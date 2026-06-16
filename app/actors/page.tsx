@@ -36,11 +36,9 @@ export default function ActorsPage() {
                 {j.name}
               </h2>
             </div>
-            <div className="mt-3 flex flex-wrap gap-1">
+            <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
               {j.roles.map((r) => (
-                <Badge key={r} tone="slate">
-                  {roleLabels[r]}
-                </Badge>
+                <Badge key={r}>{roleLabels[r]}</Badge>
               ))}
             </div>
             <p className="mt-3 line-clamp-3 leading-7 text-muted">

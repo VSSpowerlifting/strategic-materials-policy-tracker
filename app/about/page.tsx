@@ -29,11 +29,10 @@ export default function AboutPage() {
           wrapped around them.
         </p>
         <p>
-          What makes it distinctive is depth on the Chinese side: the maintainer
-          reads the Mandarin-language primaries directly, so Chinese measures are
-          tracked more closely than English secondary reporting usually allows. The
-          multi-actor frame keeps that depth honest by following the whole contest —
-          the incumbent and everyone trying to diversify away from it.
+          It follows the whole contest rather than any single side — the incumbent
+          producer-processor and the states working to diversify away from it. Every
+          measure is cited to its source, in the original language with a translation
+          where applicable, so each record can be checked against the primary text.
         </p>
         <p>
           Every record resolves to a source. Every framing label is anchored to a

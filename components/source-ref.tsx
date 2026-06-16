@@ -16,7 +16,7 @@ export function SourceCard({ source }: { source: Source }) {
       </div>
       <p className="mt-1 text-sm text-muted">{source.publisher}</p>
       <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-faint">
-        <Badge tone="neutral">{sourceTypeLabels[source.sourceType]}</Badge>
+        <Badge>{sourceTypeLabels[source.sourceType]}</Badge>
         <span className="font-mono uppercase tracking-wide">{source.language}</span>
         {source.datePublished ? (
           <span>Published {formatDate(source.datePublished)}</span>

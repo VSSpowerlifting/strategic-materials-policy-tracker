@@ -67,11 +67,9 @@ export default async function ActorPage({
             </p>
           </div>
         </div>
-        <div className="mt-4 flex flex-wrap gap-1">
+        <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1">
           {jurisdiction.roles.map((r) => (
-            <Badge key={r} tone="slate">
-              {roleLabels[r]}
-            </Badge>
+            <Badge key={r}>{roleLabels[r]}</Badge>
           ))}
         </div>
       </header>

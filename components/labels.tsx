@@ -1,16 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import {
   confidenceLabels,
-  confidenceTone,
   enSourceLabels,
+  FRAMING_HUES,
   framingCategoryLabels,
   framingCategoryShort,
-  framingCategoryTone,
   jurisdictionLabels,
   jurisdictionShort,
   mechanismLabels,
   policyStatusLabels,
-  policyStatusTone,
   sectorLabels,
 } from "@/lib/labels";
 import type {
@@ -23,17 +21,20 @@ import type {
   SourceConfidence,
 } from "@/lib/types";
 
+// Verdigris emphasis is reserved for measures currently in effect.
+const STATUS_EMPHASIS = new Set<PolicyStatus>(["active", "in_force"]);
+
 export function StatusBadge({ status }: { status: PolicyStatus }) {
-  return <Badge tone={policyStatusTone[status]}>{policyStatusLabels[status]}</Badge>;
+  return (
+    <Badge accent={STATUS_EMPHASIS.has(status)}>{policyStatusLabels[status]}</Badge>
+  );
 }
 
 export function MechanismBadges({ mechanisms }: { mechanisms: Mechanism[] }) {
   return (
-    <span className="inline-flex flex-wrap gap-1">
+    <span className="inline-flex flex-wrap gap-x-3 gap-y-1">
       {mechanisms.map((m) => (
-        <Badge key={m} tone="neutral">
-          {mechanismLabels[m]}
-        </Badge>
+        <Badge key={m}>{mechanismLabels[m]}</Badge>
       ))}
     </span>
   );
@@ -41,16 +42,19 @@ export function MechanismBadges({ mechanisms }: { mechanisms: Mechanism[] }) {
 
 export function SectorBadges({ sectors }: { sectors: Sector[] }) {
   return (
-    <span className="inline-flex flex-wrap gap-1">
+    <span className="inline-flex flex-wrap gap-x-3 gap-y-1">
       {sectors.map((s) => (
-        <Badge key={s} tone="slate">
-          {sectorLabels[s]}
-        </Badge>
+        <Badge key={s}>{sectorLabels[s]}</Badge>
       ))}
     </span>
   );
 }
 
+/**
+ * The framing-category dimension — the one place colour is kept, as a small
+ * squared marker (Strata palette) beside a quiet mono label. Non-pill, so it
+ * reads as a legend, not a CMW-style chip.
+ */
 export function FramingBadge({
   category,
   short = false,
@@ -59,9 +63,14 @@ export function FramingBadge({
   short?: boolean;
 }) {
   return (
-    <Badge tone={framingCategoryTone[category]}>
+    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] leading-none text-muted">
+      <span
+        aria-hidden
+        className="h-3 w-[3px] shrink-0"
+        style={{ background: FRAMING_HUES[category] }}
+      />
       {short ? framingCategoryShort[category] : framingCategoryLabels[category]}
-    </Badge>
+    </span>
   );
 }
 
@@ -73,7 +82,7 @@ export function FramingBadges({
   short?: boolean;
 }) {
   return (
-    <span className="inline-flex flex-wrap gap-1">
+    <span className="inline-flex flex-wrap gap-x-3 gap-y-1.5">
       {categories.map((c) => (
         <FramingBadge key={c} category={c} short={short} />
       ))}
@@ -82,9 +91,7 @@ export function FramingBadges({
 }
 
 export function ConfidenceBadge({ confidence }: { confidence: SourceConfidence }) {
-  return (
-    <Badge tone={confidenceTone[confidence]}>{confidenceLabels[confidence]}</Badge>
-  );
+  return <Badge>{confidenceLabels[confidence]}</Badge>;
 }
 
 export function EnSourceTag({ source }: { source: EnSource }) {

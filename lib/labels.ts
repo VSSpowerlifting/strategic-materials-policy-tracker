@@ -15,39 +15,6 @@ import type {
   SourceType,
 } from "./types";
 
-// Muted, institutional badge palette. Each tone is a low-opacity fill with a
-// desaturated foreground and a hairline border — no loud SaaS colors.
-export type Tone =
-  | "neutral"
-  | "amber"
-  | "sky"
-  | "emerald"
-  | "violet"
-  | "rose"
-  | "slate"
-  | "teal"
-  | "orange"
-  | "cyan"
-  | "indigo";
-
-// Retuned for the Strata graphite base (#0b0c0e): translucent so they read
-// correctly on a neutral-cool dark surface, softened to the 400 hue step with a
-// crisper 200 text, and kept clear of the single verdigris brand accent. Same
-// semantic mapping as before — no loud SaaS fills.
-export const TONE_CLASSES: Record<Tone, string> = {
-  neutral: "bg-foreground/[0.05] text-muted border-border",
-  amber: "bg-amber-400/10 text-amber-200 border-amber-400/25",
-  sky: "bg-sky-400/10 text-sky-200 border-sky-400/25",
-  emerald: "bg-emerald-400/10 text-emerald-200 border-emerald-400/25",
-  violet: "bg-violet-400/10 text-violet-200 border-violet-400/25",
-  rose: "bg-rose-400/10 text-rose-200 border-rose-400/25",
-  slate: "bg-slate-400/10 text-slate-300 border-slate-400/25",
-  teal: "bg-teal-400/10 text-teal-200 border-teal-400/25",
-  orange: "bg-orange-400/10 text-orange-200 border-orange-400/25",
-  cyan: "bg-cyan-400/10 text-cyan-200 border-cyan-400/25",
-  indigo: "bg-indigo-400/10 text-indigo-200 border-indigo-400/25",
-};
-
 // --- Jurisdictions ----------------------------------------------------------
 
 export const jurisdictionLabels: Record<JurisdictionCode, string> = {
@@ -79,15 +46,6 @@ export const policyStatusLabels: Record<PolicyStatus, string> = {
   superseded: "Superseded",
   in_force: "In force",
   unclear: "Unclear",
-};
-
-export const policyStatusTone: Record<PolicyStatus, Tone> = {
-  active: "amber",
-  suspended: "slate",
-  proposed: "violet",
-  superseded: "neutral",
-  in_force: "sky",
-  unclear: "neutral",
 };
 
 // --- Mechanisms -------------------------------------------------------------
@@ -141,15 +99,18 @@ export const framingCategoryShort: Record<FramingCategory, string> = {
   compliance_modernization: "Compliance modernization",
 };
 
-export const framingCategoryTone: Record<FramingCategory, Tone> = {
-  national_security: "rose",
-  economic_security: "amber",
-  supply_chain_resilience: "teal",
-  leverage_retaliation: "orange",
-  resource_environmental: "emerald",
-  anti_smuggling: "cyan",
-  allied_coordination: "sky",
-  compliance_modernization: "violet",
+// The framing-category dimension is the one place colour is kept (see
+// FramingBadge): it genuinely helps compare actors on /framing. Strata-palette
+// hues, rendered as a small squared marker — never as a pale pill fill.
+export const FRAMING_HUES: Record<FramingCategory, string> = {
+  national_security: "#C77B7B",
+  economic_security: "#CBA86A",
+  supply_chain_resilience: "#57B0A2",
+  leverage_retaliation: "#CE8A5C",
+  resource_environmental: "#84AE68",
+  anti_smuggling: "#5AA1C2",
+  allied_coordination: "#8E8AC6",
+  compliance_modernization: "#A981B6",
 };
 
 // --- Sources ----------------------------------------------------------------
@@ -169,13 +130,6 @@ export const confidenceLabels: Record<SourceConfidence, string> = {
   official_translation: "Official translation",
   government_media: "Government / state media",
   secondary: "Secondary analysis",
-};
-
-export const confidenceTone: Record<SourceConfidence, Tone> = {
-  primary: "emerald",
-  official_translation: "sky",
-  government_media: "amber",
-  secondary: "slate",
 };
 
 export const enSourceLabels: Record<EnSource, string> = {

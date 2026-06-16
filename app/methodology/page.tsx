@@ -30,7 +30,7 @@ const TOC = [
   ["scope", "What this tracks — and does not"],
   ["sources", "Source hierarchy"],
   ["translation", "Translation policy"],
-  ["china-depth", "Chinese-source depth"],
+  ["provenance", "Provenance and coverage"],
   ["labels", "Label definitions"],
   ["framing-method", "How framing is assigned"],
   ["limitations", "Limitations & disclaimer"],
@@ -205,19 +205,18 @@ export default function MethodologyPage() {
           </section>
 
           <section className="space-y-3">
-            <H2 id="china-depth">Chinese-source depth</H2>
+            <H2 id="provenance">Provenance and coverage</H2>
             <p>
-              Chinese coverage here runs deeper than English secondary reporting
-              because the maintainer reads the Chinese-language primaries directly.
-              This is a capability statement, not a claim of neutrality.
+              Sources are cited in their original language, with an English
+              translation where the issuing body does not publish its own. Every
+              source is labelled with its provenance and a confidence level — the
+              four tiers set out above — so the basis for each record is visible.
             </p>
             <p>
-              The data leans China-heavy because the dependency is real — China
-              processes roughly 90% of rare earths and is the leading refiner for 19
-              of 20 strategic minerals — and because the Chinese instruments are, at
-              present, the most consequential and the most under-translated. The
-              multi-actor frame exists precisely to track the whole contest: the
-              incumbent, and everyone trying to diversify away from it.
+              Coverage is multi-actor by design: it follows the whole contest across
+              the tracked governments — the incumbent producer-processor and the
+              states working to diversify away from it — rather than any single
+              country&apos;s measures in isolation.
             </p>
           </section>
 

@@ -56,7 +56,7 @@ export default function DataPage() {
         index="01"
         eyebrow="Take it with you"
         title="Data export"
-        lead="The whole dataset is downloadable, with the same source links and translation provenance you see on the site. CSV files are UTF-8 (with a byte-order mark, so the Chinese-language fields open cleanly in Excel)."
+        lead="The whole dataset is downloadable, with the same source links and translation provenance you see on the site. CSV files are UTF-8 (with a byte-order mark, so the original-language fields open cleanly in Excel)."
       />
 
       <p className="mt-6 font-mono text-sm text-faint">
@@ -73,7 +73,7 @@ export default function DataPage() {
           >
             <div className="flex items-center justify-between gap-3">
               <h2 className="font-mono text-sm text-foreground">{d.file}</h2>
-              <span className="rounded border border-border px-1.5 py-0.5 font-mono text-[11px] text-faint">
+              <span className="border-l-2 border-border-strong pl-1.5 font-mono text-[11px] text-faint">
                 {d.fmt}
               </span>
             </div>
