@@ -30,18 +30,22 @@ export type Tone =
   | "cyan"
   | "indigo";
 
+// Retuned for the Strata graphite base (#0b0c0e): translucent so they read
+// correctly on a neutral-cool dark surface, softened to the 400 hue step with a
+// crisper 200 text, and kept clear of the single verdigris brand accent. Same
+// semantic mapping as before — no loud SaaS fills.
 export const TONE_CLASSES: Record<Tone, string> = {
-  neutral: "bg-white/[0.04] text-muted border-border",
-  amber: "bg-amber-500/10 text-amber-200/90 border-amber-500/25",
-  sky: "bg-sky-500/10 text-sky-200/90 border-sky-500/25",
-  emerald: "bg-emerald-500/10 text-emerald-200/90 border-emerald-500/25",
-  violet: "bg-violet-500/10 text-violet-200/90 border-violet-500/25",
-  rose: "bg-rose-500/10 text-rose-200/90 border-rose-500/25",
-  slate: "bg-slate-400/10 text-slate-300/90 border-slate-400/25",
-  teal: "bg-teal-500/10 text-teal-200/90 border-teal-500/25",
-  orange: "bg-orange-500/10 text-orange-200/90 border-orange-500/25",
-  cyan: "bg-cyan-500/10 text-cyan-200/90 border-cyan-500/25",
-  indigo: "bg-indigo-500/10 text-indigo-200/90 border-indigo-500/25",
+  neutral: "bg-foreground/[0.05] text-muted border-border",
+  amber: "bg-amber-400/10 text-amber-200 border-amber-400/25",
+  sky: "bg-sky-400/10 text-sky-200 border-sky-400/25",
+  emerald: "bg-emerald-400/10 text-emerald-200 border-emerald-400/25",
+  violet: "bg-violet-400/10 text-violet-200 border-violet-400/25",
+  rose: "bg-rose-400/10 text-rose-200 border-rose-400/25",
+  slate: "bg-slate-400/10 text-slate-300 border-slate-400/25",
+  teal: "bg-teal-400/10 text-teal-200 border-teal-400/25",
+  orange: "bg-orange-400/10 text-orange-200 border-orange-400/25",
+  cyan: "bg-cyan-400/10 text-cyan-200 border-cyan-400/25",
+  indigo: "bg-indigo-400/10 text-indigo-200 border-indigo-400/25",
 };
 
 // --- Jurisdictions ----------------------------------------------------------

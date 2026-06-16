@@ -27,7 +27,7 @@ export function LinkCard({
     <Link
       href={href}
       className={cn(
-        "group block rounded-lg border bg-card transition-colors hover:border-border-strong hover:bg-elevated",
+        "group block rounded-lg border bg-card transition-colors hover:border-accent/40 hover:bg-elevated",
         className,
       )}
     >

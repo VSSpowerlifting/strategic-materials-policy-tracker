@@ -5,20 +5,18 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { nav, site } from "@/lib/site";
 import { Container } from "@/components/ui/container";
+import { Wordmark } from "@/components/ui/brand";
 
 export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/65">
-      <Container className="flex h-14 items-center gap-5">
-        <Link href="/" className="flex shrink-0 items-center gap-2">
-          <span className="inline-block h-4 w-4 rounded-[3px] bg-accent" aria-hidden />
-          <span className="font-mono text-sm font-semibold tracking-tight">
-            {site.shortName}
-          </span>
+    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/65">
+      <Container className="flex h-14 items-center gap-6">
+        <Link href="/" className="shrink-0 text-base">
+          <Wordmark label={site.shortName} markClassName="h-[1.35rem] w-[1.35rem]" />
         </Link>
-        <nav className="-mx-1 flex items-center gap-0.5 overflow-x-auto">
+        <nav className="-mx-1 flex items-center gap-1 overflow-x-auto">
           {nav.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(item.href + "/");
@@ -26,9 +24,10 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={cn(
-                  "whitespace-nowrap rounded px-2.5 py-1.5 text-sm text-muted transition-colors hover:bg-elevated hover:text-foreground",
-                  active && "bg-elevated text-foreground",
+                  "-mb-px whitespace-nowrap border-b-2 border-transparent px-1.5 py-1 font-display text-sm text-muted transition-colors hover:text-foreground",
+                  active && "border-accent text-accent",
                 )}
               >
                 {item.label}

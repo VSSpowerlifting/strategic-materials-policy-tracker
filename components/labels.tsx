@@ -106,10 +106,10 @@ export function JurisdictionTag({
 }) {
   return (
     <span className="inline-flex items-center gap-1.5">
-      <span className="inline-flex h-5 min-w-[1.75rem] items-center justify-center rounded border bg-elevated px-1 font-mono text-[11px] font-semibold text-foreground">
+      <span className="inline-flex h-5 min-w-[1.75rem] items-center justify-center rounded border border-accent/30 bg-elevated px-1 font-mono text-[11px] font-semibold text-foreground">
         {jurisdictionShort[code]}
       </span>
-      {withName ? <span className="text-sm">{jurisdictionLabels[code]}</span> : null}
+      {withName ? <span className="font-display text-sm">{jurisdictionLabels[code]}</span> : null}
     </span>
   );
 }

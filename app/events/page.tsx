@@ -16,6 +16,7 @@ export default function EventsPage() {
   return (
     <Container className="py-12">
       <PageHeading
+        index="01"
         eyebrow="The spine"
         title="Policy events"
         lead="Every tracked measure, newest first. Filter by actor, mechanism, status or material. Each event is a structured, source-linked record — open one for the full framing and citations."

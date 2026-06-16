@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { Container, Section } from "@/components/ui/container";
+import { Container, Section, AtlasIndex } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { EventListItem } from "@/components/event-card";
 import { FramingQuote } from "@/components/framing-quote";
+import { HeroMotif } from "@/components/hero-motif";
+import { MaterialTile } from "@/components/material-tile";
 import { JurisdictionTag } from "@/components/labels";
 import {
   getAllEvents,
@@ -34,65 +36,63 @@ export default function Home() {
   ];
 
   return (
-    <Container className="py-12 sm:py-16">
+    <Container width="wide" className="py-12 sm:py-16">
       {/* Hero */}
-      <section className="max-w-3xl">
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent">
-          Mandarin-source · multi-actor · source-linked
-        </p>
-        <h1 className="text-balance text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
-          The policy contest over rare earths and strategic materials.
-        </h1>
-        <p className="mt-6 text-pretty text-lg leading-8 text-muted">
-          China processes roughly 90% of the world&apos;s rare earths and is the
-          leading refiner for 19 of 20 strategic minerals. This database follows
-          the policy contest that dependence has set off — the export controls,
-          licensing, designations, funding and stockpiling each major power
-          deploys, and the official language it uses to justify them.
-        </p>
-        <p className="mt-4 text-pretty text-base leading-7 text-faint">
-          Every classification is a categorical, source-grounded label — no
-          synthetic risk scores. Every framing claim is anchored to a quoted
-          passage in the original language, with its translation marked. It is not
-          a market model and does not forecast prices or supply.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link
-            href="/events"
-            className="inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
-          >
-            Browse the event database →
-          </Link>
-          <Link
-            href="/methodology"
-            className="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-elevated"
-          >
-            Read the methodology
-          </Link>
+      <section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="max-w-2xl">
+          <AtlasIndex index="00" label="Mandarin-source · multi-actor · source-linked" className="mb-5" />
+          <h1 className="font-display text-balance text-4xl font-bold leading-[1.04] tracking-tight sm:text-5xl">
+            The policy contest over rare earths and strategic materials.
+          </h1>
+          <p className="mt-6 text-pretty text-lg leading-8 text-muted">
+            China processes roughly 90% of the world&apos;s rare earths and is the
+            leading refiner for 19 of 20 strategic minerals. This database follows
+            the policy contest that dependence has set off — the export controls,
+            licensing, designations, funding and stockpiling each major power
+            deploys, and the official language it uses to justify them.
+          </p>
+          <p className="mt-4 text-pretty leading-7 text-faint">
+            Every classification is a categorical, source-grounded label — no
+            synthetic risk scores. Every framing claim is anchored to a quoted
+            passage in the original language, with its translation marked. It is not
+            a market model and does not forecast prices or supply.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              href="/events"
+              className="inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2 font-display text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-strong"
+            >
+              Browse the event database →
+            </Link>
+            <Link
+              href="/methodology"
+              className="inline-flex items-center rounded-md border border-border px-4 py-2 font-display text-sm font-medium text-foreground transition-colors hover:border-accent/40 hover:bg-elevated"
+            >
+              Read the methodology
+            </Link>
+          </div>
         </div>
+        <HeroMotif />
       </section>
 
-      {/* Stats */}
-      <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-5">
+      {/* Stats — oversized Archivo numerals, mono labels */}
+      <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-8 sm:grid-cols-3 lg:grid-cols-5">
         {stats.map((s) => (
-          <Link
-            key={s.label}
-            href={s.href}
-            className="bg-card px-4 py-5 transition-colors hover:bg-elevated"
-          >
-            <div className="tnum font-mono text-2xl font-semibold text-foreground">
+          <Link key={s.label} href={s.href} className="group block">
+            <div className="tnum font-display text-4xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent">
               {s.value}
             </div>
-            <div className="mt-1 text-xs uppercase tracking-wide text-faint">
+            <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
               {s.label}
             </div>
           </Link>
         ))}
       </div>
 
-      {/* Recent events */}
+      {/* Recent events + framing teaser */}
       <div className="mt-16 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         <Section
+          index="01"
           title="Recent events"
           description="The most recent measures across all tracked actors."
         >
@@ -103,14 +103,14 @@ export default function Home() {
           </Card>
           <Link
             href="/events"
-            className="mt-3 inline-block text-sm text-accent hover:underline"
+            className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong"
           >
             All {summary.events} events →
           </Link>
         </Section>
 
-        {/* Comparative framing snapshot */}
         <Section
+          index="02"
           title="How they frame it"
           description="Everyone invokes security — but the words differ."
         >
@@ -126,71 +126,65 @@ export default function Home() {
           </div>
           <Link
             href="/framing"
-            className="mt-3 inline-block text-sm text-accent hover:underline"
+            className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong"
           >
             Comparative framing →
           </Link>
         </Section>
       </div>
 
-      {/* Materials */}
+      {/* Materials — element tiles */}
       <Section
         className="mt-16"
+        index="03"
         title="Materials"
         description="A bounded set, rare-earth-centred, with the adjacent chokepoints."
       >
-        <div className="flex flex-wrap gap-2">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {materials.map((m) => (
-            <Link
-              key={m.id}
-              href={`/materials/${m.slug}`}
-              className="group inline-flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm transition-colors hover:border-border-strong hover:bg-elevated"
-            >
-              <span className="font-medium group-hover:text-accent">{m.nameEn}</span>
-              {m.nameZh ? (
-                <span lang="zh" className="font-mono text-xs text-faint">
-                  {m.nameZh}
-                </span>
-              ) : null}
-            </Link>
+            <MaterialTile key={m.id} material={m} />
           ))}
         </div>
       </Section>
 
       {/* Methodology preview + data CTA */}
-      <Section className="mt-16" title="Built to be cited">
+      <Section className="mt-16" index="04" title="Built to be cited">
         <div className="grid gap-6 md:grid-cols-2">
           <Card className="p-6">
-            <h3 className="font-medium">The rules that protect the data</h3>
-            <ul className="mt-3 space-y-2 text-sm leading-6 text-muted">
+            <h3 className="font-display font-semibold tracking-tight">
+              The rules that protect the data
+            </h3>
+            <ul className="mt-3 space-y-2 leading-7 text-muted">
               <li>· Categorical labels only — never an invented 0–100 score.</li>
               <li>· No framing claim without a quoted anchor in the original language.</li>
               <li>· Official English preferred; self-translations marked; originals linked.</li>
-              <li>· Bounded scope; unknown fields are <code className="font-mono text-faint">null</code> or &ldquo;Not yet coded,&rdquo; never guessed.</li>
+              <li>· Bounded scope; unknown fields are <code className="font-mono text-sm text-faint">null</code> or &ldquo;Not yet coded,&rdquo; never guessed.</li>
             </ul>
             <Link
               href="/methodology"
-              className="mt-4 inline-block text-sm text-accent hover:underline"
+              className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong"
             >
               Full methodology, label definitions &amp; limitations →
             </Link>
           </Card>
           <Card className="p-6">
-            <h3 className="font-medium">Take the data with you</h3>
-            <p className="mt-3 text-sm leading-6 text-muted">
+            <h3 className="font-display font-semibold tracking-tight">
+              Take the data with you
+            </h3>
+            <p className="mt-3 leading-7 text-muted">
               The whole dataset — events, framing anchors, materials, jurisdictions
               and sources — is downloadable as structured JSON and CSV, with the same
               source links and translation provenance you see on the site.
             </p>
             <Link
               href="/data"
-              className="mt-4 inline-block text-sm text-accent hover:underline"
+              className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong"
             >
               CSV / JSON export →
             </Link>
           </Card>
         </div>
-        <p className="mt-8 text-xs text-faint">
+        <p className="mt-8 font-mono text-xs text-faint">
           {site.name} · {site.version} · scope from {site.scopeStart}.
         </p>
       </Section>

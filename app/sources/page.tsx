@@ -27,18 +27,20 @@ export default function SourcesPage() {
   return (
     <Container className="py-12">
       <PageHeading
+        index="01"
         eyebrow="Provenance"
         title="Source register"
         lead="Every record on this site resolves to one of these sources. They are ordered by the confidence hierarchy the project applies: primary official text first, then official translation, then government/state media, then secondary analysis."
       />
 
       <div className="mt-10 space-y-12">
-        {SOURCE_CONFIDENCE.map((level) => {
+        {SOURCE_CONFIDENCE.map((level, i) => {
           const group = sources.filter((s) => s.confidence === level);
           if (group.length === 0) return null;
           return (
             <Section
               key={level}
+              index={String(i + 1).padStart(2, "0")}
               title={`${confidenceLabels[level]} (${group.length})`}
               description={HIERARCHY_NOTE[level]}
             >
@@ -52,9 +54,9 @@ export default function SourcesPage() {
         })}
       </div>
 
-      <p className="mt-12 max-w-prose text-sm leading-6 text-faint">
+      <p className="mt-12 max-w-prose leading-7 text-faint">
         How these tiers are defined and applied is set out on the{" "}
-        <Link href="/methodology#sources" className="text-accent hover:underline">
+        <Link href="/methodology#sources" className="font-display text-accent hover:text-accent-strong">
           methodology page
         </Link>
         .

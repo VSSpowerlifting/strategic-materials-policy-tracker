@@ -53,12 +53,13 @@ export default function DataPage() {
   return (
     <Container className="py-12">
       <PageHeading
+        index="01"
         eyebrow="Take it with you"
         title="Data export"
         lead="The whole dataset is downloadable, with the same source links and translation provenance you see on the site. CSV files are UTF-8 (with a byte-order mark, so the Chinese-language fields open cleanly in Excel)."
       />
 
-      <p className="mt-6 text-sm text-faint">
+      <p className="mt-6 font-mono text-sm text-faint">
         Current snapshot: {s.events} events · {s.framingClaims} framing anchors ·{" "}
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
         sources.
@@ -68,19 +69,19 @@ export default function DataPage() {
         {downloads.map((d) => (
           <div
             key={d.file}
-            className="flex flex-col rounded-lg border bg-card p-5"
+            className="flex flex-col rounded-lg border border-border bg-card p-5"
           >
             <div className="flex items-center justify-between gap-3">
-              <h2 className="font-mono text-sm">{d.file}</h2>
-              <span className="rounded border px-1.5 py-0.5 font-mono text-[11px] text-faint">
+              <h2 className="font-mono text-sm text-foreground">{d.file}</h2>
+              <span className="rounded border border-border px-1.5 py-0.5 font-mono text-[11px] text-faint">
                 {d.fmt}
               </span>
             </div>
-            <p className="mt-2 flex-1 text-sm leading-6 text-muted">{d.desc}</p>
+            <p className="mt-2 flex-1 leading-7 text-muted">{d.desc}</p>
             <a
               href={d.href}
               download
-              className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-elevated"
+              className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-md border border-border px-3 py-1.5 font-display text-sm font-medium transition-colors hover:border-accent/40 hover:bg-elevated"
             >
               Download ↓
             </a>
@@ -88,8 +89,8 @@ export default function DataPage() {
         ))}
       </div>
 
-      <div className="mt-12 max-w-prose space-y-3 text-sm leading-6 text-muted">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-faint">
+      <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
+        <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-faint">
           Terms of use
         </h2>
         <p>

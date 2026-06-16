@@ -21,8 +21,8 @@ export function FramingQuote({
   const lang = hasCJK(claim.quoteOriginal) ? "zh" : undefined;
 
   return (
-    <figure className="overflow-hidden rounded-lg border bg-card">
-      <div className="border-l-2 border-accent/60 px-5 py-4">
+    <figure className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card">
+      <div className="flex-1 border-l-2 border-accent/60 px-5 py-4">
         <blockquote
           lang={lang}
           className="text-pretty text-lg leading-relaxed text-foreground"
@@ -30,18 +30,20 @@ export function FramingQuote({
           {claim.quoteOriginal}
         </blockquote>
         {isTranslated ? (
-          <p className="mt-3 text-sm leading-7 text-muted">
-            <span className="text-faint">EN&nbsp;</span>
+          <p className="mt-3 leading-7 text-muted">
+            <span className="font-mono text-xs text-accent">EN&nbsp;</span>
             {claim.quoteEn}
           </p>
         ) : null}
       </div>
-      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t px-5 py-3 text-xs text-faint">
+      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border px-5 py-3 font-mono text-xs text-faint">
         <FramingBadges categories={claim.category} short />
         {source ? (
           <>
             <span aria-hidden>·</span>
-            <ExtLink href={source.url}>{source.publisher}</ExtLink>
+            <ExtLink href={source.url} className="font-mono">
+              {source.publisher}
+            </ExtLink>
             <ConfidenceBadge confidence={source.confidence} />
           </>
         ) : null}
@@ -49,7 +51,9 @@ export function FramingQuote({
         <span>{enSourceLabels[claim.quoteEnSource]}</span>
       </figcaption>
       {claim.notes ? (
-        <p className="border-t px-5 py-3 text-xs leading-5 text-faint">{claim.notes}</p>
+        <p className="border-t border-border px-5 py-3 text-sm leading-6 text-faint">
+          {claim.notes}
+        </p>
       ) : null}
     </figure>
   );

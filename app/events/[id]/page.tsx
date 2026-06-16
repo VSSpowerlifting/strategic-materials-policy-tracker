@@ -42,8 +42,10 @@ export async function generateMetadata({
 
 function MetaRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-[7rem_minmax(0,1fr)] gap-3 border-b py-2.5 last:border-b-0">
-      <dt className="text-xs uppercase tracking-wide text-faint">{label}</dt>
+    <div className="grid grid-cols-[7rem_minmax(0,1fr)] gap-3 border-b border-border py-2.5 last:border-b-0">
+      <dt className="font-display text-xs uppercase tracking-[0.12em] text-faint">
+        {label}
+      </dt>
       <dd className="text-sm">{children}</dd>
     </div>
   );
@@ -69,7 +71,10 @@ export default async function EventPage({
 
   return (
     <Container className="py-12">
-      <Link href="/events" className="text-sm text-muted hover:text-foreground">
+      <Link
+        href="/events"
+        className="font-display text-sm text-muted hover:text-foreground"
+      >
         ← All events
       </Link>
 
@@ -87,7 +92,7 @@ export default async function EventPage({
         {event.documentNumber ? (
           <p className="mt-3 font-mono text-xs text-faint">{event.documentNumber}</p>
         ) : null}
-        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight">
+        <h1 className="mt-3 text-balance font-display text-3xl font-bold tracking-tight">
           {event.titleEn}
         </h1>
         {showOriginalTitle ? (
@@ -108,19 +113,20 @@ export default async function EventPage({
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="min-w-0 space-y-10">
-          <Section title="Summary">
-            <p className="max-w-prose text-pretty leading-7 text-foreground/90">
+          <Section index="01" title="Summary">
+            <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
               {event.summary}
             </p>
           </Section>
 
-          <Section title="Analytical significance">
-            <p className="max-w-prose text-pretty leading-7 text-foreground/90">
+          <Section index="02" title="Analytical significance">
+            <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
               {event.analyticalSignificance}
             </p>
           </Section>
 
           <Section
+            index="03"
             title="Framing anchors"
             description="Official framing, classified only from quoted passages."
           >
@@ -148,7 +154,7 @@ export default async function EventPage({
           </Section>
 
           {materials.length > 0 ? (
-            <Section title="Affected materials">
+            <Section index="04" title="Affected materials">
               <div className="flex flex-wrap gap-2">
                 {materials.map((m) => (
                   <Link
@@ -169,7 +175,11 @@ export default async function EventPage({
           ) : null}
 
           {related.length > 0 ? (
-            <Section title="Related events" description="Events touching the same materials.">
+            <Section
+              index="05"
+              title="Related events"
+              description="Events touching the same materials."
+            >
               <Card className="px-4 py-1">
                 {related.map((e) => (
                   <EventLine key={e.id} event={e} />
@@ -178,7 +188,7 @@ export default async function EventPage({
             </Section>
           ) : null}
 
-          <Section title={`Sources (${sources.length})`}>
+          <Section index="06" title={`Sources (${sources.length})`}>
             <div className="grid gap-3">
               {sources.map((s) => (
                 <SourceCard key={s.id} source={s} />
@@ -190,7 +200,7 @@ export default async function EventPage({
         {/* At a glance */}
         <aside className="lg:sticky lg:top-20 lg:self-start">
           <Card className="p-4">
-            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
+            <h2 className="mb-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted">
               At a glance
             </h2>
             <dl>

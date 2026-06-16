@@ -9,7 +9,9 @@ export function SourceCard({ source }: { source: Source }) {
   return (
     <div id={source.id} className="scroll-mt-24 rounded-lg border bg-card p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
-        <h3 className="font-medium leading-snug">{source.title}</h3>
+        <h3 className="font-display font-semibold leading-snug tracking-tight">
+          {source.title}
+        </h3>
         <ConfidenceBadge confidence={source.confidence} />
       </div>
       <p className="mt-1 text-sm text-muted">{source.publisher}</p>

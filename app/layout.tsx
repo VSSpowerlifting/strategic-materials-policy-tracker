@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
 
-const inter = Inter({
+// Display / structural / UI labels.
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
+// All long-form reading text — what makes the data pages read like a publication.
+const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+
+// Data tokens: document numbers, dates, symbols, source IDs, section index.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -29,8 +41,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${plexMono.variable} h-full`}>
-      <body className="flex min-h-full flex-col">
+    <html
+      lang="en"
+      className={`${archivo.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full`}
+    >
+      <body className="flex min-h-full flex-col antialiased">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

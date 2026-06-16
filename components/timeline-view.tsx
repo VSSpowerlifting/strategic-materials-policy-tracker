@@ -11,7 +11,7 @@ const ALL = "all";
 const WINDOW_START = "2025-04-01";
 
 const selectClass =
-  "rounded-md border bg-card px-2.5 py-2 text-sm text-foreground focus:border-border-strong focus:outline-none";
+  "rounded-md border border-border bg-card px-2.5 py-2 font-display text-sm text-foreground focus:border-accent/50 focus:outline-none";
 
 function TimelineNode({ event }: { event: PolicyEvent }) {
   return (
@@ -27,7 +27,7 @@ function TimelineNode({ event }: { event: PolicyEvent }) {
         <JurisdictionTag code={event.jurisdiction} />
         <Link
           href={`/events/${event.id}`}
-          className="text-pretty font-medium leading-snug hover:text-accent"
+          className="text-pretty font-display font-medium leading-snug hover:text-accent"
         >
           {event.titleEn}
         </Link>
@@ -102,7 +102,7 @@ export function TimelineView({
             </option>
           ))}
         </select>
-        <span className="tnum self-center text-sm text-faint">
+        <span className="tnum self-center font-mono text-sm text-faint">
           {filtered.length} of {events.length}
         </span>
       </div>
@@ -110,7 +110,7 @@ export function TimelineView({
       <div className="mt-10">
         {foundational.length > 0 ? (
           <div className="mb-2">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-faint">
+            <p className="mb-4 font-mono text-xs text-faint">
               Foundational context · before April 2025
             </p>
             <ol>
@@ -123,7 +123,7 @@ export function TimelineView({
 
         <div className="relative mb-6 flex items-center gap-3">
           <span className="h-px flex-1 bg-border-strong" />
-          <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
+          <span className="font-mono text-xs text-accent">
             April 2025 · acute phase
           </span>
           <span className="h-px flex-1 bg-border-strong" />

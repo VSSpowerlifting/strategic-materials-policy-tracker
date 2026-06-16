@@ -1,27 +1,34 @@
 @import "tailwindcss";
 
 /*
- * Dark, restrained, institutional theme. Navy/charcoal base, muted gold signal
- * accent, hairline borders. Palette is defined as :root custom properties so it
- * is available to both Tailwind utilities (via @theme inline) and hand-written
- * CSS below.
+ * "Strata" — cool near-black graphite base with a single oxidized-copper
+ * (verdigris) accent. Long-form reading is set in a serif (Newsreader);
+ * structure, labels and display are Archivo; data tokens are JetBrains Mono.
+ *
+ * Raw tokens live on :root and are exposed to Tailwind through @theme inline,
+ * so utilities (bg-card, text-accent, border-border …) and the hand-written CSS
+ * below share one source of truth.
  */
 :root {
-  --bg: #0a0e17;
-  --card: #10151f;
-  --elevated: #141c2b;
-  --border: #1f2937;
-  --border-strong: #2c3a52;
-  --fg: #e7eaf1;
-  --muted: #9aa4b6;
-  --faint: #6b7689;
-  --accent: #d6b46a;
-  --accent-fg: #0a0e17;
+  --bg: #0b0c0e; /* near-black, neutral-cool graphite (minimal blue) */
+  --surface: #131619; /* card surface */
+  --elevated: #1a1e22; /* hover / elevated */
+  --border: #262b31; /* hairline */
+  --border-strong: #38414a; /* hover / structural */
+  --fg: #ecedea; /* warm-neutral off-white (NOT blue-white) */
+  --muted: #9aa1a3; /* cool grey */
+  --faint: #7b8488; /* faint — nudged up from spec #626a6e to clear WCAG AA on small text */
+
+  --accent: #4fb59e; /* PRIMARY — oxidized-copper / verdigris teal-green */
+  --accent-strong: #6fd0ba; /* hover / emphasis */
+  --accent-fg: #07100d; /* text on accent */
 }
 
 @theme inline {
+  /* Color tokens keep their established names so existing utilities still
+     resolve; only the underlying values move to the Strata palette. */
   --color-background: var(--bg);
-  --color-card: var(--card);
+  --color-card: var(--surface);
   --color-elevated: var(--elevated);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
@@ -29,10 +36,14 @@
   --color-muted: var(--muted);
   --color-faint: var(--faint);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-fg);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
+  /* Three families. Inter and IBM Plex Mono are gone. */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", "JetBrains Mono", monospace;
 }
 
 @layer base {
@@ -49,10 +60,22 @@
 
   body {
     background-color: var(--bg);
+    /* A single, very low verdigris glow anchored top-centre — depth without a
+       grid. Deliberately not the sibling sites' grid / vertical-rule textures. */
+    background-image: radial-gradient(
+      120% 70% at 50% -10%,
+      color-mix(in oklab, var(--accent) 9%, transparent) 0%,
+      transparent 55%
+    );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: var(--fg);
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    /* Reading default is the serif. Structural/UI surfaces opt into Archivo
+       with `font-display`. */
+    font-family: var(--font-newsreader), ui-serif, Georgia, Cambria, "Times New Roman", serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    font-synthesis-weight: none;
   }
 
   ::selection {
@@ -62,5 +85,38 @@
   /* Tabular figures for dense data tables. */
   .tnum {
     font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /*
+   * Supply-flow line animation for the hero motif. A slow dash drift along the
+   * converging lines; switched off entirely under reduced-motion.
+   */
+  .flow-line {
+    stroke-dasharray: 4 7;
+    animation: strata-flow 5.5s linear infinite;
+  }
+  .flow-line--slow {
+    animation-duration: 9s;
+  }
+
+  @keyframes strata-flow {
+    to {
+      stroke-dashoffset: -44;
+    }
+  }
+
+  /* Faint connective contour texture for large empty areas (component-driven
+     <FlowTexture/> uses currentColor; this just sets a default tint). */
+  .strata-contours {
+    color: var(--border-strong);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-line,
+  .flow-line--slow {
+    animation: none !important;
   }
 }

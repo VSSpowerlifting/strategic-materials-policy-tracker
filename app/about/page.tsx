@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <Container className="py-12">
-      <PageHeading eyebrow="About" title={site.name} />
+      <PageHeading index="01" eyebrow="About" title={site.name} />
 
-      <div className="mt-8 max-w-prose space-y-4 leading-7 text-foreground/90">
+      <div className="mt-8 max-w-prose space-y-4 text-lg leading-8 text-foreground/90">
         <p>
           The {site.name} is a source-linked English database of how the major
           powers contest rare earths and adjacent strategic materials through
@@ -39,7 +39,7 @@ export default function AboutPage() {
           Every record resolves to a source. Every framing label is anchored to a
           quoted passage in the original language. Nothing is scored on an invented
           0–100 scale. How all of that is decided is set out in the{" "}
-          <Link href="/methodology" className="text-accent hover:underline">
+          <Link href="/methodology" className="font-display text-accent hover:text-accent-strong">
             methodology
           </Link>
           .
@@ -49,13 +49,13 @@ export default function AboutPage() {
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/events"
-          className="inline-flex items-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+          className="inline-flex items-center rounded-md bg-accent px-4 py-2 font-display text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-strong"
         >
           Browse the events →
         </Link>
         <Link
           href="/data"
-          className="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-elevated"
+          className="inline-flex items-center rounded-md border border-border px-4 py-2 font-display text-sm font-medium transition-colors hover:border-accent/40 hover:bg-elevated"
         >
           Export the data
         </Link>

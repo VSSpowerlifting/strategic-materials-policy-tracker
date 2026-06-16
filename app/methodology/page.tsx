@@ -99,14 +99,14 @@ const DEFS: Record<string, Record<string, string>> = {
 
 function DefList({ items }: { items: [string, string][] }) {
   return (
-    <dl className="mt-3 space-y-px overflow-hidden rounded-lg border">
+    <dl className="mt-3 space-y-px overflow-hidden rounded-lg border border-border">
       {items.map(([term, def]) => (
         <div
           key={term}
           className="grid gap-1 bg-card px-4 py-2.5 sm:grid-cols-[14rem_minmax(0,1fr)] sm:gap-4"
         >
-          <dt className="text-sm font-medium">{term}</dt>
-          <dd className="text-sm leading-6 text-muted">{def}</dd>
+          <dt className="font-display text-sm font-semibold">{term}</dt>
+          <dd className="leading-7 text-muted">{def}</dd>
         </div>
       ))}
     </dl>
@@ -115,7 +115,7 @@ function DefList({ items }: { items: [string, string][] }) {
 
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h2 id={id} className="scroll-mt-20 text-xl font-semibold tracking-tight">
+    <h2 id={id} className="scroll-mt-20 font-display text-xl font-bold tracking-tight">
       {children}
     </h2>
   );
@@ -125,6 +125,7 @@ export default function MethodologyPage() {
   return (
     <Container className="py-12">
       <PageHeading
+        index="01"
         eyebrow="How the data is made"
         title="Methodology"
         lead="The boundaries of this project are its credibility. This page sets out exactly what is and is not tracked, how sources are graded, how translations are handled, what every label means, and how framing is assigned."
@@ -132,12 +133,12 @@ export default function MethodologyPage() {
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">
         <aside className="lg:sticky lg:top-20 lg:self-start">
-          <nav className="space-y-1 text-sm">
+          <nav className="space-y-1 font-display text-sm">
             {TOC.map(([id, label]) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className="block rounded px-2 py-1 text-muted hover:bg-elevated hover:text-foreground"
+                className="block rounded px-2 py-1 text-muted transition-colors hover:bg-elevated hover:text-foreground"
               >
                 {label}
               </a>
@@ -227,7 +228,7 @@ export default function MethodologyPage() {
               is one of the categorical labels below.
             </p>
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
                 Policy status
               </h3>
               <DefList
@@ -238,7 +239,7 @@ export default function MethodologyPage() {
               />
             </div>
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
                 Mechanism
               </h3>
               <DefList
@@ -246,7 +247,7 @@ export default function MethodologyPage() {
               />
             </div>
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
                 Material sensitivity (sectors)
               </h3>
               <DefList
@@ -254,7 +255,7 @@ export default function MethodologyPage() {
               />
             </div>
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
                 Framing category
               </h3>
               <DefList
@@ -317,7 +318,7 @@ export default function MethodologyPage() {
                 measures change.
               </li>
             </ul>
-            <p className="rounded-lg border border-amber-500/25 bg-amber-500/[0.05] px-4 py-3 text-sm text-amber-100/90">
+            <p className="rounded-lg border border-amber-400/25 bg-amber-400/[0.06] px-4 py-3 text-amber-100/90">
               This is not legal or compliance advice. Do not rely on it for
               export-control classification or licensing decisions; consult the primary
               instruments and qualified counsel.
@@ -348,9 +349,9 @@ export default function MethodologyPage() {
             </ul>
           </section>
 
-          <p className="border-t pt-6 text-sm text-faint">
+          <p className="border-t border-border pt-6 leading-7 text-faint">
             Questions about a classification? Each rests on the linked source — start
-            there, then see the <Link href="/sources" className="text-accent hover:underline">source register</Link>.
+            there, then see the <Link href="/sources" className="font-display text-accent hover:text-accent-strong">source register</Link>.
           </p>
         </div>
       </div>

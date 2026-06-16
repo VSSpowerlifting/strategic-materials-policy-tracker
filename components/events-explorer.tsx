@@ -19,7 +19,7 @@ import type {
 const ALL = "all";
 
 const selectClass =
-  "w-full rounded-md border bg-card px-2.5 py-2 text-sm text-foreground focus:border-border-strong focus:outline-none";
+  "w-full rounded-md border border-border bg-card px-2.5 py-2 font-display text-sm text-foreground focus:border-accent/50 focus:outline-none";
 
 export function EventsExplorer({
   events,
@@ -160,7 +160,7 @@ export function EventsExplorer({
         </select>
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-sm text-faint">
+      <div className="mt-4 flex items-center justify-between font-mono text-sm text-faint">
         <p className="tnum">
           {filtered.length} of {events.length} events
         </p>
@@ -168,7 +168,7 @@ export function EventsExplorer({
           <button
             type="button"
             onClick={reset}
-            className="text-accent hover:underline"
+            className="text-accent hover:text-accent-strong"
           >
             Clear filters
           </button>

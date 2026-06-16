@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container, PageHeading } from "@/components/ui/container";
 import { LinkCard } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ActorMonogram } from "@/components/actor-monogram";
 import { roleLabels } from "@/lib/labels";
 import { getAllJurisdictions } from "@/lib/data";
 
@@ -17,6 +18,7 @@ export default function ActorsPage() {
   return (
     <Container className="py-12">
       <PageHeading
+        index="01"
         eyebrow="Six actors"
         title="Actors"
         lead="The incumbent and the states trying to diversify away from it. Each profile sets out an actor's place in the supply chain, the policy instruments it reaches for, and its framing posture."
@@ -29,10 +31,8 @@ export default function ActorsPage() {
             className="p-5"
           >
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-8 min-w-[2.5rem] items-center justify-center rounded border bg-elevated px-1.5 font-mono text-sm font-semibold">
-                {j.code}
-              </span>
-              <h2 className="text-lg font-medium group-hover:text-accent">
+              <ActorMonogram code={j.code} size="md" />
+              <h2 className="font-display text-lg font-semibold tracking-tight group-hover:text-accent">
                 {j.name}
               </h2>
             </div>
@@ -43,10 +43,10 @@ export default function ActorsPage() {
                 </Badge>
               ))}
             </div>
-            <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">
+            <p className="mt-3 line-clamp-3 leading-7 text-muted">
               {j.supplyChainPosition}
             </p>
-            <div className="tnum mt-3 text-xs text-faint">
+            <div className="tnum mt-3 font-mono text-xs text-faint">
               {j.eventIds.length} {j.eventIds.length === 1 ? "event" : "events"}
             </div>
           </LinkCard>

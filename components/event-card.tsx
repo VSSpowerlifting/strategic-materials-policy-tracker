@@ -19,7 +19,7 @@ export function EventListItem({ event }: { event: PolicyEvent }) {
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
-            <h3 className="text-pretty font-medium leading-snug text-foreground group-hover:text-accent">
+            <h3 className="text-pretty font-display font-medium leading-snug text-foreground group-hover:text-accent">
               {event.titleEn}
             </h3>
             <StatusBadge status={event.policyStatus} />
@@ -44,7 +44,7 @@ export function EventLine({ event }: { event: PolicyEvent }) {
         {formatDate(event.date)}
       </time>
       <JurisdictionTag code={event.jurisdiction} />
-      <span className="text-pretty text-sm text-muted group-hover:text-accent">
+      <span className="text-pretty font-display text-sm text-muted group-hover:text-accent">
         {event.titleEn}
       </span>
     </Link>
