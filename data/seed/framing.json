@@ -1,0 +1,112 @@
+[
+  {
+    "id": "fc-china-oct-natsec",
+    "eventId": "china-rare-earth-expansion-2025-10",
+    "actor": "china",
+    "category": ["national_security"],
+    "quoteOriginal": "为了维护国家安全和国家利益",
+    "quoteEn": "in order to safeguard national security and national interests",
+    "quoteEnSource": "self",
+    "sourceId": "src-cset-mofcom-61",
+    "notes": "The statutory justification clause of Announcement No. 61. English rendering from CSET's institutional bilingual translation; the Chinese is reproduced from the primary."
+  },
+  {
+    "id": "fc-china-oct-gt-nonprolif",
+    "eventId": "china-rare-earth-expansion-2025-10",
+    "actor": "china",
+    "category": ["national_security", "compliance_modernization"],
+    "quoteOriginal": "The move was made to safeguard national security and interests and to uphold international commitments including non-proliferation, according to a statement released on MOFCOM's website on Thursday.",
+    "quoteEn": "The move was made to safeguard national security and interests and to uphold international commitments including non-proliferation, according to a statement released on MOFCOM's website on Thursday.",
+    "quoteEnSource": "na",
+    "sourceId": "src-globaltimes-61",
+    "notes": "Chinese state-media (Global Times English edition) rendering of MOFCOM's rationale. Pairs the national-security justification with a normalization framing — that the controls are consistent with international practice and dual-use obligations."
+  },
+  {
+    "id": "fc-us-burgum-resilience",
+    "eventId": "us-critical-minerals-list-2025",
+    "actor": "us",
+    "category": ["supply_chain_resilience", "economic_security"],
+    "quoteOriginal": "By working with the mineral industry and state partners, we are ensuring that the minerals powering our energy, defense, and technology supply chains are mined and processed in the United States.",
+    "quoteEn": "By working with the mineral industry and state partners, we are ensuring that the minerals powering our energy, defense, and technology supply chains are mined and processed in the United States.",
+    "quoteEnSource": "na",
+    "sourceId": "src-doi-press-2025",
+    "notes": "Attributed to U.S. Secretary of the Interior Doug Burgum in the Department of the Interior press release announcing the final 2025 list."
+  },
+  {
+    "id": "fc-eu-crma-resilience",
+    "eventId": "eu-critical-raw-materials-act",
+    "actor": "eu",
+    "category": ["supply_chain_resilience", "economic_security"],
+    "quoteOriginal": "The Critical Raw Materials Act (CRM Act) will ensure EU access to a secure and sustainable supply of critical raw materials.",
+    "quoteEn": "The Critical Raw Materials Act (CRM Act) will ensure EU access to a secure and sustainable supply of critical raw materials.",
+    "quoteEnSource": "na",
+    "sourceId": "src-ec-crma",
+    "notes": "The European Commission's own statement of the Act's objective, on its official Critical Raw Materials Act page."
+  },
+  {
+    "id": "fc-us-dod-mp-natsec",
+    "eventId": "evt-us-dod-mp-2025",
+    "actor": "us",
+    "category": ["national_security"],
+    "quoteOriginal": "Rebuilding the critical minerals and rare earth magnet sectors of the U.S.",
+    "quoteEn": "Rebuilding the critical minerals and rare earth magnet sectors of the U.S.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fortune-dod-mp",
+    "notes": "Stated rationale of the DoD–MP Materials partnership as reported by Fortune; frames the equity-and-offtake deal as defense-industrial base rebuilding."
+  },
+  {
+    "id": "fc-au-cmsr-econsec",
+    "eventId": "evt-au-cmsr-2026",
+    "actor": "australia",
+    "category": ["economic_security"],
+    "quoteOriginal": "Critical minerals and rare earths are at the heart of our economic and national security",
+    "quoteEn": "Critical minerals and rare earths are at the heart of our economic and national security",
+    "quoteEnSource": "na",
+    "sourceId": "src-au-industry-cmsr",
+    "notes": "Australian government framing of the Critical Minerals Strategic Reserve."
+  },
+  {
+    "id": "fc-jp-jogmec-resilience",
+    "eventId": "evt-jp-jogmec-lynas-2023",
+    "actor": "japan",
+    "category": ["supply_chain_resilience"],
+    "quoteOriginal": "diversifying the supply sources which are currently concentrated to China",
+    "quoteEn": "diversifying the supply sources which are currently concentrated to China",
+    "quoteEnSource": "na",
+    "sourceId": "src-jogmec-lynas",
+    "notes": "JOGMEC's stated purpose for the additional Lynas investment and heavy-REE offtake."
+  },
+  {
+    "id": "fc-ca-ica-natsec",
+    "eventId": "evt-ca-ica-divest-2022",
+    "actor": "canada",
+    "category": ["national_security"],
+    "quoteOriginal": "rigorous scrutiny by Canada's national security and intelligence community",
+    "quoteEn": "rigorous scrutiny by Canada's national security and intelligence community",
+    "quoteEnSource": "na",
+    "sourceId": "src-ca-ised-divest",
+    "notes": "From the ISED divestiture statement, describing the Investment Canada Act national-security review applied to the three investments."
+  },
+  {
+    "id": "fc-cn-gage-natsec",
+    "eventId": "evt-cn-gage-2023",
+    "actor": "china",
+    "category": ["national_security"],
+    "quoteOriginal": "为了维护国家安全和国家利益",
+    "quoteEn": "to safeguard national security and interests",
+    "quoteEnSource": "self",
+    "sourceId": "src-globaltimes-gage-2023",
+    "notes": "The standard MOFCOM justification clause for Announcement No. 23 (2023); the Global Times (state media) reports the same national-security rationale in English at the linked report."
+  },
+  {
+    "id": "fc-cn-us-ban-natsec",
+    "eventId": "evt-cn-us-ban-2024",
+    "actor": "china",
+    "category": ["national_security", "compliance_modernization"],
+    "quoteOriginal": "为了维护国家安全和利益，履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfill non-proliferation obligations",
+    "quoteEnSource": "self",
+    "sourceId": "src-cset-mofcom-46",
+    "notes": "Stated justification of Announcement No. 46 (2024), from CSET's bilingual translation. The category follows the literal text (national security + non-proliferation/compliance); the retaliation reading rests on the one-day-after-BIS timing and is recorded in the event's analytical significance, not the quote."
+  }
+]

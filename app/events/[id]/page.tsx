@@ -1,0 +1,235 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Container, Section } from "@/components/ui/container";
+import { Card } from "@/components/ui/card";
+import { FramingQuote } from "@/components/framing-quote";
+import { SourceCard } from "@/components/source-ref";
+import { EventLine } from "@/components/event-card";
+import {
+  JurisdictionTag,
+  MechanismBadges,
+  SectorBadges,
+  StatusBadge,
+} from "@/components/labels";
+import { enSourceLabels, jurisdictionShort } from "@/lib/labels";
+import {
+  getAllEvents,
+  getEventById,
+  getFramingByEvent,
+  getJurisdictionById,
+  getMaterialsByIds,
+  getRelatedEvents,
+  getSourceById,
+  getSourcesByIds,
+} from "@/lib/data";
+import { formatDate } from "@/lib/format";
+
+export function generateStaticParams() {
+  return getAllEvents().map((e) => ({ id: e.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const event = getEventById(id);
+  if (!event) return { title: "Event not found" };
+  return { title: event.titleEn, description: event.summary };
+}
+
+function MetaRow({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-[7rem_minmax(0,1fr)] gap-3 border-b py-2.5 last:border-b-0">
+      <dt className="text-xs uppercase tracking-wide text-faint">{label}</dt>
+      <dd className="text-sm">{children}</dd>
+    </div>
+  );
+}
+
+export default async function EventPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const event = getEventById(id);
+  if (!event) notFound();
+
+  const framing = getFramingByEvent(event.id);
+  const sources = getSourcesByIds(event.sourceIds);
+  const materials = getMaterialsByIds(event.affectedMaterialIds);
+  const jurisdiction = getJurisdictionById(event.jurisdiction);
+  const related = getRelatedEvents(event);
+  const actorHref = `/actors/${jurisdictionShort[event.jurisdiction].toLowerCase()}`;
+  const showOriginalTitle =
+    event.titleOriginalLang !== "en" && event.titleOriginal !== "Not yet coded";
+
+  return (
+    <Container className="py-12">
+      <Link href="/events" className="text-sm text-muted hover:text-foreground">
+        ← All events
+      </Link>
+
+      <header className="mt-6 max-w-3xl">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+          <time className="tnum font-mono text-faint">{formatDate(event.date)}</time>
+          <Link href={actorHref} className="hover:opacity-80">
+            <JurisdictionTag code={event.jurisdiction} withName />
+          </Link>
+          <span aria-hidden className="text-faint">
+            ·
+          </span>
+          <span className="text-muted">{event.issuingBody}</span>
+        </div>
+        {event.documentNumber ? (
+          <p className="mt-3 font-mono text-xs text-faint">{event.documentNumber}</p>
+        ) : null}
+        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight">
+          {event.titleEn}
+        </h1>
+        {showOriginalTitle ? (
+          <p lang="zh" className="mt-2 text-lg leading-relaxed text-muted">
+            {event.titleOriginal}
+          </p>
+        ) : null}
+        {event.titleEnSource !== "na" ? (
+          <p className="mt-2 text-xs text-faint">
+            English title: {enSourceLabels[event.titleEnSource].toLowerCase()}
+          </p>
+        ) : null}
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <StatusBadge status={event.policyStatus} />
+          <MechanismBadges mechanisms={event.mechanism} />
+        </div>
+      </header>
+
+      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="min-w-0 space-y-10">
+          <Section title="Summary">
+            <p className="max-w-prose text-pretty leading-7 text-foreground/90">
+              {event.summary}
+            </p>
+          </Section>
+
+          <Section title="Analytical significance">
+            <p className="max-w-prose text-pretty leading-7 text-foreground/90">
+              {event.analyticalSignificance}
+            </p>
+          </Section>
+
+          <Section
+            title="Framing anchors"
+            description="Official framing, classified only from quoted passages."
+          >
+            {framing.length > 0 ? (
+              <div className="grid gap-4">
+                {framing.map((f) => (
+                  <FramingQuote
+                    key={f.id}
+                    claim={f}
+                    source={getSourceById(f.sourceId)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <Card className="p-5">
+                <p className="text-sm leading-6 text-muted">
+                  Framing:{" "}
+                  <span className="font-mono text-faint">Not yet coded.</span> No
+                  framing category is assigned because this record does not yet carry
+                  a verified quoted passage from the primary source. Per the
+                  methodology, a framing label is never inferred from context alone.
+                </p>
+              </Card>
+            )}
+          </Section>
+
+          {materials.length > 0 ? (
+            <Section title="Affected materials">
+              <div className="flex flex-wrap gap-2">
+                {materials.map((m) => (
+                  <Link
+                    key={m.id}
+                    href={`/materials/${m.slug}`}
+                    className="group inline-flex items-center gap-2 rounded-md border bg-card px-3 py-1.5 text-sm transition-colors hover:border-border-strong hover:bg-elevated"
+                  >
+                    <span className="group-hover:text-accent">{m.nameEn}</span>
+                    {m.nameZh ? (
+                      <span lang="zh" className="font-mono text-xs text-faint">
+                        {m.nameZh}
+                      </span>
+                    ) : null}
+                  </Link>
+                ))}
+              </div>
+            </Section>
+          ) : null}
+
+          {related.length > 0 ? (
+            <Section title="Related events" description="Events touching the same materials.">
+              <Card className="px-4 py-1">
+                {related.map((e) => (
+                  <EventLine key={e.id} event={e} />
+                ))}
+              </Card>
+            </Section>
+          ) : null}
+
+          <Section title={`Sources (${sources.length})`}>
+            <div className="grid gap-3">
+              {sources.map((s) => (
+                <SourceCard key={s.id} source={s} />
+              ))}
+            </div>
+          </Section>
+        </div>
+
+        {/* At a glance */}
+        <aside className="lg:sticky lg:top-20 lg:self-start">
+          <Card className="p-4">
+            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
+              At a glance
+            </h2>
+            <dl>
+              <MetaRow label="Status">
+                <StatusBadge status={event.policyStatus} />
+              </MetaRow>
+              <MetaRow label="Mechanism">
+                <MechanismBadges mechanisms={event.mechanism} />
+              </MetaRow>
+              <MetaRow label="Sectors">
+                {event.affectedSectors.length ? (
+                  <SectorBadges sectors={event.affectedSectors} />
+                ) : (
+                  <span className="text-faint">—</span>
+                )}
+              </MetaRow>
+              <MetaRow label="Issuer">
+                {jurisdiction ? (
+                  <Link href={actorHref} className="text-accent hover:underline">
+                    {jurisdiction.name}
+                  </Link>
+                ) : (
+                  event.issuingBody
+                )}
+              </MetaRow>
+              <MetaRow label="Doc no.">
+                {event.documentNumber ? (
+                  <span className="font-mono text-xs">{event.documentNumber}</span>
+                ) : (
+                  <span className="font-mono text-xs text-faint">Not yet coded</span>
+                )}
+              </MetaRow>
+              <MetaRow label="Sources">
+                <span className="tnum">{sources.length}</span>
+              </MetaRow>
+            </dl>
+          </Card>
+        </aside>
+      </div>
+    </Container>
+  );
+}

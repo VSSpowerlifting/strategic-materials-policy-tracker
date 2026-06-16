@@ -1,0 +1,170 @@
+[
+  {
+    "id": "rare-earth-elements",
+    "slug": "rare-earth-elements",
+    "nameEn": "Rare earth elements (grouped)",
+    "nameZh": "稀土元素",
+    "grouping": "rare earth elements",
+    "statusSummary": "The spine of the contest. China's April 2025 controls cover seven medium and heavy rare earths (samarium, gadolinium, terbium, dysprosium, lutetium, scandium, yttrium); the October 2025 expansion added five more (holmium, erbium, thulium, europium, ytterbium) plus extraterritorial reach, before the October measures were suspended in November 2025. Rare earths are designated critical by the US (2025 list) and the EU (CRMA).",
+    "chinaPositionNote": "China mines roughly 60–70% of global rare earths and processes about 90%, with near-total dominance of heavy-rare-earth separation (IEA; USGS).",
+    "diversificationNote": "Allied capacity is concentrating downstream: Lynas (Australia/Malaysia), MP Materials (US, Mountain Pass) and Iluka's Eneabba refinery (Australia) are the principal non-China separation projects.",
+    "downstreamIndustries": ["Permanent magnets", "Defense systems", "EV drivetrains", "Wind turbines", "Electronics"],
+    "eventIds": [
+      "china-rare-earth-controls-2025-04",
+      "china-rare-earth-expansion-2025-10",
+      "china-rare-earth-suspension-2025-11",
+      "us-critical-minerals-list-2025",
+      "eu-critical-raw-materials-act",
+      "evt-us-dod-mp-2025",
+      "evt-au-cmsr-2026",
+      "evt-jp-jogmec-lynas-2023"
+    ],
+    "sourceIds": ["src-iea-critical-minerals", "src-cset-mofcom-61", "src-usgs-news-2025"]
+  },
+  {
+    "id": "dysprosium",
+    "slug": "dysprosium",
+    "nameEn": "Dysprosium",
+    "nameZh": "镝",
+    "grouping": "rare earth elements",
+    "statusSummary": "A heavy rare earth named in China's 4 April 2025 controls. Dysprosium raises the coercivity and high-temperature performance of NdFeB magnets, making it critical for traction motors and defense actuators. Designated critical by the US and the EU.",
+    "chinaPositionNote": "Heavy rare earths such as dysprosium are separated almost entirely in China, drawing on ion-adsorption clays in southern China and imported Myanmar feedstock (IEA).",
+    "diversificationNote": "Heavy-rare-earth separation outside China remains nascent; Lynas has begun producing separated heavy rare earths in Malaysia.",
+    "downstreamIndustries": ["High-performance NdFeB magnets", "EV traction motors", "Defense actuators"],
+    "eventIds": [
+      "china-rare-earth-controls-2025-04",
+      "us-critical-minerals-list-2025",
+      "eu-critical-raw-materials-act",
+      "evt-jp-jogmec-lynas-2023"
+    ],
+    "sourceIds": ["src-iea-critical-minerals", "src-hk-april-2025"]
+  },
+  {
+    "id": "terbium",
+    "slug": "terbium",
+    "nameEn": "Terbium",
+    "nameZh": "铽",
+    "grouping": "rare earth elements",
+    "statusSummary": "A heavy rare earth named in China's 4 April 2025 controls. Terbium, like dysprosium, is added to NdFeB magnets to sustain performance at high temperatures and is used in phosphors. Designated critical by the US and the EU.",
+    "chinaPositionNote": "Terbium supply depends on heavy-rare-earth separation capacity that is overwhelmingly located in China (IEA).",
+    "diversificationNote": "Allied heavy-rare-earth separation is limited; terbium is among the materials Lynas aims to supply outside China.",
+    "downstreamIndustries": ["High-performance NdFeB magnets", "Phosphors", "Defense electronics"],
+    "eventIds": [
+      "china-rare-earth-controls-2025-04",
+      "us-critical-minerals-list-2025",
+      "eu-critical-raw-materials-act",
+      "evt-jp-jogmec-lynas-2023"
+    ],
+    "sourceIds": ["src-iea-critical-minerals", "src-hk-april-2025"]
+  },
+  {
+    "id": "neodymium",
+    "slug": "neodymium",
+    "nameEn": "Neodymium",
+    "nameZh": "钕",
+    "grouping": "rare earth elements",
+    "statusSummary": "A light rare earth and the principal magnet element. Neodymium itself was not named in the element-by-element April or October 2025 export-control lists, but its policy exposure is acute: finished NdFeB magnets and the heavy rare earths (dysprosium, terbium) they require are controlled. Designated critical by the US and the EU.",
+    "chinaPositionNote": "China dominates neodymium-praseodymium (NdPr) oxide and metal production and the magnet-making that consumes it (IEA).",
+    "diversificationNote": "MP Materials (US) and Lynas (Australia) are scaling NdPr oxide output; US policy now includes magnet offtake and price support to seed domestic demand.",
+    "downstreamIndustries": ["NdFeB permanent magnets", "EV motors", "Wind turbines", "Consumer electronics"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-us-dod-mp-2025"],
+    "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
+  },
+  {
+    "id": "praseodymium",
+    "slug": "praseodymium",
+    "nameEn": "Praseodymium",
+    "nameZh": "镨",
+    "grouping": "rare earth elements",
+    "statusSummary": "A light rare earth usually produced and sold with neodymium as NdPr. Like neodymium, it was not named individually in the 2025 element lists, but is exposed through magnet controls. Designated critical by the US and the EU.",
+    "chinaPositionNote": "Praseodymium is co-produced with neodymium in a supply chain China dominates from oxide through to finished magnet (IEA).",
+    "diversificationNote": "Tied to the same NdPr diversification efforts (MP Materials, Lynas) as neodymium.",
+    "downstreamIndustries": ["NdFeB permanent magnets", "EV motors", "Aircraft engines"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-us-dod-mp-2025"],
+    "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
+  },
+  {
+    "id": "gallium",
+    "slug": "gallium",
+    "nameEn": "Gallium",
+    "nameZh": "镓",
+    "grouping": null,
+    "statusSummary": "A semiconductor chokepoint material. China imposed export licensing on gallium in 2023 and restricted exports to the United States in December 2024; gallium is designated critical by the US (2025 list) and the EU. These measures are now coded as Announcement No. 23 (licensing from 1 August 2023) and Announcement No. 46 (the December 2024 US-directed ban, suspended November 2025); gallium is also named in Australia's Critical Minerals Strategic Reserve.",
+    "chinaPositionNote": "China accounts for roughly 98% of global primary low-purity gallium production (USGS).",
+    "diversificationNote": "Recovery from alumina and recycling is being explored in the EU, Japan and North America, but volumes remain small.",
+    "downstreamIndustries": ["GaAs / GaN semiconductors", "Radar and defense electronics", "LEDs", "Photovoltaics"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-cn-gage-2023", "evt-au-cmsr-2026", "evt-cn-us-ban-2024"],
+    "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
+  },
+  {
+    "id": "germanium",
+    "slug": "germanium",
+    "nameEn": "Germanium",
+    "nameZh": "锗",
+    "grouping": null,
+    "statusSummary": "A semiconductor and optics chokepoint material placed under Chinese export licensing in 2023, with US-directed restrictions in December 2024. Designated critical by the US and the EU. These measures are now coded as Announcement No. 23 (licensing from 1 August 2023) and Announcement No. 46 (the December 2024 US-directed ban, suspended November 2025).",
+    "chinaPositionNote": "China is the leading producer of refined germanium, with a majority of global output (USGS).",
+    "diversificationNote": "Zinc-residue recovery and recycling in Europe and North America provide limited alternative supply.",
+    "downstreamIndustries": ["Infrared optics", "Fiber optics", "Satellite solar cells", "Semiconductors"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-cn-gage-2023", "evt-cn-us-ban-2024"],
+    "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
+  },
+  {
+    "id": "graphite",
+    "slug": "graphite",
+    "nameEn": "Graphite",
+    "nameZh": "石墨",
+    "grouping": null,
+    "statusSummary": "The dominant anode material for lithium-ion batteries. China tightened export controls on certain graphite items in 2023 and the material is designated critical by the US and the EU. The 2023 measures are now coded as Announcement No. 39 (high-sensitivity items on the dual-use control list from 1 December 2023); Announcement No. 46 added stricter US end-use review in December 2024.",
+    "chinaPositionNote": "China produces the majority of natural graphite and nearly all of the world's spherical (battery-grade) graphite (USGS; IEA).",
+    "diversificationNote": "Synthetic graphite and new natural-graphite anode capacity are being developed in North America, Europe and Africa.",
+    "downstreamIndustries": ["Lithium-ion battery anodes", "Refractories", "Steelmaking"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-cn-graphite-2023"],
+    "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
+  },
+  {
+    "id": "antimony",
+    "slug": "antimony",
+    "nameEn": "Antimony",
+    "nameZh": "锑",
+    "grouping": null,
+    "statusSummary": "A defense and flame-retardant material brought under Chinese export controls in September 2024. Designated critical by the US (2025 list) and an EU critical raw material. Antimony is now coded via Announcement No. 46 (the December 2024 US-directed ban, suspended November 2025) and Australia's Critical Minerals Strategic Reserve; the standalone September 2024 antimony control is noted here as context but is not separately coded as an event.",
+    "chinaPositionNote": "China is the leading global producer of mined and refined antimony (USGS).",
+    "diversificationNote": "Western supply is thin; projects in Australia and North America aim to add non-China antimony output.",
+    "downstreamIndustries": ["Ammunition and military ordnance", "Flame retardants", "Lead-acid batteries", "Photovoltaic glass"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-au-cmsr-2026", "evt-cn-us-ban-2024"],
+    "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
+  },
+  {
+    "id": "tungsten",
+    "slug": "tungsten",
+    "nameEn": "Tungsten",
+    "nameZh": "钨",
+    "grouping": null,
+    "statusSummary": "A hard-metal and defense material. China added tungsten and related items to its export-control list in February 2025; tungsten is designated critical by the US and the EU. The February 2025 measure is now coded as Announcement No. 10 (4 February 2025), which added tungsten alongside tellurium, bismuth, molybdenum and indium to the dual-use export control list.",
+    "chinaPositionNote": "China accounts for roughly 80% of global tungsten supply (USGS).",
+    "diversificationNote": "Tungsten projects and recycling in North America, Europe and Australia are being advanced to reduce dependence.",
+    "downstreamIndustries": ["Cemented-carbide tooling", "Armor-piercing munitions", "Aerospace alloys"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-cn-tungsten-2025"],
+    "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
+  },
+  {
+    "id": "ndfeb-magnets",
+    "slug": "ndfeb-magnets",
+    "nameEn": "Rare-earth permanent magnets (NdFeB)",
+    "nameZh": "钕铁硼永磁体",
+    "grouping": "super-hard and magnetic materials",
+    "statusSummary": "The finished product where rare-earth dependence concentrates. NdFeB magnets containing controlled elements are captured by China's April and October 2025 measures; the October measures were suspended in November 2025. Magnets are the focus of US offtake and price-support policy and EU resilience benchmarks.",
+    "chinaPositionNote": "China manufactures roughly 90% of the world's rare-earth permanent magnets (IEA).",
+    "diversificationNote": "MP Materials (US), e-VAC / Vacuumschmelze, and projects in Japan and Europe are rebuilding magnet-making capacity outside China.",
+    "downstreamIndustries": ["EV traction motors", "Wind turbines", "Defense systems", "Robotics", "Consumer electronics"],
+    "eventIds": [
+      "china-rare-earth-controls-2025-04",
+      "china-rare-earth-expansion-2025-10",
+      "china-rare-earth-suspension-2025-11",
+      "eu-critical-raw-materials-act",
+      "evt-us-dod-mp-2025"
+    ],
+    "sourceIds": ["src-iea-critical-minerals", "src-cset-mofcom-61"]
+  }
+]

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/*
+ * Dark, restrained, institutional theme. Navy/charcoal base, muted gold signal
+ * accent, hairline borders. Palette is defined as :root custom properties so it
+ * is available to both Tailwind utilities (via @theme inline) and hand-written
+ * CSS below.
+ */
+:root {
+  --bg: #0a0e17;
+  --card: #10151f;
+  --elevated: #141c2b;
+  --border: #1f2937;
+  --border-strong: #2c3a52;
+  --fg: #e7eaf1;
+  --muted: #9aa4b6;
+  --faint: #6b7689;
+  --accent: #d6b46a;
+  --accent-fg: #0a0e17;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-card: var(--card);
+  --color-elevated: var(--elevated);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-fg);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 35%, transparent);
+  }
+
+  /* Tabular figures for dense data tables. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}

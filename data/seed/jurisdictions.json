@@ -1,0 +1,76 @@
+[
+  {
+    "id": "china",
+    "code": "CN",
+    "name": "China",
+    "roles": ["producer", "processor", "controller"],
+    "supplyChainPosition": "The dominant incumbent. China mines roughly 60–70% of the world's rare earths and processes about 90%, and is the leading refiner for 19 of 20 strategic minerals tracked by the IEA. Its principal policy instrument is export licensing and control administered through MOFCOM and customs (GACC), increasingly with extraterritorial reach.",
+    "keyBodies": ["MOFCOM", "GACC (General Administration of Customs)", "State Council", "MIIT", "NDRC"],
+    "framingPosture": "Frames controls as national-security and non-proliferation measures consistent with international practice and dual-use obligations. Official text avoids the language of retaliation even when measures track external trade actions.",
+    "eventIds": [
+      "china-rare-earth-controls-2025-04",
+      "china-rare-earth-expansion-2025-10",
+      "china-rare-earth-suspension-2025-11",
+      "evt-cn-gage-2023",
+      "evt-cn-graphite-2023",
+      "evt-cn-us-ban-2024",
+      "evt-cn-tungsten-2025"
+    ],
+    "sourceIds": ["src-iea-critical-minerals", "src-cset-mofcom-61", "src-globaltimes-61"]
+  },
+  {
+    "id": "us",
+    "code": "US",
+    "name": "United States",
+    "roles": ["import_dependent", "funder", "stockpiler", "regulator", "producer"],
+    "supplyChainPosition": "Heavily import-dependent for separated rare earths and finished magnets, and rebuilding a domestic mine-to-magnet chain. Instruments span USGS critical-mineral designation, BIS export controls, DOE and Defense (DPA Title III) funding, and offtake / price-support arrangements.",
+    "keyBodies": ["USGS / Department of the Interior", "BIS", "DOE", "Department of State", "Department of Defense (DPA Title III)"],
+    "framingPosture": "Frames policy as economic security, defense-industrial resilience, and reducing dependence on a single foreign supplier.",
+    "eventIds": ["us-critical-minerals-list-2025", "evt-us-dod-mp-2025"],
+    "sourceIds": ["src-doi-press-2025", "src-usgs-news-2025", "src-fedreg-usgs-2025"]
+  },
+  {
+    "id": "eu",
+    "code": "EU",
+    "name": "European Union",
+    "roles": ["import_dependent", "regulator", "funder"],
+    "supplyChainPosition": "Import-dependent and pursuing de-risking rather than decoupling. The Critical Raw Materials Act sets 2030 benchmarks — 10% domestic extraction, 40% processing, 25% recycling of annual consumption, and no more than 65% of any strategic raw material from a single third country — backed by Strategic Project designations and faster permitting.",
+    "keyBodies": ["European Commission (DG GROW)"],
+    "framingPosture": "Frames policy as supply-chain resilience, de-risking, and open strategic autonomy.",
+    "eventIds": ["eu-critical-raw-materials-act"],
+    "sourceIds": ["src-ec-crma", "src-eurlex-crma"]
+  },
+  {
+    "id": "australia",
+    "code": "AU",
+    "name": "Australia",
+    "roles": ["producer", "processor"],
+    "supplyChainPosition": "A resource producer building allied processing capacity: Lynas operates Mt Weld and separation at Kalgoorlie and in Malaysia, and Iluka is constructing the Eneabba refinery with government backing. Positioned as a non-China supplier of separated rare earths.",
+    "keyBodies": ["Department of Industry, Science and Resources (DISR) / Critical Minerals Office"],
+    "framingPosture": "Frames policy as allied supply security and an industrial opportunity in downstream processing.",
+    "eventIds": ["evt-au-cmsr-2026"],
+    "sourceIds": ["src-iea-critical-minerals"]
+  },
+  {
+    "id": "japan",
+    "code": "JP",
+    "name": "Japan",
+    "roles": ["import_dependent", "stockpiler", "funder"],
+    "supplyChainPosition": "An early mover on diversification following the 2010 rare-earth shock. Supports stockpiling and offtake through JOGMEC (including long-standing investment in Lynas) to reduce single-source dependence.",
+    "keyBodies": ["METI / JOGMEC"],
+    "framingPosture": "Frames policy as economic security and supply diversification.",
+    "eventIds": ["evt-jp-jogmec-lynas-2023"],
+    "sourceIds": ["src-iea-critical-minerals"]
+  },
+  {
+    "id": "canada",
+    "code": "CA",
+    "name": "Canada",
+    "roles": ["producer", "regulator"],
+    "supplyChainPosition": "A resource producer aligning with allied supply chains under its Critical Minerals Strategy, and tightening inbound investment screening on strategic-mineral assets.",
+    "keyBodies": ["Natural Resources Canada (NRCan)"],
+    "framingPosture": "Frames policy as allied coordination, economic security, and responsible resource development.",
+    "eventIds": ["evt-ca-ica-divest-2022"],
+    "sourceIds": ["src-iea-critical-minerals"]
+  }
+]
