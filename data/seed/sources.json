@@ -286,5 +286,41 @@
     "sourceType": "dataset",
     "confidence": "secondary",
     "notes": "IEA policy database summary of MOFCOM/GACC Announcement No. 10 (2025) on tungsten, tellurium, bismuth, molybdenum and indium."
+  },
+  {
+    "id": "src-mofcom-18",
+    "title": "MOFCOM/GACC Announcement No. 18 of 2025 (medium & heavy rare earths)",
+    "publisher": "Ministry of Commerce (China)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_9c2108ccaf754f22a34abab2fedaa944.html",
+    "language": "zh",
+    "datePublished": "2025-04-04",
+    "dateAccessed": "2026-06-16",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Primary MOFCOM/GACC announcement (No. 18 of 2025) on export controls for certain medium and heavy rare-earth-related items; source of the verbatim Chinese justification clause."
+  },
+  {
+    "id": "src-mofcom-39",
+    "title": "MOFCOM/GACC Announcement No. 39 of 2023 (graphite)",
+    "publisher": "Ministry of Commerce (China)",
+    "url": "https://aqygzj.mofcom.gov.cn/qdml/art/2023/art_28aca48820d94a1ca822047d6716c1d6.html",
+    "language": "zh",
+    "datePublished": "2023-10-20",
+    "dateAccessed": "2026-06-16",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Primary MOFCOM/GACC announcement (No. 39 of 2023) optimising and adjusting temporary export-control measures on graphite items; source of the verbatim Chinese justification clause."
+  },
+  {
+    "id": "src-mofcom-10",
+    "title": "MOFCOM/GACC Announcement No. 10 of 2025 (tungsten et al.)",
+    "publisher": "Ministry of Commerce (China)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_e623090907fc4e1092f0a4db72f57b95.html",
+    "language": "zh",
+    "datePublished": "2025-02-04",
+    "dateAccessed": "2026-06-16",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Primary MOFCOM/GACC announcement (No. 10 of 2025) on export controls for tungsten, tellurium, bismuth, molybdenum and indium related items; source of the verbatim Chinese justification clause."
   }
 ]

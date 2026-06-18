@@ -4,7 +4,7 @@
     "date": "2025-04-04",
     "jurisdiction": "china",
     "issuingBody": "MOFCOM / GACC",
-    "titleOriginal": "商务部、海关总署公告2025年第18号",
+    "titleOriginal": "商务部 海关总署公告2025年第18号 公布对部分中重稀土相关物项实施出口管制的决定",
     "titleOriginalLang": "zh",
     "titleEn": "MOFCOM & GACC Announcement No. 18 of 2025: export controls on certain medium and heavy rare-earth-related items",
     "titleEnSource": "self",
@@ -16,7 +16,7 @@
     "summary": "China's Ministry of Commerce and the General Administration of Customs jointly imposed export licensing on seven medium and heavy rare earths — samarium, gadolinium, terbium, dysprosium, lutetium, scandium and yttrium — together with their oxides, alloys, compounds and mixtures, and related magnets. Exporters must obtain MOFCOM licenses; the measure is a licensing regime, not an outright ban.",
     "analyticalSignificance": "The opening move of the 2025 escalation, announced days after new US tariffs. Beijing targeted the medium and heavy rare earths where its separation monopoly is most complete, demonstrating chokepoint leverage while framing the step in standard control terms rather than as retaliation. These April controls have remained in force throughout the later expansion and suspension.",
     "supersededByEventId": null,
-    "sourceIds": ["src-hk-april-2025", "src-china-briefing-timeline"]
+    "sourceIds": ["src-mofcom-18", "src-hk-april-2025", "src-china-briefing-timeline"]
   },
   {
     "id": "china-rare-earth-expansion-2025-10",
@@ -194,7 +194,7 @@
     "date": "2023-10-20",
     "jurisdiction": "china",
     "issuingBody": "MOFCOM",
-    "titleOriginal": "Not yet coded",
+    "titleOriginal": "商务部 海关总署公告2023年第39号 关于优化调整石墨物项临时出口管制措施的公告",
     "titleOriginalLang": "zh",
     "titleEn": "MOFCOM/GACC Announcement No. 39 of 2023 on graphite export control measures",
     "titleEnSource": "self",
@@ -206,7 +206,7 @@
     "summary": "Effective 1 December 2023, three high-sensitivity synthetic and natural-flake graphite categories moved onto the dual-use control list; five low-sensitivity items were de-controlled. Replaced the 2006 temporary graphite regime.",
     "analyticalSignificance": "Targeted EV-battery anode supply; stated justification cited national security and non-proliferation obligations. Original-language text and a quoted framing anchor are not yet coded for this record.",
     "supersededByEventId": null,
-    "sourceIds": ["src-iea-graphite-2023", "src-interos-graphite-2023"]
+    "sourceIds": ["src-mofcom-39", "src-iea-graphite-2023", "src-interos-graphite-2023"]
   },
   {
     "id": "evt-cn-us-ban-2024",
@@ -232,7 +232,7 @@
     "date": "2025-02-04",
     "jurisdiction": "china",
     "issuingBody": "MOFCOM",
-    "titleOriginal": "Not yet coded",
+    "titleOriginal": "商务部 海关总署公告2025年第10号 公布对钨、碲、铋、钼、铟相关物项实施出口管制的决定",
     "titleOriginalLang": "zh",
     "titleEn": "MOFCOM/GACC Announcement No. 10 of 2025 on export controls on tungsten and related items",
     "titleEnSource": "self",
@@ -244,6 +244,6 @@
     "summary": "Added tungsten, tellurium, bismuth, molybdenum, and indium-related items to the dual-use export control list, requiring licenses. Only tungsten is in the v1 material set; the others are noted here, not coded as materials.",
     "analyticalSignificance": "Extended controls into defense-relevant refractory metals where China holds a dominant processing share. The original-language text and a quoted framing anchor are not yet coded.",
     "supersededByEventId": null,
-    "sourceIds": ["src-iea-tungsten-2025", "src-pillsbury-2025"]
+    "sourceIds": ["src-mofcom-10", "src-iea-tungsten-2025", "src-pillsbury-2025"]
   }
 ]

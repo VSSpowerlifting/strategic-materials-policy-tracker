@@ -108,5 +108,38 @@
     "quoteEnSource": "self",
     "sourceId": "src-cset-mofcom-46",
     "notes": "Stated justification of Announcement No. 46 (2024), from CSET's bilingual translation. The category follows the literal text (national security + non-proliferation/compliance); the retaliation reading rests on the one-day-after-BIS timing and is recorded in the event's analytical significance, not the quote."
+  },
+  {
+    "id": "fc-cn-apr18-natsec",
+    "eventId": "china-rare-earth-controls-2025-04",
+    "actor": "china",
+    "category": ["national_security", "compliance_modernization"],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-18",
+    "notes": "Statutory justification clause of Announcement No. 18 (2025), from the MOFCOM primary. Pairs the national-security justification with the non-proliferation/compliance clause, the same framing as Announcement No. 46."
+  },
+  {
+    "id": "fc-cn-graphite-natsec",
+    "eventId": "evt-cn-graphite-2023",
+    "actor": "china",
+    "category": ["national_security"],
+    "quoteOriginal": "为维护国家安全和利益",
+    "quoteEn": "to safeguard national security and interests",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-39",
+    "notes": "Justification clause of Announcement No. 39 (2023), from the MOFCOM primary. The graphite announcement text does not carry the non-proliferation clause, so only national security is coded — a real, narrower framing than the rare-earth and tungsten measures."
+  },
+  {
+    "id": "fc-cn-tungsten-natsec",
+    "eventId": "evt-cn-tungsten-2025",
+    "actor": "china",
+    "category": ["national_security", "compliance_modernization"],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-10",
+    "notes": "Justification clause of Announcement No. 10 (2025), from the MOFCOM primary. Same national-security + non-proliferation/compliance clause as Announcement No. 18 and No. 46."
   }
 ]
