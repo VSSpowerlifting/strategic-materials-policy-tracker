@@ -26,8 +26,8 @@ export function SiteHeader() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "-mb-px whitespace-nowrap border-b-2 border-transparent px-1.5 py-1 font-display text-sm text-muted transition-colors hover:text-foreground",
-                  active && "border-accent text-accent",
+                  "whitespace-nowrap rounded px-2 py-1 font-display text-sm text-muted transition-colors hover:bg-elevated hover:text-foreground",
+                  active && "bg-elevated font-semibold text-accent",
                 )}
               >
                 {item.label}

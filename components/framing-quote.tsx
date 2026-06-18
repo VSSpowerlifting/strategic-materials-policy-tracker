@@ -22,7 +22,7 @@ export function FramingQuote({
 
   return (
     <figure className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card">
-      <div className="flex-1 border-l-2 border-accent/60 px-5 py-4">
+      <div className="flex-1 border-l-[3px] border-accent px-5 py-4">
         <blockquote
           lang={lang}
           className="text-pretty text-lg leading-relaxed text-foreground"
@@ -36,19 +36,22 @@ export function FramingQuote({
           </p>
         ) : null}
       </div>
-      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border px-5 py-3 font-mono text-xs text-faint">
-        <FramingBadges categories={claim.category} short />
-        {source ? (
-          <>
-            <span aria-hidden>·</span>
-            <ExtLink href={source.url} className="font-mono">
-              {source.publisher}
-            </ExtLink>
-            <ConfidenceBadge confidence={source.confidence} />
-          </>
-        ) : null}
-        <span aria-hidden>·</span>
-        <span>{enSourceLabels[claim.quoteEnSource]}</span>
+      <figcaption className="border-t border-border px-5 py-3 font-mono text-xs text-faint">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <FramingBadges categories={claim.category} short />
+        </div>
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+          {source ? (
+            <>
+              <ExtLink href={source.url} className="font-mono">
+                {source.publisher}
+              </ExtLink>
+              <ConfidenceBadge confidence={source.confidence} />
+              <span className="text-border-strong" aria-hidden>/</span>
+            </>
+          ) : null}
+          <span>{enSourceLabels[claim.quoteEnSource]}</span>
+        </div>
       </figcaption>
       {claim.notes ? (
         <p className="border-t border-border px-5 py-3 text-sm leading-6 text-faint">

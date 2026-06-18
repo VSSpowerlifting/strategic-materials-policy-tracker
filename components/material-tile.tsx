@@ -34,7 +34,7 @@ export function MaterialSymbol({
   const { symbol, atomicNumber, hue } = getMaterialMeta(id);
   return (
     <div
-      style={{ borderColor: `${hue}59` }}
+      style={{ borderColor: `${hue}a6` }}
       className={cn(
         "relative flex shrink-0 items-center justify-center overflow-hidden border bg-elevated",
         SYMBOL_SIZE[size],
@@ -43,7 +43,7 @@ export function MaterialSymbol({
     >
       <span
         aria-hidden
-        className="absolute -right-3 -top-3 h-10 w-10 rounded-full opacity-25 blur-xl"
+        className="absolute -right-3 -top-3 h-10 w-10 rounded-full opacity-40 blur-xl"
         style={{ background: hue }}
       />
       {atomicNumber ? (
@@ -66,7 +66,7 @@ export function MaterialTile({ material }: { material: Material }) {
   return (
     <Link
       href={`/materials/${material.slug}`}
-      className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-accent/40 hover:bg-elevated"
+      className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:bg-elevated"
     >
       <MaterialSymbol id={material.id} size="md" />
       <div className="min-w-0">

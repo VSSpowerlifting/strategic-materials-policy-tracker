@@ -51,12 +51,6 @@ export default function Home() {
             licensing, designations, funding and stockpiling each major power
             deploys, and the official language it uses to justify them.
           </p>
-          <p className="mt-4 text-pretty leading-7 text-faint">
-            Every classification is a categorical, source-grounded label — no
-            synthetic risk scores. Every framing claim is anchored to a quoted
-            passage in the original language, with its translation marked. It is not
-            a market model and does not forecast prices or supply.
-          </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               href="/events"
@@ -76,13 +70,13 @@ export default function Home() {
       </section>
 
       {/* Stats — oversized Archivo numerals, mono labels */}
-      <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-8 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 rounded-lg border border-border bg-card px-6 py-5 sm:grid-cols-3 lg:grid-cols-5">
         {stats.map((s) => (
           <Link key={s.label} href={s.href} className="group block">
             <div className="tnum font-display text-4xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent">
               {s.value}
             </div>
-            <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
+            <div className="mt-1 font-mono text-xs uppercase tracking-[0.14em] text-faint">
               {s.label}
             </div>
           </Link>

@@ -10,22 +10,20 @@ export function EventListItem({ event }: { event: PolicyEvent }) {
       href={`/events/${event.id}`}
       className="group block border-b px-4 py-4 transition-colors last:border-b-0 hover:bg-elevated"
     >
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:gap-4">
-        <div className="flex items-center gap-2 sm:w-44 sm:shrink-0">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
+        <div className="flex items-center gap-2 sm:w-44 sm:shrink-0 sm:flex-col sm:items-start sm:gap-1">
           <time className="tnum font-mono text-xs text-faint">
             {formatDate(event.date)}
           </time>
           <JurisdictionTag code={event.jurisdiction} />
+          <MechanismBadges mechanisms={event.mechanism} />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
-            <h3 className="text-pretty font-display font-medium leading-snug text-foreground group-hover:text-accent">
+            <h3 className="text-pretty font-display font-semibold leading-snug text-foreground group-hover:text-accent">
               {event.titleEn}
             </h3>
             <StatusBadge status={event.policyStatus} />
-          </div>
-          <div className="mt-2">
-            <MechanismBadges mechanisms={event.mechanism} />
           </div>
         </div>
       </div>

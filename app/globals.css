@@ -60,12 +60,12 @@
 
   body {
     background-color: var(--bg);
-    /* A single, very low verdigris glow anchored top-centre — depth without a
-       grid. Deliberately not the sibling sites' grid / vertical-rule textures. */
+    /* Verdigris glow concentrated at the crown — reads as a deliberate light
+       source rather than a wash. Narrower radius keeps it off the text region. */
     background-image: radial-gradient(
-      120% 70% at 50% -10%,
-      color-mix(in oklab, var(--accent) 9%, transparent) 0%,
-      transparent 55%
+      90% 55% at 50% -8%,
+      color-mix(in oklab, var(--accent) 14%, transparent) 0%,
+      transparent 62%
     );
     background-attachment: fixed;
     background-repeat: no-repeat;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { Container, PageHeading } from "@/components/ui/container";
 import { FramingQuote } from "@/components/framing-quote";
 import { FramingBadge } from "@/components/labels";
@@ -47,23 +48,29 @@ export default function FramingPage() {
         lead="Every government reaches for the language of security — but they do not mean the same thing. Beijing frames control as national security and non-proliferation; Washington and Brussels frame access as economic security and supply-chain resilience. Each label below is assigned only from a quoted passage, never inferred from context."
       />
 
-      {/* Category reference strip */}
-      <div className="mt-8 flex flex-wrap gap-2">
-        {FRAMING_CATEGORIES.map((c) => {
-          const n = counts.get(c) ?? 0;
-          return (
-            <span
-              key={c}
-              className={n === 0 ? "opacity-40" : undefined}
-              title={n === 0 ? "Not yet observed in a coded quote" : undefined}
-            >
-              <FramingBadge category={c} short />
-              <span className="tnum ml-1 align-middle font-mono text-[11px] text-faint">
-                {n}
-              </span>
-            </span>
-          );
-        })}
+      {/* Category reference grid */}
+      <div className="mt-8">
+        <p className="mb-3 font-mono text-xs uppercase tracking-[0.12em] text-faint">
+          Categories in this dataset
+        </p>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-3 lg:grid-cols-4">
+          {FRAMING_CATEGORIES.map((c) => {
+            const n = counts.get(c) ?? 0;
+            return (
+              <div
+                key={c}
+                className={cn(
+                  "flex items-center justify-between gap-2",
+                  n === 0 && "opacity-40",
+                )}
+                title={n === 0 ? "Not yet observed in a coded quote" : undefined}
+              >
+                <FramingBadge category={c} short />
+                <span className="tnum font-mono text-[11px] text-faint">{n}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <div className="mt-12 space-y-16">

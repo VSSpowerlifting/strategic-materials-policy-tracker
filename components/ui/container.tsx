@@ -66,13 +66,13 @@ export function PageHeading({
   className?: string;
 }) {
   return (
-    <div className={cn("max-w-3xl", className)}>
+    <div className={cn(className)}>
       {eyebrow ? <AtlasIndex index={index} label={eyebrow} className="mb-4" /> : null}
-      <h1 className="font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+      <h1 className="max-w-4xl font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
         {title}
       </h1>
       {lead ? (
-        <p className="mt-5 text-pretty text-lg leading-8 text-muted">{lead}</p>
+        <p className="mt-5 max-w-3xl text-pretty text-lg leading-8 text-muted">{lead}</p>
       ) : null}
     </div>
   );
@@ -100,7 +100,7 @@ export function Section({
             {index ? (
               <span className="font-mono text-xs tnum text-accent">{index}</span>
             ) : null}
-            <h2 className="font-display text-sm font-semibold tracking-tight text-foreground">
+            <h2 className="font-display text-base font-bold tracking-tight text-foreground">
               {title}
             </h2>
           </div>
