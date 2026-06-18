@@ -1,22 +1,32 @@
 import Link from "next/link";
 import { JurisdictionTag, MechanismBadges, StatusBadge } from "@/components/labels";
 import { formatDate } from "@/lib/format";
-import type { PolicyEvent } from "@/lib/types";
+import type { PolicyEvent, PolicyStatus } from "@/lib/types";
+
+function statusStripClass(status: PolicyStatus): string {
+  if (status === "active" || status === "in_force") return "bg-accent";
+  if (status === "proposed") return "bg-border-strong";
+  return "bg-faint/30";
+}
 
 /** Dense, full-width row used in the events index and on profile pages. */
 export function EventListItem({ event }: { event: PolicyEvent }) {
   return (
     <Link
       href={`/events/${event.id}`}
-      className="group block border-b px-4 py-4 transition-colors last:border-b-0 hover:bg-elevated"
+      className="group flex border-b transition-colors last:border-b-0 hover:bg-elevated"
     >
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
+      {/* Status strip — 4px left edge encodes current enforcement */}
+      <span
+        aria-hidden
+        className={`w-1 shrink-0 self-stretch rounded-l-sm ${statusStripClass(event.policyStatus)}`}
+      />
+      <div className="flex flex-1 flex-col gap-2 px-4 py-4 sm:flex-row sm:items-start sm:gap-4">
         <div className="flex items-center gap-2 sm:w-44 sm:shrink-0 sm:flex-col sm:items-start sm:gap-1">
           <time className="tnum font-mono text-xs text-faint">
             {formatDate(event.date)}
           </time>
           <JurisdictionTag code={event.jurisdiction} />
-          <MechanismBadges mechanisms={event.mechanism} />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
@@ -24,6 +34,9 @@ export function EventListItem({ event }: { event: PolicyEvent }) {
               {event.titleEn}
             </h3>
             <StatusBadge status={event.policyStatus} />
+          </div>
+          <div className="mt-1.5">
+            <MechanismBadges mechanisms={event.mechanism} />
           </div>
         </div>
       </div>

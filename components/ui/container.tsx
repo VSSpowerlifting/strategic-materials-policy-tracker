@@ -96,17 +96,21 @@ export function Section({
     <section className={cn("scroll-mt-20", className)}>
       {title ? (
         <div className="mb-4 border-b border-border pb-2">
-          <div className="flex items-baseline gap-3">
+          <div className="flex items-end gap-3">
             {index ? (
-              <span className="font-mono text-xs tnum text-accent">{index}</span>
+              <span className="tnum font-display text-2xl font-bold leading-none text-foreground">
+                {index}
+              </span>
             ) : null}
-            <h2 className="font-display text-base font-bold tracking-tight text-foreground">
-              {title}
-            </h2>
+            <div>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+                {title}
+              </h2>
+              {description ? (
+                <p className="mt-0.5 text-sm leading-6 text-faint">{description}</p>
+              ) : null}
+            </div>
           </div>
-          {description ? (
-            <p className="mt-1.5 text-sm leading-6 text-faint">{description}</p>
-          ) : null}
         </div>
       ) : null}
       {children}

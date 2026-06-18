@@ -43,7 +43,7 @@ export function MaterialSymbol({
     >
       <span
         aria-hidden
-        className="absolute -right-3 -top-3 h-10 w-10 rounded-full opacity-40 blur-xl"
+        className="absolute -right-3 -top-3 h-10 w-10 rounded-full opacity-60 blur-xl"
         style={{ background: hue }}
       />
       {atomicNumber ? (
@@ -63,10 +63,12 @@ export function MaterialSymbol({
 
 /** Clickable grid tile used on the materials index and the homepage preview. */
 export function MaterialTile({ material }: { material: Material }) {
+  const { hue } = getMaterialMeta(material.id);
   return (
     <Link
       href={`/materials/${material.slug}`}
-      className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:bg-elevated"
+      style={{ "--tile-hue": hue } as React.CSSProperties}
+      className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-all hover:bg-elevated hover:shadow-[0_0_18px_2px_color-mix(in_oklab,var(--tile-hue)_12%,transparent)]"
     >
       <MaterialSymbol id={material.id} size="md" />
       <div className="min-w-0">
@@ -78,9 +80,17 @@ export function MaterialTile({ material }: { material: Material }) {
             {material.nameZh}
           </span>
         ) : null}
-        <div className="tnum mt-1 font-mono text-[11px] text-faint">
+        <div className="tnum mt-0.5 font-mono text-[11px] text-faint">
           {material.eventIds.length} events
         </div>
+        {material.grouping ? (
+          <div
+            className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.15em]"
+            style={{ color: hue }}
+          >
+            {material.grouping}
+          </div>
+        ) : null}
       </div>
     </Link>
   );

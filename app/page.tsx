@@ -38,10 +38,10 @@ export default function Home() {
   return (
     <Container width="wide" className="py-12 sm:py-16">
       {/* Hero */}
-      <section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="max-w-2xl">
           <AtlasIndex index="00" label="Multi-actor · policy-instrument · source-linked" className="mb-5" />
-          <h1 className="font-display text-balance text-4xl font-bold leading-[1.04] tracking-tight sm:text-5xl">
+          <h1 className="font-display text-balance text-5xl font-bold leading-[1.04] tracking-tight sm:text-6xl">
             The policy contest over rare earths and strategic materials.
           </h1>
           <p className="mt-6 text-pretty text-lg leading-8 text-muted">
@@ -54,7 +54,7 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               href="/events"
-              className="inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2 font-display text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-strong"
+              className="inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2 font-display text-sm font-semibold text-accent-foreground shadow-[0_0_20px_color-mix(in_oklab,var(--accent)_25%,transparent)] transition-colors hover:bg-accent-strong"
             >
               Browse the event database →
             </Link>
@@ -69,18 +69,25 @@ export default function Home() {
         <HeroMotif />
       </section>
 
-      {/* Stats — oversized Archivo numerals, mono labels */}
-      <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 rounded-lg border border-border bg-card px-6 py-5 sm:grid-cols-3 lg:grid-cols-5">
-        {stats.map((s) => (
-          <Link key={s.label} href={s.href} className="group block">
-            <div className="tnum font-display text-4xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent">
-              {s.value}
-            </div>
-            <div className="mt-1 font-mono text-xs uppercase tracking-[0.14em] text-faint">
-              {s.label}
-            </div>
-          </Link>
-        ))}
+      {/* Stats — dataset scope declaration strip */}
+      <div className="mt-12 rounded-lg border border-border-strong border-l-2 border-l-accent bg-card/60">
+        <div className="border-b border-border px-6 py-2">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-faint">
+            Dataset scope · {site.scopeStart} – present
+          </span>
+        </div>
+        <div className="grid grid-cols-2 divide-x divide-border sm:grid-cols-3 lg:grid-cols-5">
+          {stats.map((s) => (
+            <Link key={s.label} href={s.href} className="group block px-6 py-4">
+              <div className="tnum font-display text-3xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent">
+                {s.value}
+              </div>
+              <div className="mt-1 font-mono text-xs uppercase tracking-[0.14em] text-faint">
+                {s.label}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Recent events + framing teaser */}

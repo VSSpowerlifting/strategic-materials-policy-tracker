@@ -21,8 +21,8 @@ export function FramingQuote({
   const lang = hasCJK(claim.quoteOriginal) ? "zh" : undefined;
 
   return (
-    <figure className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card">
-      <div className="flex-1 border-l-[3px] border-accent px-5 py-4">
+    <figure className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-border-strong">
+      <div className="flex-1 border-l-[5px] border-accent px-5 py-4">
         <blockquote
           lang={lang}
           className="text-pretty text-lg leading-relaxed text-foreground"
@@ -31,12 +31,12 @@ export function FramingQuote({
         </blockquote>
         {isTranslated ? (
           <p className="mt-3 leading-7 text-muted">
-            <span className="font-mono text-xs text-accent">EN&nbsp;</span>
+            <span className="font-mono text-xs text-accent/70">EN&nbsp;</span>
             {claim.quoteEn}
           </p>
         ) : null}
       </div>
-      <figcaption className="border-t border-border px-5 py-3 font-mono text-xs text-faint">
+      <figcaption className="border-t border-border bg-elevated/40 px-5 py-3 font-mono text-xs text-faint">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <FramingBadges categories={claim.category} short />
         </div>

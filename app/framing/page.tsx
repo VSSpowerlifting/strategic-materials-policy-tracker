@@ -81,13 +81,13 @@ export default function FramingPage() {
           );
           return (
             <section key={category} className="scroll-mt-20">
-              {/* Category band — atlas index + Archivo title + count, hairline rule */}
-              <div className="border-b border-border pb-3">
-                <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-xs tnum text-accent">
+              {/* Category band — large display number anchors the section; label sits quietly below */}
+              <div className="border-b border-border border-l-[3px] border-l-accent pl-3 pb-3">
+                <div className="flex items-end gap-4">
+                  <span className="tnum font-display text-3xl font-bold leading-none text-foreground">
                     {String(gi + 1).padStart(2, "0")}
                   </span>
-                  <h2 className="font-display text-xl font-bold tracking-tight">
+                  <h2 className="font-display text-lg font-semibold tracking-tight text-muted">
                     {framingCategoryLabels[category]}
                   </h2>
                   <span className="tnum ml-auto font-mono text-xs text-faint">

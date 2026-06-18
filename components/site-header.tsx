@@ -16,6 +16,10 @@ export function SiteHeader() {
         <Link href="/" className="shrink-0 text-base">
           <Wordmark label={site.shortName} markClassName="h-[1.35rem] w-[1.35rem]" />
         </Link>
+        <span className="hidden font-mono text-[10px] text-faint sm:block">
+          {site.scopeStart}–
+        </span>
+        <span className="mx-1 hidden h-4 w-px shrink-0 bg-border sm:block" aria-hidden />
         <nav className="-mx-1 flex items-center gap-1 overflow-x-auto">
           {nav.map((item) => {
             const active =
