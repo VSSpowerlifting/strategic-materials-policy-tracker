@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <Container width="wide" className="py-12 sm:py-16">
       {/* Hero */}
-      <section className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr]">
+      <section>
         <div className="max-w-2xl">
           <AtlasIndex index="00" label="Multi-actor · policy-instrument · source-linked" className="mb-5" />
           <h1 className="font-display text-balance text-5xl font-bold leading-[1.04] tracking-tight sm:text-6xl">
@@ -66,7 +66,9 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <HeroMotif />
+        <div className="mt-10 lg:mt-12">
+          <HeroMotif materials={summary.materials} />
+        </div>
       </section>
 
       {/* Stats — dataset scope declaration strip */}
