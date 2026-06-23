@@ -10,7 +10,7 @@ export const site = {
     "How the major powers contest rare earths and strategic materials through policy.",
   description:
     "A source-linked policy database tracking how China, the United States, the EU and allied states use export controls, designations, funding and stockpiling around rare earths and strategic materials — and how each government frames its stance, in the original language with translation provenance.",
-  version: "v0.2.0",
+  version: "v0.3-framing",
   lastUpdated: "2026-06-13",
   scopeStart: "April 2025",
   // Placeholder until a domain is registered / deployed.
