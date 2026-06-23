@@ -13,6 +13,7 @@
   --bg: #0b0c0e; /* near-black, neutral-cool graphite (minimal blue) */
   --surface: #131619; /* card surface */
   --elevated: #1a1e22; /* hover / elevated */
+  --plate: #16191d; /* dossier plate — primary record sheets (sits between card & elevated) */
   --border: #262b31; /* hairline */
   --border-strong: #38414a; /* hover / structural */
   --fg: #ecedea; /* warm-neutral off-white (NOT blue-white) */
@@ -30,6 +31,7 @@
   --color-background: var(--bg);
   --color-card: var(--surface);
   --color-elevated: var(--elevated);
+  --color-plate: var(--plate);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-foreground: var(--fg);
@@ -112,11 +114,70 @@
   .strata-contours {
     color: var(--border-strong);
   }
+
+  /*
+   * Dossier plate — the primary record surface (framing quote, event row,
+   * material header). Reads as a typeset document sheet rather than a generic
+   * card: a slightly raised graphite base, one hairline top highlight for a
+   * "pressed sheet" edge, and a quiet drop so the sheet sits *inside* the
+   * graphite. Pair with border-strong; no rounded skeuomorph, no glow.
+   */
+  .plate {
+    background-color: var(--plate);
+    box-shadow:
+      inset 0 1px 0 0 color-mix(in oklab, var(--fg) 6%, transparent),
+      0 1px 2px 0 rgb(0 0 0 / 0.25);
+  }
+
+  /*
+   * Classification metadata rail — the mono, uppercase provenance/label strip
+   * on dossiers (FramingQuote footer, event-card header, framing category
+   * bands). Quiet, instrument-like; structural, not decorative.
+   */
+  .rail {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem; /* 11px */
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  /*
+   * Oxide identity edge — lets a record carry its material's oxide hue as a
+   * single structural left rule (material headers; optionally event/framing
+   * accents). Component sets `--oxide` inline (cf. material-tile's --tile-hue);
+   * falls back to verdigris so the graphite/verdigris identity is never broken.
+   */
+  .oxide-rule {
+    border-left: 2px solid
+      color-mix(in oklab, var(--oxide, var(--accent)) 70%, transparent);
+  }
+
+  /*
+   * Chokepoint breath — a slow opacity pulse for the single central processor
+   * ring in the hero band (direction A). One element only; deliberately not a
+   * terminal "ticker". Off entirely under reduced motion (below).
+   */
+  .choke-pulse {
+    animation: strata-pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes strata-pulse {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .flow-line,
-  .flow-line--slow {
+  .flow-line--slow,
+  .choke-pulse {
     animation: none !important;
   }
 }

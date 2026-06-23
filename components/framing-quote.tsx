@@ -21,11 +21,20 @@ export function FramingQuote({
   const lang = hasCJK(claim.quoteOriginal) ? "zh" : undefined;
 
   return (
-    <figure className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-border-strong">
+    <figure className="plate flex h-full flex-col overflow-hidden rounded-lg border border-border-strong transition-colors hover:border-accent/40">
+      {/* Classification rail — how this passage is coded */}
+      <div className="flex items-center gap-3 border-b border-border px-5 py-2.5">
+        <span aria-hidden className="h-3 w-[5px] shrink-0 rounded-[1px] bg-accent" />
+        <span className="rail">Framing anchor</span>
+        <span className="ml-auto inline-flex flex-wrap items-center justify-end gap-x-3 gap-y-1.5">
+          <FramingBadges categories={claim.category} short />
+        </span>
+      </div>
+      {/* Evidence — the quoted passage in the original language is the hero object */}
       <div className="flex-1 border-l-[5px] border-accent px-5 py-4">
         <blockquote
           lang={lang}
-          className="text-pretty text-lg leading-relaxed text-foreground"
+          className="text-pretty font-serif text-xl leading-relaxed text-foreground"
         >
           {claim.quoteOriginal}
         </blockquote>
@@ -36,22 +45,18 @@ export function FramingQuote({
           </p>
         ) : null}
       </div>
-      <figcaption className="border-t border-border bg-elevated/40 px-5 py-3 font-mono text-xs text-faint">
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-          <FramingBadges categories={claim.category} short />
-        </div>
-        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-          {source ? (
-            <>
-              <ExtLink href={source.url} className="font-mono">
-                {source.publisher}
-              </ExtLink>
-              <ConfidenceBadge confidence={source.confidence} />
-              <span className="text-border-strong" aria-hidden>/</span>
-            </>
-          ) : null}
-          <span>{enSourceLabels[claim.quoteEnSource]}</span>
-        </div>
+      {/* Provenance rail — where the anchor comes from */}
+      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border bg-elevated/40 px-5 py-3 font-mono text-xs text-faint">
+        {source ? (
+          <>
+            <ExtLink href={source.url} className="font-mono">
+              {source.publisher}
+            </ExtLink>
+            <ConfidenceBadge confidence={source.confidence} />
+            <span className="text-border-strong" aria-hidden>/</span>
+          </>
+        ) : null}
+        <span>{enSourceLabels[claim.quoteEnSource]}</span>
       </figcaption>
       {claim.notes ? (
         <p className="border-t border-border px-5 py-3 text-sm leading-6 text-faint">
