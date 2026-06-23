@@ -67,8 +67,8 @@ export function MaterialTile({ material }: { material: Material }) {
   return (
     <Link
       href={`/materials/${material.slug}`}
-      style={{ "--tile-hue": hue } as React.CSSProperties}
-      className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-all hover:bg-elevated hover:shadow-[0_0_18px_2px_color-mix(in_oklab,var(--tile-hue)_12%,transparent)]"
+      style={{ "--oxide": hue, "--tile-hue": hue } as React.CSSProperties}
+      className="oxide-rule plate group flex items-center gap-4 rounded-r-lg p-4 ring-1 ring-border/80 transition-all hover:bg-elevated hover:shadow-[0_0_18px_2px_color-mix(in_oklab,var(--tile-hue)_14%,transparent)]"
     >
       <MaterialSymbol id={material.id} size="md" />
       <div className="min-w-0">
@@ -98,8 +98,12 @@ export function MaterialTile({ material }: { material: Material }) {
 
 /** Large, non-link element-tile header for the material detail page. */
 export function MaterialTileHeader({ material }: { material: Material }) {
+  const { hue } = getMaterialMeta(material.id);
   return (
-    <div className="flex items-center gap-5">
+    <div
+      style={{ "--oxide": hue } as React.CSSProperties}
+      className="oxide-rule flex items-center gap-5 pl-5"
+    >
       <MaterialSymbol id={material.id} size="lg" />
       <div className="min-w-0">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">

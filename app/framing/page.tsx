@@ -9,6 +9,7 @@ import {
   framingCategoryLabels,
   jurisdictionLabels,
   jurisdictionShort,
+  FRAMING_HUES,
 } from "@/lib/labels";
 import { FRAMING_CATEGORIES, JURISDICTIONS } from "@/lib/types";
 import type { JurisdictionCode } from "@/lib/types";
@@ -48,25 +49,25 @@ export default function FramingPage() {
         lead="Every government reaches for the language of security — but they do not mean the same thing. Beijing frames control as national security and non-proliferation; Washington and Brussels frame access as economic security and supply-chain resilience. Each label below is assigned only from a quoted passage, never inferred from context."
       />
 
-      {/* Category reference grid */}
-      <div className="mt-8">
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.12em] text-faint">
-          Categories in this dataset
-        </p>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-3 lg:grid-cols-4">
+      {/* Category legend — a structured register, not a badge cloud */}
+      <div className="mt-8 overflow-hidden rounded-lg border border-border-strong plate">
+        <div className="border-b border-b-border px-4 py-2.5">
+          <span className="rail">Categories in this dataset</span>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
           {FRAMING_CATEGORIES.map((c) => {
             const n = counts.get(c) ?? 0;
             return (
               <div
                 key={c}
                 className={cn(
-                  "flex items-center justify-between gap-2",
+                  "flex items-center justify-between gap-2 border-b border-r border-border px-4 py-2.5",
                   n === 0 && "opacity-40",
                 )}
                 title={n === 0 ? "Not yet observed in a coded quote" : undefined}
               >
                 <FramingBadge category={c} short />
-                <span className="tnum font-mono text-[11px] text-faint">{n}</span>
+                <span className="tnum rail text-faint">{n}</span>
               </div>
             );
           })}
@@ -81,8 +82,11 @@ export default function FramingPage() {
           );
           return (
             <section key={category} className="scroll-mt-20">
-              {/* Category band — large display number anchors the section; label sits quietly below */}
-              <div className="border-b border-border border-l-[3px] border-l-accent pl-3 pb-3">
+              {/* Category band — color-keyed to its category; analytical infrastructure */}
+              <div
+                style={{ "--oxide": FRAMING_HUES[category] } as React.CSSProperties}
+                className="oxide-rule border-b border-b-border pl-3 pb-3"
+              >
                 <div className="flex items-end gap-4">
                   <span className="tnum font-display text-3xl font-bold leading-none text-foreground">
                     {String(gi + 1).padStart(2, "0")}
@@ -90,7 +94,7 @@ export default function FramingPage() {
                   <h2 className="font-display text-lg font-semibold tracking-tight text-muted">
                     {framingCategoryLabels[category]}
                   </h2>
-                  <span className="tnum ml-auto font-mono text-xs text-faint">
+                  <span className="rail tnum ml-auto text-faint">
                     {claims.length} {claims.length === 1 ? "anchor" : "anchors"}
                   </span>
                 </div>
