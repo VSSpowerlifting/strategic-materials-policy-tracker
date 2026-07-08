@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "headroom": {
+      "type": "stdio",
+      "command": "/Users/benjaminyang/.local/bin/headroom",
+      "args": [
+        "mcp",
+        "serve"
+      ],
+      "env": {}
+    },
+    "ruflo": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "ruflo@3.25.4",
+        "mcp",
+        "start"
+      ],
+      "env": {}
+    }
+  }
+}

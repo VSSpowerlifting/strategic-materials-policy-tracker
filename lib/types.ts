@@ -205,3 +205,93 @@ export type Source = {
   confidence: SourceConfidence;
   notes?: string | null;
 };
+
+// ---------------------------------------------------------------------------
+// Candidate (private / pre-publication) workflow
+//
+// Candidate records are DRAFTS. They live under `data/candidates/` and are
+// NEVER imported by `lib/data.ts` or any file under `app/` — so they cannot
+// reach public pages, exports, search, filters, or the production build.
+// `scripts/validate-data.ts` proves this on every `npm run validate`.
+// See `data/candidates/README.md` for the add/review/reject/promote workflow.
+// ---------------------------------------------------------------------------
+
+/** Lifecycle of a candidate record. */
+export const CANDIDATE_STATUSES = [
+  "draft", // researcher captured it; not yet verified
+  "in_review", // source-verification / classification in progress
+  "verified", // source-verifier returned VERIFIED (or VERIFIED WITH CORRECTIONS)
+  "rejected", // will not be published
+  "promoted", // merged into the published seed (see promotion.promotedEventId)
+] as const;
+
+/** The source-verifier's single verdict (mirrors the agent's contract). */
+export const REVIEW_VERDICTS = [
+  "pending",
+  "verified",
+  "verified_with_corrections",
+  "insufficient_source",
+  "reject",
+] as const;
+
+/** Categorical classification confidence — no numeric scores. */
+export const CONFIDENCE_LEVELS = ["high", "medium", "low"] as const;
+
+export type CandidateStatus = (typeof CANDIDATE_STATUSES)[number];
+export type ReviewVerdict = (typeof REVIEW_VERDICTS)[number];
+export type ConfidenceLevel = (typeof CONFIDENCE_LEVELS)[number];
+
+/**
+ * A proposed event. Same shape as `PolicyEvent` but every field is optional so
+ * an early-stage draft can be incomplete. Completeness is enforced by the
+ * validator once `status` reaches "verified"/"promoted".
+ */
+export type ProposedEvent = Partial<PolicyEvent>;
+
+/** A proposed framing claim (same shape as `FramingClaim`, fields optional). */
+export type ProposedFraming = Partial<FramingClaim>;
+
+export type CandidateRecord = {
+  /** Unique, in its own namespace (convention: "cand-..."). Must NOT collide
+   *  with any published id. */
+  candidateId: string;
+  status: CandidateStatus;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt?: string | null;
+
+  /** The published payload being proposed. */
+  proposedEvent: ProposedEvent;
+  proposedFraming?: ProposedFraming[];
+  /** New sources this candidate introduces (existing sources may be referenced
+   *  by id in proposedEvent.sourceIds instead). */
+  proposedSources?: Source[];
+
+  /** Source-verification result. */
+  verification: {
+    verdict: ReviewVerdict;
+    verifiedFields?: string[];
+    corrections?: string[];
+    reviewer?: string | null;
+    reviewedAt?: string | null;
+  };
+
+  /** Proposed classification (existing taxonomy only). */
+  classification: {
+    proposedFramingCategories?: FramingCategory[];
+    confidence: ConfidenceLevel;
+    evidence?: string | null;
+    ambiguityFlags?: string[];
+  };
+
+  reviewerNotes?: string | null;
+  openQuestions?: string[];
+
+  /** Promotion bookkeeping. */
+  promotion: {
+    promoted: boolean;
+    promotedEventId?: string | null;
+    promotedAt?: string | null;
+    approvedBy?: string | null;
+  };
+};

@@ -1,5 +1,62 @@
 @AGENTS.md
 
+# Ruflo + Headroom integration — project governance
+
+This repo has **Ruflo** (agent orchestration) and **Headroom** (context compression)
+installed as **project-local** MCP servers (see `.mcp.json`). Project-specific custom
+agents live in `.claude/agents/`. The data rules already in `AGENTS.md` and the working
+notes below still apply in full; this section governs how the AI tooling may be used.
+
+## Project purpose
+
+The Strategic Materials Policy Tracker is a source-linked English database tracking
+government policy instruments affecting rare earths and adjacent strategic materials.
+It is **not** a commodity-price model, an investment-recommendation service, a general
+news aggregator, or a home for unsupported geopolitical speculation.
+
+## Headroom compression boundary (critical)
+
+Headroom/Ruflo may compress or summarize terminal output, build/lint logs, repetitive
+JSON, repository maps, and search results. Compressed summaries are **never authoritative**
+for: legal or regulatory language, Chinese-language source text, quotations or translations,
+URLs, dates, issuing authorities, implementation status, material scope, final
+classifications, or final analytical claims. For any of those, retrieve and read the
+**complete original source** before concluding.
+
+## Source rules
+
+- Prefer official legal, regulatory, ministerial, parliamentary, agency, or government
+  sources. Secondary reporting may identify a candidate measure but must not replace an
+  available official source.
+- Never invent URLs, quotations, dates, issuing authorities, material coverage, legal
+  effects, or implementation status.
+- Distinguish proposals, consultations, announcements, adopted measures, enacted laws,
+  and implemented measures. Every factual field must be traceable to its source.
+- Retrieve the complete original source before verifying authoritative fields. Ambiguous
+  records and classifications require human review.
+
+## Methodology rules
+
+- Preserve the existing taxonomy (the `as const` label arrays in `lib/types.ts`) unless
+  the maintainer explicitly approves a change. Do not create a category to fit one record.
+- Do not infer legal effect beyond the official text; keep political framing separate from
+  operative legal language.
+- Preserve distinctions among jurisdiction, issuing authority, instrument, material scope,
+  announcement date, and implementation date.
+- Headroom-compressed context must not replace direct review of authoritative source material.
+
+## Repository safety
+
+- Never deploy, publish, push, merge, or commit without explicit maintainer approval.
+- Never modify factual records during an audit-only task; never delete records without approval.
+- Do integration work only on the `ruflo-headroom-integration` branch.
+- Run `npm run validate`, `npm run lint`, `npm run typecheck`, and `npm run build` after changes.
+- AI-generated research and classifications remain **drafts** until human approval.
+- Draft/candidate records live in `data/candidates/` (private, git-ignored) and are
+  isolated from all public output. Add/review/reject/**promote** them via the workflow in
+  `data/candidates/README.md`; `npm run validate` enforces the rules and the leak checks.
+  Never publish a candidate by editing `data/seed/*` without the human-gated promotion step.
+
 # Strategic Materials Policy Tracker — working notes
 
 A source-linked database of how China, the US, the EU and allied states contest

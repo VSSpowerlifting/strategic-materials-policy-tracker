@@ -1,0 +1,86 @@
+[
+  {
+    "candidateId": "cand-example-verified-0001",
+    "status": "verified",
+    "createdBy": "policy-researcher",
+    "createdAt": "2026-07-01",
+    "updatedAt": "2026-07-05",
+    "proposedEvent": {
+      "date": "2026-06-15",
+      "jurisdiction": "eu",
+      "issuingBody": "European Commission (EXAMPLE — synthetic record, not a real body action)",
+      "titleOriginal": "EXAMPLE — Draft measure title (synthetic, not a real instrument)",
+      "titleOriginalLang": "en",
+      "titleEn": "EXAMPLE — Draft measure title (synthetic, not a real instrument)",
+      "titleEnSource": "na",
+      "policyStatus": "proposed",
+      "mechanism": ["supply_chain_security"],
+      "affectedMaterialIds": [],
+      "affectedSectors": ["industrial"],
+      "summary": "Synthetic example candidate used to demonstrate and test the candidate workflow. This is NOT a real policy instrument and must never be promoted as-is.",
+      "analyticalSignificance": "Illustrative only — exercises the strict validation path for a verified candidate.",
+      "sourceIds": ["cand-src-example-0001"]
+    },
+    "proposedFraming": [],
+    "proposedSources": [
+      {
+        "id": "cand-src-example-0001",
+        "title": "EXAMPLE synthetic source",
+        "publisher": "Example Authority",
+        "url": "https://example.gov/example-draft-notice-2026",
+        "language": "en",
+        "datePublished": "2026-06-15",
+        "dateAccessed": "2026-07-01",
+        "sourceType": "official",
+        "confidence": "primary",
+        "notes": "Synthetic example source. Replace with a real official primary source before any promotion."
+      }
+    ],
+    "verification": {
+      "verdict": "verified",
+      "verifiedFields": ["jurisdiction", "issuingBody", "date", "instrument", "source"],
+      "corrections": [],
+      "reviewer": "source-verifier",
+      "reviewedAt": "2026-07-05"
+    },
+    "classification": {
+      "proposedFramingCategories": ["supply_chain_resilience"],
+      "confidence": "medium",
+      "evidence": "Synthetic example — see the proposedEvent.summary field.",
+      "ambiguityFlags": []
+    },
+    "reviewerNotes": "Template/example candidate. Safe to keep tracked; contains no real policy claims.",
+    "openQuestions": [],
+    "promotion": {
+      "promoted": false,
+      "promotedEventId": null,
+      "promotedAt": null,
+      "approvedBy": null
+    }
+  },
+  {
+    "candidateId": "cand-example-draft-0002",
+    "status": "draft",
+    "createdBy": "policy-researcher",
+    "createdAt": "2026-07-06",
+    "proposedEvent": {
+      "jurisdiction": "japan",
+      "titleOriginal": "EXAMPLE — early draft, details pending",
+      "titleEn": "EXAMPLE — early draft, details pending"
+    },
+    "verification": {
+      "verdict": "pending"
+    },
+    "classification": {
+      "confidence": "low"
+    },
+    "reviewerNotes": "Early-stage synthetic draft; missing fields are expected and permitted at status \"draft\".",
+    "openQuestions": [
+      "Confirm the issuing authority against the primary source",
+      "Locate the official source URL and document number"
+    ],
+    "promotion": {
+      "promoted": false
+    }
+  }
+]
