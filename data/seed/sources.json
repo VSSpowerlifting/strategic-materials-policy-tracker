@@ -310,5 +310,17 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Primary MOFCOM/GACC announcement (No. 10 of 2025) on export controls for tungsten, tellurium, bismuth, molybdenum and indium related items; source of the verbatim Chinese justification clause."
+  },
+  {
+    "id": "src-mofcom-33",
+    "title": "MOFCOM/GACC Announcement No. 33 of 2024 (antimony and superhard-materials items)",
+    "publisher": "Ministry of Commerce (China)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2024/art_a4711acb06364199a3c5a06d7f2be6d8.html",
+    "language": "zh",
+    "datePublished": "2024-08-15",
+    "dateAccessed": "2026-07-09",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Primary MOFCOM/GACC announcement (No. 33 of 2024) implementing export controls on antimony-related items and superhard-materials equipment; effective 15 September 2024. Inspected directly for the verbatim Chinese title and operative scope."
   }
 ]

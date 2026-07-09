@@ -245,5 +245,24 @@
     "analyticalSignificance": "Extended controls into defense-relevant refractory metals where China holds a dominant processing share. The original-language text and a quoted framing anchor are not yet coded.",
     "supersededByEventId": null,
     "sourceIds": ["src-mofcom-10", "src-iea-tungsten-2025", "src-pillsbury-2025"]
+  },
+  {
+    "id": "evt-cn-antimony-2024",
+    "date": "2024-08-15",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2024年第33号 关于对锑等物项实施出口管制的公告",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM/GACC Announcement No. 33 of 2024 on export controls on antimony and related items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM/GACC Announcement No. 33 (2024)",
+    "policyStatus": "active",
+    "mechanism": ["export_control", "dual_use_license"],
+    "affectedMaterialIds": ["antimony"],
+    "affectedSectors": ["defense", "semiconductor", "industrial"],
+    "summary": "Announced 15 August 2024 and effective 15 September 2024, the measure placed antimony-related items — ore and raw materials, metal and products, oxides (99.99% and above), organic antimony compounds, hydrides, indium antimonide, and gold-antimony refining/separation technology — onto the dual-use export-control list, alongside superhard-materials equipment (six-sided presses with cylinder diameter of at least 500 mm or design pressure of at least 5 GPa, MPCVD equipment, and diamond window materials). Exporters must obtain MOFCOM licenses; it is a licensing regime, not an outright ban, and the announcement text names no specific country.",
+    "analyticalSignificance": "Extended China's dual-use licensing architecture to antimony — a metal critical to munitions, flame retardants and photovoltaics, where China holds a dominant mine-and-refining share — roughly four months before the 3 December 2024 measure singled out antimony (with gallium and germanium) for a ban on exports to the United States. A quoted framing anchor from the announcement text is not yet coded.",
+    "supersededByEventId": null,
+    "sourceIds": ["src-mofcom-33"]
   }
 ]

@@ -132,7 +132,7 @@
     "chinaPositionNote": "China is the leading global producer of mined and refined antimony (USGS).",
     "diversificationNote": "Western supply is thin; projects in Australia and North America aim to add non-China antimony output.",
     "downstreamIndustries": ["Ammunition and military ordnance", "Flame retardants", "Lead-acid batteries", "Photovoltaic glass"],
-    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-au-cmsr-2026", "evt-cn-us-ban-2024"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-au-cmsr-2026", "evt-cn-us-ban-2024", "evt-cn-antimony-2024"],
     "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
   },
   {

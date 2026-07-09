@@ -14,7 +14,8 @@
       "evt-cn-gage-2023",
       "evt-cn-graphite-2023",
       "evt-cn-us-ban-2024",
-      "evt-cn-tungsten-2025"
+      "evt-cn-tungsten-2025",
+      "evt-cn-antimony-2024"
     ],
     "sourceIds": ["src-iea-critical-minerals", "src-cset-mofcom-61", "src-globaltimes-61"]
   },
