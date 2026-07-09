@@ -188,6 +188,32 @@ function getFraming(eventId: string) {
   return framing.filter((f) => f.eventId === eventId);
 }
 
+// --- Back-reference consistency ---------------------------------------------
+//
+// material.eventIds and jurisdiction.eventIds are hand-maintained indexes. They
+// must stay in exact sync with the events' affectedMaterialIds / jurisdiction,
+// or pages and the /compare matrix will show a stale or missing cross-reference.
+// (getEventsByMaterial / getEventsByActor derive from the event side, so drift
+// here is silent without this check.)
+
+for (const m of materials) {
+  const derived = new Set(events.filter((e) => e.affectedMaterialIds.includes(m.id)).map((e) => e.id));
+  const listed = new Set(m.eventIds);
+  for (const id of derived)
+    if (!listed.has(id)) err(`material "${m.id}": eventIds is missing "${id}" (that event lists this material in affectedMaterialIds)`);
+  for (const id of listed)
+    if (!derived.has(id)) err(`material "${m.id}": eventIds has stale "${id}" (that event does not list this material)`);
+}
+
+for (const j of jurisdictions) {
+  const derived = new Set(events.filter((e) => e.jurisdiction === j.id).map((e) => e.id));
+  const listed = new Set(j.eventIds);
+  for (const id of derived)
+    if (!listed.has(id)) err(`jurisdiction "${j.id}": eventIds is missing "${id}" (that event's jurisdiction is "${j.id}")`);
+  for (const id of listed)
+    if (!derived.has(id)) err(`jurisdiction "${j.id}": eventIds has stale "${id}" (that event is not in "${j.id}")`);
+}
+
 // --- Candidate records (private / pre-publication) --------------------------
 //
 // Candidates are drafts and must never reach public output. Here we (1) validate
