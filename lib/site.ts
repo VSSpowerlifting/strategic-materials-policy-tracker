@@ -22,6 +22,7 @@ export const nav = [
   { href: "/materials", label: "Materials" },
   { href: "/actors", label: "Actors" },
   { href: "/framing", label: "Framing" },
+  { href: "/compare", label: "Compare" },
   { href: "/timeline", label: "Timeline" },
   { href: "/sources", label: "Sources" },
   { href: "/methodology", label: "Methodology" },

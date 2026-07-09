@@ -19,6 +19,7 @@ import {
   getDatasetSummary,
   getAllFramingClaims,
   getFramingByEvent,
+  getControlMatrix,
 } from "@/lib/data";
 import type { JurisdictionCode } from "@/lib/types";
 
@@ -79,6 +80,40 @@ test("source lookups round-trip", () => {
 test("framing-by-event only returns claims for that event", () => {
   for (const e of getAllEvents())
     for (const f of getFramingByEvent(e.id)) assert.equal(f.eventId, e.id);
+});
+
+test("control matrix: one row per material, totals reconcile across axes", () => {
+  const m = getControlMatrix();
+  assert.equal(m.rows.length, getAllMaterials().length);
+  const cellSum = m.rows.reduce(
+    (sum, r) => sum + m.jurisdictions.reduce((s, j) => s + r.byJurisdiction[j].count, 0),
+    0,
+  );
+  const rowTotalSum = m.rows.reduce((s, r) => s + r.total, 0);
+  const colTotalSum = m.jurisdictions.reduce((s, j) => s + m.columnTotals[j], 0);
+  assert.equal(cellSum, rowTotalSum);
+  assert.equal(cellSum, colTotalSum);
+});
+
+test("control matrix: cells are consistent with the events they aggregate", () => {
+  const m = getControlMatrix();
+  for (const r of m.rows)
+    for (const j of m.jurisdictions) {
+      const cell = r.byJurisdiction[j];
+      assert.equal(cell.count, cell.eventIds.length);
+      assert.equal(new Set(cell.mechanisms).size, cell.mechanisms.length, "mechanisms must be de-duped");
+      for (const e of getEventsByMaterial(r.material.id))
+        if (e.jurisdiction === j) assert.ok(cell.eventIds.includes(e.id));
+      if (cell.latestDate)
+        for (const id of cell.eventIds) {
+          const ev = getEventById(id)!;
+          assert.ok(ev.date <= cell.latestDate);
+        }
+    }
+});
+
+test("control matrix: columns are taxonomy-ordered with the control actor first", () => {
+  assert.equal(getControlMatrix().jurisdictions[0], "china");
 });
 
 test("dataset summary equals loaded counts", () => {

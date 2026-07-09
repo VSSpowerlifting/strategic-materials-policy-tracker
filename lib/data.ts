@@ -2,12 +2,14 @@
  * Read-only data access for the MVP. All data is local seed JSON — no live
  * APIs, no database. Loaders return typed records and never mutate the seed.
  */
+import { JURISDICTIONS } from "./types";
 import type {
   FramingCategory,
   FramingClaim,
   Jurisdiction,
   JurisdictionCode,
   Material,
+  Mechanism,
   PolicyEvent,
   Source,
 } from "./types";
@@ -140,4 +142,62 @@ export function getDatasetSummary() {
     jurisdictions: jurisdictions.length,
     sources: sources.length,
   };
+}
+
+// --- Comparative control matrix ---------------------------------------------
+//
+// A purely derived cross-tab of material (rows) × jurisdiction (columns). Each
+// cell counts the coded events in which that jurisdiction acted on that
+// material and collects the mechanisms and latest date. No new classification
+// is introduced — it only aggregates existing coded fields.
+
+export type MatrixCell = {
+  count: number;
+  mechanisms: Mechanism[];
+  latestDate: string | null;
+  eventIds: string[];
+};
+
+export type MatrixRow = {
+  material: Material;
+  byJurisdiction: Record<JurisdictionCode, MatrixCell>;
+  total: number;
+};
+
+const emptyCell = (): MatrixCell => ({ count: 0, mechanisms: [], latestDate: null, eventIds: [] });
+
+export function getControlMatrix(): {
+  jurisdictions: JurisdictionCode[];
+  rows: MatrixRow[];
+  columnTotals: Record<JurisdictionCode, number>;
+} {
+  const present = new Set(jurisdictions.map((j) => j.id));
+  // Meaningful, stable column order (the control actor first), taxonomy-driven.
+  const cols = JURISDICTIONS.filter((j) => present.has(j)) as JurisdictionCode[];
+
+  const rows: MatrixRow[] = getAllMaterials().map((material) => {
+    const byJurisdiction = Object.fromEntries(cols.map((j) => [j, emptyCell()])) as Record<
+      JurisdictionCode,
+      MatrixCell
+    >;
+    for (const e of getEventsByMaterial(material.id)) {
+      const cell = byJurisdiction[e.jurisdiction];
+      if (!cell) continue;
+      cell.count++;
+      cell.eventIds.push(e.id);
+      for (const m of e.mechanism) if (!cell.mechanisms.includes(m)) cell.mechanisms.push(m);
+      if (!cell.latestDate || e.date > cell.latestDate) cell.latestDate = e.date;
+    }
+    const total = cols.reduce((sum, j) => sum + byJurisdiction[j].count, 0);
+    return { material, byJurisdiction, total };
+  });
+
+  // Most-contested materials first; ties broken alphabetically.
+  rows.sort((a, b) => b.total - a.total || a.material.nameEn.localeCompare(b.material.nameEn));
+
+  const columnTotals = Object.fromEntries(
+    cols.map((j) => [j, rows.reduce((sum, r) => sum + r.byJurisdiction[j].count, 0)]),
+  ) as Record<JurisdictionCode, number>;
+
+  return { jurisdictions: cols, rows, columnTotals };
 }
