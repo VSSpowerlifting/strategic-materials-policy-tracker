@@ -206,7 +206,7 @@
     "summary": "Effective 1 December 2023, three high-sensitivity synthetic and natural-flake graphite categories moved onto the dual-use control list; five low-sensitivity items were de-controlled. Replaced the 2006 temporary graphite regime.",
     "analyticalSignificance": "Targeted EV-battery anode supply; stated justification cited national security and non-proliferation obligations. Original-language text and a quoted framing anchor are not yet coded for this record.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mofcom-39", "src-iea-graphite-2023", "src-interos-graphite-2023"]
+    "sourceIds": ["src-mofcom-39", "src-iea-graphite-2023"]
   },
   {
     "id": "evt-cn-us-ban-2024",
