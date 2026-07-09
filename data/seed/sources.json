@@ -322,5 +322,41 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Primary MOFCOM/GACC announcement (No. 33 of 2024) implementing export controls on antimony-related items and superhard-materials equipment; effective 15 September 2024. Inspected directly for the verbatim Chinese title and operative scope."
+  },
+  {
+    "id": "src-mofcom-70",
+    "title": "MOFCOM/GACC Announcement No. 70 of 2025 (suspension of Announcements Nos. 55, 56, 57, 58, 61 and 62 of 2025)",
+    "publisher": "Ministry of Commerce (China)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_b1ec77dd3f0d4762952904df7cdaadec.html",
+    "language": "zh",
+    "datePublished": "2025-11-07",
+    "dateAccessed": "2026-07-09",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Primary suspension decision. Operative text inspected directly: 自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。 The announcement body carries no justification clause beyond 经批准 (upon approval)."
+  },
+  {
+    "id": "src-mofcom-kl-qa",
+    "title": "MOFCOM spokesperson Q&A on the China–US Kuala Lumpur trade-consultation joint arrangement (商务部新闻发言人就中美吉隆坡经贸磋商联合安排答记者问)",
+    "publisher": "Ministry of Commerce (China)",
+    "url": "https://www.mofcom.gov.cn/syxwfb/art/2025/art_e8453c07ce374814ba65bdb6ff5813c4.html",
+    "language": "zh",
+    "datePublished": "2025-10-30",
+    "dateAccessed": "2026-07-09",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official spokesperson statement announcing the joint arrangement that Announcement No. 70 implements: the US pauses its 29 September 50% penetration rule for one year and China suspends the 9 October export-control measures for one year. Anchor for the suspension event's framing, since No. 70 itself states no rationale."
+  },
+  {
+    "id": "src-usgs-mcs2025-antimony",
+    "title": "Mineral Commodity Summaries 2025 — Antimony",
+    "publisher": "U.S. Geological Survey",
+    "url": "https://pubs.usgs.gov/periodicals/mcs2025/mcs2025-antimony.pdf",
+    "language": "en",
+    "datePublished": "2025-01-31",
+    "dateAccessed": "2026-07-09",
+    "sourceType": "official",
+    "confidence": "secondary",
+    "notes": "Official USGS chapter inspected directly (PDF). Documents the August 2024 Chinese licensing requirement (ore, metals, oxides, hydrides, indium antimonides, organo-antimony compounds, gold-antimony separation technology), the near-doubling of the metal price July–November 2024 (Argus data), and the December 2024 ban on exports to the United States. Coded secondary relative to the Chinese instrument: authoritative English corroboration, not the primary text."
   }
 ]

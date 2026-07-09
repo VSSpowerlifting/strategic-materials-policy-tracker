@@ -141,5 +141,27 @@
     "quoteEnSource": "self",
     "sourceId": "src-mofcom-10",
     "notes": "Justification clause of Announcement No. 10 (2025), from the MOFCOM primary. Same national-security + non-proliferation/compliance clause as Announcement No. 18 and No. 46."
+  },
+  {
+    "id": "fc-cn-antimony-natsec",
+    "eventId": "evt-cn-antimony-2024",
+    "actor": "china",
+    "category": ["national_security", "compliance_modernization"],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-33",
+    "notes": "Justification clause of Announcement No. 33 (2024), from the MOFCOM primary (inspected 2026-07-09). Identical national-security + non-proliferation formula later used in Announcements No. 10 and No. 18 of 2025 — the antimony measure is where this now-standard clause entered the mineral-controls series."
+  },
+  {
+    "id": "fc-cn-suspension-leverage",
+    "eventId": "china-rare-earth-suspension-2025-11",
+    "actor": "china",
+    "category": ["leverage_retaliation"],
+    "quoteOriginal": "中方将暂停实施10月9日公布的相关出口管制等措施一年",
+    "quoteEn": "China will suspend implementation of the relevant export-control and other measures announced on 9 October for one year",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-kl-qa",
+    "notes": "From the MOFCOM spokesperson Q&A on the Kuala Lumpur joint arrangement (30 Oct 2025), which pairs this sentence with the US pausing its 29 September 50% penetration rule for one year — an explicitly reciprocal, time-bound exchange. Coded leverage_retaliation on that reciprocity structure. Announcement No. 70 itself contains no justification clause (only 经批准), so the framing anchor is the spokesperson statement, not the instrument text."
   }
 ]

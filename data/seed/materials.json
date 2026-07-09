@@ -119,7 +119,7 @@
     "chinaPositionNote": "China produces the majority of natural graphite and nearly all of the world's spherical (battery-grade) graphite (USGS; IEA).",
     "diversificationNote": "Synthetic graphite and new natural-graphite anode capacity are being developed in North America, Europe and Africa.",
     "downstreamIndustries": ["Lithium-ion battery anodes", "Refractories", "Steelmaking"],
-    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-cn-graphite-2023"],
+    "eventIds": ["us-critical-minerals-list-2025", "eu-critical-raw-materials-act", "evt-cn-graphite-2023", "china-rare-earth-suspension-2025-11"],
     "sourceIds": ["src-iea-critical-minerals", "src-usgs-news-2025"]
   },
   {
