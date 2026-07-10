@@ -81,7 +81,7 @@ export default function FramingPage() {
               (ACTOR_ORDER.get(a.actor) ?? 99) - (ACTOR_ORDER.get(b.actor) ?? 99),
           );
           return (
-            <section key={category} className="scroll-mt-20">
+            <section key={category} id={category} className="scroll-mt-20">
               {/* Category band — color-keyed to its category; analytical infrastructure */}
               <div
                 style={{ "--oxide": FRAMING_HUES[category] } as React.CSSProperties}

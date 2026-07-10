@@ -2,7 +2,7 @@
  * Read-only data access for the MVP. All data is local seed JSON — no live
  * APIs, no database. Loaders return typed records and never mutate the seed.
  */
-import { JURISDICTIONS } from "./types";
+import { FRAMING_CATEGORIES, JURISDICTIONS } from "./types";
 import type {
   FramingCategory,
   FramingClaim,
@@ -84,6 +84,23 @@ export function getFramingGroupedByCategory(): { category: FramingCategory; clai
   return [...map.entries()]
     .map(([category, claims]) => ({ category, claims }))
     .sort((a, b) => b.claims.length - a.claims.length);
+}
+
+/**
+ * Framing categories per event, for browse-level chips and filters. A plain
+ * record (serializable across the server → client component boundary), each
+ * value the de-duplicated union of the event's claim categories in canonical
+ * taxonomy order. Events whose framing has not yet been anchored to a quote
+ * are present with an empty array — "not yet coded", never "no framing".
+ */
+export function getFramingCategoriesByEvent(): Record<string, FramingCategory[]> {
+  const out: Record<string, FramingCategory[]> = {};
+  for (const e of events) {
+    const seen = new Set<FramingCategory>();
+    for (const f of framing) if (f.eventId === e.id) f.category.forEach((c) => seen.add(c));
+    out[e.id] = FRAMING_CATEGORIES.filter((c) => seen.has(c));
+  }
+  return out;
 }
 
 // --- Materials --------------------------------------------------------------

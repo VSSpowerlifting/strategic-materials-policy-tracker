@@ -2,10 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { JurisdictionTag, StatusBadge } from "@/components/labels";
+import { FramingBadges, JurisdictionTag, StatusBadge } from "@/components/labels";
 import { jurisdictionLabels } from "@/lib/labels";
 import { formatDate } from "@/lib/format";
-import type { JurisdictionCode, Material, PolicyEvent } from "@/lib/types";
+import type {
+  FramingCategory,
+  JurisdictionCode,
+  Material,
+  PolicyEvent,
+} from "@/lib/types";
 
 const ALL = "all";
 const WINDOW_START = "2025-04-01";
@@ -13,7 +18,13 @@ const WINDOW_START = "2025-04-01";
 const selectClass =
   "rounded-md border border-border bg-card px-2.5 py-2 font-display text-sm text-foreground focus:border-accent/50 focus:outline-none";
 
-function TimelineNode({ event }: { event: PolicyEvent }) {
+function TimelineNode({
+  event,
+  framingCategories,
+}: {
+  event: PolicyEvent;
+  framingCategories: FramingCategory[];
+}) {
   return (
     <li className="relative border-l border-border pb-8 pl-7 last:border-l-transparent last:pb-0">
       <span
@@ -33,6 +44,12 @@ function TimelineNode({ event }: { event: PolicyEvent }) {
         </Link>
         <StatusBadge status={event.policyStatus} />
       </div>
+      {/* Official-framing markers; anchored quotes only, linked to /framing */}
+      {framingCategories.length > 0 ? (
+        <div className="mt-2">
+          <FramingBadges categories={framingCategories} linked />
+        </div>
+      ) : null}
     </li>
   );
 }
@@ -40,9 +57,12 @@ function TimelineNode({ event }: { event: PolicyEvent }) {
 export function TimelineView({
   events,
   materials,
+  framingByEvent,
 }: {
   events: PolicyEvent[];
   materials: Material[];
+  /** Event id → framing categories (from getFramingCategoriesByEvent). */
+  framingByEvent: Record<string, FramingCategory[]>;
 }) {
   const [actor, setActor] = useState(ALL);
   const [material, setMaterial] = useState(ALL);
@@ -115,7 +135,11 @@ export function TimelineView({
             </p>
             <ol>
               {foundational.map((e) => (
-                <TimelineNode key={e.id} event={e} />
+                <TimelineNode
+                  key={e.id}
+                  event={e}
+                  framingCategories={framingByEvent[e.id] ?? []}
+                />
               ))}
             </ol>
           </div>
@@ -132,13 +156,28 @@ export function TimelineView({
         {inWindow.length > 0 ? (
           <ol>
             {inWindow.map((e) => (
-              <TimelineNode key={e.id} event={e} />
+              <TimelineNode
+                key={e.id}
+                event={e}
+                framingCategories={framingByEvent[e.id] ?? []}
+              />
             ))}
           </ol>
         ) : (
           <p className="text-sm text-muted">No events match these filters.</p>
         )}
       </div>
+
+      <p className="mt-10 font-mono text-[11px] leading-relaxed text-faint">
+        Framing markers show how the issuing government officially presented a
+        measure — quoted, not inferred — and do not restate its legal effect.
+        Events without markers have framing that is not yet coded, not framing
+        that does not exist. Compare anchors on the{" "}
+        <Link href="/framing" className="text-accent hover:text-accent-strong">
+          framing page
+        </Link>
+        .
+      </p>
     </div>
   );
 }

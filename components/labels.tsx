@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
   confidenceLabels,
@@ -58,33 +59,52 @@ export function SectorBadges({ sectors }: { sectors: Sector[] }) {
 export function FramingBadge({
   category,
   short = false,
+  linked = false,
 }: {
   category: FramingCategory;
   short?: boolean;
+  /** Link to the category's section on /framing. Never use inside another link. */
+  linked?: boolean;
 }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] leading-none text-muted">
+  const body = (
+    <>
       <span
         aria-hidden
         className="h-3 w-[5px] shrink-0 rounded-[1px]"
         style={{ background: FRAMING_HUES[category] }}
       />
       {short ? framingCategoryShort[category] : framingCategoryLabels[category]}
-    </span>
+    </>
   );
+  const className =
+    "inline-flex items-center gap-1.5 font-mono text-[11px] leading-none text-muted";
+  if (linked) {
+    return (
+      <Link
+        href={`/framing#${category}`}
+        title={`${framingCategoryLabels[category]} — see the framing catalogue`}
+        className={`${className} hover:text-accent`}
+      >
+        {body}
+      </Link>
+    );
+  }
+  return <span className={className}>{body}</span>;
 }
 
 export function FramingBadges({
   categories,
   short = true,
+  linked = false,
 }: {
   categories: FramingCategory[];
   short?: boolean;
+  linked?: boolean;
 }) {
   return (
     <span className="inline-flex flex-wrap gap-x-3 gap-y-1.5">
       {categories.map((c) => (
-        <FramingBadge key={c} category={c} short={short} />
+        <FramingBadge key={c} category={c} short={short} linked={linked} />
       ))}
     </span>
   );

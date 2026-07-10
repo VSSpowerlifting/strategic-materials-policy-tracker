@@ -19,8 +19,10 @@ import {
   getDatasetSummary,
   getAllFramingClaims,
   getFramingByEvent,
+  getFramingCategoriesByEvent,
   getControlMatrix,
 } from "@/lib/data";
+import { FRAMING_CATEGORIES } from "@/lib/types";
 import type { JurisdictionCode } from "@/lib/types";
 
 test("events load and are sorted most-recent-first", () => {
@@ -80,6 +82,26 @@ test("source lookups round-trip", () => {
 test("framing-by-event only returns claims for that event", () => {
   for (const e of getAllEvents())
     for (const f of getFramingByEvent(e.id)) assert.equal(f.eventId, e.id);
+});
+
+test("framing categories by event: every event keyed, values match its claims", () => {
+  const byEvent = getFramingCategoriesByEvent();
+  const events = getAllEvents();
+  assert.equal(Object.keys(byEvent).length, events.length);
+  for (const e of events) {
+    const cats = byEvent[e.id];
+    assert.ok(Array.isArray(cats), `missing entry for ${e.id}`);
+    const expected = new Set(getFramingByEvent(e.id).flatMap((f) => f.category));
+    assert.deepEqual(new Set(cats), expected, `category union mismatch for ${e.id}`);
+    assert.equal(new Set(cats).size, cats.length, `duplicate categories for ${e.id}`);
+  }
+});
+
+test("framing categories by event follow canonical taxonomy order", () => {
+  const order = new Map(FRAMING_CATEGORIES.map((c, i) => [c, i]));
+  for (const cats of Object.values(getFramingCategoriesByEvent()))
+    for (let i = 1; i < cats.length; i++)
+      assert.ok(order.get(cats[i - 1])! < order.get(cats[i])!, "unsorted categories");
 });
 
 test("control matrix: one row per material, totals reconcile across axes", () => {

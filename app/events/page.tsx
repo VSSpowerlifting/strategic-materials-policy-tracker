@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Container, PageHeading } from "@/components/ui/container";
 import { EventsExplorer } from "@/components/events-explorer";
-import { getAllEvents, getAllMaterials } from "@/lib/data";
+import {
+  getAllEvents,
+  getAllMaterials,
+  getFramingCategoriesByEvent,
+} from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -22,7 +26,11 @@ export default function EventsPage() {
         lead="Every tracked measure, newest first. Filter by actor, mechanism, status or material. Each event is a structured, source-linked record — open one for the full framing and citations."
       />
       <div className="mt-10">
-        <EventsExplorer events={events} materials={materials} />
+        <EventsExplorer
+          events={events}
+          materials={materials}
+          framingByEvent={getFramingCategoriesByEvent()}
+        />
       </div>
     </Container>
   );

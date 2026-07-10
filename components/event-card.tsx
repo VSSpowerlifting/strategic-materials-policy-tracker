@@ -1,7 +1,12 @@
 import Link from "next/link";
-import { JurisdictionTag, MechanismBadges, StatusBadge } from "@/components/labels";
+import {
+  FramingBadges,
+  JurisdictionTag,
+  MechanismBadges,
+  StatusBadge,
+} from "@/components/labels";
 import { formatDate } from "@/lib/format";
-import type { PolicyEvent, PolicyStatus } from "@/lib/types";
+import type { FramingCategory, PolicyEvent, PolicyStatus } from "@/lib/types";
 
 function statusStripClass(status: PolicyStatus): string {
   if (status === "active" || status === "in_force") return "bg-accent";
@@ -9,8 +14,20 @@ function statusStripClass(status: PolicyStatus): string {
   return "bg-faint/30";
 }
 
-/** Dense, full-width row used in the events index and on profile pages. */
-export function EventListItem({ event }: { event: PolicyEvent }) {
+/**
+ * Dense, full-width row used in the events index and on profile pages.
+ * `framingCategories` is opt-in: undefined renders no framing row at all
+ * (profile pages that don't load framing), while an empty array states
+ * "not yet coded" — the official framing exists, we just haven't anchored
+ * it to a verified quote yet.
+ */
+export function EventListItem({
+  event,
+  framingCategories,
+}: {
+  event: PolicyEvent;
+  framingCategories?: FramingCategory[];
+}) {
   return (
     <Link
       href={`/events/${event.id}`}
@@ -38,6 +55,17 @@ export function EventListItem({ event }: { event: PolicyEvent }) {
           <div className="mt-1.5">
             <MechanismBadges mechanisms={event.mechanism} />
           </div>
+          {framingCategories ? (
+            <div className="mt-2">
+              {framingCategories.length > 0 ? (
+                <FramingBadges categories={framingCategories} />
+              ) : (
+                <span className="font-mono text-[11px] leading-none text-faint">
+                  Official framing not yet coded
+                </span>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
     </Link>
