@@ -1,6 +1,6 @@
 # Project state
 
-_Last updated: 2026-07-10 (browse-level framing visibility)._
+_Last updated: 2026-08-04 (repo housekeeping; no data or UI changes)._
 
 ## Branch
 
@@ -9,6 +9,9 @@ Nothing has been pushed, merged, or deployed.
 
 ## Latest commits
 
+- `5767c20` Ignore graphify-out; track .graphifyignore; document Graphify navigation
+- `df27e39` Surface framing categories at browse level (chips, filter, cross-links)
+- `765e6b1` Recover interrupted session: move orphan sources to private candidates
 - `ac6bf4b` Canonicalize JOGMEC source URL after site restructure
 - `dfd3a1e` Complete framing coverage; code suspension primary (No. 70); add USGS antimony corroboration
 - `3b4fcde` Validate material/jurisdiction eventIds stay in sync with events
@@ -53,7 +56,14 @@ pages and `/framing`; it is now discoverable while browsing:
 No taxonomy change: the filter and chips reuse the eight existing
 `FRAMING_CATEGORIES`, `framingCategoryShort` labels, and `FRAMING_HUES` tones.
 
-## Checks (all run 2026-07-10)
+## Checks
+
+**Re-verified 2026-08-04** after four weeks idle, no drift: `npm run validate`
+✓ (same counts as below), `npm run typecheck` ✓, `npm run lint` ✓,
+`npm test` ✓ 36/36. `npm run build` not re-run — see the font-cache caveat
+below.
+
+Original run, 2026-07-10:
 
 - `npm run validate` — ✓ 14 events · 15 framing claims · 11 materials ·
   6 jurisdictions · 30 sources · 4 candidates (private)
