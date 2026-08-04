@@ -127,3 +127,29 @@ integrity, allowed-value membership, quote anchors and translation provenance.
   November Chinese measures.
 - Dedicated event records for the 2023–2025 gallium, germanium, graphite, antimony
   and tungsten controls (currently only referenced in material notes).
+
+## Token-efficient navigation (Graphify)
+
+- Start each session by reading `PROJECT_STATE.md` if it exists.
+- For architecture, file locations, data flow, validation flow, routes, or
+  components questions ("where should I edit?"), read `graphify-out/GRAPH_REPORT.md`
+  before broad search.
+- Order of operations: Graphify report first, targeted `rg` second, direct file
+  reads third.
+- Do not re-audit the whole repo unless explicitly asked.
+- Do not open large files unless Graphify or targeted search identifies them as
+  relevant.
+- Summarize large outputs instead of pasting them back.
+- Use Ruflo only when role separation genuinely helps (research, source
+  verification, policy classification, methodology review, editorial skepticism,
+  publishing QA, longitudinal comparison, claim-to-source traceability). Not for
+  simple coding edits, one-file fixes, nav changes, README edits, formatting, or
+  routine build errors.
+- Use Headroom only for long logs, repetitive JSON, large search/validation
+  output, or Ruflo multi-agent context. Headroom summaries are never authoritative
+  for source text, dates, URLs, legal language, or classifications (see above).
+- After major architecture or file-structure changes, run `graphify update .` to
+  refresh the graph (no API cost with `--code-only`).
+- After meaningful work, update `PROJECT_STATE.md`.
+- Prefer small, focused changes over large rewrites.
+- Do not push, merge, publish, deploy, or sync without explicit permission.

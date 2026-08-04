@@ -45,6 +45,10 @@ next-env.d.ts
 .claude/skills/
 skills-lock.json
 
+# Graphify output — regenerable from source via `graphify update .`.
+# `.graphifyignore` stays tracked so a fresh clone rebuilds the same graph.
+graphify-out/
+
 # Ruflo + Headroom runtime artifacts (durable config like .mcp.json,
 # .claude/settings.json, .claude/agents/, .claude-flow/config.yaml stays tracked)
 .swarm/
