@@ -92,11 +92,11 @@
     "eventId": "evt-cn-gage-2023",
     "actor": "china",
     "category": ["national_security"],
-    "quoteOriginal": "为了维护国家安全和国家利益",
+    "quoteOriginal": "为维护国家安全和利益",
     "quoteEn": "to safeguard national security and interests",
     "quoteEnSource": "self",
-    "sourceId": "src-globaltimes-gage-2023",
-    "notes": "The standard MOFCOM justification clause for Announcement No. 23 (2023); the Global Times (state media) reports the same national-security rationale in English at the linked report."
+    "sourceId": "src-mofcom-23",
+    "notes": "Justification clause of Announcement No. 23 (2023), verified verbatim against the MOFCOM primary. Re-anchored 2026-08-10: the claim previously cited a state-media English report that does not carry the Chinese text, and the wording coded at that time was a near-paraphrase that does not appear in the announcement. The announcement carries no non-proliferation clause, so only national security is coded — a real, narrower framing than the rare-earth and tungsten measures, and identical to the graphite announcement."
   },
   {
     "id": "fc-cn-us-ban-natsec",

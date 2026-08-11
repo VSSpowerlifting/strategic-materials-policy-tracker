@@ -301,9 +301,11 @@ export default function MethodologyPage() {
             <H2 id="limitations">Limitations &amp; disclaimer</H2>
             <ul className="space-y-2 text-muted">
               <li>
-                · The dataset is a seed. At v1 it carries fully-coded flagship events
-                and framing anchors across China, the US and the EU; Australia, Japan
-                and Canada are profiled but not yet event-coded.
+                · The dataset is a seed. All six actors are now event-coded, and every
+                coded event carries at least one framing anchor — but coverage is
+                deliberately uneven: China accounts for eight of the fourteen events,
+                while Australia, Japan and Canada are each represented by a single
+                anchoring instrument. Read it as a depth-first sample, not a census.
               </li>
               <li>
                 · Some Chinese document numbers and original-language titles are not
@@ -329,14 +331,17 @@ export default function MethodologyPage() {
             <ul className="space-y-2 text-muted">
               <li>
                 <span className="font-mono text-foreground">{site.version}</span> —{" "}
-                {formatDate(site.lastUpdated)}. Expanded multi-actor seed: eight events
-                added so all six actors are event-coded — the US DoD–MP Materials
-                partnership, Australia&apos;s Critical Minerals Strategic Reserve,
-                Japan&apos;s JOGMEC/JARE investment in Lynas, Canada&apos;s Investment
-                Canada Act divestiture order, and China&apos;s 2023–2025
-                gallium/germanium, graphite, US-directed ban (Announcement No. 46) and
-                tungsten controls — with framing anchors for all but the graphite and
-                tungsten measures, left uncoded pending a quoted primary.
+                {formatDate(site.lastUpdated)}. Expanded multi-actor seed: nine events
+                added since v0.1.0 so all six actors are event-coded — the US DoD–MP
+                Materials partnership, Australia&apos;s Critical Minerals Strategic
+                Reserve, Japan&apos;s JOGMEC/JARE investment in Lynas, Canada&apos;s
+                Investment Canada Act divestiture order, and China&apos;s 2023–2025
+                gallium/germanium, graphite, US-directed ban (Announcement No. 46),
+                tungsten and antimony controls. Framing anchors are now coded for every
+                event in the dataset. The gallium/germanium anchor was re-cited to
+                MOFCOM/GACC Announcement No. 23 (2023) itself after review found it
+                pointing at a state-media English report that does not carry the
+                quoted Chinese text.
               </li>
               <li>
                 <span className="font-mono text-foreground">v0.1.0</span> — June 2026.

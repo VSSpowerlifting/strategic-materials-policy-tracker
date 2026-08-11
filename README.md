@@ -4,7 +4,7 @@
 
 **Live site → https://strategic-materials-policy-tracker.vercel.app**
 
-This is an economic-security **policy** product, not a commodity-price tracker, a mining-economics model, or a generic dashboard. Every record resolves to a primary source; every framing label is anchored to a quoted passage in the original language; nothing is scored on an invented 0–100 scale.
+This is an economic-security **policy** product, not a commodity-price tracker, a mining-economics model, or a generic dashboard. Every record resolves to at least one source in the register — primary official text wherever it is available, with anything less marked as such; every framing label is anchored to a quoted passage in the original language; nothing is scored on an invented 0–100 scale.
 
 <!-- TODO (maintainer): add a /framing page screenshot here once a current, deploy-matching capture is available.
      An existing capture lives under .claude/skills/strategic-materials-live-design/screens/pages/framing.png,
