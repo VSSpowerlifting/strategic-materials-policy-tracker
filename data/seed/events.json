@@ -10,13 +10,38 @@
     "titleEnSource": "self",
     "documentNumber": "MOFCOM & GACC Announcement [2025] No. 18",
     "policyStatus": "active",
-    "mechanism": ["export_control", "dual_use_license"],
-    "affectedMaterialIds": ["rare-earth-elements", "dysprosium", "terbium", "ndfeb-magnets"],
-    "affectedSectors": ["defense", "energy", "battery", "industrial"],
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "battery",
+      "industrial"
+    ],
     "summary": "China's Ministry of Commerce and the General Administration of Customs jointly imposed export licensing on seven medium and heavy rare earths — samarium, gadolinium, terbium, dysprosium, lutetium, scandium and yttrium — together with their oxides, alloys, compounds and mixtures, and related magnets. Exporters must obtain MOFCOM licenses; the measure is a licensing regime, not an outright ban.",
     "analyticalSignificance": "The opening move of the 2025 escalation, announced days after new US tariffs. Beijing targeted the medium and heavy rare earths where its separation monopoly is most complete, demonstrating chokepoint leverage while framing the step in standard control terms rather than as retaliation. These April controls have remained in force throughout the later expansion and suspension.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mofcom-18", "src-hk-april-2025", "src-china-briefing-timeline"]
+    "sourceIds": [
+      "src-mofcom-18",
+      "src-hk-april-2025",
+      "src-china-briefing-timeline"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-04-04",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "china-rare-earth-expansion-2025-10",
@@ -25,17 +50,43 @@
     "issuingBody": "MOFCOM (Bureau of Industrial Security and Import and Export Controls)",
     "titleOriginal": "商务部公告2025第61号 公布对境外相关稀土物项实施出口管制的决定",
     "titleOriginalLang": "zh",
-    "titleEn": "MOFCOM Announcement No. 61 of 2025: Decision to Implement Controls on Exports of Rare Earth-Related Items to Foreign Countries",
+    "titleEn": "MOFCOM Announcement No. 61 of 2025: decision to implement export controls on relevant rare-earth items located outside China",
     "titleEnSource": "self",
     "documentNumber": "MOFCOM Announcement No. 61 (2025)",
     "policyStatus": "suspended",
-    "mechanism": ["export_control", "dual_use_license"],
-    "affectedMaterialIds": ["rare-earth-elements", "ndfeb-magnets"],
-    "affectedSectors": ["defense", "semiconductor", "energy", "battery", "industrial"],
-    "summary": "MOFCOM expanded the regime, adding five further rare earths (holmium, erbium, thulium, europium, ytterbium) and, most significantly, asserting extraterritorial jurisdiction: foreign-made items containing 0.1% or more by value of Chinese-origin controlled rare earths — or produced using Chinese rare-earth extraction, separation, metal-smelting, magnet-making or recycling technology — would require a license. Companion measures covered related technology and equipment.",
-    "analyticalSignificance": "The extraterritorial 0.1% rule mirrors the design of US export controls (a de minimis / foreign-direct-product logic) and marks a qualitative escalation from controlling exports of Chinese material to controlling foreign goods derived from it. This is the measure later suspended under the November 2025 stand-down.",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "The extraterritorial measure of the October 2025 package. Foreign exporters must obtain a Chinese dual-use licence before shipping to third countries where the goods contain 0.1% or more by value of listed Chinese-origin rare-earth items, or were made abroad using Chinese rare-earth extraction, separation, metal-smelting, magnet-manufacturing or secondary-recovery technology, or are themselves of Chinese origin. Applications from foreign military users and from importers on the control and watch lists are refused in principle, as are WMD, terrorism and military end-uses; exports for research or production of 14nm-and-below logic chips or 256-layer-and-above memory, and for AI with potential military use, are decided case by case. Humanitarian shipments are exempt subject to post-export reporting. The controlled item lists are in an annex. The extraterritorial limbs took effect 1 December 2025; the limb covering Chinese-origin items took effect on publication.",
+    "analyticalSignificance": "The extraterritorial 0.1% rule mirrors the design of US export controls (a de minimis / foreign-direct-product logic) and marks a qualitative escalation from controlling exports of Chinese material to controlling foreign goods derived from it. Suspended by Announcement No. 70 of 2025 through 10 November 2026. The five additional rare earths added in the same October package came from a companion instrument, not from this one.",
     "supersededByEventId": null,
-    "sourceIds": ["src-cset-mofcom-61", "src-globaltimes-61", "src-china-briefing-timeline"]
+    "sourceIds": [
+      "src-mofcom-61",
+      "src-mofcom-70",
+      "src-cset-mofcom-61",
+      "src-globaltimes-61",
+      "src-china-briefing-timeline"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "china-rare-earth-suspension-2025-11",
@@ -48,13 +99,38 @@
     "titleEnSource": "self",
     "documentNumber": "MOFCOM & GACC Announcement [2025] No. 70",
     "policyStatus": "active",
-    "mechanism": ["export_control", "trade_action"],
-    "affectedMaterialIds": ["rare-earth-elements", "ndfeb-magnets", "graphite"],
-    "affectedSectors": ["defense", "semiconductor", "energy", "battery", "industrial"],
+    "mechanism": [
+      "export_control",
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
     "summary": "Implementing the China–US Kuala Lumpur trade-consultation arrangement after the Busan leaders' meeting, MOFCOM and GACC suspended the whole 9 October 2025 control package — Announcements No. 55 (superhard materials), No. 56 (rare-earth equipment and feedstock), No. 57 (five additional heavy rare earths), No. 58 (lithium batteries and artificial-graphite anode materials), No. 61 (extraterritorial rare-earth items) and No. 62 (rare-earth technology) — effective immediately (自即日起) through 10 November 2026. The 4 April 2025 controls on the original seven elements (Announcement No. 18) were not suspended and remain in force.",
     "analyticalSignificance": "Confirms that the October escalation functioned as negotiating leverage that could be switched off — but the suspension is time-bound and reversible, not a repeal, and leaves the April baseline intact. The suspension instrument itself states no rationale (only 经批准); the reciprocity logic appears in the spokesperson Q&A on the Kuala Lumpur arrangement, which pairs China's suspension with the US pausing its 50% penetration rule.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mofcom-70", "src-mofcom-kl-qa", "src-china-briefing-timeline"]
+    "sourceIds": [
+      "src-mofcom-70",
+      "src-mofcom-kl-qa",
+      "src-china-briefing-timeline"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-11-07",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "us-critical-minerals-list-2025",
@@ -67,13 +143,44 @@
     "titleEnSource": "na",
     "documentNumber": "FR Doc. 2025-19813 (Federal Register, 7 Nov 2025)",
     "policyStatus": "in_force",
-    "mechanism": ["designation"],
-    "affectedMaterialIds": ["rare-earth-elements", "dysprosium", "terbium", "neodymium", "praseodymium", "gallium", "germanium", "graphite", "antimony", "tungsten"],
-    "affectedSectors": ["defense", "semiconductor", "energy", "battery", "industrial"],
+    "mechanism": [
+      "designation"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "neodymium",
+      "praseodymium",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
     "summary": "The USGS, through the Department of the Interior, finalized the 2025 List of Critical Minerals: 60 minerals in total, with ten added in 2025 (boron, copper, lead, metallurgical coal, phosphate, potash, rhenium, silicon, silver and uranium) on the basis of new data, public feedback and interagency recommendations. Designation drives permitting priority, funding eligibility and supply-chain attention; it is not itself an export control.",
     "analyticalSignificance": "The principal US instrument is designation, paired with funding and offtake — the mirror image of China's control-and-license posture. Several 2025 additions (notably copper, metallurgical coal and uranium) reflect interagency and executive direction that goes beyond the USGS quantitative screening methodology, signalling a more security-driven definition of 'critical'.",
     "supersededByEventId": null,
-    "sourceIds": ["src-doi-press-2025", "src-usgs-news-2025", "src-fedreg-usgs-2025"]
+    "sourceIds": [
+      "src-doi-press-2025",
+      "src-usgs-news-2025",
+      "src-fedreg-usgs-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-11-07",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "eu-critical-raw-materials-act",
@@ -86,13 +193,46 @@
     "titleEnSource": "na",
     "documentNumber": "Regulation (EU) 2024/1252",
     "policyStatus": "in_force",
-    "mechanism": ["supply_chain_security", "designation", "funding"],
-    "affectedMaterialIds": ["rare-earth-elements", "dysprosium", "terbium", "neodymium", "praseodymium", "gallium", "germanium", "graphite", "antimony", "tungsten", "ndfeb-magnets"],
-    "affectedSectors": ["defense", "semiconductor", "energy", "battery", "industrial"],
+    "mechanism": [
+      "supply_chain_security",
+      "designation",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "neodymium",
+      "praseodymium",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
     "summary": "The Critical Raw Materials Act entered into force on 23 May 2024. It sets 2030 benchmarks for the EU's annual consumption of strategic raw materials — at least 10% extracted, 40% processed and 25% recycled domestically, and no more than 65% from any single third country — and creates Strategic Project designations with accelerated permitting. The first Strategic Projects were designated in 2025.",
     "analyticalSignificance": "The EU instrument is benchmark-and-designation: de-risking through diversification targets rather than export leverage. It predates the April 2025 acute phase and is included as the standing framework the 2025 Chinese measures act upon. It anchors the EU's 'de-risking, not decoupling' posture.",
     "supersededByEventId": null,
-    "sourceIds": ["src-ec-crma", "src-eurlex-crma"]
+    "sourceIds": [
+      "src-ec-crma",
+      "src-eurlex-crma"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-05-03",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-us-dod-mp-2025",
@@ -105,13 +245,39 @@
     "titleEnSource": "na",
     "documentNumber": null,
     "policyStatus": "active",
-    "mechanism": ["funding", "offtake_agreement", "stockpiling"],
-    "affectedMaterialIds": ["rare-earth-elements", "neodymium", "praseodymium", "ndfeb-magnets"],
-    "affectedSectors": ["defense", "energy", "industrial"],
+    "mechanism": [
+      "funding",
+      "offtake_agreement",
+      "stockpiling"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "neodymium",
+      "praseodymium",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "industrial"
+    ],
     "summary": "DoD agreed to buy $400M of newly created MP Materials preferred stock plus a 10-year warrant at $30.03/share, positioning it to become the largest shareholder (~15%); added a $150M loan, a 10-year NdPr price floor of $110/kg, and a 10-year magnet offtake commitment, to build domestic separation and magnet capacity at Mountain Pass and a second magnet plant.",
     "analyticalSignificance": "Marks a shift to direct US equity-and-price-floor industrial policy in rare earths, explicitly to reduce dependence on China; read as the US emulating state-backed models it long avoided.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mp-dod-2025", "src-fortune-dod-mp"]
+    "sourceIds": [
+      "src-dod-mp-transaction-agreement-2025",
+      "src-osc-mp-loan-2025",
+      "src-mp-dod-2025",
+      "src-fortune-dod-mp"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-07-10",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-au-cmsr-2026",
@@ -124,13 +290,36 @@
     "titleEnSource": "na",
     "documentNumber": null,
     "policyStatus": "active",
-    "mechanism": ["stockpiling", "offtake_agreement"],
-    "affectedMaterialIds": ["rare-earth-elements", "antimony", "gallium"],
-    "affectedSectors": ["defense", "energy", "semiconductor", "industrial"],
+    "mechanism": [
+      "stockpiling",
+      "offtake_agreement"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "antimony",
+      "gallium"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "semiconductor",
+      "industrial"
+    ],
     "summary": "Australia named rare earths, antimony, and gallium as the initial focus of its A$1.2B Critical Minerals Strategic Reserve (committed by PM Albanese on 24 April 2025, in the 2025-26 budget, operational from H2 2026). The reserve secures rights to Australian-produced minerals and on-sells them to allies, drawing on the expanded A$5B Critical Minerals Facility and Export Finance Australia offtake powers.",
     "analyticalSignificance": "A demand-side allied counter to Chinese concentration, framed around supplying partners (Canada, Japan, Europe, UK); follows the October 2025 US-Australia rare earths framework.",
     "supersededByEventId": null,
-    "sourceIds": ["src-au-industry-cmsr", "src-au-pmc-cmsr"]
+    "sourceIds": [
+      "src-au-industry-cmsr",
+      "src-au-pmc-cmsr"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-jp-jogmec-lynas-2023",
@@ -143,13 +332,34 @@
     "titleEnSource": "na",
     "documentNumber": null,
     "policyStatus": "active",
-    "mechanism": ["funding", "offtake_agreement"],
-    "affectedMaterialIds": ["rare-earth-elements", "dysprosium", "terbium"],
-    "affectedSectors": ["energy", "defense", "industrial"],
+    "mechanism": [
+      "funding",
+      "offtake_agreement"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium"
+    ],
+    "affectedSectors": [
+      "energy",
+      "defense",
+      "industrial"
+    ],
     "summary": "Japan Australia Rare Earth (JARE), the Sojitz–JOGMEC vehicle, committed a further A$200M of equity to Lynas to fund light-REE expansion and the start of heavy-REE (dysprosium, terbium) separation, with an agreement to take up to 65% of the heavy REEs produced. Builds on JOGMEC's decade-plus backing of Lynas since the 2010 Chinese rare-earth shock; Sojitz began importing Lynas-separated Dy/Tb in October 2025, the first operational heavy-REE chain outside China.",
     "analyticalSignificance": "The clearest long-run example of patient state-backed offtake-plus-equity to build non-Chinese heavy-REE supply, the chokepoint China most dominates.",
     "supersededByEventId": null,
-    "sourceIds": ["src-jogmec-lynas"]
+    "sourceIds": [
+      "src-jogmec-lynas"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2023-03-07",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-ca-ica-divest-2022",
@@ -162,13 +372,30 @@
     "titleEnSource": "na",
     "documentNumber": null,
     "policyStatus": "active",
-    "mechanism": ["investment_screening"],
+    "mechanism": [
+      "investment_screening"
+    ],
     "affectedMaterialIds": [],
-    "affectedSectors": ["battery", "energy", "industrial"],
+    "affectedSectors": [
+      "battery",
+      "energy",
+      "industrial"
+    ],
     "summary": "Under the Investment Canada Act, Canada ordered three Chinese investors to divest holdings in Canadian critical-mineral juniors (Sinomine from Power Metals, Chengze Lithium from Lithium Chile, Zangge Mining from Ultra Lithium), days after a 28 October 2022 policy making SOE investment in critical minerals approvable only \"on an exceptional basis.\" Affected minerals include lithium, cesium, and tantalum, none of which are in the v1 material set.",
     "analyticalSignificance": "A leading allied use of investment screening (rather than export control) as a critical-minerals instrument, tied to friend-shoring rhetoric and timed alongside US engagement.",
     "supersededByEventId": null,
-    "sourceIds": ["src-ca-ised-divest", "src-gowling-ca-divest"]
+    "sourceIds": [
+      "src-ca-ised-divest",
+      "src-gowling-ca-divest"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2022-11-02",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-cn-gage-2023",
@@ -181,13 +408,35 @@
     "titleEnSource": "self",
     "documentNumber": "MOFCOM/GACC Announcement No. 23 (2023)",
     "policyStatus": "active",
-    "mechanism": ["export_control", "dual_use_license"],
-    "affectedMaterialIds": ["gallium", "germanium"],
-    "affectedSectors": ["semiconductor", "energy", "defense"],
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "gallium",
+      "germanium"
+    ],
+    "affectedSectors": [
+      "semiconductor",
+      "energy",
+      "defense"
+    ],
     "summary": "Effective 1 August 2023, eight gallium-related and six germanium-related items require a dual-use export license from provincial MOFCOM (not a ban). First major Chinese critical-material control of this cycle, days after expanded US/allied semiconductor controls.",
     "analyticalSignificance": "Established the licensing template (end-use/end-user disclosure, roughly 60-day review) reused in later controls; exports to the US fell to near zero.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mofcom-23", "src-iea-gage-2023", "src-globaltimes-gage-2023"]
+    "sourceIds": [
+      "src-mofcom-23",
+      "src-iea-gage-2023",
+      "src-globaltimes-gage-2023"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2023-07-03",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-cn-graphite-2023",
@@ -200,32 +449,78 @@
     "titleEnSource": "self",
     "documentNumber": "MOFCOM/GACC Announcement No. 39 (2023)",
     "policyStatus": "active",
-    "mechanism": ["export_control", "dual_use_license"],
-    "affectedMaterialIds": ["graphite"],
-    "affectedSectors": ["battery", "semiconductor", "defense", "industrial"],
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "graphite"
+    ],
+    "affectedSectors": [
+      "battery",
+      "semiconductor",
+      "defense",
+      "industrial"
+    ],
     "summary": "Effective 1 December 2023, three high-sensitivity synthetic and natural-flake graphite categories moved onto the dual-use control list; five low-sensitivity items were de-controlled. Replaced the 2006 temporary graphite regime.",
     "analyticalSignificance": "Targeted EV-battery anode supply; stated justification cited national security and non-proliferation obligations. Original-language text and a quoted framing anchor are not yet coded for this record.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mofcom-39", "src-iea-graphite-2023"]
+    "sourceIds": [
+      "src-mofcom-39",
+      "src-iea-graphite-2023"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2023-10-20",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-cn-us-ban-2024",
     "date": "2024-12-03",
     "jurisdiction": "china",
     "issuingBody": "MOFCOM",
-    "titleOriginal": "Not yet coded",
+    "titleOriginal": "商务部公告2024年第46号 关于加强相关两用物项对美国出口管制的公告",
     "titleOriginalLang": "zh",
     "titleEn": "MOFCOM Announcement No. 46 of 2024 on strengthening export controls of dual-use items to the United States",
     "titleEnSource": "self",
     "documentNumber": "MOFCOM Announcement No. 46 (2024)",
-    "policyStatus": "suspended",
-    "mechanism": ["export_control", "countermeasure", "trade_action"],
-    "affectedMaterialIds": ["gallium", "germanium", "antimony"],
-    "affectedSectors": ["defense", "semiconductor", "industrial"],
+    "policyStatus": "active",
+    "mechanism": [
+      "export_control",
+      "countermeasure",
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "gallium",
+      "germanium",
+      "antimony",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
     "summary": "Issued one day after a US BIS action adding ~140 entities and tightening chip controls, this barred, in principle, exports to the US of gallium, germanium, antimony, and superhard materials, prohibited all dual-use exports to US military end users/uses, and tightened graphite end-use review. The materials ban (Article 2) was suspended by MOFCOM Announcement No. 72 of 2025, effective to 27 November 2026; the Article 1 military-end-use prohibition was not addressed.",
-    "analyticalSignificance": "The clearest country-specific retaliatory escalation of the cycle, converting licensing into an outright US-directed ban. The retaliation reading rests on the one-day-after-BIS timing and lives here, not in the quoted anchor, which states the national-security and non-proliferation justification.",
+    "analyticalSignificance": "The clearest country-specific escalation of the cycle: the first Chinese measure to name the United States as the destination and to close military end-uses outright. It is not a blanket export ban — clause 1 prohibits dual-use exports to US military users and uses, clause 2 denies licences in principle for gallium, germanium, antimony and superhard materials and tightens end-use review for graphite. The retaliation reading rests on the one-day-after-BIS timing and lives here, not in the quoted anchor, which states the national-security and non-proliferation justification.",
     "supersededByEventId": null,
-    "sourceIds": ["src-cset-mofcom-46"]
+    "sourceIds": [
+      "src-mofcom-46",
+      "src-mofcom-72",
+      "src-cset-mofcom-46"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-12-03",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-cn-tungsten-2025",
@@ -238,13 +533,34 @@
     "titleEnSource": "self",
     "documentNumber": "MOFCOM/GACC Announcement No. 10 (2025)",
     "policyStatus": "active",
-    "mechanism": ["export_control", "dual_use_license"],
-    "affectedMaterialIds": ["tungsten"],
-    "affectedSectors": ["defense", "industrial", "energy"],
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "industrial",
+      "energy"
+    ],
     "summary": "Added tungsten, tellurium, bismuth, molybdenum, and indium-related items to the dual-use export control list, requiring licenses. Only tungsten is in the v1 material set; the others are noted here, not coded as materials.",
     "analyticalSignificance": "Extended controls into defense-relevant refractory metals where China holds a dominant processing share. The original-language text and a quoted framing anchor are not yet coded.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mofcom-10", "src-iea-tungsten-2025", "src-pillsbury-2025"]
+    "sourceIds": [
+      "src-mofcom-10",
+      "src-iea-tungsten-2025",
+      "src-pillsbury-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-02-04",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   },
   {
     "id": "evt-cn-antimony-2024",
@@ -257,12 +573,792 @@
     "titleEnSource": "self",
     "documentNumber": "MOFCOM/GACC Announcement No. 33 (2024)",
     "policyStatus": "active",
-    "mechanism": ["export_control", "dual_use_license"],
-    "affectedMaterialIds": ["antimony"],
-    "affectedSectors": ["defense", "semiconductor", "industrial"],
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "antimony"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
     "summary": "Announced 15 August 2024 and effective 15 September 2024, the measure placed antimony-related items — ore and raw materials, metal and products, oxides (99.99% and above), organic antimony compounds, hydrides, indium antimonide, and gold-antimony refining/separation technology — onto the dual-use export-control list, alongside superhard-materials equipment (six-sided presses with cylinder diameter of at least 500 mm or design pressure of at least 5 GPa, MPCVD equipment, and diamond window materials). Exporters must obtain MOFCOM licenses; it is a licensing regime, not an outright ban, and the announcement text names no specific country.",
     "analyticalSignificance": "Extended China's dual-use licensing architecture to antimony — a metal critical to munitions, flame retardants and photovoltaics, where China holds a dominant mine-and-refining share — roughly four months before the 3 December 2024 measure singled out antimony (with gallium and germanium) for a ban on exports to the United States. USGS reporting attributes a near-doubling of the antimony metal price (July–November 2024) to the announcement. The announcement's justification clause is coded as a framing claim from the primary.",
     "supersededByEventId": null,
-    "sourceIds": ["src-mofcom-33", "src-usgs-mcs2025-antimony"]
+    "sourceIds": [
+      "src-mofcom-33",
+      "src-usgs-mcs2025-antimony"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-08-15",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-jogmec-lofdal-2026",
+    "date": "2026-07-23",
+    "jurisdiction": "japan",
+    "issuingBody": "JOGMEC (Japan Organization for Metals and Energy Security), jointly with Toyota Tsusho Corporation",
+    "titleOriginal": "ナミビア共和国におけるレアアース探査・開発事業を行う特定目的会社の設立およびJOGMECの出資について",
+    "titleOriginalLang": "ja",
+    "titleEn": "Establishment of a Special Purpose Company for Heavy Rare Earth Development in the Republic of Namibia and Investment by JOGMEC",
+    "titleEnSource": "official",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "industrial"
+    ],
+    "summary": "JOGMEC decided to invest up to CAD 47.668 million (約54.6億円, given as approximately 5.5 billion yen in JOGMEC's own English version) in TJ Namibia Rare Earths Corporation, a special purpose company established by Toyota Tsusho to carry the Lofdal heavy-rare-earth project in the Kunene Region of Namibia. The initial investment was made on 23 July 2026 and announced jointly on 30 July 2026. The project began as a JOGMEC exploration venture with Canada-based Namibia Critical Metals Inc. in 2020; Toyota Tsusho joined as co-developer in March 2026 after an open competitive tender for part of JOGMEC's option interest. A definitive feasibility study will run through TJ, with a final commercialisation decision targeted during FY2026.",
+    "analyticalSignificance": "Japan's instrument set is equity through a state agency rather than export control, and this is the first Japanese rare-earth mine development in Africa. It targets dysprosium and terbium specifically — the heavy rare earths where Chinese separation capacity is most concentrated and which the April 2025 Chinese controls named — so it reads as diversification against a named chokepoint rather than general resource policy. Note this is a decision to invest in a project still at feasibility stage, not production capacity. The release describes an equity investment (出資) only; no offtake instrument is mentioned, so none is coded.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-jogmec-lofdal-ja",
+      "src-jogmec-lofdal-en"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "monitored",
+    "lifecycle": {
+      "officialPublicationDate": "2026-07-30",
+      "discoveredAt": "2026-08-11",
+      "verifiedAt": "2026-08-11",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-eo-14241-2025",
+    "date": "2025-03-20",
+    "jurisdiction": "us",
+    "issuingBody": "President of the United States (Executive Office of the President)",
+    "titleOriginal": "Immediate Measures To Increase American Mineral Production",
+    "titleOriginalLang": "en",
+    "titleEn": "Immediate Measures To Increase American Mineral Production",
+    "titleEnSource": "na",
+    "documentNumber": "Executive Order 14241; 90 FR 13673 (FR Doc. 2025-05212)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "neodymium",
+      "praseodymium",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "industrial"
+    ],
+    "summary": "Signed 20 March 2025 and published 25 March 2025, the order directs immediate federal action to expand domestic mineral production. It defines \"mineral\" as a critical mineral under 30 U.S.C. 1606(a)(3) plus uranium, copper, potash, gold and anything else the Chair of the National Energy Dominance Council designates, and defines \"mineral production\" to cover mining, processing, refining and smelting as well as the production of processed critical minerals and derivative products. Operative sections direct agencies to identify and expedite priority permitting projects, deliver recommendations on the Mining Act of 1872, identify federal land suitable for mineral production, and accelerate private and public capital investment — including through the National Security Capital Forum. It creates no export control and no import restriction; it is a domestic supply-side instrument. Executive Order 14261 (8 April 2025) subsequently amended it.",
+    "analyticalSignificance": "The anchor instrument of the 2025 US mineral-policy push, and the clearest statement that the American response to Chinese control of processed minerals runs through domestic production and permitting rather than through reciprocal export controls. Predates the tracker's April 2025 scope start by eleven days and is included as a foundational instrument: the later 2025 US measures, including the Section 232 order, build on its definitions and its National Energy Dominance Council machinery.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-fedreg-eo-14241"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-03-25",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-eo-14272-2025",
+    "date": "2025-04-15",
+    "jurisdiction": "us",
+    "issuingBody": "President of the United States (Executive Office of the President)",
+    "titleOriginal": "Ensuring National Security and Economic Resilience Through Section 232 Actions on Processed Critical Minerals and Derivative Products",
+    "titleOriginalLang": "en",
+    "titleEn": "Ensuring National Security and Economic Resilience Through Section 232 Actions on Processed Critical Minerals and Derivative Products",
+    "titleEnSource": "na",
+    "documentNumber": "Executive Order 14272; 90 FR 16437 (FR Doc. 2025-06836)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "trade_action",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "neodymium",
+      "praseodymium",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "industrial"
+    ],
+    "summary": "Signed 15 April 2025 and published 18 April 2025, the order directs the Secretary of Commerce to initiate an investigation under section 232 of the Trade Expansion Act of 1962 into the effects on national security of imports of processed critical minerals and their derivative products, assessing the factors in 19 U.S.C. 1862(d) along with import volumes and the concentration of foreign supply. \"Critical minerals\" is defined by reference to the USGS list published under section 7002(c) of the Energy Act of 2020, plus uranium; \"rare earth elements\" by reference to the seventeen elements identified in the Department of Energy's April 2020 Critical Materials Rare Earths Supply Chain publication. \"Processed critical minerals\" covers the stages after ore extraction up through conversion into a metal, metal powder or master alloy, and \"derivative products\" the manufactured goods incorporating them. The order initiates an investigation; it does not itself impose a tariff or a quota.",
+    "analyticalSignificance": "The US opening its trade-remedy channel on the same chokepoint China regulates through export licensing — the two governments acting on processed minerals from opposite ends of the same supply chain. Coded as a trade action because it starts a statutory section 232 process, but note carefully that the operative effect at this date is an investigation and a reporting timetable, not a restriction: any duty would come from a later presidential decision on the Secretary's report.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-fedreg-eo-14272"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-04-18",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-cm-list-2018",
+    "date": "2018-05-18",
+    "jurisdiction": "us",
+    "issuingBody": "Office of the Secretary, U.S. Department of the Interior",
+    "titleOriginal": "Final List of Critical Minerals 2018",
+    "titleOriginalLang": "en",
+    "titleEn": "Final List of Critical Minerals 2018",
+    "titleEnSource": "na",
+    "documentNumber": "83 FR 23295 (FR Doc. 2018-10667)",
+    "policyStatus": "superseded",
+    "mechanism": [
+      "designation"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "The first US critical-minerals list, finalised under Executive Order 13817 after 453 public comments on the February 2018 draft. It designates 35 mineral commodities: aluminum (bauxite), antimony, arsenic, barite, beryllium, bismuth, cesium, chromium, cobalt, fluorspar, gallium, germanium, graphite (natural), hafnium, helium, indium, lithium, magnesium, manganese, niobium, platinum group metals, potash, the rare earth elements group, rhenium, rubidium, scandium, strontium, tantalum, tellurium, tin, titanium, tungsten, uranium, vanadium and zirconium. Rare earths appear as a single grouped entry rather than as individual elements. The notice states the list \"while ``final,'' is not a permanent list, but will be dynamic and updated periodically\", and that it would serve as the Department of Commerce's initial focus for its report under section 4 of the Executive Order.",
+    "analyticalSignificance": "The baseline record of the US designation instrument, and the reference point every later US measure is measured against — the 2022 and 2025 lists both describe themselves as revisions of it, and EO 13953 defines \"critical minerals\" by pointing at the minerals identified under EO 13817. Coding it makes the 2018-2025 designation chain legible as a single lineage rather than three unconnected notices. Designation carries no export restriction: its effect runs through permitting, funding eligibility and reporting obligations.",
+    "supersededByEventId": "evt-us-cm-list-2022",
+    "sourceIds": [
+      "src-fedreg-cm-list-2018"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2018-05-18",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-eo-13953-2020",
+    "date": "2020-09-30",
+    "jurisdiction": "us",
+    "issuingBody": "President of the United States (Executive Office of the President)",
+    "titleOriginal": "Addressing the Threat to the Domestic Supply Chain From Reliance on Critical Minerals From Foreign Adversaries and Supporting the Domestic Mining and Processing Industries",
+    "titleOriginalLang": "en",
+    "titleEn": "Addressing the Threat to the Domestic Supply Chain From Reliance on Critical Minerals From Foreign Adversaries and Supporting the Domestic Mining and Processing Industries",
+    "titleEnSource": "na",
+    "documentNumber": "Executive Order 13953; 85 FR 62539 (FR Doc. 2020-22064)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "supply_chain_security",
+      "designation"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "Signed 30 September 2020 under IEEPA, the National Emergencies Act and 3 U.S.C. 301, the order declares a national emergency over US reliance on critical minerals from foreign adversaries. Section 1(a) directs the Secretary of the Interior, in consultation with Treasury, Defense, Commerce and other agencies, to investigate that reliance and report to the President within 60 days, recommending executive action that \"may include the imposition of tariffs or quotas, other import restrictions against China and other non-market foreign adversaries\"; section 1(b) requires a threat update every 180 days. Section 2(a) makes it US policy to prioritise expansion and protection of the domestic minerals supply chain, so that the United States develops supply chains that \"do not depend on resources or processing from foreign adversaries\". \"Critical minerals\" is defined by reference to the minerals identified by the Secretary of the Interior under EO 13817 as amended by this order. The order amends EO 13817; the Federal Register's disposition record for it carried no revocation entry when accessed on 2026-08-12.",
+    "analyticalSignificance": "The measure that converted US critical-minerals policy from designation and reporting into emergency authority, five years before the 2025 orders built on the same machinery. Unlike EO 14241 and EO 14272 — which speak of \"hostile foreign powers\" and leave the country unnamed — this order names the People's Republic of China directly and repeatedly, including in the operative instruction in section 1(a). That is the government's own text, not an inference drawn here, and it is why this record carries an explicit China-naming framing anchor where the 2025 orders do not.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-fedreg-eo-13953"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2020-10-05",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-cm-list-2022",
+    "date": "2022-02-24",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Geological Survey / Department of the Interior",
+    "titleOriginal": "2022 Final List of Critical Minerals",
+    "titleOriginalLang": "en",
+    "titleEn": "2022 Final List of Critical Minerals",
+    "titleEnSource": "na",
+    "documentNumber": "87 FR 10381 (FR Doc. 2022-04027)",
+    "policyStatus": "superseded",
+    "mechanism": [
+      "designation"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "neodymium",
+      "praseodymium",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "The first critical-minerals list made under section 7002 of the Energy Act of 2020 (Pub. L. 116-260) rather than under Executive Order 13817 alone, and expressly a revision of the 2018 list at 83 FR 23295. It designates 50 minerals and — the structural change from 2018 — breaks the rare earths out as individual elements, naming cerium, dysprosium, erbium, europium, gadolinium, holmium, lanthanum, lutetium, neodymium, praseodymium, samarium, terbium, thulium, ytterbium and yttrium separately, alongside antimony, gallium, germanium, graphite, tungsten and the platinum-group metals. Helium, potash and uranium had been on the 2018 final list but were not carried onto the 2022 draft; USGS records that comments requesting their inclusion \"did not identify any inaccuracies in the data used to conduct the quantitative evaluation\".",
+    "analyticalSignificance": "The moment US designation acquired element-level resolution on rare earths — which is what later allows a US list to be compared directly against Chinese control announcements that name individual elements, such as the seven medium and heavy rare earths in MOFCOM Announcement No. 18 of 2025. It also moves the list onto a statutory footing with a three-year review cycle, which is the mechanism that produced the 2025 list.",
+    "supersededByEventId": "us-critical-minerals-list-2025",
+    "sourceIds": [
+      "src-fedreg-cm-list-2022"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2022-02-24",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-ecl-2020",
+    "date": "2020-10-17",
+    "jurisdiction": "china",
+    "issuingBody": "全国人民代表大会常务委员会 (Standing Committee of the National People's Congress)",
+    "titleOriginal": "中华人民共和国出口管制法",
+    "titleOriginalLang": "zh",
+    "titleEn": "Export Control Law of the People's Republic of China",
+    "titleEnSource": "official",
+    "documentNumber": "Presidential Order No. 58; adopted at the 22nd Meeting of the Standing Committee of the 13th NPC",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "China's framework export-control statute, adopted 17 October 2020 and in force from 1 December 2020. Article 2 applies it to dual-use items, military products, nuclear items and other goods, technologies and services related to national security and non-proliferation obligations, and defines export control as prohibitive or restrictive measures on transfers out of the PRC and on provision of controlled items by Chinese persons to foreign organisations and individuals. Article 4 establishes a unified system operating through control lists and export licensing; Article 9 permits temporary controls of up to two years on items outside the lists; Article 10 permits outright export bans, including bans directed at specified destination countries, organisations or individuals; Article 12 makes licensing mandatory for listed and temporarily controlled items and extends it to unlisted items where the exporter knows or is notified of specified risks. The statute names no material: material scope is set entirely by the control lists and announcements issued under it.",
+    "analyticalSignificance": "The legal foundation under which every Chinese rare-earth, gallium, germanium, graphite, antimony and tungsten measure in this database is issued, and the source of the formula those announcements reuse — Article 1's 为了维护国家安全和利益，履行防扩散等国际义务 is the statutory original that MOFCOM Announcement No. 46 of 2024 tracks in abbreviated form. Coding it lets the announcement-level records be read as applications of a standing framework rather than as ad hoc acts. Article 10's destination-specific ban power is the express authority behind the 2024 US-directed measure.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-npc-ecl-2020",
+      "src-npc-ecl-2020-en"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2020-10-17",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-decree-792-2024",
+    "date": "2024-09-30",
+    "jurisdiction": "china",
+    "issuingBody": "中华人民共和国国务院 (State Council of the PRC)",
+    "titleOriginal": "中华人民共和国两用物项出口管制条例",
+    "titleOriginalLang": "zh",
+    "titleEn": "Regulations of the People's Republic of China on Export Control of Dual-Use Items",
+    "titleEnSource": "self",
+    "documentNumber": "国务院令第792号 (State Council Decree No. 792)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "The administrative regulation implementing the Export Control Law for dual-use items: adopted at the State Council's 41st executive meeting on 18 September 2024, promulgated by Decree No. 792 on 30 September 2024, and in force from 1 December 2024. Article 1 makes it subordinate to the Export Control Law. Article 2 defines dual-use items and, expanding on the statute, defines export control to reach not only commercial export but also gifts, exhibition, cooperation, aid and transfer by other means. Article 4 assigns responsibility for dual-use export control to the State Council commerce department (MOFCOM) under the national export-control coordination mechanism, with provincial commerce departments able to act under delegation. Article 6 requires MOFCOM to issue compliance guidance and pushes exporters and their freight, e-commerce-platform and financial service providers towards internal compliance systems. Like the parent statute, it names no material.",
+    "analyticalSignificance": "The instrument that sits between the 2020 statute and the 2023-2025 announcements, and the reason those announcements are administered by MOFCOM rather than by another body. Two features matter for reading the later measures: the widened definition of export in Article 2, which captures non-commercial transfers, and the compliance obligations pushed onto logistics, platform and financial intermediaries in Article 6 — both are conditions the 2025 extraterritorial measures assume rather than restate.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-moj-decree-792"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-09-30",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-decree-785-2024",
+    "date": "2024-06-29",
+    "jurisdiction": "china",
+    "issuingBody": "中华人民共和国国务院 (State Council of the PRC)",
+    "titleOriginal": "稀土管理条例",
+    "titleOriginalLang": "zh",
+    "titleEn": "Regulations on Rare Earth Administration",
+    "titleEnSource": "self",
+    "documentNumber": "国令第785号 (State Council Decree No. 785)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "supply_chain_security",
+      "stockpiling",
+      "catalogue_listing"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "neodymium",
+      "praseodymium"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "China's first administrative regulation governing the rare-earth industry end to end: adopted at the State Council's 31st executive meeting on 26 April 2024, signed by Premier Li Qiang on 22 June 2024, published 29 June 2024 and in force from 1 October 2024. Article 2 applies it to mining, smelting and separation, metal smelting, comprehensive utilisation, product circulation and import and export. Article 4 states that rare-earth resources belong to the State and provides for protective exploitation. Article 8 confines mining and smelting-separation to enterprises designated and published by the MIIT-led process, barring all others. Article 10 puts mining and smelting-separation under total-quantity control (总量调控) with dynamic management. Article 13 prohibits purchasing, processing, selling or exporting illegally mined or separated rare-earth products. Article 14 establishes a whole-chain product traceability information system, with flow-of-goods records required from producers and exporters. Article 15 subjects import and export to the foreign-trade and export-control regimes. Article 16 provides for a reserve system combining physical stockpiles with reserved mineral ground, and government with enterprise stockpiles.",
+    "analyticalSignificance": "The domestic-side counterpart to the export-control announcements: where the MOFCOM measures govern what leaves China, this governs who may produce rare earths inside it, in what quantity, and under what traceability. Two provisions bear directly on the later export measures — the Article 14 traceability system, which is the administrative apparatus a licensing regime needs to police origin claims, and the Article 16 reserve system, which is the only stockpiling authority coded on the Chinese side of this database. The instrument is also notable for what it is not: a control on exports. Its own justification clause pairs resource and ecological protection with resource and industrial security, and it makes no reference to any foreign state.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-gov-cn-decree-785"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-06-29",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-au-cmpti-2025",
+    "date": "2025-02-14",
+    "jurisdiction": "australia",
+    "issuingBody": "Parliament of Australia (administered by the Department of the Treasury)",
+    "titleOriginal": "Future Made in Australia (Production Tax Credits and Other Measures) Act 2025",
+    "titleOriginalLang": "en",
+    "titleEn": "Future Made in Australia (Production Tax Credits and Other Measures) Act 2025",
+    "titleEnSource": "na",
+    "documentNumber": "Act No. 9 of 2025 (C2025A00009)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium",
+      "neodymium",
+      "praseodymium",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "Schedule 2 of the Act inserts Division 419 into the Income Tax Assessment Act 1997, creating the Critical Minerals Production Tax Incentive. Section 419-5 entitles a constitutional corporation to a refundable tax offset for income years starting on or after 1 July 2027 and ending on or before 30 June 2040, where it holds a registration for CMPTI processing activities and incurs CMPTI expenditure carrying them on, subject to residency and community-benefit conditions. Section 419-10 sets the offset at 10% of the company's total CMPTI expenditure. Section 419-15 enumerates the critical minerals, including antimony, gallium, germanium, graphite, tungsten, scandium and the rare-earth elements individually (cerium, dysprosium, erbium, europium, gadolinium, holmium, lanthanum, lutetium, neodymium, praseodymium, promethium, samarium, terbium, thulium, ytterbium, yttrium); subsection (2) bars the regulations from prescribing uranium. Section 419-20 confines a CMPTI processing activity to substantially transforming feedstock through extractive metallurgical processing into a purer or more refined form that is chemically distinct from the feedstock. A registration may be in force for 10 income years within the 1 July 2027 to 30 June 2040 window, with the Industry Secretary deciding whether to issue the certificate.",
+    "analyticalSignificance": "The clearest statutory example in this database of an incentive aimed squarely at the separation-and-refining step rather than at mining — the Guide to Division 419 states the offset exists to support processing that produces a form \"chemically distinct from the feedstock\", and the Act's own explanatory structure places the entitlement outside extraction. That targeting is the point: the chokepoint the Chinese measures operate on is midstream processing, and this is the allied fiscal instrument aimed at the same stage. It is also the first Australian record here coded to a statute rather than to a programme announcement.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-legislation-au-cmpti-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-02-14",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-cms-2022",
+    "date": "2022-12-09",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "The Canadian Critical Minerals Strategy",
+    "titleOriginalLang": "en",
+    "titleEn": "The Canadian Critical Minerals Strategy",
+    "titleEnSource": "na",
+    "documentNumber": "Not yet coded",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "funding",
+      "designation"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "Released in Vancouver on 9 December 2022 by the Minister of Natural Resources, the Strategy is backed by up to $3.8 billion in federal funding allocated in Budget 2022, covering geoscience and exploration through mineral processing, manufacturing and recycling, including research, development and technological deployment. Natural Resources Canada states five outcomes for it: supporting economic growth, competitiveness and job creation; promoting climate action and environmental protection; advancing reconciliation with Indigenous Peoples; fostering diverse and inclusive workforces and communities; and enhancing global security and partnership with allies. The Strategy addresses Canada's 31 critical minerals across the value chain, and the release names lithium, graphite, nickel, cobalt, copper, rare earth elements, potash, uranium and aluminum as the opportunities validated in consultation.",
+    "analyticalSignificance": "Canada's principal positive-inducement instrument, and the counterpart to the investment-screening measure already coded here — together they show one government using funding and gatekeeping on the same resource base. The framing is the distinguishing feature: alone among the strategies coded in this tranche, it places reconciliation with Indigenous Peoples among the stated outcomes on equal footing with security and growth, and it names allied partnership as an outcome rather than as a means. Material scope is coded narrowly to the minerals the release itself names among those this database tracks; the full 31-mineral list was not machine-read.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-cms-2022"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2022-12-09",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-2022",
+    "date": "2022-05-18",
+    "jurisdiction": "japan",
+    "issuingBody": "国会 (National Diet of Japan)",
+    "titleOriginal": "経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律",
+    "titleOriginalLang": "ja",
+    "titleEn": "Act on the Promotion of Ensuring National Security through Integrated Implementation of Economic Measures",
+    "titleEnSource": "self",
+    "documentNumber": "令和四年法律第四十三号 (Act No. 43 of 2022)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "Promulgated 18 May 2022, the Economic Security Promotion Act creates four regimes, of which the first governs strategic materials: Chapter 2 establishes the framework for securing the stable supply of specified critical materials (特定重要物資), running from a basic policy for stable-supply assurance through company-level supply-assurance plans (供給確保計画) to special measures under the Japan Finance Corporation Act, the Small and Medium Business Investment & Consultation Companies Act and the Small and Medium-sized Enterprise Credit Insurance Act, plus support delivered through designated stable-supply-assurance support corporations. The remaining chapters cover essential infrastructure services, development support for specified critical technologies, and non-disclosure of patent applications. The Act itself designates no material: which goods become specified critical materials is set by Cabinet Order under this framework.",
+    "analyticalSignificance": "The statutory basis for the Japanese instruments already coded here — JOGMEC's rare-earth investments sit inside a legal architecture this Act created, and reading them without it makes them look like discrete commercial decisions rather than the operation of a designation-and-support regime. The Act is also the clearest case in this tranche of the pattern the whole framework layer shows: the material scope of Japanese policy is not in the statute but in the subordinate designation, so a database that only coded named-material instruments would miss where the authority actually comes from.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-egov-jp-espa-2022"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2022-05-18",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-uk-cms-2022",
+    "date": "2022-07-22",
+    "jurisdiction": "uk",
+    "issuingBody": "Department for Business, Energy & Industrial Strategy",
+    "titleOriginal": "Resilience for the Future: The United Kingdom's Critical Minerals Strategy",
+    "titleOriginalLang": "en",
+    "titleEn": "Resilience for the Future: The United Kingdom's Critical Minerals Strategy",
+    "titleEnSource": "na",
+    "documentNumber": "Not yet coded",
+    "policyStatus": "superseded",
+    "mechanism": [
+      "designation",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "The UK's first critical-minerals strategy, published 22 July 2022 and last updated 13 March 2023. It sets out an \"A-C-E\" approach — accelerate the UK's domestic capabilities, collaborate with international partners, and enhance international markets. Alongside it the British Geological Survey carried out its first UK criticality assessment, defining by economic vulnerability and supply risk a cohort of 18 minerals with high criticality for the UK: antimony, bismuth, cobalt, gallium, graphite, indium, lithium, magnesium, niobium, palladium, platinum, rare earth elements, silicon, tantalum, tellurium, tin, tungsten and vanadium. The strategy records that for each of the 18, the top three producer countries control between 73 and 98 percent of global production, and that China is the biggest producer of 12 of the 18. The publication was withdrawn on 24 November 2025; every page of the document carries the stamp \"Withdrawn 22 November 2025\".",
+    "analyticalSignificance": "The UK's entry point into this database and a useful contrast case: the criticality cohort is built from an explicit BGS assessment of economic vulnerability and supply risk, and the strategy states production concentration — including China's position on 12 of the 18 minerals — as a finding of that assessment rather than as a political characterisation. Germanium is absent from the 2022 cohort but present in the 2025 successor, which is the kind of movement a designation lineage is worth coding to capture.",
+    "supersededByEventId": "evt-uk-cms-2025",
+    "sourceIds": [
+      "src-gov-uk-cms-2022"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2022-07-22",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-uk-cms-2025",
+    "date": "2025-11-22",
+    "jurisdiction": "uk",
+    "issuingBody": "Department for Business and Trade",
+    "titleOriginal": "Vision 2035: Critical Minerals Strategy",
+    "titleOriginalLang": "en",
+    "titleEn": "Vision 2035: Critical Minerals Strategy",
+    "titleEnSource": "na",
+    "documentNumber": "Not yet coded",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "designation",
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "graphite",
+      "antimony",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "The strategy that replaced the withdrawn 2022 document, published 22 November 2025 under the UK's modern Industrial Strategy and last updated 23 January 2026. It sets a ten-year vision to 2035 and defines success by four features: at least 10% of annual UK industrial demand for critical minerals in aggregate met by domestic production (primary extraction, processing and refining) by 2035; within that, at least 50,000 tonnes of lithium or lithium carbonate equivalent produced domestically by 2035; 20% of total annual UK industrial demand met through recycling of products to recover critical minerals by 2035; and supply diversified so that no more than 60% of the UK's annual demand for any critical mineral is imported from any one country by 2035. It works by reference to the existing UK critical minerals list and adds a separate forward-looking \"growth minerals\" list tied to the Industrial Strategy's growth sectors. Minerals eligible for the support set out in the strategy include antimony, gallium, germanium, natural graphite, rare earth elements and tungsten.",
+    "analyticalSignificance": "The single-country import ceiling is the analytically distinctive element — a quantified diversification target of the same family as the EU CRMA's 65% benchmark, set at 60% and expressed without naming a supplier. Coded alongside the CRMA it lets the two European-side benchmarks be compared directly. The strategy's emphasis on midstream processing and recycling as the UK's stated competitive advantage puts it in the same category as the Australian production tax incentive: an allied instrument aimed at the separation and refining step rather than at extraction.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-gov-uk-cms-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-11-22",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-in-ncmm-2025",
+    "date": "2025-01-29",
+    "jurisdiction": "india",
+    "issuingBody": "Union Cabinet / Ministry of Mines, Government of India",
+    "titleOriginal": "National Critical Mineral Mission",
+    "titleOriginalLang": "en",
+    "titleEn": "National Critical Mineral Mission",
+    "titleEnSource": "na",
+    "documentNumber": "Not yet coded",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "funding",
+      "stockpiling"
+    ],
+    "affectedMaterialIds": [],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "Approved by the Union Cabinet on 29 January 2025 with, in the release's own words, \"an expenditure of Rs.16,300 crore and expected investment of Rs.18,000 crore by PSUs, etc.\" The Mission spans the value chain — exploration, mining, beneficiation, processing and recovery from end-of-life products — and intensifies exploration onshore and in offshore areas. Stated components include a fast-track regulatory approval process for critical-mineral mining projects, financial incentives for exploration, recovery from overburden and tailings, encouragement for Indian public-sector undertakings and private companies to acquire critical-mineral assets abroad and expand trade with resource-rich countries, development of a domestic stockpile of critical minerals, mineral processing parks, recycling support, research promotion and a Centre of Excellence on Critical Minerals. The release situates the Mission after the 2023 amendment of the Mines and Minerals (Development and Regulation) Act, 1957, the auction of 24 strategic-mineral blocks, and the removal of customs duties on most critical minerals in the 2024-25 Union Budget. It does not enumerate India's critical-minerals list, so no material scope is coded.",
+    "analyticalSignificance": "India's entry into this database, and the tranche's clearest instance of a single instrument combining exploration funding, overseas asset acquisition and stockpiling — a combination the other actors here split across separate measures. The stockpiling limb is what makes it directly comparable to Japan's and China's reserve provisions. Note the arithmetic discrepancy carried on the face of the source: the headline states an outlay of Rs.34,300 crore over seven years while the body states Rs.16,300 crore of expenditure plus Rs.18,000 crore of expected PSU investment; this record codes the body figures, which are the ones the government attributes to distinct actors.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-pib-ncmm-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-01-29",
+      "discoveredAt": "2026-08-12",
+      "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-nrcan-cmrdd-2024",
+    "date": "2024-09-04",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "Government of Canada Supporting Critical Minerals Processing in Kingston",
+    "titleOriginalLang": "en",
+    "titleEn": "Government of Canada Supporting Critical Minerals Processing in Kingston",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "On 4 September 2024, Natural Resources Canada announced almost $8.4 million in funding under the Critical Minerals Research, Development and Demonstration (CMRDD) program — part of the $3.8 billion Canadian Critical Minerals Strategy funding envelope from Budget 2022 — split between Cyclic Materials Incorporated ($4.9 million, for a demonstration plant producing high-purity mixed rare earth oxide and a cobalt-nickel mixed hydroxide product from recycled materials, aimed at permanent magnets) and Green Graphite Technologies Inc. ($3.5 million, for recovering and upgrading graphite from secondary sources into lithium-ion battery-grade graphite). Announced in Kingston, Ontario by Mark Gerretsen, MP for Kingston and the Islands, on behalf of the Minister of Energy and Natural Resources, the Honourable Jonathan Wilkinson.",
+    "analyticalSignificance": "Gives Canada a second, more specific funding-mechanism event beyond the general 2022 Critical Minerals Strategy announcement (evt-ca-cms-2022), and is the corpus's clearest allied instance of government money aimed specifically at the recycling and downstream stage of the rare-earth-magnet and graphite supply chains, distinct from the mining- and processing-stage instruments already dominant in the corpus.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-cmrdd-2024"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-09-04",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-antismuggling-campaign-2025",
+    "date": "2025-05-09",
+    "jurisdiction": "china",
+    "issuingBody": "国家出口管制工作协调机制办公室 (National Export Control Coordination Mechanism Office), coordinating 商务部 (MOFCOM), 公安部 (Ministry of Public Security), 国家安全部 (Ministry of State Security), 海关总署 (GACC), 最高人民法院 (Supreme People's Court), 最高人民检察院 (Supreme People's Procuratorate) and 国家邮政局 (State Postal Bureau)",
+    "titleOriginal": "国家出口管制工作协调机制办公室部署开展打击战略矿产走私出口专项行动",
+    "titleOriginalLang": "zh",
+    "titleEn": "National Export Control Coordination Mechanism Office deploys special campaign against smuggling and illegal export of strategic minerals",
+    "titleEnSource": "self",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "customs_enforcement",
+      "export_control"
+    ],
+    "affectedMaterialIds": [
+      "gallium",
+      "germanium",
+      "antimony",
+      "tungsten",
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "battery",
+      "industrial"
+    ],
+    "summary": "On 9 May 2025 the National Export Control Coordination Mechanism Office, together with MOFCOM, the Ministry of Public Security, the Ministry of State Security, the General Administration of Customs (GACC), the Supreme People's Court, the Supreme People's Procuratorate and the State Postal Bureau, held an on-site meeting in Shenzhen, Guangdong to deploy a special enforcement campaign against smuggling and illegal export of strategic minerals — explicitly naming gallium, germanium, antimony, tungsten and medium/heavy rare earths. The notice targets false declaration and concealment (伪报瞒报), concealed smuggling (夹藏走私) and third-country transshipment evasion (\"第三国\"转口), and calls for source-to-port oversight, faster investigation and publication of illegal-export cases, and strengthened cross-department, cross-region and mainland-Hong Kong-Macao customs enforcement cooperation.",
+    "analyticalSignificance": "The first customs-enforcement-mechanism event in the corpus, and a materially significant addition on its own terms: it shows the domestic-enforcement complement to China's export-control announcements already coded (the MOFCOM/GACC catalogue notices restrict what may be exported; this campaign polices whether the restriction is actually being evaded). Directly names five of the corpus's eleven tracked materials, giving strong comparative value against the existing export-control events on the same materials.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-antismuggling-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-05-09",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-uk-nwf-tungsten-west-2026",
+    "date": "2026-08-25",
+    "jurisdiction": "uk",
+    "issuingBody": "National Wealth Fund",
+    "titleOriginal": "National Wealth Fund backs Tungsten West to unlock critical UK tungsten supply",
+    "titleOriginalLang": "en",
+    "titleEn": "National Wealth Fund backs Tungsten West to unlock critical UK tungsten supply",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "industrial"
+    ],
+    "summary": "On 25 August 2026 the National Wealth Fund agreed up to £71 million in support for Tungsten West (£36 million equity plus up to £35 million in lending) to fund construction, commissioning and processing costs for restarting production at the Hemerdon tungsten and tin mine near Plymouth, Devon, described as one of the world's largest tungsten resources. The investment also unlocks an exclusive negotiation period giving the UK Government the right to procure up to 50% of the mine's tungsten production, per Tungsten West's 2025 Feasibility Study — the release states this offtake agreement itself is being negotiated separately by the UK Government and had not been concluded as of this announcement.",
+    "analyticalSignificance": "Gives the UK a third, more specific event beyond its two Critical Minerals Strategy documents (evt-uk-cms-2022, evt-uk-cms-2025), and is directly on-material: tungsten is one of the corpus's eleven tracked materials, and this is the first UK event to name it in a concrete financing instrument rather than a strategy list.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nwf-tungsten-west-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-08-25",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   }
 ]

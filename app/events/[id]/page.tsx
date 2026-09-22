@@ -24,6 +24,10 @@ import {
   getSourcesByIds,
 } from "@/lib/data";
 import { formatDate } from "@/lib/format";
+import { CiteBlock } from "@/components/cite-block";
+import { SaveEventButton } from "@/components/save-event-button";
+import { plainCitation } from "@/lib/citation";
+import { eventJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return getAllEvents().map((e) => ({ id: e.id }));
@@ -66,11 +70,17 @@ export default async function EventPage({
   const jurisdiction = getJurisdictionById(event.jurisdiction);
   const related = getRelatedEvents(event);
   const actorHref = `/actors/${jurisdictionShort[event.jurisdiction].toLowerCase()}`;
+  let sectionNo = 0;
+  const nextSectionIndex = () => String(++sectionNo).padStart(2, "0");
   const showOriginalTitle =
     event.titleOriginalLang !== "en" && event.titleOriginal !== "Not yet coded";
 
   return (
     <Container className="py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(eventJsonLd(event, sources)) }}
+      />
       <Link
         href="/events"
         className="font-display text-sm text-muted hover:text-foreground"
@@ -109,24 +119,36 @@ export default async function EventPage({
           <StatusBadge status={event.policyStatus} />
           <MechanismBadges mechanisms={event.mechanism} />
         </div>
+        <div className="mt-4">
+          <SaveEventButton eventId={event.id} />
+        </div>
       </header>
 
+      {/*
+        Section numbers are assigned in render order rather than hard-coded.
+        "Related events" is conditional, so a record with none used to display
+        04 then 06 — a gap that reads like a missing section. That is now
+        routine rather than rare: an instrument naming no material has no
+        related events either, since relatedness is derived from shared
+        materials. JSX evaluates siblings in source order, so the counter
+        below is deterministic for this server-rendered page.
+      */}
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="min-w-0 space-y-10">
-          <Section index="01" title="Summary">
+          <Section index={nextSectionIndex()} title="Summary">
             <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
               {event.summary}
             </p>
           </Section>
 
-          <Section index="02" title="Analytical significance">
+          <Section index={nextSectionIndex()} title="Analytical significance">
             <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
               {event.analyticalSignificance}
             </p>
           </Section>
 
           <Section
-            index="03"
+            index={nextSectionIndex()}
             title="Framing anchors"
             description="Official framing, classified only from quoted passages."
           >
@@ -153,8 +175,8 @@ export default async function EventPage({
             )}
           </Section>
 
-          {materials.length > 0 ? (
-            <Section index="04" title="Affected materials">
+          <Section index={nextSectionIndex()} title="Affected materials">
+            {materials.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {materials.map((m) => (
                   <Link
@@ -171,12 +193,26 @@ export default async function EventPage({
                   </Link>
                 ))}
               </div>
-            </Section>
-          ) : null}
+            ) : (
+              // Saying this out loud matters. An empty section would read as
+              // "not coded yet", when in fact the empty scope is the finding.
+              // Two different findings produce it — a framework instrument that
+              // names no material, and an instrument whose materials fall
+              // outside the tracked set — so the copy states the fact both
+              // share and sends the reader to the summary for which one it is.
+              // Either way no material is inferred onto the record.
+              <Card className="px-4 py-3 text-sm leading-6 text-muted">
+                No tracked material is coded for this record — either the instrument
+                names no material of its own, or the minerals it names fall outside
+                this database&apos;s material set. The summary above says which. Nothing
+                is inferred here from the measures issued under it.
+              </Card>
+            )}
+          </Section>
 
           {related.length > 0 ? (
             <Section
-              index="05"
+              index={nextSectionIndex()}
               title="Related events"
               description="Events touching the same materials."
             >
@@ -188,12 +224,20 @@ export default async function EventPage({
             </Section>
           ) : null}
 
-          <Section index="06" title={`Sources (${sources.length})`}>
+          <Section index={nextSectionIndex()} title={`Sources (${sources.length})`}>
             <div className="grid gap-3">
               {sources.map((s) => (
                 <SourceCard key={s.id} source={s} />
               ))}
             </div>
+          </Section>
+
+          <Section index={nextSectionIndex()} title="Citation">
+            <CiteBlock
+              plain={plainCitation(event)}
+              eventId={event.id}
+              primaryUrls={sources.map((s) => s.url)}
+            />
           </Section>
         </div>
 

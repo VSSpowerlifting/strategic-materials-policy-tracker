@@ -68,3 +68,19 @@ test("NO candidate data leaks into any public export", () => {
   ].join("\n");
   assert.ok(!/\bcand-/.test(blob), "candidate ids (cand-*) must never appear in exports");
 });
+
+
+test("eventsCsv accepts a subset and keeps the same columns and quoting rules", () => {
+  const all = getAllEvents();
+  const subset = all.slice(0, 2);
+  const rows = dataRows(eventsCsv(subset));
+  assert.equal(rows.length, subset.length);
+  const header = eventsCsv().split("\r\n")[0];
+  assert.equal(eventsCsv(subset).split("\r\n")[0], header);
+  // The default (no argument) keeps exporting the whole corpus, unchanged.
+  assert.equal(dataRows(eventsCsv()).length, all.length);
+});
+
+test("eventsCsv on an empty subset yields a header with no data rows", () => {
+  assert.deepEqual(dataRows(eventsCsv([])), []);
+});

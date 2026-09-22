@@ -3,9 +3,19 @@
     "id": "china",
     "code": "CN",
     "name": "China",
-    "roles": ["producer", "processor", "controller"],
+    "roles": [
+      "producer",
+      "processor",
+      "controller"
+    ],
     "supplyChainPosition": "The dominant incumbent. China mines roughly 60–70% of the world's rare earths and processes about 90%, and is the leading refiner for 19 of 20 strategic minerals tracked by the IEA. Its principal policy instrument is export licensing and control administered through MOFCOM and customs (GACC), increasingly with extraterritorial reach.",
-    "keyBodies": ["MOFCOM", "GACC (General Administration of Customs)", "State Council", "MIIT", "NDRC"],
+    "keyBodies": [
+      "MOFCOM",
+      "GACC (General Administration of Customs)",
+      "State Council",
+      "MIIT",
+      "NDRC"
+    ],
     "framingPosture": "Frames controls as national-security and non-proliferation measures consistent with international practice and dual-use obligations. Official text avoids the language of retaliation even when measures track external trade actions.",
     "eventIds": [
       "china-rare-earth-controls-2025-04",
@@ -15,63 +25,199 @@
       "evt-cn-graphite-2023",
       "evt-cn-us-ban-2024",
       "evt-cn-tungsten-2025",
-      "evt-cn-antimony-2024"
+      "evt-cn-antimony-2024",
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024",
+      "evt-cn-decree-785-2024",
+      "evt-cn-antismuggling-campaign-2025"
     ],
-    "sourceIds": ["src-iea-critical-minerals", "src-cset-mofcom-61", "src-globaltimes-61"]
+    "sourceIds": [
+      "src-iea-critical-minerals",
+      "src-cset-mofcom-61",
+      "src-globaltimes-61"
+    ]
   },
   {
     "id": "us",
     "code": "US",
     "name": "United States",
-    "roles": ["import_dependent", "funder", "stockpiler", "regulator", "producer"],
+    "roles": [
+      "import_dependent",
+      "funder",
+      "stockpiler",
+      "regulator",
+      "producer"
+    ],
     "supplyChainPosition": "Heavily import-dependent for separated rare earths and finished magnets, and rebuilding a domestic mine-to-magnet chain. Instruments span USGS critical-mineral designation, BIS export controls, DOE and Defense (DPA Title III) funding, and offtake / price-support arrangements.",
-    "keyBodies": ["USGS / Department of the Interior", "BIS", "DOE", "Department of State", "Department of Defense (DPA Title III)"],
+    "keyBodies": [
+      "USGS / Department of the Interior",
+      "BIS",
+      "DOE",
+      "Department of State",
+      "Department of Defense (DPA Title III)"
+    ],
     "framingPosture": "Frames policy as economic security, defense-industrial resilience, and reducing dependence on a single foreign supplier.",
-    "eventIds": ["us-critical-minerals-list-2025", "evt-us-dod-mp-2025"],
-    "sourceIds": ["src-doi-press-2025", "src-usgs-news-2025", "src-fedreg-usgs-2025"]
+    "eventIds": [
+      "us-critical-minerals-list-2025",
+      "evt-us-dod-mp-2025",
+      "evt-us-eo-14241-2025",
+      "evt-us-eo-14272-2025",
+      "evt-us-cm-list-2018",
+      "evt-us-eo-13953-2020",
+      "evt-us-cm-list-2022"
+    ],
+    "sourceIds": [
+      "src-doi-press-2025",
+      "src-usgs-news-2025",
+      "src-fedreg-usgs-2025",
+      "src-fedreg-eo-14241",
+      "src-fedreg-eo-14272",
+      "src-fedreg-cm-list-2018",
+      "src-fedreg-eo-13953",
+      "src-fedreg-cm-list-2022"
+    ]
   },
   {
     "id": "eu",
     "code": "EU",
     "name": "European Union",
-    "roles": ["import_dependent", "regulator", "funder"],
+    "roles": [
+      "import_dependent",
+      "regulator",
+      "funder"
+    ],
     "supplyChainPosition": "Import-dependent and pursuing de-risking rather than decoupling. The Critical Raw Materials Act sets 2030 benchmarks — 10% domestic extraction, 40% processing, 25% recycling of annual consumption, and no more than 65% of any strategic raw material from a single third country — backed by Strategic Project designations and faster permitting.",
-    "keyBodies": ["European Commission (DG GROW)"],
+    "keyBodies": [
+      "European Commission (DG GROW)"
+    ],
     "framingPosture": "Frames policy as supply-chain resilience, de-risking, and open strategic autonomy.",
-    "eventIds": ["eu-critical-raw-materials-act"],
-    "sourceIds": ["src-ec-crma", "src-eurlex-crma"]
+    "eventIds": [
+      "eu-critical-raw-materials-act"
+    ],
+    "sourceIds": [
+      "src-ec-crma",
+      "src-eurlex-crma"
+    ]
   },
   {
     "id": "australia",
     "code": "AU",
     "name": "Australia",
-    "roles": ["producer", "processor"],
+    "roles": [
+      "producer",
+      "processor"
+    ],
     "supplyChainPosition": "A resource producer building allied processing capacity: Lynas operates Mt Weld and separation at Kalgoorlie and in Malaysia, and Iluka is constructing the Eneabba refinery with government backing. Positioned as a non-China supplier of separated rare earths.",
-    "keyBodies": ["Department of Industry, Science and Resources (DISR) / Critical Minerals Office"],
+    "keyBodies": [
+      "Department of Industry, Science and Resources (DISR) / Critical Minerals Office"
+    ],
     "framingPosture": "Frames policy as allied supply security and an industrial opportunity in downstream processing.",
-    "eventIds": ["evt-au-cmsr-2026"],
-    "sourceIds": ["src-iea-critical-minerals"]
+    "eventIds": [
+      "evt-au-cmsr-2026",
+      "evt-au-cmpti-2025"
+    ],
+    "sourceIds": [
+      "src-iea-critical-minerals",
+      "src-legislation-au-cmpti-2025"
+    ]
   },
   {
     "id": "japan",
     "code": "JP",
     "name": "Japan",
-    "roles": ["import_dependent", "stockpiler", "funder"],
+    "roles": [
+      "import_dependent",
+      "stockpiler",
+      "funder"
+    ],
     "supplyChainPosition": "An early mover on diversification following the 2010 rare-earth shock. Supports stockpiling and offtake through JOGMEC (including long-standing investment in Lynas) to reduce single-source dependence.",
-    "keyBodies": ["METI / JOGMEC"],
+    "keyBodies": [
+      "METI / JOGMEC"
+    ],
     "framingPosture": "Frames policy as economic security and supply diversification.",
-    "eventIds": ["evt-jp-jogmec-lynas-2023"],
-    "sourceIds": ["src-iea-critical-minerals"]
+    "eventIds": [
+      "evt-jp-jogmec-lynas-2023",
+      "evt-jp-jogmec-lofdal-2026",
+      "evt-jp-espa-2022"
+    ],
+    "sourceIds": [
+      "src-iea-critical-minerals",
+      "src-jogmec-lofdal-ja",
+      "src-jogmec-lofdal-en",
+      "src-egov-jp-espa-2022"
+    ]
   },
   {
     "id": "canada",
     "code": "CA",
     "name": "Canada",
-    "roles": ["producer", "regulator"],
+    "roles": [
+      "producer",
+      "regulator"
+    ],
     "supplyChainPosition": "A resource producer aligning with allied supply chains under its Critical Minerals Strategy, and tightening inbound investment screening on strategic-mineral assets.",
-    "keyBodies": ["Natural Resources Canada (NRCan)"],
+    "keyBodies": [
+      "Natural Resources Canada (NRCan)"
+    ],
     "framingPosture": "Frames policy as allied coordination, economic security, and responsible resource development.",
-    "eventIds": ["evt-ca-ica-divest-2022"],
-    "sourceIds": ["src-iea-critical-minerals"]
+    "eventIds": [
+      "evt-ca-ica-divest-2022",
+      "evt-ca-cms-2022",
+      "evt-ca-nrcan-cmrdd-2024"
+    ],
+    "sourceIds": [
+      "src-iea-critical-minerals",
+      "src-nrcan-cms-2022"
+    ]
+  },
+  {
+    "id": "uk",
+    "code": "GB",
+    "name": "United Kingdom",
+    "roles": [
+      "import_dependent",
+      "regulator",
+      "funder"
+    ],
+    "supplyChainPosition": "Import-dependent across the critical-minerals set, with policy built on an explicit British Geological Survey criticality assessment and, since 2025, a stated bet on midstream processing and recycling rather than extraction. The 2025 strategy sets quantified 2035 targets: 10% of aggregate annual industrial demand met domestically, 20% through recycling, and no more than 60% of demand for any one critical mineral imported from any single country.",
+    "keyBodies": [
+      "Department for Business and Trade (DBT)",
+      "British Geological Survey (BGS)",
+      "Critical Minerals Intelligence Centre"
+    ],
+    "framingPosture": "Frames policy as supply-chain resilience and industrial competitiveness. States production-concentration facts, including China's share of global output, as findings of the BGS criticality assessment rather than as political characterisation, and expresses its diversification target as a single-country import ceiling without naming a supplier.",
+    "eventIds": [
+      "evt-uk-cms-2022",
+      "evt-uk-cms-2025",
+      "evt-uk-nwf-tungsten-west-2026"
+    ],
+    "sourceIds": [
+      "src-gov-uk-cms-2022",
+      "src-gov-uk-cms-2025"
+    ]
+  },
+  {
+    "id": "india",
+    "code": "IN",
+    "name": "India",
+    "roles": [
+      "import_dependent",
+      "funder",
+      "stockpiler",
+      "producer"
+    ],
+    "supplyChainPosition": "Import-dependent for most processed critical minerals and building a state-led programme across the value chain. Instruments combine exploration funding, a fast-track approval route for critical-mineral mining projects, overseas asset acquisition through public-sector undertakings, customs-duty removal on most critical minerals, and a planned domestic stockpile.",
+    "keyBodies": [
+      "Ministry of Mines",
+      "Geological Survey of India (GSI)",
+      "KABIL (Khanij Bidesh India Ltd)"
+    ],
+    "framingPosture": "Frames policy as self-reliance (Atmanirbhar Bharat) and value-chain resilience, citing the role of critical minerals in high-tech industries, clean energy and defence. Published framing to date names no foreign state.",
+    "eventIds": [
+      "evt-in-ncmm-2025"
+    ],
+    "sourceIds": [
+      "src-pib-ncmm-2025"
+    ]
   }
 ]

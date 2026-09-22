@@ -76,3 +76,30 @@ Promotion is **manual and human-gated** — the AI agents never publish.
    `npm run lint && npm run typecheck && npm run build`.
 
 Nothing is published until a human completes step 4 and commits/deploys.
+
+### Carrying the lifecycle through promotion
+
+A monitored record's value is its dates, and promotion is where they are most
+easily lost. Map them explicitly:
+
+| Candidate field | Published field |
+| --- | --- |
+| `createdAt` (date the measure was first logged) | `lifecycle.discoveredAt` |
+| `verification.reviewedAt` (date verification completed) | `lifecycle.verifiedAt` |
+| — (the issuing body's own publication date) | `lifecycle.officialPublicationDate` |
+| — (**the deploy date**, see below) | `lifecycle.publishedAt` |
+
+`npm run validate` enforces the first two for any candidate whose
+`proposedEvent.intakeMode` is `"monitored"`, and warns if they drift from the
+candidate's own bookkeeping.
+
+**`promotion.promotedAt` is not `lifecycle.publishedAt`.** Promotion merges a
+record into the seed; publication is when a deploy makes it publicly readable.
+They are the same date only when the promotion commit is deployed in the same
+operation. Otherwise `publishedAt` is the later deploy date. Leave
+`lifecycle.publishedAt` null through promotion and set it in the release that
+actually ships the record — the validator rejects a non-null `publishedAt` on a
+monitored candidate that has not been promoted yet, for exactly this reason.
+
+Set `site.monitoringStartedAt` in that same release, never earlier: it is the
+date monitoring became real, not the date the schema was able to describe it.

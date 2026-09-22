@@ -13,6 +13,8 @@ import type {
   Sector,
   SourceConfidence,
   SourceType,
+  WatchCadence,
+  WatchStatus,
 } from "./types";
 
 // --- Jurisdictions ----------------------------------------------------------
@@ -24,6 +26,8 @@ export const jurisdictionLabels: Record<JurisdictionCode, string> = {
   australia: "Australia",
   japan: "Japan",
   canada: "Canada",
+  uk: "United Kingdom",
+  india: "India",
   other: "Other",
 };
 
@@ -34,6 +38,8 @@ export const jurisdictionShort: Record<JurisdictionCode, string> = {
   australia: "AU",
   japan: "JP",
   canada: "CA",
+  uk: "GB",
+  india: "IN",
   other: "—",
 };
 
@@ -136,6 +142,25 @@ export const enSourceLabels: Record<EnSource, string> = {
   official: "Official translation",
   self: "Project / third-party translation",
   na: "English original",
+};
+
+// --- Watchlist --------------------------------------------------------------
+//
+// Cadence is the review interval the project commits to, not an observed
+// update frequency of the source itself.
+
+export const cadenceLabels: Record<WatchCadence, string> = {
+  weekly: "Weekly",
+  biweekly: "Every two weeks",
+  monthly: "Monthly",
+  quarterly: "Quarterly",
+  ad_hoc: "As prompted",
+};
+
+export const watchStatusLabels: Record<WatchStatus, string> = {
+  active: "In rotation",
+  paused: "Paused",
+  retired: "Retired",
 };
 
 // --- Jurisdiction roles -----------------------------------------------------

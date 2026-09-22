@@ -22,6 +22,7 @@ A short guided tour of the live site:
 - **[Framing](https://strategic-materials-policy-tracker.vercel.app/framing)** — the comparative framing matrix, the analytical centerpiece (see below).
 - **[Events](https://strategic-materials-policy-tracker.vercel.app/events)** — the policy-measure index, filterable by actor, mechanism, material and status.
 - **[Materials](https://strategic-materials-policy-tracker.vercel.app/materials)** — each tracked material, its position in Chinese policy, and diversification efforts.
+- **[Coverage](https://strategic-materials-policy-tracker.vercel.app/coverage)** — the coded footprint: source composition, framing-anchor coverage, per-actor counts and the research boundaries, derived from the data rather than hand-written.
 - **[Methodology](https://strategic-materials-policy-tracker.vercel.app/methodology)** — scope, source hierarchy, translation policy, and every label definition.
 - **[Data](https://strategic-materials-policy-tracker.vercel.app/data)** — download the full dataset as JSON or CSV, with the same provenance shown on the site.
 
@@ -52,9 +53,9 @@ These are the project's standing commitments, enforced in code by `scripts/valid
 
 ## Coverage
 
-- **Actors:** China, the United States, the EU, Australia, Japan and Canada.
+- **Actors:** China, the United States, the EU, Australia, Japan, Canada, the United Kingdom and India.
 - **Materials:** a rare-earth-centred set of strategic materials and their downstream sectors.
-- **Time:** events from April 2025 forward, with a few foundational instruments included for context.
+- **Time:** 2018–2026. Coverage is deepest from 2023 onward; the earlier records are the foundational instruments — designation lists, export-control statutes and enabling acts — that the later measures are issued under.
 
 Coverage is deepest on the Chinese measures, read from Mandarin primaries. See the [methodology version history](https://strategic-materials-policy-tracker.vercel.app/methodology#versions) for the per-release changelog.
 
@@ -85,12 +86,22 @@ app/                 Routes (App Router)
   materials/         Material index + [slug]
   actors/            Jurisdiction index + [code]
   framing/           Comparative framing (the signature page)
+  coverage/          Coverage & evidence dashboard (derived, no hard-coded counts)
+  compare/           Comparative control matrix (material x actor)
+  search/            Corpus-wide search with actor/mechanism filters, shareable URLs
+  saved/             Personal saved-events view (localStorage, no account)
+  watchlist/         Project-curated registry of sources under standing review
   timeline/  sources/  methodology/  data/  about/
   api/export/        force-static CSV / JSON download handlers
+  api/v1/            Read-only public API (events, materials, actors, sources, framing, coverage, watchlist)
+  api/cite/          BibTeX / RIS / CSL-JSON citation endpoints
+  sitemap.ts  robots.ts   Discoverability
 components/          UI primitives and domain components
-lib/                 types, data loaders, labels, formatting, export, site config
-data/seed/           events / framing / materials / jurisdictions / sources JSON
-scripts/             validate-data.ts
+lib/                 types, data loaders, labels, formatting, export, site config,
+                     search index, citation builders, coverage metrics, structured data
+data/seed/           events / framing / materials / jurisdictions / sources / watchlist JSON
+data/candidates/     private, git-ignored candidate-review workspace (see its own README)
+scripts/             validate-data.ts, candidate-files.ts
 ```
 
 ## Data & validation
@@ -106,17 +117,22 @@ npm install
 npm run dev        # http://localhost:3000
 npm run validate   # run the seed-data integrity checks
 npm run typecheck  # tsc --noEmit
+npm run lint       # eslint
+npm test           # node --test, unit + integration tests
 npm run build      # production build + prerender
 ```
 
 ## Status
 
-**Current release: `v0.3-framing`.** A multi-actor seed dataset across the six tracked actors, with the comparative framing matrix and source register in place, a passing data validator, and full JSON/CSV export. Coverage is deepest on the Chinese measures, read directly from Mandarin primaries. The full per-release changelog lives in the [methodology version history](https://strategic-materials-policy-tracker.vercel.app/methodology#versions).
+**Current release: `v0.4-coverage`.** A multi-actor dataset across the tracked actors, with the comparative framing matrix, source register and a dedicated coverage & evidence dashboard in place, a passing data validator, and full JSON/CSV export. The site also has full-corpus search (with actor/mechanism filters and shareable URLs), a personal saved-events view, a read-only public API (`/api/v1/*`), citation endpoints (BibTeX/RIS/CSL-JSON), and a sitemap/robots.txt for discoverability. New candidate measures go through a private, git-ignored review workflow (`data/candidates/`) with its own schema validation before any human-approved promotion into the public seed. Coverage is deepest on the Chinese measures, read directly from Mandarin primaries. The full per-release changelog lives in the [methodology version history](https://strategic-materials-policy-tracker.vercel.app/methodology#versions).
+
+Live counts are on the [coverage dashboard](https://strategic-materials-policy-tracker.vercel.app/coverage) rather than repeated here — a hand-written count in this README is a claim that goes stale the next time a record lands.
 
 ## Roadmap & known gaps
 
 - Transcribe the original-language titles / document numbers currently marked `null` or `"Not yet coded"` against the primaries, and add framing anchors where they are still pending.
-- Dedicated event records for the 2023–2025 gallium, germanium, graphite, antimony and tungsten controls where they are currently only referenced in material notes.
+- Expand the material set beyond the rare-earth-centred eleven. Several coded instruments (the Australian production tax incentive, the UK and Canadian lists) name minerals — lithium, cobalt, nickel, PGMs — that have no `Material` record, so those measures currently show a narrower material scope on site than their text carries.
+- South Korea and Brazil: both are in the intended actor set but neither is in the taxonomy yet, because no in-scope primary has been verified for them. The jurisdiction codes go in when the first event does, not before.
 - Deepen non-Chinese actor coverage as primary sources are verified.
 
 ## Usage & citation

@@ -20,6 +20,7 @@ import {
   CONFIDENCE_LEVELS,
   EN_SOURCES,
   FRAMING_CATEGORIES,
+  INTAKE_MODES,
   JURISDICTIONS,
   JURISDICTION_ROLES,
   MECHANISMS,
@@ -30,13 +31,19 @@ import {
   SOURCE_LANGS,
   SOURCE_TYPES,
   TITLE_LANGS,
+  VERIFICATION_STATUSES,
+  WATCH_CADENCES,
+  WATCH_STATUSES,
   type CandidateRecord,
   type FramingClaim,
   type Jurisdiction,
   type Material,
   type PolicyEvent,
   type Source,
+  type WatchedSource,
 } from "../lib/types";
+import { site } from "../lib/site";
+import { isExampleCandidateFile } from "./candidate-files";
 
 const seedDir = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "seed");
 const read = <T>(name: string): T => JSON.parse(readFileSync(join(seedDir, `${name}.json`), "utf8")) as T;
@@ -46,6 +53,7 @@ const framing = read<FramingClaim[]>("framing");
 const materials = read<Material[]>("materials");
 const jurisdictions = read<Jurisdiction[]>("jurisdictions");
 const sources = read<Source[]>("sources");
+const watchlist = read<WatchedSource[]>("watchlist");
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -76,6 +84,7 @@ assertUnique("sources", sources.map((s) => s.id));
 
 // Lookup sets
 const sourceIds = new Set(sources.map((s) => s.id));
+const sourceById = new Map(sources.map((s) => [s.id, s]));
 const materialIds = new Set(materials.map((m) => m.id));
 const eventIds = new Set(events.map((e) => e.id));
 const jurisdictionIds = new Set(jurisdictions.map((j) => j.id));
@@ -105,13 +114,153 @@ for (const e of events) {
   // Material resolution
   for (const mid of e.affectedMaterialIds) if (!materialIds.has(mid)) err(`${at}: affectedMaterialId "${mid}" does not resolve`);
 
+  // An empty material scope is legitimate and deliberate for framework
+  // instruments — an export-control statute or an enabling act names no
+  // material, and inferring one from the announcements issued under it would
+  // put a claim in the record that the source does not make. It warns rather
+  // than errors so the distinction stays visible: the reviewer should be able
+  // to tell "this instrument names no material" from "nobody has coded it yet".
+  if (!e.affectedMaterialIds || e.affectedMaterialIds.length === 0)
+    warn(`${at}: has no affectedMaterialIds — confirm the instrument genuinely names no material`);
+
   // Superseded resolution
   if (e.supersededByEventId != null && !eventIds.has(e.supersededByEventId))
     err(`${at}: supersededByEventId "${e.supersededByEventId}" does not resolve`);
 
   if (!e.titleOriginal?.trim()) err(`${at}: titleOriginal is empty`);
   if (!e.titleEn?.trim()) err(`${at}: titleEn is empty`);
+
+  // --- Verification standing, lifecycle and intake --------------------------
+
+  if (!inSet(VERIFICATION_STATUSES, e.verificationStatus))
+    err(`${at}: verificationStatus "${e.verificationStatus}" not set / not in allowed set`);
+  if (!inSet(INTAKE_MODES, e.intakeMode))
+    err(`${at}: intakeMode "${e.intakeMode}" not set / not in allowed set`);
+
+  // The official-primary rule. "Verified" means the record rests on a
+  // government document in its own right — both primary confidence AND an
+  // official source type. A company press release marked primary does not
+  // qualify, and neither does a third-party translation of an official text.
+  // Applies to every event, backfills included.
+  const hasOfficialPrimary = (e.sourceIds ?? []).some((sid) => {
+    const s = sourceById.get(sid);
+    return s?.confidence === "primary" && s?.sourceType === "official";
+  });
+  if (e.verificationStatus === "verified" && !hasOfficialPrimary)
+    err(
+      `${at}: verificationStatus is "verified" but no source is both confidence:"primary" and sourceType:"official"`,
+    );
+  if (e.verificationStatus === "provisional" && hasOfficialPrimary)
+    warn(`${at}: marked "provisional" but an official primary source resolves — should it be verified?`);
+
+  const lc = e.lifecycle;
+  if (!lc || typeof lc !== "object") {
+    err(`${at}: lifecycle block is missing`);
+  } else {
+    const isoOrNull = (v: unknown, field: string) => {
+      if (v === null) return null;
+      if (typeof v !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(v)) {
+        err(`${at}: lifecycle.${field} must be an ISO yyyy-mm-dd date or null (got ${JSON.stringify(v)})`);
+        return null;
+      }
+      return v;
+    };
+    const official = isoOrNull(lc.officialPublicationDate, "officialPublicationDate");
+    const discovered = isoOrNull(lc.discoveredAt, "discoveredAt");
+    const verified = isoOrNull(lc.verifiedAt, "verifiedAt");
+    const published = isoOrNull(lc.publishedAt, "publishedAt");
+
+    // Ordering within the tracker's own workflow is an error; a discovery that
+    // precedes official publication is legitimate (a proposal can be tracked
+    // before it is promulgated), so that one only warns.
+    const order: [string, string | null, string, string | null][] = [
+      ["discoveredAt", discovered, "verifiedAt", verified],
+      ["verifiedAt", verified, "publishedAt", published],
+      ["discoveredAt", discovered, "publishedAt", published],
+    ];
+    for (const [aName, aVal, bName, bVal] of order)
+      if (aVal && bVal && aVal > bVal) err(`${at}: lifecycle.${aName} (${aVal}) is after lifecycle.${bName} (${bVal})`);
+    if (official && discovered && official > discovered)
+      warn(`${at}: lifecycle.officialPublicationDate (${official}) is after discoveredAt (${discovered})`);
+
+    // A monitored record is the unit the timeliness metric is computed from, so
+    // it must be complete and verified. Backfills may leave dates null.
+    //
+    // publishedAt is the exception, and deliberately so. Promotion merges a
+    // record into the seed; publication is the deploy that makes it readable
+    // (see data/candidates/README.md, "Carrying the lifecycle through
+    // promotion"). Between those two moments a monitored record legitimately
+    // has publishedAt null, and requiring it here would force the date to be
+    // invented at promotion — the precise failure the candidate-side rule
+    // below guards against.
+    //
+    // The invariant that actually matters is that the metric's inputs are
+    // complete whenever the metric is live, and `site.monitoringStartedAt` is
+    // what makes it live. So publishedAt is required only once that is set.
+    if (e.intakeMode === "monitored") {
+      if (e.verificationStatus !== "verified")
+        err(`${at}: intakeMode "monitored" requires verificationStatus "verified"`);
+      for (const [field, value] of [
+        ["officialPublicationDate", official],
+        ["discoveredAt", discovered],
+        ["verifiedAt", verified],
+      ] as const)
+        if (!value) err(`${at}: intakeMode "monitored" requires lifecycle.${field}`);
+      if (!published && site.monitoringStartedAt)
+        err(
+          `${at}: intakeMode "monitored" requires lifecycle.publishedAt once site.monitoringStartedAt is set (${site.monitoringStartedAt})`,
+        );
+      if (published && !site.monitoringStartedAt)
+        warn(
+          `${at}: lifecycle.publishedAt is set but site.monitoringStartedAt is null — they belong to the same release`,
+        );
+    }
+  }
 }
+
+// --- Watchlist --------------------------------------------------------------
+//
+// The input side of the tracker: official sources under standing review.
+// Watching a source implies no claim about it, so these entries are validated
+// for structure and resolution only — never for evidentiary weight.
+
+assertUnique("watchlist", watchlist.map((w) => w.id));
+
+const watchedJurisdictions = new Set<string>();
+
+for (const w of watchlist) {
+  const at = `watchlist "${w.id}"`;
+
+  if (!inSet(JURISDICTIONS, w.jurisdiction)) err(`${at}: jurisdiction "${w.jurisdiction}" not in allowed set`);
+  if (!inSet(SOURCE_TYPES, w.sourceType)) err(`${at}: sourceType "${w.sourceType}" not in allowed set`);
+  if (!inSet(SOURCE_LANGS, w.language)) err(`${at}: language "${w.language}" not in allowed set`);
+  if (!inSet(WATCH_CADENCES, w.cadence)) err(`${at}: cadence "${w.cadence}" not in allowed set`);
+  if (!inSet(WATCH_STATUSES, w.status)) err(`${at}: status "${w.status}" not in allowed set`);
+
+  if (!w.issuingBody?.trim()) err(`${at}: issuingBody is empty`);
+  if (!w.title?.trim()) err(`${at}: title is empty`);
+  if (!/^https?:\/\//.test(w.url ?? "")) err(`${at}: url must be an absolute http(s) URL`);
+
+  for (const mid of w.materialIds ?? []) if (!materialIds.has(mid)) err(`${at}: materialId "${mid}" does not resolve`);
+  for (const m of w.mechanisms ?? []) if (!inSet(MECHANISMS, m)) err(`${at}: mechanism "${m}" not in allowed set`);
+
+  // A check cannot have happened after the last published release: the
+  // watchlist ships with the site, so a later date would assert a review the
+  // public build cannot contain.
+  if (w.lastCheckedAt !== null) {
+    if (typeof w.lastCheckedAt !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(w.lastCheckedAt))
+      err(`${at}: lastCheckedAt must be an ISO yyyy-mm-dd date or null`);
+    else if (w.lastCheckedAt > site.lastUpdated)
+      err(`${at}: lastCheckedAt (${w.lastCheckedAt}) postdates site.lastUpdated (${site.lastUpdated})`);
+  }
+
+  if (w.status === "active") watchedJurisdictions.add(w.jurisdiction);
+}
+
+// Coverage gap: a jurisdiction we publish events for, with nothing under watch.
+for (const j of new Set(events.map((e) => e.jurisdiction)))
+  if (!watchedJurisdictions.has(j))
+    warn(`watchlist: jurisdiction "${j}" has published events but no active watched source`);
 
 // --- Framing claims ---------------------------------------------------------
 
@@ -255,10 +404,13 @@ const publishedIds = new Set<string>([
 
 const candidateIdSeen = new Map<string, string>();
 let candidateCount = 0;
+let exampleCandidateCount = 0;
 
 for (const { file, records } of loadCandidateFiles()) {
+  const isExample = isExampleCandidateFile(file);
   for (const c of records) {
-    candidateCount++;
+    if (isExample) exampleCandidateCount++;
+    else candidateCount++;
     const cid = c?.candidateId;
     const at = `candidate "${cid ?? "(missing id)"}" (${file})`;
 
@@ -331,6 +483,33 @@ for (const { file, records } of loadCandidateFiles()) {
         if (!resolvable.has(sid)) err(`${at}: proposedEvent.sourceId "${sid}" does not resolve to a published or proposed source`);
     }
 
+    // A candidate destined to be a monitored record must carry the lifecycle
+    // through promotion. Without this the dates that make the timeliness metric
+    // meaningful are lost at exactly the moment the record becomes public.
+    if (pe.intakeMode === "monitored") {
+      const lc = pe.lifecycle;
+      const require = (cond: boolean, msg: string) => {
+        if (!cond) err(`${at}: ${msg}`);
+      };
+      require(pe.verificationStatus === "verified", 'proposedEvent.intakeMode "monitored" requires verificationStatus "verified"');
+      require(!!lc?.officialPublicationDate, "proposedEvent.lifecycle.officialPublicationDate is required for a monitored candidate");
+      require(!!lc?.discoveredAt, "proposedEvent.lifecycle.discoveredAt is required for a monitored candidate");
+      if (c.status === "verified" || c.status === "promoted")
+        require(!!lc?.verifiedAt, "proposedEvent.lifecycle.verifiedAt is required once a monitored candidate is verified");
+
+      // publishedAt is the deploy date, not the promotion date. It cannot be
+      // known before the record ships, so it must stay null until then.
+      if (c.status !== "promoted" && lc?.publishedAt)
+        err(`${at}: proposedEvent.lifecycle.publishedAt must stay null until the record is actually published`);
+
+      // The candidate's own bookkeeping and the lifecycle must agree, so the
+      // published dates are traceable to the review trail.
+      if (lc?.discoveredAt && c.createdAt && lc.discoveredAt !== c.createdAt.slice(0, 10))
+        warn(`${at}: lifecycle.discoveredAt (${lc.discoveredAt}) does not match createdAt (${c.createdAt})`);
+      if (lc?.verifiedAt && c.verification?.reviewedAt && lc.verifiedAt !== c.verification.reviewedAt.slice(0, 10))
+        warn(`${at}: lifecycle.verifiedAt (${lc.verifiedAt}) does not match verification.reviewedAt (${c.verification.reviewedAt})`);
+    }
+
     if (c.status === "promoted") {
       if (!c.promotion?.promoted) err(`${at}: status "promoted" but promotion.promoted is false`);
       if (!c.promotion?.promotedEventId || !eventIds.has(c.promotion.promotedEventId))
@@ -378,7 +557,18 @@ for (const dir of ["app", "components", "lib"]) {
 
 // --- Report -----------------------------------------------------------------
 
-const counts = `${events.length} events · ${framing.length} framing claims · ${materials.length} materials · ${jurisdictions.length} jurisdictions · ${sources.length} sources · ${candidateCount} candidates (private)`;
+const verifiedCount = events.filter((e) => e.verificationStatus === "verified").length;
+const monitoredCount = events.filter((e) => e.intakeMode === "monitored").length;
+const activeWatched = watchlist.filter((w) => w.status === "active").length;
+
+const exampleNote = exampleCandidateCount
+  ? ` (+ ${exampleCandidateCount} example fixture${exampleCandidateCount === 1 ? "" : "s"}, schema-checked, not counted)`
+  : "";
+const counts =
+  `${events.length} events (${verifiedCount} verified · ${events.length - verifiedCount} provisional · ${monitoredCount} monitored) · ` +
+  `${framing.length} framing claims · ${materials.length} materials · ${jurisdictions.length} jurisdictions · ` +
+  `${sources.length} sources · ${activeWatched}/${watchlist.length} watched sources active · ` +
+  `${candidateCount} candidate${candidateCount === 1 ? "" : "s"} (private)${exampleNote}`;
 
 if (warnings.length) {
   console.log(`\n⚠  ${warnings.length} warning(s):`);

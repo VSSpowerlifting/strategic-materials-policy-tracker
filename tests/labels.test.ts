@@ -11,6 +11,8 @@ import {
   SOURCE_CONFIDENCE,
   EN_SOURCES,
   JURISDICTION_ROLES,
+  WATCH_CADENCES,
+  WATCH_STATUSES,
 } from "@/lib/types";
 import {
   jurisdictionLabels,
@@ -25,6 +27,8 @@ import {
   confidenceLabels,
   enSourceLabels,
   roleLabels,
+  cadenceLabels,
+  watchStatusLabels,
 } from "@/lib/labels";
 
 // A display label must exist for every taxonomy value, and no label may be
@@ -48,3 +52,5 @@ covers("sourceType", SOURCE_TYPES, sourceTypeLabels);
 covers("sourceConfidence", SOURCE_CONFIDENCE, confidenceLabels);
 covers("enSource", EN_SOURCES, enSourceLabels);
 covers("jurisdictionRole", JURISDICTION_ROLES, roleLabels);
+covers("watchCadence", WATCH_CADENCES, cadenceLabels);
+covers("watchStatus", WATCH_STATUSES, watchStatusLabels);

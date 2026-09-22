@@ -18,6 +18,8 @@ export const JURISDICTIONS = [
   "australia",
   "japan",
   "canada",
+  "uk",
+  "india",
   "other",
 ] as const;
 
@@ -103,6 +105,39 @@ export const JURISDICTION_ROLES = [
   "regulator",
 ] as const;
 
+/**
+ * Evidentiary standing of a published record. This is a *status*, held
+ * separately from `lifecycle.verifiedAt`, which records only *when* the
+ * verification happened. A record can legitimately be "verified" with a null
+ * `verifiedAt` when it was verified before the tracker kept lifecycle dates.
+ *
+ *  - "verified"    — resolves to at least one source that is BOTH
+ *                    `confidence: "primary"` AND `sourceType: "official"`.
+ *  - "provisional" — the record stands on translations, state media or
+ *                    secondary analysis. It stays published and honestly
+ *                    labelled, but is excluded from verified-action and
+ *                    official-source-coverage counts.
+ */
+export const VERIFICATION_STATUSES = ["verified", "provisional"] as const;
+
+/**
+ * How a record entered the tracker.
+ *
+ *  - "backfill"  — added retrospectively when the archive was built. Lifecycle
+ *                  dates are mostly unrecoverable and must stay null rather
+ *                  than be reconstructed.
+ *  - "monitored" — caught prospectively from the watchlist after monitoring
+ *                  began. Requires the full lifecycle, which is what makes any
+ *                  timeliness statistic well defined.
+ */
+export const INTAKE_MODES = ["backfill", "monitored"] as const;
+
+/** How often a watched source is meant to be checked. */
+export const WATCH_CADENCES = ["weekly", "biweekly", "monthly", "quarterly", "ad_hoc"] as const;
+
+/** Whether a watched source is currently in the review rotation. */
+export const WATCH_STATUSES = ["active", "paused", "retired"] as const;
+
 // ---------------------------------------------------------------------------
 // Derived union types
 // ---------------------------------------------------------------------------
@@ -118,10 +153,32 @@ export type TitleLang = (typeof TITLE_LANGS)[number];
 export type SourceLang = (typeof SOURCE_LANGS)[number];
 export type EnSource = (typeof EN_SOURCES)[number];
 export type JurisdictionRole = (typeof JURISDICTION_ROLES)[number];
+export type VerificationStatus = (typeof VERIFICATION_STATUSES)[number];
+export type IntakeMode = (typeof INTAKE_MODES)[number];
+export type WatchCadence = (typeof WATCH_CADENCES)[number];
+export type WatchStatus = (typeof WATCH_STATUSES)[number];
 
 // ---------------------------------------------------------------------------
 // Entities
 // ---------------------------------------------------------------------------
+
+/**
+ * Dates tracing a record from the issuing body to this site. Every field is
+ * nullable on purpose: an unknown date is recorded as null, never reconstructed
+ * or approximated. Metrics that depend on a date simply exclude the records
+ * that lack it, and state the denominator they used.
+ */
+export type EventLifecycle = {
+  /** ISO date the issuing body published the instrument. */
+  officialPublicationDate: string | null;
+  /** ISO date the tracker first logged the measure. */
+  discoveredAt: string | null;
+  /** ISO date primary-source verification completed. Not a status — see
+   *  `verificationStatus`. */
+  verifiedAt: string | null;
+  /** ISO date the record became publicly visible on the site. */
+  publishedAt: string | null;
+};
 
 export type PolicyEvent = {
   id: string;
@@ -145,6 +202,42 @@ export type PolicyEvent = {
   analyticalSignificance: string;
   supersededByEventId?: string | null;
   sourceIds: string[];
+  /** Evidentiary standing. Gated by the official-primary rule in the validator. */
+  verificationStatus: VerificationStatus;
+  /** How the record entered the tracker. */
+  intakeMode: IntakeMode;
+  lifecycle: EventLifecycle;
+};
+
+/**
+ * An official source under standing review — the input side of the tracker,
+ * as opposed to `Source`, which is a citation bound to a published record.
+ * Kept in its own file so that watching something implies no claim about it.
+ */
+export type WatchedSource = {
+  id: string;
+  jurisdiction: JurisdictionCode;
+  /** e.g. "MOFCOM Bureau of Industry Security and Import/Export Control". */
+  issuingBody: string;
+  /** Original-language name of the issuing body, where it has one. */
+  issuingBodyOriginal?: string | null;
+  /** Human name of the page or feed being watched. */
+  title: string;
+  url: string;
+  sourceType: SourceType;
+  language: SourceLang;
+  /** Materials this source is watched for; must resolve to materials.json. */
+  materialIds: string[];
+  /** Policy areas, drawn from the existing mechanism taxonomy. */
+  mechanisms: Mechanism[];
+  cadence: WatchCadence;
+  status: WatchStatus;
+  /**
+   * ISO date this source was last checked for new measures. Null means never
+   * checked in a published review cycle — it is not a claim of freshness.
+   */
+  lastCheckedAt: string | null;
+  notes?: string | null;
 };
 
 export type FramingClaim = {
