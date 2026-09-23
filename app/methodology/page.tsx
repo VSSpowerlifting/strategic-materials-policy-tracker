@@ -21,7 +21,14 @@ import {
 import type { JurisdictionCode } from "@/lib/types";
 import { site } from "@/lib/site";
 import { formatDate } from "@/lib/format";
-import { getAllEvents, getDatasetSummary } from "@/lib/data";
+import { getAllControlMeasures, getAllEvents, getAllFinancialCommitments, getDatasetSummary } from "@/lib/data";
+import {
+  capitalSourceLabels,
+  controlStatusLabels,
+  financialStatusLabels,
+  valueRoleLabels,
+} from "@/lib/labels";
+import { CAPITAL_SOURCES, CONTROL_STATUSES, FINANCIAL_STATUSES, VALUE_ROLES } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -36,9 +43,53 @@ const TOC = [
   ["provenance", "Provenance and coverage"],
   ["labels", "Label definitions"],
   ["framing-method", "How framing is assigned"],
+  ["capital-counting", "Capital & Control: counting rules"],
   ["limitations", "Limitations & disclaimer"],
   ["versions", "Version history"],
 ] as const;
+
+const VALUE_ROLE_DEFS: Record<(typeof VALUE_ROLES)[number], string> = {
+  commitment: "Money, or a money-like promise, committed to a named recipient or project. The only role ever summed.",
+  program_envelope: "The ceiling of a programme, fund or facility that awards are drawn from.",
+  budget_appropriation: "Money set aside in a budget or allocation.",
+  lending_authority: "A ceiling on what a lender may lend or guarantee.",
+  expected_co_investment: "Money a government expects others to invest.",
+  private_financing: "Commercial capital raised alongside public money.",
+  recipient_own_funds: "The recipient's own contribution.",
+  total_project_cost: "The value of a project or pipeline, whoever pays for it.",
+};
+
+const CAPITAL_SOURCE_DEFS: Record<(typeof CAPITAL_SOURCES)[number], string> = {
+  public: "A government, ministry or state agency.",
+  public_enterprise: "A state-owned company or fund, such as the UK National Wealth Fund.",
+  mixed_vehicle: "A joint public-private vehicle whose public share is not stated.",
+  private: "Commercial lenders, investors or the recipient.",
+  not_stated: "The source does not say who provides the capital.",
+};
+
+const FINANCIAL_STATUS_DEFS: Record<(typeof FINANCIAL_STATUSES)[number], string> = {
+  announced: "Publicly announced; no decision or agreement is stated.",
+  authorized: "Legal or budgetary authority exists, e.g. an enacted statute or cabinet approval.",
+  allocated: "Assigned to the purpose, e.g. in a budget.",
+  decided: "The provider has decided to invest, lend or award, including a conditional commitment.",
+  contracted: "A binding agreement has been executed.",
+  partially_disbursed: "Some of the money has been paid out.",
+  disbursed: "The money has been paid out.",
+  withdrawn: "The commitment was withdrawn.",
+  not_stated: "The source states no status.",
+};
+
+const CONTROL_STATUS_DEFS: Record<(typeof CONTROL_STATUSES)[number], string> = {
+  announced: "Announced or deployed without a stated legal effective date.",
+  scheduled: "Adopted, with a stated future effective date.",
+  in_force: "Legally in effect.",
+  suspended: "Adopted but paused, usually until a stated date.",
+  expired: "Lapsed at the end of its stated term.",
+  revoked: "Repealed or withdrawn.",
+  investigation: "An inquiry that imposes no restriction yet.",
+  concluded: "An inquiry that has ended with a finding or report; any measure that follows is its own record.",
+  not_stated: "The source states no status.",
+};
 
 const DEFS: Record<string, Record<string, string>> = {
   policyStatus: {
@@ -217,7 +268,7 @@ export default function MethodologyPage() {
                 id="capital-control"
                 className="scroll-mt-20 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted"
               >
-                Capital &amp; Control (in development)
+                Capital &amp; Control
               </h3>
               <p>
                 Version 0.5 extends the model so that one announcement can hold the
@@ -287,9 +338,15 @@ export default function MethodologyPage() {
                 </li>
               </ul>
               <p>
-                At this stage the model is in place but holds no data: no financial
-                commitments or control measures are published yet. They will be
-                added as each is verified against its sources.
+                The dataset now holds {summary.financialCommitments} financial
+                commitments and {summary.controlMeasures} control clauses, across{" "}
+                {new Set([...getAllFinancialCommitments(), ...getAllControlMeasures()].map((r) => r.eventId)).size}{" "}
+                events, each verified field by field against its sources. They are
+                browsable on <Link href="/capital" className="text-accent hover:text-accent-strong">Capital</Link>,{" "}
+                <Link href="/controls" className="text-accent hover:text-accent-strong">Controls</Link> and{" "}
+                <Link href="/interplay" className="text-accent hover:text-accent-strong">Capital × Control</Link>; how
+                figures are added up is set out under{" "}
+                <a href="#capital-counting" className="text-accent hover:text-accent-strong">counting rules</a>.
               </p>
             </div>
           </section>
@@ -420,6 +477,84 @@ export default function MethodologyPage() {
           </section>
 
           <section className="space-y-3">
+            <H2 id="capital-counting">Capital &amp; Control: counting rules</H2>
+            <p>
+              Every figure on the Capital and Controls pages, in the summary API and in
+              the exports is derived by one module from the seed records, under these
+              rules. They exist because the commonest error in public reporting on
+              industrial policy is adding up numbers that are not the same kind of
+              thing.
+            </p>
+            <ul className="space-y-2 text-muted">
+              <li>
+                · <strong className="text-foreground">Per currency, never converted.</strong> Totals are
+                shown separately for each currency the sources use. No exchange rate is applied anywhere.
+              </li>
+              <li>
+                · <strong className="text-foreground">One value role at a time.</strong> Only rows whose
+                value role is &ldquo;commitment&rdquo; are ever summed. Envelopes, appropriations and
+                lending authorities are listed, never totalled: two envelopes can share a drawdown (the
+                Australian Reserve&apos;s A$1 billion for transactions is both part of the Reserve and
+                drawn from the Critical Minerals Facility), and an envelope is not money committed to
+                anyone.
+              </li>
+              <li>
+                · <strong className="text-foreground">No part is counted with its package.</strong> A row
+                that is part of, or drawn from, another row in the same total is left out of it and named
+                beside the total. If two counted rows were ever to share a descendant, the total for that
+                currency is withheld and the overlap shown instead.
+              </li>
+              <li>
+                · <strong className="text-foreground">Public means public.</strong> &ldquo;Public
+                commitments&rdquo; are rows with public or public-enterprise capital. Private financing, a
+                recipient&apos;s own funds, expected co-investment and total project cost are shown apart,
+                and so are joint public-private vehicles whose public share is not stated.
+              </li>
+              <li>
+                · <strong className="text-foreground">Ceilings are not sums.</strong> A figure stated
+                &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; is added only to figures
+                of the same qualifier, and shown apart from exact figures.
+              </li>
+              <li>
+                · <strong className="text-foreground">Status is shown, not filtered away.</strong> A
+                public-commitment total spans every financial status from announced to disbursed; each
+                total shows its status mix, and every row carries its own. A conditional commitment or a
+                non-binding letter of intent is labelled as such in its status note.
+              </li>
+              <li>
+                · <strong className="text-foreground">No figure without a figure.</strong> A price floor,
+                an offtake, a tax offset or a procurement right with no stated total is listed with its
+                terms, never valued. Nothing is estimated.
+              </li>
+              <li>
+                · <strong className="text-foreground">Dates mean the data&apos;s date.</strong> Control
+                statuses and the days left on a suspension are evaluated on the date the data was last
+                checked ({formatDate(site.lastUpdated)}), not on the day a page is read. What follows a
+                stated end date is recorded only once an official source states it.
+              </li>
+              <li>
+                · <strong className="text-foreground">Time charts show sequence, not causation.</strong> The
+                Capital × Control chronology places financial and control status changes side by side; it
+                draws no link between them that a source does not state.
+              </li>
+              <li>
+                · Arithmetic on amounts is exact decimal arithmetic; no amount passes through binary
+                floating point.
+              </li>
+            </ul>
+            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Value roles</h3>
+            <DefList
+              items={VALUE_ROLES.map((r) => [valueRoleLabels[r], VALUE_ROLE_DEFS[r]])}
+            />
+            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Capital sources</h3>
+            <DefList items={CAPITAL_SOURCES.map((c) => [capitalSourceLabels[c], CAPITAL_SOURCE_DEFS[c]])} />
+            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Financial statuses</h3>
+            <DefList items={FINANCIAL_STATUSES.map((s) => [financialStatusLabels[s], FINANCIAL_STATUS_DEFS[s]])} />
+            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Control statuses</h3>
+            <DefList items={CONTROL_STATUSES.map((s) => [controlStatusLabels[s], CONTROL_STATUS_DEFS[s]])} />
+          </section>
+
+          <section className="space-y-3">
             <H2 id="limitations">Limitations &amp; disclaimer</H2>
             <ul className="space-y-2 text-muted">
               <li>
@@ -456,7 +591,18 @@ export default function MethodologyPage() {
             <ul className="space-y-2 text-muted">
               <li>
                 <span className="font-mono text-foreground">{site.version}</span> —{" "}
-                {formatDate(site.lastUpdated)}. Expanded multi-actor seed: nine events
+                {formatDate(site.lastUpdated)}. Capital &amp; Control: {summary.financialCommitments} financial
+                commitments and {summary.controlMeasures} control clauses, verified field by field against
+                official primaries and binding filings; the Capital, Controls and Capital × Control pages; the
+                counting rules above; new JSON endpoints and CSV exports. Three events added (the US–Australia
+                critical minerals Framework, the OSC loans to Vulcan Elements and ReElement, the US active anode
+                material AD/CVD investigations) and Proclamation 11001, the outcome of the section 232
+                investigation. New vocabulary values: a policy status &ldquo;ended&rdquo;, an instrument
+                &ldquo;several instruments, split not stated&rdquo;, a control status &ldquo;investigation
+                concluded&rdquo; and a measure type &ldquo;trade negotiation mandate&rdquo;.
+              </li>
+              <li>
+                <span className="font-mono text-foreground">Earlier releases</span> — Expanded multi-actor seed: nine events
                 added since v0.1.0 so all six actors are event-coded — the US DoD–MP
                 Materials partnership, Australia&apos;s Critical Minerals Strategic
                 Reserve, Japan&apos;s JOGMEC/JARE investment in Lynas, Canada&apos;s

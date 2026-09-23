@@ -119,10 +119,14 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
   export route handlers can be `force-static`).
 - `lib/site.ts` — name, nav, version, last-updated, scope.
 - `data/seed/*.json` — events, framing, materials, jurisdictions, sources,
-  watchlist, and (v0.5, empty until backfilled) financial-commitments and
-  control-measures.
+  watchlist, and (v0.5) financial-commitments and control-measures.
+- `lib/capital-control.ts` — every derived Capital & Control figure (counting
+  rules, statuses as of `site.lastUpdated`, relationship graph, summaries);
+  `lib/decimal.ts` holds exact decimal arithmetic; `lib/capital-control-summary.ts`
+  backs `/api/v1/capital-control/summary`. Never total money anywhere else.
 - `components/` — UI primitives (`ui/`) and domain components. `FramingQuote` is
-  the signature element; `EventsExplorer` / `TimelineView` are the client filters.
+  the signature element; `EventsExplorer` / `TimelineView` are the client filters;
+  `components/capital/` holds the Capital & Control rows, explorers and SVG charts.
 
 ## Conventions
 

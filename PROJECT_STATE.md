@@ -1,8 +1,77 @@
 # Project state
 
-_Last updated: 2026-09-23 (v0.5 Capital & Control: Phases 0 and 1 merged; Phase 2 runtime validation on branch `feat/capital-control-validation`)._
+_Last updated: 2026-09-23 (v0.5 Capital & Control platform release on branch `feat/capital-control-platform`)._
 
-## Latest session: v0.5 Capital & Control — Phase 2 runtime validation
+## Latest session: v0.5 Capital & Control — platform release (Phase 3)
+
+Branch `feat/capital-control-platform`, from `main` at `f55762d` (the Phase 2
+merge). The worktree lives at
+`/Users/benjaminyang/.claude/worktrees/smpt-platform-launch-d4e51a/smpt-capital-control`
+(moved there from `strategic-materials-policy-tracker-worktrees/` because the
+session's write guard only allows edits under its own worktree path).
+
+### Data (all verified against official primaries or binding filings, 2026-09-23)
+
+- 39 financial commitments and 33 control clauses across 26 events. Counts
+  are derived on /coverage, /data and /methodology; do not pin them here.
+- Backfilled onto existing events: DoD–MP Materials (8-K and OSC release,
+  read in a browser; OSC notes corrected), OBBBA OSC credit subsidy and
+  lending authority, Australia's CMSR and Critical Minerals Facility, the
+  CMPTI tax offset, Canada's CMS envelope and CMRDD awards, India's NCMM,
+  the UK CMS fund and NWF–Tungsten West, JARE–Lynas, JOGMEC–Lofdal; MOFCOM
+  Nos. 23/2023, 39/2023, 33/2024, 46/2024 (with No. 72/2025 suspension),
+  10/2025, 18/2025, 61/2025 (six clauses) and 70/2025, Decree 785, the
+  anti-smuggling campaign, the three ICA divestiture orders, the DoD–MP
+  contractual covenants and the EO 14272 section 232 investigation.
+- New events: Proclamation 11001 (section 232 outcome, 14 Jan 2026); the
+  US–Australia critical minerals Framework (20 Oct 2025); OSC's conditional
+  loans to Vulcan Elements and ReElement (21 Nov 2025); the US active anode
+  material AD/CVD investigations (ended with a negative ITC determination,
+  31 Mar 2026). Six new sources, three framing anchors.
+
+### Vocabulary changes (flagged for maintainer review in the PR)
+
+- `POLICY_STATUSES` + `ended` (used by the AD/CVD event).
+- `FINANCIAL_INSTRUMENTS` + `mixed` (one amount over several named
+  instruments, no split: CMF, CMSR, NWF package, US–AU envelopes).
+- `CONTROL_STATUSES` + `concluded` (the EO 14272 and AD/CVD investigations).
+- `CONTROL_MEASURE_TYPES` + `trade_negotiation` (Proclamation 11001).
+
+### Platform
+
+- `lib/capital-control.ts` (+ `lib/decimal.ts`, `lib/capital-control-summary.ts`):
+  counting rules, exact decimals, relationship graph, statuses as of
+  `site.lastUpdated`, chronology, clocks, material interplay, summaries.
+- Pages: `/capital`, `/capital/[id]`, `/controls`, `/controls/[id]`,
+  `/interplay`; Capital & Control sections on event, material, actor and
+  home pages; search indexes both entities; methodology gains
+  `#capital-counting` with definitions; nav adds Capital, Controls,
+  Interplay (Saved and About move to the footer via `secondaryNav`).
+- API: `/api/v1/financial-commitments[/id]`, `/api/v1/control-measures[/id]`,
+  `/api/v1/capital-control/summary`. Exports: four new CSVs; the dataset
+  JSON carries both entities and the summary.
+- Tests: `tests/capital-control-analytics.test.ts` (counting rules on
+  fixtures and on the corpus, decimals, statuses over time, exports); the
+  schema, validation and search tests were updated for a populated corpus.
+
+### Open items
+
+- Commerce's final AD/CVD determinations and any termination notice were
+  not read; the event cites only the initiations and the ITC final notice.
+- The MOFCOM No. 61 Annex 1 (.wps) is still unread; the extraterritorial
+  clauses say so.
+- Whether MP drew the $350 million option from DoD or the banks is not
+  recorded; no later primary in the corpus states it.
+- The No. 61 suspension ends 10 Nov 2026 and No. 46's Item 2 suspension
+  27 Nov 2026: the validator will warn after those dates until a source
+  records what followed.
+- `graphify update .` not run.
+
+Next action: review and merge the Phase 3 PR; then the next expansion
+(EU RESourceEU and CRMA strategic projects, Japan ESPA support, Canadian SIF
+awards, China's Nos. 55–58 and 62).
+
+## Previous session: v0.5 Capital & Control — Phase 2 runtime validation
 
 Branch `feat/capital-control-validation`, from `main` at `060ab08` (the Phase 1
 merge). Validation infrastructure only: no Capital & Control records, no API,
