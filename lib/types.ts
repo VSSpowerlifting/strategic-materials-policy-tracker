@@ -318,8 +318,8 @@ export type Source = {
 // Ground rules the model is built around (validator enforcement is Phase 2):
 //  - Original currency is authoritative. Amounts are decimal strings, never JS
 //    numbers, and nothing here converts, deflates or totals them.
-//  - Unlike instruments and value roles are never added together, and a parent
-//    envelope and the awards drawn from it are never both counted.
+//  - Unlike instruments and value roles are never added together, and a
+//    commitment is never counted together with one it is part of or drawn from.
 //  - Private capital, a recipient's own funds and total project cost are
 //    recorded so they can be kept out of public-support figures.
 //  - Every important field names the source that supports it (`evidence`). A
@@ -469,6 +469,17 @@ export const OUTCOME_METRICS = [
 export const OUTCOME_ATTRIBUTIONS = ["government", "recipient", "third_party"] as const;
 
 /**
+ * How a commitment relates to another. A link is read from the record that
+ * holds it, towards the commitment it names:
+ *  - "part_of"    — this commitment is a component of that one, e.g. one
+ *                   element of a reserve or package.
+ *  - "drawn_from" — this commitment is paid out of that one, e.g. an award from
+ *                   a facility, envelope, appropriation or lending authority.
+ * There are no inverse types, so every link has one spelling.
+ */
+export const FINANCIAL_RELATIONSHIP_TYPES = ["part_of", "drawn_from"] as const;
+
+/**
  * How directly a source supports the fields it is cited for. There is no "not
  * stated" level: a fact the sources do not state is null or an empty array.
  */
@@ -480,11 +491,12 @@ export const FINANCIAL_EVIDENCE_FIELDS = [
   "value_role",
   "capital_source",
   "amount",
-  "parent", // parentId
+  "relationships",
   "provider", // provider and providerJurisdiction
   "legal_authority",
   "recipient",
-  "project", // project and facility
+  "project",
+  "facility",
   "location",
   "stages", // stages and stageAllocation
   "materials", // materialIds, materialAttribution and untrackedMaterialsAsStated
@@ -536,8 +548,8 @@ export const TARGET_SCOPES = [
   "all_jurisdictions", // applies whatever the destination or origin
   "named_jurisdictions",
   "named_entities", // named companies, persons or listed parties
-  "end_users", // categories of user, e.g. military end users
-  "end_uses", // categories of use, e.g. weapons of mass destruction
+  "end_users", // categories of user, worded in targetEndUsersAsStated
+  "end_uses", // categories of use, worded in targetEndUsesAsStated
   "domestic_operators", // enterprises inside the issuing jurisdiction
 ] as const;
 
@@ -564,7 +576,7 @@ export const CONTROL_EVIDENCE_FIELDS = [
   "measure_type",
   "direction",
   "clause",
-  "targets", // targetScopes, targetJurisdictions and targetEntities
+  "targets", // every target* field, including the stated end users and end uses
   "materials", // materialIds, materialAttribution and untrackedMaterialsAsStated
   "product_scope",
   "product_codes",
@@ -586,6 +598,7 @@ export type CurrencyBasis = (typeof CURRENCY_BASES)[number];
 export type TermKind = (typeof TERM_KINDS)[number];
 export type OutcomeMetric = (typeof OUTCOME_METRICS)[number];
 export type OutcomeAttribution = (typeof OUTCOME_ATTRIBUTIONS)[number];
+export type FinancialRelationshipType = (typeof FINANCIAL_RELATIONSHIP_TYPES)[number];
 export type EvidenceLevel = (typeof EVIDENCE_LEVELS)[number];
 export type FinancialEvidenceField = (typeof FINANCIAL_EVIDENCE_FIELDS)[number];
 export type ControlMeasureType = (typeof CONTROL_MEASURE_TYPES)[number];
@@ -664,8 +677,8 @@ export type ControlStatusEntry = StatusEntry<ControlStatus> & {
  * Field-level provenance: one source, the fields of one record it supports,
  * and how directly it supports them. A record's sources are the distinct
  * `sourceId`s of its evidence; there is no separate `sourceIds` list to drift.
- * Terms, outcomes and status entries also name their own source, which must
- * appear here under the matching field.
+ * Terms, outcomes, status entries and relationships also name their own
+ * source, which must appear here under the matching field.
  */
 export type EvidenceReference<F extends string> = {
   sourceId: string;
@@ -683,8 +696,10 @@ export type ControlEvidence = EvidenceReference<ControlEvidenceField>;
 /**
  * One structured term of an instrument: a rate, cap, floor, share, duration
  * or covenant. Figures are decimal strings. Money in a term carries its own
- * currency, and `unit` names what the figure is expressed in or per:
- * "percent", "years", "per_kg", "per_year", "tonnes_per_year".
+ * currency, and `unit` says what the figure is expressed in or per, as the
+ * source gives it: "%", "years", "per kg", "tonnes per annum". Units are free
+ * text on purpose; a controlled list waits until repeated real values show a
+ * stable set.
  */
 export type InstrumentTerm = {
   kind: TermKind;
@@ -706,6 +721,7 @@ export type StatedOutcome = {
   /** Decimal string for a quantity; null for "target_date" or when no figure is stated. */
   value: DecimalString | null;
   qualifier: ValueQualifier | null;
+  /** Free text, as the source gives it (see InstrumentTerm). */
   unit: string | null;
   /** For "target_date": an ISO date or partial date ("2027", "2027-03"); otherwise null. */
   targetDate: string | null;
@@ -713,6 +729,24 @@ export type StatedOutcome = {
   asStated: string;
   statedBy: OutcomeAttribution;
   sourceId: string;
+  note?: string | null;
+};
+
+/**
+ * A typed link from this commitment to another, which may belong to a
+ * different event. Read it from the record that holds it: "part_of" means this
+ * commitment is a component of `commitmentId`; "drawn_from" means it is paid
+ * out of `commitmentId`. A commitment can hold several links of both kinds and
+ * is never counted together with a commitment it links to. Each link names
+ * the source that states it.
+ */
+export type FinancialRelationship = {
+  /** The other commitment: "fin-...". */
+  commitmentId: string;
+  relationship: FinancialRelationshipType;
+  sourceId: string;
+  /** Pinpoint within the source, e.g. "para. 4". */
+  locator?: string | null;
   note?: string | null;
 };
 
@@ -727,11 +761,11 @@ export type FinancialCommitment = {
   /** The event that announces or cites this commitment. */
   eventId: string;
   /**
-   * The envelope, appropriation or lending authority this commitment is drawn
-   * from. It may belong to a different event. A parent and its children are
-   * never both counted.
+   * What this commitment is part of or drawn from, in this event or another;
+   * empty when the sources state neither. One amount can be part of a reserve
+   * and drawn from a separate facility at the same time.
    */
-  parentId: string | null;
+  relationships: FinancialRelationship[];
   instrument: FinancialInstrument;
   valueRole: ValueRole;
   capitalSource: CapitalSource;
@@ -792,6 +826,13 @@ export type ControlMeasure = {
   targetJurisdictions: CountryCode[];
   /** Named companies, persons or lists, as the source names them. */
   targetEntities: string[];
+  /**
+   * Classes of end user the measure targets, named or described in the
+   * source's words, e.g. "military end users". Not a controlled vocabulary.
+   */
+  targetEndUsersAsStated: string[];
+  /** End uses the measure targets, in the source's words. Not a controlled vocabulary. */
+  targetEndUsesAsStated: string[];
   /** Tracked materials only: a subset of the parent event's affectedMaterialIds. */
   materialIds: string[];
   materialAttribution: MaterialAttribution;

@@ -14,6 +14,7 @@ import type {
   EvidenceLevel,
   FinancialEvidenceField,
   FinancialInstrument,
+  FinancialRelationshipType,
   FinancialStatus,
   FramingCategory,
   ImplementationStatus,
@@ -326,6 +327,11 @@ export const outcomeAttributionLabels: Record<OutcomeAttribution, string> = {
   third_party: "Stated by a third party",
 };
 
+export const financialRelationshipTypeLabels: Record<FinancialRelationshipType, string> = {
+  part_of: "Part of",
+  drawn_from: "Drawn from",
+};
+
 export const evidenceLevelLabels: Record<EvidenceLevel, string> = {
   explicit: "Explicit",
   ambiguous: "Ambiguous",
@@ -336,11 +342,12 @@ export const financialEvidenceFieldLabels: Record<FinancialEvidenceField, string
   value_role: "Value role",
   capital_source: "Capital source",
   amount: "Amount",
-  parent: "Parent commitment",
+  relationships: "Related commitments",
   provider: "Provider",
   legal_authority: "Legal authority",
   recipient: "Recipient",
-  project: "Project or facility",
+  project: "Project",
+  facility: "Facility",
   location: "Location",
   stages: "Supply-chain stages",
   materials: "Materials",

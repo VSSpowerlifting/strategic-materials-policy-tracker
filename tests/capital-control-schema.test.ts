@@ -16,6 +16,7 @@ import {
   FINANCIAL_COMMITMENT_ID_PREFIX,
   FINANCIAL_EVIDENCE_FIELDS,
   FINANCIAL_INSTRUMENTS,
+  FINANCIAL_RELATIONSHIP_TYPES,
   FINANCIAL_STATUSES,
   IMPLEMENTATION_STATUSES,
   MATERIAL_ATTRIBUTIONS,
@@ -31,10 +32,13 @@ import {
   VALUE_ROLES,
 } from "@/lib/types";
 import type {
+  ControlEvidenceField,
   ControlMeasure,
   ControlStatusEntry,
   EvidenceReference,
   FinancialCommitment,
+  FinancialEvidenceField,
+  FinancialRelationship,
   FinancialStatusEntry,
   InstrumentTerm,
   MonetaryAmount,
@@ -51,6 +55,7 @@ import {
   evidenceLevelLabels,
   financialEvidenceFieldLabels,
   financialInstrumentLabels,
+  financialRelationshipTypeLabels,
   financialStatusLabels,
   implementationStatusLabels,
   materialAttributionLabels,
@@ -107,6 +112,7 @@ const VOCABULARIES: [name: string, values: readonly string[], labels: Record<str
   ["TERM_KINDS", TERM_KINDS, termKindLabels],
   ["OUTCOME_METRICS", OUTCOME_METRICS, outcomeMetricLabels],
   ["OUTCOME_ATTRIBUTIONS", OUTCOME_ATTRIBUTIONS, outcomeAttributionLabels],
+  ["FINANCIAL_RELATIONSHIP_TYPES", FINANCIAL_RELATIONSHIP_TYPES, financialRelationshipTypeLabels],
   ["EVIDENCE_LEVELS", EVIDENCE_LEVELS, evidenceLevelLabels],
   ["FINANCIAL_EVIDENCE_FIELDS", FINANCIAL_EVIDENCE_FIELDS, financialEvidenceFieldLabels],
   ["CONTROL_MEASURE_TYPES", CONTROL_MEASURE_TYPES, controlMeasureTypeLabels],
@@ -181,8 +187,9 @@ test("the vocabularies carry every value the Capital & Control model requires", 
   ]);
   requires("EVIDENCE_LEVELS", EVIDENCE_LEVELS, ["explicit", "ambiguous"]);
   requires("FINANCIAL_EVIDENCE_FIELDS", FINANCIAL_EVIDENCE_FIELDS, [
-    "instrument", "value_role", "capital_source", "amount", "provider", "recipient", "project",
-    "location", "stages", "materials", "status", "terms", "outcomes", "legal_authority",
+    "instrument", "value_role", "capital_source", "amount", "relationships", "provider",
+    "recipient", "project", "facility", "location", "stages", "materials", "status", "terms",
+    "outcomes", "legal_authority",
   ]);
   requires("CONTROL_MEASURE_TYPES", CONTROL_MEASURE_TYPES, [
     "export_licensing", "export_prohibition", "extraterritorial_licensing", "end_use_restriction",
@@ -276,18 +283,19 @@ test("Phase 1: every event getter returns an empty array", () => {
 
 // --- Public surface -----------------------------------------------------------
 
-// The Capital & Control foundation adds no public records. These are the public
-// counts on main when it landed (4d18c3b). A change that promotes or removes
-// public records must update this baseline deliberately, in the same PR.
-test("existing public counts are unchanged by the Capital & Control foundation", () => {
-  assert.deepEqual(getDatasetSummary(), {
-    events: 32,
-    framingClaims: 36,
-    materials: 11,
-    jurisdictions: 8,
-    sources: 56,
-  });
+// The Capital & Control foundation publishes no records and no counts. Public
+// counts are derived here from the seed files, never pinned, so ordinary corpus
+// growth cannot fail this schema test.
+test("public counts derive from the existing seeds; the empty Capital & Control seeds add none", () => {
   const seedLength = (file: string) => (readJson(`data/seed/${file}`) as unknown[]).length;
+  // Exactly these keys: a Capital & Control count here would change the public contract.
+  assert.deepEqual(getDatasetSummary(), {
+    events: seedLength("events.json"),
+    framingClaims: seedLength("framing.json"),
+    materials: seedLength("materials.json"),
+    jurisdictions: seedLength("jurisdictions.json"),
+    sources: seedLength("sources.json"),
+  });
   assert.equal(getAllEvents().length, seedLength("events.json"));
   assert.equal(getAllSources().length, seedLength("sources.json"));
   assert.equal(getAllFramingClaims().length, seedLength("framing.json"));
@@ -318,8 +326,19 @@ test("no candidate data can enter the loaders or the public build path", () => {
 
   for (const file of [COMMITMENTS_FILE, CONTROLS_FILE])
     assert.ok(!/\bcand-/.test(read(file)), `${file} carries a candidate id`);
-  for (const r of [...getAllFinancialCommitments(), ...getAllControlMeasures()])
-    assert.ok(!r.id.startsWith("cand-"), `candidate id reached a loader: ${r.id}`);
+  // Nothing a public loader returns names a candidate, as an id or a reference.
+  const publicRecords = [
+    ...getAllEvents(),
+    ...getAllSources(),
+    ...getAllFramingClaims(),
+    ...getAllMaterials(),
+    ...getAllJurisdictions(),
+    ...getAllWatchedSources(),
+    ...getAllFinancialCommitments(),
+    ...getAllControlMeasures(),
+  ];
+  assert.ok(publicRecords.length > 0);
+  assert.ok(!/\bcand-/.test(JSON.stringify(publicRecords)), "a candidate id reached a public loader");
 });
 
 test("fin- and ctl- are reserved, documented, and collide with no existing id", () => {
@@ -397,4 +416,158 @@ test("money and figures are strings, statuses are histories, and no derivable fi
     ],
     [false, false, false, false, false],
   );
+});
+
+// --- Field-level provenance -------------------------------------------------
+//
+// The evidence category that covers each substantive field. `id` and `eventId`
+// are structural, `evidence` is the provenance itself and `notes` is editorial.
+// Keyed by the entity's own fields: a field no category covers, or a mapping to
+// a category that does not exist, stops compiling; a category that covers no
+// field fails the test below.
+
+const COMMITMENT_FIELD_EVIDENCE: Record<
+  Exclude<keyof FinancialCommitment, "id" | "eventId" | "evidence" | "notes">,
+  FinancialEvidenceField
+> = {
+  relationships: "relationships",
+  instrument: "instrument",
+  valueRole: "value_role",
+  capitalSource: "capital_source",
+  amount: "amount",
+  provider: "provider",
+  providerJurisdiction: "provider",
+  legalAuthority: "legal_authority",
+  recipient: "recipient",
+  project: "project",
+  facility: "facility",
+  locations: "location",
+  stages: "stages",
+  stageAllocation: "stages",
+  materialIds: "materials",
+  materialAttribution: "materials",
+  untrackedMaterialsAsStated: "materials",
+  financialStatusHistory: "status",
+  implementationStatusHistory: "status",
+  terms: "terms",
+  outcomes: "outcomes",
+};
+
+const CONTROL_FIELD_EVIDENCE: Record<
+  Exclude<keyof ControlMeasure, "id" | "eventId" | "evidence" | "notes">,
+  ControlEvidenceField
+> = {
+  measureType: "measure_type",
+  direction: "direction",
+  clause: "clause",
+  targetScopes: "targets",
+  targetJurisdictions: "targets",
+  targetEntities: "targets",
+  targetEndUsersAsStated: "targets",
+  targetEndUsesAsStated: "targets",
+  materialIds: "materials",
+  materialAttribution: "materials",
+  untrackedMaterialsAsStated: "materials",
+  productScopeAsStated: "product_scope",
+  productCodes: "product_codes",
+  legalBasisEventIds: "legal_basis",
+  legalBasisAsStated: "legal_basis",
+  modifiesMeasureIds: "modified_measures",
+  modifiesExternalInstruments: "modified_measures",
+  statusHistory: "status",
+};
+
+test("every substantive field has an evidence category, and every category covers a field", () => {
+  const categories = (map: Record<string, string>) => [...new Set(Object.values(map))].sort();
+  assert.deepEqual(categories(COMMITMENT_FIELD_EVIDENCE), [...FINANCIAL_EVIDENCE_FIELDS].sort());
+  assert.deepEqual(categories(CONTROL_FIELD_EVIDENCE), [...CONTROL_EVIDENCE_FIELDS].sort());
+});
+
+// --- Relationships between commitments --------------------------------------
+
+test("a commitment can be part of one commitment and drawn from another at once", () => {
+  // A type-level fixture, never a seed record: the shape of the Australian
+  // reserve case, where one amount is a component of a reserve and is also paid
+  // out of a separate facility. Ids and the source are placeholders.
+  const component: FinancialCommitment = {
+    id: "fin-example-component",
+    eventId: "evt-example",
+    relationships: [
+      { commitmentId: "fin-example-reserve", relationship: "part_of", sourceId: "src-example" },
+      {
+        commitmentId: "fin-example-facility",
+        relationship: "drawn_from",
+        sourceId: "src-example",
+        locator: "para. 2",
+      },
+    ],
+    instrument: "unspecified",
+    valueRole: "commitment",
+    capitalSource: "public",
+    amount: null,
+    provider: null,
+    providerJurisdiction: null,
+    legalAuthority: null,
+    recipient: null,
+    project: null,
+    facility: null,
+    locations: [],
+    stages: [],
+    stageAllocation: "not_stated",
+    materialIds: [],
+    materialAttribution: "not_stated",
+    untrackedMaterialsAsStated: [],
+    financialStatusHistory: [],
+    implementationStatusHistory: [],
+    terms: [],
+    outcomes: [],
+    evidence: [{ sourceId: "src-example", supports: ["relationships"], evidence: "explicit" }],
+  };
+  const links = component.relationships;
+  assert.equal(new Set(links.map((r) => r.relationship)).size, 2, "both link types on one record");
+  assert.equal(new Set(links.map((r) => r.commitmentId)).size, 2, "pointing at two different commitments");
+  assert.deepEqual(JSON.parse(JSON.stringify(component)), component, "must survive the seed files' JSON round trip");
+
+  // A link is read one way, from the record that holds it, so there is no inverse type.
+  assert.deepEqual([...FINANCIAL_RELATIONSHIP_TYPES].sort(), ["drawn_from", "part_of"]);
+  // Typed links replace the single parent link; there is no untyped list of parent ids.
+  const linkIsTyped: IsExactly<FinancialRelationship["relationship"], "part_of" | "drawn_from"> = true;
+  const linkNamesSource: HasKey<FinancialRelationship, "sourceId"> = true;
+  const hasParentId: HasKey<FinancialCommitment, "parentId"> = false;
+  const hasParentIds: HasKey<FinancialCommitment, "parentIds"> = false;
+  assert.deepEqual([linkIsTyped, linkNamesSource, hasParentId, hasParentIds], [true, true, false, false]);
+});
+
+// --- Control targets --------------------------------------------------------
+
+test("a control measure keeps the end users and end uses it targets in the source's words", () => {
+  // A type-level fixture, never a seed record. Ids and the source are placeholders.
+  const measure: ControlMeasure = {
+    id: "ctl-example-end-use",
+    eventId: "evt-example",
+    measureType: "end_use_restriction",
+    direction: "export",
+    clause: null,
+    targetScopes: ["end_users", "end_uses"],
+    targetJurisdictions: [],
+    targetEntities: [],
+    targetEndUsersAsStated: ["military end users"],
+    targetEndUsesAsStated: ["use in weapons of mass destruction"],
+    materialIds: [],
+    materialAttribution: "not_stated",
+    untrackedMaterialsAsStated: [],
+    productScopeAsStated: null,
+    productCodes: [],
+    legalBasisEventIds: [],
+    legalBasisAsStated: null,
+    modifiesMeasureIds: [],
+    modifiesExternalInstruments: [],
+    statusHistory: [],
+    evidence: [{ sourceId: "src-example", supports: ["targets"], evidence: "explicit" }],
+  };
+  assert.deepEqual(JSON.parse(JSON.stringify(measure)), measure, "must survive the seed files' JSON round trip");
+  // Source wording, not a controlled vocabulary of end-user or end-use categories.
+  const endUsersAreWording: IsExactly<ControlMeasure["targetEndUsersAsStated"], string[]> = true;
+  const endUsesAreWording: IsExactly<ControlMeasure["targetEndUsesAsStated"], string[]> = true;
+  assert.deepEqual([endUsersAreWording, endUsesAreWording], [true, true]);
 });

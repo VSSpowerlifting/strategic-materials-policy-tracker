@@ -85,11 +85,19 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
    `ControlMeasure` (`ctl-*`) are child rows of an event; `fc-` stays with framing
    claims and `cand-` with candidates. Amounts are decimal strings in the source's
    original currency, with `amountAsStated` — never JS numbers, never converted.
-   Never add unlike instruments or value roles together, never count a parent
-   envelope and its awards together, and never present private capital or total
-   project cost as public support. Statuses are source-linked histories (the last
-   entry is current), every field's source goes in `evidence`, and one control
-   row covers one clause. No synthetic economic-security score.
+   Never add unlike instruments or value roles together, never count a
+   commitment together with one it is `part_of` or `drawn_from` (typed
+   `relationships`; one commitment can hold both), and never present private
+   capital or total project cost as public support. Statuses are source-linked
+   histories (the last entry is current), every field's source goes in
+   `evidence`, and one control row covers one clause. `unit` stays free text as
+   the source gives it until repeated real values show a stable set. A binding
+   securities filing or a recipient's official disclosure may support contract,
+   financing, capacity or implementation facts it states directly — never
+   government rationale or framing, an unstated government status, speculative
+   valuations, market-price estimates or unsupported projections — and stays
+   attributed to its speaker in `evidence` and `statedBy`. No synthetic
+   economic-security score.
 
 ## Architecture
 

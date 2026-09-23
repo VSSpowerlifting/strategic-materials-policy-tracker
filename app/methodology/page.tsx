@@ -244,8 +244,10 @@ export default function MethodologyPage() {
                   added into one figure.
                 </li>
                 <li>
-                  · A program envelope and the awards drawn from it are linked, and
-                  the two are never both counted.
+                  · A commitment records how it relates to larger ones: it can be
+                  part of a reserve or package, drawn from a facility or program
+                  envelope, or both at once. An amount is never counted both on its
+                  own and inside a commitment it is linked to.
                 </li>
                 <li>
                   · Private financing, a recipient&apos;s own funds and total project
@@ -262,6 +264,16 @@ export default function MethodologyPage() {
                   · Each important field names the source that supports it. Where the
                   sources do not state something, the field is left empty rather
                   than inferred.
+                </li>
+                <li>
+                  · A company&apos;s binding securities filing, or a recipient&apos;s
+                  own official disclosure, can support contract, financing, capacity
+                  or implementation facts that it states directly. It cannot, on its
+                  own, establish a government&apos;s rationale or framing, a status
+                  the government has not stated, a speculative valuation, a
+                  market-price estimate or an unsupported projection. What it
+                  supports stays visibly attributed to the company, not to the
+                  government.
                 </li>
                 <li>
                   · A control clause whose status differs from the rest of its
