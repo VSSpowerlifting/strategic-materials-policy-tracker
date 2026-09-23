@@ -15,17 +15,29 @@
  * Chinese or Japanese title can be searched in its own script.
  */
 import {
+  getAllControlMeasures,
   getAllEvents,
+  getAllFinancialCommitments,
   getAllFramingClaims,
   getAllJurisdictions,
   getAllMaterials,
   getAllSources,
   getAllWatchedSources,
 } from "./data";
-import { jurisdictionLabels, mechanismLabels, policyStatusLabels } from "./labels";
+import {
+  controlMeasureTypeLabels,
+  controlStatusLabels,
+  financialInstrumentLabels,
+  jurisdictionLabels,
+  mechanismLabels,
+  policyStatusLabels,
+  valueRoleLabels,
+} from "./labels";
+import { commitmentActor, controlIssuer, currentControlStatus, currentFinancialStatus } from "./capital-control";
+import { formatMoney } from "./decimal";
 import type { JurisdictionCode, Mechanism } from "./types";
 
-export const SEARCH_KINDS = ["event", "material", "actor", "framing", "source", "watched"] as const;
+export const SEARCH_KINDS = ["event", "capital", "control", "material", "actor", "framing", "source", "watched"] as const;
 export type SearchKind = (typeof SEARCH_KINDS)[number];
 
 export type SearchDoc = {
@@ -88,6 +100,73 @@ export function buildSearchIndex(): SearchDoc[] {
         e.mechanism.map((m) => mechanismLabels[m]).join(" "),
         e.affectedMaterialIds.join(" "),
       ),
+    });
+  }
+
+  // Capital & Control rows: indexed with their amounts as stated, parties,
+  // clauses, targets and source wording, so a document number, a company or
+  // a customs code finds the row itself, not only its event.
+  for (const c of getAllFinancialCommitments()) {
+    const actor = commitmentActor(c);
+    docs.push({
+      id: c.id,
+      kind: "capital",
+      title: `${financialInstrumentLabels[c.instrument]} · ${c.recipient ?? c.provider ?? c.id}`,
+      subtitle: `${actor ? jurisdictionLabels[actor] : "Not government capital"} · ${valueRoleLabels[c.valueRole]}${c.amount ? ` · ${c.amount.qualifier === "exact" ? "" : `${c.amount.qualifier.replace("_", " ")} `}${formatMoney(c.amount.value, c.amount.currency)}` : ""}`,
+      href: `/capital/${c.id}`,
+      date: c.financialStatusHistory.find((e) => e.date)?.date ?? null,
+      jurisdiction: actor,
+      mechanisms: null,
+      haystack: join(
+        c.id,
+        c.provider,
+        c.recipient,
+        c.project,
+        c.facility,
+        c.legalAuthority,
+        c.amount?.amountAsStated,
+        c.amount?.currency,
+        c.notes,
+        financialInstrumentLabels[c.instrument],
+        valueRoleLabels[c.valueRole],
+        currentFinancialStatus(c),
+        c.materialIds.join(" "),
+        c.untrackedMaterialsAsStated.join(" "),
+        c.terms.map((x) => x.asStated).join(" "),
+        c.locations.map((l) => l.asStated).join(" "),
+      ),
+    });
+  }
+
+  for (const m of getAllControlMeasures()) {
+    const issuer = controlIssuer(m);
+    docs.push({
+      id: m.id,
+      kind: "control",
+      title: `${controlMeasureTypeLabels[m.measureType]}${m.clause ? ` · ${m.clause}` : ""}`,
+      subtitle: `${jurisdictionLabels[issuer]} · ${controlStatusLabels[currentControlStatus(m)]}`,
+      href: `/controls/${m.id}`,
+      date: m.statusHistory.find((e) => e.date)?.date ?? null,
+      jurisdiction: issuer,
+      mechanisms: null,
+      haystack:
+        join(
+          m.id,
+          m.clause,
+          m.notes,
+          m.legalBasisAsStated,
+          controlMeasureTypeLabels[m.measureType],
+          m.targetEntities.join(" "),
+          m.targetJurisdictions.join(" "),
+          m.targetEndUsersAsStated.join(" "),
+          m.targetEndUsesAsStated.join(" "),
+          m.materialIds.join(" "),
+          m.untrackedMaterialsAsStated.join(" "),
+          m.productCodes.map((p) => p.code).join(" "),
+          m.modifiesExternalInstruments.join(" "),
+        ) +
+        " " +
+        (m.productScopeAsStated ?? ""),
     });
   }
 

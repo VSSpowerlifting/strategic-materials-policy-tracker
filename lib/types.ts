@@ -30,6 +30,7 @@ export const POLICY_STATUSES = [
   "superseded",
   "in_force",
   "unclear",
+  "ended", // concluded, withdrawn or expired with no continuing effect and no replacement
 ] as const;
 
 export const MECHANISMS = [
@@ -345,6 +346,7 @@ export const FINANCIAL_INSTRUMENTS = [
   "offtake",
   "procurement_right",
   "stockpile_purchase",
+  "mixed", // one amount the source spreads over several named instruments (e.g. "loans and equity support") without a split
   "unspecified", // the source says "support", "funding" or "investment" and names no instrument
 ] as const;
 
@@ -358,6 +360,7 @@ export const VALUE_ROLES = [
   "program_envelope", // the ceiling of a programme or fund that awards are drawn from
   "budget_appropriation", // money set aside in a budget
   "lending_authority", // a ceiling on what a lender may lend or guarantee
+  "funding_option", // a ceiling a party may call on at its election under an executed agreement; an exercise is recorded as its own commitment drawn from it
   "expected_co_investment", // money the government expects others to put in
   "private_financing", // commercial capital raised alongside public money
   "recipient_own_funds", // the recipient's own contribution
@@ -540,6 +543,7 @@ export const CONTROL_STATUSES = [
   "expired",
   "revoked",
   "investigation", // an inquiry that imposes no restriction yet
+  "concluded", // an inquiry that has ended with a finding or report; what follows is recorded as its own measure
   "not_stated",
 ] as const;
 

@@ -14,6 +14,15 @@ import {
   getSourceById,
 } from "@/lib/data";
 import { site } from "@/lib/site";
+import {
+  controlClocks,
+  controlStatusOn,
+  formatDecimalCompact,
+  publicCommitmentRows,
+  totalCommitments,
+} from "@/lib/capital-control";
+import { getAllControlMeasures, getAllFinancialCommitments } from "@/lib/data";
+import { formatDate } from "@/lib/format";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 const HOMEPAGE_FRAMING_IDS = ["fc-china-oct-natsec", "fc-us-burgum-resilience"];
@@ -34,7 +43,28 @@ export default function Home() {
     { label: "Materials", value: summary.materials, href: "/materials" },
     { label: "Actors", value: summary.jurisdictions, href: "/actors" },
     { label: "Sources", value: summary.sources, href: "/sources" },
+    { label: "Financial rows", value: summary.financialCommitments, href: "/capital" },
+    { label: "Control clauses", value: summary.controlMeasures, href: "/controls" },
   ];
+  const asOf = site.lastUpdated;
+  const totals = totalCommitments(publicCommitmentRows());
+  const controls = getAllControlMeasures();
+  const inForce = controls.filter((m) => controlStatusOn(m, asOf) === "in_force").length;
+  const suspended = controls.filter((m) => controlStatusOn(m, asOf) === "suspended").length;
+  const nextClock = controlClocks(asOf)[0];
+  const countedIds = new Set(totals.currencies.flatMap((c) => c.countedIds));
+  const capitalActors = new Set(
+    getAllFinancialCommitments().filter((c) => countedIds.has(c.id)).map((c) => c.providerJurisdiction).filter(Boolean),
+  ).size;
+  const sumLine = (s: Partial<Record<"exact" | "approximately" | "at_least" | "up_to", string>>) =>
+    [
+      s.exact ? formatDecimalCompact(s.exact) : null,
+      s.approximately ? `about ${formatDecimalCompact(s.approximately)}` : null,
+      s.at_least ? `at least ${formatDecimalCompact(s.at_least)}` : null,
+      s.up_to ? `up to ${formatDecimalCompact(s.up_to)}` : null,
+    ]
+      .filter(Boolean)
+      .join(" + ");
 
   return (
     <>
@@ -54,8 +84,9 @@ export default function Home() {
             China processes roughly 90% of the world&apos;s rare earths and is the
             leading refiner for 19 of 20 strategic minerals. This database follows
             the policy contest that dependence has set off — the export controls,
-            licensing, designations, funding and stockpiling each major power
-            deploys, and the official language it uses to justify them.
+            licensing, designations, public money, ownership, offtake and
+            stockpiling each major power deploys, clause by clause and commitment
+            by commitment, and the official language it uses to justify them.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
@@ -84,7 +115,7 @@ export default function Home() {
             Dataset scope · {site.scopeStart} – present
           </span>
         </div>
-        <div className="grid grid-cols-2 divide-x divide-border sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 divide-x divide-border sm:grid-cols-4 lg:grid-cols-7">
           {stats.map((s) => (
             <Link key={s.label} href={s.href} className="group block px-6 py-4">
               <div className="tnum font-display text-3xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent">
@@ -142,10 +173,63 @@ export default function Home() {
         </Section>
       </div>
 
-      {/* Comparative matrix entry point */}
+      {/* Capital & Control entry points */}
       <Section
         className="mt-16"
         index="03"
+        title="Capital and control"
+        description="Money and restrictions, instrument by instrument, from official sources and binding filings."
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          <Link href="/capital" className="group rounded-lg border bg-card p-5 transition-colors hover:border-accent/40 hover:bg-elevated">
+            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Capital</p>
+            <p className="mt-3 font-display text-lg font-semibold group-hover:text-accent">Who is paying for which supply chains</p>
+            <ul className="mt-3 space-y-1.5 font-mono text-xs text-muted">
+              {totals.currencies.map((c) => (
+                <li key={c.currency} className="tnum">
+                  <span className="text-foreground">{c.currency}</span>{" "}
+                  {c.status === "withheld" ? (
+                    <span className="text-faint">total withheld: counted rows overlap</span>
+                  ) : (
+                    <>
+                      {sumLine(c.binding) ? <>binding {sumLine(c.binding)}</> : null}
+                      {sumLine(c.binding) && sumLine(c.notYetBinding) ? " · " : null}
+                      {sumLine(c.notYetBinding) ? <span className="text-faint">not yet binding {sumLine(c.notYetBinding)}</span> : null}
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Public commitments from {capitalActors} governments, per currency, with every package counted once.
+            </p>
+          </Link>
+          <Link href="/controls" className="group rounded-lg border bg-card p-5 transition-colors hover:border-accent/40 hover:bg-elevated">
+            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Controls</p>
+            <p className="mt-3 font-display text-lg font-semibold group-hover:text-accent">What is in force, suspended or pending</p>
+            <p className="tnum mt-3 font-mono text-xs text-muted">
+              {inForce} clauses in force · {suspended} suspended
+            </p>
+            {nextClock ? (
+              <p className="mt-3 text-sm leading-6 text-muted">
+                Next stated end date: {formatDate(nextClock.entry.until!)}, {nextClock.daysLeft} days after the data&apos;s as-of date.
+              </p>
+            ) : null}
+          </Link>
+          <Link href="/interplay" className="group rounded-lg border bg-card p-5 transition-colors hover:border-accent/40 hover:bg-elevated">
+            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Capital × Control</p>
+            <p className="mt-3 font-display text-lg font-semibold group-hover:text-accent">Money and restrictions on one clock</p>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Every dated financial and control status change by actor, and a material-by-actor grid of where they meet.
+            </p>
+          </Link>
+        </div>
+      </Section>
+
+      {/* Comparative matrix entry point */}
+      <Section
+        className="mt-16"
+        index="04"
         title="Who has acted on what"
         description="The same materials, six governments, side by side."
       >
@@ -168,7 +252,7 @@ export default function Home() {
       {/* Materials — element tiles */}
       <Section
         className="mt-16"
-        index="04"
+        index="05"
         title="Materials"
         description="A bounded set, rare-earth-centred, with the adjacent chokepoints."
       >
@@ -180,7 +264,7 @@ export default function Home() {
       </Section>
 
       {/* Methodology preview + data CTA */}
-      <Section className="mt-16" index="05" title="Built to be cited">
+      <Section className="mt-16" index="06" title="Built to be cited">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card className="p-6">
             <h3 className="font-display font-semibold tracking-tight">

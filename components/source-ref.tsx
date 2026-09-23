@@ -7,7 +7,7 @@ import type { Source } from "@/lib/types";
 
 export function SourceCard({ source }: { source: Source }) {
   return (
-    <div id={source.id} className="scroll-mt-24 rounded-lg border bg-card p-4">
+    <div id={source.id} className="min-w-0 scroll-mt-24 rounded-lg border bg-card p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <h3 className="font-display font-semibold leading-snug tracking-tight">
           {source.title}
@@ -24,7 +24,7 @@ export function SourceCard({ source }: { source: Source }) {
         <span>Accessed {formatDate(source.dateAccessed)}</span>
       </div>
       {source.notes ? (
-        <p className="mt-2 text-sm leading-6 text-muted">{source.notes}</p>
+        <p className="mt-2 text-sm leading-6 text-muted [overflow-wrap:anywhere]">{source.notes}</p>
       ) : null}
       <div className="mt-3">
         <ExtLink href={source.url} className="break-all text-sm">

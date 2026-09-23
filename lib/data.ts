@@ -202,9 +202,8 @@ export function getWatchedSourcesByJurisdiction(): {
 //
 // Financial commitments ("fin-...") and control measures ("ctl-...") are child
 // rows of an event: the separate instruments and operative clauses one
-// announcement contains. Both seed files are empty until the v0.5 backfill,
-// and nothing here is exposed through the public API, the exports or any page
-// yet. Lists are ordered by id with a plain code-point comparison, so the order
+// announcement contains. Derived figures live in lib/capital-control.ts.
+// Lists are ordered by id with a plain code-point comparison, so the order
 // depends on neither seed-file order nor the runtime's locale.
 
 const byId = (a: { id: string }, b: { id: string }) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
@@ -247,6 +246,8 @@ export function getDatasetSummary() {
     materials: materials.length,
     jurisdictions: jurisdictions.length,
     sources: sources.length,
+    financialCommitments: financialCommitments.length,
+    controlMeasures: controlMeasures.length,
   };
 }
 

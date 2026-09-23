@@ -1,6 +1,6 @@
 # Strategic Materials Policy Tracker
 
-**A source-linked policy-intelligence database tracking how governments contest rare earths and adjacent strategic materials** — through export controls, critical-mineral designations, stockpiling, funding, supply-chain law, and the official language each government uses to justify its stance.
+**A source-linked policy and financial-intelligence database tracking how governments contest rare earths and adjacent strategic materials** — through export controls, critical-mineral designations, public money, ownership, offtake, stockpiling, supply-chain law, and the official language each government uses to justify its stance. Every financial instrument and every control clause is its own record, verified field by field against official primaries or binding filings.
 
 **Live site → https://strategic-materials-policy-tracker.vercel.app**
 
@@ -21,6 +21,9 @@ A short guided tour of the live site:
 - **[Home](https://strategic-materials-policy-tracker.vercel.app)** — the project framing and entry points.
 - **[Framing](https://strategic-materials-policy-tracker.vercel.app/framing)** — the comparative framing matrix, the analytical centerpiece (see below).
 - **[Events](https://strategic-materials-policy-tracker.vercel.app/events)** — the policy-measure index, filterable by actor, mechanism, material and status.
+- **[Capital](https://strategic-materials-policy-tracker.vercel.app/capital)** — every financial instrument (equity, loans, grants, tax offsets, price floors, offtake, stockpile money, envelopes), in its original currency, with public commitments totalled per currency and no package counted twice.
+- **[Controls](https://strategic-materials-policy-tracker.vercel.app/controls)** — export, re-export, import, investment, customs and domestic-production controls, one row per clause, with a legal-status timeline and the clocks on time-limited suspensions.
+- **[Capital × Control](https://strategic-materials-policy-tracker.vercel.app/interplay)** — money and restrictions on one clock and one material-by-actor grid.
 - **[Materials](https://strategic-materials-policy-tracker.vercel.app/materials)** — each tracked material, its position in Chinese policy, and diversification efforts.
 - **[Coverage](https://strategic-materials-policy-tracker.vercel.app/coverage)** — the coded footprint: source composition, framing-anchor coverage, per-actor counts and the research boundaries, derived from the data rather than hand-written.
 - **[Methodology](https://strategic-materials-policy-tracker.vercel.app/methodology)** — scope, source hierarchy, translation policy, and every label definition.
@@ -71,9 +74,9 @@ Five entities, fully typed in [`lib/types.ts`](lib/types.ts):
 
 The categorical label sets are the single source of truth: the union types are derived from `as const` arrays, and the validator imports the same arrays, so the schema and the checks cannot drift apart.
 
-### Capital & Control (v0.5, in development)
+### Capital & Control (v0.5)
 
-Two child entities let one event hold the separate instruments inside it. Both are typed in `lib/types.ts` and loaded by `lib/data.ts`, but their seed files are empty: no records are published yet, and neither entity appears in the API, the exports or any page.
+Two child entities let one event hold the separate instruments inside it. Both are typed in `lib/types.ts`, loaded by `lib/data.ts`, validated at runtime and published on `/capital`, `/controls` and `/interplay`, in the event, material and actor pages, in search, in the `/api/v1` endpoints and in the exports. Every derived figure comes from one module, `lib/capital-control.ts`, under the [counting rules](https://strategic-materials-policy-tracker.vercel.app/methodology#capital-counting): totals only per currency and only for rows whose value role is "commitment"; a part never added to the package it belongs to (and a total withheld if two counted rows share a descendant); envelopes, appropriations and lending authorities listed, never summed; private capital, recipient funds, expected co-investment and project cost kept apart from public support; ceilings and approximations kept apart from exact figures; control statuses evaluated on the data's as-of date; exact decimal arithmetic.
 
 - **FinancialCommitment** (`fin-*`, `data/seed/financial-commitments.json`) — one financial instrument: value role, capital source, amount, provider, recipient, project, facility, location, supply-chain stages, materials, terms and outcomes, with separate source-linked status histories for the money (announced to disbursed) and the project (feasibility to operational). Typed links say what a commitment is part of or drawn from, in the same event or another; one commitment can be both.
 - **ControlMeasure** (`ctl-*`, `data/seed/control-measures.json`) — one operative clause of an export, import, investment or domestic control: type, direction, targets (including the end users and end uses it names, in its own words), materials, product scope and codes, legal basis, the measures it modifies, and a source-linked status history.
@@ -104,14 +107,17 @@ app/                 Routes (App Router)
   watchlist/         Project-curated registry of sources under standing review
   timeline/  sources/  methodology/  data/  about/
   api/export/        force-static CSV / JSON download handlers
-  api/v1/            Read-only public API (events, materials, actors, sources, framing, coverage, watchlist)
+  capital/  controls/  interplay/   Capital & Control pages + [id] detail pages
+  api/v1/            Read-only public API (events, materials, actors, sources, framing, coverage, watchlist,
+                     financial-commitments, control-measures, capital-control/summary)
   api/cite/          BibTeX / RIS / CSL-JSON citation endpoints
   sitemap.ts  robots.ts   Discoverability
 components/          UI primitives and domain components
 lib/                 types, data loaders, labels, formatting, export, site config,
-                     search index, citation builders, coverage metrics, structured data
+                     search index, citation builders, coverage metrics, structured data,
+                     capital-control analytics (capital-control.ts, capital-control-summary.ts, decimal.ts)
 data/seed/           events / framing / materials / jurisdictions / sources / watchlist JSON
-                     financial-commitments / control-measures JSON (v0.5; empty until backfilled)
+                     financial-commitments / control-measures JSON (v0.5)
 data/candidates/     private, git-ignored candidate-review workspace (see its own README)
 scripts/             validate-data.ts, validate-capital-control.ts, candidate-files.ts
 ```
@@ -136,7 +142,7 @@ npm run build      # production build + prerender
 
 ## Status
 
-**Current release: `v0.4-coverage`.** A multi-actor dataset across the tracked actors, with the comparative framing matrix, source register and a dedicated coverage & evidence dashboard in place, a passing data validator, and full JSON/CSV export. The site also has full-corpus search (with actor/mechanism filters and shareable URLs), a personal saved-events view, a read-only public API (`/api/v1/*`), citation endpoints (BibTeX/RIS/CSL-JSON), and a sitemap/robots.txt for discoverability. New candidate measures go through a private, git-ignored review workflow (`data/candidates/`) with its own schema validation before any human-approved promotion into the public seed. Coverage is deepest on the Chinese measures, read directly from Mandarin primaries. The full per-release changelog lives in the [methodology version history](https://strategic-materials-policy-tracker.vercel.app/methodology#versions).
+**Current release: `v0.5-capital-control`.** Capital & Control is live: source-verified financial commitments and clause-level control measures, with the Capital, Controls and Capital × Control pages, their APIs and CSV exports. Before it: a multi-actor dataset across the tracked actors, with the comparative framing matrix, source register and a dedicated coverage & evidence dashboard in place, a passing data validator, and full JSON/CSV export. The site also has full-corpus search (with actor/mechanism filters and shareable URLs), a personal saved-events view, a read-only public API (`/api/v1/*`), citation endpoints (BibTeX/RIS/CSL-JSON), and a sitemap/robots.txt for discoverability. New candidate measures go through a private, git-ignored review workflow (`data/candidates/`) with its own schema validation before any human-approved promotion into the public seed. Coverage is deepest on the Chinese measures, read directly from Mandarin primaries. The full per-release changelog lives in the [methodology version history](https://strategic-materials-policy-tracker.vercel.app/methodology#versions).
 
 Live counts are on the [coverage dashboard](https://strategic-materials-policy-tracker.vercel.app/coverage) rather than repeated here — a hand-written count in this README is a claim that goes stale the next time a record lands.
 
@@ -146,7 +152,7 @@ Live counts are on the [coverage dashboard](https://strategic-materials-policy-t
 - Expand the material set beyond the rare-earth-centred eleven. Several coded instruments (the Australian production tax incentive, the UK and Canadian lists) name minerals — lithium, cobalt, nickel, PGMs — that have no `Material` record, so those measures currently show a narrower material scope on site than their text carries.
 - South Korea and Brazil: both are in the intended actor set but neither is in the taxonomy yet, because no in-scope primary has been verified for them. The jurisdiction codes go in when the first event does, not before.
 - Deepen non-Chinese actor coverage as primary sources are verified.
-- **v0.5 Capital & Control:** a source-verified backfill of financial commitments and control measures (next), then their API and export fields. The data model and its runtime validator are already in place; see [Capital & Control](#capital--control-v05-in-development) above.
+- **Capital & Control, next:** EU (RESourceEU, CRMA strategic projects), Japanese ESPA-designated materials support, Canadian Strategic Innovation Fund awards, US DOE and EXIM facilities, and China's October 2025 announcements Nos. 55–58 and 62 as their own records; disbursement histories as primaries publish them. See [Capital & Control](#capital--control-v05) above.
 
 ## Usage & citation
 

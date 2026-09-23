@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
+import { InstrumentsPanel } from "@/components/capital/instruments-panel";
+import { commitmentActor, controlIssuer } from "@/lib/capital-control";
+import { getAllControlMeasures, getAllFinancialCommitments } from "@/lib/data";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EventListItem } from "@/components/event-card";
@@ -45,6 +48,8 @@ export default async function ActorPage({
   const actor = jurisdiction.id as JurisdictionCode;
   const events = getEventsByActor(actor);
   const framing = getAllFramingClaims().filter((f) => f.actor === actor);
+  const commitments = getAllFinancialCommitments().filter((c) => commitmentActor(c) === actor);
+  const controls = getAllControlMeasures().filter((m) => controlIssuer(m) === actor);
 
   return (
     <Container className="py-12">
@@ -135,6 +140,21 @@ export default async function ActorPage({
               </p>
             )}
           </Section>
+
+          {commitments.length || controls.length ? (
+            <Section
+              index="05"
+              title="Capital and control"
+              description="Financial instruments this actor provides and control clauses it issues."
+            >
+              <InstrumentsPanel
+                commitments={commitments}
+                controls={controls}
+                capitalHref={`/capital?actor=${actor}`}
+                controlsHref={`/controls?issuer=${actor}`}
+              />
+            </Section>
+          ) : null}
         </div>
 
         <aside className="lg:sticky lg:top-20 lg:self-start">

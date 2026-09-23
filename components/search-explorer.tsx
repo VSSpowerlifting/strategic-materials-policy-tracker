@@ -15,6 +15,8 @@ const ALL = "all";
 
 const KIND_LABEL: Record<SearchKind, string> = {
   event: "Events",
+  capital: "Financial commitments",
+  control: "Control clauses",
   material: "Materials",
   actor: "Actors",
   framing: "Framing claims",

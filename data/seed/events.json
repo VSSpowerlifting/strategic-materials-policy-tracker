@@ -1360,5 +1360,166 @@
       "verifiedAt": null,
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-proc-11001-2026",
+    "date": "2026-01-14",
+    "jurisdiction": "us",
+    "issuingBody": "President of the United States (Executive Office of the President)",
+    "titleOriginal": "Adjusting Imports of Processed Critical Minerals and Their Derivative Products Into The United States",
+    "titleOriginalLang": "en",
+    "titleEn": "Adjusting Imports of Processed Critical Minerals and Their Derivative Products Into The United States",
+    "titleEnSource": "na",
+    "documentNumber": "Proclamation 11001; 91 FR 2439 (FR Doc. 2026-01045)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "praseodymium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "industrial"
+    ],
+    "summary": "Signed 14 January 2026 and published 20 January 2026, the proclamation closes the section 232 investigation opened by Executive Order 14272. It records that the Secretary of Commerce transmitted his report on 24 October 2025 and found that imports of processed critical minerals and their derivative products (PCMDPs) threaten to impair US national security, citing rare earth permanent magnets as an example derivative product. The President concurs and chooses negotiation as the remedy: the Secretary and the Trade Representative are to negotiate agreements with trading partners, considering price floors for trade in critical minerals and other trade-restricting measures, and to report within 180 days. The proclamation imposes no tariff or quota; it says that depending on the negotiations the President may consider alternative remedies, including minimum import prices for specific critical minerals.",
+    "analyticalSignificance": "The outcome of the US trade-remedy track on processed minerals: a formal national-security finding paired with a negotiation mandate rather than a duty. It places price floors, the instrument the DoD–MP deal applies to one company, on the table as a trade-policy tool across partners, and keeps import restrictions in reserve as leverage. Coded as in force because the negotiation directive operates from signature, not because any restriction applies.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-fedreg-proc-11001"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-01-20",
+      "discoveredAt": "2026-09-23",
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-au-framework-2025",
+    "date": "2025-10-20",
+    "jurisdiction": "australia",
+    "issuingBody": "Prime Minister of Australia and President of the United States (joint framework)",
+    "titleOriginal": "United States–Australia Framework for Securing of Supply in the Mining and Processing of Critical Minerals and Rare Earths",
+    "titleOriginalLang": "en",
+    "titleEn": "United States–Australia Framework for Securing of Supply in the Mining and Processing of Critical Minerals and Rare Earths",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "offtake_agreement",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy"
+    ],
+    "summary": "Signed in Washington on 20 October 2025 by President Trump and Prime Minister Albanese, the Framework commits the two governments to mobilise government and private support for mining and processing projects \"via guarantees, loans, or equity; finalization of offtake arrangements; insurance; or regulatory facilitation\", and, within six months, to take measures to provide at least $1 billion in financing to projects in each country; the Australian release says each government will provide at least USD 1 billion towards a USD 8.5 billion pipeline of priority projects. It also commits the participants to work towards standards-based trading with price floors or similar measures, to strengthen authorities that review and deter critical-mineral asset sales on national-security grounds, and to establish a Critical Minerals Supply Security Response Group. Australia announced alongside it up to USD 200 million in concessional equity for the Alcoa-Sojitz Gallium Recovery Project at Wagerup, Western Australia, with an Australian right of offtake and a parallel US equity investment with a right of offtake, and a USD 100 million equity investment in Arafura's Nolans rare-earths project in the Northern Territory. Section II states that the Framework creates no legally binding obligations.",
+    "analyticalSignificance": "The first allied instrument in the corpus that pairs two governments' capital with a shared price-floor and asset-sale agenda: the financing mirrors the DoD–MP package at alliance scale, and the gallium project is trilateral, with Japan having funded half of project costs to date according to the Australian release. Because the Framework is expressly non-binding, its USD 1 billion figures are recorded as envelopes that each government says it is taking measures to provide, not as money committed to recipients; the named equity investments are recorded separately and nested under Australia's envelope only as the release implies.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-wh-us-au-framework-2025",
+      "src-pm-us-au-framework-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-20",
+      "discoveredAt": "2026-09-23",
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-osc-vulcan-reelement-2025",
+    "date": "2025-11-21",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of War, Office of Strategic Capital",
+    "titleOriginal": "Office of Strategic Capital Agrees to Joint $700M Conditional Loan Commitment with Vulcan Elements and ReElement Technologies",
+    "titleOriginalLang": "en",
+    "titleEn": "Office of Strategic Capital Agrees to Joint $700M Conditional Loan Commitment with Vulcan Elements and ReElement Technologies",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "industrial"
+    ],
+    "summary": "On 21 November 2025 the Office of Strategic Capital announced a joint $700 million conditional loan commitment, $620 million to Vulcan Elements and $80 million to ReElement Technologies, to support rare earth element separation, metallization and NdFeB magnet manufacturing in the United States, funded from the lending authority the One Big Beautiful Bill Act gives OSC for critical minerals. The Department will also receive warrants from both companies. In parallel, the Department of Commerce's CHIPS Program Office signed a preliminary non-binding letter of intent for $50 million in proposed CHIPS Act incentives for equipment purchases, and the release says Commerce will also receive $50 million of equity in Vulcan Elements. The commitments are conditional: no OSC funds are disbursed until financial, legal, technical and other due-diligence conditions are met. The companies anticipate collectively producing up to 10,000 metric tons of NdFeB magnet material in the next several years.",
+    "analyticalSignificance": "The second OSC magnet financing after the MP Materials loan, and the first drawn from the new lending authority at scale. It extends the US state-capital model from one national champion to a second, vertically integrated magnet supply chain, and adds warrants and a Commerce equity stake to the toolkit. The conditional status matters: this is a commitment subject to due diligence, not money lent.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-osc-vulcan-reelement-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-11-21",
+      "discoveredAt": "2026-09-23",
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-aam-adcvd-2025",
+    "date": "2025-01-07",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Commerce (International Trade Administration) and U.S. International Trade Commission",
+    "titleOriginal": "Active Anode Material From the People's Republic of China: antidumping and countervailing duty investigations",
+    "titleOriginalLang": "en",
+    "titleEn": "Active Anode Material From the People's Republic of China: antidumping and countervailing duty investigations",
+    "titleEnSource": "na",
+    "documentNumber": "Investigation Nos. 701-TA-752 and 731-TA-1730; FR Docs. 2025-00656, 2025-00657, 2026-06488",
+    "policyStatus": "ended",
+    "mechanism": [
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "graphite"
+    ],
+    "affectedSectors": [
+      "battery",
+      "energy"
+    ],
+    "summary": "Commerce initiated antidumping and countervailing duty investigations of active anode material from China, applicable 7 January 2025, on petitions filed on 18 December 2024 by the American Active Anode Material Producers. The scope covers anode-grade graphite of at least 90 percent carbon by weight, synthetic, natural or blended, in any form, with HTSUS subheadings listed for convenience only. Commerce went on to make affirmative determinations of subsidy and of sales at less than fair value. On 31 March 2026 the International Trade Commission determined that the establishment of a US industry is not materially retarded by reason of those imports, with one commissioner dissenting, so the investigations ended without duty orders.",
+    "analyticalSignificance": "The corpus's first allied import-side control case on a tracked material, and a negative one: the trade-remedy track against Chinese graphite anode material, the midstream product China's own graphite export controls cover, ended at the injury stage. Recording it matters precisely because nothing was imposed — a database of restrictions that listed only successful ones would overstate how much of the allied response is legally in force.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-fedreg-aam-ad-initiation-2025",
+      "src-fedreg-aam-cvd-initiation-2025",
+      "src-fedreg-itc-aam-final-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-01-15",
+      "discoveredAt": "2026-09-23",
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
   }
 ]

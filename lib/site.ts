@@ -9,9 +9,9 @@ export const site = {
   tagline:
     "How the major powers contest rare earths and strategic materials through policy.",
   description:
-    "A source-linked policy database tracking how China, the United States, the EU and allied states use export controls, designations, funding and stockpiling around rare earths and strategic materials — and how each government frames its stance, in the original language with translation provenance.",
-  version: "v0.4-coverage",
-  lastUpdated: "2026-09-22",
+    "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
+  version: "v0.5-capital-control",
+  lastUpdated: "2026-09-23",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness
@@ -23,19 +23,61 @@ export const site = {
   url: "https://strategic-materials-policy-tracker.vercel.app",
 } as const;
 
-export const nav = [
-  { href: "/events", label: "Events" },
-  { href: "/materials", label: "Materials" },
-  { href: "/actors", label: "Actors" },
-  { href: "/framing", label: "Framing" },
-  { href: "/compare", label: "Compare" },
-  { href: "/coverage", label: "Coverage" },
-  { href: "/timeline", label: "Timeline" },
-  { href: "/sources", label: "Sources" },
-  { href: "/watchlist", label: "Watchlist" },
-  { href: "/search", label: "Search" },
+/**
+ * Header navigation, grouped by what a reader is looking for. `primary` items
+ * sit inline in the desktop header; the rest open under "More". On small
+ * screens every group opens from one "Menu" disclosure. Search has its own
+ * always-visible header link, so it is listed here only for the footer and
+ * sitemap.
+ */
+export const navGroups = [
+  {
+    label: "Policy record",
+    items: [
+      { href: "/events", label: "Events", primary: true },
+      { href: "/timeline", label: "Timeline", primary: true },
+      { href: "/framing", label: "Framing", primary: true },
+      { href: "/compare", label: "Compare", primary: false },
+    ],
+  },
+  {
+    label: "Capital & Control",
+    items: [
+      { href: "/capital", label: "Capital", primary: true },
+      { href: "/controls", label: "Controls", primary: true },
+      { href: "/interplay", label: "Interplay", primary: true },
+    ],
+  },
+  {
+    label: "Reference",
+    items: [
+      { href: "/materials", label: "Materials", primary: true },
+      { href: "/actors", label: "Actors", primary: true },
+      { href: "/sources", label: "Sources", primary: false },
+      { href: "/coverage", label: "Coverage", primary: false },
+      { href: "/watchlist", label: "Watchlist", primary: false },
+    ],
+  },
+  {
+    label: "Method & data",
+    items: [
+      { href: "/methodology", label: "Methodology", primary: false },
+      { href: "/data", label: "Data", primary: false },
+      { href: "/search", label: "Search", primary: false },
+    ],
+  },
+] as const;
+
+/** Every header destination, flattened (footer, sitemap). */
+export const nav = navGroups.flatMap((g) => g.items.map(({ href, label }) => ({ href, label })));
+
+/** Inline desktop links, in reading order: the record, then Capital & Control, then reference. */
+export const primaryNav = nav.filter((i) =>
+  navGroups.some((g) => g.items.some((x) => x.href === i.href && x.primary)),
+);
+
+/** Pages reachable from the footer and sitemap but kept out of the crowded header. */
+export const secondaryNav = [
   { href: "/saved", label: "Saved" },
-  { href: "/methodology", label: "Methodology" },
-  { href: "/data", label: "Data" },
   { href: "/about", label: "About" },
 ] as const;

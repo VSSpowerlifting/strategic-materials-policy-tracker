@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Wordmark } from "@/components/ui/brand";
-import { nav, site } from "@/lib/site";
+import { nav, secondaryNav, site } from "@/lib/site";
 import { formatDate } from "@/lib/format";
 
 export function SiteFooter() {
@@ -30,7 +30,7 @@ export function SiteFooter() {
             </p>
           </div>
           <nav className="grid grid-cols-2 gap-x-10 gap-y-1.5 font-display text-sm sm:grid-cols-3">
-            {nav.map((i) => (
+            {[...nav, ...secondaryNav].map((i) => (
               <Link
                 key={i.href}
                 href={i.href}

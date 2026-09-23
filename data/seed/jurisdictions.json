@@ -64,7 +64,10 @@
       "evt-us-eo-14272-2025",
       "evt-us-cm-list-2018",
       "evt-us-eo-13953-2020",
-      "evt-us-cm-list-2022"
+      "evt-us-cm-list-2022",
+      "evt-us-proc-11001-2026",
+      "evt-us-osc-vulcan-reelement-2025",
+      "evt-us-aam-adcvd-2025"
     ],
     "sourceIds": [
       "src-doi-press-2025",
@@ -114,7 +117,8 @@
     "framingPosture": "Frames policy as allied supply security and an industrial opportunity in downstream processing.",
     "eventIds": [
       "evt-au-cmsr-2026",
-      "evt-au-cmpti-2025"
+      "evt-au-cmpti-2025",
+      "evt-us-au-framework-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

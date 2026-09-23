@@ -85,10 +85,11 @@ import {
 } from "@/lib/data";
 import { COMMITMENT_FIELD_EVIDENCE, CONTROL_FIELD_EVIDENCE } from "@/scripts/validate-capital-control";
 
-// Capital & Control (v0.5), Phase 1: the data model and its loaders exist, and
-// both seed files are deliberately empty. The runtime validation rules (Phase 2)
-// live in scripts/validate-capital-control.ts, tested in
-// tests/capital-control-validation.test.ts.
+// Capital & Control (v0.5): the data model and its loaders. Phase 3 backfilled
+// both seed files with source-verified rows; the runtime validation rules live
+// in scripts/validate-capital-control.ts (tests/capital-control-validation.test.ts)
+// and the derived figures in lib/capital-control.ts
+// (tests/capital-control-analytics.test.ts).
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel: string) => readFileSync(join(root, rel), "utf8");
@@ -148,10 +149,10 @@ test("the vocabularies carry every value the Capital & Control model requires", 
   };
   requires("FINANCIAL_INSTRUMENTS", FINANCIAL_INSTRUMENTS, [
     "grant", "loan", "loan_guarantee", "equity", "tax_credit", "price_floor",
-    "offtake", "procurement_right", "stockpile_purchase", "unspecified",
+    "offtake", "procurement_right", "stockpile_purchase", "mixed", "unspecified",
   ]);
   requires("VALUE_ROLES", VALUE_ROLES, [
-    "commitment", "program_envelope", "budget_appropriation", "lending_authority",
+    "commitment", "program_envelope", "budget_appropriation", "lending_authority", "funding_option",
     "expected_co_investment", "private_financing", "recipient_own_funds", "total_project_cost",
   ]);
   requires("CAPITAL_SOURCES", CAPITAL_SOURCES, [
@@ -167,7 +168,7 @@ test("the vocabularies carry every value the Capital & Control model requires", 
   ]);
   requires("CONTROL_STATUSES", CONTROL_STATUSES, [
     "announced", "scheduled", "in_force", "suspended", "expired", "revoked",
-    "investigation", "not_stated",
+    "investigation", "concluded", "not_stated",
   ]);
   requires("SUPPLY_CHAIN_STAGES", SUPPLY_CHAIN_STAGES, [
     "exploration", "mining", "separation", "processing", "refining",
@@ -218,11 +219,9 @@ for (const file of [COMMITMENTS_FILE, CONTROLS_FILE]) {
   });
 }
 
-test("Phase 1 adds the model only: both Capital & Control seed files are empty", () => {
-  assert.deepEqual(readJson(COMMITMENTS_FILE), []);
-  assert.deepEqual(readJson(CONTROLS_FILE), []);
-  assert.deepEqual(getAllFinancialCommitments(), []);
-  assert.deepEqual(getAllControlMeasures(), []);
+test("the backfill publishes records in both Capital & Control seed files", () => {
+  assert.ok((readJson(COMMITMENTS_FILE) as unknown[]).length > 0, "financial commitments are backfilled");
+  assert.ok((readJson(CONTROLS_FILE) as unknown[]).length > 0, "control measures are backfilled");
 });
 
 test("the loaders read exactly the seed files", () => {
@@ -275,27 +274,29 @@ test("event getters return only that event's rows, as fresh arrays, and mutate n
   assert.equal(JSON.stringify(getAllEvents()), eventsBefore, "event getters must not alter events");
 });
 
-test("Phase 1: every event getter returns an empty array", () => {
-  for (const e of getAllEvents()) {
-    assert.deepEqual(getFinancialCommitmentsByEvent(e.id), []);
-    assert.deepEqual(getControlMeasuresByEvent(e.id), []);
-  }
+test("the event getters partition the rows: every row belongs to exactly one event", () => {
+  const byEvent = getAllEvents().flatMap((e) => [
+    ...getFinancialCommitmentsByEvent(e.id).map((c) => c.id),
+    ...getControlMeasuresByEvent(e.id).map((m) => m.id),
+  ]);
+  const all = [...getAllFinancialCommitments().map((c) => c.id), ...getAllControlMeasures().map((m) => m.id)];
+  assert.deepEqual([...byEvent].sort(), [...all].sort());
 });
 
 // --- Public surface -----------------------------------------------------------
 
-// The Capital & Control foundation publishes no records and no counts. Public
-// counts are derived here from the seed files, never pinned, so ordinary corpus
-// growth cannot fail this schema test.
-test("public counts derive from the existing seeds; the empty Capital & Control seeds add none", () => {
+// Public counts are derived here from the seed files, never pinned, so
+// ordinary corpus growth cannot fail this schema test.
+test("public counts derive from the seeds, Capital & Control included", () => {
   const seedLength = (file: string) => (readJson(`data/seed/${file}`) as unknown[]).length;
-  // Exactly these keys: a Capital & Control count here would change the public contract.
   assert.deepEqual(getDatasetSummary(), {
     events: seedLength("events.json"),
     framingClaims: seedLength("framing.json"),
     materials: seedLength("materials.json"),
     jurisdictions: seedLength("jurisdictions.json"),
     sources: seedLength("sources.json"),
+    financialCommitments: seedLength("financial-commitments.json"),
+    controlMeasures: seedLength("control-measures.json"),
   });
   assert.equal(getAllEvents().length, seedLength("events.json"));
   assert.equal(getAllSources().length, seedLength("sources.json"));

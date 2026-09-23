@@ -1029,12 +1029,12 @@ test("npm run validate exits non-zero, naming record and field, when a Capital &
 
 // --- Public surface ---------------------------------------------------------
 
-test("Capital & Control stays off every public surface, and the validator out of the build graph", () => {
-  // Pages, API routes, exports and components read no Capital & Control data
-  // yet; only lib/data.ts loads the seeds. Public counts stay derived from the
-  // seeds (tests/capital-control-schema.test.ts), so no number is pinned here.
-  const capitalControlData =
-    /getAllFinancialCommitments|getFinancialCommitment|getAllControlMeasures|getControlMeasure|financial-commitments|control-measures/;
+test("public surfaces read Capital & Control only through the loaders, and the validator stays out of the build graph", () => {
+  // Pages, API routes, exports and components reach the seeds only through
+  // lib/data.ts, so every public figure passes through the same loaders the
+  // tests and the validator check. Public counts stay derived from the seeds
+  // (tests/capital-control-schema.test.ts), so no number is pinned here.
+  const seedImport = /from\s+["'][^"']*data\/seed\/(?:financial-commitments|control-measures)\.json["']/;
   const offenders: string[] = [];
   const walk = (dir: string) => {
     for (const name of readdirSync(join(root, dir))) {
@@ -1043,7 +1043,7 @@ test("Capital & Control stays off every public surface, and the validator out of
       else if (/\.(ts|tsx|js|jsx|mjs)$/.test(name)) {
         const source = read(rel);
         if (source.includes("validate-capital-control")) offenders.push(`${rel} imports the validator`);
-        if (rel !== "lib/data.ts" && capitalControlData.test(source)) offenders.push(`${rel} reads Capital & Control data`);
+        if (rel !== "lib/data.ts" && seedImport.test(source)) offenders.push(`${rel} imports a Capital & Control seed directly`);
       }
     }
   };
