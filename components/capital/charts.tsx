@@ -81,12 +81,13 @@ export function ControlStatusChart({
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="block h-auto min-w-[760px] w-full"
-          role="img"
-          aria-labelledby="ctl-chart-title ctl-chart-desc"
+          role="group"
+          aria-labelledby="ctl-chart-title"
+          aria-describedby="ctl-chart-desc"
         >
           <title id="ctl-chart-title">Legal status of each control clause over time</title>
           <desc id="ctl-chart-desc">
-            {`${rows.length} clauses from ${formatDate(from)} to ${formatDate(to)}. Each bar is coloured by status; dashed tails run to a stated end date. As of ${formatDate(asOf)}.`}
+            {`${rows.length} clauses from ${formatDate(from)} to ${formatDate(to)}. Each bar is coloured by status; dashed tails run to a stated end date. As of ${formatDate(asOf)}. Each row links to its clause; the filterable list below gives the same records as text.`}
           </desc>
           {years(from, to).map((y) => (
             <g key={y}>
@@ -196,10 +197,10 @@ export function InterplayChronology({
   return (
     <figure>
       <div className="overflow-x-auto rounded-lg border bg-card">
-        <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto min-w-[760px] w-full" role="img" aria-labelledby="ip-title ip-desc">
+        <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto min-w-[760px] w-full" role="group" aria-labelledby="ip-title" aria-describedby="ip-desc">
           <title id="ip-title">Capital and control status changes by actor over time</title>
           <desc id="ip-desc">
-            {`${placed.filter((m) => m.kind === "capital").length} dated financial status changes and ${placed.filter((m) => m.kind === "control").length} dated control status changes across ${lanes.length} actors, ${formatDate(from)} to ${formatDate(to)}.`}
+            {`${placed.filter((m) => m.kind === "capital").length} dated financial status changes and ${placed.filter((m) => m.kind === "control").length} dated control status changes across ${lanes.length} actors, ${formatDate(from)} to ${formatDate(to)}. Each mark links to its record; the Capital and Controls lists give the same records as text.`}
           </desc>
           {years(from, to).map((y) => (
             <g key={y}>
@@ -269,6 +270,7 @@ export function StageMatrix({ rows }: { rows: FinancialCommitment[] }) {
   const count = (j: JurisdictionCode, s: string) => rows.filter((r) => commitmentActor(r) === j && r.stages.includes(s as never)).length;
   const max = Math.max(1, ...actors.flatMap((j) => stages.map((s) => count(j, s))));
   const unstaged = rows.filter((r) => r.stages.length === 0).length;
+  const nonGov = rows.filter((r) => r.stages.length > 0 && !commitmentActor(r)).length;
   return (
     <div>
       <div className="overflow-x-auto rounded-lg border">
@@ -313,7 +315,8 @@ export function StageMatrix({ rows }: { rows: FinancialCommitment[] }) {
         </table>
       </div>
       <p className="mt-2 text-xs text-faint">
-        {unstaged} of {rows.length} rows name no stage (the source does not say which stage the money goes to) and are not shown.
+        {unstaged} of {rows.length} rows name no stage (the source does not say which stage the money goes to) and are not shown
+        {nonGov ? `; ${nonGov} staged row${nonGov === 1 ? " is" : "s are"} private or otherwise not government capital and ${nonGov === 1 ? "is" : "are"} left out of the actor rows` : ""}.
       </p>
     </div>
   );

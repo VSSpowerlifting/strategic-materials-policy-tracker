@@ -51,7 +51,7 @@ export function buildCapitalControlSummary() {
           .filter((c) => c.valueRole === "commitment" && !PUBLIC_CAPITAL_SOURCES.includes(c.capitalSource))
           .map((c) => ({ id: c.id, valueRole: c.valueRole, capitalSource: c.capitalSource, amount: c.amount })),
       ],
-      byActor: obj(countBy(all, (c) => commitmentActor(c))),
+      byActor: obj(countBy(all, (c) => commitmentActor(c) ?? "not_government")),
       byInstrument: obj(countBy(all, (c) => c.instrument)),
       byValueRole: obj(countBy(all, (c) => c.valueRole)),
       byCurrentFinancialStatus: obj(countBy(all, (c) => currentFinancialStatus(c))),

@@ -4,7 +4,7 @@ import { Container, PageHeading, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { InterplayChronology, MaterialInterplayMatrix } from "@/components/capital/charts";
 import { JurisdictionTag } from "@/components/labels";
-import { InlineAmount } from "@/components/capital/rows";
+import { InlineAmount, ProviderTag } from "@/components/capital/rows";
 import { ControlStatusBadge } from "@/components/capital/primitives";
 import {
   commitmentActor,
@@ -53,7 +53,7 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
         ) : (
           <li key={it.c.id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
             <time className="tnum w-24 shrink-0 font-mono text-xs text-faint">{it.date ? formatDate(it.date) : "—"}</time>
-            <JurisdictionTag code={commitmentActor(it.c)} />
+            <ProviderTag code={commitmentActor(it.c)} />
             <Link href={`/capital/${it.c.id}`} className="min-w-0 flex-1 hover:text-accent">
               <span aria-hidden className="mr-1.5 inline-block h-2 w-2 rounded-full bg-[#CBA86A]" />
               {financialInstrumentLabels[it.c.instrument]}

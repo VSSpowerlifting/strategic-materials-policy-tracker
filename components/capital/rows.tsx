@@ -20,7 +20,7 @@ import {
   valueRoleLabels,
 } from "@/lib/labels";
 import type { CommitmentSummary, ControlSummary } from "@/lib/capital-control";
-import type { MonetaryAmount } from "@/lib/types";
+import type { JurisdictionCode, MonetaryAmount } from "@/lib/types";
 
 const QUALIFIER_WORD = { exact: "", up_to: "up to", approximately: "about", at_least: "at least" } as const;
 
@@ -33,6 +33,25 @@ export function InlineAmount({ amount }: { amount: MonetaryAmount | null }) {
       ) : null}
       <span className="font-mono text-[11px] text-muted">{amount.currency}</span>
       <span className="font-display font-semibold">{formatDecimalCompact(amount.value)}</span>
+    </span>
+  );
+}
+
+/**
+ * The providing government's tag, or a plain marker for capital no tracked
+ * government provides (private financing, a company's own funds, a project
+ * pipeline). Such rows are never credited to the event's government.
+ */
+export function ProviderTag({ code, withName = false }: { code: JurisdictionCode | null; withName?: boolean }) {
+  if (code) return <JurisdictionTag code={code} withName={withName} />;
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <span className="inline-flex h-5 items-center justify-center rounded border border-border-strong px-1 font-mono text-[11px] text-muted">
+        —
+      </span>
+      <span className={withName ? "font-display text-sm text-muted" : "font-mono text-[11px] text-faint"}>
+        {withName ? "Not government capital" : "non-gov."}
+      </span>
     </span>
   );
 }
@@ -62,7 +81,7 @@ export function CommitmentRow({
       />
       <div className="flex min-w-0 flex-1 flex-col gap-2 px-4 py-3 sm:flex-row sm:gap-4" style={{ paddingLeft: `${16 + indent * 20}px` }}>
         <div className="flex items-center gap-2 sm:w-36 sm:shrink-0 sm:flex-col sm:items-start sm:gap-1.5">
-          <JurisdictionTag code={c.actor} />
+          <ProviderTag code={c.actor} />
           <span className="tnum font-mono text-[11px] text-faint">
             {c.statusDate ? formatDate(c.statusDate) : "Date not stated"}
           </span>

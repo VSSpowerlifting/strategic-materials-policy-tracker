@@ -246,10 +246,12 @@ test("the Announcement No. 61 clauses are suspended until 10 November 2026 on th
 
 // --- Derived views ------------------------------------------------------------------------------
 
-test("the chronology is dated, ordered and complete for dated entries", () => {
+test("the chronology is dated, ordered and complete for dated entries of government rows", () => {
   const marks = instrumentChronology();
   const expected =
-    getAllFinancialCommitments().reduce((n, c) => n + c.financialStatusHistory.filter((e) => e.date).length, 0) +
+    getAllFinancialCommitments()
+      .filter((c) => c.providerJurisdiction !== null)
+      .reduce((n, c) => n + c.financialStatusHistory.filter((e) => e.date).length, 0) +
     getAllControlMeasures().reduce((n, m) => n + m.statusHistory.filter((e) => e.date).length, 0);
   assert.equal(marks.length, expected);
   assert.ok(marks.every((m, i) => i === 0 || marks[i - 1].date <= m.date));
@@ -322,4 +324,41 @@ test("the dataset and summary include Capital & Control and are deterministic", 
 test("every event with a Capital & Control row still resolves", () => {
   const ids = new Set(getAllEvents().map((e) => e.id));
   for (const r of [...getAllFinancialCommitments(), ...getAllControlMeasures()]) assert.ok(ids.has(r.eventId), r.id);
+});
+
+// --- Attribution and binding status --------------------------------------------------------------
+
+test("no private, not-stated or provider-less row is credited to a government", () => {
+  for (const c of getAllFinancialCommitments()) {
+    const s = summarizeCommitment(c);
+    if (c.providerJurisdiction === null) assert.equal(s.actor, null, `${c.id} is credited to ${s.actor}`);
+    if (c.capitalSource === "private") assert.equal(s.actor, null, `${c.id}: private capital credited to ${s.actor}`);
+  }
+  const lanes = new Set(instrumentChronology().filter((m) => m.kind === "capital").map((m) => m.id));
+  for (const c of getAllFinancialCommitments()) if (c.providerJurisdiction === null) assert.ok(!lanes.has(c.id), `${c.id} sits in an actor lane`);
+  for (const row of materialInterplay(site.lastUpdated).values())
+    for (const [j, cell] of row)
+      for (const id of cell.capitalIds) assert.equal(getAllFinancialCommitments().find((c) => c.id === id)!.providerJurisdiction, j, id);
+});
+
+test("binding and not-yet-binding sums partition each currency total exactly", () => {
+  const t = totalCommitments(publicCommitmentRows());
+  for (const cur of t.currencies)
+    for (const q of ["exact", "approximately", "at_least", "up_to"] as const)
+      assert.equal(
+        addDecimals([cur.binding[q] ?? "0", cur.notYetBinding[q] ?? "0"]),
+        cur.byQualifier[q] ?? "0",
+        `${cur.currency} ${q}`,
+      );
+});
+
+test("a conditional loan commitment and a non-binding letter of intent are never counted as binding", () => {
+  const t = totalCommitments(publicCommitmentRows());
+  const usd = t.currencies.find((c) => c.currency === "USD")!;
+  const ids = ["fin-us-osc-vulcan-reelement-2025-joint-commitment", "fin-us-commerce-chips-vulcan-2025-incentives"];
+  for (const id of ids) {
+    const c = getAllFinancialCommitments().find((x) => x.id === id)!;
+    assert.ok(!["contracted", "partially_disbursed", "disbursed"].includes(c.financialStatusHistory.at(-1)!.status), id);
+  }
+  assert.ok(usd.notYetBinding.exact, "USD has not-yet-binding money");
 });

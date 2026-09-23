@@ -137,6 +137,13 @@ export type CurrencyTotal = {
   currency: string;
   /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
   byQualifier: Partial<Record<ValueQualifier, string>>;
+  /**
+   * The same sums split by whether a binding agreement exists (contracted,
+   * partially disbursed, disbursed) or not yet (announced, authorized,
+   * allocated, decided, including conditional and non-binding commitments).
+   */
+  binding: Partial<Record<ValueQualifier, string>>;
+  notYetBinding: Partial<Record<ValueQualifier, string>>;
   countedIds: string[];
   /** Rows left out because a row they belong to is counted in the same total. */
   nestedIds: string[];
@@ -191,11 +198,15 @@ export function totalCommitments(
               break outer;
             }
       const byQualifier: Partial<Record<ValueQualifier, string>> = {};
+      const binding: Partial<Record<ValueQualifier, string>> = {};
+      const notYetBinding: Partial<Record<ValueQualifier, string>> = {};
       for (const c of list) {
         const q = c.amount!.qualifier;
         byQualifier[q] = addDecimals([byQualifier[q] ?? "0", c.amount!.value]);
+        const bucket = isBinding(c) ? binding : notYetBinding;
+        bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
       }
-      return { currency, byQualifier, countedIds: list.map((c) => c.id), nestedIds: nested.get(currency) ?? [], overlap };
+      return { currency, byQualifier, binding, notYetBinding, countedIds: list.map((c) => c.id), nestedIds: nested.get(currency) ?? [], overlap };
     });
   return { currencies, unquantifiedIds };
 }
@@ -230,9 +241,20 @@ export function controlIssuer(m: ControlMeasure): JurisdictionCode {
   return getEventById(m.eventId)!.jurisdiction;
 }
 
-/** The tracked actor behind a commitment, falling back to its event's issuer. */
-export function commitmentActor(c: FinancialCommitment): JurisdictionCode {
-  return c.providerJurisdiction ?? getEventById(c.eventId)!.jurisdiction;
+/**
+ * The tracked government behind a commitment, or null. Never inferred from the
+ * event: a bank loan, a company's own cash or a project pipeline announced in
+ * a government's event is not that government's money.
+ */
+export function commitmentActor(c: FinancialCommitment): JurisdictionCode | null {
+  return c.providerJurisdiction;
+}
+
+/** Financial statuses at which a binding agreement exists. */
+export const BINDING_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["contracted", "partially_disbursed", "disbursed"];
+
+export function isBinding(c: FinancialCommitment): boolean {
+  return BINDING_FINANCIAL_STATUSES.includes(currentFinancialStatus(c));
 }
 
 // --- Timelines ---------------------------------------------------------------------------
@@ -253,18 +275,23 @@ export type InstrumentMark = {
  */
 export function instrumentChronology(): InstrumentMark[] {
   const marks: InstrumentMark[] = [];
-  for (const c of getAllFinancialCommitments())
+  // Rows with no government provider (private capital, a project pipeline)
+  // have no actor lane and are left out rather than credited to one.
+  for (const c of getAllFinancialCommitments()) {
+    const actor = commitmentActor(c);
+    if (!actor) continue;
     for (const e of c.financialStatusHistory)
       if (e.date)
         marks.push({
           kind: "capital",
           id: c.id,
           eventId: c.eventId,
-          jurisdiction: commitmentActor(c),
+          jurisdiction: actor,
           date: e.date,
           status: e.status,
           label: c.recipient ?? c.provider ?? c.id,
         });
+  }
   for (const m of getAllControlMeasures())
     for (const e of m.statusHistory)
       if (e.date)
@@ -326,8 +353,8 @@ export function materialInterplay(asOf: string): Map<string, Map<JurisdictionCod
   };
   // A part of a package is folded into the package, so one deal counts once.
   for (const c of getAllFinancialCommitments())
-    if (!c.relationships.some((r) => r.relationship === "part_of"))
-      for (const mat of c.materialIds) cell(mat, commitmentActor(c)).capitalIds.push(c.id);
+    if (commitmentActor(c) && !c.relationships.some((r) => r.relationship === "part_of"))
+      for (const mat of c.materialIds) cell(mat, commitmentActor(c)!).capitalIds.push(c.id);
   for (const m of getAllControlMeasures())
     for (const mat of m.materialIds) {
       const x = cell(mat, controlIssuer(m));
@@ -357,7 +384,8 @@ export type CommitmentSummary = {
   id: string;
   eventId: string;
   eventTitle: string;
-  actor: JurisdictionCode;
+  /** The providing government; null for private or unattributed capital. */
+  actor: JurisdictionCode | null;
   instrument: FinancialCommitment["instrument"];
   valueRole: ValueRole;
   capitalSource: CapitalSource;

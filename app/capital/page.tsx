@@ -55,7 +55,7 @@ export default function CapitalPage() {
   );
   const unquantified = all.filter((c) => !c.amount && c.valueRole === "commitment");
   const events = new Set(all.map((c) => c.eventId)).size;
-  const actors = new Set(summaries.map((s) => s.actor)).size;
+  const actors = new Set(summaries.map((s) => s.actor).filter(Boolean)).size;
   const bySummary = new Map(summaries.map((s) => [s.id, s]));
   const actorTotals = JURISDICTIONS.map((j) => ({ j, t: totalCommitments(publicRows.filter((c) => commitmentActor(c) === j), all) })).filter(
     (x) => x.t.currencies.length || x.t.unquantifiedIds.length,
@@ -81,7 +81,7 @@ export default function CapitalPage() {
         {[
           ["Financial rows", all.length],
           ["Events", events],
-          ["Providing actors", actors],
+          ["Providing governments", actors],
           ["Instruments", new Set(all.map((c) => c.instrument)).size],
         ].map(([k, v]) => (
           <div key={k} className="bg-card px-4 py-4">
@@ -94,29 +94,43 @@ export default function CapitalPage() {
       <div className="mt-14 space-y-14">
         <Section
           index="01"
-          title="Public money committed to recipients"
-          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency only; parts of a counted package are left out; ceilings and approximations are shown apart from exact figures."
+          title="Public commitments to recipients, binding and not yet binding"
+          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency only; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; ceilings and approximations are shown apart from exact figures."
         >
           <div className="grid gap-4 lg:grid-cols-3">
             {totals.currencies.map((t) => {
               const counted = t.countedIds.map((id) => getFinancialCommitmentById(id)!);
               const max = counted.reduce((m, c) => (compareDecimals(c.amount!.value, m) > 0 ? c.amount!.value : m), "0");
               return (
-                <Card key={t.currency} className="p-5">
+                <Card key={t.currency} className="min-w-0 p-5">
                   <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{t.currency}</p>
                   {t.overlap ? (
                     <p className="mt-2 text-sm text-muted">
                       No total: {t.overlap.a} and {t.overlap.b} share {t.overlap.shared}, so adding them would double-count.
                     </p>
                   ) : (
-                    <dl className="mt-2 space-y-1">
-                      {QUALIFIER_ORDER.filter((q) => t.byQualifier[q]).map((q) => (
-                        <div key={q} className="flex items-baseline justify-between gap-3">
-                          <dt className="font-mono text-[11px] text-muted">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
-                          <dd className="tnum font-display text-2xl font-bold">{formatDecimalCompact(t.byQualifier[q]!)}</dd>
-                        </div>
-                      ))}
-                    </dl>
+                    <div className="mt-2 space-y-3">
+                      {([
+                        ["Binding", "contracted, partly or fully paid", t.binding],
+                        ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", t.notYetBinding],
+                      ] as const).map(([label, gloss, sums]) =>
+                        QUALIFIER_ORDER.some((q) => sums[q]) ? (
+                          <div key={label}>
+                            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted" title={gloss}>
+                              {label}
+                            </p>
+                            <dl className="mt-1 space-y-0.5">
+                              {QUALIFIER_ORDER.filter((q) => sums[q]).map((q) => (
+                                <div key={q} className="flex items-baseline justify-between gap-3">
+                                  <dt className="font-mono text-[11px] text-faint">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
+                                  <dd className="tnum font-display text-2xl font-bold">{formatDecimalCompact(sums[q]!)}</dd>
+                                </div>
+                              ))}
+                            </dl>
+                          </div>
+                        ) : null,
+                      )}
+                    </div>
                   )}
                   <p className="mt-3 font-mono text-[11px] leading-5 text-faint">
                     {FINANCIAL_STATUSES.map((s) => [s, countBy(counted, (c) => currentFinancialStatus(c)).get(s)] as const)
@@ -133,7 +147,7 @@ export default function CapitalPage() {
                         <li key={c.id}>
                           <Link href={`/capital/${c.id}`} className="group block">
                             <div className="flex items-baseline justify-between gap-2 text-sm">
-                              <span className="truncate font-display group-hover:text-accent">{c.recipient ?? c.provider}</span>
+                              <span className="min-w-0 truncate font-display group-hover:text-accent">{c.recipient ?? c.provider}</span>
                               <InlineAmount amount={c.amount} />
                             </div>
                             <div className="mt-1 h-1.5 rounded-sm bg-elevated">
@@ -146,7 +160,7 @@ export default function CapitalPage() {
                               />
                             </div>
                             <p className="mt-0.5 font-mono text-[10px] text-faint">
-                              {jurisdictionLabels[commitmentActor(c)]} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
+                              {commitmentActor(c) ? jurisdictionLabels[commitmentActor(c)!] : "Not government capital"} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
                             </p>
                           </Link>
                         </li>
@@ -175,7 +189,7 @@ export default function CapitalPage() {
             Totals are never converted between currencies or across rows of different value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
-            {" "}Each total spans every financial status from announced to disbursed; the status mix is shown on each card and each row.
+            {" "}Binding means a contract has been executed or money paid; everything earlier, including conditional loan commitments and non-binding letters of intent, is shown as not yet binding.
             {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
           </p>
           <div className="mt-6 overflow-x-auto rounded-lg border">

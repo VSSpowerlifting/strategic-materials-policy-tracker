@@ -30,6 +30,9 @@ import {
 } from "@/lib/types";
 import type { CommitmentSummary } from "@/lib/capital-control";
 
+/** Filter value for rows no tracked government provides. */
+const NON_GOV = "non_government";
+
 /**
  * Filterable list of financial rows. With "families" on (the default) a row
  * that is part of, or drawn from, another visible row is nested under it, so
@@ -55,7 +58,10 @@ export function CapitalExplorer({
 
   const opts = useMemo(
     () => ({
-      actor: countOptions(rows.map((r) => r.actor), jurisdictionLabels, JURISDICTIONS),
+      actor: [
+        ...countOptions(rows.flatMap((r) => (r.actor ? [r.actor] : [])), jurisdictionLabels, JURISDICTIONS),
+        ...(rows.some((r) => !r.actor) ? [{ value: NON_GOV, label: "Not government capital", count: rows.filter((r) => !r.actor).length }] : []),
+      ],
       instrument: countOptions(rows.map((r) => r.instrument), financialInstrumentLabels, FINANCIAL_INSTRUMENTS),
       role: countOptions(rows.map((r) => r.valueRole), valueRoleLabels, VALUE_ROLES),
       source: countOptions(rows.map((r) => r.capitalSource), capitalSourceLabels, CAPITAL_SOURCES),
@@ -84,7 +90,7 @@ export function CapitalExplorer({
     const needle = normalize(q.trim());
     return rows.filter(
       (r) =>
-        (actor === ALL || r.actor === actor) &&
+        (actor === ALL || (actor === NON_GOV ? r.actor === null : r.actor === actor)) &&
         (instrument === ALL || r.instrument === instrument) &&
         (role === ALL || r.valueRole === role) &&
         (source === ALL || r.capitalSource === source) &&

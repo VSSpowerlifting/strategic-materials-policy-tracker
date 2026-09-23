@@ -262,7 +262,7 @@ export function financialCommitmentsCsv(): string {
     getAllFinancialCommitments().map((c) => [
       c.id,
       c.eventId,
-      commitmentActor(c),
+      commitmentActor(c) ?? "",
       c.instrument,
       c.valueRole,
       c.capitalSource,

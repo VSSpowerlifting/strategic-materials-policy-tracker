@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { buildSearchIndex, normalize, searchDocs, SEARCH_KINDS } from "@/lib/search";
-import { getAllEvents, getAllSources, getAllWatchedSources } from "@/lib/data";
+import { getAllEvents, getAllFinancialCommitments, getAllSources, getAllWatchedSources } from "@/lib/data";
 import { JURISDICTIONS } from "@/lib/types";
 
 const docs = buildSearchIndex();
@@ -87,7 +87,7 @@ test("source documents carry their published date where the source has one", () 
 test("event, capital, control, framing, actor and watched documents carry a jurisdiction; material and source do not", () => {
   const validCodes = new Set(JURISDICTIONS as readonly string[]);
   for (const d of docs) {
-    if (["event", "capital", "control", "actor", "framing", "watched"].includes(d.kind)) {
+    if (["event", "control", "actor", "framing", "watched"].includes(d.kind) || (d.kind === "capital" && d.jurisdiction !== null)) {
       assert.ok(d.jurisdiction, `${d.kind}:${d.id} should carry a jurisdiction`);
       assert.ok(validCodes.has(d.jurisdiction!), `${d.kind}:${d.id} has an unrecognised jurisdiction ${d.jurisdiction}`);
     }
@@ -119,6 +119,13 @@ test("actor filtering (by hand, the way the search page applies it) narrows to t
     china.filter((d) => d.kind === "event").map((d) => d.id),
   );
   assert.deepEqual(indexedChinaEventIds, chinaEventIds);
+});
+
+test("a capital document carries a government only when one provides the money", () => {
+  for (const d of docs.filter((x) => x.kind === "capital")) {
+    const c = getAllFinancialCommitments().find((x) => x.id === d.id)!;
+    assert.equal(d.jurisdiction, c.providerJurisdiction, d.id);
+  }
 });
 
 test("Capital & Control rows are searchable by party, customs code and document wording", () => {

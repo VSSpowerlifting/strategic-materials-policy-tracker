@@ -52,7 +52,19 @@ export default function Home() {
   const inForce = controls.filter((m) => controlStatusOn(m, asOf) === "in_force").length;
   const suspended = controls.filter((m) => controlStatusOn(m, asOf) === "suspended").length;
   const nextClock = controlClocks(asOf)[0];
-  const capitalActors = new Set(getAllFinancialCommitments().map((c) => c.providerJurisdiction).filter(Boolean)).size;
+  const countedIds = new Set(totals.currencies.flatMap((c) => c.countedIds));
+  const capitalActors = new Set(
+    getAllFinancialCommitments().filter((c) => countedIds.has(c.id)).map((c) => c.providerJurisdiction).filter(Boolean),
+  ).size;
+  const sumLine = (s: Partial<Record<"exact" | "approximately" | "at_least" | "up_to", string>>) =>
+    [
+      s.exact ? formatDecimalCompact(s.exact) : null,
+      s.approximately ? `about ${formatDecimalCompact(s.approximately)}` : null,
+      s.at_least ? `at least ${formatDecimalCompact(s.at_least)}` : null,
+      s.up_to ? `up to ${formatDecimalCompact(s.up_to)}` : null,
+    ]
+      .filter(Boolean)
+      .join(" + ");
 
   return (
     <>
@@ -172,15 +184,13 @@ export default function Home() {
           <Link href="/capital" className="group rounded-lg border bg-card p-5 transition-colors hover:border-accent/40 hover:bg-elevated">
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Capital</p>
             <p className="mt-3 font-display text-lg font-semibold group-hover:text-accent">Who is paying for which supply chains</p>
-            <ul className="mt-3 space-y-1 font-mono text-xs text-muted">
+            <ul className="mt-3 space-y-1.5 font-mono text-xs text-muted">
               {totals.currencies.map((c) => (
                 <li key={c.currency} className="tnum">
-                  {c.currency}{" "}
-                  {c.byQualifier.exact ? formatDecimalCompact(c.byQualifier.exact) : null}
-                  {c.byQualifier.exact && (c.byQualifier.up_to || c.byQualifier.approximately) ? " + " : ""}
-                  {c.byQualifier.approximately ? `about ${formatDecimalCompact(c.byQualifier.approximately)}` : null}
-                  {c.byQualifier.approximately && c.byQualifier.up_to ? " + " : ""}
-                  {c.byQualifier.up_to ? `up to ${formatDecimalCompact(c.byQualifier.up_to)}` : null}
+                  <span className="text-foreground">{c.currency}</span>{" "}
+                  {sumLine(c.binding) ? <>binding {sumLine(c.binding)}</> : null}
+                  {sumLine(c.binding) && sumLine(c.notYetBinding) ? " · " : null}
+                  {sumLine(c.notYetBinding) ? <span className="text-faint">not yet binding {sumLine(c.notYetBinding)}</span> : null}
                 </li>
               ))}
             </ul>

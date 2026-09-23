@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
-import { JurisdictionTag } from "@/components/labels";
 import {
   AmountDetail,
   CapitalSourceBadge,
@@ -17,7 +16,7 @@ import {
   SourceMention,
   ValueRoleBadge,
 } from "@/components/capital/primitives";
-import { CommitmentRow } from "@/components/capital/rows";
+import { CommitmentRow, ProviderTag } from "@/components/capital/rows";
 import {
   childLinks,
   commitmentActor,
@@ -87,7 +86,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
 
       <header className="mt-6 max-w-4xl">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-          <JurisdictionTag code={actor} withName />
+          <ProviderTag code={actor} withName />
           <span aria-hidden className="text-faint">·</span>
           <span className="text-muted">{c.provider ?? "Provider not stated"}</span>
         </div>

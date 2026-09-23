@@ -508,7 +508,10 @@ export default function MethodologyPage() {
                 · <strong className="text-foreground">Public means public.</strong> &ldquo;Public
                 commitments&rdquo; are rows with public or public-enterprise capital. Private financing, a
                 recipient&apos;s own funds, expected co-investment and total project cost are shown apart,
-                and so are joint public-private vehicles whose public share is not stated.
+                and so are joint public-private vehicles whose public share is not stated. A row is
+                credited to a government only when a government provides the money: a bank loan or a
+                company&apos;s own cash announced in a government&apos;s event is never that
+                government&apos;s.
               </li>
               <li>
                 · <strong className="text-foreground">Ceilings are not sums.</strong> A figure stated
@@ -516,10 +519,11 @@ export default function MethodologyPage() {
                 of the same qualifier, and shown apart from exact figures.
               </li>
               <li>
-                · <strong className="text-foreground">Status is shown, not filtered away.</strong> A
-                public-commitment total spans every financial status from announced to disbursed; each
-                total shows its status mix, and every row carries its own. A conditional commitment or a
-                non-binding letter of intent is labelled as such in its status note.
+                · <strong className="text-foreground">Binding apart from not yet binding.</strong> Within
+                each currency, money under an executed agreement or already paid (contracted, partially
+                disbursed, disbursed) is summed apart from money announced, authorized, allocated or decided
+                — which includes conditional loan commitments and non-binding letters of intent. Every row
+                carries its own status.
               </li>
               <li>
                 · <strong className="text-foreground">No figure without a figure.</strong> A price floor,
