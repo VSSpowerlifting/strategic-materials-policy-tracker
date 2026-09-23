@@ -28,6 +28,8 @@ import { CiteBlock } from "@/components/cite-block";
 import { SaveEventButton } from "@/components/save-event-button";
 import { plainCitation } from "@/lib/citation";
 import { eventJsonLd, jsonLdScript } from "@/lib/structured-data";
+import { InstrumentsPanel } from "@/components/capital/instruments-panel";
+import { getControlMeasuresByEvent, getFinancialCommitmentsByEvent } from "@/lib/data";
 
 export function generateStaticParams() {
   return getAllEvents().map((e) => ({ id: e.id }));
@@ -69,6 +71,8 @@ export default async function EventPage({
   const materials = getMaterialsByIds(event.affectedMaterialIds);
   const jurisdiction = getJurisdictionById(event.jurisdiction);
   const related = getRelatedEvents(event);
+  const commitments = getFinancialCommitmentsByEvent(event.id);
+  const controls = getControlMeasuresByEvent(event.id);
   const actorHref = `/actors/${jurisdictionShort[event.jurisdiction].toLowerCase()}`;
   let sectionNo = 0;
   const nextSectionIndex = () => String(++sectionNo).padStart(2, "0");
@@ -146,6 +150,16 @@ export default async function EventPage({
               {event.analyticalSignificance}
             </p>
           </Section>
+
+          {commitments.length || controls.length ? (
+            <Section
+              index={nextSectionIndex()}
+              title="Instruments in this event"
+              description="The separate financial commitments and control clauses this announcement contains, each with its own status history and evidence."
+            >
+              <InstrumentsPanel commitments={commitments} controls={controls} />
+            </Section>
+          ) : null}
 
           <Section
             index={nextSectionIndex()}
@@ -280,6 +294,13 @@ export default async function EventPage({
               <MetaRow label="Sources">
                 <span className="tnum">{sources.length}</span>
               </MetaRow>
+              {commitments.length || controls.length ? (
+                <MetaRow label="Instruments">
+                  <span className="tnum">
+                    {commitments.length} financial · {controls.length} control
+                  </span>
+                </MetaRow>
+              ) : null}
             </dl>
           </Card>
         </aside>

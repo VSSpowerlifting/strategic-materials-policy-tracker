@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
+import { InstrumentsPanel } from "@/components/capital/instruments-panel";
+import { getAllControlMeasures, getAllFinancialCommitments } from "@/lib/data";
 import { Card } from "@/components/ui/card";
 import { EventListItem } from "@/components/event-card";
 import { SourceList } from "@/components/source-ref";
@@ -70,6 +72,8 @@ export default async function MaterialPage({
   const events = getEventsByMaterial(material.id);
   const sources = getSourcesByIds(material.sourceIds);
   const actorStatuses = statusByActor(events);
+  const commitments = getAllFinancialCommitments().filter((c) => c.materialIds.includes(material.id));
+  const controls = getAllControlMeasures().filter((m) => m.materialIds.includes(material.id));
   const { hue } = getMaterialMeta(material.id);
 
   return (
@@ -155,8 +159,23 @@ export default async function MaterialPage({
             )}
           </Section>
 
+          {commitments.length || controls.length ? (
+            <Section
+              index="05"
+              title="Capital and control"
+              description="Financial instruments and control clauses that name this material. Rows naming the grouped rare-earth set are listed under it, not under each element."
+            >
+              <InstrumentsPanel
+                commitments={commitments}
+                controls={controls}
+                capitalHref={`/capital?material=${material.id}`}
+                controlsHref={`/controls?material=${material.id}`}
+              />
+            </Section>
+          ) : null}
+
           {sources.length > 0 ? (
-            <Section index="05" title={`Sources (${sources.length})`}>
+            <Section index={commitments.length || controls.length ? "06" : "05"} title={`Sources (${sources.length})`}>
               <SourceList sources={sources} />
             </Section>
           ) : null}

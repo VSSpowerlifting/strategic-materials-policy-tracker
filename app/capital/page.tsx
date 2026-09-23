@@ -1,0 +1,237 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Container, PageHeading, Section } from "@/components/ui/container";
+import { Card } from "@/components/ui/card";
+import { CapitalExplorer } from "@/components/capital/capital-explorer";
+import { StageMatrix } from "@/components/capital/charts";
+import { CommitmentRow, InlineAmount } from "@/components/capital/rows";
+import {
+  PUBLIC_CAPITAL_SOURCES,
+  compareDecimals,
+  formatDecimalCompact,
+  publicCommitmentRows,
+  rowsByValueRole,
+  summarizeCommitment,
+  totalCommitments,
+} from "@/lib/capital-control";
+import { getAllFinancialCommitments, getAllMaterials, getFinancialCommitmentById } from "@/lib/data";
+import {
+  financialInstrumentLabels,
+  termKindLabels,
+  valueQualifierLabels,
+  valueRoleLabels,
+} from "@/lib/labels";
+import { site } from "@/lib/site";
+import type { ValueQualifier } from "@/lib/types";
+
+export const metadata: Metadata = {
+  title: "Capital",
+  description:
+    "Source-verified public money in strategic-material supply chains: equity, loans, grants, tax credits, price floors, offtake and stockpile funding, by provider, recipient, stage, material and status — in original currencies, with parent envelopes and child awards never double-counted.",
+};
+
+const QUALIFIER_ORDER: ValueQualifier[] = ["exact", "approximately", "at_least", "up_to"];
+
+export default function CapitalPage() {
+  const all = getAllFinancialCommitments();
+  const summaries = all.map(summarizeCommitment);
+  const materialNames = Object.fromEntries(getAllMaterials().map((m) => [m.id, m.nameEn]));
+  const publicRows = publicCommitmentRows(all);
+  const totals = totalCommitments(publicRows, all);
+  const byRole = rowsByValueRole(all);
+  const envelopeRoles = ["program_envelope", "budget_appropriation", "lending_authority"] as const;
+  const envelopes = envelopeRoles.flatMap((r) => byRole.get(r) ?? []);
+  const nonPublic = all.filter(
+    (c) =>
+      ["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost"].includes(c.valueRole) ||
+      (c.valueRole === "commitment" && !PUBLIC_CAPITAL_SOURCES.includes(c.capitalSource)),
+  );
+  const unquantified = all.filter((c) => !c.amount && c.valueRole === "commitment");
+  const events = new Set(all.map((c) => c.eventId)).size;
+  const actors = new Set(summaries.map((s) => s.actor)).size;
+  const bySummary = new Map(summaries.map((s) => [s.id, s]));
+
+  return (
+    <Container className="py-12">
+      <PageHeading
+        index="01"
+        eyebrow="Money as policy"
+        title="Capital"
+        lead={
+          <>
+            How governments put money, ownership and purchase guarantees behind strategic-material supply chains.
+            Each row is one instrument from an official source or binding filing, in the currency the source uses.
+            Envelopes, private capital and figures stated as ceilings are kept apart from money committed to a recipient,
+            and a part is never counted alongside the package it belongs to.
+          </>
+        }
+      />
+
+      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
+        {[
+          ["Financial rows", all.length],
+          ["Events", events],
+          ["Providing actors", actors],
+          ["Instruments", new Set(all.map((c) => c.instrument)).size],
+        ].map(([k, v]) => (
+          <div key={k} className="bg-card px-4 py-4">
+            <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{k}</dt>
+            <dd className="tnum mt-1 font-display text-3xl font-bold">{v}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div className="mt-14 space-y-14">
+        <Section
+          index="01"
+          title="Public money committed to recipients"
+          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency only; parts of a counted package are left out; ceilings and approximations are shown apart from exact figures."
+        >
+          <div className="grid gap-4 lg:grid-cols-3">
+            {totals.currencies.map((t) => {
+              const counted = t.countedIds.map((id) => getFinancialCommitmentById(id)!);
+              const max = counted.reduce((m, c) => (compareDecimals(c.amount!.value, m) > 0 ? c.amount!.value : m), "0");
+              return (
+                <Card key={t.currency} className="p-5">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{t.currency}</p>
+                  {t.overlap ? (
+                    <p className="mt-2 text-sm text-muted">
+                      No total: {t.overlap.a} and {t.overlap.b} share {t.overlap.shared}, so adding them would double-count.
+                    </p>
+                  ) : (
+                    <dl className="mt-2 space-y-1">
+                      {QUALIFIER_ORDER.filter((q) => t.byQualifier[q]).map((q) => (
+                        <div key={q} className="flex items-baseline justify-between gap-3">
+                          <dt className="font-mono text-[11px] text-muted">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
+                          <dd className="tnum font-display text-2xl font-bold">{formatDecimalCompact(t.byQualifier[q]!)}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                  <ul className="mt-4 space-y-2 border-t pt-3">
+                    {counted.map((c) => {
+                      // Bar length is relative within this currency only. Number() is
+                      // used for this display ratio alone; totals are exact decimals.
+                      const pct = Math.max(4, Math.round((Number(c.amount!.value) / Number(max)) * 100));
+                      return (
+                        <li key={c.id}>
+                          <Link href={`/capital/${c.id}`} className="group block">
+                            <div className="flex items-baseline justify-between gap-2 text-sm">
+                              <span className="truncate font-display group-hover:text-accent">{c.recipient ?? c.provider}</span>
+                              <InlineAmount amount={c.amount} />
+                            </div>
+                            <div className="mt-1 h-1.5 rounded-sm bg-elevated">
+                              <div
+                                className="h-1.5 rounded-sm"
+                                style={{
+                                  width: `${pct}%`,
+                                  background: c.amount!.qualifier === "exact" ? "#CBA86A" : "color-mix(in oklab, #CBA86A 40%, transparent)",
+                                }}
+                              />
+                            </div>
+                            <p className="mt-0.5 font-mono text-[10px] text-faint">{financialInstrumentLabels[c.instrument]}</p>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {t.nestedIds.length ? (
+                    <p className="mt-3 text-xs leading-5 text-faint">
+                      Not added again: {t.nestedIds.length} part{t.nestedIds.length === 1 ? "" : "s"} of a counted package (
+                      {t.nestedIds.map((id, i) => (
+                        <span key={id}>
+                          {i ? ", " : ""}
+                          <Link href={`/capital/${id}`} className="hover:text-accent">
+                            {bySummary.get(id) ? `${financialInstrumentLabels[bySummary.get(id)!.instrument].toLowerCase()}, ${bySummary.get(id)!.recipient}` : id}
+                          </Link>
+                        </span>
+                      ))}
+                      ).
+                    </p>
+                  ) : null}
+                </Card>
+              );
+            })}
+          </div>
+          <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
+            Totals are never converted between currencies or across rows of different value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
+            {" "}
+            {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
+            {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
+          </p>
+        </Section>
+
+        <Section
+          index="02"
+          title="Instruments that carry terms, not a sum"
+          description="Price floors, offtake, tax offsets and procurement rights change incentives without a stated total. Their operative terms are the finding."
+        >
+          <div className="grid gap-4 md:grid-cols-2">
+            {unquantified.map((c) => (
+              <Card key={c.id} className="p-5">
+                <Link href={`/capital/${c.id}`} className="font-display font-semibold hover:text-accent">
+                  {financialInstrumentLabels[c.instrument]} · {c.recipient ?? c.provider}
+                </Link>
+                <ul className="mt-3 space-y-2">
+                  {c.terms.slice(0, 3).map((t, i) => (
+                    <li key={i} className="text-sm leading-6">
+                      <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-faint">{termKindLabels[t.kind]} </span>
+                      <span className="text-muted">“{t.asStated}”</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          index="03"
+          title="Envelopes, appropriations and lending authorities"
+          description="Ceilings that awards are drawn from. Listed, never summed: two envelopes can share a drawdown, and an envelope is not money committed to anyone."
+        >
+          <Card className="overflow-hidden">
+            {envelopes.map((c) => (
+              <CommitmentRow key={c.id} c={bySummary.get(c.id)!} />
+            ))}
+          </Card>
+        </Section>
+
+        <Section
+          index="04"
+          title="Kept apart from public support"
+          description="Private financing, a recipient's own funds, money governments expect others to invest, joint vehicles whose public share is not stated, and rows whose capital source the source does not state."
+        >
+          <Card className="overflow-hidden">
+            {nonPublic.map((c) => (
+              <CommitmentRow key={c.id} c={bySummary.get(c.id)!} />
+            ))}
+          </Card>
+          <p className="mt-2 text-xs text-faint">
+            Value roles here: {[...new Set(nonPublic.map((c) => valueRoleLabels[c.valueRole]))].join(", ")}.
+          </p>
+        </Section>
+
+        <Section
+          index="05"
+          title="Where the money is aimed"
+          description="Financial rows by providing actor and supply-chain stage. Counts of records, not of money."
+        >
+          <StageMatrix rows={all} />
+        </Section>
+
+        <Section index="06" title="All financial rows" description={`Every row, filterable. Data as of ${site.lastUpdated}.`}>
+          <CapitalExplorer rows={summaries} materialNames={materialNames} />
+          <p className="mt-4 text-sm text-muted">
+            Download:{" "}
+            <a href="/api/export/financial-commitments.csv" className="text-accent hover:text-accent-strong">CSV</a>
+            {" · "}
+            <Link href="/api/v1/financial-commitments" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
+            {" · "}
+            <Link href="/data" className="text-accent hover:text-accent-strong">all exports</Link>
+          </p>
+        </Section>
+      </div>
+    </Container>
+  );
+}

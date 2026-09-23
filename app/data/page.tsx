@@ -13,7 +13,31 @@ const downloads = [
     file: "smpt-dataset.json",
     href: "/api/export/dataset.json",
     fmt: "JSON",
-    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions and sources, plus counts and the data notice.",
+    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions, sources, financial commitments and control measures, plus the capital-and-control summary, counts and the data notice.",
+  },
+  {
+    file: "smpt-financial-commitments.csv",
+    href: "/api/export/financial-commitments.csv",
+    fmt: "CSV",
+    desc: "One row per financial instrument: value role, capital source, amount in the source's currency with its qualifier and wording, provider, recipient, stages, materials, parent links and current status. Never converted or summed.",
+  },
+  {
+    file: "smpt-control-measures.csv",
+    href: "/api/export/control-measures.csv",
+    fmt: "CSV",
+    desc: "One row per control clause: measure type, direction, targets, materials, product scope in the source's words, product codes, legal basis and current status with any stated end date.",
+  },
+  {
+    file: "smpt-financial-status-history.csv",
+    href: "/api/export/financial-status-history.csv",
+    fmt: "CSV",
+    desc: "One row per financial or implementation status entry, in order, with its date, source and whether it is current.",
+  },
+  {
+    file: "smpt-control-status-history.csv",
+    href: "/api/export/control-status-history.csv",
+    fmt: "CSV",
+    desc: "One row per control status entry, in order, with its date, stated end, source and whether it is current.",
   },
   {
     file: "smpt-events.csv",
@@ -62,7 +86,7 @@ export default function DataPage() {
       <p className="mt-6 font-mono text-sm text-faint">
         Current snapshot: {s.events} events · {s.framingClaims} framing anchors ·{" "}
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
-        sources.
+        sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -87,6 +111,22 @@ export default function DataPage() {
             </a>
           </div>
         ))}
+      </div>
+
+      <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
+        <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-faint">
+          JSON API
+        </h2>
+        <p>
+          Read-only, prerendered endpoints under <code className="font-mono text-sm text-foreground">/api/v1</code>:
+          {" "}<code className="font-mono text-sm">events</code>, <code className="font-mono text-sm">framing</code>,{" "}
+          <code className="font-mono text-sm">materials</code>, <code className="font-mono text-sm">actors</code>,{" "}
+          <code className="font-mono text-sm">sources</code>, <code className="font-mono text-sm">financial-commitments</code>{" "}
+          and <code className="font-mono text-sm">control-measures</code> (each with a <code className="font-mono text-sm">/[id]</code>{" "}
+          record that bundles its sources), plus <code className="font-mono text-sm">capital-control/summary</code>, the
+          double-count-safe totals and status counts behind the Capital and Controls pages. Totals are per currency and per
+          value role, with statuses evaluated on the data&apos;s as-of date.
+        </p>
       </div>
 
       <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
