@@ -97,7 +97,15 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
    government rationale or framing, an unstated government status, speculative
    valuations, market-price estimates or unsupported projections — and stays
    attributed to its speaker in `evidence` and `statedBy`. No synthetic
-   economic-security score.
+   economic-security score. `npm run validate` checks both seed files at
+   runtime (`scripts/validate-capital-control.ts`, which also holds the shared
+   field-to-evidence map): keep records sorted by id; write figures as canonical
+   decimal strings ("1250000", not "1,250,000" or 1250000); use uppercase ISO-format
+   currency and country codes; give real dates, with each history's dated entries
+   oldest first; name only materials the event lists; keep `stageAllocation`,
+   `materialAttribution` and `targetScopes` consistent with what is recorded;
+   and cite in `evidence` the source of every populated field group, including
+   each term's, outcome's, relationship's and status entry's own source.
 
 ## Architecture
 

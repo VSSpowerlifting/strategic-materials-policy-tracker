@@ -78,7 +78,9 @@ Two child entities let one event hold the separate instruments inside it. Both a
 - **FinancialCommitment** (`fin-*`, `data/seed/financial-commitments.json`) — one financial instrument: value role, capital source, amount, provider, recipient, project, facility, location, supply-chain stages, materials, terms and outcomes, with separate source-linked status histories for the money (announced to disbursed) and the project (feasibility to operational). Typed links say what a commitment is part of or drawn from, in the same event or another; one commitment can be both.
 - **ControlMeasure** (`ctl-*`, `data/seed/control-measures.json`) — one operative clause of an export, import, investment or domestic control: type, direction, targets (including the end users and end uses it names, in its own words), materials, product scope and codes, legal basis, the measures it modifies, and a source-linked status history.
 
-`fin-` and `ctl-` are reserved id prefixes; `fc-` stays with framing claims and `cand-` with private candidates. Amounts are decimal strings in the source's own currency, never converted or totalled across currencies or instruments; every field names the source that supports it; and private capital or total project cost is never counted as public support. The full rules are on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology#capital-control). Validator enforcement is the next phase.
+`fin-` and `ctl-` are reserved id prefixes; `fc-` stays with framing claims and `cand-` with private candidates. Amounts are decimal strings in the source's own currency, never converted or totalled across currencies or instruments; every field names the source that supports it; and private capital or total project cost is never counted as public support. The full rules are on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology#capital-control).
+
+`npm run validate` checks both seed files at runtime (`scripts/validate-capital-control.ts`). Ids carry their prefix and are unique and sorted; every reference resolves, and a row's materials come from its event's; figures are canonical decimal strings; currency and country codes have the ISO format (the format only, not registry membership); dates are real, and a history's dated entries run oldest first; relationships and modifications never loop back; and every populated field group names its source in `evidence`, as does each term, outcome, relationship and status entry.
 
 ## Tech stack
 
@@ -111,7 +113,7 @@ lib/                 types, data loaders, labels, formatting, export, site confi
 data/seed/           events / framing / materials / jurisdictions / sources / watchlist JSON
                      financial-commitments / control-measures JSON (v0.5; empty until backfilled)
 data/candidates/     private, git-ignored candidate-review workspace (see its own README)
-scripts/             validate-data.ts, candidate-files.ts
+scripts/             validate-data.ts, validate-capital-control.ts, candidate-files.ts
 ```
 
 ## Data & validation
@@ -144,7 +146,7 @@ Live counts are on the [coverage dashboard](https://strategic-materials-policy-t
 - Expand the material set beyond the rare-earth-centred eleven. Several coded instruments (the Australian production tax incentive, the UK and Canadian lists) name minerals — lithium, cobalt, nickel, PGMs — that have no `Material` record, so those measures currently show a narrower material scope on site than their text carries.
 - South Korea and Brazil: both are in the intended actor set but neither is in the taxonomy yet, because no in-scope primary has been verified for them. The jurisdiction codes go in when the first event does, not before.
 - Deepen non-Chinese actor coverage as primary sources are verified.
-- **v0.5 Capital & Control:** validator rules for financial commitments and control measures (next), then a source-verified backfill of both, then their API and export fields. The data model is already in place; see [Capital & Control](#capital--control-v05-in-development) above.
+- **v0.5 Capital & Control:** a source-verified backfill of financial commitments and control measures (next), then their API and export fields. The data model and its runtime validator are already in place; see [Capital & Control](#capital--control-v05-in-development) above.
 
 ## Usage & citation
 

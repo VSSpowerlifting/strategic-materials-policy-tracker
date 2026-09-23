@@ -8,6 +8,8 @@
  *  - unique identifiers
  *  - all categorical labels fall within the allowed sets
  *  - translation provenance is set on every translated field
+ *  - the Capital & Control seeds (financial commitments, control measures)
+ *    pass scripts/validate-capital-control.ts
  *
  * Exits non-zero on any error so it can gate CI / pre-deploy.
  */
@@ -44,6 +46,7 @@ import {
 } from "../lib/types";
 import { site } from "../lib/site";
 import { isExampleCandidateFile } from "./candidate-files";
+import { formatCapitalControlIssue, parseCapitalControlSeed, validateCapitalControl } from "./validate-capital-control";
 
 const seedDir = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "seed");
 const read = <T>(name: string): T => JSON.parse(readFileSync(join(seedDir, `${name}.json`), "utf8")) as T;
@@ -405,8 +408,9 @@ const publishedIds = new Set<string>([
 const candidateIdSeen = new Map<string, string>();
 let candidateCount = 0;
 let exampleCandidateCount = 0;
+const candidateFiles = loadCandidateFiles();
 
-for (const { file, records } of loadCandidateFiles()) {
+for (const { file, records } of candidateFiles) {
   const isExample = isExampleCandidateFile(file);
   for (const c of records) {
     if (isExample) exampleCandidateCount++;
@@ -518,6 +522,46 @@ for (const { file, records } of loadCandidateFiles()) {
   }
 }
 
+// --- Capital & Control (v0.5) ------------------------------------------------
+//
+// Financial commitments ("fin-") and control measures ("ctl-") are checked by
+// scripts/validate-capital-control.ts, which returns structured issues and never
+// exits; this entry point only formats them and owns the exit code. Candidate
+// ids and their proposed-source ids are passed in so that no published row can
+// reference a private draft.
+
+const capitalControlSeed = (name: "financial-commitments" | "control-measures") =>
+  parseCapitalControlSeed(readFileSync(join(seedDir, `${name}.json`), "utf8"), name);
+const commitmentsSeed = capitalControlSeed("financial-commitments");
+const controlsSeed = capitalControlSeed("control-measures");
+
+const candidateReferenceIds = candidateFiles.flatMap(({ records }) =>
+  records.flatMap((c) => [
+    c?.candidateId,
+    ...(Array.isArray(c?.proposedSources) ? c.proposedSources.map((s) => s?.id) : []),
+  ]),
+);
+
+const capitalControl = validateCapitalControl({
+  financialCommitments: commitmentsSeed.records,
+  controlMeasures: controlsSeed.records,
+  corpus: {
+    events,
+    sources,
+    materials,
+    jurisdictions,
+    framing,
+    watchlist,
+    candidateIds: candidateReferenceIds.filter((id): id is string => typeof id === "string" && id.trim() !== ""),
+  },
+  // The UTC calendar date. Only the review warning for a lapsed "until" depends on it.
+  today: new Date().toISOString().slice(0, 10),
+});
+
+for (const issue of [...commitmentsSeed.errors, ...controlsSeed.errors, ...capitalControl.errors])
+  err(formatCapitalControlIssue(issue));
+for (const issue of capitalControl.warnings) warn(formatCapitalControlIssue(issue));
+
 // --- Leak proof: the build graph must not import candidate data -------------
 //
 // app/, components/ and lib/ are the only inputs to the production build. If any
@@ -564,10 +608,14 @@ const activeWatched = watchlist.filter((w) => w.status === "active").length;
 const exampleNote = exampleCandidateCount
   ? ` (+ ${exampleCandidateCount} example fixture${exampleCandidateCount === 1 ? "" : "s"}, schema-checked, not counted)`
   : "";
+const { financialCommitments: commitmentCount, controlMeasures: controlCount } = capitalControl.counts;
 const counts =
   `${events.length} events (${verifiedCount} verified · ${events.length - verifiedCount} provisional · ${monitoredCount} monitored) · ` +
   `${framing.length} framing claims · ${materials.length} materials · ${jurisdictions.length} jurisdictions · ` +
-  `${sources.length} sources · ${activeWatched}/${watchlist.length} watched sources active · ` +
+  `${sources.length} sources · ` +
+  `${commitmentCount} financial commitment${commitmentCount === 1 ? "" : "s"} · ` +
+  `${controlCount} control measure${controlCount === 1 ? "" : "s"} · ` +
+  `${activeWatched}/${watchlist.length} watched sources active · ` +
   `${candidateCount} candidate${candidateCount === 1 ? "" : "s"} (private)${exampleNote}`;
 
 if (warnings.length) {

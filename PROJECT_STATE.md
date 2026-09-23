@@ -1,8 +1,63 @@
 # Project state
 
-_Last updated: 2026-09-23 (v0.5 Capital & Control: Phase 0 merged; Phase 1 data model and review corrections on PR #3)._
+_Last updated: 2026-09-23 (v0.5 Capital & Control: Phases 0 and 1 merged; Phase 2 runtime validation on branch `feat/capital-control-validation`)._
 
-## Latest session: v0.5 Capital & Control — Phase 0 merged, Phase 1 data model
+## Latest session: v0.5 Capital & Control — Phase 2 runtime validation
+
+Branch `feat/capital-control-validation`, from `main` at `060ab08` (the Phase 1
+merge). Validation infrastructure only: no Capital & Control records, no API,
+export, page or analytics change, and both seed files are still `[]`.
+
+- `scripts/validate-capital-control.ts` (new): a pure validator. It takes the
+  parsed seed arrays, the corpus they reference and an injected `today`, and
+  returns structured issues (`code`, `recordId`, `index`, `field`, `message`);
+  it never reads files or exits. It holds the shared field-to-evidence maps
+  (moved out of the Phase 1 test) and one checker each for canonical decimal
+  strings, ISO-format currency and country codes, calendar dates and target
+  dates.
+- `scripts/validate-data.ts`: parses both seed files, runs the validator with
+  the corpus and the ids of private candidates, prints its errors and
+  warnings, and adds both counts to the summary line (0 financial commitments
+  · 0 control measures). The five existing warnings are unchanged.
+- Enforced: shape against `lib/types.ts` (required and unknown fields, JSON
+  types, blank strings, vocabularies); `fin-`/`ctl-` ids, unique across the
+  dataset and sorted; events, sources, materials, jurisdictions,
+  relationships, legal bases and modified measures that resolve, and no
+  candidate id; materials within the event's; stage allocation, material
+  attribution and target scopes consistent with what is recorded; non-empty
+  financial and control status histories (the implementation history may be
+  empty), with dated entries oldest first; `until` only on scheduled,
+  suspended or in-force entries and never before its entry; no self-links,
+  duplicates or cycles among relationships or modifications; coherent term
+  and outcome figures; evidence for every populated field group, none for an
+  empty one, and the same source's evidence for each term, outcome,
+  relationship and status entry. One warning: the current control status's
+  `until` has passed, so the record needs review.
+- Tests: `tests/capital-control-validation.test.ts` (34 tests on in-memory
+  fixtures, including runs of the validator entry point on the real seeds and
+  on a temporary invalid copy); `tests/capital-control-schema.test.ts` now
+  imports the evidence maps instead of keeping its own.
+
+Decided in this phase (to revisit only when Phase 3 evidence requires it):
+
+- A relationship is a (commitment, type) pair: the same link stated by a
+  second source is a duplicate, and that source goes in `evidence`. A product
+  code is a (system, code) pair with one role.
+- Currency and country codes are checked for format, not against a registry:
+  the repository has no trustworthy ISO list, and no dependency was added.
+- `until` is allowed on `scheduled`, `suspended` and `in_force`, as the
+  schema's own comment describes; the lapsed-`until` warning uses the UTC date.
+- A term with a figure needs a qualifier and a currency or unit; an outcome
+  with a figure needs a qualifier; a term or outcome without a figure carries
+  no qualifier, currency or unit.
+
+Not done here: `graphify update .` was skipped, since it would change files
+outside this task. The Phase 0 source issues below are still open.
+
+Next action: review and merge the Phase 2 PR, then Phase 3, the
+source-verified backfill of both seed files under these rules.
+
+## Previous session: v0.5 Capital & Control — Phase 0 merged, Phase 1 data model
 
 ### Phase 0: source-backed corrections (merged)
 
@@ -22,8 +77,10 @@ _Last updated: 2026-09-23 (v0.5 Capital & Control: Phase 0 merged; Phase 1 data 
   `src-gowling-ca-divest`; the pmc.gov.au page is bot-blocked; the MOFCOM No. 61
   annex (.wps) is unread.
 
-### Phase 1: Capital & Control data model (branch `feat/capital-control-schema`, PR #3, not merged)
+### Phase 1: Capital & Control data model (PR #3, merged)
 
+- PR #3, "Add Capital & Control data model", was merged to `main` on
+  2026-09-23 as `060ab085c606839952e3e53039c5f65b62c6b4da`.
 - `lib/types.ts`: two child entities of `PolicyEvent`, `FinancialCommitment`
   (`fin-*`) and `ControlMeasure` (`ctl-*`), with 23 controlled vocabularies, a
   decimal-string `MonetaryAmount`, arrays of `InstrumentTerm` and
@@ -66,14 +123,14 @@ Decided in review:
   estimates or unsupported projections, and it stays attributed to its speaker
   through `evidence` and `statedBy`.
 
-Phase 2 rules to write: canonical decimal strings and ISO codes, `materialIds`
+Phase 2 rules to write (now written; see the Phase 2 session above): canonical decimal strings and ISO codes, `materialIds`
 within the event's materials, evidence covering every populated field
 (including each relationship's source), relationships that resolve with no
 self-links, duplicates or cycles, `targetScopes` consistent with the stated end
 users and end uses, and chronological status histories.
 
-Next action: review and merge the Phase 1 PR, then Phase 2 (validator rules for
-the two entities), with the seed files still empty.
+Next action at the time, since done: the Phase 1 PR was merged as `060ab08`, and
+Phase 2 (validator rules for the two entities, seed files still empty) followed.
 
 ## Latest session: Candidate promotion (Canada, China, UK) + framing QA + commit prep
 
