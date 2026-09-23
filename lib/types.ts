@@ -345,6 +345,7 @@ export const FINANCIAL_INSTRUMENTS = [
   "offtake",
   "procurement_right",
   "stockpile_purchase",
+  "mixed", // one amount the source spreads over several named instruments (e.g. "loans and equity support") without a split
   "unspecified", // the source says "support", "funding" or "investment" and names no instrument
 ] as const;
 
@@ -519,6 +520,7 @@ export const CONTROL_MEASURE_TYPES = [
   "customs_enforcement",
   "domestic_production_control",
   "contractual_ownership_covenant",
+  "trade_negotiation", // a directed negotiation of agreements to adjust trade, with restrictions held in reserve
 ] as const;
 
 /** Which flow a control measure governs. */
@@ -540,6 +542,7 @@ export const CONTROL_STATUSES = [
   "expired",
   "revoked",
   "investigation", // an inquiry that imposes no restriction yet
+  "concluded", // an inquiry that has ended with a finding or report; what follows is recorded as its own measure
   "not_stated",
 ] as const;
 

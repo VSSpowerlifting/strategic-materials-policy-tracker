@@ -36,7 +36,8 @@
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
       "evt-ca-nrcan-cmrdd-2024",
-      "evt-cn-antismuggling-campaign-2025"
+      "evt-cn-antismuggling-campaign-2025",
+      "evt-us-proc-11001-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -99,7 +100,8 @@
       "evt-us-eo-14272-2025",
       "evt-us-cm-list-2022",
       "evt-cn-decree-785-2024",
-      "evt-au-cmpti-2025"
+      "evt-au-cmpti-2025",
+      "evt-us-proc-11001-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -158,7 +160,8 @@
       "evt-us-eo-14272-2025",
       "evt-us-cm-list-2022",
       "evt-cn-decree-785-2024",
-      "evt-au-cmpti-2025"
+      "evt-au-cmpti-2025",
+      "evt-us-proc-11001-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -194,7 +197,8 @@
       "evt-au-cmpti-2025",
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
-      "evt-cn-antismuggling-campaign-2025"
+      "evt-cn-antismuggling-campaign-2025",
+      "evt-us-proc-11001-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -228,7 +232,8 @@
       "evt-us-cm-list-2022",
       "evt-au-cmpti-2025",
       "evt-uk-cms-2025",
-      "evt-cn-antismuggling-campaign-2025"
+      "evt-cn-antismuggling-campaign-2025",
+      "evt-us-proc-11001-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -364,7 +369,8 @@
       "eu-critical-raw-materials-act",
       "evt-us-dod-mp-2025",
       "evt-jp-jogmec-lofdal-2026",
-      "evt-us-eo-14272-2025"
+      "evt-us-eo-14272-2025",
+      "evt-us-proc-11001-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

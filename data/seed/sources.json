@@ -426,10 +426,10 @@
     "url": "https://www.war.gov/News/Releases/Release/Article/4270722/office-of-strategic-capital-announces-first-loan-through-dod-agreement-with-mp/",
     "language": "en",
     "datePublished": "2025-08-10",
-    "dateAccessed": "2026-08-12",
+    "dateAccessed": "2026-09-23",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "OSC release recording the execution of the $150M loan contemplated by the July 2025 DoD agreement — the office's first direct loan. ACCESS CAVEAT: war.gov returns HTTP 403 to automated clients, including with a declared user agent, so the body text of this release has NOT been machine-read. Its existence, headline, issuing office and date (10 August 2025) were confirmed 2026-08-12 from the Office of Strategic Capital's own news listing at https://www.cto.mil/osc/, which links to this canonical URL. The loan terms coded on the event come from the MP Materials Form 8-K (src-dod-mp-transaction-agreement-2025), not from this release. Spot-check in a browser before relying on it for any further field. Rebuilt 2026-08-12 after the record was lost to an accidental working-tree revert."
+    "notes": "OSC release recording the execution of the $150M loan contemplated by the July 2025 DoD agreement, the office's first direct loan. war.gov returns HTTP 403 to automated clients; the body text was read in full in a browser on 2026-09-23. It states that the funding for the loan comes from the One Big Beautiful Bill Act, which provides OSC with $500 million of credit subsidy funding, creating up to $100 billion in available loan funds for critical minerals production and related industries and projects. The loan's rate and term come from the MP Materials Form 8-K (src-dod-mp-transaction-agreement-2025)."
   },
   {
     "id": "src-jogmec-lofdal-ja",
@@ -670,5 +670,17 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The National Wealth Fund's own release announcing up to £71 million (£36 million equity plus up to £35 million lending) for Tungsten West to restart the Hemerdon tungsten and tin mine near Plymouth. States that the resulting negotiation right for up to 50% of production is separate from the offtake agreement itself, which was still being negotiated by the UK Government as of this release."
+  },
+  {
+    "id": "src-fedreg-proc-11001",
+    "title": "Proclamation 11001 of January 14, 2026: Adjusting Imports of Processed Critical Minerals and Their Derivative Products Into The United States",
+    "publisher": "Federal Register (Office of the Federal Register, National Archives)",
+    "url": "https://www.federalregister.gov/documents/2026/01/20/2026-01045/adjusting-imports-of-processed-critical-minerals-and-their-derivative-products-into-the-united",
+    "language": "en",
+    "datePublished": "2026-01-20",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Canonical Federal Register text, 91 FR 2439 (FR Doc. 2026-01045), signed 14 January 2026. Read in full 2026-09-23 via the Federal Register full-text endpoint (https://www.federalregister.gov/documents/full_text/text/2026/01/20/2026-01045.txt). Source of the 24 October 2025 report date, the negotiation mandate and the 180-day update requirement."
   }
 ]

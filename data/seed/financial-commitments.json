@@ -1,1 +1,2253 @@
-[]
+[
+  {
+    "id": "fin-au-cmf-2026-expanded-facility",
+    "eventId": "evt-au-cmsr-2026",
+    "relationships": [],
+    "instrument": "mixed",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "5000000000",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "the expanded $5 billion Critical Minerals Facility",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Australian Government (Critical Minerals Facility)",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "not_stated",
+        "date": null,
+        "sourceId": "src-au-industry-cmsr",
+        "note": "The release describes the facility as expanded and existing; it gives no date or status for the expansion."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on Reserve funding",
+        "note": "\"which provides government-backed loans and equity support for projects\""
+      },
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on Reserve funding",
+        "note": null
+      }
+    ],
+    "notes": "Recorded because the Reserve's A$1 billion for transactions is drawn from it. An envelope, never added to the awards or transactions drawn from it."
+  },
+  {
+    "id": "fin-au-cmpti-2025-production-tax-offset",
+    "eventId": "evt-au-cmpti-2025",
+    "relationships": [],
+    "instrument": "tax_credit",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "Commonwealth of Australia (refundable tax offset)",
+    "providerJurisdiction": "australia",
+    "legalAuthority": "Future Made in Australia (Production Tax Credits and Other Measures) Act 2025 (Act No. 9 of 2025), Schedule 2, inserting Division 419 into the Income Tax Assessment Act 1997",
+    "recipient": "Constitutional corporations with registered CMPTI processing activities",
+    "project": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": null,
+        "asStated": "one or more facilities in Australia"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony",
+      "gallium",
+      "germanium",
+      "graphite",
+      "rare-earth-elements",
+      "dysprosium",
+      "neodymium",
+      "praseodymium",
+      "terbium",
+      "tungsten"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "arsenic",
+      "beryllium",
+      "bismuth",
+      "chromium",
+      "cobalt",
+      "fluorine",
+      "hafnium",
+      "high purity alumina",
+      "indium",
+      "lithium",
+      "magnesium",
+      "manganese",
+      "molybdenum",
+      "nickel",
+      "niobium",
+      "platinum-group elements (iridium, osmium, palladium, platinum, rhodium, ruthenium)",
+      "rhenium",
+      "scandium",
+      "selenium",
+      "silicon",
+      "tantalum",
+      "tellurium",
+      "titanium",
+      "vanadium",
+      "zirconium",
+      "a thing prescribed by the regulations (not uranium)"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "authorized",
+        "date": "2025-02-14",
+        "sourceId": "src-legislation-au-cmpti-2025",
+        "note": "Act No. 9 of 2025, made 14 February 2025."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "tax_credit_rate",
+        "value": "10",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of CMPTI expenditure",
+        "asStated": "The amount of the CMPTI tax offset for the income year is equal to 10% of the company's total CMPTI expenditure",
+        "sourceId": "src-legislation-au-cmpti-2025",
+        "note": "Reducible under community benefit rules (s 419-10(2))."
+      },
+      {
+        "kind": "duration",
+        "value": "10",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "income years",
+        "asStated": "A registration can be in force for 10 income years during the period starting on 1 July 2027 and ending on 30 June 2040.",
+        "sourceId": "src-legislation-au-cmpti-2025",
+        "note": null
+      },
+      {
+        "kind": "other",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "the income year: (i) starts on or after 1 July 2027; and (ii) ends on or before 30 June 2040",
+        "sourceId": "src-legislation-au-cmpti-2025",
+        "note": "Window of eligible income years (s 419-5(1)(b))."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-legislation-au-cmpti-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Schedule 2, ss 419-5, 419-10, 419-15, 419-20 (pp. 36–39 of the authorised PDF)",
+        "note": null
+      }
+    ],
+    "notes": "A statutory entitlement with no stated aggregate amount, so it contributes no figure to any total. \"Processing\" and \"refining\" render s 419-20's \"substantially transforming a feedstock ... through extractive metallurgical processing into a purer or more refined form\". The Act lists scandium separately from the rare-earth elements; it is kept as the Act lists it."
+  },
+  {
+    "id": "fin-au-cmsr-2026-reserve",
+    "eventId": "evt-au-cmsr-2026",
+    "relationships": [],
+    "instrument": "mixed",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1200000000",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "$1.2 billion Critical Minerals Strategic Reserve",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Australian Government",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "antimony",
+      "gallium",
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-01-12",
+        "sourceId": "src-au-industry-cmsr",
+        "note": "New details of an already announced Reserve; the release says enabling legislation for Export Finance Australia will be brought forward in 2026."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph; paragraphs on first minerals and operation",
+        "note": "Operates \"by securing rights to minerals produced in Australia and on-selling those rights\", with a separate allocation for selective stockpiling."
+      }
+    ],
+    "notes": "The parent of two stated components, A$1 billion for transactions and A$185 million for stockpiling and implementation costs. The components sum to A$1.185 billion against the A$1.2 billion headline; the release does not explain the gap and none is inferred. Materials are the Reserve's stated first focus."
+  },
+  {
+    "id": "fin-au-cmsr-2026-stockpiling-allocation",
+    "eventId": "evt-au-cmsr-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-au-cmsr-2026-reserve",
+        "relationship": "part_of",
+        "sourceId": "src-au-industry-cmsr",
+        "locator": "Paragraph on Reserve funding",
+        "note": null
+      }
+    ],
+    "instrument": "stockpile_purchase",
+    "valueRole": "budget_appropriation",
+    "capitalSource": "public",
+    "amount": {
+      "value": "185000000",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "A further $185 million has been allocated for selective stockpiling of minerals, where required, and other implementation costs.",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Australian Government",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "stockpiling"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "allocated",
+        "date": null,
+        "sourceId": "src-au-industry-cmsr",
+        "note": "The allocation date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "relationships",
+          "stages",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on Reserve funding",
+        "note": null
+      },
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Paragraph on Reserve funding",
+        "note": "The allocation also covers \"other implementation costs\", and no split is given."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-au-cmsr-2026-transactions",
+    "eventId": "evt-au-cmsr-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-au-cmf-2026-expanded-facility",
+        "relationship": "drawn_from",
+        "sourceId": "src-au-industry-cmsr",
+        "locator": "Paragraph on Reserve funding",
+        "note": null
+      },
+      {
+        "commitmentId": "fin-au-cmsr-2026-reserve",
+        "relationship": "part_of",
+        "sourceId": "src-au-industry-cmsr",
+        "locator": "Paragraph on Reserve funding",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1000000000",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "The Reserve includes $1 billion for transactions to be drawn from the expanded $5 billion Critical Minerals Facility",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Australian Government (Department of Industry, Science and Resources, with Export Finance Australia)",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-01-12",
+        "sourceId": "src-au-industry-cmsr",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "relationships",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraphs on Reserve funding and delivery",
+        "note": null
+      }
+    ],
+    "notes": "The release does not say which instruments the transactions will use. The facility it is drawn from provides loans and equity support, and the Reserve operates by securing and on-selling rights to minerals."
+  },
+  {
+    "id": "fin-ca-cmrdd-2024-cyclic-materials",
+    "eventId": "evt-ca-nrcan-cmrdd-2024",
+    "relationships": [
+      {
+        "commitmentId": "fin-ca-cmrdd-2024-kingston-awards",
+        "relationship": "part_of",
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "locator": "Opening paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "4900000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "NRCan is providing $4.9 million to Cyclic Materials for this initiative",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
+    "providerJurisdiction": "canada",
+    "legalAuthority": null,
+    "recipient": "Cyclic Materials Incorporated",
+    "project": "Demonstration plant producing high-purity mixed rare earth oxide and a cobalt–nickel mixed hydroxide product from recycled materials",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "recycling"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "cobalt",
+      "nickel"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2024-09-04",
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "relationships",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on Cyclic Materials",
+        "note": null
+      }
+    ],
+    "notes": "The release calls the funding an investment and does not name the instrument."
+  },
+  {
+    "id": "fin-ca-cmrdd-2024-green-graphite",
+    "eventId": "evt-ca-nrcan-cmrdd-2024",
+    "relationships": [
+      {
+        "commitmentId": "fin-ca-cmrdd-2024-kingston-awards",
+        "relationship": "part_of",
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "locator": "Opening paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "3500000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "NRCan is providing $3.5 million to GGT for this initiative",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
+    "providerJurisdiction": "canada",
+    "legalAuthority": null,
+    "recipient": "Green Graphite Technologies Inc.",
+    "project": "Demonstrating GraphRenew technology to recover graphite from secondary sources and upgrade it to lithium-ion battery-grade graphite",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "recycling"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2024-09-04",
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "relationships",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on Green Graphite Technologies",
+        "note": null
+      }
+    ],
+    "notes": "The release calls the funding an investment and does not name the instrument."
+  },
+  {
+    "id": "fin-ca-cmrdd-2024-kingston-awards",
+    "eventId": "evt-ca-nrcan-cmrdd-2024",
+    "relationships": [
+      {
+        "commitmentId": "fin-ca-cms-2022-budget-envelope",
+        "relationship": "drawn_from",
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "locator": "Quick facts",
+        "note": "The release says the CMRDD \"is part of the Canadian Critical Minerals Strategy\" and that \"Budget 2022 provided $3.8 billion over eight years to implement\" it."
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "8400000",
+      "currency": "CAD",
+      "qualifier": "approximately",
+      "amountAsStated": "almost $8.4 million in investments",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
+    "providerJurisdiction": "canada",
+    "legalAuthority": null,
+    "recipient": "Cyclic Materials Incorporated and Green Graphite Technologies Inc.",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "recycling"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements",
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "cobalt",
+      "nickel"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2024-09-04",
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "relationships",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph; Quick facts",
+        "note": null
+      }
+    ],
+    "notes": "The announcement total; its two awards are recorded as parts of it. \"Almost $8.4 million\" is the release's own rounding of $4.9 million plus $3.5 million."
+  },
+  {
+    "id": "fin-ca-cms-2022-budget-envelope",
+    "eventId": "evt-ca-cms-2022",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "budget_appropriation",
+    "capitalSource": "public",
+    "amount": {
+      "value": "3800000000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "backed by up to $3.8 billion in federal funding allocated in Budget 2022",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Government of Canada",
+    "providerJurisdiction": "canada",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "exploration",
+      "processing",
+      "recycling",
+      "research_development"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "allocated",
+        "date": null,
+        "sourceId": "src-nrcan-cms-2022",
+        "note": "Allocated in Budget 2022; the release gives no date for the allocation."
+      },
+      {
+        "status": "announced",
+        "date": "2022-12-09",
+        "sourceId": "src-nrcan-cms-2022",
+        "note": "The Strategy was released in Vancouver on 9 December 2022."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "8",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "Budget 2022 provided $3.8 billion over eight years to implement the Canadian Critical Minerals Strategy.",
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cms-2022",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "stages",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph",
+        "note": "\"from geoscience and exploration to mineral processing, manufacturing and recycling applications, including support for research, development and technological deployment\""
+      },
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Quick facts",
+        "note": null
+      }
+    ],
+    "notes": "\"Manufacturing\" in the release is not mapped to a stage: it does not say which manufacturing. The release is not an itemised budget, so no component amounts are recorded for it."
+  },
+  {
+    "id": "fin-in-ncmm-2025-government-expenditure",
+    "eventId": "evt-in-ncmm-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "163000000000",
+      "currency": "INR",
+      "qualifier": "exact",
+      "amountAsStated": "an expenditure of Rs.16,300 crore",
+      "currencyBasis": "stated"
+    },
+    "provider": "Government of India",
+    "providerJurisdiction": "india",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "exploration",
+      "mining",
+      "processing",
+      "recycling",
+      "stockpiling",
+      "research_development"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "authorized",
+        "date": "2025-01-29",
+        "sourceId": "src-pib-ncmm-2025",
+        "note": "Approved by the Union Cabinet."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-pib-ncmm-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "stages",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraphs 1–4",
+        "note": null
+      }
+    ],
+    "notes": "Rs.1 crore = 10,000,000 rupees. The headline gives an outlay of Rs.34,300 crore over seven years, the sum of this expenditure and the Rs.18,000 crore of expected PSU investment; the two are recorded separately and the sum is not stored. Stages follow the release: exploration, mining, beneficiation and processing, recovery from end-of-life products, a domestic stockpile and research."
+  },
+  {
+    "id": "fin-in-ncmm-2025-psu-investment",
+    "eventId": "evt-in-ncmm-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "expected_co_investment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "180000000000",
+      "currency": "INR",
+      "qualifier": "exact",
+      "amountAsStated": "expected investment of Rs.18,000 crore by PSUs, etc.",
+      "currencyBasis": "stated"
+    },
+    "provider": "Indian public-sector undertakings (\"PSUs, etc.\")",
+    "providerJurisdiction": "india",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-01-29",
+        "sourceId": "src-pib-ncmm-2025",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-pib-ncmm-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph 1",
+        "note": null
+      },
+      {
+        "sourceId": "src-pib-ncmm-2025",
+        "supports": [
+          "capital_source",
+          "provider"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Paragraph 1",
+        "note": "\"PSUs, etc.\": the \"etc.\" leaves open investors other than public-sector undertakings."
+      }
+    ],
+    "notes": "Money the government expects others to invest, not a government commitment."
+  },
+  {
+    "id": "fin-jp-jare-lynas-2023-equity",
+    "eventId": "evt-jp-jogmec-lynas-2023",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "mixed_vehicle",
+    "amount": {
+      "value": "200000000",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "an additional AUD 200million worth investment in the equity of Lynas Rare Earths Limited",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Australia Rare Earth (JARE), co-founded by Sojitz Corporation and JOGMEC",
+    "providerJurisdiction": "japan",
+    "legalAuthority": null,
+    "recipient": "Lynas Rare Earths Limited",
+    "project": "Lynas mid-term growth plan: light rare earths production capacity expansion and heavy rare earths separation commencement",
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2023-03-07",
+        "sourceId": "src-jogmec-lynas",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": null
+      }
+    ],
+    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split."
+  },
+  {
+    "id": "fin-jp-jare-lynas-2023-hre-offtake",
+    "eventId": "evt-jp-jogmec-lynas-2023",
+    "relationships": [],
+    "instrument": "offtake",
+    "valueRole": "commitment",
+    "capitalSource": "not_stated",
+    "amount": null,
+    "provider": "Sojitz Corporation and JOGMEC",
+    "providerJurisdiction": "japan",
+    "legalAuthority": null,
+    "recipient": "Lynas Rare Earths Limited",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "separation"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-jogmec-lynas",
+        "note": "\"have entered into an agreement\"; the date of the agreement is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "offtake_share",
+        "value": "65",
+        "qualifier": "up_to",
+        "currency": null,
+        "unit": "% of heavy rare earths produced from Mt. Weld feedstock",
+        "asStated": "supply up to 65% of the HRE (dysprosium and terbium) produced by Lynas from Mt. Weld feedstock to the Japanese market",
+        "sourceId": "src-jogmec-lynas",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "instrument",
+          "value_role",
+          "provider",
+          "recipient",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": null
+      }
+    ],
+    "notes": "A supply agreement between a trading company, a state agency and the producer; no money value is stated."
+  },
+  {
+    "id": "fin-jp-jogmec-lofdal-2026-equity",
+    "eventId": "evt-jp-jogmec-lofdal-2026",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "47668000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to 47.668 million Canadian dollars (approximately 5.5 billion yen)",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "legalAuthority": null,
+    "recipient": "TJ Namibia Rare Earths Corporation (special purpose company established by Toyota Tsusho)",
+    "project": "Lofdal heavy rare earth development project",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "NA",
+        "subnational": "Kunene Region",
+        "asStated": "the Lofdal area of the Kunene Region, Republic of Namibia"
+      }
+    ],
+    "stages": [
+      "exploration",
+      "mining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-jogmec-lofdal-en",
+        "note": "\"JOGMEC has decided to invest up to 47.668 million Canadian dollars\"; the decision date is not stated."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": "2026-07-23",
+        "sourceId": "src-jogmec-lofdal-en",
+        "note": "\"The initial investment was made on July 23, 2026.\""
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "feasibility",
+        "date": null,
+        "sourceId": "src-jogmec-lofdal-en",
+        "note": "A Definitive Feasibility Study is being conducted through TJ."
+      }
+    ],
+    "terms": [],
+    "outcomes": [
+      {
+        "metric": "other",
+        "value": null,
+        "qualifier": null,
+        "unit": null,
+        "targetDate": null,
+        "asStated": "JOGMEC and Toyota Tsusho ... aim to make a final decision on commercialization during FY2026.",
+        "statedBy": "government",
+        "sourceId": "src-jogmec-lofdal-en",
+        "note": "Joint statement by JOGMEC and Toyota Tsusho; Japanese FY2026 runs April 2026 to March 2027."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lofdal-en",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Second to fourth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-jogmec-lofdal-ja",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Title",
+        "note": "The Japanese title describes the SPC's business as レアアース探査・開発事業 (rare earth exploration and development)."
+      }
+    ],
+    "notes": "The amount is in Canadian dollars in both the Japanese and English releases; the yen figure is an approximation given in the release (約54.6億円 in the Japanese text, \"approximately 5.5 billion yen\" in English) and is not recorded as a separate amount."
+  },
+  {
+    "id": "fin-uk-cms-2025-critical-mineral-fund",
+    "eventId": "evt-uk-cms-2025",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "GBP",
+      "qualifier": "up_to",
+      "amountAsStated": "funding of up to £50 million will be made available by DBT to support critical mineral projects",
+      "currencyBasis": "stated"
+    },
+    "provider": "Department for Business and Trade",
+    "providerJurisdiction": "uk",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-11-22",
+        "sourceId": "src-gov-uk-cms-2025",
+        "note": "\"Further detail will be announced in 2026.\""
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-gov-uk-cms-2025",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "p. 20 (Industrial Strategy section); p. 41",
+        "note": null
+      },
+      {
+        "sourceId": "src-gov-uk-cms-2025",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "p. 20",
+        "note": "The strategy frames the fund as \"bespoke, targeted grant funding\" and elsewhere as \"bespoke critical mineral support\"."
+      }
+    ],
+    "notes": "The strategy says the fund \"could include expanding research and innovation as well as supporting commercialisation\"; because that is conditional, no stage is recorded."
+  },
+  {
+    "id": "fin-uk-nwf-2026-tungsten-procurement-right",
+    "eventId": "evt-uk-nwf-tungsten-west-2026",
+    "relationships": [],
+    "instrument": "procurement_right",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "UK Government",
+    "providerJurisdiction": "uk",
+    "legalAuthority": null,
+    "recipient": "Tungsten West",
+    "project": null,
+    "facility": "Hemerdon mine",
+    "locations": [
+      {
+        "countryCode": "GB",
+        "subnational": "Devon",
+        "asStated": "on the outskirts of Plymouth"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-25",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "note": "An exclusive negotiation period only: \"The offtake agreement is being negotiated separately by UK Government.\""
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "procurement_share",
+        "value": "50",
+        "qualifier": "up_to",
+        "currency": null,
+        "unit": "% of the mine's tungsten production",
+        "asStated": "the right to procure up to 50% of the mine's tungsten production, stated in its 2025 Feasibility Study",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Unlocked by the NWF investment but not part of it. No agreement had been concluded when the release was published."
+  },
+  {
+    "id": "fin-uk-nwf-2026-tungsten-west-equity",
+    "eventId": "evt-uk-nwf-tungsten-west-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-uk-nwf-2026-tungsten-west-package",
+        "relationship": "part_of",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "36000000",
+      "currency": "GBP",
+      "qualifier": "exact",
+      "amountAsStated": "a £36 million equity investment",
+      "currencyBasis": "stated"
+    },
+    "provider": "National Wealth Fund",
+    "providerJurisdiction": "uk",
+    "legalAuthority": null,
+    "recipient": "Tungsten West",
+    "project": "Restart of production at the Hemerdon tungsten and tin mine",
+    "facility": "Hemerdon mine",
+    "locations": [
+      {
+        "countryCode": "GB",
+        "subnational": "Devon",
+        "asStated": "on the outskirts of Plymouth"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "tin"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-25",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "relationships",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-uk-nwf-2026-tungsten-west-lending",
+    "eventId": "evt-uk-nwf-tungsten-west-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-uk-nwf-2026-tungsten-west-package",
+        "relationship": "part_of",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "35000000",
+      "currency": "GBP",
+      "qualifier": "up_to",
+      "amountAsStated": "up to £35 million of lending",
+      "currencyBasis": "stated"
+    },
+    "provider": "National Wealth Fund",
+    "providerJurisdiction": "uk",
+    "legalAuthority": null,
+    "recipient": "Tungsten West",
+    "project": "Restart of production at the Hemerdon tungsten and tin mine",
+    "facility": "Hemerdon mine",
+    "locations": [
+      {
+        "countryCode": "GB",
+        "subnational": "Devon",
+        "asStated": "on the outskirts of Plymouth"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "tin"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-25",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "relationships",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-uk-nwf-2026-tungsten-west-package",
+    "eventId": "evt-uk-nwf-tungsten-west-2026",
+    "relationships": [],
+    "instrument": "mixed",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "71000000",
+      "currency": "GBP",
+      "qualifier": "up_to",
+      "amountAsStated": "an investment of up to £71 million in Tungsten West",
+      "currencyBasis": "stated"
+    },
+    "provider": "National Wealth Fund",
+    "providerJurisdiction": "uk",
+    "legalAuthority": null,
+    "recipient": "Tungsten West",
+    "project": "Restart of production at the Hemerdon tungsten and tin mine",
+    "facility": "Hemerdon mine",
+    "locations": [
+      {
+        "countryCode": "GB",
+        "subnational": "Devon",
+        "asStated": "on the outskirts of Plymouth"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "tin"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-25",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [
+      {
+        "metric": "target_date",
+        "value": null,
+        "qualifier": null,
+        "unit": null,
+        "targetDate": "2027",
+        "asStated": "The Company is targeting ramp up to full scale production in Q1 2027.",
+        "statedBy": "recipient",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "note": "First quarter of 2027."
+      },
+      {
+        "metric": "direct_jobs",
+        "value": "350",
+        "qualifier": "approximately",
+        "unit": "direct jobs",
+        "targetDate": null,
+        "asStated": "The Hemerdon project is expected to support around 350 direct jobs once fully operational",
+        "statedBy": "government",
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "note": "Stated by the National Wealth Fund, which is wholly owned by HM Treasury."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "The National Wealth Fund is \"wholly owned by HM Treasury\"."
+      }
+    ],
+    "notes": "The package total; its equity and lending components are recorded as parts of it. The stages render \"construction, commissioning and processing costs associated with restarting production\"."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-additional-preferred-option",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "350000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "a commitment for up to $350 million in additional funding in the form of additional Series A Preferred Stock",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of Defense",
+    "providerJurisdiction": "us",
+    "legalAuthority": null,
+    "recipient": "MP Materials Corp.",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-07-09",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "Provided for in the Transaction Agreement as one alternative for the Company's $350 million Funding Allocation."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Introductory paragraph; Item 1.01, Funding Allocation",
+        "note": null
+      }
+    ],
+    "notes": "Contingent: the Transaction Agreement lets the Company fund up to the full $350 million either by selling additional preferred stock to DoD on the same terms or under the JPMorgan / Goldman Sachs committed financing. The filing does not say which it chose, and no later source in the corpus records an exercise, so this is a ceiling on an option, not money paid."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-bank-financing",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "private_financing",
+    "capitalSource": "private",
+    "amount": {
+      "value": "1000000000",
+      "currency": "USD",
+      "qualifier": "at_least",
+      "amountAsStated": "committed secured financing ... in an amount equal to, in the aggregate, at least $1,000,000,000 (the \"10X Facility Funding\")",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "JPMorgan Chase Funding Inc. and Goldman Sachs Bank USA",
+    "providerJurisdiction": null,
+    "legalAuthority": null,
+    "recipient": "MP Materials Corp.",
+    "project": null,
+    "facility": "10X Facility",
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-07-09",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "A debt commitment letter, \"subject to customary terms and conditions\"; the filing does not describe an executed loan agreement."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "650000000",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": null,
+        "asStated": "$650,000,000 of which will ... be specifically allocated to the construction of the 10X Facility",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "facility",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, 10X Facility Funding",
+        "note": null
+      }
+    ],
+    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-company-cash",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "recipient_own_funds",
+    "capitalSource": "private",
+    "amount": {
+      "value": "600000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "The Company has also agreed to use up to $600,000,000 of its existing cash to fund the above projects.",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": null,
+    "providerJurisdiction": null,
+    "legalAuthority": null,
+    "recipient": "MP Materials Corp.",
+    "project": "HREE refining expansion and hydrochloric acid recommissioning at Mountain Pass; Independence magnet facility expansion",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-07-09",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "An undertaking in the Transaction Agreement."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [
+      {
+        "metric": "annual_capacity",
+        "value": "3000",
+        "qualifier": "exact",
+        "unit": "tons of magnets annually",
+        "targetDate": null,
+        "asStated": "expand capacity at the Company's \"Independence\" magnet facility ... to a projected 3,000 tons of magnets annually",
+        "statedBy": "recipient",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "A projection in the company's filing; a reasonable-best-efforts undertaking, not a government target."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "recipient",
+          "project",
+          "stages",
+          "materials",
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Transaction Agreement",
+        "note": null
+      }
+    ],
+    "notes": "The recipient's own contribution, recorded so it is never counted as public support."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-magnet-offtake",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "offtake",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "US Department of Defense",
+    "providerJurisdiction": "us",
+    "legalAuthority": null,
+    "recipient": "MP 10X Development, LLC (project company established to develop the 10X Facility)",
+    "project": "Second domestic magnet manufacturing facility",
+    "facility": "10X Facility",
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-07-09",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "Offtake Agreement dated 9 July 2025 (Exhibit 10.5)."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-07-10",
+        "sourceId": "src-mp-dod-2025",
+        "note": "The company \"will construct\" the facility \"at a soon-to-be-chosen location\"."
+      }
+    ],
+    "terms": [
+      {
+        "kind": "offtake_share",
+        "value": "100",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of magnet production",
+        "asStated": "the Project Company will sell and deliver to the Department of Defense the entire amount of magnets produced at the 10X Facility",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "The Project Company may syndicate up to 100% of production to commercial customers at DoD's request, or at its own request with DoD's consent."
+      },
+      {
+        "kind": "duration",
+        "value": "10",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "a term of ten years following the Commercial Operation Date",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": null
+      },
+      {
+        "kind": "other",
+        "value": "140000000",
+        "qualifier": "at_least",
+        "currency": "USD",
+        "unit": "EBITDA per year",
+        "asStated": "the 10X Facility will generate at least $140,000,000 of EBITDA on an annual basis after reaching full production capacity, adjusted annually ... for inflation at a rate equal to 2%",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "The Threshold EBITDA Amount."
+      },
+      {
+        "kind": "other",
+        "value": "25",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the Threshold EBITDA Amount per quarter",
+        "asStated": "quarterly \"magnet facilitation payments\" ... equal to 25% of the applicable Threshold EBITDA Amount each quarter",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": null
+      },
+      {
+        "kind": "annual_reimbursement_cap",
+        "value": "30000000",
+        "qualifier": "up_to",
+        "currency": "USD",
+        "unit": "per calendar year",
+        "asStated": "payments in respect of certain incremental costs ... capped at $30,000,000 in any calendar year",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": null
+      }
+    ],
+    "outcomes": [
+      {
+        "metric": "target_date",
+        "value": null,
+        "qualifier": null,
+        "unit": null,
+        "targetDate": "2028",
+        "asStated": "expected to begin commissioning in 2028",
+        "statedBy": "recipient",
+        "sourceId": "src-mp-dod-2025",
+        "note": null
+      },
+      {
+        "metric": "annual_capacity",
+        "value": "10000",
+        "qualifier": "approximately",
+        "unit": "metric tons",
+        "targetDate": null,
+        "asStated": "MP Materials' total U.S. rare earth magnet manufacturing capacity will reach an estimated 10,000 metric tons",
+        "statedBy": "recipient",
+        "sourceId": "src-mp-dod-2025",
+        "note": "Company-wide magnet capacity once the facility is complete, not the 10X Facility alone."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Offtake Agreement",
+        "note": null
+      },
+      {
+        "sourceId": "src-mp-dod-2025",
+        "supports": [
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-preferred-equity",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "400000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$400 million equity investment",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of Defense",
+    "providerJurisdiction": "us",
+    "legalAuthority": "Defense Production Act Title III, 50 U.S.C. § 4531 et seq., \"as well as other authorities\"",
+    "recipient": "MP Materials Corp.",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "separation",
+      "processing",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-07-09",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "Subscription Agreement entered into on the Effective Date; 400,000 shares of Series A Cumulative Perpetual Convertible Preferred Stock to be issued on the Closing Date, 11 July 2025."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "7",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% per year",
+        "asStated": "Shares of Series A Preferred Stock accrue cumulative dividends at a rate of 7.0% per year ... payable solely in-kind",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "Dividend rate on the preferred stock."
+      },
+      {
+        "kind": "other",
+        "value": "30.03",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": "per share",
+        "asStated": "a warrant ... for a period of 10 years from the Closing Date for up to 11,201,659 shares of Common Stock, at an initial exercise price of $30.03 per share",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "The warrant issued to DoD alongside the preferred stock; the warrant carries no separate purchase amount."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Introductory paragraph; Item 1.01, Series A Preferred Stock and Warrant",
+        "note": null
+      },
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "legal_authority"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 8.01, risk factors",
+        "note": "The company reports that it received assurances from DoD that it has authority under DPA Title III and other authorities; this is the recipient's account, not a government statement."
+      },
+      {
+        "sourceId": "src-mp-dod-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on use of proceeds",
+        "note": "The recipient's stated intended use: \"to expand its existing rare earths separation and processing capabilities, as well as its magnet production capacity\"."
+      }
+    ],
+    "notes": "DoD's convertible preferred stock and warrant together represent 15% of issued and outstanding common stock as of the Closing Date, on an as-converted and as-exercised basis (Form 8-K). Stage attribution is the recipient's stated intended use of proceeds."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-price-floor",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "price_floor",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "US Department of Defense",
+    "providerJurisdiction": "us",
+    "legalAuthority": null,
+    "recipient": "MP Materials Corp.",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "neodymium",
+      "praseodymium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-07-09",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "NdPr price floor protection agreement (PPA) entered into on the Effective Date."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "price_floor",
+        "value": "110",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": "per kg of NdPr",
+        "asStated": "a quarterly payment per kilogram (kg) of Neodymium-Praseodymium (\"NdPr\") produced by the Company equal to the shortfall between $110 per kg and the Benchmark Quarterly Average Volume Weighted Price",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": null
+      },
+      {
+        "kind": "duration",
+        "value": "10",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "will continue for 10 years",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "From the first day of the first full calendar quarter following closing."
+      },
+      {
+        "kind": "other",
+        "value": "30",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the NdPr sales price above $110 per kg",
+        "asStated": "the Department of Defense will be entitled to receive 30% of the NdPr sales price which exceeds $110 per kg",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "Applies after the 10X Facility reaches full production capacity."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Price Protection Agreement",
+        "note": null
+      }
+    ],
+    "notes": "Applies to all of the Company's products that contain NdPr (concentrate, oxide and metal). No total value is stated: the cost depends on future prices, and none is estimated here."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-samarium-loan",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-osc-obbba-2025-lending-authority",
+        "relationship": "drawn_from",
+        "sourceId": "src-osc-mp-loan-2025",
+        "locator": "Third paragraph",
+        "note": "The release states the loan's funding comes from the One Big Beautiful Bill Act's OSC credit subsidy, which creates up to $100 billion in available loan funds."
+      }
+    ],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "150000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "a loan to the Company in the aggregate principal amount of $150,000,000 (the \"Samarium Project Loan\")",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of Defense, Office of Strategic Capital",
+    "providerJurisdiction": "us",
+    "legalAuthority": "One Big Beautiful Bill Act (source of OSC's credit subsidy funding)",
+    "recipient": "MP Materials Corp.",
+    "project": "Samarium Project: expansion of heavy rare earth separation, including separation of samarium oxide",
+    "facility": "Mountain Pass Rare Earth Mine and Processing Facility",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "California",
+        "asStated": "near Mountain Pass, San Bernardino County, California"
+      }
+    ],
+    "stages": [
+      "separation"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-07-09",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "The Transaction Agreement provides that DoD will extend the loan within 30 days of the Effective Date, subject to agreed extensions."
+      },
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-osc-mp-loan-2025",
+        "note": "OSC announced on 10 August 2025 \"the recent execution of its first direct loan\"; the execution date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "lending_rate",
+        "value": "1",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "percentage points above the 10-year U.S. Treasury constant maturity rate",
+        "asStated": "Interest will accrue ... at a rate equal to the 10-year U.S. Treasury constant maturity rate ... plus 1.00%",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": null
+      },
+      {
+        "kind": "duration",
+        "value": "12",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "maturing 12 years after issuance of the Promissory Note",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Transaction Agreement; Item 2.03",
+        "note": null
+      },
+      {
+        "sourceId": "src-osc-mp-loan-2025",
+        "supports": [
+          "instrument",
+          "amount",
+          "provider",
+          "legal_authority",
+          "relationships",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "First and third paragraphs",
+        "note": "Read in full in a browser on 2026-09-23."
+      }
+    ],
+    "notes": "OSC describes this as its first direct loan. Unsecured promissory note; the company may repay at any time."
+  },
+  {
+    "id": "fin-us-osc-obbba-2025-credit-subsidy",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "budget_appropriation",
+    "capitalSource": "public",
+    "amount": {
+      "value": "500000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$500 million of credit subsidy funding",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of Defense, Office of Strategic Capital",
+    "providerJurisdiction": "us",
+    "legalAuthority": "One Big Beautiful Bill Act",
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "authorized",
+        "date": "2025-07-04",
+        "sourceId": "src-osc-mp-loan-2025",
+        "note": "The release says the President signed the Act into law on 4 July 2025."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-mp-loan-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Recorded because the OSC release names it as the source of the MP loan. A credit subsidy covers the budget cost of lending, not loan principal, so it is never added to the lending authority or to any loan."
+  },
+  {
+    "id": "fin-us-osc-obbba-2025-lending-authority",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "lending_authority",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "creating up to $100 billion in available loan funds specifically for critical minerals production and related industries and projects",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of Defense, Office of Strategic Capital",
+    "providerJurisdiction": "us",
+    "legalAuthority": "One Big Beautiful Bill Act",
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "authorized",
+        "date": "2025-07-04",
+        "sourceId": "src-osc-mp-loan-2025",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-mp-loan-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": null
+      }
+    ],
+    "notes": "A lending ceiling created by the $500 million credit subsidy, as the OSC release describes it. A ceiling on what may be lent, not money lent; awards drawn from it are recorded separately and never added to it."
+  }
+]

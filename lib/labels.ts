@@ -200,10 +200,10 @@ export const roleLabels: Record<JurisdictionRole, string> = {
 
 // --- Capital & Control (v0.5) -----------------------------------------------
 //
-// Labels for the financial-commitment and control-measure vocabularies. No
-// page shows these records yet; the labels exist so the vocabulary is complete
-// before any data or display arrives. Kept deliberately plain: a status or an
-// instrument is a fact about the record, not a judgement of it.
+// Labels for the financial-commitment and control-measure vocabularies, used
+// by /capital, /controls, the event pages and the exports. Kept deliberately
+// plain: a status or an instrument is a fact about the record, not a
+// judgement of it.
 
 export const financialInstrumentLabels: Record<FinancialInstrument, string> = {
   grant: "Grant",
@@ -215,6 +215,7 @@ export const financialInstrumentLabels: Record<FinancialInstrument, string> = {
   offtake: "Offtake",
   procurement_right: "Procurement right",
   stockpile_purchase: "Stockpile purchase",
+  mixed: "Several instruments, split not stated",
   unspecified: "Instrument not specified",
 };
 
@@ -369,6 +370,7 @@ export const controlMeasureTypeLabels: Record<ControlMeasureType, string> = {
   customs_enforcement: "Customs enforcement",
   domestic_production_control: "Domestic production control",
   contractual_ownership_covenant: "Contractual ownership covenant",
+  trade_negotiation: "Trade negotiation mandate",
 };
 
 export const controlDirectionLabels: Record<ControlDirection, string> = {
@@ -388,6 +390,7 @@ export const controlStatusLabels: Record<ControlStatus, string> = {
   expired: "Expired",
   revoked: "Revoked",
   investigation: "Under investigation",
+  concluded: "Investigation concluded",
   not_stated: "Not stated",
 };
 
@@ -426,3 +429,26 @@ export const controlEvidenceFieldLabels: Record<ControlEvidenceField, string> = 
   modified_measures: "Modified measures or instruments",
   status: "Status",
 };
+
+// --- Capital & Control chart hues ---------------------------------------------
+//
+// Drawn from the Strata palette above, so no new colour enters the system.
+// Status hues encode legal standing on the control-status chart; the two kind
+// hues separate money from restrictions on the capital-and-control chronology.
+
+export const CONTROL_STATUS_HUES: Record<ControlStatus, string> = {
+  announced: "#A981B6",
+  scheduled: "#8E8AC6",
+  in_force: "#4fb59e",
+  suspended: "#CBA86A",
+  expired: "#38414a",
+  revoked: "#38414a",
+  investigation: "#5AA1C2",
+  concluded: "#7b8488",
+  not_stated: "#38414a",
+};
+
+export const INSTRUMENT_KIND_HUES = {
+  capital: "#CBA86A",
+  control: "#C77B7B",
+} as const;

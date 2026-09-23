@@ -1360,5 +1360,48 @@
       "verifiedAt": null,
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-proc-11001-2026",
+    "date": "2026-01-14",
+    "jurisdiction": "us",
+    "issuingBody": "President of the United States (Executive Office of the President)",
+    "titleOriginal": "Adjusting Imports of Processed Critical Minerals and Their Derivative Products Into The United States",
+    "titleOriginalLang": "en",
+    "titleEn": "Adjusting Imports of Processed Critical Minerals and Their Derivative Products Into The United States",
+    "titleEnSource": "na",
+    "documentNumber": "Proclamation 11001; 91 FR 2439 (FR Doc. 2026-01045)",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "praseodymium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy",
+      "industrial"
+    ],
+    "summary": "Signed 14 January 2026 and published 20 January 2026, the proclamation closes the section 232 investigation opened by Executive Order 14272. It records that the Secretary of Commerce transmitted his report on 24 October 2025 and found that imports of processed critical minerals and their derivative products (PCMDPs) threaten to impair US national security, citing rare earth permanent magnets as an example derivative product. The President concurs and chooses negotiation as the remedy: the Secretary and the Trade Representative are to negotiate agreements with trading partners, considering price floors for trade in critical minerals and other trade-restricting measures, and to report within 180 days. The proclamation imposes no tariff or quota; it says that depending on the negotiations the President may consider alternative remedies, including minimum import prices for specific critical minerals.",
+    "analyticalSignificance": "The outcome of the US trade-remedy track on processed minerals: a formal national-security finding paired with a negotiation mandate rather than a duty. It places price floors, the instrument the DoD–MP deal applies to one company, on the table as a trade-policy tool across partners, and keeps import restrictions in reserve as leverage. Coded as in force because the negotiation directive operates from signature, not because any restriction applies.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-fedreg-proc-11001"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-01-20",
+      "discoveredAt": "2026-09-23",
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
   }
 ]

@@ -488,5 +488,19 @@
     "quoteEnSource": "na",
     "sourceId": "src-nwf-tungsten-west-2026",
     "notes": "John Healey, Chancellor of the Exchequer. The attribution was independently verified against gov.uk's live Ministers listing in an earlier review session and re-confirmed this session; both the National Wealth Fund release and gov.uk agree Healey holds this office. Coded national_security on this sentence alone, which is explicit geopolitical-danger framing; the quote continues into an economic/jobs argument not anchored here. A second, government quotation (Business Secretary Jonathan Reynolds: \"...will boost our economic resilience, strengthen supply chains...\") also plausibly supports economic_security and supply_chain_resilience, but was left uncoded to keep this addition to the single narrowest claim needed to resolve the no-framing warning; a maintainer may add it separately if broader framing coverage is wanted."
+  },
+  {
+    "id": "fc-us-proc11001-threat",
+    "eventId": "evt-us-proc-11001-2026",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "Mining a mineral domestically does not safeguard the national security of the United States if the United States remains dependent on a foreign country for the processing of that mineral.",
+    "quoteEn": "Mining a mineral domestically does not safeguard the national security of the United States if the United States remains dependent on a foreign country for the processing of that mineral.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-proc-11001",
+    "notes": "Verbatim from paragraph 6, line breaks removed. The proclamation frames processing, not extraction, as the security chokepoint, the same midstream stage the Australian production tax incentive and the DoD–MP separation loan target. It names no country, so no leverage_retaliation label is applied."
   }
 ]
