@@ -5,8 +5,12 @@ import { Card } from "@/components/ui/card";
 import { CapitalExplorer } from "@/components/capital/capital-explorer";
 import { StageMatrix } from "@/components/capital/charts";
 import { CommitmentRow, InlineAmount } from "@/components/capital/rows";
+import { JurisdictionTag } from "@/components/labels";
 import {
   PUBLIC_CAPITAL_SOURCES,
+  commitmentActor,
+  countBy,
+  currentFinancialStatus,
   compareDecimals,
   formatDecimalCompact,
   publicCommitmentRows,
@@ -17,11 +21,14 @@ import {
 import { getAllFinancialCommitments, getAllMaterials, getFinancialCommitmentById } from "@/lib/data";
 import {
   financialInstrumentLabels,
+  financialStatusLabels,
+  jurisdictionLabels,
   termKindLabels,
   valueQualifierLabels,
   valueRoleLabels,
 } from "@/lib/labels";
 import { site } from "@/lib/site";
+import { FINANCIAL_STATUSES, JURISDICTIONS } from "@/lib/types";
 import type { ValueQualifier } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -50,6 +57,9 @@ export default function CapitalPage() {
   const events = new Set(all.map((c) => c.eventId)).size;
   const actors = new Set(summaries.map((s) => s.actor)).size;
   const bySummary = new Map(summaries.map((s) => [s.id, s]));
+  const actorTotals = JURISDICTIONS.map((j) => ({ j, t: totalCommitments(publicRows.filter((c) => commitmentActor(c) === j), all) })).filter(
+    (x) => x.t.currencies.length || x.t.unquantifiedIds.length,
+  );
 
   return (
     <Container className="py-12">
@@ -108,7 +118,13 @@ export default function CapitalPage() {
                       ))}
                     </dl>
                   )}
-                  <ul className="mt-4 space-y-2 border-t pt-3">
+                  <p className="mt-3 font-mono text-[11px] leading-5 text-faint">
+                    {FINANCIAL_STATUSES.map((s) => [s, countBy(counted, (c) => currentFinancialStatus(c)).get(s)] as const)
+                      .filter(([, n]) => n)
+                      .map(([s, n]) => `${financialStatusLabels[s]} ${n}`)
+                      .join(" · ")}
+                  </p>
+                  <ul className="mt-3 space-y-2 border-t pt-3">
                     {counted.map((c) => {
                       // Bar length is relative within this currency only. Number() is
                       // used for this display ratio alone; totals are exact decimals.
@@ -129,7 +145,9 @@ export default function CapitalPage() {
                                 }}
                               />
                             </div>
-                            <p className="mt-0.5 font-mono text-[10px] text-faint">{financialInstrumentLabels[c.instrument]}</p>
+                            <p className="mt-0.5 font-mono text-[10px] text-faint">
+                              {jurisdictionLabels[commitmentActor(c)]} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
+                            </p>
                           </Link>
                         </li>
                       );
@@ -157,8 +175,46 @@ export default function CapitalPage() {
             Totals are never converted between currencies or across rows of different value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
+            {" "}Each total spans every financial status from announced to disbursed; the status mix is shown on each card and each row.
             {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
           </p>
+          <div className="mt-6 overflow-x-auto rounded-lg border">
+            <table className="w-full min-w-[36rem] border-collapse text-sm">
+              <caption className="sr-only">Public commitments by providing actor and currency</caption>
+              <thead>
+                <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+                  <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
+                  <th scope="col" className="px-3 py-2 text-left font-normal">By currency, exact · ceilings and approximations kept apart</th>
+                  <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum</th>
+                </tr>
+              </thead>
+              <tbody>
+                {actorTotals.map(({ j, t }) => (
+                  <tr key={j} className="border-b align-top last:border-b-0">
+                    <th scope="row" className="px-3 py-3 text-left font-normal">
+                      <Link href={`/capital?actor=${j}&role=commitment`} className="hover:opacity-80">
+                        <JurisdictionTag code={j} withName />
+                      </Link>
+                    </th>
+                    <td className="px-3 py-3">
+                      <span className="flex flex-col gap-1">
+                        {t.currencies.map((cur) => (
+                          <span key={cur.currency} className="tnum font-mono text-xs text-muted">
+                            <span className="text-foreground">{cur.currency}</span>{" "}
+                            {QUALIFIER_ORDER.filter((q) => cur.byQualifier[q])
+                              .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(cur.byQualifier[q]!)}`)
+                              .join(" + ")}
+                          </span>
+                        ))}
+                        {t.currencies.length === 0 ? <span className="font-mono text-xs text-faint">—</span> : null}
+                      </span>
+                    </td>
+                    <td className="tnum px-3 py-3 text-right font-mono text-xs text-muted">{t.unquantifiedIds.length || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Section>
 
         <Section

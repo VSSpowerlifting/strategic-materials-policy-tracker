@@ -682,5 +682,77 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Canonical Federal Register text, 91 FR 2439 (FR Doc. 2026-01045), signed 14 January 2026. Read in full 2026-09-23 via the Federal Register full-text endpoint (https://www.federalregister.gov/documents/full_text/text/2026/01/20/2026-01045.txt). Source of the 24 October 2025 report date, the negotiation mandate and the 180-day update requirement."
+  },
+  {
+    "id": "src-wh-us-au-framework-2025",
+    "title": "United States-Australia Framework For Securing of Supply in the Mining and Processing of Critical Minerals and Rare Earths",
+    "publisher": "The White House",
+    "url": "https://www.whitehouse.gov/briefings-statements/2025/10/united-states-australia-framework-for-securing-of-supply-in-the-mining-and-processing-of-critical-minerals-and-rare-earths/",
+    "language": "en",
+    "datePublished": "2025-10-20",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full text of the Framework as signed in Washington on 20 October 2025, read in full in a browser on 2026-09-23. Source of the financing clause (\"within 6 months ... at least $1 billion in financing to projects located in each of the United States and Australia\"), the instrument list (guarantees, loans, equity, offtake, insurance, regulatory facilitation), the price-mechanism and asset-sales clauses, and Section II's statement that the Framework creates no legally binding obligations. The financing clause does not itself say whether the $1 billion is per participant; the Australian release (src-pm-us-au-framework-2025) says each."
+  },
+  {
+    "id": "src-pm-us-au-framework-2025",
+    "title": "Historic critical minerals framework signed by President Trump and Prime Minister Albanese",
+    "publisher": "Prime Minister of Australia",
+    "url": "https://www.pm.gov.au/media/historic-critical-minerals-framework-signed-president-trump-and-prime-minister-albanese",
+    "language": "en",
+    "datePublished": "2025-10-21",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The Prime Minister's release, dated Tuesday 21 October 2025 in Australia (datetime 2025-10-20T19:16:41Z), read in full in a browser on 2026-09-23 (the site blocks automated clients). Source of \"each provide at least USD$1 billion in investments towards an USD$8.5 billion pipeline ... over the next six months\", the up to USD$200 million concessional equity in the Alcoa-Sojitz Gallium Recovery Project with an Australian right of offtake, the US equity investment with a right of offtake in the same project, and the USD$100 million equity investment in Arafura's Nolans project."
+  },
+  {
+    "id": "src-osc-vulcan-reelement-2025",
+    "title": "Office of Strategic Capital Agrees to Joint $700M Conditional Loan Commitment with Vulcan Elements and ReElement Technologies",
+    "publisher": "U.S. Department of War (Office of Strategic Capital)",
+    "url": "https://www.war.gov/News/Releases/Release/Article/4339788/office-of-strategic-capital-agrees-to-joint-700m-conditional-loan-commitment-wi/",
+    "language": "en",
+    "datePublished": "2025-11-21",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Read in full in a browser on 2026-09-23 (war.gov returns HTTP 403 to automated clients). Source of the joint $700 million conditional loan commitment ($620 million to Vulcan Elements, $80 million to ReElement Technologies), the OBBBA funding source, the warrants, the Commerce CHIPS Program Office's preliminary non-binding letter of intent for $50 million in proposed incentives, the $50 million of Vulcan equity Commerce will receive, and the statement that no OSC funds are disbursed until the conditions are met."
+  },
+  {
+    "id": "src-fedreg-aam-ad-initiation-2025",
+    "title": "Active Anode Material From the People's Republic of China: Initiation of Less-Than-Fair-Value Investigation",
+    "publisher": "Federal Register (International Trade Administration, Department of Commerce)",
+    "url": "https://www.federalregister.gov/documents/2025/01/15/2025-00656/active-anode-material-from-the-peoples-republic-of-china-initiation-of-less-than-fair-value-investigation",
+    "language": "en",
+    "datePublished": "2025-01-15",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "FR Doc. 2025-00656, applicable 7 January 2025. Read via the Federal Register full-text endpoint on 2026-09-23. Source of the petition date (18 December 2024), the scope appendix (anode-grade graphite of at least 90 percent carbon, synthetic, natural or blended) and the HTSUS subheadings, which the notice says are \"provided for convenience and customs purposes only\"."
+  },
+  {
+    "id": "src-fedreg-aam-cvd-initiation-2025",
+    "title": "Active Anode Material From the People's Republic of China: Initiation of Countervailing Duty Investigation",
+    "publisher": "Federal Register (International Trade Administration, Department of Commerce)",
+    "url": "https://www.federalregister.gov/documents/2025/01/15/2025-00657/active-anode-material-from-the-peoples-republic-of-china-initiation-of-countervailing-duty-investigation",
+    "language": "en",
+    "datePublished": "2025-01-15",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "FR Doc. 2025-00657, applicable 7 January 2025. Read via the Federal Register full-text endpoint on 2026-09-23. Same scope appendix and HTSUS subheadings as the less-than-fair-value investigation."
+  },
+  {
+    "id": "src-fedreg-itc-aam-final-2026",
+    "title": "Active Anode Material from China; Determinations (Investigation Nos. 701-TA-752 and 731-TA-1730 (Final))",
+    "publisher": "Federal Register (United States International Trade Commission)",
+    "url": "https://www.federalregister.gov/documents/2026/04/03/2026-06488/active-anode-material-from-china-determinations",
+    "language": "en",
+    "datePublished": "2026-04-03",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "FR Doc. 2026-06488, 91 FR 16968. Read in full via the Federal Register full-text endpoint on 2026-09-23. The Commission determined, on 31 March 2026, that the establishment of a US industry is not materially retarded by reason of the imports Commerce found subsidized and sold at less than fair value (Commissioner Kearns dissenting). Commerce's final affirmative determinations are cited in the notice's background but were not separately read for this record."
   }
 ]

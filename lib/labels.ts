@@ -75,6 +75,7 @@ export const policyStatusLabels: Record<PolicyStatus, string> = {
   superseded: "Superseded",
   in_force: "In force",
   unclear: "Unclear",
+  ended: "Ended",
 };
 
 // --- Mechanisms -------------------------------------------------------------

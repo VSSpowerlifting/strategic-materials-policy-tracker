@@ -1,5 +1,281 @@
 [
   {
+    "id": "fin-au-alcoa-sojitz-gallium-2025-equity",
+    "eventId": "evt-us-au-framework-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-au-framework-2025-au-financing",
+        "relationship": "part_of",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "locator": "Fourth to sixth paragraphs",
+        "note": "The release introduces the project as one of the pipeline's priority projects with financial commitments announced the same day; that it counts towards Australia's USD 1 billion is implied, not stated."
+      }
+    ],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "200000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to USD$200 million in concessional equity finance for the project",
+      "currencyBasis": "stated"
+    },
+    "provider": "Australian Government",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": "Alcoa-Sojitz Gallium Recovery Project",
+    "project": "Gallium recovery at the Alcoa-Sojitz project",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Western Australia",
+        "asStated": "Wagerup, Western Australia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-20",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [
+      {
+        "metric": "supply_share",
+        "value": "10",
+        "qualifier": "up_to",
+        "unit": "% of total global gallium supply",
+        "targetDate": null,
+        "asStated": "This project will provide up to 10 per cent of total global gallium supply.",
+        "statedBy": "government",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": "The Australian Government's statement of the project's potential, not an estimate made here."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Fifth and sixth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "relationships"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Fourth paragraph",
+        "note": "Presented as one of the pipeline's priority projects; the release does not say this equity counts towards the USD 1 billion."
+      },
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Sixth paragraph",
+        "note": "\"Gallium Recovery Project\": recovery of gallium in processing, as the project name describes it."
+      }
+    ],
+    "notes": "The release says the equity finance \"includes a right of offtake for the Australian Government\", recorded as its own row, and that \"Japan has already provided 50 percent of the project costs to date\"; no Japanese row is recorded because no amount or instrument is stated."
+  },
+  {
+    "id": "fin-au-alcoa-sojitz-gallium-2025-offtake-right",
+    "eventId": "evt-us-au-framework-2025",
+    "relationships": [],
+    "instrument": "offtake",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "Australian Government",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": "Alcoa-Sojitz Gallium Recovery Project",
+    "project": "Gallium recovery at the Alcoa-Sojitz project",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Western Australia",
+        "asStated": "Wagerup, Western Australia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-20",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Sixth paragraph",
+        "note": "\"which includes a right of offtake for the Australian Government\""
+      },
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Sixth paragraph",
+        "note": null
+      }
+    ],
+    "notes": "No share or volume is stated."
+  },
+  {
+    "id": "fin-au-arafura-nolans-2025-equity",
+    "eventId": "evt-us-au-framework-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-au-framework-2025-au-financing",
+        "relationship": "part_of",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "locator": "Fourth and seventh paragraphs",
+        "note": "Presented as one of the pipeline's priority projects with financial commitments announced the same day."
+      }
+    ],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "a USD$100 million equity investment in the project",
+      "currencyBasis": "stated"
+    },
+    "provider": "Australian Government",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": "Arafura Nolans project",
+    "project": "Nolans rare earths project",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Northern Territory",
+        "asStated": "the Northern Territory"
+      }
+    ],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-20",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [
+      {
+        "metric": "supply_share",
+        "value": "5",
+        "qualifier": "exact",
+        "unit": "% of global rare earths",
+        "targetDate": null,
+        "asStated": "Once operational, this project will produce 5 per cent of global rare earths",
+        "statedBy": "government",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": "The Australian Government's statement, not an estimate made here."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Seventh and eighth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "relationships"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Fourth paragraph",
+        "note": "That this equity counts towards Australia's USD 1 billion is implied, not stated."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "fin-au-cmf-2026-expanded-facility",
     "eventId": "evt-au-cmsr-2026",
     "relationships": [],
@@ -1474,6 +1750,359 @@
     "notes": "The package total; its equity and lending components are recorded as parts of it. The stages render \"construction, commissioning and processing costs associated with restarting production\"."
   },
   {
+    "id": "fin-us-alcoa-sojitz-gallium-2025-equity",
+    "eventId": "evt-us-au-framework-2025",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "United States Government",
+    "providerJurisdiction": "us",
+    "legalAuthority": null,
+    "recipient": "Alcoa-Sojitz Gallium Recovery Project",
+    "project": "Gallium recovery at the Alcoa-Sojitz project",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Western Australia",
+        "asStated": "Wagerup, Western Australia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-20",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Sixth paragraph",
+        "note": "\"The United States Government is also making an equity investment with a right of offtake.\" Stated in the Australian release; no US source in the corpus gives the amount."
+      },
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Sixth paragraph",
+        "note": null
+      }
+    ],
+    "notes": "No amount is stated, and none is inferred. The right of offtake that accompanies it is not separately recorded because the release gives no term for it."
+  },
+  {
+    "id": "fin-us-au-framework-2025-au-financing",
+    "eventId": "evt-us-au-framework-2025",
+    "relationships": [],
+    "instrument": "mixed",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1000000000",
+      "currency": "USD",
+      "qualifier": "at_least",
+      "amountAsStated": "the US and Australia will take measures to each provide at least USD$1 billion in investments",
+      "currencyBasis": "stated"
+    },
+    "provider": "Australian Government",
+    "providerJurisdiction": "australia",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining",
+      "separation",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-20",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": "Announced with the Framework in Washington on 20 October 2025; the Australian release is dated 21 October 2025."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "6",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "within 6 months of the date of this Framework",
+        "sourceId": "src-wh-us-au-framework-2025",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": "The Australian release says \"each\"; the Framework text alone says \"at least $1 billion in financing to projects located in each of the United States and Australia\"."
+      },
+      {
+        "sourceId": "src-wh-us-au-framework-2025",
+        "supports": [
+          "instrument",
+          "stages",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Recitals; Section I, investment and financing clauses",
+        "note": "\"The Participants will mobilize government and private sector support including for capital and operational expenditures via guarantees, loans, or equity; finalization of offtake arrangements; insurance; or regulatory facilitation.\""
+      }
+    ],
+    "notes": "An envelope each government says it is taking measures to provide, not money committed to a recipient. Section II: the Framework \"does not constitute or create any legally binding or enforceable obligations\". The stages follow the Framework's objective of resilient supply chains \"including mining, separation, and processing\"."
+  },
+  {
+    "id": "fin-us-au-framework-2025-project-pipeline",
+    "eventId": "evt-us-au-framework-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "total_project_cost",
+    "capitalSource": "not_stated",
+    "amount": {
+      "value": "8500000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "an USD$8.5 billion pipeline of priority critical minerals projects in Australia and the United States",
+      "currencyBasis": "stated"
+    },
+    "provider": null,
+    "providerJurisdiction": null,
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-20",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": null
+      }
+    ],
+    "notes": "The value of a project pipeline, not public money. Recorded so it is never mistaken for support; the release does not list the projects or say who pays for them."
+  },
+  {
+    "id": "fin-us-au-framework-2025-us-financing",
+    "eventId": "evt-us-au-framework-2025",
+    "relationships": [],
+    "instrument": "mixed",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1000000000",
+      "currency": "USD",
+      "qualifier": "at_least",
+      "amountAsStated": "the US and Australia will take measures to each provide at least USD$1 billion in investments",
+      "currencyBasis": "stated"
+    },
+    "provider": "United States Government",
+    "providerJurisdiction": "us",
+    "legalAuthority": null,
+    "recipient": null,
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining",
+      "separation",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-20",
+        "sourceId": "src-pm-us-au-framework-2025",
+        "note": "Announced with the Framework in Washington on 20 October 2025; the Australian release is dated 21 October 2025."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "6",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "within 6 months of the date of this Framework",
+        "sourceId": "src-wh-us-au-framework-2025",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": "The Australian release says \"each\"; the Framework text alone says \"at least $1 billion in financing to projects located in each of the United States and Australia\"."
+      },
+      {
+        "sourceId": "src-wh-us-au-framework-2025",
+        "supports": [
+          "instrument",
+          "stages",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Recitals; Section I, investment and financing clauses",
+        "note": "\"The Participants will mobilize government and private sector support including for capital and operational expenditures via guarantees, loans, or equity; finalization of offtake arrangements; insurance; or regulatory facilitation.\""
+      }
+    ],
+    "notes": "An envelope each government says it is taking measures to provide, not money committed to a recipient. Section II: the Framework \"does not constitute or create any legally binding or enforceable obligations\". The stages follow the Framework's objective of resilient supply chains \"including mining, separation, and processing\"."
+  },
+  {
+    "id": "fin-us-commerce-chips-vulcan-2025-incentives",
+    "eventId": "evt-us-osc-vulcan-reelement-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "a preliminary non-binding letter of intent to provide $50 million in proposed federal incentives under the CHIPS and Science Act",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of Commerce, CHIPS Program Office",
+    "providerJurisdiction": "us",
+    "legalAuthority": "CHIPS and Science Act",
+    "recipient": null,
+    "project": "Purchase of equipment, in parallel with OSC's financing",
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-11-21",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "note": "A preliminary, non-binding letter of intent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50000000",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": "of equity in Vulcan Elements",
+        "asStated": "The Department of Commerce will also receive $50 million of equity in Vulcan Elements.",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "note": "The release does not say whether this equity is consideration for the proposed incentives or a separate purchase, so it is kept as a term here and never added as money."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "project",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Fourth paragraph",
+        "note": null
+      }
+    ],
+    "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\"."
+  },
+  {
     "id": "fin-us-dod-mp-2025-additional-preferred-option",
     "eventId": "evt-us-dod-mp-2025",
     "relationships": [],
@@ -2249,5 +2878,251 @@
       }
     ],
     "notes": "A lending ceiling created by the $500 million credit subsidy, as the OSC release describes it. A ceiling on what may be lent, not money lent; awards drawn from it are recorded separately and never added to it."
+  },
+  {
+    "id": "fin-us-osc-vulcan-reelement-2025-joint-commitment",
+    "eventId": "evt-us-osc-vulcan-reelement-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-osc-obbba-2025-lending-authority",
+        "relationship": "drawn_from",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "locator": "Fourth paragraph",
+        "note": "\"The funding for OSC's conditional loans comes from the One Big Beautiful Bill Act ... The Act provides up to $100 billion in total OSC lending authority\"."
+      }
+    ],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "700000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "a joint $700 million conditional loan commitment",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of War, Office of Strategic Capital",
+    "providerJurisdiction": "us",
+    "legalAuthority": "One Big Beautiful Bill Act (OSC lending authority)",
+    "recipient": "Vulcan Elements and ReElement Technologies",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "separation",
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-11-21",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "note": "A conditional commitment: \"No OSC funds are disbursed until all parties have completed or met the conditions for disbursement as specified in the loan commitment.\""
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "The Department of War will also receive warrants from Vulcan and ReElement as part of the joint commitment.",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "note": null
+      }
+    ],
+    "outcomes": [
+      {
+        "metric": "other",
+        "value": "10000",
+        "qualifier": "up_to",
+        "unit": "metric tons of NdFeB magnet material",
+        "targetDate": null,
+        "asStated": "Vulcan and ReElement anticipate collectively producing up to 10,000 metric tons of NdFeB magnet material in the next several years",
+        "statedBy": "recipient",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "note": "The companies' expectation as the OSC release reports it; no period or annual rate is stated."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "relationships",
+          "materials",
+          "status",
+          "terms",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "First to fourth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph",
+        "note": "\"advanced rare earth element separation, metallization, and magnet manufacturing capabilities\"; metallization is recorded as refining."
+      }
+    ],
+    "notes": "The joint commitment; its two loans are recorded as parts of it. Stages are stated for the joint commitment, not per company."
+  },
+  {
+    "id": "fin-us-osc-vulcan-reelement-2025-reelement-loan",
+    "eventId": "evt-us-osc-vulcan-reelement-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-osc-vulcan-reelement-2025-joint-commitment",
+        "relationship": "part_of",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "80000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "one to ReElement for $80 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of War, Office of Strategic Capital",
+    "providerJurisdiction": "us",
+    "legalAuthority": null,
+    "recipient": "ReElement Technologies",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-11-21",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "note": "A conditional commitment: \"No OSC funds are disbursed until all parties have completed or met the conditions for disbursement as specified in the loan commitment.\""
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "relationships",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-osc-vulcan-reelement-2025-vulcan-elements-loan",
+    "eventId": "evt-us-osc-vulcan-reelement-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-osc-vulcan-reelement-2025-joint-commitment",
+        "relationship": "part_of",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "620000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "one to Vulcan for $620 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "US Department of War, Office of Strategic Capital",
+    "providerJurisdiction": "us",
+    "legalAuthority": null,
+    "recipient": "Vulcan Elements",
+    "project": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-11-21",
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "note": "A conditional commitment: \"No OSC funds are disbursed until all parties have completed or met the conditions for disbursement as specified in the loan commitment.\""
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "relationships",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
   }
 ]

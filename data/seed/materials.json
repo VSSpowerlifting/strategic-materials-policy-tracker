@@ -37,7 +37,9 @@
       "evt-uk-cms-2025",
       "evt-ca-nrcan-cmrdd-2024",
       "evt-cn-antismuggling-campaign-2025",
-      "evt-us-proc-11001-2026"
+      "evt-us-proc-11001-2026",
+      "evt-us-au-framework-2025",
+      "evt-us-osc-vulcan-reelement-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -198,7 +200,8 @@
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
       "evt-cn-antismuggling-campaign-2025",
-      "evt-us-proc-11001-2026"
+      "evt-us-proc-11001-2026",
+      "evt-us-au-framework-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -269,7 +272,8 @@
       "evt-ca-cms-2022",
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
-      "evt-ca-nrcan-cmrdd-2024"
+      "evt-ca-nrcan-cmrdd-2024",
+      "evt-us-aam-adcvd-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -370,7 +374,8 @@
       "evt-us-dod-mp-2025",
       "evt-jp-jogmec-lofdal-2026",
       "evt-us-eo-14272-2025",
-      "evt-us-proc-11001-2026"
+      "evt-us-proc-11001-2026",
+      "evt-us-osc-vulcan-reelement-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

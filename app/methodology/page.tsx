@@ -48,6 +48,7 @@ const DEFS: Record<string, Record<string, string>> = {
     superseded: "Replaced by a later measure.",
     in_force: "A standing law or regulation in continuing effect.",
     unclear: "Status not established from the available sources.",
+    ended: "Concluded, withdrawn or expired with no continuing effect and nothing replacing it — for example a trade investigation that ended without an order.",
   },
   mechanism: {
     export_control: "Restriction on exporting specified items.",

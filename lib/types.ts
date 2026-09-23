@@ -30,6 +30,7 @@ export const POLICY_STATUSES = [
   "superseded",
   "in_force",
   "unclear",
+  "ended", // concluded, withdrawn or expired with no continuing effect and no replacement
 ] as const;
 
 export const MECHANISMS = [

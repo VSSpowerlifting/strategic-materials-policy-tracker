@@ -2485,6 +2485,194 @@
     "notes": "Covers all dual-use items, not a named material, so no material is attributed. Announcement No. 72 of 2025 suspended Item 2 only; this clause was not suspended."
   },
   {
+    "id": "ctl-us-aam-2025-antidumping-investigation",
+    "eventId": "evt-us-aam-adcvd-2025",
+    "measureType": "trade_investigation",
+    "direction": "import",
+    "clause": "Investigation No. 731-TA-1730",
+    "targetScopes": [
+      "named_jurisdictions"
+    ],
+    "targetJurisdictions": [
+      "CN"
+    ],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "active anode material, which is an anode grade graphite material with a graphite minimum purity content of 90 percent carbon by weight, whether containing synthetic graphite, natural graphite, or a blend of synthetic and natural graphite; with or without coating",
+    "productCodes": [
+      {
+        "system": "us_hts",
+        "code": "2504.10.5000",
+        "role": "reference"
+      },
+      {
+        "system": "us_hts",
+        "code": "3801.10.5000",
+        "role": "reference"
+      },
+      {
+        "system": "us_hts",
+        "code": "2504.10.1000",
+        "role": "reference"
+      },
+      {
+        "system": "us_hts",
+        "code": "3801.90.0000",
+        "role": "reference"
+      }
+    ],
+    "legalBasisEventIds": [],
+    "legalBasisAsStated": "Tariff Act of 1930, section 735(b) (19 U.S.C. 1673d(b)), under which the Commission made its final determination",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "investigation",
+        "date": "2025-01-07",
+        "sourceId": "src-fedreg-aam-ad-initiation-2025",
+        "until": null,
+        "note": "Commerce initiation, applicable 7 January 2025, on a petition received 18 December 2024."
+      },
+      {
+        "status": "concluded",
+        "date": "2026-03-31",
+        "sourceId": "src-fedreg-itc-aam-final-2026",
+        "until": null,
+        "note": "The ITC determined that the establishment of a US industry is not materially retarded by reason of the subject imports (one commissioner dissenting); no order follows from this record."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-fedreg-aam-ad-initiation-2025",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Dates; scope appendix",
+        "note": null
+      },
+      {
+        "sourceId": "src-fedreg-itc-aam-final-2026",
+        "supports": [
+          "clause",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Determinations; final paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Commerce's preliminary and final determinations were affirmative; the provisional measures that followed them are not coded as separate clauses. The HTSUS subheadings are \"provided for convenience and customs purposes only\"; the written scope is dispositive."
+  },
+  {
+    "id": "ctl-us-aam-2025-countervailing-investigation",
+    "eventId": "evt-us-aam-adcvd-2025",
+    "measureType": "trade_investigation",
+    "direction": "import",
+    "clause": "Investigation No. 701-TA-752",
+    "targetScopes": [
+      "named_jurisdictions"
+    ],
+    "targetJurisdictions": [
+      "CN"
+    ],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "active anode material, which is an anode grade graphite material with a graphite minimum purity content of 90 percent carbon by weight, whether containing synthetic graphite, natural graphite, or a blend of synthetic and natural graphite; with or without coating",
+    "productCodes": [
+      {
+        "system": "us_hts",
+        "code": "2504.10.5000",
+        "role": "reference"
+      },
+      {
+        "system": "us_hts",
+        "code": "3801.10.5000",
+        "role": "reference"
+      },
+      {
+        "system": "us_hts",
+        "code": "2504.10.1000",
+        "role": "reference"
+      },
+      {
+        "system": "us_hts",
+        "code": "3801.90.0000",
+        "role": "reference"
+      }
+    ],
+    "legalBasisEventIds": [],
+    "legalBasisAsStated": "Tariff Act of 1930, section 705(b) (19 U.S.C. 1671d(b)), under which the Commission made its final determination",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "investigation",
+        "date": "2025-01-07",
+        "sourceId": "src-fedreg-aam-cvd-initiation-2025",
+        "until": null,
+        "note": "Commerce initiation, applicable 7 January 2025, on a petition received 18 December 2024."
+      },
+      {
+        "status": "concluded",
+        "date": "2026-03-31",
+        "sourceId": "src-fedreg-itc-aam-final-2026",
+        "until": null,
+        "note": "The ITC determined that the establishment of a US industry is not materially retarded by reason of the subject imports (one commissioner dissenting); no order follows from this record."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-fedreg-aam-cvd-initiation-2025",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Dates; scope appendix",
+        "note": null
+      },
+      {
+        "sourceId": "src-fedreg-itc-aam-final-2026",
+        "supports": [
+          "clause",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Determinations; final paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Commerce's preliminary and final determinations were affirmative; the provisional measures that followed them are not coded as separate clauses. The HTSUS subheadings are \"provided for convenience and customs purposes only\"; the written scope is dispositive."
+  },
+  {
     "id": "ctl-us-dod-mp-2025-ownership-covenants",
     "eventId": "evt-us-dod-mp-2025",
     "measureType": "contractual_ownership_covenant",
