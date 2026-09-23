@@ -32,12 +32,10 @@ import {
   VALUE_ROLES,
 } from "@/lib/types";
 import type {
-  ControlEvidenceField,
   ControlMeasure,
   ControlStatusEntry,
   EvidenceReference,
   FinancialCommitment,
-  FinancialEvidenceField,
   FinancialRelationship,
   FinancialStatusEntry,
   InstrumentTerm,
@@ -85,9 +83,12 @@ import {
   getFinancialCommitmentById,
   getFinancialCommitmentsByEvent,
 } from "@/lib/data";
+import { COMMITMENT_FIELD_EVIDENCE, CONTROL_FIELD_EVIDENCE } from "@/scripts/validate-capital-control";
 
 // Capital & Control (v0.5), Phase 1: the data model and its loaders exist, and
-// both seed files are deliberately empty. Validation rules arrive in Phase 2.
+// both seed files are deliberately empty. The runtime validation rules (Phase 2)
+// live in scripts/validate-capital-control.ts, tested in
+// tests/capital-control-validation.test.ts.
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel: string) => readFileSync(join(root, rel), "utf8");
@@ -420,62 +421,11 @@ test("money and figures are strings, statuses are histories, and no derivable fi
 
 // --- Field-level provenance -------------------------------------------------
 //
-// The evidence category that covers each substantive field. `id` and `eventId`
-// are structural, `evidence` is the provenance itself and `notes` is editorial.
+// The field-to-evidence maps are the runtime validator's own metadata
+// (scripts/validate-capital-control.ts), imported here rather than kept twice.
 // Keyed by the entity's own fields: a field no category covers, or a mapping to
 // a category that does not exist, stops compiling; a category that covers no
 // field fails the test below.
-
-const COMMITMENT_FIELD_EVIDENCE: Record<
-  Exclude<keyof FinancialCommitment, "id" | "eventId" | "evidence" | "notes">,
-  FinancialEvidenceField
-> = {
-  relationships: "relationships",
-  instrument: "instrument",
-  valueRole: "value_role",
-  capitalSource: "capital_source",
-  amount: "amount",
-  provider: "provider",
-  providerJurisdiction: "provider",
-  legalAuthority: "legal_authority",
-  recipient: "recipient",
-  project: "project",
-  facility: "facility",
-  locations: "location",
-  stages: "stages",
-  stageAllocation: "stages",
-  materialIds: "materials",
-  materialAttribution: "materials",
-  untrackedMaterialsAsStated: "materials",
-  financialStatusHistory: "status",
-  implementationStatusHistory: "status",
-  terms: "terms",
-  outcomes: "outcomes",
-};
-
-const CONTROL_FIELD_EVIDENCE: Record<
-  Exclude<keyof ControlMeasure, "id" | "eventId" | "evidence" | "notes">,
-  ControlEvidenceField
-> = {
-  measureType: "measure_type",
-  direction: "direction",
-  clause: "clause",
-  targetScopes: "targets",
-  targetJurisdictions: "targets",
-  targetEntities: "targets",
-  targetEndUsersAsStated: "targets",
-  targetEndUsesAsStated: "targets",
-  materialIds: "materials",
-  materialAttribution: "materials",
-  untrackedMaterialsAsStated: "materials",
-  productScopeAsStated: "product_scope",
-  productCodes: "product_codes",
-  legalBasisEventIds: "legal_basis",
-  legalBasisAsStated: "legal_basis",
-  modifiesMeasureIds: "modified_measures",
-  modifiesExternalInstruments: "modified_measures",
-  statusHistory: "status",
-};
 
 test("every substantive field has an evidence category, and every category covers a field", () => {
   const categories = (map: Record<string, string>) => [...new Set(Object.values(map))].sort();
