@@ -3,18 +3,23 @@
     "id": "fc-china-oct-natsec",
     "eventId": "china-rare-earth-expansion-2025-10",
     "actor": "china",
-    "category": ["national_security"],
-    "quoteOriginal": "为了维护国家安全和国家利益",
-    "quoteEn": "in order to safeguard national security and national interests",
+    "category": [
+      "national_security"
+    ],
+    "quoteOriginal": "为维护国家安全和利益",
+    "quoteEn": "to safeguard national security and interests",
     "quoteEnSource": "self",
-    "sourceId": "src-cset-mofcom-61",
-    "notes": "The statutory justification clause of Announcement No. 61. English rendering from CSET's institutional bilingual translation; the Chinese is reproduced from the primary."
+    "sourceId": "src-mofcom-61",
+    "notes": "Justification clause of Announcement No. 61 (2025), verified verbatim against the MOFCOM primary. Re-anchored 2026-08-11: the claim previously cited a third-party bilingual translation and the wording coded at that time (为了维护国家安全和国家利益) does not appear in the announcement, despite a note asserting it was reproduced from the primary. Unlike Announcement No. 46, this text carries no non-proliferation clause, so only national security is coded. This re-anchoring was lost to an accidental working-tree revert on 2026-08-12 and restored the same day by re-fetching the primary and re-reading the clause."
   },
   {
     "id": "fc-china-oct-gt-nonprolif",
     "eventId": "china-rare-earth-expansion-2025-10",
     "actor": "china",
-    "category": ["national_security", "compliance_modernization"],
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
     "quoteOriginal": "The move was made to safeguard national security and interests and to uphold international commitments including non-proliferation, according to a statement released on MOFCOM's website on Thursday.",
     "quoteEn": "The move was made to safeguard national security and interests and to uphold international commitments including non-proliferation, according to a statement released on MOFCOM's website on Thursday.",
     "quoteEnSource": "na",
@@ -25,7 +30,10 @@
     "id": "fc-us-burgum-resilience",
     "eventId": "us-critical-minerals-list-2025",
     "actor": "us",
-    "category": ["supply_chain_resilience", "economic_security"],
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
     "quoteOriginal": "By working with the mineral industry and state partners, we are ensuring that the minerals powering our energy, defense, and technology supply chains are mined and processed in the United States.",
     "quoteEn": "By working with the mineral industry and state partners, we are ensuring that the minerals powering our energy, defense, and technology supply chains are mined and processed in the United States.",
     "quoteEnSource": "na",
@@ -36,7 +44,10 @@
     "id": "fc-eu-crma-resilience",
     "eventId": "eu-critical-raw-materials-act",
     "actor": "eu",
-    "category": ["supply_chain_resilience", "economic_security"],
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
     "quoteOriginal": "The Critical Raw Materials Act (CRM Act) will ensure EU access to a secure and sustainable supply of critical raw materials.",
     "quoteEn": "The Critical Raw Materials Act (CRM Act) will ensure EU access to a secure and sustainable supply of critical raw materials.",
     "quoteEnSource": "na",
@@ -47,7 +58,9 @@
     "id": "fc-us-dod-mp-natsec",
     "eventId": "evt-us-dod-mp-2025",
     "actor": "us",
-    "category": ["national_security"],
+    "category": [
+      "national_security"
+    ],
     "quoteOriginal": "Rebuilding the critical minerals and rare earth magnet sectors of the U.S.",
     "quoteEn": "Rebuilding the critical minerals and rare earth magnet sectors of the U.S.",
     "quoteEnSource": "na",
@@ -58,7 +71,9 @@
     "id": "fc-au-cmsr-econsec",
     "eventId": "evt-au-cmsr-2026",
     "actor": "australia",
-    "category": ["economic_security"],
+    "category": [
+      "economic_security"
+    ],
     "quoteOriginal": "Critical minerals and rare earths are at the heart of our economic and national security",
     "quoteEn": "Critical minerals and rare earths are at the heart of our economic and national security",
     "quoteEnSource": "na",
@@ -69,7 +84,9 @@
     "id": "fc-jp-jogmec-resilience",
     "eventId": "evt-jp-jogmec-lynas-2023",
     "actor": "japan",
-    "category": ["supply_chain_resilience"],
+    "category": [
+      "supply_chain_resilience"
+    ],
     "quoteOriginal": "diversifying the supply sources which are currently concentrated to China",
     "quoteEn": "diversifying the supply sources which are currently concentrated to China",
     "quoteEnSource": "na",
@@ -80,7 +97,9 @@
     "id": "fc-ca-ica-natsec",
     "eventId": "evt-ca-ica-divest-2022",
     "actor": "canada",
-    "category": ["national_security"],
+    "category": [
+      "national_security"
+    ],
     "quoteOriginal": "rigorous scrutiny by Canada's national security and intelligence community",
     "quoteEn": "rigorous scrutiny by Canada's national security and intelligence community",
     "quoteEnSource": "na",
@@ -91,7 +110,9 @@
     "id": "fc-cn-gage-natsec",
     "eventId": "evt-cn-gage-2023",
     "actor": "china",
-    "category": ["national_security"],
+    "category": [
+      "national_security"
+    ],
     "quoteOriginal": "为维护国家安全和利益",
     "quoteEn": "to safeguard national security and interests",
     "quoteEnSource": "self",
@@ -102,18 +123,24 @@
     "id": "fc-cn-us-ban-natsec",
     "eventId": "evt-cn-us-ban-2024",
     "actor": "china",
-    "category": ["national_security", "compliance_modernization"],
-    "quoteOriginal": "为了维护国家安全和利益，履行防扩散等国际义务",
-    "quoteEn": "to safeguard national security and interests and fulfill non-proliferation obligations",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests, and to fulfil international obligations including non-proliferation",
     "quoteEnSource": "self",
-    "sourceId": "src-cset-mofcom-46",
-    "notes": "Stated justification of Announcement No. 46 (2024), from CSET's bilingual translation. The category follows the literal text (national security + non-proliferation/compliance); the retaliation reading rests on the one-day-after-BIS timing and is recorded in the event's analytical significance, not the quote."
+    "sourceId": "src-mofcom-46",
+    "notes": "Justification clause of Announcement No. 46 (2024), verified verbatim against the MOFCOM primary. Re-anchored from CSET's bilingual translation to the primary: the wording coded from CSET (为了维护国家安全和利益，履行防扩散等国际义务) differs from the announcement, which reads 为维护国家安全和利益、履行防扩散等国际义务 — no 了, and an enumeration comma rather than a full comma. The English is the project's own rendering and now carries 等国际义务 (\"and other international obligations\"), which the previous translation dropped. The category follows the literal text (national security + non-proliferation/compliance); the retaliation reading rests on the one-day-after-BIS timing and is recorded in the event's analytical significance, not the quote. This re-anchoring was lost to an accidental working-tree revert on 2026-08-12 and restored the same day by re-fetching the primary."
   },
   {
     "id": "fc-cn-apr18-natsec",
     "eventId": "china-rare-earth-controls-2025-04",
     "actor": "china",
-    "category": ["national_security", "compliance_modernization"],
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
     "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
     "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
     "quoteEnSource": "self",
@@ -124,7 +151,9 @@
     "id": "fc-cn-graphite-natsec",
     "eventId": "evt-cn-graphite-2023",
     "actor": "china",
-    "category": ["national_security"],
+    "category": [
+      "national_security"
+    ],
     "quoteOriginal": "为维护国家安全和利益",
     "quoteEn": "to safeguard national security and interests",
     "quoteEnSource": "self",
@@ -135,7 +164,10 @@
     "id": "fc-cn-tungsten-natsec",
     "eventId": "evt-cn-tungsten-2025",
     "actor": "china",
-    "category": ["national_security", "compliance_modernization"],
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
     "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
     "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
     "quoteEnSource": "self",
@@ -146,7 +178,10 @@
     "id": "fc-cn-antimony-natsec",
     "eventId": "evt-cn-antimony-2024",
     "actor": "china",
-    "category": ["national_security", "compliance_modernization"],
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
     "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
     "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
     "quoteEnSource": "self",
@@ -157,11 +192,301 @@
     "id": "fc-cn-suspension-leverage",
     "eventId": "china-rare-earth-suspension-2025-11",
     "actor": "china",
-    "category": ["leverage_retaliation"],
+    "category": [
+      "leverage_retaliation"
+    ],
     "quoteOriginal": "中方将暂停实施10月9日公布的相关出口管制等措施一年",
     "quoteEn": "China will suspend implementation of the relevant export-control and other measures announced on 9 October for one year",
     "quoteEnSource": "self",
     "sourceId": "src-mofcom-kl-qa",
     "notes": "From the MOFCOM spokesperson Q&A on the Kuala Lumpur joint arrangement (30 Oct 2025), which pairs this sentence with the US pausing its 29 September 50% penetration rule for one year — an explicitly reciprocal, time-bound exchange. Coded leverage_retaliation on that reciprocity structure. Announcement No. 70 itself contains no justification clause (only 经批准), so the framing anchor is the spokesperson statement, not the instrument text."
+  },
+  {
+    "id": "fc-jp-lofdal-supply",
+    "eventId": "evt-jp-jogmec-lofdal-2026",
+    "actor": "japan",
+    "category": [
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "日本のレアアース安定供給に資するプロジェクトとして期待されています",
+    "quoteEn": "the project is expected to contribute to securing a stable supply of rare earths for Japan",
+    "quoteEnSource": "official",
+    "sourceId": "src-jogmec-lofdal-ja",
+    "notes": "Japanese original from the JOGMEC release; the English is JOGMEC's own published translation of the same sentence in its English edition, so provenance is 'official' rather than 'self'. Both language editions were re-read at promotion (2026-08-12). The release carries a second framing sentence (日本の重要鉱物のサプライチェーン強靭化, economic security) which is spoken by Toyota Tsusho, the corporate partner in this joint government-industry announcement, and is deliberately not coded: framing claims record the government's official presentation, and actor 'japan' may not be anchored to a corporate voice."
+  },
+  {
+    "id": "fc-us-eo14241-natsec",
+    "eventId": "evt-us-eo-14241-2025",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "economic_security"
+    ],
+    "quoteOriginal": "Our national and economic security are now acutely threatened by our reliance upon hostile foreign powers' mineral production.",
+    "quoteEn": "Our national and economic security are now acutely threatened by our reliance upon hostile foreign powers' mineral production.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-eo-14241",
+    "notes": "Purpose clause of the order, verbatim from the Federal Register text. Codes both categories because the sentence names both explicitly. The order does not name China, so no leverage_retaliation is coded: \"hostile foreign powers\" is the government's own formulation and the tracker does not resolve it to a country the text leaves unnamed."
+  },
+  {
+    "id": "fc-us-eo14272-natsec",
+    "eventId": "evt-us-eo-14272-2025",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "economic_security"
+    ],
+    "quoteOriginal": "Critical minerals, including rare earth elements, in the form of processed minerals are essential raw materials and critical production inputs required for economic and national security.",
+    "quoteEn": "Critical minerals, including rare earth elements, in the form of processed minerals are essential raw materials and critical production inputs required for economic and national security.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-eo-14272",
+    "notes": "Opening of the section 1 policy statement, verbatim from the Federal Register text. The sentence names economic and national security together, so both are coded."
+  },
+  {
+    "id": "fc-us-eo14272-supply",
+    "eventId": "evt-us-eo-14272-2025",
+    "actor": "us",
+    "category": [
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "But processed critical minerals and their derivative products face significant global supply chain vulnerabilities and market distortions due to reliance on a small number of foreign suppliers.",
+    "quoteEn": "But processed critical minerals and their derivative products face significant global supply chain vulnerabilities and market distortions due to reliance on a small number of foreign suppliers.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-eo-14272",
+    "notes": "Second paragraph of the section 1 policy statement, verbatim. Kept separate from the national-security anchor because it makes a distinct claim — supplier concentration and market distortion — rather than restating the security rationale."
+  },
+  {
+    "id": "fc-us-cm2018-vulnerability",
+    "eventId": "evt-us-cm-list-2018",
+    "actor": "us",
+    "category": [
+      "economic_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "This dependency of the United States on foreign sources creates a strategic vulnerability for both its economy and military to adverse foreign government action, natural disaster, and other events that can disrupt supply of these key minerals.",
+    "quoteEn": "This dependency of the United States on foreign sources creates a strategic vulnerability for both its economy and military to adverse foreign government action, natural disaster, and other events that can disrupt supply of these key minerals.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-cm-list-2018",
+    "notes": "From the SUMMARY of the Federal Register notice, verbatim. The sentence places adverse foreign government action alongside natural disaster as one disruption risk among several and names no country, so no leverage or retaliation framing is coded."
+  },
+  {
+    "id": "fc-us-eo13953-emergency",
+    "eventId": "evt-us-eo-13953-2020",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "economic_security"
+    ],
+    "quoteOriginal": "I therefore determine that our Nation's undue reliance on critical minerals, in processed or unprocessed form, from foreign adversaries constitutes an unusual and extraordinary threat, which has its source in substantial part outside the United States, to the national security, foreign policy, and economy of the United States. I hereby declare a national emergency to deal with that threat.",
+    "quoteEn": "I therefore determine that our Nation's undue reliance on critical minerals, in processed or unprocessed form, from foreign adversaries constitutes an unusual and extraordinary threat, which has its source in substantial part outside the United States, to the national security, foreign policy, and economy of the United States. I hereby declare a national emergency to deal with that threat.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-eo-13953",
+    "notes": "The operative determination and emergency declaration, verbatim from the Federal Register text with the printed line breaks removed and nothing else altered. This is the IEEPA/NEA predicate for the whole order."
+  },
+  {
+    "id": "fc-us-eo13953-china",
+    "eventId": "evt-us-eo-13953-2020",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "leverage_retaliation"
+    ],
+    "quoteOriginal": "Our dependence on one country, the People's Republic of China (China), for multiple critical minerals is particularly concerning.",
+    "quoteEn": "Our dependence on one country, the People's Republic of China (China), for multiple critical minerals is particularly concerning.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-eo-13953",
+    "notes": "Verbatim, line breaks removed. Coded with leverage_retaliation because the order itself, in the operative instruction at section 1(a), directs that recommended action \"may include the imposition of tariffs or quotas, other import restrictions against China and other non-market foreign adversaries\" — the country is named by the government in its own operative text, so the label rests on the document rather than on any inference drawn here. Contrast EO 14241 and EO 14272, which leave the country unnamed and therefore carry no such label."
+  },
+  {
+    "id": "fc-us-cm2022-methodology",
+    "eventId": "evt-us-cm-list-2022",
+    "actor": "us",
+    "category": [
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "This 2022 final list of critical minerals is not intended to replace related terms and definitions of minerals that are deemed strategic, critical or otherwise important.",
+    "quoteEn": "This 2022 final list of critical minerals is not intended to replace related terms and definitions of minerals that are deemed strategic, critical or otherwise important.",
+    "quoteEnSource": "na",
+    "sourceId": "src-fedreg-cm-list-2022",
+    "notes": "USGS limiting the reach of its own designation. Coded compliance_modernization rather than a security category because the statement is about the instrument's legal scope — that it is a statutory list under section 7002 of the Energy Act of 2020 and not a general-purpose determination — not about why the minerals matter."
+  },
+  {
+    "id": "fc-cn-ecl-natsec",
+    "eventId": "evt-cn-ecl-2020",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为了维护国家安全和利益，履行防扩散等国际义务，加强和规范出口管制，制定本法。",
+    "quoteEn": "This Law is enacted for the purposes of safeguarding national security and interest, performing nonproliferation and other international obligations, and strengthening and regulating export control.",
+    "quoteEnSource": "official",
+    "sourceId": "src-npc-ecl-2020-en",
+    "notes": "Article 1 of the Export Control Law. The Chinese is verbatim from the NPC's Chinese text (src-npc-ecl-2020); the English is the NPC's own official translation, which is why quoteEnSource is \"official\" and the claim resolves to the English edition. This is the statutory original of the national-security-plus-non-proliferation formula that the later MOFCOM announcements reuse — compare fc-cn-us-ban-natsec, where Announcement No. 46 carries the same two limbs in abbreviated form."
+  },
+  {
+    "id": "fc-cn-decree792-natsec",
+    "eventId": "evt-cn-decree-792-2024",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为了维护国家安全和利益，履行防扩散等国际义务，加强和规范两用物项出口管制，根据《中华人民共和国出口管制法》(以下简称出口管制法)等法律，制定本条例。",
+    "quoteEn": "These Regulations are formulated in accordance with the Export Control Law of the People's Republic of China (hereinafter the Export Control Law) and other laws, for the purposes of safeguarding national security and interests, performing non-proliferation and other international obligations, and strengthening and regulating export control of dual-use items.",
+    "quoteEnSource": "self",
+    "sourceId": "src-moj-decree-792",
+    "notes": "Article 1, verbatim from the State Council's administrative-regulations database. The clause reproduces the Export Control Law's Article 1 purpose formula and adds the subordination to that statute; the translation here is this project's own, rendered to match the NPC's official English of the parent provision where the wording is identical."
+  },
+  {
+    "id": "fc-cn-decree785-resource",
+    "eventId": "evt-cn-decree-785-2024",
+    "actor": "china",
+    "category": [
+      "resource_environmental",
+      "economic_security",
+      "national_security"
+    ],
+    "quoteOriginal": "为有效保护和合理开发利用稀土资源，促进稀土产业高质量发展，维护生态安全，保障国家资源安全和产业安全，根据有关法律，制定本条例。",
+    "quoteEn": "These Regulations are formulated in accordance with the relevant laws in order to effectively protect and rationally develop and utilise rare-earth resources, promote the high-quality development of the rare-earth industry, safeguard ecological security, and ensure national resource security and industrial security.",
+    "quoteEnSource": "self",
+    "sourceId": "src-gov-cn-decree-785",
+    "notes": "Article 1 of the Regulations on Rare Earth Administration, verbatim from the State Council portal; translation is this project's own. Three categories are coded because the single sentence carries three distinct limbs — resource protection and ecological security, industrial development, and national resource and industrial security. Worth contrasting with the export-control instruments: this justification is entirely domestic and mentions no foreign state, no non-proliferation obligation and no export."
+  },
+  {
+    "id": "fc-au-cmpti-processing",
+    "eventId": "evt-au-cmpti-2025",
+    "actor": "australia",
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
+    "quoteOriginal": "Companies may be entitled to a refundable tax offset for expenditure incurred in carrying on processing activities at facilities in Australia that substantially transform feedstock containing critical minerals into purer or more refined forms of the critical minerals that are chemically distinct from the feedstock. This offset is designed to support the growth of these processing activities in Australia.",
+    "quoteEn": "Companies may be entitled to a refundable tax offset for expenditure incurred in carrying on processing activities at facilities in Australia that substantially transform feedstock containing critical minerals into purer or more refined forms of the critical minerals that are chemically distinct from the feedstock. This offset is designed to support the growth of these processing activities in Australia.",
+    "quoteEnSource": "na",
+    "sourceId": "src-legislation-au-cmpti-2025",
+    "notes": "Section 419-1, \"What this Division is about\", verbatim from the authorised PDF. A guide provision rather than an operative one, but it is the Parliament's own statement of the incentive's purpose in the enacted text, which is what the framing model requires. Note what it does not say: no foreign state, no supply threat and no security rationale appears — the stated purpose is growth in domestic processing."
+  },
+  {
+    "id": "fc-ca-cms-allies",
+    "eventId": "evt-ca-cms-2022",
+    "actor": "canada",
+    "category": [
+      "allied_coordination"
+    ],
+    "quoteOriginal": "Enhancing global security and partnership with allies.",
+    "quoteEn": "Enhancing global security and partnership with allies.",
+    "quoteEnSource": "na",
+    "sourceId": "src-nrcan-cms-2022",
+    "notes": "The fifth of the five outcomes Natural Resources Canada states for the Strategy, verbatim. Coded on its own because it is the only one of the five framed in security terms; the other four are economic, environmental, reconciliation and workforce outcomes."
+  },
+  {
+    "id": "fc-ca-cms-opportunity",
+    "eventId": "evt-ca-cms-2022",
+    "actor": "canada",
+    "category": [
+      "economic_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "It will position Canada as the global supplier of choice for the critical minerals and clean technologies needed for the green, digital global economy — and it will help advance economic reconciliation with Indigenous Peoples.",
+    "quoteEn": "It will position Canada as the global supplier of choice for the critical minerals and clean technologies needed for the green, digital global economy — and it will help advance economic reconciliation with Indigenous Peoples.",
+    "quoteEnSource": "na",
+    "sourceId": "src-nrcan-cms-2022",
+    "notes": "Attributed in the release to the Honourable Jonathan Wilkinson, Minister of Natural Resources. Coded as economic security and resilience rather than allied coordination: the supplier-of-choice claim is about Canada's own position in the market, and is kept separate from the explicit allied-partnership outcome anchored in fc-ca-cms-allies."
+  },
+  {
+    "id": "fc-jp-espa-security",
+    "eventId": "evt-jp-espa-2022",
+    "actor": "japan",
+    "category": [
+      "national_security",
+      "economic_security"
+    ],
+    "quoteOriginal": "この法律は、国際情勢の複雑化、社会経済構造の変化等に伴い、安全保障を確保するためには、経済活動に関して行われる国家及び国民の安全を害する行為を未然に防止する重要性が増大していることに鑑み、経済施策を一体的に講ずることによる安全保障の確保の推進に関する基本的な方針を策定するとともに、安全保障の確保に関する経済施策として、特定重要物資の安定的な供給の確保及び特定社会基盤役務の安定的な提供の確保に関する制度並びに特定重要技術の開発支援及び特許出願の非公開に関する制度を創設することにより、安全保障の確保に関する経済施策を総合的かつ効果的に推進することを目的とする。",
+    "quoteEn": "The purpose of this Act is, in view of the growing importance of preventing in advance acts harmful to the security of the State and its people carried out in relation to economic activity in order to ensure national security amid increasing complexity in the international situation and changes in socio-economic structures, to formulate a basic policy on promoting the securing of national security through the integrated implementation of economic measures, and to establish, as economic measures relating to the securing of national security, systems for ensuring the stable supply of specified critical materials and the stable provision of specified essential infrastructure services, together with systems for supporting the development of specified critical technologies and for non-disclosure of patent applications, thereby comprehensively and effectively promoting economic measures relating to the securing of national security.",
+    "quoteEnSource": "self",
+    "sourceId": "src-egov-jp-espa-2022",
+    "notes": "Article 1 of Act No. 43 of 2022, verbatim from the e-Gov statutory database. Translation is this project's own — no official English version of this Act was located in this session, which is why quoteEnSource is \"self\" rather than \"official\". The sentence is the Act's single purpose provision and it ties economic measures to security explicitly, which is why both categories are coded."
+  },
+  {
+    "id": "fc-uk-cms2022-ace",
+    "eventId": "evt-uk-cms-2022",
+    "actor": "uk",
+    "category": [
+      "supply_chain_resilience",
+      "allied_coordination"
+    ],
+    "quoteOriginal": "This strategy sets out how we will do this through our new A-C-E approach. We aim to: Accelerate the UK's domestic capabilities",
+    "quoteEn": "This strategy sets out how we will do this through our new A-C-E approach. We aim to: Accelerate the UK's domestic capabilities",
+    "quoteEnSource": "na",
+    "sourceId": "src-gov-uk-cms-2022",
+    "notes": "The strategy's own statement of its structure, verbatim, with the first of the three headings. Allied coordination is coded because the C limb of the stated approach is \"Collaborate with international partners\", which appears in the same passage as a heading."
+  },
+  {
+    "id": "fc-uk-cms2025-vision",
+    "eventId": "evt-uk-cms-2025",
+    "actor": "uk",
+    "category": [
+      "economic_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "The UK has the critical minerals it needs to drive economic growth and the clean energy transition, harnessing our competitive advantage in midstream processing and recycling of critical minerals.",
+    "quoteEn": "The UK has the critical minerals it needs to drive economic growth and the clean energy transition, harnessing our competitive advantage in midstream processing and recycling of critical minerals.",
+    "quoteEnSource": "na",
+    "sourceId": "src-gov-uk-cms-2025",
+    "notes": "The Vision 2035 statement, set out as a display quotation in the strategy and reproduced verbatim with the printed line breaks removed. It is the government's own formulation of the strategy's objective, and it frames the UK's position as a competitive advantage in midstream processing rather than as a response to any external actor."
+  },
+  {
+    "id": "fc-in-ncmm-selfreliance",
+    "eventId": "evt-in-ncmm-2025",
+    "actor": "india",
+    "category": [
+      "economic_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "There is a need to establish an effective framework for India's self-reliance in the critical mineral sector.",
+    "quoteEn": "There is a need to establish an effective framework for India's self-reliance in the critical mineral sector.",
+    "quoteEnSource": "na",
+    "sourceId": "src-pib-ncmm-2025",
+    "notes": "From the Press Information Bureau release on the Cabinet approval, verbatim. The surrounding text places the Mission within the Atmanirbhar Bharat (self-reliant India) initiative and cites the indispensable role of critical minerals in high-tech industries, clean energy and defence. No foreign state is named anywhere in the release."
+  },
+  {
+    "id": "fc-cn-antismuggling-natsec",
+    "eventId": "evt-cn-antismuggling-campaign-2025",
+    "actor": "china",
+    "category": [
+      "national_security"
+    ],
+    "quoteOriginal": "加强战略矿产资源出口管制事关国家安全和发展利益。",
+    "quoteEn": "Strengthening export controls on strategic mineral resources relates to national security and development interests.",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-antismuggling-2025",
+    "notes": "Justification clause from the MOFCOM notice's second paragraph, verified verbatim (including punctuation) against the primary. Coded national_security only: the clause pairs security with \"development interests\" but does not itself elaborate an economic-security or resilience rationale, so no broader category is inferred from it."
+  },
+  {
+    "id": "fc-ca-cmrdd-resilience",
+    "eventId": "evt-ca-nrcan-cmrdd-2024",
+    "actor": "canada",
+    "category": [
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "New technologies will help address gaps in our world-leading supply chain, seize the economic opportunity presented to us, keep Canadian industry competitive in a rapidly evolving global context, and create jobs — now and for future generations.",
+    "quoteEn": "New technologies will help address gaps in our world-leading supply chain, seize the economic opportunity presented to us, keep Canadian industry competitive in a rapidly evolving global context, and create jobs — now and for future generations.",
+    "quoteEnSource": "na",
+    "sourceId": "src-nrcan-cmrdd-2024",
+    "notes": "Attributed in the release to the Honourable Jonathan Wilkinson, Minister of Energy and Natural Resources. Coded narrowly as supply_chain_resilience only, on the explicit \"address gaps in our world-leading supply chain\" clause — the same register as the existing fc-ca-cms-opportunity anchor from the same minister. \"Economic opportunity\" language in the same and other quotes (Gerretsen; the two company CEOs) was not used: the CEO quotes are private-company statements, not official government framing, and the remaining ministerial language is generic economic-opportunity boosterism without a security or resilience claim of its own, so no second category or second claim was added."
+  },
+  {
+    "id": "fc-uk-nwf-natsec",
+    "eventId": "evt-uk-nwf-tungsten-west-2026",
+    "actor": "uk",
+    "category": [
+      "national_security"
+    ],
+    "quoteOriginal": "We are living in a more dangerous world, which is why backing British industry is more important than ever before.",
+    "quoteEn": "We are living in a more dangerous world, which is why backing British industry is more important than ever before.",
+    "quoteEnSource": "na",
+    "sourceId": "src-nwf-tungsten-west-2026",
+    "notes": "John Healey, Chancellor of the Exchequer. The attribution was independently verified against gov.uk's live Ministers listing in an earlier review session and re-confirmed this session; both the National Wealth Fund release and gov.uk agree Healey holds this office. Coded national_security on this sentence alone, which is explicit geopolitical-danger framing; the quote continues into an economic/jobs argument not anchored here. A second, government quotation (Business Secretary Jonathan Reynolds: \"...will boost our economic resilience, strengthen supply chains...\") also plausibly supports economic_security and supply_chain_resilience, but was left uncoded to keep this addition to the single narrowest claim needed to resolve the no-framing warning; a maintainer may add it separately if broader framing coverage is wanted."
   }
 ]

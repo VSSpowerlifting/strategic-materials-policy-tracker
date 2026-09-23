@@ -12,19 +12,24 @@ import type {
   Mechanism,
   PolicyEvent,
   Source,
+  SourceConfidence,
+  WatchedSource,
 } from "./types";
+import { getCoverageReport, type Share } from "./coverage";
 
 import eventsSeed from "@/data/seed/events.json";
 import framingSeed from "@/data/seed/framing.json";
 import materialsSeed from "@/data/seed/materials.json";
 import jurisdictionsSeed from "@/data/seed/jurisdictions.json";
 import sourcesSeed from "@/data/seed/sources.json";
+import watchlistSeed from "@/data/seed/watchlist.json";
 
 const events = eventsSeed as PolicyEvent[];
 const framing = framingSeed as FramingClaim[];
 const materials = materialsSeed as Material[];
 const jurisdictions = jurisdictionsSeed as Jurisdiction[];
 const sources = sourcesSeed as Source[];
+const watchlist = watchlistSeed as WatchedSource[];
 
 // Sort helper: most recent first.
 const byDateDesc = (a: PolicyEvent, b: PolicyEvent) => b.date.localeCompare(a.date);
@@ -149,6 +154,44 @@ export function getSourcesByIds(ids: string[]): Source[] {
     .filter((s): s is Source => Boolean(s));
 }
 
+// --- Watchlist ---------------------------------------------------------------
+//
+// The input side of the tracker: official sources under standing review.
+// Watching a source is a statement about the project's own review routine, not
+// a claim about the source's contents — nothing here asserts that a measure
+// exists, or that none does. Loaders deliberately expose `lastCheckedAt` as it
+// is stored (null included) so a page can say "not yet checked in a published
+// review cycle" rather than imply freshness the project cannot evidence.
+
+export function getAllWatchedSources(): WatchedSource[] {
+  return [...watchlist].sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export function getWatchedSourceById(id: string): WatchedSource | undefined {
+  return watchlist.find((w) => w.id === id);
+}
+
+/**
+ * Active watched sources grouped by jurisdiction, in canonical taxonomy order.
+ * Jurisdictions with no active watched source are returned with an empty array
+ * rather than omitted — a coverage gap is information, and hiding it would let
+ * the page read as fuller coverage than the project actually maintains. Paused
+ * and retired sources are excluded here; `getAllWatchedSources` still has them.
+ */
+export function getWatchedSourcesByJurisdiction(): {
+  jurisdiction: JurisdictionCode;
+  sources: WatchedSource[];
+}[] {
+  const present = new Set(jurisdictions.map((j) => j.id));
+  const cols = JURISDICTIONS.filter((j) => present.has(j)) as JurisdictionCode[];
+  return cols.map((jurisdiction) => ({
+    jurisdiction,
+    sources: getAllWatchedSources().filter(
+      (w) => w.jurisdiction === jurisdiction && w.status === "active",
+    ),
+  }));
+}
+
 // --- Aggregate counts (for the homepage / headers) --------------------------
 
 export function getDatasetSummary() {
@@ -158,6 +201,68 @@ export function getDatasetSummary() {
     materials: materials.length,
     jurisdictions: jurisdictions.length,
     sources: sources.length,
+  };
+}
+
+/**
+ * The dataset's evidentiary footprint: what is coded, how well it is anchored
+ * to sources and framing, and where coverage is uneven — derived entirely
+ * from `getCoverageReport()` (the single computation over the seed) and
+ * reshaped into the exact breakdown the coverage page and its tests expect.
+ * No field here is a synthetic score; every share carries its denominator.
+ */
+export type EvidenceSummary = {
+  totals: {
+    events: number;
+    framingClaims: number;
+    materials: number;
+    jurisdictions: number;
+    sources: number;
+  };
+  primarySources: Share;
+  averageSourcesPerEvent: number;
+  framingCoverage: Share;
+  dateWindow: { earliest: string; latest: string };
+  byJurisdiction: {
+    jurisdiction: JurisdictionCode;
+    /** Lowercase two-letter actor route segment, from `jurisdictionShort`. */
+    code: string;
+    events: number;
+    framingCoverage: Share;
+    linkedSources: number;
+    primaryLinkedSources: number;
+  }[];
+  byMechanism: { mechanism: Mechanism; count: number }[];
+  bySourceConfidence: { confidence: SourceConfidence; count: number }[];
+  /** Event IDs whose `titleOriginal` is still the literal "Not yet coded". */
+  notYetCodedTitleEventIds: string[];
+};
+
+export function getEvidenceSummary(): EvidenceSummary {
+  const r = getCoverageReport();
+  return {
+    totals: {
+      events: r.totals.events,
+      framingClaims: r.totals.framingClaims,
+      materials: r.totals.materials,
+      jurisdictions: r.totals.jurisdictions,
+      sources: r.totals.sources,
+    },
+    primarySources: r.sources.primary,
+    averageSourcesPerEvent: r.evidence.averageLinkedSourcesPerEvent,
+    framingCoverage: r.evidence.withFraming,
+    dateWindow: r.evidence.dateWindow,
+    byJurisdiction: r.actors.map((a) => ({
+      jurisdiction: a.jurisdiction,
+      code: a.code,
+      events: a.events,
+      framingCoverage: a.framingAnchored,
+      linkedSources: a.linkedSources,
+      primaryLinkedSources: a.primaryLinkedSources,
+    })),
+    byMechanism: r.mechanisms,
+    bySourceConfidence: r.sources.byConfidence,
+    notYetCodedTitleEventIds: r.evidence.notYetCodedTitleEventIds,
   };
 }
 

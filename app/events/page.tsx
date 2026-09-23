@@ -26,6 +26,12 @@ export default function EventsPage() {
         lead="Every tracked measure, newest first. Filter by actor, mechanism, status or material. Each event is a structured, source-linked record — open one for the full framing and citations."
       />
       <div className="mt-10">
+        {/*
+          No Suspense boundary here on purpose. The explorer applies any URL
+          filters from `window.location.search` after mount rather than through
+          `useSearchParams`, which would opt this subtree out of prerendering
+          and ship an empty event list in the static HTML.
+        */}
         <EventsExplorer
           events={events}
           materials={materials}

@@ -9,7 +9,7 @@ import { getAllJurisdictions } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Actors",
   description:
-    "Jurisdiction profiles for the six tracked actors — China, the United States, the EU, Australia, Japan and Canada — their role in the supply chain, the instruments they use, and how they frame policy.",
+    "Jurisdiction profiles for the tracked actors — China, the United States, the EU, Australia, Japan, Canada, the United Kingdom and India — their role in the supply chain, the instruments they use, and how they frame policy.",
 };
 
 export default function ActorsPage() {

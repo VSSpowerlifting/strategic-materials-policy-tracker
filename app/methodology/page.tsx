@@ -5,6 +5,7 @@ import {
   confidenceLabels,
   enSourceLabels,
   framingCategoryLabels,
+  jurisdictionLabels,
   mechanismLabels,
   policyStatusLabels,
   sectorLabels,
@@ -17,8 +18,10 @@ import {
   SECTORS,
   SOURCE_CONFIDENCE,
 } from "@/lib/types";
+import type { JurisdictionCode } from "@/lib/types";
 import { site } from "@/lib/site";
 import { formatDate } from "@/lib/format";
+import { getAllEvents, getDatasetSummary } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -121,7 +124,30 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
   );
 }
 
+/**
+ * Coverage sentences on this page are derived, never typed in. Hand-written
+ * counts here have gone stale twice as the corpus grew, and a stale count on
+ * the methodology page is a truth-in-labeling failure, not a cosmetic one.
+ */
+function coverageShape() {
+  const events = getAllEvents();
+  const summary = getDatasetSummary();
+  const byActor = new Map<JurisdictionCode, number>();
+  for (const e of events) byActor.set(e.jurisdiction, (byActor.get(e.jurisdiction) ?? 0) + 1);
+  const ranked = [...byActor.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  const fewest = ranked[ranked.length - 1][1];
+  const thinnest = ranked.filter(([, n]) => n === fewest).map(([j]) => jurisdictionLabels[j]);
+  return { summary, ranked, fewest, thinnest };
+}
+
+/** "A", "A and B", "A, B and C" — so a derived sentence still reads as English. */
+function listSentence(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+}
+
 export default function MethodologyPage() {
+  const { summary, ranked, fewest, thinnest } = coverageShape();
   return (
     <Container className="py-12">
       <PageHeading
@@ -165,10 +191,14 @@ export default function MethodologyPage() {
               estimates.
             </p>
             <p>
-              Scope is deliberately bounded: six actors, a rare-earth-centred material
-              set, and events from {site.scopeStart} forward, with a few foundational
-              instruments included for context. The boundary is the point — it is what
-              lets every record be sourced.
+              Scope is deliberately bounded: {summary.jurisdictions} actors, a
+              rare-earth-centred material set, and events from {site.scopeStart}{" "}
+              forward. The boundary is
+              the point — it is what lets every record be sourced. Some records carry
+              no material at all: a framework statute names none of its own, and an
+              instrument may name minerals that fall outside this material set. Both
+              are recorded as an empty scope and said so on the record, rather than
+              being filled in from the measures issued under them.
             </p>
           </section>
 
@@ -301,11 +331,14 @@ export default function MethodologyPage() {
             <H2 id="limitations">Limitations &amp; disclaimer</H2>
             <ul className="space-y-2 text-muted">
               <li>
-                · The dataset is a seed. All six actors are now event-coded, and every
+                · The dataset is a seed. Every tracked actor is event-coded and every
                 coded event carries at least one framing anchor — but coverage is
-                deliberately uneven: China accounts for eight of the fourteen events,
-                while Australia, Japan and Canada are each represented by a single
-                anchoring instrument. Read it as a depth-first sample, not a census.
+                deliberately uneven: {jurisdictionLabels[ranked[0][0]]} accounts for{" "}
+                {ranked[0][1]} of the {summary.events} events, while{" "}
+                {listSentence(thinnest)} {thinnest.length === 1 ? "is" : "are"}{" "}
+                represented by{" "}
+                {fewest === 1 ? "a single instrument" : `only ${fewest} each`}. Read it
+                as a depth-first sample, not a census.
               </li>
               <li>
                 · Some Chinese document numbers and original-language titles are not

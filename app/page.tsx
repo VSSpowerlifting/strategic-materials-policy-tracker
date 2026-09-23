@@ -14,6 +14,7 @@ import {
   getSourceById,
 } from "@/lib/data";
 import { site } from "@/lib/site";
+import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 const HOMEPAGE_FRAMING_IDS = ["fc-china-oct-natsec", "fc-us-burgum-resilience"];
 
@@ -36,6 +37,11 @@ export default function Home() {
   ];
 
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(datasetJsonLd()) }}
+      />
     <Container width="wide" className="py-12 sm:py-16">
       {/* Hero */}
       <section>
@@ -136,10 +142,33 @@ export default function Home() {
         </Section>
       </div>
 
-      {/* Materials — element tiles */}
+      {/* Comparative matrix entry point */}
       <Section
         className="mt-16"
         index="03"
+        title="Who has acted on what"
+        description="The same materials, six governments, side by side."
+      >
+        <Card className="p-6">
+          <p className="max-w-3xl leading-7 text-muted">
+            The event index reads chronologically. The comparative matrix reads structurally —
+            down a column for one government&apos;s posture, across a row for the contest over a
+            single material. Every cell opens the measures behind the count, with the mechanisms
+            and the most recent date.
+          </p>
+          <Link
+            href="/compare"
+            className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong"
+          >
+            Open the comparative matrix →
+          </Link>
+        </Card>
+      </Section>
+
+      {/* Materials — element tiles */}
+      <Section
+        className="mt-16"
+        index="04"
         title="Materials"
         description="A bounded set, rare-earth-centred, with the adjacent chokepoints."
       >
@@ -151,8 +180,8 @@ export default function Home() {
       </Section>
 
       {/* Methodology preview + data CTA */}
-      <Section className="mt-16" index="04" title="Built to be cited">
-        <div className="grid gap-6 md:grid-cols-2">
+      <Section className="mt-16" index="05" title="Built to be cited">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card className="p-6">
             <h3 className="font-display font-semibold tracking-tight">
               The rules that protect the data
@@ -186,11 +215,28 @@ export default function Home() {
               CSV / JSON export →
             </Link>
           </Card>
+          <Card className="p-6">
+            <h3 className="font-display font-semibold tracking-tight">
+              See what the data can support
+            </h3>
+            <p className="mt-3 leading-7 text-muted">
+              The coverage dashboard shows the coded footprint directly: how many events are
+              anchored to a primary source and a framing quote, the source-confidence mix, and
+              where the research is thin — counts, never a synthetic score.
+            </p>
+            <Link
+              href="/coverage"
+              className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong"
+            >
+              Open the coverage dashboard →
+            </Link>
+          </Card>
         </div>
         <p className="mt-8 font-mono text-xs text-faint">
           {site.name} · {site.version} · scope from {site.scopeStart}.
         </p>
       </Section>
     </Container>
+    </>
   );
 }

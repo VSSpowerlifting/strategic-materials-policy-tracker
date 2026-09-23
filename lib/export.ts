@@ -10,6 +10,7 @@ import {
   getAllMaterials,
   getAllSources,
 } from "./data";
+import type { PolicyEvent } from "./types";
 
 const LIST_SEP = "; ";
 
@@ -47,7 +48,10 @@ export function buildDataset() {
   };
 }
 
-export function eventsCsv(): string {
+/** @param events Defaults to the whole corpus; pass a subset (e.g. a
+ *  reader's saved list) to reuse the exact same columns and quoting for a
+ *  smaller export instead of a second CSV builder. */
+export function eventsCsv(events: PolicyEvent[] = getAllEvents()): string {
   return toCsv(
     [
       "id",
@@ -68,7 +72,7 @@ export function eventsCsv(): string {
       "summary",
       "analyticalSignificance",
     ],
-    getAllEvents().map((e) => [
+    events.map((e) => [
       e.id,
       e.date,
       e.jurisdiction,
