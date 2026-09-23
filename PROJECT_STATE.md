@@ -1,6 +1,25 @@
 # Project state
 
-_Last updated: 2026-09-23 (v0.5 Capital & Control platform release on branch `feat/capital-control-platform`)._
+_Last updated: 2026-09-23 (v0.5 released: PR #5 merged to `main` as `7ddb62c`; v0.6 work starts on `feat/capital-intelligence-v06`)._
+
+## Release reconciliation: v0.5 is on `main`
+
+- PR #5 ("Capital & Control: source-verified capital and control platform
+  (v0.5)") was merged on 2026-09-23 at 22:38 UTC as
+  `7ddb62ca6891cb9e517db1b5e8d570b890a3ba7b` (PR head `2dee471`). The `main`
+  CI run for that commit passed. The session notes below still say "not
+  merged"; they describe the state before the merge.
+- `main` is clean at `7ddb62c`. The Phase 3 session worktree under
+  `~/.claude/worktrees/` no longer exists; `git worktree prune` has been run
+  in the main checkout.
+- `graphify update .` was run at `7ddb62c` (969 nodes, 2,869 edges, 52
+  communities; `graphify-out/` is git-ignored, so no tracked file changed).
+  Its god nodes are the `lib/data.ts` loaders (`getAllEvents`,
+  `getAllControlMeasures`, `getAllFinancialCommitments`), `formatDate` and
+  `site`, which matches the architecture described in CLAUDE.md. The seed
+  JSON files produce no nodes: the extractor reads code, not data, so the
+  graph says nothing about the corpus itself.
+- The open items listed under "Open items" below are still open.
 
 ## Latest session: v0.5 Capital & Control — platform release (Phase 3)
 
