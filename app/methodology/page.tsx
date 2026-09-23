@@ -184,11 +184,21 @@ export default function MethodologyPage() {
             </p>
             <p>
               It does <strong>not</strong> model the global minerals market. It does
-              not forecast prices, estimate reserves or tonnages, or rank countries
-              by a supply-risk number. Where market-share figures appear — for
+              not track or forecast market prices, estimate reserves or tonnages,
+              publish supply-risk numbers or rankings, or make projections its
+              sources do not state. Where market-share figures appear — for
               example, that China processes roughly 90% of rare earths — they are
               cited context drawn from bodies such as the IEA and USGS, not original
               estimates.
+            </p>
+            <p>
+              The one kind of figure it does record is a term of a policy
+              instrument: a number that a government states, or that a binding
+              filing sets out, as part of the measure itself — a price floor written
+              into an agreement, a tax-offset percentage, a capacity covenant, a
+              contract term. Such a term is recorded only when it can be cited
+              precisely. It describes the instrument; it is not an estimate of the
+              market.
             </p>
             <p>
               Scope is deliberately bounded: {summary.jurisdictions} actors, a
@@ -200,6 +210,75 @@ export default function MethodologyPage() {
               are recorded as an empty scope and said so on the record, rather than
               being filled in from the measures issued under them.
             </p>
+
+            <div className="space-y-3 pt-2">
+              <h3
+                id="capital-control"
+                className="scroll-mt-20 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted"
+              >
+                Capital &amp; Control (in development)
+              </h3>
+              <p>
+                Version 0.5 extends the model so that one announcement can hold the
+                separate financial instruments and control measures inside it. The
+                event stays the unit of announcement and citation. Beneath it, a{" "}
+                <strong>financial commitment</strong> (ids beginning{" "}
+                <code className="font-mono text-faint">fin-</code>) records one
+                instrument, such as a grant, loan, equity stake, price floor or
+                program envelope, and a <strong>control measure</strong> (ids
+                beginning <code className="font-mono text-faint">ctl-</code>) records
+                one operative clause of an export, import, investment or domestic
+                control. The tracker remains a policy-intelligence record, not a
+                commodity-price or market-forecasting model.
+              </p>
+              <ul className="space-y-2 text-muted">
+                <li>
+                  · Original currency is authoritative. An amount is kept as the
+                  source states it, with its currency and any qualifier such as
+                  &ldquo;up to&rdquo;. Nothing is converted, adjusted for inflation or
+                  totalled across currencies.
+                </li>
+                <li>
+                  · Unlike instruments are never combined. A loan, an equity stake, a
+                  tax credit and a price floor are different promises and are not
+                  added into one figure.
+                </li>
+                <li>
+                  · A program envelope and the awards drawn from it are linked, and
+                  the two are never both counted.
+                </li>
+                <li>
+                  · Private financing, a recipient&apos;s own funds and total project
+                  cost are recorded so they can be kept apart. None of them is
+                  presented as public support.
+                </li>
+                <li>
+                  · Announced, authorized, contracted and disbursed money are
+                  different stages, and a project under construction is not an
+                  operational one. Each status carries the date and the source that
+                  support it.
+                </li>
+                <li>
+                  · Each important field names the source that supports it. Where the
+                  sources do not state something, the field is left empty rather
+                  than inferred.
+                </li>
+                <li>
+                  · A control clause whose status differs from the rest of its
+                  instrument — one limb in force, another suspended — is recorded on
+                  its own, so one record never hides a conflict.
+                </li>
+                <li>
+                  · There is no synthetic economic-security score, index or ranking,
+                  and none will be added.
+                </li>
+              </ul>
+              <p>
+                At this stage the model is in place but holds no data: no financial
+                commitments or control measures are published yet. They will be
+                added as each is verified against its sources.
+              </p>
+            </div>
           </section>
 
           <section className="space-y-3">

@@ -4,15 +4,37 @@
  * across every page. The definitions themselves live on /methodology.
  */
 import type {
+  CapitalSource,
+  ControlDirection,
+  ControlEvidenceField,
+  ControlMeasureType,
+  ControlStatus,
+  CurrencyBasis,
   EnSource,
+  EvidenceLevel,
+  FinancialEvidenceField,
+  FinancialInstrument,
+  FinancialStatus,
   FramingCategory,
+  ImplementationStatus,
   JurisdictionCode,
   JurisdictionRole,
+  MaterialAttribution,
   Mechanism,
+  OutcomeAttribution,
+  OutcomeMetric,
   PolicyStatus,
+  ProductCodeRole,
+  ProductCodeSystem,
   Sector,
   SourceConfidence,
   SourceType,
+  StageAllocation,
+  SupplyChainStage,
+  TargetScope,
+  TermKind,
+  ValueQualifier,
+  ValueRole,
   WatchCadence,
   WatchStatus,
 } from "./types";
@@ -173,4 +195,227 @@ export const roleLabels: Record<JurisdictionRole, string> = {
   stockpiler: "Stockpiler",
   import_dependent: "Import-dependent",
   regulator: "Regulator",
+};
+
+// --- Capital & Control (v0.5) -----------------------------------------------
+//
+// Labels for the financial-commitment and control-measure vocabularies. No
+// page shows these records yet; the labels exist so the vocabulary is complete
+// before any data or display arrives. Kept deliberately plain: a status or an
+// instrument is a fact about the record, not a judgement of it.
+
+export const financialInstrumentLabels: Record<FinancialInstrument, string> = {
+  grant: "Grant",
+  loan: "Loan",
+  loan_guarantee: "Loan guarantee",
+  equity: "Equity",
+  tax_credit: "Tax credit",
+  price_floor: "Price floor",
+  offtake: "Offtake",
+  procurement_right: "Procurement right",
+  stockpile_purchase: "Stockpile purchase",
+  unspecified: "Instrument not specified",
+};
+
+export const valueRoleLabels: Record<ValueRole, string> = {
+  commitment: "Commitment",
+  program_envelope: "Program envelope",
+  budget_appropriation: "Budget appropriation",
+  lending_authority: "Lending authority",
+  expected_co_investment: "Expected co-investment",
+  private_financing: "Private financing",
+  recipient_own_funds: "Recipient's own funds",
+  total_project_cost: "Total project cost",
+};
+
+export const capitalSourceLabels: Record<CapitalSource, string> = {
+  public: "Public",
+  public_enterprise: "Public enterprise",
+  mixed_vehicle: "Mixed public-private vehicle",
+  private: "Private",
+  not_stated: "Not stated",
+};
+
+export const financialStatusLabels: Record<FinancialStatus, string> = {
+  announced: "Announced",
+  authorized: "Authorized",
+  allocated: "Allocated",
+  decided: "Decided",
+  contracted: "Contracted",
+  partially_disbursed: "Partially disbursed",
+  disbursed: "Disbursed",
+  withdrawn: "Withdrawn",
+  not_stated: "Not stated",
+};
+
+export const implementationStatusLabels: Record<ImplementationStatus, string> = {
+  announced: "Announced",
+  feasibility: "Feasibility",
+  construction: "Construction",
+  commissioning: "Commissioning",
+  operational: "Operational",
+  suspended: "Suspended",
+  cancelled: "Cancelled",
+  not_stated: "Not stated",
+  not_applicable: "Not applicable",
+};
+
+export const supplyChainStageLabels: Record<SupplyChainStage, string> = {
+  exploration: "Exploration",
+  mining: "Mining",
+  separation: "Separation",
+  processing: "Processing",
+  refining: "Refining",
+  component_manufacturing: "Component manufacturing",
+  final_manufacturing: "Final manufacturing",
+  recycling: "Recycling",
+  stockpiling: "Stockpiling",
+  research_development: "Research and development",
+  cross_cutting: "Cross-cutting",
+};
+
+export const stageAllocationLabels: Record<StageAllocation, string> = {
+  single_stage: "Single stage",
+  multi_stage_unallocated: "Several stages, split not stated",
+  not_stated: "Not stated",
+};
+
+export const materialAttributionLabels: Record<MaterialAttribution, string> = {
+  tracked_only: "Tracked materials only",
+  includes_untracked: "Includes untracked materials",
+  not_stated: "Not stated",
+};
+
+export const valueQualifierLabels: Record<ValueQualifier, string> = {
+  exact: "Exact",
+  up_to: "Up to",
+  approximately: "Approximately",
+  at_least: "At least",
+};
+
+export const currencyBasisLabels: Record<CurrencyBasis, string> = {
+  stated: "Stated in the source",
+  issuer_context: "Read from the issuing government",
+};
+
+export const termKindLabels: Record<TermKind, string> = {
+  tax_credit_rate: "Tax-credit rate",
+  price_floor: "Price floor",
+  annual_reimbursement_cap: "Annual reimbursement cap",
+  lending_rate: "Lending rate",
+  duration: "Duration",
+  procurement_share: "Procurement share",
+  offtake_share: "Offtake share",
+  quantity_covenant: "Quantity covenant",
+  capacity_covenant: "Capacity covenant",
+  other: "Other term",
+};
+
+export const outcomeMetricLabels: Record<OutcomeMetric, string> = {
+  annual_capacity: "Annual capacity",
+  supply_share: "Supply share",
+  procurement_right_share: "Procurement-right share",
+  direct_jobs: "Direct jobs",
+  target_date: "Target date",
+  other: "Other outcome",
+};
+
+export const outcomeAttributionLabels: Record<OutcomeAttribution, string> = {
+  government: "Stated by the government",
+  recipient: "Stated by the recipient",
+  third_party: "Stated by a third party",
+};
+
+export const evidenceLevelLabels: Record<EvidenceLevel, string> = {
+  explicit: "Explicit",
+  ambiguous: "Ambiguous",
+};
+
+export const financialEvidenceFieldLabels: Record<FinancialEvidenceField, string> = {
+  instrument: "Instrument",
+  value_role: "Value role",
+  capital_source: "Capital source",
+  amount: "Amount",
+  parent: "Parent commitment",
+  provider: "Provider",
+  legal_authority: "Legal authority",
+  recipient: "Recipient",
+  project: "Project or facility",
+  location: "Location",
+  stages: "Supply-chain stages",
+  materials: "Materials",
+  status: "Status",
+  terms: "Terms",
+  outcomes: "Outcomes",
+};
+
+export const controlMeasureTypeLabels: Record<ControlMeasureType, string> = {
+  export_licensing: "Export licensing",
+  export_prohibition: "Export prohibition",
+  extraterritorial_licensing: "Extraterritorial licensing",
+  end_use_restriction: "End-use restriction",
+  decontrol: "Decontrol",
+  suspension: "Suspension",
+  trade_investigation: "Trade investigation",
+  import_restriction: "Import restriction",
+  investment_divestiture: "Investment divestiture",
+  customs_enforcement: "Customs enforcement",
+  domestic_production_control: "Domestic production control",
+  contractual_ownership_covenant: "Contractual ownership covenant",
+};
+
+export const controlDirectionLabels: Record<ControlDirection, string> = {
+  export: "Export",
+  re_export: "Re-export",
+  import: "Import",
+  inbound_investment: "Inbound investment",
+  outbound_investment: "Outbound investment",
+  domestic: "Domestic",
+};
+
+export const controlStatusLabels: Record<ControlStatus, string> = {
+  announced: "Announced",
+  scheduled: "Scheduled",
+  in_force: "In force",
+  suspended: "Suspended",
+  expired: "Expired",
+  revoked: "Revoked",
+  investigation: "Under investigation",
+  not_stated: "Not stated",
+};
+
+export const targetScopeLabels: Record<TargetScope, string> = {
+  all_jurisdictions: "All jurisdictions",
+  named_jurisdictions: "Named jurisdictions",
+  named_entities: "Named entities",
+  end_users: "End users",
+  end_uses: "End uses",
+  domestic_operators: "Domestic operators",
+};
+
+export const productCodeSystemLabels: Record<ProductCodeSystem, string> = {
+  cn_customs: "China customs commodity code",
+  cn_control_number: "China dual-use control number",
+  hs: "Harmonized System (HS)",
+  us_hts: "US Harmonized Tariff Schedule",
+  us_eccn: "US Export Control Classification Number",
+  eu_cn: "EU Combined Nomenclature",
+};
+
+export const productCodeRoleLabels: Record<ProductCodeRole, string> = {
+  reference: "Reference only",
+  legal_scope: "Defines legal scope",
+};
+
+export const controlEvidenceFieldLabels: Record<ControlEvidenceField, string> = {
+  measure_type: "Measure type",
+  direction: "Direction",
+  clause: "Clause",
+  targets: "Targets",
+  materials: "Materials",
+  product_scope: "Product scope",
+  product_codes: "Product codes",
+  legal_basis: "Legal basis",
+  modified_measures: "Modified measures or instruments",
+  status: "Status",
 };
