@@ -360,6 +360,7 @@ export const VALUE_ROLES = [
   "program_envelope", // the ceiling of a programme or fund that awards are drawn from
   "budget_appropriation", // money set aside in a budget
   "lending_authority", // a ceiling on what a lender may lend or guarantee
+  "funding_option", // a ceiling a party may call on at its election under an executed agreement; an exercise is recorded as its own commitment drawn from it
   "expected_co_investment", // money the government expects others to put in
   "private_financing", // commercial capital raised alongside public money
   "recipient_own_funds", // the recipient's own contribution
@@ -521,7 +522,6 @@ export const CONTROL_MEASURE_TYPES = [
   "customs_enforcement",
   "domestic_production_control",
   "contractual_ownership_covenant",
-  "trade_negotiation", // a directed negotiation of agreements to adjust trade, with restrictions held in reserve
 ] as const;
 
 /** Which flow a control measure governs. */

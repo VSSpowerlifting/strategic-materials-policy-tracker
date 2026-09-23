@@ -152,7 +152,7 @@ test("the vocabularies carry every value the Capital & Control model requires", 
     "offtake", "procurement_right", "stockpile_purchase", "mixed", "unspecified",
   ]);
   requires("VALUE_ROLES", VALUE_ROLES, [
-    "commitment", "program_envelope", "budget_appropriation", "lending_authority",
+    "commitment", "program_envelope", "budget_appropriation", "lending_authority", "funding_option",
     "expected_co_investment", "private_financing", "recipient_own_funds", "total_project_cost",
   ]);
   requires("CAPITAL_SOURCES", CAPITAL_SOURCES, [
@@ -197,7 +197,7 @@ test("the vocabularies carry every value the Capital & Control model requires", 
     "export_licensing", "export_prohibition", "extraterritorial_licensing", "end_use_restriction",
     "decontrol", "suspension", "trade_investigation", "import_restriction",
     "investment_divestiture", "customs_enforcement", "domestic_production_control",
-    "contractual_ownership_covenant", "trade_negotiation",
+    "contractual_ownership_covenant",
   ]);
   requires("CONTROL_DIRECTIONS", CONTROL_DIRECTIONS, [
     "export", "re_export", "import", "inbound_investment", "outbound_investment", "domestic",

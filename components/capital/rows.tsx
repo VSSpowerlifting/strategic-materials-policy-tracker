@@ -22,6 +22,15 @@ import {
 import type { CommitmentSummary, ControlSummary } from "@/lib/capital-control";
 import type { JurisdictionCode, MonetaryAmount } from "@/lib/types";
 
+/**
+ * A funding option's status in words that cannot be mistaken for committed
+ * money: the agreement's status, then whether any exercise is recorded.
+ */
+export function optionStatusLabel(status: CommitmentSummary["status"], exerciseRecorded: boolean): string {
+  const agreement = status === "contracted" ? "Option executed" : `Option ${financialStatusLabels[status].toLowerCase()}`;
+  return `${agreement} · ${exerciseRecorded ? "exercise recorded" : "no exercise recorded"}`;
+}
+
 const QUALIFIER_WORD = { exact: "", up_to: "up to", approximately: "about", at_least: "at least" } as const;
 
 export function InlineAmount({ amount }: { amount: MonetaryAmount | null }) {
@@ -103,9 +112,13 @@ export function CommitmentRow({
             <Badge accent={!offRole}>{valueRoleLabels[c.valueRole]}</Badge>
             <Badge>{financialInstrumentLabels[c.instrument]}</Badge>
             <Badge>{capitalSourceLabels[c.capitalSource]}</Badge>
-            <Badge accent={["contracted", "partially_disbursed", "disbursed"].includes(c.status)}>
-              {financialStatusLabels[c.status]}
-            </Badge>
+            {c.optionExerciseRecorded === null ? (
+              <Badge accent={["contracted", "partially_disbursed", "disbursed"].includes(c.status)}>
+                {financialStatusLabels[c.status]}
+              </Badge>
+            ) : (
+              <Badge>{optionStatusLabel(c.status, c.optionExerciseRecorded)}</Badge>
+            )}
             {c.stages.length ? (
               <span className="font-mono text-[11px] text-faint">
                 {c.stages.map((s) => supplyChainStageLabels[s]).join(" · ")}

@@ -13,7 +13,7 @@ import {
   NotStated,
 } from "@/components/capital/primitives";
 import { ControlRow } from "@/components/capital/rows";
-import { currentControlEntry, summarizeControl } from "@/lib/capital-control";
+import { currentControlEntry, statusEntriesRecordedElsewhere, summarizeControl } from "@/lib/capital-control";
 import {
   getAllControlMeasures,
   getControlMeasureById,
@@ -24,6 +24,7 @@ import {
   controlDirectionLabels,
   controlEvidenceFieldLabels,
   controlMeasureTypeLabels,
+  controlStatusLabels,
   materialAttributionLabels,
   productCodeRoleLabels,
   productCodeSystemLabels,
@@ -170,6 +171,15 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
           <Section index={next()} title="Status" description="Oldest first; the last entry is current. A stated end date is shown, never extended by inference.">
             <Card className="p-5">
               <ControlStatusTrail entries={m.statusHistory} />
+              {statusEntriesRecordedElsewhere(m).map(({ entry, event }) => (
+                <p key={`${entry.status}-${event.id}`} className="mt-4 border-t pt-4 text-sm leading-6 text-muted">
+                  The &ldquo;{controlStatusLabels[entry.status].toLowerCase()}&rdquo; entry is recorded in a separate event:{" "}
+                  <Link href={`/events/${event.id}`} className="text-accent hover:text-accent-strong">
+                    {event.documentNumber?.split(";")[0] ?? event.titleEn}
+                  </Link>{" "}
+                  ({formatDate(event.date)}). That event is not a control measure of its own; see its page for what it does.
+                </p>
+              ))}
             </Card>
           </Section>
 

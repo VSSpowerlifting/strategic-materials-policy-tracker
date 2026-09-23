@@ -2107,7 +2107,7 @@
     "eventId": "evt-us-dod-mp-2025",
     "relationships": [],
     "instrument": "equity",
-    "valueRole": "commitment",
+    "valueRole": "funding_option",
     "capitalSource": "public",
     "amount": {
       "value": "350000000",
@@ -2136,11 +2136,32 @@
         "status": "contracted",
         "date": "2025-07-09",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
-        "note": "Provided for in the Transaction Agreement as one alternative for the Company's $350 million Funding Allocation."
+        "note": "The Transaction Agreement that grants the Company this right was executed on the Effective Date. An executed option is not an exercise: no source in the corpus records one, or any payment under it."
       }
     ],
     "implementationStatusHistory": [],
-    "terms": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "350000000",
+        "qualifier": "up_to",
+        "currency": "USD",
+        "unit": null,
+        "asStated": "the Company’s alternatives including having a right to fund up to the full $350,000,000 of such additional proceeds by selling to DoD additional shares of Series A Preferred Stock on the same terms as the initial purchase or otherwise electing to obtain $350,000,000 under the terms and conditions of the committed financing provided by JPMorgan and Goldman Sachs",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "The option and its alternative. The filing does not say which the Company chose."
+      },
+      {
+        "kind": "duration",
+        "value": "45",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "days after the Closing Date",
+        "asStated": "the Company shall select and fund from available alternatives on or prior to the date that is 45 days after the Closing Date, additional financing with net proceeds of at least $350,000,000 (the “Funding Allocation”)",
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "note": "The election window. The corpus records neither the Closing Date nor the election."
+      }
+    ],
     "outcomes": [],
     "evidence": [
       {
@@ -2153,14 +2174,15 @@
           "provider",
           "recipient",
           "materials",
-          "status"
+          "status",
+          "terms"
         ],
         "evidence": "explicit",
-        "locator": "Introductory paragraph; Item 1.01, Funding Allocation",
+        "locator": "Introductory paragraph; Item 1.01, Transaction Agreement (Funding Allocation)",
         "note": null
       }
     ],
-    "notes": "Contingent: the Transaction Agreement lets the Company fund up to the full $350 million either by selling additional preferred stock to DoD on the same terms or under the JPMorgan / Goldman Sachs committed financing. The filing does not say which it chose, and no later source in the corpus records an exercise, so this is a ceiling on an option, not money paid."
+    "notes": "A funding option, not committed money: the Company may fund up to the full $350 million of its Funding Allocation by selling additional preferred stock to DoD, or elect to obtain it under the JPMorgan / Goldman Sachs committed financing instead. No source in the corpus records which it chose, whether DoD bought any further preferred stock, or any payment, so this row is listed apart and never summed. An exercise would be recorded as its own commitment drawn from this row."
   },
   {
     "id": "fin-us-dod-mp-2025-bank-financing",

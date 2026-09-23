@@ -6,13 +6,16 @@ import { CapitalExplorer } from "@/components/capital/capital-explorer";
 import { StageMatrix } from "@/components/capital/charts";
 import { CommitmentRow, InlineAmount } from "@/components/capital/rows";
 import { JurisdictionTag } from "@/components/labels";
+import { OptionLadder } from "@/components/capital/primitives";
 import {
+  LISTED_NOT_SUMMED_ROLES,
   PUBLIC_CAPITAL_SOURCES,
   commitmentActor,
   countBy,
   currentFinancialStatus,
   compareDecimals,
   formatDecimalCompact,
+  optionState,
   publicCommitmentRows,
   rowsByValueRole,
   summarizeCommitment,
@@ -46,8 +49,8 @@ export default function CapitalPage() {
   const publicRows = publicCommitmentRows(all);
   const totals = totalCommitments(publicRows, all);
   const byRole = rowsByValueRole(all);
-  const envelopeRoles = ["program_envelope", "budget_appropriation", "lending_authority"] as const;
-  const envelopes = envelopeRoles.flatMap((r) => byRole.get(r) ?? []);
+  const envelopes = LISTED_NOT_SUMMED_ROLES.flatMap((r) => byRole.get(r) ?? []);
+  const options = byRole.get("funding_option") ?? [];
   const nonPublic = all.filter(
     (c) =>
       ["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost"].includes(c.valueRole) ||
@@ -104,9 +107,13 @@ export default function CapitalPage() {
               return (
                 <Card key={t.currency} className="min-w-0 p-5">
                   <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{t.currency}</p>
-                  {t.overlap ? (
-                    <p className="mt-2 text-sm text-muted">
-                      No total: {t.overlap.a} and {t.overlap.b} share {t.overlap.shared}, so adding them would double-count.
+                  {t.status === "withheld" ? (
+                    <p className="mt-2 text-sm leading-6 text-muted">
+                      <strong className="font-semibold text-foreground">Total withheld.</strong>{" "}
+                      <Link href={`/capital/${t.overlap.a}`} className="text-accent hover:text-accent-strong">{t.overlap.a}</Link> and{" "}
+                      <Link href={`/capital/${t.overlap.b}`} className="text-accent hover:text-accent-strong">{t.overlap.b}</Link> both
+                      contain <Link href={`/capital/${t.overlap.shared}`} className="text-accent hover:text-accent-strong">{t.overlap.shared}</Link>,
+                      so adding them would double-count. The rows are listed below without a sum.
                     </p>
                   ) : (
                     <div className="mt-2 space-y-3">
@@ -215,9 +222,11 @@ export default function CapitalPage() {
                         {t.currencies.map((cur) => (
                           <span key={cur.currency} className="tnum font-mono text-xs text-muted">
                             <span className="text-foreground">{cur.currency}</span>{" "}
-                            {QUALIFIER_ORDER.filter((q) => cur.byQualifier[q])
-                              .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(cur.byQualifier[q]!)}`)
-                              .join(" + ")}
+                            {cur.status === "withheld"
+                              ? "total withheld: counted rows overlap"
+                              : QUALIFIER_ORDER.filter((q) => cur.byQualifier[q])
+                                  .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(cur.byQualifier[q]!)}`)
+                                  .join(" + ")}
                           </span>
                         ))}
                         {t.currencies.length === 0 ? <span className="font-mono text-xs text-faint">—</span> : null}
@@ -231,8 +240,40 @@ export default function CapitalPage() {
           </div>
         </Section>
 
+        {options.length ? (
+          <Section
+            index="02"
+            title="Funding options under executed agreements"
+            description="A ceiling a recipient may call on at its own election. The agreement is signed, but an option is not committed money until it is exercised, so it is listed here and never added to the totals above. An exercise would be recorded as its own commitment."
+          >
+            <div className="space-y-4">
+              {options.map((c) => {
+                const st = optionState(c, all);
+                const step = (list: typeof st.exercises) => list.map((e) => ({ id: e.id, label: e.amount?.amountAsStated ?? e.id }));
+                return (
+                  <Card key={c.id} className="min-w-0 overflow-hidden">
+                    <CommitmentRow c={bySummary.get(c.id)!} />
+                    <div className="space-y-3 border-t px-4 py-4">
+                      {c.terms.filter((t) => t.kind === "other").slice(0, 1).map((t, i) => (
+                        <p key={i} className="text-sm leading-6 text-muted">
+                          <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-faint">As filed </span>“{t.asStated}”
+                        </p>
+                      ))}
+                      <OptionLadder
+                        executed={st.executed ? { date: st.executed.date, sourceId: st.executed.sourceId } : null}
+                        exercises={step(st.exercises)}
+                        disbursements={step(st.disbursements)}
+                      />
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </Section>
+        ) : null}
+
         <Section
-          index="02"
+          index={options.length ? "03" : "02"}
           title="Instruments that carry terms, not a sum"
           description="Price floors, offtake, tax offsets and procurement rights change incentives without a stated total. Their operative terms are the finding."
         >
@@ -256,7 +297,7 @@ export default function CapitalPage() {
         </Section>
 
         <Section
-          index="03"
+          index={options.length ? "04" : "03"}
           title="Envelopes, appropriations and lending authorities"
           description="Ceilings that awards are drawn from. Listed, never summed: two envelopes can share a drawdown, and an envelope is not money committed to anyone."
         >
@@ -268,7 +309,7 @@ export default function CapitalPage() {
         </Section>
 
         <Section
-          index="04"
+          index={options.length ? "05" : "04"}
           title="Kept apart from public support"
           description="Private financing, a recipient's own funds, money governments expect others to invest, joint vehicles whose public share is not stated, and rows whose capital source the source does not state."
         >
@@ -283,14 +324,14 @@ export default function CapitalPage() {
         </Section>
 
         <Section
-          index="05"
+          index={options.length ? "06" : "05"}
           title="Where the money is aimed"
           description="Financial rows by providing actor and supply-chain stage. Counts of records, not of money."
         >
           <StageMatrix rows={all} />
         </Section>
 
-        <Section index="06" title="All financial rows" description={`Every row, filterable. Data as of ${site.lastUpdated}.`}>
+        <Section index={options.length ? "07" : "06"} title="All financial rows" description={`Every row, filterable. Data as of ${site.lastUpdated}.`}>
           <CapitalExplorer rows={summaries} materialNames={materialNames} />
           <p className="mt-4 text-sm text-muted">
             Download:{" "}

@@ -15,7 +15,10 @@
  *  - A row is never counted together with a row it is part of or drawn from:
  *    within any sum, a row whose ancestor is also counted is left out.
  *  - If two counted rows share a descendant the sum would double-count, so
- *    that currency's total is withheld and the overlap reported instead.
+ *    that currency's total is withheld: its sums are null (status
+ *    "withheld") and the overlap is reported instead.
+ *  - Funding options (a ceiling a party may call on under an executed
+ *    agreement) are listed, never summed; an exercise is its own commitment.
  *  - Private capital, a recipient's own funds and total project cost are not
  *    public support. Mixed public-private vehicles are reported apart from
  *    public money because their public share is not stated.
@@ -36,7 +39,9 @@ import type {
   ControlStatusEntry,
   FinancialCommitment,
   FinancialStatus,
+  FinancialStatusEntry,
   JurisdictionCode,
+  PolicyEvent,
   ValueQualifier,
   ValueRole,
 } from "./types";
@@ -133,23 +138,49 @@ export function isRootCommitment(c: FinancialCommitment): boolean {
 /** Capital sources counted as public support. Mixed vehicles are reported apart. */
 export const PUBLIC_CAPITAL_SOURCES: readonly CapitalSource[] = ["public", "public_enterprise"];
 
-export type CurrencyTotal = {
+type QualifierSums = Partial<Record<ValueQualifier, string>>;
+
+/** What every currency entry carries, summed or not. */
+type CurrencyTotalBase = {
   currency: string;
-  /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
-  byQualifier: Partial<Record<ValueQualifier, string>>;
-  /**
-   * The same sums split by whether a binding agreement exists (contracted,
-   * partially disbursed, disbursed) or not yet (announced, authorized,
-   * allocated, decided, including conditional and non-binding commitments).
-   */
-  binding: Partial<Record<ValueQualifier, string>>;
-  notYetBinding: Partial<Record<ValueQualifier, string>>;
+  /** Rows the total is made of (or would be, were it safe to add them). */
   countedIds: string[];
   /** Rows left out because a row they belong to is counted in the same total. */
   nestedIds: string[];
-  /** Set when two counted rows share a descendant: no total is shown for the currency. */
-  overlap: { a: string; b: string; shared: string } | null;
 };
+
+/**
+ * One currency's total. Discriminated on `status`, so no consumer can read a
+ * sum for a currency whose rows overlap:
+ *  - "summed": the sums are safe to show.
+ *  - "withheld": two counted rows share a descendant, so adding them would
+ *    double-count. The sums are null, never zero or partial, and `overlap`
+ *    names the rows.
+ */
+export type CurrencyTotal =
+  | (CurrencyTotalBase & {
+      status: "summed";
+      /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
+      byQualifier: QualifierSums;
+      /**
+       * The same sums split by whether a binding agreement exists (contracted,
+       * partially disbursed, disbursed) or not yet (announced, authorized,
+       * allocated, decided, including conditional and non-binding commitments).
+       */
+      binding: QualifierSums;
+      notYetBinding: QualifierSums;
+      overlap: null;
+    })
+  | (CurrencyTotalBase & {
+      status: "withheld";
+      reason: "overlap";
+      byQualifier: null;
+      binding: null;
+      notYetBinding: null;
+      overlap: { a: string; b: string; shared: string };
+    });
+
+export type SummedCurrencyTotal = Extract<CurrencyTotal, { status: "summed" }>;
 
 export type CommitmentTotals = {
   currencies: CurrencyTotal[];
@@ -187,8 +218,8 @@ export function totalCommitments(
 
   const currencies: CurrencyTotal[] = [...counted.entries()]
     .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
-    .map(([currency, list]) => {
-      let overlap: CurrencyTotal["overlap"] = null;
+    .map(([currency, list]): CurrencyTotal => {
+      let overlap: { a: string; b: string; shared: string } | null = null;
       const desc = list.map((c) => ({ id: c.id, d: descendantIds(c.id, all) }));
       outer: for (let i = 0; i < desc.length; i++)
         for (let j = i + 1; j < desc.length; j++)
@@ -197,16 +228,19 @@ export function totalCommitments(
               overlap = { a: desc[i].id, b: desc[j].id, shared: s };
               break outer;
             }
-      const byQualifier: Partial<Record<ValueQualifier, string>> = {};
-      const binding: Partial<Record<ValueQualifier, string>> = {};
-      const notYetBinding: Partial<Record<ValueQualifier, string>> = {};
+      const base = { currency, countedIds: list.map((c) => c.id), nestedIds: nested.get(currency) ?? [] };
+      if (overlap)
+        return { ...base, status: "withheld", reason: "overlap", byQualifier: null, binding: null, notYetBinding: null, overlap };
+      const byQualifier: QualifierSums = {};
+      const binding: QualifierSums = {};
+      const notYetBinding: QualifierSums = {};
       for (const c of list) {
         const q = c.amount!.qualifier;
         byQualifier[q] = addDecimals([byQualifier[q] ?? "0", c.amount!.value]);
         const bucket = isBinding(c) ? binding : notYetBinding;
         bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
       }
-      return { currency, byQualifier, binding, notYetBinding, countedIds: list.map((c) => c.id), nestedIds: nested.get(currency) ?? [], overlap };
+      return { ...base, status: "summed", byQualifier, binding, notYetBinding, overlap: null };
     });
   return { currencies, unquantifiedIds };
 }
@@ -214,6 +248,31 @@ export function totalCommitments(
 /** Public support committed to recipients: role "commitment", public capital. */
 export function publicCommitmentRows(all: readonly FinancialCommitment[] = getAllFinancialCommitments()) {
   return all.filter((c) => c.valueRole === "commitment" && PUBLIC_CAPITAL_SOURCES.includes(c.capitalSource));
+}
+
+/** Value roles that describe money available but not committed: listed, never summed. */
+export const LISTED_NOT_SUMMED_ROLES: readonly ValueRole[] = ["program_envelope", "budget_appropriation", "lending_authority"];
+
+/**
+ * Where a funding option stands, from the corpus alone. The option is
+ * executed when its agreement is contracted; it is exercised only when a
+ * commitment drawn from it is recorded; money has moved only when that
+ * commitment is (partly) disbursed. Absence means "none recorded in the
+ * corpus", never "not exercised".
+ */
+export type OptionState = {
+  executed: FinancialStatusEntry | null;
+  exercises: FinancialCommitment[];
+  disbursements: FinancialCommitment[];
+};
+
+export function optionState(c: FinancialCommitment, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): OptionState {
+  const executed = [...c.financialStatusHistory].reverse().find((e) => BINDING_FINANCIAL_STATUSES.includes(e.status)) ?? null;
+  const exercises = childLinks(c.id, all)
+    .filter((l) => l.relationship === "drawn_from" && l.commitment.valueRole === "commitment")
+    .map((l) => l.commitment);
+  const disbursements = exercises.filter((e) => ["partially_disbursed", "disbursed"].includes(currentFinancialStatus(e)));
+  return { executed, exercises, disbursements };
 }
 
 /** Rows grouped by value role. */
@@ -403,6 +462,11 @@ export type CommitmentSummary = {
   termCount: number;
   sourceCount: number;
   hasAmbiguity: boolean;
+  /**
+   * For a funding option only: whether a commitment drawn from it (an
+   * exercise) is recorded in the corpus. Null for every other value role.
+   */
+  optionExerciseRecorded: boolean | null;
 };
 
 function latestDate(entries: readonly { date: string | null }[]): string | null {
@@ -433,7 +497,37 @@ export function summarizeCommitment(c: FinancialCommitment): CommitmentSummary {
     termCount: c.terms.length,
     sourceCount: evidenceSourceIds(c).length,
     hasAmbiguity: c.evidence.some((x) => x.evidence === "ambiguous"),
+    optionExerciseRecorded: c.valueRole === "funding_option" ? optionState(c).exercises.length > 0 : null,
   };
+}
+
+/**
+ * Status entries of a control measure that another event in the corpus
+ * records: the entry's source is one of that event's sources. This is how an
+ * outcome that is not itself a restriction (a proclamation that closes an
+ * investigation with a negotiation mandate) stays linked to the measure
+ * without being coded as a control.
+ */
+export function statusEntriesRecordedElsewhere(m: ControlMeasure): { entry: ControlStatusEntry; event: PolicyEvent }[] {
+  const own = getEventById(m.eventId)?.sourceIds ?? [];
+  const out: { entry: ControlStatusEntry; event: PolicyEvent }[] = [];
+  for (const entry of m.statusHistory) {
+    if (own.includes(entry.sourceId)) continue;
+    for (const e of getAllEvents())
+      if (e.id !== m.eventId && e.sourceIds.includes(entry.sourceId)) out.push({ entry, event: e });
+  }
+  return out;
+}
+
+/** The reverse: control measures of other events whose status entries this event's sources record. */
+export function controlStatusesRecordedIn(eventId: string): { measure: ControlMeasure; entry: ControlStatusEntry }[] {
+  const e = getEventById(eventId);
+  if (!e) return [];
+  const out: { measure: ControlMeasure; entry: ControlStatusEntry }[] = [];
+  for (const m of getAllControlMeasures())
+    if (m.eventId !== eventId)
+      for (const { entry, event } of statusEntriesRecordedElsewhere(m)) if (event.id === eventId) out.push({ measure: m, entry });
+  return out;
 }
 
 export type ControlSummary = {

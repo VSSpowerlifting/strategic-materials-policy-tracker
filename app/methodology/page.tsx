@@ -53,6 +53,8 @@ const VALUE_ROLE_DEFS: Record<(typeof VALUE_ROLES)[number], string> = {
   program_envelope: "The ceiling of a programme, fund or facility that awards are drawn from.",
   budget_appropriation: "Money set aside in a budget or allocation.",
   lending_authority: "A ceiling on what a lender may lend or guarantee.",
+  funding_option:
+    "A ceiling a party may call on at its own election under an executed agreement. Listed, never summed: an executed option is not committed money. An exercise is recorded as its own commitment drawn from the option, with its own payment status.",
   expected_co_investment: "Money a government expects others to invest.",
   private_financing: "Commercial capital raised alongside public money.",
   recipient_own_funds: "The recipient's own contribution.",
@@ -502,7 +504,17 @@ export default function MethodologyPage() {
                 · <strong className="text-foreground">No part is counted with its package.</strong> A row
                 that is part of, or drawn from, another row in the same total is left out of it and named
                 beside the total. If two counted rows were ever to share a descendant, the total for that
-                currency is withheld and the overlap shown instead.
+                currency is withheld and the overlap shown instead. The JSON summary says so in a
+                machine-readable way: that currency&apos;s entry has <code className="font-mono text-xs">status: &quot;withheld&quot;</code>{" "}
+                and its sums are <code className="font-mono text-xs">null</code>, never zero or partial.
+              </li>
+              <li>
+                · <strong className="text-foreground">An option is not a commitment.</strong> A funding
+                option (a ceiling the recipient may call on under a signed agreement) is listed apart and
+                never summed. It counts only once a source records an exercise, which is coded as its own
+                commitment drawn from the option; payment is then tracked in that commitment&apos;s status.
+                The site shows each option&apos;s three steps (agreement executed, exercise, disbursement)
+                and says &ldquo;none recorded&rdquo; where the corpus is silent, never &ldquo;not exercised&rdquo;.
               </li>
               <li>
                 · <strong className="text-foreground">Public means public.</strong> &ldquo;Public
@@ -603,7 +615,8 @@ export default function MethodologyPage() {
                 material AD/CVD investigations) and Proclamation 11001, the outcome of the section 232
                 investigation. New vocabulary values: a policy status &ldquo;ended&rdquo;, an instrument
                 &ldquo;several instruments, split not stated&rdquo;, a control status &ldquo;investigation
-                concluded&rdquo; and a measure type &ldquo;trade negotiation mandate&rdquo;.
+                concluded&rdquo; and a value role &ldquo;funding option&rdquo;. Proclamation 11001 is an
+                event, not a control measure: it directs negotiations and imposes no restriction.
               </li>
               <li>
                 <span className="font-mono text-foreground">Earlier releases</span> — Expanded multi-actor seed: nine events

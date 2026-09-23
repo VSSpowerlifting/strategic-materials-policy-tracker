@@ -254,3 +254,80 @@ export function Fact({ label, children }: { label: string; children: React.React
 export function NotStated({ children = "Not stated" }: { children?: React.ReactNode }) {
   return <span className="font-mono text-xs text-faint">{children}</span>;
 }
+
+/**
+ * The three steps a funding option can reach, each from the corpus alone:
+ * the agreement granting it is executed; an exercise is recorded as its own
+ * commitment drawn from it; money under that commitment is paid. A missing
+ * step reads "none recorded in the corpus", never "not exercised".
+ */
+export function OptionLadder({
+  executed,
+  exercises,
+  disbursements,
+}: {
+  executed: { date: string | null; sourceId: string } | null;
+  exercises: { id: string; label: string }[];
+  disbursements: { id: string; label: string }[];
+}) {
+  const steps: { label: string; done: boolean; body: React.ReactNode }[] = [
+    {
+      label: "Agreement executed",
+      done: executed !== null,
+      body: executed ? (
+        <>
+          {executed.date ? formatDate(executed.date) : "Date not stated"} · <SourceMention sourceId={executed.sourceId} />
+        </>
+      ) : (
+        "No executed agreement recorded in the corpus"
+      ),
+    },
+    {
+      label: "Option exercised",
+      done: exercises.length > 0,
+      body: exercises.length ? (
+        exercises.map((e, i) => (
+          <span key={e.id}>
+            {i ? ", " : ""}
+            <Link href={`/capital/${e.id}`} className="text-accent hover:text-accent-strong">{e.label}</Link>
+          </span>
+        ))
+      ) : (
+        "None recorded in the corpus"
+      ),
+    },
+    {
+      label: "Money disbursed",
+      done: disbursements.length > 0,
+      body: disbursements.length ? (
+        disbursements.map((e, i) => (
+          <span key={e.id}>
+            {i ? ", " : ""}
+            <Link href={`/capital/${e.id}`} className="text-accent hover:text-accent-strong">{e.label}</Link>
+          </span>
+        ))
+      ) : (
+        "None recorded in the corpus"
+      ),
+    },
+  ];
+  return (
+    <ol className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
+      {steps.map((s, i) => (
+        <li key={s.label} className="bg-card px-4 py-3">
+          <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em]">
+            <span
+              aria-hidden
+              className={`inline-flex h-4 w-4 items-center justify-center rounded-sm border text-[10px] ${s.done ? "border-accent text-accent" : "border-border-strong text-faint"}`}
+            >
+              {s.done ? "✓" : i + 1}
+            </span>
+            <span className={s.done ? "text-foreground" : "text-faint"}>{s.label}</span>
+            <span className="sr-only">{s.done ? " — recorded" : " — not recorded"}</span>
+          </p>
+          <p className="mt-1.5 text-sm leading-6 text-muted">{s.body}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}

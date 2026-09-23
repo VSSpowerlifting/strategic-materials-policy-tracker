@@ -188,9 +188,15 @@ export default function Home() {
               {totals.currencies.map((c) => (
                 <li key={c.currency} className="tnum">
                   <span className="text-foreground">{c.currency}</span>{" "}
-                  {sumLine(c.binding) ? <>binding {sumLine(c.binding)}</> : null}
-                  {sumLine(c.binding) && sumLine(c.notYetBinding) ? " · " : null}
-                  {sumLine(c.notYetBinding) ? <span className="text-faint">not yet binding {sumLine(c.notYetBinding)}</span> : null}
+                  {c.status === "withheld" ? (
+                    <span className="text-faint">total withheld: counted rows overlap</span>
+                  ) : (
+                    <>
+                      {sumLine(c.binding) ? <>binding {sumLine(c.binding)}</> : null}
+                      {sumLine(c.binding) && sumLine(c.notYetBinding) ? " · " : null}
+                      {sumLine(c.notYetBinding) ? <span className="text-faint">not yet binding {sumLine(c.notYetBinding)}</span> : null}
+                    </>
+                  )}
                 </li>
               ))}
             </ul>

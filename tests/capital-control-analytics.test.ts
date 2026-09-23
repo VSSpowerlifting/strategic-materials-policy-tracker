@@ -12,6 +12,7 @@ import {
   formatDecimalCompact,
   instrumentChronology,
   materialInterplay,
+  optionState,
   publicCommitmentRows,
   shortInstrumentLabel,
   summarizeCommitment,
@@ -34,6 +35,7 @@ import {
   getSourceById,
 } from "@/lib/data";
 import { site } from "@/lib/site";
+import { CONTROL_MEASURE_TYPES } from "@/lib/types";
 import type { ControlMeasure, FinancialCommitment } from "@/lib/types";
 
 // --- Fixtures -----------------------------------------------------------------
@@ -151,7 +153,35 @@ test("two counted rows sharing a descendant withhold the total", () => {
   });
   const all = [x, y, award];
   const t = totalCommitments([x, y], all);
-  assert.deepEqual(t.currencies[0].overlap, { a: "x", b: "y", shared: "award" });
+  const cur = t.currencies[0];
+  assert.equal(cur.status, "withheld");
+  assert.deepEqual(cur.overlap, { a: "x", b: "y", shared: "award" });
+  // No sum of any kind: null, not zero, not partial.
+  assert.equal(cur.byQualifier, null);
+  assert.equal(cur.binding, null);
+  assert.equal(cur.notYetBinding, null);
+  assert.deepEqual(cur.countedIds, ["x", "y"]);
+});
+
+test("a withheld currency serializes with no figure a consumer could read as a total", () => {
+  const x = fin("x", { amount: { value: "123", currency: "EUR", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } });
+  const y = fin("y", { amount: { value: "456", currency: "EUR", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } });
+  const ok = fin("ok", { amount: { value: "7", currency: "USD", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } });
+  const award = fin("award", {
+    relationships: [
+      { commitmentId: "x", relationship: "drawn_from", sourceId: "s" },
+      { commitmentId: "y", relationship: "part_of", sourceId: "s" },
+    ],
+  });
+  const all = [x, y, ok, award];
+  const t = totalCommitments([x, y, ok], all);
+  const eur = t.currencies.find((c) => c.currency === "EUR")!;
+  const usd = t.currencies.find((c) => c.currency === "USD")!;
+  const json = JSON.stringify(eur);
+  for (const figure of ["123", "456", "579"]) assert.ok(!json.includes(figure), `withheld EUR entry leaks ${figure}`);
+  // One unsafe currency does not withhold another.
+  assert.equal(usd.status, "summed");
+  assert.deepEqual(usd.status === "summed" && usd.byQualifier, { exact: "7" });
 });
 
 test("rows without an amount are reported, not valued", () => {
@@ -177,6 +207,7 @@ test("public totals on the corpus: one role, public capital only, no overlap, no
   assert.ok(rows.every((c) => c.valueRole === "commitment" && ["public", "public_enterprise"].includes(c.capitalSource)));
   const t = totalCommitments(rows, all);
   for (const cur of t.currencies) {
+    assert.equal(cur.status, "summed", `${cur.currency} total withheld`);
     assert.equal(cur.overlap, null, `${cur.currency} totals overlap`);
     for (const id of cur.countedIds) {
       const c = all.find((x) => x.id === id)!;
@@ -343,13 +374,15 @@ test("no private, not-stated or provider-less row is credited to a government", 
 
 test("binding and not-yet-binding sums partition each currency total exactly", () => {
   const t = totalCommitments(publicCommitmentRows());
-  for (const cur of t.currencies)
+  for (const cur of t.currencies) {
+    if (cur.status !== "summed") assert.fail(`${cur.currency} total withheld`);
     for (const q of ["exact", "approximately", "at_least", "up_to"] as const)
       assert.equal(
         addDecimals([cur.binding[q] ?? "0", cur.notYetBinding[q] ?? "0"]),
         cur.byQualifier[q] ?? "0",
         `${cur.currency} ${q}`,
       );
+  }
 });
 
 test("a conditional loan commitment and a non-binding letter of intent are never counted as binding", () => {
@@ -360,5 +393,88 @@ test("a conditional loan commitment and a non-binding letter of intent are never
     const c = getAllFinancialCommitments().find((x) => x.id === id)!;
     assert.ok(!["contracted", "partially_disbursed", "disbursed"].includes(c.financialStatusHistory.at(-1)!.status), id);
   }
-  assert.ok(usd.notYetBinding.exact, "USD has not-yet-binding money");
+  assert.equal(usd.status, "summed");
+  assert.ok(usd.status === "summed" && usd.notYetBinding.exact, "USD has not-yet-binding money");
+});
+
+// --- Funding options ---------------------------------------------------------------
+
+const OPTION = "fin-us-dod-mp-2025-additional-preferred-option";
+
+test("the DoD–MP USD 350M option is a funding option, listed and never summed", () => {
+  const all = getAllFinancialCommitments();
+  const c = all.find((x) => x.id === OPTION)!;
+  assert.equal(c.valueRole, "funding_option");
+  assert.deepEqual([c.amount!.value, c.amount!.currency, c.amount!.qualifier], ["350000000", "USD", "up_to"]);
+  assert.ok(c.terms.some((t) => t.asStated.includes("committed financing provided by JPMorgan and Goldman Sachs")), "the bank alternative is kept in the filing's words");
+  assert.ok(!publicCommitmentRows(all).some((x) => x.id === OPTION));
+  const t = totalCommitments(publicCommitmentRows(all), all);
+  const usd = t.currencies.find((x) => x.currency === "USD")!;
+  assert.ok(!usd.countedIds.includes(OPTION) && !usd.nestedIds.includes(OPTION));
+  // The only USD "up to" figure among public commitments was the option; none remains binding.
+  assert.ok(usd.status === "summed" && !usd.binding.up_to, "an option leaked into binding USD money");
+});
+
+test("an executed option records no exercise or payment the corpus does not state", () => {
+  const s = optionState(getAllFinancialCommitments().find((x) => x.id === OPTION)!);
+  assert.equal(s.executed?.status, "contracted");
+  assert.equal(s.executed?.date, "2025-07-09");
+  assert.deepEqual(s.exercises, []);
+  assert.deepEqual(s.disbursements, []);
+  assert.equal(summarizeCommitment(getAllFinancialCommitments().find((x) => x.id === OPTION)!).optionExerciseRecorded, false);
+});
+
+test("an exercise is its own commitment drawn from the option, and only paid money reads as disbursed", () => {
+  const opt = fin("opt", { valueRole: "funding_option", financialStatusHistory: [{ status: "contracted", date: "2025-01-01", sourceId: "s" }] });
+  const ex = fin("ex", {
+    relationships: [{ commitmentId: "opt", relationship: "drawn_from", sourceId: "s" }],
+    financialStatusHistory: [{ status: "contracted", date: "2025-02-01", sourceId: "s" }],
+  });
+  const paid = fin("paid", {
+    relationships: [{ commitmentId: "opt", relationship: "drawn_from", sourceId: "s" }],
+    financialStatusHistory: [{ status: "disbursed", date: "2025-03-01", sourceId: "s" }],
+  });
+  const all = [opt, ex, paid];
+  const s = optionState(opt, all);
+  assert.deepEqual(s.exercises.map((e) => e.id), ["ex", "paid"]);
+  assert.deepEqual(s.disbursements.map((e) => e.id), ["paid"]);
+  // The option is never added to the commitments drawn from it.
+  assert.throws(() => totalCommitments([opt, ex], all), /unlike value roles/);
+  assert.deepEqual(totalCommitments([ex, paid], all).currencies[0].countedIds, ["ex", "paid"]);
+});
+
+test("every financial row lands in exactly one bucket of the summary", () => {
+  const s = buildCapitalControlSummary();
+  const all = getAllFinancialCommitments();
+  const t = totalCommitments(publicCommitmentRows(all), all);
+  const buckets: [string, string[]][] = [
+    ["public commitments", [...t.currencies.flatMap((c) => [...c.countedIds, ...c.nestedIds]), ...t.unquantifiedIds]],
+    ["envelopes", s.capital.envelopesListedNotSummed.map((r) => r.id)],
+    ["options", s.capital.fundingOptionsListedNotSummed.map((r) => r.id)],
+    ["kept apart", s.capital.keptApartFromPublicSupport.map((r) => r.id)],
+  ];
+  const seen = new Map<string, string>();
+  for (const [name, ids] of buckets)
+    for (const id of ids) {
+      assert.ok(!seen.has(id), `${id} is in both ${seen.get(id)} and ${name}`);
+      seen.set(id, name);
+    }
+  for (const c of all) assert.ok(seen.has(c.id), `${c.id} is in no summary bucket`);
+  assert.equal(seen.size, all.length);
+  const opt = s.capital.fundingOptionsListedNotSummed.find((r) => r.id === OPTION)!;
+  assert.deepEqual(opt.agreementExecuted, { date: "2025-07-09", sourceId: "src-dod-mp-transaction-agreement-2025" });
+  assert.deepEqual([opt.exercisesRecorded, opt.disbursementsRecorded], [[], []]);
+  assert.ok(s.countingRules.some((r) => r.includes("withheld")));
+});
+
+// --- Proclamation 11001 ------------------------------------------------------------
+
+test("a negotiation mandate is not a control measure: Proclamation 11001 stays an event", () => {
+  assert.ok(!(CONTROL_MEASURE_TYPES as readonly string[]).includes("trade_negotiation"));
+  assert.ok(getEventById("evt-us-proc-11001-2026"), "the proclamation event remains");
+  assert.equal(getAllControlMeasures().filter((m) => m.eventId === "evt-us-proc-11001-2026").length, 0);
+  const inv = getAllControlMeasures().find((m) => m.id === "ctl-us-eo-14272-2025-section-232-investigation")!;
+  const concluded = inv.statusHistory.at(-1)!;
+  assert.equal(concluded.status, "concluded");
+  assert.equal(concluded.sourceId, "src-fedreg-proc-11001");
 });

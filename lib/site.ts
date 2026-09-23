@@ -23,23 +23,58 @@ export const site = {
   url: "https://strategic-materials-policy-tracker.vercel.app",
 } as const;
 
-export const nav = [
-  { href: "/events", label: "Events" },
-  { href: "/capital", label: "Capital" },
-  { href: "/controls", label: "Controls" },
-  { href: "/interplay", label: "Interplay" },
-  { href: "/materials", label: "Materials" },
-  { href: "/actors", label: "Actors" },
-  { href: "/framing", label: "Framing" },
-  { href: "/compare", label: "Compare" },
-  { href: "/coverage", label: "Coverage" },
-  { href: "/timeline", label: "Timeline" },
-  { href: "/sources", label: "Sources" },
-  { href: "/watchlist", label: "Watchlist" },
-  { href: "/search", label: "Search" },
-  { href: "/methodology", label: "Methodology" },
-  { href: "/data", label: "Data" },
+/**
+ * Header navigation, grouped by what a reader is looking for. `primary` items
+ * sit inline in the desktop header; the rest open under "More". On small
+ * screens every group opens from one "Menu" disclosure. Search has its own
+ * always-visible header link, so it is listed here only for the footer and
+ * sitemap.
+ */
+export const navGroups = [
+  {
+    label: "Policy record",
+    items: [
+      { href: "/events", label: "Events", primary: true },
+      { href: "/timeline", label: "Timeline", primary: true },
+      { href: "/framing", label: "Framing", primary: true },
+      { href: "/compare", label: "Compare", primary: false },
+    ],
+  },
+  {
+    label: "Capital & Control",
+    items: [
+      { href: "/capital", label: "Capital", primary: true },
+      { href: "/controls", label: "Controls", primary: true },
+      { href: "/interplay", label: "Interplay", primary: true },
+    ],
+  },
+  {
+    label: "Reference",
+    items: [
+      { href: "/materials", label: "Materials", primary: true },
+      { href: "/actors", label: "Actors", primary: true },
+      { href: "/sources", label: "Sources", primary: false },
+      { href: "/coverage", label: "Coverage", primary: false },
+      { href: "/watchlist", label: "Watchlist", primary: false },
+    ],
+  },
+  {
+    label: "Method & data",
+    items: [
+      { href: "/methodology", label: "Methodology", primary: false },
+      { href: "/data", label: "Data", primary: false },
+      { href: "/search", label: "Search", primary: false },
+    ],
+  },
 ] as const;
+
+/** Every header destination, flattened (footer, sitemap). */
+export const nav = navGroups.flatMap((g) => g.items.map(({ href, label }) => ({ href, label })));
+
+/** Inline desktop links, in reading order: the record, then Capital & Control, then reference. */
+export const primaryNav = nav.filter((i) =>
+  navGroups.some((g) => g.items.some((x) => x.href === i.href && x.primary)),
+);
 
 /** Pages reachable from the footer and sitemap but kept out of the crowded header. */
 export const secondaryNav = [

@@ -12,7 +12,7 @@ session's write guard only allows edits under its own worktree path).
 
 ### Data (all verified against official primaries or binding filings, 2026-09-23)
 
-- 39 financial commitments and 33 control clauses across 26 events. Counts
+- 39 financial commitments and 32 control clauses across 25 events. Counts
   are derived on /coverage, /data and /methodology; do not pin them here.
 - Backfilled onto existing events: DoD–MP Materials (8-K and OSC release,
   read in a browser; OSC notes corrected), OBBBA OSC credit subsidy and
@@ -29,13 +29,17 @@ session's write guard only allows edits under its own worktree path).
   material AD/CVD investigations (ended with a negative ITC determination,
   31 Mar 2026). Six new sources, three framing anchors.
 
-### Vocabulary changes (flagged for maintainer review in the PR)
+### Vocabulary changes (maintainer decisions recorded in the correction pass)
 
 - `POLICY_STATUSES` + `ended` (used by the AD/CVD event).
 - `FINANCIAL_INSTRUMENTS` + `mixed` (one amount over several named
   instruments, no split: CMF, CMSR, NWF package, US–AU envelopes).
 - `CONTROL_STATUSES` + `concluded` (the EO 14272 and AD/CVD investigations).
-- `CONTROL_MEASURE_TYPES` + `trade_negotiation` (Proclamation 11001).
+- Approved: the three above. Not approved: `CONTROL_MEASURE_TYPES` +
+  `trade_negotiation` — removed with its only row (see below).
+- `VALUE_ROLES` + `funding_option` (the DoD–MP USD 350M option), added in
+  the correction pass under the maintainer's instruction to choose a durable
+  representation for that option.
 
 ### Platform
 
@@ -65,6 +69,36 @@ session's write guard only allows edits under its own worktree path).
 - The two NRCan releases were re-read in full in a browser; one
   `amountAsStated` quote was corrected to the source's exact wording.
 
+### Correction pass before merge
+
+- Proclamation 11001 is an event, not a control measure: it directs
+  negotiations and imposes no tariff, quota or licensing rule. Its
+  negotiation-mandate row and `trade_negotiation` are gone. The EO 14272
+  investigation's `concluded` entry still cites it; `/controls/[id]` links
+  that entry to the proclamation event, and the event page shows the
+  control status it records (derived from shared sources, no new field).
+- The USD 350M DoD–MP option is `valueRole: "funding_option"`: listed, never
+  summed. Its status stays `contracted` (the agreement is executed); its
+  terms quote the 8-K's option and bank-alternative wording and the 45-day
+  election window (re-read in a browser 2026-09-23). /capital and the detail
+  page show three steps (agreement executed, exercise, disbursement), with
+  "none recorded in the corpus" where the corpus is silent. An exercise
+  would be coded as its own commitment `drawn_from` the option. The summary
+  API lists it under `fundingOptionsListedNotSummed`.
+- `CurrencyTotal` is a union on `status`: `"summed"` carries the sums;
+  `"withheld"` (counted rows share a descendant) carries `reason`,
+  `overlap` and null sums. Pages, the home card and the summary follow it.
+- Header: the 15-link scrolling strip is replaced by grouped navigation.
+  Desktop shows eight primary links (Events, Timeline, Framing, Capital,
+  Controls, Interplay, Materials, Actors), a "More" disclosure and Search;
+  small screens show Search and a "Menu" disclosure with four groups
+  (Capital & Control second). Escape closes and returns focus; navigation,
+  outside click and focus leaving close it.
+- The AD/CVD event's missing-framing warning stays: the three documents read
+  (two Commerce initiations, the ITC final notice) are procedural and
+  legal findings, not government framing, and quoting them as framing would
+  break the framing/legal-language separation.
+
 ### PR and release state
 
 - PR: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/5
@@ -72,9 +106,8 @@ session's write guard only allows edits under its own worktree path).
   (validate, typecheck, lint, test, build) passing; Vercel preview passing
   after one redeploy that cleared a transient `next/font/google` fetch
   failure unrelated to this branch.
-- Local gates at HEAD: validate, lint, typecheck, 207 tests, build (389
-  pages). No dev or prod servers left running.
-- Awaiting maintainer decision: the four vocabulary additions above.
+- Local gates: see the correction-pass commit message and PR body.
+  No dev or prod servers left running.
 - Housekeeping: after the session, run `git worktree prune` in the main
   checkout; the session worktree
   `/Users/benjaminyang/.claude/worktrees/smpt-platform-launch-d4e51a`
@@ -87,8 +120,8 @@ session's write guard only allows edits under its own worktree path).
   not read; the event cites only the initiations and the ITC final notice.
 - The MOFCOM No. 61 Annex 1 (.wps) is still unread; the extraterritorial
   clauses say so.
-- Whether MP drew the $350 million option from DoD or the banks is not
-  recorded; no later primary in the corpus states it.
+- Whether MP exercised the $350 million option with DoD or used the bank
+  alternative is not recorded; no later primary in the corpus states it.
 - The No. 61 suspension ends 10 Nov 2026 and No. 46's Item 2 suspension
   27 Nov 2026: the validator will warn after those dates until a source
   records what followed.

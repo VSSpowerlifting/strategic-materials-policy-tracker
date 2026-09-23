@@ -2824,7 +2824,7 @@
         "date": "2025-10-24",
         "sourceId": "src-fedreg-proc-11001",
         "until": null,
-        "note": "The Secretary transmitted his report to the President on 24 October 2025 (Proclamation 11001, para. 1)."
+        "note": "The Secretary transmitted his report to the President on 24 October 2025 (Proclamation 11001, para. 1). The proclamation, signed 14 January 2026, directs negotiations in clauses (1)–(3) and imposes no tariff or quota; it is recorded as an event, not as a control measure, because it restricts nothing."
       }
     ],
     "evidence": [
@@ -2850,77 +2850,10 @@
           "status"
         ],
         "evidence": "explicit",
-        "locator": "Para. 1",
+        "locator": "Para. 1; clauses (1)–(3)",
         "note": null
       }
     ],
     "notes": "Sec. 2 defines critical minerals by the USGS list plus uranium, and derivative products to include permanent magnets. Only the materials the order names are attributed."
-  },
-  {
-    "id": "ctl-us-proc-11001-2026-negotiation-mandate",
-    "eventId": "evt-us-proc-11001-2026",
-    "measureType": "trade_negotiation",
-    "direction": "import",
-    "clause": "Clause (1)",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [
-      "rare-earth-elements",
-      "gallium",
-      "germanium",
-      "praseodymium",
-      "terbium",
-      "ndfeb-magnets"
-    ],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "lithium",
-      "fluorite",
-      "bromine",
-      "indium",
-      "yttrium",
-      "cobalt",
-      "nickel",
-      "uranium"
-    ],
-    "productScopeAsStated": "imports of processed critical minerals and their derivative products (PCMDPs) from any country",
-    "productCodes": [],
-    "legalBasisEventIds": [],
-    "legalBasisAsStated": "section 232 of the Trade Expansion Act of 1962, as amended, 19 U.S.C. 1862; section 301 of title 3, United States Code",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "in_force",
-        "date": "2026-01-14",
-        "sourceId": "src-fedreg-proc-11001",
-        "until": null,
-        "note": "Signed 14 January 2026; an update on the negotiations is due within 180 days."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-fedreg-proc-11001",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Paras. 4, 12–14; clauses (1)–(3)",
-        "note": null
-      }
-    ],
-    "notes": "Directs the Secretary of Commerce and the Trade Representative to negotiate agreements and to consider price floors for trade in critical minerals and other trade-restricting measures. No tariff or quota is imposed; the proclamation says minimum import prices and other measures may follow depending on the negotiations. The named minerals are the proclamation's examples, not a list of covered products."
   }
 ]

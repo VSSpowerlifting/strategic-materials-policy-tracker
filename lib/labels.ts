@@ -225,6 +225,7 @@ export const valueRoleLabels: Record<ValueRole, string> = {
   program_envelope: "Program envelope",
   budget_appropriation: "Budget appropriation",
   lending_authority: "Lending authority",
+  funding_option: "Funding option",
   expected_co_investment: "Expected co-investment",
   private_financing: "Private financing",
   recipient_own_funds: "Recipient's own funds",
@@ -371,7 +372,6 @@ export const controlMeasureTypeLabels: Record<ControlMeasureType, string> = {
   customs_enforcement: "Customs enforcement",
   domestic_production_control: "Domestic production control",
   contractual_ownership_covenant: "Contractual ownership covenant",
-  trade_negotiation: "Trade negotiation mandate",
 };
 
 export const controlDirectionLabels: Record<ControlDirection, string> = {

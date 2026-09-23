@@ -13,14 +13,17 @@ import {
   ImplementationStatusTrail,
   InstrumentBadge,
   NotStated,
+  OptionLadder,
   SourceMention,
   ValueRoleBadge,
 } from "@/components/capital/primitives";
-import { CommitmentRow, ProviderTag } from "@/components/capital/rows";
+import { CommitmentRow, ProviderTag, optionStatusLabel } from "@/components/capital/rows";
+import { Badge } from "@/components/ui/badge";
 import {
   childLinks,
   commitmentActor,
   currentFinancialStatus,
+  optionState,
   summarizeCommitment,
 } from "@/lib/capital-control";
 import { groupDecimal } from "@/lib/decimal";
@@ -74,6 +77,9 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
   const children = childLinks(c.id);
   const actor = commitmentActor(c);
   const status = currentFinancialStatus(c);
+  const option = c.valueRole === "funding_option" ? optionState(c) : null;
+  const optionStep = (list: typeof children[number]["commitment"][]) =>
+    list.map((e) => ({ id: e.id, label: `${e.amount ? e.amount.amountAsStated : "no amount stated"}` }));
   // Numbered in render order so a skipped optional section leaves no gap.
   let n = 0;
   const next = () => String(++n).padStart(2, "0");
@@ -98,7 +104,11 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
           <ValueRoleBadge role={c.valueRole} />
           <InstrumentBadge instrument={c.instrument} />
           <CapitalSourceBadge source={c.capitalSource} />
-          <FinancialStatusBadge status={status} />
+          {option ? (
+            <Badge>{optionStatusLabel(status, option.exercises.length > 0)}</Badge>
+          ) : (
+            <FinancialStatusBadge status={status} />
+          )}
         </div>
         <p className="mt-3 font-mono text-xs text-faint">{c.id}</p>
       </header>
@@ -109,7 +119,20 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
             {c.amount ? (
               <Card className="p-5">
                 <AmountDetail amount={c.amount} />
-                {c.valueRole !== "commitment" ? (
+                {option ? (
+                  <div className="mt-3 border-t pt-3">
+                    <p className="mb-3 text-sm leading-6 text-muted">
+                      A <strong className="font-semibold text-foreground">funding option</strong>: a ceiling the recipient may call on
+                      under an executed agreement. An executed option is not committed money, so this figure is never added to any
+                      total. An exercise would be recorded as its own commitment drawn from this row, with its own payment status.
+                    </p>
+                    <OptionLadder
+                      executed={option.executed ? { date: option.executed.date, sourceId: option.executed.sourceId } : null}
+                      exercises={optionStep(option.exercises)}
+                      disbursements={optionStep(option.disbursements)}
+                    />
+                  </div>
+                ) : c.valueRole !== "commitment" ? (
                   <p className="mt-3 border-t pt-3 text-sm leading-6 text-muted">
                     This figure is a <strong className="font-semibold text-foreground">{valueRoleLabels[c.valueRole].toLowerCase()}</strong>, not money
                     committed to a recipient. It is never added to commitments or to other roles.

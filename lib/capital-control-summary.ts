@@ -4,6 +4,7 @@
  * `site.lastUpdated`, never on the build clock.
  */
 import {
+  LISTED_NOT_SUMMED_ROLES,
   PUBLIC_CAPITAL_SOURCES,
   commitmentActor,
   controlClocks,
@@ -11,6 +12,7 @@ import {
   controlStatusOn,
   countBy,
   currentFinancialStatus,
+  optionState,
   publicCommitmentRows,
   totalCommitments,
 } from "./capital-control";
@@ -35,16 +37,33 @@ export function buildCapitalControlSummary() {
     countingRules: [
       "Amounts are never converted between currencies.",
       "Only rows with valueRole \"commitment\" are summed; envelopes, appropriations and lending authorities are listed, never summed.",
+      "Funding options (valueRole \"funding_option\") are listed, never summed: an executed option is not an exercise. An exercise is recorded as its own commitment drawn from the option.",
       "A row is not added when a row it is part of or drawn from is counted in the same total.",
+      "If two counted rows in one currency share a descendant, that currency's total is withheld: status \"withheld\", sums null, and the overlapping rows named.",
       "Private financing, recipient funds, expected co-investment and total project cost are never public support; mixed vehicles are reported apart.",
       "Sums are kept apart by qualifier: exact, approximately, at least, up to.",
+      "Binding money (contracted, partially disbursed, disbursed) is summed apart from money not yet binding (announced, authorized, allocated, decided).",
     ],
     capital: {
       rows: all.length,
       publicCommitmentTotals: totals.currencies,
       publicCommitmentsWithoutAmount: totals.unquantifiedIds,
       publicCapitalSources: PUBLIC_CAPITAL_SOURCES,
-      envelopesListedNotSummed: listed(["program_envelope", "budget_appropriation", "lending_authority"]),
+      envelopesListedNotSummed: listed([...LISTED_NOT_SUMMED_ROLES]),
+      fundingOptionsListedNotSummed: all
+        .filter((c) => c.valueRole === "funding_option")
+        .map((c) => {
+          const s = optionState(c, all);
+          return {
+            id: c.id,
+            valueRole: c.valueRole,
+            capitalSource: c.capitalSource,
+            amount: c.amount,
+            agreementExecuted: s.executed ? { date: s.executed.date, sourceId: s.executed.sourceId } : null,
+            exercisesRecorded: s.exercises.map((e) => e.id),
+            disbursementsRecorded: s.disbursements.map((e) => e.id),
+          };
+        }),
       keptApartFromPublicSupport: [
         ...listed(["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost"]),
         ...all
