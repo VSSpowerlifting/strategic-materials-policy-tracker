@@ -4,6 +4,8 @@
  */
 import { FRAMING_CATEGORIES, JURISDICTIONS } from "./types";
 import type {
+  ControlMeasure,
+  FinancialCommitment,
   FramingCategory,
   FramingClaim,
   Jurisdiction,
@@ -23,6 +25,8 @@ import materialsSeed from "@/data/seed/materials.json";
 import jurisdictionsSeed from "@/data/seed/jurisdictions.json";
 import sourcesSeed from "@/data/seed/sources.json";
 import watchlistSeed from "@/data/seed/watchlist.json";
+import financialCommitmentsSeed from "@/data/seed/financial-commitments.json";
+import controlMeasuresSeed from "@/data/seed/control-measures.json";
 
 const events = eventsSeed as PolicyEvent[];
 const framing = framingSeed as FramingClaim[];
@@ -30,6 +34,8 @@ const materials = materialsSeed as Material[];
 const jurisdictions = jurisdictionsSeed as Jurisdiction[];
 const sources = sourcesSeed as Source[];
 const watchlist = watchlistSeed as WatchedSource[];
+const financialCommitments = financialCommitmentsSeed as FinancialCommitment[];
+const controlMeasures = controlMeasuresSeed as ControlMeasure[];
 
 // Sort helper: most recent first.
 const byDateDesc = (a: PolicyEvent, b: PolicyEvent) => b.date.localeCompare(a.date);
@@ -190,6 +196,46 @@ export function getWatchedSourcesByJurisdiction(): {
       (w) => w.jurisdiction === jurisdiction && w.status === "active",
     ),
   }));
+}
+
+// --- Capital & Control (v0.5) -------------------------------------------------
+//
+// Financial commitments ("fin-...") and control measures ("ctl-...") are child
+// rows of an event: the separate instruments and operative clauses one
+// announcement contains. Both seed files are empty until the v0.5 backfill,
+// and nothing here is exposed through the public API, the exports or any page
+// yet. Lists are ordered by id with a plain code-point comparison, so the order
+// depends on neither seed-file order nor the runtime's locale.
+
+const byId = (a: { id: string }, b: { id: string }) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+
+export function getAllFinancialCommitments(): FinancialCommitment[] {
+  return [...financialCommitments].sort(byId);
+}
+
+export function getFinancialCommitmentById(id: string): FinancialCommitment | undefined {
+  return financialCommitments.find((c) => c.id === id);
+}
+
+/**
+ * Commitments announced in, or cited by, one event. A commitment's parent
+ * envelope can sit in a different event, so this is not the whole family tree.
+ */
+export function getFinancialCommitmentsByEvent(eventId: string): FinancialCommitment[] {
+  return getAllFinancialCommitments().filter((c) => c.eventId === eventId);
+}
+
+export function getAllControlMeasures(): ControlMeasure[] {
+  return [...controlMeasures].sort(byId);
+}
+
+export function getControlMeasureById(id: string): ControlMeasure | undefined {
+  return controlMeasures.find((m) => m.id === id);
+}
+
+/** The operative clauses of one event, one row per clause with its own status history. */
+export function getControlMeasuresByEvent(eventId: string): ControlMeasure[] {
+  return getAllControlMeasures().filter((m) => m.eventId === eventId);
 }
 
 // --- Aggregate counts (for the homepage / headers) --------------------------

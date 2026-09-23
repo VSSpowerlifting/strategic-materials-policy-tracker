@@ -1,6 +1,79 @@
 # Project state
 
-_Last updated: 2026-09-22 (candidate promotion, framing QA, and commit-preparation session)._
+_Last updated: 2026-09-23 (v0.5 Capital & Control: Phase 0 merged; Phase 1 data model and review corrections on PR #3)._
+
+## Latest session: v0.5 Capital & Control — Phase 0 merged, Phase 1 data model
+
+### Phase 0: source-backed corrections (merged)
+
+- PR #2, "Correct source-backed policy details", was squash-merged to `main` as
+  `4d18c3b` on 2026-09-23. It corrected eight event records against their cited
+  official sources: MOFCOM No. 61's suspension timing, JOGMEC–Lynas, the source
+  of the ICA divestiture's nationality attribution, the NWF–Tungsten West
+  wording, the Australian reserve's publication date and inaccessible-page
+  claims, CAD labels on the two Canadian funding events, and the UK strategy's
+  up-to-£50 million fund. Public counts unchanged: 32 events, 56 sources, 36
+  framing claims, 11 materials, 8 jurisdictions.
+- Post-merge CI passed. The production deployment came from the Vercel GitHub
+  integration (`dpl_FP6Z7aCak2x5nX86k7RhVEwFpGS5`, source `git`, commit
+  `4d18c3b`, READY) and was verified route by route.
+- Still open: the `src-nrcan-cmrdd-2024` source note shows unlabelled "$"
+  amounts; `datePublished` is null on `src-au-industry-cmsr` and
+  `src-gowling-ca-divest`; the pmc.gov.au page is bot-blocked; the MOFCOM No. 61
+  annex (.wps) is unread.
+
+### Phase 1: Capital & Control data model (branch `feat/capital-control-schema`, PR #3, not merged)
+
+- `lib/types.ts`: two child entities of `PolicyEvent`, `FinancialCommitment`
+  (`fin-*`) and `ControlMeasure` (`ctl-*`), with 23 controlled vocabularies, a
+  decimal-string `MonetaryAmount`, arrays of `InstrumentTerm` and
+  `StatedOutcome`, source-linked status histories (financial, implementation,
+  control) and typed field-level `EvidenceReference`s. `PolicyEvent` is unchanged.
+- Review corrections (second commit on PR #3): typed `relationships`
+  (`part_of` / `drawn_from`, each naming its source) replace the single
+  `parentId`, so one amount can be part of a reserve and drawn from a separate
+  facility at once; `relationships` and `facility` are evidence fields and
+  `parent` is gone; `ControlMeasure` keeps the end users and end uses it
+  targets in the source's words (`targetEndUsersAsStated`,
+  `targetEndUsesAsStated`); the schema test derives public counts from the
+  seed files instead of pinning them.
+- `data/seed/financial-commitments.json` and `data/seed/control-measures.json`:
+  both `[]`.
+- `lib/data.ts`: six read-only loaders (all, by id and by event, for each
+  entity), ordered by code-point id. Not wired into the API, exports or pages.
+- `lib/labels.ts`: exactly one label per vocabulary value.
+- Docs: the methodology scope section (instrument-term boundary and the Capital
+  & Control rules), README and CLAUDE.md.
+- `tests/capital-control-schema.test.ts`: vocabularies and labels, empty seeds,
+  loader determinism, unknown ids, event getters, public counts derived from
+  the seed files (no pinned numbers), candidate isolation across every public
+  loader, reserved prefixes, field-to-evidence coverage for both entities, a
+  record that is both `part_of` and `drawn_from`, stated end users and end
+  uses, and compile-time checks that money is a string and no derivable field
+  is stored.
+
+Decided in review:
+
+- Relationships are read from the record that holds them: this commitment is
+  `part_of` or `drawn_from` the one it names. There are no inverse types.
+  Phase 2 validates resolution, self-links, duplicates and cycles.
+- `unit` stays source-preserving free text for the initial backfill. A
+  controlled unit list waits until repeated real values show a stable set.
+- A binding securities filing or official first-party recipient disclosure may
+  support explicit contract, financing, capacity or implementation facts it
+  states directly. It cannot on its own establish government rationale or
+  framing, an unstated government status, speculative valuation, market-price
+  estimates or unsupported projections, and it stays attributed to its speaker
+  through `evidence` and `statedBy`.
+
+Phase 2 rules to write: canonical decimal strings and ISO codes, `materialIds`
+within the event's materials, evidence covering every populated field
+(including each relationship's source), relationships that resolve with no
+self-links, duplicates or cycles, `targetScopes` consistent with the stated end
+users and end uses, and chronological status histories.
+
+Next action: review and merge the Phase 1 PR, then Phase 2 (validator rules for
+the two entities), with the seed files still empty.
 
 ## Latest session: Candidate promotion (Canada, China, UK) + framing QA + commit prep
 

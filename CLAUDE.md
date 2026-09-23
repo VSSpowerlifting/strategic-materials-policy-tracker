@@ -61,8 +61,11 @@ classifications, or final analytical claims. For any of those, retrieve and read
 
 A source-linked database of how China, the US, the EU and allied states contest
 rare earths and strategic materials through **policy instruments and official
-framing**. Not a market model — no prices, tonnages, reserves or supply-risk
-numbers. Read `README.md` and `/methodology` for the full framing.
+framing**. Not a market model — no market prices, reserve or tonnage estimates,
+supply-risk numbers or projections. The one exception is a term of a policy
+instrument that a government states or a binding filing sets out (a price floor
+in an agreement, a tax-offset rate, a capacity covenant), recorded only when
+precisely sourced. Read `README.md` and `/methodology` for the full framing.
 
 ## The hard rules (do not break these when editing data)
 
@@ -78,6 +81,23 @@ numbers. Read `README.md` and `/methodology` for the full framing.
    April 2025 forward (plus a few foundational instruments). Don't let it sprawl.
 5. **Never invent data.** Unknown → `null` or `"Not yet coded"`. Verify document
    numbers, dates and titles against the primary before coding them.
+6. **Capital & Control (v0.5).** `FinancialCommitment` (`fin-*`) and
+   `ControlMeasure` (`ctl-*`) are child rows of an event; `fc-` stays with framing
+   claims and `cand-` with candidates. Amounts are decimal strings in the source's
+   original currency, with `amountAsStated` — never JS numbers, never converted.
+   Never add unlike instruments or value roles together, never count a
+   commitment together with one it is `part_of` or `drawn_from` (typed
+   `relationships`; one commitment can hold both), and never present private
+   capital or total project cost as public support. Statuses are source-linked
+   histories (the last entry is current), every field's source goes in
+   `evidence`, and one control row covers one clause. `unit` stays free text as
+   the source gives it until repeated real values show a stable set. A binding
+   securities filing or a recipient's official disclosure may support contract,
+   financing, capacity or implementation facts it states directly — never
+   government rationale or framing, an unstated government status, speculative
+   valuations, market-price estimates or unsupported projections — and stays
+   attributed to its speaker in `evidence` and `statedBy`. No synthetic
+   economic-security score.
 
 ## Architecture
 
@@ -90,7 +110,9 @@ numbers. Read `README.md` and `/methodology` for the full framing.
 - `lib/export.ts` — deterministic JSON/CSV builders (no wall-clock reads, so the
   export route handlers can be `force-static`).
 - `lib/site.ts` — name, nav, version, last-updated, scope.
-- `data/seed/*.json` — events, framing, materials, jurisdictions, sources.
+- `data/seed/*.json` — events, framing, materials, jurisdictions, sources,
+  watchlist, and (v0.5, empty until backfilled) financial-commitments and
+  control-measures.
 - `components/` — UI primitives (`ui/`) and domain components. `FramingQuote` is
   the signature element; `EventsExplorer` / `TimelineView` are the client filters.
 

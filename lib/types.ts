@@ -300,6 +300,559 @@ export type Source = {
 };
 
 // ---------------------------------------------------------------------------
+// Capital & Control (v0.5): financial commitments and control measures
+//
+// A PolicyEvent stays the announcement and citation unit. The instruments an
+// announcement contains are recorded as child rows of two separate kinds,
+// because money and legal restrictions answer different questions and share
+// almost no fields:
+//
+//   FinancialCommitment  "fin-..."  one financial instrument: a grant, loan,
+//                                   equity stake, price floor, programme
+//                                   envelope and so on.
+//   ControlMeasure       "ctl-..."  one operative clause or limb of an export,
+//                                   import, investment or domestic control.
+//
+// "fc-" already belongs to framing claims and "cand-" to private candidates.
+//
+// Ground rules the model is built around (validator enforcement is Phase 2):
+//  - Original currency is authoritative. Amounts are decimal strings, never JS
+//    numbers, and nothing here converts, deflates or totals them.
+//  - Unlike instruments and value roles are never added together, and a
+//    commitment is never counted together with one it is part of or drawn from.
+//  - Private capital, a recipient's own funds and total project cost are
+//    recorded so they can be kept out of public-support figures.
+//  - Every important field names the source that supports it (`evidence`). A
+//    record's source list is derived from that and is not stored separately.
+//  - Statuses are source-linked histories, oldest first; the current status is
+//    the last entry, so no separate current-status field is stored.
+//  - Absence is null or an empty array. No row is created only to record that
+//    something is not stated.
+// ---------------------------------------------------------------------------
+
+/** Reserved id prefixes for the two Capital & Control entities. */
+export const FINANCIAL_COMMITMENT_ID_PREFIX = "fin-";
+export const CONTROL_MEASURE_ID_PREFIX = "ctl-";
+
+/** The kind of money, or money-like promise, a commitment is. */
+export const FINANCIAL_INSTRUMENTS = [
+  "grant",
+  "loan",
+  "loan_guarantee",
+  "equity",
+  "tax_credit",
+  "price_floor",
+  "offtake",
+  "procurement_right",
+  "stockpile_purchase",
+  "unspecified", // the source says "support", "funding" or "investment" and names no instrument
+] as const;
+
+/**
+ * What a stated amount represents. Only "commitment" is money committed to a
+ * recipient or project; the other roles are recorded so they can be kept out
+ * of support figures, or compared only with their own kind.
+ */
+export const VALUE_ROLES = [
+  "commitment", // committed to a named recipient or project
+  "program_envelope", // the ceiling of a programme or fund that awards are drawn from
+  "budget_appropriation", // money set aside in a budget
+  "lending_authority", // a ceiling on what a lender may lend or guarantee
+  "expected_co_investment", // money the government expects others to put in
+  "private_financing", // commercial capital raised alongside public money
+  "recipient_own_funds", // the recipient's own contribution
+  "total_project_cost", // the whole cost of the project, whoever pays it
+] as const;
+
+/** Who ultimately provides the capital. */
+export const CAPITAL_SOURCES = [
+  "public",
+  "public_enterprise", // a state-owned company or public-sector undertaking
+  "mixed_vehicle", // a joint public-private vehicle, e.g. the JOGMEC-Sojitz JARE
+  "private",
+  "not_stated",
+] as const;
+
+/** The financial lifecycle of a commitment. The stages are distinct, never interchangeable. */
+export const FINANCIAL_STATUSES = [
+  "announced",
+  "authorized", // legal or budgetary authority exists
+  "allocated", // money assigned to the purpose, e.g. in a budget
+  "decided", // the provider has decided to invest or award
+  "contracted", // a binding agreement has been executed
+  "partially_disbursed",
+  "disbursed",
+  "withdrawn",
+  "not_stated",
+] as const;
+
+/** Physical progress of the funded project, held apart from the money. */
+export const IMPLEMENTATION_STATUSES = [
+  "announced",
+  "feasibility",
+  "construction",
+  "commissioning",
+  "operational",
+  "suspended",
+  "cancelled",
+  "not_stated",
+  "not_applicable", // no physical project, e.g. a tax credit or a programme envelope
+] as const;
+
+/** Supply-chain stages. Recorded on each commitment, never on the event. */
+export const SUPPLY_CHAIN_STAGES = [
+  "exploration",
+  "mining",
+  "separation",
+  "processing",
+  "refining",
+  "component_manufacturing",
+  "final_manufacturing",
+  "recycling",
+  "stockpiling",
+  "research_development",
+  "cross_cutting",
+] as const;
+
+/** Whether a commitment's amount can be attributed to the stages it lists. */
+export const STAGE_ALLOCATIONS = [
+  "single_stage", // the whole amount supports the one stage listed
+  "multi_stage_unallocated", // spread over the stages listed; the split is not stated
+  "not_stated", // the source does not say which stage the money goes to
+] as const;
+
+/** How the materials a source names relate to the tracked material set. */
+export const MATERIAL_ATTRIBUTIONS = [
+  "tracked_only", // every material the source names is a tracked material
+  "includes_untracked", // the source also names materials outside the taxonomy
+  "not_stated", // the source names no specific material
+] as const;
+
+/** How the source qualifies a figure. "up_to" is a ceiling, not the committed sum. */
+export const VALUE_QUALIFIERS = ["exact", "up_to", "approximately", "at_least"] as const;
+
+/**
+ * How the currency of an amount was established:
+ *  - "stated"         — the source prints the code or an unambiguous symbol
+ *                       ("AUD", "£", "Rs.").
+ *  - "issuer_context" — the source prints an ambiguous symbol such as "$", and
+ *                       the currency is read from the issuing government (a
+ *                       Canadian federal release → CAD).
+ */
+export const CURRENCY_BASES = ["stated", "issuer_context"] as const;
+
+/** Structured terms a commitment can carry. One commitment may carry several. */
+export const TERM_KINDS = [
+  "tax_credit_rate",
+  "price_floor",
+  "annual_reimbursement_cap",
+  "lending_rate",
+  "duration",
+  "procurement_share",
+  "offtake_share",
+  "quantity_covenant",
+  "capacity_covenant",
+  "other",
+] as const;
+
+/** Outcomes a source attributes to a commitment. */
+export const OUTCOME_METRICS = [
+  "annual_capacity",
+  "supply_share",
+  "procurement_right_share",
+  "direct_jobs",
+  "target_date",
+  "other",
+] as const;
+
+/** Who makes an outcome claim within the source; a company's target is not a government's. */
+export const OUTCOME_ATTRIBUTIONS = ["government", "recipient", "third_party"] as const;
+
+/**
+ * How a commitment relates to another. A link is read from the record that
+ * holds it, towards the commitment it names:
+ *  - "part_of"    — this commitment is a component of that one, e.g. one
+ *                   element of a reserve or package.
+ *  - "drawn_from" — this commitment is paid out of that one, e.g. an award from
+ *                   a facility, envelope, appropriation or lending authority.
+ * There are no inverse types, so every link has one spelling.
+ */
+export const FINANCIAL_RELATIONSHIP_TYPES = ["part_of", "drawn_from"] as const;
+
+/**
+ * How directly a source supports the fields it is cited for. There is no "not
+ * stated" level: a fact the sources do not state is null or an empty array.
+ */
+export const EVIDENCE_LEVELS = ["explicit", "ambiguous"] as const;
+
+/** FinancialCommitment fields an evidence reference can support. */
+export const FINANCIAL_EVIDENCE_FIELDS = [
+  "instrument",
+  "value_role",
+  "capital_source",
+  "amount",
+  "relationships",
+  "provider", // provider and providerJurisdiction
+  "legal_authority",
+  "recipient",
+  "project",
+  "facility",
+  "location",
+  "stages", // stages and stageAllocation
+  "materials", // materialIds, materialAttribution and untrackedMaterialsAsStated
+  "status", // both status histories
+  "terms",
+  "outcomes",
+] as const;
+
+/** The kind of legal or contractual control a measure imposes. */
+export const CONTROL_MEASURE_TYPES = [
+  "export_licensing",
+  "export_prohibition",
+  "extraterritorial_licensing",
+  "end_use_restriction",
+  "decontrol",
+  "suspension",
+  "trade_investigation",
+  "import_restriction",
+  "investment_divestiture",
+  "customs_enforcement",
+  "domestic_production_control",
+  "contractual_ownership_covenant",
+] as const;
+
+/** Which flow a control measure governs. */
+export const CONTROL_DIRECTIONS = [
+  "export",
+  "re_export",
+  "import",
+  "inbound_investment",
+  "outbound_investment",
+  "domestic",
+] as const;
+
+/** Legal status of one control clause over time. */
+export const CONTROL_STATUSES = [
+  "announced",
+  "scheduled", // adopted, with a stated future effective date
+  "in_force",
+  "suspended",
+  "expired",
+  "revoked",
+  "investigation", // an inquiry that imposes no restriction yet
+  "not_stated",
+] as const;
+
+/** How a control measure defines whom or what it targets. A measure may combine several. */
+export const TARGET_SCOPES = [
+  "all_jurisdictions", // applies whatever the destination or origin
+  "named_jurisdictions",
+  "named_entities", // named companies, persons or listed parties
+  "end_users", // categories of user, worded in targetEndUsersAsStated
+  "end_uses", // categories of use, worded in targetEndUsesAsStated
+  "domestic_operators", // enterprises inside the issuing jurisdiction
+] as const;
+
+/** Classification systems a product code can come from. */
+export const PRODUCT_CODE_SYSTEMS = [
+  "cn_customs", // China customs commodity code (10-digit)
+  "cn_control_number", // China dual-use item control number, e.g. 1C902
+  "hs", // WCO Harmonized System
+  "us_hts", // US Harmonized Tariff Schedule
+  "us_eccn", // US Export Control Classification Number
+  "eu_cn", // EU Combined Nomenclature
+] as const;
+
+/**
+ * What a listed code does:
+ *  - "reference"   — printed for convenience; the item description governs
+ *                    (China's 参考海关商品编号).
+ *  - "legal_scope" — the code itself defines what is covered.
+ */
+export const PRODUCT_CODE_ROLES = ["reference", "legal_scope"] as const;
+
+/** ControlMeasure fields an evidence reference can support. */
+export const CONTROL_EVIDENCE_FIELDS = [
+  "measure_type",
+  "direction",
+  "clause",
+  "targets", // every target* field, including the stated end users and end uses
+  "materials", // materialIds, materialAttribution and untrackedMaterialsAsStated
+  "product_scope",
+  "product_codes",
+  "legal_basis", // legalBasisEventIds and legalBasisAsStated
+  "modified_measures", // modifiesMeasureIds and modifiesExternalInstruments
+  "status",
+] as const;
+
+export type FinancialInstrument = (typeof FINANCIAL_INSTRUMENTS)[number];
+export type ValueRole = (typeof VALUE_ROLES)[number];
+export type CapitalSource = (typeof CAPITAL_SOURCES)[number];
+export type FinancialStatus = (typeof FINANCIAL_STATUSES)[number];
+export type ImplementationStatus = (typeof IMPLEMENTATION_STATUSES)[number];
+export type SupplyChainStage = (typeof SUPPLY_CHAIN_STAGES)[number];
+export type StageAllocation = (typeof STAGE_ALLOCATIONS)[number];
+export type MaterialAttribution = (typeof MATERIAL_ATTRIBUTIONS)[number];
+export type ValueQualifier = (typeof VALUE_QUALIFIERS)[number];
+export type CurrencyBasis = (typeof CURRENCY_BASES)[number];
+export type TermKind = (typeof TERM_KINDS)[number];
+export type OutcomeMetric = (typeof OUTCOME_METRICS)[number];
+export type OutcomeAttribution = (typeof OUTCOME_ATTRIBUTIONS)[number];
+export type FinancialRelationshipType = (typeof FINANCIAL_RELATIONSHIP_TYPES)[number];
+export type EvidenceLevel = (typeof EVIDENCE_LEVELS)[number];
+export type FinancialEvidenceField = (typeof FINANCIAL_EVIDENCE_FIELDS)[number];
+export type ControlMeasureType = (typeof CONTROL_MEASURE_TYPES)[number];
+export type ControlDirection = (typeof CONTROL_DIRECTIONS)[number];
+export type ControlStatus = (typeof CONTROL_STATUSES)[number];
+export type TargetScope = (typeof TARGET_SCOPES)[number];
+export type ProductCodeSystem = (typeof PRODUCT_CODE_SYSTEMS)[number];
+export type ProductCodeRole = (typeof PRODUCT_CODE_ROLES)[number];
+export type ControlEvidenceField = (typeof CONTROL_EVIDENCE_FIELDS)[number];
+
+/**
+ * A figure written as a canonical decimal string: digits with an optional
+ * fractional part, and no sign, exponent, currency symbol or thousands
+ * separator. No leading zeros (other than a lone "0" before the point) and no
+ * trailing fractional zeros, so every value has exactly one spelling:
+ * "163000000000", "47668000", "0.5". Held as a string so that no amount ever
+ * passes through binary floating point.
+ */
+export type DecimalString = string;
+
+/** ISO 4217 alphabetic currency code, e.g. "USD", "CAD", "INR". */
+export type CurrencyCode = string;
+
+/** ISO 3166-1 alpha-2 country code, e.g. "NA" (Namibia), "US". */
+export type CountryCode = string;
+
+/** An amount of money exactly as a source states it, in the source's currency. */
+export type MonetaryAmount = {
+  /** Major currency units: "Rs.16,300 crore" → "163000000000". */
+  value: DecimalString;
+  currency: CurrencyCode;
+  qualifier: ValueQualifier;
+  /** The amount as the source prints it, e.g. "up to $3.8 billion". */
+  amountAsStated: string;
+  currencyBasis: CurrencyBasis;
+};
+
+/**
+ * Where a funded project or facility is. Deliberately not the actor taxonomy:
+ * a project can sit in a country the tracker does not follow.
+ */
+export type ProjectLocation = {
+  countryCode: CountryCode | null;
+  /** State, province, region or site, e.g. "Kunene Region". */
+  subnational: string | null;
+  /** The location exactly as the source words it. */
+  asStated: string | null;
+};
+
+/**
+ * One entry in a source-linked status history. Histories run oldest first and
+ * the current status is the last entry, so no separate current-status field
+ * is stored.
+ */
+export type StatusEntry<S extends string> = {
+  status: S;
+  /** ISO date the status took effect, as the source states it; null if it gives none. */
+  date: string | null;
+  sourceId: string;
+  note?: string | null;
+};
+
+export type FinancialStatusEntry = StatusEntry<FinancialStatus>;
+export type ImplementationStatusEntry = StatusEntry<ImplementationStatus>;
+
+export type ControlStatusEntry = StatusEntry<ControlStatus> & {
+  /**
+   * The stated end of this status, when the source gives one: the date a
+   * "scheduled" clause is due to take effect, the end of a suspension, or the
+   * expiry of a measure in force.
+   */
+  until?: string | null;
+};
+
+/**
+ * Field-level provenance: one source, the fields of one record it supports,
+ * and how directly it supports them. A record's sources are the distinct
+ * `sourceId`s of its evidence; there is no separate `sourceIds` list to drift.
+ * Terms, outcomes, status entries and relationships also name their own
+ * source, which must appear here under the matching field.
+ */
+export type EvidenceReference<F extends string> = {
+  sourceId: string;
+  /** The fields this source supports on this record; never empty. */
+  supports: F[];
+  evidence: EvidenceLevel;
+  /** Pinpoint within the source, e.g. "para. 8", "Item 1.01", "p. 20". */
+  locator?: string | null;
+  note?: string | null;
+};
+
+export type FinancialEvidence = EvidenceReference<FinancialEvidenceField>;
+export type ControlEvidence = EvidenceReference<ControlEvidenceField>;
+
+/**
+ * One structured term of an instrument: a rate, cap, floor, share, duration
+ * or covenant. Figures are decimal strings. Money in a term carries its own
+ * currency, and `unit` says what the figure is expressed in or per, as the
+ * source gives it: "%", "years", "per kg", "tonnes per annum". Units are free
+ * text on purpose; a controlled list waits until repeated real values show a
+ * stable set.
+ */
+export type InstrumentTerm = {
+  kind: TermKind;
+  /** Null when the source states the term without a figure. */
+  value: DecimalString | null;
+  qualifier: ValueQualifier | null;
+  /** ISO 4217 code when the figure is money (a price floor, a cap); otherwise null. */
+  currency: CurrencyCode | null;
+  unit: string | null;
+  /** The term as the source words it. */
+  asStated: string;
+  sourceId: string;
+  note?: string | null;
+};
+
+/** An outcome a source attributes to a commitment: capacity, supply access, jobs or a date. */
+export type StatedOutcome = {
+  metric: OutcomeMetric;
+  /** Decimal string for a quantity; null for "target_date" or when no figure is stated. */
+  value: DecimalString | null;
+  qualifier: ValueQualifier | null;
+  /** Free text, as the source gives it (see InstrumentTerm). */
+  unit: string | null;
+  /** For "target_date": an ISO date or partial date ("2027", "2027-03"); otherwise null. */
+  targetDate: string | null;
+  /** The outcome as the source words it, e.g. "full-scale production in Q1 2027". */
+  asStated: string;
+  statedBy: OutcomeAttribution;
+  sourceId: string;
+  note?: string | null;
+};
+
+/**
+ * A typed link from this commitment to another, which may belong to a
+ * different event. Read it from the record that holds it: "part_of" means this
+ * commitment is a component of `commitmentId`; "drawn_from" means it is paid
+ * out of `commitmentId`. A commitment can hold several links of both kinds and
+ * is never counted together with a commitment it links to. Each link names
+ * the source that states it.
+ */
+export type FinancialRelationship = {
+  /** The other commitment: "fin-...". */
+  commitmentId: string;
+  relationship: FinancialRelationshipType;
+  sourceId: string;
+  /** Pinpoint within the source, e.g. "para. 4". */
+  locator?: string | null;
+  note?: string | null;
+};
+
+/**
+ * One financial instrument announced in, or cited by, an event. An event can
+ * carry several (an equity stake, a loan and a price floor in one package),
+ * and each is recorded, sourced and statused on its own.
+ */
+export type FinancialCommitment = {
+  /** "fin-..." */
+  id: string;
+  /** The event that announces or cites this commitment. */
+  eventId: string;
+  /**
+   * What this commitment is part of or drawn from, in this event or another;
+   * empty when the sources state neither. One amount can be part of a reserve
+   * and drawn from a separate facility at the same time.
+   */
+  relationships: FinancialRelationship[];
+  instrument: FinancialInstrument;
+  valueRole: ValueRole;
+  capitalSource: CapitalSource;
+  /** Null when the source states no amount, e.g. a rate-based tax credit. */
+  amount: MonetaryAmount | null;
+  /** Normalized name of whoever provides the money; null when not stated. */
+  provider: string | null;
+  /** The tracked actor behind the provider (actor taxonomy, not a location). */
+  providerJurisdiction: JurisdictionCode | null;
+  /** Statute or authority invoked, as stated, e.g. "Defense Production Act Title III". */
+  legalAuthority: string | null;
+  recipient: string | null;
+  /** The funded undertaking, e.g. a mine restart or a demonstration plant. */
+  project: string | null;
+  /** The physical site or plant, where named. */
+  facility: string | null;
+  /** Empty when the source gives no location. */
+  locations: ProjectLocation[];
+  stages: SupplyChainStage[];
+  stageAllocation: StageAllocation;
+  /** Tracked materials only: a subset of the parent event's affectedMaterialIds. */
+  materialIds: string[];
+  materialAttribution: MaterialAttribution;
+  /** Co-products and other materials outside the taxonomy, as the source names them. */
+  untrackedMaterialsAsStated: string[];
+  financialStatusHistory: FinancialStatusEntry[];
+  implementationStatusHistory: ImplementationStatusEntry[];
+  terms: InstrumentTerm[];
+  outcomes: StatedOutcome[];
+  evidence: FinancialEvidence[];
+  notes?: string | null;
+};
+
+/** A product code exactly as the source prints it. */
+export type ProductCode = {
+  system: ProductCodeSystem;
+  /** As printed, e.g. "2805301100" or "1C902". */
+  code: string;
+  role: ProductCodeRole;
+};
+
+/**
+ * One operative clause or limb of a control. Clauses whose statuses differ
+ * (one limb in force, another suspended) are separate rows, so no row hides a
+ * conflicting status history.
+ */
+export type ControlMeasure = {
+  /** "ctl-..." */
+  id: string;
+  eventId: string;
+  measureType: ControlMeasureType;
+  direction: ControlDirection;
+  /** The operative clause or limb, e.g. "Item 1(3)", "Art. 2"; null for a single-clause measure. */
+  clause: string | null;
+  /** Empty when the source does not define its targets. */
+  targetScopes: TargetScope[];
+  /** Named target jurisdictions, as ISO 3166-1 alpha-2 codes. */
+  targetJurisdictions: CountryCode[];
+  /** Named companies, persons or lists, as the source names them. */
+  targetEntities: string[];
+  /**
+   * Classes of end user the measure targets, named or described in the
+   * source's words, e.g. "military end users". Not a controlled vocabulary.
+   */
+  targetEndUsersAsStated: string[];
+  /** End uses the measure targets, in the source's words. Not a controlled vocabulary. */
+  targetEndUsesAsStated: string[];
+  /** Tracked materials only: a subset of the parent event's affectedMaterialIds. */
+  materialIds: string[];
+  materialAttribution: MaterialAttribution;
+  untrackedMaterialsAsStated: string[];
+  /** The covered items in the source's own words. */
+  productScopeAsStated: string | null;
+  productCodes: ProductCode[];
+  /** Events in the corpus that are this measure's legal basis, e.g. an export control law. */
+  legalBasisEventIds: string[];
+  legalBasisAsStated: string | null;
+  /** Control measures this one modifies, suspends or replaces. */
+  modifiesMeasureIds: string[];
+  /** Instruments it modifies that are not in the corpus, by document number or title. */
+  modifiesExternalInstruments: string[];
+  statusHistory: ControlStatusEntry[];
+  evidence: ControlEvidence[];
+  notes?: string | null;
+};
+
+// ---------------------------------------------------------------------------
 // Candidate (private / pre-publication) workflow
 //
 // Candidate records are DRAFTS. They live under `data/candidates/` and are

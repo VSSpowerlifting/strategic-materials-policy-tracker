@@ -32,7 +32,7 @@ A short guided tour of the live site:
 
 It tracks **policy instruments and official framing**: the export controls, licensing regimes, critical-mineral designations, supply-chain-security laws, funding, stockpiling and offtake measures governments use around rare earths and adjacent strategic materials — translated, structured, and citable.
 
-It does **not** model the global minerals market. It does not forecast prices, estimate reserves or tonnages, or rank countries by a supply-risk number. Where market-share figures appear (for example, that China processes roughly 90% of rare earths), they are cited context drawn from bodies such as the IEA and USGS — not original estimates. That boundary is the credibility shield, and it is stated plainly on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology).
+It does **not** model the global minerals market. It does not track or forecast market prices, estimate reserves or tonnages, publish supply-risk numbers, or make projections its sources do not state. Where market-share figures appear (for example, that China processes roughly 90% of rare earths), they are cited context drawn from bodies such as the IEA and USGS — not original estimates. The one kind of figure it does record is a term of a policy instrument that a government states or a binding filing sets out — a price floor in an agreement, a tax-offset rate, a capacity covenant — and only when it is precisely sourced. That boundary is the credibility shield, and it is stated plainly on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology).
 
 The distinctive capability is depth on the Chinese side: the maintainer reads the Mandarin-language primaries directly, so Chinese measures are tracked more closely than English secondary reporting usually allows. The multi-actor frame keeps that depth honest by following the whole contest — the incumbent producer-processor and the states working to diversify away from it.
 
@@ -71,6 +71,15 @@ Five entities, fully typed in [`lib/types.ts`](lib/types.ts):
 
 The categorical label sets are the single source of truth: the union types are derived from `as const` arrays, and the validator imports the same arrays, so the schema and the checks cannot drift apart.
 
+### Capital & Control (v0.5, in development)
+
+Two child entities let one event hold the separate instruments inside it. Both are typed in `lib/types.ts` and loaded by `lib/data.ts`, but their seed files are empty: no records are published yet, and neither entity appears in the API, the exports or any page.
+
+- **FinancialCommitment** (`fin-*`, `data/seed/financial-commitments.json`) — one financial instrument: value role, capital source, amount, provider, recipient, project, facility, location, supply-chain stages, materials, terms and outcomes, with separate source-linked status histories for the money (announced to disbursed) and the project (feasibility to operational). Typed links say what a commitment is part of or drawn from, in the same event or another; one commitment can be both.
+- **ControlMeasure** (`ctl-*`, `data/seed/control-measures.json`) — one operative clause of an export, import, investment or domestic control: type, direction, targets (including the end users and end uses it names, in its own words), materials, product scope and codes, legal basis, the measures it modifies, and a source-linked status history.
+
+`fin-` and `ctl-` are reserved id prefixes; `fc-` stays with framing claims and `cand-` with private candidates. Amounts are decimal strings in the source's own currency, never converted or totalled across currencies or instruments; every field names the source that supports it; and private capital or total project cost is never counted as public support. The full rules are on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology#capital-control). Validator enforcement is the next phase.
+
 ## Tech stack
 
 - Next.js (App Router) · TypeScript · Tailwind CSS v4
@@ -100,6 +109,7 @@ components/          UI primitives and domain components
 lib/                 types, data loaders, labels, formatting, export, site config,
                      search index, citation builders, coverage metrics, structured data
 data/seed/           events / framing / materials / jurisdictions / sources / watchlist JSON
+                     financial-commitments / control-measures JSON (v0.5; empty until backfilled)
 data/candidates/     private, git-ignored candidate-review workspace (see its own README)
 scripts/             validate-data.ts, candidate-files.ts
 ```
@@ -134,6 +144,7 @@ Live counts are on the [coverage dashboard](https://strategic-materials-policy-t
 - Expand the material set beyond the rare-earth-centred eleven. Several coded instruments (the Australian production tax incentive, the UK and Canadian lists) name minerals — lithium, cobalt, nickel, PGMs — that have no `Material` record, so those measures currently show a narrower material scope on site than their text carries.
 - South Korea and Brazil: both are in the intended actor set but neither is in the taxonomy yet, because no in-scope primary has been verified for them. The jurisdiction codes go in when the first event does, not before.
 - Deepen non-Chinese actor coverage as primary sources are verified.
+- **v0.5 Capital & Control:** validator rules for financial commitments and control measures (next), then a source-verified backfill of both, then their API and export fields. The data model is already in place; see [Capital & Control](#capital--control-v05-in-development) above.
 
 ## Usage & citation
 
