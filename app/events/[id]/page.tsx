@@ -317,27 +317,7 @@ export default async function EventPage({
               <MetaRow label="Sources">
                 <span className="tnum">{sources.length}</span>
               </MetaRow>
-              {recordedStatuses.length ? (
-            <Section
-              index={nextSectionIndex()}
-              title="Control status this event records"
-              description="This event's source records a status of a control measure coded under another event."
-            >
-              <Card className="overflow-hidden">
-                {recordedStatuses.map(({ measure, entry }) => (
-                  <div key={`${measure.id}-${entry.status}`}>
-                    <ControlRow m={summarizeControl(measure)} />
-                    <p className="border-b px-4 py-2 font-mono text-[11px] text-faint last:border-b-0">
-                      Records: {controlStatusLabels[entry.status].toLowerCase()}
-                      {entry.date ? `, ${formatDate(entry.date)}` : ""}
-                    </p>
-                  </div>
-                ))}
-              </Card>
-            </Section>
-          ) : null}
-
-          {commitments.length || controls.length ? (
+              {commitments.length || controls.length ? (
                 <MetaRow label="Instruments">
                   <span className="tnum">
                     {commitments.length} financial · {controls.length} control

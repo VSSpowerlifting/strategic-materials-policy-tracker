@@ -14,7 +14,7 @@ import {
 } from "@/lib/capital-control";
 import { getAllControlMeasures, getAllFinancialCommitments, getAllMaterials } from "@/lib/data";
 import { formatDate } from "@/lib/format";
-import { controlMeasureTypeLabels, financialInstrumentLabels } from "@/lib/labels";
+import { controlMeasureTypeLabels, financialInstrumentLabels, valueRoleLabels } from "@/lib/labels";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -57,6 +57,9 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
             <Link href={`/capital/${it.c.id}`} className="min-w-0 flex-1 hover:text-accent">
               <span aria-hidden className="mr-1.5 inline-block h-2 w-2 rounded-full bg-[#CBA86A]" />
               {financialInstrumentLabels[it.c.instrument]}
+              {it.c.valueRole !== "commitment" ? (
+                <span className="text-faint"> · {valueRoleLabels[it.c.valueRole].toLowerCase()}</span>
+              ) : null}
               <span className="text-muted"> · {it.c.recipient ?? it.c.provider}</span>
             </Link>
             <InlineAmount amount={it.c.amount} />

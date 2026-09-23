@@ -326,6 +326,8 @@ export type InstrumentMark = {
   date: string;
   status: string;
   label: string;
+  /** Capital marks only: the row's value role, so an option never reads as committed money. */
+  valueRole?: ValueRole;
 };
 
 /**
@@ -349,6 +351,7 @@ export function instrumentChronology(): InstrumentMark[] {
           date: e.date,
           status: e.status,
           label: c.recipient ?? c.provider ?? c.id,
+          valueRole: c.valueRole,
         });
   }
   for (const m of getAllControlMeasures())

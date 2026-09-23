@@ -239,7 +239,9 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
           <Section index={next()} title="Status" description="Financial and physical progress are separate histories. The last entry is current.">
             <div className="grid gap-6 md:grid-cols-2">
               <Card className="p-5">
-                <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Financial</h3>
+                <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+                  {option ? "Financial · the agreement granting the option" : "Financial"}
+                </h3>
                 <FinancialStatusTrail entries={c.financialStatusHistory} />
               </Card>
               <Card className="p-5">

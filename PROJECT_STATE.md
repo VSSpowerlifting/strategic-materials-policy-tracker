@@ -88,6 +88,8 @@ session's write guard only allows edits under its own worktree path).
 - `CurrencyTotal` is a union on `status`: `"summed"` carries the sums;
   `"withheld"` (counted rows share a descendant) carries `reason`,
   `overlap` and null sums. Pages, the home card and the summary follow it.
+- The option is labelled as a funding option wherever its status appears:
+  row badges, the detail page, the interplay ledger and chronology tooltip.
 - Header: the 15-link scrolling strip is replaced by grouped navigation.
   Desktop shows eight primary links (Events, Timeline, Framing, Capital,
   Controls, Interplay, Materials, Actors), a "More" disclosure and Search;
@@ -106,8 +108,13 @@ session's write guard only allows edits under its own worktree path).
   (validate, typecheck, lint, test, build) passing; Vercel preview passing
   after one redeploy that cleared a transient `next/font/google` fetch
   failure unrelated to this branch.
-- Local gates: see the correction-pass commit message and PR body.
-  No dev or prod servers left running.
+- Local gates after the correction pass: validate (0 errors, 6 existing-kind
+  warnings), typecheck, lint, 213 tests, build (387 pages); 375px sweep of
+  all 144 sitemap pages; header checked at 375, 768, 1024 and 1440px.
+  Correction commits on top of `b35132c`: `4b811a8` (integrity pass) and the
+  follow-up advisor fix (duplicate event-page section; option labels in the
+  interplay ledger, chronology tooltip and status trail). The final head SHA
+  is in the PR. No dev or prod servers left running.
 - Housekeeping: after the session, run `git worktree prune` in the main
   checkout; the session worktree
   `/Users/benjaminyang/.claude/worktrees/smpt-platform-launch-d4e51a`

@@ -225,7 +225,12 @@ export function InterplayChronology({
             const cy = TOP + lane * LANE + LANE / 2 + (m.kind === "capital" ? -8 : 8) + (m.n % 2 ? 0 : 0);
             const cx = x(m.date) + (m.n % 4) * 3;
             const href = m.kind === "capital" ? `/capital/${m.id}` : `/controls/${m.id}`;
-            const status = m.kind === "capital" ? financialStatusLabels[m.status as never] : controlStatusLabels[m.status as never];
+            const status =
+              m.kind === "control"
+                ? controlStatusLabels[m.status as never]
+                : m.valueRole === "funding_option"
+                  ? `funding option; agreement ${String(financialStatusLabels[m.status as never]).toLowerCase()}, not committed money`
+                  : financialStatusLabels[m.status as never];
             const tip = `${formatDate(m.date)} — ${m.kind === "capital" ? "Capital" : "Control"}: ${m.label} (${status})`;
             return (
               <Link key={`${m.id}-${m.date}-${m.status}`} href={href}>
