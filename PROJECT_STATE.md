@@ -54,6 +54,33 @@ session's write guard only allows edits under its own worktree path).
   fixtures and on the corpus, decimals, statuses over time, exports); the
   schema, validation and search tests were updated for a populated corpus.
 
+### Review fixes (commit f7b0383 and after)
+
+- Capital is credited to a government only through `providerJurisdiction`;
+  bank financing, MP's own cash and the US–AU project pipeline show as
+  "not government capital" and sit in no actor lane or matrix.
+- Public totals are split into binding (contracted or paid) and not yet
+  binding (announced to decided, incl. conditional and non-binding) on
+  /capital, the home page and the summary API.
+- The two NRCan releases were re-read in full in a browser; one
+  `amountAsStated` quote was corrected to the source's exact wording.
+
+### PR and release state
+
+- PR: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/5
+  (base `main` at `f55762d`; not merged). Checks: GitHub `validate`
+  (validate, typecheck, lint, test, build) passing; Vercel preview passing
+  after one redeploy that cleared a transient `next/font/google` fetch
+  failure unrelated to this branch.
+- Local gates at HEAD: validate, lint, typecheck, 207 tests, build (389
+  pages). No dev or prod servers left running.
+- Awaiting maintainer decision: the four vocabulary additions above.
+- Housekeeping: after the session, run `git worktree prune` in the main
+  checkout; the session worktree
+  `/Users/benjaminyang/.claude/worktrees/smpt-platform-launch-d4e51a`
+  (a worktree of the home-directory repo) holds this branch's worktree,
+  with its `node_modules` and `.next`, as an untracked directory.
+
 ### Open items
 
 - Commerce's final AD/CVD determinations and any termination notice were
