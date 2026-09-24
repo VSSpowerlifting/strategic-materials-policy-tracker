@@ -687,8 +687,25 @@ export default function MethodologyPage() {
             <ul className="space-y-2 text-muted">
               <li>
                 <span className="font-mono text-foreground">{site.version}</span> —{" "}
-                {formatDate(site.lastUpdated)}. Capital &amp; Control: {summary.financialCommitments} financial
-                commitments and {summary.controlMeasures} control clauses, verified field by field against
+                {formatDate(site.lastUpdated)}. Capital intelligence: registries of {summary.organizations}{" "}
+                organizations, {summary.projects} projects and {summary.programmes} programmes that the financial
+                rows point to, and {summary.projectDesignations} project designations, each evidenced field by field.
+                New pages for portfolios, projects, organizations and programmes; capital stacks by value role;
+                programme ledgers that list ceilings beside recorded awards; co-investment; flows; and a
+                material-by-stage response map of capital, designations and control clauses, with item types and
+                supply-chain stages coded on every control clause that defines items. New records from primaries:
+                China&apos;s Announcements Nos. 56, 57, 58 and 62 of 2025; the EU&apos;s Critical Raw Materials Act
+                Strategic Projects (March and June 2025) and RESourceEU; Japan&apos;s certified critical-mineral
+                supply-assurance plans and JOGMEC grants; Canada&apos;s G7 Production Alliance round and PDAC 2026
+                awards; Commerce&apos;s CHIPS agreements with USA Rare Earth; and what MP Materials&apos; later filings
+                record about the DoD package. Corrections: currency totals are now split by instrument (version
+                0.5 added grants, loans and equity together, contrary to its own rule), and a withdrawn or lapsed
+                commitment is no longer summed. New vocabulary values: a financial status &ldquo;lapsed&rdquo;, and
+                the registry, designation and item-type vocabularies.
+              </li>
+              <li>
+                <span className="font-mono text-foreground">v0.5-capital-control</span> — 23 September 2026. Capital
+                &amp; Control: 39 financial commitments and 32 control clauses, verified field by field against
                 official primaries and binding filings; the Capital, Controls and Capital × Control pages; the
                 counting rules above; new JSON endpoints and CSV exports. Three events added (the US–Australia
                 critical minerals Framework, the OSC loans to Vulcan Elements and ReElement, the US active anode

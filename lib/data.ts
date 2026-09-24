@@ -305,6 +305,10 @@ export function getDatasetSummary() {
     sources: sources.length,
     financialCommitments: financialCommitments.length,
     controlMeasures: controlMeasures.length,
+    organizations: organizations.length,
+    projects: projects.length,
+    programmes: programmes.length,
+    projectDesignations: projectDesignations.length,
   };
 }
 

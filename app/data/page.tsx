@@ -110,7 +110,9 @@ export default function DataPage() {
       <p className="mt-6 font-mono text-sm text-faint">
         Current snapshot: {s.events} events · {s.framingClaims} framing anchors ·{" "}
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
-        sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses.
+        sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses ·{" "}
+        {s.organizations} organizations · {s.projects} projects · {s.programmes} programmes ·{" "}
+        {s.projectDesignations} project designations.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">

@@ -142,9 +142,17 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
   rules, statuses as of `site.lastUpdated`, relationship graph, summaries);
   `lib/decimal.ts` holds exact decimal arithmetic; `lib/capital-control-summary.ts`
   backs `/api/v1/capital-control/summary`. Never total money anywhere else.
+- `lib/capital-intelligence.ts` (+ `lib/capital-intelligence-summary.ts`, v0.6) —
+  value-role layers, capital stacks, organization roles, programme ledgers,
+  actor and designation portfolios, flows, co-investment and the stage
+  response map. Every money figure still comes from `totalCommitments`, which
+  splits each currency by instrument (never a cross-instrument sum) and leaves
+  withdrawn or lapsed commitments out.
 - `components/` — UI primitives (`ui/`) and domain components. `FramingQuote` is
   the signature element; `EventsExplorer` / `TimelineView` are the client filters;
-  `components/capital/` holds the Capital & Control rows, explorers and SVG charts.
+  `components/capital/` holds the Capital & Control rows, explorers and SVG charts;
+  `components/intelligence/` the totals, layers, registry links, designation rows
+  and response map.
 
 ## Conventions
 
@@ -171,6 +179,11 @@ After any change to `data/seed/*`, run `npm run validate` — it gates referenti
 integrity, allowed-value membership, quote anchors and translation provenance.
 
 ## What still needs building (v1 roadmap)
+
+- v0.6 follow-ups: the EU's second Strategic Project round and any magnet-scrap
+  export instrument; SRF (formerly SIF) project awards; EXIM, DOE and DPA Title
+  III awards; what China does when the October 2025 suspension ends on
+  10 November 2026. Earlier items:
 
 - Event records for Australia (Lynas / Iluka), Japan (JOGMEC) and Canada so all six
   actors are event-coded, not just profiled.
