@@ -742,14 +742,14 @@ export default function MethodologyPage() {
                 counted as binding or not yet binding, or read as capital, backing or co-investment. New
                 vocabulary values: a financial status &ldquo;lapsed&rdquo;, a value role &ldquo;non-binding
                 indication&rdquo;, and the registry, designation and item-type vocabularies. In the JSON, the
-                released <code className="font-mono text-faint">/api/v1/capital-control/summary</code> (and its
-                copy in <code className="font-mono text-faint">dataset.json</code> as{" "}
-                <code className="font-mono text-faint">capitalControlSummary</code>) moved{" "}
-                <code className="font-mono text-faint">capital.publicCommitmentTotals[].byQualifier</code>,{" "}
-                <code className="font-mono text-faint">.binding</code> and{" "}
-                <code className="font-mono text-faint">.notYetBinding</code> into{" "}
-                <code className="font-mono text-faint">capital.publicCommitmentTotals[].instruments[]</code>;{" "}
-                <code className="font-mono text-faint">/api/v1/capital-intelligence/summary</code> is new in this
+                released <code className="break-all font-mono text-faint">/api/v1/capital-control/summary</code> (and its
+                copy in <code className="break-all font-mono text-faint">dataset.json</code> as{" "}
+                <code className="break-all font-mono text-faint">capitalControlSummary</code>) moved{" "}
+                <code className="break-all font-mono text-faint">capital.publicCommitmentTotals[].byQualifier</code>,{" "}
+                <code className="break-all font-mono text-faint">.binding</code> and{" "}
+                <code className="break-all font-mono text-faint">.notYetBinding</code> into{" "}
+                <code className="break-all font-mono text-faint">capital.publicCommitmentTotals[].instruments[]</code>;{" "}
+                <code className="break-all font-mono text-faint">/api/v1/capital-intelligence/summary</code> is new in this
                 release.
               </li>
               <li>
