@@ -554,8 +554,8 @@ export const layerLabels = {
 } as const;
 
 export const layerGlosses = {
-  public_commitment: "Committed to a recipient by a government or public enterprise. Summed per currency; a part is never added to its package.",
-  joint_vehicle_commitment: "Committed by a vehicle that public and private parties set up together. Summed apart from public money: the public share is not stated.",
+  public_commitment: "Committed to a recipient by a government or public enterprise. Summed per currency and per instrument, never across either; a part is never added to its package.",
+  joint_vehicle_commitment: "Committed by a vehicle that public and private parties set up together. Summed apart from public money, per currency and instrument: the public share is not stated.",
   other_commitment: "Committed with private capital, or capital whose source the sources do not state. Listed, never summed with public money.",
   funding_option: "A ceiling a party may call on under an executed agreement. Listed, never summed: an option is not committed money until exercised.",
   envelope: "Ceilings that awards are drawn from. Listed, never summed, and never divided into awards.",

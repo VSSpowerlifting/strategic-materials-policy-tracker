@@ -230,6 +230,9 @@ test("co-investment is classed by who provides the capital, and counts no envelo
   assert.deepEqual(byProject.get("prj-gb-hemerdon")?.governments, ["uk"]);
   assert.deepEqual(byProject.get("prj-gb-hemerdon")?.designatingGovernments, ["eu"]);
   assert.ok(!byProject.has("prj-na-lofdal"), "one provider is not co-investment");
+  // Canada's EDC and the German government (not a tracked actor) behind one facility.
+  assert.ok(byProject.get("prj-ca-vianode-st-thomas")?.kinds.includes("cross_government"));
+  assert.deepEqual(byProject.get("prj-ca-vianode-st-thomas")?.governments, ["canada"], "only tracked governments are named as governments");
   assert.ok(!byProject.has("prj-fr-caremag"), "a designation alone is not co-investment");
   // Multilateral public money beside an EU designation: EBRD equity in Sarytogan.
   assert.deepEqual(byProject.get("prj-kz-sarytogan")?.kinds, ["capital_and_designation"]);

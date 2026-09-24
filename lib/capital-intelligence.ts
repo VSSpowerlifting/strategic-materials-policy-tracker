@@ -302,8 +302,16 @@ export function coInvestments(all: readonly FinancialCommitment[] = getAllFinanc
     const privateRows = rows.filter((c) => c.providerJurisdiction === null && ["private_financing", "recipient_own_funds"].includes(c.valueRole));
     const governments = [...new Set(publicRows.map((c) => c.providerJurisdiction!))].sort(byCodePoint);
     const publicOrgs = [...new Set(publicRows.flatMap((c) => c.providerOrgIds))].sort(byCodePoint);
+    // A government outside the tracked actors (Germany, say) still counts as a second government:
+    // its public rows are identified by their provider organizations' government kind and country.
+    const untrackedGovernments = new Set(
+      rows
+        .filter((c) => c.providerJurisdiction === null && PUBLIC_CAPITAL_SOURCES.includes(c.capitalSource))
+        .flatMap((c) => c.providerOrgIds.map((id) => getOrganizationById(id)).filter((o) => o?.kind === "government" && o.countryCode))
+        .map((o) => o!.countryCode!),
+    );
     const kinds: CoInvestmentKind[] = [];
-    if (governments.length > 1) kinds.push("cross_government");
+    if (governments.length + untrackedGovernments.size > 1) kinds.push("cross_government");
     if (publicRows.length && privateRows.length) kinds.push("public_and_private");
     if (governments.length === 1 && publicOrgs.length > 1) kinds.push("several_public_bodies");
     const designations = getAllProjectDesignations().filter((d) => d.projectId === project.id);

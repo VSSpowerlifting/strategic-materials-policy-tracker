@@ -256,7 +256,8 @@ export default function PortfoliosPage() {
                     ) : null}
                   </div>
                   <p className="mt-2 font-mono text-[11px] text-faint">
-                    {c.rowIds.length} rows · {c.providerOrgIds.length} providing organizations{c.designationIds.length ? ` · ${c.designationIds.length} designation${c.designationIds.length === 1 ? "" : "s"}` : ""}
+                    {c.rowIds.length} row{c.rowIds.length === 1 ? "" : "s"} · {c.providerOrgIds.length} providing organization{c.providerOrgIds.length === 1 ? "" : "s"}
+                    {c.designationIds.length ? ` · ${c.designationIds.length} designation${c.designationIds.length === 1 ? "" : "s"}` : ""}
                   </p>
                 </Card>
               ))}
