@@ -17,7 +17,8 @@ import {
   controlIssuer,
   controlStatusOn,
   currentFinancialStatus,
-  isBinding,
+  isEnded,
+  legalStanding,
   totalCommitments,
   type CommitmentTotals,
 } from "./capital-control";
@@ -236,6 +237,13 @@ export function layers(rows: readonly FinancialCommitment[], all: readonly Finan
 
 // --- Projects: capital stack and co-investment --------------------------------------------
 
+/**
+ * A row that can back a project or sit in a portfolio's capital: it has not ended, and it is not a funding
+ * option. An option is a right to call on money, never money that moved; an exercise is its own row, and
+ * that row backs. Ended and option rows stay listed wherever they appear, with their status.
+ */
+export const isBackingRow = (c: FinancialCommitment): boolean => !isEnded(c) && c.valueRole !== "funding_option";
+
 export type ProjectStack = {
   project: Project;
   rows: FinancialCommitment[];
@@ -252,8 +260,12 @@ export function projectStack(id: string, all: readonly FinancialCommitment[] = g
   const project = getProjectById(id);
   if (!project) return null;
   const rows = all.filter((c) => c.projectId === id);
-  const governments = [...new Set(rows.flatMap((c) => (c.providerJurisdiction ? [c.providerJurisdiction] : [])))].sort(byCodePoint);
-  const providerOrgIds = [...new Set(rows.flatMap((c) => c.providerOrgIds))].sort(byCodePoint);
+  // Who stands behind the project: providers of rows that have not ended. A withdrawn or lapsed row keeps its
+  // place in the stack (with its status) but no longer backs the project, and a funding option is standing,
+  // not backing, until a commitment drawn from it is recorded (that draw is its own row here).
+  const backing = rows.filter(isBackingRow);
+  const governments = [...new Set(backing.flatMap((c) => (c.providerJurisdiction ? [c.providerJurisdiction] : [])))].sort(byCodePoint);
+  const providerOrgIds = [...new Set(backing.flatMap((c) => c.providerOrgIds))].sort(byCodePoint);
   let latestImplementation: ProjectStack["latestImplementation"] = null;
   for (const c of rows)
     for (const e of c.implementationStatusHistory)
@@ -280,7 +292,12 @@ export type CoInvestment = {
   /** Governments whose schemes recognize the project (from the designation's programme). */
   designatingGovernments: JurisdictionCode[];
   providerOrgIds: string[];
+  /** The rows the kinds rest on: capital that has not ended, and no funding option. */
   rowIds: string[];
+  /** Funding options on the project: listed as options, and no part of any kind above. */
+  optionIds: string[];
+  /** Withdrawn or lapsed rows on the project: listed, and no part of any kind above. */
+  endedIds: string[];
   designationIds: string[];
 };
 
@@ -290,14 +307,18 @@ export type CoInvestment = {
  * funds; several public bodies of one government; or public capital
  * (a government's, or a multilateral lender's) alongside a designation
  * (standing, not money). Envelopes and total project
- * cost are not capital provided, so they do not count.
+ * cost are not capital provided, so they do not count. Neither does a row
+ * that has ended (a commitment letter that lapsed undrawn backs nothing) or a
+ * funding option (a right to call on money is not money that moved): an
+ * exercise is its own commitment and counts as one.
  */
 export function coInvestments(all: readonly FinancialCommitment[] = getAllFinancialCommitments()): CoInvestment[] {
   const out: CoInvestment[] = [];
   for (const project of getAllProjects()) {
-    const rows = all.filter(
+    const onProject = all.filter(
       (c) => c.projectId === project.id && !["program_envelope", "budget_appropriation", "lending_authority", "total_project_cost"].includes(c.valueRole),
     );
+    const rows = onProject.filter(isBackingRow);
     const publicRows = rows.filter((c) => c.providerJurisdiction !== null);
     const privateRows = rows.filter((c) => c.providerJurisdiction === null && ["private_financing", "recipient_own_funds"].includes(c.valueRole));
     const governments = [...new Set(publicRows.map((c) => c.providerJurisdiction!))].sort(byCodePoint);
@@ -331,6 +352,8 @@ export function coInvestments(all: readonly FinancialCommitment[] = getAllFinanc
         ].sort(byCodePoint),
         providerOrgIds: [...new Set(rows.flatMap((c) => c.providerOrgIds))].sort(byCodePoint),
         rowIds: rows.map((c) => c.id),
+        optionIds: onProject.filter((c) => !isEnded(c) && c.valueRole === "funding_option").map((c) => c.id),
+        endedIds: onProject.filter(isEnded).map((c) => c.id),
         designationIds: designations.map((d) => d.id),
       });
   }
@@ -400,14 +423,25 @@ export type ActorPortfolio = {
   publicTotals: CommitmentTotals;
   /** Joint-vehicle commitments, per currency, kept apart from public money. */
   jointVehicleTotals: CommitmentTotals;
-  /** Record counts, never money. */
+  /**
+   * Record counts, never money. Every count but `ended` is of rows that have not ended, and every count but
+   * `byLayer` leaves funding options out (an option is counted once, in its own layer, and never as the
+   * instrument, stage or material it would fund if called on).
+   */
   counts: {
     rows: number;
+    /** Rows that withdrew or lapsed: counted here and nowhere else, a package with its parts once. */
+    ended: number;
     byLayer: Record<LayerKey, number>;
     byInstrument: Record<string, number>;
-    /** Committed rows (any capital source) under a binding agreement, or not yet. */
+    /**
+     * Committed rows (any capital source) by legal standing. A row whose status the source does not give is
+     * neither binding nor not yet binding; an ended committed row is neither.
+     */
     committedBinding: number;
     committedNotYetBinding: number;
+    committedStatusNotStated: number;
+    committedEnded: number;
     byGeography: Record<Geography, number>;
     byStage: Record<SupplyChainStage, number>;
     byMaterial: Record<string, number>;
@@ -427,27 +461,37 @@ export type ActorPortfolio = {
  */
 export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): ActorPortfolio {
   const rows = all.filter((c) => c.providerJurisdiction === actor);
-  const inScope = new Set(rows.map((c) => c.id));
-  // Record counts fold a part into its package when the package is in scope.
-  const counted = rows.filter((c) => !c.relationships.some((r) => r.relationship === "part_of" && inScope.has(r.commitmentId)));
+  // Record counts fold a part into its package when the package is in scope and has not ended: an ended
+  // package does not hide a part that is still standing, and an ended part is counted as ended.
+  // The package must sit in the same layer, so a commitment under an envelope is still a commitment of its own.
+  const foldable = (group: readonly FinancialCommitment[]) => {
+    const byId = new Map(group.map((c) => [c.id, c]));
+    return group.filter((c) => {
+      const packageRow = (r: FinancialCommitment["relationships"][number]) => byId.get(r.commitmentId);
+      return !c.relationships.some((r) => r.relationship === "part_of" && packageRow(r) && layerOf(packageRow(r)!) === layerOf(c));
+    });
+  };
+  const counted = foldable(rows.filter((c) => !isEnded(c)));
+  const endedCounted = foldable(rows.filter(isEnded));
   const byLayer = tally(LAYER_KEYS);
   const byGeography = tally(["domestic", "abroad", "domestic_and_abroad", "not_stated"] as const);
   const byStage = tally(SUPPLY_CHAIN_STAGES);
   const byInstrument: Record<string, number> = {};
   const byMaterial: Record<string, number> = {};
-  let committedBinding = 0;
-  let committedNotYetBinding = 0;
+  const standing = { binding: 0, not_yet_binding: 0, status_not_stated: 0, ended: 0 };
   for (const c of counted) {
     byLayer[layerOf(c)]++;
+    if (c.valueRole === "funding_option") continue;
     byInstrument[c.instrument] = (byInstrument[c.instrument] ?? 0) + 1;
     for (const s of new Set(c.stages)) byStage[s]++;
     for (const m of new Set(c.materialIds)) byMaterial[m] = (byMaterial[m] ?? 0) + 1;
     if (c.valueRole === "commitment") {
-      if (isBinding(c)) committedBinding++;
-      else committedNotYetBinding++;
+      standing[legalStanding(c)]++;
       byGeography[rowGeography(c, actor, all)!.geography]++;
     }
   }
+  standing.ended = endedCounted.filter((c) => c.valueRole === "commitment").length;
+  const backing = rows.filter(isBackingRow);
   const committedPublic = rows.filter((c) => layerOf(c) === "public_commitment");
   const committedJoint = rows.filter((c) => layerOf(c) === "joint_vehicle_commitment");
   const programmes = new Set(getAllProgrammes().filter((g) => g.actor === actor).map((g) => g.id));
@@ -458,16 +502,19 @@ export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialC
     jointVehicleTotals: totalCommitments(committedJoint, all),
     counts: {
       rows: counted.length,
+      ended: endedCounted.length,
       byLayer,
       byInstrument,
-      committedBinding,
-      committedNotYetBinding,
+      committedBinding: standing.binding,
+      committedNotYetBinding: standing.not_yet_binding,
+      committedStatusNotStated: standing.status_not_stated,
+      committedEnded: standing.ended,
       byGeography,
       byStage,
       byMaterial,
-      providerOrganizations: new Set(rows.flatMap((c) => c.providerOrgIds)).size,
-      recipientOrganizations: new Set(rows.flatMap((c) => c.recipientOrgIds)).size,
-      projects: new Set(rows.flatMap((c) => (c.projectId ? [c.projectId] : []))).size,
+      providerOrganizations: new Set(backing.flatMap((c) => c.providerOrgIds)).size,
+      recipientOrganizations: new Set(backing.flatMap((c) => c.recipientOrgIds)).size,
+      projects: new Set(backing.flatMap((c) => (c.projectId ? [c.projectId] : []))).size,
       programmes: programmes.size,
       designations: getAllProjectDesignations().filter((d) => programmes.has(d.programmeId)).length,
     },
@@ -508,7 +555,7 @@ export type DesignationPortfolio = {
     noStage: number;
     byMaterial: Record<string, number>;
     holders: number;
-    /** Designated projects that also carry a financial row from any provider. */
+    /** Designated projects that also carry a financial row from any provider that has not ended (an option alone is not capital). */
     projectsWithCapital: number;
   };
 };
@@ -530,7 +577,8 @@ export function designationPortfolio(actor: JurisdictionCode, all: readonly Fina
     if (!d.stages.length) noStage++;
     for (const m of new Set(d.materialIds)) byMaterial[m] = (byMaterial[m] ?? 0) + 1;
   }
-  const funded = new Set(all.flatMap((c) => (c.projectId ? [c.projectId] : [])));
+  // A project carries capital when a row that has not ended and is not a bare option is aimed at it.
+  const funded = new Set(all.filter(isBackingRow).flatMap((c) => (c.projectId ? [c.projectId] : [])));
   return {
     actor,
     designationIds: list.map((d) => d.id),
@@ -556,6 +604,23 @@ export function actorsWithDesignations(): JurisdictionCode[] {
   return (["eu", "us", "japan", "australia", "canada", "uk", "india", "china", "other"] as const).filter((j) => present.has(j));
 }
 
+// --- Folding a part into its package ---------------------------------------------------------
+
+/**
+ * A part of a package is folded into it, so one deal counts once, but only into a package that is itself
+ * counted in the same view and under the same actor. A package the view does not count (an envelope in a view
+ * of commitments, an ended package, another provider's) never hides a part that the view does count.
+ */
+function isFoldedPart(c: FinancialCommitment, byId: ReadonlyMap<string, FinancialCommitment>, countsHere: (p: FinancialCommitment) => boolean): boolean {
+  return c.relationships.some((r) => {
+    if (r.relationship !== "part_of") return false;
+    const p = byId.get(r.commitmentId);
+    return !!p && p.providerJurisdiction === c.providerJurisdiction && countsHere(p);
+  });
+}
+
+const byIdOf = (all: readonly FinancialCommitment[]) => new Map(all.map((c) => [c.id, c]));
+
 // --- Flows: from a government to where its money is aimed -----------------------------------
 
 export type FlowCell = { actor: JurisdictionCode; destination: string; rowIds: string[] };
@@ -563,17 +628,23 @@ export type FlowCell = { actor: JurisdictionCode; destination: string; rowIds: s
 /**
  * Committed rows from each tracked government to each destination country,
  * or "not_stated". Counts records: a package counts once, with its parts
- * folded in, and a row aimed at two countries appears under both.
+ * folded in, and a row aimed at two countries appears under both. A row that
+ * withdrew or lapsed is not a flow, and an ended package does not hide the
+ * parts that are still standing. Funding options are not commitments and are
+ * never a flow; an exercise is its own commitment and is one.
  */
 export function capitalFlows(all: readonly FinancialCommitment[] = getAllFinancialCommitments()): FlowCell[] {
   const cells = new Map<string, FlowCell>();
+  const byId = byIdOf(all);
+  const isFlow = (c: FinancialCommitment) => !!c.providerJurisdiction && c.valueRole === "commitment" && !isEnded(c);
   for (const c of all) {
-    if (!c.providerJurisdiction || c.valueRole !== "commitment") continue;
-    if (c.relationships.some((r) => r.relationship === "part_of")) continue;
-    const g = rowGeography(c, c.providerJurisdiction, all)!;
+    if (!isFlow(c)) continue;
+    if (isFoldedPart(c, byId, isFlow)) continue;
+    const actor = c.providerJurisdiction!;
+    const g = rowGeography(c, actor, all)!;
     for (const destination of g.countries.length ? g.countries : ["not_stated"]) {
-      const key = `${c.providerJurisdiction}\u0000${destination}`;
-      if (!cells.has(key)) cells.set(key, { actor: c.providerJurisdiction, destination, rowIds: [] });
+      const key = `${actor}\u0000${destination}`;
+      if (!cells.has(key)) cells.set(key, { actor, destination, rowIds: [] });
       cells.get(key)!.rowIds.push(c.id);
     }
   }
@@ -583,9 +654,17 @@ export function capitalFlows(all: readonly FinancialCommitment[] = getAllFinanci
 // --- Stage response map: capital and controls at the same material and stage -----------------
 
 export type ResponseCell = {
-  /** Government-provided committed rows and funding options at this material and stage, packages counted once. */
+  /** Government-provided commitments at this material and stage that have not ended, packages counted once. */
   capitalIds: string[];
   capitalActors: JurisdictionCode[];
+  /**
+   * Funding options at this material and stage: a right to call on money, listed apart from the commitments
+   * above because an option is not an exercise. An exercise is a commitment and is in `capitalIds`.
+   */
+  optionIds: string[];
+  optionActors: JurisdictionCode[];
+  /** Withdrawn or lapsed government rows aimed here: listed, and not capital, backing or an option. */
+  endedIds: string[];
   /** Control clauses whose covered items sit at this material and stage, by issuer. */
   controlIds: string[];
   controlsByIssuer: Partial<Record<JurisdictionCode, string[]>>;
@@ -601,7 +680,9 @@ export type ResponseCell = {
  * the projects designated there, and the control clauses whose covered items
  * sit there. Record counts only, never money; a designation is standing, not
  * capital; and a control's stage is where its items belong, not a claim that
- * the clause restricts that stage.
+ * the clause restricts that stage. Capital is commitments that have not ended;
+ * funding options and ended rows are kept apart, so an unexercised option never
+ * reads as money aimed at a stage and ended money never reads as still backing it.
  */
 export function stageResponseMap(asOf: string, all: readonly FinancialCommitment[] = getAllFinancialCommitments(), controls: readonly ControlMeasure[] = getAllControlMeasures()) {
   const out = new Map<string, Map<SupplyChainStage, ResponseCell>>();
@@ -609,17 +690,39 @@ export function stageResponseMap(asOf: string, all: readonly FinancialCommitment
     if (!out.has(mat)) out.set(mat, new Map());
     const row = out.get(mat)!;
     if (!row.has(stage))
-      row.set(stage, { capitalIds: [], capitalActors: [], controlIds: [], controlsByIssuer: {}, controlStatuses: {}, designationIds: [], designationActors: [] });
+      row.set(stage, {
+        capitalIds: [],
+        capitalActors: [],
+        optionIds: [],
+        optionActors: [],
+        endedIds: [],
+        controlIds: [],
+        controlsByIssuer: {},
+        controlStatuses: {},
+        designationIds: [],
+        designationActors: [],
+      });
     return row.get(stage)!;
   };
+  const byId = byIdOf(all);
+  // Ended rows are listed here too, so a part folds only into a package that is placed as capital or an option.
+  const isPlaced = (c: FinancialCommitment) => !!c.providerJurisdiction && ["commitment", "funding_option"].includes(c.valueRole);
+  const isStanding = (c: FinancialCommitment) => isPlaced(c) && !isEnded(c);
   for (const c of all) {
-    if (!c.providerJurisdiction || !["commitment", "funding_option"].includes(c.valueRole)) continue;
-    if (c.relationships.some((r) => r.relationship === "part_of")) continue;
+    if (!isPlaced(c)) continue;
+    if (isFoldedPart(c, byId, isStanding)) continue;
+    const actor = c.providerJurisdiction!;
     for (const mat of c.materialIds)
       for (const stage of new Set(c.stages)) {
         const x = cell(mat, stage);
-        x.capitalIds.push(c.id);
-        if (!x.capitalActors.includes(c.providerJurisdiction)) x.capitalActors.push(c.providerJurisdiction);
+        if (isEnded(c)) x.endedIds.push(c.id);
+        else if (c.valueRole === "funding_option") {
+          x.optionIds.push(c.id);
+          if (!x.optionActors.includes(actor)) x.optionActors.push(actor);
+        } else {
+          x.capitalIds.push(c.id);
+          if (!x.capitalActors.includes(actor)) x.capitalActors.push(actor);
+        }
       }
   }
   for (const m of controls) {
@@ -646,6 +749,7 @@ export function stageResponseMap(asOf: string, all: readonly FinancialCommitment
   for (const row of out.values())
     for (const x of row.values()) {
       x.capitalActors.sort(byCodePoint);
+      x.optionActors.sort(byCodePoint);
       x.designationActors.sort(byCodePoint);
     }
   return out;

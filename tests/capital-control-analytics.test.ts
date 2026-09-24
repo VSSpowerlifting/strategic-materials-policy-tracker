@@ -12,6 +12,7 @@ import {
   formatDecimalCompact,
   instrumentChronology,
   materialInterplay,
+  legalStanding,
   optionState,
   publicCommitmentRows,
   shortInstrumentLabel,
@@ -35,7 +36,7 @@ import {
   getSourceById,
 } from "@/lib/data";
 import { site } from "@/lib/site";
-import { CONTROL_MEASURE_TYPES } from "@/lib/types";
+import { CONTROL_MEASURE_TYPES, FINANCIAL_STATUSES } from "@/lib/types";
 import type { ControlMeasure, FinancialCommitment } from "@/lib/types";
 import type { CurrencyTotal, InstrumentSum } from "@/lib/capital-control";
 
@@ -506,7 +507,7 @@ test("every financial row lands in exactly one bucket of the summary", () => {
   const all = getAllFinancialCommitments();
   const t = totalCommitments(publicCommitmentRows(all), all);
   const buckets: [string, string[]][] = [
-    ["public commitments", [...t.currencies.flatMap((c) => [...c.countedIds, ...c.nestedIds]), ...t.unquantifiedIds]],
+    ["public commitments", [...t.currencies.flatMap((c) => [...c.countedIds, ...c.nestedIds]), ...t.unquantifiedIds, ...t.statusNotStatedIds, ...t.endedIds]],
     ["envelopes", s.capital.envelopesListedNotSummed.map((r) => r.id)],
     ["options", s.capital.fundingOptionsListedNotSummed.map((r) => r.id)],
     ["kept apart", s.capital.keptApartFromPublicSupport.map((r) => r.id)],
@@ -535,6 +536,106 @@ test("a negotiation mandate is not a control measure: Proclamation 11001 stays a
   const concluded = inv.statusHistory.at(-1)!;
   assert.equal(concluded.status, "concluded");
   assert.equal(concluded.sourceId, "src-fedreg-proc-11001");
+});
+
+const usd = (value: string) => ({ value, currency: "USD", qualifier: "exact" as const, amountAsStated: value, currencyBasis: "stated" as const });
+const history = (...statuses: FinancialCommitment["financialStatusHistory"][number]["status"][]) =>
+  statuses.map((status, i) => ({ status, date: `2025-0${i + 1}-01`, sourceId: "s" }));
+
+test("an ended or otherwise ineligible package never suppresses a part that still stands", () => {
+  // An ended package: its parts are the money that still stands, each counted once.
+  const ended = fin("pkg", { amount: usd("300"), financialStatusHistory: history("announced", "withdrawn") });
+  const a = part("a", "pkg", "100");
+  const b = part("b", "pkg", "200");
+  let all = [ended, a, b];
+  let t = totalCommitments(all, all);
+  assert.deepEqual(t.endedIds, ["pkg"]);
+  const cur = t.currencies[0];
+  assert.deepEqual([cur.countedIds, cur.nestedIds], [["a", "b"], []]);
+  assert.deepEqual(sole(cur).byQualifier, { exact: "300" });
+
+  // A package whose status is not stated is not counted, so it does not hide its parts either.
+  const unknown = fin("pkg", { amount: usd("300"), financialStatusHistory: history("not_stated") });
+  all = [unknown, a, b];
+  t = totalCommitments(all, all);
+  assert.deepEqual(t.statusNotStatedIds, ["pkg"]);
+  assert.deepEqual(t.currencies[0].countedIds, ["a", "b"]);
+
+  // A package with no amount is listed, not valued, and hides nothing.
+  const amountless = fin("pkg", { amount: null });
+  all = [amountless, a, b];
+  t = totalCommitments(all, all);
+  assert.deepEqual(t.unquantifiedIds, ["pkg"]);
+  assert.deepEqual(t.currencies[0].countedIds, ["a", "b"]);
+
+  // A package that is itself counted still keeps its parts out, unchanged.
+  const live = fin("pkg", { amount: usd("300") });
+  all = [live, a, b];
+  t = totalCommitments(all, all);
+  assert.deepEqual([t.currencies[0].countedIds, t.currencies[0].nestedIds], [["pkg"], ["a", "b"]]);
+  assert.deepEqual(sole(t.currencies[0]).byQualifier, { exact: "300" });
+});
+
+test("an ineligible middle ancestor does not break the chain to an eligible grandparent", () => {
+  const grand = fin("grand", { amount: usd("500") });
+  const middle = part("middle", "grand", "300", { financialStatusHistory: history("announced", "lapsed") });
+  const child = part("child", "middle", "100");
+  const all = [grand, middle, child];
+  const t = totalCommitments(all, all);
+  const cur = t.currencies[0];
+  assert.deepEqual(t.endedIds, ["middle"]);
+  assert.deepEqual([cur.countedIds, cur.nestedIds], [["grand"], ["child"]], "the child is inside the grandparent's figure");
+  assert.deepEqual(sole(cur).byQualifier, { exact: "500" });
+});
+
+test("a status the source does not give is neither binding nor not yet binding, and is never summed", () => {
+  const bound = fin("bound", { amount: usd("100"), financialStatusHistory: history("contracted") });
+  const pending = fin("pending", { amount: usd("40"), financialStatusHistory: history("announced") });
+  const unknown = fin("unknown", { amount: usd("7"), financialStatusHistory: history("not_stated") });
+  const all = [bound, pending, unknown];
+  const t = totalCommitments(all, all);
+  assert.deepEqual(t.statusNotStatedIds, ["unknown"]);
+  const inst = sole(t.currencies[0]);
+  assert.deepEqual(t.currencies[0].countedIds, ["bound", "pending"]);
+  assert.deepEqual([inst.binding, inst.notYetBinding], [{ exact: "100" }, { exact: "40" }]);
+  // Nothing of the unknown row's 7 is in any sum.
+  assert.equal(JSON.stringify(t.currencies).includes('"7"'), false);
+  // On its own it yields no currency at all: there is nothing defensible to sum.
+  const alone = totalCommitments([unknown], [unknown]);
+  assert.deepEqual([alone.currencies, alone.statusNotStatedIds], [[], ["unknown"]]);
+  // legalStanding covers every status exactly once, and only the four terms.
+  const standings = FINANCIAL_STATUSES.map((status) => legalStanding(fin("x", { financialStatusHistory: history(status) })));
+  assert.deepEqual([...new Set(standings)].sort(), ["binding", "ended", "not_yet_binding", "status_not_stated"]);
+  assert.deepEqual(
+    FINANCIAL_STATUSES.filter((s) => legalStanding(fin("x", { financialStatusHistory: history(s) })) === "status_not_stated"),
+    ["not_stated"],
+  );
+  // No part of it reaches a binding sum through the back door: the corpus's own not-stated row is listed apart.
+  const corpus = totalCommitments(publicCommitmentRows(), getAllFinancialCommitments());
+  assert.ok(corpus.statusNotStatedIds.includes("fin-ca-g7-2025-nmg-canada-growth-fund"));
+  for (const cur of corpus.currencies) for (const i of cur.instruments ?? []) assert.ok(!i.countedIds.includes("fin-ca-g7-2025-nmg-canada-growth-fund"));
+});
+
+test("a draw from an option that has ended is not an exercise, and the summary lists it apart", () => {
+  const opt = fin("opt", { valueRole: "funding_option", amount: usd("350"), financialStatusHistory: history("contracted") });
+  const draw = (id: string, ...statuses: Parameters<typeof history>) =>
+    fin(id, { amount: usd("50"), relationships: [{ commitmentId: "opt", relationship: "drawn_from", sourceId: "s" }], financialStatusHistory: history(...statuses) });
+  const dead = draw("dead", "announced", "withdrawn");
+  let s = optionState(opt, [opt, dead]);
+  assert.deepEqual([s.exercises, s.disbursements].map((l) => l.map((e) => e.id)), [[], []], "a withdrawn draw is not an exercise");
+  assert.deepEqual(s.endedExercises.map((e) => e.id), ["dead"]);
+  const live = draw("live", "contracted", "partially_disbursed");
+  s = optionState(opt, [opt, dead, live]);
+  assert.deepEqual(s.exercises.map((e) => e.id), ["live"]);
+  assert.deepEqual(s.disbursements.map((e) => e.id), ["live"]);
+  assert.deepEqual(s.endedExercises.map((e) => e.id), ["dead"]);
+  // The corpus option has no recorded draw of either kind, and the summary says so in its own field.
+  const summary = buildCapitalControlSummary();
+  const corpusOption = summary.capital.fundingOptionsListedNotSummed.find((r) => r.id === OPTION)!;
+  assert.deepEqual([corpusOption.exercisesRecorded, corpusOption.exercisesEnded], [[], []]);
+  assert.ok(summary.countingRules.some((r) => r.includes("not_stated")));
+  assert.ok(summary.countingRules.some((r) => r.includes("ended draw")));
+  assert.ok(Array.isArray(summary.capital.publicCommitmentsStatusNotStated));
 });
 
 test("a withdrawn or lapsed commitment is listed as ended and never summed", () => {

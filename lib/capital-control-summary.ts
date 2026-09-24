@@ -47,12 +47,16 @@ export function buildCapitalControlSummary() {
       "Sums are kept apart by qualifier: exact, approximately, at least, up to.",
       "Binding money (contracted, partially disbursed, disbursed) is summed apart from money not yet binding (announced, authorized, allocated, decided).",
       "A commitment whose current status is withdrawn or lapsed is left out of every sum and listed as ended.",
+      "A commitment with an amount whose current status is \"not_stated\" is neither binding nor not yet binding: it is left out of every sum and listed as status not stated, the same rule as an instrument the source does not name.",
+      "Only a row that is itself counted keeps its parts out of a sum: an ended, status-not-stated or amountless package does not hide the parts that are still standing.",
+      "A commitment drawn from a funding option that has ended is not an exercise: it is listed under the option as an ended draw, and only a draw that has not ended reads as an exercise.",
     ],
     capital: {
       rows: all.length,
       publicCommitmentTotals: totals.currencies,
       publicCommitmentsWithoutAmount: totals.unquantifiedIds,
       publicCommitmentsEnded: totals.endedIds,
+      publicCommitmentsStatusNotStated: totals.statusNotStatedIds,
       publicCapitalSources: PUBLIC_CAPITAL_SOURCES,
       envelopesListedNotSummed: listed([...LISTED_NOT_SUMMED_ROLES]),
       fundingOptionsListedNotSummed: all
@@ -66,6 +70,7 @@ export function buildCapitalControlSummary() {
             amount: c.amount,
             agreementExecuted: s.executed ? { date: s.executed.date, sourceId: s.executed.sourceId } : null,
             exercisesRecorded: s.exercises.map((e) => e.id),
+            exercisesEnded: s.endedExercises.map((e) => e.id),
             disbursementsRecorded: s.disbursements.map((e) => e.id),
           };
         }),

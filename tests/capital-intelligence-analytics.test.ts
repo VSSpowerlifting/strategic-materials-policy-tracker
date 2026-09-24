@@ -24,7 +24,7 @@ import {
   stageResponseMap,
 } from "@/lib/capital-intelligence";
 import { buildCapitalIntelligenceSummary } from "@/lib/capital-intelligence-summary";
-import { totalCommitments } from "@/lib/capital-control";
+import { isEnded, totalCommitments } from "@/lib/capital-control";
 import {
   getAllFinancialCommitments,
   getAllOrganizations,
@@ -224,7 +224,12 @@ test("co-investment is classed by who provides the capital, and counts no envelo
   const byProject = new Map(coInvestments().map((c) => [c.project.id, c]));
   assert.deepEqual(byProject.get("prj-au-alcoa-sojitz-gallium")?.kinds, ["cross_government"]);
   assert.deepEqual(byProject.get("prj-au-alcoa-sojitz-gallium")?.governments, ["australia", "us"]);
-  assert.deepEqual(byProject.get("prj-us-mp-10x-facility")?.kinds, ["public_and_private"]);
+  // The 10X facility carries a US offtake and the banks' commitment letter, which lapsed undrawn on 2025-08-26:
+  // ended money no longer backs the project, so it is not public-and-private co-investment.
+  assert.ok(!byProject.has("prj-us-mp-10x-facility"), "a lapsed private letter beside one public row is not co-investment");
+  const tenX = projectStack("prj-us-mp-10x-facility")!;
+  assert.deepEqual(tenX.governments, ["us"]);
+  assert.ok(tenX.rows.some((c) => c.id === "fin-us-dod-mp-2025-bank-financing"), "the lapsed letter stays listed in the stack");
   // Hemerdon: NWF and the UK Government provide capital; the EU recognizes it as a Strategic Project.
   assert.deepEqual(byProject.get("prj-gb-hemerdon")?.kinds, ["several_public_bodies", "capital_and_designation"]);
   assert.deepEqual(byProject.get("prj-gb-hemerdon")?.governments, ["uk"]);
@@ -389,4 +394,178 @@ test("the response map places designations beside capital and controls without c
   assert.ok(separation?.designationIds.includes("dsg-eu-crma-pulawy"));
   assert.deepEqual(separation?.designationActors, ["eu"]);
   for (const row of map.values()) for (const cell of row.values()) for (const id of cell.capitalIds) assert.ok(id.startsWith("fin-"));
+});
+
+// --- Ended rows and unexercised options in the derived views ---------------------------------
+
+const usd = (value: string) => ({ value, currency: "USD", qualifier: "exact" as const, amountAsStated: value, currencyBasis: "stated" as const });
+const history = (...statuses: FinancialCommitment["financialStatusHistory"][number]["status"][]) =>
+  statuses.map((status, i) => ({ status, date: `2025-0${i + 1}-01`, sourceId: "s" }));
+const partOf = (of: string) => [{ commitmentId: of, relationship: "part_of" as const, sourceId: "s" }];
+const ids = (list: readonly { id: string }[]) => list.map((c) => c.id);
+
+test("co-investment and a project's backers leave out ended rows and unexercised options, and list them apart", () => {
+  const project = "prj-au-alcoa-sojitz-gallium";
+  const us = fin("us", { projectId: project, financialStatusHistory: history("contracted") });
+  const auLive = fin("au", { providerJurisdiction: "australia", projectId: project });
+  const auEnded = fin("au-ended", { providerJurisdiction: "australia", projectId: project, financialStatusHistory: history("announced", "withdrawn") });
+  const auOption = fin("au-option", { providerJurisdiction: "australia", projectId: project, valueRole: "funding_option", financialStatusHistory: history("contracted") });
+  const bank = fin("bank", { providerJurisdiction: null, capitalSource: "private", valueRole: "private_financing", projectId: project });
+  const bankLapsed = fin("bank-lapsed", { providerJurisdiction: null, capitalSource: "private", valueRole: "private_financing", projectId: project, financialStatusHistory: history("decided", "lapsed") });
+  const find = (all: FinancialCommitment[]) => coInvestments(all).find((c) => c.project.id === project);
+
+  // Two governments, one of which has withdrawn: one government stands behind the project.
+  assert.equal(find([us, auEnded]), undefined);
+  assert.deepEqual(projectStack(project, [us, auEnded])!.governments, ["us"]);
+  // An option beside one government's capital is not a second provider.
+  assert.equal(find([us, auOption]), undefined);
+  assert.deepEqual(projectStack(project, [us, auOption])!.governments, ["us"]);
+  // The same rows once live are co-investment.
+  assert.deepEqual(find([us, auLive])!.kinds, ["cross_government"]);
+  // A lapsed private letter is not private co-investment.
+  assert.equal(find([us, bankLapsed]), undefined);
+  assert.deepEqual(find([us, bank])!.kinds, ["public_and_private"]);
+
+  // With everything present, the kinds rest on what stands and the rest is listed under its own field.
+  const co = find([us, bank, auEnded, auOption, bankLapsed])!;
+  assert.deepEqual(co.kinds, ["public_and_private"]);
+  assert.deepEqual(co.governments, ["us"]);
+  assert.deepEqual(co.rowIds, ["us", "bank"]);
+  assert.deepEqual(co.optionIds, ["au-option"]);
+  assert.deepEqual(co.endedIds, ["au-ended", "bank-lapsed"]);
+  // Every row of the stack is still there, with its status.
+  assert.deepEqual(ids(projectStack(project, [us, bank, auEnded, auOption, bankLapsed])!.rows), ["us", "bank", "au-ended", "au-option", "bank-lapsed"]);
+
+  // A designation beside capital that has ended, or beside an option, is not capital and designation.
+  const hemerdon = "prj-gb-hemerdon";
+  const uk = (over: Partial<FinancialCommitment>) => fin("uk", { providerJurisdiction: "uk", projectId: hemerdon, ...over });
+  const capitalAndDesignation = (row: FinancialCommitment) => coInvestments([row]).find((c) => c.project.id === hemerdon)?.kinds.includes("capital_and_designation") ?? false;
+  assert.equal(capitalAndDesignation(uk({})), true);
+  assert.equal(capitalAndDesignation(uk({ financialStatusHistory: history("announced", "withdrawn") })), false);
+  assert.equal(capitalAndDesignation(uk({ valueRole: "funding_option" })), false);
+  assert.equal(designationPortfolio("eu", [uk({})]).counts.projectsWithCapital >= 1, true);
+  const withoutBacking = designationPortfolio("eu", [uk({ valueRole: "funding_option" }), uk({ financialStatusHistory: history("announced", "lapsed") })]);
+  assert.equal(withoutBacking.counts.projectsWithCapital, designationPortfolio("eu", []).counts.projectsWithCapital);
+});
+
+test("a portfolio counts what has not ended once, keeps ended rows and options apart, and never reads a missing status as not yet binding", () => {
+  const at = (cc: string) => [{ countryCode: cc, subnational: null, asStated: cc }];
+  const common = { locations: at("US"), stages: ["processing" as const], materialIds: ["test-material"] };
+  const pkg = fin("pkg", { ...common, amount: usd("100"), financialStatusHistory: history("contracted") });
+  const pkgPart = fin("pkg-part", { ...common, amount: usd("60"), relationships: partOf("pkg"), financialStatusHistory: history("contracted") });
+  const endedPkg = fin("ended-pkg", { ...common, amount: usd("300"), financialStatusHistory: history("announced", "withdrawn") });
+  const standing = fin("standing", { ...common, amount: usd("120"), relationships: partOf("ended-pkg") });
+  const unknown = fin("unknown", { ...common, amount: usd("7"), financialStatusHistory: history("not_stated") });
+  const option = fin("option", { ...common, valueRole: "funding_option", amount: usd("350"), financialStatusHistory: history("contracted") });
+  const dead = fin("dead", { ...common, amount: usd("9"), financialStatusHistory: history("decided", "lapsed") });
+  const all = [pkg, pkgPart, endedPkg, standing, unknown, option, dead];
+  const p = actorPortfolio("us", all);
+
+  // A part folds into a package that stands; a part of an ended package is a row of its own.
+  assert.equal(p.counts.rows, 4, "pkg (with its part), standing, unknown, and the option's layer");
+  assert.equal(p.counts.ended, 2, "the ended package and the lapsed row");
+  assert.deepEqual(
+    [p.counts.committedBinding, p.counts.committedNotYetBinding, p.counts.committedStatusNotStated, p.counts.committedEnded],
+    [1, 1, 1, 2],
+  );
+  assert.equal(p.counts.byLayer.funding_option, 1);
+  assert.equal(p.counts.byLayer.public_commitment, 3);
+  // An option is counted in its own layer only, never as the instrument, stage or material it would fund.
+  assert.deepEqual(p.counts.byInstrument, { grant: 3 });
+  assert.equal(p.counts.byStage.processing, 3);
+  assert.equal(p.counts.byMaterial["test-material"], 3);
+  assert.equal(p.counts.byGeography.domestic, 3);
+  // Money: the standing part and the package are summed; the rest is listed as ended or apart.
+  assert.deepEqual(p.publicTotals.endedIds.sort(), ["dead", "ended-pkg"]);
+  assert.deepEqual(p.publicTotals.statusNotStatedIds, ["unknown"]);
+  const cur = p.publicTotals.currencies[0];
+  assert.deepEqual([cur.countedIds.sort(), cur.nestedIds], [["pkg", "standing"], ["pkg-part"]]);
+  assert.deepEqual((cur.status === "summed" ? cur.instruments[0].binding : null), { exact: "100" });
+  assert.deepEqual((cur.status === "summed" ? cur.instruments[0].notYetBinding : null), { exact: "120" });
+
+  // Flows: ended rows and options are no flow, and a standing part of an ended package is one.
+  const flows = capitalFlows(all).filter((f) => f.actor === "us");
+  assert.deepEqual(flows.map((f) => f.destination), ["US"]);
+  assert.deepEqual(flows[0].rowIds.sort(), ["pkg", "standing", "unknown"]);
+
+  // Response map: capital, options and ended rows sit in their own fields of one cell.
+  const cell = stageResponseMap(site.lastUpdated, all, []).get("test-material")!.get("processing")!;
+  assert.deepEqual(cell.capitalIds.sort(), ["pkg", "standing", "unknown"]);
+  assert.deepEqual(cell.optionIds, ["option"]);
+  assert.deepEqual(cell.endedIds.sort(), ["dead", "ended-pkg"]);
+  assert.deepEqual([cell.capitalActors, cell.optionActors], [["us"], ["us"]]);
+  assert.ok(![...cell.capitalIds].includes("option"));
+  assert.ok(all.filter(isEnded).every((c) => !cell.capitalIds.includes(c.id)));
+});
+
+test("in the corpus, the unexercised option is listed as an option and the lapsed letter backs nothing", () => {
+  const OPTION = "fin-us-dod-mp-2025-additional-preferred-option";
+  const map = stageResponseMap(site.lastUpdated);
+  const seenAs = { capital: 0, option: 0 };
+  // The corpus option codes no stage, so the map (which is by stage) never places it; a staged option is
+  // placed as an option by the fixture test above.
+  for (const row of map.values())
+    for (const cell of row.values()) {
+      if (cell.capitalIds.includes(OPTION)) seenAs.capital++;
+      if (cell.optionIds.includes(OPTION)) seenAs.option++;
+      for (const id of cell.capitalIds) assert.ok(!isEnded(getFinancialCommitmentById(id)!), `${id} has ended and is shown as capital`);
+      for (const id of cell.endedIds) assert.ok(isEnded(getFinancialCommitmentById(id)!), `${id} is listed as ended but has not ended`);
+    }
+  assert.equal(seenAs.capital, 0, "an option is never a commitment in the response map");
+  assert.equal(seenAs.option, 0, "the option has no stage to be placed at");
+  // The US portfolio counts the option in its own layer and leaves it out of every other count.
+  const us = actorPortfolio("us");
+  assert.ok(us.counts.byLayer.funding_option >= 1);
+  // The summary API says the same in named fields.
+  const summary = buildCapitalIntelligenceSummary();
+  const cells = summary.stageResponseMap.flatMap((m) => m.stages);
+  assert.ok(cells.every((c) => Array.isArray(c.fundingOptionIds) && Array.isArray(c.endedRowIds)));
+  assert.ok(cells.every((c) => !c.capitalIds.includes(OPTION)));
+  assert.ok(summary.coInvestment.every((c) => Array.isArray(c.fundingOptionIds) && Array.isArray(c.endedRowIds)));
+  assert.ok(summary.portfolios.every((x) => typeof x.counts.committedStatusNotStated === "number" && typeof x.counts.ended === "number"));
+  assert.ok(summary.countingRules.some((r) => r.includes("funding option is listed as an option")));
+  assert.ok(summary.countingRules.some((r) => r.includes("not_stated")));
+});
+
+test("a commitment under an envelope is still a commitment: no view folds a part into a package it does not count", () => {
+  const at = [{ countryCode: "AU", subnational: null, asStated: "AU" }];
+  const envelope = fin("envelope", {
+    providerJurisdiction: "australia",
+    valueRole: "program_envelope",
+    amount: usd("5000"),
+    stages: ["processing"],
+    materialIds: ["test-material"],
+    financialStatusHistory: history("announced"),
+  });
+  const equity = fin("equity", {
+    providerJurisdiction: "australia",
+    instrument: "equity",
+    amount: usd("50"),
+    relationships: partOf("envelope"),
+    locations: at,
+    stages: ["processing"],
+    materialIds: ["test-material"],
+    financialStatusHistory: history("contracted"),
+  });
+  const all = [envelope, equity];
+
+  // The envelope is a ceiling, not a flow and not capital aimed at a stage, so it hides nothing.
+  assert.deepEqual(capitalFlows(all).map((f) => [f.actor, f.destination, f.rowIds]), [["australia", "AU", ["equity"]]]);
+  const cell = stageResponseMap(site.lastUpdated, all, []).get("test-material")!.get("processing")!;
+  assert.deepEqual([cell.capitalIds, cell.optionIds, cell.endedIds], [["equity"], [], []]);
+  // The portfolio counts the commitment in its own layer beside the envelope, matching its summed money.
+  const p = actorPortfolio("australia", all);
+  assert.equal(p.counts.byLayer.public_commitment, 1);
+  assert.equal(p.counts.byLayer.envelope, 1);
+  assert.equal(p.counts.committedBinding, 1);
+  assert.deepEqual(p.publicTotals.currencies[0].countedIds, ["equity"]);
+  // A part of another actor's package, or of a package that is not capital at all, is not hidden either.
+  const foreign = fin("foreign", { providerJurisdiction: "us", relationships: partOf("equity"), amount: usd("5"), locations: at });
+  assert.deepEqual(capitalFlows([envelope, equity, foreign]).map((f) => f.actor).sort(), ["australia", "us"]);
+  const privatePkg = fin("private-pkg", { providerJurisdiction: null, capitalSource: "private", valueRole: "private_financing" });
+  const underPrivate = fin("under-private", { relationships: partOf("private-pkg"), locations: [{ countryCode: "US", subnational: null, asStated: "US" }] });
+  assert.deepEqual(capitalFlows([privatePkg, underPrivate]).map((f) => f.rowIds), [["under-private"]]);
+  // The corpus's two Australian equity stakes under the US-Australia financing envelope are in the flows again.
+  const flows = capitalFlows();
+  for (const id of ["fin-au-alcoa-sojitz-gallium-2025-equity", "fin-au-arafura-nolans-2025-equity"]) assert.ok(flows.some((f) => f.rowIds.includes(id)), `${id} is missing from the flows`);
 });
