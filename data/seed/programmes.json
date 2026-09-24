@@ -1,1 +1,204 @@
-[]
+[
+  {
+    "id": "prg-au-cmf",
+    "name": "Critical Minerals Facility",
+    "nameOriginal": null,
+    "actor": "australia",
+    "kind": "financing_facility",
+    "administeringOrgIds": [],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on Reserve funding",
+        "note": "\"the expanded $5 billion Critical Minerals Facility, which provides government-backed loans and equity support for projects\""
+      }
+    ],
+    "notes": "The release does not name the body that administers the Facility, so none is recorded."
+  },
+  {
+    "id": "prg-au-cmpti",
+    "name": "Critical Minerals Production Tax Incentive",
+    "nameOriginal": null,
+    "actor": "australia",
+    "kind": "tax_incentive",
+    "administeringOrgIds": [],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "Future Made in Australia (Production Tax Credits and Other Measures) Act 2025, Schedule 2, inserting Division 419 into the Income Tax Assessment Act 1997",
+    "evidence": [
+      {
+        "sourceId": "src-legislation-au-cmpti-2025",
+        "supports": [
+          "name",
+          "kind",
+          "administrators",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Schedule 2 heading; s 419-5",
+        "note": "\"Schedule 2—Critical minerals production tax incentive\"; a refundable tax offset for registered processing activities."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prg-au-cmsr",
+    "name": "Critical Minerals Strategic Reserve",
+    "nameOriginal": null,
+    "actor": "australia",
+    "kind": "strategic_reserve",
+    "administeringOrgIds": [
+      "org-au-disr"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "First and seventh to ninth paragraphs",
+        "note": "\"The Reserve will operate by securing rights to minerals produced in Australia and on-selling those rights\"; \"Future transactions under the Reserve will be led out of the Department of Industry, Science and Resources, in close partnership with Export Finance Australia.\""
+      }
+    ],
+    "notes": "Export Finance Australia's partnership role is kept in this note; it has no registry record until a cited source states what kind of body it is."
+  },
+  {
+    "id": "prg-ca-cmrdd",
+    "name": "Critical Minerals Research, Development and Demonstration (CMRDD) program",
+    "nameOriginal": null,
+    "actor": "canada",
+    "kind": "grant_programme",
+    "administeringOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "parentProgrammeId": "prg-ca-cms",
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "name",
+          "administrators",
+          "parent"
+        ],
+        "evidence": "explicit",
+        "locator": "Quick facts",
+        "note": "\"Funding for these projects comes from NRCan’s Critical Minerals Research, Development and Demonstration Program (CMRDD). The CMRDD is part of the Canadian Critical Minerals Strategy\""
+      },
+      {
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "supports": [
+          "kind"
+        ],
+        "evidence": "ambiguous",
+        "locator": "\"CMRDD is administered through 2 funding streams\"",
+        "note": "One stream funds federal laboratories' research and development, the other is contribution funding to outside projects. The page does not say here whether contributions are repayable."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prg-ca-cms",
+    "name": "Canadian Critical Minerals Strategy (Budget 2022 funding)",
+    "nameOriginal": null,
+    "actor": "canada",
+    "kind": "multi_instrument",
+    "administeringOrgIds": [],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cms-2022",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph",
+        "note": "\"from geoscience and exploration to mineral processing, manufacturing and recycling applications, including support for research, development and technological deployment\""
+      },
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "name"
+        ],
+        "evidence": "explicit",
+        "locator": "Quick facts",
+        "note": "\"Budget 2022 provided $3.8 billion over eight years to implement the Canadian Critical Minerals Strategy.\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prg-in-ncmm",
+    "name": "National Critical Mineral Mission",
+    "nameOriginal": null,
+    "actor": "india",
+    "kind": "multi_instrument",
+    "administeringOrgIds": [],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-pib-ncmm-2025",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Title and paragraphs 1–4",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prg-us-osc-critical-minerals-lending",
+    "name": "Office of Strategic Capital critical-minerals lending (One Big Beautiful Bill Act)",
+    "nameOriginal": null,
+    "actor": "us",
+    "kind": "financing_facility",
+    "administeringOrgIds": [
+      "org-us-osc"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "One Big Beautiful Bill Act",
+    "evidence": [
+      {
+        "sourceId": "src-osc-mp-loan-2025",
+        "supports": [
+          "kind",
+          "administrators",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": "\"The bill provides OSC with $500 million of credit subsidy funding, creating up to $100 billion in available loan funds specifically for critical minerals production and related industries and projects.\""
+      },
+      {
+        "sourceId": "src-osc-mp-loan-2025",
+        "supports": [
+          "name"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Third paragraph",
+        "note": "A descriptive name: the sources give this lending no programme title."
+      }
+    ],
+    "notes": null
+  }
+]

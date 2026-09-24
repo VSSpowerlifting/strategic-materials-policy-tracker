@@ -23,13 +23,15 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Alcoa-Sojitz Gallium Recovery Project",
     "recipientOrgIds": [],
     "project": "Gallium recovery at the Alcoa-Sojitz project",
-    "projectId": null,
+    "projectId": "prj-au-alcoa-sojitz-gallium",
     "facility": null,
     "locations": [
       {
@@ -121,13 +123,15 @@
     "amount": null,
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Alcoa-Sojitz Gallium Recovery Project",
     "recipientOrgIds": [],
     "project": "Gallium recovery at the Alcoa-Sojitz project",
-    "projectId": null,
+    "projectId": "prj-au-alcoa-sojitz-gallium",
     "facility": null,
     "locations": [
       {
@@ -210,13 +214,15 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Arafura Nolans project",
     "recipientOrgIds": [],
     "project": "Nolans rare earths project",
-    "projectId": null,
+    "projectId": "prj-au-nolans",
     "facility": null,
     "locations": [
       {
@@ -303,9 +309,11 @@
     },
     "provider": "Australian Government (Critical Minerals Facility)",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-au-cmf",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -336,7 +344,8 @@
           "value_role",
           "capital_source",
           "amount",
-          "provider"
+          "provider",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Reserve funding",
@@ -364,9 +373,11 @@
     "amount": null,
     "provider": "Commonwealth of Australia (refundable tax offset)",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": "Future Made in Australia (Production Tax Credits and Other Measures) Act 2025 (Act No. 9 of 2025), Schedule 2, inserting Division 419 into the Income Tax Assessment Act 1997",
-    "programmeId": null,
+    "programmeId": "prg-au-cmpti",
     "recipient": "Constitutional corporations with registered CMPTI processing activities",
     "recipientOrgIds": [],
     "project": null,
@@ -481,7 +492,8 @@
           "stages",
           "materials",
           "status",
-          "terms"
+          "terms",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Schedule 2, ss 419-5, 419-10, 419-15, 419-20 (pp. 36–39 of the authorised PDF)",
@@ -506,9 +518,11 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-au-cmsr",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -545,7 +559,8 @@
           "amount",
           "provider",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Opening paragraph; paragraphs on first minerals and operation",
@@ -578,9 +593,11 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-au-cmsr",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -615,7 +632,8 @@
           "provider",
           "relationships",
           "stages",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Reserve funding",
@@ -664,9 +682,11 @@
     },
     "provider": "Australian Government (Department of Industry, Science and Resources, with Export Finance Australia)",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-disr"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-au-cmf",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -699,7 +719,8 @@
           "amount",
           "provider",
           "relationships",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraphs on Reserve funding and delivery",
@@ -724,21 +745,25 @@
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
-      "value": "4900000",
+      "value": "4893125",
       "currency": "CAD",
       "qualifier": "exact",
-      "amountAsStated": "Natural Resources Canada (NRCan) is providing $4.9 million to Cyclic Materials for this initiative",
+      "amountAsStated": "Amount funded: $4,893,125",
       "currencyBasis": "issuer_context"
     },
     "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
     "providerJurisdiction": "canada",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-ca-cmrdd",
     "recipient": "Cyclic Materials Incorporated",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
     "project": "Demonstration plant producing high-purity mixed rare earth oxide and a cobalt–nickel mixed hydroxide product from recycled materials",
-    "projectId": null,
+    "projectId": "prj-ca-cyclic-kingston-demonstration-plant",
     "facility": null,
     "locations": [],
     "stages": [
@@ -771,21 +796,30 @@
           "instrument",
           "value_role",
           "capital_source",
-          "amount",
           "provider",
           "recipient",
           "project",
           "relationships",
           "stages",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Cyclic Materials",
         "note": null
+      },
+      {
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "supports": [
+          "amount"
+        ],
+        "evidence": "explicit",
+        "locator": "Funded Projects: \"Kingston Demonstration Plant – Extended Operations\"",
+        "note": "The programme page lists the exact amount funded; the 2024 release rounds it to \"$4.9 million\". Currency read from the issuing government (a Canadian federal page printing \"$\")."
       }
     ],
-    "notes": "The release calls the funding an investment and does not name the instrument."
+    "notes": "The release calls the funding an investment and does not name the instrument. The 4 September 2024 release states \"NRCan is providing $4.9 million to Cyclic Materials\"; the CMRDD programme page lists the same project with \"Amount funded: $4,893,125\", recorded here as the exact figure."
   },
   {
     "id": "fin-ca-cmrdd-2024-green-graphite",
@@ -811,13 +845,17 @@
     },
     "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
     "providerJurisdiction": "canada",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-ca-cmrdd",
     "recipient": "Green Graphite Technologies Inc.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-green-graphite-technologies"
+    ],
     "project": "Demonstrating GraphRenew technology to recover graphite from secondary sources and upgrade it to lithium-ion battery-grade graphite",
-    "projectId": null,
+    "projectId": "prj-ca-ggt-graphite-recycling-pilot",
     "facility": null,
     "locations": [],
     "stages": [
@@ -854,7 +892,8 @@
           "relationships",
           "stages",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Green Graphite Technologies",
@@ -887,11 +926,16 @@
     },
     "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
     "providerJurisdiction": "canada",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-ca-cmrdd",
     "recipient": "Cyclic Materials Incorporated and Green Graphite Technologies Inc.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-cyclic-materials",
+      "org-green-graphite-technologies"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -933,7 +977,8 @@
           "relationships",
           "stages",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Opening paragraph; Quick facts",
@@ -958,9 +1003,11 @@
     },
     "provider": "Government of Canada",
     "providerJurisdiction": "canada",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-ca-cms",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -1015,7 +1062,8 @@
           "amount",
           "provider",
           "stages",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Opening paragraph",
@@ -1049,9 +1097,11 @@
     },
     "provider": "Government of India",
     "providerJurisdiction": "india",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-in-government"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-in-ncmm",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -1091,7 +1141,8 @@
           "amount",
           "provider",
           "stages",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraphs 1–4",
@@ -1118,7 +1169,7 @@
     "providerJurisdiction": "india",
     "providerOrgIds": [],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-in-ncmm",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -1148,7 +1199,8 @@
           "instrument",
           "value_role",
           "amount",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph 1",
@@ -1183,11 +1235,15 @@
     },
     "provider": "Japan Australia Rare Earth (JARE), co-founded by Sojitz Corporation and JOGMEC",
     "providerJurisdiction": "japan",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-jare"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Lynas Rare Earths Limited",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-lynas"
+    ],
     "project": "Lynas mid-term growth plan: light rare earths production capacity expansion and heavy rare earths separation commencement",
     "projectId": null,
     "facility": null,
@@ -1243,11 +1299,16 @@
     "amount": null,
     "provider": "Sojitz Corporation and JOGMEC",
     "providerJurisdiction": "japan",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-jp-jogmec",
+      "org-sojitz"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Lynas Rare Earths Limited",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-lynas"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -1320,13 +1381,17 @@
     },
     "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
     "providerJurisdiction": "japan",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "TJ Namibia Rare Earths Corporation (special purpose company established by Toyota Tsusho)",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-tj-namibia-rare-earths"
+    ],
     "project": "Lofdal heavy rare earth development project",
-    "projectId": null,
+    "projectId": "prj-na-lofdal",
     "facility": null,
     "locations": [
       {
@@ -1431,7 +1496,9 @@
     },
     "provider": "Department for Business and Trade",
     "providerJurisdiction": "uk",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-uk-dbt"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": null,
@@ -1492,13 +1559,17 @@
     "amount": null,
     "provider": "UK Government",
     "providerJurisdiction": "uk",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-uk-government"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Tungsten West",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": null,
-    "projectId": null,
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1552,7 +1623,8 @@
           "stages",
           "materials",
           "status",
-          "terms"
+          "terms",
+          "project"
         ],
         "evidence": "explicit",
         "locator": "Third paragraph",
@@ -1585,13 +1657,17 @@
     },
     "provider": "National Wealth Fund",
     "providerJurisdiction": "uk",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-uk-nwf"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Tungsten West",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": "Restart of production at the Hemerdon tungsten and tin mine",
-    "projectId": null,
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1672,13 +1748,17 @@
     },
     "provider": "National Wealth Fund",
     "providerJurisdiction": "uk",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-uk-nwf"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Tungsten West",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": "Restart of production at the Hemerdon tungsten and tin mine",
-    "projectId": null,
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1751,13 +1831,17 @@
     },
     "provider": "National Wealth Fund",
     "providerJurisdiction": "uk",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-uk-nwf"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Tungsten West",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": "Restart of production at the Hemerdon tungsten and tin mine",
-    "projectId": null,
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1847,13 +1931,15 @@
     "amount": null,
     "provider": "United States Government",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-government"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "Alcoa-Sojitz Gallium Recovery Project",
     "recipientOrgIds": [],
     "project": "Gallium recovery at the Alcoa-Sojitz project",
-    "projectId": null,
+    "projectId": "prj-au-alcoa-sojitz-gallium",
     "facility": null,
     "locations": [
       {
@@ -1928,7 +2014,9 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": null,
@@ -2069,7 +2157,9 @@
     },
     "provider": "United States Government",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-government"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": null,
@@ -2153,7 +2243,9 @@
     },
     "provider": "US Department of Commerce, CHIPS Program Office",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
     "legalAuthority": "CHIPS and Science Act",
     "programmeId": null,
     "recipient": null,
@@ -2226,11 +2318,15 @@
     },
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "MP Materials Corp.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -2312,13 +2408,18 @@
     },
     "provider": "JPMorgan Chase Funding Inc. and Goldman Sachs Bank USA",
     "providerJurisdiction": null,
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-goldman-sachs-bank-usa",
+      "org-jpmorgan-chase-funding"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "MP Materials Corp.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
-    "projectId": null,
+    "projectId": "prj-us-mp-10x-facility",
     "facility": "10X Facility",
     "locations": [],
     "stages": [],
@@ -2360,7 +2461,8 @@
           "recipient",
           "facility",
           "status",
-          "terms"
+          "terms",
+          "project"
         ],
         "evidence": "explicit",
         "locator": "Item 1.01, 10X Facility Funding",
@@ -2389,7 +2491,9 @@
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "MP Materials Corp.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": "HREE refining expansion and hydrochloric acid recommissioning at Mountain Pass; Independence magnet facility expansion",
     "projectId": null,
     "facility": null,
@@ -2460,13 +2564,17 @@
     "amount": null,
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "MP 10X Development, LLC (project company established to develop the 10X Facility)",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-mp-10x-development"
+    ],
     "project": "Second domestic magnet manufacturing facility",
-    "projectId": null,
+    "projectId": "prj-us-mp-10x-facility",
     "facility": "10X Facility",
     "locations": [],
     "stages": [
@@ -2619,11 +2727,15 @@
     },
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": "Defense Production Act Title III, 50 U.S.C. § 4531 et seq., \"as well as other authorities\"",
     "programmeId": null,
     "recipient": "MP Materials Corp.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -2721,11 +2833,15 @@
     "amount": null,
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": null,
     "programmeId": null,
     "recipient": "MP Materials Corp.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -2824,13 +2940,17 @@
     },
     "provider": "US Department of Defense, Office of Strategic Capital",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act (source of OSC's credit subsidy funding)",
-    "programmeId": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "MP Materials Corp.",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": "Samarium Project: expansion of heavy rare earth separation, including separation of samarium oxide",
-    "projectId": null,
+    "projectId": "prj-us-mountain-pass-samarium",
     "facility": "Mountain Pass Rare Earth Mine and Processing Facility",
     "locations": [
       {
@@ -2916,7 +3036,8 @@
           "provider",
           "legal_authority",
           "relationships",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "First and third paragraphs",
@@ -2941,9 +3062,11 @@
     },
     "provider": "US Department of Defense, Office of Strategic Capital",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act",
-    "programmeId": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -2976,7 +3099,8 @@
           "amount",
           "provider",
           "legal_authority",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Third paragraph",
@@ -3001,9 +3125,11 @@
     },
     "provider": "US Department of Defense, Office of Strategic Capital",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act",
-    "programmeId": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": null,
     "recipientOrgIds": [],
     "project": null,
@@ -3036,7 +3162,8 @@
           "amount",
           "provider",
           "legal_authority",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Third paragraph",
@@ -3069,11 +3196,16 @@
     },
     "provider": "US Department of War, Office of Strategic Capital",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act (OSC lending authority)",
-    "programmeId": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "Vulcan Elements and ReElement Technologies",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-reelement-technologies",
+      "org-vulcan-elements"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -3139,7 +3271,8 @@
           "materials",
           "status",
           "terms",
-          "outcomes"
+          "outcomes",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "First to fourth paragraphs",
@@ -3181,11 +3314,15 @@
     },
     "provider": "US Department of War, Office of Strategic Capital",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "ReElement Technologies",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-reelement-technologies"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -3221,7 +3358,8 @@
           "recipient",
           "relationships",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Second paragraph",
@@ -3254,11 +3392,15 @@
     },
     "provider": "US Department of War, Office of Strategic Capital",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": null,
-    "programmeId": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "Vulcan Elements",
-    "recipientOrgIds": [],
+    "recipientOrgIds": [
+      "org-vulcan-elements"
+    ],
     "project": null,
     "projectId": null,
     "facility": null,
@@ -3294,7 +3436,8 @@
           "recipient",
           "relationships",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Second paragraph",

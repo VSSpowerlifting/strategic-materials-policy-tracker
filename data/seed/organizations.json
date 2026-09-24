@@ -1,1 +1,773 @@
-[]
+[
+  {
+    "id": "org-au-disr",
+    "name": "Department of Industry, Science and Resources",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "AU",
+    "actor": "australia",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-industry-cmsr",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Masthead; paragraph on future transactions",
+        "note": "\"Future transactions under the Reserve will be led out of the Department of Industry, Science and Resources\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-au-government",
+    "name": "Australian Government",
+    "nameOriginal": null,
+    "aliases": [
+      "Commonwealth of Australia"
+    ],
+    "kind": "government",
+    "countryCode": "AU",
+    "actor": "australia",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraphs on the two priority projects",
+        "note": null
+      },
+      {
+        "sourceId": "src-legislation-au-cmpti-2025",
+        "supports": [
+          "name"
+        ],
+        "evidence": "explicit",
+        "locator": "Title page",
+        "note": "The Act is an Act of the Commonwealth of Australia; the tax offset is paid by the Commonwealth."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-government",
+    "name": "Government of Canada",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cms-2022",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-nrcan",
+    "name": "Natural Resources Canada",
+    "nameOriginal": null,
+    "aliases": [
+      "NRCan"
+    ],
+    "kind": "government",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Issuer; third and fourth paragraphs",
+        "note": "\"Natural Resources Canada (NRCan) is providing $4.9 million to Cyclic Materials\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-cyclic-materials",
+    "name": "Cyclic Materials Incorporated",
+    "nameOriginal": null,
+    "aliases": [
+      "Cyclic Materials Inc."
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph; closing quotation attribution",
+        "note": null
+      }
+    ],
+    "notes": "The cited sources do not state where the company is incorporated."
+  },
+  {
+    "id": "org-goldman-sachs-bank-usa",
+    "name": "Goldman Sachs Bank USA",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "bank",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, overview and Transaction Agreement paragraphs",
+        "note": "Named with JPMorgan as a provider of \"committed secured financing\" for the 10X Facility."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-green-graphite-technologies",
+    "name": "Green Graphite Technologies Inc.",
+    "nameOriginal": null,
+    "aliases": [
+      "GGT"
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-2024",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "notes": "The cited sources do not state where the company is incorporated."
+  },
+  {
+    "id": "org-in-government",
+    "name": "Government of India",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "IN",
+    "actor": "india",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-pib-ncmm-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Issuer and opening paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-jare",
+    "name": "Japan Australia Rare Earth (JARE)",
+    "nameOriginal": null,
+    "aliases": [
+      "JARE"
+    ],
+    "kind": "joint_vehicle",
+    "countryCode": null,
+    "actor": null,
+    "parents": [
+      {
+        "organizationId": "org-jp-jogmec",
+        "relationship": "established_by",
+        "sourceId": "src-jogmec-lynas",
+        "locator": "First paragraph",
+        "note": null
+      },
+      {
+        "organizationId": "org-sojitz",
+        "relationship": "established_by",
+        "sourceId": "src-jogmec-lynas",
+        "locator": "First paragraph",
+        "note": null
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "name",
+          "kind",
+          "parents"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": "\"Japan Australia Rare Earth (“JARE”), co-founded in 2011 by Sojitz Corporation (“Sojitz”) and Japan Organization for Metals and Energy Security (“JOGMEC”)\""
+      }
+    ],
+    "notes": "A joint vehicle: its money is reported apart from public money, and it is not rolled up into JOGMEC's or Sojitz's portfolio. The release does not state the vehicle's country or the founders' shares."
+  },
+  {
+    "id": "org-jp-jogmec",
+    "name": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "nameOriginal": "独立行政法人エネルギー・金属鉱物資源機構",
+    "aliases": [
+      "JOGMEC"
+    ],
+    "kind": "government",
+    "countryCode": "JP",
+    "actor": "japan",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lofdal-ja",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Masthead and first paragraph",
+        "note": "Named as 独立行政法人エネルギー・金属鉱物資源機構 (本部：東京都港区). 独立行政法人 is an incorporated administrative agency, a body of the Japanese state."
+      },
+      {
+        "sourceId": "src-jogmec-lofdal-en",
+        "supports": [
+          "name"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-jpmorgan-chase-funding",
+    "name": "JPMorgan Chase Funding Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "bank",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, overview",
+        "note": "\"JPMorgan Chase Funding Inc. (acting through such of its affiliates and branches as it deems appropriate, “JPMorgan”)\". The filing names the lending entity, not whether it is itself a bank; it is classed with the commercial lenders it acts for."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-lynas",
+    "name": "Lynas Rare Earths Limited",
+    "nameOriginal": null,
+    "aliases": [
+      "Lynas Rare Earths Ltd",
+      "Lynas"
+    ],
+    "kind": "company",
+    "countryCode": "AU",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph; Overview of Lynas",
+        "note": "\"an Australian rare earths company\"; listed on the Australian Stock Exchange, headquartered in Perth."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-mp-10x-development",
+    "name": "MP 10X Development, LLC",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "project_company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Offtake Agreement paragraph; Exhibit 10.5",
+        "note": "\"a special purpose vehicle (the “Project Company”), established to develop the 10X Facility\"; Exhibit 10.5 names the party to the Offtake Agreement as MP 10X Development, LLC."
+      }
+    ],
+    "notes": "The filing refers to the Project Company alongside \"any other subsidiary of the Company to which the 10X Facility is assigned\" but does not say who formed it, so no parent link is recorded; the 10X Facility project record connects it to MP Materials."
+  },
+  {
+    "id": "org-mp-materials",
+    "name": "MP Materials Corp.",
+    "nameOriginal": null,
+    "aliases": [
+      "MP Materials"
+    ],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover page",
+        "note": "State of incorporation: Delaware; principal executive offices in Las Vegas, Nevada."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-reelement-technologies",
+    "name": "ReElement Technologies",
+    "nameOriginal": null,
+    "aliases": [
+      "ReElement"
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-sojitz",
+    "name": "Sojitz Corporation",
+    "nameOriginal": null,
+    "aliases": [
+      "Sojitz"
+    ],
+    "kind": "company",
+    "countryCode": "JP",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph; Overview of Sojitz (Chiyoda-ku, Tokyo)",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-tj-namibia-rare-earths",
+    "name": "TJ Namibia Rare Earths Corporation",
+    "nameOriginal": "TJ Namibia Rare Earths株式会社",
+    "aliases": [
+      "TJ"
+    ],
+    "kind": "project_company",
+    "countryCode": "JP",
+    "actor": null,
+    "parents": [
+      {
+        "organizationId": "org-toyota-tsusho",
+        "relationship": "established_by",
+        "sourceId": "src-jogmec-lofdal-en",
+        "locator": "Second paragraph",
+        "note": null
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lofdal-en",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "parents"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph; Overview of TJ (head office Minato-ku, Tokyo)",
+        "note": "\"Toyota Tsusho has established TJ Namibia Rare Earths Corporation (hereinafter \\\"TJ\\\"), a special purpose company to carry out the project\""
+      },
+      {
+        "sourceId": "src-jogmec-lofdal-ja",
+        "supports": [
+          "name"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": "特定目的会社「TJ Namibia Rare Earths株式会社」"
+      }
+    ],
+    "notes": "JOGMEC invests in the company, but the release does not state the resulting shareholdings."
+  },
+  {
+    "id": "org-toyota-tsusho",
+    "name": "Toyota Tsusho Corporation",
+    "nameOriginal": "豊田通商株式会社",
+    "aliases": [
+      "Toyota Tsusho"
+    ],
+    "kind": "company",
+    "countryCode": "JP",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lofdal-en",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph (Head Office: Nagoya, Aichi)",
+        "note": null
+      },
+      {
+        "sourceId": "src-jogmec-lofdal-ja",
+        "supports": [
+          "name"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-tungsten-west",
+    "name": "Tungsten West",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Second paragraph",
+        "note": "\"a mining company focused on restarting the Hemerdon tungsten and tin mine on the outskirts of Plymouth\""
+      }
+    ],
+    "notes": "The release does not state where the company is incorporated."
+  },
+  {
+    "id": "org-uk-dbt",
+    "name": "Department for Business and Trade",
+    "nameOriginal": null,
+    "aliases": [
+      "DBT"
+    ],
+    "kind": "government",
+    "countryCode": "GB",
+    "actor": "uk",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-gov-uk-cms-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "p. 20",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-uk-government",
+    "name": "UK Government",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "GB",
+    "actor": "uk",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening bullet points; third paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-uk-nwf",
+    "name": "National Wealth Fund",
+    "nameOriginal": null,
+    "aliases": [
+      "National Wealth Fund Limited",
+      "NWF"
+    ],
+    "kind": "public_financier",
+    "countryCode": "GB",
+    "actor": "uk",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Closing notice",
+        "note": "\"the trading name of the National Wealth Fund Limited, which is a private limited company registered in England and Wales ... and is wholly owned by HM Treasury\"; \"not a banking institution\"."
+      }
+    ],
+    "notes": "Wholly owned by HM Treasury. Its money is public-enterprise capital, reported with public money."
+  },
+  {
+    "id": "org-us-commerce",
+    "name": "U.S. Department of Commerce",
+    "nameOriginal": null,
+    "aliases": [
+      "Department of Commerce"
+    ],
+    "kind": "government",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Fourth paragraph",
+        "note": "\"the Department of Commerce's Creating Helpful Incentives to Produce Semiconductors (CHIPS) Program Office\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-us-dod",
+    "name": "U.S. Department of Defense",
+    "nameOriginal": null,
+    "aliases": [
+      "U.S. Department of War",
+      "Department of War",
+      "DoD"
+    ],
+    "kind": "government",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, first paragraph",
+        "note": "\"the United States Department of Defense (“Department of Defense” or “DoD”)\""
+      },
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "name"
+        ],
+        "evidence": "explicit",
+        "locator": "Third paragraph",
+        "note": "\"Following the Department of War's agreement earlier this year with MP Materials\": the agreement the Form 8-K records with the Department of Defense, so one department under two names."
+      }
+    ],
+    "notes": "Sources from September 2025 onward use \"Department of War\"; the record keeps one id so the department's portfolio does not split."
+  },
+  {
+    "id": "org-us-government",
+    "name": "United States Government",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on the Alcoa-Sojitz project",
+        "note": "\"The United States Government is also making an equity investment with a right of offtake.\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-us-osc",
+    "name": "Office of Strategic Capital (OSC)",
+    "nameOriginal": null,
+    "aliases": [
+      "OSC"
+    ],
+    "kind": "government",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [
+      {
+        "organizationId": "org-us-dod",
+        "relationship": "part_of",
+        "sourceId": "src-dow-osc-about",
+        "locator": "History list",
+        "note": null
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dow-osc-about",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor",
+          "parents"
+        ],
+        "evidence": "explicit",
+        "locator": "History list: \"Secretary of Defense Establishes Office of Strategic Capital\"",
+        "note": "\"SECDEF establishes the Office of Strategic Capital (OSC) as a finance organization within the Department of Defense\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-vulcan-elements",
+    "name": "Vulcan Elements",
+    "nameOriginal": null,
+    "aliases": [
+      "Vulcan"
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  }
+]

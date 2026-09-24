@@ -754,5 +754,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "FR Doc. 2026-06488, 91 FR 16968. Read in full via the Federal Register full-text endpoint on 2026-09-23. The Commission determined, on 31 March 2026, that the establishment of a US industry is not materially retarded by reason of the imports Commerce found subsidized and sold at less than fair value (Commissioner Kearns dissenting). Commerce's final affirmative determinations are cited in the notice's background but were not separately read for this record."
+  },
+  {
+    "id": "src-dow-osc-about",
+    "title": "Office of Strategic Capital (OSC)",
+    "publisher": "Office of the Under Secretary of War for Research and Engineering (OUSW(R&E))",
+    "url": "https://www.cto.mil/osc/",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "OSC's own page on the Research and Engineering site. Its history list includes the entry \"Secretary of Defense Establishes Office of Strategic Capital\": \"SECDEF establishes the Office of Strategic Capital (OSC) as a finance organization within the Department of Defense\". Read 2026-09-23; cited for OSC's place inside the department, which the loan releases do not state in terms."
+  },
+  {
+    "id": "src-nrcan-cmrdd-programme",
+    "title": "Critical Minerals Research, Development and Demonstration Program",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/campaign/critical-minerals-in-canada/federal-support-for-critical-mineral-projects-and-value-chains/critical-minerals-research-development-and-demonstration-program.html",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "NRCan's standing programme page. States that CMRDD is administered through two funding streams (federal research and development projects, and contribution funding) and lists the projects that received contribution funding, each with organization, description, amount funded, status, critical minerals and location. Read in full in a browser on 2026-09-23 (canada.ca times out for automated clients). The page is updated in place and carries no publication date; the list is read as of the access date."
   }
 ]

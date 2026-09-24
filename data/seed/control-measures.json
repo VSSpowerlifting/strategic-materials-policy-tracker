@@ -272,8 +272,15 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods",
+      "technology"
+    ],
+    "controlledStages": [
+      "mining",
+      "refining",
+      "processing"
+    ],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -313,6 +320,15 @@
         "evidence": "explicit",
         "locator": "Preamble; Items 1(1) and 8",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-33",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Items 1(1) and 8",
+        "note": "Stages read from the item list, which names items, not stages: ore and raw materials (锑矿及原料) sit at mining; metal, high-purity oxides, organic compounds, hydrides and indium antimonide at refining and processing; gold-antimony smelting and separation technology (金锑冶炼分离技术) at refining."
       }
     ],
     "notes": null
@@ -363,7 +379,11 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
+    "controlledItemTypes": [
+      "equipment",
+      "goods",
+      "technology"
+    ],
     "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
@@ -404,6 +424,15 @@
         "evidence": "explicit",
         "locator": "Items 1(2) and 8",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-33",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Items 1(2) and 8",
+        "note": "Press equipment and its key parts, MPCVD equipment, diamond window material and synthesis technology. The items are superhard materials outside the tracked set, so no supply-chain stage is coded."
       }
     ],
     "notes": "Equipment, diamond window material and technology for making synthetic diamond and cubic boron nitride; outside the tracked materials, recorded because Announcement No. 46 of 2024 later names superhard materials alongside gallium, germanium and antimony."
@@ -664,8 +693,13 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "refining",
+      "processing"
+    ],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -705,6 +739,15 @@
         "evidence": "explicit",
         "locator": "Preamble; Items 1, 2 and 8",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-23",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Items 1, 2 and 8",
+        "note": "Stages read from the item list: the metals and zone-refined germanium ingots sit at refining; the compounds, oxides, tetrachloride and epitaxial substrates at processing. The announcement names items, not stages."
       }
     ],
     "notes": "Every listed customs code is printed as a reference code (参考海关商品编号); the item descriptions govern. Items 2–7 set out the licensing procedure. The announcement names no destination, so it applies to exports to every jurisdiction."
@@ -832,8 +875,13 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "mining",
+      "processing"
+    ],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -876,6 +924,15 @@
         "evidence": "explicit",
         "locator": "Preamble; Items 1 and 9",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-39",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Items 1 and 9",
+        "note": "Stages read from the item list: natural flake graphite (天然鳞片石墨) is a mined concentrate; spherical and expanded graphite and high-purity synthetic graphite materials are processed products. The announcement names items, not stages."
       }
     ],
     "notes": "Replaces the 2006 temporary graphite measure, which Item 9 repeals from the same date."
@@ -1235,8 +1292,14 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "separation",
+      "refining",
+      "component_manufacturing"
+    ],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1270,6 +1333,15 @@
         "evidence": "explicit",
         "locator": "Preamble; Items 1–7; explanatory notes; closing paragraphs",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-18",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Items 1–7; explanatory notes; closing paragraphs",
+        "note": "Stages read from the item list: oxides, compounds and mixtures sit at separation; metals, alloys and targets at refining; samarium-cobalt and terbium- or dysprosium-bearing NdFeB permanent magnet materials at component manufacturing. The announcement names items, not stages."
       }
     ],
     "notes": "Samarium, gadolinium, lutetium, scandium and yttrium fall under the grouped rare-earth-elements material; terbium and dysprosium are tracked individually. Exporters must apply to MOFCOM for a licence under the Export Control Law and the Dual-Use Items Regulations."
@@ -1378,7 +1450,9 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "含有、集成或者混有原产于中国的本公告附件1第一部分所列物项在境外制造的本公告附件1第二部分所列物项，且附件1第一部分所列物项占境外制造的附件1第二部分所列物项的价值比例达到0.1%及以上的",
     "productCodes": [],
-    "controlledItemTypes": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
     "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
@@ -1428,6 +1502,15 @@
         "evidence": "explicit",
         "locator": "Operative sentence",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-61",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Items 1(1) and 8",
+        "note": "Annex 1 Part II items made abroad. The annex (.wps) is unread, so no stage is coded."
       }
     ],
     "notes": "Foreign-made items containing China-origin Annex 1 Part 1 items at 0.1% or more of value need a Chinese licence before export from a third country. Suspended before its scheduled start. Annex 1 (物项列表, a .wps file) was not machine-read, so the items it lists are not transcribed; the announcement's title and text establish that they are rare-earth items."
@@ -1452,8 +1535,16 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "使用原产于中国的稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用相关技术在境外生产的本公告附件1所列物项",
     "productCodes": [],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "mining",
+      "separation",
+      "refining",
+      "component_manufacturing",
+      "recycling"
+    ],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1502,6 +1593,15 @@
         "evidence": "explicit",
         "locator": "Operative sentence",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-61",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Items 1(2) and 8",
+        "note": "The clause names the technologies the covered foreign-made items are produced with: 开采 (mining), 冶炼分离 (smelting and separation), 金属冶炼 (metal smelting, coded as refining), 磁材制造 (magnet manufacturing) and 稀土二次资源回收利用 (secondary-resource recovery)."
       }
     ],
     "notes": "Annex 1 items made abroad with Chinese rare-earth mining, separation, smelting, magnet-making or recycling technology. Suspended before its scheduled start. Annex 1 (物项列表, a .wps file) was not machine-read, so the items it lists are not transcribed; the announcement's title and text establish that they are rare-earth items."
@@ -1610,7 +1710,9 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "原产于中国的本公告附件1所列物项",
     "productCodes": [],
-    "controlledItemTypes": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
     "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
@@ -1660,6 +1762,15 @@
         "evidence": "explicit",
         "locator": "Operative sentence",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-61",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Items 1(3) and 8",
+        "note": "Chinese-origin Annex 1 items. The annex (.wps) is unread, so no stage is coded."
       }
     ],
     "notes": "Annex 1 (物项列表, a .wps file) was not machine-read, so the items it lists are not transcribed; the announcement's title and text establish that they are rare-earth items."
@@ -1891,8 +2002,13 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "任何组织和个人不得收购、加工、销售、出口非法开采或者非法冶炼分离的稀土产品。",
     "productCodes": [],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "mining",
+      "separation"
+    ],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -1928,6 +2044,15 @@
         "evidence": "explicit",
         "locator": "Art. 13; Art. 32",
         "note": null
+      },
+      {
+        "sourceId": "src-gov-cn-decree-785",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Art. 13; Art. 32",
+        "note": "\"非法开采或者非法冶炼分离的稀土产品\": rare earth products of illegal mining or illegal smelting and separation."
       }
     ],
     "notes": "Reaches export as well as domestic trade in illegally mined or separated products; coded as domestic because it regulates the product's origin rather than its destination."
@@ -1952,8 +2077,13 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "国家…对稀土开采和稀土冶炼分离实行总量调控，并优化动态管理。",
     "productCodes": [],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "mining",
+      "separation"
+    ],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -1989,6 +2119,15 @@
         "evidence": "explicit",
         "locator": "Art. 10; Art. 32",
         "note": null
+      },
+      {
+        "sourceId": "src-gov-cn-decree-785",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Art. 10; Art. 32",
+        "note": "\"对稀土开采和稀土冶炼分离实行总量调控\": total-quantity control over rare earth mining and smelting-separation output."
       }
     ],
     "notes": "Total-quantity control of mining and separation. The quotas themselves are not published in this instrument, and none are recorded."
@@ -2013,8 +2152,12 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "建立稀土产品追溯信息系统，加强对稀土产品全过程追溯管理",
     "productCodes": [],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "cross_cutting"
+    ],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -2050,6 +2193,15 @@
         "evidence": "explicit",
         "locator": "Art. 14; Art. 32",
         "note": null
+      },
+      {
+        "sourceId": "src-gov-cn-decree-785",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Art. 14; Art. 32",
+        "note": "\"稀土产品全过程追溯管理\": whole-process traceability of rare earth products, which names no single stage."
       }
     ],
     "notes": "Art. 25 sets fines for enterprises that fail to record product flows in the traceability system, exporters included."
@@ -2150,8 +2302,14 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods",
+      "technology"
+    ],
+    "controlledStages": [
+      "refining",
+      "processing"
+    ],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -2185,6 +2343,15 @@
         "evidence": "explicit",
         "locator": "Preamble; Item 1; closing paragraphs",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-10",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Item 1; closing paragraphs",
+        "note": "Stages read from the item list: ammonium paratungstate and tungsten oxide sit at refining; carbide, solid tungsten, tungsten-nickel alloys and the technology for producing 1C004 and 1C117 items at processing. The announcement names items, not stages."
       }
     ],
     "notes": "The control numbers are the entries of China's dual-use export control list, which the announcement updates; the customs codes are printed for reference."
@@ -2283,7 +2450,10 @@
         "role": "legal_scope"
       }
     ],
-    "controlledItemTypes": [],
+    "controlledItemTypes": [
+      "goods",
+      "technology"
+    ],
     "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
@@ -2318,6 +2488,15 @@
         "evidence": "explicit",
         "locator": "Items 2–5",
         "note": null
+      },
+      {
+        "sourceId": "src-mofcom-10",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Items 2–5",
+        "note": "Tellurium, bismuth, molybdenum and indium items, with production technology and data. These metals are outside the tracked set, so no stage is coded."
       }
     ],
     "notes": "The same announcement's controls on four untracked metals, recorded so the measure is complete. Customs reference codes for these items are not transcribed."
@@ -2581,8 +2760,12 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "processing"
+    ],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "Tariff Act of 1930, section 735(b) (19 U.S.C. 1673d(b)), under which the Commission made its final determination",
     "modifiesMeasureIds": [],
@@ -2630,6 +2813,15 @@
         "evidence": "explicit",
         "locator": "Determinations; final paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-fedreg-aam-ad-initiation-2025",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Dates; scope appendix",
+        "note": "Active anode material, \"an anode grade graphite material\", read as a processed graphite product; the scope names no stage."
       }
     ],
     "notes": "Commerce's preliminary and final determinations were affirmative; the provisional measures that followed them are not coded as separate clauses. The HTSUS subheadings are \"provided for convenience and customs purposes only\"; the written scope is dispositive."
@@ -2677,8 +2869,12 @@
         "role": "reference"
       }
     ],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "processing"
+    ],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "Tariff Act of 1930, section 705(b) (19 U.S.C. 1671d(b)), under which the Commission made its final determination",
     "modifiesMeasureIds": [],
@@ -2726,6 +2922,15 @@
         "evidence": "explicit",
         "locator": "Determinations; final paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-fedreg-aam-cvd-initiation-2025",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Dates; scope appendix",
+        "note": "Active anode material, \"an anode grade graphite material\", read as a processed graphite product; the scope names no stage."
       }
     ],
     "notes": "Commerce's preliminary and final determinations were affirmative; the provisional measures that followed them are not coded as separate clauses. The HTSUS subheadings are \"provided for convenience and customs purposes only\"; the written scope is dispositive."
@@ -2869,8 +3074,12 @@
     ],
     "productScopeAsStated": "imports of processed critical minerals and their derivative products",
     "productCodes": [],
-    "controlledItemTypes": [],
-    "controlledStages": [],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "processing"
+    ],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "section 232 of the Trade Expansion Act of 1962, as amended, 19 U.S.C. 1862",
     "modifiesMeasureIds": [],
@@ -2916,6 +3125,15 @@
         "evidence": "explicit",
         "locator": "Para. 1; clauses (1)–(3)",
         "note": null
+      },
+      {
+        "sourceId": "src-fedreg-eo-14272",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Secs. 1–3",
+        "note": "\"processed critical minerals\" sit at processing; \"their derivative products\" are not assigned a stage because the order does not say which products they are."
       }
     ],
     "notes": "Sec. 2 defines critical minerals by the USGS list plus uranium, and derivative products to include permanent magnets. Only the materials the order names are attributed."

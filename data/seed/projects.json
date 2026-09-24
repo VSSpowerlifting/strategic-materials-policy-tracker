@@ -1,1 +1,310 @@
-[]
+[
+  {
+    "id": "prj-au-alcoa-sojitz-gallium",
+    "name": "Alcoa-Sojitz Gallium Recovery Project",
+    "sponsorOrgIds": [],
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Western Australia",
+        "asStated": "Wagerup, Western Australia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraphs on the first priority project",
+        "note": null
+      }
+    ],
+    "notes": "The release names the project without saying who develops it, so no sponsor is recorded. It calls it \"a trilateral project with Japan, the United States and Australia\" and says \"Japan has already provided 50 percent of the project costs to date\"; no Japanese amount is stated or recorded."
+  },
+  {
+    "id": "prj-au-nolans",
+    "name": "Nolans project",
+    "sponsorOrgIds": [],
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Northern Territory",
+        "asStated": "the Northern Territory"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-pm-us-au-framework-2025",
+        "supports": [
+          "name",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph on the second priority project",
+        "note": "\"the Arafura Nolans project in the Northern Territory\""
+      }
+    ],
+    "notes": "The release names the project as \"the Arafura Nolans project\" and states no developer or stage, so neither is recorded."
+  },
+  {
+    "id": "prj-ca-cyclic-kingston-demonstration-plant",
+    "name": "Kingston Demonstration Plant",
+    "sponsorOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "cobalt",
+      "nickel"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Funded Projects: \"Kingston Demonstration Plant – Extended Operations\"",
+        "note": "Organization: Cyclic Materials Inc; location: Kingston, Ontario; critical minerals: rare earth elements, cobalt, nickel; status: launched in 2024, completed in March 2026."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-ca-ggt-graphite-recycling-pilot",
+    "name": "Recycling of Graphite from Secondary Sources for Use in Lithium-Ion Batteries",
+    "sponsorOrgIds": [
+      "org-green-graphite-technologies"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Funded Projects",
+        "note": "\"through a pilot plant project\"; organization: Green Graphite Technologies Inc; location: Kingston, Ontario; status: launched in 2024, expected to be completed by 2026."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-gb-hemerdon",
+    "name": "Hemerdon tungsten and tin mine",
+    "sponsorOrgIds": [
+      "org-tungsten-west"
+    ],
+    "locations": [
+      {
+        "countryCode": "GB",
+        "subnational": "Devon",
+        "asStated": "the Hemerdon tungsten and tin mine in Devon ... on the outskirts of Plymouth"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "tin"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-nwf-tungsten-west-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First bullet point; second and third paragraphs",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-na-lofdal",
+    "name": "Lofdal heavy rare earth development project",
+    "sponsorOrgIds": [
+      "org-jp-jogmec",
+      "org-tj-namibia-rare-earths",
+      "org-toyota-tsusho"
+    ],
+    "locations": [
+      {
+        "countryCode": "NA",
+        "subnational": "Kunene Region",
+        "asStated": "the Lofdal area of the Kunene Region, Republic of Namibia"
+      }
+    ],
+    "stages": [
+      "exploration",
+      "mining"
+    ],
+    "materialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lofdal-en",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First to third paragraphs",
+        "note": "\"JOGMEC ... and Toyota Tsusho ... are currently advancing a heavy rare earth development project\"; TJ is \"a special purpose company to carry out the project\"."
+      },
+      {
+        "sourceId": "src-jogmec-lofdal-ja",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Title",
+        "note": "レアアース探査・開発事業 (rare earth exploration and development)."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-us-mountain-pass-samarium",
+    "name": "Mountain Pass heavy rare earth separation expansion (Samarium Project)",
+    "sponsorOrgIds": [
+      "org-mp-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "California",
+        "asStated": "the Mountain Pass Rare Earth Mine and Processing Facility located near Mountain Pass, San Bernardino County, California"
+      }
+    ],
+    "stages": [
+      "separation"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Transaction Agreement paragraphs",
+        "note": "\"expand heavy rare earth elements (“HREE”) refining capacity at the Mountain Pass Rare Earth Mine and Processing Facility ... which ... will include separation of samarium oxide\""
+      }
+    ],
+    "notes": "Samarium is a rare earth element; it has no material record of its own and is covered by the rare-earth-elements record."
+  },
+  {
+    "id": "prj-us-mp-10x-facility",
+    "name": "10X Facility",
+    "sponsorOrgIds": [
+      "org-mp-10x-development",
+      "org-mp-materials"
+    ],
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, overview and Transaction Agreement paragraphs",
+        "note": "\"the Company’s construction of its second domestic magnet manufacturing facility (the “10X Facility”)\"; built \"to produce sintered Neodymium-iron boron (NdFeB) permanent magnet blocks and / or other finished magnets\"."
+      }
+    ],
+    "notes": "The filing and the company release give the site only as \"a soon-to-be-chosen location\", so no location is recorded."
+  }
+]
