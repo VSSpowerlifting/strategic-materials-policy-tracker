@@ -60,6 +60,65 @@ Chinese controls meet by material and stage.
 - Withdrawn or lapsed commitments are listed as ended and never summed
   (`CommitmentTotals.endedIds`); before, a withdrawn row would have been
   summed as not yet binding.
+- **Accounting-semantics correction pass** (on the PR, after `39d516c`):
+  - `totalCommitments`: a package that is not itself counted (ended, no
+    amount, or status not stated) no longer keeps its parts out of a sum; only
+    a counted ancestor nests a row. Before, any in-scope ancestor with a
+    same-currency amount did, so an ended package would have hidden parts that
+    still stand. Fixture-tested, including an ended middle ancestor under a
+    counted grandparent.
+  - A commitment with an amount whose current status is `not_stated` is
+    neither binding nor not yet binding: listed with its own figure, counted
+    apart, never summed (`CommitmentTotals.statusNotStatedIds`, the same rule
+    as an unstated instrument). v0.5 and the first v0.6 commit read it as not
+    yet binding. One corpus row is affected
+    (`fin-ca-g7-2025-nmg-canada-growth-fund`, CAD, instrument unspecified,
+    already unsummed for that reason). `legalStanding(c)` gives the four terms
+    binding / not_yet_binding / ended / status_not_stated.
+  - Ended rows (withdrawn, lapsed) are not capital in any derived view: they
+    back no project (stack governments and providers), are no co-investment
+    kind, no flow, and no portfolio reach (organizations, projects); portfolios
+    count them once, as `counts.ended` / `committedEnded`. An ended package does
+    not fold its standing parts (flows, portfolio counts, response map,
+    material matrix).
+  - Funding options stay visible as options and never as backing: portfolio
+    counts hold them in their own layer only (not instrument, stage, material,
+    geography or legal standing); co-investment lists them under `optionIds`;
+    the response map under `optionIds`; a project or programme shows them as
+    options. A draw from an option that has ended is not an exercise
+    (`OptionState.endedExercises`), never "exercised" and never money moved.
+  - The same principle now holds in every view (advisor finding, verified on the
+    seed): a part folds into a package only when that package is itself counted
+    in that view and under the same actor. Flows count commitments, the response
+    map commitments and options, the material matrix rows with an actor, and a
+    portfolio folds only within a layer, so a commitment under an envelope is still
+    a commitment. Before this, two Australian equity stakes
+    (`fin-au-alcoa-sojitz-gallium-2025-equity`, `fin-au-arafura-nolans-2025-equity`),
+    each `part_of` the US-Australia financing envelope, were missing from the flows
+    and the response map (envelopes are not flows), and from the portfolio's
+    committed-layer counts although their money was in its totals. They are back.
+    Organization pages count only rows that back (a lapsed letter puts no bank
+    behind a project) and note ended rows.
+  - Public pages and both summary APIs carry the same distinctions (see the
+    API note below). No cross-instrument sum was restored.
+- **Intentional API behaviour changes in this pass** (the routes' "add fields,
+  never repurpose" note is knowingly broken in three places, all corrections):
+  1. `/api/v1/capital-control/summary`: adds `capital.publicCommitmentsStatusNotStated`
+     and `fundingOptionsListedNotSummed[].exercisesEnded`; a `not_stated` row
+     leaves `publicCommitmentTotals` (its sums no longer include it under
+     `notYetBinding`); nesting (`nestedIds`) applies only under a counted package.
+  2. `/api/v1/capital-intelligence/summary`: `portfolios[].counts` adds `ended`,
+     `committedStatusNotStated`, `committedEnded`, and its other counts no longer
+     include ended rows or options; `projects[].governments` / `providerOrgIds`
+     and `coInvestment[].kinds` / `governments` / `rowIds` exclude ended rows
+     and options (new `fundingOptionIds`, `endedRowIds`); `stageResponseMap[]`
+     stages' `capitalRows` / `capitalIds` / `capitalActors` no longer hold
+     options or ended rows (new `fundingOptionIds`, `fundingOptionActors`,
+     `endedRowIds`); `flows` exclude ended rows and now include the two
+     Australian equity stakes above (they were hidden under an envelope).
+     Consequence in the corpus: the MP 10X project is no longer "public and
+     private" (its private bank letter lapsed undrawn).
+  3. Same for `dataset.json`, which embeds both summaries.
 - No grand stack total, public share, leverage, utilisation rate or
   cross-currency figure anywhere; a test scans the intelligence summary's keys.
 - Geography: row location, then project location, then (for a package with
@@ -115,6 +174,13 @@ Chinese controls meet by material and stage.
   after fixing `/interplay` (new table) and `/compare` (existing, screen-reader
   text escaping an unpositioned scroll wrapper). Desktop checked at 1440px.
   No candidate id in `.next`.
+- Accounting-semantics pass: validate 0 errors (same 10 warnings), typecheck and
+  lint clean, 267 tests (8 new; five rules mutation-checked: old ancestor rule,
+  not_stated as not yet binding, options as backing, fold-any-part, fold-across-layers, each fails a test), build
+  876 pages, no candidate id in `.next`. 375px sweep of 233 capital, portfolio,
+  project, material, programme, organization, interplay, methodology and data
+  pages: no horizontal overflow; desktop checked on `/projects/prj-us-mp-10x-facility`
+  and `/interplay`. Both summary APIs and `dataset.json` read from the served build.
 - Slip to note: one early probe of EDGAR sent the user's email address in a
   User-Agent header; not repeated (EDGAR was read in the browser afterwards).
 
@@ -134,8 +200,13 @@ Chinese controls meet by material and stage.
   before or soon after taking effect; the suspension ends 10 Nov 2026 and the
   validator will warn after that date.
 - `/coverage` does not yet report registry or Capital & Control counts.
-- A commitment whose current status is `not_stated` and whose instrument is
-  named would be summed as "not yet binding"; no current row does this.
+- Two older tests hold only because the corpus has no ended package with
+  standing parts: the material matrix "never shows a part" and the EU
+  `counts.rows` equalling all EU rows. Both invariants are wrong in principle.
+  A part whose package does not carry the part's stage or material is folded
+  away in the response map; no corpus row does this (checked).
+- `layerOfRow` and the commitments CSV `layer` column label an ended row by its
+  value role; the ended state is in the status column and the summaries' rules.
 - Portfolio cards for Canada and the UK are mostly "listed, not summed"
   (unstated or mixed instruments); each card links to that actor's rows.
 - Framing not yet coded on three of the four Japan certification events and

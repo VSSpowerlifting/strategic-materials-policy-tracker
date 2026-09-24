@@ -147,7 +147,10 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
   actor and designation portfolios, flows, co-investment and the stage
   response map. Every money figure still comes from `totalCommitments`, which
   splits each currency by instrument (never a cross-instrument sum) and leaves
-  withdrawn or lapsed commitments out.
+  withdrawn, lapsed and status-not-stated commitments out (each listed apart).
+  A row that ended, or is not itself counted, never hides a part that still
+  stands; an option is an option and never backing, and an ended row backs
+  nothing.
 - `components/` — UI primitives (`ui/`) and domain components. `FramingQuote` is
   the signature element; `EventsExplorer` / `TimelineView` are the client filters;
   `components/capital/` holds the Capital & Control rows, explorers and SVG charts;
