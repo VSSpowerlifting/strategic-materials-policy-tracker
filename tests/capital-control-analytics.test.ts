@@ -759,6 +759,7 @@ test("USA Rare Earth's direct funding is instrument-not-stated on the package an
   assert.equal(parts.length, 5);
   // The executed agreement is a source of its own: the 8-K never says "other transaction" and never says "grant".
   assert.match(getSourceById(AGREEMENT)?.url ?? "", /ea029340201ex10-1\.htm$/);
+  assert.ok(getEventById("evt-us-chips-usar-2026")!.sourceIds.includes(AGREEMENT), "the event page lists the agreement it cites");
   for (const c of [pkg, ...parts]) {
     assert.equal(c.instrument, "unspecified", c.id);
     // One reading, one level: every entry that supports the instrument is ambiguous, and the package and its parts agree.

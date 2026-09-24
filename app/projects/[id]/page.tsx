@@ -47,6 +47,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const controls = controlsAtProjectStages(p, site.lastUpdated);
   const ended = stack.rows.filter(isEnded);
   const options = stack.rows.filter((c) => !isEnded(c) && c.valueRole === "funding_option");
+  const indications = stack.rows.filter((c) => !isEnded(c) && c.valueRole === "indication");
   const programmes = [...new Set(stack.rows.flatMap((c) => (c.programmeId ? [c.programmeId] : [])))];
   let n = 0;
   const next = () => String(++n).padStart(2, "0");
@@ -77,13 +78,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             title="Capital stack"
             description="One layer per value role. Only committed public money, and joint-vehicle money apart from it, is summed, per currency; everything else is listed. There is no total across layers."
           >
-            {ended.length || options.length ? (
+            {ended.length || options.length || indications.length ? (
               <p className="mb-6 max-w-prose rounded-md border border-dashed px-4 py-3 text-sm leading-6 text-muted">
                 {ended.length
                   ? `${ended.length} row${ended.length === 1 ? " has" : "s have"} ended (withdrawn or lapsed) and no longer back${ended.length === 1 ? "s" : ""} this project; ${ended.length === 1 ? "it stays" : "they stay"} listed with ${ended.length === 1 ? "its" : "their"} status. `
                   : ""}
                 {options.length
-                  ? `${options.length} funding option${options.length === 1 ? " is" : "s are"} a right to call on money, not money that moved, and ${options.length === 1 ? "is" : "are"} not counted as backing; an exercise would be a commitment of its own.`
+                  ? `${options.length} funding option${options.length === 1 ? " is" : "s are"} a right to call on money, not money that moved, and ${options.length === 1 ? "is" : "are"} not counted as backing; an exercise would be a commitment of its own. `
+                  : ""}
+                {indications.length
+                  ? `${indications.length} non-binding indication${indications.length === 1 ? " is" : "s are"} a letter of intent or interest, possible support and not a commitment, and ${indications.length === 1 ? "is" : "are"} not counted as backing; one that became binding would be recorded as a commitment.`
                   : ""}
               </p>
             ) : null}
@@ -192,7 +196,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
           <Card className="p-4 text-sm">
             <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Providers</h2>
-            <OrgList ids={stack.providerOrgIds} showKind empty="No named provider" />
+            <OrgList ids={stack.providerOrgIds} showKind empty="No provider of committed capital is named" />
           </Card>
           <Card className="p-4 text-sm">
             <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Machine-readable</h2>

@@ -179,7 +179,7 @@ export type InstrumentSum = {
     }
   | {
       /**
-       * Rows whose instrument the sources do not name ("unspecified"), or
+       * Rows whose instrument is not specified ("unspecified": the sources name none the vocabulary covers), or
        * that combine instruments without a split ("mixed"), are listed with
        * their own figures and never summed: adding them could add a loan to a
        * grant without anyone being able to tell.

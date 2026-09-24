@@ -2046,7 +2046,8 @@
     "supersededByEventId": null,
     "sourceIds": [
       "src-nist-chips-usar-2026",
-      "src-usar-8k-2026-06-03"
+      "src-usar-8k-2026-06-03",
+      "src-usar-direct-funding-agreement-2026-06-03"
     ],
     "verificationStatus": "verified",
     "intakeMode": "backfill",

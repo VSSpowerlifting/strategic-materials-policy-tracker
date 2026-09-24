@@ -192,7 +192,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
           {roles.received.length ? (
             <Card className="p-4 text-sm">
               <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Funded by</h2>
-              {funders.length ? funders.map((p) => <span key={p} className="block"><OrgLink id={p} /></span>) : <p className="text-muted">No named provider.</p>}
+              {funders.length ? funders.map((p) => <span key={p} className="block"><OrgLink id={p} /></span>) : <p className="text-muted">No provider of committed capital is named.</p>}
             </Card>
           ) : null}
           <Card className="p-4 text-sm">
