@@ -327,6 +327,17 @@ test("the Announcement No. 61 clauses are suspended until 10 November 2026 on th
   }
 });
 
+test("the Announcement No. 62 clauses state the two laws its preamble cites, not the four of the joint Nos. 56-58", () => {
+  // No. 62 is MOFCOM's alone: its preamble names the Export Control Law and the Dual-use Items Export Control
+  // Regulations, and nothing else. The Foreign Trade Law and the Customs Law belong to Nos. 18, 56, 57 and 58.
+  const rows = getAllControlMeasures().filter((m) => m.eventId === "evt-cn-mofcom-62-2025");
+  assert.ok(rows.length >= 4);
+  const two = "《中华人民共和国出口管制法》《中华人民共和国两用物项出口管制条例》";
+  for (const m of rows) assert.ok(!/对外贸易法|海关法/.test(m.legalBasisAsStated ?? ""), m.id);
+  for (const id of ["ctl-cn-62-2025-technology-licensing", "ctl-cn-62-2025-production-line-technology-licensing", "ctl-cn-62-2025-overseas-support-ban"])
+    assert.equal(rows.find((m) => m.id === id)?.legalBasisAsStated, two, id);
+});
+
 // --- Derived views ------------------------------------------------------------------------------
 
 test("the chronology is dated, ordered and complete for dated entries of government rows", () => {
