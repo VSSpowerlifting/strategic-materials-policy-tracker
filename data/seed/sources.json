@@ -958,5 +958,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23. Note 12: \"In July 2025, the Company issued 400,000 shares ... to the DoW for cash consideration of $400.0 million.\" Note on debt: the Samarium Project Loan \"bears interest at a fixed rate of 5.38% per annum\". Note 3 and MD&A: the Price Protection Agreement commenced on October 1, 2025; PPA income of $59.9 million for the six months to June 30, 2026 and a PPA income receivable of $17.6 million ($51.0 million at December 31, 2025). The 10X Facility is in Northlake, Texas, on a 120-acre site bought in April 2026, where construction is \"currently underway\". It refers to the Department of Defense as the Department of War."
+  },
+  {
+    "id": "src-meti-critical-minerals-certified-plans",
+    "title": "重要鉱物（経済安全保障推進法に基づく認定供給確保計画）",
+    "publisher": "経済産業省 (Ministry of Economy, Trade and Industry, Japan)",
+    "url": "https://www.meti.go.jp/policy/economy/economic_security/metal/index.html",
+    "language": "ja",
+    "datePublished": null,
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "METI's critical-minerals page, section 4 (認定供給確保計画): each certified supply-assurance plan with the business, certification number, the undertaking and the approximate subsidy (※助成額は約○億円), and the certification date. Read in full in a browser on 2026-09-23 (the site refuses automated clients); eleven plans listed, the latest certified on 16 September 2026. The page is updated in place and carries no publication date for the list."
+  },
+  {
+    "id": "src-jogmec-critical-minerals-grants",
+    "title": "重要鉱物助成金交付事業",
+    "publisher": "独立行政法人エネルギー・金属鉱物資源機構 (JOGMEC)",
+    "url": "https://www.jogmec.go.jp/activities/metal/critical-grant.html",
+    "language": "ja",
+    "datePublished": null,
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "JOGMEC's page for the critical-minerals grant programme under the Economic Security Promotion Act, read in full 2026-09-23. It pays certified businesses \"当該取組に係る申請者負担額の1／2の助成金\" (a grant of half the applicant's cost of the undertaking) and lists the grant decisions (交付決定事業) with approximate amounts and the fiscal year of the decision: nine as read, the latest three in 令和8年度 (FY2026)."
   }
 ]

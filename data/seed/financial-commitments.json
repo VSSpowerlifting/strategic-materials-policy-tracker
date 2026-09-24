@@ -1679,6 +1679,224 @@
     "notes": "A supply agreement between a trading company, a state agency and the producer; no money value is stated."
   },
   {
+    "id": "fin-jp-jogmec-almt-tungsten-grant",
+    "eventId": "evt-jp-espa-almt-tungsten-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "7500000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約75億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "株式会社アライドマテリアル",
+    "recipientOrgIds": [
+      "org-allied-material"
+    ],
+    "project": "New tungsten reduction and carburisation facilities to raise production of tungsten powder and tungsten carbide powder.",
+    "projectId": "prj-jp-almt-tungsten",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-18",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年3月18日."
+      },
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和7年度; the decision date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
+        "note": "還元及び炭化 (reduction and carburisation) into tungsten and tungsten carbide powder is read as processing."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description; 交付決定事業",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
+    "id": "fin-jp-jogmec-japan-new-metals-tungsten-grant",
+    "eventId": "evt-jp-espa-japan-new-metals-tungsten-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "2000000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約20億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "日本新金属株式会社",
+    "recipientOrgIds": [
+      "org-japan-new-metals"
+    ],
+    "project": "Expanded tungsten hydrometallurgical refining facilities in Japan.",
+    "projectId": "prj-jp-japan-new-metals-tungsten",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-09-07",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年9月7日; JOGMEC's list of grant decisions, as read, does not yet include it."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第３号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第３号－１",
+        "note": "湿式精錬 (hydrometallurgical refining) is coded as refining."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
     "id": "fin-jp-jogmec-lofdal-2026-equity",
     "eventId": "evt-jp-jogmec-lofdal-2026",
     "relationships": [],
@@ -1792,6 +2010,238 @@
       }
     ],
     "notes": "The amount is in Canadian dollars in both the Japanese and English releases; the yen figure is an approximation given in the release (約54.6億円 in the Japanese text, \"approximately 5.5 billion yen\" in English) and is not recorded as a separate amount."
+  },
+  {
+    "id": "fin-jp-jogmec-santoku-rare-earth-grant",
+    "eventId": "evt-jp-espa-santoku-rare-earth-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "800000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約8億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "株式会社三徳",
+    "recipientOrgIds": [
+      "org-santoku"
+    ],
+    "project": "New smelting facilities in Japan to increase rare earth production.",
+    "projectId": "prj-jp-santoku-rare-earth",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-07-29",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年7月29日."
+      },
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和8年度; the decision date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第２号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第２号－１",
+        "note": "製錬 (smelting and refining) is read as refining; the list does not say whether separation is included."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description; 交付決定事業",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
+    "id": "fin-jp-jogmec-shin-etsu-rare-earth-grant",
+    "eventId": "evt-jp-espa-shin-etsu-rare-earth-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "17500000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約175億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "信越化学工業株式会社",
+    "recipientOrgIds": [
+      "org-shin-etsu-chemical"
+    ],
+    "project": "New smelting facilities in Japan to increase rare earth production.",
+    "projectId": "prj-jp-shin-etsu-rare-earth",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-05-19",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年5月19日."
+      },
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和8年度; the decision date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第１号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第１号－１",
+        "note": "製錬 (smelting and refining) is read as refining; the list does not say whether separation is included."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description; 交付決定事業",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
   },
   {
     "id": "fin-uk-cms-2025-critical-mineral-fund",

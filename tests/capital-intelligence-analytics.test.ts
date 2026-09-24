@@ -369,7 +369,12 @@ test("a government's designations are counted apart from its capital, at home an
   const euCapital = actorPortfolio("eu");
   assert.equal(euCapital.counts.rows, getAllFinancialCommitments().filter((c) => c.providerJurisdiction === "eu").length);
   assert.ok(actorsWithCapital().includes("eu"));
-  assert.deepEqual(actorsWithDesignations(), ["eu"]);
+  assert.deepEqual(actorsWithDesignations(), ["eu", "japan"]);
+  // Japan's certified plans: three in Japan, one whose location the list does not state.
+  const jp = designationPortfolio("japan");
+  assert.equal(jp.counts.byGeography.domestic, 3);
+  assert.equal(jp.counts.byGeography.not_stated, 1);
+  assert.equal(jp.counts.projectsWithCapital, jp.counts.designations, "every certified plan carries its JOGMEC grant row");
   // Hemerdon (UK capital), CO2Graphite (EIB loan) and Sarytogan (EBRD equity) carry both a designation and a financial row.
   assert.equal(eu.counts.projectsWithCapital, 3);
 });

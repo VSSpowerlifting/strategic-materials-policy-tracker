@@ -45,7 +45,9 @@
       "evt-cn-mofcom-62-2025",
       "evt-eu-crma-strategic-projects-2025-03",
       "evt-eu-crma-strategic-projects-2025-06",
-      "evt-eu-resourceeu-2025"
+      "evt-eu-resourceeu-2025",
+      "evt-jp-espa-shin-etsu-rare-earth-2026",
+      "evt-jp-espa-santoku-rare-earth-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -357,7 +359,9 @@
       "evt-cn-antismuggling-campaign-2025",
       "evt-uk-nwf-tungsten-west-2026",
       "evt-eu-crma-strategic-projects-2025-03",
-      "evt-eu-crma-strategic-projects-2025-06"
+      "evt-eu-crma-strategic-projects-2025-06",
+      "evt-jp-espa-almt-tungsten-2026",
+      "evt-jp-espa-japan-new-metals-tungsten-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

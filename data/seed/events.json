@@ -1794,5 +1794,149 @@
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-jp-espa-almt-tungsten-2026",
+    "date": "2026-03-18",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（株式会社アライドマテリアル、認定番号２０２５重要鉱物第２号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Allied Material's critical-minerals supply-assurance plan for tungsten under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２５重要鉱物第２号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "On 18 March 2026 (令和8年3月18日) METI certified the supply-assurance plan of Allied Material Corporation (株式会社アライドマテリアル) under the Economic Security Promotion Act (certification number ２０２５重要鉱物第２号－１): new tungsten reduction and carburisation facilities to raise production of tungsten powder and tungsten carbide powder. METI's list gives a subsidy of about 75億円 (JPY 7.5 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC lists the grant among its FY2025 (令和7年度) grant decisions.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its tungsten plans reach the powder and carbide stages whose export China licensed from February 2025 (Announcement No. 10).",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-shin-etsu-rare-earth-2026",
+    "date": "2026-05-19",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（信越化学工業株式会社、認定番号２０２６重要鉱物第１号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Shin-Etsu Chemical's critical-minerals supply-assurance plan for rare earths under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２６重要鉱物第１号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [],
+    "summary": "On 19 May 2026 (令和8年5月19日) METI certified the supply-assurance plan of Shin-Etsu Chemical Co., Ltd. (信越化学工業株式会社) under the Economic Security Promotion Act (certification number ２０２６重要鉱物第１号－１): new smelting facilities in Japan to increase rare earth production. METI's list gives a subsidy of about 175億円 (JPY 17.5 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC lists the grant among its FY2026 (令和8年度) grant decisions.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its rare-earth plans add smelting capacity inside Japan at the stages whose Chinese technology exports Announcement No. 62 placed under licence in October 2025.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-santoku-rare-earth-2026",
+    "date": "2026-07-29",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（株式会社三徳、認定番号２０２６重要鉱物第２号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Santoku's critical-minerals supply-assurance plan for rare earths under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２６重要鉱物第２号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [],
+    "summary": "On 29 July 2026 (令和8年7月29日) METI certified the supply-assurance plan of Santoku Corporation (株式会社三徳) under the Economic Security Promotion Act (certification number ２０２６重要鉱物第２号－１): new smelting facilities in Japan to increase rare earth production. METI's list gives a subsidy of about 8億円 (JPY 0.8 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC lists the grant among its FY2026 (令和8年度) grant decisions.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its rare-earth plans add smelting capacity inside Japan at the stages whose Chinese technology exports Announcement No. 62 placed under licence in October 2025.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-japan-new-metals-tungsten-2026",
+    "date": "2026-09-07",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（日本新金属株式会社、認定番号２０２６重要鉱物第３号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Japan New Metals' critical-minerals supply-assurance plan for tungsten under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２６重要鉱物第３号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "On 7 September 2026 (令和8年9月7日) METI certified the supply-assurance plan of Japan New Metals Co., Ltd. (日本新金属株式会社) under the Economic Security Promotion Act (certification number ２０２６重要鉱物第３号－１): expanded tungsten hydrometallurgical refining facilities in Japan. METI's list gives a subsidy of about 20億円 (JPY 2 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC's list of grant decisions, as read on 23 September 2026, does not yet include it.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its tungsten plans reach the powder and carbide stages whose export China licensed from February 2025 (Announcement No. 10).",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
   }
 ]

@@ -1006,6 +1006,183 @@
     "notes": null
   },
   {
+    "id": "prj-jp-almt-tungsten",
+    "name": "Allied Material tungsten reduction and carburisation facilities",
+    "sponsorOrgIds": [
+      "org-allied-material"
+    ],
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
+        "note": "\"タングステンの還元及び炭化設備を新設し、タングステン粉末及び炭化タングステン粉末の生産能力を向上させる。\""
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
+        "note": "還元及び炭化 (reduction and carburisation) into tungsten and tungsten carbide powder is read as processing."
+      }
+    ],
+    "notes": "The list does not say where the facilities are."
+  },
+  {
+    "id": "prj-jp-japan-new-metals-tungsten",
+    "name": "Japan New Metals tungsten hydrometallurgical refining facilities in Japan",
+    "sponsorOrgIds": [
+      "org-japan-new-metals"
+    ],
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第３号－１",
+        "note": "\"日本国内に、タングステンの湿式精錬設備を増強し、国内安定供給体制を強化する。\""
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第３号－１",
+        "note": "湿式精錬 (hydrometallurgical refining) is coded as refining."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-jp-santoku-rare-earth",
+    "name": "Santoku rare earth smelting facilities in Japan",
+    "sponsorOrgIds": [
+      "org-santoku"
+    ],
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第２号－１",
+        "note": "\"日本国内に、製錬設備を新設することで、レアアースの生産を増強する。\""
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第２号－１",
+        "note": "製錬 (smelting and refining) is read as refining; the list does not say whether separation is included."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-jp-shin-etsu-rare-earth",
+    "name": "Shin-Etsu Chemical rare earth smelting facilities in Japan",
+    "sponsorOrgIds": [
+      "org-shin-etsu-chemical"
+    ],
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第１号－１",
+        "note": "\"日本国内に、製錬設備を新設することで、レアアースの生産を増強する。\""
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第１号－１",
+        "note": "製錬 (smelting and refining) is read as refining; the list does not say whether separation is included."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "prj-kz-sarytogan",
     "name": "Sarytogan Graphite Project",
     "sponsorOrgIds": [

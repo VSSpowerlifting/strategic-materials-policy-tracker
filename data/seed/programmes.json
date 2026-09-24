@@ -229,6 +229,68 @@
     "notes": null
   },
   {
+    "id": "prg-jp-espa-critical-minerals-certification",
+    "name": "Certified supply-assurance plans for critical minerals (Economic Security Promotion Act)",
+    "nameOriginal": "重要鉱物に係る認定供給確保計画",
+    "actor": "japan",
+    "kind": "designation_scheme",
+    "administeringOrgIds": [
+      "org-jp-meti"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "経済安全保障推進法 (Economic Security Promotion Act), under METI's 重要鉱物に係る安定供給確保を図るための取組方針",
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Sections 1 and 4",
+        "note": "The Minister certifies supply-assurance plans against the critical-minerals policy; certification opens the way to a JOGMEC grant but is not itself money."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description",
+        "note": "\"『経済施策を一体的に講ずることによる安全保障の確保の推進に関する法律（経済安全保障推進法）』に基づき\""
+      }
+    ],
+    "notes": "A plan is certified, not a project; each certified plan is recorded as a designation of the undertaking it describes."
+  },
+  {
+    "id": "prg-jp-jogmec-critical-minerals-grants",
+    "name": "Critical minerals grant programme (JOGMEC)",
+    "nameOriginal": "重要鉱物助成金交付事業",
+    "actor": "japan",
+    "kind": "grant_programme",
+    "administeringOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "経済安全保障推進法; 重要鉱物に係る安定供給確保支援基金事業費助成金交付規程",
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "name",
+          "kind",
+          "administrators",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description; related regulations",
+        "note": "\"計画が認定された供給確保事業者に対し、当該取組に係る申請者負担額の1／2の助成金を交付する事業\""
+      }
+    ],
+    "notes": "Grants half the applicant's cost of a certified undertaking. Rare earths, tungsten, gallium, germanium, antimony and graphite are among the minerals it currently supports."
+  },
+  {
     "id": "prg-us-osc-critical-minerals-lending",
     "name": "Office of Strategic Capital critical-minerals lending (One Big Beautiful Bill Act)",
     "nameOriginal": null,

@@ -149,7 +149,11 @@
     "eventIds": [
       "evt-jp-jogmec-lynas-2023",
       "evt-jp-jogmec-lofdal-2026",
-      "evt-jp-espa-2022"
+      "evt-jp-espa-2022",
+      "evt-jp-espa-almt-tungsten-2026",
+      "evt-jp-espa-shin-etsu-rare-earth-2026",
+      "evt-jp-espa-santoku-rare-earth-2026",
+      "evt-jp-espa-japan-new-metals-tungsten-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

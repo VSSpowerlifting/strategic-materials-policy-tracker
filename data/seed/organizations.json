@@ -26,6 +26,38 @@
     "notes": null
   },
   {
+    "id": "org-allied-material",
+    "name": "Allied Material Corporation",
+    "nameOriginal": "株式会社アライドマテリアル",
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "JP",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, 認定供給確保計画",
+        "note": "Named as the certified business in its Japanese form only."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "country"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4",
+        "note": "A 株式会社 (kabushiki kaisha) certified under Japan's Economic Security Promotion Act; the list gives no address."
+      }
+    ],
+    "notes": "The English name is this project's rendering; the METI and JOGMEC lists give only the Japanese name."
+  },
+  {
     "id": "org-au-disr",
     "name": "Department of Industry, Science and Resources",
     "nameOriginal": null,
@@ -536,6 +568,38 @@
     "notes": null
   },
   {
+    "id": "org-japan-new-metals",
+    "name": "Japan New Metals Co., Ltd.",
+    "nameOriginal": "日本新金属株式会社",
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "JP",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, 認定供給確保計画",
+        "note": "Named as the certified business in its Japanese form only."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "country"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4",
+        "note": "A 株式会社 (kabushiki kaisha) certified under Japan's Economic Security Promotion Act; the list gives no address."
+      }
+    ],
+    "notes": "The English name is this project's rendering; the METI and JOGMEC lists give only the Japanese name."
+  },
+  {
     "id": "org-jare",
     "name": "Japan Australia Rare Earth (JARE)",
     "nameOriginal": null,
@@ -608,6 +672,33 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-jp-meti",
+    "name": "Ministry of Economy, Trade and Industry (METI)",
+    "nameOriginal": "経済産業省",
+    "aliases": [
+      "METI"
+    ],
+    "kind": "government",
+    "countryCode": "JP",
+    "actor": "japan",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Page footer and contact",
+        "note": "\"経済産業省（法人番号 4000012090001） 〒100-8901 東京都千代田区霞が関1-3-1\"; the page lists the plans the Minister has certified."
       }
     ],
     "notes": null
@@ -1008,6 +1099,38 @@
     "notes": null
   },
   {
+    "id": "org-santoku",
+    "name": "Santoku Corporation",
+    "nameOriginal": "株式会社三徳",
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "JP",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, 認定供給確保計画",
+        "note": "Named as the certified business in its Japanese form only."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "country"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4",
+        "note": "A 株式会社 (kabushiki kaisha) certified under Japan's Economic Security Promotion Act; the list gives no address."
+      }
+    ],
+    "notes": "The English name is this project's rendering; the METI and JOGMEC lists give only the Japanese name."
+  },
+  {
     "id": "org-sarytogan",
     "name": "Sarytogan Graphite Limited",
     "nameOriginal": null,
@@ -1030,6 +1153,38 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "org-shin-etsu-chemical",
+    "name": "Shin-Etsu Chemical Co., Ltd.",
+    "nameOriginal": "信越化学工業株式会社",
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "JP",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, 認定供給確保計画",
+        "note": "Named as the certified business in its Japanese form only."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "country"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4",
+        "note": "A 株式会社 (kabushiki kaisha) certified under Japan's Economic Security Promotion Act; the list gives no address."
+      }
+    ],
+    "notes": "The English name is this project's rendering; the METI and JOGMEC lists give only the Japanese name."
   },
   {
     "id": "org-sibanye-stillwater-sandouville",

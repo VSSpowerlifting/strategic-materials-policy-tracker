@@ -626,5 +626,61 @@
     "quoteEnSource": "na",
     "sourceId": "src-ec-ip-25-2891",
     "notes": "Background paragraph of the Commission's press release. The Commission does not name the market players."
+  },
+  {
+    "id": "fc-jp-espa-almt-tungsten-supply",
+    "eventId": "evt-jp-espa-almt-tungsten-2026",
+    "actor": "japan",
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
+    "quoteOriginal": "我が国の重要鉱物の安定供給確保を図る上で効果的と認められる取組",
+    "quoteEn": "undertakings recognized as effective in securing the stable supply of critical minerals to Japan",
+    "quoteEnSource": "self",
+    "sourceId": "src-jogmec-critical-minerals-grants",
+    "notes": "JOGMEC's description of what the certified plans it funds must be; the same wording covers every grant under the programme."
+  },
+  {
+    "id": "fc-jp-espa-shin-etsu-rare-earth-supply",
+    "eventId": "evt-jp-espa-shin-etsu-rare-earth-2026",
+    "actor": "japan",
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
+    "quoteOriginal": "我が国の重要鉱物の安定供給確保を図る上で効果的と認められる取組",
+    "quoteEn": "undertakings recognized as effective in securing the stable supply of critical minerals to Japan",
+    "quoteEnSource": "self",
+    "sourceId": "src-jogmec-critical-minerals-grants",
+    "notes": "JOGMEC's description of what the certified plans it funds must be; the same wording covers every grant under the programme."
+  },
+  {
+    "id": "fc-jp-espa-santoku-rare-earth-supply",
+    "eventId": "evt-jp-espa-santoku-rare-earth-2026",
+    "actor": "japan",
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
+    "quoteOriginal": "我が国の重要鉱物の安定供給確保を図る上で効果的と認められる取組",
+    "quoteEn": "undertakings recognized as effective in securing the stable supply of critical minerals to Japan",
+    "quoteEnSource": "self",
+    "sourceId": "src-jogmec-critical-minerals-grants",
+    "notes": "JOGMEC's description of what the certified plans it funds must be; the same wording covers every grant under the programme."
+  },
+  {
+    "id": "fc-jp-espa-japan-new-metals-tungsten-supply",
+    "eventId": "evt-jp-espa-japan-new-metals-tungsten-2026",
+    "actor": "japan",
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
+    "quoteOriginal": "我が国の重要鉱物の安定供給確保を図る上で効果的と認められる取組",
+    "quoteEn": "undertakings recognized as effective in securing the stable supply of critical minerals to Japan",
+    "quoteEnSource": "self",
+    "sourceId": "src-jogmec-critical-minerals-grants",
+    "notes": "JOGMEC's description of what the certified plans it funds must be; the same wording covers every grant under the programme."
   }
 ]
