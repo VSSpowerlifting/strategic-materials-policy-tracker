@@ -268,7 +268,10 @@
       "src-dod-mp-transaction-agreement-2025",
       "src-osc-mp-loan-2025",
       "src-mp-dod-2025",
-      "src-fortune-dod-mp"
+      "src-fortune-dod-mp",
+      "src-mp-10q-2025-q3",
+      "src-mp-10k-2025",
+      "src-mp-10q-2026-q2"
     ],
     "verificationStatus": "verified",
     "intakeMode": "backfill",

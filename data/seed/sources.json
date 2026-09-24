@@ -922,5 +922,41 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Press release, read in full through the press corner's document API on 2026-09-23 (updated 8 December 2025). Its wording of the funding aim is \"mobilise up to €3 billion over the next 12 months\"; the Communication's own wording is recorded on the row."
+  },
+  {
+    "id": "src-mp-10q-2025-q3",
+    "title": "MP Materials Corp. Form 10-Q for the quarterly period ended September 30, 2025",
+    "publisher": "MP Materials Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136825000054/mp-20250930.htm",
+    "language": "en",
+    "datePublished": "2025-11-07",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23 (EDGAR refuses automated clients without a contact header). States that the banks' Commitment Letter \"expired undrawn on its own terms on August 26, 2025, as it was reduced on a dollar-for-dollar basis upon the Offering ... and the Company's execution of the Revolving Credit Facility\", and that in August 2025 the Company issued the $150 million Samarium Project Loan note to the DoW. It supports financing facts it states directly and is attributed to the company, not to the government."
+  },
+  {
+    "id": "src-mp-10k-2025",
+    "title": "MP Materials Corp. Form 10-K for the fiscal year ended December 31, 2025",
+    "publisher": "MP Materials Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm",
+    "language": "en",
+    "datePublished": "2026-02-26",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Binding annual filing of the recipient, read in a browser on 2026-09-23. Reports the July 2025 public offering (13,590,908 shares, net proceeds $724.2 million), the Samarium Project Loan note issued in August 2025, \"funds received from the DoW Transactions\", and 400,000 Series A preferred shares issued in 2025 and outstanding at December 31, 2025. It does not mention the $350 million Funding Allocation or say whether any additional preferred stock was sold to the DoW."
+  },
+  {
+    "id": "src-mp-10q-2026-q2",
+    "title": "MP Materials Corp. Form 10-Q for the quarterly period ended June 30, 2026",
+    "publisher": "MP Materials Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000048/mp-20260630.htm",
+    "language": "en",
+    "datePublished": "2026-08-07",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23. Note 12: \"In July 2025, the Company issued 400,000 shares ... to the DoW for cash consideration of $400.0 million.\" Note on debt: the Samarium Project Loan \"bears interest at a fixed rate of 5.38% per annum\". Note 3 and MD&A: the Price Protection Agreement commenced on October 1, 2025; PPA income of $59.9 million for the six months to June 30, 2026 and a PPA income receivable of $17.6 million ($51.0 million at December 31, 2025). The 10X Facility is in Northlake, Texas, on a 120-acre site bought in April 2026, where construction is \"currently underway\". It refers to the Department of Defense as the Department of War."
   }
 ]

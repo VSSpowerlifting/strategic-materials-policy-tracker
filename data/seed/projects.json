@@ -1582,7 +1582,13 @@
       "org-mp-10x-development",
       "org-mp-materials"
     ],
-    "locations": [],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Texas",
+        "asStated": "a 120-acre site in Northlake, Texas"
+      }
+    ],
     "stages": [
       "component_manufacturing"
     ],
@@ -1603,9 +1609,18 @@
         "evidence": "explicit",
         "locator": "Item 1.01, overview and Transaction Agreement paragraphs",
         "note": "\"the Company’s construction of its second domestic magnet manufacturing facility (the “10X Facility”)\"; built \"to produce sintered Neodymium-iron boron (NdFeB) permanent magnet blocks and / or other finished magnets\"."
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 1; note on property, plant and equipment",
+        "note": "The site was bought in April 2026; the July 2025 filing gave only \"a soon-to-be-chosen location\"."
       }
     ],
-    "notes": "The filing and the company release give the site only as \"a soon-to-be-chosen location\", so no location is recorded."
+    "notes": "The July 2025 filing and release gave the site as \"a soon-to-be-chosen location\"; MP's 10-Q for the quarter to 30 June 2026 places it in Northlake, Texas."
   },
   {
     "id": "prj-za-zandkopsdrift",

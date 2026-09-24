@@ -2703,7 +2703,7 @@
         "note": null
       }
     ],
-    "notes": "A funding option, not committed money: the Company may fund up to the full $350 million of its Funding Allocation by selling additional preferred stock to DoD, or elect to obtain it under the JPMorgan / Goldman Sachs committed financing instead. No source in the corpus records which it chose, whether DoD bought any further preferred stock, or any payment, so this row is listed apart and never summed. An exercise would be recorded as its own commitment drawn from this row."
+    "notes": "A funding option, not committed money: the Company could fund up to the full $350 million of its Funding Allocation by selling additional preferred stock to DoD, or elect to obtain it under the JPMorgan / Goldman Sachs committed financing instead, within 45 days of the Closing Date. MP's Form 10-K for 2025 reports 400,000 Series A shares issued in 2025 and outstanding at 31 December 2025, the number issued at closing, and its 10-Q for the quarter to 30 June 2026 still reports 400,000; the bank Commitment Letter expired undrawn on 26 August 2025. Neither filing mentions the Funding Allocation or states that the option was exercised or lapsed, so no exercise and no lapse is recorded; the row is listed apart and never summed. An exercise would be recorded as its own commitment drawn from this row."
   },
   {
     "id": "fin-us-dod-mp-2025-bank-financing",
@@ -2746,6 +2746,12 @@
         "date": "2025-07-09",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
         "note": "A debt commitment letter, \"subject to customary terms and conditions\"; the filing does not describe an executed loan agreement."
+      },
+      {
+        "status": "lapsed",
+        "date": "2025-08-26",
+        "sourceId": "src-mp-10q-2025-q3",
+        "note": "\"The Commitment Letter expired undrawn on its own terms on August 26, 2025, as it was reduced on a dollar-for-dollar basis upon the Offering ... and the Company's execution of the Revolving Credit Facility.\""
       }
     ],
     "implementationStatusHistory": [],
@@ -2780,9 +2786,18 @@
         "evidence": "explicit",
         "locator": "Item 1.01, 10X Facility Funding",
         "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2025-q3",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 3 (Public-Private Partnership), Commitment Letter for Facility Construction",
+        "note": null
       }
     ],
-    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash."
+    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's $724.2 million public offering and a revolving credit facility reduced it to nothing."
   },
   {
     "id": "fin-us-dod-mp-2025-company-cash",
@@ -2913,6 +2928,12 @@
         "date": "2025-07-10",
         "sourceId": "src-mp-dod-2025",
         "note": "The company \"will construct\" the facility \"at a soon-to-be-chosen location\"."
+      },
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "\"In April 2026, the Company purchased a 120-acre site in Northlake, Texas, for approximately $80 million where construction of the 10X Facility is currently underway.\" Reported for the quarter to 30 June 2026; the start date of construction is not stated."
       }
     ],
     "terms": [
@@ -3020,6 +3041,15 @@
         "evidence": "explicit",
         "locator": "Opening paragraphs",
         "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note on property, plant and equipment; Note 1",
+        "note": null
       }
     ],
     "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations."
@@ -3071,6 +3101,12 @@
         "date": "2025-07-09",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
         "note": "Subscription Agreement entered into on the Effective Date; 400,000 shares of Series A Cumulative Perpetual Convertible Preferred Stock to be issued on the Closing Date, 11 July 2025."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "\"In July 2025, the Company issued 400,000 shares of newly designated Series A Cumulative Perpetual Convertible Preferred Stock ... to the DoW for cash consideration of $400.0 million.\" The day is not stated in this note; the Form 8-K put the Closing Date at 11 July 2025."
       }
     ],
     "implementationStatusHistory": [],
@@ -3132,6 +3168,15 @@
         "evidence": "explicit",
         "locator": "Paragraph on use of proceeds",
         "note": "The recipient's stated intended use: \"to expand its existing rare earths separation and processing capabilities, as well as its magnet production capacity\"."
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 12, Redeemable Preferred Stock",
+        "note": null
       }
     ],
     "notes": "DoD's convertible preferred stock and warrant together represent 15% of issued and outstanding common stock as of the Closing Date, on an as-converted and as-exercised basis (Form 8-K). Stage attribution is the recipient's stated intended use of proceeds."
@@ -3227,7 +3272,7 @@
         "note": null
       }
     ],
-    "notes": "Applies to all of the Company's products that contain NdPr (concentrate, oxide and metal). No total value is stated: the cost depends on future prices, and none is estimated here."
+    "notes": "Applies to all of the Company's products that contain NdPr (concentrate, oxide and metal). No total value is stated: the cost depends on future prices, and none is estimated here. The agreement commenced on 1 October 2025. MP's 10-Q for the quarter to 30 June 2026 reports price protection agreement income of $59.9 million for the first half of 2026 (its right to receive cash from the DoW for the gap between $110 per kilogram of NdPr and the benchmark price) and a PPA income receivable of $17.6 million at 30 June 2026 ($51.0 million at 31 December 2025). It does not state cash received, so no payment status is recorded; these are the company's accounting figures, not a government statement."
   },
   {
     "id": "fin-us-dod-mp-2025-samarium-loan",
@@ -3293,6 +3338,12 @@
         "date": null,
         "sourceId": "src-osc-mp-loan-2025",
         "note": "OSC announced on 10 August 2025 \"the recent execution of its first direct loan\"; the execution date is not stated."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-mp-10k-2025",
+        "note": "\"in August 2025, we issued a $150.0 million unsecured promissory note to the DoW with a 12-year term, maturing on August 1, 2037\"; the filing reports funds received from the DoW Transactions. The day of funding is not stated."
       }
     ],
     "implementationStatusHistory": [],
@@ -3316,6 +3367,16 @@
         "asStated": "maturing 12 years after issuance of the Promissory Note",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
         "note": null
+      },
+      {
+        "kind": "lending_rate",
+        "value": "5.38",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% per annum, fixed",
+        "asStated": "bears interest at a fixed rate of 5.38% per annum, calculated as the 10-year U.S. Treasury constant maturity rate plus 1.00% at the time of funding",
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "The rate fixed at funding under the formula the Transaction Agreement set."
       }
     ],
     "outcomes": [],
@@ -3355,6 +3416,24 @@
         "evidence": "explicit",
         "locator": "First and third paragraphs",
         "note": "Read in full in a browser on 2026-09-23."
+      },
+      {
+        "sourceId": "src-mp-10k-2025",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "MD&A, DoW Transactions; Liquidity and Capital Resources",
+        "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 11, Debt Obligations: Samarium Project Loan",
+        "note": null
       }
     ],
     "notes": "OSC describes this as its first direct loan. Unsecured promissory note; the company may repay at any time."

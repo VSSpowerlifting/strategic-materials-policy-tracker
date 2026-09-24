@@ -78,6 +78,7 @@ const FINANCIAL_STATUS_DEFS: Record<(typeof FINANCIAL_STATUSES)[number], string>
   partially_disbursed: "Some of the money has been paid out.",
   disbursed: "The money has been paid out.",
   withdrawn: "The commitment was withdrawn.",
+  lapsed: "The commitment ended unused on its own terms, for example a commitment letter that expired undrawn.",
   not_stated: "The source states no status.",
 };
 

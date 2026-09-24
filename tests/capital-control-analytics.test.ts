@@ -482,3 +482,27 @@ test("a negotiation mandate is not a control measure: Proclamation 11001 stays a
   assert.equal(concluded.status, "concluded");
   assert.equal(concluded.sourceId, "src-fedreg-proc-11001");
 });
+
+test("a withdrawn or lapsed commitment is listed as ended and never summed", () => {
+  const live = fin("fin-live", { amount: { value: "100", currency: "USD", qualifier: "exact", amountAsStated: "$100", currencyBasis: "stated" } });
+  const withdrawn = fin("fin-withdrawn", {
+    financialStatusHistory: [
+      { status: "announced", date: "2025-01-01", sourceId: "s" },
+      { status: "withdrawn", date: "2025-06-01", sourceId: "s" },
+    ],
+  });
+  const lapsed = fin("fin-lapsed", {
+    financialStatusHistory: [
+      { status: "decided", date: "2025-01-01", sourceId: "s" },
+      { status: "lapsed", date: "2025-08-26", sourceId: "s" },
+    ],
+  });
+  const all = [live, withdrawn, lapsed];
+  const t = totalCommitments(all, all);
+  assert.deepEqual(t.endedIds, ["fin-withdrawn", "fin-lapsed"]);
+  assert.equal(t.currencies.length, 1);
+  const usd = t.currencies[0];
+  assert.equal(usd.status, "summed");
+  assert.deepEqual(usd.countedIds, ["fin-live"]);
+  assert.deepEqual(usd.status === "summed" && usd.byQualifier, { exact: "100" });
+});

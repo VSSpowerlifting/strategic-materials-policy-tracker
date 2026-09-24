@@ -34,7 +34,11 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
   if (!totals.currencies.length)
     return (
       <p className="font-mono text-xs text-faint">
-        {totals.unquantifiedIds.length ? `No amount stated on ${totals.unquantifiedIds.length === 1 ? "the row" : `any of ${totals.unquantifiedIds.length} rows`}` : "Nothing to sum"}
+        {totals.unquantifiedIds.length
+          ? `No amount stated on ${totals.unquantifiedIds.length === 1 ? "the row" : `any of ${totals.unquantifiedIds.length} rows`}`
+          : totals.endedIds.length
+            ? "Nothing to sum: the commitment has ended"
+            : "Nothing to sum"}
       </p>
     );
   return (
@@ -60,6 +64,11 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
           </p>
         </div>
       ))}
+      {totals.endedIds.length ? (
+        <p className="font-mono text-[11px] text-faint sm:col-span-2">
+          {totals.endedIds.length} row{totals.endedIds.length === 1 ? " has" : "s have"} ended (withdrawn or lapsed) and {totals.endedIds.length === 1 ? "is" : "are"} not summed.
+        </p>
+      ) : null}
       {totals.unquantifiedIds.length ? (
         <p className="font-mono text-[11px] text-faint sm:col-span-2">
           {totals.unquantifiedIds.length} row{totals.unquantifiedIds.length === 1 ? " states" : "s state"} no amount and {totals.unquantifiedIds.length === 1 ? "is" : "are"} listed, not valued.

@@ -258,6 +258,7 @@ export const financialStatusLabels: Record<FinancialStatus, string> = {
   partially_disbursed: "Partially disbursed",
   disbursed: "Disbursed",
   withdrawn: "Withdrawn",
+  lapsed: "Lapsed",
   not_stated: "Not stated",
 };
 

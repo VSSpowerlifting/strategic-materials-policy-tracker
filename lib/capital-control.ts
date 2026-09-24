@@ -24,6 +24,8 @@
  *    public money because their public share is not stated.
  *  - Figures stated as ceilings, approximations or floors are kept apart from
  *    exact figures, so a total never hides how much of it is "up to".
+ *  - A commitment whose current status is withdrawn or lapsed is left out of
+ *    every sum and listed as ended: money that will not flow is not support.
  *  - Decimal arithmetic is exact (BigInt), never floating point.
  */
 import {
@@ -186,7 +188,12 @@ export type CommitmentTotals = {
   currencies: CurrencyTotal[];
   /** Rows in scope that state no amount (price floors, offtakes, tax credits). */
   unquantifiedIds: string[];
+  /** Rows whose current status is withdrawn or lapsed: money that will not flow, listed and never summed. */
+  endedIds: string[];
 };
+
+/** Financial statuses at which a commitment has ended without the money flowing. */
+export const ENDED_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["withdrawn", "lapsed"];
 
 /**
  * Per-currency totals of the given rows under the counting rules above. The
@@ -203,9 +210,14 @@ export function totalCommitments(
 
   const inScope = new Map(rows.map((r) => [r.id, r]));
   const unquantifiedIds: string[] = [];
+  const endedIds: string[] = [];
   const counted = new Map<string, FinancialCommitment[]>();
   const nested = new Map<string, string[]>();
   for (const c of rows) {
+    if (ENDED_FINANCIAL_STATUSES.includes(currentFinancialStatus(c))) {
+      endedIds.push(c.id);
+      continue;
+    }
     if (!c.amount) {
       unquantifiedIds.push(c.id);
       continue;
@@ -242,7 +254,7 @@ export function totalCommitments(
       }
       return { ...base, status: "summed", byQualifier, binding, notYetBinding, overlap: null };
     });
-  return { currencies, unquantifiedIds };
+  return { currencies, unquantifiedIds, endedIds };
 }
 
 /** Public support committed to recipients: role "commitment", public capital. */

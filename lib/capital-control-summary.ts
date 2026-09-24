@@ -43,11 +43,13 @@ export function buildCapitalControlSummary() {
       "Private financing, recipient funds, expected co-investment and total project cost are never public support; mixed vehicles are reported apart.",
       "Sums are kept apart by qualifier: exact, approximately, at least, up to.",
       "Binding money (contracted, partially disbursed, disbursed) is summed apart from money not yet binding (announced, authorized, allocated, decided).",
+      "A commitment whose current status is withdrawn or lapsed is left out of every sum and listed as ended.",
     ],
     capital: {
       rows: all.length,
       publicCommitmentTotals: totals.currencies,
       publicCommitmentsWithoutAmount: totals.unquantifiedIds,
+      publicCommitmentsEnded: totals.endedIds,
       publicCapitalSources: PUBLIC_CAPITAL_SOURCES,
       envelopesListedNotSummed: listed([...LISTED_NOT_SUMMED_ROLES]),
       fundingOptionsListedNotSummed: all

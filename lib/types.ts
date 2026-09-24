@@ -386,6 +386,7 @@ export const FINANCIAL_STATUSES = [
   "partially_disbursed",
   "disbursed",
   "withdrawn",
+  "lapsed", // ended unused on its own terms, e.g. a commitment letter that expired undrawn (v0.6)
   "not_stated",
 ] as const;
 
