@@ -4405,7 +4405,7 @@
       "value": "1300000000",
       "currency": "USD",
       "qualifier": "up_to",
-      "amountAsStated": "to guarantee the repayment by USAR and its affiliates of advances in an aggregate principal amount of $1.3 billion (“FFB Advances”) made by the Federal Financing Bank",
+      "amountAsStated": "to guarantee the repayment by USAR and its affiliates of advances in an aggregate principal amount of $1.3 billion (“FFB Advances” and, together with the Direct Funding, the “Awards”) made by the Federal Financing Bank",
       "currencyBasis": "stated"
     },
     "provider": "U.S. Department of Commerce (CHIPS Program Office), guaranteeing Federal Financing Bank advances",
@@ -5832,7 +5832,7 @@
         "note": null
       }
     ],
-    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's $724.2 million public offering and a revolving credit facility reduced it to nothing."
+    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing."
   },
   {
     "id": "fin-us-dod-mp-2025-company-cash",
