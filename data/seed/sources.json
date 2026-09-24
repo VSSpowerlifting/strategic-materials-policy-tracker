@@ -898,5 +898,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Press release, read in full through the press corner's document API on 2026-09-23. States that the projects \"will diversify the EU's sources of supply and increase economic security\" and estimates \"an overall capital investment of €5.5 billion\" for the 13 projects, which is project cost and is not recorded as capital."
+  },
+  {
+    "id": "src-ec-resourceeu-com-945",
+    "title": "RESourceEU Action Plan: Accelerating our critical raw materials strategy to adapt to a new reality (COM(2025) 945 final)",
+    "publisher": "European Commission",
+    "url": "https://single-market-economy.ec.europa.eu/document/download/01c448d6-dc93-40d7-9afe-4c2af448d00c_en",
+    "language": "en",
+    "datePublished": "2025-12-03",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The Communication itself, 19 pages, read in full 2026-09-23. Section 2.1: \"Overall, as part of a Team Europe approach, the EU should mobilise EUR 3 billion of EU funds within the next 12 months in direct support of the CRM value chain\"; names the Just Transition Fund's EUR 18.7 million for Neo Performance's rare earths magnet project in Estonia, EIB loan agreements with the Strategic Projects UpCatalyst and Keliber, and the EBRD's equity of around EUR 3.6 million in the Sarytogan Graphite Strategic Project. Section 3.1: by Q2 2026 the Commission will propose restrictions on exports of permanent-magnet scraps and waste."
+  },
+  {
+    "id": "src-ec-ip-25-2891",
+    "title": "Commission adopts RESourceEU to secure raw materials, reduce dependencies and boost competitiveness (IP/25/2891)",
+    "publisher": "European Commission",
+    "url": "https://ec.europa.eu/commission/presscorner/detail/en/ip_25_2891",
+    "language": "en",
+    "datePublished": "2025-12-03",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Press release, read in full through the press corner's document API on 2026-09-23 (updated 8 December 2025). Its wording of the funding aim is \"mobilise up to €3 billion over the next 12 months\"; the Communication's own wording is recorded on the row."
   }
 ]

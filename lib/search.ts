@@ -132,7 +132,7 @@ export function buildSearchIndex(): SearchDoc[] {
       id: c.id,
       kind: "capital",
       title: `${financialInstrumentLabels[c.instrument]} · ${c.recipient ?? c.provider ?? c.id}`,
-      subtitle: `${actor ? jurisdictionLabels[actor] : "Not government capital"} · ${valueRoleLabels[c.valueRole]}${c.amount ? ` · ${c.amount.qualifier === "exact" ? "" : `${c.amount.qualifier.replace("_", " ")} `}${formatMoney(c.amount.value, c.amount.currency)}` : ""}`,
+      subtitle: `${actor ? jurisdictionLabels[actor] : "No tracked government"} · ${valueRoleLabels[c.valueRole]}${c.amount ? ` · ${c.amount.qualifier === "exact" ? "" : `${c.amount.qualifier.replace("_", " ")} `}${formatMoney(c.amount.value, c.amount.currency)}` : ""}`,
       href: `/capital/${c.id}`,
       date: c.financialStatusHistory.find((e) => e.date)?.date ?? null,
       jurisdiction: actor,

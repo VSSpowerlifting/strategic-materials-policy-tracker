@@ -179,6 +179,32 @@
     "notes": "Recognition gives priority status, coordinated help with finance and off-takers and, inside the EU, time-limited permitting (27 months for extraction, 15 months for other projects). Any money that follows is recorded as its own financial row. A second call closed on 15 January 2026; no second selection decision is recorded yet."
   },
   {
+    "id": "prg-eu-resourceeu",
+    "name": "RESourceEU",
+    "nameOriginal": null,
+    "actor": "eu",
+    "kind": "multi_instrument",
+    "administeringOrgIds": [
+      "org-eu-commission"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Introduction; sections 1–2",
+        "note": "\"RESourceEU mobilises a large spectrum of policy tools as well as private and public actors\": a Critical Raw Materials Centre, a financing hub, joint purchasing, a stockpiling pilot and EU funds, coordinated by the Commission."
+      }
+    ],
+    "notes": "An action plan, not a legal instrument: it adds no legal authority of its own and builds on Regulation (EU) 2024/1252."
+  },
+  {
     "id": "prg-in-ncmm",
     "name": "National Critical Mineral Mission",
     "nameOriginal": null,

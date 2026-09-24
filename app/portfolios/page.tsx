@@ -239,7 +239,7 @@ export default function PortfoliosPage() {
         <Section
           index="04"
           title="Projects with more than one backer"
-          description="By kind: more than one government's capital, public and private capital, several public bodies, or government capital alongside a designation. Envelopes and total project cost are not capital provided, so they do not count."
+          description="By kind: more than one government's capital, public and private capital, several public bodies, or public capital alongside a designation. Envelopes and total project cost are not capital provided, so they do not count."
         >
           {co.length ? (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

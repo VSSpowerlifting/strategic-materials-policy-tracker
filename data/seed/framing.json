@@ -612,5 +612,19 @@
     "quoteEnSource": "na",
     "sourceId": "src-ec-ip-25-1419",
     "notes": "From the Commission's press release on the first list of Strategic Projects outside the EU."
+  },
+  {
+    "id": "fc-eu-resourceeu-2025-weaponisation",
+    "eventId": "evt-eu-resourceeu-2025",
+    "actor": "eu",
+    "category": [
+      "economic_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "The recent weaponisation of CRMs by dominant market players highlighted the need to accelerate existing efforts to enhance security of supply.",
+    "quoteEn": "The recent weaponisation of CRMs by dominant market players highlighted the need to accelerate existing efforts to enhance security of supply.",
+    "quoteEnSource": "na",
+    "sourceId": "src-ec-ip-25-2891",
+    "notes": "Background paragraph of the Commission's press release. The Commission does not name the market players."
   }
 ]

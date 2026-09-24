@@ -44,7 +44,8 @@
       "evt-cn-mofcom-57-2025",
       "evt-cn-mofcom-62-2025",
       "evt-eu-crma-strategic-projects-2025-03",
-      "evt-eu-crma-strategic-projects-2025-06"
+      "evt-eu-crma-strategic-projects-2025-06",
+      "evt-eu-resourceeu-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -283,7 +284,8 @@
       "evt-us-aam-adcvd-2025",
       "evt-cn-mofcom-58-2025",
       "evt-eu-crma-strategic-projects-2025-03",
-      "evt-eu-crma-strategic-projects-2025-06"
+      "evt-eu-crma-strategic-projects-2025-06",
+      "evt-eu-resourceeu-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -389,7 +391,8 @@
       "evt-us-proc-11001-2026",
       "evt-us-osc-vulcan-reelement-2025",
       "evt-cn-mofcom-56-2025",
-      "evt-cn-mofcom-62-2025"
+      "evt-cn-mofcom-62-2025",
+      "evt-eu-resourceeu-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

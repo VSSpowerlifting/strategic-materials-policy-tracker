@@ -167,7 +167,7 @@ export default function CapitalPage() {
                               />
                             </div>
                             <p className="mt-0.5 font-mono text-[10px] text-faint">
-                              {commitmentActor(c) ? jurisdictionLabels[commitmentActor(c)!] : "Not government capital"} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
+                              {commitmentActor(c) ? jurisdictionLabels[commitmentActor(c)!] : "No tracked government"} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
                             </p>
                           </Link>
                         </li>

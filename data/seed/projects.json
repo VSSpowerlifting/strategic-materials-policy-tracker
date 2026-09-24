@@ -324,6 +324,52 @@
     "notes": null
   },
   {
+    "id": "prj-ee-neo-rare-earth-magnet-project",
+    "name": "Neo Performance's rare earths magnet project in Estonia",
+    "sponsorOrgIds": [
+      "org-neo-performance"
+    ],
+    "locations": [
+      {
+        "countryCode": "EE",
+        "subnational": null,
+        "asStated": "Estonia"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "name",
+          "sponsors",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 2.1",
+        "note": "\"Rare earths magnet project\": read as rare-earth permanent-magnet manufacturing; the Communication does not say which magnet type."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "prj-es-el-moto",
     "name": "Mining Project El Moto",
     "sponsorOrgIds": [

@@ -287,8 +287,9 @@ export type CoInvestment = {
 /**
  * Projects with more than one backer, by kind: more than one government's
  * capital; public money alongside private financing or a recipient's own
- * funds; several public bodies of one government; or government capital
- * alongside a designation (standing, not money). Envelopes and total project
+ * funds; several public bodies of one government; or public capital
+ * (a government's, or a multilateral lender's) alongside a designation
+ * (standing, not money). Envelopes and total project
  * cost are not capital provided, so they do not count.
  */
 export function coInvestments(all: readonly FinancialCommitment[] = getAllFinancialCommitments()): CoInvestment[] {
@@ -306,7 +307,9 @@ export function coInvestments(all: readonly FinancialCommitment[] = getAllFinanc
     if (publicRows.length && privateRows.length) kinds.push("public_and_private");
     if (governments.length === 1 && publicOrgs.length > 1) kinds.push("several_public_bodies");
     const designations = getAllProjectDesignations().filter((d) => d.projectId === project.id);
-    if (publicRows.length && designations.length) kinds.push("capital_and_designation");
+    // Public capital here includes multilateral money (a public financier no tracked government owns).
+    const publicCapital = rows.filter((c) => c.providerJurisdiction !== null || PUBLIC_CAPITAL_SOURCES.includes(c.capitalSource));
+    if (publicCapital.length && designations.length) kinds.push("capital_and_designation");
     if (kinds.length)
       out.push({
         project,

@@ -60,7 +60,7 @@ export function CapitalExplorer({
     () => ({
       actor: [
         ...countOptions(rows.flatMap((r) => (r.actor ? [r.actor] : [])), jurisdictionLabels, JURISDICTIONS),
-        ...(rows.some((r) => !r.actor) ? [{ value: NON_GOV, label: "Not government capital", count: rows.filter((r) => !r.actor).length }] : []),
+        ...(rows.some((r) => !r.actor) ? [{ value: NON_GOV, label: "No tracked government", count: rows.filter((r) => !r.actor).length }] : []),
       ],
       instrument: countOptions(rows.map((r) => r.instrument), financialInstrumentLabels, FINANCIAL_INSTRUMENTS),
       role: countOptions(rows.map((r) => r.valueRole), valueRoleLabels, VALUE_ROLES),

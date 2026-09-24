@@ -230,6 +230,9 @@ test("co-investment is classed by who provides the capital, and counts no envelo
   assert.deepEqual(byProject.get("prj-gb-hemerdon")?.designatingGovernments, ["eu"]);
   assert.ok(!byProject.has("prj-na-lofdal"), "one provider is not co-investment");
   assert.ok(!byProject.has("prj-fr-caremag"), "a designation alone is not co-investment");
+  // Multilateral public money beside an EU designation: EBRD equity in Sarytogan.
+  assert.deepEqual(byProject.get("prj-kz-sarytogan")?.kinds, ["capital_and_designation"]);
+  assert.deepEqual(byProject.get("prj-kz-sarytogan")?.governments, [], "the EBRD is credited to no government");
 });
 
 test("control clauses at a project's materials and stages are found by item overlap, with their status on the as-of date", () => {
@@ -362,10 +365,13 @@ test("a government's designations are counted apart from its capital, at home an
   assert.equal(designationGeography(ngc, "eu").geography, "domestic_and_abroad");
   // Substitution projects carry no stage and are counted as such.
   assert.equal(eu.counts.noStage, getAllProjectDesignations().filter((x) => !x.stages.length).length);
-  // Designations never enter a money figure: the EU provides no capital row, so it has no capital portfolio.
-  assert.ok(!actorsWithCapital().includes("eu"));
+  // Designations never enter a money figure: the EU's capital portfolio counts its financial rows only.
+  const euCapital = actorPortfolio("eu");
+  assert.equal(euCapital.counts.rows, getAllFinancialCommitments().filter((c) => c.providerJurisdiction === "eu").length);
+  assert.ok(actorsWithCapital().includes("eu"));
   assert.deepEqual(actorsWithDesignations(), ["eu"]);
-  assert.equal(eu.counts.projectsWithCapital, 1, "only Hemerdon carries both");
+  // Hemerdon (UK capital), CO2Graphite (EIB loan) and Sarytogan (EBRD equity) carry both a designation and a financial row.
+  assert.equal(eu.counts.projectsWithCapital, 3);
 });
 
 test("the response map places designations beside capital and controls without counting them as capital", () => {

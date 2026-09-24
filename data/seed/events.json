@@ -1748,5 +1748,48 @@
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-eu-resourceeu-2025",
+    "date": "2025-12-03",
+    "jurisdiction": "eu",
+    "issuingBody": "European Commission",
+    "titleOriginal": "RESourceEU Action Plan: Accelerating our critical raw materials strategy to adapt to a new reality",
+    "titleOriginalLang": "en",
+    "titleEn": "RESourceEU Action Plan: Accelerating our critical raw materials strategy to adapt to a new reality",
+    "titleEnSource": "na",
+    "documentNumber": "COM(2025) 945 final",
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "stockpiling",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "battery",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "A Commission action plan building on the Critical Raw Materials Act. It sets up a European Critical Raw Materials Centre in early 2026 (market intelligence, project finance, joint purchasing and stockpiling), a Raw Materials Platform to aggregate demand and secure offtake, a stockpiling pilot with Member States from early 2026, and a financing hub coordinating EU instruments (InvestEU, the Innovation Fund, the Battery Booster and EIB and EBRD financing). It says the EU should mobilise EUR 3 billion of EU funds within 12 months in direct support of the critical-raw-materials value chain, and records financing already given, including the Just Transition Fund's EUR 18.7 million for a rare-earth magnet project in Estonia, EIB loans to the UpCatalyst graphite Strategic Project and EBRD equity in the Sarytogan graphite project. By Q2 2026 the Commission will propose restrictions on exports of permanent-magnet scraps and waste; no such instrument is in the corpus, so no control clause is recorded. A targeted amendment to the Act extends magnet labelling and recycled-content rules.",
+    "analyticalSignificance": "The EU's response moves from recognition to money and market tools: after the 2025 Strategic Project lists, the plan puts EU funds, public-bank financing, joint purchasing and stockpiling behind the same projects. It names China's controls only obliquely, as the \"weaponisation of CRMs by dominant market players\", and proposes the EU's first rare-earth export restriction of its own, on magnet scrap, which remained a proposal to come when the plan was adopted.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ec-resourceeu-com-945",
+      "src-ec-ip-25-2891"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-12-03",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
   }
 ]

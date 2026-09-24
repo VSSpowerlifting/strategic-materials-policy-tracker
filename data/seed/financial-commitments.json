@@ -1082,6 +1082,319 @@
     "notes": "\"Manufacturing\" in the release is not mapped to a stage: it does not say which manufacturing. The release is not an itemised budget, so no component amounts are recorded for it."
   },
   {
+    "id": "fin-ebrd-2025-sarytogan-equity",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "3600000",
+      "currency": "EUR",
+      "qualifier": "approximately",
+      "amountAsStated": "around EUR 6 million in the EuroManganese Strategic Project in the Czech Republic and EUR 3.6 million in the Sarytogan Graphite Strategic Project in Kazakhstan",
+      "currencyBasis": "stated"
+    },
+    "provider": "European Bank for Reconstruction and Development",
+    "providerJurisdiction": null,
+    "providerOrgIds": [
+      "org-ebrd"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Sarytogan Graphite Strategic Project",
+    "recipientOrgIds": [],
+    "project": "Sarytogan Graphite Strategic Project",
+    "projectId": "prj-kz-sarytogan",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "KZ",
+        "subnational": null,
+        "asStated": "Kazakhstan"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "\"The EBRD also invested in equity\"; recorded as an executed investment with no date stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, fourth paragraph (continues on p. 5)",
+        "note": "\"around\" qualifies both figures in the sentence, so the Sarytogan figure is recorded as approximate."
+      }
+    ],
+    "notes": "Multilateral public money: it counts among public commitments but is credited to no tracked government. The EuroManganese investment named alongside it is manganese, outside the tracked materials, and is not recorded."
+  },
+  {
+    "id": "fin-eu-eib-2025-up-catalyst-loan",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": null,
+    "provider": "European Investment Bank (supported by InvestEU)",
+    "providerJurisdiction": "eu",
+    "providerOrgIds": [
+      "org-eu-eib"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "UpCatalyst",
+    "recipientOrgIds": [
+      "org-up-catalyst"
+    ],
+    "project": "Strategic Project UpCatalyst (processing of graphite)",
+    "projectId": "prj-ee-co2graphite",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "\"the EIB has already provided financing to the Strategic Projects UpCatalyst ... and Keliber ... via loan agreements\"; no date or amount is stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, third paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "project"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 2.1, third paragraph",
+        "note": "The Communication names \"the Strategic Projects UpCatalyst (processing of graphite)\" after its promoter; the one Strategic Project UP Catalyst promotes is CO2Graphite (Decision C(2025) 1904, annex entry (11))."
+      }
+    ],
+    "notes": "No amount is stated, so the row sums nothing. The Keliber loan named alongside it is lithium, outside the tracked materials, and is not recorded."
+  },
+  {
+    "id": "fin-eu-jtf-2025-neo-magnet-project",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "18700000",
+      "currency": "EUR",
+      "qualifier": "exact",
+      "amountAsStated": "EUR 18.7 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Just Transition Fund",
+    "providerJurisdiction": "eu",
+    "providerOrgIds": [],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Neo Performance",
+    "recipientOrgIds": [
+      "org-neo-performance"
+    ],
+    "project": "Rare earths magnet project in Estonia",
+    "projectId": "prj-ee-neo-rare-earth-magnet-project",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "EE",
+        "subnational": null,
+        "asStated": "Estonia"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "\"The Just Transition Fund has provided EUR 18.7 million in funding\"; the Communication does not say whether the money is awarded or paid, or when."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, second paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 2.1, second paragraph",
+        "note": "\"Rare earths magnet project\": read as permanent-magnet manufacturing; the magnet type is not stated."
+      }
+    ],
+    "notes": "Recorded as reported in the RESourceEU Communication, not from the award decision; the instrument is not named. The Just Transition Fund is an EU fund under shared management, so the provider's actor is the EU."
+  },
+  {
+    "id": "fin-eu-resourceeu-2025-eu-funds",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "3000000000",
+      "currency": "EUR",
+      "qualifier": "exact",
+      "amountAsStated": "the EU should mobilise EUR 3 billion of EU funds within the next 12 months in direct support of the CRM value chain",
+      "currencyBasis": "stated"
+    },
+    "provider": "European Union (EU funds)",
+    "providerJurisdiction": "eu",
+    "providerOrgIds": [],
+    "legalAuthority": null,
+    "programmeId": "prg-eu-resourceeu",
+    "recipient": null,
+    "recipientOrgIds": [],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-12-03",
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "Stated as an aim of the Action Plan (\"should mobilise\"), not an allocation."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "12",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "within the next 12 months",
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "programme",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, final paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-ip-25-2891",
+        "supports": [
+          "amount"
+        ],
+        "evidence": "ambiguous",
+        "locator": "\"Promote critical raw materials projects\" paragraph",
+        "note": "The press release words the same aim as \"mobilise up to €3 billion over the next 12 months\"."
+      }
+    ],
+    "notes": "An envelope: money the EU aims to mobilise across instruments for the critical-raw-materials value chain, listed and never summed. The Communication says \"EUR 3 billion\"; the press release says \"up to €3 billion\". No split by instrument, stage or material is stated."
+  },
+  {
     "id": "fin-in-ncmm-2025-government-expenditure",
     "eventId": "evt-in-ncmm-2025",
     "relationships": [],

@@ -190,6 +190,31 @@
     "notes": "The cited sources do not state where the company is incorporated."
   },
   {
+    "id": "org-ebrd",
+    "name": "European Bank for Reconstruction and Development",
+    "nameOriginal": null,
+    "aliases": [
+      "EBRD"
+    ],
+    "kind": "public_financier",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1",
+        "note": "Named as investing equity in Strategic Projects and, with the support of the Commission, launching an equity facility for exploration projects."
+      }
+    ],
+    "notes": "A multilateral development bank, not a tracked government: its money is public but credited to no actor."
+  },
+  {
     "id": "org-eu-commission",
     "name": "European Commission",
     "nameOriginal": null,
@@ -214,6 +239,32 @@
       }
     ],
     "notes": "A supranational body, so no country is recorded; its actor is the EU."
+  },
+  {
+    "id": "org-eu-eib",
+    "name": "European Investment Bank",
+    "nameOriginal": null,
+    "aliases": [
+      "EIB"
+    ],
+    "kind": "public_financier",
+    "countryCode": null,
+    "actor": "eu",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "name",
+          "kind",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1",
+        "note": "Named as providing financing to Strategic Projects \"via loan agreements\" and as committed to CRM financing \"via loans, venture debt, and private funds\"."
+      }
+    ],
+    "notes": "The EU's bank. The cited source does not state where it is constituted, so no country is recorded."
   },
   {
     "id": "org-european-bauxites",
@@ -759,6 +810,29 @@
         "evidence": "explicit",
         "locator": "Cover page",
         "note": "State of incorporation: Delaware; principal executive offices in Las Vegas, Nevada."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-neo-performance",
+    "name": "Neo Performance",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1",
+        "note": "\"Neo Performance's Rare earths magnet project in Estonia\"; the name is recorded as the Communication gives it."
       }
     ],
     "notes": null

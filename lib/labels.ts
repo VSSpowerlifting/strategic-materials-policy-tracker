@@ -575,5 +575,5 @@ export const coInvestmentKindLabels = {
   cross_government: "More than one government",
   public_and_private: "Public and private capital",
   several_public_bodies: "Several public bodies of one government",
-  capital_and_designation: "Government capital and a designation",
+  capital_and_designation: "Public capital and a designation",
 } as const;
