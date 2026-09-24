@@ -530,5 +530,60 @@
     "quoteEnSource": "na",
     "sourceId": "src-osc-vulcan-reelement-2025",
     "notes": "Attributed in the release to Under Secretary of War for Research and Engineering Emil Michael."
+  },
+  {
+    "id": "fc-cn-56-2025-natsec",
+    "eventId": "evt-cn-mofcom-56-2025",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-56",
+    "notes": "Justification clause of Announcement No. 56 (2025), read verbatim from the MOFCOM primary on 2026-09-23; the same national-security and non-proliferation pairing as Announcement No. 18."
+  },
+  {
+    "id": "fc-cn-57-2025-natsec",
+    "eventId": "evt-cn-mofcom-57-2025",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-57",
+    "notes": "Justification clause of Announcement No. 57 (2025), read verbatim from the MOFCOM primary on 2026-09-23; the same national-security and non-proliferation pairing as Announcement No. 18."
+  },
+  {
+    "id": "fc-cn-58-2025-natsec",
+    "eventId": "evt-cn-mofcom-58-2025",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-58",
+    "notes": "Justification clause of Announcement No. 58 (2025), read verbatim from the MOFCOM primary on 2026-09-23; the same national-security and non-proliferation pairing as Announcement No. 18."
+  },
+  {
+    "id": "fc-cn-62-2025-natsec",
+    "eventId": "evt-cn-mofcom-62-2025",
+    "actor": "china",
+    "category": [
+      "national_security"
+    ],
+    "quoteOriginal": "为维护国家安全和利益",
+    "quoteEn": "to safeguard national security and interests",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-62",
+    "notes": "Justification clause of Announcement No. 62 (2025), read verbatim from the MOFCOM primary on 2026-09-23. Like No. 61 it carries no non-proliferation limb, so only national security is coded."
   }
 ]

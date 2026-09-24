@@ -778,5 +778,53 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "NRCan's standing programme page. States that CMRDD is administered through two funding streams (federal research and development projects, and contribution funding) and lists the projects that received contribution funding, each with organization, description, amount funded, status, critical minerals and location. Read in full in a browser on 2026-09-23 (canada.ca times out for automated clients). The page is updated in place and carries no publication date; the list is read as of the access date."
+  },
+  {
+    "id": "src-mofcom-56",
+    "title": "商务部 海关总署公告2025年第56号 公布对部分稀土设备和原辅料相关物项实施出口管制的决定",
+    "publisher": "中华人民共和国商务部、海关总署 (Ministry of Commerce and General Administration of Customs, PRC)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_1315078cebe04210bc35c72a4e7f7967.html",
+    "language": "zh",
+    "datePublished": "2025-10-09",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Chinese primary for Announcement No. 56 (2025), read in full 2026-09-23. Justification clause verbatim: 根据《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》有关规定，为维护国家安全和利益、履行防扩散等国际义务，经国务院批准. Lists 2B902.a–z (rare-earth production and processing equipment) and 1C914.a–c (rare-earth ores, flotation reagents and extractants); \"本公告自2025年11月8日起正式实施\"."
+  },
+  {
+    "id": "src-mofcom-57",
+    "title": "商务部 海关总署公告2025年第57号 公布对部分中重稀土相关物项实施出口管制的决定",
+    "publisher": "中华人民共和国商务部、海关总署 (Ministry of Commerce and General Administration of Customs, PRC)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_59ec4f6bec0b459aa4a30c4bbd0a41c1.html",
+    "language": "zh",
+    "datePublished": "2025-10-09",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Chinese primary for Announcement No. 57 (2025), read in full 2026-09-23. Justification clause verbatim: 根据《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》有关规定，为维护国家安全和利益、履行防扩散等国际义务，经国务院批准. Lists 1C909 (holmium), 1C910 (erbium), 1C911 (thulium), 1C912 (europium) and 1C913 (ytterbium) items; \"本公告自2025年11月8日起正式实施\"."
+  },
+  {
+    "id": "src-mofcom-58",
+    "title": "商务部 海关总署公告2025年第58号 公布对锂电池和人造石墨负极材料相关物项实施出口管制的决定",
+    "publisher": "中华人民共和国商务部、海关总署 (Ministry of Commerce and General Administration of Customs, PRC)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_79646f0161564975a938fe00fee158d5.html",
+    "language": "zh",
+    "datePublished": "2025-10-09",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Chinese primary for Announcement No. 58 (2025), read in full 2026-09-23. Justification clause verbatim: 根据《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》有关规定，为维护国家安全和利益、履行防扩散等国际义务，经国务院批准. Three item groups: lithium batteries (3A001, 3B901.a, 3E901.a), cathode materials (3C901.a.1–3, 3B901.b) and graphite anode materials (3C901.b.1, a mixed-anode entry printed as 3C902.b.2, 3B901.c.1–3, 3E901.b); \"本公告自2025年11月8日起正式实施\"."
+  },
+  {
+    "id": "src-mofcom-62",
+    "title": "商务部公告2025第62号 公布对稀土相关技术实施出口管制的决定",
+    "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_6cb42957741440c6984de696b70df9ae.html",
+    "language": "zh",
+    "datePublished": "2025-10-09",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Chinese primary for Announcement No. 62 (2025), read in full 2026-09-23. Justification clause verbatim: 为维护国家安全和利益，根据《中华人民共和国出口管制法》《中华人民共和国两用物项出口管制条例》等法律法规相关规定，经国务院批准. Like No. 61 it carries no non-proliferation limb. Controls 1E902.a (rare-earth mining, smelting-separation, metal-smelting, magnet-manufacturing and secondary-recovery technology and its carriers) and 1E902.b (production-line assembly, commissioning, maintenance, repair and upgrading technology); \"本公告自发布之日起实施\". The two .wps annexes are filing guides, not item lists."
   }
 ]

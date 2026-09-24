@@ -70,7 +70,7 @@
       "industrial"
     ],
     "summary": "The extraterritorial measure of the October 2025 package. Foreign exporters must obtain a Chinese dual-use licence before shipping to third countries where the goods contain 0.1% or more by value of listed Chinese-origin rare-earth items, or were made abroad using Chinese rare-earth extraction, separation, metal-smelting, magnet-manufacturing or secondary-recovery technology, or are themselves of Chinese origin. Applications from foreign military users and from importers on the control and watch lists are refused in principle, as are WMD, terrorism and military end-uses; exports for research or production of 14nm-and-below logic chips or 256-layer-and-above memory, and for AI with potential military use, are decided case by case. Humanitarian shipments are exempt subject to post-export reporting. The controlled item lists are in an annex. Under paragraph 8, the limb covering Chinese-origin items (item 1(3)) applied from publication on 9 October 2025, while the two extraterritorial limbs (items 1(1) and 1(2)) were scheduled to apply from 1 December 2025. Before that date, Announcement No. 70 of 2025 suspended Announcement No. 61 from 7 November 2025 to 10 November 2026, so the extraterritorial limbs did not take effect on 1 December 2025.",
-    "analyticalSignificance": "The extraterritorial 0.1% rule mirrors the design of US export controls (a de minimis / foreign-direct-product logic) and marks a qualitative escalation from controlling exports of Chinese material to controlling foreign goods derived from it. Suspended by Announcement No. 70 of 2025 through 10 November 2026. The five additional rare earths added in the same October package came from a companion instrument, not from this one.",
+    "analyticalSignificance": "The extraterritorial 0.1% rule mirrors the design of US export controls (a de minimis / foreign-direct-product logic) and marks a qualitative escalation from controlling exports of Chinese material to controlling foreign goods derived from it. Suspended by Announcement No. 70 of 2025 through 10 November 2026. The five additional rare earths added in the same October package came from a companion instrument, Announcement No. 57, not from this one.",
     "supersededByEventId": null,
     "sourceIds": [
       "src-mofcom-61",
@@ -1518,6 +1518,150 @@
     "lifecycle": {
       "officialPublicationDate": "2025-01-15",
       "discoveredAt": "2026-09-23",
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-56-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2025年第56号 公布对部分稀土设备和原辅料相关物项实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM & GACC Announcement No. 56 of 2025: decision to implement export controls on certain rare-earth equipment and raw and auxiliary material items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM & GACC Announcement [2025] No. 56",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [],
+    "summary": "Adds two dual-use list entries. 2B902 covers rare-earth production and processing equipment in 26 sub-items: centrifugal extraction equipment, ion-adsorption-ore leachate precipitation equipment, roasting kilns, extraction tanks and ion-adsorption equipment for separation and purification, precipitation-crystallisation reactors, resistance furnaces, metal-electrolysis equipment and cells, reduction and carbon-tube furnaces, crystal-growth furnaces, the strip-casting, hydrogen-decrepitation, jet-milling, pressing, sintering, machining and grain-boundary-diffusion equipment of permanent-magnet production, and shaft kilns for secondary-resource recovery. 1C914 covers rare-earth raw and auxiliary materials: bastnäsite, monazite and ion-adsorption ores, hydroxamic-acid or phosphate-ester flotation reagents, and five named extractants. Exports need a MOFCOM licence, and customs declarations must state whether goods are controlled. It was to take effect on 8 November 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026, so it never took effect.",
+    "analyticalSignificance": "Moves the rare-earth controls upstream of the materials themselves, to the equipment, ores and reagents used to produce them, across every stage from ore to magnet and secondary recovery. Suspended before its start date with the rest of the 9 October package; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-56",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-57-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2025年第57号 公布对部分中重稀土相关物项实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM & GACC Announcement No. 57 of 2025: decision to implement export controls on certain medium and heavy rare earth items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM & GACC Announcement [2025] No. 57",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [],
+    "summary": "Adds five medium and heavy rare earths to the dual-use list: holmium (1C909), erbium (1C910), thulium (1C911), europium (1C912) and ytterbium (1C913). For each it covers the metal, named alloys and targets, functional materials containing the element (holmium permanent-magnet, crystal, magnetic-refrigeration and magnetostrictive materials; erbium crystal, optical-fibre, hydrogen-storage and ceramic materials; thulium crystal and luminescent materials; europium phosphors, crystal and hydrogen-absorbing materials; ytterbium crystal, optical-fibre and thermal-barrier-coating materials), and the oxides, compounds and their mixtures. Exports need a MOFCOM licence, and customs declarations must state whether goods are controlled. It was to take effect on 8 November 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026, so it never took effect.",
+    "analyticalSignificance": "The companion to Announcement No. 61 that extended the April 2025 list of seven rare earths (No. 18) with five more. Because it was suspended before its start date, the controlled set in force stayed the April seven; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-57",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-58-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2025年第58号 公布对锂电池和人造石墨负极材料相关物项实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM & GACC Announcement No. 58 of 2025: decision to implement export controls on lithium battery and artificial graphite anode material items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM & GACC Announcement [2025] No. 58",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "graphite"
+    ],
+    "affectedSectors": [
+      "battery"
+    ],
+    "summary": "Controls three item groups: lithium-ion batteries of 300 Wh/kg or more, the equipment that makes them and the technology to produce them; lithium iron phosphate, ternary-precursor and lithium-rich manganese cathode materials and cathode production equipment; and graphite anode materials, both artificial and mixed artificial-natural, with the granulation, graphitisation and coating equipment and the granulation, continuous-graphitisation and liquid-phase-coating technology used to make them. Exports need a MOFCOM licence, and customs declarations must state whether goods are controlled. It was to take effect on 8 November 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026, so it never took effect.",
+    "analyticalSignificance": "Carries graphite controls beyond the 2023 natural-flake and high-purity synthetic list (No. 39) to battery-grade anode material and the equipment and process technology behind it. Only the graphite limb touches a tracked material; the battery and cathode limbs are recorded as untracked. Suspended before its start date; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-58",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-62-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM (Bureau of Industrial Security and Import and Export Controls)",
+    "titleOriginal": "商务部公告2025第62号 公布对稀土相关技术实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM Announcement No. 62 of 2025: decision to implement export controls on rare-earth-related technologies",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM Announcement No. 62 (2025)",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [],
+    "summary": "Requires a licence to export technology, and its carriers, for rare-earth mining, smelting and separation, metal smelting, magnet manufacturing (samarium-cobalt, NdFeB and cerium magnets) and secondary-resource recovery (1E902.a), and technology for assembling, commissioning, maintaining, repairing and upgrading those production lines (1E902.b). Exporting uncontrolled goods, technology or services the exporter knows are for, or substantially contribute to, such activities abroad also needs a licence, and Chinese citizens and organisations may not give substantive help or support to them without one. Export is defined to include transfer through licensing, investment, exchanges, joint research, employment and consulting. It applied from publication on 9 October 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026.",
+    "analyticalSignificance": "The one October instrument in force before the suspension: for four weeks it restricted the transfer of Chinese rare-earth mining, separation, smelting, magnet and recycling know-how, and Chinese support for those activities abroad, at the same stages where the capital other governments are recorded as providing is aimed. It shares its stage list with No. 61's foreign-direct-product limb, which reaches items made abroad with the same technologies. Suspended from 7 November 2025; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-62",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }

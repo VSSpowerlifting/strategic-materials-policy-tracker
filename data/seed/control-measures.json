@@ -192,6 +192,1406 @@
     "notes": "One of three orders announced together; the Canadian company is Ultra Lithium Inc.."
   },
   {
+    "id": "ctl-cn-56-2025-customs-declaration",
+    "eventId": "evt-cn-mofcom-56-2025",
+    "measureType": "customs_enforcement",
+    "direction": "export",
+    "clause": "Customs declaration paragraph",
+    "targetScopes": [
+      "domestic_operators"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "出口经营者应当对报关商品的真实性负责，加强出口物项识别，属于管制物项的，必须在报关单备注栏中注明“属于两用物项”并列明两用物项出口管制编码；不属于管制物项但参数、指标、性能等接近的，必须在报关单备注栏中注明“不属于管制物项”并填写具体参数、指标。对上述填报信息完整、准确、真实性存疑的，海关将依法质疑，质疑期间出口货物不予放行。",
+    "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-56",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-56",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph after the item list; preamble",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "ctl-cn-56-2025-equipment-licensing",
+    "eventId": "evt-cn-mofcom-56-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 1 (2B902)",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "2B902 稀土生产加工设备：用于稀土生产加工的离心萃取设备；离子型稀土矿智能连续除杂沉淀设备；稀土用焙烧窑；用于稀土分离提纯的萃取槽和离子吸附设备；稀土用沉淀结晶反应罐及其零部件；稀土用电阻炉；用于稀土金属电解的设备和稀土电解槽；真空感应还原炉；真空碳管炉；稀土晶体生长炉；稀土永磁真空感应铸片炉、氢碎炉、气流磨、成型压机、自动热压设备、冷等静压压力机、真空烧结炉及相关零部件；用于稀土磁材加工的设备；晶界扩散设备；用于稀土二次资源回收利用的立窑。",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "2B902.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.c",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.d",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.e",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.f",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.g",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.h",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.i",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.j",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.k",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.l",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.m",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.n",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.o",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.p",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.q",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.r",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.s",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.t",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.u",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.v",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.w",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.x",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.y",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "2B902.z",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "84798999",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "84799090",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "85141990",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "85433000",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "85142000",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "84798310",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "equipment"
+    ],
+    "controlledStages": [
+      "processing",
+      "separation",
+      "refining",
+      "component_manufacturing",
+      "recycling"
+    ],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-56",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-56",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status",
+          "product_codes"
+        ],
+        "evidence": "explicit",
+        "locator": "Preamble; Item 1 (2B902.a–z); closing paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-56",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Item 1 (2B902.a–z); closing paragraphs",
+        "note": "The list names separation and purification (稀土分离提纯), metal electrolysis (稀土金属电解), permanent-magnet production (稀土永磁) and secondary-resource recovery (稀土二次资源回收利用); roasting kilns, leachate precipitation and crystal-growth furnaces are read as processing."
+      }
+    ],
+    "notes": "Condensed from the 26 sub-items 2B902.a–z in the announcement's own words; the parameters each item must meet are in the source. The reference customs codes are printed at eight digits as the announcement gives them. Scheduled for 8 November 2025 and suspended the day before by No. 70, so it never took effect."
+  },
+  {
+    "id": "ctl-cn-56-2025-raw-materials-licensing",
+    "eventId": "evt-cn-mofcom-56-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 2 (1C914)",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "1C914 稀土原辅料相关物项：稀土矿（氟碳铈矿；独居石；离子吸附型稀土矿）；含有羟肟酸类或磷酸酯类捕收剂的稀土矿浮选药剂；用于稀土生产的萃取剂（P507、P204、环烷酸、N235、C272）。",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "1C914.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C914.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C914.c",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "25309020",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "29319000",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "29199000",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "38249999",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "mining",
+      "processing",
+      "separation"
+    ],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-56",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-56",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status",
+          "product_codes"
+        ],
+        "evidence": "explicit",
+        "locator": "Preamble; Item 2 (1C914.a–c); closing paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-56",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Item 2 (1C914.a–c); closing paragraphs",
+        "note": "Stages read from the item list: bastnäsite, monazite and ion-adsorption ores are mine output; flotation reagents are used in beneficiation (processing); the five extractants are used in rare-earth production, read as solvent-extraction separation. The announcement names items, not stages."
+      }
+    ],
+    "notes": "Extractants are identified in the source by name and CAS number (P507: CAS 14802-03-0; P204: CAS 298-07-7; naphthenic acid: CAS 1338-24-5; N235: CAS 68814-95-9; C272: CAS 83411-71-6)."
+  },
+  {
+    "id": "ctl-cn-57-2025-customs-declaration",
+    "eventId": "evt-cn-mofcom-57-2025",
+    "measureType": "customs_enforcement",
+    "direction": "export",
+    "clause": "Customs declaration paragraph",
+    "targetScopes": [
+      "domestic_operators"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "出口经营者应当对报关商品的真实性负责，加强出口物项识别，属于管制物项的，必须在报关单备注栏中注明“属于两用物项”并列明两用物项出口管制编码；不属于管制物项但参数、指标、性能等接近的，必须在报关单备注栏中注明“不属于管制物项”并填写具体参数、指标。对上述填报信息完整、准确、真实性存疑的，海关将依法质疑，质疑期间出口货物不予放行。",
+    "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-57",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-57",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph after the explanatory notes; preamble",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "ctl-cn-57-2025-export-licensing",
+    "eventId": "evt-cn-mofcom-57-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Items 1–5 (1C909–1C913)",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "钬、铒、铥、铕、镱相关物项：金属、合金、靶材及含该元素的永磁、晶体、磁制冷、磁致伸缩、光纤、储氢、陶瓷、发光、吸氢、热屏蔽涂层等材料；氧化物及其混合物；化合物及其混合物。",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "1C909.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C909.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C909.c",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C910.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C910.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C910.c",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C911.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C911.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C911.c",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C912.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C912.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C912.c",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C913.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C913.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C913.c",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "28053019",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [
+      "separation",
+      "refining",
+      "component_manufacturing"
+    ],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-57",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-57",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status",
+          "product_codes"
+        ],
+        "evidence": "explicit",
+        "locator": "Preamble; Items 1–5; explanatory notes; closing paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-57",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Items 1–5; explanatory notes; closing paragraphs",
+        "note": "Stages read from the item list: oxides, compounds and mixtures sit at separation; metals, alloys and targets at refining; the magnet, crystal, optical-fibre, luminescent and other functional materials at component manufacturing. The announcement names items, not stages."
+      }
+    ],
+    "notes": "Holmium, erbium, thulium, europium and ytterbium have no material record of their own and fall under the grouped rare-earth-elements material, as the April list's samarium, gadolinium, lutetium, scandium and yttrium do. Only holmium's list includes permanent-magnet material (含钬的永磁材料), and the text does not say NdFeB, so the NdFeB material is not recorded. The reference customs code 28053019 is printed for each metal."
+  },
+  {
+    "id": "ctl-cn-58-2025-battery-cathode-licensing",
+    "eventId": "evt-cn-mofcom-58-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Items 1–2",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "锂离子电池 (lithium-ion batteries of 300 Wh/kg or more)",
+      "磷酸铁锂正极材料 (lithium iron phosphate cathode material)",
+      "三元正极材料的前驱体 (ternary cathode precursors: nickel-cobalt-manganese and nickel-cobalt-aluminium hydroxides)",
+      "富锂锰基正极材料 (lithium-rich manganese-based cathode material)"
+    ],
+    "productScopeAsStated": "锂电池相关物项：重量能量密度大于等于300 Wh/kg的可充放电锂离子电池（包含电芯和电池组）、用于制造可充放电锂离子电池的设备、用于生产上述电池的技术；正极材料相关物项：磷酸铁锂正极材料、三元正极材料的前驱体、富锂锰基正极材料，以及用于制造正极材料的设备。",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "3A001",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3B901.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3E901.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3C901.a.1",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3C901.a.2",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3C901.a.3",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3B901.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "85076000",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "84798999",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "28429040",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "28539030",
+        "role": "reference"
+      },
+      {
+        "system": "cn_customs",
+        "code": "28539050",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods",
+      "equipment",
+      "technology"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-58",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-58",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status",
+          "product_codes"
+        ],
+        "evidence": "explicit",
+        "locator": "Preamble; Items 1–2; closing paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-58",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Preamble; Items 1–2; closing paragraphs",
+        "note": "Batteries, cathode materials, their production equipment and battery technology. These sit outside the tracked materials, so no supply-chain stage is coded."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "ctl-cn-58-2025-customs-declaration",
+    "eventId": "evt-cn-mofcom-58-2025",
+    "measureType": "customs_enforcement",
+    "direction": "export",
+    "clause": "Customs declaration paragraph",
+    "targetScopes": [
+      "domestic_operators"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "出口经营者应当对报关商品的真实性负责，加强出口物项识别，属于管制物项的，必须在报关单备注栏中注明“属于两用物项”并列明两用物项出口管制编码；不属于管制物项但参数、指标、性能等接近的，必须在报关单备注栏中注明“不属于管制物项”并填写具体参数、指标。对上述填报信息完整、准确、真实性存疑的，海关将依法质疑，质疑期间出口货物不予放行。",
+    "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-58",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-58",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraph after the item list; preamble",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "ctl-cn-58-2025-graphite-anode-licensing",
+    "eventId": "evt-cn-mofcom-58-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 3",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "石墨负极材料相关物项：人造石墨负极材料；人造石墨和天然石墨混合的负极材料；用于生产石墨负极材料的造粒工艺设备、石墨化设备（箱体炉、艾奇逊炉、内串炉、连续石墨化炉）和包覆改性设备；用于生产石墨负极材料的工艺及技术（造粒工艺、连续石墨化技术、液相包覆技术）。",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "3C901.b.1",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3C902.b.2",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3B901.c.1",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3B901.c.2",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3B901.c.3",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "3E901.b",
+        "role": "legal_scope"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods",
+      "equipment",
+      "technology"
+    ],
+    "controlledStages": [
+      "processing"
+    ],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-58",
+        "until": "2025-11-08",
+        "note": "本公告自2025年11月8日起正式实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-58",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status",
+          "product_codes"
+        ],
+        "evidence": "explicit",
+        "locator": "Preamble; Item 3; closing paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-58",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Preamble; Item 3; closing paragraphs",
+        "note": "Anode material, the granulation, graphitisation and coating equipment that makes it, and the process technology are read as graphite processing; the announcement names items, not stages."
+      }
+    ],
+    "notes": "The mixed artificial-and-natural graphite anode entry is printed as 3C902.b.2 in the announcement, next to 3C901.b.1; it is recorded as printed."
+  },
+  {
+    "id": "ctl-cn-62-2025-knowledge-catch-all",
+    "eventId": "evt-cn-mofcom-62-2025",
+    "measureType": "end_use_restriction",
+    "direction": "export",
+    "clause": "Item 1, second paragraph",
+    "targetScopes": [
+      "end_uses"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [
+      "用于或者实质性有助于境外稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用活动"
+    ],
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "出口非管制的货物、技术或者服务，出口经营者明知其用于或者实质性有助于境外稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用活动的……应当在出口前向商务部申请两用物项出口许可。",
+    "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》第十二条和《中华人民共和国两用物项出口管制条例》第十四条",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "in_force",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-62",
+        "until": null,
+        "note": "本公告自发布之日起实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-62",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1, second paragraph; Item 8",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      }
+    ],
+    "notes": "A knowledge-based licensing requirement for goods, technology or services that are not themselves controlled."
+  },
+  {
+    "id": "ctl-cn-62-2025-overseas-support-ban",
+    "eventId": "evt-cn-mofcom-62-2025",
+    "measureType": "end_use_restriction",
+    "direction": "export",
+    "clause": "Item 7",
+    "targetScopes": [
+      "domestic_operators",
+      "end_uses"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [
+      "境外稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用活动"
+    ],
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "中国公民、法人、非法人组织未经许可不得为境外稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用活动提供任何实质性帮助和支持。",
+    "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "in_force",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-62",
+        "until": null,
+        "note": "本公告自发布之日起实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-62",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 7; Items 2 and 8",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      }
+    ],
+    "notes": "Recorded with direction \"export\" because Item 2 defines export to include transfer or provision abroad or to foreign persons through investment, exchanges, joint research, employment, consulting and similar means."
+  },
+  {
+    "id": "ctl-cn-62-2025-production-line-technology-licensing",
+    "eventId": "evt-cn-mofcom-62-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 1(2) (1E902.b)",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用相关生产线装配、调试、维护、维修、升级等技术。",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "1E902.b",
+        "role": "legal_scope"
+      }
+    ],
+    "controlledItemTypes": [
+      "technology"
+    ],
+    "controlledStages": [
+      "mining",
+      "separation",
+      "refining",
+      "component_manufacturing",
+      "recycling"
+    ],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "in_force",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-62",
+        "until": null,
+        "note": "本公告自发布之日起实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-62",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status",
+          "product_codes"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1(2); Item 8",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-62",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1(2); Item 8",
+        "note": "The clause names the production lines the technology serves: 开采 (mining), 冶炼分离 (smelting and separation), 金属冶炼 (metal smelting, coded as refining), 磁材制造 (magnet manufacturing) and 稀土二次资源回收利用 (secondary-resource recovery)."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "ctl-cn-62-2025-technology-licensing",
+    "eventId": "evt-cn-mofcom-62-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 1(1) (1E902.a)",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用相关技术及其载体。",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "1E902.a",
+        "role": "legal_scope"
+      }
+    ],
+    "controlledItemTypes": [
+      "technology"
+    ],
+    "controlledStages": [
+      "mining",
+      "separation",
+      "refining",
+      "component_manufacturing",
+      "recycling"
+    ],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "in_force",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-62",
+        "until": null,
+        "note": "本公告自发布之日起实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-62",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status",
+          "product_codes"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1(1) and its definitions paragraph; Item 8",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-62",
+        "supports": [
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1(1) and its definitions paragraph; Item 8",
+        "note": "The clause names the stages: 开采 (mining), 冶炼分离 (smelting and separation), 金属冶炼 (metal smelting, coded as refining), 磁材制造 (magnet manufacturing, defined as samarium-cobalt, NdFeB and cerium magnet manufacturing technology) and 稀土二次资源回收利用 (secondary-resource recovery)."
+      }
+    ],
+    "notes": "Technology and its carriers include design drawings, process specifications, process parameters, processing programs and simulation data, as the announcement defines them."
+  },
+  {
     "id": "ctl-cn-antimony-2024-export-licensing",
     "eventId": "evt-cn-antimony-2024",
     "measureType": "export_licensing",
@@ -1881,19 +3281,27 @@
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [
+      "ctl-cn-56-2025-customs-declaration",
+      "ctl-cn-56-2025-equipment-licensing",
+      "ctl-cn-56-2025-raw-materials-licensing",
+      "ctl-cn-57-2025-customs-declaration",
+      "ctl-cn-57-2025-export-licensing",
+      "ctl-cn-58-2025-battery-cathode-licensing",
+      "ctl-cn-58-2025-customs-declaration",
+      "ctl-cn-58-2025-graphite-anode-licensing",
+      "ctl-cn-62-2025-knowledge-catch-all",
+      "ctl-cn-62-2025-overseas-support-ban",
+      "ctl-cn-62-2025-production-line-technology-licensing",
+      "ctl-cn-62-2025-technology-licensing",
+      "ctl-cn-ree-2025-10-advanced-chip-ai-review",
       "ctl-cn-ree-2025-10-de-minimis-licensing",
       "ctl-cn-ree-2025-10-foreign-direct-product-licensing",
-      "ctl-cn-ree-2025-10-origin-reexport-licensing",
       "ctl-cn-ree-2025-10-military-listed-end-users",
-      "ctl-cn-ree-2025-10-prohibited-end-uses",
-      "ctl-cn-ree-2025-10-advanced-chip-ai-review"
+      "ctl-cn-ree-2025-10-origin-reexport-licensing",
+      "ctl-cn-ree-2025-10-prohibited-end-uses"
     ],
     "modifiesExternalInstruments": [
-      "商务部、海关总署公告2025年第55号",
-      "商务部、海关总署公告2025年第56号",
-      "商务部、海关总署公告2025年第57号",
-      "商务部、海关总署公告2025年第58号",
-      "商务部公告2025年第62号"
+      "商务部、海关总署公告2025年第55号"
     ],
     "statusHistory": [
       {
@@ -1919,7 +3327,7 @@
         "note": null
       }
     ],
-    "notes": "One sentence suspends six announcements until 10 November 2026. Only No. 61 is in the corpus; the others are listed by number and not transcribed. The suspension names no material itself."
+    "notes": "One sentence suspends six announcements until 10 November 2026. Nos. 56, 57, 58, 61 and 62 are in the corpus and each clause is linked here; No. 55 (superhard materials) covers no tracked material and is listed by number only. The suspension names no material itself."
   },
   {
     "id": "ctl-cn-ree-regs-2024-designated-enterprises",
