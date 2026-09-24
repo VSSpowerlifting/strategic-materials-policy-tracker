@@ -98,7 +98,7 @@ export default function CapitalPage() {
         <Section
           index="01"
           title="Public commitments to recipients, binding and not yet binding"
-          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency only; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; ceilings and approximations are shown apart from exact figures."
+          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency and per instrument, never across either; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; ceilings and approximations are shown apart from exact figures; withdrawn or lapsed commitments are left out."
         >
           <div className="grid gap-4 lg:grid-cols-3">
             {totals.currencies.map((t) => {
@@ -116,27 +116,32 @@ export default function CapitalPage() {
                       so adding them would double-count. The rows are listed below without a sum.
                     </p>
                   ) : (
-                    <div className="mt-2 space-y-3">
-                      {([
-                        ["Binding", "contracted, partly or fully paid", t.binding],
-                        ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", t.notYetBinding],
-                      ] as const).map(([label, gloss, sums]) =>
-                        QUALIFIER_ORDER.some((q) => sums[q]) ? (
-                          <div key={label}>
-                            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted" title={gloss}>
-                              {label}
-                            </p>
-                            <dl className="mt-1 space-y-0.5">
-                              {QUALIFIER_ORDER.filter((q) => sums[q]).map((q) => (
-                                <div key={q} className="flex items-baseline justify-between gap-3">
-                                  <dt className="font-mono text-[11px] text-faint">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
-                                  <dd className="tnum font-display text-2xl font-bold">{formatDecimalCompact(sums[q]!)}</dd>
-                                </div>
-                              ))}
-                            </dl>
-                          </div>
-                        ) : null,
-                      )}
+                    <div className="mt-2 divide-y divide-border/60">
+                      {t.instruments.map((inst) => (
+                        <div key={inst.instrument} className="space-y-2 py-3 first:pt-1">
+                          <p className="font-display text-sm font-semibold">{financialInstrumentLabels[inst.instrument]}</p>
+                          {([
+                            ["Binding", "contracted, partly or fully paid", inst.binding],
+                            ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", inst.notYetBinding],
+                          ] as const).map(([label, gloss, sums]) =>
+                            QUALIFIER_ORDER.some((q) => sums[q]) ? (
+                              <div key={label}>
+                                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted" title={gloss}>
+                                  {label}
+                                </p>
+                                <dl className="mt-1 space-y-0.5">
+                                  {QUALIFIER_ORDER.filter((q) => sums[q]).map((q) => (
+                                    <div key={q} className="flex items-baseline justify-between gap-3">
+                                      <dt className="font-mono text-[11px] text-faint">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
+                                      <dd className="tnum font-display text-xl font-bold">{formatDecimalCompact(sums[q]!)}</dd>
+                                    </div>
+                                  ))}
+                                </dl>
+                              </div>
+                            ) : null,
+                          )}
+                        </div>
+                      ))}
                     </div>
                   )}
                   <p className="mt-3 font-mono text-[11px] leading-5 text-faint">
@@ -193,7 +198,7 @@ export default function CapitalPage() {
             })}
           </div>
           <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
-            Totals are never converted between currencies or across rows of different value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
+            Totals are never converted between currencies, never added across instruments or value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
             {" "}Binding means a contract has been executed or money paid; everything earlier, including conditional loan commitments and non-binding letters of intent, is shown as not yet binding.
@@ -201,11 +206,11 @@ export default function CapitalPage() {
           </p>
           <div className="mt-6 overflow-x-auto rounded-lg border">
             <table className="w-full min-w-[36rem] border-collapse text-sm">
-              <caption className="sr-only">Public commitments by providing actor and currency</caption>
+              <caption className="sr-only">Public commitments by providing actor, currency and instrument</caption>
               <thead>
                 <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
-                  <th scope="col" className="px-3 py-2 text-left font-normal">By currency, exact · ceilings and approximations kept apart</th>
+                  <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · ceilings and approximations kept apart</th>
                   <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum</th>
                 </tr>
               </thead>
@@ -224,9 +229,14 @@ export default function CapitalPage() {
                             <span className="text-foreground">{cur.currency}</span>{" "}
                             {cur.status === "withheld"
                               ? "total withheld: counted rows overlap"
-                              : QUALIFIER_ORDER.filter((q) => cur.byQualifier[q])
-                                  .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(cur.byQualifier[q]!)}`)
-                                  .join(" + ")}
+                              : cur.instruments
+                                  .map(
+                                    (i) =>
+                                      `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
+                                        .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
+                                        .join(" and ")}`,
+                                  )
+                                  .join("; ")}
                           </span>
                         ))}
                         {t.currencies.length === 0 ? <span className="font-mono text-xs text-faint">—</span> : null}

@@ -569,9 +569,21 @@ export default function MethodologyPage() {
                 anyone.
               </li>
               <li>
+                · <strong className="text-foreground">One instrument at a time.</strong> Within a currency,
+                each instrument has its own sums: grants, loans, equity, loan guarantees and packages that
+                combine instruments (&ldquo;mixed&rdquo;) are never added into one figure, because a
+                guaranteed loan, a grant and a shareholding are different promises. Version 0.5 printed one
+                sum per currency across instruments, contrary to this rule; version 0.6 corrects it.
+              </li>
+              <li>
+                · <strong className="text-foreground">Ended commitments are not money.</strong> A
+                commitment whose current status is withdrawn or lapsed is listed as ended and left out of
+                every sum.
+              </li>
+              <li>
                 · <strong className="text-foreground">No part is counted with its package.</strong> A row
-                that is part of, or drawn from, another row in the same total is left out of it and named
-                beside the total. If two counted rows were ever to share a descendant, the total for that
+                that is part of, or drawn from, another row in the same currency is left out of the sums and
+                named beside them, whatever either row&apos;s instrument. If two counted rows were ever to share a descendant, the total for that
                 currency is withheld and the overlap shown instead. The JSON summary says so in a
                 machine-readable way: that currency&apos;s entry has <code className="font-mono text-xs">status: &quot;withheld&quot;</code>{" "}
                 and its sums are <code className="font-mono text-xs">null</code>, never zero or partial.

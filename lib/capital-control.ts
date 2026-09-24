@@ -8,6 +8,8 @@
  *
  * Aggregation rules (see /methodology#capital-counting):
  *  - Money is never converted. Totals are per currency.
+ *  - Unlike instruments are never added: within a currency, each instrument
+ *    (grant, loan, equity, loan guarantee...) has its own sums.
  *  - Unlike value roles are never added. Only rows whose role is
  *    "commitment" are ever summed; envelopes, appropriations and lending
  *    authorities are listed, never totalled, because two envelopes can share
@@ -34,8 +36,10 @@ import {
   getAllFinancialCommitments,
   getEventById,
 } from "./data";
+import { FINANCIAL_INSTRUMENTS } from "./types";
 import type {
   CapitalSource,
+  FinancialInstrument,
   ControlMeasure,
   ControlStatus,
   ControlStatusEntry,
@@ -142,43 +146,57 @@ export const PUBLIC_CAPITAL_SOURCES: readonly CapitalSource[] = ["public", "publ
 
 type QualifierSums = Partial<Record<ValueQualifier, string>>;
 
+/**
+ * The counted rows of one instrument in one currency, summed. Unlike
+ * instruments are never added: a grant, a loan, an equity stake and a loan
+ * guarantee are different promises, so each has its own sums.
+ */
+export type InstrumentSum = {
+  instrument: FinancialInstrument;
+  countedIds: string[];
+  /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
+  byQualifier: QualifierSums;
+  /**
+   * The same sums split by whether a binding agreement exists (contracted,
+   * partially disbursed, disbursed) or not yet (announced, authorized,
+   * allocated, decided, including conditional and non-binding commitments).
+   */
+  binding: QualifierSums;
+  notYetBinding: QualifierSums;
+};
+
 /** What every currency entry carries, summed or not. */
 type CurrencyTotalBase = {
   currency: string;
-  /** Rows the total is made of (or would be, were it safe to add them). */
+  /** Rows the totals are made of (or would be, were it safe to add them). */
   countedIds: string[];
-  /** Rows left out because a row they belong to is counted in the same total. */
+  /** Rows left out because a row they belong to is counted in the same currency. */
   nestedIds: string[];
 };
 
 /**
- * One currency's total. Discriminated on `status`, so no consumer can read a
- * sum for a currency whose rows overlap:
- *  - "summed": the sums are safe to show.
+ * One currency's totals, one entry per instrument. Discriminated on
+ * `status`, so no consumer can read a sum for a currency whose rows overlap:
+ *  - "summed": the per-instrument sums are safe to show. There is no sum
+ *    across instruments.
  *  - "withheld": two counted rows share a descendant, so adding them would
  *    double-count. The sums are null, never zero or partial, and `overlap`
  *    names the rows.
+ * A part is left out when a row it belongs to is counted in the same
+ * currency, whatever either row's instrument: nesting is decided before the
+ * rows are split by instrument, so a package's parts are never counted
+ * beside it under their own instruments.
  */
 export type CurrencyTotal =
   | (CurrencyTotalBase & {
       status: "summed";
-      /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
-      byQualifier: QualifierSums;
-      /**
-       * The same sums split by whether a binding agreement exists (contracted,
-       * partially disbursed, disbursed) or not yet (announced, authorized,
-       * allocated, decided, including conditional and non-binding commitments).
-       */
-      binding: QualifierSums;
-      notYetBinding: QualifierSums;
+      instruments: InstrumentSum[];
       overlap: null;
     })
   | (CurrencyTotalBase & {
       status: "withheld";
       reason: "overlap";
-      byQualifier: null;
-      binding: null;
-      notYetBinding: null;
+      instruments: null;
       overlap: { a: string; b: string; shared: string };
     });
 
@@ -241,18 +259,23 @@ export function totalCommitments(
               break outer;
             }
       const base = { currency, countedIds: list.map((c) => c.id), nestedIds: nested.get(currency) ?? [] };
-      if (overlap)
-        return { ...base, status: "withheld", reason: "overlap", byQualifier: null, binding: null, notYetBinding: null, overlap };
-      const byQualifier: QualifierSums = {};
-      const binding: QualifierSums = {};
-      const notYetBinding: QualifierSums = {};
-      for (const c of list) {
-        const q = c.amount!.qualifier;
-        byQualifier[q] = addDecimals([byQualifier[q] ?? "0", c.amount!.value]);
-        const bucket = isBinding(c) ? binding : notYetBinding;
-        bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
+      if (overlap) return { ...base, status: "withheld", reason: "overlap", instruments: null, overlap };
+      const instruments: InstrumentSum[] = [];
+      for (const instrument of FINANCIAL_INSTRUMENTS) {
+        const of = list.filter((c) => c.instrument === instrument);
+        if (!of.length) continue;
+        const byQualifier: QualifierSums = {};
+        const binding: QualifierSums = {};
+        const notYetBinding: QualifierSums = {};
+        for (const c of of) {
+          const q = c.amount!.qualifier;
+          byQualifier[q] = addDecimals([byQualifier[q] ?? "0", c.amount!.value]);
+          const bucket = isBinding(c) ? binding : notYetBinding;
+          bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
+        }
+        instruments.push({ instrument, countedIds: of.map((c) => c.id), byQualifier, binding, notYetBinding });
       }
-      return { ...base, status: "summed", byQualifier, binding, notYetBinding, overlap: null };
+      return { ...base, status: "summed", instruments, overlap: null };
     });
   return { currencies, unquantifiedIds, endedIds };
 }

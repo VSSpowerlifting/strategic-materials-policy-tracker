@@ -151,7 +151,7 @@ test("only committed public money and joint-vehicle money are summed, each apart
   );
   const pub = ls.find((l) => l.key === "public_commitment")!.totals!;
   assert.equal(pub.currencies[0].status, "summed");
-  assert.deepEqual(pub.currencies[0].status === "summed" && pub.currencies[0].byQualifier, { exact: "200" });
+  assert.deepEqual(pub.currencies[0].status === "summed" && pub.currencies[0].instruments.map((i) => [i.instrument, i.byQualifier]), [["grant", { exact: "200" }]]);
   assert.deepEqual(SUMMED_LAYERS, ["public_commitment", "joint_vehicle_commitment"]);
   for (const key of LAYER_KEYS) assert.ok(typeof key === "string");
   // Every corpus row falls in exactly one layer.
@@ -216,7 +216,7 @@ test("a package inside a stack is counted once, its parts left out of the sum", 
   assert.equal(gbp.status, "summed");
   assert.deepEqual(gbp.countedIds, ["fin-uk-nwf-2026-tungsten-west-package"]);
   assert.deepEqual(gbp.nestedIds.sort(), ["fin-uk-nwf-2026-tungsten-west-equity", "fin-uk-nwf-2026-tungsten-west-lending"]);
-  assert.deepEqual(gbp.status === "summed" && gbp.byQualifier, { up_to: "71000000" });
+  assert.deepEqual(gbp.status === "summed" && gbp.instruments.map((i) => [i.instrument, i.byQualifier]), [["mixed", { up_to: "71000000" }]]);
 });
 
 test("co-investment is classed by who provides the capital, and counts no envelope or project cost", () => {
@@ -257,8 +257,8 @@ test("a programme ledger lists its ceilings apart and sums recorded awards, neve
   // The joint commitment counts once; its two loans are its parts and are not added again.
   assert.deepEqual(usd.countedIds.sort(), ["fin-us-dod-mp-2025-samarium-loan", "fin-us-osc-vulcan-reelement-2025-joint-commitment"]);
   assert.deepEqual(usd.nestedIds.sort(), ["fin-us-osc-vulcan-reelement-2025-reelement-loan", "fin-us-osc-vulcan-reelement-2025-vulcan-elements-loan"]);
-  assert.deepEqual(usd.status === "summed" && usd.binding, { exact: "150000000" });
-  assert.deepEqual(usd.status === "summed" && usd.notYetBinding, { exact: "700000000" });
+  // Both are loans, so they share one instrument's sums: the samarium loan is binding, the joint commitment is not yet.
+  assert.deepEqual(usd.status === "summed" && usd.instruments.map((i) => [i.instrument, i.binding, i.notYetBinding]), [["loan", { exact: "150000000" }, { exact: "700000000" }]]);
   for (const key of ["utilisation", "utilization", "share", "remaining", "undrawn"]) assert.ok(!(key in osc), `ledger has no ${key}`);
 });
 

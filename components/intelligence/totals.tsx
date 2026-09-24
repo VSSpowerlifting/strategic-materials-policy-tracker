@@ -1,12 +1,12 @@
 /**
- * Per-currency totals from `totalCommitments`, as the v0.5 counting rules
- * produce them: binding apart from not yet binding, each split by how the
- * source qualifies its figures, or a withheld total when counted rows share a
- * descendant. Pure presentation with no data imports.
+ * Per-currency totals from `totalCommitments`, one block per instrument
+ * (unlike instruments are never added): binding apart from not yet binding,
+ * each split by how the source qualifies its figures, or a withheld total when
+ * counted rows share a descendant. Pure presentation with no data imports.
  */
 import Link from "next/link";
 import { formatDecimalCompact } from "@/lib/decimal";
-import { valueQualifierLabels } from "@/lib/labels";
+import { financialInstrumentLabels, valueQualifierLabels } from "@/lib/labels";
 import type { CommitmentTotals } from "@/lib/capital-control";
 import type { ValueQualifier } from "@/lib/types";
 
@@ -54,9 +54,17 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
               <Link href={`/capital/${t.overlap.shared}`} className="text-accent hover:text-accent-strong">{t.overlap.shared}</Link>.
             </p>
           ) : (
-            <div className="mt-1 space-y-2">
-              <Sums label="Binding" sums={t.binding} />
-              <Sums label="Not yet binding" sums={t.notYetBinding} />
+            <div className="mt-1 divide-y divide-border/60">
+              {t.instruments.map((i) => (
+                <div key={i.instrument} className="space-y-1.5 py-2 first:pt-1 last:pb-0">
+                  <p className="font-display text-sm font-semibold">
+                    {financialInstrumentLabels[i.instrument]}
+                    <span className="ml-2 font-mono text-[10px] font-normal text-faint">{i.countedIds.length} row{i.countedIds.length === 1 ? "" : "s"}</span>
+                  </p>
+                  <Sums label="Binding" sums={i.binding} />
+                  <Sums label="Not yet binding" sums={i.notYetBinding} />
+                </div>
+              ))}
             </div>
           )}
           <p className="mt-2 font-mono text-[10px] leading-4 text-faint">

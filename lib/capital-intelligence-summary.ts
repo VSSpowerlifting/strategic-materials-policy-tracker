@@ -57,7 +57,7 @@ export function buildCapitalIntelligenceSummary() {
   return {
     asOf,
     countingRules: [
-      "Every money figure is a per-currency total from the v0.5 counting rules; nothing is converted between currencies.",
+      "Every money figure is a per-currency, per-instrument total from the counting rules; nothing is converted between currencies and nothing is added across instruments.",
       "A stack, portfolio or programme is split into layers of one value role; only committed money (public, and joint vehicles apart) is summed.",
       "Funding options, envelopes, appropriations, lending authorities, private financing, recipient funds, expected co-investment and total project cost are listed, never summed.",
       "There is no grand stack total, public-share percentage, leverage or crowding-in ratio, or programme utilisation rate.",
