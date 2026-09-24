@@ -25,8 +25,10 @@
  *  - Private capital, a recipient's own funds and total project cost are not
  *    public support. Mixed public-private vehicles are reported apart from
  *    public money because their public share is not stated.
- *  - Figures stated as ceilings, approximations or floors are kept apart from
- *    exact figures, so a total never hides how much of it is "up to".
+ *  - Figures stated "up to", "about" or "at least" are added only to figures
+ *    with the same qualifier (per currency and instrument) and kept apart from
+ *    exact figures, so a total never hides how much of it is "up to". An
+ *    up_to sum is a sum of stated upper bounds, not an amount paid.
  *  - A commitment whose current status is withdrawn or lapsed is left out of
  *    every sum and listed as ended: money that will not flow is not support.
  *  - A commitment whose current status is "not_stated" is left out of every

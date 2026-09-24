@@ -57,6 +57,17 @@ Chinese controls meet by material and stage.
   instrument are listed, never summed (`summed: false`, null sums). Nesting is
   decided over the whole currency before the split. This changes
   `publicCommitmentTotals` in `/api/v1/capital-control/summary`.
+- Precision (docs only, no logic change): figures stated "up to", "about" or
+  "at least" are **summed**, within one currency and one instrument, in their own
+  qualifier bucket (`byQualifier`, `binding`, `notYetBinding` keyed `up_to`,
+  `approximately`, `at_least`, `exact`). An `up_to` sum is a sum of stated upper
+  bounds, not an exact amount or money paid. What is never summed is the value
+  roles `program_envelope`, `budget_appropriation`, `lending_authority` and
+  `funding_option` (an unexercised option), plus private financing, recipient
+  funds, expected co-investment and project cost. Earlier wording that called
+  "up to" figures "ceilings" that are "kept apart" or "not sums" (methodology
+  heading, `/capital`, `/portfolios`, README, API `countingRules`) blurred these
+  two things and was corrected in the documentation-precision pass.
 - Withdrawn or lapsed commitments are listed as ended and never summed
   (`CommitmentTotals.endedIds`); before, a withdrawn row would have been
   summed as not yet binding.

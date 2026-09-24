@@ -74,8 +74,9 @@ export default function CapitalPage() {
           <>
             How governments put money, ownership and purchase guarantees behind strategic-material supply chains.
             Each row is one instrument from an official source or binding filing, in the currency the source uses.
-            Envelopes, private capital and figures stated as ceilings are kept apart from money committed to a recipient,
-            and a part is never counted alongside the package it belongs to.
+            Programme envelopes, unexercised funding options and private capital are listed apart from money committed to a
+            recipient, and never summed; a commitment stated &ldquo;up to&rdquo; is added only to others stated the same way.
+            A part is never counted alongside the package it belongs to.
           </>
         }
       />
@@ -98,7 +99,7 @@ export default function CapitalPage() {
         <Section
           index="01"
           title="Public commitments to recipients, binding and not yet binding"
-          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency and per instrument, never across either; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; ceilings and approximations are shown apart from exact figures; withdrawn or lapsed commitments are left out."
+          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency and per instrument, never across either; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; figures stated “up to”, “about” or “at least” are added only to figures stated the same way, within one currency and instrument, and shown apart from exact figures (an “up to” sum adds stated upper bounds; it is not an amount paid); withdrawn or lapsed commitments are left out."
         >
           <div className="grid gap-4 lg:grid-cols-3">
             {totals.currencies.map((t) => {
@@ -206,7 +207,7 @@ export default function CapitalPage() {
             })}
           </div>
           <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
-            Totals are never converted between currencies, never added across instruments or value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
+            Totals are never converted between currencies, never added across instruments or value roles. Within one currency and instrument, figures stated &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; are added only to others stated the same way; an &ldquo;up to&rdquo; figure is a sum of stated upper bounds, not an amount paid. A paler bar marks any such figure.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
             {" "}Binding means a contract has been executed or money paid; every earlier stage the source states, including conditional loan commitments and non-binding letters of intent, is shown as not yet binding. A commitment whose source states no status is neither: it is listed, not summed
@@ -220,7 +221,7 @@ export default function CapitalPage() {
               <thead>
                 <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
-                  <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · ceilings and approximations kept apart</th>
+                  <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · “up to”, “about” and “at least” figures in separate buckets</th>
                   <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum (no amount, no status, or ended)</th>
                 </tr>
               </thead>

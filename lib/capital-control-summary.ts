@@ -44,7 +44,7 @@ export function buildCapitalControlSummary() {
       "Unlike instruments are never added: within each currency, each instrument (grant, loan, equity, loan guarantee, ...) has its own sums, and there is no sum across instruments.",
       "Rows whose instrument the sources do not name (\"unspecified\") or that combine instruments without a split (\"mixed\") are listed with their own figures and never summed: summed is false and the sums are null.",
       "Nesting is decided before the split by instrument: a part is left out when a row it belongs to is counted in the same currency, whatever the instruments.",
-      "Sums are kept apart by qualifier: exact, approximately, at least, up to.",
+      "Sums are kept apart by qualifier: exact, approximately, at least, up to. Within one currency and instrument, figures with the same qualifier are added: the up_to sum is a sum of stated upper bounds, not an amount paid or an exact commitment, and the at_least sum a sum of stated lower bounds. Envelopes, appropriations, lending authorities and unexercised funding options are not part of any sum.",
       "Binding money (contracted, partially disbursed, disbursed) is summed apart from money not yet binding (announced, authorized, allocated, decided).",
       "A commitment whose current status is withdrawn or lapsed is left out of every sum and listed as ended.",
       "A commitment with an amount whose current status is \"not_stated\" is neither binding nor not yet binding: it is left out of every sum and listed as status not stated, the same rule as an instrument the source does not name.",

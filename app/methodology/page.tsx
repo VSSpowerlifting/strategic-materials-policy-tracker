@@ -633,9 +633,13 @@ export default function MethodologyPage() {
                 government&apos;s.
               </li>
               <li>
-                · <strong className="text-foreground">Ceilings are not sums.</strong> A figure stated
-                &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; is added only to figures
-                of the same qualifier, and shown apart from exact figures.
+                · <strong className="text-foreground">Stated bounds are summed only with their own kind.</strong>{" "}
+                A committed figure stated &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; is
+                added only to figures with the same qualifier, within the same currency and instrument, and
+                shown apart from exact figures. An &ldquo;up to&rdquo; total is a sum of stated upper
+                bounds, not an amount paid and not an exact commitment; an &ldquo;at least&rdquo; total is a
+                sum of stated lower bounds. This is separate from programme envelopes, appropriations,
+                lending authorities and unexercised funding options, which are listed and never summed.
               </li>
               <li>
                 · <strong className="text-foreground">Binding apart from not yet binding.</strong> Within

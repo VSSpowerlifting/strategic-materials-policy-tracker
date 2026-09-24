@@ -130,7 +130,7 @@ export default function PortfoliosPage() {
         <Section
           index="01"
           title="Committed public money, per currency"
-          description="Summed under the counting rules: a part is never added to its package, ceilings and options are left out, and joint vehicles are kept apart from public money."
+          description="Summed under the counting rules: a part is never added to its package, envelopes and unexercised options are listed and left out, figures stated “up to” are added only to each other (a sum of stated upper bounds, not an amount paid), and joint vehicles are kept apart from public money."
         >
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {portfolios.map((p) => (
