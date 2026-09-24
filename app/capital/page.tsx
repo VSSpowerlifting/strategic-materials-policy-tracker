@@ -120,10 +120,18 @@ export default function CapitalPage() {
                       {t.instruments.map((inst) => (
                         <div key={inst.instrument} className="space-y-2 py-3 first:pt-1">
                           <p className="font-display text-sm font-semibold">{financialInstrumentLabels[inst.instrument]}</p>
-                          {([
-                            ["Binding", "contracted, partly or fully paid", inst.binding],
-                            ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", inst.notYetBinding],
-                          ] as const).map(([label, gloss, sums]) =>
+                          {!inst.summed ? (
+                            <p className="font-mono text-[11px] leading-5 text-faint">
+                              Listed below, not summed: {inst.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources do not name the instrument"}.
+                            </p>
+                          ) : null}
+                          {(inst.summed
+                            ? ([
+                                ["Binding", "contracted, partly or fully paid", inst.binding],
+                                ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", inst.notYetBinding],
+                              ] as const)
+                            : []
+                          ).map(([label, gloss, sums]) =>
                             QUALIFIER_ORDER.some((q) => sums[q]) ? (
                               <div key={label}>
                                 <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted" title={gloss}>
@@ -230,11 +238,12 @@ export default function CapitalPage() {
                             {cur.status === "withheld"
                               ? "total withheld: counted rows overlap"
                               : cur.instruments
-                                  .map(
-                                    (i) =>
-                                      `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
-                                        .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
-                                        .join(" and ")}`,
+                                  .map((i) =>
+                                    i.summed
+                                      ? `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
+                                          .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
+                                          .join(" and ")}`
+                                      : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed, not summed`,
                                   )
                                   .join("; ")}
                           </span>

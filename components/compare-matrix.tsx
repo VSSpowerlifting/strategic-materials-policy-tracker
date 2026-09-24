@@ -89,7 +89,7 @@ export function CompareMatrix({
         }
       }}
     >
-      <div className="overflow-x-auto rounded-lg border border-border-strong plate">
+      <div className="relative overflow-x-auto rounded-lg border border-border-strong plate">
         <table className="w-full border-collapse text-sm">
           <caption className="sr-only">
             Tracked materials (rows) by jurisdiction (columns). Each cell is the number of coded

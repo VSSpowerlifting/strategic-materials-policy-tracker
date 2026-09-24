@@ -9,7 +9,8 @@
  * Aggregation rules (see /methodology#capital-counting):
  *  - Money is never converted. Totals are per currency.
  *  - Unlike instruments are never added: within a currency, each instrument
- *    (grant, loan, equity, loan guarantee...) has its own sums.
+ *    (grant, loan, equity, loan guarantee...) has its own sums, and rows
+ *    whose instrument is not stated or is a mix are listed, never summed.
  *  - Unlike value roles are never added. Only rows whose role is
  *    "commitment" are ever summed; envelopes, appropriations and lending
  *    authorities are listed, never totalled, because two envelopes can share
@@ -154,16 +155,36 @@ type QualifierSums = Partial<Record<ValueQualifier, string>>;
 export type InstrumentSum = {
   instrument: FinancialInstrument;
   countedIds: string[];
-  /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
-  byQualifier: QualifierSums;
-  /**
-   * The same sums split by whether a binding agreement exists (contracted,
-   * partially disbursed, disbursed) or not yet (announced, authorized,
-   * allocated, decided, including conditional and non-binding commitments).
-   */
-  binding: QualifierSums;
-  notYetBinding: QualifierSums;
-};
+} & (
+  | {
+      summed: true;
+      /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
+      byQualifier: QualifierSums;
+      /**
+       * The same sums split by whether a binding agreement exists (contracted,
+       * partially disbursed, disbursed) or not yet (announced, authorized,
+       * allocated, decided, including conditional and non-binding commitments).
+       */
+      binding: QualifierSums;
+      notYetBinding: QualifierSums;
+    }
+  | {
+      /**
+       * Rows whose instrument the sources do not name ("unspecified"), or
+       * that combine instruments without a split ("mixed"), are listed with
+       * their own figures and never summed: adding them could add a loan to a
+       * grant without anyone being able to tell.
+       */
+      summed: false;
+      reason: "instrument_not_stated" | "several_instruments";
+      byQualifier: null;
+      binding: null;
+      notYetBinding: null;
+    }
+);
+
+/** Instrument values that name no single instrument, so rows under them are listed, never summed. */
+export const UNSUMMED_INSTRUMENTS: readonly FinancialInstrument[] = ["mixed", "unspecified"];
 
 /** What every currency entry carries, summed or not. */
 type CurrencyTotalBase = {
@@ -264,6 +285,18 @@ export function totalCommitments(
       for (const instrument of FINANCIAL_INSTRUMENTS) {
         const of = list.filter((c) => c.instrument === instrument);
         if (!of.length) continue;
+        if (UNSUMMED_INSTRUMENTS.includes(instrument)) {
+          instruments.push({
+            instrument,
+            countedIds: of.map((c) => c.id),
+            summed: false,
+            reason: instrument === "mixed" ? "several_instruments" : "instrument_not_stated",
+            byQualifier: null,
+            binding: null,
+            notYetBinding: null,
+          });
+          continue;
+        }
         const byQualifier: QualifierSums = {};
         const binding: QualifierSums = {};
         const notYetBinding: QualifierSums = {};
@@ -273,7 +306,7 @@ export function totalCommitments(
           const bucket = isBinding(c) ? binding : notYetBinding;
           bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
         }
-        instruments.push({ instrument, countedIds: of.map((c) => c.id), byQualifier, binding, notYetBinding });
+        instruments.push({ instrument, countedIds: of.map((c) => c.id), summed: true, byQualifier, binding, notYetBinding });
       }
       return { ...base, status: "summed", instruments, overlap: null };
     });

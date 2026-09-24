@@ -140,7 +140,7 @@ test("unlike instruments are never added: each has its own sums within a currenc
   for (const cross of ["150", "1400", "1350", "1450"]) assert.ok(!json.includes(`"${cross}"`), `a cross-instrument sum ${cross} leaked`);
 });
 
-test("a mixed package is counted under its own instrument and its parts are not counted again under theirs", () => {
+test("a mixed package is listed under its own instrument and its parts are not counted again under theirs", () => {
   const all = [
     fin("pkg", { instrument: "mixed", amount: { value: "71", currency: "GBP", qualifier: "up_to", amountAsStated: "", currencyBasis: "stated" } }),
     part("eq", "pkg", "36", { instrument: "equity", amount: { value: "36", currency: "GBP", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } }),
@@ -150,6 +150,9 @@ test("a mixed package is counted under its own instrument and its parts are not 
   const i = sole(t.currencies[0]);
   assert.equal(i.instrument, "mixed");
   assert.deepEqual(i.countedIds, ["pkg"]);
+  // A package that combines instruments is listed with its own figure, never summed.
+  assert.equal(i.summed, false);
+  assert.equal(i.byQualifier, null);
   assert.deepEqual(t.currencies[0].nestedIds.sort(), ["eq", "ln"]);
 });
 
@@ -422,13 +425,19 @@ test("binding and not-yet-binding sums partition each instrument's total exactly
   const t = totalCommitments(publicCommitmentRows());
   for (const cur of t.currencies) {
     if (cur.status !== "summed") assert.fail(`${cur.currency} total withheld`);
-    for (const i of cur.instruments)
+    for (const i of cur.instruments) {
+      if (!i.summed) {
+        // Listed, never summed: no figure at all, not a zero.
+        assert.deepEqual([i.byQualifier, i.binding, i.notYetBinding], [null, null, null], `${cur.currency} ${i.instrument}`);
+        continue;
+      }
       for (const q of ["exact", "approximately", "at_least", "up_to"] as const)
         assert.equal(
           addDecimals([i.binding[q] ?? "0", i.notYetBinding[q] ?? "0"]),
           i.byQualifier[q] ?? "0",
           `${cur.currency} ${i.instrument} ${q}`,
         );
+    }
     // Every counted row sits under exactly one instrument, its own.
     assert.deepEqual(cur.instruments.flatMap((i) => i.countedIds).sort(), [...cur.countedIds].sort(), cur.currency);
   }
@@ -443,7 +452,7 @@ test("a conditional loan commitment and a non-binding letter of intent are never
     assert.ok(!["contracted", "partially_disbursed", "disbursed"].includes(c.financialStatusHistory.at(-1)!.status), id);
   }
   assert.equal(usd.status, "summed");
-  assert.ok(usd.status === "summed" && usd.instruments.some((i) => i.notYetBinding.exact), "USD has not-yet-binding money");
+  assert.ok(usd.status === "summed" && usd.instruments.some((i) => i.summed && i.notYetBinding.exact), "USD has not-yet-binding money");
 });
 
 // --- Funding options ---------------------------------------------------------------
@@ -550,4 +559,17 @@ test("a withdrawn or lapsed commitment is listed as ended and never summed", () 
   assert.equal(usd.status, "summed");
   assert.deepEqual(usd.countedIds, ["fin-live"]);
   assert.deepEqual(sole(usd).byQualifier, { exact: "100" });
+});
+
+test("rows whose instrument is not stated are listed, never summed together", () => {
+  const all = [
+    fin("a", { instrument: "unspecified" }),
+    fin("b", { instrument: "unspecified", amount: { value: "50", currency: "USD", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } }),
+  ];
+  const t = totalCommitments(all, all);
+  const i = sole(t.currencies[0]);
+  assert.equal(i.instrument, "unspecified");
+  assert.equal(i.summed, false);
+  assert.deepEqual(i.countedIds, ["a", "b"]);
+  assert.ok(!JSON.stringify(t).includes('"150"'), "two unnamed instruments were added together");
 });

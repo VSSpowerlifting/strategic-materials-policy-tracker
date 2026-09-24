@@ -61,8 +61,16 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
                     {financialInstrumentLabels[i.instrument]}
                     <span className="ml-2 font-mono text-[10px] font-normal text-faint">{i.countedIds.length} row{i.countedIds.length === 1 ? "" : "s"}</span>
                   </p>
-                  <Sums label="Binding" sums={i.binding} />
-                  <Sums label="Not yet binding" sums={i.notYetBinding} />
+                  {i.summed ? (
+                    <>
+                      <Sums label="Binding" sums={i.binding} />
+                      <Sums label="Not yet binding" sums={i.notYetBinding} />
+                    </>
+                  ) : (
+                    <p className="font-mono text-[11px] leading-5 text-faint">
+                      Listed, not summed: {i.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources do not name the instrument"}.
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

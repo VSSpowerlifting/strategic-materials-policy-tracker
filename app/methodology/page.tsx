@@ -570,10 +570,13 @@ export default function MethodologyPage() {
               </li>
               <li>
                 · <strong className="text-foreground">One instrument at a time.</strong> Within a currency,
-                each instrument has its own sums: grants, loans, equity, loan guarantees and packages that
-                combine instruments (&ldquo;mixed&rdquo;) are never added into one figure, because a
-                guaranteed loan, a grant and a shareholding are different promises. Version 0.5 printed one
-                sum per currency across instruments, contrary to this rule; version 0.6 corrects it.
+                each instrument has its own sums: grants, loans, equity and loan guarantees are never added
+                into one figure, because a
+                guaranteed loan, a grant and a shareholding are different promises. Rows whose instrument the
+                sources do not name, and packages that combine instruments without a split, are listed with
+                their own figures and never summed, since adding them could add a loan to a grant unseen.
+                Version 0.5 printed one sum per currency across instruments, contrary to this rule; version
+                0.6 corrects it.
               </li>
               <li>
                 · <strong className="text-foreground">Ended commitments are not money.</strong> A

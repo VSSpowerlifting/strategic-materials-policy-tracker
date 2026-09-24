@@ -183,7 +183,7 @@ export default function Home() {
                     <span className="text-faint">total withheld: counted rows overlap</span>
                   ) : (
                     <span className="text-faint">
-                      {c.instruments.map((i) => financialInstrumentLabels[i.instrument].toLowerCase()).join(", ")} · each summed apart
+                      {c.instruments.map((i) => financialInstrumentLabels[i.instrument].toLowerCase()).join(", ")} · each apart, never added together
                     </span>
                   )}
                 </li>

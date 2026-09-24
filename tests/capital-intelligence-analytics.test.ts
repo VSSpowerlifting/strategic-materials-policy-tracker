@@ -216,7 +216,8 @@ test("a package inside a stack is counted once, its parts left out of the sum", 
   assert.equal(gbp.status, "summed");
   assert.deepEqual(gbp.countedIds, ["fin-uk-nwf-2026-tungsten-west-package"]);
   assert.deepEqual(gbp.nestedIds.sort(), ["fin-uk-nwf-2026-tungsten-west-equity", "fin-uk-nwf-2026-tungsten-west-lending"]);
-  assert.deepEqual(gbp.status === "summed" && gbp.instruments.map((i) => [i.instrument, i.byQualifier]), [["mixed", { up_to: "71000000" }]]);
+  // The package combines equity and lending without a split in its own figure, so it is listed, never summed.
+  assert.deepEqual(gbp.status === "summed" && gbp.instruments.map((i) => [i.instrument, i.summed, i.byQualifier]), [["mixed", false, null]]);
 });
 
 test("co-investment is classed by who provides the capital, and counts no envelope or project cost", () => {

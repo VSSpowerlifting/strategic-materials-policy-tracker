@@ -42,6 +42,7 @@ export function buildCapitalControlSummary() {
       "If two counted rows in one currency share a descendant, that currency's total is withheld: status \"withheld\", sums null, and the overlapping rows named.",
       "Private financing, recipient funds, expected co-investment and total project cost are never public support; mixed vehicles are reported apart.",
       "Unlike instruments are never added: within each currency, each instrument (grant, loan, equity, loan guarantee, ...) has its own sums, and there is no sum across instruments.",
+      "Rows whose instrument the sources do not name (\"unspecified\") or that combine instruments without a split (\"mixed\") are listed with their own figures and never summed: summed is false and the sums are null.",
       "Nesting is decided before the split by instrument: a part is left out when a row it belongs to is counted in the same currency, whatever the instruments.",
       "Sums are kept apart by qualifier: exact, approximately, at least, up to.",
       "Binding money (contracted, partially disbursed, disbursed) is summed apart from money not yet binding (announced, authorized, allocated, decided).",
