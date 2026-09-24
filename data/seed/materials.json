@@ -42,7 +42,9 @@
       "evt-us-osc-vulcan-reelement-2025",
       "evt-cn-mofcom-56-2025",
       "evt-cn-mofcom-57-2025",
-      "evt-cn-mofcom-62-2025"
+      "evt-cn-mofcom-62-2025",
+      "evt-eu-crma-strategic-projects-2025-03",
+      "evt-eu-crma-strategic-projects-2025-06"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -204,7 +206,8 @@
       "evt-uk-cms-2025",
       "evt-cn-antismuggling-campaign-2025",
       "evt-us-proc-11001-2026",
-      "evt-us-au-framework-2025"
+      "evt-us-au-framework-2025",
+      "evt-eu-crma-strategic-projects-2025-03"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -239,7 +242,8 @@
       "evt-au-cmpti-2025",
       "evt-uk-cms-2025",
       "evt-cn-antismuggling-campaign-2025",
-      "evt-us-proc-11001-2026"
+      "evt-us-proc-11001-2026",
+      "evt-eu-crma-strategic-projects-2025-03"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -277,7 +281,9 @@
       "evt-uk-cms-2025",
       "evt-ca-nrcan-cmrdd-2024",
       "evt-us-aam-adcvd-2025",
-      "evt-cn-mofcom-58-2025"
+      "evt-cn-mofcom-58-2025",
+      "evt-eu-crma-strategic-projects-2025-03",
+      "evt-eu-crma-strategic-projects-2025-06"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -347,7 +353,9 @@
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
       "evt-cn-antismuggling-campaign-2025",
-      "evt-uk-nwf-tungsten-west-2026"
+      "evt-uk-nwf-tungsten-west-2026",
+      "evt-eu-crma-strategic-projects-2025-03",
+      "evt-eu-crma-strategic-projects-2025-06"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

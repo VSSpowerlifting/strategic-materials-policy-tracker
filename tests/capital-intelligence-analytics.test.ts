@@ -7,9 +7,13 @@ import {
   LAYER_KEYS,
   SUMMED_LAYERS,
   actorPortfolio,
+  actorsWithCapital,
+  actorsWithDesignations,
   capitalFlows,
   coInvestments,
   controlsAtProjectStages,
+  designationGeography,
+  designationPortfolio,
   layerOf,
   layers,
   organizationRoles,
@@ -25,6 +29,7 @@ import {
   getAllFinancialCommitments,
   getAllOrganizations,
   getAllProgrammes,
+  getAllProjectDesignations,
   getAllProjects,
   getFinancialCommitmentById,
 } from "@/lib/data";
@@ -219,8 +224,12 @@ test("co-investment is classed by who provides the capital, and counts no envelo
   assert.deepEqual(byProject.get("prj-au-alcoa-sojitz-gallium")?.kinds, ["cross_government"]);
   assert.deepEqual(byProject.get("prj-au-alcoa-sojitz-gallium")?.governments, ["australia", "us"]);
   assert.deepEqual(byProject.get("prj-us-mp-10x-facility")?.kinds, ["public_and_private"]);
-  assert.deepEqual(byProject.get("prj-gb-hemerdon")?.kinds, ["several_public_bodies"]);
+  // Hemerdon: NWF and the UK Government provide capital; the EU recognizes it as a Strategic Project.
+  assert.deepEqual(byProject.get("prj-gb-hemerdon")?.kinds, ["several_public_bodies", "capital_and_designation"]);
+  assert.deepEqual(byProject.get("prj-gb-hemerdon")?.governments, ["uk"]);
+  assert.deepEqual(byProject.get("prj-gb-hemerdon")?.designatingGovernments, ["eu"]);
   assert.ok(!byProject.has("prj-na-lofdal"), "one provider is not co-investment");
+  assert.ok(!byProject.has("prj-fr-caremag"), "a designation alone is not co-investment");
 });
 
 test("control clauses at a project's materials and stages are found by item overlap, with their status on the as-of date", () => {
@@ -339,4 +348,30 @@ test("the summary carries no ratio, share, percentage, utilisation or grand tota
   assert.deepEqual(buildCapitalIntelligenceSummary(), summary, "deterministic");
   assert.equal(summary.asOf, site.lastUpdated);
   assert.equal(summary.programmes.length, getAllProgrammes().length);
+});
+
+test("a government's designations are counted apart from its capital, at home and abroad by the project's country", () => {
+  const eu = designationPortfolio("eu");
+  assert.equal(eu.counts.designations, eu.designationIds.length);
+  assert.ok(eu.counts.byGeography.domestic > 0 && eu.counts.byGeography.abroad > 0);
+  // Greenland is an overseas territory, not EU territory: the Norway-Greenland graphite project is abroad.
+  const d = getAllProjectDesignations().find((x) => x.id === "dsg-eu-crma-greenroc-norgraph")!;
+  assert.equal(designationGeography(d, "eu").geography, "abroad");
+  // The graphite initiative in France, Namibia and Germany straddles the border.
+  const ngc = getAllProjectDesignations().find((x) => x.id === "dsg-eu-crma-ngc-graphite")!;
+  assert.equal(designationGeography(ngc, "eu").geography, "domestic_and_abroad");
+  // Substitution projects carry no stage and are counted as such.
+  assert.equal(eu.counts.noStage, getAllProjectDesignations().filter((x) => !x.stages.length).length);
+  // Designations never enter a money figure: the EU provides no capital row, so it has no capital portfolio.
+  assert.ok(!actorsWithCapital().includes("eu"));
+  assert.deepEqual(actorsWithDesignations(), ["eu"]);
+  assert.equal(eu.counts.projectsWithCapital, 1, "only Hemerdon carries both");
+});
+
+test("the response map places designations beside capital and controls without counting them as capital", () => {
+  const map = stageResponseMap(site.lastUpdated);
+  const separation = map.get("rare-earth-elements")?.get("separation");
+  assert.ok(separation?.designationIds.includes("dsg-eu-crma-pulawy"));
+  assert.deepEqual(separation?.designationActors, ["eu"]);
+  for (const row of map.values()) for (const cell of row.values()) for (const id of cell.capitalIds) assert.ok(id.startsWith("fin-"));
 });

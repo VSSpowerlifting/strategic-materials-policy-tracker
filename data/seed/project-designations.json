@@ -1,1 +1,1704 @@
-[]
+[
+  {
+    "id": "dsg-eu-crma-balakhivka",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-ua-balakhivka",
+    "projectNameAsStated": "Balakhivka Graphite Deposit",
+    "holderOrgIds": [
+      "org-pobuzhzhyas-development"
+    ],
+    "locations": [
+      {
+        "countryCode": "UA",
+        "subnational": null,
+        "asStated": "Ukraine"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-06-04",
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (1)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 1",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-bam4ever",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fr-bam4ever",
+    "projectNameAsStated": "BAM4EVER (Phase I&II)",
+    "holderOrgIds": [
+      "org-tokai-cobex-savoie"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (4)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 4",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-baux-eu-gallant-leader",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-gr-baux-eu-gallant-leader",
+    "projectNameAsStated": "BAUX-EU, GALLANT and LEADER project",
+    "holderOrgIds": [
+      "org-european-bauxites",
+      "org-metlen"
+    ],
+    "locations": [
+      {
+        "countryCode": "GR",
+        "subnational": null,
+        "asStated": "Greece"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "gallium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "bauxite/alumina/aluminium"
+    ],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (6)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, rows 6a and 6b",
+        "note": null
+      }
+    ],
+    "notes": "An integrated project of one extraction component (BAUX-EU) and two processing components (GALLENT and LEADER, the annex's own two spellings of the second name)."
+  },
+  {
+    "id": "dsg-eu-crma-caremag",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fr-caremag",
+    "projectNameAsStated": "CAREMAG",
+    "holderOrgIds": [
+      "org-caremag"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "boron (metallurgy grade)"
+    ],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (7)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 7",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-co2graphite",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-ee-co2graphite",
+    "projectNameAsStated": "CO2Graphite",
+    "holderOrgIds": [
+      "org-up-catalyst"
+    ],
+    "locations": [
+      {
+        "countryCode": "EE",
+        "subnational": null,
+        "asStated": "Estonia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (11)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 11",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-el-moto",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-es-el-moto",
+    "projectNameAsStated": "Mining Project El Moto",
+    "holderOrgIds": [
+      "org-abenojar-tungsten"
+    ],
+    "locations": [
+      {
+        "countryCode": "ES",
+        "subnational": null,
+        "asStated": "Spain"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (27)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 27",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-fortum-hydromet",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fi-fortum-hydromet",
+    "projectNameAsStated": "Project Fortum Hydromet",
+    "holderOrgIds": [
+      "org-fortum-battery-recycling"
+    ],
+    "locations": [
+      {
+        "countryCode": "FI",
+        "subnational": null,
+        "asStated": "Finland"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "lithium (battery grade)",
+      "copper",
+      "nickel (battery grade)",
+      "cobalt"
+    ],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (35)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 35",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-gallicam",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fr-gallicam",
+    "projectNameAsStated": "GALLICAM",
+    "holderOrgIds": [
+      "org-sibanye-stillwater-sandouville"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "nickel (battery grade)",
+      "cobalt",
+      "lithium (battery grade)",
+      "manganese (battery grade)",
+      "copper"
+    ],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (15)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 15",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-gepeto",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-be-gepeto",
+    "projectNameAsStated": "GePETO",
+    "holderOrgIds": [
+      "org-umicore"
+    ],
+    "locations": [
+      {
+        "countryCode": "BE",
+        "subnational": null,
+        "asStated": "Belgium"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (14)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, rows 14 and 39",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-greenroc-norgraph",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-no-greenroc-norgraph",
+    "projectNameAsStated": "Norgraph a/s and Greenland Graphite a/s",
+    "holderOrgIds": [
+      "org-greenroc"
+    ],
+    "locations": [
+      {
+        "countryCode": "NO",
+        "subnational": null,
+        "asStated": "Norway"
+      },
+      {
+        "countryCode": "GL",
+        "subnational": null,
+        "asStated": "Greenland"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-06-04",
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (3)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 3",
+        "note": null
+      }
+    ],
+    "notes": "Processing in Norway (Norgraph a/s) and extraction in Greenland (Greenland Graphite a/s); Greenland is an overseas country or territory, not part of the EU."
+  },
+  {
+    "id": "dsg-eu-crma-hycamite",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fi-hycamite",
+    "projectNameAsStated": "Hycamite TCD Technologies Ltd",
+    "holderOrgIds": [
+      "org-hycamite"
+    ],
+    "locations": [
+      {
+        "countryCode": "FI",
+        "subnational": null,
+        "asStated": "Finland"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (16)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 16",
+        "note": null
+      }
+    ],
+    "notes": "The annex names the project after its promoter."
+  },
+  {
+    "id": "dsg-eu-crma-inspiree",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-it-inspiree",
+    "projectNameAsStated": "LIFE22-ENV-IT-INSPIREE",
+    "holderOrgIds": [
+      "org-itelyum-regeneration"
+    ],
+    "locations": [
+      {
+        "countryCode": "IT",
+        "subnational": null,
+        "asStated": "Italy"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (22)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 22",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-magfactory",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fr-magfactory",
+    "projectNameAsStated": "MagFactory",
+    "holderOrgIds": [
+      "org-magreesource"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (25)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 25",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-maniry",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-mg-maniry",
+    "projectNameAsStated": "Maniry Graphite Mine Project",
+    "holderOrgIds": [
+      "org-evion"
+    ],
+    "locations": [
+      {
+        "countryCode": "MG",
+        "subnational": null,
+        "asStated": "Madagascar"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-06-04",
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (7)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 7",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-ngc-graphite",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fr-ngc-graphite",
+    "projectNameAsStated": "European Initiative for Strategic and Sustainable Graphite Production",
+    "holderOrgIds": [
+      "org-ngc-battery-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      },
+      {
+        "countryCode": "NA",
+        "subnational": null,
+        "asStated": "Namibia"
+      },
+      {
+        "countryCode": "DE",
+        "subnational": null,
+        "asStated": "Germany"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (13)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 13",
+        "note": null
+      }
+    ],
+    "notes": "A processing project in France, Namibia and Germany: the one EU-list project with a component outside the Union."
+  },
+  {
+    "id": "dsg-eu-crma-northcycle",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-se-northcycle",
+    "projectNameAsStated": "NorthCYCLE",
+    "holderOrgIds": [
+      "org-northvolt-revolt"
+    ],
+    "locations": [
+      {
+        "countryCode": "SE",
+        "subnational": null,
+        "asStated": "Sweden"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "manganese (battery grade)",
+      "lithium (battery grade)",
+      "nickel (battery grade)",
+      "cobalt"
+    ],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (28)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 28",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-orano-hydrometallurgy",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fr-orano-hydrometallurgy",
+    "projectNameAsStated": "Hydrometallurgy",
+    "holderOrgIds": [
+      "org-orano-batteries"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "lithium (battery grade)",
+      "cobalt",
+      "nickel (battery grade)",
+      "manganese (battery grade)"
+    ],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (17)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 17",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-p6-metals",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-es-p6-metals",
+    "projectNameAsStated": "P6 Metals",
+    "holderOrgIds": [
+      "org-iberian-resources-spain"
+    ],
+    "locations": [
+      {
+        "countryCode": "ES",
+        "subnational": null,
+        "asStated": "Spain"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (30)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 30",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-prohipersi",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-de-prohipersi",
+    "projectNameAsStated": "ProHiPerSi",
+    "holderOrgIds": [
+      "org-pcc-thorion"
+    ],
+    "locations": [
+      {
+        "countryCode": "DE",
+        "subnational": null,
+        "asStated": "Germany"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (34)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 34",
+        "note": null
+      }
+    ],
+    "notes": "A substitution project: it \"aims to contribute to the substitution of graphite (battery grade)\", so it supplies no graphite and no supply-chain stage is coded. The decision's address for the promoter gives no country, so none is recorded for the organization."
+  },
+  {
+    "id": "dsg-eu-crma-pulawy",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-pl-pulawy",
+    "projectNameAsStated": "Pulawy Rare Earths Separation Plant",
+    "holderOrgIds": [
+      "org-mkango-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "PL",
+        "subnational": null,
+        "asStated": "Poland"
+      }
+    ],
+    "stages": [
+      "processing",
+      "separation"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (36)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 36",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Entry (36)",
+        "note": "The annex calls it a processing project; the project's own name states separation, so both stages are coded."
+      }
+    ],
+    "notes": "The annex calls it a processing project; the project's own name states separation, so both stages are coded."
+  },
+  {
+    "id": "dsg-eu-crma-reemap",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-se-reemap",
+    "projectNameAsStated": "ReeMAP Project: Malmberget, Per Geijer and Lulea Industrial Park",
+    "holderOrgIds": [
+      "org-lkab"
+    ],
+    "locations": [
+      {
+        "countryCode": "SE",
+        "subnational": null,
+        "asStated": "Sweden"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (38)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 38",
+        "note": null
+      }
+    ],
+    "notes": "An integrated project of two extraction components (Malmberget and Per Geijer) and one processing component (Luleå Industrial Park)."
+  },
+  {
+    "id": "dsg-eu-crma-regain",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-be-regain",
+    "projectNameAsStated": "ReGAIN",
+    "holderOrgIds": [
+      "org-umicore"
+    ],
+    "locations": [
+      {
+        "countryCode": "BE",
+        "subnational": null,
+        "asStated": "Belgium"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (39)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, rows 14 and 39",
+        "note": null
+      }
+    ],
+    "notes": "A substitution project: it \"aims to contribute to the substitution of germanium\", so no supply-chain stage is coded."
+  },
+  {
+    "id": "dsg-eu-crma-salrom-baia-de-fier",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-ro-salrom-baia-de-fier",
+    "projectNameAsStated": "SALROM Baia de Fier",
+    "holderOrgIds": [
+      "org-salrom"
+    ],
+    "locations": [
+      {
+        "countryCode": "RO",
+        "subnational": null,
+        "asStated": "Romania"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (43)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 43",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-sarytogan",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-kz-sarytogan",
+    "projectNameAsStated": "Sarytogan Graphite Project",
+    "holderOrgIds": [
+      "org-sarytogan"
+    ],
+    "locations": [
+      {
+        "countryCode": "KZ",
+        "subnational": null,
+        "asStated": "Kazakhstan"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-06-04",
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (10)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 10",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-songwe-hill",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-mw-songwe-hill",
+    "projectNameAsStated": "Songwe Hill Rare Earths",
+    "holderOrgIds": [
+      "org-mkango-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "MW",
+        "subnational": null,
+        "asStated": "Malawi"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-06-04",
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (11)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 36",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-talga-graphite-one",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-se-talga-graphite-one",
+    "projectNameAsStated": "Talga Natural Graphite ONE",
+    "holderOrgIds": [
+      "org-talga"
+    ],
+    "locations": [
+      {
+        "countryCode": "SE",
+        "subnational": null,
+        "asStated": "Sweden"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (44)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 44",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-tungsten-west",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-gb-hemerdon",
+    "projectNameAsStated": "Tungsten West",
+    "holderOrgIds": [
+      "org-tungsten-west"
+    ],
+    "locations": [
+      {
+        "countryCode": "GB",
+        "subnational": null,
+        "asStated": "the United Kingdom"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-06-04",
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (12)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 12",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-zandkopsdrift",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-za-zandkopsdrift",
+    "projectNameAsStated": "Zandkopsdrift",
+    "holderOrgIds": [
+      "org-frontier-rare-earths"
+    ],
+    "locations": [
+      {
+        "countryCode": "ZA",
+        "subnational": null,
+        "asStated": "South Africa"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "manganese (battery grade)"
+    ],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-06-04",
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "note": "Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\""
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (13)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 13",
+        "note": null
+      }
+    ],
+    "notes": null
+  }
+]

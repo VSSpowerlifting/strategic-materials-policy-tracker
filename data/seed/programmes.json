@@ -143,6 +143,42 @@
     "notes": null
   },
   {
+    "id": "prg-eu-crma-strategic-projects",
+    "name": "Strategic Projects under the Critical Raw Materials Act",
+    "nameOriginal": null,
+    "actor": "eu",
+    "kind": "designation_scheme",
+    "administeringOrgIds": [
+      "org-eu-commission"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "Regulation (EU) 2024/1252, Article 7(9)",
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "administrators",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Title; citation of Article 7(9); recitals (1)–(9); Article 1",
+        "note": "The Commission recognises projects for the extraction, processing, recycling or substitution of strategic raw materials as Strategic Projects; recognition confers standing, not money."
+      },
+      {
+        "sourceId": "src-ec-ip-25-864",
+        "supports": [
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Benefits for the selected projects",
+        "note": "\"coordinated support by the Commission, Member States and financial institutions ... notably regarding access to finance and support to connect with relevant off-takers\" and \"streamlined permitting provisions\"."
+      }
+    ],
+    "notes": "Recognition gives priority status, coordinated help with finance and off-takers and, inside the EU, time-limited permitting (27 months for extraction, 15 months for other projects). Any money that follows is recorded as its own financial row. A second call closed on 15 January 2026; no second selection decision is recorded yet."
+  },
+  {
     "id": "prg-in-ncmm",
     "name": "National Critical Mineral Mission",
     "nameOriginal": null,

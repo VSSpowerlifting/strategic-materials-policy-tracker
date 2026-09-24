@@ -1,7 +1,7 @@
 /**
  * The stage response map: for each tracked material and supply-chain stage,
- * the government capital aimed there and the control clauses whose covered
- * items sit there. Record counts only. A control's stage says where its items
+ * the government capital aimed there, the projects designated there (standing,
+ * not money) and the control clauses whose covered items sit there. Record counts only. A control's stage says where its items
  * belong, never that it restricts that stage, and nothing here draws a causal
  * line between a clause and a financing.
  */
@@ -30,6 +30,14 @@ function Cell({ cell }: { cell: ResponseCell | undefined }) {
           <span className="text-foreground">{cell.capitalIds.length}</span>
           <span className="text-faint">{cell.capitalActors.map((a) => jurisdictionShort[a]).join(" ")}</span>
           <span className="sr-only">capital rows</span>
+        </span>
+      ) : null}
+      {cell.designationIds.length ? (
+        <span className="inline-flex items-center gap-1.5 font-mono text-[11px]" title={cell.designationIds.join(", ")}>
+          <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" />
+          <span className="text-foreground">{cell.designationIds.length}</span>
+          <span className="text-faint">{cell.designationActors.map((a) => jurisdictionShort[a]).join(" ")}</span>
+          <span className="sr-only">project designations</span>
         </span>
       ) : null}
       {cell.controlIds.length ? (
@@ -83,6 +91,7 @@ export function StageResponseMap({ asOf }: { asOf: string }) {
       </div>
       <p className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] text-faint">
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full bg-[#CBA86A]" /> government capital rows (committed or option), a package once</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" /> project designations (standing, not money)</span>
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-[1px] bg-[#C77B7B]" /> control clauses whose covered items sit here</span>
         <span>Letters: the governments providing or issuing. Hover or focus a count for record ids and statuses.</span>
       </p>
@@ -93,7 +102,7 @@ export function StageResponseMap({ asOf }: { asOf: string }) {
 /** One material's stages as a list, for the material page. */
 export function MaterialStageResponse({ materialId, asOf }: { materialId: string; asOf: string }) {
   const row = stageResponseMap(asOf).get(materialId);
-  if (!row) return <p className="text-sm text-muted">No capital row or control clause is coded to a stage for this material.</p>;
+  if (!row) return <p className="text-sm text-muted">No capital row, designation or control clause is coded to a stage for this material.</p>;
   const stages = SUPPLY_CHAIN_STAGES.filter((s) => row.has(s));
   return (
     <ul className="divide-y rounded-lg border">
@@ -112,6 +121,13 @@ export function MaterialStageResponse({ materialId, asOf }: { materialId: string
               ) : (
                 <span className="text-faint">No government capital row coded here</span>
               )}
+              {cell.designationIds.length ? (
+                <span className="flex flex-wrap items-center gap-2">
+                  <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" />
+                  <span className="text-muted">{cell.designationIds.length} project designation{cell.designationIds.length === 1 ? "" : "s"} from</span>
+                  {cell.designationActors.map((a) => <JurisdictionTag key={a} code={a} />)}
+                </span>
+              ) : null}
               {cell.controlIds.length ? (
                 <span className="flex flex-wrap items-center gap-2">
                   <span aria-hidden className="h-2 w-2 rounded-[1px] bg-[#C77B7B]" />

@@ -270,21 +270,26 @@ export function projectStack(id: string, all: readonly FinancialCommitment[] = g
   };
 }
 
-export type CoInvestmentKind = "cross_government" | "public_and_private" | "several_public_bodies";
+export type CoInvestmentKind = "cross_government" | "public_and_private" | "several_public_bodies" | "capital_and_designation";
 
 export type CoInvestment = {
   project: Project;
   kinds: CoInvestmentKind[];
+  /** Governments providing capital (from providerJurisdiction). */
   governments: JurisdictionCode[];
+  /** Governments whose schemes recognize the project (from the designation's programme). */
+  designatingGovernments: JurisdictionCode[];
   providerOrgIds: string[];
   rowIds: string[];
+  designationIds: string[];
 };
 
 /**
- * Projects with more than one provider of capital, by kind: more than one
- * government; public money alongside private financing or a recipient's own
- * funds; or several public bodies of one government. Envelopes and
- * total project cost are not capital provided, so they do not count.
+ * Projects with more than one backer, by kind: more than one government's
+ * capital; public money alongside private financing or a recipient's own
+ * funds; several public bodies of one government; or government capital
+ * alongside a designation (standing, not money). Envelopes and total project
+ * cost are not capital provided, so they do not count.
  */
 export function coInvestments(all: readonly FinancialCommitment[] = getAllFinancialCommitments()): CoInvestment[] {
   const out: CoInvestment[] = [];
@@ -300,13 +305,22 @@ export function coInvestments(all: readonly FinancialCommitment[] = getAllFinanc
     if (governments.length > 1) kinds.push("cross_government");
     if (publicRows.length && privateRows.length) kinds.push("public_and_private");
     if (governments.length === 1 && publicOrgs.length > 1) kinds.push("several_public_bodies");
+    const designations = getAllProjectDesignations().filter((d) => d.projectId === project.id);
+    if (publicRows.length && designations.length) kinds.push("capital_and_designation");
     if (kinds.length)
       out.push({
         project,
         kinds,
         governments,
+        designatingGovernments: [
+          ...new Set(designations.flatMap((d) => {
+            const g = getProgrammeById(d.programmeId);
+            return g ? [g.actor] : [];
+          })),
+        ].sort(byCodePoint),
         providerOrgIds: [...new Set(rows.flatMap((c) => c.providerOrgIds))].sort(byCodePoint),
         rowIds: rows.map((c) => c.id),
+        designationIds: designations.map((d) => d.id),
       });
   }
   return out;
@@ -455,6 +469,82 @@ export function actorsWithCapital(all: readonly FinancialCommitment[] = getAllFi
   return (["us", "eu", "japan", "australia", "canada", "uk", "india", "china", "other"] as const).filter((j) => present.has(j));
 }
 
+// --- Designations by actor: recognition without money -------------------------------------
+
+/** Where a designated project is, relative to the designating government's home territory. */
+export function designationGeography(d: ProjectDesignation, actor: JurisdictionCode): RowGeography {
+  const own = d.locations.flatMap((l) => (l.countryCode ? [l.countryCode] : []));
+  const project = getProjectById(d.projectId);
+  const fromProject = project ? project.locations.flatMap((l) => (l.countryCode ? [l.countryCode] : [])) : [];
+  const [countries, basis] = own.length ? [own, "row" as const] : fromProject.length ? [fromProject, "project" as const] : [[], null];
+  const distinct = [...new Set(countries)].sort(byCodePoint);
+  if (!distinct.length) return { geography: "not_stated", countries: [], basis: null };
+  const home = ACTOR_HOME_COUNTRIES[actor];
+  const inside = distinct.filter((cc) => home.includes(cc)).length;
+  return { geography: inside === distinct.length ? "domestic" : inside === 0 ? "abroad" : "domestic_and_abroad", countries: distinct, basis };
+}
+
+export type DesignationPortfolio = {
+  actor: JurisdictionCode;
+  designationIds: string[];
+  /** Record counts, never money. */
+  counts: {
+    designations: number;
+    byGeography: Record<Geography, number>;
+    byCountry: Record<string, number>;
+    byStage: Record<SupplyChainStage, number>;
+    /** Designations with no supply-chain stage: substitution projects. */
+    noStage: number;
+    byMaterial: Record<string, number>;
+    holders: number;
+    /** Designated projects that also carry a financial row from any provider. */
+    projectsWithCapital: number;
+  };
+};
+
+/** One government's project designations, through the programmes it runs. */
+export function designationPortfolio(actor: JurisdictionCode, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): DesignationPortfolio {
+  const programmes = new Set(getAllProgrammes().filter((g) => g.actor === actor).map((g) => g.id));
+  const list = getAllProjectDesignations().filter((d) => programmes.has(d.programmeId));
+  const byGeography = tally(["domestic", "abroad", "domestic_and_abroad", "not_stated"] as const);
+  const byStage = tally(SUPPLY_CHAIN_STAGES);
+  const byCountry: Record<string, number> = {};
+  const byMaterial: Record<string, number> = {};
+  let noStage = 0;
+  for (const d of list) {
+    const g = designationGeography(d, actor);
+    byGeography[g.geography]++;
+    for (const cc of g.countries) byCountry[cc] = (byCountry[cc] ?? 0) + 1;
+    for (const st of new Set(d.stages)) byStage[st]++;
+    if (!d.stages.length) noStage++;
+    for (const m of new Set(d.materialIds)) byMaterial[m] = (byMaterial[m] ?? 0) + 1;
+  }
+  const funded = new Set(all.flatMap((c) => (c.projectId ? [c.projectId] : [])));
+  return {
+    actor,
+    designationIds: list.map((d) => d.id),
+    counts: {
+      designations: list.length,
+      byGeography,
+      byCountry,
+      byStage,
+      noStage,
+      byMaterial,
+      holders: new Set(list.flatMap((d) => d.holderOrgIds)).size,
+      projectsWithCapital: new Set(list.filter((d) => funded.has(d.projectId)).map((d) => d.projectId)).size,
+    },
+  };
+}
+
+/** Actors whose programmes recognize at least one project. */
+export function actorsWithDesignations(): JurisdictionCode[] {
+  const present = new Set(getAllProjectDesignations().flatMap((d) => {
+    const g = getProgrammeById(d.programmeId);
+    return g ? [g.actor] : [];
+  }));
+  return (["eu", "us", "japan", "australia", "canada", "uk", "india", "china", "other"] as const).filter((j) => present.has(j));
+}
+
 // --- Flows: from a government to where its money is aimed -----------------------------------
 
 export type FlowCell = { actor: JurisdictionCode; destination: string; rowIds: string[] };
@@ -490,20 +580,25 @@ export type ResponseCell = {
   controlsByIssuer: Partial<Record<JurisdictionCode, string[]>>;
   /** Of those clauses, how many had each status on the as-of date. */
   controlStatuses: Partial<Record<ControlStatus, number>>;
+  /** Project designations at this material and stage: standing, not money. */
+  designationIds: string[];
+  designationActors: JurisdictionCode[];
 };
 
 /**
- * For each tracked material and supply-chain stage: the capital aimed there
- * and the control clauses whose covered items sit there. Record counts only,
- * never money, and a control's stage is where its items belong, not a claim
- * that the clause restricts that stage.
+ * For each tracked material and supply-chain stage: the capital aimed there,
+ * the projects designated there, and the control clauses whose covered items
+ * sit there. Record counts only, never money; a designation is standing, not
+ * capital; and a control's stage is where its items belong, not a claim that
+ * the clause restricts that stage.
  */
 export function stageResponseMap(asOf: string, all: readonly FinancialCommitment[] = getAllFinancialCommitments(), controls: readonly ControlMeasure[] = getAllControlMeasures()) {
   const out = new Map<string, Map<SupplyChainStage, ResponseCell>>();
   const cell = (mat: string, stage: SupplyChainStage) => {
     if (!out.has(mat)) out.set(mat, new Map());
     const row = out.get(mat)!;
-    if (!row.has(stage)) row.set(stage, { capitalIds: [], capitalActors: [], controlIds: [], controlsByIssuer: {}, controlStatuses: {} });
+    if (!row.has(stage))
+      row.set(stage, { capitalIds: [], capitalActors: [], controlIds: [], controlsByIssuer: {}, controlStatuses: {}, designationIds: [], designationActors: [] });
     return row.get(stage)!;
   };
   for (const c of all) {
@@ -527,7 +622,21 @@ export function stageResponseMap(asOf: string, all: readonly FinancialCommitment
         if (status) x.controlStatuses[status] = (x.controlStatuses[status] ?? 0) + 1;
       }
   }
-  for (const row of out.values()) for (const x of row.values()) x.capitalActors.sort(byCodePoint);
+  for (const d of getAllProjectDesignations()) {
+    const actor = getProgrammeById(d.programmeId)?.actor;
+    if (!actor) continue;
+    for (const mat of d.materialIds)
+      for (const stage of new Set(d.stages)) {
+        const x = cell(mat, stage);
+        x.designationIds.push(d.id);
+        if (!x.designationActors.includes(actor)) x.designationActors.push(actor);
+      }
+  }
+  for (const row of out.values())
+    for (const x of row.values()) {
+      x.capitalActors.sort(byCodePoint);
+      x.designationActors.sort(byCodePoint);
+    }
   return out;
 }
 

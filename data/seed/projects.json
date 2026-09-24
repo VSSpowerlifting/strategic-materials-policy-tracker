@@ -67,6 +67,95 @@
     "notes": "The release names the project as \"the Arafura Nolans project\" and states no developer or stage, so neither is recorded."
   },
   {
+    "id": "prj-be-gepeto",
+    "name": "GePETO",
+    "sponsorOrgIds": [
+      "org-umicore"
+    ],
+    "locations": [
+      {
+        "countryCode": "BE",
+        "subnational": null,
+        "asStated": "Belgium"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (14)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, rows 14 and 39",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-be-regain",
+    "name": "ReGAIN",
+    "sponsorOrgIds": [
+      "org-umicore"
+    ],
+    "locations": [
+      {
+        "countryCode": "BE",
+        "subnational": null,
+        "asStated": "Belgium"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (39)",
+        "note": "A substitution project: it \"aims to contribute to the substitution of germanium\", so no supply-chain stage is coded."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, rows 14 and 39",
+        "note": null
+      }
+    ],
+    "notes": "A substitution project: it \"aims to contribute to the substitution of germanium\", so no supply-chain stage is coded."
+  },
+  {
     "id": "prj-ca-cyclic-kingston-demonstration-plant",
     "name": "Kingston Demonstration Plant",
     "sponsorOrgIds": [
@@ -146,6 +235,584 @@
     "notes": null
   },
   {
+    "id": "prj-de-prohipersi",
+    "name": "ProHiPerSi",
+    "sponsorOrgIds": [
+      "org-pcc-thorion"
+    ],
+    "locations": [
+      {
+        "countryCode": "DE",
+        "subnational": null,
+        "asStated": "Germany"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (34)",
+        "note": "A substitution project: it \"aims to contribute to the substitution of graphite (battery grade)\", so it supplies no graphite and no supply-chain stage is coded. The decision's address for the promoter gives no country, so none is recorded for the organization."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 34",
+        "note": null
+      }
+    ],
+    "notes": "A substitution project: it \"aims to contribute to the substitution of graphite (battery grade)\", so it supplies no graphite and no supply-chain stage is coded. The decision's address for the promoter gives no country, so none is recorded for the organization."
+  },
+  {
+    "id": "prj-ee-co2graphite",
+    "name": "CO2Graphite",
+    "sponsorOrgIds": [
+      "org-up-catalyst"
+    ],
+    "locations": [
+      {
+        "countryCode": "EE",
+        "subnational": null,
+        "asStated": "Estonia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (11)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 11",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-es-el-moto",
+    "name": "Mining Project El Moto",
+    "sponsorOrgIds": [
+      "org-abenojar-tungsten"
+    ],
+    "locations": [
+      {
+        "countryCode": "ES",
+        "subnational": null,
+        "asStated": "Spain"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (27)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 27",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-es-p6-metals",
+    "name": "P6 Metals",
+    "sponsorOrgIds": [
+      "org-iberian-resources-spain"
+    ],
+    "locations": [
+      {
+        "countryCode": "ES",
+        "subnational": null,
+        "asStated": "Spain"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (30)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 30",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-fi-fortum-hydromet",
+    "name": "Project Fortum Hydromet",
+    "sponsorOrgIds": [
+      "org-fortum-battery-recycling"
+    ],
+    "locations": [
+      {
+        "countryCode": "FI",
+        "subnational": null,
+        "asStated": "Finland"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "lithium (battery grade)",
+      "copper",
+      "nickel (battery grade)",
+      "cobalt"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (35)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 35",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-fi-hycamite",
+    "name": "Hycamite TCD Technologies Ltd",
+    "sponsorOrgIds": [
+      "org-hycamite"
+    ],
+    "locations": [
+      {
+        "countryCode": "FI",
+        "subnational": null,
+        "asStated": "Finland"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (16)",
+        "note": "The annex names the project after its promoter."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 16",
+        "note": null
+      }
+    ],
+    "notes": "The annex names the project after its promoter."
+  },
+  {
+    "id": "prj-fr-bam4ever",
+    "name": "BAM4EVER (Phase I&II)",
+    "sponsorOrgIds": [
+      "org-tokai-cobex-savoie"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (4)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 4",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-fr-caremag",
+    "name": "CAREMAG",
+    "sponsorOrgIds": [
+      "org-caremag"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "boron (metallurgy grade)"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (7)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 7",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-fr-gallicam",
+    "name": "GALLICAM",
+    "sponsorOrgIds": [
+      "org-sibanye-stillwater-sandouville"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "nickel (battery grade)",
+      "cobalt",
+      "lithium (battery grade)",
+      "manganese (battery grade)",
+      "copper"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (15)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 15",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-fr-magfactory",
+    "name": "MagFactory",
+    "sponsorOrgIds": [
+      "org-magreesource"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (25)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 25",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-fr-ngc-graphite",
+    "name": "European Initiative for Strategic and Sustainable Graphite Production",
+    "sponsorOrgIds": [
+      "org-ngc-battery-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      },
+      {
+        "countryCode": "NA",
+        "subnational": null,
+        "asStated": "Namibia"
+      },
+      {
+        "countryCode": "DE",
+        "subnational": null,
+        "asStated": "Germany"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (13)",
+        "note": "A processing project in France, Namibia and Germany: the one EU-list project with a component outside the Union."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 13",
+        "note": null
+      }
+    ],
+    "notes": "A processing project in France, Namibia and Germany: the one EU-list project with a component outside the Union."
+  },
+  {
+    "id": "prj-fr-orano-hydrometallurgy",
+    "name": "Hydrometallurgy",
+    "sponsorOrgIds": [
+      "org-orano-batteries"
+    ],
+    "locations": [
+      {
+        "countryCode": "FR",
+        "subnational": null,
+        "asStated": "France"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "lithium (battery grade)",
+      "cobalt",
+      "nickel (battery grade)",
+      "manganese (battery grade)"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (17)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 17",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "prj-gb-hemerdon",
     "name": "Hemerdon tungsten and tin mine",
     "sponsorOrgIds": [
@@ -181,6 +848,250 @@
         ],
         "evidence": "explicit",
         "locator": "First bullet point; second and third paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "sponsors",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 12",
+        "note": "The decision names the Strategic Project \"Tungsten West\" and gives its promoter's address as \"Hemerdon Mine (Drakelands), PL7 5BS, Devon, United Kingdom\"; the annex lists it as an extraction project in the United Kingdom contributing to the supply of tungsten."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-gr-baux-eu-gallant-leader",
+    "name": "BAUX-EU, GALLANT and LEADER project",
+    "sponsorOrgIds": [
+      "org-european-bauxites",
+      "org-metlen"
+    ],
+    "locations": [
+      {
+        "countryCode": "GR",
+        "subnational": null,
+        "asStated": "Greece"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "gallium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "bauxite/alumina/aluminium"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (6)",
+        "note": "An integrated project of one extraction component (BAUX-EU) and two processing components (GALLENT and LEADER, the annex's own two spellings of the second name)."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, rows 6a, 6b",
+        "note": null
+      }
+    ],
+    "notes": "An integrated project of one extraction component (BAUX-EU) and two processing components (GALLENT and LEADER, the annex's own two spellings of the second name)."
+  },
+  {
+    "id": "prj-it-inspiree",
+    "name": "LIFE22-ENV-IT-INSPIREE",
+    "sponsorOrgIds": [
+      "org-itelyum-regeneration"
+    ],
+    "locations": [
+      {
+        "countryCode": "IT",
+        "subnational": null,
+        "asStated": "Italy"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (22)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 22",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-kz-sarytogan",
+    "name": "Sarytogan Graphite Project",
+    "sponsorOrgIds": [
+      "org-sarytogan"
+    ],
+    "locations": [
+      {
+        "countryCode": "KZ",
+        "subnational": null,
+        "asStated": "Kazakhstan"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (10)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 10",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-mg-maniry",
+    "name": "Maniry Graphite Mine Project",
+    "sponsorOrgIds": [
+      "org-evion"
+    ],
+    "locations": [
+      {
+        "countryCode": "MG",
+        "subnational": null,
+        "asStated": "Madagascar"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (7)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 7",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-mw-songwe-hill",
+    "name": "Songwe Hill Rare Earths",
+    "sponsorOrgIds": [
+      "org-mkango-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "MW",
+        "subnational": null,
+        "asStated": "Malawi"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (11)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 36",
         "note": null
       }
     ],
@@ -233,6 +1144,349 @@
         "evidence": "explicit",
         "locator": "Title",
         "note": "レアアース探査・開発事業 (rare earth exploration and development)."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-no-greenroc-norgraph",
+    "name": "Norgraph a/s and Greenland Graphite a/s",
+    "sponsorOrgIds": [
+      "org-greenroc"
+    ],
+    "locations": [
+      {
+        "countryCode": "NO",
+        "subnational": null,
+        "asStated": "Norway"
+      },
+      {
+        "countryCode": "GL",
+        "subnational": null,
+        "asStated": "Greenland"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (3)",
+        "note": "Processing in Norway (Norgraph a/s) and extraction in Greenland (Greenland Graphite a/s); Greenland is an overseas country or territory, not part of the EU."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 3",
+        "note": null
+      }
+    ],
+    "notes": "Processing in Norway (Norgraph a/s) and extraction in Greenland (Greenland Graphite a/s); Greenland is an overseas country or territory, not part of the EU."
+  },
+  {
+    "id": "prj-pl-pulawy",
+    "name": "Pulawy Rare Earths Separation Plant",
+    "sponsorOrgIds": [
+      "org-mkango-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "PL",
+        "subnational": null,
+        "asStated": "Poland"
+      }
+    ],
+    "stages": [
+      "processing",
+      "separation"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (36)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Entry (36)",
+        "note": "The annex calls it a processing project; the project's own name states separation, so both stages are coded."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 36",
+        "note": null
+      }
+    ],
+    "notes": "The annex calls it a processing project; the project's own name states separation, so both stages are coded."
+  },
+  {
+    "id": "prj-ro-salrom-baia-de-fier",
+    "name": "SALROM Baia de Fier",
+    "sponsorOrgIds": [
+      "org-salrom"
+    ],
+    "locations": [
+      {
+        "countryCode": "RO",
+        "subnational": null,
+        "asStated": "Romania"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (43)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 43",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-se-northcycle",
+    "name": "NorthCYCLE",
+    "sponsorOrgIds": [
+      "org-northvolt-revolt"
+    ],
+    "locations": [
+      {
+        "countryCode": "SE",
+        "subnational": null,
+        "asStated": "Sweden"
+      }
+    ],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "manganese (battery grade)",
+      "lithium (battery grade)",
+      "nickel (battery grade)",
+      "cobalt"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (28)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 28",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-se-reemap",
+    "name": "ReeMAP Project: Malmberget, Per Geijer and Lulea Industrial Park",
+    "sponsorOrgIds": [
+      "org-lkab"
+    ],
+    "locations": [
+      {
+        "countryCode": "SE",
+        "subnational": null,
+        "asStated": "Sweden"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (38)",
+        "note": "An integrated project of two extraction components (Malmberget and Per Geijer) and one processing component (Luleå Industrial Park)."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 38",
+        "note": null
+      }
+    ],
+    "notes": "An integrated project of two extraction components (Malmberget and Per Geijer) and one processing component (Luleå Industrial Park)."
+  },
+  {
+    "id": "prj-se-talga-graphite-one",
+    "name": "Talga Natural Graphite ONE",
+    "sponsorOrgIds": [
+      "org-talga"
+    ],
+    "locations": [
+      {
+        "countryCode": "SE",
+        "subnational": null,
+        "asStated": "Sweden"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (44)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 44",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-ua-balakhivka",
+    "name": "Balakhivka Graphite Deposit",
+    "sponsorOrgIds": [
+      "org-pobuzhzhyas-development"
+    ],
+    "locations": [
+      {
+        "countryCode": "UA",
+        "subnational": null,
+        "asStated": "Ukraine"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (1)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 1",
+        "note": null
       }
     ],
     "notes": null
@@ -306,5 +1560,53 @@
       }
     ],
     "notes": "The filing and the company release give the site only as \"a soon-to-be-chosen location\", so no location is recorded."
+  },
+  {
+    "id": "prj-za-zandkopsdrift",
+    "name": "Zandkopsdrift",
+    "sponsorOrgIds": [
+      "org-frontier-rare-earths"
+    ],
+    "locations": [
+      {
+        "countryCode": "ZA",
+        "subnational": null,
+        "asStated": "South Africa"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "manganese (battery grade)"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-06",
+        "supports": [
+          "name",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (13)",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 13",
+        "note": null
+      }
+    ],
+    "notes": null
   }
 ]

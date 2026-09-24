@@ -826,5 +826,77 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Chinese primary for Announcement No. 62 (2025), read in full 2026-09-23. Justification clause verbatim: 为维护国家安全和利益，根据《中华人民共和国出口管制法》《中华人民共和国两用物项出口管制条例》等法律法规相关规定，经国务院批准. Like No. 61 it carries no non-proliferation limb. Controls 1E902.a (rare-earth mining, smelting-separation, metal-smelting, magnet-manufacturing and secondary-recovery technology and its carriers) and 1E902.b (production-line assembly, commissioning, maintenance, repair and upgrading technology); \"本公告自发布之日起实施\". The two .wps annexes are filing guides, not item lists."
+  },
+  {
+    "id": "src-ec-crma-sp-decision-2025-03",
+    "title": "Commission Decision of 25.3.2025 recognising certain critical raw material projects as Strategic Projects under Regulation (EU) 2024/1252 (C(2025) 1904 final)",
+    "publisher": "European Commission",
+    "url": "https://single-market-economy.ec.europa.eu/document/download/9b159533-2a45-4d43-bf33-6ca5fa88440d_en?filename=C_2025_1904_1_EN_ACT_part1_v2.pdf",
+    "language": "en",
+    "datePublished": "2025-03-25",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The decision itself, read in full 2026-09-23. Adopted under Article 7(9) of Regulation (EU) 2024/1252. Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\" Article 2 addresses the decision to each project promoter, with the promoter's address; those addresses are the source for the promoters' countries. Recital (4): 124 applications from projects in Member States, 122 complete."
+  },
+  {
+    "id": "src-ec-crma-sp-annex-2025-03",
+    "title": "Annex to Commission Decision C(2025) 1904 final: list of Strategic Projects",
+    "publisher": "European Commission",
+    "url": "https://single-market-economy.ec.europa.eu/document/download/e9c90c91-7492-4047-bc51-d0c9d5e89a2f_en?filename=C_2025_1904_1_EN_annexe_acte_autonome_part1_v2.pdf",
+    "language": "en",
+    "datePublished": "2025-03-25",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The list of 47 Strategic Projects in the EU, read in full 2026-09-23. Each entry names the project, whether it is an extraction, processing, recycling, substitution or integrated project, the country, the promoter and the strategic raw materials it contributes to. Only projects naming a tracked material are recorded as designations."
+  },
+  {
+    "id": "src-ec-crma-sp-decision-2025-06",
+    "title": "Commission Decision of 4.6.2025 recognising certain critical raw material projects located in third countries and in overseas countries or territories as Strategic Projects under Regulation (EU) 2024/1252 (C(2025) 3491 final)",
+    "publisher": "European Commission",
+    "url": "https://single-market-economy.ec.europa.eu/document/download/808502c2-21c7-4ca8-855f-ff0b528f91c4_en?filename=C_2025_3491_1_EN_ACT_part1_v4.pdf",
+    "language": "en",
+    "datePublished": "2025-06-04",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The decision itself, read in full 2026-09-23. Article 1 recognises the annexed projects as Strategic Projects; recital (10) states that each received the explicit approval of the third country or OCT concerned; Article 2 lists promoters with addresses (Tungsten West PLC: \"Hemerdon Mine (Drakelands), PL7 5BS, Devon, United Kingdom\")."
+  },
+  {
+    "id": "src-ec-crma-sp-annex-2025-06",
+    "title": "Annex to Commission Decision C(2025) 3491 final: list of Strategic Projects in third countries and overseas countries or territories",
+    "publisher": "European Commission",
+    "url": "https://single-market-economy.ec.europa.eu/document/download/60c576a5-435e-43e6-83de-c81f3652259b_en?filename=C_2025_3491_1_EN_annexe_acte_autonome_part1_v3.pdf",
+    "language": "en",
+    "datePublished": "2025-06-04",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The list of 13 Strategic Projects outside the EU, read in full 2026-09-23. Only projects naming a tracked material are recorded as designations."
+  },
+  {
+    "id": "src-ec-ip-25-864",
+    "title": "Commission selects 47 Strategic Projects to secure and diversify access to raw materials in the EU (IP/25/864)",
+    "publisher": "European Commission",
+    "url": "https://ec.europa.eu/commission/presscorner/detail/en/ip_25_864",
+    "language": "en",
+    "datePublished": "2025-03-25",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Press release, read in full through the press corner's document API on 2026-09-23. States the benefits (coordinated support on access to finance and off-takers; permit-granting capped at 27 months for extraction and 15 months for other projects) and an \"expected overall capital investment of €22.5 billion\" for the 47 projects, which is project cost, not EU money, and is not recorded as capital."
+  },
+  {
+    "id": "src-ec-ip-25-1419",
+    "title": "Commission selects 13 Strategic Projects in third countries to secure access to raw materials and to support local value creation (IP/25/1419)",
+    "publisher": "European Commission",
+    "url": "https://ec.europa.eu/commission/presscorner/detail/en/ip_25_1419",
+    "language": "en",
+    "datePublished": "2025-06-04",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Press release, read in full through the press corner's document API on 2026-09-23. States that the projects \"will diversify the EU's sources of supply and increase economic security\" and estimates \"an overall capital investment of €5.5 billion\" for the 13 projects, which is project cost and is not recorded as capital."
   }
 ]

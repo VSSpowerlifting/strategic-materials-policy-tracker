@@ -9,6 +9,8 @@ import {
   ACTOR_HOME_COUNTRIES,
   actorPortfolio,
   actorsWithCapital,
+  actorsWithDesignations,
+  designationPortfolio,
   capitalFlows,
   coInvestments,
   layerOf,
@@ -46,6 +48,9 @@ export function buildCapitalIntelligenceSummary() {
         controlIds: cell.controlIds,
         controlsByIssuer: cell.controlsByIssuer,
         controlStatusesAsOf: cell.controlStatuses,
+        designations: cell.designationIds.length,
+        designationIds: cell.designationIds,
+        designationActors: cell.designationActors,
       })),
     }));
 
@@ -73,6 +78,7 @@ export function buildCapitalIntelligenceSummary() {
       const p = actorPortfolio(actor, all);
       return { actor, publicCommitmentTotals: p.publicTotals, jointVehicleCommitmentTotals: p.jointVehicleTotals, counts: p.counts };
     }),
+    designationPortfolios: actorsWithDesignations().map((actor) => designationPortfolio(actor, all)),
     projects: getAllProjects().map((project) => {
       const s = projectStack(project.id, all)!;
       return {
@@ -87,8 +93,10 @@ export function buildCapitalIntelligenceSummary() {
       projectId: c.project.id,
       kinds: c.kinds,
       governments: c.governments,
+      designatingGovernments: c.designatingGovernments,
       providerOrgIds: c.providerOrgIds,
       rowIds: c.rowIds,
+      designationIds: c.designationIds,
     })),
     programmes: getAllProgrammes().map((g) => {
       const l = programmeLedger(g.id, all)!;

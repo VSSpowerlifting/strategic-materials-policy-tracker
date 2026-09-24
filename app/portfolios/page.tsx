@@ -9,6 +9,8 @@ import {
   LAYER_KEYS,
   actorPortfolio,
   actorsWithCapital,
+  actorsWithDesignations,
+  designationPortfolio,
   capitalFlows,
   coInvestments,
 } from "@/lib/capital-intelligence";
@@ -89,6 +91,7 @@ export default function PortfoliosPage() {
   const destinations = [...new Set(flows.map((f) => f.destination))].sort((a, b) => (a === "not_stated" ? 1 : b === "not_stated" ? -1 : a < b ? -1 : 1));
   const co = coInvestments(all);
   const programmes = getAllProgrammes();
+  const designators = actorsWithDesignations().map((a) => designationPortfolio(a, all));
 
   const instruments = FINANCIAL_INSTRUMENTS.filter((i) => portfolios.some((p) => p.counts.byInstrument[i]));
   const stages = SUPPLY_CHAIN_STAGES.filter((s) => portfolios.some((p) => p.counts.byStage[s]));
@@ -235,8 +238,8 @@ export default function PortfoliosPage() {
 
         <Section
           index="04"
-          title="Projects with more than one provider"
-          description="Co-investment by kind. Envelopes and total project cost are not capital provided, so they do not count."
+          title="Projects with more than one backer"
+          description="By kind: more than one government's capital, public and private capital, several public bodies, or government capital alongside a designation. Envelopes and total project cost are not capital provided, so they do not count."
         >
           {co.length ? (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -244,10 +247,17 @@ export default function PortfoliosPage() {
                 <Card key={c.project.id} className="p-4">
                   <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">{c.kinds.map((k) => coInvestmentKindLabels[k]).join(" · ")}</p>
                   <p className="mt-2 font-display font-semibold leading-snug"><ProjectLink id={c.project.id} /></p>
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
                     {c.governments.map((g) => <JurisdictionTag key={g} code={g} />)}
+                    {c.designatingGovernments.length ? (
+                      <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-muted">
+                        <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" /> designated by {c.designatingGovernments.map((g) => jurisdictionShort[g]).join(", ")}
+                      </span>
+                    ) : null}
                   </div>
-                  <p className="mt-2 font-mono text-[11px] text-faint">{c.rowIds.length} rows · {c.providerOrgIds.length} providing organizations</p>
+                  <p className="mt-2 font-mono text-[11px] text-faint">
+                    {c.rowIds.length} rows · {c.providerOrgIds.length} providing organizations{c.designationIds.length ? ` · ${c.designationIds.length} designation${c.designationIds.length === 1 ? "" : "s"}` : ""}
+                  </p>
                 </Card>
               ))}
             </div>
@@ -256,7 +266,69 @@ export default function PortfoliosPage() {
           )}
         </Section>
 
-        <Section index="05" title="Programmes" description="The named schemes each government runs.">
+        {designators.length ? (
+          <Section
+            index="05"
+            title="Recognition without money"
+            description="Projects a government recognizes under a designation scheme. Standing, not capital: never summed, never counted in the tables above. At home or abroad is read from the designated project's stated country against the designating government's home territory."
+          >
+            <div className="space-y-4">
+              {designators.map((d) => {
+                const countries = Object.entries(d.counts.byCountry).sort(([a, x], [b, y]) => y - x || (a < b ? -1 : 1));
+                const mats = materials.filter((m) => d.counts.byMaterial[m.id]);
+                const st = SUPPLY_CHAIN_STAGES.filter((s) => d.counts.byStage[s]);
+                return (
+                  <Card key={d.actor} className="p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <JurisdictionTag code={d.actor} withName />
+                      <span className="font-mono text-[11px] text-faint">{d.counts.designations} designations · {d.counts.holders} holders</span>
+                    </div>
+                    <div className="mt-4 grid gap-5 md:grid-cols-3">
+                      <div>
+                        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Where</p>
+                        <dl className="space-y-1 text-sm">
+                          {(["domestic", "abroad", "domestic_and_abroad", "not_stated"] as const).filter((g) => d.counts.byGeography[g]).map((g) => (
+                            <div key={g} className="flex justify-between gap-3"><dt className="text-muted">{geographyLabels[g]}</dt><dd className="tnum font-mono">{d.counts.byGeography[g]}</dd></div>
+                          ))}
+                        </dl>
+                        <p className="mt-2 font-mono text-[11px] leading-5 text-faint">{countries.map(([cc, n]) => `${cc} ${n}`).join(" · ")}</p>
+                      </div>
+                      <div>
+                        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Materials</p>
+                        <dl className="space-y-1 text-sm">
+                          {mats.map((m) => (
+                            <div key={m.id} className="flex justify-between gap-3"><dt className="text-muted">{m.nameEn}</dt><dd className="tnum font-mono">{d.counts.byMaterial[m.id]}</dd></div>
+                          ))}
+                        </dl>
+                      </div>
+                      <div>
+                        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Stages</p>
+                        <dl className="space-y-1 text-sm">
+                          {st.map((s) => (
+                            <div key={s} className="flex justify-between gap-3"><dt className="text-muted">{supplyChainStageLabels[s]}</dt><dd className="tnum font-mono">{d.counts.byStage[s]}</dd></div>
+                          ))}
+                          {d.counts.noStage ? (
+                            <div className="flex justify-between gap-3"><dt className="text-faint">Substitution, no stage</dt><dd className="tnum font-mono">{d.counts.noStage}</dd></div>
+                          ) : null}
+                        </dl>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-sm text-muted">
+                      {d.counts.projectsWithCapital
+                        ? `${d.counts.projectsWithCapital} designated project${d.counts.projectsWithCapital === 1 ? " also carries" : "s also carry"} a financial row in the corpus. `
+                        : "No designated project carries a financial row in the corpus yet. "}
+                      {programmes.filter((g) => g.actor === d.actor && g.kind === "designation_scheme").map((g) => (
+                        <Link key={g.id} href={`/programmes/${g.id}`} className="text-accent hover:text-accent-strong">{g.name} →</Link>
+                      ))}
+                    </p>
+                  </Card>
+                );
+              })}
+            </div>
+          </Section>
+        ) : null}
+
+        <Section index={designators.length ? "06" : "05"} title="Programmes" description="The named schemes each government runs.">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {actors.map((a) => {
               const list = programmes.filter((g) => g.actor === a);

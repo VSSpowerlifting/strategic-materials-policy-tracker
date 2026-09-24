@@ -1,5 +1,31 @@
 [
   {
+    "id": "org-abenojar-tungsten",
+    "name": "ABENÓJAR TUNGSTEN S.L.",
+    "nameOriginal": null,
+    "aliases": [
+      "Abenojar Tungsten S.L."
+    ],
+    "kind": "company",
+    "countryCode": "ES",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 27",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-au-disr",
     "name": "Department of Industry, Science and Resources",
     "nameOriginal": null,
@@ -113,6 +139,32 @@
     "notes": null
   },
   {
+    "id": "org-caremag",
+    "name": "CAREMAG SAS",
+    "nameOriginal": null,
+    "aliases": [
+      "Caremag SAS"
+    ],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 7",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-cyclic-materials",
     "name": "Cyclic Materials Incorporated",
     "nameOriginal": null,
@@ -136,6 +188,130 @@
       }
     ],
     "notes": "The cited sources do not state where the company is incorporated."
+  },
+  {
+    "id": "org-eu-commission",
+    "name": "European Commission",
+    "nameOriginal": null,
+    "aliases": [
+      "Commission"
+    ],
+    "kind": "government",
+    "countryCode": null,
+    "actor": "eu",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Title and signature",
+        "note": "Adopts the decision under Regulation (EU) 2024/1252; signed for the Commission by the Executive Vice-President."
+      }
+    ],
+    "notes": "A supranational body, so no country is recorded; its actor is the EU."
+  },
+  {
+    "id": "org-european-bauxites",
+    "name": "European Bauxites",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "GR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 6a",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-evion",
+    "name": "EVION GROUP NL",
+    "nameOriginal": null,
+    "aliases": [
+      "Evion Group NL"
+    ],
+    "kind": "company",
+    "countryCode": "AU",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 7",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-fortum-battery-recycling",
+    "name": "Fortum Battery Recycling Oy",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FI",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 35",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-frontier-rare-earths",
+    "name": "Frontier Rare Earths Limited",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "LU",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 13",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-goldman-sachs-bank-usa",
@@ -186,6 +362,80 @@
     "notes": "The cited sources do not state where the company is incorporated."
   },
   {
+    "id": "org-greenroc",
+    "name": "GreenRoc Strategic Materials Plc",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "GB",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 3",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-hycamite",
+    "name": "Hycamite TCD Technologies Ltd.",
+    "nameOriginal": null,
+    "aliases": [
+      "Hycamite TCD Technologies Ltd"
+    ],
+    "kind": "company",
+    "countryCode": "FI",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 16",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-iberian-resources-spain",
+    "name": "Iberian Resources Spain",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "ES",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 30",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-in-government",
     "name": "Government of India",
     "nameOriginal": null,
@@ -206,6 +456,30 @@
         "evidence": "explicit",
         "locator": "Issuer and opening paragraph",
         "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-itelyum-regeneration",
+    "name": "Itelyum Regeneration SpA",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "IT",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 22",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
       }
     ],
     "notes": null
@@ -311,6 +585,33 @@
     "notes": null
   },
   {
+    "id": "org-lkab",
+    "name": "LKAB (Luossavaara-Kiirunavaara AB)",
+    "nameOriginal": null,
+    "aliases": [
+      "Luossavaara-Kirunavaara AB (LKAB)",
+      "LKAB"
+    ],
+    "kind": "company",
+    "countryCode": "SE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 38",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-lynas",
     "name": "Lynas Rare Earths Limited",
     "nameOriginal": null,
@@ -333,6 +634,82 @@
         "evidence": "explicit",
         "locator": "First paragraph; Overview of Lynas",
         "note": "\"an Australian rare earths company\"; listed on the Australian Stock Exchange, headquartered in Perth."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-magreesource",
+    "name": "MagREEsource",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 25",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-metlen",
+    "name": "Metlen Energy and Metals",
+    "nameOriginal": null,
+    "aliases": [
+      "Metlen Energy & Metals"
+    ],
+    "kind": "company",
+    "countryCode": "GR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 6b",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-mkango-resources",
+    "name": "Mkango Resources Ltd.",
+    "nameOriginal": null,
+    "aliases": [
+      "Mkango Resources Limited"
+    ],
+    "kind": "company",
+    "countryCode": "CA",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 36",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
       }
     ],
     "notes": null
@@ -387,6 +764,127 @@
     "notes": null
   },
   {
+    "id": "org-ngc-battery-materials",
+    "name": "NGC Battery Materials GmbH",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "DE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 13",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-northvolt-revolt",
+    "name": "Northvolt Revolt AB",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "SE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 28",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-orano-batteries",
+    "name": "ORANO Batteries",
+    "nameOriginal": null,
+    "aliases": [
+      "Orano Batteries"
+    ],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 17",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-pcc-thorion",
+    "name": "PCC Thorion GmbH",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 34",
+        "note": "Named as a project promoter to which the decision is addressed; the address given has no country, so none is recorded."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-pobuzhzhyas-development",
+    "name": "Pobuzhzhya’s Development LLC",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "UA",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 1",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-reelement-technologies",
     "name": "ReElement Technologies",
     "nameOriginal": null,
@@ -407,6 +905,78 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-salrom",
+    "name": "Societatea Națională a Sării S.A.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "RO",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 43",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-sarytogan",
+    "name": "Sarytogan Graphite Limited",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "AU",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 10",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-sibanye-stillwater-sandouville",
+    "name": "Sibanye-Stillwater Sandouville Refinery",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 15",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
       }
     ],
     "notes": null
@@ -433,6 +1003,30 @@
         "evidence": "explicit",
         "locator": "First paragraph; Overview of Sojitz (Chiyoda-ku, Tokyo)",
         "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-talga",
+    "name": "Talga AB",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "SE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 44",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
       }
     ],
     "notes": null
@@ -482,6 +1076,30 @@
     "notes": "JOGMEC invests in the company, but the release does not state the resulting shareholdings."
   },
   {
+    "id": "org-tokai-cobex-savoie",
+    "name": "Tokai COBEX savoie",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 4",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-toyota-tsusho",
     "name": "Toyota Tsusho Corporation",
     "nameOriginal": "豊田通商株式会社",
@@ -520,9 +1138,11 @@
     "id": "org-tungsten-west",
     "name": "Tungsten West",
     "nameOriginal": null,
-    "aliases": [],
+    "aliases": [
+      "Tungsten West PLC"
+    ],
     "kind": "company",
-    "countryCode": null,
+    "countryCode": "GB",
     "actor": null,
     "parents": [],
     "evidence": [
@@ -535,9 +1155,19 @@
         "evidence": "explicit",
         "locator": "Second paragraph",
         "note": "\"a mining company focused on restarting the Hemerdon tungsten and tin mine on the outskirts of Plymouth\""
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-06",
+        "supports": [
+          "name",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 12",
+        "note": "Named as \"Tungsten West PLC\", with the address \"Hemerdon Mine (Drakelands), PL7 5BS, Devon, United Kingdom\"."
       }
     ],
-    "notes": "The release does not state where the company is incorporated."
+    "notes": null
   },
   {
     "id": "org-uk-dbt",
@@ -618,6 +1248,56 @@
       }
     ],
     "notes": "Wholly owned by HM Treasury. Its money is public-enterprise capital, reported with public money."
+  },
+  {
+    "id": "org-umicore",
+    "name": "Umicore",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "BE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, rows 14 and 39",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-up-catalyst",
+    "name": "UP Catalyst",
+    "nameOriginal": null,
+    "aliases": [
+      "UP Catalyst OU"
+    ],
+    "kind": "company",
+    "countryCode": "EE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 11",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-us-commerce",

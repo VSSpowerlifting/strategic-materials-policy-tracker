@@ -1665,5 +1665,88 @@
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-eu-crma-strategic-projects-2025-03",
+    "date": "2025-03-25",
+    "jurisdiction": "eu",
+    "issuingBody": "European Commission",
+    "titleOriginal": "Commission Decision of 25.3.2025 recognising certain critical raw material projects as Strategic Projects under Regulation (EU) 2024/1252 of the European Parliament and of the Council",
+    "titleOriginalLang": "en",
+    "titleEn": "Commission Decision recognising 47 critical raw material projects in the EU as Strategic Projects under the Critical Raw Materials Act",
+    "titleEnSource": "na",
+    "documentNumber": "C(2025) 1904 final",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "graphite",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "battery",
+      "defense"
+    ],
+    "summary": "The Commission's first list of Strategic Projects under Regulation (EU) 2024/1252: 47 extraction, processing, recycling and substitution projects in 13 Member States, selected from 122 complete applications against the Act's criteria (contribution to supply security, technical feasibility, sustainable implementation, cross-border benefits). Recognition brings coordinated support from the Commission, Member States and financial institutions on access to finance and off-takers, and permit-granting capped at 27 months for extraction and 15 months for other projects. Twenty-one of the projects name a tracked material: five rare-earth projects for magnets (three with processing, one of them integrated with extraction, and two recycling), eleven naming battery-grade graphite (one a substitution project), two tungsten projects, one gallium project and two germanium projects (one a substitution project). The Commission puts the 47 projects' expected capital investment at €22.5 billion; that is project cost, not EU money, and is not recorded as capital.",
+    "analyticalSignificance": "The EU's main project-level instrument is recognition, not money: the designation changes permitting and access to finance, and any funding that follows is a separate decision. Its rare-earth projects process, separate and recycle rare earths for magnets, the activities whose Chinese technology Announcement No. 62 placed under export licence in October 2025 before its suspension.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ec-crma-sp-decision-2025-03",
+      "src-ec-crma-sp-annex-2025-03",
+      "src-ec-ip-25-864"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-03-25",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-eu-crma-strategic-projects-2025-06",
+    "date": "2025-06-04",
+    "jurisdiction": "eu",
+    "issuingBody": "European Commission",
+    "titleOriginal": "Commission Decision of 4.6.2025 recognising certain critical raw material projects located in third countries and in overseas countries or territories as Strategic Projects under Regulation (EU) 2024/1252 of the European Parliament and of the Council",
+    "titleOriginalLang": "en",
+    "titleEn": "Commission Decision recognising 13 critical raw material projects in third countries and overseas countries or territories as Strategic Projects under the Critical Raw Materials Act",
+    "titleEnSource": "na",
+    "documentNumber": "C(2025) 3491 final",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "battery",
+      "defense",
+      "energy"
+    ],
+    "summary": "The first list of Strategic Projects outside the EU: 13 projects in Brazil, Canada, Greenland, Kazakhstan, Madagascar, Malawi, New Caledonia, Norway, Serbia, South Africa, Ukraine, the United Kingdom and Zambia, each approved by the third country or overseas territory concerned. Seven name a tracked material: four graphite extraction projects (Ukraine, Madagascar, Kazakhstan, and an integrated Norway–Greenland project), two rare-earth extraction projects for magnets (Songwe Hill in Malawi and Zandkopsdrift in South Africa) and one tungsten extraction project, Tungsten West at the Hemerdon mine in Devon. The Commission estimates the 13 projects need €5.5 billion of capital to start operations; that is project cost and is not recorded as capital.",
+    "analyticalSignificance": "Extends EU recognition to projects the Union does not host, with the host government's consent. One of them, the Hemerdon tungsten mine, is also backed by the UK's National Wealth Fund in this corpus, so a single project carries both another government's capital and an EU designation.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ec-crma-sp-decision-2025-06",
+      "src-ec-crma-sp-annex-2025-06",
+      "src-ec-ip-25-1419"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-06-04",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
   }
 ]
