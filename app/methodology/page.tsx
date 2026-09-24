@@ -55,6 +55,8 @@ const VALUE_ROLE_DEFS: Record<(typeof VALUE_ROLES)[number], string> = {
   lending_authority: "A ceiling on what a lender may lend or guarantee.",
   funding_option:
     "A ceiling a party may call on at its own election under an executed agreement. Listed, never summed: an executed option is not committed money. An exercise is recorded as its own commitment drawn from the option, with its own payment status.",
+  indication:
+    "A non-binding letter of intent or interest that names an amount: possible support, not money committed to anyone. Listed in its own layer, never summed, and never counted as binding, not yet binding, capital, backing or co-investment.",
   expected_co_investment: "Money a government expects others to invest.",
   private_financing: "Commercial capital raised alongside public money.",
   recipient_own_funds: "The recipient's own contribution.",
@@ -645,8 +647,9 @@ export default function MethodologyPage() {
                 · <strong className="text-foreground">Binding apart from not yet binding.</strong> Within
                 each currency, money under an executed agreement or already paid (contracted, partially
                 disbursed, disbursed) is summed apart from money announced, authorized, allocated or decided
-                — which includes conditional loan commitments and non-binding letters of intent. Every row
-                carries its own status.
+                — which includes conditional loan commitments. A non-binding letter of intent or interest is
+                not a commitment and is in neither: it is an indication, listed apart and never summed. Every
+                row carries its own status.
               </li>
               <li>
                 · <strong className="text-foreground">No figure without a figure.</strong> A price floor,
@@ -732,9 +735,13 @@ export default function MethodologyPage() {
                 record about the DoD package. Corrections: currency totals are now split by instrument (version
                 0.5 added grants, loans and equity together, contrary to its own rule), a withdrawn or lapsed
                 commitment is no longer summed or counted as capital, a commitment whose status is not stated is
-                listed apart instead of being read as not yet binding, and an ended or unsummed package no
-                longer hides parts that still stand. New vocabulary values: a financial status &ldquo;lapsed&rdquo;, and
-                the registry, designation and item-type vocabularies.
+                listed apart instead of being read as not yet binding, an ended or unsummed package no
+                longer hides parts that still stand, and a non-binding letter of intent or interest that names an
+                amount is now an indication and no longer a commitment (three from the G7 round and the CHIPS
+                letter of intent recorded in version 0.5): it is listed in its own layer and never summed,
+                counted as binding or not yet binding, or read as capital, backing or co-investment. New
+                vocabulary values: a financial status &ldquo;lapsed&rdquo;, a value role &ldquo;non-binding
+                indication&rdquo;, and the registry, designation and item-type vocabularies.
               </li>
               <li>
                 <span className="font-mono text-foreground">v0.5-capital-control</span> — 23 September 2026. Capital

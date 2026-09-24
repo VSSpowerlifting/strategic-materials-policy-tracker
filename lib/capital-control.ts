@@ -171,7 +171,8 @@ export type InstrumentSum = {
       /**
        * The same sums split by whether a binding agreement exists (contracted,
        * partially disbursed, disbursed) or not yet (announced, authorized,
-       * allocated, decided, including conditional and non-binding commitments).
+       * allocated, decided, including conditional commitments; a non-binding letter of intent or interest
+       * is an indication, not a commitment, and is in no sum).
        */
       binding: QualifierSums;
       notYetBinding: QualifierSums;

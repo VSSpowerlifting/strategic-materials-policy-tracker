@@ -361,6 +361,7 @@ export const VALUE_ROLES = [
   "budget_appropriation", // money set aside in a budget
   "lending_authority", // a ceiling on what a lender may lend or guarantee
   "funding_option", // a ceiling a party may call on at its election under an executed agreement; an exercise is recorded as its own commitment drawn from it
+  "indication", // a non-binding letter of intent or interest that names an amount: possible support, never a commitment, capital or backing
   "expected_co_investment", // money the government expects others to put in
   "private_financing", // commercial capital raised alongside public money
   "recipient_own_funds", // the recipient's own contribution

@@ -23,6 +23,7 @@ import {
   rowGeography,
   stageResponseMap,
 } from "@/lib/capital-intelligence";
+import { buildCapitalControlSummary } from "@/lib/capital-control-summary";
 import { buildCapitalIntelligenceSummary } from "@/lib/capital-intelligence-summary";
 import { isEnded, totalCommitments } from "@/lib/capital-control";
 import {
@@ -235,9 +236,14 @@ test("co-investment is classed by who provides the capital, and counts no envelo
   assert.deepEqual(byProject.get("prj-gb-hemerdon")?.governments, ["uk"]);
   assert.deepEqual(byProject.get("prj-gb-hemerdon")?.designatingGovernments, ["eu"]);
   assert.ok(!byProject.has("prj-na-lofdal"), "one provider is not co-investment");
-  // Canada's EDC and the German government (not a tracked actor) behind one facility.
-  assert.ok(byProject.get("prj-ca-vianode-st-thomas")?.kinds.includes("cross_government"));
-  assert.deepEqual(byProject.get("prj-ca-vianode-st-thomas")?.governments, ["canada"], "only tracked governments are named as governments");
+  // Vianode's only rows are two non-binding letters of interest (Canada's EDC and the German government): possible
+  // support nobody has committed, so they back nothing and the project is not co-investment.
+  assert.ok(!byProject.has("prj-ca-vianode-st-thomas"), "two letters of interest are not cross-government co-investment");
+  const vianode = projectStack("prj-ca-vianode-st-thomas")!;
+  assert.deepEqual([vianode.governments, vianode.providerOrgIds], [[], []], "a letter of interest makes no government or provider a backer");
+  assert.deepEqual(vianode.layers.map((l) => [l.key, l.rows.map((c) => c.id), l.totals]), [
+    ["indication", ["fin-ca-g7-2025-vianode-edc-letter-of-interest", "fin-de-g7-2025-vianode-export-credit-guarantee"], null],
+  ]);
   assert.ok(!byProject.has("prj-fr-caremag"), "a designation alone is not co-investment");
   // Multilateral public money beside an EU designation: EBRD equity in Sarytogan.
   assert.deepEqual(byProject.get("prj-kz-sarytogan")?.kinds, ["capital_and_designation"]);
@@ -593,7 +599,7 @@ test("in the corpus, Australia's stockpiling allocation is counted at stockpilin
 
   // Every actor's stage and material counts equal the rule, written out apart from `actorPortfolio`.
   for (const actor of actorsWithCapital(all)) {
-    const mine = all.filter((x) => x.providerJurisdiction === actor && !isEnded(x) && x.valueRole !== "funding_option");
+    const mine = all.filter((x) => x.providerJurisdiction === actor && !isEnded(x) && x.valueRole !== "funding_option" && x.valueRole !== "indication");
     const byId = new Map(mine.map((x) => [x.id, x]));
     const covered = (x: FinancialCommitment, has: (p: FinancialCommitment) => boolean) =>
       x.relationships.some((r) => {
@@ -828,4 +834,91 @@ test("the project page and the project API read one status: the API serves what 
     latestImplementation: { status: string; date: string | null };
   };
   assert.deepEqual([mp.latestImplementation.status, mp.latestImplementation.date], ["construction", null]);
+});
+
+// --- Non-binding indications ------------------------------------------------------------------
+
+const LETTERS = [
+  "fin-ca-g7-2025-nmg-edc-letter-of-interest",
+  "fin-ca-g7-2025-vianode-edc-letter-of-interest",
+  "fin-de-g7-2025-vianode-export-credit-guarantee",
+  "fin-us-commerce-chips-vulcan-2025-incentives",
+];
+
+test("a non-binding indication is listed in its own layer and is never a sum, a backer, a flow or a stage of capital", () => {
+  const at = { locations: [{ countryCode: "US", subnational: null, asStated: "US" }], stages: ["processing" as const], materialIds: ["m"] };
+  const committed = fin("committed", { ...at, projectId: "prj-ca-vianode-st-thomas", providerJurisdiction: "us", providerOrgIds: ["org-a"], financialStatusHistory: [{ status: "contracted", date: "2025-02-01", sourceId: "s" }] });
+  const letter = fin("letter", {
+    ...at,
+    valueRole: "indication",
+    projectId: "prj-ca-vianode-st-thomas",
+    providerJurisdiction: "canada",
+    providerOrgIds: ["org-b"],
+    amount: { value: "500", currency: "USD", qualifier: "up_to", amountAsStated: "US$500", currencyBasis: "stated" },
+  });
+  const all = [committed, letter];
+  assert.equal(layerOf(letter), "indication");
+  assert.ok(!SUMMED_LAYERS.includes("indication"));
+  // In a stack it has a layer of its own, with no total; the commitment's total holds only the commitment.
+  const stack = projectStack("prj-ca-vianode-st-thomas", all)!;
+  assert.deepEqual(stack.layers.map((l) => [l.key, l.rows.map((c) => c.id)]), [["public_commitment", ["committed"]], ["indication", ["letter"]]]);
+  assert.equal(stack.layers[1].totals, null);
+  assert.deepEqual(stack.layers[0].totals!.currencies[0].countedIds, ["committed"]);
+  // It makes no government or provider a backer, so it is not co-investment.
+  assert.deepEqual([stack.governments, stack.providerOrgIds], [["us"], ["org-a"]]);
+  assert.equal(coInvestments(all).length, 0);
+  // No flow, no capital in the response map, no legal standing, no instrument/stage/material count in a portfolio.
+  assert.deepEqual(capitalFlows(all).map((f) => f.rowIds), [["committed"]]);
+  const cell = stageResponseMap(site.lastUpdated, all, []).get("m")!.get("processing")!;
+  assert.deepEqual([cell.capitalIds, cell.optionIds, cell.endedIds], [["committed"], [], []]);
+  const ca = actorPortfolio("canada", all).counts;
+  assert.equal(ca.byLayer.indication, 1);
+  assert.equal(ca.rows, 1);
+  assert.deepEqual([ca.committedBinding, ca.committedNotYetBinding, ca.committedStatusNotStated, ca.committedEnded], [0, 0, 0, 0]);
+  assert.deepEqual([ca.byInstrument, ca.byStage.processing, ca.byMaterial, ca.providerOrganizations, ca.recipientOrganizations, ca.projects], [{}, 0, {}, 0, 0, 0]);
+  assert.deepEqual(actorPortfolio("canada", all).publicTotals.currencies, []);
+  // A lapsed letter is listed as ended like any ended row, and still backs nothing.
+  const lapsed = fin("lapsed", { valueRole: "indication", providerJurisdiction: "canada", projectId: "prj-ca-vianode-st-thomas", financialStatusHistory: history("announced", "lapsed") });
+  const ended = actorPortfolio("canada", [lapsed]).counts;
+  assert.deepEqual([ended.ended, ended.rows, ended.byLayer.indication, ended.committedEnded], [1, 0, 0, 0]);
+  assert.deepEqual(projectStack("prj-ca-vianode-st-thomas", [lapsed])!.governments, []);
+});
+
+test("in the corpus, the four non-binding letters of intent or interest are indications, in no sum and behind no project", () => {
+  const all = getAllFinancialCommitments();
+  for (const id of LETTERS) {
+    const c = getFinancialCommitmentById(id)!;
+    assert.equal(c.valueRole, "indication", id);
+    assert.equal(c.financialStatusHistory.at(-1)!.status, "announced", id);
+    assert.equal(layerOf(c), "indication", id);
+  }
+  // Exactly these four rows are indications: the rule applies where the source itself says letter of intent or interest.
+  assert.deepEqual(all.filter((c) => c.valueRole === "indication").map((c) => c.id).sort(), [...LETTERS].sort());
+  // The conditional loan commitments are a lender's decision on conditions and stay commitments.
+  for (const id of ["fin-us-osc-vulcan-reelement-2025-joint-commitment", "fin-ca-g7-2025-ucore-package"]) assert.equal(getFinancialCommitmentById(id)!.valueRole, "commitment", id);
+  // No total, by any actor, counts one; and a summary lists all four apart.
+  const s = buildCapitalIntelligenceSummary();
+  for (const p of s.portfolios) {
+    const json = JSON.stringify([p.publicCommitmentTotals, p.jointVehicleCommitmentTotals]);
+    for (const id of LETTERS) assert.ok(!json.includes(id), `${id} is in ${p.actor}'s totals`);
+  }
+  assert.deepEqual(buildCapitalControlSummary().capital.indicationsListedNotSummed.map((r) => r.id).sort(), [...LETTERS].sort());
+  // Vianode's two letters are the only rows on the project: it has no backer, no government and no co-investment.
+  const vianode = projectStack("prj-ca-vianode-st-thomas")!;
+  assert.deepEqual(vianode.rows.map((c) => c.id).sort(), ["fin-ca-g7-2025-vianode-edc-letter-of-interest", "fin-de-g7-2025-vianode-export-credit-guarantee"]);
+  assert.deepEqual([vianode.governments, vianode.providerOrgIds], [[], []]);
+  assert.ok(!coInvestments().some((c) => c.project.id === "prj-ca-vianode-st-thomas"));
+  // NMG keeps its Canada Growth Fund and offtake rows; its letter sits apart from them.
+  const nmg = projectStack("prj-ca-nmg-matawinie")!;
+  assert.ok(nmg.layers.some((l) => l.key === "indication" && l.rows.map((c) => c.id).join() === "fin-ca-g7-2025-nmg-edc-letter-of-interest"));
+  // The USD loan-guarantee figure is USA Rare Earth's binding $1.3 billion alone; the German $300 million is not in it.
+  const usd = buildCapitalControlSummary().capital.publicCommitmentTotals.find((t) => t.currency === "USD")!;
+  if (usd.status !== "summed") assert.fail("the USD total is withheld");
+  const guarantee = usd.instruments.find((i) => i.instrument === "loan_guarantee")!;
+  if (!guarantee.summed) assert.fail("loan guarantees are summed");
+  assert.deepEqual(guarantee.countedIds, ["fin-us-chips-usar-2026-loan-guarantee"]);
+  assert.deepEqual([guarantee.byQualifier, guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000" }, { up_to: "1300000000" }, {}]);
+  // Canada's portfolio counts its two letters in their own layer only.
+  const canada = actorPortfolio("canada", all).counts;
+  assert.equal(canada.byLayer.indication, 2);
 });

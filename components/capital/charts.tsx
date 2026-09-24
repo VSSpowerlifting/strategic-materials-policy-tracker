@@ -230,7 +230,9 @@ export function InterplayChronology({
                 ? controlStatusLabels[m.status as never]
                 : m.valueRole === "funding_option"
                   ? `funding option; agreement ${String(financialStatusLabels[m.status as never]).toLowerCase()}, not committed money`
-                  : financialStatusLabels[m.status as never];
+                  : m.valueRole === "indication"
+                    ? `non-binding indication; ${String(financialStatusLabels[m.status as never]).toLowerCase()}, not a commitment`
+                    : financialStatusLabels[m.status as never];
             const tip = `${formatDate(m.date)} — ${m.kind === "capital" ? "Capital" : "Control"}: ${m.label} (${status})`;
             return (
               <Link key={`${m.id}-${m.date}-${m.status}`} href={href}>

@@ -41,6 +41,7 @@ export function buildCapitalControlSummary() {
       "A row is not added when a row it is part of or drawn from is counted in the same total.",
       "If two counted rows in one currency share a descendant, that currency's total is withheld: status \"withheld\", sums null, and the overlapping rows named.",
       "Private financing, recipient funds, expected co-investment and total project cost are never public support; mixed vehicles are reported apart.",
+      "A non-binding letter of intent or interest that names an amount is an indication (valueRole \"indication\"), not a commitment: it is listed apart, never summed, and never counted as binding, not yet binding or capital.",
       "Unlike instruments are never added: within each currency, each instrument (grant, loan, equity, loan guarantee, ...) has its own sums, and there is no sum across instruments.",
       "Rows whose instrument the sources do not name (\"unspecified\") or that combine instruments without a split (\"mixed\") are listed with their own figures and never summed: summed is false and the sums are null.",
       "Nesting is decided before the split by instrument: a part is left out when a row it belongs to is counted in the same currency, whatever the instruments.",
@@ -59,6 +60,7 @@ export function buildCapitalControlSummary() {
       publicCommitmentsStatusNotStated: totals.statusNotStatedIds,
       publicCapitalSources: PUBLIC_CAPITAL_SOURCES,
       envelopesListedNotSummed: listed([...LISTED_NOT_SUMMED_ROLES]),
+      indicationsListedNotSummed: listed(["indication"]),
       fundingOptionsListedNotSummed: all
         .filter((c) => c.valueRole === "funding_option")
         .map((c) => {

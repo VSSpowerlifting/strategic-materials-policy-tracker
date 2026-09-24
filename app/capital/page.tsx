@@ -53,7 +53,7 @@ export default function CapitalPage() {
   const options = byRole.get("funding_option") ?? [];
   const nonPublic = all.filter(
     (c) =>
-      ["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost"].includes(c.valueRole) ||
+      ["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost", "indication"].includes(c.valueRole) ||
       (c.valueRole === "commitment" && !PUBLIC_CAPITAL_SOURCES.includes(c.capitalSource)),
   );
   const unquantified = all.filter((c) => !c.amount && c.valueRole === "commitment");
@@ -210,7 +210,7 @@ export default function CapitalPage() {
             Totals are never converted between currencies, never added across instruments or value roles. Within one currency and instrument, figures stated &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; are added only to others stated the same way; an &ldquo;up to&rdquo; figure is a sum of stated upper bounds, not an amount paid. A paler bar marks any such figure.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
-            {" "}Binding means a contract has been executed or money paid; every earlier stage the source states, including conditional loan commitments and non-binding letters of intent, is shown as not yet binding. A commitment whose source states no status is neither: it is listed, not summed
+            {" "}Binding means a contract has been executed or money paid; every earlier stage the source states, including conditional loan commitments, is shown as not yet binding. A non-binding letter of intent or interest is not a commitment at all: it is an indication, listed below apart from public support and never summed. A commitment whose source states no status is neither: it is listed, not summed
             {totals.statusNotStatedIds.length ? ` (${totals.statusNotStatedIds.length} now)` : ""}, and a withdrawn or lapsed one is listed as ended
             {totals.endedIds.length ? ` (${totals.endedIds.length} now)` : ""} and never summed.
             {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
@@ -339,7 +339,7 @@ export default function CapitalPage() {
         <Section
           index={options.length ? "05" : "04"}
           title="Kept apart from public support"
-          description="Private financing, a recipient's own funds, money governments expect others to invest, joint vehicles whose public share is not stated, and rows whose capital source the source does not state."
+          description="Private financing, a recipient's own funds, money governments expect others to invest, non-binding letters of intent or interest (indications, not commitments), joint vehicles whose public share is not stated, and rows whose capital source the source does not state."
         >
           <Card className="overflow-hidden">
             {nonPublic.map((c) => (

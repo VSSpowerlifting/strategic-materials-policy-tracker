@@ -206,6 +206,7 @@ export const LAYER_KEYS = [
   "joint_vehicle_commitment", // committed by a joint vehicle whose public share is not stated: summed apart
   "other_commitment", // committed, but private or of unstated source: listed
   "funding_option", // listed, never summed
+  "indication", // non-binding letters of intent or interest: listed, never summed, never capital or backing
   "envelope", // envelopes, appropriations and lending authorities: listed, never summed
   "private_financing",
   "recipient_own_funds",
@@ -240,11 +241,14 @@ export function layers(rows: readonly FinancialCommitment[], all: readonly Finan
 // --- Projects: capital stack and co-investment --------------------------------------------
 
 /**
- * A row that can back a project or sit in a portfolio's capital: it has not ended, and it is not a funding
- * option. An option is a right to call on money, never money that moved; an exercise is its own row, and
- * that row backs. Ended and option rows stay listed wherever they appear, with their status.
+ * A row that can back a project or sit in a portfolio's capital: it has not ended, it is not a funding
+ * option and it is not a non-binding indication. An option is a right to call on money, never money that
+ * moved; an exercise is its own row, and that row backs. An indication (a letter of intent or interest) is
+ * possible support that nobody has committed, so it backs nothing and makes no one a backer. Ended, option
+ * and indication rows stay listed wherever they appear, with their status or role.
  */
-export const isBackingRow = (c: FinancialCommitment): boolean => !isEnded(c) && c.valueRole !== "funding_option";
+export const isBackingRow = (c: FinancialCommitment): boolean =>
+  !isEnded(c) && c.valueRole !== "funding_option" && c.valueRole !== "indication";
 
 export type ProjectStack = {
   project: Project;
@@ -443,10 +447,10 @@ export type ActorPortfolio = {
   jointVehicleTotals: CommitmentTotals;
   /**
    * Record counts, never money. Every count but `ended` is of rows that have not ended, and every count but
-   * `byLayer` leaves funding options out (an option is counted once, in its own layer, and never as the
-   * instrument, stage or material it would fund if called on). `byInstrument`, `byStage` and `byMaterial` hold
-   * every other value role (commitments, envelopes, appropriations, private financing and the rest), not only
-   * commitments. `byInstrument` counts a package once; `byStage` and `byMaterial` count per cell, so a part is
+   * `byLayer` leaves funding options and non-binding indications out (each is counted once, in its own layer,
+   * and never as the instrument, stage or material it would fund if called on or if it came to anything).
+   * `byInstrument`, `byStage` and `byMaterial` hold every other value role (commitments, envelopes,
+   * appropriations, private financing and the rest), not only commitments. `byInstrument` counts a package once; `byStage` and `byMaterial` count per cell, so a part is
    * counted at a stage or material its package does not cover and never twice where both cover it.
    */
   counts: {
@@ -503,7 +507,7 @@ export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialC
   const standing = { binding: 0, not_yet_binding: 0, status_not_stated: 0, ended: 0 };
   for (const c of counted) {
     byLayer[layerOf(c)]++;
-    if (c.valueRole === "funding_option") continue;
+    if (c.valueRole === "funding_option" || c.valueRole === "indication") continue;
     byInstrument[c.instrument] = (byInstrument[c.instrument] ?? 0) + 1;
     if (c.valueRole === "commitment") {
       standing[legalStanding(c)]++;
@@ -513,8 +517,8 @@ export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialC
   // Stage and material are counted per cell: a part folds only where a standing package of the same layer
   // (and, being this actor's rows, the same provider) covers that stage or material, so a part that reaches
   // beyond its package is counted at the stage or material the package does not cover, and never twice
-  // where both cover it. `rows` above is unchanged. Funding options are left out, as everywhere here.
-  const standingRows = rows.filter((c) => !isEnded(c) && c.valueRole !== "funding_option");
+  // where both cover it. `rows` above is unchanged. Funding options and indications are left out, as everywhere here.
+  const standingRows = rows.filter((c) => !isEnded(c) && c.valueRole !== "funding_option" && c.valueRole !== "indication");
   const standingById = new Map(standingRows.map((c) => [c.id, c]));
   const coveredByPackage = (c: FinancialCommitment, covers: (p: FinancialCommitment) => boolean) =>
     isFoldedPart(c, standingById, (p) => layerOf(p) === layerOf(c) && covers(p));

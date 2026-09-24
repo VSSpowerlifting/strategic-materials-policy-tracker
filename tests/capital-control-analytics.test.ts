@@ -518,16 +518,18 @@ test("binding and not-yet-binding sums partition each instrument's total exactly
   }
 });
 
-test("a conditional loan commitment and a non-binding letter of intent are never counted as binding", () => {
+test("a conditional loan commitment is never counted as binding, and a non-binding letter of intent is not a commitment at all", () => {
   const t = totalCommitments(publicCommitmentRows());
   const usd = t.currencies.find((c) => c.currency === "USD")!;
-  const ids = ["fin-us-osc-vulcan-reelement-2025-joint-commitment", "fin-us-commerce-chips-vulcan-2025-incentives"];
-  for (const id of ids) {
-    const c = getAllFinancialCommitments().find((x) => x.id === id)!;
-    assert.ok(!["contracted", "partially_disbursed", "disbursed"].includes(c.financialStatusHistory.at(-1)!.status), id);
-  }
+  const conditional = getAllFinancialCommitments().find((x) => x.id === "fin-us-osc-vulcan-reelement-2025-joint-commitment")!;
+  assert.ok(!["contracted", "partially_disbursed", "disbursed"].includes(conditional.financialStatusHistory.at(-1)!.status));
   assert.equal(usd.status, "summed");
   assert.ok(usd.status === "summed" && usd.instruments.some((i) => i.summed && i.notYetBinding.exact), "USD has not-yet-binding money");
+  // The CHIPS letter of intent is an indication: in no total, binding or not yet binding.
+  const letter = getAllFinancialCommitments().find((x) => x.id === "fin-us-commerce-chips-vulcan-2025-incentives")!;
+  assert.equal(letter.valueRole, "indication");
+  assert.ok(!publicCommitmentRows().some((c) => c.id === letter.id));
+  assert.ok(usd.status === "summed" && !usd.instruments.some((i) => i.countedIds.includes(letter.id)));
 });
 
 // --- Funding options ---------------------------------------------------------------
@@ -583,6 +585,7 @@ test("every financial row lands in exactly one bucket of the summary", () => {
   const buckets: [string, string[]][] = [
     ["public commitments", [...t.currencies.flatMap((c) => [...c.countedIds, ...c.nestedIds]), ...t.unquantifiedIds, ...t.statusNotStatedIds, ...t.endedIds]],
     ["envelopes", s.capital.envelopesListedNotSummed.map((r) => r.id)],
+    ["indications", s.capital.indicationsListedNotSummed.map((r) => r.id)],
     ["options", s.capital.fundingOptionsListedNotSummed.map((r) => r.id)],
     ["kept apart", s.capital.keptApartFromPublicSupport.map((r) => r.id)],
   ];

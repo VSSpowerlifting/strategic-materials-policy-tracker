@@ -152,7 +152,7 @@ test("the vocabularies carry every value the Capital & Control model requires", 
     "offtake", "procurement_right", "stockpile_purchase", "mixed", "unspecified",
   ]);
   requires("VALUE_ROLES", VALUE_ROLES, [
-    "commitment", "program_envelope", "budget_appropriation", "lending_authority", "funding_option",
+    "commitment", "program_envelope", "budget_appropriation", "lending_authority", "funding_option", "indication",
     "expected_co_investment", "private_financing", "recipient_own_funds", "total_project_cost",
   ]);
   requires("CAPITAL_SOURCES", CAPITAL_SOURCES, [

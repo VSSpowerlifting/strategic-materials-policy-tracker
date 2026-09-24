@@ -1244,7 +1244,7 @@
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [],
     "instrument": "unspecified",
-    "valueRole": "commitment",
+    "valueRole": "indication",
     "capitalSource": "public_enterprise",
     "amount": {
       "value": "430000000",
@@ -1316,7 +1316,7 @@
         "note": "Coded to the mine the paragraph names."
       }
     ],
-    "notes": "A letter of interest, recorded as not yet binding. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
   },
   {
     "id": "fin-ca-g7-2025-nmg-offtake",
@@ -1738,7 +1738,7 @@
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [],
     "instrument": "unspecified",
-    "valueRole": "commitment",
+    "valueRole": "indication",
     "capitalSource": "public_enterprise",
     "amount": {
       "value": "500000000",
@@ -1817,7 +1817,7 @@
         "note": "A synthetic graphite facility, read as processing."
       }
     ],
-    "notes": "A letter of interest, recorded as not yet binding. A Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
   },
   {
     "id": "fin-ca-pdac-2026-ggt-eip",
@@ -2248,7 +2248,7 @@
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [],
     "instrument": "loan_guarantee",
-    "valueRole": "commitment",
+    "valueRole": "indication",
     "capitalSource": "public",
     "amount": {
       "value": "300000000",
@@ -2327,7 +2327,7 @@
         "note": "A synthetic graphite facility, read as processing."
       }
     ],
-    "notes": "Germany is not a tracked actor, so this public money is credited to no government in the tracker. Stated in a Canadian government backgrounder, not by the German government."
+    "notes": "A letter of interest for \"potential support\", recorded as a non-binding indication, not as a commitment: the export credit guarantee is in no sum. Germany is not a tracked actor, so this row is credited to no government in the tracker. Stated in a Canadian government backgrounder, not by the German government."
   },
   {
     "id": "fin-ebrd-2025-sarytogan-equity",
@@ -5571,7 +5571,7 @@
     "eventId": "evt-us-osc-vulcan-reelement-2025",
     "relationships": [],
     "instrument": "unspecified",
-    "valueRole": "commitment",
+    "valueRole": "indication",
     "capitalSource": "public",
     "amount": {
       "value": "50000000",
@@ -5648,7 +5648,7 @@
         "note": "\"the Department of Commerce's ... CHIPS Program Office signed a preliminary non-binding letter of intent to provide $50 million in proposed federal incentives under the CHIPS and Science Act\": the release does not name the incentives programme itself."
       }
     ],
-    "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\"."
+    "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\". Recorded as a non-binding indication, not as a commitment: a preliminary non-binding letter of intent is not a financing commitment, so it is in no sum."
   },
   {
     "id": "fin-us-dod-mp-2025-additional-preferred-option",
