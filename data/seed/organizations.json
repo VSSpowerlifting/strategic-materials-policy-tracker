@@ -119,6 +119,85 @@
     "notes": null
   },
   {
+    "id": "org-ca-canada-growth-fund",
+    "name": "Canada Growth Fund",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "public_financier",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Nouveau Monde Graphite paragraph; Rio Tinto paragraph",
+        "note": "Named as the source of investments and an \"equity-like royalty investment\" in a Government of Canada announcement; the backgrounder does not describe its ownership."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-edc",
+    "name": "Export Development Canada",
+    "nameOriginal": null,
+    "aliases": [
+      "EDC"
+    ],
+    "kind": "public_financier",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Nouveau Monde Graphite and Vianode paragraphs; UK Export Finance paragraph",
+        "note": "Issues letters of interest for project financing and is named as UK Export Finance's \"Canadian counterpart\", i.e. Canada's export-credit agency."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-feddev-ontario",
+    "name": "Federal Economic Development Agency for Southern Ontario",
+    "nameOriginal": null,
+    "aliases": [
+      "FedDev Ontario"
+    ],
+    "kind": "government",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-ca-government",
     "name": "Government of Canada",
     "nameOriginal": null,
@@ -138,6 +217,58 @@
         ],
         "evidence": "explicit",
         "locator": "Opening paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-nb-geological-survey",
+    "name": "New Brunswick Geological Survey",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative entries",
+        "note": "A provincial body: its actor is Canada, the tracked government it sits within."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-nrc",
+    "name": "National Research Council of Canada",
+    "nameOriginal": null,
+    "aliases": [
+      "NRC"
+    ],
+    "kind": "government",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects",
         "note": null
       }
     ],
@@ -166,6 +297,31 @@
         "evidence": "explicit",
         "locator": "Issuer; third and fourth paragraphs",
         "note": "\"Natural Resources Canada (NRCan) is providing $4.9 million to Cyclic Materials\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-ns-dnr",
+    "name": "Nova Scotia Department of Natural Resources",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "CA",
+    "actor": "canada",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative entries",
+        "note": "A provincial department: its actor is Canada, the tracked government it sits within."
       }
     ],
     "notes": null
@@ -220,6 +376,55 @@
       }
     ],
     "notes": "The cited sources do not state where the company is incorporated."
+  },
+  {
+    "id": "org-de-government",
+    "name": "Government of Germany",
+    "nameOriginal": null,
+    "aliases": [
+      "German government"
+    ],
+    "kind": "government",
+    "countryCode": "DE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Vianode paragraph",
+        "note": "\"a letter of interest from the German government\"; Germany is not a tracked actor, so its money is credited to no actor."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-defense-metals",
+    "name": "Defense Metals Corp.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "First and Last Mile Fund: Wicheeda entry",
+        "note": null
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-ebrd",
@@ -344,6 +549,29 @@
         "evidence": "explicit",
         "locator": "Article 2, row 7",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-focus-graphite",
+    "name": "Focus Graphite",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects",
+        "note": null
       }
     ],
     "notes": null
@@ -953,6 +1181,29 @@
     "notes": null
   },
   {
+    "id": "org-northern-graphite",
+    "name": "Northern Graphite",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Northern Graphite paragraphs",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-northvolt-revolt",
     "name": "Northvolt Revolt AB",
     "nameOriginal": null,
@@ -972,6 +1223,29 @@
         "evidence": "explicit",
         "locator": "Article 2, row 28",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-nouveau-monde-graphite",
+    "name": "Nouveau Monde Graphite",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
       }
     ],
     "notes": null
@@ -1045,6 +1319,29 @@
         "evidence": "explicit",
         "locator": "Article 2, row 1",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-rain-carbon-canada",
+    "name": "Rain Carbon Canada",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects",
+        "note": null
       }
     ],
     "notes": null
@@ -1399,6 +1696,29 @@
     "notes": null
   },
   {
+    "id": "org-ucore-rare-metals",
+    "name": "Ucore Rare Metals Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-uk-dbt",
     "name": "Department for Business and Trade",
     "nameOriginal": null,
@@ -1650,6 +1970,29 @@
         "evidence": "explicit",
         "locator": "History list: \"Secretary of Defense Establishes Office of Strategic Capital\"",
         "note": "\"SECDEF establishes the Office of Strategic Capital (OSC) as a finance organization within the Department of Defense\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-vianode",
+    "name": "Vianode",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Vianode paragraph",
+        "note": null
       }
     ],
     "notes": null

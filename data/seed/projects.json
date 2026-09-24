@@ -235,6 +235,226 @@
     "notes": null
   },
   {
+    "id": "prj-ca-ggt-regolith-graphite",
+    "name": "Battery-Grade Graphite: A Canadian Low-GHG Solution From Regolith Resources",
+    "sponsorOrgIds": [
+      "org-green-graphite-technologies"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Nelson, British Columbia"
+      },
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Mississauga, Ontario"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Energy Innovation Program: Green Graphite Technologies entry",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Energy Innovation Program: Green Graphite Technologies entry",
+        "note": "\"upgrade near-surface graphite for use in lithium-ion batteries\", read as processing."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-ca-nmg-matawinie",
+    "name": "Matawinie Mine",
+    "sponsorOrgIds": [
+      "org-nouveau-monde-graphite"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Quebec",
+        "asStated": "near Montreal, Quebec"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
+      }
+    ],
+    "notes": "The backgrounder describes the company's aim of \"the largest fully integrated natural graphite production facility in North America\"; only the mine is recorded as the project."
+  },
+  {
+    "id": "prj-ca-ucore-kingston",
+    "name": "Ucore commercial rare earth processing facility, Kingston",
+    "sponsorOrgIds": [
+      "org-ucore-rare-metals"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "refining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Ucore paragraph",
+        "note": "\"refining two important rare earth elements — samarium and gadolinium\" with its RapidSX separation and processing technology: coded as separation and refining."
+      }
+    ],
+    "notes": "Samarium and gadolinium have no material record of their own and fall under the grouped rare-earth-elements material."
+  },
+  {
+    "id": "prj-ca-vianode-st-thomas",
+    "name": "Vianode synthetic graphite facility, St. Thomas",
+    "sponsorOrgIds": [
+      "org-vianode"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "St. Thomas, Ontario"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Vianode paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Vianode paragraph",
+        "note": "A synthetic graphite facility, read as processing."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-ca-wicheeda",
+    "name": "Wicheeda Rare Earth Elements Project",
+    "sponsorOrgIds": [
+      "org-defense-metals"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Vancouver, British Columbia"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials",
+          "location",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First and Last Mile Fund: Wicheeda entry",
+        "note": null
+      }
+    ],
+    "notes": "The backgrounder gives the entry's location as Vancouver; the funded transmission line and road serve the mine site."
+  },
+  {
     "id": "prj-de-prohipersi",
     "name": "ProHiPerSi",
     "sponsorOrgIds": [

@@ -1082,6 +1082,1254 @@
     "notes": "\"Manufacturing\" in the release is not mapped to a stage: it does not say which manufacturing. The release is not an itemised budget, so no component amounts are recorded for it."
   },
   {
+    "id": "fin-ca-g7-2025-focus-graphite-gpi",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "14100000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "a conditionally approved investment of up to $14.1 million from Natural Resources Canada’s Global Partnerships Initiative",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Global Partnerships Initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Focus Graphite",
+    "recipientOrgIds": [
+      "org-focus-graphite"
+    ],
+    "project": "Chemical-free electrothermal purification project for natural flake graphite",
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "\"conditionally approved\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Focus Graphite",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Research and development projects: Focus Graphite",
+        "note": "High-temperature purification of flake graphite, read as processing."
+      }
+    ],
+    "notes": "In collaboration with Ukraine's Thermal & Material Engineering Center and American Energy Technologies Company; the graphite comes from the Lac Knife and Lac Tétépisca deposits."
+  },
+  {
+    "id": "fin-ca-g7-2025-nmg-canada-growth-fund",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "35000000",
+      "currency": "CAD",
+      "qualifier": "at_least",
+      "amountAsStated": "more than $35 million from the Canada Growth Fund",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nouveau Monde Graphite",
+    "recipientOrgIds": [
+      "org-nouveau-monde-graphite"
+    ],
+    "project": null,
+    "projectId": "prj-ca-nmg-matawinie",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "not_stated",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Named among the investments the Alliance announcement \"builds on\"; the backgrounder does not state their stage or date."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "First paragraph of the list",
+        "note": "The investment supports the company's mine-to-anode plan; coded to the mine it names."
+      }
+    ],
+    "notes": "An earlier investment the backgrounder cites, not one it announces. The instrument is not named."
+  },
+  {
+    "id": "fin-ca-g7-2025-nmg-edc-letter-of-interest",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "430000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "a letter of interest for up to US$430 million from Export Development Canada",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export Development Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-edc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nouveau Monde Graphite",
+    "recipientOrgIds": [
+      "org-nouveau-monde-graphite"
+    ],
+    "project": null,
+    "projectId": "prj-ca-nmg-matawinie",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "A letter of interest, which is not a financing commitment; its date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "First paragraph of the list",
+        "note": "Coded to the mine the paragraph names."
+      }
+    ],
+    "notes": "A letter of interest, recorded as not yet binding. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+  },
+  {
+    "id": "fin-ca-g7-2025-nmg-offtake",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "offtake",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "Government of Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nouveau Monde Graphite",
+    "recipientOrgIds": [
+      "org-nouveau-monde-graphite"
+    ],
+    "project": "Matawinie Mine",
+    "projectId": "prj-ca-nmg-matawinie",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "\"offtake arrangements with the Government of Canada, Panasonic (Japan), and Traxys (Luxembourg)\""
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
+      }
+    ],
+    "notes": "No volume, price or term is stated. The Panasonic and Traxys offtakes are private and the Government of Japan's \"investment intention\" is not a commitment; none is recorded as a row."
+  },
+  {
+    "id": "fin-ca-g7-2025-northern-graphite-nrc",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "860000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$860,000 in funding through the National Research Council of Canada’s Canada–Germany Collaborative Industrial Research and Development Program",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "National Research Council of Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Northern Graphite and Rain Carbon Canada",
+    "recipientOrgIds": [
+      "org-northern-graphite",
+      "org-rain-carbon-canada"
+    ],
+    "project": "Research project on upcycled natural graphite for battery anodes",
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "research_development"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Highlighted as funding for the project; no award date is stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Northern Graphite and Rain Carbon Canada",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-g7-2025-ucore-feddev",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-ca-g7-2025-ucore-package",
+        "relationship": "part_of",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "locator": "Ucore paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "10000000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $10 million through the Federal Economic Development Agency for Southern Ontario",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Federal Economic Development Agency for Southern Ontario",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-feddev-ontario"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Ucore Rare Metals Inc.",
+    "recipientOrgIds": [
+      "org-ucore-rare-metals"
+    ],
+    "project": null,
+    "projectId": "prj-ca-ucore-kingston",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Part of a \"conditionally approved investment\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials",
+          "relationships"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Ucore paragraph",
+        "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-g7-2025-ucore-nrcan",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-ca-g7-2025-ucore-package",
+        "relationship": "part_of",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "locator": "Ucore paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "26300000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $26.3 million through Natural Resources Canada",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Ucore Rare Metals Inc.",
+    "recipientOrgIds": [
+      "org-ucore-rare-metals"
+    ],
+    "project": null,
+    "projectId": "prj-ca-ucore-kingston",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Part of a \"conditionally approved investment\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials",
+          "relationships"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Ucore paragraph",
+        "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-g7-2025-ucore-package",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "36300000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "a conditionally approved investment of up to $36.3 million from the Government of Canada",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Government of Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Ucore Rare Metals Inc.",
+    "recipientOrgIds": [
+      "org-ucore-rare-metals"
+    ],
+    "project": null,
+    "projectId": "prj-ca-ucore-kingston",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "\"conditionally approved\"; recorded as decided and not yet binding, like the OSC conditional loan commitments."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Ucore paragraph",
+        "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      }
+    ],
+    "notes": "The package total; its NRCan and FedDev Ontario parts are recorded as parts of it. The instrument is not named. NRCan's CMRDD programme page separately lists a 2023 award of $4,275,848 to Ucore's RapidSX demonstration plant in Kingston, which is not recorded here."
+  },
+  {
+    "id": "fin-ca-g7-2025-vianode-edc-letter-of-interest",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "500000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "a letter of interest for up to US$500 million in potential financing from Export Development Canada",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export Development Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-edc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Vianode",
+    "recipientOrgIds": [
+      "org-vianode"
+    ],
+    "project": null,
+    "projectId": "prj-ca-vianode-st-thomas",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "St. Thomas, Ontario"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "A letter of interest for \"potential financing\"; its date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Vianode paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Vianode paragraph",
+        "note": "A synthetic graphite facility, read as processing."
+      }
+    ],
+    "notes": "A letter of interest, recorded as not yet binding. A Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+  },
+  {
+    "id": "fin-ca-pdac-2026-ggt-eip",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "4750000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $4,750,000",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Energy Innovation Program)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Green Graphite Technologies Inc. (GGT)",
+    "recipientOrgIds": [
+      "org-green-graphite-technologies"
+    ],
+    "project": "Battery-Grade Graphite: A Canadian Low-GHG Solution From Regolith Resources",
+    "projectId": "prj-ca-ggt-regolith-graphite",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC as part of \"up to $165.2 million for 22 Canadian projects\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Energy Innovation Program: Green Graphite Technologies entry",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Energy Innovation Program: Green Graphite Technologies entry",
+        "note": "Upgrading graphite for lithium-ion batteries, read as processing."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-nb-granitoids-cmgd",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "172000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $172,000",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Geoscience and Data initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "New Brunswick Geological Survey",
+    "recipientOrgIds": [
+      "org-ca-nb-geological-survey"
+    ],
+    "project": "Geochronology and Petrogenesis of Granitoids and Related Critical Mineral Systems in New Brunswick",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "New Brunswick",
+        "asStated": "Fredericton, New Brunswick"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "lithium",
+      "copper",
+      "zinc"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Geochronology and Petrogenesis of Granitoids",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Geochronology and Petrogenesis of Granitoids",
+        "note": "Regional exploration models and mineral potential mapping, read as exploration."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-nb-maritimes-basin-cmgd",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "232600",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $232,600",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Geoscience and Data initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "New Brunswick Geological Survey",
+    "recipientOrgIds": [
+      "org-ca-nb-geological-survey"
+    ],
+    "project": "Critical Mineral Potential of the Maritimes Basin in Eastern New Brunswick",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "New Brunswick",
+        "asStated": "Grand Lake Region, New Brunswick"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "copper",
+      "zinc",
+      "lithium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Maritimes Basin",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Maritimes Basin",
+        "note": "Field mapping and sampling to find mineral potential, read as exploration."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-ns-graphite-cmgd",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "97000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $97,000",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Geoscience and Data initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nova Scotia Department of Natural Resources",
+    "recipientOrgIds": [
+      "org-ca-ns-dnr"
+    ],
+    "project": "Graphite in Support of Battery Value Chains",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Nova Scotia",
+        "asStated": "Halifax, Nova Scotia"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Graphite in Support of Battery Value Chains",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Graphite in Support of Battery Value Chains",
+        "note": "Geological mapping and assessment of graphite resources, read as exploration."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-wicheeda-flmf",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1878250",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $1,878,250",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (First and Last Mile Fund)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Defense Metals Corp.",
+    "recipientOrgIds": [
+      "org-defense-metals"
+    ],
+    "project": "Wicheeda REE Clean Energy and Transportation Infrastructure Project",
+    "projectId": "prj-ca-wicheeda",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "\"conditionally approved, pending final due diligence\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First and Last Mile Fund: Wicheeda entry",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "First and Last Mile Fund: Wicheeda entry",
+        "note": "Power and road infrastructure for a mine site, coded to mining."
+      }
+    ],
+    "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund."
+  },
+  {
+    "id": "fin-de-g7-2025-vianode-export-credit-guarantee",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "300000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "a letter of interest from the German government for the potential support of the project with an export credit guarantee amount of up to US$300 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Government of Germany",
+    "providerJurisdiction": null,
+    "providerOrgIds": [
+      "org-de-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Vianode",
+    "recipientOrgIds": [
+      "org-vianode"
+    ],
+    "project": null,
+    "projectId": "prj-ca-vianode-st-thomas",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "St. Thomas, Ontario"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "A letter of interest for \"potential support\"; its date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Vianode paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Vianode paragraph",
+        "note": "A synthetic graphite facility, read as processing."
+      }
+    ],
+    "notes": "Germany is not a tracked actor, so this public money is credited to no government in the tracker. Stated in a Canadian government backgrounder, not by the German government."
+  },
+  {
     "id": "fin-ebrd-2025-sarytogan-equity",
     "eventId": "evt-eu-resourceeu-2025",
     "relationships": [],

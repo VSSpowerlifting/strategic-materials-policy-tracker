@@ -47,7 +47,9 @@
       "evt-eu-crma-strategic-projects-2025-06",
       "evt-eu-resourceeu-2025",
       "evt-jp-espa-shin-etsu-rare-earth-2026",
-      "evt-jp-espa-santoku-rare-earth-2026"
+      "evt-jp-espa-santoku-rare-earth-2026",
+      "evt-ca-g7-cmpa-2025",
+      "evt-ca-nrcan-pdac-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -287,7 +289,9 @@
       "evt-cn-mofcom-58-2025",
       "evt-eu-crma-strategic-projects-2025-03",
       "evt-eu-crma-strategic-projects-2025-06",
-      "evt-eu-resourceeu-2025"
+      "evt-eu-resourceeu-2025",
+      "evt-ca-g7-cmpa-2025",
+      "evt-ca-nrcan-pdac-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -361,7 +365,8 @@
       "evt-eu-crma-strategic-projects-2025-03",
       "evt-eu-crma-strategic-projects-2025-06",
       "evt-jp-espa-almt-tungsten-2026",
-      "evt-jp-espa-japan-new-metals-tungsten-2026"
+      "evt-jp-espa-japan-new-metals-tungsten-2026",
+      "evt-ca-nrcan-pdac-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

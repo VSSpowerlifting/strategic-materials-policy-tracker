@@ -1938,5 +1938,82 @@
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-ca-g7-cmpa-2025",
+    "date": "2025-10-31",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "Canada unlocks 26 new investments and partnerships with 9 allied countries to secure critical minerals supply chains",
+    "titleOriginalLang": "en",
+    "titleEn": "Canada unlocks 26 new investments and partnerships with 9 allied countries to secure critical minerals supply chains (G7 Critical Minerals Production Alliance, first round)",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "offtake_agreement",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "battery"
+    ],
+    "summary": "The first round of 26 projects and measures under the Canada-led G7 Critical Minerals Production Alliance, announced on 31 October 2025 in Toronto, which Canada says will unlock $6.4 billion of critical minerals projects. Among those naming a tracked material: Government of Canada offtake arrangements with Nouveau Monde Graphite's Matawinie mine, alongside earlier Canada Growth Fund investment of more than $35 million and an Export Development Canada letter of interest for up to US$430 million; a conditionally approved investment of up to $36.3 million in Ucore Rare Metals' samarium and gadolinium refining facility in Kingston (up to $26.3 million from NRCan and up to $10 million from FedDev Ontario); letters of interest for Vianode's synthetic graphite facility in St. Thomas, Ontario, of up to US$500 million from Export Development Canada and an export-credit guarantee of up to US$300 million from the German government; up to $14.1 million for Focus Graphite's electrothermal purification project; and $860,000 of NRC research funding for Northern Graphite and Rain Carbon Canada. Private offtakes (Torngat–Carester, Northern Graphite–Alkeemia) and scandium, lithium and nickel items are not recorded as rows.",
+    "analyticalSignificance": "Canada's answer is a mix of offtake, export-credit letters of interest and conditional grants, several of them co-financed or co-purchased with allies (Japan, Germany, France, Italy), aimed at graphite and rare-earth processing. Much of it is not yet binding: letters of interest and conditional approvals, kept apart from binding money in every total.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-g7-cmpa-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-31",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-nrcan-pdac-2026",
+    "date": "2026-03-03",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "Government of Canada invests to unlock Canada’s critical minerals advantage",
+    "titleOriginalLang": "en",
+    "titleEn": "Government of Canada invests to unlock Canada’s critical minerals advantage (PDAC 2026 funding announcement)",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "battery"
+    ],
+    "summary": "On 3 March 2026 the Minister of Energy and Natural Resources announced up to $165.2 million for 22 projects across five NRCan programmes: the First and Last Mile Fund (which subsumed the Critical Minerals Infrastructure Fund), the Energy Innovation Program, the CMRDD program, the Indigenous Natural Resource Partnerships program and the Critical Minerals Geoscience and Data initiative. Five name a tracked material and are recorded: $1,878,250 (conditionally approved) for power and road infrastructure to Defense Metals' Wicheeda rare earth mine site; $4,750,000 for Green Graphite Technologies' battery-grade graphite demonstration; and three geoscience studies naming graphite, rare earth elements and tungsten. The $165.2 million total is not recorded, because most of it funds untracked minerals and infrastructure.",
+    "analyticalSignificance": "Shows the long tail of Canadian support: small, programme-by-programme awards, with the tracked-material share concentrated in graphite upgrading and rare-earth mine infrastructure. The same graphite company received CMRDD support in 2024, so its capital history now spans two programmes.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-pdac-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-03-03",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
   }
 ]

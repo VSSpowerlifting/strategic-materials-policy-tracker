@@ -178,7 +178,9 @@
     "eventIds": [
       "evt-ca-ica-divest-2022",
       "evt-ca-cms-2022",
-      "evt-ca-nrcan-cmrdd-2024"
+      "evt-ca-nrcan-cmrdd-2024",
+      "evt-ca-g7-cmpa-2025",
+      "evt-ca-nrcan-pdac-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

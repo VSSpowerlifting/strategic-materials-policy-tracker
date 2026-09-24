@@ -982,5 +982,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "JOGMEC's page for the critical-minerals grant programme under the Economic Security Promotion Act, read in full 2026-09-23. It pays certified businesses \"当該取組に係る申請者負担額の1／2の助成金\" (a grant of half the applicant's cost of the undertaking) and lists the grant decisions (交付決定事業) with approximate amounts and the fiscal year of the decision: nine as read, the latest three in 令和8年度 (FY2026)."
+  },
+  {
+    "id": "src-nrcan-g7-cmpa-2025",
+    "title": "Backgrounder: Canada unlocks 26 new investments and partnerships with 9 allied countries to secure critical minerals supply chains",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/natural-resources-canada/news/2025/10/backgrounder-canada-unlocks-25-new-investments-and-partnerships-with-9-allied-countries-to-secure-critical-minerals-supply-chains.html",
+    "language": "en",
+    "datePublished": "2025-10-31",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "NRCan backgrounder on the first round of projects under the G7 Critical Minerals Production Alliance, announced on 31 October 2025 at the G7 Energy and Environment Ministers' Meeting in Toronto. Read in full in a browser on 2026-09-23 (canada.ca times out for automated clients). Figures without a currency are Canadian dollars, read from the issuing government; figures in US dollars are printed as US$."
+  },
+  {
+    "id": "src-nrcan-pdac-2026",
+    "title": "Backgrounder: Government of Canada invests to unlock Canada’s critical minerals advantage",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/natural-resources-canada/news/2026/03/backgrounder-government-of-canada-invests-to-unlock-canadas-critical-minerals-advantage.html",
+    "language": "en",
+    "datePublished": "2026-03-03",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "NRCan backgrounder listing each of the 22 projects announced on 3 March 2026 at PDAC (up to $165.2 million across five programmes), with recipient, location, funding amount and description. Read in full in a browser on 2026-09-23. Only projects naming a tracked material are recorded; the $165.2 million total is not, because most of it funds untracked minerals."
   }
 ]

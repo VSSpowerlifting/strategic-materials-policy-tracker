@@ -682,5 +682,19 @@
     "quoteEnSource": "self",
     "sourceId": "src-jogmec-critical-minerals-grants",
     "notes": "JOGMEC's description of what the certified plans it funds must be; the same wording covers every grant under the programme."
+  },
+  {
+    "id": "fc-ca-g7-cmpa-2025-resilience",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "actor": "canada",
+    "category": [
+      "supply_chain_resilience",
+      "allied_coordination"
+    ],
+    "quoteOriginal": "a Canada-led G7 initiative to diversify and secure global critical minerals production and supply",
+    "quoteEn": "a Canada-led G7 initiative to diversify and secure global critical minerals production and supply",
+    "quoteEnSource": "na",
+    "sourceId": "src-nrcan-g7-cmpa-2025",
+    "notes": "The backgrounder's description of the Critical Minerals Production Alliance."
   }
 ]
