@@ -332,8 +332,46 @@ three G7 letters is dated; MP 10X's construction start is not stated; the
 RESourceEU envelope is recorded `exact` though the press release says "up to"
 (the envelope is never summed); Cyclic Materials' programme page also says
 "completed in March 2026", which is not recorded; USA Rare Earth's "contracted"
-means the agreement is executed, not that funds are obligated (item 3). Method
-note: EDGAR was read in the browser; no personal address was sent to any service.
+means the agreement is executed, not that funds are obligated or paid (item 3; the
+follow-up below puts that in the status note and the definitions). Method note:
+EDGAR was read in the browser; no personal address was sent to any service.
+
+#### Follow-up: "contracted" is an executed agreement, not obligated or paid funds
+
+A narrow check of whether the USA Rare Earth "up to $277M" could be read as funds
+already federally obligated or paid. Payment was already kept apart: "Contracted" is a
+separate stage from "Disbursed", every "up to" sum is captioned "not an amount paid",
+and the $277M sits under "instrument not specified", so it is in no Binding sum.
+Obligation was not: of the 19 pages that show the figure, only the package row page,
+its event and the sources index said that signing obligates nothing (Exhibit 10.1
+Section 2.1(b): "No obligation of funds for the Award by the Department shall occur upon
+execution of this Agreement. An obligation of funds for the Award shall occur only upon
+delivery of a Funding Obligation."). The other 16 said nothing on obligation (most show
+a "Contracted" badge beside the figure), and the status note on the five part rows said
+only that disbursements follow milestones.
+
+Changed, wording only: the `contracted` status note on the package and its five parts
+now says signing obligates no funds and cites Section 2.1(b) (the entry keeps its 8-K
+source, date and status; each part gained the Section 2.1(b) status evidence the
+package already had), and "contracted" and "binding" are defined as describing the
+agreement, not the money, in the methodology, the `/capital` caption, the
+public-commitments layer gloss (project, organization and portfolio pages), both summary
+APIs' counting rules and the `FINANCIAL_STATUSES` comment. Nothing else moved: a diff
+of both summaries, all 50 project stacks, portfolios, co-investment, flows and the
+response map against the previous tree differs in two counting-rule strings.
+
+Not covered, by choice: the shared `CommitmentRow` card (badge only), so `/actors/us`,
+`/interplay`, five material pages (dysprosium, gallium, NdFeB magnets, rare earths,
+terbium) and the CHIPS programme page still show the figure with no statement on
+obligation, only the "Contracted" badge where a status is shown; each links to the row
+page. The loan-guarantee rows were not examined for the same point.
+
+Evidence limit: USA Rare Earth's Q2 10-Q (filed 10 Aug 2026) says no disbursements or
+advances had been received by 30 Jun 2026 and that funding is contingent on milestones,
+conditions and approvals; it and the 24 Aug, 4 Sep and 15 Sep 8-Ks and the 17 Sep
+424B3 do not use the term "Funding Obligation". Other filings and Commerce releases
+were not searched, and none is entered as data: the corpus records no funding obligation
+and no disbursement, which is not a finding that none exists.
 
 ### Data added (all read in full from primaries or binding filings, 2026-09-23)
 
@@ -399,7 +437,7 @@ note: EDGAR was read in the browser; no personal address was sent to any service
   pages: no horizontal overflow; desktop checked on `/projects/prj-us-mp-10x-facility`
   and `/interplay`. Both summary APIs and `dataset.json` read from the served build.
 - Release-review pass: validate 0 errors (same 10 warnings, 87 sources), typecheck
-  and lint clean, 280 tests (also without the candidates file), 876-page build, none
+  and lint clean, 280 tests (281 after the wording follow-up; also without the candidates file), 876-page build, none
   of the 11 candidate ids in `.next` (built with the private file present). The
   No. 62 test and the four `latestImplementation` tests were confirmed to fail on the
   unfixed code. Every affected page (26, including `/portfolios`, `/capital`, the
@@ -456,7 +494,7 @@ note: EDGAR was read in the browser; no personal address was sent to any service
   running.
 
 PR: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/6
-(branch `feat/capital-intelligence-v06`, code at `8c191a5` after the release-review pass, base
+(branch `feat/capital-intelligence-v06`, code at the release-review pass (`8c191a5`) and its wording follow-up, base
 `main` at `7ddb62c`). Vercel preview built; not merged, per instruction.
 
 Next action: maintainer review of PR #6; after merge, watch 10 Nov 2026
