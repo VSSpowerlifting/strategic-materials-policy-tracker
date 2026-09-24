@@ -254,8 +254,16 @@ export type ProjectStack = {
   governments: JurisdictionCode[];
   providerOrgIds: string[];
   designations: ProjectDesignation[];
-  /** The latest dated implementation entry any of its rows records, with the row it came from. */
-  latestImplementation: { status: string; date: string; rowId: string; sourceId: string } | null;
+  /**
+   * The project's latest physical status: each row's current implementation entry (a history lists entries
+   * oldest first, so the last), and the one that ranks latest across rows, with the row it came from.
+   * An entry ranks by its own date or, when the source gives none, by the date of the nearest earlier dated
+   * entry in its own row. That date only orders entries: `date` stays null for an undated entry and is never
+   * filled in. Where ranks are equal an undated entry, which follows the entry it is placed after, outranks a
+   * dated one; an undated entry with no dated entry before it in its row ranks below every dated entry, since
+   * nothing shows it is later; any tie left is broken by the corpus order of the rows.
+   */
+  latestImplementation: { status: string; date: string | null; rowId: string; sourceId: string } | null;
 };
 
 export function projectStack(id: string, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): ProjectStack | null {
@@ -269,10 +277,18 @@ export function projectStack(id: string, all: readonly FinancialCommitment[] = g
   const governments = [...new Set(backing.flatMap((c) => (c.providerJurisdiction ? [c.providerJurisdiction] : [])))].sort(byCodePoint);
   const providerOrgIds = [...new Set(backing.flatMap((c) => c.providerOrgIds))].sort(byCodePoint);
   let latestImplementation: ProjectStack["latestImplementation"] = null;
-  for (const c of rows)
-    for (const e of c.implementationStatusHistory)
-      if (e.date && (!latestImplementation || e.date > latestImplementation.date))
-        latestImplementation = { status: e.status, date: e.date, rowId: c.id, sourceId: e.sourceId };
+  let best: { anchor: string; undated: number } | null = null;
+  for (const c of rows) {
+    const history = c.implementationStatusHistory;
+    const current = history.at(-1);
+    if (!current) continue;
+    const anchor = current.date ?? [...history].reverse().find((e) => e.date)?.date ?? "";
+    const undated = current.date ? 0 : 1;
+    if (!best || anchor > best.anchor || (anchor === best.anchor && undated > best.undated)) {
+      best = { anchor, undated };
+      latestImplementation = { status: current.status, date: current.date ?? null, rowId: c.id, sourceId: current.sourceId };
+    }
+  }
   return {
     project,
     rows,

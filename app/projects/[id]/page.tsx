@@ -165,11 +165,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                   {stack.latestImplementation ? (
                     <span className="flex flex-wrap items-center gap-2">
                       <ImplementationStatusBadge status={stack.latestImplementation.status as ImplementationStatus} />
-                      <span className="font-mono text-xs text-faint">{formatDate(stack.latestImplementation.date)}</span>
+                      <span className="font-mono text-xs text-faint">
+                        {stack.latestImplementation.date ? formatDate(stack.latestImplementation.date) : "Date not stated"}
+                      </span>
                       <SourceMention sourceId={stack.latestImplementation.sourceId} />
                     </span>
                   ) : (
-                    <NotStated>No dated physical status recorded</NotStated>
+                    <NotStated>No physical status recorded</NotStated>
                   )}
                 </Fact>
               </dl>

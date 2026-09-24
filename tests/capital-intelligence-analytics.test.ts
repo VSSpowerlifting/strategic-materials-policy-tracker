@@ -736,3 +736,96 @@ test("a commitment under an envelope is still a commitment: no view folds a part
   const flows = capitalFlows();
   for (const id of ["fin-au-alcoa-sojitz-gallium-2025-equity", "fin-au-arafura-nolans-2025-equity"]) assert.ok(flows.some((f) => f.rowIds.includes(id)), `${id} is missing from the flows`);
 });
+
+// --- A project's latest physical status ---------------------------------------------------------
+
+const MP10X = "prj-us-mp-10x-facility";
+const step = (status: string, date: string | null, sourceId = "s") => ({ status: status as never, date, sourceId });
+const onProject = (id: string, ...entries: ReturnType<typeof step>[]) =>
+  fin(id, { projectId: MP10X, implementationStatusHistory: entries });
+const latest = (...rows: FinancialCommitment[]) => projectStack(MP10X, rows)!.latestImplementation;
+
+test("an undated implementation status is kept, ranked by the dated entry before it, and its date stays null", () => {
+  // Dated, then undated in one row: the undated entry is the row's current status and reads as later than the dated one.
+  assert.deepEqual(latest(onProject("a", step("announced", "2025-07-10"), step("construction", null, "s2"))), {
+    status: "construction",
+    date: null,
+    rowId: "a",
+    sourceId: "s2",
+  });
+  // Undated only: still the project's status, with no date invented.
+  assert.deepEqual(latest(onProject("a", step("feasibility", null))), { status: "feasibility", date: null, rowId: "a", sourceId: "s" });
+  // The row's last entry is its current one, whether dated or not, and an undated entry earlier in the history does not outrank it.
+  assert.deepEqual(latest(onProject("a", step("feasibility", null), step("construction", "2025-05-01"))), {
+    status: "construction",
+    date: "2025-05-01",
+    rowId: "a",
+    sourceId: "s",
+  });
+  // No history at all: nothing to report.
+  assert.equal(latest(onProject("a")), null);
+  assert.equal(latest(fin("elsewhere", { projectId: "prj-na-lofdal", implementationStatusHistory: [step("feasibility", null)] })), null);
+});
+
+test("across rows, an undated entry is placed by its row's dated entry: later dates win, and nothing is invented", () => {
+  const undatedAfter = onProject("undated-after", step("announced", "2025-07-10"), step("construction", null));
+  // Another row's later dated entry is later; its earlier one is not.
+  assert.equal(latest(undatedAfter, onProject("later", step("operating", "2025-09-01")))!.rowId, "later");
+  assert.equal(latest(onProject("earlier", step("announced", "2025-06-01")), undatedAfter)!.status, "construction");
+  // On equal rank the undated entry, which follows the dated one it is placed after, outranks it: in either row order.
+  const sameDay = onProject("same-day", step("announced", "2025-07-10"));
+  assert.equal(latest(undatedAfter, sameDay)!.rowId, "undated-after");
+  assert.equal(latest(sameDay, undatedAfter)!.rowId, "undated-after");
+  // An undated entry with no dated entry before it ranks below every dated one, and above nothing at all.
+  const unanchored = onProject("unanchored", step("feasibility", null));
+  assert.equal(latest(unanchored, sameDay)!.rowId, "same-day");
+  assert.equal(latest(sameDay, unanchored)!.rowId, "same-day");
+  assert.equal(latest(unanchored)!.rowId, "unanchored");
+  // Equal ranks that remain are broken by the order of the rows, as before.
+  const first = onProject("first", step("announced", "2025-07-10"));
+  const second = onProject("second", step("feasibility", "2025-07-10"));
+  assert.equal(latest(first, second)!.rowId, "first");
+  assert.equal(latest(second, first)!.rowId, "second");
+  const twoUnanchored = [onProject("u1", step("feasibility", null)), onProject("u2", step("construction", null))];
+  assert.equal(latest(...twoUnanchored)!.rowId, "u1");
+  // A dated entry keeps its own date; an undated one never borrows the date it is ranked by.
+  assert.equal(latest(undatedAfter)!.date, null);
+  assert.equal(latest(sameDay)!.date, "2025-07-10");
+});
+
+test("in the corpus, MP 10X is under construction and Lofdal is at feasibility, both with no date stated", () => {
+  assert.deepEqual(projectStack(MP10X)!.latestImplementation, {
+    status: "construction",
+    date: null,
+    rowId: "fin-us-dod-mp-2025-magnet-offtake",
+    sourceId: "src-mp-10q-2026-q2",
+  });
+  assert.deepEqual(projectStack("prj-na-lofdal")!.latestImplementation, {
+    status: "feasibility",
+    date: null,
+    rowId: "fin-jp-jogmec-lofdal-2026-equity",
+    sourceId: "src-jogmec-lofdal-en",
+  });
+  // No project's status carries a date its row does not state.
+  for (const project of getAllProjects()) {
+    const s = projectStack(project.id)!.latestImplementation;
+    if (!s) continue;
+    const row = getFinancialCommitmentById(s.rowId)!;
+    const current = row.implementationStatusHistory.at(-1)!;
+    assert.deepEqual([s.status, s.date, s.sourceId], [current.status, current.date, current.sourceId], project.id);
+  }
+});
+
+test("the project page and the project API read one status: the API serves what projectStack returns, date null included", async () => {
+  const { GET } = await import("@/app/api/v1/projects/[id]/route");
+  for (const id of [MP10X, "prj-na-lofdal", ...getAllProjects().map((p) => p.id)]) {
+    const res = await GET(new Request(`http://localhost/api/v1/projects/${id}`), { params: Promise.resolve({ id }) });
+    assert.equal(res.status, 200, id);
+    const body = (await res.json()) as { latestImplementation: unknown };
+    assert.deepEqual(body.latestImplementation, projectStack(id)!.latestImplementation, id);
+  }
+  const mp = (await (await GET(new Request("http://localhost/"), { params: Promise.resolve({ id: MP10X }) })).json()) as {
+    latestImplementation: { status: string; date: string | null };
+  };
+  assert.deepEqual([mp.latestImplementation.status, mp.latestImplementation.date], ["construction", null]);
+});
