@@ -87,7 +87,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                   ? `${options.length} funding option${options.length === 1 ? " is" : "s are"} a right to call on money, not money that moved, and ${options.length === 1 ? "is" : "are"} not counted as backing; an exercise would be a commitment of its own. `
                   : ""}
                 {indications.length
-                  ? `${indications.length} non-binding indication${indications.length === 1 ? " is" : "s are"} a letter of intent or interest, possible support and not a commitment, and ${indications.length === 1 ? "is" : "are"} not counted as backing; one that became binding would be recorded as a commitment.`
+                  ? `${indications.length} non-binding indication${indications.length === 1 ? " is a letter" : "s are letters"} of intent or interest, possible support and not a commitment, and ${indications.length === 1 ? "is" : "are"} not counted as backing; one that became binding would be recorded as a commitment.`
                   : ""}
               </p>
             ) : null}
