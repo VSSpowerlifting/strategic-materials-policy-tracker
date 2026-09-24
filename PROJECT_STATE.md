@@ -1,6 +1,142 @@
 # Project state
 
-_Last updated: 2026-09-23 (v0.5 released: PR #5 merged to `main` as `7ddb62c`; v0.6 work starts on `feat/capital-intelligence-v06`)._
+_Last updated: 2026-09-24 (v0.6 Capital Intelligence on branch `feat/capital-intelligence-v06`, PR open against `main`, not merged)._
+
+## Latest session: v0.6 Capital Intelligence
+
+Branch `feat/capital-intelligence-v06` from `main` at `7ddb62c`; worktree
+`/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/smpt-v06`
+(git-ignored `data/candidates/candidates.json` copied in so the leak checks
+test real private ids; `graphify-out/` refreshed, also ignored).
+
+### Direction
+
+v0.5 recorded instruments; v0.6 records the parties, undertakings and schemes
+they connect, so the corpus can answer who funded whom, what a project's
+capital stack is, what a programme has recorded under it, how governments'
+portfolios compare, where money goes, and where capital, recognition and
+Chinese controls meet by material and stage.
+
+### Data model (all in `lib/types.ts`, validated in `scripts/validate-capital-control.ts`)
+
+- Registries: `Organization` (`org-`), `Project` (`prj-`), `Programme` (`prg-`);
+  a third child row of an event, `ProjectDesignation` (`dsg-`). Registry facts
+  are evidenced like any field; registries hold no money.
+- Commitments gain `providerOrgIds`, `recipientOrgIds`, `projectId`,
+  `programmeId`; control clauses gain `controlledItemTypes` and
+  `controlledStages` (where the covered items belong; empty for end-use,
+  customs, divestiture and suspension clauses, enforced).
+- Validator: six collections in two passes; actor agreement across provider
+  organizations, programmes and `providerJurisdiction`; programme agreement
+  along `drawn_from`; project material coverage; designations under a
+  designation scheme; item-scope rules; org and programme parent cycles;
+  warning for unlinked registry records.
+
+### Vocabulary decisions (maintainer authority delegated in the task; reasoning recorded)
+
+- New vocabularies: organization kinds (government, public financier, joint
+  vehicle, company, project company, bank), link types (part_of,
+  established_by), programme kinds, designation statuses (recognized,
+  withdrawn), controlled item types (goods, equipment, technology).
+  `withdrawn` has no record yet; kept because a status vocabulary needs its
+  terminal state.
+- `FINANCIAL_STATUSES` + `lapsed`: the JPMorgan/Goldman commitment letter
+  "expired undrawn on its own terms"; `withdrawn` would misstate it.
+- Not added: a control type for the EU's proposed magnet-scrap export
+  restriction (no instrument exists; described in the event only); a
+  `substitution` stage (two CRMA substitution projects carry no stage).
+
+### Counting decisions
+
+- Portfolios roll up through `part_of` only; a joint vehicle's money is never
+  its founders'. The Department of War is an alias of the Department of
+  Defense record, so its portfolio does not split.
+- Correction to v0.5: currency totals are split by instrument
+  (`CurrencyTotal.instruments[]`), never summed across instruments, as the
+  methodology always stated. Rows with an unstated (`unspecified`) or mixed
+  instrument are listed, never summed (`summed: false`, null sums). Nesting is
+  decided over the whole currency before the split. This changes
+  `publicCommitmentTotals` in `/api/v1/capital-control/summary`.
+- Withdrawn or lapsed commitments are listed as ended and never summed
+  (`CommitmentTotals.endedIds`); before, a withdrawn row would have been
+  summed as not yet binding.
+- No grand stack total, public share, leverage, utilisation rate or
+  cross-currency figure anywhere; a test scans the intelligence summary's keys.
+- Geography: row location, then project location, then (for a package with
+  none) the locations every part states; EU = the 27 member states, UK = GB,
+  Greenland abroad. Untracked governments (Germany) count as a second
+  government for co-investment but are credited to no actor; multilateral
+  money (EBRD) is public but credited to no actor.
+- Designations are standing, never capital; the Commission's "expected
+  investment" figures (project cost) appear only in event summaries.
+- A loan guaranteed by Commerce and made by the FFB is recorded once, as the
+  guarantee.
+
+### Data added (all read in full from primaries or binding filings, 2026-09-23)
+
+- China: MOFCOM Nos. 56, 57, 58 (MOFCOM/GACC) and 62 (MOFCOM) of 2025, 12
+  clauses; No. 70's suspension now links them; No. 55 stays external.
+- EU: Decisions C(2025) 1904 and 3491 with annexes: 28 Strategic Project
+  designations naming tracked materials, 27 projects, 26 promoters; RESourceEU
+  (COM(2025) 945): EUR 3 billion envelope, JTF–Neo, EIB–UP Catalyst,
+  EBRD–Sarytogan.
+- Japan: METI certified supply-assurance plans and JOGMEC grant decisions: four
+  events (Allied Material, Shin-Etsu, Santoku, Japan New Metals).
+- Canada: G7 Critical Minerals Production Alliance round (NMG, Ucore, Vianode,
+  Focus Graphite, Northern Graphite) and PDAC 2026 awards (Wicheeda, GGT,
+  geoscience); CMRDD programme page (Cyclic amount corrected to CAD 4,893,125).
+- US: MP Materials 10-Q Q3 2025, 10-K 2025, 10-Q Q2 2026 (equity and samarium
+  loan disbursed, bank letter lapsed, 10X in Northlake, Texas); Commerce CHIPS
+  LOI and June 2026 agreements with USA Rare Earth (12 rows, 5 projects, a
+  covenant clause); OSC's own page for its place in DoD.
+- Registry backfill of all 39 v0.5 rows; 16 v0.5 control clauses gained item
+  types and stages.
+- Counts at the end of the session: 50 events, 74 financial commitments, 45
+  control clauses, 77 organizations, 50 projects, 12 programmes, 32
+  designations, 86 sources, 52 framing claims (derive live counts; do not pin).
+
+### Product
+
+- Pages: `/portfolios`, `/projects[/id]`, `/organizations[/id]`,
+  `/programmes[/id]`; stage response map on `/interplay` and material pages;
+  registry links on capital, control and event pages. Navigation: Portfolios
+  primary (Timeline moved under More); Projects, Organizations, Programmes in
+  Capital & Control.
+- API: `/api/v1/{organizations,projects,programmes,project-designations}[/id]`,
+  `/api/v1/capital-intelligence/summary`. Exports: four registry CSVs, trailing
+  columns on the commitment and control CSVs, registries in `dataset.json`.
+  Search: organizations (aliases, original-language names), projects,
+  programmes.
+
+### Gates at the end of the session
+
+- validate (0 errors, the 6 existing-kind warnings), typecheck, lint, 259
+  tests, build (876 pages). 375px sweep of all 349 sitemap pages: no overflow
+  after fixing `/interplay` (new table) and `/compare` (existing, screen-reader
+  text escaping an unpositioned scroll wrapper). Desktop checked at 1440px.
+  No candidate id in `.next`.
+- Slip to note: one early probe of EDGAR sent the user's email address in a
+  User-Agent header; not repeated (EDGAR was read in the browser afterwards).
+
+### Known weaknesses / open items
+
+- A mixed package's parts are not summed in its place (NWF–Tungsten West shows
+  no GBP sum, only listed rows).
+- Company countries are left null where no cited source states them; Japanese
+  company English names are this project's rendering.
+- Canadian SRF (formerly SIF) awards: no primary lists them individually;
+  none recorded. EU second-round Strategic Projects: no decision yet.
+- The MP $350M option: filings show 400,000 Series A shares but never state
+  exercise or lapse; neither recorded. PPA cash receipts not stated.
+- Commerce–USA Rare Earth and Canadian letters of interest are not binding
+  until stated otherwise; disbursements unrecorded.
+- The No. 61 Annex 1 (.wps) is still unread; Nos. 56/57/58/62 were suspended
+  before or soon after taking effect; the suspension ends 10 Nov 2026 and the
+  validator will warn after that date.
+- `/coverage` does not yet report registry or Capital & Control counts.
+
+Next action: maintainer review of the PR; after merge, watch 10 Nov 2026
+(China), the EU second round, SRF awards and USA Rare Earth disbursements.
 
 ## Release reconciliation: v0.5 is on `main`
 
