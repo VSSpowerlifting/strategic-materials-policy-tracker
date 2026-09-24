@@ -76,7 +76,7 @@ const FINANCIAL_STATUS_DEFS: Record<(typeof FINANCIAL_STATUSES)[number], string>
   authorized: "Legal or budgetary authority exists, e.g. an enacted statute or cabinet approval.",
   allocated: "Assigned to the purpose, e.g. in a budget.",
   decided: "The provider has decided to invest, lend or award, including a conditional commitment.",
-  contracted: "A binding agreement has been executed.",
+  contracted: "A binding agreement has been executed. Not a payment, and not necessarily an obligation of funds: an agreement can leave that to a later step.",
   partially_disbursed: "Some of the money has been paid out.",
   disbursed: "The money has been paid out.",
   withdrawn: "The commitment was withdrawn.",
@@ -648,8 +648,9 @@ export default function MethodologyPage() {
                 each currency, money under an executed agreement or already paid (contracted, partially
                 disbursed, disbursed) is summed apart from money announced, authorized, allocated or decided
                 — which includes conditional loan commitments. A non-binding letter of intent or interest is
-                not a commitment and is in neither: it is an indication, listed apart and never summed. Every
-                row carries its own status.
+                not a commitment and is in neither: it is an indication, listed apart and never summed. Binding
+                describes the agreement, not the money: a contracted row may leave the provider&apos;s
+                obligation of funds and their payment to later steps. Every row carries its own status.
               </li>
               <li>
                 · <strong className="text-foreground">No figure without a figure.</strong> A price floor,

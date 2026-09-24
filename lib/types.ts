@@ -383,7 +383,7 @@ export const FINANCIAL_STATUSES = [
   "authorized", // legal or budgetary authority exists
   "allocated", // money assigned to the purpose, e.g. in a budget
   "decided", // the provider has decided to invest or award
-  "contracted", // a binding agreement has been executed
+  "contracted", // a binding agreement has been executed; not a payment, and not necessarily an obligation of funds
   "partially_disbursed",
   "disbursed",
   "withdrawn",

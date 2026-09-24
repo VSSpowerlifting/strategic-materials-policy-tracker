@@ -23,6 +23,8 @@ import {
   totalCommitments,
 } from "@/lib/capital-control";
 import { buildCapitalControlSummary } from "@/lib/capital-control-summary";
+import { buildCapitalIntelligenceSummary } from "@/lib/capital-intelligence-summary";
+import { layerGlosses } from "@/lib/labels";
 import {
   buildDataset,
   controlMeasuresCsv,
@@ -781,4 +783,43 @@ test("USA Rare Earth's direct funding is instrument-not-stated on the package an
   assert.equal(unspecified.summed, false);
   assert.equal(unspecified.byQualifier, null);
   for (const c of parts) assert.ok(usd.nestedIds.includes(c.id) && !usd.countedIds.includes(c.id), c.id);
+});
+
+test("USA Rare Earth's contracted direct funding says where its status shows that signing obligated and paid nothing", async () => {
+  const AGREEMENT = "src-usar-direct-funding-agreement-2026-06-03";
+  const pkg = getFinancialCommitmentById("fin-us-chips-usar-2026-direct-funding")!;
+  const parts = getAllFinancialCommitments().filter((c) => c.relationships.some((r) => r.commitmentId === pkg.id && r.relationship === "part_of"));
+  assert.equal(parts.length, 5);
+  const { GET } = await import("@/app/api/v1/financial-commitments/[id]/route");
+  for (const c of [pkg, ...parts]) {
+    // The sourced status, its date and its source are untouched: the clarification is a note, not a different status.
+    const contracted = c.financialStatusHistory.filter((e) => e.status === "contracted");
+    assert.equal(contracted.length, 1, c.id);
+    assert.equal(c.financialStatusHistory.at(-1)!.status, "contracted", c.id);
+    assert.equal(contracted[0].date, "2026-06-03", c.id);
+    assert.equal(contracted[0].sourceId, "src-usar-8k-2026-06-03", c.id);
+    // The note under the status names the distinction and the clause; the API serves the same note with the status.
+    const note = contracted[0].note ?? "";
+    assert.match(note, /Signing obligates no funds/, c.id);
+    assert.match(note, /Section 2\.1\(b\)/, c.id);
+    assert.match(note, /Funding Obligation/, c.id);
+    const res = await GET(new Request(`http://localhost/api/v1/financial-commitments/${c.id}`), { params: Promise.resolve({ id: c.id }) });
+    const body = (await res.json()) as { commitment: { financialStatusHistory: { status: string; note: string | null }[] } };
+    assert.equal(body.commitment.financialStatusHistory.find((e) => e.status === "contracted")?.note, note, c.id);
+    // The clause is cited on the row itself, from the executed agreement, as explicit evidence for the status.
+    const clause = c.evidence.filter((e) => e.sourceId === AGREEMENT && e.supports.includes("status"));
+    assert.equal(clause.length, 1, c.id);
+    assert.deepEqual([clause[0].evidence, clause[0].locator], ["explicit", "Section 2.1(b)"], c.id);
+  }
+  // The amount, the qualifier and the totals are untouched by the clarification.
+  assert.deepEqual([pkg.amount!.value, pkg.amount!.qualifier], ["277000000", "up_to"]);
+  const usd = buildCapitalControlSummary().capital.publicCommitmentTotals.find((t) => t.currency === "USD")!;
+  if (usd.status !== "summed") assert.fail("the USD total is withheld");
+  const guarantee = usd.instruments.find((i) => i.instrument === "loan_guarantee")!;
+  assert.deepEqual([guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000" }, {}]);
+  assert.equal(usd.instruments.find((i) => i.instrument === "unspecified")!.summed, false);
+  // Where "contracted" and "binding" are defined, they say an executed agreement need not have obligated or paid funds.
+  assert.ok(buildCapitalControlSummary().countingRules.some((r) => /Binding describes the agreement, not the money/.test(r) && /obligation of funds/.test(r)));
+  assert.ok(buildCapitalIntelligenceSummary().countingRules.some((r) => /contracted row is an executed agreement/.test(r) && /obligated or paid/.test(r)));
+  assert.match(layerGlosses.public_commitment, /contracted row is an executed agreement.*obligated or paid/);
 });

@@ -4297,7 +4297,7 @@
         "status": "contracted",
         "date": "2026-06-03",
         "sourceId": "src-usar-8k-2026-06-03",
-        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -4586,7 +4586,7 @@
         "status": "contracted",
         "date": "2026-06-03",
         "sourceId": "src-usar-8k-2026-06-03",
-        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -4627,6 +4627,15 @@
         "evidence": "ambiguous",
         "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(iv)",
         "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
       },
       {
         "sourceId": "src-usar-8k-2026-06-03",
@@ -4781,7 +4790,7 @@
         "status": "contracted",
         "date": "2026-06-03",
         "sourceId": "src-usar-8k-2026-06-03",
-        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -4822,6 +4831,15 @@
         "evidence": "ambiguous",
         "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(v)",
         "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
       },
       {
         "sourceId": "src-usar-8k-2026-06-03",
@@ -4989,7 +5007,7 @@
         "status": "contracted",
         "date": "2026-06-03",
         "sourceId": "src-usar-8k-2026-06-03",
-        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -5031,6 +5049,15 @@
         "evidence": "ambiguous",
         "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(i)",
         "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
       },
       {
         "sourceId": "src-nist-chips-usar-2026",
@@ -5205,7 +5232,7 @@
         "status": "contracted",
         "date": "2026-06-03",
         "sourceId": "src-usar-8k-2026-06-03",
-        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -5247,6 +5274,15 @@
         "evidence": "ambiguous",
         "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(ii)",
         "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
       },
       {
         "sourceId": "src-nist-chips-usar-2026",
@@ -5414,7 +5450,7 @@
         "status": "contracted",
         "date": "2026-06-03",
         "sourceId": "src-usar-8k-2026-06-03",
-        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -5456,6 +5492,15 @@
         "evidence": "ambiguous",
         "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(iii)",
         "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
       },
       {
         "sourceId": "src-nist-chips-usar-2026",

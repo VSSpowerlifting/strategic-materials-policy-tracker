@@ -60,7 +60,7 @@ export function buildCapitalIntelligenceSummary() {
   return {
     asOf,
     countingRules: [
-      "Every money figure is a per-currency, per-instrument total from the counting rules; nothing is converted between currencies and nothing is added across instruments. Figures with the same qualifier are added within a currency and instrument; an up_to sum is a sum of stated upper bounds, not an amount paid.",
+      "Every money figure is a per-currency, per-instrument total from the counting rules; nothing is converted between currencies and nothing is added across instruments. Figures with the same qualifier are added within a currency and instrument; an up_to sum is a sum of stated upper bounds, not an amount paid. A contracted row is an executed agreement, which need not mean the provider has obligated or paid the funds.",
       "A stack, portfolio or programme is split into layers of one value role; only committed money (public, and joint vehicles apart) is summed.",
       "Funding options, non-binding indications, envelopes, appropriations, lending authorities, private financing, recipient funds, expected co-investment and total project cost are listed, never summed.",
       "There is no grand stack total, public-share percentage, leverage or crowding-in ratio, or programme utilisation rate.",
