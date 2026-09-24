@@ -93,7 +93,7 @@ Chinese controls meet by material and stage.
   types and stages.
 - Counts at the end of the session: 50 events, 74 financial commitments, 45
   control clauses, 77 organizations, 50 projects, 12 programmes, 32
-  designations, 86 sources, 52 framing claims (derive live counts; do not pin).
+  designations, 86 sources, 49 framing claims (derive live counts; do not pin).
 
 ### Product
 
@@ -134,6 +134,15 @@ Chinese controls meet by material and stage.
   before or soon after taking effect; the suspension ends 10 Nov 2026 and the
   validator will warn after that date.
 - `/coverage` does not yet report registry or Capital & Control counts.
+- A commitment whose current status is `not_stated` and whose instrument is
+  named would be summed as "not yet binding"; no current row does this.
+- Portfolio cards for Canada and the UK are mostly "listed, not summed"
+  (unstated or mixed instruments); each card links to that actor's rows.
+- Framing not yet coded on three of the four Japan certification events and
+  the PDAC 2026 event: the JOGMEC programme quote anchors only the first
+  certification rather than being counted four times.
+- The local `next start` server used for QA was stopped; nothing is left
+  running.
 
 Next action: maintainer review of the PR; after merge, watch 10 Nov 2026
 (China), the EU second round, SRF awards and USA Rare Earth disbursements.

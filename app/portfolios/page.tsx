@@ -128,6 +128,11 @@ export default function PortfoliosPage() {
                   <span className="font-mono text-[11px] text-faint">{p.counts.rows} records</span>
                 </div>
                 <CurrencyTotals totals={p.publicTotals} compact />
+                <p className="mt-2 font-mono text-[11px] text-faint">
+                  <Link href={`/capital?actor=${p.actor}&role=commitment`} className="text-accent hover:text-accent-strong">
+                    Every row, with its own figure →
+                  </Link>
+                </p>
                 {p.jointVehicleTotals.currencies.length ? (
                   <div className="mt-3 border-t pt-3">
                     <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Joint vehicles, kept apart</p>
