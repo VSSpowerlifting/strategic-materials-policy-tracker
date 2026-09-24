@@ -134,6 +134,28 @@ Chinese controls meet by material and stage.
     part, other provider's package. Both summary APIs read the same `stageResponseMap`;
     a test compares the served summary to it, cell by cell. The matrix and the
     ledger are page-only and have no API field.
+- **Portfolio stage and material pass** (on the PR, after `67ca144`):
+  - `actorPortfolio` counts `byStage` and `byMaterial` per cell: a part is folded
+    only where a standing package of the same layer and actor lists that specific
+    stage or material. `rows`, `byLayer`, `byInstrument`, legal standing and
+    geography are unchanged (a deal still counts once). Ended rows and funding
+    options are still left out. Fixture-tested (part inside its package, part beyond
+    it, ended package with standing part, envelope and option packages); a corpus
+    oracle checks every actor.
+  - Actual corpus effect, before and after, every actor's `rows`, `ended`,
+    `byInstrument`, `byMaterial` and every other stage identical: Australia
+    `byStage` was mining 1, separation 1, processing 4, refining 1 and is now the
+    same plus **stockpiling 1** (`fin-au-cmsr-2026-stockpiling-allocation`, part of
+    `fin-au-cmsr-2026-reserve`, which does not list stockpiling). Australia `rows`
+    stays 7. No other actor changes. In the API only
+    `/api/v1/capital-intelligence/summary` `portfolios[australia].counts.byStage.stockpiling`
+    (0 to 1) and the `countingRules` text change.
+  - `/portfolios`: the Instrument, Supply-chain stage and Material headings now say
+    they hold every value role except funding options (not only commitments) and
+    that stage and material are counted per cell; legal standing and geography are
+    committed rows only. Under the flow table a note explains that a package's "not
+    stated" can coexist with known locations on its parts, and lists each such
+    package with a link to its page. The methodology page has a matching bullet.
 - **Intentional API behaviour changes in this pass** (the routes' "add fields,
   never repurpose" note is knowingly broken in three places, all corrections):
   1. `/api/v1/capital-control/summary`: adds `capital.publicCommitmentsStatusNotStated`
@@ -216,6 +238,14 @@ Chinese controls meet by material and stage.
   coverage check, no same-field check, old whole-row fold, matrix without material,
   matrix with uncounted package, portfolio folding across standing and ended each
   fail a test), build, phone and desktop checks (see the PR).
+- Portfolio stage and material pass: validate 0 errors (same 10 warnings), typecheck
+  and lint clean, 272 tests (two new; also without
+  the candidates file), 876-page build, no candidate id in `.next`. Mutation checks: no
+  coverage test, no layer test and folding always each fail the new tests.
+  375px checks of `/portfolios`, `/methodology`, `/capital`, a USAR package page and
+  `/interplay`: no overflow; `/portfolios` read at 1440px. Diffed before and after
+  on the final tree: the control summary is identical, and the intelligence summary
+  differs only in `countingRules` and `portfolios[australia].counts.byStage.stockpiling`.
 - Accounting-semantics pass: validate 0 errors (same 10 warnings), typecheck and
   lint clean, 267 tests (8 new; five rules mutation-checked: old ancestor rule,
   not_stated as not yet binding, options as backing, fold-any-part, fold-across-layers, each fails a test), build
@@ -243,17 +273,14 @@ Chinese controls meet by material and stage.
   validator will warn after that date.
 - `/coverage` does not yet report registry or Capital & Control counts.
 - Flows fold a whole part into a package that is a flow, not destination by
-  destination. The USAR CHIPS package states no country (two of its parts state
-  none), so it is `not_stated` and its six US parts are folded into it; a
-  per-destination fold would list the deal under both. Left as is: it changes a
-  public table and the reading is debatable.
-- A portfolio folds a part into its package for every count (documented: a deal
-  counts once), so a part at a stage or material its package does not name is not
-  counted at that stage or material (`byStage`, `byMaterial`). One corpus row does
-  this: `fin-au-cmsr-2026-stockpiling-allocation` (stage `stockpiling`) is part of
-  `fin-au-cmsr-2026-reserve`, which lists no stockpiling stage, so Australia's
-  `byStage.stockpiling` does not count it. Left as is; a per-cell fold in the
-  portfolio would change that API count, and the choice is the reviewer's.
+  destination, and stay at that documented package level. The USAR CHIPS package
+  states no country (two of its parts state none), so it is `not_stated` and its
+  six US parts are folded into it; a per-destination fold would list the deal
+  under both. `/portfolios` now says so under the flow table and links each such
+  package to its own page, where its parts are listed, each linking to its own record with its location.
+- `byInstrument` still counts a package once, so a part whose instrument differs
+  from its package's is not counted under its own instrument (a `mixed` package
+  is one `mixed` row). No stage or material effect; not changed.
 - `layerOfRow` and the commitments CSV `layer` column label an ended row by its
   value role; the ended state is in the status column and the summaries' rules.
 - Portfolio cards for Canada and the UK are mostly "listed, not summed"

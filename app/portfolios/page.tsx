@@ -13,7 +13,9 @@ import {
   designationPortfolio,
   capitalFlows,
   coInvestments,
+  rowGeography,
 } from "@/lib/capital-intelligence";
+import { childLinks } from "@/lib/capital-control";
 import { getAllFinancialCommitments, getAllMaterials, getAllProgrammes, getJurisdictionById } from "@/lib/data";
 import {
   coInvestmentKindLabels,
@@ -90,6 +92,18 @@ export default function PortfoliosPage() {
   const flows = capitalFlows(all);
   const destinations = [...new Set(flows.map((f) => f.destination))].sort((a, b) => (a === "not_stated" ? 1 : b === "not_stated" ? -1 : a < b ? -1 : 1));
   const co = coInvestments(all);
+  const byId = new Map(all.map((c) => [c.id, c]));
+  // Packages placed under "not stated" whose parts do state a country: the package's own reach is unknown
+  // because not every part states one, but the parts that do are worth inspecting.
+  const notStatedWithLocatedParts = flows
+    .filter((f) => f.destination === "not_stated")
+    .flatMap((f) =>
+      f.rowIds.flatMap((id) => {
+        const parts = childLinks(id, all).filter((l) => l.relationship === "part_of");
+        const located = parts.map((l) => rowGeography(l.commitment, f.actor, all)?.countries ?? []).filter((cs) => cs.length);
+        return located.length ? [{ actor: f.actor, row: byId.get(id)!, parts: parts.length, located: located.length, countries: [...new Set(located.flat())].sort() }] : [];
+      }),
+    );
   const programmes = getAllProgrammes();
   const designators = actorsWithDesignations().map((a) => designationPortfolio(a, all));
 
@@ -149,7 +163,7 @@ export default function PortfoliosPage() {
         <Section
           index="02"
           title="What each portfolio is made of"
-          description={`Counts of records, never money. A package with its parts counts once. A row that withdrew or lapsed is not capital and is counted only as ended; a funding option is counted in its own value role and nowhere else, since it is a right to call on money and not an exercise. At home or abroad is read from each committed row's stated location or its project's, against the provider's home territory (the member states for the EU). Data as of ${site.lastUpdated}.`}
+          description={`Counts of records, never money. Rows, value role, instrument, legal standing and geography count a package with its parts once; stage and material count per cell, so a part is counted at a stage or material its package does not list and never again where the package lists it. Instrument, stage and material hold every value role except funding options (commitments, envelopes, appropriations, private financing and the rest); legal standing and geography hold committed rows only. A row that withdrew or lapsed is not capital and is counted only as ended; a funding option is counted in its own value role and nowhere else, since it is a right to call on money and not an exercise. At home or abroad is read from each committed row's stated location or its project's, against the provider's home territory (the member states for the EU). Data as of ${site.lastUpdated}.`}
         >
           <CountTable
             actors={actors}
@@ -178,15 +192,15 @@ export default function PortfoliosPage() {
                 })),
               },
               {
-                title: "Instrument",
+                title: "Instrument (every value role but funding options; a package counts once)",
                 rows: instruments.map((i: FinancialInstrument) => ({ label: financialInstrumentLabels[i], values: portfolios.map((p) => p.counts.byInstrument[i] ?? 0) })),
               },
               {
-                title: "Supply-chain stage",
+                title: "Supply-chain stage (every value role but funding options; counted per cell)",
                 rows: stages.map((s) => ({ label: supplyChainStageLabels[s], values: portfolios.map((p) => p.counts.byStage[s]) })),
               },
               {
-                title: "Material",
+                title: "Material (every value role but funding options; counted per cell)",
                 rows: mats.map((m) => ({ label: m.nameEn, values: portfolios.map((p) => p.counts.byMaterial[m.id] ?? 0) })),
               },
               {
@@ -205,7 +219,7 @@ export default function PortfoliosPage() {
         <Section
           index="03"
           title="Where the money is aimed"
-          description="Committed rows from each government to each country the row or its project names. A row aimed at two countries counts under both; a package counts once."
+          description="Committed rows from each government to each country the row or its project names. A row aimed at two countries counts under both; a package counts once, with its parts folded into it."
         >
           <div className="relative overflow-x-auto rounded-lg border">
             <table className="w-full min-w-[32rem] border-collapse text-sm">
@@ -243,6 +257,28 @@ export default function PortfoliosPage() {
               </tbody>
             </table>
           </div>
+          {notStatedWithLocatedParts.length ? (
+            <div className="mt-4 rounded-lg border bg-card p-4 text-sm">
+              <p className="text-muted">
+                &ldquo;Not stated&rdquo; for a package can sit beside known locations on its parts. A package is aimed at no country
+                when not every part states one; the parts that do are folded into it and are not counted again at their own country
+                here. Open the package to list its parts, and a part to see its own location.
+              </p>
+              <ul className="mt-3 space-y-2">
+                {notStatedWithLocatedParts.map((x) => (
+                  <li key={x.row.id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <JurisdictionTag code={x.actor} />
+                    <Link href={`/capital/${x.row.id}`} className="min-w-0 text-accent hover:text-accent-strong">
+                      {financialInstrumentLabels[x.row.instrument]} · {x.row.recipient ?? x.row.provider ?? x.row.id}
+                    </Link>
+                    <span className="font-mono text-[11px] text-faint">
+                      {x.located} of {x.parts} parts state a country ({x.countries.join(", ")})
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </Section>
 
         <Section

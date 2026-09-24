@@ -603,6 +603,15 @@ export default function MethodologyPage() {
                 and its sums are <code className="font-mono text-xs">null</code>, never zero or partial.
               </li>
               <li>
+                · <strong className="text-foreground">Record counts fold a part only where its package covers it.</strong>{" "}
+                A part is counted inside its package, so one deal counts once, but only in a count where the
+                package is counted too. Stage and material counts in a portfolio, and the stage response
+                map and the material matrix, work cell by cell: a part is counted at a stage or material its
+                package does not list, and never twice where the package lists it. A package whose parts
+                do not all state a country shows &ldquo;not stated&rdquo; in the flow table, and its parts,
+                folded into it there, can be listed on the package&apos;s own page.
+              </li>
+              <li>
                 · <strong className="text-foreground">An option is not a commitment.</strong> A funding
                 option (a ceiling the recipient may call on under a signed agreement) is listed apart and
                 never summed. It counts only once a source records an exercise, which is coded as its own

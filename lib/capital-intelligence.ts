@@ -428,7 +428,10 @@ export type ActorPortfolio = {
   /**
    * Record counts, never money. Every count but `ended` is of rows that have not ended, and every count but
    * `byLayer` leaves funding options out (an option is counted once, in its own layer, and never as the
-   * instrument, stage or material it would fund if called on).
+   * instrument, stage or material it would fund if called on). `byInstrument`, `byStage` and `byMaterial` hold
+   * every other value role (commitments, envelopes, appropriations, private financing and the rest), not only
+   * commitments. `byInstrument` counts a package once; `byStage` and `byMaterial` count per cell, so a part is
+   * counted at a stage or material its package does not cover and never twice where both cover it.
    */
   counts: {
     rows: number;
@@ -457,9 +460,10 @@ export type ActorPortfolio = {
 
 /**
  * One tracked government's capital, from `providerJurisdiction` only. A
- * part of a package is counted once, inside its package, in every record
- * count here, so a three-part package is one row of "equity, loans" and not
- * three; the per-currency totals apply the same rule themselves.
+ * part of a package is counted once, inside its package, in `rows`, the layers,
+ * the instrument and the legal standing, so a three-part package is one row of
+ * "equity, loans" and not three; the per-currency totals apply the same rule
+ * themselves. Stage and material are counted per cell instead (see `counts`).
  */
 export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): ActorPortfolio {
   const rows = all.filter((c) => c.providerJurisdiction === actor);
@@ -485,12 +489,22 @@ export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialC
     byLayer[layerOf(c)]++;
     if (c.valueRole === "funding_option") continue;
     byInstrument[c.instrument] = (byInstrument[c.instrument] ?? 0) + 1;
-    for (const s of new Set(c.stages)) byStage[s]++;
-    for (const m of new Set(c.materialIds)) byMaterial[m] = (byMaterial[m] ?? 0) + 1;
     if (c.valueRole === "commitment") {
       standing[legalStanding(c)]++;
       byGeography[rowGeography(c, actor, all)!.geography]++;
     }
+  }
+  // Stage and material are counted per cell: a part folds only where a standing package of the same layer
+  // (and, being this actor's rows, the same provider) covers that stage or material, so a part that reaches
+  // beyond its package is counted at the stage or material the package does not cover, and never twice
+  // where both cover it. `rows` above is unchanged. Funding options are left out, as everywhere here.
+  const standingRows = rows.filter((c) => !isEnded(c) && c.valueRole !== "funding_option");
+  const standingById = new Map(standingRows.map((c) => [c.id, c]));
+  const coveredByPackage = (c: FinancialCommitment, covers: (p: FinancialCommitment) => boolean) =>
+    isFoldedPart(c, standingById, (p) => layerOf(p) === layerOf(c) && covers(p));
+  for (const c of standingRows) {
+    for (const st of new Set(c.stages)) if (!coveredByPackage(c, (p) => p.stages.includes(st))) byStage[st]++;
+    for (const m of new Set(c.materialIds)) if (!coveredByPackage(c, (p) => p.materialIds.includes(m))) byMaterial[m] = (byMaterial[m] ?? 0) + 1;
   }
   standing.ended = endedCounted.filter((c) => c.valueRole === "commitment").length;
   const backing = rows.filter(isBackingRow);

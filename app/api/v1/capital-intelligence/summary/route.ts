@@ -3,7 +3,7 @@
  * every endpoint is a build artifact rather than a live query. `/api/v1` is a
  * stable contract — add fields, never repurpose them.
  *
- * Recorded exceptions (corrections, see PROJECT_STATE.md, v0.6 counting decisions): portfolio counts, co-investment, project governments, flows and the response map (ended rows and options are listed under their own fields, not counted as capital).
+ * Recorded exceptions (corrections, see PROJECT_STATE.md, v0.6 counting decisions): portfolio counts, co-investment, project governments, flows and the response map (ended rows and options are listed under their own fields, not counted as capital); and portfolio `counts.byStage` and `counts.byMaterial`, now counted per cell (Australia's `byStage.stockpiling` 0 to 1).
  */
 import { buildCapitalIntelligenceSummary } from "@/lib/capital-intelligence-summary";
 

@@ -538,6 +538,83 @@ test("every actor's portfolio rows follow the folding rule, with an ended packag
   assert.deepEqual([c.rows, c.ended], expectedPortfolioRows("us", rows));
 });
 
+test("a portfolio counts stage and material per cell: a part beyond its package is counted there, a covered one is not counted twice", () => {
+  const at = (materialIds: string[], stages: FinancialCommitment["stages"], over: Partial<FinancialCommitment> = {}) => ({ materialIds, stages, ...over });
+  const gone = history("announced", "withdrawn");
+  const rows = [
+    // A standing package, a part inside it, and a part that reaches past it.
+    fin("pkg", at(["ma", "mb"], ["mining", "processing"])),
+    fin("covered", at(["ma"], ["mining"], { relationships: partOf("pkg") })),
+    fin("beyond", at(["ma", "mc"], ["mining", "refining"], { relationships: partOf("pkg") })),
+    // An ended package does not cover its standing part, and an ended part is not counted here at all.
+    fin("ended-pkg", at(["md"], ["separation"], { financialStatusHistory: gone })),
+    fin("ended-pkg-standing", at(["md"], ["separation"], { relationships: partOf("ended-pkg") })),
+    fin("ended-pkg-ended", at(["md"], ["separation"], { relationships: partOf("ended-pkg"), financialStatusHistory: gone })),
+    // A package of another layer (an envelope) covers nothing for a commitment under it.
+    fin("env", at(["me"], ["stockpiling"], { valueRole: "program_envelope" })),
+    fin("env-part", at(["me"], ["stockpiling"], { relationships: partOf("env") })),
+    // An option is left out of stage and material, and does not cover a commitment that is part of it.
+    fin("opt", at(["mf"], ["component_manufacturing"], { valueRole: "funding_option" })),
+    fin("opt-part", at(["mf"], ["component_manufacturing"], { relationships: partOf("opt") })),
+  ];
+  const c = actorPortfolio("us", rows).counts;
+  const stages = Object.fromEntries(Object.entries(c.byStage).filter(([, n]) => n));
+  const materials = Object.fromEntries(Object.entries(c.byMaterial));
+  assert.deepEqual(stages, { mining: 1, processing: 1, refining: 1, separation: 1, stockpiling: 2, component_manufacturing: 1 });
+  assert.deepEqual(materials, { ma: 1, mb: 1, mc: 1, md: 1, me: 2, mf: 1 });
+  // Rows are unchanged by the per-cell rule: a part still folds into its package there.
+  assert.deepEqual([c.rows, c.ended], [6, 1]);
+  assert.deepEqual([c.rows, c.ended], expectedPortfolioRows("us", rows));
+});
+
+test("in the corpus, Australia's stockpiling allocation is counted at stockpiling, and no covered part is counted twice", () => {
+  const part = getFinancialCommitmentById("fin-au-cmsr-2026-stockpiling-allocation")!;
+  const pkg = getFinancialCommitmentById("fin-au-cmsr-2026-reserve")!;
+  assert.deepEqual(part.relationships.map((r) => [r.relationship, r.commitmentId]), [["part_of", pkg.id]]);
+  assert.ok(part.stages.includes("stockpiling") && !pkg.stages.includes("stockpiling"), "the package does not cover the part's stage");
+  const all = getAllFinancialCommitments();
+  const au = actorPortfolio("australia", all).counts;
+  assert.ok(au.byStage.stockpiling >= 1, "the part is counted at the stage its package does not cover");
+  assert.deepEqual([au.rows, au.ended], expectedPortfolioRows("australia", all), "and `rows` still folds the part into its package");
+  // Take the allocation away: exactly one stockpiling record goes, and nothing else moves.
+  const without = actorPortfolio("australia", all.filter((c) => c.id !== part.id)).counts;
+  assert.equal(au.byStage.stockpiling - without.byStage.stockpiling, 1);
+  assert.deepEqual({ ...au.byStage, stockpiling: 0 }, { ...without.byStage, stockpiling: 0 });
+  assert.deepEqual(au.byMaterial, without.byMaterial, "the allocation lists no material of its own, so the reserve's materials are not counted twice");
+  assert.equal(au.rows, without.rows, "the part still folds into the reserve for the row count");
+  // A part that its package genuinely covers is not counted at all: every stage and material of the USAR round-top
+  // part is listed by its package, so dropping the part changes no count.
+  const covered = getFinancialCommitmentById("fin-us-chips-usar-2026-round-top-direct-funding")!;
+  const owner = getFinancialCommitmentById("fin-us-chips-usar-2026-direct-funding")!;
+  assert.ok(covered.stages.every((x) => owner.stages.includes(x)) && covered.materialIds.every((m) => owner.materialIds.includes(m)));
+  const us = actorPortfolio("us", all).counts;
+  const usWithout = actorPortfolio("us", all.filter((c) => c.id !== covered.id)).counts;
+  assert.deepEqual([us.byStage, us.byMaterial, us.rows], [usWithout.byStage, usWithout.byMaterial, usWithout.rows]);
+
+  // Every actor's stage and material counts equal the rule, written out apart from `actorPortfolio`.
+  for (const actor of actorsWithCapital(all)) {
+    const mine = all.filter((x) => x.providerJurisdiction === actor && !isEnded(x) && x.valueRole !== "funding_option");
+    const byId = new Map(mine.map((x) => [x.id, x]));
+    const covered = (x: FinancialCommitment, has: (p: FinancialCommitment) => boolean) =>
+      x.relationships.some((r) => {
+        const p = byId.get(r.commitmentId);
+        return r.relationship === "part_of" && !!p && layerOf(p) === layerOf(x) && has(p);
+      });
+    const expectStage: Record<string, number> = {};
+    const expectMaterial: Record<string, number> = {};
+    for (const x of mine) {
+      for (const st of new Set(x.stages)) if (!covered(x, (p) => p.stages.includes(st))) expectStage[st] = (expectStage[st] ?? 0) + 1;
+      for (const m of new Set(x.materialIds)) if (!covered(x, (p) => p.materialIds.includes(m))) expectMaterial[m] = (expectMaterial[m] ?? 0) + 1;
+    }
+    const c = actorPortfolio(actor, all).counts;
+    assert.deepEqual(Object.fromEntries(Object.entries(c.byStage).filter(([, n]) => n)), expectStage, `${actor} by stage`);
+    assert.deepEqual(c.byMaterial, expectMaterial, `${actor} by material`);
+  }
+  // The API summary carries the same counts.
+  const summary = buildCapitalIntelligenceSummary().portfolios.find((p) => p.actor === "australia")!;
+  assert.deepEqual(summary.counts.byStage, au.byStage);
+});
+
 test("the response map folds a part only into a package in the same field of the same cell", () => {
   const at = (materialIds: string[], stages: FinancialCommitment["stages"], over: Partial<FinancialCommitment> = {}) => ({ materialIds, stages, ...over });
   const gone = history("announced", "withdrawn");
