@@ -144,7 +144,11 @@ Chinese controls meet by material and stage.
 - The local `next start` server used for QA was stopped; nothing is left
   running.
 
-Next action: maintainer review of the PR; after merge, watch 10 Nov 2026
+PR: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/6
+(branch `feat/capital-intelligence-v06`, reviewed code at `a091810`, base
+`main` at `7ddb62c`). Vercel preview built; not merged, per instruction.
+
+Next action: maintainer review of PR #6; after merge, watch 10 Nov 2026
 (China), the EU second round, SRF awards and USA Rare Earth disbursements.
 
 ## Release reconciliation: v0.5 is on `main`
