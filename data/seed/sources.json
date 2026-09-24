@@ -1006,5 +1006,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "NRCan backgrounder listing each of the 22 projects announced on 3 March 2026 at PDAC (up to $165.2 million across five programmes), with recipient, location, funding amount and description. Read in full in a browser on 2026-09-23. Only projects naming a tracked material are recorded; the $165.2 million total is not, because most of it funds untracked minerals."
+  },
+  {
+    "id": "src-nist-chips-usar-2026",
+    "title": "The Department of Commerce’s CHIPS Program Announces a Letter of Intent with USA Rare Earth to Accelerate Its Domestic and Vertically Integrated \"Mine-to-Magnet\" Strategy",
+    "publisher": "National Institute of Standards and Technology (U.S. Department of Commerce, CHIPS Program Office)",
+    "url": "https://www.nist.gov/news-events/news/2026/01/department-commerces-chips-program-announces-letter-intent-usa-rare-earth",
+    "language": "en",
+    "datePublished": "2026-01-26",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Commerce's own release, read in full 2026-09-23: \"a non-binding letter of intent to provide up to $277 million in direct funding and up to $1.3 billion in a senior secured loan to USA Rare Earth (USAR) under the CHIPS and Science Act\"; two projects in Texas and Oklahoma; Commerce to receive about 16.1 million shares and a warrant for 17.6 million more."
+  },
+  {
+    "id": "src-usar-8k-2026-06-03",
+    "title": "USA Rare Earth, Inc. Form 8-K (June 3, 2026): Direct Funding Agreement and Loan Guarantee Agreement with the Department of Commerce",
+    "publisher": "USA Rare Earth, Inc. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1970622/000121390026064453/ea0293402-8k_usarare.htm",
+    "language": "en",
+    "datePublished": "2026-06-03",
+    "dateAccessed": "2026-09-23",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The recipient's binding filing, read in a browser on 2026-09-23. Item 1.01 describes the Direct Funding Agreement (up to $277.0 million in five project awards) and the Loan Guarantee Agreement (the DOC guarantees $1.3 billion of Federal Financing Bank advances in five project tranches), both entered into on 3 June 2026 under the \"CHIPS Incentives Program—Facilities for Semiconductor Materials and Manufacturing Equipment\"; milestone-based disbursement; equity-raise requirements; covenants; and the Securities Issuance Agreement (16,132,790 shares and a warrant for 17,600,584 shares at $17.17 to the DOC). Cover page: incorporated in Delaware. It supports contract and financing facts it states directly and is attributed to the company."
   }
 ]

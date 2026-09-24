@@ -696,5 +696,18 @@
     "quoteEnSource": "na",
     "sourceId": "src-nrcan-g7-cmpa-2025",
     "notes": "The backgrounder's description of the Critical Minerals Production Alliance."
+  },
+  {
+    "id": "fc-us-chips-usar-2026-chokepoints",
+    "eventId": "evt-us-chips-usar-2026",
+    "actor": "us",
+    "category": [
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "provides U.S. semiconductor companies a reliable domestic source and removes choke points in their manufacturing supply chain",
+    "quoteEn": "provides U.S. semiconductor companies a reliable domestic source and removes choke points in their manufacturing supply chain",
+    "quoteEnSource": "na",
+    "sourceId": "src-nist-chips-usar-2026",
+    "notes": "Bill Frauenhofer, Director of the CHIPS Program, in Commerce's release."
   }
 ]

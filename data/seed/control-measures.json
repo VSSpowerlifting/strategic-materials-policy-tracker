@@ -4344,6 +4344,70 @@
     "notes": "Commerce's preliminary and final determinations were affirmative; the provisional measures that followed them are not coded as separate clauses. The HTSUS subheadings are \"provided for convenience and customs purposes only\"; the written scope is dispositive."
   },
   {
+    "id": "ctl-us-chips-usar-2026-covenants",
+    "eventId": "evt-us-chips-usar-2026",
+    "measureType": "contractual_ownership_covenant",
+    "direction": "inbound_investment",
+    "clause": "Funding Agreements, covenants (iv) and (xi)",
+    "targetScopes": [
+      "end_users"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [
+      "foreign countries and entities of concern"
+    ],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "productScopeAsStated": "restrictions on joint research and transactions with foreign countries and entities of concern; ... restrictions on mergers, dispositions, and change of control transactions without consent of the DOC",
+    "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
+    "legalBasisEventIds": [],
+    "legalBasisAsStated": "Direct Funding Agreement and Loan Guarantee Agreement under the CHIPS Act of 2022",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "in_force",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "until": null,
+        "note": "Covenants of the Funding Agreements entered into on 3 June 2026; the filing does not state their duration."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Representations, Warranties and Covenants",
+        "note": null
+      }
+    ],
+    "notes": "Contractual conditions attached to public money, recorded as a control in the same way as the DoD–MP ownership covenants: a restriction on dealings with foreign entities of concern and on changes of control without the Department of Commerce's consent. It binds the company, not third parties."
+  },
+  {
     "id": "ctl-us-dod-mp-2025-ownership-covenants",
     "eventId": "evt-us-dod-mp-2025",
     "measureType": "contractual_ownership_covenant",

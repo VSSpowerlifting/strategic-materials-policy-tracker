@@ -4239,6 +4239,1222 @@
     "notes": "An envelope each government says it is taking measures to provide, not money committed to a recipient. Section II: the Framework \"does not constitute or create any legally binding or enforceable obligations\". The stages follow the Framework's objective of resilient supply chains \"including mining, separation, and processing\"."
   },
   {
+    "id": "fin-us-chips-usar-2026-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "277000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "direct funding awards (the “Direct Funding”) with a maximum award amount of $277.0 million in the aggregate",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": "CHIPS Act of 2022",
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining",
+      "processing",
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-01-26",
+        "sourceId": "src-nist-chips-usar-2026",
+        "note": "\"a non-binding letter of intent to provide up to $277 million in direct funding\"."
+      },
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "16132790",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "shares of USAR common stock issued to the DOC",
+        "asStated": "USAR will issue to the DOC 16,132,790 shares of USAR Common Stock (the “SIA Shares”)",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Consideration to the government under the Securities Issuance Agreement, entered into \"as inducement to enter into\" the Direct Funding Agreement."
+      },
+      {
+        "kind": "other",
+        "value": "17600584",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "shares under warrant at $17.17 per share",
+        "asStated": "a warrant (the “Warrant”) to purchase 17,600,584 shares of USAR Common Stock (the “Warrant Shares”) at an exercise price of $17.17 per share",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "status",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First to fourth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "amount",
+          "provider",
+          "recipient",
+          "programme",
+          "legal_authority",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding Agreement; Securities Issuance Agreement",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding Agreement",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones; recorded as grants."
+      }
+    ],
+    "notes": "The package; its five project awards are recorded as parts of it. The government receives shares and a warrant in return, recorded as terms, not as money it provides. Disbursement is milestone-based; no disbursement is recorded in the corpus."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1300000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "to guarantee the repayment by USAR and its affiliates of advances in an aggregate principal amount of $1.3 billion (“FFB Advances”) made by the Federal Financing Bank",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office), guaranteeing Federal Financing Bank advances",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": "CHIPS Act of 2022",
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining",
+      "processing",
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-01-26",
+        "sourceId": "src-nist-chips-usar-2026",
+        "note": "\"up to $1.3 billion in a senior secured loan\" under a non-binding letter of intent."
+      },
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "15",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years from the first advance under each note",
+        "asStated": "Each FFB Advance matures fifteen (15) years after the first FFB Advance made under the applicable FFB Note.",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      },
+      {
+        "kind": "other",
+        "value": "2",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the FFB commitment, one-time commitment fee",
+        "asStated": "a one-time commitment fee equal to 2.0% of the FFB commitment amount",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      },
+      {
+        "kind": "other",
+        "value": "2",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% per annum on the unutilized FFB commitment, ticking fee",
+        "asStated": "a ticking fee equal to 2.0% per annum on the unutilized FFB commitment",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      },
+      {
+        "kind": "lending_rate",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "senior secured debt with a 15-year term and an expected rate of Treasury + 150 bps",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "The rate expected under the letter of intent; the agreement sets rates in each FFB note."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "status",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First to fourth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "amount",
+          "provider",
+          "recipient",
+          "programme",
+          "legal_authority",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Loan Guarantee Agreement",
+        "note": null
+      }
+    ],
+    "notes": "The Federal Financing Bank, \"an instrumentality of the United States\", makes the advances and the DOC guarantees them; recorded once, as the DOC's guarantee, so the same $1.3 billion is not counted as both a loan and a guarantee. A guarantee is its own instrument and is never added to the direct funding. The package's five project tranches are recorded as parts of it."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-magnet-project-2-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (d)",
+        "note": null
+      }
+    ],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "60000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(d) $60.0 million for the construction of a new magnet making facility",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Magnet Project 2",
+    "projectId": "prj-us-usar-magnet-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (d)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (d)",
+        "note": "A new magnet making facility; the filing does not name the magnet type or the site. NdFeB is read from the company's Stillwater production, not stated for this project."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-magnet-project-2-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (d)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "325000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(d) $325.0 million for the Magnet Project 2",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Magnet Project 2",
+    "projectId": "prj-us-usar-magnet-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (d)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (d)",
+        "note": "A new magnet making facility; the filing does not name the magnet type or the site. NdFeB is read from the company's Stillwater production, not stated for this project."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-metal-project-2-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (e)",
+        "note": null
+      }
+    ],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "15000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(e) $15.0 million for the construction of a new strip casting and metal making facility",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Metal Project 2",
+    "projectId": "prj-us-usar-metal-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (e)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (e)",
+        "note": "A new strip casting and metal making facility; the filing does not name the site. Read as the refining stage."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-metal-project-2-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (e)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "75000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(e) $75.0 million for the Metal Project 2",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Metal Project 2",
+    "projectId": "prj-us-usar-metal-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (e)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (e)",
+        "note": "A new strip casting and metal making facility; the filing does not name the site. Read as the refining stage."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-round-top-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (a)",
+        "note": null
+      }
+    ],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "132000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(a) $132.0 million for the construction of a rare earth mining and processing facility in Sierra Blanca, Texas",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Round Top Mine Project",
+    "projectId": "prj-us-usar-round-top",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Texas",
+        "asStated": "Sierra Blanca, Texas"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (a)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release names the 12 minerals the mine will process: yttrium, gallium, dysprosium, terbium, holmium, lutetium, erbium, thulium, ytterbium, gadolinium, hafnium and zirconium. The rare earths among them fall under the grouped material; hafnium and zirconium are untracked."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-round-top-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (a)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "550000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(a) $550.0 million for the Round Top Mine Project",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Round Top Mine Project",
+    "projectId": "prj-us-usar-round-top",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Texas",
+        "asStated": "Sierra Blanca, Texas"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (a)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release names the 12 minerals the mine will process: yttrium, gallium, dysprosium, terbium, holmium, lutetium, erbium, thulium, ytterbium, gadolinium, hafnium and zirconium. The rare earths among them fall under the grouped material; hafnium and zirconium are untracked."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-magnet-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (b)",
+        "note": null
+      }
+    ],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(b) $50.0 million for the expansion and modernization of the existing magnet making facility located in Stillwater, Oklahoma",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Magnet Project",
+    "projectId": "prj-us-usar-stillwater-magnet",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (b)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release says the Stillwater project will increase \"production capacity of NdFeB magnets to 10,000 TPA\"."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-magnet-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (b)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "250000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(b) $250.0 million for the Stillwater Magnet Project",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Magnet Project",
+    "projectId": "prj-us-usar-stillwater-magnet",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (b)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release says the Stillwater project will increase \"production capacity of NdFeB magnets to 10,000 TPA\"."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-metal-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (c)",
+        "note": null
+      }
+    ],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "20000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(c) $20.0 million for the expansion and modernization of the existing strip casting and metal making facility located in Stillwater, Oklahoma",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Metal Project",
+    "projectId": "prj-us-usar-stillwater-metal",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026; disbursements are made on project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (c)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Third and fourth paragraphs",
+        "note": "Strip casting and metal making for rare earth metals and alloys (Commerce release), read as the refining stage."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-metal-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (c)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(c) $100.0 million for the Stillwater Metal Project",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Metal Project",
+    "projectId": "prj-us-usar-stillwater-metal",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (c)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Third and fourth paragraphs",
+        "note": "Strip casting and metal making for rare earth metals and alloys (Commerce release), read as the refining stage."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "fin-us-commerce-chips-vulcan-2025-incentives",
     "eventId": "evt-us-osc-vulcan-reelement-2025",
     "relationships": [],
@@ -4258,7 +5474,7 @@
       "org-us-commerce"
     ],
     "legalAuthority": "CHIPS and Science Act",
-    "programmeId": null,
+    "programmeId": "prg-us-chips-incentives",
     "recipient": null,
     "recipientOrgIds": [],
     "project": "Purchase of equipment, in parallel with OSC's financing",
@@ -4309,6 +5525,15 @@
         "evidence": "explicit",
         "locator": "Fourth paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "programme"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Fourth paragraph",
+        "note": "\"the Department of Commerce's ... CHIPS Program Office signed a preliminary non-binding letter of intent to provide $50 million in proposed federal incentives under the CHIPS and Science Act\": the release does not name the incentives programme itself."
       }
     ],
     "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\"."

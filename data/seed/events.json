@@ -2015,5 +2015,46 @@
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-chips-usar-2026",
+    "date": "2026-01-26",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Commerce (CHIPS Program Office)",
+    "titleOriginal": "The Department of Commerce’s CHIPS Program Announces a Letter of Intent with USA Rare Earth to Accelerate Its Domestic and Vertically Integrated \"Mine-to-Magnet\" Strategy",
+    "titleOriginalLang": "en",
+    "titleEn": "Commerce's CHIPS Program letter of intent with USA Rare Earth, and the funding and loan guarantee agreements that followed",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "On 26 January 2026 the Department of Commerce's CHIPS Program Office signed a non-binding letter of intent to provide USA Rare Earth up to $277 million in direct funding and up to $1.3 billion in a senior secured loan under the CHIPS and Science Act, for a rare earth mine and processing facility at Round Top (Sierra Blanca), Texas, and magnet and metal making in Stillwater, Oklahoma, with Commerce to take shares and a warrant. On 3 June 2026 USA Rare Earth entered into a Direct Funding Agreement (up to $277.0 million across five project awards, including two new facilities whose sites are not named) and a Loan Guarantee Agreement under which Commerce guarantees $1.3 billion of Federal Financing Bank advances in five matching tranches, and issued Commerce 16,132,790 shares and a warrant for 17,600,584 more. Disbursements depend on project milestones and on the company raising equity; none is recorded.",
+    "analyticalSignificance": "The CHIPS programme, built for semiconductors, now funds a rare earth mine-to-magnet chain on the argument that magnets and minerals are semiconductor inputs. Like the DoD–MP deal it pairs money with an equity position and covenants on foreign entities of concern; unlike it, most of the money is a guarantee, which is never added to the grants.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nist-chips-usar-2026",
+      "src-usar-8k-2026-06-03"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-01-26",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
   }
 ]

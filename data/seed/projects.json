@@ -2020,6 +2020,229 @@
     "notes": "The July 2025 filing and release gave the site as \"a soon-to-be-chosen location\"; MP's 10-Q for the quarter to 30 June 2026 places it in Northlake, Texas."
   },
   {
+    "id": "prj-us-usar-magnet-project-2",
+    "name": "Magnet Project 2",
+    "sponsorOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "name",
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding Agreement (d)",
+        "note": "\"the construction of a new magnet making facility\""
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (d)",
+        "note": "A new magnet making facility; the filing does not name the magnet type or the site. NdFeB is read from the company's Stillwater production, not stated for this project."
+      }
+    ],
+    "notes": "The filing does not name the site."
+  },
+  {
+    "id": "prj-us-usar-metal-project-2",
+    "name": "Metal Project 2",
+    "sponsorOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "locations": [],
+    "stages": [
+      "refining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "name",
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding Agreement (e)",
+        "note": "\"the construction of a new strip casting and metal making facility\""
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (e)",
+        "note": "A new strip casting and metal making facility; the filing does not name the site. Read as the refining stage."
+      }
+    ],
+    "notes": "The filing does not name the site."
+  },
+  {
+    "id": "prj-us-usar-round-top",
+    "name": "Round Top Mine Project",
+    "sponsorOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Texas",
+        "asStated": "Sierra Blanca, Texas"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "name",
+          "sponsors",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding Agreement (a)",
+        "note": "\"the construction of a rare earth mining and processing facility in Sierra Blanca, Texas\""
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release names the 12 minerals the mine will process: yttrium, gallium, dysprosium, terbium, holmium, lutetium, erbium, thulium, ytterbium, gadolinium, hafnium and zirconium. The rare earths among them fall under the grouped material; hafnium and zirconium are untracked."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-us-usar-stillwater-magnet",
+    "name": "Stillwater Magnet Project",
+    "sponsorOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "name",
+          "sponsors",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding Agreement (b)",
+        "note": "\"the expansion and modernization of the existing magnet making facility located in Stillwater, Oklahoma\""
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release says the Stillwater project will increase \"production capacity of NdFeB magnets to 10,000 TPA\"."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-us-usar-stillwater-metal",
+    "name": "Stillwater Metal Project",
+    "sponsorOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "name",
+          "sponsors",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding Agreement (c)",
+        "note": "\"the expansion and modernization of the existing strip casting and metal making facility located in Stillwater, Oklahoma\""
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Third and fourth paragraphs",
+        "note": "Strip casting and metal making for rare earth metals and alloys (Commerce release), read as the refining stage."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "prj-za-zandkopsdrift",
     "name": "Zandkopsdrift",
     "sponsorOrgIds": [

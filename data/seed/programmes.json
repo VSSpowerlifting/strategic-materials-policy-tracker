@@ -291,6 +291,33 @@
     "notes": "Grants half the applicant's cost of a certified undertaking. Rare earths, tungsten, gallium, germanium, antimony and graphite are among the minerals it currently supports."
   },
   {
+    "id": "prg-us-chips-incentives",
+    "name": "CHIPS Incentives Program",
+    "nameOriginal": null,
+    "actor": "us",
+    "kind": "multi_instrument",
+    "administeringOrgIds": [
+      "org-us-commerce"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "CHIPS Act of 2022 (CHIPS and Science Act)",
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "name",
+          "kind",
+          "administrators",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, first paragraph",
+        "note": "\"under the CHIPS Incentives Program—Facilities for Semiconductor Materials and Manufacturing Equipment under the CHIPS Act of 2022\": direct funding awards and a loan guarantee from the DOC."
+      }
+    ],
+    "notes": "Run by the Department of Commerce's CHIPS Program Office. It provides direct funding and loans or loan guarantees, recorded as their own instruments."
+  },
+  {
     "id": "prg-us-osc-critical-minerals-lending",
     "name": "Office of Strategic Capital critical-minerals lending (One Big Beautiful Bill Act)",
     "nameOriginal": null,

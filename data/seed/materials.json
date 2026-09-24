@@ -49,7 +49,8 @@
       "evt-jp-espa-shin-etsu-rare-earth-2026",
       "evt-jp-espa-santoku-rare-earth-2026",
       "evt-ca-g7-cmpa-2025",
-      "evt-ca-nrcan-pdac-2026"
+      "evt-ca-nrcan-pdac-2026",
+      "evt-us-chips-usar-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -81,7 +82,8 @@
       "evt-us-eo-14272-2025",
       "evt-us-cm-list-2022",
       "evt-cn-decree-785-2024",
-      "evt-au-cmpti-2025"
+      "evt-au-cmpti-2025",
+      "evt-us-chips-usar-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -113,7 +115,8 @@
       "evt-us-cm-list-2022",
       "evt-cn-decree-785-2024",
       "evt-au-cmpti-2025",
-      "evt-us-proc-11001-2026"
+      "evt-us-proc-11001-2026",
+      "evt-us-chips-usar-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -212,7 +215,8 @@
       "evt-cn-antismuggling-campaign-2025",
       "evt-us-proc-11001-2026",
       "evt-us-au-framework-2025",
-      "evt-eu-crma-strategic-projects-2025-03"
+      "evt-eu-crma-strategic-projects-2025-03",
+      "evt-us-chips-usar-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -401,7 +405,8 @@
       "evt-us-osc-vulcan-reelement-2025",
       "evt-cn-mofcom-56-2025",
       "evt-cn-mofcom-62-2025",
-      "evt-eu-resourceeu-2025"
+      "evt-eu-resourceeu-2025",
+      "evt-us-chips-usar-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

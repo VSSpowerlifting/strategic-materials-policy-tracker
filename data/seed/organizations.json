@@ -1975,6 +1975,32 @@
     "notes": null
   },
   {
+    "id": "org-usa-rare-earth",
+    "name": "USA Rare Earth, Inc.",
+    "nameOriginal": null,
+    "aliases": [
+      "USAR"
+    ],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover page",
+        "note": "State of incorporation: Delaware; principal executive offices in Stillwater, Oklahoma."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-vianode",
     "name": "Vianode",
     "nameOriginal": null,
