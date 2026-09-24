@@ -35,6 +35,7 @@ import {
   getAllEvents,
   getAllFinancialCommitments,
   getEventById,
+  getFinancialCommitmentById,
   getSourceById,
 } from "@/lib/data";
 import { site } from "@/lib/site";
@@ -746,4 +747,34 @@ test("rows whose instrument is not stated are listed, never summed together", ()
   assert.equal(i.summed, false);
   assert.deepEqual(i.countedIds, ["a", "b"]);
   assert.ok(!JSON.stringify(t).includes('"150"'), "two unnamed instruments were added together");
+});
+
+test("USA Rare Earth's direct funding is instrument-not-stated on the package and all five parts, never a grant sum", () => {
+  const AGREEMENT = "src-usar-direct-funding-agreement-2026-06-03";
+  const pkg = getFinancialCommitmentById("fin-us-chips-usar-2026-direct-funding")!;
+  const parts = getAllFinancialCommitments().filter((c) => c.relationships.some((r) => r.commitmentId === pkg.id && r.relationship === "part_of"));
+  assert.equal(parts.length, 5);
+  // The executed agreement is a source of its own: the 8-K never says "other transaction" and never says "grant".
+  assert.match(getSourceById(AGREEMENT)?.url ?? "", /ea029340201ex10-1\.htm$/);
+  for (const c of [pkg, ...parts]) {
+    assert.equal(c.instrument, "unspecified", c.id);
+    // One reading, one level: every entry that supports the instrument is ambiguous, and the package and its parts agree.
+    const instrument = c.evidence.filter((e) => e.supports.includes("instrument"));
+    assert.ok(instrument.length >= 2, c.id);
+    assert.ok(instrument.every((e) => e.evidence === "ambiguous"), c.id);
+    assert.ok(instrument.some((e) => e.sourceId === AGREEMENT), c.id);
+    // The instrument is no longer bundled into an explicit entry beside the amount.
+    assert.ok(c.evidence.filter((e) => e.evidence === "explicit").every((e) => !e.supports.includes("instrument")), c.id);
+  }
+  assert.equal(addDecimals(parts.map((c) => c.amount!.value)), pkg.amount!.value);
+  // The package is listed under "not specified" in USD, never summed; no grant total carries it, and its parts stay nested.
+  const usd = buildCapitalControlSummary().capital.publicCommitmentTotals.find((t) => t.currency === "USD")!;
+  if (usd.status !== "summed") assert.fail("the USD total is withheld");
+  const inst = (name: string) => usd.instruments.find((i) => i.instrument === name);
+  assert.ok(!inst("grant")?.countedIds.includes(pkg.id));
+  const unspecified = inst("unspecified")!;
+  assert.ok(unspecified.countedIds.includes(pkg.id));
+  assert.equal(unspecified.summed, false);
+  assert.equal(unspecified.byQualifier, null);
+  for (const c of parts) assert.ok(usd.nestedIds.includes(c.id) && !usd.countedIds.includes(c.id), c.id);
 });

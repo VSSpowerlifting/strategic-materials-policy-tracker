@@ -347,7 +347,7 @@ export const FINANCIAL_INSTRUMENTS = [
   "procurement_right",
   "stockpile_purchase",
   "mixed", // one amount the source spreads over several named instruments (e.g. "loans and equity support") without a split
-  "unspecified", // the source says "support", "funding" or "investment" and names no instrument
+  "unspecified", // the source says "support", "funding" or "investment" and names no instrument, or names only a legal form no instrument here covers (a US "other transaction"); never a grant on a guess
 ] as const;
 
 /**

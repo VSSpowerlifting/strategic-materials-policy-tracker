@@ -4242,7 +4242,7 @@
     "id": "fin-us-chips-usar-2026-direct-funding",
     "eventId": "evt-us-chips-usar-2026",
     "relationships": [],
-    "instrument": "grant",
+    "instrument": "unspecified",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -4362,10 +4362,37 @@
         ],
         "evidence": "ambiguous",
         "locator": "Item 1.01, Direct Funding Agreement",
-        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones; recorded as grants."
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds occurs on execution, only when the Department delivers a Funding Obligation, up to the scheduled cumulative disbursement amount and subject to the project's progress."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4.16",
+        "note": "Issuing equity interests to the Department, in the amount the Securities Issuance Agreement specifies, is a condition precedent to the Award Date."
       }
     ],
-    "notes": "The package; its five project awards are recorded as parts of it. The government receives shares and a warrant in return, recorded as terms, not as money it provides. Disbursement is milestone-based; no disbursement is recorded in the corpus."
+    "notes": "The package; its five project awards are recorded as parts of it. Instrument not specified: the 8-K calls them \"direct funding awards\" and never grants, and the executed Direct Funding Agreement (Exhibit 10.1) defines Direct Funding as \"in the form of an other transaction\", a form it lists apart from grants and cooperative agreements; the vocabulary has no instrument for it. The government receives shares and a warrant in return, recorded as terms, not as money it provides; issuing the equity to the Department is a condition precedent to the Award Date (Section 4.16). Disbursement is milestone-based and reimburses eligible costs; under Section 2.1(b) no funds are obligated on execution, only when the Department delivers a Funding Obligation, and the Department may recover disbursements on the clawback events of Section 10.1.1. The corpus records no funding obligation and no disbursement."
   },
   {
     "id": "fin-us-chips-usar-2026-loan-guarantee",
@@ -4520,7 +4547,7 @@
         "note": null
       }
     ],
-    "instrument": "grant",
+    "instrument": "unspecified",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -4569,7 +4596,6 @@
       {
         "sourceId": "src-usar-8k-2026-06-03",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -4587,6 +4613,24 @@
       {
         "sourceId": "src-usar-8k-2026-06-03",
         "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (d)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(iv)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
           "stages",
           "materials"
         ],
@@ -4595,7 +4639,7 @@
         "note": "A new magnet making facility; the filing does not name the magnet type or the site. NdFeB is read from the company's Stillwater production, not stated for this project."
       }
     ],
-    "notes": null
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
   },
   {
     "id": "fin-us-chips-usar-2026-magnet-project-2-loan-guarantee",
@@ -4698,7 +4742,7 @@
         "note": null
       }
     ],
-    "instrument": "grant",
+    "instrument": "unspecified",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -4747,7 +4791,6 @@
       {
         "sourceId": "src-usar-8k-2026-06-03",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -4765,6 +4808,24 @@
       {
         "sourceId": "src-usar-8k-2026-06-03",
         "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (e)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(v)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
           "stages",
           "materials"
         ],
@@ -4773,7 +4834,7 @@
         "note": "A new strip casting and metal making facility; the filing does not name the site. Read as the refining stage."
       }
     ],
-    "notes": null
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
   },
   {
     "id": "fin-us-chips-usar-2026-metal-project-2-loan-guarantee",
@@ -4876,7 +4937,7 @@
         "note": null
       }
     ],
-    "instrument": "grant",
+    "instrument": "unspecified",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -4938,7 +4999,6 @@
       {
         "sourceId": "src-usar-8k-2026-06-03",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -4955,6 +5015,24 @@
         "note": null
       },
       {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (a)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(i)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
         "sourceId": "src-nist-chips-usar-2026",
         "supports": [
           "stages",
@@ -4965,7 +5043,7 @@
         "note": "The Commerce release names the 12 minerals the mine will process: yttrium, gallium, dysprosium, terbium, holmium, lutetium, erbium, thulium, ytterbium, gadolinium, hafnium and zirconium. The rare earths among them fall under the grouped material; hafnium and zirconium are untracked."
       }
     ],
-    "notes": null
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
   },
   {
     "id": "fin-us-chips-usar-2026-round-top-loan-guarantee",
@@ -5082,7 +5160,7 @@
         "note": null
       }
     ],
-    "instrument": "grant",
+    "instrument": "unspecified",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -5137,7 +5215,6 @@
       {
         "sourceId": "src-usar-8k-2026-06-03",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -5154,6 +5231,24 @@
         "note": null
       },
       {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (b)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(ii)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
         "sourceId": "src-nist-chips-usar-2026",
         "supports": [
           "stages",
@@ -5164,7 +5259,7 @@
         "note": "The Commerce release says the Stillwater project will increase \"production capacity of NdFeB magnets to 10,000 TPA\"."
       }
     ],
-    "notes": null
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
   },
   {
     "id": "fin-us-chips-usar-2026-stillwater-magnet-loan-guarantee",
@@ -5274,7 +5369,7 @@
         "note": null
       }
     ],
-    "instrument": "grant",
+    "instrument": "unspecified",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -5329,7 +5424,6 @@
       {
         "sourceId": "src-usar-8k-2026-06-03",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -5346,6 +5440,24 @@
         "note": null
       },
       {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (c)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(iii)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
         "sourceId": "src-nist-chips-usar-2026",
         "supports": [
           "stages",
@@ -5356,7 +5468,7 @@
         "note": "Strip casting and metal making for rare earth metals and alloys (Commerce release), read as the refining stage."
       }
     ],
-    "notes": null
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
   },
   {
     "id": "fin-us-chips-usar-2026-stillwater-metal-loan-guarantee",
