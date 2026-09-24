@@ -21,6 +21,8 @@
     ],
     "productScopeAsStated": "Chengze Lithium International Limited is required to divest itself of its investment in Lithium Chile Inc.",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "final orders made under section 25.4(1) of the ICA",
     "modifiesMeasureIds": [],
@@ -83,6 +85,8 @@
     ],
     "productScopeAsStated": "Sinomine (Hong Kong) Rare Metals Resources Co., Limited is required to divest itself of its investment in Power Metals Corp.",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "final orders made under section 25.4(1) of the ICA",
     "modifiesMeasureIds": [],
@@ -145,6 +149,8 @@
     ],
     "productScopeAsStated": "Zangge Mining Investment (Chengdu) Co., Ltd. is required to divest itself of its investment in Ultra Lithium Inc.",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "final orders made under section 25.4(1) of the ICA",
     "modifiesMeasureIds": [],
@@ -266,6 +272,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -355,6 +363,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -420,6 +430,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "镓、锗、锑、钨、中重稀土等战略矿产",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -652,6 +664,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -715,6 +729,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "除上述物项外，商务部、国家国防科工委、海关总署公告2006年第50号中其他物项取消临时出口管制。",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -816,6 +832,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -885,6 +903,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "出口经营者应加强物项识别，报关时应在备注栏中注明是否属于管制物项，属于管制物项的应列明两用物项出口管制编码。对上述填报信息存有疑议的，海关将依法质疑，质疑期间出口货物不予放行。",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1215,6 +1235,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1275,6 +1297,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": null,
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1354,6 +1378,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "含有、集成或者混有原产于中国的本公告附件1第一部分所列物项在境外制造的本公告附件1第二部分所列物项，且附件1第一部分所列物项占境外制造的附件1第二部分所列物项的价值比例达到0.1%及以上的",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1426,6 +1452,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "使用原产于中国的稀土开采、冶炼分离、金属冶炼、磁材制造、稀土二次资源回收利用相关技术在境外生产的本公告附件1所列物项",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1501,6 +1529,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": null,
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1580,6 +1610,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "原产于中国的本公告附件1所列物项",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1656,6 +1688,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": null,
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1731,6 +1765,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [
@@ -1794,6 +1830,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "国务院工业和信息化主管部门会同国务院有关部门确定稀土开采企业和稀土冶炼分离企业，并向社会公布。",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -1853,6 +1891,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "任何组织和个人不得收购、加工、销售、出口非法开采或者非法冶炼分离的稀土产品。",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -1912,6 +1952,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "国家…对稀土开采和稀土冶炼分离实行总量调控，并优化动态管理。",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -1971,6 +2013,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "建立稀土产品追溯信息系统，加强对稀土产品全过程追溯管理",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -2106,6 +2150,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -2237,6 +2283,8 @@
         "role": "legal_scope"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -2300,6 +2348,8 @@
     ],
     "productScopeAsStated": "原则上不予许可镓、锗、锑、超硬材料相关两用物项对美国出口",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -2373,6 +2423,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "对石墨两用物项对美国出口，实施更严格的最终用户和最终用途审查",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -2450,6 +2502,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "两用物项 (dual-use items)",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020"
     ],
@@ -2527,6 +2581,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "Tariff Act of 1930, section 735(b) (19 U.S.C. 1673d(b)), under which the Commission made its final determination",
     "modifiesMeasureIds": [],
@@ -2621,6 +2677,8 @@
         "role": "reference"
       }
     ],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "Tariff Act of 1930, section 705(b) (19 U.S.C. 1671d(b)), under which the Commission made its final determination",
     "modifiesMeasureIds": [],
@@ -2695,6 +2753,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "Without DoD's consent the Company may not consummate a Fundamental Event (a sale of 15% or more of its voting stock, or of material equity or assets of the Project Company) other than to persons from permitted jurisdictions, sell equity or material assets of the Project Company, sell assets or products DoD identifies as a national-security priority, knowingly issue more than 14.9% of its common stock to persons from non-permitted foreign jurisdictions, or consummate a CFIUS-jurisdiction Fundamental Event without CFIUS clearance; it will not nominate non-U.S. citizens to its Board.",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -2751,6 +2811,8 @@
     "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "NdPr products and magnets from the 10X Facility: \"subject to a prohibition on sales to certain Restricted Buyers\"",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": null,
     "modifiesMeasureIds": [],
@@ -2807,6 +2869,8 @@
     ],
     "productScopeAsStated": "imports of processed critical minerals and their derivative products",
     "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
     "legalBasisEventIds": [],
     "legalBasisAsStated": "section 232 of the Trade Expansion Act of 1962, as amended, 19 U.S.C. 1862",
     "modifiesMeasureIds": [],

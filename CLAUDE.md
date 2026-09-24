@@ -107,6 +107,24 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
    and cite in `evidence` the source of every populated field group, including
    each term's, outcome's, relationship's and status entry's own source.
 
+7. **Capital intelligence (v0.6).** Registries: `Organization` (`org-*`),
+   `Project` (`prj-*`), `Programme` (`prg-*`), and a third child row of an
+   event, `ProjectDesignation` (`dsg-*`). Commitments point to them through
+   `providerOrgIds`, `recipientOrgIds`, `projectId` and `programmeId`; control
+   clauses gain `controlledItemTypes` and `controlledStages` (the stage the
+   covered item belongs to, never "restricts that stage"; empty for end-use,
+   customs, divestiture and suspension clauses). Registry facts (name, kind,
+   country, actor, parents) are evidenced like any field. A registry record
+   holds no money; stacks, portfolios, co-investment and flows are derived in
+   `lib/capital-intelligence.ts` through `totalCommitments` only — no grand
+   stack total, public-share percentage, leverage ratio or utilisation rate.
+   Portfolios roll up through `part_of` links, never through `established_by`
+   (a joint vehicle's money is not its founders'). A designation is never
+   capital. The validator enforces actor agreement between provider
+   organizations, programmes and `providerJurisdiction`, programme agreement
+   along `drawn_from` links, project material coverage and designation
+   schemes, and warns on registry records nothing links to.
+
 ## Architecture
 
 - `lib/types.ts` — entities + the categorical label sets as `as const` arrays.

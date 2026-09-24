@@ -9,7 +9,10 @@ import type {
   ControlEvidenceField,
   ControlMeasureType,
   ControlStatus,
+  ControlledItemType,
   CurrencyBasis,
+  DesignationEvidenceField,
+  DesignationStatus,
   EnSource,
   EvidenceLevel,
   FinancialEvidenceField,
@@ -22,11 +25,17 @@ import type {
   JurisdictionRole,
   MaterialAttribution,
   Mechanism,
+  OrganizationEvidenceField,
+  OrganizationKind,
+  OrganizationLinkType,
   OutcomeAttribution,
   OutcomeMetric,
   PolicyStatus,
   ProductCodeRole,
   ProductCodeSystem,
+  ProgrammeEvidenceField,
+  ProgrammeKind,
+  ProjectEvidenceField,
   Sector,
   SourceConfidence,
   SourceType,
@@ -357,6 +366,7 @@ export const financialEvidenceFieldLabels: Record<FinancialEvidenceField, string
   status: "Status",
   terms: "Terms",
   outcomes: "Outcomes",
+  programme: "Programme",
 };
 
 export const controlMeasureTypeLabels: Record<ControlMeasureType, string> = {
@@ -428,6 +438,77 @@ export const controlEvidenceFieldLabels: Record<ControlEvidenceField, string> = 
   product_codes: "Product codes",
   legal_basis: "Legal basis",
   modified_measures: "Modified measures or instruments",
+  status: "Status",
+  item_scope: "Item types and stages",
+};
+
+// --- Capital intelligence (v0.6) ------------------------------------------------
+
+export const controlledItemTypeLabels: Record<ControlledItemType, string> = {
+  goods: "Goods",
+  equipment: "Equipment",
+  technology: "Technology",
+};
+
+export const organizationKindLabels: Record<OrganizationKind, string> = {
+  government: "Government body",
+  public_financier: "Public financier",
+  joint_vehicle: "Joint vehicle",
+  company: "Company",
+  project_company: "Project company",
+  bank: "Commercial bank",
+};
+
+export const organizationLinkTypeLabels: Record<OrganizationLinkType, string> = {
+  part_of: "Part of",
+  established_by: "Established by",
+};
+
+export const organizationEvidenceFieldLabels: Record<OrganizationEvidenceField, string> = {
+  name: "Name",
+  kind: "Kind",
+  country: "Country",
+  actor: "Government",
+  parents: "Parent bodies",
+};
+
+export const projectEvidenceFieldLabels: Record<ProjectEvidenceField, string> = {
+  name: "Name",
+  sponsors: "Sponsors",
+  location: "Location",
+  stages: "Supply-chain stages",
+  materials: "Materials",
+};
+
+export const programmeKindLabels: Record<ProgrammeKind, string> = {
+  grant_programme: "Grant programme",
+  financing_facility: "Financing facility",
+  tax_incentive: "Tax incentive",
+  strategic_reserve: "Strategic reserve",
+  designation_scheme: "Designation scheme",
+  multi_instrument: "Multi-instrument programme",
+};
+
+export const programmeEvidenceFieldLabels: Record<ProgrammeEvidenceField, string> = {
+  name: "Name",
+  kind: "Kind",
+  administrators: "Administering bodies",
+  parent: "Parent programme",
+  legal_authority: "Legal authority",
+};
+
+export const designationStatusLabels: Record<DesignationStatus, string> = {
+  recognized: "Recognized",
+  withdrawn: "Withdrawn",
+};
+
+export const designationEvidenceFieldLabels: Record<DesignationEvidenceField, string> = {
+  programme: "Programme",
+  project: "Project",
+  holders: "Holders",
+  location: "Location",
+  stages: "Supply-chain stages",
+  materials: "Materials",
   status: "Status",
 };
 

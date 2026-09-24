@@ -351,6 +351,73 @@ export default function MethodologyPage() {
                 <a href="#capital-counting" className="text-accent hover:text-accent-strong">counting rules</a>.
               </p>
             </div>
+
+            <div className="space-y-3 pt-2">
+              <h3
+                id="capital-intelligence"
+                className="scroll-mt-20 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted"
+              >
+                Capital intelligence: who, what and under which scheme
+              </h3>
+              <p>
+                Version 0.6 adds the parties and undertakings the instruments connect, as
+                registries the financial rows point to. An <strong>organization</strong>{" "}
+                (<code className="font-mono text-faint">org-</code>) is a provider, recipient,
+                sponsor or holder: a government body, public financier, joint vehicle,
+                company, project company or bank. A <strong>project</strong>{" "}
+                (<code className="font-mono text-faint">prj-</code>) is one physical
+                undertaking, such as a mine, a refinery or a magnet plant. A{" "}
+                <strong>programme</strong> (<code className="font-mono text-faint">prg-</code>)
+                is a named scheme that awards, lends, credits, reserves or designates. A{" "}
+                <strong>project designation</strong> (<code className="font-mono text-faint">dsg-</code>)
+                records a project recognized under a designation scheme, such as an EU
+                strategic project under the Critical Raw Materials Act.
+              </p>
+              <ul className="space-y-2 text-muted">
+                <li>
+                  · Registry records are factual claims like any other. An
+                  organization&apos;s name, kind, country, government and parent bodies
+                  each name the source that states them.
+                </li>
+                <li>
+                  · A renamed body keeps one record and lists its other names, so its
+                  portfolio does not split in two.
+                </li>
+                <li>
+                  · A portfolio rolls up from an office to the department it is part of.
+                  It does not roll up from a joint vehicle to the bodies that set it up:
+                  a joint vehicle&apos;s money is not its founders&apos; money, and the
+                  public share of it is not stated.
+                </li>
+                <li>
+                  · A registry record holds no money. Capital stacks, portfolios,
+                  co-investment and flows are derived from the financial rows under the
+                  same counting rules, one value role at a time and one currency at a
+                  time. There is no grand stack total, no public-share percentage, no
+                  leverage ratio and no programme utilisation rate.
+                </li>
+                <li>
+                  · A designation confers standing, not money, and never enters a sum.
+                  Where a designation publishes expected investment, that is total
+                  project cost and is not recorded as support.
+                </li>
+                <li>
+                  · Each control clause records the kind of item it covers (goods,
+                  equipment, technology) and the supply-chain stages those items belong
+                  to. Controlling exports of separation technology places the item at the
+                  separation stage; it does not mean the clause restricts separation
+                  itself. End-use restrictions, customs enforcement, divestiture orders
+                  and suspensions define no items of their own and carry neither.
+                </li>
+                <li>
+                  · Whether money stays at home or goes abroad is read from the funded
+                  row&apos;s stated location, or its project&apos;s, against the
+                  provider&apos;s home territory: the member states for the EU, and the
+                  United Kingdom as GB. Where no location is stated, the row is counted
+                  as location not stated, never guessed.
+                </li>
+              </ul>
+            </div>
           </section>
 
           <section className="space-y-3">
