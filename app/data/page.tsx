@@ -13,7 +13,7 @@ const downloads = [
     file: "smpt-dataset.json",
     href: "/api/export/dataset.json",
     fmt: "JSON",
-    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions, sources, financial commitments and control measures, plus the capital-and-control summary, counts and the data notice.",
+    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions, sources, financial commitments, control measures, organizations, projects, programmes and project designations, plus the capital-and-control and capital-intelligence summaries, counts and the data notice.",
   },
   {
     file: "smpt-financial-commitments.csv",
@@ -26,6 +26,30 @@ const downloads = [
     href: "/api/export/control-measures.csv",
     fmt: "CSV",
     desc: "One row per control clause: measure type, direction, targets, materials, product scope in the source's words, product codes, legal basis and current status with any stated end date.",
+  },
+  {
+    file: "smpt-organizations.csv",
+    href: "/api/export/organizations.csv",
+    fmt: "CSV",
+    desc: "One row per provider, recipient, sponsor or holder: kind, country, the government it belongs to, the bodies it is part of or was established by, and how many financial rows it provides and receives.",
+  },
+  {
+    file: "smpt-projects.csv",
+    href: "/api/export/projects.csv",
+    fmt: "CSV",
+    desc: "One row per physical project: sponsors, stated location, stages, materials, and the financial rows and designations that point to it. No money is stored on a project.",
+  },
+  {
+    file: "smpt-programmes.csv",
+    href: "/api/export/programmes.csv",
+    fmt: "CSV",
+    desc: "One row per named programme or scheme: its government, kind, administering bodies, parent programme, legal authority, and the rows and designations recorded under it.",
+  },
+  {
+    file: "smpt-project-designations.csv",
+    href: "/api/export/project-designations.csv",
+    fmt: "CSV",
+    desc: "One row per project recognized under a designation scheme, such as an EU strategic project: the scheme, project, holders, location, stages, materials and current status. Standing, not money.",
   },
   {
     file: "smpt-financial-status-history.csv",
@@ -121,11 +145,15 @@ export default function DataPage() {
           Read-only, prerendered endpoints under <code className="font-mono text-sm text-foreground">/api/v1</code>:
           {" "}<code className="font-mono text-sm">events</code>, <code className="font-mono text-sm">framing</code>,{" "}
           <code className="font-mono text-sm">materials</code>, <code className="font-mono text-sm">actors</code>,{" "}
-          <code className="font-mono text-sm">sources</code>, <code className="font-mono text-sm">financial-commitments</code>{" "}
-          and <code className="font-mono text-sm">control-measures</code> (each with a <code className="font-mono text-sm">/[id]</code>{" "}
+          <code className="font-mono text-sm">sources</code>, <code className="font-mono text-sm">financial-commitments</code>,{" "}
+          <code className="font-mono text-sm">control-measures</code>, <code className="font-mono text-sm">organizations</code>,{" "}
+          <code className="font-mono text-sm">projects</code>, <code className="font-mono text-sm">programmes</code> and{" "}
+          <code className="font-mono text-sm">project-designations</code> (each with a <code className="font-mono text-sm">/[id]</code>{" "}
           record that bundles its sources), plus <code className="font-mono text-sm">capital-control/summary</code>, the
-          double-count-safe totals and status counts behind the Capital and Controls pages. Totals are per currency and per
-          value role, with statuses evaluated on the data&apos;s as-of date.
+          double-count-safe totals and status counts behind the Capital and Controls pages, and{" "}
+          <code className="font-mono text-sm">capital-intelligence/summary</code>: portfolios, capital stacks, programme
+          ledgers, co-investment, flows and the stage response map. Totals are per currency and per value role, with
+          statuses evaluated on the data&apos;s as-of date; no endpoint returns a ratio, share or cross-currency figure.
         </p>
       </div>
 

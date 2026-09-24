@@ -21,6 +21,7 @@ import {
   getMaterialsByIds,
 } from "@/lib/data";
 import {
+  controlledItemTypeLabels,
   controlDirectionLabels,
   controlEvidenceFieldLabels,
   controlMeasureTypeLabels,
@@ -28,6 +29,7 @@ import {
   materialAttributionLabels,
   productCodeRoleLabels,
   productCodeSystemLabels,
+  supplyChainStageLabels,
   targetScopeLabels,
 } from "@/lib/labels";
 import { formatDate } from "@/lib/format";
@@ -148,6 +150,25 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   ) : null}
                   {m.untrackedMaterialsAsStated.length ? <span className="mt-1 block text-muted">Also names: {m.untrackedMaterialsAsStated.join("; ")}</span> : null}
                   <span className="mt-1 block font-mono text-[11px] text-faint">{materialAttributionLabels[m.materialAttribution]}</span>
+                </Fact>
+                <Fact label="Items and stages">
+                  {m.controlledItemTypes.length ? (
+                    <>
+                      <span className="flex flex-wrap gap-x-3 gap-y-1">
+                        {m.controlledItemTypes.map((t) => <Badge key={t}>{controlledItemTypeLabels[t]}</Badge>)}
+                      </span>
+                      <span className="mt-1 block text-muted">
+                        {m.controlledStages.length
+                          ? `Covered items belong to: ${m.controlledStages.map((s) => supplyChainStageLabels[s].toLowerCase()).join(", ")}`
+                          : "No stage coded: the covered items are listed in an unread annex or sit outside the tracked materials."}
+                      </span>
+                      <span className="mt-1 block font-mono text-[11px] text-faint">
+                        Where the items belong, not a claim that the clause restricts that stage.
+                      </span>
+                    </>
+                  ) : (
+                    <NotStated>The clause defines no items of its own</NotStated>
+                  )}
                 </Fact>
                 <Fact label="Legal basis">
                   {m.legalBasisAsStated ? <span lang={hasCjk(m.legalBasisAsStated) ? "zh" : undefined}>{m.legalBasisAsStated}</span> : <NotStated />}

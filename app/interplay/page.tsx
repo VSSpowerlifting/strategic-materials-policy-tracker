@@ -6,6 +6,7 @@ import { InterplayChronology, MaterialInterplayMatrix } from "@/components/capit
 import { JurisdictionTag } from "@/components/labels";
 import { InlineAmount, ProviderTag } from "@/components/capital/rows";
 import { ControlStatusBadge } from "@/components/capital/primitives";
+import { StageResponseMap } from "@/components/intelligence/response-map";
 import {
   commitmentActor,
   controlIssuer,
@@ -91,7 +92,15 @@ export default function InterplayPage() {
           <MaterialInterplayMatrix asOf={asOf} />
         </Section>
 
-        <Section index="03" title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. Parts of packages are folded into their package.">
+        <Section
+          index="03"
+          title="Material by supply-chain stage"
+          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. A clause's stage is where its items belong (separation technology sits at separation), not a claim that it restricts that stage; clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed. Record counts, never money.`}
+        >
+          <StageResponseMap asOf={asOf} />
+        </Section>
+
+        <Section index="04" title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. Parts of packages are folded into their package.">
           <div className="grid gap-4 lg:grid-cols-2">
             {materials.map((m) => (
               <Card key={m.id} className="p-5">

@@ -104,6 +104,15 @@ test("geography reads the row's own location first, then its project's, and neve
   // EU money in a member state is domestic; in Greenland it is not.
   assert.equal(rowGeography(fin("g", { providerJurisdiction: "eu", locations: [at("SE")] }))!.geography, "domestic");
   assert.equal(rowGeography(fin("h", { providerJurisdiction: "eu", locations: [at("GL")] }))!.geography, "abroad");
+  // A package that states no location takes its parts' locations, but only when every part states one.
+  const pkg = fin("fin-pkg");
+  const partA = fin("fin-pkg-a", { relationships: [{ commitmentId: "fin-pkg", relationship: "part_of", sourceId: "s" }], locations: [at("US")] });
+  const partB = fin("fin-pkg-b", { relationships: [{ commitmentId: "fin-pkg", relationship: "part_of", sourceId: "s" }], projectId: "prj-na-lofdal" });
+  assert.deepEqual(rowGeography(pkg, "us", [pkg, partA, partB]), { geography: "domestic_and_abroad", countries: ["NA", "US"], basis: "parts" });
+  const partC = fin("fin-pkg-c", { relationships: [{ commitmentId: "fin-pkg", relationship: "part_of", sourceId: "s" }] });
+  assert.deepEqual(rowGeography(pkg, "us", [pkg, partA, partC]), { geography: "not_stated", countries: [], basis: null });
+  // The Kingston awards state no location; both awards point to projects in Kingston, Ontario.
+  assert.deepEqual(rowGeography(getFinancialCommitmentById("fin-ca-cmrdd-2024-kingston-awards")!), { geography: "domestic", countries: ["CA"], basis: "parts" });
   // No government, no geography: private money has no home territory to compare with.
   assert.equal(rowGeography(fin("i", { providerJurisdiction: null })), null);
 });

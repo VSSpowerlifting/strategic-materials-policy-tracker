@@ -79,21 +79,46 @@ export type RowGeography = {
   geography: Geography;
   /** Country codes the classification rests on, sorted. */
   countries: string[];
-  /** Where they come from: the row's own locations, its project's, or neither. */
-  basis: "row" | "project" | null;
+  /**
+   * Where they come from: the row's own locations, its project's, or (for a
+   * package that states none) the locations its parts or their projects
+   * state. Null when nothing is stated.
+   */
+  basis: "row" | "project" | "parts" | null;
 };
+
+/** Country codes a row states, directly or through its project. */
+function statedCountries(c: FinancialCommitment): { countries: string[]; basis: "row" | "project" | null } {
+  const own = c.locations.flatMap((l) => (l.countryCode ? [l.countryCode] : []));
+  if (own.length) return { countries: own, basis: "row" };
+  const project = c.projectId ? getProjectById(c.projectId) : undefined;
+  const fromProject = project ? project.locations.flatMap((l) => (l.countryCode ? [l.countryCode] : [])) : [];
+  return fromProject.length ? { countries: fromProject, basis: "project" } : { countries: [], basis: null };
+}
 
 /**
  * Where a government's money goes, relative to its home territory. The row's
- * own stated locations are used first, then its project's; a location with no
- * country code, or no location at all, is "not stated", never guessed.
+ * own stated locations are used first, then its project's; a package that
+ * states neither takes the locations its parts state, since the package is
+ * the sum of them. A location with no country code, or no location at all,
+ * is "not stated", never guessed.
  */
-export function rowGeography(c: FinancialCommitment, actor: JurisdictionCode | null = c.providerJurisdiction): RowGeography | null {
+export function rowGeography(
+  c: FinancialCommitment,
+  actor: JurisdictionCode | null = c.providerJurisdiction,
+  all: readonly FinancialCommitment[] = getAllFinancialCommitments(),
+): RowGeography | null {
   if (!actor) return null;
-  const own = c.locations.flatMap((l) => (l.countryCode ? [l.countryCode] : []));
-  const project = c.projectId ? getProjectById(c.projectId) : undefined;
-  const fromProject = project ? project.locations.flatMap((l) => (l.countryCode ? [l.countryCode] : [])) : [];
-  const [countries, basis] = own.length ? [own, "row" as const] : fromProject.length ? [fromProject, "project" as const] : [[], null];
+  let { countries, basis }: { countries: string[]; basis: RowGeography["basis"] } = statedCountries(c);
+  if (!countries.length) {
+    const parts = childLinks(c.id, all).filter((l) => l.relationship === "part_of");
+    const fromParts = parts.flatMap((l) => statedCountries(l.commitment).countries);
+    // Only when every part states a country: otherwise the package's reach is partly unknown.
+    if (parts.length && parts.every((l) => statedCountries(l.commitment).countries.length)) {
+      countries = fromParts;
+      basis = "parts";
+    }
+  }
   const distinct = [...new Set(countries)].sort(byCodePoint);
   if (!distinct.length) return { geography: "not_stated", countries: [], basis: null };
   const home = ACTOR_HOME_COUNTRIES[actor];
@@ -395,7 +420,7 @@ export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialC
     if (c.valueRole === "commitment") {
       if (isBinding(c)) committedBinding++;
       else committedNotYetBinding++;
-      byGeography[rowGeography(c, actor)!.geography]++;
+      byGeography[rowGeography(c, actor, all)!.geography]++;
     }
   }
   const committedPublic = rows.filter((c) => layerOf(c) === "public_commitment");
@@ -444,7 +469,7 @@ export function capitalFlows(all: readonly FinancialCommitment[] = getAllFinanci
   for (const c of all) {
     if (!c.providerJurisdiction || c.valueRole !== "commitment") continue;
     if (c.relationships.some((r) => r.relationship === "part_of")) continue;
-    const g = rowGeography(c)!;
+    const g = rowGeography(c, c.providerJurisdiction, all)!;
     for (const destination of g.countries.length ? g.countries : ["not_stated"]) {
       const key = `${c.providerJurisdiction}\u0000${destination}`;
       if (!cells.has(key)) cells.set(key, { actor: c.providerJurisdiction, destination, rowIds: [] });

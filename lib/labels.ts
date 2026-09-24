@@ -534,3 +534,45 @@ export const INSTRUMENT_KIND_HUES = {
   capital: "#CBA86A",
   control: "#C77B7B",
 } as const;
+
+// --- Capital intelligence views (v0.6) ------------------------------------------------
+//
+// Keyed by the derived view keys in lib/capital-intelligence.ts. Kept here with
+// the other label maps; the view keys are not stored vocabularies.
+
+export const layerLabels = {
+  public_commitment: "Public commitments",
+  joint_vehicle_commitment: "Joint-vehicle commitments",
+  other_commitment: "Other commitments",
+  funding_option: "Funding options",
+  envelope: "Envelopes, appropriations and lending authorities",
+  private_financing: "Private financing",
+  recipient_own_funds: "Recipient's own funds",
+  expected_co_investment: "Expected co-investment",
+  total_project_cost: "Total project cost",
+} as const;
+
+export const layerGlosses = {
+  public_commitment: "Committed to a recipient by a government or public enterprise. Summed per currency; a part is never added to its package.",
+  joint_vehicle_commitment: "Committed by a vehicle that public and private parties set up together. Summed apart from public money: the public share is not stated.",
+  other_commitment: "Committed with private capital, or capital whose source the sources do not state. Listed, never summed with public money.",
+  funding_option: "A ceiling a party may call on under an executed agreement. Listed, never summed: an option is not committed money until exercised.",
+  envelope: "Ceilings that awards are drawn from. Listed, never summed, and never divided into awards.",
+  private_financing: "Commercial capital raised alongside public money. Listed, never public support.",
+  recipient_own_funds: "The recipient's own contribution. Listed, never public support.",
+  expected_co_investment: "Money a government expects others to invest. Listed, never a commitment.",
+  total_project_cost: "The whole cost of a project, whoever pays it. Listed, never support.",
+} as const;
+
+export const geographyLabels = {
+  domestic: "At home",
+  abroad: "Abroad",
+  domestic_and_abroad: "At home and abroad",
+  not_stated: "Location not stated",
+} as const;
+
+export const coInvestmentKindLabels = {
+  cross_government: "More than one government",
+  public_and_private: "Public and private capital",
+  several_public_bodies: "Several public bodies of one government",
+} as const;

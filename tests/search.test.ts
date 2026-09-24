@@ -72,7 +72,7 @@ test("every result href points at a real route shape", () => {
   for (const d of docs)
     assert.match(
       d.href,
-      /^\/(events|capital|controls|materials|actors|sources|watchlist)(\/|#)/,
+      /^\/(events|capital|controls|projects|organizations|programmes|materials|actors|sources|watchlist)(\/|#)/,
       `${d.id}: suspicious href ${d.href}`,
     );
 });
@@ -91,7 +91,8 @@ test("event, capital, control, framing, actor and watched documents carry a juri
       assert.ok(d.jurisdiction, `${d.kind}:${d.id} should carry a jurisdiction`);
       assert.ok(validCodes.has(d.jurisdiction!), `${d.kind}:${d.id} has an unrecognised jurisdiction ${d.jurisdiction}`);
     }
-    if (d.kind === "material" || d.kind === "source") assert.equal(d.jurisdiction, null);
+    if (d.kind === "material" || d.kind === "source" || d.kind === "project") assert.equal(d.jurisdiction, null);
+    if (d.kind === "programme") assert.ok(d.jurisdiction && validCodes.has(d.jurisdiction), `${d.id} should carry its programme's government`);
   }
 });
 
@@ -134,4 +135,12 @@ test("Capital & Control rows are searchable by party, customs code and document 
   assert.ok(ids("2805301200").includes("ctl-cn-ree-2025-04-export-licensing"), "a Chinese customs reference code finds its clause");
   assert.ok(ids("Sinomine").some((id) => id.startsWith("ctl-ca-ica-2022-divest-")));
   assert.ok(ids("境外军事用户").includes("ctl-cn-ree-2025-10-military-listed-end-users"), "CJK end-user wording is indexed verbatim");
+});
+
+test("registry records are searchable by name, alias and original-language name", () => {
+  const find = (q: string) => searchDocs(docs, q).map((d) => `${d.kind}:${d.id}`);
+  assert.ok(find("Department of War").includes("organization:org-us-dod"), "an alias finds the renamed department");
+  assert.ok(find("エネルギー・金属鉱物資源機構").includes("organization:org-jp-jogmec"), "the Japanese name finds JOGMEC");
+  assert.ok(find("Hemerdon").includes("project:prj-gb-hemerdon"));
+  assert.ok(find("Critical Minerals Facility").includes("programme:prg-au-cmf"));
 });

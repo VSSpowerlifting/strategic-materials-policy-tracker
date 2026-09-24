@@ -35,7 +35,7 @@ export const navGroups = [
     label: "Policy record",
     items: [
       { href: "/events", label: "Events", primary: true },
-      { href: "/timeline", label: "Timeline", primary: true },
+      { href: "/timeline", label: "Timeline", primary: false },
       { href: "/framing", label: "Framing", primary: true },
       { href: "/compare", label: "Compare", primary: false },
     ],
@@ -46,6 +46,10 @@ export const navGroups = [
       { href: "/capital", label: "Capital", primary: true },
       { href: "/controls", label: "Controls", primary: true },
       { href: "/interplay", label: "Interplay", primary: true },
+      { href: "/portfolios", label: "Portfolios", primary: true },
+      { href: "/projects", label: "Projects", primary: false },
+      { href: "/organizations", label: "Organizations", primary: false },
+      { href: "/programmes", label: "Programmes", primary: false },
     ],
   },
   {
