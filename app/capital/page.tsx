@@ -123,7 +123,7 @@ export default function CapitalPage() {
                           <p className="font-display text-sm font-semibold">{financialInstrumentLabels[inst.instrument]}</p>
                           {!inst.summed ? (
                             <p className="font-mono text-[11px] leading-5 text-faint">
-                              Listed below, not summed: {inst.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources do not name the instrument"}.
+                              Listed below, not summed: {inst.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources name no instrument the tracker's vocabulary covers"}.
                             </p>
                           ) : null}
                           {(inst.summed

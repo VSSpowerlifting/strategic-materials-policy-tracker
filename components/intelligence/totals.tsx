@@ -70,7 +70,7 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
                     </>
                   ) : (
                     <p className="font-mono text-[11px] leading-5 text-faint">
-                      Listed, not summed: {i.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources do not name the instrument"}.
+                      Listed, not summed: {i.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources name no instrument the tracker's vocabulary covers"}.
                     </p>
                   )}
                 </div>
