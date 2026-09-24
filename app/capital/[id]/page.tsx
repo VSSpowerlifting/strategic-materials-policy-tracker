@@ -130,6 +130,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
                     <OptionLadder
                       executed={option.executed ? { date: option.executed.date, sourceId: option.executed.sourceId } : null}
                       exercises={optionStep(option.exercises)}
+                      endedExercises={optionStep(option.endedExercises)}
                       disbursements={optionStep(option.disbursements)}
                     />
                   </div>

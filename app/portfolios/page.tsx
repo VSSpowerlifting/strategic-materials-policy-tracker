@@ -125,7 +125,9 @@ export default function PortfoliosPage() {
                   <Link href={`/actors/${getJurisdictionById(p.actor)?.code.toLowerCase() ?? p.actor}`} className="hover:opacity-80">
                     <JurisdictionTag code={p.actor} withName />
                   </Link>
-                  <span className="font-mono text-[11px] text-faint">{p.counts.rows} records</span>
+                  <span className="font-mono text-[11px] text-faint">
+                    {p.counts.rows} records{p.counts.ended ? ` · ${p.counts.ended} ended` : ""}
+                  </span>
                 </div>
                 <CurrencyTotals totals={p.publicTotals} compact />
                 <p className="mt-2 font-mono text-[11px] text-faint">
@@ -147,7 +149,7 @@ export default function PortfoliosPage() {
         <Section
           index="02"
           title="What each portfolio is made of"
-          description={`Counts of records, never money. A package with its parts counts once. At home or abroad is read from each committed row's stated location or its project's, against the provider's home territory (the member states for the EU). Data as of ${site.lastUpdated}.`}
+          description={`Counts of records, never money. A package with its parts counts once. A row that withdrew or lapsed is not capital and is counted only as ended; a funding option is counted in its own value role and nowhere else, since it is a right to call on money and not an exercise. At home or abroad is read from each committed row's stated location or its project's, against the provider's home territory (the member states for the EU). Data as of ${site.lastUpdated}.`}
         >
           <CountTable
             actors={actors}
@@ -164,6 +166,8 @@ export default function PortfoliosPage() {
                 rows: [
                   { label: "Binding (contracted or paid)", values: portfolios.map((p) => p.counts.committedBinding) },
                   { label: "Not yet binding", values: portfolios.map((p) => p.counts.committedNotYetBinding) },
+                  { label: "Status not stated", values: portfolios.map((p) => p.counts.committedStatusNotStated) },
+                  { label: "Ended (withdrawn or lapsed)", values: portfolios.map((p) => p.counts.committedEnded) },
                 ],
               },
               {

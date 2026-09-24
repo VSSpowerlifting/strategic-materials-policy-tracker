@@ -581,12 +581,23 @@ export default function MethodologyPage() {
               <li>
                 · <strong className="text-foreground">Ended commitments are not money.</strong> A
                 commitment whose current status is withdrawn or lapsed is listed as ended and left out of
-                every sum.
+                every sum. It is also not capital in any count derived from it: it backs no project, adds no
+                government or provider to a stack, is no flow and no co-investment, and is counted only as
+                ended. An ended package does not hide its parts: a part that is still standing counts as a
+                row of its own.
+              </li>
+              <li>
+                · <strong className="text-foreground">A status the source does not give is not &ldquo;not yet
+                binding&rdquo;.</strong> A commitment with an amount whose current status is &ldquo;not
+                stated&rdquo; is neither binding nor not yet binding: it is listed with its own figure, counted
+                apart, and never summed. Version 0.5 read it as not yet binding; version 0.6 changes this to match the
+                one for an instrument the source does not name. Such a row also does not hide its parts.
               </li>
               <li>
                 · <strong className="text-foreground">No part is counted with its package.</strong> A row
                 that is part of, or drawn from, another row in the same currency is left out of the sums and
-                named beside them, whatever either row&apos;s instrument. If two counted rows were ever to share a descendant, the total for that
+                named beside them, whatever either row&apos;s instrument, when that other row is itself
+                summed. If it is not (it ended, states no amount or no status), it does not suppress the row. If two counted rows were ever to share a descendant, the total for that
                 currency is withheld and the overlap shown instead. The JSON summary says so in a
                 machine-readable way: that currency&apos;s entry has <code className="font-mono text-xs">status: &quot;withheld&quot;</code>{" "}
                 and its sums are <code className="font-mono text-xs">null</code>, never zero or partial.
@@ -596,6 +607,10 @@ export default function MethodologyPage() {
                 option (a ceiling the recipient may call on under a signed agreement) is listed apart and
                 never summed. It counts only once a source records an exercise, which is coded as its own
                 commitment drawn from the option; payment is then tracked in that commitment&apos;s status.
+                A draw that has since been withdrawn or has lapsed is listed under the option as an ended
+                draw, never as an exercise or as money moved. Wherever capital is counted (a project&apos;s
+                backers, co-investment, a portfolio, the stage response map) an option is shown as an option
+                and never as a commitment or as backing.
                 The site shows each option&apos;s three steps (agreement executed, exercise, disbursement)
                 and says &ldquo;none recorded&rdquo; where the corpus is silent, never &ldquo;not exercised&rdquo;.
               </li>
@@ -702,8 +717,10 @@ export default function MethodologyPage() {
                 supply-assurance plans and JOGMEC grants; Canada&apos;s G7 Production Alliance round and PDAC 2026
                 awards; Commerce&apos;s CHIPS agreements with USA Rare Earth; and what MP Materials&apos; later filings
                 record about the DoD package. Corrections: currency totals are now split by instrument (version
-                0.5 added grants, loans and equity together, contrary to its own rule), and a withdrawn or lapsed
-                commitment is no longer summed. New vocabulary values: a financial status &ldquo;lapsed&rdquo;, and
+                0.5 added grants, loans and equity together, contrary to its own rule), a withdrawn or lapsed
+                commitment is no longer summed or counted as capital, a commitment whose status is not stated is
+                listed apart instead of being read as not yet binding, and an ended or unsummed package no
+                longer hides parts that still stand. New vocabulary values: a financial status &ldquo;lapsed&rdquo;, and
                 the registry, designation and item-type vocabularies.
               </li>
               <li>

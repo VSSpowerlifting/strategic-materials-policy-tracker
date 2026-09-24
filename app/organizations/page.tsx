@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { JurisdictionTag } from "@/components/labels";
+import { isEnded } from "@/lib/capital-control";
 import { organizationRoles } from "@/lib/capital-intelligence";
 import { getAllOrganizations } from "@/lib/data";
 import { organizationKindLabels } from "@/lib/labels";
@@ -41,6 +42,10 @@ export default function OrganizationsPage() {
               <Card className="overflow-hidden">
                 {list.map((o) => {
                   const r = roles.get(o.id)!;
+                  // Rows that ended are not provided or received capital; they are counted apart.
+                  const provided = r.provided.filter((c) => !isEnded(c)).length;
+                  const received = r.received.filter((c) => !isEnded(c)).length;
+                  const ended = [...r.provided, ...r.received].filter(isEnded).length;
                   return (
                     <Link key={o.id} href={`/organizations/${o.id}`} className="group flex flex-col gap-1 border-b px-4 py-3 last:border-b-0 hover:bg-elevated sm:flex-row sm:items-center sm:gap-4">
                       <span className="flex items-center gap-2 sm:w-32 sm:shrink-0">
@@ -52,10 +57,13 @@ export default function OrganizationsPage() {
                         {o.aliases.length ? <span className="block font-mono text-[11px] text-faint">also {o.aliases.join(" · ")}</span> : null}
                       </span>
                       <span className="tnum font-mono text-[11px] text-muted sm:text-right">
-                        {r.provided.length ? `provides ${r.provided.length}` : ""}
-                        {r.provided.length && r.received.length ? " · " : ""}
-                        {r.received.length ? `receives ${r.received.length}` : ""}
-                        {!r.provided.length && !r.received.length ? (r.sponsoredProjects.length ? `sponsors ${r.sponsoredProjects.length}` : "parent body") : ""}
+                        {[
+                          provided ? `provides ${provided}` : "",
+                          received ? `receives ${received}` : "",
+                          ended ? `${ended} ended` : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" · ") || (r.sponsoredProjects.length ? `sponsors ${r.sponsoredProjects.length}` : "parent body")}
                       </span>
                     </Link>
                   );

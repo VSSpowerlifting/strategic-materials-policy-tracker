@@ -2,6 +2,8 @@
  * Versioned read-only JSON API. Prerendered: the corpus is a static seed, so
  * every endpoint is a build artifact rather than a live query. `/api/v1` is a
  * stable contract — add fields, never repurpose them.
+ *
+ * Recorded exceptions (corrections, see PROJECT_STATE.md, v0.6 counting decisions): portfolio counts, co-investment, project governments, flows and the response map (ended rows and options are listed under their own fields, not counted as capital).
  */
 import { buildCapitalIntelligenceSummary } from "@/lib/capital-intelligence-summary";
 

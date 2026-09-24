@@ -331,7 +331,8 @@ export function StageMatrix({ rows }: { rows: FinancialCommitment[] }) {
 
 /**
  * Where money and restrictions meet on the same material. Each cell counts the
- * financial rows an actor provides and the control clauses it issues naming
+ * financial rows an actor provides that have not ended (a funding option is one
+ * row, not an exercise) and the control clauses it issues naming
  * the material, with how many of those clauses are in force on the as-of date.
  */
 export function MaterialInterplayMatrix({ asOf }: { asOf: string }) {

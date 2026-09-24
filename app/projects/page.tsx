@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
 import { OrgList } from "@/components/intelligence/org-link";
+import { isEnded } from "@/lib/capital-control";
 import { coInvestments, projectStack } from "@/lib/capital-intelligence";
 import { getAllMaterials, getAllProjects } from "@/lib/data";
 import { coInvestmentKindLabels, supplyChainStageLabels } from "@/lib/labels";
@@ -73,6 +74,7 @@ export default function ProjectsPage() {
                 </div>
                 <p className="mt-auto pt-4 font-mono text-[11px] text-faint">
                   {s.rows.length} financial row{s.rows.length === 1 ? "" : "s"}
+                  {s.rows.some(isEnded) ? ` (${s.rows.filter(isEnded).length} ended)` : ""}
                   {s.designations.length ? ` · ${s.designations.length} designation${s.designations.length === 1 ? "" : "s"}` : ""}
                   {c ? ` · ${c.kinds.map((k) => coInvestmentKindLabels[k].toLowerCase()).join("; ")}` : ""}
                 </p>

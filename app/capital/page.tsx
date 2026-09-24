@@ -61,7 +61,7 @@ export default function CapitalPage() {
   const actors = new Set(summaries.map((s) => s.actor).filter(Boolean)).size;
   const bySummary = new Map(summaries.map((s) => [s.id, s]));
   const actorTotals = JURISDICTIONS.map((j) => ({ j, t: totalCommitments(publicRows.filter((c) => commitmentActor(c) === j), all) })).filter(
-    (x) => x.t.currencies.length || x.t.unquantifiedIds.length,
+    (x) => x.t.currencies.length || x.t.unquantifiedIds.length || x.t.statusNotStatedIds.length || x.t.endedIds.length,
   );
 
   return (
@@ -209,7 +209,9 @@ export default function CapitalPage() {
             Totals are never converted between currencies, never added across instruments or value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
-            {" "}Binding means a contract has been executed or money paid; everything earlier, including conditional loan commitments and non-binding letters of intent, is shown as not yet binding.
+            {" "}Binding means a contract has been executed or money paid; every earlier stage the source states, including conditional loan commitments and non-binding letters of intent, is shown as not yet binding. A commitment whose source states no status is neither: it is listed, not summed
+            {totals.statusNotStatedIds.length ? ` (${totals.statusNotStatedIds.length} now)` : ""}, and a withdrawn or lapsed one is listed as ended
+            {totals.endedIds.length ? ` (${totals.endedIds.length} now)` : ""} and never summed.
             {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
           </p>
           <div className="mt-6 overflow-x-auto rounded-lg border">
@@ -219,7 +221,7 @@ export default function CapitalPage() {
                 <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
                   <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · ceilings and approximations kept apart</th>
-                  <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum</th>
+                  <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum (no amount, no status, or ended)</th>
                 </tr>
               </thead>
               <tbody>
@@ -251,7 +253,12 @@ export default function CapitalPage() {
                         {t.currencies.length === 0 ? <span className="font-mono text-xs text-faint">—</span> : null}
                       </span>
                     </td>
-                    <td className="tnum px-3 py-3 text-right font-mono text-xs text-muted">{t.unquantifiedIds.length || "—"}</td>
+                    <td
+                      className="tnum px-3 py-3 text-right font-mono text-xs text-muted"
+                      title={`${t.unquantifiedIds.length} no amount · ${t.statusNotStatedIds.length} no status stated · ${t.endedIds.length} ended`}
+                    >
+                      {t.unquantifiedIds.length + t.statusNotStatedIds.length + t.endedIds.length || "—"}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -281,6 +288,7 @@ export default function CapitalPage() {
                       <OptionLadder
                         executed={st.executed ? { date: st.executed.date, sourceId: st.executed.sourceId } : null}
                         exercises={step(st.exercises)}
+                        endedExercises={step(st.endedExercises)}
                         disbursements={step(st.disbursements)}
                       />
                     </div>

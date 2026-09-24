@@ -1,7 +1,9 @@
 /**
  * The stage response map: for each tracked material and supply-chain stage,
  * the government capital aimed there, the projects designated there (standing,
- * not money) and the control clauses whose covered items sit there. Record counts only. A control's stage says where its items
+ * not money) and the control clauses whose covered items sit there. Record counts only. Capital is commitments
+ * that have not ended: a funding option is shown as an option (a right to call on money, not an exercise) and a
+ * withdrawn or lapsed row as ended, and neither reads as money aimed here. A control's stage says where its items
  * belong, never that it restricts that stage, and nothing here draws a causal
  * line between a clause and a financing.
  */
@@ -32,6 +34,22 @@ function Cell({ cell }: { cell: ResponseCell | undefined }) {
           <span className="sr-only">capital rows</span>
         </span>
       ) : null}
+      {cell.optionIds.length ? (
+        <span className="inline-flex items-center gap-1.5 font-mono text-[11px]" title={`${cell.optionIds.join(", ")} (funding options, not exercised commitments)`}>
+          <span aria-hidden className="h-2 w-2 rounded-full border border-[#CBA86A]" />
+          <span className="text-foreground">{cell.optionIds.length}</span>
+          <span className="text-faint">{cell.optionActors.map((a) => jurisdictionShort[a]).join(" ")}</span>
+          <span className="sr-only">funding options, not commitments</span>
+        </span>
+      ) : null}
+      {cell.endedIds.length ? (
+        <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-faint" title={`${cell.endedIds.join(", ")} (withdrawn or lapsed)`}>
+          <span aria-hidden className="h-2 w-2 rounded-full border border-dashed border-faint" />
+          <span>{cell.endedIds.length}</span>
+          <span>ended</span>
+          <span className="sr-only">rows withdrawn or lapsed, not capital</span>
+        </span>
+      ) : null}
       {cell.designationIds.length ? (
         <span className="inline-flex items-center gap-1.5 font-mono text-[11px]" title={cell.designationIds.join(", ")}>
           <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" />
@@ -60,7 +78,7 @@ export function StageResponseMap({ asOf }: { asOf: string }) {
     <div>
       <div className="relative overflow-x-auto rounded-lg border">
         <table className="w-full min-w-[44rem] border-collapse text-sm">
-          <caption className="sr-only">Capital rows and control clauses by material and supply-chain stage</caption>
+          <caption className="sr-only">Capital commitments, funding options, ended rows, designations and control clauses by material and supply-chain stage</caption>
           <thead>
             <tr className="border-b bg-card">
               <th scope="col" className="sticky left-0 z-10 bg-card px-3 py-2 text-left font-mono text-[11px] font-normal uppercase tracking-[0.12em] text-faint">
@@ -90,7 +108,9 @@ export function StageResponseMap({ asOf }: { asOf: string }) {
         </table>
       </div>
       <p className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] text-faint">
-        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full bg-[#CBA86A]" /> government capital rows (committed or option), a package once</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full bg-[#CBA86A]" /> government commitments that have not ended, a package once</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full border border-[#CBA86A]" /> funding options: a right to call on money, not an exercise</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full border border-dashed border-faint" /> withdrawn or lapsed rows: not capital</span>
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" /> project designations (standing, not money)</span>
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-[1px] bg-[#C77B7B]" /> control clauses whose covered items sit here</span>
         <span>Letters: the governments providing or issuing. Hover or focus a count for record ids and statuses.</span>
@@ -119,8 +139,21 @@ export function MaterialStageResponse({ materialId, asOf }: { materialId: string
                   {cell.capitalActors.map((a) => <JurisdictionTag key={a} code={a} />)}
                 </span>
               ) : (
-                <span className="text-faint">No government capital row coded here</span>
+                <span className="text-faint">No government commitment coded here</span>
               )}
+              {cell.optionIds.length ? (
+                <span className="flex flex-wrap items-center gap-2">
+                  <span aria-hidden className="h-2 w-2 rounded-full border border-[#CBA86A]" />
+                  <span className="text-muted">{cell.optionIds.length} funding option{cell.optionIds.length === 1 ? "" : "s"}, not exercised commitments, from</span>
+                  {cell.optionActors.map((a) => <JurisdictionTag key={a} code={a} />)}
+                </span>
+              ) : null}
+              {cell.endedIds.length ? (
+                <span className="flex flex-wrap items-center gap-2 text-faint">
+                  <span aria-hidden className="h-2 w-2 rounded-full border border-dashed border-faint" />
+                  {cell.endedIds.length} row{cell.endedIds.length === 1 ? " has" : "s have"} ended (withdrawn or lapsed) and {cell.endedIds.length === 1 ? "is" : "are"} not capital
+                </span>
+              ) : null}
               {cell.designationIds.length ? (
                 <span className="flex flex-wrap items-center gap-2">
                   <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" />

@@ -9,7 +9,8 @@ import { EvidenceTable, Fact, NotStated } from "@/components/capital/primitives"
 import { LayerStack } from "@/components/intelligence/layers";
 import { OrgLink, ProjectLink } from "@/components/intelligence/org-link";
 import { DesignationRow } from "@/components/intelligence/designation-row";
-import { childOrganizations, layers, organizationRoles, parentOrganizations } from "@/lib/capital-intelligence";
+import { isEnded } from "@/lib/capital-control";
+import { childOrganizations, isBackingRow, layers, organizationRoles, parentOrganizations } from "@/lib/capital-intelligence";
 import { getAllFinancialCommitments, getAllOrganizations, getOrganizationById } from "@/lib/data";
 import {
   jurisdictionLabels,
@@ -43,17 +44,22 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
   const children = childOrganizations(id);
   const rolledUp = roles.rolledUpIds.slice(1);
   // Other providers on the same projects or recipients as this body's own rows, and who funds it.
-  const myProjects = new Set(roles.provided.flatMap((c) => (c.projectId ? [c.projectId] : [])));
-  const myRecipients = new Set(roles.provided.flatMap((c) => c.recipientOrgIds));
+  // Only rows that back (have not ended, are not a bare funding option) make an organization a co-provider or a
+  // funder: a lapsed commitment letter does not put its banks behind the project.
+  const backingProvided = roles.provided.filter(isBackingRow);
+  const myProjects = new Set(backingProvided.flatMap((c) => (c.projectId ? [c.projectId] : [])));
+  const myRecipients = new Set(backingProvided.flatMap((c) => c.recipientOrgIds));
   const coProviders = [
     ...new Set(
       all
+        .filter(isBackingRow)
         .filter((c) => (c.projectId !== null && myProjects.has(c.projectId)) || c.recipientOrgIds.some((r) => myRecipients.has(r)))
         .flatMap((c) => c.providerOrgIds)
         .filter((p) => !roles.rolledUpIds.includes(p)),
     ),
   ].sort();
-  const funders = [...new Set(roles.received.flatMap((c) => c.providerOrgIds))].sort();
+  const funders = [...new Set(roles.received.filter(isBackingRow).flatMap((c) => c.providerOrgIds))].sort();
+  const endedRows = [...roles.provided, ...roles.received].filter(isEnded);
   let n = 0;
   const next = () => String(++n).padStart(2, "0");
 
@@ -89,6 +95,11 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
               {rolledUp.length ? (
                 <p className="mb-4 text-sm text-muted">
                   Rolled up: {rolledUp.map((r, i) => <span key={r}>{i ? ", " : ""}<OrgLink id={r} /></span>)}
+                </p>
+              ) : null}
+              {endedRows.length ? (
+                <p className="mb-4 max-w-prose text-sm text-muted">
+                  {endedRows.length} row{endedRows.length === 1 ? " has" : "s have"} ended (withdrawn or lapsed): listed with {endedRows.length === 1 ? "its" : "their"} status, and not counted as capital behind any project.
                 </p>
               ) : null}
               <LayerStack layers={layers(roles.provided, all)} />

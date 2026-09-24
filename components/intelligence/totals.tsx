@@ -36,9 +36,11 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
       <p className="font-mono text-xs text-faint">
         {totals.unquantifiedIds.length
           ? `No amount stated on ${totals.unquantifiedIds.length === 1 ? "the row" : `any of ${totals.unquantifiedIds.length} rows`}`
-          : totals.endedIds.length
-            ? "Nothing to sum: the commitment has ended"
-            : "Nothing to sum"}
+          : totals.statusNotStatedIds.length
+            ? `Nothing to sum: no status is stated on ${totals.statusNotStatedIds.length === 1 ? "the row" : `any of ${totals.statusNotStatedIds.length} rows`}`
+            : totals.endedIds.length
+              ? "Nothing to sum: the commitment has ended"
+              : "Nothing to sum"}
       </p>
     );
   return (
@@ -83,6 +85,11 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
       {totals.endedIds.length ? (
         <p className="font-mono text-[11px] text-faint sm:col-span-2">
           {totals.endedIds.length} row{totals.endedIds.length === 1 ? " has" : "s have"} ended (withdrawn or lapsed) and {totals.endedIds.length === 1 ? "is" : "are"} not summed.
+        </p>
+      ) : null}
+      {totals.statusNotStatedIds.length ? (
+        <p className="font-mono text-[11px] text-faint sm:col-span-2">
+          {totals.statusNotStatedIds.length} row{totals.statusNotStatedIds.length === 1 ? " states" : "s state"} an amount but no status, so {totals.statusNotStatedIds.length === 1 ? "it is" : "they are"} neither binding nor not yet binding and {totals.statusNotStatedIds.length === 1 ? "is" : "are"} listed, not summed.
         </p>
       ) : null}
       {totals.unquantifiedIds.length ? (

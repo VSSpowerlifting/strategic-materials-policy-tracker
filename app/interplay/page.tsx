@@ -88,7 +88,7 @@ export default function InterplayPage() {
           <InterplayChronology asOf={asOf} />
         </Section>
 
-        <Section index="02" title="Material by actor" description={`Financial rows provided (a package counts once) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts, never money.`}>
+        <Section index="02" title="Material by actor" description={`Financial rows provided that have not ended (a package counts once; a withdrawn or lapsed row is left out, and a funding option is a row of its own, not an exercise) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts, never money.`}>
           <MaterialInterplayMatrix asOf={asOf} />
         </Section>
 

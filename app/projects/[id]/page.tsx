@@ -10,7 +10,7 @@ import { LayerStack } from "@/components/intelligence/layers";
 import { OrgList, ProgrammeLink } from "@/components/intelligence/org-link";
 import { DesignationRow } from "@/components/intelligence/designation-row";
 import { coInvestments, controlsAtProjectStages, projectStack } from "@/lib/capital-intelligence";
-import { controlIssuer } from "@/lib/capital-control";
+import { controlIssuer, isEnded } from "@/lib/capital-control";
 import { getAllProjects, getEventById, getMaterialsByIds, getProjectById } from "@/lib/data";
 import {
   coInvestmentKindLabels,
@@ -45,6 +45,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const materials = getMaterialsByIds(p.materialIds);
   const co = coInvestments().find((c) => c.project.id === id);
   const controls = controlsAtProjectStages(p, site.lastUpdated);
+  const ended = stack.rows.filter(isEnded);
+  const options = stack.rows.filter((c) => !isEnded(c) && c.valueRole === "funding_option");
   const programmes = [...new Set(stack.rows.flatMap((c) => (c.programmeId ? [c.programmeId] : [])))];
   let n = 0;
   const next = () => String(++n).padStart(2, "0");
@@ -75,6 +77,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             title="Capital stack"
             description="One layer per value role. Only committed public money, and joint-vehicle money apart from it, is summed, per currency; everything else is listed. There is no total across layers."
           >
+            {ended.length || options.length ? (
+              <p className="mb-6 max-w-prose rounded-md border border-dashed px-4 py-3 text-sm leading-6 text-muted">
+                {ended.length
+                  ? `${ended.length} row${ended.length === 1 ? " has" : "s have"} ended (withdrawn or lapsed) and no longer back${ended.length === 1 ? "s" : ""} this project; ${ended.length === 1 ? "it stays" : "they stay"} listed with ${ended.length === 1 ? "its" : "their"} status. `
+                  : ""}
+                {options.length
+                  ? `${options.length} funding option${options.length === 1 ? " is" : "s are"} a right to call on money, not money that moved, and ${options.length === 1 ? "is" : "are"} not counted as backing; an exercise would be a commitment of its own.`
+                  : ""}
+              </p>
+            ) : null}
             {stack.layers.length ? <LayerStack layers={stack.layers} /> : <p className="text-sm text-muted">No financial row points to this project yet.</p>}
           </Section>
 
