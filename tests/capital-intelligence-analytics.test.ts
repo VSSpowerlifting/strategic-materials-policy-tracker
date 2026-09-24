@@ -362,6 +362,22 @@ test("the summary carries no ratio, share, percentage, utilisation or grand tota
   assert.equal(summary.programmes.length, getAllProgrammes().length);
 });
 
+/**
+ * The documented folding rule, written out apart from `actorPortfolio`: a part is counted inside its package when
+ * the package is the same provider's, is in the same layer, and is in the same group (standing, or ended), and is
+ * counted on its own otherwise. Returns [rows that have not ended, rows that have ended].
+ */
+function expectedPortfolioRows(actor: string, all: readonly FinancialCommitment[]): [number, number] {
+  const mine = all.filter((c) => c.providerJurisdiction === actor);
+  const byId = new Map(mine.map((c) => [c.id, c]));
+  const count = (group: FinancialCommitment[]) =>
+    group.filter((c) => !c.relationships.some((r) => {
+      const p = byId.get(r.commitmentId);
+      return r.relationship === "part_of" && p && isEnded(p) === isEnded(c) && layerOf(p) === layerOf(c);
+    })).length;
+  return [count(mine.filter((c) => !isEnded(c))), count(mine.filter(isEnded))];
+}
+
 test("a government's designations are counted apart from its capital, at home and abroad by the project's country", () => {
   const eu = designationPortfolio("eu");
   assert.equal(eu.counts.designations, eu.designationIds.length);
@@ -374,9 +390,10 @@ test("a government's designations are counted apart from its capital, at home an
   assert.equal(designationGeography(ngc, "eu").geography, "domestic_and_abroad");
   // Substitution projects carry no stage and are counted as such.
   assert.equal(eu.counts.noStage, getAllProjectDesignations().filter((x) => !x.stages.length).length);
-  // Designations never enter a money figure: the EU's capital portfolio counts its financial rows only.
+  // Designations never enter a money figure: the EU's capital portfolio counts its financial rows only,
+  // less the parts the folding rule folds into a package (see the oracle below).
   const euCapital = actorPortfolio("eu");
-  assert.equal(euCapital.counts.rows, getAllFinancialCommitments().filter((c) => c.providerJurisdiction === "eu").length);
+  assert.deepEqual([euCapital.counts.rows, euCapital.counts.ended], expectedPortfolioRows("eu", getAllFinancialCommitments()));
   assert.ok(actorsWithCapital().includes("eu"));
   assert.deepEqual(actorsWithDesignations(), ["eu", "japan"]);
   // Japan's certified plans: three in Japan, one whose location the list does not state.
@@ -464,6 +481,7 @@ test("a portfolio counts what has not ended once, keeps ended rows and options a
   // A part folds into a package that stands; a part of an ended package is a row of its own.
   assert.equal(p.counts.rows, 4, "pkg (with its part), standing, unknown, and the option's layer");
   assert.equal(p.counts.ended, 2, "the ended package and the lapsed row");
+  assert.deepEqual([p.counts.rows, p.counts.ended], expectedPortfolioRows("us", all));
   assert.deepEqual(
     [p.counts.committedBinding, p.counts.committedNotYetBinding, p.counts.committedStatusNotStated, p.counts.committedEnded],
     [1, 1, 1, 2],
@@ -496,6 +514,78 @@ test("a portfolio counts what has not ended once, keeps ended rows and options a
   assert.deepEqual([cell.capitalActors, cell.optionActors], [["us"], ["us"]]);
   assert.ok(![...cell.capitalIds].includes("option"));
   assert.ok(all.filter(isEnded).every((c) => !cell.capitalIds.includes(c.id)));
+});
+
+test("every actor's portfolio rows follow the folding rule, with an ended package and its standing part", () => {
+  const all = getAllFinancialCommitments();
+  for (const actor of actorsWithCapital(all)) {
+    const c = actorPortfolio(actor, all).counts;
+    assert.deepEqual([c.rows, c.ended], expectedPortfolioRows(actor, all), actor);
+  }
+  const at = { locations: [{ countryCode: "US", subnational: null, asStated: "US" }], stages: ["processing" as const], materialIds: ["m"] };
+  const ended = fin("ended-pkg", { ...at, financialStatusHistory: history("announced", "withdrawn") });
+  const standing = fin("standing", { ...at, relationships: partOf("ended-pkg") });
+  const endedPart = fin("ended-part", { ...at, relationships: partOf("ended-pkg"), financialStatusHistory: history("announced", "lapsed") });
+  const live = fin("live-pkg", at);
+  const livePart = fin("live-part", { ...at, relationships: partOf("live-pkg") });
+  const endedPartOfLive = fin("ended-part-of-live", { ...at, relationships: partOf("live-pkg"), financialStatusHistory: history("announced", "withdrawn") });
+  const rows = [ended, standing, endedPart, live, livePart, endedPartOfLive];
+  const c = actorPortfolio("us", rows).counts;
+  // Standing: the part of the ended package is a row of its own, and the live package folds its live part.
+  assert.equal(c.rows, 2, "standing part of an ended package, and the live package with its part");
+  // Ended: the package folds its ended part; an ended part of a live package is ended money and is counted so.
+  assert.equal(c.ended, 2, "the ended package with its ended part, and the ended part of the live package");
+  assert.deepEqual([c.rows, c.ended], expectedPortfolioRows("us", rows));
+});
+
+test("the response map folds a part only into a package in the same field of the same cell", () => {
+  const at = (materialIds: string[], stages: FinancialCommitment["stages"], over: Partial<FinancialCommitment> = {}) => ({ materialIds, stages, ...over });
+  const gone = history("announced", "withdrawn");
+  const rows = [
+    // A package over two materials and two stages, with parts at, inside and beyond it.
+    fin("pkg", at(["ma", "mb"], ["mining", "processing"])),
+    fin("p-inside", at(["ma"], ["mining"], { relationships: partOf("pkg") })),
+    fin("p-other-material", at(["ma", "mc"], ["mining"], { relationships: partOf("pkg") })),
+    fin("p-other-stage", at(["ma"], ["mining", "refining"], { relationships: partOf("pkg") })),
+    fin("p-ended", at(["ma"], ["mining"], { relationships: partOf("pkg"), financialStatusHistory: gone })),
+    // An unexercised option does not hide a commitment that is part of it.
+    fin("opt", at(["md"], ["mining"], { valueRole: "funding_option" })),
+    fin("opt-part", at(["md"], ["mining"], { relationships: partOf("opt") })),
+    // An ended package does not hide a standing part; its own ended part folds into it.
+    fin("ended-pkg", at(["me"], ["mining"], { financialStatusHistory: gone })),
+    fin("ended-pkg-standing", at(["me"], ["mining"], { relationships: partOf("ended-pkg") })),
+    fin("ended-pkg-ended", at(["me"], ["mining"], { relationships: partOf("ended-pkg"), financialStatusHistory: gone })),
+    // Another provider's package does not hide it.
+    fin("eu-pkg", at(["mf"], ["mining"], { providerJurisdiction: "eu" })),
+    fin("us-part-of-eu", at(["mf"], ["mining"], { relationships: partOf("eu-pkg") })),
+  ];
+  const map = stageResponseMap(site.lastUpdated, rows, []);
+  const cell = (m: string, s: FinancialCommitment["stages"][number]) => map.get(m)?.get(s);
+  const capital = (m: string, s: FinancialCommitment["stages"][number]) => (cell(m, s)?.capitalIds ?? []).slice().sort();
+
+  assert.deepEqual(capital("ma", "mining"), ["pkg"], "package and part cover the same cell: one row");
+  assert.deepEqual(cell("ma", "mining")!.endedIds, ["p-ended"], "an ended part of a standing package is listed as ended, not hidden");
+  assert.deepEqual(capital("ma", "processing"), ["pkg"]);
+  assert.deepEqual(capital("mb", "mining"), ["pkg"]);
+  assert.deepEqual(capital("mc", "mining"), ["p-other-material"], "the package does not cover this material");
+  assert.deepEqual(capital("ma", "refining"), ["p-other-stage"], "the package does not cover this stage");
+  assert.deepEqual([capital("md", "mining"), cell("md", "mining")!.optionIds], [["opt-part"], ["opt"]]);
+  assert.deepEqual([capital("me", "mining"), cell("me", "mining")!.endedIds], [["ended-pkg-standing"], ["ended-pkg"]]);
+  assert.deepEqual(capital("mf", "mining"), ["eu-pkg", "us-part-of-eu"]);
+  assert.deepEqual(cell("mf", "mining")!.capitalActors, ["eu", "us"]);
+  // No row sits twice in one cell, and a part of a package that covers the cell never sits beside it.
+  for (const row of map.values())
+    for (const x of row.values()) for (const list of [x.capitalIds, x.optionIds, x.endedIds]) assert.equal(new Set(list).size, list.length);
+
+  // The corpus map and the API summary carry the same cells, field for field.
+  const summary = buildCapitalIntelligenceSummary().stageResponseMap;
+  const real = stageResponseMap(site.lastUpdated);
+  for (const { materialId, stages } of summary)
+    for (const s of stages) {
+      const x = real.get(materialId)!.get(s.stage as FinancialCommitment["stages"][number])!;
+      assert.deepEqual([s.capitalIds, s.fundingOptionIds, s.endedRowIds], [x.capitalIds, x.optionIds, x.endedIds]);
+    }
+  assert.equal(summary.reduce((n, m) => n + m.stages.length, 0), [...real.values()].reduce((n, m) => n + m.size, 0));
 });
 
 test("in the corpus, the unexercised option is listed as an option and the lapsed letter backs nothing", () => {

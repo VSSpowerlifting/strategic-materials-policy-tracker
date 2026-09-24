@@ -101,6 +101,39 @@ Chinese controls meet by material and stage.
     behind a project) and note ended rows.
   - Public pages and both summary APIs carry the same distinctions (see the
     API note below). No cross-instrument sum was restored.
+- **Fold-rule pass** (on the PR, after `7fbbdeb`; closes three admitted gaps):
+  - One rule, `isFoldedPart(c, byId, countsHere)` in `lib/capital-control.ts`:
+    a part folds into a package only where the cell being built also counts that
+    package (same provider, and in the cell's own terms). Views: the response map
+    folds per material-and-stage cell, into a package in the same field (capital,
+    option or ended) that covers that material and stage; the material matrix
+    folds per material-and-actor cell, into a counted (not ended) package of the
+    same actor naming the material; flows fold a whole part into a flow package
+    (unchanged); a portfolio folds within a layer and within standing or ended.
+  - Response map: a part no longer disappears at a material or stage its package
+    does not cover; an ended part of a standing package is listed as ended (it was
+    hidden); a commitment that is part of an option is capital, not hidden by the
+    option. The corpus map is unchanged (no row does any of this).
+  - Material matrix: `materialInterplay(asOf, all?, controls?)` now takes its rows
+    so it can be fixture-tested. Corpus effect: two rows appear that an envelope
+    had hidden at materials the envelope does not name
+    (`fin-au-alcoa-sojitz-gallium-2025-equity` under gallium,
+    `fin-au-arafura-nolans-2025-equity` under rare earths, both Australia).
+  - `/interplay` material ledgers: the selection moved to
+    `materialLedgerRows(materialId, all?)` (a part is folded only into a package
+    listed there in the same state) and an ended row is marked "ended". Before, every
+    `part_of` row was hidden and ended rows carried no marker. Corpus effect (diffed
+    material by material): the same two Australian equity rows appear, in the gallium
+    and rare-earth ledgers; nothing else changes, and no ledger row is ended, so the
+    marker is not rendered anywhere in the corpus yet.
+  - Tests: the "matrix never shows a part" and "EU counts.rows equals all EU
+    rows" assumptions are replaced by fixtures and by an oracle written apart from
+    `actorPortfolio` (every actor's `counts.rows` / `counts.ended`, plus an ended
+    package with a standing part). Response map fixture: same cell (once), other
+    material, other stage, ended part, option part, ended package with standing
+    part, other provider's package. Both summary APIs read the same `stageResponseMap`;
+    a test compares the served summary to it, cell by cell. The matrix and the
+    ledger are page-only and have no API field.
 - **Intentional API behaviour changes in this pass** (the routes' "add fields,
   never repurpose" note is knowingly broken in three places, all corrections):
   1. `/api/v1/capital-control/summary`: adds `capital.publicCommitmentsStatusNotStated`
@@ -115,7 +148,11 @@ Chinese controls meet by material and stage.
      stages' `capitalRows` / `capitalIds` / `capitalActors` no longer hold
      options or ended rows (new `fundingOptionIds`, `fundingOptionActors`,
      `endedRowIds`); `flows` exclude ended rows and now include the two
-     Australian equity stakes above (they were hidden under an envelope).
+     Australian equity stakes above (they were hidden under an envelope). This
+     fold-rule pass changes no summary-API value on the corpus except the
+     `countingRules` text (the response map, flows and portfolios are unchanged
+     when diffed before and after); it changes the material matrix and the
+     `/interplay` ledgers, which are page-only.
      Consequence in the corpus: the MP 10X project is no longer "public and
      private" (its private bank letter lapsed undrawn).
   3. Same for `dataset.json`, which embeds both summaries.
@@ -174,6 +211,11 @@ Chinese controls meet by material and stage.
   after fixing `/interplay` (new table) and `/compare` (existing, screen-reader
   text escaping an unpositioned scroll wrapper). Desktop checked at 1440px.
   No candidate id in `.next`.
+- Fold-rule pass: validate 0 errors (same 10 warnings), typecheck and lint clean,
+  270 tests (3 new, one replaced; the new fold rules were mutation-checked: no
+  coverage check, no same-field check, old whole-row fold, matrix without material,
+  matrix with uncounted package, portfolio folding across standing and ended each
+  fail a test), build, phone and desktop checks (see the PR).
 - Accounting-semantics pass: validate 0 errors (same 10 warnings), typecheck and
   lint clean, 267 tests (8 new; five rules mutation-checked: old ancestor rule,
   not_stated as not yet binding, options as backing, fold-any-part, fold-across-layers, each fails a test), build
@@ -200,11 +242,18 @@ Chinese controls meet by material and stage.
   before or soon after taking effect; the suspension ends 10 Nov 2026 and the
   validator will warn after that date.
 - `/coverage` does not yet report registry or Capital & Control counts.
-- Two older tests hold only because the corpus has no ended package with
-  standing parts: the material matrix "never shows a part" and the EU
-  `counts.rows` equalling all EU rows. Both invariants are wrong in principle.
-  A part whose package does not carry the part's stage or material is folded
-  away in the response map; no corpus row does this (checked).
+- Flows fold a whole part into a package that is a flow, not destination by
+  destination. The USAR CHIPS package states no country (two of its parts state
+  none), so it is `not_stated` and its six US parts are folded into it; a
+  per-destination fold would list the deal under both. Left as is: it changes a
+  public table and the reading is debatable.
+- A portfolio folds a part into its package for every count (documented: a deal
+  counts once), so a part at a stage or material its package does not name is not
+  counted at that stage or material (`byStage`, `byMaterial`). One corpus row does
+  this: `fin-au-cmsr-2026-stockpiling-allocation` (stage `stockpiling`) is part of
+  `fin-au-cmsr-2026-reserve`, which lists no stockpiling stage, so Australia's
+  `byStage.stockpiling` does not count it. Left as is; a per-cell fold in the
+  portfolio would change that API count, and the choice is the reviewer's.
 - `layerOfRow` and the commitments CSV `layer` column label an ended row by its
   value role; the ended state is in the status column and the summaries' rules.
 - Portfolio cards for Canada and the UK are mostly "listed, not summed"

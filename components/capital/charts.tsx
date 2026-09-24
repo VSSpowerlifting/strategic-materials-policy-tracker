@@ -334,6 +334,7 @@ export function StageMatrix({ rows }: { rows: FinancialCommitment[] }) {
  * financial rows an actor provides that have not ended (a funding option is one
  * row, not an exercise) and the control clauses it issues naming
  * the material, with how many of those clauses are in force on the as-of date.
+ * A part is folded into its package only in a cell where the package is counted.
  */
 export function MaterialInterplayMatrix({ asOf }: { asOf: string }) {
   const grid = materialInterplay(asOf);

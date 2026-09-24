@@ -11,7 +11,9 @@ import {
   descendantIds,
   formatDecimalCompact,
   instrumentChronology,
+  isEnded,
   materialInterplay,
+  materialLedgerRows,
   legalStanding,
   optionState,
   publicCommitmentRows,
@@ -338,14 +340,74 @@ test("the chronology is dated, ordered and complete for dated entries of governm
   assert.ok(marks.every((m, i) => i === 0 || marks[i - 1].date <= m.date));
 });
 
-test("the material matrix counts records only, and folds package parts into the package", () => {
-  const grid = materialInterplay(site.lastUpdated);
-  const partIds = new Set(getAllFinancialCommitments().filter((c) => c.relationships.some((r) => r.relationship === "part_of")).map((c) => c.id));
-  for (const row of grid.values())
-    for (const cell of row.values()) {
-      assert.ok(cell.capitalIds.every((id) => !partIds.has(id)));
+test("the material matrix folds a part into a package it counts in the same cell, and shows every other part", () => {
+  const withdrawn = [{ status: "announced" as const, date: "2025-01-01", sourceId: "s" }, { status: "withdrawn" as const, date: "2025-02-01", sourceId: "s" }];
+  const on = (...materialIds: string[]) => ({ materialIds });
+  const rows = [
+    // A standing package with parts: the parts fold in where the package names the material.
+    fin("pkg", on("m1")),
+    part("pkg-part", "pkg", "40", on("m1")),
+    part("pkg-part-ended", "pkg", "5", { ...on("m1"), financialStatusHistory: withdrawn }),
+    // An ended package does not hide the part that still stands.
+    fin("ended-pkg", { ...on("m2"), financialStatusHistory: withdrawn }),
+    part("standing-part", "ended-pkg", "30", on("m2")),
+    // A package outside the matrix (private, no government behind it) or under another provider does not hide it either.
+    fin("private-pkg", { ...on("m3"), providerJurisdiction: null, capitalSource: "private" }),
+    part("part-of-private", "private-pkg", "20", on("m3")),
+    fin("eu-pkg", { ...on("m4"), providerJurisdiction: "eu" }),
+    part("part-of-eu", "eu-pkg", "20", on("m4")),
+    // A package folds a part only at the materials the package itself names.
+    fin("wide-pkg", on("m5", "m6")),
+    part("wide-part", "wide-pkg", "10", on("m5", "m7")),
+  ];
+  const grid = materialInterplay(site.lastUpdated, rows, []);
+  const at = (m: string, j: "us" | "eu") => grid.get(m)?.get(j)?.capitalIds ?? [];
+  assert.deepEqual(at("m1", "us"), ["pkg"], "a part folds into its package; an ended part is not capital at all");
+  assert.deepEqual(at("m2", "us"), ["standing-part"], "an ended package hides nothing and is not counted");
+  assert.deepEqual(at("m3", "us"), ["part-of-private"]);
+  assert.deepEqual(at("m4", "us"), ["part-of-eu"]);
+  assert.deepEqual(at("m4", "eu"), ["eu-pkg"]);
+  assert.deepEqual(at("m5", "us"), ["wide-pkg"], "package and part cover the same cell: counted once");
+  assert.deepEqual(at("m6", "us"), ["wide-pkg"]);
+  assert.deepEqual(at("m7", "us"), ["wide-part"], "the part is at a material its package does not name");
+
+  // Against the corpus: no cell holds an ended row, and a part is in a cell only when no counted package of the same
+  // provider that names the same material is in it; every other counted row is present.
+  const all = getAllFinancialCommitments();
+  const byId = new Map(all.map((c) => [c.id, c]));
+  const expected = (mat: string, j: string) =>
+    all
+      .filter((c) => !isEnded(c) && c.providerJurisdiction === j && c.materialIds.includes(mat))
+      .filter((c) => !c.relationships.some((r) => {
+        const p = byId.get(r.commitmentId);
+        return r.relationship === "part_of" && p && !isEnded(p) && p.providerJurisdiction === j && p.materialIds.includes(mat);
+      }))
+      .map((c) => c.id);
+  const real = materialInterplay(site.lastUpdated);
+  for (const [mat, row] of real)
+    for (const [j, cell] of row) {
+      assert.deepEqual([...cell.capitalIds].sort(), expected(mat, j).sort(), `${mat} / ${j}`);
       assert.ok(cell.controlsInForce <= cell.controlIds.length);
     }
+});
+
+test("a material's ledger folds a part only into a package it lists in the same state", () => {
+  const withdrawn = [{ status: "announced" as const, date: "2025-01-01", sourceId: "s" }, { status: "withdrawn" as const, date: "2025-02-01", sourceId: "s" }];
+  const m = (...materialIds: string[]) => ({ materialIds });
+  const rows = [
+    fin("pkg", m("a")),
+    part("pkg-part", "pkg", "1", m("a")),
+    part("pkg-part-elsewhere", "pkg", "1", m("a", "b")),
+    part("pkg-part-ended", "pkg", "1", { ...m("a"), financialStatusHistory: withdrawn }),
+    fin("ended-pkg", { ...m("a"), financialStatusHistory: withdrawn }),
+    part("ended-pkg-standing", "ended-pkg", "1", m("a")),
+    part("ended-pkg-ended", "ended-pkg", "1", { ...m("a"), financialStatusHistory: withdrawn }),
+  ];
+  assert.deepEqual(
+    materialLedgerRows("a", rows).map((c) => c.id),
+    ["pkg", "pkg-part-ended", "ended-pkg", "ended-pkg-standing"],
+  );
+  assert.deepEqual(materialLedgerRows("b", rows).map((c) => c.id), ["pkg-part-elsewhere"], "the package does not name this material");
 });
 
 test("summaries resolve their events and carry only serializable values", () => {

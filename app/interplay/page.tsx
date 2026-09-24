@@ -12,8 +12,10 @@ import {
   controlIssuer,
   controlStatusOn,
   currentControlEntry,
+  isEnded,
+  materialLedgerRows,
 } from "@/lib/capital-control";
-import { getAllControlMeasures, getAllFinancialCommitments, getAllMaterials } from "@/lib/data";
+import { getAllControlMeasures, getAllMaterials } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 import { controlMeasureTypeLabels, financialInstrumentLabels, valueRoleLabels } from "@/lib/labels";
 import { site } from "@/lib/site";
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
  */
 function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string }) {
   const controls = getAllControlMeasures().filter((m) => m.materialIds.includes(materialId));
-  const money = getAllFinancialCommitments().filter((c) => c.materialIds.includes(materialId) && !c.relationships.some((r) => r.relationship === "part_of"));
+  const money = materialLedgerRows(materialId);
   const firstDate = (h: { date: string | null }[]) => h.find((e) => e.date)?.date ?? null;
   const items = [
     ...controls.map((m) => ({ kind: "control" as const, date: firstDate(m.statusHistory), m })),
@@ -62,6 +64,7 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
                 <span className="text-faint"> · {valueRoleLabels[it.c.valueRole].toLowerCase()}</span>
               ) : null}
               <span className="text-muted"> · {it.c.recipient ?? it.c.provider}</span>
+              {isEnded(it.c) ? <span className="text-faint"> · ended</span> : null}
             </Link>
             <InlineAmount amount={it.c.amount} />
           </li>
@@ -100,7 +103,7 @@ export default function InterplayPage() {
           <StageResponseMap asOf={asOf} />
         </Section>
 
-        <Section index="04" title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. Parts of packages are folded into their package.">
+        <Section index="04" title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. A part is folded into its package only when that package is listed here in the same state; a row that withdrew or lapsed is marked ended and never hides a part that still stands.">
           <div className="grid gap-4 lg:grid-cols-2">
             {materials.map((m) => (
               <Card key={m.id} className="p-5">

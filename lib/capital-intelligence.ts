@@ -13,11 +13,13 @@
 import {
   LISTED_NOT_SUMMED_ROLES,
   PUBLIC_CAPITAL_SOURCES,
+  byIdOf,
   childLinks,
   controlIssuer,
   controlStatusOn,
   currentFinancialStatus,
   isEnded,
+  isFoldedPart,
   legalStanding,
   totalCommitments,
   type CommitmentTotals,
@@ -604,23 +606,6 @@ export function actorsWithDesignations(): JurisdictionCode[] {
   return (["eu", "us", "japan", "australia", "canada", "uk", "india", "china", "other"] as const).filter((j) => present.has(j));
 }
 
-// --- Folding a part into its package ---------------------------------------------------------
-
-/**
- * A part of a package is folded into it, so one deal counts once, but only into a package that is itself
- * counted in the same view and under the same actor. A package the view does not count (an envelope in a view
- * of commitments, an ended package, another provider's) never hides a part that the view does count.
- */
-function isFoldedPart(c: FinancialCommitment, byId: ReadonlyMap<string, FinancialCommitment>, countsHere: (p: FinancialCommitment) => boolean): boolean {
-  return c.relationships.some((r) => {
-    if (r.relationship !== "part_of") return false;
-    const p = byId.get(r.commitmentId);
-    return !!p && p.providerJurisdiction === c.providerJurisdiction && countsHere(p);
-  });
-}
-
-const byIdOf = (all: readonly FinancialCommitment[]) => new Map(all.map((c) => [c.id, c]));
-
 // --- Flows: from a government to where its money is aimed -----------------------------------
 
 export type FlowCell = { actor: JurisdictionCode; destination: string; rowIds: string[] };
@@ -628,7 +613,9 @@ export type FlowCell = { actor: JurisdictionCode; destination: string; rowIds: s
 /**
  * Committed rows from each tracked government to each destination country,
  * or "not_stated". Counts records: a package counts once, with its parts
- * folded in, and a row aimed at two countries appears under both. A row that
+ * folded in (the whole part, not destination by destination: a package whose
+ * parts do not all state a country stays "not_stated" and keeps its parts),
+ * and a row aimed at two countries appears under both. A row that
  * withdrew or lapsed is not a flow, and an ended package does not hide the
  * parts that are still standing. Funding options are not commitments and are
  * never a flow; an exercise is its own commitment and is one.
@@ -683,6 +670,8 @@ export type ResponseCell = {
  * the clause restricts that stage. Capital is commitments that have not ended;
  * funding options and ended rows are kept apart, so an unexercised option never
  * reads as money aimed at a stage and ended money never reads as still backing it.
+ * A part is folded into its package only in a cell where the package is in the same field and covers that
+ * material and stage, so a package never hides a part of it at a cell it does not cover.
  */
 export function stageResponseMap(asOf: string, all: readonly FinancialCommitment[] = getAllFinancialCommitments(), controls: readonly ControlMeasure[] = getAllControlMeasures()) {
   const out = new Map<string, Map<SupplyChainStage, ResponseCell>>();
@@ -705,15 +694,18 @@ export function stageResponseMap(asOf: string, all: readonly FinancialCommitment
     return row.get(stage)!;
   };
   const byId = byIdOf(all);
-  // Ended rows are listed here too, so a part folds only into a package that is placed as capital or an option.
+  // Ended rows are listed here too. Each cell has three fields (capital, option, ended), and a part folds into
+  // its package only when that package sits in the same field of the same cell: it is placed, is the same
+  // kind of row (capital, option or ended), and covers this material and stage.
   const isPlaced = (c: FinancialCommitment) => !!c.providerJurisdiction && ["commitment", "funding_option"].includes(c.valueRole);
-  const isStanding = (c: FinancialCommitment) => isPlaced(c) && !isEnded(c);
+  const fieldOf = (c: FinancialCommitment) => (isEnded(c) ? "ended" : c.valueRole === "funding_option" ? "option" : "capital");
+  const covers = (p: FinancialCommitment, mat: string, stage: SupplyChainStage) => p.materialIds.includes(mat) && p.stages.includes(stage);
   for (const c of all) {
     if (!isPlaced(c)) continue;
-    if (isFoldedPart(c, byId, isStanding)) continue;
     const actor = c.providerJurisdiction!;
     for (const mat of c.materialIds)
       for (const stage of new Set(c.stages)) {
+        if (isFoldedPart(c, byId, (p) => isPlaced(p) && fieldOf(p) === fieldOf(c) && covers(p, mat, stage))) continue;
         const x = cell(mat, stage);
         if (isEnded(c)) x.endedIds.push(c.id);
         else if (c.valueRole === "funding_option") {

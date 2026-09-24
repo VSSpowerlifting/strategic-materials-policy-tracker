@@ -519,12 +519,38 @@ export function controlClocks(asOf: string) {
 export type InterplayCell = { capitalIds: string[]; controlIds: string[]; controlsInForce: number };
 
 /**
+ * A part of a package is folded into it, so one deal counts once, but only into a package that the cell being
+ * built also counts. `countsHere` says whether a given package is in that cell: a view that does not count the
+ * package (an envelope in a view of commitments, an ended package, another provider's, one that does not cover
+ * this material, stage or destination) never hides a part that the cell does count.
+ */
+export function isFoldedPart(
+  c: FinancialCommitment,
+  byId: ReadonlyMap<string, FinancialCommitment>,
+  countsHere: (p: FinancialCommitment) => boolean,
+): boolean {
+  return c.relationships.some((r) => {
+    if (r.relationship !== "part_of") return false;
+    const p = byId.get(r.commitmentId);
+    return !!p && p.providerJurisdiction === c.providerJurisdiction && countsHere(p);
+  });
+}
+
+export const byIdOf = (all: readonly FinancialCommitment[]) => new Map(all.map((c) => [c.id, c]));
+
+/**
  * For each tracked material and actor: the financial rows that actor provides
  * (a package counted once, its parts folded in) and the control clauses it
  * issues naming the material. Counts of records, never of money, so no
- * currency or value role is mixed.
+ * currency or value role is mixed. A part is folded only into a package that
+ * this matrix counts in the same cell: not an ended package, a private or
+ * another provider's package, or a package that does not name the material.
  */
-export function materialInterplay(asOf: string): Map<string, Map<JurisdictionCode, InterplayCell>> {
+export function materialInterplay(
+  asOf: string,
+  all: readonly FinancialCommitment[] = getAllFinancialCommitments(),
+  controls: readonly ControlMeasure[] = getAllControlMeasures(),
+): Map<string, Map<JurisdictionCode, InterplayCell>> {
   const out = new Map<string, Map<JurisdictionCode, InterplayCell>>();
   const cell = (mat: string, j: JurisdictionCode) => {
     if (!out.has(mat)) out.set(mat, new Map());
@@ -532,22 +558,32 @@ export function materialInterplay(asOf: string): Map<string, Map<JurisdictionCod
     if (!row.has(j)) row.set(j, { capitalIds: [], controlIds: [], controlsInForce: 0 });
     return row.get(j)!;
   };
-  // A part of a package is folded into the package, so one deal counts once, but only into a package
-  // that is itself counted here. An ended row is not capital aimed at a material and is left out.
-  // A part folds only into a package this matrix counts under the same actor: a private row, another
-  // provider's row or an ended row does not hide it.
-  const live = getAllFinancialCommitments().filter((c) => !isEnded(c) && commitmentActor(c));
-  const liveById = new Map(live.map((c) => [c.id, c]));
-  for (const c of live)
-    if (!c.relationships.some((r) => r.relationship === "part_of" && liveById.get(r.commitmentId)?.providerJurisdiction === c.providerJurisdiction))
-      for (const mat of c.materialIds) cell(mat, commitmentActor(c)!).capitalIds.push(c.id);
-  for (const m of getAllControlMeasures())
+  const isCounted = (c: FinancialCommitment) => !isEnded(c) && !!commitmentActor(c);
+  const byId = byIdOf(all);
+  for (const c of all) {
+    if (!isCounted(c)) continue;
+    for (const mat of c.materialIds)
+      if (!isFoldedPart(c, byId, (p) => isCounted(p) && p.materialIds.includes(mat))) cell(mat, commitmentActor(c)!).capitalIds.push(c.id);
+  }
+  for (const m of controls)
     for (const mat of m.materialIds) {
       const x = cell(mat, controlIssuer(m));
       x.controlIds.push(m.id);
       if (controlStatusOn(m, asOf) === "in_force") x.controlsInForce++;
     }
   return out;
+}
+
+/**
+ * The financial rows a material's ledger lists: every row naming the material, with a part folded into its
+ * package only when that package is listed too (it names the material, and is ended or not as the part is), so
+ * an ended row is listed as ended and neither an ended package nor another material's package hides a part.
+ */
+export function materialLedgerRows(materialId: string, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): FinancialCommitment[] {
+  const byId = byIdOf(all);
+  return all.filter(
+    (c) => c.materialIds.includes(materialId) && !isFoldedPart(c, byId, (p) => p.materialIds.includes(materialId) && isEnded(p) === isEnded(c)),
+  );
 }
 
 /** Events that carry at least one Capital & Control row, newest first. */
