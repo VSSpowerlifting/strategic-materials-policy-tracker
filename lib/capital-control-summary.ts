@@ -41,15 +41,26 @@ export function buildCapitalControlSummary() {
       "A row is not added when a row it is part of or drawn from is counted in the same total.",
       "If two counted rows in one currency share a descendant, that currency's total is withheld: status \"withheld\", sums null, and the overlapping rows named.",
       "Private financing, recipient funds, expected co-investment and total project cost are never public support; mixed vehicles are reported apart.",
-      "Sums are kept apart by qualifier: exact, approximately, at least, up to.",
-      "Binding money (contracted, partially disbursed, disbursed) is summed apart from money not yet binding (announced, authorized, allocated, decided).",
+      "A non-binding letter of intent or interest that names an amount is an indication (valueRole \"indication\"), not a commitment: it is listed apart, never summed, and never counted as binding, not yet binding or capital.",
+      "Unlike instruments are never added: within each currency, each instrument (grant, loan, equity, loan guarantee, ...) has its own sums, and there is no sum across instruments.",
+      "Rows whose instrument is not specified (\"unspecified\": the sources name none the vocabulary covers) or that combine instruments without a split (\"mixed\") are listed with their own figures and never summed: summed is false and the sums are null.",
+      "Nesting is decided before the split by instrument: a part is left out when a row it belongs to is counted in the same currency, whatever the instruments.",
+      "Sums are kept apart by qualifier: exact, approximately, at least, up to. Within one currency and instrument, figures with the same qualifier are added: the up_to sum is a sum of stated upper bounds, not an amount paid or an exact commitment, and the at_least sum a sum of stated lower bounds. Envelopes, appropriations, lending authorities and unexercised funding options are not part of any sum.",
+      "Binding money (contracted, partially disbursed, disbursed) is summed apart from money not yet binding (announced, authorized, allocated, decided). Binding describes the agreement, not the money: a contracted row is an executed agreement and may leave the provider's obligation of funds and their payment to later steps.",
+      "A commitment whose current status is withdrawn or lapsed is left out of every sum and listed as ended.",
+      "A commitment with an amount whose current status is \"not_stated\" is neither binding nor not yet binding: it is left out of every sum and listed as status not stated, the same rule as an instrument the source does not name.",
+      "Only a row that is itself counted keeps its parts out of a sum: an ended, status-not-stated or amountless package does not hide the parts that are still standing.",
+      "A commitment drawn from a funding option that has ended is not an exercise: it is listed under the option as an ended draw, and only a draw that has not ended reads as an exercise.",
     ],
     capital: {
       rows: all.length,
       publicCommitmentTotals: totals.currencies,
       publicCommitmentsWithoutAmount: totals.unquantifiedIds,
+      publicCommitmentsEnded: totals.endedIds,
+      publicCommitmentsStatusNotStated: totals.statusNotStatedIds,
       publicCapitalSources: PUBLIC_CAPITAL_SOURCES,
       envelopesListedNotSummed: listed([...LISTED_NOT_SUMMED_ROLES]),
+      indicationsListedNotSummed: listed(["indication"]),
       fundingOptionsListedNotSummed: all
         .filter((c) => c.valueRole === "funding_option")
         .map((c) => {
@@ -61,6 +72,7 @@ export function buildCapitalControlSummary() {
             amount: c.amount,
             agreementExecuted: s.executed ? { date: s.executed.date, sourceId: s.executed.sourceId } : null,
             exercisesRecorded: s.exercises.map((e) => e.id),
+            exercisesEnded: s.endedExercises.map((e) => e.id),
             disbursementsRecorded: s.disbursements.map((e) => e.id),
           };
         }),

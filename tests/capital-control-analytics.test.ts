@@ -11,7 +11,10 @@ import {
   descendantIds,
   formatDecimalCompact,
   instrumentChronology,
+  isEnded,
   materialInterplay,
+  materialLedgerRows,
+  legalStanding,
   optionState,
   publicCommitmentRows,
   shortInstrumentLabel,
@@ -20,6 +23,8 @@ import {
   totalCommitments,
 } from "@/lib/capital-control";
 import { buildCapitalControlSummary } from "@/lib/capital-control-summary";
+import { buildCapitalIntelligenceSummary } from "@/lib/capital-intelligence-summary";
+import { layerGlosses } from "@/lib/labels";
 import {
   buildDataset,
   controlMeasuresCsv,
@@ -32,11 +37,13 @@ import {
   getAllEvents,
   getAllFinancialCommitments,
   getEventById,
+  getFinancialCommitmentById,
   getSourceById,
 } from "@/lib/data";
 import { site } from "@/lib/site";
-import { CONTROL_MEASURE_TYPES } from "@/lib/types";
+import { CONTROL_MEASURE_TYPES, FINANCIAL_STATUSES } from "@/lib/types";
 import type { ControlMeasure, FinancialCommitment } from "@/lib/types";
+import type { CurrencyTotal, InstrumentSum } from "@/lib/capital-control";
 
 // --- Fixtures -----------------------------------------------------------------
 
@@ -51,9 +58,13 @@ function fin(id: string, over: Partial<FinancialCommitment> = {}): FinancialComm
     amount: { value: "100", currency: "USD", qualifier: "exact", amountAsStated: "$100", currencyBasis: "issuer_context" },
     provider: null,
     providerJurisdiction: "us",
+    providerOrgIds: [],
     legalAuthority: null,
+    programmeId: null,
     recipient: null,
+    recipientOrgIds: [],
     project: null,
+    projectId: null,
     facility: null,
     locations: [],
     stages: [],
@@ -105,6 +116,52 @@ test("compact formatting never rounds a digit away", () => {
 
 // --- Counting rules on fixtures -------------------------------------------------------
 
+/** The single instrument of a fixture currency total; fails if unlike instruments were combined or the total was withheld. */
+function sole(cur: CurrencyTotal): InstrumentSum {
+  if (cur.status !== "summed") assert.fail(`${cur.currency} total withheld`);
+  assert.equal(cur.instruments.length, 1, `${cur.currency} holds ${cur.instruments.length} instruments`);
+  return cur.instruments[0];
+}
+
+test("unlike instruments are never added: each has its own sums within a currency", () => {
+  const all = [
+    fin("grant"),
+    fin("loan", { instrument: "loan", amount: { value: "50", currency: "USD", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } }),
+    fin("guarantee", { instrument: "loan_guarantee", amount: { value: "1300", currency: "USD", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } }),
+  ];
+  const t = totalCommitments(all, all);
+  const usd = t.currencies[0];
+  assert.equal(usd.status, "summed");
+  if (usd.status !== "summed") return;
+  assert.deepEqual(
+    usd.instruments.map((i) => [i.instrument, i.byQualifier]),
+    [
+      ["grant", { exact: "100" }],
+      ["loan", { exact: "50" }],
+      ["loan_guarantee", { exact: "1300" }],
+    ],
+  );
+  // No figure anywhere in the total adds two instruments together.
+  const json = JSON.stringify(usd);
+  for (const cross of ["150", "1400", "1350", "1450"]) assert.ok(!json.includes(`"${cross}"`), `a cross-instrument sum ${cross} leaked`);
+});
+
+test("a mixed package is listed under its own instrument and its parts are not counted again under theirs", () => {
+  const all = [
+    fin("pkg", { instrument: "mixed", amount: { value: "71", currency: "GBP", qualifier: "up_to", amountAsStated: "", currencyBasis: "stated" } }),
+    part("eq", "pkg", "36", { instrument: "equity", amount: { value: "36", currency: "GBP", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } }),
+    part("ln", "pkg", "35", { instrument: "loan", amount: { value: "35", currency: "GBP", qualifier: "up_to", amountAsStated: "", currencyBasis: "stated" } }),
+  ];
+  const t = totalCommitments(all, all);
+  const i = sole(t.currencies[0]);
+  assert.equal(i.instrument, "mixed");
+  assert.deepEqual(i.countedIds, ["pkg"]);
+  // A package that combines instruments is listed with its own figure, never summed.
+  assert.equal(i.summed, false);
+  assert.equal(i.byQualifier, null);
+  assert.deepEqual(t.currencies[0].nestedIds.sort(), ["eq", "ln"]);
+});
+
 test("a part is never added to the package it belongs to", () => {
   const all = [fin("pkg", { amount: { value: "71", currency: "GBP", qualifier: "up_to", amountAsStated: "", currencyBasis: "stated" } }),
     part("eq", "pkg", "36", { amount: { value: "36", currency: "GBP", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } }),
@@ -113,7 +170,7 @@ test("a part is never added to the package it belongs to", () => {
   assert.equal(t.currencies.length, 1);
   assert.deepEqual(t.currencies[0].countedIds, ["pkg"]);
   assert.deepEqual(t.currencies[0].nestedIds.sort(), ["eq", "loan"]);
-  assert.deepEqual(t.currencies[0].byQualifier, { up_to: "71" });
+  assert.deepEqual(sole(t.currencies[0]).byQualifier, { up_to: "71" });
 });
 
 test("parts are counted when their package is outside the scope", () => {
@@ -122,7 +179,7 @@ test("parts are counted when their package is outside the scope", () => {
   const b = part("b", "pkg", "60");
   const all = [pkg, a, b];
   const t = totalCommitments([a, b], all);
-  assert.deepEqual(t.currencies[0].byQualifier, { exact: "100" });
+  assert.deepEqual(sole(t.currencies[0]).byQualifier, { exact: "100" });
 });
 
 test("currencies are never added together, and qualifiers are kept apart", () => {
@@ -133,7 +190,7 @@ test("currencies are never added together, and qualifiers are kept apart", () =>
   ];
   const t = totalCommitments(all, all);
   assert.deepEqual(t.currencies.map((c) => c.currency), ["CAD", "USD"]);
-  assert.deepEqual(t.currencies[1].byQualifier, { exact: "100", up_to: "50" });
+  assert.deepEqual(sole(t.currencies[1]).byQualifier, { exact: "100", up_to: "50" });
 });
 
 test("unlike value roles are refused, not added", () => {
@@ -157,9 +214,7 @@ test("two counted rows sharing a descendant withhold the total", () => {
   assert.equal(cur.status, "withheld");
   assert.deepEqual(cur.overlap, { a: "x", b: "y", shared: "award" });
   // No sum of any kind: null, not zero, not partial.
-  assert.equal(cur.byQualifier, null);
-  assert.equal(cur.binding, null);
-  assert.equal(cur.notYetBinding, null);
+  assert.equal(cur.instruments, null);
   assert.deepEqual(cur.countedIds, ["x", "y"]);
 });
 
@@ -181,7 +236,7 @@ test("a withheld currency serializes with no figure a consumer could read as a t
   for (const figure of ["123", "456", "579"]) assert.ok(!json.includes(figure), `withheld EUR entry leaks ${figure}`);
   // One unsafe currency does not withhold another.
   assert.equal(usd.status, "summed");
-  assert.deepEqual(usd.status === "summed" && usd.byQualifier, { exact: "7" });
+  assert.deepEqual(sole(usd).byQualifier, { exact: "7" });
 });
 
 test("rows without an amount are reported, not valued", () => {
@@ -275,6 +330,17 @@ test("the Announcement No. 61 clauses are suspended until 10 November 2026 on th
   }
 });
 
+test("the Announcement No. 62 clauses state the two laws its preamble cites, not the four of the joint Nos. 56-58", () => {
+  // No. 62 is MOFCOM's alone: its preamble names the Export Control Law and the Dual-use Items Export Control
+  // Regulations, and nothing else. The Foreign Trade Law and the Customs Law belong to Nos. 18, 56, 57 and 58.
+  const rows = getAllControlMeasures().filter((m) => m.eventId === "evt-cn-mofcom-62-2025");
+  assert.ok(rows.length >= 4);
+  const two = "《中华人民共和国出口管制法》《中华人民共和国两用物项出口管制条例》";
+  for (const m of rows) assert.ok(!/对外贸易法|海关法/.test(m.legalBasisAsStated ?? ""), m.id);
+  for (const id of ["ctl-cn-62-2025-technology-licensing", "ctl-cn-62-2025-production-line-technology-licensing", "ctl-cn-62-2025-overseas-support-ban"])
+    assert.equal(rows.find((m) => m.id === id)?.legalBasisAsStated, two, id);
+});
+
 // --- Derived views ------------------------------------------------------------------------------
 
 test("the chronology is dated, ordered and complete for dated entries of government rows", () => {
@@ -288,14 +354,74 @@ test("the chronology is dated, ordered and complete for dated entries of governm
   assert.ok(marks.every((m, i) => i === 0 || marks[i - 1].date <= m.date));
 });
 
-test("the material matrix counts records only, and folds package parts into the package", () => {
-  const grid = materialInterplay(site.lastUpdated);
-  const partIds = new Set(getAllFinancialCommitments().filter((c) => c.relationships.some((r) => r.relationship === "part_of")).map((c) => c.id));
-  for (const row of grid.values())
-    for (const cell of row.values()) {
-      assert.ok(cell.capitalIds.every((id) => !partIds.has(id)));
+test("the material matrix folds a part into a package it counts in the same cell, and shows every other part", () => {
+  const withdrawn = [{ status: "announced" as const, date: "2025-01-01", sourceId: "s" }, { status: "withdrawn" as const, date: "2025-02-01", sourceId: "s" }];
+  const on = (...materialIds: string[]) => ({ materialIds });
+  const rows = [
+    // A standing package with parts: the parts fold in where the package names the material.
+    fin("pkg", on("m1")),
+    part("pkg-part", "pkg", "40", on("m1")),
+    part("pkg-part-ended", "pkg", "5", { ...on("m1"), financialStatusHistory: withdrawn }),
+    // An ended package does not hide the part that still stands.
+    fin("ended-pkg", { ...on("m2"), financialStatusHistory: withdrawn }),
+    part("standing-part", "ended-pkg", "30", on("m2")),
+    // A package outside the matrix (private, no government behind it) or under another provider does not hide it either.
+    fin("private-pkg", { ...on("m3"), providerJurisdiction: null, capitalSource: "private" }),
+    part("part-of-private", "private-pkg", "20", on("m3")),
+    fin("eu-pkg", { ...on("m4"), providerJurisdiction: "eu" }),
+    part("part-of-eu", "eu-pkg", "20", on("m4")),
+    // A package folds a part only at the materials the package itself names.
+    fin("wide-pkg", on("m5", "m6")),
+    part("wide-part", "wide-pkg", "10", on("m5", "m7")),
+  ];
+  const grid = materialInterplay(site.lastUpdated, rows, []);
+  const at = (m: string, j: "us" | "eu") => grid.get(m)?.get(j)?.capitalIds ?? [];
+  assert.deepEqual(at("m1", "us"), ["pkg"], "a part folds into its package; an ended part is not capital at all");
+  assert.deepEqual(at("m2", "us"), ["standing-part"], "an ended package hides nothing and is not counted");
+  assert.deepEqual(at("m3", "us"), ["part-of-private"]);
+  assert.deepEqual(at("m4", "us"), ["part-of-eu"]);
+  assert.deepEqual(at("m4", "eu"), ["eu-pkg"]);
+  assert.deepEqual(at("m5", "us"), ["wide-pkg"], "package and part cover the same cell: counted once");
+  assert.deepEqual(at("m6", "us"), ["wide-pkg"]);
+  assert.deepEqual(at("m7", "us"), ["wide-part"], "the part is at a material its package does not name");
+
+  // Against the corpus: no cell holds an ended row, and a part is in a cell only when no counted package of the same
+  // provider that names the same material is in it; every other counted row is present.
+  const all = getAllFinancialCommitments();
+  const byId = new Map(all.map((c) => [c.id, c]));
+  const expected = (mat: string, j: string) =>
+    all
+      .filter((c) => !isEnded(c) && c.providerJurisdiction === j && c.materialIds.includes(mat))
+      .filter((c) => !c.relationships.some((r) => {
+        const p = byId.get(r.commitmentId);
+        return r.relationship === "part_of" && p && !isEnded(p) && p.providerJurisdiction === j && p.materialIds.includes(mat);
+      }))
+      .map((c) => c.id);
+  const real = materialInterplay(site.lastUpdated);
+  for (const [mat, row] of real)
+    for (const [j, cell] of row) {
+      assert.deepEqual([...cell.capitalIds].sort(), expected(mat, j).sort(), `${mat} / ${j}`);
       assert.ok(cell.controlsInForce <= cell.controlIds.length);
     }
+});
+
+test("a material's ledger folds a part only into a package it lists in the same state", () => {
+  const withdrawn = [{ status: "announced" as const, date: "2025-01-01", sourceId: "s" }, { status: "withdrawn" as const, date: "2025-02-01", sourceId: "s" }];
+  const m = (...materialIds: string[]) => ({ materialIds });
+  const rows = [
+    fin("pkg", m("a")),
+    part("pkg-part", "pkg", "1", m("a")),
+    part("pkg-part-elsewhere", "pkg", "1", m("a", "b")),
+    part("pkg-part-ended", "pkg", "1", { ...m("a"), financialStatusHistory: withdrawn }),
+    fin("ended-pkg", { ...m("a"), financialStatusHistory: withdrawn }),
+    part("ended-pkg-standing", "ended-pkg", "1", m("a")),
+    part("ended-pkg-ended", "ended-pkg", "1", { ...m("a"), financialStatusHistory: withdrawn }),
+  ];
+  assert.deepEqual(
+    materialLedgerRows("a", rows).map((c) => c.id),
+    ["pkg", "pkg-part-ended", "ended-pkg", "ended-pkg-standing"],
+  );
+  assert.deepEqual(materialLedgerRows("b", rows).map((c) => c.id), ["pkg-part-elsewhere"], "the package does not name this material");
 });
 
 test("summaries resolve their events and carry only serializable values", () => {
@@ -372,29 +498,40 @@ test("no private, not-stated or provider-less row is credited to a government", 
       for (const id of cell.capitalIds) assert.equal(getAllFinancialCommitments().find((c) => c.id === id)!.providerJurisdiction, j, id);
 });
 
-test("binding and not-yet-binding sums partition each currency total exactly", () => {
+test("binding and not-yet-binding sums partition each instrument's total exactly", () => {
   const t = totalCommitments(publicCommitmentRows());
   for (const cur of t.currencies) {
     if (cur.status !== "summed") assert.fail(`${cur.currency} total withheld`);
-    for (const q of ["exact", "approximately", "at_least", "up_to"] as const)
-      assert.equal(
-        addDecimals([cur.binding[q] ?? "0", cur.notYetBinding[q] ?? "0"]),
-        cur.byQualifier[q] ?? "0",
-        `${cur.currency} ${q}`,
-      );
+    for (const i of cur.instruments) {
+      if (!i.summed) {
+        // Listed, never summed: no figure at all, not a zero.
+        assert.deepEqual([i.byQualifier, i.binding, i.notYetBinding], [null, null, null], `${cur.currency} ${i.instrument}`);
+        continue;
+      }
+      for (const q of ["exact", "approximately", "at_least", "up_to"] as const)
+        assert.equal(
+          addDecimals([i.binding[q] ?? "0", i.notYetBinding[q] ?? "0"]),
+          i.byQualifier[q] ?? "0",
+          `${cur.currency} ${i.instrument} ${q}`,
+        );
+    }
+    // Every counted row sits under exactly one instrument, its own.
+    assert.deepEqual(cur.instruments.flatMap((i) => i.countedIds).sort(), [...cur.countedIds].sort(), cur.currency);
   }
 });
 
-test("a conditional loan commitment and a non-binding letter of intent are never counted as binding", () => {
+test("a conditional loan commitment is never counted as binding, and a non-binding letter of intent is not a commitment at all", () => {
   const t = totalCommitments(publicCommitmentRows());
   const usd = t.currencies.find((c) => c.currency === "USD")!;
-  const ids = ["fin-us-osc-vulcan-reelement-2025-joint-commitment", "fin-us-commerce-chips-vulcan-2025-incentives"];
-  for (const id of ids) {
-    const c = getAllFinancialCommitments().find((x) => x.id === id)!;
-    assert.ok(!["contracted", "partially_disbursed", "disbursed"].includes(c.financialStatusHistory.at(-1)!.status), id);
-  }
+  const conditional = getAllFinancialCommitments().find((x) => x.id === "fin-us-osc-vulcan-reelement-2025-joint-commitment")!;
+  assert.ok(!["contracted", "partially_disbursed", "disbursed"].includes(conditional.financialStatusHistory.at(-1)!.status));
   assert.equal(usd.status, "summed");
-  assert.ok(usd.status === "summed" && usd.notYetBinding.exact, "USD has not-yet-binding money");
+  assert.ok(usd.status === "summed" && usd.instruments.some((i) => i.summed && i.notYetBinding.exact), "USD has not-yet-binding money");
+  // The CHIPS letter of intent is an indication: in no total, binding or not yet binding.
+  const letter = getAllFinancialCommitments().find((x) => x.id === "fin-us-commerce-chips-vulcan-2025-incentives")!;
+  assert.equal(letter.valueRole, "indication");
+  assert.ok(!publicCommitmentRows().some((c) => c.id === letter.id));
+  assert.ok(usd.status === "summed" && !usd.instruments.some((i) => i.countedIds.includes(letter.id)));
 });
 
 // --- Funding options ---------------------------------------------------------------
@@ -411,8 +548,8 @@ test("the DoD–MP USD 350M option is a funding option, listed and never summed"
   const t = totalCommitments(publicCommitmentRows(all), all);
   const usd = t.currencies.find((x) => x.currency === "USD")!;
   assert.ok(!usd.countedIds.includes(OPTION) && !usd.nestedIds.includes(OPTION));
-  // The only USD "up to" figure among public commitments was the option; none remains binding.
-  assert.ok(usd.status === "summed" && !usd.binding.up_to, "an option leaked into binding USD money");
+  // The option is in no instrument's sums, binding or not.
+  assert.ok(usd.status === "summed" && usd.instruments.every((i) => !i.countedIds.includes(OPTION)), "an option leaked into USD money");
 });
 
 test("an executed option records no exercise or payment the corpus does not state", () => {
@@ -448,8 +585,9 @@ test("every financial row lands in exactly one bucket of the summary", () => {
   const all = getAllFinancialCommitments();
   const t = totalCommitments(publicCommitmentRows(all), all);
   const buckets: [string, string[]][] = [
-    ["public commitments", [...t.currencies.flatMap((c) => [...c.countedIds, ...c.nestedIds]), ...t.unquantifiedIds]],
+    ["public commitments", [...t.currencies.flatMap((c) => [...c.countedIds, ...c.nestedIds]), ...t.unquantifiedIds, ...t.statusNotStatedIds, ...t.endedIds]],
     ["envelopes", s.capital.envelopesListedNotSummed.map((r) => r.id)],
+    ["indications", s.capital.indicationsListedNotSummed.map((r) => r.id)],
     ["options", s.capital.fundingOptionsListedNotSummed.map((r) => r.id)],
     ["kept apart", s.capital.keptApartFromPublicSupport.map((r) => r.id)],
   ];
@@ -477,4 +615,211 @@ test("a negotiation mandate is not a control measure: Proclamation 11001 stays a
   const concluded = inv.statusHistory.at(-1)!;
   assert.equal(concluded.status, "concluded");
   assert.equal(concluded.sourceId, "src-fedreg-proc-11001");
+});
+
+const usd = (value: string) => ({ value, currency: "USD", qualifier: "exact" as const, amountAsStated: value, currencyBasis: "stated" as const });
+const history = (...statuses: FinancialCommitment["financialStatusHistory"][number]["status"][]) =>
+  statuses.map((status, i) => ({ status, date: `2025-0${i + 1}-01`, sourceId: "s" }));
+
+test("an ended or otherwise ineligible package never suppresses a part that still stands", () => {
+  // An ended package: its parts are the money that still stands, each counted once.
+  const ended = fin("pkg", { amount: usd("300"), financialStatusHistory: history("announced", "withdrawn") });
+  const a = part("a", "pkg", "100");
+  const b = part("b", "pkg", "200");
+  let all = [ended, a, b];
+  let t = totalCommitments(all, all);
+  assert.deepEqual(t.endedIds, ["pkg"]);
+  const cur = t.currencies[0];
+  assert.deepEqual([cur.countedIds, cur.nestedIds], [["a", "b"], []]);
+  assert.deepEqual(sole(cur).byQualifier, { exact: "300" });
+
+  // A package whose status is not stated is not counted, so it does not hide its parts either.
+  const unknown = fin("pkg", { amount: usd("300"), financialStatusHistory: history("not_stated") });
+  all = [unknown, a, b];
+  t = totalCommitments(all, all);
+  assert.deepEqual(t.statusNotStatedIds, ["pkg"]);
+  assert.deepEqual(t.currencies[0].countedIds, ["a", "b"]);
+
+  // A package with no amount is listed, not valued, and hides nothing.
+  const amountless = fin("pkg", { amount: null });
+  all = [amountless, a, b];
+  t = totalCommitments(all, all);
+  assert.deepEqual(t.unquantifiedIds, ["pkg"]);
+  assert.deepEqual(t.currencies[0].countedIds, ["a", "b"]);
+
+  // A package that is itself counted still keeps its parts out, unchanged.
+  const live = fin("pkg", { amount: usd("300") });
+  all = [live, a, b];
+  t = totalCommitments(all, all);
+  assert.deepEqual([t.currencies[0].countedIds, t.currencies[0].nestedIds], [["pkg"], ["a", "b"]]);
+  assert.deepEqual(sole(t.currencies[0]).byQualifier, { exact: "300" });
+});
+
+test("an ineligible middle ancestor does not break the chain to an eligible grandparent", () => {
+  const grand = fin("grand", { amount: usd("500") });
+  const middle = part("middle", "grand", "300", { financialStatusHistory: history("announced", "lapsed") });
+  const child = part("child", "middle", "100");
+  const all = [grand, middle, child];
+  const t = totalCommitments(all, all);
+  const cur = t.currencies[0];
+  assert.deepEqual(t.endedIds, ["middle"]);
+  assert.deepEqual([cur.countedIds, cur.nestedIds], [["grand"], ["child"]], "the child is inside the grandparent's figure");
+  assert.deepEqual(sole(cur).byQualifier, { exact: "500" });
+});
+
+test("a status the source does not give is neither binding nor not yet binding, and is never summed", () => {
+  const bound = fin("bound", { amount: usd("100"), financialStatusHistory: history("contracted") });
+  const pending = fin("pending", { amount: usd("40"), financialStatusHistory: history("announced") });
+  const unknown = fin("unknown", { amount: usd("7"), financialStatusHistory: history("not_stated") });
+  const all = [bound, pending, unknown];
+  const t = totalCommitments(all, all);
+  assert.deepEqual(t.statusNotStatedIds, ["unknown"]);
+  const inst = sole(t.currencies[0]);
+  assert.deepEqual(t.currencies[0].countedIds, ["bound", "pending"]);
+  assert.deepEqual([inst.binding, inst.notYetBinding], [{ exact: "100" }, { exact: "40" }]);
+  // Nothing of the unknown row's 7 is in any sum.
+  assert.equal(JSON.stringify(t.currencies).includes('"7"'), false);
+  // On its own it yields no currency at all: there is nothing defensible to sum.
+  const alone = totalCommitments([unknown], [unknown]);
+  assert.deepEqual([alone.currencies, alone.statusNotStatedIds], [[], ["unknown"]]);
+  // legalStanding covers every status exactly once, and only the four terms.
+  const standings = FINANCIAL_STATUSES.map((status) => legalStanding(fin("x", { financialStatusHistory: history(status) })));
+  assert.deepEqual([...new Set(standings)].sort(), ["binding", "ended", "not_yet_binding", "status_not_stated"]);
+  assert.deepEqual(
+    FINANCIAL_STATUSES.filter((s) => legalStanding(fin("x", { financialStatusHistory: history(s) })) === "status_not_stated"),
+    ["not_stated"],
+  );
+  // No part of it reaches a binding sum through the back door: the corpus's own not-stated row is listed apart.
+  const corpus = totalCommitments(publicCommitmentRows(), getAllFinancialCommitments());
+  assert.ok(corpus.statusNotStatedIds.includes("fin-ca-g7-2025-nmg-canada-growth-fund"));
+  for (const cur of corpus.currencies) for (const i of cur.instruments ?? []) assert.ok(!i.countedIds.includes("fin-ca-g7-2025-nmg-canada-growth-fund"));
+});
+
+test("a draw from an option that has ended is not an exercise, and the summary lists it apart", () => {
+  const opt = fin("opt", { valueRole: "funding_option", amount: usd("350"), financialStatusHistory: history("contracted") });
+  const draw = (id: string, ...statuses: Parameters<typeof history>) =>
+    fin(id, { amount: usd("50"), relationships: [{ commitmentId: "opt", relationship: "drawn_from", sourceId: "s" }], financialStatusHistory: history(...statuses) });
+  const dead = draw("dead", "announced", "withdrawn");
+  let s = optionState(opt, [opt, dead]);
+  assert.deepEqual([s.exercises, s.disbursements].map((l) => l.map((e) => e.id)), [[], []], "a withdrawn draw is not an exercise");
+  assert.deepEqual(s.endedExercises.map((e) => e.id), ["dead"]);
+  const live = draw("live", "contracted", "partially_disbursed");
+  s = optionState(opt, [opt, dead, live]);
+  assert.deepEqual(s.exercises.map((e) => e.id), ["live"]);
+  assert.deepEqual(s.disbursements.map((e) => e.id), ["live"]);
+  assert.deepEqual(s.endedExercises.map((e) => e.id), ["dead"]);
+  // The corpus option has no recorded draw of either kind, and the summary says so in its own field.
+  const summary = buildCapitalControlSummary();
+  const corpusOption = summary.capital.fundingOptionsListedNotSummed.find((r) => r.id === OPTION)!;
+  assert.deepEqual([corpusOption.exercisesRecorded, corpusOption.exercisesEnded], [[], []]);
+  assert.ok(summary.countingRules.some((r) => r.includes("not_stated")));
+  assert.ok(summary.countingRules.some((r) => r.includes("ended draw")));
+  assert.ok(Array.isArray(summary.capital.publicCommitmentsStatusNotStated));
+});
+
+test("a withdrawn or lapsed commitment is listed as ended and never summed", () => {
+  const live = fin("fin-live", { amount: { value: "100", currency: "USD", qualifier: "exact", amountAsStated: "$100", currencyBasis: "stated" } });
+  const withdrawn = fin("fin-withdrawn", {
+    financialStatusHistory: [
+      { status: "announced", date: "2025-01-01", sourceId: "s" },
+      { status: "withdrawn", date: "2025-06-01", sourceId: "s" },
+    ],
+  });
+  const lapsed = fin("fin-lapsed", {
+    financialStatusHistory: [
+      { status: "decided", date: "2025-01-01", sourceId: "s" },
+      { status: "lapsed", date: "2025-08-26", sourceId: "s" },
+    ],
+  });
+  const all = [live, withdrawn, lapsed];
+  const t = totalCommitments(all, all);
+  assert.deepEqual(t.endedIds, ["fin-withdrawn", "fin-lapsed"]);
+  assert.equal(t.currencies.length, 1);
+  const usd = t.currencies[0];
+  assert.equal(usd.status, "summed");
+  assert.deepEqual(usd.countedIds, ["fin-live"]);
+  assert.deepEqual(sole(usd).byQualifier, { exact: "100" });
+});
+
+test("rows whose instrument is not stated are listed, never summed together", () => {
+  const all = [
+    fin("a", { instrument: "unspecified" }),
+    fin("b", { instrument: "unspecified", amount: { value: "50", currency: "USD", qualifier: "exact", amountAsStated: "", currencyBasis: "stated" } }),
+  ];
+  const t = totalCommitments(all, all);
+  const i = sole(t.currencies[0]);
+  assert.equal(i.instrument, "unspecified");
+  assert.equal(i.summed, false);
+  assert.deepEqual(i.countedIds, ["a", "b"]);
+  assert.ok(!JSON.stringify(t).includes('"150"'), "two unnamed instruments were added together");
+});
+
+test("USA Rare Earth's direct funding is instrument-not-stated on the package and all five parts, never a grant sum", () => {
+  const AGREEMENT = "src-usar-direct-funding-agreement-2026-06-03";
+  const pkg = getFinancialCommitmentById("fin-us-chips-usar-2026-direct-funding")!;
+  const parts = getAllFinancialCommitments().filter((c) => c.relationships.some((r) => r.commitmentId === pkg.id && r.relationship === "part_of"));
+  assert.equal(parts.length, 5);
+  // The executed agreement is a source of its own: the 8-K never says "other transaction" and never says "grant".
+  assert.match(getSourceById(AGREEMENT)?.url ?? "", /ea029340201ex10-1\.htm$/);
+  assert.ok(getEventById("evt-us-chips-usar-2026")!.sourceIds.includes(AGREEMENT), "the event page lists the agreement it cites");
+  for (const c of [pkg, ...parts]) {
+    assert.equal(c.instrument, "unspecified", c.id);
+    // One reading, one level: every entry that supports the instrument is ambiguous, and the package and its parts agree.
+    const instrument = c.evidence.filter((e) => e.supports.includes("instrument"));
+    assert.ok(instrument.length >= 2, c.id);
+    assert.ok(instrument.every((e) => e.evidence === "ambiguous"), c.id);
+    assert.ok(instrument.some((e) => e.sourceId === AGREEMENT), c.id);
+    // The instrument is no longer bundled into an explicit entry beside the amount.
+    assert.ok(c.evidence.filter((e) => e.evidence === "explicit").every((e) => !e.supports.includes("instrument")), c.id);
+  }
+  assert.equal(addDecimals(parts.map((c) => c.amount!.value)), pkg.amount!.value);
+  // The package is listed under "not specified" in USD, never summed; no grant total carries it, and its parts stay nested.
+  const usd = buildCapitalControlSummary().capital.publicCommitmentTotals.find((t) => t.currency === "USD")!;
+  if (usd.status !== "summed") assert.fail("the USD total is withheld");
+  const inst = (name: string) => usd.instruments.find((i) => i.instrument === name);
+  assert.ok(!inst("grant")?.countedIds.includes(pkg.id));
+  const unspecified = inst("unspecified")!;
+  assert.ok(unspecified.countedIds.includes(pkg.id));
+  assert.equal(unspecified.summed, false);
+  assert.equal(unspecified.byQualifier, null);
+  for (const c of parts) assert.ok(usd.nestedIds.includes(c.id) && !usd.countedIds.includes(c.id), c.id);
+});
+
+test("USA Rare Earth's contracted direct funding says where its status shows that signing obligated and paid nothing", async () => {
+  const AGREEMENT = "src-usar-direct-funding-agreement-2026-06-03";
+  const pkg = getFinancialCommitmentById("fin-us-chips-usar-2026-direct-funding")!;
+  const parts = getAllFinancialCommitments().filter((c) => c.relationships.some((r) => r.commitmentId === pkg.id && r.relationship === "part_of"));
+  assert.equal(parts.length, 5);
+  const { GET } = await import("@/app/api/v1/financial-commitments/[id]/route");
+  for (const c of [pkg, ...parts]) {
+    // The sourced status, its date and its source are untouched: the clarification is a note, not a different status.
+    const contracted = c.financialStatusHistory.filter((e) => e.status === "contracted");
+    assert.equal(contracted.length, 1, c.id);
+    assert.equal(c.financialStatusHistory.at(-1)!.status, "contracted", c.id);
+    assert.equal(contracted[0].date, "2026-06-03", c.id);
+    assert.equal(contracted[0].sourceId, "src-usar-8k-2026-06-03", c.id);
+    // The note under the status names the distinction and the clause; the API serves the same note with the status.
+    const note = contracted[0].note ?? "";
+    assert.match(note, /Signing obligates no funds/, c.id);
+    assert.match(note, /Section 2\.1\(b\)/, c.id);
+    assert.match(note, /Funding Obligation/, c.id);
+    const res = await GET(new Request(`http://localhost/api/v1/financial-commitments/${c.id}`), { params: Promise.resolve({ id: c.id }) });
+    const body = (await res.json()) as { commitment: { financialStatusHistory: { status: string; note: string | null }[] } };
+    assert.equal(body.commitment.financialStatusHistory.find((e) => e.status === "contracted")?.note, note, c.id);
+    // The clause is cited on the row itself, from the executed agreement, as explicit evidence for the status.
+    const clause = c.evidence.filter((e) => e.sourceId === AGREEMENT && e.supports.includes("status"));
+    assert.equal(clause.length, 1, c.id);
+    assert.deepEqual([clause[0].evidence, clause[0].locator], ["explicit", "Section 2.1(b)"], c.id);
+  }
+  // The amount, the qualifier and the totals are untouched by the clarification.
+  assert.deepEqual([pkg.amount!.value, pkg.amount!.qualifier], ["277000000", "up_to"]);
+  const usd = buildCapitalControlSummary().capital.publicCommitmentTotals.find((t) => t.currency === "USD")!;
+  if (usd.status !== "summed") assert.fail("the USD total is withheld");
+  const guarantee = usd.instruments.find((i) => i.instrument === "loan_guarantee")!;
+  assert.deepEqual([guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000" }, {}]);
+  assert.equal(usd.instruments.find((i) => i.instrument === "unspecified")!.summed, false);
+  // Where "contracted" and "binding" are defined, they say an executed agreement need not have obligated or paid funds.
+  assert.ok(buildCapitalControlSummary().countingRules.some((r) => /Binding describes the agreement, not the money/.test(r) && /obligation of funds/.test(r)));
+  assert.ok(buildCapitalIntelligenceSummary().countingRules.some((r) => /contracted row is an executed agreement/.test(r) && /obligated or paid/.test(r)));
+  assert.match(layerGlosses.public_commitment, /contracted row is an executed agreement.*obligated or paid/);
 });

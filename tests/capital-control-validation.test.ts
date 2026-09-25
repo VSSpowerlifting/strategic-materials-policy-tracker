@@ -21,6 +21,10 @@ import type {
   ControlMeasure,
   FinancialCommitment,
   FinancialEvidenceField,
+  Organization,
+  Programme,
+  Project,
+  ProjectDesignation,
 } from "@/lib/types";
 import {
   getAllEvents,
@@ -101,9 +105,13 @@ const BASE_COMMITMENT: FinancialCommitment = {
   },
   provider: "Example Agency",
   providerJurisdiction: "us",
+  providerOrgIds: ["org-alpha-agency"],
   legalAuthority: null,
+  programmeId: null,
   recipient: "Example Minerals Ltd",
+  recipientOrgIds: ["org-alpha-minerals"],
   project: null,
+  projectId: null,
   facility: null,
   locations: [],
   stages: ["separation"],
@@ -145,6 +153,8 @@ const BASE_CONTROL: ControlMeasure = {
   untrackedMaterialsAsStated: [],
   productScopeAsStated: "Example oxides and metals",
   productCodes: [{ system: "cn_customs", code: "1234567890", role: "reference" }],
+  controlledItemTypes: [],
+  controlledStages: [],
   legalBasisEventIds: [],
   legalBasisAsStated: null,
   modifiesMeasureIds: [],
@@ -192,7 +202,9 @@ const FULL_COMMITMENT = commitment({
   id: "fin-alpha-full",
   relationships: [{ commitmentId: "fin-alpha-grant", relationship: "part_of", sourceId: "src-one" }],
   legalAuthority: "Example Act, s. 3",
+  programmeId: "prg-alpha-fund",
   project: "Example demonstration plant",
+  projectId: "prj-alpha-plant",
   facility: "Example refinery",
   locations: [{ countryCode: "AU", subnational: "Western Australia", asStated: "Western Australia" }],
   implementationStatusHistory: [{ status: "construction", date: "2025-07-01", sourceId: "src-one" }],
@@ -208,7 +220,9 @@ const MINIMAL_COMMITMENT = commitment({
   amount: null,
   provider: null,
   providerJurisdiction: null,
+  providerOrgIds: [],
   recipient: null,
+  recipientOrgIds: [],
   stages: [],
   stageAllocation: "not_stated",
   materialIds: [],
@@ -224,8 +238,62 @@ const FULL_CONTROL = control({
   legalBasisAsStated: "Example Act, art. 12",
   modifiesMeasureIds: ["ctl-alpha-licensing"],
   modifiesExternalInstruments: ["Example Notice No. 1"],
+  controlledItemTypes: ["goods", "technology"],
+  controlledStages: ["separation"],
   evidence: [{ sourceId: "src-two", supports: [...CONTROL_EVIDENCE_FIELDS], evidence: "explicit" }],
 });
+
+// --- Registry fixtures (v0.6) ----------------------------------------------------
+
+const ORG_AGENCY: Organization = {
+  id: "org-alpha-agency",
+  name: "Example Agency",
+  nameOriginal: null,
+  aliases: [],
+  kind: "government",
+  countryCode: "US",
+  actor: "us",
+  parents: [],
+  evidence: [{ sourceId: "src-one", supports: ["name", "kind", "country", "actor"], evidence: "explicit" }],
+};
+
+const ORG_MINERALS: Organization = {
+  id: "org-alpha-minerals",
+  name: "Example Minerals Ltd",
+  nameOriginal: null,
+  aliases: [],
+  kind: "company",
+  countryCode: "AU",
+  actor: null,
+  parents: [],
+  evidence: [{ sourceId: "src-one", supports: ["name", "kind", "country"], evidence: "explicit" }],
+};
+
+const PROJECT: Project = {
+  id: "prj-alpha-plant",
+  name: "Example demonstration plant",
+  sponsorOrgIds: ["org-alpha-minerals"],
+  locations: [{ countryCode: "AU", subnational: "Western Australia", asStated: "Western Australia" }],
+  stages: ["separation"],
+  materialIds: ["mat-one", "mat-two"],
+  materialAttribution: "tracked_only",
+  untrackedMaterialsAsStated: [],
+  evidence: [{ sourceId: "src-one", supports: ["name", "sponsors", "location", "stages", "materials"], evidence: "explicit" }],
+};
+
+const PROGRAMME: Programme = {
+  id: "prg-alpha-fund",
+  name: "Example Fund",
+  nameOriginal: null,
+  actor: "us",
+  kind: "grant_programme",
+  administeringOrgIds: ["org-alpha-agency"],
+  parentProgrammeId: null,
+  legalAuthorityAsStated: null,
+  evidence: [{ sourceId: "src-one", supports: ["name", "kind", "administrators"], evidence: "explicit" }],
+};
+
+const REGISTRY = { organizations: [ORG_AGENCY, ORG_MINERALS], projects: [PROJECT], programmes: [PROGRAMME] };
 
 /** Only the fields that are never empty: measure type, direction and status. */
 const MINIMAL_CONTROL = control({
@@ -235,6 +303,8 @@ const MINIMAL_CONTROL = control({
   materialAttribution: "not_stated",
   productScopeAsStated: null,
   productCodes: [],
+  controlledItemTypes: [],
+  controlledStages: [],
   evidence: [{ sourceId: "src-two", supports: ["measure_type", "direction", "status"], evidence: "explicit" }],
 });
 
@@ -253,14 +323,35 @@ const linked = (id: string, relationships: ReturnType<typeof link>[], overrides:
     ...overrides,
   });
 
+type Registries = {
+  organizations?: unknown[];
+  projects?: unknown[];
+  programmes?: unknown[];
+  projectDesignations?: unknown[];
+};
+
+/**
+ * Runs the validator. Unless `registries` is given, the registry fixtures a
+ * test's rows mention by id are passed along, and no others, so a fixture
+ * never trips the unreferenced-record warning in a test about something else.
+ */
 function validate(
   commitments: unknown[] = [],
   controls: unknown[] = [],
-  options: { today?: string; corpus?: CapitalControlCorpus } = {},
+  options: { today?: string; corpus?: CapitalControlCorpus; registries?: Registries } = {},
 ) {
+  const text = JSON.stringify([commitments, controls]);
+  const mentioned = <T extends { id: string }>(list: T[]) => list.filter((r) => text.includes(`"${r.id}"`));
+  const auto: Registries = {
+    organizations: mentioned(REGISTRY.organizations),
+    projects: mentioned(REGISTRY.projects),
+    programmes: mentioned(REGISTRY.programmes),
+  };
+  const registries = options.registries ?? auto;
   return validateCapitalControl({
     financialCommitments: commitments,
     controlMeasures: controls,
+    ...registries,
     corpus: options.corpus ?? CORPUS,
     today: options.today ?? TODAY,
   });
@@ -279,7 +370,14 @@ test("well-formed fixtures validate cleanly and are counted", () => {
   const result = validate([commitment()], [control()]);
   assert.deepEqual(result.errors, []);
   assert.deepEqual(result.warnings, []);
-  assert.deepEqual(result.counts, { financialCommitments: 1, controlMeasures: 1 });
+  assert.deepEqual(result.counts, {
+    financialCommitments: 1,
+    controlMeasures: 1,
+    organizations: 2,
+    projects: 0,
+    programmes: 0,
+    projectDesignations: 0,
+  });
   assertErrors(validate([FULL_COMMITMENT, commitment()], [FULL_CONTROL, control()]), []);
   assertErrors(validate([MINIMAL_COMMITMENT], [MINIMAL_CONTROL]), []);
 });
@@ -960,12 +1058,22 @@ test("no candidate identifier enters a Capital & Control row", () => {
 // --- The committed seeds and the validator entry point ----------------------
 
 test("the committed Capital & Control seed files validate cleanly against the corpus", () => {
-  const commitments = parseCapitalControlSeed(read("data/seed/financial-commitments.json"), "financial-commitments");
-  const controls = parseCapitalControlSeed(read("data/seed/control-measures.json"), "control-measures");
-  assert.deepEqual([...commitments.errors, ...controls.errors], []);
+  const seed = (name: Parameters<typeof parseCapitalControlSeed>[1]) => parseCapitalControlSeed(read(`data/seed/${name}.json`), name);
+  const commitments = seed("financial-commitments");
+  const controls = seed("control-measures");
+  const organizations = seed("organizations");
+  const projects = seed("projects");
+  const programmes = seed("programmes");
+  const designations = seed("project-designations");
+  const all = [commitments, controls, organizations, projects, programmes, designations];
+  assert.deepEqual(all.flatMap((x) => x.errors), []);
   const result = validateCapitalControl({
     financialCommitments: commitments.records,
     controlMeasures: controls.records,
+    organizations: organizations.records,
+    projects: projects.records,
+    programmes: programmes.records,
+    projectDesignations: designations.records,
     corpus: {
       events: getAllEvents(),
       sources: getAllSources(),
@@ -977,9 +1085,18 @@ test("the committed Capital & Control seed files validate cleanly against the co
     today: TODAY,
   });
   assert.deepEqual(result.errors, []);
+  assert.deepEqual(
+    result.warnings.filter((w) => w.code === "unreferenced_record"),
+    [],
+    "every registry record is linked from a row, a designation or another registry record",
+  );
   assert.deepEqual(result.counts, {
     financialCommitments: commitments.records.length,
     controlMeasures: controls.records.length,
+    organizations: organizations.records.length,
+    projects: projects.records.length,
+    programmes: programmes.records.length,
+    projectDesignations: designations.records.length,
   });
 });
 
@@ -1049,4 +1166,261 @@ test("public surfaces read Capital & Control only through the loaders, and the v
   };
   for (const dir of ["app", "components", "lib"]) walk(dir);
   assert.deepEqual(offenders, []);
+});
+
+// --- Registries and designations (v0.6) --------------------------------------------
+
+const org = (over: Partial<Organization> = {}): Organization => ({ ...structuredClone(ORG_AGENCY), ...over });
+const programme = (over: Partial<Programme> = {}): Programme => ({ ...structuredClone(PROGRAMME), ...over });
+
+const SCHEME: Programme = programme({
+  id: "prg-alpha-scheme",
+  name: "Example strategic project scheme",
+  kind: "designation_scheme",
+});
+
+const DESIGNATION: ProjectDesignation = {
+  id: "dsg-alpha-plant",
+  eventId: "evt-alpha",
+  programmeId: "prg-alpha-scheme",
+  projectId: "prj-alpha-plant",
+  projectNameAsStated: "Example plant",
+  holderOrgIds: ["org-alpha-minerals"],
+  locations: [{ countryCode: "AU", subnational: null, asStated: "Australia" }],
+  stages: ["separation"],
+  materialIds: ["mat-one"],
+  materialAttribution: "tracked_only",
+  untrackedMaterialsAsStated: [],
+  statusHistory: [{ status: "recognized", date: "2025-03-25", sourceId: "src-two" }],
+  evidence: [
+    {
+      sourceId: "src-two",
+      supports: ["programme", "project", "holders", "location", "stages", "materials", "status"],
+      evidence: "explicit",
+    },
+  ],
+};
+
+/** The full registry, with one designation, alongside the full commitment that links it. */
+const registries = (over: Registries = {}): Registries => ({
+  organizations: [ORG_AGENCY, ORG_MINERALS],
+  projects: [PROJECT],
+  programmes: [PROGRAMME, SCHEME],
+  projectDesignations: [DESIGNATION],
+  ...over,
+});
+
+test("linked registry records and designations validate cleanly and are counted", () => {
+  const result = validate([FULL_COMMITMENT, commitment()], [], { registries: registries() });
+  assert.deepEqual(result.errors, []);
+  assert.deepEqual(result.warnings, []);
+  assert.deepEqual(
+    [result.counts.organizations, result.counts.projects, result.counts.programmes, result.counts.projectDesignations],
+    [2, 1, 2, 1],
+  );
+});
+
+test("a registry record nothing points to warns, and a parent of a linked organization counts as linked", () => {
+  const parent = org({ id: "org-alpha-department", name: "Example Department" });
+  const child = org({
+    parents: [{ organizationId: "org-alpha-department", relationship: "part_of", sourceId: "src-one" }],
+    evidence: [{ sourceId: "src-one", supports: ["name", "kind", "country", "actor", "parents"], evidence: "explicit" }],
+  });
+  const orphan = org({ id: "org-alpha-orphan", name: "Example Orphan" });
+  const result = validate([commitment()], [], {
+    registries: registries({ organizations: [ORG_AGENCY, ORG_MINERALS].map((o) => (o.id === child.id ? child : o)).concat(parent, orphan).sort((a, b) => (a.id < b.id ? -1 : 1)), projectDesignations: [] }),
+  });
+  assert.deepEqual(result.errors, []);
+  assert.deepEqual(result.warnings.map(key).sort(), [
+    "unreferenced_record@org-alpha-orphan:id",
+    "unreferenced_record@prg-alpha-fund:id",
+    "unreferenced_record@prg-alpha-scheme:id",
+    "unreferenced_record@prj-alpha-plant:id",
+  ]);
+});
+
+test("registry references resolve wherever a row, project, programme or designation names one", () => {
+  assertErrors(
+    validate(
+      [{ ...FULL_COMMITMENT, projectId: "prj-missing", programmeId: "prg-missing" }, commitment({ providerOrgIds: ["org-missing"], recipientOrgIds: ["org-alpha-minerals", "org-alpha-minerals"] })],
+      [],
+      { registries: registries() },
+    ),
+    [
+      "unresolved_reference@fin-alpha-grant:providerOrgIds[0]",
+      "duplicate_value@fin-alpha-grant:recipientOrgIds[1]",
+      "unresolved_reference@fin-alpha-full:projectId",
+      "unresolved_reference@fin-alpha-full:programmeId",
+    ],
+  );
+  const bad = registries({
+    projects: [{ ...PROJECT, sponsorOrgIds: ["org-missing"] }],
+    programmes: [
+      {
+        ...PROGRAMME,
+        administeringOrgIds: ["org-missing"],
+        parentProgrammeId: "prg-missing",
+        evidence: [{ sourceId: "src-one", supports: ["name", "kind", "administrators", "parent"], evidence: "explicit" }],
+      },
+      SCHEME,
+    ],
+    projectDesignations: [{ ...DESIGNATION, holderOrgIds: ["org-missing"], programmeId: "prg-missing", projectId: "prj-missing" }],
+  });
+  assertErrors(validate([FULL_COMMITMENT, commitment()], [], { registries: bad }), [
+    "unresolved_reference@prj-alpha-plant:sponsorOrgIds[0]",
+    "unresolved_reference@prg-alpha-fund:administeringOrgIds[0]",
+    "unresolved_reference@prg-alpha-fund:parentProgrammeId",
+    "unresolved_reference@dsg-alpha-plant:holderOrgIds[0]",
+    "unresolved_reference@dsg-alpha-plant:programmeId",
+    "unresolved_reference@dsg-alpha-plant:projectId",
+  ]);
+});
+
+test("a government body's money is its government's: provider organizations agree with providerJurisdiction", () => {
+  // The provider organization belongs to another government.
+  assertErrors(validate([commitment({ providerJurisdiction: "australia" })]), [
+    "actor_mismatch@fin-alpha-grant:providerOrgIds[0]",
+    "actor_mismatch@fin-alpha-grant:providerJurisdiction",
+  ]);
+  // A company is never credited to a government, however it is linked.
+  assertErrors(validate([commitment({ providerOrgIds: ["org-alpha-minerals"] })]), [
+    "actor_mismatch@fin-alpha-grant:providerJurisdiction",
+  ]);
+  // A joint vehicle is the government's only through a body that established it; its own actor stays null.
+  const vehicle = org({
+    id: "org-alpha-vehicle",
+    name: "Example Vehicle",
+    kind: "joint_vehicle",
+    actor: null,
+    parents: [
+      { organizationId: "org-alpha-agency", relationship: "established_by", sourceId: "src-one" },
+      { organizationId: "org-alpha-minerals", relationship: "established_by", sourceId: "src-one" },
+    ],
+    evidence: [{ sourceId: "src-one", supports: ["name", "kind", "country", "parents"], evidence: "explicit" }],
+  });
+  const withVehicle = registries({ organizations: [ORG_AGENCY, ORG_MINERALS, vehicle], projectDesignations: [] });
+  assertErrors(validate([commitment({ providerOrgIds: ["org-alpha-vehicle"], capitalSource: "mixed_vehicle" })], [], { registries: withVehicle }), []);
+  assertErrors(
+    validate([commitment({ providerOrgIds: ["org-alpha-vehicle"] })], [], {
+      registries: {
+        ...withVehicle,
+        organizations: [
+          ORG_AGENCY,
+          ORG_MINERALS,
+          { ...vehicle, actor: "us", evidence: [{ sourceId: "src-one", supports: ["name", "kind", "country", "actor", "parents"], evidence: "explicit" }] },
+        ],
+      },
+    }),
+    ["actor_mismatch@org-alpha-vehicle:actor"],
+  );
+  // A programme is run by one government; its rows and administrators belong to it.
+  assertErrors(
+    validate([{ ...FULL_COMMITMENT }, commitment()], [], { registries: registries({ programmes: [{ ...PROGRAMME, actor: "australia" }, SCHEME] }) }),
+    ["actor_mismatch@fin-alpha-full:programmeId", "actor_mismatch@prg-alpha-fund:administeringOrgIds[0]"],
+  );
+});
+
+test("an office is part of a department of the same government, and parent links form no cycle", () => {
+  const department = org({ id: "org-alpha-department", name: "Example Department", actor: "australia" });
+  const office = org({
+    parents: [{ organizationId: "org-alpha-department", relationship: "part_of", sourceId: "src-one" }],
+    evidence: [{ sourceId: "src-one", supports: ["name", "kind", "country", "actor", "parents"], evidence: "explicit" }],
+  });
+  assertErrors(
+    validate([commitment()], [], { registries: { organizations: [office, department, ORG_MINERALS] } }),
+    ["actor_mismatch@org-alpha-agency:parents[0].organizationId"],
+  );
+  const loop = { ...department, actor: "us" as const, parents: [{ organizationId: "org-alpha-agency", relationship: "part_of" as const, sourceId: "src-one" }], evidence: office.evidence };
+  assertErrors(validate([commitment()], [], { registries: { organizations: [office, loop, ORG_MINERALS] } }), [
+    "cycle@org-alpha-agency:parents",
+  ]);
+  assertErrors(
+    validate([commitment()], [], {
+      registries: { organizations: [{ ...office, parents: [{ organizationId: "org-alpha-agency", relationship: "part_of", sourceId: "src-one" }] }, ORG_MINERALS] },
+    }),
+    ["self_reference@org-alpha-agency:parents[0].organizationId"],
+  );
+});
+
+test("a row drawn from an envelope stays within that envelope's programme", () => {
+  const envelope = commitment({
+    id: "fin-alpha-envelope",
+    valueRole: "program_envelope",
+    programmeId: "prg-alpha-fund",
+    recipient: null,
+    recipientOrgIds: [],
+    evidence: commitmentEvidence(["programme"], ["recipient"]),
+  });
+  const award = (programmeId: string | null) =>
+    linked("fin-alpha-grant", [link("fin-alpha-envelope", "drawn_from")], {
+      programmeId,
+      evidence: commitmentEvidence(programmeId ? ["relationships", "programme"] : ["relationships"]),
+    });
+  const child = programme({ id: "prg-alpha-fund-round", name: "Example Fund, first round", parentProgrammeId: "prg-alpha-fund", evidence: [{ sourceId: "src-one", supports: ["name", "kind", "administrators", "parent"], evidence: "explicit" }] });
+  const regs = registries({ programmes: [PROGRAMME, child, SCHEME], projectDesignations: [] });
+  assertErrors(validate([envelope, award("prg-alpha-fund")], [], { registries: regs }), []);
+  assertErrors(validate([envelope, award("prg-alpha-fund-round")], [], { registries: regs }), []);
+  assertErrors(validate([envelope, award(null)], [], { registries: regs }), ["programme_mismatch@fin-alpha-grant:programmeId"]);
+  assertErrors(validate([envelope, award("prg-alpha-scheme")], [], { registries: regs }), ["programme_mismatch@fin-alpha-grant:programmeId"]);
+});
+
+test("a row and a designation name only materials their project lists", () => {
+  const narrow = { ...PROJECT, materialIds: ["mat-two"] };
+  assertErrors(
+    validate([FULL_COMMITMENT, commitment()], [], { registries: registries({ projects: [narrow] }) }),
+    ["material_not_in_project@fin-alpha-full:materialIds[0]", "material_not_in_project@dsg-alpha-plant:materialIds[0]"],
+  );
+});
+
+test("clauses that define no items carry no item types or stages, and stages need an item type", () => {
+  assertErrors(validate([], [control({ measureType: "end_use_restriction", controlledItemTypes: ["goods"], evidence: controlEvidence(["item_scope"]) })]), [
+    "item_scope_mismatch@ctl-alpha-licensing:controlledItemTypes",
+  ]);
+  assertErrors(validate([], [control({ measureType: "suspension", controlledStages: ["mining"], evidence: controlEvidence(["item_scope"]) })]), [
+    "item_scope_mismatch@ctl-alpha-licensing:controlledStages",
+  ]);
+  assertErrors(validate([], [control({ controlledStages: ["mining"], evidence: controlEvidence(["item_scope"]) })]), [
+    "item_scope_mismatch@ctl-alpha-licensing:controlledItemTypes",
+  ]);
+  assertErrors(validate([], [control({ controlledItemTypes: ["technology"], evidence: controlEvidence(["item_scope"]) })]), []);
+  assertErrors(validate([], [control({ controlledItemTypes: ["goods"] })]), ["missing_evidence@ctl-alpha-licensing:controlledItemTypes"]);
+});
+
+test("a designation sits under a designation scheme, within its event's materials, with a status history", () => {
+  assertErrors(
+    validate([FULL_COMMITMENT, commitment()], [], { registries: registries({ projectDesignations: [{ ...DESIGNATION, programmeId: "prg-alpha-fund" }] }) }),
+    ["kind_mismatch@dsg-alpha-plant:programmeId"],
+  );
+  assertErrors(
+    validate([FULL_COMMITMENT, commitment()], [], {
+      registries: registries({ projectDesignations: [{ ...DESIGNATION, eventId: "evt-beta", statusHistory: [] }] }),
+    }),
+    [
+      "material_not_in_event@dsg-alpha-plant:materialIds[0]",
+      "empty_status_history@dsg-alpha-plant:statusHistory",
+      "evidence_for_absent_field@dsg-alpha-plant:evidence[0].supports[6]",
+    ],
+  );
+  assertErrors(
+    validate([FULL_COMMITMENT, commitment()], [], {
+      registries: registries({ projectDesignations: [{ ...DESIGNATION, evidence: [{ ...DESIGNATION.evidence[0], supports: ["programme", "project", "holders", "location", "stages", "materials"] }] }] }),
+    }),
+    ["missing_evidence@dsg-alpha-plant:statusHistory", "missing_same_source_evidence@dsg-alpha-plant:statusHistory[0].sourceId"],
+  );
+});
+
+test("registry ids carry their own prefix and are unique across every collection", () => {
+  assertErrors(
+    validate([commitment()], [], { registries: { organizations: [ORG_AGENCY, { ...ORG_MINERALS, id: "prj-alpha-minerals" }] } }),
+    ["invalid_id@prj-alpha-minerals:id", "unresolved_reference@fin-alpha-grant:recipientOrgIds[0]"],
+  );
+  assertErrors(
+    validate([FULL_COMMITMENT, commitment()], [], { registries: registries({ projects: [{ ...PROJECT, id: "org-alpha-minerals" }] }) }),
+    [
+      "invalid_id@org-alpha-minerals:id",
+      "id_collision@org-alpha-minerals:id",
+      "unresolved_reference@fin-alpha-full:projectId",
+      "unresolved_reference@dsg-alpha-plant:projectId",
+    ],
+  );
 });

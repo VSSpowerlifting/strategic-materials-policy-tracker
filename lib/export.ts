@@ -10,9 +10,15 @@ import {
   getAllFramingClaims,
   getAllJurisdictions,
   getAllMaterials,
+  getAllOrganizations,
+  getAllProgrammes,
+  getAllProjectDesignations,
+  getAllProjects,
   getAllSources,
 } from "./data";
 import { buildCapitalControlSummary } from "./capital-control-summary";
+import { buildCapitalIntelligenceSummary } from "./capital-intelligence-summary";
+import { layerOf, organizationRoles } from "./capital-intelligence";
 import { commitmentActor, controlIssuer, currentControlEntry, currentFinancialStatus, evidenceSourceIds } from "./capital-control";
 import type { PolicyEvent } from "./types";
 
@@ -45,6 +51,10 @@ export function buildDataset() {
       sources: getAllSources().length,
       financialCommitments: getAllFinancialCommitments().length,
       controlMeasures: getAllControlMeasures().length,
+      organizations: getAllOrganizations().length,
+      projects: getAllProjects().length,
+      programmes: getAllProgrammes().length,
+      projectDesignations: getAllProjectDesignations().length,
     },
     events: getAllEvents(),
     framing: getAllFramingClaims(),
@@ -54,6 +64,11 @@ export function buildDataset() {
     financialCommitments: getAllFinancialCommitments(),
     controlMeasures: getAllControlMeasures(),
     capitalControlSummary: buildCapitalControlSummary(),
+    organizations: getAllOrganizations(),
+    projects: getAllProjects(),
+    programmes: getAllProgrammes(),
+    projectDesignations: getAllProjectDesignations(),
+    capitalIntelligenceSummary: buildCapitalIntelligenceSummary(),
   };
 }
 
@@ -258,6 +273,12 @@ export function financialCommitmentsCsv(): string {
       "outcomeCount",
       "sourceIds",
       "notes",
+      // v0.6, appended so existing column positions never move.
+      "providerOrgIds",
+      "recipientOrgIds",
+      "projectId",
+      "programmeId",
+      "layer",
     ],
     getAllFinancialCommitments().map((c) => [
       c.id,
@@ -291,6 +312,11 @@ export function financialCommitmentsCsv(): string {
       c.outcomes.length,
       evidenceSourceIds(c).join(LIST_SEP),
       c.notes ?? "",
+      c.providerOrgIds.join(LIST_SEP),
+      c.recipientOrgIds.join(LIST_SEP),
+      c.projectId ?? "",
+      c.programmeId ?? "",
+      layerOf(c),
     ]),
   );
 }
@@ -323,6 +349,9 @@ export function controlMeasuresCsv(): string {
       "currentStatusUntil",
       "sourceIds",
       "notes",
+      // v0.6, appended so existing column positions never move.
+      "controlledItemTypes",
+      "controlledStages",
     ],
     getAllControlMeasures().map((m) => {
       const cur = currentControlEntry(m);
@@ -352,6 +381,8 @@ export function controlMeasuresCsv(): string {
         cur.until ?? "",
         evidenceSourceIds(m).join(LIST_SEP),
         m.notes ?? "",
+        m.controlledItemTypes.join(LIST_SEP),
+        m.controlledStages.join(LIST_SEP),
       ];
     }),
   );
@@ -379,4 +410,101 @@ export function controlStatusHistoryCsv(): string {
       rows.push([m.id, i, e.status, e.date ?? "", e.until ?? "", e.sourceId, i === m.statusHistory.length - 1, e.note ?? ""]),
     );
   return toCsv(["measureId", "sequence", "status", "date", "until", "sourceId", "isCurrent", "note"], rows);
+}
+
+// --- Capital intelligence registries (v0.6) --------------------------------------
+
+const locationsCell = (locations: readonly { countryCode: string | null; subnational: string | null; asStated: string | null }[]) =>
+  locations.map((l) => [l.countryCode, l.subnational, l.asStated].filter(Boolean).join(" / ")).join(LIST_SEP);
+
+export function organizationsCsv(): string {
+  return toCsv(
+    ["id", "name", "nameOriginal", "aliases", "kind", "countryCode", "actor", "partOf", "establishedBy", "rowsProvided", "rowsReceived", "sourceIds", "notes"],
+    getAllOrganizations().map((o) => {
+      const roles = organizationRoles(o.id);
+      return [
+        o.id,
+        o.name,
+        o.nameOriginal ?? "",
+        o.aliases.join(LIST_SEP),
+        o.kind,
+        o.countryCode ?? "",
+        o.actor ?? "",
+        o.parents.filter((p) => p.relationship === "part_of").map((p) => p.organizationId).join(LIST_SEP),
+        o.parents.filter((p) => p.relationship === "established_by").map((p) => p.organizationId).join(LIST_SEP),
+        roles.provided.length,
+        roles.received.length,
+        evidenceSourceIds(o).join(LIST_SEP),
+        o.notes ?? "",
+      ];
+    }),
+  );
+}
+
+export function projectsCsv(): string {
+  const all = getAllFinancialCommitments();
+  return toCsv(
+    ["id", "name", "sponsorOrgIds", "locations", "stages", "materialIds", "materialAttribution", "untrackedMaterialsAsStated", "financialRowIds", "designationIds", "sourceIds", "notes"],
+    getAllProjects().map((p) => [
+      p.id,
+      p.name,
+      p.sponsorOrgIds.join(LIST_SEP),
+      locationsCell(p.locations),
+      p.stages.join(LIST_SEP),
+      p.materialIds.join(LIST_SEP),
+      p.materialAttribution,
+      p.untrackedMaterialsAsStated.join(LIST_SEP),
+      all.filter((c) => c.projectId === p.id).map((c) => c.id).join(LIST_SEP),
+      getAllProjectDesignations().filter((d) => d.projectId === p.id).map((d) => d.id).join(LIST_SEP),
+      evidenceSourceIds(p).join(LIST_SEP),
+      p.notes ?? "",
+    ]),
+  );
+}
+
+export function programmesCsv(): string {
+  const all = getAllFinancialCommitments();
+  return toCsv(
+    ["id", "name", "nameOriginal", "actor", "kind", "administeringOrgIds", "parentProgrammeId", "legalAuthorityAsStated", "financialRowIds", "designationIds", "sourceIds", "notes"],
+    getAllProgrammes().map((g) => [
+      g.id,
+      g.name,
+      g.nameOriginal ?? "",
+      g.actor,
+      g.kind,
+      g.administeringOrgIds.join(LIST_SEP),
+      g.parentProgrammeId ?? "",
+      g.legalAuthorityAsStated ?? "",
+      all.filter((c) => c.programmeId === g.id).map((c) => c.id).join(LIST_SEP),
+      getAllProjectDesignations().filter((d) => d.programmeId === g.id).map((d) => d.id).join(LIST_SEP),
+      evidenceSourceIds(g).join(LIST_SEP),
+      g.notes ?? "",
+    ]),
+  );
+}
+
+export function projectDesignationsCsv(): string {
+  return toCsv(
+    ["id", "eventId", "programmeId", "projectId", "projectNameAsStated", "holderOrgIds", "locations", "stages", "materialIds", "materialAttribution", "untrackedMaterialsAsStated", "currentStatus", "currentStatusDate", "sourceIds", "notes"],
+    getAllProjectDesignations().map((d) => {
+      const cur = d.statusHistory[d.statusHistory.length - 1];
+      return [
+        d.id,
+        d.eventId,
+        d.programmeId,
+        d.projectId,
+        d.projectNameAsStated,
+        d.holderOrgIds.join(LIST_SEP),
+        locationsCell(d.locations),
+        d.stages.join(LIST_SEP),
+        d.materialIds.join(LIST_SEP),
+        d.materialAttribution,
+        d.untrackedMaterialsAsStated.join(LIST_SEP),
+        cur?.status ?? "",
+        cur?.date ?? "",
+        evidenceSourceIds(d).join(LIST_SEP),
+        d.notes ?? "",
+      ];
+    }),
+  );
 }

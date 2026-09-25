@@ -23,9 +23,15 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Alcoa-Sojitz Gallium Recovery Project",
+    "recipientOrgIds": [],
     "project": "Gallium recovery at the Alcoa-Sojitz project",
+    "projectId": "prj-au-alcoa-sojitz-gallium",
     "facility": null,
     "locations": [
       {
@@ -117,9 +123,15 @@
     "amount": null,
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Alcoa-Sojitz Gallium Recovery Project",
+    "recipientOrgIds": [],
     "project": "Gallium recovery at the Alcoa-Sojitz project",
+    "projectId": "prj-au-alcoa-sojitz-gallium",
     "facility": null,
     "locations": [
       {
@@ -202,9 +214,15 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Arafura Nolans project",
+    "recipientOrgIds": [],
     "project": "Nolans rare earths project",
+    "projectId": "prj-au-nolans",
     "facility": null,
     "locations": [
       {
@@ -291,9 +309,15 @@
     },
     "provider": "Australian Government (Critical Minerals Facility)",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-au-cmf",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -320,7 +344,8 @@
           "value_role",
           "capital_source",
           "amount",
-          "provider"
+          "provider",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Reserve funding",
@@ -348,9 +373,15 @@
     "amount": null,
     "provider": "Commonwealth of Australia (refundable tax offset)",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": "Future Made in Australia (Production Tax Credits and Other Measures) Act 2025 (Act No. 9 of 2025), Schedule 2, inserting Division 419 into the Income Tax Assessment Act 1997",
+    "programmeId": "prg-au-cmpti",
     "recipient": "Constitutional corporations with registered CMPTI processing activities",
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [
       {
@@ -461,7 +492,8 @@
           "stages",
           "materials",
           "status",
-          "terms"
+          "terms",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Schedule 2, ss 419-5, 419-10, 419-15, 419-20 (pp. 36–39 of the authorised PDF)",
@@ -486,9 +518,15 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-au-cmsr",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -521,7 +559,8 @@
           "amount",
           "provider",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Opening paragraph; paragraphs on first minerals and operation",
@@ -554,9 +593,15 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-au-cmsr",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -587,7 +632,8 @@
           "provider",
           "relationships",
           "stages",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Reserve funding",
@@ -636,9 +682,15 @@
     },
     "provider": "Australian Government (Department of Industry, Science and Resources, with Export Finance Australia)",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-disr"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-au-cmf",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -667,7 +719,8 @@
           "amount",
           "provider",
           "relationships",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraphs on Reserve funding and delivery",
@@ -692,17 +745,25 @@
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
-      "value": "4900000",
+      "value": "4893125",
       "currency": "CAD",
       "qualifier": "exact",
-      "amountAsStated": "Natural Resources Canada (NRCan) is providing $4.9 million to Cyclic Materials for this initiative",
+      "amountAsStated": "Amount funded: $4,893,125",
       "currencyBasis": "issuer_context"
     },
     "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
     "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-ca-cmrdd",
     "recipient": "Cyclic Materials Incorporated",
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
     "project": "Demonstration plant producing high-purity mixed rare earth oxide and a cobalt–nickel mixed hydroxide product from recycled materials",
+    "projectId": "prj-ca-cyclic-kingston-demonstration-plant",
     "facility": null,
     "locations": [],
     "stages": [
@@ -735,21 +796,30 @@
           "instrument",
           "value_role",
           "capital_source",
-          "amount",
           "provider",
           "recipient",
           "project",
           "relationships",
           "stages",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Cyclic Materials",
         "note": null
+      },
+      {
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "supports": [
+          "amount"
+        ],
+        "evidence": "explicit",
+        "locator": "Funded Projects: \"Kingston Demonstration Plant – Extended Operations\"",
+        "note": "The programme page lists the exact amount funded; the 2024 release rounds it to \"$4.9 million\". Currency read from the issuing government (a Canadian federal page printing \"$\")."
       }
     ],
-    "notes": "The release calls the funding an investment and does not name the instrument."
+    "notes": "The release calls the funding an investment and does not name the instrument. The 4 September 2024 release states \"NRCan is providing $4.9 million to Cyclic Materials\"; the CMRDD programme page lists the same project with \"Amount funded: $4,893,125\", recorded here as the exact figure."
   },
   {
     "id": "fin-ca-cmrdd-2024-green-graphite",
@@ -775,9 +845,17 @@
     },
     "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
     "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-ca-cmrdd",
     "recipient": "Green Graphite Technologies Inc.",
+    "recipientOrgIds": [
+      "org-green-graphite-technologies"
+    ],
     "project": "Demonstrating GraphRenew technology to recover graphite from secondary sources and upgrade it to lithium-ion battery-grade graphite",
+    "projectId": "prj-ca-ggt-graphite-recycling-pilot",
     "facility": null,
     "locations": [],
     "stages": [
@@ -814,7 +892,8 @@
           "relationships",
           "stages",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph on Green Graphite Technologies",
@@ -847,9 +926,18 @@
     },
     "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
     "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-ca-cmrdd",
     "recipient": "Cyclic Materials Incorporated and Green Graphite Technologies Inc.",
+    "recipientOrgIds": [
+      "org-cyclic-materials",
+      "org-green-graphite-technologies"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -889,7 +977,8 @@
           "relationships",
           "stages",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Opening paragraph; Quick facts",
@@ -914,9 +1003,15 @@
     },
     "provider": "Government of Canada",
     "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-ca-cms",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -967,7 +1062,8 @@
           "amount",
           "provider",
           "stages",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Opening paragraph",
@@ -986,6 +1082,1567 @@
     "notes": "\"Manufacturing\" in the release is not mapped to a stage: it does not say which manufacturing. The release is not an itemised budget, so no component amounts are recorded for it."
   },
   {
+    "id": "fin-ca-g7-2025-focus-graphite-gpi",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "14100000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "a conditionally approved investment of up to $14.1 million from Natural Resources Canada’s Global Partnerships Initiative",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Global Partnerships Initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Focus Graphite",
+    "recipientOrgIds": [
+      "org-focus-graphite"
+    ],
+    "project": "Chemical-free electrothermal purification project for natural flake graphite",
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "\"conditionally approved\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Focus Graphite",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Research and development projects: Focus Graphite",
+        "note": "High-temperature purification of flake graphite, read as processing."
+      }
+    ],
+    "notes": "In collaboration with Ukraine's Thermal & Material Engineering Center and American Energy Technologies Company; the graphite comes from the Lac Knife and Lac Tétépisca deposits."
+  },
+  {
+    "id": "fin-ca-g7-2025-nmg-canada-growth-fund",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "35000000",
+      "currency": "CAD",
+      "qualifier": "at_least",
+      "amountAsStated": "more than $35 million from the Canada Growth Fund",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nouveau Monde Graphite",
+    "recipientOrgIds": [
+      "org-nouveau-monde-graphite"
+    ],
+    "project": null,
+    "projectId": "prj-ca-nmg-matawinie",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "not_stated",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Named among the investments the Alliance announcement \"builds on\"; the backgrounder does not state their stage or date."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "First paragraph of the list",
+        "note": "The investment supports the company's mine-to-anode plan; coded to the mine it names."
+      }
+    ],
+    "notes": "An earlier investment the backgrounder cites, not one it announces. The instrument is not named."
+  },
+  {
+    "id": "fin-ca-g7-2025-nmg-edc-letter-of-interest",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "indication",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "430000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "a letter of interest for up to US$430 million from Export Development Canada",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export Development Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-edc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nouveau Monde Graphite",
+    "recipientOrgIds": [
+      "org-nouveau-monde-graphite"
+    ],
+    "project": null,
+    "projectId": "prj-ca-nmg-matawinie",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "A letter of interest, which is not a financing commitment; its date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "First paragraph of the list",
+        "note": "Coded to the mine the paragraph names."
+      }
+    ],
+    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+  },
+  {
+    "id": "fin-ca-g7-2025-nmg-offtake",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "offtake",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": null,
+    "provider": "Government of Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nouveau Monde Graphite",
+    "recipientOrgIds": [
+      "org-nouveau-monde-graphite"
+    ],
+    "project": "Matawinie Mine",
+    "projectId": "prj-ca-nmg-matawinie",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "\"offtake arrangements with the Government of Canada, Panasonic (Japan), and Traxys (Luxembourg)\""
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph of the list",
+        "note": null
+      }
+    ],
+    "notes": "No volume, price or term is stated. The Panasonic and Traxys offtakes are private and the Government of Japan's \"investment intention\" is not a commitment; none is recorded as a row."
+  },
+  {
+    "id": "fin-ca-g7-2025-northern-graphite-nrc",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "860000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$860,000 in funding through the National Research Council of Canada’s Canada–Germany Collaborative Industrial Research and Development Program",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "National Research Council of Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Northern Graphite and Rain Carbon Canada",
+    "recipientOrgIds": [
+      "org-northern-graphite",
+      "org-rain-carbon-canada"
+    ],
+    "project": "Research project on upcycled natural graphite for battery anodes",
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "research_development"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Highlighted as funding for the project; no award date is stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Northern Graphite and Rain Carbon Canada",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-g7-2025-ucore-feddev",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-ca-g7-2025-ucore-package",
+        "relationship": "part_of",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "locator": "Ucore paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "10000000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $10 million through the Federal Economic Development Agency for Southern Ontario",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Federal Economic Development Agency for Southern Ontario",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-feddev-ontario"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Ucore Rare Metals Inc.",
+    "recipientOrgIds": [
+      "org-ucore-rare-metals"
+    ],
+    "project": null,
+    "projectId": "prj-ca-ucore-kingston",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Part of a \"conditionally approved investment\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials",
+          "relationships"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Ucore paragraph",
+        "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-g7-2025-ucore-nrcan",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [
+      {
+        "commitmentId": "fin-ca-g7-2025-ucore-package",
+        "relationship": "part_of",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "locator": "Ucore paragraph",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "26300000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $26.3 million through Natural Resources Canada",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Ucore Rare Metals Inc.",
+    "recipientOrgIds": [
+      "org-ucore-rare-metals"
+    ],
+    "project": null,
+    "projectId": "prj-ca-ucore-kingston",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "Part of a \"conditionally approved investment\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials",
+          "relationships"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Ucore paragraph",
+        "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-g7-2025-ucore-package",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "36300000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "a conditionally approved investment of up to $36.3 million from the Government of Canada",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Government of Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Ucore Rare Metals Inc.",
+    "recipientOrgIds": [
+      "org-ucore-rare-metals"
+    ],
+    "project": null,
+    "projectId": "prj-ca-ucore-kingston",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "\"conditionally approved\"; recorded as decided and not yet binding, like the OSC conditional loan commitments."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Ucore paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Ucore paragraph",
+        "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      }
+    ],
+    "notes": "The package total; its NRCan and FedDev Ontario parts are recorded as parts of it. The instrument is not named. NRCan's CMRDD programme page separately lists a 2023 award of $4,275,848 to Ucore's RapidSX demonstration plant in Kingston, which is not recorded here."
+  },
+  {
+    "id": "fin-ca-g7-2025-vianode-edc-letter-of-interest",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "indication",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "500000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "a letter of interest for up to US$500 million in potential financing from Export Development Canada",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export Development Canada",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-edc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Vianode",
+    "recipientOrgIds": [
+      "org-vianode"
+    ],
+    "project": null,
+    "projectId": "prj-ca-vianode-st-thomas",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "St. Thomas, Ontario"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "A letter of interest for \"potential financing\"; its date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Vianode paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Vianode paragraph",
+        "note": "A synthetic graphite facility, read as processing."
+      }
+    ],
+    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+  },
+  {
+    "id": "fin-ca-pdac-2026-ggt-eip",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "4750000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $4,750,000",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Energy Innovation Program)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Green Graphite Technologies Inc. (GGT)",
+    "recipientOrgIds": [
+      "org-green-graphite-technologies"
+    ],
+    "project": "Battery-Grade Graphite: A Canadian Low-GHG Solution From Regolith Resources",
+    "projectId": "prj-ca-ggt-regolith-graphite",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC as part of \"up to $165.2 million for 22 Canadian projects\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Energy Innovation Program: Green Graphite Technologies entry",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Energy Innovation Program: Green Graphite Technologies entry",
+        "note": "Upgrading graphite for lithium-ion batteries, read as processing."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-nb-granitoids-cmgd",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "172000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $172,000",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Geoscience and Data initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "New Brunswick Geological Survey",
+    "recipientOrgIds": [
+      "org-ca-nb-geological-survey"
+    ],
+    "project": "Geochronology and Petrogenesis of Granitoids and Related Critical Mineral Systems in New Brunswick",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "New Brunswick",
+        "asStated": "Fredericton, New Brunswick"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "lithium",
+      "copper",
+      "zinc"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Geochronology and Petrogenesis of Granitoids",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Geochronology and Petrogenesis of Granitoids",
+        "note": "Regional exploration models and mineral potential mapping, read as exploration."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-nb-maritimes-basin-cmgd",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "232600",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $232,600",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Geoscience and Data initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "New Brunswick Geological Survey",
+    "recipientOrgIds": [
+      "org-ca-nb-geological-survey"
+    ],
+    "project": "Critical Mineral Potential of the Maritimes Basin in Eastern New Brunswick",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "New Brunswick",
+        "asStated": "Grand Lake Region, New Brunswick"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "copper",
+      "zinc",
+      "lithium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Maritimes Basin",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Maritimes Basin",
+        "note": "Field mapping and sampling to find mineral potential, read as exploration."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-ns-graphite-cmgd",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "97000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $97,000",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Geoscience and Data initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Nova Scotia Department of Natural Resources",
+    "recipientOrgIds": [
+      "org-ca-ns-dnr"
+    ],
+    "project": "Graphite in Support of Battery Value Chains",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Nova Scotia",
+        "asStated": "Halifax, Nova Scotia"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "Announced at PDAC."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Graphite in Support of Battery Value Chains",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Graphite in Support of Battery Value Chains",
+        "note": "Geological mapping and assessment of graphite resources, read as exploration."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-ca-pdac-2026-wicheeda-flmf",
+    "eventId": "evt-ca-nrcan-pdac-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1878250",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Funding amount: $1,878,250",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (First and Last Mile Fund)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Defense Metals Corp.",
+    "recipientOrgIds": [
+      "org-defense-metals"
+    ],
+    "project": "Wicheeda REE Clean Energy and Transportation Infrastructure Project",
+    "projectId": "prj-ca-wicheeda",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-03-03",
+        "sourceId": "src-nrcan-pdac-2026",
+        "note": "\"conditionally approved, pending final due diligence\"."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First and Last Mile Fund: Wicheeda entry",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "First and Last Mile Fund: Wicheeda entry",
+        "note": "Power and road infrastructure for a mine site, coded to mining."
+      }
+    ],
+    "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund."
+  },
+  {
+    "id": "fin-de-g7-2025-vianode-export-credit-guarantee",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "loan_guarantee",
+    "valueRole": "indication",
+    "capitalSource": "public",
+    "amount": {
+      "value": "300000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "a letter of interest from the German government for the potential support of the project with an export credit guarantee amount of up to US$300 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Government of Germany",
+    "providerJurisdiction": null,
+    "providerOrgIds": [
+      "org-de-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Vianode",
+    "recipientOrgIds": [
+      "org-vianode"
+    ],
+    "project": null,
+    "projectId": "prj-ca-vianode-st-thomas",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "St. Thomas, Ontario"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": null,
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "A letter of interest for \"potential support\"; its date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Vianode paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Vianode paragraph",
+        "note": "A synthetic graphite facility, read as processing."
+      }
+    ],
+    "notes": "A letter of interest for \"potential support\", recorded as a non-binding indication, not as a commitment: the export credit guarantee is in no sum. Germany is not a tracked actor, so this row is credited to no government in the tracker. Stated in a Canadian government backgrounder, not by the German government."
+  },
+  {
+    "id": "fin-ebrd-2025-sarytogan-equity",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "3600000",
+      "currency": "EUR",
+      "qualifier": "approximately",
+      "amountAsStated": "around EUR 6 million in the EuroManganese Strategic Project in the Czech Republic and EUR 3.6 million in the Sarytogan Graphite Strategic Project in Kazakhstan",
+      "currencyBasis": "stated"
+    },
+    "provider": "European Bank for Reconstruction and Development",
+    "providerJurisdiction": null,
+    "providerOrgIds": [
+      "org-ebrd"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Sarytogan Graphite Strategic Project",
+    "recipientOrgIds": [],
+    "project": "Sarytogan Graphite Strategic Project",
+    "projectId": "prj-kz-sarytogan",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "KZ",
+        "subnational": null,
+        "asStated": "Kazakhstan"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "\"The EBRD also invested in equity\"; recorded as an executed investment with no date stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, fourth paragraph (continues on p. 5)",
+        "note": "\"around\" qualifies both figures in the sentence, so the Sarytogan figure is recorded as approximate."
+      }
+    ],
+    "notes": "Multilateral public money: it counts among public commitments but is credited to no tracked government. The EuroManganese investment named alongside it is manganese, outside the tracked materials, and is not recorded."
+  },
+  {
+    "id": "fin-eu-eib-2025-up-catalyst-loan",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": null,
+    "provider": "European Investment Bank (supported by InvestEU)",
+    "providerJurisdiction": "eu",
+    "providerOrgIds": [
+      "org-eu-eib"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "UpCatalyst",
+    "recipientOrgIds": [
+      "org-up-catalyst"
+    ],
+    "project": "Strategic Project UpCatalyst (processing of graphite)",
+    "projectId": "prj-ee-co2graphite",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "\"the EIB has already provided financing to the Strategic Projects UpCatalyst ... and Keliber ... via loan agreements\"; no date or amount is stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, third paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "project"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 2.1, third paragraph",
+        "note": "The Communication names \"the Strategic Projects UpCatalyst (processing of graphite)\" after its promoter; the one Strategic Project UP Catalyst promotes is CO2Graphite (Decision C(2025) 1904, annex entry (11))."
+      }
+    ],
+    "notes": "No amount is stated, so the row sums nothing. The Keliber loan named alongside it is lithium, outside the tracked materials, and is not recorded."
+  },
+  {
+    "id": "fin-eu-jtf-2025-neo-magnet-project",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "18700000",
+      "currency": "EUR",
+      "qualifier": "exact",
+      "amountAsStated": "EUR 18.7 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Just Transition Fund",
+    "providerJurisdiction": "eu",
+    "providerOrgIds": [],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Neo Performance",
+    "recipientOrgIds": [
+      "org-neo-performance"
+    ],
+    "project": "Rare earths magnet project in Estonia",
+    "projectId": "prj-ee-neo-rare-earth-magnet-project",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "EE",
+        "subnational": null,
+        "asStated": "Estonia"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "\"The Just Transition Fund has provided EUR 18.7 million in funding\"; the Communication does not say whether the money is awarded or paid, or when."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, second paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 2.1, second paragraph",
+        "note": "\"Rare earths magnet project\": read as permanent-magnet manufacturing; the magnet type is not stated."
+      }
+    ],
+    "notes": "Recorded as reported in the RESourceEU Communication, not from the award decision; the instrument is not named. The Just Transition Fund is an EU fund under shared management, so the provider's actor is the EU."
+  },
+  {
+    "id": "fin-eu-resourceeu-2025-eu-funds",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "3000000000",
+      "currency": "EUR",
+      "qualifier": "exact",
+      "amountAsStated": "the EU should mobilise EUR 3 billion of EU funds within the next 12 months in direct support of the CRM value chain",
+      "currencyBasis": "stated"
+    },
+    "provider": "European Union (EU funds)",
+    "providerJurisdiction": "eu",
+    "providerOrgIds": [],
+    "legalAuthority": null,
+    "programmeId": "prg-eu-resourceeu",
+    "recipient": null,
+    "recipientOrgIds": [],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-12-03",
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": "Stated as an aim of the Action Plan (\"should mobilise\"), not an allocation."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "12",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "within the next 12 months",
+        "sourceId": "src-ec-resourceeu-com-945",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-resourceeu-com-945",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "programme",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, final paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-ec-ip-25-2891",
+        "supports": [
+          "amount"
+        ],
+        "evidence": "ambiguous",
+        "locator": "\"Promote critical raw materials projects\" paragraph",
+        "note": "The press release words the same aim as \"mobilise up to €3 billion over the next 12 months\"."
+      }
+    ],
+    "notes": "An envelope: money the EU aims to mobilise across instruments for the critical-raw-materials value chain, listed and never summed. The Communication says \"EUR 3 billion\"; the press release says \"up to €3 billion\". No split by instrument, stage or material is stated."
+  },
+  {
     "id": "fin-in-ncmm-2025-government-expenditure",
     "eventId": "evt-in-ncmm-2025",
     "relationships": [],
@@ -1001,9 +2658,15 @@
     },
     "provider": "Government of India",
     "providerJurisdiction": "india",
+    "providerOrgIds": [
+      "org-in-government"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-in-ncmm",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -1039,7 +2702,8 @@
           "amount",
           "provider",
           "stages",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraphs 1–4",
@@ -1064,9 +2728,13 @@
     },
     "provider": "Indian public-sector undertakings (\"PSUs, etc.\")",
     "providerJurisdiction": "india",
+    "providerOrgIds": [],
     "legalAuthority": null,
+    "programmeId": "prg-in-ncmm",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -1092,7 +2760,8 @@
           "instrument",
           "value_role",
           "amount",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Paragraph 1",
@@ -1127,9 +2796,17 @@
     },
     "provider": "Japan Australia Rare Earth (JARE), co-founded by Sojitz Corporation and JOGMEC",
     "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jare"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Lynas Rare Earths Limited",
+    "recipientOrgIds": [
+      "org-lynas"
+    ],
     "project": "Lynas mid-term growth plan: light rare earths production capacity expansion and heavy rare earths separation commencement",
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -1183,9 +2860,18 @@
     "amount": null,
     "provider": "Sojitz Corporation and JOGMEC",
     "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec",
+      "org-sojitz"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Lynas Rare Earths Limited",
+    "recipientOrgIds": [
+      "org-lynas"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -1241,6 +2927,224 @@
     "notes": "A supply agreement between a trading company, a state agency and the producer; no money value is stated."
   },
   {
+    "id": "fin-jp-jogmec-almt-tungsten-grant",
+    "eventId": "evt-jp-espa-almt-tungsten-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "7500000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約75億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "株式会社アライドマテリアル",
+    "recipientOrgIds": [
+      "org-allied-material"
+    ],
+    "project": "New tungsten reduction and carburisation facilities to raise production of tungsten powder and tungsten carbide powder.",
+    "projectId": "prj-jp-almt-tungsten",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-03-18",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年3月18日."
+      },
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和7年度; the decision date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
+        "note": "還元及び炭化 (reduction and carburisation) into tungsten and tungsten carbide powder is read as processing."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description; 交付決定事業",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
+    "id": "fin-jp-jogmec-japan-new-metals-tungsten-grant",
+    "eventId": "evt-jp-espa-japan-new-metals-tungsten-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "2000000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約20億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "日本新金属株式会社",
+    "recipientOrgIds": [
+      "org-japan-new-metals"
+    ],
+    "project": "Expanded tungsten hydrometallurgical refining facilities in Japan.",
+    "projectId": "prj-jp-japan-new-metals-tungsten",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "tungsten"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-09-07",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年9月7日; JOGMEC's list of grant decisions, as read, does not yet include it."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第３号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第３号－１",
+        "note": "湿式精錬 (hydrometallurgical refining) is coded as refining."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
     "id": "fin-jp-jogmec-lofdal-2026-equity",
     "eventId": "evt-jp-jogmec-lofdal-2026",
     "relationships": [],
@@ -1256,9 +3160,17 @@
     },
     "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
     "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "TJ Namibia Rare Earths Corporation (special purpose company established by Toyota Tsusho)",
+    "recipientOrgIds": [
+      "org-tj-namibia-rare-earths"
+    ],
     "project": "Lofdal heavy rare earth development project",
+    "projectId": "prj-na-lofdal",
     "facility": null,
     "locations": [
       {
@@ -1348,6 +3260,238 @@
     "notes": "The amount is in Canadian dollars in both the Japanese and English releases; the yen figure is an approximation given in the release (約54.6億円 in the Japanese text, \"approximately 5.5 billion yen\" in English) and is not recorded as a separate amount."
   },
   {
+    "id": "fin-jp-jogmec-santoku-rare-earth-grant",
+    "eventId": "evt-jp-espa-santoku-rare-earth-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "800000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約8億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "株式会社三徳",
+    "recipientOrgIds": [
+      "org-santoku"
+    ],
+    "project": "New smelting facilities in Japan to increase rare earth production.",
+    "projectId": "prj-jp-santoku-rare-earth",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-07-29",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年7月29日."
+      },
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和8年度; the decision date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第２号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第２号－１",
+        "note": "製錬 (smelting and refining) is read as refining; the list does not say whether separation is included."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description; 交付決定事業",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
+    "id": "fin-jp-jogmec-shin-etsu-rare-earth-grant",
+    "eventId": "evt-jp-espa-shin-etsu-rare-earth-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "17500000000",
+      "currency": "JPY",
+      "qualifier": "approximately",
+      "amountAsStated": "※助成額は約175億円",
+      "currencyBasis": "stated"
+    },
+    "provider": "Japan Organization for Metals and Energy Security (JOGMEC)",
+    "providerJurisdiction": "japan",
+    "providerOrgIds": [
+      "org-jp-jogmec"
+    ],
+    "legalAuthority": "経済安全保障推進法 (Economic Security Promotion Act)",
+    "programmeId": "prg-jp-jogmec-critical-minerals-grants",
+    "recipient": "信越化学工業株式会社",
+    "recipientOrgIds": [
+      "org-shin-etsu-chemical"
+    ],
+    "project": "New smelting facilities in Japan to increase rare earth production.",
+    "projectId": "prj-jp-shin-etsu-rare-earth",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": null,
+        "asStated": "日本国内"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-05-19",
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "note": "METI's list gives the subsidy with the plan certified on 令和8年5月19日."
+      },
+      {
+        "status": "decided",
+        "date": null,
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和8年度; the decision date is not stated."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "50",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the applicant's cost of the undertaking",
+        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "note": "The programme-wide rate; the list does not restate it per plan."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4, plan ２０２６重要鉱物第１号－１",
+        "note": "The subsidy (助成) is paid by JOGMEC to businesses whose plans METI certifies."
+      },
+      {
+        "sourceId": "src-meti-critical-minerals-certified-plans",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Section 4, plan ２０２６重要鉱物第１号－１",
+        "note": "製錬 (smelting and refining) is read as refining; the list does not say whether separation is included."
+      },
+      {
+        "sourceId": "src-jogmec-critical-minerals-grants",
+        "supports": [
+          "provider",
+          "programme",
+          "legal_authority",
+          "terms",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme description; 交付決定事業",
+        "note": null
+      }
+    ],
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
     "id": "fin-uk-cms-2025-critical-mineral-fund",
     "eventId": "evt-uk-cms-2025",
     "relationships": [],
@@ -1363,9 +3507,15 @@
     },
     "provider": "Department for Business and Trade",
     "providerJurisdiction": "uk",
+    "providerOrgIds": [
+      "org-uk-dbt"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -1420,9 +3570,17 @@
     "amount": null,
     "provider": "UK Government",
     "providerJurisdiction": "uk",
+    "providerOrgIds": [
+      "org-uk-government"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Tungsten West",
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": null,
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1476,7 +3634,8 @@
           "stages",
           "materials",
           "status",
-          "terms"
+          "terms",
+          "project"
         ],
         "evidence": "explicit",
         "locator": "Third paragraph",
@@ -1509,9 +3668,17 @@
     },
     "provider": "National Wealth Fund",
     "providerJurisdiction": "uk",
+    "providerOrgIds": [
+      "org-uk-nwf"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Tungsten West",
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": "Restart of production at the Hemerdon tungsten and tin mine",
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1592,9 +3759,17 @@
     },
     "provider": "National Wealth Fund",
     "providerJurisdiction": "uk",
+    "providerOrgIds": [
+      "org-uk-nwf"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Tungsten West",
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": "Restart of production at the Hemerdon tungsten and tin mine",
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1667,9 +3842,17 @@
     },
     "provider": "National Wealth Fund",
     "providerJurisdiction": "uk",
+    "providerOrgIds": [
+      "org-uk-nwf"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Tungsten West",
+    "recipientOrgIds": [
+      "org-tungsten-west"
+    ],
     "project": "Restart of production at the Hemerdon tungsten and tin mine",
+    "projectId": "prj-gb-hemerdon",
     "facility": "Hemerdon mine",
     "locations": [
       {
@@ -1759,9 +3942,15 @@
     "amount": null,
     "provider": "United States Government",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-government"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "Alcoa-Sojitz Gallium Recovery Project",
+    "recipientOrgIds": [],
     "project": "Gallium recovery at the Alcoa-Sojitz project",
+    "projectId": "prj-au-alcoa-sojitz-gallium",
     "facility": null,
     "locations": [
       {
@@ -1836,9 +4025,15 @@
     },
     "provider": "Australian Government",
     "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-government"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -1916,9 +4111,13 @@
     },
     "provider": null,
     "providerJurisdiction": null,
+    "providerOrgIds": [],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -1969,9 +4168,15 @@
     },
     "provider": "United States Government",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-government"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -2034,11 +4239,1384 @@
     "notes": "An envelope each government says it is taking measures to provide, not money committed to a recipient. Section II: the Framework \"does not constitute or create any legally binding or enforceable obligations\". The stages follow the Framework's objective of resilient supply chains \"including mining, separation, and processing\"."
   },
   {
+    "id": "fin-us-chips-usar-2026-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "277000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "direct funding awards (the “Direct Funding”) with a maximum award amount of $277.0 million in the aggregate",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": "CHIPS Act of 2022",
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining",
+      "processing",
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-01-26",
+        "sourceId": "src-nist-chips-usar-2026",
+        "note": "\"a non-binding letter of intent to provide up to $277 million in direct funding\"."
+      },
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "16132790",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "shares of USAR common stock issued to the DOC",
+        "asStated": "USAR will issue to the DOC 16,132,790 shares of USAR Common Stock (the “SIA Shares”)",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Consideration to the government under the Securities Issuance Agreement, entered into \"as inducement to enter into\" the Direct Funding Agreement."
+      },
+      {
+        "kind": "other",
+        "value": "17600584",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "shares under warrant at $17.17 per share",
+        "asStated": "a warrant (the “Warrant”) to purchase 17,600,584 shares of USAR Common Stock (the “Warrant Shares”) at an exercise price of $17.17 per share",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "status",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First to fourth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "amount",
+          "provider",
+          "recipient",
+          "programme",
+          "legal_authority",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding Agreement; Securities Issuance Agreement",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding Agreement",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds occurs on execution, only when the Department delivers a Funding Obligation, up to the scheduled cumulative disbursement amount and subject to the project's progress."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 4.16",
+        "note": "Issuing equity interests to the Department, in the amount the Securities Issuance Agreement specifies, is a condition precedent to the Award Date."
+      }
+    ],
+    "notes": "The package; its five project awards are recorded as parts of it. Instrument not specified: the 8-K calls them \"direct funding awards\" and never grants, and the executed Direct Funding Agreement (Exhibit 10.1) defines Direct Funding as \"in the form of an other transaction\", a form it lists apart from grants and cooperative agreements; the vocabulary has no instrument for it. The government receives shares and a warrant in return, recorded as terms, not as money it provides; issuing the equity to the Department is a condition precedent to the Award Date (Section 4.16). Disbursement is milestone-based and reimburses eligible costs; under Section 2.1(b) no funds are obligated on execution, only when the Department delivers a Funding Obligation, and the Department may recover disbursements on the clawback events of Section 10.1.1. The corpus records no funding obligation and no disbursement."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1300000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "to guarantee the repayment by USAR and its affiliates of advances in an aggregate principal amount of $1.3 billion (“FFB Advances” and, together with the Direct Funding, the “Awards”) made by the Federal Financing Bank",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office), guaranteeing Federal Financing Bank advances",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": "CHIPS Act of 2022",
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining",
+      "processing",
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-01-26",
+        "sourceId": "src-nist-chips-usar-2026",
+        "note": "\"up to $1.3 billion in a senior secured loan\" under a non-binding letter of intent."
+      },
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "15",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years from the first advance under each note",
+        "asStated": "Each FFB Advance matures fifteen (15) years after the first FFB Advance made under the applicable FFB Note.",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      },
+      {
+        "kind": "other",
+        "value": "2",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% of the FFB commitment, one-time commitment fee",
+        "asStated": "a one-time commitment fee equal to 2.0% of the FFB commitment amount",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      },
+      {
+        "kind": "other",
+        "value": "2",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% per annum on the unutilized FFB commitment, ticking fee",
+        "asStated": "a ticking fee equal to 2.0% per annum on the unutilized FFB commitment",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": null
+      },
+      {
+        "kind": "lending_rate",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "senior secured debt with a 15-year term and an expected rate of Treasury + 150 bps",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "The rate expected under the letter of intent; the agreement sets rates in each FFB note."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "status",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "First to fourth paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "amount",
+          "provider",
+          "recipient",
+          "programme",
+          "legal_authority",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Loan Guarantee Agreement",
+        "note": null
+      }
+    ],
+    "notes": "The Federal Financing Bank, \"an instrumentality of the United States\", makes the advances and the DOC guarantees them; recorded once, as the DOC's guarantee, so the same $1.3 billion is not counted as both a loan and a guarantee. A guarantee is its own instrument and is never added to the direct funding. The package's five project tranches are recorded as parts of it."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-magnet-project-2-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (d)",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "60000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(d) $60.0 million for the construction of a new magnet making facility",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Magnet Project 2",
+    "projectId": "prj-us-usar-magnet-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (d)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (d)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(iv)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (d)",
+        "note": "A new magnet making facility; the filing does not name the magnet type or the site. NdFeB is read from the company's Stillwater production, not stated for this project."
+      }
+    ],
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-magnet-project-2-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (d)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "325000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(d) $325.0 million for the Magnet Project 2",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Magnet Project 2",
+    "projectId": "prj-us-usar-magnet-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (d)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (d)",
+        "note": "A new magnet making facility; the filing does not name the magnet type or the site. NdFeB is read from the company's Stillwater production, not stated for this project."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-metal-project-2-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (e)",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "15000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(e) $15.0 million for the construction of a new strip casting and metal making facility",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Metal Project 2",
+    "projectId": "prj-us-usar-metal-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (e)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (e)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(v)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (e)",
+        "note": "A new strip casting and metal making facility; the filing does not name the site. Read as the refining stage."
+      }
+    ],
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-metal-project-2-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (e)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "75000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(e) $75.0 million for the Metal Project 2",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Metal Project 2",
+    "projectId": "prj-us-usar-metal-project-2",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (e)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01 (e)",
+        "note": "A new strip casting and metal making facility; the filing does not name the site. Read as the refining stage."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-round-top-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (a)",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "132000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(a) $132.0 million for the construction of a rare earth mining and processing facility in Sierra Blanca, Texas",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Round Top Mine Project",
+    "projectId": "prj-us-usar-round-top",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Texas",
+        "asStated": "Sierra Blanca, Texas"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (a)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (a)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(i)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release names the 12 minerals the mine will process: yttrium, gallium, dysprosium, terbium, holmium, lutetium, erbium, thulium, ytterbium, gadolinium, hafnium and zirconium. The rare earths among them fall under the grouped material; hafnium and zirconium are untracked."
+      }
+    ],
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-round-top-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (a)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "550000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(a) $550.0 million for the Round Top Mine Project",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Round Top Mine Project",
+    "projectId": "prj-us-usar-round-top",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Texas",
+        "asStated": "Sierra Blanca, Texas"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "hafnium",
+      "zirconium"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (a)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release names the 12 minerals the mine will process: yttrium, gallium, dysprosium, terbium, holmium, lutetium, erbium, thulium, ytterbium, gadolinium, hafnium and zirconium. The rare earths among them fall under the grouped material; hafnium and zirconium are untracked."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-magnet-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (b)",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(b) $50.0 million for the expansion and modernization of the existing magnet making facility located in Stillwater, Oklahoma",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Magnet Project",
+    "projectId": "prj-us-usar-stillwater-magnet",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (b)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (b)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(ii)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release says the Stillwater project will increase \"production capacity of NdFeB magnets to 10,000 TPA\"."
+      }
+    ],
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-magnet-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (b)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "250000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(b) $250.0 million for the Stillwater Magnet Project",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Magnet Project",
+    "projectId": "prj-us-usar-stillwater-magnet",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (b)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Third and fourth paragraphs",
+        "note": "The Commerce release says the Stillwater project will increase \"production capacity of NdFeB magnets to 10,000 TPA\"."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-metal-direct-funding",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-direct-funding",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, Direct Funding (c)",
+        "note": null
+      }
+    ],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "20000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(c) $20.0 million for the expansion and modernization of the existing strip casting and metal making facility located in Stillwater, Oklahoma",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Metal Project",
+    "projectId": "prj-us-usar-stillwater-metal",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Direct Funding Agreement entered into on 3 June 2026. Signing obligates no funds: under Exhibit 10.1 Section 2.1(b) the Department obligates funds only when it delivers a Funding Obligation, and disbursements follow project milestones, subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Direct Funding (c)",
+        "note": null
+      },
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Item 1.01, Direct Funding (c)",
+        "note": "The filing calls them \"direct funding awards\" that reimburse eligible costs on milestones and never calls them grants; recorded as instrument not specified."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Article 1, definitions of “Direct Funding” and “CHIPS Incentives”; Section 2.1(a)(iii)",
+        "note": "The executed agreement defines \"Direct Funding\" as \"direct funding under the NOFO in the form of an other transaction\" and lists grants, cooperative agreements and other transactions as separate forms of CHIPS Incentives. It never calls the awards grants. The vocabulary has no instrument for an other transaction, so the instrument is recorded as not specified, not as grant."
+      },
+      {
+        "sourceId": "src-usar-direct-funding-agreement-2026-06-03",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1(b)",
+        "note": "Contracted means the agreement is executed: no obligation of funds for this project's award occurs on execution, only when the Department delivers a Funding Obligation, up to the project's scheduled cumulative disbursement amount and subject to its progress."
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Third and fourth paragraphs",
+        "note": "Strip casting and metal making for rare earth metals and alloys (Commerce release), read as the refining stage."
+      }
+    ],
+    "notes": "Instrument not specified, as on the package: the 8-K calls this a \"direct funding award\" and the executed agreement defines Direct Funding as \"in the form of an other transaction\", never a grant."
+  },
+  {
+    "id": "fin-us-chips-usar-2026-stillwater-metal-loan-guarantee",
+    "eventId": "evt-us-chips-usar-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-chips-usar-2026-loan-guarantee",
+        "relationship": "part_of",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "locator": "Item 1.01, FFB Advances (c)",
+        "note": null
+      }
+    ],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "(c) $100.0 million for the Stillwater Metal Project",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Commerce (CHIPS Program Office)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-chips-incentives",
+    "recipient": "USA Rare Earth, Inc.",
+    "recipientOrgIds": [
+      "org-usa-rare-earth"
+    ],
+    "project": "Stillwater Metal Project",
+    "projectId": "prj-us-usar-stillwater-metal",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Oklahoma",
+        "asStated": "Stillwater, Oklahoma"
+      }
+    ],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-06-03",
+        "sourceId": "src-usar-8k-2026-06-03",
+        "note": "Loan Guarantee Agreement entered into on 3 June 2026; each Federal Financing Bank advance is subject to conditions precedent."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-usar-8k-2026-06-03",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "relationships",
+          "provider",
+          "programme",
+          "recipient",
+          "project",
+          "status",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, FFB Advances (c)",
+        "note": null
+      },
+      {
+        "sourceId": "src-nist-chips-usar-2026",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Third and fourth paragraphs",
+        "note": "Strip casting and metal making for rare earth metals and alloys (Commerce release), read as the refining stage."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "fin-us-commerce-chips-vulcan-2025-incentives",
     "eventId": "evt-us-osc-vulcan-reelement-2025",
     "relationships": [],
     "instrument": "unspecified",
-    "valueRole": "commitment",
+    "valueRole": "indication",
     "capitalSource": "public",
     "amount": {
       "value": "50000000",
@@ -2049,9 +5627,15 @@
     },
     "provider": "US Department of Commerce, CHIPS Program Office",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-commerce"
+    ],
     "legalAuthority": "CHIPS and Science Act",
+    "programmeId": "prg-us-chips-incentives",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": "Purchase of equipment, in parallel with OSC's financing",
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -2098,9 +5682,18 @@
         "evidence": "explicit",
         "locator": "Fourth paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-osc-vulcan-reelement-2025",
+        "supports": [
+          "programme"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Fourth paragraph",
+        "note": "\"the Department of Commerce's ... CHIPS Program Office signed a preliminary non-binding letter of intent to provide $50 million in proposed federal incentives under the CHIPS and Science Act\": the release does not name the incentives programme itself."
       }
     ],
-    "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\"."
+    "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\". Recorded as a non-binding indication, not as a commitment: a preliminary non-binding letter of intent is not a financing commitment, so it is in no sum."
   },
   {
     "id": "fin-us-dod-mp-2025-additional-preferred-option",
@@ -2118,9 +5711,17 @@
     },
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -2182,7 +5783,7 @@
         "note": null
       }
     ],
-    "notes": "A funding option, not committed money: the Company may fund up to the full $350 million of its Funding Allocation by selling additional preferred stock to DoD, or elect to obtain it under the JPMorgan / Goldman Sachs committed financing instead. No source in the corpus records which it chose, whether DoD bought any further preferred stock, or any payment, so this row is listed apart and never summed. An exercise would be recorded as its own commitment drawn from this row."
+    "notes": "A funding option, not committed money: the Company could fund up to the full $350 million of its Funding Allocation by selling additional preferred stock to DoD, or elect to obtain it under the JPMorgan / Goldman Sachs committed financing instead, within 45 days of the Closing Date. MP's Form 10-K for 2025 reports 400,000 Series A shares issued in 2025 and outstanding at 31 December 2025, the number issued at closing, and its 10-Q for the quarter to 30 June 2026 still reports 400,000; the bank Commitment Letter expired undrawn on 26 August 2025. Neither filing mentions the Funding Allocation or states that the option was exercised or lapsed, so no exercise and no lapse is recorded; the row is listed apart and never summed. An exercise would be recorded as its own commitment drawn from this row."
   },
   {
     "id": "fin-us-dod-mp-2025-bank-financing",
@@ -2200,9 +5801,18 @@
     },
     "provider": "JPMorgan Chase Funding Inc. and Goldman Sachs Bank USA",
     "providerJurisdiction": null,
+    "providerOrgIds": [
+      "org-goldman-sachs-bank-usa",
+      "org-jpmorgan-chase-funding"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
+    "projectId": "prj-us-mp-10x-facility",
     "facility": "10X Facility",
     "locations": [],
     "stages": [],
@@ -2216,6 +5826,12 @@
         "date": "2025-07-09",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
         "note": "A debt commitment letter, \"subject to customary terms and conditions\"; the filing does not describe an executed loan agreement."
+      },
+      {
+        "status": "lapsed",
+        "date": "2025-08-26",
+        "sourceId": "src-mp-10q-2025-q3",
+        "note": "\"The Commitment Letter expired undrawn on its own terms on August 26, 2025, as it was reduced on a dollar-for-dollar basis upon the Offering ... and the Company's execution of the Revolving Credit Facility.\""
       }
     ],
     "implementationStatusHistory": [],
@@ -2244,14 +5860,24 @@
           "recipient",
           "facility",
           "status",
-          "terms"
+          "terms",
+          "project"
         ],
         "evidence": "explicit",
         "locator": "Item 1.01, 10X Facility Funding",
         "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2025-q3",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 3 (Public-Private Partnership), Commitment Letter for Facility Construction",
+        "note": null
       }
     ],
-    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash."
+    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing."
   },
   {
     "id": "fin-us-dod-mp-2025-company-cash",
@@ -2269,9 +5895,15 @@
     },
     "provider": null,
     "providerJurisdiction": null,
+    "providerOrgIds": [],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": "HREE refining expansion and hydrochloric acid recommissioning at Mountain Pass; Independence magnet facility expansion",
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -2340,9 +5972,17 @@
     "amount": null,
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "MP 10X Development, LLC (project company established to develop the 10X Facility)",
+    "recipientOrgIds": [
+      "org-mp-10x-development"
+    ],
     "project": "Second domestic magnet manufacturing facility",
+    "projectId": "prj-us-mp-10x-facility",
     "facility": "10X Facility",
     "locations": [],
     "stages": [
@@ -2368,6 +6008,12 @@
         "date": "2025-07-10",
         "sourceId": "src-mp-dod-2025",
         "note": "The company \"will construct\" the facility \"at a soon-to-be-chosen location\"."
+      },
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "\"In April 2026, the Company purchased a 120-acre site in Northlake, Texas, for approximately $80 million where construction of the 10X Facility is currently underway.\" Reported for the quarter to 30 June 2026; the start date of construction is not stated."
       }
     ],
     "terms": [
@@ -2475,6 +6121,15 @@
         "evidence": "explicit",
         "locator": "Opening paragraphs",
         "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note on property, plant and equipment; Note 1",
+        "note": null
       }
     ],
     "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations."
@@ -2495,9 +6150,17 @@
     },
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": "Defense Production Act Title III, 50 U.S.C. § 4531 et seq., \"as well as other authorities\"",
+    "programmeId": null,
     "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -2518,6 +6181,12 @@
         "date": "2025-07-09",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
         "note": "Subscription Agreement entered into on the Effective Date; 400,000 shares of Series A Cumulative Perpetual Convertible Preferred Stock to be issued on the Closing Date, 11 July 2025."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "\"In July 2025, the Company issued 400,000 shares of newly designated Series A Cumulative Perpetual Convertible Preferred Stock ... to the DoW for cash consideration of $400.0 million.\" The day is not stated in this note; the Form 8-K put the Closing Date at 11 July 2025."
       }
     ],
     "implementationStatusHistory": [],
@@ -2579,6 +6248,15 @@
         "evidence": "explicit",
         "locator": "Paragraph on use of proceeds",
         "note": "The recipient's stated intended use: \"to expand its existing rare earths separation and processing capabilities, as well as its magnet production capacity\"."
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 12, Redeemable Preferred Stock",
+        "note": null
       }
     ],
     "notes": "DoD's convertible preferred stock and warrant together represent 15% of issued and outstanding common stock as of the Closing Date, on an as-converted and as-exercised basis (Form 8-K). Stage attribution is the recipient's stated intended use of proceeds."
@@ -2593,9 +6271,17 @@
     "amount": null,
     "provider": "US Department of Defense",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
     "legalAuthority": null,
+    "programmeId": null,
     "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -2666,7 +6352,7 @@
         "note": null
       }
     ],
-    "notes": "Applies to all of the Company's products that contain NdPr (concentrate, oxide and metal). No total value is stated: the cost depends on future prices, and none is estimated here."
+    "notes": "Applies to all of the Company's products that contain NdPr (concentrate, oxide and metal). No total value is stated: the cost depends on future prices, and none is estimated here. The agreement commenced on 1 October 2025. MP's 10-Q for the quarter to 30 June 2026 reports price protection agreement income of $59.9 million for the first half of 2026 (its right to receive cash from the DoW for the gap between $110 per kilogram of NdPr and the benchmark price) and a PPA income receivable of $17.6 million at 30 June 2026 ($51.0 million at 31 December 2025). It does not state cash received, so no payment status is recorded; these are the company's accounting figures, not a government statement."
   },
   {
     "id": "fin-us-dod-mp-2025-samarium-loan",
@@ -2692,9 +6378,17 @@
     },
     "provider": "US Department of Defense, Office of Strategic Capital",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act (source of OSC's credit subsidy funding)",
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
     "project": "Samarium Project: expansion of heavy rare earth separation, including separation of samarium oxide",
+    "projectId": "prj-us-mountain-pass-samarium",
     "facility": "Mountain Pass Rare Earth Mine and Processing Facility",
     "locations": [
       {
@@ -2724,6 +6418,12 @@
         "date": null,
         "sourceId": "src-osc-mp-loan-2025",
         "note": "OSC announced on 10 August 2025 \"the recent execution of its first direct loan\"; the execution date is not stated."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-mp-10k-2025",
+        "note": "\"in August 2025, we issued a $150.0 million unsecured promissory note to the DoW with a 12-year term, maturing on August 1, 2037\"; the filing reports funds received from the DoW Transactions. The day of funding is not stated."
       }
     ],
     "implementationStatusHistory": [],
@@ -2747,6 +6447,16 @@
         "asStated": "maturing 12 years after issuance of the Promissory Note",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
         "note": null
+      },
+      {
+        "kind": "lending_rate",
+        "value": "5.38",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "% per annum, fixed",
+        "asStated": "bears interest at a fixed rate of 5.38% per annum, calculated as the 10-year U.S. Treasury constant maturity rate plus 1.00% at the time of funding",
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "The rate fixed at funding under the formula the Transaction Agreement set."
       }
     ],
     "outcomes": [],
@@ -2780,11 +6490,30 @@
           "provider",
           "legal_authority",
           "relationships",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "First and third paragraphs",
         "note": "Read in full in a browser on 2026-09-23."
+      },
+      {
+        "sourceId": "src-mp-10k-2025",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "MD&A, DoW Transactions; Liquidity and Capital Resources",
+        "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 11, Debt Obligations: Samarium Project Loan",
+        "note": null
       }
     ],
     "notes": "OSC describes this as its first direct loan. Unsecured promissory note; the company may repay at any time."
@@ -2805,9 +6534,15 @@
     },
     "provider": "US Department of Defense, Office of Strategic Capital",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act",
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -2836,7 +6571,8 @@
           "amount",
           "provider",
           "legal_authority",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Third paragraph",
@@ -2861,9 +6597,15 @@
     },
     "provider": "US Department of Defense, Office of Strategic Capital",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act",
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": null,
+    "recipientOrgIds": [],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -2892,7 +6634,8 @@
           "amount",
           "provider",
           "legal_authority",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Third paragraph",
@@ -2925,9 +6668,18 @@
     },
     "provider": "US Department of War, Office of Strategic Capital",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": "One Big Beautiful Bill Act (OSC lending authority)",
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "Vulcan Elements and ReElement Technologies",
+    "recipientOrgIds": [
+      "org-reelement-technologies",
+      "org-vulcan-elements"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [
@@ -2991,7 +6743,8 @@
           "materials",
           "status",
           "terms",
-          "outcomes"
+          "outcomes",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "First to fourth paragraphs",
@@ -3033,9 +6786,17 @@
     },
     "provider": "US Department of War, Office of Strategic Capital",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "ReElement Technologies",
+    "recipientOrgIds": [
+      "org-reelement-technologies"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -3069,7 +6830,8 @@
           "recipient",
           "relationships",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Second paragraph",
@@ -3102,9 +6864,17 @@
     },
     "provider": "US Department of War, Office of Strategic Capital",
     "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-osc"
+    ],
     "legalAuthority": null,
+    "programmeId": "prg-us-osc-critical-minerals-lending",
     "recipient": "Vulcan Elements",
+    "recipientOrgIds": [
+      "org-vulcan-elements"
+    ],
     "project": null,
+    "projectId": null,
     "facility": null,
     "locations": [],
     "stages": [],
@@ -3138,7 +6908,8 @@
           "recipient",
           "relationships",
           "materials",
-          "status"
+          "status",
+          "programme"
         ],
         "evidence": "explicit",
         "locator": "Second paragraph",

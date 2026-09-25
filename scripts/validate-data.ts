@@ -47,6 +47,7 @@ import {
 import { site } from "../lib/site";
 import { isExampleCandidateFile } from "./candidate-files";
 import { formatCapitalControlIssue, parseCapitalControlSeed, validateCapitalControl } from "./validate-capital-control";
+import type { CapitalControlCollection } from "./validate-capital-control";
 
 const seedDir = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "seed");
 const read = <T>(name: string): T => JSON.parse(readFileSync(join(seedDir, `${name}.json`), "utf8")) as T;
@@ -530,10 +531,15 @@ for (const { file, records } of candidateFiles) {
 // ids and their proposed-source ids are passed in so that no published row can
 // reference a private draft.
 
-const capitalControlSeed = (name: "financial-commitments" | "control-measures") =>
+const capitalControlSeed = (name: CapitalControlCollection) =>
   parseCapitalControlSeed(readFileSync(join(seedDir, `${name}.json`), "utf8"), name);
 const commitmentsSeed = capitalControlSeed("financial-commitments");
 const controlsSeed = capitalControlSeed("control-measures");
+// v0.6 capital-intelligence registries and designations.
+const organizationsSeed = capitalControlSeed("organizations");
+const projectsSeed = capitalControlSeed("projects");
+const programmesSeed = capitalControlSeed("programmes");
+const designationsSeed = capitalControlSeed("project-designations");
 
 const candidateReferenceIds = candidateFiles.flatMap(({ records }) =>
   records.flatMap((c) => [
@@ -545,6 +551,10 @@ const candidateReferenceIds = candidateFiles.flatMap(({ records }) =>
 const capitalControl = validateCapitalControl({
   financialCommitments: commitmentsSeed.records,
   controlMeasures: controlsSeed.records,
+  organizations: organizationsSeed.records,
+  projects: projectsSeed.records,
+  programmes: programmesSeed.records,
+  projectDesignations: designationsSeed.records,
   corpus: {
     events,
     sources,
@@ -558,7 +568,15 @@ const capitalControl = validateCapitalControl({
   today: new Date().toISOString().slice(0, 10),
 });
 
-for (const issue of [...commitmentsSeed.errors, ...controlsSeed.errors, ...capitalControl.errors])
+for (const issue of [
+  ...commitmentsSeed.errors,
+  ...controlsSeed.errors,
+  ...organizationsSeed.errors,
+  ...projectsSeed.errors,
+  ...programmesSeed.errors,
+  ...designationsSeed.errors,
+  ...capitalControl.errors,
+])
   err(formatCapitalControlIssue(issue));
 for (const issue of capitalControl.warnings) warn(formatCapitalControlIssue(issue));
 
@@ -608,13 +626,23 @@ const activeWatched = watchlist.filter((w) => w.status === "active").length;
 const exampleNote = exampleCandidateCount
   ? ` (+ ${exampleCandidateCount} example fixture${exampleCandidateCount === 1 ? "" : "s"}, schema-checked, not counted)`
   : "";
-const { financialCommitments: commitmentCount, controlMeasures: controlCount } = capitalControl.counts;
+const {
+  financialCommitments: commitmentCount,
+  controlMeasures: controlCount,
+  organizations: organizationCount,
+  projects: projectCount,
+  programmes: programmeCount,
+  projectDesignations: designationCount,
+} = capitalControl.counts;
+const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
 const counts =
   `${events.length} events (${verifiedCount} verified · ${events.length - verifiedCount} provisional · ${monitoredCount} monitored) · ` +
   `${framing.length} framing claims · ${materials.length} materials · ${jurisdictions.length} jurisdictions · ` +
   `${sources.length} sources · ` +
   `${commitmentCount} financial commitment${commitmentCount === 1 ? "" : "s"} · ` +
   `${controlCount} control measure${controlCount === 1 ? "" : "s"} · ` +
+  `${plural(organizationCount, "organization")} · ${plural(projectCount, "project")} · ` +
+  `${plural(programmeCount, "programme")} · ${plural(designationCount, "project designation")} · ` +
   `${activeWatched}/${watchlist.length} watched sources active · ` +
   `${candidateCount} candidate${candidateCount === 1 ? "" : "s"} (private)${exampleNote}`;
 

@@ -347,7 +347,7 @@ export const FINANCIAL_INSTRUMENTS = [
   "procurement_right",
   "stockpile_purchase",
   "mixed", // one amount the source spreads over several named instruments (e.g. "loans and equity support") without a split
-  "unspecified", // the source says "support", "funding" or "investment" and names no instrument
+  "unspecified", // the source says "support", "funding" or "investment" and names no instrument, or names only a legal form no instrument here covers (a US "other transaction"); never a grant on a guess
 ] as const;
 
 /**
@@ -361,6 +361,7 @@ export const VALUE_ROLES = [
   "budget_appropriation", // money set aside in a budget
   "lending_authority", // a ceiling on what a lender may lend or guarantee
   "funding_option", // a ceiling a party may call on at its election under an executed agreement; an exercise is recorded as its own commitment drawn from it
+  "indication", // a non-binding letter of intent or interest that names an amount: possible support, never a commitment, capital or backing
   "expected_co_investment", // money the government expects others to put in
   "private_financing", // commercial capital raised alongside public money
   "recipient_own_funds", // the recipient's own contribution
@@ -382,10 +383,11 @@ export const FINANCIAL_STATUSES = [
   "authorized", // legal or budgetary authority exists
   "allocated", // money assigned to the purpose, e.g. in a budget
   "decided", // the provider has decided to invest or award
-  "contracted", // a binding agreement has been executed
+  "contracted", // a binding agreement has been executed; not a payment, and not necessarily an obligation of funds
   "partially_disbursed",
   "disbursed",
   "withdrawn",
+  "lapsed", // ended unused on its own terms, e.g. a commitment letter that expired undrawn (v0.6)
   "not_stated",
 ] as const;
 
@@ -495,10 +497,10 @@ export const FINANCIAL_EVIDENCE_FIELDS = [
   "capital_source",
   "amount",
   "relationships",
-  "provider", // provider and providerJurisdiction
+  "provider", // provider, providerJurisdiction and providerOrgIds
   "legal_authority",
-  "recipient",
-  "project",
+  "recipient", // recipient and recipientOrgIds
+  "project", // project and projectId
   "facility",
   "location",
   "stages", // stages and stageAllocation
@@ -506,6 +508,7 @@ export const FINANCIAL_EVIDENCE_FIELDS = [
   "status", // both status histories
   "terms",
   "outcomes",
+  "programme", // programmeId (v0.6)
 ] as const;
 
 /** The kind of legal or contractual control a measure imposes. */
@@ -587,6 +590,7 @@ export const CONTROL_EVIDENCE_FIELDS = [
   "legal_basis", // legalBasisEventIds and legalBasisAsStated
   "modified_measures", // modifiesMeasureIds and modifiesExternalInstruments
   "status",
+  "item_scope", // controlledItemTypes and controlledStages (v0.6)
 ] as const;
 
 export type FinancialInstrument = (typeof FINANCIAL_INSTRUMENTS)[number];
@@ -779,11 +783,24 @@ export type FinancialCommitment = {
   provider: string | null;
   /** The tracked actor behind the provider (actor taxonomy, not a location). */
   providerJurisdiction: JurisdictionCode | null;
+  /**
+   * The providers as registry organizations ("org-..."), most specific unit
+   * first-named (OSC, not the whole department). Empty when the provider is
+   * not an identifiable organization, e.g. "PSUs, etc."; `provider` keeps the
+   * wording either way.
+   */
+  providerOrgIds: string[];
   /** Statute or authority invoked, as stated, e.g. "Defense Production Act Title III". */
   legalAuthority: string | null;
+  /** The programme or scheme the money is awarded or managed under ("prg-..."), when the sources name one. */
+  programmeId: string | null;
   recipient: string | null;
+  /** The recipients as registry organizations; empty when the recipient is a project, a class or unstated. */
+  recipientOrgIds: string[];
   /** The funded undertaking, e.g. a mine restart or a demonstration plant. */
   project: string | null;
+  /** The registry project ("prj-...") this row funds, when it funds one identifiable project. */
+  projectId: string | null;
   /** The physical site or plant, where named. */
   facility: string | null;
   /** Empty when the source gives no location. */
@@ -844,6 +861,21 @@ export type ControlMeasure = {
   /** The covered items in the source's own words. */
   productScopeAsStated: string | null;
   productCodes: ProductCode[];
+  /**
+   * What kind of item the clause covers (v0.6). Empty for clauses that do not
+   * define items of their own: end-use restrictions, customs enforcement,
+   * divestiture orders and suspensions.
+   */
+  controlledItemTypes: ControlledItemType[];
+  /**
+   * The supply-chain stages the covered items belong to: the stage that
+   * produces a covered material or product, or the stage a covered technology
+   * or piece of equipment is used in. Read from the product scope; empty on
+   * the same clauses as controlledItemTypes. Controlling exports of
+   * separation technology is not controlling separation itself, so this says
+   * where the items sit, not what the clause restricts domestically.
+   */
+  controlledStages: SupplyChainStage[];
   /** Events in the corpus that are this measure's legal basis, e.g. an export control law. */
   legalBasisEventIds: string[];
   legalBasisAsStated: string | null;
@@ -853,6 +885,227 @@ export type ControlMeasure = {
   modifiesExternalInstruments: string[];
   statusHistory: ControlStatusEntry[];
   evidence: ControlEvidence[];
+  notes?: string | null;
+};
+
+// ---------------------------------------------------------------------------
+// Capital intelligence (v0.6): who, what and under which scheme
+//
+// v0.5 recorded the instruments. v0.6 adds the parties and undertakings they
+// connect, as registries that the instrument rows point to:
+//
+//   Organization        "org-..."  a provider, recipient, sponsor or holder:
+//                                  a government body, public financier,
+//                                  joint vehicle, company or bank.
+//   Project             "prj-..."  one physical undertaking (a mine, a
+//                                  refinery, a magnet plant) that capital or
+//                                  a designation is aimed at.
+//   Programme           "prg-..."  a named scheme that awards, lends,
+//                                  credits, reserves or designates.
+//   ProjectDesignation  "dsg-..."  non-monetary support: a project recognized
+//                                  under a scheme (an EU CRMA strategic
+//                                  project). A child row of the event that
+//                                  recognizes it, like fin- and ctl- rows.
+//
+// Registry records are factual claims too: every name, kind, country, actor
+// and parent link names its source in `evidence`. Nothing money-related is
+// stored on a registry record; stacks, portfolios, co-investment and flows are
+// derived in lib/capital-intelligence.ts through the v0.5 counting rules.
+// A designation is never capital and never enters a sum.
+// ---------------------------------------------------------------------------
+
+export const ORGANIZATION_ID_PREFIX = "org-";
+export const PROJECT_ID_PREFIX = "prj-";
+export const PROGRAMME_ID_PREFIX = "prg-";
+export const PROJECT_DESIGNATION_ID_PREFIX = "dsg-";
+
+/** What kind of body an organization is. */
+export const ORGANIZATION_KINDS = [
+  "government", // a government, or one of its ministries, departments, agencies or offices
+  "public_financier", // a publicly owned lender, investor or export-credit agency, e.g. the National Wealth Fund
+  "joint_vehicle", // a vehicle set up jointly by public and private parties, e.g. JARE
+  "company", // a company acting in its own name
+  "project_company", // a company established to develop one project
+  "bank", // a commercial bank
+] as const;
+
+/**
+ * How an organization relates to another, read from the record that holds the
+ * link. "part_of" (an office inside a department) rolls a portfolio up to the
+ * parent; "established_by" (a joint vehicle or project company and the bodies
+ * that set it up) does not, because the vehicle's money is not its founders'.
+ */
+export const ORGANIZATION_LINK_TYPES = ["part_of", "established_by"] as const;
+
+/** Organization fields an evidence reference can support. */
+export const ORGANIZATION_EVIDENCE_FIELDS = [
+  "name", // name, nameOriginal and aliases
+  "kind",
+  "country",
+  "actor",
+  "parents",
+] as const;
+
+/** Project fields an evidence reference can support. */
+export const PROJECT_EVIDENCE_FIELDS = ["name", "sponsors", "location", "stages", "materials"] as const;
+
+/** What a programme does with the money or recognition it manages. */
+export const PROGRAMME_KINDS = [
+  "grant_programme", // awards grants or non-repayable contributions
+  "financing_facility", // lends, guarantees or invests
+  "tax_incentive", // a tax credit or offset
+  "strategic_reserve", // buys, holds or trades stocks
+  "designation_scheme", // recognizes projects; any money comes from other instruments
+  "multi_instrument", // funds several of the above under one name, with no split stated
+] as const;
+
+/** Programme fields an evidence reference can support. */
+export const PROGRAMME_EVIDENCE_FIELDS = [
+  "name", // name and nameOriginal
+  "kind",
+  "administrators", // administeringOrgIds, and the actor they belong to
+  "parent",
+  "legal_authority",
+] as const;
+
+/** Legal standing of a project designation over time. */
+export const DESIGNATION_STATUSES = [
+  "recognized", // the scheme's decision recognizes the project
+  "withdrawn", // the recognition has been withdrawn or has lapsed
+] as const;
+
+/** ProjectDesignation fields an evidence reference can support. */
+export const DESIGNATION_EVIDENCE_FIELDS = [
+  "programme",
+  "project", // projectId and projectNameAsStated
+  "holders",
+  "location",
+  "stages",
+  "materials",
+  "status",
+] as const;
+
+/** What kind of item a control clause covers. */
+export const CONTROLLED_ITEM_TYPES = [
+  "goods", // materials, compounds, alloys and products other than production equipment
+  "equipment", // production, processing or testing equipment
+  "technology", // technology, know-how or technical data
+] as const;
+
+export type OrganizationKind = (typeof ORGANIZATION_KINDS)[number];
+export type OrganizationLinkType = (typeof ORGANIZATION_LINK_TYPES)[number];
+export type OrganizationEvidenceField = (typeof ORGANIZATION_EVIDENCE_FIELDS)[number];
+export type ProjectEvidenceField = (typeof PROJECT_EVIDENCE_FIELDS)[number];
+export type ProgrammeKind = (typeof PROGRAMME_KINDS)[number];
+export type ProgrammeEvidenceField = (typeof PROGRAMME_EVIDENCE_FIELDS)[number];
+export type DesignationStatus = (typeof DESIGNATION_STATUSES)[number];
+export type DesignationEvidenceField = (typeof DESIGNATION_EVIDENCE_FIELDS)[number];
+export type ControlledItemType = (typeof CONTROLLED_ITEM_TYPES)[number];
+
+/** A link from one organization to another, naming the source that states it. */
+export type OrganizationLink = {
+  /** The other organization: "org-...". */
+  organizationId: string;
+  relationship: OrganizationLinkType;
+  sourceId: string;
+  locator?: string | null;
+  note?: string | null;
+};
+
+/**
+ * A provider, recipient, sponsor or holder. One record per body, however
+ * many names the sources use for it: a renamed department keeps one id and
+ * lists its other names in `aliases`, so its portfolio does not split.
+ */
+export type Organization = {
+  /** "org-..." */
+  id: string;
+  /** Normalized English name. */
+  name: string;
+  /** The name in the body's own language, where that is not English. */
+  nameOriginal: string | null;
+  /** Other names the sources use, e.g. "Department of War". */
+  aliases: string[];
+  kind: OrganizationKind;
+  /** ISO 3166-1 alpha-2 code of the country it is constituted in; null for a supranational body. */
+  countryCode: CountryCode | null;
+  /**
+   * The tracked government the body belongs to: set for government bodies and
+   * public financiers, null for companies, banks and joint vehicles, whose
+   * money is not a government's even when a government helped found them.
+   */
+  actor: JurisdictionCode | null;
+  parents: OrganizationLink[];
+  evidence: EvidenceReference<OrganizationEvidenceField>[];
+  notes?: string | null;
+};
+
+/**
+ * One physical undertaking capital or a designation is aimed at. It holds
+ * what the undertaking is, not what was paid for it: money stays on the
+ * financial rows that point here.
+ */
+export type Project = {
+  /** "prj-..." */
+  id: string;
+  name: string;
+  /** Developers or owners the sources name. */
+  sponsorOrgIds: string[];
+  locations: ProjectLocation[];
+  stages: SupplyChainStage[];
+  /** Tracked materials the sources name for the project. */
+  materialIds: string[];
+  materialAttribution: MaterialAttribution;
+  untrackedMaterialsAsStated: string[];
+  evidence: EvidenceReference<ProjectEvidenceField>[];
+  notes?: string | null;
+};
+
+/** A named scheme that awards, lends, credits, reserves or designates. */
+export type Programme = {
+  /** "prg-..." */
+  id: string;
+  name: string;
+  nameOriginal: string | null;
+  /** The tracked government that runs it. */
+  actor: JurisdictionCode;
+  kind: ProgrammeKind;
+  administeringOrgIds: string[];
+  /** A wider programme this one is funded from or forms part of. */
+  parentProgrammeId: string | null;
+  legalAuthorityAsStated: string | null;
+  evidence: EvidenceReference<ProgrammeEvidenceField>[];
+  notes?: string | null;
+};
+
+export type DesignationStatusEntry = StatusEntry<DesignationStatus>;
+
+/**
+ * A project recognized under a designation scheme. It confers standing
+ * (priority, coordination, faster permitting), not money: any money that
+ * follows is its own financial row.
+ */
+export type ProjectDesignation = {
+  /** "dsg-..." */
+  id: string;
+  /** The event that recognizes the project, e.g. a Commission decision. */
+  eventId: string;
+  /** The designation scheme. */
+  programmeId: string;
+  projectId: string;
+  /** The project's name exactly as the designation gives it. */
+  projectNameAsStated: string;
+  /** Promoters or holders as registry organizations; empty when the source names none. */
+  holderOrgIds: string[];
+  /** The location as the designation states it. */
+  locations: ProjectLocation[];
+  stages: SupplyChainStage[];
+  /** Tracked materials only: a subset of the event's affectedMaterialIds. */
+  materialIds: string[];
+  materialAttribution: MaterialAttribution;
+  untrackedMaterialsAsStated: string[];
+  statusHistory: DesignationStatusEntry[];
+  evidence: EvidenceReference<DesignationEvidenceField>[];
   notes?: string | null;
 };
 

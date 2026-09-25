@@ -12,7 +12,11 @@ import type {
   JurisdictionCode,
   Material,
   Mechanism,
+  Organization,
   PolicyEvent,
+  Programme,
+  Project,
+  ProjectDesignation,
   Source,
   SourceConfidence,
   WatchedSource,
@@ -27,6 +31,10 @@ import sourcesSeed from "@/data/seed/sources.json";
 import watchlistSeed from "@/data/seed/watchlist.json";
 import financialCommitmentsSeed from "@/data/seed/financial-commitments.json";
 import controlMeasuresSeed from "@/data/seed/control-measures.json";
+import organizationsSeed from "@/data/seed/organizations.json";
+import projectsSeed from "@/data/seed/projects.json";
+import programmesSeed from "@/data/seed/programmes.json";
+import projectDesignationsSeed from "@/data/seed/project-designations.json";
 
 const events = eventsSeed as PolicyEvent[];
 const framing = framingSeed as FramingClaim[];
@@ -36,6 +44,12 @@ const sources = sourcesSeed as Source[];
 const watchlist = watchlistSeed as WatchedSource[];
 const financialCommitments = financialCommitmentsSeed as FinancialCommitment[];
 const controlMeasures = controlMeasuresSeed as ControlMeasure[];
+// The v0.6 seeds start as [] and are typed through unknown so an empty file
+// (inferred as never[]) and a populated one load the same way.
+const organizations = organizationsSeed as unknown as Organization[];
+const projects = projectsSeed as unknown as Project[];
+const programmes = programmesSeed as unknown as Programme[];
+const projectDesignations = projectDesignationsSeed as unknown as ProjectDesignation[];
 
 // Sort helper: most recent first.
 const byDateDesc = (a: PolicyEvent, b: PolicyEvent) => b.date.localeCompare(a.date);
@@ -237,6 +251,49 @@ export function getControlMeasuresByEvent(eventId: string): ControlMeasure[] {
   return getAllControlMeasures().filter((m) => m.eventId === eventId);
 }
 
+// --- Capital intelligence registries (v0.6) --------------------------------------
+//
+// Organizations ("org-"), projects ("prj-"), programmes ("prg-") and project
+// designations ("dsg-"). Money stays on the financial rows; everything derived
+// from these links lives in lib/capital-intelligence.ts.
+
+export function getAllOrganizations(): Organization[] {
+  return [...organizations].sort(byId);
+}
+
+export function getOrganizationById(id: string): Organization | undefined {
+  return organizations.find((o) => o.id === id);
+}
+
+export function getAllProjects(): Project[] {
+  return [...projects].sort(byId);
+}
+
+export function getProjectById(id: string): Project | undefined {
+  return projects.find((p) => p.id === id);
+}
+
+export function getAllProgrammes(): Programme[] {
+  return [...programmes].sort(byId);
+}
+
+export function getProgrammeById(id: string): Programme | undefined {
+  return programmes.find((g) => g.id === id);
+}
+
+export function getAllProjectDesignations(): ProjectDesignation[] {
+  return [...projectDesignations].sort(byId);
+}
+
+export function getProjectDesignationById(id: string): ProjectDesignation | undefined {
+  return projectDesignations.find((d) => d.id === id);
+}
+
+/** The designations one event recognizes. */
+export function getProjectDesignationsByEvent(eventId: string): ProjectDesignation[] {
+  return getAllProjectDesignations().filter((d) => d.eventId === eventId);
+}
+
 // --- Aggregate counts (for the homepage / headers) --------------------------
 
 export function getDatasetSummary() {
@@ -248,6 +305,10 @@ export function getDatasetSummary() {
     sources: sources.length,
     financialCommitments: financialCommitments.length,
     controlMeasures: controlMeasures.length,
+    organizations: organizations.length,
+    projects: projects.length,
+    programmes: programmes.length,
+    projectDesignations: projectDesignations.length,
   };
 }
 

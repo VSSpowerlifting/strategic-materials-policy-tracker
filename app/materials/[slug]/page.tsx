@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { InstrumentsPanel } from "@/components/capital/instruments-panel";
+import { MaterialStageResponse } from "@/components/intelligence/response-map";
+import { site } from "@/lib/site";
 import { getAllControlMeasures, getAllFinancialCommitments } from "@/lib/data";
 import { Card } from "@/components/ui/card";
 import { EventListItem } from "@/components/event-card";
@@ -171,6 +173,13 @@ export default async function MaterialPage({
                 capitalHref={`/capital?material=${material.id}`}
                 controlsHref={`/controls?material=${material.id}`}
               />
+              <h3 className="mb-3 mt-8 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">By supply-chain stage</h3>
+              <p className="mb-3 max-w-prose text-sm leading-6 text-muted">
+                Where government capital is aimed and where control clauses&apos; covered items sit, as of {site.lastUpdated}. A clause&apos;s
+                stage is where its items belong, not a claim that it restricts that stage. Record counts only.{" "}
+                <Link href="/interplay" className="text-accent hover:text-accent-strong">All materials</Link>
+              </p>
+              <MaterialStageResponse materialId={material.id} asOf={site.lastUpdated} />
             </Section>
           ) : null}
 

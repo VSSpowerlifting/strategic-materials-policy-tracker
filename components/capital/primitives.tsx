@@ -265,12 +265,15 @@ export function OptionLadder({
   executed,
   exercises,
   disbursements,
+  endedExercises = [],
 }: {
   executed: { date: string | null; sourceId: string } | null;
   exercises: { id: string; label: string }[];
   disbursements: { id: string; label: string }[];
+  /** Draws recorded and then withdrawn or lapsed: listed, never read as an exercise or as money moved. */
+  endedExercises?: { id: string; label: string }[];
 }) {
-  const steps: { label: string; done: boolean; body: React.ReactNode }[] = [
+  const steps: { label: string; done: boolean; body: React.ReactNode; extra?: React.ReactNode }[] = [
     {
       label: "Agreement executed",
       done: executed !== null,
@@ -295,6 +298,17 @@ export function OptionLadder({
       ) : (
         "None recorded in the corpus"
       ),
+      extra: endedExercises.length ? (
+        <span className="mt-1 block text-faint">
+          Ended, not an exercise:{" "}
+          {endedExercises.map((e, i) => (
+            <span key={e.id}>
+              {i ? ", " : ""}
+              <Link href={`/capital/${e.id}`} className="text-accent hover:text-accent-strong">{e.label}</Link>
+            </span>
+          ))}
+        </span>
+      ) : null,
     },
     {
       label: "Money disbursed",
@@ -325,7 +339,10 @@ export function OptionLadder({
             <span className={s.done ? "text-foreground" : "text-faint"}>{s.label}</span>
             <span className="sr-only">{s.done ? " — recorded" : " — not recorded"}</span>
           </p>
-          <p className="mt-1.5 text-sm leading-6 text-muted">{s.body}</p>
+          <p className="mt-1.5 text-sm leading-6 text-muted">
+            {s.body}
+            {s.extra}
+          </p>
         </li>
       ))}
     </ol>

@@ -53,7 +53,7 @@ export default function CapitalPage() {
   const options = byRole.get("funding_option") ?? [];
   const nonPublic = all.filter(
     (c) =>
-      ["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost"].includes(c.valueRole) ||
+      ["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost", "indication"].includes(c.valueRole) ||
       (c.valueRole === "commitment" && !PUBLIC_CAPITAL_SOURCES.includes(c.capitalSource)),
   );
   const unquantified = all.filter((c) => !c.amount && c.valueRole === "commitment");
@@ -61,7 +61,7 @@ export default function CapitalPage() {
   const actors = new Set(summaries.map((s) => s.actor).filter(Boolean)).size;
   const bySummary = new Map(summaries.map((s) => [s.id, s]));
   const actorTotals = JURISDICTIONS.map((j) => ({ j, t: totalCommitments(publicRows.filter((c) => commitmentActor(c) === j), all) })).filter(
-    (x) => x.t.currencies.length || x.t.unquantifiedIds.length,
+    (x) => x.t.currencies.length || x.t.unquantifiedIds.length || x.t.statusNotStatedIds.length || x.t.endedIds.length,
   );
 
   return (
@@ -74,8 +74,9 @@ export default function CapitalPage() {
           <>
             How governments put money, ownership and purchase guarantees behind strategic-material supply chains.
             Each row is one instrument from an official source or binding filing, in the currency the source uses.
-            Envelopes, private capital and figures stated as ceilings are kept apart from money committed to a recipient,
-            and a part is never counted alongside the package it belongs to.
+            Programme envelopes, unexercised funding options and private capital are listed apart from money committed to a
+            recipient, and never summed; a commitment stated &ldquo;up to&rdquo; is added only to others stated the same way.
+            A part is never counted alongside the package it belongs to.
           </>
         }
       />
@@ -98,7 +99,7 @@ export default function CapitalPage() {
         <Section
           index="01"
           title="Public commitments to recipients, binding and not yet binding"
-          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency only; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; ceilings and approximations are shown apart from exact figures."
+          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency and per instrument, never across either; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; figures stated “up to”, “about” or “at least” are added only to figures stated the same way, within one currency and instrument, and shown apart from exact figures (an “up to” sum adds stated upper bounds; it is not an amount paid); withdrawn or lapsed commitments are left out."
         >
           <div className="grid gap-4 lg:grid-cols-3">
             {totals.currencies.map((t) => {
@@ -116,27 +117,40 @@ export default function CapitalPage() {
                       so adding them would double-count. The rows are listed below without a sum.
                     </p>
                   ) : (
-                    <div className="mt-2 space-y-3">
-                      {([
-                        ["Binding", "contracted, partly or fully paid", t.binding],
-                        ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", t.notYetBinding],
-                      ] as const).map(([label, gloss, sums]) =>
-                        QUALIFIER_ORDER.some((q) => sums[q]) ? (
-                          <div key={label}>
-                            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted" title={gloss}>
-                              {label}
+                    <div className="mt-2 divide-y divide-border/60">
+                      {t.instruments.map((inst) => (
+                        <div key={inst.instrument} className="space-y-2 py-3 first:pt-1">
+                          <p className="font-display text-sm font-semibold">{financialInstrumentLabels[inst.instrument]}</p>
+                          {!inst.summed ? (
+                            <p className="font-mono text-[11px] leading-5 text-faint">
+                              Listed below, not summed: {inst.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources name no instrument the tracker's vocabulary covers"}.
                             </p>
-                            <dl className="mt-1 space-y-0.5">
-                              {QUALIFIER_ORDER.filter((q) => sums[q]).map((q) => (
-                                <div key={q} className="flex items-baseline justify-between gap-3">
-                                  <dt className="font-mono text-[11px] text-faint">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
-                                  <dd className="tnum font-display text-2xl font-bold">{formatDecimalCompact(sums[q]!)}</dd>
-                                </div>
-                              ))}
-                            </dl>
-                          </div>
-                        ) : null,
-                      )}
+                          ) : null}
+                          {(inst.summed
+                            ? ([
+                                ["Binding", "contracted, partly or fully paid", inst.binding],
+                                ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", inst.notYetBinding],
+                              ] as const)
+                            : []
+                          ).map(([label, gloss, sums]) =>
+                            QUALIFIER_ORDER.some((q) => sums[q]) ? (
+                              <div key={label}>
+                                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted" title={gloss}>
+                                  {label}
+                                </p>
+                                <dl className="mt-1 space-y-0.5">
+                                  {QUALIFIER_ORDER.filter((q) => sums[q]).map((q) => (
+                                    <div key={q} className="flex items-baseline justify-between gap-3">
+                                      <dt className="font-mono text-[11px] text-faint">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
+                                      <dd className="tnum font-display text-xl font-bold">{formatDecimalCompact(sums[q]!)}</dd>
+                                    </div>
+                                  ))}
+                                </dl>
+                              </div>
+                            ) : null,
+                          )}
+                        </div>
+                      ))}
                     </div>
                   )}
                   <p className="mt-3 font-mono text-[11px] leading-5 text-faint">
@@ -167,7 +181,7 @@ export default function CapitalPage() {
                               />
                             </div>
                             <p className="mt-0.5 font-mono text-[10px] text-faint">
-                              {commitmentActor(c) ? jurisdictionLabels[commitmentActor(c)!] : "Not government capital"} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
+                              {commitmentActor(c) ? jurisdictionLabels[commitmentActor(c)!] : "No tracked government"} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
                             </p>
                           </Link>
                         </li>
@@ -193,20 +207,22 @@ export default function CapitalPage() {
             })}
           </div>
           <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
-            Totals are never converted between currencies or across rows of different value roles, and a paler bar marks a figure the source gives as a ceiling or an approximation.
+            Totals are never converted between currencies, never added across instruments or value roles. Within one currency and instrument, figures stated &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; are added only to others stated the same way; an &ldquo;up to&rdquo; figure is a sum of stated upper bounds, not an amount paid. A paler bar marks any such figure.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
-            {" "}Binding means a contract has been executed or money paid; everything earlier, including conditional loan commitments and non-binding letters of intent, is shown as not yet binding.
+            {" "}Binding means a contract has been executed or money paid; an executed contract need not have obligated or paid any funds. Every earlier stage the source states, including conditional loan commitments, is shown as not yet binding. A non-binding letter of intent or interest is not a commitment at all: it is an indication, listed below apart from public support and never summed. A commitment whose source states no status is neither: it is listed, not summed
+            {totals.statusNotStatedIds.length ? ` (${totals.statusNotStatedIds.length} now)` : ""}, and a withdrawn or lapsed one is listed as ended
+            {totals.endedIds.length ? ` (${totals.endedIds.length} now)` : ""} and never summed.
             {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
           </p>
           <div className="mt-6 overflow-x-auto rounded-lg border">
             <table className="w-full min-w-[36rem] border-collapse text-sm">
-              <caption className="sr-only">Public commitments by providing actor and currency</caption>
+              <caption className="sr-only">Public commitments by providing actor, currency and instrument</caption>
               <thead>
                 <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
-                  <th scope="col" className="px-3 py-2 text-left font-normal">By currency, exact · ceilings and approximations kept apart</th>
-                  <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum</th>
+                  <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · “up to”, “about” and “at least” figures in separate buckets</th>
+                  <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum (no amount, no status, or ended)</th>
                 </tr>
               </thead>
               <tbody>
@@ -224,15 +240,26 @@ export default function CapitalPage() {
                             <span className="text-foreground">{cur.currency}</span>{" "}
                             {cur.status === "withheld"
                               ? "total withheld: counted rows overlap"
-                              : QUALIFIER_ORDER.filter((q) => cur.byQualifier[q])
-                                  .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(cur.byQualifier[q]!)}`)
-                                  .join(" + ")}
+                              : cur.instruments
+                                  .map((i) =>
+                                    i.summed
+                                      ? `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
+                                          .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
+                                          .join(" and ")}`
+                                      : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed, not summed`,
+                                  )
+                                  .join("; ")}
                           </span>
                         ))}
                         {t.currencies.length === 0 ? <span className="font-mono text-xs text-faint">—</span> : null}
                       </span>
                     </td>
-                    <td className="tnum px-3 py-3 text-right font-mono text-xs text-muted">{t.unquantifiedIds.length || "—"}</td>
+                    <td
+                      className="tnum px-3 py-3 text-right font-mono text-xs text-muted"
+                      title={`${t.unquantifiedIds.length} no amount · ${t.statusNotStatedIds.length} no status stated · ${t.endedIds.length} ended`}
+                    >
+                      {t.unquantifiedIds.length + t.statusNotStatedIds.length + t.endedIds.length || "—"}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -262,6 +289,7 @@ export default function CapitalPage() {
                       <OptionLadder
                         executed={st.executed ? { date: st.executed.date, sourceId: st.executed.sourceId } : null}
                         exercises={step(st.exercises)}
+                        endedExercises={step(st.endedExercises)}
                         disbursements={step(st.disbursements)}
                       />
                     </div>
@@ -311,7 +339,7 @@ export default function CapitalPage() {
         <Section
           index={options.length ? "05" : "04"}
           title="Kept apart from public support"
-          description="Private financing, a recipient's own funds, money governments expect others to invest, joint vehicles whose public share is not stated, and rows whose capital source the source does not state."
+          description="Private financing, a recipient's own funds, money governments expect others to invest, non-binding letters of intent or interest (indications, not commitments), joint vehicles whose public share is not stated, and rows whose capital source the source does not state."
         >
           <Card className="overflow-hidden">
             {nonPublic.map((c) => (

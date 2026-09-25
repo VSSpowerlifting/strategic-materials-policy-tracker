@@ -1,7 +1,10 @@
 /**
  * Runtime validation for the Capital & Control seed files (v0.5):
  * data/seed/financial-commitments.json ("fin-") and
- * data/seed/control-measures.json ("ctl-").
+ * data/seed/control-measures.json ("ctl-"), and for the capital-intelligence
+ * registries and designations that v0.6 adds: organizations.json ("org-"),
+ * projects.json ("prj-"), programmes.json ("prg-") and
+ * project-designations.json ("dsg-").
  *
  * Pure on purpose: it takes the parsed seed arrays, the published records they
  * reference and the current date, and returns structured errors and warnings.
@@ -27,7 +30,10 @@ import {
   CONTROL_MEASURE_ID_PREFIX,
   CONTROL_MEASURE_TYPES,
   CONTROL_STATUSES,
+  CONTROLLED_ITEM_TYPES,
   CURRENCY_BASES,
+  DESIGNATION_EVIDENCE_FIELDS,
+  DESIGNATION_STATUSES,
   EVIDENCE_LEVELS,
   FINANCIAL_COMMITMENT_ID_PREFIX,
   FINANCIAL_EVIDENCE_FIELDS,
@@ -37,10 +43,20 @@ import {
   IMPLEMENTATION_STATUSES,
   JURISDICTIONS,
   MATERIAL_ATTRIBUTIONS,
+  ORGANIZATION_EVIDENCE_FIELDS,
+  ORGANIZATION_ID_PREFIX,
+  ORGANIZATION_KINDS,
+  ORGANIZATION_LINK_TYPES,
   OUTCOME_ATTRIBUTIONS,
   OUTCOME_METRICS,
   PRODUCT_CODE_ROLES,
   PRODUCT_CODE_SYSTEMS,
+  PROGRAMME_EVIDENCE_FIELDS,
+  PROGRAMME_ID_PREFIX,
+  PROGRAMME_KINDS,
+  PROJECT_DESIGNATION_ID_PREFIX,
+  PROJECT_EVIDENCE_FIELDS,
+  PROJECT_ID_PREFIX,
   STAGE_ALLOCATIONS,
   SUPPLY_CHAIN_STAGES,
   TARGET_SCOPES,
@@ -49,6 +65,8 @@ import {
   VALUE_ROLES,
   type ControlEvidenceField,
   type ControlMeasure,
+  type ControlMeasureType,
+  type DesignationEvidenceField,
   type ControlStatus,
   type ControlStatusEntry,
   type EvidenceReference,
@@ -57,7 +75,15 @@ import {
   type FinancialRelationship,
   type InstrumentTerm,
   type MonetaryAmount,
+  type Organization,
+  type OrganizationEvidenceField,
+  type OrganizationLink,
   type ProductCode,
+  type Programme,
+  type ProgrammeEvidenceField,
+  type Project,
+  type ProjectDesignation,
+  type ProjectEvidenceField,
   type ProjectLocation,
   type StatedOutcome,
   type StatusEntry,
@@ -82,9 +108,13 @@ export const COMMITMENT_FIELD_EVIDENCE: Readonly<
   amount: "amount",
   provider: "provider",
   providerJurisdiction: "provider",
+  providerOrgIds: "provider",
   legalAuthority: "legal_authority",
+  programmeId: "programme",
   recipient: "recipient",
+  recipientOrgIds: "recipient",
   project: "project",
+  projectId: "project",
   facility: "facility",
   locations: "location",
   stages: "stages",
@@ -114,10 +144,63 @@ export const CONTROL_FIELD_EVIDENCE: Readonly<
   untrackedMaterialsAsStated: "materials",
   productScopeAsStated: "product_scope",
   productCodes: "product_codes",
+  controlledItemTypes: "item_scope",
+  controlledStages: "item_scope",
   legalBasisEventIds: "legal_basis",
   legalBasisAsStated: "legal_basis",
   modifiesMeasureIds: "modified_measures",
   modifiesExternalInstruments: "modified_measures",
+  statusHistory: "status",
+};
+
+export const ORGANIZATION_FIELD_EVIDENCE: Readonly<
+  Record<Exclude<keyof Organization, "id" | "evidence" | "notes">, OrganizationEvidenceField>
+> = {
+  name: "name",
+  nameOriginal: "name",
+  aliases: "name",
+  kind: "kind",
+  countryCode: "country",
+  actor: "actor",
+  parents: "parents",
+};
+
+export const PROJECT_FIELD_EVIDENCE: Readonly<
+  Record<Exclude<keyof Project, "id" | "evidence" | "notes">, ProjectEvidenceField>
+> = {
+  name: "name",
+  sponsorOrgIds: "sponsors",
+  locations: "location",
+  stages: "stages",
+  materialIds: "materials",
+  materialAttribution: "materials",
+  untrackedMaterialsAsStated: "materials",
+};
+
+export const PROGRAMME_FIELD_EVIDENCE: Readonly<
+  Record<Exclude<keyof Programme, "id" | "evidence" | "notes">, ProgrammeEvidenceField>
+> = {
+  name: "name",
+  actor: "administrators",
+  nameOriginal: "name",
+  kind: "kind",
+  administeringOrgIds: "administrators",
+  parentProgrammeId: "parent",
+  legalAuthorityAsStated: "legal_authority",
+};
+
+export const DESIGNATION_FIELD_EVIDENCE: Readonly<
+  Record<Exclude<keyof ProjectDesignation, "id" | "eventId" | "evidence" | "notes">, DesignationEvidenceField>
+> = {
+  programmeId: "programme",
+  projectId: "project",
+  projectNameAsStated: "project",
+  holderOrgIds: "holders",
+  locations: "location",
+  stages: "stages",
+  materialIds: "materials",
+  materialAttribution: "materials",
+  untrackedMaterialsAsStated: "materials",
   statusHistory: "status",
 };
 
@@ -162,7 +245,23 @@ function daysInMonth(year: number, month: number): number {
 
 // --- Issues ---------------------------------------------------------------------
 
-export type CapitalControlCollection = "financial-commitments" | "control-measures";
+export type CapitalControlCollection =
+  | "financial-commitments"
+  | "control-measures"
+  | "organizations"
+  | "projects"
+  | "programmes"
+  | "project-designations";
+
+/** Every collection, in the order the validator checks them. */
+export const CAPITAL_CONTROL_COLLECTIONS: readonly CapitalControlCollection[] = [
+  "financial-commitments",
+  "control-measures",
+  "organizations",
+  "projects",
+  "programmes",
+  "project-designations",
+];
 
 /** Stable issue codes: tests and tooling match on these, never on the prose. */
 export const CAPITAL_CONTROL_ISSUE_CODES = [
@@ -195,6 +294,13 @@ export const CAPITAL_CONTROL_ISSUE_CODES = [
   "material_attribution_mismatch", // materialAttribution disagrees with the materials recorded
   "target_scope_mismatch", // targetScopes disagrees with the targets recorded
   "incoherent_value", // a qualifier, currency, unit, date or location that contradicts its figure
+  // Registries and designations (v0.6)
+  "actor_mismatch", // an organization, programme or row whose tracked actor contradicts another's
+  "programme_mismatch", // a row drawn from an envelope names a programme outside that envelope's
+  "material_not_in_project", // a row names a material its project does not list
+  "item_scope_mismatch", // item types or stages on a clause that defines no items, or stages without item types
+  "kind_mismatch", // a kind that contradicts how the record is used, e.g. a designation under a non-designation programme
+  "unreferenced_record", // warning: a registry record nothing points to
   // Status histories
   "empty_status_history", // a required history with no entry
   "status_chronology", // dated entries out of order
@@ -238,6 +344,30 @@ const COLLECTIONS: Readonly<
     prefix: CONTROL_MEASURE_ID_PREFIX,
     example: "ctl-example-licensing",
   },
+  organizations: {
+    entity: "organization",
+    file: "organizations.json",
+    prefix: ORGANIZATION_ID_PREFIX,
+    example: "org-example-agency",
+  },
+  projects: {
+    entity: "project",
+    file: "projects.json",
+    prefix: PROJECT_ID_PREFIX,
+    example: "prj-example-mine",
+  },
+  programmes: {
+    entity: "programme",
+    file: "programmes.json",
+    prefix: PROGRAMME_ID_PREFIX,
+    example: "prg-example-fund",
+  },
+  "project-designations": {
+    entity: "project designation",
+    file: "project-designations.json",
+    prefix: PROJECT_DESIGNATION_ID_PREFIX,
+    example: "dsg-example-strategic-project",
+  },
 };
 
 /** One report line, e.g. `financial commitment "fin-x" (amount.value): …`. */
@@ -267,6 +397,11 @@ export type CapitalControlCorpus = {
 export type CapitalControlInput = {
   financialCommitments: readonly unknown[];
   controlMeasures: readonly unknown[];
+  /** v0.6 registries and designations; each defaults to []. */
+  organizations?: readonly unknown[];
+  projects?: readonly unknown[];
+  programmes?: readonly unknown[];
+  projectDesignations?: readonly unknown[];
   corpus: CapitalControlCorpus;
   /** The current date, YYYY-MM-DD. Injected so time-dependent warnings stay deterministic. */
   today: string;
@@ -275,7 +410,14 @@ export type CapitalControlInput = {
 export type CapitalControlResult = {
   errors: CapitalControlIssue[];
   warnings: CapitalControlIssue[];
-  counts: { financialCommitments: number; controlMeasures: number };
+  counts: {
+    financialCommitments: number;
+    controlMeasures: number;
+    organizations: number;
+    projects: number;
+    programmes: number;
+    projectDesignations: number;
+  };
 };
 
 // --- Shape ------------------------------------------------------------------------
@@ -378,9 +520,13 @@ const COMMITMENT: Fields<FinancialCommitment> = {
   amount: { kind: "object", name: "amount", fields: AMOUNT, nullable: true },
   provider: nullableText(),
   providerJurisdiction: nullableOneOf(JURISDICTIONS),
+  providerOrgIds: listOf(text()),
   legalAuthority: nullableText(),
+  programmeId: nullableText(),
   recipient: nullableText(),
+  recipientOrgIds: listOf(text()),
   project: nullableText(),
+  projectId: nullableText(),
   facility: nullableText(),
   locations: listOf(objectOf("location", LOCATION)),
   stages: listOf(oneOf(SUPPLY_CHAIN_STAGES)),
@@ -412,6 +558,8 @@ const CONTROL: Fields<ControlMeasure> = {
   untrackedMaterialsAsStated: listOf(text()),
   productScopeAsStated: nullableText(),
   productCodes: listOf(objectOf("product code", PRODUCT_CODE)),
+  controlledItemTypes: listOf(oneOf(CONTROLLED_ITEM_TYPES)),
+  controlledStages: listOf(oneOf(SUPPLY_CHAIN_STAGES)),
   legalBasisEventIds: listOf(text()),
   legalBasisAsStated: nullableText(),
   modifiesMeasureIds: listOf(text()),
@@ -421,9 +569,77 @@ const CONTROL: Fields<ControlMeasure> = {
   notes: optionalText(),
 };
 
+const ORGANIZATION_LINK: Fields<OrganizationLink> = {
+  organizationId: text(),
+  relationship: oneOf(ORGANIZATION_LINK_TYPES),
+  sourceId: text(),
+  locator: optionalText(),
+  note: optionalText(),
+};
+
+const ORGANIZATION: Fields<Organization> = {
+  id: text(),
+  name: text(),
+  nameOriginal: nullableText(),
+  aliases: listOf(text()),
+  kind: oneOf(ORGANIZATION_KINDS),
+  countryCode: nullableText("country"),
+  actor: nullableOneOf(JURISDICTIONS),
+  parents: listOf(objectOf("organization link", ORGANIZATION_LINK)),
+  evidence: listOf(objectOf("evidence reference", evidenceReference(ORGANIZATION_EVIDENCE_FIELDS))),
+  notes: optionalText(),
+};
+
+const PROJECT: Fields<Project> = {
+  id: text(),
+  name: text(),
+  sponsorOrgIds: listOf(text()),
+  locations: listOf(objectOf("location", LOCATION)),
+  stages: listOf(oneOf(SUPPLY_CHAIN_STAGES)),
+  materialIds: listOf(text()),
+  materialAttribution: oneOf(MATERIAL_ATTRIBUTIONS),
+  untrackedMaterialsAsStated: listOf(text()),
+  evidence: listOf(objectOf("evidence reference", evidenceReference(PROJECT_EVIDENCE_FIELDS))),
+  notes: optionalText(),
+};
+
+const PROGRAMME: Fields<Programme> = {
+  id: text(),
+  name: text(),
+  nameOriginal: nullableText(),
+  actor: oneOf(JURISDICTIONS),
+  kind: oneOf(PROGRAMME_KINDS),
+  administeringOrgIds: listOf(text()),
+  parentProgrammeId: nullableText(),
+  legalAuthorityAsStated: nullableText(),
+  evidence: listOf(objectOf("evidence reference", evidenceReference(PROGRAMME_EVIDENCE_FIELDS))),
+  notes: optionalText(),
+};
+
+const DESIGNATION: Fields<ProjectDesignation> = {
+  id: text(),
+  eventId: text(),
+  programmeId: text(),
+  projectId: text(),
+  projectNameAsStated: text(),
+  holderOrgIds: listOf(text()),
+  locations: listOf(objectOf("location", LOCATION)),
+  stages: listOf(oneOf(SUPPLY_CHAIN_STAGES)),
+  materialIds: listOf(text()),
+  materialAttribution: oneOf(MATERIAL_ATTRIBUTIONS),
+  untrackedMaterialsAsStated: listOf(text()),
+  statusHistory: listOf(objectOf("status entry", statusEntry(DESIGNATION_STATUSES))),
+  evidence: listOf(objectOf("evidence reference", evidenceReference(DESIGNATION_EVIDENCE_FIELDS))),
+  notes: optionalText(),
+};
+
 const SHAPES: Readonly<Record<CapitalControlCollection, Spec>> = {
   "financial-commitments": objectOf("financial commitment", COMMITMENT),
   "control-measures": objectOf("control measure", CONTROL),
+  organizations: objectOf("organization", ORGANIZATION),
+  projects: objectOf("project", PROJECT),
+  programmes: objectOf("programme", PROGRAMME),
+  "project-designations": objectOf("project designation", DESIGNATION),
 };
 
 // --- Reporting --------------------------------------------------------------------
@@ -587,13 +803,22 @@ function scanForCandidates(value: unknown, path: string, r: Reporter): void {
 
 // --- References and sets --------------------------------------------------------------
 
+/**
+ * What a record can point to. The registry maps hold every id in the file,
+ * with the record itself when its shape is sound and null otherwise, so a
+ * reference resolves either way but attributes are read only from sound
+ * records.
+ */
 type Refs = {
   events: ReadonlyMap<string, CorpusEvent>;
   sources: ReadonlySet<string>;
   materials: ReadonlySet<string>;
   jurisdictions: ReadonlySet<string>;
-  commitments: ReadonlySet<string>;
+  commitments: ReadonlyMap<string, FinancialCommitment | null>;
   controls: ReadonlySet<string>;
+  organizations: ReadonlyMap<string, Organization | null>;
+  projects: ReadonlyMap<string, Project | null>;
+  programmes: ReadonlyMap<string, Programme | null>;
   candidates: ReadonlySet<string>;
 };
 
@@ -602,6 +827,9 @@ const SOURCE = "a source in sources.json";
 const MATERIAL = "a material id in materials.json";
 const COMMITMENT_TARGET = "a financial commitment in financial-commitments.json";
 const CONTROL_TARGET = "a control measure in control-measures.json";
+const ORGANIZATION_TARGET = "an organization in organizations.json";
+const PROJECT_TARGET = "a project in projects.json";
+const PROGRAMME_TARGET = "a programme in programmes.json";
 
 /** Reports a reference that does not resolve; true when it does. */
 function resolves(
@@ -796,6 +1024,7 @@ function checkMaterials(
   event: CorpusEvent | undefined,
   r: Reporter,
   refs: Refs,
+  project?: Project | null,
 ): void {
   checkUnique(row.materialIds, "materialIds", "material", r);
   row.materialIds.forEach((id, i) => {
@@ -805,6 +1034,12 @@ function checkMaterials(
         "material_not_in_event",
         field,
         `"${id}" is not among event "${event.id}"'s affectedMaterialIds; a row names only materials its event covers`,
+      );
+    if (refs.materials.has(id) && project && !project.materialIds.includes(id))
+      r.error(
+        "material_not_in_project",
+        field,
+        `"${id}" is not among project "${project.id}"'s materialIds; add it to the project if its sources name it, or drop it here`,
       );
   });
   checkUnique(row.untrackedMaterialsAsStated, "untrackedMaterialsAsStated", "material", r);
@@ -828,6 +1063,47 @@ function checkMaterials(
       "materialAttribution",
       `"${row.materialAttribution}" does not match the materials recorded: ${problems.join("; ")}`,
     );
+}
+
+function checkLocations(locations: readonly ProjectLocation[], r: Reporter): void {
+  checkUnique(locations, "locations", "location", r);
+  locations.forEach((location, i) => {
+    if (location.countryCode === null && location.subnational === null && location.asStated === null)
+      r.error("incoherent_value", `locations[${i}]`, "names no country, place or wording; remove it (an unstated location is an empty list)");
+  });
+}
+
+/** Resolves each id in a list of organization references and reports repeats. */
+function checkOrgRefs(ids: readonly string[], field: string, r: Reporter, refs: Refs): void {
+  ids.forEach((id, i) => resolves(id, refs.organizations, ORGANIZATION_TARGET, `${field}[${i}]`, r, refs));
+  checkUnique(ids, field, "organization", r);
+}
+
+/** The tracked actors an organization belongs to, directly or through the bodies it is part of or was established by. */
+function actorChain(id: string, refs: Refs): Set<string> {
+  const actors = new Set<string>();
+  const seen = new Set<string>();
+  const stack = [id];
+  while (stack.length) {
+    const cur = stack.pop()!;
+    if (seen.has(cur)) continue;
+    seen.add(cur);
+    const org = refs.organizations.get(cur);
+    if (!org) continue;
+    if (org.actor !== null) actors.add(org.actor);
+    for (const link of org.parents) stack.push(link.organizationId);
+  }
+  return actors;
+}
+
+/** Whether programme `id` is `ancestor` or sits under it through parentProgrammeId. */
+function programmeWithin(id: string, ancestor: string, refs: Refs): boolean {
+  const seen = new Set<string>();
+  for (let cur: string | null = id; cur !== null && !seen.has(cur); cur = refs.programmes.get(cur)?.parentProgrammeId ?? null) {
+    if (cur === ancestor) return true;
+    seen.add(cur);
+  }
+  return false;
 }
 
 function checkTerm(term: InstrumentTerm, path: string, r: Reporter): void {
@@ -865,8 +1141,10 @@ function checkOutcome(outcome: StatedOutcome, path: string, r: Reporter): void {
 
 function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void {
   const event = resolveEvent(c.eventId, r, refs);
+  // Actor rules compare against the provider's jurisdiction only once it is itself valid.
+  let actorKnown = c.providerJurisdiction === null;
   if (c.providerJurisdiction !== null && isOneOf(JURISDICTIONS, c.providerJurisdiction))
-    resolves(
+    actorKnown = resolves(
       c.providerJurisdiction,
       refs.jurisdictions,
       "a jurisdiction record in jurisdictions.json; the provider's jurisdiction must be a tracked actor, or null",
@@ -875,10 +1153,53 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
       refs,
     );
 
-  checkUnique(c.locations, "locations", "location", r);
-  c.locations.forEach((location, i) => {
-    if (location.countryCode === null && location.subnational === null && location.asStated === null)
-      r.error("incoherent_value", `locations[${i}]`, "names no country, place or wording; remove it (an unstated location is an empty list)");
+  checkLocations(c.locations, r);
+
+  // Registry links (v0.6).
+  checkOrgRefs(c.providerOrgIds, "providerOrgIds", r, refs);
+  checkOrgRefs(c.recipientOrgIds, "recipientOrgIds", r, refs);
+  const project = c.projectId !== null && resolves(c.projectId, refs.projects, PROJECT_TARGET, "projectId", r, refs) ? refs.projects.get(c.projectId) : null;
+  const programme =
+    c.programmeId !== null && resolves(c.programmeId, refs.programmes, PROGRAMME_TARGET, "programmeId", r, refs)
+      ? refs.programmes.get(c.programmeId)
+      : null;
+  c.providerOrgIds.forEach((id, i) => {
+    const org = refs.organizations.get(id);
+    if (actorKnown && org && org.actor !== null && org.actor !== c.providerJurisdiction)
+      r.error(
+        "actor_mismatch",
+        `providerOrgIds[${i}]`,
+        `organization "${id}" belongs to "${org.actor}", but providerJurisdiction is ${JSON.stringify(c.providerJurisdiction)}; a government body's money is its government's`,
+      );
+  });
+  if (
+    actorKnown &&
+    c.providerJurisdiction !== null &&
+    c.providerOrgIds.length > 0 &&
+    c.providerOrgIds.every((id) => refs.organizations.get(id)) &&
+    !c.providerOrgIds.some((id) => actorChain(id, refs).has(c.providerJurisdiction!))
+  )
+    r.error(
+      "actor_mismatch",
+      "providerJurisdiction",
+      `is "${c.providerJurisdiction}", but no provider organization belongs to it, directly or through the bodies it is part of or was established by`,
+    );
+  if (actorKnown && programme && c.providerJurisdiction !== null && programme.actor !== c.providerJurisdiction)
+    r.error(
+      "actor_mismatch",
+      "programmeId",
+      `programme "${programme.id}" is run by "${programme.actor}", but providerJurisdiction is "${c.providerJurisdiction}"`,
+    );
+  c.relationships.forEach((link, i) => {
+    if (link.relationship !== "drawn_from") return;
+    const parent = refs.commitments.get(link.commitmentId);
+    if (!parent || parent.programmeId === null) return;
+    if (c.programmeId === null || !programmeWithin(c.programmeId, parent.programmeId, refs))
+      r.error(
+        "programme_mismatch",
+        "programmeId",
+        `is ${JSON.stringify(c.programmeId)}, but relationships[${i}] draws this row from "${parent.id}", which belongs to programme "${parent.programmeId}"; name that programme or one under it`,
+      );
   });
 
   checkUnique(c.stages, "stages", "stage", r);
@@ -891,7 +1212,7 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
       `is "${c.stageAllocation}", but ${stageCount} distinct stage${stageCount === 1 ? " is" : "s are"} recorded; "single_stage" needs exactly one stage, "multi_stage_unallocated" two or more, "not_stated" none`,
     );
 
-  checkMaterials(c, event, r, refs);
+  checkMaterials(c, event, r, refs, project);
 
   c.relationships.forEach((link, i) => {
     const path = `relationships[${i}]`;
@@ -952,6 +1273,14 @@ const SCOPED_TARGETS: readonly (readonly [
   ["end_uses", "targetEndUsesAsStated"],
 ];
 
+/** Clauses that restrict by end use, enforcement, ownership or suspension and define no items of their own. */
+export const NO_ITEM_MEASURE_TYPES: readonly ControlMeasureType[] = [
+  "end_use_restriction",
+  "customs_enforcement",
+  "investment_divestiture",
+  "suspension",
+];
+
 function checkControl(m: ControlMeasure, today: string, r: Reporter, refs: Refs): void {
   const event = resolveEvent(m.eventId, r, refs);
 
@@ -967,6 +1296,17 @@ function checkControl(m: ControlMeasure, today: string, r: Reporter, refs: Refs)
   }
 
   checkMaterials(m, event, r, refs);
+
+  checkUnique(m.controlledItemTypes, "controlledItemTypes", "item type", r);
+  checkUnique(m.controlledStages, "controlledStages", "stage", r);
+  if (NO_ITEM_MEASURE_TYPES.includes(m.measureType) && (m.controlledItemTypes.length > 0 || m.controlledStages.length > 0))
+    r.error(
+      "item_scope_mismatch",
+      m.controlledItemTypes.length > 0 ? "controlledItemTypes" : "controlledStages",
+      `is populated, but a "${m.measureType}" clause defines no items of its own; leave controlledItemTypes and controlledStages empty`,
+    );
+  else if (m.controlledStages.length > 0 && m.controlledItemTypes.length === 0)
+    r.error("item_scope_mismatch", "controlledItemTypes", "is empty, but controlledStages is populated; say which kind of item sits at those stages");
 
   checkUnique(m.productCodes, "productCodes", "system and code, with the one role the source gives it", r, (code) =>
     `${code.system}\u0000${code.code}`,
@@ -993,6 +1333,86 @@ function checkControl(m: ControlMeasure, today: string, r: Reporter, refs: Refs)
     m.statusHistory.map((entry, i) => [entry.sourceId, `statusHistory[${i}].sourceId`] as const),
     r,
   );
+}
+
+// --- Registries and designations (v0.6) ------------------------------------------------
+
+/** Kinds whose money is never a government's, whoever set them up. */
+const NON_GOVERNMENT_KINDS: readonly Organization["kind"][] = ["company", "project_company", "bank", "joint_vehicle"];
+
+function checkOrganization(o: Organization, r: Reporter, refs: Refs): void {
+  checkUnique(o.aliases, "aliases", "alias", r);
+  o.aliases.forEach((alias, i) => {
+    if (alias === o.name) r.error("duplicate_value", `aliases[${i}]`, "repeats the organization's name; list only other names");
+  });
+  if (o.actor !== null && isOneOf(JURISDICTIONS, o.actor))
+    resolves(o.actor, refs.jurisdictions, "a jurisdiction record in jurisdictions.json, or null", "actor", r, refs);
+  if (o.actor !== null && NON_GOVERNMENT_KINDS.includes(o.kind))
+    r.error(
+      "actor_mismatch",
+      "actor",
+      `is "${o.actor}", but a ${o.kind.replace(/_/g, " ")} belongs to no government; record the government link as a parent instead`,
+    );
+  o.parents.forEach((link, i) => {
+    const path = `parents[${i}]`;
+    if (link.organizationId === o.id)
+      r.error("self_reference", `${path}.organizationId`, "is this organization's own id; an organization cannot be its own parent");
+    else if (resolves(link.organizationId, refs.organizations, ORGANIZATION_TARGET, `${path}.organizationId`, r, refs)) {
+      const parent = refs.organizations.get(link.organizationId);
+      if (link.relationship === "part_of" && parent && o.actor !== null && parent.actor !== null && parent.actor !== o.actor)
+        r.error("actor_mismatch", `${path}.organizationId`, `is part of "${parent.id}" (${parent.actor}), but this organization belongs to "${o.actor}"`);
+    }
+    resolves(link.sourceId, refs.sources, SOURCE, `${path}.sourceId`, r, refs);
+  });
+  checkUnique(o.parents, "parents", "organization and relationship type", r, (link) => `${link.organizationId}\u0000${link.relationship}`);
+  const covered = checkEvidence(o, o.evidence, ORGANIZATION_FIELD_EVIDENCE, ORGANIZATION_EVIDENCE_FIELDS, r, refs);
+  requireSameSource(covered, "parents", o.parents.map((link, i) => [link.sourceId, `parents[${i}].sourceId`] as const), r);
+}
+
+function checkProject(p: Project, r: Reporter, refs: Refs): void {
+  checkOrgRefs(p.sponsorOrgIds, "sponsorOrgIds", r, refs);
+  checkLocations(p.locations, r);
+  checkUnique(p.stages, "stages", "stage", r);
+  checkMaterials(p, undefined, r, refs);
+  checkEvidence(p, p.evidence, PROJECT_FIELD_EVIDENCE, PROJECT_EVIDENCE_FIELDS, r, refs);
+}
+
+function checkProgramme(g: Programme, r: Reporter, refs: Refs): void {
+  if (isOneOf(JURISDICTIONS, g.actor))
+    resolves(g.actor, refs.jurisdictions, "a jurisdiction record in jurisdictions.json", "actor", r, refs);
+  checkOrgRefs(g.administeringOrgIds, "administeringOrgIds", r, refs);
+  g.administeringOrgIds.forEach((id, i) => {
+    const org = refs.organizations.get(id);
+    if (org && org.actor !== null && org.actor !== g.actor)
+      r.error("actor_mismatch", `administeringOrgIds[${i}]`, `organization "${id}" belongs to "${org.actor}", but the programme's actor is "${g.actor}"`);
+  });
+  if (g.parentProgrammeId !== null) {
+    if (g.parentProgrammeId === g.id)
+      r.error("self_reference", "parentProgrammeId", "is this programme's own id; a programme cannot be its own parent");
+    else if (resolves(g.parentProgrammeId, refs.programmes, PROGRAMME_TARGET, "parentProgrammeId", r, refs)) {
+      const parent = refs.programmes.get(g.parentProgrammeId);
+      if (parent && parent.actor !== g.actor)
+        r.error("actor_mismatch", "parentProgrammeId", `programme "${parent.id}" is run by "${parent.actor}", but this programme's actor is "${g.actor}"`);
+    }
+  }
+  checkEvidence(g, g.evidence, PROGRAMME_FIELD_EVIDENCE, PROGRAMME_EVIDENCE_FIELDS, r, refs);
+}
+
+function checkDesignation(d: ProjectDesignation, r: Reporter, refs: Refs): void {
+  const event = resolveEvent(d.eventId, r, refs);
+  if (resolves(d.programmeId, refs.programmes, PROGRAMME_TARGET, "programmeId", r, refs)) {
+    const programme = refs.programmes.get(d.programmeId);
+    if (programme && programme.kind !== "designation_scheme")
+      r.error("kind_mismatch", "programmeId", `programme "${programme.id}" is a ${programme.kind.replace(/_/g, " ")}; a designation sits under a "designation_scheme" programme`);
+  }
+  const project = resolves(d.projectId, refs.projects, PROJECT_TARGET, "projectId", r, refs) ? refs.projects.get(d.projectId) : null;
+  checkOrgRefs(d.holderOrgIds, "holderOrgIds", r, refs);
+  checkLocations(d.locations, r);
+  checkUnique(d.stages, "stages", "stage", r);
+  checkMaterials(d, event, r, refs, project);
+  checkStatusHistory(d.statusHistory, "statusHistory", true, r, refs);
+  const covered = checkEvidence(d, d.evidence, DESIGNATION_FIELD_EVIDENCE, DESIGNATION_EVIDENCE_FIELDS, r, refs);
+  requireSameSource(covered, "status", d.statusHistory.map((entry, i) => [entry.sourceId, `statusHistory[${i}].sourceId`] as const), r);
 }
 
 // --- Cycles -------------------------------------------------------------------------------
@@ -1096,7 +1516,16 @@ const idOf = (record: unknown): string | null =>
 /** "fin-" or "ctl-", then lowercase letters and digits in hyphen-separated words. */
 const ID_BODY = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-/** Validates both Capital & Control collections against the corpus they reference. */
+/** Which collection each prefix belongs to, for pointing a misfiled id at its file. */
+const PREFIX_OWNER = new Map(CAPITAL_CONTROL_COLLECTIONS.map((c) => [COLLECTIONS[c].prefix, c]));
+
+/**
+ * Validates the Capital & Control collections and the v0.6 registries against
+ * the corpus they reference. Two passes: every record's shape and identity
+ * first, then the semantic checks, so a cross-registry rule (an
+ * organization's actor, a programme's parent) reads only records whose shape
+ * is sound.
+ */
 export function validateCapitalControl(input: CapitalControlInput): CapitalControlResult {
   const { corpus, today } = input;
   if (!isCalendarDate(today))
@@ -1106,18 +1535,13 @@ export function validateCapitalControl(input: CapitalControlInput): CapitalContr
   const records: Readonly<Record<CapitalControlCollection, readonly unknown[]>> = {
     "financial-commitments": input.financialCommitments,
     "control-measures": input.controlMeasures,
-  };
-  const refs: Refs = {
-    events: new Map(corpus.events.map((e) => [e.id, e])),
-    sources: new Set(corpus.sources.map((s) => s.id)),
-    materials: new Set(corpus.materials.map((m) => m.id)),
-    jurisdictions: new Set(corpus.jurisdictions.map((j) => j.id)),
-    commitments: new Set(input.financialCommitments.flatMap((c) => idOf(c) ?? [])),
-    controls: new Set(input.controlMeasures.flatMap((m) => idOf(m) ?? [])),
-    candidates: new Set(corpus.candidateIds ?? []),
+    organizations: input.organizations ?? [],
+    projects: input.projects ?? [],
+    programmes: input.programmes ?? [],
+    "project-designations": input.projectDesignations ?? [],
   };
 
-  // Published ids that no fin-/ctl- id may reuse.
+  // Published ids that no Capital & Control or registry id may reuse.
   const published = new Map<string, string>();
   const publish = (kind: string, ids: readonly (string | null | undefined)[]) => {
     for (const id of ids) if (id && !published.has(id)) published.set(id, kind);
@@ -1130,82 +1554,171 @@ export function validateCapitalControl(input: CapitalControlInput): CapitalContr
   publish("a framing claim", (corpus.framing ?? []).map((f) => f.id));
   publish("a watched source", (corpus.watchlist ?? []).map((w) => w.id));
 
-  const edges: Record<CapitalControlCollection, Map<string, Edge[]>> = {
-    "financial-commitments": new Map(),
-    "control-measures": new Map(),
-  };
-  const firstIndex: Record<CapitalControlCollection, Map<string, number>> = {
-    "financial-commitments": new Map(),
-    "control-measures": new Map(),
-  };
-  const addEdge = (collection: CapitalControlCollection, from: string, to: string, label: string) =>
-    edges[collection].set(from, [...(edges[collection].get(from) ?? []), { to, label }]);
-
-  for (const collection of ["financial-commitments", "control-measures"] as const) {
+  // Pass 1: shape, candidate isolation and identity.
+  type Checked = { record: unknown; id: string | null; index: number; r: Reporter };
+  const checked = {} as Record<CapitalControlCollection, Checked[]>;
+  const ownerOf = new Map<string, CapitalControlCollection>();
+  for (const collection of CAPITAL_CONTROL_COLLECTIONS) {
     const { file, prefix, example } = COLLECTIONS[collection];
-    const otherPrefix = collection === "financial-commitments" ? CONTROL_MEASURE_ID_PREFIX : FINANCIAL_COMMITMENT_ID_PREFIX;
-    const otherFile = collection === "financial-commitments" ? "control-measures.json" : "financial-commitments.json";
+    const firstIndex = new Map<string, number>();
     let previous: string | undefined;
-
-    records[collection].forEach((record, index) => {
+    checked[collection] = records[collection].map((record, index) => {
       const id = idOf(record);
       const r = new Reporter(issues, collection, index, id);
       checkShape(record, SHAPES[collection], "", r);
       scanForCandidates(record, "", r);
-
       if (id !== null) {
-        if (!id.startsWith(prefix) || !ID_BODY.test(id.slice(prefix.length)))
+        if (!id.startsWith(prefix) || !ID_BODY.test(id.slice(prefix.length))) {
+          const owner = [...PREFIX_OWNER.entries()].find(([p, c]) => c !== collection && id.startsWith(p));
           r.error(
             "invalid_id",
             "id",
             `${JSON.stringify(id)} must be "${prefix}" followed by lowercase letters and digits in hyphen-separated words, e.g. "${example}"${
-              id.startsWith(otherPrefix) ? `; "${otherPrefix}" ids belong in ${otherFile}` : ""
+              owner ? `; "${owner[0]}" ids belong in ${COLLECTIONS[owner[1]].file}` : ""
             }`,
           );
-        const earlier = firstIndex[collection].get(id);
+        }
+        const earlier = firstIndex.get(id);
         if (earlier !== undefined)
           r.error("duplicate_id", "id", `${JSON.stringify(id)} is already the id of the record at index ${earlier} in ${file}`);
-        else firstIndex[collection].set(id, index);
+        else firstIndex.set(id, index);
         const kind = published.get(id);
         if (kind) r.error("id_collision", "id", `${JSON.stringify(id)} is already ${kind} id in the published corpus; ids are unique across the dataset`);
-        if (collection === "control-measures" && refs.commitments.has(id))
-          r.error("id_collision", "id", `${JSON.stringify(id)} is also a financial commitment id; ids are unique across both collections`);
+        const otherOwner = ownerOf.get(id);
+        if (otherOwner && otherOwner !== collection)
+          r.error("id_collision", "id", `${JSON.stringify(id)} is also ${withArticle(COLLECTIONS[otherOwner].entity)} id; ids are unique across every collection`);
+        else if (!otherOwner) ownerOf.set(id, collection);
         if (previous !== undefined && previous > id)
           r.error("id_order", "id", `${JSON.stringify(id)} comes after ${JSON.stringify(previous)}; keep records in ascending code-point order of id`);
         previous = id;
       }
-
-      if (!r.sound) return;
-      if (collection === "financial-commitments") {
-        const c = record as FinancialCommitment;
-        checkCommitment(c, r, refs);
-        for (const link of c.relationships)
-          if (link.commitmentId !== c.id && refs.commitments.has(link.commitmentId))
-            addEdge(collection, c.id, link.commitmentId, link.relationship);
-      } else {
-        const m = record as ControlMeasure;
-        checkControl(m, today, r, refs);
-        for (const target of m.modifiesMeasureIds)
-          if (target !== m.id && refs.controls.has(target)) addEdge(collection, m.id, target, "modifies");
-      }
+      return { record, id, index, r };
     });
   }
 
-  for (const { start, path } of findCycles(edges["financial-commitments"]))
-    new Reporter(issues, "financial-commitments", firstIndex["financial-commitments"].get(start) ?? null, start).error(
-      "cycle",
-      "relationships",
-      `${path} loops back; a commitment cannot be part of or drawn from itself, directly or through other commitments`,
+  const registry = <T,>(collection: CapitalControlCollection) =>
+    new Map<string, T | null>(
+      checked[collection].flatMap(({ record, id, r }) => (id === null ? [] : [[id, r.sound ? (record as T) : null] as [string, T | null]])),
     );
-  for (const { start, path } of findCycles(edges["control-measures"]))
-    new Reporter(issues, "control-measures", firstIndex["control-measures"].get(start) ?? null, start).error(
-      "cycle",
-      "modifiesMeasureIds",
-      `${path} loops back; a measure cannot modify itself through other measures`,
-    );
+  const refs: Refs = {
+    events: new Map(corpus.events.map((e) => [e.id, e])),
+    sources: new Set(corpus.sources.map((s) => s.id)),
+    materials: new Set(corpus.materials.map((m) => m.id)),
+    jurisdictions: new Set(corpus.jurisdictions.map((j) => j.id)),
+    commitments: registry<FinancialCommitment>("financial-commitments"),
+    controls: new Set(checked["control-measures"].flatMap(({ id }) => id ?? [])),
+    organizations: registry<Organization>("organizations"),
+    projects: registry<Project>("projects"),
+    programmes: registry<Programme>("programmes"),
+    candidates: new Set(corpus.candidateIds ?? []),
+  };
+
+  // Pass 2: semantics, for records whose shape is sound.
+  const edges: Record<"commitments" | "controls" | "organizations" | "programmes", Map<string, Edge[]>> = {
+    commitments: new Map(),
+    controls: new Map(),
+    organizations: new Map(),
+    programmes: new Map(),
+  };
+  const addEdge = (graph: keyof typeof edges, from: string, to: string, label: string) =>
+    edges[graph].set(from, [...(edges[graph].get(from) ?? []), { to, label }]);
+  const referenced = { organizations: new Set<string>(), projects: new Set<string>(), programmes: new Set<string>() };
+  const refer = (kind: keyof typeof referenced, ids: readonly (string | null)[]) => ids.forEach((id) => id && referenced[kind].add(id));
+
+  for (const collection of CAPITAL_CONTROL_COLLECTIONS)
+    for (const { record, r } of checked[collection]) {
+      if (!r.sound) continue;
+      switch (collection) {
+        case "financial-commitments": {
+          const c = record as FinancialCommitment;
+          checkCommitment(c, r, refs);
+          for (const link of c.relationships)
+            if (link.commitmentId !== c.id && refs.commitments.has(link.commitmentId)) addEdge("commitments", c.id, link.commitmentId, link.relationship);
+          refer("organizations", [...c.providerOrgIds, ...c.recipientOrgIds]);
+          refer("projects", [c.projectId]);
+          refer("programmes", [c.programmeId]);
+          break;
+        }
+        case "control-measures": {
+          const m = record as ControlMeasure;
+          checkControl(m, today, r, refs);
+          for (const target of m.modifiesMeasureIds)
+            if (target !== m.id && refs.controls.has(target)) addEdge("controls", m.id, target, "modifies");
+          break;
+        }
+        case "organizations": {
+          const o = record as Organization;
+          checkOrganization(o, r, refs);
+          for (const link of o.parents)
+            if (link.organizationId !== o.id && refs.organizations.has(link.organizationId))
+              addEdge("organizations", o.id, link.organizationId, link.relationship);
+          break;
+        }
+        case "projects": {
+          const p = record as Project;
+          checkProject(p, r, refs);
+          refer("organizations", p.sponsorOrgIds);
+          break;
+        }
+        case "programmes": {
+          const g = record as Programme;
+          checkProgramme(g, r, refs);
+          if (g.parentProgrammeId !== null && g.parentProgrammeId !== g.id && refs.programmes.has(g.parentProgrammeId))
+            addEdge("programmes", g.id, g.parentProgrammeId, "part_of");
+          refer("organizations", g.administeringOrgIds);
+          refer("programmes", [g.parentProgrammeId]);
+          break;
+        }
+        case "project-designations": {
+          const d = record as ProjectDesignation;
+          checkDesignation(d, r, refs);
+          refer("organizations", d.holderOrgIds);
+          refer("projects", [d.projectId]);
+          refer("programmes", [d.programmeId]);
+          break;
+        }
+      }
+    }
+
+  // An organization that is only a parent of a referenced one is referenced through it.
+  const stack = [...referenced.organizations];
+  while (stack.length) {
+    const org = refs.organizations.get(stack.pop()!);
+    for (const link of org?.parents ?? [])
+      if (!referenced.organizations.has(link.organizationId)) {
+        referenced.organizations.add(link.organizationId);
+        stack.push(link.organizationId);
+      }
+  }
+  const UNREFERENCED: readonly (readonly [keyof typeof referenced, CapitalControlCollection, string])[] = [
+    ["organizations", "organizations", "no financial row, project, programme, designation or other organization names it"],
+    ["projects", "projects", "no financial row or designation points to it"],
+    ["programmes", "programmes", "no financial row, designation or other programme names it"],
+  ];
+  for (const [kind, collection, why] of UNREFERENCED)
+    for (const { id, r } of checked[collection])
+      if (id !== null && r.sound && !referenced[kind].has(id))
+        r.warn("unreferenced_record", "id", `${why}; link it or remove it`);
+
+  const report = (graph: keyof typeof edges, collection: CapitalControlCollection, field: string, why: string) => {
+    const index = new Map(checked[collection].flatMap(({ id, index }) => (id === null ? [] : [[id, index] as const])));
+    for (const { start, path } of findCycles(edges[graph]))
+      new Reporter(issues, collection, index.get(start) ?? null, start).error("cycle", field, `${path} loops back; ${why}`);
+  };
+  report("commitments", "financial-commitments", "relationships", "a commitment cannot be part of or drawn from itself, directly or through other commitments");
+  report("controls", "control-measures", "modifiesMeasureIds", "a measure cannot modify itself through other measures");
+  report("organizations", "organizations", "parents", "an organization cannot be its own parent through other organizations");
+  report("programmes", "programmes", "parentProgrammeId", "a programme cannot sit under itself through other programmes");
 
   return {
     ...issues,
-    counts: { financialCommitments: input.financialCommitments.length, controlMeasures: input.controlMeasures.length },
+    counts: {
+      financialCommitments: records["financial-commitments"].length,
+      controlMeasures: records["control-measures"].length,
+      organizations: records.organizations.length,
+      projects: records.projects.length,
+      programmes: records.programmes.length,
+      projectDesignations: records["project-designations"].length,
+    },
   };
 }

@@ -17,12 +17,12 @@ import { site } from "@/lib/site";
 import {
   controlClocks,
   controlStatusOn,
-  formatDecimalCompact,
   publicCommitmentRows,
   totalCommitments,
 } from "@/lib/capital-control";
 import { getAllControlMeasures, getAllFinancialCommitments } from "@/lib/data";
 import { formatDate } from "@/lib/format";
+import { financialInstrumentLabels } from "@/lib/labels";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 const HOMEPAGE_FRAMING_IDS = ["fc-china-oct-natsec", "fc-us-burgum-resilience"];
@@ -56,15 +56,6 @@ export default function Home() {
   const capitalActors = new Set(
     getAllFinancialCommitments().filter((c) => countedIds.has(c.id)).map((c) => c.providerJurisdiction).filter(Boolean),
   ).size;
-  const sumLine = (s: Partial<Record<"exact" | "approximately" | "at_least" | "up_to", string>>) =>
-    [
-      s.exact ? formatDecimalCompact(s.exact) : null,
-      s.approximately ? `about ${formatDecimalCompact(s.approximately)}` : null,
-      s.at_least ? `at least ${formatDecimalCompact(s.at_least)}` : null,
-      s.up_to ? `up to ${formatDecimalCompact(s.up_to)}` : null,
-    ]
-      .filter(Boolean)
-      .join(" + ");
 
   return (
     <>
@@ -191,11 +182,9 @@ export default function Home() {
                   {c.status === "withheld" ? (
                     <span className="text-faint">total withheld: counted rows overlap</span>
                   ) : (
-                    <>
-                      {sumLine(c.binding) ? <>binding {sumLine(c.binding)}</> : null}
-                      {sumLine(c.binding) && sumLine(c.notYetBinding) ? " · " : null}
-                      {sumLine(c.notYetBinding) ? <span className="text-faint">not yet binding {sumLine(c.notYetBinding)}</span> : null}
-                    </>
+                    <span className="text-faint">
+                      {c.instruments.map((i) => financialInstrumentLabels[i.instrument].toLowerCase()).join(", ")} · each apart, never added together
+                    </span>
                   )}
                 </li>
               ))}

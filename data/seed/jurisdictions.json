@@ -29,7 +29,11 @@
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024",
       "evt-cn-decree-785-2024",
-      "evt-cn-antismuggling-campaign-2025"
+      "evt-cn-antismuggling-campaign-2025",
+      "evt-cn-mofcom-56-2025",
+      "evt-cn-mofcom-57-2025",
+      "evt-cn-mofcom-58-2025",
+      "evt-cn-mofcom-62-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -67,7 +71,8 @@
       "evt-us-cm-list-2022",
       "evt-us-proc-11001-2026",
       "evt-us-osc-vulcan-reelement-2025",
-      "evt-us-aam-adcvd-2025"
+      "evt-us-aam-adcvd-2025",
+      "evt-us-chips-usar-2026"
     ],
     "sourceIds": [
       "src-doi-press-2025",
@@ -95,7 +100,10 @@
     ],
     "framingPosture": "Frames policy as supply-chain resilience, de-risking, and open strategic autonomy.",
     "eventIds": [
-      "eu-critical-raw-materials-act"
+      "eu-critical-raw-materials-act",
+      "evt-eu-crma-strategic-projects-2025-03",
+      "evt-eu-crma-strategic-projects-2025-06",
+      "evt-eu-resourceeu-2025"
     ],
     "sourceIds": [
       "src-ec-crma",
@@ -142,7 +150,11 @@
     "eventIds": [
       "evt-jp-jogmec-lynas-2023",
       "evt-jp-jogmec-lofdal-2026",
-      "evt-jp-espa-2022"
+      "evt-jp-espa-2022",
+      "evt-jp-espa-almt-tungsten-2026",
+      "evt-jp-espa-shin-etsu-rare-earth-2026",
+      "evt-jp-espa-santoku-rare-earth-2026",
+      "evt-jp-espa-japan-new-metals-tungsten-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -167,7 +179,9 @@
     "eventIds": [
       "evt-ca-ica-divest-2022",
       "evt-ca-cms-2022",
-      "evt-ca-nrcan-cmrdd-2024"
+      "evt-ca-nrcan-cmrdd-2024",
+      "evt-ca-g7-cmpa-2025",
+      "evt-ca-nrcan-pdac-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

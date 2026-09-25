@@ -10,7 +10,7 @@ export const site = {
     "How the major powers contest rare earths and strategic materials through policy.",
   description:
     "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
-  version: "v0.5-capital-control",
+  version: "v0.6-capital-intelligence",
   lastUpdated: "2026-09-23",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
@@ -35,7 +35,7 @@ export const navGroups = [
     label: "Policy record",
     items: [
       { href: "/events", label: "Events", primary: true },
-      { href: "/timeline", label: "Timeline", primary: true },
+      { href: "/timeline", label: "Timeline", primary: false },
       { href: "/framing", label: "Framing", primary: true },
       { href: "/compare", label: "Compare", primary: false },
     ],
@@ -46,6 +46,10 @@ export const navGroups = [
       { href: "/capital", label: "Capital", primary: true },
       { href: "/controls", label: "Controls", primary: true },
       { href: "/interplay", label: "Interplay", primary: true },
+      { href: "/portfolios", label: "Portfolios", primary: true },
+      { href: "/projects", label: "Projects", primary: false },
+      { href: "/organizations", label: "Organizations", primary: false },
+      { href: "/programmes", label: "Programmes", primary: false },
     ],
   },
   {
