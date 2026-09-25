@@ -146,7 +146,7 @@ export function SiteHeader() {
             >
               <SearchIcon />
             </Link>
-            <RecordAsOf className="hidden lg:inline-flex" />
+            <RecordAsOf className="hidden xl:inline-flex" />
             <button
               ref={menuToggle}
               type="button"
@@ -166,8 +166,8 @@ export function SiteHeader() {
           </div>
         </Container>
 
-        {/* Small screens: what the record is as of, kept in view under the bar. */}
-        <div className="border-t border-border lg:hidden">
+        {/* Below xl: what the record is as of, kept in view under the bar (the main bar carries it from xl up). */}
+        <div className="border-t border-border xl:hidden">
           <Container width="wide" className="flex h-9 items-center justify-between gap-3">
             <RecordAsOf />
             <span className="font-display text-xs text-faint">Not a live feed</span>
