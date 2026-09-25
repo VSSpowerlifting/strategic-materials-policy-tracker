@@ -610,6 +610,17 @@ export type FinancialRelationshipType = (typeof FINANCIAL_RELATIONSHIP_TYPES)[nu
 export type EvidenceLevel = (typeof EVIDENCE_LEVELS)[number];
 export type FinancialEvidenceField = (typeof FINANCIAL_EVIDENCE_FIELDS)[number];
 export type ControlMeasureType = (typeof CONTROL_MEASURE_TYPES)[number];
+
+/**
+ * Clauses that restrict by end use, enforcement, ownership or suspension and define no items of their own, so
+ * `controlledItemTypes` and `controlledStages` are empty by rule. Such a clause has no supply-chain stage to place.
+ */
+export const NO_ITEM_MEASURE_TYPES: readonly ControlMeasureType[] = [
+  "end_use_restriction",
+  "customs_enforcement",
+  "investment_divestiture",
+  "suspension",
+];
 export type ControlDirection = (typeof CONTROL_DIRECTIONS)[number];
 export type ControlStatus = (typeof CONTROL_STATUSES)[number];
 export type TargetScope = (typeof TARGET_SCOPES)[number];

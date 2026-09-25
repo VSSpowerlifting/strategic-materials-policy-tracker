@@ -47,7 +47,7 @@ import type {
   SupplyChainStage,
   ValueRole,
 } from "./types";
-import { SUPPLY_CHAIN_STAGES } from "./types";
+import { NO_ITEM_MEASURE_TYPES, SUPPLY_CHAIN_STAGES } from "./types";
 
 const byCodePoint = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 
@@ -779,6 +779,72 @@ export function stageResponseMap(asOf: string, all: readonly FinancialCommitment
       x.designationActors.sort(byCodePoint);
     }
   return out;
+}
+
+/**
+ * What the stage response map cannot place, by record kind, using the same placement tests as
+ * `stageResponseMap`: a control clause or designation needs a stage and a material; a capital row needs a
+ * providing government, the commitment or funding-option role, a stage and a material. Each kind's buckets are
+ * exclusive and sum to that kind's total, so nothing is counted twice and none is left out.
+ *
+ * "No stage" is a statement about the record, not a coverage gap: a clause that restricts by end use,
+ * customs enforcement, divestiture or suspension defines no items of its own, so its stage is empty by rule
+ * (`NO_ITEM_MEASURE_TYPES`). Those are counted apart from clauses that could carry a stage and record none.
+ * Counts only: nothing here is money, and a kind's off-lattice count is never added to another kind's.
+ */
+export function stageLatticeGaps(
+  all: readonly FinancialCommitment[] = getAllFinancialCommitments(),
+  controls: readonly ControlMeasure[] = getAllControlMeasures(),
+  designations: readonly ProjectDesignation[] = getAllProjectDesignations(),
+) {
+  const placedControl = (m: ControlMeasure) => m.controlledStages.length > 0 && m.materialIds.length > 0;
+  const unplacedControls = controls.filter((m) => !placedControl(m));
+  const noStageControls = unplacedControls.filter((m) => m.controlledStages.length === 0);
+  const byRule = noStageControls.filter((m) => NO_ITEM_MEASURE_TYPES.includes(m.measureType));
+
+  const isPlacedRole = (c: FinancialCommitment) => c.valueRole === "commitment" || c.valueRole === "funding_option";
+  const otherRoles: Partial<Record<ValueRole, number>> = {};
+  let noProvider = 0;
+  let noStageOrMaterial = 0;
+  let onLattice = 0;
+  for (const c of all) {
+    if (!isPlacedRole(c)) otherRoles[c.valueRole] = (otherRoles[c.valueRole] ?? 0) + 1;
+    else if (!c.providerJurisdiction) noProvider++;
+    else if (c.stages.length === 0 || c.materialIds.length === 0) noStageOrMaterial++;
+    else onLattice++;
+  }
+  const otherRoleTotal = Object.values(otherRoles).reduce((n, x) => n + x, 0);
+
+  const unplacedDesignations = designations.filter((d) => d.stages.length === 0 || d.materialIds.length === 0);
+  return {
+    controls: {
+      total: controls.length,
+      /** Clauses the map cannot place: no stage, or (with a stage) no tracked material. */
+      unplaced: unplacedControls.length,
+      /** Of the unplaced clauses, those with no stage. */
+      noStage: noStageControls.length,
+      /** No stage by rule: the clause defines no items of its own. */
+      noStageByRule: byRule.length,
+      /** No stage although the clause type could carry one. */
+      noStageOther: noStageControls.length - byRule.length,
+      /** Unplaced although a stage is recorded, because no tracked material is. */
+      noMaterialOnly: unplacedControls.length - noStageControls.length,
+      placed: controls.length - unplacedControls.length,
+    },
+    designations: { total: designations.length, unplaced: unplacedDesignations.length, placed: designations.length - unplacedDesignations.length },
+    capital: {
+      total: all.length,
+      /** Commitment or funding-option rows with a providing government and a stage and material. */
+      placed: onLattice,
+      /** A commitment or funding option that no tracked government provides. */
+      noProvider,
+      /** A government's commitment or option that records no stage or no tracked material. */
+      noStageOrMaterial,
+      /** Rows in another value role (envelopes, appropriations, indications, private funds): never placed. */
+      otherRoles,
+      otherRoleTotal,
+    },
+  };
 }
 
 /**

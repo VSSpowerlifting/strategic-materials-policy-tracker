@@ -1,8 +1,90 @@
 # Project state
 
-_Last updated: 2026-09-24 (v0.6 Capital Intelligence on branch `feat/capital-intelligence-v06`, PR open against `main`, not merged)._
+_Last updated: 2026-09-25 (Lattice Register milestone 1 on `feat/lattice-register-m1`, draft PR against `feat/capital-intelligence-v06`, not merged; v0.6 PR #6 still open)._
 
-## Latest session: v0.6 Capital Intelligence
+## Latest session: Lattice Register, milestone 1
+
+Branch `feat/lattice-register-m1` from `feat/capital-intelligence-v06` at `a8e4957` (PR #6 open); worktree
+`/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/smpt-lattice-register`. Draft PR base is
+`feat/capital-intelligence-v06`, so the diff is this milestone only. Visual reference: the approved
+`SMPT-Lattice-Register.pdf` (design review, not implemented before this).
+
+### What shipped
+
+- **Branding.** Gold lattice palette in `app/globals.css` (token names unchanged, so every page follows): warm
+  near-black base, gold accent, cream `paper` tokens for reading sections, and three mark tokens
+  (`--mark-commitment`, `--mark-control`, `--mark-designation`). The two lattice dot colors are the supplied
+  logo's own (`#ffca64`, `#a87002`) and the wordmark gold is sampled from it (`--brand-gold`, `#c8993e`). The mark
+  is the **supplied artwork**, not a redraw: `public/brand/smpt-lattice-mark.png` is the mark cropped (transparent
+  background, Lanczos-downscaled to 480 px wide) from the supplied 8000 x 2000 logo PNG and served by `next/image`;
+  no vector source was supplied. An earlier generated 7 x 7 SVG mark was checked against the logo and the approved
+  PDF, found not to match, and removed. The wordmark text is live text in Archivo (the supplied lockup's typeface
+  is a different face); `LatticeMark` + `Wordmark` are in `components/ui/brand.tsx`. New header (Overview, Compare, Explore, Materials, Jurisdictions, Method, search
+  with `/` shortcut, "Record as of"); new footer (Method / Data / Coverage, version line, full page index).
+- **Nav is a presentation layer.** `headerNav` in `lib/site.ts` drives the six header links; `navGroups`/`nav`
+  are unchanged, so the sitemap, footer index and phone menu still reach every page. Explore points at the
+  existing `/events` explorer (Explore redesign deferred) and is current across the record-browsing routes;
+  Jurisdictions is `/actors` under its design label.
+- **Overview (`/`).** Lattice hero, node summary, the 27-of-45 notice, record counts, dated register (stated end
+  dates + newest events), control-clause squares and the existing per-currency/instrument public-commitment
+  totals. Replaces the old home (hero motif, stats strip, recent events, framing snapshot, tile grid); the
+  dataset JSON-LD is kept. `HeroMotif`, `MaterialTile` and friends are now unused by `/` but left in place.
+- **Compare (`/compare`).** Working material-by-stage lattice: kind toggles, government filter (providers for
+  commitments, issuers for clauses, designating governments for designations), records panel for the selected
+  node, one-material split by government, "Not on the lattice" counts. The earlier events-by-material-and-actor
+  matrix is kept below it as its own section. Selection lives in the URL hash (`/compare#tungsten:processing`),
+  so both routes stay static.
+- **Phone.** The lattice becomes a tap-a-material accordion with the per-stage list; the government split
+  becomes a list; nothing scrolls horizontally at 390 px.
+
+### Derivation (no new analysis)
+
+- `lib/lattice.ts` reshapes `stageResponseMap` into a serializable payload (records by kind, ids per cell);
+  `lib/lattice-view.ts` holds the pure filter/count/government-split logic; `stageLatticeGaps` in
+  `lib/capital-intelligence.ts` counts what the map cannot place, with the map's own placement tests, in
+  exclusive buckets. Stage columns are the occupied stages (derived, not a fixed nine).
+- Counts are per kind and never added across kinds; no row or column is totalled; amounts stay in the source's
+  currency and qualifier. Funding options and ended rows are listed apart in the panel, never counted as
+  commitments. No causal link is drawn (the panel says so).
+- `NO_ITEM_MEASURE_TYPES` moved from `scripts/validate-capital-control.ts` to `lib/types.ts` (the validator now
+  imports it): the lattice copy needs to know which clauses record no stage *by rule*. No validator behaviour
+  change.
+
+### The 27 of 45
+
+27 of 45 control clauses have an empty `controlledStages` and cannot appear on the lattice. Of those, 16 are
+end-use, customs-enforcement, investment-divestiture or suspension clauses, where the validator enforces an
+empty stage (no items of their own); the other 11 are clause types that could carry a stage and record none.
+The copy says "record no stage" (never "missing" or "incomplete") and splits the two cases. The notice is shown
+above the Compare lattice and in the Overview's left column (below the lattice on a phone).
+
+### Deltas from the design reference (data wins)
+
+- "Not on the lattice" buckets differ from the comp by one: 7 commitment-or-option rows (6 with no stage or
+  tracked material, 1 with no providing government) and 20 rows in other value roles; the comp shows 6 and 21.
+  The lattice places funding options, so an option with no stage is counted with the commitments here.
+- Record counts, statuses and end dates are derived from the data at build time, not transcribed.
+- Not built: the month-strip chart on the dated register and its "four kinds of date" key (two kinds are
+  explained instead); "This view as CSV" (no lattice export endpoint exists); per-count "Open rows" links
+  (Explore has no filter deep links, so the panel links to each record and to `/capital`); the tungsten
+  dossier, Explore redesign and Hemerdon record (deferred).
+- Registry English names are used for parties when exactly one organization is linked; the designation's
+  as-stated name is shown as a secondary line.
+
+### Decisions to confirm
+
+- Legacy pages keep their hard-coded data hexes (`#CBA86A`, `#4fb59e`, `#C77B7B`) as a fixed record-kind
+  encoding; the lattice uses its own tokens. The two palettes differ for designations (teal on `/interplay`,
+  cream diamond on the lattice). Unify only if the maintainer wants.
+- Header uses the wide container; legacy pages use the default one, so the logo sits slightly left of content.
+
+### Checks
+
+`npm run validate` (unchanged, no data edits), `lint`, `typecheck`, `test` (new `tests/lattice.test.ts` plus a
+`formatDateLong` test), `build`; visual checks at 1440 px and 390 px (headless Chrome over CDP) and interaction
+checks (cell select, government filter, kind toggles, hash deep link, bad-hash fallback).
+
+## Previous session: v0.6 Capital Intelligence
 
 Branch `feat/capital-intelligence-v06` from `main` at `7ddb62c`; worktree
 `/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/smpt-v06`
