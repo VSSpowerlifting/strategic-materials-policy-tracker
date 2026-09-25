@@ -36,8 +36,9 @@ A conflict between any of these is reported, not blended.
 `CLAUDE.md` already covers unknown values (rule 5: unknown is `null` or
 `"Not yet coded"`), no currency conversion and no adding of unlike instruments
 or `part_of`/`drawn_from` double counting (rule 6), and never totalling money
-outside `lib/capital-control.ts` (the Architecture section). Also hold to the
-standards below.
+outside `lib/capital-control.ts` (`totalCommitments`), which
+`lib/capital-intelligence.ts` also goes through for stacks and portfolios (rule 7
+and the Architecture section). Also hold to the standards below.
 
 These are review standards, not statements about current `main` behavior. Verify
 the live code and data before relying on any of them or reporting a defect; `main`
@@ -58,7 +59,7 @@ may not yet meet every one.
   This applies only to fields the schema actually has. Confirm the field exists
   before auditing for it.
 - **Check the whole publication path for a private candidate** (pages, search,
-  `/api/v1`, exports, `sitemap.ts`, derived totals), not only a visible table.
+  `/api/v1`, exports, `app/sitemap.ts`, derived totals), not only a visible table.
 - **Tests take expected values from reviewed sources and explicit rules**, not
   from the transformation under test. For an important regression, show the check
   fails on the old behavior where practical.
