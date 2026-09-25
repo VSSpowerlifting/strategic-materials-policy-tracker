@@ -152,7 +152,7 @@ test("the vocabularies carry every value the Capital & Control model requires", 
     "offtake", "procurement_right", "stockpile_purchase", "mixed", "unspecified",
   ]);
   requires("VALUE_ROLES", VALUE_ROLES, [
-    "commitment", "program_envelope", "budget_appropriation", "lending_authority", "funding_option",
+    "commitment", "program_envelope", "budget_appropriation", "lending_authority", "funding_option", "indication",
     "expected_co_investment", "private_financing", "recipient_own_funds", "total_project_cost",
   ]);
   requires("CAPITAL_SOURCES", CAPITAL_SOURCES, [
@@ -297,6 +297,10 @@ test("public counts derive from the seeds, Capital & Control included", () => {
     sources: seedLength("sources.json"),
     financialCommitments: seedLength("financial-commitments.json"),
     controlMeasures: seedLength("control-measures.json"),
+    organizations: seedLength("organizations.json"),
+    projects: seedLength("projects.json"),
+    programmes: seedLength("programmes.json"),
+    projectDesignations: seedLength("project-designations.json"),
   });
   assert.equal(getAllEvents().length, seedLength("events.json"));
   assert.equal(getAllSources().length, seedLength("sources.json"));
@@ -458,9 +462,13 @@ test("a commitment can be part of one commitment and drawn from another at once"
     amount: null,
     provider: null,
     providerJurisdiction: null,
+    providerOrgIds: [],
     legalAuthority: null,
+    programmeId: null,
     recipient: null,
+    recipientOrgIds: [],
     project: null,
+    projectId: null,
     facility: null,
     locations: [],
     stages: [],
@@ -509,6 +517,8 @@ test("a control measure keeps the end users and end uses it targets in the sourc
     untrackedMaterialsAsStated: [],
     productScopeAsStated: null,
     productCodes: [],
+    controlledItemTypes: [],
+    controlledStages: [],
     legalBasisEventIds: [],
     legalBasisAsStated: null,
     modifiesMeasureIds: [],

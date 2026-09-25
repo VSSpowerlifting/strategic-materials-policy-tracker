@@ -6,13 +6,16 @@ import { InterplayChronology, MaterialInterplayMatrix } from "@/components/capit
 import { JurisdictionTag } from "@/components/labels";
 import { InlineAmount, ProviderTag } from "@/components/capital/rows";
 import { ControlStatusBadge } from "@/components/capital/primitives";
+import { StageResponseMap } from "@/components/intelligence/response-map";
 import {
   commitmentActor,
   controlIssuer,
   controlStatusOn,
   currentControlEntry,
+  isEnded,
+  materialLedgerRows,
 } from "@/lib/capital-control";
-import { getAllControlMeasures, getAllFinancialCommitments, getAllMaterials } from "@/lib/data";
+import { getAllControlMeasures, getAllMaterials } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 import { controlMeasureTypeLabels, financialInstrumentLabels, valueRoleLabels } from "@/lib/labels";
 import { site } from "@/lib/site";
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
  */
 function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string }) {
   const controls = getAllControlMeasures().filter((m) => m.materialIds.includes(materialId));
-  const money = getAllFinancialCommitments().filter((c) => c.materialIds.includes(materialId) && !c.relationships.some((r) => r.relationship === "part_of"));
+  const money = materialLedgerRows(materialId);
   const firstDate = (h: { date: string | null }[]) => h.find((e) => e.date)?.date ?? null;
   const items = [
     ...controls.map((m) => ({ kind: "control" as const, date: firstDate(m.statusHistory), m })),
@@ -61,6 +64,7 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
                 <span className="text-faint"> · {valueRoleLabels[it.c.valueRole].toLowerCase()}</span>
               ) : null}
               <span className="text-muted"> · {it.c.recipient ?? it.c.provider}</span>
+              {isEnded(it.c) ? <span className="text-faint"> · ended</span> : null}
             </Link>
             <InlineAmount amount={it.c.amount} />
           </li>
@@ -87,11 +91,19 @@ export default function InterplayPage() {
           <InterplayChronology asOf={asOf} />
         </Section>
 
-        <Section index="02" title="Material by actor" description={`Financial rows provided (a package counts once) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts, never money.`}>
+        <Section index="02" title="Material by actor" description={`Financial rows provided that have not ended (a package counts once; a withdrawn or lapsed row is left out, and a funding option is a row of its own, not an exercise) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts, never money.`}>
           <MaterialInterplayMatrix asOf={asOf} />
         </Section>
 
-        <Section index="03" title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. Parts of packages are folded into their package.">
+        <Section
+          index="03"
+          title="Material by supply-chain stage"
+          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. A clause's stage is where its items belong (separation technology sits at separation), not a claim that it restricts that stage; clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed. Record counts, never money.`}
+        >
+          <StageResponseMap asOf={asOf} />
+        </Section>
+
+        <Section index="04" title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. A part is folded into its package only when that package is listed here in the same state; a row that withdrew or lapsed is marked ended and never hides a part that still stands.">
           <div className="grid gap-4 lg:grid-cols-2">
             {materials.map((m) => (
               <Card key={m.id} className="p-5">

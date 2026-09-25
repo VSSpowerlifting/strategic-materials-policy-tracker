@@ -2,54 +2,69 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Wordmark } from "@/components/ui/brand";
 import { nav, secondaryNav, site } from "@/lib/site";
-import { formatDate } from "@/lib/format";
+import { formatDateLong } from "@/lib/format";
 
+/** "v0.6-capital-intelligence" → "0.6". */
+const versionNumber = /^v?(\d+\.\d+)/.exec(site.version)?.[1] ?? site.version;
+
+/**
+ * Footer. Pages that end in a full-bleed section mark their root with `data-flush-footer`, which removes the
+ * space above the footer so the two meet.
+ */
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-border">
-      <Container className="py-12">
-        <div className="flex flex-col gap-8 md:flex-row md:justify-between">
-          <div className="max-w-md">
-            <Wordmark label={site.name} className="text-sm" />
-            <p className="mt-3 text-pretty leading-7 text-muted">{site.tagline}</p>
-            <p className="mt-3 text-sm leading-6 text-faint">
-              Scope: policy instruments and official framing across China, the US,
-              the EU, and allied states from {site.scopeStart}. This is not a market
-              model — no price or supply forecasting. See the{" "}
-              <Link className="font-display text-accent hover:text-accent-strong" href="/methodology">
-                methodology
-              </Link>{" "}
-              and{" "}
-              <Link
-                className="font-display text-accent hover:text-accent-strong"
-                href="/methodology#sources"
-              >
-                source &amp; translation policy
-              </Link>
-              .
+    <footer className="mt-24 border-t border-border-strong bg-background [main:has([data-flush-footer])+&]:mt-0">
+      <Container width="wide" className="py-12">
+        <div className="grid gap-10 md:grid-cols-[1.1fr_1fr_1fr_1fr]">
+          <div>
+            <Wordmark markClassName="h-12" />
+          </div>
+          <div>
+            <h2 className="font-display text-sm font-semibold text-foreground">Method</h2>
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-muted">
+              <li>Categorical labels only, never an invented score.</li>
+              <li>Amounts stay in the source&apos;s currency and are never converted.</li>
+              <li>Unknown fields stay empty or &ldquo;not yet coded&rdquo;, never guessed.</li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="font-display text-sm font-semibold text-foreground">Data</h2>
+            <p className="mt-3 text-sm leading-6 text-muted">Every record type as CSV and JSON, with its source links.</p>
+            <p className="mt-2 space-y-1 font-mono text-xs leading-6 text-muted">
+              <Link href="/data" className="block hover:text-foreground">/api/export/dataset.json</Link>
+              <Link href="/data" className="block hover:text-foreground">/api/v1/ routes for each record type</Link>
             </p>
           </div>
-          <nav className="grid grid-cols-2 gap-x-10 gap-y-1.5 font-display text-sm sm:grid-cols-3">
-            {[...nav, ...secondaryNav].map((i) => (
-              <Link
-                key={i.href}
-                href={i.href}
-                className="text-muted transition-colors hover:text-foreground"
-              >
-                {i.label}
-              </Link>
-            ))}
-          </nav>
+          <div>
+            <h2 className="font-display text-sm font-semibold text-foreground">Coverage</h2>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Counts per government measure how deeply this project has researched it, not how much that government has done.
+            </p>
+          </div>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 font-display text-xs text-faint sm:flex-row sm:items-center sm:justify-between">
-          <p className="tnum font-mono">
-            {site.version} · Last updated {formatDate(site.lastUpdated)}
+
+        <nav aria-label="All pages" className="mt-10 flex flex-wrap gap-x-5 gap-y-1.5 border-t border-border pt-6 font-display text-sm">
+          {[...nav, ...secondaryNav].map((i) => (
+            <Link key={i.href} href={i.href} className="text-muted transition-colors hover:text-foreground">
+              {i.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="mt-6 flex flex-col gap-2 border-t border-border pt-5 font-display text-xs text-faint sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            Version {versionNumber}. Data as of {formatDateLong(site.lastUpdated)}.{" "}
+            {site.monitoringStartedAt ? `Prospective monitoring began ${formatDateLong(site.monitoringStartedAt)}.` : "Prospective monitoring has not started."}
           </p>
           <p>
-            Not legal or compliance advice. Categorical labels only — no synthetic
-            risk scores.
+            <Link href="/methodology" className="hover:text-foreground">Methodology</Link>
+            {" · "}
+            <Link href="/coverage" className="hover:text-foreground">Coverage</Link>
+            {" · "}
+            <Link href="/data" className="hover:text-foreground">Downloads and API</Link>
           </p>
         </div>
+        <p className="mt-3 font-display text-xs text-faint">Not legal or compliance advice.</p>
       </Container>
     </footer>
   );

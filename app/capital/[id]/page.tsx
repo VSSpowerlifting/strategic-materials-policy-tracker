@@ -18,6 +18,7 @@ import {
   ValueRoleBadge,
 } from "@/components/capital/primitives";
 import { CommitmentRow, ProviderTag, optionStatusLabel } from "@/components/capital/rows";
+import { OrgList, ProgrammeLink, ProjectLink } from "@/components/intelligence/org-link";
 import { Badge } from "@/components/ui/badge";
 import {
   childLinks,
@@ -129,6 +130,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
                     <OptionLadder
                       executed={option.executed ? { date: option.executed.date, sourceId: option.executed.sourceId } : null}
                       exercises={optionStep(option.exercises)}
+                      endedExercises={optionStep(option.endedExercises)}
                       disbursements={optionStep(option.disbursements)}
                     />
                   </div>
@@ -196,10 +198,20 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
           <Section index={next()} title="Record">
             <Card className="px-5 py-1">
               <dl>
-                <Fact label="Provider">{c.provider ?? <NotStated />}</Fact>
+                <Fact label="Provider">
+                  {c.provider ?? <NotStated />}
+                  {c.providerOrgIds.length ? <span className="mt-1 block"><OrgList ids={c.providerOrgIds} showKind /></span> : null}
+                </Fact>
                 <Fact label="Legal authority">{c.legalAuthority ?? <NotStated />}</Fact>
-                <Fact label="Recipient">{c.recipient ?? <NotStated />}</Fact>
-                <Fact label="Project">{c.project ?? <NotStated />}</Fact>
+                <Fact label="Programme">{c.programmeId ? <ProgrammeLink id={c.programmeId} /> : <NotStated>None named</NotStated>}</Fact>
+                <Fact label="Recipient">
+                  {c.recipient ?? <NotStated />}
+                  {c.recipientOrgIds.length ? <span className="mt-1 block"><OrgList ids={c.recipientOrgIds} showKind /></span> : null}
+                </Fact>
+                <Fact label="Project">
+                  {c.project ?? (c.projectId ? null : <NotStated />)}
+                  {c.projectId ? <span className="mt-1 block"><ProjectLink id={c.projectId} /> <span className="font-mono text-[11px] text-faint">capital stack →</span></span> : null}
+                </Fact>
                 <Fact label="Facility">{c.facility ?? <NotStated />}</Fact>
                 <Fact label="Location">
                   {c.locations.length ? (

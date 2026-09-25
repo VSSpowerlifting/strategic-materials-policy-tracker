@@ -230,7 +230,9 @@ export function InterplayChronology({
                 ? controlStatusLabels[m.status as never]
                 : m.valueRole === "funding_option"
                   ? `funding option; agreement ${String(financialStatusLabels[m.status as never]).toLowerCase()}, not committed money`
-                  : financialStatusLabels[m.status as never];
+                  : m.valueRole === "indication"
+                    ? `non-binding indication; ${String(financialStatusLabels[m.status as never]).toLowerCase()}, not a commitment`
+                    : financialStatusLabels[m.status as never];
             const tip = `${formatDate(m.date)} — ${m.kind === "capital" ? "Capital" : "Control"}: ${m.label} (${status})`;
             return (
               <Link key={`${m.id}-${m.date}-${m.status}`} href={href}>
@@ -331,8 +333,10 @@ export function StageMatrix({ rows }: { rows: FinancialCommitment[] }) {
 
 /**
  * Where money and restrictions meet on the same material. Each cell counts the
- * financial rows an actor provides and the control clauses it issues naming
+ * financial rows an actor provides that have not ended (a funding option is one
+ * row, not an exercise) and the control clauses it issues naming
  * the material, with how many of those clauses are in force on the as-of date.
+ * A part is folded into its package only in a cell where the package is counted.
  */
 export function MaterialInterplayMatrix({ asOf }: { asOf: string }) {
   const grid = materialInterplay(asOf);

@@ -8,6 +8,9 @@
  *
  * Aggregation rules (see /methodology#capital-counting):
  *  - Money is never converted. Totals are per currency.
+ *  - Unlike instruments are never added: within a currency, each instrument
+ *    (grant, loan, equity, loan guarantee...) has its own sums, and rows
+ *    whose instrument is not stated or is a mix are listed, never summed.
  *  - Unlike value roles are never added. Only rows whose role is
  *    "commitment" are ever summed; envelopes, appropriations and lending
  *    authorities are listed, never totalled, because two envelopes can share
@@ -22,8 +25,18 @@
  *  - Private capital, a recipient's own funds and total project cost are not
  *    public support. Mixed public-private vehicles are reported apart from
  *    public money because their public share is not stated.
- *  - Figures stated as ceilings, approximations or floors are kept apart from
- *    exact figures, so a total never hides how much of it is "up to".
+ *  - Figures stated "up to", "about" or "at least" are added only to figures
+ *    with the same qualifier (per currency and instrument) and kept apart from
+ *    exact figures, so a total never hides how much of it is "up to". An
+ *    up_to sum is a sum of stated upper bounds, not an amount paid.
+ *  - A commitment whose current status is withdrawn or lapsed is left out of
+ *    every sum and listed as ended: money that will not flow is not support.
+ *  - A commitment whose current status is "not_stated" is left out of every
+ *    sum and listed apart: the split into binding and not yet binding is a
+ *    claim about status, and a source that gives none supports neither. This
+ *    is the same rule as an instrument the source does not name.
+ *  - Only a row that is itself counted can keep another row out of a sum. An
+ *    ended, status-not-stated or amountless row never suppresses its parts.
  *  - Decimal arithmetic is exact (BigInt), never floating point.
  */
 import {
@@ -32,8 +45,10 @@ import {
   getAllFinancialCommitments,
   getEventById,
 } from "./data";
+import { FINANCIAL_INSTRUMENTS } from "./types";
 import type {
   CapitalSource,
+  FinancialInstrument,
   ControlMeasure,
   ControlStatus,
   ControlStatusEntry,
@@ -140,43 +155,78 @@ export const PUBLIC_CAPITAL_SOURCES: readonly CapitalSource[] = ["public", "publ
 
 type QualifierSums = Partial<Record<ValueQualifier, string>>;
 
-/** What every currency entry carries, summed or not. */
-type CurrencyTotalBase = {
-  currency: string;
-  /** Rows the total is made of (or would be, were it safe to add them). */
-  countedIds: string[];
-  /** Rows left out because a row they belong to is counted in the same total. */
-  nestedIds: string[];
-};
-
 /**
- * One currency's total. Discriminated on `status`, so no consumer can read a
- * sum for a currency whose rows overlap:
- *  - "summed": the sums are safe to show.
- *  - "withheld": two counted rows share a descendant, so adding them would
- *    double-count. The sums are null, never zero or partial, and `overlap`
- *    names the rows.
+ * The counted rows of one instrument in one currency, summed. Unlike
+ * instruments are never added: a grant, a loan, an equity stake and a loan
+ * guarantee are different promises, so each has its own sums.
  */
-export type CurrencyTotal =
-  | (CurrencyTotalBase & {
-      status: "summed";
+export type InstrumentSum = {
+  instrument: FinancialInstrument;
+  countedIds: string[];
+} & (
+  | {
+      summed: true;
       /** Sums of the counted rows' figures, kept apart by how the source qualifies them. */
       byQualifier: QualifierSums;
       /**
        * The same sums split by whether a binding agreement exists (contracted,
        * partially disbursed, disbursed) or not yet (announced, authorized,
-       * allocated, decided, including conditional and non-binding commitments).
+       * allocated, decided, including conditional commitments; a non-binding letter of intent or interest
+       * is an indication, not a commitment, and is in no sum).
        */
       binding: QualifierSums;
       notYetBinding: QualifierSums;
+    }
+  | {
+      /**
+       * Rows whose instrument is not specified ("unspecified": the sources name none the vocabulary covers), or
+       * that combine instruments without a split ("mixed"), are listed with
+       * their own figures and never summed: adding them could add a loan to a
+       * grant without anyone being able to tell.
+       */
+      summed: false;
+      reason: "instrument_not_stated" | "several_instruments";
+      byQualifier: null;
+      binding: null;
+      notYetBinding: null;
+    }
+);
+
+/** Instrument values that name no single instrument, so rows under them are listed, never summed. */
+export const UNSUMMED_INSTRUMENTS: readonly FinancialInstrument[] = ["mixed", "unspecified"];
+
+/** What every currency entry carries, summed or not. */
+type CurrencyTotalBase = {
+  currency: string;
+  /** Rows the totals are made of (or would be, were it safe to add them). */
+  countedIds: string[];
+  /** Rows left out because a row they belong to is counted in the same currency. */
+  nestedIds: string[];
+};
+
+/**
+ * One currency's totals, one entry per instrument. Discriminated on
+ * `status`, so no consumer can read a sum for a currency whose rows overlap:
+ *  - "summed": the per-instrument sums are safe to show. There is no sum
+ *    across instruments.
+ *  - "withheld": two counted rows share a descendant, so adding them would
+ *    double-count. The sums are null, never zero or partial, and `overlap`
+ *    names the rows.
+ * A part is left out when a row it belongs to is counted in the same
+ * currency, whatever either row's instrument: nesting is decided before the
+ * rows are split by instrument, so a package's parts are never counted
+ * beside it under their own instruments.
+ */
+export type CurrencyTotal =
+  | (CurrencyTotalBase & {
+      status: "summed";
+      instruments: InstrumentSum[];
       overlap: null;
     })
   | (CurrencyTotalBase & {
       status: "withheld";
       reason: "overlap";
-      byQualifier: null;
-      binding: null;
-      notYetBinding: null;
+      instruments: null;
       overlap: { a: string; b: string; shared: string };
     });
 
@@ -186,7 +236,18 @@ export type CommitmentTotals = {
   currencies: CurrencyTotal[];
   /** Rows in scope that state no amount (price floors, offtakes, tax credits). */
   unquantifiedIds: string[];
+  /** Rows whose current status is withdrawn or lapsed: money that will not flow, listed and never summed. */
+  endedIds: string[];
+  /**
+   * Rows with an amount whose current status is "not_stated": the source
+   * gives no stage, so they are neither binding nor not yet binding, and are
+   * listed with their own figures and never summed.
+   */
+  statusNotStatedIds: string[];
 };
+
+/** Financial statuses at which a commitment has ended without the money flowing. */
+export const ENDED_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["withdrawn", "lapsed"];
 
 /**
  * Per-currency totals of the given rows under the counting rules above. The
@@ -203,15 +264,32 @@ export function totalCommitments(
 
   const inScope = new Map(rows.map((r) => [r.id, r]));
   const unquantifiedIds: string[] = [];
+  const endedIds: string[] = [];
+  const statusNotStatedIds: string[] = [];
   const counted = new Map<string, FinancialCommitment[]>();
   const nested = new Map<string, string[]>();
+  // A row that reaches a sum: not ended, states an amount, and states its status.
+  const counts = (c: FinancialCommitment | undefined): c is FinancialCommitment & { amount: NonNullable<FinancialCommitment["amount"]> } =>
+    !!c && !!c.amount && legalStanding(c) !== "ended" && legalStanding(c) !== "status_not_stated";
   for (const c of rows) {
+    if (isEnded(c)) {
+      endedIds.push(c.id);
+      continue;
+    }
     if (!c.amount) {
       unquantifiedIds.push(c.id);
       continue;
     }
+    if (!counts(c)) {
+      statusNotStatedIds.push(c.id);
+      continue;
+    }
     const cur = c.amount.currency;
-    const ancestorCounted = [...ancestorIds(c, all)].some((a) => inScope.get(a)?.amount?.currency === cur);
+    // Only an ancestor that itself reaches the sum keeps this row out of it.
+    const ancestorCounted = [...ancestorIds(c, all)].some((a) => {
+      const p = inScope.get(a);
+      return counts(p) && p.amount.currency === cur;
+    });
     if (ancestorCounted) nested.set(cur, [...(nested.get(cur) ?? []), c.id]);
     else counted.set(cur, [...(counted.get(cur) ?? []), c]);
   }
@@ -229,20 +307,37 @@ export function totalCommitments(
               break outer;
             }
       const base = { currency, countedIds: list.map((c) => c.id), nestedIds: nested.get(currency) ?? [] };
-      if (overlap)
-        return { ...base, status: "withheld", reason: "overlap", byQualifier: null, binding: null, notYetBinding: null, overlap };
-      const byQualifier: QualifierSums = {};
-      const binding: QualifierSums = {};
-      const notYetBinding: QualifierSums = {};
-      for (const c of list) {
-        const q = c.amount!.qualifier;
-        byQualifier[q] = addDecimals([byQualifier[q] ?? "0", c.amount!.value]);
-        const bucket = isBinding(c) ? binding : notYetBinding;
-        bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
+      if (overlap) return { ...base, status: "withheld", reason: "overlap", instruments: null, overlap };
+      const instruments: InstrumentSum[] = [];
+      for (const instrument of FINANCIAL_INSTRUMENTS) {
+        const of = list.filter((c) => c.instrument === instrument);
+        if (!of.length) continue;
+        if (UNSUMMED_INSTRUMENTS.includes(instrument)) {
+          instruments.push({
+            instrument,
+            countedIds: of.map((c) => c.id),
+            summed: false,
+            reason: instrument === "mixed" ? "several_instruments" : "instrument_not_stated",
+            byQualifier: null,
+            binding: null,
+            notYetBinding: null,
+          });
+          continue;
+        }
+        const byQualifier: QualifierSums = {};
+        const binding: QualifierSums = {};
+        const notYetBinding: QualifierSums = {};
+        for (const c of of) {
+          const q = c.amount!.qualifier;
+          byQualifier[q] = addDecimals([byQualifier[q] ?? "0", c.amount!.value]);
+          const bucket = isBinding(c) ? binding : notYetBinding;
+          bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
+        }
+        instruments.push({ instrument, countedIds: of.map((c) => c.id), summed: true, byQualifier, binding, notYetBinding });
       }
-      return { ...base, status: "summed", byQualifier, binding, notYetBinding, overlap: null };
+      return { ...base, status: "summed", instruments, overlap: null };
     });
-  return { currencies, unquantifiedIds };
+  return { currencies, unquantifiedIds, endedIds, statusNotStatedIds };
 }
 
 /** Public support committed to recipients: role "commitment", public capital. */
@@ -256,23 +351,28 @@ export const LISTED_NOT_SUMMED_ROLES: readonly ValueRole[] = ["program_envelope"
 /**
  * Where a funding option stands, from the corpus alone. The option is
  * executed when its agreement is contracted; it is exercised only when a
- * commitment drawn from it is recorded; money has moved only when that
- * commitment is (partly) disbursed. Absence means "none recorded in the
- * corpus", never "not exercised".
+ * commitment drawn from it is recorded and has not ended; money has moved
+ * only when that commitment is (partly) disbursed. Absence means "none
+ * recorded in the corpus", never "not exercised".
  */
 export type OptionState = {
   executed: FinancialStatusEntry | null;
+  /** Commitments drawn from the option that have not ended. A withdrawn or lapsed draw is not an exercise. */
   exercises: FinancialCommitment[];
+  /** Draws that were recorded and then withdrew or lapsed: listed, never read as an exercise or as money moved. */
+  endedExercises: FinancialCommitment[];
   disbursements: FinancialCommitment[];
 };
 
 export function optionState(c: FinancialCommitment, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): OptionState {
   const executed = [...c.financialStatusHistory].reverse().find((e) => BINDING_FINANCIAL_STATUSES.includes(e.status)) ?? null;
-  const exercises = childLinks(c.id, all)
+  const draws = childLinks(c.id, all)
     .filter((l) => l.relationship === "drawn_from" && l.commitment.valueRole === "commitment")
     .map((l) => l.commitment);
+  const exercises = draws.filter((e) => !isEnded(e));
+  const endedExercises = draws.filter(isEnded);
   const disbursements = exercises.filter((e) => ["partially_disbursed", "disbursed"].includes(currentFinancialStatus(e)));
-  return { executed, exercises, disbursements };
+  return { executed, exercises, endedExercises, disbursements };
 }
 
 /** Rows grouped by value role. */
@@ -312,8 +412,30 @@ export function commitmentActor(c: FinancialCommitment): JurisdictionCode | null
 /** Financial statuses at which a binding agreement exists. */
 export const BINDING_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["contracted", "partially_disbursed", "disbursed"];
 
+/** Financial statuses at which money is promised or decided but no binding agreement exists yet. */
+export const NOT_YET_BINDING_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["announced", "authorized", "allocated", "decided"];
+
 export function isBinding(c: FinancialCommitment): boolean {
   return BINDING_FINANCIAL_STATUSES.includes(currentFinancialStatus(c));
+}
+
+/** The commitment has ended without the money flowing: withdrawn, or lapsed unused. */
+export function isEnded(c: FinancialCommitment): boolean {
+  return ENDED_FINANCIAL_STATUSES.includes(currentFinancialStatus(c));
+}
+
+/**
+ * Where a commitment stands, in the four terms every count and total uses. A
+ * status the source does not give is never read as "not yet binding".
+ */
+export type LegalStanding = "binding" | "not_yet_binding" | "ended" | "status_not_stated";
+
+export function legalStanding(c: FinancialCommitment): LegalStanding {
+  const status = currentFinancialStatus(c);
+  if (ENDED_FINANCIAL_STATUSES.includes(status)) return "ended";
+  if (BINDING_FINANCIAL_STATUSES.includes(status)) return "binding";
+  if (NOT_YET_BINDING_FINANCIAL_STATUSES.includes(status)) return "not_yet_binding";
+  return "status_not_stated";
 }
 
 // --- Timelines ---------------------------------------------------------------------------
@@ -400,12 +522,38 @@ export function controlClocks(asOf: string) {
 export type InterplayCell = { capitalIds: string[]; controlIds: string[]; controlsInForce: number };
 
 /**
+ * A part of a package is folded into it, so one deal counts once, but only into a package that the cell being
+ * built also counts. `countsHere` says whether a given package is in that cell: a view that does not count the
+ * package (an envelope in a view of commitments, an ended package, another provider's, one that does not cover
+ * this material, stage or destination) never hides a part that the cell does count.
+ */
+export function isFoldedPart(
+  c: FinancialCommitment,
+  byId: ReadonlyMap<string, FinancialCommitment>,
+  countsHere: (p: FinancialCommitment) => boolean,
+): boolean {
+  return c.relationships.some((r) => {
+    if (r.relationship !== "part_of") return false;
+    const p = byId.get(r.commitmentId);
+    return !!p && p.providerJurisdiction === c.providerJurisdiction && countsHere(p);
+  });
+}
+
+export const byIdOf = (all: readonly FinancialCommitment[]) => new Map(all.map((c) => [c.id, c]));
+
+/**
  * For each tracked material and actor: the financial rows that actor provides
  * (a package counted once, its parts folded in) and the control clauses it
  * issues naming the material. Counts of records, never of money, so no
- * currency or value role is mixed.
+ * currency or value role is mixed. A part is folded only into a package that
+ * this matrix counts in the same cell: not an ended package, a private or
+ * another provider's package, or a package that does not name the material.
  */
-export function materialInterplay(asOf: string): Map<string, Map<JurisdictionCode, InterplayCell>> {
+export function materialInterplay(
+  asOf: string,
+  all: readonly FinancialCommitment[] = getAllFinancialCommitments(),
+  controls: readonly ControlMeasure[] = getAllControlMeasures(),
+): Map<string, Map<JurisdictionCode, InterplayCell>> {
   const out = new Map<string, Map<JurisdictionCode, InterplayCell>>();
   const cell = (mat: string, j: JurisdictionCode) => {
     if (!out.has(mat)) out.set(mat, new Map());
@@ -413,17 +561,32 @@ export function materialInterplay(asOf: string): Map<string, Map<JurisdictionCod
     if (!row.has(j)) row.set(j, { capitalIds: [], controlIds: [], controlsInForce: 0 });
     return row.get(j)!;
   };
-  // A part of a package is folded into the package, so one deal counts once.
-  for (const c of getAllFinancialCommitments())
-    if (commitmentActor(c) && !c.relationships.some((r) => r.relationship === "part_of"))
-      for (const mat of c.materialIds) cell(mat, commitmentActor(c)!).capitalIds.push(c.id);
-  for (const m of getAllControlMeasures())
+  const isCounted = (c: FinancialCommitment) => !isEnded(c) && !!commitmentActor(c);
+  const byId = byIdOf(all);
+  for (const c of all) {
+    if (!isCounted(c)) continue;
+    for (const mat of c.materialIds)
+      if (!isFoldedPart(c, byId, (p) => isCounted(p) && p.materialIds.includes(mat))) cell(mat, commitmentActor(c)!).capitalIds.push(c.id);
+  }
+  for (const m of controls)
     for (const mat of m.materialIds) {
       const x = cell(mat, controlIssuer(m));
       x.controlIds.push(m.id);
       if (controlStatusOn(m, asOf) === "in_force") x.controlsInForce++;
     }
   return out;
+}
+
+/**
+ * The financial rows a material's ledger lists: every row naming the material, with a part folded into its
+ * package only when that package is listed too (it names the material, and is ended or not as the part is), so
+ * an ended row is listed as ended and neither an ended package nor another material's package hides a part.
+ */
+export function materialLedgerRows(materialId: string, all: readonly FinancialCommitment[] = getAllFinancialCommitments()): FinancialCommitment[] {
+  const byId = byIdOf(all);
+  return all.filter(
+    (c) => c.materialIds.includes(materialId) && !isFoldedPart(c, byId, (p) => p.materialIds.includes(materialId) && isEnded(p) === isEnded(c)),
+  );
 }
 
 /** Events that carry at least one Capital & Control row, newest first. */

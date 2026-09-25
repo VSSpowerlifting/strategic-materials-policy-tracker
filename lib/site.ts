@@ -10,7 +10,7 @@ export const site = {
     "How the major powers contest rare earths and strategic materials through policy.",
   description:
     "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
-  version: "v0.5-capital-control",
+  version: "v0.6-capital-intelligence",
   lastUpdated: "2026-09-23",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
@@ -35,7 +35,7 @@ export const navGroups = [
     label: "Policy record",
     items: [
       { href: "/events", label: "Events", primary: true },
-      { href: "/timeline", label: "Timeline", primary: true },
+      { href: "/timeline", label: "Timeline", primary: false },
       { href: "/framing", label: "Framing", primary: true },
       { href: "/compare", label: "Compare", primary: false },
     ],
@@ -46,6 +46,10 @@ export const navGroups = [
       { href: "/capital", label: "Capital", primary: true },
       { href: "/controls", label: "Controls", primary: true },
       { href: "/interplay", label: "Interplay", primary: true },
+      { href: "/portfolios", label: "Portfolios", primary: true },
+      { href: "/projects", label: "Projects", primary: false },
+      { href: "/organizations", label: "Organizations", primary: false },
+      { href: "/programmes", label: "Programmes", primary: false },
     ],
   },
   {
@@ -67,6 +71,25 @@ export const navGroups = [
     ],
   },
 ] as const;
+
+/**
+ * The six inline header links of the Lattice Register design. A presentation layer only: `navGroups` and `nav`
+ * stay complete, so the sitemap, the footer and the small-screen menu still reach every page. "Explore" opens
+ * the existing event explorer and is marked current across the record-browsing pages; "Jurisdictions" is the
+ * `/actors` route under its design label.
+ */
+export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] = [
+  { href: "/", label: "Overview", exact: true },
+  { href: "/compare", label: "Compare" },
+  {
+    href: "/events",
+    label: "Explore",
+    alsoCurrentFor: ["/capital", "/controls", "/projects", "/organizations", "/programmes", "/sources", "/timeline", "/framing", "/search"],
+  },
+  { href: "/materials", label: "Materials" },
+  { href: "/actors", label: "Jurisdictions" },
+  { href: "/methodology", label: "Method" },
+];
 
 /** Every header destination, flattened (footer, sitemap). */
 export const nav = navGroups.flatMap((g) => g.items.map(({ href, label }) => ({ href, label })));

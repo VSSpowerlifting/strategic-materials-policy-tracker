@@ -1,53 +1,38 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
- * The chokepoint mark — original SVG, no image asset. Two supply lines enter
- * from the left and two leave to the right, all necking through a single
- * central node: a supply line pinching through a point. Drawn in currentColor
- * (set to verdigris by callers); crisp down to ~20px.
+ * The supplied SMPT lattice mark: a diamond of two offset dot grids, dark amber into light gold, the dots growing
+ * toward the lower right. It is the artwork itself (`public/brand/smpt-lattice-mark.png`, cropped from the supplied
+ * 8000 × 2000 logo with its transparent background), not a redraw; `next/image` serves it at the size needed.
  */
-export function ChokepointMark({ className }: { className?: string }) {
+export function LatticeMark({ className, priority = false }: { className?: string; priority?: boolean }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      className={cn("h-5 w-5", className)}
-    >
-      <path d="M3.5 5.5 L12 12 L3.5 18.5" />
-      <path d="M20.5 5.5 L12 12 L20.5 18.5" />
-      {/* knockout keeps the chokepoint node reading over the converging lines */}
-      <circle cx="12" cy="12" r="2.2" fill="var(--bg)" />
-      <circle cx="12" cy="12" r="2.2" />
-      <circle cx="3.5" cy="5.5" r="1.05" fill="currentColor" stroke="none" />
-      <circle cx="3.5" cy="18.5" r="1.05" fill="currentColor" stroke="none" />
-      <circle cx="20.5" cy="5.5" r="1.05" fill="currentColor" stroke="none" />
-      <circle cx="20.5" cy="18.5" r="1.05" fill="currentColor" stroke="none" />
-    </svg>
+    <Image
+      src="/brand/smpt-lattice-mark.png"
+      alt=""
+      width={480}
+      height={424}
+      priority={priority}
+      className={cn("h-9 w-auto shrink-0 select-none", className)}
+    />
   );
 }
 
 /**
- * Header lockup: the chokepoint mark in verdigris beside an Archivo wordmark.
- * `label` defaults to the short name; pass the full name for the footer.
+ * Header and footer lockup: the supplied mark beside the full project name in two tracked capitals lines, set in
+ * the supplied logo's gold (`--brand-gold`). The name is live text, so it stays selectable and readable by
+ * assistive technology; it is always the full name, so the mark never stands in for it.
  */
-export function Wordmark({
-  label,
-  className,
-  markClassName,
-}: {
-  label: string;
-  className?: string;
-  markClassName?: string;
-}) {
+export function Wordmark({ className, markClassName, priority = false }: { className?: string; markClassName?: string; priority?: boolean }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
-      <ChokepointMark className={cn("text-accent", markClassName)} />
-      <span className="font-display font-semibold tracking-tight">{label}</span>
+    <span className={cn("inline-flex items-center gap-3", className)}>
+      <LatticeMark className={markClassName} priority={priority} />
+      <span className="font-display text-[0.6875rem] font-medium uppercase leading-[1.25] tracking-[0.12em] text-brand">
+        Strategic Materials
+        <br />
+        Policy Tracker
+      </span>
     </span>
   );
 }

@@ -55,6 +55,8 @@ const VALUE_ROLE_DEFS: Record<(typeof VALUE_ROLES)[number], string> = {
   lending_authority: "A ceiling on what a lender may lend or guarantee.",
   funding_option:
     "A ceiling a party may call on at its own election under an executed agreement. Listed, never summed: an executed option is not committed money. An exercise is recorded as its own commitment drawn from the option, with its own payment status.",
+  indication:
+    "A non-binding letter of intent or interest that names an amount: possible support, not money committed to anyone. Listed in its own layer, never summed, and never counted as binding, not yet binding, capital, backing or co-investment.",
   expected_co_investment: "Money a government expects others to invest.",
   private_financing: "Commercial capital raised alongside public money.",
   recipient_own_funds: "The recipient's own contribution.",
@@ -74,10 +76,11 @@ const FINANCIAL_STATUS_DEFS: Record<(typeof FINANCIAL_STATUSES)[number], string>
   authorized: "Legal or budgetary authority exists, e.g. an enacted statute or cabinet approval.",
   allocated: "Assigned to the purpose, e.g. in a budget.",
   decided: "The provider has decided to invest, lend or award, including a conditional commitment.",
-  contracted: "A binding agreement has been executed.",
+  contracted: "A binding agreement has been executed. Not a payment, and not necessarily an obligation of funds: an agreement can leave that to a later step.",
   partially_disbursed: "Some of the money has been paid out.",
   disbursed: "The money has been paid out.",
   withdrawn: "The commitment was withdrawn.",
+  lapsed: "The commitment ended unused on its own terms, for example a commitment letter that expired undrawn.",
   not_stated: "The source states no status.",
 };
 
@@ -351,6 +354,73 @@ export default function MethodologyPage() {
                 <a href="#capital-counting" className="text-accent hover:text-accent-strong">counting rules</a>.
               </p>
             </div>
+
+            <div className="space-y-3 pt-2">
+              <h3
+                id="capital-intelligence"
+                className="scroll-mt-20 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted"
+              >
+                Capital intelligence: who, what and under which scheme
+              </h3>
+              <p>
+                Version 0.6 adds the parties and undertakings the instruments connect, as
+                registries the financial rows point to. An <strong>organization</strong>{" "}
+                (<code className="font-mono text-faint">org-</code>) is a provider, recipient,
+                sponsor or holder: a government body, public financier, joint vehicle,
+                company, project company or bank. A <strong>project</strong>{" "}
+                (<code className="font-mono text-faint">prj-</code>) is one physical
+                undertaking, such as a mine, a refinery or a magnet plant. A{" "}
+                <strong>programme</strong> (<code className="font-mono text-faint">prg-</code>)
+                is a named scheme that awards, lends, credits, reserves or designates. A{" "}
+                <strong>project designation</strong> (<code className="font-mono text-faint">dsg-</code>)
+                records a project recognized under a designation scheme, such as an EU
+                strategic project under the Critical Raw Materials Act.
+              </p>
+              <ul className="space-y-2 text-muted">
+                <li>
+                  · Registry records are factual claims like any other. An
+                  organization&apos;s name, kind, country, government and parent bodies
+                  each name the source that states them.
+                </li>
+                <li>
+                  · A renamed body keeps one record and lists its other names, so its
+                  portfolio does not split in two.
+                </li>
+                <li>
+                  · A portfolio rolls up from an office to the department it is part of.
+                  It does not roll up from a joint vehicle to the bodies that set it up:
+                  a joint vehicle&apos;s money is not its founders&apos; money, and the
+                  public share of it is not stated.
+                </li>
+                <li>
+                  · A registry record holds no money. Capital stacks, portfolios,
+                  co-investment and flows are derived from the financial rows under the
+                  same counting rules, one value role at a time and one currency at a
+                  time. There is no grand stack total, no public-share percentage, no
+                  leverage ratio and no programme utilisation rate.
+                </li>
+                <li>
+                  · A designation confers standing, not money, and never enters a sum.
+                  Where a designation publishes expected investment, that is total
+                  project cost and is not recorded as support.
+                </li>
+                <li>
+                  · Each control clause records the kind of item it covers (goods,
+                  equipment, technology) and the supply-chain stages those items belong
+                  to. Controlling exports of separation technology places the item at the
+                  separation stage; it does not mean the clause restricts separation
+                  itself. End-use restrictions, customs enforcement, divestiture orders
+                  and suspensions define no items of their own and carry neither.
+                </li>
+                <li>
+                  · Whether money stays at home or goes abroad is read from the funded
+                  row&apos;s stated location, or its project&apos;s, against the
+                  provider&apos;s home territory: the member states for the EU, and the
+                  United Kingdom as GB. Where no location is stated, the row is counted
+                  as location not stated, never guessed.
+                </li>
+              </ul>
+            </div>
           </section>
 
           <section className="space-y-3">
@@ -501,18 +571,57 @@ export default function MethodologyPage() {
                 anyone.
               </li>
               <li>
+                · <strong className="text-foreground">One instrument at a time.</strong> Within a currency,
+                each instrument has its own sums: grants, loans, equity and loan guarantees are never added
+                into one figure, because a
+                guaranteed loan, a grant and a shareholding are different promises. Rows whose instrument the
+                sources do not name, and packages that combine instruments without a split, are listed with
+                their own figures and never summed, since adding them could add a loan to a grant unseen.
+                Version 0.5 printed one sum per currency across instruments, contrary to this rule; version
+                0.6 corrects it.
+              </li>
+              <li>
+                · <strong className="text-foreground">Ended commitments are not money.</strong> A
+                commitment whose current status is withdrawn or lapsed is listed as ended and left out of
+                every sum. It is also not capital in any count derived from it: it backs no project, adds no
+                government or provider to a stack, is no flow and no co-investment, and is counted only as
+                ended. An ended package does not hide its parts: a part that is still standing counts as a
+                row of its own.
+              </li>
+              <li>
+                · <strong className="text-foreground">A status the source does not give is not &ldquo;not yet
+                binding&rdquo;.</strong> A commitment with an amount whose current status is &ldquo;not
+                stated&rdquo; is neither binding nor not yet binding: it is listed with its own figure, counted
+                apart, and never summed. Version 0.5 read it as not yet binding; version 0.6 changes this to match the
+                one for an instrument the source does not name. Such a row also does not hide its parts.
+              </li>
+              <li>
                 · <strong className="text-foreground">No part is counted with its package.</strong> A row
-                that is part of, or drawn from, another row in the same total is left out of it and named
-                beside the total. If two counted rows were ever to share a descendant, the total for that
+                that is part of, or drawn from, another row in the same currency is left out of the sums and
+                named beside them, whatever either row&apos;s instrument, when that other row is itself
+                summed. If it is not (it ended, states no amount or no status), it does not suppress the row. If two counted rows were ever to share a descendant, the total for that
                 currency is withheld and the overlap shown instead. The JSON summary says so in a
                 machine-readable way: that currency&apos;s entry has <code className="font-mono text-xs">status: &quot;withheld&quot;</code>{" "}
                 and its sums are <code className="font-mono text-xs">null</code>, never zero or partial.
+              </li>
+              <li>
+                · <strong className="text-foreground">Record counts fold a part only where its package covers it.</strong>{" "}
+                A part is counted inside its package, so one deal counts once, but only in a count where the
+                package is counted too. Stage and material counts in a portfolio, and the stage response
+                map and the material matrix, work cell by cell: a part is counted at a stage or material its
+                package does not list, and never twice where the package lists it. A package whose parts
+                do not all state a country shows &ldquo;not stated&rdquo; in the flow table, and its parts,
+                folded into it there, can be listed on the package&apos;s own page.
               </li>
               <li>
                 · <strong className="text-foreground">An option is not a commitment.</strong> A funding
                 option (a ceiling the recipient may call on under a signed agreement) is listed apart and
                 never summed. It counts only once a source records an exercise, which is coded as its own
                 commitment drawn from the option; payment is then tracked in that commitment&apos;s status.
+                A draw that has since been withdrawn or has lapsed is listed under the option as an ended
+                draw, never as an exercise or as money moved. Wherever capital is counted (a project&apos;s
+                backers, co-investment, a portfolio, the stage response map) an option is shown as an option
+                and never as a commitment or as backing.
                 The site shows each option&apos;s three steps (agreement executed, exercise, disbursement)
                 and says &ldquo;none recorded&rdquo; where the corpus is silent, never &ldquo;not exercised&rdquo;.
               </li>
@@ -526,16 +635,22 @@ export default function MethodologyPage() {
                 government&apos;s.
               </li>
               <li>
-                · <strong className="text-foreground">Ceilings are not sums.</strong> A figure stated
-                &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; is added only to figures
-                of the same qualifier, and shown apart from exact figures.
+                · <strong className="text-foreground">Stated bounds are summed only with their own kind.</strong>{" "}
+                A committed figure stated &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; is
+                added only to figures with the same qualifier, within the same currency and instrument, and
+                shown apart from exact figures. An &ldquo;up to&rdquo; total is a sum of stated upper
+                bounds, not an amount paid and not an exact commitment; an &ldquo;at least&rdquo; total is a
+                sum of stated lower bounds. This is separate from programme envelopes, appropriations,
+                lending authorities and unexercised funding options, which are listed and never summed.
               </li>
               <li>
                 · <strong className="text-foreground">Binding apart from not yet binding.</strong> Within
                 each currency, money under an executed agreement or already paid (contracted, partially
                 disbursed, disbursed) is summed apart from money announced, authorized, allocated or decided
-                — which includes conditional loan commitments and non-binding letters of intent. Every row
-                carries its own status.
+                — which includes conditional loan commitments. A non-binding letter of intent or interest is
+                not a commitment and is in neither: it is an indication, listed apart and never summed. Binding
+                describes the agreement, not the money: a contracted row may leave the provider&apos;s
+                obligation of funds and their payment to later steps. Every row carries its own status.
               </li>
               <li>
                 · <strong className="text-foreground">No figure without a figure.</strong> A price floor,
@@ -607,8 +722,40 @@ export default function MethodologyPage() {
             <ul className="space-y-2 text-muted">
               <li>
                 <span className="font-mono text-foreground">{site.version}</span> —{" "}
-                {formatDate(site.lastUpdated)}. Capital &amp; Control: {summary.financialCommitments} financial
-                commitments and {summary.controlMeasures} control clauses, verified field by field against
+                {formatDate(site.lastUpdated)}. Capital intelligence: registries of {summary.organizations}{" "}
+                organizations, {summary.projects} projects and {summary.programmes} programmes that the financial
+                rows point to, and {summary.projectDesignations} project designations, each evidenced field by field.
+                New pages for portfolios, projects, organizations and programmes; capital stacks by value role;
+                programme ledgers that list ceilings beside recorded awards; co-investment; flows; and a
+                material-by-stage response map of capital, designations and control clauses, with item types and
+                supply-chain stages coded on every control clause that defines items. New records from primaries:
+                China&apos;s Announcements Nos. 56, 57, 58 and 62 of 2025; the EU&apos;s Critical Raw Materials Act
+                Strategic Projects (March and June 2025) and RESourceEU; Japan&apos;s certified critical-mineral
+                supply-assurance plans and JOGMEC grants; Canada&apos;s G7 Production Alliance round and PDAC 2026
+                awards; Commerce&apos;s CHIPS agreements with USA Rare Earth; and what MP Materials&apos; later filings
+                record about the DoD package. Corrections: currency totals are now split by instrument (version
+                0.5 added grants, loans and equity together, contrary to its own rule), a withdrawn or lapsed
+                commitment is no longer summed or counted as capital, a commitment whose status is not stated is
+                listed apart instead of being read as not yet binding, an ended or unsummed package no
+                longer hides parts that still stand, and a non-binding letter of intent or interest that names an
+                amount is now an indication and no longer a commitment (three from the G7 round and the CHIPS
+                letter of intent recorded in version 0.5): it is listed in its own layer and never summed,
+                counted as binding or not yet binding, or read as capital, backing or co-investment. New
+                vocabulary values: a financial status &ldquo;lapsed&rdquo;, a value role &ldquo;non-binding
+                indication&rdquo;, and the registry, designation and item-type vocabularies. In the JSON, the
+                released <code className="break-all font-mono text-faint">/api/v1/capital-control/summary</code> (and its
+                copy in <code className="break-all font-mono text-faint">dataset.json</code> as{" "}
+                <code className="break-all font-mono text-faint">capitalControlSummary</code>) moved{" "}
+                <code className="break-all font-mono text-faint">capital.publicCommitmentTotals[].byQualifier</code>,{" "}
+                <code className="break-all font-mono text-faint">.binding</code> and{" "}
+                <code className="break-all font-mono text-faint">.notYetBinding</code> into{" "}
+                <code className="break-all font-mono text-faint">capital.publicCommitmentTotals[].instruments[]</code>;{" "}
+                <code className="break-all font-mono text-faint">/api/v1/capital-intelligence/summary</code> is new in this
+                release.
+              </li>
+              <li>
+                <span className="font-mono text-foreground">v0.5-capital-control</span> — 23 September 2026. Capital
+                &amp; Control: 39 financial commitments and 32 control clauses, verified field by field against
                 official primaries and binding filings; the Capital, Controls and Capital × Control pages; the
                 counting rules above; new JSON endpoints and CSV exports. Three events added (the US–Australia
                 critical minerals Framework, the OSC loans to Vulcan Elements and ReElement, the US active anode

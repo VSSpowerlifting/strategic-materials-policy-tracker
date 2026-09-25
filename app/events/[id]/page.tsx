@@ -31,7 +31,8 @@ import { eventJsonLd, jsonLdScript } from "@/lib/structured-data";
 import { InstrumentsPanel } from "@/components/capital/instruments-panel";
 import { ControlRow } from "@/components/capital/rows";
 import { controlStatusesRecordedIn, summarizeControl } from "@/lib/capital-control";
-import { getControlMeasuresByEvent, getFinancialCommitmentsByEvent } from "@/lib/data";
+import { getControlMeasuresByEvent, getFinancialCommitmentsByEvent, getProjectDesignationsByEvent } from "@/lib/data";
+import { DesignationRow } from "@/components/intelligence/designation-row";
 
 export function generateStaticParams() {
   return getAllEvents().map((e) => ({ id: e.id }));
@@ -75,6 +76,7 @@ export default async function EventPage({
   const related = getRelatedEvents(event);
   const commitments = getFinancialCommitmentsByEvent(event.id);
   const controls = getControlMeasuresByEvent(event.id);
+  const designations = getProjectDesignationsByEvent(event.id);
   const recordedStatuses = controlStatusesRecordedIn(event.id);
   const actorHref = `/actors/${jurisdictionShort[event.jurisdiction].toLowerCase()}`;
   let sectionNo = 0;
@@ -181,6 +183,20 @@ export default async function EventPage({
               description="The separate financial commitments and control clauses this announcement contains, each with its own status history and evidence."
             >
               <InstrumentsPanel commitments={commitments} controls={controls} />
+            </Section>
+          ) : null}
+
+          {designations.length ? (
+            <Section
+              index={nextSectionIndex()}
+              title={`Projects recognized (${designations.length})`}
+              description="Project designations this decision makes: standing under a scheme, not money, and never counted as capital."
+            >
+              <Card className="overflow-hidden">
+                {designations.map((d) => (
+                  <DesignationRow key={d.id} d={d} showProject />
+                ))}
+              </Card>
             </Section>
           ) : null}
 

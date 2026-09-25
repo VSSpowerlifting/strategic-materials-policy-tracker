@@ -21,8 +21,13 @@ import {
   getAllFramingClaims,
   getAllJurisdictions,
   getAllMaterials,
+  getAllOrganizations,
+  getAllProgrammes,
+  getAllProjects,
   getAllSources,
   getAllWatchedSources,
+  getProgrammeById,
+  getProjectById,
 } from "./data";
 import {
   controlMeasureTypeLabels,
@@ -30,14 +35,29 @@ import {
   financialInstrumentLabels,
   jurisdictionLabels,
   mechanismLabels,
+  organizationKindLabels,
   policyStatusLabels,
+  programmeKindLabels,
+  supplyChainStageLabels,
   valueRoleLabels,
 } from "./labels";
 import { commitmentActor, controlIssuer, currentControlStatus, currentFinancialStatus } from "./capital-control";
 import { formatMoney } from "./decimal";
 import type { JurisdictionCode, Mechanism } from "./types";
 
-export const SEARCH_KINDS = ["event", "capital", "control", "material", "actor", "framing", "source", "watched"] as const;
+export const SEARCH_KINDS = [
+  "event",
+  "capital",
+  "control",
+  "project",
+  "organization",
+  "programme",
+  "material",
+  "actor",
+  "framing",
+  "source",
+  "watched",
+] as const;
 export type SearchKind = (typeof SEARCH_KINDS)[number];
 
 export type SearchDoc = {
@@ -112,7 +132,7 @@ export function buildSearchIndex(): SearchDoc[] {
       id: c.id,
       kind: "capital",
       title: `${financialInstrumentLabels[c.instrument]} · ${c.recipient ?? c.provider ?? c.id}`,
-      subtitle: `${actor ? jurisdictionLabels[actor] : "Not government capital"} · ${valueRoleLabels[c.valueRole]}${c.amount ? ` · ${c.amount.qualifier === "exact" ? "" : `${c.amount.qualifier.replace("_", " ")} `}${formatMoney(c.amount.value, c.amount.currency)}` : ""}`,
+      subtitle: `${actor ? jurisdictionLabels[actor] : "No tracked government"} · ${valueRoleLabels[c.valueRole]}${c.amount ? ` · ${c.amount.qualifier === "exact" ? "" : `${c.amount.qualifier.replace("_", " ")} `}${formatMoney(c.amount.value, c.amount.currency)}` : ""}`,
       href: `/capital/${c.id}`,
       date: c.financialStatusHistory.find((e) => e.date)?.date ?? null,
       jurisdiction: actor,
@@ -134,7 +154,61 @@ export function buildSearchIndex(): SearchDoc[] {
         c.untrackedMaterialsAsStated.join(" "),
         c.terms.map((x) => x.asStated).join(" "),
         c.locations.map((l) => l.asStated).join(" "),
+        c.programmeId ? getProgrammeById(c.programmeId)?.name : null,
+        c.projectId ? getProjectById(c.projectId)?.name : null,
       ),
+    });
+  }
+
+  // v0.6 registries: a company, agency or mine finds its own profile.
+  for (const p of getAllProjects()) {
+    docs.push({
+      id: p.id,
+      kind: "project",
+      title: p.name,
+      subtitle: `Project · ${[...p.locations.map((l) => l.asStated ?? l.countryCode), ...p.stages.map((s) => supplyChainStageLabels[s])].filter(Boolean).join(" · ")}`,
+      href: `/projects/${p.id}`,
+      date: null,
+      jurisdiction: null,
+      mechanisms: null,
+      haystack: join(
+        p.id,
+        p.name,
+        p.notes,
+        p.locations.map((l) => [l.asStated, l.subnational, l.countryCode].join(" ")).join(" "),
+        p.materialIds.join(" "),
+        p.untrackedMaterialsAsStated.join(" "),
+        p.sponsorOrgIds.join(" "),
+      ),
+    });
+  }
+
+  for (const o of getAllOrganizations()) {
+    docs.push({
+      id: o.id,
+      kind: "organization",
+      title: o.name,
+      subtitle: `${organizationKindLabels[o.kind]}${o.actor ? ` · ${jurisdictionLabels[o.actor]}` : o.countryCode ? ` · ${o.countryCode}` : ""}`,
+      href: `/organizations/${o.id}`,
+      date: null,
+      jurisdiction: o.actor,
+      mechanisms: null,
+      // The original-language name is indexed unnormalised too, so a search in its own script matches.
+      haystack: join(o.id, o.name, o.nameOriginal, o.aliases.join(" "), o.notes, organizationKindLabels[o.kind]) + " " + (o.nameOriginal ?? ""),
+    });
+  }
+
+  for (const g of getAllProgrammes()) {
+    docs.push({
+      id: g.id,
+      kind: "programme",
+      title: g.name,
+      subtitle: `Programme · ${jurisdictionLabels[g.actor]} · ${programmeKindLabels[g.kind]}`,
+      href: `/programmes/${g.id}`,
+      date: null,
+      jurisdiction: g.actor,
+      mechanisms: null,
+      haystack: join(g.id, g.name, g.nameOriginal, g.legalAuthorityAsStated, g.notes, programmeKindLabels[g.kind]),
     });
   }
 

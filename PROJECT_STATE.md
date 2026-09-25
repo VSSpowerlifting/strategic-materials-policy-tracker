@@ -1,6 +1,605 @@
 # Project state
 
-_Last updated: 2026-09-23 (v0.5 Capital & Control platform release on branch `feat/capital-control-platform`)._
+_Last updated: 2026-09-25 (Lattice Register milestone 1 on `feat/lattice-register-m1`, draft PR against `feat/capital-intelligence-v06`, not merged; v0.6 PR #6 still open)._
+
+## Latest session: Lattice Register, milestone 1
+
+Branch `feat/lattice-register-m1` from `feat/capital-intelligence-v06` at `a8e4957` (PR #6 open); worktree
+`/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/smpt-lattice-register`. Draft PR base is
+`feat/capital-intelligence-v06`, so the diff is this milestone only. Visual reference: the approved
+`SMPT-Lattice-Register.pdf` (design review, not implemented before this).
+
+### What shipped
+
+- **Branding.** Gold lattice palette in `app/globals.css` (token names unchanged, so every page follows): warm
+  near-black base, gold accent, cream `paper` tokens for reading sections, and three mark tokens
+  (`--mark-commitment`, `--mark-control`, `--mark-designation`). The two lattice dot colors are the supplied
+  logo's own (`#ffca64`, `#a87002`) and the wordmark gold is sampled from it (`--brand-gold`, `#c8993e`). The mark
+  is the **supplied artwork**, not a redraw: `public/brand/smpt-lattice-mark.png` is the mark cropped (transparent
+  background, Lanczos-downscaled to 480 px wide) from the supplied 8000 x 2000 logo PNG and served by `next/image`;
+  no vector source was supplied. An earlier generated 7 x 7 SVG mark was checked against the logo and the approved
+  PDF, found not to match, and removed. The wordmark text is live text in Archivo (the supplied lockup's typeface
+  is a different face); `LatticeMark` + `Wordmark` are in `components/ui/brand.tsx`. New header (Overview, Compare, Explore, Materials, Jurisdictions, Method, search
+  with `/` shortcut, "Record as of"); new footer (Method / Data / Coverage, version line, full page index).
+- **Nav is a presentation layer.** `headerNav` in `lib/site.ts` drives the six header links; `navGroups`/`nav`
+  are unchanged, so the sitemap, footer index and phone menu still reach every page. Explore points at the
+  existing `/events` explorer (Explore redesign deferred) and is current across the record-browsing routes;
+  Jurisdictions is `/actors` under its design label.
+- **Overview (`/`).** Lattice hero, node summary, the 27-of-45 notice, record counts, dated register (stated end
+  dates + newest events), control-clause squares and the existing per-currency/instrument public-commitment
+  totals. Replaces the old home (hero motif, stats strip, recent events, framing snapshot, tile grid); the
+  dataset JSON-LD is kept. `HeroMotif`, `MaterialTile` and friends are now unused by `/` but left in place.
+- **Compare (`/compare`).** Working material-by-stage lattice: kind toggles, government filter (providers for
+  commitments, issuers for clauses, designating governments for designations), records panel for the selected
+  node, one-material split by government, "Not on the lattice" counts. The earlier events-by-material-and-actor
+  matrix is kept below it as its own section. Selection lives in the URL hash (`/compare#tungsten:processing`),
+  so both routes stay static.
+- **Phone.** The lattice becomes a tap-a-material accordion with the per-stage list; the government split
+  becomes a list; nothing scrolls horizontally at 390 px.
+
+### Derivation (no new analysis)
+
+- `lib/lattice.ts` reshapes `stageResponseMap` into a serializable payload (records by kind, ids per cell);
+  `lib/lattice-view.ts` holds the pure filter/count/government-split logic; `stageLatticeGaps` in
+  `lib/capital-intelligence.ts` counts what the map cannot place, with the map's own placement tests, in
+  exclusive buckets. Stage columns are the occupied stages (derived, not a fixed nine).
+- Counts are per kind and never added across kinds; no row or column is totalled; amounts stay in the source's
+  currency and qualifier. Funding options and ended rows are listed apart in the panel, never counted as
+  commitments. No causal link is drawn (the panel says so).
+- `NO_ITEM_MEASURE_TYPES` moved from `scripts/validate-capital-control.ts` to `lib/types.ts` (the validator now
+  imports it): the lattice copy needs to know which clauses record no stage *by rule*. No validator behaviour
+  change.
+
+### The 27 of 45
+
+27 of 45 control clauses have an empty `controlledStages` and cannot appear on the lattice. Of those, 16 are
+end-use, customs-enforcement, investment-divestiture or suspension clauses, where the validator enforces an
+empty stage (no items of their own); the other 11 are clause types that could carry a stage and record none.
+The copy says "record no stage" (never "missing" or "incomplete") and splits the two cases. The notice is shown
+above the Compare lattice and in the Overview's left column (below the lattice on a phone).
+
+### Deltas from the design reference (data wins)
+
+- "Not on the lattice" buckets differ from the comp by one: 7 commitment-or-option rows (6 with no stage or
+  tracked material, 1 with no providing government) and 20 rows in other value roles; the comp shows 6 and 21.
+  The lattice places funding options, so an option with no stage is counted with the commitments here.
+- Record counts, statuses and end dates are derived from the data at build time, not transcribed.
+- Not built: the month-strip chart on the dated register and its "four kinds of date" key (two kinds are
+  explained instead); "This view as CSV" (no lattice export endpoint exists); per-count "Open rows" links
+  (Explore has no filter deep links, so the panel links to each record and to `/capital`); the tungsten
+  dossier, Explore redesign and Hemerdon record (deferred).
+- Registry English names are used for parties when exactly one organization is linked; the designation's
+  as-stated name is shown as a secondary line.
+
+### Decisions to confirm
+
+- Legacy pages keep their hard-coded data hexes (`#CBA86A`, `#4fb59e`, `#C77B7B`) as a fixed record-kind
+  encoding; the lattice uses its own tokens. The two palettes differ for designations (teal on `/interplay`,
+  cream diamond on the lattice). Unify only if the maintainer wants.
+- Header uses the wide container; legacy pages use the default one, so the logo sits slightly left of content.
+
+### Checks
+
+`npm run validate` (unchanged, no data edits), `lint`, `typecheck`, `test` (new `tests/lattice.test.ts` plus a
+`formatDateLong` test), `build`; visual checks at 1440 px and 390 px (headless Chrome over CDP) and interaction
+checks (cell select, government filter, kind toggles, hash deep link, bad-hash fallback).
+
+## Previous session: v0.6 Capital Intelligence
+
+Branch `feat/capital-intelligence-v06` from `main` at `7ddb62c`; worktree
+`/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/smpt-v06`
+(git-ignored `data/candidates/candidates.json` copied in so the leak checks
+test real private ids; `graphify-out/` refreshed, also ignored).
+
+### Direction
+
+v0.5 recorded instruments; v0.6 records the parties, undertakings and schemes
+they connect, so the corpus can answer who funded whom, what a project's
+capital stack is, what a programme has recorded under it, how governments'
+portfolios compare, where money goes, and where capital, recognition and
+Chinese controls meet by material and stage.
+
+### Data model (all in `lib/types.ts`, validated in `scripts/validate-capital-control.ts`)
+
+- Registries: `Organization` (`org-`), `Project` (`prj-`), `Programme` (`prg-`);
+  a third child row of an event, `ProjectDesignation` (`dsg-`). Registry facts
+  are evidenced like any field; registries hold no money.
+- Commitments gain `providerOrgIds`, `recipientOrgIds`, `projectId`,
+  `programmeId`; control clauses gain `controlledItemTypes` and
+  `controlledStages` (where the covered items belong; empty for end-use,
+  customs, divestiture and suspension clauses, enforced).
+- Validator: six collections in two passes; actor agreement across provider
+  organizations, programmes and `providerJurisdiction`; programme agreement
+  along `drawn_from`; project material coverage; designations under a
+  designation scheme; item-scope rules; org and programme parent cycles;
+  warning for unlinked registry records.
+
+### Vocabulary decisions (maintainer authority delegated in the task; reasoning recorded)
+
+- New vocabularies: organization kinds (government, public financier, joint
+  vehicle, company, project company, bank), link types (part_of,
+  established_by), programme kinds, designation statuses (recognized,
+  withdrawn), controlled item types (goods, equipment, technology).
+  `withdrawn` has no record yet; kept because a status vocabulary needs its
+  terminal state.
+- `FINANCIAL_STATUSES` + `lapsed`: the JPMorgan/Goldman commitment letter
+  "expired undrawn on its own terms"; `withdrawn` would misstate it.
+- `VALUE_ROLES` + `indication` (release-review pass): a non-binding letter of
+  intent or interest that names an amount. Applied only where the source itself
+  says letter of intent or interest (four rows; see the release-review section).
+  Not applied to the OSC and Ucore conditional loan commitments (a lender's
+  decision on conditions) or to USA Rare Earth's letter of intent, which is the
+  first status entry of a row that is now contracted. Forward rule: when a
+  letter becomes binding, keep the same row, change its role to `commitment`
+  and append the new status entry (USA Rare Earth's history is the precedent).
+- `unspecified` widened in its comment (release-review pass): the sources name
+  no instrument the vocabulary covers, which includes naming only a legal form
+  such as a US "other transaction". Rejected: adding an `other_transaction`
+  instrument, because an other transaction is a legal vehicle, not a kind of
+  money, and the US direct funding would stay unsummable either way. The
+  `reason: "instrument_not_stated"` literal in the API is unchanged (renaming
+  it would break consumers), so for USA Rare Earth it is literally inaccurate;
+  the UI copy and the rows' notes say what is true.
+- Not added: a control type for the EU's proposed magnet-scrap export
+  restriction (no instrument exists; described in the event only); a
+  `substitution` stage (two CRMA substitution projects carry no stage).
+
+### Counting decisions
+
+- Portfolios roll up through `part_of` only; a joint vehicle's money is never
+  its founders'. The Department of War is an alias of the Department of
+  Defense record, so its portfolio does not split.
+- Correction to v0.5: currency totals are split by instrument
+  (`CurrencyTotal.instruments[]`), never summed across instruments, as the
+  methodology always stated. Rows with an unstated (`unspecified`) or mixed
+  instrument are listed, never summed (`summed: false`, null sums). Nesting is
+  decided over the whole currency before the split. This changes
+  `publicCommitmentTotals` in `/api/v1/capital-control/summary`.
+- Precision (docs only, no logic change): figures stated "up to", "about" or
+  "at least" are **summed**, within one currency and one instrument, in their own
+  qualifier bucket (`byQualifier`, `binding`, `notYetBinding` keyed `up_to`,
+  `approximately`, `at_least`, `exact`). An `up_to` sum is a sum of stated upper
+  bounds, not an exact amount or money paid. What is never summed is the value
+  roles `program_envelope`, `budget_appropriation`, `lending_authority` and
+  `funding_option` (an unexercised option), plus private financing, recipient
+  funds, expected co-investment and project cost. Earlier wording that called
+  "up to" figures "ceilings" that are "kept apart" or "not sums" (methodology
+  heading, `/capital`, `/portfolios`, README, API `countingRules`) blurred these
+  two things and was corrected in the documentation-precision pass.
+- Withdrawn or lapsed commitments are listed as ended and never summed
+  (`CommitmentTotals.endedIds`); before, a withdrawn row would have been
+  summed as not yet binding.
+- **Accounting-semantics correction pass** (on the PR, after `39d516c`):
+  - `totalCommitments`: a package that is not itself counted (ended, no
+    amount, or status not stated) no longer keeps its parts out of a sum; only
+    a counted ancestor nests a row. Before, any in-scope ancestor with a
+    same-currency amount did, so an ended package would have hidden parts that
+    still stand. Fixture-tested, including an ended middle ancestor under a
+    counted grandparent.
+  - A commitment with an amount whose current status is `not_stated` is
+    neither binding nor not yet binding: listed with its own figure, counted
+    apart, never summed (`CommitmentTotals.statusNotStatedIds`, the same rule
+    as an unstated instrument). v0.5 and the first v0.6 commit read it as not
+    yet binding. One corpus row is affected
+    (`fin-ca-g7-2025-nmg-canada-growth-fund`, CAD, instrument unspecified,
+    already unsummed for that reason). `legalStanding(c)` gives the four terms
+    binding / not_yet_binding / ended / status_not_stated.
+  - Ended rows (withdrawn, lapsed) are not capital in any derived view: they
+    back no project (stack governments and providers), are no co-investment
+    kind, no flow, and no portfolio reach (organizations, projects); portfolios
+    count them once, as `counts.ended` / `committedEnded`. An ended package does
+    not fold its standing parts (flows, portfolio counts, response map,
+    material matrix).
+  - Funding options stay visible as options and never as backing: portfolio
+    counts hold them in their own layer only (not instrument, stage, material,
+    geography or legal standing); co-investment lists them under `optionIds`;
+    the response map under `optionIds`; a project or programme shows them as
+    options. A draw from an option that has ended is not an exercise
+    (`OptionState.endedExercises`), never "exercised" and never money moved.
+  - The same principle now holds in every view (advisor finding, verified on the
+    seed): a part folds into a package only when that package is itself counted
+    in that view and under the same actor. Flows count commitments, the response
+    map commitments and options, the material matrix rows with an actor, and a
+    portfolio folds only within a layer, so a commitment under an envelope is still
+    a commitment. Before this, two Australian equity stakes
+    (`fin-au-alcoa-sojitz-gallium-2025-equity`, `fin-au-arafura-nolans-2025-equity`),
+    each `part_of` the US-Australia financing envelope, were missing from the flows
+    and the response map (envelopes are not flows), and from the portfolio's
+    committed-layer counts although their money was in its totals. They are back.
+    Organization pages count only rows that back (a lapsed letter puts no bank
+    behind a project) and note ended rows.
+  - Public pages and both summary APIs carry the same distinctions (see the
+    API note below). No cross-instrument sum was restored.
+- **Fold-rule pass** (on the PR, after `7fbbdeb`; closes three admitted gaps):
+  - One rule, `isFoldedPart(c, byId, countsHere)` in `lib/capital-control.ts`:
+    a part folds into a package only where the cell being built also counts that
+    package (same provider, and in the cell's own terms). Views: the response map
+    folds per material-and-stage cell, into a package in the same field (capital,
+    option or ended) that covers that material and stage; the material matrix
+    folds per material-and-actor cell, into a counted (not ended) package of the
+    same actor naming the material; flows fold a whole part into a flow package
+    (unchanged); a portfolio folds within a layer and within standing or ended.
+  - Response map: a part no longer disappears at a material or stage its package
+    does not cover; an ended part of a standing package is listed as ended (it was
+    hidden); a commitment that is part of an option is capital, not hidden by the
+    option. The corpus map is unchanged (no row does any of this).
+  - Material matrix: `materialInterplay(asOf, all?, controls?)` now takes its rows
+    so it can be fixture-tested. Corpus effect: two rows appear that an envelope
+    had hidden at materials the envelope does not name
+    (`fin-au-alcoa-sojitz-gallium-2025-equity` under gallium,
+    `fin-au-arafura-nolans-2025-equity` under rare earths, both Australia).
+  - `/interplay` material ledgers: the selection moved to
+    `materialLedgerRows(materialId, all?)` (a part is folded only into a package
+    listed there in the same state) and an ended row is marked "ended". Before, every
+    `part_of` row was hidden and ended rows carried no marker. Corpus effect (diffed
+    material by material): the same two Australian equity rows appear, in the gallium
+    and rare-earth ledgers; nothing else changes, and no ledger row is ended, so the
+    marker is not rendered anywhere in the corpus yet.
+  - Tests: the "matrix never shows a part" and "EU counts.rows equals all EU
+    rows" assumptions are replaced by fixtures and by an oracle written apart from
+    `actorPortfolio` (every actor's `counts.rows` / `counts.ended`, plus an ended
+    package with a standing part). Response map fixture: same cell (once), other
+    material, other stage, ended part, option part, ended package with standing
+    part, other provider's package. Both summary APIs read the same `stageResponseMap`;
+    a test compares the served summary to it, cell by cell. The matrix and the
+    ledger are page-only and have no API field.
+- **Portfolio stage and material pass** (on the PR, after `67ca144`):
+  - `actorPortfolio` counts `byStage` and `byMaterial` per cell: a part is folded
+    only where a standing package of the same layer and actor lists that specific
+    stage or material. `rows`, `byLayer`, `byInstrument`, legal standing and
+    geography are unchanged (a deal still counts once). Ended rows and funding
+    options are still left out. Fixture-tested (part inside its package, part beyond
+    it, ended package with standing part, envelope and option packages); a corpus
+    oracle checks every actor.
+  - Actual corpus effect, before and after, every actor's `rows`, `ended`,
+    `byInstrument`, `byMaterial` and every other stage identical: Australia
+    `byStage` was mining 1, separation 1, processing 4, refining 1 and is now the
+    same plus **stockpiling 1** (`fin-au-cmsr-2026-stockpiling-allocation`, part of
+    `fin-au-cmsr-2026-reserve`, which does not list stockpiling). Australia `rows`
+    stays 7. No other actor changes. In the API only
+    `/api/v1/capital-intelligence/summary` `portfolios[australia].counts.byStage.stockpiling`
+    (0 to 1) and the `countingRules` text change.
+  - `/portfolios`: the Instrument, Supply-chain stage and Material headings now say
+    they hold every value role except funding options (not only commitments) and
+    that stage and material are counted per cell; legal standing and geography are
+    committed rows only. Under the flow table a note explains that a package's "not
+    stated" can coexist with known locations on its parts, and lists each such
+    package with a link to its page. The methodology page has a matching bullet.
+- **Intentional API behaviour changes** (the routes' "add fields, never
+  repurpose" note is knowingly broken in one released endpoint, corrected below;
+  the review pass corrected an earlier count of "three places", two of which are
+  endpoints new in v0.6):
+  1. `/api/v1/capital-control/summary` (released in v0.5) and its copy in
+     `/api/export/dataset.json` as `capitalControlSummary`:
+     `capital.publicCommitmentTotals[].byQualifier`, `.binding` and
+     `.notYetBinding` are **removed from the currency level** and now live at
+     `capital.publicCommitmentTotals[].instruments[].byQualifier|binding|notYetBinding`
+     (an `unspecified` or `mixed` instrument has `summed: false`, a `reason` and
+     null sums). Added: `capital.publicCommitmentsStatusNotStated`,
+     `capital.publicCommitmentsEnded`, `capital.indicationsListedNotSummed` and
+     `capital.fundingOptionsListedNotSummed[].exercisesEnded`; a `not_stated` row
+     leaves `publicCommitmentTotals`; nesting (`nestedIds`) applies only under a
+     counted package. The correction: v0.5 added grants, loans and equity
+     together, against its own rule.
+  2. `/api/v1/financial-commitments` (released): rows can now carry
+     `valueRole: "indication"`, a value consumers with a closed enum have not
+     seen; one v0.5 row (`fin-us-commerce-chips-vulcan-2025-incentives`) changed
+     from `commitment`. The USA Rare Earth rows are new in v0.6, so their
+     instrument change (`grant` to `unspecified`) alters no released record.
+  3. `/api/v1/capital-intelligence/summary` is **new in v0.6**, so it changes no
+     released shape; the figures listed below moved during review. Between drafts
+     its `portfolios[].counts` added `ended`, `committedStatusNotStated`,
+     `committedEnded` and dropped ended rows and options from the other counts;
+     `projects[].governments` / `providerOrgIds` and `coInvestment[]` exclude
+     ended rows and options (new `fundingOptionIds`, `endedRowIds`); the stage
+     response map holds no options or ended rows in `capitalIds` (new
+     `fundingOptionIds`, `fundingOptionActors`, `endedRowIds`); `flows` exclude
+     ended rows and include the two Australian equity stakes above. The
+     registry routes (`organizations`, `projects`, `programmes`,
+     `project-designations`) are new as well; `/api/v1/projects/[id]` serves
+     `latestImplementation` with a nullable `date`.
+- No grand stack total, public share, leverage, utilisation rate or
+  cross-currency figure anywhere; a test scans the intelligence summary's keys.
+- Geography: row location, then project location, then (for a package with
+  none) the locations every part states; EU = the 27 member states, UK = GB,
+  Greenland abroad. Untracked governments (Germany) count as a second
+  government for co-investment but are credited to no actor; multilateral
+  money (EBRD) is public but credited to no actor.
+- Designations are standing, never capital; the Commission's "expected
+  investment" figures (project cost) appear only in event summaries.
+- A loan guaranteed by Commerce and made by the FFB is recorded once, as the
+  guarantee.
+
+### Release-review pass on PR #6 (reviewed head `1f54f5a`; fixes on top, code at `8c191a5`)
+
+An independent review of `1f54f5a` against the primaries found two defects and
+three judgement calls; the maintainer delegated the bounded decisions. Each fix
+is its own commit with focused tests (fixtures failing before the fix and
+passing after it were checked for the first two).
+
+1. **MOFCOM No. 62 legal basis.** `ctl-cn-62-2025-technology-licensing` and
+   `ctl-cn-62-2025-production-line-technology-licensing` carried the four-law
+   string of the joint Nos. 56-58 (Export Control Law, Foreign Trade Law,
+   Customs Law, Dual-use Regulations). No. 62 is MOFCOM's alone and its
+   preamble cites only the Export Control Law and the Dual-use Items Export
+   Control Regulations; both clauses now carry the string their sibling
+   overseas-support clause already had. `legalBasisEventIds` were right and
+   are unchanged. Nos. 18, 56, 57 and 58 were re-read: their four-law strings
+   are correct.
+2. **Latest physical status.** `projectStack().latestImplementation` skipped
+   undated entries. Each row's current (last) entry now ranks across rows by
+   its own date or, if it has none, the nearest earlier dated entry in its row;
+   the date stays `null` and is never filled in. Equal ranks: an undated entry
+   placed after a dated one outranks it; an undated entry with no dated entry
+   before it ranks below every dated one; any tie left keeps the corpus order.
+   MP 10X: "Announced, 10 Jul 2025" is now "Construction, date not stated"
+   (`fin-us-dod-mp-2025-magnet-offtake`, `src-mp-10q-2026-q2`). Lofdal: nothing
+   is now "Feasibility, date not stated". The project page renders "Date not
+   stated" and `/api/v1/projects/[id]` serves the same value (tested by calling
+   the route handler for every project).
+3. **USA Rare Earth instrument.** The 8-K calls the awards "direct funding
+   awards" and never grants; the package marked its `grant` reading ambiguous
+   while its five parts marked it explicit. The executed Direct Funding
+   Agreement (Exhibit 10.1, read in full) defines "Direct Funding" as direct
+   funding "in the form of an other transaction" and lists grants, cooperative
+   agreements and other transactions as separate forms of CHIPS Incentives.
+   All six rows are now `unspecified`, with identical `ambiguous` instrument
+   evidence on each. Exhibit 10.1 is its own source (`src-usar-direct-funding-agreement-2026-06-03`,
+   87 sources) and is listed on the event. The package's notes and evidence now
+   carry Section 2.1(b) (no funds obligated on execution, only on a Funding
+   Obligation), Section 4.16 (issuing equity to the Department is a condition
+   precedent to the Award Date) and the clawback events (Sections 10.1.1, 10.2).
+   The rows stay `contracted`; the 16,132,790 shares and the warrant stay
+   recorded as terms.
+4. **Letters of intent or interest.** Four rows are, in their sources' words,
+   letters of intent or interest: the EDC letters for Nouveau Monde Graphite
+   (US$430M) and Vianode (US$500M), the German export-credit-guarantee letter
+   for Vianode (US$300M) and v0.5's CHIPS letter of intent for Vulcan Elements
+   (US$50M). They were `commitment` rows read as not yet binding, so the German
+   US$300M sat inside a displayed USD loan-guarantee total of up to US$1.6
+   billion beside USA Rare Earth's binding US$1.3 billion, and two letters made
+   Vianode a cross-government co-investment. They are now `indication` rows:
+   visible with their amount and status on the capital, project, portfolio, row
+   and search pages, in their own layer (`layerOf` is `indication`), but never
+   summed, never binding or not yet binding, and never a flow, a backer
+   (`isBackingRow` is false), co-investment, a project's government or provider,
+   or an instrument, stage or material count in a portfolio (each is counted
+   once, in its own layer, as funding options are). The stage response map
+   places only commitments and options, so a letter now appears in no cell of
+   it; it stays visible on its row, project and `/capital` pages and in the
+   portfolio `byLayer` counts.
+5. **Transcription.** The USA Rare Earth loan-guarantee `amountAsStated` dropped
+   `and, together with the Direct Funding, the "Awards"` without an ellipsis and
+   is now quoted as filed; the MP Materials $724.2 million is net offering
+   proceeds (10-K), not the offering, and the bank-financing note says so.
+
+Exact public effects on the seed (before is `1f54f5a`, measured by dumping both
+summaries, the project stacks, portfolios, co-investment, flows and the response
+map from each tree and diffing every leaf):
+
+- USD public totals: grant "up to 277 million, binding" **gone** (the USA Rare
+  Earth package is listed under "instrument not specified", not summed); loan
+  guarantee "up to 1.6 billion" (1.3 billion binding, 300 million not yet binding)
+  is **up to 1.3 billion, all binding**; the "not specified" list changes from
+  the two EDC letters and the Vulcan letter to the USA Rare Earth package (its
+  five parts nested as before). Counted USD rows 11 to 7, nested 12 unchanged.
+  Loans (850M; 150M binding, 700M not yet) and equity are unchanged; CAD, EUR,
+  GBP and JPY totals are unchanged.
+- `byValueRole`: commitment 57 to 53, indication 4. `byInstrument`: grant 11 to
+  5, unspecified 25 to 31.
+- US portfolio: public-commitment layer 9 to 8, indication layer 1,
+  `committedNotYetBinding` 3 to 2, geography "not stated" 6 to 5; no grant
+  instrument row. Canada: public-commitment layer 13 to 11, indication layer 2,
+  `committedNotYetBinding` 12 to 10, geography "at home" 11 to 9, instrument
+  "unspecified" 13 to 11, graphite 9 to 7, mining 4 to 3, processing 4 to 3,
+  projects 7 to 6, provider organizations 6 to 5, recipient organizations 11 to
+  10; Canada's USD public total (the two EDC letters, unsummed) is gone.
+- Co-investment: 11 to 10 projects (Vianode was `cross_government`; it has no
+  backer now); NMG loses EDC as a provider and the letter as a row. Flows:
+  Canada to Canada 11 to 9 rows, US "not stated" 6 to 5. Response map (graphite):
+  mining cell 3 to 2 rows and processing cell 5 to 4.
+- Project stacks: the five USA Rare Earth projects' public layer shows
+  "instrument not specified, listed, not summed" where it showed a grant sum
+  (Round Top 132M, Stillwater Magnet 50M, Stillwater Metal 20M, Magnet Project 2
+  60M, Metal Project 2 15M; their loan guarantees of 550M, 250M, 100M, 325M and
+  75M are unchanged); Vianode is one indication layer (two rows), no government
+  and no provider; NMG's letter is in an indication layer beside its commitments;
+  MP 10X and Lofdal as in item 2. The CHIPS programme ledger's recorded awards
+  are the USA Rare Earth rows only, the Vulcan letter is under "other layers".
+- Control clauses: two No. 62 clauses' legal basis, four laws to two.
+
+Unresolved source ambiguity, reported rather than resolved: the German letter is
+stated only in Canada's backgrounder, not by the German government; none of the
+three G7 letters is dated; MP 10X's construction start is not stated; the
+RESourceEU envelope is recorded `exact` though the press release says "up to"
+(the envelope is never summed); Cyclic Materials' programme page also says
+"completed in March 2026", which is not recorded; USA Rare Earth's "contracted"
+means the agreement is executed, not that funds are obligated or paid (item 3; the
+follow-up below puts that in the status note and the definitions). Method note:
+EDGAR was read in the browser; no personal address was sent to any service.
+
+#### Follow-up: "contracted" is an executed agreement, not obligated or paid funds
+
+A narrow check of whether the USA Rare Earth "up to $277M" could be read as funds
+already federally obligated or paid. Payment was already kept apart: "Contracted" is a
+separate stage from "Disbursed", every "up to" sum is captioned "not an amount paid",
+and the $277M sits under "instrument not specified", so it is in no Binding sum.
+Obligation was not: of the 19 pages that show the figure, only the package row page,
+its event and the sources index said that signing obligates nothing (Exhibit 10.1
+Section 2.1(b): "No obligation of funds for the Award by the Department shall occur upon
+execution of this Agreement. An obligation of funds for the Award shall occur only upon
+delivery of a Funding Obligation."). The other 16 said nothing on obligation (most show
+a "Contracted" badge beside the figure), and the status note on the five part rows said
+only that disbursements follow milestones.
+
+Changed, wording only: the `contracted` status note on the package and its five parts
+now says signing obligates no funds and cites Section 2.1(b) (the entry keeps its 8-K
+source, date and status; each part gained the Section 2.1(b) status evidence the
+package already had), and "contracted" and "binding" are defined as describing the
+agreement, not the money, in the methodology, the `/capital` caption, the
+public-commitments layer gloss (project, organization and portfolio pages), both summary
+APIs' counting rules and the `FINANCIAL_STATUSES` comment. Nothing else moved: a diff
+of both summaries, all 50 project stacks, portfolios, co-investment, flows and the
+response map against the previous tree differs in two counting-rule strings.
+
+Not covered, by choice: the shared `CommitmentRow` card (badge only), so `/actors/us`,
+`/interplay`, five material pages (dysprosium, gallium, NdFeB magnets, rare earths,
+terbium) and the CHIPS programme page still show the figure with no statement on
+obligation, only the "Contracted" badge where a status is shown; each links to the row
+page. The loan-guarantee rows were not examined for the same point.
+
+Evidence limit: USA Rare Earth's Q2 10-Q (filed 10 Aug 2026) says no disbursements or
+advances had been received by 30 Jun 2026 and that funding is contingent on milestones,
+conditions and approvals; it and the 24 Aug, 4 Sep and 15 Sep 8-Ks and the 17 Sep
+424B3 do not use the term "Funding Obligation". Other filings and Commerce releases
+were not searched, and none is entered as data: the corpus records no funding obligation
+and no disbursement, which is not a finding that none exists.
+
+### Data added (all read in full from primaries or binding filings, 2026-09-23)
+
+- China: MOFCOM Nos. 56, 57, 58 (MOFCOM/GACC) and 62 (MOFCOM) of 2025, 12
+  clauses; No. 70's suspension now links them; No. 55 stays external.
+- EU: Decisions C(2025) 1904 and 3491 with annexes: 28 Strategic Project
+  designations naming tracked materials, 27 projects, 26 promoters; RESourceEU
+  (COM(2025) 945): EUR 3 billion envelope, JTF–Neo, EIB–UP Catalyst,
+  EBRD–Sarytogan.
+- Japan: METI certified supply-assurance plans and JOGMEC grant decisions: four
+  events (Allied Material, Shin-Etsu, Santoku, Japan New Metals).
+- Canada: G7 Critical Minerals Production Alliance round (NMG, Ucore, Vianode,
+  Focus Graphite, Northern Graphite) and PDAC 2026 awards (Wicheeda, GGT,
+  geoscience); CMRDD programme page (Cyclic amount corrected to CAD 4,893,125).
+- US: MP Materials 10-Q Q3 2025, 10-K 2025, 10-Q Q2 2026 (equity and samarium
+  loan disbursed, bank letter lapsed, 10X in Northlake, Texas); Commerce CHIPS
+  LOI and June 2026 agreements with USA Rare Earth (12 rows, 5 projects, a
+  covenant clause); OSC's own page for its place in DoD.
+- Registry backfill of all 39 v0.5 rows; 16 v0.5 control clauses gained item
+  types and stages.
+- Counts at the end of the session: 50 events, 74 financial commitments, 45
+  control clauses, 77 organizations, 50 projects, 12 programmes, 32
+  designations, 87 sources, 49 framing claims (derive live counts; do not pin).
+
+### Product
+
+- Pages: `/portfolios`, `/projects[/id]`, `/organizations[/id]`,
+  `/programmes[/id]`; stage response map on `/interplay` and material pages;
+  registry links on capital, control and event pages. Navigation: Portfolios
+  primary (Timeline moved under More); Projects, Organizations, Programmes in
+  Capital & Control.
+- API: `/api/v1/{organizations,projects,programmes,project-designations}[/id]`,
+  `/api/v1/capital-intelligence/summary`. Exports: four registry CSVs, trailing
+  columns on the commitment and control CSVs, registries in `dataset.json`.
+  Search: organizations (aliases, original-language names), projects,
+  programmes.
+
+### Gates at the end of the session
+
+- validate (0 errors, the 6 existing-kind warnings), typecheck, lint, 259
+  tests, build (876 pages). 375px sweep of all 349 sitemap pages: no overflow
+  after fixing `/interplay` (new table) and `/compare` (existing, screen-reader
+  text escaping an unpositioned scroll wrapper). Desktop checked at 1440px.
+  No candidate id in `.next`.
+- Fold-rule pass: validate 0 errors (same 10 warnings), typecheck and lint clean,
+  270 tests (3 new, one replaced; the new fold rules were mutation-checked: no
+  coverage check, no same-field check, old whole-row fold, matrix without material,
+  matrix with uncounted package, portfolio folding across standing and ended each
+  fail a test), build, phone and desktop checks (see the PR).
+- Portfolio stage and material pass: validate 0 errors (same 10 warnings), typecheck
+  and lint clean, 272 tests (two new; also without
+  the candidates file), 876-page build, no candidate id in `.next`. Mutation checks: no
+  coverage test, no layer test and folding always each fail the new tests.
+  375px checks of `/portfolios`, `/methodology`, `/capital`, a USAR package page and
+  `/interplay`: no overflow; `/portfolios` read at 1440px. Diffed before and after
+  on the final tree: the control summary is identical, and the intelligence summary
+  differs only in `countingRules` and `portfolios[australia].counts.byStage.stockpiling`.
+- Accounting-semantics pass: validate 0 errors (same 10 warnings), typecheck and
+  lint clean, 267 tests (8 new; five rules mutation-checked: old ancestor rule,
+  not_stated as not yet binding, options as backing, fold-any-part, fold-across-layers, each fails a test), build
+  876 pages, no candidate id in `.next`. 375px sweep of 233 capital, portfolio,
+  project, material, programme, organization, interplay, methodology and data
+  pages: no horizontal overflow; desktop checked on `/projects/prj-us-mp-10x-facility`
+  and `/interplay`. Both summary APIs and `dataset.json` read from the served build.
+- Release-review pass: validate 0 errors (same 10 warnings, 87 sources), typecheck
+  and lint clean, 280 tests (281 after the wording follow-up; also without the candidates file), 876-page build, none
+  of the 11 candidate ids in `.next` (built with the private file present). The
+  No. 62 test and the four `latestImplementation` tests were confirmed to fail on the
+  unfixed code. Every affected page (26, including `/portfolios`, `/capital`, the
+  projects, rows, organizations, the CHIPS programme, the No. 62 clause and
+  `/methodology`) was loaded at 375px and 1440px and its `scrollWidth` compared with
+  its `clientWidth`: one overflow found (`/methodology`, from the long JSON paths in
+  the v0.6 entry) and fixed by letting them wrap; the 52 loads then had none. Desktop
+  and phone views read on `/portfolios` and the Vianode project. Both summaries, the
+  project stacks, portfolios, co-investment, flows and the response map were
+  dumped from the reviewed head and the final tree and diffed leaf by leaf; the
+  effects are listed above and nothing else changed. QA note: a stale `next start`
+  process (its name is `next-server`, so `pkill -f "next start"` misses it) served an
+  earlier build for part of the pass; every check quoted here was redone against a
+  server started from the final build.
+- Slip to note: one early probe of EDGAR sent the user's email address in a
+  User-Agent header; not repeated (EDGAR was read in the browser afterwards).
+
+### Known weaknesses / open items
+
+- A mixed package's parts are not summed in its place (NWF–Tungsten West shows
+  no GBP sum, only listed rows).
+- Company countries are left null where no cited source states them; Japanese
+  company English names are this project's rendering.
+- Canadian SRF (formerly SIF) awards: no primary lists them individually;
+  none recorded. EU second-round Strategic Projects: no decision yet.
+- The MP $350M option: filings show 400,000 Series A shares but never state
+  exercise or lapse; neither recorded. PPA cash receipts not stated.
+- Letters of intent or interest are indications, not commitments (release-review
+  pass). The USA Rare Earth agreements are executed, but under Section 2.1(b) of
+  the Direct Funding Agreement no funds are obligated on execution, only when
+  the Department delivers a Funding Obligation; no funding obligation or
+  disbursement is recorded.
+- The No. 61 Annex 1 (.wps) is still unread; Nos. 56/57/58/62 were suspended
+  before or soon after taking effect; the suspension ends 10 Nov 2026 and the
+  validator will warn after that date.
+- `/coverage` does not yet report registry or Capital & Control counts.
+- Flows fold a whole part into a package that is a flow, not destination by
+  destination, and stay at that documented package level. The USAR CHIPS package
+  states no country (two of its parts state none), so it is `not_stated` and its
+  six US parts are folded into it; a per-destination fold would list the deal
+  under both. `/portfolios` now says so under the flow table and links each such
+  package to its own page, where its parts are listed, each linking to its own record with its location.
+- `byInstrument` still counts a package once, so a part whose instrument differs
+  from its package's is not counted under its own instrument (a `mixed` package
+  is one `mixed` row). No stage or material effect; not changed.
+- `layerOfRow` and the commitments CSV `layer` column label an ended row by its
+  value role; the ended state is in the status column and the summaries' rules.
+- Portfolio cards for Canada and the UK are mostly "listed, not summed"
+  (unstated or mixed instruments); each card links to that actor's rows.
+- Framing not yet coded on three of the four Japan certification events and
+  the PDAC 2026 event: the JOGMEC programme quote anchors only the first
+  certification rather than being counted four times.
+- The local `next start` server used for QA was stopped; nothing is left
+  running.
+
+PR: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/6
+(branch `feat/capital-intelligence-v06`, code at the release-review pass (`8c191a5`) and its wording follow-up, base
+`main` at `7ddb62c`). Vercel preview built; not merged, per instruction.
+
+Next action: maintainer review of PR #6; after merge, watch 10 Nov 2026
+(China), the EU second round, SRF awards and USA Rare Earth disbursements.
+
+## Release reconciliation: v0.5 is on `main`
+
+- PR #5 ("Capital & Control: source-verified capital and control platform
+  (v0.5)") was merged on 2026-09-23 at 22:38 UTC as
+  `7ddb62ca6891cb9e517db1b5e8d570b890a3ba7b` (PR head `2dee471`). The `main`
+  CI run for that commit passed. The session notes below still say "not
+  merged"; they describe the state before the merge.
+- `main` is clean at `7ddb62c`. The Phase 3 session worktree under
+  `~/.claude/worktrees/` no longer exists; `git worktree prune` has been run
+  in the main checkout.
+- `graphify update .` was run at `7ddb62c` (969 nodes, 2,869 edges, 52
+  communities; `graphify-out/` is git-ignored, so no tracked file changed).
+  Its god nodes are the `lib/data.ts` loaders (`getAllEvents`,
+  `getAllControlMeasures`, `getAllFinancialCommitments`), `formatDate` and
+  `site`, which matches the architecture described in CLAUDE.md. The seed
+  JSON files produce no nodes: the extractor reads code, not data, so the
+  graph says nothing about the corpus itself.
+- The open items listed under "Open items" below are still open.
 
 ## Latest session: v0.5 Capital & Control — platform release (Phase 3)
 

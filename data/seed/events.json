@@ -70,7 +70,7 @@
       "industrial"
     ],
     "summary": "The extraterritorial measure of the October 2025 package. Foreign exporters must obtain a Chinese dual-use licence before shipping to third countries where the goods contain 0.1% or more by value of listed Chinese-origin rare-earth items, or were made abroad using Chinese rare-earth extraction, separation, metal-smelting, magnet-manufacturing or secondary-recovery technology, or are themselves of Chinese origin. Applications from foreign military users and from importers on the control and watch lists are refused in principle, as are WMD, terrorism and military end-uses; exports for research or production of 14nm-and-below logic chips or 256-layer-and-above memory, and for AI with potential military use, are decided case by case. Humanitarian shipments are exempt subject to post-export reporting. The controlled item lists are in an annex. Under paragraph 8, the limb covering Chinese-origin items (item 1(3)) applied from publication on 9 October 2025, while the two extraterritorial limbs (items 1(1) and 1(2)) were scheduled to apply from 1 December 2025. Before that date, Announcement No. 70 of 2025 suspended Announcement No. 61 from 7 November 2025 to 10 November 2026, so the extraterritorial limbs did not take effect on 1 December 2025.",
-    "analyticalSignificance": "The extraterritorial 0.1% rule mirrors the design of US export controls (a de minimis / foreign-direct-product logic) and marks a qualitative escalation from controlling exports of Chinese material to controlling foreign goods derived from it. Suspended by Announcement No. 70 of 2025 through 10 November 2026. The five additional rare earths added in the same October package came from a companion instrument, not from this one.",
+    "analyticalSignificance": "The extraterritorial 0.1% rule mirrors the design of US export controls (a de minimis / foreign-direct-product logic) and marks a qualitative escalation from controlling exports of Chinese material to controlling foreign goods derived from it. Suspended by Announcement No. 70 of 2025 through 10 November 2026. The five additional rare earths added in the same October package came from a companion instrument, Announcement No. 57, not from this one.",
     "supersededByEventId": null,
     "sourceIds": [
       "src-mofcom-61",
@@ -268,7 +268,10 @@
       "src-dod-mp-transaction-agreement-2025",
       "src-osc-mp-loan-2025",
       "src-mp-dod-2025",
-      "src-fortune-dod-mp"
+      "src-fortune-dod-mp",
+      "src-mp-10q-2025-q3",
+      "src-mp-10k-2025",
+      "src-mp-10q-2026-q2"
     ],
     "verificationStatus": "verified",
     "intakeMode": "backfill",
@@ -1518,6 +1521,539 @@
     "lifecycle": {
       "officialPublicationDate": "2025-01-15",
       "discoveredAt": "2026-09-23",
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-56-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2025年第56号 公布对部分稀土设备和原辅料相关物项实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM & GACC Announcement No. 56 of 2025: decision to implement export controls on certain rare-earth equipment and raw and auxiliary material items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM & GACC Announcement [2025] No. 56",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [],
+    "summary": "Adds two dual-use list entries. 2B902 covers rare-earth production and processing equipment in 26 sub-items: centrifugal extraction equipment, ion-adsorption-ore leachate precipitation equipment, roasting kilns, extraction tanks and ion-adsorption equipment for separation and purification, precipitation-crystallisation reactors, resistance furnaces, metal-electrolysis equipment and cells, reduction and carbon-tube furnaces, crystal-growth furnaces, the strip-casting, hydrogen-decrepitation, jet-milling, pressing, sintering, machining and grain-boundary-diffusion equipment of permanent-magnet production, and shaft kilns for secondary-resource recovery. 1C914 covers rare-earth raw and auxiliary materials: bastnäsite, monazite and ion-adsorption ores, hydroxamic-acid or phosphate-ester flotation reagents, and five named extractants. Exports need a MOFCOM licence, and customs declarations must state whether goods are controlled. It was to take effect on 8 November 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026, so it never took effect.",
+    "analyticalSignificance": "Moves the rare-earth controls upstream of the materials themselves, to the equipment, ores and reagents used to produce them, across every stage from ore to magnet and secondary recovery. Suspended before its start date with the rest of the 9 October package; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-56",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-57-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2025年第57号 公布对部分中重稀土相关物项实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM & GACC Announcement No. 57 of 2025: decision to implement export controls on certain medium and heavy rare earth items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM & GACC Announcement [2025] No. 57",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [],
+    "summary": "Adds five medium and heavy rare earths to the dual-use list: holmium (1C909), erbium (1C910), thulium (1C911), europium (1C912) and ytterbium (1C913). For each it covers the metal, named alloys and targets, functional materials containing the element (holmium permanent-magnet, crystal, magnetic-refrigeration and magnetostrictive materials; erbium crystal, optical-fibre, hydrogen-storage and ceramic materials; thulium crystal and luminescent materials; europium phosphors, crystal and hydrogen-absorbing materials; ytterbium crystal, optical-fibre and thermal-barrier-coating materials), and the oxides, compounds and their mixtures. Exports need a MOFCOM licence, and customs declarations must state whether goods are controlled. It was to take effect on 8 November 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026, so it never took effect.",
+    "analyticalSignificance": "The companion to Announcement No. 61 that extended the April 2025 list of seven rare earths (No. 18) with five more. Because it was suspended before its start date, the controlled set in force stayed the April seven; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-57",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-58-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2025年第58号 公布对锂电池和人造石墨负极材料相关物项实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM & GACC Announcement No. 58 of 2025: decision to implement export controls on lithium battery and artificial graphite anode material items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM & GACC Announcement [2025] No. 58",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "graphite"
+    ],
+    "affectedSectors": [
+      "battery"
+    ],
+    "summary": "Controls three item groups: lithium-ion batteries of 300 Wh/kg or more, the equipment that makes them and the technology to produce them; lithium iron phosphate, ternary-precursor and lithium-rich manganese cathode materials and cathode production equipment; and graphite anode materials, both artificial and mixed artificial-natural, with the granulation, graphitisation and coating equipment and the granulation, continuous-graphitisation and liquid-phase-coating technology used to make them. Exports need a MOFCOM licence, and customs declarations must state whether goods are controlled. It was to take effect on 8 November 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026, so it never took effect.",
+    "analyticalSignificance": "Carries graphite controls beyond the 2023 natural-flake and high-purity synthetic list (No. 39) to battery-grade anode material and the equipment and process technology behind it. Only the graphite limb touches a tracked material; the battery and cathode limbs are recorded as untracked. Suspended before its start date; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-58",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-62-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM (Bureau of Industrial Security and Import and Export Controls)",
+    "titleOriginal": "商务部公告2025第62号 公布对稀土相关技术实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM Announcement No. 62 of 2025: decision to implement export controls on rare-earth-related technologies",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM Announcement No. 62 (2025)",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [],
+    "summary": "Requires a licence to export technology, and its carriers, for rare-earth mining, smelting and separation, metal smelting, magnet manufacturing (samarium-cobalt, NdFeB and cerium magnets) and secondary-resource recovery (1E902.a), and technology for assembling, commissioning, maintaining, repairing and upgrading those production lines (1E902.b). Exporting uncontrolled goods, technology or services the exporter knows are for, or substantially contribute to, such activities abroad also needs a licence, and Chinese citizens and organisations may not give substantive help or support to them without one. Export is defined to include transfer through licensing, investment, exchanges, joint research, employment and consulting. It applied from publication on 9 October 2025; Announcement No. 70 suspended it from 7 November 2025 to 10 November 2026.",
+    "analyticalSignificance": "The one October instrument in force before the suspension: for four weeks it restricted the transfer of Chinese rare-earth mining, separation, smelting, magnet and recycling know-how, and Chinese support for those activities abroad, at the same stages where the capital other governments are recorded as providing is aimed. It shares its stage list with No. 61's foreign-direct-product limb, which reaches items made abroad with the same technologies. Suspended from 7 November 2025; the corpus records nothing yet about what follows 10 November 2026.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-62",
+      "src-mofcom-70"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-eu-crma-strategic-projects-2025-03",
+    "date": "2025-03-25",
+    "jurisdiction": "eu",
+    "issuingBody": "European Commission",
+    "titleOriginal": "Commission Decision of 25.3.2025 recognising certain critical raw material projects as Strategic Projects under Regulation (EU) 2024/1252 of the European Parliament and of the Council",
+    "titleOriginalLang": "en",
+    "titleEn": "Commission Decision recognising 47 critical raw material projects in the EU as Strategic Projects under the Critical Raw Materials Act",
+    "titleEnSource": "na",
+    "documentNumber": "C(2025) 1904 final",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "graphite",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "battery",
+      "defense"
+    ],
+    "summary": "The Commission's first list of Strategic Projects under Regulation (EU) 2024/1252: 47 extraction, processing, recycling and substitution projects in 13 Member States, selected from 122 complete applications against the Act's criteria (contribution to supply security, technical feasibility, sustainable implementation, cross-border benefits). Recognition brings coordinated support from the Commission, Member States and financial institutions on access to finance and off-takers, and permit-granting capped at 27 months for extraction and 15 months for other projects. Twenty-one of the projects name a tracked material: five rare-earth projects for magnets (three with processing, one of them integrated with extraction, and two recycling), eleven naming battery-grade graphite (one a substitution project), two tungsten projects, one gallium project and two germanium projects (one a substitution project). The Commission puts the 47 projects' expected capital investment at €22.5 billion; that is project cost, not EU money, and is not recorded as capital.",
+    "analyticalSignificance": "The EU's main project-level instrument is recognition, not money: the designation changes permitting and access to finance, and any funding that follows is a separate decision. Its rare-earth projects process, separate and recycle rare earths for magnets, the activities whose Chinese technology Announcement No. 62 placed under export licence in October 2025 before its suspension.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ec-crma-sp-decision-2025-03",
+      "src-ec-crma-sp-annex-2025-03",
+      "src-ec-ip-25-864"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-03-25",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-eu-crma-strategic-projects-2025-06",
+    "date": "2025-06-04",
+    "jurisdiction": "eu",
+    "issuingBody": "European Commission",
+    "titleOriginal": "Commission Decision of 4.6.2025 recognising certain critical raw material projects located in third countries and in overseas countries or territories as Strategic Projects under Regulation (EU) 2024/1252 of the European Parliament and of the Council",
+    "titleOriginalLang": "en",
+    "titleEn": "Commission Decision recognising 13 critical raw material projects in third countries and overseas countries or territories as Strategic Projects under the Critical Raw Materials Act",
+    "titleEnSource": "na",
+    "documentNumber": "C(2025) 3491 final",
+    "policyStatus": "in_force",
+    "mechanism": [
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "battery",
+      "defense",
+      "energy"
+    ],
+    "summary": "The first list of Strategic Projects outside the EU: 13 projects in Brazil, Canada, Greenland, Kazakhstan, Madagascar, Malawi, New Caledonia, Norway, Serbia, South Africa, Ukraine, the United Kingdom and Zambia, each approved by the third country or overseas territory concerned. Seven name a tracked material: four graphite extraction projects (Ukraine, Madagascar, Kazakhstan, and an integrated Norway–Greenland project), two rare-earth extraction projects for magnets (Songwe Hill in Malawi and Zandkopsdrift in South Africa) and one tungsten extraction project, Tungsten West at the Hemerdon mine in Devon. The Commission estimates the 13 projects need €5.5 billion of capital to start operations; that is project cost and is not recorded as capital.",
+    "analyticalSignificance": "Extends EU recognition to projects the Union does not host, with the host government's consent. One of them, the Hemerdon tungsten mine, is also backed by the UK's National Wealth Fund in this corpus, so a single project carries both another government's capital and an EU designation.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ec-crma-sp-decision-2025-06",
+      "src-ec-crma-sp-annex-2025-06",
+      "src-ec-ip-25-1419"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-06-04",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-eu-resourceeu-2025",
+    "date": "2025-12-03",
+    "jurisdiction": "eu",
+    "issuingBody": "European Commission",
+    "titleOriginal": "RESourceEU Action Plan: Accelerating our critical raw materials strategy to adapt to a new reality",
+    "titleOriginalLang": "en",
+    "titleEn": "RESourceEU Action Plan: Accelerating our critical raw materials strategy to adapt to a new reality",
+    "titleEnSource": "na",
+    "documentNumber": "COM(2025) 945 final",
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "stockpiling",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "battery",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "A Commission action plan building on the Critical Raw Materials Act. It sets up a European Critical Raw Materials Centre in early 2026 (market intelligence, project finance, joint purchasing and stockpiling), a Raw Materials Platform to aggregate demand and secure offtake, a stockpiling pilot with Member States from early 2026, and a financing hub coordinating EU instruments (InvestEU, the Innovation Fund, the Battery Booster and EIB and EBRD financing). It says the EU should mobilise EUR 3 billion of EU funds within 12 months in direct support of the critical-raw-materials value chain, and records financing already given, including the Just Transition Fund's EUR 18.7 million for a rare-earth magnet project in Estonia, EIB loans to the UpCatalyst graphite Strategic Project and EBRD equity in the Sarytogan graphite project. By Q2 2026 the Commission will propose restrictions on exports of permanent-magnet scraps and waste; no such instrument is in the corpus, so no control clause is recorded. A targeted amendment to the Act extends magnet labelling and recycled-content rules.",
+    "analyticalSignificance": "The EU's response moves from recognition to money and market tools: after the 2025 Strategic Project lists, the plan puts EU funds, public-bank financing, joint purchasing and stockpiling behind the same projects. It names China's controls only obliquely, as the \"weaponisation of CRMs by dominant market players\", and proposes the EU's first rare-earth export restriction of its own, on magnet scrap, which remained a proposal to come when the plan was adopted.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ec-resourceeu-com-945",
+      "src-ec-ip-25-2891"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-12-03",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-almt-tungsten-2026",
+    "date": "2026-03-18",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（株式会社アライドマテリアル、認定番号２０２５重要鉱物第２号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Allied Material's critical-minerals supply-assurance plan for tungsten under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２５重要鉱物第２号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "On 18 March 2026 (令和8年3月18日) METI certified the supply-assurance plan of Allied Material Corporation (株式会社アライドマテリアル) under the Economic Security Promotion Act (certification number ２０２５重要鉱物第２号－１): new tungsten reduction and carburisation facilities to raise production of tungsten powder and tungsten carbide powder. METI's list gives a subsidy of about 75億円 (JPY 7.5 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC lists the grant among its FY2025 (令和7年度) grant decisions.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its tungsten plans reach the powder and carbide stages whose export China licensed from February 2025 (Announcement No. 10).",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-shin-etsu-rare-earth-2026",
+    "date": "2026-05-19",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（信越化学工業株式会社、認定番号２０２６重要鉱物第１号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Shin-Etsu Chemical's critical-minerals supply-assurance plan for rare earths under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２６重要鉱物第１号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [],
+    "summary": "On 19 May 2026 (令和8年5月19日) METI certified the supply-assurance plan of Shin-Etsu Chemical Co., Ltd. (信越化学工業株式会社) under the Economic Security Promotion Act (certification number ２０２６重要鉱物第１号－１): new smelting facilities in Japan to increase rare earth production. METI's list gives a subsidy of about 175億円 (JPY 17.5 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC lists the grant among its FY2026 (令和8年度) grant decisions.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its rare-earth plans add smelting capacity inside Japan at the stages whose Chinese technology exports Announcement No. 62 placed under licence in October 2025.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-santoku-rare-earth-2026",
+    "date": "2026-07-29",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（株式会社三徳、認定番号２０２６重要鉱物第２号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Santoku's critical-minerals supply-assurance plan for rare earths under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２６重要鉱物第２号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [],
+    "summary": "On 29 July 2026 (令和8年7月29日) METI certified the supply-assurance plan of Santoku Corporation (株式会社三徳) under the Economic Security Promotion Act (certification number ２０２６重要鉱物第２号－１): new smelting facilities in Japan to increase rare earth production. METI's list gives a subsidy of about 8億円 (JPY 0.8 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC lists the grant among its FY2026 (令和8年度) grant decisions.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its rare-earth plans add smelting capacity inside Japan at the stages whose Chinese technology exports Announcement No. 62 placed under licence in October 2025.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-jp-espa-japan-new-metals-tungsten-2026",
+    "date": "2026-09-07",
+    "jurisdiction": "japan",
+    "issuingBody": "METI / JOGMEC",
+    "titleOriginal": "経済安全保障推進法に基づく重要鉱物の供給確保計画の認定（日本新金属株式会社、認定番号２０２６重要鉱物第３号－１）",
+    "titleOriginalLang": "ja",
+    "titleEn": "Certification of Japan New Metals' critical-minerals supply-assurance plan for tungsten under the Economic Security Promotion Act",
+    "titleEnSource": "self",
+    "documentNumber": "２０２６重要鉱物第３号－１",
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "On 7 September 2026 (令和8年9月7日) METI certified the supply-assurance plan of Japan New Metals Co., Ltd. (日本新金属株式会社) under the Economic Security Promotion Act (certification number ２０２６重要鉱物第３号－１): expanded tungsten hydrometallurgical refining facilities in Japan. METI's list gives a subsidy of about 20億円 (JPY 2 billion), paid by JOGMEC at half the applicant's cost of the undertaking. JOGMEC's list of grant decisions, as read on 23 September 2026, does not yet include it.",
+    "analyticalSignificance": "Japan's economic-security support works through certification plus a half-cost grant to a named domestic company, rather than equity or loans. Its tungsten plans reach the powder and carbide stages whose export China licensed from February 2025 (Announcement No. 10).",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-meti-critical-minerals-certified-plans",
+      "src-jogmec-critical-minerals-grants"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-g7-cmpa-2025",
+    "date": "2025-10-31",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "Canada unlocks 26 new investments and partnerships with 9 allied countries to secure critical minerals supply chains",
+    "titleOriginalLang": "en",
+    "titleEn": "Canada unlocks 26 new investments and partnerships with 9 allied countries to secure critical minerals supply chains (G7 Critical Minerals Production Alliance, first round)",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "offtake_agreement",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "energy",
+      "battery"
+    ],
+    "summary": "The first round of 26 projects and measures under the Canada-led G7 Critical Minerals Production Alliance, announced on 31 October 2025 in Toronto, which Canada says will unlock $6.4 billion of critical minerals projects. Among those naming a tracked material: Government of Canada offtake arrangements with Nouveau Monde Graphite's Matawinie mine, alongside earlier Canada Growth Fund investment of more than $35 million and an Export Development Canada letter of interest for up to US$430 million; a conditionally approved investment of up to $36.3 million in Ucore Rare Metals' samarium and gadolinium refining facility in Kingston (up to $26.3 million from NRCan and up to $10 million from FedDev Ontario); letters of interest for Vianode's synthetic graphite facility in St. Thomas, Ontario, of up to US$500 million from Export Development Canada and an export-credit guarantee of up to US$300 million from the German government; up to $14.1 million for Focus Graphite's electrothermal purification project; and $860,000 of NRC research funding for Northern Graphite and Rain Carbon Canada. Private offtakes (Torngat–Carester, Northern Graphite–Alkeemia) and scandium, lithium and nickel items are not recorded as rows.",
+    "analyticalSignificance": "Canada's answer is a mix of offtake, export-credit letters of interest and conditional grants, several of them co-financed or co-purchased with allies (Japan, Germany, France, Italy), aimed at graphite and rare-earth processing. Much of it is not yet binding: letters of interest and conditional approvals, kept apart from binding money in every total.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-g7-cmpa-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-31",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-nrcan-pdac-2026",
+    "date": "2026-03-03",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "Government of Canada invests to unlock Canada’s critical minerals advantage",
+    "titleOriginalLang": "en",
+    "titleEn": "Government of Canada invests to unlock Canada’s critical minerals advantage (PDAC 2026 funding announcement)",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "graphite",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "battery"
+    ],
+    "summary": "On 3 March 2026 the Minister of Energy and Natural Resources announced up to $165.2 million for 22 projects across five NRCan programmes: the First and Last Mile Fund (which subsumed the Critical Minerals Infrastructure Fund), the Energy Innovation Program, the CMRDD program, the Indigenous Natural Resource Partnerships program and the Critical Minerals Geoscience and Data initiative. Five name a tracked material and are recorded: $1,878,250 (conditionally approved) for power and road infrastructure to Defense Metals' Wicheeda rare earth mine site; $4,750,000 for Green Graphite Technologies' battery-grade graphite demonstration; and three geoscience studies naming graphite, rare earth elements and tungsten. The $165.2 million total is not recorded, because most of it funds untracked minerals and infrastructure.",
+    "analyticalSignificance": "Shows the long tail of Canadian support: small, programme-by-programme awards, with the tracked-material share concentrated in graphite upgrading and rare-earth mine infrastructure. The same graphite company received CMRDD support in 2024, so its capital history now spans two programmes.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-pdac-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-03-03",
+      "discoveredAt": null,
+      "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-chips-usar-2026",
+    "date": "2026-01-26",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Commerce (CHIPS Program Office)",
+    "titleOriginal": "The Department of Commerce’s CHIPS Program Announces a Letter of Intent with USA Rare Earth to Accelerate Its Domestic and Vertically Integrated \"Mine-to-Magnet\" Strategy",
+    "titleOriginalLang": "en",
+    "titleEn": "Commerce's CHIPS Program letter of intent with USA Rare Earth, and the funding and loan guarantee agreements that followed",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "dysprosium",
+      "terbium",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "On 26 January 2026 the Department of Commerce's CHIPS Program Office signed a non-binding letter of intent to provide USA Rare Earth up to $277 million in direct funding and up to $1.3 billion in a senior secured loan under the CHIPS and Science Act, for a rare earth mine and processing facility at Round Top (Sierra Blanca), Texas, and magnet and metal making in Stillwater, Oklahoma, with Commerce to take shares and a warrant. On 3 June 2026 USA Rare Earth entered into a Direct Funding Agreement (up to $277.0 million across five project awards, including two new facilities whose sites are not named) and a Loan Guarantee Agreement under which Commerce guarantees $1.3 billion of Federal Financing Bank advances in five matching tranches, and issued Commerce 16,132,790 shares and a warrant for 17,600,584 more. Disbursements depend on project milestones and on the company raising equity; none is recorded.",
+    "analyticalSignificance": "The CHIPS programme, built for semiconductors, now funds a rare earth mine-to-magnet chain on the argument that magnets and minerals are semiconductor inputs. Like the DoD–MP deal it pairs money with an equity position and covenants on foreign entities of concern; unlike it, most of the money is a guarantee, which is never added to the grants.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nist-chips-usar-2026",
+      "src-usar-8k-2026-06-03",
+      "src-usar-direct-funding-agreement-2026-06-03"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-01-26",
+      "discoveredAt": null,
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }

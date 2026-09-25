@@ -59,7 +59,7 @@ export function ProviderTag({ code, withName = false }: { code: JurisdictionCode
         —
       </span>
       <span className={withName ? "font-display text-sm text-muted" : "font-mono text-[11px] text-faint"}>
-        {withName ? "Not government capital" : "non-gov."}
+        {withName ? "No tracked government" : "no gov."}
       </span>
     </span>
   );

@@ -530,5 +530,142 @@
     "quoteEnSource": "na",
     "sourceId": "src-osc-vulcan-reelement-2025",
     "notes": "Attributed in the release to Under Secretary of War for Research and Engineering Emil Michael."
+  },
+  {
+    "id": "fc-cn-56-2025-natsec",
+    "eventId": "evt-cn-mofcom-56-2025",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-56",
+    "notes": "Justification clause of Announcement No. 56 (2025), read verbatim from the MOFCOM primary on 2026-09-23; the same national-security and non-proliferation pairing as Announcement No. 18."
+  },
+  {
+    "id": "fc-cn-57-2025-natsec",
+    "eventId": "evt-cn-mofcom-57-2025",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-57",
+    "notes": "Justification clause of Announcement No. 57 (2025), read verbatim from the MOFCOM primary on 2026-09-23; the same national-security and non-proliferation pairing as Announcement No. 18."
+  },
+  {
+    "id": "fc-cn-58-2025-natsec",
+    "eventId": "evt-cn-mofcom-58-2025",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-58",
+    "notes": "Justification clause of Announcement No. 58 (2025), read verbatim from the MOFCOM primary on 2026-09-23; the same national-security and non-proliferation pairing as Announcement No. 18."
+  },
+  {
+    "id": "fc-cn-62-2025-natsec",
+    "eventId": "evt-cn-mofcom-62-2025",
+    "actor": "china",
+    "category": [
+      "national_security"
+    ],
+    "quoteOriginal": "为维护国家安全和利益",
+    "quoteEn": "to safeguard national security and interests",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-62",
+    "notes": "Justification clause of Announcement No. 62 (2025), read verbatim from the MOFCOM primary on 2026-09-23. Like No. 61 it carries no non-proliferation limb, so only national security is coded."
+  },
+  {
+    "id": "fc-eu-crma-sp-2025-03-resilience",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "actor": "eu",
+    "category": [
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "to boost domestic strategic raw material capacities, which will in turn strengthen the European raw materials value chain and diversify sources of supply",
+    "quoteEn": "to boost domestic strategic raw material capacities, which will in turn strengthen the European raw materials value chain and diversify sources of supply",
+    "quoteEnSource": "na",
+    "sourceId": "src-ec-ip-25-864",
+    "notes": "Opening sentence of the Commission's press release on the first list of Strategic Projects."
+  },
+  {
+    "id": "fc-eu-crma-sp-2025-06-economic-security",
+    "eventId": "evt-eu-crma-strategic-projects-2025-06",
+    "actor": "eu",
+    "category": [
+      "economic_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "The Strategic Projects will diversify the EU's sources of supply and increase economic security.",
+    "quoteEn": "The Strategic Projects will diversify the EU's sources of supply and increase economic security.",
+    "quoteEnSource": "na",
+    "sourceId": "src-ec-ip-25-1419",
+    "notes": "From the Commission's press release on the first list of Strategic Projects outside the EU."
+  },
+  {
+    "id": "fc-eu-resourceeu-2025-weaponisation",
+    "eventId": "evt-eu-resourceeu-2025",
+    "actor": "eu",
+    "category": [
+      "economic_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "The recent weaponisation of CRMs by dominant market players highlighted the need to accelerate existing efforts to enhance security of supply.",
+    "quoteEn": "The recent weaponisation of CRMs by dominant market players highlighted the need to accelerate existing efforts to enhance security of supply.",
+    "quoteEnSource": "na",
+    "sourceId": "src-ec-ip-25-2891",
+    "notes": "Background paragraph of the Commission's press release. The Commission does not name the market players."
+  },
+  {
+    "id": "fc-jp-espa-almt-tungsten-supply",
+    "eventId": "evt-jp-espa-almt-tungsten-2026",
+    "actor": "japan",
+    "category": [
+      "supply_chain_resilience",
+      "economic_security"
+    ],
+    "quoteOriginal": "我が国の重要鉱物の安定供給確保を図る上で効果的と認められる取組",
+    "quoteEn": "undertakings recognized as effective in securing the stable supply of critical minerals to Japan",
+    "quoteEnSource": "self",
+    "sourceId": "src-jogmec-critical-minerals-grants",
+    "notes": "JOGMEC's description of what the certified plans it funds must be. It is the programme's framing, not this certification's own, so it anchors only the first certification in the corpus; the later three carry no framing claim rather than repeating it, which would count the same passage four times."
+  },
+  {
+    "id": "fc-ca-g7-cmpa-2025-resilience",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "actor": "canada",
+    "category": [
+      "supply_chain_resilience",
+      "allied_coordination"
+    ],
+    "quoteOriginal": "a Canada-led G7 initiative to diversify and secure global critical minerals production and supply",
+    "quoteEn": "a Canada-led G7 initiative to diversify and secure global critical minerals production and supply",
+    "quoteEnSource": "na",
+    "sourceId": "src-nrcan-g7-cmpa-2025",
+    "notes": "The backgrounder's description of the Critical Minerals Production Alliance."
+  },
+  {
+    "id": "fc-us-chips-usar-2026-chokepoints",
+    "eventId": "evt-us-chips-usar-2026",
+    "actor": "us",
+    "category": [
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "provides U.S. semiconductor companies a reliable domestic source and removes choke points in their manufacturing supply chain",
+    "quoteEn": "provides U.S. semiconductor companies a reliable domestic source and removes choke points in their manufacturing supply chain",
+    "quoteEnSource": "na",
+    "sourceId": "src-nist-chips-usar-2026",
+    "notes": "Bill Frauenhofer, Director of the CHIPS Program, in Commerce's release."
   }
 ]
