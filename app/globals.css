@@ -1,33 +1,49 @@
 @import "tailwindcss";
 
 /*
- * "Strata" — cool near-black graphite base with a single oxidized-copper
- * (verdigris) accent. Long-form reading is set in a serif (Newsreader);
- * structure, labels and display are Archivo; data tokens are JetBrains Mono.
+ * "Lattice Register" — a warm near-black base with a single gold accent, and a
+ * cream "paper" surface for the record's reading sections. Long-form reading is
+ * set in a serif (Newsreader); structure, labels and display are Archivo; data
+ * tokens are JetBrains Mono. (Token names are unchanged from the earlier
+ * "Strata" palette, so every existing utility follows the rebrand.)
  *
  * Raw tokens live on :root and are exposed to Tailwind through @theme inline,
  * so utilities (bg-card, text-accent, border-border …) and the hand-written CSS
  * below share one source of truth.
  */
 :root {
-  --bg: #0b0c0e; /* near-black, neutral-cool graphite (minimal blue) */
-  --surface: #131619; /* card surface */
-  --elevated: #1a1e22; /* hover / elevated */
-  --plate: #16191d; /* dossier plate — primary record sheets (sits between card & elevated) */
-  --border: #262b31; /* hairline */
-  --border-strong: #38414a; /* hover / structural */
-  --fg: #ecedea; /* warm-neutral off-white (NOT blue-white) */
-  --muted: #9aa1a3; /* cool grey */
-  --faint: #7b8488; /* faint — nudged up from spec #626a6e to clear WCAG AA on small text */
+  --bg: #12110f; /* warm near-black */
+  --surface: #1a1814; /* card surface */
+  --elevated: #232019; /* hover / elevated */
+  --plate: #1e1b16; /* dossier plate — primary record sheets (sits between card & elevated) */
+  --border: #2d2a23; /* hairline */
+  --border-strong: #433e34; /* hover / structural */
+  --fg: #efece6; /* warm off-white */
+  --muted: #aaa397; /* warm grey (AA on --bg and --surface) */
+  --faint: #8e887d; /* faint — AA on --bg for small text */
 
-  --accent: #4fb59e; /* PRIMARY — oxidized-copper / verdigris teal-green */
-  --accent-strong: #6fd0ba; /* hover / emphasis */
-  --accent-fg: #07100d; /* text on accent */
+  --accent: #e3b04b; /* PRIMARY — lattice gold */
+  --accent-strong: #f2c96b; /* hover / emphasis */
+  --accent-fg: #1a1305; /* text on accent */
+  --brand-gold: #c8993e; /* the supplied logo's wordmark gold (sampled from the artwork) */
+
+  /* Cream "paper" sections: the reading body under the dark lattice. */
+  --paper: #f5f3ee;
+  --paper-fg: #1b1915;
+  --paper-muted: #5b5548; /* AA on --paper */
+  --paper-faint: #6f6859; /* AA on --paper for small text */
+  --paper-border: #d8d3c7;
+  --paper-accent: #7a5510; /* gold dark enough to read as text on paper */
+
+  /* Lattice marks. Each kind of record has one fixed encoding; area is a record count, never money. */
+  --mark-commitment: #ffca64; /* the supplied logo's light gold */
+  --mark-control: #a87002; /* the supplied logo's dark amber */
+  --mark-designation: #f3ecdb;
 }
 
 @theme inline {
   /* Color tokens keep their established names so existing utilities still
-     resolve; only the underlying values move to the Strata palette. */
+     resolve; only the underlying values move to the Lattice Register palette. */
   --color-background: var(--bg);
   --color-card: var(--surface);
   --color-elevated: var(--elevated);
@@ -40,6 +56,16 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-fg);
+  --color-brand: var(--brand-gold);
+  --color-paper: var(--paper);
+  --color-paper-foreground: var(--paper-fg);
+  --color-paper-muted: var(--paper-muted);
+  --color-paper-faint: var(--paper-faint);
+  --color-paper-border: var(--paper-border);
+  --color-paper-accent: var(--paper-accent);
+  --color-mark-commitment: var(--mark-commitment);
+  --color-mark-control: var(--mark-control);
+  --color-mark-designation: var(--mark-designation);
 
   /* Three families. Inter and IBM Plex Mono are gone. */
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
@@ -62,11 +88,11 @@
 
   body {
     background-color: var(--bg);
-    /* Verdigris glow concentrated at the crown — reads as a deliberate light
+    /* Gold glow concentrated at the crown — reads as a deliberate light
        source rather than a wash. Narrower radius keeps it off the text region. */
     background-image: radial-gradient(
       90% 55% at 50% -8%,
-      color-mix(in oklab, var(--accent) 14%, transparent) 0%,
+      color-mix(in oklab, var(--accent) 9%, transparent) 0%,
       transparent 62%
     );
     background-attachment: fixed;
@@ -147,7 +173,7 @@
    * Oxide identity edge — lets a record carry its material's oxide hue as a
    * single structural left rule (material headers; optionally event/framing
    * accents). Component sets `--oxide` inline (cf. material-tile's --tile-hue);
-   * falls back to verdigris so the graphite/verdigris identity is never broken.
+   * falls back to the gold accent so the identity is never broken.
    */
   .oxide-rule {
     border-left: 2px solid

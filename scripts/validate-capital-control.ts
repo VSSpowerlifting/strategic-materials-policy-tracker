@@ -43,6 +43,7 @@ import {
   IMPLEMENTATION_STATUSES,
   JURISDICTIONS,
   MATERIAL_ATTRIBUTIONS,
+  NO_ITEM_MEASURE_TYPES,
   ORGANIZATION_EVIDENCE_FIELDS,
   ORGANIZATION_ID_PREFIX,
   ORGANIZATION_KINDS,
@@ -65,7 +66,6 @@ import {
   VALUE_ROLES,
   type ControlEvidenceField,
   type ControlMeasure,
-  type ControlMeasureType,
   type DesignationEvidenceField,
   type ControlStatus,
   type ControlStatusEntry,
@@ -1271,14 +1271,6 @@ const SCOPED_TARGETS: readonly (readonly [
   ["named_entities", "targetEntities"],
   ["end_users", "targetEndUsersAsStated"],
   ["end_uses", "targetEndUsesAsStated"],
-];
-
-/** Clauses that restrict by end use, enforcement, ownership or suspension and define no items of their own. */
-export const NO_ITEM_MEASURE_TYPES: readonly ControlMeasureType[] = [
-  "end_use_restriction",
-  "customs_enforcement",
-  "investment_divestiture",
-  "suspension",
 ];
 
 function checkControl(m: ControlMeasure, today: string, r: Reporter, refs: Refs): void {
