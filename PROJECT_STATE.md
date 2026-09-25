@@ -1,6 +1,71 @@
 # Project state
 
-_Last updated: 2026-09-25 (Lattice Register milestone 1 on `feat/lattice-register-m1`, draft PR against `feat/capital-intelligence-v06`, not merged; v0.6 PR #6 still open)._
+_Last updated: 2026-09-25 (release reconciliation: PRs #6 and #7 are merged to `main` and deployed to production; the earlier status line below is kept for history)._
+
+_Previous status line (2026-09-25, before the merges): Lattice Register milestone 1 on `feat/lattice-register-m1`, draft PR against `feat/capital-intelligence-v06`, not merged; v0.6 PR #6 still open._
+
+## Release reconciliation: v0.6 and Lattice Register M1 are on `main` and in production
+
+Recorded 2026-09-25 from GitHub, on `main` at `ba52005`. The v0.6 and Lattice Register sections below were written
+before these merges and still say "not merged" or "PR open"; they describe the state at the time.
+
+- **PR #6** (v0.6 Capital Intelligence) merged 2026-09-25 17:25 UTC as
+  `f20a6c9378dfaa6fd21661807c032c7a4db38356` into `main`. `main` CI for that commit passed. GitHub records a
+  Production deployment of that SHA (17:26 UTC, status `success`).
+- **PR #7** (Lattice Register M1: gold-lattice branding, overview and Compare) merged 2026-09-25 19:36 UTC as
+  `ba520052e150ff7716a1dd3559887a60c9dd6b23`. Its base at merge was `main` (the M1 section
+  below describes the earlier draft base `feat/capital-intelligence-v06`). `main` CI for that commit passed. GitHub records
+  a Production deployment of that SHA (19:37 UTC, status `success`).
+- **Draft PR #8** (`docs/operating-playbook` at `d27915c`, adds `docs/operating-playbook.md` and a two-line
+  pointer in `CLAUDE.md`) branched from `7ddb62c`, before both merges. It is still open and unmerged. GitHub
+  reports it mergeable and clean; a local merge onto `ba52005` is conflict-free. The playbook is a review-standards
+  document, not a statement about current `main` behavior.
+- **Open M1 decisions** (palette unification, header container width; see the M1 section) are unchanged.
+- `lib/site.ts` still reads `version: "v0.6-capital-intelligence"` and `lastUpdated: "2026-09-23"`; neither was
+  changed by #6 or #7. Whether to bump them is a maintainer decision.
+
+### Production privacy check (read-only, 2026-09-25, from a worktree at `ba52005`)
+
+A separate read-only session checked the public production site (`strategic-materials-policy-tracker.vercel.app`)
+against the git-ignored private candidate file at `ba52005`. **Result: PASS.** None of the 29 private ids appeared
+in any body or header the check fetched, and not even the bare `cand-` prefix. The 29 ids are the fixture's 11
+`candidateId`s plus 18 nested `cand-*` ids, matched case-insensitively and in percent-decoded form. It made 905
+unique read-only GETs and wrote nothing to production.
+
+| Surface | Responses scanned |
+| --- | --- |
+| sitemap and robots.txt | 2 |
+| `/api/v1` list, per-record and summary routes | 355 |
+| `/api/export/*` JSON and CSV | 14 |
+| `/api/cite` citation exports | 153 |
+| pages (static routes, sitemap-listed dynamic routes, one 404) | 340 |
+| derived-view pages | 9 |
+| derived-view API summaries | 3 |
+| search page and its embedded index | 2 |
+| `/_next/static` client bundles, followed recursively | 21 |
+| public static assets | 9 |
+
+The rows are responses scanned per surface and add up to 908; 905 is the number of unique URLs fetched. The
+3-URL difference is the three derived-view API summaries (`/api/v1/capital-control/summary`,
+`/api/v1/capital-intelligence/summary`, `/api/v1/coverage`), each fetched once and scanned under both the `/api/v1`
+row and the derived-view API summaries row. The original run's URL inventory was not kept. A rerun of the same
+script on 2026-09-25, instrumented to log which surfaces scanned each URL, reproduced every row, the 908 total and
+the 905 unique URLs, and listed exactly those three URLs as the only ones scanned under more than one surface. It
+also passed again (29 ids, no matches).
+
+Stated coverage limits:
+
+- It did not confirm that production ran `ba52005`; the only check was that production shows 50 events, as the
+  local seed does at that commit. The GitHub deployment record above ties `ba52005` to a Production deployment,
+  but the check itself did not read the deployed SHA.
+- It sent no requests for URLs built from candidate ids, so a page that exists only at such a URL and is not
+  linked anywhere would not have been found.
+- The dynamic page list came from the sitemap and the static list from `app/`; routes reachable only through
+  client-side state (for example the stored data behind `/saved`) were not exercised.
+- Results reflect the CDN's responses at check time; bundle coverage is limited to chunks reachable from the
+  fetched pages and chunks.
+- Matching is by substring on the ids, so a candidate published under a rewritten id would be missed; no response
+  contained the bare `cand-` prefix.
 
 ## Latest session: Lattice Register, milestone 1
 

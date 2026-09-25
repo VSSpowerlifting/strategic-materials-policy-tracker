@@ -199,6 +199,8 @@ integrity, allowed-value membership, quote anchors and translation provenance.
 ## Token-efficient navigation (Graphify)
 
 - Start each session by reading `PROJECT_STATE.md` if it exists.
+- For substantial tasks, reviews, or skill routing (`ben-*` skills), read
+  `docs/operating-playbook.md`. Load it on demand; it is not auto-imported.
 - For architecture, file locations, data flow, validation flow, routes, or
   components questions ("where should I edit?"), read `graphify-out/GRAPH_REPORT.md`
   before broad search.
