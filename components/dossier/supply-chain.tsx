@@ -176,37 +176,56 @@ function Empty({ children }: { children: string }) {
 
 // --- Records by stage ------------------------------------------------------------------------------
 
+/**
+ * A column with more than CARD_LIMIT cards shows its first CARD_LIMIT, in row order, and folds the rest behind
+ * "Show all N" on the row they belong to. Returns how many cards each row shows.
+ */
+function shownPerRow(lengths: number[]): number[] {
+  const total = lengths.reduce((a, b) => a + b, 0);
+  let left = total > CARD_LIMIT ? CARD_LIMIT : total;
+  return lengths.map((n) => {
+    const shown = Math.min(n, left);
+    left -= shown;
+    return shown;
+  });
+}
+
+// On desktop each column spans four rows of the parent grid as a subgrid (heading, capital, controls,
+// designations), so the three labelled rows line up across the stages of one grid line.
+const columnRows = "flex flex-col gap-5 lg:row-span-4 lg:mb-8 lg:grid lg:grid-rows-subgrid lg:gap-y-5";
+
 function StageColumn({ stage }: { stage: StageBlock }) {
   const list = "space-y-2";
+  const [capN, optN, endN, ctlN, desN] = shownPerRow([stage.capital.length, stage.options.length, stage.ended.length, stage.controls.length, stage.designations.length]);
   return (
-    <div className="dossier-stage min-w-0 space-y-5 rounded-md p-1">
+    <div className={`dossier-stage min-w-0 rounded-md p-1 ${columnRows}`}>
       <h3 id={`stage-${stage.id}`} className="scroll-mt-24 font-display text-base font-semibold">
         {stage.label}
       </h3>
       <div className="space-y-2">
         <SubHeading>Capital rows</SubHeading>
-        {stage.capital.length ? <FoldedList items={stage.capital} limit={CARD_LIMIT} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} /> : <Empty>None</Empty>}
+        {stage.capital.length ? <FoldedList items={stage.capital} limit={capN} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} /> : <Empty>None</Empty>}
         {stage.options.length ? (
           <div className="space-y-2 pt-1">
             <SubHeading note="listed apart">Funding options, not commitments</SubHeading>
             <p className="text-xs leading-5 text-faint">A funding option is a right to call on money, not an exercise of it.</p>
-            <FoldedList items={stage.options} limit={CARD_LIMIT} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} />
+            <FoldedList items={stage.options} limit={optN} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} />
           </div>
         ) : null}
         {stage.ended.length ? (
           <div className="space-y-2 pt-1">
             <SubHeading note="listed apart">Withdrawn or lapsed</SubHeading>
-            <FoldedList items={stage.ended} limit={CARD_LIMIT} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} />
+            <FoldedList items={stage.ended} limit={endN} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} />
           </div>
         ) : null}
       </div>
       <div className="space-y-2">
         <SubHeading>Control clauses</SubHeading>
-        {stage.controls.length ? <FoldedList items={stage.controls} limit={CARD_LIMIT} label="Show all" className={list} render={(c) => <ControlCard key={c.id} control={c} />} /> : <Empty>None</Empty>}
+        {stage.controls.length ? <FoldedList items={stage.controls} limit={ctlN} label="Show all" className={list} render={(c) => <ControlCard key={c.id} control={c} />} /> : <Empty>None</Empty>}
       </div>
       <div className="space-y-2">
         <SubHeading note="standing, not money">Designations</SubHeading>
-        {stage.designations.length ? <FoldedList items={stage.designations} limit={CARD_LIMIT} label="Show all" className={list} render={(d) => <DesignationCard key={d.id} d={d} />} /> : <Empty>None</Empty>}
+        {stage.designations.length ? <FoldedList items={stage.designations} limit={desN} label="Show all" className={list} render={(d) => <DesignationCard key={d.id} d={d} />} /> : <Empty>None</Empty>}
       </div>
     </div>
   );
@@ -214,30 +233,39 @@ function StageColumn({ stage }: { stage: StageBlock }) {
 
 function NoStageColumn({ payload }: { payload: DossierPayload }) {
   const { capital, controls, designations } = payload.unstaged;
+  const [capN, ctlN, desN] = shownPerRow([capital.length, controls.length, designations.length]);
   return (
-    <div className="min-w-0 space-y-4 rounded-md border border-dashed border-border-strong p-3">
-      <h3 id="no-stage" className="scroll-mt-24 font-display text-base font-semibold">
-        No stage recorded
-      </h3>
-      <p className="text-xs leading-5 text-faint">These name {payload.nameEn} but record no stage, so the lattice cannot place them.</p>
-      {capital.length ? (
-        <div className="space-y-2">
-          <SubHeading>Capital rows</SubHeading>
-          <FoldedList items={capital} limit={CARD_LIMIT} label="Show all" className="space-y-2" render={(r) => <CapitalCard key={r.id} row={r} />} />
-        </div>
-      ) : null}
-      {controls.length ? (
-        <div className="space-y-2">
-          <SubHeading>Control clauses</SubHeading>
-          <FoldedList items={controls} limit={CARD_LIMIT} label="Show all" className="space-y-2" render={(c) => <ControlCard key={c.id} control={c} />} />
-        </div>
-      ) : null}
-      {designations.length ? (
-        <div className="space-y-2">
-          <SubHeading note="standing, not money">Designations</SubHeading>
-          <FoldedList items={designations} limit={CARD_LIMIT} label="Show all" className="space-y-2" render={(d) => <DesignationCard key={d.id} d={d} />} />
-        </div>
-      ) : null}
+    <div className={`min-w-0 rounded-md border border-dashed border-border-strong p-3 ${columnRows}`}>
+      <div className="space-y-2">
+        <h3 id="no-stage" className="scroll-mt-24 font-display text-base font-semibold">
+          No stage recorded
+        </h3>
+        <p className="text-xs leading-5 text-faint">These name {payload.nameEn} but record no stage, so the lattice cannot place them.</p>
+      </div>
+      <div className="space-y-2">
+        {capital.length ? (
+          <>
+            <SubHeading>Capital rows</SubHeading>
+            <FoldedList items={capital} limit={capN} label="Show all" className="space-y-2" render={(r) => <CapitalCard key={r.id} row={r} />} />
+          </>
+        ) : null}
+      </div>
+      <div className="space-y-2">
+        {controls.length ? (
+          <>
+            <SubHeading>Control clauses</SubHeading>
+            <FoldedList items={controls} limit={ctlN} label="Show all" className="space-y-2" render={(c) => <ControlCard key={c.id} control={c} />} />
+          </>
+        ) : null}
+      </div>
+      <div className="space-y-2">
+        {designations.length ? (
+          <>
+            <SubHeading note="standing, not money">Designations</SubHeading>
+            <FoldedList items={designations} limit={desN} label="Show all" className="space-y-2" render={(d) => <DesignationCard key={d.id} d={d} />} />
+          </>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -249,10 +277,24 @@ export function RecordsByStage({ payload }: { payload: DossierPayload }) {
   return (
     <section id="records" className="scroll-mt-24">
       <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Records by stage</h2>
-      <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
-        A designation is a government&apos;s recognition of a project under a named scheme. It records standing, not money, and covers only the stages and materials the designation names. A project is the registry record of the site or venture. Shared stage codes are not a finding.
-      </p>
-      <div className="mt-5 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:[grid-template-columns:repeat(auto-fill,minmax(13.5rem,1fr))]">
+      {/* Phones: one column of stages, so a row of jump links; each targets the stage's one id. */}
+      <nav aria-label="Jump to a stage" className="mt-4 flex flex-wrap gap-2 lg:hidden">
+        {payload.stages.map((st) => (
+          <a
+            key={st.id}
+            href={`#stage-${st.id}`}
+            className={`inline-flex min-h-11 items-center rounded-full border px-3.5 text-sm hover:text-foreground ${st.empty ? "border-border text-faint" : "border-border-strong text-muted"}`}
+          >
+            {stageShortLabels[st.id]}
+          </a>
+        ))}
+        {hasUnstaged ? (
+          <a href="#no-stage" className="inline-flex min-h-11 items-center rounded-full border border-dashed border-border-strong px-3.5 text-sm text-muted hover:text-foreground">
+            No stage recorded
+          </a>
+        ) : null}
+      </nav>
+      <div className="mt-5 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:gap-y-0 lg:[grid-template-columns:repeat(auto-fill,minmax(13.5rem,1fr))]">
         {filled.map((s) => (
           <StageColumn key={s.id} stage={s} />
         ))}
@@ -272,6 +314,9 @@ export function RecordsByStage({ payload }: { payload: DossierPayload }) {
           .
         </p>
       ) : null}
+      <p className="mt-6 max-w-3xl text-sm leading-6 text-muted">
+        A designation is a government&apos;s recognition of a project under a named scheme. It records standing, not money, and covers only the stages and materials the designation names. A project is the registry record of the site or venture. Shared stage codes are not a finding.
+      </p>
 
       {payload.registryProjects.length ? (
         <div className="mt-10">

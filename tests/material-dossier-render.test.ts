@@ -131,6 +131,67 @@ test("the future-date note is replaced by the dates when there are some", () => 
   assert.ok(body.includes("Dates stated after the as-of: 1 Feb 2027"));
 });
 
+// --- §5.3, §7: the records grid, the phone chips and the fold rule --------------------------------
+
+/** The `#records` markup, split into one string per stage column (the heading id opens each). */
+const columnsOf = (markup: string) => markup.slice(markup.indexOf('id="records"')).split(/<div class="(?:dossier-stage|min-w-0 rounded-md border border-dashed)/).slice(1);
+
+test("every records column carries the three labelled rows in order, and the columns are subgrid rows on desktop", () => {
+  for (const slug of slugs) {
+    const markup = html(payload(slug));
+    const cols = columnsOf(markup).filter((c) => c.includes("<h3"));
+    assert.ok(cols.length > 0, slug);
+    for (const col of cols.filter((c) => !c.includes('id="no-stage"'))) {
+      const a = col.indexOf("Capital rows");
+      const b = col.indexOf("Control clauses");
+      const c = col.indexOf(">Designations");
+      assert.ok(a > 0 && b > a && c > b, `${slug}: row order`);
+    }
+  }
+  assert.ok(html(payload("tungsten")).includes("lg:grid-rows-subgrid"));
+});
+
+test("phones get a stage-jump chip per stage that links, and never carries, the stage's one id", () => {
+  for (const slug of slugs) {
+    const p = payload(slug);
+    const markup = html(p);
+    const nav = markup.slice(markup.indexOf('aria-label="Jump to a stage"'), markup.indexOf("</nav>", markup.indexOf('aria-label="Jump to a stage"')));
+    assert.ok(nav.includes("lg:hidden"), `${slug}: chips are phone-only`);
+    for (const stage of p.stages) {
+      assert.equal(count(nav, `href="#stage-${stage.id}"`), 1, `${slug} chip ${stage.id}`);
+      assert.equal(count(markup, `id="stage-${stage.id}"`), 1, `${slug} id ${stage.id}`);
+    }
+  }
+});
+
+test("a column with more than six cards shows six and folds the rest behind Show all N, without losing a card", () => {
+  const p = payload("rare-earth-elements");
+  const markup = html(p);
+  const cards = (col: string) => count(col, "<li class=\"rounded-md border border-border bg-card p-3 text-sm\">");
+  for (const col of columnsOf(markup).filter((c) => c.includes("<h3") && !c.includes('id="no-stage"'))) {
+    const id = /id="stage-([a-z_]+)"/.exec(col)?.[1];
+    const stage = p.stages.find((s) => s.id === id)!;
+    const total = stage.capital.length + stage.options.length + stage.ended.length + stage.controls.length + stage.designations.length;
+    const toggles = [...col.matchAll(/<summary[^>]*>Show all (\d+)<\/summary>/g)];
+    // Every card of the column is in the markup, and the folded ones sit inside a disclosure.
+    assert.ok(cards(col) >= total, `${id}: cards kept`);
+    const open = col.replace(/<details[\s\S]*?<\/details>/g, "");
+    if (total > 6) {
+      assert.ok(toggles.length > 0, `${id}: folds`);
+      assert.ok(cards(open) <= 6 + stage.capital.reduce((n, r) => n + r.parts.length, 0), `${id}: at most six visible`);
+    } else assert.equal(toggles.length, 0, `${id}: nothing to fold`);
+  }
+});
+
+test("the explanatory line sits once, under the grid", () => {
+  for (const slug of slugs) {
+    const markup = html(payload(slug));
+    const line = "A designation is a government";
+    assert.equal(count(text(markup), line), 1, slug);
+    assert.ok(markup.indexOf(line) > markup.lastIndexOf('id="stage-'), `${slug}: after the last stage heading`);
+  }
+});
+
 // --- AC-17, AC-18: no framing, no private drafts --------------------------------------------------
 
 test("no framing quote, framing category label or framing count is rendered", () => {

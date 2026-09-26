@@ -45,11 +45,11 @@ export function FoldedList<T>({ items, limit, label, render, className }: { item
   const rest = items.slice(limit);
   return (
     <>
-      <ul className={className}>{shown.map(render)}</ul>
+      {shown.length ? <ul className={className}>{shown.map(render)}</ul> : null}
       {rest.length ? (
         <details className="mt-2 group">
           <summary className="cursor-pointer font-display text-xs font-semibold text-accent hover:text-accent-strong">
-            {label} ({items.length})
+            {label} {items.length}
           </summary>
           <ul className={cn("mt-2", className)}>{rest.map(render)}</ul>
         </details>
