@@ -117,11 +117,32 @@ function partyName(orgIds: readonly string[], asStated: string | null): string |
   return asStated;
 }
 
+function partyNames(c: FinancialCommitment): string[] {
+  return [partyName(c.providerOrgIds, c.provider), partyName(c.recipientOrgIds, c.recipient)].filter((p): p is string => Boolean(p));
+}
+
+/** "National Wealth Fund to Tungsten West"; a missing party is left out, never guessed. */
+export function commitmentTitle(c: FinancialCommitment): string {
+  const parties = partyNames(c);
+  return parties.length === 2 ? `${parties[0]} to ${parties[1]}` : (parties[0] ?? c.project ?? c.id);
+}
+
+/** A row's own amount, in its own currency and qualifier, formatted for display and never converted; null when none is stated. */
+export function amountView(c: FinancialCommitment): LatticeCommitment["amount"] {
+  return c.amount
+    ? {
+        qualifier: QUALIFIER_WORD[c.amount.qualifier] ?? null,
+        currency: c.amount.currency,
+        value: formatDecimalCompact(c.amount.value),
+        asStated: c.amount.amountAsStated,
+      }
+    : null;
+}
+
 function commitmentRecord(c: FinancialCommitment, field: CapitalField): LatticeCommitment {
   const actor = commitmentActor(c)!;
   const status = currentFinancialStatus(c);
   const dated = [...c.financialStatusHistory].reverse().find((e) => e.status === status && e.date);
-  const parties = [partyName(c.providerOrgIds, c.provider), partyName(c.recipientOrgIds, c.recipient)].filter(Boolean);
   return {
     kind: "commitment",
     id: c.id,
@@ -129,16 +150,9 @@ function commitmentRecord(c: FinancialCommitment, field: CapitalField): LatticeC
     actor,
     actorShort: jurisdictionShort[actor],
     field,
-    title: parties.length === 2 ? `${parties[0]} to ${parties[1]}` : (parties[0] ?? c.project ?? c.id),
-    parties: parties.join(" to "),
-    amount: c.amount
-      ? {
-          qualifier: QUALIFIER_WORD[c.amount.qualifier] ?? null,
-          currency: c.amount.currency,
-          value: formatDecimalCompact(c.amount.value),
-          asStated: c.amount.amountAsStated,
-        }
-      : null,
+    title: commitmentTitle(c),
+    parties: partyNames(c).join(" to "),
+    amount: amountView(c),
     instrument: financialInstrumentLabels[c.instrument],
     status: dated?.date ? `${financialStatusLabels[status]}, ${formatDate(dated.date)}` : financialStatusLabels[status],
   };
@@ -192,7 +206,7 @@ export function buildLatticeModel(
   controls: readonly ControlMeasure[] = getAllControlMeasures(),
   designations: readonly ProjectDesignation[] = getAllProjectDesignations(),
 ): LatticeModel {
-  const map = stageResponseMap(asOf, all, controls);
+  const map = stageResponseMap(asOf, all, controls, designations);
   const commitmentById = new Map(all.map((c) => [c.id, c]));
   const controlById = new Map(controls.map((m) => [m.id, m]));
   const designationById = new Map(designations.map((d) => [d.id, d]));
