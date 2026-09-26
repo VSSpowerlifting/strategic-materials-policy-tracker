@@ -8,21 +8,21 @@ const CARD_LIMIT = 6;
 
 // --- The band: the material's row of the lattice, opened out --------------------------------------
 
-function BandColumn({ stage }: { stage: StageBlock }) {
-  const { counts, actors } = stage;
+type BandCounts = { commitments: number; controls: number; designations: number };
+type BandActors = { commitments: string[]; controls: string[]; designations: string[] };
+
+/** One column of the band: a stage, or the records that name the material and record no stage. */
+function BandCell({ label, short, counts, actors, marks, attr }: { label: string; short: string; counts: BandCounts; actors: BandActors; marks: boolean; attr: Record<string, string> }) {
   const marked = counts.commitments + counts.controls + counts.designations > 0;
   return (
-    <li
-      data-stage={stage.id}
-      className="flex items-center gap-4 rounded-md px-2 py-2.5 lg:flex-col lg:items-center lg:gap-1 lg:px-1 lg:py-3 lg:text-center"
-    >
+    <li {...attr} className="flex items-center gap-4 rounded-md px-2 py-2.5 lg:flex-col lg:items-center lg:gap-1 lg:px-1 lg:py-3 lg:text-center">
       <span className="w-28 shrink-0 font-display text-sm font-semibold text-foreground lg:w-auto lg:text-xs">
-        <span className="lg:hidden">{stage.label}</span>
-        <span className="hidden lg:inline">{stageShortLabels[stage.id]}</span>
+        <span className="lg:hidden">{label}</span>
+        <span className="hidden lg:inline">{short}</span>
       </span>
       {marked ? (
         <>
-          <CellMarks counts={counts} className="mx-0 lg:mx-auto" />
+          {marks ? <CellMarks counts={counts} className="mx-0 lg:mx-auto" /> : null}
           <span className="min-w-0 space-y-1 text-xs leading-5 text-muted">
             {(
               [
@@ -50,13 +50,22 @@ function BandColumn({ stage }: { stage: StageBlock }) {
   );
 }
 
+const shortCodes = (xs: (string | null)[]) => [...new Set(xs.filter((x): x is string => !!x))].sort();
+
 export function SupplyChainBand({ payload }: { payload: DossierPayload }) {
-  const n = payload.stages.length;
+  const n = payload.stages.length + 1;
+  const un = payload.unstaged;
+  const unCounts = { commitments: un.capital.length, controls: un.controls.length, designations: un.designations.length };
+  const unActors = {
+    commitments: shortCodes(un.capital.map((r) => r.actorShort)),
+    controls: shortCodes(un.controls.map((c) => c.issuerShort)),
+    designations: shortCodes(un.designations.map((d) => d.programmeActorShort)),
+  };
   return (
     <section id="supply-chain" className="scroll-mt-24">
       <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Supply chain, stage by stage</h2>
       <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
-        {payload.nameEn}&apos;s row of the lattice: what the record places at each stage. Counts are records per stage, never money; a record coded to several stages is counted at each, so the stages have no total.
+        {payload.nameEn}&apos;s row of the lattice: what the record places at each stage. Counts are records per stage, never money; a record coded to several stages is counted at each, so the stages have no total. The last column holds records that name {payload.nameEn} and record no stage, so the lattice cannot place them.
       </p>
       <ul
         className="mt-4 grid gap-1 rounded-lg border border-border bg-card/50 p-2 lg:[grid-template-columns:repeat(var(--stages),minmax(0,1fr))]"
@@ -64,15 +73,10 @@ export function SupplyChainBand({ payload }: { payload: DossierPayload }) {
         aria-label={`${payload.nameEn} by supply-chain stage`}
       >
         {payload.stages.map((s) => (
-          <BandColumn key={s.id} stage={s} />
+          <BandCell key={s.id} label={s.label} short={stageShortLabels[s.id]} counts={s.counts} actors={s.actors} marks attr={{ "data-stage": s.id }} />
         ))}
+        <BandCell label="No stage recorded" short="No stage" counts={unCounts} actors={unActors} marks={false} attr={{ "data-no-stage": "true" }} />
       </ul>
-      {payload.unstaged.capital.length + payload.unstaged.controls.length + payload.unstaged.designations.length > 0 ? (
-        <p className="mt-2 text-xs leading-5 text-faint">
-          Also recorded for {payload.nameEn} with no stage: {countWord(payload.unstaged.capital.length, "capital row", "capital rows")}, {countWord(payload.unstaged.controls.length, "control clause", "control clauses")},{" "}
-          {countWord(payload.unstaged.designations.length, "designation", "designations")}. They are in the last column of the records below.
-        </p>
-      ) : null}
     </section>
   );
 }

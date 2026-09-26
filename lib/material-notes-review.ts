@@ -50,8 +50,11 @@ const allUnverified = { statusSummary: UNVERIFIED, chinaPositionNote: UNVERIFIED
  * check names each one.
  *
  * What was checked on 2026-09-26, and why nothing entered:
- * - Every `statusSummary` opens with a characterization ("The spine of the contest.", "A hard-metal and defense
- *   material.") that no coded record states, so the whole field fails whatever its later sentences say.
+ * - Every `statusSummary` holds at least one sentence that no coded record states, so the whole field fails: a
+ *   characterization ("The spine of the contest.", "A hard-metal and defense material.", "A semiconductor chokepoint
+ *   material.") or a technical claim (dysprosium's "critical for traction motors and defense actuators"). Where a
+ *   first sentence is a coded fact (dysprosium and terbium: named in China's 4 April 2025 controls), a later sentence
+ *   still fails.
  * - `src-usgs-news-2025`, the only USGS source in the registry, was read in full (the page's main text). It
  *   announces the 2025 List of Critical Minerals and states no China share for tungsten, gallium, germanium,
  *   graphite or antimony. Its one figure, that the United States imported 80% of the rare earth elements it used in

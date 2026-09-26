@@ -62,11 +62,28 @@ test("the rendered figures are exactly the payload's single-row figures, once ea
   }
 });
 
-test("tungsten and rare earths render no figure the rows do not state", () => {
-  const tungsten = moneyAttributes(renderToStaticMarkup(createElement(CapitalControls, { payload: payload("tungsten") })));
-  assert.deepEqual([...tungsten].sort(), ["about JPY 2 billion", "about JPY 7.5 billion", "CAD 172,000", "GBP 36 million", "up to GBP 35 million", "up to GBP 71 million"].sort());
+test("tungsten and rare earths render no figure the rows do not state, in attributes or in plain text", () => {
+  const tungstenSection = renderToStaticMarkup(createElement(CapitalControls, { payload: payload("tungsten") }));
+  assert.deepEqual([...moneyAttributes(tungstenSection)].sort(), ["about JPY 2 billion", "about JPY 7.5 billion", "CAD 172,000", "GBP 36 million", "up to GBP 35 million", "up to GBP 71 million"].sort());
+  // The whole tungsten page, as text: no sum of the two JPY grants, however it is written.
+  const tungsten = text(html(payload("tungsten")));
+  for (const banned of ["9.5 billion", "9,500,000,000", "9.5 bn", "9,500 million", "9500 million"]) assert.ok(!tungsten.includes(banned), banned);
   const rare = text(html(payload("rare-earth-elements")));
-  for (const banned of ["JPY 18.3 billion", "18,300,000,000", "USD 175 million", "175,000,000"]) assert.ok(!rare.includes(banned), banned);
+  for (const banned of ["JPY 18.3 billion", "18,300,000,000", "18.3 billion", "USD 175 million", "175,000,000"]) assert.ok(!rare.includes(banned), banned);
+});
+
+test("apart from a row's own figure and its source wording, the money block prints no currency figure", () => {
+  // A sum written as plain text (no data-money, no banned word) would survive every other check, so strip what a row
+  // is allowed to print (its figure, its source wording, and a part's own figure in its "Part:" line) and look at the rest.
+  const currency = /\b(USD|GBP|CAD|JPY|EUR|AUD|INR)\b[^A-Za-z]{0,3}\d/;
+  for (const slug of slugs) {
+    const section = renderToStaticMarkup(createElement(CapitalControls, { payload: payload(slug) }));
+    const rest = section
+      .replace(/<span data-money=[^>]*>[\s\S]*?<\/strong><\/span>/g, " ")
+      .replace(/<span data-as-stated[^>]*>[\s\S]*?<\/span>/g, " ")
+      .replace(/<p class="[^"]*">Part: [^<]*<\/p>/g, " ");
+    assert.ok(!currency.test(text(rest)), `${slug}: ${currency.exec(text(rest))?.[0]}`);
+  }
 });
 
 // --- AC-12: URL behavior, no script ---------------------------------------------------------------
@@ -80,6 +97,7 @@ test("each stage id appears on exactly one element, and every section renders wi
     assert.ok(!markup.includes("<script"), "no client script");
     // The band carries data-stage and no id; the id lives once, in the records.
     for (const stage of p.stages) assert.equal(count(markup, `data-stage="${stage.id}"`), 1, `${slug} band ${stage.id}`);
+    assert.equal(count(markup, 'data-no-stage="true"'), 1, `${slug} band: one no-stage column`);
   }
   // Every vocabulary stage id that has a column is spelled as the vocabulary spells it.
   for (const stage of payload("tungsten").stages) assert.ok((SUPPLY_CHAIN_STAGES as readonly string[]).includes(stage.id));

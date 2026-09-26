@@ -168,6 +168,7 @@ export type DesignationView = {
   asStated: string | null;
   programme: string;
   programmeActor: string;
+  programmeActorShort: string;
   status: StatusLine;
   holders: string[];
   materials: string[];
@@ -488,6 +489,7 @@ function designationView(d: ProjectDesignation, ctx: Ctx, noStage: boolean): Des
     asStated: project && project.name !== d.projectNameAsStated ? d.projectNameAsStated : null,
     programme: programme?.name ?? d.programmeId,
     programmeActor: programme ? jurisdictionLabels[programme.actor] : "",
+    programmeActorShort: programme ? jurisdictionShort[programme.actor] : "",
     status: entry
       ? entry.date
         ? { text: `${designationStatusLabels[entry.status]}, status date ${formatDate(entry.date)}`, date: entry.date, dated: true }

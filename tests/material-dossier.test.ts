@@ -178,14 +178,12 @@ test("the money block shows each row's own figure exactly once, for every materi
   }
 });
 
-test("no computed figure: nothing equals a sum of rows, and a summing variant would be caught", () => {
-  const tungsten = moneyRows(dossier("tungsten")).flatMap((r) => (r.amount ? [r.amount.text] : []));
+test("no computed figure among the payload's figures: nothing equals a sum of rows", () => {
+  const figures = (slug: string) => moneyRows(dossier(slug)).flatMap((r) => (r.amount ? [r.amount.text] : []));
+  const tungsten = figures("tungsten");
   assert.ok(!tungsten.some((t) => t.includes("9,500,000,000") || t.includes("9.5 billion")), "no JPY 9.5 billion");
-  const rare = moneyRows(dossier("rare-earth-elements")).flatMap((r) => (r.amount ? [r.amount.text] : []));
+  const rare = figures("rare-earth-elements");
   for (const banned of ["JPY 18.3 billion", "JPY 18,300,000,000", "USD 175 million", "USD 175,000,000"]) assert.ok(!rare.some((t) => t.includes(banned)), banned);
-  // The comparison is strict: a variant that added the two JPY grants would add a figure the seed rows do not have.
-  const variant = [...tungsten, "about JPY 9.5 billion"].sort();
-  assert.notDeepEqual(variant, [...tungsten].sort());
 });
 
 // --- AC-7: nesting --------------------------------------------------------------------------------
