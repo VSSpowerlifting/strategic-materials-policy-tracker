@@ -183,6 +183,18 @@ test("a column with more than six cards shows six and folds the rest behind Show
   }
 });
 
+test("Project registry is a labelled block from lg up and a disclosure below it, with the same facts in each", () => {
+  const p = payload("tungsten");
+  const markup = html(p);
+  const withRegistry = p.stages.flatMap((s) => s.designations).filter((d) => d.registry.locations.length || d.registry.sponsors.length);
+  assert.ok(withRegistry.length > 0);
+  const disclosures = [...markup.matchAll(/<details class="mt-2 lg:hidden"><summary[^>]*>Project registry<\/summary>([\s\S]*?)<\/details>/g)].map((m) => text(m[1]));
+  const blocks = [...markup.matchAll(/<div class="mt-2 hidden lg:block"><p[^>]*>Project registry<\/p>([\s\S]*?)<\/div><\/div>/g)].map((m) => text(m[1]));
+  assert.equal(disclosures.length, withRegistry.length);
+  assert.deepEqual(blocks, disclosures);
+  for (const d of withRegistry) assert.ok(disclosures.some((t) => d.registry.locations.every((l) => t.includes(text(l)))), d.id);
+});
+
 test("the explanatory line sits once, under the grid", () => {
   for (const slug of slugs) {
     const markup = html(payload(slug));

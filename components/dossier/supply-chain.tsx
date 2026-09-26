@@ -135,6 +135,32 @@ export function ControlCard({ control }: { control: ControlView }) {
   );
 }
 
+/**
+ * The project's registry facts, secondary to the designation. A labelled block from `lg` up and a disclosure
+ * below it (spec 5.3, 7). Two elements, one shown per width, so it works without a script or `::details-content`.
+ */
+function RegistryBlock({ registry }: { registry: DesignationView["registry"] }) {
+  const facts = (
+    <div className="space-y-1 text-xs leading-5 text-muted">
+      {registry.locations.length ? <p>Locations: {registry.locations.join("; ")}</p> : null}
+      {registry.sponsors.length ? <p>Sponsors: {registry.sponsors.join(", ")}</p> : null}
+    </div>
+  );
+  const label = "font-mono text-[11px] uppercase tracking-[0.1em] text-faint";
+  return (
+    <>
+      <details className="mt-2 lg:hidden">
+        <summary className={`cursor-pointer hover:text-foreground ${label}`}>Project registry</summary>
+        <div className="mt-1.5">{facts}</div>
+      </details>
+      <div className="mt-2 hidden lg:block">
+        <p className={label}>Project registry</p>
+        <div className="mt-1.5">{facts}</div>
+      </div>
+    </>
+  );
+}
+
 export function DesignationCard({ d }: { d: DesignationView }) {
   return (
     <li className="rounded-md border border-border bg-card p-3 text-sm">
@@ -157,15 +183,7 @@ export function DesignationCard({ d }: { d: DesignationView }) {
       {d.registry.stageNote ? <p className="mt-1.5 text-xs leading-5 text-faint">{d.registry.stageNote}</p> : null}
       {d.registry.untracked.length ? <p className="mt-1 text-xs leading-5 text-faint">Project record also names: {d.registry.untracked.join(", ")}, not a tracked material</p> : null}
       {d.noStageReason ? <p className="mt-1 text-xs leading-5 text-faint">{d.noStageReason}</p> : null}
-      {d.registry.locations.length || d.registry.sponsors.length ? (
-        <details className="mt-2">
-          <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.1em] text-faint hover:text-foreground">Project registry</summary>
-          <div className="mt-1.5 space-y-1 text-xs leading-5 text-muted">
-            {d.registry.locations.length ? <p>Locations: {d.registry.locations.join("; ")}</p> : null}
-            {d.registry.sponsors.length ? <p>Sponsors: {d.registry.sponsors.join(", ")}</p> : null}
-          </div>
-        </details>
-      ) : null}
+      {d.registry.locations.length || d.registry.sponsors.length ? <RegistryBlock registry={d.registry} /> : null}
     </li>
   );
 }
@@ -236,13 +254,11 @@ function NoStageColumn({ payload }: { payload: DossierPayload }) {
   const [capN, ctlN, desN] = shownPerRow([capital.length, controls.length, designations.length]);
   return (
     <div className={`min-w-0 rounded-md border border-dashed border-border-strong p-3 ${columnRows}`}>
+      <h3 id="no-stage" className="scroll-mt-24 font-display text-base font-semibold">
+        No stage recorded
+      </h3>
       <div className="space-y-2">
-        <h3 id="no-stage" className="scroll-mt-24 font-display text-base font-semibold">
-          No stage recorded
-        </h3>
         <p className="text-xs leading-5 text-faint">These name {payload.nameEn} but record no stage, so the lattice cannot place them.</p>
-      </div>
-      <div className="space-y-2">
         {capital.length ? (
           <>
             <SubHeading>Capital rows</SubHeading>
