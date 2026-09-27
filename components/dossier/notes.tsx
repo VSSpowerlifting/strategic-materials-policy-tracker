@@ -11,7 +11,7 @@ export function NotesSection({ payload }: { payload: DossierPayload }) {
   return (
     <section id="notes" className="scroll-mt-24">
       <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Editorial notes (not coded records)</h2>
-      <p className="mt-3 text-sm leading-6 text-muted">Written summaries kept from the earlier page. The coded records above are the evidence.</p>
+      <p className="mt-3 text-sm leading-6 text-muted">Written summaries kept from the earlier page, not coded records. A summary appears only if it passed review against the records above; the downstream-use list is exempt from that review and has not been checked against a source.</p>
       <div className="mt-5 space-y-5">
         {fields.map((f) => (
           <div key={f.field}>

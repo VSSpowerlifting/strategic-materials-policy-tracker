@@ -1,8 +1,75 @@
 # Project state
 
-_Last updated: 2026-09-25 (release reconciliation: PRs #6 and #7 are merged to `main` and deployed to production; the earlier status line below is kept for history)._
+_Last updated: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, not merged; the 2026-09-25 release reconciliation below is unchanged)._
 
 _Previous status line (2026-09-25, before the merges): Lattice Register milestone 1 on `feat/lattice-register-m1`, draft PR against `feat/capital-intelligence-v06`, not merged; v0.6 PR #6 still open._
+
+## Latest session: Lattice Register, milestone 2 (material dossiers)
+
+Branch `feat/lattice-dossier-m2` from `main` at `8ff7315`; draft PR #9
+(<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/9>), not merged, not deployed. Worktree
+`/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/smpt-dossier-m2`. Implements the frozen spec
+`SMPT-M2-dossier-spec-v3.md` (SHA-256 `29843dc57aa27ed136ea0195a1622f837fba1e8645a5961b3532f92e21675bac`, kept outside the
+repo and unchanged). This section was added at Ben's direction (the spec's D12/U7 reserve `PROJECT_STATE.md` for that).
+
+### Implemented state
+
+- `/materials/[slug]` is one server-rendered template for all 11 materials, with no client script. Sections: supply-chain
+  band, records by stage, capital and controls, timeline, events, cited-by, editorial notes.
+- Code: `lib/material-dossier.ts` (payload builder), `lib/material-notes-review.ts` (review ledger), `components/dossier/*`,
+  `app/materials/[slug]/page.tsx` (thin wrapper), `tests/material-dossier.test.ts` and `tests/material-dossier-render.test.ts`.
+  Small edits outside the spec's new-files list: `lib/lattice.ts` (exports `amountView` and `commitmentTitle`),
+  `lib/capital-intelligence.ts` (`stageResponseMap` takes an optional `designations` argument, default the seed),
+  `components/lattice/lattice.tsx` (CTA copy and `#stage-<id>` link), `app/globals.css` (`:target` and `:has` stage focus).
+  No change under `data/`, `lib/types`, `lib/site`, `lib/search`, `lib/export`, `app/api` or `app/methodology`.
+- Money is list-only: each row shows its own stated amount and currency, with no sum, split or conversion (static test
+  bans `totalCommitments` and `lib/decimal` in dossier source).
+- The lattice places designations, not projects. Registry projects with no designation are listed apart.
+- Candidate isolation: dossier code imports only seed loaders; the render-level leak test passes.
+- Editorial notes are gated by `lib/material-notes-review.ts` (default omit). All 33 gated note fields (statusSummary,
+  chinaPositionNote and diversificationNote for 11 materials) are currently `show:false`, so none renders.
+
+### Approved differences from the frozen spec (maintainer decisions; the spec is unchanged)
+
+1. Empty stages are one collapsed "None recorded at:" line at every width (each name keeps its `#stage-<id>` anchor), not
+   "None recorded" columns (spec §5.3, §6.2). The band still shows "None recorded" per empty stage. The approved comp also
+   shows only populated stages in its records grid.
+2. Row labels (Capital rows / Control clauses / Designations) repeat in every column instead of one label gutter, because the
+   records grid wraps.
+3. The records grid wraps (auto-fill, minimum 13.5rem) rather than one fixed column per stage.
+4. Cards are sub-lists per column row; a record coded to several stages appears at each (spec §8.2).
+5. "Show all N" applies per column budget: more than six cards shows six in row order and folds the rest on their row.
+
+Also recorded in the PR: Hemerdon "tin, not a tracked material" comes from the project record, not the designation; the
+inherited "listed under the group, not under each element" sentence was replaced because the data contradicts it; the
+comp's per-currency summary table is replaced by the list-only money block; comp source count 27 vs 28 here.
+
+### Deferred: editorial-note source review
+
+- All 33 gated note fields stay omitted until each has a passing ledger entry: every claim must resolve to a coded record or
+  to a source in the registry that was read, with a locator and read date.
+- `chinaPositionNote`: the USGS page in the registry (`src-usgs-news-2025`) was read in full on 2026-09-26 and states no
+  China share for tungsten, gallium, germanium, graphite or antimony. The IEA critical-minerals report
+  (`src-iea-critical-minerals`) was **not read**, so its rare-earth, NdFeB, heavy-rare-earth, Nd/Pr and graphite claims are
+  unverified. `statusSummary` and `diversificationNote` each contain sentences no coded record states.
+- The "Typical downstream uses" lists are exempt from the ledger and were **not source-verified**. The Editorial notes intro
+  says so.
+- Needed: new registry sources (USGS Mineral Commodity Summaries, the full IEA outlook, company releases), then a review
+  pass per field. That is a data tranche, not part of M2.
+
+### Checks and limits
+
+- On the final code before this note edit: `validate`, `lint`, `typecheck` clean; 347 of 347 tests; production build
+  exit 0 (878 pages); `git diff --check` clean; `check:links` 87 sources, 70 ok, 16 redirect, 1 blocked (meti.go.jp 403),
+  0 dead. Two `canada.ca` sources (`src-nrcan-cmrdd-2024`, `src-nrcan-cms-2022`) redirect to canada.ca's 404 page: existing
+  data, follow-up.
+- Visual review with headless Chrome at 1440 px and true 390 px (DevTools emulation), plus an earlier browser-pane sweep of
+  all 11 dossiers at 390.
+- Not run: the file-level `cand-` scan of `.next` (blocked by the sandbox permission layer); substituted with a served-HTML
+  count of 0 across all 11 dossiers plus the leak test. The 29 individual candidate ids were not re-scanned on the final
+  build because the private fixture copy was deleted (the original is untouched).
+- Not done: main-checkout `graphify update`; deployment. CI status is recorded in the PR, not here.
+- Open for Ben: merge decision on PR #9; the source tranche above.
 
 ## Release reconciliation: v0.6 and Lattice Register M1 are on `main` and in production
 

@@ -257,6 +257,9 @@ test("the shipped ledger omits every field it has not verified, and downstream l
     const markup = html(p);
     assert.equal(count(markup, "data-note-field="), 1, slug);
     assert.ok(markup.includes('data-note-field="downstreamIndustries"'));
+    // The intro must not present the exempt downstream list as evidence or as source-checked.
+    assert.ok(markup.includes("exempt from that review and has not been checked against a source"), slug);
+    assert.ok(!markup.includes("are the evidence"), slug);
   }
   for (const slug of slugs) for (const f of NOTE_FIELDS) assert.equal(renderableNote(slug, f), null, `${slug} ${f}`);
 });
