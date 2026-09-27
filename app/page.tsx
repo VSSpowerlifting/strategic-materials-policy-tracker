@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { LatticeLegend, LatticeOverview } from "@/components/lattice/lattice";
 import { ControlGapNotice, NotPlacedSentence } from "@/components/lattice/not-on-lattice";
 import { CapitalAndControl, DatedRegister, RecordCounts } from "@/components/overview/sections";
@@ -5,6 +6,25 @@ import { buildLatticeModel } from "@/lib/lattice";
 import { formatDateLong } from "@/lib/format";
 import { site } from "@/lib/site";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
+
+const socialDescription =
+  "Explore source-linked government controls, public commitments and project designations across rare earths and strategic materials.";
+
+export const metadata: Metadata = {
+  openGraph: {
+    type: "website",
+    url: site.url,
+    siteName: site.name,
+    title: site.name,
+    description: socialDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.name,
+    description: socialDescription,
+    images: ["/opengraph-image"],
+  },
+};
 
 /** The node shown before a visitor chooses one (falls back to the first marked cell if it holds nothing). */
 const PREFERRED = { slug: "tungsten", stage: "processing" } as const;
