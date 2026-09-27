@@ -200,6 +200,75 @@
   }
 }
 
+/*
+ * Material dossier stage focus. A stage id (`#stage-processing`) sits on one element, the stage's heading in
+ * "Records by stage". Its column is highlighted through :target, and the matching column of the supply-chain
+ * band, which holds no id, through :has on the page. Without :has only the records column highlights.
+ */
+@layer components {
+  .dossier-stage:has(> :target),
+  .dossier-stage-name:target {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 0.375rem;
+  }
+  .dossier:has(#stage-exploration:target) [data-stage="exploration"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-mining:target) [data-stage="mining"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-separation:target) [data-stage="separation"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-processing:target) [data-stage="processing"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-refining:target) [data-stage="refining"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-component_manufacturing:target) [data-stage="component_manufacturing"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-final_manufacturing:target) [data-stage="final_manufacturing"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-recycling:target) [data-stage="recycling"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-stockpiling:target) [data-stage="stockpiling"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-research_development:target) [data-stage="research_development"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+  .dossier:has(#stage-cross_cutting:target) [data-stage="cross_cutting"] {
+    background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .flow-line,
   .flow-line--slow,

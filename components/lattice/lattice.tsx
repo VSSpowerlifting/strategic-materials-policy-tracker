@@ -307,7 +307,7 @@ function MobileMaterialDetail({ id, model, filter, materialId }: { id: string; m
         href={`/materials/${material.slug}`}
         className="mt-3 flex items-center justify-center rounded-md bg-paper px-4 py-2.5 font-display text-sm font-semibold text-paper-foreground hover:bg-paper/90"
       >
-        Open the {material.nameEn.toLowerCase()} material page →
+        Open the {material.nameEn.toLowerCase()} dossier →
       </Link>
     </div>
   );
@@ -636,8 +636,8 @@ function RecordsPanel({ model, filter, selection }: { model: LatticeModel; filte
         <Link href="/capital" className="flex items-center justify-center rounded-md bg-paper-foreground px-4 py-2.5 font-display text-sm font-semibold text-paper hover:bg-paper-foreground/90">
           Explore all capital rows
         </Link>
-        <Link href={`/materials/${material.slug}`} className="flex items-center justify-center rounded-md border border-paper-border px-4 py-2.5 font-display text-sm font-semibold hover:bg-paper-border/40">
-          Open the {material.nameEn.toLowerCase()} material page
+        <Link href={`/materials/${material.slug}#stage-${selection.stage}`} className="flex items-center justify-center rounded-md border border-paper-border px-4 py-2.5 font-display text-sm font-semibold hover:bg-paper-border/40">
+          Open the {material.nameEn.toLowerCase()} dossier
         </Link>
       </div>
     </aside>

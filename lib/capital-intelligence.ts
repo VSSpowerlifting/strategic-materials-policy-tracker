@@ -707,7 +707,12 @@ export type ResponseCell = {
  * A part is folded into its package only in a cell where the package is in the same field and covers that
  * material and stage, so a package never hides a part of it at a cell it does not cover.
  */
-export function stageResponseMap(asOf: string, all: readonly FinancialCommitment[] = getAllFinancialCommitments(), controls: readonly ControlMeasure[] = getAllControlMeasures()) {
+export function stageResponseMap(
+  asOf: string,
+  all: readonly FinancialCommitment[] = getAllFinancialCommitments(),
+  controls: readonly ControlMeasure[] = getAllControlMeasures(),
+  designations: readonly ProjectDesignation[] = getAllProjectDesignations(),
+) {
   const out = new Map<string, Map<SupplyChainStage, ResponseCell>>();
   const cell = (mat: string, stage: SupplyChainStage) => {
     if (!out.has(mat)) out.set(mat, new Map());
@@ -762,7 +767,7 @@ export function stageResponseMap(asOf: string, all: readonly FinancialCommitment
         if (status) x.controlStatuses[status] = (x.controlStatuses[status] ?? 0) + 1;
       }
   }
-  for (const d of getAllProjectDesignations()) {
+  for (const d of designations) {
     const actor = getProgrammeById(d.programmeId)?.actor;
     if (!actor) continue;
     for (const mat of d.materialIds)
