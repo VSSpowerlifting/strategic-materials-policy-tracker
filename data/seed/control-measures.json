@@ -1609,7 +1609,7 @@
     ],
     "materialAttribution": "tracked_only",
     "untrackedMaterialsAsStated": [],
-    "productScopeAsStated": "锑相关物项：锑矿及原料；金属锑及制品；锑的氧化物（纯度大于等于99.99%）；三甲基锑、三乙基锑及其他有机锑化合物（纯度大于99.999%）；锑的氢化物（纯度大于99.999%）；锑化铟；金锑冶炼分离技术。",
+    "productScopeAsStated": "锑相关物项：锑矿及原料；金属锑及制品；锑的氧化物（纯度大于等于99.99%）；三甲基锑、三乙基锑及其他有机锑化合物（纯度（无机元素基准）大于99.999%）；锑的氢化物（纯度大于99.999%，含在惰性气体或氢气中稀释的锑的氢化物）；锑化铟（具有以下所有特性：位错密度小于50个/平方厘米的单晶，以及纯度大于99.99999%的多晶）；金锑冶炼分离技术。",
     "productCodes": [
       {
         "system": "cn_customs",
@@ -1731,7 +1731,7 @@
         "note": "Stages read from the item list, which names items, not stages: ore and raw materials (锑矿及原料) sit at mining; metal, high-purity oxides, organic compounds, hydrides and indium antimonide at refining and processing; gold-antimony smelting and separation technology (金锑冶炼分离技术) at refining."
       }
     ],
-    "notes": null
+    "notes": "Item 1(1)6 introduces the indium-antimonide criteria with 具有以下所有特性 (\"having all of the following characteristics\") and then gives a dislocation-density limit for single crystal and a purity limit for polycrystal. The announcement does not state how the two criteria combine; productScopeAsStated gives the text as stated."
   },
   {
     "id": "ctl-cn-antimony-2024-superhard-licensing",
@@ -1751,7 +1751,7 @@
     "untrackedMaterialsAsStated": [
       "超硬材料相关物项 (superhard-materials items)"
     ],
-    "productScopeAsStated": "超硬材料相关物项：六面顶压机设备；六面顶压机专用关键零部件；微波等离子体化学气相沉积法（MPCVD）设备；金刚石窗口材料；用六面顶压机合成人造金刚石单晶或立方氮化硼单晶工艺技术；用于制造已列管的六面顶压机设备的技术。",
+    "productScopeAsStated": "超硬材料相关物项：六面顶压机设备（具有以下所有特性：专门设计或制造的X/Y/Z三轴六面同步加压的大型液压机，缸径尺寸大于等于500毫米或设计使用压力大于等于5千兆帕）；六面顶压机专用关键零部件，包括铰链梁、顶锤、合成压力大于5千兆帕的高压控制系统；微波等离子体化学气相沉积法（MPCVD）设备（具有以下所有特性：专门设计或制造的MPCVD设备，微波功率在10千瓦以上，且微波频率为915兆赫或2450兆赫）；金刚石窗口材料，包括曲面金刚石窗口材料，或具有以下全部特征的平面金刚石窗口材料：直径3英寸及以上的单晶或多晶，可见光透过率65%及以上；用六面顶压机合成人造金刚石单晶或立方氮化硼单晶工艺技术；用于制造已列管的六面顶压机设备的技术。",
     "productCodes": [
       {
         "system": "cn_customs",
