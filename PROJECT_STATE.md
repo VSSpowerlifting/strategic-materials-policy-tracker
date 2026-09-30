@@ -1,13 +1,35 @@
 # Project state
 
-_Last updated: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, not merged; the 2026-09-25 release reconciliation below is unchanged)._
+_Last updated: 2026-09-30 (removable `/events` filter chips, draft PR #13, not merged; M2 dossiers PR #9 merged 2026-09-27 as `a995980`)._
+
+_Previous status line: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, at the time not merged; the 2026-09-25 release reconciliation below is unchanged)._
 
 _Previous status line (2026-09-25, before the merges): Lattice Register milestone 1 on `feat/lattice-register-m1`, draft PR against `feat/capital-intelligence-v06`, not merged; v0.6 PR #6 still open._
 
-## Latest session: Lattice Register, milestone 2 (material dossiers)
+## Latest session: shadcn registry config and `/events` filter chips
 
-Branch `feat/lattice-dossier-m2` from `main` at `8ff7315`; draft PR #9
-(<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/9>), not merged, not deployed. Worktree
+Draft PR #13 (<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/13>), not merged. Two commits on
+top of `main` at `4d5e884`.
+
+- `fcfa0a6` adds `components.json` (new-york, neutral, lucide) with third-party shadcn registries (`@cult-ui`,
+  `@aceternity`, `@reactbits-starter`, `@reactbits-pro`; the ReactBits pair reads `REACTBITS_LICENSE_KEY`). `shadcn init`
+  was not run and no component was installed. `components/ui` is unchanged.
+- The second commit (amended; SHA is in the PR) replaces the active-filter text trail in `components/events-explorer.tsx`
+  with one removable chip per active filter (search, actor, mechanism, status, material, framing), built on the existing `Badge` and
+  `cn`. The URL params, native selects and "Clear filters" are unchanged. Each remove button has an `aria-label` and hands
+  focus to a neighbouring chip, or to the count line when none is left.
+- No new runtime dependencies, no `package.json` or lockfile change, no `app/globals.css` change.
+- Checks: `validate`, `lint`, `typecheck` clean; 347 of 347 tests; production build clean; Playwright desktop (1280) and
+  mobile (375) checks of removal by click and keyboard, clear-all, and no horizontal scroll. The 3 dev-console font-preload
+  warnings on `/events` also occur on the original code.
+- Not done: no chip test (the repo's tests cover non-React code); other filter surfaces (`components/capital/filter-controls.tsx`,
+  `components/search-explorer.tsx`) are unchanged. Open for Ben: merge decision on PR #13.
+
+## Previous session: Lattice Register, milestone 2 (material dossiers)
+
+Branch `feat/lattice-dossier-m2` from `main` at `8ff7315`; PR #9
+(<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/9>), **merged into `main` 2026-09-27 as `a995980`**
+(recorded from GitHub; written as a draft, "not merged, not deployed" at the time; deployment not checked). Worktree
 `/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/smpt-dossier-m2`. Implements the frozen spec
 `SMPT-M2-dossier-spec-v3.md` (SHA-256 `29843dc57aa27ed136ea0195a1622f837fba1e8645a5961b3532f92e21675bac`, kept outside the
 repo and unchanged). This section was added at Ben's direction (the spec's D12/U7 reserve `PROJECT_STATE.md` for that).
@@ -69,7 +91,7 @@ comp's per-currency summary table is replaced by the list-only money block; comp
   count of 0 across all 11 dossiers plus the leak test. The 29 individual candidate ids were not re-scanned on the final
   build because the private fixture copy was deleted (the original is untouched).
 - Not done: main-checkout `graphify update`; deployment. CI status is recorded in the PR, not here.
-- Open for Ben: merge decision on PR #9; the source tranche above.
+- Open for Ben: the source tranche above (the merge decision on PR #9 is resolved: merged).
 
 ## Release reconciliation: v0.6 and Lattice Register M1 are on `main` and in production
 
