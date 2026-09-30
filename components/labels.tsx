@@ -83,7 +83,8 @@ export function FramingBadge({
       <Link
         href={`/framing#${category}`}
         title={`${framingCategoryLabels[category]} — see the framing catalogue`}
-        className={`${className} hover:text-accent`}
+        // Vertical padding lifts the hit area to 24px; the equal negative margin keeps layout unchanged.
+        className={`${className} -my-1.5 py-1.5 hover:text-accent`}
       >
         {body}
       </Link>
