@@ -605,8 +605,8 @@ function relatedIds(rows: ReturnType<typeof rowsFor>) {
 
 const DAY = 86_400_000;
 const dayNumber = (iso: string) => Math.floor(Date.parse(`${iso}T00:00:00Z`) / DAY);
-/** The narrowest axis a phone shows: 358 px of track, with dots 10 px wide and 3 px apart at least. */
-const MIN_GAP_PCT = (13 / 358) * 100;
+/** A 360 px phone shows a 282 px track; dots in one lane sit 24 px apart at least, so their 24 px tap areas never overlap. */
+const MIN_GAP_PCT = (24 / 282) * 100;
 
 function buildTimeline(events: PolicyEvent[], rows: ReturnType<typeof rowsFor>, asOf: string): Timeline {
   const sorted = [...events].sort((a, b) => byCodePoint(a.date, b.date) || byCodePoint(a.id, b.id));
