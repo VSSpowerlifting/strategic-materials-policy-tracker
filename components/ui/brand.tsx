@@ -24,11 +24,21 @@ export function LatticeMark({ className, priority = false }: { className?: strin
  * the supplied logo's gold (`--brand-gold`). The name is live text, so it stays selectable and readable by
  * assistive technology; it is always the full name, so the mark never stands in for it.
  */
-export function Wordmark({ className, markClassName, priority = false }: { className?: string; markClassName?: string; priority?: boolean }) {
+export function Wordmark({
+  className,
+  markClassName,
+  textClassName,
+  priority = false,
+}: {
+  className?: string;
+  markClassName?: string;
+  textClassName?: string;
+  priority?: boolean;
+}) {
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
       <LatticeMark className={markClassName} priority={priority} />
-      <span className="font-display text-[0.6875rem] font-medium uppercase leading-[1.25] tracking-[0.12em] text-brand">
+      <span className={cn("font-display text-[0.6875rem] font-medium uppercase leading-[1.25] tracking-[0.12em] text-brand", textClassName)}>
         Strategic Materials
         <br />
         Policy Tracker

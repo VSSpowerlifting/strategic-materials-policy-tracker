@@ -107,8 +107,9 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border-strong bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
       <div ref={menuBox}>
         <Container width="wide" className="flex h-16 items-center gap-5 lg:h-[4.5rem] lg:gap-8">
-          <Link href="/" aria-label={`${site.name}, overview`} className="shrink-0">
-            <Wordmark markClassName="h-9 lg:h-12" priority />
+          {/* Not shrink-0: below 360px the name's tracking tightens to the widest value that keeps two lines at 320px. */}
+          <Link href="/" aria-label={`${site.name}, overview`} className="min-w-0">
+            <Wordmark markClassName="h-9 lg:h-12" textClassName="max-[359px]:tracking-[0.01em]" priority />
           </Link>
 
           <nav aria-label="Main" className="hidden min-w-0 items-stretch gap-1 self-stretch lg:flex">
@@ -154,14 +155,14 @@ export function SiteHeader() {
               aria-controls={menuId}
               onClick={() => setMenuOpen((o) => !o)}
               className={cn(
-                "inline-flex h-9 items-center gap-2 rounded-md border border-border-strong px-3 font-display text-sm text-foreground transition-colors hover:bg-elevated lg:hidden",
+                "inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border-strong px-3 font-display text-sm text-foreground transition-colors hover:bg-elevated max-[399px]:w-9 max-[399px]:px-0 lg:hidden",
                 menuOpen && "bg-elevated",
               )}
             >
               <svg viewBox="0 0 16 16" aria-hidden className="h-4 w-4">
                 <path d="M2 4.5h12M2 8h12M2 11.5h12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
               </svg>
-              Menu
+              <span className="max-[399px]:sr-only">Menu</span>
             </button>
           </div>
         </Container>
