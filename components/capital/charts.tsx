@@ -1,7 +1,7 @@
 /**
  * Capital & Control visualisations. Server-rendered SVG and tables: no chart
- * library, no client JavaScript, and every mark is a link to the record it
- * encodes, so a chart is also a navigation surface and never a dead end.
+ * library, no client JavaScript. The status charts link each bar to its record;
+ * the dense interplay chronology is a picture only, backed by a text list.
  *
  * Nothing here plots money against money across currencies or value roles.
  * Time charts plot dated status changes; matrices count records.
@@ -12,7 +12,6 @@ import {
   INSTRUMENT_KIND_HUES,
   controlMeasureTypeLabels,
   controlStatusLabels,
-  financialStatusLabels,
   jurisdictionLabels,
   jurisdictionShort,
   supplyChainStageLabels,
@@ -20,11 +19,21 @@ import {
 import {
   controlIssuer,
   controlSpans,
-  instrumentChronology,
   materialInterplay,
   commitmentActor,
   shortInstrumentLabel,
 } from "@/lib/capital-control";
+import {
+  CHRONOLOGY_FROM,
+  CHRONOLOGY_LABEL,
+  CHRONOLOGY_TO,
+  CHRONOLOGY_COLS,
+  CHRONOLOGY_W,
+  chronologyX,
+  markStatusText,
+  placeMarks,
+  plottedMarks,
+} from "@/lib/interplay-chronology";
 import { getAllMaterials, getEventById } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 import { CONTROL_STATUSES, JURISDICTIONS, SUPPLY_CHAIN_STAGES } from "@/lib/types";
@@ -162,45 +171,62 @@ export function ControlStatusChart({
 
 // --- Capital and control chronology by actor ---------------------------------------------
 
+const ROW_STEP = 7;
+
 /**
  * Swimlanes by actor: every dated status change of a financial row (circle)
  * and of a control clause (square). It shows sequence and density — who
  * reaches for money, who for restrictions, and when — never magnitude.
+ * The chart is a picture only: `InterplayChronologyList` gives every plotted
+ * change as text with a link per record.
  */
 export function InterplayChronology({
   asOf,
-  from = "2022-07-01",
-  to = "2027-01-01",
+  from = CHRONOLOGY_FROM,
+  to = CHRONOLOGY_TO,
 }: {
   asOf: string;
   from?: string;
   to?: string;
 }) {
-  const marks = instrumentChronology().filter((m) => m.date >= from && m.date <= to);
+  const marks = plottedMarks(from, to);
   const lanes = JURISDICTIONS.filter((j) => marks.some((m) => m.jurisdiction === j));
-  const LABEL = 132;
-  const W = 1000;
-  const LANE = 44;
+  const LABEL = CHRONOLOGY_LABEL;
+  const W = CHRONOLOGY_W;
   const TOP = 30;
-  const H = TOP + lanes.length * LANE + 8;
-  const x = scale(from, to, LABEL + 10, W - 14);
+  const x = chronologyX(from, to);
 
-  // Offset marks that fall on the same day in the same lane, so none hides another.
-  const stack = new Map<string, number>();
-  const placed = marks.map((m) => {
-    const key = `${m.jurisdiction}|${m.kind}|${m.date.slice(0, 7)}`;
-    const n = stack.get(key) ?? 0;
-    stack.set(key, n + 1);
-    return { ...m, n };
-  });
+  const placed = placeMarks(marks);
+
+  // Each lane grows to fit its fullest bucket: capital rows on top, control rows below.
+  const rowsOf = (j: string, kind: string) =>
+    Math.max(1, ...placed.filter((m) => m.jurisdiction === j && m.kind === kind).map((m) => Math.ceil(m.count / CHRONOLOGY_COLS)));
+  let cursor = TOP;
+  const geo = new Map<string, { top: number; capRows: number; height: number; split: number }>();
+  for (const j of lanes) {
+    const capRows = rowsOf(j, "capital");
+    const ctlRows = rowsOf(j, "control");
+    const height = 12 + capRows * ROW_STEP + 8 + ctlRows * ROW_STEP + 6;
+    geo.set(j, { top: cursor, capRows, height, split: cursor + 12 + capRows * ROW_STEP + 1 });
+    cursor += height;
+  }
+  const H = cursor + 8;
+
+  const capitalCount = placed.filter((m) => m.kind === "capital").length;
+  const controlCount = placed.length - capitalCount;
 
   return (
     <figure>
-      <div className="overflow-x-auto rounded-lg border bg-card">
-        <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto min-w-[760px] w-full" role="group" aria-labelledby="ip-title" aria-describedby="ip-desc">
+      <div
+        className="overflow-x-auto rounded-lg border bg-card"
+        role="region"
+        aria-label="Chronology chart, scrolls horizontally"
+        tabIndex={0}
+      >
+        <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto min-w-[760px] w-full" role="img" aria-labelledby="ip-title" aria-describedby="ip-desc">
           <title id="ip-title">Capital and control status changes by actor over time</title>
           <desc id="ip-desc">
-            {`${placed.filter((m) => m.kind === "capital").length} dated financial status changes and ${placed.filter((m) => m.kind === "control").length} dated control status changes across ${lanes.length} actors, ${formatDate(from)} to ${formatDate(to)}. Each mark links to its record; the Capital and Controls lists give the same records as text.`}
+            {`${capitalCount} dated financial status changes and ${controlCount} dated control status changes across ${lanes.length} actors, ${formatDate(from)} to ${formatDate(to)}. Circles are financial changes and squares are control changes, one lane per actor. This chart is a visual summary only; its marks are not links. The chronology list directly below it gives every one of these changes as text, grouped by actor and record, with a link to each record.`}
           </desc>
           {years(from, to).map((y) => (
             <g key={y}>
@@ -209,43 +235,30 @@ export function InterplayChronology({
             </g>
           ))}
           <line x1={x(asOf)} x2={x(asOf)} y1={TOP - 14} y2={H - 4} stroke="var(--accent)" strokeDasharray="2 3" />
-          {lanes.map((j, i) => {
-            const y = TOP + i * LANE;
+          {lanes.map((j) => {
+            const g = geo.get(j)!;
             return (
               <g key={j}>
-                <line x1={LABEL} x2={W - 8} y1={y + LANE / 2} y2={y + LANE / 2} stroke="var(--border)" />
-                <text x={8} y={y + LANE / 2 + 4} fontSize={12} className="fill-[var(--muted)] font-mono">
+                <line x1={LABEL} x2={W - 8} y1={g.split} y2={g.split} stroke="var(--border)" />
+                <text x={8} y={g.top + g.height / 2 + 4} fontSize={12} className="fill-[var(--muted)] font-mono">
                   {jurisdictionLabels[j]}
                 </text>
               </g>
             );
           })}
           {placed.map((m) => {
-            const lane = lanes.indexOf(m.jurisdiction);
-            const cy = TOP + lane * LANE + LANE / 2 + (m.kind === "capital" ? -8 : 8) + (m.n % 2 ? 0 : 0);
-            const cx = x(m.date) + (m.n % 4) * 3;
-            const href = m.kind === "capital" ? `/capital/${m.id}` : `/controls/${m.id}`;
-            const status =
-              m.kind === "control"
-                ? controlStatusLabels[m.status as never]
-                : m.valueRole === "funding_option"
-                  ? `funding option; agreement ${String(financialStatusLabels[m.status as never]).toLowerCase()}, not committed money`
-                  : m.valueRole === "indication"
-                    ? `non-binding indication; ${String(financialStatusLabels[m.status as never]).toLowerCase()}, not a commitment`
-                    : financialStatusLabels[m.status as never];
-            const tip = `${formatDate(m.date)} — ${m.kind === "capital" ? "Capital" : "Control"}: ${m.label} (${status})`;
-            return (
-              <Link key={`${m.id}-${m.date}-${m.status}`} href={href}>
-                {m.kind === "capital" ? (
-                  <circle cx={cx} cy={cy} r={5} fill={INSTRUMENT_KIND_HUES.capital} fillOpacity={0.85} stroke="var(--bg)" strokeWidth={1}>
-                    <title>{tip}</title>
-                  </circle>
-                ) : (
-                  <rect x={cx - 4.5} y={cy - 4.5} width={9} height={9} rx={1} fill={INSTRUMENT_KIND_HUES.control} fillOpacity={0.85} stroke="var(--bg)" strokeWidth={1}>
-                    <title>{tip}</title>
-                  </rect>
-                )}
-              </Link>
+            const g = geo.get(m.jurisdiction)!;
+            const cx = x(m.date) + m.dx;
+            const cy = m.kind === "capital" ? g.top + 12 + m.row * ROW_STEP : g.split + 9 + m.row * ROW_STEP;
+            const tip = `${formatDate(m.date)} — ${m.kind === "capital" ? "Capital" : "Control"}: ${m.label} (${markStatusText(m)})`;
+            return m.kind === "capital" ? (
+              <circle key={`${m.id}-${m.date}-${m.status}`} cx={cx} cy={cy} r={5} fill={INSTRUMENT_KIND_HUES.capital} fillOpacity={0.85} stroke="var(--bg)" strokeWidth={1}>
+                <title>{tip}</title>
+              </circle>
+            ) : (
+              <rect key={`${m.id}-${m.date}-${m.status}`} x={cx - 4.5} y={cy - 4.5} width={9} height={9} rx={1} fill={INSTRUMENT_KIND_HUES.control} fillOpacity={0.85} stroke="var(--bg)" strokeWidth={1}>
+                <title>{tip}</title>
+              </rect>
             );
           })}
         </svg>
