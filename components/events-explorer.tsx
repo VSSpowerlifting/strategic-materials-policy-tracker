@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { EventListItem } from "@/components/event-card";
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
   framingCategoryShort,
@@ -10,6 +11,7 @@ import {
   mechanismLabels,
   policyStatusLabels,
 } from "@/lib/labels";
+import { cn } from "@/lib/utils";
 import { FRAMING_CATEGORIES } from "@/lib/types";
 import type {
   FramingCategory,
@@ -180,16 +182,27 @@ export function EventsExplorer({
   const secondaryActive =
     (status !== ALL ? 1 : 0) + (material !== ALL ? 1 : 0) + (framing !== ALL ? 1 : 0);
 
-  // A reader arriving from a matrix cell sees a pre-narrowed list; name the
-  // active filters so the narrowing is legible rather than looking like a
-  // short dataset. Labels only — no counts or claims beyond the filters.
-  const activeLabels = [
-    actor !== ALL ? jurisdictionLabels[actor as JurisdictionCode] : null,
-    material !== ALL ? materialName(material) : null,
-    mechanism !== ALL ? mechanismLabels[mechanism as Mechanism] : null,
-    status !== ALL ? policyStatusLabels[status as PolicyStatus] : null,
-    framing !== ALL ? framingCategoryShort[framing as FramingCategory] : null,
-  ].filter(Boolean) as string[];
+  // A reader arriving from a matrix cell sees a pre-narrowed list; name each
+  // active filter as a chip that can be removed on its own. Labels only — no
+  // counts or claims beyond the filters.
+  const chips = [
+    query.trim() ? { key: "query", kind: "search", label: `“${query.trim()}”`, clear: () => setQuery("") } : null,
+    actor !== ALL
+      ? { key: "actor", kind: "actor", label: jurisdictionLabels[actor as JurisdictionCode], clear: () => setActor(ALL) }
+      : null,
+    mechanism !== ALL
+      ? { key: "mechanism", kind: "mechanism", label: mechanismLabels[mechanism as Mechanism], clear: () => setMechanism(ALL) }
+      : null,
+    status !== ALL
+      ? { key: "status", kind: "status", label: policyStatusLabels[status as PolicyStatus], clear: () => setStatus(ALL) }
+      : null,
+    material !== ALL
+      ? { key: "material", kind: "material", label: materialName(material), clear: () => setMaterial(ALL) }
+      : null,
+    framing !== ALL
+      ? { key: "framing", kind: "framing", label: framingCategoryShort[framing as FramingCategory], clear: () => setFraming(ALL) }
+      : null,
+  ].filter((c): c is NonNullable<typeof c> => c !== null);
 
   // Mirror the filter state into the URL so any view is shareable and the
   // matrix deep link round-trips. `replaceState` rather than a push: typing in
@@ -325,11 +338,8 @@ export function EventsExplorer({
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 font-mono text-sm text-faint">
-        <p className="tnum" aria-live="polite">
+        <p id="events-count" tabIndex={-1} className="tnum outline-none" aria-live="polite">
           {filtered.length} of {events.length} events
-          {activeLabels.length > 0 ? (
-            <span className="text-muted"> · {activeLabels.join(" · ")}</span>
-          ) : null}
         </p>
         {isFiltered ? (
           <button
@@ -341,6 +351,35 @@ export function EventsExplorer({
           </button>
         ) : null}
       </div>
+
+      {chips.length > 0 ? (
+        <ul aria-label="Active filters" className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+          {chips.map((c) => (
+            <li key={c.key}>
+              <Badge accent className="gap-1.5 text-xs">
+                <span>{c.label}</span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    // The removed chip unmounts; hand focus to a neighbour (or the count) so keyboard users keep their place.
+                    const li = e.currentTarget.closest("li");
+                    const next = (li?.nextElementSibling ?? li?.previousElementSibling)?.querySelector("button");
+                    (next ?? document.getElementById("events-count"))?.focus();
+                    c.clear();
+                  }}
+                  aria-label={`Remove ${c.kind} filter: ${c.label}`}
+                  className={cn(
+                    "-my-1 -mr-1 rounded px-2 py-1 text-muted transition-colors hover:text-foreground",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  )}
+                >
+                  <span aria-hidden>×</span>
+                </button>
+              </Badge>
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
       <Card className="mt-3 overflow-hidden">
         {filtered.length > 0 ? (
