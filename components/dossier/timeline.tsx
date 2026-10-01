@@ -4,11 +4,11 @@ import type { DossierPayload } from "@/lib/material-dossier";
 import { Chip } from "./parts";
 
 const DOT = 10;
-const LANE = 16;
+const LANE = 24;
 
 export function TimelineSection({ payload }: { payload: DossierPayload }) {
   const t = payload.timeline;
-  const height = Math.max(1, t.lanes) * LANE + 4;
+  const height = Math.max(1, t.lanes) * LANE;
   return (
     <section id="timeline" className="scroll-mt-24">
       <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Timeline</h2>
@@ -24,11 +24,11 @@ export function TimelineSection({ payload }: { payload: DossierPayload }) {
               title={`${formatDate(p.date)}: ${p.title}`}
               aria-label={`${formatDate(p.date)}, ${p.actorShort}: ${p.title}`}
               data-event-date={p.date}
-              className="absolute rounded-full bg-mark-commitment outline-offset-2 hover:bg-accent-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-              style={{ left: `${p.pct}%`, top: p.lane * LANE + 2, width: DOT, height: DOT, transform: "translateX(-50%)" }}
+              className="absolute rounded-full bg-mark-commitment outline-offset-2 after:absolute after:-inset-[7px] hover:bg-accent-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              style={{ left: `${p.pct}%`, top: p.lane * LANE + (LANE - DOT) / 2, width: DOT, height: DOT, transform: "translateX(-50%)" }}
             />
           ))}
-          <span aria-hidden className="absolute inset-y-[-8px] w-px bg-accent" style={{ left: `${t.asOfPct}%` }} data-as-of={t.asOf} />
+          <span aria-hidden className="pointer-events-none absolute inset-y-[-8px] w-px bg-accent" style={{ left: `${t.asOfPct}%` }} data-as-of={t.asOf} />
         </div>
         <div className="relative mx-[6px] mt-1 h-5 border-t border-border-strong" aria-hidden>
           {t.ticks.map((k) => (

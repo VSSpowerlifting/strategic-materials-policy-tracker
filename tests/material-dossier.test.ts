@@ -336,12 +336,12 @@ test("the no-later-date claim holds only when true", () => {
   assert.ok(dossier("tungsten", data2).timeline.futureDates.some((f) => f.date === "2030-01-01"));
 });
 
-test("dots that share a lane never overlap at the narrowest width", () => {
+test("dots that share a lane keep their 24 px tap areas apart at a 282 px track", () => {
   for (const slug of slugs) {
     const p = dossier(slug);
     const byLane = new Map<number, number[]>();
     for (const pt of p.timeline.points) byLane.set(pt.lane, [...(byLane.get(pt.lane) ?? []), pt.pct]);
-    for (const xs of byLane.values()) for (let i = 1; i < xs.length; i++) assert.ok((xs[i] - xs[i - 1]) * 3.58 >= 12.9, `${slug}: dots at least 13 px apart on a 358 px track`);
+    for (const xs of byLane.values()) for (let i = 1; i < xs.length; i++) assert.ok((xs[i] - xs[i - 1]) * 2.82 >= 24 - 1e-9, `${slug}: dots at least 24 px apart on a 282 px track`);
   }
 });
 
