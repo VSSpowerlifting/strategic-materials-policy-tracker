@@ -46,7 +46,7 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
           <li key={it.m.id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
             <time className="tnum w-24 shrink-0 font-mono text-xs text-faint">{it.date ? formatDate(it.date) : "—"}</time>
             <JurisdictionTag code={controlIssuer(it.m)} />
-            <Link href={`/controls/${it.m.id}`} className="min-w-0 flex-1 hover:text-accent">
+            <Link href={`/controls/${it.m.id}`} className="min-w-0 flex-1 basis-48 md:basis-0 hover:text-accent">
               <span aria-hidden className="mr-1.5 inline-block h-2 w-2 rounded-[1px] bg-[#C77B7B]" />
               {controlMeasureTypeLabels[it.m.measureType]}
               {it.m.clause ? <span className="text-muted"> · {it.m.clause}</span> : null}
@@ -57,7 +57,7 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
           <li key={it.c.id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
             <time className="tnum w-24 shrink-0 font-mono text-xs text-faint">{it.date ? formatDate(it.date) : "—"}</time>
             <ProviderTag code={commitmentActor(it.c)} />
-            <Link href={`/capital/${it.c.id}`} className="min-w-0 flex-1 hover:text-accent">
+            <Link href={`/capital/${it.c.id}`} className="min-w-0 flex-1 basis-48 md:basis-0 hover:text-accent">
               <span aria-hidden className="mr-1.5 inline-block h-2 w-2 rounded-full bg-[#CBA86A]" />
               {financialInstrumentLabels[it.c.instrument]}
               {it.c.valueRole !== "commitment" ? (
