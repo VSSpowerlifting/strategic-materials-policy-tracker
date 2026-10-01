@@ -1,20 +1,21 @@
 # Project state
 
-_Last updated: 2026-09-30 (removable `/events` filter chips, draft PR #13, not merged; M2 dossiers PR #9 merged 2026-09-27 as `a995980`)._
+_Last updated: 2026-09-30 (removable `/events` filter chips, PR #13, and timeline framing tap targets, PR #14, both merged; M2 dossiers PR #9 merged 2026-09-27 as `a995980`)._
 
 _Previous status line: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, at the time not merged; the 2026-09-25 release reconciliation below is unchanged)._
 
 _Previous status line (2026-09-25, before the merges): Lattice Register milestone 1 on `feat/lattice-register-m1`, draft PR against `feat/capital-intelligence-v06`, not merged; v0.6 PR #6 still open._
 
-## Latest session: shadcn registry config and `/events` filter chips
+## Latest session: frontend registry setup, event filter chips, and timeline tap targets
 
-Draft PR #13 (<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/13>), not merged. Two commits on
-top of `main` at `4d5e884`.
+PR #13 (<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/13>) squash-merged into `main` as
+`31c6981589c0ba55ced5b069e2f24df60cb023b5`; PR #14 (<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/14>)
+squash-merged as `a2656cc403004483a14f6188c28af0a246a9a301`. Both were based on `main` at `4d5e884`.
 
-- `fcfa0a6` adds `components.json` (new-york, neutral, lucide) with third-party shadcn registries (`@cult-ui`,
+- PR #13 adds `components.json` (new-york, neutral, lucide) with third-party shadcn registries (`@cult-ui`,
   `@aceternity`, `@reactbits-starter`, `@reactbits-pro`; the ReactBits pair reads `REACTBITS_LICENSE_KEY`). `shadcn init`
   was not run and no component was installed. `components/ui` is unchanged.
-- The second commit (amended; SHA is in the PR) replaces the active-filter text trail in `components/events-explorer.tsx`
+- PR #13 also replaces the active-filter text trail in `components/events-explorer.tsx`
   with one removable chip per active filter (search, actor, mechanism, status, material, framing), built on the existing `Badge` and
   `cn`. The URL params, native selects and "Clear filters" are unchanged. Each remove button has an `aria-label` and hands
   focus to a neighbouring chip, or to the count line when none is left.
@@ -23,7 +24,12 @@ top of `main` at `4d5e884`.
   mobile (375) checks of removal by click and keyboard, clear-all, and no horizontal scroll. The 3 dev-console font-preload
   warnings on `/events` also occur on the original code.
 - Not done: no chip test (the repo's tests cover non-React code); other filter surfaces (`components/capital/filter-controls.tsx`,
-  `components/search-explorer.tsx`) are unchanged. Open for Ben: merge decision on PR #13.
+  `components/search-explorer.tsx`) are unchanged.
+- PR #14 raises the linked `FramingBadge` hit area in `components/labels.tsx` (used only by `/timeline`) from about 12px to
+  24px with `-my-1.5 py-1.5`, so layout is unchanged. At 375 px the timeline's under-24px target count went 111 to 32; all 79
+  framing links are at least 24px high; no marker moved at 375 or 1280; page height is unchanged. Remaining small targets
+  (lattice dots on dossiers, other inline links) are not addressed. CI failed once on a `next/font/google` Turbopack
+  resolution error in the runner and passed on rerun of the same commit; no font change was made.
 
 ## Previous session: Lattice Register, milestone 2 (material dossiers)
 
