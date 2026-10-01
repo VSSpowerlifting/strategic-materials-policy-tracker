@@ -16,7 +16,7 @@ export const CHRONOLOGY_TO = "2027-01-01";
 export const CHRONOLOGY_W = 1000;
 export const CHRONOLOGY_LABEL = 132;
 
-/** Marks that share an actor, kind and month fan out in a grid so none hides another. */
+/** Marks that share an actor, kind and month fan out in a grid so none hides another; each row is centred on the date. */
 export const CHRONOLOGY_COLS = 6;
 export const CHRONOLOGY_COL_STEP = 5;
 
@@ -52,7 +52,7 @@ export type PlacedMark = InstrumentMark & {
   count: number;
   col: number;
   row: number;
-  /** Horizontal offset from the date's x, centred so the bucket averages on its date. */
+  /** Horizontal offset from the date's x. Each row is centred on the date, so a partial last row is too. */
   dx: number;
 };
 
@@ -66,9 +66,10 @@ export function placeMarks(marks: InstrumentMark[]): PlacedMark[] {
     const n = seen.get(k) ?? 0;
     seen.set(k, n + 1);
     const count = size.get(k) ?? 1;
+    const row = Math.floor(n / CHRONOLOGY_COLS);
     const col = n % CHRONOLOGY_COLS;
-    const cols = Math.min(count, CHRONOLOGY_COLS);
-    return { ...m, n, count, col, row: Math.floor(n / CHRONOLOGY_COLS), dx: (col - (cols - 1) / 2) * CHRONOLOGY_COL_STEP };
+    const inRow = Math.min(CHRONOLOGY_COLS, count - row * CHRONOLOGY_COLS);
+    return { ...m, n, count, col, row, dx: (col - (inRow - 1) / 2) * CHRONOLOGY_COL_STEP };
   });
 }
 
