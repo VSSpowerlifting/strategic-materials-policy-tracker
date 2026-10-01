@@ -73,7 +73,7 @@ export default function ControlsPage() {
               const { entry, daysLeft } = group[0];
               const event = getEventById(group[0].measure.eventId)!;
               return (
-                <Card key={`${entry.sourceId}-${entry.until}`} className="p-5">
+                <Card key={`${entry.sourceId}|${entry.until}|${entry.status}`} className="p-5">
                   <div className="flex items-baseline justify-between gap-3">
                     <ControlStatusBadge status={entry.status} />
                     <span className="tnum font-mono text-xs text-muted">until {formatDate(entry.until!)}</span>
