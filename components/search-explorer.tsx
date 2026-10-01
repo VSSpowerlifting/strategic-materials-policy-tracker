@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { FilterChips } from "@/components/filter-chips";
+import type { FilterChip } from "@/components/filter-chips";
 import { searchDocs, SEARCH_KINDS } from "@/lib/search";
 import type { SearchDoc, SearchKind } from "@/lib/search";
 import { jurisdictionLabels, mechanismLabels } from "@/lib/labels";
@@ -40,6 +42,16 @@ const selectClass =
  */
 const PARAM = { query: "q", kind: "kind", actor: "actor", mechanism: "mechanism" } as const;
 
+// Below `sm` the secondary filters sit behind a disclosure; from `sm` up they
+// are always shown. `open` is driven from this query so one set of controls
+// serves both presentations.
+const DESKTOP_QUERY = "(min-width: 40rem)";
+function subscribeDesktop(cb: () => void) {
+  const mq = window.matchMedia(DESKTOP_QUERY);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+
 export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
   const [query, setQuery] = useState("");
   const [kind, setKind] = useState<string>(ALL);
@@ -48,6 +60,12 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
   // Guards the write-back effect so it cannot clear an incoming URL before the
   // read below has applied it (same reasoning as the events explorer).
   const [urlRead, setUrlRead] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const isDesktop = useSyncExternalStore(
+    subscribeDesktop,
+    () => window.matchMedia(DESKTOP_QUERY).matches,
+    () => false,
+  );
 
   // Only offer filter values that actually occur in the index, in canonical
   // taxonomy order rather than insertion order.
@@ -137,6 +155,19 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
   const active = hasQuery || hasActiveFilter;
 
+  const chips = [
+    hasQuery ? { key: "query", kind: "search", label: `“${query.trim()}”`, clear: () => setQuery("") } : null,
+    kind !== ALL
+      ? { key: "kind", kind: "type", label: KIND_LABEL[kind as SearchKind], clear: () => setKind(ALL) }
+      : null,
+    actor !== ALL
+      ? { key: "actor", kind: "actor", label: jurisdictionLabels[actor as JurisdictionCode], clear: () => setActor(ALL) }
+      : null,
+    mechanism !== ALL
+      ? { key: "mechanism", kind: "mechanism", label: mechanismLabels[mechanism as Mechanism], clear: () => setMechanism(ALL) }
+      : null,
+  ].filter((c): c is FilterChip => c !== null);
+
   function reset() {
     setQuery("");
     setKind(ALL);
@@ -147,8 +178,8 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
   return (
     <div>
       <Card className="p-4">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="sm:col-span-2 lg:col-span-1">
+        <div className="grid gap-3 lg:grid-cols-4">
+          <div>
             <label htmlFor="q" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
               Search the corpus
             </label>
@@ -162,60 +193,76 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               autoComplete="off"
             />
           </div>
-          <div>
-            <label htmlFor="kind" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
-              Record type
-            </label>
-            <select id="kind" value={kind} onChange={(e) => setKind(e.target.value)} className={selectClass}>
-              <option value={ALL}>All types{active ? ` (${total})` : ""}</option>
-              {SEARCH_KINDS.map((k) => (
-                <option key={k} value={k}>
-                  {KIND_LABEL[k]}
-                  {active ? ` (${counts[k]})` : ""}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="actor" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
-              Actor
-            </label>
-            <select id="actor" value={actor} onChange={(e) => setActor(e.target.value)} className={selectClass}>
-              <option value={ALL}>All actors</option>
-              {options.actors.map((a) => (
-                <option key={a} value={a}>
-                  {jurisdictionLabels[a]}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="mechanism" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
-              Mechanism
-            </label>
-            <select
-              id="mechanism"
-              value={mechanism}
-              onChange={(e) => setMechanism(e.target.value)}
-              className={selectClass}
-            >
-              <option value={ALL}>All mechanisms</option>
-              {options.mechanisms.map((m) => (
-                <option key={m} value={m}>
-                  {mechanismLabels[m]}
-                </option>
-              ))}
-            </select>
-          </div>
+          <details
+            open={isDesktop || moreOpen}
+            onToggle={(e) => {
+              if (!isDesktop) setMoreOpen(e.currentTarget.open);
+            }}
+            className="lg:col-span-3"
+          >
+            <summary className="cursor-pointer py-1 font-mono text-xs text-muted hover:text-foreground sm:hidden">
+              More filters
+            </summary>
+            <div className="mt-2 grid gap-3 sm:mt-0 sm:grid-cols-2 lg:grid-cols-3">
+              <div>
+                <label htmlFor="kind" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+                  Record type
+                </label>
+                <select id="kind" value={kind} onChange={(e) => setKind(e.target.value)} className={selectClass}>
+                  <option value={ALL}>All types{active ? ` (${total})` : ""}</option>
+                  {SEARCH_KINDS.map((k) => (
+                    <option key={k} value={k}>
+                      {KIND_LABEL[k]}
+                      {active ? ` (${counts[k]})` : ""}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="actor" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+                  Actor
+                </label>
+                <select id="actor" value={actor} onChange={(e) => setActor(e.target.value)} className={selectClass}>
+                  <option value={ALL}>All actors</option>
+                  {options.actors.map((a) => (
+                    <option key={a} value={a}>
+                      {jurisdictionLabels[a]}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="mechanism" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+                  Mechanism
+                </label>
+                <select
+                  id="mechanism"
+                  value={mechanism}
+                  onChange={(e) => setMechanism(e.target.value)}
+                  className={selectClass}
+                >
+                  <option value={ALL}>All mechanisms</option>
+                  {options.mechanisms.map((m) => (
+                    <option key={m} value={m}>
+                      {mechanismLabels[m]}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </details>
         </div>
         <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-          <p className="text-xs leading-5 text-faint">
-            Matching is exact substring, not fuzzy — <span className="font-mono">No. 61</span> and{" "}
-            <span className="font-mono">No. 62</span> are different instruments, so a near-miss is
-            worse than no match. Original-language text is indexed in its own script; searching{" "}
-            <span className="font-mono">稀土</span> works. Actor and mechanism filters apply
-            to every record type that carries one, not only events.
-          </p>
+          <details className="text-xs leading-5 text-faint">
+            <summary className="cursor-pointer py-1 font-mono hover:text-muted">How matching works</summary>
+            <p className="mt-1">
+              Matching is exact substring, not fuzzy — <span className="font-mono">No. 61</span> and{" "}
+              <span className="font-mono">No. 62</span> are different instruments, so a near-miss is
+              worse than no match. Original-language text is indexed in its own script; searching{" "}
+              <span className="font-mono">稀土</span> works. Actor and mechanism filters apply
+              to every record type that carries one, not only events.
+            </p>
+          </details>
           {active ? (
             <button
               type="button"
@@ -229,6 +276,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
       </Card>
 
       <div className="mt-6">
+        {active ? <div className="mb-3"><FilterChips chips={chips} fallbackId="q" /></div> : null}
         {!active ? (
           <p className="text-sm leading-7 text-faint">
             {docs.length} records indexed — events, materials, actors, framing claims, sources and
@@ -248,9 +296,6 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
           <>
             <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
               {results.length} {results.length === 1 ? "result" : "results"}
-              {kind !== ALL ? ` in ${KIND_LABEL[kind as SearchKind]}` : ""}
-              {actor !== ALL ? ` · ${jurisdictionLabels[actor as JurisdictionCode]}` : ""}
-              {mechanism !== ALL ? ` · ${mechanismLabels[mechanism as Mechanism]}` : ""}
             </p>
             <ul className="grid gap-2">
               {results.map((d) => (
