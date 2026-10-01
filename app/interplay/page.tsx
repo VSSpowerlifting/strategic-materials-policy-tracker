@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { InterplayChronology, MaterialInterplayMatrix } from "@/components/capital/charts";
+import { InterplayChronologyList } from "@/components/capital/chronology-list";
 import { JurisdictionTag } from "@/components/labels";
 import { InlineAmount, ProviderTag } from "@/components/capital/rows";
 import { ControlStatusBadge } from "@/components/capital/primitives";
@@ -87,8 +88,11 @@ export default function InterplayPage() {
         lead="Controls and capital are recorded separately because they answer different questions. This page puts them on one clock and one grid, so you can see which governments restrict and which pay, on which materials, and in what order. It shows sequence, never causation: no link between a control and a financing is drawn unless a source states it."
       />
       <div className="mt-12 space-y-14">
-        <Section index="01" title="Chronology by actor" description="Every dated status change of a financial row (circle) and a control clause (square). Select a mark for its record.">
+        <Section index="01" title="Chronology by actor" description="Every dated status change of a financial row (circle) and a control clause (square). The chart is a picture; the list below it gives every change as text, with a link to each record.">
           <InterplayChronology asOf={asOf} />
+          <div className="mt-8">
+            <InterplayChronologyList />
+          </div>
         </Section>
 
         <Section index="02" title="Material by actor" description={`Financial rows provided that have not ended (a package counts once; a withdrawn or lapsed row is left out, and a funding option is a row of its own, not an exercise) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts, never money.`}>
