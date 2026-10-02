@@ -1935,6 +1935,41 @@
     "notes": null
   },
   {
+    "id": "prj-us-inl-antimony-pilot",
+    "name": "INL antimony sulfide modular pilot plant",
+    "sponsorOrgIds": [],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "Idaho Falls, Idaho"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-army-antimony-pilot-2026",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Army article describes the prototype processing facility at INL and its antimony-sulfide demonstration role."
+      }
+    ],
+    "notes": "Prototype processing capability using samples from the Stibnite Gold Project; separate from the mine project itself."
+  },
+  {
     "id": "prj-us-mountain-pass-samarium",
     "name": "Mountain Pass heavy rare earth separation expansion (Samarium Project)",
     "sponsorOrgIds": [
@@ -2018,6 +2053,53 @@
       }
     ],
     "notes": "The July 2025 filing and release gave the site as \"a soon-to-be-chosen location\"; MP's 10-Q for the quarter to 30 June 2026 places it in Northlake, Texas."
+  },
+  {
+    "id": "prj-us-stibnite",
+    "name": "Stibnite Gold Project",
+    "sponsorOrgIds": [],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "central Idaho"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "gold",
+      "silver"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dod-perpetua-dpa-2022",
+        "supports": [
+          "name",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "DoD names the Stibnite-Gold Project in central Idaho and identifies antimony trisulfide as the defense-relevant output."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Project financing and 2026 outlook sections",
+        "note": "The filing describes development of the mine project and the processing plant as part of the approved project scope."
+      }
+    ],
+    "notes": "A gold-antimony-silver development; only antimony is tracked as a material in SMPT."
   },
   {
     "id": "prj-us-usar-magnet-project-2",
@@ -2289,87 +2371,5 @@
       }
     ],
     "notes": null
-  },
-  {
-    "id": "prj-us-stibnite",
-    "name": "Stibnite Gold Project",
-    "sponsorOrgIds": [],
-    "locations": [
-      {
-        "countryCode": "US",
-        "subnational": "Idaho",
-        "asStated": "central Idaho"
-      }
-    ],
-    "stages": [
-      "mining",
-      "processing"
-    ],
-    "materialIds": [
-      "antimony"
-    ],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "gold",
-      "silver"
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-dod-perpetua-dpa-2022",
-        "supports": [
-          "name",
-          "location",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Opening paragraphs",
-        "note": "DoD names the Stibnite-Gold Project in central Idaho and identifies antimony trisulfide as the defense-relevant output."
-      },
-      {
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "supports": [
-          "stages"
-        ],
-        "evidence": "explicit",
-        "locator": "Project financing and 2026 outlook sections",
-        "note": "The filing describes development of the mine project and the processing plant as part of the approved project scope."
-      }
-    ],
-    "notes": "A gold-antimony-silver development; only antimony is tracked as a material in SMPT."
-  },
-  {
-    "id": "prj-us-inl-antimony-pilot",
-    "name": "INL antimony sulfide modular pilot plant",
-    "sponsorOrgIds": [],
-    "locations": [
-      {
-        "countryCode": "US",
-        "subnational": "Idaho",
-        "asStated": "Idaho Falls, Idaho"
-      }
-    ],
-    "stages": [
-      "processing"
-    ],
-    "materialIds": [
-      "antimony"
-    ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
-    "evidence": [
-      {
-        "sourceId": "src-us-army-antimony-pilot-2026",
-        "supports": [
-          "name",
-          "location",
-          "stages",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Opening paragraphs",
-        "note": "Army article describes the prototype processing facility at INL and its antimony-sulfide demonstration role."
-      }
-    ],
-    "notes": "Prototype processing capability using samples from the Stibnite Gold Project; separate from the mine project itself."
   }
 ]
