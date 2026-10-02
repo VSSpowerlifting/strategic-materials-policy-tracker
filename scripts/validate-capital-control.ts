@@ -1145,7 +1145,7 @@ function checkOutcome(outcome: StatedOutcome, path: string, r: Reporter): void {
     r.error("incoherent_value", `${path}.qualifier`, 'is null, but the outcome states a figure; say whether it is "exact", "up_to", "approximately" or "at_least"');
 }
 
-function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void {
+function checkCommitment(c: FinancialCommitment, today: string, r: Reporter, refs: Refs): void {
   const event = resolveEvent(c.eventId, r, refs);
   // Actor rules compare against the provider's jurisdiction only once it is itself valid.
   let actorKnown = c.providerJurisdiction === null;
@@ -1237,6 +1237,18 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
 
   checkStatusHistory(c.financialStatusHistory, "financialStatusHistory", true, r, refs);
   checkStatusHistory(c.implementationStatusHistory, "implementationStatusHistory", false, r, refs);
+
+  if (c.lifecycleReview) {
+    for (const field of ["financialStatusCheckedAt", "implementationStatusCheckedAt"] as const) {
+      const checkedAt = c.lifecycleReview[field];
+      if (checkedAt !== null && isCalendarDate(checkedAt) && checkedAt > today)
+        r.error(
+          "invalid_date",
+          `lifecycleReview.${field}`,
+          `${JSON.stringify(checkedAt)} postdates the validator as-of date ${today}; a review cannot be recorded before it happens`,
+        );
+    }
+  }
 
   c.terms.forEach((term, i) => {
     resolves(term.sourceId, refs.sources, SOURCE, `terms[${i}].sourceId`, r, refs);
@@ -1629,7 +1641,7 @@ export function validateCapitalControl(input: CapitalControlInput): CapitalContr
       switch (collection) {
         case "financial-commitments": {
           const c = record as FinancialCommitment;
-          checkCommitment(c, r, refs);
+          checkCommitment(c, today, r, refs);
           for (const link of c.relationships)
             if (link.commitmentId !== c.id && refs.commitments.has(link.commitmentId)) addEdge("commitments", c.id, link.commitmentId, link.relationship);
           refer("organizations", [...c.providerOrgIds, ...c.recipientOrgIds]);
