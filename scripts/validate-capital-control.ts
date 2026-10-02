@@ -99,7 +99,7 @@ import {
 // to a category that does not exist, stops compiling.
 
 export const COMMITMENT_FIELD_EVIDENCE: Readonly<
-  Record<Exclude<keyof FinancialCommitment, "id" | "eventId" | "evidence" | "notes">, FinancialEvidenceField>
+  Record<Exclude<keyof FinancialCommitment, "id" | "eventId" | "evidence" | "notes" | "lifecycleReview">, FinancialEvidenceField>
 > = {
   relationships: "relationships",
   instrument: "instrument",
@@ -473,6 +473,11 @@ const statusEntry = (statuses: readonly string[]): Fields<StatusEntry<string>> =
 
 const CONTROL_STATUS_ENTRY: Fields<ControlStatusEntry> = { ...statusEntry(CONTROL_STATUSES), until: optionalText("date") };
 
+const LIFECYCLE_REVIEW = {
+  financialStatusCheckedAt: nullableText("date"),
+  implementationStatusCheckedAt: nullableText("date"),
+} as const;
+
 const TERM: Fields<InstrumentTerm> = {
   kind: oneOf(TERM_KINDS),
   value: nullableText("decimal"),
@@ -536,6 +541,7 @@ const COMMITMENT: Fields<FinancialCommitment> = {
   untrackedMaterialsAsStated: listOf(text()),
   financialStatusHistory: listOf(objectOf("status entry", statusEntry(FINANCIAL_STATUSES))),
   implementationStatusHistory: listOf(objectOf("status entry", statusEntry(IMPLEMENTATION_STATUSES))),
+  lifecycleReview: { kind: "object", name: "lifecycle review", fields: LIFECYCLE_REVIEW, optional: true },
   terms: listOf(objectOf("term", TERM)),
   outcomes: listOf(objectOf("outcome", OUTCOME)),
   evidence: listOf(objectOf("evidence reference", evidenceReference(FINANCIAL_EVIDENCE_FIELDS))),
