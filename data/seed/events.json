@@ -2176,5 +2176,202 @@
       "verifiedAt": "2026-10-02",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-dod-perpetua-dpa-2022",
+    "date": "2022-12-19",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Defense",
+    "titleOriginal": "DoD Issues $24.8M Critical Minerals Award to Perpetua Resources",
+    "titleOriginalLang": "en",
+    "titleEn": "DoD Defense Production Act support for Perpetua's Stibnite antimony project",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "ended",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "antimony"
+    ],
+    "affectedSectors": [
+      "defense",
+      "industrial"
+    ],
+    "summary": "DoD announced an initial Defense Production Act Title III award for environmental and engineering work on Perpetua Resources' Stibnite Gold Project. The Technology Investment Agreement was later definitized at $24.8 million and modified in May 2024 by an additional $34.4 million, bringing the total ceiling to $59.2 million. The agreement expired on 16 June 2025; Perpetua's June 2026 Form 10-Q states that all available funds had been disbursed.",
+    "analyticalSignificance": "A multi-year federal grant supported permitting and construction readiness for a domestic antimony source before the project reached construction.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-dod-perpetua-dpa-2022",
+      "src-perpetua-sec-dpa-2022",
+      "src-perpetua-sec-2024-q2",
+      "src-perpetua-sec-2026-q2",
+      "src-perpetua-stibnite-construction-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2022-12-19",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-army-perpetua-otia-2023",
+    "date": "2023-08-18",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Defense / U.S. Army",
+    "titleOriginal": "Perpetua Resources awarded Ordnance Technology Initiative Agreement for domestic antimony trisulfide supply-chain demonstration",
+    "titleOriginalLang": "en",
+    "titleEn": "Army-backed antimony trisulfide pilot and process-development agreement with Perpetua",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "antimony"
+    ],
+    "affectedSectors": [
+      "defense",
+      "industrial"
+    ],
+    "summary": "Perpetua Resources Idaho received an Ordnance Technology Initiative Agreement through the Defense Ordnance Technology Consortium to demonstrate a domestic antimony trisulfide supply chain using Stibnite ore. The agreement began at up to $15.5 million in 2023, received later additions, and reached a current estimated amount of $27.1 million by June 2026. The funded work includes sampling, pilot-scale production of military-specification antimony trisulfide, full-scale process design and a modular pilot plant; the Army marked the INL pilot facility's opening in July 2026.",
+    "analyticalSignificance": "The programme extends public support beyond mine development into downstream process demonstration for military-grade antimony sulfide.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-perpetua-sec-dotc-2023",
+      "src-perpetua-sec-2026-q2",
+      "src-us-army-antimony-pilot-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2023-08-21",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-exim-stibnite-2026",
+    "date": "2026-05-21",
+    "jurisdiction": "us",
+    "issuingBody": "Export-Import Bank of the United States",
+    "titleOriginal": "Final approval of EXIM project finance for Perpetua Resources' Stibnite Gold Project",
+    "titleOriginalLang": "en",
+    "titleEn": "EXIM final approval of project finance for the Stibnite Gold Project",
+    "titleEnSource": "na",
+    "documentNumber": "AP768324XX",
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "antimony"
+    ],
+    "affectedSectors": [
+      "industrial",
+      "defense"
+    ],
+    "summary": "On 21 May 2026 EXIM's board gave final approval to project-finance transaction AP768324XX for Perpetua Resources Idaho Inc.'s gold-and-antimony Stibnite project. EXIM's transaction table lists a financed amount of $2.906 billion and status 'Authorized'. Perpetua's June 2026 Form 10-Q states that the senior secured long-term loan remained subject to definitive documentation and conditions precedent before funds would become available.",
+    "analyticalSignificance": "The approval moves Stibnite from smaller grant support into large-scale public project finance, while the tracker keeps board approval separate from loan closing and disbursement.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-exim-stibnite-board-2026",
+      "src-exim-stibnite-transactions-2026",
+      "src-perpetua-sec-2026-q2",
+      "src-exim-mmia"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-05-21",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-dow-arr-antimony-2025",
+    "date": "2025-09-30",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of War",
+    "titleOriginal": "Department of War Awards $43.4 Million to Further On-Shore Antimony Trisulfide Production",
+    "titleOriginalLang": "en",
+    "titleEn": "Department of War DPA support for Alaska Range Resources' integrated antimony supply chain",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "antimony"
+    ],
+    "affectedSectors": [
+      "defense",
+      "industrial"
+    ],
+    "summary": "The Department of War awarded Alaska Range Resources $43.4 million under Defense Production Act Title III to develop antimony trisulfide production in Alaska. The award covers extraction of stibnite at the Estelle/Stibium initiative, concentration, and refining, including construction and commissioning of concentration and refinery capacity.",
+    "analyticalSignificance": "The award links upstream extraction with domestic concentration and refining in one public-support package, expanding the U.S. antimony response beyond isolated mine or processing support.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-dow-arr-antimony-2025",
+      "src-nova-arr-h1-2026",
+      "src-nova-arr-q4-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-09-30",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-dow-usac-antimony-2026",
+    "date": "2026-03-04",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of War",
+    "titleOriginal": "Department of War Invests $27M for the Domestic Excavation, Extraction, Processing, and Refinement of Antimony",
+    "titleOriginalLang": "en",
+    "titleEn": "Department of War DPA support for United States Antimony Corporation",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "antimony"
+    ],
+    "affectedSectors": [
+      "defense",
+      "industrial"
+    ],
+    "summary": "The Department of War announced a $27 million Defense Production Act Title III investment in United States Antimony Corporation for domestic antimony extraction, processing and refining. The award supports expansion and modernization at Thompson Falls, Montana and related Alaska mining integration. By June 2026, $16.2 million was obligated, $12.8 million had been paid after milestone approval, and the remaining $10.8 million required future authorization.",
+    "analyticalSignificance": "The award combines midstream capacity expansion with upstream feedstock development, while its milestone structure makes the difference between headline award, obligated funds and cash paid directly observable.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-dow-usac-antimony-2026",
+      "src-usac-2026-q2-10q"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-03-04",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
   }
 ]

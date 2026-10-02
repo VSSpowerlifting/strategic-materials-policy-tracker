@@ -710,5 +710,75 @@
     "quoteEnSource": "na",
     "sourceId": "src-nrcan-trail-strategic-metals-2026",
     "notes": "Natural Resources Canada description of the Canada Critical Minerals Accelerator's purpose."
+  },
+  {
+    "id": "fc-us-army-perpetua-otia-2023-resilience",
+    "eventId": "evt-us-army-perpetua-otia-2023",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "establishing a secure, domestic supply chain for this essential ammunition component",
+    "quoteEn": "establishing a secure, domestic supply chain for this essential ammunition component",
+    "quoteEnSource": "na",
+    "sourceId": "src-us-army-antimony-pilot-2026",
+    "notes": "Retrospective Army framing in 2026 of the DOTC effort initiated in 2023; not wording attributed to the 2023 SEC filing."
+  },
+  {
+    "id": "fc-us-dod-perpetua-dpa-2022-resilience",
+    "eventId": "evt-us-dod-perpetua-dpa-2022",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "restore domestic industrial capabilities essential to the national defense",
+    "quoteEn": "restore domestic industrial capabilities essential to the national defense",
+    "quoteEnSource": "na",
+    "sourceId": "src-dod-perpetua-dpa-2022",
+    "notes": "DoD description of the DPA Investments Program mission in the award release."
+  },
+  {
+    "id": "fc-us-exim-stibnite-2026-resilience",
+    "eventId": "evt-us-exim-stibnite-2026",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "improve the resiliency of our supply chains",
+    "quoteEn": "improve the resiliency of our supply chains",
+    "quoteEnSource": "na",
+    "sourceId": "src-exim-mmia",
+    "notes": "Programme-level EXIM framing for the Make More in America Initiative under which the Stibnite loan was approved."
+  },
+  {
+    "id": "fc-us-dow-arr-antimony-2025-resilience",
+    "eventId": "evt-us-dow-arr-antimony-2025",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "advances North American sourcing of this critical mineral for the defense industrial base",
+    "quoteEn": "advances North American sourcing of this critical mineral for the defense industrial base",
+    "quoteEnSource": "na",
+    "sourceId": "src-dow-arr-antimony-2025",
+    "notes": "Assistant Secretary of War for Industrial Base Policy Mike Cadenazzi in the official award release."
+  },
+  {
+    "id": "fc-us-dow-usac-antimony-2026-resilience",
+    "eventId": "evt-us-dow-usac-antimony-2026",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "Strong domestic mineral supply chains are essential to support our warfighting capability",
+    "quoteEn": "Strong domestic mineral supply chains are essential to support our warfighting capability",
+    "quoteEnSource": "na",
+    "sourceId": "src-dow-usac-antimony-2026",
+    "notes": "Acting Deputy Assistant Secretary of War for Industrial Base Resilience Jeffrey Frankston in the official release."
   }
 ]

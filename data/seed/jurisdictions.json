@@ -74,7 +74,12 @@
       "evt-us-aam-adcvd-2025",
       "evt-us-chips-usar-2026",
       "evt-us-dod-5n-germanium-2024",
-      "evt-us-dow-5n-germanium-2025"
+      "evt-us-dow-5n-germanium-2025",
+      "evt-us-dod-perpetua-dpa-2022",
+      "evt-us-army-perpetua-otia-2023",
+      "evt-us-exim-stibnite-2026",
+      "evt-us-dow-arr-antimony-2025",
+      "evt-us-dow-usac-antimony-2026"
     ],
     "sourceIds": [
       "src-doi-press-2025",
