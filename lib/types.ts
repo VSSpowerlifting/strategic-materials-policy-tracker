@@ -398,6 +398,7 @@ export const IMPLEMENTATION_STATUSES = [
   "construction",
   "commissioning",
   "operational",
+  "completed",
   "suspended",
   "cancelled",
   "not_stated",

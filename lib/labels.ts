@@ -269,6 +269,7 @@ export const implementationStatusLabels: Record<ImplementationStatus, string> = 
   construction: "Construction",
   commissioning: "Commissioning",
   operational: "Operational",
+  completed: "Completed",
   suspended: "Suspended",
   cancelled: "Cancelled",
   not_stated: "Not stated",

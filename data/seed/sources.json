@@ -774,10 +774,10 @@
     "url": "https://www.canada.ca/en/campaign/critical-minerals-in-canada/federal-support-for-critical-mineral-projects-and-value-chains/critical-minerals-research-development-and-demonstration-program.html",
     "language": "en",
     "datePublished": null,
-    "dateAccessed": "2026-09-23",
+    "dateAccessed": "2026-10-02",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "NRCan's standing programme page. States that CMRDD is administered through two funding streams (federal research and development projects, and contribution funding) and lists the projects that received contribution funding, each with organization, description, amount funded, status, critical minerals and location. Read in full in a browser on 2026-09-23 (canada.ca times out for automated clients). The page is updated in place and carries no publication date; the list is read as of the access date."
+    "notes": "NRCan's standing programme page. States that CMRDD is administered through two funding streams (federal research and development projects, and contribution funding) and lists the projects that received contribution funding, each with organization, description, amount funded, status, critical minerals and location. Rechecked on 2026-10-02. The page is updated in place and carries no publication date; the list is read as of the access date."
   },
   {
     "id": "src-mofcom-56",
@@ -1306,5 +1306,89 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Filed disclosure of the DPA grant structure: $16.2M currently obligated, $10.8M subject to future authorization, $12.8M of approved milestones collected in April 2026, and substantial completion of the Thompson Falls expansion."
+  },
+  {
+    "id": "src-cgf-cyclic-2026",
+    "title": "Canada Growth Fund Invests US$25 Million in Cyclic Materials to Strengthen Canada’s Rare Earth Supply Chain",
+    "publisher": "Canada Growth Fund",
+    "url": "https://www.cgf-fcc.ca/en/news/canada-growth-fund-invests-us-25-million-in-cyclic-materials-to-strengthen-canadas-rare-earth-supply-chain/",
+    "language": "en",
+    "datePublished": "2026-01-23",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Canada Growth Fund press release. The page is dated 23 January 2026 and carries a Kingston dateline of 20 January 2026. It states that CGF invested US$25 million in Cyclic Materials as part of a US$75 million Series C preferred-equity round, supporting expansion of the Kingston Centre of Excellence, Canadian R&D, the first commercial Hub and broader commercialization. It also states that Cyclic was then constructing its first commercial-scale Hub in Kingston."
+  },
+  {
+    "id": "src-open-canada-feddev-cyclic-2025",
+    "title": "Grants and Contributions: Agreement 1019177",
+    "publisher": "Government of Canada Open Government Portal",
+    "url": "https://search.open.canada.ca/grants/record/feddevontario,062-2025-2026-Q4-00111,current",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "dataset",
+    "confidence": "primary",
+    "notes": "Federal grants-and-contributions disclosure for Cyclic Materials Inc. Agreement 1019177. It records a C$5,000,000 contribution from the Federal Economic Development Agency for Southern Ontario, with an agreement period beginning 1 September 2025 and ending 30 September 2028, to scale operations and establish a rare-earth-elements recycling Centre of Excellence in Kingston, Ontario."
+  },
+  {
+    "id": "src-cyclic-centre-excellence-2025",
+    "title": "Cyclic Materials Announces USD $25M Investment to Establish Centre of Excellence for Rare Earth Recycling in Kingston, Ontario",
+    "publisher": "Cyclic Materials",
+    "url": "https://cyclicmaterials.earth/resources/cyclic-materials-announces-usd-25m-investment-to-establish-centre-of-excellence-for-rare-earth-recycling-in-kingston-ontario",
+    "language": "en",
+    "datePublished": "2025-06-11",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Company announcement establishing the Kingston Centre of Excellence as a 140,000-square-foot commercial processing and R&D facility. It describes the first commercial Hub, 500-tonne annual magnet-rich feed capacity and a then-targeted Q1 2026 start of operations. The company's stated US$25 million facility investment is not recorded as public support."
+  },
+  {
+    "id": "src-nrcan-cmpa-2026-round2",
+    "title": "Canada secures 30 new critical minerals partnerships and unlocks $12.1 billion in mining project capital",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/natural-resources-canada/news/2026/03/canada-secures-30-new-critical-minerals-partnerships-and-unlocks-121-billion-in-mining-project-capital.html",
+    "language": "en",
+    "datePublished": "2026-03-02",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "NRCan backgrounder for the second round of Critical Minerals Production Alliance partnerships. For Cyclic Materials, it states that the Kingston rare-earths recycling Centre of Excellence had a conditionally approved investment of up to C$9.1 million through the Global Partnerships Initiative and separately cites the recent US$25 million Canada Growth Fund equity investment."
+  },
+  {
+    "id": "src-nrcan-gpi-programme",
+    "title": "Global Partnerships Initiative",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/campaign/critical-minerals-in-canada/federal-support-for-critical-mineral-projects-and-value-chains/global-partnerships-initiative.html",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "NRCan's standing Global Partnerships Initiative page. It describes contribution funding as non-repayable and lists Cyclic Materials among GPI funded projects, with up to C$9.1 million to advance processing, separation and metallization technologies for an integrated rare-earth recycling value chain. The page is updated in place and carries no publication date."
+  },
+  {
+    "id": "src-canada-grant-cyclic-cmrdd-2024",
+    "title": "Grant and contribution record — Kingston Demonstration Plant-Extended Operations",
+    "publisher": "Government of Canada Open Government Portal / Natural Resources Canada",
+    "url": "https://search.open.canada.ca/grants/record/nrcan-rncan%2C115-2024-2025-Q2-15713%2Ccurrent",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "dataset",
+    "confidence": "primary",
+    "notes": "Official grant disclosure for agreement CMRDD2-048. Lists Cyclic Materials Inc., agreement value C$4,893,125, and agreement period 17 July 2024 through 31 March 2026."
+  },
+  {
+    "id": "src-canada-grant-ggt-cmrdd-2024",
+    "title": "Grant and contribution record — Recycling of Graphite from Secondary Sources for Use in Lithium-Ion Batteries",
+    "publisher": "Government of Canada Open Government Portal / Natural Resources Canada",
+    "url": "https://search.open.canada.ca/grants/record/nrcan-rncan%2C115-2024-2025-Q2-15593%2Ccurrent",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "dataset",
+    "confidence": "primary",
+    "notes": "Official grant disclosure for agreement CMRDD2-039. Lists Green Graphite Technologies Inc., agreement value C$3,500,000, and agreement period 9 August 2024 through 31 March 2026."
   }
 ]

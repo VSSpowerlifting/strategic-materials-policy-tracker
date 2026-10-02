@@ -30,16 +30,18 @@ function wicheeda() {
   return { commitment, project };
 }
 
-test("the live corpus surfaces Cyclic Materials as a P0 evidence mismatch", () => {
+test("the refreshed Cyclic demonstration bundle is complete and no longer a P0 mismatch", () => {
   const bundle = queue().bundles.find(
     (item) => item.projectId === "prj-ca-cyclic-kingston-demonstration-plant",
   );
   assert.ok(bundle, "Cyclic Materials bundle is present");
-  assert.equal(bundle.priority, "P0");
+  assert.equal(bundle.priority, "P3");
+  assert.ok(bundle.rows.every((row) => row.financial.status === "contracted"));
+  assert.ok(bundle.rows.every((row) => row.implementation.status === "completed"));
   assert.ok(
-    bundle.rows.some((row) =>
-      row.implementation.reasons.some((reason) =>
-        reason.includes("project evidence states completion"),
+    bundle.rows.every((row) =>
+      row.implementation.reasons.every(
+        (reason) => !reason.includes("project evidence states completion"),
       ),
     ),
   );
@@ -174,6 +176,25 @@ test("an operational project is routine even if financing is still live", () => 
     AS_OF,
   ).rows;
   assert.equal(row.implementation.status, "operational");
+  assert.equal(row.implementation.priority, "P3");
+});
+
+test("a completed project is routine even when its completion day is not stated", () => {
+  const { commitment, project } = wicheeda();
+  commitment.implementationStatusHistory = [
+    {
+      status: "completed",
+      date: null,
+      sourceId: commitment.financialStatusHistory[0].sourceId,
+    },
+  ];
+
+  const [row] = deriveLifecycleRefreshQueue(
+    [commitment],
+    [project],
+    AS_OF,
+  ).rows;
+  assert.equal(row.implementation.status, "completed");
   assert.equal(row.implementation.priority, "P3");
 });
 

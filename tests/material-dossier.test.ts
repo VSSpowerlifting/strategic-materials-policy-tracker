@@ -95,7 +95,7 @@ test("tungsten stats", () => {
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
   const expected: Record<string, [number, number, number]> = {
     tungsten: [5, 5, 0],
-    "rare-earth-elements": [9, 18, 9],
+    "rare-earth-elements": [9, 19, 10],
     graphite: [15, 19, 4],
     "ndfeb-magnets": [0, 4, 4],
     gallium: [1, 4, 3],
@@ -156,7 +156,7 @@ test("V1: the Allied Material grant is decided with no date, and the event date 
 
 test("a control clause's dates are its own status dates, labelled as such", () => {
   const clause = dossier("tungsten").controls.find((c) => c.title.startsWith("Export licensing"))!;
-  assert.equal(clause.asOfState, "In force on 23 Sep 2026");
+  assert.equal(clause.asOfState, "In force on 2 Oct 2026");
   assert.equal(clause.entry, "In force, status date 4 Feb 2025");
   assert.equal(clause.documentNumber, "MOFCOM/GACC Announcement No. 10 (2025)");
 });
