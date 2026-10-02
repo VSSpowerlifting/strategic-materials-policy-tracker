@@ -6,6 +6,8 @@ import {
   deriveLifecycleRefreshQueue,
   formatLifecycleRefreshReport,
 } from "@/lib/lifecycle-refresh";
+import { getAllFinancialCommitments } from "@/lib/data";
+import { site } from "@/lib/site";
 import type { FinancialCommitment } from "@/lib/types";
 
 const AS_OF = "2026-10-02";
@@ -250,3 +252,17 @@ test("future review dates are rejected against the explicit as-of date", () => {
     /after asOf 2026-10-02/,
   );
 });
+
+test("the committed corpus queues every financial row exactly once", () => {
+  const commitments = getAllFinancialCommitments();
+  const rows = deriveLifecycleRefreshQueue(commitments, site.lastUpdated);
+  const bundles = bundleLifecycleRefreshQueue(commitments, rows);
+  const bundledIds = bundles.flatMap((bundle) => bundle.commitmentIds).sort();
+  const commitmentIds = commitments.map((commitment) => commitment.id).sort();
+
+  assert.equal(rows.length, commitments.length);
+  assert.deepEqual(bundledIds, commitmentIds);
+  assert.equal(new Set(bundledIds).size, commitments.length);
+  assert.match(formatLifecycleRefreshReport(bundles, site.lastUpdated), new RegExp(site.lastUpdated));
+});
+
