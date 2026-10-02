@@ -4010,6 +4010,118 @@
     "notes": "No amount is stated, and none is inferred. The right of offtake that accompanies it is not separately recorded because the release gives no term for it."
   },
   {
+    "id": "fin-us-army-perpetua-antimony-otia",
+    "eventId": "evt-us-army-perpetua-otia-2023",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "27100000",
+      "currency": "USD",
+      "qualifier": "approximately",
+      "amountAsStated": "The current estimated amount is $27.1 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Defense / U.S. Army through the Defense Ordnance Technology Consortium",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Prototype Other Transaction authority",
+    "programmeId": null,
+    "recipient": "Perpetua Resources Idaho, Inc.",
+    "recipientOrgIds": [],
+    "project": "Domestic antimony trisulfide process demonstration and modular pilot plant using Stibnite ore",
+    "projectId": "prj-us-inl-antimony-pilot",
+    "facility": "INL antimony sulfide modular pilot plant",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "Idaho Falls, Idaho"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2023-08-18",
+        "sourceId": "src-perpetua-sec-dotc-2023",
+        "note": "The OTIA was awarded under Prototype Other Transaction authority on 18 August 2023."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": null,
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "note": "The filing reports grant income and cash reimbursements under the still-active OTIA; the full current estimated amount had not been paid."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "operational",
+        "date": "2026-07-29",
+        "sourceId": "src-us-army-antimony-pilot-2026",
+        "note": "The Army marked the opening of the prototype processing facility at INL and commencement of demonstration activities on 29 July 2026."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-perpetua-sec-dotc-2023",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 8.01",
+        "note": "The filing calls the support an OTIA/grant and describes the pilot-plant and process-development work."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "DOW Ordnance Technology Consortium Grant",
+        "note": "The filing summarizes the 2023, 2025 and 2026 additions and gives the current estimated amount of $27.1M."
+      },
+      {
+        "sourceId": "src-us-army-antimony-pilot-2026",
+        "supports": [
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and programme-history paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "The current estimate incorporates the original up-to-$15.5M 2023 OTIA plus later additions. The amount remains subject to adjustment as scope, costs and budget change."
+  },
+  {
     "id": "fin-us-au-framework-2025-au-financing",
     "eventId": "evt-us-au-framework-2025",
     "relationships": [],
@@ -6519,6 +6631,268 @@
     "notes": "OSC describes this as its first direct loan. Unsecured promissory note; the company may repay at any time."
   },
   {
+    "id": "fin-us-dod-perpetua-stibnite-dpa",
+    "eventId": "evt-us-dod-perpetua-dpa-2022",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "59200000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "bringing the total amount of the TIA to $59.2 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Defense, Air Force Research Laboratory",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "Perpetua Resources Idaho, Inc.",
+    "recipientOrgIds": [],
+    "project": "Stibnite Gold Project",
+    "projectId": "prj-us-stibnite",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "central Idaho"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2022-12-16",
+        "sourceId": "src-perpetua-sec-dpa-2022",
+        "note": "Perpetua Resources Idaho entered into the undefinitized Technology Investment Agreement effective 16 December 2022."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "note": "The June 2026 Form 10-Q states that the TIA expired on 16 June 2025, all available funds had been disbursed, and no additional funds remained available."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "note": "The company states that early-works construction began in October 2025 and additional critical-path construction began in May 2026; no single start date is used here."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-perpetua-sec-2024-q2",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "DPA Grant / liquidity disclosures",
+        "note": "The filing calls the TIA a grant, records the $34.4M modification and $59.2M total, and describes reimbursement under the agreement."
+      },
+      {
+        "sourceId": "src-dod-perpetua-dpa-2022",
+        "supports": [
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government Funding / DPA Grant",
+        "note": null
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Project financing and development discussion",
+        "note": "The grant funded construction readiness for a project that includes mining and a processing plant; the agreement did not allocate dollars between those stages."
+      },
+      {
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Construction update",
+        "note": null
+      },
+      {
+        "sourceId": "src-perpetua-sec-dpa-2022",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01",
+        "note": "The filing states that the Technology Investment Agreement became effective on 16 December 2022."
+      }
+    ],
+    "notes": "One row represents the same DPA Technology Investment Agreement across amendments, avoiding double-counting the original $24.8M award and the later $34.4M addition. The agreement was definitized at $24.8M in July 2023, modified by an additional $34.4M in May 2024, and ultimately fully disbursed."
+  },
+  {
+    "id": "fin-us-exim-perpetua-stibnite-2026",
+    "eventId": "evt-us-exim-stibnite-2026",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "2906000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "2,906 [US$ millions]",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export-Import Bank of the United States",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [],
+    "legalAuthority": "Make More in America Initiative",
+    "programmeId": null,
+    "recipient": "Perpetua Resources Idaho, Inc.",
+    "recipientOrgIds": [],
+    "project": "Stibnite Gold Project",
+    "projectId": "prj-us-stibnite",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "Idaho"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "gold"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-05-21",
+        "sourceId": "src-exim-stibnite-board-2026",
+        "note": "EXIM's board gave final approval. The bank's transaction table labels the transaction 'Authorized'; SMPT maps this to decided because definitive loan documentation had not yet been executed."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "note": "Early works were underway before EXIM's final approval and additional critical-path construction began in May 2026."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-exim-stibnite-transactions-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "2026 Perpetua Resources Corp. transaction row",
+        "note": "The table lists US$2.906B, U.S. mining sector, and status Authorized."
+      },
+      {
+        "sourceId": "src-exim-stibnite-board-2026",
+        "supports": [
+          "instrument",
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Transaction AP768324XX",
+        "note": "The minutes identify a direct loan for Gold and Antimony and record final approval."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "status",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Project Financing from U.S. EXIM",
+        "note": "The filing states that the board-approved loan remained subject to definitive documentation and conditions precedent and identifies the Make More in America Initiative."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Project financing and development discussion",
+        "note": "The loan finances the Stibnite development, which includes mine development and a processing plant; no amount is allocated by stage."
+      },
+      {
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Construction update",
+        "note": null
+      }
+    ],
+    "notes": "EXIM's official transaction table uses 'Authorized', but the commitment remains non-binding in SMPT's lifecycle until definitive loan documents are executed. The June 2026 filing states that availability depends on completion of definitive documentation and satisfaction of conditions precedent."
+  },
+  {
     "id": "fin-us-osc-obbba-2025-credit-subsidy",
     "eventId": "evt-us-dod-mp-2025",
     "relationships": [],
@@ -6917,370 +7291,5 @@
       }
     ],
     "notes": null
-  },
-  {
-    "id": "fin-us-dod-perpetua-stibnite-dpa",
-    "eventId": "evt-us-dod-perpetua-dpa-2022",
-    "relationships": [],
-    "instrument": "grant",
-    "valueRole": "commitment",
-    "capitalSource": "public",
-    "amount": {
-      "value": "59200000",
-      "currency": "USD",
-      "qualifier": "up_to",
-      "amountAsStated": "bringing the total amount of the TIA to $59.2 million",
-      "currencyBasis": "issuer_context"
-    },
-    "provider": "U.S. Department of Defense, Air Force Research Laboratory",
-    "providerJurisdiction": "us",
-    "providerOrgIds": [
-      "org-us-dod"
-    ],
-    "legalAuthority": "Defense Production Act Title III",
-    "programmeId": null,
-    "recipient": "Perpetua Resources Idaho, Inc.",
-    "recipientOrgIds": [],
-    "project": "Stibnite Gold Project",
-    "projectId": "prj-us-stibnite",
-    "facility": null,
-    "locations": [
-      {
-        "countryCode": "US",
-        "subnational": "Idaho",
-        "asStated": "central Idaho"
-      }
-    ],
-    "stages": [
-      "mining",
-      "processing"
-    ],
-    "stageAllocation": "multi_stage_unallocated",
-    "materialIds": [
-      "antimony"
-    ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
-    "financialStatusHistory": [
-      {
-        "status": "contracted",
-        "date": "2022-12-16",
-        "sourceId": "src-perpetua-sec-dpa-2022",
-        "note": "Perpetua Resources Idaho entered into the undefinitized Technology Investment Agreement effective 16 December 2022."
-      },
-      {
-        "status": "disbursed",
-        "date": null,
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "note": "The June 2026 Form 10-Q states that the TIA expired on 16 June 2025, all available funds had been disbursed, and no additional funds remained available."
-      }
-    ],
-    "implementationStatusHistory": [
-      {
-        "status": "construction",
-        "date": null,
-        "sourceId": "src-perpetua-stibnite-construction-2026",
-        "note": "The company states that early-works construction began in October 2025 and additional critical-path construction began in May 2026; no single start date is used here."
-      }
-    ],
-    "terms": [],
-    "outcomes": [],
-    "evidence": [
-      {
-        "sourceId": "src-perpetua-sec-2024-q2",
-        "supports": [
-          "instrument",
-          "value_role",
-          "capital_source",
-          "amount",
-          "provider",
-          "legal_authority",
-          "recipient",
-          "project",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "DPA Grant / liquidity disclosures",
-        "note": "The filing calls the TIA a grant, records the $34.4M modification and $59.2M total, and describes reimbursement under the agreement."
-      },
-      {
-        "sourceId": "src-dod-perpetua-dpa-2022",
-        "supports": [
-          "provider",
-          "recipient",
-          "project",
-          "location",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Opening paragraphs",
-        "note": null
-      },
-      {
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Government Funding / DPA Grant",
-        "note": null
-      },
-      {
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "supports": [
-          "stages"
-        ],
-        "evidence": "ambiguous",
-        "locator": "Project financing and development discussion",
-        "note": "The grant funded construction readiness for a project that includes mining and a processing plant; the agreement did not allocate dollars between those stages."
-      },
-      {
-        "sourceId": "src-perpetua-stibnite-construction-2026",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Construction update",
-        "note": null
-      }
-    ],
-    "notes": "One row represents the same DPA Technology Investment Agreement across amendments, avoiding double-counting the original $24.8M award and the later $34.4M addition. The agreement was definitized at $24.8M in July 2023, modified by an additional $34.4M in May 2024, and ultimately fully disbursed."
-  },
-  {
-    "id": "fin-us-army-perpetua-antimony-otia",
-    "eventId": "evt-us-army-perpetua-otia-2023",
-    "relationships": [],
-    "instrument": "grant",
-    "valueRole": "commitment",
-    "capitalSource": "public",
-    "amount": {
-      "value": "27100000",
-      "currency": "USD",
-      "qualifier": "approximately",
-      "amountAsStated": "The current estimated amount is $27.1 million",
-      "currencyBasis": "issuer_context"
-    },
-    "provider": "U.S. Department of Defense / U.S. Army through the Defense Ordnance Technology Consortium",
-    "providerJurisdiction": "us",
-    "providerOrgIds": [
-      "org-us-dod"
-    ],
-    "legalAuthority": "Prototype Other Transaction authority",
-    "programmeId": null,
-    "recipient": "Perpetua Resources Idaho, Inc.",
-    "recipientOrgIds": [],
-    "project": "Domestic antimony trisulfide process demonstration and modular pilot plant using Stibnite ore",
-    "projectId": "prj-us-inl-antimony-pilot",
-    "facility": "INL antimony sulfide modular pilot plant",
-    "locations": [
-      {
-        "countryCode": "US",
-        "subnational": "Idaho",
-        "asStated": "Idaho Falls, Idaho"
-      }
-    ],
-    "stages": [
-      "processing"
-    ],
-    "stageAllocation": "single_stage",
-    "materialIds": [
-      "antimony"
-    ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
-    "financialStatusHistory": [
-      {
-        "status": "contracted",
-        "date": "2023-08-18",
-        "sourceId": "src-perpetua-sec-dotc-2023",
-        "note": "The OTIA was awarded under Prototype Other Transaction authority on 18 August 2023."
-      },
-      {
-        "status": "partially_disbursed",
-        "date": null,
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "note": "The filing reports grant income and cash reimbursements under the still-active OTIA; the full current estimated amount had not been paid."
-      }
-    ],
-    "implementationStatusHistory": [
-      {
-        "status": "operational",
-        "date": "2026-07-29",
-        "sourceId": "src-us-army-antimony-pilot-2026",
-        "note": "The Army marked the opening of the prototype processing facility at INL and commencement of demonstration activities on 29 July 2026."
-      }
-    ],
-    "terms": [],
-    "outcomes": [],
-    "evidence": [
-      {
-        "sourceId": "src-perpetua-sec-dotc-2023",
-        "supports": [
-          "instrument",
-          "value_role",
-          "capital_source",
-          "provider",
-          "legal_authority",
-          "recipient",
-          "project",
-          "stages",
-          "materials",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Item 8.01",
-        "note": "The filing calls the support an OTIA/grant and describes the pilot-plant and process-development work."
-      },
-      {
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "supports": [
-          "amount",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "DOW Ordnance Technology Consortium Grant",
-        "note": "The filing summarizes the 2023, 2025 and 2026 additions and gives the current estimated amount of $27.1M."
-      },
-      {
-        "sourceId": "src-us-army-antimony-pilot-2026",
-        "supports": [
-          "project",
-          "facility",
-          "location",
-          "stages",
-          "materials",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Opening and programme-history paragraphs",
-        "note": null
-      }
-    ],
-    "notes": "The current estimate incorporates the original up-to-$15.5M 2023 OTIA plus later additions. The amount remains subject to adjustment as scope, costs and budget change."
-  },
-  {
-    "id": "fin-us-exim-perpetua-stibnite-2026",
-    "eventId": "evt-us-exim-stibnite-2026",
-    "relationships": [],
-    "instrument": "loan",
-    "valueRole": "commitment",
-    "capitalSource": "public",
-    "amount": {
-      "value": "2906000000",
-      "currency": "USD",
-      "qualifier": "exact",
-      "amountAsStated": "2,906 [US$ millions]",
-      "currencyBasis": "stated"
-    },
-    "provider": "Export-Import Bank of the United States",
-    "providerJurisdiction": "us",
-    "providerOrgIds": [],
-    "legalAuthority": "Make More in America Initiative",
-    "programmeId": null,
-    "recipient": "Perpetua Resources Idaho, Inc.",
-    "recipientOrgIds": [],
-    "project": "Stibnite Gold Project",
-    "projectId": "prj-us-stibnite",
-    "facility": null,
-    "locations": [
-      {
-        "countryCode": "US",
-        "subnational": "Idaho",
-        "asStated": "Idaho"
-      }
-    ],
-    "stages": [
-      "mining",
-      "processing"
-    ],
-    "stageAllocation": "multi_stage_unallocated",
-    "materialIds": [
-      "antimony"
-    ],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "gold"
-    ],
-    "financialStatusHistory": [
-      {
-        "status": "decided",
-        "date": "2026-05-21",
-        "sourceId": "src-exim-stibnite-board-2026",
-        "note": "EXIM's board gave final approval. The bank's transaction table labels the transaction 'Authorized'; SMPT maps this to decided because definitive loan documentation had not yet been executed."
-      }
-    ],
-    "implementationStatusHistory": [
-      {
-        "status": "construction",
-        "date": null,
-        "sourceId": "src-perpetua-stibnite-construction-2026",
-        "note": "Early works were underway before EXIM's final approval and additional critical-path construction began in May 2026."
-      }
-    ],
-    "terms": [],
-    "outcomes": [],
-    "evidence": [
-      {
-        "sourceId": "src-exim-stibnite-transactions-2026",
-        "supports": [
-          "instrument",
-          "value_role",
-          "capital_source",
-          "amount",
-          "provider",
-          "recipient",
-          "project",
-          "location",
-          "materials",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "2026 Perpetua Resources Corp. transaction row",
-        "note": "The table lists US$2.906B, U.S. mining sector, and status Authorized."
-      },
-      {
-        "sourceId": "src-exim-stibnite-board-2026",
-        "supports": [
-          "instrument",
-          "provider",
-          "recipient",
-          "project",
-          "materials",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Transaction AP768324XX",
-        "note": "The minutes identify a direct loan for Gold and Antimony and record final approval."
-      },
-      {
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "supports": [
-          "status",
-          "legal_authority"
-        ],
-        "evidence": "explicit",
-        "locator": "Project Financing from U.S. EXIM",
-        "note": "The filing states that the board-approved loan remained subject to definitive documentation and conditions precedent and identifies the Make More in America Initiative."
-      },
-      {
-        "sourceId": "src-perpetua-sec-2026-q2",
-        "supports": [
-          "stages"
-        ],
-        "evidence": "ambiguous",
-        "locator": "Project financing and development discussion",
-        "note": "The loan finances the Stibnite development, which includes mine development and a processing plant; no amount is allocated by stage."
-      },
-      {
-        "sourceId": "src-perpetua-stibnite-construction-2026",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Construction update",
-        "note": null
-      }
-    ],
-    "notes": "EXIM's official transaction table uses 'Authorized', but the commitment remains non-binding in SMPT's lifecycle until definitive loan documents are executed. The June 2026 filing states that availability depends on completion of definitive documentation and satisfaction of conditions precedent."
   }
 ]
