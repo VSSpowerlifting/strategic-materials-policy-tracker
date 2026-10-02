@@ -98,7 +98,7 @@ test("designations, projects and projects with no designation, per material; the
     "rare-earth-elements": [9, 18, 9],
     graphite: [15, 19, 4],
     "ndfeb-magnets": [0, 4, 4],
-    gallium: [1, 3, 2],
+    gallium: [1, 4, 3],
     germanium: [2, 5, 3],
     dysprosium: [0, 2, 2],
     terbium: [0, 2, 2],
