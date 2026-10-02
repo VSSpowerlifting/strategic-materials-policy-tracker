@@ -57,7 +57,14 @@
         "note": null
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-08-24",
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "note": "Alcoa states that the 24 August 2026 groundbreaking marked the start of construction at Wagerup."
+      }
+    ],
     "terms": [],
     "outcomes": [
       {
@@ -109,9 +116,22 @@
         "evidence": "ambiguous",
         "locator": "Sixth paragraph",
         "note": "\"Gallium Recovery Project\": recovery of gallium in processing, as the project name describes it."
+      },
+      {
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Supports the project's physical construction status only; it does not establish execution or payment of this specific public financial instrument."
       }
     ],
-    "notes": "The release says the equity finance \"includes a right of offtake for the Australian Government\", recorded as its own row, and that \"Japan has already provided 50 percent of the project costs to date\"; no Japanese row is recorded because no amount or instrument is stated."
+    "notes": "The release says the equity finance \"includes a right of offtake for the Australian Government\", recorded as its own row, and that \"Japan has already provided 50 percent of the project costs to date\"; no Japanese row is recorded because no amount or instrument is stated. Lifecycle review on 2 October 2026 confirmed physical construction began on 24 August 2026. The reviewed primary sources did not establish that this specific government equity/offtake instrument had been legally executed or paid, so its financial status is not promoted beyond the existing announced state.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-au-alcoa-sojitz-gallium-2025-offtake-right",
@@ -157,7 +177,14 @@
         "note": null
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-08-24",
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "note": "Alcoa states that the 24 August 2026 groundbreaking marked the start of construction at Wagerup."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -186,9 +213,22 @@
         "evidence": "ambiguous",
         "locator": "Sixth paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Supports the project's physical construction status only; it does not establish execution or payment of this specific public financial instrument."
       }
     ],
-    "notes": "No share or volume is stated."
+    "notes": "No share or volume is stated. Lifecycle review on 2 October 2026 confirmed physical construction began on 24 August 2026. The reviewed primary sources did not establish that this specific government equity/offtake instrument had been legally executed or paid, so its financial status is not promoted beyond the existing announced state.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-au-arafura-nolans-2025-equity",
@@ -244,6 +284,12 @@
         "date": "2025-10-20",
         "sourceId": "src-pm-us-au-framework-2025",
         "note": null
+      },
+      {
+        "status": "contracted",
+        "date": "2026-04-01",
+        "sourceId": "src-arafura-nolans-efa-subscription-2026",
+        "note": "Arafura executed a binding US$100 million subscription agreement with Export Finance Australia; completion remained subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -289,9 +335,26 @@
         "evidence": "ambiguous",
         "locator": "Fourth paragraph",
         "note": "That this equity counts towards Australia's USD 1 billion is implied, not stated."
+      },
+      {
+        "sourceId": "src-arafura-nolans-efa-subscription-2026",
+        "supports": [
+          "instrument",
+          "amount",
+          "provider",
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Highlights; Export Finance Australia; Annexure B",
+        "note": "The binding subscription establishes contractual commitment, not cash receipt."
       }
     ],
-    "notes": null
+    "notes": "The US$100 million EFA equity support announced in October 2025 became a binding subscription agreement on 1 April 2026. Completion remained subject to conditions precedent, so no disbursement is inferred. A 2 October 2026 lifecycle review found primary company material still tying full construction commencement to financing/settlement milestones; no later primary source reviewed cleanly confirmed full construction commencement, so no physical construction status is recorded here.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-au-cmf-2026-expanded-facility",
@@ -2971,14 +3034,14 @@
     "id": "fin-eu-jtf-2025-neo-magnet-project",
     "eventId": "evt-eu-resourceeu-2025",
     "relationships": [],
-    "instrument": "unspecified",
+    "instrument": "grant",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
-      "value": "18700000",
+      "value": "14800000",
       "currency": "EUR",
-      "qualifier": "exact",
-      "amountAsStated": "EUR 18.7 million",
+      "qualifier": "approximately",
+      "amountAsStated": "grant amount of approximately €14.8 million",
       "currencyBasis": "stated"
     },
     "provider": "Just Transition Fund",
@@ -3012,12 +3075,25 @@
     "financialStatusHistory": [
       {
         "status": "decided",
-        "date": null,
-        "sourceId": "src-ec-resourceeu-com-945",
-        "note": "\"The Just Transition Fund has provided EUR 18.7 million in funding\"; the Communication does not say whether the money is awarded or paid, or when."
+        "date": "2022-11-09",
+        "sourceId": "src-neo-jtf-award-2022",
+        "note": "Neo announced that it had been awarded a grant of up to €18.7 million under the JTF."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": "2025-12-31",
+        "sourceId": "src-neo-aif-2026",
+        "note": "As of 31 December 2025, Neo reported receiving an aggregate US$8.4 million from the JTF grant. The status date is the reporting cutoff, not an asserted transfer date."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "operational",
+        "date": "2026-09-14",
+        "sourceId": "src-neo-commercial-production-2026",
+        "note": "Neo announced that the European permanent magnet facility was in commercial production and shipping customer volumes."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -3047,9 +3123,48 @@
         "evidence": "ambiguous",
         "locator": "Section 2.1, second paragraph",
         "note": "\"Rare earths magnet project\": read as permanent-magnet manufacturing; the magnet type is not stated."
+      },
+      {
+        "sourceId": "src-neo-jtf-award-2022",
+        "supports": [
+          "instrument",
+          "capital_source",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening bullets and first two paragraphs",
+        "note": "Establishes the grant award; the original award was up to €18.7 million."
+      },
+      {
+        "sourceId": "src-neo-aif-2026",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "European Permanent Magnet facility / government support discussion",
+        "note": "Current grant terms are approximately €14.8 million; Neo reports US$8.4 million received by 31 December 2025."
+      },
+      {
+        "sourceId": "src-neo-commercial-production-2026",
+        "supports": [
+          "status",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening announcement",
+        "note": "Supports operational implementation status."
       }
     ],
-    "notes": "Recorded as reported in the RESourceEU Communication, not from the award decision; the instrument is not named. The Just Transition Fund is an EU fund under shared management, so the provider's actor is the EU."
+    "notes": "The JTF award was initially announced in November 2022 as up to €18.7 million. Neo's 2026 Annual Information Form reports amended terms at a 23% grant rate and an amount of approximately €14.8 million; the amount field reflects that later stated commitment. Neo also reported US$8.4 million received by 31 December 2025, so the financial lifecycle is partially disbursed. The facility entered commercial production on 14 September 2026.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-eu-resourceeu-2025-eu-funds",
@@ -4466,7 +4581,14 @@
         "note": null
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-08-24",
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "note": "Alcoa states that the 24 August 2026 groundbreaking marked the start of construction at Wagerup."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -4495,9 +4617,22 @@
         "evidence": "ambiguous",
         "locator": "Sixth paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Supports the project's physical construction status only; it does not establish execution or payment of this specific public financial instrument."
       }
     ],
-    "notes": "No amount is stated, and none is inferred. The right of offtake that accompanies it is not separately recorded because the release gives no term for it."
+    "notes": "No amount is stated, and none is inferred. The right of offtake that accompanies it is not separately recorded because the release gives no term for it. Lifecycle review on 2 October 2026 confirmed physical construction began on 24 August 2026. The reviewed primary sources did not establish that this specific government equity/offtake instrument had been legally executed or paid, so its financial status is not promoted beyond the existing announced state.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-us-army-perpetua-antimony-otia",
