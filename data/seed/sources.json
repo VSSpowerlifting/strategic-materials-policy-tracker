@@ -1042,5 +1042,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The executed agreement itself (Award ID No. AP-2026-0044, execution version), filed as Exhibit 10.1 to the 8-K in src-usar-8k-2026-06-03 and read in full in a browser on 2026-09-24. Article 1: \"“Direct Funding” means direct funding under the NOFO in the form of an other transaction\" and \"“CHIPS Incentives” means the provision of direct funding (via grants, cooperative agreements, or other transactions), loans and loan guarantees as described in the NOFO\". It never calls the awards grants. Section 2.1(a) sets five maximum award amounts (Round Top $132,000,000; Stillwater Magnet $50,000,000; Stillwater Metal $20,000,000; Magnet Project 2 $60,000,000; Metal Project 2 $15,000,000). Section 2.1(b): \"No obligation of funds for the Award by the Department shall occur upon execution of this Agreement. An obligation of funds for the Award shall occur only upon delivery of a Funding Obligation.\" Section 4.16 makes the issuance of Equity Interests to the Department a condition precedent to the Award Date. Section 10.1.1 lists the clawback events and Section 10.2 has the recipient repay recovered disbursements within 120 days of the Department's demand. It supports contract terms it states directly and is attributed to the parties."
+  },
+  {
+    "id": "src-lynas-q3-2023-jare-cash",
+    "title": "Lynas Rare Earths — Quarterly Report for the period ended 31 March 2023",
+    "publisher": "Lynas Rare Earths Limited / ASX",
+    "url": "https://announcements.asx.com.au/asxpdf/20230421/pdf/45nw3k77phf61l.pdf",
+    "language": "en",
+    "datePublished": "2023-04-21",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "ASX-filed quarterly report stating that under the March 2023 JARE agreements, JARE provided AUD200 million in cash through a subscription for ordinary Lynas shares."
+  },
+  {
+    "id": "src-lynas-terbium-first-production-2025",
+    "title": "Lynas adds Heavy Rare Earths product with first separated Terbium",
+    "publisher": "Lynas Rare Earths Limited / ASX",
+    "url": "https://announcements.asx.com.au/asxpdf/20250618/pdf/06kvhfkwxybzxj.pdf",
+    "language": "en",
+    "datePublished": "2025-06-18",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "ASX announcement confirming first production of separated terbium oxide at Lynas Malaysia on the heavy-rare-earth production line, following first dysprosium oxide production in May 2025."
   }
 ]

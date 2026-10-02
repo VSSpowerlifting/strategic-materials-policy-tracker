@@ -2824,9 +2824,28 @@
         "date": "2023-03-07",
         "sourceId": "src-jogmec-lynas",
         "note": null
+      },
+      {
+        "status": "contracted",
+        "date": "2023-03-07",
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "note": "Lynas' April 2023 quarterly report says that, as announced on 7 March, Lynas signed new agreements with JARE under which JARE extended its support."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "note": "The same quarterly report states that JARE provided AUD200 million in cash through a subscription for ordinary Lynas shares; it does not state the cash-transfer date."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "operational",
+        "date": "2025-06-18",
+        "sourceId": "src-lynas-terbium-first-production-2025",
+        "note": "Lynas confirmed first separated terbium oxide production at Lynas Malaysia after first dysprosium oxide production in May 2025, completing the heavy-rare-earth separation objective named in the 2023 growth plan."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2846,6 +2865,24 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "JARE Support for Lynas' Growth section",
+        "note": "States both execution of the new agreements and provision of the AUD200 million contribution in cash."
+      },
+      {
+        "sourceId": "src-lynas-terbium-first-production-2025",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Confirms production on the new Heavy Rare Earth production line of both Dy and Tb, the two HRE products covered by the 2023 supply arrangement."
       }
     ],
     "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split."
