@@ -1042,5 +1042,65 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The executed agreement itself (Award ID No. AP-2026-0044, execution version), filed as Exhibit 10.1 to the 8-K in src-usar-8k-2026-06-03 and read in full in a browser on 2026-09-24. Article 1: \"“Direct Funding” means direct funding under the NOFO in the form of an other transaction\" and \"“CHIPS Incentives” means the provision of direct funding (via grants, cooperative agreements, or other transactions), loans and loan guarantees as described in the NOFO\". It never calls the awards grants. Section 2.1(a) sets five maximum award amounts (Round Top $132,000,000; Stillwater Magnet $50,000,000; Stillwater Metal $20,000,000; Magnet Project 2 $60,000,000; Metal Project 2 $15,000,000). Section 2.1(b): \"No obligation of funds for the Award by the Department shall occur upon execution of this Agreement. An obligation of funds for the Award shall occur only upon delivery of a Funding Obligation.\" Section 4.16 makes the issuance of Equity Interests to the Department a condition precedent to the Award Date. Section 10.1.1 lists the clawback events and Section 10.2 has the recipient repay recovered disbursements within 120 days of the Department's demand. It supports contract terms it states directly and is attributed to the parties."
+  },
+  {
+    "id": "src-dow-arr-antimony-2025",
+    "title": "Department of War Awards $43.4 Million to Further On-Shore Antimony Trisulfide Production",
+    "publisher": "U.S. Department of War",
+    "url": "https://www.war.gov/News/Releases/Release/Article/4319016/department-of-war-awards-434-million-to-further-on-shore-antimony-trisulfide-pr/",
+    "language": "en",
+    "datePublished": "2025-09-30",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official DPA Title III award release for Alaska Range Resources. States the $43.4M award, integrated extraction/concentration/refining scope, Estelle/Stibium location, and national-security/supply-chain rationale."
+  },
+  {
+    "id": "src-nova-arr-h1-2026",
+    "title": "Nova Minerals Limited — Half-Year Financial Report and Review of Operations",
+    "publisher": "Nova Minerals Limited / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1852551/000149315226019450/ex99-1.htm",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Filed company report describing Alaska Range Resources as Nova's 100%-owned U.S. subsidiary, the $43.4M 24-month firm-fixed-price DPA project sub-agreement, and Port MacKenzie refinery development."
+  },
+  {
+    "id": "src-nova-arr-q4-2025",
+    "title": "Nova Minerals Limited — Quarterly Activities and Cashflow Report, December 2025",
+    "publisher": "Nova Minerals Limited / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1852551/000149315226003702/ex99-1.htm",
+    "language": "en",
+    "datePublished": "2026-01-27",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Filed quarterly report recording commencement of procurement for mining and processing equipment for starter antimony operations and the Port MacKenzie refinery."
+  },
+  {
+    "id": "src-dow-usac-antimony-2026",
+    "title": "Department of War Invests $27M for the Domestic Excavation, Extraction, Processing, and Refinement of Antimony",
+    "publisher": "U.S. Department of War",
+    "url": "https://www.war.gov/News/Releases/Release/Article/4421101/department-of-war-invests-27m-for-the-domestic-excavation-extraction-processing/",
+    "language": "en",
+    "datePublished": "2026-03-04",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official DPA Title III release describing a February 24, 2026 $27M investment in United States Antimony Corporation for Montana processing/refining expansion and Alaska feedstock development."
+  },
+  {
+    "id": "src-usac-2026-q2-10q",
+    "title": "United States Antimony Corporation, Form 10-Q for the quarter ended June 30, 2026",
+    "publisher": "United States Antimony Corporation / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm",
+    "language": "en",
+    "datePublished": "2026-08-11",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Filed disclosure of the DPA grant structure: $16.2M currently obligated, $10.8M subject to future authorization, $12.8M of approved milestones collected in April 2026, and substantial completion of the Thompson Falls expansion."
   }
 ]
