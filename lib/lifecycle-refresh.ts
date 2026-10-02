@@ -67,6 +67,7 @@ const ACTIVE_IMPLEMENTATION = new Set<ImplementationStatus>([
 const ADVANCED_IMPLEMENTATION = new Set<ImplementationStatus>([
   "commissioning",
   "operational",
+  "completed",
 ]);
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -240,6 +241,7 @@ function implementationSide(
   if (
     passed.length > 0 &&
     current !== "operational" &&
+    current !== "completed" &&
     current !== "cancelled"
   ) {
     priority = higherPriority(priority, "P1");
