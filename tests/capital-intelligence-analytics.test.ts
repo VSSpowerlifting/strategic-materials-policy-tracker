@@ -922,7 +922,7 @@ test("in the corpus, non-binding financing proposals are indications, in no sum 
   if (!guarantee.summed) assert.fail("loan guarantees are summed");
   assert.deepEqual(guarantee.countedIds, ["fin-us-chips-usar-2026-loan-guarantee"]);
   assert.deepEqual([guarantee.byQualifier, guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000" }, { up_to: "1300000000" }, {}]);
-  // Canada's portfolio counts its two letters in their own layer only.
+  // Canada's portfolio counts its two letters plus the Trail commercial framework in the indication layer only.
   const canada = actorPortfolio("canada", all).counts;
-  assert.equal(canada.byLayer.indication, 2);
+  assert.equal(canada.byLayer.indication, 3);
 });
