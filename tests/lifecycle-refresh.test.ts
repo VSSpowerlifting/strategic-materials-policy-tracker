@@ -209,3 +209,24 @@ test("queue output is deterministic and states what inclusion means", () => {
   );
   assert.match(output, /^Lifecycle refresh queue — as of 2026-10-02/m);
 });
+
+test("Lynas equity cash receipt has no invented payment day or whole-plan completion", () => {
+  const commitment = getFinancialCommitmentById("fin-jp-jare-lynas-2023-equity")!;
+  assert.equal(commitment.amount?.value, "200000000");
+  assert.equal(commitment.amount?.currency, "AUD");
+  assert.deepEqual(
+    commitment.financialStatusHistory.map(({ status, date }) => ({ status, date })),
+    [
+      { status: "decided", date: "2023-03-07" },
+      { status: "contracted", date: "2023-03-07" },
+      { status: "disbursed", date: null },
+    ],
+  );
+  assert.deepEqual(commitment.implementationStatusHistory, []);
+  assert.equal(commitment.lifecycleReview?.financialStatusCheckedAt, AS_OF);
+  assert.equal(commitment.lifecycleReview?.implementationStatusCheckedAt, null);
+  const [row] = deriveLifecycleRefreshQueue([commitment], [], AS_OF).rows;
+  assert.equal(row.financial.status, "disbursed");
+  assert.equal(row.financial.priority, "P3");
+  assert.equal(row.implementation.applicable, false);
+});

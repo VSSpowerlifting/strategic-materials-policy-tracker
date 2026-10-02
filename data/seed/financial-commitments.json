@@ -3429,6 +3429,18 @@
         "date": "2023-03-07",
         "sourceId": "src-jogmec-lynas",
         "note": null
+      },
+      {
+        "status": "contracted",
+        "date": "2023-03-07",
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "note": "Lynas' quarterly filing states that the new JARE agreements were signed on 7 March 2023."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "note": "The quarterly filing confirms receipt of AUD200 million cash through an ordinary-share subscription during the March quarter; no exact transfer day is stated."
       }
     ],
     "implementationStatusHistory": [],
@@ -3451,9 +3463,22 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 10, JARE Support for Lynas' Growth; page 11, Cash Position",
+        "note": "The filing reports signed agreements, the cash contribution, and AUD200 million proceeds from the JARE share issue in the March-quarter cash-flow table."
       }
     ],
-    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split."
+    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split. The cash receipt is confirmed by Lynas' March-quarter 2023 filing. A later HRE production milestone at Lynas Malaysia is not treated as completion of this broader, unallocated light- and heavy-rare-earth growth plan.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": null
+    }
   },
   {
     "id": "fin-jp-jare-lynas-2023-hre-offtake",
