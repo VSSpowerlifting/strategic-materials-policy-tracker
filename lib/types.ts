@@ -683,6 +683,16 @@ export type StatusEntry<S extends string> = {
 export type FinancialStatusEntry = StatusEntry<FinancialStatus>;
 export type ImplementationStatusEntry = StatusEntry<ImplementationStatus>;
 
+/**
+ * Tracker-maintenance timestamps for lifecycle review. These are not source
+ * claims and never belong in status histories: they only record when an
+ * appropriate follow-up search was completed.
+ */
+export type LifecycleReview = {
+  financialStatusCheckedAt: string | null;
+  implementationStatusCheckedAt: string | null;
+};
+
 export type ControlStatusEntry = StatusEntry<ControlStatus> & {
   /**
    * The stated end of this status, when the source gives one: the date a
@@ -825,6 +835,11 @@ export type FinancialCommitment = {
   untrackedMaterialsAsStated: string[];
   financialStatusHistory: FinancialStatusEntry[];
   implementationStatusHistory: ImplementationStatusEntry[];
+  /**
+   * Optional until a record has entered the lifecycle-refresh workflow.
+   * Missing means never reviewed; it does not imply the status is unchanged.
+   */
+  lifecycleReview?: LifecycleReview;
   terms: InstrumentTerm[];
   outcomes: StatedOutcome[];
   evidence: FinancialEvidence[];
