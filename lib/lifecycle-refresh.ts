@@ -121,7 +121,7 @@ function projectProgressSignals(project: Project | undefined): string[] {
     .join(" ");
   const signals: string[] = [];
   const tests: [RegExp, string][] = [
-    [/\bcompleted in\b|\bstatus:[^.;]{0,160}\bcompleted\b/i, "project evidence states completion"],
+    [/\bcompleted in\b|\bstatus:\s*completed\b/i, "project evidence states completion"],
     [/\bentered (?:commercial )?production\b|\bcommercial production\b|\bprocessing operations (?:have )?commenced\b/i, "project evidence states production or processing has begun"],
     [/\bcommissioned\b|\bcommissioning (?:has )?(?:begun|commenced|started)\b/i, "project evidence states commissioning"],
     [/\bground broke\b|\bgroundbreaking\b|\bunder construction\b|\bconstruction (?:has )?(?:begun|commenced|started)\b/i, "project evidence states construction"],
@@ -543,9 +543,15 @@ export function deriveLifecycleRefreshQueue(
     else firstByProject.set(commitment.projectId, commitment.id);
   }
 
+  // Project is the primary human research unit. Relationship links only
+  // bundle records that do not already belong to a named project; otherwise an
+  // umbrella/package row can collapse multiple distinct projects into one
+  // research bundle.
   for (const commitment of sortedCommitments) {
+    if (commitment.projectId !== null) continue;
     for (const relationship of commitment.relationships) {
-      if (byCommitment.has(relationship.commitmentId)) uf.union(commitment.id, relationship.commitmentId);
+      const related = byCommitment.get(relationship.commitmentId);
+      if (related && related.projectId === null) uf.union(commitment.id, relationship.commitmentId);
     }
   }
 
