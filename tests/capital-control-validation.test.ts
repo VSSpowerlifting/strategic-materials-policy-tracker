@@ -482,6 +482,36 @@ test("dates are real calendar dates; a target date may be a year or a year-month
   ]);
 });
 
+test("lifecycle review timestamps are maintenance metadata and cannot postdate the validator as-of date", () => {
+  assertErrors(
+    validate([
+      commitment({
+        lifecycleReview: {
+          financialStatusCheckedAt: TODAY,
+          implementationStatusCheckedAt: null,
+        },
+      }),
+    ]),
+    [],
+  );
+
+  assertErrors(
+    validate(
+      [
+        commitment({
+          lifecycleReview: {
+            financialStatusCheckedAt: "2026-09-24",
+            implementationStatusCheckedAt: TODAY,
+          },
+        }),
+      ],
+      [],
+      { today: TODAY },
+    ),
+    ["invalid_date@fin-alpha-grant:lifecycleReview.financialStatusCheckedAt"],
+  );
+});
+
 // --- Shape ------------------------------------------------------------------
 
 test("records carry exactly the schema's fields, with the right JSON types", () => {
