@@ -72,7 +72,9 @@
       "evt-us-proc-11001-2026",
       "evt-us-osc-vulcan-reelement-2025",
       "evt-us-aam-adcvd-2025",
-      "evt-us-chips-usar-2026"
+      "evt-us-chips-usar-2026",
+      "evt-us-dod-5n-germanium-2024",
+      "evt-us-dow-5n-germanium-2025"
     ],
     "sourceIds": [
       "src-doi-press-2025",
@@ -181,7 +183,8 @@
       "evt-ca-cms-2022",
       "evt-ca-nrcan-cmrdd-2024",
       "evt-ca-g7-cmpa-2025",
-      "evt-ca-nrcan-pdac-2026"
+      "evt-ca-nrcan-pdac-2026",
+      "evt-ca-trail-strategic-metals-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
