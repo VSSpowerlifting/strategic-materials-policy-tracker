@@ -373,14 +373,57 @@ function implementationAssessment(
 
   if (status === null || status === "not_stated" || status === "announced") {
     const binding = financial.status !== null && BINDING_OR_FUNDED.has(financial.status);
-    if (
-      (binding && (financial.ageDays === null || financial.ageDays > 180)) ||
-      (!binding && (financial.ageDays === null || financial.ageDays > 180))
-    ) {
+
+    // Once the physical clock has its own evidence or review date, classify it
+    // from that clock. A fresh implementation review must not remain stale just
+    // because the financing is old.
+    if (age !== null) {
+      if (age > 180) {
+        reasons.push(`physical implementation has no substantive later stage after ${age} days`);
+        return {
+          status,
+          statusDate: current?.date ?? null,
+          checkedAt,
+          referenceDate,
+          ageDays: age,
+          applicable: true,
+          priority: "P1",
+          reasons,
+        };
+      }
+      if (age >= 90) {
+        reasons.push(`physical implementation was last evidenced or reviewed ${age} days ago`);
+        return {
+          status,
+          statusDate: current?.date ?? null,
+          checkedAt,
+          referenceDate,
+          ageDays: age,
+          applicable: true,
+          priority: "P2",
+          reasons,
+        };
+      }
+      reasons.push(`physical implementation was reviewed recently (${age} days)`);
+      return {
+        status,
+        statusDate: current?.date ?? null,
+        checkedAt,
+        referenceDate,
+        ageDays: age,
+        applicable: true,
+        priority: "P3",
+        reasons,
+      };
+    }
+
+    // No physical status date and no physical review yet: use the financing
+    // clock only to decide how urgently that first implementation check is due.
+    if (financial.ageDays === null || financial.ageDays > 180) {
       reasons.push(
         binding
-          ? "binding or funded commitment has no substantive physical-status review"
-          : "named physical undertaking has no substantive implementation status after more than 180 days",
+          ? "binding or funded commitment has never had a substantive physical-status review"
+          : "named physical undertaking has never had an implementation review and its financial evidence is old or undated",
       );
       return {
         status,
@@ -393,11 +436,11 @@ function implementationAssessment(
         reasons,
       };
     }
-    if (binding || (financial.ageDays !== null && financial.ageDays >= 90)) {
+    if (binding || financial.ageDays >= 90) {
       reasons.push(
         binding
-          ? "recent binding commitment has no substantive physical-status review"
-          : "physical implementation has not been reviewed within the normal refresh window",
+          ? "recent binding commitment has never had a substantive physical-status review"
+          : "physical implementation has not yet been reviewed within the normal refresh window",
       );
       return {
         status,
