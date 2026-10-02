@@ -1042,5 +1042,113 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The executed agreement itself (Award ID No. AP-2026-0044, execution version), filed as Exhibit 10.1 to the 8-K in src-usar-8k-2026-06-03 and read in full in a browser on 2026-09-24. Article 1: \"“Direct Funding” means direct funding under the NOFO in the form of an other transaction\" and \"“CHIPS Incentives” means the provision of direct funding (via grants, cooperative agreements, or other transactions), loans and loan guarantees as described in the NOFO\". It never calls the awards grants. Section 2.1(a) sets five maximum award amounts (Round Top $132,000,000; Stillwater Magnet $50,000,000; Stillwater Metal $20,000,000; Magnet Project 2 $60,000,000; Metal Project 2 $15,000,000). Section 2.1(b): \"No obligation of funds for the Award by the Department shall occur upon execution of this Agreement. An obligation of funds for the Award shall occur only upon delivery of a Funding Obligation.\" Section 4.16 makes the issuance of Equity Interests to the Department a condition precedent to the Award Date. Section 10.1.1 lists the clawback events and Section 10.2 has the recipient repay recovered disbursements within 120 days of the Department's demand. It supports contract terms it states directly and is attributed to the parties."
+  },
+  {
+    "id": "src-dod-perpetua-dpa-2022",
+    "title": "DoD Issues $24.8M Critical Minerals Award to Perpetua Resources",
+    "publisher": "U.S. Department of Defense",
+    "url": "https://www.war.gov/News/Releases/Release/Article/3249350/dod-issues-248m-critical-minerals-award-to-perpetua-resources/",
+    "language": "en",
+    "datePublished": "2022-12-19",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "DoD release announcing the initial Defense Production Act Title III award to Perpetua Resources Idaho, Inc. for environmental and engineering work on the Stibnite Gold Project and identifying antimony trisulfide as the defense-relevant material."
+  },
+  {
+    "id": "src-perpetua-sec-dpa-2022",
+    "title": "Perpetua Resources Corp., Form 8-K (Defense Production Act Technology Investment Agreement)",
+    "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465922128035/tm2232993d1_8k.htm",
+    "language": "en",
+    "datePublished": "2022-12-19",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Filed disclosure of the Technology Investment Agreement effective 16 December 2022. States that Perpetua Resources Idaho entered into an undefinitized TIA with DoD/Air Force Research Laboratory for up to $24.8 million under DPA Title III."
+  },
+  {
+    "id": "src-perpetua-sec-2024-q2",
+    "title": "Perpetua Resources Corp., Form 10-Q for the quarter ended June 30, 2024",
+    "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465924087827/ppta-20240630x10q.htm",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Filed disclosure that the DPA TIA was definitized at $24.8 million on 25 July 2023 and modified on 2 May 2024 with an additional $34.4 million, bringing the total to $59.2 million. Also reports reimbursements under the agreement."
+  },
+  {
+    "id": "src-perpetua-sec-dotc-2023",
+    "title": "Perpetua Resources Corp., Form 8-K (Ordnance Technology Initiative Agreement)",
+    "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465923093671/tm2324218d1_8k.htm",
+    "language": "en",
+    "datePublished": "2023-08-21",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Filed disclosure of the 18 August 2023 OTIA through the Defense Ordnance Technology Consortium, originally up to $15.5 million, to demonstrate a domestic antimony trisulfide supply chain using Stibnite ore and to develop a modular pilot plant."
+  },
+  {
+    "id": "src-perpetua-sec-2026-q2",
+    "title": "Perpetua Resources Corp., Form 10-Q for the quarter ended June 30, 2026",
+    "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465926097134/ppta-20260630x10q.htm",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Filed disclosure that all $59.2 million available under the DPA TIA had been disbursed and the agreement expired 16 June 2025; also records the OTIA's later additions to a current estimated $27.1 million and ongoing reimbursements. Separately describes the EXIM board-approved $2.9 billion senior secured loan as subject to definitive documentation and conditions precedent."
+  },
+  {
+    "id": "src-us-army-antimony-pilot-2026",
+    "title": "U.S. Army, Perpetua Resources, and INL launch domestic antimony sulfide processing facility",
+    "publisher": "U.S. Army",
+    "url": "https://www.army.mil/article/294430/u_s_army_perpetua_resources_and_inl_launch_domestic_antimony_sulfide_processing_facility",
+    "language": "en",
+    "datePublished": "2026-08-06",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Army article on the 29 July 2026 opening of the Idaho National Laboratory prototype antimony-sulfide processing facility. States that the Army effort began in 2023 at $27.1 million and that the separate DPA project with Perpetua totaled about $59.3 million."
+  },
+  {
+    "id": "src-exim-stibnite-transactions-2026",
+    "title": "Project and Structured Finance Transactions — Perpetua Resources Corp.",
+    "publisher": "Export-Import Bank of the United States",
+    "url": "https://www.exim.gov/solutions/project-and-structured-finance/transactions",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "EXIM transaction table, updated 2 July 2026, listing Perpetua Resources Corp. as a 2026 U.S. mining project-finance transaction with a financed amount of US$2.906 billion and status 'Authorized'."
+  },
+  {
+    "id": "src-exim-stibnite-board-2026",
+    "title": "EXIM Board Meeting Minutes — May 21, 2026",
+    "publisher": "Export-Import Bank of the United States",
+    "url": "https://www.exim.gov/news/minutes/board-meeting-minutes-2026-05-21",
+    "language": "en",
+    "datePublished": "2026-05-21",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Board minutes recording final approval of transaction AP768324XX for Perpetua Resources Idaho Inc.; identifies it as a direct loan for a Gold and Antimony project in Idaho."
+  },
+  {
+    "id": "src-perpetua-stibnite-construction-2026",
+    "title": "Perpetua Resources Advances Construction of the Stibnite Gold Project",
+    "publisher": "Perpetua Resources Corp.",
+    "url": "https://www.investors.perpetuaresources.com/investors/news/perpetua-resources-advances-construction-of-the-stibnite-gold-project",
+    "language": "en",
+    "datePublished": "2026-06-01",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Company project update stating that additional critical-path construction began 30 May 2026 and built on early-works construction that began in October 2025."
   }
 ]
