@@ -26,6 +26,32 @@
     "notes": null
   },
   {
+    "id": "org-alaska-range-resources",
+    "name": "Alaska Range Resources, LLC",
+    "nameOriginal": null,
+    "aliases": [
+      "ARR"
+    ],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nova-arr-h1-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "U.S. Department of War Grant section",
+        "note": "Nova describes Alaska Range Resources as its 100%-owned U.S. subsidiary."
+      }
+    ],
+    "notes": "Wholly owned U.S. subsidiary of Nova Minerals Limited; the current organization schema does not encode corporate-subsidiary ownership."
+  },
+  {
     "id": "org-allied-material",
     "name": "Allied Material Corporation",
     "nameOriginal": "株式会社アライドマテリアル",
@@ -1849,6 +1875,33 @@
     "notes": null
   },
   {
+    "id": "org-us-antimony",
+    "name": "United States Antimony Corporation",
+    "nameOriginal": null,
+    "aliases": [
+      "US Antimony Corporation",
+      "USAC"
+    ],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-usac-2026-q2-10q",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover page; Note 9",
+        "note": "SEC-filed quarterly report identifies the registrant and its U.S. operations."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-us-commerce",
     "name": "U.S. Department of Commerce",
     "nameOriginal": null,
@@ -2044,59 +2097,6 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
-      }
-    ],
-    "notes": null
-  },
-  {
-    "id": "org-alaska-range-resources",
-    "name": "Alaska Range Resources, LLC",
-    "nameOriginal": null,
-    "aliases": [
-      "ARR"
-    ],
-    "kind": "company",
-    "countryCode": "US",
-    "actor": null,
-    "parents": [],
-    "evidence": [
-      {
-        "sourceId": "src-nova-arr-h1-2026",
-        "supports": [
-          "name",
-          "kind",
-          "country"
-        ],
-        "evidence": "explicit",
-        "locator": "U.S. Department of War Grant section",
-        "note": "Nova describes Alaska Range Resources as its 100%-owned U.S. subsidiary."
-      }
-    ],
-    "notes": "Wholly owned U.S. subsidiary of Nova Minerals Limited; the current organization schema does not encode corporate-subsidiary ownership."
-  },
-  {
-    "id": "org-us-antimony",
-    "name": "United States Antimony Corporation",
-    "nameOriginal": null,
-    "aliases": [
-      "US Antimony Corporation",
-      "USAC"
-    ],
-    "kind": "company",
-    "countryCode": "US",
-    "actor": null,
-    "parents": [],
-    "evidence": [
-      {
-        "sourceId": "src-usac-2026-q2-10q",
-        "supports": [
-          "name",
-          "kind",
-          "country"
-        ],
-        "evidence": "explicit",
-        "locator": "Cover page; Note 9",
-        "note": "SEC-filed quarterly report identifies the registrant and its U.S. operations."
       }
     ],
     "notes": null
