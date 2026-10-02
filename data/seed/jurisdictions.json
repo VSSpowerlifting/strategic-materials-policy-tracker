@@ -72,7 +72,10 @@
       "evt-us-proc-11001-2026",
       "evt-us-osc-vulcan-reelement-2025",
       "evt-us-aam-adcvd-2025",
-      "evt-us-chips-usar-2026"
+      "evt-us-chips-usar-2026",
+      "evt-us-dod-perpetua-dpa-2022",
+      "evt-us-army-perpetua-otia-2023",
+      "evt-us-exim-stibnite-2026"
     ],
     "sourceIds": [
       "src-doi-press-2025",
