@@ -177,6 +177,25 @@ test("an operational project is routine even if financing is still live", () => 
   assert.equal(row.implementation.priority, "P3");
 });
 
+test("a completed project is routine even when its completion day is not stated", () => {
+  const { commitment, project } = wicheeda();
+  commitment.implementationStatusHistory = [
+    {
+      status: "completed",
+      date: null,
+      sourceId: commitment.financialStatusHistory[0].sourceId,
+    },
+  ];
+
+  const [row] = deriveLifecycleRefreshQueue(
+    [commitment],
+    [project],
+    AS_OF,
+  ).rows;
+  assert.equal(row.implementation.status, "completed");
+  assert.equal(row.implementation.priority, "P3");
+});
+
 test("queue output is deterministic and states what inclusion means", () => {
   const first = queue();
   const second = queue();
