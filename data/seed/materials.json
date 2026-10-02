@@ -336,7 +336,12 @@
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
       "evt-cn-antismuggling-campaign-2025",
-      "evt-ca-trail-strategic-metals-2026"
+      "evt-ca-trail-strategic-metals-2026",
+      "evt-us-dod-perpetua-dpa-2022",
+      "evt-us-army-perpetua-otia-2023",
+      "evt-us-exim-stibnite-2026",
+      "evt-us-dow-arr-antimony-2025",
+      "evt-us-dow-usac-antimony-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
