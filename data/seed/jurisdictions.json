@@ -72,7 +72,9 @@
       "evt-us-proc-11001-2026",
       "evt-us-osc-vulcan-reelement-2025",
       "evt-us-aam-adcvd-2025",
-      "evt-us-chips-usar-2026"
+      "evt-us-chips-usar-2026",
+      "evt-us-dow-arr-antimony-2025",
+      "evt-us-dow-usac-antimony-2026"
     ],
     "sourceIds": [
       "src-doi-press-2025",
