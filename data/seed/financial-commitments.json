@@ -730,6 +730,97 @@
     "notes": "The release does not say which instruments the transactions will use. The facility it is drawn from provides loans and equity support, and the Reserve operates by securing and on-selling rights to minerals."
   },
   {
+    "id": "fin-ca-cgf-cyclic-2026-equity",
+    "eventId": "evt-ca-cgf-cyclic-2026",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "25000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "US$25 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Cyclic Materials Inc.",
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "project": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "projectId": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "stages": [
+      "processing",
+      "recycling",
+      "research_development"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The CGF release says it \"has invested\" US$25 million and describes the transaction as part of a Series C preferred-equity round. Recorded as a binding equity transaction, not as disbursed cash because no payment timing is stated."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The release says Cyclic was \"now constructing its first commercial-scale Hub in Kingston\"."
+      }
+    ],
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    },
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-cgf-cyclic-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs; Transaction Highlights; company description",
+        "note": "The source identifies preferred equity, the public investor, Cyclic, the amount, Kingston Centre expansion/Hub, rare-earth recycling and processing, and current construction."
+      }
+    ],
+    "notes": "CGF says the US$25 million supports expansion of the Kingston Centre of Excellence, Canadian R&D, execution of the first Hub and broader commercialization. The row links the named Kingston project because the source directly supports it, but the amount is not treated as exclusively allocated to construction or any single stage."
+  },
+  {
     "id": "fin-ca-cmrdd-2024-cyclic-materials",
     "eventId": "evt-ca-nrcan-cmrdd-2024",
     "relationships": [
@@ -784,9 +875,22 @@
         "date": "2024-09-04",
         "sourceId": "src-nrcan-cmrdd-2024",
         "note": null
+      },
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "note": "The standing CMRDD page lists this among projects that received contribution funding and gives the exact amount funded; no agreement date or payment date is stated."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "completed",
+        "date": null,
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "note": "The programme page states: launched in 2024; completed in March 2026. The exact completion day is not stated, so no date is invented."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -812,14 +916,19 @@
       {
         "sourceId": "src-nrcan-cmrdd-programme",
         "supports": [
-          "amount"
+          "amount",
+          "status"
         ],
         "evidence": "explicit",
         "locator": "Funded Projects: \"Kingston Demonstration Plant – Extended Operations\"",
         "note": "The programme page lists the exact amount funded; the 2024 release rounds it to \"$4.9 million\". Currency read from the issuing government (a Canadian federal page printing \"$\")."
       }
     ],
-    "notes": "The release calls the funding an investment and does not name the instrument. The 4 September 2024 release states \"NRCan is providing $4.9 million to Cyclic Materials\"; the CMRDD programme page lists the same project with \"Amount funded: $4,893,125\", recorded here as the exact figure."
+    "notes": "The 4 September 2024 release announced NRCan support; the standing CMRDD programme page gives the exact C$4,893,125 amount, lists the project among contribution-funded projects, and now records the Kingston Demonstration Plant – Extended Operations project as completed in March 2026. No agreement or disbursement date is published, so the financial lifecycle advances only to contracted with an undated source entry.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-cmrdd-2024-green-graphite",
@@ -1080,6 +1189,123 @@
       }
     ],
     "notes": "\"Manufacturing\" in the release is not mapped to a stage: it does not say which manufacturing. The release is not an itemised budget, so no component amounts are recorded for it."
+  },
+  {
+    "id": "fin-ca-feddev-cyclic-2025-contribution",
+    "eventId": "evt-ca-feddev-cyclic-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "5000000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$5,000,000.00",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Federal Economic Development Agency for Southern Ontario",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-feddev-ontario"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Cyclic Materials Inc.",
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "project": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "projectId": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "stages": [
+      "recycling"
+    ],
+    "stageAllocation": "single_stage",
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-09-01",
+        "sourceId": "src-open-canada-feddev-cyclic-2025",
+        "note": "The federal disclosure provides an agreement number, agreement value and agreement period beginning 1 September 2025."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-06-11",
+        "sourceId": "src-cyclic-centre-excellence-2025",
+        "note": "Cyclic announced the Kingston Centre of Excellence and its first commercial Hub."
+      },
+      {
+        "status": "construction",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The later CGF release says the first commercial-scale Kingston Hub was under construction."
+      }
+    ],
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    },
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-open-canada-feddev-cyclic-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement Number; Agreement Value; Agreement Date; Description; Organization; Agreement Type; Recipient; Program",
+        "note": "The disclosure calls the instrument a \"Contribution\". The tracker keeps instrument unspecified because this source does not state whether the contribution is repayable and no narrower tracker instrument can be assigned safely."
+      },
+      {
+        "sourceId": "src-cyclic-centre-excellence-2025",
+        "supports": [
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Announcement body; A Strategic Facility Serving a Circular Future",
+        "note": null
+      },
+      {
+        "sourceId": "src-cgf-cyclic-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Company description",
+        "note": "Supports the later construction status only."
+      }
+    ],
+    "notes": "The Government of Canada disclosure records Agreement 1019177 under FedDev Ontario's Business Scale-up and Productivity program. The agreement runs through 30 September 2028. Because the disclosure says only \"Contribution\", the tracker does not assume grant/non-repayable treatment."
   },
   {
     "id": "fin-ca-g7-2025-focus-graphite-gpi",
@@ -1818,6 +2044,117 @@
       }
     ],
     "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+  },
+  {
+    "id": "fin-ca-gpi-cyclic-2026-centre-excellence",
+    "eventId": "evt-ca-g7-cmpa-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "9100000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $9.1 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Global Partnerships Initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Cyclic Materials Inc.",
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "project": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "projectId": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "stages": [
+      "separation",
+      "processing",
+      "recycling"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-03-02",
+        "sourceId": "src-nrcan-cmpa-2026-round2",
+        "note": "The backgrounder calls the investment \"conditionally approved\". It is therefore recorded as decided, not contracted."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The CGF release says Cyclic was constructing its first commercial-scale Hub in Kingston."
+      }
+    ],
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    },
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmpa-2026-round2",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Cyclic Materials bullet",
+        "note": "The March backgrounder identifies the Kingston rare-earth recycling Centre of Excellence, the up-to-C$9.1 million GPI amount and its conditionally approved status."
+      },
+      {
+        "sourceId": "src-nrcan-gpi-programme",
+        "supports": [
+          "instrument",
+          "project",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "GPI description; GPI funded projects — Contribution funding — Cyclic Materials Inc.",
+        "note": "The programme page describes GPI contribution funding as non-repayable and says Cyclic's funding advances processing, separation and metallization technologies for an integrated rare-earth recycling value chain; normalized to the tracker's grant instrument."
+      },
+      {
+        "sourceId": "src-cgf-cyclic-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Company description",
+        "note": "Supports the project's construction status, not the GPI financial status."
+      }
+    ],
+    "notes": "A current GPI programme page now lists Cyclic among funded projects, but it does not publish an executed agreement date for this award. The financial lifecycle therefore remains at the March 2 conditionally approved/decided stage rather than being promoted to contracted."
   },
   {
     "id": "fin-ca-pdac-2026-ggt-eip",
