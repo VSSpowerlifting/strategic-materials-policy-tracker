@@ -32,6 +32,8 @@ export type LifecycleRefreshRow = {
   provider: string | null;
   providerOrgIds: string[];
   providerJurisdiction: FinancialCommitment["providerJurisdiction"];
+  valueRole: FinancialCommitment["valueRole"];
+  instrument: FinancialCommitment["instrument"];
   financial: LifecycleRefreshSide<FinancialStatus>;
   implementation: LifecycleRefreshSide<ImplementationStatus>;
   priority: LifecycleRefreshPriority;
@@ -144,14 +146,14 @@ function financialSide(c: FinancialCommitment, asOf: string): LifecycleRefreshSi
     priority = "P1";
     reasons.push(`financial status/review is ${base.ageDays} days old`);
   } else if (
-    c.projectId !== null &&
+    hasNamedPhysicalProject(c) &&
     NOT_YET_BINDING_FINANCIAL_STATUSES.includes(current) &&
     base.ageDays > 180
   ) {
     priority = "P1";
     reasons.push(`named project remains ${current} after ${base.ageDays} days`);
   } else if (
-    c.projectId !== null &&
+    hasNamedPhysicalProject(c) &&
     NOT_YET_BINDING_FINANCIAL_STATUSES.includes(current) &&
     base.ageDays >= 90
   ) {
@@ -216,7 +218,7 @@ function implementationSide(
         reasons.push(`implementation was last checked ${base.ageDays} days ago and no status is recorded`);
       }
     } else if (
-      c.projectId !== null &&
+      hasNamedPhysicalProject(c) &&
       (BINDING_FINANCIAL_STATUSES.includes(financialStatus) || (financial.ageDays !== null && financial.ageDays > 180))
     ) {
       priority = higherPriority(priority, "P1");
@@ -274,6 +276,8 @@ export function deriveLifecycleRefreshQueue(
         provider: c.provider,
         providerOrgIds: [...c.providerOrgIds],
         providerJurisdiction: c.providerJurisdiction,
+        valueRole: c.valueRole,
+        instrument: c.instrument,
         financial,
         implementation,
         priority,
@@ -359,8 +363,9 @@ export function bundleLifecycleRefreshQueue(
       );
       const projects = [...new Set(sorted.flatMap((row) => (row.projectId ? [row.projectId] : [])))].sort();
       const first = byId.get(sorted[0].commitmentId)!;
+      const projectLabel = sorted.find((row) => row.project !== null)?.project ?? null;
       const label =
-        first.project ??
+        projectLabel ??
         (first.projectId ? first.projectId : null) ??
         first.provider ??
         first.providerOrgIds[0] ??
@@ -404,7 +409,7 @@ export function formatLifecycleRefreshReport(
         const fAge = row.financial.ageDays === null ? "never checked/dated" : `${row.financial.ageDays}d`;
         const iAge = row.implementation.ageDays === null ? "never checked/dated" : `${row.implementation.ageDays}d`;
         lines.push(
-          `- ${row.commitmentId}: financial ${row.financial.currentStatus ?? "none"} (${fAge}); implementation ${row.implementation.currentStatus ?? "none"} (${iAge})`,
+          `- ${row.commitmentId} [${row.valueRole}/${row.instrument}]: financial ${row.financial.currentStatus ?? "none"} (${fAge}); implementation ${row.implementation.currentStatus ?? "none"} (${iAge})`,
         );
       }
       if (bundle.reasons.length) lines.push(...bundle.reasons.map((reason) => `  - ${reason}`));
