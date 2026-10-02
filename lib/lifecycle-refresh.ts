@@ -54,7 +54,9 @@ const ENDED_IMPLEMENTATION = new Set<ImplementationStatus>(["operational", "canc
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
 export function isIsoDate(value: string): boolean {
-  return isoDate.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
+  if (!isoDate.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
 }
 
 function maxDate(...values: (string | null | undefined)[]): string | null {
@@ -170,8 +172,8 @@ export function deriveLifecycleQueueItem(
     if (
       namedProject &&
       (
-        (implementationStatus === null && financialStatus !== null && BINDING_FINANCIAL.has(financialStatus)) ||
-        (implementationStatus === null && (olderThan(financial, 180) || financialUnknown)) ||
+        (implementationStatus === null && financialStatus !== null && BINDING_FINANCIAL.has(financialStatus) && (implementationUnknown || olderThan(implementation, 180))) ||
+        (implementationStatus === null && (olderThan(financial, 180) || financialUnknown) && (implementationUnknown || olderThan(implementation, 180))) ||
         (implementationStatus !== null && ACTIVE_IMPLEMENTATION.has(implementationStatus) && olderThan(implementation, 365)) ||
         implementationUnknown && implementationStatus !== null && ACTIVE_IMPLEMENTATION.has(implementationStatus)
       )
@@ -191,9 +193,15 @@ export function deriveLifecycleQueueItem(
       } else if (!namedProject && financialStatus !== null && !TERMINAL_FINANCIAL.has(financialStatus) && (olderThan(financial, 180) || financialUnknown)) {
         priority = "P2";
         reasons.push(financialUnknown ? "non-project commitment has no dated financial status or review" : "non-project commitment is older than 180 days");
-      } else if (namedProject && financialStatus !== null && BINDING_FINANCIAL.has(financialStatus) && implementationStatus === null) {
+      } else if (
+        namedProject &&
+        financialStatus !== null &&
+        BINDING_FINANCIAL.has(financialStatus) &&
+        implementationStatus === null &&
+        olderThan(implementation, 90)
+      ) {
         priority = "P2";
-        reasons.push("binding named project has no implementation status");
+        reasons.push("binding named project has no implementation status and its last physical check is older than 90 days");
       } else {
         reasons.push("routine lifecycle review");
       }
@@ -237,7 +245,7 @@ export function deriveLifecycleRefreshQueue(
       (a, b) =>
         PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority] ||
         (b.financial.ageDays ?? -1) - (a.financial.ageDays ?? -1) ||
-        a.commitmentId.localeCompare(b.commitmentId),
+        (a.commitmentId < b.commitmentId ? -1 : a.commitmentId > b.commitmentId ? 1 : 0),
     );
 }
 
@@ -271,8 +279,12 @@ export function bundleLifecycleRefreshQueue(
         priority: group.reduce<LifecyclePriority>((p, item) => betterPriority(p, item.priority), "P3"),
         commitmentIds: group.map((item) => item.commitmentId).sort(),
         reasons: [...new Set(group.flatMap((item) => item.reasons))],
-        items: [...group].sort((a, b) => a.commitmentId.localeCompare(b.commitmentId)),
+        items: [...group].sort((a, b) => (a.commitmentId < b.commitmentId ? -1 : a.commitmentId > b.commitmentId ? 1 : 0)),
       };
     })
-    .sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority] || a.key.localeCompare(b.key));
+    .sort(
+      (a, b) =>
+        PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority] ||
+        (a.key < b.key ? -1 : a.key > b.key ? 1 : 0),
+    );
 }
