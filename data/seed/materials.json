@@ -50,7 +50,10 @@
       "evt-jp-espa-santoku-rare-earth-2026",
       "evt-ca-g7-cmpa-2025",
       "evt-ca-nrcan-pdac-2026",
-      "evt-us-chips-usar-2026"
+      "evt-us-chips-usar-2026",
+      "evt-ca-cgf-cyclic-2026",
+      "evt-ca-feddev-cyclic-2025",
+      "evt-ca-g7-cmpa-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
