@@ -2298,14 +2298,7 @@
         "note": "The signed Strategic Investment Agreement establishes a commercial framework and intent to work toward an investment; definitive documentation and approvals were still required."
       }
     ],
-    "implementationStatusHistory": [
-      {
-        "status": "feasibility",
-        "date": "2026-07-07",
-        "sourceId": "src-nrcan-trail-strategic-metals-2026",
-        "note": "The expansion is described as a proposed initiative under a strategic investment framework rather than a committed construction programme."
-      }
-    ],
+    "implementationStatusHistory": [],
     "terms": [
       {
         "kind": "other",
