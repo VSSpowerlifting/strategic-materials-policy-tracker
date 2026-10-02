@@ -45,6 +45,36 @@ test("the live corpus surfaces Cyclic Materials as a P0 evidence mismatch", () =
   );
 });
 
+test("expected future completion is not treated as completed", () => {
+  const bundle = queue().bundles.find(
+    (item) => item.projectId === "prj-ca-ggt-graphite-recycling-pilot",
+  );
+  assert.ok(bundle, "Green Graphite Technologies bundle is present");
+  assert.notEqual(bundle.priority, "P0");
+  assert.ok(
+    bundle.rows.every((row) =>
+      row.implementation.reasons.every(
+        (reason) => !reason.includes("project evidence states completion"),
+      ),
+    ),
+  );
+});
+
+test("umbrella funding relationships do not collapse distinct named projects", () => {
+  const q = queue();
+  const cyclic = q.bundles.find(
+    (item) => item.projectId === "prj-ca-cyclic-kingston-demonstration-plant",
+  );
+  const graphite = q.bundles.find(
+    (item) => item.projectId === "prj-ca-ggt-graphite-recycling-pilot",
+  );
+  assert.ok(cyclic);
+  assert.ok(graphite);
+  assert.notEqual(cyclic.id, graphite.id);
+  assert.deepEqual(cyclic.commitmentIds, ["fin-ca-cmrdd-2024-cyclic-materials"]);
+  assert.deepEqual(graphite.commitmentIds, ["fin-ca-cmrdd-2024-green-graphite"]);
+});
+
 test("human research bundles collapse commitments that name one project", () => {
   const bundle = queue().bundles.find(
     (item) => item.projectId === "prj-au-alcoa-sojitz-gallium",
