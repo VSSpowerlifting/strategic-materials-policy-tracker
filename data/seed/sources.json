@@ -1042,5 +1042,17 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The executed agreement itself (Award ID No. AP-2026-0044, execution version), filed as Exhibit 10.1 to the 8-K in src-usar-8k-2026-06-03 and read in full in a browser on 2026-09-24. Article 1: \"“Direct Funding” means direct funding under the NOFO in the form of an other transaction\" and \"“CHIPS Incentives” means the provision of direct funding (via grants, cooperative agreements, or other transactions), loans and loan guarantees as described in the NOFO\". It never calls the awards grants. Section 2.1(a) sets five maximum award amounts (Round Top $132,000,000; Stillwater Magnet $50,000,000; Stillwater Metal $20,000,000; Magnet Project 2 $60,000,000; Metal Project 2 $15,000,000). Section 2.1(b): \"No obligation of funds for the Award by the Department shall occur upon execution of this Agreement. An obligation of funds for the Award shall occur only upon delivery of a Funding Obligation.\" Section 4.16 makes the issuance of Equity Interests to the Department a condition precedent to the Award Date. Section 10.1.1 lists the clawback events and Section 10.2 has the recipient repay recovered disbursements within 120 days of the Department's demand. It supports contract terms it states directly and is attributed to the parties."
+  },
+  {
+    "id": "src-canada-grant-cyclic-cmrdd-2024",
+    "title": "Grant and contribution record — Kingston Demonstration Plant-Extended Operations",
+    "publisher": "Government of Canada Open Government Portal / Natural Resources Canada",
+    "url": "https://search.open.canada.ca/grants/record/nrcan-rncan%2C115-2024-2025-Q2-15713%2Ccurrent",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "dataset",
+    "confidence": "primary",
+    "notes": "Official grant disclosure for agreement CMRDD2-048. Lists Cyclic Materials Inc., agreement value C$4,893,125, and agreement period 17 July 2024 through 31 March 2026."
   }
 ]
