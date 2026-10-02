@@ -533,35 +533,77 @@ export function deriveLifecycleRefreshQueue(
   });
 
   const byCommitment = new Map(sortedCommitments.map((commitment) => [commitment.id, commitment]));
-  const uf = new UnionFind(sortedCommitments.map((commitment) => commitment.id));
+  const rowsByCommitment = new Map(rows.map((row) => [row.commitmentId, row]));
+  const projectRows = sortedCommitments.filter((commitment) => commitment.projectId !== null);
+  const noProjectRows = sortedCommitments.filter((commitment) => commitment.projectId === null);
 
-  const firstByProject = new Map<string, string>();
-  for (const commitment of sortedCommitments) {
-    if (commitment.projectId === null) continue;
-    const first = firstByProject.get(commitment.projectId);
-    if (first) uf.union(first, commitment.id);
-    else firstByProject.set(commitment.projectId, commitment.id);
+  // Project identity is the strongest human research boundary. Relationship
+  // families may attach no-project parents/children to one project, but a
+  // shared programme envelope must never fuse two distinct projects.
+  const groupKeyByCommitment = new Map<string, string>();
+  for (const commitment of projectRows)
+    groupKeyByCommitment.set(commitment.id, `project:${commitment.projectId}`);
+
+  const noProjectIds = new Set(noProjectRows.map((commitment) => commitment.id));
+  const noProjectUf = new UnionFind([...noProjectIds]);
+  for (const commitment of noProjectRows) {
+    for (const relationship of commitment.relationships) {
+      if (noProjectIds.has(relationship.commitmentId))
+        noProjectUf.union(commitment.id, relationship.commitmentId);
+    }
+  }
+  // Relationships are directional on the child, so include reverse links when
+  // finding a no-project component's adjacent projects.
+  const components = new Map<string, string[]>();
+  for (const commitment of noProjectRows) {
+    const root = noProjectUf.find(commitment.id);
+    components.set(root, [...(components.get(root) ?? []), commitment.id]);
   }
 
-  for (const commitment of sortedCommitments) {
-    for (const relationship of commitment.relationships) {
-      if (byCommitment.has(relationship.commitmentId)) uf.union(commitment.id, relationship.commitmentId);
+  for (const [root, memberIds] of components) {
+    const members = new Set(memberIds);
+    const adjacentProjects = new Set<string>();
+    let hasRelationship = false;
+
+    for (const commitment of sortedCommitments) {
+      for (const relationship of commitment.relationships) {
+        const sourceIn = members.has(commitment.id);
+        const targetIn = members.has(relationship.commitmentId);
+        if (!sourceIn && !targetIn) continue;
+        hasRelationship = true;
+
+        if (sourceIn) {
+          const target = byCommitment.get(relationship.commitmentId);
+          if (target?.projectId) adjacentProjects.add(target.projectId);
+        }
+        if (targetIn && commitment.projectId) adjacentProjects.add(commitment.projectId);
+      }
+    }
+
+    if (adjacentProjects.size === 1) {
+      const [projectId] = [...adjacentProjects];
+      for (const id of memberIds) groupKeyByCommitment.set(id, `project:${projectId}`);
+    } else if (hasRelationship || memberIds.length > 1) {
+      for (const id of memberIds) groupKeyByCommitment.set(id, `relationship:${root}`);
     }
   }
 
-  const firstByProviderEvent = new Map<string, string>();
-  for (const commitment of sortedCommitments) {
-    if (commitment.projectId !== null || commitment.relationships.length > 0) continue;
-    const key = `${commitment.eventId}\u0000${providerKey(commitment)}`;
-    const first = firstByProviderEvent.get(key);
-    if (first) uf.union(first, commitment.id);
-    else firstByProviderEvent.set(key, commitment.id);
+  // Anything still unassigned has no project and no relationship family.
+  // Group only siblings from the same event/provider.
+  for (const commitment of noProjectRows) {
+    if (groupKeyByCommitment.has(commitment.id)) continue;
+    groupKeyByCommitment.set(
+      commitment.id,
+      `provider:${commitment.eventId}\u0000${providerKey(commitment)}`,
+    );
   }
 
   const grouped = new Map<string, LifecycleRefreshRow[]>();
-  for (const row of rows) {
-    const root = uf.find(row.commitmentId);
-    grouped.set(root, [...(grouped.get(root) ?? []), row]);
+  for (const commitment of sortedCommitments) {
+    const key = groupKeyByCommitment.get(commitment.id);
+    if (!key) throw new Error(`no lifecycle bundle key for ${commitment.id}`);
+    const row = rowsByCommitment.get(commitment.id)!;
+    grouped.set(key, [...(grouped.get(key) ?? []), row]);
   }
 
   const bundles: LifecycleRefreshBundle[] = [...grouped.entries()].map(([root, bundleRows]) => {
