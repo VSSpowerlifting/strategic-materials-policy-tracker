@@ -6519,6 +6519,262 @@
     "notes": "OSC describes this as its first direct loan. Unsecured promissory note; the company may repay at any time."
   },
   {
+    "id": "fin-us-dow-arr-antimony-2025",
+    "eventId": "evt-us-dow-arr-antimony-2025",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "43400000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$43.4 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "Alaska Range Resources, LLC",
+    "recipientOrgIds": [
+      "org-alaska-range-resources"
+    ],
+    "project": "Estelle Gold and Critical Minerals Project — integrated antimony supply chain",
+    "projectId": "prj-us-estelle-antimony",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Estelle Project in Alaska"
+      },
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Port MacKenzie"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-09-30",
+        "sourceId": "src-dow-arr-antimony-2025",
+        "note": "The Department announced the DPA Title III award on 30 September 2025."
+      },
+      {
+        "status": "contracted",
+        "date": "2025-10-01",
+        "sourceId": "src-nova-arr-h1-2026",
+        "note": "Nova's filed half-year report describes a 24-month firm-fixed-price project sub-agreement awarded on 1 October 2025."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "24",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "24-month firm-fixed price project sub-agreement",
+        "sourceId": "src-nova-arr-h1-2026",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-arr-antimony-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-scope paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-nova-arr-h1-2026",
+        "supports": [
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "U.S. Department of War Grant; Refinery & Equipment Procurement",
+        "note": "The filing supplies the contract form, duration and Port MacKenzie refinery context."
+      }
+    ],
+    "notes": "The $43.4M award spans extraction, concentration and refining; no source allocates the amount by stage, so the full figure is never assigned separately to any one stage."
+  },
+  {
+    "id": "fin-us-dow-usac-antimony-2026",
+    "eventId": "evt-us-dow-usac-antimony-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "27000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$27 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "United States Antimony Corporation",
+    "recipientOrgIds": [
+      "org-us-antimony"
+    ],
+    "project": "Thompson Falls facility expansion and related Alaska antimony mining integration",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Montana",
+        "asStated": "Thompson Falls, Montana"
+      },
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Alaska"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-02-24",
+        "sourceId": "src-dow-usac-antimony-2026",
+        "note": "The official release dates the Department's investment to 24 February 2026; the subsequent Form 10-Q describes the award as a milestone-based firm fixed-price arrangement."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": null,
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "The company received $12.8M in April 2026 after formal acceptance of three milestones; the filing does not state the day of receipt."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "16200000",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": null,
+        "asStated": "$16.2 million representing currently obligated funding",
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "Currently obligated portion of the $27M award as of 30 June 2026."
+      },
+      {
+        "kind": "other",
+        "value": "10800000",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": null,
+        "asStated": "the remaining $10.8 million related to future phases subject to additional authorization",
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "Not treated as already disbursed or separately committed."
+      },
+      {
+        "kind": "other",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "The period of performance under the agreement extends through January 4, 2028.",
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-scope paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-usac-2026-q2-10q",
+        "supports": [
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 9 — Government Grant; Property, Plant and Equipment",
+        "note": "The filing records the obligation split, milestone payment and Thompson Falls expansion status."
+      }
+    ],
+    "notes": "The award covers more than one physical undertaking, so no single projectId is assigned. The Thompson Falls facility is separately registered as a project, but the full $27M is not attributed to it."
+  },
+  {
     "id": "fin-us-osc-obbba-2025-credit-subsidy",
     "eventId": "evt-us-dod-mp-2025",
     "relationships": [],
