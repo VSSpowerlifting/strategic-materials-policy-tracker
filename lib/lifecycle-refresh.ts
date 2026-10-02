@@ -67,17 +67,6 @@ const ADVANCED_IMPLEMENTATION = new Set<ImplementationStatus>([
   "operational",
 ]);
 
-const PHYSICAL_STAGES = new Set<FinancialCommitment["stages"][number]>([
-  "exploration",
-  "mining",
-  "separation",
-  "processing",
-  "refining",
-  "component_manufacturing",
-  "final_manufacturing",
-  "recycling",
-]);
-
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 function assertIsoDate(value: string, label: string): void {
@@ -132,8 +121,7 @@ function side<S extends string>(
 function hasNamedPhysicalProject(c: FinancialCommitment): boolean {
   const current = c.implementationStatusHistory.at(-1)?.status ?? null;
   if (current === "not_applicable") return false;
-  if (c.projectId !== null || c.project !== null || c.facility !== null) return true;
-  return c.stages.some((stage) => PHYSICAL_STAGES.has(stage));
+  return c.projectId !== null || c.project !== null || c.facility !== null;
 }
 
 function financialSide(c: FinancialCommitment, asOf: string): LifecycleRefreshSide<FinancialStatus> {
