@@ -156,7 +156,7 @@ test("V1: the Allied Material grant is decided with no date, and the event date 
 
 test("a control clause's dates are its own status dates, labelled as such", () => {
   const clause = dossier("tungsten").controls.find((c) => c.title.startsWith("Export licensing"))!;
-  assert.equal(clause.asOfState, "In force on 23 Sep 2026");
+  assert.equal(clause.asOfState, "In force on 2 Oct 2026");
   assert.equal(clause.entry, "In force, status date 4 Feb 2025");
   assert.equal(clause.documentNumber, "MOFCOM/GACC Announcement No. 10 (2025)");
 });
