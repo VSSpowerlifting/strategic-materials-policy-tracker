@@ -2481,5 +2481,78 @@
       "verifiedAt": "2026-10-02",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-ca-edc-neo-narva-2024",
+    "date": "2024-11-01",
+    "jurisdiction": "canada",
+    "issuingBody": "Export Development Canada",
+    "titleOriginal": "EDC financing for Neo Performance Materials' Narva rare-earth magnet production facility",
+    "titleOriginalLang": "en",
+    "titleEn": "Export Development Canada financing for Neo Performance Materials' Narva rare-earth magnet production facility",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "Export Development Canada signed financing for Neo Performance Materials' Narva, Estonia rare-earth magnet production facility. Neo's loan agreement provides up to US$50 million in two US$25 million tranches for construction of the sintered-magnet plant.",
+    "analyticalSignificance": "Adds Canadian public export-credit financing to Europe's effort to build commercial rare-earth permanent-magnet manufacturing capacity outside China. The financing supported a named manufacturing facility rather than a programme envelope.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-edc-neo-narva-2024",
+      "src-neo-edc-facility-2024"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-au-nrfc-arafura-2025",
+    "date": "2025-01-15",
+    "jurisdiction": "australia",
+    "issuingBody": "National Reconstruction Fund Corporation",
+    "titleOriginal": "NRFC boosting global rare earths supply through cornerstone $200 million investment commitment in Arafura’s transformational mining project",
+    "titleOriginalLang": "en",
+    "titleEn": "NRFC commits A$200 million cornerstone investment to Arafura's Nolans rare-earth project",
+    "titleEnSource": "self",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "The National Reconstruction Fund Corporation announced a A$200 million cornerstone investment commitment in Arafura Rare Earths to support development of the Nolans rare-earth project. Arafura signed a binding term sheet for unsecured convertible notes, subject to conditions precedent.",
+    "analyticalSignificance": "Adds a separate Australian public-capital instrument for Nolans beyond the later EFA equity commitment. The NRFC package is binding but conditional and should not be conflated with cash received or with the project's physical construction status.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrfc-arafura-2025",
+      "src-arafura-nrfc-term-sheet-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-01-15",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
   }
 ]
