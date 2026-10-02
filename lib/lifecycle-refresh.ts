@@ -47,8 +47,8 @@ const PRIORITY_ORDER: Record<LifecyclePriority, number> = { P0: 0, P1: 1, P2: 2,
 
 const PRE_BINDING_FINANCIAL = new Set<FinancialStatus>(["announced", "authorized", "allocated", "decided", "not_stated"]);
 const BINDING_FINANCIAL = new Set<FinancialStatus>(["contracted", "partially_disbursed", "disbursed"]);
-const ENDED_FINANCIAL = new Set<FinancialStatus>(["withdrawn", "lapsed"]);
-const ACTIVE_IMPLEMENTATION = new Set<ImplementationStatus>(["announced", "feasibility", "construction", "commissioning"]);
+const TERMINAL_FINANCIAL = new Set<FinancialStatus>(["disbursed", "withdrawn", "lapsed"]);
+const ACTIVE_IMPLEMENTATION = new Set<ImplementationStatus>(["announced", "feasibility", "construction", "commissioning", "suspended", "not_stated"]);
 const ENDED_IMPLEMENTATION = new Set<ImplementationStatus>(["operational", "cancelled", "not_applicable"]);
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
@@ -161,7 +161,7 @@ export function deriveLifecycleQueueItem(
 
     if (
       (namedProject && financialStatus !== null && PRE_BINDING_FINANCIAL.has(financialStatus) && (olderThan(financial, 180) || financialUnknown)) ||
-      (financialStatus !== null && !ENDED_FINANCIAL.has(financialStatus) && olderThan(financial, 365))
+      (financialStatus !== null && !TERMINAL_FINANCIAL.has(financialStatus) && olderThan(financial, 365))
     ) {
       priority = "P1";
       reasons.push(financialUnknown ? "named project has no dated financial status or review" : "financial status needs a high-priority refresh");
@@ -188,7 +188,7 @@ export function deriveLifecycleQueueItem(
       if (namedProject && financialStatus !== null && PRE_BINDING_FINANCIAL.has(financialStatus) && olderThan(financial, 90)) {
         priority = "P2";
         reasons.push("named project has a pre-binding financial status older than 90 days");
-      } else if (!namedProject && financialStatus !== null && !ENDED_FINANCIAL.has(financialStatus) && (olderThan(financial, 180) || financialUnknown)) {
+      } else if (!namedProject && financialStatus !== null && !TERMINAL_FINANCIAL.has(financialStatus) && (olderThan(financial, 180) || financialUnknown)) {
         priority = "P2";
         reasons.push(financialUnknown ? "non-project commitment has no dated financial status or review" : "non-project commitment is older than 180 days");
       } else if (namedProject && financialStatus !== null && BINDING_FINANCIAL.has(financialStatus) && implementationStatus === null) {
@@ -202,7 +202,7 @@ export function deriveLifecycleQueueItem(
 
   if (
     financialStatus !== null &&
-    (financialStatus === "disbursed" || ENDED_FINANCIAL.has(financialStatus)) &&
+    TERMINAL_FINANCIAL.has(financialStatus) &&
     namedProject &&
     implementationStatus !== null &&
     !ENDED_IMPLEMENTATION.has(implementationStatus)
