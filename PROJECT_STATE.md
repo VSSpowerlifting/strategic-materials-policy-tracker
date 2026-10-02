@@ -1,5 +1,26 @@
 # Project state
 
+_Last updated: 2026-10-02. Lifecycle infrastructure (#33) and refresh waves #34/#35 are merged. Latest verified main: `7baf10d2a316256e22bd9b0487c5f28a18eb63b5`._
+
+## Latest continuation: lifecycle refresh recovery and Lynas financial correction
+
+Verified live GitHub state on 2026-10-02 rather than relying on the older history below:
+
+- Germanium/Trail backfill #25 and integrated antimony backfill #31 are merged.
+- Lifecycle infrastructure #33 is merged; older draft #32 is superseded.
+- Wave #34 adds completed implementation status, repairs Cyclic/GGT demonstration lifecycle records and adds the separate Cyclic commercial Kingston support stack.
+- Wave #35 records Wagerup construction independently of its announced financing, Nolans' binding but conditional EFA equity agreement, and Neo's amended grant, partial receipts and commercial production.
+- On main at `7baf10d`, the deterministic 2026-10-02 queue has 53 bundles: P0 0, P1 26, P2 16, P3 11. This is a maintenance queue, not a failure ranking.
+
+This continuation rebuilds the oldest unresolved Lynas equity refresh on current main instead of merging stale draft #28. Lynas' ASX-filed March-quarter 2023 report was read in full: signed agreements support contracted on 7 March 2023; the reported AUD200 million cash receipt supports disbursed with a null transfer date. The amount, instrument, material and stage coding are unchanged. The later Malaysia HRE production milestone does not establish completion of the full unallocated growth plan; no implementation status is added to this equity row. Only its financial review clock is updated.
+
+Local validation and lifecycle regression checks are recorded in the replacement PR. Release checks and deployment must be verified against its exact revision before merge.
+
+Next actions:
+1. Review the replacement Lynas financial correction and retire old #28 after the replacement is accepted.
+2. Continue source-audited refreshes for Matawinie, Wicheeda, Ucore, MP Materials and USA Rare Earth. Separate new Neo EDC/Arafura NRFC instruments from existing-row lifecycle updates.
+3. Complete the lifecycle sweep before publishing announcement-to-execution metrics; rerun Strategic Concern → Industrial Response with commitments, project identity and controls kept separate.
+
 _Last updated: 2026-09-30 (removable `/events` filter chips, PR #13, and timeline framing tap targets, PR #14, both merged; M2 dossiers PR #9 merged 2026-09-27 as `a995980`)._
 
 _Previous status line: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, at the time not merged; the 2026-09-25 release reconciliation below is unchanged)._
