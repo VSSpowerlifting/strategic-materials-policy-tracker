@@ -1150,5 +1150,17 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Company project update stating that additional critical-path construction began 30 May 2026 and built on early-works construction that began in October 2025."
+  },
+  {
+    "id": "src-exim-mmia",
+    "title": "Make More in America Initiative",
+    "publisher": "Export-Import Bank of the United States",
+    "url": "https://www.exim.gov/about/special-initiatives/make-more-in-america-initiative",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "EXIM programme page describing MMIA as a domestic financing tool for sectors critical to national security and for improving the resiliency and security of U.S. supply chains."
   }
 ]
