@@ -163,7 +163,8 @@ export function deriveLifecycleQueueItem(
 
     if (
       (namedProject && financialStatus !== null && PRE_BINDING_FINANCIAL.has(financialStatus) && (olderThan(financial, 180) || financialUnknown)) ||
-      (financialStatus !== null && !TERMINAL_FINANCIAL.has(financialStatus) && olderThan(financial, 365))
+      (financialStatus === "partially_disbursed" && olderThan(financial, 365)) ||
+      (commitment.valueRole === "funding_option" && olderThan(financial, 180))
     ) {
       priority = "P1";
       reasons.push(financialUnknown ? "named project has no dated financial status or review" : "financial status needs a high-priority refresh");
