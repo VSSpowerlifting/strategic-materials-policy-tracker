@@ -780,13 +780,20 @@
     ],
     "financialStatusHistory": [
       {
-        "status": "announced",
-        "date": "2024-09-04",
-        "sourceId": "src-nrcan-cmrdd-2024",
-        "note": null
+        "status": "contracted",
+        "date": "2024-07-17",
+        "sourceId": "src-canada-grant-cyclic-cmrdd-2024",
+        "note": "The Government of Canada grant disclosure records agreement CMRDD2-048 with an agreement period beginning 17 July 2024."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "operational",
+        "date": null,
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "note": "NRCan's funded-projects page says the Kingston demonstration plant project was launched in 2024 and completed in March 2026. `operational` records that the demonstration plant operated; the source gives no exact operating-start date and the schema has no separate completed status."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -812,11 +819,21 @@
       {
         "sourceId": "src-nrcan-cmrdd-programme",
         "supports": [
-          "amount"
+          "amount",
+          "status"
         ],
         "evidence": "explicit",
         "locator": "Funded Projects: \"Kingston Demonstration Plant – Extended Operations\"",
-        "note": "The programme page lists the exact amount funded; the 2024 release rounds it to \"$4.9 million\". Currency read from the issuing government (a Canadian federal page printing \"$\")."
+        "note": "The programme page lists the exact amount funded and reports the project as launched in 2024 and completed in March 2026; currency is read from the Canadian federal context."
+      },
+      {
+        "sourceId": "src-canada-grant-cyclic-cmrdd-2024",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement number CMRDD2-048",
+        "note": "Official grant disclosure establishes the agreement start date."
       }
     ],
     "notes": "The release calls the funding an investment and does not name the instrument. The 4 September 2024 release states \"NRCan is providing $4.9 million to Cyclic Materials\"; the CMRDD programme page lists the same project with \"Amount funded: $4,893,125\", recorded here as the exact figure."
