@@ -2244,6 +2244,150 @@
     "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund."
   },
   {
+    "id": "fin-ca-trail-cgf-2026-indication",
+    "eventId": "evt-ca-trail-strategic-metals-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "indication",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "400000000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $400 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": "Canada Critical Minerals Accelerator",
+    "programmeId": null,
+    "recipient": "Teck Resources Limited",
+    "recipientOrgIds": [
+      "org-teck-resources"
+    ],
+    "project": "Trail Strategic Metals Initiative",
+    "projectId": "prj-ca-trail-strategic-metals",
+    "facility": "Trail Operations",
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Trail Operations in British Columbia"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "germanium",
+      "antimony",
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-07-07",
+        "sourceId": "src-teck-trail-strategic-metals-2026",
+        "note": "The signed Strategic Investment Agreement establishes a commercial framework and intent to work toward an investment; definitive documentation and approvals were still required."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "feasibility",
+        "date": "2026-07-07",
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "note": "The expansion is described as a proposed initiative under a strategic investment framework rather than a committed construction programme."
+      }
+    ],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "400000000",
+        "qualifier": "up_to",
+        "currency": "CAD",
+        "unit": null,
+        "asStated": "an equity-like investment by CGF of up to $400 million directly into the facility",
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "note": "Classified as instrument unspecified because 'equity-like' does not establish that the legal instrument is equity."
+      },
+      {
+        "kind": "other",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "offtake rights for a portion of future germanium, antimony and gallium produced by Trail",
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "note": "A contemplated future structure, not a contracted offtake."
+      }
+    ],
+    "outcomes": [
+      {
+        "metric": "other",
+        "value": "2",
+        "qualifier": "up_to",
+        "unit": "times existing production capacity",
+        "targetDate": null,
+        "asStated": "could double Trail's existing production capacity for germanium and antimony",
+        "statedBy": "government",
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "note": "Prospective capacity effect; gallium is described separately as potential new capacity."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and investment-framework paragraphs",
+        "note": "The source explicitly calls this a commercial framework for an equity-like investment; `unspecified` avoids converting that description into a legal-form claim."
+      },
+      {
+        "sourceId": "src-teck-trail-strategic-metals-2026",
+        "supports": [
+          "value_role",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through conditions paragraph",
+        "note": "Teck states that the contemplated arrangements remain subject to definitive documentation and approvals."
+      }
+    ],
+    "notes": "A non-binding indication, not a committed investment. It is excluded from commitment totals unless later definitive documentation supports promotion to a commitment."
+  },
+  {
     "id": "fin-de-g7-2025-vianode-export-credit-guarantee",
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [],
@@ -5696,6 +5840,114 @@
     "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\". Recorded as a non-binding indication, not as a commitment: a preliminary non-binding letter of intent is not a financing commitment, so it is in no sum."
   },
   {
+    "id": "fin-us-dod-5n-germanium-2024",
+    "eventId": "evt-us-dod-5n-germanium-2024",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "14400000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$14.4 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Defense",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Investment Program",
+    "programmeId": null,
+    "recipient": "5N+ Semiconductors",
+    "recipientOrgIds": [
+      "org-5n-plus-semiconductors"
+    ],
+    "project": "St. George space-qualified germanium substrate capacity expansion",
+    "projectId": "prj-us-5n-st-george-germanium-substrates",
+    "facility": "St. George facility",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2024-04-16",
+        "sourceId": "src-dod-5n-germanium-2024",
+        "note": "DoD announced the award on 16 April 2024. No source in the current corpus establishes execution of a separate binding grant agreement, so the row is not advanced to contracted."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "4",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "planned to last four years",
+        "sourceId": "src-dod-5n-germanium-2024",
+        "note": "The company separately describes the award as subject to conditions and pre-set milestones over the four-year term."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-5n-germanium-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through technical-effort paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-5n-germanium-2024",
+        "supports": [
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-description paragraphs",
+        "note": "5N+ confirms the milestone-conditioned four-year award."
+      }
+    ],
+    "notes": "The award supports both substrate-manufacturing capability and germanium sourcing/recovery/refining; the $14.4M is not allocated between those stages."
+  },
+  {
     "id": "fin-us-dod-mp-2025-additional-preferred-option",
     "eventId": "evt-us-dod-mp-2025",
     "relationships": [],
@@ -6517,6 +6769,128 @@
       }
     ],
     "notes": "OSC describes this as its first direct loan. Unsecured promissory note; the company may repay at any time."
+  },
+  {
+    "id": "fin-us-dow-5n-germanium-2025",
+    "eventId": "evt-us-dow-5n-germanium-2025",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "18100000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$18.1 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "5N Plus Inc.",
+    "recipientOrgIds": [
+      "org-5n-plus"
+    ],
+    "project": "St. George germanium recovery and refining expansion",
+    "projectId": "prj-us-5n-st-george-germanium-refining",
+    "facility": "St. George facility",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "recycling",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-12-15",
+        "sourceId": "src-dow-5n-germanium-2026",
+        "note": "The Department states that the investment was made on 15 December 2025 and announced later because of the government shutdown. No definitive grant agreement is in the current source set."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "48",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "over the course of the next 48 months",
+        "sourceId": "src-5n-germanium-2026",
+        "note": "Company description of the capacity-expansion period."
+      }
+    ],
+    "outcomes": [
+      {
+        "metric": "annual_capacity",
+        "value": "20",
+        "qualifier": "up_to",
+        "unit": "metric tons of high-purity germanium per year",
+        "targetDate": null,
+        "asStated": "valorize up to 20 metric tons of high-purity germanium per year",
+        "statedBy": "recipient",
+        "sourceId": "src-5n-germanium-2026",
+        "note": "The company describes recovery/refining capability; the Department separately describes zone-refining capacity as more than 20 metric tons annually, so the two statements are not merged."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dow-5n-germanium-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through capacity paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-5n-germanium-2026",
+        "supports": [
+          "instrument",
+          "amount",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "terms",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through capacity paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "A separate DPA-funded scope from the 2024 germanium-substrate award. Recycling and refining are both named, but the $18.1M is not divided by stage."
   },
   {
     "id": "fin-us-osc-obbba-2025-credit-subsidy",
