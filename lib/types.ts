@@ -398,6 +398,7 @@ export const IMPLEMENTATION_STATUSES = [
   "construction",
   "commissioning",
   "operational",
+  "completed", // the defined project or demonstration finished; a surviving facility may continue under a later project
   "suspended",
   "cancelled",
   "not_stated",
