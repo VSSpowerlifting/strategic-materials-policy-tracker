@@ -74,6 +74,7 @@ import {
   type FinancialEvidenceField,
   type FinancialRelationship,
   type InstrumentTerm,
+  type LifecycleReview,
   type MonetaryAmount,
   type Organization,
   type OrganizationEvidenceField,
@@ -94,12 +95,13 @@ import {
 //
 // The evidence category that covers each substantive field, shared by the
 // validator and the tests. `id` and `eventId` are structural, `evidence` is the
-// provenance itself and `notes` is editorial, so none of them needs evidence.
+// provenance itself, `notes` is editorial and `lifecycleReview` is maintenance
+// metadata rather than a sourced status claim, so none of them needs evidence.
 // Keyed by the entity's own fields: a field no category covers, or a mapping
 // to a category that does not exist, stops compiling.
 
 export const COMMITMENT_FIELD_EVIDENCE: Readonly<
-  Record<Exclude<keyof FinancialCommitment, "id" | "eventId" | "evidence" | "notes">, FinancialEvidenceField>
+  Record<Exclude<keyof FinancialCommitment, "id" | "eventId" | "evidence" | "notes" | "lifecycleReview">, FinancialEvidenceField>
 > = {
   relationships: "relationships",
   instrument: "instrument",
@@ -473,6 +475,11 @@ const statusEntry = (statuses: readonly string[]): Fields<StatusEntry<string>> =
 
 const CONTROL_STATUS_ENTRY: Fields<ControlStatusEntry> = { ...statusEntry(CONTROL_STATUSES), until: optionalText("date") };
 
+const LIFECYCLE_REVIEW: Fields<LifecycleReview> = {
+  financialStatusCheckedAt: nullableText("date"),
+  implementationStatusCheckedAt: nullableText("date"),
+};
+
 const TERM: Fields<InstrumentTerm> = {
   kind: oneOf(TERM_KINDS),
   value: nullableText("decimal"),
@@ -536,6 +543,7 @@ const COMMITMENT: Fields<FinancialCommitment> = {
   untrackedMaterialsAsStated: listOf(text()),
   financialStatusHistory: listOf(objectOf("status entry", statusEntry(FINANCIAL_STATUSES))),
   implementationStatusHistory: listOf(objectOf("status entry", statusEntry(IMPLEMENTATION_STATUSES))),
+  lifecycleReview: { ...objectOf("lifecycle review", LIFECYCLE_REVIEW), optional: true },
   terms: listOf(objectOf("term", TERM)),
   outcomes: listOf(objectOf("outcome", OUTCOME)),
   evidence: listOf(objectOf("evidence reference", evidenceReference(FINANCIAL_EVIDENCE_FIELDS))),
