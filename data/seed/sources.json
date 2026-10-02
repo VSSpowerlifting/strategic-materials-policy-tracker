@@ -1390,5 +1390,65 @@
     "sourceType": "dataset",
     "confidence": "primary",
     "notes": "Official grant disclosure for agreement CMRDD2-039. Lists Green Graphite Technologies Inc., agreement value C$3,500,000, and agreement period 9 August 2024 through 31 March 2026."
+  },
+  {
+    "id": "src-alcoa-wagerup-groundbreaking-2026",
+    "title": "Australia, Japan, the United States and Alcoa Break Ground on Gallium Project in Western Australia",
+    "publisher": "Alcoa Corporation",
+    "url": "https://news.alcoa.com/press-releases/press-release-details/2026/Australia-Japan-the-United-States-and-Alcoa-Break-Ground-on-Gallium-Project-in-Western-Australia/default.aspx",
+    "language": "en",
+    "datePublished": "2026-08-24",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Alcoa's first-party release states that the 24 August 2026 groundbreaking marked the start of construction of the gallium production facility at the Wagerup alumina refinery."
+  },
+  {
+    "id": "src-arafura-nolans-efa-subscription-2026",
+    "title": "Arafura Executes Binding Cornerstone Equity Agreements",
+    "publisher": "Arafura Rare Earths Limited / Australian Securities Exchange",
+    "url": "https://wcsecure.weblink.com.au/pdf/ARU/03074414.pdf",
+    "language": "en",
+    "datePublished": "2026-04-01",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Arafura's ASX announcement states that it executed a binding Subscription Agreement and Investor Rights Deed with Export Finance Australia for US$100 million of equity. Completion remained subject to conditions precedent, including shareholder approval, key debt documentation and construction approvals; the sunset date stated was 1 December 2026."
+  },
+  {
+    "id": "src-neo-jtf-award-2022",
+    "title": "Neo Performance Materials to Receive First-Ever Grant Under Europe’s Just Transition Fund for Neo’s Planned Sintered Rare Earth Magnet Manufacturing Plant in Estonia",
+    "publisher": "Neo Performance Materials",
+    "url": "https://www.neomaterials.com/neo-performance-materials-european-grant/",
+    "language": "en",
+    "datePublished": "2022-11-09",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Neo states that it was awarded a grant of up to €18.7 million from the Government of Estonia under Europe's Just Transition Fund for the planned magnet plant."
+  },
+  {
+    "id": "src-neo-aif-2026",
+    "title": "Annual Information Form for the year ended December 31, 2025",
+    "publisher": "Neo Performance Materials Inc.",
+    "url": "https://www.neomaterials.com/wp-content/uploads/2026/03/NPM-AIF-2026.pdf",
+    "language": "en",
+    "datePublished": "2026-03-01",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Neo reports that the JTF grant terms reflect a 23% grant rate and an amount of approximately €14.8 million, and that it had received an aggregate US$8.4 million from the grant as of 31 December 2025."
+  },
+  {
+    "id": "src-neo-commercial-production-2026",
+    "title": "Neo Advances to Commercial Production at European Facility",
+    "publisher": "Neo Performance Materials",
+    "url": "https://www.neomaterials.com/neo-advances-commercial-production-magnet-facility/",
+    "language": "en",
+    "datePublished": "2026-09-14",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Neo states that its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare-earth sintered magnets to a Tier 1 EV traction-motor customer."
   }
 ]
