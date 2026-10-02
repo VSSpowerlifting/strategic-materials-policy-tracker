@@ -93,6 +93,31 @@ test("an old non-project commitment is P2 rather than P1", () => {
   assert.equal(item.priority, "P2");
 });
 
+test("durable non-project contracts are P2, while stale funding options can escalate to P1", () => {
+  const contract = deriveLifecycleQueueItem(
+    fin("fin-price-floor", {
+      project: null,
+      projectId: null,
+      instrument: "price_floor",
+      financialStatusHistory: [{ status: "contracted", date: "2025-01-01", sourceId: "src-fixture" }],
+    }),
+    AS_OF,
+  );
+  assert.equal(contract.priority, "P2");
+
+  const option = deriveLifecycleQueueItem(
+    fin("fin-option", {
+      project: null,
+      projectId: null,
+      valueRole: "funding_option",
+      instrument: "equity",
+      financialStatusHistory: [{ status: "contracted", date: "2026-01-01", sourceId: "src-fixture" }],
+    }),
+    AS_OF,
+  );
+  assert.equal(option.priority, "P1");
+});
+
 test("a binding named project with no physical follow-up is P1 even when recent", () => {
   const item = deriveLifecycleQueueItem(
     fin("fin-binding", {
