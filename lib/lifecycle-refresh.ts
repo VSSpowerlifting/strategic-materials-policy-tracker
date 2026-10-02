@@ -291,7 +291,7 @@ function implementationAssessment(
     };
   }
 
-  if (status === "operational" || status === "cancelled") {
+  if (status === "operational" || status === "completed" || status === "cancelled") {
     reasons.push(`physical lifecycle is ${status}`);
     return {
       status,
