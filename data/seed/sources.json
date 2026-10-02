@@ -1042,5 +1042,89 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The executed agreement itself (Award ID No. AP-2026-0044, execution version), filed as Exhibit 10.1 to the 8-K in src-usar-8k-2026-06-03 and read in full in a browser on 2026-09-24. Article 1: \"“Direct Funding” means direct funding under the NOFO in the form of an other transaction\" and \"“CHIPS Incentives” means the provision of direct funding (via grants, cooperative agreements, or other transactions), loans and loan guarantees as described in the NOFO\". It never calls the awards grants. Section 2.1(a) sets five maximum award amounts (Round Top $132,000,000; Stillwater Magnet $50,000,000; Stillwater Metal $20,000,000; Magnet Project 2 $60,000,000; Metal Project 2 $15,000,000). Section 2.1(b): \"No obligation of funds for the Award by the Department shall occur upon execution of this Agreement. An obligation of funds for the Award shall occur only upon delivery of a Funding Obligation.\" Section 4.16 makes the issuance of Equity Interests to the Department a condition precedent to the Award Date. Section 10.1.1 lists the clawback events and Section 10.2 has the recipient repay recovered disbursements within 120 days of the Department's demand. It supports contract terms it states directly and is attributed to the parties."
+  },
+  {
+    "id": "src-dod-5n-germanium-2024",
+    "title": "DOD Awards $14.4 Million to Sustain and Enhance the Space-Qualified Solar Cell Supply Chain",
+    "publisher": "U.S. Department of Defense",
+    "url": "https://www.defense.gov/News/Releases/Release/Article/3743467/dod-awards-144-million-to-sustain-and-enhance-the-space-qualified-solar-cell-su/",
+    "language": "en",
+    "datePublished": "2024-04-16",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official DPA Investment award release for 5N+ Semiconductors. States the $14.4M award, St. George location, germanium-substrate scope, four-year technical effort, and national-security/supply-chain rationale."
+  },
+  {
+    "id": "src-5n-germanium-2024",
+    "title": "5N+ Awarded US$14.4 Million by U.S. Department of Defense",
+    "publisher": "5N Plus Inc.",
+    "url": "https://www.5nplus.com/media/uploads/news/2024-04/b2024-04-18_dod_award_kYnCTid.pdf",
+    "language": "en",
+    "datePublished": "2024-04-18",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Company release confirming a US$14.4M DoD DPAI award, subject to conditions and pre-set milestones over four years, for St. George germanium-substrate production capacity."
+  },
+  {
+    "id": "src-dow-5n-germanium-2026",
+    "title": "Department of War Invests $18.1M to Increase U.S. Refining Capacity for Germanium Metal",
+    "publisher": "U.S. Department of War",
+    "url": "https://www.war.gov/serve-from-netstorage/News/Releases/Release/Article/4393075/department-of-war-invests-181m-to-increase-us-refining-capacity-for-germanium-m/index.html",
+    "language": "en",
+    "datePublished": "2026-01-29",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official release announcing a 15 December 2025 DPA Title III investment of $18.1M to 5N Plus for St. George germanium refining. States a sevenfold zone-refining expansion to more than 20 metric tons annually and domestic sourcing objectives."
+  },
+  {
+    "id": "src-5n-germanium-2026",
+    "title": "5N+ Awarded US$18.1 Million by U.S. Government to Significantly Increase Germanium Production Capacity in St. George, Utah",
+    "publisher": "5N Plus Inc.",
+    "url": "https://www.5nplus.com/en/news/5n-awarded-us181-million/",
+    "language": "en",
+    "datePublished": "2026-01-30",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Company release describing the US$18.1M grant to expand germanium recycling and refining over 48 months, with a target of up to 20 metric tons of high-purity germanium per year."
+  },
+  {
+    "id": "src-5n-st-george-expansion-2026",
+    "title": "5N+ to Expand St. George, Utah Production Facility by 50% to Support Future Growth",
+    "publisher": "5N Plus Inc.",
+    "url": "https://www.5nplus.com/en/news/5n-to-expand-st-george-utah-production-facility-by/",
+    "language": "en",
+    "datePublished": "2026-09-22",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Company update announcing a roughly 50% St. George facility expansion, with construction expected to begin in Q3 2026 and finish in the second half of 2027. It says the expansion follows two recent U.S. government awards supporting St. George capabilities."
+  },
+  {
+    "id": "src-nrcan-trail-strategic-metals-2026",
+    "title": "Canada announces first agreement under new Canada Critical Minerals Accelerator",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/natural-resources-canada/news/2026/07/canada-announces-first-agreement-under-new-canada-critical-minerals-accelerator.html",
+    "language": "en",
+    "datePublished": "2026-07-07",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official announcement of the Strategic Investment Agreement among the Canada Critical Minerals Accelerator, Canada Growth Fund and Teck. Describes a commercial framework for up to C$400M in equity-like investment, possible government offtake rights, and germanium/antimony/gallium capacity expansion at Trail."
+  },
+  {
+    "id": "src-teck-trail-strategic-metals-2026",
+    "title": "Teck, Canada Growth Fund and Canada Critical Minerals Accelerator sign Agreement to Support Strategic Metals Production at Trail Smelter",
+    "publisher": "Teck Resources Limited",
+    "url": "https://www.teck.com/news/news-releases/2026/teck%2C-canada-growth-fund-and-canada-critical-minerals-accelerator-sign-agreement-to-support-strategic-metals-production-at-trail-smelter",
+    "language": "en",
+    "datePublished": "2026-07-07",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Company release clarifying that the signed Strategic Investment Agreement is a commercial framework and that contemplated arrangements remain subject to definitive documentation and applicable approvals."
   }
 ]
