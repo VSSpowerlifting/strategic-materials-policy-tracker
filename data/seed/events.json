@@ -325,6 +325,42 @@
     }
   },
   {
+    "id": "evt-ca-cgf-cyclic-2026",
+    "date": "2026-01-20",
+    "jurisdiction": "canada",
+    "issuingBody": "Canada Growth Fund",
+    "titleOriginal": "Canada Growth Fund Invests US$25 Million in Cyclic Materials to Strengthen Canada’s Rare Earth Supply Chain",
+    "titleOriginalLang": "en",
+    "titleEn": "Canada Growth Fund invests US$25 million in Cyclic Materials to strengthen Canada’s rare-earth supply chain",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "Canada Growth Fund announced a US$25 million investment in Cyclic Materials as part of a US$75 million Series C preferred-equity round. The investment supports expansion of Cyclic's Kingston Centre of Excellence, Canadian R&D, execution of its first commercial Hub and broader commercialization of rare-earth recycling technology.",
+    "analyticalSignificance": "Adds a direct public-equity instrument to Canada's rare-earth recycling response and shows public support moving beyond demonstration funding into commercial-scale processing infrastructure. The source also places the Kingston Hub in construction at the time of the transaction.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-cgf-cyclic-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-01-23",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
     "id": "evt-jp-jogmec-lynas-2023",
     "date": "2023-03-07",
     "jurisdiction": "japan",
@@ -1080,6 +1116,41 @@
       "officialPublicationDate": "2022-12-09",
       "discoveredAt": "2026-08-12",
       "verifiedAt": "2026-08-12",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-feddev-cyclic-2025",
+    "date": "2025-09-01",
+    "jurisdiction": "canada",
+    "issuingBody": "Federal Economic Development Agency for Southern Ontario",
+    "titleOriginal": "Grants and Contributions: Agreement 1019177",
+    "titleOriginalLang": "en",
+    "titleEn": "FedDev Ontario contribution agreement 1019177 with Cyclic Materials",
+    "titleEnSource": "na",
+    "documentNumber": "1019177",
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "A Government of Canada grants-and-contributions disclosure records a C$5 million FedDev Ontario contribution agreement with Cyclic Materials, running from 1 September 2025 to 30 September 2028, to scale operations and establish a rare-earth-elements recycling Centre of Excellence in Kingston, Ontario.",
+    "analyticalSignificance": "Documents binding federal scale-up support for Cyclic's Kingston commercial recycling facility, distinct from the earlier CMRDD demonstration award and from later Canada Growth Fund and Global Partnerships Initiative support.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-open-canada-feddev-cyclic-2025"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": null,
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
       "publishedAt": null
     }
   },
@@ -1976,6 +2047,43 @@
       "officialPublicationDate": "2025-10-31",
       "discoveredAt": null,
       "verifiedAt": "2026-09-23",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-g7-cmpa-2026",
+    "date": "2026-03-02",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "Canada secures 30 new critical minerals partnerships and unlocks $12.1 billion in mining project capital",
+    "titleOriginalLang": "en",
+    "titleEn": "Canada announces second round of Critical Minerals Production Alliance partnerships and investments",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [
+      "defense",
+      "industrial"
+    ],
+    "summary": "Natural Resources Canada announced the second round of Critical Minerals Production Alliance partnerships and investments. For tracked rare-earths support, the backgrounder identifies a conditionally approved investment of up to C$9.1 million through the Global Partnerships Initiative for Cyclic Materials' Kingston Centre of Excellence, alongside the recent US$25 million Canada Growth Fund equity investment.",
+    "analyticalSignificance": "Shows Canada's rare-earth recycling policy layering conditional programme funding on top of an earlier public-equity investment at the same commercial-scale Kingston undertaking. The conditional approval is kept distinct from binding or disbursed support.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-cmpa-2026-round2"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-03-02",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
       "publishedAt": null
     }
   },
