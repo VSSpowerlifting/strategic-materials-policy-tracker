@@ -81,8 +81,10 @@ const PHYSICAL_STAGES = new Set<FinancialCommitment["stages"][number]>([
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 function assertIsoDate(value: string, label: string): void {
-  if (!ISO_DATE.test(value) || Number.isNaN(Date.parse(`${value}T00:00:00Z`)))
-    throw new Error(`${label}: expected ISO yyyy-mm-dd, got ${JSON.stringify(value)}`);
+  if (!ISO_DATE.test(value)) throw new Error(`${label}: expected ISO yyyy-mm-dd, got ${JSON.stringify(value)}`);
+  const parsed = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value)
+    throw new Error(`${label}: expected a real ISO calendar date, got ${JSON.stringify(value)}`);
 }
 
 function latestDatedStatus<S extends string>(entries: readonly StatusEntry<S>[]): string | null {
@@ -248,8 +250,7 @@ function implementationSide(
   if (
     passed.length > 0 &&
     current !== "operational" &&
-    current !== "cancelled" &&
-    current !== "not_applicable"
+    current !== "cancelled"
   ) {
     priority = higherPriority(priority, "P1");
     reasons.push(`stated implementation milestone date has passed (${passed.sort().at(-1)})`);
@@ -361,7 +362,9 @@ export function bundleLifecycleRefreshQueue(
 
   return [...grouped.entries()]
     .map(([key, bundleRows]): LifecycleRefreshBundle => {
-      const sorted = [...bundleRows].sort((a, b) => a.commitmentId.localeCompare(b.commitmentId));
+      const sorted = [...bundleRows].sort((a, b) =>
+        a.commitmentId < b.commitmentId ? -1 : a.commitmentId > b.commitmentId ? 1 : 0,
+      );
       const priority = sorted.reduce<LifecycleRefreshPriority>(
         (best, row) => higherPriority(best, row.priority),
         "P3",
