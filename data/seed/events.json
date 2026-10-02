@@ -1145,12 +1145,12 @@
     "sourceIds": [
       "src-open-canada-feddev-cyclic-2025"
     ],
-    "verificationStatus": "verified",
+    "verificationStatus": "provisional",
     "intakeMode": "backfill",
     "lifecycle": {
       "officialPublicationDate": null,
       "discoveredAt": null,
-      "verifiedAt": "2026-10-02",
+      "verifiedAt": null,
       "publishedAt": null
     }
   },
