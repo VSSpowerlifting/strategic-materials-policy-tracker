@@ -98,6 +98,23 @@ test("a stale pre-binding named project is P1 on both lifecycle clocks when impl
   assert.equal(row.priority, "P1");
 });
 
+test("stage-tagged policy support without a named undertaking does not create a fake physical lifecycle", () => {
+  const c = fin("fin-generic-policy", {
+    project: null,
+    projectId: null,
+    facility: null,
+    stages: ["processing"],
+    stageAllocation: "single_stage",
+    financialStatusHistory: [
+      { status: "authorized", date: "2026-09-20", sourceId: "src-test" },
+    ],
+  });
+
+  const [row] = deriveLifecycleRefreshQueue([c], AS_OF);
+  assert.equal(row.implementation.priority, "P3");
+  assert.deepEqual(row.implementation.reasons, ["physical implementation tracking is not applicable"]);
+});
+
 test("a binding named project with no implementation review is P1 even when financing is recent", () => {
   const c = fin("fin-binding-project", {
     project: "Binding Project",
