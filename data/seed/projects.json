@@ -324,6 +324,59 @@
     "notes": "The backgrounder describes the company's aim of \"the largest fully integrated natural graphite production facility in North America\"; only the mine is recorded as the project."
   },
   {
+    "id": "prj-ca-trail-strategic-metals",
+    "name": "Trail Strategic Metals Initiative",
+    "sponsorOrgIds": [
+      "org-teck-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Trail Operations in British Columbia"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "materialIds": [
+      "germanium",
+      "antimony",
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and investment-framework paragraphs",
+        "note": "NRCan describes expansion of critical-mineral processing capacity at Trail, including germanium, antimony and potential gallium capacity."
+      },
+      {
+        "sourceId": "src-teck-trail-strategic-metals-2026",
+        "supports": [
+          "sponsors",
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through Strategic Metals Initiative paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "The initiative could double existing germanium and antimony production capacity and potentially add gallium capacity; those are prospective outcomes, not current production increments."
+  },
+  {
     "id": "prj-ca-ucore-kingston",
     "name": "Ucore commercial rare earth processing facility, Kingston",
     "sponsorOrgIds": [
@@ -1933,6 +1986,104 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "prj-us-5n-st-george-germanium-refining",
+    "name": "St. George germanium recovery and refining expansion",
+    "sponsorOrgIds": [
+      "org-5n-plus"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "recycling",
+      "refining"
+    ],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-5n-germanium-2026",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and capacity paragraphs",
+        "note": "The release describes expansion of germanium-metal zone refining and sourcing from underutilized domestic sources."
+      },
+      {
+        "sourceId": "src-5n-germanium-2026",
+        "supports": [
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and capacity paragraphs",
+        "note": "5N+ describes recycling and refining germanium from industrial residues and mining by-products."
+      }
+    ],
+    "notes": "A distinct DPA-funded scope from the 2024 substrate-capacity award, although both occur at the same St. George facility."
+  },
+  {
+    "id": "prj-us-5n-st-george-germanium-substrates",
+    "name": "St. George space-qualified germanium substrate capacity expansion",
+    "sponsorOrgIds": [
+      "org-5n-plus-semiconductors"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "refining",
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-5n-germanium-2024",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Award and technical-effort paragraphs",
+        "note": "DoD describes germanium-substrate manufacturing expansion plus sourcing, recovery and refining improvements at St. George."
+      },
+      {
+        "sourceId": "src-5n-germanium-2024",
+        "supports": [
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and project-description paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "The project spans upstream material preparation/refining and production of space-qualified germanium wafers/substrates; the award does not allocate money by stage."
   },
   {
     "id": "prj-us-mountain-pass-samarium",

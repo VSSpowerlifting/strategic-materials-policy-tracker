@@ -2057,5 +2057,124 @@
       "verifiedAt": "2026-09-23",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-dod-5n-germanium-2024",
+    "date": "2024-04-16",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Defense",
+    "titleOriginal": "DOD Awards $14.4 Million to Sustain and Enhance the Space-Qualified Solar Cell Supply Chain",
+    "titleOriginalLang": "en",
+    "titleEn": "DoD DPA support for 5N+ space-qualified germanium substrate capacity",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "germanium"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "energy"
+    ],
+    "summary": "DoD awarded $14.4 million through the Defense Production Act Investment Program to 5N+ Semiconductors to sustain and expand production of space-qualified germanium substrates at St. George, Utah. The four-year effort covers manufacturing-capacity upgrades plus improvements in germanium sourcing, recovery and refining.",
+    "analyticalSignificance": "The award targets a downstream semiconductor-material bottleneck while also supporting upstream recovery and refining within the same domestic facility.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-dod-5n-germanium-2024",
+      "src-5n-germanium-2024"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-04-16",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-dow-5n-germanium-2025",
+    "date": "2025-12-15",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of War",
+    "titleOriginal": "Department of War Invests $18.1M to Increase U.S. Refining Capacity for Germanium Metal",
+    "titleOriginalLang": "en",
+    "titleEn": "Department of War DPA investment in 5N+ germanium recovery and refining",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "germanium"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "The Department of War made an $18.1 million DPA Title III investment in 5N Plus on 15 December 2025, publicly announced on 29 January 2026, to expand germanium-metal refining and domestic-source recovery at St. George, Utah. The effort is intended to expand zone-refining capacity and supply optics and solar germanium crystal chains.",
+    "analyticalSignificance": "This second St. George intervention addresses germanium-metal recovery and refining rather than the substrate-manufacturing capacity emphasized in the 2024 award.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-dow-5n-germanium-2026",
+      "src-5n-germanium-2026",
+      "src-5n-st-george-expansion-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-01-29",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-trail-strategic-metals-2026",
+    "date": "2026-07-07",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada / Canada Growth Fund",
+    "titleOriginal": "Canada announces first agreement under new Canada Critical Minerals Accelerator",
+    "titleOriginalLang": "en",
+    "titleEn": "Canada Growth Fund and Teck strategic investment framework for Trail strategic metals expansion",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "germanium",
+      "antimony",
+      "gallium"
+    ],
+    "affectedSectors": [
+      "industrial",
+      "defense",
+      "semiconductor"
+    ],
+    "summary": "Canada's Critical Minerals Accelerator, Canada Growth Fund and Teck signed a Strategic Investment Agreement for the Trail Strategic Metals Initiative. The agreement establishes a commercial framework for up to C$400 million of equity-like CGF investment and potential government offtake rights, but the contemplated arrangements remained subject to definitive documentation and approvals.",
+    "analyticalSignificance": "The framework targets an existing integrated smelting and refining complex and links germanium, antimony and potential gallium expansion to structured public investment, while remaining non-binding at the financing stage.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-trail-strategic-metals-2026",
+      "src-teck-trail-strategic-metals-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-07-07",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
   }
 ]

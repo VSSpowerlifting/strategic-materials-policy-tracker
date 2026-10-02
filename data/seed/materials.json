@@ -216,7 +216,8 @@
       "evt-us-proc-11001-2026",
       "evt-us-au-framework-2025",
       "evt-eu-crma-strategic-projects-2025-03",
-      "evt-us-chips-usar-2026"
+      "evt-us-chips-usar-2026",
+      "evt-ca-trail-strategic-metals-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -252,7 +253,10 @@
       "evt-uk-cms-2025",
       "evt-cn-antismuggling-campaign-2025",
       "evt-us-proc-11001-2026",
-      "evt-eu-crma-strategic-projects-2025-03"
+      "evt-eu-crma-strategic-projects-2025-03",
+      "evt-us-dod-5n-germanium-2024",
+      "evt-us-dow-5n-germanium-2025",
+      "evt-ca-trail-strategic-metals-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -331,7 +335,8 @@
       "evt-au-cmpti-2025",
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
-      "evt-cn-antismuggling-campaign-2025"
+      "evt-cn-antismuggling-campaign-2025",
+      "evt-ca-trail-strategic-metals-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

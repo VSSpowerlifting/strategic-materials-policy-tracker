@@ -1,5 +1,58 @@
 [
   {
+    "id": "org-5n-plus",
+    "name": "5N Plus Inc.",
+    "nameOriginal": null,
+    "aliases": [
+      "5N+"
+    ],
+    "kind": "company",
+    "countryCode": "CA",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-5n-germanium-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph",
+        "note": "The company release identifies 5N Plus Inc. as a Canadian issuer headquartered in Montréal, Québec."
+      }
+    ],
+    "notes": "Parent company of the St. George operation; corporate-subsidiary ownership is not encoded by the current organization relationship vocabulary."
+  },
+  {
+    "id": "org-5n-plus-semiconductors",
+    "name": "5N Plus Semiconductors LLC",
+    "nameOriginal": null,
+    "aliases": [
+      "5N+ Semiconductors",
+      "5N Semi"
+    ],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-5n-germanium-2024",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and St. George technical-effort paragraph",
+        "note": "DoD names 5N+ Semiconductors and places the technical work at its St. George, Utah facility."
+      }
+    ],
+    "notes": "U.S. operating subsidiary associated with the St. George semiconductor facility."
+  },
+  {
     "id": "org-abenojar-tungsten",
     "name": "ABENÓJAR TUNGSTEN S.L.",
     "nameOriginal": null,
@@ -1553,6 +1606,32 @@
         "evidence": "explicit",
         "locator": "Article 2, row 44",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-teck-resources",
+    "name": "Teck Resources Limited",
+    "nameOriginal": null,
+    "aliases": [
+      "Teck"
+    ],
+    "kind": "company",
+    "countryCode": "CA",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-teck-trail-strategic-metals-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph",
+        "note": "Teck's release identifies Teck Resources Limited and the Trail Operations facility in British Columbia."
       }
     ],
     "notes": null

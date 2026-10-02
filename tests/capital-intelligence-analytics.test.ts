@@ -844,6 +844,7 @@ const LETTERS = [
   "fin-de-g7-2025-vianode-export-credit-guarantee",
   "fin-us-commerce-chips-vulcan-2025-incentives",
 ];
+const INDICATIONS = [...LETTERS, "fin-ca-trail-cgf-2026-indication"];
 
 test("a non-binding indication is listed in its own layer and is never a sum, a backer, a flow or a stage of capital", () => {
   const at = { locations: [{ countryCode: "US", subnational: null, asStated: "US" }], stages: ["processing" as const], materialIds: ["m"] };
@@ -884,30 +885,33 @@ test("a non-binding indication is listed in its own layer and is never a sum, a 
   assert.deepEqual(projectStack("prj-ca-vianode-st-thomas", [lapsed])!.governments, []);
 });
 
-test("in the corpus, the four non-binding letters of intent or interest are indications, in no sum and behind no project", () => {
+test("in the corpus, non-binding financing proposals are indications, in no sum and behind no project", () => {
   const all = getAllFinancialCommitments();
-  for (const id of LETTERS) {
+  for (const id of INDICATIONS) {
     const c = getFinancialCommitmentById(id)!;
     assert.equal(c.valueRole, "indication", id);
     assert.equal(c.financialStatusHistory.at(-1)!.status, "announced", id);
     assert.equal(layerOf(c), "indication", id);
   }
-  // Exactly these four rows are indications: the rule applies where the source itself says letter of intent or interest.
-  assert.deepEqual(all.filter((c) => c.valueRole === "indication").map((c) => c.id).sort(), [...LETTERS].sort());
+  // Exactly these rows are indications: four letters plus Trail's commercial framework, which still requires definitive documentation.
+  assert.deepEqual(all.filter((c) => c.valueRole === "indication").map((c) => c.id).sort(), [...INDICATIONS].sort());
   // The conditional loan commitments are a lender's decision on conditions and stay commitments.
   for (const id of ["fin-us-osc-vulcan-reelement-2025-joint-commitment", "fin-ca-g7-2025-ucore-package"]) assert.equal(getFinancialCommitmentById(id)!.valueRole, "commitment", id);
-  // No total, by any actor, counts one; and a summary lists all four apart.
+  // No total, by any actor, counts one; and the summary lists every indication apart.
   const s = buildCapitalIntelligenceSummary();
   for (const p of s.portfolios) {
     const json = JSON.stringify([p.publicCommitmentTotals, p.jointVehicleCommitmentTotals]);
-    for (const id of LETTERS) assert.ok(!json.includes(id), `${id} is in ${p.actor}'s totals`);
+    for (const id of INDICATIONS) assert.ok(!json.includes(id), `${id} is in ${p.actor}'s totals`);
   }
-  assert.deepEqual(buildCapitalControlSummary().capital.indicationsListedNotSummed.map((r) => r.id).sort(), [...LETTERS].sort());
+  assert.deepEqual(buildCapitalControlSummary().capital.indicationsListedNotSummed.map((r) => r.id).sort(), [...INDICATIONS].sort());
   // Vianode's two letters are the only rows on the project: it has no backer, no government and no co-investment.
   const vianode = projectStack("prj-ca-vianode-st-thomas")!;
   assert.deepEqual(vianode.rows.map((c) => c.id).sort(), ["fin-ca-g7-2025-vianode-edc-letter-of-interest", "fin-de-g7-2025-vianode-export-credit-guarantee"]);
   assert.deepEqual([vianode.governments, vianode.providerOrgIds], [[], []]);
   assert.ok(!coInvestments().some((c) => c.project.id === "prj-ca-vianode-st-thomas"));
+  const trail = projectStack("prj-ca-trail-strategic-metals")!;
+  assert.deepEqual([trail.governments, trail.providerOrgIds], [[], []]);
+  assert.ok(!coInvestments().some((c) => c.project.id === "prj-ca-trail-strategic-metals"));
   // NMG keeps its Canada Growth Fund and offtake rows; its letter sits apart from them.
   const nmg = projectStack("prj-ca-nmg-matawinie")!;
   assert.ok(nmg.layers.some((l) => l.key === "indication" && l.rows.map((c) => c.id).join() === "fin-ca-g7-2025-nmg-edc-letter-of-interest"));
@@ -918,7 +922,7 @@ test("in the corpus, the four non-binding letters of intent or interest are indi
   if (!guarantee.summed) assert.fail("loan guarantees are summed");
   assert.deepEqual(guarantee.countedIds, ["fin-us-chips-usar-2026-loan-guarantee"]);
   assert.deepEqual([guarantee.byQualifier, guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000" }, { up_to: "1300000000" }, {}]);
-  // Canada's portfolio counts its two letters in their own layer only.
+  // Canada's portfolio counts its two letters plus the Trail commercial framework in the indication layer only.
   const canada = actorPortfolio("canada", all).counts;
-  assert.equal(canada.byLayer.indication, 2);
+  assert.equal(canada.byLayer.indication, 3);
 });
