@@ -154,6 +154,25 @@ test("advanced physical execution against a still pre-binding financial row is a
   assert.equal(row.priority, "P0");
 });
 
+test("completed projects are terminal physical execution and can expose financial-lifecycle tension", () => {
+  const c = fin("fin-completed", {
+    project: "Completed Demonstration",
+    projectId: "prj-completed",
+    stages: ["recycling"],
+    stageAllocation: "single_stage",
+    financialStatusHistory: [
+      { status: "announced", date: "2024-09-04", sourceId: "src-test" },
+    ],
+    implementationStatusHistory: [
+      { status: "completed", date: "2026-03-31", sourceId: "src-test" },
+    ],
+  });
+
+  const [row] = deriveLifecycleRefreshQueue([c], AS_OF);
+  assert.equal(row.implementation.priority, "P0");
+  assert.match(row.implementation.reasons.join(" "), /completed while financial status remains announced/);
+});
+
 test("a passed exact target milestone triggers a refresh without inventing progression", () => {
   const c = fin("fin-milestone", {
     project: "Milestone Project",
