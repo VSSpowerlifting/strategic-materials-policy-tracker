@@ -141,7 +141,7 @@ export function deriveLifecycleQueueItem(
   const implementation = track(commitment.implementationStatusHistory, review?.implementationStatusCheckedAt, asOf);
   const financialStatus = financial.status as FinancialStatus | null;
   const implementationStatus = implementation.status as ImplementationStatus | null;
-  const namedProject = commitment.projectId !== null;
+  const namedProject = commitment.projectId !== null || commitment.project !== null;
   const reasons: string[] = [];
 
   let priority: LifecyclePriority = "P3";
@@ -244,6 +244,7 @@ export function deriveLifecycleRefreshQueue(
 function bundleKey(item: LifecycleQueueItem, byId: ReadonlyMap<string, FinancialCommitment>): string {
   if (item.projectId) return `project:${item.projectId}`;
   const commitment = byId.get(item.commitmentId);
+  if (commitment?.project) return `project-name:${commitment.providerJurisdiction ?? "none"}:${commitment.project}`;
   const parent = commitment?.relationships.find((relationship) => relationship.relationship === "part_of")?.commitmentId;
   return parent ? `package:${parent}` : `commitment:${item.commitmentId}`;
 }
