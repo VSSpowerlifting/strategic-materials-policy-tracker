@@ -104,6 +104,21 @@ test("a binding named project with no physical follow-up is P1 even when recent"
   );
   assert.equal(item.priority, "P1");
   assert.ok(item.reasons.includes("named project lacks implementation follow-up"));
+
+  const reviewed = deriveLifecycleQueueItem(itemToCommitment(), AS_OF, [{
+    commitmentId: "fin-binding",
+    financialStatusCheckedAt: "2026-10-01",
+    implementationStatusCheckedAt: "2026-10-01",
+  }]);
+  assert.equal(reviewed.priority, "P3");
+
+  function itemToCommitment(): FinancialCommitment {
+    return fin("fin-binding", {
+      project: "Binding project",
+      projectId: "prj-binding",
+      financialStatusHistory: [{ status: "contracted", date: "2026-09-20", sourceId: "src-fixture" }],
+    });
+  }
 });
 
 test("financial completion does not hide an active physical project", () => {
