@@ -331,7 +331,9 @@
       "evt-au-cmpti-2025",
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
-      "evt-cn-antismuggling-campaign-2025"
+      "evt-cn-antismuggling-campaign-2025",
+      "evt-us-dow-arr-antimony-2025",
+      "evt-us-dow-usac-antimony-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
