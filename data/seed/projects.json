@@ -1935,6 +1935,64 @@
     "notes": null
   },
   {
+    "id": "prj-us-estelle-antimony",
+    "name": "Estelle Gold and Critical Minerals Project — integrated antimony supply chain",
+    "sponsorOrgIds": [
+      "org-alaska-range-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Estelle Project in Alaska"
+      },
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Port MacKenzie"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing",
+      "refining"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "gold"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dow-arr-antimony-2025",
+        "supports": [
+          "name",
+          "stages",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Award scope paragraphs",
+        "note": "The award covers stibnite extraction, concentration and refining at the Estelle/Stibium initiative."
+      },
+      {
+        "sourceId": "src-nova-arr-h1-2026",
+        "supports": [
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "U.S. Department of War Grant; Refinery & Equipment Procurement",
+        "note": "The filing identifies ARR as the award recipient and Port MacKenzie as the proposed antimony refinery location."
+      }
+    ],
+    "notes": "The underlying Estelle development also contains gold; this record represents the antimony supply-chain undertaking funded by the DPA award."
+  },
+  {
     "id": "prj-us-mountain-pass-samarium",
     "name": "Mountain Pass heavy rare earth separation expansion (Samarium Project)",
     "sponsorOrgIds": [
@@ -2018,6 +2076,57 @@
       }
     ],
     "notes": "The July 2025 filing and release gave the site as \"a soon-to-be-chosen location\"; MP's 10-Q for the quarter to 30 June 2026 places it in Northlake, Texas."
+  },
+  {
+    "id": "prj-us-usac-thompson-falls-expansion",
+    "name": "Thompson Falls antimony facility expansion",
+    "sponsorOrgIds": [
+      "org-us-antimony"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Montana",
+        "asStated": "Thompson Falls, Montana"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Award scope paragraphs",
+        "note": "The release states that the investment will modernize and expand Montana capacity to process, refine and produce antimony."
+      },
+      {
+        "sourceId": "src-usac-2026-q2-10q",
+        "supports": [
+          "sponsors",
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 9; Property, Plant and Equipment",
+        "note": "The filing identifies United States Antimony Corporation and the Thompson Falls facility expansion, and reports substantial completion."
+      }
+    ],
+    "notes": "The $27M DPA award also supports Alaska mining integration, so the financial commitment is not assigned wholly to this project."
   },
   {
     "id": "prj-us-usar-magnet-project-2",
