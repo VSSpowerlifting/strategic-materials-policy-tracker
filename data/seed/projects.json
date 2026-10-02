@@ -156,6 +156,57 @@
     "notes": "A substitution project: it \"aims to contribute to the substitution of germanium\", so no supply-chain stage is coded."
   },
   {
+    "id": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "name": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "sponsorOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "processing",
+      "recycling",
+      "research_development"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-cyclic-centre-excellence-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Announcement body; A Strategic Facility Serving a Circular Future",
+        "note": "Cyclic describes a Kingston Centre of Excellence combining its first commercial rare-earth recovery Hub with R&D. The facility processes magnet-rich end-of-life feedstock into recycled mixed rare-earth oxide."
+      },
+      {
+        "sourceId": "src-nrcan-gpi-programme",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "GPI funded projects — Contribution funding — Cyclic Materials Inc.",
+        "note": "NRCan says the project advances rare-earth processing, separation and metallization technologies using end-of-life materials; recycling, processing and separation are represented directly in the tracker taxonomy."
+      }
+    ],
+    "notes": "The Centre of Excellence is separate from the earlier Kingston Demonstration Plant recorded as prj-ca-cyclic-kingston-demonstration-plant. The June 2025 company announcement describes the commercial-scale Hub and R&D facility; the January 2026 CGF source says that Hub was then under construction."
+  },
+  {
     "id": "prj-ca-cyclic-kingston-demonstration-plant",
     "name": "Kingston Demonstration Plant",
     "sponsorOrgIds": [
