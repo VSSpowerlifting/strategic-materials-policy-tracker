@@ -96,6 +96,55 @@ export function controlStatusOn(m: ControlMeasure, date: string): ControlStatus 
   return status;
 }
 
+export type SuspensionPath = "before_effective" | "after_effective" | "other";
+
+/**
+ * How a clause reached its current suspended state.
+ *
+ * "before_effective" means the clause was scheduled but suspended before any
+ * recorded in-force period. "after_effective" means the clause had already
+ * entered into force before the suspension. "other" preserves any source-backed
+ * history that does not fit either path rather than guessing.
+ */
+export function suspensionPath(m: ControlMeasure): SuspensionPath | null {
+  if (currentControlStatus(m) !== "suspended") return null;
+  const prior = m.statusHistory.slice(0, -1);
+  if (prior.some((e) => e.status === "in_force")) return "after_effective";
+  if (prior.some((e) => e.status === "scheduled")) return "before_effective";
+  return "other";
+}
+
+export type SuspensionAnatomy = {
+  suspendedIds: string[];
+  beforeEffectiveIds: string[];
+  afterEffectiveIds: string[];
+  otherIds: string[];
+};
+
+/**
+ * Current suspended clauses split by whether they ever entered into force.
+ * This is a legal-status history count, not a measure of economic intensity.
+ */
+export function suspensionAnatomy(
+  all: readonly ControlMeasure[] = getAllControlMeasures(),
+): SuspensionAnatomy {
+  const out: SuspensionAnatomy = {
+    suspendedIds: [],
+    beforeEffectiveIds: [],
+    afterEffectiveIds: [],
+    otherIds: [],
+  };
+  for (const m of all) {
+    const path = suspensionPath(m);
+    if (path === null) continue;
+    out.suspendedIds.push(m.id);
+    if (path === "before_effective") out.beforeEffectiveIds.push(m.id);
+    else if (path === "after_effective") out.afterEffectiveIds.push(m.id);
+    else out.otherIds.push(m.id);
+  }
+  return out;
+}
+
 /** Whole days from `from` to `to` (ISO dates), UTC. */
 export function daysBetween(from: string, to: string): number {
   return Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000);
