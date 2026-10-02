@@ -3,6 +3,7 @@ import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { TitlePage } from "@/components/title-page";
 import { site } from "@/lib/site";
 
 // Display / structural / UI labels.
@@ -46,6 +47,7 @@ export default function RootLayout({
       className={`${archivo.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col antialiased">
+        <TitlePage />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
