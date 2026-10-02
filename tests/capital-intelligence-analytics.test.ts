@@ -897,7 +897,7 @@ test("in the corpus, non-binding financing proposals are indications, in no sum 
   assert.deepEqual(all.filter((c) => c.valueRole === "indication").map((c) => c.id).sort(), [...INDICATIONS].sort());
   // The conditional loan commitments are a lender's decision on conditions and stay commitments.
   for (const id of ["fin-us-osc-vulcan-reelement-2025-joint-commitment", "fin-ca-g7-2025-ucore-package"]) assert.equal(getFinancialCommitmentById(id)!.valueRole, "commitment", id);
-  // No total, by any actor, counts one; and a summary lists all four apart.
+  // No total, by any actor, counts one; and the summary lists every indication apart.
   const s = buildCapitalIntelligenceSummary();
   for (const p of s.portfolios) {
     const json = JSON.stringify([p.publicCommitmentTotals, p.jointVehicleCommitmentTotals]);
