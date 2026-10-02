@@ -99,10 +99,10 @@ test("designations, projects and projects with no designation, per material; the
     graphite: [15, 19, 4],
     "ndfeb-magnets": [0, 4, 4],
     gallium: [1, 3, 2],
-    germanium: [2, 2, 0],
+    germanium: [2, 5, 3],
     dysprosium: [0, 2, 2],
     terbium: [0, 2, 2],
-    antimony: [0, 0, 0],
+    antimony: [0, 1, 1],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
   };
