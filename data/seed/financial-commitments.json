@@ -6641,7 +6641,7 @@
       "value": "59200000",
       "currency": "USD",
       "qualifier": "up_to",
-      "amountAsStated": "bringing the total amount of the TIA to $59.2 million",
+      "amountAsStated": "$59.2 million",
       "currencyBasis": "issuer_context"
     },
     "provider": "U.S. Department of Defense, Air Force Research Laboratory",
