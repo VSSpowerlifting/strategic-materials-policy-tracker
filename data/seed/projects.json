@@ -156,6 +156,57 @@
     "notes": "A substitution project: it \"aims to contribute to the substitution of germanium\", so no supply-chain stage is coded."
   },
   {
+    "id": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "name": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "sponsorOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "stages": [
+      "separation",
+      "processing",
+      "recycling",
+      "research_development"
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-cyclic-centre-excellence-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Announcement body; A Strategic Facility Serving a Circular Future",
+        "note": "Cyclic describes a Kingston Centre of Excellence combining its first commercial rare-earth recovery Hub with R&D. The facility processes magnet-rich end-of-life feedstock into recycled mixed rare-earth oxide."
+      },
+      {
+        "sourceId": "src-nrcan-gpi-programme",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "GPI funded projects — Contribution funding — Cyclic Materials Inc.",
+        "note": "NRCan says the project advances rare-earth processing, separation and metallization technologies using end-of-life materials; recycling, processing and separation are represented directly in the tracker taxonomy."
+      }
+    ],
+    "notes": "The Centre of Excellence is separate from the earlier Kingston Demonstration Plant recorded as prj-ca-cyclic-kingston-demonstration-plant. The June 2025 company announcement describes the commercial-scale Hub and R&D facility; the January 2026 CGF source says that Hub was then under construction."
+  },
+  {
     "id": "prj-ca-cyclic-kingston-demonstration-plant",
     "name": "Kingston Demonstration Plant",
     "sponsorOrgIds": [
@@ -322,6 +373,59 @@
       }
     ],
     "notes": "The backgrounder describes the company's aim of \"the largest fully integrated natural graphite production facility in North America\"; only the mine is recorded as the project."
+  },
+  {
+    "id": "prj-ca-trail-strategic-metals",
+    "name": "Trail Strategic Metals Initiative",
+    "sponsorOrgIds": [
+      "org-teck-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Trail Operations in British Columbia"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "materialIds": [
+      "germanium",
+      "antimony",
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and investment-framework paragraphs",
+        "note": "NRCan describes expansion of critical-mineral processing capacity at Trail, including germanium, antimony and potential gallium capacity."
+      },
+      {
+        "sourceId": "src-teck-trail-strategic-metals-2026",
+        "supports": [
+          "sponsors",
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through Strategic Metals Initiative paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "The initiative could double existing germanium and antimony production capacity and potentially add gallium capacity; those are prospective outcomes, not current production increments."
   },
   {
     "id": "prj-ca-ucore-kingston",
@@ -1935,6 +2039,197 @@
     "notes": null
   },
   {
+    "id": "prj-us-5n-st-george-germanium-refining",
+    "name": "St. George germanium recovery and refining expansion",
+    "sponsorOrgIds": [
+      "org-5n-plus"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "recycling",
+      "refining"
+    ],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-5n-germanium-2026",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and capacity paragraphs",
+        "note": "The release describes expansion of germanium-metal zone refining and sourcing from underutilized domestic sources."
+      },
+      {
+        "sourceId": "src-5n-germanium-2026",
+        "supports": [
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and capacity paragraphs",
+        "note": "5N+ describes recycling and refining germanium from industrial residues and mining by-products."
+      }
+    ],
+    "notes": "A distinct DPA-funded scope from the 2024 substrate-capacity award, although both occur at the same St. George facility."
+  },
+  {
+    "id": "prj-us-5n-st-george-germanium-substrates",
+    "name": "St. George space-qualified germanium substrate capacity expansion",
+    "sponsorOrgIds": [
+      "org-5n-plus-semiconductors"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "refining",
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-5n-germanium-2024",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Award and technical-effort paragraphs",
+        "note": "DoD describes germanium-substrate manufacturing expansion plus sourcing, recovery and refining improvements at St. George."
+      },
+      {
+        "sourceId": "src-5n-germanium-2024",
+        "supports": [
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and project-description paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "The project spans upstream material preparation/refining and production of space-qualified germanium wafers/substrates; the award does not allocate money by stage."
+  },
+  {
+    "id": "prj-us-estelle-antimony",
+    "name": "Estelle Gold and Critical Minerals Project — integrated antimony supply chain",
+    "sponsorOrgIds": [
+      "org-alaska-range-resources"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Estelle Project in Alaska"
+      },
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Port MacKenzie"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing",
+      "refining"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "gold"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dow-arr-antimony-2025",
+        "supports": [
+          "name",
+          "stages",
+          "materials",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Award scope paragraphs",
+        "note": "The award covers stibnite extraction, concentration and refining at the Estelle/Stibium initiative."
+      },
+      {
+        "sourceId": "src-nova-arr-h1-2026",
+        "supports": [
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "U.S. Department of War Grant; Refinery & Equipment Procurement",
+        "note": "The filing identifies ARR as the award recipient and Port MacKenzie as the proposed antimony refinery location."
+      }
+    ],
+    "notes": "The underlying Estelle development also contains gold; this record represents the antimony supply-chain undertaking funded by the DPA award."
+  },
+  {
+    "id": "prj-us-inl-antimony-pilot",
+    "name": "INL antimony sulfide modular pilot plant",
+    "sponsorOrgIds": [],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "Idaho Falls, Idaho"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-army-antimony-pilot-2026",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Army article describes the prototype processing facility at INL and its antimony-sulfide demonstration role."
+      }
+    ],
+    "notes": "Prototype processing capability using samples from the Stibnite Gold Project; separate from the mine project itself."
+  },
+  {
     "id": "prj-us-mountain-pass-samarium",
     "name": "Mountain Pass heavy rare earth separation expansion (Samarium Project)",
     "sponsorOrgIds": [
@@ -2018,6 +2313,53 @@
       }
     ],
     "notes": "The July 2025 filing and release gave the site as \"a soon-to-be-chosen location\"; MP's 10-Q for the quarter to 30 June 2026 places it in Northlake, Texas."
+  },
+  {
+    "id": "prj-us-stibnite",
+    "name": "Stibnite Gold Project",
+    "sponsorOrgIds": [],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "central Idaho"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "gold",
+      "silver"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dod-perpetua-dpa-2022",
+        "supports": [
+          "name",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "DoD names the Stibnite-Gold Project in central Idaho and identifies antimony trisulfide as the defense-relevant output."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Project financing and 2026 outlook sections",
+        "note": "The filing describes development of the mine project and the processing plant as part of the approved project scope."
+      }
+    ],
+    "notes": "A gold-antimony-silver development; only antimony is tracked as a material in SMPT."
   },
   {
     "id": "prj-us-usar-magnet-project-2",

@@ -398,6 +398,7 @@ export const IMPLEMENTATION_STATUSES = [
   "construction",
   "commissioning",
   "operational",
+  "completed",
   "suspended",
   "cancelled",
   "not_stated",
@@ -683,6 +684,16 @@ export type StatusEntry<S extends string> = {
 export type FinancialStatusEntry = StatusEntry<FinancialStatus>;
 export type ImplementationStatusEntry = StatusEntry<ImplementationStatus>;
 
+/**
+ * Maintenance metadata for lifecycle follow-up. These dates say only when an
+ * appropriate review was completed; they are not substantive status evidence
+ * and never belong in a status history.
+ */
+export type LifecycleReview = {
+  financialStatusCheckedAt: string | null;
+  implementationStatusCheckedAt: string | null;
+};
+
 export type ControlStatusEntry = StatusEntry<ControlStatus> & {
   /**
    * The stated end of this status, when the source gives one: the date a
@@ -825,6 +836,11 @@ export type FinancialCommitment = {
   untrackedMaterialsAsStated: string[];
   financialStatusHistory: FinancialStatusEntry[];
   implementationStatusHistory: ImplementationStatusEntry[];
+  /**
+   * Omitted means this row has not yet been reviewed under the lifecycle-refresh
+   * system. Once present, each clock is maintained independently.
+   */
+  lifecycleReview?: LifecycleReview;
   terms: InstrumentTerm[];
   outcomes: StatedOutcome[];
   evidence: FinancialEvidence[];

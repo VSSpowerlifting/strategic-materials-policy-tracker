@@ -667,5 +667,118 @@
     "quoteEnSource": "na",
     "sourceId": "src-nist-chips-usar-2026",
     "notes": "Bill Frauenhofer, Director of the CHIPS Program, in Commerce's release."
+  },
+  {
+    "id": "fc-us-dod-5n-germanium-2024-security",
+    "eventId": "evt-us-dod-5n-germanium-2024",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "Space-based capabilities are vital to U.S. national security",
+    "quoteEn": "Space-based capabilities are vital to U.S. national security",
+    "quoteEnSource": "na",
+    "sourceId": "src-dod-5n-germanium-2024",
+    "notes": "Assistant Secretary of Defense for Industrial Base Policy Laura Taylor-Kale in the official award release."
+  },
+  {
+    "id": "fc-us-dow-5n-germanium-2025-priority",
+    "eventId": "evt-us-dow-5n-germanium-2025",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "Increasing domestic germanium production is one of the highest industrial base priorities for the DoW.",
+    "quoteEn": "Increasing domestic germanium production is one of the highest industrial base priorities for the DoW.",
+    "quoteEnSource": "na",
+    "sourceId": "src-dow-5n-germanium-2026",
+    "notes": "Assistant Secretary of War for Industrial Base Policy Mike Cadenazzi in the official release."
+  },
+  {
+    "id": "fc-ca-trail-strategic-metals-2026-security",
+    "eventId": "evt-ca-trail-strategic-metals-2026",
+    "actor": "canada",
+    "category": [
+      "economic_security",
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "secure the critical minerals Canada and the world need for economic sovereignty, national security and the energy transition",
+    "quoteEn": "secure the critical minerals Canada and the world need for economic sovereignty, national security and the energy transition",
+    "quoteEnSource": "na",
+    "sourceId": "src-nrcan-trail-strategic-metals-2026",
+    "notes": "Natural Resources Canada description of the Canada Critical Minerals Accelerator's purpose."
+  },
+  {
+    "id": "fc-us-army-perpetua-otia-2023-resilience",
+    "eventId": "evt-us-army-perpetua-otia-2023",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "establishing a secure, domestic supply chain for this essential ammunition component",
+    "quoteEn": "establishing a secure, domestic supply chain for this essential ammunition component",
+    "quoteEnSource": "na",
+    "sourceId": "src-us-army-antimony-pilot-2026",
+    "notes": "Retrospective Army framing in 2026 of the DOTC effort initiated in 2023; not wording attributed to the 2023 SEC filing."
+  },
+  {
+    "id": "fc-us-dod-perpetua-dpa-2022-resilience",
+    "eventId": "evt-us-dod-perpetua-dpa-2022",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "restore domestic industrial capabilities essential to the national defense",
+    "quoteEn": "restore domestic industrial capabilities essential to the national defense",
+    "quoteEnSource": "na",
+    "sourceId": "src-dod-perpetua-dpa-2022",
+    "notes": "DoD description of the DPA Investments Program mission in the award release."
+  },
+  {
+    "id": "fc-us-exim-stibnite-2026-resilience",
+    "eventId": "evt-us-exim-stibnite-2026",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "improve the resiliency of our supply chains",
+    "quoteEn": "improve the resiliency of our supply chains",
+    "quoteEnSource": "na",
+    "sourceId": "src-exim-mmia",
+    "notes": "Programme-level EXIM framing for the Make More in America Initiative under which the Stibnite loan was approved."
+  },
+  {
+    "id": "fc-us-dow-arr-antimony-2025-resilience",
+    "eventId": "evt-us-dow-arr-antimony-2025",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "advances North American sourcing of this critical mineral for the defense industrial base",
+    "quoteEn": "advances North American sourcing of this critical mineral for the defense industrial base",
+    "quoteEnSource": "na",
+    "sourceId": "src-dow-arr-antimony-2025",
+    "notes": "Assistant Secretary of War for Industrial Base Policy Mike Cadenazzi in the official award release."
+  },
+  {
+    "id": "fc-us-dow-usac-antimony-2026-resilience",
+    "eventId": "evt-us-dow-usac-antimony-2026",
+    "actor": "us",
+    "category": [
+      "national_security",
+      "supply_chain_resilience"
+    ],
+    "quoteOriginal": "Strong domestic mineral supply chains are essential to support our warfighting capability",
+    "quoteEn": "Strong domestic mineral supply chains are essential to support our warfighting capability",
+    "quoteEnSource": "na",
+    "sourceId": "src-dow-usac-antimony-2026",
+    "notes": "Acting Deputy Assistant Secretary of War for Industrial Base Resilience Jeffrey Frankston in the official release."
   }
 ]

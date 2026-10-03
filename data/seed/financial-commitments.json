@@ -57,7 +57,14 @@
         "note": null
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-08-24",
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "note": "Alcoa states that the 24 August 2026 groundbreaking marked the start of construction at Wagerup."
+      }
+    ],
     "terms": [],
     "outcomes": [
       {
@@ -109,9 +116,22 @@
         "evidence": "ambiguous",
         "locator": "Sixth paragraph",
         "note": "\"Gallium Recovery Project\": recovery of gallium in processing, as the project name describes it."
+      },
+      {
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Supports the project's physical construction status only; it does not establish execution or payment of this specific public financial instrument."
       }
     ],
-    "notes": "The release says the equity finance \"includes a right of offtake for the Australian Government\", recorded as its own row, and that \"Japan has already provided 50 percent of the project costs to date\"; no Japanese row is recorded because no amount or instrument is stated."
+    "notes": "The release says the equity finance \"includes a right of offtake for the Australian Government\", recorded as its own row, and that \"Japan has already provided 50 percent of the project costs to date\"; no Japanese row is recorded because no amount or instrument is stated. Lifecycle review on 2 October 2026 confirmed physical construction began on 24 August 2026. The reviewed primary sources did not establish that this specific government equity/offtake instrument had been legally executed or paid, so its financial status is not promoted beyond the existing announced state.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-au-alcoa-sojitz-gallium-2025-offtake-right",
@@ -157,7 +177,14 @@
         "note": null
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-08-24",
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "note": "Alcoa states that the 24 August 2026 groundbreaking marked the start of construction at Wagerup."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -186,9 +213,22 @@
         "evidence": "ambiguous",
         "locator": "Sixth paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Supports the project's physical construction status only; it does not establish execution or payment of this specific public financial instrument."
       }
     ],
-    "notes": "No share or volume is stated."
+    "notes": "No share or volume is stated. Lifecycle review on 2 October 2026 confirmed physical construction began on 24 August 2026. The reviewed primary sources did not establish that this specific government equity/offtake instrument had been legally executed or paid, so its financial status is not promoted beyond the existing announced state.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-au-arafura-nolans-2025-equity",
@@ -244,6 +284,12 @@
         "date": "2025-10-20",
         "sourceId": "src-pm-us-au-framework-2025",
         "note": null
+      },
+      {
+        "status": "contracted",
+        "date": "2026-04-01",
+        "sourceId": "src-arafura-nolans-efa-subscription-2026",
+        "note": "Arafura executed a binding US$100 million subscription agreement with Export Finance Australia; completion remained subject to conditions precedent."
       }
     ],
     "implementationStatusHistory": [],
@@ -289,9 +335,26 @@
         "evidence": "ambiguous",
         "locator": "Fourth paragraph",
         "note": "That this equity counts towards Australia's USD 1 billion is implied, not stated."
+      },
+      {
+        "sourceId": "src-arafura-nolans-efa-subscription-2026",
+        "supports": [
+          "instrument",
+          "amount",
+          "provider",
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Highlights; Export Finance Australia; Annexure B",
+        "note": "The binding subscription establishes contractual commitment, not cash receipt."
       }
     ],
-    "notes": null
+    "notes": "The US$100 million EFA equity support announced in October 2025 became a binding subscription agreement on 1 April 2026. Completion remained subject to conditions precedent, so no disbursement is inferred. A 2 October 2026 lifecycle review found primary company material still tying full construction commencement to financing/settlement milestones; no later primary source reviewed cleanly confirmed full construction commencement, so no physical construction status is recorded here.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-au-cmf-2026-expanded-facility",
@@ -730,6 +793,97 @@
     "notes": "The release does not say which instruments the transactions will use. The facility it is drawn from provides loans and equity support, and the Reserve operates by securing and on-selling rights to minerals."
   },
   {
+    "id": "fin-ca-cgf-cyclic-2026-equity",
+    "eventId": "evt-ca-cgf-cyclic-2026",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "25000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "US$25 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Cyclic Materials Inc.",
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "project": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "projectId": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "stages": [
+      "processing",
+      "recycling",
+      "research_development"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The CGF release says it \"has invested\" US$25 million and describes the transaction as part of a Series C preferred-equity round. Recorded as a binding equity transaction, not as disbursed cash because no payment timing is stated."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The release says Cyclic was \"now constructing its first commercial-scale Hub in Kingston\"."
+      }
+    ],
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    },
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-cgf-cyclic-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs; Transaction Highlights; company description",
+        "note": "The source identifies preferred equity, the public investor, Cyclic, the amount, Kingston Centre expansion/Hub, rare-earth recycling and processing, and current construction."
+      }
+    ],
+    "notes": "CGF says the US$25 million supports expansion of the Kingston Centre of Excellence, Canadian R&D, execution of the first Hub and broader commercialization. The row links the named Kingston project because the source directly supports it, but the amount is not treated as exclusively allocated to construction or any single stage."
+  },
+  {
     "id": "fin-ca-cmrdd-2024-cyclic-materials",
     "eventId": "evt-ca-nrcan-cmrdd-2024",
     "relationships": [
@@ -780,13 +934,20 @@
     ],
     "financialStatusHistory": [
       {
-        "status": "announced",
-        "date": "2024-09-04",
-        "sourceId": "src-nrcan-cmrdd-2024",
-        "note": null
+        "status": "contracted",
+        "date": "2024-07-17",
+        "sourceId": "src-canada-grant-cyclic-cmrdd-2024",
+        "note": "The Government of Canada disclosure records agreement CMRDD2-048 with an agreement period beginning 17 July 2024."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "completed",
+        "date": null,
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "note": "NRCan's funded-project page states that the Kingston Demonstration Plant – Extended Operations project was launched in 2024 and completed in March 2026. The exact completion day is not stated, so no date is invented."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -812,14 +973,28 @@
       {
         "sourceId": "src-nrcan-cmrdd-programme",
         "supports": [
-          "amount"
+          "amount",
+          "status"
         ],
         "evidence": "explicit",
         "locator": "Funded Projects: \"Kingston Demonstration Plant – Extended Operations\"",
         "note": "The programme page lists the exact amount funded; the 2024 release rounds it to \"$4.9 million\". Currency read from the issuing government (a Canadian federal page printing \"$\")."
+      },
+      {
+        "sourceId": "src-canada-grant-cyclic-cmrdd-2024",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement number CMRDD2-048; Agreement Date",
+        "note": "Official grant disclosure establishes the binding agreement and its 17 July 2024 start date."
       }
     ],
-    "notes": "The release calls the funding an investment and does not name the instrument. The 4 September 2024 release states \"NRCan is providing $4.9 million to Cyclic Materials\"; the CMRDD programme page lists the same project with \"Amount funded: $4,893,125\", recorded here as the exact figure."
+    "notes": "The 4 September 2024 release publicized NRCan support; the official grants-and-contributions disclosure shows that agreement CMRDD2-048 was already in force from 17 July 2024 through 31 March 2026. NRCan's standing CMRDD page gives the exact C$4,893,125 funded amount and records the Kingston demonstration project as completed in March 2026. No payment timing is stated, so the financial lifecycle is not promoted beyond contracted.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-cmrdd-2024-green-graphite",
@@ -869,10 +1044,10 @@
     "untrackedMaterialsAsStated": [],
     "financialStatusHistory": [
       {
-        "status": "announced",
-        "date": "2024-09-04",
-        "sourceId": "src-nrcan-cmrdd-2024",
-        "note": null
+        "status": "contracted",
+        "date": "2024-08-09",
+        "sourceId": "src-canada-grant-ggt-cmrdd-2024",
+        "note": "The Government of Canada disclosure records agreement CMRDD2-039 with an agreement period beginning 9 August 2024."
       }
     ],
     "implementationStatusHistory": [],
@@ -898,9 +1073,22 @@
         "evidence": "explicit",
         "locator": "Paragraph on Green Graphite Technologies",
         "note": null
+      },
+      {
+        "sourceId": "src-canada-grant-ggt-cmrdd-2024",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement number CMRDD2-039; Agreement Date",
+        "note": "Official grant disclosure establishes the binding agreement and its 9 August 2024 start date."
       }
     ],
-    "notes": "The release calls the funding an investment and does not name the instrument."
+    "notes": "The 4 September 2024 release publicized the C$3.5 million support, while the official grants-and-contributions disclosure shows agreement CMRDD2-039 running from 9 August 2024 through 31 March 2026. The standing CMRDD page still describes the project as launched in 2024 and expected to be completed by 2026; the 2026 follow-up found no primary source that cleanly ties a later physical milestone to this exact GraphRenew CMRDD project, so no implementation status is inferred.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-cmrdd-2024-kingston-awards",
@@ -1080,6 +1268,123 @@
       }
     ],
     "notes": "\"Manufacturing\" in the release is not mapped to a stage: it does not say which manufacturing. The release is not an itemised budget, so no component amounts are recorded for it."
+  },
+  {
+    "id": "fin-ca-feddev-cyclic-2025-contribution",
+    "eventId": "evt-ca-feddev-cyclic-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "5000000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$5,000,000.00",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Federal Economic Development Agency for Southern Ontario",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-feddev-ontario"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Cyclic Materials Inc.",
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "project": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "projectId": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "stages": [
+      "recycling"
+    ],
+    "stageAllocation": "single_stage",
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-09-01",
+        "sourceId": "src-open-canada-feddev-cyclic-2025",
+        "note": "The federal disclosure provides an agreement number, agreement value and agreement period beginning 1 September 2025."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-06-11",
+        "sourceId": "src-cyclic-centre-excellence-2025",
+        "note": "Cyclic announced the Kingston Centre of Excellence and its first commercial Hub."
+      },
+      {
+        "status": "construction",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The later CGF release says the first commercial-scale Kingston Hub was under construction."
+      }
+    ],
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    },
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-open-canada-feddev-cyclic-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement Number; Agreement Value; Agreement Date; Description; Organization; Agreement Type; Recipient; Program",
+        "note": "The disclosure calls the instrument a \"Contribution\". The tracker keeps instrument unspecified because this source does not state whether the contribution is repayable and no narrower tracker instrument can be assigned safely."
+      },
+      {
+        "sourceId": "src-cyclic-centre-excellence-2025",
+        "supports": [
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Announcement body; A Strategic Facility Serving a Circular Future",
+        "note": null
+      },
+      {
+        "sourceId": "src-cgf-cyclic-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Company description",
+        "note": "Supports the later construction status only."
+      }
+    ],
+    "notes": "The Government of Canada disclosure records Agreement 1019177 under FedDev Ontario's Business Scale-up and Productivity program. The agreement runs through 30 September 2028. Because the disclosure says only \"Contribution\", the tracker does not assume grant/non-repayable treatment."
   },
   {
     "id": "fin-ca-g7-2025-focus-graphite-gpi",
@@ -1820,6 +2125,117 @@
     "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
   },
   {
+    "id": "fin-ca-gpi-cyclic-2026-centre-excellence",
+    "eventId": "evt-ca-g7-cmpa-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "9100000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $9.1 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Global Partnerships Initiative)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Cyclic Materials Inc.",
+    "recipientOrgIds": [
+      "org-cyclic-materials"
+    ],
+    "project": "Kingston Centre of Excellence for Rare Earth Recycling",
+    "projectId": "prj-ca-cyclic-kingston-centre-of-excellence",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Kingston, Ontario"
+      }
+    ],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "stages": [
+      "separation",
+      "processing",
+      "recycling"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-03-02",
+        "sourceId": "src-nrcan-cmpa-2026-round2",
+        "note": "The backgrounder calls the investment \"conditionally approved\". It is therefore recorded as decided, not contracted."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-01-20",
+        "sourceId": "src-cgf-cyclic-2026",
+        "note": "The CGF release says Cyclic was constructing its first commercial-scale Hub in Kingston."
+      }
+    ],
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    },
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmpa-2026-round2",
+        "supports": [
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Cyclic Materials bullet",
+        "note": "The March backgrounder identifies the Kingston rare-earth recycling Centre of Excellence, the up-to-C$9.1 million GPI amount and its conditionally approved status."
+      },
+      {
+        "sourceId": "src-nrcan-gpi-programme",
+        "supports": [
+          "instrument",
+          "project",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "GPI description; GPI funded projects — Contribution funding — Cyclic Materials Inc.",
+        "note": "The programme page describes GPI contribution funding as non-repayable and says Cyclic's funding advances processing, separation and metallization technologies for an integrated rare-earth recycling value chain; normalized to the tracker's grant instrument."
+      },
+      {
+        "sourceId": "src-cgf-cyclic-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Company description",
+        "note": "Supports the project's construction status, not the GPI financial status."
+      }
+    ],
+    "notes": "A current GPI programme page now lists Cyclic among funded projects, but it does not publish an executed agreement date for this award. The financial lifecycle therefore remains at the March 2 conditionally approved/decided stage rather than being promoted to contracted."
+  },
+  {
     "id": "fin-ca-pdac-2026-ggt-eip",
     "eventId": "evt-ca-nrcan-pdac-2026",
     "relationships": [],
@@ -2244,6 +2660,143 @@
     "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund."
   },
   {
+    "id": "fin-ca-trail-cgf-2026-indication",
+    "eventId": "evt-ca-trail-strategic-metals-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "indication",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "400000000",
+      "currency": "CAD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $400 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": "Canada Critical Minerals Accelerator",
+    "programmeId": null,
+    "recipient": "Teck Resources Limited",
+    "recipientOrgIds": [
+      "org-teck-resources"
+    ],
+    "project": "Trail Strategic Metals Initiative",
+    "projectId": "prj-ca-trail-strategic-metals",
+    "facility": "Trail Operations",
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Trail Operations in British Columbia"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "germanium",
+      "antimony",
+      "gallium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-07-07",
+        "sourceId": "src-teck-trail-strategic-metals-2026",
+        "note": "The signed Strategic Investment Agreement establishes a commercial framework and intent to work toward an investment; definitive documentation and approvals were still required."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "400000000",
+        "qualifier": "up_to",
+        "currency": "CAD",
+        "unit": null,
+        "asStated": "an equity-like investment by CGF of up to $400 million directly into the facility",
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "note": "Classified as instrument unspecified because 'equity-like' does not establish that the legal instrument is equity."
+      },
+      {
+        "kind": "other",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "offtake rights for a portion of future germanium, antimony and gallium produced by Trail",
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "note": "A contemplated future structure, not a contracted offtake."
+      }
+    ],
+    "outcomes": [
+      {
+        "metric": "other",
+        "value": "2",
+        "qualifier": "up_to",
+        "unit": "times existing production capacity",
+        "targetDate": null,
+        "asStated": "could double Trail's existing production capacity for germanium and antimony",
+        "statedBy": "government",
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "note": "Prospective capacity effect; gallium is described separately as potential new capacity."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-trail-strategic-metals-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and investment-framework paragraphs",
+        "note": "The source explicitly calls this a commercial framework for an equity-like investment; `unspecified` avoids converting that description into a legal-form claim."
+      },
+      {
+        "sourceId": "src-teck-trail-strategic-metals-2026",
+        "supports": [
+          "value_role",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through conditions paragraph",
+        "note": "Teck states that the contemplated arrangements remain subject to definitive documentation and approvals."
+      }
+    ],
+    "notes": "A non-binding indication, not a committed investment. It is excluded from commitment totals unless later definitive documentation supports promotion to a commitment."
+  },
+  {
     "id": "fin-de-g7-2025-vianode-export-credit-guarantee",
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [],
@@ -2481,14 +3034,14 @@
     "id": "fin-eu-jtf-2025-neo-magnet-project",
     "eventId": "evt-eu-resourceeu-2025",
     "relationships": [],
-    "instrument": "unspecified",
+    "instrument": "grant",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
-      "value": "18700000",
+      "value": "14800000",
       "currency": "EUR",
-      "qualifier": "exact",
-      "amountAsStated": "EUR 18.7 million",
+      "qualifier": "approximately",
+      "amountAsStated": "grant amount of approximately €14.8 million",
       "currencyBasis": "stated"
     },
     "provider": "Just Transition Fund",
@@ -2522,12 +3075,25 @@
     "financialStatusHistory": [
       {
         "status": "decided",
-        "date": null,
-        "sourceId": "src-ec-resourceeu-com-945",
-        "note": "\"The Just Transition Fund has provided EUR 18.7 million in funding\"; the Communication does not say whether the money is awarded or paid, or when."
+        "date": "2022-11-09",
+        "sourceId": "src-neo-jtf-award-2022",
+        "note": "Neo announced that it had been awarded a grant of up to €18.7 million under the JTF."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": "2025-12-31",
+        "sourceId": "src-neo-aif-2026",
+        "note": "As of 31 December 2025, Neo reported receiving an aggregate US$8.4 million from the JTF grant. The status date is the reporting cutoff, not an asserted transfer date."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "operational",
+        "date": "2026-09-14",
+        "sourceId": "src-neo-commercial-production-2026",
+        "note": "Neo announced that the European permanent magnet facility was in commercial production and shipping customer volumes."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2557,9 +3123,48 @@
         "evidence": "ambiguous",
         "locator": "Section 2.1, second paragraph",
         "note": "\"Rare earths magnet project\": read as permanent-magnet manufacturing; the magnet type is not stated."
+      },
+      {
+        "sourceId": "src-neo-jtf-award-2022",
+        "supports": [
+          "instrument",
+          "capital_source",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening bullets and first two paragraphs",
+        "note": "Establishes the grant award; the original award was up to €18.7 million."
+      },
+      {
+        "sourceId": "src-neo-aif-2026",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "European Permanent Magnet facility / government support discussion",
+        "note": "Current grant terms are approximately €14.8 million; Neo reports US$8.4 million received by 31 December 2025."
+      },
+      {
+        "sourceId": "src-neo-commercial-production-2026",
+        "supports": [
+          "status",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening announcement",
+        "note": "Supports operational implementation status."
       }
     ],
-    "notes": "Recorded as reported in the RESourceEU Communication, not from the award decision; the instrument is not named. The Just Transition Fund is an EU fund under shared management, so the provider's actor is the EU."
+    "notes": "The JTF award was initially announced in November 2022 as up to €18.7 million. Neo's 2026 Annual Information Form reports amended terms at a 23% grant rate and an amount of approximately €14.8 million; the amount field reflects that later stated commitment. Neo also reported US$8.4 million received by 31 December 2025, so the financial lifecycle is partially disbursed. The facility entered commercial production on 14 September 2026.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-eu-resourceeu-2025-eu-funds",
@@ -3976,7 +4581,14 @@
         "note": null
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-08-24",
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "note": "Alcoa states that the 24 August 2026 groundbreaking marked the start of construction at Wagerup."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -4005,9 +4617,134 @@
         "evidence": "ambiguous",
         "locator": "Sixth paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Supports the project's physical construction status only; it does not establish execution or payment of this specific public financial instrument."
       }
     ],
-    "notes": "No amount is stated, and none is inferred. The right of offtake that accompanies it is not separately recorded because the release gives no term for it."
+    "notes": "No amount is stated, and none is inferred. The right of offtake that accompanies it is not separately recorded because the release gives no term for it. Lifecycle review on 2 October 2026 confirmed physical construction began on 24 August 2026. The reviewed primary sources did not establish that this specific government equity/offtake instrument had been legally executed or paid, so its financial status is not promoted beyond the existing announced state.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
+  },
+  {
+    "id": "fin-us-army-perpetua-antimony-otia",
+    "eventId": "evt-us-army-perpetua-otia-2023",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "27100000",
+      "currency": "USD",
+      "qualifier": "approximately",
+      "amountAsStated": "The current estimated amount is $27.1 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Defense / U.S. Army through the Defense Ordnance Technology Consortium",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Prototype Other Transaction authority",
+    "programmeId": null,
+    "recipient": "Perpetua Resources Idaho, Inc.",
+    "recipientOrgIds": [],
+    "project": "Domestic antimony trisulfide process demonstration and modular pilot plant using Stibnite ore",
+    "projectId": "prj-us-inl-antimony-pilot",
+    "facility": "INL antimony sulfide modular pilot plant",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "Idaho Falls, Idaho"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2023-08-18",
+        "sourceId": "src-perpetua-sec-dotc-2023",
+        "note": "The OTIA was awarded under Prototype Other Transaction authority on 18 August 2023."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": null,
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "note": "The filing reports grant income and cash reimbursements under the still-active OTIA; the full current estimated amount had not been paid."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "operational",
+        "date": "2026-07-29",
+        "sourceId": "src-us-army-antimony-pilot-2026",
+        "note": "The Army marked the opening of the prototype processing facility at INL and commencement of demonstration activities on 29 July 2026."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-perpetua-sec-dotc-2023",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 8.01",
+        "note": "The filing calls the support an OTIA/grant and describes the pilot-plant and process-development work."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "DOW Ordnance Technology Consortium Grant",
+        "note": "The filing summarizes the 2023, 2025 and 2026 additions and gives the current estimated amount of $27.1M."
+      },
+      {
+        "sourceId": "src-us-army-antimony-pilot-2026",
+        "supports": [
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and programme-history paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "The current estimate incorporates the original up-to-$15.5M 2023 OTIA plus later additions. The amount remains subject to adjustment as scope, costs and budget change."
   },
   {
     "id": "fin-us-au-framework-2025-au-financing",
@@ -5696,6 +6433,114 @@
     "notes": "The release does not name the recipient of the letter of intent; it states the equity in Vulcan Elements in the next sentence. Instrument not specified beyond \"federal incentives\". Recorded as a non-binding indication, not as a commitment: a preliminary non-binding letter of intent is not a financing commitment, so it is in no sum."
   },
   {
+    "id": "fin-us-dod-5n-germanium-2024",
+    "eventId": "evt-us-dod-5n-germanium-2024",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "14400000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$14.4 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Defense",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Investment Program",
+    "programmeId": null,
+    "recipient": "5N+ Semiconductors",
+    "recipientOrgIds": [
+      "org-5n-plus-semiconductors"
+    ],
+    "project": "St. George space-qualified germanium substrate capacity expansion",
+    "projectId": "prj-us-5n-st-george-germanium-substrates",
+    "facility": "St. George facility",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "refining",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2024-04-16",
+        "sourceId": "src-dod-5n-germanium-2024",
+        "note": "DoD announced the award on 16 April 2024. No source in the current corpus establishes execution of a separate binding grant agreement, so the row is not advanced to contracted."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "4",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "planned to last four years",
+        "sourceId": "src-dod-5n-germanium-2024",
+        "note": "The company separately describes the award as subject to conditions and pre-set milestones over the four-year term."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-5n-germanium-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through technical-effort paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-5n-germanium-2024",
+        "supports": [
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-description paragraphs",
+        "note": "5N+ confirms the milestone-conditioned four-year award."
+      }
+    ],
+    "notes": "The award supports both substrate-manufacturing capability and germanium sourcing/recovery/refining; the $14.4M is not allocated between those stages."
+  },
+  {
     "id": "fin-us-dod-mp-2025-additional-preferred-option",
     "eventId": "evt-us-dod-mp-2025",
     "relationships": [],
@@ -6517,6 +7362,646 @@
       }
     ],
     "notes": "OSC describes this as its first direct loan. Unsecured promissory note; the company may repay at any time."
+  },
+  {
+    "id": "fin-us-dod-perpetua-stibnite-dpa",
+    "eventId": "evt-us-dod-perpetua-dpa-2022",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "59200000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "$59.2 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Defense, Air Force Research Laboratory",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "Perpetua Resources Idaho, Inc.",
+    "recipientOrgIds": [],
+    "project": "Stibnite Gold Project",
+    "projectId": "prj-us-stibnite",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "central Idaho"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2022-12-16",
+        "sourceId": "src-perpetua-sec-dpa-2022",
+        "note": "Perpetua Resources Idaho entered into the undefinitized Technology Investment Agreement effective 16 December 2022."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "note": "The June 2026 Form 10-Q states that the TIA expired on 16 June 2025, all available funds had been disbursed, and no additional funds remained available."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "note": "The company states that early-works construction began in October 2025 and additional critical-path construction began in May 2026; no single start date is used here."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-perpetua-sec-2024-q2",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "DPA Grant / liquidity disclosures",
+        "note": "The filing calls the TIA a grant, records the $34.4M modification and $59.2M total, and describes reimbursement under the agreement."
+      },
+      {
+        "sourceId": "src-dod-perpetua-dpa-2022",
+        "supports": [
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government Funding / DPA Grant",
+        "note": null
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Project financing and development discussion",
+        "note": "The grant funded construction readiness for a project that includes mining and a processing plant; the agreement did not allocate dollars between those stages."
+      },
+      {
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Construction update",
+        "note": null
+      },
+      {
+        "sourceId": "src-perpetua-sec-dpa-2022",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01",
+        "note": "The filing states that the Technology Investment Agreement became effective on 16 December 2022."
+      }
+    ],
+    "notes": "One row represents the same DPA Technology Investment Agreement across amendments, avoiding double-counting the original $24.8M award and the later $34.4M addition. The agreement was definitized at $24.8M in July 2023, modified by an additional $34.4M in May 2024, and ultimately fully disbursed."
+  },
+  {
+    "id": "fin-us-dow-5n-germanium-2025",
+    "eventId": "evt-us-dow-5n-germanium-2025",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "18100000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$18.1 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "5N Plus Inc.",
+    "recipientOrgIds": [
+      "org-5n-plus"
+    ],
+    "project": "St. George germanium recovery and refining expansion",
+    "projectId": "prj-us-5n-st-george-germanium-refining",
+    "facility": "St. George facility",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "St. George, Utah"
+      }
+    ],
+    "stages": [
+      "recycling",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "germanium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-12-15",
+        "sourceId": "src-dow-5n-germanium-2026",
+        "note": "The Department states that the investment was made on 15 December 2025 and announced later because of the government shutdown. No definitive grant agreement is in the current source set."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "48",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "over the course of the next 48 months",
+        "sourceId": "src-5n-germanium-2026",
+        "note": "Company description of the capacity-expansion period."
+      }
+    ],
+    "outcomes": [
+      {
+        "metric": "annual_capacity",
+        "value": "20",
+        "qualifier": "up_to",
+        "unit": "metric tons of high-purity germanium per year",
+        "targetDate": null,
+        "asStated": "valorize up to 20 metric tons of high-purity germanium per year",
+        "statedBy": "recipient",
+        "sourceId": "src-5n-germanium-2026",
+        "note": "The company describes recovery/refining capability; the Department separately describes zone-refining capacity as more than 20 metric tons annually, so the two statements are not merged."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-dow-5n-germanium-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through capacity paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-5n-germanium-2026",
+        "supports": [
+          "instrument",
+          "amount",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "terms",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening through capacity paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "A separate DPA-funded scope from the 2024 germanium-substrate award. Recycling and refining are both named, but the $18.1M is not divided by stage."
+  },
+  {
+    "id": "fin-us-dow-arr-antimony-2025",
+    "eventId": "evt-us-dow-arr-antimony-2025",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "43400000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$43.4 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "Alaska Range Resources, LLC",
+    "recipientOrgIds": [
+      "org-alaska-range-resources"
+    ],
+    "project": "Estelle Gold and Critical Minerals Project — integrated antimony supply chain",
+    "projectId": "prj-us-estelle-antimony",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Estelle Project in Alaska"
+      },
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Port MacKenzie"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-09-30",
+        "sourceId": "src-dow-arr-antimony-2025",
+        "note": "The Department announced the DPA Title III award on 30 September 2025."
+      },
+      {
+        "status": "contracted",
+        "date": "2025-10-01",
+        "sourceId": "src-nova-arr-h1-2026",
+        "note": "Nova's filed half-year report describes a 24-month firm-fixed-price project sub-agreement awarded on 1 October 2025."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "duration",
+        "value": "24",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "months",
+        "asStated": "24-month firm-fixed price project sub-agreement",
+        "sourceId": "src-nova-arr-h1-2026",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-arr-antimony-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-scope paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-nova-arr-h1-2026",
+        "supports": [
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "U.S. Department of War Grant; Refinery & Equipment Procurement",
+        "note": "The filing supplies the contract form, duration and Port MacKenzie refinery context."
+      }
+    ],
+    "notes": "The $43.4M award spans extraction, concentration and refining; no source allocates the amount by stage, so the full figure is never assigned separately to any one stage."
+  },
+  {
+    "id": "fin-us-dow-usac-antimony-2026",
+    "eventId": "evt-us-dow-usac-antimony-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "27000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$27 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "United States Antimony Corporation",
+    "recipientOrgIds": [
+      "org-us-antimony"
+    ],
+    "project": "Thompson Falls facility expansion and related Alaska antimony mining integration",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Montana",
+        "asStated": "Thompson Falls, Montana"
+      },
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Alaska"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2026-02-24",
+        "sourceId": "src-dow-usac-antimony-2026",
+        "note": "The official release dates the Department's investment to 24 February 2026; the subsequent Form 10-Q describes the award as a milestone-based firm fixed-price arrangement."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": null,
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "The company received $12.8M in April 2026 after formal acceptance of three milestones; the filing does not state the day of receipt."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "16200000",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": null,
+        "asStated": "$16.2 million representing currently obligated funding",
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "Currently obligated portion of the $27M award as of 30 June 2026."
+      },
+      {
+        "kind": "other",
+        "value": "10800000",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": null,
+        "asStated": "the remaining $10.8 million related to future phases subject to additional authorization",
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "Not treated as already disbursed or separately committed."
+      },
+      {
+        "kind": "other",
+        "value": null,
+        "qualifier": null,
+        "currency": null,
+        "unit": null,
+        "asStated": "The period of performance under the agreement extends through January 4, 2028.",
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": null
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-scope paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-usac-2026-q2-10q",
+        "supports": [
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 9 — Government Grant; Property, Plant and Equipment",
+        "note": "The filing records the obligation split, milestone payment and Thompson Falls expansion status."
+      }
+    ],
+    "notes": "The award covers more than one physical undertaking, so no single projectId is assigned. The Thompson Falls facility is separately registered as a project, but the full $27M is not attributed to it."
+  },
+  {
+    "id": "fin-us-exim-perpetua-stibnite-2026",
+    "eventId": "evt-us-exim-stibnite-2026",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "2906000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "2,906 [US$ millions]",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export-Import Bank of the United States",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [],
+    "legalAuthority": "Make More in America Initiative",
+    "programmeId": null,
+    "recipient": "Perpetua Resources Idaho, Inc.",
+    "recipientOrgIds": [],
+    "project": "Stibnite Gold Project",
+    "projectId": "prj-us-stibnite",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Idaho",
+        "asStated": "Idaho"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "gold"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-05-21",
+        "sourceId": "src-exim-stibnite-board-2026",
+        "note": "EXIM's board gave final approval. The bank's transaction table labels the transaction 'Authorized'; SMPT maps this to decided because definitive loan documentation had not yet been executed."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "note": "Early works were underway before EXIM's final approval and additional critical-path construction began in May 2026."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-exim-stibnite-transactions-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "2026 Perpetua Resources Corp. transaction row",
+        "note": "The table lists US$2.906B, U.S. mining sector, and status Authorized."
+      },
+      {
+        "sourceId": "src-exim-stibnite-board-2026",
+        "supports": [
+          "instrument",
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Transaction AP768324XX",
+        "note": "The minutes identify a direct loan for Gold and Antimony and record final approval."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "status",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Project Financing from U.S. EXIM",
+        "note": "The filing states that the board-approved loan remained subject to definitive documentation and conditions precedent and identifies the Make More in America Initiative."
+      },
+      {
+        "sourceId": "src-perpetua-sec-2026-q2",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Project financing and development discussion",
+        "note": "The loan finances the Stibnite development, which includes mine development and a processing plant; no amount is allocated by stage."
+      },
+      {
+        "sourceId": "src-perpetua-stibnite-construction-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Construction update",
+        "note": null
+      }
+    ],
+    "notes": "EXIM's official transaction table uses 'Authorized', but the commitment remains non-binding in SMPT's lifecycle until definitive loan documents are executed. The June 2026 filing states that availability depends on completion of definitive documentation and satisfaction of conditions precedent."
   },
   {
     "id": "fin-us-osc-obbba-2025-credit-subsidy",

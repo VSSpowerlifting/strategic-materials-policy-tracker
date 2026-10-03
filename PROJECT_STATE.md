@@ -1,5 +1,26 @@
 # Project state
 
+## 2026-10-03: animated title integration (PR #22)
+
+The title screen was previously deployed from `codex/animated-title` at `716953f`
+while PR #22 remained a draft. It was absent from `main`, leaving subsequent main
+deployments without the opening sequence. Ben authorized integration, merge and
+deployment on 2026-10-03.
+
+Reintegrated the unchanged five-file title implementation with `main` at
+`7baf10d2a316256e22bd9b0487c5f28a18eb63b5`. All current policy records and lifecycle
+changes are preserved. The native dialog opens only on a first plain-homepage
+visit in a tab session; repeat visits, deep links and reduced-motion preferences
+skip it. Enter and Escape dismiss it; it also closes automatically after 4.2s.
+
+Local verification: data validation passed with the 13 existing warnings, lint
+and typecheck passed, all 363 tests passed, and the production build passed.
+The `tsx` CLI cannot open its IPC socket in this environment, so validation used
+`node --import tsx scripts/validate-data.ts` with the unchanged validator. Local
+browser startup/download was unavailable; final browser verification is to use
+the Vercel preview before merging. CI, preview verification and production
+deployment remain pending at the time of this checkpoint.
+
 _Last updated: 2026-09-30 (removable `/events` filter chips, PR #13, and timeline framing tap targets, PR #14, both merged; M2 dossiers PR #9 merged 2026-09-27 as `a995980`)._
 
 _Previous status line: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, at the time not merged; the 2026-09-25 release reconciliation below is unchanged)._
