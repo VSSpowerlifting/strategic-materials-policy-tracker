@@ -40,8 +40,14 @@ Local verification: data validation passes (61 events, 122 sources, 85 financial
 commitments, 57 projects; the 13 existing warnings remain), capital/control
 validation passes, and all 41 lifecycle and dossier tests pass. The new lifecycle
 test failed against the original row; the new nested-citation test failed with
-the original traversal. Full CI and Vercel checks remain pending at this
-checkpoint and will be recorded in the draft PR description.
+the original traversal. The initial full CI run passed validation, typecheck
+and lint, then passed 364 of 365 tests. Its sole failure was an existing geography
+snapshot: the sourced Toyama location changes Japan's domestic designated-project
+count from three to four, and unknown locations from one to zero. That expectation
+is corrected and the targeted analytics test passes locally. The local selected
+checkout lacks the project API route needed for one other analytics test; full
+coverage remains with CI. Vercel passed the initial head. Full checks of the final
+head remain pending here and will be recorded in the draft PR description.
 
 Standalone queue as of 3 October: 53 bundles, P0 0 / P1 25 / P2 16 / P3 12
 (previous main: 0 / 26 / 16 / 11). Allied Material moves from P1 to P3 after
