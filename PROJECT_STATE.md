@@ -1,5 +1,60 @@
 # Project state
 
+## Latest session: Matawinie lifecycle refresh (2026-10-02)
+
+Prepared from live `main` at `7baf10d2a316256e22bd9b0487c5f28a18eb63b5`,
+after the Wagerup/Nolans/Neo refresh merged in #35. Branch:
+`data/lifecycle-refresh-matawinie-20261002`. This is a separate draft from the
+Lynas correction in #36; neither pending draft is assumed merged or deployed.
+Keep both lifecycle corrections and regression tests when integrating them.
+
+- The earlier CGF investment is equity, contracted 2024-12-16 and disbursed
+  2024-12-20, supported by CGF's own Schedule 13D. The PM's May 2026 quick facts
+  identify the earlier December 2024 investment separately from new 2026 capital.
+  Retain NRCan's original more-than-C$35-million lower bound; no conversion or
+  substitution of the additional US$82-million 2026 round. The existing project
+  link is not a claim that all corporate proceeds were allocated to the mine.
+- Canada's offtake is contracted 2026-05-13. Record its 30,000 tonnes per annum
+  and seven-year term starting at commercial production, with no inferred
+  payment, shipment, numeric price or calendar end date.
+- The Phase 2 mine began construction 2026-04-13, according to NMG's Q2 MD&A.
+  Apply that physical milestone to all three linked records, separately from
+  FID on May 15 and the May 19 ceremony. Demonstration-plant production is not
+  Phase 2 mine operation; the Bécancour plant is a separate project.
+- The historical up-to-US$430-million EDC letter stays a non-binding indication,
+  with its amount and announced/undated financial history intact. The later
+  US$335-million EDC/CIB debt commitment has different providers and facilities;
+  it does not prove the historical indication was contracted, paid or lapsed.
+- Both review clocks are 2026-10-02. Against this main baseline, Matawinie moves
+  from P1 to P3: 53 bundles, P0 0 / P1 25 / P2 16 / P3 12. This count excludes
+  the separate pending Lynas correction in #36.
+
+Primary documents read in full for the coded facts on 2026-10-02:
+
+| Source registry ID | Claim locator |
+| --- | --- |
+| `src-cgf-nmg-schedule13d-2024` | Schedule 13D Items 3–4: subscription date, completed cash purchase; signature dated December 23, 2024 |
+| `src-pm-matawinie-groundbreaking-2026` | Quick facts: earlier December 2024 CGF investment, distinct from the new 2026 investment |
+| `src-nmg-canada-offtake-definitive-2026` | Government of Canada Offtake Agreement: definitive signing and terms |
+| `src-nmg-q2-mda-2026` | Phase 2 mine section, pages 9–10: actual construction start; financing/liquidity sections: later conditional EDC/CIB facilities |
+
+Also screened NMG's news index through its October 1 release. That release
+concerns interest payable to IQ on a 2022 convertible note, not any of these
+three instruments. The index continues to describe Matawinie construction and
+Bécancour's prospective FID; it supplies no later mine operating milestone.
+
+Local data validation passes with the existing 13 warnings; all 12 lifecycle
+tests pass. The new regression fails on the old data, then passes after the
+refresh. It checks original transaction identity, independent dates, offtake
+terms and the exclusion of the EDC indication from public commitment totals.
+Full standard validation/typecheck/lint/test/build gates will run on the draft
+revision in GitHub CI; their live results belong in the PR.
+
+Separate follow-up leads: new 2026 CGF and IQ equity, the EDC/CIB debt package
+and the EIP electric-loader grant require their own source-reviewed backfill;
+do not silently overwrite the historical instruments with those amounts.
+Continue the lifecycle sweep with Wicheeda/Ucore before Industrial Response.
+
 _Last updated: 2026-09-30 (removable `/events` filter chips, PR #13, and timeline framing tap targets, PR #14, both merged; M2 dossiers PR #9 merged 2026-09-27 as `a995980`)._
 
 _Previous status line: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, at the time not merged; the 2026-09-25 release reconciliation below is unchanged)._
