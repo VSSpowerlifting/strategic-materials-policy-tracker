@@ -1,5 +1,44 @@
 # Project state
 
+## Lifecycle checkpoint — MP Materials 10X review (2026-10-03)
+
+Branch: `data/lifecycle-refresh-mp-10x-20261003`, based on main
+`0b7f336d9e592bdb9e4d002e405beb6629481042`. This is a scoped lifecycle refresh of
+the two existing 10X rows. Keep the branch as a draft PR; merge and production publication are not authorized.
+
+- `fin-us-dod-mp-2025-bank-financing`: retain the private financing classification,
+  historical USD 1 billion minimum commitment, and undrawn lapse on 26 August 2025.
+  Add the linked project's construction history with a null commencement date.
+  The offering and revolver are separate financing, not a draw or repayment under the expired letter.
+- `fin-us-dod-mp-2025-magnet-offtake`: retain contracted on 9 July 2025 and a null total amount.
+  Retain construction with an unknown start date. The 2028 commissioning date remains a target;
+  Independence production is a separate facility's progress.
+- Both financial and physical review clocks are 3 October 2026. Current filings disclose deferred
+  reimbursable-cost balances and receivables, not a separately quantified cumulative cash-disbursement
+  amount under this offtake. Do not infer payment status from those balances or from price-protection receipts.
+- Full original sources read: July 2025 SEC 8-K, Q3 2025 SEC 10-Q, Q2 2026 SEC 10-Q,
+  6 August 2026 company results, and 26 February Northlake announcement. The company news index was
+  checked for later relevant updates. Three existing filing access dates refreshed; one results source added.
+  Northlake location already matches the project registry; no project or new incentive rows added.
+- Regression reproduced the missing bank-row physical history against main, then passed after the update.
+  Local validation passes with the same 13 pre-existing warnings; 12 lifecycle and 28 dossier tests pass.
+  Standard remote CI (validation, typecheck, lint, complete tests, build) and Vercel checks are to be
+  recorded in the draft PR after publication. The selected local checkout is not a full npm installation.
+- Queue at 2026-10-03 on this branch alone: 53 bundles, P0 0 / P1 25 / P2 16 / P3 12,
+  versus main P0 0 / P1 26 / P2 16 / P3 11. The 10X bundle moves P1 to P3;
+  expired financing still carries an applicable physical-project clock.
+
+Separate pending drafts: #36 Lynas (head `a46105a654a9acaa8b1693b9f986400501d13ab7`),
+#37 Matawinie (head `b8702f8d032a4ef094b0f8d8bf6d058ca055e0a6`), and
+#38 Wicheeda/Ucore (head `ebcb74799b07088d33b37b4b8644f6808c873f7b`).
+This branch does not include those draft changes. Recompute the combined queue only after integration
+is authorized and completed.
+
+Next scoped research target: Allied Material tungsten. Continue the lifecycle sweep, preserving
+independent binding, payment and physical clocks. The broader strategic-concern/industrial-response
+analysis remains downstream of sufficient lifecycle coverage. Stay in the same chat while this phase
+continues; recover from this checkpoint and the live PR state if a session freezes.
+
 ## 2026-10-03: animated title integration (PR #22)
 
 The title screen was previously deployed from `codex/animated-title` at `716953f`
