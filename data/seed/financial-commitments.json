@@ -1469,7 +1469,7 @@
     "id": "fin-ca-g7-2025-nmg-canada-growth-fund",
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [],
-    "instrument": "unspecified",
+    "instrument": "equity",
     "valueRole": "commitment",
     "capitalSource": "public_enterprise",
     "amount": {
@@ -1509,16 +1509,34 @@
         "date": null,
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "note": "Named among the investments the Alliance announcement \"builds on\"; the backgrounder does not state their stage or date."
+      },
+      {
+        "status": "contracted",
+        "date": "2024-12-16",
+        "sourceId": "src-cgf-nmg-schedule13d-2024",
+        "note": "CGF reports a subscription agreement dated December 16, 2024."
+      },
+      {
+        "status": "disbursed",
+        "date": "2024-12-20",
+        "sourceId": "src-cgf-nmg-schedule13d-2024",
+        "note": "CGF reports purchasing NMG shares and warrants for US$25 million in the private placement on December 20, 2024. This is the original investment, not the additional 2026 equity round."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-04-13",
+        "sourceId": "src-nmg-q2-mda-2026",
+        "note": "NMG dates the start of Phase 2 Matawinie Mine construction to April 13, 2026 and reports ongoing civil works. This physical milestone is separate from the May 15 FID and May 19 ceremony; it does not state production or financing disbursement."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
       {
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -1540,9 +1558,46 @@
         "evidence": "ambiguous",
         "locator": "First paragraph of the list",
         "note": "The investment supports the company's mine-to-anode plan; coded to the mine it names."
+      },
+      {
+        "sourceId": "src-cgf-nmg-schedule13d-2024",
+        "supports": [
+          "instrument",
+          "provider",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Schedule 13D, Items 3 and 4",
+        "note": "CGF reports a cash-funded share-and-warrant purchase, the subscription agreement date and the completed private placement."
+      },
+      {
+        "sourceId": "src-pm-matawinie-groundbreaking-2026",
+        "supports": [
+          "amount",
+          "provider",
+          "recipient"
+        ],
+        "evidence": "explicit",
+        "locator": "Quick facts: previous Canada Growth Fund investment",
+        "note": "Identifies the earlier December 2024 CGF investment as C$35.6 million, distinct from the additional 2026 investment. The original NRCan lower-bound CAD amount is retained; no currency conversion is made."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Matawinie Mine Project (Phase 2), pages 9–10",
+        "note": "NMG reports construction began April 13, 2026. Applies to the Phase 2 mine only; demonstration-plant activity and the separately financed Bécancour plant are not mine commercial operation."
       }
     ],
-    "notes": "An earlier investment the backgrounder cites, not one it announces. The instrument is not named."
+    "notes": "Earlier CGF equity investment cited by the Alliance backgrounder; now identified and dated from the investor filing. The original more-than-C$35-million amount remains as stated by NRCan. The separate 2026 CGF equity investment is additional capital and is not substituted into this row. The existing Matawinie link does not allocate all corporate investment proceeds exclusively to the mine.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-nmg-edc-letter-of-interest",
@@ -1590,7 +1645,14 @@
         "note": "A letter of interest, which is not a financing commitment; its date is not stated."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-04-13",
+        "sourceId": "src-nmg-q2-mda-2026",
+        "note": "NMG dates the start of Phase 2 Matawinie Mine construction to April 13, 2026 and reports ongoing civil works. This physical milestone is separate from the May 15 FID and May 19 ceremony; it does not state production or financing disbursement."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -1619,9 +1681,32 @@
         "evidence": "ambiguous",
         "locator": "First paragraph of the list",
         "note": "Coded to the mine the paragraph names."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing: fully committed senior project debt commitment letter; Liquidity and funding",
+        "note": "The later EDC/CIB facilities remain subject to conditions and final legal documentation in this filing. They do not prove execution or termination of the historical EDC-only US$430-million indication; its financial history is retained."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Matawinie Mine Project (Phase 2), pages 9–10",
+        "note": "NMG reports construction began April 13, 2026. Applies to the Phase 2 mine only; demonstration-plant activity and the separately financed Bécancour plant are not mine commercial operation."
       }
     ],
-    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded. Review on 2026-10-02 found a later US$335-million EDC/CIB project-debt commitment letter in the Q2 MD&A. Its different amount, providers and facilities do not establish that this historical US$430-million indication was contracted, paid or formally lapsed. Mine construction does not change its non-binding value role.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-nmg-offtake",
@@ -1661,10 +1746,44 @@
         "date": "2025-10-31",
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "note": "\"offtake arrangements with the Government of Canada, Panasonic (Japan), and Traxys (Luxembourg)\""
+      },
+      {
+        "status": "contracted",
+        "date": "2026-05-13",
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "note": "NMG reports signing the definitive binding offtake and marketing agreements with Canada. No payment or delivery is evidenced by signing."
       }
     ],
-    "implementationStatusHistory": [],
-    "terms": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-04-13",
+        "sourceId": "src-nmg-q2-mda-2026",
+        "note": "NMG dates the start of Phase 2 Matawinie Mine construction to April 13, 2026 and reports ongoing civil works. This physical milestone is separate from the May 15 FID and May 19 ceremony; it does not state production or financing disbursement."
+      }
+    ],
+    "terms": [
+      {
+        "kind": "quantity_covenant",
+        "value": "30000",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "tonnes per annum",
+        "asStated": "30,000 tonnes per annum",
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "note": "Graphite concentrate from the Phase 2 Matawinie Mine under the definitive agreement."
+      },
+      {
+        "kind": "duration",
+        "value": "7",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "seven-year period as of the start of commercial production",
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "note": "The term begins at the start of commercial production, not the agreement signing date; no calendar end date is inferred."
+      }
+    ],
     "outcomes": [],
     "evidence": [
       {
@@ -1683,9 +1802,39 @@
         "evidence": "explicit",
         "locator": "First paragraph of the list",
         "note": null
+      },
+      {
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "supports": [
+          "instrument",
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "stages",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Offtake Agreement",
+        "note": "NMG reports the definitive binding agreement signed May 13, 2026, its annual volume, take-or-pay structure and seven-year term beginning with commercial production."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Matawinie Mine Project (Phase 2), pages 9–10",
+        "note": "NMG reports construction began April 13, 2026. Applies to the Phase 2 mine only; demonstration-plant activity and the separately financed Bécancour plant are not mine commercial operation."
       }
     ],
-    "notes": "No volume, price or term is stated. The Panasonic and Traxys offtakes are private and the Government of Japan's \"investment intention\" is not a commitment; none is recorded as a row."
+    "notes": "Definitive binding Government of Canada offtake signed May 13, 2026 for 30,000 tonnes per annum over seven years from commercial production. Take-or-pay at a fixed North American market price with an upside-sharing resale mechanism; no numeric price is disclosed. No payment or shipment is inferred. The Panasonic and Traxys offtakes are private and the Government of Japan investment intention is not a commitment; none is recorded as a row.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-northern-graphite-nrc",

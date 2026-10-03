@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { publicCommitmentRows, totalCommitments } from "@/lib/capital-control";
 
 import {
   getAllFinancialCommitments,
@@ -29,6 +30,52 @@ function wicheeda() {
   const project = getProjectById(commitment.projectId!)!;
   return { commitment, project };
 }
+
+test("Matawinie refresh preserves transaction identity and independent lifecycle dates", () => {
+  const equity = getFinancialCommitmentById("fin-ca-g7-2025-nmg-canada-growth-fund")!;
+  const indication = getFinancialCommitmentById("fin-ca-g7-2025-nmg-edc-letter-of-interest")!;
+  const offtake = getFinancialCommitmentById("fin-ca-g7-2025-nmg-offtake")!;
+  assert.equal(equity.instrument, "equity");
+  assert.deepEqual(equity.amount, {
+    value: "35000000", currency: "CAD", qualifier: "at_least",
+    amountAsStated: "more than $35 million from the Canada Growth Fund",
+    currencyBasis: "issuer_context",
+  });
+  assert.deepEqual(equity.financialStatusHistory.slice(-2).map(({ status, date }) => ({ status, date })), [
+    { status: "contracted", date: "2024-12-16" },
+    { status: "disbursed", date: "2024-12-20" },
+  ]);
+  assert.equal(indication.valueRole, "indication");
+  assert.equal(indication.amount?.value, "430000000");
+  assert.equal(indication.amount?.currency, "USD");
+  assert.equal(indication.amount?.qualifier, "up_to");
+  assert.deepEqual(indication.financialStatusHistory.map(({ status, date }) => ({ status, date })), [
+    { status: "announced", date: null },
+  ]);
+  assert.equal(offtake.amount, null);
+  assert.equal(offtake.financialStatusHistory.at(-1)?.status, "contracted");
+  assert.equal(offtake.financialStatusHistory.at(-1)?.date, "2026-05-13");
+  assert.equal(offtake.terms.find((term) => term.kind === "quantity_covenant")?.value, "30000");
+  const duration = offtake.terms.find((term) => term.kind === "duration")!;
+  assert.equal(duration.value, "7");
+  assert.match(duration.note ?? "", /start of commercial production/);
+  for (const commitment of [equity, indication, offtake]) {
+    assert.equal(commitment.implementationStatusHistory.at(-1)?.status, "construction");
+    assert.equal(commitment.implementationStatusHistory.at(-1)?.date, "2026-04-13");
+    assert.deepEqual(commitment.lifecycleReview, {
+      financialStatusCheckedAt: AS_OF, implementationStatusCheckedAt: AS_OF,
+    });
+  }
+  const bundle = queue().bundles.find((item) => item.projectId === "prj-ca-nmg-matawinie")!;
+  assert.equal(bundle.priority, "P3");
+  assert.equal(bundle.rows.length, 3);
+  const publicRows = publicCommitmentRows([equity, indication, offtake]);
+  assert.deepEqual(publicRows.map((row) => row.id), [equity.id, offtake.id]);
+  const totals = totalCommitments(publicRows, [equity, indication, offtake]);
+  assert.deepEqual(totals.currencies.map((row) => row.currency), ["CAD"]);
+  assert.deepEqual(totals.currencies[0].instruments?.[0].binding, { at_least: "35000000" });
+  assert.deepEqual(totals.unquantifiedIds, [offtake.id]);
+});
 
 test("the refreshed Cyclic demonstration bundle is complete and no longer a P0 mismatch", () => {
   const bundle = queue().bundles.find(

@@ -1450,5 +1450,53 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Neo states that its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare-earth sintered magnets to a Tier 1 EV traction-motor customer."
+  },
+  {
+    "id": "src-cgf-nmg-schedule13d-2024",
+    "title": "Schedule 13D: Nouveau Monde Graphite Inc. — Canada Growth Fund Inc.",
+    "publisher": "Canada Growth Fund Inc. / SEC",
+    "url": "https://www.sec.gov/Archives/edgar/data/1649752/000089843224001047/xslSCHEDULE_13D_X01/primary_doc.xml",
+    "language": "en",
+    "datePublished": "2024-12-23",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Investor securities filing. Items 3–4 state the US$25-million cash purchase, December 16 subscription agreement and December 20, 2024 private placement. Warrants included in beneficial ownership are not inferred exercised or counted as additional public support."
+  },
+  {
+    "id": "src-pm-matawinie-groundbreaking-2026",
+    "title": "Prime Minister Carney breaks ground on Nouveau Monde Graphite’s Matawinie Mine",
+    "publisher": "Prime Minister of Canada",
+    "url": "https://www.pm.gc.ca/en/news/news-releases/2026/05/19/prime-minister-carney-breaks-ground-nouveau-monde-graphites-matawinie",
+    "language": "en",
+    "datePublished": "2026-05-19",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Quick facts distinguish the December 2024 C$35.6-million CGF investment from the additional 2026 investment. Used to identify the earlier transaction behind the NRCan backgrounder amount, not to convert currencies or replace it."
+  },
+  {
+    "id": "src-nmg-canada-offtake-definitive-2026",
+    "title": "NMG Announces Results of its Annual General and Special Meeting of Shareholders and Signature of a Definitive Binding Offtake Agreement with the Government of Canada",
+    "publisher": "Nouveau Monde Graphite / SEC",
+    "url": "https://www.sec.gov/Archives/edgar/data/1649752/000110465926060836/tm2614605d1_ex99-2.htm",
+    "language": "en",
+    "datePublished": "2026-05-13",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Issuer disclosure furnished to the SEC. Government of Canada Offtake Agreement section reports definitive signing, 30,000 tonnes per annum and seven years from commercial production; it does not evidence shipments or payments."
+  },
+  {
+    "id": "src-nmg-q2-mda-2026",
+    "title": "Management Discussion & Analysis for the six-month period ended June 30, 2026",
+    "publisher": "Nouveau Monde Graphite / SEC",
+    "url": "https://www.sec.gov/Archives/edgar/data/1649752/000110465926095007/nmg-20260630xex99d2.htm",
+    "language": "en",
+    "datePublished": "2026-08-12",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Complete issuer MD&A, signed August 12, 2026. Pages 9–10 date Phase 2 mine construction from April 13. Financing and liquidity sections describe a later US$335-million EDC/CIB debt commitment subject to conditions and final documentation. Physical implementation is attributed to the company; forecasts are not treated as completed milestones."
   }
 ]
