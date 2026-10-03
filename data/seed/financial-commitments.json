@@ -1820,7 +1820,14 @@
         "note": "Part of a \"conditionally approved investment\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "note": "Proposed first commercial samarium/gadolinium processing facility in Kingston. Existing demonstration-plant operations and Louisiana commercial-facility development are distinct projects; no later physical stage for this proposed Canadian commercial facility was established in the reviewed sources."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -1851,9 +1858,41 @@
         "evidence": "ambiguous",
         "locator": "Ucore paragraph",
         "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and contribution-agreement conditions",
+        "note": "Conditional funding for a proposed Canadian commercial facility, subject to due diligence and execution of a contribution agreement."
+      },
+      {
+        "sourceId": "src-ucore-mda-q2-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Funding for a Samarium and Gadolinium Facility",
+        "note": "The 26 August 2026 MD&A explicitly states that neither Canadian definitive agreement exists as of its date; demonstration and Louisiana work are described separately."
+      },
+      {
+        "sourceId": "src-ucore-us-ota-modification-20260914",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and program scope",
+        "note": "Executed US award modification concerns Kingston process development and Louisiana Enhanced Machine A. It does not establish execution or payment of this Canadian package or construction/operation of its proposed Canadian commercial facility."
       }
     ],
-    "notes": null
+    "notes": "Lifecycle review on 2 October 2026: the 26 August 2026 MD&A states there was no definitive agreement for either Canadian component as of that filing. Reviewed later sources did not establish execution or disbursement of this funding, so the original conditional decision is retained. The proposed Canadian commercial facility is distinct from the operating Kingston commercialization/demonstration facility, its earlier CMRDD contribution agreement, the US-funded development program and the Louisiana commercial facility.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-ucore-nrcan",
@@ -1867,7 +1906,7 @@
         "note": null
       }
     ],
-    "instrument": "unspecified",
+    "instrument": "grant",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -1916,14 +1955,20 @@
         "note": "Part of a \"conditionally approved investment\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "note": "Proposed first commercial samarium/gadolinium processing facility in Kingston. Existing demonstration-plant operations and Louisiana commercial-facility development are distinct projects; no later physical stage for this proposed Canadian commercial facility was established in the reviewed sources."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
       {
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -1947,9 +1992,50 @@
         "evidence": "ambiguous",
         "locator": "Ucore paragraph",
         "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and contribution-agreement conditions",
+        "note": "Conditional funding for a proposed Canadian commercial facility, subject to due diligence and execution of a contribution agreement."
+      },
+      {
+        "sourceId": "src-ucore-mda-q2-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Funding for a Samarium and Gadolinium Facility",
+        "note": "The 26 August 2026 MD&A explicitly states that neither Canadian definitive agreement exists as of its date; demonstration and Louisiana work are described separately."
+      },
+      {
+        "sourceId": "src-ucore-us-ota-modification-20260914",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and program scope",
+        "note": "Executed US award modification concerns Kingston process development and Louisiana Enhanced Machine A. It does not establish execution or payment of this Canadian package or construction/operation of its proposed Canadian commercial facility."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening funding paragraph",
+        "note": "NRCan component is expressly a non-repayable contribution, coded as grant. FedDev and the aggregate package are not assigned that instrument."
       }
     ],
-    "notes": null
+    "notes": "Lifecycle review on 2 October 2026: the 26 August 2026 MD&A states there was no definitive agreement for either Canadian component as of that filing. Reviewed later sources did not establish execution or disbursement of this funding, so the original conditional decision is retained. The proposed Canadian commercial facility is distinct from the operating Kingston commercialization/demonstration facility, its earlier CMRDD contribution agreement, the US-funded development program and the Louisiana commercial facility.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-ucore-package",
@@ -2004,7 +2090,14 @@
         "note": "\"conditionally approved\"; recorded as decided and not yet binding, like the OSC conditional loan commitments."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "note": "Proposed first commercial samarium/gadolinium processing facility in Kingston. Existing demonstration-plant operations and Louisiana commercial-facility development are distinct projects; no later physical stage for this proposed Canadian commercial facility was established in the reviewed sources."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2034,9 +2127,41 @@
         "evidence": "ambiguous",
         "locator": "Ucore paragraph",
         "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and contribution-agreement conditions",
+        "note": "Conditional funding for a proposed Canadian commercial facility, subject to due diligence and execution of a contribution agreement."
+      },
+      {
+        "sourceId": "src-ucore-mda-q2-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Funding for a Samarium and Gadolinium Facility",
+        "note": "The 26 August 2026 MD&A explicitly states that neither Canadian definitive agreement exists as of its date; demonstration and Louisiana work are described separately."
+      },
+      {
+        "sourceId": "src-ucore-us-ota-modification-20260914",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and program scope",
+        "note": "Executed US award modification concerns Kingston process development and Louisiana Enhanced Machine A. It does not establish execution or payment of this Canadian package or construction/operation of its proposed Canadian commercial facility."
       }
     ],
-    "notes": "The package total; its NRCan and FedDev Ontario parts are recorded as parts of it. The instrument is not named. NRCan's CMRDD programme page separately lists a 2023 award of $4,275,848 to Ucore's RapidSX demonstration plant in Kingston, which is not recorded here."
+    "notes": "The package total; its NRCan and FedDev Ontario parts remain recorded as parts of it. NRCan is identified as a non-repayable contribution; the package instrument is not fully specified. Lifecycle review on 2 October 2026: the 26 August 2026 MD&A states there was no definitive agreement for either Canadian component as of that filing. Reviewed later sources did not establish execution or disbursement of this funding, so the original conditional decision is retained. The proposed Canadian commercial facility is distinct from the operating Kingston commercialization/demonstration facility, its earlier CMRDD contribution agreement, the US-funded development program and the Louisiana commercial facility.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-vianode-edc-letter-of-interest",
@@ -2626,7 +2751,14 @@
         "note": "\"conditionally approved, pending final due diligence\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "feasibility",
+        "date": "2026-07-13",
+        "sourceId": "src-defense-metals-wicheeda-update-20260713",
+        "note": "The linked Wicheeda mine is undergoing feasibility work, with spring drilling completed and flotation pilot testing ongoing. This does not establish commencement or completion of the separately funded transmission-line and road-design deliverables; the date is the reporting date, not a stated start date."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2655,9 +2787,41 @@
         "evidence": "ambiguous",
         "locator": "First and Last Mile Fund: Wicheeda entry",
         "note": "Power and road infrastructure for a mine site, coded to mining."
+      },
+      {
+        "sourceId": "src-defense-metals-wicheeda-flmf-20260304",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Pages 1–2: conditional approval and project scope",
+        "note": "The infrastructure award remains subject to final due diligence; the 2026–2028 work schedule is prospective."
+      },
+      {
+        "sourceId": "src-defense-metals-wicheeda-update-20260713",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Pages 1–2: ongoing feasibility, pilot testing and conditional funding",
+        "note": "Supports feasibility of the linked mine and continued conditional wording for infrastructure funding."
+      },
+      {
+        "sourceId": "src-defense-metals-wicheeda-proposal-20260812",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1: invitation to submit a full project proposal",
+        "note": "The separate processing-feasibility application is explicitly not a funding commitment and does not replace or advance this infrastructure award."
       }
     ],
-    "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund."
+    "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund. Lifecycle review on 2 October 2026: the July issuer update still describes the infrastructure funding as conditional. Reviewed primary sources did not establish execution or payment of this specific award. Feasibility describes the linked mine, not verified delivery of the funded infrastructure work. The August invitation concerning a separate processing-feasibility application is not a funding commitment and is not substituted for this award.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-trail-cgf-2026-indication",

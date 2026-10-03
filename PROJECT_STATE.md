@@ -1,5 +1,53 @@
 # Project state
 
+## Latest session: Wicheeda and Ucore lifecycle review (2 October 2026)
+
+Draft branch `data/lifecycle-refresh-wicheeda-ucore-20261002`, based on `main`
+`7baf10d2a316256e22bd9b0487c5f28a18eb63b5`. This section records the scoped review;
+no merge or production publication is authorized by this checkpoint.
+
+- Wicheeda: preserve the original CAD 1,878,250 infrastructure amount and conditional
+  decision dated 3 March 2026. Record feasibility of the linked mine as reported on
+  13 July 2026; this is neither a stated feasibility start date nor evidence that the
+  funded transmission-line/road deliverables have commenced or finished. The July
+  release still calls the infrastructure funding conditional. The August proposal
+  invitation concerns a separate processing-feasibility application and expressly is
+  not a funding commitment.
+- Ucore: preserve the up-to CAD 36.3 million package and its NRCan/FedDev parts,
+  relationships and conditional decision dates (31 October 2025). The 26 August 2026
+  MD&A explicitly says no definitive agreement existed for either component as of
+  its date. NRCan's expressly non-repayable contribution is coded as a grant;
+  FedDev and the aggregate package remain instrument unspecified. The proposed
+  Canadian commercial samarium/gadolinium facility is recorded as announced on
+  31 October 2025. Existing Kingston demonstration operations, its earlier CMRDD
+  award, US award modifications and Louisiana commercial development do not establish
+  construction or operation of this proposed Canadian commercial facility.
+- Both financial and implementation review clocks are dated 2 October 2026 for all
+  four rows. Reviewed later disclosures did not establish execution or payment of
+  either funding record, or a later physical stage for Ucore's proposed Canadian facility.
+- Six primary sources added. Original complete issuer releases reviewed: Defense
+  Metals 4 March, 13 July and 12 August 2026; Ucore 31 October 2025 and 14 September
+  2026. The full 34-page Ucore Q2 MD&A dated 26 August 2026 was reviewed. Additional
+  Wicheeda follow-up: complete 31 August drilling release and 23 September proposed
+  private-placement release; these do not establish mine construction or execution
+  of the infrastructure award.
+- Source ledger: the six added source IDs are `src-defense-metals-wicheeda-flmf-20260304`,
+  `src-defense-metals-wicheeda-update-20260713`, `src-defense-metals-wicheeda-proposal-20260812`,
+  `src-ucore-canada-conditional-20251031`, `src-ucore-mda-q2-2026` and
+  `src-ucore-us-ota-modification-20260914`. Additional originals:
+  <https://www.defensemetals.com/_files/ugd/433b25_ae24a5b5fd384c3f8a8fcbaf09858981.pdf>
+  and <https://www.defensemetals.com/_files/ugd/433b25_de8d16ad7d814c3d8d4b029529eda1de.pdf>.
+- Local validation passes (13 existing editorial warnings). Lifecycle regressions:
+  13/13; dossier tests: 28/28; analytics: 45 passed, one API test blocked by the
+  omitted route in the partial local checkout. Full repository CI and Vercel preview
+  must be checked on the draft PR; do not treat the local checkout as a full build.
+- Queue as of 2 October 2026: 53 bundles, P0 0 / P1 24 / P2 16 / P3 13, compared
+  with main's P0 0 / P1 26 / P2 16 / P3 11. These counts exclude the still separate
+  Lynas PR #36 and Matawinie PR #37; preserve those drafts during integration.
+- Next research bundle: MP Materials 10X facility (bank-financing and magnet-offtake
+  rows); then Allied Material tungsten and remaining named-project P1 bundles.
+  This remains the lifecycle sweep phase; stay in the same chat.
+
 _Last updated: 2026-09-30 (removable `/events` filter chips, PR #13, and timeline framing tap targets, PR #14, both merged; M2 dossiers PR #9 merged 2026-09-27 as `a995980`)._
 
 _Previous status line: 2026-09-26 (M2 material dossiers implemented on `feat/lattice-dossier-m2`, draft PR #9, at the time not merged; the 2026-09-25 release reconciliation below is unchanged)._
