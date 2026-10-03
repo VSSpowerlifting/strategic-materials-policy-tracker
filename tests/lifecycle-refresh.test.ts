@@ -27,6 +27,9 @@ function wicheeda() {
     getFinancialCommitmentById("fin-ca-pdac-2026-wicheeda-flmf")!,
   );
   const project = getProjectById(commitment.projectId!)!;
+  // Keep synthetic freshness cases independent of the live seed's latest review.
+  delete commitment.lifecycleReview;
+  commitment.implementationStatusHistory = [];
   return { commitment, project };
 }
 
@@ -208,4 +211,41 @@ test("queue output is deterministic and states what inclusion means", () => {
     /cannot yet distinguish unchanged status from insufficient follow-up/,
   );
   assert.match(output, /^Lifecycle refresh queue — as of 2026-10-02/m);
+});
+
+test("Wicheeda feasibility does not advance its conditional infrastructure funding", () => {
+  const commitment = getFinancialCommitmentById("fin-ca-pdac-2026-wicheeda-flmf")!;
+  assert.equal(commitment.amount?.currency, "CAD");
+  assert.equal(commitment.amount?.value, "1878250");
+  assert.equal(commitment.amount?.qualifier, "exact");
+  assert.equal(commitment.financialStatusHistory.at(-1)!.status, "decided");
+  assert.equal(commitment.financialStatusHistory.at(-1)!.date, "2026-03-03");
+  assert.equal(commitment.implementationStatusHistory.at(-1)!.status, "feasibility");
+  assert.equal(commitment.implementationStatusHistory.at(-1)!.date, "2026-07-13");
+  assert.match(commitment.implementationStatusHistory.at(-1)!.note!, /linked Wicheeda mine/);
+  const bundle = queue().bundles.find((item) => item.projectId === "prj-ca-wicheeda")!;
+  assert.equal(bundle.priority, "P3");
+  assert.ok(bundle.rows.every((row) => row.financial.referenceDate === AS_OF && row.implementation.referenceDate === AS_OF));
+});
+
+test("Ucore's proposed commercial facility is distinct from its demonstration plant and US funding", () => {
+  const ids = ["fin-ca-g7-2025-ucore-package", "fin-ca-g7-2025-ucore-nrcan", "fin-ca-g7-2025-ucore-feddev"];
+  const rows = ids.map((id) => getFinancialCommitmentById(id)!);
+  assert.deepEqual(rows.map((row) => row.amount?.value), ["36300000", "26300000", "10000000"]);
+  for (const row of rows) {
+    assert.equal(row.financialStatusHistory.at(-1)!.status, "decided");
+    assert.equal(row.financialStatusHistory.at(-1)!.date, "2025-10-31");
+    assert.equal(row.implementationStatusHistory.at(-1)!.status, "announced");
+    assert.equal(row.implementationStatusHistory.at(-1)!.date, "2025-10-31");
+    assert.match(row.notes!, /no definitive agreement/i);
+  }
+  assert.equal(rows[1].instrument, "grant");
+  assert.equal(rows[2].instrument, "unspecified");
+  for (const row of rows.slice(1)) {
+    assert.ok(row.relationships.some((link) => link.relationship === "part_of" && link.commitmentId === rows[0].id));
+  }
+  const bundle = queue().bundles.find((item) => item.projectId === "prj-ca-ucore-kingston")!;
+  assert.equal(bundle.priority, "P3");
+  assert.deepEqual(bundle.commitmentIds, [...ids].sort());
+  assert.ok(bundle.rows.every((row) => row.financial.referenceDate === AS_OF && row.implementation.referenceDate === AS_OF));
 });

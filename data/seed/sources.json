@@ -1450,5 +1450,77 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Neo states that its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare-earth sintered magnets to a Tier 1 EV traction-motor customer."
+  },
+  {
+    "id": "src-defense-metals-wicheeda-flmf-20260304",
+    "title": "Defense Metals Receives Conditional Approval for up to C$1.88 Million in Funding for Wicheeda Rare Earth Elements Clean Energy and Transportation Infrastructure Project",
+    "publisher": "Defense Metals Corp.",
+    "url": "https://www.defensemetals.com/_files/ugd/433b25_e01dcb4f295240099185c495af3c4946.pdf",
+    "language": "en",
+    "datePublished": "2026-03-04",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete four-page issuer release reviewed. Conditional second-call CMIF/FLMF infrastructure award; scheduled activities are prospective."
+  },
+  {
+    "id": "src-defense-metals-wicheeda-update-20260713",
+    "title": "Defense Metals Provides Corporate Update Highlighting Continued Execution and Strategic Momentum",
+    "publisher": "Defense Metals Corp.",
+    "url": "https://www.defensemetals.com/_files/ugd/433b25_80ed8a13cf3c428e88968896c71ffb0f.pdf",
+    "language": "en",
+    "datePublished": "2026-07-13",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Ongoing mine feasibility work, completed spring drilling and pilot testing; infrastructure funding still described as conditional."
+  },
+  {
+    "id": "src-defense-metals-wicheeda-proposal-20260812",
+    "title": "Defense Metals Invited by Natural Resources Canada to Submit a Full Project Proposal for its Wicheeda Processing Feasibility Program",
+    "publisher": "Defense Metals Corp.",
+    "url": "https://www.defensemetals.com/_files/ugd/433b25_9ef7dd23603d48d5886e0562e19be517.pdf",
+    "language": "en",
+    "datePublished": "2026-08-12",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Separate CMRDD/GPI processing-feasibility application; explicitly not a funding commitment."
+  },
+  {
+    "id": "src-ucore-canada-conditional-20251031",
+    "title": "Ucore Receives Conditional Approval from the Government of Canada for up to $36.3M for Canadian Rare Earth Processing",
+    "publisher": "Ucore Rare Metals Inc.",
+    "url": "https://ucore.com/ucore-receives-conditional-approval-from-the-government-of-canada-for-up-to-36-3m-for-canadian-rare-earth-processing/",
+    "language": "en",
+    "datePublished": "2025-10-31",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Proposed Kingston commercial samarium/gadolinium facility; funding conditional on contribution agreement execution. NRCan component expressly non-repayable."
+  },
+  {
+    "id": "src-ucore-mda-q2-2026",
+    "title": "Ucore Rare Metals Inc. Management Discussion and Analysis for the three-month and six-month periods ended June 30, 2026",
+    "publisher": "Ucore Rare Metals Inc.",
+    "url": "https://ucore.com/FinancialStatements/Ucore_MDA_Q2_2026.pdf",
+    "language": "en",
+    "datePublished": "2026-08-26",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete 34-page MD&A reviewed, including subsequent events. Explicitly no definitive Canadian samarium/gadolinium funding agreement as of its date. Distinguishes existing Kingston demonstration operations, earlier CMRDD agreement and Louisiana development."
+  },
+  {
+    "id": "src-ucore-us-ota-modification-20260914",
+    "title": "Ucore Secures Additional US$4.6 Million from U.S. Department of War to Advance Samarium and Gadolinium Refining",
+    "publisher": "Ucore Rare Metals Inc.",
+    "url": "https://ucore.com/ucore-secures-additional-us4-6-million-from-u-s-department-of-war-to-advance-samarium-and-gadolinium-refining/",
+    "language": "en",
+    "datePublished": "2026-09-14",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Executed modification of a distinct US award supports Kingston process development and Louisiana Enhanced Machine A; not execution of the Canadian conditional package."
   }
 ]
