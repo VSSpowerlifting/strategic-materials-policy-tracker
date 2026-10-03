@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { publicCommitmentRows } from "@/lib/capital-control";
 
 import {
   getAllFinancialCommitments,
@@ -13,6 +14,40 @@ import {
 } from "@/lib/lifecycle-refresh";
 
 const AS_OF = "2026-10-02";
+
+test("10X construction remains tracked after private financing expires", () => {
+  const bank = getFinancialCommitmentById("fin-us-dod-mp-2025-bank-financing")!;
+  const offtake = getFinancialCommitmentById("fin-us-dod-mp-2025-magnet-offtake")!;
+  const project = getProjectById("prj-us-mp-10x-facility")!;
+  assert.deepEqual(
+    bank.financialStatusHistory.map(({ status, date }) => ({ status, date })),
+    [{ status: "decided", date: "2025-07-09" }, { status: "lapsed", date: "2025-08-26" }],
+  );
+  assert.equal(bank.valueRole, "private_financing");
+  assert.equal(bank.capitalSource, "private");
+  assert.equal(bank.amount?.value, "1000000000");
+  assert.deepEqual(publicCommitmentRows([bank, offtake]).map(({ id }) => id), [offtake.id]);
+  assert.equal(offtake.financialStatusHistory.at(-1)?.status, "contracted");
+  assert.equal(offtake.financialStatusHistory.at(-1)?.date, "2025-07-09");
+  assert.equal(offtake.amount, null);
+  for (const commitment of [bank, offtake]) {
+    const physical = commitment.implementationStatusHistory.at(-1)!;
+    assert.equal(physical.status, "construction");
+    assert.equal(physical.date, null, "a reporting date is not a construction start date");
+    assert.equal(physical.sourceId, "src-mp-10q-2026-q2");
+  }
+  const reviewedAt = "2026-10-03";
+  const q = deriveLifecycleRefreshQueue([bank, offtake], [project], reviewedAt);
+  assert.equal(q.bundles.length, 1);
+  assert.equal(q.bundles[0].priority, "P3");
+  for (const row of q.rows) {
+    assert.equal(row.financial.referenceDate, reviewedAt);
+    assert.equal(row.implementation.referenceDate, reviewedAt);
+    assert.equal(row.implementation.applicable, true);
+    assert.equal(row.implementation.status, "construction");
+  }
+  assert.equal(offtake.outcomes.find(({ metric }) => metric === "target_date")?.targetDate, "2028");
+});
 
 function queue() {
   return deriveLifecycleRefreshQueue(

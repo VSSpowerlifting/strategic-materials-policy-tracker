@@ -6679,7 +6679,14 @@
         "note": "\"The Commitment Letter expired undrawn on its own terms on August 26, 2025, as it was reduced on a dollar-for-dollar basis upon the Offering ... and the Company's execution of the Revolving Credit Facility.\""
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "Note 6 reports construction underway at the Northlake site purchased in April 2026. The actual construction start date is not stated. This is the linked physical project's status, independent of the bank commitment letter's expiry."
+      }
+    ],
     "terms": [
       {
         "kind": "other",
@@ -6720,9 +6727,31 @@
         "evidence": "explicit",
         "locator": "Note 3 (Public-Private Partnership), Commitment Letter for Facility Construction",
         "note": null
+      },
+      {
+        "sourceId": "src-mp-q2-results-20260806",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "CEO comments in second-quarter 2026 results",
+        "note": "Reports accelerated construction at 10X. This corroborates the project's construction status; it does not date construction commencement or establish a financing draw."
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 1; Note 6, Property, Plant and Equipment; MD&A, Magnetics segment",
+        "note": "Construction of the linked 10X Facility is underway. This does not revive or demonstrate a draw under the expired 2025 bank commitment letter."
       }
     ],
-    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing."
+    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing. Lifecycle review on 3 October 2026: the Q3 2025 filing still supports the letter's undrawn expiry; the Q2 2026 filing and 6 August results report construction at the linked 10X project. The subsequent equity offering and revolving credit facility are separate financing, not disbursements or repayment under this historical commitment.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-us-dod-mp-2025-company-cash",
@@ -6973,11 +7002,24 @@
           "status"
         ],
         "evidence": "explicit",
-        "locator": "Note on property, plant and equipment; Note 1",
-        "note": null
+        "locator": "Note 1; Note 6, Property, Plant and Equipment; Note 9, Operating Leases; Note 13, Other Current Assets; MD&A, DoW Offtake Agreement and Magnetics segment",
+        "note": "Construction is underway and the filing continues to describe the executed DoW offtake. The $6.0 million contract liability and $3.892 million reimbursable-cost receivable are accounting balances, not a separately disclosed cumulative cash-disbursement amount for this offtake."
+      },
+      {
+        "sourceId": "src-mp-q2-results-20260806",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "CEO comments in second-quarter 2026 results",
+        "note": "Reports accelerated construction at 10X. This corroborates the project's construction status; it does not date construction commencement or establish a financing draw."
       }
     ],
-    "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations."
+    "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations. Lifecycle review on 3 October 2026 retains contracted status and construction with an unknown commencement date. The Q2 2026 filing recognizes pre-production reimbursable costs under the offtake but does not separately quantify cumulative cash paid under it; no disbursement status or total commitment amount is inferred from deferred balances or receivables. Price Protection Agreement receipts, Independence production and Apple prepayments concern separate instruments or facilities. Commissioning in 2028 remains a target.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-us-dod-mp-2025-preferred-equity",
