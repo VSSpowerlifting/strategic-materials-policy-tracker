@@ -278,13 +278,25 @@ test("each row carries the one scope label its precedence gives", () => {
 
 // --- AC-9, AC-10: layers and non-live rows --------------------------------------------------------
 
-test("graphite keeps two layers apart, and the status-not-stated row sits in its own sub-list", () => {
+test("graphite keeps the reviewed CGF equity apart from non-binding indications", () => {
   const p = dossier("graphite");
   assert.deepEqual(p.money.layers.map((l) => l.key), ["public_commitment", "indication"]);
   const pub = p.money.layers[0];
-  assert.deepEqual(pub.statusNotStated.map((r) => r.id), ["fin-ca-g7-2025-nmg-canada-growth-fund"]);
-  assert.ok(!pub.live.some((r) => r.id === "fin-ca-g7-2025-nmg-canada-growth-fund"));
+  assert.deepEqual(pub.statusNotStated.map((r) => r.id), []);
+  assert.equal(pub.live.find((r) => r.id === "fin-ca-g7-2025-nmg-canada-growth-fund")?.standing, "binding");
   assert.equal(p.money.layers[1].live.length, 3);
+  assert.ok(p.money.layers[1].live.some((r) => r.id === "fin-ca-g7-2025-nmg-edc-letter-of-interest"));
+});
+
+test("a fixture with an unknown financial status stays in the dossier's separate sub-list", () => {
+  const id = "fin-ca-g7-2025-nmg-canada-growth-fund";
+  const data = withCommitment(id, (c) => ({
+    ...c,
+    financialStatusHistory: [{ status: "not_stated", date: null, sourceId: "src-nrcan-g7-cmpa-2025" }],
+  }));
+  const pub = dossier("graphite", data).money.layers[0];
+  assert.deepEqual(pub.statusNotStated.map((r) => r.id), [id]);
+  assert.ok(!pub.live.some((r) => r.id === id));
 });
 
 test("an ended package does not hide a part that still stands", () => {

@@ -47,6 +47,9 @@ Local data validation passes with the existing 13 warnings; all 12 lifecycle
 tests pass. The new regression fails on the old data, then passes after the
 refresh. It checks original transaction identity, independent dates, offtake
 terms and the exclusion of the EDC indication from public commitment totals.
+The affected analytics and dossier tests now expect CGF's source-reviewed
+binding status. Dedicated fixtures retain unknown-status accounting and dossier
+sub-list coverage, independently of whether the live corpus contains such a row.
 Full standard validation/typecheck/lint/test/build gates will run on the draft
 revision in GitHub CI; their live results belong in the PR.
 
