@@ -522,7 +522,9 @@ function collectSourceIds(value: unknown, out: Set<string>): void {
   if (value && typeof value === "object") {
     for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
       if (k === "sourceId" && typeof v === "string") out.add(v);
-      else if (k === "sourceIds" && Array.isArray(v)) for (const s of v) if (typeof s === "string") out.add(s);
+      else if (k === "sourceIds" && Array.isArray(v)) {
+        for (const s of v) if (typeof s === "string") out.add(s);
+      }
       else collectSourceIds(v, out);
     }
   }

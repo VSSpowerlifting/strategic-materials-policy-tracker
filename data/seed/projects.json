@@ -1335,7 +1335,13 @@
     "sponsorOrgIds": [
       "org-allied-material"
     ],
-    "locations": [],
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": "Toyama",
+        "asStated": "富山製作所から約1kmの場所"
+      }
+    ],
     "stages": [
       "processing"
     ],
@@ -1364,9 +1370,18 @@
         "evidence": "ambiguous",
         "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
         "note": "還元及び炭化 (reduction and carburisation) into tungsten and tungsten carbide powder is read as processing."
+      },
+      {
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "supports": [
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, new-site paragraph",
+        "note": "A site of approximately 40,000 square metres was secured about 1 km from the recipient's Toyama Works for the new powder plant."
       }
     ],
-    "notes": "The list does not say where the facilities are."
+    "notes": "METI's certified-plan list does not state a location. The recipient's 9 April 2026 release identifies a new site about 1 km from Toyama Works. Site secured does not establish construction commencement, ownership of the land, or operation."
   },
   {
     "id": "prj-jp-japan-new-metals-tungsten",

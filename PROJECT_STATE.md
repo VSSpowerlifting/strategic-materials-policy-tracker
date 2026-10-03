@@ -1,5 +1,59 @@
 # Project state
 
+## 2026-10-03: Allied Material tungsten lifecycle refresh (draft)
+
+Scoped continuation of Ben's lifecycle sweep on `data/lifecycle-refresh-allied-tungsten-20261003`,
+based on `main` at `0b7f336d9e592bdb9e4d002e405beb6629481042`. The animated title
+integration and all unrelated records remain in the base. This batch is for review;
+no merge or production publish is authorized by this continuation.
+
+- `fin-jp-jogmec-almt-tungsten-grant` retains approximately JPY 7.5 billion and
+  financial status `decided`, with its actual decision date unknown. JOGMEC's
+  current original programme page still lists the FY2025 decision; it does not
+  establish payment or grant cash receipt. Its programme rate is a ceiling of
+  half the applicant's undertaking costs, so the existing 50% term is corrected
+  to `up_to`, without inferring a project-specific public funding share.
+- The recipient's full one-page 9 April 2026 original PDF was read and visually
+  checked, and corroborated against Sumitomo Electric's official announcement.
+  It announces a new plant and related equipment, a secured site about 1 km
+  from Toyama Works, approximately 1.5 times current manufacturing capacity,
+  and operation targeted for the first half of FY2028. Planned construction
+  does not establish that construction has begun. Physical history therefore
+  records `announced` on 9 April, not construction or operation.
+- The location is added to `prj-jp-almt-tungsten`, with primary evidence.
+  Recipient targets retain their fiscal-period wording and are not achieved
+  outcomes. The approximately JPY 15.9 billion company investment plan remains
+  distinct from the approximately JPY 7.5 billion public grant.
+- Both independent lifecycle review clocks are 3 October 2026. JOGMEC's complete
+  current programme content and the recipient's current topics list were
+  reviewed. Direct current METI access returned 403; cached METI content was
+  older, so its prior access date and existing data were retained. No later
+  reviewed primary source established construction commencement or payment.
+- Dossier verification exposed a dangling `else` in `collectSourceIds` that
+  prevented recursion into nested evidence, lifecycle histories, terms and
+  outcomes. Braces restore the documented traversal. A regression verifies
+  that the new recipient source is cited once for the capital row and once
+  for the project. This fix must be retained when integrating other drafts.
+  The tungsten dossier now has 29 default sources and 33 with the wider registry.
+
+Local verification: data validation passes (61 events, 122 sources, 85 financial
+commitments, 57 projects; the 13 existing warnings remain), capital/control
+validation passes, and all 41 lifecycle and dossier tests pass. The new lifecycle
+test failed against the original row; the new nested-citation test failed with
+the original traversal. Full CI and Vercel checks remain pending at this
+checkpoint and will be recorded in the draft PR description.
+
+Standalone queue as of 3 October: 53 bundles, P0 0 / P1 25 / P2 16 / P3 12
+(previous main: 0 / 26 / 16 / 11). Allied Material moves from P1 to P3 after
+review; this does not establish payment or construction. Separate drafts
+#36 Lynas (`a46105a654a9acaa8b1693b9f986400501d13ab7`),
+#37 Matawinie (`b8702f8d032a4ef094b0f8d8bf6d058ca055e0a6`),
+#38 Wicheeda/Ucore (`ebcb74799b07088d33b37b4b8644f6808c873f7b`) and
+#39 MP 10X (`f1a1b8f132d401937a9bcf9a272cb0a91b83c588`) are not included.
+Combined queue and source-count snapshots must be recalculated after authorized
+integration. Next scoped research target: Lofdal. Broader Strategic Concern to
+Industrial Response analysis remains deferred until lifecycle coverage is ready.
+
 ## 2026-10-03: animated title integration (PR #22)
 
 The title screen was previously deployed from `codex/animated-title` at `716953f`
