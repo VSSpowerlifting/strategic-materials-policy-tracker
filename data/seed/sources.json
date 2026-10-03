@@ -1,5 +1,17 @@
 [
   {
+    "id": "src-allied-tungsten-expansion-20260409",
+    "title": "タングステンの供給能力を約1.5倍に増強　総額約159億円を投資、2028年度上期稼働へ",
+    "publisher": "株式会社アライドマテリアル (A.L.M.T. Corp.)",
+    "url": "https://www.allied-material.co.jp/dcms_media/other/NewsRelease_20260409.pdf",
+    "language": "ja",
+    "datePublished": "2026-04-09",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full one-page original Japanese PDF read and visually checked on 3 October 2026; the same announcement was corroborated on Sumitomo Electric's official 9 April release. The recipient announces approximately JPY 15.9 billion of investment in a new tungsten/tungsten-carbide powder plant and related equipment, a secured site about 1 km from Toyama Works, approximately 1.5 times current manufacturing capacity, and operation targeted for the first half of FY2028. It identifies METI supply-assurance-plan certification. It does not disclose JOGMEC grant cash receipt or confirm construction commencement. Its plant image is labelled an illustration."
+  },
+  {
     "id": "src-cset-mofcom-61",
     "title": "Ministry of Commerce Announcement No. 61 of 2025: Decision to Implement Controls on Exports of Rare Earth-Related Items to Foreign Countries (CSET translation)",
     "publisher": "Center for Security and Emerging Technology (Georgetown University)",
@@ -978,10 +990,10 @@
     "url": "https://www.jogmec.go.jp/activities/metal/critical-grant.html",
     "language": "ja",
     "datePublished": null,
-    "dateAccessed": "2026-09-23",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "JOGMEC's page for the critical-minerals grant programme under the Economic Security Promotion Act, read in full 2026-09-23. It pays certified businesses \"当該取組に係る申請者負担額の1／2の助成金\" (a grant of half the applicant's cost of the undertaking) and lists the grant decisions (交付決定事業) with approximate amounts and the fiscal year of the decision: nine as read, the latest three in 令和8年度 (FY2026)."
+    "notes": "JOGMEC's page for the critical-minerals grant programme under the Economic Security Promotion Act, read in full 2026-09-23. It pays certified businesses \"当該取組に係る申請者負担額の1／2の助成金\" (a grant of half the applicant's cost of the undertaking) and lists the grant decisions (交付決定事業) with approximate amounts and the fiscal year of the decision: nine as read, the latest three in 令和8年度 (FY2026). Rechecked in full on 3 October 2026 against the current official page (ten grant-decision rows). Allied Material remains an approximately JPY 7.5 billion decision in FY2025, without a calendar decision date or cash-payment disclosure. The 助成率 table states half the applicant's costs as an upper limit, not an exact project-wide ratio."
   },
   {
     "id": "src-nrcan-g7-cmpa-2025",

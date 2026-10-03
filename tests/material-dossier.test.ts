@@ -89,7 +89,7 @@ test("tungsten stats", () => {
   assert.equal(stat(p, "projects").sublabel, "0 with no designation");
   assert.equal(v("programmes"), 4);
   assert.equal(v("organizations"), 11);
-  assert.equal(v("sources"), 28);
+  assert.equal(v("sources"), 29);
 });
 
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
@@ -115,14 +115,14 @@ test("designations, projects and projects with no designation, per material; the
 
 // --- AC-3: the sources definition -----------------------------------------------------------------
 
-test("sources: 28 for tungsten, 32 if registry evidence were counted, and an unrelated registry citation is excluded", () => {
+test("sources: 29 for tungsten, 33 if registry evidence were counted, and an unrelated registry citation is excluded", () => {
   const cited = sourcesCitedByMaterial("tungsten");
-  assert.equal(cited.length, 28);
+  assert.equal(cited.length, 29);
   assert.ok(cited.some((c) => c.source.id === "src-iea-critical-minerals"), "the material record's own source");
   assert.deepEqual(cited.find((c) => c.source.id === "src-iea-critical-minerals")!.citedBy.map((c) => c.kind), ["material_record"]);
   for (const c of cited) assert.ok(c.citedBy.length >= 1, c.source.id);
   const wider = sourcesCitedByMaterial("tungsten", undefined, { includeRegistry: true });
-  assert.equal(wider.length, 32);
+  assert.equal(wider.length, 33);
   assert.notEqual(cited.length, wider.length);
 
   // A fixture: a registry organization of the material cites a source no record of the material cites.
@@ -130,11 +130,25 @@ test("sources: 28 for tungsten, 32 if registry evidence were counted, and an unr
   const unrelated = data.sources.find((s) => !cited.some((c) => c.source.id === s.id) && !wider.some((c) => c.source.id === s.id))!;
   const org = data.organizations.find((o) => o.id === "org-jp-jogmec")!;
   const fixture: DossierData = { ...data, organizations: data.organizations.map((o) => (o.id === org.id ? { ...o, evidence: [...o.evidence, { sourceId: unrelated.id, supports: ["name"], evidence: "explicit" as const }] } : o)) };
-  assert.equal(sourcesCitedByMaterial("tungsten", fixture).length, 28);
+  assert.equal(sourcesCitedByMaterial("tungsten", fixture).length, 29);
   assert.ok(sourcesCitedByMaterial("tungsten", fixture, { includeRegistry: true }).some((c) => c.source.id === unrelated.id));
 });
 
 // --- AC-4: dates ----------------------------------------------------------------------------------
+
+test("the recipient's nested lifecycle and project evidence is cited once per record", () => {
+  const cited = sourcesCitedByMaterial("tungsten").find(
+    ({ source }) => source.id === "src-allied-tungsten-expansion-20260409",
+  );
+  assert.ok(cited, "the original recipient disclosure is in the dossier's sources");
+  assert.deepEqual(
+    cited.citedBy.map(({ kind, id }) => ({ kind, id })),
+    [
+      { kind: "capital_row", id: "fin-jp-jogmec-almt-tungsten-grant" },
+      { kind: "project", id: "prj-jp-almt-tungsten" },
+    ],
+  );
+});
 
 test("V1: the Allied Material grant is decided with no date, and the event date is never substituted", () => {
   const row = findRow(dossier("tungsten"), "fin-jp-jogmec-almt-tungsten-grant")!;

@@ -14,6 +14,34 @@ import {
 
 const AS_OF = "2026-10-02";
 
+test("Allied Material's planned plant does not imply construction or grant payment", () => {
+  const commitment = getFinancialCommitmentById("fin-jp-jogmec-almt-tungsten-grant")!;
+  const project = getProjectById("prj-jp-almt-tungsten")!;
+  assert.equal(commitment.financialStatusHistory.at(-1)?.status, "decided");
+  assert.equal(commitment.financialStatusHistory.at(-1)?.date, null);
+  assert.equal(commitment.amount?.value, "7500000000");
+  assert.equal(commitment.amount?.qualifier, "approximately");
+  const physical = commitment.implementationStatusHistory.at(-1)!;
+  assert.ok(physical, "the announced physical project is recorded");
+  assert.equal(physical.status, "announced");
+  assert.equal(physical.date, "2026-04-09");
+  assert.equal(physical.sourceId, "src-allied-tungsten-expansion-20260409");
+  assert.equal(project.locations[0].countryCode, "JP");
+  assert.match(project.locations[0].asStated!, /富山製作所/);
+  const target = commitment.outcomes.find(({ metric }) => metric === "target_date")!;
+  assert.equal(target.targetDate, "2028");
+  assert.match(target.asStated, /2028年度上期/);
+  assert.equal(target.statedBy, "recipient");
+  assert.equal(commitment.terms[0].qualifier, "up_to");
+  const reviewedAt = "2026-10-03";
+  const q = deriveLifecycleRefreshQueue([commitment], [project], reviewedAt);
+  assert.equal(q.bundles[0].priority, "P3");
+  assert.equal(q.rows[0].financial.referenceDate, reviewedAt);
+  assert.equal(q.rows[0].implementation.referenceDate, reviewedAt);
+  assert.equal(q.rows[0].financial.statusDate, null);
+  assert.equal(q.rows[0].implementation.statusDate, "2026-04-09");
+});
+
 function queue() {
   return deriveLifecycleRefreshQueue(
     getAllFinancialCommitments(),

@@ -3583,20 +3583,50 @@
         "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和7年度; the decision date is not stated."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-04-09",
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "note": "The recipient announced a new plant and related reduction/carburisation equipment, with a site secured about 1 km from its Toyama Works. The release states planned construction and a first-half FY2028 operating target; it does not report construction commencement or current operation."
+      }
+    ],
     "terms": [
       {
         "kind": "other",
         "value": "50",
-        "qualifier": "exact",
+        "qualifier": "up_to",
         "currency": null,
         "unit": "% of the applicant's cost of the undertaking",
-        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "asStated": "申請者負担額の1／2を上限",
         "sourceId": "src-jogmec-critical-minerals-grants",
-        "note": "The programme-wide rate; the list does not restate it per plan."
+        "note": "Programme-wide maximum grant rate, as stated in JOGMEC's 助成率 table. It is not an exact subsidy-to-total-project-cost ratio for this plan."
       }
     ],
-    "outcomes": [],
+    "outcomes": [
+      {
+        "metric": "target_date",
+        "value": null,
+        "qualifier": null,
+        "unit": null,
+        "targetDate": "2028",
+        "asStated": "2028年度上期の稼働開始を目指し",
+        "statedBy": "recipient",
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "note": "Target for the first half of FY2028. The year-only index retains the year; fiscal-period precision remains in asStated and this note. No exact operating date or achieved operation is reported."
+      },
+      {
+        "metric": "other",
+        "value": "1.5",
+        "qualifier": "approximately",
+        "unit": "times current manufacturing capacity",
+        "targetDate": null,
+        "asStated": "製造能力を約1.5倍に引き上げます",
+        "statedBy": "recipient",
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "note": "Recipient's planned capacity expansion for tungsten and tungsten-carbide powders, associated with the new plant and related equipment. This is a stated target, not measured output or the new plant's standalone annual tonnage."
+      }
+    ],
     "evidence": [
       {
         "sourceId": "src-meti-critical-minerals-certified-plans",
@@ -3635,10 +3665,25 @@
         ],
         "evidence": "explicit",
         "locator": "Programme description; 交付決定事業",
-        "note": null
+        "note": "Rechecked on 3 October 2026: Allied Material remains listed among grant decisions (交付決定事業), approximately JPY 7.5 billion, in FY2025. No calendar decision date or payment amount is stated. The 助成率 table states a ceiling of half the applicant's undertaking costs."
+      },
+      {
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "supports": [
+          "project",
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening and new-site paragraphs",
+        "note": "Recipient identifies the same METI-certified tungsten reduction/carburisation initiative and announces the plant and capacity targets. Planned construction is not proof that construction has started."
       }
     ],
-    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000. Lifecycle review on 3 October 2026 retains decided status and an unknown grant-decision date. The 9 April recipient release adds an announced physical project near Toyama Works and a first-half FY2028 operating target. Its approximately JPY 15.9 billion investment plan is separate from the approximately JPY 7.5 billion public grant. The reviewed sources do not establish grant cash receipt, construction commencement or operation.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-jp-jogmec-japan-new-metals-tungsten-grant",
