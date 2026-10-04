@@ -1050,7 +1050,7 @@
     "url": "https://www.defense.gov/News/Releases/Release/Article/3743467/dod-awards-144-million-to-sustain-and-enhance-the-space-qualified-solar-cell-su/",
     "language": "en",
     "datePublished": "2024-04-16",
-    "dateAccessed": "2026-10-02",
+    "dateAccessed": "2026-10-04",
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Official DPA Investment award release for 5N+ Semiconductors. States the $14.4M award, St. George location, germanium-substrate scope, four-year technical effort, and national-security/supply-chain rationale."
@@ -1062,10 +1062,10 @@
     "url": "https://www.5nplus.com/media/uploads/news/2024-04/b2024-04-18_dod_award_kYnCTid.pdf",
     "language": "en",
     "datePublished": "2024-04-18",
-    "dateAccessed": "2026-10-02",
+    "dateAccessed": "2026-10-04",
     "sourceType": "other",
     "confidence": "primary",
-    "notes": "Company release confirming a US$14.4M DoD DPAI award, subject to conditions and pre-set milestones over four years, for St. George germanium-substrate production capacity."
+    "notes": "Company release confirming a US$14.4M DoD DPAI award, described as 'based on meeting certain conditions' over four years, for upgrading and increasing manufacturing capabilities at the St. George facility. It does not use the phrase 'pre-set milestones' (that wording is in 5N+'s Q1 and Q2 2024 MD&As) and does not mention sourcing, recovery or refining."
   },
   {
     "id": "src-dow-5n-germanium-2026",
@@ -1074,7 +1074,7 @@
     "url": "https://www.war.gov/serve-from-netstorage/News/Releases/Release/Article/4393075/department-of-war-invests-181m-to-increase-us-refining-capacity-for-germanium-m/index.html",
     "language": "en",
     "datePublished": "2026-01-29",
-    "dateAccessed": "2026-10-02",
+    "dateAccessed": "2026-10-04",
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Official release announcing a 15 December 2025 DPA Title III investment of $18.1M to 5N Plus for St. George germanium refining. States a sevenfold zone-refining expansion to more than 20 metric tons annually and domestic sourcing objectives."
@@ -1086,7 +1086,7 @@
     "url": "https://www.5nplus.com/en/news/5n-awarded-us181-million/",
     "language": "en",
     "datePublished": "2026-01-30",
-    "dateAccessed": "2026-10-02",
+    "dateAccessed": "2026-10-04",
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Company release describing the US$18.1M grant to expand germanium recycling and refining over 48 months, with a target of up to 20 metric tons of high-purity germanium per year."
@@ -1098,10 +1098,10 @@
     "url": "https://www.5nplus.com/en/news/5n-to-expand-st-george-utah-production-facility-by/",
     "language": "en",
     "datePublished": "2026-09-22",
-    "dateAccessed": "2026-10-02",
+    "dateAccessed": "2026-10-04",
     "sourceType": "other",
     "confidence": "primary",
-    "notes": "Company update announcing a roughly 50% St. George facility expansion, with construction expected to begin in Q3 2026 and finish in the second half of 2027. It says the expansion follows two recent U.S. government awards supporting St. George capabilities."
+    "notes": "Company update announcing a roughly 50% St. George facility expansion, with construction expected to begin in Q3 2026 and finish in the second half of 2027. It says the expansion follows two recent U.S. government awards supporting St. George capabilities. It states the expansion 'will be funded within the Company's existing capital expenditure plans and support from customers' and says it 'follows' the two awards; it does not say either award funds the expansion, so it is not physical-stage evidence for either funded scope."
   },
   {
     "id": "src-nrcan-trail-strategic-metals-2026",
@@ -1666,5 +1666,65 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Lynas' two-page ASX market announcement dated 7 March 2023, read in full from the weblink.com.au copy of the ASX filing (the ASX-hosted PDF was not located). Its opening says Lynas is pleased to announce the signing of new agreements with JARE, and it states: \"The agreements were signed today at a signing ceremony in Tokyo, Japan\", so execution on 7 March 2023 is expressly stated. It sets out JARE's AUD$200 million contribution through a subscription for ordinary shares priced off the VWAP around the announcement, so the subscription and cash receipt come after signing; the receipt day is stated in no source reviewed. This recipient announcement supports the contract date and terms it states, not government framing."
+  },
+  {
+    "id": "src-usaspending-fa86502425501",
+    "title": "Award Summary: FA86502425501 (Cooperative Agreement), 5N PLUS SEMICONDUCTORS LLC",
+    "publisher": "USAspending.gov (U.S. Department of the Treasury), reporting Department of Defense award data",
+    "url": "https://www.usaspending.gov/award/ASST_NON_FA86502425501_097/",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-04",
+    "sourceType": "dataset",
+    "confidence": "primary",
+    "notes": "Federal award record (read through the USAspending API, award, transactions and funding endpoints). Records DPA Title III cooperative agreement FA86502425501, awarded by the Department of the Air Force (AFRL) with Immediate Office of the Secretary of Defense funding, to 5N PLUS SEMICONDUCTORS LLC (Saint George, Utah address), new award dated 2024-04-11, 'modification to definitize the agreement' PZ0001 dated 2025-05-20, later non-financial modifications through 2026-03-26. Reported federal obligation $12,458,128 plus non-federal funding $2,505,981; place of performance is shown as multi-state. The record's description matches DoD's April 2024 release title, and the recipient's earlier DPA Title III awards FA86501225503 (2012) and FA86502025525 (2020) are separate records. The award summary reports $0 account outlay, while the funding endpoint lists three gross-outlay lines defined as fiscal-year-beginning-to-period-end: $998,701.28 (FY2024 period 9, ending June 2024), $1,032,342.24 (FY2025 period 9, June 2025) and $399,308.73 (FY2026 period 6, March 2026), the last two paired with equal negative obligations. The summary's $0 reflects USAspending counting only each fiscal year's latest closed DoD submission (consistent with the behavior observed through the API and with the published code at commit 7c86854, which was not verified against the deployed implementation), not an absence of outlay lines. The lines are cumulative within a fiscal year and are not totalled; they are federal-reported account data with no payee or payment date and support a partially_disbursed entry on federal-reporting attribution only."
+  },
+  {
+    "id": "src-5n-mda-q1-2024",
+    "title": "5N Plus Inc. Management's Discussion and Analysis, quarter ended March 31, 2024",
+    "publisher": "5N Plus Inc.",
+    "url": "https://www.5nplus.com/media/uploads/documents/b2024-05-06_mda_q1_2024.pdf",
+    "language": "en",
+    "datePublished": "2024-05-06",
+    "dateAccessed": "2026-10-04",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Recipient securities disclosure. Page 4 describes a US$14.4M DoD grant 'subject to certain conditions and the achievement of pre-set milestones over a four-year term', supporting the St. George germanium-substrate production facility. It does not state a payment, receivable or execution date."
+  },
+  {
+    "id": "src-5n-mda-q2-2024",
+    "title": "5N Plus Inc. Management's Discussion and Analysis, quarter ended June 30, 2024",
+    "publisher": "5N Plus Inc.",
+    "url": "https://www.5nplus.com/media/uploads/documents/b2024-08-05_mda_q2_2024.pdf",
+    "language": "en",
+    "datePublished": "2024-08-05",
+    "dateAccessed": "2026-10-04",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Recipient securities disclosure. Page 4 repeats the US$14.4M DoD grant, 'subject to certain conditions and the achievement of pre-set milestones over a four-year term', in support of the St. George germanium-substrates production facility. It does not state a payment, receivable or execution date."
+  },
+  {
+    "id": "src-5n-mda-q4-2025",
+    "title": "5N Plus Inc. Management's Discussion and Analysis, year ended December 31, 2025",
+    "publisher": "5N Plus Inc.",
+    "url": "https://www.5nplus.com/media/uploads/documents/b2026-02-24_mda_q4_2025.pdf",
+    "language": "en",
+    "datePublished": "2026-02-24",
+    "dateAccessed": "2026-10-04",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Recipient securities disclosure. Page 4 says that in early 2026 the Company announced it 'has been awarded' a US$18.1M grant by the U.S. Government to expand germanium recycling and refining capacity. It does not name St. George, state an execution date, state conditions or disclose any payment."
+  },
+  {
+    "id": "src-5n-sustainability-2025",
+    "title": "5N+ 2025 Sustainability Report",
+    "publisher": "5N Plus Inc.",
+    "url": "https://www.5nplus.com/media/uploads/documents/b5n_sustainability_report_2025.pdf",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-04",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Recipient publication, not a securities filing. The report states no publication date; the PDF's creation date is 27 April 2026 and the server's last-modified date is 28 April 2026, which are file metadata and not recorded as the publication date. Page 42 says 5N+ announced a 'planned expansion' of germanium recovery and recycling 'supported by a significant financial award from the U.S. government', to increase recovery at its St. George facility 'over the next four years'. The wording is future-tense and states no execution, payment or physical stage. It dates the announcement to 2025 (the Department and the company's release date it to January 2026) and attaches space-qualified solar-cell capacity to the award, which is the subject of the 2024 award."
   }
 ]

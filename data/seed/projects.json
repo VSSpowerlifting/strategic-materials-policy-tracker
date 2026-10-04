@@ -2140,6 +2140,28 @@
         "evidence": "explicit",
         "locator": "Opening and capacity paragraphs",
         "note": "5N+ describes recycling and refining germanium from industrial residues and mining by-products."
+      },
+      {
+        "sourceId": "src-5n-mda-q4-2025",
+        "supports": [
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 4, sentence beginning 'In early 2026, the Company announced'",
+        "note": "Recipient disclosure of the US$18.1M grant for germanium recycling and refining capacity. It does not name St. George."
+      },
+      {
+        "sourceId": "src-5n-sustainability-2025",
+        "supports": [
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 42, Waste Management, 'Driving Circularity Through Germanium Recovery'",
+        "note": "Recipient publication describing a planned expansion of germanium recovery and recycling at St. George, supported by a U.S. government award, over the next four years. It states no stage beyond planned."
       }
     ],
     "notes": "A distinct DPA-funded scope from the 2024 substrate-capacity award, although both occur at the same St. George facility."
@@ -2189,6 +2211,26 @@
         "evidence": "explicit",
         "locator": "Opening and project-description paragraphs",
         "note": null
+      },
+      {
+        "sourceId": "src-5n-mda-q1-2024",
+        "supports": [
+          "location",
+          "materials",
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 4, paragraph beginning 'Subsequent to quarter end, the Company also announced'",
+        "note": "Recipient disclosure placing the supported production facility at St. George, Utah and describing its germanium substrates."
+      },
+      {
+        "sourceId": "src-usaspending-fa86502425501",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Award Summary: Recipient; Place of Performance",
+        "note": "The recipient is 5N PLUS SEMICONDUCTORS LLC at a Saint George, Utah address. The place of performance reads multi-state, so the record alone does not place the project at the facility."
       }
     ],
     "notes": "The project spans upstream material preparation/refining and production of space-qualified germanium wafers/substrates; the award does not allocate money by stage."
