@@ -19,8 +19,11 @@ behaviour were checked, and #36–#42, #28 and #32 are closed.
 
 **Analysis outcome (draft, not human-approved).**
 `docs/analysis/strategic-concern-industrial-response-2026-10-03.md` (definitions, findings, limitations),
-`docs/analysis/concern-response-tables-2026-10-03.md` (generated; unedited script output, byte-identical on rerun) and
-`scripts/analyze-concern-response.ts` (read-only; explicit `--as-of`; stdout only). No data record was edited. Findings:
+`docs/analysis/concern-response-tables-2026-10-03.md` (generated; unedited script output, byte-identical on rerun at the pinned
+`b4183f8` data and `lib`; a run on later seed data is a new comparison, not a reproduction) and
+`scripts/analyze-concern-response.ts` (read-only; explicit `--as-of`; stdout only). `--as-of` controls the dated calculations (queue
+ages, control status, stated-end day counts) but does not date-slice current financial or physical status, which are read as the last
+history entry. No data record was edited. Findings:
 (1) binding instruments and recorded physical status overlap only partly: of 29 projects with a government commitment, 18 are
 binding and 9 record construction-or-later (strict 8, excluding the Cyclic demonstration plant's funded-activity completion); **7 are
 in both (strict 6)**, 11 are binding without construction recorded, 10 of them with no physical status at all, 2 record construction

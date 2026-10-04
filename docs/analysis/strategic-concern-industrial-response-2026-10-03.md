@@ -45,6 +45,16 @@ Two dates are used and kept apart: the **as-of date** (`--as-of 2026-10-03`, pas
 sets ages and control status, and `site.lastUpdated` (2026-10-02) is when the records were last stamped. The merge commit's
 author date is 2026-10-04, after the as-of date; ages are measured to 2026-10-03 as instructed.
 
+**What `--as-of` controls, and what it does not.** `--as-of` fixes the date for the dated calculations: the lifecycle queue's
+ages and priorities, control status on that date (`controlStatusOn`, including the stage-response map), and the day counts for
+stated ends and source ages. It does **not** date-slice current financial or physical status. `currentFinancialStatus` returns
+the last entry of a row's `financialStatusHistory`, and the script reads the last `implementationStatusHistory` entry, whatever
+those entries' dates. Every financial-status, binding and physical-status count here is the status at the analysed data
+revision, not a reconstruction of the status that held on 2026-10-03. At `b4183f8` no financial or implementation status entry is
+dated after 2026-10-03 (the latest are 2026-09-07 and 2026-09-14), so the as-of date and the current status coincide for this
+baseline, and the findings are unaffected. That would not hold for later data, which can carry entries dated after the as-of date
+or undated entries that reflect evidence reviewed later.
+
 No prior "Strategic Concern → Industrial Response" document or script exists in the repository or its history (searched `docs/`,
 `scripts/` and `PROJECT_STATE.md`; `git log --all -S "Industrial Response"` finds only PR commits that mention it in
 `PROJECT_STATE.md`). `PROJECT_STATE.md` recorded this analysis as **deferred until the lifecycle sweep was complete**; this baseline
@@ -401,21 +411,31 @@ Use `source-verifier` per row; AI output stays draft until approved; do not wide
 - 15 of 44 folded GC rows have no registry project (programme-level, tax-offset, geoscience, or company-level rows) and cannot be
   followed to physical execution at all.
 - Control clauses are only partly placed on stages (18 of 45).
+- `--as-of` does not date-slice current financial or physical status (section 1), so these counts describe the analysed revision, not
+  an earlier date; a historical reconstruction would need a date-aware status helper that the shared code does not have.
 
 ## 10. Reproduction and checks
 
-Run from any checkout where the data and library code equal the analysed revision, i.e. where
-`git diff --stat b4183f8fc68beea7a53496d73d9e04c93d553a69 -- data/seed lib` prints nothing:
+**Reproduction requires the pinned baseline revision and data.** The tables are reproducible only from a checkout whose
+`data/seed` and `lib` equal revision `b4183f8fc68beea7a53496d73d9e04c93d553a69`, which the `git diff --quiet` line below checks. Running
+the script on later seed data, including `main` after any data change, is a **new comparison, not a reproduction** of these tables:
+its output will differ, and it must go to a new file and be described as a comparison against this baseline. The
+historical tables are never regenerated over. From a later `main`, reproduce in a detached worktree of the pinned revision with only
+the script copied in:
 
 ```bash
-git diff --stat b4183f8fc68beea7a53496d73d9e04c93d553a69 -- data/seed lib   # must be empty
-node --import tsx scripts/analyze-concern-response.ts --as-of 2026-10-03 > docs/analysis/concern-response-tables-2026-10-03.md
+git worktree add --detach ../baseline-repro b4183f8fc68beea7a53496d73d9e04c93d553a69
+cp scripts/analyze-concern-response.ts ../baseline-repro/scripts/   # the script is read-only; the worktree needs node_modules
+cd ../baseline-repro
+git diff --quiet b4183f8fc68beea7a53496d73d9e04c93d553a69 -- data/seed lib && echo "pinned data and lib: reproduction"
+node --import tsx scripts/analyze-concern-response.ts --as-of 2026-10-03 > /tmp/concern-response-tables-repro.md
+cmp /tmp/concern-response-tables-repro.md <path to docs/analysis/concern-response-tables-2026-10-03.md>   # must print nothing
 npm run audit:lifecycle   # queue, for cross-checking section 2 of the tables
 ```
 
 `node --import tsx` is used because the `tsx` CLI could not open its IPC socket in the authoring environment. `--as-of` is required.
-The script is read-only, reads no clock and writes only to stdout; the table file is its unedited output, and a second run is
-byte-identical.
+The script is read-only, reads no clock and writes only to stdout; the table file is its unedited output, and a second run at the
+pinned revision is byte-identical.
 
 Checks: see the PR description for the run results on the final commit. Scoped lint is `npx eslint . --ignore-pattern '.claude/**'`.
 Plain `npm run lint` scans nested worktrees under `.claude/worktrees/` and fails there (538 errors and 5,552 warnings, all in those

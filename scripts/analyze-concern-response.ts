@@ -8,6 +8,14 @@
  * `stageResponseMap`, `stageLatticeGaps`, `isFoldedPart`, `legalStanding` and the lifecycle queue, so the
  * numbers follow the corpus's own counting rules. The "ladder" columns are presentation only: financial
  * standing and physical status are separate axes and are never combined into a score.
+ *
+ * `--as-of` fixes the date for dated calculations (queue ages and priorities, control status on that date, stated-end
+ * and source-age day counts). It does not date-slice current financial or physical status: both are read as the last
+ * history entry, whatever its date, so counts describe the data revision the script runs on, not an earlier date.
+ *
+ * Reproducing docs/analysis/concern-response-tables-2026-10-03.md requires the pinned baseline revision b4183f8 (data/seed
+ * and lib identical to it). A run on later seed data is a new comparison, not a reproduction; write it to a different
+ * file and never regenerate over the historical tables.
  */
 import {
   getAllControlMeasures,
