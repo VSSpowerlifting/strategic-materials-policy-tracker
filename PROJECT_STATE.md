@@ -1,15 +1,20 @@
 # Project state
 
-## 2026-10-03: lifecycle-refresh consolidation checkpoint (integrated locally, uncommitted)
+## 2026-10-03: lifecycle-refresh consolidation checkpoint (draft PR #43 open, unmerged)
 
-**Status.** Draft PRs #36–#42 are integrated into one local working tree. Nothing is committed, pushed, merged or
-deployed, and none of the seven drafts has been closed; each remains open and unmerged on GitHub.
+**Status.** Draft PRs #36–#42 are integrated on branch `claude/smpt-lifecycle-consolidate-0b56b0` and published as draft
+PR #43 (<https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/43>). The integration commit is
+`8f590fd`; a later docs-only commit updates this section, so use the PR's head for the exact SHA. Nothing is merged or
+deployed. #36–#42, #28 and #32 all remain open and unmerged; no branch was deleted. GitHub CI and Vercel results for the
+PR head are recorded in a comment on #43, not here, so this file does not change the revision they ran against.
+Remaining before merge: source approval of the facts each draft established (they were inherited, not re-verified, here),
+review of the integration notes below, and those check results.
 
 - Branch `claude/smpt-lifecycle-consolidate-0b56b0`, worktree
   `.claude/worktrees/smpt-lifecycle-consolidate-0b56b0`, baseline `main` at
-  `0b7f336d9e592bdb9e4d002e405beb6629481042` (the animated title is already in the baseline). `HEAD` is still that commit;
-  the integration is uncommitted changes to nine files: `data/seed/{financial-commitments,projects,sources}.json`,
-  `lib/material-dossier.ts`, four test files and this file.
+  `0b7f336d9e592bdb9e4d002e405beb6629481042` (the animated title is already in the baseline). The branch changes nine
+  files on top of it: `data/seed/{financial-commitments,projects,sources}.json`, `lib/material-dossier.ts`, four test
+  files and this file.
 - Integrated heads: #36 Lynas JARE `a46105a`, #37 Matawinie `b8702f8`, #38 Wicheeda and Ucore `ebcb747`, #39 MP 10X
   `f1a1b8f`, #40 Allied tungsten `22c8a49`, #41 Lofdal `727bd5b`, #42 Regolith `52fe9b9` (full SHAs are in the PR list).
 - How it was merged: shared JSON by record id, never by replacing a seed file with a branch copy. No record id is touched
