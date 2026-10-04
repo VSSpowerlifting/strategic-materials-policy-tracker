@@ -414,10 +414,10 @@
     "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796d8k.htm",
     "language": "en",
     "datePublished": "2025-07-10",
-    "dateAccessed": "2026-08-12",
+    "dateAccessed": "2026-10-03",
     "sourceType": "other",
     "confidence": "primary",
-    "notes": "The binding disclosure of the DoD deal terms, filed with the SEC. Read in full 2026-08-12 (EDGAR returns 403 without a declared user agent). Confirms verbatim: the Transaction Agreement was entered into on 9 July 2025 (the 'Effective Date'); a commitment for a $150 million loan to support expansion of heavy rare earth separation, to be extended by DoD within 30 days following closing; a quarterly payment per kilogram of NdPr equal to the shortfall between $110 per kg and the benchmark quarterly average price; a 10-year offtake agreement for magnet production from the 10X Facility; and a warrant issued to DoD. Source type 'other' follows the convention used for src-mp-dod-2025 (company document rather than a government instrument), but this is the filed agreement disclosure rather than a press release. Note the event is dated 2025-07-10, the announcement date, while the agreement's effective date is 2025-07-09. Rebuilt 2026-08-12 after the record was lost to an accidental working-tree revert; re-verified against the filing."
+    "notes": "The binding disclosure of the DoD deal terms, filed with the SEC. Read in full 2026-08-12 (EDGAR returns 403 without a declared user agent). Confirms verbatim: the Transaction Agreement was entered into on 9 July 2025 (the 'Effective Date'); a commitment for a $150 million loan to support expansion of heavy rare earth separation, to be extended by DoD within 30 days following closing; a quarterly payment per kilogram of NdPr equal to the shortfall between $110 per kg and the benchmark quarterly average price; a 10-year offtake agreement for magnet production from the 10X Facility; and a warrant issued to DoD. Source type 'other' follows the convention used for src-mp-dod-2025 (company document rather than a government instrument), but this is the filed agreement disclosure rather than a press release. Note the event is dated 2025-07-10, the announcement date, while the agreement's effective date is 2025-07-09. Rebuilt 2026-08-12 after the record was lost to an accidental working-tree revert; re-verified against the filing. Full original filing reread on 3 October 2026 for the 10X lifecycle review; the reporting date is not treated as a construction commencement date."
   },
   {
     "id": "src-osc-mp-loan-2025",
@@ -438,10 +438,10 @@
     "url": "https://www.jogmec.go.jp/news/release/release_01320.html",
     "language": "ja",
     "datePublished": "2026-07-30",
-    "dateAccessed": "2026-08-12",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "Japanese original of the joint JOGMEC / Toyota Tsusho release. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Source of the verbatim Japanese framing anchor and of the 最大47.668百万カナダドル / 約54.6億円 figure. The 安定供給 sentence coded as the framing anchor is JOGMEC own; the サプライチェーン強靭化 sentence in the same release is Toyota Tsusho and is not coded."
+    "notes": "Japanese original of the joint JOGMEC / Toyota Tsusho release. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Source of the verbatim Japanese framing anchor and of the 最大47.668百万カナダドル / 約54.6億円 figure. The 安定供給 sentence coded as the framing anchor is JOGMEC own; the サプライチェーン強靭化 sentence in the same release is Toyota Tsusho and is not coded. Rechecked in full on 3 October 2026. The initial SPC investment remains explicitly dated 23 July 2026, but its amount is not disclosed; the up-to-CAD-47.668-million figure is the investment ceiling. The FY2026 commercialization decision is a target, not an achieved FID or construction milestone."
   },
   {
     "id": "src-jogmec-lofdal-en",
@@ -450,10 +450,10 @@
     "url": "https://www.jogmec.go.jp/english/news/release/release_00451.html",
     "language": "en",
     "datePublished": "2026-07-30",
-    "dateAccessed": "2026-08-12",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "official_translation",
-    "notes": "JOGMEC own English edition of the same release — the issuing body official translation, which is why the framing anchor carries quoteEnSource official. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Two divergences from the Japanese are recorded: the yen figure is rounded to approximately 5.5 billion yen against 約54.6億円, and the English title says Heavy Rare Earth Development where the Japanese says レアアース探査・開発事業 (rare-earth exploration and development)."
+    "notes": "JOGMEC own English edition of the same release — the issuing body official translation, which is why the framing anchor carries quoteEnSource official. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Two divergences from the Japanese are recorded: the yen figure is rounded to approximately 5.5 billion yen against 約54.6億円, and the English title says Heavy Rare Earth Development where the Japanese says レアアース探査・開発事業 (rare-earth exploration and development). Rechecked in full on 3 October 2026. The initial SPC investment remains explicitly dated 23 July 2026, but its amount is not disclosed; the up-to-CAD-47.668-million figure is the investment ceiling. The FY2026 commercialization decision is a target, not an achieved FID or construction milestone."
   },
   {
     "id": "src-fedreg-eo-14241",
@@ -930,10 +930,10 @@
     "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136825000054/mp-20250930.htm",
     "language": "en",
     "datePublished": "2025-11-07",
-    "dateAccessed": "2026-09-23",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23 (EDGAR refuses automated clients without a contact header). States that the banks' Commitment Letter \"expired undrawn on its own terms on August 26, 2025, as it was reduced on a dollar-for-dollar basis upon the Offering ... and the Company's execution of the Revolving Credit Facility\", and that in August 2025 the Company issued the $150 million Samarium Project Loan note to the DoW. It supports financing facts it states directly and is attributed to the company, not to the government."
+    "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23 (EDGAR refuses automated clients without a contact header). States that the banks' Commitment Letter \"expired undrawn on its own terms on August 26, 2025, as it was reduced on a dollar-for-dollar basis upon the Offering ... and the Company's execution of the Revolving Credit Facility\", and that in August 2025 the Company issued the $150 million Samarium Project Loan note to the DoW. It supports financing facts it states directly and is attributed to the company, not to the government. Full original filing reread on 3 October 2026 for the 10X lifecycle review; the reporting date is not treated as a construction commencement date."
   },
   {
     "id": "src-mp-10k-2025",
@@ -954,10 +954,10 @@
     "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000048/mp-20260630.htm",
     "language": "en",
     "datePublished": "2026-08-07",
-    "dateAccessed": "2026-09-23",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23. Note 12: \"In July 2025, the Company issued 400,000 shares ... to the DoW for cash consideration of $400.0 million.\" Note on debt: the Samarium Project Loan \"bears interest at a fixed rate of 5.38% per annum\". Note 3 and MD&A: the Price Protection Agreement commenced on October 1, 2025; PPA income of $59.9 million for the six months to June 30, 2026 and a PPA income receivable of $17.6 million ($51.0 million at December 31, 2025). The 10X Facility is in Northlake, Texas, on a 120-acre site bought in April 2026, where construction is \"currently underway\". It refers to the Department of Defense as the Department of War."
+    "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23. Note 12: \"In July 2025, the Company issued 400,000 shares ... to the DoW for cash consideration of $400.0 million.\" Note on debt: the Samarium Project Loan \"bears interest at a fixed rate of 5.38% per annum\". Note 3 and MD&A: the Price Protection Agreement commenced on October 1, 2025; PPA income of $59.9 million for the six months to June 30, 2026 and a PPA income receivable of $17.6 million ($51.0 million at December 31, 2025). The 10X Facility is in Northlake, Texas, on a 120-acre site bought in April 2026, where construction is \"currently underway\". It refers to the Department of Defense as the Department of War. Full original filing reread on 3 October 2026 for the 10X lifecycle review; the reporting date is not treated as a construction commencement date."
   },
   {
     "id": "src-meti-critical-minerals-certified-plans",
@@ -978,10 +978,10 @@
     "url": "https://www.jogmec.go.jp/activities/metal/critical-grant.html",
     "language": "ja",
     "datePublished": null,
-    "dateAccessed": "2026-09-23",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "JOGMEC's page for the critical-minerals grant programme under the Economic Security Promotion Act, read in full 2026-09-23. It pays certified businesses \"当該取組に係る申請者負担額の1／2の助成金\" (a grant of half the applicant's cost of the undertaking) and lists the grant decisions (交付決定事業) with approximate amounts and the fiscal year of the decision: nine as read, the latest three in 令和8年度 (FY2026)."
+    "notes": "JOGMEC's page for the critical-minerals grant programme under the Economic Security Promotion Act, read in full 2026-09-23. It pays certified businesses \"当該取組に係る申請者負担額の1／2の助成金\" (a grant of half the applicant's cost of the undertaking) and lists the grant decisions (交付決定事業) with approximate amounts and the fiscal year of the decision: nine as read, the latest three in 令和8年度 (FY2026). Rechecked in full on 3 October 2026 against the current official page (ten grant-decision rows). Allied Material remains an approximately JPY 7.5 billion decision in FY2025, without a calendar decision date or cash-payment disclosure. The 助成率 table states half the applicant's costs as an upper limit, not an exact project-wide ratio."
   },
   {
     "id": "src-nrcan-g7-cmpa-2025",
@@ -1450,5 +1450,221 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Neo states that its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare-earth sintered magnets to a Tier 1 EV traction-motor customer."
+  },
+  {
+    "id": "src-lynas-q3-2023-jare-cash",
+    "title": "Lynas Rare Earths — Quarterly Report for the period ended 31 March 2023",
+    "publisher": "Lynas Rare Earths Limited / ASX",
+    "url": "https://announcements.asx.com.au/asxpdf/20230421/pdf/45nw3k77phf61l.pdf",
+    "language": "en",
+    "datePublished": "2023-04-21",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "ASX-filed quarterly report, read in full on 2026-10-02. Page 10 says that, \"As announced on 7 March 2023\", Lynas signed new JARE agreements and that JARE provided AUD200 million in cash through an ordinary-share subscription; the signing day itself is established by the 7 March 2023 announcement (src-lynas-asx-20230307-jare-agreements), not by this report. Page 11 records the AUD200 million JARE proceeds in the March-quarter cash-flow table. The exact cash-transfer day is not stated. This recipient filing supports its direct financing disclosures, not government framing or completion of the entire growth plan."
+  },
+  {
+    "id": "src-cgf-nmg-schedule13d-2024",
+    "title": "Schedule 13D: Nouveau Monde Graphite Inc. — Canada Growth Fund Inc.",
+    "publisher": "Canada Growth Fund Inc. / SEC",
+    "url": "https://www.sec.gov/Archives/edgar/data/1649752/000089843224001047/xslSCHEDULE_13D_X01/primary_doc.xml",
+    "language": "en",
+    "datePublished": "2024-12-23",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Investor securities filing. Items 3–4 state the US$25-million cash purchase, December 16 subscription agreement and December 20, 2024 private placement. Warrants included in beneficial ownership are not inferred exercised or counted as additional public support."
+  },
+  {
+    "id": "src-pm-matawinie-groundbreaking-2026",
+    "title": "Prime Minister Carney breaks ground on Nouveau Monde Graphite’s Matawinie Mine",
+    "publisher": "Prime Minister of Canada",
+    "url": "https://www.pm.gc.ca/en/news/news-releases/2026/05/19/prime-minister-carney-breaks-ground-nouveau-monde-graphites-matawinie",
+    "language": "en",
+    "datePublished": "2026-05-19",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Quick facts distinguish the December 2024 C$35.6-million CGF investment from the additional 2026 investment. Used to identify the earlier transaction behind the NRCan backgrounder amount, not to convert currencies or replace it."
+  },
+  {
+    "id": "src-nmg-canada-offtake-definitive-2026",
+    "title": "NMG Announces Results of its Annual General and Special Meeting of Shareholders and Signature of a Definitive Binding Offtake Agreement with the Government of Canada",
+    "publisher": "Nouveau Monde Graphite / SEC",
+    "url": "https://www.sec.gov/Archives/edgar/data/1649752/000110465926060836/tm2614605d1_ex99-2.htm",
+    "language": "en",
+    "datePublished": "2026-05-13",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Issuer disclosure furnished to the SEC. Government of Canada Offtake Agreement section reports definitive signing, 30,000 tonnes per annum and seven years from commercial production; it does not evidence shipments or payments."
+  },
+  {
+    "id": "src-nmg-q2-mda-2026",
+    "title": "Management Discussion & Analysis for the six-month period ended June 30, 2026",
+    "publisher": "Nouveau Monde Graphite / SEC",
+    "url": "https://www.sec.gov/Archives/edgar/data/1649752/000110465926095007/nmg-20260630xex99d2.htm",
+    "language": "en",
+    "datePublished": "2026-08-12",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Complete issuer MD&A, signed August 12, 2026. Pages 9–10 date Phase 2 mine construction from April 13. Financing and liquidity sections describe a later US$335-million EDC/CIB debt commitment subject to conditions and final documentation. Physical implementation is attributed to the company; forecasts are not treated as completed milestones."
+  },
+  {
+    "id": "src-defense-metals-wicheeda-flmf-20260304",
+    "title": "Defense Metals Receives Conditional Approval for up to C$1.88 Million in Funding for Wicheeda Rare Earth Elements Clean Energy and Transportation Infrastructure Project",
+    "publisher": "Defense Metals Corp.",
+    "url": "https://www.defensemetals.com/_files/ugd/433b25_e01dcb4f295240099185c495af3c4946.pdf",
+    "language": "en",
+    "datePublished": "2026-03-04",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete four-page issuer release reviewed. Conditional second-call CMIF/FLMF infrastructure award; scheduled activities are prospective."
+  },
+  {
+    "id": "src-defense-metals-wicheeda-update-20260713",
+    "title": "Defense Metals Provides Corporate Update Highlighting Continued Execution and Strategic Momentum",
+    "publisher": "Defense Metals Corp.",
+    "url": "https://www.defensemetals.com/_files/ugd/433b25_80ed8a13cf3c428e88968896c71ffb0f.pdf",
+    "language": "en",
+    "datePublished": "2026-07-13",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Ongoing mine feasibility work, completed spring drilling and pilot testing; infrastructure funding still described as conditional."
+  },
+  {
+    "id": "src-defense-metals-wicheeda-proposal-20260812",
+    "title": "Defense Metals Invited by Natural Resources Canada to Submit a Full Project Proposal for its Wicheeda Processing Feasibility Program",
+    "publisher": "Defense Metals Corp.",
+    "url": "https://www.defensemetals.com/_files/ugd/433b25_9ef7dd23603d48d5886e0562e19be517.pdf",
+    "language": "en",
+    "datePublished": "2026-08-12",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Separate CMRDD/GPI processing-feasibility application; explicitly not a funding commitment."
+  },
+  {
+    "id": "src-ucore-canada-conditional-20251031",
+    "title": "Ucore Receives Conditional Approval from the Government of Canada for up to $36.3M for Canadian Rare Earth Processing",
+    "publisher": "Ucore Rare Metals Inc.",
+    "url": "https://ucore.com/ucore-receives-conditional-approval-from-the-government-of-canada-for-up-to-36-3m-for-canadian-rare-earth-processing/",
+    "language": "en",
+    "datePublished": "2025-10-31",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Proposed Kingston commercial samarium/gadolinium facility; funding conditional on contribution agreement execution. NRCan component expressly non-repayable."
+  },
+  {
+    "id": "src-ucore-mda-q2-2026",
+    "title": "Ucore Rare Metals Inc. Management Discussion and Analysis for the three-month and six-month periods ended June 30, 2026",
+    "publisher": "Ucore Rare Metals Inc.",
+    "url": "https://ucore.com/FinancialStatements/Ucore_MDA_Q2_2026.pdf",
+    "language": "en",
+    "datePublished": "2026-08-26",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete 34-page MD&A reviewed, including subsequent events. Explicitly no definitive Canadian samarium/gadolinium funding agreement as of its date. Distinguishes existing Kingston demonstration operations, earlier CMRDD agreement and Louisiana development."
+  },
+  {
+    "id": "src-ucore-us-ota-modification-20260914",
+    "title": "Ucore Secures Additional US$4.6 Million from U.S. Department of War to Advance Samarium and Gadolinium Refining",
+    "publisher": "Ucore Rare Metals Inc.",
+    "url": "https://ucore.com/ucore-secures-additional-us4-6-million-from-u-s-department-of-war-to-advance-samarium-and-gadolinium-refining/",
+    "language": "en",
+    "datePublished": "2026-09-14",
+    "dateAccessed": "2026-10-02",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete issuer release reviewed. Executed modification of a distinct US award supports Kingston process development and Louisiana Enhanced Machine A; not execution of the Canadian conditional package."
+  },
+  {
+    "id": "src-mp-q2-results-20260806",
+    "title": "MP Materials Reports Second Quarter 2026 Results",
+    "publisher": "MP Materials Corp.",
+    "url": "https://investors.mpmaterials.com/investor-news/news-details/2026/MP-Materials-Reports-Second-Quarter-2026-Results/default.aspx",
+    "language": "en",
+    "datePublished": "2026-08-06",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full original company results release read on 3 October 2026. CEO comments report accelerated construction at the 10X magnet manufacturing facility. Qualification and production at Independence are separate from the 10X construction project. The release does not establish 10X's actual construction commencement date, operational status, or a draw under the expired bank commitment letter."
+  },
+  {
+    "id": "src-allied-tungsten-expansion-20260409",
+    "title": "タングステンの供給能力を約1.5倍に増強　総額約159億円を投資、2028年度上期稼働へ",
+    "publisher": "株式会社アライドマテリアル (A.L.M.T. Corp.)",
+    "url": "https://www.allied-material.co.jp/dcms_media/other/NewsRelease_20260409.pdf",
+    "language": "ja",
+    "datePublished": "2026-04-09",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full one-page original Japanese PDF read and visually checked on 3 October 2026; the same announcement was corroborated on Sumitomo Electric's official 9 April release. The recipient announces approximately JPY 15.9 billion of investment in a new tungsten/tungsten-carbide powder plant and related equipment, a secured site about 1 km from Toyama Works, approximately 1.5 times current manufacturing capacity, and operation targeted for the first half of FY2028. It identifies METI supply-assurance-plan certification. It does not disclose JOGMEC grant cash receipt or confirm construction commencement. Its plant image is labelled an illustration."
+  },
+  {
+    "id": "src-ncmi-lofdal-jv-20260730",
+    "title": "Namibia Critical Metals Announces Completion of Japan’s C$23 Million Earn-In and Formation of Strategic Joint Venture Company for the Lofdal Heavy Rare Earth Project",
+    "publisher": "Namibia Critical Metals Inc.",
+    "url": "https://www.namibiacriticalmetals.com/wp-content/uploads/2026/07/260730-TJNRE-Earn-In-Completion-SEDAR.pdf",
+    "language": "en",
+    "datePublished": "2026-07-30",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full four-page company-hosted original PDF read on 3 October 2026. It distinguishes the completed C$23 million earn-in, the approximately C$11 million expanded DFS budget, and JOGMEC's up-to-C$47.668 million investment in TJNREC with an initial investment on 23 July. It does not quantify the initial SPC investment. Transfer of the 50% project interest is subject to prior shareholder and TSX Venture Exchange approvals. Ongoing pilot-scale work, engineering, permitting and mine planning remain definitive-feasibility activities; pre-FID work is not commercial construction or operation."
+  },
+  {
+    "id": "src-ncmi-lofdal-jv-update-20260831",
+    "title": "Namibia Critical Metals Provides Update on Lofdal Joint Venture Transaction",
+    "publisher": "Namibia Critical Metals Inc.",
+    "url": "https://www.namibiacriticalmetals.com/wp-content/uploads/2026/09/260831-JV-Transaction-Update-SEDAR.pdf",
+    "language": "en",
+    "datePublished": "2026-08-31",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full three-page company-hosted original PDF read on 3 October 2026. The document is dated 31 August despite its September upload directory. The opening paragraphs say the project-interest transaction still requires shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. Its completed C$23 million expenditure requirement does not establish that the conditional transfer is complete or disclose payments under JOGMEC's newer SPC equity commitment."
+  },
+  {
+    "id": "src-nrcan-regolith-eip-2025",
+    "title": "Battery-Grade Graphite: A Canadian Low-GHG Solution from Regolith Resources",
+    "publisher": "Natural Resources Canada",
+    "url": "https://natural-resources.canada.ca/funding-partnerships/energy-innovation-program/battery-grade-graphite-canadian-low-ghg-solution-regolith-resources",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full current NRCan Energy Innovation Program project profile read on 3 October 2026. It lists Status Active, Year 2025, Agreement Value C$4,750,000, Project Total C$12,262,850, locations BC and ON, Weaver Energy Corp. as partner and Green Graphite Technologies Inc. as lead proponent. It describes the vertically integrated low-GHG graphite-processing demonstration and expected engineering/commercialization results. It does not state agreement execution, payment, construction or commissioning dates."
+  },
+  {
+    "id": "src-ggt-mississauga-demo-commissioning-20260811",
+    "title": "Our Mississauga graphite purification demonstration facility is entering the final stages of commissioning.",
+    "publisher": "Green Graphite Technologies Inc.",
+    "url": "https://www.linkedin.com/posts/green-graphite-tech_our-mississauga-graphite-purification-activity-7492954053392457729-LMSP",
+    "language": "en",
+    "datePublished": "2026-08-11",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full official company LinkedIn post read on 3 October 2026. It says the Mississauga graphite-purification demonstration facility is entering final-stage commissioning and describes continuous carbochlorination at scale for a domestic battery-materials supply chain. It does not name the NRCan EIP/Regolith award, disclose grant payment or claim commercial operation; the project linkage is limited to the matching recipient, Mississauga location and graphite-purification process. Date provenance: the visible page shows only a relative age (\"1mo\"). The 11 August 2026 date comes from LinkedIn's own page metadata (SocialMediaPosting datePublished 2026-08-11T14:44:18Z) and matches the timestamp encoded in the post's activity ID; it is platform-stated, not printed in the post text and not independently corroborated by a GGT release or other outlet."
+  },
+  {
+    "id": "src-lynas-asx-20230307-jare-agreements",
+    "title": "JARE EXTENDS SUPPORT FOR LYNAS GROWTH PLAN",
+    "publisher": "Lynas Rare Earths Limited / ASX",
+    "url": "https://wcsecure.weblink.com.au/pdf/LYC/02640930.pdf",
+    "language": "en",
+    "datePublished": "2023-03-07",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Lynas' two-page ASX market announcement dated 7 March 2023, read in full from the weblink.com.au copy of the ASX filing (the ASX-hosted PDF was not located). Its opening says Lynas is pleased to announce the signing of new agreements with JARE, and it states: \"The agreements were signed today at a signing ceremony in Tokyo, Japan\", so execution on 7 March 2023 is expressly stated. It sets out JARE's AUD$200 million contribution through a subscription for ordinary shares priced off the VWAP around the announcement, so the subscription and cash receipt come after signing; the receipt day is stated in no source reviewed. This recipient announcement supports the contract date and terms it states, not government framing."
   }
 ]

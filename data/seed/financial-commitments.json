@@ -1469,7 +1469,7 @@
     "id": "fin-ca-g7-2025-nmg-canada-growth-fund",
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [],
-    "instrument": "unspecified",
+    "instrument": "equity",
     "valueRole": "commitment",
     "capitalSource": "public_enterprise",
     "amount": {
@@ -1509,16 +1509,34 @@
         "date": null,
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "note": "Named among the investments the Alliance announcement \"builds on\"; the backgrounder does not state their stage or date."
+      },
+      {
+        "status": "contracted",
+        "date": "2024-12-16",
+        "sourceId": "src-cgf-nmg-schedule13d-2024",
+        "note": "CGF reports a subscription agreement dated December 16, 2024."
+      },
+      {
+        "status": "disbursed",
+        "date": "2024-12-20",
+        "sourceId": "src-cgf-nmg-schedule13d-2024",
+        "note": "CGF reports purchasing NMG shares and warrants for US$25 million in the private placement on December 20, 2024. This is the original investment, not the additional 2026 equity round."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-04-13",
+        "sourceId": "src-nmg-q2-mda-2026",
+        "note": "NMG dates the start of Phase 2 Matawinie Mine construction to April 13, 2026 and reports ongoing civil works. This physical milestone is separate from the May 15 FID and May 19 ceremony; it does not state production or financing disbursement."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
       {
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -1540,9 +1558,46 @@
         "evidence": "ambiguous",
         "locator": "First paragraph of the list",
         "note": "The investment supports the company's mine-to-anode plan; coded to the mine it names."
+      },
+      {
+        "sourceId": "src-cgf-nmg-schedule13d-2024",
+        "supports": [
+          "instrument",
+          "provider",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Schedule 13D, Items 3 and 4",
+        "note": "CGF reports a cash-funded share-and-warrant purchase, the subscription agreement date and the completed private placement."
+      },
+      {
+        "sourceId": "src-pm-matawinie-groundbreaking-2026",
+        "supports": [
+          "amount",
+          "provider",
+          "recipient"
+        ],
+        "evidence": "explicit",
+        "locator": "Quick facts: previous Canada Growth Fund investment",
+        "note": "Identifies the earlier December 2024 CGF investment as C$35.6 million, distinct from the additional 2026 investment. The original NRCan lower-bound CAD amount is retained; no currency conversion is made."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Matawinie Mine Project (Phase 2), pages 9–10",
+        "note": "NMG reports construction began April 13, 2026. Applies to the Phase 2 mine only; demonstration-plant activity and the separately financed Bécancour plant are not mine commercial operation."
       }
     ],
-    "notes": "An earlier investment the backgrounder cites, not one it announces. The instrument is not named."
+    "notes": "Earlier CGF equity investment cited by the Alliance backgrounder; now identified and dated from the investor filing. The original more-than-C$35-million amount remains as stated by NRCan. The separate 2026 CGF equity investment is additional capital and is not substituted into this row. The existing Matawinie link does not allocate all corporate investment proceeds exclusively to the mine.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-nmg-edc-letter-of-interest",
@@ -1590,7 +1645,14 @@
         "note": "A letter of interest, which is not a financing commitment; its date is not stated."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-04-13",
+        "sourceId": "src-nmg-q2-mda-2026",
+        "note": "NMG dates the start of Phase 2 Matawinie Mine construction to April 13, 2026 and reports ongoing civil works. This physical milestone is separate from the May 15 FID and May 19 ceremony; it does not state production or financing disbursement."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -1619,9 +1681,32 @@
         "evidence": "ambiguous",
         "locator": "First paragraph of the list",
         "note": "Coded to the mine the paragraph names."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing: fully committed senior project debt commitment letter; Liquidity and funding",
+        "note": "The later EDC/CIB facilities remain subject to conditions and final legal documentation in this filing. They do not prove execution or termination of the historical EDC-only US$430-million indication; its financial history is retained."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Matawinie Mine Project (Phase 2), pages 9–10",
+        "note": "NMG reports construction began April 13, 2026. Applies to the Phase 2 mine only; demonstration-plant activity and the separately financed Bécancour plant are not mine commercial operation."
       }
     ],
-    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded."
+    "notes": "A letter of interest, recorded as a non-binding indication, not as a commitment: it names an amount but is not a financing commitment, so it is in no sum. A separate Canada Infrastructure Bank letter of interest is named without an amount and is not recorded. Review on 2026-10-02 found a later US$335-million EDC/CIB project-debt commitment letter in the Q2 MD&A. Its different amount, providers and facilities do not establish that this historical US$430-million indication was contracted, paid or formally lapsed. Mine construction does not change its non-binding value role.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-nmg-offtake",
@@ -1661,10 +1746,44 @@
         "date": "2025-10-31",
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "note": "\"offtake arrangements with the Government of Canada, Panasonic (Japan), and Traxys (Luxembourg)\""
+      },
+      {
+        "status": "contracted",
+        "date": "2026-05-13",
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "note": "NMG reports signing the definitive binding offtake and marketing agreements with Canada. No payment or delivery is evidenced by signing."
       }
     ],
-    "implementationStatusHistory": [],
-    "terms": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-04-13",
+        "sourceId": "src-nmg-q2-mda-2026",
+        "note": "NMG dates the start of Phase 2 Matawinie Mine construction to April 13, 2026 and reports ongoing civil works. This physical milestone is separate from the May 15 FID and May 19 ceremony; it does not state production or financing disbursement."
+      }
+    ],
+    "terms": [
+      {
+        "kind": "quantity_covenant",
+        "value": "30000",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "tonnes per annum",
+        "asStated": "30,000 tonnes per annum",
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "note": "Graphite concentrate from the Phase 2 Matawinie Mine under the definitive agreement."
+      },
+      {
+        "kind": "duration",
+        "value": "7",
+        "qualifier": "exact",
+        "currency": null,
+        "unit": "years",
+        "asStated": "seven-year period as of the start of commercial production",
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "note": "The term begins at the start of commercial production, not the agreement signing date; no calendar end date is inferred."
+      }
+    ],
     "outcomes": [],
     "evidence": [
       {
@@ -1683,9 +1802,39 @@
         "evidence": "explicit",
         "locator": "First paragraph of the list",
         "note": null
+      },
+      {
+        "sourceId": "src-nmg-canada-offtake-definitive-2026",
+        "supports": [
+          "instrument",
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "stages",
+          "status",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Offtake Agreement",
+        "note": "NMG reports the definitive binding agreement signed May 13, 2026, its annual volume, take-or-pay structure and seven-year term beginning with commercial production."
+      },
+      {
+        "sourceId": "src-nmg-q2-mda-2026",
+        "supports": [
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Matawinie Mine Project (Phase 2), pages 9–10",
+        "note": "NMG reports construction began April 13, 2026. Applies to the Phase 2 mine only; demonstration-plant activity and the separately financed Bécancour plant are not mine commercial operation."
       }
     ],
-    "notes": "No volume, price or term is stated. The Panasonic and Traxys offtakes are private and the Government of Japan's \"investment intention\" is not a commitment; none is recorded as a row."
+    "notes": "Definitive binding Government of Canada offtake signed May 13, 2026 for 30,000 tonnes per annum over seven years from commercial production. Take-or-pay at a fixed North American market price with an upside-sharing resale mechanism; no numeric price is disclosed. No payment or shipment is inferred. The Panasonic and Traxys offtakes are private and the Government of Japan investment intention is not a commitment; none is recorded as a row.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-northern-graphite-nrc",
@@ -1820,7 +1969,14 @@
         "note": "Part of a \"conditionally approved investment\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "note": "Proposed first commercial samarium/gadolinium processing facility in Kingston. Existing demonstration-plant operations and Louisiana commercial-facility development are distinct projects; no later physical stage for this proposed Canadian commercial facility was established in the reviewed sources."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -1851,9 +2007,41 @@
         "evidence": "ambiguous",
         "locator": "Ucore paragraph",
         "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and contribution-agreement conditions",
+        "note": "Conditional funding for a proposed Canadian commercial facility, subject to due diligence and execution of a contribution agreement."
+      },
+      {
+        "sourceId": "src-ucore-mda-q2-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Funding for a Samarium and Gadolinium Facility",
+        "note": "The 26 August 2026 MD&A explicitly states that neither Canadian definitive agreement exists as of its date; demonstration and Louisiana work are described separately."
+      },
+      {
+        "sourceId": "src-ucore-us-ota-modification-20260914",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and program scope",
+        "note": "Executed US award modification concerns Kingston process development and Louisiana Enhanced Machine A. It does not establish execution or payment of this Canadian package or construction/operation of its proposed Canadian commercial facility."
       }
     ],
-    "notes": null
+    "notes": "Lifecycle review on 2 October 2026: the 26 August 2026 MD&A states there was no definitive agreement for either Canadian component as of that filing. Reviewed later sources did not establish execution or disbursement of this funding, so the original conditional decision is retained. The proposed Canadian commercial facility is distinct from the operating Kingston commercialization/demonstration facility, its earlier CMRDD contribution agreement, the US-funded development program and the Louisiana commercial facility.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-ucore-nrcan",
@@ -1867,7 +2055,7 @@
         "note": null
       }
     ],
-    "instrument": "unspecified",
+    "instrument": "grant",
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
@@ -1916,14 +2104,20 @@
         "note": "Part of a \"conditionally approved investment\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "note": "Proposed first commercial samarium/gadolinium processing facility in Kingston. Existing demonstration-plant operations and Louisiana commercial-facility development are distinct projects; no later physical stage for this proposed Canadian commercial facility was established in the reviewed sources."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
       {
         "sourceId": "src-nrcan-g7-cmpa-2025",
         "supports": [
-          "instrument",
           "value_role",
           "capital_source",
           "amount",
@@ -1947,9 +2141,50 @@
         "evidence": "ambiguous",
         "locator": "Ucore paragraph",
         "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and contribution-agreement conditions",
+        "note": "Conditional funding for a proposed Canadian commercial facility, subject to due diligence and execution of a contribution agreement."
+      },
+      {
+        "sourceId": "src-ucore-mda-q2-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Funding for a Samarium and Gadolinium Facility",
+        "note": "The 26 August 2026 MD&A explicitly states that neither Canadian definitive agreement exists as of its date; demonstration and Louisiana work are described separately."
+      },
+      {
+        "sourceId": "src-ucore-us-ota-modification-20260914",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and program scope",
+        "note": "Executed US award modification concerns Kingston process development and Louisiana Enhanced Machine A. It does not establish execution or payment of this Canadian package or construction/operation of its proposed Canadian commercial facility."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "instrument"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening funding paragraph",
+        "note": "NRCan component is expressly a non-repayable contribution, coded as grant. FedDev and the aggregate package are not assigned that instrument."
       }
     ],
-    "notes": null
+    "notes": "Lifecycle review on 2 October 2026: the 26 August 2026 MD&A states there was no definitive agreement for either Canadian component as of that filing. Reviewed later sources did not establish execution or disbursement of this funding, so the original conditional decision is retained. The proposed Canadian commercial facility is distinct from the operating Kingston commercialization/demonstration facility, its earlier CMRDD contribution agreement, the US-funded development program and the Louisiana commercial facility.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-ucore-package",
@@ -2004,7 +2239,14 @@
         "note": "\"conditionally approved\"; recorded as decided and not yet binding, like the OSC conditional loan commitments."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "note": "Proposed first commercial samarium/gadolinium processing facility in Kingston. Existing demonstration-plant operations and Louisiana commercial-facility development are distinct projects; no later physical stage for this proposed Canadian commercial facility was established in the reviewed sources."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2034,9 +2276,41 @@
         "evidence": "ambiguous",
         "locator": "Ucore paragraph",
         "note": "Refining samarium and gadolinium with RapidSX separation technology, coded as separation and refining."
+      },
+      {
+        "sourceId": "src-ucore-canada-conditional-20251031",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and contribution-agreement conditions",
+        "note": "Conditional funding for a proposed Canadian commercial facility, subject to due diligence and execution of a contribution agreement."
+      },
+      {
+        "sourceId": "src-ucore-mda-q2-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Government of Canada Funding for a Samarium and Gadolinium Facility",
+        "note": "The 26 August 2026 MD&A explicitly states that neither Canadian definitive agreement exists as of its date; demonstration and Louisiana work are described separately."
+      },
+      {
+        "sourceId": "src-ucore-us-ota-modification-20260914",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and program scope",
+        "note": "Executed US award modification concerns Kingston process development and Louisiana Enhanced Machine A. It does not establish execution or payment of this Canadian package or construction/operation of its proposed Canadian commercial facility."
       }
     ],
-    "notes": "The package total; its NRCan and FedDev Ontario parts are recorded as parts of it. The instrument is not named. NRCan's CMRDD programme page separately lists a 2023 award of $4,275,848 to Ucore's RapidSX demonstration plant in Kingston, which is not recorded here."
+    "notes": "The package total; its NRCan and FedDev Ontario parts remain recorded as parts of it. NRCan is identified as a non-repayable contribution; the package instrument is not fully specified. Lifecycle review on 2 October 2026: the 26 August 2026 MD&A states there was no definitive agreement for either Canadian component as of that filing. Reviewed later sources did not establish execution or disbursement of this funding, so the original conditional decision is retained. The proposed Canadian commercial facility is distinct from the operating Kingston commercialization/demonstration facility, its earlier CMRDD contribution agreement, the US-funded development program and the Louisiana commercial facility.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-g7-2025-vianode-edc-letter-of-interest",
@@ -2281,7 +2555,14 @@
         "note": "Announced at PDAC as part of \"up to $165.2 million for 22 Canadian projects\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "commissioning",
+        "date": "2026-08-11",
+        "sourceId": "src-ggt-mississauga-demo-commissioning-20260811",
+        "note": "Green Graphite Technologies' official post, dated 11 August 2026 by LinkedIn's page metadata, says its Mississauga graphite purification demonstration facility is entering the final stages of commissioning. The Mississauga facility and graphite-purification process correspond to the Regolith project record; the post does not name the NRCan EIP award, disclose grant payment or establish commercial operation, so this is not coded as operational."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2310,9 +2591,34 @@
         "evidence": "ambiguous",
         "locator": "Energy Innovation Program: Green Graphite Technologies entry",
         "note": "Upgrading graphite for lithium-ion batteries, read as processing."
+      },
+      {
+        "sourceId": "src-nrcan-regolith-eip-2025",
+        "supports": [
+          "amount",
+          "provider",
+          "recipient",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Project profile: Status, Agreement Value, Project Total, Lead Proponent and Project Objectives",
+        "note": "The current NRCan EIP profile names the project, Green Graphite Technologies, its C$4,750,000 agreement value and a C$12,262,850 project total. It lists the project as active but does not state agreement execution, disbursement or a payment date; the project total is not recoded as a public commitment or share."
+      },
+      {
+        "sourceId": "src-ggt-mississauga-demo-commissioning-20260811",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening sentence",
+        "note": "The recipient's official post explicitly places its Mississauga graphite-purification demonstration facility in final-stage commissioning. The post does not use the NRCan project title or identify grant funding, so no payment or commercial-operation status is inferred."
       }
     ],
-    "notes": null
+    "notes": "NRCan's 3 March 2026 announcement records the C$4,750,000 EIP award as announced. Its current project profile lists the project as Active and gives a C$12,262,850 project total, but does not disclose a signed agreement date, disbursement or payment. On 11 August 2026, Green Graphite Technologies said its Mississauga graphite-purification demonstration facility was entering the final stages of commissioning. The location and process match the Regolith project record; the company post does not name the EIP award, so physical status is limited to commissioning and is not treated as grant payment, commercial operation or completion.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-ca-pdac-2026-nb-granitoids-cmgd",
@@ -2626,7 +2932,14 @@
         "note": "\"conditionally approved, pending final due diligence\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "feasibility",
+        "date": "2026-07-13",
+        "sourceId": "src-defense-metals-wicheeda-update-20260713",
+        "note": "The linked Wicheeda mine is undergoing feasibility work, with spring drilling completed and flotation pilot testing ongoing. This does not establish commencement or completion of the separately funded transmission-line and road-design deliverables; the date is the reporting date, not a stated start date."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2655,9 +2968,41 @@
         "evidence": "ambiguous",
         "locator": "First and Last Mile Fund: Wicheeda entry",
         "note": "Power and road infrastructure for a mine site, coded to mining."
+      },
+      {
+        "sourceId": "src-defense-metals-wicheeda-flmf-20260304",
+        "supports": [
+          "status",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Pages 1–2: conditional approval and project scope",
+        "note": "The infrastructure award remains subject to final due diligence; the 2026–2028 work schedule is prospective."
+      },
+      {
+        "sourceId": "src-defense-metals-wicheeda-update-20260713",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Pages 1–2: ongoing feasibility, pilot testing and conditional funding",
+        "note": "Supports feasibility of the linked mine and continued conditional wording for infrastructure funding."
+      },
+      {
+        "sourceId": "src-defense-metals-wicheeda-proposal-20260812",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1: invitation to submit a full project proposal",
+        "note": "The separate processing-feasibility application is explicitly not a funding commitment and does not replace or advance this infrastructure award."
       }
     ],
-    "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund."
+    "notes": "A 60-km transmission line to the mine site and the design of road upgrades; the fund subsumed the Critical Minerals Infrastructure Fund. Lifecycle review on 2 October 2026: the July issuer update still describes the infrastructure funding as conditional. Reviewed primary sources did not establish execution or payment of this specific award. Feasibility describes the linked mine, not verified delivery of the funded infrastructure work. The August invitation concerning a separate processing-feasibility application is not a funding commitment and is not substituted for this award.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": "2026-10-02"
+    }
   },
   {
     "id": "fin-ca-trail-cgf-2026-indication",
@@ -3429,6 +3774,18 @@
         "date": "2023-03-07",
         "sourceId": "src-jogmec-lynas",
         "note": null
+      },
+      {
+        "status": "contracted",
+        "date": "2023-03-07",
+        "sourceId": "src-lynas-asx-20230307-jare-agreements",
+        "note": "Lynas' 7 March 2023 ASX announcement states: \"The agreements were signed today at a signing ceremony in Tokyo, Japan\". The share subscription and cash receipt follow signing."
+      },
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "note": "The quarterly filing confirms receipt of AUD200 million cash through an ordinary-share subscription during the March quarter; no exact transfer day is stated."
       }
     ],
     "implementationStatusHistory": [],
@@ -3451,9 +3808,31 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
+      },
+      {
+        "sourceId": "src-lynas-asx-20230307-jare-agreements",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph (signing of new agreements) and closing paragraphs (\"The agreements were signed today at a signing ceremony in Tokyo, Japan\")",
+        "note": "Lynas' own announcement dated 7 March 2023 establishes execution that day. It does not state the subscription or cash-receipt day."
+      },
+      {
+        "sourceId": "src-lynas-q3-2023-jare-cash",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 10, JARE Support for Lynas' Growth; page 11, Cash Position",
+        "note": "The filing, referring to the 7 March 2023 announcement, reports the signed agreements and AUD200 million cash contributed through an ordinary-share subscription, and records the AUD200 million JARE proceeds in the March-quarter cash-flow table. It supports the disbursed status; the signing day rests on the announcement above."
       }
     ],
-    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split."
+    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split. The cash receipt is confirmed by Lynas' March-quarter 2023 filing. A later HRE production milestone at Lynas Malaysia is not treated as completion of this broader, unallocated light- and heavy-rare-earth growth plan.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-02",
+      "implementationStatusCheckedAt": null
+    }
   },
   {
     "id": "fin-jp-jare-lynas-2023-hre-offtake",
@@ -3583,20 +3962,50 @@
         "note": "Listed among JOGMEC's grant decisions (交付決定事業) for 令和7年度; the decision date is not stated."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-04-09",
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "note": "The recipient announced a new plant and related reduction/carburisation equipment, with a site secured about 1 km from its Toyama Works. The release states planned construction and a first-half FY2028 operating target; it does not report construction commencement or current operation."
+      }
+    ],
     "terms": [
       {
         "kind": "other",
         "value": "50",
-        "qualifier": "exact",
+        "qualifier": "up_to",
         "currency": null,
         "unit": "% of the applicant's cost of the undertaking",
-        "asStated": "当該取組に係る申請者負担額の1／2の助成金",
+        "asStated": "申請者負担額の1／2を上限",
         "sourceId": "src-jogmec-critical-minerals-grants",
-        "note": "The programme-wide rate; the list does not restate it per plan."
+        "note": "Programme-wide maximum grant rate, as stated in JOGMEC's 助成率 table. It is not an exact subsidy-to-total-project-cost ratio for this plan."
       }
     ],
-    "outcomes": [],
+    "outcomes": [
+      {
+        "metric": "target_date",
+        "value": null,
+        "qualifier": null,
+        "unit": null,
+        "targetDate": "2028",
+        "asStated": "2028年度上期の稼働開始を目指し",
+        "statedBy": "recipient",
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "note": "Target for the first half of FY2028. The year-only index retains the year; fiscal-period precision remains in asStated and this note. No exact operating date or achieved operation is reported."
+      },
+      {
+        "metric": "other",
+        "value": "1.5",
+        "qualifier": "approximately",
+        "unit": "times current manufacturing capacity",
+        "targetDate": null,
+        "asStated": "製造能力を約1.5倍に引き上げます",
+        "statedBy": "recipient",
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "note": "Recipient's planned capacity expansion for tungsten and tungsten-carbide powders, associated with the new plant and related equipment. This is a stated target, not measured output or the new plant's standalone annual tonnage."
+      }
+    ],
     "evidence": [
       {
         "sourceId": "src-meti-critical-minerals-certified-plans",
@@ -3635,10 +4044,25 @@
         ],
         "evidence": "explicit",
         "locator": "Programme description; 交付決定事業",
-        "note": null
+        "note": "Rechecked on 3 October 2026: Allied Material remains listed among grant decisions (交付決定事業), approximately JPY 7.5 billion, in FY2025. No calendar decision date or payment amount is stated. The 助成率 table states a ceiling of half the applicant's undertaking costs."
+      },
+      {
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "supports": [
+          "project",
+          "status",
+          "outcomes"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening and new-site paragraphs",
+        "note": "Recipient identifies the same METI-certified tungsten reduction/carburisation initiative and announces the plant and capacity targets. Planned construction is not proof that construction has started."
       }
     ],
-    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+    "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000. Lifecycle review on 3 October 2026 retains decided status and an unknown grant-decision date. The 9 April recipient release adds an announced physical project near Toyama Works and a first-half FY2028 operating target. Its approximately JPY 15.9 billion investment plan is separate from the approximately JPY 7.5 billion public grant. The reviewed sources do not establish grant cash receipt, construction commencement or operation.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-jp-jogmec-japan-new-metals-tungsten-grant",
@@ -3860,9 +4284,33 @@
         "evidence": "explicit",
         "locator": "Title",
         "note": "The Japanese title describes the SPC's business as レアアース探査・開発事業 (rare earth exploration and development)."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-20260730",
+        "supports": [
+          "amount",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, investment paragraphs; page 2, Advancing a Strategic Heavy Rare Earth Supply Chain",
+        "note": "The project company corroborates JOGMEC's up-to-CAD-47.668-million SPC investment and the initial investment on 23 July, without disclosing the paid amount. Its completed CAD 23 million earn-in and approximately CAD 11 million expanded DFS budget are distinct figures, not payments measured against this equity commitment. The DFS includes pilot-scale metallurgical work, separation testwork, engineering, permitting and mine planning; it is not a construction or operating milestone."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-update-20260831",
+        "supports": [
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening transaction-update paragraphs",
+        "note": "The underlying project-interest transaction still requires shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. These conditions concern implementation of that transaction and do not reverse JOGMEC's disclosed initial capitalization of TJ."
       }
     ],
-    "notes": "The amount is in Canadian dollars in both the Japanese and English releases; the yen figure is an approximation given in the release (約54.6億円 in the Japanese text, \"approximately 5.5 billion yen\" in English) and is not recorded as a separate amount."
+    "notes": "The amount is in Canadian dollars in both the Japanese and English releases; the yen figure is an approximation given in the release (約54.6億円 in the Japanese text, \"approximately 5.5 billion yen\" in English) and is not recorded as a separate amount. Lifecycle review on 3 October 2026 retains partially_disbursed financial status: the initial SPC investment occurred on 23 July, but the initial investment amount is not disclosed. Namibia Critical Metals' completed C$23 million earn-in and approximately C$11 million expanded DFS budget are separate from JOGMEC's up-to-C$47.668 million SPC equity commitment; neither is coded as a paid amount against it. The recipient's 30 July release confirms ongoing DFS execution, including pilot-scale work and engineering, while its 31 August update says the underlying project-interest transaction still requires shareholder consent and regulatory approvals. Those transaction conditions do not negate the initial SPC investment. Feasibility remains the physical status, with its actual start date unknown; the reviewed sources do not establish commercial mine construction, operation or a completed final investment decision. The FY2026 commercialization decision remains a target.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-jp-jogmec-santoku-rare-earth-grant",
@@ -6679,7 +7127,14 @@
         "note": "\"The Commitment Letter expired undrawn on its own terms on August 26, 2025, as it was reduced on a dollar-for-dollar basis upon the Offering ... and the Company's execution of the Revolving Credit Facility.\""
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q2",
+        "note": "Note 6 reports construction underway at the Northlake site purchased in April 2026. The actual construction start date is not stated. This is the linked physical project's status, independent of the bank commitment letter's expiry."
+      }
+    ],
     "terms": [
       {
         "kind": "other",
@@ -6720,9 +7175,31 @@
         "evidence": "explicit",
         "locator": "Note 3 (Public-Private Partnership), Commitment Letter for Facility Construction",
         "note": null
+      },
+      {
+        "sourceId": "src-mp-q2-results-20260806",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "CEO comments in second-quarter 2026 results",
+        "note": "Reports accelerated construction at 10X. This corroborates the project's construction status; it does not date construction commencement or establish a financing draw."
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 1; Note 6, Property, Plant and Equipment; MD&A, Magnetics segment",
+        "note": "Construction of the linked 10X Facility is underway. This does not revive or demonstrate a draw under the expired 2025 bank commitment letter."
       }
     ],
-    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing."
+    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing. Lifecycle review on 3 October 2026: the Q3 2025 filing still supports the letter's undrawn expiry; the Q2 2026 filing and 6 August results report construction at the linked 10X project. The subsequent equity offering and revolving credit facility are separate financing, not disbursements or repayment under this historical commitment.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-us-dod-mp-2025-company-cash",
@@ -6973,11 +7450,24 @@
           "status"
         ],
         "evidence": "explicit",
-        "locator": "Note on property, plant and equipment; Note 1",
-        "note": null
+        "locator": "Note 1; Note 6, Property, Plant and Equipment; Note 9, Operating Leases; Note 13, Other Current Assets; MD&A, DoW Offtake Agreement and Magnetics segment",
+        "note": "Construction is underway and the filing continues to describe the executed DoW offtake. The $6.0 million contract liability and $3.892 million reimbursable-cost receivable are accounting balances, not a separately disclosed cumulative cash-disbursement amount for this offtake."
+      },
+      {
+        "sourceId": "src-mp-q2-results-20260806",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "CEO comments in second-quarter 2026 results",
+        "note": "Reports accelerated construction at 10X. This corroborates the project's construction status; it does not date construction commencement or establish a financing draw."
       }
     ],
-    "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations."
+    "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations. Lifecycle review on 3 October 2026 retains contracted status and construction with an unknown commencement date. The Q2 2026 filing recognizes pre-production reimbursable costs under the offtake but does not separately quantify cumulative cash paid under it; no disbursement status or total commitment amount is inferred from deferred balances or receivables. Price Protection Agreement receipts, Independence production and Apple prepayments concern separate instruments or facilities. Commissioning in 2028 remains a target.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-us-dod-mp-2025-preferred-equity",

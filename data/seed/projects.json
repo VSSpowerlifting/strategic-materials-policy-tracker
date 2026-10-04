@@ -332,9 +332,31 @@
         "evidence": "ambiguous",
         "locator": "Energy Innovation Program: Green Graphite Technologies entry",
         "note": "\"upgrade near-surface graphite for use in lithium-ion batteries\", read as processing."
+      },
+      {
+        "sourceId": "src-nrcan-regolith-eip-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Project profile: Lead Proponent, Partners, Location and Project Objectives",
+        "note": "The current NRCan EIP profile confirms the project name, Green Graphite Technologies as lead proponent, Weaver Energy as partner, BC/ON locations and the high-purity graphite processing objective."
+      },
+      {
+        "sourceId": "src-ggt-mississauga-demo-commissioning-20260811",
+        "supports": [
+          "location"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Opening sentence",
+        "note": "GGT's official post identifies a Mississauga graphite-purification demonstration facility entering final-stage commissioning. This corroborates activity at the project's recorded Mississauga location, but the post does not use the Regolith project title."
       }
     ],
-    "notes": null
+    "notes": "The current NRCan EIP profile lists the project as Active, with a C$4,750,000 agreement value and C$12,262,850 project total; it gives no payment or construction date. GGT's 11 August 2026 official post says its Mississauga graphite-purification demonstration facility was entering final-stage commissioning. The post does not identify the NRCan award by name, so the linkage is recorded with that limitation; no commercial operation or project completion is inferred. Review on 3 October 2026 found no later project-specific primary disclosure."
   },
   {
     "id": "prj-ca-nmg-matawinie",
@@ -1335,7 +1357,13 @@
     "sponsorOrgIds": [
       "org-allied-material"
     ],
-    "locations": [],
+    "locations": [
+      {
+        "countryCode": "JP",
+        "subnational": "Toyama",
+        "asStated": "富山製作所から約1kmの場所"
+      }
+    ],
     "stages": [
       "processing"
     ],
@@ -1364,9 +1392,18 @@
         "evidence": "ambiguous",
         "locator": "Section 4, plan ２０２５重要鉱物第２号－１",
         "note": "還元及び炭化 (reduction and carburisation) into tungsten and tungsten carbide powder is read as processing."
+      },
+      {
+        "sourceId": "src-allied-tungsten-expansion-20260409",
+        "supports": [
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, new-site paragraph",
+        "note": "A site of approximately 40,000 square metres was secured about 1 km from the recipient's Toyama Works for the new powder plant."
       }
     ],
-    "notes": "The list does not say where the facilities are."
+    "notes": "METI's certified-plan list does not state a location. The recipient's 9 April 2026 release identifies a new site about 1 km from Toyama Works. Site secured does not establish construction commencement, ownership of the land, or operation."
   },
   {
     "id": "prj-jp-japan-new-metals-tungsten",
@@ -1691,9 +1728,29 @@
         "evidence": "explicit",
         "locator": "Title",
         "note": "レアアース探査・開発事業 (rare earth exploration and development)."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-20260730",
+        "supports": [
+          "name",
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening transaction and investment paragraphs",
+        "note": "The project company identifies Lofdal, JOGMEC, Toyota Tsusho and the newly established TJNREC. Its 50% participating-interest transfer is expressly subject to prior shareholder and TSX Venture Exchange approval; the release reports ongoing definitive-feasibility work rather than construction."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-update-20260831",
+        "supports": [
+          "name",
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening transaction-update paragraphs",
+        "note": "The named partners continue to seek shareholder consent and regulatory approvals to implement the project-interest transaction; no completed transfer is asserted."
       }
     ],
-    "notes": null
+    "notes": "The 30 July 2026 recipient release reports ongoing definitive-feasibility execution, including pilot-scale metallurgy, mineral separation testwork, engineering, environmental permitting and mine development planning. The original DFS start date is not stated. The 31 August 2026 update says implementation of the underlying project-interest transaction still requires shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. A completed earn-in expenditure requirement is distinct from completion of that conditional interest transfer, and from JOGMEC's initial investment in TJ. Review on 3 October 2026 did not establish commercial mine construction, operation or a completed final investment decision."
   },
   {
     "id": "prj-no-greenroc-norgraph",
