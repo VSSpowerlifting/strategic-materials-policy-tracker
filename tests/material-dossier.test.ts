@@ -134,6 +134,22 @@ test("sources: 28 for tungsten, 32 if registry evidence were counted, and an unr
   assert.ok(sourcesCitedByMaterial("tungsten", fixture, { includeRegistry: true }).some((c) => c.source.id === unrelated.id));
 });
 
+test("Lofdal's transaction disclosures are cited once per capital row and project", () => {
+  for (const materialId of ["rare-earth-elements", "dysprosium", "terbium"]) {
+    for (const sourceId of ["src-ncmi-lofdal-jv-20260730", "src-ncmi-lofdal-jv-update-20260831"]) {
+      const cited = sourcesCitedByMaterial(materialId).find(({ source }) => source.id === sourceId);
+      assert.ok(cited, `${sourceId} is present in the ${materialId} dossier`);
+      assert.deepEqual(
+        cited.citedBy.map(({ kind, id }) => ({ kind, id })),
+        [
+          { kind: "capital_row", id: "fin-jp-jogmec-lofdal-2026-equity" },
+          { kind: "project", id: "prj-na-lofdal" },
+        ],
+      );
+    }
+  }
+});
+
 // --- AC-4: dates ----------------------------------------------------------------------------------
 
 test("V1: the Allied Material grant is decided with no date, and the event date is never substituted", () => {

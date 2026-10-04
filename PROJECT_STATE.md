@@ -1,5 +1,61 @@
 # Project state
 
+## 2026-10-03: Lofdal lifecycle refresh (draft)
+
+Scoped continuation of Ben's lifecycle sweep on `data/lifecycle-refresh-lofdal-20261003`,
+based on `main` at `0b7f336d9e592bdb9e4d002e405beb6629481042`.
+The review date uses Ben's local date, 3 October, despite 4 October UTC.
+This batch remains a draft for review; no merge or production publish.
+
+- `fin-jp-jogmec-lofdal-2026-equity` retains its up-to-CAD-47.668-million
+  public SPC equity commitment and both financial history entries: decided,
+  actual decision date unknown; partially disbursed on 23 July 2026.
+  JOGMEC's original Japanese release and official English translation were
+  re-read in full and corroborated against the recipient's 30 July original
+  four-page PDF. The amount of the initial SPC investment is not disclosed.
+- The recipient's completed C$23 million earn-in and approximately C$11 million
+  expanded DFS budget are distinct from the newer SPC equity commitment.
+  Neither is recoded as cash paid against that commitment, and no new financial
+  row or conversion is introduced.
+- The recipient's 31 August original three-page PDF says the underlying
+  project-interest transaction still requires shareholder consent and regulatory
+  approvals, including final TSX Venture Exchange approval. These conditions do
+  not undo JOGMEC's initial SPC investment or establish a completed interest
+  transfer. They are contextual evidence, not terms of the SPC equity row.
+- The physical history remains feasibility with the actual original start date
+  unknown. Ongoing DFS work includes pilot-scale metallurgical programs,
+  separation testwork, engineering, permitting and mine planning. The full
+  20 July original four-page release was also reviewed. None of these sources
+  establishes commercial mine construction, operation or an achieved FID.
+  The FY2026 commercialization decision remains a target.
+- Both independent review clocks are 3 October 2026. The current recipient
+  news index lists 31 August as its latest release. The original project page,
+  government releases and targeted later-source searches were reviewed.
+  Absence of a later construction disclosure is not proof that none occurred.
+- Add two company-hosted primary PDFs, refresh the two existing JOGMEC source
+  access dates, and evidence the project notes. Framing, amounts, histories,
+  registry geography, stages and taxonomy are unchanged.
+- Reuse the exact three-line nested-source traversal fix already proposed in
+  separate PR #40, without including its Allied Material data or tests.
+  A new dossier regression checks both company sources in all three covered
+  material dossiers, once per capital row and project. Keep the shared fix
+  once on integration and recalculate combined source-count snapshots.
+
+Local checks: data and capital/control validation pass (61 events, 123 sources,
+85 financial commitments, 57 projects; 13 existing warnings); all 41 focused
+lifecycle/dossier tests pass. The lifecycle regression failed on the original
+row; the citation regression failed on the original helper after adding the new
+data. Full CI and Vercel checks are pending at this checkpoint; final results
+will be recorded in the draft PR description.
+
+Standalone queue as of 3 October: 53 bundles, P0 0 / P1 25 / P2 16 / P3 12
+(main: 0 / 26 / 16 / 11). Lofdal moves P1 to P3 after review, with no inference
+of full payment, transfer completion or construction. Separate drafts #36–#40
+remain open and are not included; their current heads were checked.
+Next scoped research target: Green Graphite Technologies' Regolith project
+(`prj-ca-ggt-regolith-graphite`). Broader Strategic Concern to Industrial
+Response analysis remains deferred until lifecycle coverage is ready.
+
 ## 2026-10-03: animated title integration (PR #22)
 
 The title screen was previously deployed from `codex/animated-title` at `716953f`

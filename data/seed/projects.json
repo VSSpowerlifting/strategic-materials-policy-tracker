@@ -1691,9 +1691,29 @@
         "evidence": "explicit",
         "locator": "Title",
         "note": "レアアース探査・開発事業 (rare earth exploration and development)."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-20260730",
+        "supports": [
+          "name",
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening transaction and investment paragraphs",
+        "note": "The project company identifies Lofdal, JOGMEC, Toyota Tsusho and the newly established TJNREC. Its 50% participating-interest transfer is expressly subject to prior shareholder and TSX Venture Exchange approval; the release reports ongoing definitive-feasibility work rather than construction."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-update-20260831",
+        "supports": [
+          "name",
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening transaction-update paragraphs",
+        "note": "The named partners continue to seek shareholder consent and regulatory approvals to implement the project-interest transaction; no completed transfer is asserted."
       }
     ],
-    "notes": null
+    "notes": "The 30 July 2026 recipient release reports ongoing definitive-feasibility execution, including pilot-scale metallurgy, mineral separation testwork, engineering, environmental permitting and mine development planning. The original DFS start date is not stated. The 31 August 2026 update says implementation of the underlying project-interest transaction still requires shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. A completed earn-in expenditure requirement is distinct from completion of that conditional interest transfer, and from JOGMEC's initial investment in TJ. Review on 3 October 2026 did not establish commercial mine construction, operation or a completed final investment decision."
   },
   {
     "id": "prj-no-greenroc-norgraph",

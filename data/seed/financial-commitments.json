@@ -3860,9 +3860,33 @@
         "evidence": "explicit",
         "locator": "Title",
         "note": "The Japanese title describes the SPC's business as レアアース探査・開発事業 (rare earth exploration and development)."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-20260730",
+        "supports": [
+          "amount",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, investment paragraphs; page 2, Advancing a Strategic Heavy Rare Earth Supply Chain",
+        "note": "The project company corroborates JOGMEC's up-to-CAD-47.668-million SPC investment and the initial investment on 23 July, without disclosing the paid amount. Its completed CAD 23 million earn-in and approximately CAD 11 million expanded DFS budget are distinct figures, not payments measured against this equity commitment. The DFS includes pilot-scale metallurgical work, separation testwork, engineering, permitting and mine planning; it is not a construction or operating milestone."
+      },
+      {
+        "sourceId": "src-ncmi-lofdal-jv-update-20260831",
+        "supports": [
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 1, opening transaction-update paragraphs",
+        "note": "The underlying project-interest transaction still requires shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. These conditions concern implementation of that transaction and do not reverse JOGMEC's disclosed initial capitalization of TJ."
       }
     ],
-    "notes": "The amount is in Canadian dollars in both the Japanese and English releases; the yen figure is an approximation given in the release (約54.6億円 in the Japanese text, \"approximately 5.5 billion yen\" in English) and is not recorded as a separate amount."
+    "notes": "The amount is in Canadian dollars in both the Japanese and English releases; the yen figure is an approximation given in the release (約54.6億円 in the Japanese text, \"approximately 5.5 billion yen\" in English) and is not recorded as a separate amount. Lifecycle review on 3 October 2026 retains partially_disbursed financial status: the initial SPC investment occurred on 23 July, but the initial investment amount is not disclosed. Namibia Critical Metals' completed C$23 million earn-in and approximately C$11 million expanded DFS budget are separate from JOGMEC's up-to-C$47.668 million SPC equity commitment; neither is coded as a paid amount against it. The recipient's 30 July release confirms ongoing DFS execution, including pilot-scale work and engineering, while its 31 August update says the underlying project-interest transaction still requires shareholder consent and regulatory approvals. Those transaction conditions do not negate the initial SPC investment. Feasibility remains the physical status, with its actual start date unknown; the reviewed sources do not establish commercial mine construction, operation or a completed final investment decision. The FY2026 commercialization decision remains a target.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-jp-jogmec-santoku-rare-earth-grant",

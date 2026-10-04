@@ -14,6 +14,34 @@ import {
 
 const AS_OF = "2026-10-02";
 
+test("Lofdal's initial SPC investment, pending project transfer and feasibility work stay separate", () => {
+  const commitment = getFinancialCommitmentById("fin-jp-jogmec-lofdal-2026-equity")!;
+  const project = getProjectById("prj-na-lofdal")!;
+  assert.deepEqual(
+    commitment.financialStatusHistory.map(({ status, date }) => ({ status, date })),
+    [
+      { status: "decided", date: null },
+      { status: "partially_disbursed", date: "2026-07-23" },
+    ],
+  );
+  assert.equal(commitment.amount?.value, "47668000");
+  assert.equal(commitment.amount?.currency, "CAD");
+  assert.equal(commitment.amount?.qualifier, "up_to");
+  assert.equal(commitment.implementationStatusHistory.at(-1)?.status, "feasibility");
+  assert.equal(commitment.implementationStatusHistory.at(-1)?.date, null);
+  assert.match(project.notes!, /shareholder consent.*regulatory approvals/);
+  assert.match(commitment.notes!, /initial investment amount is not disclosed/);
+  assert.match(commitment.notes!, /C\$23 million earn-in/);
+  assert.equal(commitment.terms.length, 0, "underlying JV conditions are not terms of the SPC equity row");
+  const reviewedAt = "2026-10-03";
+  const q = deriveLifecycleRefreshQueue([commitment], [project], reviewedAt);
+  assert.equal(q.bundles[0].priority, "P3");
+  assert.equal(q.rows[0].financial.referenceDate, reviewedAt);
+  assert.equal(q.rows[0].implementation.referenceDate, reviewedAt);
+  assert.equal(q.rows[0].financial.statusDate, "2026-07-23");
+  assert.equal(q.rows[0].implementation.statusDate, null);
+});
+
 function queue() {
   return deriveLifecycleRefreshQueue(
     getAllFinancialCommitments(),

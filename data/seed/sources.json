@@ -60,6 +60,30 @@
     "notes": "Department of the Interior press release announcing the final 2025 list; source of the attributed Secretary Burgum quotation."
   },
   {
+    "id": "src-ncmi-lofdal-jv-20260730",
+    "title": "Namibia Critical Metals Announces Completion of Japan’s C$23 Million Earn-In and Formation of Strategic Joint Venture Company for the Lofdal Heavy Rare Earth Project",
+    "publisher": "Namibia Critical Metals Inc.",
+    "url": "https://www.namibiacriticalmetals.com/wp-content/uploads/2026/07/260730-TJNRE-Earn-In-Completion-SEDAR.pdf",
+    "language": "en",
+    "datePublished": "2026-07-30",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full four-page company-hosted original PDF read on 3 October 2026. It distinguishes the completed C$23 million earn-in, the approximately C$11 million expanded DFS budget, and JOGMEC's up-to-C$47.668 million investment in TJNREC with an initial investment on 23 July. It does not quantify the initial SPC investment. Transfer of the 50% project interest is subject to prior shareholder and TSX Venture Exchange approvals. Ongoing pilot-scale work, engineering, permitting and mine planning remain definitive-feasibility activities; pre-FID work is not commercial construction or operation."
+  },
+  {
+    "id": "src-ncmi-lofdal-jv-update-20260831",
+    "title": "Namibia Critical Metals Provides Update on Lofdal Joint Venture Transaction",
+    "publisher": "Namibia Critical Metals Inc.",
+    "url": "https://www.namibiacriticalmetals.com/wp-content/uploads/2026/09/260831-JV-Transaction-Update-SEDAR.pdf",
+    "language": "en",
+    "datePublished": "2026-08-31",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full three-page company-hosted original PDF read on 3 October 2026. The document is dated 31 August despite its September upload directory. The opening paragraphs say the project-interest transaction still requires shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. Its completed C$23 million expenditure requirement does not establish that the conditional transfer is complete or disclose payments under JOGMEC's newer SPC equity commitment."
+  },
+  {
     "id": "src-usgs-news-2025",
     "title": "Interior Department releases final 2025 List of Critical Minerals",
     "publisher": "U.S. Geological Survey",
@@ -438,10 +462,10 @@
     "url": "https://www.jogmec.go.jp/news/release/release_01320.html",
     "language": "ja",
     "datePublished": "2026-07-30",
-    "dateAccessed": "2026-08-12",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "Japanese original of the joint JOGMEC / Toyota Tsusho release. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Source of the verbatim Japanese framing anchor and of the 最大47.668百万カナダドル / 約54.6億円 figure. The 安定供給 sentence coded as the framing anchor is JOGMEC own; the サプライチェーン強靭化 sentence in the same release is Toyota Tsusho and is not coded."
+    "notes": "Japanese original of the joint JOGMEC / Toyota Tsusho release. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Source of the verbatim Japanese framing anchor and of the 最大47.668百万カナダドル / 約54.6億円 figure. The 安定供給 sentence coded as the framing anchor is JOGMEC own; the サプライチェーン強靭化 sentence in the same release is Toyota Tsusho and is not coded. Rechecked in full on 3 October 2026. The initial SPC investment remains explicitly dated 23 July 2026, but its amount is not disclosed; the up-to-CAD-47.668-million figure is the investment ceiling. The FY2026 commercialization decision is a target, not an achieved FID or construction milestone."
   },
   {
     "id": "src-jogmec-lofdal-en",
@@ -450,10 +474,10 @@
     "url": "https://www.jogmec.go.jp/english/news/release/release_00451.html",
     "language": "en",
     "datePublished": "2026-07-30",
-    "dateAccessed": "2026-08-12",
+    "dateAccessed": "2026-10-03",
     "sourceType": "official",
     "confidence": "official_translation",
-    "notes": "JOGMEC own English edition of the same release — the issuing body official translation, which is why the framing anchor carries quoteEnSource official. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Two divergences from the Japanese are recorded: the yen figure is rounded to approximately 5.5 billion yen against 約54.6億円, and the English title says Heavy Rare Earth Development where the Japanese says レアアース探査・開発事業 (rare-earth exploration and development)."
+    "notes": "JOGMEC own English edition of the same release — the issuing body official translation, which is why the framing anchor carries quoteEnSource official. Read in full 2026-08-11 and re-read at promotion 2026-08-12. Two divergences from the Japanese are recorded: the yen figure is rounded to approximately 5.5 billion yen against 約54.6億円, and the English title says Heavy Rare Earth Development where the Japanese says レアアース探査・開発事業 (rare-earth exploration and development). Rechecked in full on 3 October 2026. The initial SPC investment remains explicitly dated 23 July 2026, but its amount is not disclosed; the up-to-CAD-47.668-million figure is the investment ceiling. The FY2026 commercialization decision is a target, not an achieved FID or construction milestone."
   },
   {
     "id": "src-fedreg-eo-14241",
