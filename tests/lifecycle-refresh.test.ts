@@ -384,6 +384,17 @@ test("Lynas equity cash receipt has no invented payment day or whole-plan comple
       { status: "disbursed", date: null },
     ],
   );
+  // The signing day comes from Lynas' own 7 March 2023 announcement ("signed today"), not
+  // from the quarterly report, which only says "As announced on 7 March 2023".
+  const [, contracted, disbursed] = commitment.financialStatusHistory;
+  assert.equal(contracted.sourceId, "src-lynas-asx-20230307-jare-agreements");
+  assert.match(contracted.note ?? "", /The agreements were signed today at a signing ceremony in Tokyo/);
+  assert.equal(disbursed.sourceId, "src-lynas-q3-2023-jare-cash");
+  assert.ok(
+    commitment.evidence.some(
+      (e) => e.sourceId === "src-lynas-asx-20230307-jare-agreements" && e.supports.includes("status"),
+    ),
+  );
   assert.deepEqual(commitment.implementationStatusHistory, []);
   assert.equal(commitment.lifecycleReview?.financialStatusCheckedAt, AS_OF);
   assert.equal(commitment.lifecycleReview?.implementationStatusCheckedAt, null);

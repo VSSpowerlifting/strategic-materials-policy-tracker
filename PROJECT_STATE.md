@@ -18,7 +18,7 @@ review of the integration notes below, and those check results.
 - Integrated heads: #36 Lynas JARE `a46105a`, #37 Matawinie `b8702f8`, #38 Wicheeda and Ucore `ebcb747`, #39 MP 10X
   `f1a1b8f`, #40 Allied tungsten `22c8a49`, #41 Lofdal `727bd5b`, #42 Regolith `52fe9b9` (full SHAs are in the PR list).
 - How it was merged: shared JSON by record id, never by replacing a seed file with a branch copy. No record id is touched
-  by more than one PR. The 13 commitments, 3 projects and 17 new sources were each checked against their PR head, and
+  by more than one PR. The 13 commitments, 3 projects and 18 new sources were each checked against their PR head, and
   every untouched record against `main`. Files stay id-sorted in canonical `JSON.stringify(x, null, 2)` form.
   Sources are appended in PR order, so #40's and #41's new sources sit at the end rather than where their PRs put them.
 - The nested-citation fix in `lib/material-dossier.ts` (a dangling `else` in `collectSourceIds`; see #40 below) is applied
@@ -37,14 +37,14 @@ review of the integration notes below, and those check results.
    corpus-only assertions had become vacuous. The addition first asserts the row is counted once its status is stated
    (a control), then re-runs `totalCommitments` on a fixture where that row's financial status is `not_stated` and asserts
    it lands in `statusNotStatedIds` and in no sum. This adds coverage; no existing assertion was changed.
-3. `data/seed/sources.json`: the 17 new sources are appended in PR order. #40's source was first in its PR and #41's
+3. `data/seed/sources.json`: the 18 new sources are appended in PR order. #40's source was first in its PR and #41's
    were mid-file, so both moved to the end. Registry order carries no meaning; ids and contents equal the PR heads.
 4. #38's `wicheeda()` test helper (strips the live review stamp so synthetic freshness cases stay independent of it) is
    byte-identical to #38's own; it is not a local change.
 
 **Validation on the combined tree** (`node --import tsx` for scripts; the `tsx` CLI cannot open its IPC socket here):
 
-- Data validation passes: 61 events, 138 sources, 85 commitments, 57 projects; the same 13 warnings as the baseline.
+- Data validation passes: 61 events, 139 sources, 85 commitments, 57 projects; the same 13 warnings as the baseline.
 - Final gate on this exact tree, run after the last edit to data and tests: `validate`, `typecheck`, `lint`, `test` (375 of
   375), `next build` (980 static pages) and `git diff --check` all exit 0.
 - Five new tests fail when the old `collectSourceIds` line is restored.
@@ -61,17 +61,17 @@ review of the integration notes below, and those check results.
 
   | Material | Before fix | Fix only | Combined |
   | --- | --- | --- | --- |
-  | dysprosium | 20 | 20 | 23 |
+  | dysprosium | 20 | 20 | 24 |
   | gallium | 34 | 35 | 35 |
   | graphite | 38 | 40 | 46 |
-  | rare-earth-elements | 63 | 68 | 77 |
+  | rare-earth-elements | 63 | 68 | 78 |
   | ndfeb-magnets | 30 | 33 | 34 |
-  | terbium | 21 | 21 | 24 |
+  | terbium | 21 | 21 | 25 |
   | tungsten | 28 | 28 | 29 |
 
   Antimony, germanium, neodymium and praseodymium are unchanged (39, 31, 18, 19). The fix alone moves gallium, graphite,
   rare-earth-elements and ndfeb-magnets on baseline data, which is wider than any one PR's scope. Every source gained on
-  top of that is one of the 17 new sources, and none is cited twice for the same record.
+  top of that is one of the 18 new sources, and none is cited twice for the same record.
 - Browser (dev server, not a production server): the six affected dossiers list exactly the expected sources, each new
   source once, with no horizontal scroll at 375 px (mobile emulation) or 1024 px (the pane's own width; 1280 px was not
   checked). Capital detail pages for the Lynas, Ucore,
@@ -106,11 +106,31 @@ deferred until the lifecycle sweep is complete.
 Each subsection keeps the caveats the drafts established. Financial status and physical implementation are independent
 throughout. Their standalone queue counts and "next target" lines are superseded by the combined queue above.
 
+#### 2026-10-03: pre-merge review corrections (PR #43)
+
+- **Lynas signing date.** The quarterly report does not itself date the signing; it says "As announced on 7 March 2023".
+  Lynas' 7 March 2023 announcement was read in full and expressly states "The agreements were signed today at a signing
+  ceremony in Tokyo, Japan", so `contracted` stays 2023-03-07 and now cites that announcement (new source
+  `src-lynas-asx-20230307-jare-agreements`; the copy read is the weblink.com.au mirror of the ASX filing). The `decided`
+  date, `disbursed` status with a null receipt day, amount and `evidence` supports are unchanged. The Lynas regression
+  asserts the contracted entry's source and quoted passage.
+- **Review provenance.** The earlier source review mixed full-document reads with summarised web output. Every changed
+  claim was re-read from the retrieved original (pypdf for PDFs; tag-stripped text for SEC, NRCan, JOGMEC, company and PM
+  pages) at the cited passage with surrounding text; the 10-Qs and MD&As were read at the cited notes and sections, not
+  end to end. One source was not retrievable: the MP second-quarter 2026 results page (HTTP 403); the MP rows are
+  supported by the 10-Q and 8-K without it. No other claim changed.
+- **Regolith post date.** The visible post shows only "1mo". The 11 August 2026 date is LinkedIn's own page metadata
+  (`datePublished` 2026-08-11T14:44:18Z) and agrees with the timestamp encoded in the activity ID; it is platform-stated,
+  not independently corroborated by a GGT release or other outlet. The caveated linkage and Toyama wording are unchanged.
+
 #### 2026-10-02: Lynas JARE equity cash receipt (#36)
 
 Rebuilt on current `main` instead of merging stale draft #28. Lynas' ASX March-quarter 2023 report was read in full.
-Signed agreements support `contracted` on 7 March 2023, and the reported AUD 200 million cash receipt through an
-ordinary-share subscription supports `disbursed` with a null transfer date. Amount, instrument, material and stage are
+`contracted` on 7 March 2023 rests on Lynas' own 7 March 2023 ASX announcement ("JARE EXTENDS SUPPORT FOR LYNAS GROWTH
+PLAN"), which states "The agreements were signed today at a signing ceremony in Tokyo, Japan" (new source
+`src-lynas-asx-20230307-jare-agreements`). The quarterly report only repeats the signing "As announced on 7 March 2023",
+so it corroborates but is not the dating source. The reported AUD 200 million cash receipt through an ordinary-share
+subscription supports `disbursed` with a null transfer date (the subscription follows signing). Amount, instrument, material and stage are
 unchanged. The later Malaysia heavy-rare-earth production milestone does not establish completion of the full
 unallocated growth plan, so no implementation status is added to this row.
 
@@ -208,6 +228,9 @@ unallocated growth plan, so no implementation status is added to this row.
   location and process matching the Regolith project record, and the row and project notes say so. No grant payment,
   commercial operation or completion is inferred.
 - Two primary sources added; both review clocks set to 3 October 2026.
+- Date provenance: the post's visible text shows only "1mo". The 11 August 2026 date is LinkedIn's own page metadata
+  (`datePublished` 2026-08-11T14:44:18Z), matching the timestamp encoded in the activity ID. It is platform-stated, not
+  printed in the post and not independently corroborated outside LinkedIn.
 
 ## 2026-10-03: animated title integration (PR #22)
 

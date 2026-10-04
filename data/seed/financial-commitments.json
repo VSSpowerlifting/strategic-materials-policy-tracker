@@ -2560,7 +2560,7 @@
         "status": "commissioning",
         "date": "2026-08-11",
         "sourceId": "src-ggt-mississauga-demo-commissioning-20260811",
-        "note": "Green Graphite Technologies' official 11 August 2026 post says its Mississauga graphite purification demonstration facility is entering the final stages of commissioning. The Mississauga facility and graphite-purification process correspond to the Regolith project record; the post does not name the NRCan EIP award, disclose grant payment or establish commercial operation, so this is not coded as operational."
+        "note": "Green Graphite Technologies' official post, dated 11 August 2026 by LinkedIn's page metadata, says its Mississauga graphite purification demonstration facility is entering the final stages of commissioning. The Mississauga facility and graphite-purification process correspond to the Regolith project record; the post does not name the NRCan EIP award, disclose grant payment or establish commercial operation, so this is not coded as operational."
       }
     ],
     "terms": [],
@@ -3778,8 +3778,8 @@
       {
         "status": "contracted",
         "date": "2023-03-07",
-        "sourceId": "src-lynas-q3-2023-jare-cash",
-        "note": "Lynas' quarterly filing states that the new JARE agreements were signed on 7 March 2023."
+        "sourceId": "src-lynas-asx-20230307-jare-agreements",
+        "note": "Lynas' 7 March 2023 ASX announcement states: \"The agreements were signed today at a signing ceremony in Tokyo, Japan\". The share subscription and cash receipt follow signing."
       },
       {
         "status": "disbursed",
@@ -3810,13 +3810,22 @@
         "note": null
       },
       {
+        "sourceId": "src-lynas-asx-20230307-jare-agreements",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph (signing of new agreements) and closing paragraphs (\"The agreements were signed today at a signing ceremony in Tokyo, Japan\")",
+        "note": "Lynas' own announcement dated 7 March 2023 establishes execution that day. It does not state the subscription or cash-receipt day."
+      },
+      {
         "sourceId": "src-lynas-q3-2023-jare-cash",
         "supports": [
           "status"
         ],
         "evidence": "explicit",
         "locator": "Page 10, JARE Support for Lynas' Growth; page 11, Cash Position",
-        "note": "The filing reports signed agreements, the cash contribution, and AUD200 million proceeds from the JARE share issue in the March-quarter cash-flow table."
+        "note": "The filing, referring to the 7 March 2023 announcement, reports the signed agreements and AUD200 million cash contributed through an ordinary-share subscription, and records the AUD200 million JARE proceeds in the March-quarter cash-flow table. It supports the disbursed status; the signing day rests on the announcement above."
       }
     ],
     "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split. The cash receipt is confirmed by Lynas' March-quarter 2023 filing. A later HRE production milestone at Lynas Malaysia is not treated as completion of this broader, unallocated light- and heavy-rare-earth growth plan.",
