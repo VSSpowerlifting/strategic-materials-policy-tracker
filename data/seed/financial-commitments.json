@@ -2281,7 +2281,14 @@
         "note": "Announced at PDAC as part of \"up to $165.2 million for 22 Canadian projects\"."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "commissioning",
+        "date": "2026-08-11",
+        "sourceId": "src-ggt-mississauga-demo-commissioning-20260811",
+        "note": "Green Graphite Technologies' official 11 August 2026 post says its Mississauga graphite purification demonstration facility is entering the final stages of commissioning. The Mississauga facility and graphite-purification process correspond to the Regolith project record; the post does not name the NRCan EIP award, disclose grant payment or establish commercial operation, so this is not coded as operational."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -2310,9 +2317,34 @@
         "evidence": "ambiguous",
         "locator": "Energy Innovation Program: Green Graphite Technologies entry",
         "note": "Upgrading graphite for lithium-ion batteries, read as processing."
+      },
+      {
+        "sourceId": "src-nrcan-regolith-eip-2025",
+        "supports": [
+          "amount",
+          "provider",
+          "recipient",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Project profile: Status, Agreement Value, Project Total, Lead Proponent and Project Objectives",
+        "note": "The current NRCan EIP profile names the project, Green Graphite Technologies, its C$4,750,000 agreement value and a C$12,262,850 project total. It lists the project as active but does not state agreement execution, disbursement or a payment date; the project total is not recoded as a public commitment or share."
+      },
+      {
+        "sourceId": "src-ggt-mississauga-demo-commissioning-20260811",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening sentence",
+        "note": "The recipient's official post explicitly places its Mississauga graphite-purification demonstration facility in final-stage commissioning. The post does not use the NRCan project title or identify grant funding, so no payment or commercial-operation status is inferred."
       }
     ],
-    "notes": null
+    "notes": "NRCan's 3 March 2026 announcement records the C$4,750,000 EIP award as announced. Its current project profile lists the project as Active and gives a C$12,262,850 project total, but does not disclose a signed agreement date, disbursement or payment. On 11 August 2026, Green Graphite Technologies said its Mississauga graphite-purification demonstration facility was entering the final stages of commissioning. The location and process match the Regolith project record; the company post does not name the EIP award, so physical status is limited to commissioning and is not treated as grant payment, commercial operation or completion.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-03",
+      "implementationStatusCheckedAt": "2026-10-03"
+    }
   },
   {
     "id": "fin-ca-pdac-2026-nb-granitoids-cmgd",

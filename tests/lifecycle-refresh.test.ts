@@ -14,6 +14,28 @@ import {
 
 const AS_OF = "2026-10-02";
 
+test("GGT's Regolith financing stays announced while its Mississauga demonstration facility is commissioning", () => {
+  const commitment = getFinancialCommitmentById("fin-ca-pdac-2026-ggt-eip")!;
+  const project = getProjectById("prj-ca-ggt-regolith-graphite")!;
+  assert.equal(commitment.financialStatusHistory.at(-1)?.status, "announced");
+  assert.equal(commitment.financialStatusHistory.at(-1)?.date, "2026-03-03");
+  const physical = commitment.implementationStatusHistory.at(-1)!;
+  assert.equal(physical.status, "commissioning");
+  assert.equal(physical.date, "2026-08-11");
+  assert.equal(physical.sourceId, "src-ggt-mississauga-demo-commissioning-20260811");
+  assert.deepEqual(project.locations.map(({ countryCode, subnational }) => ({ countryCode, subnational })), [
+    { countryCode: "CA", subnational: "British Columbia" },
+    { countryCode: "CA", subnational: "Ontario" },
+  ]);
+  const reviewedAt = "2026-10-03";
+  const q = deriveLifecycleRefreshQueue([commitment], [project], reviewedAt);
+  assert.equal(q.bundles[0].priority, "P3");
+  assert.equal(q.rows[0].financial.referenceDate, reviewedAt);
+  assert.equal(q.rows[0].implementation.referenceDate, reviewedAt);
+  assert.equal(q.rows[0].financial.statusDate, "2026-03-03");
+  assert.equal(q.rows[0].implementation.statusDate, "2026-08-11");
+});
+
 function queue() {
   return deriveLifecycleRefreshQueue(
     getAllFinancialCommitments(),

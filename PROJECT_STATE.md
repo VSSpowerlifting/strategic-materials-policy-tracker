@@ -1,5 +1,47 @@
 # Project state
 
+## 2026-10-03: Green Graphite Regolith lifecycle refresh (draft)
+
+Scoped continuation of Ben's lifecycle sweep on `data/lifecycle-refresh-regolith-20261003`,
+based on `main` at `0b7f336d9e592bdb9e4d002e405beb6629481042`. This batch is
+for review; no merge or production publish.
+
+- `fin-ca-pdac-2026-ggt-eip` retains financial status `announced` dated
+  3 March 2026. The current NRCan Energy Innovation Program profile lists the
+  project as Active, a C$4,750,000 agreement value and C$12,262,850 project
+  total, but does not disclose agreement execution, payment or a payment date.
+  The project total is not coded as a public commitment or share.
+- The recipient's official 11 August 2026 LinkedIn post says its Mississauga
+  graphite-purification demonstration facility is entering the final stages of
+  commissioning. The project record already identifies Mississauga and the same
+  graphite-purification activity. Physical history therefore records
+  `commissioning` on 11 August, with no commercial operation or completion
+  inferred. The post does not name the NRCan EIP award, so that linkage is
+  explicitly caveated in the row and project notes.
+- Full current NRCan EIP profile, the recipient's 4 March PDAC repost, official
+  recipient homepage, current news index and 11 August company post were read.
+  The current project page was rechecked; no later project-specific primary
+  disclosure through 3 October established payment, commercial operation or
+  completion.
+- Add two primary sources, refresh both independent review clocks to 3 October,
+  and reuse the exact nested-source traversal fix proposed in separate PR #40
+  and used in #41. The new dossier regression shows each new source once for
+  the graphite capital row and once for the Regolith project. Combined source
+  counts must be recalculated when independent drafts are integrated.
+- The original lifecycle regression failed against the row without physical
+  history; the original nested-citation regression failed against the old
+  helper. Local data and capital/control validation pass with 13 existing
+  warnings; the lifecycle and dossier focused tests pass.
+
+Standalone queue as of 3 October: 53 bundles, P0 0 / P1 25 / P2 16 / P3 12
+(main: 0 / 26 / 16 / 11). Regolith moves P1 to P3 after review; this records
+review freshness and commissioning evidence, not payment or commercial
+operation. Separate drafts #36–#41 remain open and are not included. Next
+scoped research target: review integration ordering and then continue the
+lifecycle sweep with the next unrefreshed P1 record. Broader Strategic Concern
+to Industrial Response analysis remains deferred until lifecycle coverage is
+ready.
+
 ## 2026-10-03: animated title integration (PR #22)
 
 The title screen was previously deployed from `codex/animated-title` at `716953f`

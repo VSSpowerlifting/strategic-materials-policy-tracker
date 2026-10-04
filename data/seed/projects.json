@@ -332,9 +332,31 @@
         "evidence": "ambiguous",
         "locator": "Energy Innovation Program: Green Graphite Technologies entry",
         "note": "\"upgrade near-surface graphite for use in lithium-ion batteries\", read as processing."
+      },
+      {
+        "sourceId": "src-nrcan-regolith-eip-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Project profile: Lead Proponent, Partners, Location and Project Objectives",
+        "note": "The current NRCan EIP profile confirms the project name, Green Graphite Technologies as lead proponent, Weaver Energy as partner, BC/ON locations and the high-purity graphite processing objective."
+      },
+      {
+        "sourceId": "src-ggt-mississauga-demo-commissioning-20260811",
+        "supports": [
+          "location"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Opening sentence",
+        "note": "GGT's official post identifies a Mississauga graphite-purification demonstration facility entering final-stage commissioning. This corroborates activity at the project's recorded Mississauga location, but the post does not use the Regolith project title."
       }
     ],
-    "notes": null
+    "notes": "The current NRCan EIP profile lists the project as Active, with a C$4,750,000 agreement value and C$12,262,850 project total; it gives no payment or construction date. GGT's 11 August 2026 official post says its Mississauga graphite-purification demonstration facility was entering final-stage commissioning. The post does not identify the NRCan award by name, so the linkage is recorded with that limitation; no commercial operation or project completion is inferred. Review on 3 October 2026 found no later project-specific primary disclosure."
   },
   {
     "id": "prj-ca-nmg-matawinie",

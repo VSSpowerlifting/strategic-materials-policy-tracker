@@ -1450,5 +1450,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Neo states that its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare-earth sintered magnets to a Tier 1 EV traction-motor customer."
+  },
+  {
+    "id": "src-nrcan-regolith-eip-2025",
+    "title": "Battery-Grade Graphite: A Canadian Low-GHG Solution from Regolith Resources",
+    "publisher": "Natural Resources Canada",
+    "url": "https://natural-resources.canada.ca/funding-partnerships/energy-innovation-program/battery-grade-graphite-canadian-low-ghg-solution-regolith-resources",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full current NRCan Energy Innovation Program project profile read on 3 October 2026. It lists Status Active, Year 2025, Agreement Value C$4,750,000, Project Total C$12,262,850, locations BC and ON, Weaver Energy Corp. as partner and Green Graphite Technologies Inc. as lead proponent. It describes the vertically integrated low-GHG graphite-processing demonstration and expected engineering/commercialization results. It does not state agreement execution, payment, construction or commissioning dates."
+  },
+  {
+    "id": "src-ggt-mississauga-demo-commissioning-20260811",
+    "title": "Our Mississauga graphite purification demonstration facility is entering the final stages of commissioning.",
+    "publisher": "Green Graphite Technologies Inc.",
+    "url": "https://www.linkedin.com/posts/green-graphite-tech_our-mississauga-graphite-purification-activity-7492954053392457729-LMSP",
+    "language": "en",
+    "datePublished": "2026-08-11",
+    "dateAccessed": "2026-10-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Full official company LinkedIn post read on 3 October 2026. It says the Mississauga graphite-purification demonstration facility is entering final-stage commissioning and describes continuous carbochlorination at scale for a domestic battery-materials supply chain. It does not name the NRCan EIP/Regolith award, disclose grant payment or claim commercial operation; the project linkage is limited to the matching recipient, Mississauga location and graphite-purification process."
   }
 ]

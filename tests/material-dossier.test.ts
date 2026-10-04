@@ -134,6 +134,25 @@ test("sources: 28 for tungsten, 32 if registry evidence were counted, and an unr
   assert.ok(sourcesCitedByMaterial("tungsten", fixture, { includeRegistry: true }).some((c) => c.source.id === unrelated.id));
 });
 
+test("Regolith's current company sources are cited once for the capital row and project", () => {
+  for (const sourceId of [
+    "src-nrcan-regolith-eip-2025",
+    "src-ggt-mississauga-demo-commissioning-20260811",
+  ]) {
+    const cited = sourcesCitedByMaterial("graphite").find(
+      ({ source }) => source.id === sourceId,
+    );
+    assert.ok(cited, `${sourceId} is present in the graphite dossier`);
+    assert.deepEqual(
+      cited.citedBy.map(({ kind, id }) => ({ kind, id })),
+      [
+        { kind: "capital_row", id: "fin-ca-pdac-2026-ggt-eip" },
+        { kind: "project", id: "prj-ca-ggt-regolith-graphite" },
+      ],
+    );
+  }
+});
+
 // --- AC-4: dates ----------------------------------------------------------------------------------
 
 test("V1: the Allied Material grant is decided with no date, and the event date is never substituted", () => {
