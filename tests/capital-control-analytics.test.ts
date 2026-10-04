@@ -689,10 +689,26 @@ test("a status the source does not give is neither binding nor not yet binding, 
     FINANCIAL_STATUSES.filter((s) => legalStanding(fin("x", { financialStatusHistory: history(s) })) === "status_not_stated"),
     ["not_stated"],
   );
-  // No part of it reaches a binding sum through the back door: the corpus's own not-stated row is listed apart.
+  // Unknown corpus rows are listed apart; a source-reviewed row can acquire a stated status later.
   const corpus = totalCommitments(publicCommitmentRows(), getAllFinancialCommitments());
-  assert.ok(corpus.statusNotStatedIds.includes("fin-ca-g7-2025-nmg-canada-growth-fund"));
-  for (const cur of corpus.currencies) for (const i of cur.instruments ?? []) assert.ok(!i.countedIds.includes("fin-ca-g7-2025-nmg-canada-growth-fund"));
+  const unknownIds = publicCommitmentRows()
+    .filter((c) => c.financialStatusHistory.at(-1)?.status === "not_stated")
+    .map((c) => c.id);
+  assert.deepEqual(corpus.statusNotStatedIds, unknownIds);
+  for (const cur of corpus.currencies) for (const i of cur.instruments ?? [])
+    for (const id of unknownIds) assert.ok(!i.countedIds.includes(id));
+  // The reviewed corpus now has no unknown-status public row, so the same guarantee is checked on a fixture of the
+  // row that used to be one. Control first: with its stated status the row is counted.
+  const fixtureId = "fin-ca-g7-2025-nmg-canada-growth-fund";
+  const countedIn = (t: typeof corpus) =>
+    t.currencies.some((cur) => (cur.instruments ?? []).some((i) => i.countedIds.includes(fixtureId)));
+  assert.ok(countedIn(corpus), "control: the row is counted once its status is stated");
+  const fixtureRows = getAllFinancialCommitments().map((c) =>
+    c.id === fixtureId ? { ...c, financialStatusHistory: history("not_stated") } : c,
+  );
+  const fixtureTotals = totalCommitments(publicCommitmentRows(fixtureRows), fixtureRows);
+  assert.deepEqual(fixtureTotals.statusNotStatedIds, [fixtureId]);
+  assert.ok(!countedIn(fixtureTotals), "an unknown-status row reaches no sum");
 });
 
 test("a draw from an option that has ended is not an exercise, and the summary lists it apart", () => {

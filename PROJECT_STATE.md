@@ -1,5 +1,209 @@
 # Project state
 
+## 2026-10-03: lifecycle-refresh consolidation checkpoint (integrated locally, uncommitted)
+
+**Status.** Draft PRs #36–#42 are integrated into one local working tree. Nothing is committed, pushed, merged or
+deployed, and none of the seven drafts has been closed; each remains open and unmerged on GitHub.
+
+- Branch `claude/smpt-lifecycle-consolidate-0b56b0`, worktree
+  `.claude/worktrees/smpt-lifecycle-consolidate-0b56b0`, baseline `main` at
+  `0b7f336d9e592bdb9e4d002e405beb6629481042` (the animated title is already in the baseline). `HEAD` is still that commit;
+  the integration is uncommitted changes to nine files: `data/seed/{financial-commitments,projects,sources}.json`,
+  `lib/material-dossier.ts`, four test files and this file.
+- Integrated heads: #36 Lynas JARE `a46105a`, #37 Matawinie `b8702f8`, #38 Wicheeda and Ucore `ebcb747`, #39 MP 10X
+  `f1a1b8f`, #40 Allied tungsten `22c8a49`, #41 Lofdal `727bd5b`, #42 Regolith `52fe9b9` (full SHAs are in the PR list).
+- How it was merged: shared JSON by record id, never by replacing a seed file with a branch copy. No record id is touched
+  by more than one PR. The 13 commitments, 3 projects and 17 new sources were each checked against their PR head, and
+  every untouched record against `main`. Files stay id-sorted in canonical `JSON.stringify(x, null, 2)` form.
+  Sources are appended in PR order, so #40's and #41's new sources sit at the end rather than where their PRs put them.
+- The nested-citation fix in `lib/material-dossier.ts` (a dangling `else` in `collectSourceIds`; see #40 below) is applied
+  once. #37, #40, #41 and #42 each keep their own citation regression.
+- Tests were assembled by whole block, not by textual merge (`git merge-file --union` interleaved assertions and broke
+  loading). Checked afterwards by line: every line each PR added to the five test and code files is in the combined tree,
+  and every line a PR removed or rewrote is gone, with one exception (the import, below).
+
+**Where the combined tree differs from a plain union of the seven heads** (everything else equals a PR head or `main`):
+
+1. `tests/lifecycle-refresh.test.ts`: #37 and #39 each edited the `@/lib/capital-control` import. They are one line,
+   `import { publicCommitmentRows, totalCommitments } from "@/lib/capital-control";`. That is the only PR line not
+   present verbatim, and it removes no assertion.
+2. `tests/capital-control-analytics.test.ts` gains 11 lines that no PR has, in the "status the source does not give"
+   test. #37 states CGF's status, so the live corpus no longer holds an unknown-status public row and that test's
+   corpus-only assertions had become vacuous. The addition first asserts the row is counted once its status is stated
+   (a control), then re-runs `totalCommitments` on a fixture where that row's financial status is `not_stated` and asserts
+   it lands in `statusNotStatedIds` and in no sum. This adds coverage; no existing assertion was changed.
+3. `data/seed/sources.json`: the 17 new sources are appended in PR order. #40's source was first in its PR and #41's
+   were mid-file, so both moved to the end. Registry order carries no meaning; ids and contents equal the PR heads.
+4. #38's `wicheeda()` test helper (strips the live review stamp so synthetic freshness cases stay independent of it) is
+   byte-identical to #38's own; it is not a local change.
+
+**Validation on the combined tree** (`node --import tsx` for scripts; the `tsx` CLI cannot open its IPC socket here):
+
+- Data validation passes: 61 events, 138 sources, 85 commitments, 57 projects; the same 13 warnings as the baseline.
+- Final gate on this exact tree, run after the last edit to data and tests: `validate`, `typecheck`, `lint`, `test` (375 of
+  375), `next build` (980 static pages) and `git diff --check` all exit 0.
+- Five new tests fail when the old `collectSourceIds` line is restored.
+- Lifecycle queue, recomputed at an explicit as-of of 2026-10-03 (85 rows, 53 bundles in both trees):
+
+  | | P0 | P1 | P2 | P3 |
+  | --- | --- | --- | --- | --- |
+  | `main` baseline | 0 | 26 | 16 | 11 |
+  | combined tree | 0 | 18 | 16 | 19 |
+
+  Exactly eight bundles move P1 to P3 (Lynas JARE, Matawinie, Wicheeda, Ucore Kingston, MP 10X, Allied, Lofdal,
+  Regolith); the other 45 are unchanged. This is review freshness, not project advancement.
+- Dossier source counts (traversal before the fix, fix on baseline data, fix on the combined tree):
+
+  | Material | Before fix | Fix only | Combined |
+  | --- | --- | --- | --- |
+  | dysprosium | 20 | 20 | 23 |
+  | gallium | 34 | 35 | 35 |
+  | graphite | 38 | 40 | 46 |
+  | rare-earth-elements | 63 | 68 | 77 |
+  | ndfeb-magnets | 30 | 33 | 34 |
+  | terbium | 21 | 21 | 24 |
+  | tungsten | 28 | 28 | 29 |
+
+  Antimony, germanium, neodymium and praseodymium are unchanged (39, 31, 18, 19). The fix alone moves gallium, graphite,
+  rare-earth-elements and ndfeb-magnets on baseline data, which is wider than any one PR's scope. Every source gained on
+  top of that is one of the 17 new sources, and none is cited twice for the same record.
+- Browser (dev server, not a production server): the six affected dossiers list exactly the expected sources, each new
+  source once, with no horizontal scroll at 375 px (mobile emulation) or 1024 px (the pane's own width; 1280 px was not
+  checked). Capital detail pages for the Lynas, Ucore,
+  MP, Allied, Lofdal and Regolith rows show the statuses and caveats recorded below. The title plays on a first
+  plain-homepage entry, sets `smpt:title-seen`, and closes on its own, on Escape or on Enter (all three checked). Repeat visits, a deep link and
+  reduced motion skip it, and a control run without reduced motion plays it. No console or server errors.
+- #36's Vercel check failed with "Deployment rate limited — retry in 24 hours" while its CI `validate` job passed. That
+  is a platform rate limit, not a code failure; it was not retriggered.
+
+**Not verified or still open.**
+
+- No domain fact was re-adjudicated against its primary source here; this is an integration of reviewed drafts.
+- `site.lastUpdated` is still 2026-10-02, earlier than the 2026-10-03 review stamps from #39–#42. Nothing validates that
+  ordering. Ben decided to leave it unchanged for this draft: `site.lastUpdated` is the dataset's record-as-of date,
+  while the 2026-10-03 stamps are maintenance-review dates and keep their original values. No status-history entry in the 13 touched commitments is dated after
+  2026-10-02, so no status silently stops being current as of `lastUpdated`; only the review stamps postdate it.
+- Live GitHub state was re-read read-only at this checkpoint: `origin/main` is still `0b7f336`, and #36–#42 are open
+  drafts whose heads equal the SHAs integrated here. #28 (`486ee36`, the stale Lynas draft) and #32 (`b1e6b4f`, the
+  older maintenance-queue draft) are also still open.
+- The Graphify report is stale and was not regenerated.
+- The seven drafts' own CI and Vercel results belong to those PRs; the combined tree has not been through GitHub CI.
+
+**Exact next action.** Ben reviews the working-tree diff. If approved, authorize a commit on this branch, a push, and one
+consolidated draft PR. Keep #36–#42 open until that PR is accepted, then close each with a link to it. Retire #28 with
+#36 (its replacement), and #32, which #36's notes call superseded by the merged #33. The combined queue's remaining 18 P1 bundles are
+the next lifecycle work, along with these leads from the drafts: USA Rare Earth, and separating new Neo EDC and Arafura
+NRFC instruments from updates to existing rows. The broader Strategic Concern → Industrial Response analysis stays
+deferred until the lifecycle sweep is complete.
+
+### Record notes carried in from the seven drafts
+
+Each subsection keeps the caveats the drafts established. Financial status and physical implementation are independent
+throughout. Their standalone queue counts and "next target" lines are superseded by the combined queue above.
+
+#### 2026-10-02: Lynas JARE equity cash receipt (#36)
+
+Rebuilt on current `main` instead of merging stale draft #28. Lynas' ASX March-quarter 2023 report was read in full.
+Signed agreements support `contracted` on 7 March 2023, and the reported AUD 200 million cash receipt through an
+ordinary-share subscription supports `disbursed` with a null transfer date. Amount, instrument, material and stage are
+unchanged. The later Malaysia heavy-rare-earth production milestone does not establish completion of the full
+unallocated growth plan, so no implementation status is added to this row.
+
+#### 2026-10-02: Matawinie (#37)
+
+- The earlier CGF investment is equity, contracted 2024-12-16 and disbursed 2024-12-20, per CGF's own Schedule 13D. The
+  Prime Minister's May 2026 quick facts separate it from new 2026 capital. NRCan's more-than-C$35-million lower bound is
+  retained; the additional US$82 million 2026 round is neither converted nor substituted. The project link does not claim
+  all corporate proceeds went to the mine.
+- Canada's offtake is contracted 2026-05-13: 30,000 tonnes per annum for seven years from commercial production, with no
+  inferred payment, shipment, numeric price or calendar end date.
+- The Phase 2 mine began construction 2026-04-13 (NMG Q2 MD&A), applied to all three linked rows and kept apart from
+  FID on 15 May and the 19 May ceremony. Demonstration-plant output is not Phase 2 mine operation; Bécancour is separate.
+- The historical up-to-US$430 million EDC letter stays a non-binding indication with its announced, undated history. The
+  later US$335 million EDC/CIB debt commitment has different providers and facilities and does not show the earlier
+  indication was contracted, paid or lapsed.
+- Dedicated fixtures keep unknown-status accounting and the dossier sub-list covered independently of the live corpus.
+- Follow-up leads, not coded here: new 2026 CGF and IQ equity, the EDC/CIB debt package, and the EIP electric-loader grant.
+- NMG's news index was also screened through its 1 October 2026 release (interest on a 2022 convertible note); it supplies
+  no later mine operating milestone. Primary documents read in full, and what each supports:
+
+  | Source id | Claim locator |
+  | --- | --- |
+  | `src-cgf-nmg-schedule13d-2024` | Schedule 13D Items 3–4: subscription date and completed cash purchase; signed 23 December 2024 |
+  | `src-pm-matawinie-groundbreaking-2026` | Quick facts: the earlier December 2024 CGF investment, distinct from the new 2026 investment |
+  | `src-nmg-canada-offtake-definitive-2026` | Government of Canada Offtake Agreement: definitive signing and terms |
+  | `src-nmg-q2-mda-2026` | Phase 2 mine section, pp. 9–10: actual construction start; financing and liquidity sections: the later conditional EDC/CIB facilities |
+
+#### 2026-10-02: Wicheeda and Ucore (#38)
+
+- Wicheeda keeps the original CAD 1,878,250 infrastructure amount and its conditional decision of 3 March 2026. Feasibility
+  of the linked mine (13 July 2026) is neither a stated start date nor evidence that the funded transmission-line and
+  road deliverables began or finished; the July release still calls the funding conditional. The August proposal
+  invitation concerns a separate processing-feasibility application and is not a funding commitment.
+- Ucore keeps the up-to CAD 36.3 million package, its NRCan and FedDev parts, their relationships and the 31 October 2025
+  conditional decision dates. The 26 August 2026 MD&A says no definitive agreement existed for either component as of its
+  date. NRCan's expressly non-repayable contribution is coded as a grant; FedDev and the package stay instrument
+  unspecified. The proposed Canadian commercial samarium/gadolinium facility is `announced` (31 October 2025). Kingston
+  demonstration operations, the earlier CMRDD award, US award modifications and Louisiana development do not establish
+  construction or operation of it.
+- Six sources added: Defense Metals 4 March, 13 July and 12 August 2026; Ucore 31 October 2025 and 14 September 2026; the
+  Ucore Q2 MD&A of 26 August 2026 (34 pages, read in full). Later Wicheeda releases (31 August drilling, 23 September
+  proposed placement) do not establish mine construction or award execution. #38 also lists two further original PDFs it
+  read that are not registered as sources:
+  <https://www.defensemetals.com/_files/ugd/433b25_ae24a5b5fd384c3f8a8fcbaf09858981.pdf> and
+  <https://www.defensemetals.com/_files/ugd/433b25_de8d16ad7d814c3d8d4b029529eda1de.pdf>.
+
+#### 2026-10-03: MP Materials 10X (#39)
+
+- `fin-us-dod-mp-2025-bank-financing` keeps its private-financing classification, the historical USD 1 billion minimum
+  commitment, and the undrawn lapse on 26 August 2025. The linked project's construction history is added with a null
+  start date. The offering and revolver are separate financing, not a draw or repayment under the expired letter.
+- `fin-us-dod-mp-2025-magnet-offtake` stays contracted (9 July 2025) with a null total amount and construction with an
+  unknown start. The 2028 commissioning date is a target; Independence production is a separate facility's progress.
+- Filings show deferred reimbursable-cost balances and receivables, not a quantified cumulative cash disbursement under
+  the offtake; payment status is not inferred from them or from price-protection receipts.
+- One results source added (6 August 2026) and three filing access dates refreshed.
+
+#### 2026-10-03: Allied Material tungsten (#40)
+
+- `fin-jp-jogmec-almt-tungsten-grant` keeps about JPY 7.5 billion and `decided` with the decision date unknown. JOGMEC's
+  programme page lists the FY2025 decision and does not establish payment. The 50% term is corrected from `exact` to
+  `up_to` because it is the programme ceiling (half the applicant's cost), not a project-specific share.
+- The recipient's 9 April 2026 release announces a new plant and equipment, a site about 1 km from Toyama Works, roughly
+  1.5 times current capacity, and operation targeted for the first half of FY2028. Planned construction is not construction
+  begun, so physical history is `announced`. The about JPY 15.9 billion company plan stays distinct from the grant.
+- Toyama is added to `prj-jp-almt-tungsten`, which moves Japan's domestic designated-project count from three to four and
+  unknown locations from one to zero. Direct METI access returned 403 and cached content was older, so its access date
+  and data are retained.
+- The citation bug: `collectSourceIds` bound its `else` to the inner `if (typeof s === "string")`, so nested evidence,
+  lifecycle histories, terms and outcomes were never traversed. Braces on the `sourceIds` loop restore the documented
+  traversal. The tungsten dossier shows 29 default sources, 33 with the wider registry.
+
+#### 2026-10-03: Lofdal (#41)
+
+- `fin-jp-jogmec-lofdal-2026-equity` keeps its up-to-CAD-47.668-million public SPC equity commitment and both history
+  entries: `decided` (decision date unknown) and `partially_disbursed` on 23 July 2026. The initial investment amount is
+  not disclosed.
+- The recipient's completed C$23 million earn-in and about C$11 million expanded DFS budget are distinct from the SPC
+  commitment and are not coded as cash paid against it. The 31 August update says the project-interest transaction still
+  needs shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. That is context, not
+  a term of the SPC row, and it neither undoes the initial investment nor shows a completed interest transfer.
+- Physical history stays `feasibility` with the start unknown. Nothing reviewed shows construction, operation or an
+  achieved FID; the FY2026 commercialization decision is a target. The reviewing date uses Ben's local 3 October.
+- Two company PDFs added and two JOGMEC access dates refreshed. Dossier citations are checked in the rare-earth-elements,
+  dysprosium and terbium dossiers.
+
+#### 2026-10-03: Green Graphite Technologies, Regolith (#42)
+
+- `fin-ca-pdac-2026-ggt-eip` keeps `announced` (3 March 2026). NRCan's current EIP profile lists the project as Active with
+  a C$4,750,000 agreement value and a C$12,262,850 project total, but discloses no execution date or payment. The project
+  total is not coded as a commitment or public share.
+- The company's 11 August 2026 post says the Mississauga graphite-purification demonstration facility is entering final
+  commissioning, so physical history is `commissioning`. The post does not name the NRCan EIP award; the linkage rests on
+  location and process matching the Regolith project record, and the row and project notes say so. No grant payment,
+  commercial operation or completion is inferred.
+- Two primary sources added; both review clocks set to 3 October 2026.
+
 ## 2026-10-03: animated title integration (PR #22)
 
 The title screen was previously deployed from `codex/animated-title` at `716953f`

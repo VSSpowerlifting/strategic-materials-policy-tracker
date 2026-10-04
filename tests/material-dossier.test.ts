@@ -89,7 +89,7 @@ test("tungsten stats", () => {
   assert.equal(stat(p, "projects").sublabel, "0 with no designation");
   assert.equal(v("programmes"), 4);
   assert.equal(v("organizations"), 11);
-  assert.equal(v("sources"), 28);
+  assert.equal(v("sources"), 29);
 });
 
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
@@ -115,14 +115,14 @@ test("designations, projects and projects with no designation, per material; the
 
 // --- AC-3: the sources definition -----------------------------------------------------------------
 
-test("sources: 28 for tungsten, 32 if registry evidence were counted, and an unrelated registry citation is excluded", () => {
+test("sources: 29 for tungsten, 33 if registry evidence were counted, and an unrelated registry citation is excluded", () => {
   const cited = sourcesCitedByMaterial("tungsten");
-  assert.equal(cited.length, 28);
+  assert.equal(cited.length, 29);
   assert.ok(cited.some((c) => c.source.id === "src-iea-critical-minerals"), "the material record's own source");
   assert.deepEqual(cited.find((c) => c.source.id === "src-iea-critical-minerals")!.citedBy.map((c) => c.kind), ["material_record"]);
   for (const c of cited) assert.ok(c.citedBy.length >= 1, c.source.id);
   const wider = sourcesCitedByMaterial("tungsten", undefined, { includeRegistry: true });
-  assert.equal(wider.length, 32);
+  assert.equal(wider.length, 33);
   assert.notEqual(cited.length, wider.length);
 
   // A fixture: a registry organization of the material cites a source no record of the material cites.
@@ -130,11 +130,60 @@ test("sources: 28 for tungsten, 32 if registry evidence were counted, and an unr
   const unrelated = data.sources.find((s) => !cited.some((c) => c.source.id === s.id) && !wider.some((c) => c.source.id === s.id))!;
   const org = data.organizations.find((o) => o.id === "org-jp-jogmec")!;
   const fixture: DossierData = { ...data, organizations: data.organizations.map((o) => (o.id === org.id ? { ...o, evidence: [...o.evidence, { sourceId: unrelated.id, supports: ["name"], evidence: "explicit" as const }] } : o)) };
-  assert.equal(sourcesCitedByMaterial("tungsten", fixture).length, 28);
+  assert.equal(sourcesCitedByMaterial("tungsten", fixture).length, 29);
   assert.ok(sourcesCitedByMaterial("tungsten", fixture, { includeRegistry: true }).some((c) => c.source.id === unrelated.id));
 });
 
+test("Lofdal's transaction disclosures are cited once per capital row and project", () => {
+  for (const materialId of ["rare-earth-elements", "dysprosium", "terbium"]) {
+    for (const sourceId of ["src-ncmi-lofdal-jv-20260730", "src-ncmi-lofdal-jv-update-20260831"]) {
+      const cited = sourcesCitedByMaterial(materialId).find(({ source }) => source.id === sourceId);
+      assert.ok(cited, `${sourceId} is present in the ${materialId} dossier`);
+      assert.deepEqual(
+        cited.citedBy.map(({ kind, id }) => ({ kind, id })),
+        [
+          { kind: "capital_row", id: "fin-jp-jogmec-lofdal-2026-equity" },
+          { kind: "project", id: "prj-na-lofdal" },
+        ],
+      );
+    }
+  }
+});
+
+test("Regolith's current company sources are cited once for the capital row and project", () => {
+  for (const sourceId of [
+    "src-nrcan-regolith-eip-2025",
+    "src-ggt-mississauga-demo-commissioning-20260811",
+  ]) {
+    const cited = sourcesCitedByMaterial("graphite").find(
+      ({ source }) => source.id === sourceId,
+    );
+    assert.ok(cited, `${sourceId} is present in the graphite dossier`);
+    assert.deepEqual(
+      cited.citedBy.map(({ kind, id }) => ({ kind, id })),
+      [
+        { kind: "capital_row", id: "fin-ca-pdac-2026-ggt-eip" },
+        { kind: "project", id: "prj-ca-ggt-regolith-graphite" },
+      ],
+    );
+  }
+});
+
 // --- AC-4: dates ----------------------------------------------------------------------------------
+
+test("the recipient's nested lifecycle and project evidence is cited once per record", () => {
+  const cited = sourcesCitedByMaterial("tungsten").find(
+    ({ source }) => source.id === "src-allied-tungsten-expansion-20260409",
+  );
+  assert.ok(cited, "the original recipient disclosure is in the dossier's sources");
+  assert.deepEqual(
+    cited.citedBy.map(({ kind, id }) => ({ kind, id })),
+    [
+      { kind: "capital_row", id: "fin-jp-jogmec-almt-tungsten-grant" },
+      { kind: "project", id: "prj-jp-almt-tungsten" },
+    ],
+  );
+});
 
 test("V1: the Allied Material grant is decided with no date, and the event date is never substituted", () => {
   const row = findRow(dossier("tungsten"), "fin-jp-jogmec-almt-tungsten-grant")!;
@@ -278,13 +327,25 @@ test("each row carries the one scope label its precedence gives", () => {
 
 // --- AC-9, AC-10: layers and non-live rows --------------------------------------------------------
 
-test("graphite keeps two layers apart, and the status-not-stated row sits in its own sub-list", () => {
+test("graphite keeps the reviewed CGF equity apart from non-binding indications", () => {
   const p = dossier("graphite");
   assert.deepEqual(p.money.layers.map((l) => l.key), ["public_commitment", "indication"]);
   const pub = p.money.layers[0];
-  assert.deepEqual(pub.statusNotStated.map((r) => r.id), ["fin-ca-g7-2025-nmg-canada-growth-fund"]);
-  assert.ok(!pub.live.some((r) => r.id === "fin-ca-g7-2025-nmg-canada-growth-fund"));
+  assert.deepEqual(pub.statusNotStated.map((r) => r.id), []);
+  assert.equal(pub.live.find((r) => r.id === "fin-ca-g7-2025-nmg-canada-growth-fund")?.standing, "binding");
   assert.equal(p.money.layers[1].live.length, 3);
+  assert.ok(p.money.layers[1].live.some((r) => r.id === "fin-ca-g7-2025-nmg-edc-letter-of-interest"));
+});
+
+test("a fixture with an unknown financial status stays in the dossier's separate sub-list", () => {
+  const id = "fin-ca-g7-2025-nmg-canada-growth-fund";
+  const data = withCommitment(id, (c) => ({
+    ...c,
+    financialStatusHistory: [{ status: "not_stated", date: null, sourceId: "src-nrcan-g7-cmpa-2025" }],
+  }));
+  const pub = dossier("graphite", data).money.layers[0];
+  assert.deepEqual(pub.statusNotStated.map((r) => r.id), [id]);
+  assert.ok(!pub.live.some((r) => r.id === id));
 });
 
 test("an ended package does not hide a part that still stands", () => {
