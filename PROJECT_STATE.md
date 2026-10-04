@@ -1,5 +1,59 @@
 # Project state
 
+## 2026-10-04: merged-release checkpoint and Strategic Concern → Industrial Response first baseline (draft PR, unmerged)
+
+**Supersedes** the "draft PR #43 open, unmerged" section below, which is kept as the record of how #43 was assembled.
+This is the **first baseline** of the analysis, not a rerun of an earlier published one (none exists in the repo or its history).
+
+**Observed in this session (2026-10-04).** `origin/main` is `b4183f8fc68beea7a53496d73d9e04c93d553a69` (#43, "Consolidate
+lifecycle refreshes #36-#42 and restore nested dossier citations"). The analysis branch is `analysis/concern-response-baseline-2026-10-03`,
+cut from that commit in the existing checkout (the checkout had been on `codex/animated-title` at `716953f`, untouched). The queue
+regenerated at `--as-of 2026-10-03` is P0 0 / P1 18 / P2 16 / P3 19 over 53 bundles and 85 rows (25 rows individually P1; 29 rows in
+P1 bundles). `npm run validate`, `typecheck` and `test` pass; the new script is clean under `eslint`; scoped lint
+(`npx eslint . --ignore-pattern '.claude/**'`) exits 0. Plain `npm run lint` also scans `.claude/worktrees/*` and fails there with
+538 errors / 5,552 warnings, all inside nested worktrees (538 errors in `smpt-antimony-productscope`), none in the main tree; lint
+configuration and those worktrees were not changed. `npm run build` was not run (no app code changed). `data/seed` and `lib` are
+identical to `b4183f8`.
+**Reported by Ben, not re-verified here:** post-merge CI and the production deploy passed, public citations and the title
+behaviour were checked, and #36–#42, #28 and #32 are closed.
+
+**Analysis outcome (draft, not human-approved).**
+`docs/analysis/strategic-concern-industrial-response-2026-10-03.md` (definitions, findings, limitations),
+`docs/analysis/concern-response-tables-2026-10-03.md` (generated; unedited script output, byte-identical on rerun) and
+`scripts/analyze-concern-response.ts` (read-only; explicit `--as-of`; stdout only). No data record was edited. Findings:
+(1) binding instruments and recorded physical status overlap only partly: of 29 projects with a government commitment, 18 are
+binding and 9 record construction-or-later (strict 8, excluding the Cyclic demonstration plant's funded-activity completion); **7 are
+in both (strict 6)**, 11 are binding without construction recorded, 10 of them with no physical status at all, 2 record construction
+without a binding row; (2) financial and physical status are independent in both directions, and no maturity order between them is
+claimed (Ucore's conditional decision and announced facility are separate dimensions); (3) the US rare-earth/magnet response is
+instrument-dense and physically thin, and NdPr rests on one binding instrument, `fin-us-dod-mp-2025-price-floor`, a P1 row;
+(4) all 6 antimony and all 3 germanium government-commitment rows are P1-exposed, and germanium records no binding public
+commitment; (5) controls share material × stage cells with responses but no record links them, and 21 of 45 clauses carry a stated
+end after the as-of date (China, 2026-11-10 and 2026-11-27). The ladder, the government-commitment definition and the strict reading
+are the analysis's own presentation framing, not corpus fields. No money was totalled. P1 rows stay in the baseline; removing them is
+a labelled diagnostic sensitivity scenario. Freshness is described with the queue's categorical priorities on separate financial and
+physical clocks; "no lifecycle review date recorded" is used, not "never reviewed".
+
+**Framing-provenance finding.** `fc-us-dod-mp-natsec` is an unnamed Defense Department spokesperson quoted by Fortune (secondary
+reporting, `src-fortune-dod-mp`, 2025-08-12); the stored quote is cut mid-sentence. It is excluded from counts requiring official
+government framing (23 of 31 commitment-bearing events carry official framing, not 24). The seed record is **not edited**; the fix
+(re-source to a DoD release or recode as secondary, and quote the full sentence) needs a maintainer decision.
+
+**Unresolved.** Eleven rows in eight P1 bundles decide the movable conclusions; ten need verification and
+`fin-us-dod-mp-2025-preferred-equity` is a confirm-only bundle-mate: `fin-us-dod-mp-2025-price-floor`, `-additional-preferred-option`
+(and `-preferred-equity`); `fin-us-dod-mp-2025-samarium-loan`; `fin-us-army-perpetua-antimony-otia`; `fin-us-dow-arr-antimony-2025`;
+`fin-us-dod-perpetua-stibnite-dpa` and `fin-us-exim-perpetua-stibnite-2026`; `fin-us-dow-usac-antimony-2026`;
+`fin-us-dow-5n-germanium-2025`; `fin-us-dod-5n-germanium-2024`. (An earlier brief counted 12 rows in 8 bundles; the twelfth,
+`fin-us-dod-mp-2025-company-cash`, is a recipient cash balance in its own ninth bundle and is excluded.) Evidence needed per row is in
+section 7–8 of the narrative. The corpus holds UK and India events beyond the six actors named in the scope rule; unchanged here.
+
+**Environment.** The disk filled during the session (ENOSPC). With Ben's authorization, four inactive git-ignored generated
+`.next` directories were removed after confirming no Next process or listener used them; free space went from about 233 MiB to
+4.1 GiB. Source, `node_modules`, Git metadata, branches, worktrees, transcripts and other sessions' temp files were not touched.
+
+**Exact next action.** Ben reviews the draft PR. If approved, authorize merging it and, separately, the bounded source-verification
+tranche above (use `source-verifier`; do not run another broad sweep). Nothing was merged or deployed.
+
 ## 2026-10-03: lifecycle-refresh consolidation checkpoint (draft PR #43 open, unmerged)
 
 **Status.** Draft PRs #36–#42 are integrated on branch `claude/smpt-lifecycle-consolidate-0b56b0` and published as draft
