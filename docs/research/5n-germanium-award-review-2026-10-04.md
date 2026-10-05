@@ -279,7 +279,7 @@ Recorded for the maintainer; none is done here, because each touches shared code
 
 ## Retrospective sensitivity comparison with PR #44
 
-PR #44's baseline tables (`docs/analysis/`, branch `analysis/concern-response-baseline-2026-10-03`, head `b2cbd41`) are **not
+PR #44's baseline tables (`docs/analysis/`, branch `analysis/concern-response-baseline-2026-10-03`, head `b2cbd41` when this comparison ran; PR #44 later merged as `f190651` after a documentation-only correction that left the tables byte-identical) are **not
 edited**; this branch holds no change under `docs/analysis/`. The comparison below is a **retrospective sensitivity comparison,
 not the original historical baseline**: it runs PR #44's unmodified script (`scripts/analyze-concern-response.ts` at `b2cbd41`, in
 scratch copies that are not in the repository) with `--as-of 2026-10-03`, the date of PR #44's tables, over records that

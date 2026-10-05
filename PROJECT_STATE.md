@@ -1,11 +1,11 @@
 # Project state
 
-## 2026-10-04: 5N Plus St. George germanium award review and accounting review (committed on branch; draft PR, unmerged)
+## 2026-10-04: 5N Plus St. George germanium award review and accounting review (PR #45, merged after PR #44)
 
 **Status.** Branch `research/5n-germanium-award-review-2026-10-04`, at `origin/main` `b4183f8` (local `main` is stale at `0b7f336`).
 The branch already held this task's uncommitted draft; it was reviewed, corrected and kept, not recreated. The maintainer approved the
-2024 classification (`partially_disbursed` on federal-reporting attribution, null date, no amount paid) on 2026-10-04 and authorised a commit to this branch, a push and a draft PR. The branch is committed and pushed with a draft PR open; nothing is merged or deployed. PR #44 (draft, `analysis/concern-response-baseline-2026-10-03`, head `b2cbd41`) is untouched and its
-dated tables stay as the 2026-10-03 baseline; this entry does not supersede them. A second, narrower accounting review the same
+2024 classification (`partially_disbursed` on federal-reporting attribution, null date, no amount paid) on 2026-10-04 and authorised a commit to this branch, a push and a draft PR. The maintainer then approved PR #44's analytical baseline and this PR's source-reviewed classification and asked for #44 to merge first, then #45. PR #44 (`analysis/concern-response-baseline-2026-10-03`) was squash-merged as `f190651`
+after a documentation-only correction (head `1e4b1bc`; see below); its dated tables stay as the 2026-10-03 baseline and this entry does not supersede them. A second, narrower accounting review the same
 day resolved the 2024 outlay evidence. Full ledger: `docs/research/5n-germanium-award-review-2026-10-04.md`.
 
 - Scope: `fin-us-dod-5n-germanium-2024` and `fin-us-dow-5n-germanium-2025`, their two projects, and sources. Every source in
@@ -41,7 +41,7 @@ day resolved the 2024 outlay evidence. Full ledger: `docs/research/5n-germanium-
   the 2024 row at `contracted` leaves funded at 0. Full table in the ledger.
 - **Historical as-of limitation.** The `partially_disbursed` entry is undated and reflects evidence reviewed on 2026-10-04; it does not
   establish disbursement at any earlier date. Financial status is not date-sliced in the shared code (`currentFinancialStatus` returns the
-  last entry), so every as-of derivation, including PR #44's, shows the row as `partially_disbursed` at every as-of date (probed from
+  last entry), so every as-of derivation, including PR #44's (whose analysis document now states the same limitation), shows the row as `partially_disbursed` at every as-of date (probed from
   2024-03-01 to 2026-10-03), and queue ages go negative before 2026-10-04. No date of payment is invented and no shared derivation code is changed.
 - **`site.lastUpdated`** is the dataset's record-as-of date (it dates derived statuses, exports, structured data and the banner),
   not a page-edit timestamp. No status entry written here postdates its current value, 2026-10-02, so it is left unchanged, as in
@@ -52,15 +52,19 @@ day resolved the 2024 outlay evidence. Full ledger: `docs/research/5n-germanium-
   contracted row ...", which does not literally cover a `partially_disbursed` row; the material page shows the generic "Binding: an
   agreement is executed, which is not a payment" label beside "Partially disbursed". No page or derived total presents $14.4M as paid.
 - Files: `data/seed/{financial-commitments,projects,sources}.json`, `tests/germanium-5n-award-review.test.ts`, the ledger, this file.
-- **Merge with PR #44.** PR #44 also adds a new top section to this file (its heading is also dated 2026-10-04), so the two will conflict at the same insertion
-  point. Resolve by keeping both sections whole, this one first, then PR #44's, and leaving everything below unchanged. Simulated in
-  scratch with `git merge-file` (base `b4183f8`, ours this working copy, theirs `b2cbd41`): one conflict hunk, at the top; the
-  resolution keeps each section byte-identical to its original and the shared tail unchanged. PR #44's branch was not touched.
+- **Merge with PR #44.** PR #44 merged first (`f190651`). Both PRs add a top section to this file (both headings are dated 2026-10-04), so merging `origin/main`
+  into this branch conflicted at that insertion point and nowhere else. The one conflict hunk was resolved by keeping both complete
+  sections, this one first, then PR #44's, each byte-identical to its original (apart from the status wording in this section) and
+  everything below unchanged. PR #44's historical tables and findings were not edited. Before merging, #44 received a documentation-only
+  correction (`1e4b1bc`): `--as-of` controls dated calculations but does not date-slice current financial or physical status, and
+  reproduction requires the pinned `b4183f8` data and `lib` (later data is a new comparison). The script change is comment-only and the
+  tables regenerate byte-identically. PR #44's section keeps its as-written status wording ("draft PR, unmerged"), which describes its state when it was
+  written; it merged as `f190651`.
 - **Follow-up work, not in this PR** (shared code or schema; details in the ledger): F1 amount-basis qualifier for the amount block (schema); F2 binding-total
   caption that covers `partially_disbursed`; F3 generic "Binding" label beside "Partially disbursed" on the material page; F4 date-sliced financial status
   for as-of derivations; F5 re-read the award once DoD's FY2026 year-end submission exists.
 - Open for the maintainer: the follow-ups above; `site.lastUpdated`; reconciling the announced $14.4M with the reported federal obligation ($12,458,128) and
-  non-federal funding ($2,505,981); merge order with PR #44; the events `evt-us-dod-5n-germanium-2024` and `evt-us-dow-5n-germanium-2025` were not edited.
+  non-federal funding ($2,505,981); the events `evt-us-dod-5n-germanium-2024` and `evt-us-dow-5n-germanium-2025` were not edited.
   The 2024 classification is approved; the revert path remains in the ledger if later evidence contradicts it.
 
 ## 2026-10-04: merged-release checkpoint and Strategic Concern → Industrial Response first baseline (draft PR, unmerged)
