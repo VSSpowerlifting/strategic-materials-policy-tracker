@@ -6928,12 +6928,31 @@
     "financialStatusHistory": [
       {
         "status": "decided",
-        "date": "2024-04-16",
+        "date": null,
         "sourceId": "src-dod-5n-germanium-2024",
-        "note": "DoD announced the award on 16 April 2024. No source in the current corpus establishes execution of a separate binding grant agreement, so the row is not advanced to contracted."
+        "note": "DoD announced the award on 16 April 2024. The release does not date the award decision, and the agreement's signing date (11 April 2024, below) precedes the announcement, so the announcement date is not used as the decision date."
+      },
+      {
+        "status": "contracted",
+        "date": "2024-04-11",
+        "sourceId": "src-usaspending-fa86502425501",
+        "note": "USAspending records cooperative agreement FA86502425501 to 5N PLUS SEMICONDUCTORS LLC as a new award signed 11 April 2024, described as DPA Title III sustainment and enhancement of the space-qualified solar cell supply chain (the subject of DoD's release). That federal award record establishes an executed agreement; the agreement text was not inspected. A later modification dated 20 May 2025 is described as definitizing the agreement. Binding describes the agreement, not paid money. Amounts, kept distinct: the federal obligation reported in the record is $12,458,128 (award plus modifications through 26 March 2026) and its non-federal funding is $2,505,981; neither equals the $14.4M announced figure, which is kept as stated, and how the announced figure relates to them is not reconciled."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": null,
+        "sourceId": "src-usaspending-fa86502425501",
+        "note": "Federal-reporting attribution only: neither DoD nor 5N+ states a payment, receivable or payment date. USAspending's File C (account-by-award) data, reported by DoD on federal account 097-0360 and linked to this award by its FAIN, carry three gross-outlay lines, each a fiscal-year-beginning-to-period-end figure: $998,701.28 (FY2024 period 9, ending June 2024), $1,032,342.24 (FY2025 period 9, ending June 2025) and $399,308.73 (FY2026 period 6, ending March 2026). By the official definition (OMB Circular A-11, quoted in USAspending's data dictionary) an outlay is a payment made to liquidate an obligation, so some money is reported paid out against this agreement. A reporting period is not a payment date, so the date is left null. The lines name no payee, each is only a floor for its fiscal year at that period end, and they are not totalled, so no amount paid is recorded. The award summary's $0 account outlay does not contradict them: USAspending counts toward that field only each fiscal year's latest closed DoD submission, and the same $0 appears on other awards on this account that carry interim outlay lines. Year-end data differ by year: for FY2024 the period-12 submission is available and holds account rows for other awards but no outlay line for this award; for FY2025 the period-12 submission is available but the File C data retrieved hold no rows for the account in it; for FY2026 no year-end submission existed at retrieval on 4 October 2026 (the latest DoD submission was period 11), so that year's position is open. The public data do not show whether the award was omitted or reported as zero, and omission is the usual pattern (10 of 13 FY2024 assistance awards with a period-9 outlay line have none at period 12). This is the corpus's first partial disbursement resting on federal-reporting data and not on a government or recipient statement. The entry is undated and reflects evidence reviewed on 4 October 2026; it does not establish that any disbursement had occurred at an earlier date, although derivations that read the latest entry show it at every as-of date. The reading is left to human review."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2024-04-16",
+        "sourceId": "src-dod-5n-germanium-2024",
+        "note": "DoD announced upgrading and expanding production facilities and tools at 5N Semi's St. George facility over a planned four years. 'Announced' records this stated plan, not construction. The St. George site itself already operates; no later physical stage of the funded scope is evidenced in the sources read, and 5N+'s 22 September 2026 facility-expansion release does not attribute that expansion to this award."
+      }
+    ],
     "terms": [
       {
         "kind": "duration",
@@ -6943,7 +6962,7 @@
         "unit": "years",
         "asStated": "planned to last four years",
         "sourceId": "src-dod-5n-germanium-2024",
-        "note": "The company separately describes the award as subject to conditions and pre-set milestones over the four-year term."
+        "note": "DoD states the four-year period. 5N+'s 18 April 2024 release says the award is 'based on meeting certain conditions' over four years; the phrase 'pre-set milestones' appears only in 5N+'s Q1 and Q2 2024 MD&As (recipient disclosures). The conditions and milestones are not described in any source read."
       }
     ],
     "outcomes": [],
@@ -6968,7 +6987,7 @@
         ],
         "evidence": "explicit",
         "locator": "Opening through technical-effort paragraphs",
-        "note": null
+        "note": "Announcement of the award; it does not state that an agreement was executed. The $14.4M is the announced amount and is not confirmed as the executed, obligated or paid amount (the federal award record reports a $12,458,128 federal obligation and $2,505,981 non-federal funding; how they relate to the announced figure is not reconciled)."
       },
       {
         "sourceId": "src-5n-germanium-2024",
@@ -6978,15 +6997,58 @@
           "facility",
           "location",
           "materials",
-          "status",
           "terms"
         ],
         "evidence": "explicit",
-        "locator": "Opening and award-description paragraphs",
-        "note": "5N+ confirms the milestone-conditioned four-year award."
+        "locator": "Headline, opening paragraph and second-paragraph award description",
+        "note": "5N+ says the US$14.4M award is based on meeting certain conditions over four years and enables manufacturing upgrades at St. George. It does not mention milestones, sourcing, recovery or refining, and does not state execution or payment."
+      },
+      {
+        "sourceId": "src-usaspending-fa86502425501",
+        "supports": [
+          "provider",
+          "legal_authority",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Award Summary: Award Type, Awarding and Funding Agency, Recipient, Date Signed; Transaction History: modification 0 (New Award, 2024-04-11) and PZ0001",
+        "note": "Federal-reported data. The place of performance is multi-state and the obligation differs from the announced amount, so this record is not used for amount, facility or location. Its File C gross-outlay lines support the partially_disbursed entry as federal-reporting attribution only, with no date of payment or amount paid (see that status note)."
+      },
+      {
+        "sourceId": "src-5n-mda-q1-2024",
+        "supports": [
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "materials",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 4, paragraph beginning 'Subsequent to quarter end, the Company also announced'",
+        "note": "Recipient disclosure: 5N+ states the 'pre-set milestones' wording and the St. George facility. It states no execution, receivable or payment."
+      },
+      {
+        "sourceId": "src-5n-mda-q2-2024",
+        "supports": [
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "materials",
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 4, sentence beginning 'Earlier in Q2 2024, the Company also announced'",
+        "note": "Recipient disclosure repeating the conditions and pre-set milestones. It states no execution, receivable or payment."
       }
     ],
-    "notes": "The award supports both substrate-manufacturing capability and germanium sourcing/recovery/refining; the $14.4M is not allocated between those stages."
+    "notes": "Amounts, kept distinct and not reconciled: the announced $14.4M (DoD and 5N+, April 2024); the federal obligation reported for the award, $12,458,128; and the non-federal funding recorded for it, $2,505,981 (USAspending lists $14,964,109 as total funding, the sum of those two). None of these is confirmed as the amount executed or paid, and no source read explains how the announced figure relates to the reported federal obligation. That relationship is the unresolved question; the federal record does report an obligation. The award supports both substrate-manufacturing capability and germanium sourcing/recovery/refining; the $14.4M is not allocated between those stages. Reviewed 4 October 2026: execution of a cooperative agreement is established by the federal award record (USAspending); the agreement text was not inspected. Some payment is reported in federal-reporting data only (USAspending File C outlay lines; see the partially_disbursed status note): neither DoD nor 5N+ states a payment, receivable or payment date (releases and filings through 3 August 2026), and no date of payment or amount paid is recorded. The physical stage supported for the funded scope is announced only, which records the stated plan and not construction. 5N+'s 22 September 2026 release about a roughly 50% St. George facility expansion says it is funded from existing capex plans and customer support and does not attribute it to this award.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-04",
+      "implementationStatusCheckedAt": "2026-10-04"
+    }
   },
   {
     "id": "fin-us-dod-mp-2025-additional-preferred-option",
@@ -8040,10 +8102,17 @@
         "status": "decided",
         "date": "2025-12-15",
         "sourceId": "src-dow-5n-germanium-2026",
-        "note": "The Department states that the investment was made on 15 December 2025 and announced later because of the government shutdown. No definitive grant agreement is in the current source set."
+        "note": "The Department states that the investment was made on 15 December 2025 and announced later because of the government shutdown. No execution or payment evidence is established in the reviewed sources: no definitive agreement or federal award record was found, USAspending lists no 2025 or later award to 5N Plus for this scope as of 4 October 2026 (an absence in one dataset, which can lag), and 5N+'s filings call it an award without stating execution. The row is not advanced to contracted."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-01-29",
+        "sourceId": "src-dow-5n-germanium-2026",
+        "note": "The Department states that 5N+ will expand zone-refining capacity at its St. George facility. 5N+ describes a planned expansion over 48 months (30 January 2026 release) and, in its 2025 Sustainability Report, over the next four years. 'Announced' records this stated plan, not construction. The St. George site itself operates; no later physical stage of the funded scope is evidenced in the sources read, and 5N+'s 22 September 2026 facility-expansion release does not attribute that expansion to this award."
+      }
+    ],
     "terms": [
       {
         "kind": "duration",
@@ -8089,7 +8158,7 @@
         ],
         "evidence": "explicit",
         "locator": "Opening through capacity paragraphs",
-        "note": null
+        "note": "The release says the investment was made on 15 December 2025; it does not say an agreement was executed or any amount paid."
       },
       {
         "sourceId": "src-5n-germanium-2026",
@@ -8107,10 +8176,37 @@
         ],
         "evidence": "explicit",
         "locator": "Opening through capacity paragraphs",
-        "note": null
+        "note": "Recipient release: 5N+ says it 'has been awarded' the grant and describes future-tense capacity growth ('will enable', 'gradually', 'In time') over 48 months. It states no execution, condition or payment."
+      },
+      {
+        "sourceId": "src-5n-mda-q4-2025",
+        "supports": [
+          "instrument",
+          "amount",
+          "recipient",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 4, Specialty Semiconductors discussion, sentence beginning 'In early 2026, the Company announced'",
+        "note": "Recipient securities disclosure: the grant is described as awarded, without naming St. George, stating execution, conditions or payment. The FY2025 financial statements carry only a general government-grants accounting policy and no award-specific receivable or deferred amount."
+      },
+      {
+        "sourceId": "src-5n-sustainability-2025",
+        "supports": [
+          "facility",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Page 42, Waste Management, 'Driving Circularity Through Germanium Recovery'",
+        "note": "Recipient publication (not a securities filing): 5N+ describes a 'planned expansion' of germanium recovery and recycling at St. George 'supported by a significant financial award from the U.S. government', to increase recovery 'over the next four years'. It states no execution, payment or stage. It dates the announcement to 2025, whereas the Department and the company's release date it to January 2026, and it also attaches space-qualified solar-cell capacity to this award, which is the 2024 award's subject; neither point is coded here."
       }
     ],
-    "notes": "A separate DPA-funded scope from the 2024 germanium-substrate award. Recycling and refining are both named, but the $18.1M is not divided by stage."
+    "notes": "A separate DPA-funded scope from the 2024 germanium-substrate award. Recycling and refining are both named, but the $18.1M is not divided by stage. Reviewed 4 October 2026: no execution or payment evidence established in the reviewed sources (no executed-agreement document, federal award record, payment or payment date was found). The physical stage supported for the funded scope is announced only, which records the stated plan and not construction (recipient wording is future-tense, including its 2025 Sustainability Report, which is undated). 5N+'s 22 September 2026 release about a roughly 50% St. George facility expansion says it is funded from existing capex plans and customer support and does not attribute it to this award.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-04",
+      "implementationStatusCheckedAt": "2026-10-04"
+    }
   },
   {
     "id": "fin-us-dow-arr-antimony-2025",

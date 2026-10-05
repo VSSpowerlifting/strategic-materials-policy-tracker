@@ -1,5 +1,72 @@
 # Project state
 
+## 2026-10-04: 5N Plus St. George germanium award review and accounting review (PR #45, merged after PR #44)
+
+**Status.** Branch `research/5n-germanium-award-review-2026-10-04`, at `origin/main` `b4183f8` (local `main` is stale at `0b7f336`).
+The branch already held this task's uncommitted draft; it was reviewed, corrected and kept, not recreated. The maintainer approved the
+2024 classification (`partially_disbursed` on federal-reporting attribution, null date, no amount paid) on 2026-10-04 and authorised a commit to this branch, a push and a draft PR. The maintainer then approved PR #44's analytical baseline and this PR's source-reviewed classification and asked for #44 to merge first, then #45. PR #44 (`analysis/concern-response-baseline-2026-10-03`) was squash-merged as `f190651`
+after a documentation-only correction (head `1e4b1bc`; see below); its dated tables stay as the 2026-10-03 baseline and this entry does not supersede them. A second, narrower accounting review the same
+day resolved the 2024 outlay evidence. Full ledger: `docs/research/5n-germanium-award-review-2026-10-04.md`.
+
+- Scope: `fin-us-dod-5n-germanium-2024` and `fin-us-dow-5n-germanium-2025`, their two projects, and sources. Every source in
+  ledger rows 1-12 was read twice on 2026-10-04 (second pass independent of the first); row 13, the web search, ran once; rows
+  14-18 (USAspending File C downloads, data dictionary, published source code, award-summary controls, year-end availability) belong to the accounting review.
+- **2024 award, accounting conclusion.** Execution is established by the federal award record (USAspending: cooperative agreement
+  FA86502425501, signed 2024-04-11, definitized 2025-05-20); the agreement text was not inspected. The row is `partially_disbursed`
+  on **federal-reporting attribution only**: File C carries three gross-outlay lines on account 097-0360 (FY2024 P9 $998,701.28,
+  FY2025 P9 $1,032,342.24, FY2026 P6 $399,308.73), each a fiscal-year-beginning-to-period-end figure from a different fiscal year,
+  defined (OMB A-11) as payments made to liquidate an obligation. The status date is **null** (a reporting period is not a payment
+  date), **no amount paid is recorded** and the lines are not totalled. Neither DoD nor 5N+ states a payment, receivable or payment
+  date. The award summary's $0 account outlay is USAspending counting only each fiscal year's latest closed DoD submission; the
+  FY2024 and FY2025 year-end submissions are available and carry no line for the award, and FY2026's year-end submission did not yet exist
+  at retrieval (the latest was period 11). The USAspending code was read at commit `7c86854` and is consistent with the observed API behavior; it is not proof of the deployed implementation (tested against 49 awards on the account; all 14 comparable awards, this one included, show $0). The public data cannot
+  show whether the year-end submissions omitted the award or reported zero.
+- **Amounts, kept distinct and unreconciled.** Announced $14.4M (the row's one amount, as stated); reported federal obligation $12,458,128;
+  non-federal funding $2,505,981 (USAspending `total_funding` $14,964,109 is their sum). None is confirmed as the amount executed
+  or paid. The federal dataset does report an obligation; the unresolved question is how the announced figure relates to it. The row's `contracted` and `partially_disbursed` entries describe the agreement and the federal-reporting lines; neither says $14.4M was paid.
+- **2025 award.** Stays `decided` (15 December 2025). No execution or payment evidence established in the reviewed sources (no
+  agreement, federal award record, payment or payment date found; USAspending can lag). Recipient filings and releases say "awarded" only.
+- **Physical clock.** Both rows carry an `announced` entry (2024-04-16 DoD release; 2026-01-29 DoW release), described as the stated
+  plan, not construction. No later stage is evidenced. 5N+'s 22 September 2026 facility-expansion release is funded from capex and
+  customers per the company and is not attributed to either award. 5N+'s 2025 Sustainability Report (undated; file metadata April
+  2026) still calls the recovery expansion "planned".
+- Financial and implementation review dates are separate fields, both 2026-10-04. The queue treats a review as resetting a row's
+  clock, so both rows read P3 from review, not from new status evidence.
+- "pre-set milestones" cites 5N+'s Q1/Q2 2024 MD&As; the April 2024 release only says "certain conditions".
+- **Retrospective sensitivity comparison with PR #44, not the original historical baseline** (PR #44's script at `b2cbd41`, run with
+  `--as-of 2026-10-03` over records that include evidence reviewed on 2026-10-04, so the 2026-10-04 review stamps postdate the as-of
+  date; PR #44's tables are unedited). Binding corpus rows 34 to 35, not-yet-binding 49 to 48, projects with a recorded physical
+  status 13 to 15, germanium binding 0 to 1. Review stamps alone move the queue (P1 bundles 18 to 16) and germanium P1-exposed 3 to
+  1. The partial-disbursement reading alone moves germanium funded rows 0 to 1 and projects with a funded row 6 to 7 of 29; holding
+  the 2024 row at `contracted` leaves funded at 0. Full table in the ledger.
+- **Historical as-of limitation.** The `partially_disbursed` entry is undated and reflects evidence reviewed on 2026-10-04; it does not
+  establish disbursement at any earlier date. Financial status is not date-sliced in the shared code (`currentFinancialStatus` returns the
+  last entry), so every as-of derivation, including PR #44's (whose analysis document now states the same limitation), shows the row as `partially_disbursed` at every as-of date (probed from
+  2024-03-01 to 2026-10-03), and queue ages go negative before 2026-10-04. No date of payment is invented and no shared derivation code is changed.
+- **`site.lastUpdated`** is the dataset's record-as-of date (it dates derived statuses, exports, structured data and the banner),
+  not a page-edit timestamp. No status entry written here postdates its current value, 2026-10-02, so it is left unchanged, as in
+  the #43 precedent below. Changing it is a site-wide as-of decision for the maintainer.
+- **Rendered output** (both awards and the project, organization, material and API views checked on a restarted dev server):
+  statuses, citations and caveats render as recorded. Amount-presentation gaps in shared code, not changed: the amount block has no
+  "announced" qualifier (the schema has no amount-basis field); the project, organization and material totals caption says "A
+  contracted row ...", which does not literally cover a `partially_disbursed` row; the material page shows the generic "Binding: an
+  agreement is executed, which is not a payment" label beside "Partially disbursed". No page or derived total presents $14.4M as paid.
+- Files: `data/seed/{financial-commitments,projects,sources}.json`, `tests/germanium-5n-award-review.test.ts`, the ledger, this file.
+- **Merge with PR #44.** PR #44 merged first (`f190651`). Both PRs add a top section to this file (both headings are dated 2026-10-04), so merging `origin/main`
+  into this branch conflicted at that insertion point and nowhere else. The one conflict hunk was resolved by keeping both complete
+  sections, this one first, then PR #44's, each byte-identical to its original (apart from the status wording in this section) and
+  everything below unchanged. PR #44's historical tables and findings were not edited. Before merging, #44 received a documentation-only
+  correction (`1e4b1bc`): `--as-of` controls dated calculations but does not date-slice current financial or physical status, and
+  reproduction requires the pinned `b4183f8` data and `lib` (later data is a new comparison). The script change is comment-only and the
+  tables regenerate byte-identically. PR #44's section keeps its as-written status wording ("draft PR, unmerged"), which describes its state when it was
+  written; it merged as `f190651`.
+- **Follow-up work, not in this PR** (shared code or schema; details in the ledger): F1 amount-basis qualifier for the amount block (schema); F2 binding-total
+  caption that covers `partially_disbursed`; F3 generic "Binding" label beside "Partially disbursed" on the material page; F4 date-sliced financial status
+  for as-of derivations; F5 re-read the award once DoD's FY2026 year-end submission exists.
+- Open for the maintainer: the follow-ups above; `site.lastUpdated`; reconciling the announced $14.4M with the reported federal obligation ($12,458,128) and
+  non-federal funding ($2,505,981); the events `evt-us-dod-5n-germanium-2024` and `evt-us-dow-5n-germanium-2025` were not edited.
+  The 2024 classification is approved; the revert path remains in the ledger if later evidence contradicts it.
+
 ## 2026-10-04: merged-release checkpoint and Strategic Concern → Industrial Response first baseline (draft PR, unmerged)
 
 **Supersedes** the "draft PR #43 open, unmerged" section below, which is kept as the record of how #43 was assembled.
