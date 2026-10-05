@@ -42,6 +42,11 @@ export function InlineAmount({ amount }: { amount: MonetaryAmount | null }) {
       ) : null}
       <span className="font-mono text-[11px] text-muted">{amount.currency}</span>
       <span className="font-display font-semibold">{formatDecimalCompact(amount.value)}</span>
+      {amount.basisLabel ? (
+        <span className="font-mono text-[11px] lowercase text-faint" title={amount.basisNote ?? undefined}>
+          {amount.basisLabel}
+        </span>
+      ) : null}
     </span>
   );
 }

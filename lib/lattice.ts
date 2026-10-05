@@ -45,7 +45,7 @@ export type LatticeCommitment = Common & {
   /** "National Wealth Fund to Tungsten West"; a missing party is left out, never guessed. */
   parties: string;
   /** Null when the source states no amount. `value` is the compact decimal in `currency`, never converted. */
-  amount: { qualifier: string | null; currency: string; value: string; asStated: string } | null;
+  amount: { qualifier: string | null; currency: string; value: string; asStated: string; basisLabel?: string } | null;
   instrument: string;
   /** "Announced, 25 Aug 2026"; the date is the status entry's own, absent when the source gives none. */
   status: string;
@@ -135,6 +135,7 @@ export function amountView(c: FinancialCommitment): LatticeCommitment["amount"] 
         currency: c.amount.currency,
         value: formatDecimalCompact(c.amount.value),
         asStated: c.amount.amountAsStated,
+        ...(c.amount.basisLabel ? { basisLabel: c.amount.basisLabel } : {}),
       }
     : null;
 }

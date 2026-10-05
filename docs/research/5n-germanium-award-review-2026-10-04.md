@@ -216,8 +216,8 @@ server held the seed JSON loaded at start-up).
   the issuing government". Financial history shows three entries (Decided, date not stated; Contracted, 11 Apr 2024; Partially
   disbursed, date not stated, current), each with its source link. The partially-disbursed note opens "Federal-reporting
   attribution only". The Notes block states the three amounts, that none is confirmed as executed or paid, and that the physical
-  stage "records the stated plan and not construction". The DoD evidence note states "$14.4M is the announced amount and is not confirmed as the executed,
-  obligated or paid amount", and the USAspending evidence note names the lines as federal-reporting attribution only.
+  stage "records the stated plan and not construction". The DoD evidence note states "$14.4M is the announced amount" and that it is unreconciled with the
+  reported federal obligation and non-federal funding (wording corrected 2026-10-05), and the USAspending evidence note names the lines as federal-reporting attribution only.
 - **2025 award page.** Status "Decided", 15 Dec 2025; amount "USD 18.1 million · As stated". The status note and the Notes block
   carry the approved wording ("no execution or payment evidence established in the reviewed sources"), and the implementation note
   says "'Announced' records this stated plan, not construction."

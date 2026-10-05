@@ -45,6 +45,7 @@ function CapitalRow({ row, materialName }: { row: CapitalRowView; materialName: 
       ) : null}
       <p className="mt-1.5">{row.amount ? <Money amount={row.amount} /> : <em className="text-faint">No amount stated</em>}</p>
       {row.asStated ? <AsStated text={row.asStated} /> : null}
+      {row.amountBasis ? <p className="text-xs leading-5 text-faint">Amount basis: {row.amountBasis.toLowerCase()}; see the record page for how it relates to reported figures.</p> : null}
       <p className="mt-1 text-xs leading-5 text-muted">
         {row.instrument}. {row.status.text}.
       </p>
