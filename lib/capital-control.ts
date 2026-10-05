@@ -176,6 +176,11 @@ export type InstrumentSum = {
        */
       binding: QualifierSums;
       notYetBinding: QualifierSums;
+      /**
+       * Present only when a counted row's amount carries a basis note (for example an announced
+       * amount unreconciled with a reported obligation). Informational: it never changes a sum.
+       */
+      amountBasis?: { commitmentId: string; label: string; note: string }[];
     }
   | {
       /**
@@ -333,7 +338,18 @@ export function totalCommitments(
           const bucket = isBinding(c) ? binding : notYetBinding;
           bucket[q] = addDecimals([bucket[q] ?? "0", c.amount!.value]);
         }
-        instruments.push({ instrument, countedIds: of.map((c) => c.id), summed: true, byQualifier, binding, notYetBinding });
+        const amountBasis = of.flatMap((c) =>
+          c.amount?.basisLabel && c.amount.basisNote ? [{ commitmentId: c.id, label: c.amount.basisLabel, note: c.amount.basisNote }] : [],
+        );
+        instruments.push({
+          instrument,
+          countedIds: of.map((c) => c.id),
+          summed: true,
+          byQualifier,
+          binding,
+          notYetBinding,
+          ...(amountBasis.length ? { amountBasis } : {}),
+        });
       }
       return { ...base, status: "summed", instruments, overlap: null };
     });

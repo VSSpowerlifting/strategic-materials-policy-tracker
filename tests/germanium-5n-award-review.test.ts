@@ -49,7 +49,7 @@ test("2024 award: executed per the federal award record; partially disbursed on 
   assert.match(row.notes!, /how the announced figure relates to the reported federal obligation\. That relationship is the unresolved question/);
   assert.match(contracted, /the federal obligation reported in the record is \$12,458,128/);
   const dodEvidence = row.evidence.find((e) => e.sourceId === "src-dod-5n-germanium-2024")!;
-  assert.match(dodEvidence.note!, /not confirmed as the executed, obligated or paid amount/);
+  assert.match(dodEvidence.note!, /announced amount\. It is unreconciled with the \$12,458,128 federal obligation.*no amount paid is recorded/);
 
   // Execution comes from the federal award record, whose agreement text was not inspected.
   assert.match(contracted, /establishes an executed agreement; the agreement text was not inspected/);

@@ -654,6 +654,14 @@ export type MonetaryAmount = {
   /** The amount as the source prints it, e.g. "up to $3.8 billion". */
   amountAsStated: string;
   currencyBasis: CurrencyBasis;
+  /**
+   * Optional, free text: what this figure is as the sources characterise it (for example an
+   * announced amount) when that differs from an executed or paid amount. Set only where a
+   * source or review states the basis; absent means no basis is claimed, not that it is confirmed.
+   */
+  basisNote?: string | null;
+  /** Optional short tag for compact rows (for example "Announced"); set only together with `basisNote`. */
+  basisLabel?: string | null;
 };
 
 /**

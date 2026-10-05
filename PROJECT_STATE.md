@@ -1,5 +1,48 @@
 # Project state
 
+## 2026-10-05: F1-F3 amount and status presentation (draft PR)
+
+**Status.** Branch `feat/f1-f3-amount-status-presentation`, created from `origin/main` `a376dda` (PR #45 squash). The checkout was on the
+merged PR #45 head, whose tree equals `a376dda` but is not in main's history, so it was not stacked on. Local `main` is stale at
+`0b7f336` (verified; not moved). Opened as a draft PR; not merged or deployed.
+
+- **F1.** Existing amount provenance was inspected first: `amountAsStated` holds only the source's wording, and the `evidence` notes that
+  support `amount` also describe other fields (31 of 86 rows carry one), so rendering them under "Amount" would misstate other rows.
+  Added two optional free-text fields on `MonetaryAmount`, `basisNote` and a short `basisLabel` (no enum, no new taxonomy), validated in
+  `scripts/validate-capital-control.ts`. Set on one record only, `fin-us-dod-5n-germanium-2024` (a test asserts this): "Announced amount
+  (DoD release, 16 April 2024)", unreconciled with the $12,458,128 federal obligation reported in the federal award record and the
+  $2,505,981 non-federal funding reported there; no amount paid recorded. (An earlier draft said the figure was "not confirmed as
+  obligated"; that was wrong, because the federal record does report an obligation.) Shown as "Amount basis" on the record page, as a
+  lowercase "announced" tag beside the compact amount (`InlineAmount`: capital list, programme, interplay lists) and as an "Amount basis:
+  announced; see the record page" line on the material-page capital row. Amounts, statuses and counting rules are unchanged; exports and the API gain only the additive basis fields listed below.
+  **Aggregates and machine-readable outputs.** Totals now carry an optional, informational `amountBasis` list per summed instrument
+  (`lib/capital-control.ts`, present only when a counted row has a basis; sums and counting are unchanged). `CurrencyTotals` renders it as
+  "Includes an announced amount (<row id>): <basisNote>" (5N+ project, 5N+ and DoD organization pages). Probed by calling every route
+  handler and the lattice builder directly; outputs that expose the 14,400,000 figure and now carry the basis: `/api/v1/financial-commitments`
+  and `/[id]`, `/api/export/dataset.json` (the amount object, `basisLabel` and `basisNote`), `/api/export/financial-commitments.csv`
+  (two columns appended at the end, `amountBasisLabel` and `amountBasisNote`, blank for every other row; no column moved),
+  `/api/v1/capital-intelligence/summary` and `/api/v1/projects/[id]` (instrument `amountBasis`), and the lattice model (`amount.basisLabel`).
+  **Outputs that mention $14.4M without a basis, left as they are:** event and source text (event summary and title, source titles and
+  notes: the DoD and 5N+ wording, which says "awarded"; the event records were not edited), the events/sources CSVs, citation exports
+  (RIS/CSL titles; the BibTeX export, probed directly for the collection and the 2024 event entry, contains no $14.4M, no amount, value or total field, so no change) and `/api/v1/events`, `/api/v1/sources`, `/api/v1/organizations/[id]`; the financial-status-history CSV
+  repeats the figure only inside a status note that already says "announced". None of these presents an amount field.
+- **F2.** The public-commitment caption (`layerGlosses` in `lib/labels.ts`, `LAYER_GLOSSES` in `lib/material-dossier.ts`) now reads: "A
+  contracted, partially disbursed or disbursed row is binding because an agreement is executed; payment is tracked separately. A
+  contracted row need not mean funds are obligated or paid, and a partially disbursed row is not fully paid." It does not say payment
+  alone makes a row binding. Rendered check on the built material pages: contracted (`fin-au-arafura-nolans-2025-equity`),
+  partially disbursed (the 2024 5N row) and disbursed (`fin-jp-jare-lynas-2023-equity`) all show the new caption and label. The two API counting-rule strings were left as
+  they are (one already names all three statuses; the other is true for contracted rows). The /capital and overview definitions
+  ("a contract has been executed or money paid") were not edited.
+- **F3.** Material-page standing label: "Binding: an agreement is executed; payment is tracked separately".
+- Tests: new `tests/amount-status-presentation.test.ts` (written first and failing); one assertion in
+  `tests/capital-control-analytics.test.ts` updated to the new caption. Checks: `npm test` 387/387, `npm run validate`, `npm run typecheck`
+  and `npm run build` pass; ESLint is clean on the changed files (repo-wide `npm run lint` reports thousands of problems, all from
+  other worktrees' `.next` output under `.claude/worktrees/`).
+- Unchanged: `docs/analysis/*`, date-slicing, `site.lastUpdated` (2026-10-02), PR #44/#45 sections below.
+- **Remaining ambiguity.** The announced $14.4M is still unreconciled with the federal figures. The basis is prose plus a short tag, not a
+  structured field, so other rows with a non-executed figure stay unlabelled until each is source-reviewed. Aggregate totals are not
+  qualified per row (see F1). F4 (date-sliced status) and F5 (FY2026 year-end re-read) remain open.
+
 ## 2026-10-04: 5N Plus St. George germanium award review and accounting review (PR #45, merged after PR #44)
 
 **Status.** Branch `research/5n-germanium-award-review-2026-10-04`, at `origin/main` `b4183f8` (local `main` is stale at `0b7f336`).

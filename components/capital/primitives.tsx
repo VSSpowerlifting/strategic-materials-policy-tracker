@@ -106,6 +106,12 @@ export function AmountDetail({ amount }: { amount: MonetaryAmount }) {
         {amount.currency} {groupDecimal(amount.value)} · {valueQualifierLabels[amount.qualifier]} · Currency{" "}
         {currencyBasisLabels[amount.currencyBasis].toLowerCase()}
       </p>
+      {amount.basisNote ? (
+        <p className="mt-2 text-sm leading-6 text-muted">
+          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Amount basis </span>
+          {amount.basisNote}
+        </p>
+      ) : null}
     </div>
   );
 }

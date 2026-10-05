@@ -6892,7 +6892,9 @@
       "currency": "USD",
       "qualifier": "exact",
       "amountAsStated": "$14.4 million",
-      "currencyBasis": "issuer_context"
+      "currencyBasis": "issuer_context",
+      "basisLabel": "Announced",
+      "basisNote": "Announced amount (DoD release, 16 April 2024). It is unreconciled with the $12,458,128 federal obligation reported in the federal award record and with the $2,505,981 non-federal funding reported there. No amount paid is recorded; some payment is reported in federal-reporting data only."
     },
     "provider": "U.S. Department of Defense",
     "providerJurisdiction": "us",
@@ -6987,7 +6989,7 @@
         ],
         "evidence": "explicit",
         "locator": "Opening through technical-effort paragraphs",
-        "note": "Announcement of the award; it does not state that an agreement was executed. The $14.4M is the announced amount and is not confirmed as the executed, obligated or paid amount (the federal award record reports a $12,458,128 federal obligation and $2,505,981 non-federal funding; how they relate to the announced figure is not reconciled)."
+        "note": "Announcement of the award; it does not state that an agreement was executed. The $14.4M is the announced amount. It is unreconciled with the $12,458,128 federal obligation and the $2,505,981 non-federal funding reported in the federal award record, and no amount paid is recorded."
       },
       {
         "sourceId": "src-5n-germanium-2024",

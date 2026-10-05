@@ -279,6 +279,9 @@ export function financialCommitmentsCsv(): string {
       "projectId",
       "programmeId",
       "layer",
+      // v0.7, appended: the amount's basis where a record states one (blank for every other row).
+      "amountBasisLabel",
+      "amountBasisNote",
     ],
     getAllFinancialCommitments().map((c) => [
       c.id,
@@ -317,6 +320,8 @@ export function financialCommitmentsCsv(): string {
       c.projectId ?? "",
       c.programmeId ?? "",
       layerOf(c),
+      c.amount?.basisLabel ?? "",
+      c.amount?.basisNote ?? "",
     ]),
   );
 }

@@ -837,5 +837,5 @@ test("USA Rare Earth's contracted direct funding says where its status shows tha
   // Where "contracted" and "binding" are defined, they say an executed agreement need not have obligated or paid funds.
   assert.ok(buildCapitalControlSummary().countingRules.some((r) => /Binding describes the agreement, not the money/.test(r) && /obligation of funds/.test(r)));
   assert.ok(buildCapitalIntelligenceSummary().countingRules.some((r) => /contracted row is an executed agreement/.test(r) && /obligated or paid/.test(r)));
-  assert.match(layerGlosses.public_commitment, /contracted row is an executed agreement.*obligated or paid/);
+  assert.match(layerGlosses.public_commitment, /contracted, partially disbursed or disbursed row is binding because an agreement is executed.*obligated or paid/);
 });

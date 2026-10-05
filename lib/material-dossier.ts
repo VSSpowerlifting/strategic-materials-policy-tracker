@@ -125,6 +125,8 @@ export type CapitalRowView = {
   provider: string | null;
   recipient: string | null;
   amount: MoneyText | null;
+  /** A short basis tag for the amount (for example "Announced"), set only where a record carries one. */
+  amountBasis: string | null;
   /** The source wording of the amount, verbatim, in its own language. */
   asStated: string | null;
   instrument: string;
@@ -309,7 +311,7 @@ const LAYER_LABELS: Record<LayerKey, string> = {
 };
 
 const LAYER_GLOSSES: Record<LayerKey, string> = {
-  public_commitment: "Committed to a recipient by a government or public enterprise, at the status each row states. A contracted row is an executed agreement, which need not mean funds are obligated or paid.",
+  public_commitment: "Committed to a recipient by a government or public enterprise, at the status each row states. A contracted, partially disbursed or disbursed row is binding because an agreement is executed; payment is tracked separately by status. A contracted row need not mean funds are obligated or paid, and a partially disbursed row is not fully paid.",
   joint_vehicle_commitment: "Committed by a vehicle that public and private parties set up together. The public share is not stated.",
   other_commitment: "Committed with private capital, or capital whose source the sources do not state.",
   funding_option: "A ceiling a party may call on under an executed agreement. An option is not committed money until it is exercised.",
@@ -322,7 +324,7 @@ const LAYER_GLOSSES: Record<LayerKey, string> = {
 };
 
 const STANDING_LABELS: Record<LegalStanding, string> = {
-  binding: "Binding: an agreement is executed, which is not a payment",
+  binding: "Binding: an agreement is executed; payment is tracked separately",
   not_yet_binding: "Not yet binding",
   ended: "Ended: withdrawn or lapsed",
   status_not_stated: "Status not stated",
@@ -411,6 +413,7 @@ function rowView(c: FinancialCommitment, ctx: Ctx, opts: { parts: CapitalRowView
     provider: partiesText(c.providerOrgIds, c.provider, ctx),
     recipient: partiesText(c.recipientOrgIds, c.recipient, ctx),
     amount: money,
+    amountBasis: c.amount?.basisLabel ?? null,
     asStated: a ? a.asStated : null,
     instrument: financialInstrumentLabels[c.instrument],
     status: financialStatusLine(c),

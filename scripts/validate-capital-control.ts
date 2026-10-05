@@ -450,6 +450,8 @@ const AMOUNT: Fields<MonetaryAmount> = {
   qualifier: oneOf(VALUE_QUALIFIERS),
   amountAsStated: text(),
   currencyBasis: oneOf(CURRENCY_BASES),
+  basisNote: optionalText(),
+  basisLabel: optionalText(),
 };
 
 const RELATIONSHIP: Fields<FinancialRelationship> = {
