@@ -35,13 +35,15 @@ merged PR #45 head, whose tree equals `a376dda` but is not in main's history, so
   ("a contract has been executed or money paid") were not edited.
 - **F3.** Material-page standing label: "Binding: an agreement is executed; payment is tracked separately".
 - Tests: new `tests/amount-status-presentation.test.ts` (written first and failing); one assertion in
-  `tests/capital-control-analytics.test.ts` updated to the new caption. Checks: `npm test` 387/387, `npm run validate`, `npm run typecheck`
-  and `npm run build` pass; ESLint is clean on the changed files (repo-wide `npm run lint` reports thousands of problems, all from
-  other worktrees' `.next` output under `.claude/worktrees/`).
+  `tests/capital-control-analytics.test.ts` updated to the new caption. Checks on the final feature commit `edd8e21` (local): `npm test` 392/392, `npm run validate`, `npm run typecheck`
+  and `npm run build` pass; scoped ESLint on the changed files is clean. Repo-wide `npm run lint` was not re-run on that commit; in earlier
+  local runs it reported thousands of problems, all from other worktrees' `.next` output under `.claude/worktrees/`. CI results are
+  recorded with the PR, not here.
 - Unchanged: `docs/analysis/*`, date-slicing, `site.lastUpdated` (2026-10-02), PR #44/#45 sections below.
 - **Remaining ambiguity.** The announced $14.4M is still unreconciled with the federal figures. The basis is prose plus a short tag, not a
-  structured field, so other rows with a non-executed figure stay unlabelled until each is source-reviewed. Aggregate totals are not
-  qualified per row (see F1). F4 (date-sliced status) and F5 (FY2026 year-end re-read) remain open.
+  structured field, so other rows with a non-executed figure stay unlabelled until each is source-reviewed. Aggregate totals carry the basis through
+  the `amountBasis` annotation (rendered as "Includes an announced amount (<row id>): <note>" and exported on summed instruments in the
+  summary and project APIs); only the 2024 5N row has one, and the totals themselves are unchanged. F4 (date-sliced status) and F5 (FY2026 year-end re-read) remain open.
 
 ## 2026-10-04: 5N Plus St. George germanium award review and accounting review (PR #45, merged after PR #44)
 
