@@ -1,8 +1,19 @@
 # Project state
 
-## 2026-10-07: Nickel financing/project backfill — NTwist NRC IRAP (draft)
+## 2026-10-07: Telescope lithium financing/project backfill — G7 CMPA orphan completion (draft)
 
-**Status.** Branch `feat/nickel-financing-backfill-20261007`, cut from `main` `dbc058d` after PR #53 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/telescope-lithium-backfill-20261007`, cut from `main` `d295789` after PR #54 merged. Draft review phase; unmerged and not deployed.
+
+- Backfills the two Telescope Innovations lithium projects already named in the October 2025 G7 Critical Minerals Production Alliance event; no new policy event is created.
+- Li-PICK is recorded at the exact C$319,200 agreement value and `contracted` from 2024-09-01 via federal contribution agreement 1022725. It is a recycling-stage lithium project converting spent lithium-ion batteries into cathode active material and battery-grade lithium carbonate. No project site or payment timing is inferred from the recipient-location disclosure.
+- The lithium-sulphide project uses NRCan's formal title, exact C$3,039,344 funded amount and Vancouver project location from the standing CMRDD register. Its financial status stays `decided` from the 2025-10-31 conditional approval because no matching binding agreement date was located; no payment/disbursement is inferred.
+- NRCan says the lithium-sulphide project was launched in 2025 and is expected to be completed by 2028. That language is preserved without forcing it into a physical-status category that does not cleanly describe an R&D/pilot project.
+- Out of scope: PH7/Excir and the G7 round's remaining items, unrelated project-registry cleanup, PGMs, Indonesian policy, or schema/vocabulary changes.
+- Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: Nickel financing/project backfill — NTwist NRC IRAP (PR #54, merged)
+
+**Status.** PR #54 merged to `main` as `d29578911e20ba971b25082ba697997b8dd73d70`; reviewed head `ad426a5157ca78d78e878c1f18e37e0b40a0ca26` cleared validate, typecheck, lint, 427/427 tests, build and Vercel. Post-merge CI #162 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Backfills the C$500,000 NRC IRAP nickel item already named in the October 2025 G7 Critical Minerals Production Alliance event and nickel dossier; it does not create a new policy event.
 - Adds one public commitment row to NTwist Inc. and one R&D-stage nickel project naming Vale Europe Ltd. and Tunley Environmental Ltd. as the two official-source project collaborators.

@@ -515,6 +515,86 @@
     "notes": null
   },
   {
+    "id": "prj-ca-telescope-lipick",
+    "name": "Li-PICK - Energy Efficient Battery Recycling Enabled by Recrystallization",
+    "sponsorOrgIds": [
+      "org-telescope-innovations"
+    ],
+    "locations": [],
+    "stages": [
+      "recycling"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-canada-grant-telescope-lipick-2024",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Title; Recipient's Legal Name; Description",
+        "note": "The agreement describes converting spent lithium-ion batteries into cathode active material and battery-grade lithium carbonate. The disclosure's Vancouver location is a recipient location, not necessarily a project site, so no project location is inferred."
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Telescope Innovations Corp.",
+        "note": "NRCan describes Telescope's project with CellMine (United Kingdom) as converting spent lithium-ion batteries into battery-grade lithium carbonate and cathode active material."
+      }
+    ],
+    "notes": "CellMine (United Kingdom) is a named project collaborator in the G7 backgrounder. No separate organization registry record is created because the source does not establish its legal identity or entity type."
+  },
+  {
+    "id": "prj-ca-telescope-lithium-sulphide",
+    "name": "A Route to Establish a Canadian Lithium Sulphide Supply Chain for Solid-State Batteries",
+    "sponsorOrgIds": [
+      "org-telescope-innovations"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Vancouver, British Columbia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Funded Projects: \"A Route to Establish a Canadian Lithium Sulphide Supply Chain for Solid-State Batteries\"",
+        "note": "NRCan names Telescope Innovations Corp., Vancouver, British Columbia, lithium, and a project to scale up and pilot low-cost lithium sulphide manufacturing."
+      }
+    ],
+    "notes": "NRCan lists the project as launched in 2025 and expected to be completed by 2028. That wording is retained in source notes rather than forced into a physical-status category that does not directly match an R&D/pilot project."
+  },
+  {
     "id": "prj-ca-trail-strategic-metals",
     "name": "Trail Strategic Metals Initiative",
     "sponsorOrgIds": [
