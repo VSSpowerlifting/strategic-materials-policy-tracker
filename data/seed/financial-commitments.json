@@ -2087,6 +2087,77 @@
     "notes": null
   },
   {
+    "id": "fin-ca-g7-2025-ntwist-nrc-irap",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "500000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$500,000 through the National Research Council of Canada (NRC)’s Industrial Research Assistance Program",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "National Research Council of Canada (Industrial Research Assistance Program)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "NTwist Inc.",
+    "recipientOrgIds": [
+      "org-ntwist"
+    ],
+    "project": "Nickel production and efficiency R&D project",
+    "projectId": "prj-ca-ntwist-nickel-efficiency",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "research_development"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "nickel"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "NRCan lists the project with $500,000 through NRC IRAP. No matching C$500,000 agreement was located in the reviewed federal grants disclosure, so no contracted or binding stage is inferred."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: NTwist Inc.",
+        "note": "NRCan identifies C$500,000 through NRC IRAP for NTwist's project with Vale Europe and Tunley Environmental to improve nickel production and efficiency; the item appears in the backgrounder's research-and-development project section."
+      }
+    ],
+    "notes": "Vale Europe Ltd. and Tunley Environmental Ltd. are named project collaborators, not recipients of the Canadian funding. No project location, payment, or physical production milestone is inferred."
+  },
+  {
     "id": "fin-ca-g7-2025-ucore-feddev",
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [

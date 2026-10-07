@@ -109,12 +109,28 @@ test("Australian CMPTI promotes nickel from the existing statutory material list
   assert.ok(getEventById("evt-au-cmpti-2025")?.affectedMaterialIds.includes("nickel"));
 });
 
-test("Canada G7 CMPA carries event-level nickel scope without inventing a new financial row", () => {
+test("Canada G7 CMPA now codes the NTwist nickel R&D commitment and project without overclaiming maturity", () => {
   const event = getEventById("evt-ca-g7-cmpa-2025")!;
   assert.ok(event.affectedMaterialIds.includes("nickel"));
   assert.match(event.summary, /C\$500,000/);
-  assert.match(event.summary, /NTwist Inc\./);
-  assert.match(event.summary, /not separately recorded as rows/);
+  assert.match(event.summary, /nickel item is separately coded/);
+
+  const row = getFinancialCommitmentById("fin-ca-g7-2025-ntwist-nrc-irap")!;
+  assert.equal(row.amount?.value, "500000");
+  assert.equal(row.amount?.currency, "CAD");
+  assert.equal(row.amount?.qualifier, "exact");
+  assert.equal(row.financialStatusHistory.at(-1)?.status, "announced");
+  assert.equal(row.projectId, "prj-ca-ntwist-nickel-efficiency");
+  assert.deepEqual(row.stages, ["research_development"]);
+  assert.deepEqual(row.materialIds, ["nickel"]);
+  assert.deepEqual(row.locations, []);
+  assert.match(row.notes ?? "", /No project location, payment, or physical production milestone is inferred/);
+
+  const project = getProjectById("prj-ca-ntwist-nickel-efficiency")!;
+  assert.deepEqual(project.materialIds, ["nickel"]);
+  assert.deepEqual(project.stages, ["research_development"]);
+  assert.deepEqual(project.locations, []);
+  assert.deepEqual(project.sponsorOrgIds, ["org-ntwist", "org-tunley-environmental", "org-vale-europe"]);
 });
 
 test("China No. 58 attributes nickel only through ternary cathode precursors", () => {

@@ -107,7 +107,7 @@ test("designations, projects and projects with no designation, per material; the
     praseodymium: [0, 0, 0],
     lithium: [1, 3, 2],
     cobalt: [4, 5, 1],
-    nickel: [4, 5, 1],
+    nickel: [4, 6, 2],
   };
   for (const slug of slugs) {
     const p = dossier(slug);

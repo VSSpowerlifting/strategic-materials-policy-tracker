@@ -1,8 +1,19 @@
 # Project state
 
-## 2026-10-07: Lithium financing/project backfill — Canada CMRDD + EIB Keliber (draft)
+## 2026-10-07: Nickel financing/project backfill — NTwist NRC IRAP (draft)
 
-**Status.** Branch `feat/lithium-financing-backfill-20261007`, cut from `main` `cd38940` after PR #52 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/nickel-financing-backfill-20261007`, cut from `main` `dbc058d` after PR #53 merged. Draft review phase; unmerged and not deployed.
+
+- Backfills the C$500,000 NRC IRAP nickel item already named in the October 2025 G7 Critical Minerals Production Alliance event and nickel dossier; it does not create a new policy event.
+- Adds one public commitment row to NTwist Inc. and one R&D-stage nickel project naming Vale Europe Ltd. and Tunley Environmental Ltd. as the two official-source project collaborators.
+- Keeps financial maturity at `announced` on 2025-10-31. The NRCan backgrounder explicitly states the amount and funding channel, but no matching C$500,000 agreement was located in the reviewed federal grants disclosure, so no contracted, binding, obligation, payment or disbursement state is inferred.
+- Keeps location unknown. The official source does not state a project site, so participant addresses and company names are not used to manufacture one.
+- Out of scope: the G7 round's remaining scandium/lithium/Excir items, PGMs, Indonesian nickel policy, physical-status promotion, or schema/vocabulary changes.
+- Focused regression coverage pins the amount, announced status, R&D stage, project link, nickel scope and explicit absence of a project location. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: Lithium financing/project backfill — Canada CMRDD + EIB Keliber (PR #53, merged)
+
+**Status.** PR #53 merged to `main` as `dbc058d2b83c938fcc560c61448e00a6c8b230dd`; reviewed head `2b779d73e1fe60941771f85f5a995d046968e3aa` cleared validate, typecheck, lint, 427/427 tests, build and Vercel. Post-merge CI #160 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Backfills three lithium financings already surfaced by SMPT's source base rather than opening a broad new-source sweep: C$4,937,500 to Saltworks Technologies, C$4,500,000 to NORAM Electrolysis Systems, and the EIB's €150 million Keliber loan.
 - Adds a 2024 NRCan lithium-processing funding event and two British Columbia process-technology projects. Both remain at the `processing` stage because NRCan explicitly frames the awards as midstream lithium processing.
