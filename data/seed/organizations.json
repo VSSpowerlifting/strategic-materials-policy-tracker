@@ -1797,6 +1797,39 @@
     "notes": null
   },
   {
+    "id": "org-telescope-innovations",
+    "name": "Telescope Innovations Corp.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-canada-grant-telescope-lipick-2024",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Recipient's Legal Name; Recipient Type",
+        "note": "The disclosure gives the legal recipient name and identifies it as a for-profit organization."
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Telescope Innovations Corp.",
+        "note": null
+      }
+    ],
+    "notes": "The federal disclosures give a Vancouver, British Columbia recipient location but do not establish jurisdiction of incorporation."
+  },
+  {
     "id": "org-tj-namibia-rare-earths",
     "name": "TJ Namibia Rare Earths Corporation",
     "nameOriginal": "TJ Namibia Rare Earths株式会社",

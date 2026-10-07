@@ -317,7 +317,7 @@
     "grouping": null,
     "statusSummary": "A core battery material and a strategic raw material across major allied policy frameworks. Lithium is on the US 2025 critical-minerals list and the EU Critical Raw Materials Act; Australia’s Critical Minerals Production Tax Incentive covers lithium processing, while Canada and the UK treat lithium as a priority critical mineral. China’s 2025 No. 58 package targeted lithium-ion batteries, cathode materials, manufacturing equipment and technology rather than raw lithium itself; the measure was suspended before taking effect and remains suspended through 10 November 2026.",
     "chinaPositionNote": "China remains the dominant lithium refiner even as mining is geographically more diversified. IEA 2026 treats China as the top refining country for lithium and highlights that refining and downstream battery-material capacity outside dominant suppliers still lags announced mining growth.",
-    "diversificationNote": "Diversification is expanding across mining, processing and battery materials: Canada has CMRDD-backed lithium process-technology projects at Saltworks and NORAM, while the EIB signed a €150 million loan for Finland's integrated Keliber lithium project. Australia forecasts growth in mined and refined lithium output, and the UK's Vision 2035 targets at least 50,000 tonnes of domestic lithium or lithium-carbonate-equivalent production by 2035.",
+    "diversificationNote": "Diversification is expanding across mining, processing, recycling and battery materials: Canada has CMRDD-backed lithium process-technology projects at Saltworks and NORAM plus Telescope Innovations' Li-PICK battery-recycling and lithium-sulphide projects, while the EIB signed a €150 million loan for Finland's integrated Keliber lithium project. Australia forecasts growth in mined and refined lithium output, and the UK's Vision 2035 targets at least 50,000 tonnes of domestic lithium or lithium-carbonate-equivalent production by 2035.",
     "downstreamIndustries": [
       "Lithium-ion batteries",
       "Electric vehicles",
@@ -358,7 +358,10 @@
       "src-eib-keliber-2024",
       "src-eib-keliber-project-20170804",
       "src-ec-crma-sp-annex-2025-03",
-      "src-ec-crma-sp-decision-2025-03"
+      "src-ec-crma-sp-decision-2025-03",
+      "src-nrcan-g7-cmpa-2025",
+      "src-canada-grant-telescope-lipick-2024",
+      "src-nrcan-cmrdd-programme"
     ]
   },
   {

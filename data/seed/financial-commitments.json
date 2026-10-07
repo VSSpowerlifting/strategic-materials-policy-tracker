@@ -2158,6 +2158,190 @@
     "notes": "Vale Europe Ltd. and Tunley Environmental Ltd. are named project collaborators, not recipients of the Canadian funding. No project location, payment, or physical production milestone is inferred."
   },
   {
+    "id": "fin-ca-g7-2025-telescope-lipick",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "319200",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Agreement Value: $319,200.00",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "National Research Council of Canada (Industrial Research Assistance Program)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrc"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Telescope Innovations Corp.",
+    "recipientOrgIds": [
+      "org-telescope-innovations"
+    ],
+    "project": "Li-PICK - Energy Efficient Battery Recycling Enabled by Recrystallization",
+    "projectId": "prj-ca-telescope-lipick",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "recycling"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2024-09-01",
+        "sourceId": "src-canada-grant-telescope-lipick-2024",
+        "note": "The federal disclosure records contribution agreement 1022725 from 1 September 2024 through 31 March 2026."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-canada-grant-telescope-lipick-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement 1022725",
+        "note": "Establishes the exact agreement value, contribution form, binding agreement period, recipient and lithium battery-recycling purpose."
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "provider",
+          "recipient",
+          "project",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Telescope Innovations Corp.",
+        "note": "Names the NRC IRAP channel, Telescope, CellMine and the conversion of spent lithium-ion batteries into battery-grade lithium carbonate and cathode active material."
+      }
+    ],
+    "notes": "Binding contribution agreement verified through the federal grants disclosure. The disclosure's Vancouver location is a recipient location and is not treated as the project site. No payment or disbursement timing is stated.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-07",
+      "implementationStatusCheckedAt": "2026-10-07"
+    }
+  },
+  {
+    "id": "fin-ca-g7-2025-telescope-lithium-sulphide",
+    "eventId": "evt-ca-g7-cmpa-2025",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "3039344",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "Amount funded: $3,039,344",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-ca-cmrdd",
+    "recipient": "Telescope Innovations Corp.",
+    "recipientOrgIds": [
+      "org-telescope-innovations"
+    ],
+    "project": "A Route to Establish a Canadian Lithium Sulphide Supply Chain for Solid-State Batteries",
+    "projectId": "prj-ca-telescope-lithium-sulphide",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "Vancouver, British Columbia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2025-10-31",
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "note": "The G7 backgrounder says Telescope was conditionally approved for up to C$3.04 million under CMRDD. NRCan's standing CMRDD register later gives the exact funded amount, but no binding agreement date is established in the reviewed sources."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "recipient",
+          "status",
+          "project",
+          "materials",
+          "stages",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Telescope Innovations Corp.",
+        "note": "Establishes conditional approval under CMRDD for a pilot method to manufacture lithium sulphide."
+      },
+      {
+        "sourceId": "src-nrcan-cmrdd-programme",
+        "supports": [
+          "amount",
+          "recipient",
+          "project",
+          "materials",
+          "stages",
+          "programme",
+          "locations"
+        ],
+        "evidence": "explicit",
+        "locator": "Funded Projects: \"A Route to Establish a Canadian Lithium Sulphide Supply Chain for Solid-State Batteries\"",
+        "note": "Gives the exact C$3,039,344 amount funded, Telescope Innovations Corp., lithium, Vancouver, British Columbia, and the scale-up/pilot lithium-sulphide manufacturing purpose."
+      }
+    ],
+    "notes": "NRCan's current project register says the project was launched in 2025 and is expected to be completed by 2028. No matching binding contribution agreement was located in the reviewed disclosure search, so the financial status remains decided rather than contracted; no payment or disbursement is inferred.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-07",
+      "implementationStatusCheckedAt": "2026-10-07"
+    }
+  },
+  {
     "id": "fin-ca-g7-2025-ucore-feddev",
     "eventId": "evt-ca-g7-cmpa-2025",
     "relationships": [
