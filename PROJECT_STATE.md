@@ -15,7 +15,7 @@
 
 ## 2026-10-07: Lithium material expansion — promotion-first tranche (PR #50, merged)
 
-**Status.** PR #50 merged to `main` as `379340b7364da59097ca3b132cc382ce23dcb269`; reviewed head `cfc506276668ec3a951b4844e218c580fe6c7af1` cleared validate, typecheck, lint, 409/409 tests, build and Vercel. The production Vercel deployment on the merge SHA succeeded; no separate post-merge CI run had attached at this checkpoint.
+**Status.** PR #50 merged to `main` as `379340b7364da59097ca3b132cc382ce23dcb269`; reviewed head `cfc506276668ec3a951b4844e218c580fe6c7af1` cleared validate, typecheck, lint, 409/409 tests, build and Vercel. Post-merge CI #143 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Adds lithium as the twelfth tracked material, with a current dossier grounded in IEA 2026, USGS 2026, Australia's September 2026 resources outlook, NRCan midstream-processing support, the UK Vision 2035 strategy and China's Announcement No. 58 primary.
 - Promotes existing lithium scope rather than creating speculative new records: 18 existing events now declare lithium; four existing control rows and three existing financial rows carry tracked lithium attribution. No exact `lithium` remains in an `untrackedMaterialsAsStated` field.
