@@ -117,7 +117,7 @@ test("tungsten renders its stage focus target in the records, with the hemerdon 
   assert.ok(body.includes("Decided, date not stated"));
   assert.ok(body.includes("Project record codes: mining, processing. Not placed here; this designation names mining only."));
   assert.ok(body.includes("Part: Equity, GBP 36 million; not added again"));
-  assert.ok(body.includes("names 12 materials; the amount is not divided"));
+  assert.ok(body.includes("names 13 materials; the amount is not divided"));
   assert.ok(body.includes("No tungsten record states a date after the as-of."));
   assert.ok(body.includes("None recorded at: Separation, Component manufacturing"));
   assert.ok(!body.includes("every record whose source names"));
