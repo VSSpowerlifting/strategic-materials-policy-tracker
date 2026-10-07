@@ -19,6 +19,7 @@ import {
   controlStatusOn,
   currentFinancialStatus,
   isEnded,
+  isEndedOn,
   isFoldedPart,
   legalStanding,
   totalCommitments,
@@ -737,7 +738,7 @@ export function stageResponseMap(
   // its package only when that package sits in the same field of the same cell: it is placed, is the same
   // kind of row (capital, option or ended), and covers this material and stage.
   const isPlaced = (c: FinancialCommitment) => !!c.providerJurisdiction && ["commitment", "funding_option"].includes(c.valueRole);
-  const fieldOf = (c: FinancialCommitment) => (isEnded(c) ? "ended" : c.valueRole === "funding_option" ? "option" : "capital");
+  const fieldOf = (c: FinancialCommitment) => (isEndedOn(c, asOf) ? "ended" : c.valueRole === "funding_option" ? "option" : "capital");
   const covers = (p: FinancialCommitment, mat: string, stage: SupplyChainStage) => p.materialIds.includes(mat) && p.stages.includes(stage);
   for (const c of all) {
     if (!isPlaced(c)) continue;
@@ -746,7 +747,7 @@ export function stageResponseMap(
       for (const stage of new Set(c.stages)) {
         if (isFoldedPart(c, byId, (p) => isPlaced(p) && fieldOf(p) === fieldOf(c) && covers(p, mat, stage))) continue;
         const x = cell(mat, stage);
-        if (isEnded(c)) x.endedIds.push(c.id);
+        if (isEndedOn(c, asOf)) x.endedIds.push(c.id);
         else if (c.valueRole === "funding_option") {
           x.optionIds.push(c.id);
           if (!x.optionActors.includes(actor)) x.optionActors.push(actor);

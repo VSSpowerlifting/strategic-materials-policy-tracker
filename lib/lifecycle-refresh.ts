@@ -1,3 +1,4 @@
+import { financialStatusEntryOn, financialStatusEvidenceBoundary } from "./capital-control";
 import type {
   FinancialCommitment,
   FinancialStatus,
@@ -134,10 +135,11 @@ function financialAssessment(
   commitment: FinancialCommitment,
   asOf: string,
 ): LifecycleClockAssessment<FinancialStatus> {
-  const current = currentStatus(commitment.financialStatusHistory);
-  const dated = latestDatedEntry(commitment.financialStatusHistory);
-  const checkedAt = commitment.lifecycleReview?.financialStatusCheckedAt ?? null;
-  const referenceDate = laterDate(dated?.date ?? null, checkedAt);
+  const current = financialStatusEntryOn(commitment, asOf);
+  const statusBoundary = current ? financialStatusEvidenceBoundary(commitment, current) : null;
+  const recordedCheck = commitment.lifecycleReview?.financialStatusCheckedAt ?? null;
+  const checkedAt = recordedCheck !== null && recordedCheck <= asOf ? recordedCheck : null;
+  const referenceDate = laterDate(statusBoundary, checkedAt);
   const age = ageDays(asOf, referenceDate);
   const status = current?.status ?? null;
   const reasons: string[] = [];
