@@ -69,6 +69,7 @@ test("Canadian Kingston recycling records promote cobalt without promoting nicke
   ]) {
     const row = getFinancialCommitmentById(id)!;
     assert.ok(row.materialIds.includes("cobalt"));
+  assert.ok(row.materialIds.includes("nickel"));
     assert.ok(row.untrackedMaterialsAsStated.includes("nickel"));
     assert.ok(!row.untrackedMaterialsAsStated.includes("cobalt"));
     assert.equal(row.materialAttribution, "includes_untracked");
@@ -115,12 +116,12 @@ test("China No. 58 attributes cobalt only through ternary cathode precursors", (
   assert.ok(row.untrackedMaterialsAsStated.some((item) => item.includes("三元正极材料")));
   assert.match(
     row.evidence.find((entry) => entry.supports.includes("item_scope"))?.note ?? "",
-    /Neither attribution means the measure controls raw lithium or raw cobalt/,
+    /do not mean the measure controls raw lithium, raw cobalt or raw nickel/,
   );
 
   const event = getEventById("evt-cn-mofcom-58-2025")!;
-  assert.match(event.analyticalSignificance, /cobalt-bearing ternary precursors/);
-  assert.match(event.analyticalSignificance, /not from a control on raw cobalt/);
+  assert.match(event.analyticalSignificance, /cobalt- and nickel-bearing ternary precursors/);
+  assert.match(event.analyticalSignificance, /not from controls on raw cobalt or raw nickel/);
 });
 
 test("cobalt stage-response map carries the suspended No. 58 control at component manufacturing", () => {
