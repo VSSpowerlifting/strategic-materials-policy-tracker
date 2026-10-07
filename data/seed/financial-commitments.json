@@ -3373,7 +3373,7 @@
         "note": "The Communication names \"the Strategic Projects UpCatalyst (processing of graphite)\" after its promoter; the one Strategic Project UP Catalyst promotes is CO2Graphite (Decision C(2025) 1904, annex entry (11))."
       }
     ],
-    "notes": "No amount is stated, so the row sums nothing. The Keliber loan named alongside it is lithium, outside the tracked materials, and is not recorded."
+    "notes": "No amount is stated, so the row sums nothing. The same Commission passage names an EIB loan agreement for Strategic Project Keliber (lithium). Lithium is now tracked at the parent ResourceEU event level, but the Keliber loan is not separately coded as a financial row in this tranche."
   },
   {
     "id": "fin-eu-jtf-2025-neo-magnet-project",
