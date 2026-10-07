@@ -1750,5 +1750,29 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Official USGS lithium commodity sheet. Reports batteries as 88% of estimated global lithium end use and describes rechargeable-battery demand from electric vehicles, grid storage, portable electronics and power tools."
+  },
+  {
+    "id": "src-au-req-2026-09",
+    "title": "Resources and energy quarterly: September 2026",
+    "publisher": "Department of Industry, Science and Resources (Australia)",
+    "url": "https://www.industry.gov.au/publications/resources-and-energy-quarterly-september-2026",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official Australian resources outlook. Used for lithium dossier context: Australia expects strong growth in mined lithium output through 2031, with lithium demand driven by EV and battery-energy-storage deployment; the publication also tracks lithium hydroxide alongside spodumene."
+  },
+  {
+    "id": "src-nrcan-lithium-processing-2024",
+    "title": "Government of Canada Invests Over $9 Million to Enable Made-in-Canada Lithium Battery Supply Chain in British Columbia",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/natural-resources-canada/news/2024/07/government-of-canada-invests-over-9-million-to-enable-made-in-canada-lithium-battery-supply-chain-in-british-columbia.html",
+    "language": "en",
+    "datePublished": "2024-07-11",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official NRCan release on CMRDD support for midstream lithium processing: Saltworks lithium-brine concentration/conversion and NORAM Electrolysis Systems lithium-hydroxide production technology. Used as diversification context only; these awards are not coded as financial rows in this tranche."
   }
 ]
