@@ -1,8 +1,21 @@
 # Project state
 
-## 2026-10-07: Announcement No. 33 antimony source-accuracy consolidation (draft PR #48)
+## 2026-10-07: F4 date-sliced financial status for historical as-of analysis (draft)
 
-**Status.** Branch `fix/antimony-announcement-33-accuracy-20261007`, cut from current `main` `7f1c210` after PR #47 merged. Draft PR #48; unmerged and not deployed.
+**Status.** Branch `fix/f4-date-sliced-financial-status-20261007`, cut from current `main` `e6fb6cd` after PR #48 merged. Draft review phase; unmerged and not deployed.
+
+- Scope is deliberately narrow: financial-status semantics for code paths that explicitly accept an `asOf` date. Current-site status helpers, current totals, seed data, schema, taxonomy and physical/implementation-status history are unchanged.
+- Added `financialStatusOn`, `financialStatusEntryOn`, `legalStandingOn`, `isBindingOn` and `isEndedOn`. A dated history entry applies from its recorded date. An undated entry enters a historical view only from a non-inferred evidence boundary: source publication date; otherwise the explicit financial-status review date; otherwise source access date. The entry's own date remains null, so no effective/payment date is invented.
+- The 2024 5N+ germanium row therefore remains `contracted` through 2026-10-03 and becomes `partially_disbursed` only on 2026-10-04, the first dated boundary for that undated evidence. The current status remains `partially_disbursed`.
+- Lifecycle financial assessment now reads the status evidenced by `asOf` and ignores a financial review stamp later than `asOf`; this removes future financial-review leakage and negative financial ages. Physical-status history and physical review semantics are not date-sliced by F4.
+- `stageResponseMap(asOf)` now decides ended/live financial rows using status on the requested date rather than the row's later current status.
+- `scripts/analyze-concern-response.ts --as-of ...` now uses date-sliced financial standing consistently. It still uses the checked-out corpus as its denominator and revision-current physical status, so F4 is not a full historical reconstruction of record ingestion or physical implementation.
+- Regression coverage pins 5N+, Lynas cash receipt, an access-only undated status, lifecycle financial clocks, and future-lapse handling in the stage-response map.
+- No historical analysis document under `docs/analysis` is rewritten; the 2026-10-03 baseline remains a pinned historical artifact.
+
+## 2026-10-07: Announcement No. 33 antimony source-accuracy consolidation (PR #48, merged)
+
+**Status.** PR #48 merged to `main` as `e6fb6cde6454f3d8e18031ea5d17ae08b9e43035`; reviewed head `e93db9a05ae60fecaada4636ebb94c524c03f92b` cleared validate, typecheck, lint, 398/398 tests, build and Vercel.
 
 - Re-read the complete registered MOFCOM/GACC Announcement No. 33 of 2024 primary on 2026-10-07. The stale draft findings from #11 and #12 remain valid against the primary, but those old branches predate later antimony additions and are not being revived wholesale.
 - Corrected the antimony material `statusSummary`: `evt-cn-antimony-2024` already separately codes the September 2024 export-licensing measure, so the prior sentence saying it was not separately coded was false.
