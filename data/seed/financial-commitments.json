@@ -4357,11 +4357,15 @@
         "note": "The filing, referring to the 7 March 2023 announcement, reports the signed agreements and AUD200 million cash contributed through an ordinary-share subscription, and records the AUD200 million JARE proceeds in the March-quarter cash-flow table. It supports the disbursed status; the signing day rests on the announcement above."
       }
     ],
-    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split. The cash receipt is confirmed by Lynas' March-quarter 2023 filing. A later HRE production milestone at Lynas Malaysia is not treated as completion of this broader, unallocated light- and heavy-rare-earth growth plan.",
+    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split. The cash receipt is confirmed by Lynas' March-quarter 2023 filing. A later HRE production milestone at Lynas Malaysia is not treated as completion of this broader, unallocated light- and heavy-rare-earth growth plan. These associated project links are non-allocative: this row's amount remains a single financing figure and is excluded from each individual project capital stack.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-02",
       "implementationStatusCheckedAt": null
-    }
+    },
+    "associatedProjectIds": [
+      "prj-au-lynas-heavy-ree-separation",
+      "prj-au-lynas-light-ree-expansion"
+    ]
   },
   {
     "id": "fin-jp-jare-lynas-2023-hre-offtake",
@@ -7875,7 +7879,12 @@
         "note": null
       }
     ],
-    "notes": "The recipient's own contribution, recorded so it is never counted as public support."
+    "notes": "The recipient's own contribution, recorded so it is never counted as public support. These associated project links are non-allocative: this row's amount remains a single financing figure and is excluded from each individual project capital stack.",
+    "associatedProjectIds": [
+      "prj-us-mountain-pass-hcl-recommissioning",
+      "prj-us-mountain-pass-samarium",
+      "prj-us-mp-independence-expansion"
+    ]
   },
   {
     "id": "fin-us-dod-mp-2025-magnet-offtake",
@@ -8993,7 +9002,11 @@
         "note": "The filing records the obligation split, milestone payment and Thompson Falls expansion status."
       }
     ],
-    "notes": "The award covers more than one physical undertaking, so no single projectId is assigned. The Thompson Falls facility is separately registered as a project, but the full $27M is not attributed to it."
+    "notes": "The award covers more than one physical undertaking, so no single projectId is assigned. The Thompson Falls facility is separately registered as a project, but the full $27M is not attributed to it. These associated project links are non-allocative: this row's amount remains a single financing figure and is excluded from each individual project capital stack.",
+    "associatedProjectIds": [
+      "prj-us-usac-alaska-antimony-integration",
+      "prj-us-usac-thompson-falls-expansion"
+    ]
   },
   {
     "id": "fin-us-exim-perpetua-stibnite-2026",
