@@ -1737,7 +1737,7 @@
     "dateAccessed": "2026-10-07",
     "sourceType": "dataset",
     "confidence": "secondary",
-    "notes": "Used for current lithium demand, refining-concentration and diversification context. The IEA identifies China as the top refiner for lithium and other key energy minerals (nickel excepted), notes lithium demand remains the fastest-growing major energy-mineral demand, and finds midstream/downstream diversification still lags mining. Background analysis, not a policy instrument."
+    "notes": "Used for current lithium, cobalt and nickel demand, supply-concentration and diversification context. The IEA identifies Indonesia as the top refiner for nickel and China as the top refiner for other key energy minerals, finds recent nickel mining/refining growth increasingly concentrated in Indonesia, and notes that midstream/downstream diversification continues to lag upstream development. Background analysis, not a policy instrument."
   },
   {
     "id": "src-usgs-lithium-mcs-2026",
@@ -1786,5 +1786,17 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Official USGS cobalt commodity sheet. Reports Congo (Kinshasa) at an estimated 73% of 2025 world mine production, China as the leading refined-cobalt producer and consumer, and the DRC's 2025 export-ban-to-quota transition. Used for current cobalt supply-chain context, not as a coded policy event."
+  },
+  {
+    "id": "src-usgs-nickel-mcs-2026",
+    "title": "Mineral Commodity Summaries 2026 — Nickel",
+    "publisher": "U.S. Geological Survey",
+    "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-nickel.pdf",
+    "language": "en",
+    "datePublished": "2026-02-06",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official USGS 2026 nickel commodity sheet. Reports estimated 2025 Indonesian mine production of 2.6 million tonnes out of 3.9 million tonnes worldwide, and notes that stainless and alloy steel plus nickel-containing alloys typically account for more than 85% of U.S. primary nickel consumption. Used for current nickel supply and end-use context, not as a policy instrument."
   }
 ]
