@@ -1929,5 +1929,65 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "dsg-eu-crma-keliber-lithium",
+    "eventId": "evt-eu-crma-strategic-projects-2025-03",
+    "programmeId": "prg-eu-crma-strategic-projects",
+    "projectId": "prj-fi-keliber-lithium",
+    "projectNameAsStated": "KELIBER LITHIUM",
+    "holderOrgIds": [
+      "org-keliber-technology-oy"
+    ],
+    "locations": [
+      {
+        "countryCode": "FI",
+        "subnational": null,
+        "asStated": "Finland"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "statusHistory": [
+      {
+        "status": "recognized",
+        "date": "2025-03-25",
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "note": "Article 1 recognizes the projects listed in the Annex as Strategic Projects."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "project",
+          "location",
+          "materials",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (19)",
+        "note": "KELIBER LITHIUM is described as an ongoing integrated extraction and processing project in Finland for lithium (battery grade)."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "programme",
+          "holders",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 1; Article 2, row 19",
+        "note": "The Commission decision names Keliber Technology Oy as promoter."
+      }
+    ],
+    "notes": null
   }
 ]
