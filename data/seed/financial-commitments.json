@@ -468,7 +468,8 @@
       "neodymium",
       "praseodymium",
       "terbium",
-      "tungsten"
+      "tungsten",
+      "lithium"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
@@ -481,7 +482,6 @@
       "hafnium",
       "high purity alumina",
       "indium",
-      "lithium",
       "magnesium",
       "manganese",
       "molybdenum",
@@ -2660,11 +2660,11 @@
     ],
     "stageAllocation": "single_stage",
     "materialIds": [
-      "tungsten"
+      "tungsten",
+      "lithium"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
-      "lithium",
       "copper",
       "zinc"
     ],
@@ -2750,13 +2750,13 @@
     ],
     "stageAllocation": "single_stage",
     "materialIds": [
-      "rare-earth-elements"
+      "rare-earth-elements",
+      "lithium"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "copper",
-      "zinc",
-      "lithium"
+      "zinc"
     ],
     "financialStatusHistory": [
       {
