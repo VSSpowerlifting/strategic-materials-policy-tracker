@@ -281,6 +281,23 @@ const PROJECT: Project = {
   evidence: [{ sourceId: "src-one", supports: ["name", "sponsors", "location", "stages", "materials"], evidence: "explicit" }],
 };
 
+const PROJECT_TWO: Project = {
+  ...structuredClone(PROJECT),
+  id: "prj-alpha-second",
+  name: "Example second project",
+  materialIds: ["mat-one"],
+};
+
+const PROJECT_UNCLASSIFIED: Project = {
+  ...structuredClone(PROJECT),
+  id: "prj-alpha-unclassified",
+  name: "Example enabling infrastructure",
+  stages: [],
+  materialIds: [],
+  materialAttribution: "not_stated",
+  evidence: [{ sourceId: "src-one", supports: ["name", "sponsors", "location"], evidence: "explicit" }],
+};
+
 const PROGRAMME: Programme = {
   id: "prg-alpha-fund",
   name: "Example Fund",
@@ -1274,6 +1291,40 @@ test("registry references resolve wherever a row, project, programme or designat
     "unresolved_reference@dsg-alpha-plant:programmeId",
     "unresolved_reference@dsg-alpha-plant:projectId",
   ]);
+});
+
+test("shared project associations are plural, non-allocative, resolvable and material-related", () => {
+  const sharedRegistries = registries({ projects: [PROJECT, PROJECT_TWO, PROJECT_UNCLASSIFIED], projectDesignations: [] });
+  const shared = commitment({
+    project: "One unsplit amount across two projects",
+    projectId: null,
+    associatedProjectIds: ["prj-alpha-plant", "prj-alpha-second", "prj-alpha-unclassified"],
+    evidence: commitmentEvidence(["project"]),
+  });
+  assertErrors(validate([shared], [], { registries: sharedRegistries }), []);
+
+  assertErrors(
+    validate([commitment({ projectId: "prj-alpha-plant", associatedProjectIds: ["prj-alpha-plant", "prj-alpha-second"], evidence: commitmentEvidence(["project"]) })], [], { registries: sharedRegistries }),
+    ["incoherent_value@fin-alpha-grant:associatedProjectIds"],
+  );
+  assertErrors(
+    validate([commitment({ associatedProjectIds: ["prj-alpha-plant"], evidence: commitmentEvidence(["project"]) })], [], { registries: sharedRegistries }),
+    ["incoherent_value@fin-alpha-grant:associatedProjectIds"],
+  );
+  assertErrors(
+    validate([commitment({ associatedProjectIds: ["prj-alpha-plant", "prj-alpha-plant"], evidence: commitmentEvidence(["project"]) })], [], { registries: sharedRegistries }),
+    ["duplicate_value@fin-alpha-grant:associatedProjectIds[1]"],
+  );
+  assertErrors(
+    validate([commitment({ associatedProjectIds: ["prj-alpha-plant", "prj-missing"], evidence: commitmentEvidence(["project"]) })], [], { registries: sharedRegistries }),
+    ["unresolved_reference@fin-alpha-grant:associatedProjectIds[1]"],
+  );
+
+  const unrelated: Project = { ...structuredClone(PROJECT_TWO), id: "prj-alpha-unrelated", materialIds: ["mat-three"] };
+  assertErrors(
+    validate([commitment({ associatedProjectIds: ["prj-alpha-plant", "prj-alpha-unrelated"], evidence: commitmentEvidence(["project"]) })], [], { registries: registries({ projects: [PROJECT, unrelated], projectDesignations: [] }) }),
+    ["material_not_in_associated_project@fin-alpha-grant:associatedProjectIds[1]"],
+  );
 });
 
 test("a government body's money is its government's: provider organizations agree with providerJurisdiction", () => {
