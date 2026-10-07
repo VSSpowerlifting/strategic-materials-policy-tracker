@@ -10,7 +10,7 @@
 - Restored Item 1(2)'s technical thresholds for six-sided presses and high-pressure controls, MPCVD power/frequency, and diamond-window coverage. Illustrative physical-form lists that do not restrict coverage remain condensed.
 - Added `tests/antimony-announcement-33.test.ts` to pin the restored scope language, separate event coding, source standing and 2024-09-15 implementation date.
 - No schema, taxonomy, source URL, product-code, status, legal-basis, event, counting or analytical change. All later antimony event links already present on current `main` are preserved.
-- Exact-head CI and Vercel verification are pending; #11 and #12 stay open until #48 is green, then they should be closed as superseded.
+- Merge gate: `npm run validate`, typecheck, lint, tests, build and the Vercel preview must all be green on the final head; #11 and #12 stay open until #48 clears that gate, then they should be closed as superseded.
 
 ## 2026-10-07: 5N+ aggregate and Compare amount-basis follow-up (PR #47, merged)
 
