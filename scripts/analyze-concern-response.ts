@@ -9,9 +9,11 @@
  * numbers follow the corpus's own counting rules. The "ladder" columns are presentation only: financial
  * standing and physical status are separate axes and are never combined into a score.
  *
- * `--as-of` fixes the date for dated calculations (queue ages and priorities, control status on that date, stated-end
- * and source-age day counts). It does not date-slice current financial or physical status: both are read as the last
- * history entry, whatever its date, so counts describe the data revision the script runs on, not an earlier date.
+ * `--as-of` fixes the date for dated calculations and financial standing. Dated financial entries apply on their
+ * recorded date; an undated entry enters the historical view only from its non-inferred evidence boundary (source
+ * publication, or when unavailable the recorded financial review/access date). Physical status is still revision-current
+ * in this script and is not date-sliced by F4. The checked-out corpus remains the denominator: this is not a historical
+ * reconstruction of which records had been ingested by that date.
  *
  * Reproducing docs/analysis/concern-response-tables-2026-10-03.md requires the pinned baseline revision b4183f8 (data/seed
  * and lib identical to it). A run on later seed data is a new comparison, not a reproduction; write it to a different
@@ -32,11 +34,11 @@ import {
   controlIssuer,
   controlStatusOn,
   currentControlEntry,
-  currentFinancialStatus,
   daysBetween,
-  isEnded,
+  financialStatusOn,
+  isEndedOn,
   isFoldedPart,
-  legalStanding,
+  legalStandingOn,
 } from "../lib/capital-control";
 import { stageLatticeGaps, stageResponseMap } from "../lib/capital-intelligence";
 import { deriveLifecycleRefreshQueue } from "../lib/lifecycle-refresh";
@@ -81,7 +83,10 @@ const tally = <T extends string>(items: readonly T[]) => {
 };
 
 // --- Row helpers ---------------------------------------------------------------------------
-const finStatus = currentFinancialStatus;
+const finStatus = (c: FinancialCommitment) => financialStatusOn(c, asOf);
+const finLabel = (c: FinancialCommitment) => finStatus(c) ?? "not evidenced by as-of";
+const standingOn = (c: FinancialCommitment) => legalStandingOn(c, asOf);
+const endedOn = (c: FinancialCommitment) => isEndedOn(c, asOf);
 const implEntry = (c: FinancialCommitment) => c.implementationStatusHistory[c.implementationStatusHistory.length - 1] ?? null;
 /** The row's current physical status; with no history, "not applicable" when the queue rule says no physical lifecycle applies, else "none recorded". */
 const implStatus = (c: FinancialCommitment): string => implEntry(c)?.status ?? (queueRow.get(c.id)?.implementation.applicable === false ? "not applicable" : "none recorded");
@@ -95,8 +100,12 @@ const FUNDED_ACTIVITY_STATUS = new Set(["prj-ca-cyclic-kingston-demonstration-pl
 const officialFraming = (f: { sourceId: string }) => getSourceById(f.sourceId)?.sourceType === "official";
 const BINDING = ["contracted", "partially_disbursed", "disbursed"];
 const FUNDED = ["partially_disbursed", "disbursed"];
-/** A government commitment: role "commitment", a tracked providing government, not ended. */
-const isGC = (c: FinancialCommitment) => c.valueRole === "commitment" && !!c.providerJurisdiction && !isEnded(c);
+const fundedOn = (c: FinancialCommitment) => {
+  const status = finStatus(c);
+  return status !== null && FUNDED.includes(status);
+};
+/** A government commitment: role "commitment", a tracked providing government, not ended as of the requested date. */
+const isGC = (c: FinancialCommitment) => c.valueRole === "commitment" && !!c.providerJurisdiction && !endedOn(c);
 /** Counted once: a part of a package that is itself a government commitment is folded into it. */
 const gcFolded = (rows: readonly FinancialCommitment[], pkgTest: (p: FinancialCommitment) => boolean = isGC) =>
   rows.filter((c) => isGC(c) && !isFoldedPart(c, byId, pkgTest));
@@ -143,7 +152,7 @@ const roles = tally(all.map((c) => c.valueRole));
 table(["Value role", "Rows"], [...roles.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([r, n]) => [r, n]));
 line(`Financial rows by legal standing (rule in \`legalStanding\`; an unstated status is never read as not-yet-binding):`);
 line();
-const standing = tally(all.map((c) => legalStanding(c)));
+const standing = tally(all.map((c) => standingOn(c) ?? "not_evidenced_by_as_of"));
 table(["Legal standing", "Rows"], [...standing.entries()].sort().map(([s, n]) => [s, n]));
 const gaps = stageLatticeGaps();
 line(`Stage-lattice placement (from \`stageLatticeGaps\`; each kind's buckets are exclusive):`);
@@ -189,10 +198,10 @@ const gcAll = all.filter(isGC);
 const gc = gcFolded(all);
 const nonGcRoles = all.filter((c) => !isGC(c));
 line(`Government commitment (GC) rows: role \`commitment\`, a providing tracked government, not ended. ${gcAll.length} rows; ${gc.length} after folding parts into packages that are themselves GC rows (package counted once).`);
-line(`Not GC (${nonGcRoles.length}): ${[...tally(nonGcRoles.map((c) => (isEnded(c) ? `ended ${c.valueRole}` : c.valueRole === "commitment" ? "commitment with no tracked providing government" : c.valueRole))).entries()].sort().map(([k, v]) => `${k} ${v}`).join("; ")}.`);
+line(`Not GC (${nonGcRoles.length}): ${[...tally(nonGcRoles.map((c) => (endedOn(c) ? `ended ${c.valueRole}` : c.valueRole === "commitment" ? "commitment with no tracked providing government" : c.valueRole))).entries()].sort().map(([k, v]) => `${k} ${v}`).join("; ")}.`);
 line(`GC rows by capital source: ${[...tally(gcAll.map((c) => c.capitalSource)).entries()].sort().map(([k, v]) => `${k} ${v}`).join("; ")} (mixed_vehicle and not_stated are not public capital).`);
 line();
-const finOrder = ["announced", "authorized", "allocated", "decided", "not_stated", "contracted", "partially_disbursed", "disbursed"];
+const finOrder = ["not evidenced by as-of", "announced", "authorized", "allocated", "decided", "not_stated", "contracted", "partially_disbursed", "disbursed"];
 const implOrder = ["none recorded", "not applicable", "announced", "feasibility", "construction", "commissioning", "operational", "completed", "suspended", "cancelled", "not_stated", "not_applicable"];
 const present = (rows: readonly FinancialCommitment[]) => implOrder.filter((s) => rows.some((c) => implStatus(c) === s));
 const gcPhys = present(gcAll);
@@ -201,9 +210,9 @@ line();
 table(
   ["Financial status", ...gcPhys, "Total"],
   finOrder
-    .filter((f) => gcAll.some((c) => finStatus(c) === f))
+    .filter((f) => gcAll.some((c) => finLabel(c) === f))
     .map((f) => {
-      const rows = gcAll.filter((c) => finStatus(c) === f);
+      const rows = gcAll.filter((c) => finLabel(c) === f);
       return [f, ...gcPhys.map((s) => rows.filter((c) => implStatus(c) === s).length), rows.length];
     }),
 );
@@ -213,9 +222,9 @@ const gcFoldPhys = present(gc);
 table(
   ["Financial status", ...gcFoldPhys, "Total"],
   finOrder
-    .filter((f) => gc.some((c) => finStatus(c) === f))
+    .filter((f) => gc.some((c) => finLabel(c) === f))
     .map((f) => {
-      const rows = gc.filter((c) => finStatus(c) === f);
+      const rows = gc.filter((c) => finLabel(c) === f);
       return [f, ...gcFoldPhys.map((s) => rows.filter((c) => implStatus(c) === s).length), rows.length];
     }),
 );
@@ -227,7 +236,7 @@ table(
   ["Instrument", "Binding (contracted / part. disbursed / disbursed)", "Not yet binding (announced / authorized / allocated / decided)", "Status not stated", "Total"],
   instruments.map((i) => {
     const r = gc.filter((c) => c.instrument === i);
-    return [i, r.filter((c) => BINDING.includes(finStatus(c))).length, r.filter((c) => legalStanding(c) === "not_yet_binding").length, r.filter((c) => legalStanding(c) === "status_not_stated").length, r.length];
+    return [i, r.filter((c) => standingOn(c) === "binding").length, r.filter((c) => standingOn(c) === "not_yet_binding").length, r.filter((c) => standingOn(c) === "status_not_stated").length, r.length];
   }),
 );
 line(`Rows named in the analysis and kept apart from GC: options (\`funding_option\`), indications, program envelopes, appropriations, lending authority, private financing, recipient own funds (a cash balance a company commits to spend), total project cost and expected co-investment. Their count by role is in section 1.`);
@@ -257,8 +266,8 @@ const projectViews: ProjectView[] = sortIds(byProject.keys()).map((id) => {
     name: projects.get(id)?.name ?? id,
     rows,
     gcRows,
-    binding: gcRows.some((c) => BINDING.includes(finStatus(c))),
-    funded: gcRows.some((c) => FUNDED.includes(finStatus(c))),
+    binding: gcRows.some((c) => standingOn(c) === "binding"),
+    funded: gcRows.some(fundedOn),
     physical,
     built: physical.some((s) => BUILT.includes(s)),
     builtStrict: physical.some((s) => BUILT.includes(s)) && !FUNDED_ACTIVITY_STATUS.has(id),
@@ -307,7 +316,7 @@ table(
   projectViews.map((p) => [
     p.id,
     p.name,
-    p.rows.map((c) => `${c.id.replace(/^fin-/, "")}: ${c.valueRole}${isGC(c) ? "" : " (not GC)"}, ${finStatus(c)}`).join("; "),
+    p.rows.map((c) => `${c.id.replace(/^fin-/, "")}: ${c.valueRole}${isGC(c) ? "" : " (not GC)"}, ${finLabel(c)}`).join("; "),
     p.rows.map((c) => `${c.id.replace(/^fin-/, "")}: ${c.implementationStatusHistory.length ? histText(c.implementationStatusHistory) : implStatus(c)}`).join("; "),
   ]),
 );
@@ -363,10 +372,10 @@ const respRows = materials.map((m) => {
     cells: [
       m.id,
       rows.length,
-      rows.filter((c) => finStatus(c) === "disbursed" || finStatus(c) === "partially_disbursed").length,
+      rows.filter(fundedOn).length,
       rows.filter((c) => finStatus(c) === "contracted").length,
-      rows.filter((c) => legalStanding(c) === "not_yet_binding").length,
-      rows.filter((c) => legalStanding(c) === "status_not_stated").length,
+      rows.filter((c) => standingOn(c) === "not_yet_binding").length,
+      rows.filter((c) => standingOn(c) === "status_not_stated").length,
       named.length,
       projIds.size,
       projBuilt,
@@ -374,7 +383,7 @@ const respRows = materials.map((m) => {
       ledger.filter((c) => c.valueRole === "indication").length,
       ledger.filter((c) => ["program_envelope", "budget_appropriation", "lending_authority"].includes(c.valueRole)).length,
       ledger.filter((c) => ["private_financing", "recipient_own_funds", "total_project_cost", "expected_co_investment"].includes(c.valueRole)).length,
-      ledger.filter((c) => c.valueRole === "commitment" && isEnded(c)).length + ledger.filter((c) => c.valueRole !== "commitment" && isEnded(c)).length,
+      ledger.filter((c) => c.valueRole === "commitment" && endedOn(c)).length + ledger.filter((c) => c.valueRole !== "commitment" && endedOn(c)).length,
     ] as (string | number)[],
   };
 });
@@ -536,10 +545,10 @@ table(
       rows.length,
       exposed.length,
       bundleOnly.length,
-      rows.filter((c) => BINDING.includes(finStatus(c))).length,
-      keep.filter((c) => BINDING.includes(finStatus(c))).length,
-      rows.filter((c) => FUNDED.includes(finStatus(c))).length,
-      keep.filter((c) => FUNDED.includes(finStatus(c))).length,
+      rows.filter((c) => standingOn(c) === "binding").length,
+      keep.filter((c) => standingOn(c) === "binding").length,
+      rows.filter((c) => fundedOn(c)).length,
+      keep.filter((c) => fundedOn(c)).length,
       builtAll.length,
       builtClean.length,
     ];
