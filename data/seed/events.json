@@ -1802,13 +1802,14 @@
       "graphite",
       "tungsten",
       "cobalt",
-      "nickel"
+      "nickel",
+      "lithium"
     ],
     "affectedSectors": [
       "battery",
       "defense"
     ],
-    "summary": "The Commission's first list of Strategic Projects under Regulation (EU) 2024/1252: 47 extraction, processing, recycling and substitution projects in 13 Member States, selected from 122 complete applications against the Act's criteria (contribution to supply security, technical feasibility, sustainable implementation, cross-border benefits). Recognition brings coordinated support from the Commission, Member States and financial institutions on access to finance and off-takers, and permit-granting capped at 27 months for extraction and 15 months for other projects. Twenty-one of the projects name a tracked material: five rare-earth projects for magnets (three with processing, one of them integrated with extraction, and two recycling), eleven naming battery-grade graphite (one a substitution project), four of those also naming cobalt and battery-grade nickel, two tungsten projects, one gallium project and two germanium projects (one a substitution project). The Commission puts the 47 projects' expected capital investment at €22.5 billion; that is project cost, not EU money, and is not recorded as capital.",
+    "summary": "The Commission's first list of Strategic Projects under Regulation (EU) 2024/1252: 47 extraction, processing, recycling and substitution projects in 13 Member States, selected from 122 complete applications against the Act's criteria (contribution to supply security, technical feasibility, sustainable implementation, cross-border benefits). Recognition brings coordinated support from the Commission, Member States and financial institutions on access to finance and off-takers, and permit-granting capped at 27 months for extraction and 15 months for other projects. Among the projects represented in SMPT are five rare-earth projects for magnets, eleven naming battery-grade graphite, four of those also naming cobalt and battery-grade nickel, two tungsten projects, one gallium project, two germanium projects, and KELIBER LITHIUM, an integrated extraction-and-processing project for battery-grade lithium. The Commission puts the 47 projects' expected capital investment at €22.5 billion; that is project cost, not EU money, and is not recorded as capital.",
     "analyticalSignificance": "The EU's main project-level instrument is recognition, not money: the designation changes permitting and access to finance, and any funding that follows is a separate decision. Its rare-earth projects process, separate and recycle rare earths for magnets, the activities whose Chinese technology Announcement No. 62 placed under export licence in October 2025 before its suspension.",
     "supersededByEventId": null,
     "sourceIds": [
@@ -1894,7 +1895,7 @@
       "semiconductor",
       "industrial"
     ],
-    "summary": "A Commission action plan building on the Critical Raw Materials Act. It sets up a European Critical Raw Materials Centre in early 2026 (market intelligence, project finance, joint purchasing and stockpiling), a Raw Materials Platform to aggregate demand and secure offtake, a stockpiling pilot with Member States from early 2026, and a financing hub coordinating EU instruments (InvestEU, the Innovation Fund, the Battery Booster and EIB and EBRD financing). It says the EU should mobilise EUR 3 billion of EU funds within 12 months in direct support of the critical-raw-materials value chain, and records financing already given, including the Just Transition Fund's EUR 18.7 million for a rare-earth magnet project in Estonia, EIB loans to the UpCatalyst graphite Strategic Project and EBRD equity in the Sarytogan graphite project. By Q2 2026 the Commission will propose restrictions on exports of permanent-magnet scraps and waste; no such instrument is in the corpus, so no control clause is recorded. A targeted amendment to the Act extends magnet labelling and recycled-content rules.",
+    "summary": "A Commission action plan building on the Critical Raw Materials Act. It sets up a European Critical Raw Materials Centre in early 2026 (market intelligence, project finance, joint purchasing and stockpiling), a Raw Materials Platform to aggregate demand and secure offtake, a stockpiling pilot with Member States from early 2026, and a financing hub coordinating EU instruments (InvestEU, the Innovation Fund, the Battery Booster and EIB and EBRD financing). It says the EU should mobilise EUR 3 billion of EU funds within 12 months in direct support of the critical-raw-materials value chain, and records financing already given, including the Just Transition Fund's EUR 18.7 million for a rare-earth magnet project in Estonia, EIB loans to the UpCatalyst graphite and Keliber lithium Strategic Projects and EBRD equity in the Sarytogan graphite project. Keliber's €150 million EIB loan is separately coded under its August 2024 financing event. By Q2 2026 the Commission will propose restrictions on exports of permanent-magnet scraps and waste; no such instrument is in the corpus, so no control clause is recorded. A targeted amendment to the Act extends magnet labelling and recycled-content rules.",
     "analyticalSignificance": "The EU's response moves from recognition to money and market tools: after the 2025 Strategic Project lists, the plan puts EU funds, public-bank financing, joint purchasing and stockpiling behind the same projects. It names China's controls only obliquely, as the \"weaponisation of CRMs by dominant market players\", and proposes the EU's first rare-earth export restriction of its own, on magnet scrap, which remained a proposal to come when the plan was adopted.",
     "supersededByEventId": null,
     "sourceIds": [
@@ -2526,6 +2527,80 @@
       "officialPublicationDate": "2026-03-04",
       "discoveredAt": null,
       "verifiedAt": "2026-10-02",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-nrcan-lithium-processing-2024",
+    "date": "2024-07-11",
+    "jurisdiction": "canada",
+    "issuingBody": "Natural Resources Canada",
+    "titleOriginal": "Government of Canada Invests Over $9 Million to Enable Made-in-Canada Lithium Battery Supply Chain in British Columbia",
+    "titleOriginalLang": "en",
+    "titleEn": "Government of Canada Invests Over $9 Million to Enable Made-in-Canada Lithium Battery Supply Chain in British Columbia",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "lithium"
+    ],
+    "affectedSectors": [
+      "battery",
+      "industrial"
+    ],
+    "summary": "Natural Resources Canada announced two Critical Minerals Research, Development and Demonstration (CMRDD) investments totaling C$9,437,500 for midstream lithium processing in British Columbia: C$4,937,500 to Saltworks Technologies to accelerate concentration and conversion of Canadian lithium brine into battery precursors, and C$4,500,000 to NORAM Electrolysis Systems for industrial-scale membrane-electrolysis demonstration for lithium production and lithium-hydroxide commercialization. The separate federal grants disclosure records NORAM agreement CMRDD2-021 in force from 8 July 2024 through 31 March 2027.",
+    "analyticalSignificance": "Adds a concrete Canadian midstream-lithium financing event beneath the broader 2022 Critical Minerals Strategy. The two awards target process technology rather than mine development: brine concentration/conversion and lithium-hydroxide electrolysis. Only the NORAM award has a matching binding agreement record in the reviewed public disclosures; Saltworks remains coded at the announced stage.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-nrcan-lithium-processing-2024",
+      "src-canada-grant-noram-cmrdd-2024"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-07-11",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-07",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-eu-eib-keliber-2024",
+    "date": "2024-08-23",
+    "jurisdiction": "eu",
+    "issuingBody": "European Investment Bank",
+    "titleOriginal": "Finland: EU and Sibanye-Stillwater, through its Keliber lithium project, join forces in €150 million deal to improve EU access to and resilience in battery materials",
+    "titleOriginalLang": "en",
+    "titleEn": "Finland: EU and Sibanye-Stillwater, through its Keliber lithium project, join forces in €150 million deal to improve EU access to and resilience in battery materials",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "lithium"
+    ],
+    "affectedSectors": [
+      "battery",
+      "industrial"
+    ],
+    "summary": "The European Investment Bank announced a €150 million direct loan to Keliber Oy, part of a €500 million financing package for an integrated Finnish lithium project spanning mines, concentration and battery-grade lithium-hydroxide production. The EIB project record gives a signature date of 20 August 2024 for the €150 million loan; the European Commission provides an InvestEU guarantee for the direct financing.",
+    "analyticalSignificance": "The EIB describes the transaction as its first financing support for mining critical raw materials in the EU. It moves EU lithium policy from strategic-project recognition and general financing frameworks into a signed, project-specific public-bank commitment for integrated domestic extraction and processing.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-eib-keliber-2024",
+      "src-eib-keliber-project-20170804"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-08-23",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-07",
       "publishedAt": null
     }
   }

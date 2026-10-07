@@ -1,8 +1,22 @@
 # Project state
 
-## 2026-10-07: Nickel material expansion — promotion-first tranche (draft)
+## 2026-10-07: Lithium financing/project backfill — Canada CMRDD + EIB Keliber (draft)
 
-**Status.** Branch `feat/nickel-material-tranche-20261007`, cut from `main` `63685c0` after PR #51 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/lithium-financing-backfill-20261007`, cut from `main` `cd38940` after PR #52 merged. Draft review phase; unmerged and not deployed.
+
+- Backfills three lithium financings already surfaced by SMPT's source base rather than opening a broad new-source sweep: C$4,937,500 to Saltworks Technologies, C$4,500,000 to NORAM Electrolysis Systems, and the EIB's €150 million Keliber loan.
+- Adds a 2024 NRCan lithium-processing funding event and two British Columbia process-technology projects. Both remain at the `processing` stage because NRCan explicitly frames the awards as midstream lithium processing.
+- Preserves financial maturity: Saltworks stays `announced` because no matching binding CMRDD agreement for the exact C$4,937,500 award was found in the reviewed federal disclosures; NORAM is `contracted` from 2024-07-08 via agreement CMRDD2-021; Keliber is `contracted` from the EIB's 2024-08-20 €150 million signature.
+- Adds a dedicated 2024 EIB Keliber financing event, the KELIBER LITHIUM project, and its March 2025 EU CRMA Strategic Project designation. The project uses `mining` + `processing` from the Commission's explicit integrated extraction-and-processing description.
+- Keeps Keliber Oy (EIB borrower) and Keliber Technology Oy (CRMA promoter) as separate organization records because the primary sources use different legal names and no identity equivalence is asserted.
+- The EIB project page also records a later €17.5 million signature on 2024-12-20. That later transaction is explicitly out of scope and is not rolled into the €150 million row.
+- ResourceEU and the existing UpCatalyst row now point to the separately coded Keliber financing instead of describing it as omitted.
+- Out of scope: the later €17.5 million Keliber signature, Vulcan/Northvolt/other new-source lithium financings, NTwist nickel backfill, PGMs, physical-status promotion beyond source evidence, or schema/vocabulary changes.
+- Focused regressions pin the Canada award maturity split, Keliber amount/date, CRMA designation linkage, dossier provenance and ResourceEU cleanup. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: Nickel material expansion — promotion-first tranche (PR #52, merged)
+
+**Status.** PR #52 merged to `main` as `cd38940ee183a0723cb7f4057004e68691b1b2ef`; reviewed head `1bd6727d8ac7909a5f126ea0b9f87b7a1bae44da` cleared validate, typecheck, lint, 422/422 tests, build and Vercel. Post-merge CI #154 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Adds nickel as the fourteenth tracked material, with current supply-chain context grounded in IEA 2026 and USGS 2026. The dossier distinguishes Indonesia's mining/refining concentration from China's ownership-linked exposure and does not create a new Indonesian policy event.
 - Promotes explicit nickel scope already present in the corpus: 13 events, one control row, three financial rows, five projects and four project designations now carry tracked nickel. No nickel or battery-grade-nickel string remains in the promoted rows' `untrackedMaterialsAsStated` fields.

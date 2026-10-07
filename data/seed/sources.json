@@ -1773,7 +1773,7 @@
     "dateAccessed": "2026-10-07",
     "sourceType": "official",
     "confidence": "primary",
-    "notes": "Official NRCan release on CMRDD support for midstream lithium processing: Saltworks lithium-brine concentration/conversion and NORAM Electrolysis Systems lithium-hydroxide production technology. Used as diversification context only; these awards are not coded as financial rows in this tranche."
+    "notes": "Official NRCan release on CMRDD support for midstream lithium processing: C$4,937,500 to Saltworks for lithium-brine concentration/conversion and C$4,500,000 to NORAM Electrolysis Systems for industrial-scale lithium-hydroxide electrolysis demonstration. The two awards are coded in the lithium financing backfill; NORAM's binding agreement is separately verified through the federal grants disclosure."
   },
   {
     "id": "src-usgs-cobalt-mcs-2026",
@@ -1798,5 +1798,41 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Official USGS 2026 nickel commodity sheet. Reports estimated 2025 Indonesian mine production of 2.6 million tonnes out of 3.9 million tonnes worldwide, and notes that stainless and alloy steel plus nickel-containing alloys typically account for more than 85% of U.S. primary nickel consumption. Used for current nickel supply and end-use context, not as a policy instrument."
+  },
+  {
+    "id": "src-canada-grant-noram-cmrdd-2024",
+    "title": "Grants and Contributions — ELECTROLYSIS FOR LITHIUM PRODUCTION AND RECYCLING",
+    "publisher": "Government of Canada Open Government",
+    "url": "https://search.open.canada.ca/grants/record/nrcan-rncan%2C115-2024-2025-Q2-15527%2Ccurrent",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official federal grants-and-contributions disclosure for NRCan agreement CMRDD2-021 with NORAM Electrolysis Systems Inc. Agreement value C$4,500,000; agreement period 2024-07-08 through 2027-03-31; title ELECTROLYSIS FOR LITHIUM PRODUCTION AND RECYCLING."
+  },
+  {
+    "id": "src-eib-keliber-2024",
+    "title": "Finland: EU and Sibanye-Stillwater, through its Keliber lithium project, join forces in €150 million deal to improve EU access to and resilience in battery materials",
+    "publisher": "European Investment Bank",
+    "url": "https://www.eib.org/en/press/all/2024-313-eu-and-sibanye-stillwater-through-its-keliber-lithium-project-in-finland-join-forces-in-eur150-million-deal-to-improve-eu-access-to-and-resilience-in-battery-materials",
+    "language": "en",
+    "datePublished": "2024-08-23",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official EIB release: EIB is lending €150 million to Keliber Oy as part of a €500 million financing package for integrated lithium mining, concentration and lithium-hydroxide processing in Finland. The direct loan is backed by an InvestEU guarantee."
+  },
+  {
+    "id": "src-eib-keliber-project-20170804",
+    "title": "KELIBER BATTERY GRADE LITHIUM PRODUCTION",
+    "publisher": "European Investment Bank",
+    "url": "https://www.eib.org/en/projects/all/20170804",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official EIB project record. Status Signed; records €150,000,000 signed on 2024-08-20 and a later €17,500,000 signature on 2024-12-20. This tranche codes only the €150 million transaction surfaced by the August 2024 EIB release. Project description covers lithium mines, a concentrator and a hydrometallurgical battery-grade lithium-hydroxide plant."
   }
 ]

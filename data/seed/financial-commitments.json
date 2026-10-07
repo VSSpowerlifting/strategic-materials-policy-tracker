@@ -1174,6 +1174,186 @@
     "notes": "The announcement total; its two awards are recorded as parts of it. \"Almost $8.4 million\" is the release's own rounding of $4.9 million plus $3.5 million."
   },
   {
+    "id": "fin-ca-cmrdd-2024-noram-lithium",
+    "eventId": "evt-ca-nrcan-lithium-processing-2024",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "4500000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$4,500,000 investment",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-ca-cmrdd",
+    "recipient": "NORAM Electrolysis Systems Inc.",
+    "recipientOrgIds": [
+      "org-noram-electrolysis-systems"
+    ],
+    "project": "Electrolysis for Lithium Production and Recycling",
+    "projectId": "prj-ca-noram-lithium-electrolysis",
+    "facility": "new test centre",
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2024-07-08",
+        "sourceId": "src-canada-grant-noram-cmrdd-2024",
+        "note": "Official grants disclosure records agreement CMRDD2-021 from 8 July 2024 through 31 March 2027."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2024-07-11",
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "note": "The release describes an industrial-scale demonstration at NESI's new test centre; no later physical milestone is established in the sources reviewed for this tranche."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "materials",
+          "status",
+          "programme",
+          "facility"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph; NESI investment paragraph",
+        "note": "Currency is read from the Canadian federal issuer context."
+      },
+      {
+        "sourceId": "src-canada-grant-noram-cmrdd-2024",
+        "supports": [
+          "amount",
+          "recipient",
+          "project",
+          "status",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement CMRDD2-021",
+        "note": "Establishes the exact agreement value and binding agreement period."
+      }
+    ],
+    "notes": "Binding agreement verified through the federal grants disclosure. No payment/disbursement timing is stated, so contracted is not treated as paid.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-07",
+      "implementationStatusCheckedAt": "2026-10-07"
+    }
+  },
+  {
+    "id": "fin-ca-cmrdd-2024-saltworks-lithium",
+    "eventId": "evt-ca-nrcan-lithium-processing-2024",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "4937500",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$4,937,500 investment",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Natural Resources Canada (Critical Minerals Research, Development and Demonstration program)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-nrcan"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-ca-cmrdd",
+    "recipient": "Saltworks Technologies Inc.",
+    "recipientOrgIds": [
+      "org-saltworks-technologies"
+    ],
+    "project": "Concentration and conversion of Canadian lithium brine into lithium battery precursors",
+    "projectId": "prj-ca-saltworks-lithium-brine",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2024-07-11",
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "note": "The release published 11 July says the Minister announced the investments 'yesterday'. No matching CMRDD agreement record for this exact C$4,937,500 award was located in the reviewed public disclosures, so the row is not promoted beyond announced."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2024-07-11",
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "note": "The release states the investment will accelerate concentration and conversion of Canadian lithium brine using technologies already developed and tested by Saltworks; no construction/operational milestone is stated."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "materials",
+          "status",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph; Saltworks investment paragraph",
+        "note": "Currency is read from the Canadian federal issuer context."
+      }
+    ],
+    "notes": "Exact announced amount from the NRCan release. The source establishes a government investment and project purpose but not a binding agreement or payment; absent a matching agreement disclosure, financial standing remains announced.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-07",
+      "implementationStatusCheckedAt": "2026-10-07"
+    }
+  },
+  {
     "id": "fin-ca-cms-2022-budget-envelope",
     "eventId": "evt-ca-cms-2022",
     "relationships": [],
@@ -3302,6 +3482,102 @@
     "notes": "Multilateral public money: it counts among public commitments but is credited to no tracked government. The EuroManganese investment named alongside it is manganese, outside the tracked materials, and is not recorded."
   },
   {
+    "id": "fin-eu-eib-2024-keliber-loan",
+    "eventId": "evt-eu-eib-keliber-2024",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "150000000",
+      "currency": "EUR",
+      "qualifier": "exact",
+      "amountAsStated": "€150 million direct loan",
+      "currencyBasis": "stated"
+    },
+    "provider": "European Investment Bank (supported by an InvestEU guarantee)",
+    "providerJurisdiction": "eu",
+    "providerOrgIds": [
+      "org-eu-eib"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Keliber Oy",
+    "recipientOrgIds": [
+      "org-keliber-oy"
+    ],
+    "project": "KELIBER LITHIUM",
+    "projectId": "prj-fi-keliber-lithium",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2024-08-20",
+        "sourceId": "src-eib-keliber-project-20170804",
+        "note": "The EIB project record lists a €150 million signature on 20 August 2024."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-eib-keliber-2024",
+        "note": "The 23 August 2024 EIB release states that construction of the plant had already begun; it does not state the construction start date."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-eib-keliber-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening bullets and financing/project description",
+        "note": "The release states the €150 million EIB direct loan, InvestEU guarantee and integrated lithium project."
+      },
+      {
+        "sourceId": "src-eib-keliber-project-20170804",
+        "supports": [
+          "amount",
+          "project",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Amount; Signature date(s); Project description",
+        "note": "The project page establishes the exact 20 August 2024 signature date for the €150 million loan."
+      }
+    ],
+    "notes": "This row codes only the €150 million EIB loan surfaced by the August 2024 release. The EIB project page also records a later €17.5 million signature on 20 December 2024; that later transaction is outside this tranche and is not added to the amount.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-07",
+      "implementationStatusCheckedAt": "2026-10-07"
+    }
+  },
+  {
     "id": "fin-eu-eib-2025-up-catalyst-loan",
     "eventId": "evt-eu-resourceeu-2025",
     "relationships": [],
@@ -3371,7 +3647,7 @@
         "note": "The Communication names \"the Strategic Projects UpCatalyst (processing of graphite)\" after its promoter; the one Strategic Project UP Catalyst promotes is CO2Graphite (Decision C(2025) 1904, annex entry (11))."
       }
     ],
-    "notes": "No amount is stated, so the row sums nothing. The same Commission passage names an EIB loan agreement for Strategic Project Keliber (lithium). Lithium is now tracked at the parent ResourceEU event level, but the Keliber loan is not separately coded as a financial row in this tranche."
+    "notes": "No amount is stated for UpCatalyst, so this row sums nothing. The same Commission passage also names the Keliber lithium loan; Keliber is now separately coded as fin-eu-eib-2024-keliber-loan from the EIB's primary transaction sources."
   },
   {
     "id": "fin-eu-jtf-2025-neo-magnet-project",

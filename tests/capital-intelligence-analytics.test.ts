@@ -407,8 +407,9 @@ test("a government's designations are counted apart from its capital, at home an
   assert.equal(jp.counts.byGeography.domestic, 4);
   assert.equal(jp.counts.byGeography.not_stated, 0);
   assert.equal(jp.counts.projectsWithCapital, jp.counts.designations, "every certified plan carries its JOGMEC grant row");
-  // Hemerdon (UK capital), CO2Graphite (EIB loan) and Sarytogan (EBRD equity) carry both a designation and a financial row.
-  assert.equal(eu.counts.projectsWithCapital, 3);
+  // Hemerdon (UK capital), CO2Graphite (EIB loan), Sarytogan (EBRD equity) and Keliber (EIB loan)
+  // carry both a designation and a financial row.
+  assert.equal(eu.counts.projectsWithCapital, 4);
 });
 
 test("the response map places designations beside capital and controls without counting them as capital", () => {
