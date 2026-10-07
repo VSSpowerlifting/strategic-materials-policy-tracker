@@ -57,11 +57,12 @@ test("cobalt dossier is current, source-linked and reverse-linked to every promo
   }
 });
 
-test("Canadian Kingston recycling records promote cobalt without promoting nickel", () => {
+test("Canadian Kingston recycling records keep cobalt tracked after later nickel promotion", () => {
   const project = getProjectById("prj-ca-cyclic-kingston-demonstration-plant")!;
   assert.ok(project.materialIds.includes("cobalt"));
-  assert.ok(project.untrackedMaterialsAsStated.includes("nickel"));
-  assert.ok(!project.untrackedMaterialsAsStated.includes("cobalt"));
+  assert.ok(project.materialIds.includes("nickel"));
+  assert.ok(!project.untrackedMaterialsAsStated.some((item) => /cobalt|nickel/i.test(item)));
+  assert.equal(project.materialAttribution, "tracked_only");
 
   for (const id of [
     "fin-ca-cmrdd-2024-cyclic-materials",
@@ -69,13 +70,14 @@ test("Canadian Kingston recycling records promote cobalt without promoting nicke
   ]) {
     const row = getFinancialCommitmentById(id)!;
     assert.ok(row.materialIds.includes("cobalt"));
-  assert.ok(row.materialIds.includes("nickel"));
-    assert.ok(row.untrackedMaterialsAsStated.includes("nickel"));
-    assert.ok(!row.untrackedMaterialsAsStated.includes("cobalt"));
-    assert.equal(row.materialAttribution, "includes_untracked");
+    assert.ok(row.materialIds.includes("nickel"));
+    assert.ok(!row.untrackedMaterialsAsStated.some((item) => /cobalt|nickel/i.test(item)));
+    assert.equal(row.materialAttribution, "tracked_only");
   }
 
-  assert.ok(getEventById("evt-ca-nrcan-cmrdd-2024")?.affectedMaterialIds.includes("cobalt"));
+  const event = getEventById("evt-ca-nrcan-cmrdd-2024")!;
+  assert.ok(event.affectedMaterialIds.includes("cobalt"));
+  assert.ok(event.affectedMaterialIds.includes("nickel"));
 });
 
 test("four existing EU Strategic Projects promote cobalt in both project and designation records", () => {
