@@ -35,6 +35,67 @@
     "notes": "The release names the project without saying who develops it, so no sponsor is recorded. It calls it \"a trilateral project with Japan, the United States and Australia\" and says \"Japan has already provided 50 percent of the project costs to date\"; no Japanese amount is stated or recorded."
   },
   {
+    "id": "prj-au-lynas-heavy-ree-separation",
+    "name": "Lynas heavy rare earth separation commencement",
+    "sponsorOrgIds": [
+      "org-lynas"
+    ],
+    "locations": [],
+    "stages": [
+      "separation"
+    ],
+    "materialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Growth plan, heavy rare earth separation and offtake paragraphs",
+        "note": "The source describes commencement of heavy rare earth separation and names dysprosium and terbium supply. It does not allocate the equity investment to this undertaking or establish a stand-alone site."
+      }
+    ],
+    "notes": "Distinct undertaking within the jointly financed Lynas growth plan. The source does not allocate the AUD200 million between light and heavy rare earth work."
+  },
+  {
+    "id": "prj-au-lynas-light-ree-expansion",
+    "name": "Lynas light rare earth production capacity expansion",
+    "sponsorOrgIds": [
+      "org-lynas"
+    ],
+    "locations": [],
+    "stages": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Growth plan and additional investment paragraphs",
+        "note": "The investment supports a mid-term growth plan including an increase in light rare earth production capacity. No standalone amount or facility location is attributed."
+      }
+    ],
+    "notes": "Distinct undertaking within a shared Lynas growth plan. No share of JARE's AUD200 million is allocable to it from the reviewed source."
+  },
+  {
     "id": "prj-au-nolans",
     "name": "Nolans project",
     "sponsorOrgIds": [],
@@ -2801,6 +2862,41 @@
     "notes": "Prototype processing capability using samples from the Stibnite Gold Project; separate from the mine project itself."
   },
   {
+    "id": "prj-us-mountain-pass-hcl-recommissioning",
+    "name": "Mountain Pass hydrochloric acid facility recommissioning",
+    "sponsorOrgIds": [
+      "org-mp-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "California",
+        "asStated": "Mountain Pass Rare Earth Mine and Processing Facility"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Transaction Agreement — undertaking to recommission hydrochloric acid facility",
+        "note": "Source identifies HCl recommissioning at the Mountain Pass rare-earth facility; the source does not give a separately allocated financing amount."
+      }
+    ],
+    "notes": "MP own-cash undertaking, listed separately from heavy-rare-earth refining work and Independence expansion. HCl is a reagent and is not added as a tracked material."
+  },
+  {
     "id": "prj-us-mountain-pass-samarium",
     "name": "Mountain Pass heavy rare earth separation expansion (Samarium Project)",
     "sponsorOrgIds": [
@@ -2886,6 +2982,37 @@
     "notes": "The July 2025 filing and release gave the site as \"a soon-to-be-chosen location\"; MP's 10-Q for the quarter to 30 June 2026 places it in Northlake, Texas."
   },
   {
+    "id": "prj-us-mp-independence-expansion",
+    "name": "Independence magnet facility expansion",
+    "sponsorOrgIds": [
+      "org-mp-materials"
+    ],
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Transaction Agreement — Independence magnet facility expansion",
+        "note": "Transaction Agreement describes increasing Independence magnet production capacity; projected 3,000-ton annual capacity is a recipient undertaking, not a realized outcome."
+      }
+    ],
+    "notes": "Distinct from the new 10X facility. The recipient's up-to-$600M cash undertaking spans multiple projects, without a split."
+  },
+  {
     "id": "prj-us-stibnite",
     "name": "Stibnite Gold Project",
     "sponsorOrgIds": [],
@@ -2931,6 +3058,83 @@
       }
     ],
     "notes": "A gold-antimony-silver development; only antimony is tracked as a material in SMPT."
+  },
+  {
+    "id": "prj-us-usac-alaska-antimony-integration",
+    "name": "US Antimony Alaska antimony mining integration",
+    "sponsorOrgIds": [
+      "org-us-antimony"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Alaska"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Award-scope paragraphs on Alaska feedstock development",
+        "note": "The government names Alaska mining integration but does not identify a specific named mine. This project is deliberately not equated with Nolan Creek."
+      }
+    ],
+    "notes": "Bounded Alaska mining/feedstock undertaking within the $27M award; no separate amount is given."
+  },
+  {
+    "id": "prj-us-usac-thompson-falls-expansion",
+    "name": "Thompson Falls antimony processing and refining expansion",
+    "sponsorOrgIds": [
+      "org-us-antimony"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Montana",
+        "asStated": "Thompson Falls, Montana"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Award-scope paragraphs on Montana processing and refining expansion",
+        "note": "The $27M award also supports Alaska mining integration and is not fully allocable to Thompson Falls."
+      }
+    ],
+    "notes": "The source describes facility expansion at Thompson Falls; the shared $27M award cannot be attributed wholly to this site."
   },
   {
     "id": "prj-us-usar-magnet-project-2",
