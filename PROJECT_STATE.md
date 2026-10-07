@@ -1,8 +1,19 @@
 # Project state
 
-## 2026-10-07: Telescope lithium financing/project backfill — G7 CMPA orphan completion (draft)
+## 2026-10-07: Graphite project-registry completion — Focus + Northern/Rain (draft)
 
-**Status.** Branch `feat/telescope-lithium-backfill-20261007`, cut from `main` `d295789` after PR #54 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/graphite-project-registry-20261007`, cut from `main` `941c774` after PR #55 merged. Draft review phase; unmerged and not deployed.
+
+- Converts two already-coded G7 CMPA graphite financings from free-text project descriptions into first-class project registry records; no new money, event, source or financial-status change is introduced.
+- Adds Focus Graphite's chemical-free electrothermal purification demonstration as a processing-stage graphite project and links the existing up-to-C$14.1 million conditional GPI commitment.
+- Adds Northern Graphite and Rain Carbon Canada's upcycled-natural-graphite battery-anode R&D project and links the existing C$860,000 NRC commitment.
+- Keeps both project locations empty. Focus's source identifies Lac Knife and Lac Tétépisca as graphite feedstock deposits, not the purification project's site; the Northern/Rain source states no project location.
+- MP Materials, United States Antimony, Lynas and the three CMGD study rows remain out of scope because their current free-text project fields either span multiple undertakings or need a separate modeling decision.
+- Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: Telescope lithium financing/project backfill — G7 CMPA orphan completion (PR #55, merged)
+
+**Status.** PR #55 merged to `main` as `941c774a40f9810a781fcc59bda890116e8000cf`; reviewed head `ce06c6b6853aa00eadc69c134be4ac3fb6e0f8b3` cleared validate, typecheck, lint, 432/432 tests, build and Vercel. Post-merge CI #167 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Backfills the two Telescope Innovations lithium projects already named in the October 2025 G7 Critical Minerals Production Alliance event; no new policy event is created.
 - Li-PICK is recorded at the exact C$319,200 agreement value and `contracted` from 2024-09-01 via federal contribution agreement 1022725. It is a recycling-stage lithium project converting spent lithium-ion batteries into cathode active material and battery-grade lithium carbonate. No project site or payment timing is inferred from the recipient-location disclosure.

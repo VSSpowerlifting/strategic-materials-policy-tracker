@@ -247,6 +247,45 @@
     "notes": null
   },
   {
+    "id": "prj-ca-focus-graphite-electrothermal-purification",
+    "name": "Chemical-Free Electrothermal Purification Project",
+    "sponsorOrgIds": [
+      "org-focus-graphite"
+    ],
+    "locations": [],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Focus Graphite",
+        "note": "NRCan calls this Focus Graphite's chemical-free electrothermal purification project and identifies natural flake graphite from the Lac Knife and Lac Tétépisca deposits as feedstock. Those deposits are not treated as the project location."
+      },
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Research and development projects: Focus Graphite",
+        "note": "The project demonstrates a high-temperature electrothermal purification process for natural flake graphite, read as processing."
+      }
+    ],
+    "notes": "Thermal & Material Engineering Center and American Energy Technologies Company are named collaborators in the source but are not added as sponsor organizations in this tranche. No project site is stated."
+  },
+  {
     "id": "prj-ca-ggt-graphite-recycling-pilot",
     "name": "Recycling of Graphite from Secondary Sources for Use in Lithium-Ion Batteries",
     "sponsorOrgIds": [
@@ -442,6 +481,38 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "prj-ca-northern-rain-upcycled-graphite",
+    "name": "Upcycled Natural Graphite for Fast-Charging, Long-Life Lithium Battery Technology",
+    "sponsorOrgIds": [
+      "org-northern-graphite",
+      "org-rain-carbon-canada"
+    ],
+    "locations": [],
+    "stages": [
+      "research_development"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: Northern Graphite and Rain Carbon Canada",
+        "note": "NRCan identifies Northern Graphite and Rain Carbon Canada and describes research to turn leftover natural graphite from mining into high-quality material used in battery anodes."
+      }
+    ],
+    "notes": "No project site is stated; none is inferred from Northern Graphite's separate Lac des Iles operations or participant locations."
   },
   {
     "id": "prj-ca-ntwist-nickel-efficiency",

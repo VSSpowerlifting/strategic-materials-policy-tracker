@@ -274,7 +274,7 @@
     "grouping": null,
     "statusSummary": "The dominant anode material for lithium-ion batteries. China tightened export controls on certain graphite items in 2023 and the material is designated critical by the US and the EU. The 2023 measures are now coded as Announcement No. 39 (high-sensitivity items on the dual-use control list from 1 December 2023); Announcement No. 46 added stricter US end-use review in December 2024.",
     "chinaPositionNote": "China produces the majority of natural graphite and nearly all of the world's spherical (battery-grade) graphite (USGS; IEA).",
-    "diversificationNote": "Synthetic graphite and new natural-graphite anode capacity are being developed in North America, Europe and Africa.",
+    "diversificationNote": "Synthetic graphite and new natural-graphite anode capacity are being developed in North America, Europe and Africa. Canada's G7 CMPA portfolio includes Focus Graphite's electrothermal purification demonstration and Northern Graphite/Rain Carbon Canada's R&D on upcycling mined-graphite leftovers into battery-anode material.",
     "downstreamIndustries": [
       "Lithium-ion battery anodes",
       "Refractories",
@@ -306,7 +306,8 @@
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
-      "src-usgs-news-2025"
+      "src-usgs-news-2025",
+      "src-nrcan-g7-cmpa-2025"
     ]
   },
   {
