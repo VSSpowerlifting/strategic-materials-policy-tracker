@@ -28,6 +28,7 @@ const expectedEvents = [
   "china-rare-earth-suspension-2025-11",
   "evt-ca-g7-cmpa-2025",
   "evt-ca-nrcan-pdac-2026",
+  "evt-eu-resourceeu-2025",
 ] as const;
 
 test("lithium dossier is source-linked and every listed event declares lithium scope", () => {
