@@ -44,6 +44,7 @@ import {
   getAllEvents,
   getAllFinancialCommitments,
   getEventById,
+  getSourceById,
 } from "./data";
 import { FINANCIAL_INSTRUMENTS } from "./types";
 import type {
@@ -68,6 +69,47 @@ import { addDecimals } from "./decimal";
 
 export function currentFinancialStatus(c: FinancialCommitment): FinancialStatus {
   return c.financialStatusHistory[c.financialStatusHistory.length - 1].status;
+}
+
+/**
+ * Earliest non-inferred date by which an undated financial-status entry is
+ * evidenced in the corpus. A stated status date wins. Otherwise use the
+ * source's publication date; if the source gives none, use the explicit
+ * financial-review date, then the source access date as a conservative
+ * observation boundary. This does not invent the status's actual effective
+ * date: the entry's own `date` remains null.
+ */
+export function financialStatusEvidenceBoundary(
+  c: FinancialCommitment,
+  e: FinancialStatusEntry,
+): string | null {
+  if (e.date !== null) return e.date;
+  const source = getSourceById(e.sourceId);
+  if (source?.datePublished) return source.datePublished;
+  if (c.lifecycleReview?.financialStatusCheckedAt) return c.lifecycleReview.financialStatusCheckedAt;
+  return source?.dateAccessed ?? null;
+}
+
+/**
+ * Last financial-status entry whose evidence boundary is on or before `date`.
+ * History order remains authoritative when multiple entries qualify. Null
+ * means the checked-out corpus does not establish any financial status by the
+ * requested date.
+ */
+export function financialStatusEntryOn(
+  c: FinancialCommitment,
+  date: string,
+): FinancialStatusEntry | null {
+  let entry: FinancialStatusEntry | null = null;
+  for (const e of c.financialStatusHistory) {
+    const boundary = financialStatusEvidenceBoundary(c, e);
+    if (boundary !== null && boundary <= date) entry = e;
+  }
+  return entry;
+}
+
+export function financialStatusOn(c: FinancialCommitment, date: string): FinancialStatus | null {
+  return financialStatusEntryOn(c, date)?.status ?? null;
 }
 
 export function currentControlEntry(m: ControlMeasure): ControlStatusEntry {
@@ -435,9 +477,19 @@ export function isBinding(c: FinancialCommitment): boolean {
   return BINDING_FINANCIAL_STATUSES.includes(currentFinancialStatus(c));
 }
 
+export function isBindingOn(c: FinancialCommitment, date: string): boolean {
+  const status = financialStatusOn(c, date);
+  return status !== null && BINDING_FINANCIAL_STATUSES.includes(status);
+}
+
 /** The commitment has ended without the money flowing: withdrawn, or lapsed unused. */
 export function isEnded(c: FinancialCommitment): boolean {
   return ENDED_FINANCIAL_STATUSES.includes(currentFinancialStatus(c));
+}
+
+export function isEndedOn(c: FinancialCommitment, date: string): boolean {
+  const status = financialStatusOn(c, date);
+  return status !== null && ENDED_FINANCIAL_STATUSES.includes(status);
 }
 
 /**
@@ -448,6 +500,15 @@ export type LegalStanding = "binding" | "not_yet_binding" | "ended" | "status_no
 
 export function legalStanding(c: FinancialCommitment): LegalStanding {
   const status = currentFinancialStatus(c);
+  if (ENDED_FINANCIAL_STATUSES.includes(status)) return "ended";
+  if (BINDING_FINANCIAL_STATUSES.includes(status)) return "binding";
+  if (NOT_YET_BINDING_FINANCIAL_STATUSES.includes(status)) return "not_yet_binding";
+  return "status_not_stated";
+}
+
+export function legalStandingOn(c: FinancialCommitment, date: string): LegalStanding | null {
+  const status = financialStatusOn(c, date);
+  if (status === null) return null;
   if (ENDED_FINANCIAL_STATUSES.includes(status)) return "ended";
   if (BINDING_FINANCIAL_STATUSES.includes(status)) return "binding";
   if (NOT_YET_BINDING_FINANCIAL_STATUSES.includes(status)) return "not_yet_binding";
