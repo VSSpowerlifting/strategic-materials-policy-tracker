@@ -2179,5 +2179,116 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "org-saltworks-technologies",
+    "name": "Saltworks Technologies Inc.",
+    "nameOriginal": null,
+    "aliases": [
+      "Saltworks"
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph; Saltworks investment paragraph",
+        "note": null
+      }
+    ],
+    "notes": "The cited NRCan release locates the project in British Columbia but does not establish the company's jurisdiction of incorporation."
+  },
+  {
+    "id": "org-noram-electrolysis-systems",
+    "name": "NORAM Electrolysis Systems Inc.",
+    "nameOriginal": null,
+    "aliases": [
+      "NESI",
+      "Noram Electrolysis Systems Inc."
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph; NESI investment paragraph",
+        "note": null
+      },
+      {
+        "sourceId": "src-canada-grant-noram-cmrdd-2024",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Recipient's Legal Name",
+        "note": null
+      }
+    ],
+    "notes": "The official grant disclosure gives Vancouver, British Columbia as the recipient location but does not by itself establish jurisdiction of incorporation."
+  },
+  {
+    "id": "org-keliber-oy",
+    "name": "Keliber Oy",
+    "nameOriginal": null,
+    "aliases": [
+      "Keliber"
+    ],
+    "kind": "company",
+    "countryCode": "FI",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-eib-keliber-2024",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "EIB describes Keliber Oy as a Finnish mining and battery-material processing company."
+      }
+    ],
+    "notes": "EIB borrower. Kept distinct from Keliber Technology Oy because the CRMA designation uses that separate legal name."
+  },
+  {
+    "id": "org-keliber-technology-oy",
+    "name": "Keliber Technology Oy",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FI",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 19",
+        "note": "Commission decision lists Keliber Technology Oy at a Finland address as the project promoter."
+      }
+    ],
+    "notes": "CRMA designation holder/promoter. Not collapsed into Keliber Oy without explicit identity evidence."
   }
 ]
