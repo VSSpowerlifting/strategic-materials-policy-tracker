@@ -97,16 +97,17 @@ test("China No. 58 is a lithium supply-chain control, not a raw-lithium export r
   const row = getControlMeasureById("ctl-cn-58-2025-battery-cathode-licensing")!;
   assert.ok(row.materialIds.includes("lithium"));
   assert.ok(row.materialIds.includes("cobalt"));
+  assert.ok(row.materialIds.includes("nickel"));
   assert.deepEqual(row.controlledStages, ["component_manufacturing"]);
   assert.equal(row.materialAttribution, "includes_untracked");
   assert.ok(row.untrackedMaterialsAsStated.some((item) => item.includes("三元正极材料")));
   assert.match(
     row.evidence.find((entry) => entry.supports.includes("item_scope"))?.note ?? "",
-    /Neither attribution means the measure controls raw lithium or raw cobalt/,
+    /do not mean the measure controls raw lithium, raw cobalt or raw nickel/,
   );
 
   const event = getEventById("evt-cn-mofcom-58-2025")!;
-  assert.match(event.analyticalSignificance, /Lithium, cobalt and graphite now touch tracked materials/);
+  assert.match(event.analyticalSignificance, /Lithium, cobalt, nickel and graphite now touch tracked materials/);
   assert.match(event.analyticalSignificance, /suspended before its start date/);
 });
 

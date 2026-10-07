@@ -470,7 +470,8 @@
       "terbium",
       "tungsten",
       "lithium",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
@@ -485,7 +486,6 @@
       "magnesium",
       "manganese",
       "molybdenum",
-      "nickel",
       "niobium",
       "platinum-group elements (iridium, osmium, palladium, platinum, rhodium, ruthenium)",
       "rhenium",
@@ -926,12 +926,11 @@
     "stageAllocation": "single_stage",
     "materialIds": [
       "rare-earth-elements",
-      "cobalt"
-    ],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
+      "cobalt",
       "nickel"
     ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
     "financialStatusHistory": [
       {
         "status": "contracted",
@@ -1135,12 +1134,11 @@
     "materialIds": [
       "rare-earth-elements",
       "graphite",
-      "cobalt"
-    ],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
+      "cobalt",
       "nickel"
     ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
     "financialStatusHistory": [
       {
         "status": "announced",

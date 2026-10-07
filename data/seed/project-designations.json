@@ -380,13 +380,13 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "lithium (battery grade)",
-      "copper",
-      "nickel (battery grade)"
+      "copper"
     ],
     "statusHistory": [
       {
@@ -444,11 +444,11 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
-      "nickel (battery grade)",
       "lithium (battery grade)",
       "manganese (battery grade)",
       "copper"
@@ -938,13 +938,13 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "manganese (battery grade)",
-      "lithium (battery grade)",
-      "nickel (battery grade)"
+      "lithium (battery grade)"
     ],
     "statusHistory": [
       {
@@ -1002,12 +1002,12 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "lithium (battery grade)",
-      "nickel (battery grade)",
       "manganese (battery grade)"
     ],
     "statusHistory": [

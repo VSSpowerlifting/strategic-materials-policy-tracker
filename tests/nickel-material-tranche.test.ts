@@ -17,51 +17,53 @@ const expectedEvents = [
   "eu-critical-raw-materials-act",
   "evt-us-eo-14241-2025",
   "evt-us-eo-14272-2025",
-  "evt-us-cm-list-2018",
-  "evt-us-eo-13953-2020",
   "evt-us-cm-list-2022",
   "evt-us-proc-11001-2026",
   "evt-au-cmpti-2025",
   "evt-ca-cms-2022",
-  "evt-uk-cms-2022",
   "evt-ca-nrcan-cmrdd-2024",
   "evt-cn-mofcom-58-2025",
   "china-rare-earth-suspension-2025-11",
   "evt-eu-crma-strategic-projects-2025-03",
+  "evt-ca-g7-cmpa-2025",
 ] as const;
 
-test("cobalt dossier is current, source-linked and reverse-linked to every promoted event", () => {
-  const material = getMaterialBySlug("cobalt")!;
-  assert.equal(material.nameEn, "Cobalt");
-  assert.equal(material.nameZh, "钴");
-  assert.match(material.statusSummary, /Democratic Republic of the Congo/);
-  assert.match(material.statusSummary, /does not yet code the DRC quota/);
-  assert.match(material.chinaPositionNote, /leading producer of refined cobalt/);
-  assert.match(material.diversificationNote ?? "", /Cyclic Materials/);
+test("nickel dossier is source-linked and reverse-linked only to explicit nickel policy scope", () => {
+  const material = getMaterialBySlug("nickel")!;
+  assert.equal(material.nameEn, "Nickel");
+  assert.equal(material.nameZh, "镍");
+  assert.match(material.statusSummary, /Indonesia/);
+  assert.match(material.statusSummary, /does not create a new Indonesian policy event/);
+  assert.match(material.chinaPositionNote, /Indonesia, not China/);
+  assert.match(material.diversificationNote ?? "", /NTwist/);
 
   for (const id of expectedEvents) {
-    assert.ok(material.eventIds.includes(id), `cobalt dossier missing event ${id}`);
-    assert.ok(getEventById(id)?.affectedMaterialIds.includes("cobalt"), `${id} does not declare cobalt scope`);
+    assert.ok(material.eventIds.includes(id), `nickel dossier missing event ${id}`);
+    assert.ok(getEventById(id)?.affectedMaterialIds.includes("nickel"), `${id} does not declare nickel scope`);
   }
+
+  assert.ok(!material.eventIds.includes("evt-us-cm-list-2018"));
+  assert.ok(!material.eventIds.includes("evt-us-eo-13953-2020"));
+  assert.ok(!material.eventIds.includes("evt-uk-cms-2022"));
 
   for (const id of [
     "src-iea-critical-minerals-2026",
-    "src-usgs-cobalt-mcs-2026",
+    "src-usgs-nickel-mcs-2026",
+    "src-nrcan-cms-2022",
     "src-nrcan-cmrdd-2024",
-    "src-gov-uk-cms-2022",
+    "src-nrcan-g7-cmpa-2025",
     "src-ec-crma",
     "src-mofcom-58",
   ]) {
-    assert.ok(material.sourceIds.includes(id), `cobalt dossier missing source ${id}`);
+    assert.ok(material.sourceIds.includes(id), `nickel dossier missing source ${id}`);
     assert.ok(getSourceById(id), `missing registered source ${id}`);
   }
 });
 
-test("Canadian Kingston recycling records keep cobalt tracked after later nickel promotion", () => {
+test("Canadian Kingston recycling records promote nickel and become fully tracked", () => {
   const project = getProjectById("prj-ca-cyclic-kingston-demonstration-plant")!;
-  assert.ok(project.materialIds.includes("cobalt"));
   assert.ok(project.materialIds.includes("nickel"));
-  assert.ok(!project.untrackedMaterialsAsStated.some((item) => /cobalt|nickel/i.test(item)));
+  assert.ok(!project.untrackedMaterialsAsStated.some((item) => /nickel/i.test(item)));
   assert.equal(project.materialAttribution, "tracked_only");
 
   for (const id of [
@@ -69,18 +71,15 @@ test("Canadian Kingston recycling records keep cobalt tracked after later nickel
     "fin-ca-cmrdd-2024-kingston-awards",
   ]) {
     const row = getFinancialCommitmentById(id)!;
-    assert.ok(row.materialIds.includes("cobalt"));
     assert.ok(row.materialIds.includes("nickel"));
-    assert.ok(!row.untrackedMaterialsAsStated.some((item) => /cobalt|nickel/i.test(item)));
+    assert.ok(!row.untrackedMaterialsAsStated.some((item) => /nickel/i.test(item)));
     assert.equal(row.materialAttribution, "tracked_only");
   }
 
-  const event = getEventById("evt-ca-nrcan-cmrdd-2024")!;
-  assert.ok(event.affectedMaterialIds.includes("cobalt"));
-  assert.ok(event.affectedMaterialIds.includes("nickel"));
+  assert.ok(getEventById("evt-ca-nrcan-cmrdd-2024")?.affectedMaterialIds.includes("nickel"));
 });
 
-test("four existing EU Strategic Projects promote cobalt in both project and designation records", () => {
+test("four EU Strategic Projects promote battery-grade nickel in both project and designation records", () => {
   const pairs = [
     ["prj-fi-fortum-hydromet", "dsg-eu-crma-fortum-hydromet"],
     ["prj-fr-gallicam", "dsg-eu-crma-gallicam"],
@@ -91,28 +90,36 @@ test("four existing EU Strategic Projects promote cobalt in both project and des
   for (const [projectId, designationId] of pairs) {
     const project = getProjectById(projectId)!;
     const designation = getProjectDesignationById(designationId)!;
-    assert.ok(project.materialIds.includes("cobalt"), projectId);
-    assert.ok(designation.materialIds.includes("cobalt"), designationId);
-    assert.ok(!project.untrackedMaterialsAsStated.includes("cobalt"), projectId);
-    assert.ok(!designation.untrackedMaterialsAsStated.includes("cobalt"), designationId);
+    assert.ok(project.materialIds.includes("nickel"), projectId);
+    assert.ok(designation.materialIds.includes("nickel"), designationId);
+    assert.ok(!project.untrackedMaterialsAsStated.some((item) => /nickel/i.test(item)), projectId);
+    assert.ok(!designation.untrackedMaterialsAsStated.some((item) => /nickel/i.test(item)), designationId);
   }
 
   const event = getEventById("evt-eu-crma-strategic-projects-2025-03")!;
-  assert.ok(event.affectedMaterialIds.includes("cobalt"));
-  assert.match(event.summary, /four of those also naming cobalt/);
+  assert.ok(event.affectedMaterialIds.includes("nickel"));
+  assert.match(event.summary, /cobalt and battery-grade nickel/);
 });
 
-test("Australian CMPTI promotes cobalt from the existing statutory material list", () => {
+test("Australian CMPTI promotes nickel from the existing statutory material list", () => {
   const row = getFinancialCommitmentById("fin-au-cmpti-2025-production-tax-offset")!;
-  assert.ok(row.materialIds.includes("cobalt"));
-  assert.ok(!row.untrackedMaterialsAsStated.includes("cobalt"));
+  assert.ok(row.materialIds.includes("nickel"));
+  assert.ok(!row.untrackedMaterialsAsStated.includes("nickel"));
   assert.equal(row.materialAttribution, "includes_untracked");
-  assert.ok(getEventById("evt-au-cmpti-2025")?.affectedMaterialIds.includes("cobalt"));
+  assert.ok(getEventById("evt-au-cmpti-2025")?.affectedMaterialIds.includes("nickel"));
 });
 
-test("China No. 58 attributes cobalt only through ternary cathode precursors", () => {
+test("Canada G7 CMPA carries event-level nickel scope without inventing a new financial row", () => {
+  const event = getEventById("evt-ca-g7-cmpa-2025")!;
+  assert.ok(event.affectedMaterialIds.includes("nickel"));
+  assert.match(event.summary, /C\$500,000/);
+  assert.match(event.summary, /NTwist Inc\./);
+  assert.match(event.summary, /not separately recorded as rows/);
+});
+
+test("China No. 58 attributes nickel only through ternary cathode precursors", () => {
   const row = getControlMeasureById("ctl-cn-58-2025-battery-cathode-licensing")!;
-  assert.ok(row.materialIds.includes("cobalt"));
+  assert.ok(row.materialIds.includes("nickel"));
   assert.deepEqual(row.controlledStages, ["component_manufacturing"]);
   assert.equal(row.materialAttribution, "includes_untracked");
   assert.ok(row.untrackedMaterialsAsStated.some((item) => item.includes("三元正极材料")));
@@ -126,9 +133,9 @@ test("China No. 58 attributes cobalt only through ternary cathode precursors", (
   assert.match(event.analyticalSignificance, /not from controls on raw cobalt or raw nickel/);
 });
 
-test("cobalt stage-response map carries the suspended No. 58 control at component manufacturing", () => {
+test("nickel stage-response map carries suspended No. 58 at component manufacturing", () => {
   const map = stageResponseMap("2026-10-07");
-  const cell = map.get("cobalt")?.get("component_manufacturing");
+  const cell = map.get("nickel")?.get("component_manufacturing");
   assert.ok(cell);
   assert.ok(cell.controlIds.includes("ctl-cn-58-2025-battery-cathode-licensing"));
   assert.equal(cell.controlStatuses.suspended, 1);

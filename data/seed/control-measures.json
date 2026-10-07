@@ -906,7 +906,8 @@
     "targetEndUsesAsStated": [],
     "materialIds": [
       "lithium",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
@@ -1043,7 +1044,7 @@
         ],
         "evidence": "explicit",
         "locator": "Preamble; Items 1–2; closing paragraphs",
-        "note": "Batteries, cathode materials, their production equipment and battery technology sit at component manufacturing. Lithium is present across the battery/cathode limb; cobalt is attributed through the explicitly cobalt-bearing ternary precursors. Neither attribution means the measure controls raw lithium or raw cobalt. The untracked list preserves the controlled product forms and still-untracked nickel and manganese as stated."
+        "note": "Batteries, cathode materials, their production equipment and battery technology sit at component manufacturing. Lithium is present across the battery/cathode limb; cobalt and nickel are attributed through the explicitly cobalt- and nickel-bearing ternary precursors. These attributions do not mean the measure controls raw lithium, raw cobalt or raw nickel. The untracked list preserves the controlled product forms and still-untracked manganese as stated."
       }
     ],
     "notes": null

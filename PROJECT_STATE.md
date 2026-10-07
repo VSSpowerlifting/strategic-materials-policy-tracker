@@ -1,8 +1,22 @@
 # Project state
 
-## 2026-10-07: Cobalt material expansion — promotion-first tranche (draft)
+## 2026-10-07: Nickel material expansion — promotion-first tranche (draft)
 
-**Status.** Branch `feat/cobalt-material-tranche-20261007`, cut from `main` `379340b` after PR #50 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/nickel-material-tranche-20261007`, cut from `main` `63685c0` after PR #51 merged. Draft review phase; unmerged and not deployed.
+
+- Adds nickel as the fourteenth tracked material, with current supply-chain context grounded in IEA 2026 and USGS 2026. The dossier distinguishes Indonesia's mining/refining concentration from China's ownership-linked exposure and does not create a new Indonesian policy event.
+- Promotes explicit nickel scope already present in the corpus: 13 events, one control row, three financial rows, five projects and four project designations now carry tracked nickel. No nickel or battery-grade-nickel string remains in the promoted rows' `untrackedMaterialsAsStated` fields.
+- Canada's Kingston Cyclic Materials project, its C$4.893M award and the parent Kingston award package now track nickel alongside cobalt; with nickel promoted, those three records have no remaining untracked material scope.
+- Four March 2025 EU CRMA Strategic Projects — Fortum Hydromet, GALLICAM, Orano Hydrometallurgy and NorthCYCLE — now promote battery-grade nickel from their already-source-backed designation/project material lists. No new project or financing record is created.
+- Australia's CMPTI row promotes nickel from the statute's existing material list.
+- The 2025 Canada-led G7 CMPA event now declares nickel because its existing NRCan backgrounder includes C$500,000 through NRC IRAP for NTwist Inc. with Vale Europe Ltd. and Tunley Environmental Ltd. to improve nickel production and efficiency. That project is not separately coded as a financial row in this tranche.
+- China Announcement No. 58 now attributes nickel at `component_manufacturing` through explicitly nickel-bearing ternary cathode precursors. This is not a raw-nickel export restriction; the measure remains suspended before implementation through 2026-11-10.
+- Out of scope: coding Indonesian nickel policy as a new event/control, creating the NTwist funding as a new row, new nickel financing/project backfill, promotion of PGMs or other materials, physical-status changes, or schema/vocabulary redesign.
+- Focused regression coverage pins dossier provenance, Canada Kingston promotion, the four EU Strategic Projects/designations, CMPTI, G7 event-level scope, No. 58 semantics and the nickel stage-response cell. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: Cobalt material expansion — promotion-first tranche (PR #51, merged)
+
+**Status.** PR #51 merged to `main` as `63685c0a5c23ff8481747ee889ab5dcfa849371c`; reviewed head `2b9cf9644712f31e4bd975ce5f6d6ef2b4454043` cleared validate, typecheck, lint, 415/415 tests, build and Vercel. Post-merge CI #151 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Adds cobalt as the thirteenth tracked material, with current supply-chain context grounded in IEA 2026 and USGS 2026. The dossier states the DRC's 2025 ban-to-quota shift as current context but does not create a DRC policy event in this tranche.
 - Promotes explicit cobalt scope already present in the corpus: 15 events, one control row, three financial rows, five projects and four project designations now carry tracked cobalt. No exact `cobalt` remains in an `untrackedMaterialsAsStated` field.
