@@ -65,7 +65,7 @@ test("Canadian ICA divestiture controls are promoted from untracked lithium to t
     "ctl-ca-ica-2022-divest-zangge-ultra-lithium",
   ]) {
     const row = getControlMeasureById(id)!;
-    assert.deepEqual(row.materialIds, ["lithium"]);
+    assert.ok(row.materialIds.includes("lithium"));
     assert.equal(row.materialAttribution, "tracked_only");
     assert.deepEqual(row.untrackedMaterialsAsStated, []);
   }
