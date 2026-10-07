@@ -10,7 +10,7 @@
 - China No. 58 is attributed to lithium at `component_manufacturing`, with the source's battery/cathode product forms preserved as stated. This is a lithium-supply-chain control, not a claim that China restricted exports of raw lithium; No. 58 remains suspended before implementation through 2026-11-10.
 - The ResourceEU event now declares lithium because its existing Commission source names an EIB loan agreement for Strategic Project Keliber. The Keliber loan remains deliberately unmodeled as a separate financial row in this tranche.
 - Out of scope: new lithium financing/project backfill (including Keliber and lithium items in the G7 CMPA rounds), promotion of cobalt/nickel/PGMs, physical-status changes, or any schema/vocabulary redesign.
-- Focused regression coverage pins dossier provenance, event reverse links, the three ICA controls, the CMPTI/PDAC promotions, No. 58 stage semantics and the lithium stage-response cell. Exact-head CI/Vercel are pending.
+- Focused regression coverage pins dossier provenance, event reverse links, the three ICA controls, the CMPTI/PDAC promotions, No. 58 stage semantics and the lithium stage-response cell. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
 
 ## 2026-10-07: F4 date-sliced financial status for historical as-of analysis (PR #49, merged)
 
