@@ -95,7 +95,8 @@ test("existing Australian and Canadian financial rows promote lithium without in
 
 test("China No. 58 is a lithium supply-chain control, not a raw-lithium export restriction", () => {
   const row = getControlMeasureById("ctl-cn-58-2025-battery-cathode-licensing")!;
-  assert.deepEqual(row.materialIds, ["lithium"]);
+  assert.ok(row.materialIds.includes("lithium"));
+  assert.ok(row.materialIds.includes("cobalt"));
   assert.deepEqual(row.controlledStages, ["component_manufacturing"]);
   assert.equal(row.materialAttribution, "includes_untracked");
   assert.ok(row.untrackedMaterialsAsStated.some((item) => item.includes("三元正极材料")));
