@@ -80,7 +80,8 @@ test("F1 outputs: the financial-commitments CSV appends the basis for this row o
   const { financialCommitmentsCsv } = await import("@/lib/export");
   const csv = financialCommitmentsCsv();
   const header = csv.slice(0, csv.indexOf("\n")).replace("\r", "").split(",");
-  assert.deepEqual(header.slice(-2), ["amountBasisLabel", "amountBasisNote"]);
+  assert.deepEqual(header.slice(-3, -1), ["amountBasisLabel", "amountBasisNote"]);
+  assert.equal(header.at(-1), "associatedProjectIds");
   assert.equal(header.indexOf("amountValue"), 6); // existing positions unchanged
   assert.equal(csv.split(",Announced,").length - 1, 1);
   assert.equal(csv.split("Announced amount (DoD release").length - 1, 1);
