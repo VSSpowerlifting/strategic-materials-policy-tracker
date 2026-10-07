@@ -354,6 +354,46 @@
     ]
   },
   {
+    "id": "cobalt",
+    "slug": "cobalt",
+    "nameEn": "Cobalt",
+    "nameZh": "钴",
+    "grouping": null,
+    "statusSummary": "A battery, aerospace and defense material with acute geographic concentration at both ends of the supply chain. The Democratic Republic of the Congo dominates mined supply and shifted from a 2025 export ban to quotas; China remains the leading refined-cobalt producer. IEA 2026 says the DRC quota has created a projected cobalt supply gap through 2035. SMPT does not yet code the DRC quota as a policy event; this tranche promotes cobalt only where the existing corpus already carries explicit cobalt scope.",
+    "chinaPositionNote": "China remains the world's leading producer of refined cobalt and the leading consumer, primarily for lithium-ion batteries (USGS 2026). IEA 2026 likewise identifies China as the dominant refiner for cobalt while the DRC dominates mining, creating a two-country concentration across upstream and midstream stages.",
+    "diversificationNote": "Existing SMPT records already show allied responses at recycling and processing: Canada funded Cyclic Materials' Kingston demonstration plant to produce a cobalt–nickel mixed hydroxide from recycled material, while Australia's Critical Minerals Production Tax Incentive covers cobalt processing from 2027.",
+    "downstreamIndustries": [
+      "Lithium-ion battery cathodes",
+      "Aerospace superalloys",
+      "Defense systems",
+      "Industrial catalysts"
+    ],
+    "eventIds": [
+      "us-critical-minerals-list-2025",
+      "eu-critical-raw-materials-act",
+      "evt-us-eo-14241-2025",
+      "evt-us-eo-14272-2025",
+      "evt-us-cm-list-2018",
+      "evt-us-eo-13953-2020",
+      "evt-us-cm-list-2022",
+      "evt-us-proc-11001-2026",
+      "evt-au-cmpti-2025",
+      "evt-ca-cms-2022",
+      "evt-uk-cms-2022",
+      "evt-ca-nrcan-cmrdd-2024",
+      "evt-cn-mofcom-58-2025",
+      "china-rare-earth-suspension-2025-11"
+    ],
+    "sourceIds": [
+      "src-iea-critical-minerals-2026",
+      "src-usgs-cobalt-mcs-2026",
+      "src-nrcan-cmrdd-2024",
+      "src-gov-uk-cms-2022",
+      "src-ec-crma",
+      "src-mofcom-58"
+    ]
+  },
+  {
     "id": "antimony",
     "slug": "antimony",
     "nameEn": "Antimony",
