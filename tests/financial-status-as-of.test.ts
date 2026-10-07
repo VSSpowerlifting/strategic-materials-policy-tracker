@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 
 import {
   currentFinancialStatus,
@@ -94,4 +95,19 @@ test("stageResponseMap uses as-of endedness instead of a row's later current sta
     assert.deepEqual(after.get("germanium")?.get(stage)?.capitalIds, []);
     assert.deepEqual(after.get("germanium")?.get(stage)?.endedIds, [base.id]);
   }
+});
+
+test("concern-response CLI wires --as-of through financial standing", () => {
+  const output = execFileSync(
+    process.execPath,
+    ["--import", "tsx", "scripts/analyze-concern-response.ts", "--as-of", "2026-10-03"],
+    { cwd: process.cwd(), encoding: "utf8" },
+  );
+  const projectRow = output
+    .split("\n")
+    .find((line) => line.includes("us-dod-5n-germanium-2024: commitment"));
+  assert.ok(projectRow, "5N row appears in the generated project register");
+  assert.match(projectRow, /us-dod-5n-germanium-2024: commitment, contracted/);
+  assert.doesNotMatch(projectRow, /us-dod-5n-germanium-2024: commitment, partially_disbursed/);
+  assert.match(output, /Financial rows by legal standing on the as-of date/);
 });
