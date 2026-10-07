@@ -1,8 +1,20 @@
 # Project state
 
-## 2026-10-07: F4 date-sliced financial status for historical as-of analysis (draft)
+## 2026-10-07: Lithium material expansion — promotion-first tranche (draft)
 
-**Status.** Branch `fix/f4-date-sliced-financial-status-20261007`, cut from current `main` `e6fb6cd` after PR #48 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/lithium-material-tranche-20261007`, cut from `main` `f7f6c65` after F4 merged. Draft review phase; unmerged and not deployed.
+
+- Adds lithium as the twelfth tracked material, with a current dossier grounded in IEA 2026, USGS 2026, Australia's September 2026 resources outlook, NRCan midstream-processing support, the UK Vision 2035 strategy and China's Announcement No. 58 primary.
+- Promotes existing lithium scope rather than creating speculative new records: 18 existing events now declare lithium; four existing control rows and three existing financial rows carry tracked lithium attribution. No exact `lithium` remains in an `untrackedMaterialsAsStated` field.
+- Canada's three 2022 ICA divestiture controls are now tracked to lithium. Australia's CMPTI row and two already-coded Canadian geoscience awards promote lithium from their existing untracked lists.
+- China No. 58 is attributed to lithium at `component_manufacturing`, with the source's battery/cathode product forms preserved as stated. This is a lithium-supply-chain control, not a claim that China restricted exports of raw lithium; No. 58 remains suspended before implementation through 2026-11-10.
+- The ResourceEU event now declares lithium because its existing Commission source names an EIB loan agreement for Strategic Project Keliber. The Keliber loan remains deliberately unmodeled as a separate financial row in this tranche.
+- Out of scope: new lithium financing/project backfill (including Keliber and lithium items in the G7 CMPA rounds), promotion of cobalt/nickel/PGMs, physical-status changes, or any schema/vocabulary redesign.
+- Focused regression coverage pins dossier provenance, event reverse links, the three ICA controls, the CMPTI/PDAC promotions, No. 58 stage semantics and the lithium stage-response cell. Exact-head CI/Vercel are pending.
+
+## 2026-10-07: F4 date-sliced financial status for historical as-of analysis (PR #49, merged)
+
+**Status.** PR #49 merged to `main` as `f7f6c6568125c488336a3a9e9350dc8dab383fa9`; reviewed head `34d200804df1754ad209dcdf053c84f2d6518163` cleared validate, typecheck, lint, 404/404 tests, build and Vercel. Post-merge CI #139 and the production Vercel deployment also succeeded.
 
 - Scope is deliberately narrow: financial-status semantics for code paths that explicitly accept an `asOf` date. Current-site status helpers, current totals, seed data, schema, taxonomy and physical/implementation-status history are unchanged.
 - Added `financialStatusOn`, `financialStatusEntryOn`, `legalStandingOn`, `isBindingOn` and `isEndedOn`. A dated history entry applies from its recorded date. An undated entry enters a historical view only from a non-inferred evidence boundary: source publication date; otherwise the explicit financial-status review date; otherwise source access date. The entry's own date remains null, so no effective/payment date is invented.
@@ -15,7 +27,7 @@
 
 ## 2026-10-07: Announcement No. 33 antimony source-accuracy consolidation (PR #48, merged)
 
-**Status.** PR #48 merged to `main` as `e6fb6cde6454f3d8e18031ea5d17ae08b9e43035`; reviewed head `e93db9a05ae60fecaada4636ebb94c524c03f92b` cleared validate, typecheck, lint, 398/398 tests, build and Vercel.
+**Status.** PR #48 merged to `main` as `e6fb6cde6454f3d8e18031ea5d17ae08b9e43035`; reviewed head `e93db9a05ae60fecaada4636ebb94c524c03f92b` cleared validate, typecheck, lint, 398/398 tests, build and Vercel. Stale drafts #11 and #12 were closed as superseded by #48.
 
 - Re-read the complete registered MOFCOM/GACC Announcement No. 33 of 2024 primary on 2026-10-07. The stale draft findings from #11 and #12 remain valid against the primary, but those old branches predate later antimony additions and are not being revived wholesale.
 - Corrected the antimony material `statusSummary`: `evt-cn-antimony-2024` already separately codes the September 2024 export-licensing measure, so the prior sentence saying it was not separately coded was false.
@@ -23,7 +35,7 @@
 - Restored Item 1(2)'s technical thresholds for six-sided presses and high-pressure controls, MPCVD power/frequency, and diamond-window coverage. Illustrative physical-form lists that do not restrict coverage remain condensed.
 - Added `tests/antimony-announcement-33.test.ts` to pin the restored scope language, separate event coding, source standing and 2024-09-15 implementation date.
 - No schema, taxonomy, source URL, product-code, status, legal-basis, event, counting or analytical change. All later antimony event links already present on current `main` are preserved.
-- Merge gate: `npm run validate`, typecheck, lint, tests, build and the Vercel preview must all be green on the final head; #11 and #12 stay open until #48 clears that gate, then they should be closed as superseded.
+- The replacement PR cleared its full merge gate; no later antimony data was lost when the stale September branches were retired.
 
 ## 2026-10-07: 5N+ aggregate and Compare amount-basis follow-up (PR #47, merged)
 
