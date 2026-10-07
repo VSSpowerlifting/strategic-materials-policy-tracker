@@ -53,8 +53,8 @@ test("Telescope's two lithium projects remain distinct undertakings", () => {
 test("the G7 event no longer describes Telescope's lithium projects as uncoded", () => {
   const event = getEventById("evt-ca-g7-cmpa-2025")!;
   assert.match(event.summary, /Telescope Innovations' two lithium projects are separately coded/);
-  assert.match(event.summary, /C\$319,200/);
-  assert.match(event.summary, /C\$3,039,344/);
+  assert.match(event.summary, /up-to-C\$319,200/);
+  assert.match(event.summary, /up-to-C\$3\.04 million/);
   assert.match(event.summary, /remaining lithium items are not separately recorded/);
 });
 
