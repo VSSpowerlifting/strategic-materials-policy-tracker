@@ -105,6 +105,7 @@ test("designations, projects and projects with no designation, per material; the
     antimony: [0, 4, 4],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
+    lithium: [0, 0, 0],
   };
   for (const slug of slugs) {
     const p = dossier(slug);
@@ -265,7 +266,7 @@ test("the USAR children nest under the two five-material parents; every amount i
   }
 });
 
-test("top level plus nested equals the rows naming the material, per layer, for all 11 materials", () => {
+test("top level plus nested equals the rows naming the material, per layer, for all tracked materials", () => {
   const all = getAllFinancialCommitments();
   for (const slug of slugs) {
     const p = dossier(slug);
@@ -314,8 +315,8 @@ test("a part whose package does not name the material stands alone, with a note 
 
 test("each row carries the one scope label its precedence gives", () => {
   const p = dossier("tungsten");
-  assert.equal(findRow(p, "fin-au-cmpti-2025-production-tax-offset")!.scope, "names 10 materials; the amount is not divided");
-  assert.equal(findRow(p, "fin-ca-pdac-2026-nb-granitoids-cmgd")!.scope, "also covers materials outside the tracked set");
+  assert.equal(findRow(p, "fin-au-cmpti-2025-production-tax-offset")!.scope, "names 11 materials; the amount is not divided");
+  assert.equal(findRow(p, "fin-ca-pdac-2026-nb-granitoids-cmgd")!.scope, "names 2 materials; the amount is not divided");
   assert.equal(findRow(p, "fin-uk-nwf-2026-tungsten-west-package")!.scope, "also covers materials outside the tracked set");
   assert.equal(findRow(p, "fin-jp-jogmec-almt-tungsten-grant")!.scope, "names Tungsten only");
   assert.equal(findRow(p, "fin-jp-jogmec-japan-new-metals-tungsten-grant")!.scope, "names Tungsten only");

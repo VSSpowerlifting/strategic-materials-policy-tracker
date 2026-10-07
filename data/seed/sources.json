@@ -1726,5 +1726,53 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Recipient publication, not a securities filing. The report states no publication date; the PDF's creation date is 27 April 2026 and the server's last-modified date is 28 April 2026, which are file metadata and not recorded as the publication date. Page 42 says 5N+ announced a 'planned expansion' of germanium recovery and recycling 'supported by a significant financial award from the U.S. government', to increase recovery at its St. George facility 'over the next four years'. The wording is future-tense and states no execution, payment or physical stage. It dates the announcement to 2025 (the Department and the company's release date it to January 2026) and attaches space-qualified solar-cell capacity to the award, which is the subject of the 2024 award."
+  },
+  {
+    "id": "src-iea-critical-minerals-2026",
+    "title": "Global Critical Minerals Outlook 2026",
+    "publisher": "International Energy Agency (IEA)",
+    "url": "https://www.iea.org/reports/global-critical-minerals-outlook-2026",
+    "language": "en",
+    "datePublished": "2026-07-16",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "dataset",
+    "confidence": "secondary",
+    "notes": "Used for current lithium demand, refining-concentration and diversification context. The IEA identifies China as the top refiner for lithium and other key energy minerals (nickel excepted), notes lithium demand remains the fastest-growing major energy-mineral demand, and finds midstream/downstream diversification still lags mining. Background analysis, not a policy instrument."
+  },
+  {
+    "id": "src-usgs-lithium-mcs-2026",
+    "title": "Mineral Commodity Summaries 2026 — Lithium",
+    "publisher": "U.S. Geological Survey",
+    "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-lithium.pdf",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official USGS lithium commodity sheet. Reports batteries as 88% of estimated global lithium end use and describes rechargeable-battery demand from electric vehicles, grid storage, portable electronics and power tools."
+  },
+  {
+    "id": "src-au-req-2026-09",
+    "title": "Resources and energy quarterly: September 2026",
+    "publisher": "Department of Industry, Science and Resources (Australia)",
+    "url": "https://www.industry.gov.au/publications/resources-and-energy-quarterly-september-2026",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official Australian resources outlook. Used for lithium dossier context: Australia expects strong growth in mined lithium output through 2031, with lithium demand driven by EV and battery-energy-storage deployment; the publication also tracks lithium hydroxide alongside spodumene."
+  },
+  {
+    "id": "src-nrcan-lithium-processing-2024",
+    "title": "Government of Canada Invests Over $9 Million to Enable Made-in-Canada Lithium Battery Supply Chain in British Columbia",
+    "publisher": "Natural Resources Canada",
+    "url": "https://www.canada.ca/en/natural-resources-canada/news/2024/07/government-of-canada-invests-over-9-million-to-enable-made-in-canada-lithium-battery-supply-chain-in-british-columbia.html",
+    "language": "en",
+    "datePublished": "2024-07-11",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official NRCan release on CMRDD support for midstream lithium processing: Saltworks lithium-brine concentration/conversion and NORAM Electrolysis Systems lithium-hydroxide production technology. Used as diversification context only; these awards are not coded as financial rows in this tranche."
   }
 ]

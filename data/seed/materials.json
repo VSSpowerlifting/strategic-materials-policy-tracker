@@ -310,6 +310,50 @@
     ]
   },
   {
+    "id": "lithium",
+    "slug": "lithium",
+    "nameEn": "Lithium",
+    "nameZh": "锂",
+    "grouping": null,
+    "statusSummary": "A core battery material and a strategic raw material across major allied policy frameworks. Lithium is on the US 2025 critical-minerals list and the EU Critical Raw Materials Act; Australia’s Critical Minerals Production Tax Incentive covers lithium processing, while Canada and the UK treat lithium as a priority critical mineral. China’s 2025 No. 58 package targeted lithium-ion batteries, cathode materials, manufacturing equipment and technology rather than raw lithium itself; the measure was suspended before taking effect and remains suspended through 10 November 2026.",
+    "chinaPositionNote": "China remains the dominant lithium refiner even as mining is geographically more diversified. IEA 2026 treats China as the top refining country for lithium and highlights that refining and downstream battery-material capacity outside dominant suppliers still lags announced mining growth.",
+    "diversificationNote": "Diversification is expanding across mining, refining and battery materials: Australia forecasts growth in mined and refined lithium output, Canada is supporting midstream lithium-processing technology, and the UK’s Vision 2035 targets at least 50,000 tonnes of domestic lithium or lithium-carbonate-equivalent production by 2035.",
+    "downstreamIndustries": [
+      "Lithium-ion batteries",
+      "Electric vehicles",
+      "Battery energy storage systems",
+      "Portable electronics"
+    ],
+    "eventIds": [
+      "us-critical-minerals-list-2025",
+      "eu-critical-raw-materials-act",
+      "evt-us-eo-14241-2025",
+      "evt-us-eo-14272-2025",
+      "evt-us-cm-list-2018",
+      "evt-us-eo-13953-2020",
+      "evt-us-cm-list-2022",
+      "evt-us-proc-11001-2026",
+      "evt-au-cmpti-2025",
+      "evt-ca-cms-2022",
+      "evt-uk-cms-2022",
+      "evt-uk-cms-2025",
+      "evt-ca-ica-divest-2022",
+      "evt-cn-mofcom-58-2025",
+      "china-rare-earth-suspension-2025-11",
+      "evt-ca-g7-cmpa-2025",
+      "evt-ca-nrcan-pdac-2026",
+      "evt-eu-resourceeu-2025"
+    ],
+    "sourceIds": [
+      "src-iea-critical-minerals-2026",
+      "src-usgs-lithium-mcs-2026",
+      "src-gov-uk-cms-2025",
+      "src-mofcom-58",
+      "src-au-req-2026-09",
+      "src-nrcan-lithium-processing-2024"
+    ]
+  },
+  {
     "id": "antimony",
     "slug": "antimony",
     "nameEn": "Antimony",
