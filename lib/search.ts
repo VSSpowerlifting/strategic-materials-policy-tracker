@@ -156,6 +156,7 @@ export function buildSearchIndex(): SearchDoc[] {
         c.locations.map((l) => l.asStated).join(" "),
         c.programmeId ? getProgrammeById(c.programmeId)?.name : null,
         c.projectId ? getProjectById(c.projectId)?.name : null,
+        (c.associatedProjectIds ?? []).map((id) => getProjectById(id)?.name).join(" "),
       ),
     });
   }
