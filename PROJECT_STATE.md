@@ -1,8 +1,21 @@
 # Project state
 
-## 2026-10-07: Lithium material expansion — promotion-first tranche (draft)
+## 2026-10-07: Cobalt material expansion — promotion-first tranche (draft)
 
-**Status.** Branch `feat/lithium-material-tranche-20261007`, cut from `main` `f7f6c65` after F4 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/cobalt-material-tranche-20261007`, cut from `main` `379340b` after PR #50 merged. Draft review phase; unmerged and not deployed.
+
+- Adds cobalt as the thirteenth tracked material, with current supply-chain context grounded in IEA 2026 and USGS 2026. The dossier states the DRC's 2025 ban-to-quota shift as current context but does not create a DRC policy event in this tranche.
+- Promotes explicit cobalt scope already present in the corpus: 15 events, one control row, three financial rows, five projects and four project designations now carry tracked cobalt. No exact `cobalt` remains in an `untrackedMaterialsAsStated` field.
+- Canada's Kingston Cyclic Materials project, its C$4.893M award and the parent Kingston award package now track cobalt while retaining nickel as untracked. The project remains a recycling-stage record and its existing financial/physical lifecycle is unchanged.
+- Four existing March 2025 EU CRMA Strategic Projects — Fortum Hydromet, GALLICAM, Orano Hydrometallurgy and NorthCYCLE — now promote cobalt from their already-source-backed designation/project material lists. No new project or financing record is created.
+- Australia's CMPTI row promotes cobalt from the statute's existing material list.
+- China Announcement No. 58 now attributes cobalt at `component_manufacturing` through explicitly cobalt-bearing ternary cathode precursors. This is not a raw-cobalt export restriction; the measure remains suspended before implementation through 2026-11-10.
+- Out of scope: coding the DRC cobalt ban/quota as a new event/control, nickel promotion, new cobalt financing/project backfill, physical-status changes, or schema/vocabulary redesign.
+- Focused regression coverage pins dossier provenance, Canada Kingston promotion, the four EU Strategic Projects/designations, CMPTI, No. 58 semantics and the cobalt stage-response cell. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: Lithium material expansion — promotion-first tranche (PR #50, merged)
+
+**Status.** PR #50 merged to `main` as `379340b7364da59097ca3b132cc382ce23dcb269`; reviewed head `cfc506276668ec3a951b4844e218c580fe6c7af1` cleared validate, typecheck, lint, 409/409 tests, build and Vercel. The production Vercel deployment on the merge SHA succeeded; no separate post-merge CI run had attached at this checkpoint.
 
 - Adds lithium as the twelfth tracked material, with a current dossier grounded in IEA 2026, USGS 2026, Australia's September 2026 resources outlook, NRCan midstream-processing support, the UK Vision 2035 strategy and China's Announcement No. 58 primary.
 - Promotes existing lithium scope rather than creating speculative new records: 18 existing events now declare lithium; four existing control rows and three existing financial rows carry tracked lithium attribution. No exact `lithium` remains in an `untrackedMaterialsAsStated` field.
