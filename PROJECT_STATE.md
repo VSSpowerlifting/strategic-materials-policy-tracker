@@ -1,8 +1,20 @@
 # Project state
 
-## 2026-10-07: 5N+ aggregate and Compare amount-basis follow-up (draft PR)
+## 2026-10-07: Announcement No. 33 antimony source-accuracy consolidation (draft PR #48)
 
-**Status.** Branch `fix/5n-aggregate-compare-basis-20261007`, cut from `main` `e55f1b0` after the merged F1-F3 work. Draft PR only; not merged or deployed.
+**Status.** Branch `fix/antimony-announcement-33-accuracy-20261007`, cut from current `main` `7f1c210` after PR #47 merged. Draft PR #48; unmerged and not deployed.
+
+- Re-read the complete registered MOFCOM/GACC Announcement No. 33 of 2024 primary on 2026-10-07. The stale draft findings from #11 and #12 remain valid against the primary, but those old branches predate later antimony additions and are not being revived wholesale.
+- Corrected the antimony material `statusSummary`: `evt-cn-antimony-2024` already separately codes the September 2024 export-licensing measure, so the prior sentence saying it was not separately coded was false.
+- Restored coverage-defining qualifiers in Item 1(1): organic-antimony purity is on an inorganic-element basis; diluted antimony hydrides are included; and indium-antimonide carries the source's single-crystal dislocation-density and polycrystal purity criteria. The source's internally awkward “all characteristics” wording remains documented as ambiguous rather than interpreted.
+- Restored Item 1(2)'s technical thresholds for six-sided presses and high-pressure controls, MPCVD power/frequency, and diamond-window coverage. Illustrative physical-form lists that do not restrict coverage remain condensed.
+- Added `tests/antimony-announcement-33.test.ts` to pin the restored scope language, separate event coding, source standing and 2024-09-15 implementation date.
+- No schema, taxonomy, source URL, product-code, status, legal-basis, event, counting or analytical change. All later antimony event links already present on current `main` are preserved.
+- Merge gate: `npm run validate`, typecheck, lint, tests, build and the Vercel preview must all be green on the final head; #11 and #12 stay open until #48 clears that gate, then they should be closed as superseded.
+
+## 2026-10-07: 5N+ aggregate and Compare amount-basis follow-up (PR #47, merged)
+
+**Status.** PR #47 merged to `main` as `7f1c21073e13b34a5e641362988f94ba59c37711`. The reviewed head `240410cf2bd0336f76a12d07726714540b171d2d` passed validate, typecheck, lint, 394/394 tests, build and Vercel; the merge commit's Vercel production status reported success.
 
 - Review found two presentation gaps with the existing 2024 5N amount-basis metadata. `/capital` counted the $14.4M row in its binding total and provider comparison but omitted the informational amount-basis caveat already rendered by project and organization totals. Both aggregate surfaces now reuse the same `AmountBasisNotes` presentation; sums, classifications and counting logic are unchanged.
 - Compare already received `basisLabel: "Announced"` from the lattice model, but the visible commitment detail row rendered only qualifier, currency and value. It now renders the carried basis label beside the amount (for this row: `Announced USD 14.4 million`).
