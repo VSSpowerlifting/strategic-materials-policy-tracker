@@ -1419,9 +1419,7 @@
     "id": "org-ntwist",
     "name": "NTwist Inc.",
     "nameOriginal": null,
-    "aliases": [
-      "NTWIST"
-    ],
+    "aliases": [],
     "kind": "company",
     "countryCode": null,
     "actor": null,
@@ -1438,7 +1436,7 @@
         "note": null
       }
     ],
-    "notes": "The NRCan backgrounder identifies NTwist Inc. as the Canadian project lead but does not state its jurisdiction of incorporation."
+    "notes": "The NRCan backgrounder identifies NTwist Inc. as the project lead but does not state its jurisdiction of incorporation."
   },
   {
     "id": "org-orano-batteries",
