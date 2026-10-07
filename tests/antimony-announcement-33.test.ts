@@ -13,13 +13,14 @@ const superhardControl = () => getControlMeasureById("ctl-cn-antimony-2024-super
 
 test("Announcement No. 33 antimony scope retains coverage-defining qualifiers", () => {
   const row = exportControl();
+  const scope = row.productScopeAsStated ?? "";
   for (const text of [
     "纯度（无机元素基准）大于99.999%",
     "含在惰性气体或氢气中稀释的锑的氢化物",
     "位错密度小于50个/平方厘米的单晶",
     "纯度大于99.99999%的多晶",
   ]) {
-    assert.ok(row.productScopeAsStated.includes(text), `missing scope qualifier: ${text}`);
+    assert.ok(scope.includes(text), `missing scope qualifier: ${text}`);
   }
   assert.match(row.notes ?? "", /having all of the following characteristics/);
   assert.match(row.notes ?? "", /does not state how the two criteria combine/);
@@ -27,6 +28,7 @@ test("Announcement No. 33 antimony scope retains coverage-defining qualifiers", 
 
 test("Announcement No. 33 superhard scope retains technical coverage thresholds", () => {
   const row = superhardControl();
+  const scope = row.productScopeAsStated ?? "";
   for (const text of [
     "缸径尺寸大于等于500毫米或设计使用压力大于等于5千兆帕",
     "合成压力大于5千兆帕的高压控制系统",
@@ -34,7 +36,7 @@ test("Announcement No. 33 superhard scope retains technical coverage thresholds"
     "直径3英寸及以上的单晶或多晶",
     "可见光透过率65%及以上",
   ]) {
-    assert.ok(row.productScopeAsStated.includes(text), `missing scope threshold: ${text}`);
+    assert.ok(scope.includes(text), `missing scope threshold: ${text}`);
   }
 });
 
