@@ -223,7 +223,8 @@
       "recycling"
     ],
     "materialIds": [
-      "rare-earth-elements"
+      "rare-earth-elements",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
