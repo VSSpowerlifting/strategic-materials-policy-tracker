@@ -14,11 +14,11 @@
     ],
     "targetEndUsersAsStated": [],
     "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
+    "materialIds": [
       "lithium"
     ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "Chengze Lithium International Limited is required to divest itself of its investment in Lithium Chile Inc.",
     "productCodes": [],
     "controlledItemTypes": [],
@@ -78,11 +78,11 @@
     ],
     "targetEndUsersAsStated": [],
     "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
+    "materialIds": [
       "lithium"
     ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "Sinomine (Hong Kong) Rare Metals Resources Co., Limited is required to divest itself of its investment in Power Metals Corp.",
     "productCodes": [],
     "controlledItemTypes": [],
@@ -142,11 +142,11 @@
     ],
     "targetEndUsersAsStated": [],
     "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
+    "materialIds": [
       "lithium"
     ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
     "productScopeAsStated": "Zangge Mining Investment (Chengdu) Co., Ltd. is required to divest itself of its investment in Ultra Lithium Inc.",
     "productCodes": [],
     "controlledItemTypes": [],
@@ -904,7 +904,9 @@
     "targetEntities": [],
     "targetEndUsersAsStated": [],
     "targetEndUsesAsStated": [],
-    "materialIds": [],
+    "materialIds": [
+      "lithium"
+    ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "锂离子电池 (lithium-ion batteries of 300 Wh/kg or more)",
@@ -980,7 +982,9 @@
       "equipment",
       "technology"
     ],
-    "controlledStages": [],
+    "controlledStages": [
+      "component_manufacturing"
+    ],
     "legalBasisEventIds": [
       "evt-cn-ecl-2020",
       "evt-cn-decree-792-2024"
@@ -1038,7 +1042,7 @@
         ],
         "evidence": "explicit",
         "locator": "Preamble; Items 1–2; closing paragraphs",
-        "note": "Batteries, cathode materials, their production equipment and battery technology. These sit outside the tracked materials, so no supply-chain stage is coded."
+        "note": "Batteries, cathode materials, their production equipment and battery technology sit at component manufacturing in the lithium supply chain. The tracked lithium attribution does not mean the measure controls raw lithium; the untracked list preserves the controlled product forms and non-lithium constituents as stated."
       }
     ],
     "notes": null
