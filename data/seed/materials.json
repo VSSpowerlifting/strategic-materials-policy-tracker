@@ -344,7 +344,8 @@
       "evt-ca-nrcan-pdac-2026",
       "evt-eu-resourceeu-2025",
       "evt-ca-nrcan-lithium-processing-2024",
-      "evt-eu-eib-keliber-2024"
+      "evt-eu-eib-keliber-2024",
+      "evt-eu-crma-strategic-projects-2025-03"
     ],
     "sourceIds": [
       "src-iea-critical-minerals-2026",
@@ -355,7 +356,9 @@
       "src-nrcan-lithium-processing-2024",
       "src-canada-grant-noram-cmrdd-2024",
       "src-eib-keliber-2024",
-      "src-eib-keliber-project-20170804"
+      "src-eib-keliber-project-20170804",
+      "src-ec-crma-sp-annex-2025-03",
+      "src-ec-crma-sp-decision-2025-03"
     ]
   },
   {
