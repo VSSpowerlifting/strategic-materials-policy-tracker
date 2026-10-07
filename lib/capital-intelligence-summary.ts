@@ -95,6 +95,7 @@ export function buildCapitalIntelligenceSummary() {
         providerOrgIds: s.providerOrgIds,
         layers: s.layers.map((l) => ({ layer: l.key, rowIds: ids(l.rows), totals: l.totals })),
         designationIds: ids(s.designations),
+        sharedCapitalRowIds: ids(s.sharedRows),
       };
     }),
     coInvestment: coInvestments(all).map((c) => ({
