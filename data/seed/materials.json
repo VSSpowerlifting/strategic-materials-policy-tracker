@@ -395,6 +395,46 @@
     ]
   },
   {
+    "id": "nickel",
+    "slug": "nickel",
+    "nameEn": "Nickel",
+    "nameZh": "镍",
+    "grouping": null,
+    "statusSummary": "A battery, stainless-steel and high-performance-alloy material with supply concentration increasingly centered in Indonesia. USGS 2026 estimates Indonesia produced about 2.6 million tonnes of the world's 3.9 million tonnes of mined nickel in 2025, while IEA 2026 identifies Indonesia as the leading nickel refiner and says recent nickel supply growth has become more concentrated there. Nickel is tracked in U.S., EU, Canadian and Australian policy frameworks; SMPT does not create a new Indonesian policy event in this tranche.",
+    "chinaPositionNote": "Nickel differs from lithium and cobalt: IEA 2026 identifies Indonesia, not China, as the top refining country. China still has material exposure through Chinese firms' major positions in Indonesian upstream and midstream capacity, so the concentration is geographically Indonesian with an important China-linked ownership dimension.",
+    "diversificationNote": "Existing SMPT records show diversification responses across processing and recycling: Canada's Kingston Cyclic Materials project produces a cobalt–nickel mixed hydroxide from recycled feed, four EU CRMA Strategic Projects explicitly name battery-grade nickel, Australia's CMPTI covers nickel processing, and Canada's 2025 G7 CMPA round included C$500,000 for an NTwist/Vale/UKRI nickel-production-efficiency project.",
+    "downstreamIndustries": [
+      "Stainless and alloy steels",
+      "Lithium-ion battery cathodes",
+      "Aerospace and high-performance alloys",
+      "Electroplating and catalysts"
+    ],
+    "eventIds": [
+      "us-critical-minerals-list-2025",
+      "eu-critical-raw-materials-act",
+      "evt-us-eo-14241-2025",
+      "evt-us-eo-14272-2025",
+      "evt-us-cm-list-2022",
+      "evt-us-proc-11001-2026",
+      "evt-au-cmpti-2025",
+      "evt-ca-cms-2022",
+      "evt-ca-nrcan-cmrdd-2024",
+      "evt-cn-mofcom-58-2025",
+      "china-rare-earth-suspension-2025-11",
+      "evt-eu-crma-strategic-projects-2025-03",
+      "evt-ca-g7-cmpa-2025"
+    ],
+    "sourceIds": [
+      "src-iea-critical-minerals-2026",
+      "src-usgs-nickel-mcs-2026",
+      "src-nrcan-cms-2022",
+      "src-nrcan-cmrdd-2024",
+      "src-nrcan-g7-cmpa-2025",
+      "src-ec-crma",
+      "src-mofcom-58"
+    ]
+  },
+  {
     "id": "antimony",
     "slug": "antimony",
     "nameEn": "Antimony",
