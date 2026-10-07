@@ -3079,7 +3079,7 @@
       "org-ca-nb-geological-survey"
     ],
     "project": "Geochronology and Petrogenesis of Granitoids and Related Critical Mineral Systems in New Brunswick",
-    "projectId": null,
+    "projectId": "prj-ca-cmgd-nb-granitoids",
     "facility": null,
     "locations": [
       {
@@ -3169,7 +3169,7 @@
       "org-ca-nb-geological-survey"
     ],
     "project": "Critical Mineral Potential of the Maritimes Basin in Eastern New Brunswick",
-    "projectId": null,
+    "projectId": "prj-ca-cmgd-nb-maritimes-basin",
     "facility": null,
     "locations": [
       {
@@ -3259,7 +3259,7 @@
       "org-ca-ns-dnr"
     ],
     "project": "Graphite in Support of Battery Value Chains",
-    "projectId": null,
+    "projectId": "prj-ca-cmgd-ns-graphite-battery-value-chains",
     "facility": null,
     "locations": [
       {

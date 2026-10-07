@@ -94,9 +94,9 @@ test("tungsten stats", () => {
 
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
   const expected: Record<string, [number, number, number]> = {
-    tungsten: [5, 5, 0],
-    "rare-earth-elements": [9, 19, 10],
-    graphite: [15, 21, 6],
+    tungsten: [5, 6, 1],
+    "rare-earth-elements": [9, 20, 11],
+    graphite: [15, 22, 7],
     "ndfeb-magnets": [0, 4, 4],
     gallium: [1, 4, 3],
     germanium: [2, 5, 3],
@@ -105,7 +105,7 @@ test("designations, projects and projects with no designation, per material; the
     antimony: [0, 4, 4],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
-    lithium: [1, 5, 4],
+    lithium: [1, 7, 6],
     cobalt: [4, 5, 1],
     nickel: [4, 6, 2],
   };
