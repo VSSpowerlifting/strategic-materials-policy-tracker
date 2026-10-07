@@ -436,7 +436,7 @@ test("designation cards: one per designation, headed by the project, at the desi
 
 test("a material with projects and no designations lists them apart and places none", () => {
   const nd = dossier("ndfeb-magnets");
-  assert.deepEqual(nd.registryProjects.map((r) => r.id), ["prj-ee-neo-rare-earth-magnet-project", "prj-us-mp-10x-facility", "prj-us-usar-magnet-project-2", "prj-us-usar-stillwater-magnet"]);
+  assert.deepEqual(nd.registryProjects.map((r) => r.id), ["prj-ee-neo-rare-earth-magnet-project", "prj-us-mp-10x-facility", "prj-us-mp-independence-expansion", "prj-us-usar-magnet-project-2", "prj-us-usar-stillwater-magnet"]);
   for (const s of nd.stages) assert.equal(s.designations.length, 0, s.id);
   assert.equal(nd.unstaged.designations.length, 0);
   for (const slug of ["dysprosium", "terbium"]) {
