@@ -91,8 +91,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                   : ""}
               </p>
             ) : null}
-            {stack.layers.length ? <LayerStack layers={stack.layers} /> : <p className="text-sm text-muted">No financial row points to this project yet.</p>}
+            {stack.layers.length ? <LayerStack layers={stack.layers} /> : <p className="text-sm text-muted">No individually attributed financial row is recorded for this project.</p>}
           </Section>
+
+          {stack.sharedRows.length ? (
+            <Section index={next()} title="Shared financing" description="Amounts supporting multiple projects without a disclosed allocation. Each row is listed for context but excluded from this project's capital stack and its totals.">
+              <Card className="divide-y">
+                {stack.sharedRows.map((c) => (
+                  <Link key={c.id} href={`/capital/${c.id}`} className="block px-4 py-3 text-sm text-accent hover:text-accent-strong">
+                    {c.recipient ?? c.provider ?? c.id} — {c.amount?.amountAsStated ?? "Amount not stated"}
+                  </Link>
+                ))}
+              </Card>
+            </Section>
+          ) : null}
 
           {stack.designations.length ? (
             <Section index={next()} title="Designations" description="Recognition under a scheme confers standing, not money, and is never counted as capital.">
