@@ -156,6 +156,152 @@
     "notes": "A substitution project: it \"aims to contribute to the substitution of germanium\", so no supply-chain stage is coded."
   },
   {
+    "id": "prj-ca-cmgd-nb-granitoids",
+    "name": "Geochronology and Petrogenesis of Granitoids and Related Critical Mineral Systems in New Brunswick",
+    "sponsorOrgIds": [
+      "org-ca-nb-geological-survey"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "New Brunswick",
+        "asStated": "Fredericton, New Brunswick"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "materialIds": [
+      "tungsten",
+      "lithium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "copper",
+      "zinc"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Geochronology and Petrogenesis of Granitoids and Related Critical Mineral Systems in New Brunswick",
+        "note": "NRCan explicitly labels this a project, names the New Brunswick Geological Survey as recipient, gives Fredericton as the project location, and names lithium, tungsten, copper and zinc."
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Geochronology and Petrogenesis of Granitoids and Related Critical Mineral Systems in New Brunswick",
+        "note": "Regional exploration models, mineral discovery support and mineral-potential mapping are read as exploration."
+      }
+    ],
+    "notes": "The project is a bounded geoscience undertaking under CMGD. Its source-defined project status and location are preserved even though it is not a mine-development asset."
+  },
+  {
+    "id": "prj-ca-cmgd-nb-maritimes-basin",
+    "name": "Critical Mineral Potential of the Maritimes Basin in Eastern New Brunswick",
+    "sponsorOrgIds": [
+      "org-ca-nb-geological-survey"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "New Brunswick",
+        "asStated": "Grand Lake Region, New Brunswick"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "materialIds": [
+      "rare-earth-elements",
+      "lithium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "copper",
+      "zinc"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Critical Mineral Potential of the Maritimes Basin in Eastern New Brunswick",
+        "note": "NRCan explicitly labels this a project, names the New Brunswick Geological Survey as recipient, gives Grand Lake Region as the project location, and names lithium, rare earth elements, copper and zinc."
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Critical Mineral Potential of the Maritimes Basin in Eastern New Brunswick",
+        "note": "Field mapping, sediment sampling and mineral-potential assessment are read as exploration."
+      }
+    ],
+    "notes": "The project is a bounded geoscience undertaking under CMGD. Its source-defined project status and location are preserved even though it is not a mine-development asset."
+  },
+  {
+    "id": "prj-ca-cmgd-ns-graphite-battery-value-chains",
+    "name": "Graphite in Support of Battery Value Chains",
+    "sponsorOrgIds": [
+      "org-ca-ns-dnr"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Nova Scotia",
+        "asStated": "Halifax, Nova Scotia"
+      }
+    ],
+    "stages": [
+      "exploration"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Critical Minerals Geoscience and Data initiative: Graphite in Support of Battery Value Chains",
+        "note": "NRCan explicitly labels this a project, names the Nova Scotia Department of Natural Resources as recipient, gives Halifax as the project location, and identifies graphite as the mineral focus."
+      },
+      {
+        "sourceId": "src-nrcan-pdac-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "ambiguous",
+        "locator": "Critical Minerals Geoscience and Data initiative: Graphite in Support of Battery Value Chains",
+        "note": "Geological mapping, three-dimensional modelling and laboratory analysis to identify areas for future exploration and development are read as exploration."
+      }
+    ],
+    "notes": "The project is a bounded geoscience undertaking under CMGD. Its source-defined project status and location are preserved even though it is not a mine-development asset."
+  },
+  {
     "id": "prj-ca-cyclic-kingston-centre-of-excellence",
     "name": "Kingston Centre of Excellence for Rare Earth Recycling",
     "sponsorOrgIds": [

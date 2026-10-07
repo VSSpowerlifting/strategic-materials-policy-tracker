@@ -85,8 +85,8 @@ test("tungsten stats", () => {
   assert.equal(v("capital"), 8);
   assert.equal(stat(p, "capital").sublabel, "2 of them are parts of a package");
   assert.equal(v("designations"), 5);
-  assert.equal(v("projects"), 5);
-  assert.equal(stat(p, "projects").sublabel, "0 with no designation");
+  assert.equal(v("projects"), 6);
+  assert.equal(stat(p, "projects").sublabel, "1 with no designation");
   assert.equal(v("programmes"), 4);
   assert.equal(v("organizations"), 11);
   assert.equal(v("sources"), 29);
@@ -94,9 +94,9 @@ test("tungsten stats", () => {
 
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
   const expected: Record<string, [number, number, number]> = {
-    tungsten: [5, 5, 0],
-    "rare-earth-elements": [9, 19, 10],
-    graphite: [15, 21, 6],
+    tungsten: [5, 6, 1],
+    "rare-earth-elements": [9, 20, 11],
+    graphite: [15, 22, 7],
     "ndfeb-magnets": [0, 4, 4],
     gallium: [1, 4, 3],
     germanium: [2, 5, 3],
@@ -105,7 +105,7 @@ test("designations, projects and projects with no designation, per material; the
     antimony: [0, 4, 4],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
-    lithium: [1, 5, 4],
+    lithium: [1, 7, 6],
     cobalt: [4, 5, 1],
     nickel: [4, 6, 2],
   };
@@ -454,7 +454,7 @@ test("fixture: a project with two designations is two cards, one project", () =>
   const second = { ...structuredClone(base), id: "dsg-eu-crma-tungsten-west-second", stages: ["processing" as const] };
   const fixture: DossierData = { ...data, designations: [...data.designations, second].sort((a, b) => (a.id < b.id ? -1 : 1)) };
   const p = dossier("tungsten", fixture);
-  assert.equal(stat(p, "projects").value, 5);
+  assert.equal(stat(p, "projects").value, 6);
   assert.equal(stat(p, "designations").value, 6);
   const cards = p.stages.flatMap((s) => s.designations.map((d) => ({ stage: s.id, id: d.id }))).filter((c) => c.id.startsWith("dsg-eu-crma-tungsten-west"));
   assert.deepEqual(cards.sort((a, b) => (a.id < b.id ? -1 : 1)), [
@@ -471,8 +471,8 @@ test("fixture: a project whose only designation names other materials is listed 
   assert.ok(listed, "Hemerdon is in the registry list");
   assert.equal(listed.designatedElsewhere.length, 1);
   assert.equal(stat(p, "designations").value, 4);
-  assert.equal(stat(p, "projects").value, 5);
-  assert.equal(stat(p, "projects").sublabel, "1 with no designation");
+  assert.equal(stat(p, "projects").value, 6);
+  assert.equal(stat(p, "projects").sublabel, "2 with no designation");
   assert.ok(!p.stages.some((s) => s.designations.some((d) => d.projectId === "prj-gb-hemerdon")));
 });
 

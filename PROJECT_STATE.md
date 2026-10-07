@@ -1,8 +1,20 @@
 # Project state
 
-## 2026-10-07: Graphite project-registry completion — Focus + Northern/Rain (draft)
+## 2026-10-07: CMGD geoscience project-registry completion (draft)
 
-**Status.** Branch `feat/graphite-project-registry-20261007`, cut from `main` `941c774` after PR #55 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/cmgd-project-registry-20261007`, cut from `main` `a4ff8ad` after PR #56 merged. Draft review phase; unmerged and not deployed.
+
+- Resolves the open modeling question in favor of registering the three tracked-material Critical Minerals Geoscience and Data (CMGD) studies as projects. NRCan explicitly groups CMGD support as seven projects and gives each item a `Project name`, recipient, location, funding amount and description.
+- Adds the New Brunswick Maritimes Basin project, the New Brunswick granitoids/geochronology project and Nova Scotia's graphite battery-value-chain project, then links their already-coded financing rows.
+- Preserves the issuer's per-project locations exactly as stated: Grand Lake Region, Fredericton and Halifax. No attempt is made to reinterpret whether each location is a field area, administrative base or both.
+- Keeps all three at the existing `exploration` stage. The first two retain tracked lithium plus rare earths/tungsten and untracked copper/zinc; the Nova Scotia project remains graphite-only.
+- No financing amount, financial status, event, source, organization, schema or vocabulary changes.
+- Remaining projectless financing rows after this tranche are Lynas, MP Materials and United States Antimony; each spans multiple undertakings and requires a separate modeling decision rather than a one-project link.
+- Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: Graphite project-registry completion — Focus + Northern/Rain (PR #56, merged)
+
+**Status.** PR #56 merged to `main` as `a4ff8ad777f4af981e8f9657500e0258bc2b4819`; reviewed head `519ab988ad09d19631118055d276de7a59bafbff` cleared validate, typecheck, lint, 435/435 tests, build and Vercel. Post-merge CI #169 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Converts two already-coded G7 CMPA graphite financings from free-text project descriptions into first-class project registry records; no new money, event, source or financial-status change is introduced.
 - Adds Focus Graphite's chemical-free electrothermal purification demonstration as a processing-stage graphite project and links the existing up-to-C$14.1 million conditional GPI commitment.
