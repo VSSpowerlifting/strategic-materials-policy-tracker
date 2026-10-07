@@ -1,11 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { AmountDetail } from "@/components/capital/primitives";
 import { CurrencyTotals } from "@/components/intelligence/totals";
 import { InlineAmount } from "@/components/capital/rows";
 import { Dossier } from "@/components/dossier/dossier";
+import { CommitmentItem } from "@/components/lattice/lattice";
 import { totalCommitments } from "@/lib/capital-control";
 import { getAllFinancialCommitments, getFinancialCommitmentById } from "@/lib/data";
 import { layerGlosses } from "@/lib/labels";
@@ -115,4 +118,20 @@ test("F1 outputs: the lattice amount view carries basisLabel for this row only",
   assert.equal(amountView(dod())?.basisLabel, "Announced");
   const other = getAllFinancialCommitments().find((c) => c.amount && c.id !== ID)!;
   assert.ok(!("basisLabel" in amountView(other)!));
+});
+
+test("F1: /capital carries the amount-basis caveat on both aggregate surfaces and uses binding wording that covers partial disbursement", () => {
+  const source = readFileSync(resolve(process.cwd(), "app/capital/page.tsx"), "utf8");
+  assert.equal((source.match(/<AmountBasisNotes\b/g) ?? []).length, 2);
+  assert.match(source, /contracted, partially disbursed and disbursed rows are binding, while payment is tracked separately/);
+  assert.doesNotMatch(source, /Binding means a contract has been executed or money paid/);
+});
+
+test("F1: Compare renders the carried announced basis label beside the 2024 5N amount", async () => {
+  const { buildLatticeModel } = await import("@/lib/lattice");
+  const record = buildLatticeModel(site.lastUpdated).records[ID];
+  assert.ok(record && record.kind === "commitment");
+  if (!record || record.kind !== "commitment") return;
+  const out = text(renderToStaticMarkup(createElement("ul", null, createElement(CommitmentItem, { r: record }))));
+  assert.match(out, /Announced USD 14\.4 million/);
 });

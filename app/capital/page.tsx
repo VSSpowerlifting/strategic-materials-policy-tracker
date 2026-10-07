@@ -7,6 +7,7 @@ import { StageMatrix } from "@/components/capital/charts";
 import { CommitmentRow, InlineAmount } from "@/components/capital/rows";
 import { JurisdictionTag } from "@/components/labels";
 import { OptionLadder } from "@/components/capital/primitives";
+import { AmountBasisNotes } from "@/components/intelligence/totals";
 import {
   LISTED_NOT_SUMMED_ROLES,
   PUBLIC_CAPITAL_SOURCES,
@@ -149,6 +150,7 @@ export default function CapitalPage() {
                               </div>
                             ) : null,
                           )}
+                          {inst.summed ? <AmountBasisNotes entries={inst.amountBasis} /> : null}
                         </div>
                       ))}
                     </div>
@@ -210,7 +212,7 @@ export default function CapitalPage() {
             Totals are never converted between currencies, never added across instruments or value roles. Within one currency and instrument, figures stated &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; are added only to others stated the same way; an &ldquo;up to&rdquo; figure is a sum of stated upper bounds, not an amount paid. A paler bar marks any such figure.
             {" "}
             {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
-            {" "}Binding means a contract has been executed or money paid; an executed contract need not have obligated or paid any funds. Every earlier stage the source states, including conditional loan commitments, is shown as not yet binding. A non-binding letter of intent or interest is not a commitment at all: it is an indication, listed below apart from public support and never summed. A commitment whose source states no status is neither: it is listed, not summed
+            {" "}Binding means an agreement is executed: contracted, partially disbursed and disbursed rows are binding, while payment is tracked separately. A contracted row need not mean funds are obligated or paid, and a partially disbursed row is not fully paid. Every earlier stage the source states, including conditional loan commitments, is shown as not yet binding. A non-binding letter of intent or interest is not a commitment at all: it is an indication, listed below apart from public support and never summed. A commitment whose source states no status is neither: it is listed, not summed
             {totals.statusNotStatedIds.length ? ` (${totals.statusNotStatedIds.length} now)` : ""}, and a withdrawn or lapsed one is listed as ended
             {totals.endedIds.length ? ` (${totals.endedIds.length} now)` : ""} and never summed.
             {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
@@ -236,19 +238,26 @@ export default function CapitalPage() {
                     <td className="px-3 py-3">
                       <span className="flex flex-col gap-1">
                         {t.currencies.map((cur) => (
-                          <span key={cur.currency} className="tnum font-mono text-xs text-muted">
-                            <span className="text-foreground">{cur.currency}</span>{" "}
-                            {cur.status === "withheld"
-                              ? "total withheld: counted rows overlap"
-                              : cur.instruments
-                                  .map((i) =>
-                                    i.summed
-                                      ? `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
-                                          .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
-                                          .join(" and ")}`
-                                      : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed, not summed`,
-                                  )
-                                  .join("; ")}
+                          <span key={cur.currency} className="space-y-1">
+                            <span className="tnum block font-mono text-xs text-muted">
+                              <span className="text-foreground">{cur.currency}</span>{" "}
+                              {cur.status === "withheld"
+                                ? "total withheld: counted rows overlap"
+                                : cur.instruments
+                                    .map((i) =>
+                                      i.summed
+                                        ? `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
+                                            .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
+                                            .join(" and ")}`
+                                        : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed, not summed`,
+                                    )
+                                    .join("; ")}
+                            </span>
+                            {cur.status === "summed"
+                              ? cur.instruments.map((i) =>
+                                  i.summed ? <AmountBasisNotes key={i.instrument} entries={i.amountBasis} /> : null,
+                                )
+                              : null}
                           </span>
                         ))}
                         {t.currencies.length === 0 ? <span className="font-mono text-xs text-faint">—</span> : null}

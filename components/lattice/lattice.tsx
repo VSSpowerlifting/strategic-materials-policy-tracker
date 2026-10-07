@@ -477,7 +477,7 @@ function KindToggle({ label, kind, checked, onChange }: { label: string; kind: M
   );
 }
 
-function CommitmentItem({ r }: { r: LatticeCommitment }) {
+export function CommitmentItem({ r }: { r: LatticeCommitment }) {
   return (
     <li className="py-3 first:pt-0">
       <div className="flex gap-3">
@@ -489,6 +489,7 @@ function CommitmentItem({ r }: { r: LatticeCommitment }) {
           <p className="tnum mt-1 text-sm text-paper-foreground">
             {r.amount ? (
               <>
+                {r.amount.basisLabel ? <span className="text-paper-faint">{r.amount.basisLabel} </span> : null}
                 {r.amount.qualifier ? <span className="text-paper-faint">{r.amount.qualifier} </span> : null}
                 <span className="text-paper-faint">{r.amount.currency} </span>
                 <strong className="font-semibold">{r.amount.value}</strong>
