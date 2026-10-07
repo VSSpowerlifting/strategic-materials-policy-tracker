@@ -117,6 +117,7 @@ export const COMMITMENT_FIELD_EVIDENCE: Readonly<
   recipientOrgIds: "recipient",
   project: "project",
   projectId: "project",
+  associatedProjectIds: "project",
   facility: "facility",
   locations: "location",
   stages: "stages",
@@ -536,6 +537,7 @@ const COMMITMENT: Fields<FinancialCommitment> = {
   recipientOrgIds: listOf(text()),
   project: nullableText(),
   projectId: nullableText(),
+  associatedProjectIds: { ...listOf(text()), optional: true },
   facility: nullableText(),
   locations: listOf(objectOf("location", LOCATION)),
   stages: listOf(oneOf(SUPPLY_CHAIN_STAGES)),
@@ -1169,6 +1171,24 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
   checkOrgRefs(c.providerOrgIds, "providerOrgIds", r, refs);
   checkOrgRefs(c.recipientOrgIds, "recipientOrgIds", r, refs);
   const project = c.projectId !== null && resolves(c.projectId, refs.projects, PROJECT_TARGET, "projectId", r, refs) ? refs.projects.get(c.projectId) : null;
+  const associatedIds = c.associatedProjectIds ?? [];
+  if (associatedIds.length) {
+    if (c.projectId !== null)
+      r.error("incoherent_value", "associatedProjectIds", "shared project associations cannot coexist with an attributed projectId");
+    if (associatedIds.length < 2)
+      r.error("incoherent_value", "associatedProjectIds", "shared financing requires at least two distinct associated projects");
+    checkUnique(associatedIds, "associatedProjectIds", "project");
+    const projects = associatedIds.flatMap((id, i) =>
+      resolves(id, refs.projects, PROJECT_TARGET, `associatedProjectIds[${i}]`, r, refs)
+        ? [refs.projects.get(id)!] : []);
+    const union = new Set(projects.flatMap((p) => p.materialIds));
+    for (const materialId of c.materialIds)
+      if (projects.length === associatedIds.length && !union.has(materialId))
+        r.error("material_not_in_project", "associatedProjectIds", `shared projects do not cover tracked material "${materialId}"`);
+    for (const p of projects)
+      if (c.materialIds.length && !p.materialIds.some((m) => c.materialIds.includes(m)))
+        r.error("material_not_in_project", "associatedProjectIds", `associated project "${p.id}" has no material overlap with this row`);
+  }
   const programme =
     c.programmeId !== null && resolves(c.programmeId, refs.programmes, PROGRAMME_TARGET, "programmeId", r, refs)
       ? refs.programmes.get(c.programmeId)
@@ -1637,7 +1657,7 @@ export function validateCapitalControl(input: CapitalControlInput): CapitalContr
           for (const link of c.relationships)
             if (link.commitmentId !== c.id && refs.commitments.has(link.commitmentId)) addEdge("commitments", c.id, link.commitmentId, link.relationship);
           refer("organizations", [...c.providerOrgIds, ...c.recipientOrgIds]);
-          refer("projects", [c.projectId]);
+          refer("projects", [c.projectId, ...(c.associatedProjectIds ?? [])]);
           refer("programmes", [c.programmeId]);
           break;
         }
