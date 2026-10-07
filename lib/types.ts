@@ -831,6 +831,8 @@ export type FinancialCommitment = {
   project: string | null;
   /** The registry project ("prj-...") this row funds, when it funds one identifiable project. */
   projectId: string | null;
+  /** Explicitly associated projects sharing one unallocated amount; never a per-project allocation. */
+  associatedProjectIds?: string[];
   /** The physical site or plant, where named. */
   facility: string | null;
   /** Empty when the source gives no location. */
