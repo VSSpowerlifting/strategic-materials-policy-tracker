@@ -224,12 +224,11 @@
     ],
     "materialIds": [
       "rare-earth-elements",
-      "cobalt"
-    ],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
+      "cobalt",
       "nickel"
     ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
     "evidence": [
       {
         "sourceId": "src-nrcan-cmrdd-programme",
@@ -826,13 +825,13 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "lithium (battery grade)",
-      "copper",
-      "nickel (battery grade)"
+      "copper"
     ],
     "evidence": [
       {
@@ -1017,11 +1016,11 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
-      "nickel (battery grade)",
       "lithium (battery grade)",
       "manganese (battery grade)",
       "copper"
@@ -1171,12 +1170,12 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "lithium (battery grade)",
-      "nickel (battery grade)",
       "manganese (battery grade)"
     ],
     "evidence": [
@@ -1923,13 +1922,13 @@
     ],
     "materialIds": [
       "graphite",
-      "cobalt"
+      "cobalt",
+      "nickel"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "manganese (battery grade)",
-      "lithium (battery grade)",
-      "nickel (battery grade)"
+      "lithium (battery grade)"
     ],
     "evidence": [
       {
