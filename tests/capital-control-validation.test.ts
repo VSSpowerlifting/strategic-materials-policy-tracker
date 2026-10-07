@@ -1323,7 +1323,7 @@ test("shared project associations are plural, non-allocative, resolvable and mat
   const unrelated: Project = { ...structuredClone(PROJECT_TWO), id: "prj-alpha-unrelated", materialIds: ["mat-three"] };
   assertErrors(
     validate([commitment({ associatedProjectIds: ["prj-alpha-plant", "prj-alpha-unrelated"], evidence: commitmentEvidence(["project"]) })], [], { registries: registries({ projects: [PROJECT, unrelated], projectDesignations: [] }) }),
-    ["material_not_in_associated_project@fin-alpha-grant:associatedProjectIds[1]"],
+    ["incoherent_value@fin-alpha-grant:associatedProjectIds[1]"],
   );
 });
 

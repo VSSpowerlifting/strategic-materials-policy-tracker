@@ -1172,7 +1172,7 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
   checkOrgRefs(c.recipientOrgIds, "recipientOrgIds", r, refs);
   const project = c.projectId !== null && resolves(c.projectId, refs.projects, PROJECT_TARGET, "projectId", r, refs) ? refs.projects.get(c.projectId) : null;
   const associatedProjectIds = c.associatedProjectIds ?? [];
-  checkUnique(associatedProjectIds, "associatedProjectIds", "project");
+  checkUnique(associatedProjectIds, "associatedProjectIds", "project", r);
   if (associatedProjectIds.length === 1)
     r.error(
       "incoherent_value",
@@ -1192,7 +1192,7 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
     if (!p || p.materialIds.length === 0) return;
     if (!p.materialIds.some((id) => c.materialIds.includes(id)))
       r.error(
-        "material_not_in_associated_project",
+        "incoherent_value",
         `associatedProjectIds[${i}]`,
         `project "${p.id}" shares no tracked material with this financing row; do not associate unrelated projects`,
       );
@@ -1201,7 +1201,7 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
     c.materialIds.forEach((id, i) => {
       if (!associatedProjects.some((p) => p?.materialIds.includes(id)))
         r.error(
-          "material_not_in_associated_projects",
+          "incoherent_value",
           `materialIds[${i}]`,
           `"${id}" is not named by any associated project; every tracked material on a shared financing row must be covered by at least one linked project`,
         );
