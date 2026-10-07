@@ -1590,7 +1590,7 @@
       "org-focus-graphite"
     ],
     "project": "Chemical-free electrothermal purification project for natural flake graphite",
-    "projectId": null,
+    "projectId": "prj-ca-focus-graphite-electrothermal-purification",
     "facility": null,
     "locations": [],
     "stages": [
@@ -2041,7 +2041,7 @@
       "org-rain-carbon-canada"
     ],
     "project": "Research project on upcycled natural graphite for battery anodes",
-    "projectId": null,
+    "projectId": "prj-ca-northern-rain-upcycled-graphite",
     "facility": null,
     "locations": [],
     "stages": [
