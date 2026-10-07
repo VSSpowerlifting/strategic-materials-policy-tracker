@@ -444,6 +444,39 @@
     "notes": null
   },
   {
+    "id": "prj-ca-ntwist-nickel-efficiency",
+    "name": "Nickel Production and Efficiency R&D Project",
+    "sponsorOrgIds": [
+      "org-ntwist",
+      "org-tunley-environmental",
+      "org-vale-europe"
+    ],
+    "locations": [],
+    "stages": [
+      "research_development"
+    ],
+    "materialIds": [
+      "nickel"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: NTwist Inc.",
+        "note": "The source gives no formal project title; the name is a concise normalization of its stated purpose. NRCan identifies NTwist's project with Vale Europe and Tunley Environmental to improve nickel production and efficiency and places the funding in an NRC–UKRI research-and-development collaboration."
+      }
+    ],
+    "notes": "No project location is stated; none is inferred from participant addresses or company names."
+  },
+  {
     "id": "prj-ca-saltworks-lithium-brine",
     "name": "Lithium Brine Concentration and Conversion Demonstration",
     "sponsorOrgIds": [

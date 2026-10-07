@@ -1416,6 +1416,29 @@
     "notes": null
   },
   {
+    "id": "org-ntwist",
+    "name": "NTwist Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: NTwist Inc.",
+        "note": null
+      }
+    ],
+    "notes": "The NRCan backgrounder identifies NTwist Inc. as the project lead but does not state its jurisdiction of incorporation."
+  },
+  {
     "id": "org-orano-batteries",
     "name": "ORANO Batteries",
     "nameOriginal": null,
@@ -1912,6 +1935,29 @@
     "notes": null
   },
   {
+    "id": "org-tunley-environmental",
+    "name": "Tunley Environmental Ltd.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: NTwist Inc.",
+        "note": null
+      }
+    ],
+    "notes": "Named by NRCan as a United Kingdom project collaborator; jurisdiction of incorporation is not separately asserted."
+  },
+  {
     "id": "org-ucore-rare-metals",
     "name": "Ucore Rare Metals Inc.",
     "nameOriginal": null,
@@ -2242,6 +2288,29 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "org-vale-europe",
+    "name": "Vale Europe Ltd.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-g7-cmpa-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Research and development projects: NTwist Inc.",
+        "note": null
+      }
+    ],
+    "notes": "Named by NRCan as a project collaborator; jurisdiction of incorporation is not inferred from the company name."
   },
   {
     "id": "org-vianode",
