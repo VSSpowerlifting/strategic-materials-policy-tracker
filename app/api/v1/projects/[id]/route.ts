@@ -30,6 +30,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     providerOrgIds: stack.providerOrgIds,
     layers: stack.layers.map((l) => ({ layer: l.key, rowIds: l.rows.map((c) => c.id), totals: l.totals })),
     designationIds: stack.designations.map((d) => d.id),
+    sharedCapitalRowIds: stack.sharedRows.map((c) => c.id),
     latestImplementation: stack.latestImplementation,
     sources: getSourcesByIds(evidenceSourceIds(stack.project)),
   });
