@@ -30,6 +30,27 @@ function Sums({ label, sums }: { label: string; sums: Partial<Record<ValueQualif
   );
 }
 
+export function AmountBasisNotes({
+  entries,
+}: {
+  entries?: { commitmentId: string; label: string; note: string }[];
+}) {
+  if (!entries?.length) return null;
+  return (
+    <>
+      {entries.map((b) => (
+        <p key={b.commitmentId} data-amount-basis={b.commitmentId} className="font-mono text-[10px] leading-4 text-faint">
+          Includes an {b.label.toLowerCase()} amount (
+          <Link href={`/capital/${b.commitmentId}`} className="text-accent hover:text-accent-strong">
+            {b.commitmentId}
+          </Link>
+          ): {b.note}
+        </p>
+      ))}
+    </>
+  );
+}
+
 export function CurrencyTotals({ totals, compact = false }: { totals: CommitmentTotals; compact?: boolean }) {
   if (!totals.currencies.length)
     return (
@@ -67,11 +88,7 @@ export function CurrencyTotals({ totals, compact = false }: { totals: Commitment
                     <>
                       <Sums label="Binding" sums={i.binding} />
                       <Sums label="Not yet binding" sums={i.notYetBinding} />
-                      {(i.amountBasis ?? []).map((b) => (
-                        <p key={b.commitmentId} data-amount-basis={b.commitmentId} className="font-mono text-[10px] leading-4 text-faint">
-                          Includes an {b.label.toLowerCase()} amount (<Link href={`/capital/${b.commitmentId}`} className="text-accent hover:text-accent-strong">{b.commitmentId}</Link>): {b.note}
-                        </p>
-                      ))}
+                      <AmountBasisNotes entries={i.amountBasis} />
                     </>
                   ) : (
                     <p className="font-mono text-[11px] leading-5 text-faint">

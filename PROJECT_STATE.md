@@ -1,5 +1,15 @@
 # Project state
 
+## 2026-10-07: 5N+ aggregate and Compare amount-basis follow-up (draft PR)
+
+**Status.** Branch `fix/5n-aggregate-compare-basis-20261007`, cut from `main` `e55f1b0` after the merged F1-F3 work. Draft PR only; not merged or deployed.
+
+- Review found two presentation gaps with the existing 2024 5N amount-basis metadata. `/capital` counted the $14.4M row in its binding total and provider comparison but omitted the informational amount-basis caveat already rendered by project and organization totals. Both aggregate surfaces now reuse the same `AmountBasisNotes` presentation; sums, classifications and counting logic are unchanged.
+- Compare already received `basisLabel: "Announced"` from the lattice model, but the visible commitment detail row rendered only qualifier, currency and value. It now renders the carried basis label beside the amount (for this row: `Announced USD 14.4 million`).
+- The nearby `/capital` binding explanation now matches the shared F2 wording: contracted, partially disbursed and disbursed rows are binding because an agreement is executed; payment is tracked separately. A contracted row need not mean funds are obligated or paid, and a partially disbursed row is not fully paid.
+- Regression coverage adds one check for both `/capital` aggregate placements/status wording and one rendered Compare-row check. No seed data, amount, status, evidence, source, classification or calculation changed.
+- Remaining evidence ambiguity is unchanged: the announced $14.4M is unreconciled with the $12,458,128 federal obligation and $2,505,981 non-federal funding; no amount paid is recorded.
+
 ## 2026-10-05: F1-F3 amount and status presentation (draft PR)
 
 **Status.** Branch `feat/f1-f3-amount-status-presentation`, created from `origin/main` `a376dda` (PR #45 squash). The checkout was on the
