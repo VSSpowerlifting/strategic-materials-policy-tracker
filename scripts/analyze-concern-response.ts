@@ -5,7 +5,7 @@
  *
  * Prints deterministic Markdown tables to stdout. It reads no clock and writes no file. Everything is a record
  * count; no money is totalled and no currencies are combined. Placement, folding and control status reuse
- * `stageResponseMap`, `stageLatticeGaps`, `isFoldedPart`, `legalStanding` and the lifecycle queue, so the
+ * `stageResponseMap`, `stageLatticeGaps`, `isFoldedPart`, `legalStandingOn` and the lifecycle queue, so the
  * numbers follow the corpus's own counting rules. The "ladder" columns are presentation only: financial
  * standing and physical status are separate axes and are never combined into a score.
  *
@@ -98,7 +98,6 @@ const BUILT = ["construction", "commissioning", "operational", "completed"];
 const FUNDED_ACTIVITY_STATUS = new Set(["prj-ca-cyclic-kingston-demonstration-plant"]);
 /** Framing counted as official government framing only when its source is an official document (not news or state media). */
 const officialFraming = (f: { sourceId: string }) => getSourceById(f.sourceId)?.sourceType === "official";
-const BINDING = ["contracted", "partially_disbursed", "disbursed"];
 const FUNDED = ["partially_disbursed", "disbursed"];
 const fundedOn = (c: FinancialCommitment) => {
   const status = finStatus(c);
@@ -150,7 +149,7 @@ line(`Financial rows by value role (every row has exactly one):`);
 line();
 const roles = tally(all.map((c) => c.valueRole));
 table(["Value role", "Rows"], [...roles.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([r, n]) => [r, n]));
-line(`Financial rows by legal standing (rule in \`legalStanding\`; an unstated status is never read as not-yet-binding):`);
+line(`Financial rows by legal standing on the as-of date (rule in \`legalStandingOn\`; an unstated status is never read as not-yet-binding, and a row with no status evidenced by the date is listed separately):`);
 line();
 const standing = tally(all.map((c) => standingOn(c) ?? "not_evidenced_by_as_of"));
 table(["Legal standing", "Rows"], [...standing.entries()].sort().map(([s, n]) => [s, n]));
@@ -197,7 +196,7 @@ line();
 const gcAll = all.filter(isGC);
 const gc = gcFolded(all);
 const nonGcRoles = all.filter((c) => !isGC(c));
-line(`Government commitment (GC) rows: role \`commitment\`, a providing tracked government, not ended. ${gcAll.length} rows; ${gc.length} after folding parts into packages that are themselves GC rows (package counted once).`);
+line(`Government commitment (GC) rows: role \`commitment\`, a providing tracked government, not ended as of ${asOf}. ${gcAll.length} rows; ${gc.length} after folding parts into packages that are themselves GC rows (package counted once).`);
 line(`Not GC (${nonGcRoles.length}): ${[...tally(nonGcRoles.map((c) => (endedOn(c) ? `ended ${c.valueRole}` : c.valueRole === "commitment" ? "commitment with no tracked providing government" : c.valueRole))).entries()].sort().map(([k, v]) => `${k} ${v}`).join("; ")}.`);
 line(`GC rows by capital source: ${[...tally(gcAll.map((c) => c.capitalSource)).entries()].sort().map(([k, v]) => `${k} ${v}`).join("; ")} (mixed_vehicle and not_stated are not public capital).`);
 line();
