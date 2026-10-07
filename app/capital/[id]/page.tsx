@@ -209,8 +209,16 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
                   {c.recipientOrgIds.length ? <span className="mt-1 block"><OrgList ids={c.recipientOrgIds} showKind /></span> : null}
                 </Fact>
                 <Fact label="Project">
-                  {c.project ?? (c.projectId ? null : <NotStated />)}
+                  {c.project ?? (c.projectId || c.associatedProjectIds?.length ? null : <NotStated />)}
                   {c.projectId ? <span className="mt-1 block"><ProjectLink id={c.projectId} /> <span className="font-mono text-[11px] text-faint">capital stack →</span></span> : null}
+                  {c.associatedProjectIds?.length ? (
+                    <span className="mt-2 block text-sm text-muted">
+                      Shared across projects. The amount is unallocated and excluded from each project's capital totals.
+                      {c.associatedProjectIds.map((projectId) => (
+                        <span key={projectId} className="mt-1 block"><ProjectLink id={projectId} /></span>
+                      ))}
+                    </span>
+                  ) : null}
                 </Fact>
                 <Fact label="Facility">{c.facility ?? <NotStated />}</Fact>
                 <Fact label="Location">
