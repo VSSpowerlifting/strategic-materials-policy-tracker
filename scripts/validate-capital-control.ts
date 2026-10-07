@@ -1177,7 +1177,7 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
       r.error("incoherent_value", "associatedProjectIds", "shared project associations cannot coexist with an attributed projectId");
     if (associatedIds.length < 2)
       r.error("incoherent_value", "associatedProjectIds", "shared financing requires at least two distinct associated projects");
-    checkUnique(associatedIds, "associatedProjectIds", "project");
+    checkUnique(associatedIds, "associatedProjectIds", "project", r);
     const projects = associatedIds.flatMap((id, i) =>
       resolves(id, refs.projects, PROJECT_TARGET, `associatedProjectIds[${i}]`, r, refs)
         ? [refs.projects.get(id)!] : []);
