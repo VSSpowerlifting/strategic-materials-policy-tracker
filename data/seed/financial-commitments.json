@@ -4286,6 +4286,10 @@
     ],
     "project": "Lynas mid-term growth plan: light rare earths production capacity expansion and heavy rare earths separation commencement",
     "projectId": null,
+    "associatedProjectIds": [
+      "prj-lynas-lre-capacity-expansion",
+      "prj-lynas-hre-separation"
+    ],
     "facility": null,
     "locations": [],
     "stages": [],
@@ -4357,7 +4361,7 @@
         "note": "The filing, referring to the 7 March 2023 announcement, reports the signed agreements and AUD200 million cash contributed through an ordinary-share subscription, and records the AUD200 million JARE proceeds in the March-quarter cash-flow table. It supports the disbursed status; the signing day rests on the announcement above."
       }
     ],
-    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC. No stage is recorded because the plan spans light rare earth capacity and heavy rare earth separation without a split. The cash receipt is confirmed by Lynas' March-quarter 2023 filing. A later HRE production milestone at Lynas Malaysia is not treated as completion of this broader, unallocated light- and heavy-rare-earth growth plan.",
+    "notes": "The release does not split the AUD 200 million between Sojitz and JOGMEC or between the light-rare-earth capacity expansion and heavy-rare-earth separation components of the growth plan. associatedProjectIds records both components without allocating the amount. No stage is recorded on the financing row because the plan spans distinct undertakings without a stated split. The cash receipt is confirmed by Lynas' March-quarter 2023 filing. A later HRE production milestone at Lynas Malaysia is not treated as completion of this broader, unallocated growth plan.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-02",
       "implementationStatusCheckedAt": null
@@ -7817,8 +7821,14 @@
     "recipientOrgIds": [
       "org-mp-materials"
     ],
-    "project": "HREE refining expansion and hydrochloric acid recommissioning at Mountain Pass; Independence magnet facility expansion",
+    "project": "10X Facility; Samarium Project; Mountain Pass Facility Improvements (HREE refining and hydrochloric acid facilities); Independence Facility capacity expansion",
     "projectId": null,
+    "associatedProjectIds": [
+      "prj-us-mp-10x-facility",
+      "prj-us-mountain-pass-samarium",
+      "prj-us-mp-independence-expansion",
+      "prj-us-mp-mountain-pass-hcl-facilities"
+    ],
     "facility": null,
     "locations": [],
     "stages": [
@@ -7875,7 +7885,7 @@
         "note": null
       }
     ],
-    "notes": "The recipient's own contribution, recorded so it is never counted as public support."
+    "notes": "The recipient's own contribution, recorded so it is never counted as public support. The Transaction Agreement states that up to $600 million of existing cash supports the 10X Facility, Samarium Project and Facility Improvements, with no allocation among those uses. associatedProjectIds records those non-allocative links; the amount is not attributed to any project stack."
   },
   {
     "id": "fin-us-dod-mp-2025-magnet-offtake",
