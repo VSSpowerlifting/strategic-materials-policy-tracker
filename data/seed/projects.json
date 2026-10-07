@@ -396,6 +396,92 @@
     "notes": "The backgrounder describes the company's aim of \"the largest fully integrated natural graphite production facility in North America\"; only the mine is recorded as the project."
   },
   {
+    "id": "prj-ca-noram-lithium-electrolysis",
+    "name": "Electrolysis for Lithium Production and Recycling",
+    "sponsorOrgIds": [
+      "org-noram-electrolysis-systems"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "British Columbia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-canada-grant-noram-cmrdd-2024",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Title; Recipient's Legal Name; programme description",
+        "note": "The grant title is used as the project name. NRCan's release identifies the supported activity as industrial-scale membrane electrolysis for lithium production."
+      },
+      {
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "supports": [
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph; NESI investment paragraph",
+        "note": "The release places the supported battery-supply-chain work in British Columbia and describes lithium-hydroxide production as midstream lithium processing."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "prj-ca-saltworks-lithium-brine",
+    "name": "Lithium Brine Concentration and Conversion Demonstration",
+    "sponsorOrgIds": [
+      "org-saltworks-technologies"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "British Columbia",
+        "asStated": "British Columbia"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-nrcan-lithium-processing-2024",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Saltworks investment paragraph",
+        "note": "The source does not give a formal project title; the project name is a concise normalization of its stated purpose: concentration and conversion of Canadian lithium brine into lithium battery precursors. NRCan frames the two awards as midstream lithium processing in British Columbia."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "prj-ca-trail-strategic-metals",
     "name": "Trail Strategic Metals Initiative",
     "sponsorOrgIds": [
@@ -903,6 +989,63 @@
       }
     ],
     "notes": "The annex names the project after its promoter."
+  },
+  {
+    "id": "prj-fi-keliber-lithium",
+    "name": "KELIBER LITHIUM",
+    "sponsorOrgIds": [
+      "org-keliber-technology-oy"
+    ],
+    "locations": [
+      {
+        "countryCode": "FI",
+        "subnational": null,
+        "asStated": "Finland"
+      }
+    ],
+    "stages": [
+      "mining",
+      "processing"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-annex-2025-03",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Entry (19)",
+        "note": "The annex states that KELIBER LITHIUM is an ongoing integrated extraction and processing project in Finland for lithium (battery grade)."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2025-03",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 19",
+        "note": "The Commission decision names Keliber Technology Oy as promoter."
+      },
+      {
+        "sourceId": "src-eib-keliber-project-20170804",
+        "supports": [
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Project description",
+        "note": "EIB describes mines, a concentrator and a hydrometallurgical plant producing battery-grade lithium hydroxide."
+      }
+    ],
+    "notes": "The EIB loan recipient is Keliber Oy; the CRMA designation names Keliber Technology Oy as project promoter. The organizations remain separate in the registry."
   },
   {
     "id": "prj-fr-bam4ever",
@@ -2729,148 +2872,5 @@
       }
     ],
     "notes": null
-  },
-  {
-    "id": "prj-ca-saltworks-lithium-brine",
-    "name": "Lithium Brine Concentration and Conversion Demonstration",
-    "sponsorOrgIds": [
-      "org-saltworks-technologies"
-    ],
-    "locations": [
-      {
-        "countryCode": "CA",
-        "subnational": "British Columbia",
-        "asStated": "British Columbia"
-      }
-    ],
-    "stages": [
-      "processing"
-    ],
-    "materialIds": [
-      "lithium"
-    ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
-    "evidence": [
-      {
-        "sourceId": "src-nrcan-lithium-processing-2024",
-        "supports": [
-          "name",
-          "sponsors",
-          "location",
-          "stages",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Saltworks investment paragraph",
-        "note": "The source does not give a formal project title; the project name is a concise normalization of its stated purpose: concentration and conversion of Canadian lithium brine into lithium battery precursors. NRCan frames the two awards as midstream lithium processing in British Columbia."
-      }
-    ],
-    "notes": null
-  },
-  {
-    "id": "prj-ca-noram-lithium-electrolysis",
-    "name": "Electrolysis for Lithium Production and Recycling",
-    "sponsorOrgIds": [
-      "org-noram-electrolysis-systems"
-    ],
-    "locations": [
-      {
-        "countryCode": "CA",
-        "subnational": "British Columbia",
-        "asStated": "British Columbia"
-      }
-    ],
-    "stages": [
-      "processing"
-    ],
-    "materialIds": [
-      "lithium"
-    ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
-    "evidence": [
-      {
-        "sourceId": "src-canada-grant-noram-cmrdd-2024",
-        "supports": [
-          "name",
-          "sponsors",
-          "stages",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Title; Recipient's Legal Name; programme description",
-        "note": "The grant title is used as the project name. NRCan's release identifies the supported activity as industrial-scale membrane electrolysis for lithium production."
-      },
-      {
-        "sourceId": "src-nrcan-lithium-processing-2024",
-        "supports": [
-          "location",
-          "stages",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Opening paragraph; NESI investment paragraph",
-        "note": "The release places the supported battery-supply-chain work in British Columbia and describes lithium-hydroxide production as midstream lithium processing."
-      }
-    ],
-    "notes": null
-  },
-  {
-    "id": "prj-fi-keliber-lithium",
-    "name": "KELIBER LITHIUM",
-    "sponsorOrgIds": [
-      "org-keliber-technology-oy"
-    ],
-    "locations": [
-      {
-        "countryCode": "FI",
-        "subnational": null,
-        "asStated": "Finland"
-      }
-    ],
-    "stages": [
-      "mining",
-      "processing"
-    ],
-    "materialIds": [
-      "lithium"
-    ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
-    "evidence": [
-      {
-        "sourceId": "src-ec-crma-sp-annex-2025-03",
-        "supports": [
-          "name",
-          "location",
-          "stages",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Entry (19)",
-        "note": "The annex states that KELIBER LITHIUM is an ongoing integrated extraction and processing project in Finland for lithium (battery grade)."
-      },
-      {
-        "sourceId": "src-ec-crma-sp-decision-2025-03",
-        "supports": [
-          "sponsors"
-        ],
-        "evidence": "explicit",
-        "locator": "Article 2, row 19",
-        "note": "The Commission decision names Keliber Technology Oy as promoter."
-      },
-      {
-        "sourceId": "src-eib-keliber-project-20170804",
-        "supports": [
-          "stages",
-          "materials"
-        ],
-        "evidence": "explicit",
-        "locator": "Project description",
-        "note": "EIB describes mines, a concentrator and a hydrometallurgical plant producing battery-grade lithium hydroxide."
-      }
-    ],
-    "notes": "The EIB loan recipient is Keliber Oy; the CRMA designation names Keliber Technology Oy as project promoter. The organizations remain separate in the registry."
   }
 ]
