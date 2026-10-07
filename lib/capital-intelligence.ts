@@ -254,6 +254,8 @@ export const isBackingRow = (c: FinancialCommitment): boolean =>
 export type ProjectStack = {
   project: Project;
   rows: FinancialCommitment[];
+  /** Associated but unallocated financing; excluded from attributed totals. */
+  sharedRows: FinancialCommitment[];
   layers: Layer[];
   /** Tracked governments behind the project's rows, from providerJurisdiction only. */
   governments: JurisdictionCode[];
@@ -275,6 +277,7 @@ export function projectStack(id: string, all: readonly FinancialCommitment[] = g
   const project = getProjectById(id);
   if (!project) return null;
   const rows = all.filter((c) => c.projectId === id);
+  const sharedRows = all.filter((c) => c.associatedProjectIds?.includes(id));
   // Who stands behind the project: providers of rows that have not ended. A withdrawn or lapsed row keeps its
   // place in the stack (with its status) but no longer backs the project, and a funding option is standing,
   // not backing, until a commitment drawn from it is recorded (that draw is its own row here).
@@ -297,6 +300,7 @@ export function projectStack(id: string, all: readonly FinancialCommitment[] = g
   return {
     project,
     rows,
+    sharedRows,
     layers: layers(rows, all),
     governments,
     providerOrgIds,
