@@ -1858,7 +1858,8 @@
     "affectedMaterialIds": [
       "rare-earth-elements",
       "ndfeb-magnets",
-      "graphite"
+      "graphite",
+      "lithium"
     ],
     "affectedSectors": [
       "defense",
