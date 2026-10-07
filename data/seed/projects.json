@@ -223,11 +223,11 @@
       "recycling"
     ],
     "materialIds": [
-      "rare-earth-elements"
+      "rare-earth-elements",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
-      "cobalt",
       "nickel"
     ],
     "evidence": [
@@ -825,14 +825,14 @@
       "recycling"
     ],
     "materialIds": [
-      "graphite"
+      "graphite",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "lithium (battery grade)",
       "copper",
-      "nickel (battery grade)",
-      "cobalt"
+      "nickel (battery grade)"
     ],
     "evidence": [
       {
@@ -1016,12 +1016,12 @@
       "processing"
     ],
     "materialIds": [
-      "graphite"
+      "graphite",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "nickel (battery grade)",
-      "cobalt",
       "lithium (battery grade)",
       "manganese (battery grade)",
       "copper"
@@ -1170,12 +1170,12 @@
       "recycling"
     ],
     "materialIds": [
-      "graphite"
+      "graphite",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "lithium (battery grade)",
-      "cobalt",
       "nickel (battery grade)",
       "manganese (battery grade)"
     ],
@@ -1922,14 +1922,14 @@
       "recycling"
     ],
     "materialIds": [
-      "graphite"
+      "graphite",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
       "manganese (battery grade)",
       "lithium (battery grade)",
-      "nickel (battery grade)",
-      "cobalt"
+      "nickel (battery grade)"
     ],
     "evidence": [
       {

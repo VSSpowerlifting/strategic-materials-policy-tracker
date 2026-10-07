@@ -1774,5 +1774,17 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Official NRCan release on CMRDD support for midstream lithium processing: Saltworks lithium-brine concentration/conversion and NORAM Electrolysis Systems lithium-hydroxide production technology. Used as diversification context only; these awards are not coded as financial rows in this tranche."
+  },
+  {
+    "id": "src-usgs-cobalt-mcs-2026",
+    "title": "Mineral Commodity Summaries 2026 — Cobalt",
+    "publisher": "U.S. Geological Survey",
+    "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-cobalt.pdf",
+    "language": "en",
+    "datePublished": "2026-02-06",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official USGS cobalt commodity sheet. Reports Congo (Kinshasa) at an estimated 73% of 2025 world mine production, China as the leading refined-cobalt producer and consumer, and the DRC's 2025 export-ban-to-quota transition. Used for current cobalt supply-chain context, not as a coded policy event."
   }
 ]

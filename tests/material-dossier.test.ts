@@ -106,6 +106,7 @@ test("designations, projects and projects with no designation, per material; the
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
     lithium: [0, 0, 0],
+    cobalt: [4, 5, 1],
   };
   for (const slug of slugs) {
     const p = dossier(slug);
@@ -315,7 +316,7 @@ test("a part whose package does not name the material stands alone, with a note 
 
 test("each row carries the one scope label its precedence gives", () => {
   const p = dossier("tungsten");
-  assert.equal(findRow(p, "fin-au-cmpti-2025-production-tax-offset")!.scope, "names 11 materials; the amount is not divided");
+  assert.equal(findRow(p, "fin-au-cmpti-2025-production-tax-offset")!.scope, "names 12 materials; the amount is not divided");
   assert.equal(findRow(p, "fin-ca-pdac-2026-nb-granitoids-cmgd")!.scope, "names 2 materials; the amount is not divided");
   assert.equal(findRow(p, "fin-uk-nwf-2026-tungsten-west-package")!.scope, "also covers materials outside the tracked set");
   assert.equal(findRow(p, "fin-jp-jogmec-almt-tungsten-grant")!.scope, "names Tungsten only");

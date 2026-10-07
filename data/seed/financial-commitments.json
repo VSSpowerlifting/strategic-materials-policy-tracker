@@ -469,7 +469,8 @@
       "praseodymium",
       "terbium",
       "tungsten",
-      "lithium"
+      "lithium",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
@@ -477,7 +478,6 @@
       "beryllium",
       "bismuth",
       "chromium",
-      "cobalt",
       "fluorine",
       "hafnium",
       "high purity alumina",
@@ -925,11 +925,11 @@
     ],
     "stageAllocation": "single_stage",
     "materialIds": [
-      "rare-earth-elements"
+      "rare-earth-elements",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
-      "cobalt",
       "nickel"
     ],
     "financialStatusHistory": [
@@ -1134,11 +1134,11 @@
     "stageAllocation": "single_stage",
     "materialIds": [
       "rare-earth-elements",
-      "graphite"
+      "graphite",
+      "cobalt"
     ],
     "materialAttribution": "includes_untracked",
     "untrackedMaterialsAsStated": [
-      "cobalt",
       "nickel"
     ],
     "financialStatusHistory": [

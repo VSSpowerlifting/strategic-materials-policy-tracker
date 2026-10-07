@@ -65,7 +65,7 @@ test("Canadian ICA divestiture controls are promoted from untracked lithium to t
     "ctl-ca-ica-2022-divest-zangge-ultra-lithium",
   ]) {
     const row = getControlMeasureById(id)!;
-    assert.deepEqual(row.materialIds, ["lithium"]);
+    assert.ok(row.materialIds.includes("lithium"));
     assert.equal(row.materialAttribution, "tracked_only");
     assert.deepEqual(row.untrackedMaterialsAsStated, []);
   }
@@ -95,17 +95,18 @@ test("existing Australian and Canadian financial rows promote lithium without in
 
 test("China No. 58 is a lithium supply-chain control, not a raw-lithium export restriction", () => {
   const row = getControlMeasureById("ctl-cn-58-2025-battery-cathode-licensing")!;
-  assert.deepEqual(row.materialIds, ["lithium"]);
+  assert.ok(row.materialIds.includes("lithium"));
+  assert.ok(row.materialIds.includes("cobalt"));
   assert.deepEqual(row.controlledStages, ["component_manufacturing"]);
   assert.equal(row.materialAttribution, "includes_untracked");
   assert.ok(row.untrackedMaterialsAsStated.some((item) => item.includes("三元正极材料")));
   assert.match(
     row.evidence.find((entry) => entry.supports.includes("item_scope"))?.note ?? "",
-    /does not mean the measure controls raw lithium/,
+    /Neither attribution means the measure controls raw lithium or raw cobalt/,
   );
 
   const event = getEventById("evt-cn-mofcom-58-2025")!;
-  assert.match(event.analyticalSignificance, /Lithium and graphite now touch tracked materials/);
+  assert.match(event.analyticalSignificance, /Lithium, cobalt and graphite now touch tracked materials/);
   assert.match(event.analyticalSignificance, /suspended before its start date/);
 });
 
