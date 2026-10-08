@@ -5,7 +5,7 @@ import { execFileSync } from "node:child_process";
 import {
   DOE_CMEI_LISTING_0, DOE_CMEI_LISTING_1, DOE_CMEI_EXAMPLES,
   parseDoeListingForensics, parseDoeArticleForensics, runDoeCmeiPreflight,
-} from "@/lib/doe-cmei-forensics";
+} from "@/scripts/doe-cmei-forensics";
 
 const link0 = "https://www.energy.gov/cmei/articles/does-office-critical-minerals-and-energy-innovation-announces-295-million-national";
 const link1 = "https://www.energy.gov/cmei/articles/energy-department-launches-16-million-prize-grow-mining-and-critical-minerals";
