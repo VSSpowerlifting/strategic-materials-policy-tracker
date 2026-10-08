@@ -113,7 +113,7 @@ export function readDoeShadowState(raw:unknown):DoeShadowStateV1 {
   };
 }
 function validateGate(g:DoeCoverageGate,prev:DoeShadowStateV1):void {
-  if(!utc(g.observedAt)||g.observedAt<=prev.lastSuccessfulAt||
+  if(!utc(g.observedAt)||Date.parse(g.observedAt)<=Date.parse(prev.lastSuccessfulAt)||
      g.fullBodyBoundaryCertified!==true||g.sourceUseApproved!==true||
      g.sourceWindowComplete!==true||g.originalArticleHeadersVerified!==true||
      g.publisherPagesVerified!==2||g.priorStateRecoveredFromIndependentArtifact!==true||
@@ -149,9 +149,12 @@ export function previewDoeShadowTransition(
     if(docs[i].row.publicationDate>docs[i-1].row.publicationDate)
       throw Error("DOE source window is not ordered newest-first");
   }
-  if(!duplicates.has(prev.lastLatestId)){
-    // Preserve the last trusted state if the historical rollover exceeds
-    // the bounded window. This is NOT proof there were zero new records.
+  const anchorIndex=docs.findIndex(({id})=>id===prev.lastLatestId);
+  if(anchorIndex===-1||
+     docs.slice(anchorIndex+1).some(({id})=>!Object.prototype.hasOwnProperty.call(prev.seen,id))){
+    // An absent newest anchor or unknown *older* item is a continuity gap.
+    // Unknown older publications may be missing historical state, not new
+    // publisher releases. Fail closed instead of reporting them as new.
     return {
       mode:"shadow_state_transition_preview_only",status:"coverage_gap",
       previousState:prev,proposedState:prev,noStateWritten:true,
