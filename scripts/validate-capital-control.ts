@@ -71,6 +71,7 @@ import {
   type ControlStatusEntry,
   type EvidenceReference,
   type FinancialCommitment,
+  type FinancialAmountVersion,
   type FinancialEvidenceField,
   type FinancialRelationship,
   type InstrumentTerm,
@@ -108,6 +109,7 @@ export const COMMITMENT_FIELD_EVIDENCE: Readonly<
   valueRole: "value_role",
   capitalSource: "capital_source",
   amount: "amount",
+  financialAmountHistory: "amount",
   provider: "provider",
   providerJurisdiction: "provider",
   providerOrgIds: "provider",
@@ -455,6 +457,16 @@ const AMOUNT: Fields<MonetaryAmount> = {
   basisLabel: optionalText(),
 };
 
+const FINANCIAL_AMOUNT_VERSION: Fields<FinancialAmountVersion> = {
+  amount: { kind: "object", name: "historical amount", fields: AMOUNT, nullable: true },
+  effectiveNotBefore: text("date"),
+  effectiveNoLaterThan: text("date"),
+  sourceId: text(),
+  locator: text(),
+  reason: oneOf(["original", "amendment", "correction", "withdrawal", "other"]),
+  note: nullableText(),
+};
+
 const RELATIONSHIP: Fields<FinancialRelationship> = {
   commitmentId: text(),
   relationship: oneOf(FINANCIAL_RELATIONSHIP_TYPES),
@@ -528,6 +540,7 @@ const COMMITMENT: Fields<FinancialCommitment> = {
   valueRole: oneOf(VALUE_ROLES),
   capitalSource: oneOf(CAPITAL_SOURCES),
   amount: { kind: "object", name: "amount", fields: AMOUNT, nullable: true },
+  financialAmountHistory: { ...listOf(objectOf("financial amount version", FINANCIAL_AMOUNT_VERSION)), optional: true },
   provider: nullableText(),
   providerJurisdiction: nullableOneOf(JURISDICTIONS),
   providerOrgIds: listOf(text()),
@@ -1279,6 +1292,35 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
   checkStatusHistory(c.financialStatusHistory, "financialStatusHistory", true, r, refs);
   checkStatusHistory(c.implementationStatusHistory, "implementationStatusHistory", false, r, refs);
 
+  // Fail closed if amount versions cannot establish an operative ordering.
+  const history = c.financialAmountHistory;
+  if (history !== undefined) {
+    if (history.length === 0)
+      r.error("incoherent_value", "financialAmountHistory", "omit the field for unreviewed history or provide a sourced nonempty chain");
+    let previousLatest: string | null = null;
+    let currency: string | null = null;
+    history.forEach((v, i) => {
+      const path = `financialAmountHistory[${i}]`;
+      resolves(v.sourceId, refs.sources, SOURCE, `${path}.sourceId`, r, refs);
+      if (i === 0 && v.reason !== "original")
+        r.error("incoherent_value", `${path}.reason`, "first historical amount must be original");
+      if (isCalendarDate(v.effectiveNotBefore) && isCalendarDate(v.effectiveNoLaterThan)) {
+        if (v.effectiveNotBefore > v.effectiveNoLaterThan)
+          r.error("incoherent_value", `${path}.effectiveNoLaterThan`, "earliest possible day follows latest certain day");
+        if (previousLatest !== null && v.effectiveNotBefore <= previousLatest)
+          r.error("status_chronology", `${path}.effectiveNotBefore`, "amount intervals overlap or are out of chronological order");
+        previousLatest = v.effectiveNoLaterThan;
+      }
+      if (v.amount) {
+        if (currency !== null && currency !== v.amount.currency)
+          r.error("incoherent_value", `${path}.amount.currency`, "a single instrument's historical values must retain their currency");
+        currency = v.amount.currency;
+      }
+    });
+    if (history.length && JSON.stringify(history[history.length - 1].amount) !== JSON.stringify(c.amount))
+      r.error("incoherent_value", "financialAmountHistory", "last amount version must equal canonical current amount");
+  }
+
   c.terms.forEach((term, i) => {
     resolves(term.sourceId, refs.sources, SOURCE, `terms[${i}].sourceId`, r, refs);
     checkTerm(term, `terms[${i}]`, r);
@@ -1293,6 +1335,7 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
   const covered = checkEvidence(c, c.evidence, COMMITMENT_FIELD_EVIDENCE, FINANCIAL_EVIDENCE_FIELDS, r, refs);
   const cited = <T extends { sourceId: string }>(entries: readonly T[], path: string) =>
     entries.map((entry, i) => [entry.sourceId, `${path}[${i}].sourceId`] as const);
+  requireSameSource(covered, "amount", cited(c.financialAmountHistory ?? [], "financialAmountHistory"), r);
   requireSameSource(covered, "relationships", cited(c.relationships, "relationships"), r);
   requireSameSource(
     covered,

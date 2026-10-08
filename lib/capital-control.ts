@@ -54,6 +54,7 @@ import type {
   ControlStatus,
   ControlStatusEntry,
   FinancialCommitment,
+  MonetaryAmount,
   FinancialStatus,
   FinancialStatusEntry,
   JurisdictionCode,
@@ -64,6 +65,37 @@ import type {
 
 export { addDecimals, compareDecimals, formatDecimalCompact, formatMoney, groupDecimal } from "./decimal";
 import { addDecimals } from "./decimal";
+
+// --- F4-A: opt-in operative history, never used by current totals ----------------
+
+export type FinancialAmountOn =
+  | { kind: "quantified"; amount: MonetaryAmount; effectiveNotBefore: string; effectiveNoLaterThan: string; sourceId: string }
+  | { kind: "unquantified"; effectiveNotBefore: string; effectiveNoLaterThan: string; sourceId: string }
+  | { kind: "indeterminate_transition"; earliest: string; latest: string; sourceId: string }
+  | { kind: "not_yet_evidenced" }
+  | { kind: "history_unreviewed"; currentAmount: MonetaryAmount | null };
+
+/**
+ * Date of signing is not necessarily the date of effectiveness. When a
+ * conditional amendment's actual day is unknown, withhold precise historic
+ * amount selection within its source-supported interval rather than guessing.
+ */
+export function financialAmountOn(c: FinancialCommitment, asOf: string): FinancialAmountOn {
+  const versions = c.financialAmountHistory;
+  if (!versions?.length) return { kind: "history_unreviewed", currentAmount: c.amount };
+  let chosen: (typeof versions)[number] | null = null;
+  for (const version of versions) {
+    if (asOf < version.effectiveNotBefore) break;
+    if (asOf < version.effectiveNoLaterThan)
+      return { kind: "indeterminate_transition", earliest: version.effectiveNotBefore, latest: version.effectiveNoLaterThan, sourceId: version.sourceId };
+    chosen = version;
+  }
+  if (chosen === null) return { kind: "not_yet_evidenced" };
+  const { effectiveNotBefore, effectiveNoLaterThan, sourceId } = chosen;
+  return chosen.amount === null
+    ? { kind: "unquantified", effectiveNotBefore, effectiveNoLaterThan, sourceId }
+    : { kind: "quantified", amount: chosen.amount, effectiveNotBefore, effectiveNoLaterThan, sourceId };
+}
 
 // --- Status helpers -------------------------------------------------------------
 

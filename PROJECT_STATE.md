@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: F4-A Thacker Pass dated-amount pilot (proposed review)
+
+- Introduces optional, strict, source-linked **financialAmountHistory** and an opt-in pure `financialAmountOn` query; legacy records explicitly return `history_unreviewed` and current totals are unchanged. One reviewed loan: **Thacker Pass ~US$2.26B original 2024-10-28** versus **~US$2.23B amended 2025**.
+- Contemporaneous [October 7 2025 SEC 8-K](https://www.sec.gov/Archives/edgar/data/1966983/000119312525233937/d10878d8k.htm) states amendment effectiveness depended on conditions precedent, with first advance October 20. The exact operative transition day is not proven: **October 7–19 historical requests fail closed as `indeterminate_transition`**, not an invented October 7 effective date.
+- Does not create a loan, import draws, change current sums/exports/UI, or touch EXIM, Thompson Falls #85, or the F4 RFC #86. Review independent tests and PR before merging.
+
 ## 2026-10-08: M2.3 EXIM private local editorial sync candidate
 
 - **Prior gates:** M2.1 persisted EXIM first baseline [37800436243](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37800436243) and state-restored replay [37801575996](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37801575996) both healthy (20 releases, no coverage gaps, 0 new/revised in replay). M2.2 reliability PR #87 merged at `feb77f0`; [post-merge CI 37804408191](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37804408191) passed. Scheduled-run 7/14/30-day maturity not yet established.
