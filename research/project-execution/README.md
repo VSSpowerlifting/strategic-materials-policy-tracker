@@ -34,3 +34,17 @@ Run `npm run audit:project-execution-pilot -- --json` locally. It reports source
 ## Source-integrity note
 
 The research queue references source IDs in SMPT's current registry rather than inventing new citations. The original wording is a short review anchor. The live government and corporate pages remain the editorial sources of authority; their content can change after access. Because the audit does not fetch remote publishers and contains no source-content hash, **it is not a substitute for a full source reread at promotion time**.
+
+## M3.2b local adjudication handoff (non-publishing)
+
+The four-source review queue now has a strictly isolated, **human-only decision input**. None of the following automates primary-source verification, and no approval fields are filled out by the tool itself.
+
+1. Read the complete original publisher article or government programme entry, not just the short `statementOriginal` anchor. Check dates, named subprojects, exact scope, quote, and whether the assertion is an observed fact rather than a future target. Document any contradictions independently.
+2. Copy `research/project-execution/m3-2-adjudications.example.json` to `.project-execution-review/adjudications.json`. This directory is intentionally gitignored. The checked-in example is **all pending**, with no invented reviewer, approval date, source checks or milestone IDs.
+3. For each case, set `verdict` to `approved`, `rejected`, or `needs_more_evidence` only after a genuine review. Use the real human reviewer name and date; give an evidence-specific rationale. For an approved case, explicitly complete five factual checks and propose a unique `mil-...` ID. A checkbox is a human assertion, **not proof of its truth**.
+4. Run `npm run audit:project-execution-adjudications` locally. For a safe test of the tool without filling in decisions, run `npm run audit:project-execution-adjudications -- --file research/project-execution/m3-2-adjudications.example.json`.
+5. The tool shows **non-publishing previews** only for technically valid, independently reviewed candidates. An approval for the taxonomy-blocked INL or Burntlog cases cannot override their schema barriers. Duplicate IDs, incomplete checklists, missing reviewer identity, invalid dates, or source-contract violations block the preview.
+6. Reviews completed after `site.lastUpdated` are intentionally **blocked**, not backdated. Updating the corpus cutoff is a separate, explicit maintainer action at the actual publication phase; a preview does not authorize that change.
+7. Even a clean preview is **not permission to publish**. An editor separately reviews and approves the final factual milestone and authorizes a distinct publication PR that adds `mil-...` seed records, updates the real corpus date, reruns validation, and checks site and financial-response invariants. Do not copy any local adjudication file into GitHub.
+
+**Editorial outcomes as of October 8:** Alcoa Wagerup and Cyclic Extended Operations are proposals eligible for independent human review; INL prototype demonstration and Stibnite's Burntlog access-road construction remain taxonomy blocked. This is **not** a claim that any human has yet approved the candidates.

@@ -99,3 +99,6 @@ data/candidates/*.json
 .monitor-doe-structured/
 # Nonpersistent DOE experimental source-body diagnostics (no scanner state)
 .monitor-doe-body-proof/
+
+# Local M3 execution-evidence human reviews and source notes (never in git)
+.project-execution-review/
