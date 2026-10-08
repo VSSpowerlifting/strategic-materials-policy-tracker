@@ -70,7 +70,8 @@ const eximUrl = (url: string): boolean => {
   try {
     const u = new URL(url);
     return u.origin === "https://www.exim.gov" &&
-      /^\\/news\\/[a-z0-9][a-z0-9-]*$/.test(u.pathname) &&
+      u.pathname.startsWith("/news/") &&
+      /^[a-z0-9][a-z0-9-]*$/.test(u.pathname.slice(6)) &&
       !u.search && !u.hash && !u.username && !u.password;
   } catch { return false; }
 };
