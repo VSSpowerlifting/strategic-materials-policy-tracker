@@ -41,6 +41,7 @@ export type DoePage = {
   htmlDigestSha256: string;
   headingHint: string | null;
   anchorCandidates: { url: string; titleHint: string }[];
+  outsideMainArticleHints: { url: string; titleHint: string }[];
   unpairedVisibleDateHints: string[];
   notes: string[];
 };
@@ -108,36 +109,54 @@ export function parseDoeListingForensics(
   hostOnly(finalUrl);
   if (Buffer.byteLength(html, "utf8") > MAX_HTML_BYTES || !/<html\b/i.test(html))
     throw Error("DOE listing missing valid bounded HTML");
-  const candidates = new Map<string, string>();
-  for (const a of html.matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)) {
-    const href = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(a[1]);
-    const rawHref = (href?.[1] ?? href?.[2] ?? "").replace(/&amp;/gi, "&");
-    if (!rawHref) continue;
-    let link: URL;
-    try { link = hostOnly(new URL(rawHref, finalUrl).toString()); }
-    catch { continue; }
-    // These include page navigation/other-office candidates. NONE are
-    // certified article cards merely by their publisher path.
-    if (!/^\/(?:cmei\/articles|articles)\/[a-z0-9][a-z0-9-]+\/?$/i.test(link.pathname))
-      continue;
-    const text = visible(a[2]);
-    if (text.length < 12 || text.length > 500) continue;
-    link.hostname = "www.energy.gov";
-    link.search = "";
-    link.hash = "";
-    link.pathname = link.pathname.replace(/\/$/, "");
-    const key = link.toString();
-    if (!candidates.has(key)) candidates.set(key, text);
+  // The DOE HTML has non-listing headline anchors in site chrome. Only
+  // analyze the unique document <main> region, and preserve off-main
+  // headline shapes separately as diagnostic hints. We deliberately do not
+  // certify an article card/date pair merely by its position inside main.
+  const mains = [...html.matchAll(/<main\b[^>]*>([\s\S]*?)<\/main\s*>/gi)];
+  if (mains.length !== 1)
+    throw Error("DOE listing lacks a single bounded <main> region; refuse unspecific anchor extraction");
+  const mainHtml = mains[0][1];
+  function anchors(fragment: string): Map<string, string> {
+    const candidates = new Map<string, string>();
+    for (const a of fragment.matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)) {
+      const href = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(a[1]);
+      const rawHref = (href?.[1] ?? href?.[2] ?? "").replace(/&amp;/gi, "&");
+      if (!rawHref) continue;
+      let link: URL;
+      try { link = hostOnly(new URL(rawHref, finalUrl).toString()); }
+      catch { continue; }
+      // A CMEI-filtered list can legitimately contain /articles/ as well as
+      // /cmei/articles/. Path prefix alone must NEVER certify a listing row.
+      if (!/^\/(?:cmei\/articles|articles)\/[a-z0-9][a-z0-9-]+\/?$/i.test(link.pathname))
+        continue;
+      const text = visible(a[2]);
+      if (text.length < 12 || text.length > 500) continue;
+      link.hostname = "www.energy.gov";
+      link.search = "";
+      link.hash = "";
+      link.pathname = link.pathname.replace(/\/$/, "");
+      const key = link.toString();
+      if (!candidates.has(key)) candidates.set(key, text);
+    }
+    return candidates;
   }
+  const allArticleLinks = anchors(html);
+  const mainArticleLinks = anchors(mainHtml);
+  const outsideMainArticleHints = [...allArticleLinks]
+    .filter(([url]) => !mainArticleLinks.has(url)).slice(0, 20)
+    .map(([url, titleHint]) => ({ url, titleHint }));
   return {
     requestedUrl, finalUrl, status,
     bytes: Buffer.byteLength(html, "utf8"),
-    htmlDigestSha256: sha(html), headingHint: title(html),
-    anchorCandidates: [...candidates].slice(0, 80)
+    htmlDigestSha256: sha(html), headingHint: title(mainHtml),
+    anchorCandidates: [...mainArticleLinks].slice(0, 80)
       .map(([url, titleHint]) => ({ url, titleHint })),
-    unpairedVisibleDateHints: dateHints(html),
+    outsideMainArticleHints,
+    unpairedVisibleDateHints: dateHints(mainHtml),
     notes: [
-      "Official-host article-path candidates are not scoped to a verified article-card container.",
+      "Only candidate article paths inside the single main region are counted; off-main news-link hints are excluded.",
+      "The main region may still contain sidebar/featured links; result-card boundary has NOT been verified.",
       "Visible date hints are not bound to specific titles; no date/issuer/identity accepted.",
       "HTML digest includes layout and navigation; it is NOT an article-content revision fingerprint.",
     ],
