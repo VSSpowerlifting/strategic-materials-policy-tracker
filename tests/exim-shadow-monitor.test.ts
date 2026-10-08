@@ -103,8 +103,13 @@ test("EXIM official Meeting Minutes section is not a dated news release", async 
   assert.throws(() => parseEximNewsListing(unknown),
     /no nearby official publication date: https:\/\/www\.exim\.gov\/news\/unverified-board-statement/);
   const result = await runEximShadow(null, stamp, true,
-    mock(five).fn);
+    (async (url: string) => new Response(
+      url.includes("?page=") ? withCategory :
+        article(Number(new URL(url).pathname.match(/(\d+)$/)?.[1])),
+      { status: 200 },
+    )) as typeof fetch);
   assert.equal(result.report.health, "ok");
+  assert.equal(result.report.observed, 5);
   assert.ok(result.state);
   assert.equal(result.report.newCount, 0);
 });
