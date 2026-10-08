@@ -6,6 +6,7 @@
 import { createHash } from "node:crypto";
 import type { CandidateRecord } from "../lib/types";
 import { PILOT_SOURCE_IDS } from "../lib/source-monitor";
+import { EXIM_SOURCE_ID } from "../lib/exim-shadow-monitor";
 import type { EditorialReviewQueue, EditorialQueueItem } from "../lib/monitor-editorial-queue";
 
 export const REVIEW_STATUSES = [
@@ -59,8 +60,20 @@ const keyOf = (sourceId: string, observationId: string): string => sourceId + ":
 const validId = (s: unknown): s is string => typeof s === "string" && /^[a-f0-9]{64}$/.test(s);
 const allowedStatus = (s: unknown): s is ReviewStatus =>
   typeof s === "string" && (REVIEW_STATUSES as readonly string[]).includes(s);
-const pilotSource = (id: unknown): id is string =>
-  typeof id === "string" && (PILOT_SOURCE_IDS as readonly string[]).includes(id);
+const watchedSource = (id: unknown): id is string =>
+  typeof id === "string" && (id === EXIM_SOURCE_ID ||
+    (PILOT_SOURCE_IDS as readonly string[]).includes(id));
+const sourceAllowed = (id: unknown, origin: "m1" | "exim"): id is string =>
+  origin === "exim" ? id === EXIM_SOURCE_ID :
+    typeof id === "string" && (PILOT_SOURCE_IDS as readonly string[]).includes(id);
+const eximUrl = (url: string): boolean => {
+  try {
+    const u = new URL(url);
+    return u.origin === "https://www.exim.gov" &&
+      /^\\/news\\/[a-z0-9][a-z0-9-]*$/.test(u.pathname) &&
+      !u.search && !u.hash && !u.username && !u.password;
+  } catch { return false; }
+};
 const httpsUrl = (url: unknown): url is string => {
   if (typeof url !== "string" || url.length > 2048) return false;
   try {
@@ -90,10 +103,11 @@ export function parsePrivateEditorialLedger(raw: unknown): PrivateEditorialLedge
   }
   const keys = new Set<string>();
   for (const item of raw.items) {
-    if (!isObject(item) || !pilotSource(item.watchSourceId) || !validId(item.observationId) ||
+    if (!isObject(item) || !watchedSource(item.watchSourceId) || !validId(item.observationId) ||
         item.key !== keyOf(item.watchSourceId, item.observationId) || keys.has(item.key) ||
         !iso(item.firstObservedAt) || !iso(item.lastObservedAt) ||
         item.firstObservedAt > item.lastObservedAt || !httpsUrl(item.officialUrl) ||
+        (item.watchSourceId === EXIM_SOURCE_ID && !eximUrl(item.officialUrl)) ||
         !safeText(item.titleAsListed, 600) ||
         !(item.publicationDate === null || (typeof item.publicationDate === "string" && /^\d{4}-\d{2}-\d{2}$/.test(item.publicationDate))) ||
         typeof item.keywordHintOnly !== "boolean" || !Array.isArray(item.exactCitationSourceIds) ||
@@ -116,7 +130,7 @@ export function parsePrivateEditorialLedger(raw: unknown): PrivateEditorialLedge
   return raw as PrivateEditorialLedger;
 }
 
-function validatedQueue(q: unknown): asserts q is EditorialReviewQueue {
+function validatedQueue(q: unknown, origin: "m1" | "exim"): asserts q is EditorialReviewQueue {
   if (!isObject(q) || q.version !== 1 || q.mode !== "shadow_unverified_editorial_queue" ||
       !iso(q.observedAt) || !Array.isArray(q.items) ||
       !Number.isInteger(q.countNew) || !Number.isInteger(q.countRevised) ||
@@ -124,7 +138,8 @@ function validatedQueue(q: unknown): asserts q is EditorialReviewQueue {
   const seen = new Set<string>();
   let countNew = 0, countRevised = 0;
   for (const r of q.items) {
-    if (!isObject(r) || !pilotSource(r.watchSourceId) || !validId(r.observationId) ||
+    if (!isObject(r) || !sourceAllowed(r.watchSourceId, origin) || !validId(r.observationId) ||
+        (origin === "exim" && (!httpsUrl(r.officialUrl) || !eximUrl(r.officialUrl))) ||
         !iso(r.observedAt) || r.observedAt !== q.observedAt ||
         !["new", "revised"].includes(String(r.change)) ||
         !httpsUrl(r.officialUrl) || !safeText(r.titleAsListed, 600) ||
@@ -145,9 +160,10 @@ export function importReviewQueue(
   queueUnknown: unknown,
   runId: string,
   rawArtifactContents: string,
+  origin: "m1" | "exim" = "m1",
 ): ImportResult {
   const existing = parsePrivateEditorialLedger(structuredClone(current));
-  validatedQueue(queueUnknown);
+  validatedQueue(queueUnknown, origin);
   const queue = queueUnknown;
   if (!/^\d+$/.test(runId)) throw Error("Import requires numeric GitHub Actions run ID");
   const sha256 = createHash("sha256").update(rawArtifactContents).digest("hex");
@@ -230,7 +246,9 @@ export function beginCandidate(
     throw Error("Invalid or reused candidate ID");
   if (!safeText(by, 160) || !iso(at) || at < item.firstObservedAt)
     throw Error("Candidate handoff requires named reviewer and valid UTC time");
-  const jurisdiction = item.watchSourceId === "watch-ca-nrcan-news" ? "canada" : "us";
+  const jurisdiction = item.watchSourceId === "watch-ca-nrcan-news" ? "canada" :
+    item.watchSourceId === "watch-us-federal-register-interior" || item.watchSourceId === EXIM_SOURCE_ID ? "us" :
+      (() => { throw Error("Unrecognized source jurisdiction for candidate handoff"); })();
   const candidate: CandidateRecord = {
     candidateId, status: "draft", createdBy: by.trim(), createdAt: at.slice(0, 10),
     proposedEvent: {
