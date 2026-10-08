@@ -1086,21 +1086,26 @@ export type Organization = {
  * No amount, financier or implicit whole-project status is stored here.
  * Planned targets have targetOn, never occurredOn. Null dates remain unknown.
  */
+export const PROJECT_MILESTONE_KINDS = [
+  "feasibility_completed",
+  "groundbreaking_reported",
+  "construction_started",
+  "commissioning_started",
+  "operations_started",
+  "production_reported",
+  "operations_suspended",
+  "project_cancelled",
+  "funded_activity_completed",
+] as const;
+export const PROJECT_MILESTONE_MODES = ["occurred", "planned"] as const;
+export const PROJECT_MILESTONE_SCOPES = ["whole_project", "named_facility", "funded_activity"] as const;
+
 export type ProjectMilestone = {
   id: string;
   projectId: string;
-  kind:
-    | "feasibility_completed"
-    | "groundbreaking_reported"
-    | "construction_started"
-    | "commissioning_started"
-    | "operations_started"
-    | "production_reported"
-    | "operations_suspended"
-    | "project_cancelled"
-    | "funded_activity_completed";
-  claimMode: "occurred" | "planned";
-  scope: "whole_project" | "named_facility" | "funded_activity";
+  kind: (typeof PROJECT_MILESTONE_KINDS)[number];
+  claimMode: (typeof PROJECT_MILESTONE_MODES)[number];
+  scope: (typeof PROJECT_MILESTONE_SCOPES)[number];
   scopeAsStated: string | null;
   /** An explicitly sourced event date; never a press-release date substituted for it. */
   occurredOn: string | null;
