@@ -16,7 +16,10 @@ export type DoeCmeiRow = {
   officialUrl: string;
   title: string;
   publicationDate: string;
-  issuingOffice: string;
+  /** The exact publisher-rendered label, never inferred from the filter. */
+  attributionAsListed: "Office of Critical Minerals and Energy Innovation" | "Energy.gov";
+  /** A sitewide Energy.gov label is NOT evidence of a specific issuing office. */
+  issuingOffice: string | null;
   documentType: string;
 };
 export type DoeCmeiHeader = {
@@ -176,16 +179,24 @@ export function parseDoeStructuredListing(html: string, requestedUrl: string): D
     if (title.length < 12 || title.length > 500)
       throw Error("DOE listing title has invalid length");
     const dateRaw = text(uniqueTagged(card, "div", "collection-item__date"));
-    const officeRaw = text(uniqueTagged(card, "div", "collection-item__office"));
-    if (officeRaw !== "Office of Critical Minerals and Energy Innovation")
-      throw Error("DOE CMEI filtered row lacks verified issuing office");
+    const attribution = text(uniqueTagged(card, "div", "collection-item__office"));
+    // The original DOE filtered CMEI page explicitly mixes CMEI-credited
+    // releases and DOE-wide ("Energy.gov") press releases. The listing
+    // filter is not a substitute for the per-publication issuing office.
+    // Unknown labels still fail closed: do not normalize away evidence.
+    if (attribution !== "Office of Critical Minerals and Energy Innovation" &&
+        attribution !== "Energy.gov")
+      throw Error("DOE filtered row has unexpected publisher attribution: " +
+        JSON.stringify(attribution.slice(0, 120)));
     const typ = text(uniqueTagged(card, "div", "collection-item__icon_type"));
     if (!typ || typ.length > 120)
       throw Error("DOE filtered row lacks publisher document type");
     if (seen.has(canonical)) throw Error("DOE duplicate official publication URL in index");
     seen.add(canonical);
     rows.push({officialUrl:canonical, title, publicationDate:date(dateRaw),
-      issuingOffice:officeRaw, documentType:typ});
+      attributionAsListed: attribution,
+      issuingOffice: attribution === "Energy.gov" ? null : attribution,
+      documentType:typ});
   }
   for (let i = 1; i < rows.length; i++) {
     if (rows[i].publicationDate > rows[i-1].publicationDate)
@@ -238,6 +249,11 @@ export function compareDoeOfficialHeader(
   if (listed.officialUrl !== header.officialUrl ||
       listed.title.normalize("NFKC").trim() !== header.title.normalize("NFKC").trim() ||
       listed.publicationDate !== header.publicationDate ||
-      listed.issuingOffice !== header.issuingOffice)
+      (listed.issuingOffice !== null &&
+        listed.issuingOffice !== header.issuingOffice))
     throw Error("DOE official article headline/date/issuer mismatches its listed source card");
+  // When the index says "Energy.gov" there is NO validated listed-office
+  // comparison available. The individual publisher article's primary-office
+  // is the only allowable source of issuer evidence; never backfill CMEI
+  // from a listing filter or mark its office as verified here.
 }

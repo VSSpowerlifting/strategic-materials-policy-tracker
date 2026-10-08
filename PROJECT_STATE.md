@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: DOE M2.7b listing-source attribution repair candidate
+
+- **Verified live failure:** [structured validation #37824471003](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37824471003) on M2.7a merge `2880104` failed on the next, *different* gate: `DOE CMEI filtered row lacks verified issuing office` on both index pages. No source collection, editorial promotion or finance mutation occurred. M2.7a's nested-list repair advanced parsing beyond the prior ten-card mismatch.
+- **Real DOE publisher behavior:** both CMEI-filtered index pages mix items labeled `Office of Critical Minerals and Energy Innovation` with items labeled `Energy.gov` (15 CMEI/5 sitewide in the October 8 snapshot); page 1 includes a `Blog` among press releases. CMEI **filter membership is not evidence** that a sitewide-labeled item was issued by CMEI. Direct publisher links: `https://www.energy.gov/collection/view?page=0&paragraph=822121` and `?page=1&paragraph=822121`.
+- **M2.7b candidate:** permit only those two observed per-item attribution labels, retaining exact `attributionAsListed`, with `issuingOffice:null` for `Energy.gov` entries. Keep strict per-card URL/title/date/type, exact source host, ten cards/page and pagination checks. Independently parse original article headers if the index fails, recording a red card-match error rather than hiding further issues. See `docs/monitoring/m2-7b-doe-sitewide-attribution-boundary-2026-10-08.md`.
+- **Gate:** exact-head CI, human review/merge, then new manually dispatched M2.7 structured live run. Demand 2 valid pages, 20 publisher-bound rows, zero URL overlap and all three original headers. Until separately demonstrated, `bodyBoundaryConfirmed:false` and `enabledForMonitoring:false`; no EXIM/M1 state or financing/policy records changed.
+
 ## 2026-10-08: M3.1 project execution evidence foundation — draft isolated branch
 
 - New source-scoped ProjectMilestone type and **empty** project-milestones seed. Read-only loaders do not alter public API, exports, search or UI.

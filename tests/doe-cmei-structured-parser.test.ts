@@ -52,11 +52,52 @@ test("read publisher-bound DOE rows; exclude global nav and preserve official /a
  const r=parseDoeStructuredListing(listing(page0),base);
  assert.equal(r.length,10);
  assert.deepEqual(r[0],{officialUrl:sampleUrl,title:sampleTitle,publicationDate:"2026-09-30",
+  attributionAsListed:"Office of Critical Minerals and Energy Innovation",
   issuingOffice:"Office of Critical Minerals and Energy Innovation",documentType:"Press Release"});
  assert.equal(r[1].officialUrl,"https://www.energy.gov/articles/some-broader-doe-official-link");
  assert.equal(r.some(x=>x.officialUrl.includes("global-unrelated")),false);
  assert.equal(r.every(x=>x.publicationDate==="2026-09-30"),true);
 });
+test("filtered CMEI index retains actual Energy.gov labels without inventing issuer",()=>{
+ const source=listing(page0);
+ // Two types of labels both appear in the REAL DOE filtered index; an
+ // "Energy.gov" label does not imply CMEI was its issuing organization.
+ const changed=source.replace(
+  '<div class="collection-item__office"><span>Office of Critical Minerals and Energy Innovation</span>',
+  '<div class="collection-item__office"><span>Energy.gov</span>',
+ );
+ const records=parseDoeStructuredListing(changed,base);
+ assert.equal(records[0].attributionAsListed,"Energy.gov");
+ assert.equal(records[0].issuingOffice,null);
+ assert.equal(records[1].issuingOffice,"Office of Critical Minerals and Energy Innovation");
+ assert.equal(records.length,10);
+ assert.equal(records[0].publicationDate,"2026-09-30");
+ // A publisher date/title/URL still must agree even for a sitewide-labeled
+ // row; compare also checks the original article primary-office directly.
+ const header=parseDoeStructuredArticleHeader(article(),sampleUrl);
+ compareDoeOfficialHeader(records[0],header);
+ assert.throws(()=>compareDoeOfficialHeader(records[0],
+  parseDoeStructuredArticleHeader(article("September 29, 2026"),sampleUrl)),/mismatches/);
+});
+
+test("actual mix of sitewide and CMEI labels on both pages stays explicit and source-safe",()=>{
+ const makeMixed=(ids:number[], date:string, broad:Set<number>)=>
+  '<html><body><main><h1>Latest News</h1>' +
+  '<ul class="collection--page">'+ids.map(i=>row(i,date,
+    broad.has(i)?"Energy.gov":"Office of Critical Minerals and Energy Innovation")).join("")+
+  '</ul></main></body></html>';
+ // DOE's live pages include sitewide-labeled press releases within the
+ // CMEI-filtered listing. They are SOURCE ROWS but not office-verified CMEI.
+ const a=parseDoeStructuredListing(makeMixed(page0,"September 30, 2026",new Set([4,8,9])),base);
+ const b=parseDoeStructuredListing(makeMixed(page1,"August 14, 2026",new Set([14,18])),older);
+ validateDoePagination(a,b);
+ const all=[...a,...b];
+ assert.equal(all.filter(x=>x.attributionAsListed==="Energy.gov").length,5);
+ assert.equal(all.filter(x=>x.issuingOffice===null).length,5);
+ assert.equal(all.filter(x=>x.issuingOffice!==null).length,15);
+ assert.ok(all.every(x=>x.documentType==="Press Release"));
+});
+
 test("nested outer DOE lists do not swallow verified collection--page cards",()=>{
  const raw=listing(page0);
  // The old /<ul>...<\/ul>/ global iterator consumed a surrounding UL
@@ -95,7 +136,7 @@ test("unbalanced and duplicated DOE collection wrappers remain fail closed",()=>
 test("listing rejects missing items, duplicate paths, off-office and invalid date",()=>{
  assert.throws(()=>parseDoeStructuredListing(listing(page0.slice(0,9)),base),/ten explicit/);
  assert.throws(()=>parseDoeStructuredListing(listing([...page0.slice(0,9),0]),base),/duplicate official/);
- assert.throws(()=>parseDoeStructuredListing(listing(page0).replace('<div class="collection-item__office"><span>Office of Critical Minerals and Energy Innovation</span>', '<div class="collection-item__office"><span>Other DOE Office</span>'),base),/issuing office/);
+ assert.throws(()=>parseDoeStructuredListing(listing(page0).replace('<div class="collection-item__office"><span>Office of Critical Minerals and Energy Innovation</span>', '<div class="collection-item__office"><span>Other DOE Office</span>'),base),/unexpected publisher attribution/);
  assert.throws(()=>parseDoeStructuredListing(listing(page0,"February 30, 2026"),base),/impossible/);
  assert.throws(()=>parseDoeStructuredListing(listing(page0).replace("collection-item__date","changed-date"),base),/date field/);
  assert.throws(()=>parseDoeStructuredListing(listing(page0).replace("collection--page","changed-list"),base),/collection--page/);
