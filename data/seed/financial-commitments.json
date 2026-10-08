@@ -4009,7 +4009,13 @@
     "instrument": "loan",
     "valueRole": "commitment",
     "capitalSource": "public_enterprise",
-    "amount": null,
+    "amount": {
+      "value": "18000000",
+      "currency": "EUR",
+      "qualifier": "exact",
+      "amountAsStated": "€18,000,000 signed 20 December 2024",
+      "currencyBasis": "stated"
+    },
     "provider": "European Investment Bank (supported by InvestEU)",
     "providerJurisdiction": "eu",
     "providerOrgIds": [
@@ -4017,29 +4023,38 @@
     ],
     "legalAuthority": null,
     "programmeId": null,
-    "recipient": "UpCatalyst",
+    "recipient": "UP CATALYST OU",
     "recipientOrgIds": [
       "org-up-catalyst"
     ],
-    "project": "Strategic Project UpCatalyst (processing of graphite)",
-    "projectId": "prj-ee-co2graphite",
+    "project": "UP CATALYST GREEN GRAPHITE (IEU GT2): Gen 4 reactors and R&D",
+    "projectId": null,
     "facility": null,
-    "locations": [],
-    "stages": [
-      "processing"
+    "locations": [
+      {
+        "countryCode": "EE",
+        "subnational": null,
+        "asStated": "Estonia"
+      }
     ],
-    "stageAllocation": "single_stage",
+    "stages": [
+      "processing",
+      "research_development"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
     "materialIds": [
       "graphite"
     ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "multi-walled carbon nanotubes (MWCNTs)"
+    ],
     "financialStatusHistory": [
       {
         "status": "contracted",
-        "date": null,
-        "sourceId": "src-ec-resourceeu-com-945",
-        "note": "\"the EIB has already provided financing to the Strategic Projects UpCatalyst ... and Keliber ... via loan agreements\"; no date or amount is stated."
+        "date": "2024-12-20",
+        "sourceId": "src-eib-up-catalyst-green-graphite-20240127",
+        "note": "EIB project 20240127 lists €18,000,000 signed on 20 December 2024. This establishes signature, not disbursement."
       }
     ],
     "implementationStatusHistory": [],
@@ -4047,32 +4062,37 @@
     "outcomes": [],
     "evidence": [
       {
-        "sourceId": "src-ec-resourceeu-com-945",
+        "sourceId": "src-eib-up-catalyst-green-graphite-20240127",
         "supports": [
           "instrument",
           "value_role",
           "capital_source",
+          "amount",
           "provider",
           "recipient",
+          "project",
+          "location",
           "stages",
           "materials",
           "status"
         ],
         "evidence": "explicit",
-        "locator": "Section 2.1, third paragraph",
-        "note": null
+        "locator": "Signature(s); Summary sheet; Description; Additionality and Impact",
+        "note": "The EIB record gives the exact signed amount/date, promoter UP CATALYST OU, venture-debt form, InvestEU backing and two Gen 4 graphite/MWCNT reactors plus R&D; it shows no drawdown."
       },
       {
         "sourceId": "src-ec-resourceeu-com-945",
         "supports": [
-          "project"
+          "provider",
+          "recipient",
+          "materials"
         ],
-        "evidence": "ambiguous",
+        "evidence": "explicit",
         "locator": "Section 2.1, third paragraph",
-        "note": "The Communication names \"the Strategic Projects UpCatalyst (processing of graphite)\" after its promoter; the one Strategic Project UP Catalyst promotes is CO2Graphite (Decision C(2025) 1904, annex entry (11))."
+        "note": "The December 2025 plan retrospectively mentions the EIB financing and the company's CRMA Strategic Project; it does not establish full allocation of the 2024 loan to CO2Graphite."
       }
     ],
-    "notes": "No amount is stated for UpCatalyst, so this row sums nothing. The same Commission passage also names the Keliber lithium loan; Keliber is now separately coded as fin-eu-eib-2024-keliber-loan from the EIB's primary transaction sources."
+    "notes": "€18M of EIB venture debt signed in December 2024 for Up Catalyst's Generation 4 synthetic graphite and MWCNT demonstrator reactors and corporate R&D. The EIB's approximately €46M total project cost is not a second bank commitment. Neither drawdown nor construction of the Gen 4 reactors is established. The 2025 RESourceEU event retrospectively cites this earlier financing. The CRMA-designated CO2Graphite project (prj-ee-co2graphite) shares promoter and material, but reviewed primary sources do not show that the entire EIB financing is allocable to that designation; projectId is intentionally null. Financing also covers untracked MWCNTs and R&D, with no allocation breakdown. The same RESourceEU passage mentions a separate earlier financing: Keliber's EIB loan is independently recorded as fin-eu-eib-2024-keliber-loan, not combined with this UP Catalyst facility."
   },
   {
     "id": "fin-eu-jtf-2025-neo-magnet-project",
