@@ -1,5 +1,15 @@
 # Project state
 
+## 2026-10-07: M1 source-monitoring shadow pilot (draft)
+
+**Status:** `feat/source-monitoring-m1-shadow-pilot-20261007` from merged `main` `316e2306`. Draft, **not merged, not scheduled on main and not deployed**.
+
+- Implements a bounded **read-only, two-source** observation runner for registered Natural Resources Canada Atom releases and Interior Department documents via the Federal Register JSON API. Each source logs healthy/degraded status, stable IDs, title/date/URL revisions, public publication metadata and source timestamps.
+- New `lib/source-monitor.ts`, `scripts/monitor-sources.ts`, `tests/source-monitor.test.ts`, npm command, ignored `.monitor-pilot/`, and `.github/workflows/source-monitor-pilot.yml`. After merging, GitHub Actions exposes a manual Day-0 run and weekly Tuesday 13:17 UTC automatic scans, with a best-effort cached ledger and 30-day read-only artifacts.
+- Missing/evicted cache **bootstraps without claiming new discoveries**; 403/429, other HTTP failures, timeouts, malformed responses and feed-window coverage uncertainty surface explicitly; failure does not erase previous healthy identities. Degraded runs fail their final gate *after* preserving report and state.
+- Data boundary: no new public policy records, private `data/candidates` files, classification, framing, financing, status history, or `lastCheckedAt` writes. `site.monitoringStartedAt` stays null until genuine editorial prospective monitoring/publishing begins. Documentation: `docs/monitoring/m1-read-only-source-pilot-2026-10-07.md`.
+- Merge gates: exact-head validation, typecheck, lint, offline tests and Next.js build; Day-0 **live source access remains unproven** until the first authorized manual workflow dispatch on main. No merge or Vercel deployment automatically performed by this drafting phase.
+
 ## 2026-10-07: Industrial Response Maturity public analysis (draft)
 
 **Status:** `feat/industrial-response-maturity-20261007` branched from `main` at `286e385`, following the merge of #67. **Draft, unmerged and not deployed.**
