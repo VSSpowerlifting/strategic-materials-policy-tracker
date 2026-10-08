@@ -744,6 +744,30 @@ test("a commitment under an envelope is still a commitment: no view folds a part
   for (const id of ["fin-au-alcoa-sojitz-gallium-2025-equity", "fin-au-arafura-nolans-2025-equity"]) assert.ok(flows.some((f) => f.rowIds.includes(id)), `${id} is missing from the flows`);
 });
 
+test("shared project associations are visible but never become project-attributed capital or backers", () => {
+  const project = "prj-ca-vianode-st-thomas";
+  const direct = fin("direct", {
+    projectId: project,
+    providerJurisdiction: "us",
+    providerOrgIds: ["org-direct"],
+    financialStatusHistory: history("contracted"),
+  });
+  const shared = fin("shared", {
+    projectId: null,
+    associatedProjectIds: [project, "prj-na-lofdal"],
+    providerJurisdiction: "canada",
+    providerOrgIds: ["org-shared"],
+    financialStatusHistory: history("contracted"),
+  });
+  const stack = projectStack(project, [direct, shared])!;
+  assert.deepEqual(stack.rows.map((c) => c.id), ["direct"]);
+  assert.deepEqual(stack.associatedRows.map((c) => c.id), ["shared"]);
+  assert.deepEqual(stack.layers.flatMap((l) => l.rows.map((c) => c.id)), ["direct"]);
+  assert.deepEqual(stack.governments, ["us"]);
+  assert.deepEqual(stack.providerOrgIds, ["org-direct"]);
+  assert.ok(!coInvestments([direct, shared]).some((c) => c.project.id === project));
+});
+
 // --- A project's latest physical status ---------------------------------------------------------
 
 const MP10X = "prj-us-mp-10x-facility";

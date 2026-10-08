@@ -91,8 +91,28 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                   : ""}
               </p>
             ) : null}
-            {stack.layers.length ? <LayerStack layers={stack.layers} /> : <p className="text-sm text-muted">No financial row points to this project yet.</p>}
+            {stack.layers.length ? <LayerStack layers={stack.layers} /> : <p className="text-sm text-muted">No financial row is attributable to this project yet.</p>}
           </Section>
+
+          {stack.associatedRows.length ? (
+            <Section
+              index={next()}
+              title="Shared / unallocated financing"
+              description="These rows explicitly support this project and at least one other project, but the source does not allocate the stated amount among them. They are shown for provenance and excluded from this project's capital stack, backers and co-investment."
+            >
+              <Card className="overflow-hidden">
+                {stack.associatedRows.map((c) => (
+                  <Link key={c.id} href={`/capital/${c.id}`} className="group flex flex-col gap-1 border-b px-4 py-3 last:border-b-0 hover:bg-elevated sm:flex-row sm:items-center sm:gap-4">
+                    <span className="min-w-0 flex-1">
+                      <span className="font-display font-semibold group-hover:text-accent">{c.project ?? c.recipient ?? c.id}</span>
+                      <span className="block text-sm text-muted">{c.amount?.amountAsStated ?? "Amount not stated"}</span>
+                    </span>
+                    <span className="font-mono text-[11px] text-faint">shared · unallocated</span>
+                  </Link>
+                ))}
+              </Card>
+            </Section>
+          ) : null}
 
           {stack.designations.length ? (
             <Section index={next()} title="Designations" description="Recognition under a scheme confers standing, not money, and is never counted as capital.">

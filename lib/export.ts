@@ -282,6 +282,8 @@ export function financialCommitmentsCsv(): string {
       // v0.7, appended: the amount's basis where a record states one (blank for every other row).
       "amountBasisLabel",
       "amountBasisNote",
+      // v0.8, appended: non-allocative project links for one unsplit amount spanning several projects.
+      "associatedProjectIds",
     ],
     getAllFinancialCommitments().map((c) => [
       c.id,
@@ -322,6 +324,7 @@ export function financialCommitmentsCsv(): string {
       layerOf(c),
       c.amount?.basisLabel ?? "",
       c.amount?.basisNote ?? "",
+      (c.associatedProjectIds ?? []).join(LIST_SEP),
     ]),
   );
 }
@@ -449,7 +452,7 @@ export function organizationsCsv(): string {
 export function projectsCsv(): string {
   const all = getAllFinancialCommitments();
   return toCsv(
-    ["id", "name", "sponsorOrgIds", "locations", "stages", "materialIds", "materialAttribution", "untrackedMaterialsAsStated", "financialRowIds", "designationIds", "sourceIds", "notes"],
+    ["id", "name", "sponsorOrgIds", "locations", "stages", "materialIds", "materialAttribution", "untrackedMaterialsAsStated", "financialRowIds", "designationIds", "sourceIds", "notes", "associatedFinancialRowIds"],
     getAllProjects().map((p) => [
       p.id,
       p.name,
@@ -463,6 +466,7 @@ export function projectsCsv(): string {
       getAllProjectDesignations().filter((d) => d.projectId === p.id).map((d) => d.id).join(LIST_SEP),
       evidenceSourceIds(p).join(LIST_SEP),
       p.notes ?? "",
+      all.filter((c) => (c.associatedProjectIds ?? []).includes(p.id)).map((c) => c.id).join(LIST_SEP),
     ]),
   );
 }

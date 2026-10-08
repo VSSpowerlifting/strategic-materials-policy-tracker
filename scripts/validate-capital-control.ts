@@ -117,6 +117,7 @@ export const COMMITMENT_FIELD_EVIDENCE: Readonly<
   recipientOrgIds: "recipient",
   project: "project",
   projectId: "project",
+  associatedProjectIds: "project",
   facility: "facility",
   locations: "location",
   stages: "stages",
@@ -536,6 +537,7 @@ const COMMITMENT: Fields<FinancialCommitment> = {
   recipientOrgIds: listOf(text()),
   project: nullableText(),
   projectId: nullableText(),
+  associatedProjectIds: { ...listOf(text()), optional: true },
   facility: nullableText(),
   locations: listOf(objectOf("location", LOCATION)),
   stages: listOf(oneOf(SUPPLY_CHAIN_STAGES)),
@@ -1169,6 +1171,41 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
   checkOrgRefs(c.providerOrgIds, "providerOrgIds", r, refs);
   checkOrgRefs(c.recipientOrgIds, "recipientOrgIds", r, refs);
   const project = c.projectId !== null && resolves(c.projectId, refs.projects, PROJECT_TARGET, "projectId", r, refs) ? refs.projects.get(c.projectId) : null;
+  const associatedProjectIds = c.associatedProjectIds ?? [];
+  checkUnique(associatedProjectIds, "associatedProjectIds", "project", r);
+  if (associatedProjectIds.length === 1)
+    r.error(
+      "incoherent_value",
+      "associatedProjectIds",
+      "names only one project; use projectId when an amount is attributable to one project, or name at least two projects for an unsplit shared amount",
+    );
+  if (c.projectId !== null && associatedProjectIds.length > 0)
+    r.error(
+      "incoherent_value",
+      "associatedProjectIds",
+      "is populated together with projectId; projectId is allocative to one project, while associatedProjectIds is only for an unsplit amount shared across several projects",
+    );
+  const associatedProjects = associatedProjectIds.map((id, i) =>
+    resolves(id, refs.projects, PROJECT_TARGET, `associatedProjectIds[${i}]`, r, refs) ? refs.projects.get(id) ?? null : null,
+  );
+  associatedProjects.forEach((p, i) => {
+    if (!p || p.materialIds.length === 0) return;
+    if (!p.materialIds.some((id) => c.materialIds.includes(id)))
+      r.error(
+        "incoherent_value",
+        `associatedProjectIds[${i}]`,
+        `project "${p.id}" shares no tracked material with this financing row; do not associate unrelated projects`,
+      );
+  });
+  if (associatedProjectIds.length >= 2)
+    c.materialIds.forEach((id, i) => {
+      if (!associatedProjects.some((p) => p?.materialIds.includes(id)))
+        r.error(
+          "incoherent_value",
+          `materialIds[${i}]`,
+          `"${id}" is not named by any associated project; every tracked material on a shared financing row must be covered by at least one linked project`,
+        );
+    });
   const programme =
     c.programmeId !== null && resolves(c.programmeId, refs.programmes, PROGRAMME_TARGET, "programmeId", r, refs)
       ? refs.programmes.get(c.programmeId)
@@ -1637,7 +1674,7 @@ export function validateCapitalControl(input: CapitalControlInput): CapitalContr
           for (const link of c.relationships)
             if (link.commitmentId !== c.id && refs.commitments.has(link.commitmentId)) addEdge("commitments", c.id, link.commitmentId, link.relationship);
           refer("organizations", [...c.providerOrgIds, ...c.recipientOrgIds]);
-          refer("projects", [c.projectId]);
+          refer("projects", [c.projectId, ...(c.associatedProjectIds ?? [])]);
           refer("programmes", [c.programmeId]);
           break;
         }

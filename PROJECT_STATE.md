@@ -1,8 +1,20 @@
 # Project state
 
-## 2026-10-07: CMGD geoscience project-registry completion (draft)
+## 2026-10-07: Shared multi-project financing associations — MP + Lynas (draft)
 
-**Status.** Branch `feat/cmgd-project-registry-20261007`, cut from `main` `a4ff8ad` after PR #56 merged. Draft review phase; unmerged and not deployed.
+**Status.** Branch `feat/shared-project-financing-links-20261007`, cut from `main` `fc6671b` after PR #57 merged. Draft review phase; unmerged and not deployed.
+
+- Adds optional `associatedProjectIds` for one unsplit financing amount that explicitly supports two or more identifiable projects. The field is non-allocative: associated rows are visible on each project but never enter that project's capital stack, backers, co-investment or project-level totals. `projectId` remains the one-project allocative link.
+- The validator requires at least two unique, resolving associated projects; forbids using `projectId` and `associatedProjectIds` together; requires material coherence; and uses the existing `project` evidence category for provenance.
+- MP Materials' up-to-US$600 million recipient-own-funds row is associated with the existing 10X and Samarium projects plus new Independence Facility expansion and Mountain Pass hydrochloric-acid-facilities project records. The source does not allocate the US$600 million among those uses.
+- JARE's AUD200 million Lynas equity row is associated with separate light-rare-earth capacity-expansion and heavy-rare-earth-separation projects. The source does not allocate the AUD200 million between them or state project sites.
+- Shared associations are exposed separately in the project API/page and append-only CSV columns, and are searchable by linked project name.
+- United States Antimony is deliberately out of this tranche: a later primary company disclosure gives a real US$20 million Thompson Falls / US$7 million Alaska allocation, so it should use sourced child rows under the US$27 million package rather than a non-allocative association.
+- Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
+
+## 2026-10-07: CMGD geoscience project-registry completion (PR #57, merged)
+
+**Status.** PR #57 merged to `main` as `fc6671b21f0473b2688b6f05294e6f9acba8735c`; reviewed head `69ebb9fc0b4b4c898c3b4dce58baafcb89966e14` cleared validate, typecheck, lint, 438/438 tests, build and Vercel. Post-merge CI #172 and the production Vercel deployment on the merge SHA both succeeded.
 
 - Resolves the open modeling question in favor of registering the three tracked-material Critical Minerals Geoscience and Data (CMGD) studies as projects. NRCan explicitly groups CMGD support as seven projects and gives each item a `Project name`, recipient, location, funding amount and description.
 - Adds the New Brunswick Maritimes Basin project, the New Brunswick granitoids/geochronology project and Nova Scotia's graphite battery-value-chain project, then links their already-coded financing rows.

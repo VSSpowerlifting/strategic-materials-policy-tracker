@@ -95,13 +95,13 @@ test("tungsten stats", () => {
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
   const expected: Record<string, [number, number, number]> = {
     tungsten: [5, 6, 1],
-    "rare-earth-elements": [9, 20, 11],
+    "rare-earth-elements": [9, 22, 13],
     graphite: [15, 22, 7],
-    "ndfeb-magnets": [0, 4, 4],
+    "ndfeb-magnets": [0, 5, 5],
     gallium: [1, 4, 3],
     germanium: [2, 5, 3],
-    dysprosium: [0, 2, 2],
-    terbium: [0, 2, 2],
+    dysprosium: [0, 3, 3],
+    terbium: [0, 3, 3],
     antimony: [0, 4, 4],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
@@ -436,7 +436,7 @@ test("designation cards: one per designation, headed by the project, at the desi
 
 test("a material with projects and no designations lists them apart and places none", () => {
   const nd = dossier("ndfeb-magnets");
-  assert.deepEqual(nd.registryProjects.map((r) => r.id), ["prj-ee-neo-rare-earth-magnet-project", "prj-us-mp-10x-facility", "prj-us-usar-magnet-project-2", "prj-us-usar-stillwater-magnet"]);
+  assert.deepEqual(nd.registryProjects.map((r) => r.id), ["prj-ee-neo-rare-earth-magnet-project", "prj-us-mp-10x-facility", "prj-us-mp-independence-expansion", "prj-us-usar-magnet-project-2", "prj-us-usar-stillwater-magnet"]);
   for (const s of nd.stages) assert.equal(s.designations.length, 0, s.id);
   assert.equal(nd.unstaged.designations.length, 0);
   for (const slug of ["dysprosium", "terbium"]) {

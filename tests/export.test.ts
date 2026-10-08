@@ -8,6 +8,8 @@ import {
   materialsCsv,
   jurisdictionsCsv,
   sourcesCsv,
+  financialCommitmentsCsv,
+  projectsCsv,
 } from "@/lib/export";
 import {
   getAllEvents,
@@ -83,4 +85,12 @@ test("eventsCsv accepts a subset and keeps the same columns and quoting rules", 
 
 test("eventsCsv on an empty subset yields a header with no data rows", () => {
   assert.deepEqual(dataRows(eventsCsv([])), []);
+});
+
+
+test("shared project associations have separate append-only CSV columns", () => {
+  const financialHeader = financialCommitmentsCsv().split("\r\n")[0].split(",");
+  assert.equal(financialHeader.at(-1), "associatedProjectIds");
+  const projectHeader = projectsCsv().split("\r\n")[0].split(",");
+  assert.equal(projectHeader.at(-1), "associatedFinancialRowIds");
 });

@@ -2062,6 +2062,67 @@
     "notes": null
   },
   {
+    "id": "prj-lynas-hre-separation",
+    "name": "Lynas heavy rare earth separation commencement",
+    "sponsorOrgIds": [
+      "org-lynas"
+    ],
+    "locations": [],
+    "stages": [
+      "separation"
+    ],
+    "materialIds": [
+      "rare-earth-elements",
+      "dysprosium",
+      "terbium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "name",
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph; heavy rare earth supply paragraphs",
+        "note": "JOGMEC says the growth plan includes commencement of heavy rare earth separation and names dysprosium and terbium in the associated HRE supply arrangement. The release does not state a project site."
+      }
+    ],
+    "notes": "One component of the unsplit Lynas growth plan financed by JARE's AUD 200 million equity subscription; no amount is allocated to this project."
+  },
+  {
+    "id": "prj-lynas-lre-capacity-expansion",
+    "name": "Lynas light rare earth production capacity expansion",
+    "sponsorOrgIds": [
+      "org-lynas"
+    ],
+    "locations": [],
+    "stages": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-jogmec-lynas",
+        "supports": [
+          "name",
+          "sponsors",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First paragraph",
+        "note": "JOGMEC says the AUD 200 million contribution is used for Lynas' mid-term growth plan, including expansion of light rare earth production capacity. The release does not state a project site or a supply-chain stage precise enough to code."
+      }
+    ],
+    "notes": "One component of the unsplit Lynas growth plan financed by JARE's AUD 200 million equity subscription; no amount is allocated to this project."
+  },
+  {
     "id": "prj-mg-maniry",
     "name": "Maniry Graphite Mine Project",
     "sponsorOrgIds": [
@@ -2884,6 +2945,76 @@
       }
     ],
     "notes": "The July 2025 filing and release gave the site as \"a soon-to-be-chosen location\"; MP's 10-Q for the quarter to 30 June 2026 places it in Northlake, Texas."
+  },
+  {
+    "id": "prj-us-mp-independence-expansion",
+    "name": "Independence Facility capacity expansion",
+    "sponsorOrgIds": [
+      "org-mp-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Texas",
+        "asStated": "the Company’s Independence Facility located in Fort Worth, Texas"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Transaction Agreement definitions and Facility Improvements",
+        "note": "The filing defines the Independence Facility in Fort Worth, Texas and requires expansion of its rare-earth metal, alloy and permanent-magnet manufacturing capacity to a projected 3,000 tons of magnets annually."
+      }
+    ],
+    "notes": "The $600 million company-cash undertaking also supports other MP projects and is associated with this project without a project-specific allocation."
+  },
+  {
+    "id": "prj-us-mp-mountain-pass-hcl-facilities",
+    "name": "Mountain Pass hydrochloric acid facilities development and recommissioning",
+    "sponsorOrgIds": [
+      "org-mp-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "California",
+        "asStated": "the Mountain Pass Rare Earth Mine and Processing Facility located near Mountain Pass, San Bernardino County, California"
+      }
+    ],
+    "stages": [],
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dod-mp-transaction-agreement-2025",
+        "supports": [
+          "name",
+          "sponsors",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1.01, Transaction Agreement definitions and Facility Improvements",
+        "note": "The filing identifies development, construction and/or recommissioning of hydrochloric acid facilities at the Mountain Pass Facility as one Facility Improvement. No tracked strategic material or supply-chain stage is assigned to the reagent infrastructure itself."
+      }
+    ],
+    "notes": "Enabling infrastructure within the wider MP funding package. It is deliberately left without a tracked material or supply-chain stage rather than treating hydrochloric acid infrastructure as a rare-earth project."
   },
   {
     "id": "prj-us-stibnite",

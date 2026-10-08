@@ -110,7 +110,12 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
 7. **Capital intelligence (v0.6).** Registries: `Organization` (`org-*`),
    `Project` (`prj-*`), `Programme` (`prg-*`), and a third child row of an
    event, `ProjectDesignation` (`dsg-*`). Commitments point to them through
-   `providerOrgIds`, `recipientOrgIds`, `projectId` and `programmeId`; control
+   `providerOrgIds`, `recipientOrgIds`, `projectId` and `programmeId`; an
+   optional `associatedProjectIds` list records an unsplit amount that explicitly
+   supports two or more projects. `projectId` is allocative; `associatedProjectIds`
+   is non-allocative and never enters a linked project's stack, backers, co-investment
+   or project-level totals. If a source later allocates the package, record sourced
+   child rows with `part_of` instead of inventing a split. Control
    clauses gain `controlledItemTypes` and `controlledStages` (the stage the
    covered item belongs to, never "restricts that stage"; empty for end-use,
    customs, divestiture and suspension clauses). Registry facts (name, kind,

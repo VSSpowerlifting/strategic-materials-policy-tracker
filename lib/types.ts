@@ -501,7 +501,7 @@ export const FINANCIAL_EVIDENCE_FIELDS = [
   "provider", // provider, providerJurisdiction and providerOrgIds
   "legal_authority",
   "recipient", // recipient and recipientOrgIds
-  "project", // project and projectId
+  "project", // project, projectId and associatedProjectIds
   "facility",
   "location",
   "stages", // stages and stageAllocation
@@ -829,8 +829,14 @@ export type FinancialCommitment = {
   recipientOrgIds: string[];
   /** The funded undertaking, e.g. a mine restart or a demonstration plant. */
   project: string | null;
-  /** The registry project ("prj-...") this row funds, when it funds one identifiable project. */
+  /** The registry project ("prj-...") this row funds, when the amount is attributable to one identifiable project. */
   projectId: string | null;
+  /**
+   * Registry projects this row explicitly supports when one unsplit amount spans two or more projects.
+   * These are non-allocative associations: the amount is not attributed to any linked project and is
+   * excluded from each project's capital stack, backers and co-investment. Omitted when not applicable.
+   */
+  associatedProjectIds?: string[];
   /** The physical site or plant, where named. */
   facility: string | null;
   /** Empty when the source gives no location. */

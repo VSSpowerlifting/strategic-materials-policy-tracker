@@ -94,6 +94,7 @@ export function buildCapitalIntelligenceSummary() {
         governments: s.governments,
         providerOrgIds: s.providerOrgIds,
         layers: s.layers.map((l) => ({ layer: l.key, rowIds: ids(l.rows), totals: l.totals })),
+        associatedRowIds: ids(s.associatedRows),
         designationIds: ids(s.designations),
       };
     }),

@@ -605,6 +605,16 @@ export default function MethodologyPage() {
                 and its sums are <code className="font-mono text-xs">null</code>, never zero or partial.
               </li>
               <li>
+                · <strong className="text-foreground">One project attribution at a time.</strong>{" "}
+                A row&apos;s <code className="font-mono text-xs">projectId</code> means its amount can be
+                attributed to that one project. When a source states one unsplit amount supports several
+                identifiable projects, <code className="font-mono text-xs">associatedProjectIds</code> records
+                those links without allocating the money among them. A shared row is shown on each linked
+                project for provenance but is excluded from that project&apos;s capital stack, backers,
+                co-investment and project-level totals. If a later source gives a real allocation, the
+                allocated child rows can be recorded as parts of the package instead.
+              </li>
+              <li>
                 · <strong className="text-foreground">Record counts fold a part only where its package covers it.</strong>{" "}
                 A part is counted inside its package, so one deal counts once, but only in a count where the
                 package is counted too. Stage and material counts in a portfolio, and the stage response
