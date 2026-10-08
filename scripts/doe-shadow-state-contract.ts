@@ -107,7 +107,8 @@ export function readDoeShadowState(raw:unknown):DoeShadowStateV1 {
     throw Error("DOE prior state schema mismatch; explicit source version upgrade required");
   return {
     version:1,sourceId:DOE_SHADOW_SOURCE_ID,semanticVersion:raw.semanticVersion,
-    seen:Object.fromEntries(items),lastLatestId:raw.lastLatestId,
+    // Every entry's key/value was checked as a 64-character digest above.
+    seen:Object.fromEntries(items) as Record<string,string>,lastLatestId:raw.lastLatestId,
     lastSuccessfulAt:raw.lastSuccessfulAt,
   };
 }
