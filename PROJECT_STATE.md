@@ -1,3 +1,12 @@
+## 2026-10-08: M3.1 project execution evidence foundation — draft isolated branch
+
+- New source-scoped ProjectMilestone type and **empty** project-milestones seed. Read-only loaders do not alter public API, exports, search or UI.
+- Canonical seed validator delegates to project milestone gate: strict IDs and sources, non-inferred scope, occurred-vs-planned dates, primary quotation/translation, explicit human review, duplicate assertion prohibition.
+- Read-only audit project execution CLI inventories legacy financing implementation history; tracks repeated financial-source observations, mixed status flags, non-allocative project associations, missing references, and Kingston funded activity special-case.
+- Existing financial commitments, project seeds, F4 as-of status, industrial-response denominator/counts, EXIM/DOE monitoring and deployed pages remain unchanged.
+- Acceptance: run npm validate, typecheck, lint, test, build on exact PR head. Draft pending CI; no M3.2 factual backfill or M3.3 timeline.
+- Specification: docs/analysis/project-execution-ledger-m3-1-2026-10-08.md.
+
 # Project state
 
 ## 2026-10-08: M2.6 DOE DOM evidence specimens candidate
