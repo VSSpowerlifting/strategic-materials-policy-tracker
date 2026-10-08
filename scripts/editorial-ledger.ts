@@ -235,7 +235,7 @@ export function beginCandidate(
     candidateId, status: "draft", createdBy: by.trim(), createdAt: at.slice(0, 10),
     proposedEvent: {
       jurisdiction, titleOriginal: item.titleAsListed, titleEn: item.titleAsListed,
-      intakeMode: "monitored",
+      // intakeMode stays unset until primary-source verification supplies lifecycle evidence;
     },
     verification: { verdict: "pending" },
     classification: { confidence: "low" },
