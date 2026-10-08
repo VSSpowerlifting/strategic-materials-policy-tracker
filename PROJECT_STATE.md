@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: M2.6 DOE DOM evidence specimens candidate
+
+- **Live source-shape milestone:** [DOE preflight #37818819424](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37818819424) passed on merge `15ec165`: two HTTP200 DOE CMEI listing pages, 10 in-main official articles each, **zero** overlapping article paths, three excluded off-main news links per page, and three accessible independent original article samples (including nonminerals control). Its outcome remains **forensic only — NOT an activated source**.
+- **Next source integrity gate:** added bounded raw HTML DOM-context excerpts (up to 4 per listing and 4 per article, maximum 1,300 characters apiece) to the **same existing five-request manual DOE preflight**. These help distinguish actual DOE article card, publisher-visible date/issuer, and body boundary from CMS metadata and surrounding navigation. No date is promoted as authoritative from the snippets. See `docs/monitoring/m2-6-doe-dom-structure-samples-2026-10-08.md`.
+- **Acceptance:** exact-head CI, manual merge, rerun preflight, inspect the resulting actual DOM evidence, then decide separately whether a standalone DOE shadow collector can be implemented. No EXIM/M1 state, editorial item, policy event, finance row, public surface or scheduling changes.
+
 ## 2026-10-08: M2.5a DOE preflight detected off-listing news-link overlap
 
 - [DOE preflight #37816498552](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37816498552) **failed safely** with `degraded_do_not_activate`; both filtered listing pages were HTTP 200 and all three original article samples loaded. Raw whole-HTML parser saw 13 official article-shaped links on each listing; exactly 3 general DOE featured-news links repeated on both pages, whereas the 10 filtered body results per page were distinct. Report archived as artifact 11567008284; no DOE monitor/state/finance changes.
