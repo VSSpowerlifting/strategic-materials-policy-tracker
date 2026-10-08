@@ -2354,6 +2354,46 @@
     "notes": "Sources from September 2025 onward use \"Department of War\"; the record keeps one id so the department's portfolio does not split."
   },
   {
+    "id": "org-us-exim",
+    "name": "Export-Import Bank of the United States",
+    "nameOriginal": null,
+    "aliases": [
+      "EXIM",
+      "U.S. EXIM"
+    ],
+    "kind": "public_financier",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-exim-stibnite-board-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Official bank Board of Directors minutes dated May 21, 2026, meeting header and Structured and Project Finance Division transaction AP768324XX",
+        "note": "U.S. Export-Import Bank is the approving federal public lender. The minutes list an EXIM direct loan, with no separate guaranteed lender."
+      },
+      {
+        "sourceId": "src-exim-stibnite-transactions-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Project and Structured Finance Transactions, Perpetua Resources entry, Authorized",
+        "note": "Official EXIM transaction database names the agency responsible for the authorization."
+      }
+    ],
+    "notes": "U.S. federal public export-credit lender. The Perpetua Resources Idaho $2.906B project loan was board approved in May 2026, but remained awaiting definitive documentation according to the issuer's 2026 Q2 Form 10-Q; lender identity does not promote a decided loan to contracted/disbursed."
+  },
+  {
     "id": "org-us-government",
     "name": "United States Government",
     "nameOriginal": null,

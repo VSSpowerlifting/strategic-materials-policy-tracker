@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-07: EXIM direct-lender registry reconciliation (draft)
+
+**Status:** Branch `fix/exim-perpetua-public-financier-link-20261007` based on `main` at `1eb4551`; draft and undeployed.
+
+- The Perpetua $2.906B EXIM transaction already had its correct *recipient* and historical `decided` status but lacked a source-linked `providerOrgIds` value for EXIM. Registering `org-us-exim` restores the public lender in organization portfolios without inventing executed or paid financing.
+- No amount/status/event/project changes; official EXIM and SEC sources already exist. The three remaining broad unlinked providers (EU JTF, EU-funds envelope, Indian PSUs) are not assigned a fabricated unique financer.
+- Ledger `docs/research/exim-perpetua-lender-integrity-2026-10-07.md`; three focused tests. Await exact-head validation and maintainer merge authority.
+
 ## 2026-10-07: EBRD Sarytogan equity source reconciliation (draft)
 
 **Status:** Isolated branch `fix/sarytogan-ebrd-equity-tranches-20261007` forked from `main` at `f19a6e7`. Not merged or deployed.
