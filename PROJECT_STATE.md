@@ -1,5 +1,14 @@
 # Project state
 
+## 2026-10-07: EBRD Sarytogan equity source reconciliation (draft)
+
+**Status:** Isolated branch `fix/sarytogan-ebrd-equity-tranches-20261007` forked from `main` at `f19a6e7`. Not merged or deployed.
+
+- EBRD's originally coded approximate **€3.6M Sarytogan project investment** is Commission retrospective narrative, not a transaction-specific sum. Bank source gives an original **A$5M equity investment** in Sarytogan Graphite Limited; EBRD counsel dates closing 10 February 2025.
+- Separate ASX corporate disclosure and EBRD 2026 announcement establish **A$1,396,581.12** incremental top-up received 30 April 2026 under a placement agreed 6 November 2025.
+- Changes the original direct recipient to the existing `org-sarytogan`; adds the distinct top-up row and 5 source entries; preserves multilateral non-jurisdictional provider attribution, mining project/industrial status, and provenance guardrails. No unsupported euro conversion or sum of the Commission figure.
+- Source ledger: `docs/research/sarytogan-ebrd-equity-reconciliation-2026-10-07.md`. Exact-head full validation remains a pre-merge gate; no merge/deployment authorization.
+
 ## 2026-10-07: Arafura EFA legal share-issuer integrity (draft)
 
 **Status:** Isolated branch `fix/arafura-efa-equity-recipient-20261007` from `main` at `3074f06`; not merged or deployed.
