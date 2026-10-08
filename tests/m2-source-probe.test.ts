@@ -53,7 +53,7 @@ test("manual probe treats HTML shape as an unverified candidate, never an activa
     a("/news/critical-materials-3"),
   );
   const result = await probeM2SourceCandidates("2026-10-08T00:00:00Z",
-    (async (url: string) => new Response(url.includes("exim.gov") ? html : "<html></html>", {
+    (async (url: string) => new Response(url.includes("exim.gov") ? html : wrap(a("/about/leadership", "Agency leadership and other navigation")), {
       status: 200, headers: { "content-type": "text/html" },
     })) as typeof fetch);
   assert.equal(result.mode, "m2_source_discovery_only");
