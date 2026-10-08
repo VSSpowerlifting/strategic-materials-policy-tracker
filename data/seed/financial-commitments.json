@@ -9003,7 +9003,221 @@
         "note": "The filing records the obligation split, milestone payment and Thompson Falls expansion status."
       }
     ],
-    "notes": "The award covers more than one physical undertaking, so no single projectId is assigned. The Thompson Falls facility is separately registered as a project, but the full $27M is not attributed to it."
+    "notes": "The single $27M DPA Title III award is the parent of the company's disclosed $20M Thompson Falls and $7M Alaska allocations. The parent preserves the $16.2M currently obligated / $10.8M subject to future authorization distinction and $12.8M milestone receipt in April 2026. The child amounts must not be added to the parent or described as fully disbursed."
+  },
+  {
+    "id": "fin-us-dow-usac-antimony-2026-alaska",
+    "eventId": "evt-us-dow-usac-antimony-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-dow-usac-antimony-2026",
+        "relationship": "part_of",
+        "sourceId": "src-usac-2026-q1-call-sec-exhibit",
+        "locator": "Q&A: CEO response on the $27M DPA award split",
+        "note": "This geographic allocation is part of the parent $27M award, not incremental funds."
+      }
+    ],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "7000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$7 million for Alaska",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "United States Antimony Corporation",
+    "recipientOrgIds": [
+      "org-us-antimony"
+    ],
+    "project": "Alaska antimony mining and feedstock development",
+    "projectId": "prj-us-usac-alaska-antimony-feedstock",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Alaska"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-02-24",
+        "sourceId": "src-dow-usac-antimony-2026",
+        "note": "This portion belongs to the February 24 award. The later $7M allocation is known, but no separately binding obligation or receipt is established for Alaska."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-scope paragraphs",
+        "note": "Government names two work streams under one $27M DPA award; it does not state their individual amounts."
+      },
+      {
+        "sourceId": "src-usac-2026-q1-call-sec-exhibit",
+        "supports": [
+          "amount",
+          "relationships",
+          "project",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "May 2026 SEC-furnished transcript: CEO answer to Jonathan Miller's funding allocation question",
+        "note": "Company explicitly identifies the $20M Thompson Falls and $7M Alaska split. Does not establish separate obligations or disbursement."
+      }
+    ],
+    "notes": "The company's CEO identifies $7M for Alaska; a prospective payment expectation in the May call is not evidence of disbursement. No specific named Alaska mine is attributed to the grant."
+  },
+  {
+    "id": "fin-us-dow-usac-antimony-2026-thompson-falls",
+    "eventId": "evt-us-dow-usac-antimony-2026",
+    "relationships": [
+      {
+        "commitmentId": "fin-us-dow-usac-antimony-2026",
+        "relationship": "part_of",
+        "sourceId": "src-usac-2026-q1-call-sec-exhibit",
+        "locator": "Q&A: CEO response on the $27M DPA award split",
+        "note": "This geographic allocation is part of the parent $27M award, not incremental funds."
+      }
+    ],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "20000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$20 million for Thompson Falls",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of War",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-dod"
+    ],
+    "legalAuthority": "Defense Production Act Title III",
+    "programmeId": null,
+    "recipient": "United States Antimony Corporation",
+    "recipientOrgIds": [
+      "org-us-antimony"
+    ],
+    "project": "Thompson Falls antimony processing and refining expansion",
+    "projectId": "prj-us-usac-thompson-falls-expansion",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Montana",
+        "asStated": "Thompson Falls, Montana"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-02-24",
+        "sourceId": "src-dow-usac-antimony-2026",
+        "note": "Part of the $27M award announced for February 24; its precise $20M allocation is disclosed later by the company."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": null,
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "The filing states $12.8M received in April 2026 for accepted milestones, recognized against Thompson Falls construction in progress; no exact day is given."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and award-scope paragraphs",
+        "note": "Government names two work streams under one $27M DPA award; it does not state their individual amounts."
+      },
+      {
+        "sourceId": "src-usac-2026-q1-call-sec-exhibit",
+        "supports": [
+          "amount",
+          "relationships",
+          "project",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "May 2026 SEC-furnished transcript: CEO answer to Jonathan Miller's funding allocation question",
+        "note": "Company explicitly identifies the $20M Thompson Falls and $7M Alaska split. Does not establish separate obligations or disbursement."
+      },
+      {
+        "sourceId": "src-usac-2026-q2-10q",
+        "supports": [
+          "status",
+          "project",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 9 — Government Grant and Property, Plant and Equipment",
+        "note": "Confirms payment of $12.8M in April 2026, not the entire Thompson Falls $20M allocation."
+      }
+    ],
+    "notes": "The recipient's SEC-furnished earnings-call transcript allocates $20M to Thompson Falls. Its Form 10-Q reports $12.8M of accepted milestones received in April 2026 and recorded against Thompson Falls construction in progress. Neither amount is incremental to the parent $27M award."
   },
   {
     "id": "fin-us-exim-perpetua-stibnite-2026",

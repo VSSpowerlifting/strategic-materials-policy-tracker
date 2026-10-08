@@ -1,5 +1,14 @@
 # Project state
 
+## 2026-10-07: U.S. Antimony $27M sourced geographic allocation (draft)
+
+**Status:** Isolated draft tranche on `feat/usac-antimony-award-sourced-allocation-20261007`, from main `c29086a`; unmerged, not deployed.
+
+- The company's CEO explicitly allocates the existing February 2026 $27M DoW DPA Title III award as **$20M Thompson Falls / $7M Alaska**, in a May 14 earnings-call transcript furnished as Exhibit 99.1 to a May 15 SEC Form 8-K.
+- Adds two separately registered, bounded USAC undertakings and two child capital rows with evidenced `part_of` links. Retains the original $27M parent without modifying its amount, instrument, financial status or obligations; child amounts are not incremental public commitments.
+- Thompson Falls child is partially disbursed based on Q2 Form 10-Q evidence for $12.8M received in April; Alaska child remains `decided`, without invented binding or payment. The $16.2M obligated versus $10.8M future-authorization split stays exclusively as the parent's separate obligation dimension.
+- Source ledger: `docs/research/usac-antimony-award-allocation-2026-10-07.md`. Regression tests verify parent folding and project-stack attribution. Merge and deployment remain out of scope pending CI and maintainer review.
+
 ## 2026-10-07: Shared multi-project financing associations — MP + Lynas (draft)
 
 **Status.** Branch `feat/shared-project-financing-links-20261007`, cut from `main` `fc6671b` after PR #57 merged. Draft review phase; unmerged and not deployed.
