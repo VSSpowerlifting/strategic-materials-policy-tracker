@@ -97,7 +97,8 @@ function metadataDateHints(html: string): string[] {
   // Attribute order isn't guaranteed. Record possible meta evidence only;
   // never convert a meta tag into an authoritative publication date.
   const tags = [...html.matchAll(/<meta\b[^>]*>/gi)].map((x) => x[0]);
-  const filtered = tags.filter((x) => /\b(?:date|published|modified|updated|time)\b/i.test(x));
+  const filtered = tags.filter((x) =>
+    /(?:article:published_time|article:modified_time|datePublished|dateModified|published_time|modified_time|\bdate\b|lastmod)/i.test(x));
   return filtered.slice(0, 12).map((x) => x.replace(/\s+/g, " ").slice(0, MAX_EXCERPT));
 }
 export function parseDoeListingForensics(
