@@ -86,3 +86,6 @@ data/candidates/*.json
 
 # Independent EXIM shadow baseline and unverified run artifacts (no publication)
 .monitor-exim/
+
+# Read-only EXIM Actions reliability receipts; no monitor identity state.
+.monitor-exim-reliability/
