@@ -62,6 +62,7 @@ export type FetchFunction = typeof fetch;
 
 const MAX_FEED_BYTES = 2_000_000;
 const MAX_WINDOW = 100;
+const MAX_FEDERAL_REGISTER_PAGES = 4; // 400-document hard cap; never unbounded crawling.
 const MAX_PERSISTENT_IDS = 5_000;
 const TIMEOUT_MS = 20_000;
 const KEYWORD = /critical[ -]minerals?|rare[ -]earth|gallium|germanium|graphite|antimony|tungsten|lithium|nickel|cobalt|neodymium|praseodymium|dysprosium|terbium|strategic[ -]materials?|mineral[ -]supply[ -]chain/i;
@@ -143,6 +144,26 @@ export function parseFederalRegisterJson(raw: string): Publication[] {
   }
   return uniquePublications(rows);
 }
+/**
+ * Federal Register's API supplies the next-page URL with its search cursor.
+ * Treat the returned URL as untrusted: only continue the same Interior
+ * Department document query on the exact original HTTPS API host.
+ */
+export function federalRegisterNextPage(raw: string): string | null {
+  const parsed: unknown = JSON.parse(raw);
+  if (!isRecord(parsed) || !("next_page_url" in parsed) || parsed.next_page_url === null) return null;
+  if (typeof parsed.next_page_url !== "string") throw Error("Federal Register invalid next-page URL");
+  const url = cleanUrl(parsed.next_page_url);
+  if (!url) throw Error("Federal Register invalid next-page URL");
+  const next = new URL(url);
+  const isExpected = next.hostname === "www.federalregister.gov" &&
+    /^\/api\/v1\/documents(?:\.json)?$/.test(next.pathname) &&
+    next.searchParams.getAll("conditions[agencies][]").includes("interior-department") &&
+    next.searchParams.get("per_page") === "100";
+  if (!isExpected) throw Error("Federal Register next-page URL escaped original agency-filtered API boundary");
+  return url;
+}
+
 function uniquePublications(rows: Publication[]): Publication[] {
   const seen = new Set<string>();
   return rows.filter((p) => seen.has(p.id) ? false : (seen.add(p.id), true));
@@ -238,6 +259,33 @@ async function httpBody(fetchFn: FetchFunction, url: string): Promise<{ body: st
   } finally { clearTimeout(timeout); }
 }
 
+/**
+ * Read at most four Federal Register pages, stopping as soon as the previous
+ * latest source-native identifier is found. All pages are parsed before any
+ * state is advanced. Missing anchors are surfaced via possibleWindowGap.
+ */
+async function federalRegisterWindow(
+  fetchFn: FetchFunction,
+  previousLatestId: string | null,
+): Promise<{ rows: Publication[]; status: number }> {
+  let next: string | null = FR_ENDPOINT;
+  let pages = 0;
+  let firstStatus = 200;
+  const visited = new Set<string>();
+  const rows: Publication[] = [];
+  while (next && pages < MAX_FEDERAL_REGISTER_PAGES) {
+    if (visited.has(next)) throw Error("Federal Register pagination loop");
+    visited.add(next);
+    const result = await httpBody(fetchFn, next);
+    if (pages === 0) firstStatus = result.status;
+    rows.push(...parseFederalRegisterJson(result.body));
+    pages += 1;
+    if (!previousLatestId || rows.some((row) => row.id === previousLatestId)) break;
+    next = federalRegisterNextPage(result.body);
+  }
+  return { rows: uniquePublications(rows), status: firstStatus };
+}
+
 export async function runSourcePilot(
   watchlist: readonly WatchedSource[],
   state: MonitorState,
@@ -250,8 +298,13 @@ export async function runSourcePilot(
     const source = watchlist.find((s) => s.id === sourceId);
     if (!source || source.status !== "active") throw Error("Required pilot source absent or inactive: " + sourceId);
     try {
-      const { body, status } = await httpBody(fetchFn, pilotEndpoint(source));
-      const rows = sourceId === "watch-ca-nrcan-news" ? parseNrcanAtom(body) : parseFederalRegisterJson(body);
+      const prior = next.sources[sourceId];
+      const { rows, status } = sourceId === "watch-ca-nrcan-news"
+        ? await (async () => {
+            const response = await httpBody(fetchFn, pilotEndpoint(source));
+            return { rows: parseNrcanAtom(response.body), status: response.status };
+          })()
+        : await federalRegisterWindow(fetchFn, prior?.lastLatestId ?? null);
       const result = reconcilePublications(sourceId, next.sources[sourceId], rows, observedAt, status);
       next.sources[sourceId] = result.memory;
       sources.push(result.report);
