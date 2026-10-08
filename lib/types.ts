@@ -1082,6 +1082,42 @@ export type Organization = {
 };
 
 /**
+ * M3 — separately reviewed evidence about project execution (mil-*).
+ * No amount, financier or implicit whole-project status is stored here.
+ * Planned targets have targetOn, never occurredOn. Null dates remain unknown.
+ */
+export type ProjectMilestone = {
+  id: string;
+  projectId: string;
+  kind:
+    | "feasibility_completed"
+    | "groundbreaking_reported"
+    | "construction_started"
+    | "commissioning_started"
+    | "operations_started"
+    | "production_reported"
+    | "operations_suspended"
+    | "project_cancelled"
+    | "funded_activity_completed";
+  claimMode: "occurred" | "planned";
+  scope: "whole_project" | "named_facility" | "funded_activity";
+  scopeAsStated: string | null;
+  /** An explicitly sourced event date; never a press-release date substituted for it. */
+  occurredOn: string | null;
+  /** An explicitly sourced target date; passage of time never promotes it to occurred. */
+  targetOn: string | null;
+  sourceId: string;
+  locator: string | null;
+  statementOriginal: string;
+  statementEn: string;
+  statementEnSource: EnSource;
+  /** Human attestation after reviewing full original evidence, not inferred by software. */
+  reviewedBy: string;
+  reviewedAt: string;
+  note?: string | null;
+};
+
+/**
  * One physical undertaking capital or a designation is aimed at. It holds
  * what the undertaking is, not what was paid for it: money stays on the
  * financial rows that point here.
