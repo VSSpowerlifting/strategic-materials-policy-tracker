@@ -9930,5 +9930,157 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "fin-us-doe-thacker-pass-atvm-2024",
+    "eventId": "evt-us-doe-thacker-pass-loan-2024",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "2230000000",
+      "currency": "USD",
+      "qualifier": "approximately",
+      "amountAsStated": "$2.23 billion amended expected loan amount ($1.97 billion principal plus approximately $256 million capitalized interest)",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Energy, ATVM Loan Program (Federal Financing Bank lending arrangements)",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": "Energy Independence and Security Act of 2007 — Advanced Technology Vehicles Manufacturing (ATVM) Loan Program",
+    "programmeId": null,
+    "recipient": "Lithium Nevada LLC (formerly Lithium Nevada Corp.)",
+    "recipientOrgIds": [
+      "org-lithium-nevada-llc"
+    ],
+    "project": "Thacker Pass Phase 1 lithium carbonate processing facilities",
+    "projectId": "prj-us-thacker-pass-phase1-processing",
+    "facility": "Thacker Pass Phase 1 processing plant and associated infrastructure",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Nevada",
+        "asStated": "Thacker Pass, Humboldt County, Nevada"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2024-10-28",
+        "sourceId": "src-sec-lac-thacker-loan-agreement-2024",
+        "note": "Executed ATVM Loan Arrangement and Reimbursement Agreement No. A1034 on 28 October 2024, originally naming Lithium Nevada Corp. Original approx. $2.26B face amount was later revised; no draw inferred from closing."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": "2025-10-20",
+        "sourceId": "src-sec-lac-thacker-q2-2026",
+        "note": "First $435M DOE-loan advance received on 20 October 2025. Issuer's 2026 Q2 filing confirms subsequent draws of $432M (24 February 2026) and $342M (3 June 2026), totaling $1.209B advanced by 30 June 2026. These are draws under the same facility, not additive commitments."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": "2026-06-30",
+        "sourceId": "src-sec-lac-thacker-q2-2026",
+        "note": "Issuer's quarter-ended 30 June 2026 report confirms active major construction of Thacker Pass Phase 1 processing plant, $1.6217B cumulative Phase 1 construction costs within the technical-report capital-expenditure estimate and targeting late-2027 mechanical completion. No commissioning or operating output is evidenced."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-doe-thacker-pass-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Project summary; Financial summary and Loan type",
+        "note": "DOE October 2024 baseline is about $2.26B including capitalized interest. The bank project page has not been updated for the Oct 2025 amendment and is not used as the current amount."
+      },
+      {
+        "sourceId": "src-doe-thacker-pass-nepa-2024",
+        "supports": [
+          "legal_authority",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "DOE/EIS-0561 Summary; loan restricted to processing facilities and associated infrastructure, not open-pit mine",
+        "note": "Constrains funded project and single-stage processing attribution."
+      },
+      {
+        "sourceId": "src-sec-lac-thacker-loan-agreement-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover, Preliminary Statements, and agreement parties; 28 October 2024",
+        "note": "Legal contract names DOE and Lithium Nevada Corp. borrower. Contract scope is executed loan arrangement with Federal Financing Bank advance mechanics."
+      },
+      {
+        "sourceId": "src-sec-lac-thacker-amendment-2025",
+        "supports": [
+          "provider",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph: Lithium Nevada LLC (formerly Lithium Nevada Corp.) as Borrower; 7 October 2025 OWCA",
+        "note": "This is an amendment to the 2024 loan, not a separate second loan; corporate name continuity is express."
+      },
+      {
+        "sourceId": "src-sec-lac-thacker-q2-2026",
+        "supports": [
+          "amount",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 4 — Department of Energy Loan Facility; MD&A pp. 23–28 and 'Borrowings under the DOE ATVM Loan Program'",
+        "note": "Issuer states October 2025 amended expected facility $2.23B and the dates/amounts of all three advances; separately verifies ongoing Phase 1 processing-plant construction."
+      }
+    ],
+    "notes": "Single DOE ATVM/FFB loan, No. A1034. The original 28 October 2024 closing was approximately $2.26B ($1.97B principal plus an estimated $289.6–$289.7M capitalized interest); the 7 October 2025 amendment reduced estimated interest to $256M, making the amended total approximately $2.23B. These are versions of the same facility, not two commitments; the current amount is approximate ($1.97B + $256M = $2.226B before rounding). The schema holds a current amount and financial-status history, not historically versioned amounts: an as-of 2024 report must not present $2.23B as the contemporaneous 2024 face amount. Cumulative advances were $435M on 2025-10-20, $867M after 2026-02-24, and $1.209B after 2026-06-03; the $1.209B is not additional finance and is different from the $988.018M accounting carrying value after deferred issuance costs/interest. Original legal borrower Lithium Nevada Corp. is now Lithium Nevada LLC, distinct from its Canadian-listed sponsor Lithium Americas Corp. DOE loan supports lithium-carbonate processing infrastructure (including a sulfuric-acid plant), not open-pit mine development. Q2 2026 supports construction only; no operational production. DOE's 2025 equity warrants, GM equity and private financing are not classified as draws or additional DOE commitments.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-08",
+      "implementationStatusCheckedAt": "2026-10-08"
+    }
   }
 ]
