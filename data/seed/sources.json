@@ -1954,5 +1954,65 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The bank separately announces a follow-on equity investment of about A$1.4M in Sarytogan Graphite Limited, increasing its stake to 18.4%, to support definitive feasibility study and other project development work. The bank page does not itself fix the exact settlement date or dollar cents."
+  },
+  {
+    "id": "src-doe-thacker-pass-2024",
+    "title": "Thacker Pass — DOE Loan Programs Office project and financial summary",
+    "publisher": "U.S. Department of Energy, Loan Programs Office",
+    "url": "https://www.energy.gov/edf/thacker-pass",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-08",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official DOE project page, marked last updated October 2024: $2.26 billion ATVM direct-loan facility including $1.97B principal and about $289.7M capitalized interest, borrower then Lithium Nevada Corp, Phase 1 lithium-carbonate processing facilities in Humboldt County, Nevada. This is original closing-era amount and should not be used as the 2026 amended amount or as a disbursement."
+  },
+  {
+    "id": "src-doe-thacker-pass-nepa-2024",
+    "title": "EIS-0561 Thacker Pass loan: DOE processing-facility-only scope and 28 October 2024 decision",
+    "publisher": "U.S. Department of Energy",
+    "url": "https://www.energy.gov/nepa/doeeis-0561-thacker-pass-lithium-mine-project",
+    "language": "en",
+    "datePublished": "2024-10-28",
+    "dateAccessed": "2026-10-08",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "DOE NEPA explanation specifies that the proposed loan covers Thacker Pass mine processing facilities and associated infrastructure, not the development and operation of the open-pit mine. DOE Record of Decision issued 28 October 2024."
+  },
+  {
+    "id": "src-sec-lac-thacker-loan-agreement-2024",
+    "title": "Lithium Americas, Exhibit 10.11 — 28 October 2024 ATVM Loan Arrangement and Reimbursement Agreement",
+    "publisher": "Lithium Americas Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1966983/000095017025046424/lac-ex10_11.htm",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-08",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Executed Loan Arrangement and Reimbursement Agreement dated 28 October 2024, loan number A1034, between DOE and LITHIUM NEVADA CORP. as Borrower. Federal Financing Bank advance arrangements occur under the ATVM legal mechanics, not as another project loan. Document exhibited to issuer SEC filing in 2025; agreement date is not its SEC publication date."
+  },
+  {
+    "id": "src-sec-lac-thacker-amendment-2025",
+    "title": "Lithium Americas, Exhibit 10.1 — 7 October 2025 omnibus DOE loan amendment",
+    "publisher": "Lithium Americas Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1966983/000119312526115081/lac-ex10_1.htm",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-08",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Omnibus Waiver, Consent and Amendment No. 2 dated as of 7 October 2025 identifies LITHIUM NEVADA LLC (formerly Lithium Nevada Corp.) as the same Nevada borrower and Lithium Americas Corp as Sponsor. A revised legal agreement to the existing 2024 facility, not a second DOE loan. Published as an issuer exhibit in 2026."
+  },
+  {
+    "id": "src-sec-lac-thacker-q2-2026",
+    "title": "Lithium Americas Corp., Form 10-Q for the quarter ended 30 June 2026",
+    "publisher": "Lithium Americas Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1966983/000119312526347826/lac-20260630.htm",
+    "language": "en",
+    "datePublished": "2026-08-13",
+    "dateAccessed": "2026-10-08",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "DOE Loan Note 4 and MD&A pages 23–28: original 2024 loan $2.26B ($1.97B principal plus estimated $289.6M interest), amended Oct 7 2025 expected total $2.23B ($1.97B principal plus estimated $256M interest). Three cash advances $435M Oct 20 2025, $432M Feb 24 2026, $342M Jun 3 2026; cumulative advances $1.209B by Jun 30 2026. This cumulative amount is within, not in addition to, the facility; carrying amount $988.018M reflects debt costs and accrued interest and is not cumulative cash advanced. Thacker Pass Phase 1 plant construction ongoing, not operational."
   }
 ]
