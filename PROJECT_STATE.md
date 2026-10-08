@@ -1,5 +1,14 @@
 # Project state
 
+## 2026-10-08: M2.1 EXIM first live bootstrap failure and navigation fix (PR under review)
+
+- **Confirmed merge:** M2.1 PR #76 was squash merged at `10b8cb3`; its post-merge CI passed 520 tests and the Next.js build.
+- **First live run failed safely:** [EXIM Actions run 37730218209](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37730218209), bootstrap requested, HTTP 200 index, `health: invalid_response`, zero parsed releases, zero new/revised, **no EXIM state artifact created**. Exact reported parser failure: `EXIM listing article has no nearby official publication date: https://www.exim.gov/news/media-advisories`.
+- **Cause:** a navigation link to the separate EXIM Media Advisories category has the same `/news/<slug>` URL shape as news releases but no per-release date. Rejecting that link was correct; falsely treating it as a release would have polluted publication identity.
+- **Narrow remedy:** explicitly exclude only the observed `/news/media-advisories` category (apex/www, optional slash) from individual release candidates. Preserve strict date/title/full-text agreement for real candidates and fail closed for unknown undated article-shaped URLs. Regression test reproduces navigation in index header and between dated entries, exercises initial baseline construction, and rejects undated unknown URLs.
+- **Isolation:** No change to existing Canada/Interior watcher, M1 cache, GitHub schedule, seed files, policy/financial rows, or published site. There is **no previous EXIM baseline to reset**.
+- **Acceptance:** exact-head CI required, maintainer squash merge, then manually dispatch the EXIM workflow with `bootstrap=true` once. If a later HTML/content boundary fails, diagnose and fix specifically without weakening source evidence. Only after a healthy baseline run should the owner run an unbootstrapped replay.
+
 ## 2026-10-08: M2.1 independent EXIM shadow monitoring (PR under review)
 
 - **Grounded discovery:** M2.0 PR #75 merged at `c32b07a`; real GitHub [run 37728686586](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37728686586) fetched EXIM's listing successfully (HTTP 200; 23 article-shaped links) and DOE's (HTTP 200; 12); defense index failed with a network error. M2.1 deliberately chooses EXIM only.
