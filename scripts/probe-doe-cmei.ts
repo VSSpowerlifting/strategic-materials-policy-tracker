@@ -36,6 +36,13 @@ export function summary(r: DoeForensicReport): string {
     ...r.pages.flatMap((p, i) => p.outsideMainArticleHints.slice(0, 10)
       .map((hint) => "- Listing page " + i + ": " + hint.url)),
     "",
+    "### Bounded original publisher DOM specimens",
+    "Listing article-link excerpts captured: " +
+      r.pages.reduce((n, p) => n + p.listingDomSamples.length, 0) + ".",
+    "Article date-context excerpts captured: " +
+      r.articles.reduce((n, p) => n + p.dateDomSamples.length, 0) + ".",
+    "Excerpts are present ONLY in report.json. They may include navigation or unrelated dates.",
+    "",
     "### Cautions and missing evidence",
     ...r.warnings.map((x) => "- " + x),
     "",
