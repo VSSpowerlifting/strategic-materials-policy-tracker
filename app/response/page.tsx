@@ -249,7 +249,7 @@ export default function IndustrialResponsePage() {
               One registered project with at least one directly linked, as-of-evidenced, non-ended government commitment.
               Financing may have no stated amount. A financing package and its child allocations cannot count the same
               project twice. {model.directLinkedProjects} of {model.registryProjects} projects have some direct financial
-              linkage; the matrix's {model.governmentProjects} projects meet its narrower government-commitment test.
+              linkage; the matrix&apos;s {model.governmentProjects} projects meet its narrower government-commitment test.
             </p>
           </Card>
           <Card className="p-5 text-sm leading-7 text-muted">
