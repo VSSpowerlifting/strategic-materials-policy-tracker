@@ -29,6 +29,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     governments: stack.governments,
     providerOrgIds: stack.providerOrgIds,
     layers: stack.layers.map((l) => ({ layer: l.key, rowIds: l.rows.map((c) => c.id), totals: l.totals })),
+    associatedRowIds: stack.associatedRows.map((c) => c.id),
     designationIds: stack.designations.map((d) => d.id),
     latestImplementation: stack.latestImplementation,
     sources: getSourcesByIds(evidenceSourceIds(stack.project)),
