@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: M2.5a DOE preflight detected off-listing news-link overlap
+
+- [DOE preflight #37816498552](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37816498552) **failed safely** with `degraded_do_not_activate`; both filtered listing pages were HTTP 200 and all three original article samples loaded. Raw whole-HTML parser saw 13 official article-shaped links on each listing; exactly 3 general DOE featured-news links repeated on both pages, whereas the 10 filtered body results per page were distinct. Report archived as artifact 11567008284; no DOE monitor/state/finance changes.
+- This PR limits **preflight diagnostics only** to unique `<main>` and records `outsideMainArticleHints` separately; unbounded/global anchors no longer masquerade as publisher listing entries. It retains the overlap guard and **never** changes `eligibleForMonitoringActivation: false`. Crucially, source-card/date boundaries and article revisions remain unverified, and we must re-run the manual DOE preflight on GitHub after merge before claiming a clean scoped sample.
+- DOE article example H1/time tags show publisher-visible September 30 while embedded `article:published_time` is September 28 and `article:modified_time` September 30; do not treat raw CMS metadata as authoritative date. See `docs/monitoring/m2-5a-doe-listing-main-scope-2026-10-08.md`.
+
 ## 2026-10-08: DOE CMEI M2.5 publisher-provenance preflight candidate
 
 - **EXIM operational controls verified:** M2.4 independent missing-schedule watchdog PR #92 squash-merged to `13b51a3`; exact-merge [CI #37813595464](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37813595464) passed. First true unattended EXIM source run remains due October 9 at 14:07 UTC, with independent missed-schedule check at 22:37 UTC. No claim of seven-day reliability yet.
