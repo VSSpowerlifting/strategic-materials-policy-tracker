@@ -175,12 +175,12 @@ test("missing article, source block, changed HTML and redirected host fail sourc
 });
 
 test("data discipline: reject off-site article links, duplicates, overlong titles and unbounded HTML", () => {
-  const html = "<html><h1>Latest News</h1>" +
+  const html = "<html><main><h1>Latest News</h1>" +
     '<a href="https://malicious.example/articles/foreign">Foreign fake official release</a>' +
     '<a href="' + link0 + '">A solid critical materials official news title</a>' +
     '<a href="' + link0 + '">Duplicate title for same official source</a>' +
     '<a href="/cmei/articles/x">short</a>' +
-    '<a href="/cmei/articles/' + "x".repeat(20) + '">' + "T".repeat(550) + "</a></html>";
+    '<a href="/cmei/articles/' + "x".repeat(20) + '">' + "T".repeat(550) + "</a></main></html>";
   const p = parseDoeListingForensics(html, DOE_CMEI_LISTING_0);
   assert.equal(p.anchorCandidates.length, 1);
   assert.equal(p.anchorCandidates[0].url, link0);
