@@ -47,6 +47,54 @@ const fixtureFetch = mockGet((url) => {
     headers: { "content-type": "text/html; charset=utf-8" } });
 });
 
+test("shared featured-news chrome is separately reported and never masquerades as paginated DOE rows", () => {
+  const common = [
+    "https://www.energy.gov/articles/energy-department-announces-new-genesis-mission-awards-advance-super-intelligence-science",
+    "https://www.energy.gov/articles/fact-sheet-delivering-president-trumps-promise-unleash-prosperity-and-security-united",
+    "https://www.energy.gov/articles/fact-sheet-golden-era-american-nuclear-energy-has-arrived",
+  ];
+  const featureHeader = "<header><section>" + common.map((url, n) =>
+    '<a href="' + url + '">DOE global featured newsroom headline number ' + n + "</a>").join("") +
+    "</section></header>";
+  const page0 = parseDoeListingForensics(
+    listing([link0, link1, link2, link3]).replace("<html>", "<html>" + featureHeader),
+    DOE_CMEI_LISTING_0,
+  );
+  const page1 = parseDoeListingForensics(
+    listing([link4, link5]).replace("<html>", "<html>" + featureHeader),
+    DOE_CMEI_LISTING_1,
+  );
+  assert.deepEqual(page0.anchorCandidates.map((a) => a.url),
+    [link0, link1, link2, link3]);
+  assert.equal(page0.outsideMainArticleHints.length, 3);
+  assert.equal(page1.outsideMainArticleHints.length, 3);
+  assert.deepEqual(
+    page0.outsideMainArticleHints.map((a) => a.url),
+    page1.outsideMainArticleHints.map((a) => a.url),
+  );
+  assert.equal(page0.anchorCandidates.some((a) => common.includes(a.url)), false);
+  assert.equal(page1.anchorCandidates.some((a) => common.includes(a.url)), false);
+  // /articles/ links inside the results still survive; blanket filtering
+  // to /cmei/articles/ would have silently dropped genuine DOE stories.
+  assert.equal(page0.anchorCandidates.some((a) => a.url === link3), true);
+  const commonCount = page0.anchorCandidates.filter((a) =>
+    page1.anchorCandidates.some((b) => b.url === a.url)).length;
+  assert.equal(commonCount, 0);
+});
+
+test("DOE listing must have exactly one main region; missing main or ambiguous nested pages fail closed", () => {
+  assert.throws(() => parseDoeListingForensics(
+    '<html><header><a href="' + link0 +
+    '">DOE official critical minerals announcement latest news</a></header></html>',
+    DOE_CMEI_LISTING_0,
+  ), /single bounded <main>/);
+  assert.throws(() => parseDoeListingForensics(
+    listing([link0, link1, link2]).replace("</html>",
+      '<main><h1>Second DOE page content</h1></main></html>'),
+    DOE_CMEI_LISTING_0,
+  ), /single bounded <main>/);
+});
+
 test("DOE listing evidence is source-shaped and not a verified publisher card/date binding", () => {
   const page = parseDoeListingForensics(listing([link0, link1, link2]),
     DOE_CMEI_LISTING_0);
