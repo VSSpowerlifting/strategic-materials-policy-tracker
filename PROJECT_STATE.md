@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: DOE M2.9a independently recoverable state contract candidate
+
+- **M2.8 original DOE body proof [run #37827488148](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37827488148) passed live** on #101 merge `4119c01`. Two index pages/20 source rows/zero overlap; three article bodies: September 30 mining selections **14** text blocks/**12** accordions/**7,460** candidate characters; September 14 mining workforce prize **1** text block/**2,093** characters; unrelated September 11 homebuilding control **1** block/**2,146** characters. All green, no source activation. Original full-body completeness remains **uncertified** (M2.8 literal `fullBodyBoundaryConfirmed:false`).
+- **M2.9a candidate is PURE offline continuity design, not an activation:** `scripts/doe-shadow-state-contract.ts` defines separate `watch-us-doe-cmei-news-shadow` memory, strict previous-state validation, immutable review-only transition previews, newest-ID anchor continuity, non-substitution of sitewide attribution, and no reset on missing/partial/corrupt state. Previews require future independent body/source-use/semantic/recovery approvals and never create a baseline or artifact.
+- **Non-goals:** no DOE collector or schedule, no editorial/finance promotion, no EXIM/M1 memory changes. Dedicated state/report artifact names are design reservations, not produced files. See `docs/monitoring/m2-9a-doe-shadow-state-continuity-contract-2026-10-08.md`.
+- **Next acceptance:** exact-head audit/validate/typecheck/lint/full tests/build, human review then merge. Separate M2.9b needs certified body/rights review, approved semantic version and independently authorized first bootstrap before manual collection.
+
 ## 2026-10-08: DOE M2.8 candidate article-body boundary audit
 
 - **DOE M2.7 metadata/admission passed live:** [run 37825957544](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37825957544) on #99 squash-merge `23ca395`: 2/2 filtered listing pages, 20 source-bound cards, zero URL overlap and 3/3 original publisher article headers. The CMEI filter spans 15 explicit CMEI attributions and five `Energy.gov` sitewide labels; issuer is not inferred for the latter. Source remains **forensic-only**.
