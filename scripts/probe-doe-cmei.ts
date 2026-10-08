@@ -14,11 +14,12 @@ export function summary(r: DoeForensicReport): string {
     "",
     "Checked " + r.checkedAt + " (UTC). **" + r.status + "**. Monitoring eligible: **NO**.",
     "",
-    "| Official listing page | HTTP | Possible article paths | H1 hint |",
-    "| --- | ---: | ---: | --- |",
+    "| Official listing page | HTTP | Main article hints | Off-main hints excluded | H1 hint |",
+    "| --- | ---: | ---: | ---: | --- |",
     ...r.pages.map((p) =>
       "| " + p.requestedUrl + " | " + p.status +
       " | " + p.anchorCandidates.length + " | " +
+      p.outsideMainArticleHints.length + " | " +
       (p.headingHint ?? "unavailable").replace(/\|/g, "\\|") + " |"),
     "",
     "Unique paths across two page samples: " + r.listedAcrossPages +
@@ -30,6 +31,10 @@ export function summary(r: DoeForensicReport): string {
       "| " + p.role + " | " + p.status + " | " +
       (p.headingHint ?? "unavailable").replace(/\|/g, "\\|") +
       " | " + p.unpairedVisibleDateHints.slice(0, 3).join(", ") + " |"),
+    "",
+    "### Excluded non-listing HTML headline hints (evidence only)",
+    ...r.pages.flatMap((p, i) => p.outsideMainArticleHints.slice(0, 10)
+      .map((hint) => "- Listing page " + i + ": " + hint.url)),
     "",
     "### Cautions and missing evidence",
     ...r.warnings.map((x) => "- " + x),
