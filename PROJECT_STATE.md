@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: Thompson Falls Q2 physical implementation backfill — PR under review
+
+- Existing `fin-us-dow-usac-antimony-2026-thompson-falls` gets **construction** physical status, backed by [USAC Q2 2026 Form 10-Q](https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm), Notes 9 and 16. Quarter-end source reports expansion substantially complete, **$4.1M related assets placed in service** late Q2, but **$29M gross costs remained construction in progress**. Do not mark complete/full operation; exact stage-transition date unstated.
+- **Financial standing unchanged:** $27M DPA parent with $20M Thompson Falls/$7M Alaska non-additive children; $12.8M April cash collection already recorded; future authorization conditions unchanged. No parent physical milestone and no invented Alaska mine/project execution.
+- One existing SEC source, the Thompson Falls financial row/project, regression tests and research note. No new source, financing, deployment or EXIM changes. See `docs/research/thompson-falls-q2-2026-physical-integrity.md`.
+
 ## 2026-10-08: M2.3 EXIM private local editorial sync candidate
 
 - **Prior gates:** M2.1 persisted EXIM first baseline [37800436243](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37800436243) and state-restored replay [37801575996](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37801575996) both healthy (20 releases, no coverage gaps, 0 new/revised in replay). M2.2 reliability PR #87 merged at `feb77f0`; [post-merge CI 37804408191](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37804408191) passed. Scheduled-run 7/14/30-day maturity not yet established.

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 import { currentFinancialStatus, totalCommitments, childLinks } from "@/lib/capital-control";
 import { projectStack } from "@/lib/capital-intelligence";
-import { getAllFinancialCommitments, getFinancialCommitmentById, getProjectById } from "@/lib/data";
+import { getAllFinancialCommitments, getFinancialCommitmentById, getProjectById, getSourceById } from "@/lib/data";
 
 const parentId = "fin-us-dow-usac-antimony-2026";
 const thompsonId = "fin-us-dow-usac-antimony-2026-thompson-falls";
@@ -69,4 +69,46 @@ test("MP and Lynas remain non-allocative while USAC has individually evidenced p
     const row = getFinancialCommitmentById(id)!;
     assert.equal(row.associatedProjectIds, undefined);
   }
+});
+
+test("Q2 SEC source confirms Thompson Falls construction and partial asset service without full completion", () => {
+  const row = getFinancialCommitmentById(thompsonId)!;
+  const project = getProjectById(row.projectId!)!;
+  const physical = row.implementationStatusHistory;
+  assert.equal(physical.length, 1);
+  assert.deepEqual([physical[0].status, physical[0].date, physical[0].sourceId], [
+    "construction", null, "src-usac-2026-q2-10q",
+  ]);
+  assert.match(physical[0].note ?? "", /substantially completed during Q2/);
+  assert.match(physical[0].note ?? "", /\$4\.1M/);
+  assert.match(physical[0].note ?? "", /\$29M/);
+  assert.ok(!physical.some((s) => ["operational", "completed", "commissioning"].includes(s.status)));
+  assert.equal(row.lifecycleReview?.implementationStatusCheckedAt, "2026-10-08");
+  assert.equal(row.lifecycleReview?.financialStatusCheckedAt, null);
+  assert.ok(project.evidence.some((e) =>
+    e.sourceId === "src-usac-2026-q2-10q" && e.evidence === "explicit" && e.supports.includes("stages")
+  ));
+  assert.match(project.notes ?? "", /not justify marking the whole grant-funded scope operational or completed/);
+  assert.equal(getSourceById("src-usac-2026-q2-10q")?.url,
+    "https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm");
+  assert.deepEqual(projectStack(row.projectId!)!.latestImplementation, {
+    status: "construction", date: null, rowId: thompsonId, sourceId: "src-usac-2026-q2-10q",
+  });
+});
+
+test("Physical refresh never double-counts the $27M parent or alters financial lifecycle", () => {
+  const parent = getFinancialCommitmentById(parentId)!;
+  const thompson = getFinancialCommitmentById(thompsonId)!;
+  const alaska = getFinancialCommitmentById(alaskaId)!;
+  assert.deepEqual(parent.implementationStatusHistory, []);
+  assert.deepEqual(alaska.implementationStatusHistory, []);
+  assert.deepEqual(thompson.financialStatusHistory.map((s) => [s.status, s.date]), [
+    ["decided", "2026-02-24"], ["partially_disbursed", null],
+  ]);
+  assert.match(thompson.financialStatusHistory.at(-1)?.note ?? "", /\$12\.8M/);
+  const totals = totalCommitments([parent, thompson, alaska], getAllFinancialCommitments());
+  const usd = totals.currencies.find((c) => c.currency === "USD");
+  assert.ok(usd && usd.status === "summed");
+  assert.deepEqual(usd.countedIds, [parentId]);
+  assert.deepEqual([...usd.nestedIds].sort(), [alaskaId, thompsonId]);
 });

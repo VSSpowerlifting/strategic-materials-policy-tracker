@@ -3298,9 +3298,20 @@
         "evidence": "explicit",
         "locator": "Thompson Falls operational report and CEO's response on $27M award allocation",
         "note": "Recipient states $20M is for Thompson Falls; this is the allocation, not a claim that all $20M was paid."
+      },
+      {
+        "sourceId": "src-usac-2026-q2-10q",
+        "supports": [
+          "name",
+          "location",
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 9 — Government Grant, Q2 project progress; Note 16 — Thompson Falls, Montana Facility Expansion",
+        "note": "Physical project is substantially complete in Q2 2026; some $4.1M related assets placed in service while $29M gross costs remain CIP. Does not verify full expansion operating at design output."
       }
     ],
-    "notes": "Part of the $27M DoW DPA Title III award. The company allocated $20M to Thompson Falls in its SEC-furnished May 2026 call transcript. The $12.8M first-quarter milestones/payment are not a second award."
+    "notes": "Part of the $27M DoW DPA Title III award. The company allocated $20M to Thompson Falls in its SEC-furnished May 2026 call transcript. The $12.8M first-quarter milestones/payment are not a second award. SEC Form 10-Q for Q2 2026 reports the expansion substantially completed, with approximately $4.1M of project assets placed into service late in the quarter and approximately $29M of gross expansion costs remaining in construction in progress as of June 30. These are physical project costs, not incremental government capital, and do not justify marking the whole grant-funded scope operational or completed."
   },
   {
     "id": "prj-us-usar-magnet-project-2",

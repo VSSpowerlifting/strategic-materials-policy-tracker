@@ -9662,7 +9662,14 @@
         "note": "The filing states $12.8M received in April 2026 for accepted milestones, recognized against Thompson Falls construction in progress; no exact day is given."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "USAC's quarter-ended 30 June 2026 Form 10-Q states that Thompson Falls expansion was substantially completed during Q2, with approximately $4.1M of related PP&E placed in service late in that quarter. Approximately $29M of gross project costs remained classified as construction in progress at June 30; this is evidence of physical work and partial asset service, not completion or full operational throughput of the $20M grant-funded scope. Exact construction-start and placed-in-service dates are not provided, so this milestone remains undated."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -9705,11 +9712,15 @@
           "location"
         ],
         "evidence": "explicit",
-        "locator": "Note 9 — Government Grant and Property, Plant and Equipment",
-        "note": "Confirms payment of $12.8M in April 2026, not the entire Thompson Falls $20M allocation."
+        "locator": "Note 9 — Government Grant, paragraph on Q2 substantial completion; Note 16 — Thompson Falls, Montana Facility Expansion",
+        "note": "Form 10-Q Note 9: $12.8M accepted grant milestone proceeds collected in April 2026. Notes 9, 10 and 16: Thompson Falls expansion substantially complete in Q2; approximately $4.1M project assets placed in service late Q2, with approximately $29M gross costs still in construction in progress. Supports physical construction status, not full operation."
       }
     ],
-    "notes": "The recipient's SEC-furnished earnings-call transcript allocates $20M to Thompson Falls. Its Form 10-Q reports $12.8M of accepted milestones received in April 2026 and recorded against Thompson Falls construction in progress. Neither amount is incremental to the parent $27M award."
+    "notes": "The recipient's SEC-furnished earnings-call transcript allocates $20M to Thompson Falls. Its Form 10-Q reports $12.8M of accepted milestones received in April 2026 and recorded against Thompson Falls construction in progress. Neither amount is incremental to the parent $27M award. The 2026 Q2 SEC filing independently confirms physical progress: Thompson Falls expansion substantially completed in Q2, approximately $4.1M related assets placed into service late in the quarter, and approximately $29M gross expansion project costs still in construction in progress on June 30. The funded scope is recorded at construction-stage maturity with partial asset service; this does not promote the entire expansion to operational/completed.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": null,
+      "implementationStatusCheckedAt": "2026-10-08"
+    }
   },
   {
     "id": "fin-us-exim-perpetua-stibnite-2026",
