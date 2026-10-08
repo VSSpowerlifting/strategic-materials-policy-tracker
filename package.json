@@ -21,7 +21,8 @@
     "audit:exim": "tsx scripts/audit-exim-reliability.ts",
     "audit:exim-schedule": "tsx scripts/check-exim-schedule.ts",
     "editorial:inbox": "tsx scripts/editorial-inbox.ts",
-    "audit:project-execution": "tsx scripts/audit-project-execution.ts"
+    "audit:project-execution": "tsx scripts/audit-project-execution.ts",
+    "audit:project-execution-pilot": "tsx scripts/audit-project-execution-pilot.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
