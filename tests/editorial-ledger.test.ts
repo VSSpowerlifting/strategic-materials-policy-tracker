@@ -108,7 +108,7 @@ test("candidate handoff is explicit, private, draft-only, with no asserted polic
   assert.equal(candidate.verification.verdict, "pending");
   assert.equal(candidate.classification.confidence, "low");
   assert.equal(candidate.promotion.promoted, false);
-  assert.equal(candidate.proposedEvent.jurisdiction, "ca");
+  assert.equal(candidate.proposedEvent.jurisdiction, "canada");
   assert.equal(candidate.proposedEvent.intakeMode, "monitored");
   assert.equal(candidate.proposedEvent.date, undefined);
   assert.equal(candidate.proposedEvent.policyStatus, undefined);
