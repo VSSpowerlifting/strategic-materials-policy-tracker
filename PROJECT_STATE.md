@@ -1,5 +1,14 @@
 # Project state
 
+## 2026-10-07: Keliber EIB contract borrower reconciliation (draft)
+
+**Status:** Branch `fix/keliber-eib-borrower-provenance-20261007`, based on `main` at `f16bb6e`; isolated draft, unmerged, not deployed.
+
+- The signed 20 August 2024 €150 million EIB loan agreement, filed as Exhibit 4.8 to Sibanye's 25 April 2025 SEC Form 6-K, explicitly names **Keliber Technology Oy** as the legal borrower and **Keliber Oy** as a guarantor. The 23 August 2024 EIB news release had used Keliber Oy in its shorthand recipient wording.
+- Corrects the €150M financing row's recipient organization and updates event/project/organization attribution without changing amount, maturity date, loan instrument or project.
+- EIB's 2024 Lending Report separately identifies **Natixis**, not Keliber, for the €17.5 million Keliber project signature of 20 December 2024. The precise instrument, beneficiary chain and overlap are not established by the reviewed sources; **no second financing row is created**.
+- Source ledger `docs/research/keliber-eib-borrower-reconciliation-2026-10-07.md` and regressions preserve legal identities and non-duplication. Required pre-merge validation is separate. No merge or deployment authorized.
+
 ## 2026-10-07: U.S. Antimony $27M sourced geographic allocation (draft)
 
 **Status:** Isolated draft tranche on `feat/usac-antimony-award-sourced-allocation-20261007`, from main `c29086a`; unmerged, not deployed.
