@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-08: EXIM M2.1 live source-card and body acceptance passed in PR #83
+
+- **Fifth live bootstrap failed safely:** [run 37792978605](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37792978605) on #81 merge `0e10ddc`, HTTP 200 but `invalid_response` on `/news/reports`, with **no baseline created**. An H1 boundary did not prevent footer links entering the global scan.
+- **Actual HTML forensic:** isolated PR-only runner [37793840001](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37793840001) fetched EXIM's current index, finding 20 `views-row` release cards under the unique `<main>`, explicit `views-field-field-release-date` and `views-field-title`, and repeated global `/news/reports` in both navigation and footer. Source-scoped card extraction now avoids sitewide anchor matching while requiring per-card publisher dates, titles, official URL identities, bounded card count, and continued fail-closed checks.
+- **Full-body variant:** read-only [run 37795933876](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37795933876) identified exactly one missing-`ABOUT EXIM` variant among 20 live articles: official August 4 EXIM/BETA joint announcement. Its `node--type-news` container closes before the page footer and includes contingent-financing language and forward-looking disclaimers. Preserve the existing `ABOUT EXIM` fingerprint boundary for regular releases; use single closed publisher news article only when marker absent, with title/date/length verification unchanged.
+- **Complete real-source no-state pass:** [GitHub run 37796309907](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37796309907) checked 20/20 individual releases, zero failed, then executed complete in-memory first-baseline code: `health=ok`, HTTP 200, 20 observed, one page read, zero new/revised, no window gap. This is **not** a persisted baseline or successful recovery test.
+- **PR #83 operator gate:** temporary source-forensic job/script removed before review; exact-head normal CI must pass. Maintainer squash-merge, then explicitly bootstrap on `main`, inspect persisted state and report artifacts, and run `bootstrap=false` replay only after a healthy baseline. M1 Canada/Federal Register state, published policy/financial rows, and the web app are unchanged.
+
 ## 2026-10-08: EIB UP Catalyst 2024 signature reconciliation (PR #80 under review)
 
 - EIB project [20240127](https://www.eib.org/en/projects/all/20240127) shows **€18M signed 2024-12-20** for **UP CATALYST OU** (venture debt backed by InvestEU). Its **€46M** is total project cost, not public lending. No disbursement established.

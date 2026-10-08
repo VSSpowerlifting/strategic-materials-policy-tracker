@@ -13,10 +13,24 @@ const date = (n: number) => n === 1 ? "Oct 6, 2026" : "Sep 23, 2026";
 const title = (n: number) => n === 1 ? "EXIM Announces $547 Million Loan Guarantee to Support Manufacturing" :
   "EXIM Signs Framework to Support Critical Minerals Development Number " + n;
 const articleUrl = (n: number) => EXIM_LISTING + "/" + path(n);
-const listing = (ids: number[]) => "<html><body><main><h1>News</h1>" + ids.map((n) =>
-  '<div class="views-row"><div class="date">' + date(n) +
-  '</div><div class="title"><a href="' + articleUrl(n) + '">' + title(n) +
-  "</a></div></div>").join("") + "</main></body></html>";
+// Representative EXIM 2026-10-08 HTML shape from the read-only GitHub
+// DOM probe #37793840001: h1 News is outside <main>, the main contains
+// views-row release cards with separate field-release-date and title fields,
+// and /news/reports occurs in the global navigation and footer.
+const listing = (ids: number[]) =>
+  '<html><body><h1 class="page-title__text"><span>News</span></h1>' +
+  '<nav><a href="/news/reports">Reports</a>' +
+  '<a href="/news/meeting-minutes">Board Agendas and Meeting Minutes</a>' +
+  '<a href="/news/media-advisories">Media Advisories</a></nav>' +
+  '<main class="l-page__main l-page__inner" role="main">' + ids.map((n) =>
+    '<div class="views-row views__row">' +
+    '<div class="views-field views-field-field-release-date"><div class="field-content">' +
+    date(n) + '</div></div>' +
+    '<div class="views-field views-field-title"><span class="field-content">' +
+    '<a href="' + articleUrl(n) + '" hreflang="en">' + title(n) +
+    '</a></span></div></div>').join("") + '</main>' +
+  '<footer><a href="/news/reports">EXIM Annual Reports</a>' +
+  '<a href="/news/unrecognized-future-menu">Future Menu</a></footer></body></html>';
 const article = (n: number, altered = false) => "<html><body><header>Other EXIM links</header><main>" +
   "<h1>" + title(n) + "</h1><div><strong>FOR IMMEDIATE RELEASE " +
   (n === 1 ? "October 6, 2026" : "September 23, 2026") + "</strong></div>" +
@@ -43,135 +57,97 @@ const mock = (ids: number[], changes: Set<number> = new Set(), second: number[] 
 };
 const five = [1, 2, 3, 4, 5];
 
-test("EXIM listings yield stable canonical identities and verified nearby dates, not fabricated dates", () => {
+test("live-structured EXIM news cards yield stable dates and canonical identities", () => {
   const first = parseEximNewsListing(listing(five));
   assert.equal(first.length, five.length);
   assert.equal(first[0].publicationDate, "2026-10-06");
   assert.equal(first[1].publicationDate, "2026-09-23");
   assert.equal(first[0].url, articleUrl(1));
   assert.match(first[0].id, /^[a-f0-9]{64}$/);
-  const apex = listing(five).replaceAll("https://www.exim.gov", "https://exim.gov");
-  assert.deepEqual(parseEximNewsListing(apex), first);
-  assert.throws(() => parseEximNewsListing(listing(five).replace("Oct 6, 2026", "")), /no nearby official publication date/);
-  assert.throws(() => parseEximNewsListing("<html><body>No dated news listings</body></html>"), /anchors/);
-  assert.throws(() => parseEximNewsListing(listing([1, 2, 3])), /fewer than five/);
-  assert.throws(() => parseEximNewsListing(listing(five).replace("https://www.exim.gov/news/", "https://bad.example/news/")), /fewer than five|no nearby/);
-});
-
-test("official News heading isolates dated release cards from all site-wide /news navigation", () => {
-  const expected = parseEximNewsListing(listing(five));
-  const globalNav = '<header><nav>' +
-    '<a href="/news/media-advisories">Media Advisories</a>' +
-    '<a href="/news/meeting-minutes">Board Meeting Minutes</a>' +
-    '<a href="/news/reports">Annual Reports</a>' +
-    '<a href="/news/unrecognized-future-menu">Future navigation category</a>' +
-    '<a href="/news/untitled-menu"><img src="/menu-icon.svg"></a>' +
-    '</nav></header>';
-  const withNavigation = listing(five).replace("<main>", globalNav + "<main>");
-  assert.deepEqual(parseEximNewsListing(withNavigation), expected);
-  // Require source-provided content boundary; never scan global navigation if
-  // a future EXIM template omits or renames the official heading.
-  assert.throws(
-    () => parseEximNewsListing(withNavigation.replace("<h1>News</h1>", "<h1>Reports</h1>")),
-    /missing unique official News heading/,
-  );
-  // Embedded spans inside the official heading preserve the semantic marker.
   assert.deepEqual(
-    parseEximNewsListing(withNavigation.replace("<h1>News</h1>", '<h1 class="page-title"><span>News</span></h1>')),
-    expected,
+    parseEximNewsListing(listing(five).replaceAll("https://www.exim.gov", "https://exim.gov")),
+    first,
   );
-  // A release-shaped *unknown* undated link inside content still fails closed.
-  const unknownInsideContent = withNavigation.replace("<h1>News</h1>",
-    '<h1>News</h1><a href="/news/unknown-in-content">Unknown without verified date</a>');
-  assert.throws(() => parseEximNewsListing(unknownInsideContent),
-    /no nearby official publication date: https:\/\/www\.exim\.gov\/news\/unknown-in-content/);
+  assert.throws(() => parseEximNewsListing(listing(five).replace("Oct 6, 2026", "")),
+    /no single explicit official publication date/);
+  assert.throws(() => parseEximNewsListing("<html><body>No dated news listings</body></html>"),
+    /missing HTML anchors/);
+  assert.throws(() => parseEximNewsListing(listing([1, 2, 3])),
+    /fewer than five/);
+  assert.throws(() => parseEximNewsListing(listing(five).replace(articleUrl(1), "https://bad.example/news/fake")),
+    /headline is not an official release URL/);
 });
 
-test("actual EXIM Media Advisories navigation link never becomes a dated release", async () => {
-  // Run 37730218209 failed on the category URL below. In the official index
-  // this link is part of navigation, not an individually dated publication.
-  const nav = '<nav><a href="/news/media-advisories">Media Advisories</a></nav>';
-  const before = "<html><body>" + nav + listing(five).replace(/^<html><body>/, "").replace(/<\/body><\/html>$/, "") +
-    "</body></html>";
+test("global EXIM navigation, footer, and future menu links never become press releases", async () => {
   const expected = parseEximNewsListing(listing(five));
-  assert.deepEqual(parseEximNewsListing(before), expected);
-  // A category link between two dated entries must not reuse the first date.
-  const middle = listing(five).replace('</a></div></div>', '</a></div></div>' + nav);
-  assert.deepEqual(parseEximNewsListing(middle), expected);
-  // An undated, article-shaped unknown URL STILL fails closed rather than
-  // silently disappearing just because category navigation is permitted.
-  const unknown = listing(five).replace("<h1>News</h1>", '<h1>News</h1><a href="/news/exim-new-unknown-story">Undated unknown EXIM release</a>');
-  assert.throws(() => parseEximNewsListing(unknown), /no nearby official publication date/);
-  const baseline = await runEximShadow(null, stamp, true, (async (url: string) => new Response(
-    url.includes("?page=") ? before :
-      article(Number(new URL(url).pathname.match(/(\d+)$/)?.[1])),
-    { status: 200 },
-  )) as typeof fetch);
+  const withAdditionalNav = listing(five).replace("<main",
+    '<nav><a href="/news/new-category-never-seen-before">Unknown Future Menu</a>' +
+    '<a href="/news/thumbnail-menu"><img src="/menu.png"></a></nav><main');
+  assert.deepEqual(parseEximNewsListing(withAdditionalNav), expected);
+  const withAfterMain = listing(five).replace("</main>",
+    '</main><nav><a href="/news/arbitrary-future-document">New Category</a></nav>');
+  assert.deepEqual(parseEximNewsListing(withAfterMain), expected);
+  const withNonCardMainLink = listing(five).replace("</main>",
+    '<a href="/news/non-card-main-link">Non-press-release link</a></main>');
+  assert.deepEqual(parseEximNewsListing(withNonCardMainLink), expected);
+
+  const baseline = await runEximShadow(null, stamp, true,
+    (async (url: string) => new Response(
+      url.includes("?page=") ? withAdditionalNav :
+        article(Number(new URL(url).pathname.match(/(\d+)$/)?.[1])),
+      { status: 200 },
+    )) as typeof fetch);
   assert.equal(baseline.report.health, "ok");
   assert.equal(baseline.report.observed, 5);
   assert.equal(baseline.queue.items.length, 0);
   assert.ok(baseline.state);
 });
 
-test("EXIM official Meeting Minutes section is not a dated news release", async () => {
-  const expected = parseEximNewsListing(listing(five));
-  const meetingNav = '<nav><a href="/news/meeting-minutes">Meeting Minutes</a></nav>';
-  const withCategory = listing(five).replace("<main>", "<main>" + meetingNav);
-  assert.deepEqual(parseEximNewsListing(withCategory), expected);
-  // EXIM category links remain out of release scope even when a dated card
-  // precedes them, so no neighboring date can be attributed to the section.
-  const afterDatedCard = listing(five).replace("</a></div></div>",
-    "</a></div></div>" + meetingNav);
-  assert.deepEqual(parseEximNewsListing(afterDatedCard), expected);
-  const apexAlias = listing(five).replace("<main>",
-    '<main><nav><a href="https://exim.gov/news/meeting-minutes/">Board Agendas and Meeting Minutes</a></nav>');
-  assert.deepEqual(parseEximNewsListing(apexAlias), expected);
-  // Preserve the fail-closed behavior for an unknown undated article-shaped link.
-  const unknown = listing(five).replace("<h1>News</h1>",
-    '<h1>News</h1><a href="/news/unverified-board-statement">Unverified board statement</a>');
-  assert.throws(() => parseEximNewsListing(unknown),
-    /no nearby official publication date: https:\/\/www\.exim\.gov\/news\/unverified-board-statement/);
-  const result = await runEximShadow(null, stamp, true,
-    (async (url: string) => new Response(
-      url.includes("?page=") ? withCategory :
-        article(Number(new URL(url).pathname.match(/(\d+)$/)?.[1])),
-      { status: 200 },
-    )) as typeof fetch);
-  assert.equal(result.report.health, "ok");
-  assert.equal(result.report.observed, 5);
-  assert.ok(result.state);
-  assert.equal(result.report.newCount, 0);
+test("EXIM card extraction fails closed on publisher field and headline drift", () => {
+  assert.throws(() => parseEximNewsListing(
+    listing(five).replace("views-field-field-release-date", "views-field-another-date")),
+    /lacks unique publisher date\/title fields/);
+  assert.throws(() => parseEximNewsListing(
+    listing(five).replace("views-field-title", "views-field-something-else")),
+    /lacks unique publisher date\/title fields/);
+  assert.throws(() => parseEximNewsListing(
+    listing(five).replace("Oct 6, 2026", "Oct 99, 2026")),
+    /invalid official publication date/);
+  assert.throws(() => parseEximNewsListing(
+    listing(five).replace('<h1 class="page-title__text"><span>News</span></h1>', "")),
+    /missing unique official News heading/);
+  assert.throws(() => parseEximNewsListing(
+    listing(five).replace("</main>", "")),
+    /missing main closing boundary/);
+  assert.throws(() => parseEximNewsListing(
+    listing(five).replace('class="views-row views__row"', 'class="unknown-row"')),
+    /fewer than five/);
 });
 
-test("EXIM untitled duplicate anchors need an independently dated headline for the same URL", () => {
+test("EXIM release card accepts same-URL image links but rejects ambiguous headline links", () => {
   const expected = parseEximNewsListing(listing(five));
   const thumbnail = '<a href="' + articleUrl(1) + '"><img src="/media/preview.jpg" alt="EXIM"></a>';
-  // A real dated card can link its image and its headline separately.
   const withThumbnail = listing(five).replace(
-    '<div class="title"><a href="' + articleUrl(1) + '">',
-    '<div class="title">' + thumbnail + '<a href="' + articleUrl(1) + '">',
+    '<span class="field-content"><a href="' + articleUrl(1) + '" hreflang="en">',
+    '<span class="field-content">' + thumbnail + '<a href="' + articleUrl(1) + '" hreflang="en">',
   );
+  assert.notEqual(withThumbnail, listing(five), "thumbnail fixture must differ from source");
   assert.deepEqual(parseEximNewsListing(withThumbnail), expected);
-  // This also holds when the presentation-only link appears after the title.
   const afterTitle = listing(five).replace(
-    '</a></div></div>',
-    '</a>' + thumbnail + '</div></div>',
+    '</a></span></div></div>',
+    '</a>' + thumbnail + '</span></div></div>',
   );
   assert.deepEqual(parseEximNewsListing(afterTitle), expected);
-  // Unknown article-shaped image-only links are never silently ignored.
   const unknown = listing(five).replace(
-    '<h1>News</h1>',
-    '<h1>News</h1><a href="/news/unverified-untitled"><img src="/media/unknown.jpg"></a>',
+    '<span class="field-content"><a href="' + articleUrl(1) + '" hreflang="en">',
+    '<span class="field-content"><a href="/news/unverified-unknown"><img src="/media/unknown.jpg"></a><a href="' + articleUrl(1) + '" hreflang="en">',
   );
+  assert.notEqual(unknown, listing(five), "unknown-link fixture must differ from source");
   assert.throws(() => parseEximNewsListing(unknown),
-    /EXIM article-shaped link lacks verified dated headline anchor: https:\/\/www\.exim\.gov\/news\/unverified-untitled/);
-  // Very long anchor text without a separately verified title also fails.
-  const tooLong = listing(five).replace(
-    '<h1>News</h1>',
-    '<h1>News</h1><a href="/news/unverified-long-headline">' + "L".repeat(601) + '</a>',
-  );
+    /unmatched headline\/thumbnail URL/);
+  const tooLong = listing(five).replace(title(1), "L".repeat(601));
   assert.throws(() => parseEximNewsListing(tooLong),
-    /EXIM article-shaped link lacks verified dated headline anchor: https:\/\/www\.exim\.gov\/news\/unverified-long-headline/);
+    /lacks unique article headline anchor/);
 });
 
 test("EXIM release-body verification preserves date/title and detects material text edits", () => {
@@ -184,7 +160,44 @@ test("EXIM release-body verification preserves date/title and detects material t
   const withFooter = article(1).replace("Dynamic footer", "Unrelated dynamic content");
   assert.equal(row.fingerprint, parseEximArticle(withFooter, listed).fingerprint);
   assert.throws(() => parseEximArticle(article(1).replace("October 6, 2026", "October 7, 2026"), listed), /date disagrees/);
-  assert.throws(() => parseEximArticle(article(1).replace("ABOUT EXIM:", "FREQUENTLY ASKED QUESTIONS:"), listed), /release-body boundary/);
+  assert.throws(() => parseEximArticle(article(1).replace("ABOUT EXIM:", "FREQUENTLY ASKED QUESTIONS:"), listed), /unique news-body fallback boundary/);
+});
+
+test("BETA joint announcement without ABOUT EXIM uses closed news article body, not page footer", () => {
+  // Official Aug 4, 2026 EXIM/BETA release has FOR IMMEDIATE RELEASE, no
+  // ABOUT EXIM marker, and material financing contingencies followed by
+  // Forward-Looking Statements. Live HTML has one node--type-news article,
+  // closed ahead of sitewide footer (read-only probe #37795933876).
+  const betaTitle = "BETA Technologies and EXIM Bank Announce Intent to Expand Financing Agreement for Up to $1 Billion to Fuel U.S. Aerospace Manufacturing Growth";
+  const listed = {
+    id: "a".repeat(64),
+    url: "https://www.exim.gov/news/beta-technologies-and-exim-bank-announce-intent-expand-financing-agreement-for-1-billion-fuel",
+    title: betaTitle,
+    publicationDate: "2026-08-04",
+  };
+  const body = "<p>FOR IMMEDIATE RELEASE August 4, 2026</p>" +
+    "<p>EXIM and BETA announce an intended expansion of a financing relationship. " +
+    "Proposed terms remain under review and are not a binding financial commitment.</p>" +
+    "<p>Additional Information About the Proposed Transaction: until definitive " +
+    "agreements and approvals are secured, neither side is obligated to conclude " +
+    "the proposed financing. Terms and dates remain uncertain.</p>" +
+    "<p>Forward-Looking Statements: outcome and financing conditions are not guaranteed.</p>";
+  const html = '<html><body><nav>EXIM navigation</nav><main><article class="node node--type-news node--full-view">' +
+    "<h1>" + betaTitle + "</h1>" + body + "</article></main>" +
+    "<footer>Changeable global website links</footer></body></html>";
+  const base = parseEximArticle(html, listed);
+  assert.match(base.fingerprint, /^[a-f0-9]{64}$/);
+  assert.equal(base.publicationDate, "2026-08-04");
+  assert.equal(base.fingerprint,
+    parseEximArticle(html.replace("Changeable global website links", "New dynamic footer"), listed).fingerprint);
+  assert.notEqual(base.fingerprint,
+    parseEximArticle(html.replace("neither side is obligated", "both sides are obligated"), listed).fingerprint);
+  assert.throws(() => parseEximArticle(html.replace("node--type-news", "node--type-page"), listed),
+    /unique news-body fallback boundary/);
+  assert.throws(() => parseEximArticle(html.replace("</article>", ""), listed),
+    /closed publisher news-body boundary/);
+  assert.throws(() => parseEximArticle(html.replace("August 4, 2026", "August 5, 2026"), listed),
+    /date disagrees/);
 });
 
 test("explicit baseline, unchanged replay and real body revision preserve versioned state separately", async () => {

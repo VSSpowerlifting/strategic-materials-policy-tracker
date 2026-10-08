@@ -111,61 +111,86 @@ export type EximEditorialQueue = {
     keywordHintOnly: boolean; reviewStatus: "unreviewed" }[];
 };
 
-/** Only official anchored dated releases qualify; no dates or identities inferred. */
+/**
+ * The official EXIM news index contains unrelated /news/<slug> navigation
+ * before and after the listings. Its actual release cards use the publisher's
+ * views-row + views-field-field-release-date + views-field-title structure.
+ * Read only these cards, not every sitewide anchor. A missing or modified
+ * structure fails the entire observation rather than inventing dates.
+ */
+function extractDiv(markup: string, openIndex: number): string {
+  let depth = 0;
+  for (const match of markup.slice(openIndex).matchAll(/<\/?div\b[^>]*>/gi)) {
+    if (/^<div\b/i.test(match[0])) depth++;
+    else if (--depth === 0)
+      return markup.slice(openIndex, openIndex + (match.index ?? 0) + match[0].length);
+  }
+  throw Error("EXIM listing has unbalanced release-card markup");
+}
+function divsWithClass(markup: string, className: string): string[] {
+  const found: string[] = [];
+  for (const tag of markup.matchAll(/<div\b[^>]*\bclass\s*=\s*(?:"([^"]*)"|'([^']*)')[^>]*>/gi)) {
+    const classes = (tag[1] ?? tag[2]).split(/\s+/);
+    if (classes.includes(className)) found.push(extractDiv(markup, tag.index ?? 0));
+  }
+  return found;
+}
+
+/** Require official per-card dates and titled links, never inferred dates. */
 export function parseEximNewsListing(html: string): ListedEximRelease[] {
   if (Buffer.byteLength(html, "utf8") > MAX_PAGE_BYTES || !/<html\b/i.test(html) ||
       !/<a\b/i.test(html)) throw Error("EXIM listing missing HTML anchors or exceeded safe size");
-  // The official EXIM page has site-wide navigation with /news/<slug>
-  // category links before its News heading. Only anchors *after* that
-  // publisher-supplied content heading can be individual dated releases.
-  // Require exactly one matching heading; never fall back to scanning navigation
-  // when EXIM changes its template.
   const headings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/gi)]
-    .filter((item) => visibleText(item[1]).toLowerCase() === "news");
+    .filter((h) => visibleText(h[1]).toLowerCase() === "news");
   if (headings.length !== 1)
-    throw Error("EXIM listing missing unique official News heading; refusing global navigation scan");
-  const newsStart = (headings[0].index ?? 0) + headings[0][0].length;
+    throw Error("EXIM listing missing unique official News heading; template may have changed");
+  const mains = [...html.matchAll(/<main\b[^>]*>/gi)];
+  if (mains.length !== 1) throw Error("EXIM listing requires exactly one main landmark");
+  const mainStart = (mains[0].index ?? 0) + mains[0][0].length;
+  const end = /<\/main\s*>/i.exec(html.slice(mainStart));
+  if (!end) throw Error("EXIM listing missing main closing boundary");
+  const main = html.slice(mainStart, mainStart + (end.index ?? 0));
+  const cards = divsWithClass(main, "views-row");
+  if (cards.length < 5 || cards.length > MAX_PAGE_ITEMS)
+    throw Error("EXIM listing has fewer than five or more than 35 dated release cards; treat as changed template");
+
   const out: ListedEximRelease[] = [];
   const seen = new Set<string>();
-  // Image-only or otherwise untitled anchors may point to a real release whose
-  // dated headline link appears separately. Accept only if that *same URL*
-  // has a verified dated headline elsewhere in the listing. Unknown links
-  // without a matching dated headline still fail closed.
-  const unverifiedUntitled = new Map<string, number>();
-  let previousArticleEnd = newsStart;
-  for (const match of html.slice(newsStart).matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)) {
-    const anchorIndex = newsStart + (match.index ?? 0);
-    const attr = /\bhref\s*=\s*(?:"([^"]+)"|'([^']+)')/i.exec(match[1]);
-    const url = officialArticleUrl(attr?.[1] ?? attr?.[2] ?? "");
-    if (!url) continue;
-    const title = visibleText(match[2]);
-    if (title.length < 12 || title.length > 600) {
-      unverifiedUntitled.set(url, title.length);
-      continue;
+  for (const card of cards) {
+    const dates = divsWithClass(card, "views-field-field-release-date");
+    const titles = divsWithClass(card, "views-field-title");
+    if (dates.length !== 1 || titles.length !== 1)
+      throw Error("EXIM release card lacks unique publisher date/title fields");
+    const dateText = visibleText(dates[0]);
+    const dateMatches = [...dateText.matchAll(DATE_RE)];
+    if (dateMatches.length !== 1 || dateText !== dateMatches[0][0])
+      throw Error("EXIM release card has no single explicit official publication date");
+    const date = parseDate(dateText);
+    if (!date) throw Error("EXIM release card contains invalid official publication date");
+
+    const anchors = [...titles[0].matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)];
+    const titled = anchors.filter((a) => {
+      const len = visibleText(a[2]).length;
+      return len >= 12 && len <= 600;
+    });
+    if (titled.length !== 1)
+      throw Error("EXIM release card lacks unique article headline anchor");
+    const href = (attrs: string): string =>
+      /\bhref\s*=\s*(?:"([^"]+)"|'([^']+)')/i.exec(attrs)?.slice(1).find(Boolean) ?? "";
+    const url = officialArticleUrl(href(titled[0][1]));
+    if (!url) throw Error("EXIM release card headline is not an official release URL");
+    // A thumbnail may link to the exact same release. Any other in-card
+    // article-shaped URL is ambiguous and must not be silently discarded.
+    for (const a of anchors) {
+      const alternate = officialArticleUrl(href(a[1]));
+      if (alternate !== url)
+        throw Error("EXIM release card contains unmatched headline/thumbnail URL: " + href(a[1]));
     }
-    // Date is rendered in the listing immediately before the title link.
-    // Require one visible date BETWEEN consecutive official article links:
-    // never reuse a previous item's date when a new row has none.
-    const lead = visibleText(html.slice(Math.max(previousArticleEnd, anchorIndex - 3500), anchorIndex));
-    const dateMatches = [...lead.matchAll(DATE_RE)];
-    const latest = dateMatches.at(-1);
-    const trailing = latest ? lead.slice((latest.index ?? 0) + latest[0].length).trim() : "";
-    const date = latest ? parseDate(latest[0]) : null;
-    if (!date || trailing.length > 180) throw Error("EXIM listing article has no nearby official publication date: " + url);
-    previousArticleEnd = anchorIndex + match[0].length;
-    if (seen.has(url)) continue;
+    if (seen.has(url)) throw Error("EXIM duplicate dated release card URL: " + url);
     seen.add(url);
-    out.push({ id: hash(EXIM_SOURCE_ID + "\n" + url), url, title, publicationDate: date });
-    if (out.length > MAX_PAGE_ITEMS) throw Error("EXIM listing exceeds bounded 35-release parser limit");
+    out.push({ id: hash(EXIM_SOURCE_ID + "\n" + url), url,
+      title: visibleText(titled[0][2]), publicationDate: date });
   }
-  // Do not silently discard new undated/untitled article-shaped URLs. Only
-  // duplicate presentation anchors for an independently dated title may pass.
-  for (const [url, titleLength] of unverifiedUntitled) {
-    if (!seen.has(url))
-      throw Error("EXIM article-shaped link lacks verified dated headline anchor: " + url +
-        " (visible title length " + titleLength + ")");
-  }
-  if (out.length < 5) throw Error("EXIM listing has fewer than five dated official release links; treat as changed template");
   return out;
 }
 
@@ -175,10 +200,37 @@ export function parseEximArticle(html: string, listed: ListedEximRelease): EximR
     throw Error("EXIM article is not bounded HTML");
   const text = visibleText(html);
   const start = text.search(/\bFOR IMMEDIATE RELEASE\b/i);
-  const end = start === -1 ? -1 : text.slice(start).search(/\bABOUT EXIM\s*:/i);
-  if (start === -1 || end < 0 || end < 160 || end > 45_000)
-    throw Error("EXIM article missing stable release-body boundary");
-  const body = text.slice(start, start + end).trim();
+  if (start === -1)
+    throw Error("EXIM article missing official FOR IMMEDIATE RELEASE heading: " + listed.url);
+  const end = text.slice(start).search(/\bABOUT EXIM\s*:/i);
+  let body: string;
+  if (end >= 160 && end <= 45_000) {
+    // Preserve the established EXIM fingerprint boundary when publisher
+    // boilerplate exists: revisions should not respond to footer/nav churn.
+    body = text.slice(start, start + end).trim();
+  } else if (end === -1) {
+    // EXIM's 2026-08-04 BETA Technologies joint announcement omits ABOUT EXIM
+    // and instead ends with company disclosures and forward-looking statements.
+    // The live publisher HTML has a single node--type-news article, closed
+    // BEFORE the global page footer. Never substitute all page text.
+    const newsNodes = [...html.matchAll(/<article\b([^>]*)>/gi)]
+      .filter((match) => /\bnode--type-news\b/.test(match[1]));
+    if (newsNodes.length !== 1)
+      throw Error("EXIM article missing unique news-body fallback boundary: " + listed.url);
+    const articleStart = newsNodes[0].index ?? -1;
+    const articleTail = html.slice(articleStart).search(/<\/article\s*>/i);
+    if (articleStart < 0 || articleTail < 0)
+      throw Error("EXIM article missing closed publisher news-body boundary: " + listed.url);
+    const articleText = visibleText(html.slice(articleStart, articleStart + articleTail));
+    const releaseStart = articleText.search(/\bFOR IMMEDIATE RELEASE\b/i);
+    if (releaseStart < 0)
+      throw Error("EXIM news-body fallback missing official release heading: " + listed.url);
+    body = articleText.slice(releaseStart).trim();
+    if (body.length < 160 || body.length > 45_000)
+      throw Error("EXIM news-body fallback outside bounded release length: " + listed.url);
+  } else {
+    throw Error("EXIM article missing stable release-body boundary: " + listed.url);
+  }
   const date = parseDate(body.slice(0, 130));
   if (!date || date !== listed.publicationDate)
     throw Error("EXIM full-release date disagrees with dated listing for " + listed.url);
