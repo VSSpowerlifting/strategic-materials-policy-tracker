@@ -9,7 +9,7 @@ import type { Source } from "./types";
 export type EditorialQueueItem = {
   observationId: string;
   watchSourceId: PilotSourceId;
-  firstObservedAt: string;
+  observedAt: string;
   change: ReviewObservation["change"];
   publicationDate: string | null;
   titleAsListed: string;
@@ -69,7 +69,7 @@ export function buildEditorialReviewQueue(report: PilotReport, publishedSources:
       items.push({
         observationId: record.id,
         watchSourceId: source.sourceId,
-        firstObservedAt: report.observedAt,
+        observedAt: report.observedAt,
         change: record.change,
         publicationDate: record.publishedDate,
         titleAsListed: record.title,
@@ -118,7 +118,7 @@ export function editorialReviewCsv(queue: EditorialReviewQueue): string {
     ["Observation ID", "Observed UTC", "Watched source ID", "Change", "Publication date", "Title as listed",
       "Official source URL", "Keyword hint ONLY", "Exact existing source IDs", "Human disposition (local only)", "Private reviewer notes (local only)"],
     ...queue.items.map((r) => [
-      r.observationId, r.firstObservedAt, r.watchSourceId, r.change, r.publicationDate ?? "",
+      r.observationId, r.observedAt, r.watchSourceId, r.change, r.publicationDate ?? "",
       r.titleAsListed, r.officialUrl, r.keywordHintOnly ? "YES (not classification)" : "NO (not exclusion)",
       r.exactCitationSourceIds.join("; "), "", "",
     ]),
