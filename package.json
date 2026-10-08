@@ -12,6 +12,7 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "check:links": "tsx scripts/check-links.ts",
     "audit:lifecycle": "tsx scripts/audit-lifecycle.ts",
+    "audit:project-execution": "tsx scripts/audit-project-execution.ts",
     "monitor:pilot": "tsx scripts/monitor-sources.ts",
     "monitor:probe-m2": "tsx scripts/probe-m2-sources.ts",
     "monitor:probe-doe-cmei": "tsx scripts/probe-doe-cmei.ts",
