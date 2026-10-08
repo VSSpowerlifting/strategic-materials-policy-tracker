@@ -16,6 +16,7 @@
     "monitor:probe-m2": "tsx scripts/probe-m2-sources.ts",
     "monitor:exim": "tsx scripts/monitor-exim.ts",
     "audit:exim": "tsx scripts/audit-exim-reliability.ts",
+    "audit:exim-schedule": "tsx scripts/check-exim-schedule.ts",
     "editorial:inbox": "tsx scripts/editorial-inbox.ts"
   },
   "dependencies": {
