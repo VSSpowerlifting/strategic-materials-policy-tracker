@@ -167,7 +167,7 @@ export function readEximState(value: unknown): EximState | null {
       entries.some(([id, fp]) => !/^[a-f0-9]{64}$/.test(id) || typeof fp !== "string" ||
         !/^[a-f0-9]{64}$/.test(fp))) throw Error("EXIM state identities invalid");
   if (!Object.hasOwn(value.seen, value.lastLatestId)) throw Error("EXIM last-latest anchor missing in seen identities");
-  return { version: 1, sourceId: EXIM_SOURCE_ID, seen: Object.fromEntries(entries), lastLatestId: value.lastLatestId, lastSuccessfulAt: value.lastSuccessfulAt };
+  return { version: 1, sourceId: EXIM_SOURCE_ID, seen: Object.fromEntries(entries) as Record<string, string>, lastLatestId: value.lastLatestId, lastSuccessfulAt: value.lastSuccessfulAt };
 }
 
 export function eximEditorialQueue(report: EximReport): EximEditorialQueue {
