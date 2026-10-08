@@ -259,8 +259,10 @@
     ],
     "legalAuthority": null,
     "programmeId": null,
-    "recipient": "Arafura Nolans project",
-    "recipientOrgIds": [],
+    "recipient": "Arafura Rare Earths Limited",
+    "recipientOrgIds": [
+      "org-arafura-rare-earths"
+    ],
     "project": "Nolans rare earths project",
     "projectId": "prj-au-nolans",
     "facility": null,
@@ -343,14 +345,15 @@
           "amount",
           "provider",
           "status",
-          "project"
+          "project",
+          "recipient"
         ],
         "evidence": "explicit",
-        "locator": "Highlights; Export Finance Australia; Annexure B",
-        "note": "The binding subscription establishes contractual commitment, not cash receipt."
+        "locator": "Overview and Export Finance Australia section (pp. 1–2); Annexure B (p. 6)",
+        "note": "Binding US$100M EFA subscription is for fully paid ordinary shares in Arafura Rare Earths Limited, not shares in a legally distinct Nolans project. Amount and status are unchanged; completion subject to conditions precedent."
       }
     ],
-    "notes": "The US$100 million EFA equity support announced in October 2025 became a binding subscription agreement on 1 April 2026. Completion remained subject to conditions precedent, so no disbursement is inferred. A 2 October 2026 lifecycle review found primary company material still tying full construction commencement to financing/settlement milestones; no later primary source reviewed cleanly confirmed full construction commencement, so no physical construction status is recorded here.",
+    "notes": "The US$100 million EFA equity support announced in October 2025 became a binding subscription agreement on 1 April 2026. Completion remained subject to conditions precedent, so no disbursement is inferred. A 2 October 2026 lifecycle review found primary company material still tying full construction commencement to financing/settlement milestones; no later primary source reviewed cleanly confirmed full construction commencement, so no physical construction status is recorded here. The April 2026 ASX disclosure identifies Arafura Rare Earths Limited as the legal share issuer/recipient of EFA's agreed investment; Nolans is the project to which proceeds are intended to be applied, not a share-issuing entity.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-02",
       "implementationStatusCheckedAt": "2026-10-02"
