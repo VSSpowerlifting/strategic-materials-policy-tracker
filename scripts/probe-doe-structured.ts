@@ -59,11 +59,17 @@ function summarize(r: Report): string {
     "Completed listing pages: " + r.pageCount + "/2; source-scoped rows: " + r.listingRows.length +
       "; page overlap: " + r.overlapCount + ".",
     "Original DOE article header samples: " + r.articleSamples.length + "/3.",
+    "Index source attributions: " +
+      r.listingRows.filter(x=>x.issuingOffice!==null).length +
+      " CMEI-office-confirmed, " +
+      r.listingRows.filter(x=>x.issuingOffice===null).length +
+      " Energy.gov-sitewide only (issuer NOT established by the listing).",
     "",
-    "| Displayed publisher date | Issuing office | Document type | Original DOE URL |",
-    "| --- | --- | --- | --- |",
-    ...r.listingRows.map(x=>"| "+x.publicationDate+" | "+x.issuingOffice+
-      " | "+x.documentType.replace(/\|/g,"\\|")+" | "+x.officialUrl+" |"),
+    "| Displayed publisher date | Attribution as listed | Confirmed listing issuer | Document type | Original DOE URL |",
+    "| --- | --- | --- | --- | --- |",
+    ...r.listingRows.map(x=>"| "+x.publicationDate+" | "+x.attributionAsListed+
+      " | "+(x.issuingOffice??"not established")+" | "+
+      x.documentType.replace(/\|/g,"\\|")+" | "+x.officialUrl+" |"),
     "",
     "### Sampled DOE article headers",
     ...r.articleSamples.map(x=>"- "+x.role+": "+x.header.publicationDate+
@@ -111,10 +117,17 @@ async function main() {
       const html=await getPublisherHtml(sample.url,fetch);
       const header=parseDoeStructuredArticleHeader(html.html,sample.url);
       const card=rows.find(x=>x.officialUrl===header.officialUrl);
-      if (!card) throw Error("Sample original not present in two-page CMEI evidence window");
-      compareDoeOfficialHeader(card,header);
+      // Extract original publisher evidence even when the index failed. A
+      // missing index must still remain red, but must not suppress direct
+      // header diagnostics and force another needless source probe.
+      if (!card) {
+        errors.push("Sample "+sample.role+" original article parsed but source index "+
+          "could not establish its corresponding card");
+      } else {
+        compareDoeOfficialHeader(card,header);
+      }
       samples.push({
-        role:sample.role,url:sample.url,header,matchedInTwoPageListing:true,
+        role:sample.role,url:sample.url,header,matchedInTwoPageListing:!!card,
         bodyCandidates:bodyCandidateHints(html.html),
       });
     } catch(e) {
