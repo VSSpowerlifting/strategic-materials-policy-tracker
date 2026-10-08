@@ -57,6 +57,41 @@ test("read publisher-bound DOE rows; exclude global nav and preserve official /a
  assert.equal(r.some(x=>x.officialUrl.includes("global-unrelated")),false);
  assert.equal(r.every(x=>x.publicationDate==="2026-09-30"),true);
 });
+test("nested outer DOE lists do not swallow verified collection--page cards",()=>{
+ const raw=listing(page0);
+ // The old /<ul>...<\/ul>/ global iterator consumed a surrounding UL
+ // before discovering the nested collection list, despite valid DOE rows.
+ const nested=raw.replace(
+  '<ul class="collection collection--page js-view-dom-id-123">',
+  '<ul class="outer-doe-layout"><li class="layout-item">' +
+   '<ul class="collection collection--page js-view-dom-id-123">',
+ ).replace("</ul></main>", "</ul></li></ul></main>");
+ const rows=parseDoeStructuredListing(nested,base);
+ assert.equal(rows.length,10);
+ assert.equal(rows[0].officialUrl,sampleUrl);
+ assert.equal(rows[0].publicationDate,"2026-09-30");
+});
+
+test("DOE row's nested LI/UL content cannot prematurely truncate sibling cards",()=>{
+ const raw=listing(page0);
+ const inner="<ul class=\"topic-related\"><li>Related topic</li></ul>";
+ const html=raw.replace(
+  '<div class="collection-item__office"><span>Office of Critical Minerals and Energy Innovation</span></div>',
+  '<div class="collection-item__office"><span>Office of Critical Minerals and Energy Innovation</span></div>'+inner,
+ );
+ const rows=parseDoeStructuredListing(html,base);
+ assert.equal(rows.length,10);
+ assert.equal(rows[9].publicationDate,"2026-09-30");
+});
+
+test("unbalanced and duplicated DOE collection wrappers remain fail closed",()=>{
+ const html=listing(page0);
+ const duplicate=html.replace("</ul></main>", "</ul><ul class=\"collection--page\"></ul></main>");
+ assert.throws(()=>parseDoeStructuredListing(duplicate,base),/unique filtered collection/);
+ const damaged=html.replace("</ul></main>", "</main>");
+ assert.throws(()=>parseDoeStructuredListing(damaged,base),/unbalanced ul/);
+});
+
 test("listing rejects missing items, duplicate paths, off-office and invalid date",()=>{
  assert.throws(()=>parseDoeStructuredListing(listing(page0.slice(0,9)),base),/ten explicit/);
  assert.throws(()=>parseDoeStructuredListing(listing([...page0.slice(0,9),0]),base),/duplicate official/);
