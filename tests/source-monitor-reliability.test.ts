@@ -124,7 +124,7 @@ test("Federal Register next-page traversal rejects off-domain, filtered-away and
     (async (url: string) => new Response(url.includes("federalregister.gov")
       ? fedPage(Array.from({ length: 100 }, (_, n) => 200 - n), frRoot)
       : ca)) as FetchFunction);
-  assert.equal(scan.report.sources[1].health, "network_error"); // Pagination loop fails closed.
+  assert.equal(scan.report.sources[1].health, "invalid_response"); // Pagination loop fails closed.
 });
 
 test("workflow stays daily, read-only, cache-recoverable and does not publish candidate or seed data", () => {
