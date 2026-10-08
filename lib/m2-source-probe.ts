@@ -65,6 +65,7 @@ export function extractOfficialArticleLinks(
     const title = stripTags(match[2]);
     if (title.length < 12 || title.length > 450) continue;
     parsed.hash = "";
+    parsed.hostname = candidate.hosts[0]; // Collapse apex/www aliases under one official publisher identity.
     // URLs with different paths represent different records; ignore trackable
     // navigation-only query strings for the same official article path.
     parsed.search = "";
