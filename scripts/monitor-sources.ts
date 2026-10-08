@@ -8,7 +8,7 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { getAllWatchedSources } from "../lib/data";
-import { readMonitorState, runSourcePilot, type PilotReport } from "../lib/source-monitor";
+import { PILOT_SOURCE_IDS, pilotEndpoint, readMonitorState, runSourcePilot, type PilotReport } from "../lib/source-monitor";
 
 const dir = join(process.cwd(), ".monitor-pilot");
 const stateFile = join(dir, "state.json");
@@ -43,10 +43,26 @@ function summary(report: PilotReport): string {
   return lines.join("\n") + "\n";
 }
 
-try {
+/**
+ * Explicit async entry point: this repository's tsx CLI runs in CommonJS
+ * mode, which does not permit top-level await. The runtime check exercises
+ * exactly the npm CLI path in CI, without touching networks or output files.
+ */
+async function main(): Promise<void> {
+  const watchlist = getAllWatchedSources();
+  if (process.argv.includes("--check-runtime")) {
+    for (const id of PILOT_SOURCE_IDS) {
+      const source = watchlist.find((entry) => entry.id === id);
+      if (!source || source.status !== "active") throw Error("Missing active pilot source: " + id);
+      pilotEndpoint(source);
+    }
+    process.stdout.write("SMPT pilot CLI runtime check passed (offline, no observations written)\n");
+    return;
+  }
+
   mkdirSync(dir, { recursive: true });
   const previous = existsSync(stateFile) ? JSON.parse(readFileSync(stateFile, "utf8")) as unknown : null;
-  const result = await runSourcePilot(getAllWatchedSources(), readMonitorState(previous), observedAt);
+  const result = await runSourcePilot(watchlist, readMonitorState(previous), observedAt);
   // Always write complete report before advancing durable state. Any failed
   // source retains its prior identity memory. The workflow's final health gate
   // deliberately fails after uploading logs when one source was degraded.
@@ -54,7 +70,9 @@ try {
   writeFileSync(summaryFile, summary(result.report), "utf8");
   atomicJson(stateFile, result.state);
   process.stdout.write(summary(result.report));
-} catch (e) {
+}
+
+void main().catch((e: unknown) => {
   process.stderr.write("SMPT monitoring configuration/state error: " + String(e) + "\n");
   process.exitCode = 2;
-}
+});
