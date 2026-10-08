@@ -17,6 +17,40 @@ Ask **which government-backed registered projects have documented binding financ
 - Each matrix cell and material row counts unique *projects*, not amounts. Material rows are **nonadditive**: a multi-material project appears in multiple material categories.
 - Project ledger links every financial and physical status to the relevant financial row and source URL. No fabricated links between a policy's stated rationale and the subsequent project activity are introduced.
 
+## Snapshot findings: corpus revised through 2026-10-07
+
+These counts were independently re-derived from the 94 financing entries, 74 registered projects and source-date evidence boundaries in the branch's seed. They are **project counts** under the specific current-corpus denominator, not causal impacts or an assessment of total project finance. They are not comparable to the October 3 historical baseline without accounting for the expansion from 57 to 74 registered projects and changed financial-status evidence.
+
+| Measure | Projects | Interpretation |
+| --- | ---: | --- |
+| Registered projects | 74 | Full registry, irrespective of backing |
+| Projects with directly linked government commitment evidenced as of 2026-10-07 | **42** | The six-cell matrix denominator |
+| With at least one binding government commitment | **23** | Signed/partly paid/fully paid are grouped only for agreement standing |
+| With construction or later **recorded** on any linked financial row | **10** | Record-level implementation, not verified operational output |
+| Construction or later, strict treatment of funded-activity completion | **9** | Excludes the Kingston Demonstration Plant “Extended Operations” completion alone |
+| No usable physical milestone recorded | **24** | Missing evidence, not physical inactivity |
+
+The exclusive two-axis cells are:
+
+| Financial standing | Construction or later recorded | Other status reported | No usable physical milestone |
+| --- | ---: | ---: | ---: |
+| Binding public instrument evidenced | **8** | **3** | **12** |
+| Binding public instrument not established | **2** | **5** | **12** |
+
+**Interpretation.** Documented legally binding public support and documented physical progress do not form a single ordered maturity ladder: **8** projects have both, while **12** have binding public support with no usable physical milestone in the database, and **2** have construction or later reported without a binding public instrument evidenced in SMPT. The last observation does **not** establish that those projects lack binding finance elsewhere. Nor does the absence of a recorded physical milestone establish no construction.
+
+Named cases for editorial inspection are **Nolans** (binding EFA equity agreement, no physical milestone), **Alcoa–Sojitz Gallium Recovery** (groundbreaking reported but the specific government equity instruments not yet documented as binding), **Keliber** (signed EIB loan plus project construction evidence), and **Stibnite Gold** (DPA grant with source-documented construction; the separate EXIM loan remains board-approved, not signed). Each row on `/response` links directly to its financial status source and the underlying project page. These are illustrations of different evidence types, not comparisons of government effectiveness.
+
+The **Sarytogan Graphite** project does not enter the 42-project denominator merely because its EBRD equity was legally contracted and paid. The EBRD is a multilateral with `providerJurisdiction: null` in this tracker, and the scope of this specific matrix is *tracked-government* commitments. Sarytogan remains visible in the ordinary project/capital registry.
+
+### Audit boundary for this snapshot
+
+- Counts were checked against **94** financing and **74** project seed records after PR #67, without changing those files; each direct `projectId` qualifies a registered project at most once.
+- Binding uses the **status evidence on or before 2026-10-07**; physical statuses remain current as recorded at this corpus revision.
+- Each source citation resolves through an existing financial status-history `sourceId`; the site shows a source link, but its absence cannot prove nothing occurred.
+- `prj-ca-cyclic-kingston-demonstration-plant` is the single broad-vs-strict exception already documented in the first analysis. Its completed funded activity does not independently establish that facility construction was completed.
+- This snapshot is documentary, not a causal study, regional production estimate, common-currency capital total, or fully revalidated inventory as of October 7.
+
 ## Time semantics and historic comparison
 
 The 2026-10-03 `docs/analysis/strategic-concern-industrial-response-2026-10-03.md` and its generated tables remain untouched, tied to their old source revision. This new view is a **new corpus-revision comparison**, not a rewrite of that baseline.
