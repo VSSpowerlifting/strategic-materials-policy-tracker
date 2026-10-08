@@ -60,7 +60,7 @@ test("read publisher-bound DOE rows; exclude global nav and preserve official /a
 test("listing rejects missing items, duplicate paths, off-office and invalid date",()=>{
  assert.throws(()=>parseDoeStructuredListing(listing(page0.slice(0,9)),base),/ten explicit/);
  assert.throws(()=>parseDoeStructuredListing(listing([...page0.slice(0,9),0]),base),/duplicate official/);
- assert.throws(()=>parseDoeStructuredListing(listing(page0).replace("Office of Critical Minerals and Energy Innovation","Other DOE Office"),base),/issuing office/);
+ assert.throws(()=>parseDoeStructuredListing(listing(page0).replace('<div class="collection-item__office"><span>Office of Critical Minerals and Energy Innovation</span>', '<div class="collection-item__office"><span>Other DOE Office</span>'),base),/issuing office/);
  assert.throws(()=>parseDoeStructuredListing(listing(page0,"February 30, 2026"),base),/impossible/);
  assert.throws(()=>parseDoeStructuredListing(listing(page0).replace("collection-item__date","changed-date"),base),/date field/);
  assert.throws(()=>parseDoeStructuredListing(listing(page0).replace("collection--page","changed-list"),base),/collection--page/);
