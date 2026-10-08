@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LatticeLegend, LatticeOverview } from "@/components/lattice/lattice";
 import { ControlGapNotice, NotPlacedSentence } from "@/components/lattice/not-on-lattice";
 import { CapitalAndControl, DatedRegister, RecordCounts } from "@/components/overview/sections";
@@ -41,6 +42,7 @@ export default function Home() {
         A source-linked record of export controls, public money, designations, ownership and offtake around rare earths and strategic materials. The lattice places each record where its
         source puts it.
       </p>
+      <p className="mt-3 text-sm leading-6 text-muted">Explore <Link href="/response" className="text-accent hover:underline">industrial-response evidence</Link> to compare signed public instruments with source-documented implementation milestones.</p>
       <LatticeLegend model={model} className="mt-6 hidden md:block" />
       <ControlGapNotice gaps={model.gaps} id="control-gap-desktop" className="mt-6 hidden lg:block" />
       <div className="mt-5 hidden space-y-3 text-[13px] leading-5 text-muted md:block">
@@ -48,7 +50,7 @@ export default function Home() {
           A record coded to several stages appears at each, so no row or column is totalled. <NotPlacedSentence gaps={model.gaps} />
         </p>
         <p>
-          <strong className="font-semibold text-foreground">A record, not a live feed.</strong> Statuses are shown as of {formatDateLong(asOf)}, when the data was last checked.
+          <strong className="font-semibold text-foreground">A curated revision, not a live feed.</strong> This snapshot uses the corpus revised through {formatDateLong(asOf)}; individual records have their own evidence and review dates.
           {site.monitoringStartedAt ? "" : " Prospective monitoring has not started."}
         </p>
       </div>
