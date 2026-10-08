@@ -11,6 +11,7 @@ import {
   existsSync, mkdirSync, readFileSync, readdirSync, copyFileSync, renameSync, writeFileSync,
 } from "node:fs";
 import { join, resolve } from "node:path";
+import { syncEditorialFromGitHub } from "./editorial-sync";
 import {
   beginCandidate, editorialDecision, emptyPrivateEditorialLedger,
   importReviewQueue, parsePrivateEditorialLedger, REVIEW_STATUSES,
@@ -63,7 +64,7 @@ function candidateInventory(): unknown[] {
   return rows;
 }
 function usage(): never {
-  throw Error("Commands: import <queue.json> --run-id <GitHub-run-id> | list [--status STATUS] | " +
+  throw Error("Commands: sync [--dry-run] [--check-runtime] | import <queue.json> --run-id <GitHub-run-id> | list [--status STATUS] | " +
     "decide <source-id:observation-hash> <status> --by NAME --reason TEXT | " +
     "start-candidate <source-id:observation-hash> <cand-id> --by NAME --ack-source-read");
 }
@@ -71,6 +72,23 @@ function usage(): never {
 function main(): void {
   const [command, ...args] = process.argv.slice(2);
   if (!command) usage();
+  if (command === "sync") {
+    if (args.some((arg) => !["--dry-run", "--check-runtime"].includes(arg)))
+      throw Error("Sync accepts only --dry-run or --check-runtime");
+    if (args.includes("--check-runtime")) {
+      process.stdout.write("SMPT editorial sync CLI runtime check passed (offline, no GitHub calls or files written)\n");
+      return;
+    }
+    const dryRun = args.includes("--dry-run");
+    const result = syncEditorialFromGitHub(load(), save, dryRun);
+    process.stdout.write((dryRun ? "Dry-run" : "Sync") + ": " +
+      result.pending.length + " unimported completed runs in scope, " +
+      result.alreadyImported + " already imported, " + result.inFlight +
+      " in progress; " + result.completed + " imported now, " + result.added +
+      " new review items, " + result.reopened + " revised items reopened.\n");
+    if (dryRun) process.stdout.write("Dry-run examined run metadata only: it has NOT checked artifact health or saved any private files.\n");
+    return;
+  }
   if (command === "list") {
     const statuses = option(args, "--status");
     if (statuses && !(REVIEW_STATUSES as readonly string[]).includes(statuses)) throw Error("Invalid review status");
