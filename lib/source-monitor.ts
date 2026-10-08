@@ -193,6 +193,17 @@ export function readMonitorState(value: unknown): MonitorState {
   return { version: 1, sources };
 }
 
+/**
+ * Used by unattended runs: a lost or partial cache must not silently reset
+ * the earlier collection baseline. Local first-time tests remain explicit.
+ */
+export function requirePriorPilotState(state: MonitorState): void {
+  const validated = readMonitorState(state);
+  if (PILOT_SOURCE_IDS.some((id) => !validated.sources[id])) {
+    throw Error("Prior observation state unavailable for one or more active sources; refuse silent re-baseline. Restore the archived state or explicitly authorize a reviewed reset.");
+  }
+}
+
 export function reconcilePublications(
   sourceId: PilotSourceId,
   previous: SourceMemory | undefined,
