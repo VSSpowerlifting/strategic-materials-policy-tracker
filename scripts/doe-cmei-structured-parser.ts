@@ -111,6 +111,42 @@ function uniqueTagged(
   }
   throw Error("DOE " + cls + " field has unbalanced " + tag + " markup");
 }
+/**
+ * Find every publisher-classed UL/LI regardless of nested peer lists.
+ *
+ * A non-greedy /<ul>...<\/ul>/ iterator consumes an outer list all the
+ * way through the first inner closing tag. The real DOE Drupal template
+ * may include other <ul> structures within main; as a result, a regex
+ * iterator can silently skip collection--page and report zero cards.
+ * Match opening tags independently and close same-tag boundaries by depth.
+ */
+function classedElements(html: string, tag: "ul" | "li", className: string): string[] {
+  const openings = [...html.matchAll(new RegExp("<" + tag + "\\b([^>]*)>", "gi"))]
+    .filter((m) => classes(m[1], className));
+  const elements: string[] = [];
+  for (const opener of openings) {
+    const begin = opener.index ?? 0;
+    const innerStart = begin + opener[0].length;
+    const parts = new RegExp("<\\/?" + tag + "\\b[^>]*>", "gi");
+    parts.lastIndex = begin;
+    let depth = 0;
+    let part: RegExpExecArray | null;
+    let closed = false;
+    while ((part = parts.exec(html))) {
+      if (/^<\//.test(part[0])) depth--;
+      else depth++;
+      if (depth < 0) throw Error("DOE invalid " + tag + " structural nesting");
+      if (depth === 0) {
+        elements.push(html.slice(innerStart, part.index));
+        closed = true;
+        break;
+      }
+    }
+    if (!closed) throw Error("DOE unbalanced " + tag + " " + className + " boundary");
+  }
+  return elements;
+}
+
 export function parseDoeStructuredListing(html: string, requestedUrl: string): DoeCmeiRow[] {
   bounded(html);
   const base = new URL(requestedUrl);
@@ -121,17 +157,15 @@ export function parseDoeStructuredListing(html: string, requestedUrl: string): D
       [...base.searchParams.keys()].some((key) => !["page", "paragraph"].includes(key)))
     throw Error("DOE structured parser restricted to two known CMEI index pages");
   const main = mainOnly(html);
-  const lists = [...main.matchAll(/<ul\b([^>]*)>([\s\S]*?)<\/ul\s*>/gi)]
-    .filter((x) => classes(x[1], "collection--page"));
+  const lists = classedElements(main, "ul", "collection--page");
   if (lists.length !== 1) throw Error("DOE source missing unique filtered collection--page");
-  const children = [...lists[0][2].matchAll(/<li\b([^>]*)>([\s\S]*?)<\/li\s*>/gi)]
-    .filter((x) => classes(x[1], "collection-item"));
+  const children = classedElements(lists[0], "li", "collection-item");
   if (children.length !== 10)
-    throw Error("DOE first two CMEI index pages require ten explicit listing cards");
+    throw Error("DOE first two CMEI index pages require ten explicit listing cards: observed " + children.length);
   const seen = new Set<string>();
   const rows: DoeCmeiRow[] = [];
   for (const card of children) {
-    const links = [...card[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi)]
+    const links = [...card.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi)]
       .filter((a) => classes(a[1], "collection-item__link"));
     if (links.length !== 1)
       throw Error("DOE listing card missing unique collection-item__link");
@@ -141,11 +175,11 @@ export function parseDoeStructuredListing(html: string, requestedUrl: string): D
     const title = text(links[0][2]);
     if (title.length < 12 || title.length > 500)
       throw Error("DOE listing title has invalid length");
-    const dateRaw = text(uniqueTagged(card[2], "div", "collection-item__date"));
-    const officeRaw = text(uniqueTagged(card[2], "div", "collection-item__office"));
+    const dateRaw = text(uniqueTagged(card, "div", "collection-item__date"));
+    const officeRaw = text(uniqueTagged(card, "div", "collection-item__office"));
     if (officeRaw !== "Office of Critical Minerals and Energy Innovation")
       throw Error("DOE CMEI filtered row lacks verified issuing office");
-    const typ = text(uniqueTagged(card[2], "div", "collection-item__icon_type"));
+    const typ = text(uniqueTagged(card, "div", "collection-item__icon_type"));
     if (!typ || typ.length > 120)
       throw Error("DOE filtered row lacks publisher document type");
     if (seen.has(canonical)) throw Error("DOE duplicate official publication URL in index");
