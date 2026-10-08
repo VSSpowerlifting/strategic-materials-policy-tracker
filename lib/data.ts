@@ -17,6 +17,7 @@ import type {
   Programme,
   Project,
   ProjectDesignation,
+  ProjectMilestone,
   Source,
   SourceConfidence,
   WatchedSource,
@@ -35,6 +36,7 @@ import organizationsSeed from "@/data/seed/organizations.json";
 import projectsSeed from "@/data/seed/projects.json";
 import programmesSeed from "@/data/seed/programmes.json";
 import projectDesignationsSeed from "@/data/seed/project-designations.json";
+import projectMilestonesSeed from "@/data/seed/project-milestones.json";
 
 const events = eventsSeed as PolicyEvent[];
 const framing = framingSeed as FramingClaim[];
@@ -50,6 +52,7 @@ const organizations = organizationsSeed as unknown as Organization[];
 const projects = projectsSeed as unknown as Project[];
 const programmes = programmesSeed as unknown as Programme[];
 const projectDesignations = projectDesignationsSeed as unknown as ProjectDesignation[];
+const projectMilestones = projectMilestonesSeed as ProjectMilestone[];
 
 // Sort helper: most recent first.
 const byDateDesc = (a: PolicyEvent, b: PolicyEvent) => b.date.localeCompare(a.date);
@@ -271,6 +274,19 @@ export function getAllProjects(): Project[] {
 
 export function getProjectById(id: string): Project | undefined {
   return projects.find((p) => p.id === id);
+}
+
+/** Public-only, source-reviewed milestones. Nothing in private candidates is loaded. */
+export function getAllProjectMilestones(): ProjectMilestone[] {
+  return [...projectMilestones].sort(byId);
+}
+
+export function getProjectMilestonesByProject(projectId: string): ProjectMilestone[] {
+  return getAllProjectMilestones().filter((m) => m.projectId === projectId);
+}
+
+export function getProjectMilestoneById(id: string): ProjectMilestone | undefined {
+  return projectMilestones.find((m) => m.id === id);
 }
 
 export function getAllProgrammes(): Programme[] {

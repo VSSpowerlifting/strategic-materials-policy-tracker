@@ -46,6 +46,7 @@ import {
 } from "../lib/types";
 import { site } from "../lib/site";
 import { isExampleCandidateFile } from "./candidate-files";
+import { validateProjectMilestones } from "../lib/project-milestones";
 import { formatCapitalControlIssue, parseCapitalControlSeed, validateCapitalControl } from "./validate-capital-control";
 import type { CapitalControlCollection } from "./validate-capital-control";
 
@@ -58,6 +59,7 @@ const materials = read<Material[]>("materials");
 const jurisdictions = read<Jurisdiction[]>("jurisdictions");
 const sources = read<Source[]>("sources");
 const watchlist = read<WatchedSource[]>("watchlist");
+const projectMilestones = read<unknown>("project-milestones");
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -404,6 +406,7 @@ const publishedIds = new Set<string>([
   ...materials.map((m) => m.slug),
   ...jurisdictions.map((j) => j.id),
   ...sources.map((s) => s.id),
+  ...(Array.isArray(projectMilestones) ? projectMilestones.map((m) => m?.id).filter((id): id is string => typeof id === "string") : []),
 ]);
 
 const candidateIdSeen = new Map<string, string>();
@@ -540,6 +543,14 @@ const organizationsSeed = capitalControlSeed("organizations");
 const projectsSeed = capitalControlSeed("projects");
 const programmesSeed = capitalControlSeed("programmes");
 const designationsSeed = capitalControlSeed("project-designations");
+
+// M3: physical execution assertions live on projects, NEVER on finance totals.
+// Validation rejects unresolved sources/projects and unreviewed public claims.
+for (const issue of validateProjectMilestones(projectMilestones, {
+  projects: projectsSeed.records as { id: string }[],
+  sources,
+  corpusDate: site.lastUpdated,
+})) err(issue);
 
 const candidateReferenceIds = candidateFiles.flatMap(({ records }) =>
   records.flatMap((c) => [
