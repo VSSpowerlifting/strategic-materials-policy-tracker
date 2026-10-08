@@ -4,7 +4,7 @@
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { runDoeCmeiPreflight, type DoeForensicReport } from "../lib/doe-cmei-forensics";
+import { runDoeCmeiPreflight, type DoeForensicReport } from "./doe-cmei-forensics";
 
 const OUT = join(process.cwd(), ".monitor-doe-preflight");
 
