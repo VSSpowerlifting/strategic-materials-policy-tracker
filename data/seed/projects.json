@@ -1324,6 +1324,7 @@
     "id": "prj-fi-keliber-lithium",
     "name": "KELIBER LITHIUM",
     "sponsorOrgIds": [
+      "org-keliber-oy",
       "org-keliber-technology-oy"
     ],
     "locations": [
@@ -1368,14 +1369,15 @@
         "sourceId": "src-eib-keliber-project-20170804",
         "supports": [
           "stages",
-          "materials"
+          "materials",
+          "sponsors"
         ],
         "evidence": "explicit",
         "locator": "Project description",
-        "note": "EIB describes mines, a concentrator and a hydrometallurgical plant producing battery-grade lithium hydroxide."
+        "note": "EIB describes mines, a concentrator and a hydrometallurgical plant producing battery-grade lithium hydroxide. The EIB project summary lists Keliber Oy as project promoter, distinct from the EU CRMA Commission's Keliber Technology Oy promoter and the signed loan's Keliber Technology Oy borrower."
       }
     ],
-    "notes": "The executed €150M EIB loan names Keliber Technology Oy as borrower and Keliber Oy as guarantor. The Commission's CRMA designation also names Keliber Technology Oy as promoter. They are distinct legal entities in the registry."
+    "notes": "The EIB project summary names Keliber Oy as project promoter, while the EU CRMA Strategic Project designation names Keliber Technology Oy as promoter; these source-specific roles are not collapsed. The executed €150M EIB facility names Keliber Technology Oy as borrower and Keliber Oy as an original guarantor. Both names remain distinct organizations."
   },
   {
     "id": "prj-fr-bam4ever",
