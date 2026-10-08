@@ -1,0 +1,109 @@
+# M2.1 EXIM shadow observation only. Independent from M1 production monitoring.
+# First bootstrap requires an explicit manual dispatch. State artifacts expire in
+# 30 days; if identity history is absent, scheduled scans fail closed.
+name: SMPT EXIM shadow monitoring
+
+on:
+  workflow_dispatch:
+    inputs:
+      bootstrap:
+        description: "Explicit FIRST EXIM baseline only (reject if prior state exists)"
+        type: boolean
+        required: false
+        default: false
+      force_recovery:
+        description: "Verify recovery from prior Actions artifact; state is artifact-only"
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: "7 14 * * *"
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: smpt-exim-shadow-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Find most recent archived EXIM state (independent of M1)
+        id: state
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner, repo, workflow_id: 'exim-shadow-monitor.yml',
+              branch: 'main', per_page: 70
+            });
+            for (const run of runs.data.workflow_runs) {
+              if (run.id === context.runId || run.status !== 'completed') continue;
+              const artifactName = `smpt-exim-state-${run.id}-${run.run_attempt}`;
+              const list = await github.rest.actions.listWorkflowRunArtifacts({
+                owner, repo, run_id: run.id, per_page: 100
+              });
+              const found = list.data.artifacts.find(a => a.name === artifactName && !a.expired);
+              if (!found) continue;
+              core.setOutput('run_id', String(run.id));
+              core.setOutput('name', artifactName);
+              core.info(`EXIM recovered prior state from run ${run.id} attempt ${run.run_attempt}`);
+              return;
+            }
+            core.info('No EXIM state artifact found; only explicitly authorized first baseline may run.');
+      - name: Restore EXIM identities from previous Actions artifact
+        if: steps.state.outputs.run_id != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.state.outputs.name }}
+          run-id: ${{ steps.state.outputs.run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+          path: .monitor-exim
+      - name: Observe EXIM dated releases and full article text (no publication)
+        env:
+          SMPT_EXIM_BOOTSTRAP: ${{ inputs.bootstrap == true }}
+        run: npm run monitor:exim
+      - name: Archive independent hashed EXIM identities for continuity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-exim-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .monitor-exim/state.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Archive public release metadata and unverified review queue
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-exim-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .monitor-exim/report.json
+            .monitor-exim/editorial-review-queue.json
+            .monitor-exim/summary.md
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Report monitoring evidence
+        if: always()
+        run: |
+          if test -s .monitor-exim/summary.md; then
+            cat .monitor-exim/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No validated EXIM observation. No monitoring success claimed." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Enforce healthy and gap-free collection
+        run: |
+          node -e 'const r = require("./.monitor-exim/report.json"); if (r.health !== "ok" || r.possibleWindowGap) { console.error("EXIM source degraded or continuity lost; review artifact."); process.exit(1); }'
