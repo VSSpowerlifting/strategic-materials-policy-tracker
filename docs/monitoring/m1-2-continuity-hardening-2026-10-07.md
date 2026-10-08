@@ -1,0 +1,26 @@
+# M1.2 — Reliability hardening for read-only official-source observations
+
+**Scope:** two previously registered official sources only (NRCan Atom and the Federal Register Interior Department API); no public data or policy-event promotion. This proposed phase follows two successful manual scans on October 7 Eastern / October 8 UTC:
+- [Day-0 baseline run 37721756213](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37721756213): 50 NRCan + 100 Interior publications, both healthy; a first scan cannot declare discoveries.
+- [Deduplication run 37722920588](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37722920588): prior 150-identity cache restored, both healthy, 0 new / 0 revised and `baseline: no`, 4 editorial/report artifact files saved.
+
+## Changed collection practice
+
+1. **Daily instead of weekly:** GitHub Actions schedules `13:17 UTC` every day. The GitHub schedule may be delayed or skipped; a cron entry is not proof of a scan. The collector retains source-level `lastSuccessfulAt` for inspection.
+2. **Federal Register bounded pagination:** The existing official API filter remains the Interior Department, ordered newest, 100 documents per page. When the previous latest document isn't in the first page, follow the API-supplied `next_page_url` across *at most four pages* (400 documents). Each next URL must stay inside the same HTTPS Federal Register API and Interior filter. Stop when the prior latest document's stable identity appears; de-duplicate across pages before reconciliation. If an HTTP error, invalid response, or suspicious pagination chain appears after page one, preserve the prior state and mark the **entire source** degraded; never silently accept a partial scan. If the prior identity is still absent at the cap and the observation window is full, report `possibleWindowGap: true`, and let the workflow fail visibly even though individual requests succeeded.
+3. **NRCan** has a bounded single Atom feed of 50 entries; no unsupported pagination claims or invented endpoint. Daily scanning reduces risk, and missing last-latest coverage after a full 50-item window is surfaced by `possibleWindowGap`. It is not a historical-completeness guarantee.
+4. **State recovery:** Keep the original best-effort Actions cache and add a **second 30-day artifact** containing only `state.json` (hashed, source-bound identity/fingerprint data, not extracted full texts, human notes or private candidates). On a cache miss, read the latest available state artifact from an earlier completed main-branch run of the *same workflow* with `actions: read` permission. The workflow never requests repository write or PR write permissions. State is validated by `readMonitorState` before observation.
+5. **Fail closed on losing continuity:** The scheduled and manual GitHub workflow sets `SMPT_MONITOR_REQUIRE_PRIOR_STATE=1`. If any pilot source lacks a retained baseline after cache/artifact recovery, exit before any HTTP publication scan, rather than quietly re-baseline and claim no changes. Real record recovery beyond the four-page cap remains a manual research task. If all 30-day artifacts and caches disappear, an explicitly authorized reviewed reset is necessary.
+
+## Manual verification sequence (after merge)
+
+1. Verify exact-head CI and post-merge CI. Run **SMPT source-monitor pilot** with the default manual input `recover_from_artifact=false` on `main`. It should restore the October 7/8 cache, report `baseline: no` for both healthy sources, and save **two artifacts**: the human-review/report collection and `smpt-monitor-state-RUN-ATTEMPT`. New or revised counts may legitimately be nonzero.
+2. Run the workflow again, explicitly setting `recover_from_artifact=true`. This skips the cache restore and exercises **cross-run read-only artifact recovery**. Inspect the log's `Found identity ledger from prior run...` line and the download step. Check `baseline: no` and the two official-source health rows. If recovery is broken, the run should fail rather than silently reset memory.
+3. On the next scheduled daily scan, check its job summary, prior baseline status, possible gaps, and both artifact uploads. Continue Day-7/Day-14/Day-30 checks using **actual spaced runs**, not the two rapid Day-0 demonstrations.
+
+## Explicit limits
+
+- Federal Register pagination retrieves at most 400, not all historical documents; it is a **bounded recovery window**, not a full archive. If 400 newer entries replace the previous anchor, the run emits a gap and needs an evidence-led manual backfill. An absent `next_page_url` or publisher removal can also require manual follow-up.
+- The NRCan Atom feed has no implemented next-page traversal; the last-latest check provides a rollover warning, not proof that no documents were missed.
+- The 30-day artifact is more reliable than an evictable cache but is **not permanent storage**. Both can disappear; the runner fails visibly. A durable, access-controlled longitudinal ledger would be a later architecture phase.
+- Existing publication review is still *human-gated*; a title keyword remains only a suggestion. No change to `data/seed/`, private candidate schema, policy classification, published source `lastCheckedAt`, financing totals, `site.monitoringStartedAt`, Vercel, or public pages.
