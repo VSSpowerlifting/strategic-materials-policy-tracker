@@ -9409,7 +9409,9 @@
     },
     "provider": "Export-Import Bank of the United States",
     "providerJurisdiction": "us",
-    "providerOrgIds": [],
+    "providerOrgIds": [
+      "org-us-exim"
+    ],
     "legalAuthority": "Make More in America Initiative",
     "programmeId": null,
     "recipient": "Perpetua Resources Idaho, Inc.",
@@ -9516,6 +9518,15 @@
         "evidence": "explicit",
         "locator": "Construction update",
         "note": null
+      },
+      {
+        "sourceId": "src-exim-stibnite-board-2026",
+        "supports": [
+          "provider"
+        ],
+        "evidence": "explicit",
+        "locator": "Structured & Project Finance Division, Board transaction AP768324XX; U.S. Export-Import Bank direct loan",
+        "note": "The bank is provider/authorizing lender, not an outside guarantor. Board approval is not evidence of execution or disbursement."
       }
     ],
     "notes": "EXIM's official transaction table uses 'Authorized', but the commitment remains non-binding in SMPT's lifecycle until definitive loan documents are executed. The June 2026 filing states that availability depends on completion of definitive documentation and satisfaction of conditions precedent. EXIM's May 21, 2026 board record names Perpetua Resources Idaho Inc. as prospective borrower/PSOR and the Canadian-incorporated Perpetua Resources Corp. as proposed guarantor; this classification does not imply execution of a loan or guarantee."
