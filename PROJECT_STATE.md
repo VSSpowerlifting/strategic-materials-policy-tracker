@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: M1.4 local GitHub editorial sync (PR under review)
+
+- **Motivation:** M1.3 is squash-merged to `main` at `4594c7e`; [CI 37726401696](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37726401696) passed 499 tests and the 1,071-page build. The maintainer confirmed manually importing actual run `37724982482` twice produced one durable receipt and zero duplicate items.
+- **Proposal:** `feat/m1-4-local-editorial-sync-20261008` adds on-demand `npm run editorial:inbox -- sync [--dry-run|--check-runtime]` using authenticated, **read-only** local GitHub CLI. Discover completed source-monitor runs from M1.1's first queued artifact (`37722920588`) forward; skip previously imported run IDs and import missing healthy queue/report artifacts oldest first, without any GitHub uploads or modifying the monitoring workflow. Local M1.3 audit and backups remain the only durable reviewer decision store.
+- **Failure gates:** incomplete scans, completed failures, attempts >1, expired/missing artifacts, invalid source health, feed-window gaps, or mismatched report/queue stop the sync and require manual review. Previously saved imported runs persist; no declaration of complete coverage after failure. Automated cloud intake, actual substantive policy review, and publication remain out of scope.
+- **Validation and operations:** new offline tests for chronology, tampering, source health, attempted reruns, and real CLI startup; run full exact-head CI then require a local dry-run and actual import/replay after merge. Procedure `docs/monitoring/m1-4-local-editorial-sync-2026-10-08.md`. No `data/seed`, policy events, financing, candidate promotions, public UI, Vercel or daily monitoring changes.
+
 ## 2026-10-07: M1.3 private editorial ledger (proposed PR)
 
 - **Objective:** move human research dispositions from expiring GitHub Actions run artifacts into a **private, Git-ignored, local persistent inbox**. No team/cloud storage or automatic ingestion is claimed.
