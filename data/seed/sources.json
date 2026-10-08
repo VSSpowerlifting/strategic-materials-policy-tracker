@@ -1894,5 +1894,65 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "SEC-filed annual report (Corporate Structure, printed p.9; registrant cover; notes to consolidated financial statements) identifies Perpetua Resources Corp. as incorporated in British Columbia, Canada, and its wholly owned Perpetua Resources Idaho, Inc. as the operating entity that manages Stibnite activities. It expressly distinguishes Idaho Gold Resources Company, LLC as project property holder."
+  },
+  {
+    "id": "src-ebrd-sarytogan-equity-2024",
+    "title": "EBRD acquires stake in Sarytogan Graphite Limited",
+    "publisher": "European Bank for Reconstruction and Development",
+    "url": "https://www.ebrd.com/home/news-and-events/news/2024/ebrd-acquires-stake-in-sarytogan-graphite-limited.html",
+    "language": "en",
+    "datePublished": "2024-08-09",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The bank reports AUD 5 million (about €3 million) of equity in Australian-incorporated Sarytogan Graphite Limited for its Kazakhstan graphite development. EBRD's 2024 announcement is not proof of the exact signing or settlement date."
+  },
+  {
+    "id": "src-ebrd-sarytogan-psd-54699",
+    "title": "EBRD Project 54699 — DFF Project C / Sarytogan Graphite Limited",
+    "publisher": "European Bank for Reconstruction and Development",
+    "url": "https://www.ebrd.com/home/work-with-us/projects/psd/54699.html",
+    "language": "en",
+    "datePublished": "2024-08-09",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Original EBRD project summary: AUD 5M direct equity, Sarytogan Graphite Limited investee, bank approval 18 June 2024, disclosed 9 August 2024; lists status Signed but does not date contract execution. The report covers the original investment, not the 2026 follow-on."
+  },
+  {
+    "id": "src-fasken-sarytogan-ebrd-close-2025",
+    "title": "Fasken advises EBRD on completed A$5 million Sarytogan Graphite investment",
+    "publisher": "Fasken (transaction counsel to EBRD)",
+    "url": "https://www.fasken.com/en/experience/2025/03/the-european-bank-for-reconstruction-and-development-completes-equity-investment",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "EBRD's transaction counsel reports final closing on 10 February 2025 in two tranches for aggregate A$5M; its stated share count multiplied by stated issue price does not reconcile to A$5M, so SMPT relies on the lender's direct money figure and makes no share-count inference."
+  },
+  {
+    "id": "src-sarytogan-ebrd-topup-received-2026",
+    "title": "Sarytogan Graphite Limited, ASX announcement: $1.4M Funds received",
+    "publisher": "Sarytogan Graphite Limited / ASX (announcement reproduced by Market Index)",
+    "url": "https://www.marketindex.com.au/asx/sga/announcements/14m-funds-received-6A1323055",
+    "language": "en",
+    "datePublished": "2026-04-30",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Sarytogan's dated ASX statement of 30 April 2026 reports A$1,396,581.12 cash received from EBRD under its separately agreed 6 November 2025 top-up placement (amended 18 November 2025): 17,457,264 shares at A$0.08. Kazakhstan MIC, Australian FIRB and company shareholder conditions were fulfilled by settlement."
+  },
+  {
+    "id": "src-ebrd-sarytogan-followon-2026",
+    "title": "EBRD increases stake in Sarytogan Graphite Limited",
+    "publisher": "European Bank for Reconstruction and Development",
+    "url": "https://www.ebrd.com/home/news-and-events/news/2026/ebrd-increases-stake-in-sarytogan-graphite-limited.html",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The bank separately announces a follow-on equity investment of about A$1.4M in Sarytogan Graphite Limited, increasing its stake to 18.4%, to support definitive feasibility study and other project development work. The bank page does not itself fix the exact settlement date or dollar cents."
   }
 ]
