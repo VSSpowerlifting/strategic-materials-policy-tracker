@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: DOE CMEI M2.5 publisher-provenance preflight candidate
+
+- **EXIM operational controls verified:** M2.4 independent missing-schedule watchdog PR #92 squash-merged to `13b51a3`; exact-merge [CI #37813595464](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37813595464) passed. First true unattended EXIM source run remains due October 9 at 14:07 UTC, with independent missed-schedule check at 22:37 UTC. No claim of seven-day reliability yet.
+- **DOE CMEI chosen for next *evidence-only* phase:** existing [M2 discovery #37728686586](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37728686586) returned reachable filtered DOE news HTML (HTTP 200, 12 headline-shaped paths), whereas Defense Industrial Base Policy was inaccessible from that runner. DOE's official filtered index includes both strategic-mineral and unrelated energy/construction news. Candidate links in global HTML are not yet publisher-bound listing cards or date-verified documents.
+- **M2.5 implementation candidate:** manual-only, read-only five-request DOE listing (page 0/page 1) and publisher sample (mining-project selections, workforce prize, unrelated homebuilders control) preflight with exact official-host/redirect checks, response/time bounds, non-authoritative HTML/date/H1 fingerprints, pagination overlap warnings and explicit `eligibleForMonitoringActivation: false`. No shared monitoring state, candidate decisions, published events or finance changes. See `docs/monitoring/m2-5-doe-cmei-provenance-preflight-2026-10-08.md`. CI and live runner output remain required for promotion to a separate shadow collector.
+
 ## 2026-10-08: M2.4 independent EXIM cron-miss watchdog candidate
 
 - **Verified first EXIM baseline and replay are both manual, not scheduled:** [37800436243](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37800436243) and [37801575996](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37801575996) passed with independent state/report artifacts, 20 verified releases, no gap. First post-baseline scheduled collection is due **October 9 at 14:07 UTC**; it has not yet been observed.

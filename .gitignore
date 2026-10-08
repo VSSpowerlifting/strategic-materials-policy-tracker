@@ -92,3 +92,6 @@ data/candidates/*.json
 
 # Separate missing-schedule watchdog receipts; never scanner memory.
 .monitor-exim-watchdog/
+
+# DOE CMEI manual-only preflight evidence; not a monitored state.
+.monitor-doe-preflight/
