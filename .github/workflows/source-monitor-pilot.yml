@@ -7,6 +7,12 @@ name: SMPT source-monitor pilot
 
 on:
   workflow_dispatch:
+    inputs:
+      recover_from_artifact:
+        description: "Skip cache and exercise archived identity recovery (requires a prior M1.2 run)"
+        type: boolean
+        required: false
+        default: false
   schedule:
     # Daily 13:17 UTC; schedule delivery can be delayed by GitHub.
     - cron: "17 13 * * *"
@@ -36,6 +42,7 @@ jobs:
         run: npm ci
 
       - name: Restore best-effort prior publication identities
+        if: inputs.recover_from_artifact != true
         uses: actions/cache/restore@v4
         with:
           path: .monitor-pilot/state.json
