@@ -97,3 +97,5 @@ data/candidates/*.json
 .monitor-doe-preflight/
 # Manual DOE structured-source admission evidence (not persistent monitor state)
 .monitor-doe-structured/
+# Nonpersistent DOE experimental source-body diagnostics (no scanner state)
+.monitor-doe-body-proof/
