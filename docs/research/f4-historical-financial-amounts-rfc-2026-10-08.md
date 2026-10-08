@@ -12,7 +12,7 @@ The **financial amount** on a row is presently a single `FinancialCommitment.amo
 
 Concrete case: DOE Thacker Pass ATVM loan `fin-us-doe-thacker-pass-atvm-2024`:
 - **2024-10-28:** signed facility **approximately $2.26 billion**, including **$1.97B principal** and about **$289.6–$289.7M estimated capitalized interest**.
-- **2025-10-07:** same facility amended to **approximately $2.23 billion**, including unchanged **$1.97B principal** and **approximately $256M estimated capitalized interest**.
+- **2025-10-07:** parties **signed** a conditional amendment stating a revised **approximately $2.23 billion** facility ($1.97B unchanged principal, approximately $256M estimated capitalized interest). The [issuer's contemporaneous SEC Form 8-K](https://www.sec.gov/Archives/edgar/data/1966983/000119312525233937/d10878d8k.htm) expressly states the amendment would become **effective only upon satisfaction of customary conditions precedent**. The actual day conditions were satisfied is not yet established. The **2025-10-20 first draw** confirms the amendment had become operative **no later than October 20**. Do **not** silently treat October 7 execution as the effective date.
 - The current row correctly carries **~$2.23B** with historical values in its notes, but its amount does not date-slice. The two amounts are **versions of one loan**, not separate commitments.
 - Cumulative **$1.209B advances as of 2026-06-30** concern *money drawn*, **not** a third facility amount/version. The original and amended total *include capitalized interest* and must not be conflated with authorized principal or accounting carrying value.
 
@@ -35,8 +35,10 @@ Maintain `amount` as the present/current canonical amount for API and UI backwar
 type AmountVersion = {
   /** The facility's sourced revised or original total; null means source states no amount. */
   amount: MonetaryAmount | null;
-  /** Source-supported operative date; null when a precise effective date is unavailable. */
-  effectiveDate: string | null;
+  /** Sourced earliest possible operative day; not necessarily the actual effective day. */
+  effectiveNotBefore: string;
+  /** Sourced day by which the amendment is confirmed operative; same as above for exact date. */
+  effectiveNoLaterThan: string;
   sourceId: string;
   /** Pinpoint within source; the primary evidence for amount and date. */
   locator: string;
@@ -51,7 +53,7 @@ type AmountVersion = {
 Possible rename: `amountHistory`, `amountVersionHistory`. Pick one in review and enforce it throughout the TypeScript type, validator, seed and API. Avoid `amountEffectiveDate` as a single scalar; the instrument needs multiple versions.
 
 *Rules:*
-- For versioned rows, a nonempty series must have oldest-to-newest chronological **effective** dates where stated, with no two entries on the same effective date unless explicitly adjudicated as one superseding correction. Historical queries never read a later version.
+- For versioned rows, a nonempty series must have oldest-to-newest **nonoverlapping operative windows** (both bounds sourced). Exact effective dates have equal start/end; an unknown effective day has a defensible earliest and latest supported boundary. No two entries share an operative boundary unless explicitly adjudicated as a correction. An amendment signing alone **does not prove its effective date**. Historical queries never read a later version.
 - Last entry's `amount` must deep-equal the row's canonical `amount` on committed data. No second independently mutable monetary source of truth.
 - Each version's `sourceId` must be registered and the same row must carry field-level `evidence` linking it with `supports: ["amount"]`. The source's `datePublished` and `dateAccessed` remain independently preserved on `Source`.
 - Do not add up original/revised versions or turn versions into children, `part_of`/`drawn_from` relationships, or extra rows.
@@ -65,14 +67,15 @@ Introduce a *pure* `amountOn(row, operativeAsOf)` helper distinct from `financia
 
 ```ts
 type HistoricalAmount =
-  | { kind: "quantified"; amount: MonetaryAmount; effectiveDate: string; sourceId: string }
-  | { kind: "unquantified"; effectiveDate: string; sourceId: string }
+  | { kind: "quantified"; amount: MonetaryAmount; effectiveNotBefore: string; effectiveNoLaterThan: string; sourceId: string }
+  | { kind: "unquantified"; effectiveNotBefore: string; effectiveNoLaterThan: string; sourceId: string }
+  | { kind: "indeterminate_transition"; earliest: string; latest: string }
   | { kind: "not_yet_evidenced" }
   | { kind: "history_unreviewed"; currentAmount: MonetaryAmount | null };
 ```
 
 For reviewed/versioned rows:
-- Pick the **last** applicable version whose documented effective date is <= operative-as-of, after a nonfuture financial agreement identity is established.
+- Pick the **last** version whose **latest** supported operative date is on/before operative-as-of. When the date falls inside a pending version's [earliest, latest) interval, return `indeterminate_transition`; do not choose either amount. Before the first version's earliest date, return `not_yet_evidenced`.
 - Before the first effective amount, return `not_yet_evidenced`, **not** zero.
 - An explicit sourced revision to `null` returns `unquantified`, not a numeric zero.
 - A version with unknown effective date must cause an explicitly **withheld/unknown historical boundary** until date is adjudicated. In particular, do not prematurely adopt the current amount.
@@ -93,7 +96,8 @@ A future `totalCommitmentsOn(rows, all, asOf)` must first evaluate historical am
 | Thacker 2024-10-27 | No executed facility amount claimed before signing |
 | Thacker 2024-10-28 | Original **approximately $2.26B** |
 | Thacker 2025-10-06 | Still original **approximately $2.26B** |
-| Thacker 2025-10-07 | Amended **approximately $2.23B** |
+| Thacker 2025-10-07 through 2025-10-19 | **Indeterminate transition**, not silently amended on signature day; report the competing source amounts and evidence interval |
+| Thacker 2025-10-20 | Amended **approximately $2.23B** supported no later than first draw (not a claim that the amendment became effective that exact day) |
 | Thacker 2026-06-30 | **~$2.23B face amount** with financial status partially disbursed; **$1.209B draws remain notes**, not extra rows |
 | Current Thacker UI/API | Same canonical **~$2.23B** until explicitly selecting historical mode |
 | Original amount and amendment together | Exactly **one** counted facility at any cutoff; no $4.49B false sum |
@@ -120,3 +124,7 @@ A future `totalCommitmentsOn(rows, all, asOf)` must first evaluate historical am
 This RFC does **not** imply versioned project stage/status, physical-status as-of reconstruction, financial *cash advance* history, inflation adjustment, FX conversion, separate retrospective ingestion snapshots, or a guarantee-draw model. Each needs its own source and semantics.
 
 Other active engineering work (EXIM shadow bootstrap, Rhyolite Ridge #84 and Thompson Falls #85) is **not** modified by this document. Schema design should remain blocked until reviewers accept the distinction between **operative historical truth**, **publication visibility**, and **current-corpus coverage**.
+
+## 8. Evidence correction noted during F4-A source review (2026-10-08)
+
+The contemporaneous October 7, 2025 [SEC 8-K, Item 1.01](https://www.sec.gov/Archives/edgar/data/1966983/000119312525233937/d10878d8k.htm) states the OWCA was executed but subject to conditions precedent before effectiveness. The [2026 Q2 10-Q](https://www.sec.gov/Archives/edgar/data/1966983/000119312526347826/lac-20260630.htm) establishes the initial DOE-loan advance on October 20 2025. Therefore the transition from original to revised amount lies in a **bounded but not exactly dated period**, rather than being operative automatically on the October 7 signing date. Any previously proposed exact October 7 as-of assertion is superseded by this source correction. The first prototype must test the uncertain window, not conceal it.
