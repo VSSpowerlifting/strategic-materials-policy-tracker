@@ -36,6 +36,9 @@ M3.1. The typed model and the validateProjectMilestones function enforce:
   source-language-appropriate translation provenance;
 - explicit scope wording for named facilities and funded activities;
 - real calendar dates and independent occurredOn/targetOn values;
+- the funded-activity completion kind cannot be used at whole-project or facility scope, and funded-activity scope cannot claim facility construction or operations;
+- occurrence dates cannot postdate their cited source; source publication/access boundaries cannot postdate corpus review, and reviews cannot predate their source's evidence boundary;
+- invalid publication dates fail closed, rather than silently reverting to access dates;
 - no future occurred event as of the corpus cutoff and no auto-promotion of
   a planned project; required human reviewer identity and review date;
 - bounded prose and no duplicate source assertion under two IDs merely
