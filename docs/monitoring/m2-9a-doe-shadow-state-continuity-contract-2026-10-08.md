@@ -26,7 +26,7 @@ If this state is **missing, corrupt, wrong-source, wrong-version, missing its an
 - Unique canonical official HTTPS article URLs, valid descending publisher-visible dates, title and independently verified original article header, valid 64-character **approved** semantic hashes, and literal original attribution. The 20 observed records are a **test snapshot**, not a hard-coded source corpus.
 - Sitewide `Energy.gov` listing attribution stays literal, with **null** issuer until independently established; no policy/funding materiality inference.
 
-If the source window cannot find the last trusted newest-article anchor, return **`coverage_gap`** with the **old state unchanged** and no claimed new/revised items. If anchor recovery succeeds, produce a **preview** of the next state and separately marked `unreviewed` source observations; no commit, write, published content, editorial promotion, or financial record exists in this code.
+If the source window cannot find the last trusted newest-article anchor **or contains an unknown older article after that anchor**, return **`coverage_gap`** with the **old state unchanged** and no claimed new/revised items. This rejects an incomplete historical identity map instead of mistaking an unseen old publication for a new publisher release. The first authorized baseline must therefore cover all observed identities in its verified source window. UTC advancement compares actual instants, not timestamp strings. With continuity proven, produce a **preview** of the next state and separately marked `unreviewed` source observations; no commit, write, published content, editorial promotion, or financial record exists in this code.
 
 ### Baseline and artifact contract for the later M2.9b implementation
 
