@@ -102,7 +102,7 @@ test("designations, projects and projects with no designation, per material; the
     germanium: [2, 5, 3],
     dysprosium: [0, 3, 3],
     terbium: [0, 3, 3],
-    antimony: [0, 4, 4],
+    antimony: [0, 6, 6],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
     lithium: [1, 7, 6],
