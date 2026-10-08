@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: Thacker Pass DOE ATVM loan backfill — proposed data PR
+
+- Official [DOE Thacker Pass](https://www.energy.gov/edf/thacker-pass), [28 October 2024 agreement](https://www.sec.gov/Archives/edgar/data/1966983/000095017025046424/lac-ex10_11.htm), [7 October 2025 amendment](https://www.sec.gov/Archives/edgar/data/1966983/000119312526115081/lac-ex10_1.htm), and [Q2 2026 SEC filing](https://www.sec.gov/Archives/edgar/data/1966983/000119312526347826/lac-20260630.htm) establish ONE DOE ATVM loan, originally ~$2.26B and amended to **~$2.23B**, with **$1.209B total draws by June 30 2026** (three advances). Borrower **Lithium Nevada LLC**, formerly Corp., is not sponsor Lithium Americas Corp.
+- New processing-only project for Thacker Pass Phase 1, separate from open-pit mine, with verified ongoing `construction` in 2026. Loan is `contracted` 2024-10-28, `partially_disbursed` 2025-10-20; cash advances do not add to committed face amount. Original/amended amount versions remain in narrative because F4 does not historically slice monetary amounts; do not imply an amended 2025 figure existed in 2024.
+- Boundaries: no full draw/operational production, no exercised warrants, no double-count of FFB arrangements, no invented mining finance, and no EXIM monitoring changes. Project/source/organization/lithium dossier backfill and regression tests only. CI validation then maintainer review; no merge/deploy until authorized. See `docs/research/thacker-pass-doe-atvm-financing-2026-10-08.md`.
+
 ## 2026-10-08: EXIM fourth bootstrap failure and structural navigation isolation
 
 - **Fourth failure, confirmed:** [EXIM run 37791842873](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37791842873) on `main` `97277e5` returned HTTP 200 but `health: invalid_response`: `EXIM listing article has no nearby official publication date: https://www.exim.gov/news/reports`. No prior EXIM state artifact was available and no first baseline was written.
