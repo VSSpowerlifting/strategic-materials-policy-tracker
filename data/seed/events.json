@@ -2604,5 +2604,47 @@
       "verifiedAt": "2026-10-07",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-doe-thacker-pass-loan-2024",
+    "date": "2024-10-28",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Energy, Loan Programs Office",
+    "titleOriginal": "DOE closes Advanced Technology Vehicles Manufacturing loan for Thacker Pass Phase 1 processing facilities",
+    "titleOriginalLang": "en",
+    "titleEn": "DOE closes ATVM loan for Thacker Pass lithium processing facilities",
+    "titleEnSource": "na",
+    "documentNumber": "DOE ATVM Loan No. A1034",
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "lithium"
+    ],
+    "affectedSectors": [
+      "battery",
+      "energy",
+      "industrial"
+    ],
+    "summary": "DOE executed an Advanced Technology Vehicles Manufacturing loan agreement on 28 October 2024 with Lithium Nevada Corp. (later Lithium Nevada LLC) to finance Thacker Pass Phase 1 lithium-carbonate processing facilities and related infrastructure in Nevada, excluding the open-pit mine itself. The original approximately $2.26 billion facility ($1.97 billion principal and estimated capitalized interest) was amended in October 2025 to approximately $2.23 billion; three advances totaled $1.209 billion by 30 June 2026. The financing is a single executed and partially disbursed facility, not two loans or four separate commitments. SEC reporting separately establishes ongoing processing-plant construction.",
+    "analyticalSignificance": "A large U.S. industrial-finance intervention with distinct legal closing, amended cap, repeated cash advances and verified physical construction. The DOE/FFB loan financing is focused on domestic conversion of lithium-bearing ore into battery-grade lithium carbonate, not federal financing of mine development. Preserve the distinction between announced capacity, binding financing, partial disbursement, and actual construction.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-doe-thacker-pass-2024",
+      "src-doe-thacker-pass-nepa-2024",
+      "src-sec-lac-thacker-loan-agreement-2024",
+      "src-sec-lac-thacker-amendment-2025",
+      "src-sec-lac-thacker-q2-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-10-28",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-08",
+      "publishedAt": null
+    }
   }
 ]
