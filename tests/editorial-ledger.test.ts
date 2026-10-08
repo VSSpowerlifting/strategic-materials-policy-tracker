@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import {
   beginCandidate, editorialDecision, emptyPrivateEditorialLedger,
   importReviewQueue, parsePrivateEditorialLedger,
@@ -132,4 +133,12 @@ test("reject duplicate, corrupt or wrong-mode imports and tampering with ledger"
   const l = imported();
   l.items[0].status = "candidate_started";
   assert.throws(() => parsePrivateEditorialLedger(l), /Invalid private ledger/);
+});
+
+test("maintainer CLI launches through actual npm command with no private state writes", () => {
+  const output = execFileSync(process.platform === "win32" ? "npm.cmd" : "npm",
+    ["run", "editorial:inbox", "--", "list"], {
+      cwd: process.cwd(), encoding: "utf8", timeout: 20_000,
+    });
+  assert.match(output, /Private ledger: 0 unique publications, 0 artifact runs ingested/);
 });
