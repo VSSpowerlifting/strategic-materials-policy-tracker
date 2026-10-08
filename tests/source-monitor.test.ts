@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 
 import {
   PILOT_SOURCE_IDS,
@@ -157,4 +158,14 @@ test("published Atom links decode XML ampersands and the report preserves an act
   );
   assert.equal(fetched.report.sources[0].status, 206);
   assert.equal(fetched.report.sources[0].health, "ok");
+});
+
+test("monitor CLI starts via its actual npm command without network or report writes", () => {
+  // Regression for Day-0 failure #37720568026: tsx transpiles this package's
+  // script to CommonJS, which rejects top-level await even if TS itself passes.
+  // --check-runtime exercises startup and official source configuration only.
+  const out = execFileSync(process.platform === "win32" ? "npm.cmd" : "npm",
+    ["run", "monitor:pilot", "--", "--check-runtime"],
+    { cwd: process.cwd(), encoding: "utf8", timeout: 20_000 });
+  assert.match(out, /SMPT pilot CLI runtime check passed \(offline, no observations written\)/);
 });
