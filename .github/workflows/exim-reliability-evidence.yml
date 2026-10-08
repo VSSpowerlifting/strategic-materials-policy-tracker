@@ -1,0 +1,62 @@
+# M2.2 read-only audit triggered after EXIM shadow workflow completes.
+# Separate from EXIM observation: does not fetch EXIM, write its state, or
+# mutate policies, financing records, the M1 monitor, or human-review status.
+name: SMPT EXIM reliability evidence
+
+on:
+  workflow_run:
+    workflows: ["SMPT EXIM shadow monitoring"]
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: smpt-exim-reliability-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+
+jobs:
+  reliability:
+    if: github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit completed EXIM run metadata and artifact-backed scheduled days
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SMPT_EXIM_AUDIT_TRIGGER_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: npm run audit:exim
+
+      - name: Archive EXIM reliability evidence (never monitoring state)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-exim-reliability-${{ github.event.workflow_run.id }}-${{ github.run_attempt }}
+          path: |
+            .monitor-exim-reliability/audit.json
+            .monitor-exim-reliability/summary.md
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Report milestone evidence with limitations
+        if: always()
+        run: |
+          if test -s .monitor-exim-reliability/summary.md; then
+            cat .monitor-exim-reliability/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No validated EXIM reliability audit. Inspect this Actions job." >> "$GITHUB_STEP_SUMMARY"
+          fi
