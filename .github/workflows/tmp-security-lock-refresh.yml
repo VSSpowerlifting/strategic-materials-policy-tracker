@@ -1,0 +1,62 @@
+# TEMPORARY PR-branch helper. Delete before merging.
+# Runs only for package.json changes on this exact in-repo security branch.
+# No permission to push main; only package-lock.json is committed to this branch.
+name: SMPT temporary security lockfile regeneration
+on:
+  push:
+    branches:
+      - fix/security-next-16-4-audit-20261008
+    paths:
+      - package.json
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    if: github.repository == 'VSSpowerlifting/strategic-materials-policy-tracker' && github.ref == 'refs/heads/fix/security-next-16-4-audit-20261008' && github.actor == 'VSSpowerlifting'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Resolve pinned patched Next.js pair without installation scripts
+        run: npm install --package-lock-only --ignore-scripts --no-fund
+      - name: Attempt only nonbreaking dependency audit repairs
+        shell: bash
+        run: |
+          set +e
+          npm audit fix --package-lock-only --ignore-scripts --no-fund > /tmp/smpt-security-audit-fix.txt 2>&1
+          code=$?
+          set -e
+          echo "Nonforcing audit-fix exit: $code (may reflect remaining dev alerts)"
+          tail -n 45 /tmp/smpt-security-audit-fix.txt
+      - name: Gate production dependency advisories
+        run: npm audit --omit=dev --audit-level=moderate
+      - name: Confirm lock consistency with npm ci
+        run: npm ci --ignore-scripts --no-fund
+      - name: Require manifest unchanged by resolver
+        run: git diff --exit-code -- package.json
+      - name: Commit exactly package-lock.json to security feature branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --name-only | grep -v -x 'package-lock.json'; then
+            echo "Unexpected local working-tree modifications. Refusing push."
+            exit 1
+          fi
+          if git diff --quiet -- package-lock.json; then
+            echo "No lockfile changes generated. Refusing success."
+            exit 1
+          fi
+          git add package-lock.json
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'fix(deps): regenerate security-patched npm lockfile'
+          auth=$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push origin HEAD:refs/heads/fix/security-next-16-4-audit-20261008
