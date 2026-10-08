@@ -8,7 +8,7 @@ import type { Source } from "./types";
 
 export type EditorialQueueItem = {
   observationId: string;
-  watchSourceId: PilotSourceId;
+  watchSourceId: PilotSourceId | "watch-us-exim-news-shadow";
   observedAt: string;
   change: ReviewObservation["change"];
   publicationDate: string | null;
