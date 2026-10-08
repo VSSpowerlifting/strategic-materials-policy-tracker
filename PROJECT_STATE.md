@@ -1,5 +1,15 @@
 # Project state
 
+## 2026-10-07: Industrial Response Maturity public analysis (draft)
+
+**Status:** `feat/industrial-response-maturity-20261007` branched from `main` at `286e385`, following the merge of #67. **Draft, unmerged and not deployed.**
+
+- Introduces public `/response` view with a **financial standing × implementation evidence** matrix for **directly attributed, tracked-government-backed registry projects**. Every project/status links to underlying financing evidence and original sources. Includes nonadditive material-level counts and full project evidence ledger.
+- Uses the F4 `financialStatusEntryOn` / `legalStandingOn` evidence boundary for as-of financial statuses; physical implementation remains revision-current, explicitly not historical as-of data. Avoids equating missing physical status with failure or imposing a causal link between capital and construction.
+- Excludes multilateral-only recipients, ended/no-evidence commitments, indications, envelopes, private capital, designations alone and non-allocative shared project associations from the government-response denominator. No cash amounts are summed, converted or edited; the funded-activity-only Kingston exception remains visible and excluded from a strict construction reading.
+- Preserves the pinned Oct 3 historical analysis unchanged. Advances `site.lastUpdated` to 2026-10-07 **as corpus revision**, corrects the homepage's overbroad data-rechecked wording, and adds navigation to the new view.
+- Scope/limitations: `docs/analysis/industrial-response-maturity-2026-10-07.md`. CI (validate/typecheck/lint/tests/build) and user-interface review required before maintainer decides on merge; no release authorized.
+
 ## 2026-10-07: EXIM direct-lender registry reconciliation (draft)
 
 **Status:** Branch `fix/exim-perpetua-public-financier-link-20261007` based on `main` at `1eb4551`; draft and undeployed.
