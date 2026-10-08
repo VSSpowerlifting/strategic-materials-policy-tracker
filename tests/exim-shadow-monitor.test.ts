@@ -84,6 +84,37 @@ test("actual EXIM Media Advisories navigation link never becomes a dated release
   assert.ok(baseline.state);
 });
 
+test("EXIM untitled duplicate anchors need an independently dated headline for the same URL", () => {
+  const expected = parseEximNewsListing(listing(five));
+  const thumbnail = '<a href="' + articleUrl(1) + '"><img src="/media/preview.jpg" alt="EXIM"></a>';
+  // A real dated card can link its image and its headline separately.
+  const withThumbnail = listing(five).replace(
+    '<div class="title"><a href="' + articleUrl(1) + '">',
+    '<div class="title">' + thumbnail + '<a href="' + articleUrl(1) + '">',
+  );
+  assert.deepEqual(parseEximNewsListing(withThumbnail), expected);
+  // This also holds when the presentation-only link appears after the title.
+  const afterTitle = listing(five).replace(
+    '</a></div></div>',
+    '</a>' + thumbnail + '</div></div>',
+  );
+  assert.deepEqual(parseEximNewsListing(afterTitle), expected);
+  // Unknown article-shaped image-only links are never silently ignored.
+  const unknown = listing(five).replace(
+    '<main>',
+    '<main><a href="/news/unverified-untitled"><img src="/media/unknown.jpg"></a>',
+  );
+  assert.throws(() => parseEximNewsListing(unknown),
+    /EXIM article-shaped link lacks verified dated headline anchor: https:\/\/www\.exim\.gov\/news\/unverified-untitled/);
+  // Very long anchor text without a separately verified title also fails.
+  const tooLong = listing(five).replace(
+    '<main>',
+    '<main><a href="/news/unverified-long-headline">' + "L".repeat(601) + '</a>',
+  );
+  assert.throws(() => parseEximNewsListing(tooLong),
+    /EXIM article-shaped link lacks verified dated headline anchor: https:\/\/www\.exim\.gov\/news\/unverified-long-headline/);
+});
+
 test("EXIM release-body verification preserves date/title and detects material text edits", () => {
   const listed = parseEximNewsListing(listing(five))[0];
   const row = parseEximArticle(article(1), listed);
