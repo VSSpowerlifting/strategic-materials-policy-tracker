@@ -3077,6 +3077,68 @@
     "notes": "A gold-antimony-silver development; only antimony is tracked as a material in SMPT."
   },
   {
+    "id": "prj-us-thacker-pass-phase1-processing",
+    "name": "Thacker Pass Phase 1 lithium-carbonate processing facilities",
+    "sponsorOrgIds": [
+      "org-lithium-nevada-llc"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Nevada",
+        "asStated": "Thacker Pass, Humboldt County, Nevada"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-doe-thacker-pass-2024",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Project summary and project statistics",
+        "note": "DOE names Lithium Nevada Corp. and describes lithium-carbonate processing facilities at Thacker Pass."
+      },
+      {
+        "sourceId": "src-doe-thacker-pass-nepa-2024",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Summary: subject of DOE loan is mine processing facilities and associated infrastructure, not development and operation of open-pit mine",
+        "note": "Determines funded physical scope, narrower than the full Thacker Pass mine development."
+      },
+      {
+        "sourceId": "src-sec-lac-thacker-q2-2026",
+        "supports": [
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "MD&A, Thacker Pass overview and Q2 construction highlights",
+        "note": "Lithium Nevada LLC owns Thacker Pass through the joint venture; its parent group describes active construction of Phase 1 processing plant and associated infrastructure."
+      }
+    ],
+    "notes": "This registry project represents the DOE-loan-financed Phase 1 lithium processing plant, sulfuric-acid facility and related infrastructure, not the open-pit mine development. The wider Thacker Pass mine/JV is not automatically allocated the DOE $2.23B facility. June 2026 SEC report evidences ongoing construction, not commissioning or operational lithium carbonate production."
+  },
+  {
     "id": "prj-us-usac-alaska-antimony-feedstock",
     "name": "US Antimony Alaska antimony mining and feedstock development",
     "sponsorOrgIds": [

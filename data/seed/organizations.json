@@ -1122,6 +1122,45 @@
     "notes": "Borrower under the executed €150M EIB facility agreement of 20 August 2024 (SEC Exhibit 4.8); separately promoter/holder of the EU CRMA Strategic Project designation. Kept legally distinct from guarantor Keliber Oy."
   },
   {
+    "id": "org-lithium-nevada-llc",
+    "name": "Lithium Nevada LLC",
+    "nameOriginal": null,
+    "aliases": [
+      "Lithium Nevada Corp.",
+      "Lithium Nevada Corporation",
+      "LN"
+    ],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-sec-lac-thacker-amendment-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph, Borrower identity: LITHIUM NEVADA LLC (formerly known as Lithium Nevada Corp.), a Nevada LLC",
+        "note": "The 2025 amendment establishes legal continuity with the original 2024 corporation borrower rather than two separate financing recipients."
+      },
+      {
+        "sourceId": "src-sec-lac-thacker-loan-agreement-2024",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover and preamble: LITHIUM NEVADA CORP. as borrower, Nevada corporation",
+        "note": "Original 2024 legal borrower; later legal form/name evidenced by the 2025 amendment."
+      }
+    ],
+    "notes": "Named DOE ATVM loan borrower, formerly Lithium Nevada Corp. Following the December 2024 corporate restructuring, project ownership is through Lithium Nevada Ventures LLC, the Lithium Americas/GM joint venture. Lithium Americas Corp. is not substituted for the direct borrower."
+  },
+  {
     "id": "org-lkab",
     "name": "LKAB (Luossavaara-Kiirunavaara AB)",
     "nameOriginal": null,
@@ -2352,6 +2391,34 @@
       }
     ],
     "notes": "Sources from September 2025 onward use \"Department of War\"; the record keeps one id so the department's portfolio does not split."
+  },
+  {
+    "id": "org-us-doe",
+    "name": "U.S. Department of Energy",
+    "nameOriginal": null,
+    "aliases": [
+      "DOE",
+      "Department of Energy"
+    ],
+    "kind": "government",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-doe-thacker-pass-2024",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "U.S. Department of Energy, Loan Programs Office project summary",
+        "note": "Federal department administering the ATVM loan; financing structure also uses the Federal Financing Bank. Bank mechanics do not create a duplicate commitment."
+      }
+    ],
+    "notes": "Federal ATVM/Loan Programs Office financing authority for the Thacker Pass loan. The original borrower agreement identifies DOE as an agreement party and provides for Federal Financing Bank advances under federal loan arrangements."
   },
   {
     "id": "org-us-exim",
