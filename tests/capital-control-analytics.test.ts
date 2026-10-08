@@ -832,7 +832,7 @@ test("USA Rare Earth's contracted direct funding says where its status shows tha
   const usd = buildCapitalControlSummary().capital.publicCommitmentTotals.find((t) => t.currency === "USD")!;
   if (usd.status !== "summed") assert.fail("the USD total is withheld");
   const guarantee = usd.instruments.find((i) => i.instrument === "loan_guarantee")!;
-  assert.deepEqual([guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000" }, {}]);
+  assert.deepEqual([guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000", exact: "996000000" }, {}]);
   assert.equal(usd.instruments.find((i) => i.instrument === "unspecified")!.summed, false);
   // Where "contracted" and "binding" are defined, they say an executed agreement need not have obligated or paid funds.
   assert.ok(buildCapitalControlSummary().countingRules.some((r) => /Binding describes the agreement, not the money/.test(r) && /obligation of funds/.test(r)));

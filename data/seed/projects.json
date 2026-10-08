@@ -3030,6 +3030,70 @@
     "notes": "Enabling infrastructure within the wider MP funding package. It is deliberately left without a tracked material or supply-chain stage rather than treating hydrochloric acid infrastructure as a rare-earth project."
   },
   {
+    "id": "prj-us-rhyolite-ridge-processing",
+    "name": "Rhyolite Ridge on-site lithium processing facilities",
+    "sponsorOrgIds": [
+      "org-ioneer-rhyolite-ridge-llc",
+      "org-ioneer-ltd"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Nevada",
+        "asStated": "Esmeralda County, Nevada"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "boron"
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-doe-ioneer-rhyolite-2025-close",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraphs 1–2: named project recipient, lithium-carbonate processing and Nevada site",
+        "note": "Named project is integrated lithium-boron mine but financed portion is the on-site lithium processing plant and related infrastructure."
+      },
+      {
+        "sourceId": "src-doe-rhyolite-nepa-0565",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Project summary paragraphs 1–2, DOE/EIS-0565",
+        "note": "Loan financing scope includes lithium processing plant, sulfuric-acid unit and associated infrastructure, specifically excluding open-pit mine."
+      },
+      {
+        "sourceId": "src-sec-ioneer-rhyolite-q2-2026",
+        "supports": [
+          "sponsors",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "June 2026 Quarterly Activities, project description and Engineering section",
+        "note": "Pre-FID engineering for lithium-carbonate circuit; boron is a separate co-product of the wider Rhyolite Ridge venture, not allocated a known slice of the DOE guarantee."
+      }
+    ],
+    "notes": "DOE-guaranteed finance supports on-site lithium processing and ancillary sulfuric-acid/support facilities, not open-pit mining. The broader Rhyolite Ridge project co-produces boron, which is not tracked as a material in this SMPT registry and receives no distinct allocated dollar amount here. As of 30 June 2026, issuer states no development or production activity this quarter, and FID/construction not yet achieved. Ioneer Ltd is the separately registered Australian-listed corporate developer; the loan guarantee names the U.S. project entity as direct recipient, not the parent."
+  },
+  {
     "id": "prj-us-stibnite",
     "name": "Stibnite Gold Project",
     "sponsorOrgIds": [],

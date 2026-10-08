@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-08: DOE Rhyolite Ridge $996M loan-guarantee backfill (PR #84 under review)
+
+- [DOE January 17, 2025](https://www.energy.gov/edf/articles/doe-announces-996-million-loan-guarantee-ioneer-rhyolite-ridge-advance-domestic) closed **one $996M ATVM loan guarantee** ($968M principal, $28M capitalized interest) for **Ioneer Rhyolite Ridge LLC**. The prior January 2023 conditional offer is not another loan; older DOE NEPA wording naming proposed Rhyolite Ridge Holdings LLC is not assumed to establish legal identity.
+- Federal financing is limited to on-site lithium processing and associated infrastructure, **not the open-pit mine**. The broader project co-produces boron but there is no separately evidenced public-financing allocation to boron.
+- `contracted` on 2025-01-17. Reviewed issuer June–August 2026 disclosures [Quarterly Activities](https://www.sec.gov/Archives/edgar/data/1896084/000114036126030118/ef20078896_ex99-1.htm) / [half-year accounts](https://www.sec.gov/Archives/edgar/data/1896084/000114036126032597/ef20079527_ex99-1.htm) still show pre-FID **feasibility**, unresolved first-draw conditions, no verified DOE advance; loan-establishment fees are not disbursement. No construction/operational status inferred. See `docs/research/rhyolite-ridge-doe-atvm-reconciliation-2026-10-08.md`.
+- Single isolated dataset and regression PR; no EXIM parser/monitoring or Vercel operations, and no merge without CI and maintainer review.
+
+
 ## 2026-10-08: EXIM M2.1 live source-card and body acceptance passed in PR #83
 
 - **Fifth live bootstrap failed safely:** [run 37792978605](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37792978605) on #81 merge `0e10ddc`, HTTP 200 but `invalid_response` on `/news/reports`, with **no baseline created**. An H1 boundary did not prevent footer links entering the global scan.
