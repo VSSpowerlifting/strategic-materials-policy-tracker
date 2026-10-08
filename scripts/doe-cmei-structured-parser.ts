@@ -90,14 +90,26 @@ function date(value: string): string {
   return out;
 }
 function uniqueTagged(
-  html: string, tag: "div" | "span", cls: string,
+  html: string, tag: "div" | "span" | "p", cls: string,
 ): string {
-  // Stable DOE fields are simple div/span blocks in observed template.
-  const matches = [...html.matchAll(new RegExp("<" + tag +
-    "\\b([^>]*)>([\\s\\S]*?)<\\/" + tag + "\\s*>", "gi"))]
-    .filter((x) => classes(x[1], cls));
+  const open = new RegExp("<" + tag + "\\b([^>]*)>", "gi");
+  const matches = [...html.matchAll(open)].filter((x) => classes(x[1], cls));
   if (matches.length !== 1) throw Error("DOE expected exactly one " + cls + " field");
-  return matches[0][2];
+  const m = matches[0];
+  const innerStart = (m.index ?? 0) + m[0].length;
+  // DOE article fields contain nested divs, e.g. icons and read-time.
+  // Non-greedy </div> would truncate the actual parent field.
+  const tags = new RegExp("<\\/?" + tag + "\\b[^>]*>", "gi");
+  tags.lastIndex = m.index ?? 0;
+  let depth = 0;
+  let next: RegExpExecArray | null;
+  while ((next = tags.exec(html))) {
+    if (next[0].startsWith("</")) depth--;
+    else depth++;
+    if (depth === 0)
+      return html.slice(innerStart, next.index);
+  }
+  throw Error("DOE " + cls + " field has unbalanced " + tag + " markup");
 }
 export function parseDoeStructuredListing(html: string, requestedUrl: string): DoeCmeiRow[] {
   bounded(html);
@@ -177,7 +189,7 @@ export function parseDoeStructuredArticleHeader(
   // publisher-visible release date. Scope to this article's beneath-title.
   const beneath = uniqueTagged(article, "div", "beneath-title");
   const displayed = text(uniqueTagged(beneath, "span", "display-date"));
-  const office = text(uniqueTagged(beneath, "p" as "div", "primary-office"));
+  const office = text(uniqueTagged(beneath, "p", "primary-office"));
   if (office !== "Office of Critical Minerals and Energy Innovation")
     throw Error("DOE article lacks unique CMEI primary-office attribution");
   const headline = text(headings[0][1]);
