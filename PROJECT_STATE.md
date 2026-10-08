@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: EIB UP Catalyst 2024 signature reconciliation (PR #80 under review)
+
+- EIB project [20240127](https://www.eib.org/en/projects/all/20240127) shows **€18M signed 2024-12-20** for **UP CATALYST OU** (venture debt backed by InvestEU). Its **€46M** is total project cost, not public lending. No disbursement established.
+- Existing `fin-eu-eib-2025-up-catalyst-loan` acquires exact amount, dated financial status and primary-source citations. Distinguish Gen 4 graphite/MWCNT demonstration + R&D from CRMA-designated **CO2Graphite**, with no confirmed direct full-loan attribution; remove ambiguous `projectId` while preserving organization links.
+- Strict read-only audit handed off to single data correction PR; no EXIM monitor work or other new funding. Require exact-head CI and maintainer merge approval. See `docs/research/upcatalyst-eib-2024-financing-reconciliation.md`.
+
 ## 2026-10-08: Thacker Pass DOE ATVM loan backfill — proposed data PR
 
 - Official [DOE Thacker Pass](https://www.energy.gov/edf/thacker-pass), [28 October 2024 agreement](https://www.sec.gov/Archives/edgar/data/1966983/000095017025046424/lac-ex10_11.htm), [7 October 2025 amendment](https://www.sec.gov/Archives/edgar/data/1966983/000119312526115081/lac-ex10_1.htm), and [Q2 2026 SEC filing](https://www.sec.gov/Archives/edgar/data/1966983/000119312526347826/lac-20260630.htm) establish ONE DOE ATVM loan, originally ~$2.26B and amended to **~$2.23B**, with **$1.209B total draws by June 30 2026** (three advances). Borrower **Lithium Nevada LLC**, formerly Corp., is not sponsor Lithium Americas Corp.
