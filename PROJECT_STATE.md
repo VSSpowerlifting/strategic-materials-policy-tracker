@@ -1,3 +1,5 @@
+# Project state
+
 ## 2026-10-08: M3.1 project execution evidence foundation — draft isolated branch
 
 - New source-scoped ProjectMilestone type and **empty** project-milestones seed. Read-only loaders do not alter public API, exports, search or UI.
@@ -7,7 +9,6 @@
 - Acceptance: run npm validate, typecheck, lint, test, build on exact PR head. Draft pending CI; no M3.2 factual backfill or M3.3 timeline.
 - Specification: docs/analysis/project-execution-ledger-m3-1-2026-10-08.md.
 
-# Project state
 
 ## 2026-10-08: M2.6 DOE DOM evidence specimens candidate
 
