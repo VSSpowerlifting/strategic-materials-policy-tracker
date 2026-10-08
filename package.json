@@ -13,6 +13,7 @@
     "check:links": "tsx scripts/check-links.ts",
     "audit:lifecycle": "tsx scripts/audit-lifecycle.ts",
     "monitor:pilot": "tsx scripts/monitor-sources.ts",
+    "monitor:probe-m2": "tsx scripts/probe-m2-sources.ts",
     "editorial:inbox": "tsx scripts/editorial-inbox.ts"
   },
   "dependencies": {

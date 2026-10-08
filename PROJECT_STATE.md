@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: M2.0 official-source monitoring expansion discovery (proposed)
+
+- **Why:** M1.4 `#74` is merged at `0062e01` with 505/505 tests passing before merge. The existing pilot monitors two sources; an unattended third-source activation without a reviewed state migration would break prior-state continuity.
+- **Discovery targets (not activated):** EXIM official news (`https://www.exim.gov/news`), DOE CMEI official office news listing (`https://www.energy.gov/collection/view?page=0&paragraph=822121`), and Defense Industrial Base Policy news (`https://www.businessdefense.gov/news/index.html`). Each publishes potentially relevant government announcements, but no reliable parser, pagination window or machine-readable feed has yet been established.
+- **Implementation:** manual read-only `.github/workflows/m2-source-discovery.yml` and `npm run monitor:probe-m2`. Tests official listing response shape, HTTPS-host boundaries, candidate article URL counts and reachability from GitHub's runner. Artifacts contain public listing metadata only. No `PILOT_SOURCE_IDS`, cache, active watchlist, source life cycles, candidate records, `data/seed` or financing rows changed. See `docs/monitoring/m2-0-official-source-discovery-2026-10-08.md`.
+- **Next gate:** exact-head CI, PR review and merge, then **one** manual GitHub Actions discovery run. Review its health/sample links and select only one source for a separate M2.1 parser/continuity implementation. A link-shape probe does not establish stable dated publication records or seven-day monitoring reliability.
+
 ## 2026-10-08: M1.4 local GitHub editorial sync (PR under review)
 
 - **Motivation:** M1.3 is squash-merged to `main` at `4594c7e`; [CI 37726401696](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37726401696) passed 499 tests and the 1,071-page build. The maintainer confirmed manually importing actual run `37724982482` twice produced one durable receipt and zero duplicate items.

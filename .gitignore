@@ -80,3 +80,6 @@ data/candidates/*.json
 
 # Human editorial decisions, audit history and backups stay on the maintainer device.
 .monitor-editorial/
+
+# Read-only manual M2.0 source-discovery probe output
+.monitor-probe/
