@@ -77,3 +77,6 @@ data/candidates/*.json
 
 # Shadow source monitor outputs (state and unreviewed publications)
 .monitor-pilot/
+
+# Human editorial decisions, audit history and backups stay on the maintainer device.
+.monitor-editorial/

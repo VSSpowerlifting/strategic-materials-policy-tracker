@@ -12,7 +12,8 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "check:links": "tsx scripts/check-links.ts",
     "audit:lifecycle": "tsx scripts/audit-lifecycle.ts",
-    "monitor:pilot": "tsx scripts/monitor-sources.ts"
+    "monitor:pilot": "tsx scripts/monitor-sources.ts",
+    "editorial:inbox": "tsx scripts/editorial-inbox.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
