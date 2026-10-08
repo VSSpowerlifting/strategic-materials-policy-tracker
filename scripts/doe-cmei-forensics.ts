@@ -240,7 +240,7 @@ export function parseDoeArticleForensics(
     ],
   };
 }
-async function getPublisherHtml(
+export async function getPublisherHtml(
   url: string, fetchFn: typeof fetch,
 ): Promise<{ html: string; url: string; status: number }> {
   hostOnly(url);
