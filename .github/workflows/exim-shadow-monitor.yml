@@ -11,11 +11,6 @@ on:
         type: boolean
         required: false
         default: false
-      force_recovery:
-        description: "Verify recovery from prior Actions artifact; state is artifact-only"
-        type: boolean
-        required: false
-        default: false
   schedule:
     - cron: "7 14 * * *"
 
