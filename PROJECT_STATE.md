@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-07: Perpetua financing recipient legal-entity links (draft)
+
+**Status:** Isolated branch `fix/perpetua-entity-recipient-integrity-20261007`, forked from `main` at `a2f0477`; draft, unmerged, undeployed.
+
+- EXIM's 2026 board materials name Perpetua Resources Idaho Inc. as borrower/PSOR and Perpetua Resources Corp. as proposed guarantor; the SEC 2025 Form 10-K distinguishes the Canadian parent, wholly owned operating subsidiary and separate property-title holder.
+- Registers both organizations and links only the three existing DPA, OTIA and EXIM financial recipients to the subsidiary. No amount, status, project attribution or public-support total changes.
+- Decision record `docs/research/perpetua-recipient-entity-integrity-2026-10-07.md`; targeted regression tests. The EXIM loan remains board-approved/decided, not contracted. Validation and merge remain separate.
+
 ## 2026-10-07: Keliber EIB contract borrower reconciliation (draft)
 
 **Status:** Branch `fix/keliber-eib-borrower-provenance-20261007`, based on `main` at `f16bb6e`; isolated draft, unmerged, not deployed.

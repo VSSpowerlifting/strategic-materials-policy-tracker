@@ -1882,5 +1882,17 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Full text of the Framework as signed in Washington on 20 October 2025, read in full in a browser on 2026-09-23. Source of the financing clause (\"within 6 months ... at least $1 billion in financing to projects located in each of the United States and Australia\"), the instrument list (guarantees, loans, equity, offtake, insurance, regulatory facilitation), the price-mechanism and asset-sales clauses, and Section II's statement that the Framework creates no legally binding obligations. The financing clause does not itself say whether the $1 billion is per participant; the Australian release (src-pm-us-au-framework-2025) says each."
+  },
+  {
+    "id": "src-sec-perpetua-2025-10k",
+    "title": "Perpetua Resources Corp., Form 10-K for the year ended December 31, 2025",
+    "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465926037403/ppta-20251231x10k.htm",
+    "language": "en",
+    "datePublished": "2026-03-31",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "SEC-filed annual report (Corporate Structure, printed p.9; registrant cover; notes to consolidated financial statements) identifies Perpetua Resources Corp. as incorporated in British Columbia, Canada, and its wholly owned Perpetua Resources Idaho, Inc. as the operating entity that manages Stibnite activities. It expressly distinguishes Idaho Gold Resources Company, LLC as project property holder."
   }
 ]
