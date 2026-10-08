@@ -37,7 +37,9 @@
   {
     "id": "prj-au-nolans",
     "name": "Nolans project",
-    "sponsorOrgIds": [],
+    "sponsorOrgIds": [
+      "org-arafura-rare-earths"
+    ],
     "locations": [
       {
         "countryCode": "AU",
@@ -62,9 +64,18 @@
         "evidence": "explicit",
         "locator": "Paragraph on the second priority project",
         "note": "\"the Arafura Nolans project in the Northern Territory\""
+      },
+      {
+        "sourceId": "src-arafura-nolans-efa-subscription-2026",
+        "supports": [
+          "sponsors"
+        ],
+        "evidence": "explicit",
+        "locator": "Overview and Export Finance Australia section, pp. 1–2; Annexure B, use of proceeds",
+        "note": "Arafura Rare Earths Limited is the corporate developer raising funds specifically for the Nolans project. This sponsorship link does not assert separate legal ownership of project assets."
       }
     ],
-    "notes": "The release names the project as \"the Arafura Nolans project\" and states no developer or stage, so neither is recorded."
+    "notes": "The release names the project as \"the Arafura Nolans project\" and states no developer or stage, so neither is recorded. The April 2026 ASX announcement expressly identifies Arafura Rare Earths Limited as the corporate equity issuer financing Nolans development, so it is registered as the project's sponsor/developer; underlying project-asset title remains unasserted."
   },
   {
     "id": "prj-be-gepeto",

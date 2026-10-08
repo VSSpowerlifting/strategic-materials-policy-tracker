@@ -1,5 +1,14 @@
 # Project state
 
+## 2026-10-07: Arafura EFA legal share-issuer integrity (draft)
+
+**Status:** Isolated branch `fix/arafura-efa-equity-recipient-20261007` from `main` at `3074f06`; not merged or deployed.
+
+- The 1 April 2026 ASX subscription details identify EFA as buyer of shares **in Arafura Rare Earths Limited**, not the Nolans project as an independent investee.
+- Changes existing US$100M Arafura EFA `recipient`/organization reference; creates its corporate issuer entry and links Arafura as Nolans project sponsor. No financial, implementation or project-property ownership promotion.
+- Proof ledger `docs/research/arafura-efa-share-issuer-integrity-2026-10-07.md` and regression tests. Deliberately excludes KfW backfill and unresolved Sarytogan EBRD/Commission amount reconciliation.
+- Merge blocked until validation/typecheck/lint/full tests/build succeed and maintainer approves.
+
 ## 2026-10-07: Perpetua financing recipient legal-entity links (draft)
 
 **Status:** Isolated branch `fix/perpetua-entity-recipient-integrity-20261007`, forked from `main` at `a2f0477`; draft, unmerged, undeployed.

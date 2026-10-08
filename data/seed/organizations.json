@@ -137,6 +137,33 @@
     "notes": "The English name is this project's rendering; the METI and JOGMEC lists give only the Japanese name."
   },
   {
+    "id": "org-arafura-rare-earths",
+    "name": "Arafura Rare Earths Limited",
+    "nameOriginal": null,
+    "aliases": [
+      "Arafura",
+      "Arafura Rare Earths"
+    ],
+    "kind": "company",
+    "countryCode": "AU",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-arafura-nolans-efa-subscription-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "ASX announcement cover and Overview, page 1; Arafura Rare Earths Limited, registered in Australia; address in Perth, Western Australia",
+        "note": "The company issues ordinary shares to EFA and KfW under separate binding subscription agreements; receiving equity is not equivalent to a project itself being a legal share issuer."
+      }
+    ],
+    "notes": "ASX-listed corporate issuer of shares under the 1 April 2026 binding Export Finance Australia US$100M subscription. The investment finances Nolans development; share issuance remains subject to closing conditions. Not an assertion of disbursement."
+  },
+  {
     "id": "org-au-disr",
     "name": "Department of Industry, Science and Resources",
     "nameOriginal": null,
