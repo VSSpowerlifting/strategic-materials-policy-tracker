@@ -115,6 +115,16 @@ export type EximEditorialQueue = {
 export function parseEximNewsListing(html: string): ListedEximRelease[] {
   if (Buffer.byteLength(html, "utf8") > MAX_PAGE_BYTES || !/<html\b/i.test(html) ||
       !/<a\b/i.test(html)) throw Error("EXIM listing missing HTML anchors or exceeded safe size");
+  // The official EXIM page has site-wide navigation with /news/<slug>
+  // category links before its News heading. Only anchors *after* that
+  // publisher-supplied content heading can be individual dated releases.
+  // Require exactly one matching heading; never fall back to scanning navigation
+  // when EXIM changes its template.
+  const headings = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1\s*>/gi)]
+    .filter((item) => visibleText(item[1]).toLowerCase() === "news");
+  if (headings.length !== 1)
+    throw Error("EXIM listing missing unique official News heading; refusing global navigation scan");
+  const newsStart = (headings[0].index ?? 0) + headings[0][0].length;
   const out: ListedEximRelease[] = [];
   const seen = new Set<string>();
   // Image-only or otherwise untitled anchors may point to a real release whose
@@ -122,8 +132,9 @@ export function parseEximNewsListing(html: string): ListedEximRelease[] {
   // has a verified dated headline elsewhere in the listing. Unknown links
   // without a matching dated headline still fail closed.
   const unverifiedUntitled = new Map<string, number>();
-  let previousArticleEnd = 0;
-  for (const match of html.matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)) {
+  let previousArticleEnd = newsStart;
+  for (const match of html.slice(newsStart).matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)) {
+    const anchorIndex = newsStart + (match.index ?? 0);
     const attr = /\bhref\s*=\s*(?:"([^"]+)"|'([^']+)')/i.exec(match[1]);
     const url = officialArticleUrl(attr?.[1] ?? attr?.[2] ?? "");
     if (!url) continue;
@@ -135,13 +146,13 @@ export function parseEximNewsListing(html: string): ListedEximRelease[] {
     // Date is rendered in the listing immediately before the title link.
     // Require one visible date BETWEEN consecutive official article links:
     // never reuse a previous item's date when a new row has none.
-    const lead = visibleText(html.slice(Math.max(previousArticleEnd, match.index! - 3500), match.index));
+    const lead = visibleText(html.slice(Math.max(previousArticleEnd, anchorIndex - 3500), anchorIndex));
     const dateMatches = [...lead.matchAll(DATE_RE)];
     const latest = dateMatches.at(-1);
     const trailing = latest ? lead.slice((latest.index ?? 0) + latest[0].length).trim() : "";
     const date = latest ? parseDate(latest[0]) : null;
     if (!date || trailing.length > 180) throw Error("EXIM listing article has no nearby official publication date: " + url);
-    previousArticleEnd = match.index! + match[0].length;
+    previousArticleEnd = anchorIndex + match[0].length;
     if (seen.has(url)) continue;
     seen.add(url);
     out.push({ id: hash(EXIM_SOURCE_ID + "\n" + url), url, title, publicationDate: date });
