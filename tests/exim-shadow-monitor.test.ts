@@ -84,6 +84,36 @@ test("actual EXIM Media Advisories navigation link never becomes a dated release
   assert.ok(baseline.state);
 });
 
+test("EXIM official Meeting Minutes section is not a dated news release", async () => {
+  const expected = parseEximNewsListing(listing(five));
+  const meetingNav = '<nav><a href="/news/meeting-minutes">Meeting Minutes</a></nav>';
+  const withCategory = listing(five).replace("<main>", "<main>" + meetingNav);
+  assert.deepEqual(parseEximNewsListing(withCategory), expected);
+  // EXIM category links remain out of release scope even when a dated card
+  // precedes them, so no neighboring date can be attributed to the section.
+  const afterDatedCard = listing(five).replace("</a></div></div>",
+    "</a></div></div>" + meetingNav);
+  assert.deepEqual(parseEximNewsListing(afterDatedCard), expected);
+  const apexAlias = listing(five).replace("<main>",
+    '<main><nav><a href="https://exim.gov/news/meeting-minutes/">Board Agendas and Meeting Minutes</a></nav>');
+  assert.deepEqual(parseEximNewsListing(apexAlias), expected);
+  // Preserve the fail-closed behavior for an unknown undated article-shaped link.
+  const unknown = listing(five).replace("<main>",
+    '<main><a href="/news/unverified-board-statement">Unverified board statement</a>');
+  assert.throws(() => parseEximNewsListing(unknown),
+    /no nearby official publication date: https:\/\/www\.exim\.gov\/news\/unverified-board-statement/);
+  const result = await runEximShadow(null, stamp, true,
+    (async (url: string) => new Response(
+      url.includes("?page=") ? withCategory :
+        article(Number(new URL(url).pathname.match(/(\d+)$/)?.[1])),
+      { status: 200 },
+    )) as typeof fetch);
+  assert.equal(result.report.health, "ok");
+  assert.equal(result.report.observed, 5);
+  assert.ok(result.state);
+  assert.equal(result.report.newCount, 0);
+});
+
 test("EXIM untitled duplicate anchors need an independently dated headline for the same URL", () => {
   const expected = parseEximNewsListing(listing(five));
   const thumbnail = '<a href="' + articleUrl(1) + '"><img src="/media/preview.jpg" alt="EXIM"></a>';
