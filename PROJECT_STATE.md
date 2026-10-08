@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-08: M2.1 independent EXIM shadow monitoring (PR under review)
+
+- **Grounded discovery:** M2.0 PR #75 merged at `c32b07a`; real GitHub [run 37728686586](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37728686586) fetched EXIM's listing successfully (HTTP 200; 23 article-shaped links) and DOE's (HTTP 200; 12); defense index failed with a network error. M2.1 deliberately chooses EXIM only.
+- **Separate source and state:** `lib/exim-shadow-monitor.ts`, `scripts/monitor-exim.ts` and `.github/workflows/exim-shadow-monitor.yml` are independent of M1's unchanged two-source `PILOT_SOURCE_IDS` and cache. EXIM state lives only under Git-ignored `.monitor-exim/` with **30-day GitHub artifact restoration**; missing previous state fails closed unless the maintainer explicitly authorizes the first manual bootstrap, which cannot overwrite an existing state.
+- **Dated full release evidence:** parse official EXIM HTML news listing into dated canonical URL identities, follow up to three 5+-entry pages on anchor loss, download and fingerprint the normalized body of each listed release, cross-check the `FOR IMMEDIATE RELEASE` publication date. Detect new/revised *publication text* without asserting financing commitments or legal changes; preserve state on source failure, parsing drift or a missing previous anchor. Output only unverified review metadata, in an independent EXIM queue schema. M1 private `editorial:inbox -- sync` does not yet consume this schema.
+- **Scope:** daily schedule 14:07 UTC only after manual initial state creation; read-only scoped Actions permissions, no `data/seed`, public UI, event, capital row, candidate promotion or M1 watchlist changes. User must approve merge, then explicitly dispatch a bootstrap and a recovered replay and inspect artifacts. Parser's real HTML execution is **not** verified by simulated tests or M2.0 link-shape success.
+- **Review gate:** source parser/model and independent CLI tests, CI validate/typecheck/lint/tests/build, then a real GitHub-runner Day-0 bootstrap. Procedure: `docs/monitoring/m2-1-exim-independent-shadow-2026-10-08.md`.
+
 ## 2026-10-08: M2.0 official-source monitoring expansion discovery (proposed)
 
 - **Why:** M1.4 `#74` is merged at `0062e01` with 505/505 tests passing before merge. The existing pilot monitors two sources; an unattended third-source activation without a reviewed state migration would break prior-state continuity.

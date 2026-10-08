@@ -83,3 +83,6 @@ data/candidates/*.json
 
 # Read-only manual M2.0 source-discovery probe output
 .monitor-probe/
+
+# Independent EXIM shadow baseline and unverified run artifacts (no publication)
+.monitor-exim/
