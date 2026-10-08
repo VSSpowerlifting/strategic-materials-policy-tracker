@@ -230,7 +230,7 @@ export function beginCandidate(
     throw Error("Invalid or reused candidate ID");
   if (!safeText(by, 160) || !iso(at) || at < item.firstObservedAt)
     throw Error("Candidate handoff requires named reviewer and valid UTC time");
-  const jurisdiction = item.watchSourceId === "watch-ca-nrcan-news" ? "ca" : "us";
+  const jurisdiction = item.watchSourceId === "watch-ca-nrcan-news" ? "canada" : "us";
   const candidate: CandidateRecord = {
     candidateId, status: "draft", createdBy: by.trim(), createdAt: at.slice(0, 10),
     proposedEvent: {
