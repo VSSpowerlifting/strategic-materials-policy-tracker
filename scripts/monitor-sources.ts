@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "
 import { join } from "node:path";
 import { getAllSources, getAllWatchedSources } from "../lib/data";
 import { buildEditorialReviewQueue, editorialReviewCsv, type EditorialReviewQueue } from "../lib/monitor-editorial-queue";
-import { PILOT_SOURCE_IDS, pilotEndpoint, readMonitorState, runSourcePilot, type PilotReport } from "../lib/source-monitor";
+import { PILOT_SOURCE_IDS, pilotEndpoint, readMonitorState, requirePriorPilotState, runSourcePilot, type PilotReport } from "../lib/source-monitor";
 
 const dir = join(process.cwd(), ".monitor-pilot");
 const stateFile = join(dir, "state.json");
@@ -69,10 +69,7 @@ async function main(): Promise<void> {
   mkdirSync(dir, { recursive: true });
   const previous = existsSync(stateFile) ? JSON.parse(readFileSync(stateFile, "utf8")) as unknown : null;
   const state = readMonitorState(previous);
-  if (process.env.SMPT_MONITOR_REQUIRE_PRIOR_STATE === "1" &&
-      PILOT_SOURCE_IDS.some((id) => !state.sources[id])) {
-    throw Error("Prior observation state unavailable for one or more active sources; refuse silent re-baseline. Restore the archived state or explicitly authorize a reviewed reset.");
-  }
+  if (process.env.SMPT_MONITOR_REQUIRE_PRIOR_STATE === "1") requirePriorPilotState(state);
   const result = await runSourcePilot(watchlist, state, observedAt);
   // Always write complete report before advancing durable state. Any failed
   // source retains its prior identity memory. The workflow's final health gate
