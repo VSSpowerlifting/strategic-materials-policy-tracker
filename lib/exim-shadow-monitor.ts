@@ -112,13 +112,21 @@ export function parseEximNewsListing(html: string): ListedEximRelease[] {
       !/<a\b/i.test(html)) throw Error("EXIM listing missing HTML anchors or exceeded safe size");
   const out: ListedEximRelease[] = [];
   const seen = new Set<string>();
+  // Image-only or otherwise untitled anchors may point to a real release whose
+  // dated headline link appears separately. Accept only if that *same URL*
+  // has a verified dated headline elsewhere in the listing. Unknown links
+  // without a matching dated headline still fail closed.
+  const unverifiedUntitled = new Map<string, number>();
   let previousArticleEnd = 0;
   for (const match of html.matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)) {
     const attr = /\bhref\s*=\s*(?:"([^"]+)"|'([^']+)')/i.exec(match[1]);
     const url = officialArticleUrl(attr?.[1] ?? attr?.[2] ?? "");
     if (!url) continue;
     const title = visibleText(match[2]);
-    if (title.length < 12 || title.length > 600) throw Error("EXIM dated listing entry title missing or too long");
+    if (title.length < 12 || title.length > 600) {
+      unverifiedUntitled.set(url, title.length);
+      continue;
+    }
     // Date is rendered in the listing immediately before the title link.
     // Require one visible date BETWEEN consecutive official article links:
     // never reuse a previous item's date when a new row has none.
@@ -133,6 +141,13 @@ export function parseEximNewsListing(html: string): ListedEximRelease[] {
     seen.add(url);
     out.push({ id: hash(EXIM_SOURCE_ID + "\n" + url), url, title, publicationDate: date });
     if (out.length > MAX_PAGE_ITEMS) throw Error("EXIM listing exceeds bounded 35-release parser limit");
+  }
+  // Do not silently discard new undated/untitled article-shaped URLs. Only
+  // duplicate presentation anchors for an independently dated title may pass.
+  for (const [url, titleLength] of unverifiedUntitled) {
+    if (!seen.has(url))
+      throw Error("EXIM article-shaped link lacks verified dated headline anchor: " + url +
+        " (visible title length " + titleLength + ")");
   }
   if (out.length < 5) throw Error("EXIM listing has fewer than five dated official release links; treat as changed template");
   return out;
