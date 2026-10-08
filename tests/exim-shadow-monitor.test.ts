@@ -58,6 +58,32 @@ test("EXIM listings yield stable canonical identities and verified nearby dates,
   assert.throws(() => parseEximNewsListing(listing(five).replace("https://www.exim.gov/news/", "https://bad.example/news/")), /fewer than five|no nearby/);
 });
 
+test("actual EXIM Media Advisories navigation link never becomes a dated release", async () => {
+  // Run 37730218209 failed on the category URL below. In the official index
+  // this link is part of navigation, not an individually dated publication.
+  const nav = '<nav><a href="/news/media-advisories">Media Advisories</a></nav>';
+  const before = "<html><body>" + nav + listing(five).replace(/^<html><body>/, "").replace(/<\/body><\/html>$/, "") +
+    "</body></html>";
+  const expected = parseEximNewsListing(listing(five));
+  assert.deepEqual(parseEximNewsListing(before), expected);
+  // A category link between two dated entries must not reuse the first date.
+  const middle = listing(five).replace('</a></div></div>', '</a></div></div>' + nav);
+  assert.deepEqual(parseEximNewsListing(middle), expected);
+  // An undated, article-shaped unknown URL STILL fails closed rather than
+  // silently disappearing just because category navigation is permitted.
+  const unknown = listing(five).replace("<main>", '<main><a href="/news/exim-new-unknown-story">Undated unknown EXIM release</a>');
+  assert.throws(() => parseEximNewsListing(unknown), /no nearby official publication date/);
+  const baseline = await runEximShadow(null, stamp, true, (async (url: string) => new Response(
+    url.includes("?page=") ? before :
+      article(Number(new URL(url).pathname.match(/(\d+)$/)?.[1])),
+    { status: 200 },
+  )) as typeof fetch);
+  assert.equal(baseline.report.health, "ok");
+  assert.equal(baseline.report.observed, 5);
+  assert.equal(baseline.queue.items.length, 0);
+  assert.ok(baseline.state);
+});
+
 test("EXIM release-body verification preserves date/title and detects material text edits", () => {
   const listed = parseEximNewsListing(listing(five))[0];
   const row = parseEximArticle(article(1), listed);

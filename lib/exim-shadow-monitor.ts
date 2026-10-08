@@ -44,6 +44,11 @@ function officialArticleUrl(raw: string): string | null {
     const u = new URL(decodeEntities(raw), EXIM_LISTING);
     if (u.protocol !== "https:" || !["exim.gov", "www.exim.gov"].includes(u.hostname) ||
         u.username || u.password || !/^\/news\/[a-z0-9][a-z0-9-]*\/?$/i.test(u.pathname)) return null;
+    // This real EXIM navigation section matched our release-slug pattern in the
+    // failed 2026-10-08 live bootstrap (#37730218209). It is a category index,
+    // NOT an individual dated news release. Keep date checks strict on actual
+    // article candidates instead of trying to assign this link a nearby date.
+    if (u.pathname.replace(/\/$/, "").toLowerCase() === "/news/media-advisories") return null;
     u.hostname = "www.exim.gov";
     u.hash = "";
     u.search = "";
