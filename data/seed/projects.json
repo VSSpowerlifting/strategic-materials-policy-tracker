@@ -3064,6 +3064,106 @@
     "notes": "A gold-antimony-silver development; only antimony is tracked as a material in SMPT."
   },
   {
+    "id": "prj-us-usac-alaska-antimony-feedstock",
+    "name": "US Antimony Alaska antimony mining and feedstock development",
+    "sponsorOrgIds": [
+      "org-us-antimony"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alaska",
+        "asStated": "Alaska"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Award scope: Alaska mining and feedstock paragraphs",
+        "note": "DoW identifies USAC as recipient and Alaska as the mining/feedstock undertaking, without naming a specific mine."
+      },
+      {
+        "sourceId": "src-usac-2026-q1-call-sec-exhibit",
+        "supports": [
+          "name",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "CEO response to Jonathan Miller, Q&A: $27M award allocation",
+        "note": "Company states $7M is for Alaska but does not identify a site or establish payment."
+      }
+    ],
+    "notes": "Scoped to the Alaska antimony feedstock undertaking funded by the DPA Title III award. No source reviewed links this allocation to a specifically named Alaska mine; the $7M portion is not stated to have been disbursed."
+  },
+  {
+    "id": "prj-us-usac-thompson-falls-expansion",
+    "name": "Thompson Falls antimony processing and refining expansion",
+    "sponsorOrgIds": [
+      "org-us-antimony"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Montana",
+        "asStated": "Thompson Falls, Montana"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "materialIds": [
+      "antimony"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-dow-usac-antimony-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Award scope: Thompson Falls facility expansion",
+        "note": "Government identifies expansion of USAC's Montana antimony processing and refining capacity."
+      },
+      {
+        "sourceId": "src-usac-2026-q1-call-sec-exhibit",
+        "supports": [
+          "name",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Thompson Falls operational report and CEO's response on $27M award allocation",
+        "note": "Recipient states $20M is for Thompson Falls; this is the allocation, not a claim that all $20M was paid."
+      }
+    ],
+    "notes": "Part of the $27M DoW DPA Title III award. The company allocated $20M to Thompson Falls in its SEC-furnished May 2026 call transcript. The $12.8M first-quarter milestones/payment are not a second award."
+  },
+  {
     "id": "prj-us-usar-magnet-project-2",
     "name": "Magnet Project 2",
     "sponsorOrgIds": [
