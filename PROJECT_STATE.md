@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: EXIM fourth bootstrap failure and structural navigation isolation
+
+- **Fourth failure, confirmed:** [EXIM run 37791842873](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37791842873) on `main` `97277e5` returned HTTP 200 but `health: invalid_response`: `EXIM listing article has no nearby official publication date: https://www.exim.gov/news/reports`. No prior EXIM state artifact was available and no first baseline was written.
+- **Publisher evidence and root cause:** `/news/reports` is EXIM's Annual Reports index, not a dated release. EXIM's [news index](https://www.exim.gov/news) visibly separates its site-wide navigation from the official `News` heading followed by individual dated headlines. All three successive section-index errors (`media-advisories`, `meeting-minutes`, `reports`) arose because the parser scanned *every* page anchor.
+- **Structural remedy rather than third URL exception:** parse release anchors only *after a unique official `h1` News heading*. Missing/changed/ambiguous heading fails closed; never silently fall back to global navigation. Keep existing verified section exclusions as defense in depth and preserve explicit dates, URL/title/full-body checks, revision fingerprints, size limits, and continuity logic. Tests include all three observed navigation routes plus an unknown future menu link, both heading drift and unknown release-shaped links *inside* the content section.
+- **Acceptance:** exact-head CI, human squash merge, and one supervised `bootstrap=true` on `main`. This is **not** yet proven against real HTML or article pages. If the next run fails, diagnose its exact boundary; never claim a baseline or run `bootstrap=false` until a healthy EXIM state artifact exists. M1 monitoring, existing candidate/financial/policy records, and public pages remain unchanged.
+
 ## 2026-10-08: M2.1 EXIM third live bootstrap failure — official Meeting Minutes section
 
 - **Confirmed third failure:** [run 37731753460](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37731753460) executed from `main` `ee1e76a` after #78; EXIM index HTTP 200 but `health: invalid_response`, `Diagnostic: EXIM listing article has no nearby official publication date: https://www.exim.gov/news/meeting-minutes`. The action found no prior EXIM state and produced no baseline artifact; separate M1 monitoring unaffected.
