@@ -3671,10 +3671,10 @@
     "valueRole": "commitment",
     "capitalSource": "public",
     "amount": {
-      "value": "3600000",
-      "currency": "EUR",
-      "qualifier": "approximately",
-      "amountAsStated": "around EUR 6 million in the EuroManganese Strategic Project in the Czech Republic and EUR 3.6 million in the Sarytogan Graphite Strategic Project in Kazakhstan",
+      "value": "5000000",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "AUD 5 million (€3 million)",
       "currencyBasis": "stated"
     },
     "provider": "European Bank for Reconstruction and Development",
@@ -3684,8 +3684,10 @@
     ],
     "legalAuthority": null,
     "programmeId": null,
-    "recipient": "Sarytogan Graphite Strategic Project",
-    "recipientOrgIds": [],
+    "recipient": "Sarytogan Graphite Limited",
+    "recipientOrgIds": [
+      "org-sarytogan"
+    ],
     "project": "Sarytogan Graphite Strategic Project",
     "projectId": "prj-kz-sarytogan",
     "facility": null,
@@ -3709,8 +3711,14 @@
       {
         "status": "contracted",
         "date": null,
-        "sourceId": "src-ec-resourceeu-com-945",
-        "note": "\"The EBRD also invested in equity\"; recorded as an executed investment with no date stated."
+        "sourceId": "src-ebrd-sarytogan-psd-54699",
+        "note": "EBRD project 54699 is signed, but the source does not state an exact execution date."
+      },
+      {
+        "status": "disbursed",
+        "date": "2025-02-10",
+        "sourceId": "src-fasken-sarytogan-ebrd-close-2025",
+        "note": "EBRD transaction counsel identifies completion of the two-tranche A$5M equity purchase on 10 February 2025."
       }
     ],
     "implementationStatusHistory": [],
@@ -3723,21 +3731,168 @@
           "instrument",
           "value_role",
           "capital_source",
+          "provider",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 2.1, fourth paragraph",
+        "note": "Commission retrospectively characterizes EBRD equity as around €3.6M. This is not an auditable transaction-level AUD amount or a distinct additional investment."
+      },
+      {
+        "sourceId": "src-ebrd-sarytogan-equity-2024",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
           "amount",
           "provider",
           "recipient",
           "project",
           "location",
           "stages",
-          "materials",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs; AUD 5 million (€3 million) EBRD shareholding announcement",
+        "note": "Bank directly identifies the A$5M equity investee; stated euro figure is contextual, not summed separately."
+      },
+      {
+        "sourceId": "src-ebrd-sarytogan-psd-54699",
+        "supports": [
+          "instrument",
+          "amount",
+          "recipient",
+          "project",
           "status"
         ],
         "evidence": "explicit",
-        "locator": "Section 2.1, fourth paragraph (continues on p. 5)",
-        "note": "\"around\" qualifies both figures in the sentence, so the Sarytogan figure is recorded as approximate."
+        "locator": "Project description; Client information; EBRD Finance Summary; Status Signed",
+        "note": "Project 54699 confirms A$5M and the legal investee; signature date is not asserted."
+      },
+      {
+        "sourceId": "src-fasken-sarytogan-ebrd-close-2025",
+        "supports": [
+          "amount",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Overview, Closed February 2025; completed 10 February 2025",
+        "note": "Transaction counsel confirms A$5M total closing; its internally inconsistent share-count/price figures are not carried into SMPT."
       }
     ],
-    "notes": "Multilateral public money: it counts among public commitments but is credited to no tracked government. The EuroManganese investment named alongside it is manganese, outside the tracked materials, and is not recorded."
+    "notes": "This existing EBRD Sarytogan financing row is the original A$5M share purchase, not a new award. EBRD 2024 and project 54699 identify the initial A$5M (€3M approximate) commitment to Sarytogan Graphite Limited; transaction counsel dates completion to 10 February 2025. The European Commission's December 2025 summary reports around €3.6M without identifying component transactions; it remains contextual and is not a separately counted sum. A later, independently paid A$1,396,581.12 follow-on placement is coded separately as fin-ebrd-2026-sarytogan-topup-equity, not rolled into this amount. EBRD is multilateral: no tracked national government receives financing credit."
+  },
+  {
+    "id": "fin-ebrd-2026-sarytogan-topup-equity",
+    "eventId": "evt-eu-resourceeu-2025",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "1396581.12",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "A$1,396,581.12 in cash received from EBRD on 30 April 2026",
+      "currencyBasis": "stated"
+    },
+    "provider": "European Bank for Reconstruction and Development",
+    "providerJurisdiction": null,
+    "providerOrgIds": [
+      "org-ebrd"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Sarytogan Graphite Limited",
+    "recipientOrgIds": [
+      "org-sarytogan"
+    ],
+    "project": "Sarytogan Graphite Strategic Project",
+    "projectId": "prj-kz-sarytogan",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "KZ",
+        "subnational": null,
+        "asStated": "Kazakhstan"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-11-06",
+        "sourceId": "src-sarytogan-ebrd-topup-received-2026",
+        "note": "The 30 April 2026 ASX filing retrospectively reports an EBRD top-up placement agreed 6 November 2025 and amended 18 November 2025, conditional on regulatory and shareholder approvals."
+      },
+      {
+        "status": "disbursed",
+        "date": "2026-04-30",
+        "sourceId": "src-sarytogan-ebrd-topup-received-2026",
+        "note": "Sarytogan states it received A$1,396,581.12 cash from EBRD on 30 April 2026 after conditions were fulfilled."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-sarytogan-ebrd-topup-received-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "30 April 2026 ASX announcement, p. 1, cash received and top-up placement; approvals paragraphs",
+        "note": "17,457,264 shares at A$0.08, separate from A$5M original. Cash receipt establishes disbursed status; funds support feasibility work, not mine construction."
+      },
+      {
+        "sourceId": "src-ebrd-sarytogan-followon-2026",
+        "supports": [
+          "instrument",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs, follow-on AUD 1.4M equity purchase and use of proceeds",
+        "note": "EBRD separately describes the follow-on, confirming it is incremental and raises bank holding to 18.4%."
+      },
+      {
+        "sourceId": "src-ebrd-sarytogan-psd-54699",
+        "supports": [
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Location: Kazakhstan",
+        "note": "Project locale only; EBRD's 2024 project record does not establish this 2026 placement's amount or terms."
+      }
+    ],
+    "notes": "Separate EBRD follow-on share placement with Sarytogan Graphite Limited, agreed conditionally on 6 November 2025 and paid on 30 April 2026. 17,457,264 shares at A$0.08; issuer confirms exact A$1,396,581.12 cash receipt. EBRD's separate announcement describes an approximately A$1.4M stake increase to 18.4%. This amount is incremental to original A$5M, not additive to or a breakdown of the Commission's approximate €3.6M retrospective summary. Receipt of equity does not demonstrate construction or delivery at mine. This row uses existing RESourceEU policy event as a contextual cross-reference to EBRD financing; it does not mean that the December 2025 Commission narrative reported completed 2026 cash receipt. Multilateral capital is not attributed to any tracked national government.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-07",
+      "implementationStatusCheckedAt": null
+    }
   },
   {
     "id": "fin-eu-eib-2024-keliber-loan",
