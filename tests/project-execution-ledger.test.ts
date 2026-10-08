@@ -62,7 +62,10 @@ test("source, scope, review, status, and dates fail closed on fixed counterexamp
     { name: "future occurred assertion", change: { occurredOn: "2027-04-01" }, message: /planned targets/ },
     { name: "inconsistent actual target", change: { targetOn: "2027-04-01" }, message: /targetOn: null/ },
     { name: "impossible occurred date", change: { occurredOn: "2026-02-30" }, message: /occurredOn must be a real ISO/ },
-    { name: "review before evidence", change: { reviewedAt: "2026-09-01" }, message: /before the source was published/ },
+    { name: "review before evidence", change: { reviewedAt: "2026-09-01" }, message: /before source publication\/access evidence boundary/ },
+    { name: "funded work wrongly asserted project-wide", change: { kind: "funded_activity_completed", scope: "whole_project", scopeAsStated: null }, message: /funded_activity_completed requires funded_activity scope/ },
+    { name: "funded work masquerades as facility operations", change: { scope: "funded_activity" }, message: /funded_activity scope cannot assert facility/ },
+    { name: "event later than its cited source", change: { occurredOn: "2026-09-16" }, message: /occurredOn is later than the cited source/ },
   ];
   for (const check of checks) {
     const issues = validateProjectMilestones([{ ...fixture(), ...check.change }], refs);
@@ -73,6 +76,32 @@ test("source, scope, review, status, and dates fail closed on fixed counterexamp
   assert.match(validateProjectMilestones([fixture(), fixture()], refs).join(" "), /duplicate id/);
   assert.match(validateProjectMilestones([fixture(), { ...fixture(), id: "mil-fixture-a" }], refs).join(" "),
     /strictly ascending/);
+});
+
+test("undated publisher uses source-access observation boundary without pre-access reviews", () => {
+  const accessOnly = { ...refs, sources: [{ ...source, datePublished: null }] };
+  const early = { ...fixture(), reviewedAt: "2026-09-19" };
+  assert.match(validateProjectMilestones([early], accessOnly).join(" "), /review occurred before source publication\/access evidence boundary/);
+  assert.deepEqual(validateProjectMilestones([{ ...fixture(), reviewedAt: "2026-09-20" }], accessOnly), []);
+});
+
+test("reject source dates after corpus cutoff and malformed publication claims", () => {
+  const afterCutoff = { ...refs, sources: [{ ...source, datePublished: null, dateAccessed: "2026-10-09" }] };
+  assert.match(validateProjectMilestones([fixture()], afterCutoff).join(" "), /source evidence boundary is after corpus cutoff/);
+  const malformed = { ...refs, sources: [{ ...source, datePublished: "2026-02-30" }] };
+  assert.match(validateProjectMilestones([fixture()], malformed).join(" "), /source publication date is invalid/);
+  const preEvent = { ...refs, sources: [{ ...source, datePublished: "2026-08-31" }] };
+  assert.match(validateProjectMilestones([fixture()], preEvent).join(" "), /occurredOn is later than the cited source/);
+});
+
+test("funded activity completion never masquerades as whole-project or facility execution", () => {
+  const acceptable = {
+    ...fixture(), kind: "funded_activity_completed" as const,
+    scope: "funded_activity" as const, scopeAsStated: "Grant-funded extended operations",
+  };
+  assert.deepEqual(validateProjectMilestones([acceptable], refs), []);
+  assert.match(validateProjectMilestones([{ ...acceptable, scope: "whole_project", scopeAsStated: null }], refs).join(" "),
+    /funded_activity_completed requires funded_activity scope/);
 });
 
 test("planned future targets never acquire occurrence merely because a target date passed", () => {
