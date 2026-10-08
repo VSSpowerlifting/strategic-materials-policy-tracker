@@ -326,7 +326,7 @@ export async function runSourcePilot(
         status === 401 || status === 403 || status === 429 || status === 451 ? "blocked" :
         status !== null ? "http_error" :
         (error as Error).name === "AbortError" ? "timeout" :
-        error instanceof SyntaxError || /Atom|Federal Register|JSON|Source exceeded|bounded parser|entry is missing|result missing/.test(msg) ? "invalid_response" : "network_error";
+        error instanceof SyntaxError || /Atom|Federal Register|pagination loop|JSON|Source exceeded|bounded parser|entry is missing|result missing/.test(msg) ? "invalid_response" : "network_error";
       sources.push({
         sourceId, health, status, observed: 0, baseline: !next.sources[sourceId],
         newCount: 0, revisedCount: 0, possibleWindowGap: false,
