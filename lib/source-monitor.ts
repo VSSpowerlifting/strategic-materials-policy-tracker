@@ -24,6 +24,7 @@ export type Publication = {
   /** Keyword-based review hint, never a factual policy classification. */
   keywordHint: boolean;
 };
+export type ReviewObservation = Publication & { change: "new" | "revised" };
 export type SourceMemory = {
   seen: Record<string, string>;
   lastLatestId: string | null;
@@ -45,7 +46,7 @@ export type SourceReport = {
   possibleWindowGap: boolean;
   lastSuccessfulAt: string | null;
   message: string | null;
-  reviewOnly: Publication[];
+  reviewOnly: ReviewObservation[];
 };
 export type PilotReport = {
   version: 1;
@@ -180,9 +181,11 @@ export function reconcilePublications(
 ): { memory: SourceMemory; report: SourceReport } {
   const before = previous?.seen ?? {};
   const baseline = !previous;
-  const changes = baseline ? [] : items.filter((p) => before[p.id] !== p.fingerprint);
-  const additions = baseline ? 0 : changes.filter((p) => before[p.id] === undefined).length;
-  const revisions = changes.length - additions;
+  const changes: ReviewObservation[] = baseline ? [] : items
+    .filter((p) => before[p.id] !== p.fingerprint)
+    .map((p) => ({ ...p, change: before[p.id] === undefined ? "new" : "revised" }));
+  const additions = changes.filter((p) => p.change === "new").length;
+  const revisions = changes.filter((p) => p.change === "revised").length;
   const seen = { ...before };
   for (const item of items) {
     // Re-insert seen keys, so the oldest keys are pruned first.
