@@ -1,0 +1,49 @@
+# M2.8 DOE official body-content candidate admission probe.
+# Exactly five read-only sources; manually dispatched; NEVER an active collector.
+name: SMPT DOE CMEI experimental body evidence
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smpt-doe-cmei-experimental-body-evidence
+  cancel-in-progress: false
+
+jobs:
+  publisher-body-proof:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Obtain bounded original DOE body evidence only
+        run: npm run monitor:probe-doe-body
+      - name: Archive non-activated body fingerprint candidates
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-doe-body-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .monitor-doe-body-proof/report.json
+            .monitor-doe-body-proof/summary.md
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Summarize observed publisher body evidence
+        if: always()
+        run: |
+          if test -s .monitor-doe-body-proof/summary.md; then
+            cat .monitor-doe-body-proof/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Missing validated DOE body proof; no source activation." >> "$GITHUB_STEP_SUMMARY"
+          fi
