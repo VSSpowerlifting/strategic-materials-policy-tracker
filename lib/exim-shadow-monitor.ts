@@ -118,8 +118,11 @@ export function parseEximNewsListing(html: string): ListedEximRelease[] {
     // Require one visible date BETWEEN consecutive official article links:
     // never reuse a previous item's date when a new row has none.
     const lead = visibleText(html.slice(Math.max(previousArticleEnd, match.index! - 3500), match.index));
-    const date = parseDate(lead);
-    if (!date || lead.length > 800) throw Error("EXIM listing article has no nearby official publication date: " + url);
+    const dateMatches = [...lead.matchAll(DATE_RE)];
+    const latest = dateMatches.at(-1);
+    const trailing = latest ? lead.slice((latest.index ?? 0) + latest[0].length).trim() : "";
+    const date = latest ? parseDate(latest[0]) : null;
+    if (!date || trailing.length > 180) throw Error("EXIM listing article has no nearby official publication date: " + url);
     previousArticleEnd = match.index! + match[0].length;
     if (seen.has(url)) continue;
     seen.add(url);
