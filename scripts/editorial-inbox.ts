@@ -12,6 +12,7 @@ import {
 } from "node:fs";
 import { join, resolve } from "node:path";
 import { syncEditorialFromGitHub } from "./editorial-sync";
+import { syncEximEditorial } from "./editorial-exim-sync";
 import {
   beginCandidate, editorialDecision, emptyPrivateEditorialLedger,
   importReviewQueue, parsePrivateEditorialLedger, REVIEW_STATUSES,
@@ -64,7 +65,7 @@ function candidateInventory(): unknown[] {
   return rows;
 }
 function usage(): never {
-  throw Error("Commands: sync [--dry-run] [--check-runtime] | import <queue.json> --run-id <GitHub-run-id> | list [--status STATUS] | " +
+  throw Error("Commands: sync [--dry-run] [--check-runtime] | sync-exim [--dry-run] [--check-runtime] | import <M1 queue.json> --run-id <GitHub-run-id> | list [--status STATUS] | " +
     "decide <source-id:observation-hash> <status> --by NAME --reason TEXT | " +
     "start-candidate <source-id:observation-hash> <cand-id> --by NAME --ack-source-read");
 }
@@ -87,6 +88,24 @@ function main(): void {
       " in progress; " + result.completed + " imported now, " + result.added +
       " new review items, " + result.reopened + " revised items reopened.\n");
     if (dryRun) process.stdout.write("Dry-run examined run metadata only: it has NOT checked artifact health or saved any private files.\n");
+    return;
+  }
+  if (command === "sync-exim") {
+    if (args.some((arg) => !["--dry-run", "--check-runtime"].includes(arg)))
+      throw Error("EXIM sync accepts only --dry-run or --check-runtime");
+    if (args.includes("--check-runtime")) {
+      process.stdout.write("SMPT EXIM private editorial sync runtime check passed (offline, no GitHub calls or files written)\n");
+      return;
+    }
+    const dryRun = args.includes("--dry-run");
+    const result = syncEximEditorial(load(), save, dryRun);
+    process.stdout.write((dryRun ? "EXIM dry-run" : "EXIM sync") + ": " +
+      result.pending.length + " completed unimported runs, " +
+      result.alreadyImported + " already imported, " + result.inFlight +
+      " in progress; imported now " + result.completed + ", new review items " +
+      result.added + ", revised entries reopened " + result.reopened + ".\n");
+    if (dryRun)
+      process.stdout.write("Dry-run read only workflow metadata; no artifacts fetched, private ledger written, or classification performed.\n");
     return;
   }
   if (command === "list") {
