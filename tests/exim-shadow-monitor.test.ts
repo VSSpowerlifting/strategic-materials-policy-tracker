@@ -62,7 +62,8 @@ test("EXIM release-body verification preserves date/title and detects material t
   const listed = parseEximNewsListing(listing(five))[0];
   const row = parseEximArticle(article(1), listed);
   assert.equal(row.publicationDate, "2026-10-06");
-  assert.ok(row.keywordHintOnly);
+  assert.equal(row.keywordHintOnly, false); // A generic manufacturing loan is not automatically a minerals signal.
+  assert.equal(parseEximArticle(article(2), parseEximNewsListing(listing(five))[1]).keywordHintOnly, true);
   assert.notEqual(row.fingerprint, parseEximArticle(article(1, true), listed).fingerprint);
   const withFooter = article(1).replace("Dynamic footer", "Unrelated dynamic content");
   assert.equal(row.fingerprint, parseEximArticle(withFooter, listed).fingerprint);
