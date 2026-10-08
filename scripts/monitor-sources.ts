@@ -68,7 +68,12 @@ async function main(): Promise<void> {
 
   mkdirSync(dir, { recursive: true });
   const previous = existsSync(stateFile) ? JSON.parse(readFileSync(stateFile, "utf8")) as unknown : null;
-  const result = await runSourcePilot(watchlist, readMonitorState(previous), observedAt);
+  const state = readMonitorState(previous);
+  if (process.env.SMPT_MONITOR_REQUIRE_PRIOR_STATE === "1" &&
+      PILOT_SOURCE_IDS.some((id) => !state.sources[id])) {
+    throw Error("Prior observation state unavailable for one or more active sources; refuse silent re-baseline. Restore the archived state or explicitly authorize a reviewed reset.");
+  }
+  const result = await runSourcePilot(watchlist, state, observedAt);
   // Always write complete report before advancing durable state. Any failed
   // source retains its prior identity memory. The workflow's final health gate
   // deliberately fails after uploading logs when one source was degraded.
