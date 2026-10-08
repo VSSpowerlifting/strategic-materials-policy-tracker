@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "
 import { join } from "node:path";
 import { getAllSources, getAllWatchedSources } from "../lib/data";
 import { buildEditorialReviewQueue, editorialReviewCsv, type EditorialReviewQueue } from "../lib/monitor-editorial-queue";
-import { PILOT_SOURCE_IDS, pilotEndpoint, readMonitorState, runSourcePilot, type PilotReport } from "../lib/source-monitor";
+import { PILOT_SOURCE_IDS, pilotEndpoint, readMonitorState, requirePriorPilotState, runSourcePilot, type PilotReport } from "../lib/source-monitor";
 
 const dir = join(process.cwd(), ".monitor-pilot");
 const stateFile = join(dir, "state.json");
@@ -68,7 +68,9 @@ async function main(): Promise<void> {
 
   mkdirSync(dir, { recursive: true });
   const previous = existsSync(stateFile) ? JSON.parse(readFileSync(stateFile, "utf8")) as unknown : null;
-  const result = await runSourcePilot(watchlist, readMonitorState(previous), observedAt);
+  const state = readMonitorState(previous);
+  if (process.env.SMPT_MONITOR_REQUIRE_PRIOR_STATE === "1") requirePriorPilotState(state);
+  const result = await runSourcePilot(watchlist, state, observedAt);
   // Always write complete report before advancing durable state. Any failed
   // source retains its prior identity memory. The workflow's final health gate
   // deliberately fails after uploading logs when one source was degraded.

@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-07: M1.2 daily continuity and artifact-recovery hardening (PR under review)
+
+- **Confirmed Day-0 proof:** `#69`/ `#70` source monitor [run 37721756213](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37721756213) collected 50 NRCan and 100 Federal Register Interior documents in two healthy baseline windows. `#71`'s [run 37722920588](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37722920588) restored the prior state cache, both `baseline: no`, 0 new/revised, no rollover, and archived all four editorial/report files. This establishes **same-day continuity**, not 7-day operational reliability.
+- **New proposal:** `feat/m1-2-monitor-continuity-20261007` changes schedule to daily 13:17 UTC, retrieves additional Federal Register pages **only if needed** until the previous anchor reappears (maximum 4 pages / 400 documents), validates paging boundaries and flags possible missed coverage. Keeps NRCan's real 50-item Atom window with an explicit rollover warning.
+- **State durability:** Existing Actions cache supplemented with 30-day read-only state artifacts and automated same-workflow fallback on cache miss; if neither retains both source memories, production monitoring **fails closed** rather than re-bootstrap. `workflow_dispatch` offers a controlled `recover_from_artifact` test switch after a normal run creates the first state artifact. Permissions remain read-only.
+- **Verification gate:** run validation, typechecking, lint, tests and build on exact PR head; then after merge do one ordinary live scan and a separate artifact-fallback scan, before declaring daily monitoring reliable. No change to published measures, capital rows, source `lastCheckedAt`, or `site.monitoringStartedAt`. Full procedure: `docs/monitoring/m1-2-continuity-hardening-2026-10-07.md`.
+
 ## 2026-10-07: M1 Day-0 passed; M1.1 editorial intake PR under review
 
 - **Verified live:** [SMPT monitor run #37721756213](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37721756213) at `main` `a7a492b` collected **50 NRCan and 100 Federal Register Interior documents**, both source-health `ok`. The first run is a **baseline**: both `baseline: yes`, both new/revised counters zero by design. GitHub Actions saved the 30-day report artifact and observation-state cache. No second live run or cross-run cache-restore proof has yet been observed.
