@@ -10,7 +10,7 @@
 import {
   existsSync, mkdirSync, readFileSync, readdirSync, copyFileSync, renameSync, writeFileSync,
 } from "node:fs";
-import { basename, join, resolve } from "node:path";
+import { join, resolve } from "node:path";
 import {
   beginCandidate, editorialDecision, emptyPrivateEditorialLedger,
   importReviewQueue, parsePrivateEditorialLedger, REVIEW_STATUSES,
