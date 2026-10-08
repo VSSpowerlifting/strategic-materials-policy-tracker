@@ -1,0 +1,55 @@
+# M2.4: independent heartbeat for days when the EXIM scan's own
+# workflow_run-triggered M2.2 audit cannot fire because the scan was skipped.
+# No source fetch, no collector/cache mutation, no financial/policy changes.
+name: SMPT EXIM independent schedule watchdog
+
+on:
+  schedule:
+    - cron: "37 22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: smpt-exim-independent-schedule-watchdog
+  cancel-in-progress: false
+
+jobs:
+  verify-scheduled-run:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Independently verify due EXIM scheduled scan history
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run audit:exim-schedule
+      - name: Archive read-only EXIM schedule audit receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-exim-schedule-watchdog-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .monitor-exim-watchdog/audit.json
+            .monitor-exim-watchdog/summary.md
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Show actual schedule days and outstanding gaps
+        if: always()
+        run: |
+          if test -s .monitor-exim-watchdog/summary.md; then
+            cat .monitor-exim-watchdog/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No validated EXIM schedule evidence; inspect watchdog API/runner failure." >> "$GITHUB_STEP_SUMMARY"
+          fi

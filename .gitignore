@@ -89,3 +89,6 @@ data/candidates/*.json
 
 # Read-only EXIM Actions reliability receipts; no monitor identity state.
 .monitor-exim-reliability/
+
+# Separate missing-schedule watchdog receipts; never scanner memory.
+.monitor-exim-watchdog/

@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: M2.4 independent EXIM cron-miss watchdog candidate
+
+- **Verified first EXIM baseline and replay are both manual, not scheduled:** [37800436243](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37800436243) and [37801575996](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37801575996) passed with independent state/report artifacts, 20 verified releases, no gap. First post-baseline scheduled collection is due **October 9 at 14:07 UTC**; it has not yet been observed.
+- **Identified gap:** M2.2's `workflow_run`-triggered reliability companion cannot run at all if GitHub skips the source workflow. M2.4 introduces a separately scheduled 22:37 UTC Actions watchdog with a >8-hour grace, reading only fixed EXIM workflow metadata and state/report artifact availability. Manual dispatcher runs cannot substitute for scheduled evidence. It alerts on absent, failed, incomplete, or incomplete-artifact scheduled days within the latest seven due UTC dates.
+- **No source mutation:** read-only `contents`/`actions` permissions, no EXIM HTTP/source collector invocation, no state reset, no private editorial upload or policy/finance changes. Logs/archive include status and run IDs only, 30-day retention. This independent GitHub timer still cannot alert if GitHub also fails to run the watchdog; that limitation requires an externally hosted checker later.
+- **Gate:** exact-head CI, review/merge, optional no-source-fetch Day-0 smoke, then confirm October 9 unattended EXIM run, its M2.2 post-run audit, and M2.4 watchdog no earlier than 22:37 UTC. Details in `docs/monitoring/m2-4-exim-independent-schedule-watchdog-2026-10-08.md`.
+
 ## 2026-10-08: M2.3 EXIM private local editorial sync candidate
 
 - **Prior gates:** M2.1 persisted EXIM first baseline [37800436243](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37800436243) and state-restored replay [37801575996](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37801575996) both healthy (20 releases, no coverage gaps, 0 new/revised in replay). M2.2 reliability PR #87 merged at `feb77f0`; [post-merge CI 37804408191](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37804408191) passed. Scheduled-run 7/14/30-day maturity not yet established.
