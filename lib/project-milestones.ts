@@ -8,7 +8,7 @@
 import {
   EN_SOURCES, PROJECT_MILESTONE_KINDS, PROJECT_MILESTONE_MODES, PROJECT_MILESTONE_SCOPES,
 } from "./types";
-import type { Project, ProjectMilestone, Source } from "./types";
+import type { Project, Source } from "./types";
 
 type ReferenceSource = Pick<Source, "id" | "language" | "confidence" | "datePublished" | "dateAccessed">;
 type References = {
@@ -80,6 +80,12 @@ export function validateProjectMilestones(input: unknown, refs: References): str
     }
     if (typeof m.scopeAsStated === "string" && m.scopeAsStated.length > 250)
       fail("scopeAsStated is too long");
+    // Completing a grant-funded workstream cannot, on its own, establish
+    // completion of an entire industrial undertaking or an operating plant.
+    if (m.kind === "funded_activity_completed" && m.scope !== "funded_activity")
+      fail("funded_activity_completed requires funded_activity scope");
+    if (m.scope === "funded_activity" && m.kind !== "funded_activity_completed")
+      fail("funded_activity scope cannot assert facility construction or operation");
 
     if (m.claimMode === "occurred") {
       if (m.targetOn !== null) fail("occurred claim must have targetOn: null");
@@ -126,21 +132,29 @@ export function validateProjectMilestones(input: unknown, refs: References): str
     if (isMilestoneIsoDate(m.occurredOn) && isMilestoneIsoDate(m.reviewedAt) &&
       m.occurredOn > m.reviewedAt)
       fail("occurred date is after reviewer date");
-    if (source && isMilestoneIsoDate(m.reviewedAt)) {
+    if (source) {
+      // Invalid published dates must not fall through to the access-date
+      // fallback, which could silently approve a malformed publication claim.
+      if (source.datePublished !== null && source.datePublished !== undefined &&
+          !isMilestoneIsoDate(source.datePublished))
+        fail("source publication date is invalid");
       const boundary = milestoneEvidenceBoundary(source);
       if (!boundary) fail("source has no valid publication/access observation date");
-      else if (boundary.basis === "publication" && boundary.date > m.reviewedAt)
-        fail("review occurred before the source was published");
+      else {
+        if (boundary.date > refs.corpusDate)
+          fail("source evidence boundary is after corpus cutoff");
+        if (isMilestoneIsoDate(m.reviewedAt) && boundary.date > m.reviewedAt)
+          fail("review occurred before source publication/access evidence boundary");
+        if (isMilestoneIsoDate(m.occurredOn) && boundary.date < m.occurredOn)
+          fail("occurredOn is later than the cited source evidence boundary");
+      }
     }
-    const signature = [
+    const signature = JSON.stringify([
       m.projectId, m.kind, m.claimMode, m.scope, m.scopeAsStated, m.sourceId, m.occurredOn, m.targetOn,
-    ].join("|");
+    ]);
     if (claims.has(signature)) fail("duplicate assertion identity (multiple financers do not create new milestones)");
     claims.add(signature);
   }
   return issues;
 }
 
-export function isVerifiedProjectMilestone(x: ProjectMilestone): boolean {
-  return x.reviewedBy.trim().length > 0 && isMilestoneIsoDate(x.reviewedAt);
-}
