@@ -111,7 +111,7 @@ test("separate EXIM source and queue records fail closed on drift, mismatched bo
   for (const [candidateQueue, candidateReport] of rejected) {
     assert.throws(
       () => validateAndAdaptEximEditorial(candidateQueue, candidateReport),
-      undefined, "EXIM input must fail closed: " + JSON.stringify([candidateQueue, candidateReport]).slice(0, 200));
+      /EXIM/, "EXIM input must fail closed: " + JSON.stringify([candidateQueue, candidateReport]).slice(0, 200));
   }
 });
 
