@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: M2.1 EXIM second live bootstrap failure — untitled article-shaped anchor (follow-up under review)
+
+- **Confirmed:** [EXIM bootstrap run 37731056259](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37731056259) on post-#77 main `ac7337e` returned HTTP 200 but `health: invalid_response` with exact diagnostic `EXIM dated listing entry title missing or too long`. No first baseline state file was produced; old M1 monitors remain isolated.
+- **Unresolved live HTML identity:** the prior error did not log the offending candidate URL or anchor shape, so the source may contain a duplicate image-only presentation link or a different non-headline navigation link. This branch does **not** claim confirmation that it is an image link.
+- **Fail-closed candidate remedy:** require any article-shaped URL with missing/excessive anchor title text to be independently represented by a valid dated, titled link to that *same canonical URL* on the listing. A solitary untitled or >600-character candidate still fails the whole observation, with offending URL and title length reported. Strict verified listing dates and release-body agreement remain unchanged.
+- **Acceptance:** run exact-head CI first; after maintainer squash merge, manually retry `bootstrap=true` on `main`. If it fails again, inspect the new URL-specific diagnostic and repair the actual DOM boundary rather than widening exclusions or relaxing validity checks. Only test `bootstrap=false` after an EXIM state artifact is successfully created.
+
 ## 2026-10-08: M2.1 EXIM first live bootstrap failure and navigation fix (PR under review)
 
 - **Confirmed merge:** M2.1 PR #76 was squash merged at `10b8cb3`; its post-merge CI passed 520 tests and the Next.js build.
