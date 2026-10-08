@@ -42,6 +42,7 @@ export type DoePage = {
   headingHint: string | null;
   anchorCandidates: { url: string; titleHint: string }[];
   outsideMainArticleHints: { url: string; titleHint: string }[];
+  listingDomSamples: { url: string; anchoredHtmlExcerpt: string }[];
   unpairedVisibleDateHints: string[];
   notes: string[];
 };
@@ -53,6 +54,7 @@ export type DoeArticleSample = {
   htmlDigestSha256: string;
   headingHint: string | null;
   metaDateHints: string[];
+  dateDomSamples: { matchedDateText: string; surroundingHtml: string }[];
   unpairedVisibleDateHints: string[];
   officeAttributionHint: boolean;
   notes: string[];
@@ -102,6 +104,55 @@ function metadataDateHints(html: string): string[] {
     /(?:article:published_time|article:modified_time|datePublished|dateModified|published_time|modified_time|\bdate\b|lastmod)/i.test(x));
   return filtered.slice(0, 12).map((x) => x.replace(/\s+/g, " ").slice(0, MAX_EXCERPT));
 }
+/**
+ * Bounded ORIGINAL markup only: this is publisher-template forensic evidence,
+ * not publication data, a stable selector, or citation-backed content.
+ * Each excerpt is at most 1,300 UTF-16 chars and no more than four per source.
+ */
+function domExcerpt(html: string, start: number, end: number): string {
+  const center = Math.max(start, Math.floor((start + end) / 2));
+  const from = Math.max(0, center - 550);
+  return html.slice(from, Math.min(html.length, from + 1300));
+}
+function listingDomSamples(
+  mainHtml: string, candidateUrls: readonly string[], pageUrl: string,
+): { url: string; anchoredHtmlExcerpt: string }[] {
+  const samples: { url: string; anchoredHtmlExcerpt: string }[] = [];
+  for (const target of candidateUrls.slice(0, 4)) {
+    for (const a of mainHtml.matchAll(/<a\b([^>]*?)>([\s\S]*?)<\/a\s*>/gi)) {
+      const href = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(a[1]);
+      const raw = (href?.[1] ?? href?.[2] ?? "").replace(/&amp;/gi, "&");
+      if (!raw) continue;
+      try {
+        const u = hostOnly(new URL(raw, pageUrl).toString());
+        u.hostname = "www.energy.gov";
+        u.pathname = u.pathname.replace(/\/$/, "");
+        u.hash = ""; u.search = "";
+        if (u.toString() !== target) continue;
+      } catch { continue; }
+      const pos = a.index ?? 0;
+      samples.push({ url: target,
+        anchoredHtmlExcerpt: domExcerpt(mainHtml, pos, pos + a[0].length) });
+      break;
+    }
+  }
+  return samples;
+}
+function articleDateDomSamples(html: string): {
+  matchedDateText: string; surroundingHtml: string;
+}[] {
+  const samples: { matchedDateText: string; surroundingHtml: string }[] = [];
+  // Literal date occurrences can belong to navigation, widgets, or releases.
+  // Keeping context is safer than certifying a date from unscoped text.
+  for (const m of html.matchAll(MONTHS)) {
+    if (samples.length >= 4) break;
+    const pos = m.index ?? 0;
+    samples.push({ matchedDateText: m[0],
+      surroundingHtml: domExcerpt(html, pos, pos + m[0].length) });
+  }
+  return samples;
+}
+
 export function parseDoeListingForensics(
   html: string, requestedUrl: string, finalUrl = requestedUrl, status = 200,
 ): DoePage {
@@ -153,6 +204,7 @@ export function parseDoeListingForensics(
     anchorCandidates: [...mainArticleLinks].slice(0, 80)
       .map(([url, titleHint]) => ({ url, titleHint })),
     outsideMainArticleHints,
+    listingDomSamples: listingDomSamples(mainHtml, [...mainArticleLinks.keys()], finalUrl),
     unpairedVisibleDateHints: dateHints(mainHtml),
     notes: [
       "Only candidate article paths inside the single main region are counted; off-main news-link hints are excluded.",
@@ -175,6 +227,7 @@ export function parseDoeArticleForensics(
     htmlDigestSha256: sha(html),
     headingHint: title(html),
     metaDateHints: metadataDateHints(html),
+    dateDomSamples: articleDateDomSamples(html),
     unpairedVisibleDateHints: dateHints(html),
     officeAttributionHint: /\bOffice of Critical Minerals and Energy Innovation\b/i.test(visible(html)),
     notes: [
