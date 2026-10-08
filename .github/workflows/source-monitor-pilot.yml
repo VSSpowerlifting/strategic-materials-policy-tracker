@@ -59,6 +59,8 @@ jobs:
           path: |
             .monitor-pilot/report.json
             .monitor-pilot/summary.md
+            .monitor-pilot/editorial-review-queue.json
+            .monitor-pilot/editorial-review-queue.csv
           retention-days: 30
           if-no-files-found: warn
 

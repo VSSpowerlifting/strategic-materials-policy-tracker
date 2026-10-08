@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-07: M1 Day-0 passed; M1.1 editorial intake PR under review
+
+- **Verified live:** [SMPT monitor run #37721756213](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37721756213) at `main` `a7a492b` collected **50 NRCan and 100 Federal Register Interior documents**, both source-health `ok`. The first run is a **baseline**: both `baseline: yes`, both new/revised counters zero by design. GitHub Actions saved the 30-day report artifact and observation-state cache. No second live run or cross-run cache-restore proof has yet been observed.
+- **M1.1 proposal:** `feat/m1-1-editorial-review-queue-20261007`, separate PR from current main. Each future scan produces ignored `editorial-review-queue.json` and CSV artifacts for **new or revised** publications only. Fixed `unreviewed` status, exact URL citation matches and keyword-only hints enable private human triage. Observations do **not** become events or candidates by themselves. No changes to public seed, exports, site or watchlist status.
+- **Gate:** offline tests for baseline isolation, duplicate/citation hints, CSV formula escaping, count integrity; `validate`, typecheck, lint, full test suite and build. Post-merge human-dispatched second live scan must separately prove deduplication and retained-state restoration.
+- **Limits:** artifact retention 30 days; GitHub observation cache best effort; no persisted private editor dispositions. `monitoringStartedAt` and all source `lastCheckedAt` remain unchanged. Details: `docs/monitoring/m1-1-editorial-intake-2026-10-07.md`.
+
 ## 2026-10-07: M1 Day-0 CLI startup failure and narrow recovery (PR pending)
 
 **Observed:** First manual source-monitor run [#37720568026](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37720568026) on merged main `c288b768` **failed before fetching any government source**. The `tsx scripts/monitor-sources.ts` entry point used top-level `await` while this repository's `tsx` CommonJS output cannot execute it. The log reports `Top-level await is currently not supported with the "cjs" output format`; no source-health report, state cache or artifact was created. This failure provides **no evidence** about NRCan or Federal Register availability.
