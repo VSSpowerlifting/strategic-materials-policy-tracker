@@ -112,12 +112,13 @@ export function planSyncRuns(runs: readonly SyncRun[], importedIds: ReadonlySet<
 export function validateSyncArtifact(
   queue: unknown, report: unknown,
 ): void {
+  const sources: unknown[] | null = object(report) && Array.isArray(report.sources) ? report.sources : null;
   if (!object(report) || report.mode !== "shadow_review_only" ||
       report.allSourcesHealthy !== true || report.degradedSources !== 0 ||
-      typeof report.observedAt !== "string" || !Array.isArray(report.sources) ||
-      report.sources.length !== PILOT_SOURCE_IDS.length ||
-      report.sources.some((x: unknown) => !object(x) || x.health !== "ok" || x.possibleWindowGap !== false) ||
-      PILOT_SOURCE_IDS.some((id) => !report.sources.some((x: unknown) => object(x) && x.sourceId === id)) ||
+      typeof report.observedAt !== "string" || !sources ||
+      sources.length !== PILOT_SOURCE_IDS.length ||
+      sources.some((x: unknown) => !object(x) || x.health !== "ok" || x.possibleWindowGap !== false) ||
+      PILOT_SOURCE_IDS.some((id) => !sources.some((x: unknown) => object(x) && x.sourceId === id)) ||
       !Number.isInteger(report.newPublications) || !Number.isInteger(report.revisions) ||
       !object(queue) || queue.mode !== "shadow_unverified_editorial_queue" ||
       queue.observedAt !== report.observedAt ||
