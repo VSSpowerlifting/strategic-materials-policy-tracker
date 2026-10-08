@@ -144,7 +144,7 @@ test("data discipline: reject off-site article links, duplicates, overlong title
 
 test("workflow is manual-only, read-only and never edits source collector or seeded finance records", () => {
   const y = readFileSync(".github/workflows/doe-cmei-provenance-preflight.yml", "utf8");
-  const code = readFileSync("lib/doe-cmei-forensics.ts", "utf8");
+  const code = readFileSync("scripts/doe-cmei-forensics.ts", "utf8");
   assert.match(y, /workflow_dispatch:/);
   assert.doesNotMatch(y, /\bcron:|\bschedule:|contents: write|actions: write|git push/);
   assert.match(y, /contents: read/);
