@@ -2026,5 +2026,77 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "DOE Loan Note 4 and MD&A pages 23–28: original 2024 loan $2.26B ($1.97B principal plus estimated $289.6M interest), amended Oct 7 2025 expected total $2.23B ($1.97B principal plus estimated $256M interest). Three cash advances $435M Oct 20 2025, $432M Feb 24 2026, $342M Jun 3 2026; cumulative advances $1.209B by Jun 30 2026. This cumulative amount is within, not in addition to, the facility; carrying amount $988.018M reflects debt costs and accrued interest and is not cumulative cash advanced. Thacker Pass Phase 1 plant construction ongoing, not operational."
+  },
+  {
+    "id": "src-doe-ioneer-rhyolite-2025-close",
+    "title": "DOE closes $996 million loan guarantee for Ioneer Rhyolite Ridge",
+    "publisher": "U.S. Department of Energy, Loan Programs Office",
+    "url": "https://www.energy.gov/edf/articles/doe-announces-996-million-loan-guarantee-ioneer-rhyolite-ridge-advance-domestic",
+    "language": "en",
+    "datePublished": "2025-01-17",
+    "dateAccessed": "2026-10-08",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Closing announcement: $996M guarantee, $968M principal plus $28M capitalized interest, to Ioneer Rhyolite Ridge LLC under ATVM. DOE specifies on-site lithium-carbonate processing and identified ioneer Ltd as developer; Jan 2025 closing is not evidence of cash advanced, operating production or mine financing."
+  },
+  {
+    "id": "src-doe-rhyolite-nepa-0565",
+    "title": "DOE/EIS-0565 — Rhyolite Ridge mine processing loan scope",
+    "publisher": "U.S. Department of Energy, NEPA",
+    "url": "https://www.energy.gov/nepa/doeeis-0565-rhyolite-ridge-lithium-boron-project-esmeralda-county-nevada",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-08",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "DOE environmental summary explicitly confines contemplated federal loan to on-site lithium processing facilities, sulfuric acid plant and supporting infrastructure, NOT open-pit mine development/operation. The early NEPA synopsis calls the proposed borrower Rhyolite Ridge Holdings LLC; do not conflate that with the closing release's Ioneer Rhyolite Ridge LLC without legal proof."
+  },
+  {
+    "id": "src-sec-ioneer-rhyolite-close-2025",
+    "title": "Ioneer January 2025 SEC exhibit — $996 million DOE loan closing",
+    "publisher": "Ioneer Ltd / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1896084/000114036125001367/ef20041815_ex99-1.htm",
+    "language": "en",
+    "datePublished": "2025-01-17",
+    "dateAccessed": "2026-10-08",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Issuer's 17 January 2025 closing announcement confirms the $996M ATVM facility, principal/interest split and earlier January 2023 conditional offer, including $268M principal increase. This is the same loan, not a second 2023 commitment or $996M immediately paid."
+  },
+  {
+    "id": "src-sec-ioneer-rhyolite-20f-2026",
+    "title": "Ioneer Transition Form 20-F (2026) — Rhyolite Ridge financing conditions and pre-FID status",
+    "publisher": "Ioneer Ltd / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1896084/000114036126017853/ef20070398_20f.htm",
+    "language": "en",
+    "datePublished": "2026-04-29",
+    "dateAccessed": "2026-10-08",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Issuer securities filing recounts 2025 loan closing and conditions to first DOE advance (strategic partner equity, additional funding and project-finance model), and states that a final investment decision and construction need further financing. The February 2025 Sibanye proposal did not proceed; it is not a valid assumption of equity capital."
+  },
+  {
+    "id": "src-sec-ioneer-rhyolite-q2-2026",
+    "title": "Ioneer 30 July 2026 Quarterly Activities Report — Rhyolite Ridge remains pre-FID",
+    "publisher": "Ioneer Ltd / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1896084/000114036126030118/ef20078896_ex99-1.htm",
+    "language": "en",
+    "datePublished": "2026-07-30",
+    "dateAccessed": "2026-10-08",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "June 2026 quarter update: strategic partner and Final Investment Decision still outstanding; pre-feasibility for battery-grade lithium carbonate completed, construction remains a future milestone; expressly confirms no production or development activity in quarter. Nonbinding Korea KIND/Hyundai MOUs are not cash or binding equity. Separate US Army Tooele land-lease possibility is not part of this ATVM guarantee."
+  },
+  {
+    "id": "src-sec-ioneer-rhyolite-halfyear-2026",
+    "title": "Ioneer half-year financial statements ended June 30, 2026 (SEC Exhibit 99.1)",
+    "publisher": "Ioneer Ltd / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1896084/000114036126032597/ef20079527_ex99-1.htm",
+    "language": "en",
+    "datePublished": "2026-08-13",
+    "dateAccessed": "2026-10-08",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Directors' report: issuer compliant with closed DOE loan facility, no development decision at June 30, 2026. Note 10: $4.273M unamortized DOE loan establishment fees, amortization starts after first draw; it is not an advance or independent commitment. Filing documents no positive disbursement; an absence of disclosure is not a universal proof none occurred later."
   }
 ]

@@ -878,6 +878,69 @@
     "notes": null
   },
   {
+    "id": "org-ioneer-ltd",
+    "name": "Ioneer Ltd",
+    "nameOriginal": null,
+    "aliases": [
+      "ioneer Limited",
+      "Ioneer"
+    ],
+    "kind": "company",
+    "countryCode": "AU",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-sec-ioneer-rhyolite-close-2025",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "17 January 2025 company announcement, issuer and parent/developer identification",
+        "note": "The Australian listed issuer is parent developer, not the named direct DOE loan-guarantee borrower."
+      }
+    ],
+    "notes": "ASX INR / NASDAQ IONR Australian-listed project developer. DOE's 2025 closing announcement names its U.S. project subsidiary Ioneer Rhyolite Ridge LLC as direct financing counterparty; parent and recipient must remain separate."
+  },
+  {
+    "id": "org-ioneer-rhyolite-ridge-llc",
+    "name": "Ioneer Rhyolite Ridge LLC",
+    "nameOriginal": null,
+    "aliases": [
+      "ioneer Rhyolite Ridge, LLC"
+    ],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-doe-ioneer-rhyolite-2025-close",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph: closing of a loan guarantee to Ioneer Rhyolite Ridge LLC in Nevada",
+        "note": "Federal lender's closing announcement controls the financing counterparty; the earlier NEPA draft names Rhyolite Ridge Holdings LLC as proposed borrower and is not used as an alias."
+      },
+      {
+        "sourceId": "src-sec-ioneer-rhyolite-close-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Issuer's Rhyolite Ridge loan closing announcement",
+        "note": "Project subsidiary in Nevada, distinguish from listed parent Ioneer Ltd."
+      }
+    ],
+    "notes": "Direct borrower/loan-guarantee recipient as named in DOE's 17 Jan 2025 closing announcement. DOE's older NEPA project page refers to a proposed Rhyolite Ridge Holdings LLC; no verified corporate continuity is inferred."
+  },
+  {
     "id": "org-itelyum-regeneration",
     "name": "Itelyum Regeneration SpA",
     "nameOriginal": null,

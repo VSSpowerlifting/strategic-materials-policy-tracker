@@ -942,13 +942,19 @@ test("in the corpus, non-binding financing proposals are indications, in no sum 
   // NMG keeps its Canada Growth Fund and offtake rows; its letter sits apart from them.
   const nmg = projectStack("prj-ca-nmg-matawinie")!;
   assert.ok(nmg.layers.some((l) => l.key === "indication" && l.rows.map((c) => c.id).join() === "fin-ca-g7-2025-nmg-edc-letter-of-interest"));
-  // The USD loan-guarantee figure is USA Rare Earth's binding $1.3 billion alone; the German $300 million is not in it.
+  // Distinct binding USD guarantees remain separate by source qualifier:
+  // USA Rare Earth's up-to $1.3B and DOE Rhyolite Ridge's exact $996M.
+  // German nonbinding export-credit indications are still excluded from the commitment layer.
   const usd = buildCapitalControlSummary().capital.publicCommitmentTotals.find((t) => t.currency === "USD")!;
   if (usd.status !== "summed") assert.fail("the USD total is withheld");
   const guarantee = usd.instruments.find((i) => i.instrument === "loan_guarantee")!;
   if (!guarantee.summed) assert.fail("loan guarantees are summed");
-  assert.deepEqual(guarantee.countedIds, ["fin-us-chips-usar-2026-loan-guarantee"]);
-  assert.deepEqual([guarantee.byQualifier, guarantee.binding, guarantee.notYetBinding], [{ up_to: "1300000000" }, { up_to: "1300000000" }, {}]);
+  assert.deepEqual(guarantee.countedIds, [
+    "fin-us-chips-usar-2026-loan-guarantee",
+    "fin-us-doe-rhyolite-ridge-guarantee-2025",
+  ]);
+  assert.deepEqual([guarantee.byQualifier, guarantee.binding, guarantee.notYetBinding],
+    [{ up_to: "1300000000", exact: "996000000" }, { up_to: "1300000000", exact: "996000000" }, {}]);
   // Canada's portfolio counts its two letters plus the Trail commercial framework in the indication layer only.
   const canada = actorPortfolio("canada", all).counts;
   assert.equal(canada.byLayer.indication, 3);

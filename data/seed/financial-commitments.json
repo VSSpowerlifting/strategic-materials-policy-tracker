@@ -8788,6 +8788,152 @@
     "notes": "One row represents the same DPA Technology Investment Agreement across amendments, avoiding double-counting the original $24.8M award and the later $34.4M addition. The agreement was definitized at $24.8M in July 2023, modified by an additional $34.4M in May 2024, and ultimately fully disbursed."
   },
   {
+    "id": "fin-us-doe-rhyolite-ridge-guarantee-2025",
+    "eventId": "evt-us-doe-rhyolite-ridge-2025",
+    "relationships": [],
+    "instrument": "loan_guarantee",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "996000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$996 million loan guarantee ($968 million principal plus $28 million capitalized interest)",
+      "currencyBasis": "stated"
+    },
+    "provider": "U.S. Department of Energy, Advanced Technology Vehicles Manufacturing Loan Program",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": "Energy Independence and Security Act of 2007, Section 136 — Advanced Technology Vehicles Manufacturing Loan Program",
+    "programmeId": null,
+    "recipient": "Ioneer Rhyolite Ridge LLC",
+    "recipientOrgIds": [
+      "org-ioneer-rhyolite-ridge-llc"
+    ],
+    "project": "Rhyolite Ridge on-site lithium processing facility",
+    "projectId": "prj-us-rhyolite-ridge-processing",
+    "facility": "On-site lithium carbonate processing facility and associated infrastructure",
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Nevada",
+        "asStated": "Esmeralda County, Nevada"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-01-17",
+        "sourceId": "src-doe-ioneer-rhyolite-2025-close",
+        "note": "DOE's 17 January 2025 announcement expressly reports closing the $996M ATVM loan guarantee to Ioneer Rhyolite Ridge LLC. Funding is subject to conditions precedent; no positive advance evidence in reviewed June–August 2026 issuer filings. The 2023 conditional loan is not a second count."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "feasibility",
+        "date": null,
+        "sourceId": "src-sec-ioneer-rhyolite-q2-2026",
+        "note": "The 30 July 2026 issuer report confirms June-quarter pre-construction engineering and feasibility studies with strategic partner, final investment decision and physical construction still pending. Stage is observed by this source date; no exact phase transition date is claimed."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-doe-ioneer-rhyolite-2025-close",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "legal_authority",
+          "recipient",
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "DOE closing release, 17 January 2025, paragraphs 1–2 and ATVM programme description",
+        "note": "Federal agency establishes a closed $996M guarantee and borrower, not disbursement; amount splits $968M principal and $28M capitalized interest."
+      },
+      {
+        "sourceId": "src-sec-ioneer-rhyolite-close-2025",
+        "supports": [
+          "instrument",
+          "amount",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Issuer's 17 January 2025 loan-closing statement and conditional-loan comparison",
+        "note": "Confirms closed instrument, amount and 2023 increase; earlier conditional commitment not additive."
+      },
+      {
+        "sourceId": "src-doe-rhyolite-nepa-0565",
+        "supports": [
+          "project",
+          "facility",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "DOE/EIS-0565 Summary, loan-only processing scope",
+        "note": "Excludes development/operation of open-pit mine. NEPA references a different proposed borrower, so it does not support recipient organization assignment."
+      },
+      {
+        "sourceId": "src-sec-ioneer-rhyolite-20f-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "DOE Loan discussion; conditions precedent to first advance and FID financing requirements",
+        "note": "Issuer says draw conditions include equity partner, additional capital and revised financial model; no first advance evidenced."
+      },
+      {
+        "sourceId": "src-sec-ioneer-rhyolite-q2-2026",
+        "supports": [
+          "project",
+          "stages",
+          "materials",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "July 2026 Quarterly Activities Report, strategic partnering, timeline and ASX LR 5.3.2",
+        "note": "FID awaited, future construction milestone; zero production/development activity in June 2026 quarter. A non-binding Korean partnership MOU is not a draw or construction."
+      },
+      {
+        "sourceId": "src-sec-ioneer-rhyolite-halfyear-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 10 unamortized loan fees; Note 9 pre-FID exploration/development classification; directors' compliance statement",
+        "note": "Loan fees are not cash from DOE; amortization begins after first draw and financial statements still pre-FID. No guarantee disbursement affirmed."
+      }
+    ],
+    "notes": "ONE closed ATVM loan guarantee: $996M total = $968M principal + $28M capitalized interest; neither component is a second amount. January 2023 conditional commitment was revised and replaced at closing, not additive. As of latest reviewed issuer disclosures (June-quarter activities July 30, half-year accounts August 13, 2026), no primary source positively establishes a first federal advance; preserve contracted, do not classify as partially disbursed or assert conclusively that no draw has ever happened. Reported $4.273M establishment fees are costs paid by Ioneer, NOT DOE disbursement. First draw conditions include strategic partner equity, additional funds and revised financial model. Sibanye-Stillwater did not proceed with proposed project equity in February 2025; 2026 KIND/Hyundai understandings remained nonbinding. DOE's early NEPA summary names proposed Rhyolite Ridge Holdings LLC but the 17 Jan 2025 closing names Ioneer Rhyolite Ridge LLC; these are not assumed equivalent. Processing facilities only: federal guarantee does not finance open-pit mine construction or separately fund the untracked boron co-product, and permits and feasibility are not physical construction.",
+    "lifecycleReview": {
+      "financialStatusCheckedAt": "2026-10-08",
+      "implementationStatusCheckedAt": "2026-10-08"
+    }
+  },
+  {
     "id": "fin-us-doe-thacker-pass-atvm-2024",
     "eventId": "evt-us-doe-thacker-pass-loan-2024",
     "relationships": [],

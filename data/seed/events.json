@@ -2646,5 +2646,48 @@
       "verifiedAt": "2026-10-08",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-doe-rhyolite-ridge-2025",
+    "date": "2025-01-17",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Energy, Loan Programs Office",
+    "titleOriginal": "DOE Announces $996 Million Loan Guarantee to Ioneer Rhyolite Ridge to Advance Domestic Production of Lithium Carbonate",
+    "titleOriginalLang": "en",
+    "titleEn": "DOE closes $996 million loan guarantee for Rhyolite Ridge lithium processing",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "lithium"
+    ],
+    "affectedSectors": [
+      "battery",
+      "energy",
+      "industrial"
+    ],
+    "summary": "On 17 January 2025 DOE closed an ATVM loan guarantee of $996 million ($968 million principal and $28 million capitalized interest) to Ioneer Rhyolite Ridge LLC for on-site lithium carbonate processing at the Rhyolite Ridge project in Nevada. The guarantee is a signed financing facility, not a disbursement, and DOE financing is restricted to the processing plant and related infrastructure, not the open-pit mine. As of June 2026 the issuer remained pre-final-investment decision with equity partner and additional financing requirements, with no substantiated DOE advance.",
+    "analyticalSignificance": "Shows a binding U.S. industrial-finance commitment that remains short of funded physical implementation. Separate the closed loan guarantee from the older conditional loan proposal, third-party equity, cash advances, and future mine/processing construction. The U.S. borrower is distinct from the Australian public parent.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-doe-ioneer-rhyolite-2025-close",
+      "src-doe-rhyolite-nepa-0565",
+      "src-sec-ioneer-rhyolite-close-2025",
+      "src-sec-ioneer-rhyolite-20f-2026",
+      "src-sec-ioneer-rhyolite-q2-2026",
+      "src-sec-ioneer-rhyolite-halfyear-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-01-17",
+      "discoveredAt": null,
+      "verifiedAt": "2026-10-08",
+      "publishedAt": null
+    }
   }
 ]
