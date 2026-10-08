@@ -95,3 +95,5 @@ data/candidates/*.json
 
 # DOE CMEI manual-only preflight evidence; not a monitored state.
 .monitor-doe-preflight/
+# Manual DOE structured-source admission evidence (not persistent monitor state)
+.monitor-doe-structured/

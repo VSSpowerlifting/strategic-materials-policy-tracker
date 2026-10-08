@@ -9,6 +9,17 @@
 - Acceptance: run npm validate, typecheck, lint, test, build on exact PR head. Draft pending CI; no M3.2 factual backfill or M3.3 timeline.
 - Specification: docs/analysis/project-execution-ledger-m3-1-2026-10-08.md.
 
+## 2026-10-08: M2.7a DOE nested-HTML structural parser correction
+
+- **Actual live DOE structured validation [#37823322024](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37823322024) failed safely:** zero of two structured listing pages accepted (`require ten explicit listing cards`) and three downstream article-header checks consequently blocked. Previous M2.6 [#37820293673](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37820293673) had confirmed 10 article links per page and DOE sources reachable; do not mistake the new parser failure for source outage or create source state.
+- **Root parser limitation:** regex-extracting `<ul>...<\/ul>` and `<li>...<\/li>` with a non-greedy global iterator does not preserve nesting. M2.7a uses class-bound, same-tag depth matching so DOE `collection--page` and `collection-item` cannot be consumed by parent lists, with missing/duplicate/unbalanced guards retained. Added nested-list fixtures, not a relaxed card-count tolerance.
+- **Gate:** full exact-head CI, human merge, then manually rerun DOE structured source validation and require 2/2 pages with 20 official row/date/issuer-bound cards, zero overlap and three original headers. No DOE shadow collector, identity state, article revision fingerprint, financial or policy event is created. See `docs/monitoring/m2-7a-doe-nested-list-boundaries-2026-10-08.md`.
+
+## 2026-10-08: M2.7 DOE source-bound article/date parser candidate
+
+- **Observed DOE DOM acceptance evidence** came from [M2.6 preflight #37820293673](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37820293673), successful on merged `main` `b857511`. Both CMEI-filtered listing pages returned 10 row URLs each with no overlap, and three original article samples displayed publisher `display-date` and `primary-office` in a `schema:Article` boundary. Navigation and CMS dates differed; only publisher-bound release dates are eligible for recording.
+- **M2.7 parser proposal** restricts dates/URLs/issuing office to each `collection-item` row, verifies pagination order and original publisher `schema:Article` headers, and rejects a mismatch without silent fallback. A manual-only independent `SMPT DOE CMEI structured publisher validation` Action makes the same bounded five official requests and archives a source-only report (includes minimal candidate body DOM hints). No DOE collector, baseline, persistent identity, EXIM/M1 state changes, private editorial write, policy event, finance row or public site changes. **`bodyBoundaryConfirmed:false` is intentionally hard coded.**
+- **Gate:** exact-head CI followed by human review/merge, then *live* manual DOE structured audit, inspected artifact, and actual publisher body-text boundary proof before designing M2.8 shadow collection. See `docs/monitoring/m2-7-doe-structured-source-admission-2026-10-08.md`.
 
 ## 2026-10-08: M2.6 DOE DOM evidence specimens candidate
 
