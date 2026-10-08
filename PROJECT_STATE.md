@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: DOE M2.8 candidate article-body boundary audit
+
+- **DOE M2.7 metadata/admission passed live:** [run 37825957544](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37825957544) on #99 squash-merge `23ca395`: 2/2 filtered listing pages, 20 source-bound cards, zero URL overlap and 3/3 original publisher article headers. The CMEI filter spans 15 explicit CMEI attributions and five `Energy.gov` sitewide labels; issuer is not inferred for the latter. Source remains **forensic-only**.
+- **Body evidence now observed:** live original HTML excerpts include `field--name-field-text` + `field--type-text-long`, sometimes **inside accordion panels** with multiple project details (September 30 mining selections release). Candidate M2.8 adds an experimental, main-scoped parser over all such text fields plus accordion headings and cited URLs. Synthetic regressions test that substantive edits affect the candidate SHA-256 while sitewide chrome does not; no approved revision detection is claimed.
+- **Gate:** exact-head CI, human merge, then manual read-only 5-source [DOE experimental body evidence](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/workflows/doe-body-proof.yml). Inspect real source evidence and prove semantic completeness before proposing any persisted/scheduled DOE shadow monitor. Explicit hard-coded `fullBodyBoundaryConfirmed:false`, `enabledForMonitoring:false`, `eligibleForRevisionTracking:false`. No policy/financial/EXIM/M1 record changes. See `docs/monitoring/m2-8-doe-body-evidence-2026-10-08.md`.
+
 ## 2026-10-08: DOE M2.7b listing-source attribution repair candidate
 
 - **Verified live failure:** [structured validation #37824471003](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37824471003) on M2.7a merge `2880104` failed on the next, *different* gate: `DOE CMEI filtered row lacks verified issuing office` on both index pages. No source collection, editorial promotion or finance mutation occurred. M2.7a's nested-list repair advanced parsing beyond the prior ten-card mismatch.
