@@ -74,3 +74,6 @@ ruvector.db-wal
 # the workflow README stay tracked; real candidate content never gets committed.
 data/candidates/*.json
 !data/candidates/*.example.json
+
+# Shadow source monitor outputs (state and unreviewed publications)
+.monitor-pilot/

@@ -1,0 +1,76 @@
+# Shadow-source observation only. Runs on default branch after the PR is merged.
+# No writes to published data or private candidate records. GITHUB_TOKEN is read-only.
+# The cache is best-effort; loss of cache means safe baseline bootstrap, NOT a claim
+# of newly discovered events. The archived report contains public-source metadata.
+name: SMPT source-monitor pilot
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly Tuesday 13:17 UTC; distinct from the source's publication cadence.
+    - cron: "17 13 * * 2"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smpt-shadow-source-pilot
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore best-effort prior publication identities
+        uses: actions/cache/restore@v4
+        with:
+          path: .monitor-pilot/state.json
+          key: smpt-shadow-monitor-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            smpt-shadow-monitor-v1-
+
+      - name: Observe registered official sources (no publication)
+        run: npm run monitor:pilot
+
+      - name: Preserve observation identities even when a source is blocked
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .monitor-pilot/state.json
+          key: smpt-shadow-monitor-v1-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Archive source health and public publication metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-source-pilot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .monitor-pilot/report.json
+            .monitor-pilot/summary.md
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Summarize evidence, without publishing it
+        if: always()
+        run: |
+          if test -f .monitor-pilot/summary.md; then
+            cat .monitor-pilot/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Monitor produced no valid report; source health not verified." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Fail visibly on degraded sources, after evidence is archived
+        run: |
+          node -e 'const r=require("./.monitor-pilot/report.json"); if (!r.allSourcesHealthy || r.sources.some(s=>s.possibleWindowGap)) { console.error("SMPT shadow monitor degraded or finite feed rolled over; inspect artifact, do not treat as clean."); process.exit(1); }'

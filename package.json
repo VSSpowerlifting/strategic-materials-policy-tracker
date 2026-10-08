@@ -11,7 +11,8 @@
     "validate": "tsx scripts/validate-data.ts",
     "test": "node --import tsx --test tests/*.test.ts",
     "check:links": "tsx scripts/check-links.ts",
-    "audit:lifecycle": "tsx scripts/audit-lifecycle.ts"
+    "audit:lifecycle": "tsx scripts/audit-lifecycle.ts",
+    "monitor:pilot": "tsx scripts/monitor-sources.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
