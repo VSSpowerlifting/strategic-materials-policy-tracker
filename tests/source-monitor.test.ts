@@ -144,3 +144,17 @@ test("all observed entries are review-only publication metadata; no private cand
   assert.doesNotMatch(payload, /proposedEvent|framingClaim|financialCommitment|candidateId|approval|classification/);
   assert.match(payload, /shadow_review_only/);
 });
+
+test("published Atom links decode XML ampersands and the report preserves an actual successful HTTP status", async () => {
+  const encoded = feed.replace("critical-minerals.html", "critical-minerals.html?lang=en&amp;topic=minerals");
+  const parsed = parseNrcanAtom(encoded);
+  assert.match(parsed[0].url, /lang=en&topic=minerals$/);
+
+  const fetched = await runSourcePilot(
+    watched, readMonitorState(null), "2026-10-07T14:00:00Z",
+    (async (url: string) => new Response(url.includes("federalregister.gov") ? fed : encoded,
+      { status: url.includes("federalregister.gov") ? 200 : 206 })) as FetchFunction,
+  );
+  assert.equal(fetched.report.sources[0].status, 206);
+  assert.equal(fetched.report.sources[0].health, "ok");
+});
