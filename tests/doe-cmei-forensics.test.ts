@@ -105,6 +105,10 @@ test("DOE listing evidence is source-shaped and not a verified publisher card/da
   assert.ok(page.notes.some((x) => x.includes("not bound")));
   assert.match(page.htmlDigestSha256, /^[a-f0-9]{64}$/);
   assert.equal(page.anchorCandidates[0].url, link0);
+  assert.ok(page.listingDomSamples.length > 0);
+  assert.equal(page.listingDomSamples[0].url, link0);
+  assert.match(page.listingDomSamples[0].anchoredHtmlExcerpt, /<article>/);
+  assert.ok(page.listingDomSamples.every((x) => x.anchoredHtmlExcerpt.length <= 1300));
 });
 
 test("DOE article excerpts carry nonbinding metadata diagnostics and negative-control role", () => {
@@ -112,6 +116,10 @@ test("DOE article excerpts carry nonbinding metadata diagnostics and negative-co
     "mining_selections_not_contracts", link0);
   assert.match(result.headingHint ?? "", /National Laboratory Mining/);
   assert.ok(result.metaDateHints.length > 0);
+  assert.ok(result.dateDomSamples.length >= 1);
+  assert.ok(result.dateDomSamples.length <= 4);
+  assert.ok(result.dateDomSamples.every((x) => x.surroundingHtml.length <= 1300));
+  assert.ok(result.dateDomSamples.some((x) => x.matchedDateText === "September 30, 2026"));
   assert.ok(result.notes.some((x) => /not contracted/.test(x)));
   const negative = parseDoeArticleForensics(samples[2],
     "non_minerals_control", link2);
@@ -133,6 +141,24 @@ test("five bound official requests return forensics only and flag listing overla
   assert.equal(r.overlapBetweenPages, 1);
   assert.equal(r.status, "degraded_do_not_activate");
   assert.ok(r.warnings.some((w) => /overlap/.test(w)));
+});
+
+test("bounded provenance samples preserve conflicting CMS dates as untrusted context", () => {
+  const sample = "<html><head>" +
+    '<meta property="article:published_time" content="2026-09-28T12:00:00Z">' +
+    "</head><body><header>Navigation October 5, 2026</header>" +
+    '<main><h1>DOE critical minerals selection announcement</h1>' +
+    "<time>September 30, 2026</time>" +
+    "<p>DOE selected national labs for award negotiations.</p></main>" +
+    "<footer>View previous release September 29, 2026</footer></body></html>";
+  const x = parseDoeArticleForensics(sample, "mining_selections_not_contracts", link0);
+  assert.ok(x.metaDateHints.some((hint) => hint.includes("2026-09-28")));
+  assert.ok(x.dateDomSamples.some((d) => d.matchedDateText === "September 30, 2026"));
+  assert.ok(x.dateDomSamples.some((d) => d.matchedDateText === "October 5, 2026"));
+  assert.ok(x.dateDomSamples.some((d) => d.matchedDateText === "September 29, 2026"));
+  assert.ok(x.dateDomSamples.every((d) => d.surroundingHtml.length <= 1300));
+  // No date field can be taken as a verified publication date here.
+  assert.equal("publicationDate" in x, false);
 });
 
 test("unambiguous example with disjoint listing candidates remains forensic, not monitoring eligible", async () => {
