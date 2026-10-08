@@ -11,7 +11,8 @@ export const site = {
   description:
     "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
   version: "v0.6-capital-intelligence",
-  lastUpdated: "2026-10-02",
+  /** Last curated corpus revision, NOT a claim that every row was rechecked on this date. */
+  lastUpdated: "2026-10-07",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness
@@ -43,6 +44,7 @@ export const navGroups = [
   {
     label: "Capital & Control",
     items: [
+      { href: "/response", label: "Industrial response", primary: false },
       { href: "/capital", label: "Capital", primary: true },
       { href: "/controls", label: "Controls", primary: true },
       { href: "/interplay", label: "Interplay", primary: true },
@@ -84,7 +86,7 @@ export const headerNav: readonly { href: string; label: string; exact?: boolean;
   {
     href: "/events",
     label: "Explore",
-    alsoCurrentFor: ["/capital", "/controls", "/projects", "/organizations", "/programmes", "/sources", "/timeline", "/framing", "/search"],
+    alsoCurrentFor: ["/capital", "/controls", "/projects", "/organizations", "/programmes", "/sources", "/timeline", "/framing", "/search", "/response"],
   },
   { href: "/materials", label: "Materials" },
   { href: "/actors", label: "Jurisdictions" },
