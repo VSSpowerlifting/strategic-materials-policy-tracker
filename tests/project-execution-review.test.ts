@@ -108,7 +108,7 @@ test("unknown source, duplicate review ID, reordered IDs and non-primary source 
   assert.match(errs, /sorted ascending/);
   const r = refs();
   r.sources = r.sources.map((s) => s.id === q()[0].sourceId
-    ? { ...s, confidence: "secondary" } : s);
+    ? { ...s, confidence: "secondary" as const } : s);
   assert.match(audit(q(), r).errors.join(" | "), /source is not marked primary/);
 });
 
