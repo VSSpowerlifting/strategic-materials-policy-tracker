@@ -105,7 +105,7 @@ test("designations, projects and projects with no designation, per material; the
     antimony: [0, 6, 6],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
-    lithium: [1, 7, 6],
+    lithium: [1, 8, 7], // DOE-financed Thacker Pass Phase 1 processing undertaking adds one non-designated project
     cobalt: [4, 5, 1],
     nickel: [4, 6, 2],
   };
