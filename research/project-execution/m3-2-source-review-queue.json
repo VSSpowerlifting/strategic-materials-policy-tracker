@@ -1,0 +1,93 @@
+[
+  {
+    "id": "review-m3-2-alcoa-wagerup",
+    "projectId": "prj-au-alcoa-sojitz-gallium",
+    "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+    "kindProposal": "construction_started",
+    "scopeProposal": "named_facility",
+    "scopeAsStated": "gallium production plant co-located at Alcoa’s Wagerup alumina refinery",
+    "claimMode": "occurred",
+    "occurredOn": "2026-08-24",
+    "targetOn": null,
+    "statementOriginal": "The ceremony marked the start of construction of the new facility co-located at Alcoa’s Wagerup alumina refinery in Western Australia.",
+    "statementEn": "The ceremony marked the start of construction of the new facility co-located at Alcoa’s Wagerup alumina refinery in Western Australia.",
+    "statementEnSource": "na",
+    "locator": "Opening news paragraph after 08/24/2026 date",
+    "relatedFinanceIds": [
+      "fin-au-alcoa-sojitz-gallium-2025-equity",
+      "fin-au-alcoa-sojitz-gallium-2025-offtake-right",
+      "fin-us-alcoa-sojitz-gallium-2025-equity"
+    ],
+    "gate": "human_source_review",
+    "reviewVerdict": "unreviewed",
+    "taxonomyQuestion": null,
+    "editorialCaution": "Company says the groundbreaking ceremony marked start of construction. This does not evidence financial drawdown, output or commissioning."
+  },
+  {
+    "id": "review-m3-2-cyclic-extended-operations",
+    "projectId": "prj-ca-cyclic-kingston-demonstration-plant",
+    "sourceId": "src-nrcan-cmrdd-programme",
+    "kindProposal": "funded_activity_completed",
+    "scopeProposal": "funded_activity",
+    "scopeAsStated": "Kingston Demonstration Plant – Extended Operations",
+    "claimMode": "occurred",
+    "occurredOn": null,
+    "targetOn": null,
+    "statementOriginal": "Status: Launched in 2024; completed in March 2026",
+    "statementEn": "Status: Launched in 2024; completed in March 2026",
+    "statementEnSource": "na",
+    "locator": "Funded Projects > Kingston Demonstration Plant – Extended Operations > Status",
+    "relatedFinanceIds": [
+      "fin-ca-cmrdd-2024-cyclic-materials"
+    ],
+    "gate": "human_source_review",
+    "reviewVerdict": "unreviewed",
+    "taxonomyQuestion": null,
+    "editorialCaution": "Only the funded Extended Operations activity has a completed status. Exact completion day is unknown; March 2026 stays literal prose. Cannot infer whole-plant completion or commercial operations."
+  },
+  {
+    "id": "review-m3-2-inl-demonstration",
+    "projectId": "prj-us-inl-antimony-pilot",
+    "sourceId": "src-us-army-antimony-pilot-2026",
+    "kindProposal": "demonstration_started",
+    "scopeProposal": "named_facility",
+    "scopeAsStated": "INL prototype processing facility for antimony sulfide",
+    "claimMode": "occurred",
+    "occurredOn": null,
+    "targetOn": null,
+    "statementOriginal": "the successful installation of a prototype processing facility at INL and the commencement of demonstration activities",
+    "statementEn": "the successful installation of a prototype processing facility at INL and the commencement of demonstration activities",
+    "statementEnSource": "na",
+    "locator": "Opening body paragraph after July 29 opening-ceremony reference",
+    "relatedFinanceIds": [
+      "fin-us-army-perpetua-antimony-otia"
+    ],
+    "gate": "taxonomy_blocked",
+    "reviewVerdict": "unreviewed",
+    "taxonomyQuestion": "Choose reusable milestone kind for prototype demonstrations: an August 6 report confirms demonstrations began, but does not identify their start day. Do not label prototype testing commercial operations.",
+    "editorialCaution": "July 29 is the ceremony/opening day, not an independently established technical demonstration start date. Mine output is forecast, not occurred."
+  },
+  {
+    "id": "review-m3-2-stibnite-burntlog",
+    "projectId": "prj-us-stibnite",
+    "sourceId": "src-perpetua-stibnite-construction-2026",
+    "kindProposal": "construction_started",
+    "scopeProposal": "named_infrastructure",
+    "scopeAsStated": "Burntlog Route access road and associated 2026 critical-path works",
+    "claimMode": "occurred",
+    "occurredOn": "2026-05-30",
+    "targetOn": null,
+    "statementOriginal": "On Saturday, May 30, Perpetua commenced additional critical path construction activities for the 2026 field season",
+    "statementEn": "On Saturday, May 30, Perpetua commenced additional critical path construction activities for the 2026 field season",
+    "statementEnSource": "na",
+    "locator": "June 1 announcement, first paragraph following project update introduction",
+    "relatedFinanceIds": [
+      "fin-us-dod-perpetua-stibnite-dpa",
+      "fin-us-exim-perpetua-stibnite-2026"
+    ],
+    "gate": "taxonomy_blocked",
+    "reviewVerdict": "unreviewed",
+    "taxonomyQuestion": "Distinguish named site-access infrastructure from named operating facility. Never turn this May 30 Burntlog Route start into the project's first construction start (earlier early-works began in October 2025).",
+    "editorialCaution": "Two financing rows refer to this source without exact status dates; May 30 is source-derived from the press release. No production, financing drawdown or government causality is asserted."
+  }
+]
