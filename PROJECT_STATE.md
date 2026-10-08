@@ -1,5 +1,12 @@
 # Project state
 
+## 2026-10-08: M2.1 EXIM third live bootstrap failure — official Meeting Minutes section
+
+- **Confirmed third failure:** [run 37731753460](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37731753460) executed from `main` `ee1e76a` after #78; EXIM index HTTP 200 but `health: invalid_response`, `Diagnostic: EXIM listing article has no nearby official publication date: https://www.exim.gov/news/meeting-minutes`. The action found no prior EXIM state and produced no baseline artifact; separate M1 monitoring unaffected.
+- **Publisher evidence:** [EXIM Meeting Minutes](https://www.exim.gov/news/meeting-minutes) is titled `Board Agendas and Meeting Minutes`, an official board document index rather than an individually dated press release. Its own board agenda items have distinct subpaths under `/news/minutes/`. The shadow press-release collector must not attribute neighboring release-card dates to this index.
+- **Scope:** explicitly exclude this second observed section URI, in addition to verified `/news/media-advisories`, from individual release candidates. Unknown undated article-shaped links must still fail closed. No change to date/title/body checks, fingerprint semantics, the M1 pilot, published claims/finance events, or scheduling.
+- **Gate:** exact-head GitHub CI, human squash merge, then one deliberate `bootstrap=true` live run. Do not run `bootstrap=false` recovery until a valid state artifact exists. If another template boundary fails, inspect its specific URL rather than loosening verification.
+
 ## 2026-10-08: M2.1 EXIM second live bootstrap failure — untitled article-shaped anchor (follow-up under review)
 
 - **Confirmed:** [EXIM bootstrap run 37731056259](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37731056259) on post-#77 main `ac7337e` returned HTTP 200 but `health: invalid_response` with exact diagnostic `EXIM dated listing entry title missing or too long`. No first baseline state file was produced; old M1 monitors remain isolated.
