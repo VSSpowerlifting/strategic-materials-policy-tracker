@@ -3838,7 +3838,7 @@
         "note": "Executed €150M contract controls legal borrower identity. The EIB press release informally labels Keliber Oy as recipient, but the contractual Borrower is Keliber Technology Oy."
       }
     ],
-    "notes": "The executed 20 August 2024 EIB facility agreement (SEC Exhibit 4.8) identifies Keliber Technology Oy as the borrower and Keliber Oy as an original guarantor, correcting the abbreviated borrower identification in the EIB announcement. EIB project 20170804 separately lists a €17.5M signature on 20 December 2024; the bank's 2024 lending report names Natixis as that signature's counterparty. Because the financing mechanism and flow to Keliber have not been verified, that transaction is not recorded as a second direct Keliber loan.",
+    "notes": "The executed 20 August 2024 EIB facility agreement (SEC Exhibit 4.8) identifies Keliber Technology Oy as the borrower and Keliber Oy as an original guarantor, correcting the abbreviated borrower identification in the EIB announcement. EIB project 20170804 separately lists a €17.5 million signature on 20 December 2024; the bank's 2024 lending report names Natixis as that signature's counterparty. Because the financing mechanism and flow to Keliber have not been verified, that transaction is not recorded as a second direct Keliber loan.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-07",
       "implementationStatusCheckedAt": "2026-10-07"
