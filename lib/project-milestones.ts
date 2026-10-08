@@ -5,22 +5,10 @@
  * Validation checks the structural evidence contract. Human review of the full
  * original source remains necessary before a published milestone is created.
  */
-import { EN_SOURCES } from "./types";
+import {
+  EN_SOURCES, PROJECT_MILESTONE_KINDS, PROJECT_MILESTONE_MODES, PROJECT_MILESTONE_SCOPES,
+} from "./types";
 import type { Project, ProjectMilestone, Source } from "./types";
-
-export const PROJECT_MILESTONE_KINDS = [
-  "feasibility_completed",
-  "groundbreaking_reported",
-  "construction_started",
-  "commissioning_started",
-  "operations_started",
-  "production_reported",
-  "operations_suspended",
-  "project_cancelled",
-  "funded_activity_completed",
-] as const;
-export const PROJECT_MILESTONE_MODES = ["occurred", "planned"] as const;
-export const PROJECT_MILESTONE_SCOPES = ["whole_project", "named_facility", "funded_activity"] as const;
 
 type ReferenceSource = Pick<Source, "id" | "language" | "confidence" | "datePublished" | "dateAccessed">;
 type References = {
