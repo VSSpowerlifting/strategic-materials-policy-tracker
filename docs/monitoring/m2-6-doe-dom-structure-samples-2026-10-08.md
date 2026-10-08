@@ -13,7 +13,7 @@ The rendered DOE page displays one date for a press release (e.g. September 30, 
 Without fetching any additional URLs, the five existing bounded DOE fetches now attach:
 - Up to **four 1,300-character maximum original HTML excerpts per listing page**, centered on existing canonical in-main article-link candidates. These preserve classes/wrappers and nearby potential date fields for **human DOM examination only**.
 - Up to **four 1,300-character maximum HTML excerpts per sampled article**, centered on observed human-formatted date tokens (including navigation). The existing bounded CMS meta-date snippets stay distinct. No snippet is promoted to a trusted publisher date.
-- Summary counts in the workflow report, but the **actual HTML snippets appear only in the already-private-to-workflow-operators report artifact** `report.json`. Existing `summary.md` remains compact; artifact retention remains 30 days.
+- Summary counts in the workflow report, but the **actual HTML snippets appear only in the existing GitHub Actions report artifact (repository permissions determine who can access it; it is NOT a private editorial inbox)** `report.json`. Existing `summary.md` remains compact; artifact retention remains 30 days.
 
 No new state/version, publication identity, scanner run, GitHub write permission, external sender, candidate inbox, commitment amount, export, project relationship or API/public UI change is made. Source response size, timeout, official-host allowlist, exact five-request budget and non-activation decision are unchanged.
 
