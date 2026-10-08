@@ -118,7 +118,7 @@ export function parseNrcanAtom(xml: string): Publication[] {
     const date = publishedDay(getXmlTag(chunk, "published") || getXmlTag(chunk, "updated"));
     const links = [...chunk.matchAll(/<(?:[a-z][\w-]*:)?link\b([^>]*?)\/?\s*>/gi)];
     const preferred = links.find((l) => /\brel\s*=\s*["']alternate["']/i.test(l[1])) ?? links.find((l) => !/\brel\s*=\s*["']self["']/i.test(l[1]));
-    const url = cleanUrl(/\bhref\s*=\s*["']([^"']+)["']/i.exec(preferred?.[1] ?? "")?.[1]);
+    const url = cleanUrl(xmlEntities(/\bhref\s*=\s*["']([^"']+)["']/i.exec(preferred?.[1] ?? "")?.[1] ?? ""));
     if (!title || !url || !(atomId || url)) throw Error("NRCan Atom entry is missing a stable ID, title or secure URL");
     rows.push(normalize("watch-ca-nrcan-news", atomId || url, title, url, date));
   }
@@ -176,6 +176,7 @@ export function reconcilePublications(
   previous: SourceMemory | undefined,
   items: Publication[],
   observedAt: string,
+  httpStatus = 200,
 ): { memory: SourceMemory; report: SourceReport } {
   const before = previous?.seen ?? {};
   const baseline = !previous;
@@ -194,7 +195,7 @@ export function reconcilePublications(
     report: {
       sourceId,
       health: "ok",
-      status: 200,
+      status: httpStatus,
       observed: items.length,
       baseline,
       newCount: additions,
@@ -246,9 +247,9 @@ export async function runSourcePilot(
     const source = watchlist.find((s) => s.id === sourceId);
     if (!source || source.status !== "active") throw Error("Required pilot source absent or inactive: " + sourceId);
     try {
-      const { body } = await httpBody(fetchFn, pilotEndpoint(source));
+      const { body, status } = await httpBody(fetchFn, pilotEndpoint(source));
       const rows = sourceId === "watch-ca-nrcan-news" ? parseNrcanAtom(body) : parseFederalRegisterJson(body);
-      const result = reconcilePublications(sourceId, next.sources[sourceId], rows, observedAt);
+      const result = reconcilePublications(sourceId, next.sources[sourceId], rows, observedAt, status);
       next.sources[sourceId] = result.memory;
       sources.push(result.report);
     } catch (error) {
