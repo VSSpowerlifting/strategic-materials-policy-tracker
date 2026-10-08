@@ -15,6 +15,7 @@
     "monitor:pilot": "tsx scripts/monitor-sources.ts",
     "monitor:probe-m2": "tsx scripts/probe-m2-sources.ts",
     "monitor:probe-doe-cmei": "tsx scripts/probe-doe-cmei.ts",
+    "monitor:probe-doe-structured": "tsx scripts/probe-doe-structured.ts",
     "monitor:exim": "tsx scripts/monitor-exim.ts",
     "audit:exim": "tsx scripts/audit-exim-reliability.ts",
     "audit:exim-schedule": "tsx scripts/check-exim-schedule.ts",
