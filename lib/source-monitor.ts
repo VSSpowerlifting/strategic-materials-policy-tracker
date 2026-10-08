@@ -109,6 +109,7 @@ export function parseNrcanAtom(xml: string): Publication[] {
   }
   const entries = [...xml.matchAll(/<(?:[a-z][\w-]*:)?entry\b[^>]*>([\s\S]*?)<\/(?:[a-z][\w-]*:)?entry\s*>/gi)];
   if (entries.length > MAX_WINDOW) throw Error("NRCan feed exceeded bounded parser window");
+  if (!entries.length) throw Error("NRCan Atom feed has no parsed entries; do not report a clean empty feed");
   const rows: Publication[] = [];
   for (const match of entries) {
     const chunk = match[1];
@@ -128,13 +129,14 @@ export function parseFederalRegisterJson(raw: string): Publication[] {
   const parsed: unknown = JSON.parse(raw);
   if (!isRecord(parsed) || !Array.isArray(parsed.results)) throw Error("Federal Register API response lacks a results array");
   if (parsed.results.length > MAX_WINDOW) throw Error("Federal Register response exceeded bounded parser window");
+  if (!parsed.results.length) throw Error("Federal Register results empty; treat as uncertain coverage");
   const rows: Publication[] = [];
   for (const item of parsed.results) {
     if (!isRecord(item)) throw Error("Federal Register result is not an object");
     const doc = text(item.document_number);
     const title = text(item.title);
     const url = cleanUrl(item.html_url);
-    if (!doc || !title || !url || !new URL(url).hostname.endsWith("federalregister.gov"))
+    if (!doc || !title || !url || !["www.federalregister.gov", "federalregister.gov"].includes(new URL(url).hostname))
       throw Error("Federal Register result missing document number, title or canonical URL");
     rows.push(normalize("watch-us-federal-register-interior", doc, title, url, publishedDay(item.publication_date)));
   }
@@ -197,7 +199,8 @@ export function reconcilePublications(
       baseline,
       newCount: additions,
       revisedCount: revisions,
-      possibleWindowGap: !baseline && items.length >= MAX_WINDOW && !!previous?.lastLatestId && !items.some((p) => p.id === previous.lastLatestId),
+      possibleWindowGap: !baseline && items.length >= (sourceId === "watch-ca-nrcan-news" ? 50 : 100) &&
+        !!previous?.lastLatestId && !items.some((p) => p.id === previous.lastLatestId),
       lastSuccessfulAt: observedAt,
       message: baseline ? "Baseline created; zero new items claimed" : null,
       reviewOnly: changes,
@@ -255,7 +258,7 @@ export async function runSourcePilot(
         status === 401 || status === 403 || status === 429 || status === 451 ? "blocked" :
         status !== null ? "http_error" :
         (error as Error).name === "AbortError" ? "timeout" :
-        /Atom|Federal Register|JSON|Source exceeded|bounded parser|entry is missing|result missing/.test(msg) ? "invalid_response" : "network_error";
+        error instanceof SyntaxError || /Atom|Federal Register|JSON|Source exceeded|bounded parser|entry is missing|result missing/.test(msg) ? "invalid_response" : "network_error";
       sources.push({
         sourceId, health, status, observed: 0, baseline: !next.sources[sourceId],
         newCount: 0, revisedCount: 0, possibleWindowGap: false,
