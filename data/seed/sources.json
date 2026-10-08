@@ -564,6 +564,18 @@
     "notes": "Official EIB project record. Status Signed; records €150,000,000 signed on 2024-08-20 and a later €17,500,000 signature on 2024-12-20. This tranche codes only the €150 million transaction surfaced by the August 2024 EIB release. Project description covers lithium mines, a concentrator and a hydrometallurgical battery-grade lithium-hydroxide plant."
   },
   {
+    "id": "src-eib-lending-report-2024",
+    "title": "European Investment Bank Group Lending Report 2024",
+    "publisher": "European Investment Bank",
+    "url": "https://www.eib.org/files/publications/20240236-250825-lending-report-2024-en.pdf",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-10-07",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Finland signatures table (report printed p.15 / PDF p.21) records Keliber Battery Grade Lithium Production, Keliber Technology Oy €150.0M and Natixis €17.5M. The report names signature counterparties and does not itself establish the downstream flow, financial instrument, or beneficiary of the Natixis transaction."
+  },
+  {
     "id": "src-eurlex-crma",
     "title": "Regulation (EU) 2024/1252 establishing a framework for ensuring a secure and sustainable supply of critical raw materials",
     "publisher": "Official Journal of the European Union (EUR-Lex)",
@@ -1666,6 +1678,18 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "The Prime Minister's release, dated Tuesday 21 October 2025 in Australia (datetime 2025-10-20T19:16:41Z), read in full in a browser on 2026-09-23 (the site blocks automated clients). Source of \"each provide at least USD$1 billion in investments towards an USD$8.5 billion pipeline ... over the next six months\", the up to USD$200 million concessional equity in the Alcoa-Sojitz Gallium Recovery Project with an Australian right of offtake, the US equity investment with a right of offtake in the same project, and the USD$100 million equity investment in Arafura's Nolans project."
+  },
+  {
+    "id": "src-sec-keliber-eib-facility-agreement-2024",
+    "title": "Sibanye Stillwater, Exhibit 4.8: 20 August 2024 EIB–Keliber Technology Oy €150 million Facility Agreement",
+    "publisher": "Sibanye Stillwater Limited / U.S. Securities and Exchange Commission (EDGAR)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1786909/000178690925000019/a2017-080488685financont.htm",
+    "language": "en",
+    "datePublished": "2025-04-25",
+    "dateAccessed": "2026-10-07",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Binding EIB €150M facility agreement executed August 20, 2024 and furnished April 25, 2025. Party definitions name Keliber Technology Oy as Borrower; Keliber Oy is an Original Guarantor. Corrects the shorthand recipient wording in EIB's August 2024 press release."
   },
   {
     "id": "src-teck-trail-strategic-metals-2026",

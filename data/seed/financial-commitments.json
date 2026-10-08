@@ -3757,9 +3757,9 @@
     ],
     "legalAuthority": null,
     "programmeId": null,
-    "recipient": "Keliber Oy",
+    "recipient": "Keliber Technology Oy",
     "recipientOrgIds": [
-      "org-keliber-oy"
+      "org-keliber-technology-oy"
     ],
     "project": "KELIBER LITHIUM",
     "projectId": "prj-fi-keliber-lithium",
@@ -3824,9 +3824,21 @@
         "evidence": "explicit",
         "locator": "Amount; Signature date(s); Project description",
         "note": "The project page establishes the exact 20 August 2024 signature date for the €150 million loan."
+      },
+      {
+        "sourceId": "src-sec-keliber-eib-facility-agreement-2024",
+        "supports": [
+          "recipient",
+          "amount",
+          "instrument",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover page and agreement parties (20 August 2024): EIB as Bank; Keliber Technology Oy as Borrower; Schedule 1 and signature pages: Keliber Oy as Original Guarantor",
+        "note": "Executed €150M contract controls legal borrower identity. The EIB press release informally labels Keliber Oy as recipient, but the contractual Borrower is Keliber Technology Oy."
       }
     ],
-    "notes": "This row codes only the €150 million EIB loan surfaced by the August 2024 release. The EIB project page also records a later €17.5 million signature on 20 December 2024; that later transaction is outside this tranche and is not added to the amount.",
+    "notes": "The executed 20 August 2024 EIB facility agreement (SEC Exhibit 4.8) identifies Keliber Technology Oy as the borrower and Keliber Oy as an original guarantor, correcting the abbreviated borrower identification in the EIB announcement. EIB project 20170804 separately lists a €17.5 million signature on 20 December 2024; the bank's 2024 lending report names Natixis as that signature's counterparty. Because the financing mechanism and flow to Keliber have not been verified, that transaction remains outside this tranche and is not recorded as a second direct Keliber loan.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-07",
       "implementationStatusCheckedAt": "2026-10-07"

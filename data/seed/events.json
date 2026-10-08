@@ -2588,12 +2588,13 @@
       "battery",
       "industrial"
     ],
-    "summary": "The European Investment Bank announced a €150 million direct loan to Keliber Oy, part of a €500 million financing package for an integrated Finnish lithium project spanning mines, concentration and battery-grade lithium-hydroxide production. The EIB project record gives a signature date of 20 August 2024 for the €150 million loan; the European Commission provides an InvestEU guarantee for the direct financing.",
-    "analyticalSignificance": "The EIB describes the transaction as its first financing support for mining critical raw materials in the EU. It moves EU lithium policy from strategic-project recognition and general financing frameworks into a signed, project-specific public-bank commitment for integrated domestic extraction and processing.",
+    "summary": "The European Investment Bank announced a €150 million direct loan to Keliber Technology Oy (contractual borrower; Keliber Oy is a guarantor), part of a €500 million financing package for an integrated Finnish lithium project spanning mines, concentration and battery-grade lithium-hydroxide production. The EIB project record gives a signature date of 20 August 2024 for the €150 million loan; the European Commission provides an InvestEU guarantee for the direct financing.",
+    "analyticalSignificance": "The EIB describes the transaction as its first financing support for mining critical raw materials in the EU. It moves EU lithium policy from strategic-project recognition and general financing frameworks into a signed, project-specific public-bank commitment for integrated domestic extraction and processing. The signed facility identifies Keliber Technology Oy as the borrower, correcting the broader EIB announcement's use of Keliber Oy; the bank's later €17.5M Natixis signature is not part of this coded direct loan.",
     "supersededByEventId": null,
     "sourceIds": [
       "src-eib-keliber-2024",
-      "src-eib-keliber-project-20170804"
+      "src-eib-keliber-project-20170804",
+      "src-sec-keliber-eib-facility-agreement-2024"
     ],
     "verificationStatus": "verified",
     "intakeMode": "backfill",

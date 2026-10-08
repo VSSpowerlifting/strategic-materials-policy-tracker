@@ -1057,7 +1057,7 @@
         "note": "EIB describes Keliber Oy as a Finnish mining and battery-material processing company."
       }
     ],
-    "notes": "EIB borrower. Kept distinct from Keliber Technology Oy because the CRMA designation uses that separate legal name."
+    "notes": "Named in the EIB's August 2024 release as the beneficiary of the €150M Keliber project financing, but the signed facility names Keliber Technology Oy as Borrower. Keliber Oy is an Original Guarantor; maintain a distinct organization identity."
   },
   {
     "id": "org-keliber-technology-oy",
@@ -1079,9 +1079,20 @@
         "evidence": "explicit",
         "locator": "Article 2, row 19",
         "note": "Commission decision lists Keliber Technology Oy at a Finland address as the project promoter."
+      },
+      {
+        "sourceId": "src-sec-keliber-eib-facility-agreement-2024",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Agreement parties; Keliber Technology Oy named as Finnish incorporated Borrower",
+        "note": null
       }
     ],
-    "notes": "CRMA designation holder/promoter. Not collapsed into Keliber Oy without explicit identity evidence."
+    "notes": "Borrower under the executed €150M EIB facility agreement of 20 August 2024 (SEC Exhibit 4.8); separately promoter/holder of the EU CRMA Strategic Project designation. Kept legally distinct from guarantor Keliber Oy."
   },
   {
     "id": "org-lkab",
