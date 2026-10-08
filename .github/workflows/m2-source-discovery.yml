@@ -1,0 +1,47 @@
+# M2.0 endpoint discovery only. Separate from the production M1 monitoring
+# cadence, prior identities, review queue and public policy records.
+name: SMPT M2 official-source discovery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smpt-m2-source-discovery
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Observe official HTML listing candidates (no monitoring activation)
+        run: npm run monitor:probe-m2
+      - name: Archive non-private discovery metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-m2-discovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .monitor-probe/report.json
+            .monitor-probe/summary.md
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Summarize candidate reachability
+        if: always()
+        run: |
+          if test -f .monitor-probe/summary.md; then
+            cat .monitor-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Probe did not generate evidence; no source eligible for activation." >> "$GITHUB_STEP_SUMMARY"
+          fi
