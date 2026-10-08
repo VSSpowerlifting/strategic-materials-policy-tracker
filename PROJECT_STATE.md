@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: M2.7 DOE source-bound article/date parser candidate
+
+- **Observed DOE DOM acceptance evidence** came from [M2.6 preflight #37820293673](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37820293673), successful on merged `main` `b857511`. Both CMEI-filtered listing pages returned 10 row URLs each with no overlap, and three original article samples displayed publisher `display-date` and `primary-office` in a `schema:Article` boundary. Navigation and CMS dates differed; only publisher-bound release dates are eligible for recording.
+- **M2.7 parser proposal** restricts dates/URLs/issuing office to each `collection-item` row, verifies pagination order and original publisher `schema:Article` headers, and rejects a mismatch without silent fallback. A manual-only independent `SMPT DOE CMEI structured publisher validation` Action makes the same bounded five official requests and archives a source-only report (includes minimal candidate body DOM hints). No DOE collector, baseline, persistent identity, EXIM/M1 state changes, private editorial write, policy event, finance row or public site changes. **`bodyBoundaryConfirmed:false` is intentionally hard coded.**
+- **Gate:** exact-head CI followed by human review/merge, then *live* manual DOE structured audit, inspected artifact, and actual publisher body-text boundary proof before designing M2.8 shadow collection. See `docs/monitoring/m2-7-doe-structured-source-admission-2026-10-08.md`.
+
 ## 2026-10-08: M2.6 DOE DOM evidence specimens candidate
 
 - **Live source-shape milestone:** [DOE preflight #37818819424](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37818819424) passed on merge `15ec165`: two HTTP200 DOE CMEI listing pages, 10 in-main official articles each, **zero** overlapping article paths, three excluded off-main news links per page, and three accessible independent original article samples (including nonminerals control). Its outcome remains **forensic only — NOT an activated source**.
