@@ -28,6 +28,7 @@ test("the legal borrower receives the EIB capital row in organization views; the
   const guarantor = organizationRoles("org-keliber-oy");
   assert.ok(borrower.received.some((c) => c.id === id));
   assert.ok(!guarantor.received.some((c) => c.id === id));
+  assert.ok(guarantor.sponsoredProjects.some((p) => p.id === "prj-fi-keliber-lithium"), "the EIB lists Keliber Oy as project promoter, not borrower");
   assert.notEqual(getOrganizationById("org-keliber-oy")?.id, getOrganizationById("org-keliber-technology-oy")?.id);
   assert.ok(projectStack("prj-fi-keliber-lithium")!.rows.some((c) => c.id === id));
 });
