@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-07: M1 Day-0 CLI startup failure and narrow recovery (PR pending)
+
+**Observed:** First manual source-monitor run [#37720568026](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37720568026) on merged main `c288b768` **failed before fetching any government source**. The `tsx scripts/monitor-sources.ts` entry point used top-level `await` while this repository's `tsx` CommonJS output cannot execute it. The log reports `Top-level await is currently not supported with the "cjs" output format`; no source-health report, state cache or artifact was created. This failure provides **no evidence** about NRCan or Federal Register availability.
+
+**Proposed repair:** `fix/m1-monitor-cli-runtime-20261007` wraps polling in an explicit async `main()` with caught errors. An offline `--check-runtime` mode validates pre-registered source configuration without issuing HTTP requests or writing reports. `tests/source-monitor.test.ts` now actually launches the package's `npm run monitor:pilot -- --check-runtime`; this command reproduces the former runtime failure and prevents future TS-only green-check false confidence. No source parsing, status logic, published data, or monitoring start date changed.
+
+**After approval/merge:** check exact-head CI, manually dispatch the new `SMPT source-monitor pilot` workflow on `main`, then inspect real HTTP/source-health results. The first successful run must still be marked a **baseline**, not a claim of new policy discoveries. Do not update `lastCheckedAt` or `monitoringStartedAt` without the promised production reliability and human-review evidence.
+
 ## 2026-10-07: M1 source-monitoring shadow pilot (draft)
 
 **Status:** `feat/source-monitoring-m1-shadow-pilot-20261007` from merged `main` `316e2306`. Draft, **not merged, not scheduled on main and not deployed**.
