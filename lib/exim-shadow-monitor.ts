@@ -44,11 +44,16 @@ function officialArticleUrl(raw: string): string | null {
     const u = new URL(decodeEntities(raw), EXIM_LISTING);
     if (u.protocol !== "https:" || !["exim.gov", "www.exim.gov"].includes(u.hostname) ||
         u.username || u.password || !/^\/news\/[a-z0-9][a-z0-9-]*\/?$/i.test(u.pathname)) return null;
-    // This real EXIM navigation section matched our release-slug pattern in the
-    // failed 2026-10-08 live bootstrap (#37730218209). It is a category index,
-    // NOT an individual dated news release. Keep date checks strict on actual
-    // article candidates instead of trying to assign this link a nearby date.
-    if (u.pathname.replace(/\/$/, "").toLowerCase() === "/news/media-advisories") return null;
+    // These *individually verified* official section indexes share the
+    // /news/<slug> shape with releases but are not dated press releases:
+    // - media-advisories: live bootstrap 37730218209
+    // - meeting-minutes: live bootstrap 37731753460; EXIM labels it
+    //   "Board Agendas and Meeting Minutes" at /news/meeting-minutes.
+    // Keep this an exact-path source-evidence allowlist, never a broad
+    // "no date means ignore" rule. Unknown undated candidates fail closed.
+    const sectionPath = u.pathname.replace(/\/$/, "").toLowerCase();
+    if (sectionPath === "/news/media-advisories" ||
+        sectionPath === "/news/meeting-minutes") return null;
     u.hostname = "www.exim.gov";
     u.hash = "";
     u.search = "";
