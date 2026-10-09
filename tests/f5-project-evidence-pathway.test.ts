@@ -167,5 +167,5 @@ test("F5-2: source records and status evidence are individually inspectable with
     assert.ok(link.evidence.every(s=>known.has(s.sourceId)));
   }
   assert.equal(path.historicalCapitalTotals,"not_authorized");
-  assert.ok(path.limitations.some(s=>s.includes("histor")));
+  assert.ok(path.limitations.some(s=>s.includes("current corpus revision")));
 });
