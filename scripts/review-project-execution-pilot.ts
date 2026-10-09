@@ -164,7 +164,17 @@ export function auditProjectExecutionPilot(
     if (!Array.isArray(r.relatedFinanceIds) || !sortedUnique(r.relatedFinanceIds as string[])) {
       fail("relatedFinanceIds must be a sorted unique array (empty for project-native evidence)");
     } else {
-      for (const fid of r.relatedFinanceIds as string[]) {
+      const linked = r.relatedFinanceIds as string[];
+      // A project-native source may have no financial-row observation. However,
+      // an empty array cannot be used to hide a real matching legacy observation
+      // or to describe a "funded_activity" without any relevant funding record.
+      if (linked.length === 0 && r.scopeProposal === "funded_activity")
+        fail("funded_activity review requires an actual source-linked finance observation");
+      if (linked.length === 0 && [...financiers.values()].some(f =>
+        f.projectId === r.projectId &&
+        f.implementationStatusHistory?.some(entry => entry.sourceId === r.sourceId)))
+        fail("project-native review cannot omit existing matching finance/source observations");
+      for (const fid of linked) {
         const f = financiers.get(fid);
         if (!f) {
           fail("finance reference " + fid + " does not resolve");
