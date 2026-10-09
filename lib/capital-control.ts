@@ -54,6 +54,8 @@ import type {
   ControlStatus,
   ControlStatusEntry,
   FinancialCommitment,
+  MonetaryAmount,
+  FinancialAmountBoundEvidence,
   FinancialStatus,
   FinancialStatusEntry,
   JurisdictionCode,
@@ -64,6 +66,69 @@ import type {
 
 export { addDecimals, compareDecimals, formatDecimalCompact, formatMoney, groupDecimal } from "./decimal";
 import { addDecimals } from "./decimal";
+
+// --- F4-A: opt-in operative history, never used by current totals ----------------
+
+export type FinancialAmountProvenance = {
+  /** The amount source and each independently evidenced operative bound. */
+  sourceId: string;
+  effectiveNotBeforeEvidence: FinancialAmountBoundEvidence;
+  effectiveNoLaterThanEvidence: FinancialAmountBoundEvidence;
+};
+
+export type FinancialAmountOn =
+  | ({ kind: "quantified"; amount: MonetaryAmount; effectiveNotBefore: string; effectiveNoLaterThan: string } & FinancialAmountProvenance)
+  | ({ kind: "unquantified"; effectiveNotBefore: string; effectiveNoLaterThan: string } & FinancialAmountProvenance)
+  | ({ kind: "indeterminate_transition"; earliest: string; latest: string } & FinancialAmountProvenance)
+  | { kind: "not_yet_evidenced" }
+  | { kind: "history_unreviewed"; currentAmount: MonetaryAmount | null };
+
+/** Reject malformed, impossible, or imprecise dates before lexical ISO comparisons. */
+function requireHistoricalDate(value: string): void {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new RangeError("financialAmountOn requires an ISO YYYY-MM-DD calendar date");
+  }
+  const parsed = new Date(`${value}T00:00:00.000Z`);
+  if (!Number.isFinite(parsed.valueOf()) || parsed.toISOString().slice(0, 10) !== value) {
+    throw new RangeError("financialAmountOn requires a real ISO calendar date");
+  }
+}
+
+/**
+ * Date of signing is not necessarily the date of effectiveness. When a
+ * conditional amendment's actual day is unknown, withhold precise historic
+ * amount selection within its source-supported interval rather than guessing.
+ *
+ * Operative-as-of uses the CURRENT audited corpus, not publication-known-as-of.
+ * Source IDs for amount and each date bound are intentionally separate.
+ */
+export function financialAmountOn(c: FinancialCommitment, asOf: string): FinancialAmountOn {
+  requireHistoricalDate(asOf);
+  const versions = c.financialAmountHistory;
+  if (!versions?.length) return { kind: "history_unreviewed", currentAmount: c.amount };
+  let chosen: (typeof versions)[number] | null = null;
+  for (const version of versions) {
+    if (asOf < version.effectiveNotBefore) break;
+    if (asOf < version.effectiveNoLaterThan) {
+      return {
+        kind: "indeterminate_transition",
+        earliest: version.effectiveNotBefore, latest: version.effectiveNoLaterThan,
+        sourceId: version.sourceId,
+        effectiveNotBeforeEvidence: version.effectiveNotBeforeEvidence,
+        effectiveNoLaterThanEvidence: version.effectiveNoLaterThanEvidence,
+      };
+    }
+    chosen = version;
+  }
+  if (chosen === null) return { kind: "not_yet_evidenced" };
+  const { effectiveNotBefore, effectiveNoLaterThan, sourceId,
+    effectiveNotBeforeEvidence, effectiveNoLaterThanEvidence } = chosen;
+  const provenance = { effectiveNotBefore, effectiveNoLaterThan, sourceId,
+    effectiveNotBeforeEvidence, effectiveNoLaterThanEvidence };
+  return chosen.amount === null
+    ? { kind: "unquantified", ...provenance }
+    : { kind: "quantified", amount: chosen.amount, ...provenance };
+}
 
 // --- Status helpers -------------------------------------------------------------
 

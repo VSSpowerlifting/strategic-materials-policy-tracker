@@ -1,5 +1,11 @@
 # Project state
 
+## 2026-10-08: F4-A Thacker Pass dated-amount pilot (proposed review)
+
+- Introduces optional, strict, source-linked **financialAmountHistory** and an opt-in pure `financialAmountOn` query; legacy records explicitly return `history_unreviewed` and current totals are unchanged. One reviewed loan: **Thacker Pass ~US$2.26B original 2024-10-28** versus **~US$2.23B amended 2025**.
+- [October 8 2025 SEC 8-K filing](https://www.sec.gov/Archives/edgar/data/1966983/000119312525233937/d10878d8k.htm) states amendment effectiveness depended on conditions precedent, with first advance October 20. The exact operative transition day is not proven: **October 7–19 historical requests fail closed as `indeterminate_transition`**, not an invented October 7 effective date.
+- Does not create a loan, import draws, change current sums/exports/UI, or touch EXIM, Thompson Falls #85, or the F4 RFC #86. Review independent tests and PR before merging; 2026-10-09 repair separates SEC publication from amendment execution and adds independently sourced date-bound evidence.
+
 ## 2026-10-08: DOE M2.9a independently recoverable state contract candidate
 
 - **M2.8 original DOE body proof [run #37827488148](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/actions/runs/37827488148) passed live** on #101 merge `4119c01`. Two index pages/20 source rows/zero overlap; three article bodies: September 30 mining selections **14** text blocks/**12** accordions/**7,460** candidate characters; September 14 mining workforce prize **1** text block/**2,093** characters; unrelated September 11 homebuilding control **1** block/**2,146** characters. All green, no source activation. Original full-body completeness remains **uncertified** (M2.8 literal `fullBodyBoundaryConfirmed:false`).

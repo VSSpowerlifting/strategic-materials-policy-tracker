@@ -9077,13 +9077,71 @@
         "evidence": "explicit",
         "locator": "Note 4 — Department of Energy Loan Facility; MD&A pp. 23–28 and 'Borrowings under the DOE ATVM Loan Program'",
         "note": "Issuer states October 2025 amended expected facility $2.23B and the dates/amounts of all three advances; separately verifies ongoing Phase 1 processing-plant construction."
+      },
+      {
+        "sourceId": "src-sec-lac-doe-amendment-announcement-2025-10-07",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Form 8-K Item 1.01 and Exhibit 99.1",
+        "note": "Source establishes signed conditional amendment and approximately $2.23B proposed revised total, not October 7 effectiveness."
       }
     ],
-    "notes": "Single DOE ATVM/FFB loan, No. A1034. The original 28 October 2024 closing was approximately $2.26B ($1.97B principal plus an estimated $289.6–$289.7M capitalized interest); the 7 October 2025 amendment reduced estimated interest to $256M, making the amended total approximately $2.23B. These are versions of the same facility, not two commitments; the current amount is approximate ($1.97B + $256M = $2.226B before rounding). The schema holds a current amount and financial-status history, not historically versioned amounts: an as-of 2024 report must not present $2.23B as the contemporaneous 2024 face amount. Cumulative advances were $435M on 2025-10-20, $867M after 2026-02-24, and $1.209B after 2026-06-03; the $1.209B is not additional finance and is different from the $988.018M accounting carrying value after deferred issuance costs/interest. Original legal borrower Lithium Nevada Corp. is now Lithium Nevada LLC, distinct from its Canadian-listed sponsor Lithium Americas Corp. DOE loan supports lithium-carbonate processing infrastructure (including a sulfuric-acid plant), not open-pit mine development. Q2 2026 supports construction only; no operational production. DOE's 2025 equity warrants, GM equity and private financing are not classified as draws or additional DOE commitments.",
+    "notes": "Single DOE ATVM/FFB loan, No. A1034. The original 28 October 2024 closing was approximately $2.26B ($1.97B principal plus an estimated $289.6–$289.7M capitalized interest); the 7 October 2025 amendment reduced estimated interest to $256M, making the amended total approximately $2.23B. These are versions of the same facility, not two commitments; the current amount is approximate ($1.97B + $256M = $2.226B before rounding). The schema holds a current amount and financial-status history, not historically versioned amounts: an as-of 2024 report must not present $2.23B as the contemporaneous 2024 face amount. Cumulative advances were $435M on 2025-10-20, $867M after 2026-02-24, and $1.209B after 2026-06-03; the $1.209B is not additional finance and is different from the $988.018M accounting carrying value after deferred issuance costs/interest. Original legal borrower Lithium Nevada Corp. is now Lithium Nevada LLC, distinct from its Canadian-listed sponsor Lithium Americas Corp. DOE loan supports lithium-carbonate processing infrastructure (including a sulfuric-acid plant), not open-pit mine development. Q2 2026 supports construction only; no operational production. DOE's 2025 equity warrants, GM equity and private financing are not classified as draws or additional DOE commitments. F4-A amount-history pilot retains original ~$2.26B effective from 2024-10-28. The ~$2.23B amendment was signed on 2025-10-07 subject to conditions and is proven effective no later than first advance on 2025-10-20; the precise transition date within October 7–19 is not evidenced. This is not a draw-history or historical aggregate.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-08",
       "implementationStatusCheckedAt": "2026-10-08"
-    }
+    },
+    "financialAmountHistory": [
+      {
+        "amount": {
+          "value": "2260000000",
+          "currency": "USD",
+          "qualifier": "approximately",
+          "amountAsStated": "$2.26 billion at October 2024 loan closing, including $1.97 billion principal and $289.7 million estimated capitalized interest",
+          "currencyBasis": "stated"
+        },
+        "effectiveNotBefore": "2024-10-28",
+        "effectiveNoLaterThan": "2024-10-28",
+        "sourceId": "src-doe-thacker-pass-2024",
+        "locator": "DOE project statistics, financial summary, loan amount and October 2024 update",
+        "reason": "original",
+        "note": "Executed direct loan initially totaled approximately $2.26 billion including capitalized interest, not a separate loan from later amendments.",
+        "effectiveNotBeforeEvidence": {
+          "sourceId": "src-sec-lac-thacker-loan-agreement-2024",
+          "locator": "Executed loan agreement — October 28, 2024 agreement date"
+        },
+        "effectiveNoLaterThanEvidence": {
+          "sourceId": "src-sec-lac-thacker-loan-agreement-2024",
+          "locator": "Executed loan agreement — October 28, 2024 agreement date"
+        }
+      },
+      {
+        "amount": {
+          "value": "2230000000",
+          "currency": "USD",
+          "qualifier": "approximately",
+          "amountAsStated": "$2.23 billion amended expected loan amount ($1.97 billion principal plus approximately $256 million capitalized interest)",
+          "currencyBasis": "stated"
+        },
+        "effectiveNotBefore": "2025-10-07",
+        "effectiveNoLaterThan": "2025-10-20",
+        "sourceId": "src-sec-lac-doe-amendment-announcement-2025-10-07",
+        "locator": "Form 8-K Item 1.01 and Exhibit 99.1; Q2 2026 Form 10-Q Note 4 for first draw October 20",
+        "reason": "amendment",
+        "note": "Signed October 7, 2025 subject to conditions precedent; exact effective day unverified. Initial October 20 advance establishes the amendment effective no later than then. Withhold historical amount selection for October 7–19.",
+        "effectiveNotBeforeEvidence": {
+          "sourceId": "src-sec-lac-doe-amendment-announcement-2025-10-07",
+          "locator": "Form 8-K Item 1.01 — agreement entered October 7, 2025; conditions precedent to effectiveness"
+        },
+        "effectiveNoLaterThanEvidence": {
+          "sourceId": "src-sec-lac-thacker-q2-2026",
+          "locator": "Form 10-Q Note 4 / MD&A — first DOE loan advance October 20, 2025"
+        }
+      }
+    ]
   },
   {
     "id": "fin-us-dow-5n-germanium-2025",

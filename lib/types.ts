@@ -664,6 +664,29 @@ export type MonetaryAmount = {
   basisLabel?: string | null;
 };
 
+/** One sourced amount revision of a single legal instrument, not a new loan or payment.
+ * The operative day may be bounded rather than known exactly. */
+export type FinancialAmountBoundEvidence = {
+  /** Independently registered primary evidence for this operative-date bound. */
+  sourceId: string;
+  locator: string;
+};
+
+export type FinancialAmountVersion = {
+  amount: MonetaryAmount | null;
+  /** Earliest possible day the revision could have become operative. */
+  effectiveNotBefore: string;
+  /** Day by which the revision is independently confirmed operative. */
+  effectiveNoLaterThan: string;
+  /** Primary evidence for the amount, not necessarily both date bounds. */
+  sourceId: string;
+  locator: string;
+  effectiveNotBeforeEvidence: FinancialAmountBoundEvidence;
+  effectiveNoLaterThanEvidence: FinancialAmountBoundEvidence;
+  reason: "original" | "amendment" | "correction" | "withdrawal" | "other";
+  note: string | null;
+};
+
 /**
  * Where a funded project or facility is. Deliberately not the actor taxonomy:
  * a project can sit in a country the tracker does not follow.
@@ -809,6 +832,9 @@ export type FinancialCommitment = {
   capitalSource: CapitalSource;
   /** Null when the source states no amount, e.g. a rate-based tax credit. */
   amount: MonetaryAmount | null;
+  /** Optional audited versions of this SAME facility. Omission means history unreviewed;
+   * last version must match current amount. Current-only consumers remain unchanged. */
+  financialAmountHistory?: FinancialAmountVersion[];
   /** Normalized name of whoever provides the money; null when not stated. */
   provider: string | null;
   /** The tracked actor behind the provider (actor taxonomy, not a location). */
