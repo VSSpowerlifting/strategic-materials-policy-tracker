@@ -1296,6 +1296,30 @@
     "notes": "Full three-page company-hosted original PDF read on 3 October 2026. The document is dated 31 August despite its September upload directory. The opening paragraphs say the project-interest transaction still requires shareholder consent and regulatory approvals, including final TSX Venture Exchange approval. Its completed C$23 million expenditure requirement does not establish that the conditional transfer is complete or disclose payments under JOGMEC's newer SPC equity commitment."
   },
   {
+    "id": "src-neo-aif-2025-jtf-nov2024-amendment",
+    "title": "Neo Performance Materials — 2024 Annual Information Form, Narva JTF amendment (reported March 2025)",
+    "publisher": "Neo Performance Materials Inc.",
+    "url": "https://www.neomaterials.com/wp-content/uploads/2025/03/Neo-AIF-2025-vF.pdf",
+    "language": "en",
+    "datePublished": "2025-03-18",
+    "dateAccessed": "2026-10-09",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "2024 Annual Information Form, printed p. 9 / PDF page 10. Neo reports its same Narva JTF grant was amended in November 2024, increasing grant rate from 18.75% to 23.3% while eligible project size decreased to €63.3M; revised support approximately €14.7M vs original up to €18.7M. This establishes amendment MONTH, not exact effective day. Financial report publication March 18, 2025, not November 2024."
+  },
+  {
+    "id": "src-ec-estonia-neo-narva-jtf-147",
+    "title": "European Commission Representation in Estonia — Neo Narva magnet factory JTF support",
+    "publisher": "European Commission, Representation in Estonia",
+    "url": "https://estonia.representation.ec.europa.eu/strateegia-ja-prioriteedid/eli-eelarve-eesti-jaoks/elu-edeneb-euroopa-liidu-eelarve-toel/neo-perfomance-materials-magnetitehase-rajamine_et",
+    "language": "et",
+    "datePublished": null,
+    "dateAccessed": "2026-10-09",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "The Estonian-language Commission project page states 'Euroopa Liidu õiglase ülemineku fond toetas tehase rajamist 14,7 miljoni euroga' (the EU Just Transition Fund supported plant construction with €14.7M). This confirms a separately reported €14.7M support figure, not when the 2024 award amendment was executed, whether money was fully disbursed, or why Neo's March 2026 AIF uses approximately €14.8M. No reliably identified publication date on the page."
+  },
+  {
     "id": "src-neo-aif-2026",
     "title": "Annual Information Form for the year ended December 31, 2025",
     "publisher": "Neo Performance Materials Inc.",
