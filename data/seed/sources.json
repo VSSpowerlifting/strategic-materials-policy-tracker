@@ -1308,6 +1308,18 @@
     "notes": "2024 Annual Information Form, printed p. 9 / PDF page 10. Neo reports its same Narva JTF grant was amended in November 2024, increasing grant rate from 18.75% to 23.3% while eligible project size decreased to €63.3M; revised support approximately €14.7M vs original up to €18.7M. This establishes amendment MONTH, not exact effective day. Financial report publication March 18, 2025, not November 2024."
   },
   {
+    "id": "src-eis-npm-narva-jtf-project-grant",
+    "title": "Estonian Business and Innovation Agency (EIS) — supported projects: Magnetitehas Narva (NPM Narva OÜ)",
+    "publisher": "Ettevõtluse ja Innovatsiooni Sihtasutus (Estonian Business and Innovation Agency)",
+    "url": "https://eis.ee/toetatud-projektid/?grant_size_from=0&grant_size_to=30000000&recipient=&s%5Bprogram%5D=ida-viru-ettev-tluse-investeeringute-toetus&s%5Byear%5D=all&sort=project_recipient%3Aasc",
+    "language": "et",
+    "datePublished": null,
+    "dateAccessed": "2026-10-09",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Official EIS Ida-Viru investment-support grant-results entry for 'Magnetitehas Narva': beneficiary explicitly NPM Narva OÜ, registration 16493223; support amount €14,790,898.00; eligible project cost €63,327,184.00; funding source Õiglase ülemineku fond (Just Transition Fund); support-decision YEAR shown 2022, not a day. This is a project grant register snapshot, not the original signed grant contract, the November 2024 amendment-effective date, an official disbursement ledger, or evidence that Neo Performance parent is the legal grantee."
+  },
+  {
     "id": "src-ec-estonia-neo-narva-jtf-147",
     "title": "European Commission Representation in Estonia — Neo Narva magnet factory JTF support",
     "publisher": "European Commission, Representation in Estonia",
