@@ -89,3 +89,16 @@ data/candidates/*.json
 
 # Read-only EXIM Actions reliability receipts; no monitor identity state.
 .monitor-exim-reliability/
+
+# Separate missing-schedule watchdog receipts; never scanner memory.
+.monitor-exim-watchdog/
+
+# DOE CMEI manual-only preflight evidence; not a monitored state.
+.monitor-doe-preflight/
+# Manual DOE structured-source admission evidence (not persistent monitor state)
+.monitor-doe-structured/
+# Nonpersistent DOE experimental source-body diagnostics (no scanner state)
+.monitor-doe-body-proof/
+
+# Local M3 execution-evidence human reviews and source notes (never in git)
+.project-execution-review/

@@ -1,0 +1,49 @@
+# M2.5: manual-only official DOE CMEI publisher-template forensics.
+# Does NOT activate a collector or write any published/private record.
+name: SMPT DOE CMEI source provenance preflight
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smpt-doe-cmei-one-off-preflight
+  cancel-in-progress: false
+
+jobs:
+  provenance:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Probe DOE publisher HTML and bounded primary-source article sample
+        run: npm run monitor:probe-doe-cmei
+      - name: Archive public provenance diagnostics only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-doe-cmei-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .monitor-doe-preflight/report.json
+            .monitor-doe-preflight/summary.md
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Summarize qualified evidence, never claim source activation
+        if: always()
+        run: |
+          if test -s .monitor-doe-preflight/summary.md; then
+            cat .monitor-doe-preflight/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No usable DOE primary-source forensics were produced." >> "$GITHUB_STEP_SUMMARY"
+          fi

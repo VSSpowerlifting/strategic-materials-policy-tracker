@@ -14,13 +14,20 @@
     "audit:lifecycle": "tsx scripts/audit-lifecycle.ts",
     "monitor:pilot": "tsx scripts/monitor-sources.ts",
     "monitor:probe-m2": "tsx scripts/probe-m2-sources.ts",
+    "monitor:probe-doe-cmei": "tsx scripts/probe-doe-cmei.ts",
+    "monitor:probe-doe-structured": "tsx scripts/probe-doe-structured.ts",
+    "monitor:probe-doe-body": "tsx scripts/probe-doe-body.ts",
     "monitor:exim": "tsx scripts/monitor-exim.ts",
     "audit:exim": "tsx scripts/audit-exim-reliability.ts",
-    "editorial:inbox": "tsx scripts/editorial-inbox.ts"
+    "audit:exim-schedule": "tsx scripts/check-exim-schedule.ts",
+    "editorial:inbox": "tsx scripts/editorial-inbox.ts",
+    "audit:project-execution": "tsx scripts/audit-project-execution.ts",
+    "audit:project-execution-pilot": "tsx scripts/audit-project-execution-pilot.ts",
+    "audit:project-execution-adjudications": "tsx scripts/audit-project-execution-adjudications.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "next": "16.2.9",
+    "next": "16.4.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "tailwind-merge": "^3.6.0"
@@ -31,7 +38,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "16.4.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "review-m3-2-alcoa-wagerup",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null
+  },
+  {
+    "id": "review-m3-2-cyclic-extended-operations",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null
+  },
+  {
+    "id": "review-m3-2-inl-demonstration",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null
+  },
+  {
+    "id": "review-m3-2-stibnite-burntlog",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null
+  }
+]
