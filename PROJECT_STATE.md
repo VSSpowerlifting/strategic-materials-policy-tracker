@@ -1,6 +1,13 @@
 # Project state
 
-## 2026-10-08: F4-A Thacker Pass dated-amount pilot (proposed review)
+## 2026-10-09: F4-B1 historical amount coverage audit candidate
+
+- **F4-A is merged:** PR #88 squash SHA `f2dfc4b`. It introduced a single Thacker Pass versioned amount history, separately sourced operative date bounds and source-publication date repair, without changing current totals.
+- **Current F4 coverage:** 96 financial rows, of which 74 have `valueRole: commitment`; one row has structured historical amount versions and 95 remain `history_unreviewed`. These are coverage counts, not historical capital totals.
+- **This F4-B1 candidate adds only a deterministic read-only** `npm run audit:f4 [-- --json]`, pure exhaustive coverage inventory and four registered-evidence-linked editorial review questions (Perpetua DPA, Neo JTF Estonia, Army/DOTC OTIA, Rhyolite Ridge). All are *triage only*; no amount/version/source/finance seed edits, source approval or capital summation. Output explicitly marks historical totals `not_authorized`.
+- **Next gate:** exact-head production dependency audit, validate/typecheck/lint/full tests/Next build, human review/merge. Later F4-B2 may source-review one instrument at a time; F4-C as-of totals/API/UI stay blocked. Details: `docs/research/f4-b-historical-financing-coverage-2026-10-09.md`.
+
+## 2026-10-08: F4-A Thacker Pass dated-amount pilot (merged in #88)
 
 - Introduces optional, strict, source-linked **financialAmountHistory** and an opt-in pure `financialAmountOn` query; legacy records explicitly return `history_unreviewed` and current totals are unchanged. One reviewed loan: **Thacker Pass ~US$2.26B original 2024-10-28** versus **~US$2.23B amended 2025**.
 - [October 8 2025 SEC 8-K filing](https://www.sec.gov/Archives/edgar/data/1966983/000119312525233937/d10878d8k.htm) states amendment effectiveness depended on conditions precedent, with first advance October 20. The exact operative transition day is not proven: **October 7–19 historical requests fail closed as `indeterminate_transition`**, not an invented October 7 effective date.
