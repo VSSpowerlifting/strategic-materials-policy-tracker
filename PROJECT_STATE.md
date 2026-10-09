@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-09: F4-B3: Neo Estonia JTF amount reconciliation (stacked source-review candidate)
+
+- **Proven:** Neo's 2024 Annual Information Form, printed p. 9, explicitly reports one Estonia JTF grant amendment **during November 2024** (original up-to **€18.7M** → approximately **€14.7M**; grant rate **18.75% → 23.3%** on decreased eligible project size **€63.3M**). Exact legal day remains unknown. An independent European Commission Estonia narrative also cites **€14.7M** in JTF support, but does **not** prove full payout.
+- **Conflict:** Neo's 2025 AIF instead describes the same grant as approximately **€14.8M** at a rounded **23%** rate. It is not proven whether this €100K display difference is rounding, estimate drift or a later legal revision; it cannot be fabricated as an independent amendment. Dates of publication are separate from amendment activity.
+- **This F4-B3 source-only candidate:** registers original issuer/EC evidence, adds source-scoped Neo financing-row locators and notes, updates F4 triage, and adds a machine-readable **`history_promotion_blocked`** reconciliation and CI tests. Preserves current **€14.8M** amount, existing financial status and all totals; **no Neo `financialAmountHistory`**, extra grant, status/transfer inference, historical totals or public UI.
+- **Stacked on F4-B2 PR #105**, which was open at task start. Review #105 and merge separately first; then retarget this narrowly scoped branch against updated main and run exact-head CI. Detailed handoff: `docs/research/f4-b3-neo-estonia-grant-reconciliation-2026-10-09.md`.
+- **Next evidence gate:** find signed Estonian award amendment (possibly through RTK/state grant register) to confirm legal beneficiary, precise amount and operative day, then adjudicate €14.7M vs €14.8M before permitting F4-B4 version promotion. F4-C totals remain blocked.
+
 ## 2026-10-09: F4-B2 Perpetua DPA TIA operative award ceiling (candidate review)
 
 - The historical amount coverage auditor in F4-B1 **landed in #104, merge `d0fd8a8`**. At baseline, just one of 96 financing rows had structured amount history; F4-B2 proposes a second reviewed record, bringing candidate branch coverage to 2/96 (still not complete historical capital).
