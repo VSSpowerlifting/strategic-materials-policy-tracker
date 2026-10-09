@@ -1,0 +1,42 @@
+[
+  {
+    "recordId": "fin-us-dod-perpetua-stibnite-dpa",
+    "priority": 1,
+    "reviewQuestion": "Does the December 2022 $24.8M TIA and May 2, 2024 additional $34.4M belong to one amended agreement, and can each historical amount and operative day be independently supported by the executed/issuer sources?",
+    "evidenceSourceIds": [
+      "src-perpetua-sec-dpa-2022",
+      "src-perpetua-sec-2024-q2"
+    ],
+    "limitation": "Currently recorded $59.2M is the amended ceiling, not $59.2M plus $24.8M. The directly relevant May 2, 2024 issuer Form 8-K must be separately registered and checked before amount-version promotion. Grant receipts are not versions."
+  },
+  {
+    "recordId": "fin-eu-jtf-2025-neo-magnet-project",
+    "priority": 2,
+    "reviewQuestion": "Is the original 2022 up-to-€18.7M award the same grant contract as the later approximately €14.8M at a 23% rate, and what primary document establishes the actual revision-effective date?",
+    "evidenceSourceIds": [
+      "src-neo-jtf-award-2022",
+      "src-neo-aif-2026"
+    ],
+    "limitation": "Original announcement and 2026 retrospective reporting do not by themselves identify the binding grant amendment day. Different up_to versus approximately qualifiers matter; US-dollar receipts are not grant face amounts."
+  },
+  {
+    "recordId": "fin-us-army-perpetua-antimony-otia",
+    "priority": 3,
+    "reviewQuestion": "Trace the original 2023 up-to-$15.5M OTIA through each additional award to its later approximately $27.1M estimate; determine independently supported operative bounds and whether estimate/ceiling qualifiers changed.",
+    "evidenceSourceIds": [
+      "src-perpetua-sec-dotc-2023",
+      "src-perpetua-sec-2026-q2"
+    ],
+    "limitation": "Do not equate amended estimated value with cash reimbursed or assume every new tranche was automatically operative on the announcement date. This Army OTIA is distinct from the separate DPA TIA."
+  },
+  {
+    "recordId": "fin-us-doe-rhyolite-ridge-guarantee-2025",
+    "priority": 4,
+    "reviewQuestion": "Determine whether January 2023 conditional DOE support and the January 2025 closed $996M guarantee meet the same-instrument continuity standard for amount history or instead represent a pre-closing indication superseded at binding close.",
+    "evidenceSourceIds": [
+      "src-doe-ioneer-rhyolite-2025-close",
+      "src-sec-ioneer-rhyolite-close-2025"
+    ],
+    "limitation": "Conditional commitment is not automatically a historical executed guarantee. Do not create an original-version amount until legal identity, treatment of the replaced conditional package, and source-effective boundaries are established."
+  }
+]
