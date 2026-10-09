@@ -236,3 +236,18 @@ test("Stibnite original-source registration uses actual access receipt without b
   assert.ok(source.notes?.includes("nonbinding"),"do not mislabel conditional EXIM financing");
   assert.equal(getAllProjectMilestones().length,0,"primary source is not signed milestone approval");
 });
+
+test("Project-native empty finance links cannot hide an existing same-source financial implementation observation", () => {
+  const hidden=q();
+  hidden[0].relatedFinanceIds=[];
+  assert.match(audit(hidden).errors.join(" | "),
+    /project-native review cannot omit existing matching finance\/source observations/);
+  const funded=q();
+  funded[1].relatedFinanceIds=[];
+  assert.match(audit(funded).errors.join(" | "),
+    /funded_activity review requires an actual source-linked finance observation/);
+  const independent=q();
+  const stibnite=independent.find(x=>x.id==="review-m3-2-stibnite-early-works")!;
+  assert.deepEqual(stibnite.relatedFinanceIds,[]);
+  assert.deepEqual(audit(independent).errors,[]);
+});
