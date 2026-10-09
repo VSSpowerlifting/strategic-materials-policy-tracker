@@ -2,12 +2,14 @@
   {
     "recordId": "fin-eu-jtf-2025-neo-magnet-project",
     "priority": 2,
-    "reviewQuestion": "Is the original 2022 up-to-€18.7M award the same grant contract as the later approximately €14.8M at a 23% rate, and what primary document establishes the actual revision-effective date?",
+    "reviewQuestion": "Neo's 2024 AIF explicitly dates a SAME-grant revision to November 2024 (18.75%→23.3%; approximately €14.7M); EC Estonia also reports €14.7M, but 2026 AIF calls the amount approximately €14.8M at a rounded 23%. Establish the actual amendment-effective day and exact signed award amount; determine whether €14.7M vs €14.8M is mere precision/rounding or legally revised support, rather than inventing a later amendment.",
     "evidenceSourceIds": [
       "src-neo-jtf-award-2022",
+      "src-neo-aif-2025-jtf-nov2024-amendment",
+      "src-ec-estonia-neo-narva-jtf-147",
       "src-neo-aif-2026"
     ],
-    "limitation": "Original announcement and 2026 retrospective reporting do not by themselves identify the binding grant amendment day. Different up_to versus approximately qualifiers matter; US-dollar receipts are not grant face amounts."
+    "limitation": "Known amendment MONTH only, November 2024 (possible day interval November 1–30), not legal day. 2025 AIF says approx €14.7M, Commission also €14.7M; March 2026 AIF says approx €14.8M, which is current canonical. Different amount precision cannot be promoted as a separate signed agreement without an actual amendment instrument or authoritative reconciliation. No historical amount versions or grant-paid assertions authorized; US$8.4M receipts are distinct."
   },
   {
     "recordId": "fin-us-army-perpetua-antimony-otia",
