@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 
 import reconciliation from "@/research/f4/neo-jtf-amount-reconciliation.json";
 import queue from "@/research/f4/amount-history-review-queue.json";
-import { financialAmountOn } from "@/lib/capital-control";
+import { financialAmountOn, totalCommitments } from "@/lib/capital-control";
 import { auditF4AmountCoverage } from "@/lib/f4-amount-coverage";
 import { getAllFinancialCommitments, getAllSources, getFinancialCommitmentById } from "@/lib/data";
 
@@ -90,4 +90,18 @@ test("F4-B3: no undocumented cash or additional legal grant is inferred", () => 
     "EC project narrative cannot source a paid / disbursed status");
   assert.ok(!row.financialAmountHistory);
   assert.ok(reconciliation.reconciliation.requiredBeforePromotion.some(x=>x.includes("reimbursement")));
+});
+
+test("F4-B3: provenance enrichment does not alter canonical financial accounting", () => {
+  const all = getAllFinancialCommitments();
+  const reviewed = getFinancialCommitmentById(id)!;
+  const withoutResearch = structuredClone(reviewed);
+  withoutResearch.evidence = withoutResearch.evidence.filter(e =>
+    e.sourceId !== amendment && e.sourceId !== commission);
+  const after = totalCommitments([reviewed], all);
+  const before = totalCommitments([withoutResearch], all);
+  assert.deepEqual(after, before, "adding historical evidence cannot alter present money totals");
+  const eur = after.currencies.find(x => x.currency === "EUR");
+  assert.ok(eur && eur.status === "summed");
+  assert.deepEqual(eur.countedIds, [id]);
 });
