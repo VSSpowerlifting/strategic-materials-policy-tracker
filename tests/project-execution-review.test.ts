@@ -122,3 +122,31 @@ test("pilot audit CLI is deterministic, parseable and does not publish", () => {
   assert.deepEqual(parsed.errors, []);
   assert.equal(first, formatPilotAudit(audit()));
 });
+
+test("M3.2 whole_project null scope is structurally valid without inventing a project component", () => {
+  const rows = q();
+  // Synthetic structural fixture; the Alcoa issuer statement has NOT been
+  // editorially adjudicated as a whole-project claim.
+  rows[0].scopeProposal = "whole_project";
+  rows[0].scopeAsStated = null as never;
+  const result = audit(rows);
+  assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
+  assert.equal(result.status, "non_publication_editorial_queue");
+  assert.equal(getAllProjectMilestones().length, 0);
+});
+
+test("M3.2 incompatible scope/name pairs still fail closed in both directions", () => {
+  const whole = q();
+  whole[0].scopeProposal = "whole_project";
+  assert.match(audit(whole).errors.join(" | "), /whole_project requires scopeAsStated: null/);
+
+  const narrow = q();
+  narrow[0].scopeAsStated = null as never;
+  assert.match(audit(narrow).errors.join(" | "),
+    /named facility, funded activity and taxonomy-held scopes require a bounded scopeAsStated/);
+
+  const held = q();
+  held[3].scopeAsStated = null as never;
+  assert.match(audit(held).errors.join(" | "),
+    /taxonomy-held scopes require a bounded scopeAsStated/);
+});

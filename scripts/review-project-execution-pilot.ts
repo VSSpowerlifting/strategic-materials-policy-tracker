@@ -15,7 +15,7 @@ export const M3_2_REVIEW_GATES = ["human_source_review", "taxonomy_blocked"] as 
 
 type PilotRow = {
   id: string; projectId: string; sourceId: string; kindProposal: string;
-  scopeProposal: string; scopeAsStated: string;
+  scopeProposal: string; scopeAsStated: string | null;
   claimMode: "occurred" | "planned"; occurredOn: string | null; targetOn: string | null;
   statementOriginal: string; statementEn: string; statementEnSource: string;
   locator: string; relatedFinanceIds: string[];
@@ -115,8 +115,15 @@ export function auditProjectExecutionPilot(
       fail("proposed occurrence postdates curated corpus cutoff");
     if (isMilestoneIsoDate(r.occurredOn) && boundary && r.occurredOn > boundary.date)
       fail("occurred date postdates source evidence boundary");
-    if (!textPresent(r.scopeAsStated) || r.scopeAsStated.length > 250)
-      fail("explicit bounded project component/activity name required");
+    // Match the published ProjectMilestone contract exactly: a whole-project
+    // assertion must carry null, while every narrower scope needs a named part.
+    // This validates structure only; it never authorizes broad source claims.
+    if (r.scopeProposal === "whole_project") {
+      if (r.scopeAsStated !== null)
+        fail("whole_project requires scopeAsStated: null");
+    } else if (!textPresent(r.scopeAsStated) || r.scopeAsStated.length > 250) {
+      fail("named facility, funded activity and taxonomy-held scopes require a bounded scopeAsStated");
+    }
     if (!textPresent(r.kindProposal) || !textPresent(r.scopeProposal))
       fail("proposed kind and scope are required");
     if (!textPresent(r.statementOriginal) || !textPresent(r.statementEn) ||
