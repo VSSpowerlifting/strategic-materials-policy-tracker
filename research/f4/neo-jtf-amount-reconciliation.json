@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "f4-b3-neo-jtf-amount-evidence-v1",
+  "recordId": "fin-eu-jtf-2025-neo-magnet-project",
+  "determination": "history_promotion_blocked",
+  "amendment": {
+    "establishedMonth": "2024-11",
+    "earliestPossibleDate": "2024-11-01",
+    "latestPossibleDate": "2024-11-30",
+    "exactOperativeDayEstablished": false,
+    "supportingSourceId": "src-neo-aif-2025-jtf-nov2024-amendment",
+    "sourceLocator": "2024 AIF, printed p. 9 / PDF page 10, Rare Earth Magnet Plant in Europe",
+    "interpretation": "Issuer explicitly reports a revision within November 2024, but gives no day and has not supplied an executed government decision/amendment for independent verification."
+  },
+  "reportedAmounts": [
+    {
+      "sourceId": "src-neo-jtf-award-2022",
+      "asReported": "up to €18.7 million",
+      "eurValue": "18700000",
+      "qualifier": "up_to",
+      "observation": "original_award_2022"
+    },
+    {
+      "sourceId": "src-neo-aif-2025-jtf-nov2024-amendment",
+      "asReported": "approximately €14.7 million at 23.3% for eligible project costs €63.3 million",
+      "eurValue": "14700000",
+      "qualifier": "approximately",
+      "observation": "amended_grant_reported_2025"
+    },
+    {
+      "sourceId": "src-ec-estonia-neo-narva-jtf-147",
+      "asReported": "14,7 miljoni euroga",
+      "eurValue": "14700000",
+      "qualifier": "approximately",
+      "observation": "public_institution_support_description"
+    },
+    {
+      "sourceId": "src-neo-aif-2026",
+      "asReported": "approximately €14.8 million at 23% grant rate",
+      "eurValue": "14800000",
+      "qualifier": "approximately",
+      "observation": "latest_canonical_2026"
+    }
+  ],
+  "reconciliation": {
+    "discrepancyEUR": "100000",
+    "outcome": "not_adjudicated",
+    "precisionIssue": "A 23.3% rate of €63.3M gives €14.7489M before rounding; inputs themselves are rounded, so this calculation cannot establish an exact contract ceiling or prove a new amendment.",
+    "currentCanonicalValue": "14800000",
+    "requiredBeforePromotion": [
+      "Estonian government grant amendment or decision identifying exact effective date and amended legal ceiling, OR an independently reviewable primary-source explanation of the effective-day bounds.",
+      "Source-backed explanation whether €14.7M and €14.8M are different report rounding/estimating of one amended award versus successive legally distinct award ceilings.",
+      "Separate legal award face value from reimbursement received, project cost, EDC financing and grant rate.",
+      "Independent human approval of proposed historical version windows, with the latest version exactly matching the canonical current amount."
+    ]
+  },
+  "noPromotion": true,
+  "historicalTotalsAuthorized": false
+}
