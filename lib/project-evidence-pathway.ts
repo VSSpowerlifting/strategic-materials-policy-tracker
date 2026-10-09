@@ -281,7 +281,7 @@ export function buildProjectEvidencePathway(
       "Policy contexts here parent existing finance or designation records; a shared material or date never creates a causal edge.",
       "Coannounced controls are announcement siblings only, not project-specific restrictions or effects.",
       "Direct project attribution and nonallocative association are different. No individual monetary allocation, financial sum or payment conclusion is authorized.",
-      "Financing statuses are recorded at this corpus revision. Legacy implementation observations require scoped review and are not project-native milestones.",
+      "Financing statuses describe the current corpus revision. Legacy implementation observations require scoped review and are not project-native milestones.",
       "A milestone's event/target date, publication/access horizon and reviewer date are separate. A planned target is not automatically occurred.",
       "An absent reviewed milestone means no approved entry in SMPT, not that the facility is inactive or failed.",
     ],
