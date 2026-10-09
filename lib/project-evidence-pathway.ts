@@ -10,7 +10,7 @@
 import {
   auditEvidencePathways, type PathwayEdge, type PathwayInputs,
 } from "./evidence-pathway-contract";
-import type { PolicyEvent, Source } from "./types";
+import type { PolicyEvent } from "./types";
 
 const lex = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0;
 
