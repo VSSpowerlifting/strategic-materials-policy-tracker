@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-09: F5-0 evidence pathway contract (review candidate)
+
+- Launches the long-term **F5 Policy-to-Industrial Outcome Observatory** under [epic #108](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/issues/108). [F5-0 #109](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/issues/109) is the evidence foundation; F5-1 milestone pilots and F5-2 typed project graph are separate follow-on review gates.
+- Adds pure, read-only `auditEvidencePathways` and `npm run audit:pathways [-- --json]` to count explicitly typed **event→finance/control/designation**, **finance→project direct vs nonallocative**, **designation→project**, **reviewed native milestone→project** and **finance part-of/drawn-from** links. All carry source IDs and observation dates and explicitly `causalEffect: not_asserted`, with no amount or historical sums.
+- Live baseline (October 9): **65 events, 96 financial rows, 45 control measures, 76 projects, 33 designations, and 0 published project-native milestones**. These counts are dynamic CLI outputs, not fixed logic. Preexisting legacy financial-row implementation observations remain **unreviewed**, not automatically physical milestones; missing milestones do not mean no industrial activity.
+- **Non-goals:** no new factual/published seed rows, no approvals or edits to grants/controls, no automated causal claims or policy-impact score, no inferred project monetary allocation or as-of sums, no public pages/API/export, no source-monitor or scheduling changes. Documentation: `docs/analysis/f5-0-evidence-pathway-contract-2026-10-09.md`.
+- **Approval:** strict test suite covers determinism, unresolved refs, evidence provenance, nonallocative associations, milestones and CLI; exact-head validate/typecheck/lint/full tests/build/audit required; no merge/deploy without maintainer review.
+
 ## 2026-10-09: F4-B4 current Neo Narva legal grantee (candidate for review)
 
 - **F4-B3 source-evidence PR #106 merged** as `c9c4bfe`. The Ministry of Finance JTF-2/2025 audit (project 2021-2027.6.01.22-0002, printed pp. 3 and 7) and EIS official grant register independently identify **NPM Narva OÜ (reg. 16493223)** as the **current** beneficiary, whereas existing SMPT finance record named group sponsor **Neo Performance**. The 2023 decision reassigned **95%** of original NPM Silmet OÜ grant project activity/budget to NPM Narva, leaving Silmet a partner.
