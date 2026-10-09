@@ -1,3 +1,10 @@
+## 2026-10-09: F5-1c Stibnite source registration + project-native reviewer path (pending merge)
+
+- Independent original issuer web source [Perpetua October 21, 2025](https://perpetuaresources.com/perpetua-resources-breaks-ground-on-the-stibnite-gold-project/) is recorded as `src-perpetua-stibnite-early-works-2025`, with truthful **October 9, 2026** access, genuine 2025 publication date, and explicit issuer/provenance limitations. `site.lastUpdated` intentionally proposes **2026-10-09** for human review as a *curated source revision only*.
+- Canonical unsigned M3 `review-m3-2-stibnite-early-works` links the narrowly quoted initial **early-works** construction on October 21, 2025 to `prj-us-stibnite`, with `whole_project/null` scope subject to a real editor's determination, distinct from **May 30, 2026 Burntlog Route** and with `relatedFinanceIds: []` because no existing finance-row implementation record cites this original announcement. No invented cash flow/EXIM commitment or industrial output.
+- M3 queue audit now permits empty sorted finance references **only as an independent original-source project milestone**, preserving all existing strict same-project/source checks for populated finance refs. The F5 source research entry is a pointer to M3, not its own approval mechanism. Six M3 review candidates remain unsigned, four F5 pilot source cases remain human-held, and public `project-milestones.json` remains empty.
+- This is stacked on green #120, must remain separate from automatic milestone publication, and requires explicit maintainer scrutiny of source/corpus-date changes at merge. Original-source and manual editorial attestation remain future actions. See `docs/analysis/f5-1-pilot-review-readiness-2026-10-09.md` for full handoff.
+
 ## 2026-10-09: F5-1b canonical Neo/Narva human-review intake (candidate)
 
 - Promotes **only the unreviewed review-queue placement** of Neo's September 14, 2026 commercial-production issuer claim into the existing M3.2 workflow: `review-m3-2-neo-narva-magnets`. The F5 research packet now references this same queue row, rather than carrying a second candidate approval route.
