@@ -11,6 +11,7 @@ const id = "fin-eu-jtf-2025-neo-magnet-project";
 const amendment = "src-neo-aif-2025-jtf-nov2024-amendment";
 const commission = "src-ec-estonia-neo-narva-jtf-147";
 const later = "src-neo-aif-2026";
+const eis = "src-eis-npm-narva-jtf-project-grant";
 
 test("F4-B3: Neo history remains blocked while amended values differ", () => {
   const row = getFinancialCommitmentById(id)!;
@@ -44,14 +45,14 @@ test("F4-B3: November 2024 is a bounded reported month, not a made-up operative 
   assert.ok(reconciliation.reconciliation.requiredBeforePromotion.length >= 3);
 });
 
-test("F4-B3: four source observations remain distinct, with contemporaneous and later values intact", () => {
+test("F4-B3: five source observations distinguish original, issuer, Commission, official EIS, and latest values", () => {
   const sourceIds = reconciliation.reportedAmounts.map(x=>x.sourceId);
-  assert.equal(new Set(sourceIds).size, 4);
+  assert.equal(new Set(sourceIds).size, 5);
   assert.deepEqual(reconciliation.reportedAmounts.map(x=>x.eurValue), [
-    "18700000", "14700000", "14700000", "14800000",
+    "18700000", "14700000", "14700000", "14790898", "14800000",
   ]);
   assert.deepEqual(reconciliation.reportedAmounts.map(x=>x.qualifier), [
-    "up_to", "approximately", "approximately", "approximately",
+    "up_to", "approximately", "approximately", "exact", "approximately",
   ]);
   const registered = new Map(getAllSources().map(x=>[x.id,x]));
   const row = getFinancialCommitmentById(id)!;
@@ -67,6 +68,8 @@ test("F4-B3: four source observations remain distinct, with contemporaneous and 
     "keep official Estonian-language evidence identified accurately, not as English");
   assert.equal(registered.get(commission)?.datePublished, null,
     "unknown European Commission web publication date must not be fabricated");
+  assert.equal(registered.get(eis)?.language, "et");
+  assert.equal(registered.get(eis)?.datePublished, null);
   assert.equal(registered.get(later)?.url,
     "https://www.neomaterials.com/wp-content/uploads/2026/03/NPM-AIF-2026.pdf");
 });
@@ -99,11 +102,36 @@ test("F4-B3: provenance enrichment does not alter canonical financial accounting
   const reviewed = getFinancialCommitmentById(id)!;
   const withoutResearch = structuredClone(reviewed);
   withoutResearch.evidence = withoutResearch.evidence.filter(e =>
-    e.sourceId !== amendment && e.sourceId !== commission);
+    e.sourceId !== amendment && e.sourceId !== commission && e.sourceId !== eis);
   const after = totalCommitments([reviewed], all);
   const before = totalCommitments([withoutResearch], all);
   assert.deepEqual(after, before, "adding historical evidence cannot alter present money totals");
   const eur = after.currencies.find(x => x.currency === "EUR");
   assert.ok(eur && eur.status === "summed");
   assert.deepEqual(eur.countedIds, [id]);
+});
+
+test("F4-B3: official EIS register is source-backed award amount, NOT amendment timing or cash", () => {
+  const row = getFinancialCommitmentById(id)!;
+  const verified = reconciliation.reconciliation.officialProjectRegister;
+  assert.equal(verified.awardAmountEUR, "14790898");
+  assert.equal(verified.beneficiary, "NPM Narva OÜ");
+  assert.equal(verified.beneficiaryRegistration, "16493223");
+  assert.equal(verified.eligibleProjectCostEUR, "63327184");
+  assert.equal(verified.currentAwardSnapshotNotOperativeHistoricalVersion, true);
+  assert.equal(verified.legalGranteeIdentityReviewRequired, true);
+  assert.equal(verified.distanceFromCanonicalRoundedEUR, "9102");
+  assert.equal(verified.distanceFromEarlier147EstimateEUR, "90898");
+  assert.equal(row.recipient, "Neo Performance",
+    "existing parent recipient must not silently be rewritten without a separate legal-entity review");
+  assert.deepEqual(row.recipientOrgIds, ["org-neo-performance"]);
+  assert.equal(row.amount?.value, "14800000");
+  assert.equal(row.financialAmountHistory, undefined);
+  const citation = row.evidence.find(e => e.sourceId === eis)!;
+  assert.ok(citation.supports.includes("amount"));
+  assert.ok(!citation.supports.includes("recipient"),
+    "EIS identifies a legal subsidiary, not the currently stated parent-company recipient");
+  assert.ok(!citation.supports.includes("status"),
+    "award listing does not certify disbursement");
+  assert.ok(citation.locator?.includes("14 790 898"));
 });
