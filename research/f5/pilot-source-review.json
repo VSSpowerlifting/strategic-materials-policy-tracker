@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "f5-1-source-review-pilots-v1",
+  "purpose": "Non-publishing source review packet linked to existing M3.2 review system, not an alternate approved fact store",
+  "state": "all_unreviewed_no_publication",
+  "sourceReviewDate": "2026-10-09",
+  "cases": [
+    {
+      "id": "f5-1-alcoa-wagerup-groundbreaking",
+      "projectId": "prj-au-alcoa-sojitz-gallium",
+      "track": "existing_m3_review",
+      "existingReviewId": "review-m3-2-alcoa-wagerup",
+      "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+      "sourceUrl": "https://news.alcoa.com/press-releases/press-release-details/2026/Australia-Japan-the-United-States-and-Alcoa-Break-Ground-on-Gallium-Project-in-Western-Australia/default.aspx",
+      "publishedOn": "2026-08-24",
+      "sourcePublisher": "Alcoa Corporation",
+      "proposal": null,
+      "reviewStatus": "pending_human_review",
+      "editorialDecision": "Re-use M3-2 Alcoa row. One issuer statement underlies 3 financing-row construction observations. Groundbreaking and start of construction refer to the specific gallium production plant, not operational output or paid equity. Do not create a second identical F5 assertion."
+    },
+    {
+      "id": "f5-1-narva-commercial-magnets",
+      "projectId": "prj-ee-neo-rare-earth-magnet-project",
+      "track": "new_review_candidate",
+      "existingReviewId": null,
+      "sourceId": "src-neo-commercial-production-2026",
+      "sourceUrl": "https://www.neomaterials.com/neo-advances-commercial-production-magnet-facility/",
+      "publishedOn": "2026-09-14",
+      "sourcePublisher": "Neo Performance Materials",
+      "proposal": {
+        "kind": "production_reported",
+        "scope": "named_facility",
+        "scopeAsStated": "initial commercial rare-earth magnet manufacturing programs at Neo's European facility in Narva, Estonia",
+        "claimMode": "occurred",
+        "occurredOn": null,
+        "targetOn": null,
+        "statementOriginal": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+        "statementEn": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+        "statementEnSource": "na",
+        "locator": "Opening release paragraph, September 14, 2026",
+        "editorialCaution": "Reported in production as of the release day; precise initial production-start day not stated, so occurredOn remains null. Initial customer program is not evidence that Phase 1B or planned 20,000 tpa expansion operates, nor evidence of 2,000 tonnes actually produced."
+      },
+      "reviewStatus": "pending_human_review",
+      "editorialDecision": "Human to confirm original issuer passage, name of plant and product program, that production_reported suits a reported current state rather than dated start, and scoped interpretation. The source date is an evidence boundary only, not an inferred operations-start date."
+    },
+    {
+      "id": "f5-1-stibnite-burntlog-2026",
+      "projectId": "prj-us-stibnite",
+      "track": "existing_m3_review",
+      "existingReviewId": "review-m3-2-stibnite-burntlog",
+      "sourceId": "src-perpetua-stibnite-construction-2026",
+      "sourceUrl": "https://www.investors.perpetuaresources.com/investors/news/perpetua-resources-advances-construction-of-the-stibnite-gold-project",
+      "publishedOn": "2026-06-01",
+      "sourcePublisher": "Perpetua Resources Corp.",
+      "proposal": null,
+      "reviewStatus": "taxonomy_blocked",
+      "editorialDecision": "Preserve existing M3-2 taxonomy-blocked Burntlog row. 'named_infrastructure' is not a valid current milestone scope; do not invent a new type or mislabel a road as an operating plant. The May 30 2026 Burntlog field work follows October 2025 project early works and is not first mine-wide construction."
+    },
+    {
+      "id": "f5-1-stibnite-earlyworks-2025",
+      "projectId": "prj-us-stibnite",
+      "track": "new_review_candidate",
+      "existingReviewId": null,
+      "sourceId": "src-perpetua-stibnite-early-works-2025",
+      "sourceUrl": "https://perpetuaresources.com/perpetua-resources-breaks-ground-on-the-stibnite-gold-project/",
+      "publishedOn": "2025-10-21",
+      "sourcePublisher": "Perpetua Resources",
+      "proposal": {
+        "kind": "construction_started",
+        "scope": "whole_project",
+        "scopeAsStated": null,
+        "claimMode": "occurred",
+        "occurredOn": "2025-10-21",
+        "targetOn": null,
+        "statementOriginal": "we officially started early works construction today",
+        "statementEn": "we officially started early works construction today",
+        "statementEnSource": "na",
+        "locator": "CEO attributed quotation in October 21, 2025 issuer announcement",
+        "editorialCaution": "The occurred event is *early works construction*, not all plant, mine, production or facility works; 'whole_project' locates the named undertaking, not an assertion that entire undertaking is built. The issuer explicitly said 'today' October 21. Do not conflate financial assurance with paid government money or EXIM contract execution."
+      },
+      "reviewStatus": "pending_source_registration_and_human_review",
+      "editorialDecision": "Original Perpetua issuer announcement is verified at the linked website but NOT registered in the published SMPT source registry. Before human-reviewed promotion, separately register this original issuer Source with actual publication and access dates, validate quote and early-works scope, and attest reviewer identity. Do not infer completion, EXIM binding or a novel funding item."
+    }
+  ]
+}

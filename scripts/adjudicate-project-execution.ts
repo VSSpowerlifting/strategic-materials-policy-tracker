@@ -34,7 +34,7 @@ export type SourceReviewDecision = {
 
 export type PendingProjectExecutionRow = {
   id: string; projectId: string; sourceId: string; kindProposal: string;
-  scopeProposal: string; scopeAsStated: string; claimMode: "occurred" | "planned";
+  scopeProposal: string; scopeAsStated: string | null; claimMode: "occurred" | "planned";
   occurredOn: string | null; targetOn: string | null;
   statementOriginal: string; statementEn: string; statementEnSource: string;
   locator: string; relatedFinanceIds: string[];

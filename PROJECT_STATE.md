@@ -1,5 +1,14 @@
 # Project state
 
+## 2026-10-09: F5-1 first-party execution source-review readiness (candidate)
+
+- **F5-2 merged as PR #116 (`9b32668`)** on main. F5-1 now advances the original-source review and release gates without inventing a human approval or publishing a native project milestone.
+- **Existing M3.2 reviewer architecture re-used, not cloned.** The M3 queue already has an Alcoa Wagerup construction candidate and a taxonomy-blocked Stibnite Burntlog infrastructure candidate. The new F5 review crosswalk points to those exact M3 IDs and cannot create duplicate proposals for either.
+- **Two original-source pilot leads added in non-public `research/f5/pilot-source-review.json`:** Neo reported commercial magnet production at Narva on 2026-09-14 (exact production start day unknown, so `occurredOn: null`); Perpetua reported **early works construction** at Stibnite started **2025-10-21**, separate from Burntlog Route work on 2026-05-30. Perpetua's original 2025 issuer document is not yet in published Source registry and must be registered/verified before milestone promotion.
+- **New CLI `npm run audit:f5-pilots [-- --json]`** checks four source-review dossiers, project/source identity, allowed milestone scopes/dates, duplicate M3 references and explicit blockers without writing files. Existing Stibnite Burntlog remains `taxonomy_blocked` because `named_infrastructure` is not in approved scope taxonomy.
+- **Another publication gate:** site curated corpus cutoff remains **2026-10-07** and real review research is dated **2026-10-09**; never forge reviewer date or silently update site cutoff. Public `data/seed/project-milestones.json` stays **[]** until a genuine human-signed source adjudication and a separately approved corpus refresh.
+- Full handoff `docs/analysis/f5-1-pilot-review-readiness-2026-10-09.md`; reviewer/maintainer approves any factual seed edits in a subsequent PR. This phase alters no public data, project totals, legal status, web UI, source monitoring or scheduled automation.
+
 ## 2026-10-09: F5-2 per-project evidence pathway builder (candidate)
 
 - **F5-0 foundation merged as #115 / `82621c4`**, establishing nine typed source-backed structural edge kinds and a read-only audit. F5-2 issue [#111](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/issues/111) builds on it without adding seed records, historical money totals or public pages.
