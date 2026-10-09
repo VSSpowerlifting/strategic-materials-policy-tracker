@@ -1320,6 +1320,18 @@
     "notes": "Official EIS Ida-Viru investment-support grant-results entry for 'Magnetitehas Narva': beneficiary explicitly NPM Narva OÜ, registration 16493223; support amount €14,790,898.00; eligible project cost €63,327,184.00; funding source Õiglase ülemineku fond (Just Transition Fund); support-decision YEAR shown 2022, not a day. This is a project grant register snapshot, not the original signed grant contract, the November 2024 amendment-effective date, an official disbursement ledger, or evidence that Neo Performance parent is the legal grantee."
   },
   {
+    "id": "src-estonia-finance-jtf-narva-audit-2025-11",
+    "title": "Estonian Ministry of Finance — JTF project audit JTF-2/2025, Magnetitehas Narva",
+    "publisher": "Rahandusministeerium (Estonian Ministry of Finance), Financial Control Department",
+    "url": "https://www.fin.ee/sites/default/files/documents/2025-11/A1-1_Auditi_l6pparuanne.pdf",
+    "language": "et",
+    "datePublished": null,
+    "dateAccessed": "2026-10-09",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "14-page signed final project audit dated November 21, 2025, for project 2021-2027.6.01.22-0002. Page 3 (PDF p. 3) tabulates approval decision 11-2/22/3107 of Nov 3 2022, revisions 11-2/23/3085 of Nov 3 2023, 11-2/24/4882 of Nov 28 2024, and 11-2/25/4023 of Sep 16 2025. Names NPM Narva OÜ as grantee and NPM Silmet OÜ as partner. Pages 7–9 report recipient transfer (95% activity/budget) from NPM Silmet to NPM Narva and process findings on 2024 budget revisions. Audit establishes decision dates and legal grant identity; it does not reproduce the complete amendment document or grant ceiling in each period, nor prove a decision's legal effective-upon-service date. Report signed/dossier date is not necessarily publication date; datePublished null."
+  },
+  {
     "id": "src-ec-estonia-neo-narva-jtf-147",
     "title": "European Commission Representation in Estonia — Neo Narva magnet factory JTF support",
     "publisher": "European Commission, Representation in Estonia",
