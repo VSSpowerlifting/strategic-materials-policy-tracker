@@ -12,7 +12,7 @@ export const site = {
     "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
   version: "v0.6-capital-intelligence",
   /** Last curated corpus revision, NOT a claim that every row was rechecked on this date. */
-  lastUpdated: "2026-10-07",
+  lastUpdated: "2026-10-09",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness

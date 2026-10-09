@@ -73,5 +73,20 @@
     },
     "rationale": null,
     "proposedMilestoneId": null
+  },
+  {
+    "id": "review-m3-2-stibnite-early-works",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null
   }
 ]
