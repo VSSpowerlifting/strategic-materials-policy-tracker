@@ -4222,9 +4222,27 @@
         "evidence": "explicit",
         "locator": "Opening announcement",
         "note": "Supports operational implementation status."
+      },
+      {
+        "sourceId": "src-neo-aif-2025-jtf-nov2024-amendment",
+        "supports": [
+          "amount"
+        ],
+        "evidence": "explicit",
+        "locator": "2024 Annual Information Form, printed p. 9 / PDF page 10, Rare Earth Magnet Plant in Europe",
+        "note": "Historical amendment evidence ONLY: November 2024 (day unstated), 18.75%→23.3%, eligible costs €63.3M, approximately €14.7M amended grant. NOT the canonical March 2026 approx €14.8M face amount; does not substantiate a new legal amendment after November 2024."
+      },
+      {
+        "sourceId": "src-ec-estonia-neo-narva-jtf-147",
+        "supports": [
+          "amount"
+        ],
+        "evidence": "explicit",
+        "locator": "Estonian project text — paragraph beginning 'Euroopa Liidu õiglase ülemineku fond toetas ... 14,7 miljoni euroga'",
+        "note": "Independent Commission framing of €14.7M JTF support, not evidence of exact November 2024 legal operative day, disbursement amount or the current €14.8M estimate."
       }
     ],
-    "notes": "The JTF award was initially announced in November 2022 as up to €18.7 million. Neo's 2026 Annual Information Form reports amended terms at a 23% grant rate and an amount of approximately €14.8 million; the amount field reflects that later stated commitment. Neo also reported US$8.4 million received by 31 December 2025, so the financial lifecycle is partially disbursed. The facility entered commercial production on 14 September 2026.",
+    "notes": "The JTF award was initially announced in November 2022 as up to €18.7 million. Neo's 2026 Annual Information Form reports amended terms at a 23% grant rate and an amount of approximately €14.8 million; the amount field reflects that later stated commitment. Neo also reported US$8.4 million received by 31 December 2025, so the financial lifecycle is partially disbursed. The facility entered commercial production on 14 September 2026. F4-B3 provenance review: Neo's 2024 Annual Information Form (issued March 2025) dates a SAME-grant amendment to November 2024, reducing the original up-to €18.7M award to approximately €14.7M at 23.3% of eligible €63.3M project costs. The European Commission's Estonia representation also describes €14.7M support. Neo's 2025 Annual Information Form (issued March 2026) instead describes a rounded 23% rate and approximately €14.8M, the current canonical amount. The discrepancy may be estimation/rounding and is NOT proven to be another legal amendment: no operative day within November 2024, signed Estonian grant change order, or later legal amendment has been established. Structured financialAmountHistory therefore remains absent (history_unreviewed). The 2025 receipt of US$8.4M is a cumulative reimbursement figure, not grant face value.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-02",
       "implementationStatusCheckedAt": "2026-10-02"
