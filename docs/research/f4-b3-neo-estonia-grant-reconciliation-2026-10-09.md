@@ -45,3 +45,23 @@ Two newly registered primary-source IDs and **source-scoped** row evidence link 
 ## Acceptance
 
 On exact PR head: run production dependency audit, data validation, typecheck, lint, complete tests and build. Source reviewer must inspect Neo 2024 AIF PDF page 10 (printed 9), Neo 2025 AIF page 11 (printed 10), original 2022 news release, EC Estonian text, and current SMPT finance row. Verify current amount, cash status and aggregate commitments unchanged. Human review before merging; **no merge/deploy/collector** in this phase.
+
+## EIS original public grant-register cross-check (9 October 2026)
+
+The Estonian Business and Innovation Agency's [official supported-project listing](https://eis.ee/toetatud-projektid/?grant_size_from=0&grant_size_to=30000000&recipient=&s%5Bprogram%5D=ida-viru-ettev-tluse-investeeringute-toetus&s%5Byear%5D=all&sort=project_recipient%3Aasc) independently identifies the specific beneficiary and project in Estonian:
+
+| Register field | Verbatim / stated value | Interpretation |
+| --- | --- | --- |
+| Toetuse saaja | **NPM Narva OÜ** | Legal grant beneficiary **named by EIS**, not necessarily identical with listed Canadian sponsor |
+| Toetuse saaja reg. kood | **16493223** | Estonian registered beneficiary identifier |
+| Projekti nimi | **Magnetitehas Narva** | Narva magnet factory project |
+| Toetuse suurus (eur) | **14 790 898.00** | Exact **current register support amount**, not a certified 2024 amendment day |
+| Projekti maksumus (EUR) | **63 327 184.00** | Listed project budget/cost, not additional public grant |
+| Rahastusallikas | **Õiglase ülemineku fond (ÕÜF)** | Just Transition Fund |
+| Otsuse kuupäev | **2022 (year only)** | The listing does not show a legal day; do not equate this to the November 2024 amendment |
+
+This official project entry gives an **exact listed grant amount of €14,790,898**. It is **€9,102 below** Neo's rounded current €14,800,000 presentation, and **€90,898 above** the older approximate €14,700,000. The precise current register number lends independent support to the **2026 ~€14.8M** disclosure, but does not prove why the 2025 AIF described ~€14.7M, whether an authorized post-November adjustment occurred, or the exact operative day.
+
+A separate important entity-integrity issue is now explicit: the canonical finance row's `recipient` is `Neo Performance` with organization ID `org-neo-performance`, while the government funding register names **NPM Narva OÜ** as `Toetuse saaja`. Neither treating them as synonyms nor silently replacing the parent is appropriate without checking the award contract, entity relations and organization registry. The row therefore gains the EIS primary **amount/project** source pointer and a human-review warning, **not** an asserted citation to justify its existing recipient value. The EIS entry is not evidence of disbursement, and cannot replace the issuer's separately source-audited partial payment observation.
+
+The new EIS source has an intentionally **null** publication date; the funding decision **year** is not the publication date and is not an effective amendment day. This is the third independent amount perspective alongside Neo's reports and the European Commission narrative. Structured history and as-of sums **remain blocked**. F4-B4 follow-up should source-review the actual signed Estonian grant decision(s), resolve parent/subsidiary contracting identities, and decide whether current amount's approximate presentation can coexist with a separate explicitly labeled exact register amount without modifying totals.
