@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "f4-b3-neo-jtf-amount-evidence-v1",
+  "recordId": "fin-eu-jtf-2025-neo-magnet-project",
+  "determination": "history_promotion_blocked",
+  "amendment": {
+    "establishedMonth": "2024-11",
+    "earliestPossibleDate": "2024-11-01",
+    "latestPossibleDate": "2024-11-30",
+    "exactOperativeDayEstablished": false,
+    "supportingSourceId": "src-neo-aif-2025-jtf-nov2024-amendment",
+    "sourceLocator": "2024 AIF, printed p. 9 / PDF page 10, Rare Earth Magnet Plant in Europe",
+    "interpretation": "Neo 2024 AIF retrospectively reports revision in November 2024; 2025 Estonian Ministry of Finance audit independently identifies the administrative amendment decision as no. 11-2/24/4882 dated November 28, 2024. The audit does not attach the actual grant-change decision, its financial ceiling nor service/effective-date clause; never promote its decision date as certain money-effective date without checking that instrument.",
+    "administrativeDecision": {
+      "date": "2024-11-28",
+      "decisionNumber": "11-2/24/4882",
+      "sourceId": "src-estonia-finance-jtf-narva-audit-2025-11",
+      "locator": "Official Ministry of Finance JTF-2/2025 audit PDF page 3, section 1.1",
+      "decisionDateVerified": true,
+      "exactLegalEffectiveOnServiceDateVerified": false,
+      "historicalGrantCeilingOnDecisionVerified": false
+    }
+  },
+  "reportedAmounts": [
+    {
+      "sourceId": "src-neo-jtf-award-2022",
+      "asReported": "up to €18.7 million",
+      "eurValue": "18700000",
+      "qualifier": "up_to",
+      "observation": "original_award_2022"
+    },
+    {
+      "sourceId": "src-neo-aif-2025-jtf-nov2024-amendment",
+      "asReported": "approximately €14.7 million at 23.3% for eligible project costs €63.3 million",
+      "eurValue": "14700000",
+      "qualifier": "approximately",
+      "observation": "amended_grant_reported_2025"
+    },
+    {
+      "sourceId": "src-ec-estonia-neo-narva-jtf-147",
+      "asReported": "14,7 miljoni euroga",
+      "eurValue": "14700000",
+      "qualifier": "approximately",
+      "observation": "public_institution_support_description"
+    },
+    {
+      "sourceId": "src-eis-npm-narva-jtf-project-grant",
+      "asReported": "€14,790,898.00 awarded under 'Magnetitehas Narva', eligible project cost €63,327,184.00",
+      "eurValue": "14790898",
+      "qualifier": "exact",
+      "observation": "current_official_grant_register_not_historical_amendment_evidence"
+    },
+    {
+      "sourceId": "src-neo-aif-2026",
+      "asReported": "approximately €14.8 million at 23% grant rate",
+      "eurValue": "14800000",
+      "qualifier": "approximately",
+      "observation": "latest_canonical_2026"
+    }
+  ],
+  "reconciliation": {
+    "discrepancyEUR": "100000",
+    "outcome": "not_adjudicated",
+    "precisionIssue": "A 23.3% rate of €63.3M gives €14.7489M before rounding; inputs themselves are rounded, so this calculation cannot establish an exact contract ceiling or prove a new amendment.",
+    "currentCanonicalValue": "14800000",
+    "requiredBeforePromotion": [
+      "Obtain decision 11-2/24/4882 dated 2024-11-28 and decision 11-2/25/4023 dated 2025-09-16 (both cited in official Ministry JTF-2/2025 audit), read exact award-ceiling terms and their legal effective-upon-service dates; retain unknowns if not proven.",
+      "Source-backed explanation whether €14.7M and €14.8M are different report rounding/estimating of one amended award versus successive legally distinct award ceilings.",
+      "Separate legal award face value from reimbursement received, project cost, EDC financing and grant rate.",
+      "Independent human approval of proposed historical version windows, with the latest version exactly matching the canonical current amount.",
+      "Correctly identify recipient/grantee: EIS supported-project entry names NPM Narva OÜ (registry code 16493223), while the current financing row's recipient label names Neo Performance; review organization taxonomy and legal contracting beneficiary before any canonical correction.",
+      "Audit also identifies original decision 11-2/22/3107 and 2023 grantee-transfer decision 11-2/23/3085; trace original NPM Silmet award through the 95%-budget transfer to NPM Narva before naming recipient on earlier historical versions."
+    ],
+    "officialProjectRegister": {
+      "awardAmountEUR": "14790898",
+      "beneficiary": "NPM Narva OÜ",
+      "beneficiaryRegistration": "16493223",
+      "project": "Magnetitehas Narva",
+      "eligibleProjectCostEUR": "63327184",
+      "distanceFromCanonicalRoundedEUR": "9102",
+      "distanceFromEarlier147EstimateEUR": "90898",
+      "currentAwardSnapshotNotOperativeHistoricalVersion": true,
+      "legalGranteeIdentityReviewRequired": true,
+      "note": "Official Estonian EIS register is a present award snapshot and identifies a grant beneficiary distinct from current SMPT parent-company recipient label. It is not the legal amendment instrument or proof of an operative day. Do not rewrite parent-company recipient or backdate this amount without independent source review."
+    },
+    "ministryAudit": {
+      "sourceId": "src-estonia-finance-jtf-narva-audit-2025-11",
+      "reportDate": "2025-11-21",
+      "reportPublicationDateVerified": false,
+      "projectId": "2021-2027.6.01.22-0002",
+      "decisions": [
+        {
+          "date": "2022-11-03",
+          "number": "11-2/22/3107",
+          "kind": "initial_award"
+        },
+        {
+          "date": "2023-11-03",
+          "number": "11-2/23/3085",
+          "kind": "beneficiary_change_amendment"
+        },
+        {
+          "date": "2024-11-28",
+          "number": "11-2/24/4882",
+          "kind": "budget_revision_amendment"
+        },
+        {
+          "date": "2025-09-16",
+          "number": "11-2/25/4023",
+          "kind": "further_amendment_terms_unreviewed"
+        }
+      ],
+      "grantRecipient": "NPM Narva OÜ",
+      "grantPartner": "NPM Silmet OÜ",
+      "budgetTransferredToRecipientPercent": 95,
+      "formalProceduralFindings": true,
+      "awardInvalidated": false,
+      "note": "Auditors identify procedural documentation/assessment issues, not withdrawal of the grant, and find project spending/use substantially compliant. The 2024 decision changed project budget; monetary support/percentage per version requires original administrative amendment. 2025 follow-on amendment must also be inspected before claiming amount series complete."
+    }
+  },
+  "noPromotion": true,
+  "historicalTotalsAuthorized": false
+}

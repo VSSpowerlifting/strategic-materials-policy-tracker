@@ -2,12 +2,16 @@
   {
     "recordId": "fin-eu-jtf-2025-neo-magnet-project",
     "priority": 2,
-    "reviewQuestion": "Is the original 2022 up-to-€18.7M award the same grant contract as the later approximately €14.8M at a 23% rate, and what primary document establishes the actual revision-effective date?",
+    "reviewQuestion": "Ministry of Finance JTF-2/2025 audit gives original grant decision 3 Nov 2022, beneficiary-transfer decision 3 Nov 2023, amendment decision 11-2/24/4882 on 28 Nov 2024, and further decision 11-2/25/4023 on 16 Sep 2025. Retrieve 2024 and 2025 signed decisions to verify exact operative terms, per-period grant amount and €14.7M/€14.8M report reconciliation; formally confirm grantee NPM Narva OÜ versus Neo Performance parent.",
     "evidenceSourceIds": [
       "src-neo-jtf-award-2022",
-      "src-neo-aif-2026"
+      "src-neo-aif-2025-jtf-nov2024-amendment",
+      "src-ec-estonia-neo-narva-jtf-147",
+      "src-eis-npm-narva-jtf-project-grant",
+      "src-neo-aif-2026",
+      "src-estonia-finance-jtf-narva-audit-2025-11"
     ],
-    "limitation": "Original announcement and 2026 retrospective reporting do not by themselves identify the binding grant amendment day. Different up_to versus approximately qualifiers matter; US-dollar receipts are not grant face amounts."
+    "limitation": "The exact administrative decision day Nov 28, 2024 IS now source-audited, but NOT independently the legal effective-on-communication day or the amount of that particular decision. A separate 2025 grant-change decision exists and must be reviewed for monetary effects; cannot assume amount is unchanged, nor assume it changed. EIS current €14,790,898 does not prove 2024 figure. Ministry's audit reports beneficiary transfer from NPM Silmet to NPM Narva (95% of budget); the canonical Neo Performance parent label needs separate correction. No historical versions, grant payments or totals certified."
   },
   {
     "recordId": "fin-us-army-perpetua-antimony-otia",
