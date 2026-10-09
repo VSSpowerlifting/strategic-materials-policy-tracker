@@ -257,7 +257,7 @@ export function auditEvidencePathways(input: PathwayInputs): PathwayCoverageRepo
       "A designation is recognition, not funding. Missing milestones are unreviewed data coverage, not stalled or nonexistent activity.",
       "Legacy financing-row implementation observations remain unreviewed and cannot be promoted automatically into project-native milestones.",
       "Legal, payment, physical occurred/target, source-publication/access and review clocks remain distinct; this audit makes no historical known-as-of claim.",
-      "Private research candidates are excluded. No history-dependent or cross-currency capital totals are authorized.",
+      "Private draft research files are excluded. No history-dependent or cross-currency capital totals are authorized.",
     ],
   };
 }
