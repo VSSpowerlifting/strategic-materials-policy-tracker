@@ -1,5 +1,14 @@
 # Project state
 
+## 2026-10-09: F5-2 per-project evidence pathway builder (candidate)
+
+- **F5-0 foundation merged as #115 / `82621c4`**, establishing nine typed source-backed structural edge kinds and a read-only audit. F5-2 issue [#111](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/issues/111) builds on it without adding seed records, historical money totals or public pages.
+- Pure `buildProjectEvidencePathway(projectId, corpus)` returns distinct project identity, directly attributable vs explicitly nonallocative financing, status-source receipts, designations, source-reviewed native physical milestones (none yet published), parent policy events, co-announced control **siblings only**, and financing package references **without sum/allocation**.
+- **Current corpus revision only.** Project milestones retain occurred versus target, speaker passage, source publication/access, reviewer and review date. All legacy financer-reported physical statuses remain unreviewed; a missing native milestone means no approved record, not construction failure or inactivity.
+- Tests cover Alcoa (3 finance rows repeating one physical source), Narva (one JTF row, no certified native milestone), Stibnite (DPA/EXIM, undated legacy construction entry), CHIPS combined event/controls, multi-project associations, deterministic projections, synthetic approved fixtures and missing source/ref failures.
+- Separate F5-1 [#110](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/issues/110) original-source review receipt covers August 2026 Wagerup gallium construction, September 2026 Narva magnet commercial production, and distinct October 2025 Stibnite early works/May 2026 Burntlog activities. **No human attestation or milestone publication** occurs here.
+- Review gate: complete source/evidence audit, validate/typecheck/lint/full tests/build and maintainer squash merge. See `docs/analysis/f5-2-project-pathways-2026-10-09.md`. F5-3 site casefiles remain blocked until reviewed milestones and browser QA.
+
 ## 2026-10-09: F5-0 evidence pathway contract (review candidate)
 
 - Launches the long-term **F5 Policy-to-Industrial Outcome Observatory** under [epic #108](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/issues/108). [F5-0 #109](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/issues/109) is the evidence foundation; F5-1 milestone pilots and F5-2 typed project graph are separate follow-on review gates.
