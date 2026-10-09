@@ -12,6 +12,7 @@ const amendment = "src-neo-aif-2025-jtf-nov2024-amendment";
 const commission = "src-ec-estonia-neo-narva-jtf-147";
 const later = "src-neo-aif-2026";
 const eis = "src-eis-npm-narva-jtf-project-grant";
+const audit = "src-estonia-finance-jtf-narva-audit-2025-11";
 
 test("F4-B3: Neo history remains blocked while amended values differ", () => {
   const row = getFinancialCommitmentById(id)!;
@@ -81,10 +82,11 @@ test("F4-B3: coverage audit and human triage both keep Neo unresolved", () => {
   assert.equal(report.rows.find(x=>x.recordId===id)?.history, "history_unreviewed");
   const candidate = queue.find(x=>x.recordId===id)!;
   assert.ok(candidate);
-  assert.deepEqual(candidate.evidenceSourceIds, reconciliation.reportedAmounts.map(x=>x.sourceId));
-  assert.ok(candidate.reviewQuestion.includes("November 2024"));
-  assert.ok(candidate.limitation.includes("€14.7M"));
-  assert.ok(candidate.limitation.includes("€14.8M"));
+  assert.deepEqual(candidate.evidenceSourceIds, [...reconciliation.reportedAmounts.map(x=>x.sourceId), audit]);
+  assert.ok(candidate.reviewQuestion.includes("28 Nov 2024"));
+  assert.ok(candidate.limitation.includes("Nov 28, 2024"));
+  assert.ok(candidate.limitation.includes("2025"));
+  assert.ok(candidate.limitation.includes("€14,790,898"));
   assert.equal(rows.filter(x=>x.id===id).length,1);
 });
 
@@ -102,7 +104,7 @@ test("F4-B3: provenance enrichment does not alter canonical financial accounting
   const reviewed = getFinancialCommitmentById(id)!;
   const withoutResearch = structuredClone(reviewed);
   withoutResearch.evidence = withoutResearch.evidence.filter(e =>
-    e.sourceId !== amendment && e.sourceId !== commission && e.sourceId !== eis);
+    e.sourceId !== amendment && e.sourceId !== commission && e.sourceId !== eis && e.sourceId !== audit);
   const after = totalCommitments([reviewed], all);
   const before = totalCommitments([withoutResearch], all);
   assert.deepEqual(after, before, "adding historical evidence cannot alter present money totals");
@@ -134,4 +136,41 @@ test("F4-B3: official EIS register is source-backed award amount, NOT amendment 
   assert.ok(!citation.supports.includes("status"),
     "award listing does not certify disbursement");
   assert.ok(citation.locator?.includes("14 790 898"));
+});
+
+test("F4-B3: Ministry audit pins 2024 decision day and 2025 follow-up, NOT exact monetary effectiveness", () => {
+  const m = reconciliation.amendment;
+  const a = m.administrativeDecision;
+  assert.equal(a.date, "2024-11-28");
+  assert.equal(a.decisionNumber, "11-2/24/4882");
+  assert.equal(a.sourceId, audit);
+  assert.equal(a.decisionDateVerified, true);
+  assert.equal(a.exactLegalEffectiveOnServiceDateVerified, false);
+  assert.equal(a.historicalGrantCeilingOnDecisionVerified, false);
+  assert.equal(m.exactOperativeDayEstablished, false);
+  const v = reconciliation.reconciliation.ministryAudit;
+  assert.equal(v.reportDate, "2025-11-21");
+  assert.equal(v.reportPublicationDateVerified, false);
+  assert.equal(v.projectId, "2021-2027.6.01.22-0002");
+  assert.deepEqual(v.decisions.map(x=>[x.date,x.number]), [
+    ["2022-11-03", "11-2/22/3107"],
+    ["2023-11-03", "11-2/23/3085"],
+    ["2024-11-28", "11-2/24/4882"],
+    ["2025-09-16", "11-2/25/4023"],
+  ]);
+  assert.equal(v.grantRecipient, "NPM Narva OÜ");
+  assert.equal(v.grantPartner, "NPM Silmet OÜ");
+  assert.equal(v.budgetTransferredToRecipientPercent, 95);
+  assert.equal(v.formalProceduralFindings, true);
+  assert.equal(v.awardInvalidated, false);
+  const row = getFinancialCommitmentById(id)!;
+  const ref = row.evidence.find(x=>x.sourceId===audit);
+  assert.ok(ref?.supports.includes("project"));
+  assert.ok(!ref?.supports.includes("amount"), "audit does not prove specific amount in each decision");
+  assert.ok(!ref?.supports.includes("recipient"), "cannot cite this as proof of the old parent label");
+  assert.ok(!ref?.supports.includes("status"), "cannot source a new disbursement or verified legal-effective date");
+  const src = getAllSources().find(x=>x.id===audit)!;
+  assert.equal(src.language, "et");
+  assert.equal(src.datePublished, null);
+  assert.equal(row.financialAmountHistory, undefined);
 });
