@@ -30,8 +30,8 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
   assert.equal(report.publicationAuthorized,false);
   assert.equal(report.publicMilestoneCount,0);
   assert.deepEqual(report.totals,{
-    cases:4,existingM3:3,newProposals:1,
-    missingRegisteredSources:1,taxonomyBlocked:1,humanReviewRequired:4,
+    cases:4,existingM3:4,newProposals:0,
+    missingRegisteredSources:0,taxonomyBlocked:1,humanReviewRequired:4,
   });
   assert.deepEqual(report.cases.map(x=>x.id),[
     "f5-1-alcoa-wagerup-groundbreaking",
@@ -40,7 +40,9 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
     "f5-1-stibnite-earlyworks-2025",
   ]);
   assert.ok(report.cases.every(x=>!x.publicationEligible && x.releaseBlockers.length>=1));
-  assert.ok(report.cases.every(x=>x.releaseBlockers.includes("curated_corpus_cutoff_requires_separate_approval")));
+  assert.ok(report.cases.every(x=>!x.releaseBlockers.includes("curated_corpus_cutoff_requires_separate_approval")),
+    "the reviewed corpus cutoff proposal in this PR is 2026-10-09; this is not reviewer attestation");
+  assert.equal(site.lastUpdated,"2026-10-09");
   assert.equal(getAllProjectMilestones().length,0);
 });
 
@@ -79,21 +81,26 @@ test("F5-1: Narva source dates support reported production, NOT a fabricated pro
   assert.equal(neo.publicationEligible,false);
 });
 
-test("F5-1: Stibnite 2025 early works is distinct from May 2026 Burntlog site access and requires source registration", () => {
+test("F5-1: Stibnite original early works source is registered and distinct from May 2026 Burntlog", () => {
   const r=audit();
   const old=r.cases[2],first=r.cases[3];
   assert.equal(first.projectId,old.projectId);
   assert.notEqual(first.sourceId,old.sourceId);
-  assert.equal(first.sourceRegistered,false);
-  assert.equal(first.proposedKind,"construction_started");
-  assert.equal(first.proposedScope,"whole_project");
-  assert.equal(first.proposedOccurredOn,"2025-10-21");
-  assert.deepEqual(first.releaseBlockers,[
-    "register_full_original_primary_source",
-    "independent_human_source_adjudication",
-    "curated_corpus_cutoff_requires_separate_approval",
-  ]);
-  assert.ok(input().cases[3].proposal?.editorialCaution.includes("early works construction"));
+  assert.equal(first.sourceRegistered,true);
+  assert.equal(first.track,"existing_m3_review");
+  assert.equal(first.existingReviewId,"review-m3-2-stibnite-early-works");
+  assert.equal(first.proposedKind,null);
+  assert.equal(first.proposedScope,null);
+  assert.equal(first.proposedOccurredOn,null);
+  assert.deepEqual(first.sourceEvidenceBoundary,{date:"2025-10-21",basis:"publication"});
+  assert.deepEqual(first.releaseBlockers,["existing_M3_human_adjudication"]);
+  assert.equal(input().cases[3].proposal,null);
+  const m3=m3Queue.find(x=>x.id===first.existingReviewId)!;
+  assert.deepEqual(m3.relatedFinanceIds,[]);
+  assert.equal(m3.kindProposal,"construction_started");
+  assert.equal(m3.scopeProposal,"whole_project");
+  assert.equal(m3.occurredOn,"2025-10-21");
+  assert.ok(m3.editorialCaution.includes("early works"));
   assert.equal(getAllProjectMilestones().length,0);
 });
 
@@ -112,14 +119,11 @@ test("F5-1: invalid review identities, source URLs, false approvals and duplicat
   const wrongM3=input();
   wrongM3.cases[0].existingReviewId="review-m3-2-stibnite-burntlog";
   assert.match(audit(wrongM3).errors.join(" "),/missing or mismatched existing M3 review/);
-  const forgedDate=input();
-  forgedDate.cases[3].proposal!.occurredOn="2025-10-20";
-  assert.equal(audit(forgedDate).errors.length,0,
-    "an earlier-than-publication date can be *structurally* valid; a human still must check the actual issuer claim");
-  assert.equal(audit(forgedDate).publicationAuthorized,false,
-    "date plausibility is not source verification or human attestation");
-  forgedDate.cases[3].proposal!.occurredOn="2025-10-23";
-  assert.match(audit(forgedDate).errors.join(" "),/event date cannot follow cited publication/);
+  const forgedSource=input();
+  forgedSource.cases[3].sourceUrl="https://example.com/invented-early-works";
+  assert.match(audit(forgedSource).errors.join(" "),/URL\/publisher identity mismatch/);
+  assert.equal(audit(forgedSource).publicationAuthorized,false,
+    "a registered original source is not a substitute for human-attested factual scope");
 });
 
 test("F5-1: duplicate M3 source review, malformed dates and unsupported category never slip through", () => {
@@ -130,9 +134,9 @@ test("F5-1: duplicate M3 source review, malformed dates and unsupported category
   dup.cases[1].publishedOn=dup.cases[0].publishedOn;
   dup.cases[1].sourcePublisher=dup.cases[0].sourcePublisher;
   assert.match(audit(dup).errors.join(" "),/missing or mismatched existing M3 review row|source registry URL\/publisher/);
-  const wrongKind=input();
-  wrongKind.cases[3].proposal!.kind="commissioning_started_not_known" as never;
-  assert.match(audit(wrongKind).errors.join(" "),/unsupported milestone taxonomy/);
+  const wrongRoute=input();
+  wrongRoute.cases[3].track="new_review_candidate";
+  assert.match(audit(wrongRoute).errors.join(" "),/new proposal needs unadjudicated scoped statement/);
   const wrongDate=input();
   wrongDate.cases[1].publishedOn="2026-02-30";
   assert.match(audit(wrongDate).errors.join(" "),/publication date\/publisher invalid/);
@@ -145,7 +149,7 @@ test("F5-1: all review diagnostics are deterministic and no private drafts enter
   const argv=["--import","tsx","scripts/audit-f5-pilots.ts"];
   const summary=execFileSync(process.execPath,argv,{encoding:"utf8"});
   assert.ok(summary.includes("Milestone publication: NOT AUTHORIZED"));
-  assert.ok(summary.includes("Existing M3.2 cases (reused, never duplicated): 3"));
+  assert.ok(summary.includes("Existing M3.2 cases (reused, never duplicated): 4"));
   const json=execFileSync(process.execPath,[...argv,"--json"],{encoding:"utf8"});
   assert.deepEqual(JSON.parse(json),audit());
   const bad=spawnSync(process.execPath,[...argv,"--publish"],{encoding:"utf8"});

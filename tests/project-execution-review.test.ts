@@ -19,16 +19,16 @@ const refs = () => ({
 });
 const audit = (draft: unknown = q(), r = refs()) => auditProjectExecutionPilot(draft, r);
 
-test("M3.2 five source-linked candidates are a non-promoting review queue", () => {
+test("M3.2 six source-linked candidates are a non-promoting review queue", () => {
   const result = audit();
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(result.summary.awaitingHumanSourceReview, 3);
+  assert.equal(result.summary.awaitingHumanSourceReview, 4);
   assert.equal(result.summary.blockedOnTaxonomy, 2);
   assert.deepEqual(result.candidates.map((x) => x.id),
     ["review-m3-2-alcoa-wagerup", "review-m3-2-cyclic-extended-operations",
      "review-m3-2-inl-demonstration", "review-m3-2-neo-narva-magnets",
-     "review-m3-2-stibnite-burntlog"]);
+     "review-m3-2-stibnite-burntlog", "review-m3-2-stibnite-early-works"]);
   assert.equal(getAllProjectMilestones().length, 0, "no candidate is a public milestone");
   assert.equal(getDatasetSummary().projects, getAllProjects().length);
 });
@@ -80,7 +80,7 @@ test("dated occurrence cannot follow source publication or the corpus cutoff", (
   const rows = q();
   rows[0].occurredOn = "2026-08-25";
   assert.match(audit(rows).errors.join(" | "), /occurred date postdates source evidence boundary/);
-  rows[0].occurredOn = "2026-10-08";
+  rows[0].occurredOn = "2026-10-10";
   assert.match(audit(rows).errors.join(" | "), /proposed occurrence postdates curated corpus cutoff/);
   rows[0].occurredOn = "2026-02-30";
   assert.match(audit(rows).errors.join(" | "), /real date or null/);
@@ -169,4 +169,55 @@ test("Narva is one unsigned source review, not an operational-start day or a sec
   assert.ok(!("reviewedAt" in narva));
   assert.deepEqual(audit().errors, []);
   assert.equal(getAllProjectMilestones().length, 0);
+});
+
+test("Stibnite first early works may be queued without inventing a matching financing observation", () => {
+  const rows=q();
+  const first=rows.find(x=>x.id==="review-m3-2-stibnite-early-works")!;
+  const later=rows.find(x=>x.id==="review-m3-2-stibnite-burntlog")!;
+  assert.deepEqual(first.relatedFinanceIds,[]);
+  assert.equal(first.sourceId,"src-perpetua-stibnite-early-works-2025");
+  assert.equal(first.gate,"human_source_review");
+  assert.equal(first.kindProposal,"construction_started");
+  assert.equal(first.scopeProposal,"whole_project");
+  assert.equal(first.scopeAsStated,null);
+  assert.equal(first.occurredOn,"2025-10-21");
+  assert.equal(first.reviewVerdict,"unreviewed");
+  assert.equal(later.gate,"taxonomy_blocked");
+  assert.equal(later.scopeProposal,"named_infrastructure");
+  assert.equal(later.occurredOn,"2026-05-30");
+  assert.notEqual(first.sourceId,later.sourceId);
+  const report=audit();
+  assert.deepEqual(report.errors,[]);
+  assert.deepEqual(report.candidates.find(x=>x.id===first.id)?.sourceBoundary,
+    {date:"2025-10-21",basis:"publication"});
+  assert.equal(report.candidates.find(x=>x.id===first.id)?.deduplicatedLegacyFinanceObservations,0);
+  assert.equal(getAllProjectMilestones().length,0);
+});
+
+test("M3 project-native empty finance references still require registered primary source and valid source date", () => {
+  const base=q();
+  const row=base.find(x=>x.id==="review-m3-2-stibnite-early-works")!;
+  assert.deepEqual(row.relatedFinanceIds,[]);
+  row.sourceId="src-this-original-does-not-exist";
+  assert.match(audit(base).errors.join(" | "),/sourceId does not resolve/);
+  const refsModified=refs();
+  refsModified.sources=refsModified.sources.map(x=>x.id==="src-perpetua-stibnite-early-works-2025"
+    ? {...x,confidence:"secondary" as const} : x);
+  assert.match(audit(q(),refsModified).errors.join(" | "),/source is not marked primary/);
+  const future=q();
+  future.find(x=>x.id==="review-m3-2-stibnite-early-works")!.occurredOn="2025-10-22";
+  assert.match(audit(future).errors.join(" | "),/occurred date postdates source evidence boundary/);
+});
+
+test("Finance-linked M3 source checks remain strict despite allowing independent project observations", () => {
+  const rows=q();
+  rows[0].relatedFinanceIds=["fin-eu-jtf-2025-neo-magnet-project"];
+  assert.match(audit(rows).errors.join(" | "),/belongs to a different project/);
+  const malformed=q();
+  malformed[0].relatedFinanceIds=["zzz","zzz"];
+  assert.match(audit(malformed).errors.join(" | "),/sorted unique array/);
+  const nonarray=q();
+  nonarray[0].relatedFinanceIds=null as never;
+  assert.match(audit(nonarray).errors.join(" | "),/sorted unique array/);
 });
