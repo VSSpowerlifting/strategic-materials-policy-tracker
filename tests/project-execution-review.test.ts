@@ -221,3 +221,18 @@ test("Finance-linked M3 source checks remain strict despite allowing independent
   nonarray[0].relatedFinanceIds=null as never;
   assert.match(audit(nonarray).errors.join(" | "),/sorted unique array/);
 });
+
+test("Stibnite original-source registration uses actual access receipt without backdating site curation", () => {
+  const registered=getAllSources().filter(x=>x.id==="src-perpetua-stibnite-early-works-2025");
+  assert.equal(registered.length,1,"exactly one original Perpetua source ID");
+  const source=registered[0];
+  assert.equal(source.url,
+    "https://perpetuaresources.com/perpetua-resources-breaks-ground-on-the-stibnite-gold-project/");
+  assert.equal(source.publisher,"Perpetua Resources");
+  assert.equal(source.confidence,"primary");
+  assert.equal(source.datePublished,"2025-10-21","event/report date is not the 2026 access receipt");
+  assert.equal(source.dateAccessed,"2026-10-09","never backdate original source access");
+  assert.equal(site.lastUpdated,"2026-10-09","source registration requires explicit corpus update approval");
+  assert.ok(source.notes?.includes("nonbinding"),"do not mislabel conditional EXIM financing");
+  assert.equal(getAllProjectMilestones().length,0,"primary source is not signed milestone approval");
+});
