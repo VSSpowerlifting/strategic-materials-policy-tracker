@@ -82,7 +82,7 @@ test("F5-0: source provenance is source-specific, not automatically policy-causa
     assert.ok(!["policy_caused_project","material_similarity","temporal_correlation"].includes(edge.kind));
   }
   assert.ok(report.limitations.some(s=>s.includes("causation")));
-  assert.ok(report.limitations.some(s=>s.includes("candidate")));
+  assert.ok(report.limitations.some(s=>s.includes("Private draft research files")));
 });
 
 test("F5-0: associations never become allocative project backing", () => {
