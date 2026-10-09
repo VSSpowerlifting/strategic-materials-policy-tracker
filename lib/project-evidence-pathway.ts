@@ -168,8 +168,9 @@ export function buildProjectEvidencePathway(
     return history.map(h => ({
       status: h.status, statusDate: h.date,
       evidence: sourceRef(h.sourceId), note: h.note ?? null,
-    })).sort((a, b) => lex(a.statusDate ?? "", b.statusDate ?? "")
-      || lex(a.status, b.status) || lex(a.evidence.id, b.evidence.id));
+    }));
+    // Preserve source-validated chronology, including undated final states.
+    // Null dates do not sort before earlier dated states by default.
   }
   const selected = coverage.edges.filter(e =>
     (e.toId === projectId &&
