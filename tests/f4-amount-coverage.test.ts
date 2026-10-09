@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync, spawnSync } from "node:child_process";
 
 import { auditF4AmountCoverage } from "@/lib/f4-amount-coverage";
 import { financialAmountOn } from "@/lib/capital-control";
@@ -82,4 +83,19 @@ test("F4-B: empty amount-history fields are not mistaken for evidence of review"
   const target = rows.find(row => row.id === candidates[0].recordId)!;
   target.financialAmountHistory = [];
   assert.throws(() => auditF4AmountCoverage(rows, sources(), candidates), /empty historical amount history/);
+});
+
+test("F4-B: the actual CLI summary and JSON modes are read-only and explicitly refuse historical totals", () => {
+  const command = ["--import", "tsx", "scripts/audit-f4-amount-coverage.ts"];
+  const summary = execFileSync(process.execPath, command, { encoding: "utf8" });
+  assert.match(summary, /Historical totals: NOT AUTHORIZED/);
+  assert.match(summary, /Structured amount histories recorded:/);
+  assert.doesNotMatch(summary, /\$2\.23B/);
+  const parsed = JSON.parse(execFileSync(process.execPath, [...command, "--json"], { encoding: "utf8" }));
+  assert.equal(parsed.historicalTotals, "not_authorized");
+  assert.equal(parsed.totals.records, getAllFinancialCommitments().length);
+  assert.deepEqual(parsed.reviewCandidates.map((x: { recordId: string }) => x.recordId), candidates.map(x => x.recordId));
+  const invalid = spawnSync(process.execPath, [...command, "--as-of", "2024-01-01"], { encoding: "utf8" });
+  assert.equal(invalid.status, 2, invalid.stderr);
+  assert.match(invalid.stderr, /Usage:/);
 });
