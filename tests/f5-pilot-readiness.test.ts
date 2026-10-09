@@ -106,7 +106,7 @@ test("F5-1: invalid review identities, source URLs, false approvals and duplicat
   wrongM3.cases[0].existingReviewId="review-m3-2-stibnite-burntlog";
   assert.match(audit(wrongM3).errors.join(" "),/missing or mismatched existing M3 review/);
   const forgedDate=input();
-  forgedDate.cases[3].proposal!.occurredOn="2025-10-22";
+  forgedDate.cases[3].proposal!.occurredOn="2025-10-20";
   assert.equal(audit(forgedDate).errors.length,0,
     "an earlier-than-publication date can be *structurally* valid; a human still must check the actual issuer claim");
   assert.equal(audit(forgedDate).publicationAuthorized,false,
@@ -117,13 +117,14 @@ test("F5-1: invalid review identities, source URLs, false approvals and duplicat
 
 test("F5-1: duplicate M3 source review, malformed dates and unsupported category never slip through", () => {
   const dup=input();
+  dup.cases[1].projectId=dup.cases[0].projectId;
   dup.cases[1].sourceId=dup.cases[0].sourceId;
   dup.cases[1].sourceUrl=dup.cases[0].sourceUrl;
   dup.cases[1].publishedOn=dup.cases[0].publishedOn;
   dup.cases[1].sourcePublisher=dup.cases[0].sourcePublisher;
   assert.match(audit(dup).errors.join(" "),/duplicate of existing M3 source-review claim|source registry URL\/publisher/);
   const wrongKind=input();
-  wrongKind.cases[1].proposal!.kind="commissioning_started_not_known" as ReviewPacket["cases"][number]["proposal"] extends infer T ? NonNullable<T>["kind"] : never;
+  wrongKind.cases[1].proposal!.kind="commissioning_started_not_known" as never;
   assert.match(audit(wrongKind).errors.join(" "),/unsupported milestone taxonomy/);
   const wrongDate=input();
   wrongDate.cases[1].publishedOn="2026-02-30";
