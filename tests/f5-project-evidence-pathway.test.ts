@@ -132,7 +132,8 @@ test("F5-2: synthetic reviewed milestone preserves reporter, event time, publica
   assert.equal(m.targetOn,null);
   assert.equal(m.reviewedOn,"2026-10-09");
   assert.equal(m.evidence.publishedOn,source.datePublished);
-  assert.equal(m.evidence.firstRegisteredAccessOn,source.dateAccessed);
+  assert.equal(m.evidence.accessedOn,source.dateAccessed);
+  assert.equal(m.evidence.confidence,source.confidence);
   assert.equal(m.assertion,"reviewed_project_native");
   assert.equal(r.reviewGaps.nativePhysical,"reviewed_milestones_present");
   assert.ok(!r.financing[0].legacyPhysicalObservations.some(s=>s.status==="reviewed_project_native"));
