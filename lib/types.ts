@@ -86,7 +86,7 @@ export const SOURCE_CONFIDENCE = [
 
 export const TITLE_LANGS = ["zh", "en", "ja", "fr", "other"] as const;
 
-export const SOURCE_LANGS = ["zh", "en", "ja", "fr", "other", "bilingual"] as const;
+export const SOURCE_LANGS = ["zh", "en", "ja", "fr", "et", "other", "bilingual"] as const;
 
 /**
  * Provenance of an English translation:
