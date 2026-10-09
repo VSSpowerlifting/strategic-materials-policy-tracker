@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-09: F4-B4 current Neo Narva legal grantee (candidate for review)
+
+- **F4-B3 source-evidence PR #106 merged** as `c9c4bfe`. The Ministry of Finance JTF-2/2025 audit (project 2021-2027.6.01.22-0002, printed pp. 3 and 7) and EIS official grant register independently identify **NPM Narva OÜ (reg. 16493223)** as the **current** beneficiary, whereas existing SMPT finance record named group sponsor **Neo Performance**. The 2023 decision reassigned **95%** of original NPM Silmet OÜ grant project activity/budget to NPM Narva, leaving Silmet a partner.
+- This candidate adds **one source-linked Estonian organization** and corrects only the present finance row's `recipient`/`recipientOrgIds`, shifting recipient evidence from imprecise parent project attribution to explicit EIS/Ministry beneficiary proof. The group-level Neo organization remains distinct and no unsupported direct ownership edge or historical recipient-effective date is invented.
+- Current **approximately €14.8M grant**, partially disbursed status based on separate receipts, 96 finance rows, totals, projects, legal instruments and Neo's *absent* historical amount series remain unchanged. `research/f4/neo-jtf-amount-reconciliation.json` and queue distinguish **resolved current grantee** from **unresolved historic 2022→2023 transfer day and 2024/2025 amendment ceilings**.
+- Attempts to find complete public decisions `11-2/23/3085`, `11-2/24/4882` and `11-2/25/4023` have not verified their complete signed text. No grant amount history is authorized. Draft source-access request for EIS is stored **unsent** in `docs/research/f4-b4-neo-narva-grantee-identity-2026-10-09.md`.
+- **Review gate:** exact-head production dependency audit/validate/typecheck/lint/tests/build and human source review before squash merge. Do not promote F4-C historical totals, collector changes or deploy from this phase.
+
 ## 2026-10-09: F4-B3: Neo Estonia JTF amount reconciliation (stacked source-review candidate)
 
 - **Proven:** Neo's 2024 Annual Information Form, printed p. 9, explicitly reports one Estonia JTF grant amendment **during November 2024** (original up-to **€18.7M** → approximately **€14.7M**; grant rate **18.75% → 23.3%** on decreased eligible project size **€63.3M**). Exact legal day remains unknown. An independent European Commission Estonia narrative also cites **€14.7M** in JTF support, but does **not** prove full payout.
