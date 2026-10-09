@@ -1,11 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync, spawnSync } from "node:child_process";
 
 import {
   auditF5CasefileReadiness, F5_PILOT_PROJECT_IDS,
 } from "@/lib/f5-casefile-readiness";
 import type { PathwayInputs } from "@/lib/evidence-pathway-contract";
 import type { ProjectMilestone } from "@/lib/types";
+import { site } from "@/lib/site";
 import {
   getAllControlMeasures, getAllEvents, getAllFinancialCommitments,
   getAllProjectDesignations, getAllProjectMilestones, getAllProjects, getAllSources,
@@ -135,4 +137,40 @@ test("F5 readiness: pilot order cannot affect report and cannot grant automatic 
   assert.deepEqual(a, b);
   assert.equal(a.publicReleaseAuthorized, false);
   assert.ok(a.limitations.some(s => s.includes("maintainer signoff")));
+});
+
+test("F5 casefile CLI: JSON and human reports both remain deliberately non-publishing", () => {
+  const args = ["--import", "tsx", "scripts/audit-f5-casefiles.ts"];
+  const human = execFileSync(process.execPath, args, {encoding: "utf8"});
+  assert.ok(human.includes("Public release: NOT AUTHORIZED"));
+  assert.ok(human.includes("Curated corpus validation cutoff: " + site.lastUpdated));
+  assert.ok(human.includes("Ready for manual QA: NO"));
+  const json = execFileSync(process.execPath, [...args, "--json"], {encoding: "utf8"});
+  const report = JSON.parse(json);
+  assert.deepEqual(report, auditF5CasefileReadiness(corpus(), site.lastUpdated));
+  assert.equal(report.publicReleaseAuthorized, false);
+  assert.equal(report.allPilotsEligibleForManualQa, false);
+});
+
+test("F5 casefile CLI: explicit strict mode fails closed without suppressing review evidence", () => {
+  const args = ["--import", "tsx", "scripts/audit-f5-casefiles.ts"];
+  const strict = spawnSync(process.execPath, [...args, "--strict"], {encoding: "utf8"});
+  assert.equal(strict.status, 1, "strict mode must refuse current unreviewed pilot coverage");
+  assert.ok(strict.stdout.includes("Public release: NOT AUTHORIZED"));
+  assert.ok(strict.stdout.includes("BLOCKED: no registered source-reviewed occurred project-native milestone"));
+  const jsonStrict = spawnSync(process.execPath, [...args, "--json", "--strict"], {encoding: "utf8"});
+  assert.equal(jsonStrict.status, 1);
+  const report = JSON.parse(jsonStrict.stdout);
+  assert.equal(report.publicReleaseAuthorized, false);
+  assert.equal(report.nextGate, "milestone_evidence_review");
+});
+
+test("F5 casefile CLI: unknown, duplicate or misleading approval flags are invalid", () => {
+  const args = ["--import", "tsx", "scripts/audit-f5-casefiles.ts"];
+  for (const flags of [["--publish"], ["--json", "--json"], ["--approve"]]) {
+    const invalid = spawnSync(process.execPath, [...args, ...flags], {encoding: "utf8"});
+    assert.equal(invalid.status, 2);
+    assert.match(invalid.stderr, /Usage: npm run audit:f5-casefiles/);
+    assert.equal(invalid.stdout, "");
+  }
 });
