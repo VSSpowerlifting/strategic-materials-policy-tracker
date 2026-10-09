@@ -85,7 +85,7 @@ export type FinancialAmountOn =
 
 /** Reject malformed, impossible, or imprecise dates before lexical ISO comparisons. */
 function requireHistoricalDate(value: string): void {
-  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(value)) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
     throw new RangeError("financialAmountOn requires an ISO YYYY-MM-DD calendar date");
   }
   const parsed = new Date(`${value}T00:00:00.000Z`);
