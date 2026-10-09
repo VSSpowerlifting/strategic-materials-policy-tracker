@@ -34,6 +34,13 @@
       "observation": "public_institution_support_description"
     },
     {
+      "sourceId": "src-eis-npm-narva-jtf-project-grant",
+      "asReported": "€14,790,898.00 awarded under 'Magnetitehas Narva', eligible project cost €63,327,184.00",
+      "eurValue": "14790898",
+      "qualifier": "exact",
+      "observation": "current_official_grant_register_not_historical_amendment_evidence"
+    },
+    {
       "sourceId": "src-neo-aif-2026",
       "asReported": "approximately €14.8 million at 23% grant rate",
       "eurValue": "14800000",
@@ -50,8 +57,21 @@
       "Estonian government grant amendment or decision identifying exact effective date and amended legal ceiling, OR an independently reviewable primary-source explanation of the effective-day bounds.",
       "Source-backed explanation whether €14.7M and €14.8M are different report rounding/estimating of one amended award versus successive legally distinct award ceilings.",
       "Separate legal award face value from reimbursement received, project cost, EDC financing and grant rate.",
-      "Independent human approval of proposed historical version windows, with the latest version exactly matching the canonical current amount."
-    ]
+      "Independent human approval of proposed historical version windows, with the latest version exactly matching the canonical current amount.",
+      "Correctly identify recipient/grantee: EIS supported-project entry names NPM Narva OÜ (registry code 16493223), while the current financing row's recipient label names Neo Performance; review organization taxonomy and legal contracting beneficiary before any canonical correction."
+    ],
+    "officialProjectRegister": {
+      "awardAmountEUR": "14790898",
+      "beneficiary": "NPM Narva OÜ",
+      "beneficiaryRegistration": "16493223",
+      "project": "Magnetitehas Narva",
+      "eligibleProjectCostEUR": "63327184",
+      "distanceFromCanonicalRoundedEUR": "9102",
+      "distanceFromEarlier147EstimateEUR": "90898",
+      "currentAwardSnapshotNotOperativeHistoricalVersion": true,
+      "legalGranteeIdentityReviewRequired": true,
+      "note": "Official Estonian EIS register is a present award snapshot and identifies a grant beneficiary distinct from current SMPT parent-company recipient label. It is not the legal amendment instrument or proof of an operative day. Do not rewrite parent-company recipient or backdate this amount without independent source review."
+    }
   },
   "noPromotion": true,
   "historicalTotalsAuthorized": false
