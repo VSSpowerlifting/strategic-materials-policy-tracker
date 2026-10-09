@@ -71,6 +71,7 @@ import {
   type ControlStatusEntry,
   type EvidenceReference,
   type FinancialCommitment,
+  type FinancialAmountBoundEvidence,
   type FinancialAmountVersion,
   type FinancialEvidenceField,
   type FinancialRelationship,
@@ -457,12 +458,19 @@ const AMOUNT: Fields<MonetaryAmount> = {
   basisLabel: optionalText(),
 };
 
+const FINANCIAL_AMOUNT_BOUND: Fields<FinancialAmountBoundEvidence> = {
+  sourceId: text(),
+  locator: text(),
+};
+
 const FINANCIAL_AMOUNT_VERSION: Fields<FinancialAmountVersion> = {
   amount: { kind: "object", name: "historical amount", fields: AMOUNT, nullable: true },
   effectiveNotBefore: text("date"),
   effectiveNoLaterThan: text("date"),
   sourceId: text(),
   locator: text(),
+  effectiveNotBeforeEvidence: objectOf("earliest operative-date evidence", FINANCIAL_AMOUNT_BOUND),
+  effectiveNoLaterThanEvidence: objectOf("latest operative-date evidence", FINANCIAL_AMOUNT_BOUND),
   reason: oneOf(["original", "amendment", "correction", "withdrawal", "other"]),
   note: nullableText(),
 };
@@ -1302,6 +1310,15 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
     history.forEach((v, i) => {
       const path = `financialAmountHistory[${i}]`;
       resolves(v.sourceId, refs.sources, SOURCE, `${path}.sourceId`, r, refs);
+      for (const key of ["effectiveNotBeforeEvidence", "effectiveNoLaterThanEvidence"] as const) {
+        const bound = v[key];
+        resolves(bound.sourceId, refs.sources, SOURCE, `${path}.${key}.sourceId`, r, refs);
+        if (!c.evidence.some(e => e.sourceId === bound.sourceId &&
+            (e.supports.includes("amount") || e.supports.includes("status")))) {
+          r.error("missing_same_source_evidence", `${path}.${key}.sourceId`,
+            "operative-date bound must cite a linked financial amount/status evidence source");
+        }
+      }
       if (i === 0 && v.reason !== "original")
         r.error("incoherent_value", `${path}.reason`, "first historical amount must be original");
       if (isCalendarDate(v.effectiveNotBefore) && isCalendarDate(v.effectiveNoLaterThan)) {

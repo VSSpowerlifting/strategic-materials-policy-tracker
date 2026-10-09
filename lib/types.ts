@@ -666,12 +666,23 @@ export type MonetaryAmount = {
 
 /** One sourced amount revision of a single legal instrument, not a new loan or payment.
  * The operative day may be bounded rather than known exactly. */
-export type FinancialAmountVersion = {
-  amount: MonetaryAmount | null;
-  effectiveNotBefore: string;
-  effectiveNoLaterThan: string;
+export type FinancialAmountBoundEvidence = {
+  /** Independently registered primary evidence for this operative-date bound. */
   sourceId: string;
   locator: string;
+};
+
+export type FinancialAmountVersion = {
+  amount: MonetaryAmount | null;
+  /** Earliest possible day the revision could have become operative. */
+  effectiveNotBefore: string;
+  /** Day by which the revision is independently confirmed operative. */
+  effectiveNoLaterThan: string;
+  /** Primary evidence for the amount, not necessarily both date bounds. */
+  sourceId: string;
+  locator: string;
+  effectiveNotBeforeEvidence: FinancialAmountBoundEvidence;
+  effectiveNoLaterThanEvidence: FinancialAmountBoundEvidence;
   reason: "original" | "amendment" | "correction" | "withdrawal" | "other";
   note: string | null;
 };

@@ -13,6 +13,8 @@ import type { FinancialCommitment } from "@/lib/types";
 const ID="fin-us-doe-thacker-pass-atvm-2024";
 const ORIGINAL="src-doe-thacker-pass-2024";
 const AMENDMENT="src-sec-lac-doe-amendment-announcement-2025-10-07";
+const ORIGINAL_AGREEMENT="src-sec-lac-thacker-loan-agreement-2024";
+const LATER_CONFIRMATION="src-sec-lac-thacker-q2-2026";
 const loan=()=>getFinancialCommitmentById(ID)!;
 
 test("F4-A: operative-as-of amount is sourced, qualified and stays on one legal loan",()=>{
@@ -35,6 +37,8 @@ test("F4-A: operative-as-of amount is sourced, qualified and stays on one legal 
     assert.deepEqual(financialAmountOn(c,d),{
       kind:"indeterminate_transition",
       earliest:"2025-10-07",latest:"2025-10-20",sourceId:AMENDMENT,
+      effectiveNotBeforeEvidence: c.financialAmountHistory![1].effectiveNotBeforeEvidence,
+      effectiveNoLaterThanEvidence: c.financialAmountHistory![1].effectiveNoLaterThanEvidence,
     },"conditional signing is not an exact operative transition at "+d);
   }
   for(const d of ["2025-10-20","2026-06-30","2026-10-08"]){
@@ -111,4 +115,36 @@ test("F4-A: version sources require their own explicit amount evidence",()=>{
   assert.ok(errors.includes("missing_same_source_evidence@financialAmountHistory[1].sourceId"),errors.join(", "));
   const missing=problems(r=>{r.financialAmountHistory![1].sourceId="src-invented-amendment";});
   assert.ok(missing.includes("unresolved_reference@financialAmountHistory[1].sourceId"),missing.join(", "));
+});
+
+test("F4-A: independent bound sources are preserved in all amount responses",()=>{
+  const c=loan();
+  const [original, amendment]=c.financialAmountHistory!;
+  assert.equal(original.effectiveNotBeforeEvidence.sourceId,ORIGINAL_AGREEMENT);
+  assert.equal(original.effectiveNoLaterThanEvidence.sourceId,ORIGINAL_AGREEMENT);
+  assert.equal(amendment.effectiveNotBeforeEvidence.sourceId,AMENDMENT);
+  assert.equal(amendment.effectiveNoLaterThanEvidence.sourceId,LATER_CONFIRMATION);
+  const before=financialAmountOn(c,"2024-10-28");
+  assert.equal(before.kind,"quantified");
+  if(before.kind==="quantified") assert.deepEqual(before.effectiveNoLaterThanEvidence,original.effectiveNoLaterThanEvidence);
+  const after=financialAmountOn(c,"2025-10-20");
+  assert.equal(after.kind,"quantified");
+  if(after.kind==="quantified") assert.deepEqual(after.effectiveNoLaterThanEvidence,amendment.effectiveNoLaterThanEvidence);
+});
+
+test("F4-A: historical input must be a real full calendar day, including unreviewed rows",()=>{
+  for(const invalid of ["2025-2-1","2025-02","2025-02-30","not-a-date","2025-10-20T00:00:00Z","2025-13-01"]) {
+    assert.throws(()=>financialAmountOn(loan(),invalid),RangeError);
+    assert.throws(()=>financialAmountOn(getFinancialCommitmentById("fin-eu-eib-2024-keliber-loan")!,invalid),RangeError);
+  }
+  assert.equal(financialAmountOn(loan(),"2024-02-29").kind,"not_yet_evidenced");
+});
+
+test("F4-A: each independently evidenced operative bound requires a real linked source",()=>{
+  const missing=problems(r=>{r.financialAmountHistory![1].effectiveNoLaterThanEvidence.sourceId="src-invented-bound";});
+  assert.ok(missing.includes("unresolved_reference@financialAmountHistory[1].effectiveNoLaterThanEvidence.sourceId"),missing.join(", "));
+  const unrelated=getAllSources().find(s=>!loan().evidence.some(e=>e.sourceId===s.id))!;
+  assert.ok(unrelated);
+  const absent=problems(r=>{r.financialAmountHistory![1].effectiveNoLaterThanEvidence.sourceId=unrelated.id;});
+  assert.ok(absent.includes("missing_same_source_evidence@financialAmountHistory[1].effectiveNoLaterThanEvidence.sourceId"),absent.join(", "));
 });

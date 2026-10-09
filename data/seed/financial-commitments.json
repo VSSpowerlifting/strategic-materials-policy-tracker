@@ -9108,7 +9108,15 @@
         "sourceId": "src-doe-thacker-pass-2024",
         "locator": "DOE project statistics, financial summary, loan amount and October 2024 update",
         "reason": "original",
-        "note": "Executed direct loan initially totaled approximately $2.26 billion including capitalized interest, not a separate loan from later amendments."
+        "note": "Executed direct loan initially totaled approximately $2.26 billion including capitalized interest, not a separate loan from later amendments.",
+        "effectiveNotBeforeEvidence": {
+          "sourceId": "src-sec-lac-thacker-loan-agreement-2024",
+          "locator": "Executed loan agreement — October 28, 2024 agreement date"
+        },
+        "effectiveNoLaterThanEvidence": {
+          "sourceId": "src-sec-lac-thacker-loan-agreement-2024",
+          "locator": "Executed loan agreement — October 28, 2024 agreement date"
+        }
       },
       {
         "amount": {
@@ -9123,7 +9131,15 @@
         "sourceId": "src-sec-lac-doe-amendment-announcement-2025-10-07",
         "locator": "Form 8-K Item 1.01 and Exhibit 99.1; Q2 2026 Form 10-Q Note 4 for first draw October 20",
         "reason": "amendment",
-        "note": "Signed October 7, 2025 subject to conditions precedent; exact effective day unverified. Initial October 20 advance establishes the amendment effective no later than then. Withhold historical amount selection for October 7–19."
+        "note": "Signed October 7, 2025 subject to conditions precedent; exact effective day unverified. Initial October 20 advance establishes the amendment effective no later than then. Withhold historical amount selection for October 7–19.",
+        "effectiveNotBeforeEvidence": {
+          "sourceId": "src-sec-lac-doe-amendment-announcement-2025-10-07",
+          "locator": "Form 8-K Item 1.01 — agreement entered October 7, 2025; conditions precedent to effectiveness"
+        },
+        "effectiveNoLaterThanEvidence": {
+          "sourceId": "src-sec-lac-thacker-q2-2026",
+          "locator": "Form 10-Q Note 4 / MD&A — first DOE loan advance October 20, 2025"
+        }
       }
     ]
   },
