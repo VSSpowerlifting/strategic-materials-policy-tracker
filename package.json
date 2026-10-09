@@ -23,6 +23,7 @@
     "editorial:inbox": "tsx scripts/editorial-inbox.ts",
     "audit:f4": "tsx scripts/audit-f4-amount-coverage.ts",
     "audit:pathways": "tsx scripts/audit-evidence-pathways.ts",
+    "audit:f5-casefiles": "tsx scripts/audit-f5-casefiles.ts",
     "audit:project-execution": "tsx scripts/audit-project-execution.ts",
     "audit:project-execution-pilot": "tsx scripts/audit-project-execution-pilot.ts",
     "audit:project-execution-adjudications": "tsx scripts/audit-project-execution-adjudications.ts"
