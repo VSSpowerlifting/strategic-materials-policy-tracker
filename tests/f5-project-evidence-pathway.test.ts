@@ -169,3 +169,23 @@ test("F5-2: source records and status evidence are individually inspectable with
   assert.equal(path.historicalCapitalTotals,"not_authorized");
   assert.ok(path.limitations.some(s=>s.includes("current corpus revision")));
 });
+
+test("F5-2: preserve source status-history sequence even when last authoritative status has no date", () => {
+  const d=input();
+  const id="fin-us-dod-perpetua-stibnite-dpa";
+  const row=d.finances.find(f=>f.id===id)!;
+  const source=row.financialStatusHistory[row.financialStatusHistory.length-1].sourceId;
+  const originalCount=row.financialStatusHistory.length;
+  row.financialStatusHistory.push({
+    status:"contracted",date:null,sourceId:source,
+    note:"synthetic test-only final current status with unknown exact effective day",
+  });
+  const path=buildProjectEvidencePathway("prj-us-stibnite",d);
+  const states=path.financing.find(f=>f.id===id)!.financialStatuses;
+  assert.equal(states.length,originalCount+1);
+  assert.equal(states[states.length-1].status,"contracted");
+  assert.equal(states[states.length-1].statusDate,null);
+  assert.equal(states[states.length-1].note,
+    "synthetic test-only final current status with unknown exact effective day");
+  assert.equal(states[0].status,row.financialStatusHistory[0].status);
+});
