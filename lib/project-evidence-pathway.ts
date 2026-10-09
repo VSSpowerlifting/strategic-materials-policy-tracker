@@ -10,7 +10,7 @@
 import {
   auditEvidencePathways, type PathwayEdge, type PathwayInputs,
 } from "./evidence-pathway-contract";
-import type { PolicyEvent } from "./types";
+import type { PolicyEvent, Source } from "./types";
 
 const lex = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0;
 
@@ -19,8 +19,11 @@ export type PathwaySourceReference = {
   title: string;
   publisher: string;
   url: string;
+  confidence: Source["confidence"];
+  sourceType: Source["sourceType"];
+  language: Source["language"];
   publishedOn: string | null;
-  firstRegisteredAccessOn: string;
+  accessedOn: string;
   locator: string | null;
 };
 
@@ -150,7 +153,8 @@ export function buildProjectEvidencePathway(
     if (!source) throw new Error("F5-2 missing source: " + sourceId);
     return {
       id: source.id, title: source.title, publisher: source.publisher, url: source.url,
-      publishedOn: source.datePublished ?? null, firstRegisteredAccessOn: source.dateAccessed,
+      confidence: source.confidence, sourceType: source.sourceType, language: source.language,
+      publishedOn: source.datePublished ?? null, accessedOn: source.dateAccessed,
       locator,
     };
   }
