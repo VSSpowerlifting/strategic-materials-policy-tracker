@@ -138,3 +138,31 @@ test("safe CLI accepts the checked-in PENDING example without changing published
   assert.deepEqual(parsed.errors, []);
   assert.deepEqual(parsed.proposals, []);
 });
+
+test("M3 review preview accepts a structurally valid whole-project null scope but never publishes it", () => {
+  const rows = structuredClone(queue);
+  // Synthetic structure-only test. This does not adjudicate that the actual
+  // Alcoa issuer evidence warrants a whole-project claim.
+  rows[0].scopeProposal = "whole_project";
+  rows[0].scopeAsStated = null as never;
+  const decisions = draft();
+  setApproved(decisions[0]);
+  const report = adjudicateProjectExecutionReview(rows, decisions, refs());
+  assert.deepEqual(report.errors, [], JSON.stringify(report.errors));
+  assert.deepEqual(report.blocked, []);
+  assert.equal(report.status, "human_adjudication_preview_only");
+  assert.equal(report.proposals.length, 1);
+  assert.equal(report.proposals[0].scope, "whole_project");
+  assert.equal(report.proposals[0].scopeAsStated, null);
+  assert.equal(getAllProjectMilestones().length, 0);
+});
+
+test("M3 cannot preview a purported whole-project milestone with a named component", () => {
+  const rows = structuredClone(queue);
+  rows[0].scopeProposal = "whole_project";
+  const decisions = draft();
+  setApproved(decisions[0]);
+  const report = adjudicateProjectExecutionReview(rows, decisions, refs());
+  assert.ok(report.errors.some(e => e.includes("whole_project requires scopeAsStated: null")));
+  assert.deepEqual(report.proposals, []);
+});
