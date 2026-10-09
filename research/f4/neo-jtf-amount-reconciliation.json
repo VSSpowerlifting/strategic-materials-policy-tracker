@@ -67,7 +67,7 @@
       "Source-backed explanation whether €14.7M and €14.8M are different report rounding/estimating of one amended award versus successive legally distinct award ceilings.",
       "Separate legal award face value from reimbursement received, project cost, EDC financing and grant rate.",
       "Independent human approval of proposed historical version windows, with the latest version exactly matching the canonical current amount.",
-      "Correctly identify recipient/grantee: EIS supported-project entry names NPM Narva OÜ (registry code 16493223), while the current financing row's recipient label names Neo Performance; review organization taxonomy and legal contracting beneficiary before any canonical correction.",
+      "Current grant-beneficiary identity is corrected to NPM Narva OÜ, but the historical 2022 NPM Silmet award and 2023 change decision still require the original instrument to establish recipient-effective date and legal continuity before a date-sliced recipient series.",
       "Audit also identifies original decision 11-2/22/3107 and 2023 grantee-transfer decision 11-2/23/3085; trace original NPM Silmet award through the 95%-budget transfer to NPM Narva before naming recipient on earlier historical versions."
     ],
     "officialProjectRegister": {
@@ -79,8 +79,8 @@
       "distanceFromCanonicalRoundedEUR": "9102",
       "distanceFromEarlier147EstimateEUR": "90898",
       "currentAwardSnapshotNotOperativeHistoricalVersion": true,
-      "legalGranteeIdentityReviewRequired": true,
-      "note": "Official Estonian EIS register is a present award snapshot and identifies a grant beneficiary distinct from current SMPT parent-company recipient label. It is not the legal amendment instrument or proof of an operative day. Do not rewrite parent-company recipient or backdate this amount without independent source review."
+      "legalGranteeIdentityReviewRequired": false,
+      "note": "EIS grant register explicitly identifies the legal current recipient NPM Narva OÜ, which is now separately registered and used in the current canonical finance row (F4-B4). Register is not the amendment instrument, nor proof of retrospective value/effective date or an original 2022 recipient."
     },
     "ministryAudit": {
       "sourceId": "src-estonia-finance-jtf-narva-audit-2025-11",
@@ -115,6 +115,23 @@
       "formalProceduralFindings": true,
       "awardInvalidated": false,
       "note": "Auditors identify procedural documentation/assessment issues, not withdrawal of the grant, and find project spending/use substantially compliant. The 2024 decision changed project budget; monetary support/percentage per version requires original administrative amendment. 2025 follow-on amendment must also be inspected before claiming amount series complete."
+    },
+    "currentRecipientResolution": {
+      "resolution": "current_legal_recipient_corrected",
+      "priorRecipientLabel": "Neo Performance",
+      "canonicalRecipient": "NPM Narva OÜ",
+      "canonicalRecipientOrgId": "org-npm-narva-ou",
+      "entityRegistryNumber": "16493223",
+      "legalIdentitySourceIds": [
+        "src-eis-npm-narva-jtf-project-grant",
+        "src-estonia-finance-jtf-narva-audit-2025-11"
+      ],
+      "historicalOriginalBeneficiary": "NPM Silmet OÜ",
+      "historicalTransferDecision": "11-2/23/3085",
+      "historicalTransferDecisionDate": "2023-11-03",
+      "historicalRecipientEffectiveDayProven": false,
+      "directShareholdingOrIntermediateOwnershipProven": false,
+      "note": "Corrects CURRENT Estonian grant beneficiary only; Neo Performance Materials Inc. stays group sponsor/issuer context, NPM Silmet OÜ original 2022 grantee; no backdated recipient series or direct-parent assertion is invented."
     }
   },
   "noPromotion": true,
