@@ -118,8 +118,7 @@ test("F5-0: evidence graph fails closed on missing IDs and uncited assertions", 
   assert.throws(()=>auditEvidencePathways(missingEvent),/F5 unresolved control event/);
 
   const duplicate=corpus();
-  duplicate.projects.push(duplicate.projects[0]);
-  assert.throws(()=>auditEvidencePathways(duplicate),/duplicate project ID/);
+  assert.throws(()=>auditEvidencePathways({...duplicate, projects:[...duplicate.projects,duplicate.projects[0]]}),/duplicate project ID/);
 
   const lostCitation=corpus();
   lostCitation.finances[0].evidence=[];
@@ -145,8 +144,8 @@ test("F5-0: native milestone is a separate reviewed, scoped and mode-specific as
     locator:"test source paragraph",statementOriginal:"test fixture",statementEn:"test fixture",
     statementEnSource:"na",reviewedBy:"test reviewer",reviewedAt:"2026-10-09",
   };
-  data.milestones.push(milestone);
-  const report=auditEvidencePathways(data);
+  const withMilestone={...data,milestones:[...data.milestones,milestone]};
+  const report=auditEvidencePathways(withMilestone);
   const edge=report.edges.find(e=>e.kind==="reviewed_project_milestone");
   assert.deepEqual([edge?.fromId,edge?.toId],[project.id,milestone.id]);
   assert.equal(report.totals.nativeMilestones,1);
@@ -155,10 +154,10 @@ test("F5-0: native milestone is a separate reviewed, scoped and mode-specific as
   assert.equal(report.projects.find(p=>p.projectId===project.id)?.physicalReview,
     "native_milestones_recorded");
   milestone.occurredOn="2026-09-20";
-  assert.throws(()=>auditEvidencePathways(data),/conflates occurred and target clocks/);
+  assert.throws(()=>auditEvidencePathways(withMilestone),/conflates occurred and target clocks/);
   milestone.occurredOn=null;
   milestone.reviewedBy="  ";
-  assert.throws(()=>auditEvidencePathways(data),/milestone lacks reviewer/);
+  assert.throws(()=>auditEvidencePathways(withMilestone),/milestone lacks reviewer/);
 });
 
 test("F5-0: actual CLI is read-only, machine-readable and rejects unknown options", () => {
