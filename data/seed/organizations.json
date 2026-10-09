@@ -1426,41 +1426,6 @@
     "notes": null
   },
   {
-    "id": "org-npm-narva-ou",
-    "name": "NPM Narva OÜ",
-    "nameOriginal": "NPM Narva OÜ",
-    "aliases": [],
-    "kind": "company",
-    "countryCode": "EE",
-    "actor": null,
-    "parents": [],
-    "evidence": [
-      {
-        "sourceId": "src-eis-npm-narva-jtf-project-grant",
-        "supports": [
-          "name",
-          "kind",
-          "country"
-        ],
-        "evidence": "explicit",
-        "locator": "EIS supported projects: Magnetitehas Narva; Toetuse saaja = NPM Narva OÜ; registrikood 16493223",
-        "note": "Estonian funding authority directly names the grant beneficiary, registered company, and Narva project. A group sponsor must not be substituted for the legal beneficiary."
-      },
-      {
-        "sourceId": "src-estonia-finance-jtf-narva-audit-2025-11",
-        "supports": [
-          "name",
-          "kind",
-          "country"
-        ],
-        "evidence": "explicit",
-        "locator": "JTF-2/2025 final project audit, PDF p. 3 § 1.1 'Toetuse saaja ja partner(id)' and p. 7 footnote 8",
-        "note": "Ministry confirms current grant beneficiary NPM Narva OÜ, original NPM Silmet OÜ, and transfer of 95% project activities/budget. Neither source proves direct shareholding or a simplistic one-hop corporate parent link."
-      }
-    ],
-    "notes": "Estonian company registration number 16493223. Current beneficiary for project 2021-2027.6.01.22-0002 ('Magnetitehas Narva') in EIS grant register and Ministry project audit. NPM Silmet OÜ was the initial 2022 beneficiary; Ministry audit records reassignment of 95% of grant-supported project activities and budget to NPM Narva OÜ in the 3 November 2023 amendment, with NPM Silmet retained as project partner. Distinct from sponsor/issuer name Neo Performance Materials Inc. No explicit direct parent-company ownership edge is asserted here: audit shows a common corporate group, not a verified direct shareholding chain."
-  },
-  {
     "id": "org-ngc-battery-materials",
     "name": "NGC Battery Materials GmbH",
     "nameOriginal": null,
@@ -1589,6 +1554,41 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "org-npm-narva-ou",
+    "name": "NPM Narva OÜ",
+    "nameOriginal": "NPM Narva OÜ",
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "EE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-eis-npm-narva-jtf-project-grant",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "EIS supported projects: Magnetitehas Narva; Toetuse saaja = NPM Narva OÜ; registrikood 16493223",
+        "note": "Estonian funding authority directly names the grant beneficiary, registered company, and Narva project. A group sponsor must not be substituted for the legal beneficiary."
+      },
+      {
+        "sourceId": "src-estonia-finance-jtf-narva-audit-2025-11",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "JTF-2/2025 final project audit, PDF p. 3 § 1.1 'Toetuse saaja ja partner(id)' and p. 7 footnote 8",
+        "note": "Ministry confirms current grant beneficiary NPM Narva OÜ, original NPM Silmet OÜ, and transfer of 95% project activities/budget. Neither source proves direct shareholding or a simplistic one-hop corporate parent link."
+      }
+    ],
+    "notes": "Estonian company registration number 16493223. Current beneficiary for project 2021-2027.6.01.22-0002 ('Magnetitehas Narva') in EIS grant register and Ministry project audit. NPM Silmet OÜ was the initial 2022 beneficiary; Ministry audit records reassignment of 95% of grant-supported project activities and budget to NPM Narva OÜ in the 3 November 2023 amendment, with NPM Silmet retained as project partner. Distinct from sponsor/issuer name Neo Performance Materials Inc. No explicit direct parent-company ownership edge is asserted here: audit shows a common corporate group, not a verified direct shareholding chain."
   },
   {
     "id": "org-ntwist",
