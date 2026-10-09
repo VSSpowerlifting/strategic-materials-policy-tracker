@@ -58,3 +58,14 @@ Perpetua's [June 1, 2026 release](https://www.investors.perpetuaresources.com/in
 - Audit cannot and does not change the public project/evidence graph, financial totals, status histories, source registry, site dates, candidate isolation, exports, or schedules. Full dependency audit, validate/typecheck/lint/tests/build on exact head; human review and squash merge separately.
 
 **This artifact is source research, not certified publication.** The purpose is to remove engineering ambiguity so a human reviewer can make real source decisions instead of manually reconstructing four histories or unknowingly double-counting one event.
+
+## October 9 follow-on: Neo/Narva moved into the canonical unsigned M3.2 reviewer queue
+
+After this initial research packet was prepared, the Narva commercial-production lead was **routed to the preexisting M3.2 adjudication queue**, rather than leaving an approval-eligible duplicate in F5. Canonical queue ID: `review-m3-2-neo-narva-magnets`. The F5 entry now uses `track: existing_m3_review`, points at that queue ID, and has `proposal: null`; it remains `pending_human_review`.
+
+- Original issuer [September 14, 2026 Neo release](https://www.neomaterials.com/neo-advances-commercial-production-magnet-facility/), first body paragraph: Neo reports the Narva permanent magnet facility **is in commercial production and shipping** rare earth sintered magnets under initial programs. Registered `src-neo-commercial-production-2026` has an issuer publication date of 2026-09-14 and an existing source-access record dated 2026-10-02.
+- `production_reported`, `named_facility`, `claimMode: occurred`, `occurredOn: null`, `targetOn: null` are **unreviewed scope proposals**, not an approval. Neo does **not** give an independently established day commercial production first started; the release date is only the latest evidence boundary for its reported state.
+- The single associated JTF finance row is a **source pointer** that carries the same original issuer implementation observation, not an assertion that the EU JTF grant caused production or that the funding was paid for a given output quantity. No historical grant amount versioning, financial totals or legal status is affected.
+- The existing M3 reviewer example now includes a fifth `pending` record with null reviewer identity and all attestations false. F5 reports **3 reused M3 cases, 1 remaining new lead** (2025 Perpetua early works), 1 missing registered source, 1 Burntlog taxonomy hold. It still authorizes **no publication**.
+
+**Remaining hard gates:** independent human review and attestation of the Neo issuer passage; approval of an honest curated corpus-date update (currently October 7); Perpetua October 2025 source registration and independently resolved early-works scope; Burntlog infrastructure taxonomy decision. The public `data/seed/project-milestones.json` remains empty. No reader-facing F5 casefile is unlocked by this PR.

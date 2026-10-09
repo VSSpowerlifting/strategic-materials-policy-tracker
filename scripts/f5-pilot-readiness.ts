@@ -194,7 +194,7 @@ export function auditF5PilotReadiness(input: Packet, refs: Refs): F5PilotReadine
     cases, errors,
     limitations:[
       "Every item remains a research lead. This audit cannot record or substitute for a human review attestation.",
-      "The existing M3.2 review gate remains authoritative for its original rows; no duplicate Alcoa/Burntlog approvals are created.",
+      "The existing M3.2 review gate remains authoritative for Alcoa, Narva and Burntlog; no duplicate project-source approvals are created.",
       "A registered source is not proof of a completed editorial review or exact occurrence day.",
       "The site's curated corpus cutoff cannot be advanced or reviewer signatures backdated to satisfy an automated script.",
       "Nothing is written to data/seed/project-milestones.json, the public site, exports, or financing status histories.",

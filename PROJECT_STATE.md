@@ -1,3 +1,10 @@
+## 2026-10-09: F5-1b canonical Neo/Narva human-review intake (candidate)
+
+- Promotes **only the unreviewed review-queue placement** of Neo's September 14, 2026 commercial-production issuer claim into the existing M3.2 workflow: `review-m3-2-neo-narva-magnets`. The F5 research packet now references this same queue row, rather than carrying a second candidate approval route.
+- Preserves `production_reported` / `named_facility`, **unknown exact production-start day** (`occurredOn:null`), original first-paragraph issuer quotation and registered source, and one related JTF financing observation; does not claim nameplate output, grant causation or funding payout.
+- M3 example remains five **pending** unsigned decisions with false checks. Reviewer names/approval are not invented, and the public project milestone seed, financing, current site cutoff and UI are unchanged. Source/corpus-date restrictions still block publication. Alcoa and Burntlog remain separate existing M3 cases; 2025 Stibnite early works remains a new F5 lead without registered source.
+- Review gate: exact-head data validation, full tests/typecheck/lint/build, source review and maintainer squash merge. See `docs/analysis/f5-1-pilot-review-readiness-2026-10-09.md` for the follow-on.
+
 # Project state
 
 ## 2026-10-09: F5-1 first-party execution source-review readiness (candidate)
