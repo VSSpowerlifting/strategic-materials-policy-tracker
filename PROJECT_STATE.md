@@ -1,5 +1,13 @@
 # Project state
 
+## 2026-10-09: F4-B2 Perpetua DPA TIA operative award ceiling (candidate review)
+
+- The historical amount coverage auditor in F4-B1 **landed in #104, merge `d0fd8a8`**. At baseline, just one of 96 financing rows had structured amount history; F4-B2 proposes a second reviewed record, bringing candidate branch coverage to 2/96 (still not complete historical capital).
+- Source-linked historical versions for **one** Perpetua/DoD/Air Force Research Laboratory DPA Title III Technology Investment Agreement: **up to $24.8M on 2022-12-16**, definitive **not-to-exceed $24,812,062 on 2023-07-25**, amended **up-to $59.2M canonical presentation on 2024-05-02** (exact May 2024 SEC legal ceiling **$59,224,176**, including **$34,412,114** additional within the SAME instrument).
+- Maintains temporary 2022 **$18.6M** reimbursement availability separate from the $24.8M award ceiling. The February 2024 conditional announcement is not a binding date; the issuer's SEC 8-K says amendment entered **May 2**. Registered 2023/2024 8-K publication dates remain **null**, not confused with transaction dates.
+- **Non-goals:** zero new finance rows, zero current-amount/status/counting changes, no duplicate grant, no payment/physical-execution inference, no as-of totals/UI/API. Perpetua DPA removed from open editorial F4 queue; three other unreviewed candidates remain. See `docs/research/f4-b2-perpetua-tia-2026-10-09.md`.
+- **Acceptance:** full exact-head validate/typecheck/lint/tests/build and human SEC-source review before merge; F4-C historical aggregates remain unauthorized.
+
 ## 2026-10-09: F4-B1 historical amount coverage audit candidate
 
 - **F4-A is merged:** PR #88 squash SHA `f2dfc4b`. It introduced a single Thacker Pass versioned amount history, separately sourced operative date bounds and source-publication date repair, without changing current totals.
