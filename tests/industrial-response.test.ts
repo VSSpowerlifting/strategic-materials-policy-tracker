@@ -105,7 +105,7 @@ test("corpus-wide matrix is exhaustive, disjoint, stable, and directly traceable
   const all = getAllFinancialCommitments();
   const projects = getAllProjects();
   const result = buildIndustrialResponse(site.lastUpdated, all, projects);
-  assert.equal(site.lastUpdated, "2026-10-07");
+  assert.equal(result.asOf, site.lastUpdated, "matrix uses the declared curated corpus date");
   assert.equal(result.registryProjects, projects.length);
   assert.equal(result.financialRows, all.length);
   assert.ok(result.governmentProjects > 0);
