@@ -121,18 +121,19 @@ test("F4-B3: official EIS register is source-backed award amount, NOT amendment 
   assert.equal(verified.beneficiaryRegistration, "16493223");
   assert.equal(verified.eligibleProjectCostEUR, "63327184");
   assert.equal(verified.currentAwardSnapshotNotOperativeHistoricalVersion, true);
-  assert.equal(verified.legalGranteeIdentityReviewRequired, true);
+  assert.equal(verified.legalGranteeIdentityReviewRequired, false);
+  assert.equal(reconciliation.reconciliation.currentRecipientResolution.resolution, "current_legal_recipient_corrected");
   assert.equal(verified.distanceFromCanonicalRoundedEUR, "9102");
   assert.equal(verified.distanceFromEarlier147EstimateEUR, "90898");
-  assert.equal(row.recipient, "Neo Performance",
-    "existing parent recipient must not silently be rewritten without a separate legal-entity review");
-  assert.deepEqual(row.recipientOrgIds, ["org-neo-performance"]);
+  assert.equal(row.recipient, "NPM Narva OÜ",
+    "official funding authority and Ministry audit identify the CURRENT legal beneficiary");
+  assert.deepEqual(row.recipientOrgIds, ["org-npm-narva-ou"]);
   assert.equal(row.amount?.value, "14800000");
   assert.equal(row.financialAmountHistory, undefined);
   const citation = row.evidence.find(e => e.sourceId === eis)!;
   assert.ok(citation.supports.includes("amount"));
-  assert.ok(!citation.supports.includes("recipient"),
-    "EIS identifies a legal subsidiary, not the currently stated parent-company recipient");
+  assert.ok(citation.supports.includes("recipient"),
+    "EIS identifies the current legal grant beneficiary, not parent-company group sponsor");
   assert.ok(!citation.supports.includes("status"),
     "award listing does not certify disbursement");
   assert.ok(citation.locator?.includes("14 790 898"));
@@ -167,7 +168,7 @@ test("F4-B3: Ministry audit pins 2024 decision day and 2025 follow-up, NOT exact
   const ref = row.evidence.find(x=>x.sourceId===audit);
   assert.ok(ref?.supports.includes("project"));
   assert.ok(!ref?.supports.includes("amount"), "audit does not prove specific amount in each decision");
-  assert.ok(!ref?.supports.includes("recipient"), "cannot cite this as proof of the old parent label");
+  assert.ok(ref?.supports.includes("recipient"), "Ministry explicitly confirms current NPM Narva beneficiary");
   assert.ok(!ref?.supports.includes("status"), "cannot source a new disbursement or verified legal-effective date");
   const src = getAllSources().find(x=>x.id===audit)!;
   assert.equal(src.language, "et");
