@@ -8783,9 +8783,110 @@
         "evidence": "explicit",
         "locator": "Item 1.01",
         "note": "The filing states that the Technology Investment Agreement became effective on 16 December 2022."
+      },
+      {
+        "sourceId": "src-perpetua-sec-dpa-2022",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Form 8-K Item 1.01 — effective December 16, 2022; original up-to-$24.8M TIA and temporary 75%-of-ceiling funding cap",
+        "note": "Separates award face amount from only $18.6M initially accessible pending definitization."
+      },
+      {
+        "sourceId": "src-perpetua-sec-dpa-definitization-2023-07-26",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Form 8-K Item 1.01 — July 25, 2023 definitization; full not-to-exceed $24,812,062",
+        "note": "Definitization clarifies precise legal award ceiling and removes the temporary 75% availability limitation; this is not new financing."
+      },
+      {
+        "sourceId": "src-perpetua-sec-dpa-amendment-2024-05-02",
+        "supports": [
+          "amount",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Form 8-K Item 1.01 — entered May 2, 2024; $34,412,114 additional funding; $59,224,176 total",
+        "note": "Definitive amendment to SAME agreement, distinct from earlier February 2024 conditional announcement; not a second financing award."
       }
     ],
-    "notes": "One row represents the same DPA Technology Investment Agreement across amendments, avoiding double-counting the original $24.8M award and the later $34.4M addition. The agreement was definitized at $24.8M in July 2023, modified by an additional $34.4M in May 2024, and ultimately fully disbursed."
+    "notes": "One row represents the same DPA Technology Investment Agreement across amendments, avoiding double-counting the original $24.8M award and the later $34.4M addition. The agreement was definitized at $24.8M in July 2023, modified by an additional $34.4M in May 2024, and ultimately fully disbursed. F4-B2 reviewed history separates the December 16, 2022 up-to-$24.8M undefinitized TIA (temporary $18.6M funding-availability cap), July 25, 2023 definitization at $24,812,062 not-to-exceed, and the May 2, 2024 amendment increasing the exact ceiling to $59,224,176. The published amount stays rounded at up to $59.2M and is not cash paid; these are three versions of one agreement, not three separate awards.",
+    "financialAmountHistory": [
+      {
+        "amount": {
+          "value": "24800000",
+          "currency": "USD",
+          "qualifier": "up_to",
+          "amountAsStated": "up to $24,800,000 under the undefinitized TIA",
+          "currencyBasis": "stated"
+        },
+        "effectiveNotBefore": "2022-12-16",
+        "effectiveNoLaterThan": "2022-12-16",
+        "sourceId": "src-perpetua-sec-dpa-2022",
+        "locator": "Form 8-K Item 1.01; effective December 16, 2022 original TIA; up-to-$24.8M amount; availability initially limited to $18.6M",
+        "effectiveNotBeforeEvidence": {
+          "sourceId": "src-perpetua-sec-dpa-2022",
+          "locator": "Form 8-K Item 1.01; effective December 16, 2022 original TIA; up-to-$24.8M amount; availability initially limited to $18.6M"
+        },
+        "effectiveNoLaterThanEvidence": {
+          "sourceId": "src-perpetua-sec-dpa-2022",
+          "locator": "Form 8-K Item 1.01; effective December 16, 2022 original TIA; up-to-$24.8M amount; availability initially limited to $18.6M"
+        },
+        "reason": "original",
+        "note": "The $24.8M initial undefinitized award was a legal ceiling, not immediately reimbursable cash; until definitization actual funding availability was capped at $18.6M. Issuer says original TIA became effective December 16, 2022."
+      },
+      {
+        "amount": {
+          "value": "24812062",
+          "currency": "USD",
+          "qualifier": "up_to",
+          "amountAsStated": "full not-to-exceed amount of $24,812,062",
+          "currencyBasis": "stated"
+        },
+        "effectiveNotBefore": "2023-07-25",
+        "effectiveNoLaterThan": "2023-07-25",
+        "sourceId": "src-perpetua-sec-dpa-definitization-2023-07-26",
+        "locator": "Form 8-K Item 1.01; definitized July 25, 2023 at full not-to-exceed $24,812,062",
+        "effectiveNotBeforeEvidence": {
+          "sourceId": "src-perpetua-sec-dpa-definitization-2023-07-26",
+          "locator": "Form 8-K Item 1.01; definitized July 25, 2023 at full not-to-exceed $24,812,062"
+        },
+        "effectiveNoLaterThanEvidence": {
+          "sourceId": "src-perpetua-sec-dpa-definitization-2023-07-26",
+          "locator": "Form 8-K Item 1.01; definitized July 25, 2023 at full not-to-exceed $24,812,062"
+        },
+        "reason": "other",
+        "note": "The previously undefinitized SAME TIA was definitized on July 25, 2023. $24,812,062 is the stated not-to-exceed ceiling, a more precise legal figure than the original $24.8M rounded disclosure; no additional independent grant or cash receipt."
+      },
+      {
+        "amount": {
+          "value": "59200000",
+          "currency": "USD",
+          "qualifier": "up_to",
+          "amountAsStated": "$59.2 million",
+          "currencyBasis": "issuer_context"
+        },
+        "effectiveNotBefore": "2024-05-02",
+        "effectiveNoLaterThan": "2024-05-02",
+        "sourceId": "src-perpetua-sec-dpa-amendment-2024-05-02",
+        "locator": "Form 8-K Item 1.01; May 2, 2024 executed amendment adding $34,412,114 and bringing exact legal ceiling to $59,224,176",
+        "effectiveNotBeforeEvidence": {
+          "sourceId": "src-perpetua-sec-dpa-amendment-2024-05-02",
+          "locator": "Form 8-K Item 1.01; May 2, 2024 executed amendment adding $34,412,114 and bringing exact legal ceiling to $59,224,176"
+        },
+        "effectiveNoLaterThanEvidence": {
+          "sourceId": "src-perpetua-sec-dpa-amendment-2024-05-02",
+          "locator": "Form 8-K Item 1.01; May 2, 2024 executed amendment adding $34,412,114 and bringing exact legal ceiling to $59,224,176"
+        },
+        "reason": "amendment",
+        "note": "On May 2, 2024 the company explicitly states it entered the amendment to the SAME TIA. $34,412,114 is incremental within the resulting $59,224,176 ceiling and is not additive to the canonical $59.2M public amount. Retain canonical rounded reporting value and up-to qualifier; exact legal ceiling remains in the source/locator/note. February 2024 conditional announcement did not make this amount operative."
+      }
+    ]
   },
   {
     "id": "fin-us-doe-rhyolite-ridge-guarantee-2025",

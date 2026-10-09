@@ -47,7 +47,7 @@ test("F4-B: output stable across input order, and does not mutate data or queue"
   const reversed = auditF4AmountCoverage([...rows].reverse(), [...refs].reverse(), [...queue].reverse());
   assert.deepEqual(first, reversed);
   assert.equal(JSON.stringify({ rows, refs, queue }), before);
-  assert.equal(first.reviewCandidates[0].recordId, "fin-us-dod-perpetua-stibnite-dpa");
+  assert.equal(first.reviewCandidates[0].recordId, "fin-eu-jtf-2025-neo-magnet-project");
 });
 
 test("F4-B: unknown, duplicated and already-versioned triage identities fail closed", () => {

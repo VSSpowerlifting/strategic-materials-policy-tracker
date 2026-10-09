@@ -1,15 +1,5 @@
 [
   {
-    "recordId": "fin-us-dod-perpetua-stibnite-dpa",
-    "priority": 1,
-    "reviewQuestion": "Does the December 2022 $24.8M TIA and May 2, 2024 additional $34.4M belong to one amended agreement, and can each historical amount and operative day be independently supported by the executed/issuer sources?",
-    "evidenceSourceIds": [
-      "src-perpetua-sec-dpa-2022",
-      "src-perpetua-sec-2024-q2"
-    ],
-    "limitation": "Currently recorded $59.2M is the amended ceiling, not $59.2M plus $24.8M. The directly relevant May 2, 2024 issuer Form 8-K must be separately registered and checked before amount-version promotion. Grant receipts are not versions."
-  },
-  {
     "recordId": "fin-eu-jtf-2025-neo-magnet-project",
     "priority": 2,
     "reviewQuestion": "Is the original 2022 up-to-€18.7M award the same grant contract as the later approximately €14.8M at a 23% rate, and what primary document establishes the actual revision-effective date?",
