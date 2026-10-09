@@ -2,14 +2,15 @@
   {
     "recordId": "fin-eu-jtf-2025-neo-magnet-project",
     "priority": 2,
-    "reviewQuestion": "Neo's 2024 AIF explicitly dates a SAME-grant revision to November 2024 (18.75%→23.3%; approximately €14.7M); EC Estonia also reports €14.7M, but 2026 AIF calls the amount approximately €14.8M at a rounded 23%. Establish the actual amendment-effective day and exact signed award amount; determine whether €14.7M vs €14.8M is mere precision/rounding or legally revised support, rather than inventing a later amendment.",
+    "reviewQuestion": "Neo's 2024 AIF documents a November 2024 SAME-grant amendment (€18.7M original; approx €14.7M amended); an EC project note says €14.7M, Neo's 2025 AIF says approx €14.8M, and EIS's official supported-project list states €14,790,898 for NPM Narva OÜ (16493223). Determine the legally operative amendment day and original/amended exact award ceiling; reconcile source precision and separately correct the named legal grant recipient if verified.",
     "evidenceSourceIds": [
       "src-neo-jtf-award-2022",
       "src-neo-aif-2025-jtf-nov2024-amendment",
       "src-ec-estonia-neo-narva-jtf-147",
+      "src-eis-npm-narva-jtf-project-grant",
       "src-neo-aif-2026"
     ],
-    "limitation": "Known amendment MONTH only, November 2024 (possible day interval November 1–30), not legal day. 2025 AIF says approx €14.7M, Commission also €14.7M; March 2026 AIF says approx €14.8M, which is current canonical. Different amount precision cannot be promoted as a separate signed agreement without an actual amendment instrument or authoritative reconciliation. No historical amount versions or grant-paid assertions authorized; US$8.4M receipts are distinct."
+    "limitation": "November 2024 amendment MONTH proven but DAY not verified. EIS's exact €14,790,898 is a present grant register observation, not a historical legal date. €14.7M vs €14.8M issuer approximations remain unexplained, not two proven amendments. Official grant beneficiary NPM Narva OÜ differs from current Neo Performance parent label: preserve current field pending scoped legal-identity review. No historical versions, revised grant totals, cash-paid or immediate contract promotion authorized."
   },
   {
     "recordId": "fin-us-army-perpetua-antimony-otia",
