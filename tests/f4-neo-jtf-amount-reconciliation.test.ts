@@ -63,6 +63,8 @@ test("F4-B3: four source observations remain distinct, with contemporaneous and 
   assert.equal(registered.get(amendment)?.url,
     "https://www.neomaterials.com/wp-content/uploads/2025/03/Neo-AIF-2025-vF.pdf");
   assert.equal(registered.get(amendment)?.datePublished, "2025-03-18");
+  assert.equal(registered.get(commission)?.language, "et",
+    "keep official Estonian-language evidence identified accurately, not as English");
   assert.equal(registered.get(commission)?.datePublished, null,
     "unknown European Commission web publication date must not be fabricated");
   assert.equal(registered.get(later)?.url,
