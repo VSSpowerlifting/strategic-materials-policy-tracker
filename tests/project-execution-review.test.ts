@@ -19,15 +19,16 @@ const refs = () => ({
 });
 const audit = (draft: unknown = q(), r = refs()) => auditProjectExecutionPilot(draft, r);
 
-test("M3.2 four source-linked candidates are a non-promoting review queue", () => {
+test("M3.2 five source-linked candidates are a non-promoting review queue", () => {
   const result = audit();
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(result.summary.awaitingHumanSourceReview, 2);
+  assert.equal(result.summary.awaitingHumanSourceReview, 3);
   assert.equal(result.summary.blockedOnTaxonomy, 2);
   assert.deepEqual(result.candidates.map((x) => x.id),
     ["review-m3-2-alcoa-wagerup", "review-m3-2-cyclic-extended-operations",
-     "review-m3-2-inl-demonstration", "review-m3-2-stibnite-burntlog"]);
+     "review-m3-2-inl-demonstration", "review-m3-2-neo-narva-magnets",
+     "review-m3-2-stibnite-burntlog"]);
   assert.equal(getAllProjectMilestones().length, 0, "no candidate is a public milestone");
   assert.equal(getDatasetSummary().projects, getAllProjects().length);
 });
@@ -60,9 +61,9 @@ test("scope decisions block INL demo and Stibnite road without widening canonica
   assert.equal(rows[2].gate, "taxonomy_blocked");
   assert.equal(rows[2].kindProposal, "demonstration_started");
   assert.equal(rows[2].occurredOn, null, "Army's July 29 ribbon-cutting is not a proved demo-start date");
-  assert.equal(rows[3].gate, "taxonomy_blocked");
-  assert.equal(rows[3].scopeProposal, "named_infrastructure");
-  assert.equal(rows[3].occurredOn, "2026-05-30");
+  assert.equal(rows[4].gate, "taxonomy_blocked");
+  assert.equal(rows[4].scopeProposal, "named_infrastructure");
+  assert.equal(rows[4].occurredOn, "2026-05-30");
   assert.deepEqual(audit().errors, []);
 });
 
@@ -146,7 +147,26 @@ test("M3.2 incompatible scope/name pairs still fail closed in both directions", 
     /named facility, funded activity and taxonomy-held scopes require a bounded scopeAsStated/);
 
   const held = q();
-  held[3].scopeAsStated = null as never;
+  held[4].scopeAsStated = null as never;
   assert.match(audit(held).errors.join(" | "),
     /taxonomy-held scopes require a bounded scopeAsStated/);
+});
+
+test("Narva is one unsigned source review, not an operational-start day or a second financial fact", () => {
+  const rows = q();
+  const narva = rows.find(x => x.id === "review-m3-2-neo-narva-magnets")!;
+  assert.equal(narva.sourceId, "src-neo-commercial-production-2026");
+  assert.equal(narva.kindProposal, "production_reported");
+  assert.equal(narva.scopeProposal, "named_facility");
+  assert.equal(narva.claimMode, "occurred");
+  assert.equal(narva.occurredOn, null);
+  assert.equal(narva.targetOn, null);
+  assert.deepEqual(narva.relatedFinanceIds, ["fin-eu-jtf-2025-neo-magnet-project"]);
+  assert.equal(narva.gate, "human_source_review");
+  assert.equal(narva.reviewVerdict, "unreviewed");
+  assert.ok(narva.editorialCaution.includes("does not state the first production-start day"));
+  assert.ok(!("reviewedBy" in narva));
+  assert.ok(!("reviewedAt" in narva));
+  assert.deepEqual(audit().errors, []);
+  assert.equal(getAllProjectMilestones().length, 0);
 });

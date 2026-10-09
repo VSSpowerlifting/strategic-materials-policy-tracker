@@ -30,7 +30,7 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
   assert.equal(report.publicationAuthorized,false);
   assert.equal(report.publicMilestoneCount,0);
   assert.deepEqual(report.totals,{
-    cases:4,existingM3:2,newProposals:2,
+    cases:4,existingM3:3,newProposals:1,
     missingRegisteredSources:1,taxonomyBlocked:1,humanReviewRequired:4,
   });
   assert.deepEqual(report.cases.map(x=>x.id),[
@@ -61,14 +61,21 @@ test("F5-1: Alcoa and Burntlog link existing M3 rows instead of inventing duplic
 test("F5-1: Narva source dates support reported production, NOT a fabricated production-start day", () => {
   const r=audit(),neo=r.cases[1],lead=input().cases[1];
   assert.equal(neo.sourceRegistered,true);
-  assert.equal(neo.proposedKind,"production_reported");
-  assert.equal(neo.proposedScope,"named_facility");
+  assert.equal(neo.track,"existing_m3_review");
+  assert.equal(neo.existingReviewId,"review-m3-2-neo-narva-magnets");
+  assert.equal(neo.proposedKind,null);
+  assert.equal(neo.proposedScope,null);
   assert.equal(neo.proposedOccurredOn,null);
   assert.deepEqual(neo.sourceEvidenceBoundary,{date:"2026-09-14",basis:"publication"});
-  assert.equal(lead.proposal?.targetOn,null);
-  assert.equal(lead.proposal?.claimMode,"occurred");
-  assert.ok(lead.proposal?.editorialCaution.includes("precise initial production-start day not stated"));
-  assert.ok(neo.releaseBlockers.includes("independent_human_source_adjudication"));
+  assert.equal(lead.proposal,null,"F5 cannot duplicate a canonical M3 review");
+  const m3=m3Queue.find(x=>x.id===neo.existingReviewId)!;
+  assert.equal(m3.kindProposal,"production_reported");
+  assert.equal(m3.scopeProposal,"named_facility");
+  assert.equal(m3.claimMode,"occurred");
+  assert.equal(m3.occurredOn,null);
+  assert.equal(m3.targetOn,null);
+  assert.ok(m3.editorialCaution.includes("does not state the first production-start day"));
+  assert.ok(neo.releaseBlockers.includes("existing_M3_human_adjudication"));
   assert.equal(neo.publicationEligible,false);
 });
 
@@ -122,9 +129,9 @@ test("F5-1: duplicate M3 source review, malformed dates and unsupported category
   dup.cases[1].sourceUrl=dup.cases[0].sourceUrl;
   dup.cases[1].publishedOn=dup.cases[0].publishedOn;
   dup.cases[1].sourcePublisher=dup.cases[0].sourcePublisher;
-  assert.match(audit(dup).errors.join(" "),/duplicate of existing M3 source-review claim|source registry URL\/publisher/);
+  assert.match(audit(dup).errors.join(" "),/missing or mismatched existing M3 review row|source registry URL\/publisher/);
   const wrongKind=input();
-  wrongKind.cases[1].proposal!.kind="commissioning_started_not_known" as never;
+  wrongKind.cases[3].proposal!.kind="commissioning_started_not_known" as never;
   assert.match(audit(wrongKind).errors.join(" "),/unsupported milestone taxonomy/);
   const wrongDate=input();
   wrongDate.cases[1].publishedOn="2026-02-30";
@@ -138,7 +145,7 @@ test("F5-1: all review diagnostics are deterministic and no private drafts enter
   const argv=["--import","tsx","scripts/audit-f5-pilots.ts"];
   const summary=execFileSync(process.execPath,argv,{encoding:"utf8"});
   assert.ok(summary.includes("Milestone publication: NOT AUTHORIZED"));
-  assert.ok(summary.includes("Existing M3.2 cases (reused, never duplicated): 2"));
+  assert.ok(summary.includes("Existing M3.2 cases (reused, never duplicated): 3"));
   const json=execFileSync(process.execPath,[...argv,"--json"],{encoding:"utf8"});
   assert.deepEqual(JSON.parse(json),audit());
   const bad=spawnSync(process.execPath,[...argv,"--publish"],{encoding:"utf8"});
