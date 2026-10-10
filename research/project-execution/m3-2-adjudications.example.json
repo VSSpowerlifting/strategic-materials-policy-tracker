@@ -45,6 +45,21 @@
     "proposedMilestoneId": null
   },
   {
+    "id": "review-m3-2-neo-narva-magnets",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null
+  },
+  {
     "id": "review-m3-2-stibnite-burntlog",
     "verdict": "pending",
     "reviewedBy": null,

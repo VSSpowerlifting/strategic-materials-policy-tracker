@@ -20,27 +20,15 @@
     {
       "id": "f5-1-narva-commercial-magnets",
       "projectId": "prj-ee-neo-rare-earth-magnet-project",
-      "track": "new_review_candidate",
-      "existingReviewId": null,
+      "track": "existing_m3_review",
+      "existingReviewId": "review-m3-2-neo-narva-magnets",
       "sourceId": "src-neo-commercial-production-2026",
       "sourceUrl": "https://www.neomaterials.com/neo-advances-commercial-production-magnet-facility/",
       "publishedOn": "2026-09-14",
       "sourcePublisher": "Neo Performance Materials",
-      "proposal": {
-        "kind": "production_reported",
-        "scope": "named_facility",
-        "scopeAsStated": "initial commercial rare-earth magnet manufacturing programs at Neo's European facility in Narva, Estonia",
-        "claimMode": "occurred",
-        "occurredOn": null,
-        "targetOn": null,
-        "statementOriginal": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
-        "statementEn": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
-        "statementEnSource": "na",
-        "locator": "Opening release paragraph, September 14, 2026",
-        "editorialCaution": "Reported in production as of the release day; precise initial production-start day not stated, so occurredOn remains null. Initial customer program is not evidence that Phase 1B or planned 20,000 tpa expansion operates, nor evidence of 2,000 tonnes actually produced."
-      },
+      "proposal": null,
       "reviewStatus": "pending_human_review",
-      "editorialDecision": "Human to confirm original issuer passage, name of plant and product program, that production_reported suits a reported current state rather than dated start, and scoped interpretation. The source date is an evidence boundary only, not an inferred operations-start date."
+      "editorialDecision": "Use the single canonical M3.2 unsigned Narva review row. Its original-source sentence reports ongoing initial commercial production and customer deliveries; the September 14 issuer publication is an evidence boundary, not a proven production-start day. Independently check source wording, initial-program scope, dated status vs start, and the source-to-JTF finance link before attesting. No production tonnage or grant causation."
     },
     {
       "id": "f5-1-stibnite-burntlog-2026",

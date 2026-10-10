@@ -68,6 +68,28 @@
     "editorialCaution": "July 29 is the ceremony/opening day, not an independently established technical demonstration start date. Mine output is forecast, not occurred."
   },
   {
+    "id": "review-m3-2-neo-narva-magnets",
+    "projectId": "prj-ee-neo-rare-earth-magnet-project",
+    "sourceId": "src-neo-commercial-production-2026",
+    "kindProposal": "production_reported",
+    "scopeProposal": "named_facility",
+    "scopeAsStated": "initial commercial rare-earth sintered magnet production programs at Neo's European permanent magnet facility in Narva, Estonia",
+    "claimMode": "occurred",
+    "occurredOn": null,
+    "targetOn": null,
+    "statementOriginal": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+    "statementEn": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+    "statementEnSource": "na",
+    "locator": "Issuer announcement September 14, 2026; opening body paragraph",
+    "relatedFinanceIds": [
+      "fin-eu-jtf-2025-neo-magnet-project"
+    ],
+    "gate": "human_source_review",
+    "reviewVerdict": "unreviewed",
+    "taxonomyQuestion": null,
+    "editorialCaution": "Issuer reports initial commercial sintered-magnet program and shipments as of 2026-09-14, but does not state the first production-start day. Do not treat publication day as an occurredOn event; no observed 2,000-tonne output, Phase 1B/20,000-tonne achievement, JTF-caused production, or disbursement inference."
+  },
+  {
     "id": "review-m3-2-stibnite-burntlog",
     "projectId": "prj-us-stibnite",
     "sourceId": "src-perpetua-stibnite-construction-2026",

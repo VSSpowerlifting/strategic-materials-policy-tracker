@@ -34,7 +34,7 @@ test("review example is genuinely pending and cannot generate a milestone", () =
   assert.equal(r.status, "human_adjudication_preview_only");
   assert.deepEqual(r.errors, []);
   assert.deepEqual(r.blocked, []);
-  assert.equal(r.counts.pending, 4);
+  assert.equal(r.counts.pending, 5);
   assert.deepEqual(r.proposals, []);
   assert.equal(getAllProjectMilestones().length, 0, "review never mutates public seed");
 });
@@ -72,7 +72,7 @@ test("real post-cutoff human review is blocked instead of quietly backdated", ()
 test("taxonomy-blocked INL and Stibnite cannot be approved by signing every checkbox", () => {
   const d = draft();
   setApproved(d[2]);
-  setApproved(d[3]);
+  setApproved(d[4]);
   const r = audit(d);
   assert.deepEqual(r.proposals, []);
   assert.equal(r.blocked.length, 2);
@@ -134,7 +134,7 @@ test("safe CLI accepts the checked-in PENDING example without changing published
     "--file", "research/project-execution/m3-2-adjudications.example.json"];
   const output = execFileSync(cmd[0], cmd.slice(1), {encoding: "utf8"});
   const parsed = JSON.parse(output);
-  assert.equal(parsed.counts.pending, 4);
+  assert.equal(parsed.counts.pending, 5);
   assert.deepEqual(parsed.errors, []);
   assert.deepEqual(parsed.proposals, []);
 });
@@ -165,4 +165,24 @@ test("M3 cannot preview a purported whole-project milestone with a named compone
   const report = adjudicateProjectExecutionReview(rows, decisions, refs());
   assert.ok(report.errors.some(e => e.includes("whole_project requires scopeAsStated: null")));
   assert.deepEqual(report.proposals, []);
+});
+
+test("Narva human adjudication remains pending; a test-only approval cannot become published data", () => {
+  const rows = draft();
+  const idx = rows.findIndex(d => d.id === "review-m3-2-neo-narva-magnets");
+  assert.ok(idx >= 0);
+  assert.equal(rows[idx].verdict, "pending");
+  assert.equal(rows[idx].reviewedBy, null);
+  assert.equal(rows[idx].reviewedAt, null);
+  setApproved(rows[idx]); // Synthetic, never a real reviewer attestation.
+  const result = audit(rows);
+  assert.deepEqual(result.errors, []);
+  assert.deepEqual(result.blocked, []);
+  assert.equal(result.proposals.length, 1);
+  assert.equal(result.proposals[0].kind, "production_reported");
+  assert.equal(result.proposals[0].occurredOn, null);
+  assert.equal(result.proposals[0].sourceId, "src-neo-commercial-production-2026");
+  assert.equal(result.proposals[0].reviewedBy, "Synthetic reviewer in regression test");
+  assert.equal(result.status, "human_adjudication_preview_only");
+  assert.equal(getAllProjectMilestones().length, 0);
 });
