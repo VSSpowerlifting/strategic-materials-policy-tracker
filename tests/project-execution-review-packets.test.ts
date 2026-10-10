@@ -13,7 +13,7 @@ import { site } from "../lib/site";
 const input = () => structuredClone(queue);
 const refs = () => ({
   projects: getAllProjects(), sources: getAllSources(),
-  commitments: getAllFinancialCommitments(), corpusCutoff: site.lastUpdated,
+  commitments: getAllFinancialCommitments(), corpusCutoff: site.lastUpdated as string,
   publicMilestoneCount: getAllProjectMilestones().length,
 });
 const packet = (id: string | null = null) => buildM3ReviewerPackets(input(), refs(), id);
