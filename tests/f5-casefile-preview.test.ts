@@ -108,6 +108,21 @@ test("F5-3a: synthetically reviewed unknown-day production is not backdated to i
     "synthetic structurally valid metadata cannot authorize a real public casefile");
 });
 
+test("F5-3a: unknown occurrence day sorts AFTER known dates, not as earliest", () => {
+  const unknown = artificialMilestone();
+  const dated = artificialMilestone({
+    id: "mil-f5-preview-z-dated-narva",
+    occurredOn: "2026-09-01",
+  });
+  const data = corpus();
+  const draft = buildF5EditorialCasefilePreview(unknown.projectId,
+    {...data, milestones: [unknown, dated]}, site.lastUpdated);
+  assert.deepEqual(draft.lanes.physical.occurred.map(m => m.id),
+    [dated.id, unknown.id], "null must not be treated as a timestamp before known dates");
+  assert.equal(draft.lanes.physical.occurred[1].occurredOn, null);
+  assert.equal(draft.publicReleaseAuthorized, false);
+});
+
 test("F5-3a: planned synthetic target never passes the occurred-claim gate", () => {
   const fake = artificialMilestone({
     claimMode: "planned", occurredOn: null, targetOn: "2027-04-01",
