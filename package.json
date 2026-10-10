@@ -26,6 +26,7 @@
     "audit:f5-pilots": "tsx scripts/audit-f5-pilots.ts",
     "audit:f5-casefiles": "tsx scripts/audit-f5-casefiles.ts",
     "audit:f5-observatory": "tsx scripts/audit-f5-observatory.ts",
+    "preview:f5-observatory": "tsx scripts/preview-f5-observatory.ts",
     "audit:project-execution": "tsx scripts/audit-project-execution.ts",
     "audit:project-execution-pilot": "tsx scripts/audit-project-execution-pilot.ts",
     "audit:project-execution-adjudications": "tsx scripts/audit-project-execution-adjudications.ts",
@@ -45,6 +46,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
+    "postcss": "^8.5.23",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"
