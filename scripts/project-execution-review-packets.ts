@@ -183,7 +183,8 @@ export function buildM3ReviewerPackets(
       "Review the full original source manually. Its registered metadata hash does not prove the website/PDF body was fetched or remained unchanged.",
       "The source publication date is an evidence boundary, not a substitute for an unknown physical occurrence date.",
       "A finance observation cross-reference is not a verified disbursement or a causal pathway.",
-      "Human review must be recorded separately in the gitignored local M3 adjudication file and revalidated against the current queue.",
+      "Human review must be recorded in the gitignored local M3 adjudication file, with the exact worksheet digest manually copied into each non-pending decision.",
+      "Changes to the claim, original source metadata, project, finance-source observation, or curated cutoff invalidate old reviews until the source is rechecked and re-attested.",
       "Even a human-approved local proposal is not published without a separate maintainer-approved seed/corpus PR.",
     ],
   };
@@ -245,7 +246,10 @@ export function renderM3ReviewerPacketsMarkdown(report: M3ReviewerPacketReport):
       lines.push("- [ ] " + md(question));
     lines.push("", "**Local decision:** PENDING — no approval recorded",
       "**Input metadata SHA-256:** `" + w.reviewInputDigestSha256 + "`" +
-        " (NOT a source-file checksum)", "",
+        " (NOT a source-file checksum)",
+      "**For completed human decisions only:** manually copy the exact SHA-256 above into " +
+        "`reviewInputDigestSha256` in the gitignored local decision; " +
+        "leave null while pending. Changed inputs require genuine re-review.", "",
       "---", "");
   }
   lines.push("## Release limitations", "");
