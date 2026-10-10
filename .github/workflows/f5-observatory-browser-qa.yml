@@ -1,0 +1,57 @@
+name: F5 Observatory local Chromium QA
+
+# Purely internal evidence-interface browser checks. No screenshots, traces,
+# generated private review files or browser artifacts are uploaded.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/f5-observatory-browser-qa.yml"
+      - "scripts/qa-f5-observatory-browser.mjs"
+      - "scripts/f5-observatory-local-preview.tsx"
+      - "scripts/preview-f5-observatory.ts"
+      - "components/observatory/**"
+      - "lib/f5-observatory-scaffold.ts"
+      - "lib/f5-casefile-preview.ts"
+      - "app/globals.css"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: f5-browser-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-private-observatory:
+    name: Isolated Chromium checks (not source approval)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked SMPT dependencies
+        run: npm ci
+      - name: Install isolated pinned Playwright runtime
+        # Do not modify tracked package-lock.json or add browser packages to
+        # production dependencies. This only changes ephemeral CI node_modules.
+        run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - name: Provision matching Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Render unpublished local four-project preview
+        run: npm run preview:f5-observatory
+      - name: Test actual responsive behavior in Chromium
+        # CI proves these automated assertions, not manual visual/source QA.
+        run: node scripts/qa-f5-observatory-browser.mjs
+      - name: Verify no public output or git changes
+        run: |
+          test ! -e public/observatory-preview.html
+          test ! -e app/observatory/page.tsx
+          test -z "$(git status --porcelain)"
+      # IMPORTANT: no upload-artifact, screenshot, HTML, trace, preview server
+      # or publication step. The local reviewer file dies with the CI runner.
