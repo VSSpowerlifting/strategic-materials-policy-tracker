@@ -20,6 +20,12 @@ test("O3c CI is isolated, read-only and does not distribute internal editorial H
   assert.match(job,/pull_request:/);
   assert.match(job,/permissions:\s*\n\s*contents: read/);
   assert.match(job,/timeout-minutes: 20/);
+  assert.match(job,/validate-repository:/);
+  assert.match(job,/node-version: "20"/);
+  for(const gate of [
+    "npm ci","npm audit --omit=dev --audit-level=moderate",
+    "npm run validate","npm run typecheck","npm run lint","npm test","npm run build",
+  ])assert.ok(job.includes(gate),"stacked PR must run full repo gate: "+gate);
   assert.match(job,/playwright@1\.55\.0/);
   assert.match(job,/npx playwright install --with-deps chromium/);
   assert.match(job,/npm run preview:f5-observatory/);
