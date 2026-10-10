@@ -77,13 +77,19 @@ test("M3 workbench: Thompson Falls is issuer-reported construction progress only
   assert.equal(w.originalSource.accessedOn, "2026-10-02");
 });
 
-test("M3 workbench: packet generation is deterministic, read-only, and row-order independent", () => {
+test("M3 workbench: output is deterministic, read-only, and source registry order independent", () => {
   const seed=input(), first=JSON.stringify(seed), references=refs();
   const a=buildM3ReviewerPackets(seed,references);
-  const b=buildM3ReviewerPackets([...seed].reverse(),references);
+  const b=buildM3ReviewerPackets(seed,{
+    ...references, sources:[...references.sources].reverse(),
+    projects:[...references.projects].reverse(),
+    commitments:[...references.commitments].reverse(),
+  });
   assert.deepEqual(a,b);
   assert.equal(JSON.stringify(seed), first);
   assert.equal(renderM3ReviewerPacketsMarkdown(a),renderM3ReviewerPacketsMarkdown(b));
+  assert.throws(()=>buildM3ReviewerPackets([...seed].reverse(),references),
+    /review queue invalid/, "human review queue order must remain canonical");
 });
 
 test("M3 workbench: fingerprints reflect real changes to reviewed source or quote metadata", () => {
