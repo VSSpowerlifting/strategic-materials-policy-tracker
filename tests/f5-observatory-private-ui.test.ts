@@ -51,7 +51,7 @@ test("O3: accessible semantic table, native links, responsive classes and unique
   const h=html();
   assert.match(h,/<table class="[^"]*min-w-\[52rem\]/);
   assert.match(h,/<caption class="sr-only">Industrial project evidence coverage/);
-  assert.match(h,/role="region" aria-label="Horizontally scrollable project-evidence coverage comparison" tabIndex="0"/);
+  assert.match(h,/role="region" aria-label="Horizontally scrollable project-evidence coverage comparison" tabindex="0"/);
   assert.ok(count(h,'scope="col"')>=7);
   assert.equal(count(h,'scope="row"'),4);
   assert.match(h,/grid gap-4 lg:grid-cols-2/);
@@ -62,7 +62,7 @@ test("O3: accessible semantic table, native links, responsive classes and unique
   assert.equal(count(h,'<h1'),1);
   assert.equal(count(h,'<h2'),6,"overview, four casefiles, and release gate");
   assert.ok(count(h,'<h3')>=20,"each case has evidence lanes and source heading");
-  assert.ok(count(h,'<section')>=23);
+  assert.ok(count(h,'<section')>=22,"overview, grouping, 16 evidence lanes and 4 source indexes");
   assert.equal(count(h,'<a href="javascript:'),0);
   assert.match(h,/target="_blank" rel="noopener noreferrer"/);
   assert.ok(!h.includes('aria-label="Publish"'));
@@ -84,7 +84,8 @@ test("O3: distinguish missing reviewed evidence from no industrial activity or p
 
 test("O3: financial and government evidence uses noncausal words, no amounts/sums",()=>{
   const h=html();
-  assert.match(h,/association only/);
+  assert.match(h,/nonallocative associations/);
+  assert.match(h,/Project-linked instrument reference/);
   assert.match(h,/not evidence of a government-caused physical result/);
   assert.match(h,/not funding/);
   assert.match(h,/references only, not additional or attributable capital/);
