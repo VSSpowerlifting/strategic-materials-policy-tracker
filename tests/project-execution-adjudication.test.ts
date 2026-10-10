@@ -129,6 +129,7 @@ test("pending cannot impersonate signed review; rejection never nominates public
   d[0].reviewedBy = "Fake" as never;
   assert.match(audit(d).errors.join(" | "), /pending cannot impersonate/);
   const rejected = draft();
+  setApproved(rejected[1]); // Synthetic reviewer; valid fingerprint isolates the rejected-ID rule.
   rejected[1].verdict = "rejected";
   rejected[1].reviewedBy = "Test reviewer" as never;
   rejected[1].reviewedAt = "2026-10-06" as never;
