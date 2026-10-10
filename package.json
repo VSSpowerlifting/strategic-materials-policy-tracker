@@ -27,7 +27,8 @@
     "audit:f5-casefiles": "tsx scripts/audit-f5-casefiles.ts",
     "audit:project-execution": "tsx scripts/audit-project-execution.ts",
     "audit:project-execution-pilot": "tsx scripts/audit-project-execution-pilot.ts",
-    "audit:project-execution-adjudications": "tsx scripts/audit-project-execution-adjudications.ts"
+    "audit:project-execution-adjudications": "tsx scripts/audit-project-execution-adjudications.ts",
+    "review:m3-packets": "tsx scripts/print-project-execution-review-packets.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

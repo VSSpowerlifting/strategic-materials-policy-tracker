@@ -12,7 +12,8 @@
       "noFinancingOrOperationsInference": false
     },
     "rationale": null,
-    "proposedMilestoneId": null
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
   },
   {
     "id": "review-m3-2-cyclic-extended-operations",
@@ -27,7 +28,8 @@
       "noFinancingOrOperationsInference": false
     },
     "rationale": null,
-    "proposedMilestoneId": null
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
   },
   {
     "id": "review-m3-2-inl-demonstration",
@@ -42,7 +44,8 @@
       "noFinancingOrOperationsInference": false
     },
     "rationale": null,
-    "proposedMilestoneId": null
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
   },
   {
     "id": "review-m3-2-neo-narva-magnets",
@@ -57,7 +60,8 @@
       "noFinancingOrOperationsInference": false
     },
     "rationale": null,
-    "proposedMilestoneId": null
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
   },
   {
     "id": "review-m3-2-stibnite-burntlog",
@@ -72,7 +76,8 @@
       "noFinancingOrOperationsInference": false
     },
     "rationale": null,
-    "proposedMilestoneId": null
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
   },
   {
     "id": "review-m3-2-stibnite-early-works",
@@ -87,7 +92,8 @@
       "noFinancingOrOperationsInference": false
     },
     "rationale": null,
-    "proposedMilestoneId": null
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
   },
   {
     "id": "review-m3-2-thompson-falls-q2-expansion",
@@ -102,6 +108,7 @@
       "noFinancingOrOperationsInference": false
     },
     "rationale": null,
-    "proposedMilestoneId": null
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
   }
 ]

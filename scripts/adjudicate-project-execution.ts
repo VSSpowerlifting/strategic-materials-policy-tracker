@@ -15,6 +15,7 @@ import {
   auditProjectExecutionPilot,
 } from "./review-project-execution-pilot";
 import type { FinancialCommitment } from "../lib/types";
+import { buildM3ReviewerPackets } from "./project-execution-review-packets";
 
 export type SourceReviewDecision = {
   id: string;
@@ -30,6 +31,8 @@ export type SourceReviewDecision = {
   };
   rationale: string | null;
   proposedMilestoneId: string | null;
+  /** Manually copied from the exact source-review worksheet; not a source-body checksum. */
+  reviewInputDigestSha256: string | null;
 };
 
 export type PendingProjectExecutionRow = {
@@ -43,9 +46,9 @@ export type PendingProjectExecutionRow = {
   editorialCaution: string;
 };
 type MilestoneRefs = {
-  projects: readonly Pick<Project,"id">[];
-  sources: readonly Pick<Source,"id"|"language"|"confidence"|"datePublished"|"dateAccessed">[];
-  commitments: readonly Pick<FinancialCommitment,"id"|"projectId"|"implementationStatusHistory">[];
+  projects: readonly Project[];
+  sources: readonly Source[];
+  commitments: readonly FinancialCommitment[];
   corpusCutoff: string;
   publicMilestoneIds: readonly string[];
 };
@@ -96,6 +99,22 @@ export function adjudicateProjectExecutionReview(
     return report;
   }
   if (base.errors.length > 0) return report;
+  // The human records which exact registered claim/source/finance context was
+  // reviewed. Merely storing a checklist/name cannot carry approval to a
+  // different quote, URL, facility, finance status, or curator cutoff.
+  let inputDigests: Map<string, string>;
+  try {
+    const packetReport = buildM3ReviewerPackets(rows, {
+      projects: refs.projects, sources: refs.sources,
+      commitments: refs.commitments, corpusCutoff: refs.corpusCutoff,
+      publicMilestoneCount: refs.publicMilestoneIds.length,
+    });
+    inputDigests = new Map(packetReport.worksheets.map(w => [w.id, w.reviewInputDigestSha256]));
+  } catch (error) {
+    report.errors.push("cannot pin human review to current source metadata: " +
+      (error instanceof Error ? error.message : String(error)));
+    return report;
+  }
   const q = rows as PendingProjectExecutionRow[];
   if (q.length !== decisions.length)
     report.errors.push("a decision (including pending) is required for every source-review candidate");
@@ -132,6 +151,7 @@ export function adjudicateProjectExecutionReview(
     if (verdict === "pending") {
       if (d.reviewedAt !== null || d.reviewedBy !== null ||
         d.proposedMilestoneId !== null || d.rationale !== null ||
+        d.reviewInputDigestSha256 !== null ||
         checklist.some((k) => checks[k] !== false))
         bad(id, "pending cannot impersonate a completed review");
       continue;
@@ -140,6 +160,15 @@ export function adjudicateProjectExecutionReview(
       bad(id, "recording a verdict requires named reviewer and actual reviewedAt date");
     if (!meaningful(d.rationale))
       bad(id, "non-pending verdict requires an explicit explanation");
+    if (typeof d.reviewInputDigestSha256 !== "string" ||
+        !/^[a-f0-9]{64}$/.test(d.reviewInputDigestSha256)) {
+      bad(id, "completed review requires a current 64-hex worksheet reviewInputDigestSha256");
+      continue;
+    }
+    if (d.reviewInputDigestSha256 !== inputDigests.get(id)) {
+      bad(id, "review input fingerprint differs from current queue/source/project/finance context; re-review the original evidence and re-attest");
+      continue;
+    }
 
     if (verdict !== "approved") {
       if (d.proposedMilestoneId !== null)
