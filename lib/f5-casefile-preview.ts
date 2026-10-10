@@ -76,6 +76,15 @@ export type F5EditorialCasefilePreview = {
 
 const lex = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0;
 
+/** Unknown occurrence/target days belong AFTER dated claims, never at time zero. */
+const byPhysicalClock = (clock: "occurredOn" | "targetOn") =>
+  (a: PathwayMilestone, b: PathwayMilestone) => {
+    const left = a[clock], right = b[clock];
+    if (left === null && right !== null) return 1;
+    if (left !== null && right === null) return -1;
+    return lex(left ?? "", right ?? "") || lex(a.id, b.id);
+  };
+
 /**
  * A presentation-specific *private draft* for one registered project.
  * All native milestones must already exist in the independently reviewed
@@ -91,10 +100,10 @@ export function buildF5EditorialCasefilePreview(
   const pathway = buildProjectEvidencePathway(projectId, input);
   const occurred = pathway.nativeMilestones
     .filter(m => m.claimMode === "occurred")
-    .sort((a, b) => lex(a.occurredOn ?? "", b.occurredOn ?? "") || lex(a.id, b.id));
+    .sort(byPhysicalClock("occurredOn"));
   const planned = pathway.nativeMilestones
     .filter(m => m.claimMode === "planned")
-    .sort((a, b) => lex(a.targetOn ?? "", b.targetOn ?? "") || lex(a.id, b.id));
+    .sort(byPhysicalClock("targetOn"));
 
   return {
     schemaVersion: "f5-editorial-casefile-preview-1",
