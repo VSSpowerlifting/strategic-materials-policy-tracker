@@ -227,7 +227,7 @@ export function PrivateObservatoryReview({model}: {model:F5ObservatoryScaffold})
       <p className="rail mb-3">INTERNAL EDITORIAL REVIEW ONLY · NOT A PUBLIC OBSERVATORY</p>
       <h1 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">Industrial Outcome Observatory</h1>
       <p className="mt-4 max-w-4xl font-serif text-lg leading-8 text-muted">
-        Source-linked project comparisons from SMPT's curated current corpus.
+        Source-linked project comparisons from SMPT&apos;s curated current corpus.
         This is a research draft, not a policy-effect assessment, release authorization or historical as-of view.
       </p>
       <p className="mt-3 font-mono text-xs text-muted">
