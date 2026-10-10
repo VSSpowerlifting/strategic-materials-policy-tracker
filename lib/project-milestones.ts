@@ -87,6 +87,18 @@ export function validateProjectMilestones(input: unknown, refs: References): str
     if (m.scope === "funded_activity" && m.kind !== "funded_activity_completed")
       fail("funded_activity scope cannot assert facility construction or operation");
 
+    // Issuer-reported construction status is NOT a dated start or completion.
+    if (m.kind === "construction_progress_reported") {
+      if (m.claimMode !== "occurred")
+        fail("construction_progress_reported requires an occurred observation, not a planned target");
+      if (m.scope !== "named_facility")
+        fail("construction_progress_reported requires named_facility scope");
+      if (m.occurredOn !== null)
+        fail("construction_progress_reported requires occurredOn: null (the status-report date is not an event date)");
+      if (!nonblank(m.note))
+        fail("construction_progress_reported requires a scoped status caveat in note");
+    }
+
     if (m.claimMode === "occurred") {
       if (m.targetOn !== null) fail("occurred claim must have targetOn: null");
       if (m.occurredOn !== null && !isMilestoneIsoDate(m.occurredOn))

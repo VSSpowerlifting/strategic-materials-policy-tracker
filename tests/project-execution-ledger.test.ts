@@ -196,3 +196,28 @@ test("read-only audit command produces deterministic parseable JSON for current 
   assert.ok(parsed.countedFinanceRows > 0);
   assert.equal(parsed.observations.length + parsed.gaps.length > 0, true);
 });
+
+test("construction progress reporting is an undated status observation, not a dated start or operations", () => {
+  const progress: ProjectMilestone = {
+    ...fixture(), id: "mil-fixture-progress",
+    kind: "construction_progress_reported",
+    claimMode: "occurred", scope: "named_facility",
+    scopeAsStated: "Named processing facility expansion",
+    occurredOn: null, targetOn: null,
+    statementOriginal: "Facility expansion was substantially completed during the quarter.",
+    statementEn: "Facility expansion was substantially completed during the quarter.",
+    note: "Issuer reports partial asset service and construction progress, not final completion or rated throughput.",
+  };
+  assert.deepEqual(validateProjectMilestones([progress], refs), []);
+  const invalid: [string, Partial<ProjectMilestone>, RegExp][] = [
+    ["invented event day", {occurredOn:"2026-09-01"}, /requires occurredOn: null/],
+    ["whole-project overreach", {scope:"whole_project",scopeAsStated:null}, /requires named_facility scope/],
+    ["planned event", {claimMode:"planned",targetOn:"2027-01-01"}, /requires an occurred observation/],
+    ["missing editorial caution", {note:null}, /requires a scoped status caveat/],
+  ];
+  for (const [label, changes, expected] of invalid) {
+    const errors = validateProjectMilestones([{...progress,...changes}], refs);
+    assert.ok(errors.some(e=>expected.test(e)), label+": "+errors.join("; "));
+  }
+  assert.deepEqual(getAllProjectMilestones(), [], "synthetic contract validation cannot publish real milestones");
+});

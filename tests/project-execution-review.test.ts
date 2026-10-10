@@ -23,8 +23,8 @@ test("M3.2 seven source-linked candidates are a non-promoting review queue", () 
   const result = audit();
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(result.summary.awaitingHumanSourceReview, 4);
-  assert.equal(result.summary.blockedOnTaxonomy, 3);
+  assert.equal(result.summary.awaitingHumanSourceReview, 5);
+  assert.equal(result.summary.blockedOnTaxonomy, 2);
   assert.deepEqual(result.candidates.map((x) => x.id),
     ["review-m3-2-alcoa-wagerup", "review-m3-2-cyclic-extended-operations",
      "review-m3-2-inl-demonstration", "review-m3-2-neo-narva-magnets",
@@ -253,18 +253,19 @@ test("Project-native empty finance links cannot hide an existing same-source fin
   assert.deepEqual(audit(independent).errors,[]);
 });
 
-test("Thompson Falls Q2 physical observation is taxonomy-held, unsigned and not a finance-state substitute", () => {
+test("Thompson Falls Q2 progress is human-review gated, unsigned and not a finance-state substitute", () => {
   const rows = q();
   const row = rows.find(x => x.id === "review-m3-2-thompson-falls-q2-expansion")!;
   assert.equal(row.projectId, "prj-us-usac-thompson-falls-expansion");
   assert.equal(row.sourceId, "src-usac-2026-q2-10q");
-  assert.equal(row.gate, "taxonomy_blocked");
-  assert.equal(row.kindProposal, "construction_substantially_completed_reported");
+  assert.equal(row.gate, "human_source_review");
+  assert.equal(row.kindProposal, "construction_progress_reported");
   assert.equal(row.scopeProposal, "named_facility");
   assert.equal(row.occurredOn, null, "quarter-end filing does not prove a construction milestone day");
   assert.equal(row.reviewVerdict, "unreviewed");
   assert.deepEqual(row.relatedFinanceIds, [], "no synthetic financier physical status");
-  assert.ok(row.taxonomyQuestion?.includes("no canonical construction-progress"));
+  assert.equal(row.taxonomyQuestion, null);
+  assert.match(row.editorialCaution, /not a completed\/operating project/);
   assert.equal(getAllProjectMilestones().length, 0);
   const result = audit();
   assert.deepEqual(result.errors, []);
@@ -278,12 +279,27 @@ test("Thompson Falls Q2 physical observation is taxonomy-held, unsigned and not 
     ["decided","partially_disbursed"]);
 });
 
-test("Thompson Falls cannot bypass taxonomy with a human-review flag or counterfeit approval", () => {
+test("Thompson Falls progress cannot be backdated, broadened, or given counterfeit approval", () => {
   const rows = q();
   const row = rows.find(x => x.id === "review-m3-2-thompson-falls-q2-expansion")!;
-  row.gate = "human_source_review";
-  assert.match(audit(rows).errors.join(" | "), /requires existing canonical kind and scope/);
-  row.gate = "taxonomy_blocked";
+  row.occurredOn = "2026-06-30";
+  assert.match(audit(rows).errors.join(" | "), /construction_progress_reported requires occurredOn: null/);
+  row.occurredOn = null;
+  row.scopeProposal = "whole_project";
+  row.scopeAsStated = null as never;
+  assert.match(audit(rows).errors.join(" | "), /construction_progress_reported requires named_facility scope/);
+  row.scopeProposal = "named_facility";
+  row.scopeAsStated = "Thompson Falls antimony expansion";
   row.reviewVerdict = "verified" as Draft["reviewVerdict"];
   assert.match(audit(rows).errors.join(" | "), /purportedly approved assertions/);
+});
+
+test("physical progress intake requires a bounded caveat that can become a milestone note", () => {
+  const rows = q();
+  const row = rows.find(x => x.id === "review-m3-2-thompson-falls-q2-expansion")!;
+  assert.ok(row.editorialCaution.length <= 700);
+  row.editorialCaution = "x".repeat(701);
+  assert.match(audit(rows).errors.join(" | "), /caveat required \(1-700 characters/);
+  row.editorialCaution = "";
+  assert.match(audit(rows).errors.join(" | "), /caveat required \(1-700 characters/);
 });
