@@ -86,7 +86,7 @@ function validWebSource(url: string): boolean {
  * seed-writing operations.
  */
 export function buildM3ReviewerPackets(
-  queue: readonly PendingProjectExecutionRow[],
+  queue: unknown,
   refs: Refs,
   requestedId: string | null = null,
 ): M3ReviewerPacketReport {
@@ -105,7 +105,7 @@ export function buildM3ReviewerPackets(
   const projectMap = new Map(refs.projects.map(p => [p.id, p]));
   const financeMap = new Map(refs.commitments.map(f => [f.id, f]));
   const evidenceBoundaries = new Map(audited.candidates.map(c => [c.id, c.sourceBoundary]));
-  const fullQueue = [...queue].sort((a,b) => stableCompare(a.id, b.id));
+  const fullQueue = [...(queue as PendingProjectExecutionRow[])].sort((a,b) => stableCompare(a.id, b.id));
   if (requestedId !== null && !fullQueue.some(r => r.id === requestedId))
     throw new Error("Unknown M3 review ID: " + requestedId);
 
