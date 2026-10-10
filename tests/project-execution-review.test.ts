@@ -293,3 +293,13 @@ test("Thompson Falls progress cannot be backdated, broadened, or given counterfe
   row.reviewVerdict = "verified" as Draft["reviewVerdict"];
   assert.match(audit(rows).errors.join(" | "), /purportedly approved assertions/);
 });
+
+test("physical progress intake requires a bounded caveat that can become a milestone note", () => {
+  const rows = q();
+  const row = rows.find(x => x.id === "review-m3-2-thompson-falls-q2-expansion")!;
+  assert.ok(row.editorialCaution.length <= 700);
+  row.editorialCaution = "x".repeat(701);
+  assert.match(audit(rows).errors.join(" | "), /caveat required \(1-700 characters/);
+  row.editorialCaution = "";
+  assert.match(audit(rows).errors.join(" | "), /caveat required \(1-700 characters/);
+});
