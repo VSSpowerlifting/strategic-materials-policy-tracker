@@ -80,6 +80,8 @@ test("F5-3a: financial, designation, and parent-policy lanes never invent capita
   for (const p of draft.lanes.policy) {
     assert.equal(p.context, "finance_or_designation_parent");
     assert.ok(!("verifiedCausality" in p));
+    assert.ok(!("coannouncedControlIds" in p),
+      "sibling controls must not enter the project-level policy lane");
   }
   assert.ok(draft.lanes.designations.every(d => d.recognitionNotMoney));
   assert.ok(draft.lanes.financePackageReferences.every(p =>
