@@ -8,6 +8,7 @@ import {
   getAllFinancialCommitments, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "../lib/data";
 import { adjudicateProjectExecutionReview } from "../scripts/adjudicate-project-execution";
+import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 
 const draft = () => structuredClone(template);
 const refs = () => ({
@@ -19,12 +20,19 @@ const refs = () => ({
 });
 const audit = (r: unknown, references = refs()) =>
   adjudicateProjectExecutionReview(queue, r, references);
-const setApproved = (d: ReturnType<typeof draft>[number], reviewedAt = "2026-10-06") => {
+const setApproved = (
+  d: ReturnType<typeof draft>[number], reviewedAt = "2026-10-06",
+  reviewedRows: unknown = queue, references = refs(),
+) => {
   d.verdict = "approved";
   d.reviewedBy = "Synthetic reviewer in regression test" as never;
   d.reviewedAt = reviewedAt as never;
   d.rationale = "Synthetic test only: assume full original source independently checked." as never;
   d.proposedMilestoneId = ("mil-test-" + d.id.slice("review-m3-2-".length)) as never;
+  // Synthetic test only: actual human reviewer must copy the correct packet digest.
+  d.reviewInputDigestSha256 = buildM3ReviewerPackets(reviewedRows, {
+    ...references, publicMilestoneCount: references.publicMilestoneIds.length,
+  }, d.id).worksheets[0].reviewInputDigestSha256 as never;
   for (const key of Object.keys(d.checks) as (keyof typeof d.checks)[])
     d.checks[key] = true;
 };
@@ -62,6 +70,7 @@ test("real post-cutoff human review is blocked instead of quietly backdated", ()
   assert.match(blocked.blocked[0].reason, /requires a separately authorized site.lastUpdated revision/);
   const newCorpus = refs();
   newCorpus.corpusCutoff = "2026-10-11"; // hypothetical future authorized corpus cutoff in this fixture only
+  setApproved(d[1], "2026-10-10", queue, newCorpus);
   const eligible = audit(d, newCorpus);
   assert.deepEqual(eligible.errors, []);
   assert.deepEqual(eligible.blocked, []);
@@ -146,7 +155,7 @@ test("M3 review preview accepts a structurally valid whole-project null scope bu
   rows[0].scopeProposal = "whole_project";
   rows[0].scopeAsStated = null as never;
   const decisions = draft();
-  setApproved(decisions[0]);
+  setApproved(decisions[0], "2026-10-06", rows);
   const report = adjudicateProjectExecutionReview(rows, decisions, refs());
   assert.deepEqual(report.errors, [], JSON.stringify(report.errors));
   assert.deepEqual(report.blocked, []);
