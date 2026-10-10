@@ -46,27 +46,15 @@
     {
       "id": "f5-1-stibnite-earlyworks-2025",
       "projectId": "prj-us-stibnite",
-      "track": "new_review_candidate",
-      "existingReviewId": null,
+      "track": "existing_m3_review",
+      "existingReviewId": "review-m3-2-stibnite-early-works",
       "sourceId": "src-perpetua-stibnite-early-works-2025",
       "sourceUrl": "https://perpetuaresources.com/perpetua-resources-breaks-ground-on-the-stibnite-gold-project/",
       "publishedOn": "2025-10-21",
       "sourcePublisher": "Perpetua Resources",
-      "proposal": {
-        "kind": "construction_started",
-        "scope": "whole_project",
-        "scopeAsStated": null,
-        "claimMode": "occurred",
-        "occurredOn": "2025-10-21",
-        "targetOn": null,
-        "statementOriginal": "we officially started early works construction today",
-        "statementEn": "we officially started early works construction today",
-        "statementEnSource": "na",
-        "locator": "CEO attributed quotation in October 21, 2025 issuer announcement",
-        "editorialCaution": "The occurred event is *early works construction*, not all plant, mine, production or facility works; 'whole_project' locates the named undertaking, not an assertion that entire undertaking is built. The issuer explicitly said 'today' October 21. Do not conflate financial assurance with paid government money or EXIM contract execution."
-      },
-      "reviewStatus": "pending_source_registration_and_human_review",
-      "editorialDecision": "Original Perpetua issuer announcement is verified at the linked website but NOT registered in the published SMPT source registry. Before human-reviewed promotion, separately register this original issuer Source with actual publication and access dates, validate quote and early-works scope, and attest reviewer identity. Do not infer completion, EXIM binding or a novel funding item."
+      "proposal": null,
+      "reviewStatus": "pending_human_review",
+      "editorialDecision": "Original Perpetua October 21, 2025 release now registered and linked to one canonical *pending* M3.2 source-review row (no separate F5 proposal and NO finance-row linkage). Publication still needs real reviewer/source attestation, editorial decision on whole-project early-works scope and positive authorization for the updated curated corpus cutoff. The reported activity is limited to early works; EXIM preliminary financing is nonbinding and Burntlog May 2026 is a distinct later construction event."
     }
   ]
 }

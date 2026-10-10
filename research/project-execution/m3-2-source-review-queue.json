@@ -111,5 +111,25 @@
     "reviewVerdict": "unreviewed",
     "taxonomyQuestion": "Distinguish named site-access infrastructure from named operating facility. Never turn this May 30 Burntlog Route start into the project's first construction start (earlier early-works began in October 2025).",
     "editorialCaution": "Two financing rows refer to this source without exact status dates; May 30 is source-derived from the press release. No production, financing drawdown or government causality is asserted."
+  },
+  {
+    "id": "review-m3-2-stibnite-early-works",
+    "projectId": "prj-us-stibnite",
+    "sourceId": "src-perpetua-stibnite-early-works-2025",
+    "kindProposal": "construction_started",
+    "scopeProposal": "whole_project",
+    "scopeAsStated": null,
+    "claimMode": "occurred",
+    "occurredOn": "2025-10-21",
+    "targetOn": null,
+    "statementOriginal": "we officially started early works construction today",
+    "statementEn": "we officially started early works construction today",
+    "statementEnSource": "na",
+    "locator": "October 21, 2025 original issuer release, attributed CEO Jon Cherry quote, paragraph 2",
+    "relatedFinanceIds": [],
+    "gate": "human_source_review",
+    "reviewVerdict": "unreviewed",
+    "taxonomyQuestion": null,
+    "editorialCaution": "Stibnite early works began October 21, 2025 according to Perpetua; whole_project identifies the Stibnite undertaking, not a statement that all mine construction has started/completed. The event is distinct from May 30, 2026 Burntlog Route works. Posted financial assurance is not an EXIM disbursement or loan commitment. Actual reviewer must independently confirm exact quote, scope and date. No causal inference."
   }
 ]

@@ -34,7 +34,7 @@ test("review example is genuinely pending and cannot generate a milestone", () =
   assert.equal(r.status, "human_adjudication_preview_only");
   assert.deepEqual(r.errors, []);
   assert.deepEqual(r.blocked, []);
-  assert.equal(r.counts.pending, 5);
+  assert.equal(r.counts.pending, 6);
   assert.deepEqual(r.proposals, []);
   assert.equal(getAllProjectMilestones().length, 0, "review never mutates public seed");
 });
@@ -55,13 +55,13 @@ test("approved Alcoa produces only a non-publishing, independently validated pre
 
 test("real post-cutoff human review is blocked instead of quietly backdated", () => {
   const d = draft();
-  setApproved(d[1], "2026-10-08");
+  setApproved(d[1], "2026-10-10");
   const blocked = audit(d);
   assert.deepEqual(blocked.errors, []);
   assert.equal(blocked.proposals.length, 0);
   assert.match(blocked.blocked[0].reason, /requires a separately authorized site.lastUpdated revision/);
   const newCorpus = refs();
-  newCorpus.corpusCutoff = "2026-10-09"; // hypothetical future authorized corpus cutoff in this fixture only
+  newCorpus.corpusCutoff = "2026-10-11"; // hypothetical future authorized corpus cutoff in this fixture only
   const eligible = audit(d, newCorpus);
   assert.deepEqual(eligible.errors, []);
   assert.deepEqual(eligible.blocked, []);
@@ -134,7 +134,7 @@ test("safe CLI accepts the checked-in PENDING example without changing published
     "--file", "research/project-execution/m3-2-adjudications.example.json"];
   const output = execFileSync(cmd[0], cmd.slice(1), {encoding: "utf8"});
   const parsed = JSON.parse(output);
-  assert.equal(parsed.counts.pending, 5);
+  assert.equal(parsed.counts.pending, 6);
   assert.deepEqual(parsed.errors, []);
   assert.deepEqual(parsed.proposals, []);
 });
@@ -185,4 +185,29 @@ test("Narva human adjudication remains pending; a test-only approval cannot beco
   assert.equal(result.proposals[0].reviewedBy, "Synthetic reviewer in regression test");
   assert.equal(result.status, "human_adjudication_preview_only");
   assert.equal(getAllProjectMilestones().length, 0);
+});
+
+test("Stibnite early works can enter a synthetic nonpublishing review preview without any financing row", () => {
+  const rows=draft();
+  const index=rows.findIndex(x=>x.id==="review-m3-2-stibnite-early-works");
+  assert.ok(index>=0);
+  assert.equal(rows[index].verdict,"pending");
+  assert.equal(rows[index].reviewedBy,null);
+  assert.equal(rows[index].reviewedAt,null);
+  assert.deepEqual(audit(rows).proposals,[]);
+  setApproved(rows[index],"2026-10-09"); // Synthetic test only; not an actual human attestation.
+  const result=audit(rows);
+  assert.deepEqual(result.errors,[]);
+  assert.deepEqual(result.blocked,[]);
+  assert.equal(result.status,"human_adjudication_preview_only");
+  assert.equal(result.proposals.length,1);
+  const proposed=result.proposals[0];
+  assert.equal(proposed.projectId,"prj-us-stibnite");
+  assert.equal(proposed.sourceId,"src-perpetua-stibnite-early-works-2025");
+  assert.equal(proposed.kind,"construction_started");
+  assert.equal(proposed.scope,"whole_project");
+  assert.equal(proposed.scopeAsStated,null);
+  assert.equal(proposed.occurredOn,"2025-10-21");
+  assert.ok(proposed.note?.includes("early works"));
+  assert.equal(getAllProjectMilestones().length,0);
 });

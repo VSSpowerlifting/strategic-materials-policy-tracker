@@ -42,8 +42,10 @@ const textPresent = (v: unknown): v is string =>
   typeof v === "string" && v.trim().length > 0;
 const record = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null && !Array.isArray(v);
+// [] explicitly means this is an independent project-native observation.
+// Never manufacture a finance-row implementation status to admit a project event.
 const sortedUnique = (arr: string[]) =>
-  arr.length > 0 && arr.every((x, i) => textPresent(x) && (i === 0 || arr[i - 1] < x));
+  arr.every((x, i) => textPresent(x) && (i === 0 || arr[i - 1] < x));
 
 /**
  * A source-first REVIEW-QUEUE validator. Output never contains a promoted
@@ -160,9 +162,19 @@ export function auditProjectExecutionPilot(
       fail("funded activity scope must not assert facility construction or production");
 
     if (!Array.isArray(r.relatedFinanceIds) || !sortedUnique(r.relatedFinanceIds as string[])) {
-      fail("relatedFinanceIds must be unique sorted nonempty strings");
+      fail("relatedFinanceIds must be a sorted unique array (empty for project-native evidence)");
     } else {
-      for (const fid of r.relatedFinanceIds as string[]) {
+      const linked = r.relatedFinanceIds as string[];
+      // A project-native source may have no financial-row observation. However,
+      // an empty array cannot be used to hide a real matching legacy observation
+      // or to describe a "funded_activity" without any relevant funding record.
+      if (linked.length === 0 && r.scopeProposal === "funded_activity")
+        fail("funded_activity review requires an actual source-linked finance observation");
+      if (linked.length === 0 && [...financiers.values()].some(f =>
+        f.projectId === r.projectId &&
+        f.implementationStatusHistory?.some(entry => entry.sourceId === r.sourceId)))
+        fail("project-native review cannot omit existing matching finance/source observations");
+      for (const fid of linked) {
         const f = financiers.get(fid);
         if (!f) {
           fail("finance reference " + fid + " does not resolve");
@@ -175,6 +187,8 @@ export function auditProjectExecutionPilot(
       }
     }
 
+    // Zero linked financial rows is permitted: source-first project execution is
+    // independent of government financing. Never create a synthetic finance link.
     // All linked financial rows represent the same *proposed source assertion*.
     // Multiple financiers are never automatically counted as new milestones.
     const signature = JSON.stringify([
