@@ -135,7 +135,8 @@ export function auditProjectExecutionPilot(
         (r.statementEnSource !== "na" || r.statementOriginal !== r.statementEn))
       fail("English original must have identical English passage and na translation");
     if (!textPresent(r.locator)) fail("source locator required");
-    if (!textPresent(r.editorialCaution)) fail("non-promotion interpretation caveat required");
+    if (!textPresent(r.editorialCaution) || r.editorialCaution.length > 700)
+      fail("non-promotion interpretation caveat required (1-700 characters; must fit eventual milestone note)");
 
     // Drafts must never carry a claimed reviewer, approval, date, or published
     // milestone identity: those belong only to separate human-gated promotion.
