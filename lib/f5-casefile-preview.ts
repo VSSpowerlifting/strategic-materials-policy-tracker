@@ -32,7 +32,7 @@ export type F5EditorialCasefilePreview = {
   };
   lanes: {
     /** Recorded parent events only; an adjacent export control is not a cause. */
-    policy: PathwayPolicyContext[];
+    policy: Omit<PathwayPolicyContext, "coannouncedControlIds">[];
     finance: {
       id: string;
       eventId: string;
@@ -122,7 +122,13 @@ export function buildF5EditorialCasefilePreview(
       evidence: pathway.project.sources,
     },
     lanes: {
-      policy: pathway.policyContexts,
+      // Sibling control IDs are intentionally NOT projected as a cause or a
+      // project-specific instrument in a casefile presentation lane.
+      policy: pathway.policyContexts.map(p => ({
+        id: p.id, jurisdiction: p.jurisdiction, issuingBody: p.issuingBody,
+        title: p.title, eventDate: p.eventDate, eventStatus: p.eventStatus,
+        context: p.context, sourceRecords: p.sourceRecords,
+      })),
       finance: pathway.financing.map(f => ({
         id: f.id, eventId: f.eventId, instrument: f.instrument,
         valueRole: f.valueRole, provider: f.provider, recipient: f.recipient,
