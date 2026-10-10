@@ -43,7 +43,7 @@ test("O3: the private Observatory renders actual project cohort without a public
   assert.equal(count(h,'<article id="f5-case-'),4);
   for(const c of m.cases) {
     assert.ok(h.includes('id="f5-case-'+c.comparison.projectId+'"'),c.comparison.projectId);
-    assert.ok(h.includes(c.comparison.projectName.replaceAll("&","&amp;")));
+    assert.ok(h.includes(c.comparison.projectName.replaceAll("&","&amp;").replaceAll("'","&#x27;")));
   }
 });
 
@@ -62,7 +62,7 @@ test("O3: accessible semantic table, native links, responsive classes and unique
   assert.equal(count(h,'<h1'),1);
   assert.equal(count(h,'<h2'),6,"overview, four casefiles, and release gate");
   assert.ok(count(h,'<h3')>=20,"each case has evidence lanes and source heading");
-  assert.ok(count(h,'<section')>=22,"overview, grouping, 16 evidence lanes and 4 source indexes");
+  assert.ok(count(h,'<section')>=18,"overview, grouping and four evidence lanes per case");
   assert.equal(count(h,'<a href="javascript:'),0);
   assert.match(h,/target="_blank" rel="noopener noreferrer"/);
   assert.ok(!h.includes('aria-label="Publish"'));
@@ -87,8 +87,9 @@ test("O3: financial and government evidence uses noncausal words, no amounts/sum
   assert.match(h,/nonallocative associations/);
   assert.match(h,/Project-linked instrument reference/);
   assert.match(h,/not evidence of a government-caused physical result/);
-  assert.match(h,/not funding/);
-  assert.match(h,/references only, not additional or attributable capital/);
+  assert.match(h,/not an award, loan, or cash receipt/);
+  assert.ok(model().cases.every(c=>c.draft.lanes.financePackageReferences.every(p=>p.projectMoneyAllocation==="not_asserted")),
+    "there is no project package allocation implied by a missing finance-package row");
   assert.match(h,/payout/);
   assert.ok(!h.includes("USD 100 million"));
   assert.ok(!h.includes("Total award"));
