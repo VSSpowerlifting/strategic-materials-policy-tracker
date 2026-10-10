@@ -212,7 +212,7 @@ test("Stibnite early works can enter a synthetic nonpublishing review preview wi
   assert.equal(getAllProjectMilestones().length,0);
 });
 
-test("Thompson Falls taxonomy-blocked source cannot be signed through into a physical seed", () => {
+test("Thompson Falls: taxonomy resolved, but only a synthetic human decision yields a nonpublishing preview", () => {
   const rows = draft();
   const idx = rows.findIndex(d => d.id === "review-m3-2-thompson-falls-q2-expansion");
   assert.ok(idx >= 0);
@@ -220,11 +220,19 @@ test("Thompson Falls taxonomy-blocked source cannot be signed through into a phy
   assert.equal(d.verdict, "pending");
   assert.equal(d.reviewedBy, null);
   assert.deepEqual(audit(rows).proposals, []);
-  setApproved(d); // Synthetic test input only, not actual adjudication.
+  setApproved(d); // Synthetic contract fixture, never real human adjudication.
   const result = audit(rows);
   assert.deepEqual(result.errors, []);
+  assert.deepEqual(result.blocked, []);
   assert.equal(result.counts.approved, 1);
-  assert.equal(result.proposals.length, 0);
-  assert.ok(result.blocked.some(b => b.id === d.id && b.reason.includes("Unresolved taxonomy")));
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(result.proposals.length, 1);
+  assert.equal(result.proposals[0].kind, "construction_progress_reported");
+  assert.equal(result.proposals[0].scope, "named_facility");
+  assert.equal(result.proposals[0].occurredOn, null);
+  assert.match(result.proposals[0].note ?? "", /not a completed\/operating project/);
+  assert.equal(getAllProjectMilestones().length, 0, "review is not publication");
+  setApproved(d, "2026-10-10");
+  const staleCutoff = audit(rows);
+  assert.equal(staleCutoff.proposals.length, 0);
+  assert.ok(staleCutoff.blocked.some(b => b.id === d.id && /curated corpus cutoff/.test(b.reason)));
 });
