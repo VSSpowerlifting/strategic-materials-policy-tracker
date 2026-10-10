@@ -88,5 +88,20 @@
     },
     "rationale": null,
     "proposedMilestoneId": null
+  },
+  {
+    "id": "review-m3-2-thompson-falls-q2-expansion",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null
   }
 ]

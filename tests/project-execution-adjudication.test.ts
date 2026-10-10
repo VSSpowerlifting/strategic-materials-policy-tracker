@@ -34,7 +34,7 @@ test("review example is genuinely pending and cannot generate a milestone", () =
   assert.equal(r.status, "human_adjudication_preview_only");
   assert.deepEqual(r.errors, []);
   assert.deepEqual(r.blocked, []);
-  assert.equal(r.counts.pending, 6);
+  assert.equal(r.counts.pending, 7);
   assert.deepEqual(r.proposals, []);
   assert.equal(getAllProjectMilestones().length, 0, "review never mutates public seed");
 });
@@ -134,7 +134,7 @@ test("safe CLI accepts the checked-in PENDING example without changing published
     "--file", "research/project-execution/m3-2-adjudications.example.json"];
   const output = execFileSync(cmd[0], cmd.slice(1), {encoding: "utf8"});
   const parsed = JSON.parse(output);
-  assert.equal(parsed.counts.pending, 6);
+  assert.equal(parsed.counts.pending, 7);
   assert.deepEqual(parsed.errors, []);
   assert.deepEqual(parsed.proposals, []);
 });
@@ -210,4 +210,21 @@ test("Stibnite early works can enter a synthetic nonpublishing review preview wi
   assert.equal(proposed.occurredOn,"2025-10-21");
   assert.ok(proposed.note?.includes("early works"));
   assert.equal(getAllProjectMilestones().length,0);
+});
+
+test("Thompson Falls taxonomy-blocked source cannot be signed through into a physical seed", () => {
+  const rows = draft();
+  const idx = rows.findIndex(d => d.id === "review-m3-2-thompson-falls-q2-expansion");
+  assert.ok(idx >= 0);
+  const d = rows[idx];
+  assert.equal(d.verdict, "pending");
+  assert.equal(d.reviewedBy, null);
+  assert.deepEqual(audit(rows).proposals, []);
+  setApproved(d); // Synthetic test input only, not actual adjudication.
+  const result = audit(rows);
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.counts.approved, 1);
+  assert.equal(result.proposals.length, 0);
+  assert.ok(result.blocked.some(b => b.id === d.id && b.reason.includes("Unresolved taxonomy")));
+  assert.equal(getAllProjectMilestones().length, 0);
 });
