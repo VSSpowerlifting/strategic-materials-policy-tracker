@@ -58,7 +58,7 @@ async function main(){
       const context=await browser.newContext({
         viewport,deviceScaleFactor:1,
         reducedMotion:"reduce",
-        javaScriptEnabled:false,
+        javaScriptEnabled:true,
       });
       const page=await context.newPage();
       const offFileRequests=[];
@@ -117,7 +117,7 @@ async function main(){
           const matches=["h1","header p.text-muted","article .rail","article h2",
             "article section h3","a.text-accent"];
           const asRgb=value=>{
-            const found=value.match(/^rgba?\\(\\s*([\\d.]+)[,\\s]+([\\d.]+)[,\\s]+([\\d.]+)/i);
+            const found=value.match(/^rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/i);
             return found?[Number(found[1]),Number(found[2]),Number(found[3])]:null;
           };
           const background=element=>{
@@ -160,9 +160,9 @@ async function main(){
         const sources=await page.locator("a[target='_blank']").evaluateAll(anchors=>
           anchors.map(el=>({url:el.getAttribute("href"),rel:el.getAttribute("rel")})));
         assert(sources.length>0,"source URLs must be discoverable");
-        assert(sources.every(s=>/^https?:\\/\\//.test(s.url??"")));
-        assert(sources.every(s=>s.rel?.split(/\\s+/).includes("noopener") &&
-          s.rel?.split(/\\s+/).includes("noreferrer")));
+        assert(sources.every(s=>/^https?:\/\//.test(s.url??"")));
+        assert(sources.every(s=>s.rel?.split(/\s+/).includes("noopener") &&
+          s.rel?.split(/\s+/).includes("noreferrer")));
 
         // The real seed does NOT have approved physical claims. This is a
         // typed absence of source-review evidence, never a claim of stalled work.
@@ -174,7 +174,7 @@ async function main(){
 
         process.stdout.write(
           "O3c Chromium "+viewport.width+"x"+viewport.height+
-          ": PASS layout, comparison, keyboard, source links, contrast, review gate\\n"
+          ": PASS layout, comparison, keyboard, source links, contrast, review gate\n"
         );
       } finally {
         await context.close();
@@ -188,12 +188,12 @@ async function main(){
   const latest=JSON.parse(await readFile(planPath,"utf8"));
   assert.deepEqual(latest,receipt);
   assert.equal(sha256(await readFile(htmlPath)),receipt.artifactSha256);
-  process.stdout.write("O3c automated Chromium smoke: PASS; manual browser/source review NOT PERFORMED\\n");
+  process.stdout.write("O3c automated Chromium smoke: PASS; manual browser/source review NOT PERFORMED\n");
 }
 main().catch(error=>{
   // Avoid printing HTML, original source content, sensitive local paths or
   // Playwright traces in public CI logs.
   process.stderr.write("O3c Chromium smoke failed: "+
-    (error instanceof Error?error.message:String(error))+"\\n");
+    (error instanceof Error?error.message:String(error))+"\n");
   process.exitCode=1;
 });
