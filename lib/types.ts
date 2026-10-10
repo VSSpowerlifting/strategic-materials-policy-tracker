@@ -1116,6 +1116,7 @@ export const PROJECT_MILESTONE_KINDS = [
   "feasibility_completed",
   "groundbreaking_reported",
   "construction_started",
+  "construction_progress_reported",
   "commissioning_started",
   "operations_started",
   "production_reported",

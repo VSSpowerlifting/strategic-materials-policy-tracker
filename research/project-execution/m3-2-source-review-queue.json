@@ -136,7 +136,7 @@
     "id": "review-m3-2-thompson-falls-q2-expansion",
     "projectId": "prj-us-usac-thompson-falls-expansion",
     "sourceId": "src-usac-2026-q2-10q",
-    "kindProposal": "construction_substantially_completed_reported",
+    "kindProposal": "construction_progress_reported",
     "scopeProposal": "named_facility",
     "scopeAsStated": "Thompson Falls, Montana antimony processing and refining facility expansion",
     "claimMode": "occurred",
@@ -147,9 +147,9 @@
     "statementEnSource": "na",
     "locator": "Form 10-Q Note 9, Government Grant, substantial-completion and PP&E paragraph; corroborating Note 16, Thompson Falls, Montana Facility Expansion",
     "relatedFinanceIds": [],
-    "gate": "taxonomy_blocked",
+    "gate": "human_source_review",
     "reviewVerdict": "unreviewed",
-    "taxonomyQuestion": "M3 has no canonical construction-progress/substantial-completion reported kind. Do not translate a Q2 near-completion accounting report into construction_started, commissioning_started, or operations_started. Determine whether a new narrowly scoped status kind is warranted after original-source review.",
-    "editorialCaution": "Issuer's Q2 Form 10-Q says expansion substantially completed, $4.1M related assets placed in service late Q2, ~$29M gross project costs still in construction in progress at June 30. It does not establish exact construction-start, substantial-completion or asset-service day, commissioned entire plant, achieved throughput, or completion of all grant-funded work. April $12.8M cash, $20M child allocation, $27M parent commitment, and ~$39M corporate expansion budget have distinct accounting bases. There is no matching same-source financier implementation-status row; do not create one to admit this native review."
+    "taxonomyQuestion": null,
+    "editorialCaution": "Issuer's Q2 Form 10-Q says expansion substantially completed, $4.1M related assets placed in service late Q2, ~$29M gross project costs still in construction in progress at June 30. It does not establish exact construction-start, substantial-completion or asset-service day, commissioned entire plant, achieved throughput, or completion of all grant-funded work. April $12.8M cash, $20M child allocation, $27M parent commitment, and ~$39M corporate expansion budget have distinct accounting bases. There is no matching same-source financier implementation-status row; do not create one to admit this native review. The canonical kind reports construction progress only, not a completed/operating project or dated stage transition. This remains an unsigned human-source-review candidate."
   }
 ]

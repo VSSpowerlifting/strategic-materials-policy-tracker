@@ -160,6 +160,14 @@ export function auditProjectExecutionPilot(
       fail("funded activity completion cannot be a whole-project/facility milestone");
     if (r.scopeProposal === "funded_activity" && r.kindProposal !== "funded_activity_completed")
       fail("funded activity scope must not assert facility construction or production");
+    if (r.kindProposal === "construction_progress_reported") {
+      if (r.claimMode !== "occurred")
+        fail("construction_progress_reported requires occurred claim mode");
+      if (r.scopeProposal !== "named_facility")
+        fail("construction_progress_reported requires named_facility scope");
+      if (r.occurredOn !== null)
+        fail("construction_progress_reported requires occurredOn: null; report date is not a progress event day");
+    }
 
     if (!Array.isArray(r.relatedFinanceIds) || !sortedUnique(r.relatedFinanceIds as string[])) {
       fail("relatedFinanceIds must be a sorted unique array (empty for project-native evidence)");
