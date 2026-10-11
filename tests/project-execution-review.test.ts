@@ -23,8 +23,8 @@ test("M3.2 seven source-linked candidates are a non-promoting review queue", () 
   const result = audit();
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(result.summary.awaitingHumanSourceReview, 5);
-  assert.equal(result.summary.blockedOnTaxonomy, 2);
+  assert.equal(result.summary.awaitingHumanSourceReview, 4);
+  assert.equal(result.summary.blockedOnTaxonomy, 3);
   assert.deepEqual(result.candidates.map((x) => x.id),
     ["review-m3-2-alcoa-wagerup", "review-m3-2-cyclic-extended-operations",
      "review-m3-2-inl-demonstration", "review-m3-2-neo-narva-magnets",
@@ -57,7 +57,7 @@ test("Cyclic preserves missing exact date and source-access boundary", () => {
   assert.deepEqual(result.candidates[1].sourceBoundary, { date: "2026-10-07", basis: "access" });
 });
 
-test("scope decisions block INL demo and Stibnite road without widening canonical taxonomy", () => {
+test("scope holds block INL demo, Stibnite road and canonical-but-overbroad early works", () => {
   const rows = q();
   assert.equal(rows[2].gate, "taxonomy_blocked");
   assert.equal(rows[2].kindProposal, "demonstration_started");
@@ -65,6 +65,9 @@ test("scope decisions block INL demo and Stibnite road without widening canonica
   assert.equal(rows[4].gate, "taxonomy_blocked");
   assert.equal(rows[4].scopeProposal, "named_infrastructure");
   assert.equal(rows[4].occurredOn, "2026-05-30");
+  assert.equal(rows[5].gate, "taxonomy_blocked");
+  assert.equal(rows[5].scopeProposal, "whole_project");
+  assert.match(rows[5].taxonomyQuestion!, /early-works construction/);
   assert.deepEqual(audit().errors, []);
 });
 
@@ -178,7 +181,8 @@ test("Stibnite first early works may be queued without inventing a matching fina
   const later=rows.find(x=>x.id==="review-m3-2-stibnite-burntlog")!;
   assert.deepEqual(first.relatedFinanceIds,[]);
   assert.equal(first.sourceId,"src-perpetua-stibnite-early-works-2025");
-  assert.equal(first.gate,"human_source_review");
+  assert.equal(first.gate,"taxonomy_blocked");
+  assert.match(first.taxonomyQuestion!, /full mine-site construction/);
   assert.equal(first.kindProposal,"construction_started");
   assert.equal(first.scopeProposal,"whole_project");
   assert.equal(first.scopeAsStated,null);
