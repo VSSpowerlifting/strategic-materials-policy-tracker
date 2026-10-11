@@ -32,7 +32,7 @@ test("O3c CI is isolated, read-only and does not distribute internal editorial H
   // Keep the browser trigger in sync with the evidence inputs consumed by
   // scripts/f5-observatory-local-preview.tsx. Main CI is not a substitute:
   // a path-filter omission silently skips the actual browser smoke tests.
-  const triggeredPaths=[...job.matchAll(/^\\s+- "([^"]+)"$/gm)].map(match=>match[1]);
+  const triggeredPaths=[...job.matchAll(/^\s+- "([^"]+)"$/gm)].map(match=>match[1]);
   for(const dependency of [
     "lib/f5-observatory-scaffold.ts","lib/f5-casefile-preview.ts",
     "lib/f5-casefile-readiness.ts","lib/project-evidence-pathway.ts",
