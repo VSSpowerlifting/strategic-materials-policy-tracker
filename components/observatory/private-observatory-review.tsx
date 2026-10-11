@@ -94,7 +94,10 @@ function MilestoneClaim({m}: {m:PathwayMilestone}) {
         <time dateTime={when}>{when}</time></>
         : m.claimMode==="occurred"?"Exact physical occurrence day not established":"Exact target day not stated"}
     </p>
-    <p className="mt-2 text-sm text-muted">Scope: {m.scopeAsStated ?? "Entire registered project (scope must be supported by original source)"}</p>
+    <p className="mt-2 text-sm text-muted">Scope: {m.scopeAsStated ?? "Registered project (extent limited by original source and editorial qualification)"}</p>
+    {m.note ? <p className="mt-2 text-sm leading-6 text-muted" role="note">
+      Editorial qualification: {m.note}
+    </p> : null}
     <blockquote className="mt-3 border-l-2 border-accent/50 pl-3 font-serif text-base leading-7 text-foreground">
       “{m.speakerStatementEn}”
     </blockquote>
