@@ -29,6 +29,22 @@ test("O3c CI is isolated, read-only and does not distribute internal editorial H
     "npm ci","npm audit --omit=dev --audit-level=moderate",
     "npm run validate","npm run typecheck","npm run lint","npm test","npm run build",
   ])assert.ok(ci.includes(gate),"regular main PR CI must cover: "+gate);
+  // Keep the browser trigger in sync with the evidence inputs consumed by
+  // scripts/f5-observatory-local-preview.tsx. Main CI is not a substitute:
+  // a path-filter omission silently skips the actual browser smoke tests.
+  const triggeredPaths=[...job.matchAll(/^\\s+- "([^"]+)"$/gm)].map(match=>match[1]);
+  for(const dependency of [
+    "lib/f5-observatory-scaffold.ts","lib/f5-casefile-preview.ts",
+    "lib/f5-casefile-readiness.ts","lib/project-evidence-pathway.ts",
+    "lib/evidence-pathway-contract.ts","lib/project-execution-audit.ts",
+    "lib/project-milestones.ts","lib/data.ts","lib/types.ts","lib/site.ts",
+    "data/seed/events.json","data/seed/financial-commitments.json",
+    "data/seed/control-measures.json","data/seed/projects.json",
+    "data/seed/project-designations.json","data/seed/project-milestones.json",
+    "data/seed/sources.json","app/globals.css","postcss.config.mjs",
+    "package.json","package-lock.json","components/observatory/**",
+  ])assert.ok(triggeredPaths.includes(dependency),
+    "Chromium path filter omits render/evidence input: "+dependency);
   assert.match(job,/playwright@1\.55\.0/);
   assert.match(job,/npx playwright install --with-deps chromium/);
   assert.match(job,/npm run preview:f5-observatory/);

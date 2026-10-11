@@ -11,7 +11,7 @@ This phase uses **headless Chromium** to inspect the exact O3b-generated `.proje
 ## Design
 
 - `scripts/qa-f5-observatory-browser.mjs` launches Chromium through pinned Playwright **1.55.0**, reads the HTML and JSON local QA plan, and checks the file's exact SHA-256 against the plan. The script does **not** mutate or stamp the local plan.
-- `.github/workflows/f5-observatory-browser-qa.yml` triggers only for relevant component/preview/workflow changes (plus manual workflow runs), installs dependencies on an ephemeral Ubuntu runner, downloads the matching Chromium, generates the local preview and runs the automated checks.
+- `.github/workflows/f5-observatory-browser-qa.yml` triggers for the preview, casefile/graph projection, directly consumed policy/finance/project/source seed records, styling or rendering toolchain changes (plus manual workflow runs). This deliberately incurs extra browser QA for relevant corpus changes instead of allowing source-backed displayed claims to change without Chromium verification. The ephemeral Ubuntu runner installs dependencies, downloads matching Chromium, generates the local preview and runs the automated checks.
 - The Playwright runtime is installed in the isolated job using a **pinned version** and without touching SMPT's normal tracked `package-lock.json` or production dependencies.
 - There is **no screenshot creation, browser trace, HTML dump, artifact upload, public test server, external source crawl or Next route**. The local HTML and QA plan exist only within the short-lived runner and are ignored by Git.
 - CI logs only short descriptions of checked viewport sizes and passes/failures. Production code still builds without importing a browser dependency.

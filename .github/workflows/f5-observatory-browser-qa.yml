@@ -13,7 +13,29 @@ on:
       - "components/observatory/**"
       - "lib/f5-observatory-scaffold.ts"
       - "lib/f5-casefile-preview.ts"
+      # Direct and transitive evidence inputs must also trigger browser QA.
+      # Otherwise a corpus or graph change could alter displayed claims
+      # without exercising the Chromium checks.
+      - "lib/f5-casefile-readiness.ts"
+      - "lib/project-evidence-pathway.ts"
+      - "lib/evidence-pathway-contract.ts"
+      - "lib/project-execution-audit.ts"
+      - "lib/project-milestones.ts"
+      - "lib/data.ts"
+      - "lib/types.ts"
+      - "lib/site.ts"
+      - "data/seed/events.json"
+      - "data/seed/financial-commitments.json"
+      - "data/seed/control-measures.json"
+      - "data/seed/projects.json"
+      - "data/seed/project-designations.json"
+      - "data/seed/project-milestones.json"
+      - "data/seed/sources.json"
+      # CSS and dependency/toolchain changes can alter rendered geometry.
       - "app/globals.css"
+      - "postcss.config.mjs"
+      - "package.json"
+      - "package-lock.json"
   workflow_dispatch:
 
 permissions:
