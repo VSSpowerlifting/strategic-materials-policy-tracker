@@ -2,7 +2,9 @@
 
 **Status:** draft research intake, not an approved factual backfill. **No records have been added to the public project-milestones seed.**
 
-This phase converts the M3.1 legacy shadow-audit findings into four precisely delimited, original-source-anchored editorial proposals. They live at `research/project-execution/m3-2-source-review-queue.json` and can be inspected/validated only from `scripts/` or tests. They are not imported by application routes, `lib/data.ts`, exports, search or public financial calculations.
+**Current October 11, 2026 checkpoint:** the canonical queue has **seven** leads: **four** ordinary human-source reviews and **three** taxonomy/scope holds (INL demonstration, Stibnite early works and Burntlog Route). The four-case discussion below is the **original historical M3.2 snapshot**, not the current queue. See [current F5-1 source-readiness matrix](../../docs/analysis/f5-1-industrial-source-readiness-matrix-2026-10-11.md) and `npm run review:m3-packets`. The cutoff is **2026-10-09**, all adjudication examples remain unsigned, and the public milestone seed remains empty.
+
+The original M3.2 phase converted the legacy shadow audit into four source-review leads, subsequently expanded to seven. They live at `research/project-execution/m3-2-source-review-queue.json` and can be inspected/validated only from `scripts/` or tests. They are not imported by application routes, `lib/data.ts`, exports, search or public financial calculations.
 
 ## Read-only audit
 
@@ -26,7 +28,7 @@ Run `npm run audit:project-execution-pilot -- --json` locally. It reports source
 ## Non-publication and promotion sequence
 
 - **Step 1:** Human reviewer examines entire original publisher document, identifies the precise original quotation, whose report it is, source publication/access boundary, project vs facility vs workstream scope, and dates. The research JSON expressly contains `reviewVerdict: "unreviewed"` and **must never contain a fake reviewer or approval date**.
-- **Step 2:** Only once A/B interpretation is approved may a separate change create one `mil-*` record per real-world sourced milestone, with actual reviewer name/date. If review happens later than `site.lastUpdated` (currently 2026-10-07), advance the **curated corpus cutoff deliberately as part of the authorized publication phase**; never falsify `reviewedAt`.
+- **Step 2:** Only once A/B interpretation is approved may a separate change create one `mil-*` record per real-world sourced milestone, with actual reviewer name/date. If review happens later than `site.lastUpdated` (currently 2026-10-09), advance the **curated corpus cutoff deliberately as part of the authorized publication phase**; never falsify `reviewedAt`.
 - **Step 3:** C/D require a separately approved taxonomy/semantic change (or an alternative admissible, narrower evidence model). Any enum extension must be justified against the broader corpus and regression-tested; avoid a label created merely for one pilot example.
 - **Step 4:** Keep existing finance-row physical history intact; audit conservation of financing aggregates and the response matrix. Do not remove Kingston's funded-activity exception or assert that public funding *caused* construction.
 - **Step 5:** No merge, production deployment, or promotional publication without maintainer review and green CI. A passing M3.2 pilot audit is only a **research-intake** check.
@@ -37,7 +39,7 @@ The research queue references source IDs in SMPT's current registry rather than 
 
 ## M3.2b local adjudication handoff (non-publishing)
 
-The four-source review queue now has a strictly isolated, **human-only decision input**. None of the following automates primary-source verification, and no approval fields are filled out by the tool itself.
+The seven-case reviewer queue has a strictly isolated, **human-only decision input**. None of the following automates primary-source verification, and no approval fields are filled out by the tool itself.
 
 1. Read the complete original publisher article or government programme entry, not just the short `statementOriginal` anchor. Check dates, named subprojects, exact scope, quote, and whether the assertion is an observed fact rather than a future target. Document any contradictions independently.
 2. Copy `research/project-execution/m3-2-adjudications.example.json` to `.project-execution-review/adjudications.json`. This directory is intentionally gitignored. The checked-in example is **all pending**, with no invented reviewer, approval date, source checks or milestone IDs.
