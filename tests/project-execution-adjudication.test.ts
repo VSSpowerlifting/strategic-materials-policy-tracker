@@ -78,13 +78,14 @@ test("real post-cutoff human review is blocked instead of quietly backdated", ()
   assert.equal(eligible.proposals[0].occurredOn, null, "March-only reported completion is never given an invented day");
 });
 
-test("taxonomy-blocked INL and Stibnite cannot be approved by signing every checkbox", () => {
+test("taxonomy-blocked INL, Stibnite road and early works cannot be approved by signing checkboxes", () => {
   const d = draft();
   setApproved(d[2]);
   setApproved(d[4]);
+  setApproved(d[5]);
   const r = audit(d);
   assert.deepEqual(r.proposals, []);
-  assert.equal(r.blocked.length, 2);
+  assert.equal(r.blocked.length, 3);
   assert.match(r.blocked[0].reason, /Unresolved taxonomy/);
 });
 
@@ -197,7 +198,7 @@ test("Narva human adjudication remains pending; a test-only approval cannot beco
   assert.equal(getAllProjectMilestones().length, 0);
 });
 
-test("Stibnite early works can enter a synthetic nonpublishing review preview without any financing row", () => {
+test("Stibnite early works canonical scope remains blocked even with a full synthetic signoff", () => {
   const rows=draft();
   const index=rows.findIndex(x=>x.id==="review-m3-2-stibnite-early-works");
   assert.ok(index>=0);
@@ -208,17 +209,11 @@ test("Stibnite early works can enter a synthetic nonpublishing review preview wi
   setApproved(rows[index],"2026-10-09"); // Synthetic test only; not an actual human attestation.
   const result=audit(rows);
   assert.deepEqual(result.errors,[]);
-  assert.deepEqual(result.blocked,[]);
   assert.equal(result.status,"human_adjudication_preview_only");
-  assert.equal(result.proposals.length,1);
-  const proposed=result.proposals[0];
-  assert.equal(proposed.projectId,"prj-us-stibnite");
-  assert.equal(proposed.sourceId,"src-perpetua-stibnite-early-works-2025");
-  assert.equal(proposed.kind,"construction_started");
-  assert.equal(proposed.scope,"whole_project");
-  assert.equal(proposed.scopeAsStated,null);
-  assert.equal(proposed.occurredOn,"2025-10-21");
-  assert.ok(proposed.note?.includes("early works"));
+  assert.deepEqual(result.proposals,[]);
+  assert.equal(result.blocked.length,1);
+  assert.equal(result.blocked[0].id,"review-m3-2-stibnite-early-works");
+  assert.match(result.blocked[0].reason,/Unresolved taxonomy/);
   assert.equal(getAllProjectMilestones().length,0);
 });
 

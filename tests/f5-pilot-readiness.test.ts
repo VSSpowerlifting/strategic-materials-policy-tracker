@@ -31,7 +31,7 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
   assert.equal(report.publicMilestoneCount,0);
   assert.deepEqual(report.totals,{
     cases:4,existingM3:4,newProposals:0,
-    missingRegisteredSources:0,taxonomyBlocked:1,humanReviewRequired:4,
+    missingRegisteredSources:0,taxonomyBlocked:2,humanReviewRequired:4,
   });
   assert.deepEqual(report.cases.map(x=>x.id),[
     "f5-1-alcoa-wagerup-groundbreaking",
@@ -93,7 +93,8 @@ test("F5-1: Stibnite original early works source is registered and distinct from
   assert.equal(first.proposedScope,null);
   assert.equal(first.proposedOccurredOn,null);
   assert.deepEqual(first.sourceEvidenceBoundary,{date:"2025-10-21",basis:"publication"});
-  assert.deepEqual(first.releaseBlockers,["existing_M3_human_adjudication"]);
+  assert.deepEqual(first.releaseBlockers,["existing_M3_taxonomy_gate"]);
+  assert.equal(input().cases[3].reviewStatus,"taxonomy_blocked");
   assert.equal(input().cases[3].proposal,null);
   const m3=m3Queue.find(x=>x.id===first.existingReviewId)!;
   assert.deepEqual(m3.relatedFinanceIds,[]);

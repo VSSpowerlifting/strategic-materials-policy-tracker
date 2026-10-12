@@ -127,9 +127,9 @@
     "statementEnSource": "na",
     "locator": "October 21, 2025 original issuer release, attributed CEO Jon Cherry quote, paragraph 2",
     "relatedFinanceIds": [],
-    "gate": "human_source_review",
+    "gate": "taxonomy_blocked",
     "reviewVerdict": "unreviewed",
-    "taxonomyQuestion": null,
+    "taxonomyQuestion": "Perpetua explicitly reports only early-works construction at the Stibnite Gold Project. Although whole_project is a canonical label, it could falsely imply full mine-site construction. Resolve an adequately scoped project early-works classification before reviewer approval; do not infer all mine and processing-facility workstreams began.",
     "editorialCaution": "Stibnite early works began October 21, 2025 according to Perpetua; whole_project identifies the Stibnite undertaking, not a statement that all mine construction has started/completed. The event is distinct from May 30, 2026 Burntlog Route works. Posted financial assurance is not an EXIM disbursement or loan commitment. Actual reviewer must independently confirm exact quote, scope and date. No causal inference."
   },
   {

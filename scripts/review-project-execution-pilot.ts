@@ -153,7 +153,9 @@ export function auditProjectExecutionPilot(
     } else if (r.gate === "taxonomy_blocked") {
       output.summary.blockedOnTaxonomy++;
       if (!textPresent(r.taxonomyQuestion)) fail("taxonomy_blocked requires a concrete taxonomy question");
-      if (canonical) fail("taxonomy_blocked with canonical labels needs explicit editorial review instead");
+      // A proposed canonical label can still be semantically too broad for the
+      // primary source. Keep the candidate blocked until the reviewer resolves
+      // that explicit scope question; structural validity is not source approval.
     } else {
       fail("gate must be human_source_review or taxonomy_blocked");
     }
