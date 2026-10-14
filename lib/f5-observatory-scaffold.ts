@@ -216,7 +216,14 @@ export function buildF5ObservatoryScaffold(
   const initialReady = initialPilots.filter(c=>c.comparison.manualSourceAndBrowserQaCandidate).length;
   const comparatorReady = comparators.filter(c=>c.comparison.manualSourceAndBrowserQaCandidate).length;
   // A caller-supplied comparator-only cohort must not yield a vacuous "all pilots ready" result.
-  const allInitialPilotsEligibleForManualQa = initialPilots.length > 0 &&
+  // An alternate cohort containing only one or two of the canonical pilots
+  // must never claim that ALL initial pilots are QA-eligible.
+  const requiredPilotIds = F5_OBSERVATORY_COHORT
+    .filter(c => c.track === "initial_pilot").map(c => c.projectId);
+  const selectedPilotIds = new Set(initialPilots.map(c => c.comparison.projectId));
+  const allInitialPilotsEligibleForManualQa =
+    initialPilots.length === requiredPilotIds.length &&
+    requiredPilotIds.every(id => selectedPilotIds.has(id)) &&
     initialReady === initialPilots.length;
   return {
     schemaVersion:"f5-observatory-prepublication-1",
