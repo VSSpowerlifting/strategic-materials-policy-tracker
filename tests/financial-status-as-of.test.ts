@@ -36,13 +36,33 @@ test("an undated status can enter history from a dated source publication withou
   assert.equal(financialStatusOn(row, "2023-04-21"), "disbursed");
 });
 
-test("access-only evidence is a conservative boundary when neither status nor source has a publication date", () => {
-  const row = getFinancialCommitmentById("fin-us-army-perpetua-antimony-otia")!;
+test("verified SEC filing date moves only the earliest knowable status boundary, not its effective day", () => {
+  const otia = getFinancialCommitmentById("fin-us-army-perpetua-antimony-otia")!;
+  const dpa = getFinancialCommitmentById("fin-us-dod-perpetua-stibnite-dpa")!;
 
-  assert.equal(row.financialStatusHistory.at(-1)?.status, "partially_disbursed");
+  // The Q2 10-Q was publicly filed on 2026-08-14. Its fiscal period ended
+  // 2026-06-30, but a reported state is not retroactively known on that day.
+  assert.equal(otia.financialStatusHistory.at(-1)?.status, "partially_disbursed");
+  assert.equal(otia.financialStatusHistory.at(-1)?.date, null);
+  assert.equal(financialStatusOn(otia, "2026-08-13"), "contracted");
+  assert.equal(financialStatusOn(otia, "2026-08-14"), "partially_disbursed");
+  assert.equal(financialStatusOn(otia, "2026-10-01"), "partially_disbursed");
+
+  assert.equal(dpa.financialStatusHistory.at(-1)?.status, "disbursed");
+  assert.equal(dpa.financialStatusHistory.at(-1)?.date, null);
+  assert.equal(financialStatusOn(dpa, "2026-08-13"), "contracted");
+  assert.equal(financialStatusOn(dpa, "2026-08-14"), "disbursed");
+});
+
+test("access-only evidence remains conservative when neither status nor source has a publication date", () => {
+  // JOGMEC grant index's original registered source still has no verified
+  // publication day. Its 2026-10-03 access receipt is the earliest evidence
+  // boundary, NOT an invented legal decision day.
+  const row = getFinancialCommitmentById("fin-jp-jogmec-santoku-rare-earth-grant")!;
+  assert.equal(row.financialStatusHistory.at(-1)?.status, "decided");
   assert.equal(row.financialStatusHistory.at(-1)?.date, null);
-  assert.equal(financialStatusOn(row, "2026-10-01"), "contracted");
-  assert.equal(financialStatusOn(row, "2026-10-02"), "partially_disbursed");
+  assert.equal(financialStatusOn(row, "2026-10-02"), "announced");
+  assert.equal(financialStatusOn(row, "2026-10-03"), "decided");
 });
 
 test("historical lifecycle refresh uses the financial status evidenced by the as-of date and ignores later financial reviews", () => {
