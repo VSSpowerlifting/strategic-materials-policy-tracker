@@ -38,7 +38,7 @@ npm run audit:f5-observatory -- --strict
 
 The **three initial F5 pilots** (Alcoa–Sojitz, Narva and Stibnite) and the **fourth extended comparator** (Thompson Falls) are distinct review cohorts. The internal scaffold now reports their source/browser QA eligibility separately. A reviewed comparator cannot mask an unreviewed initial pilot, and a missing comparator does not erase the three-pilot progress count.
 
-Importantly, the existing `allCasefilesEligibleForManualQa`, `nextGate` and `--strict` checks **remain whole-cohort gates**: the comparator is not silently dropped to obtain a green strict audit. The new `allInitialPilotsEligibleForManualQa` flag is a *workload/QA metric only*, not permission to publish three cases or change the agreed public release criteria. The separate original-source attestation, source-revision approval, browser QA and maintainer release authorization all still apply. Zero reviewed physical milestones remain the actual registered baseline.
+Importantly, the existing `allCasefilesEligibleForManualQa`, `nextGate` and `--strict` checks **remain whole-cohort gates**: the comparator is not silently dropped to obtain a green strict audit. The new `allInitialPilotsEligibleForManualQa` flag requires **all three canonical initial pilot project IDs**; a custom one- or two-pilot subset cannot count as all ready. It is a *workload/QA metric only*, not permission to publish three cases or change the agreed public release criteria. The separate original-source attestation, source-revision approval, browser QA and maintainer release authorization all still apply. Zero reviewed physical milestones remain the actual registered baseline.
 
 ## Intended eventual information architecture (future PRs, not enabled here)
 
