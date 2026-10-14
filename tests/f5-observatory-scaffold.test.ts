@@ -163,6 +163,14 @@ test("F5 Observatory: three synthetic pilot QA candidates do not certify the opt
   assert.equal(comparatorOnly.allInitialPilotsEligibleForManualQa,false,
     "empty pilot cohort must never count as ready");
   assert.equal(comparatorOnly.publicReleaseAuthorized,false);
+
+  const singlePilot=buildF5ObservatoryScaffold({...data,milestones},
+    site.lastUpdated,[F5_OBSERVATORY_COHORT[0]]);
+  assert.equal(singlePilot.initialPilotCasefiles,1);
+  assert.equal(singlePilot.initialPilotsReadyForManualQa,1);
+  assert.equal(singlePilot.allInitialPilotsEligibleForManualQa,false,
+    "a 1-of-3 partial canonical selection cannot masquerade as all pilots ready");
+  assert.equal(singlePilot.publicReleaseAuthorized,false);
 });
 
 test("F5 Observatory: failures and non-observation are not a proxy for success, delay or inactivity",()=>{
