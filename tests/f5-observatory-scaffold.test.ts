@@ -34,6 +34,11 @@ test("F5 Observatory: four exact pilot and comparator projects, internal only an
   assert.equal(r.curatedCorpusCutoff,site.lastUpdated);
   assert.equal(r.nextGate,"source_adjudication");
   assert.equal(r.sourceReviewedCasefilesReadyForManualQa,0);
+  assert.equal(r.initialPilotCasefiles,3);
+  assert.equal(r.initialPilotsReadyForManualQa,0);
+  assert.equal(r.allInitialPilotsEligibleForManualQa,false);
+  assert.equal(r.extendedComparatorCasefiles,1);
+  assert.equal(r.extendedComparatorsReadyForManualQa,0);
   assert.equal(r.allCasefilesEligibleForManualQa,false);
   assert.equal(r.publicReleaseAuthorized,false);
   assert.equal(r.editorialClaimsAutomaticallyApproved,false);
@@ -105,9 +110,59 @@ test("F5 Observatory: an artificial reviewed physical row advances only Narva to
   assert.equal(narva.draft.lanes.physical.occurred[0].evidence.publishedOn,"2026-09-14");
   assert.ok(narva.sourceIndex.some(x=>x.sourceId===synthetic.sourceId&&x.inLanes.includes("physical")));
   assert.equal(r.sourceReviewedCasefilesReadyForManualQa,1);
+  assert.equal(r.initialPilotsReadyForManualQa,1);
+  assert.equal(r.extendedComparatorsReadyForManualQa,0);
   assert.equal(r.nextGate,"source_adjudication");
   assert.equal(r.publicReleaseAuthorized,false);
   assert.equal(getAllProjectMilestones().length,0);
+});
+
+test("F5 Observatory: three synthetic pilot QA candidates do not certify the optional comparator or release",()=>{
+  const data=corpus();
+  // These are structurally valid TEST FIXTURES, not real source-review attestations
+  // or claims about the actual scope of any facility's physical progress.
+  const make=(id:string,projectId:string,sourceId:string,kind:ProjectMilestone["kind"],
+    occurredOn:string|null):ProjectMilestone=>({
+    id,projectId,sourceId,kind,claimMode:"occurred",
+    scope:"named_facility",scopeAsStated:"TEST ONLY: synthetic facility scope",
+    occurredOn,targetOn:null,locator:"TEST ONLY: synthetic source pinpoint",
+    statementOriginal:"TEST ONLY: no real-world assertion",
+    statementEn:"TEST ONLY: no real-world assertion",statementEnSource:"na",
+    reviewedBy:"Synthetic regression fixture, not a human source reviewer",
+    reviewedAt:site.lastUpdated,
+  });
+  const milestones=[
+    make("mil-f5-test-alcoa","prj-au-alcoa-sojitz-gallium",
+      "src-alcoa-wagerup-groundbreaking-2026","construction_started","2026-08-24"),
+    make("mil-f5-test-narva","prj-ee-neo-rare-earth-magnet-project",
+      "src-neo-commercial-production-2026","production_reported",null),
+    make("mil-f5-test-stibnite","prj-us-stibnite",
+      "src-perpetua-stibnite-early-works-2025","construction_started","2025-10-21"),
+  ];
+  const report=build({...data,milestones});
+  assert.equal(report.initialPilotCasefiles,3);
+  assert.equal(report.initialPilotsReadyForManualQa,3);
+  assert.equal(report.allInitialPilotsEligibleForManualQa,true);
+  assert.equal(report.extendedComparatorCasefiles,1);
+  assert.equal(report.extendedComparatorsReadyForManualQa,0);
+  assert.equal(report.sourceReviewedCasefilesReadyForManualQa,3);
+  assert.equal(report.allCasefilesEligibleForManualQa,false,
+    "comparator still blocks strict full-cohort QA");
+  assert.equal(report.nextGate,"source_adjudication",
+    "whole-cohort gate must not be silently weakened");
+  assert.equal(report.publicReleaseAuthorized,false);
+  assert.equal(report.editorialClaimsAutomaticallyApproved,false);
+  assert.equal(getAllProjectMilestones().length,0);
+  const rendered=formatF5ObservatoryScaffold(report);
+  assert.match(rendered,/Initial pilots ready: 3\/3/);
+  assert.match(rendered,/Extended comparators ready: 0\/1/);
+
+  const comparatorOnly=buildF5ObservatoryScaffold(data,site.lastUpdated,
+    [F5_OBSERVATORY_COHORT[3]]);
+  assert.equal(comparatorOnly.initialPilotCasefiles,0);
+  assert.equal(comparatorOnly.allInitialPilotsEligibleForManualQa,false,
+    "empty pilot cohort must never count as ready");
+  assert.equal(comparatorOnly.publicReleaseAuthorized,false);
 });
 
 test("F5 Observatory: failures and non-observation are not a proxy for success, delay or inactivity",()=>{
