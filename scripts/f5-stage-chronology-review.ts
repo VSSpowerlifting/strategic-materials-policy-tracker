@@ -55,7 +55,7 @@ const target:{
       {key:"separate_future_centre_of_excellence",role:"original_recipient_announcement",
         url:"https://cyclicmaterials.earth/resources/cyclic-materials-announces-usd-25m-investment-to-establish-centre-of-excellence-for-rare-earth-recycling-in-kingston-ontario",
         publishedOn:"2025-06-11",timeAsStated:"target_2026-Q1",
-        dateMeaning:"forward_looking_different_project",registeredSourceId:null},
+        dateMeaning:"forward_looking_different_project",registeredSourceId:"src-cyclic-centre-excellence-2025"},
       {key:"cmrdd_funded_activity_status",role:"original_government_programme",
         url:"https://www.canada.ca/en/campaign/critical-minerals-in-canada/federal-support-for-critical-mineral-projects-and-value-chains/critical-minerals-research-development-and-demonstration-program.html",
         publishedOn:null,timeAsStated:"2026-03",
