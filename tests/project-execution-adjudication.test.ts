@@ -61,6 +61,54 @@ test("approved Alcoa produces only a non-publishing, independently validated pre
   assert.equal(getAllProjectMilestones().length, 0);
 });
 
+test("M3 multi-review handoff rejects the same dated facility event reported by two publishers", () => {
+  // All reviews and the additional publisher below are TEST FIXTURES. Nothing
+  // here represents an actual source verification or human adjudication.
+  const rows = structuredClone(queue);
+  const corroboratingRow = structuredClone(rows[0]);
+  corroboratingRow.id = "review-m3-2-alcoa-wagerup-corroboration";
+  corroboratingRow.sourceId = "src-fixture-second-wagerup-publisher";
+  corroboratingRow.relatedFinanceIds = [];
+  rows.splice(1, 0, corroboratingRow);
+
+  const references = refs();
+  const originalSource = references.sources.find(s => s.id === rows[0].sourceId)!;
+  references.sources.push({
+    ...originalSource,
+    id: corroboratingRow.sourceId,
+    title: "Synthetic corroborating account of the same Wagerup construction start",
+    url: "https://example.org/independent-wagerup-fixture",
+  });
+
+  const decisions = draft();
+  const corroboratingDecision = structuredClone(decisions[0]);
+  corroboratingDecision.id = corroboratingRow.id;
+  decisions.splice(1, 0, corroboratingDecision);
+  setApproved(decisions[0], "2026-10-06", rows, references);
+  setApproved(decisions[1], "2026-10-06", rows, references);
+
+  const collision = adjudicateProjectExecutionReview(rows, decisions, references);
+  assert.deepEqual(collision.proposals, [],
+    "individual reviews must not appear ready when their joint seed is invalid");
+  assert.match(collision.errors.join(" | "),
+    /combined review proposals: .*duplicate dated physical event across sources/);
+  assert.deepEqual(collision.blocked, []);
+
+  // Truly different explicitly scoped facilities can have the same event day.
+  // Changing an input invalidates its old digest, so re-attest both TEST reviews.
+  const distinctRows = structuredClone(rows);
+  distinctRows[1].scopeAsStated = "Separate synthetic Wagerup test facility";
+  const freshDecisions = structuredClone(decisions);
+  setApproved(freshDecisions[0], "2026-10-06", distinctRows, references);
+  setApproved(freshDecisions[1], "2026-10-06", distinctRows, references);
+  const distinct = adjudicateProjectExecutionReview(
+    distinctRows, freshDecisions, references);
+  assert.deepEqual(distinct.errors, []);
+  assert.equal(distinct.proposals.length, 2);
+  assert.deepEqual(getAllProjectMilestones(), [],
+    "batch review is never source approval, promotion or publication");
+});
+
 test("real post-cutoff human review is blocked instead of quietly backdated", () => {
   const d = draft();
   setApproved(d[1], "2026-10-10");
