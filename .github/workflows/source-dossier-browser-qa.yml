@@ -1,0 +1,54 @@
+name: Public source dossier Chromium QA
+
+# Browser verification of SOURCE-TO-RECORD navigation; not F5 human source approval.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/source-dossier-browser-qa.yml"
+      - "scripts/qa-source-dossier-browser.mjs"
+      - "app/sources/**"
+      - "components/source-ref.tsx"
+      - "lib/source-usage.ts"
+      - "lib/search.ts"
+      - "lib/data.ts"
+      - "lib/types.ts"
+      - "data/seed/**"
+      - "app/globals.css"
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-dossier-browser-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-public-provenance:
+    name: Source dossier layout and keyboard checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Install isolated pinned Playwright runtime
+        run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - name: Provision Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build public site
+        run: npm run build
+      - name: Verify actual public source navigation
+        run: node scripts/qa-source-dossier-browser.mjs
+      - name: Verify no code or seed mutations
+        run: test -z "$(git status --porcelain)"
+      # No rendered screenshots, private files or reviewer decisions are uploaded.
