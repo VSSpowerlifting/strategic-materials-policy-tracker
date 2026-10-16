@@ -2,7 +2,7 @@ import Link from "next/link";
 import {FINANCIAL_STATUS_DEFS,VALUE_ROLE_DEFS} from "@/lib/capital-vocabulary";
 import {explainFinancialRecord} from "@/lib/financial-reading";
 import {financialStatusLabels,valueRoleLabels} from "@/lib/labels";
-import type {FinancialCommitment,FinancialStatus,ValueRole} from "@/lib/types";
+import type {FinancialCommitment} from "@/lib/types";
 
 export function RecordReadingGuide({record}:{record:FinancialCommitment}){
  const reading=explainFinancialRecord(record);
