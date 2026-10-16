@@ -312,7 +312,7 @@ export function buildSearchIndex(): SearchDoc[] {
       kind: "source",
       title: s.title,
       subtitle: `Source · ${s.publisher}`,
-      href: `/sources#${s.id}`,
+      href: `/sources/${s.id}`,
       date: s.datePublished ?? null,
       jurisdiction: null,
       mechanisms: null,
