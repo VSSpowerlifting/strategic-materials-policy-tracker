@@ -9,7 +9,7 @@ type M3Row = {
 };
 type SourceRef = { id: string; url: string; datePublished: string | null; dateAccessed: string };
 type FinanceRef = {
-  id: string; projectId: string | null; amount: {value: string; currency: string};
+  id: string; projectId: string | null; amount: {value: string; currency?: string} | null;
   implementationStatusHistory: readonly { status: string; date: string | null; sourceId: string }[];
 };
 type ProjectRef = {id: string};
@@ -101,7 +101,7 @@ export function auditCyclicOriginalPublisherCrosscheck(input: unknown, ctx: Cycl
     "project ID missing or ambiguous");
   const fin = ctx.commitments.filter(x => x.id === input.canonicalFinanceId);
   check(fin.length === 1 && fin[0].projectId === input.canonicalProjectId &&
-    fin[0].amount.value === "4893125" && fin[0].amount.currency === "CAD" &&
+    fin[0].amount?.value === "4893125" && fin[0].amount?.currency === "CAD" &&
     fin[0].implementationStatusHistory.some(s => s.status === "completed" &&
       s.date === null && s.sourceId === input.canonicalSourceId),
     "Cyclic finance/activity boundary changed");
