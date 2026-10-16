@@ -1,0 +1,44 @@
+name: Project directory Chromium QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/project-directory-browser-qa.yml"
+      - "scripts/qa-projects-browser.mjs"
+      - "app/projects/**"
+      - "components/projects-explorer.tsx"
+      - "lib/project-directory.ts"
+      - "lib/project-directory-text.ts"
+      - "lib/industrial-response.ts"
+      - "lib/capital-control.ts"
+      - "lib/data.ts"
+      - "data/seed/**"
+      - "app/globals.css"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: projects-browser-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-public-projects:
+    name: Responsive project directory filters and keyboard
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: node scripts/qa-projects-browser.mjs
+      - run: test -z "$(git status --porcelain)"
