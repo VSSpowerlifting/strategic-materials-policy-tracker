@@ -54,7 +54,7 @@ function build(sequence: unknown, opts: {
   bodyPairs?: unknown; acknowledgments?: unknown;
   requireContentDiffs?: boolean; privateLedger?: unknown;
 } = {}) {
-  return buildF5PrivateReviewBatch({ sequence, sources, m3(), ...opts });
+  return buildF5PrivateReviewBatch({ sequence, sources, m3: m3(), ...opts });
 }
 const changed = () => seq([cap(neo, oldBody, 12)], [cap(neo, newBody, 13)]);
 
