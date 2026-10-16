@@ -111,3 +111,31 @@ test("manual DOE probe integrates risk inventory but preserves no monitoring, st
  assert.doesNotMatch(audit,/fetch\(|writeFileSync|renameSync|github\.token|data\/seed|PILOT_SOURCE_IDS/);
  assert.match(audit,/sourceUseApproved:false/);
 });
+
+test("live-risk samples expose a bounded original publisher DOM ancestor trail rather than only opaque hashes",()=>{
+ const add='<section class="related-links publisher-cards"><div class="extra-references">'+
+  '<ul class="source-list"><li><a href="https://www.energy.gov/hidden-appendix?secret=token">Secondary evidence link</a></li></ul>'+
+  '</div></section>';
+ const seen=auditDoeSemanticCoverage(page(body+add),URL);
+ const risk=seen.sample.find(x=>x.kind==="outside_cited_link");
+ assert.ok(risk);
+ assert.deepEqual(risk.ancestorTrail,[
+  "section.related-links.publisher-cards","div.extra-references","ul.source-list","li"
+ ]);
+ assert.ok(risk.ancestorTrail.length<=6);
+ assert.ok(seen.sample.every(x=>x.ancestorTrail.every(y=>y.length<=110)));
+ assert.doesNotMatch(JSON.stringify(seen),/hidden-appendix|secret=token|Secondary evidence link/);
+ assert.equal(seen.eligibleForRevisionTracking,false);
+});
+test("ancestor breadcrumbs are depth-limited and sanitized without exposing source URL, element IDs or arbitrary attributes",()=>{
+ let contents='<a href="https://example.com/source?id=123" id="person-name" title="Sensitive">Cited document</a>';
+ for(let i=0;i<10;i++)contents='<div class="container'+i+' unsafe&value" data-private="subject-name">'+contents+'</div>';
+ const got=auditDoeSemanticCoverage(page(body+contents),URL);
+ const link=got.sample.find(x=>x.kind==="outside_cited_link");
+ assert.ok(link);
+ assert.equal(link.ancestorTrail.length,6);
+ assert.equal(link.ancestorTrail[0],"div.container5");
+ assert.equal(link.ancestorTrail[5],"div.container0");
+ assert.doesNotMatch(JSON.stringify(got),/person-name|subject-name|unsafe&value|example\.com\/source|Sensitive/);
+ assert.equal(got.sourceUseApproved,false);
+});

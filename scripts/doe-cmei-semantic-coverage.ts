@@ -21,6 +21,8 @@ export type DoeCoverageGap = {
   tag: string;
   insideKnownTextField: boolean;
   elementFingerprint: string;
+  /** Bounded structural parents only; no element text, URL, or HTML attributes. */
+  ancestorTrail: string[];
 };
 export type DoeSemanticCoverage = {
   mode: "doe_manual_semantic_gap_inventory_only";
@@ -47,11 +49,23 @@ const LIMITS: readonly DoeSemanticRisk[] = [
 const MEDIA = new Set(["iframe","embed","object","video","audio","canvas","svg"]);
 const IMAGES = new Set(["img","figure","figcaption","picture","source"]);
 const VOID = new Set(["area","base","br","col","embed","hr","img","input","link","meta","param","source","track","wbr"]);
-type Frame = {tag:string; isTextField:boolean; isAccordionButton:boolean; isPublisherHeader:boolean};
+type Frame = {tag:string; isTextField:boolean; isAccordionButton:boolean; isPublisherHeader:boolean; classHint:string|null};
 
 function cls(attrs:string,name:string):boolean{
   const m=/\bclass\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(attrs);
   return !!m && (m[1]??m[2]).split(/\s+/).includes(name);
+}
+/** Publisher CSS class names can identify ownership without exposing content or links. */
+function safeClassHint(attrs:string):string|null{
+  const m=/\bclass\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(attrs);
+  if(!m)return null;
+  const hints=(m[1]??m[2]).split(/\s+/)
+    .filter(x=>/^[a-z][a-z0-9_-]{0,50}$/i.test(x)).slice(0,2);
+  return hints.length?hints.join("."):null;
+}
+function riskAncestorTrail(stack:readonly Frame[]):string[]{
+  return stack.slice(-6).map(parent=>
+    parent.tag+(parent.classHint?"."+parent.classHint:""));
 }
 function boundedArticle(input:string):string{
   const mains=[...input.matchAll(/<main\b[^>]*>([\s\S]*?)<\/main\s*>/gi)];
@@ -133,11 +147,13 @@ export function auditDoeSemanticCoverage(html:string,articleUrl:string):DoeSeman
         sample.push({
           kind:risk,tag,insideKnownTextField:inField,
           elementFingerprint:elementFingerprint(fragment,match.index,tag,match[0]),
+          ancestorTrail:riskAncestorTrail(stack),
         });
       }
     }
     if(!VOID.has(tag)&&!/\/\s*>$/.test(match[0]))
-      stack.push({tag,isTextField:isField,isAccordionButton:isButton,isPublisherHeader:isHeader});
+      stack.push({tag,isTextField:isField,isAccordionButton:isButton,isPublisherHeader:isHeader,
+        classHint:safeClassHint(attrs)});
   }
   if(stack.length)throw Error("DOE semantic coverage has unclosed markup");
   return {
