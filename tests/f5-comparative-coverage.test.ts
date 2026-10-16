@@ -104,15 +104,16 @@ test("F5-4a provider filter includes associations but calls them nonallocative",
 
 test("F5-4a milestone mode and separate clocks survive synthetic source-reviewed fixtures", () => {
   const d = corpus(), p = d.projects[0], src = d.sources[0];
-  d.milestones.push({
+  const fixture = {
     id: "mil-fixture-reviewed-occurrence", projectId: p.id,
     kind: "construction_started", claimMode: "occurred", scope: "named_facility",
     scopeAsStated: "synthetic fixture", occurredOn: "2026-01-01", targetOn: null,
     sourceId: src.id, locator: "fixture", statementOriginal: "Fixture",
     statementEn: "Fixture", statementEnSource: "na",
     reviewedBy: "synthetic tester", reviewedAt: "2026-10-01",
-  });
-  const r = buildF5ComparativeCoverage(d, "2026-02-01");
+  } as const;
+  const r = buildF5ComparativeCoverage(
+    { ...d, milestones: [...d.milestones, fixture] }, "2026-02-01");
   const row = r.projects.find(row => row.projectId === p.id)!;
   assert.deepEqual(row.nativeOccurredMilestoneIds, ["mil-fixture-reviewed-occurrence"]);
   assert.deepEqual(row.nativePlannedMilestoneIds, []);
