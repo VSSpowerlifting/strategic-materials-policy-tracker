@@ -91,7 +91,7 @@ export function buildF5ComparativeCoverage(
   legalAsOf: string,
   filters: F5ComparisonFilters = {},
 ): F5ComparativeCoverage {
-  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(legalAsOf) ||
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(legalAsOf) ||
       Number.isNaN(Date.parse(legalAsOf + "T00:00:00Z")))
     throw new Error("F5-4a requires an ISO calendar date for public /response legal standing");
   if (filters.materialId !== undefined && !filters.materialId.trim())
