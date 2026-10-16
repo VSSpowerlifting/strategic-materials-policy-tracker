@@ -15,13 +15,14 @@ import {
   type DoeCmeiRow,
 } from "./doe-cmei-structured-parser";
 import {parseDoeBodyProof,type DoeBodyProof} from "./doe-cmei-body-proof";
+import {auditDoeSemanticCoverage,type DoeSemanticCoverage} from "./doe-cmei-semantic-coverage";
 
 const OUT=join(process.cwd(),".monitor-doe-body-proof");
 type Result={
  version:1;mode:"doe_cmei_body_candidate_forensics_only";observedAt:string;
  status:"forensic_only"|"degraded";
  sourceListingPages:number;sourceListingRows:number;pageOverlap:number;
- sampleProofs:{role:string;proof:DoeBodyProof}[];
+ sampleProofs:{role:string;proof:DoeBodyProof;coverage:DoeSemanticCoverage}[];
  errors:string[];
  fullBodyBoundaryConfirmed:false;enabledForMonitoring:false;
  revisionTrackingActivated:false;sourceStateCreated:false;
@@ -34,13 +35,14 @@ function format(r:Result):string {
  "Listing pages: "+r.sourceListingPages+"/2. Index rows: "+r.sourceListingRows+
  "; overlap: "+r.pageOverlap+".",
  "",
- "| Publisher example | Official date | Text fields | Accordion headings | Body candidate chars | Link targets |",
- "| --- | --- | ---: | ---: | ---: | ---: |",
+ "| Publisher example | Official date | Text fields | Accordion headings | Body candidate chars | Link targets | Unmodeled structure occurrences |",
+ "| --- | --- | ---: | ---: | ---: | ---: | ---: |",
  ...r.sampleProofs.map(x=>"| "+x.role+" | "+x.proof.publicationDate+" | "+
  x.proof.candidateFieldCount+" | "+x.proof.accordionHeadingCount+" | "+
- x.proof.textCharacterCount+" | "+x.proof.sourceLinkCount+" |"),
+ x.proof.textCharacterCount+" | "+x.proof.sourceLinkCount+" | "+x.coverage.riskTotal+" |"),
  "",
  "**Important:** candidate fingerprints are for engineering comparison only; full article-body coverage is NOT certified.",
+ "Unmodeled structure counts are **risk inventory signals**, not proof that every other element is covered. Zero observed flags never certifies completeness.",
  "The attached JSON includes only limited preview excerpts, diagnostics and candidate hashes, not full article text.",
  "",
  "### Errors",
@@ -70,7 +72,7 @@ async function main():Promise<void>{
   catch(e){errors.push("DOE indexed rollover: "+String(e).slice(0,220));}
  }else errors.push("Missing one or more publisher-validated listing pages");
  const allRows=pages.flat();
- const proofs:{role:string;proof:DoeBodyProof}[]=[];
+ const proofs:{role:string;proof:DoeBodyProof;coverage:DoeSemanticCoverage}[]=[];
  for(const target of DOE_CMEI_EXAMPLES){
   try{
    const official=await getPublisherHtml(target.url,fetch);
@@ -82,7 +84,13 @@ async function main():Promise<void>{
    if(proof.publicationDate!==row.publicationDate||
       proof.title!==row.title||proof.officialUrl!==row.officialUrl)
     throw Error("DOE article body candidate metadata mismatches official card");
-   proofs.push({role:target.role,proof});
+   const coverage=auditDoeSemanticCoverage(official.html,target.url);
+   if(coverage.candidateBodyFingerprint!==proof.candidateFingerprint||
+      coverage.officialUrl!==proof.officialUrl||
+      coverage.fullBodyBoundaryConfirmed!==false||
+      coverage.eligibleForRevisionTracking!==false)
+     throw Error("DOE semantic gap inventory metadata/gate mismatch");
+   proofs.push({role:target.role,proof,coverage});
   }catch(e){errors.push("DOE original "+target.role+": "+String(e).slice(0,260));}
  }
  if(proofs.length!==3)errors.push("Incomplete DOE body proof sample");
