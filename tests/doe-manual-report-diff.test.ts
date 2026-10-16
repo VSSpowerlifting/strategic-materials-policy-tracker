@@ -65,7 +65,8 @@ test("compare exact original run identities and counts; no changed fingerprint i
  assert.equal(x.status,"no_difference_detected_in_bounded_evidence");
  assert.equal(x.originalArticleSamples,3);
  assert.equal(x.observedDifferences,0);
- assert.equal(x.needsHumanReview,false);
+ assert.equal(x.needsHumanReview,true);
+ assert.equal(x.observedChangeReviewRequired,false);
  assert.ok(x.rows.every(y=>y.reasons.length===0));
  assert.ok(x.rows.every(y=>y.riskSampleComparisonExhaustive));
  assert.equal(x.completePublisherBodyCertified,false);
@@ -85,6 +86,7 @@ test("a known experimental text hash change requires original human inspection, 
  assert.equal(x.observedDifferences,1);
  assert.deepEqual(x.rows[0].reasons,["experimental_text_candidate_changed"]);
  assert.equal(x.needsHumanReview,true);
+ assert.equal(x.observedChangeReviewRequired,true);
  assert.equal(x.rows[0].independentlyVerifiedOriginalAmendment,false);
  assert.equal(x.noPublishedRecordsChanged,true);
 });
@@ -130,6 +132,7 @@ test("sample truncation forces human review even with identical first 24 item ha
  const x=compareDoeManualReports(a,b);
  assert.equal(x.status,"no_difference_detected_in_bounded_evidence");
  assert.equal(x.needsHumanReview,true);
+ assert.equal(x.observedChangeReviewRequired,true);
  assert.equal(x.rows[0].riskSampleComparisonExhaustive,false);
  assert.equal(x.rows[0].beforeSampleTruncated,true);
 });
@@ -179,5 +182,7 @@ test("pure parser never requires network/state baseline and local CLI compares J
   const parsed=JSON.parse(stdout);
   assert.equal(parsed.status,"no_difference_detected_in_bounded_evidence");
   assert.equal(parsed.noSourceStateWritten,true);
+  assert.equal(parsed.needsHumanReview,true);
+  assert.equal(parsed.observedChangeReviewRequired,false);
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
