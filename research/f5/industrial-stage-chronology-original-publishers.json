@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "f5-5-industrial-stage-chronology-v1",
+  "researchedOn": "2026-10-16",
+  "authority": "public_evidence_navigation_only",
+  "originalBodiesCaptured": false,
+  "originalBodiesAuthenticatedByHuman": false,
+  "m3AdjudicationsPresent": false,
+  "publicationAuthorized": false,
+  "cases": [
+    {
+      "reviewId": "review-m3-2-thompson-falls-q2-expansion",
+      "projectId": "prj-us-usac-thompson-falls-expansion",
+      "canonicalSourceId": "src-usac-2026-q2-10q",
+      "proposalKind": "construction_progress_reported",
+      "proposalScope": "named_facility",
+      "occurredOn": null,
+      "exactOperationDayKnown": false,
+      "reviewQuestion": "Does the Q2 issuer-reported construction-progress observation remain narrowly supported after separating early construction, May furnace commissioning, and later partially operating furnace lines?",
+      "leads": [
+        {
+          "key": "earlier_local_construction",
+          "role": "independent_local_reporting",
+          "registeredSourceId": null,
+          "publisher": "Sanders County Ledger",
+          "url": "https://www.scledger.net/story/2025/10/02/news/usac-celebrates-expansion/12856.html",
+          "publishedOn": "2025-10-02",
+          "timeAsStated": "2025-05",
+          "dateMeaning": "reported_construction_began_month",
+          "finding": "The October 2025 local coverage says actual expansion work began in May, while officials celebrated at a September ceremony.",
+          "limitation": "The October 2 publication and late-September ceremony are not May's exact construction start date."
+        },
+        {
+          "key": "first_furnace_commissioning",
+          "role": "original_issuer_statement",
+          "registeredSourceId": null,
+          "publisher": "United States Antimony Corporation",
+          "url": "https://usantimony.com/press-release/united-states-antimony-corporation-provides-status-update-on-new-antimony-smelter/",
+          "publishedOn": "2026-06-09",
+          "timeAsStated": "2026-05",
+          "dateMeaning": "issuer_reports_commissioning_began_month",
+          "finding": "USAC states commissioning of the new smelter began in May by firing the first new furnace; other lines were forecast, not yet evidenced all running.",
+          "limitation": "Announcement is retrospective, issuer-authored; cannot infer precise first-operation day or all nine were commissioned."
+        },
+        {
+          "key": "quarterly_substantial_construction",
+          "role": "original_issuer_sec_filing",
+          "registeredSourceId": "src-usac-2026-q2-10q",
+          "publisher": "United States Antimony Corporation / SEC EDGAR",
+          "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm",
+          "publishedOn": "2026-08-11",
+          "timeAsStated": "2026-Q2",
+          "dateMeaning": "issuer_quarterly_substantially_completed_report",
+          "finding": "Note 9 describes expansion substantially completed and approximately $4.1 million of related assets in service in late Q2; Note 16 still has substantial construction-in-progress.",
+          "limitation": "Accounting period is not exact physical completion day; not plant-wide commissioning or the sum of separate government finance."
+        },
+        {
+          "key": "later_original_field_observation",
+          "role": "independent_local_reporting",
+          "registeredSourceId": null,
+          "publisher": "Sanders County Ledger",
+          "url": "https://www.scledger.net/story/2026/08/27/news/usac-capacity-expands-with-new-t-falls-facility/14209.html",
+          "publishedOn": "2026-08-27",
+          "timeAsStated": "by_2026-08-27",
+          "dateMeaning": "later_partial_new_furnace_operation_report",
+          "finding": "Reporter describes active processing inside the new nine-furnace building, with seven new furnaces operational but not all simultaneously.",
+          "limitation": "Neither reporter site-visit day nor sustained throughput nor all nine simultaneous operation was independently established."
+        }
+      ],
+      "checksBeforeDecision": [
+        "Verify original 10-Q Note 9 and Note 16 in full, reconciling gross CIP and limited PP&E-in-service.",
+        "Separate initial construction in May 2025 from ceremonial groundbreaking in September 2025.",
+        "Separate May 2026 commissioning report from August 27 partial-operation reporting and exact event days.",
+        "Do not attribute $39M corporate capex, $27M parent, $20M Montana allocation, $7M Alaska allocation, or $12.8M April receipt as separate government investments.",
+        "If citing the Ledger independently, separately register a source through authorized curation; do not substitute it for canonical SEC M3 evidence."
+      ]
+    },
+    {
+      "reviewId": "review-m3-2-cyclic-extended-operations",
+      "projectId": "prj-ca-cyclic-kingston-demonstration-plant",
+      "canonicalSourceId": "src-nrcan-cmrdd-programme",
+      "proposalKind": "funded_activity_completed",
+      "proposalScope": "funded_activity",
+      "occurredOn": null,
+      "exactOperationDayKnown": false,
+      "reviewQuestion": "Does the NRCan March 2026 funded Extended Operations status concern only CMRDD work at the Hub100 demonstration facility, without projecting a separate commercial Centre of Excellence onto that award?",
+      "leads": [
+        {
+          "key": "original_hub100_opening",
+          "role": "original_recipient_announcement",
+          "registeredSourceId": null,
+          "publisher": "Cyclic Materials",
+          "url": "https://cyclicmaterials.earth/resources/cyclic-materials-opens-hub100-facility-for-production-of-recycled-mixed-rare-earth-oxide",
+          "publishedOn": "2024-06-06",
+          "timeAsStated": "by_2024-06-06",
+          "dateMeaning": "recipient_hub100_demo_opening_report",
+          "finding": "Recipient announces opening Kingston Hub100 REEPure demonstration plant, with 100 tonnes magnetic-material annual DESIGN capacity and rare earth oxide/nickel-cobalt product capability.",
+          "limitation": "An opening announcement does not prove full actual throughput, start of the later funded Extended Operations, or commercial Hub500 operation."
+        },
+        {
+          "key": "cmrdd_agreement",
+          "role": "original_government_registry",
+          "registeredSourceId": "src-canada-grant-cyclic-cmrdd-2024",
+          "publisher": "Natural Resources Canada / Open Government",
+          "url": "https://search.open.canada.ca/grants/record/nrcan-rncan%2C115-2024-2025-Q2-15713%2Ccurrent",
+          "publishedOn": null,
+          "timeAsStated": "2024-07-17_to_2026-03-31",
+          "dateMeaning": "agreement_term_not_physical_completion_day",
+          "finding": "Agreement CMRDD2-048 funds Kingston Demonstration Plant Extended Operations for CAD 4,893,125 over the registered contractual term.",
+          "limitation": "End of legal agreement on March 31 cannot be substituted for dated physical completion or paid disbursement."
+        },
+        {
+          "key": "separate_future_centre_of_excellence",
+          "role": "original_recipient_announcement",
+          "registeredSourceId": null,
+          "publisher": "Cyclic Materials",
+          "url": "https://cyclicmaterials.earth/resources/cyclic-materials-announces-usd-25m-investment-to-establish-centre-of-excellence-for-rare-earth-recycling-in-kingston-ontario",
+          "publishedOn": "2025-06-11",
+          "timeAsStated": "target_2026-Q1",
+          "dateMeaning": "forward_looking_different_project",
+          "finding": "Recipient describes a distinct future Kingston Centre of Excellence/commercial Hub, with 500 tonnes per year DESIGN capacity and a Q1 2026 start target.",
+          "limitation": "Planned 500-tonne capacity and operation target are not an achieved commissioning event and cannot change CMRDD project/award identity."
+        },
+        {
+          "key": "cmrdd_funded_activity_status",
+          "role": "original_government_programme",
+          "registeredSourceId": "src-nrcan-cmrdd-programme",
+          "publisher": "Natural Resources Canada",
+          "url": "https://www.canada.ca/en/campaign/critical-minerals-in-canada/federal-support-for-critical-mineral-projects-and-value-chains/critical-minerals-research-development-and-demonstration-program.html",
+          "publishedOn": null,
+          "timeAsStated": "2026-03",
+          "dateMeaning": "funded_extended_operations_reported_completed_month",
+          "finding": "Current NRCan programme page lists the particular Kingston Demonstration Plant Extended Operations funded activity as completed in March 2026.",
+          "limitation": "Undated in-place page update does not prove status first became public in March, exact day or whole commercial Hub operation."
+        }
+      ],
+      "checksBeforeDecision": [
+        "Read full NRCan programme record and agreement CMRDD2-048; preserve March 2026 as a month only.",
+        "Distinguish 2024 original Hub100 demonstration opening from the 2024–2026 funded Extended Operations programme.",
+        "Identify separately registered Kingston Centre of Excellence project before assessing 2025 CoE investment or Q1 2026 target.",
+        "Do not convert a 100-tonne or 500-tonne design capacity into measured output or conflate CMRDD with other federal or private funding.",
+        "Verify available source-body versions and exact human review at current M3 digest before any editorial adjudication."
+      ]
+    }
+  ]
+}
