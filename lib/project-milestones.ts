@@ -54,6 +54,7 @@ export function validateProjectMilestones(input: unknown, refs: References): str
   const sources = new Map(refs.sources.map((s) => [s.id, s]));
   const ids = new Set<string>();
   const claims = new Set<string>();
+  const datedPhysicalEvents = new Map<string, string>();
   let previous = "";
 
   if (!isMilestoneIsoDate(refs.corpusDate)) return ["project milestones: invalid corpus cutoff"];
@@ -166,6 +167,23 @@ export function validateProjectMilestones(input: unknown, refs: References): str
     ]);
     if (claims.has(signature)) fail("duplicate assertion identity (multiple financers do not create new milestones)");
     claims.add(signature);
+
+    // A dated physical event is one occurrence, regardless of how many primary
+    // publishers or financing records describe it. Undated status observations
+    // deliberately remain source-specific: distinct reporting snapshots must
+    // not be collapsed into a fabricated event with an inferred day.
+    if (m.claimMode === "occurred" && isMilestoneIsoDate(m.occurredOn)) {
+      const scopeIdentity = typeof m.scopeAsStated === "string"
+        ? m.scopeAsStated.trim().replace(/\s+/g, " ").toLowerCase()
+        : null;
+      const eventIdentity = JSON.stringify([
+        m.projectId, m.kind, m.scope, scopeIdentity, m.occurredOn,
+      ]);
+      const existing = datedPhysicalEvents.get(eventIdentity);
+      if (existing && existing !== id)
+        fail("duplicate dated physical event across sources (already represented by " + existing + ")");
+      else datedPhysicalEvents.set(eventIdentity, id);
+    }
   }
   return issues;
 }
