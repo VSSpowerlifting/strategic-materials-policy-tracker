@@ -1,7 +1,7 @@
 /** Public source-register filters; citation counts are explicit reverse-provenance links, never evidence scores. */
 import type { Source } from "./types";
 import type { SourceUse, SourceUseKind } from "./source-usage";
-import { SOURCE_USE_KINDS } from "./source-usage";
+import { SOURCE_USE_KINDS } from "./source-use-taxonomy";
 import { SOURCE_CONFIDENCE, type SourceConfidence } from "./types";
 
 export type SourceDirectoryRow = {source:Source; directlyCitingRecords:number; citingKinds:SourceUseKind[]};

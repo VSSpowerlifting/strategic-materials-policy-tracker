@@ -3,7 +3,7 @@ import {useMemo,useState} from "react";
 import {SourceCard} from "@/components/source-ref";
 import {ALL,FilterSelect,SearchBox,useUrlFilters} from "@/components/capital/filter-controls";
 import {SOURCE_CONFIDENCE,SOURCE_LANGS,SOURCE_TYPES} from "@/lib/types";
-import {SOURCE_USE_KINDS,SOURCE_USE_LABELS} from "@/lib/source-usage";
+import {SOURCE_USE_KINDS,SOURCE_USE_LABELS} from "@/lib/source-use-taxonomy";
 import {confidenceLabels,sourceTypeLabels} from "@/lib/labels";
 import {filterSourceDirectory,UNCITED_FILTER,type SourceDirectoryRow} from "@/lib/source-directory";
 
