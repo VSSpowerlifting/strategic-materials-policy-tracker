@@ -9,7 +9,7 @@ import { JurisdictionTag } from "@/components/labels";
 import { ALL, FilterSelect, SearchBox, useUrlFilters } from "@/components/capital/filter-controls";
 import { filterProjectDirectory, PROJECT_RELATIONSHIP_FILTERS, UNSTATED,
   type ProjectDirectoryRow } from "@/lib/project-directory";
-import { jurisdictionLabels, supplyChainStageLabels } from "@/lib/labels";
+import { supplyChainStageLabels } from "@/lib/labels";
 import type { SupplyChainStage } from "@/lib/types";
 
 const relationshipLabels = {
@@ -110,7 +110,7 @@ export function ProjectsExplorer({rows, materialNames}:{
       Government commitment means a directly linked, non-ended commitment evidenced as of the corpus date.
     </p>
     <div className="mt-6 grid gap-4 md:grid-cols-2">
-      {visible.map(p=><Card key={p.id} data-testid="project-record" className="flex min-w-0 flex-col p-5">
+      {visible.map(p=><div key={p.id} data-testid="project-record" className="min-w-0">\n        <Card className="flex h-full min-w-0 flex-col p-5">
         <div className="flex flex-wrap items-center gap-2">
           {p.governmentCommitmentProviders.map(code=><JurisdictionTag key={code} code={code}/>)}
           {p.countryCodes.length?p.countryCodes.map(code=><span key={code} className="font-mono text-[11px] text-muted">{countryNames[code]??code}</span>):
@@ -134,7 +134,7 @@ export function ProjectsExplorer({rows, materialNames}:{
           {p.sharedUnallocatedFinanceIds.length?` · ${p.sharedUnallocatedFinanceIds.length} shared/unallocated`:""}
           {p.designationIds.length?` · ${p.designationIds.length} designation${p.designationIds.length===1?"":"s"}`:""}
         </p>
-      </Card>)}
+      </Card></div>)}
     </div>
     {!visible.length?<Card className="mt-5 p-8 text-center text-sm text-muted">
       No registered project matches these filters. Try another material, country or evidence relationship.
