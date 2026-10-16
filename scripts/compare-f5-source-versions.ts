@@ -24,7 +24,7 @@ function main(): void {
   const values = keys.map(k => args[args.indexOf(k) + 1]);
   if (values.some(v => !v || v.startsWith("--"))) throw Error(usage);
   const [before, after, sourceId, beforeBody, afterBody] = values;
-  const paths = [before, after, beforeBody, afterBody].map(resolve);
+  const paths = [before, after, beforeBody, afterBody].map(path => resolve(path));
   if (new Set(paths).size !== paths.length) throw Error("F5 private handoff: inputs must be distinct files");
   const receipt = auditF5SourceDrift(
     JSON.parse(read(paths[0], 2_000_000)), JSON.parse(read(paths[1], 2_000_000)), getAllSources(),
