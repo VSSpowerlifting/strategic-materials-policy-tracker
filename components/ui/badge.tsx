@@ -19,7 +19,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center border-l-2 pl-1.5 font-mono text-[11px] leading-none",
+        "inline-flex min-h-5 items-center border-l-2 pl-2 font-mono text-xs leading-5",
         accent ? "border-accent text-accent" : "border-border-strong text-muted",
         className,
       )}
