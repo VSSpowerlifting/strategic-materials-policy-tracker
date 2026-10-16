@@ -75,7 +75,6 @@ test("Thompson rejects independent journalism being treated as an all-nine opera
   const field=packet();
   field.evidence[4].finding="all_nine_furnaces_operational";
   assert.match(messages(field),/interpretation mismatch/);
-  const fabricated=packet();
   field.evidence[4].sourceId="src-usac-2026-q2-10q";
   assert.match(messages(field),/source registration/);
   const forged=packet();
