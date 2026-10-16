@@ -35,7 +35,7 @@ async function recover(runs:Run[],artifacts:Map<number,Artifact[]>,currentRunId=
  const scanned:number[]=[];
  const github={rest:{actions:{
   async listWorkflowRuns(args:Record<string,unknown>){
-   assert.deepEqual(args,{
+   assert.deepEqual(JSON.parse(JSON.stringify(args)),{
     owner:"VSSpowerlifting",repo:"strategic-materials-policy-tracker",
     workflow_id:"exim-shadow-monitor.yml",branch:"main",per_page:70,
    });
