@@ -1,6 +1,6 @@
 # F5-5 — Montana DEQ records acquisition: actionable Thompson Falls handoff
 
-**Research checked 2026-10-16. STATUS: DRAFT ONLY — NO PUBLIC-RECORDS REQUEST SUBMITTED, NO SOURCE-TEST REPORT LOCATED, NO PHYSICAL MILESTONE APPROVED.**
+**Request status updated 2026-10-16:** Priority A (source-testing records) **submitted** to Montana DEQ through OPIR; portal displayed **Request State: Intake; Request Status: Perfected**. That is a filing/intake acknowledgement, **not** responsive records, an approved fee waiver, completed source test, or a milestone. **Priority B (site inspection/equipment reconciliation) remains an unsent draft.** The user-linked request identifier is stored in a **private Engram project vault**, not this public GitHub repository, because the agency status checker also accepts a surname. No account, screenshot, contact details, or enrollment documents are committed.
 
 ## Why this is the next real bottleneck
 
@@ -15,7 +15,7 @@ The December 23, 2025 [Montana DEQ MAQP #2973-05](https://deq.mt.gov/files/Air/A
 
 **Current public discovery limitation:** Official [DEQ permit registry](https://deq.mt.gov/air/assistance) makes #2973-05 publicly available, but the separately linked [archive of public information requests](https://montanadeq.govqa.us/WEBAPP/_rs/) was not fully searchable in this review session. We did **not** identify a completed source test or independent 2026 DEQ inspection in indexed public pages. That is a **negative discovery result**, not a DEQ answer on whether records exist.
 
-## Submit through the official state process
+## Submission reference and second-priority request
 
 **Official target:** Montana Department of Environmental Quality (Air Quality Bureau / Air, Energy & Mining Division), request **MAQP #2973-05** and, if a record is indexed under it, predecessor **#2973-04**.
 
@@ -23,13 +23,13 @@ The December 23, 2025 [Montana DEQ MAQP #2973-05](https://deq.mt.gov/files/Air/A
 
 **Fees:** DEQ says requests costing **less than $25** are waived, and that it waives fees for **students with proof of current enrollment** (also for qualifying journalistic requests). Student enrollment information is **not** stored in SMPT or this git repository; provide proof only directly through the agency's authorized process if claiming eligibility. Charges can otherwise apply and may require advance payment; request a fee estimate before chargeable work. DEQ aims to fulfill requests within 30 days, but this is a service goal, **not a guaranteed delivery date**. Agency advises precise subjects and bounded dates. <https://www.deq.mt.gov/about/public-records>
 
-### Request A — file first: initial source-testing documents (2026-05-01 through 2026-10-16)
+### Request A — submitted 2026-10-16: initial source-testing documents (2026-05-01 through 2026-10-16)
 
 **Subject:** Records request — MAQP #2973-05 initial source-testing records (May–October 2026)
 
 > I request electronic copies of records currently held by the Montana Department of Environmental Quality concerning the United States Antimony Corporation Thompson Falls Facility, Montana Air Quality Permit #2973-05, dated May 1 through October 16, 2026, limited to initial compliance source testing under Section II.B.1 for the nine new reduction, remelt, and oxidizer furnaces: source-test protocol submissions, schedules or notifications specifying actual initial-startup or testing dates; any received completed test reports and associated compliance determinations; and any DEQ correspondence acknowledging receipt or review of those particular protocols or results. Please include the relevant furnace ID or emissions-unit ID where present. If no responsive records are held, please indicate that rather than inferring that a test did or did not occur. If these records are maintained under predecessor MAQP #2973-04, please search that permit file too. I prefer electronic records, existing documents rather than new analysis, and a notice of estimated fees before chargeable work. Please provide reasonably segregable nonexempt portions if any material is withheld.
 
-**Research purpose:** A *submitted original* source test may identify startup/test dates, equipment IDs and compliance measurements; however, it would still need physical-scope interpretation and actual source review. It does not by itself prove nameplate production or grant-related causality.
+**What was actually sent:** The portal limits its Description field to 600 characters. The user submitted a shortened, equipment-ID-specific version of this research request, plus the intended date range, permit title, student waiver request and **“Provide me an estimate before processing”** fee preference. The full draft above is a research reference, **not verbatim submitted portal text**. The screenshot shows *Intake / Perfected* on October 16, 2026; no agency response has been received. The student waiver is **requested, not yet granted**. A subsequently *received* actual source test might identify operational dates, equipment IDs and compliance measurements, but still would need original-source human review and cannot by itself prove nameplate production or financing causality.
 
 ### Request B — separate, second priority: independent field inspections and equipment identities
 
@@ -39,7 +39,7 @@ The December 23, 2025 [Montana DEQ MAQP #2973-05](https://deq.mt.gov/files/Air/A
 
 **Research purpose:** Actual regulator observations may provide independent evidence for specific physical operations and clear up the **six *permitted legacy* versus seven *reported older-building*** units; a count mismatch alone does **not** prove noncompliance.
 
-The two literal requests are mirrored in the machine-readable, **unsent** `research/f5/thompson-deq-records-access-handoff.json`. Do not automatically send either request, create an account with stored secrets, falsify a PIR receipt number, or treat any pending request as newly received evidence.
+Both original draft texts are preserved in `research/f5/thompson-deq-records-access-handoff.json`: Priority A is **submitted using the shorter portal form**, Priority B is **not submitted**. Keep the actual requester-linked reference private; do not repeat Request A, create account credentials, submit Request B without approval, or treat this pending intake as responsive environmental evidence.
 
 ## Intake when the agency responds — preserve provenance, no automatic authority
 
