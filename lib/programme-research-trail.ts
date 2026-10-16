@@ -10,8 +10,7 @@ import { layerOf } from "./capital-intelligence";
 import type { ProgrammeLedger } from "./capital-intelligence";
 import type { SourceUse } from "./source-usage";
 import type {
- FinancialCommitment, FinancialInstrument, FinancialStatus, JurisdictionCode,
- Organization, Programme, Project, ProjectDesignation, Source, ValueRole,
+ FinancialInstrument, FinancialStatus, Organization, Programme, Project, Source, ValueRole,
 } from "./types";
 
 export type TrailEntity = {id:string; name:string; href:string};
