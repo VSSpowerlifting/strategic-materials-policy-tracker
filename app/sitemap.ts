@@ -9,6 +9,7 @@ import {
   getAllOrganizations,
   getAllProgrammes,
   getAllProjects,
+  getAllSources,
 } from "@/lib/data";
 
 /**
@@ -40,5 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getAllOrganizations().map((o) => entry(`/organizations/${o.id}`, 0.6)),
     ...getAllProjects().map((p) => entry(`/projects/${p.id}`, 0.7)),
     ...getAllProgrammes().map((g) => entry(`/programmes/${g.id}`, 0.6)),
+    ...getAllSources().map((s) => entry(`/sources/${s.id}`, 0.6)),
   ];
 }
