@@ -36,16 +36,17 @@ try{
   assert.ok(await firstSection.count()>0,"record section must have heading");
   assert.ok(await size(firstSection)>=20,"section heading must be >=20px at "+viewport.width);
   const evidence=page.getByTestId("evidence-mobile-card");
+  const evidenceTable=page.locator('table:has(caption:has-text("Original sources"))');
   assert.ok(await evidence.count()>0,"physical evidence entries must be present");
   if(viewport.width<640){
    assert.ok(await evidence.first().isVisible(),"narrow view shows readable citation cards");
-   assert.ok(!(await page.locator("table").first().isVisible()),"table hidden on phone");
+   assert.ok(!(await evidenceTable.first().isVisible()),"table hidden on phone");
    assert.ok(await evidence.first().getByText("Fields supported").isVisible());
    assert.ok(await evidence.first().getByText("Location in document").isVisible());
    assert.ok(await evidence.first().getByRole("link",{name:"View source dossier"}).isVisible());
   }else{
    assert.ok(!(await evidence.first().isVisible()),"duplicate mobile cards visually hidden on desktop");
-   assert.ok(await page.getByRole("table").first().isVisible(),"semantic evidence table visible on desktop");
+   assert.ok(await evidenceTable.first().isVisible(),"semantic evidence table visible on desktop");
   }
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
   assert.ok(overflow<=3,"record overflows at "+viewport.width+" by "+overflow+"px");
