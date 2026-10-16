@@ -1,0 +1,41 @@
+name: Research legibility Chromium QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/research-legibility-browser-qa.yml"
+      - "scripts/qa-research-legibility-browser.mjs"
+      - "components/ui/container.tsx"
+      - "components/ui/badge.tsx"
+      - "components/capital/primitives.tsx"
+      - "components/capital/filter-controls.tsx"
+      - "components/source-ref.tsx"
+      - "app/globals.css"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-legibility-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  readability:
+    name: Browser legibility and keyboard access
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: node scripts/qa-research-legibility-browser.mjs
+      - run: test -z "$(git status --porcelain)"

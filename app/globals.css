@@ -84,6 +84,7 @@
   html {
     scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -108,6 +109,17 @@
 
   ::selection {
     background: color-mix(in oklab, var(--accent) 35%, transparent);
+  }
+
+  /* A consistent, visible keyboard focus indicator across the research UI. */
+  :where(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Page titles and record excerpts should never force a narrow viewport wider. */
+  h1, h2, h3, p, dd {
+    overflow-wrap: break-word;
   }
 
   /* Tabular figures for dense data tables. */
