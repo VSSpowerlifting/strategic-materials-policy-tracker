@@ -123,6 +123,61 @@ test("English quote provenance, secondary sources, duplicate identities and boun
   assert.match(validateProjectMilestones([m, sameAssertion], refs).join(" "), /duplicate assertion identity/);
 });
 
+test("different primary sources cannot turn one dated facility event into two milestones", () => {
+  const otherSource = {
+    ...source, id: "src-fixture-corroboration", datePublished: "2026-09-16",
+  };
+  const twoSources = { ...refs, sources: [source, otherSource] };
+  const original = fixture();
+  const corroboration: ProjectMilestone = {
+    ...fixture(), id: "mil-fixture-two", sourceId: otherSource.id,
+    statementOriginal: "A second government publisher confirms the same start.",
+    statementEn: "A second government publisher confirms the same start.",
+    locator: "Government announcement, opening",
+  };
+
+  assert.match(
+    validateProjectMilestones([original, corroboration], twoSources).join(" "),
+    /duplicate dated physical event across sources/,
+    "a second source citation is not another dated construction event",
+  );
+  assert.match(
+    validateProjectMilestones([original, {
+      ...corroboration, scopeAsStated: "  demo   PLANT  ",
+    }], twoSources).join(" "),
+    /duplicate dated physical event across sources/,
+    "case and whitespace differences cannot defeat event identity",
+  );
+
+  assert.deepEqual(validateProjectMilestones([original, {
+    ...corroboration, scopeAsStated: "Separate named gallium facility",
+  }], twoSources), [],
+  "genuinely different named facilities can have construction starts on the same day");
+  assert.deepEqual(validateProjectMilestones([original, {
+    ...corroboration, occurredOn: "2026-09-02",
+  }], twoSources), [],
+  "different source-backed occurrence days remain separate events");
+});
+
+test("undated physical-status snapshots remain distinguishable across sources", () => {
+  const otherSource = {
+    ...source, id: "src-fixture-corroboration", datePublished: "2026-09-16",
+  };
+  const first: ProjectMilestone = {
+    ...fixture(), kind: "construction_progress_reported",
+    occurredOn: null, note: "First issuer status snapshot, not a construction start.",
+  };
+  const second: ProjectMilestone = {
+    ...first, id: "mil-fixture-two", sourceId: otherSource.id,
+    statementOriginal: "Later source reports additional limited construction progress.",
+    statementEn: "Later source reports additional limited construction progress.",
+    note: "Later issuer status snapshot, exact work day unknown.",
+  };
+  assert.deepEqual(validateProjectMilestones([first, second], {
+    ...refs, sources: [source, otherSource],
+  }), [], "separate undated reports are not fabricated into one dated physical event");
+});
+
 const base = getAllFinancialCommitments()[0];
 const fake = (
   id: string, projectId: string | null, status: "construction" | "completed" | "cancelled",
