@@ -47,10 +47,10 @@ export type ProgrammeTrailInput = {
 };
 
 const compare=(a:string,b:string)=>a<b?-1:a>b?1:0;
-function uniqueIds(rows:readonly {id:string}[],label:string){
+function uniqueIds<T extends {id:string}>(rows:readonly T[],label:string):Map<string,T>{
  const ids=new Set(rows.map(r=>r.id));
  if(ids.size!==rows.length)throw new Error("Duplicate "+label+" ID");
- return new Map(rows.map(r=>[r.id,r]));
+ return new Map(rows.map(r=>[r.id,r] as const));
 }
 
 /** Only include ancestors/descendants declared by the typed programme parent field. */
