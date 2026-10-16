@@ -6,7 +6,7 @@
  * Pure, reviewable data model: never reads unpublished F5/M3 packets.
  */
 import { buildIndustrialResponse } from "./industrial-response";
-import { normalize } from "../lib/project-directory-text";
+import { normalize } from "./project-directory-text";
 import type {
   FinancialCommitment, JurisdictionCode, Organization, Project,
   ProjectDesignation, SupplyChainStage,
