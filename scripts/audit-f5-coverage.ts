@@ -68,7 +68,7 @@ try {
       "Unique cited sources: " + report.selectedCohortSourceHorizon.distinctSourceIds.length,
       "Published later: " + report.selectedCohortSourceHorizon.publishedAfterSourceIds.length +
         "; publication undated: " + report.selectedCohortSourceHorizon.publicationDateUnknownSourceIds.length +
-        "; first registered access later: " + report.selectedCohortSourceHorizon.accessedAfterSourceIds.length,
+        "; recorded access date later: " + report.selectedCohortSourceHorizon.accessedAfterSourceIds.length,
     ] : []),
     "No capital totals, physical as-of claims, impact scores or automatic publication.",
     "",
