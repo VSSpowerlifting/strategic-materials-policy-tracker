@@ -19,7 +19,7 @@ function report(observedAt="2026-10-16T19:31:20.798Z",withAncestry=false){
  return {
   version:1 as const,mode:"doe_cmei_body_candidate_forensics_only" as const,
   observedAt,status:"forensic_only" as const,sourceListingPages:2,sourceListingRows:20,
-  pageOverlap:0,errors:[],
+  pageOverlap:0,errors:[] as string[],
   fullBodyBoundaryConfirmed:false,enabledForMonitoring:false,
   revisionTrackingActivated:false,sourceStateCreated:false,
   sampleProofs:DOE_CMEI_EXAMPLES.map((x,i)=>{
@@ -144,7 +144,7 @@ test("reject incomplete/failed observations, mismatched URLs, misleading approva
  edit(x=>{x.pageOverlap=1;});
  edit(x=>{x.sampleProofs.pop();});
  edit(x=>{x.sampleProofs[1].role=x.sampleProofs[0].role;});
- edit(x=>{x.sampleProofs[0].proof.officialUrl="https://example.org/cmei/articles/not-real";});
+ edit(x=>{const p=x.sampleProofs[0].proof as {officialUrl:string};p.officialUrl="https://example.org/cmei/articles/not-real";});
  edit(x=>{x.sampleProofs[0].proof.candidateFingerprint="x";});
  edit(x=>{x.sampleProofs[0].coverage.fullBodyBoundaryConfirmed=true;});
  edit(x=>{x.sampleProofs[0].coverage.sourceUseApproved=true;});
