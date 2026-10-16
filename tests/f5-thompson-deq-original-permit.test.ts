@@ -142,7 +142,8 @@ test("genuine regulator followup identified without claiming records obtained or
   assert.equal(todo.requestTargets.length,4);
   assert.ok(todo.requestTargets.some(x=>x.includes("source-test protocols")));
   assert.ok(todo.requestTargets.some(x=>x.includes("inspection reports")));
-  assert.ok(todo.requestTargets.some(x=>x.includes("notices of startup")));
+  assert.ok(todo.requestTargets.some(x=>x.includes("de minimis changes")));
+  assert.ok(todo.requestTargets.some(x=>x.includes("not an unconditional furnace-startup notice requirement")));
   assert.ok(todo.requestTargets.some(x=>x.includes("production or emissions inventory")));
   assert.match(todo.materialStillAbsent,/does not prove it does not exist/);
 });
