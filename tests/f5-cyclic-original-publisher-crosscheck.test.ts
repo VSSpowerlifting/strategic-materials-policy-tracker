@@ -5,7 +5,7 @@ import queue from "../research/project-execution/m3-2-source-review-queue.json";
 import {
   getAllFinancialCommitments, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "../lib/data";
-import { auditCyclicOriginalPublisherCrosscheck } from "../scripts/f5-cyclic-original-publisher-crosscheck";
+import { auditCyclicOriginalPublisherCrosscheck, type CyclicSourceCrosscheckContext } from "../scripts/f5-cyclic-original-publisher-crosscheck";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import { site } from "../lib/site";
 
@@ -23,7 +23,7 @@ const ctx = () => ({
   publicMilestoneCount: getAllProjectMilestones().length,
 });
 const input = () => structuredClone(research);
-const run = (p: unknown = input(), c = ctx()) => auditCyclicOriginalPublisherCrosscheck(p,c);
+const run = (p: unknown = input(), c: CyclicSourceCrosscheckContext = ctx()) => auditCyclicOriginalPublisherCrosscheck(p,c);
 
 test("Cyclic F5-5 original publisher crosscheck: source-registered, unsigned and nonpublishing", () => {
   const report=run();
@@ -60,7 +60,7 @@ test("Cyclic F5-5 crosscheck uses existing human M3 authority and one funded-act
   assert.equal(source?.datePublished,null);
   assert.equal(source?.dateAccessed,"2026-10-07");
   const fin=getAllFinancialCommitments().find(f=>f.id==="fin-ca-cmrdd-2024-cyclic-materials");
-  assert.equal(fin?.amount.value,"4893125");
+  assert.equal(fin?.amount?.value,"4893125");
   assert.equal(fin?.financialStatusHistory.at(-1)?.status,"contracted");
 });
 
