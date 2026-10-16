@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
 import { ProjectsExplorer } from "@/components/projects-explorer";
+import { ResearchReadingKey } from "@/components/capital/reading-guide";
 import { buildProjectDirectory } from "@/lib/project-directory";
 import {
   getAllFinancialCommitments, getAllMaterials, getAllOrganizations,
@@ -27,6 +28,7 @@ export default function ProjectsPage() {
         Filter by material, supply-chain stage, country or type of documented relationship.
         A project record describes the undertaking; associated money and independently
         verified industrial progress are different questions.</>} />
+    <ResearchReadingKey topic="projects" />
     <Section index="01" className="mt-10" title="Project research directory"
       description={`${rows.length} distinct registered undertakings, not an exhaustive census of industrial projects.`}>
       <ProjectsExplorer rows={rows} materialNames={materialNames}/>
