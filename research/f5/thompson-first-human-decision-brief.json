@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "f5-5-thompson-human-decision-brief-v1",
+  "checkedOn": "2026-10-16",
+  "status": "unsigned_original_source_research_for_existing_m3",
+  "existingM3ReviewId": "review-m3-2-thompson-falls-q2-expansion",
+  "existingProjectId": "prj-us-usac-thompson-falls-expansion",
+  "existingSourceId": "src-usac-2026-q2-10q",
+  "candidateKind": "construction_progress_reported",
+  "candidateScope": "named_facility",
+  "claimMode": "occurred",
+  "occurredOn": null,
+  "targetOn": null,
+  "sourceBodyArchived": false,
+  "humanOriginalDocumentAttested": false,
+  "humanReviewer": null,
+  "humanReviewDate": null,
+  "reviewInputDigestSha256": null,
+  "proposedMilestoneId": null,
+  "publicationAuthorized": false,
+  "candidateStatement": "US Antimony's June 2026 quarterly filing reports that the Thompson Falls antimony smelter expansion was substantially completed during the second quarter, with a limited amount of assets placed in service.",
+  "candidateNote": "USAC reports substantial construction completion of the Thompson Falls expansion during Q2 2026, with $4.1M of related assets placed in service late Q2 and about $29M of gross project costs still in construction in progress. This is issuer-reported construction progress, not a dated completion, full nine-furnace operation, proven production rate, or proof that all grant milestones are fulfilled. The $27M grant, $20M Montana allocation, $12.8M April receipt and roughly $39M company expansion budget have distinct bases.",
+  "decisionRecommendation": "retain_existing_scoped_progress_proposal_pending_real_human_m3_review",
+  "primaryOriginal": {
+    "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm",
+    "evidenceSourceId": "src-usac-2026-q2-10q",
+    "issuer": "United States Antimony Corporation",
+    "filingType": "Form 10-Q",
+    "filingPublishedOn": "2026-08-11",
+    "accountingPeriodEndsOn": "2026-06-30",
+    "claimLocator": "Note 16 - Commitments and Contingencies, Thompson Falls, Montana Facility Expansion; Note 9 - Government Grant",
+    "accountingFacts": [
+      {
+        "key": "substantial_construction_progress",
+        "asOf": "2026-Q2",
+        "finding": "issuer_reports_substantial_expansion_completion_no_day"
+      },
+      {
+        "key": "assets_placed_in_service",
+        "asOf": "late_2026-Q2",
+        "valueUsdApprox": "4100000",
+        "finding": "related_assets_placed_in_service_does_not_prove_all_furnaces"
+      },
+      {
+        "key": "gross_construction_in_progress",
+        "asOf": "2026-06-30",
+        "valueUsdApprox": "29000000",
+        "finding": "gross_cip_may_coexist_with_partial_service"
+      },
+      {
+        "key": "estimated_total_corporate_expansion_capex",
+        "asOf": "2026-06-30",
+        "valueUsdApprox": "39000000",
+        "finding": "corporate_budget_not_government_award"
+      },
+      {
+        "key": "q2_incurred_company_expansion_costs",
+        "asOf": "2026-06-30",
+        "valueUsdApprox": "33000000",
+        "finding": "company_incurred_not_gov_disbursement"
+      }
+    ]
+  },
+  "disambiguatingOriginals": [
+    {
+      "key": "financier_milestone_acceptance",
+      "role": "same_issuer_sec_note_not_separate_physical_event",
+      "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/R15.htm",
+      "publishedOn": "2026-08-11",
+      "reportedPeriod": "2026-03-25",
+      "finding": "DIBC approved three funding-performance milestones associated with $12.8M on March 25; cash collected April; this is not three physical plant commissioning milestones.",
+      "caution": "Financing accounting has a different state machine from M3 physical facility progress."
+    },
+    {
+      "key": "q2_management_outlook",
+      "role": "same_company_forward_looking_not_independent",
+      "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094130/tm2622899d1_ex99-1.htm",
+      "publishedOn": "2026-08-11",
+      "reportedPeriod": "2026-Q3_target",
+      "finding": "Company expected all nine new furnaces fully operating during Q3, an outlook rather than an achieved Aug 11 event.",
+      "caution": "An optimistic forward-looking operations forecast cannot upgrade construction progress."
+    },
+    {
+      "key": "independent_seven_of_nine_field_reporting",
+      "role": "local_original_field_reporting_unregistered",
+      "url": "https://www.scledger.net/story/2026/08/27/news/usac-capacity-expands-with-new-t-falls-facility/14209.html",
+      "publishedOn": "2026-08-27",
+      "reportedPeriod": "by_2026-08-27",
+      "finding": "Independent local reporting and original field photographs depict new facility processing and report seven of nine new furnaces operational, though not concurrently.",
+      "caution": "Neither the site-visit day nor full simultaneous operation or production throughput is established; this source is not in the canonical M3 citation registry."
+    },
+    {
+      "key": "earlier_construction_started_month",
+      "role": "local_original_prior_period_unregistered",
+      "url": "https://www.scledger.net/story/2025/10/02/news/usac-celebrates-expansion/12856.html",
+      "publishedOn": "2025-10-02",
+      "reportedPeriod": "2025-05",
+      "finding": "Local reporting describes actual project work beginning May 2025 ahead of the September 2025 ceremonial groundbreaking.",
+      "caution": "Ceremony day and local article publication day do not establish a precise construction commencement date."
+    }
+  ],
+  "requiredReviewerDecisions": [
+    "Read the full SEC original Notes 9 and 16 directly and determine whether the proposed construction-progress wording faithfully reflects the issuer rather than implied full commissioning.",
+    "Reconcile substantially completed construction, $4.1M placed in service and $29M remaining gross construction in progress without assuming accounting categories represent a dated physical event.",
+    "Check whether the $12.8M DIBC-approved grant milestones concern contract performance rather than separate verified physical furnace-start milestones.",
+    "Determine whether August 11 future guidance and August 27 independent partial-operation reporting qualify the specific Q2 observation without borrowing later event facts as if they were public in June.",
+    "Use the real current M3 worksheet digest, named reviewer and actual review date solely in gitignored adjudications; post-2026-10-09 reviews require separately authorized corpus-cutoff update before public-seed release."
+  ],
+  "unresolved": [
+    "actual_first_and_last_furnace_commissioning_days",
+    "all_nine_furnaces_running_concurrently",
+    "sustained_realized_throughput",
+    "independent_validation_of_full_facility_closeout",
+    "human_source_reviewer_attestation",
+    "curated_corpus_cutoff_advance_and_publication_approval"
+  ]
+}
