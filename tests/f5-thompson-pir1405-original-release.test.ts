@@ -115,7 +115,7 @@ test("regulator denies applicant's shortcut and requires initial testing of all 
  assert.equal(entry.source,"2973-05.pdf");
  assert.equal(entry.page,11);
  assert.equal(entry.type,"agency_response_to_applicant_comment");
- assert.match(entry.observed,/all new furnaces/);
+ assert.match(entry.observed,/all new furnace units/);
  assert.match(entry.limit,/does not verify results/);
  assert.equal(deq.deqPrimaryOriginal.permitDoesNotContain.completedAllNewFurnacesTestReport,null);
  assert.equal(request.deqPermit.sourceTestCondition.actualTriggerOn,null);
