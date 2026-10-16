@@ -64,6 +64,8 @@ test("Cyclic chronology refuses Hub100 100t design capacity, CMRDD completion an
   assert.equal(c.leads[0].publishedOn,"2024-06-06");
   assert.equal(c.leads[1].timeAsStated,"2024-07-17_to_2026-03-31");
   assert.equal(c.leads[2].timeAsStated,"target_2026-Q1");
+  assert.equal(c.leads[2].registeredSourceId,"src-cyclic-centre-excellence-2025");
+  assert.notEqual(c.leads[2].registeredSourceId,c.canonicalSourceId, "CoE is registered but does not become CMRDD M3 original source");
   assert.equal(c.leads[3].timeAsStated,"2026-03");
   assert.equal(c.leads[3].publishedOn,null);
   assert.ok(c.leads[2].limitation.includes("Planned 500-tonne"));
