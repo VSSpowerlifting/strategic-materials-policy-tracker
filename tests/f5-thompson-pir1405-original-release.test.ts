@@ -138,7 +138,7 @@ test("public commenter allegation and applicant reply are distinct, contested cl
  "unresolved_different_equipment_inventory_or_definition");
 });
 
-test("follow-up DEQ requests focus on later 2026 evidence, avoid duplicate 2025 release and remain unsent",()=>{
+test("submitted source-test request and draft inspection followup avoid duplicate 2025 release",()=>{
  const rr=request.requestRounds;
  assert.equal(request.requestProcess.priorPublicReleaseId,receipt.release.number);
  assert.equal(request.requestProcess.priorReleaseReviewedOn,receipt.analyzedOn);
@@ -146,7 +146,7 @@ test("follow-up DEQ requests focus on later 2026 evidence, avoid duplicate 2025 
  assert.equal(request.requestProcess.priorReleaseAvoidDuplicateRequest,true);
  assert.equal(rr.length,2);
  for(const row of rr){
-  assert.equal(row.status,"draft_not_submitted");
+  assert.ok(["submitted_intake_perfected","draft_not_submitted"].includes(row.status));
   assert.equal(row.startOn,"2026-05-01");
   assert.equal(row.endOn,"2026-10-16");
   assert.ok(row.body.includes(receipt.release.number));
@@ -156,7 +156,10 @@ test("follow-up DEQ requests focus on later 2026 evidence, avoid duplicate 2025 
   }
   assert.ok(row.body.includes("BH-2300"));
  }
- assert.equal(request.recordsRequestSubmitted,false);
+ assert.equal(request.recordsRequestSubmitted,true);
+ assert.equal(rr[0].status,"submitted_intake_perfected");
+ assert.equal(rr[1].status,"draft_not_submitted");
+ assert.equal(rr[0].requestReference,"private_vault_only");
  assert.equal(request.recordsObtained,false);
  assert.equal(request.publicMilestoneAuthorized,false);
  assert.equal(request.humanReviewCompleted,false);

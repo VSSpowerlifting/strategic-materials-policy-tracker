@@ -1,7 +1,7 @@
 {
   "schemaVersion": "f5-5-thompson-deq-public-records-handoff-v1",
   "checkedOn": "2026-10-16",
-  "status": "draft_only_not_submitted",
+  "status": "priority_a_submitted_priority_b_draft",
   "scope": "regulator_held_documents_not_human_source_decision",
   "canonicalM3ReviewId": "review-m3-2-thompson-falls-q2-expansion",
   "canonicalProjectId": "prj-us-usac-thompson-falls-expansion",
@@ -9,7 +9,7 @@
   "publicMilestoneAuthorized": false,
   "humanReviewCompleted": false,
   "recordsObtained": false,
-  "recordsRequestSubmitted": false,
+  "recordsRequestSubmitted": true,
   "deqPermit": {
     "identifier": "2973-05",
     "predecessor": "2973-04",
@@ -53,7 +53,7 @@
     "portalUrl": "https://mt-pir.arkcase.us/pir/portal/reading-room",
     "referenceContact": "DEQRecords@mt.gov",
     "accountMayBeRequired": true,
-    "requestNotSent": true,
+    "requestNotSent": false,
     "studentFeeWaiverAvailableWithEnrollmentProof": true,
     "noEnrollmentDocumentsInRepository": true,
     "feesMayApplyOtherwise": true,
@@ -68,13 +68,23 @@
     "priorReleaseReviewedOn": "2026-10-16",
     "priorReleaseResult": "six_2025_permitting_documents_no_2026_test_or_inspection_report",
     "priorReleaseAlreadyDownloadedByUser": true,
-    "priorReleaseAvoidDuplicateRequest": true
+    "priorReleaseAvoidDuplicateRequest": true,
+    "currentPriorityARequestState": "Intake",
+    "currentPriorityARequestStatus": "Perfected",
+    "currentPriorityAStatusObservedOn": "2026-10-16",
+    "privateRequestReferenceHeldOutsidePublicRepository": true,
+    "feeWaiverRequested": true,
+    "feeWaiverApproved": false,
+    "feeWaiverDecision": "pending",
+    "feePreference": "estimate_before_processing",
+    "feesAuthorized": false,
+    "recordResponsesReceived": false
   },
   "requestRounds": [
     {
       "id": "first_priority_initial_source_testing",
       "priority": 1,
-      "status": "draft_not_submitted",
+      "status": "submitted_intake_perfected",
       "permitNumber": "2973-05",
       "facility": "United States Antimony Corporation – Thompson Falls Facility, Sanders County, Montana",
       "startOn": "2026-05-01",
@@ -88,7 +98,12 @@
         "test_passed",
         "no_test_exists_if_no_indexed_result",
         "issued_permit_certifies_operations"
-      ]
+      ],
+      "submittedOn": "2026-10-16",
+      "submittedText": "abridged_600_character_portal_description_not_full_research_draft",
+      "acknowledgment": "user_supplied_request_status_screenshot",
+      "requestReference": "private_vault_only",
+      "feeWaiverDecision": "pending"
     },
     {
       "id": "second_priority_independent_inspection",
