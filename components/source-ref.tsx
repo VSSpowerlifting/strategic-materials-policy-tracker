@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { ExtLink } from "@/components/ui/ext-link";
 import { ConfidenceBadge } from "@/components/labels";
@@ -5,7 +6,9 @@ import { sourceTypeLabels } from "@/lib/labels";
 import { formatDate } from "@/lib/format";
 import type { Source } from "@/lib/types";
 
-export function SourceCard({ source }: { source: Source }) {
+export function SourceCard({
+  source, showDossierLink = true,
+}: { source: Source; showDossierLink?: boolean }) {
   return (
     <div id={source.id} className="min-w-0 scroll-mt-24 rounded-lg border bg-card p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
@@ -31,6 +34,11 @@ export function SourceCard({ source }: { source: Source }) {
           {source.url}
         </ExtLink>
       </div>
+      {showDossierLink ? (
+        <Link href={`/sources/${source.id}`} className="mt-3 inline-block font-display text-sm font-medium text-accent hover:text-accent-strong">
+          View citing records →
+        </Link>
+      ) : null}
     </div>
   );
 }
