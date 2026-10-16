@@ -130,7 +130,7 @@ test("same authoritative definitions power methodology and every relevant public
  assert.ok(!method.includes("const VALUE_ROLE_DEFS:"));
  assert.match(page,/<RecordReadingGuide record=\{c\} \/>/);
  assert.match(ui,/What the evidence says — and does not say/);
- assert.match(ui,/role:\{label/); // dynamic role read model is bound in the glossary
+ assert.match(ui,/heading:reading\.role\.label/); // explanation comes from the same typed record
  assert.match(ui,/FINANCIAL_STATUS_DEFS\.contracted/);
  for(const [path,topic] of [
   ["app/capital/page.tsx","capital"],
