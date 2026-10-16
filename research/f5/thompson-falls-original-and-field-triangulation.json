@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "f5-5-thompson-source-triangulation-1",
+  "researchCheckedOn": "2026-10-16",
+  "purpose": "public_original_source_navigation_for_existing_unsigned_M3_review_only",
+  "canonicalReviewId": "review-m3-2-thompson-falls-q2-expansion",
+  "canonicalProjectId": "prj-us-usac-thompson-falls-expansion",
+  "canonicalSourceId": "src-usac-2026-q2-10q",
+  "proposalKind": "construction_progress_reported",
+  "proposalScope": "named_facility",
+  "occurredOn": null,
+  "targetOn": null,
+  "q2PeriodEnd": "2026-06-30",
+  "secFilingDate": "2026-08-11",
+  "issuerConstructionFinding": "substantially_completed_q2_not_total_operations",
+  "reportedAssetsPlacedInServiceUsd": "4100000",
+  "reportedGrossConstructionInProgressUsdApprox": "29000000",
+  "sameCompanySourcesNotIndependent": true,
+  "localReportDoesNotEstablishAllFurnacesRunning": true,
+  "registeredPrimarySourceBodyAuthenticated": false,
+  "independentSiteVisitVerifiedByHuman": false,
+  "humanAttestationPresent": false,
+  "publicPublicationAuthorized": false,
+  "evidence": [
+    {
+      "role": "registered_q2_form10q",
+      "sourceId": "src-usac-2026-q2-10q",
+      "publisher": "United States Antimony Corporation (SEC-filed Form 10-Q)",
+      "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm",
+      "documentDate": "2026-08-11",
+      "locator": "Note 9 Government Grant; Note 16 Thompson Falls, Montana Facility Expansion",
+      "finding": "issuer_q2_substantially_complete_some_assets_in_service",
+      "limitation": "quarter_end_and_filing_date_not_a_specific_commissioning_or_completion_day"
+    },
+    {
+      "role": "sec_edgar_filing_index",
+      "sourceId": null,
+      "publisher": "U.S. Securities and Exchange Commission (EDGAR index for company filing)",
+      "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/0001104659-26-094035-index.htm",
+      "documentDate": "2026-08-11",
+      "locator": "EDGAR Filing Detail, accession 0001104659-26-094035, acceptance 16:02:52, period 2026-06-30",
+      "finding": "sec_filing_clock_not_independent_physical_confirmation",
+      "limitation": "registrar_authenticates_filing_receipt_not_physical_completion"
+    },
+    {
+      "role": "q2_issuer_earnings_exhibit",
+      "sourceId": null,
+      "publisher": "United States Antimony Corporation (SEC-furnished Exhibit 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094130/tm2622899d1_ex99-1.htm",
+      "documentDate": "2026-08-11",
+      "locator": "Management Commentary, Gary Evans outlook and commissioning language",
+      "finding": "q3_full_nine_furnace_operation_was_forward_looking",
+      "limitation": "company_press_release_not_second_independent_verification"
+    },
+    {
+      "role": "q2_issuer_call_transcript",
+      "sourceId": null,
+      "publisher": "United States Antimony Corporation (SEC-furnished August 11 call transcript)",
+      "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926097708/tm2622899d2_ex99-1.htm",
+      "documentDate": "2026-08-17",
+      "locator": "CEO remarks on Thompson Falls expansion starting up over prior 30–45 days; call held 2026-08-11, later SEC-furnished 2026-08-17",
+      "finding": "management_ramp_remarks_not_new_independent_facility_milestone",
+      "limitation": "call_date_and_subsequent_filing_date_distinct_from_project_event_day"
+    },
+    {
+      "role": "original_local_field_report",
+      "sourceId": null,
+      "publisher": "Sanders County Ledger (Annie Wooden, independent local reporting)",
+      "url": "https://www.scledger.net/story/2026/08/27/news/usac-capacity-expands-with-new-t-falls-facility/14209.html",
+      "documentDate": "2026-08-27",
+      "locator": "Lead, on-site photographic captions, and closing paragraph reporting seven of nine furnaces operational but not all simultaneously",
+      "finding": "independent_report_of_partial_new_furnace_operation",
+      "limitation": "reported_seven_of_nine_does_not_prove_simultaneous_full_capacity_or_first_operation_day"
+    }
+  ],
+  "editorialHandoff": {
+    "existingM3Authority": "gitignored_original_M3_adjudications_only",
+    "independentCorroborationStatus": "local_reporting_requires_human_source_and_scope_validation",
+    "additionalEvidenceRegistration": "separate_editor_authorized_source_registration_if_used",
+    "nextAction": "human_read_originals_and_check_which_furnaces_were_running_at_which_time",
+    "doNotInfer": [
+      "all_nine_furnaces_operational",
+      "full_year_nameplate_output_achieved",
+      "exact_q2_completion_day",
+      "government_award_equals_expansion_budget",
+      "grant_receipt_equals_plant_commissioning",
+      "independent_article_equals_human_approval"
+    ]
+  }
+}
