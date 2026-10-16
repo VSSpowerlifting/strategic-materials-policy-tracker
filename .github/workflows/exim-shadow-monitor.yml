@@ -46,16 +46,35 @@ jobs:
               branch: 'main', per_page: 70
             });
             for (const run of runs.data.workflow_runs) {
-              if (run.id === context.runId || run.status !== 'completed') continue;
-              const artifactName = `smpt-exim-state-${run.id}-${run.run_attempt}`;
+              // A failed workflow still uploads the RESTORED state via if:always.
+              // Never give such a run authority to become the next accepted
+              // continuity anchor. Both same-attempt artifacts must be present.
+              if (run.id === context.runId ||
+                  run.status !== 'completed' ||
+                  run.conclusion !== 'success' ||
+                  run.head_branch !== 'main' ||
+                  !['schedule', 'workflow_dispatch'].includes(run.event) ||
+                  !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1)
+                continue;
+              const stateName = `smpt-exim-state-${run.id}-${run.run_attempt}`;
+              const reportName = `smpt-exim-report-${run.id}-${run.run_attempt}`;
               const list = await github.rest.actions.listWorkflowRunArtifacts({
                 owner, repo, run_id: run.id, per_page: 100
               });
-              const found = list.data.artifacts.find(a => a.name === artifactName && !a.expired);
-              if (!found) continue;
+              const artifacts = list.data.artifacts;
+              const present = name => artifacts.filter(a =>
+                a.name === name &&
+                a.workflow_run?.id === run.id &&
+                !a.expired && a.size_in_bytes > 0);
+              const states = present(stateName);
+              const reports = present(reportName);
+              if (states.length !== 1 || reports.length !== 1) {
+                core.warning(`EXIM candidate run ${run.id} has no unique same-attempt state/report pair; skip`);
+                continue;
+              }
               core.setOutput('run_id', String(run.id));
-              core.setOutput('name', artifactName);
-              core.info(`EXIM recovered prior state from run ${run.id} attempt ${run.run_attempt}`);
+              core.setOutput('name', stateName);
+              core.info(`EXIM recovered trusted successful state from run ${run.id} attempt ${run.run_attempt}`);
               return;
             }
             core.info('No EXIM state artifact found; only explicitly authorized first baseline may run.');
