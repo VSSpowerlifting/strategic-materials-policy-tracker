@@ -135,10 +135,11 @@ export function auditThompsonSourceTriangulation(packet: unknown, ctx: ThompsonS
         "separate human authority or original evidence registration bypass");
       check(typeof handoff.nextAction==="string" && handoff.nextAction.length>=30,
         "human source validation action omitted");
-      check(Array.isArray(handoff.doNotInfer) &&
-        handoff.doNotInfer.length===prohibitedInferences.length &&
-        prohibitedInferences.every(s=>handoff.doNotInfer.includes(s)) &&
-        new Set(handoff.doNotInfer).size===prohibitedInferences.length,
+      const denied=handoff.doNotInfer;
+      check(Array.isArray(denied) &&
+        denied.length===prohibitedInferences.length &&
+        prohibitedInferences.every(s=>denied.includes(s)) &&
+        new Set(denied).size===prohibitedInferences.length,
         "lost prohibition against unproved full operation, funding causality, or synthetic approval");
     }
   }
@@ -170,7 +171,7 @@ export function auditThompsonSourceTriangulation(packet: unknown, ctx: ThompsonS
   check(montana.length===1 && montana[0].projectId==="prj-us-usac-thompson-falls-expansion" &&
     montana[0].amount?.value==="20000000" &&
     montana[0].implementationStatusHistory.length===0 &&
-    !montana[0].financialStatusHistory.some(s=>s.status==="fully_disbursed"),
+    !montana[0].financialStatusHistory.some(s=>s.status==="disbursed"),
     "Montana $20M allocation is not a second grant or fully paid facility milestone");
   check(alaska.length===1 && alaska[0].projectId==="prj-us-usac-alaska-antimony-feedstock" &&
     alaska[0].amount?.value==="7000000" && alaska[0].implementationStatusHistory.length===0,
