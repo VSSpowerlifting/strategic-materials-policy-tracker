@@ -39,7 +39,7 @@ test("F5 stage supplement reconciles 2 canonical M3 worksheets with 8 original p
       "supplement reuses real M3 digest, not an invented signature");
     assert.ok(report.markdown.includes(id));
   }
-  assert.equal(data().cases.flatMap(x=>x.leads).length,8);
+  assert.equal(data().cases.reduce((sum,x)=>sum+x.leads.length,0),8);
   assert.equal(getAllProjectMilestones().length,0);
   assert.ok(report.markdown.includes("UNSIGNED RESEARCH"));
   assert.ok(report.markdown.includes("ALL UNCHECKED"));
