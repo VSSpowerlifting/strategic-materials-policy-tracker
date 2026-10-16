@@ -38,3 +38,17 @@ All commands read published seeds only; no writes, pages, APIs, exports, watcher
 This is phase A, **not the public comparison feature**. Before a public route or export: inspect actual distribution/coverage against original publishers, add explicit standing and scoped milestone controls with source boundaries, design observation-horizon handling that does not turn publication into physical-effective dates, compare accessibility/browser ergonomics, and obtain reviewer authorization. Do not use a blanket historical cutoff for physical claims. Protect private M3/F5 source-review work: no automatic seed promotion or authority duplication.
 
 The existing open source/source-scope PRs #130, #132, #133, #134 and the F4 RFC #86 remain separate. No changes to published corpus seeds, financing classifications, source metadata, existing pages or automated collectors.
+
+## 2026-10-16 — F5-4b source observation horizon (read-only extension)
+
+`--source-horizon YYYY-MM-DD` adds **a separate, opt-in documentation chronology** to the same comparison. The selected-project denominator and recorded evidence claims stay identical regardless of the horizon:
+
+- The publication clock categorizes distinct cited source IDs as published by the chosen date, published later, or **publication date unknown**.
+- The *registered SMPT access date* separately categorizes source access on/before versus after the chosen date. The registry does not prove this was the first-ever access.
+- A single source reused by multiple projects is counted once in the **cohort-wide unique-source** denominator. Each project also returns its own source-ID sets so reviewers can inspect the exact evidence.
+- Publication by the horizon **does not** prove that SMPT, a government, or the public knew/used the source then. SMPT access after the horizon does **not** prove earlier unavailability.
+- A source published after the horizon remains visible in the current-corpus comparison, flagged as later. It is **not silently dropped or backdated**. This is not an event-effective-date, industrial milestone, legal standing, time-series or historical known-as-of query.
+- `site.lastUpdated` remains the legal standing cutoff inherited unchanged from public `/response`, regardless of the optional source horizon.
+- Human source approval and public release remain separate gates.
+
+Example: `npm run audit:f5-coverage -- --json --source-horizon 2024-06-01`.

@@ -19,6 +19,23 @@ export type F5ComparisonFilters = {
   providerJurisdiction?: JurisdictionCode;
 };
 
+/**
+ * Source registry chronology, never a reconstruction of what an editor or
+ * policymaker knew on the horizon date. A source can have been published
+ * before the horizon but have a later recorded SMPT access date.
+ */
+export type F5SourceHorizonInventory = {
+  horizon: string;
+  distinctSourceIds: string[];
+  publishedOnOrBeforeSourceIds: string[];
+  publishedAfterSourceIds: string[];
+  publicationDateUnknownSourceIds: string[];
+  accessedOnOrBeforeSourceIds: string[];
+  accessedAfterSourceIds: string[];
+  historicalKnownAsOfAuthorized: false;
+  physicalEventAsOfAuthorized: false;
+};
+
 export type F5FinanceReference = {
   id: string;
   relationship: "direct" | "nonallocative_association";
@@ -42,6 +59,8 @@ export type F5ComparisonProject = {
   unreviewedLegacyPhysicalObservations: number;
   /** Only registry/relation sources. Not a certificate of industrial operation. */
   structuralSourceIds: string[];
+  /** Explicit opt-in source clocks, NEVER used to filter or date project claims. */
+  sourceHorizon: F5SourceHorizonInventory | null;
   publicResponseAtCutoff: {
     eligibleGovernmentProject: boolean;
     bindingEvidenced: boolean;
@@ -61,6 +80,9 @@ export type F5ComparativeCoverage = {
   causalEffectAuthorized: false;
   /** Only the reused public response legal/finance eligibility is as-of. */
   publicResponseLegalAsOf: string;
+  sourceObservationHorizon: string | null;
+  /** Unique source IDs across selected projects, not additive per-project rows. */
+  selectedCohortSourceHorizon: F5SourceHorizonInventory | null;
   cohort: {
     definition: string;
     filters: F5ComparisonFilters;
@@ -86,14 +108,57 @@ export type F5ComparativeCoverage = {
   limitations: string[];
 };
 
+function requireCalendarDate(date: string, label: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+      Number.isNaN(Date.parse(date + "T00:00:00Z")) ||
+      new Date(date + "T00:00:00Z").toISOString().slice(0, 10) !== date)
+    throw new Error("F5-4b invalid ISO calendar date for " + label);
+}
+
+/**
+ * Source publication and *our* registered access dates are not event dates.
+ * Both are necessary context but neither reconstructs what was known as of
+ * an earlier date. This inventory never drops post-horizon citations, since
+ * doing so could silently rewrite what a current-corpus project means.
+ */
+function inventorySourceHorizon(
+  sourceIds: readonly string[],
+  sourceById: ReadonlyMap<string, PathwayInputs["sources"][number]>,
+  horizon: string,
+): F5SourceHorizonInventory {
+  const ids = [...new Set(sourceIds)].sort(lex);
+  const publishedOnOrBeforeSourceIds: string[] = [];
+  const publishedAfterSourceIds: string[] = [];
+  const publicationDateUnknownSourceIds: string[] = [];
+  const accessedOnOrBeforeSourceIds: string[] = [];
+  const accessedAfterSourceIds: string[] = [];
+  for (const id of ids) {
+    const source = sourceById.get(id);
+    if (!source) throw new Error("F5-4b missing horizon source " + id);
+    if (!source.datePublished) publicationDateUnknownSourceIds.push(id);
+    else if (source.datePublished <= horizon) publishedOnOrBeforeSourceIds.push(id);
+    else publishedAfterSourceIds.push(id);
+    if (source.dateAccessed <= horizon) accessedOnOrBeforeSourceIds.push(id);
+    else accessedAfterSourceIds.push(id);
+  }
+  return {
+    horizon, distinctSourceIds: ids,
+    publishedOnOrBeforeSourceIds, publishedAfterSourceIds,
+    publicationDateUnknownSourceIds, accessedOnOrBeforeSourceIds,
+    accessedAfterSourceIds, historicalKnownAsOfAuthorized: false,
+    physicalEventAsOfAuthorized: false,
+  };
+}
+
 export function buildF5ComparativeCoverage(
   input: PathwayInputs,
   legalAsOf: string,
   filters: F5ComparisonFilters = {},
+  sourceObservationHorizon: string | null = null,
 ): F5ComparativeCoverage {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(legalAsOf) ||
-      Number.isNaN(Date.parse(legalAsOf + "T00:00:00Z")))
-    throw new Error("F5-4a requires an ISO calendar date for public /response legal standing");
+  requireCalendarDate(legalAsOf, "public /response legal standing");
+  if (sourceObservationHorizon !== null)
+    requireCalendarDate(sourceObservationHorizon, "source observation horizon");
   if (filters.materialId !== undefined && !filters.materialId.trim())
     throw new Error("F5-4a material filter must be nonblank");
 
@@ -101,7 +166,8 @@ export function buildF5ComparativeCoverage(
   // hidden record may not be silently discarded by a narrow filter.
   const audit = auditEvidencePathways(input);
   const publicResponse = buildIndustrialResponse(legalAsOf, input.finances, input.projects);
-  const knownSources = new Set(input.sources.map(s => s.id));
+  const sourceById = new Map(input.sources.map(s => [s.id, s]));
+  const knownSources = new Set(sourceById.keys());
   const responseRows = new Map(publicResponse.rows.map(p => [p.id, p]));
   const coverage = new Map(audit.projects.map(p => [p.projectId, p]));
   const finances = new Map(input.finances.map(f => [f.id, f]));
@@ -176,6 +242,8 @@ export function buildF5ComparativeCoverage(
       nativePlannedMilestoneIds,
       unreviewedLegacyPhysicalObservations: c.legacyUnreviewedObservations,
       structuralSourceIds: [...sourceSet].sort(lex),
+      sourceHorizon: sourceObservationHorizon === null ? null
+        : inventorySourceHorizon([...sourceSet], sourceById, sourceObservationHorizon),
       publicResponseAtCutoff: {
         eligibleGovernmentProject: !!response,
         bindingEvidenced: response?.finance === "binding",
@@ -219,6 +287,12 @@ export function buildF5ComparativeCoverage(
     capitalTotalsAuthorized: false,
     causalEffectAuthorized: false,
     publicResponseLegalAsOf: legalAsOf,
+    sourceObservationHorizon,
+    selectedCohortSourceHorizon: sourceObservationHorizon === null ? null
+      : inventorySourceHorizon(
+        projects.flatMap(p => p.structuralSourceIds),
+        sourceById, sourceObservationHorizon,
+      ),
     cohort: {
       definition: "Unique published project IDs matching project material/stage tags and, if selected, any directly linked or nonallocatively associated finance provider. Not solely financed projects.",
       filters: { ...filters },
@@ -249,6 +323,8 @@ export function buildF5ComparativeCoverage(
       "Public /response eligibility and binding standing reuse its source-bound legal-as-of calculation. Native milestones and finance-reported physical notes remain current corpus revision, NOT historical known-as-of states.",
       "Reviewed native milestone absence is an editorial coverage gap, never industrial inactivity. Legacy finance-reported activity is neither independent project-native confirmation nor a causal effect.",
       "Status source dates and research review dates are not interchangeable. No source-publication cutoff or historical physical state is inferred.",
+      "Optional source observation horizons classify original source publication and SMPT access timestamps only. A post-horizon source stays in the current-revision casefile and is flagged; it is not erased, backdated, or interpreted as unavailable earlier.",
+      "Publication before the chosen horizon does not prove SMPT had the evidence then; a later registered access date does not prove earlier public unavailability.",
       "Private source-review packets are excluded. Human source adjudication and separate release QA remain required before any public comparison.",
     ],
   };
