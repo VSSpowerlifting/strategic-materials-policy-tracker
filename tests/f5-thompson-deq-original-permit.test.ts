@@ -90,7 +90,7 @@ test("DEQ engineering pages capture corrected applicant/DEQ counts and testing-o
   assert.match(loc[1].section,/Section I.B/);
   assert.match(loc[2].section,/Section II.B.1/);
   assert.match(loc[3].section,/Section II.C.1/);
-  assert.match(loc[5].finding,/applicant identified an earlier mistake/);
+  assert.match(loc[5].finding,/Applicant corrected an earlier mix-up/);
   assert.match(loc[2].finding,/Initial EPA method source testing required/);
   assert.match(loc[3].finding,/annual emissions inventory requests/);
   assert.ok(loc.every(x=>x.pageIndex>=0 && x.pageIndex<original.originalPdfTotalPages));
