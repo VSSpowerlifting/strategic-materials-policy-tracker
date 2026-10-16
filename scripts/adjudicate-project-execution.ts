@@ -224,6 +224,20 @@ export function adjudicateProjectExecutionReview(
   for (const row of q)
     if (!decisionIds.has(row.id)) bad(row.id, "missing adjudication decision");
 
+  // A successful single-source check is not sufficient for a multi-review
+  // handoff. The publication validator also checks claims *against each other*
+  // (including the same dated facility event cited by different publishers).
+  // Sort a copy by the canonical milestone ID; the reviewer queue itself has
+  // a separate review-ID ordering and must not determine this validation order.
+  if (report.errors.length === 0 && report.proposals.length > 1) {
+    const sorted = [...report.proposals].sort((a, b) =>
+      a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+    const issues = validateProjectMilestones(sorted, {
+      projects: refs.projects, sources: refs.sources, corpusDate: refs.corpusCutoff,
+    });
+    for (const issue of issues) report.errors.push("combined review proposals: " + issue);
+  }
+
   // No output can be treated as publishable when any decision is structurally
   // invalid. Distinguish this from independent factual source-review approval.
   if (report.errors.length > 0) report.proposals = [];
