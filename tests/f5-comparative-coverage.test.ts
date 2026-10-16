@@ -170,7 +170,7 @@ test("F5-4b optional horizon separates publisher and SMPT access clocks, without
   const a = d.sources.find(s => s.id === project.structuralSourceIds[0])!;
   const b = d.sources.find(s => s.id === project.structuralSourceIds[1])!;
   a.datePublished = "2020-01-01";
-  a.dateAccessed = "2026-10-01"; // published before the horizon; first registered afterward
+  a.dateAccessed = "2026-10-01"; // published before the horizon; recorded access afterward
   b.datePublished = null;
   b.dateAccessed = "2020-01-01"; // access recorded before; publication day unknown
   const report = buildF5ComparativeCoverage(d, site.lastUpdated, {}, "2024-01-01");
