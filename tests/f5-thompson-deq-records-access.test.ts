@@ -20,7 +20,7 @@ test("records handoff belongs only to existing unsigned Thompson SEC review",()=
   assert.ok(w);
   assert.equal(handoff.schemaVersion,"f5-5-thompson-deq-public-records-handoff-v1");
   assert.equal(handoff.checkedOn,"2026-10-16");
-  assert.equal(handoff.status,"draft_only_not_submitted");
+  assert.equal(handoff.status,"priority_a_submitted_priority_b_draft");
   assert.equal(handoff.scope,"regulator_held_documents_not_human_source_decision");
   assert.equal(handoff.canonicalM3ReviewId,w.id);
   assert.equal(handoff.canonicalProjectId,w.project.id);
@@ -77,7 +77,17 @@ test("state official portal, supported agency and fee-waiver evidence never impe
   assert.equal(p.portalUrl,"https://mt-pir.arkcase.us/pir/portal/reading-room");
   assert.equal(p.referenceContact,"DEQRecords@mt.gov");
   assert.equal(p.accountMayBeRequired,true);
-  assert.equal(p.requestNotSent,true);
+  assert.equal(p.requestNotSent,false);
+  assert.equal(p.currentPriorityARequestState,"Intake");
+  assert.equal(p.currentPriorityARequestStatus,"Perfected");
+  assert.equal(p.currentPriorityAStatusObservedOn,"2026-10-16");
+  assert.equal(p.privateRequestReferenceHeldOutsidePublicRepository,true);
+  assert.equal(p.feeWaiverRequested,true);
+  assert.equal(p.feeWaiverApproved,false);
+  assert.equal(p.feeWaiverDecision,"pending");
+  assert.equal(p.feePreference,"estimate_before_processing");
+  assert.equal(p.feesAuthorized,false);
+  assert.equal(p.recordResponsesReceived,false);
   assert.equal(p.studentFeeWaiverAvailableWithEnrollmentProof,true);
   assert.equal(p.noEnrollmentDocumentsInRepository,true);
   assert.equal(p.feesMayApplyOtherwise,true);
@@ -86,13 +96,19 @@ test("state official portal, supported agency and fee-waiver evidence never impe
   assert.equal(p.archiveCheck.noInferenceOfDocumentAbsence,true);
 });
 
-test("two non-submitted narrow source-document requests retain exact scope and clocks",()=>{
+test("one submitted and one draft source-document request retain exact scope and clocks",()=>{
   const a=handoff.requestRounds;
   assert.equal(a.length,2);
   assert.deepEqual(a.map(x=>x.id),[
     "first_priority_initial_source_testing","second_priority_independent_inspection"]);
   assert.deepEqual(a.map(x=>x.priority),[1,2]);
-  assert.ok(a.every(x=>x.status==="draft_not_submitted"));
+  assert.equal(a[0].status,"submitted_intake_perfected");
+  assert.equal(a[0].submittedOn,"2026-10-16");
+  assert.equal(a[0].submittedText,"abridged_600_character_portal_description_not_full_research_draft");
+  assert.equal(a[0].acknowledgment,"user_supplied_request_status_screenshot");
+  assert.equal(a[0].requestReference,"private_vault_only");
+  assert.equal(a[0].feeWaiverDecision,"pending");
+  assert.equal(a[1].status,"draft_not_submitted");
   assert.ok(a.every(x=>x.permitNumber===handoff.deqPermit.identifier));
   assert.ok(a.every(x=>x.startOn==="2026-05-01" && x.endOn==="2026-10-16"));
   assert.ok(a.every(x=>x.facility.includes("Thompson Falls")));
@@ -133,7 +149,7 @@ test("private source intake and no public mutation survive a deterministic offli
   assert.equal(handoff.publicMilestoneAuthorized,false);
   assert.equal(handoff.humanReviewCompleted,false);
   assert.equal(handoff.recordsObtained,false);
-  assert.equal(handoff.recordsRequestSubmitted,false);
+  assert.equal(handoff.recordsRequestSubmitted,true);
   assert.ok(handoff.nextUseOfRecords.whenObtained.includes("gitignored private evidence vault"));
   assert.match(handoff.nextUseOfRecords.reviewer,/existing M3 original-source human adjudication/);
   assert.match(handoff.nextUseOfRecords.publication,/No automatic project-milestone seed/);
