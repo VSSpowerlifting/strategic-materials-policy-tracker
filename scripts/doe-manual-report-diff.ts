@@ -32,7 +32,10 @@ export type DoeManualReportDiff = {
   originalArticleSamples: number;
   status: "manual_source_review_needed" | "no_difference_detected_in_bounded_evidence";
   observedDifferences: number;
-  needsHumanReview: boolean;
+  /** Full original body, use rights, and semantic boundaries remain unreviewed. */
+  needsHumanReview: true;
+  /** Changes/truncated risk sets have an additional concrete comparison follow-up. */
+  observedChangeReviewRequired: boolean;
   rows: DoeManualReportDiffRow[];
   completePublisherBodyCertified: false;
   sourceUseApproved: false;
@@ -215,7 +218,8 @@ export function compareDoeManualReports(earlier:unknown,later:unknown):DoeManual
    originalArticleSamples:rows.length,
    status:changed?"manual_source_review_needed":"no_difference_detected_in_bounded_evidence",
    observedDifferences:changed,
-   needsHumanReview:changed>0||rows.some(x=>!x.riskSampleComparisonExhaustive),
+   needsHumanReview:true,
+   observedChangeReviewRequired:changed>0||rows.some(x=>!x.riskSampleComparisonExhaustive),
    rows,
    completePublisherBodyCertified:false,sourceUseApproved:false,
    semanticRevisionTrackingApproved:false,monitoringActivationAuthorized:false,
