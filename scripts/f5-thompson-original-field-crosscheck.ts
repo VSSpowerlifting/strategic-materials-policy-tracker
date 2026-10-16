@@ -180,7 +180,7 @@ export function auditThompsonSourceTriangulation(packet: unknown, ctx: ThompsonS
     schemaVersion:"f5-5-thompson-source-audit-1" as const,
     errors,
     researchCrosscheckConsistent:errors.length===0,
-    independentOriginalFieldReportIncluded:true as const,
+    independentOriginalFieldReportIncluded:errors.length===0,
     originalSourceVerifiedByHuman:false as const,
     existingM3AdjudicationCompleted:false as const,
     publishAuthorized:false as const,
