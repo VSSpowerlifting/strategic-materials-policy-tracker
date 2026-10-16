@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "f5-5-cyclic-original-publisher-crosscheck-1",
+  "researchCheckedOn": "2026-10-16",
+  "interpretation": "nrcan_reports_completed_funded_activity_not_commercial_plant",
+  "canonicalReviewId": "review-m3-2-cyclic-extended-operations",
+  "canonicalProjectId": "prj-ca-cyclic-kingston-demonstration-plant",
+  "canonicalFinanceId": "fin-ca-cmrdd-2024-cyclic-materials",
+  "canonicalSourceId": "src-nrcan-cmrdd-programme",
+  "proposalKind": "funded_activity_completed",
+  "proposalScope": "funded_activity",
+  "reportedCompletionMonth": "2026-03",
+  "occurredOn": null,
+  "sourceIndependence": "single_federal_reporting_chain_no_independent_physical_inspection",
+  "sourceChecks": [
+    {
+      "role": "program_status",
+      "registeredSourceId": "src-nrcan-cmrdd-programme",
+      "url": "https://www.canada.ca/en/campaign/critical-minerals-in-canada/federal-support-for-critical-mineral-projects-and-value-chains/critical-minerals-research-development-and-demonstration-program.html",
+      "locator": "Funded Projects > Kingston Demonstration Plant – Extended Operations > Status",
+      "finding": "reported_cmrdd_activity_completion_month_only",
+      "clock": "in_place_page_registry_access_date_not_event_day"
+    },
+    {
+      "role": "agreement_registry",
+      "registeredSourceId": "src-canada-grant-cyclic-cmrdd-2024",
+      "url": "https://search.open.canada.ca/grants/record/nrcan-rncan%2C115-2024-2025-Q2-15713%2Ccurrent",
+      "locator": "Agreement CMRDD2-048; agreement value and Jul 17 2024–Mar 31 2026 term",
+      "finding": "legal_agreement_period_only",
+      "clock": "agreement_dates_not_completion_date"
+    },
+    {
+      "role": "funding_announcement",
+      "registeredSourceId": "src-nrcan-cmrdd-2024",
+      "url": "https://www.canada.ca/en/natural-resources-canada/news/2024/09/government-of-canada-supporting-critical-minerals-processing-in-kingston.html",
+      "locator": "September 4 2024 original NRCan release; Cyclic demonstration-plant paragraphs",
+      "finding": "initial_project_scope_and_funding_only",
+      "clock": "announcement_day_not_project_completion"
+    },
+    {
+      "role": "bilingual_status",
+      "registeredSourceId": null,
+      "url": "https://www.canada.ca/fr/campagne/mineraux-critiques-au-canada/soutien-du-gouvernement-federal-aux-projets-sur-les-mineraux-critiques-et-les-chaines-de-valeur/mineraux-critiques-recherche-developpement-et-demonstration-programme.html",
+      "locator": "Usine de démonstration de Kingston – Exploitation prolongée > État",
+      "finding": "same_nrcan_translation_not_independent_confirmation",
+      "clock": "translated_status_not_separate_event"
+    },
+    {
+      "role": "separate_programme_comparator",
+      "registeredSourceId": null,
+      "url": "https://search.open.canada.ca/grants/record/feddevontario%2C062-2025-2026-Q4-00111%2Ccurrent",
+      "locator": "FedDev Ontario agreement 1019177; Business Scale-up and Productivity; Centre of Excellence",
+      "finding": "separate_bsup_centre_not_cmrdd_completion",
+      "clock": "different_agreement_term_not_cmrdd_event"
+    }
+  ],
+  "needsHumanOriginalSourceReview": true,
+  "humanAttestationPresent": false,
+  "publicMilestonePromotionAuthorized": false,
+  "sourceBodyHashCaptured": false,
+  "note": "Public-original web research pointers only. A current publisher page is not a frozen version; do not backdate source access, manufacture exact completion day or treat grant term/other facility as corroborated physical completion."
+}
