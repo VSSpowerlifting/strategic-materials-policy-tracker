@@ -31,6 +31,8 @@ on:
       - "data/seed/project-designations.json"
       - "data/seed/project-milestones.json"
       - "data/seed/sources.json"
+      # Internal F5 research leads must also prove their new material stays off public pages.
+      - "research/f5/**"
       # CSS and dependency/toolchain changes can alter rendered geometry.
       - "app/globals.css"
       - "postcss.config.mjs"
