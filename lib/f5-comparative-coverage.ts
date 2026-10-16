@@ -22,7 +22,7 @@ export type F5ComparisonFilters = {
 /**
  * Source registry chronology, never a reconstruction of what an editor or
  * policymaker knew on the horizon date. A source can have been published
- * before the horizon but first registered by SMPT much later.
+ * before the horizon but have a later recorded SMPT access date.
  */
 export type F5SourceHorizonInventory = {
   horizon: string;
@@ -324,7 +324,7 @@ export function buildF5ComparativeCoverage(
       "Reviewed native milestone absence is an editorial coverage gap, never industrial inactivity. Legacy finance-reported activity is neither independent project-native confirmation nor a causal effect.",
       "Status source dates and research review dates are not interchangeable. No source-publication cutoff or historical physical state is inferred.",
       "Optional source observation horizons classify original source publication and SMPT access timestamps only. A post-horizon source stays in the current-revision casefile and is flagged; it is not erased, backdated, or interpreted as unavailable earlier.",
-      "Publication before the chosen horizon does not prove SMPT had the evidence then; first registered access after it does not prove earlier public unavailability.",
+      "Publication before the chosen horizon does not prove SMPT had the evidence then; a later registered access date does not prove earlier public unavailability.",
       "Private source-review packets are excluded. Human source adjudication and separate release QA remain required before any public comparison.",
     ],
   };
