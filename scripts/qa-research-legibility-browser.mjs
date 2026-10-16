@@ -64,8 +64,17 @@ try{
   const font=await size(select);
   assert.ok(font>= (viewport.width<640?16:14),"filter text size readable at "+viewport.width);
   await select.focus();
-  const outline=await select.evaluate(el=>getComputedStyle(el).outlineStyle);
-  assert.notEqual(outline,"none","keyboard focus must be visible");
+  // The tab sequence creates a keyboard modality, unlike a programmatic .focus().
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Shift+Tab");
+  const visualFocus=await select.evaluate(el=>({
+    outline:getComputedStyle(el).outlineStyle,
+    ring:getComputedStyle(el).boxShadow,
+    active:document.activeElement===el,
+  }));
+  assert.ok(visualFocus.active,"Keyboard traversal must restore focus to the filter");
+  assert.ok(visualFocus.outline!=="none"||visualFocus.ring!=="none",
+    "Keyboard focus must display a native outline or a visible focus ring");
   await page.close();
  }
  const page=await browser.newPage({viewport:{width:375,height:812}});
