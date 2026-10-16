@@ -74,7 +74,7 @@ function flag(value:unknown,where:string):boolean{
  return value;
 }
 function count(value:unknown,where:string,max=250_000):number{
- if(!Number.isInteger(value)||typeof value!=="number"||value<0||value>max)
+ if(typeof value!=="number"||!Number.isInteger(value)||value<0||value>max)
    throw Error("DOE compare invalid "+where);
  return value;
 }
@@ -85,7 +85,7 @@ function time(value:unknown):string{
    throw Error("DOE compare invalid original observation instant");
  return s;
 }
-function record(value:unknown,label:string):BodySample {
+function record(value:unknown):BodySample {
  const x=obj(value,"sample");
  const role=str(x.role,"role");
  const expected=ROLES.find(y=>y.role===role);
@@ -113,8 +113,6 @@ function record(value:unknown,label:string):BodySample {
  const risks=obj(coverage.risks,"risk classes");
  if(Object.keys(risks).sort().join(",")!==[...RISKS].sort().join(","))
    throw Error("DOE compare missing/unknown risk class");
- const counts:Object=risks;
- void counts;
  const parsed=Object.fromEntries(RISKS.map(k=>[k,count(risks[k],"risk count",300)]));
  const total=count(coverage.riskTotal,"risk total",300);
  if(Object.values(parsed).reduce((n,x)=>n+(x as number),0)!==total)
@@ -168,7 +166,7 @@ export function parseDoeManualReport(input:unknown):Report {
    throw Error("DOE compare missing or extra article proofs");
  const samples=new Map<string,BodySample>();
  for(const v of x.sampleProofs){
-  const p=record(v,"original");
+  const p=record(v);
   if(samples.has(p.role))throw Error("DOE compare duplicate article role");
   samples.set(p.role,p);
  }
