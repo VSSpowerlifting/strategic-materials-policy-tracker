@@ -110,7 +110,7 @@ test("first priority requests regulator-held completed tests, protocol records a
   assert.match(a.body,/source-test protocol submissions/);
   assert.match(a.body,/actual initial-startup or testing dates/);
   assert.match(a.body,/completed test reports/);
-  assert.match(a.body,/furnace ID or emissions-unit ID/);
+  assert.match(a.body,/furnace or emissions-unit ID/);
   assert.match(a.body,/predecessor MAQP #2973-04/);
   assert.ok(a.doNotClaim.includes("all_nine_units_started"));
   assert.ok(a.doNotClaim.includes("test_due_or_overdue"));
