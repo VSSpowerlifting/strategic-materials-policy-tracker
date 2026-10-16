@@ -84,8 +84,9 @@ test("indications and ceilings are never described as committed money or evidenc
  assert.match(explainFinancialRecord(indication).role.definition,/not money committed/);
 });
 
-test("private finance is not attributed to a government solely because the record is a commitment",()=>{
- const source=corpus().find(x=>x.valueRole==="commitment"&&x.capitalSource==="private");
+test("unknown or private provider capital is not attributed to government from a commitment role alone",()=>{
+ const source=corpus().find(x=>x.valueRole==="commitment"&&
+  (x.capitalSource==="private"||x.capitalSource==="not_stated"));
  assert.ok(source);
  assert.match(explainFinancialRecord(source).boundary,/not automatically a government commitment/);
 });
