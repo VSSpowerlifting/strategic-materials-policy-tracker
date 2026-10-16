@@ -79,7 +79,7 @@ test("Thompson rejects independent journalism being treated as an all-nine opera
   assert.match(messages(field),/source registration/);
   const forged=packet();
   forged.editorialHandoff.additionalEvidenceRegistration="automatically_registered";
-  assert.match(messages(forged),/source registration bypass/);
+  assert.match(messages(forged),/original evidence registration bypass/);
 });
 
 test("Thompson rejects invalid publisher URLs, duplicate roles, fabricated source clocks and omitted caveats",()=>{
