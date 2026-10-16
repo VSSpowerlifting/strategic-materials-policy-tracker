@@ -92,14 +92,6 @@ export function buildSourceUseIndex(corpus: PublishedSourceRecords): Map<string,
     else group.set(key, {kind, id, title, href, roles: new Set([role])});
     uses.set(sourceId, group);
   };
-  const fields = (
-    sourceId: string, kind: SourceUseKind, id: string,
-    title: string, href: string, evidence: readonly {sourceId: string; supports: readonly string[]}[],
-  ) => {
-    for (const ref of evidence)
-      if (ref.sourceId === sourceId)
-        for (const field of ref.supports) add(ref.sourceId, kind, id, title, href, "Field evidence: " + field);
-  };
   // The source ID on each record is explicit, rather than inherited from its parent.
   for (const e of corpus.events)
     for (const sid of e.sourceIds)
