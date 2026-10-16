@@ -53,7 +53,7 @@ test("Thompson chronology separates 2025 construction, May 2026 commissioning, Q
     ["2025-10-02","2026-06-09","2026-08-11","2026-08-27"]);
   assert.equal(c.occurredOn,null);
   assert.equal(c.exactOperationDayKnown,false);
-  assert.match(c.leads[3].limitation,/not.*simultaneous operation/);
+  assert.match(c.leads[3].limitation,/nor all nine simultaneous operation/);
   assert.ok(c.checksBeforeDecision.some(x=>x.includes("$27M parent")));
 });
 
