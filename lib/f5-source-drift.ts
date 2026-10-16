@@ -62,7 +62,6 @@ export type F5DriftReceipt = {
 
 const lex = (a: string, b: string): number => a < b ? -1 : a > b ? 1 : 0;
 const digest = (v: string): string => createHash("sha256").update(v).digest("hex");
-const hasOwn = (v: object, key: string) => Object.prototype.hasOwnProperty.call(v, key);
 const HASH = /^[a-f0-9]{64}$/;
 const UTC_CLOCK = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/;
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
