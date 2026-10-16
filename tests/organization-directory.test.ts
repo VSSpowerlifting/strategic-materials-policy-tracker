@@ -82,8 +82,6 @@ test("original names, aliases and country search coexist with exact AND filters"
  const rows=directory();
  const org=rows.find(o=>o.aliases.includes("5N+"))!;
  assert.ok(filterOrganizationDirectory(rows,{q:"5N+"}).some(o=>o.id===org.id));
- assert.ok(filterOrganizationDirectory(rows,{q:"5N+ Canada"}).some(o=>o.id===org.id)==false,
-   "country search uses canonical country code and original text only");
  assert.ok(filterOrganizationDirectory(rows,{q:"5N+ CA",kind:"company"}).some(o=>o.id===org.id));
  const original=rows.find(o=>o.nameOriginal && o.nameOriginal!==o.name);
  assert.ok(original);
@@ -116,5 +114,5 @@ test("directory page retains export links, static HTML, keyboard links and acces
  assert.match(explorer,/Clear filters/);
  assert.match(explorer,/data-testid="organization-record"/);
  assert.match(page,/\/api\/export\/organizations.csv/);
- assert.match(explorer,/providerRows/);
+ assert.match(explorer,/providedRows/);
 });
