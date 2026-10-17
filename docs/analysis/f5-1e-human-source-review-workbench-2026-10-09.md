@@ -4,7 +4,7 @@
 
 ## Why this exists
 
-SMPT has seven canonical M3 source-review candidates, including Alcoa Wagerup, Neo Narva, Stibnite early works and later Burntlog access infrastructure, funded Kingston extended operations, the Army INL demonstration, and Thompson Falls Q2 construction-progress reporting. Five have canonical types but still lack true source adjudication; two remain explicitly blocked on taxonomy. The candidate queue is intentionally separate from the public `data/seed/project-milestones.json`, which remains empty. A private human reviewer must be able to inspect the original issuer document, not infer an approved project state from a finance-row implementation note.
+SMPT has seven canonical M3 source-review candidates, including Alcoa Wagerup, Neo Narva, Stibnite early works and later Burntlog access infrastructure, funded Kingston extended operations, the Army INL demonstration, and Thompson Falls Q2 construction-progress reporting. Four remain in the ordinary human source-review lane; three are taxonomy/scope blocked (INL demonstration, Stibnite early works, and Burntlog Route). See the current [F5-1 source-readiness matrix](f5-1-industrial-source-readiness-matrix-2026-10-11.md); older dated counts are only historical snapshots. The candidate queue is intentionally separate from the public `data/seed/project-milestones.json`, which remains empty. A private human reviewer must be able to inspect the original issuer document, not infer an approved project state from a finance-row implementation note.
 
 ## Usage from the local repository
 
@@ -33,6 +33,8 @@ The implementation audits the **whole** M3 queue before selecting a single revie
 
 ## Human editorial and eventual release gate
 
+**Current operational boundary (October 11):** Wagerup and Narva await real source adjudication. Both Stibnite pilot leads remain taxonomy-blocked and cannot be cleared by signing checkboxes. The curated-corpus cutoff is **2026-10-09**: a later human review date requires an independently approved corpus-date update. Supplementary Neo MD&A preparation dates are not verified public-availability dates.
+
 1. The **real reviewer** opens the complete original source using the provided URL and confirms the actual passage, pinpoint, project component, evidence date and corporate-finance distinctions. Where the publisher reports operations, mark it as a **publisher assertion**, not independently inspected physical output.
 2. Record each actual reviewer verdict, decision date, checklist and reason in a **locally held** `.project-execution-review/adjudications.json` created from `research/project-execution/m3-2-adjudications.example.json`, following the original M3 adjudication workflow. Keep blocked taxonomy entries pending until a separate taxonomy decision. A source-review packet and a synthetic regression-test reviewer are **never** signatures.
 3. For **every non-pending human decision**, manually copy the exact `reviewInputDigestSha256` shown on its current worksheet into the matching local adjudication record. Leave it `null` while pending; the CLI never auto-signs. The digest covers the candidate claim, registered primary-source URL/title/date, project identity, linked finance-status evidence, and curated corpus cutoff. If the evidence metadata changes, a prior signed decision must be reconsidered and newly attested. It is **not** a checksum of the original website/PDF or proof of source authenticity.
@@ -41,6 +43,6 @@ The implementation audits the **whole** M3 queue before selecting a single revie
 
 ## Verification and non-goals
 
-Tests confirm seven packets; five human-review candidates and two taxonomy holds; unchanged public milestone count; correct Narva/Thompson Falls date boundaries; unresolved Burntlog kind; deterministic input fingerprints; fail-closed altered sources and malformed queue/CLI flags; and **no writes**. Full CI: production dependencies, data validation, typecheck, lint, tests and build.
+Tests confirm seven packets; four ordinary human-review candidates and three taxonomy/scope holds; unchanged public milestone count; correct Narva/Thompson Falls date boundaries; unresolved Burntlog infrastructure scope and Stibnite early-works breadth; deterministic input fingerprints; fail-closed altered sources and malformed queue/CLI flags; and **no writes**. Full CI: production dependencies, data validation, typecheck, lint, tests and build.
 
 No change to financing, source registry, policy records, the last-curated date, public project display, source monitor, EXIM/DOE jobs, or finance-as-of functionality. The deliverable is a tool to facilitate genuine offline adjudication—**not** a substitute for it.
