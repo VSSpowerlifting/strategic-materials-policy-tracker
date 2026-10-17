@@ -9,6 +9,7 @@ import {readFileSync} from "node:fs";
 import {fileURLToPath} from "node:url";
 import {join,dirname} from "node:path";
 import {isMilestoneIsoDate} from "../lib/project-milestones";
+import {site} from "../lib/site";
 
 export const F5_SEED_NAMES = [
   "control-measures","events","financial-commitments","framing",
@@ -121,7 +122,6 @@ if(isMain){
     const datasets:SeedInput={};
     for(const seed of F5_SEED_NAMES)
       datasets[seed]=JSON.parse(readFileSync(join(base,seed+".json"),"utf8")) as unknown[];
-    const {site}=await import("../lib/site");
     process.stdout.write(JSON.stringify(auditF5CorpusCutoffImpact(datasets,site.lastUpdated,args[1]),null,2)+"\n");
   }catch(e){
     console.error(e instanceof Error?e.message:String(e));
