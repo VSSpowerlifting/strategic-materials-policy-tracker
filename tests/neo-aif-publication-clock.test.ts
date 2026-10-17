@@ -32,7 +32,7 @@ test("Narva 2026 AIF supports finance context, not a newly invented physical mil
   assert.equal(row.amount?.qualifier, "approximately");
   assert.equal(row.financialAmountHistory, undefined, "unreviewed F4 history remains blocked");
   assert.ok(row.financialStatusHistory.some(x => x.status === "partially_disbursed" && x.date === "2025-12-31"));
-  assert.equal(getAllProjectMilestones().length, 1, "Neo remains unsigned; sole public native milestone is Wagerup");
+  assert.equal(getAllProjectMilestones().length, 2, "AIF source-date correction does not independently create physical activity; Narva public record uses September issuer source");
 });
 
 test("changing only the contextual AIF publication clock does not silently invalidate the canonical Narva M3 review fingerprint", () => {

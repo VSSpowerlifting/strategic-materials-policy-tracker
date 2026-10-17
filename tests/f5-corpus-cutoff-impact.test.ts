@@ -39,11 +39,14 @@ test("Wagerup curated revision changed only the reviewed milestone: historical c
   );
   assert.equal(historical.countOtherPostCutoffFields,0);
   const currentFull=auditF5CorpusCutoffImpact(current,"2026-10-09","2026-10-17");
-  assert.equal(currentFull.totalPublicSeedRows,699);
-  assert.equal(currentFull.countNewlyIncludedDatedFields,1,
-    "one newly published human review date appears, not 698 silently refreshed records");
+  assert.equal(currentFull.totalPublicSeedRows,700);
+  assert.equal(currentFull.countNewlyIncludedDatedFields,2,
+    "two newly published human review dates appear; other registry rows remain unchanged");
   assert.deepEqual(currentFull.newlyIncludedDatedFields,[{
     seed:"project-milestones",recordId:"mil-au-alcoa-wagerup-groundbreaking-2026-08-24",
+    field:"reviewedAt",date:"2026-10-17",
+  },{
+    seed:"project-milestones",recordId:"mil-ee-neo-narva-commercial-production-reported-2026",
     field:"reviewedAt",date:"2026-10-17",
   }]);
   assert.equal(JSON.stringify(seeds()),frozen);
@@ -88,7 +91,7 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   const parsed=JSON.parse(output);
   assert.equal(parsed.proposedCutoff,"2026-10-17");
   assert.equal(parsed.currentPublishedCutoff,"2026-10-17");
-  assert.equal(parsed.totalPublicSeedRows,699);
+  assert.equal(parsed.totalPublicSeedRows,700);
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
   assert.equal(parsed.countFutureIntervalEndFields,21);
   assert.equal(parsed.publicationAuthorized,false,

@@ -41,7 +41,7 @@ test("F5-5 absent prior state is baseline only; never a newly occurred industria
   assert.equal(result.cases[0].reviewKey, null);
   assert.equal(result.publicReleaseAuthorized, false);
   assert.equal(result.automatedSourceOrMilestonePromotionAuthorized, false);
-  assert.equal(getAllProjectMilestones().length, 1);
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("F5-5 original bytes and metadata unchanged: no review candidate or re-approval", () => {
@@ -183,7 +183,7 @@ test("F5-5 CLI consumes synthetic offline files with identical deterministic JSO
     assert.equal(JSON.parse(first).candidateCount, 1);
     assert.equal(JSON.parse(first).publicReleaseAuthorized, false);
     assert.equal(readFileSync(before, "utf8"), JSON.stringify([observed()]));
-    assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
+    assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
     assert.throws(() => execFileSync(command[0], [...command.slice(1), "--publish"],
       { encoding: "utf8", stdio: "pipe" }));
   } finally { rmSync(dir, { recursive: true, force: true }); }

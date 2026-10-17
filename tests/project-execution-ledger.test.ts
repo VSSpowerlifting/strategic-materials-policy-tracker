@@ -27,7 +27,7 @@ const fixture = (): ProjectMilestone => ({
 });
 
 test("public milestone seed remains empty; no inferred verified project milestones", () => {
-  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
 });
 
 test("valid explicitly scoped, human-reviewed primary milestone; event and evidence dates stay separate", () => {
@@ -274,5 +274,5 @@ test("construction progress reporting is an undated status observation, not a da
     const errors = validateProjectMilestones([{...progress,...changes}], refs);
     assert.ok(errors.some(e=>expected.test(e)), label+": "+errors.join("; "));
   }
-  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"], "synthetic validation cannot add another public milestone");
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"], "synthetic validation cannot add another public milestone");
 });

@@ -70,10 +70,11 @@ export async function buildF5LocalBrowserPreview():Promise<{
     sources:getAllSources(),
   },site.lastUpdated);
   if(model.publicReleaseAuthorized!==false||model.architecture.publicationRouteEnabled!==false||
-     model.sourceReviewedCasefilesReadyForManualQa!==1||
+     model.sourceReviewedCasefilesReadyForManualQa!==2||
      model.cases.length!==4||
-     getAllProjectMilestones().length!==1||
-     getAllProjectMilestones()[0]?.id!=="mil-au-alcoa-wagerup-groundbreaking-2026-08-24")
+     getAllProjectMilestones().length!==2||
+     getAllProjectMilestones()[0]?.id!=="mil-au-alcoa-wagerup-groundbreaking-2026-08-24"||
+     getAllProjectMilestones()[1]?.id!=="mil-ee-neo-narva-commercial-production-reported-2026")
     throw new Error("F5 local browser preview refuses unexpected publication or reviewed-outcome baseline");
   const body=renderToStaticMarkup(createElement(PrivateObservatoryReview,{model}));
   if(!body.includes('data-f5-private-review="true"')||
@@ -130,7 +131,7 @@ export async function buildF5LocalBrowserPreview():Promise<{
       "Local system font fallbacks may differ from self-hosted fonts on the live site; inspect typography again before release.",
       "SSR and Tailwind CSS compilation do not prove real browser layout, color contrast, keyboard access or screen-reader quality.",
       "The generated SHA-256 pins preview bytes, not original publisher content or an independent human review.",
-      "Only Wagerup has a source-reviewed public groundbreaking milestone; other missing reviewed evidence does not prove site inactivity.",
+      "Wagerup and Narva have separately source-reviewed public milestones; missing evidence elsewhere does not prove inactivity.",
       "All checks default not_run and must not be replaced by machine-generated human signoff.",
     ],
   };

@@ -30,7 +30,7 @@ test("records handoff belongs only to existing unsigned Thompson SEC review",()=
   assert.equal(w.proposedObservation.scope,"named_facility");
   assert.equal(w.proposedObservation.occurredOn,null);
   assert.equal(w.humanAttestationPresent,false);
-  assert.equal(getAllProjectMilestones().length,1);
+  assert.equal(getAllProjectMilestones().length,2);
 });
 
 test("official permit #2973-05 keeps source testing conditional on unverified all-nine startup",()=>{
@@ -154,7 +154,7 @@ test("private source intake and no public mutation survive a deterministic offli
   assert.match(handoff.nextUseOfRecords.reviewer,/existing M3 original-source human adjudication/);
   assert.match(handoff.nextUseOfRecords.publication,/No automatic project-milestone seed/);
   assert.equal(site.lastUpdated,"2026-10-17");
-  assert.equal(getAllProjectMilestones().length,1);
+  assert.equal(getAllProjectMilestones().length,2);
   assert.ok(decisions.every(x=>x.verdict==="pending" && x.reviewedBy===null && x.reviewedAt===null));
   const input=current(),before=JSON.stringify(input);
   assert.deepEqual(current(),current());
