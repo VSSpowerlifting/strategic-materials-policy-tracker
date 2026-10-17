@@ -111,14 +111,14 @@ test("M3 multi-review handoff rejects the same dated facility event reported by 
 
 test("real post-cutoff human review is blocked instead of quietly backdated", () => {
   const d = draft();
-  setApproved(d[1], "2026-10-10");
+  setApproved(d[1], "2026-10-18");
   const blocked = audit(d);
   assert.deepEqual(blocked.errors, []);
   assert.equal(blocked.proposals.length, 0);
   assert.match(blocked.blocked[0].reason, /requires a separately authorized site.lastUpdated revision/);
   const newCorpus = refs();
-  newCorpus.corpusCutoff = "2026-10-11"; // hypothetical future authorized corpus cutoff in this fixture only
-  setApproved(d[1], "2026-10-10", queue, newCorpus);
+  newCorpus.corpusCutoff = "2026-10-19"; // hypothetical future authorized corpus cutoff in this fixture only
+  setApproved(d[1], "2026-10-18", queue, newCorpus);
   const eligible = audit(d, newCorpus);
   assert.deepEqual(eligible.errors, []);
   assert.deepEqual(eligible.blocked, []);
@@ -284,7 +284,7 @@ test("Thompson Falls: taxonomy resolved, but only a synthetic human decision yie
   assert.equal(result.proposals[0].occurredOn, null);
   assert.match(result.proposals[0].note ?? "", /not a completed\/operating project/);
   assert.equal(getAllProjectMilestones().length, 1, "preview is not another publication");
-  setApproved(d, "2026-10-10");
+  setApproved(d, "2026-10-18");
   const staleCutoff = audit(rows);
   assert.equal(staleCutoff.proposals.length, 0);
   assert.ok(staleCutoff.blocked.some(b => b.id === d.id && /curated corpus cutoff/.test(b.reason)));
