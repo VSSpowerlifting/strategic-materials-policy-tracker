@@ -24,9 +24,27 @@ import type { PolicyEvent } from "./types";
 
 const LIST_SEP = "; ";
 
+/**
+ * A CSV field is a string to Excel, not a typed JSON property. Quoting commas
+ * and double quotes does NOT stop spreadsheet software treating text beginning
+ * with =, +, -, @ (and some full-width variants) as a formula. Prefix risky
+ * text with a tab *inside a quoted CSV cell*. That is the Excel-oriented
+ * defense described by OWASP; there is no universally safe CSV escape across
+ * every spreadsheet application.
+ *
+ * Keep literal signed decimal numbers intact, including negative amounts.
+ * The JSON export is the byte-faithful source for programmatic consumption.
+ * CSV may add a tab to risky text, so it is a spreadsheet-oriented projection.
+ */
+const FORMULA_PREFIX = /^[\\s\\u0000-\\u001f\\u007f-\\u009f]*[=+\\-@＝＋－＠]/u;
+const PLAIN_DECIMAL = /^[+-]?(?:\\d+)(?:\\.\\d+)?$/;
+
 function csvCell(v: unknown): string {
-  const s = v === null || v === undefined ? "" : String(v);
-  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  const raw = v === null || v === undefined ? "" : String(v);
+  const risk = /^[\\t\\r\\n]/.test(raw) ||
+    (FORMULA_PREFIX.test(raw) && !PLAIN_DECIMAL.test(raw));
+  const s = risk ? "\\t" + raw : raw;
+  return risk || /[",\\n\\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
 function toCsv(headers: string[], rows: unknown[][]): string {
