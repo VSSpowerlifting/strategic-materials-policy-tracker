@@ -99,7 +99,13 @@ export type F5ObservatoryScaffold = {
   };
   cohortSize: number;
   sourceReviewedCasefilesReadyForManualQa: number;
-  /** All cases must be structurally QA-eligible; even then a maintainer signs off separately. */
+  /** Pilot tranche and optional comparator are separate review workloads, never release authorization. */
+  initialPilotCasefiles: number;
+  initialPilotsReadyForManualQa: number;
+  allInitialPilotsEligibleForManualQa: boolean;
+  extendedComparatorCasefiles: number;
+  extendedComparatorsReadyForManualQa: number;
+  /** This remains a strict whole-cohort gate, including extended comparators. */
   nextGate: "source_adjudication" | "manual_source_browser_accessibility_qa";
   cases: ObservatoryCasefile[];
   allCasefilesEligibleForManualQa: boolean;
@@ -205,6 +211,20 @@ export function buildF5ObservatoryScaffold(
     };
   });
   const ready = cases.filter(c=>c.comparison.manualSourceAndBrowserQaCandidate).length;
+  const initialPilots = cases.filter(c=>c.comparison.track==="initial_pilot");
+  const comparators = cases.filter(c=>c.comparison.track==="extended_comparator");
+  const initialReady = initialPilots.filter(c=>c.comparison.manualSourceAndBrowserQaCandidate).length;
+  const comparatorReady = comparators.filter(c=>c.comparison.manualSourceAndBrowserQaCandidate).length;
+  // A caller-supplied comparator-only cohort must not yield a vacuous "all pilots ready" result.
+  // An alternate cohort containing only one or two of the canonical pilots
+  // must never claim that ALL initial pilots are QA-eligible.
+  const requiredPilotIds = F5_OBSERVATORY_COHORT
+    .filter(c => c.track === "initial_pilot").map(c => c.projectId);
+  const selectedPilotIds = new Set(initialPilots.map(c => c.comparison.projectId));
+  const allInitialPilotsEligibleForManualQa =
+    initialPilots.length === requiredPilotIds.length &&
+    requiredPilotIds.every(id => selectedPilotIds.has(id)) &&
+    initialReady === initialPilots.length;
   return {
     schemaVersion:"f5-observatory-prepublication-1",
     audience:"internal_research_and_design",
@@ -224,6 +244,11 @@ export function buildF5ObservatoryScaffold(
     },
     cohortSize:cases.length,
     sourceReviewedCasefilesReadyForManualQa:ready,
+    initialPilotCasefiles:initialPilots.length,
+    initialPilotsReadyForManualQa:initialReady,
+    allInitialPilotsEligibleForManualQa,
+    extendedComparatorCasefiles:comparators.length,
+    extendedComparatorsReadyForManualQa:comparatorReady,
     nextGate:ready===cases.length
       ? "manual_source_browser_accessibility_qa" : "source_adjudication",
     cases,
@@ -256,8 +281,12 @@ export function formatF5ObservatoryScaffold(scaffold:F5ObservatoryScaffold):stri
     "SMPT Industrial Outcome Observatory — INTERNAL PREPUBLICATION SCAFFOLD",
     "Curated corpus cutoff: "+scaffold.curatedCorpusCutoff,
     "Cohort projects: "+scaffold.cohortSize,
-    "Ready for manual source/browser QA: "+scaffold.sourceReviewedCasefilesReadyForManualQa,
-    "Next gate: "+scaffold.nextGate,
+    "Ready for manual source/browser QA (whole cohort): "+scaffold.sourceReviewedCasefilesReadyForManualQa,
+    "Initial pilots ready: "+scaffold.initialPilotsReadyForManualQa+"/"+scaffold.initialPilotCasefiles+
+      " (QA eligibility, NOT launch permission)",
+    "Extended comparators ready: "+scaffold.extendedComparatorsReadyForManualQa+
+      "/"+scaffold.extendedComparatorCasefiles,
+    "Next full-cohort gate: "+scaffold.nextGate,
     "Public release: NOT AUTHORIZED",
     "Causality or project capital sums: NOT AUTHORIZED",
     "",
