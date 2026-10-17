@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { ReviewedProjectMilestones } from "@/components/projects/reviewed-project-milestones";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
 import { ControlStatusBadge, EvidenceTable, Fact, ImplementationStatusBadge, NotStated, SourceMention } from "@/components/capital/primitives";
@@ -11,7 +12,7 @@ import { OrgList, ProgrammeLink } from "@/components/intelligence/org-link";
 import { DesignationRow } from "@/components/intelligence/designation-row";
 import { coInvestments, controlsAtProjectStages, projectStack } from "@/lib/capital-intelligence";
 import { controlIssuer, isEnded } from "@/lib/capital-control";
-import { getAllProjects, getEventById, getMaterialsByIds, getProjectById } from "@/lib/data";
+import { getAllProjectMilestones, getAllProjects, getEventById, getMaterialsByIds, getProjectById } from "@/lib/data";
 import {
   coInvestmentKindLabels,
   controlMeasureTypeLabels,
@@ -43,6 +44,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   if (!stack) notFound();
   const { project: p } = stack;
   const materials = getMaterialsByIds(p.materialIds);
+  const reviewedMilestones = getAllProjectMilestones().filter(m => m.projectId === id);
   const co = coInvestments().find((c) => c.project.id === id);
   const controls = controlsAtProjectStages(p, site.lastUpdated);
   const ended = stack.rows.filter(isEnded);
@@ -93,6 +95,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             ) : null}
             {stack.layers.length ? <LayerStack layers={stack.layers} /> : <p className="text-sm text-muted">No financial row is attributable to this project yet.</p>}
           </Section>
+
+          {reviewedMilestones.length ? (
+            <Section index={next()} title="Source-reviewed industrial observations"
+              description="Original-source claims independently assessed by a human reviewer. Reported events remain separate from financing status and are not evidence that funding caused construction or production.">
+              <ReviewedProjectMilestones milestones={reviewedMilestones} />
+            </Section>
+          ) : null}
 
           {stack.associatedRows.length ? (
             <Section
