@@ -63,9 +63,10 @@ try{
  assert.equal(await link.count(),1,"coverage links to the exact source filter");
  await link.focus();await page.keyboard.press("Enter");
  await page.waitForURL(url=>url.pathname==="/sources");
- if(orphanIds.length) await page.waitForFunction(() =>
+ if(orphanIds.length) await page.waitForFunction(expected =>
    document.querySelector("#source-cited")?.value === "not_cited" &&
-   Number(document.querySelector("[data-testid=sources-count]")?.textContent?.trim()) === orphanIds.length);
+   Number(document.querySelector("[data-testid=sources-count]")?.textContent?.trim()) === expected,
+   orphanIds.length);
  const visible=Number(await page.getByTestId("sources-count").innerText());
  assert.equal(visible,orphanIds.length||report.totals.sources,
    "browser source directory must agree with the coverage API");
