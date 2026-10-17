@@ -44,6 +44,7 @@ import {
 import { commitmentActor, controlIssuer, currentControlStatus, currentFinancialStatus } from "./capital-control";
 import { formatMoney } from "./decimal";
 
+import type { JurisdictionCode } from "./types";
 import { normalize } from "./search-core";
 import type { SearchDoc } from "./search-core";
 export { SEARCH_KINDS, normalize, searchDocs } from "./search-core";
