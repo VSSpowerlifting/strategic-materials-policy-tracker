@@ -11,9 +11,12 @@ import { CurrencyTotals } from "@/components/intelligence/totals";
 import { LayerStack } from "@/components/intelligence/layers";
 import { OrgList } from "@/components/intelligence/org-link";
 import { DesignationRow } from "@/components/intelligence/designation-row";
+import { ProgrammeResearchTrail } from "@/components/programme-research-trail";
+import { buildProgrammeTrail } from "@/lib/programme-research-trail";
+import { getSourceUses } from "@/lib/source-usage";
 import { summarizeCommitment } from "@/lib/capital-control";
 import { programmeLedger } from "@/lib/capital-intelligence";
-import { getAllProgrammes, getProgrammeById } from "@/lib/data";
+import { getAllOrganizations, getAllProjects, getAllProgrammes, getAllSources, getProgrammeById } from "@/lib/data";
 import { programmeEvidenceFieldLabels, programmeKindLabels } from "@/lib/labels";
 
 export function generateStaticParams() {
@@ -35,6 +38,11 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
   const l = programmeLedger(id);
   if (!l) notFound();
   const g = l.programme;
+  const trail = buildProgrammeTrail(l, {
+    organisations: getAllOrganizations(), projects: getAllProjects(),
+    programmes: getAllProgrammes(),
+    sourceEntries: getAllSources().map(source => ({source, uses: getSourceUses(source.id)})),
+  });
   let n = 0;
   const next = () => String(++n).padStart(2, "0");
 
@@ -55,6 +63,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="min-w-0 space-y-12">
+          <ProgrammeResearchTrail trail={trail} />
           {l.envelopes.length ? (
             <Section index={next()} title="Ceilings" description="Envelopes, appropriations and lending authorities. Listed, never summed, and never divided into the awards below.">
               <Card className="overflow-hidden">
