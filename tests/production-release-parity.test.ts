@@ -12,7 +12,7 @@ function healthyHttp(e:ExpectedPublicRelease):PublicHttpFetcher {
     if(path==="/api/v1/project-milestones")
       return {status:200,body:structuredClone(e.milestones)};
     if(path==="/api/export/dataset.json")
-      return {status:200,body:structuredClone(e.dataset)};
+      return {status:200,body:JSON.parse(JSON.stringify(e.dataset))};
     const p=e.projects.find(x=>path==="/api/v1/projects/"+encodeURIComponent(x.id));
     if(p)return {status:200,body:{
       reviewedProjectMilestones:structuredClone(p.milestones),
@@ -49,7 +49,7 @@ test("production serving the previous pre-API build is detected without claiming
   const r=await checkPublicReleaseParity(e,async path=>{
     if(path==="/api/v1/project-milestones")return {status:404,body:null};
     if(path==="/api/export/dataset.json"){
-      const dataset=structuredClone(e.dataset) as Record<string,unknown>;
+      const dataset=JSON.parse(JSON.stringify(e.dataset)) as Record<string,unknown>;
       delete dataset.projectMilestones;
       return {status:200,body:dataset};
     }
