@@ -98,7 +98,7 @@ test("F5 Observatory: an artificial reviewed physical row advances only Narva to
     statementEn:"Synthetic only",statementEnSource:"na",
     reviewedBy:"synthetic test reviewer; not an actual person",reviewedAt:"2026-10-07",
   };
-  const r=build({...data,milestones:[synthetic]});
+  const r=build({...data,milestones:[...data.milestones,synthetic]});
   const narva=r.cases.find(x=>x.comparison.projectId===synthetic.projectId)!;
   assert.equal(narva.comparison.registeredReviewedOccurredClaims,1);
   assert.equal(narva.comparison.manualSourceAndBrowserQaCandidate,true);
