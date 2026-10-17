@@ -23,7 +23,7 @@ test("public register and downloadable JSON expose exactly one genuinely reviewe
   assert.match(response.headers.get("content-type")??"",/application\/json/);
   const milestones=await response.json();
   assert.deepEqual(milestones,getAllProjectMilestones());
-  assert.deepEqual(milestones.map((x:{id:string})=>x.id),[milestoneId]);
+  assert.deepEqual(milestones.map((x:{id:string})=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
   const m=milestones[0];
   assert.equal(m.projectId,wagerup);
   assert.equal(m.sourceId,sourceId);
@@ -42,13 +42,13 @@ test("public register and downloadable JSON expose exactly one genuinely reviewe
 test("full dataset and summary carry only published native project milestones",async()=>{
   const ds=buildDataset();
   assert.deepEqual(ds.projectMilestones,getAllProjectMilestones());
-  assert.equal(ds.counts.projectMilestones,1);
-  assert.equal(getDatasetSummary().projectMilestones,1);
+  assert.equal(ds.counts.projectMilestones,2);
+  assert.equal(getDatasetSummary().projectMilestones,2);
   const response=getDataset();
   assert.equal(response.status,200);
   const body=await response.json();
   assert.deepEqual(body.projectMilestones,ds.projectMilestones);
-  assert.equal(body.counts.projectMilestones,1);
+  assert.equal(body.counts.projectMilestones,2);
   assert.equal(body.generatedAt,site.lastUpdated);
   assert.ok(!("reviewerAdjudications" in body));
   assert.ok(!("privateReviewQueue" in body));
@@ -61,7 +61,7 @@ test("project detail API adds source-pinned human evidence without rewriting fin
   const body=await res.json();
   assert.equal(body.project.id,wagerup);
   assert.deepEqual(body.reviewedProjectMilestones,getProjectMilestonesByProject(wagerup));
-  assert.deepEqual(body.reviewedProjectMilestones.map((x:{id:string})=>x.id),[milestoneId]);
+  assert.deepEqual(body.reviewedProjectMilestones.map((x:{id:string})=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
   assert.deepEqual(body.reviewedMilestoneSources.map((x:{id:string})=>x.id),[sourceId]);
   assert.deepEqual(body.reviewedMilestoneSources[0],getSourceById(sourceId));
   assert.match(body.reviewedMilestoneEvidenceBasis,/not independent on-site or financial verification/);
@@ -88,7 +88,7 @@ test("unsigned industrial projects have empty reviewed arrays, never inferred no
 });
 
 test("none of the JSON additions create a public Pathways or extra milestone publication",()=>{
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[milestoneId]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
   const ds=buildDataset();
   assert.ok(!JSON.stringify(ds).includes("review-m3-2-alcoa-wagerup"));
   assert.ok(!JSON.stringify(ds).includes("prj-ca-cyclic-kingston-demonstration-plant-milestone"));

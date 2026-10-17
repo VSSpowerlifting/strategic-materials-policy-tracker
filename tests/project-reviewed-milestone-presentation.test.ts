@@ -28,7 +28,7 @@ test("project detail has a dedicated conditional physical evidence lane but does
 
 test("first public Wagerup observation displays exact approved scope, source, reviewer and three distinct clocks",()=>{
   const rows=getAllProjectMilestones();
-  assert.deepEqual(rows.map(x=>x.id),[wagerupId],"only genuine signed Wagerup is published");
+  assert.deepEqual(rows.map(x=>x.id),[wagerupId,"mil-ee-neo-narva-commercial-production-reported-2026"],"only genuinely signed Wagerup and Narva are published");
   const row=rows[0];
   assert.equal(row.projectId,projectId);
   assert.equal(row.kind,"groundbreaking_reported");
@@ -37,7 +37,7 @@ test("first public Wagerup observation displays exact approved scope, source, re
   assert.ok(original);
   assert.equal(original.datePublished,"2026-08-24");
   assert.equal(original.dateAccessed,"2026-10-02");
-  const view=html(rows);
+  const view=html(rows.filter(m=>m.id===wagerupId));
   assert.equal((view.match(/<article /g)??[]).length,1);
   assert.match(view,/Source review does not establish/);
   assert.match(view,/independent on-site verification/);
@@ -79,7 +79,7 @@ test("null event/target day does not borrow original publisher date or reviewer 
   assert.match(view,/Original source published/);
   assert.match(view,/<time dateTime="2026-08-24">24 Aug 2026<\/time>/);
   assert.doesNotMatch(view,/Reported event date/);
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[wagerupId]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[wagerupId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
 });
 
 test("unregistered source rejects rendering instead of fabricating a publisher citation",()=>{

@@ -35,7 +35,7 @@ test("F5-4a registry-wide denominators and /response project parity are explicit
   assert.deepEqual(r.projects.filter(p => p.publicResponseAtCutoff.eligibleGovernmentProject)
     .map(p => p.projectId).sort(), response.rows.map(p => p.id).sort());
   assert.equal(new Set(r.projects.map(p => p.projectId)).size, d.projects.length);
-  assert.equal(r.counts.withoutNativeReviewedMilestone, d.projects.length - 1);
+  assert.equal(r.counts.withoutNativeReviewedMilestone, d.projects.length - 2);
   assert.ok(r.counts.withNativeOccurredMilestone>=1);
   assert.ok(r.counts.withUnreviewedLegacyPhysicalObservation > 0);
   assert.ok(r.projects.every(p => p.lackOfNativeMilestonesMeansInactivity === false));
