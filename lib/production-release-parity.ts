@@ -77,7 +77,8 @@ export async function checkPublicReleaseParity(
       return;
     }
     if(mode==="exact"){
-      if(!isDeepStrictEqual(result.body,expectedPayload))
+      // Compare JSON as a wire format: undefined JS properties are omitted by Next.Response JSON serialization.
+      if(!isDeepStrictEqual(result.body,JSON.parse(JSON.stringify(expectedPayload))))
         issues.push({endpoint:path,code:"payload_mismatch",
           detail:"Production JSON differs from this checked-out repo's published seed/export schema"});
       return;
