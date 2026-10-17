@@ -122,7 +122,7 @@ export function buildGuidedPrivateDecisions(
     exampleDecisions.some((d,i)=>d.id!==queue[i].id || d.verdict!=="pending" ||
       d.reviewedAt!==null || d.reviewedBy!==null || d.reviewInputDigestSha256!==null))
     throw new Error("Private session must begin with the canonical all-pending template; existing historical decisions must not be overwritten");
-  const decisions=structuredClone(exampleDecisions);
+  const decisions: SourceReviewDecision[] = structuredClone([...exampleDecisions]);
   const target=decisions.find(d=>d.id===id);
   if(!target)throw new Error("Cannot locate selected template row");
   Object.assign(target,{
