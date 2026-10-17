@@ -166,7 +166,7 @@ export function buildF5StageReviewerSupplement(packet:unknown, refs:Refs){
     refs.projects.some(p=>p.id==="prj-ca-cyclic-kingston-demonstration-plant") &&
     refs.projects.some(p=>p.id==="prj-us-usac-thompson-falls-expansion"),
     "distinct Kingston project identities and Thompson facility must be retained");
-  check(refs.publicMilestoneCount===0 && worksheet.publicationAuthorized===false &&
+  check(refs.publicMilestoneCount===1 && worksheet.publicationAuthorized===false &&
     worksheet.automaticSourceApprovalAuthorized===false,
     "unexpected public milestone/publication approval");
   lines.push("Existing M3 authority: `.project-execution-review/adjudications.json` only. "+

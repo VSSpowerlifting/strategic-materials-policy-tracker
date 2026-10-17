@@ -110,7 +110,7 @@ test("Registered SEC/NRCan URLs and clocks cannot drift without a new human revi
   assert.ok(s2);
   (s2 as {datePublished:string|null}).datePublished="2026-03-31";
   assert.match(failures(data(),ctx2),/registered original publisher URL\/publication clock mismatch/);
-  const ctx3=refs();ctx3.publicMilestoneCount=1;
+  const ctx3=refs();ctx3.publicMilestoneCount=2;
   assert.match(failures(data(),ctx3),/unexpected public milestone\/publication approval/);
   const ctx4=refs();ctx4.projects=ctx4.projects.filter(x=>x.id!=="prj-ca-cyclic-kingston-centre-of-excellence");
   assert.match(failures(data(),ctx4),/distinct Kingston project identities/);

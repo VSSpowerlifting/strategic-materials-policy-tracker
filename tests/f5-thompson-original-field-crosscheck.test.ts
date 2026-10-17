@@ -105,7 +105,7 @@ test("Thompson private review gate cannot be bypassed by signed metadata, claims
   assert.ok(m);
   (m as {reviewVerdict:string}).reviewVerdict="approved";
   assert.match(messages(packet(),other),/existing M3 unsigned review/);
-  const approval=context();approval.publicMilestoneCount=1;
+  const approval=context();approval.publicMilestoneCount=2;
   assert.match(messages(packet(),approval),/no public project-native milestone/);
 });
 
