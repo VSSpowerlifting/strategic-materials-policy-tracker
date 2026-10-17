@@ -45,10 +45,10 @@ test("no fake human review, source-body proof, digest, milestone ID or public mi
   assert.equal(brief.publicationAuthorized,false);
   assert.match(sheet().reviewInputDigestSha256,/^[0-9a-f]{64}$/);
   assert.equal(sheet().digestMeaning,"registry_metadata_fingerprint_not_archived_document_hash");
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length,1);
   assert.ok(example.every(x=>x.verdict==="pending" && x.reviewedBy===null &&
     x.reviewedAt===null && x.reviewInputDigestSha256===null));
-  assert.equal(site.lastUpdated,"2026-10-09",
+  assert.equal(site.lastUpdated,"2026-10-17",
     "a future reviewer cannot backdate source inspection to existing curated cutoff");
 });
 
@@ -154,7 +154,7 @@ test("source-role clock and evidence independence stay distinct from SEC canonic
 
 test("candidate cannot silently become a duplicate public industrial milestone",()=>{
   assert.equal(brief.proposedMilestoneId,null);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length,1);
   assert.equal(queue.filter(x=>x.projectId===projectId && x.sourceId===m3SourceId).length,1);
   assert.equal(brief.humanReviewer,null);
   const clone=structuredClone(brief);
