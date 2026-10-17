@@ -1,0 +1,726 @@
+{
+  "schemaVersion": "f5-1-industrial-evidence-pilot-chronology-v1",
+  "researchedOn": "2026-10-16",
+  "corpusCutoff": "2026-10-09",
+  "authority": "public_evidence_navigation_only",
+  "humanReceiptsPresent": false,
+  "originalBodiesAuthenticatedByHuman": false,
+  "publicationAuthorized": false,
+  "dispositionLabels": [
+    "Resolved and source-supported",
+    "Conditionally supportable with a specified caveat",
+    "Awaiting human review",
+    "Taxonomy blocked",
+    "Missing original documentation",
+    "Contradicted or unsupported"
+  ],
+  "cases": [
+    {
+      "reviewId": "review-m3-2-alcoa-wagerup",
+      "projectId": "prj-au-alcoa-sojitz-gallium",
+      "canonicalSourceId": "src-alcoa-wagerup-groundbreaking-2026",
+      "m3": {
+        "kind": "construction_started",
+        "scope": "named_facility",
+        "scopeAsStated": "gallium production plant co-located at Alcoa’s Wagerup alumina refinery",
+        "claimMode": "occurred",
+        "occurredOn": "2026-08-24",
+        "gate": "human_source_review",
+        "reviewInputDigestSha256": "90e165224587e2d87d05b6a0216a0cc0e94dff50eac87719c2d14f048928b3a9"
+      },
+      "financeRefs": [
+        "fin-au-alcoa-sojitz-gallium-2025-equity",
+        "fin-au-alcoa-sojitz-gallium-2025-offtake-right",
+        "fin-us-alcoa-sojitz-gallium-2025-equity"
+      ],
+      "financeNote": "Three financing rows describe one physical ceremony. They create no additional milestone, no drawdown and no causal claim; each row keeps its own status history.",
+      "disposition": "Conditionally supportable with a specified caveat",
+      "dispositionCaveat": "Supportable only as one 2026-08-24 named-facility event; the reviewer must choose construction_started (issuer wording) or groundbreaking_reported (ministerial wording) and must not infer commissioning, output or disbursement.",
+      "adjudicationQuestion": "Does the issuer's statement that the 24 August 2026 ceremony marked the start of construction support construction_started for the Wagerup gallium facility, or should the record use groundbreaking_reported because the government release describes only a first sod turned?",
+      "leads": [
+        {
+          "key": "issuer_groundbreaking_release",
+          "role": "original_issuer_statement",
+          "registeredSourceId": "src-alcoa-wagerup-groundbreaking-2026",
+          "publisher": "Alcoa Corporation",
+          "title": "Australia, Japan, the United States and Alcoa Break Ground on Gallium Project in Western Australia",
+          "url": "https://news.alcoa.com/press-releases/press-release-details/2026/Australia-Japan-the-United-States-and-Alcoa-Break-Ground-on-Gallium-Project-in-Western-Australia/default.aspx",
+          "publishedOn": "2026-08-24",
+          "accessedOn": "2026-10-02",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "event",
+          "timeAsStated": "2026-08-24",
+          "dateMeaning": "issuer_reported_ceremony_day_marking_construction_start",
+          "locator": "Opening news paragraph after 08/24/2026 date",
+          "quote": "The ceremony marked the start of construction of the new facility",
+          "finding": "Alcoa says the 24 August 2026 ceremony marked the start of construction of the facility co-located at its Wagerup alumina refinery.",
+          "limitation": "A ceremony described by the issuer is not evidence of sustained site works, financial drawdown, commissioning or output."
+        },
+        {
+          "key": "ministerial_first_sod_release",
+          "role": "original_government_statement",
+          "registeredSourceId": null,
+          "publisher": "Ministers for the Department of Industry, Science and Resources",
+          "title": "Ground broken on landmark gallium project",
+          "url": "https://www.minister.industry.gov.au/king/media/ground-broken-landmark-gallium-project",
+          "publishedOn": "2026-08-24",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "event",
+          "timeAsStated": "2026-08-24",
+          "dateMeaning": "government_reported_first_sod_turned_same_day",
+          "locator": "Paragraph 1",
+          "quote": "the first sod has been turned on the Alcoa-Sojitz Gallium Recovery Project",
+          "finding": "The joint ministerial release independently reports the same-day first-sod event, naming it the Alcoa-Sojitz Gallium Recovery Project.",
+          "limitation": "Not registered in sources.json; a first-sod event is a groundbreaking, and the release does not itself say construction began."
+        },
+        {
+          "key": "ministerial_supply_aspiration",
+          "role": "original_government_statement",
+          "registeredSourceId": null,
+          "publisher": "Ministers for the Department of Industry, Science and Resources",
+          "title": "Ground broken on landmark gallium project",
+          "url": "https://www.minister.industry.gov.au/king/media/ground-broken-landmark-gallium-project",
+          "publishedOn": "2026-08-24",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "aspiration",
+          "timeAsStated": "future_unspecified",
+          "dateMeaning": "forward_looking_supply_share_statement",
+          "locator": "Body paragraph on expected supply",
+          "quote": "up to 10 per cent of the world's gallium supply",
+          "finding": "Ministers describe the project's potential share of world gallium supply.",
+          "limitation": "An upper-bound aspiration is not output, capacity achieved or a market-share estimate the tracker may record."
+        },
+        {
+          "key": "jogmec_final_investment_decision",
+          "role": "original_government_agency_statement",
+          "registeredSourceId": null,
+          "publisher": "Japan Organization for Metals and Energy Security (JOGMEC)",
+          "title": "Final Investment Decision for Gallium Production Project in Australia",
+          "url": "https://www.jogmec.go.jp/english/news/release/release_00445.html",
+          "publishedOn": "2026-07-15",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "official",
+          "assertionType": "event",
+          "timeAsStated": "by_2026-07-15",
+          "dateMeaning": "investment_decision_announcement_not_construction",
+          "locator": "Opening paragraph; Japanese original at release_01306.html",
+          "quote": "has made a final investment decision",
+          "finding": "JOGMEC announces a final investment decision on the Wagerup gallium production project about five weeks before the ceremony.",
+          "limitation": "An investment decision is neither construction nor disbursement; the English page is JOGMEC's own translation of the Japanese release."
+        },
+        {
+          "key": "issuer_q3_2026_results",
+          "role": "original_issuer_statement",
+          "registeredSourceId": null,
+          "publisher": "Alcoa Corporation",
+          "title": "Alcoa Corporation Reports Third Quarter 2026 Results",
+          "url": "https://news.alcoa.com/press-releases/press-release-details/2026/Alcoa-Corporation-Reports-Third-Quarter-2026-Results/default.aspx",
+          "publishedOn": "2026-10-15",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "state",
+          "timeAsStated": "2026-Q3",
+          "dateMeaning": "post_cutoff_quarterly_report",
+          "locator": "Not verified",
+          "quote": null,
+          "finding": "Post-cutoff quarterly release; its gallium content was not verified against the full page in this pass.",
+          "limitation": "Published after the 2026-10-09 corpus cutoff; it cannot support any disposition until a human reads it and a cutoff advance is approved."
+        }
+      ],
+      "discrepancies": [
+        {
+          "topic": "Ceremony wording: construction start versus first sod",
+          "disposition": "Conditionally supportable with a specified caveat",
+          "leadKeys": [
+            "issuer_groundbreaking_release",
+            "ministerial_first_sod_release"
+          ],
+          "justification": "Both originals date the event to 2026-08-24; only the issuer calls it a construction start, so the kind is a reviewer choice."
+        },
+        {
+          "topic": "Three financing rows, one physical event",
+          "disposition": "Resolved and source-supported",
+          "leadKeys": [
+            "issuer_groundbreaking_release"
+          ],
+          "justification": "Multiple financers do not create multiple milestones; the validator's duplicate-event rule enforces one dated event."
+        },
+        {
+          "topic": "JOGMEC final investment decision versus construction",
+          "disposition": "Resolved and source-supported",
+          "leadKeys": [
+            "jogmec_final_investment_decision",
+            "issuer_groundbreaking_release"
+          ],
+          "justification": "The 15 July decision and the 24 August ceremony are distinct events; the decision is not a construction milestone."
+        },
+        {
+          "topic": "Gallium Recovery Project name versus gallium production plant",
+          "disposition": "Conditionally supportable with a specified caveat",
+          "leadKeys": [
+            "ministerial_first_sod_release",
+            "issuer_groundbreaking_release"
+          ],
+          "justification": "Both name the Wagerup co-located gallium facility; keep the issuer's scopeAsStated and note the ministerial name."
+        },
+        {
+          "topic": "Up to 10 per cent of world supply as an outcome",
+          "disposition": "Contradicted or unsupported",
+          "leadKeys": [
+            "ministerial_supply_aspiration"
+          ],
+          "justification": "The statement is an aspiration; no source evidences that share or any output."
+        },
+        {
+          "topic": "Commissioning or production after the ceremony",
+          "disposition": "Missing original documentation",
+          "leadKeys": [
+            "issuer_q3_2026_results"
+          ],
+          "justification": "No pre-cutoff original reports commissioning or output; the only later lead is post-cutoff and unread."
+        }
+      ]
+    },
+    {
+      "reviewId": "review-m3-2-neo-narva-magnets",
+      "projectId": "prj-ee-neo-rare-earth-magnet-project",
+      "canonicalSourceId": "src-neo-commercial-production-2026",
+      "m3": {
+        "kind": "production_reported",
+        "scope": "named_facility",
+        "scopeAsStated": "initial commercial rare-earth sintered magnet production programs at Neo's European permanent magnet facility in Narva, Estonia",
+        "claimMode": "occurred",
+        "occurredOn": null,
+        "gate": "human_source_review",
+        "reviewInputDigestSha256": "1823c880ee6ea65ca6cff11a9184e5e57c306b44868a8a1cb699174fc3869e53"
+      },
+      "financeRefs": [
+        "fin-eu-jtf-2025-neo-magnet-project"
+      ],
+      "financeNote": "Just Transition Fund co-funding is a financing fact only; it is not evidence that EU money caused production or was disbursed.",
+      "disposition": "Awaiting human review",
+      "dispositionCaveat": "The issuer-reported commercial-production state is undated; the reviewer must confirm the 14 September 2026 wording and keep occurredOn null.",
+      "adjudicationQuestion": "Does Neo's 14 September 2026 statement that Narva is in commercial production support an undated production_reported observation, distinct from 2025 qualification-sample production and from the full commercial ramp Neo still described as planned on 11 August 2026?",
+      "leads": [
+        {
+          "key": "issuer_opening_release",
+          "role": "original_issuer_statement",
+          "registeredSourceId": null,
+          "publisher": "Neo Performance Materials",
+          "title": "Neo opens state-of-the-art magnet facility in Europe",
+          "url": "https://www.neomaterials.com/neo-opens-state-of-the-art-magnet-facility-europe/",
+          "publishedOn": "2025-09-22",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "state",
+          "timeAsStated": "2025-05_to_2025-09-21",
+          "dateMeaning": "operational_since_month_and_inauguration_day",
+          "locator": "Quoted remarks of the European Commission President",
+          "quote": "Operational since May and formally inaugurated yesterday",
+          "finding": "The opening release reports the plant operational since May 2025, formally inaugurated the day before, and shipping qualification sample magnets.",
+          "limitation": "May is a month only; qualification-sample production is not commercial production; the page was modified on 2026-05-19, so the reviewed version must be confirmed."
+        },
+        {
+          "key": "issuer_capacity_statement",
+          "role": "original_issuer_statement",
+          "registeredSourceId": null,
+          "publisher": "Neo Performance Materials",
+          "title": "Neo opens state-of-the-art magnet facility in Europe",
+          "url": "https://www.neomaterials.com/neo-opens-state-of-the-art-magnet-facility-europe/",
+          "publishedOn": "2025-09-22",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "target",
+          "timeAsStated": "future_unspecified",
+          "dateMeaning": "projected_annual_capacity",
+          "locator": "Facility description paragraph",
+          "quote": "projected to produce 2,000 mt/year",
+          "finding": "Neo describes projected Phase 1 annual capacity.",
+          "limitation": "Projected capacity is not measured output and cannot become an occurred milestone."
+        },
+        {
+          "key": "issuer_q2_2026_results",
+          "role": "original_issuer_statement",
+          "registeredSourceId": null,
+          "publisher": "Neo Performance Materials",
+          "title": "Neo Performance Materials Reports Second Quarter 2026 Results",
+          "url": "https://www.neomaterials.com/neo-performance-materials-reports-second-quarter-2026-results/",
+          "publishedOn": "2026-08-11",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "target",
+          "timeAsStated": "later_in_2026",
+          "dateMeaning": "planned_full_commercial_ramp",
+          "locator": "Section headed European Permanent Magnet Facility Advances Toward Commercial Production",
+          "quote": "planned ramp up to full commercial production later this year",
+          "finding": "On 11 August 2026 Neo still described full commercial production as planned and qualification samples as shipping.",
+          "limitation": "A planned ramp is a target; it bounds the earliest public commercial-production statement but gives no event day."
+        },
+        {
+          "key": "issuer_commercial_production_release",
+          "role": "original_issuer_statement",
+          "registeredSourceId": "src-neo-commercial-production-2026",
+          "publisher": "Neo Performance Materials",
+          "title": "Neo Advances to Commercial Production at European Facility",
+          "url": "https://www.neomaterials.com/neo-advances-commercial-production-magnet-facility/",
+          "publishedOn": "2026-09-14",
+          "accessedOn": "2026-10-02",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "state",
+          "timeAsStated": "as_of_2026-09-14",
+          "dateMeaning": "issuer_reported_state_start_day_unknown",
+          "locator": "Issuer announcement September 14, 2026; opening body paragraph",
+          "quote": "is in commercial production and shipping volumes of rare earth sintered magnets",
+          "finding": "Neo states the Narva facility is in commercial production and shipping volumes of sintered magnets.",
+          "limitation": "The release date is not the day production began; it does not say full commercial production or quantify output."
+        },
+        {
+          "key": "issuer_annual_information_form_2026",
+          "role": "original_issuer_filing",
+          "registeredSourceId": "src-neo-aif-2026",
+          "publisher": "Neo Performance Materials Inc.",
+          "title": "Annual Information Form for the year ended December 31, 2025",
+          "url": "https://www.neomaterials.com/wp-content/uploads/2026/03/NPM-AIF-2026.pdf",
+          "publishedOn": "2026-03-01",
+          "accessedOn": "2026-10-02",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "target",
+          "timeAsStated": "2026",
+          "dateMeaning": "annual_filing_reports_milestone_and_2026_target",
+          "locator": "Narva facility discussion",
+          "quote": null,
+          "finding": "The annual information form reports the facility's one-millionth magnet in February 2026 and a 2026 commercial-production target.",
+          "limitation": "Exact wording was not re-verified for quotation in this pass; a target year is not an occurred event."
+        }
+      ],
+      "discrepancies": [
+        {
+          "topic": "Operational since May 2025 versus commercial production in 2026",
+          "disposition": "Resolved and source-supported",
+          "leadKeys": [
+            "issuer_opening_release",
+            "issuer_q2_2026_results",
+            "issuer_commercial_production_release"
+          ],
+          "justification": "The sources describe distinct states: qualification-sample operation from 2025 and commercial production reported by 14 September 2026."
+        },
+        {
+          "topic": "Commercial versus full commercial production; transition day unknown",
+          "disposition": "Awaiting human review",
+          "leadKeys": [
+            "issuer_q2_2026_results",
+            "issuer_commercial_production_release"
+          ],
+          "justification": "The transition falls between 11 August and 14 September 2026 with no stated day; occurredOn must stay null and the reviewer must not equate it with full ramp."
+        },
+        {
+          "topic": "Projected 2,000 t/yr capacity as output",
+          "disposition": "Contradicted or unsupported",
+          "leadKeys": [
+            "issuer_capacity_statement"
+          ],
+          "justification": "Projected capacity is a target and no source reports measured output."
+        },
+        {
+          "topic": "Just Transition Fund co-funding as a cause of production",
+          "disposition": "Contradicted or unsupported",
+          "leadKeys": [
+            "issuer_opening_release"
+          ],
+          "justification": "Co-funding is a financing statement; no source attributes production to the fund or evidences disbursement."
+        },
+        {
+          "topic": "Opening page modified after publication",
+          "disposition": "Awaiting human review",
+          "leadKeys": [
+            "issuer_opening_release"
+          ],
+          "justification": "The 2025 page shows a 2026-05-19 modification; a reviewer must confirm the quoted wording against an archived or current version."
+        }
+      ]
+    },
+    {
+      "reviewId": "review-m3-2-stibnite-burntlog",
+      "projectId": "prj-us-stibnite",
+      "canonicalSourceId": "src-perpetua-stibnite-construction-2026",
+      "m3": {
+        "kind": "construction_started",
+        "scope": "named_infrastructure",
+        "scopeAsStated": "Burntlog Route access road and associated 2026 critical-path works",
+        "claimMode": "occurred",
+        "occurredOn": "2026-05-30",
+        "gate": "taxonomy_blocked",
+        "reviewInputDigestSha256": "fc8173070df8e47266c660e5c3279b3da6c02e86124c7ab8de2d72d52ea29ebc"
+      },
+      "financeRefs": [
+        "fin-us-dod-perpetua-stibnite-dpa",
+        "fin-us-exim-perpetua-stibnite-2026"
+      ],
+      "financeNote": "Both financing rows cite this source for context. Neither a 2022 Defense Production Act award nor a 2026 EXIM board approval is evidence of drawdown for, or causation of, the Burntlog works.",
+      "disposition": "Taxonomy blocked",
+      "dispositionCaveat": "named_infrastructure is not a canonical milestone scope; no approval can proceed until the maintainer decides how site-access infrastructure is scoped.",
+      "adjudicationQuestion": "After a taxonomy decision, does Perpetua's statement that it commenced additional critical-path construction on 30 May 2026 support a dated start of Burntlog Route infrastructure works, kept separate from the October 2025 early-works start and from full mine construction?",
+      "leads": [
+        {
+          "key": "issuer_construction_release",
+          "role": "original_issuer_statement",
+          "registeredSourceId": "src-perpetua-stibnite-construction-2026",
+          "publisher": "Perpetua Resources Corp.",
+          "title": "Perpetua Resources Advances Construction of the Stibnite Gold Project",
+          "url": "https://www.investors.perpetuaresources.com/investors/news/perpetua-resources-advances-construction-of-the-stibnite-gold-project",
+          "publishedOn": "2026-06-01",
+          "accessedOn": "2026-10-02",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "event",
+          "timeAsStated": "2026-05-30",
+          "dateMeaning": "issuer_stated_event_day",
+          "locator": "June 1 announcement, first paragraph following project update introduction",
+          "quote": "On Saturday, May 30, Perpetua commenced additional critical path construction activities",
+          "finding": "Perpetua states that critical-path construction for the 2026 field season, including the Burntlog Route, commenced on 30 May 2026.",
+          "limitation": "The event day is stated by the issuer; the release date is 1 June. Additional critical-path work is not full mine construction."
+        },
+        {
+          "key": "issuer_construction_release_schedule",
+          "role": "original_issuer_statement",
+          "registeredSourceId": null,
+          "publisher": "Perpetua Resources",
+          "title": "Perpetua Resources Advances Construction of the Stibnite Gold Project (PDF)",
+          "url": "https://perpetuaresources.com/wp-content/uploads/Perpetua-Resources-Advances-Construction-of-the-Stibnite-Gold-Project_June-1-2026.pdf",
+          "publishedOn": "2026-06-01",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "target",
+          "timeAsStated": "2029",
+          "dateMeaning": "planned_operations_year",
+          "locator": "Body paragraph on schedule",
+          "quote": "maintaining construction schedule for 2029 operations",
+          "finding": "Perpetua states a 2029 operations target.",
+          "limitation": "A target year is planned, never an occurred milestone."
+        },
+        {
+          "key": "issuer_8k_june_2026",
+          "role": "original_issuer_sec_filing",
+          "registeredSourceId": null,
+          "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+          "title": "Form 8-K (June 2026)",
+          "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465926068574/tm2616463d1_8k.htm",
+          "publishedOn": "2026-06-01",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "event",
+          "timeAsStated": "2025-10",
+          "dateMeaning": "filing_confirms_earlier_early_works_start_month",
+          "locator": "Exhibit press release text",
+          "quote": "builds upon the early works construction Perpetua began in October 2025",
+          "finding": "The filing frames the May 2026 work as building on early works that began in October 2025.",
+          "limitation": "Confirms sequence only; it does not itself date the early-works start to a day."
+        },
+        {
+          "key": "issuer_q2_2026_10q",
+          "role": "original_issuer_sec_filing",
+          "registeredSourceId": "src-perpetua-sec-2026-q2",
+          "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+          "title": "Perpetua Resources Corp., Form 10-Q for the quarter ended June 30, 2026",
+          "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465926097134/ppta-20260630x10q.htm",
+          "publishedOn": null,
+          "accessedOn": "2026-10-02",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "state",
+          "timeAsStated": "as_of_2026-06-30",
+          "dateMeaning": "quarterly_filing_registry_publication_date_not_recorded",
+          "locator": "Management's discussion; project update and liquidity",
+          "quote": "does not intend to commence full construction on the Project until full financing",
+          "finding": "The 10-Q reports Burntlog Route work began 30 May 2026, early works began in October 2025, and full construction awaits full financing and a final investment decision targeted for H2 2026.",
+          "limitation": "The registry has no publication date (EDGAR filing date not recorded), so the evidence boundary is the 2026-10-02 access date."
+        },
+        {
+          "key": "exim_board_minutes",
+          "role": "original_government_record",
+          "registeredSourceId": "src-exim-stibnite-board-2026",
+          "publisher": "Export-Import Bank of the United States",
+          "title": "EXIM Board Meeting Minutes — May 21, 2026",
+          "url": "https://www.exim.gov/news/minutes/board-meeting-minutes-2026-05-21",
+          "publishedOn": "2026-05-21",
+          "accessedOn": "2026-10-02",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "event",
+          "timeAsStated": "2026-05-21",
+          "dateMeaning": "board_authorization_not_execution",
+          "locator": "Board action on Perpetua Resources",
+          "quote": null,
+          "finding": "EXIM's board acted on Perpetua financing nine days before the Burntlog works began.",
+          "limitation": "A board approval is an authorization, not an executed loan or disbursement; exact wording not re-verified for quotation."
+        }
+      ],
+      "discrepancies": [
+        {
+          "topic": "named_infrastructure is not a canonical scope",
+          "disposition": "Taxonomy blocked",
+          "leadKeys": [
+            "issuer_construction_release"
+          ],
+          "justification": "PROJECT_MILESTONE_SCOPES contains only whole_project, named_facility and funded_activity; a maintainer decision is required."
+        },
+        {
+          "topic": "Burntlog start as the project's first construction start",
+          "disposition": "Contradicted or unsupported",
+          "leadKeys": [
+            "issuer_8k_june_2026",
+            "issuer_q2_2026_10q"
+          ],
+          "justification": "Both filings place early works in October 2025, before the May 2026 Burntlog works."
+        },
+        {
+          "topic": "Full mine construction started",
+          "disposition": "Contradicted or unsupported",
+          "leadKeys": [
+            "issuer_q2_2026_10q"
+          ],
+          "justification": "The 10-Q states full construction will not begin until full financing is in place."
+        },
+        {
+          "topic": "EXIM approval and DPA award as drawdown for these works",
+          "disposition": "Contradicted or unsupported",
+          "leadKeys": [
+            "exim_board_minutes"
+          ],
+          "justification": "A board approval is not execution or disbursement, and no source ties either instrument's money to the Burntlog works."
+        },
+        {
+          "topic": "2029 operations",
+          "disposition": "Resolved and source-supported",
+          "leadKeys": [
+            "issuer_construction_release_schedule"
+          ],
+          "justification": "Recorded only as a planned target; it never becomes an occurred milestone."
+        }
+      ]
+    },
+    {
+      "reviewId": "review-m3-2-stibnite-early-works",
+      "projectId": "prj-us-stibnite",
+      "canonicalSourceId": "src-perpetua-stibnite-early-works-2025",
+      "m3": {
+        "kind": "construction_started",
+        "scope": "whole_project",
+        "scopeAsStated": null,
+        "claimMode": "occurred",
+        "occurredOn": "2025-10-21",
+        "gate": "taxonomy_blocked",
+        "reviewInputDigestSha256": "a0339c5102b805339ea05d611de54f1bed67692adca8c9a396c1b19b8db82836"
+      },
+      "financeRefs": [],
+      "financeNote": "No financing row is linked. Posted financial assurance is a permit obligation funded by the company, not an EXIM disbursement or government capital.",
+      "disposition": "Taxonomy blocked",
+      "dispositionCaveat": "whole_project could imply full mine construction; the event is early works only and needs a scoped classification decision first.",
+      "adjudicationQuestion": "After a taxonomy decision, does Perpetua's CEO statement that early works construction started on 21 October 2025 support a dated early-works start for the Stibnite Gold Project, without implying that full mine or processing-facility construction began?",
+      "leads": [
+        {
+          "key": "issuer_early_works_release",
+          "role": "original_issuer_statement",
+          "registeredSourceId": "src-perpetua-stibnite-early-works-2025",
+          "publisher": "Perpetua Resources",
+          "title": "Perpetua Resources Breaks Ground on the Stibnite Gold Project",
+          "url": "https://perpetuaresources.com/perpetua-resources-breaks-ground-on-the-stibnite-gold-project/",
+          "publishedOn": "2025-10-21",
+          "accessedOn": "2026-10-09",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "event",
+          "timeAsStated": "2025-10-21",
+          "dateMeaning": "issuer_stated_same_day_event",
+          "locator": "October 21, 2025 original issuer release, attributed CEO Jon Cherry quote, paragraph 2",
+          "quote": "we officially started early works construction today",
+          "finding": "Perpetua's CEO says early works construction officially started on the release day.",
+          "limitation": "Early works are a limited workstream, not full mine construction; 'today' ties the event to the 21 October release by the issuer's own statement, not by inference."
+        },
+        {
+          "key": "issuer_financial_assurance_pdf",
+          "role": "original_issuer_statement",
+          "registeredSourceId": null,
+          "publisher": "Perpetua Resources",
+          "title": "Perpetua Resources Breaks Ground on the Stibnite Gold Project (PDF)",
+          "url": "https://perpetuaresources.com/wp-content/uploads/Perpetua-Resources-Breaks-Ground-on-the-Stibnite-Gold-Project_Oct-21-2025-vFINAL-v2.pdf",
+          "publishedOn": "2025-10-21",
+          "accessedOn": "2026-10-16",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "event",
+          "timeAsStated": "2025-10-17",
+          "dateMeaning": "issuer_reported_assurance_posting_day",
+          "locator": "Body paragraph on financial assurance",
+          "quote": "posted $139 million in construction phase financial assurance",
+          "finding": "The PDF release reports that Perpetua posted construction-phase financial assurance on 17 October 2025, secured with corporate cash.",
+          "limitation": "Issuer statement only; the agency acceptance records are not in the corpus, and the 10-Q describes a requirement of about $160 million."
+        },
+        {
+          "key": "issuer_q2_2026_10q_approvals",
+          "role": "original_issuer_sec_filing",
+          "registeredSourceId": "src-perpetua-sec-2026-q2",
+          "publisher": "Perpetua Resources Corp. / U.S. Securities and Exchange Commission (EDGAR)",
+          "title": "Perpetua Resources Corp., Form 10-Q for the quarter ended June 30, 2026",
+          "url": "https://www.sec.gov/Archives/edgar/data/1526243/000110465926097134/ppta-20260630x10q.htm",
+          "publishedOn": null,
+          "accessedOn": "2026-10-02",
+          "language": "en",
+          "translation": "na",
+          "assertionType": "state",
+          "timeAsStated": "2025-09_to_2025-10",
+          "dateMeaning": "filing_reports_approvals_and_early_works_month",
+          "locator": "Project permitting and litigation discussion",
+          "quote": null,
+          "finding": "The 10-Q reports agency approvals on 20-21 September 2025, early works from October 2025 under agency authorization, and a preliminary-injunction motion that excluded early works.",
+          "limitation": "Paraphrase from a full read during research; exact passages need human re-verification before quotation; registry publication date is null."
+        }
+      ],
+      "discrepancies": [
+        {
+          "topic": "whole_project scope for an early-works start",
+          "disposition": "Taxonomy blocked",
+          "leadKeys": [
+            "issuer_early_works_release"
+          ],
+          "justification": "The issuer reports only early works; the canonical whole_project scope risks implying full mine construction."
+        },
+        {
+          "topic": "Approval, assurance posting and early-works start on three different days",
+          "disposition": "Conditionally supportable with a specified caveat",
+          "leadKeys": [
+            "issuer_q2_2026_10q_approvals",
+            "issuer_financial_assurance_pdf",
+            "issuer_early_works_release"
+          ],
+          "justification": "Approvals (20-21 September), posting (17 October) and start (21 October) are distinct; only the start is an execution milestone."
+        },
+        {
+          "topic": "$139 million posted versus about $160 million required",
+          "disposition": "Missing original documentation",
+          "leadKeys": [
+            "issuer_financial_assurance_pdf",
+            "issuer_q2_2026_10q_approvals"
+          ],
+          "justification": "Reconciling posted and required assurance needs the agency bonding records, which are not in the corpus."
+        },
+        {
+          "topic": "Financial assurance as an EXIM disbursement",
+          "disposition": "Contradicted or unsupported",
+          "leadKeys": [
+            "issuer_financial_assurance_pdf"
+          ],
+          "justification": "The issuer says the assurance was secured with corporate cash; it is not government capital."
+        }
+      ]
+    }
+  ],
+  "stibniteChronology": [
+    {
+      "part": 1,
+      "label": "Agency approvals",
+      "timeAsStated": "2025-09-20_to_2025-09-21",
+      "assertionType": "event",
+      "leadKeys": [
+        "issuer_q2_2026_10q_approvals"
+      ],
+      "finding": "Federal and state approvals that authorized limited early works.",
+      "limitation": "Approval is permission, not construction.",
+      "mapsToReviewId": null
+    },
+    {
+      "part": 2,
+      "label": "Construction-phase financial assurance posted",
+      "timeAsStated": "2025-10-17",
+      "assertionType": "event",
+      "leadKeys": [
+        "issuer_financial_assurance_pdf"
+      ],
+      "finding": "Perpetua reports posting construction-phase financial assurance with corporate cash.",
+      "limitation": "Posted amount versus requirement awaits original agency records; not government capital.",
+      "mapsToReviewId": null
+    },
+    {
+      "part": 3,
+      "label": "Early works construction begins",
+      "timeAsStated": "2025-10-21",
+      "assertionType": "event",
+      "leadKeys": [
+        "issuer_early_works_release",
+        "issuer_8k_june_2026"
+      ],
+      "finding": "Issuer-stated start of the limited early-works workstream.",
+      "limitation": "Not full mine construction; taxonomy decision pending.",
+      "mapsToReviewId": "review-m3-2-stibnite-early-works"
+    },
+    {
+      "part": 4,
+      "label": "Litigation leaves early works in place",
+      "timeAsStated": "2026-05-29_to_2026-06-17",
+      "assertionType": "state",
+      "leadKeys": [
+        "issuer_q2_2026_10q"
+      ],
+      "finding": "A preliminary-injunction motion that excluded early works was denied, and the appeals court denied a stay.",
+      "limitation": "Litigation status is context, not an execution milestone; the appeal continues.",
+      "mapsToReviewId": null
+    },
+    {
+      "part": 5,
+      "label": "Federal finance context",
+      "timeAsStated": "2022-12-19_and_2026-05-21",
+      "assertionType": "event",
+      "leadKeys": [
+        "exim_board_minutes"
+      ],
+      "finding": "A 2022 Defense Production Act award and a May 2026 EXIM board approval are the federal finance context recorded in the capital layer.",
+      "limitation": "Narrative only: neither is attributed to a specific workstream, and a board approval is not an executed loan.",
+      "mapsToReviewId": null
+    },
+    {
+      "part": 6,
+      "label": "Burntlog Route critical-path works begin",
+      "timeAsStated": "2026-05-30",
+      "assertionType": "event",
+      "leadKeys": [
+        "issuer_construction_release",
+        "issuer_q2_2026_10q"
+      ],
+      "finding": "Issuer-stated start of the 2026 field-season critical-path works, including the Burntlog Route.",
+      "limitation": "Site-access infrastructure, not an operating facility; taxonomy decision pending.",
+      "mapsToReviewId": "review-m3-2-stibnite-burntlog"
+    },
+    {
+      "part": 7,
+      "label": "Full construction and operations remain targets",
+      "timeAsStated": "target_2026-H2_and_2029",
+      "assertionType": "target",
+      "leadKeys": [
+        "issuer_q2_2026_10q",
+        "issuer_construction_release_schedule"
+      ],
+      "finding": "Full construction awaits full financing and a final investment decision targeted for H2 2026; operations are targeted for 2029.",
+      "limitation": "Targets never become occurred milestones by the passage of time.",
+      "mapsToReviewId": null
+    }
+  ],
+  "smallestHumanDecisionSet": [
+    "Four M3 adjudications recorded locally by a named human reviewer against the current worksheet digests, including the Wagerup choice between construction_started and groundbreaking_reported.",
+    "One maintainer taxonomy decision covering Stibnite early works and Burntlog Route site-access infrastructure.",
+    "Separate approval of a site.lastUpdated corpus-cutoff advance, because any real review is dated after 2026-10-09."
+  ]
+}
