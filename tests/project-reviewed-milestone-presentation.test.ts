@@ -92,5 +92,5 @@ test("Wagerup source dossier's milestone citation leads to the project detail no
   const refs=getSourceUses(sourceId).filter(x=>x.kind==="milestone");
   assert.equal(refs.length,1);
   assert.equal(refs[0].id,wagerupId);
-  assert.equal(refs[0].href,"/projects/"+projectId);
+  assert.equal(refs[0].href,"/projects/"+projectId+"#milestone-"+wagerupId);
 });
