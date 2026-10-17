@@ -125,7 +125,7 @@ test("static page uses published projections, deep-linked selectors, source link
   assert.match(component,/project-comparison-results/);
   assert.match(component,/lg:grid-cols-2/);
   assert.match(component,/\/sources\//);
-  assert.match(component,/\/capital\//);
+  assert.match(component,/kind="capital"/);
   assert.match(index,/href="\/projects\/compare"/);
   assert.match(sitemap,/entry\("\/projects\/compare"/);
   assert.doesNotMatch(page+model,/research\/f5|data\/candidates|private-review/);
