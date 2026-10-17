@@ -74,7 +74,7 @@ test("filtering never mutates data or publishes private milestone review",()=>{
  const rows=directory(),original=structuredClone(rows);
  filterSourceDirectory(rows,{q:"China",publication:"undated",citingKind:"capital"});
  assert.deepEqual(rows,original);
- assert.equal(filterSourceDirectory(rows,{citingKind:"milestone"}).length,1);
+ assert.equal(filterSourceDirectory(rows,{citingKind:"milestone"}).length,2);
 });
 test("source page statically includes full directory with accessible and shareable filters",async()=>{
  const {readFile}=await import("node:fs/promises");

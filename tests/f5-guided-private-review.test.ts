@@ -15,7 +15,8 @@ const narva="review-m3-2-neo-narva-magnets";
 const records=queue as PendingProjectExecutionRow[];
 const refs=():GuidedReviewRefs=>({
   projects:getAllProjects(),sources:getAllSources(),commitments:getAllFinancialCommitments(),
-  currentPublicMilestones:getAllProjectMilestones(),currentPublicCutoff:site.lastUpdated,
+  // Historical pre-Narva fixture for nonpublishing review construction tests only.
+  currentPublicMilestones:getAllProjectMilestones().filter(m=>m.id!=="mil-ee-neo-narva-commercial-production-reported-2026"),currentPublicCutoff:site.lastUpdated,
 });
 const choices=(over:Partial<HumanReviewInput>={}):HumanReviewInput=>({
   verdict:"approved",reviewedBy:"SYNTHETIC REGRESSION TEST (not a real reviewer)",
@@ -41,7 +42,8 @@ test("review session always uses one canonical gitignored per-candidate path",()
 });
 
 test("one already published Wagerup is unavailable for accidental second review",()=>{
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.throws(()=>prepareGuidedReview(records,{...refs(),currentPublicMilestones:getAllProjectMilestones()},narva,"2026-10-17"),/Already published/);
   assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-alcoa-wagerup","2026-10-17"),/Already published/);
   assert.equal(site.lastUpdated,"2026-10-17");
 });
