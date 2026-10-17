@@ -25,3 +25,11 @@ No published financial, source, milestone, programme, agency, original-document,
 ## Release after deployment capacity returns
 
 Review branch against current main, open PR, require exact-head tests and Vercel green preview, then merge. Existing PR #162 and #160 release blockers should be resolved on their own merits before combining new code.
+
+## Follow-on: exact registered-organization relationship search
+
+The search server now resolves only canonical `providerOrgIds`, `recipientOrgIds`, `sponsorOrgIds` and `administeringOrgIds` against published organization records. It adds exact registered organization names, original-language names, and aliases to their directly linked finance/project/programme search text. Project and programme subtitles explicitly label **registered sponsor** and **registered administrator** where present, so users can tell why an organization-name query returned those records. The organization record remains linked via its existing own search result.
+
+No government ownership, financed project allocation, legal obligation, disbursement, source corroboration or project milestone is inferred. Project search records intentionally retain `jurisdiction=null`, even for sponsors with a government designation. Missing organization IDs fail closed during static index generation. These new relations are text-discovery metadata only and do not alter published seeds or finance counts.
+
+Three focused regression cases use Umicore (Belgian projects), Cyclic Materials Inc. alias, METI/JOGMEC and European Commission administering schemes, and the Arafura financial row to ensure named organizations map to actual registered links rather than lookalike text or inferred public spending.

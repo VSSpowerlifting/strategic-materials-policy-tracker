@@ -55,6 +55,23 @@ const join = (...parts: (string | null | undefined)[]) => normalize(parts.filter
 export function buildSearchIndex(): SearchDoc[] {
   const docs: SearchDoc[] = [];
 
+  // Entity names are indexed ONLY when a record declares the exact canonical
+  // organization ID. Searching a name does not infer finance, ownership or
+  // government affiliation. Unresolved links are corrupt registry references.
+  const organizations = getAllOrganizations();
+  const organizationById = new Map(organizations.map((o) => [o.id, o]));
+  if (organizationById.size !== organizations.length)
+    throw new Error("Duplicate organization in search index");
+  const linkedOrganizations = (ids: readonly string[], recordId: string) =>
+    ids.map((id) => {
+      const org = organizationById.get(id);
+      if (!org) throw new Error("Unresolved organization " + id + " in search record " + recordId);
+      return org;
+    });
+  const organizationTerms = (ids: readonly string[], recordId: string) =>
+    linkedOrganizations(ids, recordId)
+      .flatMap((o) => [o.name, o.nameOriginal ?? "", ...o.aliases]).join(" ");
+
   for (const e of getAllEvents()) {
     docs.push({
       id: e.id,
@@ -115,17 +132,21 @@ export function buildSearchIndex(): SearchDoc[] {
         c.programmeId ? getProgrammeById(c.programmeId)?.name : null,
         c.projectId ? getProjectById(c.projectId)?.name : null,
         (c.associatedProjectIds ?? []).map((id) => getProjectById(id)?.name).filter(Boolean).join(" "),
+        // Explicit canonical provider/recipient links; not inferred from free text.
+        organizationTerms([...c.providerOrgIds, ...c.recipientOrgIds], c.id),
       ),
     });
   }
 
-  // v0.6 registries: a company, agency or mine finds its own profile.
+  // v0.6 registries: only source-linked sponsor IDs supply names/aliases.
   for (const p of getAllProjects()) {
+    const sponsors = linkedOrganizations(p.sponsorOrgIds, p.id);
+    const sponsorLabel = sponsors.map(o => o.name).join(", ");
     docs.push({
       id: p.id,
       kind: "project",
       title: p.name,
-      subtitle: `Project · ${[...p.locations.map((l) => l.asStated ?? l.countryCode), ...p.stages.map((s) => supplyChainStageLabels[s])].filter(Boolean).join(" · ")}`,
+      subtitle: `Project · ${[...p.locations.map((l) => l.asStated ?? l.countryCode), ...p.stages.map((s) => supplyChainStageLabels[s])].filter(Boolean).join(" · ")}${sponsors.length ? ` · Registered sponsor: ${sponsorLabel}` : ""}`,
       href: `/projects/${p.id}`,
       date: null,
       jurisdiction: null,
@@ -138,11 +159,12 @@ export function buildSearchIndex(): SearchDoc[] {
         p.materialIds.join(" "),
         p.untrackedMaterialsAsStated.join(" "),
         p.sponsorOrgIds.join(" "),
+        organizationTerms(p.sponsorOrgIds, p.id),
       ),
     });
   }
 
-  for (const o of getAllOrganizations()) {
+  for (const o of organizations) {
     docs.push({
       id: o.id,
       kind: "organization",
@@ -158,16 +180,18 @@ export function buildSearchIndex(): SearchDoc[] {
   }
 
   for (const g of getAllProgrammes()) {
+    const administrators = linkedOrganizations(g.administeringOrgIds, g.id);
     docs.push({
       id: g.id,
       kind: "programme",
       title: g.name,
-      subtitle: `Programme · ${jurisdictionLabels[g.actor]} · ${programmeKindLabels[g.kind]}`,
+      subtitle: `Programme · ${jurisdictionLabels[g.actor]} · ${programmeKindLabels[g.kind]}${administrators.length ? ` · Registered administrator: ${administrators.map(o => o.name).join(", ")}` : ""}`,
       href: `/programmes/${g.id}`,
       date: null,
       jurisdiction: g.actor,
       mechanisms: null,
-      haystack: join(g.id, g.name, g.nameOriginal, g.legalAuthorityAsStated, g.notes, programmeKindLabels[g.kind]),
+      haystack: join(g.id, g.name, g.nameOriginal, g.legalAuthorityAsStated, g.notes,
+        programmeKindLabels[g.kind], organizationTerms(g.administeringOrgIds, g.id)),
     });
   }
 

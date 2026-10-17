@@ -97,3 +97,40 @@ test("search interface exposes accessible browse shortcuts, full-record counts, 
  assert.match(page,/Search strategic-material policy/);
  assert.match(page,/original-language text/);
 });
+
+test("registered sponsor names and aliases retrieve real linked projects, never implied financing",()=>{
+ const ids=(q:string)=>searchDocs(docs,q).filter(d=>d.kind==="project").map(d=>d.id);
+ assert.ok(ids("Umicore").includes("prj-be-gepeto"));
+ assert.ok(ids("Umicore").includes("prj-be-regain"));
+ assert.ok(ids("Cyclic Materials Inc.").includes("prj-ca-cyclic-kingston-demonstration-plant"));
+ assert.ok(!ids("Umicore").includes("prj-au-nolans"),
+  "Unrelated Australian project cannot inherit sponsor search tokens");
+ const result=docs.find(d=>d.id==="prj-au-nolans"&&d.kind==="project")!;
+ assert.match(result.subtitle,/Registered sponsor: Arafura Rare Earths Limited/);
+ assert.equal(result.jurisdiction,null,
+  "project sponsor affiliation is not an issuing-government filter");
+});
+
+test("source-named programme administrators are searchable without reclassifying programme roles",()=>{
+ const hits=(q:string)=>searchDocs(docs,q).filter(d=>d.kind==="programme");
+ const grants=hits("Japan Organization for Metals and Energy Security");
+ assert.ok(grants.some(d=>d.id==="prg-jp-jogmec-critical-minerals-grants"));
+ assert.ok(grants.every(d=>d.jurisdiction!==null));
+ const eu=hits("European Commission");
+ assert.ok(eu.some(d=>d.id==="prg-eu-crma-strategic-projects"));
+ const programme=docs.find(d=>d.id==="prg-us-chips-incentives"&&d.kind==="programme")!;
+ assert.match(programme.subtitle,/Registered administrator: U.S. Department of Commerce/);
+});
+
+test("financial record matching uses only explicitly coded provider and recipient organizations",()=>{
+ const hits=searchDocs(docs,"Arafura Rare Earths")
+  .filter(d=>d.kind==="capital").map(d=>d.id);
+ assert.ok(hits.includes("fin-au-arafura-nolans-2025-equity"));
+ const a=docs.find(d=>d.id==="fin-au-arafura-nolans-2025-equity"&&d.kind==="capital")!;
+ assert.match(a.subtitle,/Commitment/);
+ assert.equal(a.jurisdiction,"australia");
+ // Indexing an explicitly named recipient does not change capital-source
+ // accounting or reassign a shared instrument to its associated projects.
+ const original=getAllFinancialCommitments().find(x=>x.id===a.id)!;
+ assert.deepEqual(original.recipientOrgIds,["org-arafura-rare-earths"]);
+});
