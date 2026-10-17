@@ -93,9 +93,10 @@ test("never backdate a source review to fit an already published cutoff",()=>{
 
 test("public corpus/source/finance or worksheet changes invalidate previously copied metadata fingerprint",()=>{
   const old=choices().manuallyCopiedDigest;
-  const changed:GuidedReviewRefs={...refs(),currentPublicMilestones:[]};
-  assert.notEqual(prepareGuidedReview(records,changed,narva,"2026-10-17").worksheet.reviewInputDigestSha256,old);
-  assert.throws(()=>review({manuallyCopiedDigest:old},template as unknown as SourceReviewDecision[],changed),/fingerprint differs/);
+  // The digest deliberately pins cutoff, queue, publisher, project and finance metadata,
+  // NOT the independently displayed count of previously published milestones.
+  assert.notEqual(prepareGuidedReview(records,refs(),narva,"2026-10-18").worksheet.reviewInputDigestSha256,old);
+  assert.throws(()=>review({manuallyCopiedDigest:old},template as unknown as SourceReviewDecision[],refs(),"2026-10-18"),/fingerprint differs/);
   const modified=structuredClone(records);
   modified.find(x=>x.id===narva)!.statementOriginal="Synthetic altered issuer statement";
   assert.notEqual(prepareGuidedReview(modified,refs(),narva,"2026-10-17").worksheet.reviewInputDigestSha256,old);
