@@ -325,6 +325,7 @@ export function getDatasetSummary() {
     projects: projects.length,
     programmes: programmes.length,
     projectDesignations: projectDesignations.length,
+    projectMilestones: projectMilestones.length,
   };
 }
 

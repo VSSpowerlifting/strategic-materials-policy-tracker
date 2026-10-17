@@ -13,7 +13,7 @@ const downloads = [
     file: "smpt-dataset.json",
     href: "/api/export/dataset.json",
     fmt: "JSON",
-    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions, sources, financial commitments, control measures, organizations, projects, programmes and project designations, plus the capital-and-control and capital-intelligence summaries, counts and the data notice.",
+    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions, sources, financial commitments, control measures, organizations, projects, programmes, project designations and source-reviewed project milestones, plus the capital-and-control and capital-intelligence summaries, counts and the data notice.",
   },
   {
     file: "smpt-financial-commitments.csv",
@@ -44,6 +44,12 @@ const downloads = [
     href: "/api/export/programmes.csv",
     fmt: "CSV",
     desc: "One row per named programme or scheme: its government, kind, administering bodies, parent programme, legal authority, and the rows and designations recorded under it.",
+  },
+  {
+    file: "smpt-project-milestones.json",
+    href: "/api/v1/project-milestones",
+    fmt: "JSON",
+    desc: "The public human-reviewed industrial milestone register, retaining named-facility scope, original publisher statement, pinpoint, event or target date, and real reviewer attribution. Source review is not proof of facility operation or government disbursement.",
   },
   {
     file: "smpt-project-designations.csv",
@@ -112,7 +118,7 @@ export default function DataPage() {
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
         sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses ·{" "}
         {s.organizations} organizations · {s.projects} projects · {s.programmes} programmes ·{" "}
-        {s.projectDesignations} project designations.
+        {s.projectDesignations} project designations · {s.projectMilestones} reviewed industrial milestones.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
