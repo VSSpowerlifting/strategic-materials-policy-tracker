@@ -10,6 +10,7 @@ import {
 import { site } from "@/lib/site";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import { rehearseF5Release } from "../scripts/f5-release-rehearsal";
+import type { SourceReviewDecision } from "../scripts/adjudicate-project-execution";
 
 const proposed = "2026-10-17";
 const corpus = () => ({
@@ -27,7 +28,9 @@ const worksheet = (cutoff:string,id:string) => buildM3ReviewerPackets(queue, {
 }, id).worksheets[0];
 
 function syntheticDecision(id:string, cutoff:string=proposed) {
-  const decisions = structuredClone(example);
+  // Public example intentionally infers null-only fields; simulated approvals
+  // exist in memory exclusively and use the real M3 decision shape.
+  const decisions = structuredClone(example) as unknown as SourceReviewDecision[];
   const x=decisions.find(d=>d.id===id);
   assert.ok(x);
   x.verdict="approved";
