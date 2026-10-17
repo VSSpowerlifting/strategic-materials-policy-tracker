@@ -125,7 +125,7 @@ export function buildSourceUseIndex(corpus: PublishedSourceRecords): Map<string,
   }
   for (const m of corpus.milestones)
     add(m.sourceId, "milestone", m.id, m.scopeAsStated ?? m.projectId,
-      "/projects/" + m.projectId, "Human-reviewed physical milestone");
+      "/projects/" + m.projectId + "#milestone-" + m.id, "Human-reviewed physical milestone");
 
   const order = new Map(SOURCE_USE_KINDS.map((kind, i) => [kind, i]));
   const sorted = new Map<string, SourceUse[]>();
