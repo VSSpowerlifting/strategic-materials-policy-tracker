@@ -16,7 +16,7 @@ const input = (): PathwayInputs => structuredClone({
   sources: getAllSources(),
 });
 
-test("F5-2: gallium casefile joins three finance rows but no independently reviewed physical milestone yet", () => {
+test("F5-2: gallium casefile joins three finance rows but one independently reviewed ceremonial milestone, no production or cash attribution", () => {
   const data = input(), id = "prj-au-alcoa-sojitz-gallium";
   const r = buildProjectEvidencePathway(id, data);
   assert.equal(r.schemaVersion, "f5-2");
@@ -25,8 +25,8 @@ test("F5-2: gallium casefile joins three finance rows but no independently revie
   assert.equal(r.historicalCapitalTotals, "not_authorized");
   assert.equal(r.project.id, id);
   assert.deepEqual(r.project.materialIds, ["gallium"]);
-  assert.equal(r.reviewGaps.nativePhysical, "no_reviewed_milestones");
-  assert.deepEqual(r.nativeMilestones, []);
+  assert.equal(r.reviewGaps.nativePhysical, "reviewed_milestones_present");
+  assert.deepEqual(r.nativeMilestones.map(m=>m.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
   assert.equal(r.reviewGaps.absenceMeansInactivity, false);
   assert.equal(r.reviewGaps.directFinanceCount, 3);
   assert.equal(new Set(r.financing.map(f=>f.id)).size, 3);
