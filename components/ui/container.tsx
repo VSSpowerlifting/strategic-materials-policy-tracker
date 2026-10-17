@@ -93,21 +93,21 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={cn("scroll-mt-20", className)}>
+    <section className={cn("scroll-mt-24", className)}>
       {title ? (
-        <div className="mb-4 border-b border-border pb-2">
-          <div className="flex items-end gap-3">
+        <div className="mb-5 border-b border-border-strong pb-3">
+          <div className="flex items-baseline gap-3">
             {index ? (
-              <span className="tnum font-display text-2xl font-bold leading-none text-foreground">
+              <span className="tnum shrink-0 font-mono text-sm font-semibold text-accent">
                 {index}
               </span>
             ) : null}
             <div>
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+              <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-[1.375rem]">
                 {title}
               </h2>
               {description ? (
-                <p className="mt-0.5 text-sm leading-6 text-faint">{description}</p>
+                <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p>
               ) : null}
             </div>
           </div>
