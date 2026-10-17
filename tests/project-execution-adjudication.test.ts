@@ -55,7 +55,7 @@ test("approved Alcoa produces only a non-publishing, independently validated pre
   assert.deepEqual(r.blocked, []);
   assert.equal(r.proposals.length, 1);
   assert.equal(r.proposals[0].projectId, "prj-au-alcoa-sojitz-gallium");
-  assert.equal(r.proposals[0].kind, "construction_started");
+  assert.equal(r.proposals[0].kind, "groundbreaking_reported");
   assert.equal(r.proposals[0].occurredOn, "2026-08-24");
   assert.equal(r.proposals[0].sourceId, "src-alcoa-wagerup-groundbreaking-2026");
   assert.equal(getAllProjectMilestones().length, 0);
@@ -76,7 +76,7 @@ test("M3 multi-review handoff rejects the same dated facility event reported by 
   references.sources.push({
     ...originalSource,
     id: corroboratingRow.sourceId,
-    title: "Synthetic corroborating account of the same Wagerup construction start",
+    title: "Synthetic corroborating account of the same Wagerup reported groundbreaking",
     url: "https://example.org/independent-wagerup-fixture",
   });
 

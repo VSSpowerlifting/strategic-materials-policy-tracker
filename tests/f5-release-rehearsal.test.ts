@@ -57,7 +57,7 @@ test("real published corpus and unsigned canonical examples remain blocked from 
   assert.equal(JSON.stringify(corpus()),before,"never mutate public seed records");
 });
 
-test("hypothetical human-approved Wagerup construction can advance ONLY structural manual-QA candidacy",()=>{
+test("hypothetical human-approved Wagerup groundbreaking can advance ONLY structural manual-QA candidacy",()=>{
   const decisions=syntheticDecision("review-m3-2-alcoa-wagerup");
   const before=JSON.stringify(corpus());
   const r=rehearseF5Release(queue,decisions,corpus(),site.lastUpdated,proposed);
