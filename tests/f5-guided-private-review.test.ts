@@ -113,7 +113,7 @@ test("never overwrite or launder earlier original human decision into another re
 });
 
 test("CI and noninteractive pipes cannot create fake source-review decisions",()=>{
-  const id="review-m3-2-neo-narva-magnets";
+  const id="review-m3-2-cyclic-extended-operations";
   const run=spawnSync(process.execPath,["--import","tsx","scripts/run-f5-guided-private-review.ts","--id",id,"--proposed-cutoff","2026-10-17"],{
     encoding:"utf8",input:"approved\nSYNTHETIC\n2026-10-17\ny\ny\ny\ny\ny\nshortcut\n",
   });
