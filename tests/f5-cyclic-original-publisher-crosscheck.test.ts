@@ -38,7 +38,7 @@ test("Cyclic F5-5 original publisher crosscheck: source-registered, unsigned and
     "single_federal_reporting_chain_no_independent_physical_inspection");
   assert.equal(research.reportedCompletionMonth,"2026-03");
   assert.equal(research.occurredOn,null);
-  assert.equal(getAllProjectMilestones().length, 1);
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("Cyclic F5-5 crosscheck uses existing human M3 authority and one funded-activity boundary", () => {

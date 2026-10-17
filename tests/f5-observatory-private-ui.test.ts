@@ -39,7 +39,7 @@ test("O3: the private Observatory renders actual project cohort without a public
   assert.ok(!existsSync("app/pathways/page.tsx"));
   assert.ok(!nav.some(x=>/observatory|casefile/i.test(x.href+" "+x.label)));
   assert.ok(!headerNav.some(x=>/observatory|casefile/i.test(x.href+" "+x.label)));
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
   assert.equal(count(h,'<article id="f5-case-'),4);
   for(const c of m.cases) {
     assert.ok(h.includes('id="f5-case-'+c.comparison.projectId+'"'),c.comparison.projectId);
@@ -70,9 +70,9 @@ test("O3: accessible semantic table, native links, responsive classes and unique
 
 test("O3: distinguish missing reviewed evidence from no industrial activity or project failure",()=>{
   const h=html(),m=model();
-  assert.equal(m.sourceReviewedCasefilesReadyForManualQa,1);
-  assert.equal(count(h,"No reviewed occurred physical milestone is registered."),3);
-  assert.equal(count(h,"No source-reviewed occurred physical milestone has entered the project-native register."),3);
+  assert.equal(m.sourceReviewedCasefilesReadyForManualQa,2);
+  assert.equal(count(h,"No reviewed occurred physical milestone is registered."),2);
+  assert.equal(count(h,"No source-reviewed occurred physical milestone has entered the project-native register."),2);
   assert.ok(count(h,"Missing a recorded reference is not proof of real-world inactivity.")>0);
   assert.match(h,/No reviewed occurred claim registered/);
   assert.match(h,/no reviewed occurred physical milestone/i);
@@ -124,7 +124,7 @@ test("O3: reviewed occurred test fixture shows issuer evidence with unknown day,
   assert.match(h,/Source pinpoint: TEST synthetic source pinpoint/);
   assert.match(h,/not independent on-site verification/);
   assert.equal(preview.publicReleaseAuthorized,false);
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
 });
 
 test("O3: private renderer refuses public-ready models or unsafe primary-source URLs",()=>{

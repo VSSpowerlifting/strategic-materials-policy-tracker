@@ -25,9 +25,10 @@ if (args.length > 0 && !(args.length === 1 && args[0] === "--json")) {
   });
   // Fail closed: review queue cannot replace or populate the public milestone seed.
   const live=getAllProjectMilestones();
-  if(live.length!==1||live[0]?.id!=="mil-au-alcoa-wagerup-groundbreaking-2026-08-24"||
+  if(live.length!==2||live[0]?.id!=="mil-au-alcoa-wagerup-groundbreaking-2026-08-24"||
+     live[1]?.id!=="mil-ee-neo-narva-commercial-production-reported-2026"||
      live[0]?.kind!=="groundbreaking_reported"){
-    r.errors.push("M3.2 audit requires exactly the human-reviewed Wagerup milestone; do not promote any queued peers");
+    r.errors.push("M3.2 audit requires exactly the human-reviewed Wagerup and Narva milestones; do not promote additional queued peers");
   }
   process.stdout.write(formatPilotAudit(r));
   if (r.errors.length > 0) process.exitCode = 1;

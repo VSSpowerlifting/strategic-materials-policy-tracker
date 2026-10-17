@@ -39,7 +39,7 @@ function artificialMilestone(overrides: Partial<ProjectMilestone> = {}): Project
   };
 }
 
-test("F5-3a: Wagerup source-reviewed but casefile remains PRIVATE; Narva and Stibnite unsigned", () => {
+test("F5-3a: Wagerup and Narva reviewed while remaining casefile claims stay private", () => {
   const data = corpus();
   const original = JSON.stringify(data);
   for (const projectId of F5_PILOT_PROJECT_IDS) {
@@ -59,6 +59,12 @@ test("F5-3a: Wagerup source-reviewed but casefile remains PRIVATE; Narva and Sti
       ]);
       assert.equal(draft.lanes.physical.occurredEvidence,"registered_reviewed_claims");
       assert.equal(draft.lanes.physical.occurred[0].kind,"groundbreaking_reported");
+    }else if(projectId==="prj-ee-neo-rare-earth-magnet-project"){
+      assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,true);
+      assert.deepEqual(draft.lanes.physical.occurred.map(x=>x.id),["mil-ee-neo-narva-commercial-production-reported-2026"]);
+      assert.equal(draft.lanes.physical.occurred[0].kind,"production_reported");
+      assert.equal(draft.lanes.physical.occurred[0].occurredOn,null);
+      assert.equal(draft.lanes.physical.occurredEvidence,"registered_reviewed_claims");
     }else{
       assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,false);
       assert.ok(draft.readiness.blockers.some(x=>x.includes("project-native")));
