@@ -31,7 +31,8 @@ export default function ProjectsPage() {
       description={`${rows.length} distinct registered undertakings, not an exhaustive census of industrial projects.`}>
       <ProjectsExplorer rows={rows} materialNames={materialNames}/>
       <p className="mt-6 text-sm text-muted">
-        Download: <a href="/api/export/projects.csv" className="text-accent hover:text-accent-strong">Project CSV</a>
+        Compare: <Link href="/projects/compare" className="text-accent hover:text-accent-strong">Two-project evidence comparison</Link>
+        {" · "}Download: <a href="/api/export/projects.csv" className="text-accent hover:text-accent-strong">Project CSV</a>
         {" · "}<Link href="/api/v1/projects" prefetch={false} className="text-accent hover:text-accent-strong">Project JSON API</Link>
         {" · "}<Link href="/response" className="text-accent hover:text-accent-strong">Government financing and reported physical status</Link>
       </p>

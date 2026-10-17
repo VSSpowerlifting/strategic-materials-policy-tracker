@@ -1,0 +1,44 @@
+name: Project comparison Chromium QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/project-comparison-browser-qa.yml"
+      - "scripts/qa-project-comparison-browser.mjs"
+      - "app/projects/compare/**"
+      - "components/project-comparison.tsx"
+      - "lib/project-comparison.ts"
+      - "lib/project-directory.ts"
+      - "lib/industrial-response.ts"
+      - "lib/capital-control.ts"
+      - "lib/data.ts"
+      - "data/seed/**"
+      - "app/globals.css"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-comparison-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compare:
+    name: Responsive project comparisons and source boundaries
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: node scripts/qa-project-comparison-browser.mjs
+      - run: test -z "$(git status --porcelain)"
