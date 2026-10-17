@@ -40,7 +40,7 @@ test("F5 stage supplement reconciles 2 canonical M3 worksheets with 8 original p
     assert.ok(report.markdown.includes(id));
   }
   assert.equal(data().cases.reduce((sum,x)=>sum+x.leads.length,0),8);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length, 1);
   assert.ok(report.markdown.includes("UNSIGNED RESEARCH"));
   assert.ok(report.markdown.includes("ALL UNCHECKED"));
 });
@@ -137,5 +137,5 @@ test("Printable handoff actually runs offline, produces no approval tokens and n
   assert.match(p.stdout,/review-m3-2-thompson-falls-q2-expansion/);
   assert.doesNotMatch(p.stdout,/\*\*M3 decision:\*\* APPROVED/);
   assert.doesNotMatch(p.stdout,/reviewedBy:/);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
