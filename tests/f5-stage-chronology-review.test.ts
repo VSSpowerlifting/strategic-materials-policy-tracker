@@ -57,6 +57,22 @@ test("Thompson chronology separates 2025 construction, May 2026 commissioning, Q
   assert.ok(c.checksBeforeDecision.some(x=>x.includes("$27M parent")));
 });
 
+test("Thompson handoff opens the complete issuer PDF instead of its empty web wrapper",()=>{
+  const pdf="https://usantimony.com/wp-content/uploads/2026/06/2026-0609_Smelter-Status.pdf";
+  const wrapper="https://usantimony.com/press-release/united-states-antimony-corporation-provides-status-update-on-new-antimony-smelter/";
+  const report=run();
+  assert.ok(report.markdown?.includes("]("+pdf+")"));
+  assert.ok(!report.markdown?.includes(wrapper));
+  const lead=data().cases[0].leads[1];
+  assert.equal(lead.registeredSourceId,null,"supplemental PDF is not the registered SEC milestone source");
+  assert.equal(lead.timeAsStated,"2026-05");
+  assert.equal(lead.publishedOn,"2026-06-09");
+  assert.match(lead.finding,/forecasts/);
+  assert.match(lead.limitation,/page 2.*forward-looking/);
+  const stale=data();stale.cases[0].leads[1].url=wrapper;
+  assert.match(failures(stale),/source role\/URL\/clock\/scope drift/);
+});
+
 test("Cyclic chronology refuses Hub100 100t design capacity, CMRDD completion and new 500t CoE merger",()=>{
   const c=data().cases.find(x=>x.reviewId==="review-m3-2-cyclic-extended-operations");
   assert.ok(c);

@@ -34,12 +34,12 @@
           "role": "original_issuer_statement",
           "registeredSourceId": null,
           "publisher": "United States Antimony Corporation",
-          "url": "https://usantimony.com/press-release/united-states-antimony-corporation-provides-status-update-on-new-antimony-smelter/",
+          "url": "https://usantimony.com/wp-content/uploads/2026/06/2026-0609_Smelter-Status.pdf",
           "publishedOn": "2026-06-09",
           "timeAsStated": "2026-05",
           "dateMeaning": "issuer_reports_commissioning_began_month",
-          "finding": "USAC states commissioning of the new smelter began in May by firing the first new furnace; other lines were forecast, not yet evidenced all running.",
-          "limitation": "Announcement is retrospective, issuer-authored; cannot infer precise first-operation day or all nine were commissioned."
+          "finding": "Issuer PDF page 1, opening paragraph: USAC reports commissioning began in May with the first new furnace; five by week-end and all nine by June month-end were forecasts.",
+          "limitation": "PDF page 2 contains forward-looking qualifications. Neither June 9 publication nor the month-end target establishes an exact commissioning day or achieved full operation."
         },
         {
           "key": "quarterly_substantial_construction",
