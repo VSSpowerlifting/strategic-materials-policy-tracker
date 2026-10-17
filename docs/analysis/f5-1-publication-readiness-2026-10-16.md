@@ -16,9 +16,11 @@ no approval and no milestone, and it does not move `site.lastUpdated`, which sta
 
 1. **Human adjudication.** `adjudicateProjectExecutionReview` refuses pending decisions
    presented as complete. It also refuses unnamed reviewers, stale or missing worksheet
-   digests, duplicate decisions and out-of-order decisions. The new builder also refuses
-   duplicate reviewer identities that differ only in case, spacing or Unicode form, so
-   one person cannot appear as two independent reviewers.
+   digests, duplicate decisions and out-of-order decisions. The reviewer CLI
+   (`npm run audit:project-execution-adjudications`) now also refuses machine or
+   placeholder reviewer names, and duplicate reviewer identities that differ only in
+   case, spacing or Unicode form, so one person cannot appear as two independent
+   reviewers.
 2. **Corpus cutoff.** Any real review is dated after 2026-10-09, so the adjudicator
    returns the cutoff blocker. Clearing it requires a separately authorized
    `site.lastUpdated` revision. Backdating a review is not an option.

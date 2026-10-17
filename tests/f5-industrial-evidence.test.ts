@@ -1,6 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import packet from "../research/f5/industrial-evidence-pilot-chronology.json";
 import queue from "../research/project-execution/m3-2-source-review-queue.json";
 import template from "../research/project-execution/m3-2-adjudications.example.json";
@@ -10,6 +13,7 @@ import {
 } from "../lib/data";
 import { validateProjectMilestones } from "../lib/project-milestones";
 import { buildIndustrialResponse } from "../lib/industrial-response";
+import { legalStandingOn } from "../lib/capital-control";
 import { adjudicateProjectExecutionReview } from "../scripts/adjudicate-project-execution";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import {
@@ -70,6 +74,18 @@ const complete = (d: ReturnType<typeof decisions>[number], reviewedAt: string, d
 };
 const adjudicate = (d: unknown) => adjudicateProjectExecutionReview(queue, d, adjRefs());
 const indexOf = (suffix: string) => queue.findIndex((r) => r.id.endsWith(suffix));
+/** Run the real reviewer CLI on a scratch decisions file (never the private review folder). */
+const runAdjudicationCli = (d: unknown) => {
+  const dir = mkdtempSync(join(tmpdir(), "f5-adjudications-"));
+  try {
+    const file = join(dir, "adjudications.json");
+    writeFileSync(file, JSON.stringify(d));
+    const r = spawnSync(process.execPath, ["--import", "tsx", "scripts/audit-project-execution-adjudications.ts", "--file", file], { encoding: "utf8" });
+    return { status: r.status, out: JSON.parse(r.stdout) as { errors: string[]; proposals: unknown[]; reviewerIdentityErrors: string[] } };
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+};
 
 test("the committed sidecar passes, stays unsigned and never authorizes publication", () => {
   const r = run();
@@ -113,7 +129,7 @@ test("§7.2 an issuer-reported state whose start day is unknown keeps occurredOn
   const f = failures(p);
   assert.match(f, /issuer-reported state has no known start day; occurredOn must stay null/);
   assert.match(f, /m3\.occurredOn differs from the queue row/);
-  // Relabelling the canonical state as a dated event does not bypass the guard.
+  // A day later than the cited release cannot be recorded as the event day either.
   const q = sidecar();
   leadOf(q, "neo-narva-magnets", "issuer_commercial_production_release").timeAsStated = "2026-09-15";
   leadOf(q, "neo-narva-magnets", "issuer_commercial_production_release").assertionType = "event";
@@ -176,13 +192,19 @@ test("§7.6 unallocated financing never becomes attributable capital", () => {
   assert.match(failures(q), /\.amount: sidecar must not carry review, approval or amount fields/);
   // An associated-but-unallocated binding row must not lift Alcoa out of not-yet-binding.
   const all = getAllFinancialCommitments();
-  const neoBinding = all.find((c) => c.projectId === "prj-ee-neo-rare-earth-magnet-project")!;
-  const unallocated = { ...structuredClone(neoBinding), id: "fin-test-unallocated", projectId: null,
-    associatedProjectIds: ["prj-au-alcoa-sojitz-gallium"] };
-  const res = buildIndustrialResponse(cutoff, [...all, unallocated]);
-  const alcoa = res.rows.find((x) => x.id === "prj-au-alcoa-sojitz-gallium")!;
-  assert.equal(alcoa.finance, "binding_not_evidenced");
-  assert.ok(!alcoa.financialIds.includes("fin-test-unallocated"));
+  const neoBinding = all.find((c) => c.projectId === "prj-ee-neo-rare-earth-magnet-project" &&
+    c.valueRole === "commitment" && !!c.providerJurisdiction && legalStandingOn(c, cutoff) === "binding")!;
+  assert.ok(neoBinding, "a binding government commitment to clone");
+  const alcoaWith = (over: Record<string, unknown>) => buildIndustrialResponse(cutoff, [...all,
+    { ...structuredClone(neoBinding), id: "fin-test-unallocated", ...over }])
+    .rows.find((x) => x.id === "prj-au-alcoa-sojitz-gallium")!;
+  const unallocated = alcoaWith({ projectId: null, associatedProjectIds: ["prj-au-alcoa-sojitz-gallium"] });
+  assert.equal(unallocated.finance, "binding_not_evidenced");
+  assert.ok(!unallocated.financialIds.includes("fin-test-unallocated"));
+  // Positive control: the same row, allocated, does make Alcoa binding.
+  const allocated = alcoaWith({ projectId: "prj-au-alcoa-sojitz-gallium", associatedProjectIds: [] });
+  assert.equal(allocated.finance, "binding");
+  assert.ok(allocated.financialIds.includes("fin-test-unallocated"));
 });
 
 test("§7.7 missing or contradictory provenance fails closed", () => {
@@ -249,6 +271,10 @@ test("§7.9 duplicate canonical reviewer identities are detected", () => {
   complete(d[indexOf("neo-narva-magnets")], "2026-10-05");
   d[indexOf("neo-narva-magnets")].reviewedBy = "jane  DOE" as never;
   assert.deepEqual(auditReviewerIdentities(d), ['reviewer identity "jane doe" appears under 2 spellings: "Jane Doe", "jane  DOE"']);
+  // The real reviewer CLI enforces it, so one person cannot sign twice.
+  const cli = runAdjudicationCli(d);
+  assert.equal(cli.status, 1);
+  assert.deepEqual(cli.out.reviewerIdentityErrors, auditReviewerIdentities(d));
 });
 
 test("§7.10 synthetic or unsigned approvals are rejected", () => {
@@ -284,6 +310,16 @@ test("§7.10 synthetic or unsigned approvals are rejected", () => {
   const named = decisions();
   complete(named[0], "2026-10-05");
   assert.deepEqual(auditReviewerIdentities(named), [], "a named human reviewer passes the identity audit");
+  named[0].reviewedBy = "Ai Tanaka" as never;
+  assert.deepEqual(auditReviewerIdentities(named), [], "a real given name is not mistaken for AI");
+  // The real reviewer CLI refuses a machine signature even when the adjudicator alone would accept it.
+  const machine = decisions();
+  complete(machine[indexOf("alcoa-wagerup")], "2026-10-05");
+  machine[indexOf("alcoa-wagerup")].reviewedBy = "Claude" as never;
+  assert.equal(adjudicate(machine).proposals.length, 1, "adjudicator alone does not judge names");
+  const cli = runAdjudicationCli(machine);
+  assert.equal(cli.status, 1);
+  assert.match(cli.out.reviewerIdentityErrors.join(" | "), /reviewer "Claude" is synthetic or a placeholder/);
   // The sidecar itself can never carry a signature, verdict or approval flag.
   for (const mutate of [
     (p: Packet) => { (p.cases[0] as Record<string, unknown>).reviewedBy = "Jane Doe"; },

@@ -95,7 +95,9 @@ export function findDuplicateReviewerIdentities(names: readonly string[]):
     .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
 }
 
-const SYNTHETIC_REVIEWER = /\b(?:claude|gpt|chatgpt|llm|ai|bot|assistant|automated|automation|agent|system|copilot|codex|model|script|ci|synthetic|placeholder|example|dummy|fake)\b/i;
+const SYNTHETIC_REVIEWER = /\b(?:claude|gpt|chatgpt|llm|bot|assistant|automated|automation|agent|copilot|codex|model|script|synthetic|placeholder|example|dummy|fake)\b/i;
+// Case-sensitive, so a real given name such as "Ai Tanaka" is not refused.
+const SYNTHETIC_ACRONYM = /\b(?:AI|CI|LLM)\b/;
 
 /**
  * Audit the reviewer names on a set of adjudication decisions. Pending rows are
@@ -114,7 +116,7 @@ export function auditReviewerIdentities(decisions: unknown): string[] {
       errors.push(`${id}: completed decision has no named human reviewer`);
       continue;
     }
-    if (SYNTHETIC_REVIEWER.test(d.reviewedBy) || /^(?:reviewer|test|tbd|todo|n\/?a|unknown)\b/i.test(d.reviewedBy.trim()))
+    if (SYNTHETIC_REVIEWER.test(d.reviewedBy) || SYNTHETIC_ACRONYM.test(d.reviewedBy) || /^(?:reviewer|test|tbd|todo|n\/?a|unknown)\b/i.test(d.reviewedBy.trim()))
       errors.push(`${id}: reviewer "${d.reviewedBy}" is synthetic or a placeholder, not a human identity`);
     names.push(d.reviewedBy);
   }

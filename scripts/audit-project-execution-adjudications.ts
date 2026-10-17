@@ -13,6 +13,7 @@ import {
   getAllFinancialCommitments, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "../lib/data";
 import { adjudicateProjectExecutionReview } from "./adjudicate-project-execution";
+import { auditReviewerIdentities } from "./f5-industrial-evidence";
 
 const args = process.argv.slice(2);
 const defaultPath = ".project-execution-review/adjudications.json";
@@ -40,6 +41,9 @@ const report = adjudicateProjectExecutionReview(queue, decisions, {
   corpusCutoff: site.lastUpdated,
   publicMilestoneIds: getAllProjectMilestones().map((m) => m.id),
 });
-process.stdout.write(JSON.stringify(report, null, 2) + "\n");
-if (report.errors.length > 0 || report.blocked.length > 0)
+// A completed decision needs one human identity: no machine or placeholder name,
+// and no person counted twice under two spellings.
+const reviewerIdentityErrors = auditReviewerIdentities(decisions);
+process.stdout.write(JSON.stringify({ ...report, reviewerIdentityErrors }, null, 2) + "\n");
+if (report.errors.length > 0 || report.blocked.length > 0 || reviewerIdentityErrors.length > 0)
   process.exitCode = 1;
