@@ -166,7 +166,7 @@ export function auditProjectExecutionPilot(
     // The queue and published milestone validator must reject the same
     // overbroad kind/scope combinations, even before human adjudication.
     if (r.scopeProposal === "bounded_project_workstream" &&
-        !["groundbreaking_reported", "construction_started", "construction_progress_reported"].includes(r.kindProposal))
+        !["groundbreaking_reported", "construction_started", "construction_progress_reported"].includes(String(r.kindProposal)))
       fail("bounded_project_workstream permits only scoped construction kinds");
     if (r.kindProposal === "construction_progress_reported") {
       if (r.claimMode !== "occurred")
