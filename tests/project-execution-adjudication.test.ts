@@ -44,7 +44,7 @@ test("review example is genuinely pending and cannot generate a milestone", () =
   assert.deepEqual(r.blocked, []);
   assert.equal(r.counts.pending, 7);
   assert.deepEqual(r.proposals, []);
-  assert.equal(getAllProjectMilestones().length, 0, "review never mutates public seed");
+  assert.equal(getAllProjectMilestones().length, 1, "review evaluation never modifies the existing Wagerup public seed");
 });
 
 test("approved Alcoa produces only a non-publishing, independently validated preview", () => {
@@ -58,7 +58,7 @@ test("approved Alcoa produces only a non-publishing, independently validated pre
   assert.equal(r.proposals[0].kind, "groundbreaking_reported");
   assert.equal(r.proposals[0].occurredOn, "2026-08-24");
   assert.equal(r.proposals[0].sourceId, "src-alcoa-wagerup-groundbreaking-2026");
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("M3 multi-review handoff rejects the same dated facility event reported by two publishers", () => {
@@ -105,8 +105,8 @@ test("M3 multi-review handoff rejects the same dated facility event reported by 
     distinctRows, freshDecisions, references);
   assert.deepEqual(distinct.errors, []);
   assert.equal(distinct.proposals.length, 2);
-  assert.deepEqual(getAllProjectMilestones(), [],
-    "batch review is never source approval, promotion or publication");
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"],
+    "batch review does not modify the existing Wagerup public seed");
 });
 
 test("real post-cutoff human review is blocked instead of quietly backdated", () => {
@@ -213,7 +213,7 @@ test("M3 review preview accepts a structurally valid whole-project null scope bu
   assert.equal(report.proposals.length, 1);
   assert.equal(report.proposals[0].scope, "whole_project");
   assert.equal(report.proposals[0].scopeAsStated, null);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("M3 cannot preview a purported whole-project milestone with a named component", () => {
@@ -243,7 +243,7 @@ test("Narva human adjudication remains pending; a test-only approval cannot beco
   assert.equal(result.proposals[0].sourceId, "src-neo-commercial-production-2026");
   assert.equal(result.proposals[0].reviewedBy, "Synthetic reviewer in regression test");
   assert.equal(result.status, "human_adjudication_preview_only");
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("Stibnite early works canonical scope remains blocked even with a full synthetic signoff", () => {
@@ -262,7 +262,7 @@ test("Stibnite early works canonical scope remains blocked even with a full synt
   assert.equal(result.blocked.length,1);
   assert.equal(result.blocked[0].id,"review-m3-2-stibnite-early-works");
   assert.match(result.blocked[0].reason,/Unresolved taxonomy/);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("Thompson Falls: taxonomy resolved, but only a synthetic human decision yields a nonpublishing preview", () => {
@@ -283,7 +283,7 @@ test("Thompson Falls: taxonomy resolved, but only a synthetic human decision yie
   assert.equal(result.proposals[0].scope, "named_facility");
   assert.equal(result.proposals[0].occurredOn, null);
   assert.match(result.proposals[0].note ?? "", /not a completed\/operating project/);
-  assert.equal(getAllProjectMilestones().length, 0, "review is not publication");
+  assert.equal(getAllProjectMilestones().length, 1, "preview is not another publication");
   setApproved(d, "2026-10-10");
   const staleCutoff = audit(rows);
   assert.equal(staleCutoff.proposals.length, 0);
@@ -348,7 +348,7 @@ test("old decision cannot approve a changed quote, source URL, project identity 
   const staleFinance = audit(d, changedFinances);
   assert.deepEqual(staleFinance.proposals, []);
   assert.match(staleFinance.errors.join(" | "), /fingerprint differs/);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("changing the curated cutoff never silently carries over an older signed review", () => {
@@ -364,5 +364,5 @@ test("changing the curated cutoff never silently carries over an older signed re
   const fresh = audit(d, revised);
   assert.deepEqual(fresh.errors, []);
   assert.equal(fresh.proposals.length, 1);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
