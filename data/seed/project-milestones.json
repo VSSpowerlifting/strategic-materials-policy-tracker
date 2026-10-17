@@ -16,5 +16,23 @@
     "reviewedBy": "Benjamin Yang",
     "reviewedAt": "2026-10-17",
     "note": "Alcoa reports that the August 24, 2026 groundbreaking ceremony marked the start of construction; Australian ministers describe the first sod turned. This candidate records the reported ceremony only, not independently observed sustained works, cash disbursement, commissioning or production."
+  },
+  {
+    "id": "mil-ee-neo-narva-commercial-production-reported-2026",
+    "projectId": "prj-ee-neo-rare-earth-magnet-project",
+    "kind": "production_reported",
+    "claimMode": "occurred",
+    "scope": "named_facility",
+    "scopeAsStated": "initial commercial rare-earth sintered magnet production programs at Neo's European permanent magnet facility in Narva, Estonia",
+    "occurredOn": null,
+    "targetOn": null,
+    "sourceId": "src-neo-commercial-production-2026",
+    "locator": "Issuer announcement September 14, 2026; opening body paragraph",
+    "statementOriginal": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+    "statementEn": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+    "statementEnSource": "na",
+    "reviewedBy": "Benjamin Yang",
+    "reviewedAt": "2026-10-17",
+    "note": "Issuer reports initial commercial sintered-magnet program and shipments as of 2026-09-14, but does not state the first production-start day. Do not treat publication day as an occurredOn event; no observed 2,000-tonne output, Phase 1B/20,000-tonne achievement, JTF-caused production, or disbursement inference."
   }
 ]
