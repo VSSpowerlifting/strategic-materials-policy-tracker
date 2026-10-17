@@ -107,6 +107,7 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
          {" · "}{p.designationCount} designation{p.designationCount===1?"":"s"}
         </p>
         {p.includesDescendants?<p>Counts include registered child-programme rows</p>:null}
+        <p className="pt-2"><Link href={"/programmes/"+p.id+"#research-pathway"} className="text-accent hover:underline">Trace records, organizations, projects & sources →</Link></p>
        </div>
       </Card>
      </div>)}
