@@ -110,6 +110,12 @@ test("M3 workbench: fingerprints reflect real changes to reviewed source or quot
   edited[0].statementEn=edited[0].statementOriginal;
   const changed=buildM3ReviewerPackets(edited,references).worksheets[0].reviewInputDigestSha256;
   assert.notEqual(before,changed);
+
+  const alternateKind=input();
+  alternateKind[0].kindProposal="construction_started";
+  const alternateDigest=buildM3ReviewerPackets(alternateKind,references).worksheets[0].reviewInputDigestSha256;
+  assert.notEqual(before,alternateDigest,
+    "changing Wagerup from a groundbreaking to a construction-start proposal invalidates old review fingerprints");
   const newRefs=refs();
   newRefs.sources=newRefs.sources.map(s=>s.id===original[0].sourceId
     ? {...s,dateAccessed:"2026-10-08"} : s);

@@ -34,10 +34,10 @@ test("M3.2 seven source-linked candidates are a non-promoting review queue", () 
   assert.equal(getDatasetSummary().projects, getAllProjects().length);
 });
 
-test("Alcoa three financial rows remain one proposed physical construction claim", () => {
+test("Alcoa three financial rows remain one proposed reported groundbreaking event", () => {
   const row = q()[0];
   assert.equal(row.gate, "human_source_review");
-  assert.equal(row.kindProposal, "construction_started");
+  assert.equal(row.kindProposal, "groundbreaking_reported");
   assert.equal(row.scopeProposal, "named_facility");
   assert.equal(row.occurredOn, "2026-08-24");
   assert.equal(row.relatedFinanceIds.length, 3);
