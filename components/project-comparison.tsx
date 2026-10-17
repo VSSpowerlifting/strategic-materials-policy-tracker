@@ -93,7 +93,6 @@ export function ProjectComparison({rows,materialNames,revision}: Props) {
   });
   const a = rows.find(r => r.id === left);
   const b = rows.find(r => r.id === right);
-  const ready = !!a && !!b && a.id !== b.id;
   const sharedMaterials = a && b && a.id !== b.id ? a.materialIds.filter(id => b.materialIds.includes(id)) : [];
   const sharedStages = a && b && a.id !== b.id ? a.stages.filter(id => b.stages.includes(id)) : [];
   return <div>
