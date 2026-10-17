@@ -35,7 +35,9 @@
     "review:m3-packets": "tsx scripts/print-project-execution-review-packets.ts",
     "review:f5-versions": "tsx scripts/compare-f5-source-versions.ts",
     "review:f5-bridge": "tsx scripts/print-f5-private-review-bridge.ts",
-    "review:f5-batch": "tsx scripts/run-f5-private-review-batch.ts"
+    "review:f5-batch": "tsx scripts/run-f5-private-review-batch.ts",
+    "review:f5-prospective-worksheets": "tsx scripts/print-f5-prospective-worksheets.ts",
+    "review:f5-release": "tsx scripts/print-f5-release-rehearsal.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
