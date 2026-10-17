@@ -18,7 +18,6 @@ export function SaveEventButton({ eventId }: { eventId: string }) {
     // Correcting client-only state (localStorage) after mount, not deriving
     // it during render — same sanctioned exception the events/search
     // explorers use for reading window.location after mount.
-    /* eslint-disable react-hooks/set-state-in-effect */
     const refresh = () => {
       const result = readSavedEvents();
       if (result.ok) setSaved(result.ids.includes(eventId));
@@ -26,7 +25,6 @@ export function SaveEventButton({ eventId }: { eventId: string }) {
     };
     refresh();
     return subscribeSavedEvents(refresh);
-    /* eslint-enable react-hooks/set-state-in-effect */
   }, [eventId]);
 
   return (
