@@ -34,7 +34,7 @@ test("bounded project workstream is one canonical, source-qualified construction
     scopeAsStated: "early works activities at Stibnite, components not fully specified",
     occurredOn: "2025-10-21",
   })], { ...refs, sources: [{ ...source, datePublished: "2025-10-21" }] }), []);
-  assert.deepEqual(getAllProjectMilestones(), [], "contract tests cannot publish evidence");
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"], "contract tests cannot add another milestone");
 });
 
 test("workstream scope rejects output, operating status, commissioning and funded-work completion", () => {
@@ -88,7 +88,7 @@ test("future Stibnite queue taxonomy migration cannot silently sign reviews or c
   assert.equal(road.gate, "taxonomy_blocked");
   assert.equal(early.reviewVerdict, "unreviewed");
   assert.equal(road.reviewVerdict, "unreviewed");
-  assert.deepEqual(getAllProjectMilestones(), []);
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
   const illegal = structuredClone(draft);
   illegal.find(x => x.id === early.id)!.kindProposal = "production_reported";
   assert.match(auditProjectExecutionPilot(illegal, context).errors.join(" | "),
