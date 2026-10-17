@@ -129,6 +129,7 @@ export function publicHttpsFetcher(
     if(url.origin!==base || !path.startsWith("/api/"))
       throw new Error("Only same-origin, public SMPT API paths may be checked");
     const response=await networkFetch(url,{method:"GET",redirect:"error",cache:"no-store",signal:AbortSignal.timeout(12000)});
+    if(response.status!==200) return {status:response.status,body:null};
     let body:unknown;
     try{body=await response.json()}catch{return {status:response.status,body:null,error:"Non-JSON response or invalid JSON returned by public endpoint"};}
     return {status:response.status,body};
