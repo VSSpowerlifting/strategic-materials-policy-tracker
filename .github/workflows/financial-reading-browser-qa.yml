@@ -1,0 +1,43 @@
+name: Financial reading guide Chromium QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/financial-reading-browser-qa.yml"
+      - "scripts/qa-financial-reading-browser.mjs"
+      - "app/capital/**"
+      - "app/projects/page.tsx"
+      - "app/programmes/page.tsx"
+      - "app/methodology/page.tsx"
+      - "components/capital/reading-guide.tsx"
+      - "lib/capital-vocabulary.ts"
+      - "lib/financial-reading.ts"
+      - "data/seed/**"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: financial-reading-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reading:
+    name: Browser financing concepts and keyboard definitions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: node scripts/qa-financial-reading-browser.mjs
+      - run: test -z "$(git status --porcelain)"
