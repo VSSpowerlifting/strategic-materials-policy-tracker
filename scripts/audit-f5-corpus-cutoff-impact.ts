@@ -6,8 +6,7 @@
  * reviewed; this is an editorial release aid, NEVER a publication gate pass.
  */
 import {readFileSync} from "node:fs";
-import {fileURLToPath} from "node:url";
-import {join,dirname} from "node:path";
+import {join,resolve} from "node:path";
 import {isMilestoneIsoDate} from "../lib/project-milestones";
 import {site} from "../lib/site";
 
@@ -111,14 +110,14 @@ export function auditF5CorpusCutoffImpact(
   };
 }
 
-const modulePath=fileURLToPath(import.meta.url);
-const isMain=process.argv[1]===modulePath;
+const cliEntry=resolve(process.cwd(),"scripts","audit-f5-corpus-cutoff-impact.ts");
+const isMain=!!process.argv[1]&&resolve(process.argv[1])===cliEntry;
 if(isMain){
   try{
     const args=process.argv.slice(2);
     if(args.length!==2||args[0]!=="--proposed-cutoff")
       throw new Error("Usage: node --import tsx scripts/audit-f5-corpus-cutoff-impact.ts --proposed-cutoff YYYY-MM-DD");
-    const base=join(dirname(modulePath),"..","data","seed");
+    const base=join(process.cwd(),"data","seed");
     const datasets:SeedInput={};
     for(const seed of F5_SEED_NAMES)
       datasets[seed]=JSON.parse(readFileSync(join(base,seed+".json"),"utf8")) as unknown[];
