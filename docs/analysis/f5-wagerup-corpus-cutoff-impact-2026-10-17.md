@@ -29,7 +29,7 @@ Read-only scan of all **13** public `data/seed/*.json` arrays on main `134e7bb1b
 | Watchlist | 10 |
 | **Total public array records** | **698** |
 
-**Date observations after Oct 9 through proposed Oct 17: zero.** Every existing registered publisher/public-source date and historical source-access date remains at or before Oct 9. **Date values after Oct 17:** 21 entries, all `control-measures` `statusHistory[].until = 2026-11-10`, referring to the known forward expiration of temporary suspended restrictions. Their `until` values are **not** later-achieved suspension decisions, fresh reporting, or permission to assert those controls ended. No other dated fields in the public seed are beyond the proposed cutoff.
+**Date observations after Oct 9 through proposed Oct 17: zero.** Every existing registered publisher/public-source date and historical source-access date remains at or before Oct 9. **Date values after Oct 17:** 21 entries, all future `control-measures.statusHistory[].until` boundaries: **19** suspend-until dates of **2026-11-10** and **2** distinct suspend-until dates of **2026-11-27** (2024 No. 46 U.S.-directed gallium/germanium/antimony denial and graphite end-use review, both suspended under 2025 No. 72). These are prospective suspension end dates, not independently observed resumptions or new restrictions. Their `until` values are **not** later-achieved suspension decisions, fresh reporting, or permission to assert those controls ended. No other dated fields in the public seed are beyond the proposed cutoff.
 
 The separate candidate `groundbreaking_reported` is not in any public seed yet. Its original Alcoa report on Aug 24 and genuine review on Oct 17 would fit the proposed cutoff **if** publication is independently authorized.
 
