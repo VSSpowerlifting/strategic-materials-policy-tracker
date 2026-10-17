@@ -176,7 +176,7 @@ export function auditThompsonSourceTriangulation(packet: unknown, ctx: ThompsonS
   check(alaska.length===1 && alaska[0].projectId==="prj-us-usac-alaska-antimony-feedstock" &&
     alaska[0].amount?.value==="7000000" && alaska[0].implementationStatusHistory.length===0,
     "Alaska $7M allocation must remain distinct and not imply Montana output");
-  check(ctx.publicMilestoneCount===2,"no unauthorized Thompson project-native milestone promotion");
+  check(ctx.publicMilestoneCount===2,"no public project-native milestone promotion authorized beyond Wagerup and Narva");
   return {
     schemaVersion:"f5-5-thompson-source-audit-1" as const,
     errors,
