@@ -99,6 +99,7 @@ test("public corpus/source/finance or worksheet changes invalidate previously co
   assert.throws(()=>review({manuallyCopiedDigest:old},template as unknown as SourceReviewDecision[],refs(),"2026-10-18"),/fingerprint differs/);
   const modified=structuredClone(records);
   modified.find(x=>x.id===narva)!.statementOriginal="Synthetic altered issuer statement";
+  modified.find(x=>x.id===narva)!.statementEn="Synthetic altered issuer statement";
   assert.notEqual(prepareGuidedReview(modified,refs(),narva,"2026-10-17").worksheet.reviewInputDigestSha256,old);
 });
 
