@@ -6,12 +6,13 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FilterChips } from "@/components/filter-chips";
 import type { FilterChip } from "@/components/filter-chips";
-import { searchDocs, SEARCH_KINDS } from "@/lib/search";
-import type { SearchDoc, SearchKind } from "@/lib/search";
+import { searchDocs, SEARCH_KINDS } from "@/lib/search-core";
+import type { SearchDoc, SearchKind } from "@/lib/search-core";
 import { jurisdictionLabels, mechanismLabels } from "@/lib/labels";
 import { JURISDICTIONS, MECHANISMS } from "@/lib/types";
 import type { JurisdictionCode, Mechanism } from "@/lib/types";
 import { site } from "@/lib/site";
+import { selectClass } from "@/components/capital/filter-controls";
 
 const ALL = "all";
 
@@ -29,8 +30,10 @@ const KIND_LABEL: Record<SearchKind, string> = {
   watched: "Watchlist",
 };
 
-const selectClass =
-  "w-full rounded-md border border-border bg-card px-2.5 py-2 font-display text-sm text-foreground focus:border-accent/50 focus:outline-none";
+// Browse shortcuts expose the six most useful research entry points.
+const FEATURED: readonly SearchKind[] = [
+  "project", "source", "capital", "control", "organization", "programme",
+];
 
 /**
  * URL parameter names, matching the convention the events explorer already
@@ -153,6 +156,11 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
   }, [preKind]);
 
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
+  const allCounts = useMemo(() => {
+    const grouped = {} as Record<SearchKind, number>;
+    for (const k of SEARCH_KINDS) grouped[k] = docs.filter((d) => d.kind === k).length;
+    return grouped;
+  }, [docs]);
   const active = hasQuery || hasActiveFilter;
 
   const chips = [
@@ -180,7 +188,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
       <Card className="p-4">
         <div className="grid gap-3 lg:grid-cols-4">
           <div>
-            <label htmlFor="q" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+            <label htmlFor="q" className="mb-1.5 block font-display text-xs font-semibold text-muted">
               Search the corpus
             </label>
             <input
@@ -200,12 +208,12 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
             }}
             className="lg:col-span-3"
           >
-            <summary className="cursor-pointer py-1 font-mono text-xs text-muted hover:text-foreground sm:hidden">
+            <summary className="cursor-pointer py-2 font-display text-sm font-medium text-accent hover:text-accent-strong sm:hidden">
               More filters
             </summary>
             <div className="mt-2 grid gap-3 sm:mt-0 sm:grid-cols-2 lg:grid-cols-3">
               <div>
-                <label htmlFor="kind" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+                <label htmlFor="kind" className="mb-1.5 block font-display text-xs font-semibold text-muted">
                   Record type
                 </label>
                 <select id="kind" value={kind} onChange={(e) => setKind(e.target.value)} className={selectClass}>
@@ -219,7 +227,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                 </select>
               </div>
               <div>
-                <label htmlFor="actor" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+                <label htmlFor="actor" className="mb-1.5 block font-display text-xs font-semibold text-muted">
                   Actor
                 </label>
                 <select id="actor" value={actor} onChange={(e) => setActor(e.target.value)} className={selectClass}>
@@ -232,7 +240,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                 </select>
               </div>
               <div>
-                <label htmlFor="mechanism" className="mb-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+                <label htmlFor="mechanism" className="mb-1.5 block font-display text-xs font-semibold text-muted">
                   Mechanism
                 </label>
                 <select
@@ -253,21 +261,22 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
           </details>
         </div>
         <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-          <details className="text-xs leading-5 text-faint">
-            <summary className="cursor-pointer py-1 font-mono hover:text-muted">How matching works</summary>
+          <details className="text-sm leading-6 text-muted">
+            <summary className="cursor-pointer py-1 font-display font-medium text-accent hover:text-accent-strong">How matching works</summary>
             <p className="mt-1">
               Matching is exact substring, not fuzzy — <span className="font-mono">No. 61</span> and{" "}
               <span className="font-mono">No. 62</span> are different instruments, so a near-miss is
               worse than no match. Original-language text is indexed in its own script; searching{" "}
-              <span className="font-mono">稀土</span> works. Actor and mechanism filters apply
-              to every record type that carries one, not only events.
+              <span className="font-mono">稀土</span> works. Actor filters only match records
+              assigned a tracked government; source and project records are not assigned an actor.
+              Mechanism filters apply to events and watched sources, not finance or projects.
             </p>
           </details>
           {active ? (
             <button
               type="button"
               onClick={reset}
-              className="shrink-0 font-mono text-xs text-accent hover:text-accent-strong"
+              className="inline-flex min-h-11 shrink-0 items-center font-display text-sm font-medium text-accent hover:text-accent-strong"
             >
               Clear
             </button>
@@ -278,10 +287,40 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
       <div className="mt-6">
         {active ? <div className="mb-3"><FilterChips chips={chips} fallbackId="q" /></div> : null}
         {!active ? (
-          <p className="text-sm leading-7 text-faint">
-            {docs.length} records indexed — events, materials, actors, framing claims, sources and
-            watchlist entries.
-          </p>
+          <section aria-labelledby="browse-search-types" data-testid="search-browse" className="space-y-4">
+            <div>
+              <h2 id="browse-search-types" className="font-display text-xl font-semibold tracking-tight">
+                Browse the published record
+              </h2>
+              <p className="mt-1 max-w-3xl text-sm leading-7 text-muted">
+                {docs.length} indexed entries across {SEARCH_KINDS.length} types, including policy
+                events, financial instruments, controls, projects, organizations, programmes,
+                original sources, and research notes. Choose a type below or search for a
+                company, material, exact document number, or original-language phrase.
+                These are curated entries, not a live index of every government action.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {FEATURED.map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  data-testid="search-type-shortcut"
+                  onClick={() => setKind(type)}
+                  className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 rounded-lg border border-border-strong bg-card px-4 py-4 text-left transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  <span className="font-display text-base font-semibold leading-6">{KIND_LABEL[type]}</span>
+                  <span className="tnum shrink-0 font-mono text-sm text-accent">{allCounts[type]}</span>
+                </button>
+              ))}
+            </div>
+            <p className="text-xs leading-6 text-muted">
+              Other indexed types, including actors, materials, framing and the watchlist,
+              are available under <strong className="font-semibold text-foreground">Record type</strong>.
+              Counts are records, not sums of financing, documents independently corroborating
+              an outcome, or proof that no unlisted activity exists.
+            </p>
+          </section>
         ) : results.length === 0 ? (
           <Card className="p-6">
             <p className="font-display font-semibold tracking-tight">No matches</p>
@@ -289,28 +328,35 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               Nothing in the corpus satisfies every term and filter together. This is a bounded
               database — a fixed set of actors, a rare-earth-centred material set, and instruments
               from {site.scopeStart} forward — so an absence here means the record has not been
-              coded, not that no such measure exists.
+              coded, not that no such measure exists. Actor-filtered searches exclude unassigned
+              sources and projects, while the mechanism filter only covers applicable records.
             </p>
+            <button type="button" onClick={reset}
+              className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline">
+              Clear all filters
+            </button>
           </Card>
         ) : (
           <>
-            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
-              {results.length} {results.length === 1 ? "result" : "results"}
+            <p role="status" aria-live="polite" data-testid="search-result-count"
+              className="mb-3 font-display text-sm font-semibold text-muted">
+              {results.length} {results.length === 1 ? "matching record" : "matching records"}
+              <span className="ml-2 font-normal text-faint">from {docs.length} published index entries</span>
             </p>
             <ul className="grid gap-2">
               {results.map((d) => (
                 <li key={`${d.kind}:${d.id}`}>
                   <Link
                     href={d.href}
-                    className="block rounded-lg border bg-card p-4 transition-colors hover:border-accent/40"
+                    className="block min-w-0 rounded-lg border border-border-strong bg-card p-4 transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-2">
-                      <span className="font-display font-semibold leading-snug tracking-tight">
+                      <span className="min-w-0 font-display text-base font-semibold leading-6 tracking-tight [overflow-wrap:anywhere]">
                         {d.title}
                       </span>
                       <Badge>{KIND_LABEL[d.kind]}</Badge>
                     </div>
-                    <p className="mt-1 text-sm text-muted">{d.subtitle}</p>
+                    <p className="mt-2 text-sm leading-6 text-muted [overflow-wrap:anywhere]">{d.subtitle}</p>
                   </Link>
                 </li>
               ))}

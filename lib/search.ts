@@ -43,59 +43,34 @@ import {
 } from "./labels";
 import { commitmentActor, controlIssuer, currentControlStatus, currentFinancialStatus } from "./capital-control";
 import { formatMoney } from "./decimal";
-import type { JurisdictionCode, Mechanism } from "./types";
 
-export const SEARCH_KINDS = [
-  "event",
-  "capital",
-  "control",
-  "project",
-  "organization",
-  "programme",
-  "material",
-  "actor",
-  "framing",
-  "source",
-  "watched",
-] as const;
-export type SearchKind = (typeof SEARCH_KINDS)[number];
-
-export type SearchDoc = {
-  id: string;
-  kind: SearchKind;
-  title: string;
-  /** One line of context shown under the title. */
-  subtitle: string;
-  href: string;
-  /** Pre-normalised concatenation of everything searchable in the record. */
-  haystack: string;
-  /** ISO date where the record has one, for stable ordering. */
-  date: string | null;
-  /** The actor this record is attributable to, where that is meaningful
-   *  (an event's issuer, a framing claim's actor, an actor profile itself, a
-   *  watched source's jurisdiction). Null for materials and sources, which
-   *  are not tied to a single actor. Lets the search page filter by actor
-   *  across record types without a separate index. */
-  jurisdiction: JurisdictionCode | null;
-  /** Mechanisms this record carries, where that is meaningful (events and
-   *  watched sources). Null otherwise. */
-  mechanisms: Mechanism[] | null;
-};
-
-/** Lowercase, strip diacritics, collapse whitespace. Leaves CJK untouched. */
-export function normalize(s: string): string {
-  return s
-    .normalize("NFKD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .trim();
-}
+import type { JurisdictionCode } from "./types";
+import { normalize } from "./search-core";
+import type { SearchDoc } from "./search-core";
+export { SEARCH_KINDS, normalize, searchDocs } from "./search-core";
+export type { SearchDoc, SearchKind } from "./search-core";
 
 const join = (...parts: (string | null | undefined)[]) => normalize(parts.filter(Boolean).join(" "));
 
 export function buildSearchIndex(): SearchDoc[] {
   const docs: SearchDoc[] = [];
+
+  // Entity names are indexed ONLY when a record declares the exact canonical
+  // organization ID. Searching a name does not infer finance, ownership or
+  // government affiliation. Unresolved links are corrupt registry references.
+  const organizations = getAllOrganizations();
+  const organizationById = new Map(organizations.map((o) => [o.id, o]));
+  if (organizationById.size !== organizations.length)
+    throw new Error("Duplicate organization in search index");
+  const linkedOrganizations = (ids: readonly string[], recordId: string) =>
+    ids.map((id) => {
+      const org = organizationById.get(id);
+      if (!org) throw new Error("Unresolved organization " + id + " in search record " + recordId);
+      return org;
+    });
+  const organizationTerms = (ids: readonly string[], recordId: string) =>
+    linkedOrganizations(ids, recordId)
+      .flatMap((o) => [o.name, o.nameOriginal ?? "", ...o.aliases]).join(" ");
 
   for (const e of getAllEvents()) {
     docs.push({
@@ -157,17 +132,21 @@ export function buildSearchIndex(): SearchDoc[] {
         c.programmeId ? getProgrammeById(c.programmeId)?.name : null,
         c.projectId ? getProjectById(c.projectId)?.name : null,
         (c.associatedProjectIds ?? []).map((id) => getProjectById(id)?.name).filter(Boolean).join(" "),
+        // Explicit canonical provider/recipient links; not inferred from free text.
+        organizationTerms([...c.providerOrgIds, ...c.recipientOrgIds], c.id),
       ),
     });
   }
 
-  // v0.6 registries: a company, agency or mine finds its own profile.
+  // v0.6 registries: only source-linked sponsor IDs supply names/aliases.
   for (const p of getAllProjects()) {
+    const sponsors = linkedOrganizations(p.sponsorOrgIds, p.id);
+    const sponsorLabel = sponsors.map(o => o.name).join(", ");
     docs.push({
       id: p.id,
       kind: "project",
       title: p.name,
-      subtitle: `Project · ${[...p.locations.map((l) => l.asStated ?? l.countryCode), ...p.stages.map((s) => supplyChainStageLabels[s])].filter(Boolean).join(" · ")}`,
+      subtitle: `Project · ${[...p.locations.map((l) => l.asStated ?? l.countryCode), ...p.stages.map((s) => supplyChainStageLabels[s])].filter(Boolean).join(" · ")}${sponsors.length ? ` · Registered sponsor: ${sponsorLabel}` : ""}`,
       href: `/projects/${p.id}`,
       date: null,
       jurisdiction: null,
@@ -180,11 +159,12 @@ export function buildSearchIndex(): SearchDoc[] {
         p.materialIds.join(" "),
         p.untrackedMaterialsAsStated.join(" "),
         p.sponsorOrgIds.join(" "),
+        organizationTerms(p.sponsorOrgIds, p.id),
       ),
     });
   }
 
-  for (const o of getAllOrganizations()) {
+  for (const o of organizations) {
     docs.push({
       id: o.id,
       kind: "organization",
@@ -200,16 +180,18 @@ export function buildSearchIndex(): SearchDoc[] {
   }
 
   for (const g of getAllProgrammes()) {
+    const administrators = linkedOrganizations(g.administeringOrgIds, g.id);
     docs.push({
       id: g.id,
       kind: "programme",
       title: g.name,
-      subtitle: `Programme · ${jurisdictionLabels[g.actor]} · ${programmeKindLabels[g.kind]}`,
+      subtitle: `Programme · ${jurisdictionLabels[g.actor]} · ${programmeKindLabels[g.kind]}${administrators.length ? ` · Registered administrator: ${administrators.map(o => o.name).join(", ")}` : ""}`,
       href: `/programmes/${g.id}`,
       date: null,
       jurisdiction: g.actor,
       mechanisms: null,
-      haystack: join(g.id, g.name, g.nameOriginal, g.legalAuthorityAsStated, g.notes, programmeKindLabels[g.kind]),
+      haystack: join(g.id, g.name, g.nameOriginal, g.legalAuthorityAsStated, g.notes,
+        programmeKindLabels[g.kind], organizationTerms(g.administeringOrgIds, g.id)),
     });
   }
 
@@ -340,35 +322,3 @@ export function buildSearchIndex(): SearchDoc[] {
   return docs;
 }
 
-/**
- * All terms must match (AND), each as a substring. Ranking is by where the
- * match lands — title beats body — then by date, newest first, so the same
- * query is stable across builds.
- */
-export function searchDocs(docs: SearchDoc[], query: string): SearchDoc[] {
-  const terms = normalize(query).split(" ").filter(Boolean);
-  if (terms.length === 0) return [];
-  const scored: { doc: SearchDoc; score: number }[] = [];
-  for (const doc of docs) {
-    const title = normalize(doc.title);
-    let score = 0;
-    let all = true;
-    for (const t of terms) {
-      if (title.includes(t)) score += 3;
-      else if (doc.haystack.includes(t)) score += 1;
-      else {
-        all = false;
-        break;
-      }
-    }
-    if (all) scored.push({ doc, score });
-  }
-  return scored
-    .sort(
-      (a, b) =>
-        b.score - a.score ||
-        (b.doc.date ?? "").localeCompare(a.doc.date ?? "") ||
-        a.doc.title.localeCompare(b.doc.title),
-    )
-    .map((s) => s.doc);
-}
