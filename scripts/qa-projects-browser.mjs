@@ -58,6 +58,30 @@ try{
   await page.keyboard.press("Enter");
   await page.waitForURL(/\/projects\/prj-au-alcoa-sojitz-gallium$/);
   assert.ok((await page.locator("h1").innerText()).includes("Alcoa-Sojitz"));
+  // Test actual Next.js prerendered HTTP, not merely imported route handlers.
+  // Public source-reviewed milestones must reconcile with the full JSON export.
+  const registerResponse=await page.request.get(base+"/api/v1/project-milestones");
+  assert.equal(registerResponse.status(),200);
+  const register=await registerResponse.json();
+  assert.deepEqual(register.map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
+  assert.equal(register[0].kind,"groundbreaking_reported");
+  assert.equal(register[0].reviewedAt,"2026-10-17");
+  const detailResponse=await page.request.get(base+"/api/v1/projects/prj-au-alcoa-sojitz-gallium");
+  assert.equal(detailResponse.status(),200);
+  const detail=await detailResponse.json();
+  assert.deepEqual(detail.reviewedProjectMilestones,register);
+  assert.deepEqual(detail.reviewedMilestoneSources.map(x=>x.id),["src-alcoa-wagerup-groundbreaking-2026"]);
+  assert.ok("latestImplementation" in detail);
+  assert.ok(Array.isArray(detail.layers));
+  const datasetResponse=await page.request.get(base+"/api/export/dataset.json");
+  assert.equal(datasetResponse.status(),200);
+  const dataset=await datasetResponse.json();
+  assert.equal(dataset.counts.projectMilestones,1);
+  assert.deepEqual(dataset.projectMilestones,register);
+  const unsignedResponse=await page.request.get(base+"/api/v1/projects/prj-ca-cyclic-kingston-demonstration-plant");
+  assert.equal(unsignedResponse.status(),200);
+  assert.deepEqual((await unsignedResponse.json()).reviewedProjectMilestones,[]);
+  console.log("Reviewed industrial milestone: prerendered register, project API and full dataset export agree; unsigned peers omitted.");
   console.log("Project directory: static cohort, URL filters, shared finance, keyboard navigation, mobile/tablet/desktop passed.");
   await page.close();
 }finally{if(browser)await browser.close();server.kill("SIGTERM")}
