@@ -30,7 +30,7 @@ test("PIR release explicitly remains an unsigned supplement to current real M3 r
  assert.equal(receipt.m3.reviewerName,null);
  assert.equal(receipt.m3.reviewedAt,null);
  assert.equal(receipt.publicationAuthorized,false);
- assert.equal(getAllProjectMilestones().length,0);
+ assert.equal(getAllProjectMilestones().length,1);
 });
 
 test("six actual PDF byte hashes from user-supplied archive are not certified agency source signatures",()=>{
@@ -163,7 +163,7 @@ test("submitted source-test request and draft inspection followup avoid duplicat
  assert.equal(request.recordsObtained,false);
  assert.equal(request.publicMilestoneAuthorized,false);
  assert.equal(request.humanReviewCompleted,false);
- assert.equal(site.lastUpdated,"2026-10-09");
+ assert.equal(site.lastUpdated,"2026-10-17");
  assert.ok(decisions.every(x=>x.verdict==="pending"));
- assert.equal(getAllProjectMilestones().length,0);
+ assert.equal(getAllProjectMilestones().length,1);
 });

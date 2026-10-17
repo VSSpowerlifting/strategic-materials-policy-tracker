@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "mil-au-alcoa-wagerup-groundbreaking-2026-08-24",
+    "projectId": "prj-au-alcoa-sojitz-gallium",
+    "kind": "groundbreaking_reported",
+    "claimMode": "occurred",
+    "scope": "named_facility",
+    "scopeAsStated": "gallium production plant co-located at Alcoa’s Wagerup alumina refinery",
+    "occurredOn": "2026-08-24",
+    "targetOn": null,
+    "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+    "locator": "Opening news paragraph after 08/24/2026 date",
+    "statementOriginal": "The ceremony marked the start of construction of the new facility co-located at Alcoa’s Wagerup alumina refinery in Western Australia.",
+    "statementEn": "The ceremony marked the start of construction of the new facility co-located at Alcoa’s Wagerup alumina refinery in Western Australia.",
+    "statementEnSource": "na",
+    "reviewedBy": "Benjamin Yang",
+    "reviewedAt": "2026-10-17",
+    "note": "Alcoa reports that the August 24, 2026 groundbreaking ceremony marked the start of construction; Australian ministers describe the first sod turned. This candidate records the reported ceremony only, not independently observed sustained works, cash disbursement, commissioning or production."
+  }
+]

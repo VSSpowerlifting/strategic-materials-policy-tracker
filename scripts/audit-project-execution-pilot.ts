@@ -24,8 +24,10 @@ if (args.length > 0 && !(args.length === 1 && args[0] === "--json")) {
     corpusCutoff: site.lastUpdated,
   });
   // Fail closed: review queue cannot replace or populate the public milestone seed.
-  if (getAllProjectMilestones().length > 0) {
-    r.errors.push("public milestone seed is no longer empty: isolate M3.2 audit before publishing");
+  const live=getAllProjectMilestones();
+  if(live.length!==1||live[0]?.id!=="mil-au-alcoa-wagerup-groundbreaking-2026-08-24"||
+     live[0]?.kind!=="groundbreaking_reported"){
+    r.errors.push("M3.2 audit requires exactly the human-reviewed Wagerup milestone; do not promote any queued peers");
   }
   process.stdout.write(formatPilotAudit(r));
   if (r.errors.length > 0) process.exitCode = 1;

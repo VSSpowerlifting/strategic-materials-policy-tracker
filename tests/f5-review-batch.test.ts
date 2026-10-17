@@ -79,7 +79,7 @@ test("end-to-end multi-capture preview: exact M3 candidate, SHA-pinned diff and 
   assert.equal(report.publicReleaseAuthorized, false);
   assert.equal(report.automaticPublicationAuthorized, false);
   assert.equal(report.publicSeedMutationAuthorized, false);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
   assert.equal(JSON.stringify(getAllFinancialCommitments()), financeBefore);
   const markdown = renderF5PrivateReviewBatch(report);
   assert.match(markdown, /SYNTHETIC fixture/);
@@ -295,7 +295,7 @@ test("private offline CLI: deterministic multi-case JSON/Markdown, bounded input
     assert.equal(p.publicReleaseAuthorized, false);
     assert.deepEqual(readdirSync(dir).sort(), ["bodies.json","current.txt","original.txt","sequence.json"]);
     assert.equal(readFileSync(before, "utf8"), oldBody);
-    assert.deepEqual(getAllProjectMilestones(), []);
+    assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
     const md = execFileSync(process.execPath, args.filter(x => x !== "--json"), { encoding: "utf8" });
     assert.match(md, /private reviewer worklist/);
     for (const flag of ["--approve", "--publish", "--write-seed"]) {

@@ -105,7 +105,7 @@ export function auditCyclicOriginalPublisherCrosscheck(input: unknown, ctx: Cycl
     fin[0].implementationStatusHistory.some(s => s.status === "completed" &&
       s.date === null && s.sourceId === input.canonicalSourceId),
     "Cyclic finance/activity boundary changed");
-  check(ctx.publicMilestoneCount === 0, "public project milestones changed");
+  check(ctx.publicMilestoneCount === 1, "public project milestones changed");
 
   const expectedClocks: Record<string, [string | null, string]> = {
     "src-nrcan-cmrdd-programme": [null, "2026-10-07"],

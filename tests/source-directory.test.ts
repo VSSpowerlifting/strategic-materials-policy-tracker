@@ -28,7 +28,8 @@ test("reverse citations remain distinct citing records and not field-reference i
  const wagerup=rows.find(r=>r.source.id==="src-alcoa-wagerup-groundbreaking-2026")!;
  assert.ok(wagerup.citingKinds.includes("capital"));
  assert.ok(wagerup.directlyCitingRecords>=3);
- assert.ok(!wagerup.citingKinds.includes("milestone"));
+ assert.ok(wagerup.citingKinds.includes("milestone"));
+  assert.equal(index.get(wagerup.source.id)?.filter(x=>x.kind==="milestone").length,1);
 });
 test("publisher publication date is not inferred from later recorded access",()=>{
  const rows=directory(),dated=filterSourceDirectory(rows,{publication:"dated"});
@@ -73,7 +74,7 @@ test("filtering never mutates data or publishes private milestone review",()=>{
  const rows=directory(),original=structuredClone(rows);
  filterSourceDirectory(rows,{q:"China",publication:"undated",citingKind:"capital"});
  assert.deepEqual(rows,original);
- assert.equal(filterSourceDirectory(rows,{citingKind:"milestone"}).length,0);
+ assert.equal(filterSourceDirectory(rows,{citingKind:"milestone"}).length,1);
 });
 test("source page statically includes full directory with accessible and shareable filters",async()=>{
  const {readFile}=await import("node:fs/promises");

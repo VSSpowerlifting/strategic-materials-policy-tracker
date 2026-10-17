@@ -30,7 +30,7 @@ test("M3.2 seven source-linked candidates are a non-promoting review queue", () 
      "review-m3-2-inl-demonstration", "review-m3-2-neo-narva-magnets",
      "review-m3-2-stibnite-burntlog", "review-m3-2-stibnite-early-works",
      "review-m3-2-thompson-falls-q2-expansion"]);
-  assert.equal(getAllProjectMilestones().length, 0, "no candidate is a public milestone");
+  assert.equal(getAllProjectMilestones().length, 1, "no unsigned M3 queue candidate is promoted by the queue itself");
   assert.equal(getDatasetSummary().projects, getAllProjects().length);
 });
 
@@ -84,7 +84,7 @@ test("dated occurrence cannot follow source publication or the corpus cutoff", (
   const rows = q();
   rows[0].occurredOn = "2026-08-25";
   assert.match(audit(rows).errors.join(" | "), /occurred date postdates source evidence boundary/);
-  rows[0].occurredOn = "2026-10-10";
+  rows[0].occurredOn = "2026-10-18";
   assert.match(audit(rows).errors.join(" | "), /proposed occurrence postdates curated corpus cutoff/);
   rows[0].occurredOn = "2026-02-30";
   assert.match(audit(rows).errors.join(" | "), /real date or null/);
@@ -137,7 +137,7 @@ test("M3.2 whole_project null scope is structurally valid without inventing a pr
   const result = audit(rows);
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("M3.2 incompatible scope/name pairs still fail closed in both directions", () => {
@@ -172,7 +172,7 @@ test("Narva is one unsigned source review, not an operational-start day or a sec
   assert.ok(!("reviewedBy" in narva));
   assert.ok(!("reviewedAt" in narva));
   assert.deepEqual(audit().errors, []);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("Stibnite first early works may be queued without inventing a matching financing observation", () => {
@@ -197,7 +197,7 @@ test("Stibnite first early works may be queued without inventing a matching fina
   assert.deepEqual(report.candidates.find(x=>x.id===first.id)?.sourceBoundary,
     {date:"2025-10-21",basis:"publication"});
   assert.equal(report.candidates.find(x=>x.id===first.id)?.deduplicatedLegacyFinanceObservations,0);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length, 1);
 });
 
 test("M3 project-native empty finance references still require registered primary source and valid source date", () => {
@@ -237,9 +237,9 @@ test("Stibnite original-source registration uses actual access receipt without b
   assert.equal(source.confidence,"primary");
   assert.equal(source.datePublished,"2025-10-21","event/report date is not the 2026 access receipt");
   assert.equal(source.dateAccessed,"2026-10-09","never backdate original source access");
-  assert.equal(site.lastUpdated,"2026-10-09","source registration requires explicit corpus update approval");
+  assert.equal(site.lastUpdated, "2026-10-17","source registration requires explicit corpus update approval");
   assert.ok(source.notes?.includes("nonbinding"),"do not mislabel conditional EXIM financing");
-  assert.equal(getAllProjectMilestones().length,0,"primary source is not signed milestone approval");
+  assert.equal(getAllProjectMilestones().length, 1,"unsigned Stibnite source does not add another public milestone");
 });
 
 test("Project-native empty finance links cannot hide an existing same-source financial implementation observation", () => {
@@ -270,7 +270,7 @@ test("Thompson Falls Q2 progress is human-review gated, unsigned and not a finan
   assert.deepEqual(row.relatedFinanceIds, [], "no synthetic financier physical status");
   assert.equal(row.taxonomyQuestion, null);
   assert.match(row.editorialCaution, /not a completed\/operating project/);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 1);
   const result = audit();
   assert.deepEqual(result.errors, []);
   const match = result.candidates.find(c => c.id === row.id)!;
