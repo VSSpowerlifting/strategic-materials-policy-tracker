@@ -84,7 +84,7 @@ test("dated occurrence cannot follow source publication or the corpus cutoff", (
   const rows = q();
   rows[0].occurredOn = "2026-08-25";
   assert.match(audit(rows).errors.join(" | "), /occurred date postdates source evidence boundary/);
-  rows[0].occurredOn = "2026-10-10";
+  rows[0].occurredOn = "2026-10-18";
   assert.match(audit(rows).errors.join(" | "), /proposed occurrence postdates curated corpus cutoff/);
   rows[0].occurredOn = "2026-02-30";
   assert.match(audit(rows).errors.join(" | "), /real date or null/);
