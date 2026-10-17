@@ -28,6 +28,7 @@
     "audit:f5-observatory": "tsx scripts/audit-f5-observatory.ts",
     "audit:f5-coverage": "tsx scripts/audit-f5-coverage.ts",
     "audit:f5-drift": "tsx scripts/audit-f5-source-drift.ts",
+    "audit:f5-industrial-evidence": "tsx scripts/print-f5-industrial-evidence.ts",
     "preview:f5-observatory": "tsx scripts/preview-f5-observatory.ts",
     "audit:project-execution": "tsx scripts/audit-project-execution.ts",
     "audit:project-execution-pilot": "tsx scripts/audit-project-execution-pilot.ts",
