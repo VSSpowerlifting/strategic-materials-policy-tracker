@@ -35,7 +35,13 @@ test("Wagerup proposed date does not claim to authenticate fresh source updates 
     "current control suspension expiry dates remain future context, not new events");
   assert.equal(report.countOtherPostCutoffFields,0);
   assert.ok(report.futureIntervalEndFields.every(f=>
-    f.seed==="control-measures"&&f.field.endsWith(".until")&&f.date==="2026-11-10"));
+    f.seed==="control-measures"&&f.field.endsWith(".until")));
+  assert.deepEqual(
+    Object.fromEntries([...new Set(report.futureIntervalEndFields.map(f=>f.date))].sort()
+      .map(date=>[date,report.futureIntervalEndFields.filter(f=>f.date===date).length])),
+    {"2026-11-10":19,"2026-11-27":2},
+    "distinct official Chinese suspension expiry dates must not be collapsed",
+  );
   assert.equal(JSON.stringify(seeds()),original,"audit may not modify any seed arrays");
   assert.equal(site.lastUpdated,"2026-10-09",
     "candidate PR cannot quietly advance public corpus revision");
