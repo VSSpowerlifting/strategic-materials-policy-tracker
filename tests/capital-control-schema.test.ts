@@ -301,6 +301,7 @@ test("public counts derive from the seeds, Capital & Control included", () => {
     projects: seedLength("projects.json"),
     programmes: seedLength("programmes.json"),
     projectDesignations: seedLength("project-designations.json"),
+    projectMilestones: seedLength("project-milestones.json"),
   });
   assert.equal(getAllEvents().length, seedLength("events.json"));
   assert.equal(getAllSources().length, seedLength("sources.json"));
