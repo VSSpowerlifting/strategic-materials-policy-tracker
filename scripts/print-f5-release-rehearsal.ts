@@ -59,7 +59,7 @@ try {
       "Current published cutoff: " + report.publishedCorpusCutoff,
       "Proposed future cutoff: " + report.proposedCorpusCutoff,
       "Actual registered milestones: " + report.before.publishedMilestoneIds.length,
-      "Hypothetical proposed milestone IDs: " + report.proposedMilestoneIds.join(", ") || "(none)",
+      "Hypothetical proposed milestone IDs: " + (report.proposedMilestoneIds.length ? report.proposedMilestoneIds.join(", ") : "(none)"),
       "Structural staging eligible: " + report.stagingAllowed,
       "Before casefile QA candidates: " + report.before.structurallyEligiblePilots.join(", "),
       "After casefile QA candidates: " + report.after.structurallyEligiblePilots.join(", "),
