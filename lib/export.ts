@@ -36,15 +36,15 @@ const LIST_SEP = "; ";
  * The JSON export is the byte-faithful source for programmatic consumption.
  * CSV may add a tab to risky text, so it is a spreadsheet-oriented projection.
  */
-const FORMULA_PREFIX = /^[\\s\\u0000-\\u001f\\u007f-\\u009f]*[=+\\-@＝＋－＠]/u;
-const PLAIN_DECIMAL = /^[+-]?(?:\\d+)(?:\\.\\d+)?$/;
+const FORMULA_PREFIX = /^[\s\u0000-\u001f\u007f-\u009f]*[=+\-@＝＋－＠]/u;
+const PLAIN_DECIMAL = /^[+-]?(?:\d+)(?:\.\d+)?$/;
 
 function csvCell(v: unknown): string {
   const raw = v === null || v === undefined ? "" : String(v);
-  const risk = /^[\\t\\r\\n]/.test(raw) ||
+  const risk = /^[\t\r\n]/.test(raw) ||
     (FORMULA_PREFIX.test(raw) && !PLAIN_DECIMAL.test(raw));
-  const s = risk ? "\\t" + raw : raw;
-  return risk || /[",\\n\\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  const s = risk ? "\t" + raw : raw;
+  return risk || /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
 function toCsv(headers: string[], rows: unknown[][]): string {
