@@ -61,7 +61,7 @@ test("project detail API adds source-pinned human evidence without rewriting fin
   const body=await res.json();
   assert.equal(body.project.id,wagerup);
   assert.deepEqual(body.reviewedProjectMilestones,getProjectMilestonesByProject(wagerup));
-  assert.deepEqual(body.reviewedProjectMilestones.map((x:{id:string})=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(body.reviewedProjectMilestones.map((x:{id:string})=>x.id),[milestoneId]);
   assert.deepEqual(body.reviewedMilestoneSources.map((x:{id:string})=>x.id),[sourceId]);
   assert.deepEqual(body.reviewedMilestoneSources[0],getSourceById(sourceId));
   assert.match(body.reviewedMilestoneEvidenceBasis,/not independent on-site or financial verification/);

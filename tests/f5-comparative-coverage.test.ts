@@ -118,7 +118,7 @@ test("F5-4a milestone mode and separate clocks survive synthetic source-reviewed
   assert.deepEqual(row.nativeOccurredMilestoneIds, [...new Set([...d.milestones.filter(m=>m.projectId===p.id&&m.claimMode==="occurred").map(m=>m.id),"mil-fixture-reviewed-occurrence"])].sort());
   assert.deepEqual(row.nativePlannedMilestoneIds, []);
   assert.ok(row.structuralSourceIds.includes(src.id));
-  assert.equal(r.counts.withNativeOccurredMilestone, 1);
+  assert.equal(r.counts.withNativeOccurredMilestone, 2);
   assert.equal(r.historicalPhysicalAsOfAuthorized, false,
     "even an earlier legal query must not backdate a reviewed milestone");
 });

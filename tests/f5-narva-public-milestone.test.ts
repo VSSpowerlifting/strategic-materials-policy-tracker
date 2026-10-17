@@ -45,7 +45,7 @@ test("Narva original issuer and financing boundaries remain distinct from actual
   assert.equal(src.publisher,"Neo Performance Materials");
   assert.equal(src.datePublished,"2026-09-14");
   assert.equal(src.dateAccessed,"2026-10-02");
-  assert.match(src.url,/neomaterials\\.com/);
+  assert.match(src.url,/neomaterials\.com/);
   assert.equal(m.occurredOn,null);
   assert.ok(m.note?.includes("no observed 2,000-tonne output"));
   assert.ok(m.note?.includes("JTF-caused production"));

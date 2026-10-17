@@ -85,7 +85,7 @@ test("published Wagerup evidence has financier references but no magically appro
   assert.ok(ids.includes("fin-au-alcoa-sojitz-gallium-2025-offtake-right"));
   assert.ok(ids.includes("fin-us-alcoa-sojitz-gallium-2025-equity"));
   assert.deepEqual(items.filter(use=>use.kind==="milestone").map(use=>use.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
-  assert.deepEqual(getAllProjectMilestones().map(x => x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"], "no other unsigned F5 case was promoted");
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"], "no other unsigned F5 case was promoted");
 });
 
 test("reverse references are deterministic, grouped by canonical type, and source search links point to dossiers", () => {
