@@ -75,8 +75,8 @@
       "role": "same_company_forward_looking_not_independent",
       "url": "https://www.sec.gov/Archives/edgar/data/101538/000110465926094130/tm2622899d1_ex99-1.htm",
       "publishedOn": "2026-08-11",
-      "reportedPeriod": "2026-Q3_target",
-      "finding": "Company expected all nine new furnaces fully operating during Q3, an outlook rather than an achieved Aug 11 event.",
+      "reportedPeriod": "2026_second_half_outlook",
+      "finding": "August 11 Exhibit 99.1, Strategic Overview and 2026 Outlook, describes progress toward full operational status and expected utilization growth into the second half and 2027; it does not specify an all-nine-furnace Q3 deadline.",
       "caution": "An optimistic forward-looking operations forecast cannot upgrade construction progress."
     },
     {

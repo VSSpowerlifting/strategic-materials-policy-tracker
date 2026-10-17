@@ -27,7 +27,7 @@ const target:{
         url:"https://www.scledger.net/story/2025/10/02/news/usac-celebrates-expansion/12856.html",
         publishedOn:"2025-10-02",timeAsStated:"2025-05",dateMeaning:"reported_construction_began_month",registeredSourceId:null},
       {key:"first_furnace_commissioning",role:"original_issuer_statement",
-        url:"https://usantimony.com/press-release/united-states-antimony-corporation-provides-status-update-on-new-antimony-smelter/",
+        url:"https://usantimony.com/wp-content/uploads/2026/06/2026-0609_Smelter-Status.pdf",
         publishedOn:"2026-06-09",timeAsStated:"2026-05",dateMeaning:"issuer_reports_commissioning_began_month",registeredSourceId:null},
       {key:"quarterly_substantial_construction",role:"original_issuer_sec_filing",
         url:"https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm",

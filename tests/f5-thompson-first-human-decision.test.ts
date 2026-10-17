@@ -139,8 +139,9 @@ test("source-role clock and evidence independence stay distinct from SEC canonic
   assert.equal(leads[0].reportedPeriod,"2026-03-25");
   assert.equal(leads[0].publishedOn,"2026-08-11");
   assert.match(leads[0].finding,/not three physical plant commissioning milestones/);
-  assert.equal(leads[1].reportedPeriod,"2026-Q3_target");
-  assert.match(leads[1].finding,/outlook rather than an achieved/);
+  assert.equal(leads[1].reportedPeriod,"2026_second_half_outlook");
+  assert.match(leads[1].finding,/Strategic Overview and 2026 Outlook/);
+  assert.match(leads[1].finding,/does not specify an all-nine-furnace Q3 deadline/);
   assert.equal(leads[2].publishedOn,"2026-08-27");
   assert.match(leads[2].finding,/not concurrently/);
   assert.equal(leads[3].reportedPeriod,"2025-05");
