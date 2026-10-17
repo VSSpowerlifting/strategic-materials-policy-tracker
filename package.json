@@ -37,7 +37,9 @@
     "review:f5-bridge": "tsx scripts/print-f5-private-review-bridge.ts",
     "review:f5-batch": "tsx scripts/run-f5-private-review-batch.ts",
     "review:f5-prospective-worksheets": "tsx scripts/print-f5-prospective-worksheets.ts",
-    "review:f5-release": "tsx scripts/print-f5-release-rehearsal.ts"
+    "review:f5-release": "tsx scripts/print-f5-release-rehearsal.ts",
+    "review:f5-guided": "tsx scripts/run-f5-guided-private-review.ts",
+    "audit:production-parity": "tsx scripts/check-production-release-parity.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
