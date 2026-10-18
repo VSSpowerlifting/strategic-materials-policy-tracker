@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { EventListItem } from "@/components/event-card";
@@ -9,24 +9,33 @@ import { buildBibtexForEvent, plainCitation } from "@/lib/citation";
 import { eventsCsv } from "@/lib/export";
 import {
   clearSavedEvents,
-  getSavedEventIds,
+  readSavedEvents,
   subscribeSavedEvents,
   unsaveEvent,
 } from "@/lib/watchlist-client";
+import type { SavedEventsResult } from "@/lib/watchlist-client";
 import type { PolicyEvent } from "@/lib/types";
 
 const buttonClass =
-  "rounded-md border border-border px-3 py-1.5 font-display text-xs text-foreground transition-colors hover:border-accent/50 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground";
+  "min-h-11 rounded-md border border-border px-3 py-2 font-display text-sm text-foreground transition-colors hover:border-accent/50 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground";
 
 export function SavedEventsExplorer() {
   const [ids, setIds] = useState<string[]>([]);
   const [copied, setCopied] = useState<string | null>(null);
 
+  const [storageError, setStorageError] = useState(false);
+  const applyResult = useCallback((result: SavedEventsResult) => {
+    if (result.ok) setIds(result.ids);
+    setStorageError(!result.ok);
+  }, []);
+  const refresh = useCallback(() => applyResult(readSavedEvents()), [applyResult]);
+
   useEffect(() => {
-    const refresh = () => setIds(getSavedEventIds());
+    // Restore browser-only state after hydration, matching the save button.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh();
     return subscribeSavedEvents(refresh);
-  }, []);
+  }, [refresh]);
 
   // Resolved against the live corpus, newest first, and silently drops any id
   // whose event no longer exists (a corpus edit since it was saved) rather
@@ -47,6 +56,16 @@ export function SavedEventsExplorer() {
     } catch {
       setCopied(null);
     }
+  }
+
+  if (storageError && ids.length === 0) {
+    return <Card className="p-6">
+      <p role="status" className="font-display font-semibold">Saved events unavailable</p>
+      <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
+        Your saved list could not be read or updated. Check your browser&apos;s site storage settings, then retry.
+      </p>
+      <button type="button" onClick={refresh} className={buttonClass}>Retry saved list</button>
+    </Card>;
   }
 
   if (ids.length === 0) {
@@ -97,13 +116,16 @@ export function SavedEventsExplorer() {
               type="button"
               className={buttonClass}
               onClick={() => {
-                clearSavedEvents();
+                applyResult(clearSavedEvents());
               }}
             >
               Clear all
             </button>
           </div>
         </div>
+        {storageError ? <p role="status" className="mt-3 text-sm leading-6 text-muted">
+          Could not update your saved list. Check your browser&apos;s site storage settings and try again.
+        </p> : null}
         {staleCount > 0 ? (
           <p className="mt-2 text-xs leading-5 text-faint">
             {staleCount} saved {staleCount === 1 ? "id no longer resolves" : "ids no longer resolve"} to
@@ -122,9 +144,9 @@ export function SavedEventsExplorer() {
             </div>
             <button
               type="button"
-              onClick={() => unsaveEvent(e.id)}
+              onClick={() => applyResult(unsaveEvent(e.id))}
               aria-label={`Remove "${e.titleEn}" from my saved events`}
-              className="shrink-0 self-center rounded-md border border-border px-3 py-1.5 font-display text-xs text-muted transition-colors hover:border-accent/50 hover:text-accent"
+              className="min-h-11 shrink-0 self-center rounded-md border border-border px-3 py-2 font-display text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
             >
               Remove
             </button>
