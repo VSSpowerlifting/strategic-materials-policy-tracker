@@ -47,11 +47,12 @@ Browser Back, sharing and reload retain the analytical state.
 ## Release-readiness correction (2026-10-23)
 
 Dependency commit `949305e` updates exact pins for `next` and
-`eslint-config-next` from **16.4.0 to 16.4.1**. The regenerated npm lockfile
+`eslint-config-next` from **16.4.0 to 16.4.1**. Final pins are **16.4.3** after
+the demonstrated preview font failure described below. The regenerated npm lockfile
 changes only Next.js, its environment/ESLint packages and eight SWC variants;
 Linux SWC metadata gains upstream libc selectors. React/DOM remain 19.2.4,
 and sharp remains 0.35.5, now also the framework's minimum. Node >=20.9.0,
-React 19 and ESLint 9 remain supported; no compatibility code was needed.
+React 19 and ESLint 9 remain supported; no application compatibility code was needed.
 
 The demonstrated CI failure was the direct path `root → next@16.4.0`:
 
@@ -62,18 +63,36 @@ The demonstrated CI failure was the direct path `root → next@16.4.0`:
 | [GHSA-673q-mjm6-r5xr: cached typed-array RCE](https://github.com/advisories/GHSA-673q-mjm6-r5xr) | >=16.0.0 <=16.4.0 | 16.4.1 |
 
 The [official 16.4.1 release](https://github.com/vercel/next.js/releases/tag/v16.4.1)
-fixes all three. npm's suggested 16.4.3 is not the minimum required by these
-ranges. Fixed local PNG optimization remains in use; targeted source inspection
+fixes all three. These advisory ranges alone require only 16.4.1. Fixed local PNG
+optimization remains in use; targeted source inspection
 found no Server Actions or Cache Components/use-cache functions. This is a
 dependency remediation, not an assertion that an exploit was reproduced.
 
 `npm ci` passed, `npm ls` found consistent framework/peer versions, and the exact
 CI command `npm audit --omit=dev --audit-level=moderate` returned **zero
 vulnerabilities**, without overrides, exclusions, threshold changes or bypasses.
-The all-dependency audit still reports five high dev-only entries along
+An initial all-dependency audit snapshot also reported five high dev-only entries along
 `eslint-config-next → @next/eslint-plugin-next → fast-glob → micromatch → braces`
 ([braces advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm)); this is
-outside the production gate and was not suppressed or changed.
+outside the production gate and was not suppressed or independently patched.
+The later clean-install audit reported zero; the earlier snapshot remains a
+separate observation rather than evidence that this patch fixed braces.
+
+**Observed compatibility blocker:** automatic preview for `5658029` restored the
+previous build cache, then failed on Next.js 16.4.1 with JetBrains Mono and
+`next/font/google queries have exactly one entry`. Clean local builds passed.
+Cache restoration is observed context, not a demonstrated cause. The exact error
+matches [upstream issue #99114](https://github.com/vercel/next.js/issues/99114):
+Google sometimes returns extensionless font URLs containing query parameters;
+Turbopack split embedded ampersands in the serialized options. The
+[16.4.3 release](https://github.com/vercel/next.js/releases/tag/v16.4.3) includes
+[backport #100277](https://github.com/vercel/next.js/pull/100277) of the
+[URL parsing/extension fix #100158](https://github.com/vercel/next.js/pull/100158).
+16.4.2 lacks that fix. Therefore 16.4.3 is the smallest released correction for
+both the security advisories and the demonstrated font compatibility problem.
+No font substitution, local-font migration, cache purge, bypass or unchanged
+deployment retry was used. New final-head CI and preview evidence belongs in
+the PR receipt; the failed 5658029 preview is not counted as verification.
 
 The bounded presentation pass clarifies the headline to “How governments reshape
 strategic-material supply chains.” at 32px on mobile/desktop (40px tablet), reduces desktop
@@ -157,8 +176,9 @@ additional cache, backend service or dependency was needed.
   nonallocative treatment, unknown IDs, nested private-field sentinels, exact
   search discovery and a browser-safe import boundary. Updated an obsolete
   page-source regex to exercise actual public milestone rendering.
-- `npm run build`: passed on patched Next.js 16.4.1 on its first run, including
-  static investigation routes. No security-blocked build retry or bypass.
+- `npm run build`: local 16.4.1 baseline passed, including static investigation
+  routes. Remote 16.4.1 font failure prompted the justified 16.4.3 correction
+  above; final-head results are reported in the PR receipt. No security bypass.
 - Production-build Playwright: passed at **1440×900, 768×900, 390×900**, with
   reduced motion. Exercised material/stage keyboard and mobile selection,
   separate counts, government filtering, context transfer to Compare, Back,
