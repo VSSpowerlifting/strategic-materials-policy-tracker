@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Container, PageHeading } from "@/components/ui/container";
 import { EventsExplorer } from "@/components/events-explorer";
@@ -8,7 +9,7 @@ import {
 } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Events",
+  title: "Explore policy evidence",
   description:
     "Searchable, filterable database of policy events — export controls, designations, funding and stockpiling — across China, the US, the EU and allied states.",
 };
@@ -20,12 +21,17 @@ export default function EventsPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
-        eyebrow="The spine"
-        title="Policy events"
-        lead="Every tracked measure, newest first. Filter by actor, mechanism, status or material. Each event is a structured, source-linked record — open one for the full framing and citations."
+        eyebrow="Explore"
+        title="Explore policy evidence"
+        lead="Start with a material or government. Open a measure to distinguish its official rationale, legal standing and source-linked instruments. The list reflects this corpus, not all government activity."
       />
-      <div className="mt-10">
+      <nav aria-label="Explore record types" className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-display text-sm">
+        <span aria-current="page" className="font-semibold text-foreground">Policy events</span>
+        <Link href="/capital" className="text-accent underline underline-offset-4">Financial instruments</Link>
+        <Link href="/controls" className="text-accent underline underline-offset-4">Legal controls</Link>
+        <Link href="/sources" className="text-accent underline underline-offset-4">Original sources</Link>
+      </nav>
+      <div className="mt-8">
         {/*
           No Suspense boundary here on purpose. The explorer applies any URL
           filters from `window.location.search` after mount rather than through

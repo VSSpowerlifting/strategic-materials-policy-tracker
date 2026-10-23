@@ -74,23 +74,13 @@ export const navGroups = [
   },
 ] as const;
 
-/**
- * The six inline header links of the Lattice Register design. A presentation layer only: `navGroups` and `nav`
- * stay complete, so the sitemap, the footer and the small-screen menu still reach every page. "Explore" opens
- * the existing event explorer and is marked current across the record-browsing pages; "Jurisdictions" is the
- * `/actors` route under its design label.
- */
+/** Primary journeys. Legacy record and analytical routes remain under their parent. */
 export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] = [
   { href: "/", label: "Overview", exact: true },
-  { href: "/compare", label: "Compare" },
-  {
-    href: "/events",
-    label: "Explore",
-    alsoCurrentFor: ["/capital", "/controls", "/projects", "/organizations", "/programmes", "/sources", "/timeline", "/framing", "/search", "/response"],
-  },
-  { href: "/materials", label: "Materials" },
-  { href: "/actors", label: "Jurisdictions" },
-  { href: "/methodology", label: "Method" },
+  { href: "/events", label: "Explore", alsoCurrentFor: ["/capital", "/controls", "/materials", "/actors", "/organizations", "/programmes", "/sources", "/timeline", "/search"] },
+  { href: "/compare", label: "Compare", alsoCurrentFor: ["/framing", "/interplay", "/portfolios", "/response"] },
+  { href: "/projects", label: "Projects" },
+  { href: "/methodology", label: "Methodology" },
 ];
 
 /** Every header destination, flattened (footer, sitemap). */

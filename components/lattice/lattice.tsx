@@ -114,7 +114,7 @@ function LatticeTable({
   showCounts: boolean;
 }) {
   return (
-    <div className="hidden md:block">
+    <div className="hidden overflow-x-auto md:block" role="region" aria-label="Materials by stage; scroll horizontally for all stages" tabIndex={0}>
       <table className="w-full border-collapse">
         <caption className="sr-only">
           Materials by supply-chain stage. Each marked cell counts the government commitments, control clauses and designations recorded at that material and stage,
