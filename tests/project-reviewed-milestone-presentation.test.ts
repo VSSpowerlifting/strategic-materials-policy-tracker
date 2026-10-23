@@ -6,6 +6,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { ReviewedProjectMilestones } from "../components/projects/reviewed-project-milestones";
 import { getAllProjectMilestones, getSourceById } from "../lib/data";
 import { getSourceUses } from "../lib/source-usage";
+import ProjectPage from "../app/projects/[id]/page";
+import { getPublicProjectInvestigation } from "../lib/research-experience";
 import type { ProjectMilestone } from "../lib/types";
 
 const wagerupId = "mil-au-alcoa-wagerup-groundbreaking-2026-08-24";
@@ -14,9 +16,15 @@ const sourceId = "src-alcoa-wagerup-groundbreaking-2026";
 const html = (rows:readonly ProjectMilestone[]) =>
   renderToStaticMarkup(createElement(ReviewedProjectMilestones,{milestones:rows}));
 
-test("project detail has a dedicated conditional physical evidence lane but does not create /pathways",()=>{
+test("project detail uses the public projection for a conditional physical lane without creating /pathways", async()=>{
   const source=readFileSync("app/projects/[id]/page.tsx","utf8");
-  assert.match(source,/getAllProjectMilestones\(\)\.filter\(m => m\.projectId === id\)/);
+  const packet = getPublicProjectInvestigation(projectId)!.packet;
+  assert.deepEqual(packet.nativeMilestones.map(m=>m.id), [wagerupId]);
+  const view = renderToStaticMarkup(await ProjectPage({params:Promise.resolve({id:projectId})}));
+  assert.ok(view.includes(packet.nativeMilestones[0].statementOriginal.replaceAll("&", "&amp;")));
+  const missing = renderToStaticMarkup(await ProjectPage({params:Promise.resolve({id:"prj-us-stibnite"})}));
+  assert.match(missing, /No source-reviewed project milestone is published/);
+  assert.doesNotMatch(missing, /Groundbreaking \(reported\)/);
   assert.match(source,/reviewedMilestones\.length \? \(/,
     "other unreviewed project pages must not invent an empty physical timeline");
   assert.match(source,/Source-reviewed industrial observations/);

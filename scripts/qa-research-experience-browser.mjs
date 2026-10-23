@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import { spawn } from "node:child_process";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { setTimeout as delay } from "node:timers/promises";
 const { chromium } = createRequire(import.meta.url)(
   process.env.PLAYWRIGHT_MODULE ?? "playwright",
@@ -48,7 +48,7 @@ try {
   const errors = [];
   for (const width of [390, 768, 1440]) {
     const page = await browser.newPage({
-      viewport: { width, height: 1000 },
+      viewport: { width, height: 900 },
       reducedMotion: "reduce",
     });
     page.on("pageerror", (e) => errors.push(e.message));
@@ -60,6 +60,7 @@ try {
         false,
         `${label} overflows at ${width}`,
       );
+      await page.evaluate(() => document.fonts.ready);
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.screenshot({
         path: `${output}/${label}-${width}.png`,
@@ -72,8 +73,27 @@ try {
     await page.goto(base, { waitUntil: "networkidle" });
     assert.match(
       await page.locator("h1").innerText(),
-      /From government policy/,
+      /From policy to industrial evidence/,
     );
+    await page.evaluate(() => document.fonts.ready);
+    const fontSession = await page.context().newCDPSession(page);
+    await fontSession.send("DOM.enable"); await fontSession.send("CSS.enable");
+    const { root } = await fontSession.send("DOM.getDocument");
+    const loadedFonts = {};
+    for (const [selector, expected] of [["h1", "Newsreader"], ["select", "Archivo"], ["kbd", "JetBrains Mono"]]) {
+      const { nodeId } = await fontSession.send("DOM.querySelector", { nodeId: root.nodeId, selector });
+      const { fonts } = await fontSession.send("CSS.getPlatformFontsForNode", { nodeId });
+      // kbd is hidden below xl: use a visible synthetic data-token sample with the existing class.
+      if (fonts.length) assert.ok(fonts.some(f => f.isCustomFont && f.familyName.includes(expected)), `${selector}: ${JSON.stringify(fonts)}`);
+      loadedFonts[selector] = fonts;
+    }
+    console.log("Actual platform fonts", width, JSON.stringify(loadedFonts));
+    await fontSession.detach();
+    if (width === 1440) {
+      const matrix = await page.locator('table').first().boundingBox();
+      assert.ok(matrix.y < 260 && matrix.height > 500, JSON.stringify(matrix));
+      assert.equal(await page.locator("h1").evaluate(el => getComputedStyle(el).fontSize), "40px");
+    }
     assert.equal(await page.locator("dialog[open]").count(), 0);
     await page.keyboard.press("Tab");
     assert.equal(
@@ -85,6 +105,8 @@ try {
       await page.evaluate(() => document.activeElement.id),
       "main-content",
     );
+    assert.equal(new URL(page.url()).hash, "", "skip link preserves analytical URL");
+    assert.equal(await page.getByText("Unsupported analytical selection hash.", { exact: false }).count(), 0);
     await checkLayout("home");
     if (width < 1024) {
       const toggle = page.getByRole("button", { name: "Menu", exact: true });
@@ -97,12 +119,37 @@ try {
         true,
       );
     }
-    await page
-      .getByRole("link", {
-        name: "Open the project investigation",
-        exact: true,
-      })
-      .click();
+    // One URL-backed analytical journey at every viewport.
+    const analytical = page.getByRole("region", { name: "Materials by supply-chain stage", exact: true });
+    if (width >= 768) {
+      const selected = analytical.getByRole("button", { name: /^Gallium, Processing:/ });
+      await selected.focus(); await page.keyboard.press("Enter");
+      assert.equal(await selected.getAttribute("aria-pressed"), "true");
+    } else {
+      await analytical.getByLabel("Material", { exact: true }).selectOption("gallium");
+      await analytical.getByRole("button", { name: /^Processing/ }).click();
+    }
+    assert.ok(page.url().endsWith("#gallium:processing"));
+    const evidence = page.getByRole("complementary", { name: "Selected node" });
+    assert.match(await evidence.innerText(), /6 commitments, 1 control clause, 1 designation/);
+    await page.locator(".skip-link").focus(); await page.keyboard.press("Enter");
+    assert.ok(page.url().endsWith("#gallium:processing"));
+    await analytical.getByLabel("Records", { exact: true }).selectOption("commitments,controls");
+    assert.match(await evidence.innerText(), /6 commitments, 1 control clause/);
+    assert.doesNotMatch(await evidence.innerText(), /1 designation/);
+    await page.reload({ waitUntil: "networkidle" });
+    assert.equal(await analytical.getByLabel("Records", { exact: true }).inputValue(), "commitments,controls");
+    await analytical.getByLabel("Records", { exact: true }).selectOption("all");
+    await analytical.getByLabel("Government", { exact: true }).selectOption("australia");
+    assert.match(await evidence.innerText(), /3 commitments/);
+    await page.reload({ waitUntil: "networkidle" });
+    assert.equal(await analytical.getByLabel("Government", { exact: true }).inputValue(), "australia");
+    const compare = evidence.getByRole("link", { name: "Compare this selection", exact: true });
+    await compare.click();
+    await page.waitForURL("**/compare?government=australia#gallium:processing");
+    assert.match(await page.getByRole("complementary", { name: "Selected node" }).filter({ visible: true }).innerText(), /3 commitments/);
+    await page.goBack({ waitUntil: "networkidle" });
+    await page.locator('#selected-evidence a[href="/projects/prj-au-alcoa-sojitz-gallium"]').first().click();
     await page.waitForURL("**/projects/prj-au-alcoa-sojitz-gallium");
     await page
       .getByRole("heading", { name: "What does the record establish?" })
@@ -131,6 +178,18 @@ try {
       await page.locator("#project-finance").innerText(),
       /not promoted beyond the existing announced state/,
     );
+    const packetLink = page.getByRole("link", { name: "Download investigation JSON", exact: true }).first();
+    const downloadPromise = page.waitForEvent("download");
+    await packetLink.click();
+    const download = await downloadPromise;
+    assert.equal(download.suggestedFilename(), "smpt-prj-au-alcoa-sojitz-gallium-investigation.json");
+    const packet = JSON.parse(await readFile(await download.path(), "utf8"));
+    assert.equal(packet.projectionVersion, "smpt-investigation-1");
+    assert.equal(packet.corpus.revision, "2026-10-17");
+    assert.equal(packet.projectId, "prj-au-alcoa-sojitz-gallium");
+    assert.equal(packet.nativeMilestones[0].id, "mil-au-alcoa-wagerup-groundbreaking-2026-08-24");
+    assert.match(packet.nativeMilestones[0].note, /ceremon/);
+    for (const f of packet.financialInstruments) assert.ok(await page.locator(`#project-finance a[href="/capital/${f.id}"]`).count());
     await checkLayout("wagerup");
     const source = page.locator(
       '#project-industrial a[href^="https://news.alcoa.com/"]',
@@ -139,9 +198,10 @@ try {
     assert.equal(await source.getAttribute("rel"), "noopener noreferrer");
     // Source URL fidelity is verified below against the stored dataset, without
     // treating successful rendering as evidence of publisher network availability.
-    await page
-      .getByRole("link", { name: "About Benjamin Yang", exact: true })
-      .click();
+    if (width < 640) {
+      await page.getByRole("button", { name: "Menu", exact: true }).click();
+    }
+    await page.getByRole("link", { name: "About Benjamin Yang", exact: true }).first().click();
     await page.waitForURL("**/about");
     assert.match(await page.locator("h1").innerText(), /Benjamin Yang/);
     await checkLayout("about");
@@ -250,12 +310,25 @@ try {
       await cell.evaluate((el) => el === document.activeElement),
       true,
     );
-    await page.getByText("Research tools", { exact: true }).click();
-    await page.keyboard.press("Escape");
-    assert.equal(
-      await page.locator(".resource-disclosure").getAttribute("open"),
-      null,
-    );
+    if (width >= 1024) {
+      await page.getByText("Research tools", { exact: true }).click();
+      await page.keyboard.press("Escape");
+      assert.equal(await page.locator(".resource-disclosure").getAttribute("open"), null);
+    }
+    for (const route of ["methodology", "data"]) {
+      await page.goto(base + "/" + route, { waitUntil: "networkidle" });
+      await checkLayout(route);
+    }
+    await page.goto(base + "/?material=missing&stage=processing", { waitUntil: "networkidle" });
+    await page.getByRole("status").filter({ hasText: "No records selected" }).waitFor();
+    assert.equal(await page.getByRole("complementary", { name: "Selected node" }).count(), 0);
+    await page.goto(base + "/#gallium:exploration", { waitUntil: "networkidle" });
+    assert.match(await page.getByRole("complementary", { name: "Selected node" }).innerText(), /No record/);
+    await page.goto(base + "/search?q=Wagerup+groundbreaking", { waitUntil: "networkidle" });
+    const discovered = page.locator('[data-testid="search-results"] a[href="/projects/prj-au-alcoa-sojitz-gallium#project-industrial"]');
+    await discovered.click();
+    await page.waitForURL("**/projects/prj-au-alcoa-sojitz-gallium#project-industrial");
+    assert.match(await page.locator("#project-industrial").innerText(), /Groundbreaking/);
     await page.close();
   }
   assert.deepEqual(errors, [], "browser page errors");

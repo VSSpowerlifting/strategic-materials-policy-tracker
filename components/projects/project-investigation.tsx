@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Section } from "@/components/ui/container";
 import { SourceMention } from "@/components/capital/primitives";
 import { OrgList } from "@/components/intelligence/org-link";
-import { currentFinancialStatus } from "@/lib/capital-control";
 import {
   financialInstrumentLabels,
   financialStatusLabels,
@@ -18,13 +17,13 @@ type Investigation = NonNullable<
 >;
 
 export function ProjectOverview({
-  investigation: { stack, pathway },
+  investigation: { stack, pathway, packet },
 }: {
   investigation: Investigation;
 }) {
   const states = [
     ...new Set(
-      stack.rows.map((c) => financialStatusLabels[currentFinancialStatus(c)]),
+      packet.financialInstruments.map((c) => financialStatusLabels[c.currentFinancialStatus]),
     ),
   ];
   return (
@@ -34,7 +33,7 @@ export function ProjectOverview({
           What does the record establish?
         </h2>
         <p className="mt-3 max-w-4xl text-base leading-8 text-muted">
-          {stack.project.notes ??
+          {packet.project.notes ??
             "This registered undertaking is linked below to its financial instruments, policy context and available industrial evidence."}
         </p>
       </section>
@@ -90,7 +89,7 @@ export function ProjectOverview({
 }
 
 export function ProjectFinancialRecord({
-  investigation: { stack },
+  investigation: { packet },
 }: {
   investigation: Investigation;
 }) {
@@ -99,14 +98,14 @@ export function ProjectFinancialRecord({
       title="Financial evidence and chronology"
       description="Each instrument keeps its own financial history. These dates describe financial states, not construction or production. Amounts are the current recorded terms, not historical amounts at every date below."
     >
-      {!stack.rows.length ? (
+      {!packet.financialInstruments.length ? (
         <p className="text-muted">
           No directly attributable financial instruments are recorded. Shared
           packages, if any, appear separately below.
         </p>
       ) : null}
-      <div className="space-y-4">
-        {stack.rows.map((row) => (
+      <div className="project-evidence space-y-4">
+        {packet.financialInstruments.map((row) => (
           <details
             key={row.id}
             className="rounded border border-border-strong bg-card p-4 sm:p-5"
@@ -116,7 +115,7 @@ export function ProjectFinancialRecord({
               {row.provider ?? "Provider not stated"}
               <span className="mt-1 block pl-4 text-sm font-normal text-muted">
                 {row.amount?.amountAsStated ?? "Amount not stated"} ·{" "}
-                {financialStatusLabels[currentFinancialStatus(row)]} ·{" "}
+                {financialStatusLabels[row.currentFinancialStatus]} ·{" "}
                 {valueRoleLabels[row.valueRole]}
               </span>
             </summary>
@@ -212,7 +211,7 @@ export function ProjectFinancialRecord({
 }
 
 export function ProjectPolicyContext({
-  investigation: { pathway },
+  investigation: { packet },
 }: {
   investigation: Investigation;
 }) {
@@ -221,31 +220,31 @@ export function ProjectPolicyContext({
       title="Policy context"
       description="These records directly parent the project's finance or designation entries. Their presence does not establish a causal effect on industrial activity."
     >
-      <ul className="space-y-4">
-        {pathway.policyContexts.map((context) => (
+      <ul className="project-evidence space-y-4">
+        {packet.policyContexts.map((context) => (
           <li key={context.id} className="rounded border bg-card p-4">
             <p className="font-display text-xs text-muted">
-              {formatDate(context.eventDate)} ·{" "}
-              {policyStatusLabels[context.eventStatus as PolicyStatus]}
+              {formatDate(context.date)} ·{" "}
+              {policyStatusLabels[context.policyStatus as PolicyStatus]}
             </p>
             <h3 className="mt-2 font-display font-semibold leading-7">
               <Link
                 href={`/events/${context.id}`}
                 className="text-accent hover:underline"
               >
-                {context.title}
+                {context.titleEn}
               </Link>
             </h3>
             <p className="mt-2 text-sm text-muted">{context.issuingBody}</p>
             <div className="mt-3 flex flex-wrap gap-3">
-              {context.sourceRecords.map((source) => (
-                <SourceMention key={source.id} sourceId={source.id} />
+              {context.sourceIds.map((sourceId) => (
+                <SourceMention key={sourceId} sourceId={sourceId} />
               ))}
             </div>
           </li>
         ))}
       </ul>
-      {!pathway.policyContexts.length ? (
+      {!packet.policyContexts.length ? (
         <p className="text-muted">
           No parent finance or designation policy record is linked.
         </p>
@@ -254,54 +253,8 @@ export function ProjectPolicyContext({
   );
 }
 
-export function ProjectUnknowns({
-  investigation: { stack, pathway },
-}: {
-  investigation: Investigation;
-}) {
-  const missingAmounts = stack.rows.filter((row) => !row.amount).length;
-  return (
-    <Section
-      title="What remains unknown"
-      description="Gaps describe the available SMPT record. They do not establish that an activity did not occur."
-    >
-      <ul className="list-disc space-y-3 pl-5 text-base leading-7 text-muted">
-        <li>
-          {pathway.nativeMilestones.length
-            ? "Reviewed observations establish only their stated scope. They do not by themselves establish sustained construction, capacity achieved, commercial output or a financing payout."
-            : "No project-native source-reviewed industrial milestone is published. Attributed activity in financing histories remains a separate evidence class; no exact milestone date or facility-wide conclusion is inferred."}
-        </li>
-        {missingAmounts ? (
-          <li>
-            {missingAmounts} directly linked instrument
-            {missingAmounts === 1 ? " has" : "s have"} no stated amount. The
-            missing value is not zero.
-          </li>
-        ) : null}
-        {!stack.project.sponsorOrgIds.length ? (
-          <li>
-            The project registry does not identify a sponsor organization.
-            Providers and recipients are recorded separately on each financial
-            instrument.
-          </li>
-        ) : null}
-        {pathway.reviewGaps.hasUnreviewedFinancialAmounts ? (
-          <li>
-            Historical amount review is incomplete. The current capital stack
-            cannot be read as a time series of earlier commitments.
-          </li>
-        ) : null}
-        {stack.associatedRows.length ? (
-          <li>
-            Shared financing is not allocated among the named projects and is
-            excluded from this project&apos;s stack and backers.
-          </li>
-        ) : null}
-        <li>
-          Structural links and shared materials do not demonstrate that a
-          government measure caused an industrial outcome.
-        </li>
-      </ul>
-    </Section>
-  );
+export function ProjectUnknowns({ investigation: { packet } }: { investigation: Investigation }) {
+  return <Section title="What remains unknown" description="Gaps describe the available SMPT record. They do not establish that an activity did not occur.">
+    <ul className="list-disc space-y-3 pl-5 font-display text-sm leading-7 text-muted">{packet.unknowns.map(note => <li key={note}>{note}</li>)}</ul>
+  </Section>;
 }

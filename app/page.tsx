@@ -3,13 +3,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import {
   getAllMaterials,
-  getAllProjectMilestones,
   getDatasetSummary,
-  getFinancialCommitmentById,
 } from "@/lib/data";
 import { getInvestigationEntries } from "@/lib/research-experience";
-import { currentFinancialStatus } from "@/lib/capital-control";
-import { financialStatusLabels } from "@/lib/labels";
+import { LatticeOverview } from "@/components/lattice/lattice";
+import { buildLatticeModel } from "@/lib/lattice";
 import { formatDateLong } from "@/lib/format";
 import { site } from "@/lib/site";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
@@ -31,111 +29,21 @@ export const metadata: Metadata = {
 export default function Home() {
   const counts = getDatasetSummary();
   const investigations = getInvestigationEntries();
-  const featured = investigations.find(
-    (x) => x.id === "prj-au-alcoa-sojitz-gallium",
-  );
-  const finance = getFinancialCommitmentById(
-    "fin-au-alcoa-sojitz-gallium-2025-equity",
-  );
-  const milestone = getAllProjectMilestones().find(
-    (m) => m.projectId === featured?.id,
-  );
+  const model = buildLatticeModel(site.lastUpdated);
   return (
     <div data-flush-footer>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(datasetJsonLd()) }}
       />
-      <Container width="wide" className="py-10 sm:py-14">
-        <div className="research-opening">
-          <div>
-            <p className="mb-5 font-display text-sm text-muted">
-              An independent economic-security research project
-            </p>
-            <h1 className="max-w-3xl font-serif text-[2.75rem] font-medium leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.25rem]">
-              From government policy to industrial reality.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-muted">
-              How do governments reshape strategic-material supply chains? Trace
-              legal controls, public finance and industrial intervention to the
-              evidence of what followed.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/events" className="research-button">
-                Explore the evidence
-              </Link>
-              <Link href="/compare" className="research-button-secondary">
-                Compare government approaches
-              </Link>
-            </div>
-            <p className="mt-6 font-display text-sm text-muted">
-              Built and maintained by{" "}
-              <Link
-                href="/about"
-                className="text-foreground underline underline-offset-4"
-              >
-                Benjamin Yang
-              </Link>
-              .
-            </p>
-          </div>
-          {featured ? (
-            <aside
-              className="opening-case"
-              aria-labelledby="opening-case-title"
-            >
-              <p className="font-display text-sm text-muted">
-                Inside a project investigation
-              </p>
-              <h2
-                id="opening-case-title"
-                className="mt-3 font-serif text-3xl leading-tight"
-              >
-                Gallium recovery at Wagerup
-              </h2>
-              <p className="mt-3 text-base leading-7 text-muted">
-                {featured.question}
-              </p>
-              <dl className="mt-5 space-y-4">
-                {finance ? (
-                  <div className="border-t pt-4">
-                    <dt className="font-display text-xs text-muted">
-                      Australian equity support
-                    </dt>
-                    <dd className="mt-1 text-lg">
-                      {finance.amount?.amountAsStated ?? "Amount not stated"}
-                    </dd>
-                    <dd className="mt-1 font-display text-sm text-accent">
-                      {financialStatusLabels[currentFinancialStatus(finance)]}{" "}
-                      in the financial record
-                    </dd>
-                  </div>
-                ) : null}
-                <div className="border-t pt-4">
-                  <dt className="font-display text-xs text-muted">
-                    Industrial evidence
-                  </dt>
-                  <dd className="mt-1 text-lg">
-                    {milestone
-                      ? "A source-reviewed groundbreaking observation"
-                      : "Inspect the available project evidence"}
-                  </dd>
-                  <dd className="mt-1 text-sm leading-6 text-muted">
-                    Physical activity does not establish execution or payment of
-                    a financial instrument.
-                  </dd>
-                </div>
-              </dl>
-              <Link
-                href={featured.href}
-                className="mt-5 inline-block font-display text-sm font-semibold text-accent underline underline-offset-4"
-              >
-                Open the project investigation
-              </Link>
-            </aside>
-          ) : null}
-        </div>
-        <div className="mt-12 border-t border-border-strong pt-6">
+      <Container width="wide" className="py-7 sm:py-9">
+        <LatticeOverview model={model} preferred={{ slug: "gallium", stage: "processing" }} intro={<>
+          <p className="font-display text-sm text-muted">Strategic materials, government action</p>
+          <h1 className="mt-3 font-serif text-[2rem] font-semibold sm:text-[2.5rem] leading-[1.1] tracking-tight">From policy to industrial evidence.</h1>
+          <p className="mt-4 font-serif text-base leading-7 text-muted">Trace legal controls, public finance and reported project activity to the evidence behind each claim.</p>
+          <p className="mt-4 font-display text-xs text-muted">Research by <Link href="/about" className="underline underline-offset-4">Benjamin Yang</Link>.</p>
+        </>} />
+        <div className="mt-8 border-t border-border-strong pt-5">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <h2 className="font-display text-base font-semibold">
               Start with a material

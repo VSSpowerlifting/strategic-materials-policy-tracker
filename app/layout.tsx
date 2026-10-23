@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SkipLink } from "@/components/skip-link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
@@ -45,8 +46,8 @@ export default function RootLayout({
       lang="en"
       className={`${archivo.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full`}
     >
-      <body className="research-edition flex min-h-full flex-col antialiased">
-        <a href="#main-content" className="skip-link">Skip to content</a>
+      <body className="flex min-h-full flex-col antialiased">
+        <SkipLink />
         <SiteHeader />
         <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
         <SiteFooter />

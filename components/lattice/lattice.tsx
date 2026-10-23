@@ -1,60 +1,80 @@
 "use client";
 
 /**
- * The lattice views. `LatticeOverview` is the front-page hero (the whole lattice, one selected node, no
- * controls); `LatticeCompare` adds the kind toggles, the government filter, a records panel for the selected
- * node and a one-material split by government. Both read a serialized `LatticeModel` and count records of one
+ * The lattice views. Overview and Compare share URL-backed selection, government
+ * and record-kind filters and the selected records panel. Compare adds a material
+ * split by government. Both read a serialized `LatticeModel` and count records of one
  * kind at a time: a cell never shows a sum across kinds, a row or column is never totalled, and money appears
  * only as a row's own amount in its own currency. The selected node lives in the URL hash so a view can be
  * shared without making the route dynamic.
  */
 import Link from "next/link";
-import { useCallback, useId, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useCallback, useId, useSyncExternalStore, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { controlStatusLabels } from "@/lib/labels";
 import { formatDate } from "@/lib/format";
 import type { LatticeCommitment, LatticeControl, LatticeDesignation, LatticeModel } from "@/lib/lattice";
 import {
-  ALL_KINDS,
-  NO_FILTER,
   cellView,
   countWord,
-  defaultSelection,
   governmentRows,
   isMarked,
-  parseSelection,
   type CellView,
-  type KindVisibility,
   type LatticeFilter,
 } from "@/lib/lattice-view";
-import type { ControlStatus, JurisdictionCode, SupplyChainStage } from "@/lib/types";
-import { AreaKey, CellMarks, KindSwatch, stageShortLabels, type MarkKind } from "./marks";
-import { NotOnLatticeStats, ControlGapNotice } from "./not-on-lattice";
+import { normalizeResearchQuery, researchQueryHref, researchQueryResult, QUERY_KINDS, type ResearchQuery } from "@/lib/research-query";
+import type { SupplyChainStage } from "@/lib/types";
+import { AreaKey, CellMarks, KindSwatch, type MarkKind } from "./marks";
+import { NotOnLatticeStats, ControlGapNotice, NotPlacedSentence } from "./not-on-lattice";
 
 type Selection = { materialId: string; stage: SupplyChainStage };
 type Preferred = { slug: string; stage: SupplyChainStage };
 
 // --- Selection in the URL hash -------------------------------------------------------------------
 
-const subscribeHash = (cb: () => void) => {
+const subscribeLocation = (cb: () => void) => {
   window.addEventListener("hashchange", cb);
-  return () => window.removeEventListener("hashchange", cb);
+  window.addEventListener("popstate", cb);
+  return () => { window.removeEventListener("hashchange", cb); window.removeEventListener("popstate", cb); };
 };
-const readHash = () => window.location.hash;
-const serverHash = () => "";
+const readLocation = () => window.location.href;
+const serverLocation = () => "/";
 
-function useSelection(model: LatticeModel, preferred: Preferred): [Selection | null, (s: Selection) => void] {
-  const hash = useSyncExternalStore(subscribeHash, readHash, serverHash);
-  const selection = parseSelection(model, hash) ?? defaultSelection(model, preferred);
-  const select = useCallback(
-    (s: Selection) => {
-      const slug = model.materials.find((m) => m.id === s.materialId)?.slug ?? s.materialId;
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#${slug}:${s.stage}`);
-      window.dispatchEvent(new HashChangeEvent("hashchange"));
-    },
-    [model],
-  );
-  return [selection, select];
+function useResearchQuery(model: LatticeModel, preferred: Preferred) {
+  const location = useSyncExternalStore(subscribeLocation, readLocation, serverLocation);
+  const query = normalizeResearchQuery(model, location, preferred);
+  const update = useCallback((next: ResearchQuery) => {
+    const href = researchQueryHref(model, next, window.location.pathname, window.location.href);
+    window.history.pushState(window.history.state, "", href);
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+  }, [model]);
+  const select = (selection: Selection) => update({ ...query, selection, issues: [] });
+  return { query, update, select };
+}
+
+function QueryControls({ model, query, update }: { model: LatticeModel; query: ResearchQuery; update: (q: ResearchQuery) => void }) {
+  const id = useId();
+  const change = (field: "government" | "kind", value: string) => {
+    const url = new URL(researchQueryHref(model, query, "/"), "https://smpt.invalid");
+    url.searchParams.set(field, value);
+    update(normalizeResearchQuery(model, url.href));
+  };
+  return <div className="flex flex-wrap items-center gap-3 font-display text-xs">
+    <label htmlFor={id + "government"} className="flex items-center gap-2 text-muted">Government
+      <select aria-label="Government" id={id + "government"} value={query.filter.actor} disabled={!!query.issues.length} onChange={e => change("government", e.target.value)} className="min-h-10 rounded border border-border-strong bg-card px-2 text-sm text-foreground">
+        <option value="all">All governments</option>{model.actors.map(a => <option key={a.code} value={a.code}>{a.name}</option>)}
+      </select>
+    </label>
+    <label htmlFor={id + "kind"} className="flex items-center gap-2 text-muted">Records
+      <select aria-label="Records" id={id + "kind"} value={query.kind} disabled={!!query.issues.length} onChange={e => change("kind", e.target.value)} className="min-h-10 rounded border border-border-strong bg-card px-2 text-sm text-foreground">
+        {QUERY_KINDS.map(k => <option key={k} value={k}>{({ all: "All kinds", commitments: "Commitments", controls: "Control clauses", designations: "Designations", "commitments,controls": "Commitments + controls", "commitments,designations": "Commitments + designations", "controls,designations": "Controls + designations", none: "None" })[k]}</option>)}
+      </select>
+    </label>
+    <span className="text-muted">Provider / issuer / designating government</span>
+  </div>;
+}
+
+function QueryIssues({ query }: { query: ResearchQuery }) {
+  return query.issues.length ? <p role="status" className="my-4 rounded border border-accent p-4 font-display text-sm">{query.issues.join(" ")} No records selected. <a href={typeof window === "undefined" ? "/" : window.location.pathname} className="underline">Reset analytical selection</a>.</p> : null;
 }
 
 // --- Small shared pieces -------------------------------------------------------------------------
@@ -87,14 +107,6 @@ function CountLine({ counts, inline = false }: { counts: CellView["counts"]; inl
           </span>
         ))}
     </span>
-  );
-}
-
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg viewBox="0 0 12 12" aria-hidden className={cn("h-3 w-3 shrink-0 text-faint transition-transform motion-reduce:transition-none", open && "rotate-180")}>
-      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
@@ -189,128 +201,24 @@ function LatticeTable({
   );
 }
 
-// --- The phone lattice ---------------------------------------------------------------------------
-
-function MobileLattice({
-  model,
-  filter,
-  openId,
-  onToggle,
-}: {
-  model: LatticeModel;
-  filter: LatticeFilter;
-  openId: string | null;
-  onToggle: (materialId: string) => void;
-}) {
-  const cols = { gridTemplateColumns: `repeat(${model.stages.length}, minmax(0, 1fr))` };
-  return (
-    <div className="md:hidden">
-      <div className="flex items-end gap-2 pl-[6.5rem] pr-6" aria-hidden>
-        <div className="grid h-[4.75rem] flex-1 items-end" style={cols}>
-          {model.stages.map((s) => (
-            <span key={s.id} className="relative block h-full">
-              <span className="absolute bottom-0 left-1/2 origin-bottom-left -rotate-[55deg] whitespace-nowrap font-display text-[11px] text-muted">{stageShortLabels[s.id]}</span>
-            </span>
-          ))}
-        </div>
-      </div>
-      <ul className="mt-2 divide-y divide-border/70 border-y border-border/70">
-        {model.materials.map((m) => {
-          const open = openId === m.id;
-          const panelId = `lattice-${m.id}`;
-          return (
-            <li key={m.id} className={cn(open && "bg-foreground/[0.05]")}>
-              <button
-                type="button"
-                aria-expanded={open}
-                aria-controls={panelId}
-                onClick={() => onToggle(m.id)}
-                className="grid w-full grid-cols-[6.25rem_1fr_1.25rem] items-center gap-x-2 py-1.5 pl-1 pr-1 text-left outline-offset-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-              >
-                <span className={cn("font-display text-sm leading-tight", open ? "font-semibold text-accent" : "text-foreground")}>{m.nameEn}</span>
-                <span className="grid" style={cols}>
-                  {model.stages.map((s) => {
-                    const v = cellView(model, m.id, s.id, filter);
-                    return v && isMarked(v) ? <CellMarks key={s.id} counts={v.counts} compact /> : <span key={s.id} aria-hidden className="block text-center font-mono text-[10px] text-faint/40">·</span>;
-                  })}
-                </span>
-                <Chevron open={open} />
-              </button>
-              {open ? <MobileMaterialDetail id={panelId} model={model} filter={filter} materialId={m.id} /> : null}
-            </li>
-          );
-        })}
-      </ul>
+// Mobile uses readable controls and the same selected-cell records, not miniature desktop columns.
+function MobileLattice({ model, filter, selection, onSelect }: { model: LatticeModel; filter: LatticeFilter; selection: Selection | null; onSelect: (s: Selection) => void }) {
+  const id = useId();
+  return <div className="md:hidden">
+    <label htmlFor={id} className="font-display text-sm text-muted">Material</label>
+    <select id={id} value={selection?.materialId ?? ""} onChange={e => onSelect({ materialId: e.target.value, stage: selection?.stage ?? model.stages[0].id })} className="mt-2 min-h-11 w-full rounded border border-border-strong bg-card px-3 font-display text-base">
+      <option value="" disabled>Select a material</option>{model.materials.map(m => <option key={m.id} value={m.id}>{m.nameEn}</option>)}
+    </select>
+    <p className="mt-4 font-display text-sm text-muted">Supply-chain stage · select to inspect</p>
+    <div className="mt-2 grid grid-cols-2 gap-2">
+      {model.stages.map(stage => {
+        const view = selection ? cellView(model, selection.materialId, stage.id, filter) : null;
+        return <button key={stage.id} type="button" disabled={!selection} aria-pressed={selection?.stage === stage.id} onClick={() => selection && onSelect({ ...selection, stage: stage.id })} className={cn("min-h-14 rounded border border-border-strong px-3 py-2 text-left font-display text-sm", selection?.stage === stage.id && "border-accent ring-1 ring-accent")}>
+          <span className="block">{stage.label}{selection?.stage === stage.id ? <span aria-hidden className="ml-2">✓</span> : null}</span><span className="mt-1 block text-xs text-muted">{view ? cellSummary(view.counts) || "No counted records" : "No counted records"}</span>
+        </button>;
+      })}
     </div>
-  );
-}
-
-function StatusCounts({ controls }: { controls: LatticeControl[] }) {
-  const by = new Map<ControlStatus, number>();
-  for (const c of controls) if (c.statusKey) by.set(c.statusKey, (by.get(c.statusKey) ?? 0) + 1);
-  return <>{[...by].map(([s, n]) => `${n} ${controlStatusLabels[s].toLowerCase()}`).join(", ")}</>;
-}
-
-function MobileMaterialDetail({ id, model, filter, materialId }: { id: string; model: LatticeModel; filter: LatticeFilter; materialId: string }) {
-  const material = model.materials.find((m) => m.id === materialId)!;
-  const un = model.unstaged[materialId];
-  const unVisible = un ? unstagedRecords(model, un, filter) : [];
-  return (
-    <div id={id} className="border-t border-border/60 px-1 pb-4 pt-1 text-sm">
-      <dl className="divide-y divide-border/60">
-        {model.stages.map((s) => {
-          const v = cellView(model, materialId, s.id, filter);
-          if (!v || !isMarked(v)) return null;
-          return (
-            <div key={s.id} className="grid grid-cols-[6.25rem_1fr] gap-x-3 py-2.5">
-              <dt className="font-display font-semibold text-foreground">{s.label}</dt>
-              <dd className="space-y-1.5 text-muted">
-                {v.counts.commitments ? (
-                  <p className="flex items-baseline gap-2">
-                    <KindSwatch kind="commitments" />
-                    <span>
-                      <span className="text-foreground">{countWord(v.counts.commitments, "commitment", "commitments")}</span> <span className="font-mono text-[11px] text-faint">{v.actors.commitments.join(" ")}</span>
-                    </span>
-                  </p>
-                ) : null}
-                {v.counts.controls ? (
-                  <p className="flex items-baseline gap-2">
-                    <KindSwatch kind="controls" />
-                    <span>
-                      <span className="text-foreground">{countWord(v.counts.controls, "clause", "clauses")}</span>{" "}
-                      <span className="font-mono text-[11px] text-faint">{v.actors.controls.join(" ")}, <StatusCounts controls={v.controls} /></span>
-                    </span>
-                  </p>
-                ) : null}
-                {v.counts.designations ? (
-                  <p className="flex items-baseline gap-2">
-                    <KindSwatch kind="designations" />
-                    <span>
-                      <span className="text-foreground">{countWord(v.counts.designations, "designation", "designations")}</span> <span className="font-mono text-[11px] text-faint">{v.actors.designations.join(" ")}</span>
-                    </span>
-                  </p>
-                ) : null}
-              </dd>
-            </div>
-          );
-        })}
-        {unVisible.length ? (
-          <div className="grid grid-cols-[6.25rem_1fr] gap-x-3 py-2.5">
-            <dt className="font-display font-semibold text-foreground">No stage</dt>
-            <dd className="text-faint">
-              {unVisible.length} record{unVisible.length === 1 ? "" : "s"} ({unVisible.map((r) => r.actorShort).join(", ")}) record no stage: not on the lattice.
-            </dd>
-          </div>
-        ) : null}
-      </dl>
-      <Link
-        href={`/materials/${material.slug}`}
-        className="mt-3 flex items-center justify-center rounded-md bg-paper px-4 py-2.5 font-display text-sm font-semibold text-paper-foreground hover:bg-paper/90"
-      >
-        Open the {material.nameEn.toLowerCase()} dossier →
-      </Link>
-    </div>
-  );
+  </div>;
 }
 
 function unstagedRecords(model: LatticeModel, un: LatticeModel["unstaged"][string], filter: LatticeFilter) {
@@ -324,7 +232,7 @@ export function LatticeLegend({ model, className }: { model: LatticeModel; class
   return (
     <div className={className}>
       <h2 className="font-display text-sm font-semibold text-foreground">What each mark counts</h2>
-      <ul className="mt-3 space-y-3 text-[13px] leading-5 text-muted">
+      <ul className="mt-3 space-y-3 font-display text-[13px] leading-5 text-muted">
         <li className="flex gap-3">
           <KindSwatch kind="commitments" className="mt-1" />
           <span>Government commitments that have not ended: capital rows in the commitment role with a named providing government. A package counts once; its parts are not counted again.</span>
@@ -347,7 +255,7 @@ export function LatticeLegend({ model, className }: { model: LatticeModel; class
       </ul>
       <div className="mt-4 flex items-center gap-4 text-[13px] text-muted">
         <AreaKey />
-        <span className="leading-5">Dot area is the number of records, never money.</span>
+        <span className="leading-5">Dot area is the number of records, never money or effectiveness.</span>
       </div>
     </div>
   );
@@ -355,97 +263,47 @@ export function LatticeLegend({ model, className }: { model: LatticeModel; class
 
 // --- Overview ------------------------------------------------------------------------------------
 
-function NodeSummary({ model, selection }: { model: LatticeModel; selection: Selection | null }) {
-  const material = selection && model.materials.find((m) => m.id === selection.materialId);
-  const v = selection ? cellView(model, selection.materialId, selection.stage) : null;
-  if (!selection || !material || !v) return null;
-  const label = stageLabel(model, selection.stage);
-  const col = "border-t border-border p-4 md:border-l md:border-t-0 md:p-5";
-  return (
-    <div className="mt-5 grid rounded-lg border border-border-strong bg-card md:grid-cols-[1.15fr_1fr_1fr_1fr]" aria-live="polite">
-      <div className="p-4 md:p-5">
-        <h3 className="font-serif text-lg font-semibold leading-snug text-foreground">
-          {material.nameEn} at {label.toLowerCase()}
-        </h3>
-        <p className="mt-1 text-sm leading-5 text-muted">Selected node. The three counts are never added together.</p>
-        <Link
-          href={`/compare#${material.slug}:${selection.stage}`}
-          className="mt-3 inline-block font-display text-sm font-semibold text-accent hover:text-accent-strong"
-        >
-          Compare this node →
-        </Link>
-      </div>
-      <div className={col}>
-        <p className="flex items-center gap-2 font-display text-xs text-muted">
-          <KindSwatch kind="commitments" /> Government commitments
-        </p>
-        <p className="tnum mt-2 font-display text-3xl font-semibold leading-none text-foreground">{v.counts.commitments}</p>
-        <p className="mt-1.5 text-xs leading-5 text-faint">{v.counts.commitments ? `from ${v.actors.commitments.join(", ")}; a package once` : "none recorded here"}</p>
-      </div>
-      <div className={col}>
-        <p className="flex items-center gap-2 font-display text-xs text-muted">
-          <KindSwatch kind="controls" /> Control clauses
-        </p>
-        <p className="tnum mt-2 font-display text-3xl font-semibold leading-none text-foreground">{v.counts.controls}</p>
-        <p className="mt-1.5 text-xs leading-5 text-faint">
-          {v.counts.controls ? (
-            <>
-              issued by {v.actors.controls.join(", ")}: <StatusCounts controls={v.controls} />
-            </>
-          ) : (
-            "none recorded here"
-          )}
-        </p>
-      </div>
-      <div className={col}>
-        <p className="flex items-center gap-2 font-display text-xs text-muted">
-          <KindSwatch kind="designations" /> Designations
-        </p>
-        <p className="tnum mt-2 font-display text-3xl font-semibold leading-none text-foreground">{v.counts.designations}</p>
-        <p className="mt-1.5 text-xs leading-5 text-faint">{v.counts.designations ? `by ${v.actors.designations.join(", ")}; standing, not money` : "none recorded here"}</p>
-      </div>
-    </div>
-  );
+function SelectionPreview({ model, query }: { model: LatticeModel; query: ResearchQuery }) {
+  const { view } = researchQueryResult(model, query);
+  const material = model.materials.find(m => m.id === query.selection?.materialId);
+  if (!query.selection || !material) return null;
+  const first = view?.commitments[0] ?? view?.controls[0] ?? view?.designations[0];
+  const project = first?.projects?.[0];
+  return <div aria-live="polite" className="mt-5 border-l-2 border-accent pl-4 font-display text-sm leading-6">
+    <h3 className="font-semibold">{material.nameEn} × {stageLabel(model, query.selection.stage)}</h3>
+    <p className="mt-1 text-muted">{view ? cellSummary(view.counts) || "No counted records" : "No record at this cell under these filters"}.</p>
+    {first ? <Link href={first.href} className="mt-2 block text-accent underline underline-offset-4">Read a {first.kind === "control" ? "control clause" : first.kind === "designation" ? "designation" : "financial instrument"}</Link> : null}
+    {project ? <Link href={project.href} className="mt-2 block text-accent underline underline-offset-4">Investigate {project.name}</Link> : null}
+    <Link href={researchQueryHref(model, query, "/compare")} className="mt-2 block text-muted underline underline-offset-4">Compare this selection</Link>
+  </div>;
 }
 
 export function LatticeOverview({ model, preferred, intro }: { model: LatticeModel; preferred: Preferred; intro: ReactNode }) {
-  const [selection, select] = useSelection(model, preferred);
-  const [mobileOpen, setMobileOpen] = useState<string | null | undefined>(undefined);
-  const openId = mobileOpen === undefined ? (selection?.materialId ?? null) : mobileOpen;
-  const toggleMobile = (id: string) => {
-    setMobileOpen(openId === id ? null : id);
-    if (openId !== id) {
-      const first = model.stages.find((s) => isMarked(cellView(model, id, s.id)));
-      if (first) select({ materialId: id, stage: first.id });
-    }
-  };
-  return (
-    <div className="grid gap-8 lg:grid-cols-[19rem_1fr] lg:gap-12">
-      <div>{intro}</div>
-      <div className="min-w-0">
-        <div className="rounded-lg border border-border bg-card/40 p-3 md:border-0 md:bg-transparent md:p-0">
-          <div className="mb-3 flex items-baseline justify-between md:hidden">
-            <h2 className="font-display text-base font-semibold text-foreground">Materials by stage</h2>
-            <span className="font-display text-xs text-faint">Tap a material</span>
-          </div>
-          <div className="mb-4 md:hidden">
-            <LatticeLegendCompact />
-          </div>
-          <LatticeTable model={model} filter={NO_FILTER} selection={selection} onSelect={select} showCounts={false} />
-          <MobileLattice model={model} filter={NO_FILTER} openId={openId} onToggle={toggleMobile} />
-        </div>
-        <div className="hidden md:block">
-          <NodeSummary model={model} selection={selection} />
-        </div>
+  const { query, update, select } = useResearchQuery(model, preferred);
+  return <>
+    <div className="grid gap-7 lg:grid-cols-[18rem_1fr] lg:gap-10">
+      <div>{intro}<div className="hidden lg:block"><SelectionPreview model={model} query={query} /></div><LatticeLegend model={model} className="mt-6 hidden lg:block" />
       </div>
+      <section className="min-w-0" aria-label="Materials by supply-chain stage">
+        <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="font-display text-base font-semibold">Materials by supply-chain stage</h2>
+          <span className="font-display text-xs text-muted">Select a marked cell to inspect its records</span>
+        </div>
+        <QueryControls model={model} query={query} update={update} />
+        <QueryIssues query={query} />
+        <div className="mt-5"><LatticeTable model={model} filter={query.filter} selection={query.selection} onSelect={select} showCounts={false} /><MobileLattice model={model} filter={query.filter} selection={query.selection} onSelect={select} /></div>
+        <div className="mt-4 lg:hidden"><LatticeLegendCompact /></div>
+      </section>
     </div>
-  );
+    <p className="mt-5 max-w-4xl font-display text-xs leading-5 text-muted">A record can occupy several stages; rows and columns are never totalled. Empty cells describe the coded corpus, not an absence of government activity. <NotPlacedSentence gaps={model.gaps} /></p>
+    <div className="mt-7" id="selected-evidence"><RecordsPanel model={model} filter={query.filter} selection={query.selection} query={query} compact /></div>
+  </>;
 }
 
 /** The four mark meanings in two short lines, for the phone lattice. */
 function LatticeLegendCompact() {
   return (
-    <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs leading-4 text-muted">
+    <ul className="grid grid-cols-2 gap-x-4 gap-y-2 font-display text-xs leading-5 text-muted">
       <li className="flex gap-2"><KindSwatch kind="commitments" className="mt-0.5" /> Government commitments not ended, a package once</li>
       <li className="flex gap-2"><KindSwatch kind="controls" className="mt-0.5" /> Control clauses, any status</li>
       <li className="flex gap-2"><KindSwatch kind="designations" className="mt-0.5" /> Designations: standing, not money</li>
@@ -456,25 +314,8 @@ function LatticeLegendCompact() {
 
 // --- Compare -------------------------------------------------------------------------------------
 
-const KIND_TOGGLES: { key: keyof KindVisibility; label: string; kind: MarkKind }[] = [
-  { key: "commitments", label: "Commitments", kind: "commitments" },
-  { key: "controls", label: "Control clauses", kind: "controls" },
-  { key: "designations", label: "Designations", kind: "designations" },
-];
-
-function KindToggle({ label, kind, checked, onChange }: { label: string; kind: MarkKind; checked: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <label className="relative inline-flex cursor-pointer items-center">
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="peer sr-only" />
-      <span className="inline-flex items-center gap-2 rounded-full border border-border-strong px-3 py-1.5 font-display text-xs text-muted transition-colors peer-checked:border-accent/60 peer-checked:bg-elevated peer-checked:text-foreground peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-accent">
-        <svg viewBox="0 0 12 12" aria-hidden className={cn("h-3 w-3 rounded-[3px] border border-border-strong", checked ? "border-transparent bg-foreground text-background" : "text-transparent")}>
-          <path d="m2.5 6.2 2.3 2.3 4.7-4.9" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <KindSwatch kind={kind} />
-        {label}
-      </span>
-    </label>
-  );
+function ProjectLinks({ projects }: { projects: LatticeCommitment["projects"] }) {
+  return projects?.length ? <ul className="mt-2 space-y-1 font-display text-xs leading-5 text-paper-muted">{projects.map(p => <li key={p.id}><Link href={p.href} className="text-paper-accent underline underline-offset-2">Investigate {p.name}</Link><span className="block">{p.relationship === "direct_finance" ? "Explicit financial project link" : p.relationship === "designation" ? "Designated project; standing, not money" : "Shared package association; amount not allocated to this project"}</span></li>)}</ul> : null;
 }
 
 export function CommitmentItem({ r }: { r: LatticeCommitment }) {
@@ -501,6 +342,7 @@ export function CommitmentItem({ r }: { r: LatticeCommitment }) {
           <p className="mt-0.5 text-xs leading-5 text-paper-muted">
             {r.instrument}. {r.status}.
           </p>
+          <ProjectLinks projects={r.projects} />
         </div>
       </div>
     </li>
@@ -538,6 +380,7 @@ function DesignationItem({ r }: { r: LatticeDesignation }) {
           <p className="mt-1 text-xs leading-5 text-paper-muted">
             {r.programme}. {r.status}.
           </p>
+          <ProjectLinks projects={r.projects} />
           {r.asStated ? <p className="mt-1 text-xs leading-5 text-paper-faint">Name as stated: {r.asStated}</p> : null}
         </div>
       </div>
@@ -555,23 +398,22 @@ function PanelHeading({ kind, children, note }: { kind: MarkKind; children: Reac
   );
 }
 
-function RecordsPanel({ model, filter, selection }: { model: LatticeModel; filter: LatticeFilter; selection: Selection | null }) {
+function RecordsPanel({ model, filter, selection, query, compact = false }: { model: LatticeModel; filter: LatticeFilter; selection: Selection | null; query: ResearchQuery; compact?: boolean }) {
   const material = selection && model.materials.find((m) => m.id === selection.materialId);
   if (!selection || !material) return null;
-  const v = cellView(model, selection.materialId, selection.stage, filter);
+  const v = researchQueryResult(model, query).view;
   const label = stageLabel(model, selection.stage);
   const un = model.unstaged[material.id];
   const unVisible = un ? unstagedRecords(model, un, filter) : [];
-  const marked = isMarked(v);
   return (
-    <aside aria-live="polite" aria-label="Selected node" className="rounded-xl bg-paper p-5 text-paper-foreground shadow-lg shadow-black/30">
+    <aside aria-live="polite" aria-label="Selected node" className={cn("rounded-lg bg-paper p-5 font-display text-paper-foreground", compact && "selected-evidence")}>
       <p className="font-display text-xs text-paper-faint">Selected node</p>
       <h3 className="mt-1 font-serif text-2xl font-semibold leading-tight">
         {material.nameEn} × {label}
       </h3>
-      {marked && v ? (
+      {v ? (
         <>
-          <p className="mt-1.5 text-sm leading-5 text-paper-muted">{cellSummary(v.counts)}. Listed by kind, never added together.</p>
+          <p className="mt-1.5 text-sm leading-5 text-paper-muted">{cellSummary(v.counts) || "No counted records"}. Listed by kind, never added together.</p>
           {v.counts.commitments ? (
             <>
               <PanelHeading kind="commitments" note="in their own currencies">
@@ -634,8 +476,8 @@ function RecordsPanel({ model, filter, selection }: { model: LatticeModel; filte
         </div>
       ) : null}
       <div className="mt-5 grid gap-2">
-        <Link href="/capital" className="flex items-center justify-center rounded-md bg-paper-foreground px-4 py-2.5 font-display text-sm font-semibold text-paper hover:bg-paper-foreground/90">
-          Explore all capital rows
+        <Link href={researchQueryHref(model, query, "/compare")} className="flex items-center justify-center rounded-md bg-paper-foreground px-4 py-2.5 font-display text-sm font-semibold text-paper hover:bg-paper-foreground/90">
+          Compare this selection
         </Link>
         <Link href={`/materials/${material.slug}#stage-${selection.stage}`} className="flex items-center justify-center rounded-md border border-paper-border px-4 py-2.5 font-display text-sm font-semibold hover:bg-paper-border/40">
           Open the {material.nameEn.toLowerCase()} dossier
@@ -724,55 +566,17 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
  * (paper section). Both sections share the selected material.
  */
 export function LatticeCompare({ model, preferred }: { model: LatticeModel; preferred: Preferred }) {
-  const [selection, select] = useSelection(model, preferred);
-  const [kinds, setKinds] = useState<KindVisibility>(ALL_KINDS);
-  const [actor, setActor] = useState<JurisdictionCode | "all">("all");
-  const [mobileOpen, setMobileOpen] = useState<string | null | undefined>(undefined);
-  const filter: LatticeFilter = { kinds, actor };
-  const govId = useId();
-  const openId = mobileOpen === undefined ? (selection?.materialId ?? null) : mobileOpen;
-  const toggleMobile = (id: string) => {
-    setMobileOpen(openId === id ? null : id);
-    if (openId !== id) {
-      const first = model.stages.find((s) => isMarked(cellView(model, id, s.id, filter)));
-      if (first) select({ materialId: id, stage: first.id });
-    }
-  };
-  const material = selection && model.materials.find((m) => m.id === selection.materialId);
-  const nothingShown = !kinds.commitments && !kinds.controls && !kinds.designations;
+  const { query, update, select } = useResearchQuery(model, preferred);
+  const { selection, filter } = query;
+  const material = selection && model.materials.find(m => m.id === selection.materialId);
+  const nothingShown = query.kind === "none";
   return (
     <>
       <section className="border-b border-border bg-background">
         <div className="mx-auto w-full max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
           <ControlGapNotice gaps={model.gaps} />
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3 lg:justify-end">
-            <span className="font-display text-xs text-faint">Show</span>
-            {KIND_TOGGLES.map((t) => (
-              <KindToggle key={t.key} label={t.label} kind={t.kind} checked={kinds[t.key]} onChange={(v) => setKinds((k) => ({ ...k, [t.key]: v }))} />
-            ))}
-            <span className="hidden h-5 w-px bg-border-strong lg:block" aria-hidden />
-            <label htmlFor={govId} className="inline-flex items-center gap-2 font-display text-xs text-muted">
-              Government
-              <select
-                id={govId}
-                value={actor}
-                onChange={(e) => setActor(e.target.value as JurisdictionCode | "all")}
-                className="rounded-md border border-border-strong bg-card px-2.5 py-1.5 font-display text-xs font-semibold text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-              >
-                <option value="all">All</option>
-                {model.actors.map((a) => (
-                  <option key={a.code} value={a.code}>
-                    {a.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <span className="inline-flex items-center rounded-md border border-border-strong px-2.5 py-1.5 font-display text-xs text-muted">
-              Status on <time dateTime={model.asOf} className="tnum ml-1 font-semibold text-foreground">{formatDate(model.asOf)}</time>
-            </span>
-          </div>
-
+          <div className="mt-6"><QueryControls model={model} query={query} update={update} /><QueryIssues query={query} /></div>
           <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_22rem] xl:grid-cols-[1fr_24rem]">
             <div className="min-w-0">
               {nothingShown ? (
@@ -780,7 +584,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
               ) : (
                 <>
                   <LatticeTable model={model} filter={filter} selection={selection} onSelect={select} showCounts />
-                  <MobileLattice model={model} filter={filter} openId={openId} onToggle={toggleMobile} />
+                  <MobileLattice model={model} filter={filter} selection={selection} onSelect={select} />
                 </>
               )}
               <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs leading-5 text-muted">
@@ -792,7 +596,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
             </div>
             <div className="hidden lg:block">
               <div className="sticky top-24">
-                <RecordsPanel model={model} filter={filter} selection={selection} />
+                <RecordsPanel model={model} filter={filter} selection={selection} query={query} />
               </div>
             </div>
           </div>
@@ -803,7 +607,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
 
       <div className="border-b border-border bg-background px-4 py-10 sm:px-6 lg:hidden">
         <div className="mx-auto max-w-2xl">
-          <RecordsPanel model={model} filter={filter} selection={selection} />
+          <RecordsPanel model={model} filter={filter} selection={selection} query={query} />
         </div>
       </div>
 

@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-/* Shared research surfaces: maritime ink, source paper and evidence gold.
- * Existing token names keep the specialist analytical views compatible. */
+/* Lattice Register: warm charcoal, cream reading surfaces and evidence gold. */
 :root {
   --bg: #12110f; /* warm near-black */
   --surface: #1a1814; /* card surface */
@@ -11,7 +10,7 @@
   --border-strong: #433e34; /* hover / structural */
   --fg: #efece6; /* warm off-white */
   --muted: #aaa397; /* warm grey (AA on --bg and --surface) */
-  --faint: #8e887d; /* faint — AA on --bg for small text */
+  --faint: #a39b8e; /* faint — AA on --bg for small text */
 
   --accent: #e3b04b; /* PRIMARY — lattice gold */
   --accent-strong: #f2c96b; /* hover / emphasis */
@@ -25,37 +24,6 @@
   --paper-faint: #6f6859; /* AA on --paper for small text */
   --paper-border: #d8d3c7;
   --paper-accent: #7a5510; /* gold dark enough to read as text on paper */
-
-  /* Lattice marks. Each kind of record has one fixed encoding; area is a record count, never money. */
-  --mark-commitment: #ffca64; /* the supplied logo's light gold */
-  --mark-control: #a87002; /* the supplied logo's dark amber */
-  --mark-designation: #f3ecdb;
-}
-
-/* The public edition is scoped so standalone editorial review keeps its established palette. */
-.research-edition {
-  --bg: #101e2b; /* maritime ink */
-  --surface: #152637; /* card surface */
-  --elevated: #1b3042; /* hover / elevated */
-  --plate: #192b3b; /* dossier plate — primary record sheets (sits between card & elevated) */
-  --border: #304656; /* hairline */
-  --border-strong: #4a6173; /* hover / structural */
-  --fg: #eaf0f4; /* pale blue-grey */
-  --muted: #b4c3ce; /* secondary text */
-  --faint: #aabcca; /* faint — AA on --bg for small text */
-
-  --accent: #e3b04b; /* PRIMARY — lattice gold */
-  --accent-strong: #f2c96b; /* hover / emphasis */
-  --accent-fg: #1a1305; /* text on accent */
-  --brand-gold: #c8993e; /* the supplied logo's wordmark gold (sampled from the artwork) */
-
-  /* Light reading sections. */
-  --paper: #f4f6f7;
-  --paper-fg: #142a3b;
-  --paper-muted: #465c6c; /* AA on --paper */
-  --paper-faint: #516675; /* AA on --paper for small text */
-  --paper-border: #cbd5dd;
-  --paper-accent: #66500c; /* gold dark enough to read as text on paper */
 
   /* Lattice marks. Each kind of record has one fixed encoding; area is a record count, never money. */
   --mark-commitment: #ffca64; /* the supplied logo's light gold */
@@ -306,8 +274,6 @@
 /* Research edition: content hierarchy and shared investigation surfaces. */
 .skip-link { position: fixed; z-index: 100; top: .75rem; left: .75rem; transform: translateY(-180%); padding: .75rem 1rem; background: var(--accent); color: var(--accent-fg); font-family: var(--font-display); }
 .skip-link:focus { transform: translateY(0); }
-.research-opening { display: grid; gap: 2.5rem; align-items: start; }
-.opening-case { border: 1px solid var(--border-strong); border-top: 3px solid var(--accent); background: var(--surface); padding: 1.5rem; border-radius: .25rem; }
 .research-button, .research-button-secondary { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .65rem 1rem; border-radius: .25rem; font-family: var(--font-display); font-size: .875rem; font-weight: 600; }
 .research-button { background: var(--accent); color: var(--accent-fg); }
 .research-button:hover { background: var(--accent-strong); }
@@ -325,4 +291,10 @@
 .research-chronology { border-left: 1px solid var(--border-strong); padding-left: 1.25rem; }
 .research-chronology > li + li { margin-top: 1.5rem; }
 @media (min-width: 768px) { .investigation-lanes { grid-template-columns: repeat(3, minmax(0, 1fr)); } .resource-panel { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (min-width: 1024px) { .research-opening { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 4rem; } }
+
+
+/* Interface notes use Archivo; Newsreader remains for editorial headings and reading. */
+.investigation-lane p, .research-chronology, .project-evidence { font-family: var(--font-display); }
+html { scroll-padding-top: 7rem; }
+
+@media (min-width: 1024px) { .selected-evidence > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.5rem; } }

@@ -117,12 +117,12 @@ test("financial chronology retains amount wording, status dates, qualifications 
   assert.match(view, /not construction or production/);
   assert.match(view, /current recorded terms, not historical amounts/);
   const synthetic = structuredClone(investigation);
-  synthetic.stack.rows = [
+  synthetic.packet.financialInstruments = [
     {
-      ...synthetic.stack.rows[0],
+      ...synthetic.packet.financialInstruments[0],
       amount: null,
       financialStatusHistory: [
-        { ...synthetic.stack.rows[0].financialStatusHistory[0], date: null },
+        { ...synthetic.packet.financialInstruments[0].financialStatusHistory[0], date: null },
       ],
     },
   ];
@@ -151,12 +151,12 @@ test("homepage coverage reconciles to public loaders and the opening leads strai
   assert.doesNotMatch(view, /<dialog/);
   const layout = readFileSync("app/layout.tsx", "utf8");
   assert.doesNotMatch(layout, /TitlePage/);
-  assert.match(layout, /Skip to content/);
+  assert.match(layout, /<SkipLink/);
 });
 
 
 test("public edition body and metadata text remain readable on each research surface", () => {
-  const css = readFileSync("app/globals.css", "utf8").split(".research-edition {")[1].split("}")[0];
+  const css = readFileSync("app/globals.css", "utf8").split(":root {")[1].split("}")[0];
   const color = (name: string) => new RegExp("--" + name + ": (#.+?);").exec(css)![1];
   const luminance = (hex: string) => {
     const channels = hex.slice(1).match(/../g)!.map(v => parseInt(v, 16) / 255)

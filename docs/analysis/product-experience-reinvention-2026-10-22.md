@@ -1,126 +1,168 @@
-# Economic-security research experience
+# SMPT research product experience
 
-Base: `084078f3150089d933aa6f510723f10c64ebaa59` (freshly fetched `origin/main`).
-Branch: `codex/smpt-product-experience-reinvention`.
+Revision: 2026-10-23. Original reference/base: `084078f3150089d933aa6f510723f10c64ebaa59`.
+Continues reviewed head `a2492e8433978003b6852339241d01bf5ae57b11` on
+`codex/smpt-product-experience-reinvention`, existing draft PR #181.
 
-## Direction and review of the brief
+## Final direction
 
-Implement the brief as presentation engineering over published evidence. The
-research question leads; the lattice becomes a specialized comparison tool.
-Keep the existing record routes, citations, exports and APIs. One primary writer.
-Do not merge #180 (Narva publication), #166 (project comparison), #162 (financial
-reading guide), #167 (CSV security), or the other open research/reliability PRs.
-The project directory and methodology are presentation overlap with #166/#162;
-this phase does not import their code or publish their pending work.
+Restore Lattice Register: warm charcoal `#12110f`, card `#1a1814`, cream
+`#f5f3ee`, gold `#e3b04b`, and the established three semantic marks. Remove the
+navy body override. Raise faint text slightly to `#a39b8e` for AA contrast across
+actual dark surfaces; cream-panel swatches gain an outline. Preserve the supplied
+logo and the existing Newsreader, Archivo and JetBrains Mono families.
 
-Hierarchy: Overview `/`; Explore `/events` with material/government up front;
-Compare `/compare` with a guided gallium investigation and existing matrix;
-Projects `/projects` and reusable `/projects/[id]`; Methodology `/methodology`.
-About, Data and advanced research tools are visible in a persistent resource bar
-and footer. All existing routes and query parameter names remain valid.
+The opening pairs a compact 40px desktop Newsreader introduction with the existing
+React/SVG/HTML-table lattice. A selected-cell summary and real evidence/project
+links sit beside it. The complete selected-record panel follows, retaining
+separate counts, funding options, ended rows and off-lattice explanations. Mobile
+uses a material selector and readable stage buttons with a selected check mark,
+then the same record panel. No modal, new chart engine or arbitrary project-pair
+comparison. Keep the three investigations, material entry points, bounded corpus
+coverage and reuse/methodology links below the opening.
 
-Visual direction: deep maritime ink `#101e2b`, slate `#192b3b`, pale blue-grey
-`#eaf0f4`, source-paper `#f4f6f7`, muted steel `#aabcca`, and the existing evidence
-gold `#e3b04b`. Retain Archivo for navigation, Newsreader for reading, JetBrains
-for identifiers. A broad question and an adjacent compact casefile, followed by
-material entry points and evidence-led investigations; left-aligned reading,
-bounded line lengths, no introductory modal. Gold marks actions and evidence,
-not an implied risk or progress score. Dense detail uses native disclosures. The public palette is scoped to the layout body; standalone editorial review retains its established root tokens and styling checks.
+The shell retains Overview, Explore, Compare, Projects and Methodology. Combine
+the two former secondary bars on small screens; keep About in the mobile menu,
+Data/API visible and specialist tools available. Use Archivo for analytical
+controls, legends and instrument details; Newsreader for editorial headings and
+reading. The skip link moves focus without replacing analytical URL state.
 
-## Authority and selected cases
+## Shared analytical query
 
-`lib/data.ts` reads only public seed stores; its public milestone loader currently
-returns one reviewed Wagerup observation. `site.lastUpdated` is 2026-10-17, a
-curated revision date, not a verification date for every field. Coverage figures
-come from `getDatasetSummary`, without adding overlapping classes.
+`lib/research-query.ts` is browser-safe and deterministic. Home and Compare use
+one URL-backed query through the same hook and record panel. It delegates counted
+records to the existing `cellView` and authoritative lattice model; `cellKey` now
+lives in browser-safe view logic rather than importing seed composition at runtime.
 
-Reuse `projectStack`, `layers`, `controlsAtProjectStages` (capital intelligence),
-`currentFinancialStatus`, `controlStatusOn`, `getControlMatrix`, and
-`buildProjectEvidencePathway` with explicitly public loader inputs. F5 structural
-links never establish causation; its amount-free model stays separate from the
-existing capital stack. No private review file is imported or read.
+Supported state: `material` + `stage`, `government`, `kind`; canonical links retain
+legacy `#material:stage` selection and encode filters in the query string.
+Governments accept canonical IDs or their short codes, case-insensitively, then
+serialize canonical IDs. Kinds are all, commitments, controls, designations, their three pairwise
+combinations, or none, preserving existing kind visibility. No state selects the supported gallium/processing cell by default. Explicit
+empty cells stay empty. Unknown, empty, conflicting, incomplete or repeated
+analytical parameters produce visible errors and no selected records. Unrelated
+query parameters survive interaction; standard focus/section anchors are exempt.
+Browser Back, sharing and reload retain the analytical state.
 
-Examples: `prj-au-alcoa-sojitz-gallium`, `evt-us-au-framework-2025`,
-`mil-au-alcoa-wagerup-groundbreaking-2026-08-24`, and their registered sources;
-`evt-cn-gage-2023` / `ctl-cn-gage-2023-export-licensing` for operative control;
-`prj-us-stibnite` for financing with no published project-native milestone.
-Featured links resolve through public loaders and omit unavailable records.
-Comparison uses the existing material/government matrix, accompanied by the
-gallium control and framework records, not a new financial aggregation.
+Government means provider for commitments, issuer for clauses, designating
+government for designations, never project geography. Counted IDs, options and
+ended records are separate. Off-lattice records and related context do not inflate
+counts. Project links come only from explicit financial `projectId`, separately
+labelled nonallocative `associatedProjectIds`, or designation links. Controls
+acquire no inferred project relationship from shared material or timing.
 
-## Trade-offs and verification
+Example: gallium × processing → inspect the six commitments, one control clause
+and one designation separately → follow a Wagerup financial project reference →
+inspect its three direct instruments and one published groundbreaking observation
+→ open original sources or download that investigation. Those project records
+are a supported subset of cell evidence, not the cell's total.
 
-Retain specialist framing, portfolios, capital/control and lattice tools in the
-shared shell. No general comparison builder, new dependencies, currency
-conversion, data acquisition, or factual publication. The project dossier shows
-financial histories alongside reviewed physical observations, without combining
-their clocks or assigning a project-wide success state.
+## Public investigation projection and JSON
 
-Initial environment check: npm production audit fails on the unchanged pinned
-Next.js 16.4.0 (critical advisory plus high advisories; patch 16.4.2 suggested by
-npm). Dependency/security changes are outside this phase. CI has an audit gate,
-so this pre-existing issue may stop remote validation. Record exact results below.
+`getPublicProjectInvestigation` keeps the authoritative `projectStack` and
+`buildProjectEvidencePathway`, and adds `packet` from
+`buildPublicInvestigationPacket`. Financial chronology, policy context, native
+milestones and unknowns on the actual page consume this shared projection.
+Existing capital-stack calculations remain independent and unchanged.
 
-## Final verification and acceptance
+Additive, read-only, statically generated resource:
+`GET /api/v1/projects/[id]/investigation`. It returns UTF-8 JSON with attachment
+filename `smpt-[projectId]-investigation.json`; unknown or unpublished IDs return
+404. All public project IDs are generated at build time. The existing project
+registry/stack endpoint and every existing dataset/CSV contract retain their
+meaning. The Data/API page documents the new resource and links an example.
 
-- `npm ci`: restored the exact lockfile installation before final checks.
-- `npm run validate`: passed; 65 events, 96 finance rows, 45 control clauses,
-  76 projects, 1 published reviewed milestone. Existing incomplete framing
-  warnings remain. No research/publication/security store or calculation changed.
+Projection version: `smpt-investigation-1`. Explicitly selected public fields:
+project identity/materials/stages/locations, recorded organization roles, direct
+instruments, distinct nonallocative associations, exact decimal amount strings
+and original currency/qualifier/wording, financial histories, terms and
+conditions, planned source-stated outcomes, legacy financier observations,
+designations, parent policy context, announcement-sibling controls, published
+native milestones and scope caveats, package references, field locators,
+resolving source URLs, specific unknowns and analytical limitations.
+
+No wholesale stack/pathway/internal-object serialization. Exclude lifecycle
+maintenance metadata, adjudications, reviewer packets, filesystem paths and
+unsupported fields. Milestone reviewer attribution is already legitimately
+public in the existing register and is explicitly selected. The projection
+preserves current corpus revision and legal-status cutoff `2026-10-17`; source
+publication/access, status, occurrence, target and review clocks remain distinct.
+No environment-dependent timestamp, historical known-as-of claim, historical
+financial totals, invented project allocation or causal effect.
+
+## Discovery and cost
+
+The demonstrated search gap was `Wagerup groundbreaking`. Enrich existing project
+search metadata with only published milestone wording and IDs; projects with
+published claims link to their stable `#project-industrial` section. Preserve the
+eleven existing search kinds, canonical identities, exact document identifiers,
+original-language matching and registered organization names/aliases. No fuzzy
+matching, private evidence import, milestone route or second index.
+
+One local composition measurement: lattice ~9.2ms, public Wagerup investigation
+~3.9ms; serialized lattice 91,557 bytes (12,356 gzip), packet 16,679 bytes
+(4,142 gzip). These are bounded local observations, not production benchmarks.
+The client receives the thin lattice display model, not the packet or full
+financial histories. Packet composition occurs on the server/build path. No
+additional cache, backend service or dependency was needed.
+
+## Verification and review
+
+- `npm run validate`: passed with existing incomplete-framing warnings. Published
+  corpus remains 65 events, 96 instruments, 45 clauses, 76 projects and one native
+  reviewed milestone. No research record or publication decision changed.
 - `npm run typecheck`: passed.
-- `npm run lint`: passed with 9 pre-existing unused-variable warnings in unchanged
-  scripts/tests; no new warnings.
-- `npm test`: **1,017 passed, 0 failed**. Six new regression checks cover public
-  lookup omissions, adapter/stack parity, milestone identity, missing dates and
-  amounts (synthetic fixtures), financing without milestones, exact source links,
-  coverage figures, removal of the opening modal and theme contrast.
-- `npm run build`: passed, with all existing routes statically generated. Next's
-  existing vulnerable-version advisory initially stopped the command after route
-  generation; an ordinary retry completed. No advisory bypass flag, dependency
-  upgrade or security configuration change was used.
-- `npm audit --omit=dev --audit-level=moderate`: fails on unchanged Next 16.4.0;
-  the existing CI audit gate will require a separate security patch. This phase
-  does not claim the vulnerable dependency is safe.
-- `PLAYWRIGHT_MODULE=/tmp/smpt-qa-tools/node_modules/playwright node
-  scripts/qa-research-experience-browser.mjs`: passed against the local production
-  build at **390 / 768 / 1440 CSS px**, reduced motion enabled. Runtime was installed
-  outside the repository; no package or lockfile change.
+- `npm run lint`: passed; nine pre-existing warnings in unchanged scripts/tests.
+- `npm test`: **1,029 passed, zero failed**. Added all-cell ID reconciliation,
+  URL normalization/roundtrip/error cases, government roles, page/packet byte
+  parity, source resolution, amount/condition/undated history preservation,
+  nonallocative treatment, unknown IDs, nested private-field sentinels, exact
+  search discovery and a browser-safe import boundary. Updated an obsolete
+  page-source regex to exercise actual public milestone rendering.
+- `npm run build`: passed. The existing vulnerable-version reminder initially
+  returned `SecurityFatalError`; the same ordinary command succeeded on retry.
+  No bypass flags, dependency, CI or deployment configuration changes.
+- Production-build Playwright: passed at **1440×900, 768×900, 390×900**, with
+  reduced motion. Exercised material/stage keyboard and mobile selection,
+  separate counts, government filtering, context transfer to Compare, Back,
+  reload, invalid and empty cells, project links, financial/industrial evidence,
+  actual JSON download bytes and filename, sources/citations, exact milestone
+  search to its real investigation, skip-link focus/URL preservation, menus and
+  Escape/focus return, plus 11 legacy routes. Captured and checked Overview,
+  Explore, Compare, Wagerup/Stibnite, About, Methodology and Data/API for page
+  overflow. Browser page-error collection was empty.
+- Fonts awaited before screenshots. Chromium platform-font inspection confirmed
+  custom Newsreader on the headline, Archivo on controls at all three widths,
+  and JetBrains Mono on the visible desktop data token. No fallback accepted.
 
-Browser coverage: homepage → Wagerup → primary source link → About; gallium/China
-filters → policy event → clause and citation; Stibnite financing/conditions →
-explicit milestone gap; comparison cell → supporting records; record → BibTeX,
-project JSON and CSV/full dataset. Checked filter changes, reload, Back, empty
-results, clear filters, unrelated query/hash preservation, menu Escape/focus,
-skip link, comparison keyboard disclosure, and 11 representative legacy routes.
-Source URL fidelity was checked against stored references; this is not a new
-publisher-source verification or a claim of successful outbound fetches.
+The original production layout was captured afresh at 1440×900 after fonts were
+ready; it still matches the original reference implementation. Revised captures
+use the same desktop viewport. Visual inspection confirms the restored warm
+identity, subordinate headline, substantial first-screen interactive matrix,
+selected evidence links, readable legend/conditions and retained project journeys.
+Mobile presents usable analytical controls instead of miniaturized columns.
 
-Visual inspection found and fixed tablet overflow in the retained lattice by
-adding a labelled keyboard-scrollable table region. Final desktop/mobile home,
-project, exploration, About and comparison screenshots have no document-level
-horizontal overflow in the exercised sizes. This is representative keyboard and
-responsive QA, not a claim of complete accessibility certification.
-
-[Production homepage before](product-experience/production-before.png) ·
-[Desktop overview](product-experience/overview-desktop.png) ·
-[Mobile overview](product-experience/overview-mobile.png) ·
+[Original production reference, 1440×900](product-experience/production-before.png) ·
+[Revised overview, 1440×900](product-experience/overview-desktop.png) ·
+[Revised mobile overview](product-experience/overview-mobile.png) ·
 [Wagerup investigation](product-experience/wagerup-desktop.png).
-Additional full-page captures and logs were retained locally outside the checkout.
-Screenshots are generated verification artifacts, not research data.
 
-Acceptance: all seven journeys/boundaries in the brief are implemented. The shell,
-homepage, exploration, reusable investigation, guided comparison and credibility
-entry points form one phase. Framing, capital/control, portfolios, sources,
-programme/organization directories, timeline, coverage, saved records and data
-access remain available. APIs, exports, authoritative calculations, corpus date,
-source quotations and publication decisions are unchanged. Narva remains absent
-from published milestones; #180 was not absorbed. No deploy, merge or monitoring
-activation was performed.
+Screenshots are generated QA artifacts, not research evidence. Source URLs were
+compared with the stored public references; this is not a new publisher-source
+verification. Representative responsive/keyboard checks are not a complete
+accessibility certification. Full local screenshots and logs are retained outside
+the checkout.
 
-Limitations: comparison is a guided gallium case plus the existing analytical
-matrix and specialist lattice, not a new arbitrary project-pair builder (#166
-remains separate). The F5 public adapter accepts only the public seed loaders;
-no review packets, candidates or private evidence enter it. Production was
-inspected as a before reference; the redesigned experience was verified locally.
-The dependency audit is the outstanding merge prerequisite. Exact remote CI
-status belongs to the final PR head and is reported separately at delivery.
+## Delivery limits
+
+`npm audit --omit=dev --audit-level=moderate` still fails on unchanged Next.js
+16.4.0 (critical/high advisories; npm suggests 16.4.2). Security remediation remains
+a separate merge prerequisite. Exact final-head remote CI is reported in PR #181;
+local success is not claimed as remote success or preview verification.
+
+No changes to seed/research stores, eligibility, validators, source quotations,
+financial calculations, legal standing, corpus dates, private evidence or existing
+API/export schemas. The two stale unrouted-library comments were corrected;
+comments grant no publication authority. Narva release #180, arbitrary project
+comparison #166, finance guidance #162 and CSV security #167 remain separate.
+No merge, production deployment, global CLI upgrade or monitoring activation.

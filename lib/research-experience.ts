@@ -1,4 +1,4 @@
-/** Presentation only. Explicit public loaders are the entire evidence boundary. */
+/** Public research composition. Explicit public loaders are the entire evidence boundary. */
 import {
   getAllControlMeasures,
   getAllEvents,
@@ -6,11 +6,14 @@ import {
   getAllProjectDesignations,
   getAllProjectMilestones,
   getAllProjects,
+  getAllOrganizations,
   getAllSources,
   getEventById,
   getProjectById,
   getSourceById,
 } from "./data";
+import { buildPublicInvestigationPacket } from "./investigation-packet";
+import { site } from "./site";
 import { projectStack } from "./capital-intelligence";
 import { buildProjectEvidencePathway } from "./project-evidence-pathway";
 import type { PolicyEvent, Project, Source } from "./types";
@@ -18,7 +21,7 @@ import type { PolicyEvent, Project, Source } from "./types";
 export function getPublicProjectInvestigation(id: string) {
   const stack = projectStack(id);
   if (!stack) return null;
-  const pathway = buildProjectEvidencePathway(id, {
+  const input = {
     events: getAllEvents(),
     finances: getAllFinancialCommitments(),
     controls: getAllControlMeasures(),
@@ -26,8 +29,10 @@ export function getPublicProjectInvestigation(id: string) {
     designations: getAllProjectDesignations(),
     milestones: getAllProjectMilestones(),
     sources: getAllSources(),
-  });
-  return { stack, pathway };
+  };
+  const pathway = buildProjectEvidencePathway(id, input);
+  const packet = buildPublicInvestigationPacket(id, input, getAllOrganizations(), site.lastUpdated, pathway)!;
+  return { stack, pathway, packet };
 }
 
 const entries = [

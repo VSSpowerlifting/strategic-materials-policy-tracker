@@ -38,6 +38,22 @@ export default function ComparePage() {
         title="Different tools. The same material."
         lead="Compare what governments have documented: the instruments they use, the legal and financial states their sources support, and the rationale they give. Record counts measure this corpus's coverage, not effectiveness."
       />
+      <Section
+        className="mt-14"
+        title="Materials by supply-chain stage"
+        description="The lattice retains separate encodings for government commitments, control clauses and designations. Records can occupy multiple stages. This is a structural view, not an impact or capital total."
+      >
+        <LatticeCompare
+          model={buildLatticeModel(site.lastUpdated)}
+          preferred={{ slug: "gallium", stage: "processing" }}
+        />
+        <Link
+          href="/methodology#capital-counting"
+          className="research-text-link"
+        >
+          Read the financial and coverage rules
+        </Link>
+      </Section>
       {control && controlEvent && support && supportEvent ? (
         <section
           className="mt-9 rounded border border-border-strong bg-card p-5 sm:p-7"
@@ -178,22 +194,7 @@ export default function ComparePage() {
           and counting rules.
         </p>
       </Section>
-      <Section
-        className="mt-14"
-        title="Advanced view: materials by supply-chain stage"
-        description="The lattice retains separate encodings for government commitments, control clauses and designations. Records can occupy multiple stages. This is a structural view, not an impact or capital total."
-      >
-        <LatticeCompare
-          model={buildLatticeModel(site.lastUpdated)}
-          preferred={{ slug: "gallium", stage: "processing" }}
-        />
-        <Link
-          href="/methodology#capital-counting"
-          className="research-text-link"
-        >
-          Read the financial and coverage rules
-        </Link>
-      </Section>
+
     </Container>
   );
 }

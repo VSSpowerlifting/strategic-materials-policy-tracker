@@ -14,7 +14,7 @@ import { OrgList, ProgrammeLink } from "@/components/intelligence/org-link";
 import { DesignationRow } from "@/components/intelligence/designation-row";
 import { coInvestments, controlsAtProjectStages } from "@/lib/capital-intelligence";
 import { controlIssuer, isEnded } from "@/lib/capital-control";
-import { getAllProjectMilestones, getAllProjects, getEventById, getMaterialsByIds, getProjectById } from "@/lib/data";
+import { getAllProjects, getEventById, getMaterialsByIds, getProjectById } from "@/lib/data";
 import {
   coInvestmentKindLabels,
   controlMeasureTypeLabels,
@@ -44,10 +44,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const { id } = await params;
   const investigation = getPublicProjectInvestigation(id);
   if (!investigation) notFound();
-  const { stack } = investigation;
+  const { stack, packet } = investigation;
   const { project: p } = stack;
   const materials = getMaterialsByIds(p.materialIds);
-  const reviewedMilestones = getAllProjectMilestones().filter(m => m.projectId === id);
+  const reviewedMilestones = packet.nativeMilestones;
   const co = coInvestments().find((c) => c.project.id === id);
   const controls = controlsAtProjectStages(p, site.lastUpdated);
   const ended = stack.rows.filter(isEnded);
@@ -76,6 +76,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <p className="mt-3 font-mono text-xs text-faint">{p.id}</p>
       </header>
 
+      <div className="mt-5 flex flex-wrap items-center gap-4 font-display text-sm">
+        <a href={`/api/v1/projects/${p.id}/investigation`} download className="research-button">Download investigation JSON</a>
+        <a href="#project-sources" className="text-accent underline underline-offset-4">Sources & citations</a>
+        <span className="text-muted">Corpus revised {formatDate(packet.corpus.revision)}</span>
+      </div>
       <ProjectOverview investigation={investigation} />
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
@@ -227,7 +232,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <Section index={next()} title="Evidence" description="Every project fact names the source that states it.">
             <EvidenceTable evidence={p.evidence} fieldLabels={projectEvidenceFieldLabels} />
             <p className="mt-5 text-sm leading-7 text-muted">For citations, open a parent <a href="#project-policy" className="text-accent underline">policy record</a> for BibTeX, RIS and CSL formats. Cite original documents for claims about government action.</p>
-            <p className="mt-3 text-sm"><a href={`/api/v1/projects/${p.id}`} className="text-accent underline">Project JSON with sources</a>{" · "}<Link href="/data" className="text-accent underline">Full dataset and download guide</Link></p>
+            <p className="mt-3 text-sm"><a href={`/api/v1/projects/${p.id}`} className="text-accent underline">Project registry JSON with sources</a>{" · "}<Link href="/data" className="text-accent underline">Full dataset and download guide</Link></p>
           </Section>
           </div>
         </div>
@@ -239,7 +244,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </Card>
           <Card className="p-4 text-sm">
             <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Machine-readable</h2>
-            <a href={`/api/v1/projects/${p.id}`} className="text-accent hover:text-accent-strong">JSON stack with sources</a>
+            <a href={`/api/v1/projects/${p.id}/investigation`} download className="font-display text-accent underline">Download investigation JSON</a>
+            <p className="mt-3 text-xs leading-6 text-muted">Separate financial and industrial evidence, original amounts, conditions, source URLs and field locators. Projection {packet.projectionVersion}; corpus revised {formatDate(packet.corpus.revision)}.</p>
           </Card>
         </aside>
       </div>

@@ -145,6 +145,13 @@ export default function DataPage() {
         ))}
       </div>
 
+      <section className="mt-10 max-w-prose rounded border border-border-strong bg-card p-5 font-display text-sm leading-7" aria-labelledby="investigation-downloads">
+        <h2 id="investigation-downloads" className="text-lg font-semibold text-foreground">Project investigation packets</h2>
+        <p className="mt-3 text-muted">Each project investigation offers a structured JSON download at <code className="break-all">/api/v1/projects/[id]/investigation</code>. <a href="/api/v1/projects/prj-au-alcoa-sojitz-gallium/investigation" download className="text-accent underline">Download the Wagerup example</a>.</p>
+        <p className="mt-3 text-muted">Projection <code>smpt-investigation-1</code> includes identity and organization roles, directly attributable instruments, separately labelled nonallocative associations, financial histories and current amount wording, parent policy context, announcement-sibling controls, published native milestones, legacy financial-row observations, source URLs and field locators. Planned claims keep target dates; unknown dates remain null.</p>
+        <p className="mt-3 text-muted">These deterministic build artifacts use the curated corpus revision and legal-status cutoff, with no build timestamp or historical known-as-of claim. No project-wide financial total or causal effect is computed. Existing registry endpoints and dataset exports retain their contracts. Unknown or unpublished project IDs return 404.</p>
+      </section>
+
       <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
         <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-faint">
           JSON API

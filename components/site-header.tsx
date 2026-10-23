@@ -119,10 +119,10 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border-strong bg-background">
       <div ref={menuBox}>
-        <Container width="wide" className="flex h-16 items-center gap-5 lg:h-[4.5rem] lg:gap-8">
+        <Container width="wide" className="flex h-16 items-center gap-5 lg:h-16 lg:gap-8">
           {/* Not shrink-0: below 360px the name's tracking tightens to the widest value that keeps two lines at 320px. */}
           <Link href="/" aria-label={`${site.name}, overview`} className="min-w-0">
-            <Wordmark markClassName="h-9 lg:h-12" textClassName="max-[359px]:tracking-[0.01em]" priority />
+            <Wordmark markClassName="h-9 lg:h-11" textClassName="max-[359px]:tracking-[0.01em]" priority />
           </Link>
 
           <nav aria-label="Main" className="hidden min-w-0 items-stretch gap-1 self-stretch lg:flex">
@@ -180,13 +180,13 @@ export function SiteHeader() {
           </div>
         </Container>
 
-        <div className="border-t border-border bg-card/50">
-          <Container width="wide" className="flex min-h-10 flex-wrap items-center justify-between gap-x-6 gap-y-2 py-2 font-display text-xs">
-            <span className="text-muted">Policy, finance and industrial evidence</span>
-            <nav aria-label="Research resources" className="flex flex-wrap gap-x-5 gap-y-2">
-              <Link href="/about" className="text-muted hover:text-foreground">About Benjamin Yang</Link>
+        <div className="border-t border-border">
+          <Container width="wide" className="flex min-h-9 items-center justify-between gap-3 py-1.5 font-display text-xs">
+            <RecordAsOf className="xl:invisible" />
+            <nav aria-label="Research resources" className="flex items-center gap-4">
+              <Link href="/about" className="hidden text-muted hover:text-foreground sm:inline">About Benjamin Yang</Link>
               <Link href="/data" className="text-muted hover:text-foreground">Data & API</Link>
-              <details key={pathname} className="resource-disclosure">
+              <details key={pathname} className="resource-disclosure hidden lg:block">
                 <summary className="cursor-pointer text-muted hover:text-foreground">Research tools</summary>
                 <div className="resource-panel">
                   {navGroups.map(group => <div key={group.label}>
@@ -196,14 +196,6 @@ export function SiteHeader() {
                 </div>
               </details>
             </nav>
-          </Container>
-        </div>
-
-        {/* Below xl: what the record is as of, kept in view under the bar (the main bar carries it from xl up). */}
-        <div className="border-t border-border xl:hidden">
-          <Container width="wide" className="flex h-9 items-center justify-between gap-3">
-            <RecordAsOf />
-            <span className="font-display text-xs text-faint">Not a live feed</span>
           </Container>
         </div>
 
@@ -225,6 +217,7 @@ export function SiteHeader() {
                   </Link>
                 </li>
               ))}
+              <li><Link href="/about" className="block rounded px-2 py-2 font-display text-sm text-foreground hover:bg-elevated">About Benjamin Yang</Link></li>
             </ul>
             <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
               {navGroups.map((g) => (
