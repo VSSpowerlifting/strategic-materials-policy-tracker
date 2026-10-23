@@ -3,8 +3,9 @@
 - Continues `codex/smpt-product-experience-reinvention` from `a2492e8` over original reference `084078f`; no research or publication changes.
 - Restores warm Lattice Register identity and an interactive opening. Home/Compare share a deterministic URL query and explicit evidence/project links; mobile uses readable material/stage controls.
 - Adds an allowlisted public investigation projection shared by project evidence sections and static `/api/v1/projects/[id]/investigation` JSON downloads. Exact milestone search now reaches real project investigations.
-- Local validate/typecheck/lint/build and 1,029 tests pass; responsive/font/download/keyboard browser QA passes. Unchanged Next.js audit remains a separate blocker. Exact final-head CI is reported in PR #181.
-- Full decisions, output contract, review images and limitations: [research product experience](docs/analysis/product-experience-reinvention-2026-10-22.md). No merge, production deployment, dependency repair or pending research-PR absorption.
+- Release-readiness continuation: dependency-only commit `949305e` pins Next.js and matching ESLint config to 16.4.1, the first patched release for the three demonstrated advisories. Clean `npm ci`, consistent peers and the exact production audit pass with zero production vulnerabilities. Five dev-only audit entries remain outside that gate.
+- The bounded polish clarifies the headline, trims desktop secondary navigation and puts full counting explanations in a keyboard-accessible disclosure with a visible compact key. Local validate/typecheck/lint/build and 1,029 tests pass; nine existing lint warnings remain. Responsive/font/download/keyboard QA covers 390/768/1440px. Exact final-head repeat, CI and preview receipts are reported in PR #181 after this document's commit.
+- Full decisions, advisory links, output contract, review images and limitations: [research product experience](docs/analysis/product-experience-reinvention-2026-10-22.md). No merge, production deployment, research/publication/calculation change or pending research-PR absorption.
 
 ## 2026-10-09: F5-1c Stibnite source registration + project-native reviewer path (pending merge)
 

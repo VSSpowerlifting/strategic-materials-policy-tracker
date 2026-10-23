@@ -12,7 +12,7 @@ navy body override. Raise faint text slightly to `#a39b8e` for AA contrast acros
 actual dark surfaces; cream-panel swatches gain an outline. Preserve the supplied
 logo and the existing Newsreader, Archivo and JetBrains Mono families.
 
-The opening pairs a compact 40px desktop Newsreader introduction with the existing
+The opening pairs a compact 32px desktop Newsreader introduction with the existing
 React/SVG/HTML-table lattice. A selected-cell summary and real evidence/project
 links sit beside it. The complete selected-record panel follows, retaining
 separate counts, funding options, ended rows and off-lattice explanations. Mobile
@@ -43,6 +43,44 @@ empty cells stay empty. Unknown, empty, conflicting, incomplete or repeated
 analytical parameters produce visible errors and no selected records. Unrelated
 query parameters survive interaction; standard focus/section anchors are exempt.
 Browser Back, sharing and reload retain the analytical state.
+
+## Release-readiness correction (2026-10-23)
+
+Dependency commit `949305e` updates exact pins for `next` and
+`eslint-config-next` from **16.4.0 to 16.4.1**. The regenerated npm lockfile
+changes only Next.js, its environment/ESLint packages and eight SWC variants;
+Linux SWC metadata gains upstream libc selectors. React/DOM remain 19.2.4,
+and sharp remains 0.35.5, now also the framework's minimum. Node >=20.9.0,
+React 19 and ESLint 9 remain supported; no compatibility code was needed.
+
+The demonstrated CI failure was the direct path `root → next@16.4.0`:
+
+| Advisory | Affected 16.x range | First patched 16.x |
+| --- | --- | --- |
+| [GHSA-2464-fhr4-w9xw: image optimization RCE](https://github.com/advisories/GHSA-2464-fhr4-w9xw) | >=16.0.0 <=16.4.0 | 16.4.1 |
+| [GHSA-p3m5-59mp-jv5r: Server Actions denial of service](https://github.com/advisories/GHSA-p3m5-59mp-jv5r) | >=16.0.0 <=16.4.0 | 16.4.1 |
+| [GHSA-673q-mjm6-r5xr: cached typed-array RCE](https://github.com/advisories/GHSA-673q-mjm6-r5xr) | >=16.0.0 <=16.4.0 | 16.4.1 |
+
+The [official 16.4.1 release](https://github.com/vercel/next.js/releases/tag/v16.4.1)
+fixes all three. npm's suggested 16.4.3 is not the minimum required by these
+ranges. Fixed local PNG optimization remains in use; targeted source inspection
+found no Server Actions or Cache Components/use-cache functions. This is a
+dependency remediation, not an assertion that an exploit was reproduced.
+
+`npm ci` passed, `npm ls` found consistent framework/peer versions, and the exact
+CI command `npm audit --omit=dev --audit-level=moderate` returned **zero
+vulnerabilities**, without overrides, exclusions, threshold changes or bypasses.
+The all-dependency audit still reports five high dev-only entries along
+`eslint-config-next → @next/eslint-plugin-next → fast-glob → micromatch → braces`
+([braces advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm)); this is
+outside the production gate and was not suppressed or changed.
+
+The bounded presentation pass clarifies the headline to “How governments reshape
+strategic-material supply chains.” at 32px on mobile/desktop (40px tablet), reduces desktop
+secondary navigation from 36px to 32px, and keeps a compact symbol key beside the
+selection actions. Full original counting qualifications remain in the native
+“Counting rules and qualifications” disclosure at every viewport. The record
+panel still serves the distinct purpose of listing individual canonical records.
 
 Government means provider for commitments, issuer for clauses, designating
 government for designations, never project geography. Counted IDs, options and
@@ -119,16 +157,18 @@ additional cache, backend service or dependency was needed.
   nonallocative treatment, unknown IDs, nested private-field sentinels, exact
   search discovery and a browser-safe import boundary. Updated an obsolete
   page-source regex to exercise actual public milestone rendering.
-- `npm run build`: passed. The existing vulnerable-version reminder initially
-  returned `SecurityFatalError`; the same ordinary command succeeded on retry.
-  No bypass flags, dependency, CI or deployment configuration changes.
+- `npm run build`: passed on patched Next.js 16.4.1 on its first run, including
+  static investigation routes. No security-blocked build retry or bypass.
 - Production-build Playwright: passed at **1440×900, 768×900, 390×900**, with
   reduced motion. Exercised material/stage keyboard and mobile selection,
   separate counts, government filtering, context transfer to Compare, Back,
   reload, invalid and empty cells, project links, financial/industrial evidence,
   actual JSON download bytes and filename, sources/citations, exact milestone
   search to its real investigation, skip-link focus/URL preservation, menus and
-  Escape/focus return, plus 11 legacy routes. Captured and checked Overview,
+  Escape/focus return, plus 11 legacy routes. Release QA also exercises the
+  counting disclosure by keyboard, exact document-number and original-language
+  browser queries, JSON response headers/bytes and unknown/unpublished-ID 404s.
+  Captured and checked Overview,
   Explore, Compare, Wagerup/Stibnite, About, Methodology and Data/API for page
   overflow. Browser page-error collection was empty.
 - Fonts awaited before screenshots. Chromium platform-font inspection confirmed
@@ -144,6 +184,7 @@ Mobile presents usable analytical controls instead of miniaturized columns.
 
 [Original production reference, 1440×900](product-experience/production-before.png) ·
 [Revised overview, 1440×900](product-experience/overview-desktop.png) ·
+[Revised tablet overview, 768×900](product-experience/overview-tablet.png) ·
 [Revised mobile overview](product-experience/overview-mobile.png) ·
 [Wagerup investigation](product-experience/wagerup-desktop.png).
 
@@ -155,14 +196,22 @@ the checkout.
 
 ## Delivery limits
 
-`npm audit --omit=dev --audit-level=moderate` still fails on unchanged Next.js
-16.4.0 (critical/high advisories; npm suggests 16.4.2). Security remediation remains
-a separate merge prerequisite. Exact final-head remote CI is reported in PR #181;
-local success is not claimed as remote success or preview verification.
+Local release checks use Node 24.15.0/npm 11.12.1 on macOS; CI uses Node 20 on
+Linux, while the existing Vercel project uses Node 24. No runtime/workflow setting
+changed. Independent dependency investigation and patch review found no concrete
+surviving advisory or regression; other OS execution was not tested locally.
+Exact final-head CI and preview verification are reported in PR #181 after this
+document's commit; pre-commit local results do not establish later-commit CI.
+The Vercel connector lacks team authorization; the existing CLI can inspect the
+correct project and is used for read-only preview discovery instead. CLI 62.1.0
+misparsed the documented `env run` authentication probe, attempted an upload and
+failed with an invalid environment-key error before a successful deployment.
+That command was not retried; its newly created local project link was removed.
 
 No changes to seed/research stores, eligibility, validators, source quotations,
 financial calculations, legal standing, corpus dates, private evidence or existing
 API/export schemas. The two stale unrouted-library comments were corrected;
 comments grant no publication authority. Narva release #180, arbitrary project
 comparison #166, finance guidance #162 and CSV security #167 remain separate.
-No merge, production deployment, global CLI upgrade or monitoring activation.
+No merge, successful manual deployment, production promotion, global CLI upgrade
+or monitoring activation. Ordinary Git preview automation remains enabled.

@@ -181,7 +181,7 @@ export function SiteHeader() {
         </Container>
 
         <div className="border-t border-border">
-          <Container width="wide" className="flex min-h-9 items-center justify-between gap-3 py-1.5 font-display text-xs">
+          <Container width="wide" className="flex min-h-9 items-center justify-between gap-3 py-1.5 font-display text-xs lg:min-h-8 lg:py-0">
             <RecordAsOf className="xl:invisible" />
             <nav aria-label="Research resources" className="flex items-center gap-4">
               <Link href="/about" className="hidden text-muted hover:text-foreground sm:inline">About Benjamin Yang</Link>

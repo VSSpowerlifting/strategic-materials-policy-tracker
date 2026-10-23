@@ -269,7 +269,7 @@ function SelectionPreview({ model, query }: { model: LatticeModel; query: Resear
   if (!query.selection || !material) return null;
   const first = view?.commitments[0] ?? view?.controls[0] ?? view?.designations[0];
   const project = first?.projects?.[0];
-  return <div aria-live="polite" className="mt-5 border-l-2 border-accent pl-4 font-display text-sm leading-6">
+  return <div aria-live="polite" className="mt-5 border-t border-border-strong pt-4 font-display text-sm leading-6">
     <h3 className="font-semibold">{material.nameEn} × {stageLabel(model, query.selection.stage)}</h3>
     <p className="mt-1 text-muted">{view ? cellSummary(view.counts) || "No counted records" : "No record at this cell under these filters"}.</p>
     {first ? <Link href={first.href} className="mt-2 block text-accent underline underline-offset-4">Read a {first.kind === "control" ? "control clause" : first.kind === "designation" ? "designation" : "financial instrument"}</Link> : null}
@@ -282,7 +282,7 @@ export function LatticeOverview({ model, preferred, intro }: { model: LatticeMod
   const { query, update, select } = useResearchQuery(model, preferred);
   return <>
     <div className="grid gap-7 lg:grid-cols-[18rem_1fr] lg:gap-10">
-      <div>{intro}<div className="hidden lg:block"><SelectionPreview model={model} query={query} /></div><LatticeLegend model={model} className="mt-6 hidden lg:block" />
+      <div>{intro}<div className="hidden lg:block"><SelectionPreview model={model} query={query} /><LatticeKey model={model} /></div>
       </div>
       <section className="min-w-0" aria-label="Materials by supply-chain stage">
         <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
@@ -292,7 +292,7 @@ export function LatticeOverview({ model, preferred, intro }: { model: LatticeMod
         <QueryControls model={model} query={query} update={update} />
         <QueryIssues query={query} />
         <div className="mt-5"><LatticeTable model={model} filter={query.filter} selection={query.selection} onSelect={select} showCounts={false} /><MobileLattice model={model} filter={query.filter} selection={query.selection} onSelect={select} /></div>
-        <div className="mt-4 lg:hidden"><LatticeLegendCompact /></div>
+        <div className="lg:hidden"><LatticeKey model={model} /></div>
       </section>
     </div>
     <p className="mt-5 max-w-4xl font-display text-xs leading-5 text-muted">A record can occupy several stages; rows and columns are never totalled. Empty cells describe the coded corpus, not an absence of government activity. <NotPlacedSentence gaps={model.gaps} /></p>
@@ -300,7 +300,18 @@ export function LatticeOverview({ model, preferred, intro }: { model: LatticeMod
   </>;
 }
 
-/** The four mark meanings in two short lines, for the phone lattice. */
+/** Keep the symbol key visible; full counting qualifications remain one disclosure away. */
+function LatticeKey({ model }: { model: LatticeModel }) {
+  return <div className="mt-5">
+    <LatticeLegendCompact />
+    <details className="mt-3 font-display text-xs text-muted">
+      <summary className="cursor-pointer py-2 text-foreground">Counting rules and qualifications</summary>
+      <LatticeLegend model={model} className="mt-2" />
+    </details>
+  </div>;
+}
+
+/** Compact mark meanings shared by the desktop rail and mobile lattice. */
 function LatticeLegendCompact() {
   return (
     <ul className="grid grid-cols-2 gap-x-4 gap-y-2 font-display text-xs leading-5 text-muted">

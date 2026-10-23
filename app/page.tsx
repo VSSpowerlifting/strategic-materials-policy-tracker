@@ -13,7 +13,7 @@ import { site } from "@/lib/site";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "From government policy to industrial reality",
+  title: "How governments reshape strategic-material supply chains",
   description:
     "Investigate how governments use legal controls, public finance and industrial intervention to reshape strategic-material supply chains, and what the evidence establishes.",
   openGraph: {
@@ -39,7 +39,7 @@ export default function Home() {
       <Container width="wide" className="py-7 sm:py-9">
         <LatticeOverview model={model} preferred={{ slug: "gallium", stage: "processing" }} intro={<>
           <p className="font-display text-sm text-muted">Strategic materials, government action</p>
-          <h1 className="mt-3 font-serif text-[2rem] font-semibold sm:text-[2.5rem] leading-[1.1] tracking-tight">From policy to industrial evidence.</h1>
+          <h1 className="mt-3 font-serif text-[2rem] font-semibold sm:text-[2.5rem] lg:text-[2rem] leading-[1.1] tracking-tight">How governments reshape strategic-material supply chains.</h1>
           <p className="mt-4 font-serif text-base leading-7 text-muted">Trace legal controls, public finance and reported project activity to the evidence behind each claim.</p>
           <p className="mt-4 font-display text-xs text-muted">Research by <Link href="/about" className="underline underline-offset-4">Benjamin Yang</Link>.</p>
         </>} />

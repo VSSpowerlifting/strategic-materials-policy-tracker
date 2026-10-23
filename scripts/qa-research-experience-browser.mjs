@@ -8,9 +8,9 @@ const { chromium } = createRequire(import.meta.url)(
   process.env.PLAYWRIGHT_MODULE ?? "playwright",
 );
 const port = Number(process.env.SMPT_QA_PORT ?? 3487);
-const base = `http://127.0.0.1:${port}`;
+const base = process.env.SMPT_QA_BASE ?? `http://127.0.0.1:${port}`;
 const output = process.env.SMPT_QA_OUTPUT ?? "/tmp/smpt-research-qa";
-const server = spawn(
+const server = process.env.SMPT_QA_BASE ? null : spawn(
   process.execPath,
   [
     "node_modules/next/dist/bin/next",
@@ -24,7 +24,7 @@ const server = spawn(
 );
 let logs = "",
   browser;
-for (const stream of [server.stdout, server.stderr])
+for (const stream of server ? [server.stdout, server.stderr] : [])
   stream.on("data", (data) => {
     logs = (logs + data).slice(-6000);
   });
@@ -32,7 +32,7 @@ try {
   await mkdir(output, { recursive: true });
   let ready = false;
   for (let i = 0; i < 100; i++) {
-    if (server.exitCode !== null) throw new Error(logs);
+    if (server && server.exitCode !== null) throw new Error(logs);
     try {
       if ((await fetch(base)).ok) {
         ready = true;
@@ -73,7 +73,7 @@ try {
     await page.goto(base, { waitUntil: "networkidle" });
     assert.match(
       await page.locator("h1").innerText(),
-      /From policy to industrial evidence/,
+      /How governments reshape strategic-material supply chains/,
     );
     await page.evaluate(() => document.fonts.ready);
     const fontSession = await page.context().newCDPSession(page);
@@ -92,7 +92,7 @@ try {
     if (width === 1440) {
       const matrix = await page.locator('table').first().boundingBox();
       assert.ok(matrix.y < 260 && matrix.height > 500, JSON.stringify(matrix));
-      assert.equal(await page.locator("h1").evaluate(el => getComputedStyle(el).fontSize), "40px");
+      assert.equal(await page.locator("h1").evaluate(el => getComputedStyle(el).fontSize), "32px");
     }
     assert.equal(await page.locator("dialog[open]").count(), 0);
     await page.keyboard.press("Tab");
@@ -107,6 +107,14 @@ try {
     );
     assert.equal(new URL(page.url()).hash, "", "skip link preserves analytical URL");
     assert.equal(await page.getByText("Unsupported analytical selection hash.", { exact: false }).count(), 0);
+    const countingRules = page.getByText("Counting rules and qualifications", { exact: true }).filter({ visible: true });
+    await countingRules.focus();
+    await page.keyboard.press("Enter");
+    const rules = page.locator("details[open]").filter({ has: countingRules });
+    assert.match(await rules.innerText(), /named providing government/);
+    assert.match(await rules.innerText(), /does not link a clause to a financing/);
+    await page.keyboard.press("Enter");
+    assert.equal(await rules.count(), 0);
     await checkLayout("home");
     if (width < 1024) {
       const toggle = page.getByRole("button", { name: "Menu", exact: true });
@@ -189,6 +197,13 @@ try {
     assert.equal(packet.projectId, "prj-au-alcoa-sojitz-gallium");
     assert.equal(packet.nativeMilestones[0].id, "mil-au-alcoa-wagerup-groundbreaking-2026-08-24");
     assert.match(packet.nativeMilestones[0].note, /ceremon/);
+    const packetResponse = await page.request.get(new URL(await packetLink.getAttribute("href"), base).href);
+    assert.equal(packetResponse.status(), 200);
+    assert.equal(packetResponse.headers()["content-type"], "application/json; charset=utf-8");
+    assert.equal(packetResponse.headers()["content-disposition"], `attachment; filename="${download.suggestedFilename()}"`);
+    assert.equal(await packetResponse.text(), await readFile(await download.path(), "utf8"));
+    assert.equal(await packetResponse.text(), JSON.stringify(packet, null, 2) + "\n");
+    assert.doesNotMatch(await packetResponse.text(), /adjudicationPath|reviewerPacket|internalNotes|\/Users\/|\/private\/evidence/);
     for (const f of packet.financialInstruments) assert.ok(await page.locator(`#project-finance a[href="/capital/${f.id}"]`).count());
     await checkLayout("wagerup");
     const source = page.locator(
@@ -329,6 +344,13 @@ try {
     await discovered.click();
     await page.waitForURL("**/projects/prj-au-alcoa-sojitz-gallium#project-industrial");
     assert.match(await page.locator("#project-industrial").innerText(), /Groundbreaking/);
+    for (const query of [
+      "MOFCOM/GACC Announcement No. 23 (2023)",
+      "商务部 海关总署公告2023年第23号 关于对镓、锗相关物项实施出口管制的公告",
+    ]) {
+      await page.goto(base + "/search?q=" + encodeURIComponent(query), { waitUntil: "networkidle" });
+      await page.locator('[data-testid="search-results"] a[href="/events/evt-cn-gage-2023"]').waitFor();
+    }
     await page.close();
   }
   assert.deepEqual(errors, [], "browser page errors");
@@ -381,11 +403,14 @@ try {
     (await page.request.get(base + "/api/export/projects.csv")).status(),
     200,
   );
+  for (const id of ["prj-not-found", "prj-private-unpublished"]) {
+    assert.equal((await page.request.get(base + `/api/v1/projects/${id}/investigation`)).status(), 404);
+  }
   console.log(
     "PASS: 390/768/1440px; homepage, Wagerup/Stibnite, primary link fidelity, filter/reload/Back/empty state, comparison keyboard disclosure, menu/Escape/focus, citation/download/API and 11 legacy destinations.",
   );
   console.log(`Screenshots: ${output}`);
 } finally {
   if (browser) await browser.close();
-  server.kill("SIGTERM");
+  server?.kill("SIGTERM");
 }
