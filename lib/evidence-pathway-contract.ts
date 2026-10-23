@@ -4,7 +4,8 @@
  * All links below are structural references already present in reviewed SMPT
  * records. In particular: project associations are nonallocative, recognition
  * is not finance, and a shared material/date/jurisdiction NEVER creates an edge.
- * This read-only audit is NOT imported by public pages or exports.
+ * The public investigation adapter uses this audit over published loader inputs.
+ * The audit itself grants no publication authority.
  */
 import { auditLegacyProjectExecution } from "./project-execution-audit";
 import type {
