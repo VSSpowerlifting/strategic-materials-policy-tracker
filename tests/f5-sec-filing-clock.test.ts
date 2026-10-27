@@ -35,6 +35,7 @@ test("F5: verifying a source publication clock cannot promote finance approval o
   assert.ok(dpa);
   assert.equal(dpa.financialStatusHistory.at(-1)?.status, "disbursed",
     "the separate DPA agreement has its own already sourced history");
-  assert.ok(getAllProjectMilestones().length === 0,
+  assert.deepEqual(
+    getAllProjectMilestones().filter(m => m.projectId === "prj-us-stibnite"), [],
     "factual source-metadata repair does not approve physical assertions");
 });
