@@ -377,9 +377,17 @@ try {
   const dataset = await (
     await page.request.get(base + "/api/export/dataset.json")
   ).json();
-  assert.equal(dataset.counts.projectMilestones, 1);
-  const milestone = dataset.projectMilestones[0];
-  assert.equal(milestone.id, "mil-au-alcoa-wagerup-groundbreaking-2026-08-24");
+  assert.equal(dataset.counts.projectMilestones, 2);
+  assert.deepEqual(
+    dataset.projectMilestones.map((m) => m.id),
+    [
+      "mil-au-alcoa-wagerup-groundbreaking-2026-08-24",
+      "mil-ee-neo-narva-commercial-production-reported-2026",
+    ],
+  );
+  const milestone = dataset.projectMilestones.find(
+    (m) => m.id === "mil-au-alcoa-wagerup-groundbreaking-2026-08-24",
+  );
   await page.goto(base + "/projects/prj-au-alcoa-sojitz-gallium", {
     waitUntil: "networkidle",
   });
@@ -395,10 +403,7 @@ try {
       base + "/api/v1/projects/prj-au-alcoa-sojitz-gallium",
     )
   ).json();
-  assert.deepEqual(
-    project.reviewedProjectMilestones,
-    dataset.projectMilestones,
-  );
+  assert.deepEqual(project.reviewedProjectMilestones, [milestone]);
   assert.equal(
     (await page.request.get(base + "/api/export/projects.csv")).status(),
     200,

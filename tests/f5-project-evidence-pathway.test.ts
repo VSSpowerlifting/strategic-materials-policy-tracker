@@ -52,15 +52,17 @@ test("F5-2: Stibnite preserves separate financing instruments and zero inferred 
   assert.equal(r.reviewGaps.absenceMeansInactivity,false);
 });
 
-test("F5-2: Narva's existing operational finance note cannot be promoted into a native project milestone", () => {
+test("F5-2: Narva source-reviewed production observation stays distinct from financing", () => {
   const r=buildProjectEvidencePathway("prj-ee-neo-rare-earth-magnet-project",input());
   assert.ok(r.financing.find(x=>x.id==="fin-eu-jtf-2025-neo-magnet-project"));
   assert.equal(r.financing.length,1);
   assert.equal(r.financing[0].recipient,"NPM Narva OÜ");
   assert.ok(r.financing[0].legacyPhysicalObservations.some(s=>
     s.status==="operational" && s.statusDate==="2026-09-14"));
-  assert.equal(r.nativeMilestones.length,0);
-  assert.equal(r.reviewGaps.nativePhysical,"no_reviewed_milestones");
+  assert.equal(r.nativeMilestones.length,1);
+  assert.equal(r.nativeMilestones[0].id,"mil-ee-neo-narva-commercial-production-reported-2026");
+  assert.equal(r.nativeMilestones[0].occurredOn,null);
+  assert.equal(r.reviewGaps.nativePhysical,"reviewed_milestones_present");
   assert.ok(r.reviewGaps.hasUnreviewedFinancialAmounts);
   assert.ok(r.project.sources.length>0);
 });
@@ -124,7 +126,7 @@ test("F5-2: synthetic reviewed milestone preserves reporter, event time, publica
     statementEn:"F5 test-only synthetic assertion",statementEnSource:"na",
     reviewedBy:"fictional test reviewer only",reviewedAt:"2026-10-09",
   };
-  const r=buildProjectEvidencePathway(pid,{...d,milestones:[...d.milestones,mil]});
+  const r=buildProjectEvidencePathway(pid,{...d,milestones:[...d.milestones.filter(m=>m.projectId!==pid),mil]});
   assert.equal(r.nativeMilestones.length,1);
   const m=r.nativeMilestones[0];
   assert.equal(m.claimMode,"occurred");

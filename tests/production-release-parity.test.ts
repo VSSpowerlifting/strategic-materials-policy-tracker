@@ -26,16 +26,16 @@ function healthyHttp(e:ExpectedPublicRelease):PublicHttpFetcher {
 test("read-only public parity checks the entire exported corpus and every actually released physical project",async()=>{
   const e=expected();
   assert.deepEqual(e.milestones,getAllProjectMilestones());
-  assert.deepEqual(e.milestones.map(m=>m.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24"]);
-  assert.equal(e.projects.length,1);
-  assert.equal(e.dataset.counts.projectMilestones,1);
+  assert.deepEqual(e.milestones.map(m=>m.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.equal(e.projects.length,2);
+  assert.equal(e.dataset.counts.projectMilestones,2);
   const before=JSON.stringify(e);
   const r=await checkPublicReleaseParity(e,healthyHttp(e));
   assert.equal(r.status,"in_sync");
   assert.equal(r.expectedCuratedCorpusCutoff,"2026-10-17");
-  assert.equal(r.expectedPublishedMilestoneCount,1);
+  assert.equal(r.expectedPublishedMilestoneCount,2);
   assert.deepEqual(r.issues,[]);
-  assert.equal(r.checkedEndpoints.length,3);
+  assert.equal(r.checkedEndpoints.length,4);
   assert.equal(r.publicOnly,true);
   assert.equal(r.publicationAuthorized,false);
   assert.equal(r.deploymentShaVerified,false,"public data parity is NOT Vercel exact-commit attestation");

@@ -18,7 +18,7 @@ const sourceId="src-alcoa-wagerup-groundbreaking-2026";
 
 test("supervised release publishes exactly one source-reviewed Wagerup claim, not unsigned peers",()=>{
   const milestones=getAllProjectMilestones();
-  assert.deepEqual(milestones.map(x=>x.id),[milestoneId]);
+  assert.deepEqual(milestones.map(x=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
   assert.equal(site.lastUpdated,"2026-10-17");
   assert.equal(candidate.proposedCorpusCutoff,site.lastUpdated);
   assert.equal(candidate.publishedCorpusCutoffAtPreparation,"2026-10-09");
@@ -34,7 +34,7 @@ test("supervised release publishes exactly one source-reviewed Wagerup claim, no
   assert.equal(milestones[0].targetOn,null);
   assert.equal(milestones[0].projectId,pid);
   assert.equal(milestones[0].sourceId,sourceId);
-  assert.deepEqual(milestones.filter(x=>x.projectId!=="prj-au-alcoa-sojitz-gallium"),[]);
+  assert.deepEqual(milestones.filter(x=>x.projectId!=="prj-au-alcoa-sojitz-gallium").map(x=>x.id),["mil-ee-neo-narva-commercial-production-reported-2026"]);
   assert.ok(milestones[0].note?.includes("not independently observed sustained works"));
 });
 
@@ -92,7 +92,7 @@ test("Wagerup enters only MANUAL casefile QA, not automatic public pathway relea
   };
   const frozen=JSON.stringify(corpus);
   const actual=auditF5CasefileReadiness(corpus,site.lastUpdated);
-  assert.deepEqual(actual.pilots.filter(x=>x.eligibleForManualQa).map(x=>x.projectId),[pid]);
+  assert.deepEqual(actual.pilots.filter(x=>x.eligibleForManualQa).map(x=>x.projectId).sort(),[pid,"prj-ee-neo-rare-earth-magnet-project"].sort());
   assert.equal(actual.pilots.find(x=>x.projectId===pid)?.registeredOccurredMilestones,1);
   assert.equal(actual.allPilotsEligibleForManualQa,false);
   assert.equal(actual.publicReleaseAuthorized,false);

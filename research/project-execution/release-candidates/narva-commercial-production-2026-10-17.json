@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "f5-milestone-release-candidate-1",
+  "stage": "source_reviewed_milestone_authorized_for_public_seed",
+  "releaseAuthorized": true,
+  "publicSeedModificationAuthorized": true,
+  "publicRouteReleaseAuthorized": false,
+  "proposedCorpusCutoff": "2026-10-17",
+  "publishedCorpusCutoffAtPreparation": "2026-10-17",
+  "sourceReviewId": "review-m3-2-neo-narva-magnets",
+  "reviewInputMetadataSha256": "0e8fdca930230527148be4f1da89439f1482b665243b16d747251a47707e6c1b",
+  "reviewReceiptProvenance": "Maintainer-reported successful local interactive original-source review: approved, five individually confirmed checks, named reviewer/date, private gitignored per-review file, followed by read-only staging-eligible release rehearsal. Assistant cannot independently inspect private ledger or treat registry fingerprint as a hash of original source bytes.",
+  "manualReviewRequirements": [
+    "Human maintainer reports reading complete September 14, 2026 original Neo issuer release and approving one bounded initial commercial production/shipments assertion",
+    "2026-10-17 private review under canonical M3 ID, full reviewer checks and read-only structural staging rehearsal reported passed",
+    "Public reviewer attribution Benjamin Yang / 2026-10-17 and this ONE named-facility production_reported seed explicitly authorized separately in current conversation",
+    "Keep occurredOn null: source publication day is not verified production-start day",
+    "Do not assert actual annual output, capacity phases, grant-caused production, disbursement, or source independence beyond original issuer",
+    "Preserve Wagerup public entry byte-for-byte and all other unsigned/taxonomy-blocked candidates; no /pathways release",
+    "Exact-head validation/CI/browser QA and verified production deployment needed before declaring public release"
+  ],
+  "proposedProjectMilestones": [
+    {
+      "id": "mil-ee-neo-narva-commercial-production-reported-2026",
+      "projectId": "prj-ee-neo-rare-earth-magnet-project",
+      "kind": "production_reported",
+      "claimMode": "occurred",
+      "scope": "named_facility",
+      "scopeAsStated": "initial commercial rare-earth sintered magnet production programs at Neo's European permanent magnet facility in Narva, Estonia",
+      "occurredOn": null,
+      "targetOn": null,
+      "sourceId": "src-neo-commercial-production-2026",
+      "locator": "Issuer announcement September 14, 2026; opening body paragraph",
+      "statementOriginal": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+      "statementEn": "its European permanent magnet manufacturing facility is in commercial production and shipping volumes of rare earth sintered magnets",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-10-17",
+      "note": "Issuer reports initial commercial sintered-magnet program and shipments as of 2026-09-14, but does not state the first production-start day. Do not treat publication day as an occurredOn event; no observed 2,000-tonne output, Phase 1B/20,000-tonne achievement, JTF-caused production, or disbursement inference."
+    }
+  ],
+  "finalMaintainerAuthorization": {
+    "recordedOn": "2026-10-17",
+    "scope": "one Neo Narva production_reported initial commercial production/shipments public milestone, attributed to Benjamin Yang reviewed 2026-10-17; existing site cutoff unchanged",
+    "separatePublicPathwaysAuthorization": false,
+    "source": "maintainer's explicit authorization in current conversation; private review ledger remains local"
+  }
+}
