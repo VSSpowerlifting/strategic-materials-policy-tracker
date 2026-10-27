@@ -15,14 +15,14 @@ import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "How governments reshape strategic-material supply chains",
   description:
-    "Investigate how governments use legal controls, public finance and industrial intervention to reshape strategic-material supply chains, and what the evidence establishes.",
+    "Comparative economic-security research on industrial policy, trade controls, public finance and reported activity in strategic-material supply chains, with source-linked evidence.",
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.name,
     title: site.name,
     description:
-      "Government policy, financial support and industrial implementation, traced to their sources.",
+      "Compare government policy, legal controls, financing and reported industrial activity through source-linked evidence.",
   },
 };
 
@@ -40,7 +40,7 @@ export default function Home() {
         <LatticeOverview model={model} preferred={{ slug: "gallium", stage: "processing" }} intro={<>
           <p className="font-display text-sm text-muted">Strategic materials, government action</p>
           <h1 className="mt-3 font-serif text-[2rem] font-semibold sm:text-[2.5rem] lg:text-[2rem] leading-[1.1] tracking-tight">How governments reshape strategic-material supply chains.</h1>
-          <p className="mt-4 font-serif text-base leading-7 text-muted">Trace legal controls, public finance and reported project activity to the evidence behind each claim.</p>
+          <p className="mt-4 font-serif text-base leading-7 text-muted">Compare industrial policy, trade controls, public finance and reported project activity across governments. Follow each claim to its source.</p>
           <p className="mt-4 font-display text-xs text-muted">Research by <Link href="/about" className="underline underline-offset-4">Benjamin Yang</Link>.</p>
         </>} />
         <div className="mt-8 border-t border-border-strong pt-5">
