@@ -249,6 +249,13 @@ export default function MethodologyPage() {
               and the language each government uses to justify them.
             </p>
             <p>
+              The comparative unit is a documented measure, financial instrument
+              or reported industrial observation, not a preferred country. This
+              does not imply equally complete coverage across jurisdictions:
+              absence from the corpus is not evidence of government inaction,
+              and records appearing near one another do not establish causation.
+            </p>
+            <p>
               It does <strong>not</strong> model the global minerals market. It does
               not track or forecast market prices, estimate reserves or tonnages,
               publish supply-risk numbers or rankings, or make projections its
