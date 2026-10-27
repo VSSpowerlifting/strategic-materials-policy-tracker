@@ -131,12 +131,18 @@ test("F5 Observatory: determinism across reordered seed and cohort inputs",()=>{
   const reversed=buildF5ObservatoryScaffold({
     events:[...c.events].reverse(),finances:[...c.finances].reverse(),
     controls:[...c.controls].reverse(),designations:[...c.designations].reverse(),
-    projects:[...c.projects].reverse(),milestones:[...c.milestones], // canonical milestone IDs are validation-sorted
+    projects:[...c.projects].reverse(),milestones:[...c.milestones],
     sources:[...c.sources].reverse(),
   },site.lastUpdated,[...F5_OBSERVATORY_COHORT].reverse());
   assert.deepEqual(reversed,normal);
   assert.equal(JSON.stringify(c),frozen);
   assert.equal(formatF5ObservatoryScaffold(reversed),formatF5ObservatoryScaffold(normal));
+  // Published milestones are a canonical, strictly id-ascending list: a reordered
+  // list is a contract violation and fails closed instead of being silently re-sorted.
+  assert.ok(c.milestones.length>1,"milestone reorder check needs at least two published milestones");
+  assert.throws(()=>buildF5ObservatoryScaffold({...c,milestones:[...c.milestones].reverse()},
+    site.lastUpdated,F5_OBSERVATORY_COHORT),/ids must be strictly ascending/);
+  assert.equal(JSON.stringify(c),frozen);
 });
 
 test("F5 Observatory: reject duplicate/unknown project, future claims, invalid cutoff or invented QA authority",()=>{

@@ -15,7 +15,8 @@ const narva="review-m3-2-neo-narva-magnets";
 const records=queue as PendingProjectExecutionRow[];
 const refs=():GuidedReviewRefs=>({
   projects:getAllProjects(),sources:getAllSources(),commitments:getAllFinancialCommitments(),
-  // Historical pre-Narva fixture for nonpublishing review construction tests only.
+  // Historical pre-Narva public state (Wagerup only, same cutoff) so nonpublishing
+  // review-construction tests can still exercise the now-published Narva queue row.
   currentPublicMilestones:getAllProjectMilestones().filter(m=>m.id!=="mil-ee-neo-narva-commercial-production-reported-2026"),currentPublicCutoff:site.lastUpdated,
 });
 const choices=(over:Partial<HumanReviewInput>={}):HumanReviewInput=>({
@@ -41,7 +42,7 @@ test("review session always uses one canonical gitignored per-candidate path",()
   assert.throws(()=>parseGuidedReviewArgs(["--id",narva,"--id",narva,"--proposed-cutoff","2026-10-17"]),/Usage:/);
 });
 
-test("one already published Wagerup is unavailable for accidental second review",()=>{
+test("already published Wagerup and Narva are unavailable for accidental second review",()=>{
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
   assert.throws(()=>prepareGuidedReview(records,{...refs(),currentPublicMilestones:getAllProjectMilestones()},narva,"2026-10-17"),/Already published/);
   assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-alcoa-wagerup","2026-10-17"),/Already published/);
@@ -113,6 +114,7 @@ test("never overwrite or launder earlier original human decision into another re
 });
 
 test("CI and noninteractive pipes cannot create fake source-review decisions",()=>{
+  // An unpublished row that is not taxonomy-blocked, so the run reaches the TTY guard.
   const id="review-m3-2-cyclic-extended-operations";
   const run=spawnSync(process.execPath,["--import","tsx","scripts/run-f5-guided-private-review.ts","--id",id,"--proposed-cutoff","2026-10-17"],{
     encoding:"utf8",input:"approved\nSYNTHETIC\n2026-10-17\ny\ny\ny\ny\ny\nshortcut\n",
