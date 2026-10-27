@@ -4,9 +4,9 @@ import { Container, PageHeading, Section } from "@/components/ui/container";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Benjamin Yang and SMPT",
+  title: "About Strategic Materials Policy Tracker",
   description:
-    "The research purpose, approach and limitations of Benjamin Yang's Strategic Materials Policy Tracker.",
+    "The comparative economic-security research purpose, evidence standards and limitations of Strategic Materials Policy Tracker.",
 };
 
 export default function AboutPage() {
@@ -15,16 +15,16 @@ export default function AboutPage() {
       <PageHeading
         eyebrow="About"
         title="Research by Benjamin Yang"
-        lead="An independent research project connecting government policy, legal controls, financial instruments and industrial evidence across strategic-material supply chains."
+        lead="An independent, comparative economic-security research project connecting industrial policy, trade and legal controls, public finance and reported industrial activity across strategic-material supply chains."
       />
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="max-w-prose space-y-10 text-lg leading-8 text-foreground/90">
           <Section title="The question behind the tracker">
             <p>
-              How do governments use policy, legal controls, finance and
-              industrial intervention to reshape strategic-material supply
-              chains, and what does the available evidence establish about
-              implementation?
+              How do governments use industrial policy, trade and legal
+              controls, public finance and investment to reshape
+              strategic-material supply chains, and what does the available
+              evidence establish about implementation?
             </p>
             <p className="mt-4">
               {site.name} organizes the instruments and the evidence needed to
@@ -35,16 +35,19 @@ export default function AboutPage() {
           </Section>
           <Section title="The researcher">
             <p>
-              Built and maintained by Benjamin Yang. The project&apos;s depth on
-              Chinese measures comes from direct reading of Mandarin-language
-              primary sources, paired with a multi-actor frame that tracks US,
-              EU, Japanese, Australian, Canadian and Chinese policy instruments
-              side by side.
+              Built and maintained by Benjamin Yang, {site.name} combines
+              international affairs research, economic-security analysis and
+              close examination of primary-source evidence. Its approach is
+              comparative rather than country-centered, examining how
+              governments deploy policy instruments, public financing and
+              industrial interventions across major economies and
+              strategic-material supply chains.
             </p>
             <p className="mt-4">
-              The work is intended for journalists, policy staff, analysts and
-              researchers who need structured, citable records and a clear route
-              back to the original text.
+              The project is intended for journalists, policymakers, analysts
+              and researchers who need structured, citable records, transparent
+              evidence and a clearer understanding of the relationship between
+              government action and reported industrial outcomes.
             </p>
           </Section>
           <Section title="How to judge the work">

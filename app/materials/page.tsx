@@ -6,7 +6,7 @@ import { getAllMaterials } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Materials",
   description:
-    "A bounded, rare-earth-centred material set and how each appears in the policy contest — China's position, downstream industries, and diversification efforts.",
+    "Explore a bounded set of rare earths and adjacent strategic materials through source-linked policy measures, legal controls, public finance and industrial observations.",
 };
 
 export default function MaterialsPage() {
@@ -18,7 +18,7 @@ export default function MaterialsPage() {
         index="01"
         eyebrow="Bounded set"
         title="Materials"
-        lead="Rare earths as the spine, the named REEs that drive the controls, and the adjacent chokepoints — gallium, germanium, graphite, antimony, tungsten, and finished magnets. Each entry is a China-policy view, not a global supply-chain model."
+        lead="Rare earths, the named elements covered by controls, and adjacent strategic materials — including gallium, germanium, graphite, antimony, tungsten and finished magnets. Explore the recorded policies, financing and industrial evidence attached to each; these are bounded research dossiers, not comprehensive global supply-chain models."
       />
       <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {materials.map((m) => (

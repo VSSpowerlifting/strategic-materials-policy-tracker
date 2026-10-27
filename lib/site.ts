@@ -7,9 +7,9 @@ export const site = {
   name: "Strategic Materials Policy Tracker",
   shortName: "SMPT",
   tagline:
-    "How the major powers contest rare earths and strategic materials through policy.",
+    "Comparative economic-security research on strategic-material policy and implementation.",
   description:
-    "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
+    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked records.",
   version: "v0.6-capital-intelligence",
   /** Last curated corpus revision, NOT a claim that every row was rechecked on this date. */
   lastUpdated: "2026-10-17",
