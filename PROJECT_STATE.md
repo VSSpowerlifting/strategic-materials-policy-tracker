@@ -1,4 +1,4 @@
-## 2026-10-31: frontend journeys and navigation overhaul (draft PR)
+## 2026-10-31: frontend journeys and navigation overhaul (draft PR #183)
 
 - Branch `claude/smpt-frontend-overhaul-335dcc` from `66ad5f5`. Frontend only: no `data/seed/*`, taxonomy, classification, status, review, calculation, API, export or validation change.
 - Header reorganized around five research journeys (`journeys` in `lib/site.ts`: Government action, Public capital, Projects, Compare, Evidence), each stating the question it answers. A journey's own views show in a second header row only inside it; the "Research tools" panel is gone. Every URL preserved; `navGroups`/`nav` (footer, sitemap) unchanged.
