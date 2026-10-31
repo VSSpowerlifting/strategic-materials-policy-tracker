@@ -38,7 +38,7 @@ test("Cyclic F5-5 original publisher crosscheck: source-registered, unsigned and
     "single_federal_reporting_chain_no_independent_physical_inspection");
   assert.equal(research.reportedCompletionMonth,"2026-03");
   assert.equal(research.occurredOn,null);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("Cyclic F5-5 crosscheck uses existing human M3 authority and one funded-activity boundary", () => {
@@ -104,7 +104,7 @@ test("Cyclic F5-5 crosscheck rejects registry/queue drift and approval-shaped ex
   assert.match(run(input(),c).errors.join(" "),/canonical M3 source\/claim\/gate drifted/);
   const extra={...input(), reviewedBy:"synthetic reviewer"};
   assert.match(run(extra).errors.join(" "),/unexpected or absent top-level fields/);
-  const afterPublication={...ctx(),publicMilestoneCount:1};
+  const afterPublication={...ctx(),publicMilestoneCount:3};
   assert.match(run(input(),afterPublication).errors.join(" "),/public project milestones changed/);
   assert.deepEqual(run(input()),run(input()),"audit is deterministic");
 });

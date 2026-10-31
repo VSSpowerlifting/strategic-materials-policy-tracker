@@ -13,7 +13,7 @@ const downloads = [
     file: "smpt-dataset.json",
     href: "/api/export/dataset.json",
     fmt: "JSON",
-    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions, sources, financial commitments, control measures, organizations, projects, programmes and project designations, plus the capital-and-control and capital-intelligence summaries, counts and the data notice.",
+    desc: "The complete dataset in one structured file — events, framing anchors, materials, jurisdictions, sources, financial commitments, control measures, organizations, projects, programmes, project designations and source-reviewed project milestones, plus the capital-and-control and capital-intelligence summaries, counts and the data notice.",
   },
   {
     file: "smpt-financial-commitments.csv",
@@ -44,6 +44,12 @@ const downloads = [
     href: "/api/export/programmes.csv",
     fmt: "CSV",
     desc: "One row per named programme or scheme: its government, kind, administering bodies, parent programme, legal authority, and the rows and designations recorded under it.",
+  },
+  {
+    file: "smpt-project-milestones.json",
+    href: "/api/v1/project-milestones",
+    fmt: "JSON",
+    desc: "The public human-reviewed industrial milestone register, retaining named-facility scope, original publisher statement, pinpoint, event or target date, and real reviewer attribution. Source review is not proof of facility operation or government disbursement.",
   },
   {
     file: "smpt-project-designations.csv",
@@ -112,7 +118,7 @@ export default function DataPage() {
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
         sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses ·{" "}
         {s.organizations} organizations · {s.projects} projects · {s.programmes} programmes ·{" "}
-        {s.projectDesignations} project designations.
+        {s.projectDesignations} project designations · {s.projectMilestones} reviewed industrial milestones.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -138,6 +144,13 @@ export default function DataPage() {
           </div>
         ))}
       </div>
+
+      <section className="mt-10 max-w-prose rounded border border-border-strong bg-card p-5 font-display text-sm leading-7" aria-labelledby="investigation-downloads">
+        <h2 id="investigation-downloads" className="text-lg font-semibold text-foreground">Project investigation packets</h2>
+        <p className="mt-3 text-muted">Each project investigation offers a structured JSON download at <code className="break-all">/api/v1/projects/[id]/investigation</code>. <a href="/api/v1/projects/prj-au-alcoa-sojitz-gallium/investigation" download className="text-accent underline">Download the Wagerup example</a>.</p>
+        <p className="mt-3 text-muted">Projection <code>smpt-investigation-1</code> includes identity and organization roles, directly attributable instruments, separately labelled nonallocative associations, financial histories and current amount wording, parent policy context, announcement-sibling controls, published native milestones, legacy financial-row observations, source URLs and field locators. Planned claims keep target dates; unknown dates remain null.</p>
+        <p className="mt-3 text-muted">These deterministic build artifacts use the curated corpus revision and legal-status cutoff, with no build timestamp or historical known-as-of claim. No project-wide financial total or causal effect is computed. Existing registry endpoints and dataset exports retain their contracts. Unknown or unpublished project IDs return 404.</p>
+      </section>
 
       <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
         <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-faint">

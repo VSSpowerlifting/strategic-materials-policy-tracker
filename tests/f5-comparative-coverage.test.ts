@@ -35,8 +35,8 @@ test("F5-4a registry-wide denominators and /response project parity are explicit
   assert.deepEqual(r.projects.filter(p => p.publicResponseAtCutoff.eligibleGovernmentProject)
     .map(p => p.projectId).sort(), response.rows.map(p => p.id).sort());
   assert.equal(new Set(r.projects.map(p => p.projectId)).size, d.projects.length);
-  assert.equal(r.counts.withoutNativeReviewedMilestone, d.projects.length);
-  assert.equal(r.counts.withNativeOccurredMilestone, 0);
+  assert.equal(r.counts.withoutNativeReviewedMilestone, d.projects.length - 2);
+  assert.ok(r.counts.withNativeOccurredMilestone>=1);
   assert.ok(r.counts.withUnreviewedLegacyPhysicalObservation > 0);
   assert.ok(r.projects.every(p => p.lackOfNativeMilestonesMeansInactivity === false));
 });
@@ -115,10 +115,10 @@ test("F5-4a milestone mode and separate clocks survive synthetic source-reviewed
   const r = buildF5ComparativeCoverage(
     { ...d, milestones: [...d.milestones, fixture] }, "2026-02-01");
   const row = r.projects.find(row => row.projectId === p.id)!;
-  assert.deepEqual(row.nativeOccurredMilestoneIds, ["mil-fixture-reviewed-occurrence"]);
+  assert.deepEqual(row.nativeOccurredMilestoneIds, [...new Set([...d.milestones.filter(m=>m.projectId===p.id&&m.claimMode==="occurred").map(m=>m.id),"mil-fixture-reviewed-occurrence"])].sort());
   assert.deepEqual(row.nativePlannedMilestoneIds, []);
   assert.ok(row.structuralSourceIds.includes(src.id));
-  assert.equal(r.counts.withNativeOccurredMilestone, 1);
+  assert.equal(r.counts.withNativeOccurredMilestone, 2);
   assert.equal(r.historicalPhysicalAsOfAuthorized, false,
     "even an earlier legal query must not backdate a reviewed milestone");
 });

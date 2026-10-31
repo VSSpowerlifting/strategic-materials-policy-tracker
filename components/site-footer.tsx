@@ -18,6 +18,7 @@ export function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-[1.1fr_1fr_1fr_1fr]">
           <div>
             <Wordmark markClassName="h-12" />
+            <p className="mt-4 text-sm leading-6 text-muted">Built and maintained by <Link href="/about" className="text-foreground underline decoration-border-strong underline-offset-4">Benjamin Yang</Link>.</p>
           </div>
           <div>
             <h2 className="font-display text-sm font-semibold text-foreground">Method</h2>
@@ -53,7 +54,7 @@ export function SiteFooter() {
 
         <div className="mt-6 flex flex-col gap-2 border-t border-border pt-5 font-display text-xs text-faint sm:flex-row sm:items-center sm:justify-between">
           <p>
-            Version {versionNumber}. Data as of {formatDateLong(site.lastUpdated)}.{" "}
+            Version {versionNumber}. Corpus revised {formatDateLong(site.lastUpdated)}; individual evidence dates vary.{" "}
             {site.monitoringStartedAt ? `Prospective monitoring began ${formatDateLong(site.monitoringStartedAt)}.` : "Prospective monitoring has not started."}
           </p>
           <p>

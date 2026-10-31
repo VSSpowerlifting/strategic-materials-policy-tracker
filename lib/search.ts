@@ -3,7 +3,7 @@
  *
  * Built at module load from the seed and shipped to the client, which is
  * affordable precisely because the corpus is bounded (see the scope rule in
- * CLAUDE.md) — a few dozen records, not a few million. That keeps search
+ * CLAUDE.md) — hundreds of records rather than millions. That keeps search
  * dependency-free and, more importantly, keeps every result derived from the
  * same loaders the pages use, so search can never surface something the rest of
  * the site would not.
@@ -24,6 +24,7 @@ import {
   getAllOrganizations,
   getAllProgrammes,
   getAllProjects,
+  getAllProjectMilestones,
   getAllSources,
   getAllWatchedSources,
   getProgrammeById,
@@ -141,13 +142,16 @@ export function buildSearchIndex(): SearchDoc[] {
   // v0.6 registries: only source-linked sponsor IDs supply names/aliases.
   for (const p of getAllProjects()) {
     const sponsors = linkedOrganizations(p.sponsorOrgIds, p.id);
+    // Native claims are discoverable through their real investigation, without
+    // creating another entity kind, inferred relationship or nonexistent route.
+    const milestones = getAllProjectMilestones().filter(m => m.projectId === p.id);
     const sponsorLabel = sponsors.map(o => o.name).join(", ");
     docs.push({
       id: p.id,
       kind: "project",
       title: p.name,
       subtitle: `Project · ${[...p.locations.map((l) => l.asStated ?? l.countryCode), ...p.stages.map((s) => supplyChainStageLabels[s])].filter(Boolean).join(" · ")}${sponsors.length ? ` · Registered sponsor: ${sponsorLabel}` : ""}`,
-      href: `/projects/${p.id}`,
+      href: `/projects/${p.id}${milestones.length ? "#project-industrial" : ""}`,
       date: null,
       jurisdiction: null,
       mechanisms: null,
@@ -160,6 +164,7 @@ export function buildSearchIndex(): SearchDoc[] {
         p.untrackedMaterialsAsStated.join(" "),
         p.sponsorOrgIds.join(" "),
         organizationTerms(p.sponsorOrgIds, p.id),
+        milestones.map(m => [m.id, m.kind.replaceAll("_", " "), m.scopeAsStated, m.statementOriginal, m.statementEn, m.note].filter(Boolean).join(" ")).join(" "),
       ),
     });
   }

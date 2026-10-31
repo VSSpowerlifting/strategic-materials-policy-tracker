@@ -58,6 +58,45 @@ try{
   await page.keyboard.press("Enter");
   await page.waitForURL(/\/projects\/prj-au-alcoa-sojitz-gallium$/);
   assert.ok((await page.locator("h1").innerText()).includes("Alcoa-Sojitz"));
+  // Test actual Next.js prerendered HTTP, not merely imported route handlers.
+  // Public source-reviewed milestones must reconcile with the full JSON export.
+  const registerResponse=await page.request.get(base+"/api/v1/project-milestones");
+  assert.equal(registerResponse.status(),200);
+  const register=await registerResponse.json();
+  assert.deepEqual(register.map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.equal(register[0].kind,"groundbreaking_reported");
+  assert.equal(register[0].reviewedAt,"2026-10-17");
+  const detailResponse=await page.request.get(base+"/api/v1/projects/prj-au-alcoa-sojitz-gallium");
+  assert.equal(detailResponse.status(),200);
+  const detail=await detailResponse.json();
+  assert.deepEqual(detail.reviewedProjectMilestones,register.filter(x=>x.projectId==="prj-au-alcoa-sojitz-gallium"));
+  assert.deepEqual(detail.reviewedMilestoneSources.map(x=>x.id),["src-alcoa-wagerup-groundbreaking-2026"]);
+  assert.ok("latestImplementation" in detail);
+  assert.ok(Array.isArray(detail.layers));
+  const datasetResponse=await page.request.get(base+"/api/export/dataset.json");
+  assert.equal(datasetResponse.status(),200);
+  const dataset=await datasetResponse.json();
+  assert.equal(dataset.counts.projectMilestones,2);
+  assert.deepEqual(dataset.projectMilestones,register);
+  const narvaResponse=await page.request.get(base+"/api/v1/projects/prj-ee-neo-rare-earth-magnet-project");
+  assert.equal(narvaResponse.status(),200);
+  const narva=await narvaResponse.json();
+  assert.deepEqual(narva.reviewedProjectMilestones.map(x=>x.id),["mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(narva.reviewedMilestoneSources.map(x=>x.id),["src-neo-commercial-production-2026"]);
+  assert.equal(narva.reviewedProjectMilestones[0].occurredOn,null);
+  assert.equal(narva.reviewedProjectMilestones[0].kind,"production_reported");
+  assert.ok("latestImplementation" in narva,"Narva finance status must remain separate from source review");
+  const narvaPage=await browser.newPage({viewport:{width:1024,height:800}});
+  await narvaPage.goto(base+"/projects/prj-ee-neo-rare-earth-magnet-project",{waitUntil:"networkidle"});
+  assert.ok(await narvaPage.getByRole("heading",{name:"Source-reviewed industrial observations"}).count()>0);
+  assert.ok(await narvaPage.getByRole("heading",{name:"Production (reported)"}).count()>0);
+  assert.ok((await narvaPage.getByText("Exact date not established").count())>0);
+  assert.ok(await narvaPage.locator('a[href="/sources/src-neo-commercial-production-2026"]').count()>0);
+  await narvaPage.close();
+  const unsignedResponse=await page.request.get(base+"/api/v1/projects/prj-ca-cyclic-kingston-demonstration-plant");
+  assert.equal(unsignedResponse.status(),200);
+  assert.deepEqual((await unsignedResponse.json()).reviewedProjectMilestones,[]);
+  console.log("Reviewed industrial milestone: prerendered register, project API and full dataset export agree; unsigned peers omitted.");
   console.log("Project directory: static cohort, URL filters, shared finance, keyboard navigation, mobile/tablet/desktop passed.");
   await page.close();
 }finally{if(browser)await browser.close();server.kill("SIGTERM")}

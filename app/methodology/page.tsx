@@ -167,8 +167,17 @@ export default function MethodologyPage() {
         lead="The boundaries of this project are its credibility. This page sets out exactly what is and is not tracked, how sources are graded, how translations are handled, what every label means, and how framing is assigned."
       />
 
+      <section aria-labelledby="reading-evidence" className="mt-8 rounded border border-border-strong bg-card p-5 sm:p-6">
+        <h2 id="reading-evidence" className="font-serif text-2xl">Three questions to ask of every record</h2>
+        <div className="mt-5 grid gap-6 md:grid-cols-3 text-base leading-7 text-muted">
+          <div><h3 className="font-display text-sm font-semibold text-foreground">Who makes the claim?</h3><p className="mt-2">Follow the original document and quoted passage. A government rationale and an issuer&apos;s activity report have different evidentiary roles.</p><a href="#sources" className="research-text-link">Source hierarchy</a></div>
+          <div><h3 className="font-display text-sm font-semibold text-foreground">What state is established?</h3><p className="mt-2">An announcement, binding agreement, payment and industrial observation are separate. A programme ceiling is not an individual award.</p><a href="#capital-counting" className="research-text-link">Financial counting rules</a></div>
+          <div><h3 className="font-display text-sm font-semibold text-foreground">What is missing?</h3><p className="mt-2">Unknown dates stay unknown. Coverage is selective; absent records do not prove inactivity. Shared materials never establish causation.</p><a href="#limitations" className="research-text-link">Limits of the evidence</a></div>
+        </div>
+      </section>
+
       <div className="mt-10 grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">
-        <aside className="lg:sticky lg:top-20 lg:self-start">
+        <aside className="lg:sticky lg:top-44 lg:self-start">
           <nav className="space-y-1 font-display text-sm">
             {TOC.map(([id, label]) => (
               <a
@@ -191,6 +200,13 @@ export default function MethodologyPage() {
               supply-chain-security laws, funding, stockpiling and offtake measures
               governments use around rare earths and adjacent strategic materials —
               and the language each government uses to justify them.
+            </p>
+            <p>
+              The comparative unit is a documented measure, financial instrument
+              or reported industrial observation, not a preferred country. This
+              does not imply equally complete coverage across jurisdictions:
+              absence from the corpus is not evidence of government inaction,
+              and records appearing near one another do not establish causation.
             </p>
             <p>
               It does <strong>not</strong> model the global minerals market. It does

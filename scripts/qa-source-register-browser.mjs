@@ -50,6 +50,31 @@ try{
  await page.keyboard.press("Enter");
  await page.waitForURL(/\/sources\/src-5n-germanium-2024$/);
  assert.equal(await page.locator("h1").innerText(),"Source dossier");
+ const report=await (await fetch(origin+"/api/v1/coverage")).json();
+ const orphanIds=report.sources.orphaned;
+ assert.equal(report.sources.cited.of,report.totals.sources);
+ assert.equal(report.sources.cited.count + orphanIds.length,report.totals.sources);
+ const coverageLink=orphanIds.length?"/sources?citingKind=not_cited":"/sources";
+ await page.goto(origin+"/coverage",{waitUntil:"networkidle"});
+ assert.ok((await page.locator("main").innerText()).includes(
+   report.sources.cited.count+" of "+report.sources.cited.of+" registered sources"));
+ const link=page.locator('a[href="'+coverageLink+'"]').filter({hasText:
+   orphanIds.length?"Inspect uncited registered sources":"Explore source citations"});
+ assert.equal(await link.count(),1,"coverage links to the exact source filter");
+ await link.focus();await page.keyboard.press("Enter");
+ await page.waitForURL(url=>url.pathname==="/sources");
+ if(orphanIds.length) await page.waitForFunction(expected =>
+   document.querySelector("#source-cited")?.value === "not_cited" &&
+   Number(document.querySelector("[data-testid=sources-count]")?.textContent?.trim()) === expected,
+   orphanIds.length);
+ const visible=Number(await page.getByTestId("sources-count").innerText());
+ assert.equal(visible,orphanIds.length||report.totals.sources,
+   "browser source directory must agree with the coverage API");
+ if(orphanIds.length){
+   assert.equal(await page.locator("#source-cited").inputValue(),"not_cited");
+   assert.ok((await page.getByTestId("source-record").allTextContents())
+     .every(t=>t.includes("0 directly citing published records")));
+ }
  console.log("Source register: static HTML, citations, URL, keyboard and mobile/tablet/desktop passed.");
  await page.close();
 }finally{if(browser)await browser.close();server.kill("SIGTERM")}

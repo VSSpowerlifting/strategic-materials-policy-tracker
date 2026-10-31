@@ -1,6 +1,6 @@
 # Strategic Materials Policy Tracker
 
-**A source-linked policy and financial-intelligence database tracking how governments contest rare earths and adjacent strategic materials** — through export controls, critical-mineral designations, public money, ownership, offtake, stockpiling, supply-chain law, and the official language each government uses to justify its stance. Every financial instrument and every control clause is its own record, verified field by field against official primaries or binding filings.
+**A source-linked comparative research platform for economic security and strategic materials** — examining how governments use industrial policy, trade and legal controls, investment, public finance and industrial intervention, and what the available evidence establishes about implementation. Measures, financial instruments and reported physical activity remain distinct, with field-level references back to original sources.
 
 **Live site → https://strategic-materials-policy-tracker.vercel.app**
 
@@ -11,6 +11,16 @@ This is an economic-security **policy** product, not a commodity-price tracker, 
      but that directory is gitignored and its design edition may not match the deployed site — verify before embedding.
      Suggested: commit a fresh /framing screenshot to docs/ or public/ and reference it as:
      ![Comparative framing matrix](docs/framing.png) -->
+
+---
+
+## Editorial positioning
+
+These commitments govern public descriptions of the project; they do not imply equal source coverage or authorize altering historical records:
+
+1. **Geographically neutral.** Compare policy instruments and evidence across China, the United States, the EU, Japan, Australia, Canada and other tracked jurisdictions without organizing the project around a single country. Preserve differences in the actual research footprint.
+2. **Economically substantive.** Examine industrial policy, economic security, trade and legal controls, investment, public finance and reported implementation, distinguishing instrument types and status changes.
+3. **Evidence-driven.** Connect policy announcements and rationales to financing records and source-reviewed industrial observations where documented. Attribute claims to their issuers, disclose gaps and never infer a causal relationship from co-occurrence.
 
 ---
 
@@ -26,7 +36,7 @@ A short guided tour of the live site:
 - **[Capital × Control](https://strategic-materials-policy-tracker.vercel.app/interplay)** — money and restrictions on one clock, one material-by-actor grid and one material-by-stage response map of capital, designations and control clauses.
 - **[Portfolios](https://strategic-materials-policy-tracker.vercel.app/portfolios)** — each government's capital side by side: committed public money per currency and per instrument, binding apart from not yet binding, with record counts by value role, stage, material and geography; where the money flows; projects with more than one backer; and recognition without money.
 - **[Projects](https://strategic-materials-policy-tracker.vercel.app/projects)**, **[Organizations](https://strategic-materials-policy-tracker.vercel.app/organizations)** and **[Programmes](https://strategic-materials-policy-tracker.vercel.app/programmes)** — capital stacks, provider and recipient profiles, and programme ledgers that list ceilings beside the awards recorded under them.
-- **[Materials](https://strategic-materials-policy-tracker.vercel.app/materials)** — each tracked material, its position in Chinese policy, and diversification efforts.
+- **[Materials](https://strategic-materials-policy-tracker.vercel.app/materials)** — source-linked policy, financing and industrial evidence by material, with stated coverage limitations.
 - **[Coverage](https://strategic-materials-policy-tracker.vercel.app/coverage)** — the coded footprint: source composition, framing-anchor coverage, per-actor counts and the research boundaries, derived from the data rather than hand-written.
 - **[Methodology](https://strategic-materials-policy-tracker.vercel.app/methodology)** — scope, source hierarchy, translation policy, and every label definition.
 - **[Data](https://strategic-materials-policy-tracker.vercel.app/data)** — download the full dataset as JSON or CSV, with the same provenance shown on the site.
@@ -35,11 +45,11 @@ A short guided tour of the live site:
 
 ## What it is — and what it is not
 
-It tracks **policy instruments and official framing**: the export controls, licensing regimes, critical-mineral designations, supply-chain-security laws, funding, stockpiling and offtake measures governments use around rare earths and adjacent strategic materials — translated, structured, and citable.
+It tracks **policy instruments, financial commitments, official framing and reported industrial activity**: the export controls, licensing regimes, critical-mineral designations, investment rules, supply-chain-security laws, funding, stockpiling and offtake measures governments use around rare earths and adjacent strategic materials — structured, attributed and citable.
 
 It does **not** model the global minerals market. It does not track or forecast market prices, estimate reserves or tonnages, publish supply-risk numbers, or make projections its sources do not state. Where market-share figures appear (for example, that China processes roughly 90% of rare earths), they are cited context drawn from bodies such as the IEA and USGS — not original estimates. The one kind of figure it does record is a term of a policy instrument that a government states or a binding filing sets out — a price floor in an agreement, a tax-offset rate, a capacity covenant — and only when it is precisely sourced. That boundary is the credibility shield, and it is stated plainly on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology).
 
-The distinctive capability is depth on the Chinese side: the maintainer reads the Mandarin-language primaries directly, so Chinese measures are tracked more closely than English secondary reporting usually allows. The multi-actor frame keeps that depth honest by following the whole contest — the incumbent producer-processor and the states working to diversify away from it.
+The distinctive capability is connecting government measures and their stated rationales to financial instruments, projects and source-reviewed industrial observations. Announcements, binding commitments, payments and reported physical developments are different kinds of evidence; a shared date, material or project does not establish causation. Coverage is selective and uneven across jurisdictions, not a comprehensive measure of government activity.
 
 ## The comparative framing matrix
 
@@ -62,7 +72,7 @@ These are the project's standing commitments, enforced in code by `scripts/valid
 - **Materials:** a rare-earth-centred set of strategic materials and their downstream sectors.
 - **Time:** 2018–2026. Coverage is deepest from 2023 onward; the earlier records are the foundational instruments — designation lists, export-control statutes and enabling acts — that the later measures are issued under.
 
-Coverage is deepest on the Chinese measures, read from Mandarin primaries. See the [methodology version history](https://strategic-materials-policy-tracker.vercel.app/methodology#versions) for the per-release changelog.
+Research depth varies by actor and material; consult the [coverage report](https://strategic-materials-policy-tracker.vercel.app/coverage) rather than inferring equivalent observation across jurisdictions. See the [methodology version history](https://strategic-materials-policy-tracker.vercel.app/methodology#versions) for the per-release changelog.
 
 ## Data model
 
@@ -70,7 +80,7 @@ Five entities, fully typed in [`lib/types.ts`](lib/types.ts):
 
 - **PolicyEvent** — a policy measure, carrying a jurisdiction, mechanism(s), affected materials and sectors, status, document number and source IDs.
 - **FramingClaim** — an official framing label anchored to a required quoted passage (`quoteOriginal` + `quoteEn` + provenance) and a resolving source.
-- **Material** — a tracked material, its position in Chinese policy, downstream industries and diversification efforts.
+- **Material** — a tracked material, with policy context, downstream industries and diversification notes; source records provide jurisdiction-specific evidence.
 - **Jurisdiction** — an actor profile: supply-chain role, key bodies and framing posture.
 - **Source** — the source register, graded by a four-tier confidence hierarchy.
 
@@ -163,7 +173,7 @@ Live counts are on the [coverage dashboard](https://strategic-materials-policy-t
 - Transcribe the original-language titles / document numbers currently marked `null` or `"Not yet coded"` against the primaries, and add framing anchors where they are still pending.
 - Expand the material set beyond the rare-earth-centred eleven. Several coded instruments (the Australian production tax incentive, the UK and Canadian lists) name minerals — lithium, cobalt, nickel, PGMs — that have no `Material` record, so those measures currently show a narrower material scope on site than their text carries.
 - South Korea and Brazil: both are in the intended actor set but neither is in the taxonomy yet, because no in-scope primary has been verified for them. The jurisdiction codes go in when the first event does, not before.
-- Deepen non-Chinese actor coverage as primary sources are verified.
+- Deepen coverage of currently under-researched jurisdictions as primary sources are verified.
 - **Capital intelligence, next:** the EU's second round of Strategic Projects (applications closed 15 January 2026; no decision recorded yet) and the proposed restriction on exports of permanent-magnet scrap once an instrument exists; Canadian Strategic Response Fund (formerly SIF) project awards, which no primary lists individually yet; US EXIM, DOE and DPA Title III awards; China's treatment of the October 2025 package after its suspension ends on 10 November 2026; disbursement histories as primaries publish them. See [Capital intelligence](#capital-intelligence-v06) above.
 
 ## Usage & citation
@@ -176,4 +186,4 @@ Not legal or compliance advice. Categorical labels are interpretive judgements a
 
 ## Author / maintainer
 
-Built and maintained by Benjamin Yang. The project's depth on Chinese measures comes from direct reading of Mandarin-language primary sources, paired with a multi-actor frame that tracks U.S., EU, Japanese, Australian, Canadian and Chinese policy instruments side by side. For questions about a classification, start from the source linked on each record, then see the [source register](https://strategic-materials-policy-tracker.vercel.app/sources).
+Built and maintained by Benjamin Yang, SMPT combines international affairs research, economic-security analysis and close examination of primary-source evidence. Its approach is comparative rather than country-centered. For questions about a classification, start from the source linked on each record, then see the [source register](https://strategic-materials-policy-tracker.vercel.app/sources).

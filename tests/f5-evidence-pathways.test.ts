@@ -44,8 +44,8 @@ test("F5-0: complete checked-out corpus is represented only as source-linked str
   assert.ok(report.edges.every(e=>e.causalEffect==="not_asserted" && e.evidence.length > 0));
   const knownSources = new Set(input.sources.map(s=>s.id));
   assert.ok(report.edges.every(e=>e.evidence.every(s=>knownSources.has(s.sourceId))));
-  assert.ok(report.projects.every(p=>p.physicalReview==="native_milestones_not_yet_recorded"),
-    "current empty milestone seed must not be mistaken for verified facility execution");
+  assert.equal(report.projects.filter(p=>p.physicalReview==="native_milestones_recorded").length,2);
+  assert.ok(report.projects.filter(p=>!["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].includes(p.projectId)).every(p=>p.physicalReview==="native_milestones_not_yet_recorded"),"all other physical projects remain unsigned");
   assert.ok(report.totals.legacyObservationsNeedingReview > 0);
   assert.equal(report.physicalClock,"native_source_claims_not_current_revision_status");
   assert.ok(!JSON.stringify(report).includes('"financialAmountHistory"'));
@@ -146,11 +146,11 @@ test("F5-0: native milestone is a separate reviewed, scoped and mode-specific as
   };
   const withMilestone={...data,milestones:[...data.milestones,milestone]};
   const report=auditEvidencePathways(withMilestone);
-  const edge=report.edges.find(e=>e.kind==="reviewed_project_milestone");
+  const edge=report.edges.find(e=>e.kind==="reviewed_project_milestone"&&e.toId===milestone.id);
   assert.deepEqual([edge?.fromId,edge?.toId],[project.id,milestone.id]);
-  assert.equal(report.totals.nativeMilestones,1);
+  assert.equal(report.totals.nativeMilestones,3);
   assert.equal(report.totals.nativePlanned,1);
-  assert.equal(report.totals.nativeOccurred,0);
+  assert.equal(report.totals.nativeOccurred,2);
   assert.equal(report.projects.find(p=>p.projectId===project.id)?.physicalReview,
     "native_milestones_recorded");
   milestone.occurredOn="2026-09-20";
