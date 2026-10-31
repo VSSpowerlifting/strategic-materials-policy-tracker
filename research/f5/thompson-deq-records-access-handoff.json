@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "f5-5-thompson-deq-public-records-handoff-v1",
+  "checkedOn": "2026-10-16",
+  "status": "priority_a_submitted_priority_b_draft",
+  "scope": "regulator_held_documents_not_human_source_decision",
+  "canonicalM3ReviewId": "review-m3-2-thompson-falls-q2-expansion",
+  "canonicalProjectId": "prj-us-usac-thompson-falls-expansion",
+  "canonicalSourceId": "src-usac-2026-q2-10q",
+  "publicMilestoneAuthorized": false,
+  "humanReviewCompleted": false,
+  "recordsObtained": false,
+  "recordsRequestSubmitted": true,
+  "deqPermit": {
+    "identifier": "2973-05",
+    "predecessor": "2973-04",
+    "url": "https://deq.mt.gov/files/Air/AirQuality/Documents/ARMpermits/2973-05_FNL.pdf",
+    "effectiveOn": "2025-12-23",
+    "originalPdfPageCount": 77,
+    "newReductionUnits": 5,
+    "newRemeltUnits": 2,
+    "newOxidizerUnits": 2,
+    "existingPermittedUnits": 6,
+    "existingLegacyFurnacesInLocalReporting": 7,
+    "sourceTestCondition": {
+      "locator": "PDF p. 4, Section II.B.1",
+      "trigger": "initial_startup_of_all_new_reduction_remelt_and_oxidizer_furnaces",
+      "statedTimeWindow": "within_60_days_but_no_later_than_180_days_after_trigger",
+      "actualTriggerOn": null,
+      "initialTestCompletedOn": null,
+      "dueDateEstablished": false,
+      "violationEstablished": false
+    },
+    "deMinimisChangeNotice": {
+      "locator": "PDF p. 5, Section II.C.2",
+      "onlyIf": "construction_or_improvement_meets_arm_17_8_745_de_minimis_change_conditions",
+      "doesNotEstablish": "general_initial_startup_notice_for_permitted_nine_furnaces"
+    },
+    "companyHeldFiveYearRecords": {
+      "locator": "PDF p. 5, Section II.C.4",
+      "status": "kept_by_company_available_on_site_and_submitted_to_DEQ_upon_request",
+      "noAssumptionThatDeqAlreadyHoldsThem": true
+    },
+    "annualProductionInformation": {
+      "locator": "PDF p. 4, Section II.C.1",
+      "asOf": "calendar_year_2026_in_progress",
+      "noAssumptionAnnual2026InventoryFiled": true
+    }
+  },
+  "requestProcess": {
+    "authority": "Montana Department of Environmental Quality via Montana Office of Public Information Requests",
+    "deqGuidanceUrl": "https://www.deq.mt.gov/about/public-records",
+    "supportedAgencyListUrl": "https://doa.mt.gov/OPIR/agencies",
+    "portalUrl": "https://mt-pir.arkcase.us/pir/portal/reading-room",
+    "referenceContact": "DEQRecords@mt.gov",
+    "accountMayBeRequired": true,
+    "requestNotSent": false,
+    "studentFeeWaiverAvailableWithEnrollmentProof": true,
+    "noEnrollmentDocumentsInRepository": true,
+    "feesMayApplyOtherwise": true,
+    "agencyTargetResponse": "DEQ aims to fulfill requests within 30 days, not a guaranteed statutory response date",
+    "archiveCheck": {
+      "url": "https://montanadeq.govqa.us/WEBAPP/_rs/",
+      "checkedOn": "2026-10-16",
+      "result": "archive_not_fully_queryable_from_available_read_only_web_interface",
+      "noInferenceOfDocumentAbsence": true
+    },
+    "priorPublicReleaseId": "26-PIR-1405",
+    "priorReleaseReviewedOn": "2026-10-16",
+    "priorReleaseResult": "six_2025_permitting_documents_no_2026_test_or_inspection_report",
+    "priorReleaseAlreadyDownloadedByUser": true,
+    "priorReleaseAvoidDuplicateRequest": true,
+    "currentPriorityARequestState": "Intake",
+    "currentPriorityARequestStatus": "Perfected",
+    "currentPriorityAStatusObservedOn": "2026-10-16",
+    "privateRequestReferenceHeldOutsidePublicRepository": true,
+    "feeWaiverRequested": true,
+    "feeWaiverApproved": false,
+    "feeWaiverDecision": "pending",
+    "feePreference": "estimate_before_processing",
+    "feesAuthorized": false,
+    "recordResponsesReceived": false
+  },
+  "requestRounds": [
+    {
+      "id": "first_priority_initial_source_testing",
+      "priority": 1,
+      "status": "submitted_intake_perfected",
+      "permitNumber": "2973-05",
+      "facility": "United States Antimony Corporation – Thompson Falls Facility, Sanders County, Montana",
+      "startOn": "2026-05-01",
+      "endOn": "2026-10-16",
+      "subject": "Records request — MAQP #2973-05 initial source-testing records (May–October 2026)",
+      "body": "I request electronic copies of records currently held by the Montana Department of Environmental Quality concerning the United States Antimony Corporation Thompson Falls Facility, Montana Air Quality Permit #2973-05, dated May 1 through October 16, 2026, limited to initial compliance source testing under Section II.B.1 for the nine new reduction, remelt, and oxidizer furnaces: source-test protocol submissions, schedules or notifications specifying actual initial-startup or testing dates; any received completed test reports and associated compliance determinations; and any DEQ correspondence acknowledging receipt or review of those particular protocols or results. Please search by the proposed new furnace/emissions-unit identifiers RF-1500, RF-1600, RF-1700, RF-1800, RF-1900, RFF-2000, RFF-2100, OFF-2200, and OFF-2300, together with their corresponding baghouses BH-1500 through BH-2300; please include the exact furnace or emissions-unit ID in each responsive record where present. If no responsive records are held, please indicate that rather than inferring that a test did or did not occur. If these records are maintained under predecessor MAQP #2973-04, please search that permit file too. I have already obtained public release 26-PIR-1405 containing the 2025 permit application and determination records; please avoid re-sending those six 2025 documents. I seek records generated or received in May–October 2026 rather than copies of the application. I prefer electronic records, existing documents rather than new analysis, and a notice of estimated fees before chargeable work. Please provide reasonably segregable nonexempt portions if any material is withheld.",
+      "rationale": "Permit Section II.B.1 specifies initial emissions testing after startup of all newly permitted units; only received regulator records could supply a reliable clock or observed results.",
+      "doNotClaim": [
+        "all_nine_units_started",
+        "test_due_or_overdue",
+        "test_passed",
+        "no_test_exists_if_no_indexed_result",
+        "issued_permit_certifies_operations"
+      ],
+      "submittedOn": "2026-10-16",
+      "submittedText": "abridged_600_character_portal_description_not_full_research_draft",
+      "acknowledgment": "user_supplied_request_status_screenshot",
+      "requestReference": "private_vault_only",
+      "feeWaiverDecision": "pending"
+    },
+    {
+      "id": "second_priority_independent_inspection",
+      "priority": 2,
+      "status": "draft_not_submitted",
+      "permitNumber": "2973-05",
+      "facility": "United States Antimony Corporation – Thompson Falls Facility, Sanders County, Montana",
+      "startOn": "2026-05-01",
+      "endOn": "2026-10-16",
+      "subject": "Follow-up records request — MAQP #2973-05 DEQ furnace inspections (May–October 2026)",
+      "body": "I request electronic copies of any Montana DEQ Air Quality Bureau facility inspection reports or contemporaneous regulator field-visit notes currently held for United States Antimony Corporation's Thompson Falls Facility, MAQP #2973-05, dated May 1 through October 16, 2026, to the extent they document operation, startup, installed equipment, furnace identifiers, or inspection of the nine new reduction/remelt/oxidizer furnace units (the proposed new furnace/emissions-unit identifiers RF-1500, RF-1600, RF-1700, RF-1800, RF-1900, RFF-2000, RFF-2100, OFF-2200, and OFF-2300, together with their corresponding baghouses BH-1500 through BH-2300). Where an inspection report contains an equipment inventory or permitted emissions-unit list, please include that page or attachment; I am trying to distinguish the six older units listed in the December 2025 permit from a later press account referring to seven furnaces in the old building. Please also include DEQ-issued or DEQ-received changes/amendments to #2973-05 during this period that expressly modify the furnace list, if any; do not perform a new compliance assessment. If no responsive inspection or amendment records are held, please state that. I already have public release 26-PIR-1405 containing the 2025 application, BACT addendum and permitting determinations, so please avoid duplicating those six older documents. I prefer electronic copies of 2026 records, estimated fees before chargeable work, and reasonably segregable nonexempt portions if needed.",
+      "rationale": "An actual regulator site observation and equipment ID reconciliation would be distinct from company forecast or journalistic site descriptions.",
+      "doNotClaim": [
+        "regulator_inspection_has_occurred",
+        "legacy_inventory_mismatch_proves_violation",
+        "all_nine_new_furnaces_operated_concurrently",
+        "absence_of_inspection_means_no_operation",
+        "permit_amended_if_no_document_found"
+      ]
+    }
+  ],
+  "nextUseOfRecords": {
+    "whenObtained": "Save supplied original documents and metadata only in gitignored private evidence vault; derive stable hashes and preserve agency-provided dates after real access; separately assess authenticity and public-use rights.",
+    "reviewer": "Route verified new source observations as candidates to the existing M3 original-source human adjudication; do not replace review ID, original SEC source or signed decision identity.",
+    "cutoff": "Any new human decision after 2026-10-09 requires independently authorized corpus-date update and a fresh canonical review-input digest before publication.",
+    "publication": "No automatic project-milestone seed, finance history, source registry, public route, export, or monitor update."
+  }
+}

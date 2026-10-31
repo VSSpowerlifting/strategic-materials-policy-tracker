@@ -153,7 +153,9 @@ export function auditProjectExecutionPilot(
     } else if (r.gate === "taxonomy_blocked") {
       output.summary.blockedOnTaxonomy++;
       if (!textPresent(r.taxonomyQuestion)) fail("taxonomy_blocked requires a concrete taxonomy question");
-      if (canonical) fail("taxonomy_blocked with canonical labels needs explicit editorial review instead");
+      // A proposed canonical label can still be semantically too broad for the
+      // primary source. Keep the candidate blocked until the reviewer resolves
+      // that explicit scope question; structural validity is not source approval.
     } else {
       fail("gate must be human_source_review or taxonomy_blocked");
     }
@@ -161,11 +163,16 @@ export function auditProjectExecutionPilot(
       fail("funded activity completion cannot be a whole-project/facility milestone");
     if (r.scopeProposal === "funded_activity" && r.kindProposal !== "funded_activity_completed")
       fail("funded activity scope must not assert facility construction or production");
+    // The queue and published milestone validator must reject the same
+    // overbroad kind/scope combinations, even before human adjudication.
+    if (r.scopeProposal === "bounded_project_workstream" &&
+        !["groundbreaking_reported", "construction_started", "construction_progress_reported"].includes(String(r.kindProposal)))
+      fail("bounded_project_workstream permits only scoped construction kinds");
     if (r.kindProposal === "construction_progress_reported") {
       if (r.claimMode !== "occurred")
         fail("construction_progress_reported requires occurred claim mode");
-      if (r.scopeProposal !== "named_facility")
-        fail("construction_progress_reported requires named_facility scope");
+      if (r.scopeProposal !== "named_facility" && r.scopeProposal !== "bounded_project_workstream")
+        fail("construction_progress_reported requires named_facility scope or bounded_project_workstream scope");
       if (r.occurredOn !== null)
         fail("construction_progress_reported requires occurredOn: null; report date is not a progress event day");
     }

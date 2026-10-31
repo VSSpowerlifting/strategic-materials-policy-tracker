@@ -4,9 +4,11 @@
  * kind to another or totals a row or a column, and no function reads money. Kept apart from the components so
  * the rules are testable.
  */
-import { cellKey } from "./lattice";
 import type { LatticeCell, LatticeCommitment, LatticeControl, LatticeDesignation, LatticeModel, LatticeRecord } from "./lattice";
 import type { JurisdictionCode, SupplyChainStage } from "./types";
+
+/** Browser-safe shared cell identity; importing view logic never loads the seed graph. */
+export const cellKey = (materialId: string, stage: SupplyChainStage) => `${materialId}|${stage}`;
 
 export type KindVisibility = { commitments: boolean; controls: boolean; designations: boolean };
 

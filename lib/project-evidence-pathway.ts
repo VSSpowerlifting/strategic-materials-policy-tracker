@@ -5,7 +5,8 @@
  * dates are distinct clocks. All statuses describe the current corpus
  * revision; this function does not compute historical "known as of" states.
  *
- * Read-only library model. Not routed into a public page, API or export.
+ * Read-only structural model. The public investigation adapter supplies only
+ * published loaders; public machine output uses an explicit field projection.
  */
 import {
   auditEvidencePathways, type PathwayEdge, type PathwayInputs,

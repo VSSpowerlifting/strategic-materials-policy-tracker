@@ -12,7 +12,7 @@ import { useEffect, useRef } from "react";
 export const ALL = "all";
 
 export const selectClass =
-  "w-full rounded-md border border-border bg-card px-2.5 py-2 font-display text-sm text-foreground focus:border-accent/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40";
+  "min-h-11 w-full rounded-md border border-border-strong bg-card px-3 py-2.5 font-display text-base text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 sm:text-sm";
 
 export function FilterSelect({
   id,
@@ -29,7 +29,7 @@ export function FilterSelect({
 }) {
   return (
     <label htmlFor={id} className="block">
-      <span className="mb-1 block font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{label}</span>
+      <span className="mb-1.5 block font-display text-xs font-medium tracking-normal text-muted">{label}</span>
       <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className={selectClass}>
         <option value={ALL}>All</option>
         {options.map((o) => (
@@ -46,7 +46,7 @@ export function FilterSelect({
 export function SearchBox({ id, value, onChange, placeholder }: { id: string; value: string; onChange: (v: string) => void; placeholder: string }) {
   return (
     <label htmlFor={id} className="block">
-      <span className="mb-1 block font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Search</span>
+      <span className="mb-1.5 block font-display text-xs font-medium tracking-normal text-muted">Search</span>
       <input
         id={id}
         type="search"

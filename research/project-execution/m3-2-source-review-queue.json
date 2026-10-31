@@ -3,7 +3,7 @@
     "id": "review-m3-2-alcoa-wagerup",
     "projectId": "prj-au-alcoa-sojitz-gallium",
     "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
-    "kindProposal": "construction_started",
+    "kindProposal": "groundbreaking_reported",
     "scopeProposal": "named_facility",
     "scopeAsStated": "gallium production plant co-located at Alcoa’s Wagerup alumina refinery",
     "claimMode": "occurred",
@@ -21,7 +21,7 @@
     "gate": "human_source_review",
     "reviewVerdict": "unreviewed",
     "taxonomyQuestion": null,
-    "editorialCaution": "Company says the groundbreaking ceremony marked start of construction. This does not evidence financial drawdown, output or commissioning."
+    "editorialCaution": "Alcoa reports that the August 24, 2026 groundbreaking ceremony marked the start of construction; Australian ministers describe the first sod turned. This candidate records the reported ceremony only, not independently observed sustained works, cash disbursement, commissioning or production."
   },
   {
     "id": "review-m3-2-cyclic-extended-operations",
@@ -127,9 +127,9 @@
     "statementEnSource": "na",
     "locator": "October 21, 2025 original issuer release, attributed CEO Jon Cherry quote, paragraph 2",
     "relatedFinanceIds": [],
-    "gate": "human_source_review",
+    "gate": "taxonomy_blocked",
     "reviewVerdict": "unreviewed",
-    "taxonomyQuestion": null,
+    "taxonomyQuestion": "Perpetua explicitly reports only early-works construction at the Stibnite Gold Project. Although whole_project is a canonical label, it could falsely imply full mine-site construction. Resolve an adequately scoped project early-works classification before reviewer approval; do not infer all mine and processing-facility workstreams began.",
     "editorialCaution": "Stibnite early works began October 21, 2025 according to Perpetua; whole_project identifies the Stibnite undertaking, not a statement that all mine construction has started/completed. The event is distinct from May 30, 2026 Burntlog Route works. Posted financial assurance is not an EXIM disbursement or loan commitment. Actual reviewer must independently confirm exact quote, scope and date. No causal inference."
   },
   {

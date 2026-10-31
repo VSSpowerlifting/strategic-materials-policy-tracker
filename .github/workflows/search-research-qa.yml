@@ -1,0 +1,48 @@
+name: Search research experience branch QA
+
+on:
+  push:
+    branches:
+      - feat/search-research-experience-offline-20261016
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/search-research-qa.yml"
+      - "scripts/qa-search-research-browser.mjs"
+      - "components/search-explorer.tsx"
+      - "lib/search.ts"
+      - "lib/search-core.ts"
+      - "app/search/page.tsx"
+      - "data/seed/**"
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: search-research-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  github-only-search:
+    name: Validate search and Chromium without deployment
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: node scripts/qa-search-research-browser.mjs
+      - run: test -z "$(git status --porcelain)"

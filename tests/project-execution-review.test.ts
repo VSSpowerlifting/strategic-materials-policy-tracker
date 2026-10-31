@@ -23,21 +23,21 @@ test("M3.2 seven source-linked candidates are a non-promoting review queue", () 
   const result = audit();
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(result.summary.awaitingHumanSourceReview, 5);
-  assert.equal(result.summary.blockedOnTaxonomy, 2);
+  assert.equal(result.summary.awaitingHumanSourceReview, 4);
+  assert.equal(result.summary.blockedOnTaxonomy, 3);
   assert.deepEqual(result.candidates.map((x) => x.id),
     ["review-m3-2-alcoa-wagerup", "review-m3-2-cyclic-extended-operations",
      "review-m3-2-inl-demonstration", "review-m3-2-neo-narva-magnets",
      "review-m3-2-stibnite-burntlog", "review-m3-2-stibnite-early-works",
      "review-m3-2-thompson-falls-q2-expansion"]);
-  assert.equal(getAllProjectMilestones().length, 0, "no candidate is a public milestone");
+  assert.equal(getAllProjectMilestones().length, 2, "no unsigned M3 queue candidate is promoted by the queue itself");
   assert.equal(getDatasetSummary().projects, getAllProjects().length);
 });
 
-test("Alcoa three financial rows remain one proposed physical construction claim", () => {
+test("Alcoa three financial rows remain one proposed reported groundbreaking event", () => {
   const row = q()[0];
   assert.equal(row.gate, "human_source_review");
-  assert.equal(row.kindProposal, "construction_started");
+  assert.equal(row.kindProposal, "groundbreaking_reported");
   assert.equal(row.scopeProposal, "named_facility");
   assert.equal(row.occurredOn, "2026-08-24");
   assert.equal(row.relatedFinanceIds.length, 3);
@@ -57,7 +57,7 @@ test("Cyclic preserves missing exact date and source-access boundary", () => {
   assert.deepEqual(result.candidates[1].sourceBoundary, { date: "2026-10-07", basis: "access" });
 });
 
-test("scope decisions block INL demo and Stibnite road without widening canonical taxonomy", () => {
+test("scope holds block INL demo, Stibnite road and canonical-but-overbroad early works", () => {
   const rows = q();
   assert.equal(rows[2].gate, "taxonomy_blocked");
   assert.equal(rows[2].kindProposal, "demonstration_started");
@@ -65,6 +65,9 @@ test("scope decisions block INL demo and Stibnite road without widening canonica
   assert.equal(rows[4].gate, "taxonomy_blocked");
   assert.equal(rows[4].scopeProposal, "named_infrastructure");
   assert.equal(rows[4].occurredOn, "2026-05-30");
+  assert.equal(rows[5].gate, "taxonomy_blocked");
+  assert.equal(rows[5].scopeProposal, "whole_project");
+  assert.match(rows[5].taxonomyQuestion!, /early-works construction/);
   assert.deepEqual(audit().errors, []);
 });
 
@@ -81,7 +84,7 @@ test("dated occurrence cannot follow source publication or the corpus cutoff", (
   const rows = q();
   rows[0].occurredOn = "2026-08-25";
   assert.match(audit(rows).errors.join(" | "), /occurred date postdates source evidence boundary/);
-  rows[0].occurredOn = "2026-10-10";
+  rows[0].occurredOn = "2026-10-18";
   assert.match(audit(rows).errors.join(" | "), /proposed occurrence postdates curated corpus cutoff/);
   rows[0].occurredOn = "2026-02-30";
   assert.match(audit(rows).errors.join(" | "), /real date or null/);
@@ -134,7 +137,7 @@ test("M3.2 whole_project null scope is structurally valid without inventing a pr
   const result = audit(rows);
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("M3.2 incompatible scope/name pairs still fail closed in both directions", () => {
@@ -169,7 +172,7 @@ test("Narva is one unsigned source review, not an operational-start day or a sec
   assert.ok(!("reviewedBy" in narva));
   assert.ok(!("reviewedAt" in narva));
   assert.deepEqual(audit().errors, []);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("Stibnite first early works may be queued without inventing a matching financing observation", () => {
@@ -178,7 +181,8 @@ test("Stibnite first early works may be queued without inventing a matching fina
   const later=rows.find(x=>x.id==="review-m3-2-stibnite-burntlog")!;
   assert.deepEqual(first.relatedFinanceIds,[]);
   assert.equal(first.sourceId,"src-perpetua-stibnite-early-works-2025");
-  assert.equal(first.gate,"human_source_review");
+  assert.equal(first.gate,"taxonomy_blocked");
+  assert.match(first.taxonomyQuestion!, /full mine-site construction/);
   assert.equal(first.kindProposal,"construction_started");
   assert.equal(first.scopeProposal,"whole_project");
   assert.equal(first.scopeAsStated,null);
@@ -193,7 +197,7 @@ test("Stibnite first early works may be queued without inventing a matching fina
   assert.deepEqual(report.candidates.find(x=>x.id===first.id)?.sourceBoundary,
     {date:"2025-10-21",basis:"publication"});
   assert.equal(report.candidates.find(x=>x.id===first.id)?.deduplicatedLegacyFinanceObservations,0);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("M3 project-native empty finance references still require registered primary source and valid source date", () => {
@@ -233,9 +237,9 @@ test("Stibnite original-source registration uses actual access receipt without b
   assert.equal(source.confidence,"primary");
   assert.equal(source.datePublished,"2025-10-21","event/report date is not the 2026 access receipt");
   assert.equal(source.dateAccessed,"2026-10-09","never backdate original source access");
-  assert.equal(site.lastUpdated,"2026-10-09","source registration requires explicit corpus update approval");
+  assert.equal(site.lastUpdated, "2026-10-17","source registration requires explicit corpus update approval");
   assert.ok(source.notes?.includes("nonbinding"),"do not mislabel conditional EXIM financing");
-  assert.equal(getAllProjectMilestones().length,0,"primary source is not signed milestone approval");
+  assert.equal(getAllProjectMilestones().length, 2,"unsigned Stibnite source does not add another public milestone");
 });
 
 test("Project-native empty finance links cannot hide an existing same-source financial implementation observation", () => {
@@ -266,7 +270,7 @@ test("Thompson Falls Q2 progress is human-review gated, unsigned and not a finan
   assert.deepEqual(row.relatedFinanceIds, [], "no synthetic financier physical status");
   assert.equal(row.taxonomyQuestion, null);
   assert.match(row.editorialCaution, /not a completed\/operating project/);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length, 2);
   const result = audit();
   assert.deepEqual(result.errors, []);
   const match = result.candidates.find(c => c.id === row.id)!;

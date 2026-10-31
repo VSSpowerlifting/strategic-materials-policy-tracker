@@ -325,6 +325,7 @@ export function getDatasetSummary() {
     projects: projects.length,
     programmes: programmes.length,
     projectDesignations: projectDesignations.length,
+    projectMilestones: projectMilestones.length,
   };
 }
 
@@ -344,6 +345,8 @@ export type EvidenceSummary = {
     sources: number;
   };
   primarySources: Share;
+  /** Source register entries directly cited by at least one published record of any kind. */
+  citedSources: Share;
   averageSourcesPerEvent: number;
   framingCoverage: Share;
   dateWindow: { earliest: string; latest: string };
@@ -373,6 +376,7 @@ export function getEvidenceSummary(): EvidenceSummary {
       sources: r.totals.sources,
     },
     primarySources: r.sources.primary,
+    citedSources: r.sources.cited,
     averageSourcesPerEvent: r.evidence.averageLinkedSourcesPerEvent,
     framingCoverage: r.evidence.withFraming,
     dateWindow: r.evidence.dateWindow,

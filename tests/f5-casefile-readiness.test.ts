@@ -13,7 +13,7 @@ import {
   getAllProjectDesignations, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "@/lib/data";
 
-const TODAY = "2026-10-09";
+const TODAY = "2026-10-17";
 const corpus = (): PathwayInputs => structuredClone({
   events: getAllEvents(),
   finances: getAllFinancialCommitments(),
@@ -46,7 +46,7 @@ function fixture(data: PathwayInputs, overrides: Partial<ProjectMilestone> = {})
   };
 }
 
-test("F5 readiness: the three actual pilot casefiles remain blocked without native milestones", () => {
+test("F5 readiness: Wagerup and Narva approved; Stibnite remains blocked", () => {
   const data = corpus();
   const frozen = JSON.stringify(data);
   const report = auditF5CasefileReadiness(data, TODAY);
@@ -60,9 +60,11 @@ test("F5 readiness: the three actual pilot casefiles remain blocked without nati
   assert.equal(report.autonomousMilestoneApprovalAuthorized, false);
   assert.equal(report.inferredCausalityAuthorized, false);
   assert.equal(report.historicalFinancialTotalsAuthorized, false);
-  assert.ok(report.pilots.every(p => p.registeredOccurredMilestones === 0));
-  assert.ok(report.pilots.every(p => p.eligibleForManualQa === false));
-  assert.ok(report.pilots.every(p => p.blockers.some(s => s.includes("project-native"))));
+  assert.equal(report.pilots.find(p=>p.projectId==="prj-au-alcoa-sojitz-gallium")?.registeredOccurredMilestones,1);
+  assert.equal(report.pilots.find(p=>p.projectId==="prj-ee-neo-rare-earth-magnet-project")?.registeredOccurredMilestones,1);
+  assert.ok(report.pilots.filter(p=>!["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].includes(p.projectId)).every(p=>p.registeredOccurredMilestones===0));
+  assert.deepEqual(report.pilots.filter(p => p.eligibleForManualQa).map(p => p.projectId).sort(),["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].sort());
+  assert.ok(report.pilots.filter(p=>!["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].includes(p.projectId)).every(p=>p.blockers.some(s=>s.includes("project-native"))));
   assert.ok(report.pilots.some(p => p.legacyFinancePhysicalObservations > 0));
   assert.ok(!("amount" in report.pilots[0]));
   assert.equal(JSON.stringify(data), frozen, "read-only audit must not mutate seed");

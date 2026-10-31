@@ -28,10 +28,10 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
   assert.deepEqual(report.errors, []);
   assert.equal(report.schemaVersion,"f5-1-readiness-v1");
   assert.equal(report.publicationAuthorized,false);
-  assert.equal(report.publicMilestoneCount,0);
+  assert.equal(report.publicMilestoneCount,2);
   assert.deepEqual(report.totals,{
     cases:4,existingM3:4,newProposals:0,
-    missingRegisteredSources:0,taxonomyBlocked:1,humanReviewRequired:4,
+    missingRegisteredSources:0,taxonomyBlocked:2,humanReviewRequired:4,
   });
   assert.deepEqual(report.cases.map(x=>x.id),[
     "f5-1-alcoa-wagerup-groundbreaking",
@@ -41,9 +41,9 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
   ]);
   assert.ok(report.cases.every(x=>!x.publicationEligible && x.releaseBlockers.length>=1));
   assert.ok(report.cases.every(x=>!x.releaseBlockers.includes("curated_corpus_cutoff_requires_separate_approval")),
-    "the reviewed corpus cutoff proposal in this PR is 2026-10-09; this is not reviewer attestation");
-  assert.equal(site.lastUpdated,"2026-10-09");
-  assert.equal(getAllProjectMilestones().length,0);
+    "the reviewed corpus cutoff proposal in this PR is 2026-10-09; and it does not authorize other candidate signoffs");
+  assert.equal(site.lastUpdated, "2026-10-17");
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("F5-1: Alcoa and Burntlog link existing M3 rows instead of inventing duplicate milestone proposals", () => {
@@ -93,7 +93,8 @@ test("F5-1: Stibnite original early works source is registered and distinct from
   assert.equal(first.proposedScope,null);
   assert.equal(first.proposedOccurredOn,null);
   assert.deepEqual(first.sourceEvidenceBoundary,{date:"2025-10-21",basis:"publication"});
-  assert.deepEqual(first.releaseBlockers,["existing_M3_human_adjudication"]);
+  assert.deepEqual(first.releaseBlockers,["existing_M3_taxonomy_gate"]);
+  assert.equal(input().cases[3].reviewStatus,"taxonomy_blocked");
   assert.equal(input().cases[3].proposal,null);
   const m3=m3Queue.find(x=>x.id===first.existingReviewId)!;
   assert.deepEqual(m3.relatedFinanceIds,[]);
@@ -101,7 +102,7 @@ test("F5-1: Stibnite original early works source is registered and distinct from
   assert.equal(m3.scopeProposal,"whole_project");
   assert.equal(m3.occurredOn,"2025-10-21");
   assert.ok(m3.editorialCaution.includes("early works"));
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length, 2);
 });
 
 test("F5-1: invalid review identities, source URLs, false approvals and duplicate leads fail closed", () => {

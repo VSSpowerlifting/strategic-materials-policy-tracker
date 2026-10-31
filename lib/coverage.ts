@@ -18,14 +18,22 @@
 import { FRAMING_CATEGORIES, JURISDICTIONS, MECHANISMS, SOURCE_CONFIDENCE } from "./types";
 import type { FramingCategory, JurisdictionCode, Mechanism, SourceConfidence } from "./types";
 import {
+  getAllControlMeasures,
   getAllEvents,
+  getAllFinancialCommitments,
   getAllFramingClaims,
   getAllJurisdictions,
   getAllMaterials,
+  getAllOrganizations,
+  getAllProgrammes,
+  getAllProjectDesignations,
+  getAllProjectMilestones,
+  getAllProjects,
   getAllSources,
   getAllWatchedSources,
   getSourcesByIds,
 } from "./data";
+import { buildSourceUseIndex } from "./source-citation-index";
 import { jurisdictionShort } from "./labels";
 import { site } from "./site";
 
@@ -99,7 +107,9 @@ export type CoverageReport = {
     primary: Share;
     /** Source count per confidence tier, hierarchy order. */
     byConfidence: { confidence: SourceConfidence; count: number }[];
-    /** Sources not cited by any event, framing claim or jurisdiction. */
+    /** Unique registered sources with at least one EXPLICIT published record citation. */
+    cited: Share;
+    /** Registered sources with zero direct citations across ALL published record types. */
     orphaned: string[];
   };
   actors: {
@@ -147,10 +157,23 @@ export function getCoverageReport(): CoverageReport {
   const framingByEvent = new Map<string, number>();
   for (const f of framing) framingByEvent.set(f.eventId, (framingByEvent.get(f.eventId) ?? 0) + 1);
 
-  const cited = new Set<string>();
-  for (const e of events) for (const id of e.sourceIds) cited.add(id);
-  for (const f of framing) cited.add(f.sourceId);
-  for (const j of jurisdictions) for (const id of j.sourceIds) cited.add(id);
+  // The source directory and coverage API must agree on the meaning of
+  // "uncited": a reference on a financial status, project, organization,
+  // instrument term or approved milestone is just as much a direct citation
+  // as an event reference. Reuse the one canonical explicit-link index;
+  // do not infer parent/event citations or import private review packets.
+  const citations = buildSourceUseIndex({
+    sources, events, framing, actors: jurisdictions, materials,
+    finances: getAllFinancialCommitments(),
+    controls: getAllControlMeasures(),
+    projects: getAllProjects(),
+    milestones: getAllProjectMilestones(),
+    designations: getAllProjectDesignations(),
+    organizations: getAllOrganizations(),
+    programmes: getAllProgrammes(),
+  });
+  const orphaned = sources.filter(s => (citations.get(s.id)?.length ?? 0) === 0)
+    .map(s => s.id);
 
   const present = new Set(jurisdictions.map((j) => j.id));
   const actorOrder = JURISDICTIONS.filter((j) => present.has(j)) as JurisdictionCode[];
@@ -218,7 +241,8 @@ export function getCoverageReport(): CoverageReport {
         confidence,
         count: sources.filter((s) => s.confidence === confidence).length,
       })),
-      orphaned: sources.filter((s) => !cited.has(s.id)).map((s) => s.id),
+      cited: share(sources.length - orphaned.length, sources.length),
+      orphaned,
     },
     actors: actorOrder.map((jurisdiction) => {
       const own = events.filter((e) => e.jurisdiction === jurisdiction);

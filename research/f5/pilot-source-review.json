@@ -53,8 +53,8 @@
       "publishedOn": "2025-10-21",
       "sourcePublisher": "Perpetua Resources",
       "proposal": null,
-      "reviewStatus": "pending_human_review",
-      "editorialDecision": "Original Perpetua October 21, 2025 release now registered and linked to one canonical *pending* M3.2 source-review row (no separate F5 proposal and NO finance-row linkage). Publication still needs real reviewer/source attestation, editorial decision on whole-project early-works scope and positive authorization for the updated curated corpus cutoff. The reported activity is limited to early works; EXIM preliminary financing is nonbinding and Burntlog May 2026 is a distinct later construction event."
+      "reviewStatus": "taxonomy_blocked",
+      "editorialDecision": "Original October 21, 2025 Perpetua source remains registered with a canonical pending M3.2 review. Its whole_project proposal is now explicitly taxonomy-blocked: the source supports the start of early works at Stibnite, not full-mine or processing-facility construction. Resolve scope semantics before independent human adjudication, then separately authorize any actual review and corpus-cutoff revision. No finance-row attribution, EXIM commitment inference, or seed publication."
     }
   ]
 }

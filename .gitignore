@@ -102,3 +102,6 @@ data/candidates/*.json
 
 # Local M3 execution-evidence human reviews and source notes (never in git)
 .project-execution-review/
+
+# F5-5 manually preserved source snapshots and private drift-review receipts
+.f5-drift/
