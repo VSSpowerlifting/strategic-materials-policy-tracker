@@ -94,6 +94,8 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen, menuBox, menuToggle] = useDisclosure(pathname);
   const menuId = useId();
   const journey = currentJourney(pathname);
+  const hasViewsRow = !!journey && journey.views.length > 1;
+  const closeMenu = () => setMenuOpen(false);
 
   // "/" jumps to search from anywhere that is not a text field.
   useEffect(() => {
@@ -177,7 +179,7 @@ export function SiteHeader() {
 
         {/* The current journey's own views. Shown only inside a journey that has more than one, so the header
             never lists every page at once; on narrow screens the row scrolls inside itself. */}
-        {journey && journey.views.length > 1 ? (
+        {hasViewsRow ? (
           <div className="border-t border-border">
             <Container width="wide" className="flex h-9 items-center gap-6">
               <nav aria-label={`${journey.label} views`} className="-mx-2 flex min-w-0 flex-1 items-stretch overflow-x-auto [scrollbar-width:none]">
@@ -205,11 +207,21 @@ export function SiteHeader() {
 
         {/* Small screens: the overview, the five journeys with the question each answers, then utilities. A
             journey's own views appear in the row above once it is open. */}
-        <nav id={menuId} aria-label="Main" hidden={!menuOpen} className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border lg:hidden">
+        {/* The menu sits below the sticky bar (4rem) and, inside a journey, the views row (2.25rem), plus their
+            borders; its height leaves room for both so its last items can always scroll into view. */}
+        <nav
+          id={menuId}
+          aria-label="Main"
+          hidden={!menuOpen}
+          className={cn(
+            "overflow-y-auto border-t border-border lg:hidden",
+            hasViewsRow ? "max-h-[calc(100dvh-6.375rem)]" : "max-h-[calc(100dvh-4.125rem)]",
+          )}
+        >
           <Container width="wide" className="py-4">
             <ul className="divide-y divide-border">
               <li>
-                <Link href="/" aria-current={pathname === "/" ? "page" : undefined} className={cn("block py-3 font-display text-base text-foreground", pathname === "/" && "font-semibold text-accent")}>
+                <Link href="/" onClick={closeMenu} aria-current={pathname === "/" ? "page" : undefined} className={cn("block py-3 font-display text-base text-foreground", pathname === "/" && "font-semibold text-accent")}>
                   Overview
                 </Link>
               </li>
@@ -217,7 +229,7 @@ export function SiteHeader() {
                 const current = isCurrent(pathname, headerNav[i]);
                 return (
                   <li key={j.href}>
-                    <Link href={j.href} aria-current={ariaCurrent(pathname, j.href, current)} className="block py-3">
+                    <Link href={j.href} onClick={closeMenu} aria-current={ariaCurrent(pathname, j.href, current)} className="block py-3">
                       <span className={cn("block font-display text-base text-foreground", current && "font-semibold text-accent")}>{j.label}</span>
                       <span className="mt-0.5 block text-sm leading-5 text-muted">{j.question}</span>
                     </Link>
@@ -226,9 +238,9 @@ export function SiteHeader() {
               })}
             </ul>
             <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border-strong pt-4 font-display text-sm">
-              <Link href="/search" className="text-muted hover:text-foreground">Search</Link>
-              <Link href="/saved" className="text-muted hover:text-foreground">Saved</Link>
-              <Link href="/about" className="text-muted hover:text-foreground">About Benjamin Yang</Link>
+              <Link href="/search" onClick={closeMenu} className="text-muted hover:text-foreground">Search</Link>
+              <Link href="/saved" onClick={closeMenu} className="text-muted hover:text-foreground">Saved</Link>
+              <Link href="/about" onClick={closeMenu} className="text-muted hover:text-foreground">About Benjamin Yang</Link>
               <RecordAsOf className="w-full" />
             </div>
           </Container>

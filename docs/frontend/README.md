@@ -56,7 +56,7 @@ The search box, `/saved` and `/about` are utilities and stay outside the journey
 
 The page answers its questions in reading order:
 
-1. **What SMPT is.** The hero, followed by "Scope and freshness": the curated-revision date, a statement that coverage is selective and uneven, and four counts. These are policy events, financial instruments, registered projects and reviewed industrial observations, with a link to `/coverage`. These are the same four figures the previous homepage showed, now placed beside their qualification. No totals or ratios were added, and the test asserts that the page has exactly four `<dd>`.
+1. **What SMPT is.** The hero, followed by "Scope and freshness": the curated-revision date, a statement that coverage is selective and uneven, and four counts. These are policy events, financial instruments, registered projects and reviewed industrial observations, with a link to `/coverage`. These are the same four figures the previous homepage showed. Because the brief rules out vanity stats, they are set at body size as scope metadata, not as headline numerals, and sit beside their qualification. No totals or ratios were added, and the test asserts that the page has exactly four `<dd>`.
 2. **What you can investigate.** The five journeys and their questions.
 3. **Try a worked question.** The existing `getInvestigationEntries()` examples.
 4. **Or browse by material and stage.** The existing lattice, unchanged, now reached after orientation.
@@ -72,7 +72,7 @@ The page answers its questions in reading order:
 These checks ran on a production build (`next build && next start`) in a browser at 375, 768 and 1440 px.
 
 - **Overflow.** No horizontal overflow on the home page (all three widths), on an event detail page (375 and 1440), or on `/capital` and `/events` (1440).
-- **Small-screen menu.** Below `lg` the header collapses into one disclosure. It lists Overview, the five journeys with their questions, then Search, Saved and About. It closes on Escape (returning focus to the toggle), on an outside click or focus, and on navigation. Inside a journey, the second row scrolls horizontally within itself.
+- **Small-screen menu.** Below `lg` the header collapses into one disclosure. It lists Overview, the five journeys with their questions, then Search, Saved and About. It closes on Escape (returning focus to the toggle), on an outside click or focus, on navigation, and when any of its links is tapped, including the link to the page already open. Its height leaves room for the sticky bar and, inside a journey, the views row too, so its last link can always scroll into view. At 375×667 on `/events`, the last link ends at 626px. Inside a journey, the second row scrolls horizontally within itself.
 - **Console.** Zero console errors or warnings on the production build.
 - **Not done.** No automated axe or Lighthouse pass was run. Screen-reader testing was limited to checking the markup.
 

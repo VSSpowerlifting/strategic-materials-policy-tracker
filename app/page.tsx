@@ -65,16 +65,17 @@ export default function Home() {
               have their own source and review dates. Coverage is selective and uneven; these figures describe
               SMPT, not all government activity.
             </p>
-            <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-4">
+            {/* Scope metadata at body size, not headline figures: what the corpus holds, read with the caveat above. */}
+            <dl className="mt-4 grid grid-cols-2 gap-x-5 gap-y-1.5 font-display text-sm leading-6">
               {[
                 [counts.events, "policy events"],
                 [counts.financialCommitments, "financial instruments"],
                 [counts.projects, "registered projects"],
                 [counts.projectMilestones, "reviewed industrial observations"],
               ].map(([count, label]) => (
-                <div key={label} className="flex flex-col-reverse border-l border-border pl-3">
-                  <dt className="mt-1 font-display text-xs leading-5 text-muted">{label}</dt>
-                  <dd className="font-display text-2xl font-medium tnum">{count}</dd>
+                <div key={label} className="flex flex-row-reverse justify-end gap-1.5">
+                  <dt className="text-muted">{label}</dt>
+                  <dd className="font-medium text-foreground tnum">{count}</dd>
                 </div>
               ))}
             </dl>
