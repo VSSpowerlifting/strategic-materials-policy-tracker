@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
 import { ProjectsExplorer } from "@/components/projects-explorer";
+import { ResearchReadingKey } from "@/components/capital/reading-guide";
 import { buildProjectDirectory } from "@/lib/project-directory";
 import {
   getAllFinancialCommitments, getAllMaterials, getAllOrganizations,
@@ -30,6 +31,7 @@ export default function ProjectsPage() {
     <div className="mt-7 flex flex-wrap gap-3">
       {projects.filter(p => ["prj-au-alcoa-sojitz-gallium", "prj-us-stibnite"].includes(p.id)).map(p => <Link key={p.id} href={`/projects/${p.id}`} className="research-button-secondary">Investigate {p.name}</Link>)}
     </div>
+    <ResearchReadingKey topic="projects" />
     <Section index="01" className="mt-10" title="Project research directory"
       description={`${rows.length} distinct registered undertakings, not an exhaustive census of industrial projects.`}>
       <ProjectsExplorer rows={rows} materialNames={materialNames}/>
