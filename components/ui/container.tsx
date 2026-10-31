@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Breadcrumbs, type Crumb } from "./breadcrumbs";
 
 /**
  * Page width. `default` is the workhorse measure; `wide` is for the framing
@@ -29,12 +30,11 @@ export function Container({
 }
 
 /**
- * Atlas index marker: a JetBrains Mono numeral set against the label, no
- * colored bar and no wide-tracked all-caps. Reads like a reference atlas and is
- * deliberately unlike the sibling sites' accent-bar eyebrow.
+ * Atlas kicker: the label set against a hairline, no colored bar and no wide-tracked all-caps. `index` is
+ * accepted for existing callers but no longer drawn: hand-numbered sections ("01", "05") read as a sequence the
+ * pages do not actually follow, and the numbers drifted whenever a section was conditional.
  */
 export function AtlasIndex({
-  index,
   label,
   className,
 }: {
@@ -44,30 +44,37 @@ export function AtlasIndex({
 }) {
   return (
     <div className={cn("flex items-baseline gap-3 font-mono text-xs", className)}>
-      {index ? <span className="tnum text-faint">{index}</span> : null}
       <span className="text-accent">{label}</span>
       <span aria-hidden className="h-px flex-1 self-center bg-border" />
     </div>
   );
 }
 
-/** Standard page heading: atlas kicker / Archivo title / serif lead. */
+/**
+ * Standard page heading: breadcrumb trail or atlas kicker / Archivo title / serif lead. Detail pages pass
+ * `breadcrumbs`, which replace the kicker so the page's place in its journey is said once.
+ */
 export function PageHeading({
   eyebrow,
-  index,
   title,
   lead,
+  breadcrumbs,
   className,
 }: {
   eyebrow?: string;
   index?: string;
   title: string;
   lead?: React.ReactNode;
+  breadcrumbs?: readonly Crumb[];
   className?: string;
 }) {
   return (
     <div className={cn(className)}>
-      {eyebrow ? <AtlasIndex index={index} label={eyebrow} className="mb-4" /> : null}
+      {breadcrumbs?.length ? (
+        <Breadcrumbs items={breadcrumbs} className="mb-5" />
+      ) : eyebrow ? (
+        <AtlasIndex label={eyebrow} className="mb-4" />
+      ) : null}
       <h1 className="max-w-4xl font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
         {title}
       </h1>
@@ -78,10 +85,9 @@ export function PageHeading({
   );
 }
 
-/** A labelled section with the atlas index + a hairline rule. */
+/** A labelled section under a hairline rule. `index` is accepted but not drawn (see `AtlasIndex`). */
 export function Section({
   title,
-  index,
   description,
   children,
   className,
@@ -96,21 +102,12 @@ export function Section({
     <section className={cn("scroll-mt-24", className)}>
       {title ? (
         <div className="mb-5 border-b border-border-strong pb-3">
-          <div className="flex items-baseline gap-3">
-            {index ? (
-              <span className="tnum shrink-0 font-mono text-sm font-semibold text-accent">
-                {index}
-              </span>
-            ) : null}
-            <div>
-              <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-[1.375rem]">
-                {title}
-              </h2>
-              {description ? (
-                <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p>
-              ) : null}
-            </div>
-          </div>
+          <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-[1.375rem]">
+            {title}
+          </h2>
+          {description ? (
+            <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p>
+          ) : null}
         </div>
       ) : null}
       {children}

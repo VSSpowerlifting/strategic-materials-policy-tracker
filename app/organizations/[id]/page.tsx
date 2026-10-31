@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
@@ -65,9 +66,13 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
 
   return (
     <Container className="py-12">
-      <Link href="/organizations" className="font-display text-sm text-muted hover:text-foreground">
-        ← Organizations
-      </Link>
+      <Breadcrumbs
+        items={[
+          { href: "/capital", label: "Public capital" },
+          { href: "/organizations", label: "Organizations" },
+          { label: o.name },
+        ]}
+      />
       <header className="mt-6 max-w-4xl">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {o.actor ? <JurisdictionTag code={o.actor} withName /> : null}
