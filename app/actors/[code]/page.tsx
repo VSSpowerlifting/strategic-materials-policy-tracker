@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { InstrumentsPanel } from "@/components/capital/instruments-panel";
 import { commitmentActor, controlIssuer } from "@/lib/capital-control";
 import { getAllControlMeasures, getAllFinancialCommitments } from "@/lib/data";
@@ -53,12 +54,13 @@ export default async function ActorPage({
 
   return (
     <Container className="py-12">
-      <Link
-        href="/actors"
-        className="font-display text-sm text-muted hover:text-foreground"
-      >
-        ← All actors
-      </Link>
+      <Breadcrumbs
+        items={[
+          { href: "/events", label: "Government action" },
+          { href: "/actors", label: "Governments" },
+          { label: jurisdiction.name },
+        ]}
+      />
 
       <header className="mt-6">
         <div className="flex items-center gap-4">

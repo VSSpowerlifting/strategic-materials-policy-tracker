@@ -282,15 +282,13 @@
 .research-text-link { display: inline-block; margin-top: 1rem; font-family: var(--font-display); font-size: .875rem; color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
 .material-entry { display: block; padding: .6rem .85rem; border: 1px solid var(--border-strong); border-radius: .25rem; font-family: var(--font-display); font-size: .875rem; }
 .material-entry:hover { border-color: var(--accent); color: var(--accent); background: var(--surface); }
-.resource-disclosure > summary::marker { color: var(--accent); }
-.resource-panel { position: absolute; z-index: 50; right: max(1rem, calc((100vw - 80rem) / 2)); margin-top: .75rem; max-width: calc(100vw - 2rem); max-height: 65vh; overflow: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border-strong); box-shadow: 0 8px 24px #0005; width: 44rem; }
 .investigation-lanes { display: grid; gap: 1rem; }
 .investigation-lane { min-width: 0; padding: 1.25rem; border: 1px solid var(--border-strong); background: var(--surface); border-radius: .25rem; }
 .investigation-lane h2 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
 .investigation-lane p { margin-top: .65rem; color: var(--muted); font-size: .9375rem; line-height: 1.75; }
 .research-chronology { border-left: 1px solid var(--border-strong); padding-left: 1.25rem; }
 .research-chronology > li + li { margin-top: 1.5rem; }
-@media (min-width: 768px) { .investigation-lanes { grid-template-columns: repeat(3, minmax(0, 1fr)); } .resource-panel { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 768px) { .investigation-lanes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 
 /* Interface notes use Archivo; Newsreader remains for editorial headings and reading. */
