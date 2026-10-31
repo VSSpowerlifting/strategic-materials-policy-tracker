@@ -1,0 +1,36 @@
+name: Public data release parity (manual, read-only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      origin:
+        description: "Canonical production HTTPS origin (no path or secrets)"
+        required: true
+        type: string
+        default: "https://strategic-materials-policy-tracker.vercel.app/"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smpt-public-release-parity
+  cancel-in-progress: false
+
+jobs:
+  inspect-published-json:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout expected published seed and API schema
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install reproducible dependencies
+        run: npm ci
+      - name: Inspect public HTTP JSON (read-only; does not deploy)
+        env:
+          SMPT_PRODUCTION_ORIGIN: ${{ inputs.origin }}
+        run: npm run audit:production-parity -- --origin "$SMPT_PRODUCTION_ORIGIN"

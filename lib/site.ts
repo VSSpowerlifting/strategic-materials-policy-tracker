@@ -7,12 +7,12 @@ export const site = {
   name: "Strategic Materials Policy Tracker",
   shortName: "SMPT",
   tagline:
-    "How the major powers contest rare earths and strategic materials through policy.",
+    "Comparative economic-security research on strategic-material policy and implementation.",
   description:
-    "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
+    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked records.",
   version: "v0.6-capital-intelligence",
   /** Last curated corpus revision, NOT a claim that every row was rechecked on this date. */
-  lastUpdated: "2026-10-09",
+  lastUpdated: "2026-10-17",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness
@@ -74,23 +74,13 @@ export const navGroups = [
   },
 ] as const;
 
-/**
- * The six inline header links of the Lattice Register design. A presentation layer only: `navGroups` and `nav`
- * stay complete, so the sitemap, the footer and the small-screen menu still reach every page. "Explore" opens
- * the existing event explorer and is marked current across the record-browsing pages; "Jurisdictions" is the
- * `/actors` route under its design label.
- */
+/** Primary journeys. Legacy record and analytical routes remain under their parent. */
 export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] = [
   { href: "/", label: "Overview", exact: true },
-  { href: "/compare", label: "Compare" },
-  {
-    href: "/events",
-    label: "Explore",
-    alsoCurrentFor: ["/capital", "/controls", "/projects", "/organizations", "/programmes", "/sources", "/timeline", "/framing", "/search", "/response"],
-  },
-  { href: "/materials", label: "Materials" },
-  { href: "/actors", label: "Jurisdictions" },
-  { href: "/methodology", label: "Method" },
+  { href: "/events", label: "Explore", alsoCurrentFor: ["/capital", "/controls", "/materials", "/actors", "/organizations", "/programmes", "/sources", "/timeline", "/search"] },
+  { href: "/compare", label: "Compare", alsoCurrentFor: ["/framing", "/interplay", "/portfolios", "/response"] },
+  { href: "/projects", label: "Projects" },
+  { href: "/methodology", label: "Methodology" },
 ];
 
 /** Every header destination, flattened (footer, sitemap). */

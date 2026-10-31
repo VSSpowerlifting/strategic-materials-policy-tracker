@@ -3,13 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { ProjectOverview, ProjectFinancialRecord, ProjectPolicyContext, ProjectUnknowns } from "@/components/projects/project-investigation";
+import { getPublicProjectInvestigation } from "@/lib/research-experience";
+import { ReviewedProjectMilestones } from "@/components/projects/reviewed-project-milestones";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
 import { ControlStatusBadge, EvidenceTable, Fact, ImplementationStatusBadge, NotStated, SourceMention } from "@/components/capital/primitives";
 import { LayerStack } from "@/components/intelligence/layers";
 import { OrgList, ProgrammeLink } from "@/components/intelligence/org-link";
 import { DesignationRow } from "@/components/intelligence/designation-row";
-import { coInvestments, controlsAtProjectStages, projectStack } from "@/lib/capital-intelligence";
+import { coInvestments, controlsAtProjectStages } from "@/lib/capital-intelligence";
 import { controlIssuer, isEnded } from "@/lib/capital-control";
 import { getAllProjects, getEventById, getMaterialsByIds, getProjectById } from "@/lib/data";
 import {
@@ -32,17 +35,19 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const p = getProjectById(id);
   if (!p) return { title: "Project not found" };
   return {
-    title: `${p.name} — capital stack`,
+    title: `${p.name} — project investigation`,
     description: `Who backs ${p.name}, through which instruments and at what status, by value role and in original currencies.`,
   };
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const stack = projectStack(id);
-  if (!stack) notFound();
+  const investigation = getPublicProjectInvestigation(id);
+  if (!investigation) notFound();
+  const { stack, packet } = investigation;
   const { project: p } = stack;
   const materials = getMaterialsByIds(p.materialIds);
+  const reviewedMilestones = packet.nativeMilestones;
   const co = coInvestments().find((c) => c.project.id === id);
   const controls = controlsAtProjectStages(p, site.lastUpdated);
   const ended = stack.rows.filter(isEnded);
@@ -71,8 +76,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <p className="mt-3 font-mono text-xs text-faint">{p.id}</p>
       </header>
 
+      <div className="mt-5 flex flex-wrap items-center gap-4 font-display text-sm">
+        <a href={`/api/v1/projects/${p.id}/investigation`} download className="research-button">Download investigation JSON</a>
+        <a href="#project-sources" className="text-accent underline underline-offset-4">Sources & citations</a>
+        <span className="text-muted">Corpus revised {formatDate(packet.corpus.revision)}</span>
+      </div>
+      <ProjectOverview investigation={investigation} />
+
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="min-w-0 space-y-12">
+          <div id="project-finance" className="scroll-mt-44"><ProjectFinancialRecord investigation={investigation} /></div>
           <Section
             index={next()}
             title="Capital stack"
@@ -93,6 +106,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             ) : null}
             {stack.layers.length ? <LayerStack layers={stack.layers} /> : <p className="text-sm text-muted">No financial row is attributable to this project yet.</p>}
           </Section>
+
+          <div id="project-industrial" className="scroll-mt-44">
+          {reviewedMilestones.length ? (
+            <Section index={next()} title="Source-reviewed industrial observations"
+              description="Original-source claims independently assessed by a human reviewer. Reported events remain separate from financing status and are not evidence that funding caused construction or production.">
+              <ReviewedProjectMilestones milestones={reviewedMilestones} />
+            </Section>
+          ) : <Section title="Source-reviewed industrial observations"><p className="max-w-prose text-base leading-7 text-muted">No source-reviewed project milestone is published for this undertaking. Any financing-row activity reports below remain attributed observations, not independently reviewed project milestones. Missing evidence does not establish inactivity.</p></Section>}
+          </div>
+
+          <div id="project-policy" className="scroll-mt-44"><ProjectPolicyContext investigation={investigation} /></div>
 
           {stack.associatedRows.length ? (
             <Section
@@ -185,7 +209,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 <Fact label="Programmes">
                   {programmes.length ? programmes.map((g) => <span key={g} className="block"><ProgrammeLink id={g} /></span>) : <NotStated>None recorded</NotStated>}
                 </Fact>
-                <Fact label="Latest physical status">
+                <Fact label="Latest financing-row activity report">
                   {stack.latestImplementation ? (
                     <span className="flex flex-wrap items-center gap-2">
                       <ImplementationStatusBadge status={stack.latestImplementation.status as ImplementationStatus} />
@@ -202,25 +226,26 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             </Card>
           </Section>
 
-          {p.notes ? (
-            <Section index={next()} title="Notes">
-              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">{p.notes}</p>
-            </Section>
-          ) : null}
+          <div id="project-unknowns" className="scroll-mt-44"><ProjectUnknowns investigation={investigation} /></div>
 
+          <div id="project-sources" className="scroll-mt-44">
           <Section index={next()} title="Evidence" description="Every project fact names the source that states it.">
             <EvidenceTable evidence={p.evidence} fieldLabels={projectEvidenceFieldLabels} />
+            <p className="mt-5 text-sm leading-7 text-muted">For citations, open a parent <a href="#project-policy" className="text-accent underline">policy record</a> for BibTeX, RIS and CSL formats. Cite original documents for claims about government action.</p>
+            <p className="mt-3 text-sm"><a href={`/api/v1/projects/${p.id}`} className="text-accent underline">Project registry JSON with sources</a>{" · "}<Link href="/data" className="text-accent underline">Full dataset and download guide</Link></p>
           </Section>
+          </div>
         </div>
 
-        <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+        <aside className="space-y-4 lg:sticky lg:top-44 lg:self-start">
           <Card className="p-4 text-sm">
             <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Providers</h2>
             <OrgList ids={stack.providerOrgIds} showKind empty="No provider of committed capital is named" />
           </Card>
           <Card className="p-4 text-sm">
             <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Machine-readable</h2>
-            <a href={`/api/v1/projects/${p.id}`} className="text-accent hover:text-accent-strong">JSON stack with sources</a>
+            <a href={`/api/v1/projects/${p.id}/investigation`} download className="font-display text-accent underline">Download investigation JSON</a>
+            <p className="mt-3 text-xs leading-6 text-muted">Separate financial and industrial evidence, original amounts, conditions, source URLs and field locators. Projection {packet.projectionVersion}; corpus revised {formatDate(packet.corpus.revision)}.</p>
           </Card>
         </aside>
       </div>

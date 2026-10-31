@@ -1,0 +1,33 @@
+# F5-5 — Original Montana PIR 26-PIR-1405: what it actually establishes
+
+**Inspected October 16, 2026. Research supplement only; unsigned, not a site-operation adjudication or a public source registration.**
+
+## Provenance and scope
+
+The user retrieved **public Montana DEQ Reading Room release 26-PIR-1405** (reading room lists it as closed and published **June 26, 2026**), then supplied the original **`26-PIR-1405.zip`** for inspection. This research inspected **six PDF files, 555 pages**, and computed SHA-256 fingerprints from the supplied ZIP and each member. The [machine-readable manifest](../../research/f5/thompson-pir1405-original-documents.json) includes **all six filenames, dates, sizes, page counts, and hashes**. It is a fingerprint of the *supplied bytes*, **not** a signed agency receipt, proof that every PDF was authenticated against an independent DEQ download, or a verified government source-body capture in the existing private F5 vault. Raw PDF bytes, public-comment contact details, applicant correspondence addresses, signatures, and user identity were **not** committed to this repository.
+
+The six original PDFs are **all 2025 application/permitting records**: September 11 incomplete-application notice; September 3 application with engineering appendices; October 6 BACT addendum; November 10 preliminary determination; December 5 decision determination; December 23 final permit. **None of these six is a 2026 emissions stack-test report, on-site DEQ inspection, independent plant operation record, actual nine-furnace commissioning certificate, output-meter log, or grant reimbursement confirmation.** Publication of the file bundle in June 2026 is a *document-release date*, not a plant startup date.
+
+## Original evidence added beyond issued permit #2973-05
+
+**1. Precise, distinguishable equipment identities in the applicant's proposed September 2025 expansion.** [Application `2973-05_2025_09_03_APP.pdf`, physical PDF p. 6, printed p. 3, Table 2]:
+- Five new reduction furnaces **RF-1500 / 1600 / 1700 / 1800 / 1900**, each paired with baghouse **BH-1500 / 1600 / 1700 / 1800 / 1900**.
+- Two new remelt furnaces **RFF-2000 / RFF-2100**, with baghouses **BH-2000 / BH-2100**.
+- Two new oxidizers **OFF-2200 / OFF-2300**, with baghouses **BH-2200 / BH-2300**.
+- These are **proposed permit application unit IDs**, not proof an individual furnace was installed, operating, source-tested or completed on the application date. Avoid misreading the corresponding [BACT addendum p. 4] shorthand burner IDs **RF-2000 / 2100 / 2200 / 2300** as necessarily identical equipment identifiers without cross-referencing the permit.
+- [Application p. 4, Project Overview] models **8,760 hours/year** of potential full-use operations to calculate annual **potential emissions**; it **does not measure 8,760 operating hours**, annual antimony production, or realized throughput.
+
+**2. Documented permitting sequence rather than an industrial milestone.** [September 11 `2973-04_2025_09_11_INC.pdf`, p. 1]: DEQ returned an **incomplete-application notice** because the initial Best Available Control Technology analysis was insufficient. The [October 6 `2973-05_2025_10_06_BACT.pdf`] supplies a revised BACT analysis; DEQ's final document describes the application as complete October 7. Do not present either administrative event as physical furnace completion.
+
+**3. DEQ specifically maintained the all-new-unit initial source test requirement.** [Final permit `2973-05.pdf`, physical PDF p. 11, Permit Analysis response-to-comments table]: the **applicant** asked whether a representative subset of new furnaces might be tested rather than a test for each new unit; **DEQ** said initial tests of **all new furnaces** are warranted because antimony is a hazardous air pollutant and clarified Section II.B.1. The legal test requirement is independently verifiable. **No completed test or actual triggering startup date is in this release.** The test's 60/180-day conditional window cannot be converted into an overdue date without an actual triggering date and legally correct interpretation.
+
+**4. Previous operations allegation is disputed evidence, not a regulator violation finding.** [Final permit `2973-05.pdf`, physical PDF pp. 19–20, Permit Analysis public comment / applicant response; parallel in `2973-05_DD.pdf` pp. 18–19]:
+- A public commenter argued that 2021–2025 company announcements suggested earlier installations/operations before this new permit; this was **an allegation**, not a DEQ finding that the **nine specific new expansion furnaces** were operated before permit issuance.
+- **Power Engineers, responding on USAC's behalf**, said the permit action would add new furnaces and new baghouses while updating existing baghouses and **decommissioning two older units**. The representative said prior installations were within prior permits and that some cited trisulfide electric furnaces were lab-scale and outside the relevant air-permit regime. **These are party assertions**, not an independent DEQ site inspection or proof two particular furnaces were decommissioned by a certain date.
+- The decommissioning statement presents a **plausible equipment-count research lead** for the unresolved **six older units scheduled in the permit vs seven older-building furnaces in the August 2026 local report**. Do **not** silently reconcile the counts, infer compliance or noncompliance, assume the same equipment inventory dates, or count decommissioned units without furnace-level records.
+
+## What to do with this evidence
+
+The [draft DEQ records handoff](../../research/f5/thompson-deq-records-access-handoff.json) now includes **all nine exact proposed unit IDs** and the paired baghouses. It explicitly tells DEQ that PIR **26-PIR-1405 has already been obtained**, so the agency should **avoid duplicate release of the six 2025 documents**. Our follow-up still requests **DEQ-held May 1–October 16, 2026** actual source-test protocols/reports, start-date correspondence, inspection observations and meaningful permit changes; two requests are **still drafts, not submitted**.
+
+**Editorial status:** `review-m3-2-thompson-falls-q2-expansion` remains the **existing** Q2 SEC source-grounded `construction_progress_reported` / `named_facility` / `occurredOn: null` / **human-unreviewed** source-review item. No new milestone, human approval, signed source version, registered source, finance status, public route, export, monitoring result or corpus date is authorized by these 2025 permitting records. Actual agency post-startup testing/inspection and genuine independent human adjudication remain outstanding.

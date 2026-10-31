@@ -1,0 +1,47 @@
+name: Source register Chromium QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/source-register-browser-qa.yml"
+      - "scripts/qa-source-register-browser.mjs"
+      - "app/sources/page.tsx"
+      - "components/source-register-explorer.tsx"
+      - "components/source-ref.tsx"
+      - "lib/source-directory.ts"
+      - "lib/source-usage.ts"
+      - "lib/source-citation-index.ts"
+      - "lib/coverage.ts"
+      - "lib/data.ts"
+      - "app/coverage/**"
+      - "app/api/v1/coverage/**"
+      - "data/seed/**"
+      - "app/globals.css"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-register-browser-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-source-register:
+    name: Browser source filters and direct citations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: node scripts/qa-source-register-browser.mjs
+      - run: test -z "$(git status --porcelain)"

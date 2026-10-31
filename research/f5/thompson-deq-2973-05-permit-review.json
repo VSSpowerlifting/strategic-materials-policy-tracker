@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "f5-5-thompson-deq-original-permit-review-v1",
+  "researchCheckedOn": "2026-10-16",
+  "classification": "independent_government_regulatory_authorization_not_industrial_commissioning",
+  "originalReviewAuthority": "existing_unsigned_m3_only",
+  "canonicalM3ReviewId": "review-m3-2-thompson-falls-q2-expansion",
+  "canonicalM3ProjectId": "prj-us-usac-thompson-falls-expansion",
+  "canonicalM3SourceId": "src-usac-2026-q2-10q",
+  "canonicalProposalKind": "construction_progress_reported",
+  "canonicalProposalScope": "named_facility",
+  "occurredOn": null,
+  "registeredInSmptSources": false,
+  "sourceBodyDownloadedForHash": false,
+  "humanOriginalDocumentAttested": false,
+  "humanReviewDecisionRecorded": false,
+  "publicMilestonePromotionAuthorized": false,
+  "deqPrimaryOriginal": {
+    "publisher": "Montana Department of Environmental Quality",
+    "documentTitle": "United States Antimony Corporation Thompson Falls Facility: Montana Air Quality Permit #2973-05",
+    "officialDocumentUrl": "https://deq.mt.gov/files/Air/AirQuality/Documents/ARMpermits/2973-05_FNL.pdf",
+    "permitNumber": "2973-05",
+    "priorPermitNumber": "2973-04",
+    "originalPdfTotalPages": 77,
+    "receivedInitialApplication": "2025-09-03",
+    "applicationComplete": "2025-10-07",
+    "preliminaryDetermination": "2025-11-10",
+    "decisionIssued": "2025-12-05",
+    "permitFinalEffectiveOn": "2025-12-23",
+    "facilityLocation": "Section 29, Township 21 North, Range 31 West, Sanders County, Montana",
+    "engineeringConfigurations": [
+      {
+        "equipment": "new_reduction_furnace",
+        "units": 5,
+        "thermalInputMMBtuPerHourEach": 3
+      },
+      {
+        "equipment": "new_remelt_furnace",
+        "units": 2,
+        "thermalInputMMBtuPerHourEach": 3
+      },
+      {
+        "equipment": "new_oxidizer_furnace",
+        "units": 2,
+        "thermalInputMMBtuPerHourEach": 3
+      },
+      {
+        "equipment": "existing_reduction_furnace",
+        "units": 4,
+        "thermalInputMMBtuPerHourEach": 0.85
+      },
+      {
+        "equipment": "existing_remelt_furnace",
+        "units": 1,
+        "thermalInputMMBtuPerHourEach": 0.85
+      },
+      {
+        "equipment": "existing_oxidizer_furnace",
+        "units": 1,
+        "thermalInputMMBtuPerHourEach": 0.85
+      }
+    ],
+    "locators": [
+      {
+        "pageIndex": 0,
+        "section": "Final and Effective cover letter",
+        "finding": "DEQ explicitly declares MAQP 2973-05 final and effective December 23 2025, not an actual furnace operation certificate."
+      },
+      {
+        "pageIndex": 2,
+        "section": "Section I.B Current Permit Action",
+        "finding": "DEQ specifies newly permitted five reduction, two remelt and two oxidizer furnaces, new baghouse equipment, and six previously permitted furnaces."
+      },
+      {
+        "pageIndex": 4,
+        "section": "Section II.B.1 Testing Requirements",
+        "finding": "Initial EPA method source testing required in relation to initial startup of all new furnaces, within the specified post-startup time window; permit contains no executed test result."
+      },
+      {
+        "pageIndex": 4,
+        "section": "Section II.C.1 Operational Reporting Requirements",
+        "finding": "Calendar-year production information must be supplied to DEQ in annual emissions inventory requests; no 2026 measured production figure is given."
+      },
+      {
+        "pageIndex": 7,
+        "section": "Permit Analysis I.A Permitted Equipment",
+        "finding": "Analysis summarizes nine newly permitted 3.0 MMBtu/hour furnaces plus six existing 0.85 MMBtu/hour furnaces; engineering input rating, not realized metal tonnage."
+      },
+      {
+        "pageIndex": 9,
+        "section": "Permit Analysis I.E Response to Public Comments",
+        "finding": "Applicant corrected an earlier mix-up in ratings and counts, and DEQ revised the permit text: all nine new furnace units have 3.0 MMBtu/hour ratings."
+      }
+    ],
+    "permitDoesNotContain": {
+      "verifiedCommissioningDate": null,
+      "completedAllNewFurnacesTestReport": null,
+      "independentObservedOutputTonnes": null,
+      "actualNineFurnaceSimultaneousOperation": null
+    }
+  },
+  "separateOriginalPhysicalReporting": {
+    "publisher": "Sanders County Ledger",
+    "datePublished": "2026-08-27",
+    "url": "https://www.scledger.net/story/2026/08/27/news/usac-capacity-expands-with-new-t-falls-facility/14209.html",
+    "reporterDescribedNewUnits": 9,
+    "reportedNewUnitsOperational": 7,
+    "reporterQualifiesNotAllSimultaneously": true,
+    "reporterDescribedLegacyFurnaces": 7,
+    "actualSiteVisitDay": null,
+    "originalOnSiteReportNotGovernmentInspection": true,
+    "originalReportNotRegisteredAsM3Source": true
+  },
+  "unresolvedEquipmentDiscrepancy": {
+    "deqExistingUnits": 6,
+    "ledgerLegacyUnits": 7,
+    "reconciliation": "unresolved_different_equipment_inventory_or_definition",
+    "editorialStop": "Do not quietly equate six permitted legacy furnaces in December 2025 with the reporter's seven older-building furnaces in August 2026. Request exact equipment lists and status/permit amendments; do not assert permit noncompliance."
+  },
+  "sourceEvidenceEdges": [
+    {
+      "from": "montana_deq_permit_2973_05",
+      "to": "thompson_falls_expansion",
+      "supports": "permitted_nine_new_units_and_emissions_conditions",
+      "doesNotSupport": "all_new_units_commissioned_or_realized_output"
+    },
+    {
+      "from": "local_2026_08_27_field_report",
+      "to": "thompson_falls_expansion",
+      "supports": "reporter_says_seven_new_units_operational_not_concurrent",
+      "doesNotSupport": "all_nine_operating_together_or_nameplate_tonnage"
+    },
+    {
+      "from": "sec_2026_q2_10q",
+      "to": "thompson_falls_expansion",
+      "supports": "issuer_q2_construction_progress_and_partial_assets_in_service",
+      "doesNotSupport": "exact_commissioning_day_or_full_capacity"
+    }
+  ],
+  "originalRecordFollowUp": {
+    "status": "possible_public_records_request_not_submitted",
+    "targetAgency": "Montana DEQ Air Quality Field Services / Records",
+    "permitNumber": "2973-05",
+    "suggestedWindowStart": "2026-05-01",
+    "suggestedWindowEnd": "2026-10-16",
+    "requestTargets": [
+      "Any received initial source-test protocols, completed test reports, or compliance certification under permit Section II.B.1 for the nine new furnaces.",
+      "Any facility inspection notes, regulator field observations, or inspection reports distinguishing old and new furnace equipment from May through October 16, 2026.",
+      "Any DEQ-held, dated correspondence documenting actual operation of newly permitted furnace units; separately, any notices of qualifying de minimis changes under Section II.C.2 and permit amendments after December 2025. Section II.C.2 is not an unconditional furnace-startup notice requirement.",
+      "Any readily available calendar-year production or emissions inventory information that identifies realized activity from the newly permitted furnace lines, if separately maintained."
+    ],
+    "materialStillAbsent": "No regulatory post-startup report or inspection was located in the publicly surfaced DEQ permit/document listings as of October 16 2026. This does not prove it does not exist."
+  },
+  "editorialDisposition": "add_regulator_permitted_scope_as_context_to_existing_unsigned_m3_review_not_a_new_execution_milestone"
+}

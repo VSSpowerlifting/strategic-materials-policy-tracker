@@ -1,3 +1,12 @@
+## 2026-10-23: integrated research-product revision (draft PR #181)
+
+- Continues `codex/smpt-product-experience-reinvention` from `a2492e8` over original reference `084078f`; no research or publication changes.
+- Restores warm Lattice Register identity and an interactive opening. Home/Compare share a deterministic URL query and explicit evidence/project links; mobile uses readable material/stage controls.
+- Adds an allowlisted public investigation projection shared by project evidence sections and static `/api/v1/projects/[id]/investigation` JSON downloads. Exact milestone search now reaches real project investigations.
+- Release-readiness continuation: dependency-only commit `949305e` first pins Next.js and matching ESLint config to 16.4.1, clearing all three demonstrated advisories. Automatic preview on `5658029` then exposed the upstream extensionless Google Fonts parsing bug; final pins move to 16.4.3, the first release containing its exact fix. Application code, fonts, build configuration and deployment settings are preserved. Initial dev-only audit findings are documented separately from the production gate.
+- The bounded polish clarifies the headline, trims desktop secondary navigation and puts full counting explanations in a keyboard-accessible disclosure with a visible compact key. Local validate/typecheck/lint/build and 1,029 tests pass; nine existing lint warnings remain. Responsive/font/download/keyboard QA covers 390/768/1440px. Exact final-head repeat, CI and preview receipts are reported in PR #181 after this document's commit.
+- Full decisions, advisory links, output contract, review images and limitations: [research product experience](docs/analysis/product-experience-reinvention-2026-10-22.md). No merge, production deployment, research/publication/calculation change or pending research-PR absorption.
+
 ## 2026-10-09: F5-1c Stibnite source registration + project-native reviewer path (pending merge)
 
 - Independent original issuer web source [Perpetua October 21, 2025](https://perpetuaresources.com/perpetua-resources-breaks-ground-on-the-stibnite-gold-project/) is recorded as `src-perpetua-stibnite-early-works-2025`, with truthful **October 9, 2026** access, genuine 2025 publication date, and explicit issuer/provenance limitations. `site.lastUpdated` intentionally proposes **2026-10-09** for human review as a *curated source revision only*.

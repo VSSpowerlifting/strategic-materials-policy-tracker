@@ -192,57 +192,94 @@ export function EvidenceTable<F extends string>({
   fieldLabels: Record<F, string>;
 }) {
   return (
-    <div className="overflow-x-auto rounded-lg border">
-      <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
-        <thead>
-          <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
-            <th scope="col" className="px-3 py-2 font-normal">Source</th>
-            <th scope="col" className="px-3 py-2 font-normal">Supports</th>
-            <th scope="col" className="px-3 py-2 font-normal">Level</th>
-            <th scope="col" className="px-3 py-2 font-normal">Where</th>
-          </tr>
-        </thead>
-        <tbody>
-          {evidence.map((e, i) => {
-            const s = getSourceById(e.sourceId);
-            return (
-              <tr key={i} className="border-b align-top last:border-b-0">
-                <td className="px-3 py-3">
-                  {s ? (
-                    <>
-                      <ExtLink href={s.url} className="font-display text-sm">
-                        {s.title}
-                      </ExtLink>
-                      <p className="mt-0.5 text-xs text-faint">
-                        {s.publisher} ·{" "}
-                        <Link href={`/sources#${s.id}`} className="hover:text-accent">
-                          {s.confidence === "primary" ? "primary" : s.confidence.replace("_", " ")}
-                        </Link>
-                      </p>
-                    </>
-                  ) : (
-                    <span className="font-mono text-xs">{e.sourceId}</span>
-                  )}
-                </td>
-                <td className="px-3 py-3">
-                  <span className="flex flex-wrap gap-x-3 gap-y-1">
-                    {e.supports.map((f) => (
-                      <span key={f} className="font-mono text-[11px] text-muted">
-                        {fieldLabels[f]}
-                      </span>
-                    ))}
-                  </span>
-                </td>
-                <td className="px-3 py-3">
-                  <Badge accent={e.evidence === "explicit"}>{evidenceLevelLabels[e.evidence]}</Badge>
-                  {e.note ? <p className="mt-2 max-w-xs text-xs leading-5 text-muted">{e.note}</p> : null}
-                </td>
-                <td className="px-3 py-3 text-xs text-muted">{e.locator ?? "—"}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div>
+      {/* Narrow view: one complete citation per card, with no sideways table scrolling. */}
+      <ol className="space-y-3 sm:hidden" aria-label="Evidence references">
+        {evidence.map((e, i) => {
+          const s = getSourceById(e.sourceId);
+          return (
+            <li key={i} data-testid="evidence-mobile-card"
+              className="min-w-0 rounded-lg border border-border-strong bg-card p-4">
+              <p className="font-display text-base font-semibold leading-6 [overflow-wrap:anywhere]">
+                {s ? <ExtLink href={s.url}>{s.title}</ExtLink> : e.sourceId}
+              </p>
+              {s ? <p className="mt-1 text-sm leading-6 text-muted">{s.publisher}</p> : null}
+              <dl className="mt-4 space-y-3 text-sm leading-6">
+                <div>
+                  <dt className="font-display text-xs font-semibold text-muted">Fields supported</dt>
+                  <dd className="mt-1 text-foreground">{e.supports.map(f=>fieldLabels[f]).join(" · ")}</dd>
+                </div>
+                <div>
+                  <dt className="font-display text-xs font-semibold text-muted">Evidence level</dt>
+                  <dd className="mt-1"><Badge accent={e.evidence==="explicit"}>{evidenceLevelLabels[e.evidence]}</Badge></dd>
+                </div>
+                <div>
+                  <dt className="font-display text-xs font-semibold text-muted">Location in document</dt>
+                  <dd className="mt-1 [overflow-wrap:anywhere]">{e.locator ?? "Not stated"}</dd>
+                </div>
+                {e.note ? <div>
+                  <dt className="font-display text-xs font-semibold text-muted">Qualification</dt>
+                  <dd className="mt-1 text-muted [overflow-wrap:anywhere]">{e.note}</dd>
+                </div> : null}
+              </dl>
+              {s ? <Link href={"/sources/"+s.id}
+                className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                View source dossier →
+              </Link> : null}
+            </li>
+          );
+        })}
+      </ol>
+      {/* Wide view: retain an accessible native table and horizontal scrolling when needed. */}
+      <div className="hidden overflow-x-auto rounded-lg border border-border-strong sm:block">
+        <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
+          <caption className="sr-only">Original sources, the fields each supports, evidence level and precise document location</caption>
+          <thead>
+            <tr className="border-b border-border-strong bg-card font-display text-xs font-semibold text-muted">
+              <th scope="col" className="px-4 py-3">Source</th>
+              <th scope="col" className="px-4 py-3">Fields supported</th>
+              <th scope="col" className="px-4 py-3">Evidence level</th>
+              <th scope="col" className="px-4 py-3">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {evidence.map((e, i) => {
+              const s = getSourceById(e.sourceId);
+              return (
+                <tr key={i} className="border-b border-border align-top last:border-b-0">
+                  <td className="px-4 py-4">
+                    {s ? (
+                      <>
+                        <ExtLink href={s.url} className="font-display text-sm font-medium leading-6">
+                          {s.title}
+                        </ExtLink>
+                        <p className="mt-1 text-xs leading-5 text-muted">
+                          {s.publisher} ·{" "}
+                          <Link href={"/sources/"+s.id} className="text-accent hover:underline">
+                            Source dossier
+                          </Link>
+                        </p>
+                      </>
+                    ) : (
+                      <span className="font-mono text-xs">{e.sourceId}</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-4">
+                    <ul className="space-y-1 text-sm leading-6 text-muted">
+                      {e.supports.map(f=><li key={f}>{fieldLabels[f]}</li>)}
+                    </ul>
+                  </td>
+                  <td className="px-4 py-4">
+                    <Badge accent={e.evidence === "explicit"}>{evidenceLevelLabels[e.evidence]}</Badge>
+                    {e.note ? <p className="mt-2 max-w-xs text-sm leading-6 text-muted [overflow-wrap:anywhere]">{e.note}</p> : null}
+                  </td>
+                  <td className="px-4 py-4 text-sm leading-6 text-muted [overflow-wrap:anywhere]">{e.locator ?? "Not stated"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -250,9 +287,9 @@ export function EvidenceTable<F extends string>({
 /** A labelled fact row for the record sheets. */
 export function Fact({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-1 gap-1 border-b border-border py-3 last:border-b-0 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-4">
-      <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{label}</dt>
-      <dd className="min-w-0 text-sm leading-6">{children}</dd>
+    <div className="grid grid-cols-1 gap-1.5 border-b border-border py-4 last:border-b-0 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-5">
+      <dt className="font-display text-xs font-semibold leading-5 text-muted">{label}</dt>
+      <dd className="min-w-0 text-[0.9375rem] leading-7 [overflow-wrap:anywhere]">{children}</dd>
     </div>
   );
 }

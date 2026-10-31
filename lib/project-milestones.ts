@@ -54,6 +54,7 @@ export function validateProjectMilestones(input: unknown, refs: References): str
   const sources = new Map(refs.sources.map((s) => [s.id, s]));
   const ids = new Set<string>();
   const claims = new Set<string>();
+  const datedPhysicalEvents = new Map<string, string>();
   let previous = "";
 
   if (!isMilestoneIsoDate(refs.corpusDate)) return ["project milestones: invalid corpus cutoff"];
@@ -76,7 +77,7 @@ export function validateProjectMilestones(input: unknown, refs: References): str
     if (m.scope === "whole_project") {
       if (m.scopeAsStated !== null) fail("whole_project requires scopeAsStated: null");
     } else if (!nonblank(m.scopeAsStated)) {
-      fail("named facility and funded activity require explicit scopeAsStated");
+      fail("named facility, funded activity and bounded workstream require explicit scopeAsStated");
     }
     if (typeof m.scopeAsStated === "string" && m.scopeAsStated.length > 250)
       fail("scopeAsStated is too long");
@@ -86,13 +87,18 @@ export function validateProjectMilestones(input: unknown, refs: References): str
       fail("funded_activity_completed requires funded_activity scope");
     if (m.scope === "funded_activity" && m.kind !== "funded_activity_completed")
       fail("funded_activity scope cannot assert facility construction or operation");
+    // Limited site-access, preparatory, or phase-specific construction is not
+    // proof of full-project construction, commissioning, operation, or output.
+    if (m.scope === "bounded_project_workstream" &&
+        !["groundbreaking_reported", "construction_started", "construction_progress_reported"].includes(String(m.kind)))
+      fail("bounded_project_workstream permits only scoped construction kinds, not operations, production, or completed financed activities");
 
     // Issuer-reported construction status is NOT a dated start or completion.
     if (m.kind === "construction_progress_reported") {
       if (m.claimMode !== "occurred")
         fail("construction_progress_reported requires an occurred observation, not a planned target");
-      if (m.scope !== "named_facility")
-        fail("construction_progress_reported requires named_facility scope");
+      if (m.scope !== "named_facility" && m.scope !== "bounded_project_workstream")
+        fail("construction_progress_reported requires named_facility scope or bounded_project_workstream scope");
       if (m.occurredOn !== null)
         fail("construction_progress_reported requires occurredOn: null (the status-report date is not an event date)");
       if (!nonblank(m.note))
@@ -166,6 +172,23 @@ export function validateProjectMilestones(input: unknown, refs: References): str
     ]);
     if (claims.has(signature)) fail("duplicate assertion identity (multiple financers do not create new milestones)");
     claims.add(signature);
+
+    // A dated physical event is one occurrence, regardless of how many primary
+    // publishers or financing records describe it. Undated status observations
+    // deliberately remain source-specific: distinct reporting snapshots must
+    // not be collapsed into a fabricated event with an inferred day.
+    if (m.claimMode === "occurred" && isMilestoneIsoDate(m.occurredOn)) {
+      const scopeIdentity = typeof m.scopeAsStated === "string"
+        ? m.scopeAsStated.trim().replace(/\s+/g, " ").toLowerCase()
+        : null;
+      const eventIdentity = JSON.stringify([
+        m.projectId, m.kind, m.scope, scopeIdentity, m.occurredOn,
+      ]);
+      const existing = datedPhysicalEvents.get(eventIdentity);
+      if (existing && existing !== id)
+        fail("duplicate dated physical event across sources (already represented by " + existing + ")");
+      else datedPhysicalEvents.set(eventIdentity, id);
+    }
   }
   return issues;
 }
