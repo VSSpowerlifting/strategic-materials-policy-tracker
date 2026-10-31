@@ -74,6 +74,8 @@ export type PathwayMilestone = {
   evidence: PathwaySourceReference;
   reviewer: string;
   reviewedOn: string;
+  /** Preserve the source-reviewed scope caveat through every casefile projection. */
+  note: string | null;
   /** Independently reviewed project assertion, never a financier status. */
   assertion: "reviewed_project_native";
 };
@@ -221,7 +223,8 @@ export function buildProjectEvidencePathway(
       speakerStatementOriginal: m.statementOriginal, speakerStatementEn: m.statementEn,
       translationProvenance: m.statementEnSource,
       evidence: sourceRef(m.sourceId, m.locator), reviewer: m.reviewedBy,
-      reviewedOn: m.reviewedAt, assertion: "reviewed_project_native",
+      reviewedOn: m.reviewedAt, note: m.note ?? null,
+      assertion: "reviewed_project_native",
     };
   });
 

@@ -153,3 +153,35 @@ test("O3: cohort order and rendered source coverage are deterministic",()=>{
   renderToStaticMarkup(createElement(PrivateObservatoryCasefile,{item:a.cases[0]}));
   assert.equal(JSON.stringify(a),original,"rendering does not mutate source-linked input");
 });
+
+test("O3: scoped early-works qualification survives the graph, draft and private UI",()=>{
+  const data=corpus();
+  const source=data.sources.find(s=>s.id==="src-perpetua-stibnite-early-works-2025");
+  assert.ok(source,"the actual Stibnite original issuer source must be registered");
+  const fake:ProjectMilestone={
+    id:"mil-o3-synthetic-stibnite-earlyworks",
+    projectId:"prj-us-stibnite",
+    kind:"construction_started",claimMode:"occurred",
+    scope:"whole_project",scopeAsStated:null,
+    occurredOn:"2025-10-21",targetOn:null,
+    sourceId:source.id,
+    locator:"TEST fixture pinpoint; NOT independently reviewed",
+    statementOriginal:"Synthetic early-works issuer statement",
+    statementEn:"Synthetic early-works issuer statement",
+    statementEnSource:"na",
+    reviewedBy:"synthetic test fixture; not an actual human reviewer",
+    reviewedAt:"2026-10-07",
+    note:"Only early works; no evidence that the entire mine entered full-scale construction.",
+  };
+  const preview=buildF5ObservatoryScaffold({...data,milestones:[fake]},site.lastUpdated);
+  const record=preview.cases.find(c=>c.comparison.projectId===fake.projectId);
+  assert.ok(record);
+  assert.equal(record.draft.lanes.physical.occurred.length,1);
+  assert.equal(record.draft.lanes.physical.occurred[0].note,fake.note);
+  const rendered=html(preview);
+  assert.match(rendered,/Editorial qualification: Only early works;/);
+  assert.match(rendered,/Registered project \(extent limited by original source and editorial qualification\)/);
+  assert.ok(!rendered.includes("Entire registered project"));
+  assert.equal(preview.publicReleaseAuthorized,false);
+  assert.ok(!getAllProjectMilestones().some(m=>m.id===fake.id),"test fixtures must never enter the public seed");
+});
