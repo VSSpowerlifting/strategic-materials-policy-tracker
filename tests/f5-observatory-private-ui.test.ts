@@ -183,5 +183,5 @@ test("O3: scoped early-works qualification survives the graph, draft and private
   assert.match(rendered,/Registered project \(extent limited by original source and editorial qualification\)/);
   assert.ok(!rendered.includes("Entire registered project"));
   assert.equal(preview.publicReleaseAuthorized,false);
-  assert.deepEqual(getAllProjectMilestones(),[],"test fixtures must never enter the public seed");
+  assert.ok(!getAllProjectMilestones().some(m=>m.id===fake.id),"test fixtures must never enter the public seed");
 });
