@@ -73,8 +73,9 @@ These checks ran on a production build (`next build && next start`) in a browser
 
 - **Overflow.** No horizontal overflow on the home page (all three widths), on an event detail page (375 and 1440), or on `/capital` and `/events` (1440).
 - **Small-screen menu.** Below `lg` the header collapses into one disclosure. It lists Overview, the five journeys with their questions, then Search, Saved and About. It closes on Escape (returning focus to the toggle), on an outside click or focus, on navigation, and when any of its links is tapped, including the link to the page already open. Its height leaves room for the sticky bar and, inside a journey, the views row too, so its last link can always scroll into view. At 375×667 on `/events`, the last link ends at 626px. Inside a journey, the second row scrolls horizontally within itself.
+- **Views row and the keyboard.** The row clips its overflow, so each view link draws its focus ring inset (`outline-offset: -2px`) and scrolls itself fully into view when focused. Without that, the ring was cut off at the top and bottom at every width, and at 375px a focused "Governments" showed only 11px. Tabbing through all seven Government action views at 375, 768, 1024 and 1280px leaves every focused link, and its ring, inside the row. A test in `tests/navigation-journeys.test.ts` guards both settings.
 - **Console.** Zero console errors or warnings on the production build.
-- **Not done.** No automated axe or Lighthouse pass was run. Screen-reader testing was limited to checking the markup.
+- **Automated accessibility (axe-core 4.10.2, WCAG 2.0/2.1 A and AA plus best practice).** No violations on the home page, an event detail page, `/compare` and `/projects`. The violations axe reported come from code this PR does not change and were left alone: `link-in-text-block` (inline gold links on `/capital`, a capital detail page, a project detail page and `/events`), the contrast of one chart-cell button on `/capital` (3.92:1), and an h1→h3 skip in the `/events` result cards. Screen-reader testing was limited to checking the markup. No Lighthouse pass was run.
 
 ## Screenshot index (`screenshots/`)
 

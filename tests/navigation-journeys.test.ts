@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { headerNav, isNavCurrent, journeys, nav, secondaryNav } from "../lib/site";
@@ -96,4 +96,13 @@ test("an event detail page leads back to its journey through the breadcrumb", as
   const trail = /<nav aria-label="Breadcrumb"[\s\S]*?<\/nav>/.exec(view)?.[0] ?? "";
   assert.match(trail, /href="\/events"[^>]*>Government action</);
   assert.match(trail, /aria-current="page"/);
+});
+
+test("views-row links stay visible to keyboard users inside their scroller", () => {
+  // The row clips its overflow, so an outset focus ring or a half-scrolled link would be hidden. SiteHeader needs
+  // the router to render, so this checks the source of the views-row link.
+  const source = readFileSync("components/site-header.tsx", "utf8");
+  const row = source.slice(source.indexOf("journey.views.map"), source.indexOf("{view.label}"));
+  assert.match(row, /onFocus=\{\(e\) => e\.currentTarget\.scrollIntoView\(\{ block: "nearest", inline: "nearest" \}\)\}/);
+  assert.match(row, /focus-visible:outline-offset-\[-2px\]/);
 });

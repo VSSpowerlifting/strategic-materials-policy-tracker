@@ -178,11 +178,12 @@ export function SiteHeader() {
         </Container>
 
         {/* The current journey's own views. Shown only inside a journey that has more than one, so the header
-            never lists every page at once; on narrow screens the row scrolls inside itself. */}
+            never lists every page at once; on narrow screens the row scrolls inside itself. The scroller clips
+            anything outside it, so the focus ring is drawn inset and a focused view is scrolled fully into sight. */}
         {hasViewsRow ? (
           <div className="border-t border-border">
             <Container width="wide" className="flex h-9 items-center gap-6">
-              <nav aria-label={`${journey.label} views`} className="-mx-2 flex min-w-0 flex-1 items-stretch overflow-x-auto [scrollbar-width:none]">
+              <nav aria-label={`${journey.label} views`} className="-mx-2 flex min-w-0 flex-1 items-stretch self-stretch overflow-x-auto [scrollbar-width:none]">
                 {journey.views.map((view) => {
                   const current = isActive(pathname, view.href);
                   return (
@@ -190,8 +191,9 @@ export function SiteHeader() {
                       key={view.href}
                       href={view.href}
                       aria-current={ariaCurrent(pathname, view.href, current)}
+                      onFocus={(e) => e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}
                       className={cn(
-                        "flex shrink-0 items-center whitespace-nowrap px-2 font-display text-[0.8125rem] text-muted transition-colors hover:text-foreground",
+                        "flex shrink-0 items-center whitespace-nowrap px-2 font-display text-[0.8125rem] text-muted transition-colors hover:text-foreground focus-visible:outline-offset-[-2px]",
                         current && "font-semibold text-accent",
                       )}
                     >
