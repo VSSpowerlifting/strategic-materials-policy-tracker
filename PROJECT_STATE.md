@@ -2,7 +2,8 @@
 
 - Announcement No. 70 of 2025 still ends on **10 November 2026** in the official record. MOFCOM's 28 September 2026 reading says the Kuala Lumpur arrangement was extended to 10 January 2027 but names neither No. 70 nor rare earths, and no numbered announcement amending No. 70 appears in MOFCOM's policy releases as of 30 October.
 - Found a missing 2026 China measure: MOFCOM Announcement No. 23 of 2026 (22 June) put MP Materials and USA Rare Earth, with eight drone and defence firms, on the export-control control list.
-- Both are unverified `draft` candidates (private file); verbatim evidence, open questions and a restorable copy are in [cn-suspension-expiry-watch-2026-10-31.md](docs/analysis/cn-suspension-expiry-watch-2026-10-31.md). Recheck MOFCOM around 7 to 11 November and before 27 November (No. 72 end date for No. 46 Art. 2).
+- Screened the other 2026 MOFCOM entity listings (Nos. 11, 12, 27, 28, 30): No. 12 (watch list: TDK, Mitsubishi Materials) and No. 30 (control list: Sindlhauser Materials) are scope leads; entity listings need a methodology decision before any is coded.
+- All are unverified `draft` candidates (private file); verbatim evidence, open questions and a restorable copy are in [cn-suspension-expiry-watch-2026-10-31.md](docs/analysis/cn-suspension-expiry-watch-2026-10-31.md). Recheck MOFCOM around 7 to 11 November and before 27 November (No. 72 end date for No. 46 Art. 2).
 
 ## 2026-10-23: integrated research-product revision (draft PR #181)
 

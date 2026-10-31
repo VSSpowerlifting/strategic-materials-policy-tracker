@@ -42,7 +42,22 @@ What the text does **not** do:
 
 **Open methodology question:** the instrument names no material. Its reach to rare earths runs through the general dual-use list (which includes the seven elements of Announcement No. 18 of 2025). Should `affectedMaterialIds` stay empty with the link carried by the named organizations, or list the No. 18 elements? The draft leaves it empty.
 
-**Leads not yet checked:** MOFCOM's 2026 control-list announcements for Japanese entities (No. 11, 24 February; No. 28) and EU entities (No. 30, 24 July) should be screened for materials firms.
+**Related listings:** see Finding 3.
+
+## Finding 3: screening the other 2026 MOFCOM entity listings
+
+Each announcement below was read in full on 31 October 2026. The listing texts give names (and usually addresses) only, so any scope link rests on the listed firm's own description, which is weaker evidence than the instrument itself.
+
+| Announcement | Date | List | In SMPT scope? |
+| --- | --- | --- | --- |
+| [No. 11](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_b5159a773124428a9813884015d1b8b3.html) | 24 Feb 2026 | Control list, 20 Japanese entities | No. Defence and aerospace entities; the text says they take part in enhancing Japan's military strength. |
+| [No. 12](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_bac18400512d408a8d4c2f964e36ac11.html) | 24 Feb 2026 | **Watch list**, 20 Japanese entities | Lead. Includes **TDK** (its product site describes NEOREC neodymium magnets) and **Mitsubishi Materials** (its site describes a tungsten business). A watch-list entry tightens licensing; it is not a ban. |
+| [No. 23](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_dfa9cc5c1e004d7fbb86f83d249e7986.html) | 22 Jun 2026 | Control list, 10 US entities | Yes (Finding 2). |
+| [No. 27](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_df87be1437044874a35f85cf6e076f3d.html) | 29 Jun 2026 | Control list, 20 Japanese entities | No. Defence research institutes and contractors. |
+| [No. 28](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_c2ab731429dc4bc3ba8696cd0e6ad857.html) | 29 Jun 2026 | Watch list, 20 Japanese entities | No. Includes nuclear-fuel firms, outside the material set. |
+| [No. 30](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_2c9a32aa73bf4f5ea80ffa83e62fb259.html) | 24 Jul 2026 | Control list, 14 EU entities | Lead. Includes **Sindlhauser Materials GmbH**, whose own homepage says it supplies sputter targets of bonded rare-earth metals and LaB6 ceramics. Lafert, Garnet and Antraco Chemie not yet screened. |
+
+**Methodology decision needed first:** SMPT has so far coded China's material-based controls, not entity listings. Before promoting any of Nos. 12, 23 or 30, the maintainer should decide whether entity listings are in scope, and whether the link to scope may rest on the listed firm's own business description. Drafts `cand-cn-mofcom-12-2026` and `cand-cn-mofcom-30-2026` hold the details.
 
 ## Out of scope, checked and set aside
 
@@ -198,6 +213,139 @@ The working copies live in the git-ignored `data/candidates/candidates.json`. Th
       "Recheck MOFCOM policy releases and the export-control catalogue (aqygzj.mofcom.gov.cn/qdml/) daily from 7 to 11 November 2026.",
       "Announcement No. 72 of 2025 suspends Article 2 of No. 46 of 2024 only until 27 November 2026 (see evt-cn-us-ban-2024); does the same extension reach it?",
       "Does the US side's 50% affiliates-rule suspension (secondary sources say also extended to 10 January 2027) belong in a separate US candidate?"
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotedEventId": null,
+      "promotedAt": null,
+      "approvedBy": null
+    }
+  },
+  {
+    "candidateId": "cand-cn-mofcom-12-2026",
+    "status": "draft",
+    "createdBy": "policy-researcher",
+    "createdAt": "2026-10-31",
+    "updatedAt": "2026-10-31",
+    "proposedEvent": {
+      "date": "2026-02-24",
+      "jurisdiction": "china",
+      "issuingBody": "MOFCOM",
+      "titleOriginal": "商务部公告2026年第12号 公布将20家日本实体列入关注名单",
+      "titleOriginalLang": "zh",
+      "titleEn": "MOFCOM Announcement No. 12 of 2026: adding 20 Japanese entities to the watch list",
+      "titleEnSource": "self",
+      "documentNumber": "MOFCOM Announcement No. 12 (2026)",
+      "policyStatus": "in_force",
+      "mechanism": [
+        "export_control",
+        "dual_use_license"
+      ],
+      "affectedMaterialIds": [],
+      "affectedSectors": [],
+      "summary": "Adds 20 Japanese entities whose end users and end uses of dual-use items cannot be verified to MOFCOM's watch list (关注名单), under the Export Control Law and the Dual-Use Items Export Control Regulations. Exports of dual-use items to them may not use general licences or registration-based export certificates; single-licence applications must include a risk-assessment report on the listed entity and a written commitment that the items will not be used for any purpose that helps enhance Japan's military strength, and the review period is not bound by Article 17(1) of the Regulations. MOFCOM will apply stricter end-user and end-use review and will not approve exports involving Japanese military users or uses or any other end use that helps enhance Japan's military strength. Listed entities that fulfil verification obligations under Article 26 may apply for removal. Effective from publication on 24 February 2026. The annex includes Mitsubishi Materials Corporation (item 8) and TDK Corporation (item 12).",
+      "analyticalSignificance": "Not yet coded. A watch-list entry is a stricter licensing regime, not a prohibition; it must not be described as an export ban.",
+      "sourceIds": [
+        "cand-src-mofcom-12-2026"
+      ],
+      "intakeMode": "backfill"
+    },
+    "proposedFraming": [],
+    "proposedSources": [
+      {
+        "id": "cand-src-mofcom-12-2026",
+        "title": "商务部公告2026年第12号 公布将20家日本实体列入关注名单",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_bac18400512d408a8d4c2f964e36ac11.html",
+        "language": "zh",
+        "datePublished": "2026-02-24",
+        "dateAccessed": "2026-10-31",
+        "sourceType": "official",
+        "confidence": "primary",
+        "notes": "Full text and annex read 2026-10-31. 发文日期 2026年02月24日. Opening clause verbatim: 决定将斯巴鲁株式会社等无法核实两用物项最终用户、最终用途的20家日本实体列入关注名单. No stated national-security purpose clause, unlike the control-list announcements. Annex item 8: 三菱材料株式会社（Mitsubishi Materials Corporation）; item 12: TDK株式会社（TDK Corporation）; item 15: 东金株式会社（Tokin Corporation）. Annex gives names only, no addresses."
+      }
+    ],
+    "verification": {
+      "verdict": "pending"
+    },
+    "classification": {
+      "confidence": "low",
+      "ambiguityFlags": [
+        "Scope link rests on the listed companies' own product descriptions, not on the instrument",
+        "Watch list, not control list: stricter review, not a ban"
+      ]
+    },
+    "reviewerNotes": "Scope leads, from search excerpts of company pages (read in full before relying on them): TDK's product site describes its NEOREC neodymium (NdFeB) magnet series (https://product.tdk.com/en/products/magnet/magnet/neodymium/index.html); Mitsubishi Materials describes a tungsten business and tungsten recycling (https://www.mmc.co.jp/corporate/en/business/tungsten/). Neither company is in the organization registry. The companion control-list announcement of the same date, No. 11, lists only defence and aerospace entities and is out of scope.",
+    "openQuestions": [
+      "Does SMPT code entity listings at all, and if so what links a listing to scope: the instrument, or the listed firm's own business?",
+      "If coded, should the four 2026 listings (Nos. 12, 23, 30 and any later) be separate events or one series record?"
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotedEventId": null,
+      "promotedAt": null,
+      "approvedBy": null
+    }
+  },
+  {
+    "candidateId": "cand-cn-mofcom-30-2026",
+    "status": "draft",
+    "createdBy": "policy-researcher",
+    "createdAt": "2026-10-31",
+    "updatedAt": "2026-10-31",
+    "proposedEvent": {
+      "date": "2026-07-24",
+      "jurisdiction": "china",
+      "issuingBody": "MOFCOM",
+      "titleOriginal": "商务部公告2026年第30号 公布将14家欧盟实体列入出口管制管控名单",
+      "titleOriginalLang": "zh",
+      "titleEn": "MOFCOM Announcement No. 30 of 2026: adding 14 EU entities to the export-control control list",
+      "titleEnSource": "self",
+      "documentNumber": "MOFCOM Announcement No. 30 (2026)",
+      "policyStatus": "in_force",
+      "mechanism": [
+        "export_control"
+      ],
+      "affectedMaterialIds": [],
+      "affectedSectors": [],
+      "summary": "Adds 14 entities in Italy, Germany, France, Poland, the Netherlands, the Czech Republic, Bulgaria and Lithuania to China's export-control control list under the Export Control Law and the Dual-Use Items Export Control Regulations. Exporters may not export dual-use items to them, and foreign organisations and individuals may not transfer or provide dual-use items originating in the PRC to them; related activities under way must stop immediately. Export genuinely needed in special circumstances requires an application to MOFCOM. Effective from publication on 24 July 2026. The annex includes Sindlhauser Materials GmbH (Kempten, Germany, item 3).",
+      "analyticalSignificance": "Not yet coded.",
+      "sourceIds": [
+        "cand-src-mofcom-30-2026"
+      ],
+      "intakeMode": "backfill"
+    },
+    "proposedFraming": [],
+    "proposedSources": [
+      {
+        "id": "cand-src-mofcom-30-2026",
+        "title": "商务部公告2026年第30号 公布将14家欧盟实体列入出口管制管控名单",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_2c9a32aa73bf4f5ea80ffa83e62fb259.html",
+        "language": "zh",
+        "datePublished": "2026-07-24",
+        "dateAccessed": "2026-10-31",
+        "sourceType": "official",
+        "confidence": "primary",
+        "notes": "Full text and annex read 2026-10-31. 发文日期 2026年07月24日. Justification clause verbatim: 为维护国家安全和利益，履行防扩散等国际义务. Operative clause 一 verbatim: 禁止出口经营者向上述14家实体出口两用物项，禁止境外组织和个人将原产于中华人民共和国的两用物项转移或提供给上述14家实体；正在开展的相关活动应当立即停止。 Note the wording differs from No. 23 of 2026 (境外组织和个人 here; 任何国家和地区的组织和个人 there). Annex item 3: 辛德豪瑟材料有限公司（Sindlhauser Materials GmbH）, Daimlerstraße 68, Kempten, Germany."
+      }
+    ],
+    "verification": {
+      "verdict": "pending"
+    },
+    "classification": {
+      "proposedFramingCategories": [
+        "national_security"
+      ],
+      "confidence": "low",
+      "ambiguityFlags": [
+        "Scope link rests on the listed company's own description, not on the instrument"
+      ]
+    },
+    "reviewerNotes": "Sindlhauser's own English homepage (read in full 2026-10-31, https://www.sindlhauser.de/en/) says it has supplied, since 1995, 'materials for coating such as sputter targets made from oxide and non-oxide ceramics or bonded rare earth metals, as well as metals and alloys', and lists tungsten, tantalum and molybdenum components and LaB6 (lanthanum hexaboride) ceramic and cathodes. The other 13 entities were not screened against their own sources; several (Lafert, Garnet, Antraco Chemie) need checking before ruling them out. Secondary coverage (biggo.com) links Sindlhauser to Chinese rare-earth export controls; not evidence.",
+    "openQuestions": [
+      "Same methodology question as cand-cn-mofcom-12-2026.",
+      "Screen Lafert S.p.A., Garnet S.r.l. and Antraco Chemie-Handelsgesellschaft against their own sources."
     ],
     "promotion": {
       "promoted": false,
