@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import Link from "next/link";
 import {Container,PageHeading} from "@/components/ui/container";
 import {ProgrammesExplorer} from "@/components/programmes-explorer";
+import {ResearchReadingKey} from "@/components/capital/reading-guide";
 import {programmeLedger} from "@/lib/capital-intelligence";
 import {buildProgrammeDirectory} from "@/lib/programme-directory";
 import {getAllOrganizations,getAllProgrammes} from "@/lib/data";
@@ -20,6 +21,7 @@ export default function ProgrammesPage(){
  return <Container className="py-12">
   <PageHeading index="06" eyebrow="Capital intelligence" title="Programmes"
    lead="Explore the government schemes through which financing, incentives and project designations are recorded. A named ceiling or lending authority is not an amount spent; the tracker records selected financial rows, not complete programme utilization."/>
+  <ResearchReadingKey topic="programmes" />
   <div className="mt-10"><ProgrammesExplorer rows={rows}/></div>
   <p className="mt-8 text-sm text-muted">
    Download: <a href="/api/export/programmes.csv" className="text-accent hover:underline">Programme CSV</a>
