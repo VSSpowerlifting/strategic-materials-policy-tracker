@@ -1,4 +1,4 @@
-## 2026-11-01: DFARS 2027 covered-materials brief and private candidates (draft, uncommitted)
+## 2026-11-01: DFARS 2027 covered-materials brief and private candidates (brief committed; candidates private)
 
 - Branch `claude/smpt-resume-improvements-f91ac8` from `f3df7c0`. No `data/seed/*`, taxonomy, code, API, export or `site.lastUpdated` change.
 - Two unreviewed drafts were added to the git-ignored `data/candidates/candidates.json`. `cand-us-dfars-sensitive-materials-2027` covers 10 U.S.C. 4872 and DFARS 225.7018 / 252.225-7052; the 1 January 2027 mined/refined/separated stage is checked against govinfo and acquisition.gov. `cand-us-ndaa-fy2026-covered-materials-2025` covers PL 119-60 §§843, 844(a), 844(b) and 848. Its section numbers and text were checked on 2026-11-01 against the enrolled PL 119-60 on govinfo (approved 18 December 2025; 139 Stat. 975–979). H.R. 9073 is noted as pending only. Both need human source review and the promotion step.
