@@ -49,7 +49,7 @@ test("exact same Thompson M3 registry original, named facility and unsigned meta
   assert.equal(existingBrief.primaryOriginal.evidenceSourceId,w.originalSource.id);
   assert.equal(triangulation.canonicalReviewId,w.id);
   assert.equal(getAllProjects().filter(x=>x.id===w.project.id).length,1);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length,2);
 });
 
 test("December 2025 DEQ permit #2973-05 is independent but not a newly registered source",()=>{
@@ -128,8 +128,8 @@ test("original-source edges cannot turn regulatory authorization into audited ph
   assert.equal(permit.sourceEvidenceEdges[0].doesNotSupport,"all_new_units_commissioned_or_realized_output");
   assert.equal(permit.sourceEvidenceEdges[1].doesNotSupport,"all_nine_operating_together_or_nameplate_tonnage");
   assert.equal(permit.sourceEvidenceEdges[2].doesNotSupport,"exact_commissioning_day_or_full_capacity");
-  assert.equal(site.lastUpdated,"2026-10-09");
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(site.lastUpdated,"2026-10-17");
+  assert.equal(getAllProjectMilestones().length,2);
 });
 
 test("genuine regulator followup identified without claiming records obtained or request sent",()=>{

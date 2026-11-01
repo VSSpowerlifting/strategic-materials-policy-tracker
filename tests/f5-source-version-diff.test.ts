@@ -35,7 +35,7 @@ test("F5-5 private handoff anchors exact bytes, review key and readable context"
   assert.equal(r.publicReleaseAuthorized, false);
   assert.equal(r.automatedPromotionAuthorized, false);
   assert.equal(r.entityLinksAdjudicated, false);
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length,2);
 });
 
 test("F5-5 refuses altered body, wrong source, outage and absent review key", () => {
@@ -80,7 +80,7 @@ test("F5-5 local CLI is deterministic and never writes a review or published mil
     assert.equal(a, b);
     assert.equal(JSON.parse(a).reviewVerdict, "unreviewed");
     assert.equal(readFileSync(files[2], "utf8"), oldText);
-    assert.equal(getAllProjectMilestones().length, 0);
+    assert.equal(getAllProjectMilestones().length,2);
     assert.throws(() => execFileSync(process.execPath, [...args, "--publish"], { stdio: "pipe" }));
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

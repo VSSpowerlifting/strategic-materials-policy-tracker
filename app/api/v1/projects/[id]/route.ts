@@ -5,7 +5,7 @@
  */
 import { projectStack } from "@/lib/capital-intelligence";
 import { evidenceSourceIds } from "@/lib/capital-control";
-import { getAllProjects, getSourcesByIds } from "@/lib/data";
+import { getAllProjects, getProjectMilestonesByProject, getSourcesByIds } from "@/lib/data";
 
 export const dynamic = "force-static";
 
@@ -23,7 +23,14 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   const { id } = await params;
   const stack = projectStack(id);
   if (!stack) return json({ error: "not found", id }, 404);
-  // The capital stack as layers of one value role each; only committed money carries totals.
+  // The capital stack remains its own lane; reviewing a primary-source statement
+  // never establishes cash disbursement, operating output, or causal effect.
+  const reviewedProjectMilestones = getProjectMilestonesByProject(id);
+  const reviewedMilestoneSources = getSourcesByIds(
+    [...new Set(reviewedProjectMilestones.map(m => m.sourceId))],
+  );
+  if (reviewedMilestoneSources.length !== new Set(reviewedProjectMilestones.map(m=>m.sourceId)).size)
+    throw new Error("Public reviewed milestone has a missing registered source");
   return json({
     project: stack.project,
     governments: stack.governments,
@@ -32,6 +39,11 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     associatedRowIds: stack.associatedRows.map((c) => c.id),
     designationIds: stack.designations.map((d) => d.id),
     latestImplementation: stack.latestImplementation,
+    // Additive v1 fields: reviewed project-native evidence is distinct from
+    // financing-row implementation histories and the project's base citations.
+    reviewedProjectMilestones,
+    reviewedMilestoneSources,
+    reviewedMilestoneEvidenceBasis: "human-reviewed original publisher claim; not independent on-site or financial verification",
     sources: getSourcesByIds(evidenceSourceIds(stack.project)),
   });
 }

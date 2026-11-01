@@ -23,7 +23,7 @@ test("M3 workbench: seven source-linked packets, no reviewer identities, no publ
   assert.equal(p.schemaVersion, "m3-reviewer-packet-1");
   assert.equal(p.publicationAuthorized, false);
   assert.equal(p.automaticSourceApprovalAuthorized, false);
-  assert.equal(p.publicMilestoneCount, 0);
+  assert.equal(p.publicMilestoneCount,2);
   assert.equal(p.totalQueueCandidates, 7);
   assert.equal(p.awaitingSourceReview, 4);
   assert.equal(p.blockedOnTaxonomy, 3);
@@ -34,7 +34,7 @@ test("M3 workbench: seven source-linked packets, no reviewer identities, no publ
   assert.ok(p.worksheets.every(w => w.reviewerChecks.length===5));
   assert.ok(p.worksheets.every(w => /^[a-f0-9]{64}$/.test(w.reviewInputDigestSha256)));
   assert.ok(p.worksheets.every(w => /^https?:\/\//.test(w.originalSource.url)));
-  assert.equal(getAllProjectMilestones().length, 0);
+  assert.equal(getAllProjectMilestones().length,2);
 });
 
 test("M3 workbench: Narva retains unknown production date and distinguishes source report", () => {
@@ -110,12 +110,18 @@ test("M3 workbench: fingerprints reflect real changes to reviewed source or quot
   edited[0].statementEn=edited[0].statementOriginal;
   const changed=buildM3ReviewerPackets(edited,references).worksheets[0].reviewInputDigestSha256;
   assert.notEqual(before,changed);
+
+  const alternateKind=input();
+  alternateKind[0].kindProposal="construction_started";
+  const alternateDigest=buildM3ReviewerPackets(alternateKind,references).worksheets[0].reviewInputDigestSha256;
+  assert.notEqual(before,alternateDigest,
+    "changing Wagerup from a groundbreaking to a construction-start proposal invalidates old review fingerprints");
   const newRefs=refs();
   newRefs.sources=newRefs.sources.map(s=>s.id===original[0].sourceId
     ? {...s,dateAccessed:"2026-10-08"} : s);
   const altered=buildM3ReviewerPackets(input(),newRefs).worksheets[0].reviewInputDigestSha256;
   assert.notEqual(before,altered);
-  assert.equal(getAllProjectMilestones().length,0);
+  assert.equal(getAllProjectMilestones().length,2);
 });
 
 test("M3 workbench: invalid reviews, source URL, corpus date and unknown IDs fail closed", () => {

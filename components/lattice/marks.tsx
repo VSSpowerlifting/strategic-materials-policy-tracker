@@ -81,7 +81,7 @@ export function KindSwatch({ kind, className, onPaper = false }: { kind: MarkKin
         <path d="M6 1.2 10.8 6 6 10.8 1.2 6Z" fill="none" stroke={onPaper ? "var(--paper-fg)" : "var(--mark-designation)"} strokeWidth="1.4" strokeLinejoin="round" />
       </svg>
     );
-  return <span aria-hidden className={cn("inline-block h-2.5 w-2.5 shrink-0 rounded-full", className)} style={{ background: FILL[kind] }} />;
+  return <span aria-hidden className={cn("inline-block h-2.5 w-2.5 shrink-0 rounded-full", className)} style={{ background: FILL[kind], ...(onPaper ? { border: "1px solid var(--paper-accent)" } : {}) }} />;
 }
 
 /** Sample discs for the "area is a number of records" legend. */

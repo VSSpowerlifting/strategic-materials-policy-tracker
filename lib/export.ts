@@ -13,6 +13,7 @@ import {
   getAllOrganizations,
   getAllProgrammes,
   getAllProjectDesignations,
+  getAllProjectMilestones,
   getAllProjects,
   getAllSources,
 } from "./data";
@@ -73,6 +74,7 @@ export function buildDataset() {
       projects: getAllProjects().length,
       programmes: getAllProgrammes().length,
       projectDesignations: getAllProjectDesignations().length,
+      projectMilestones: getAllProjectMilestones().length,
     },
     events: getAllEvents(),
     framing: getAllFramingClaims(),
@@ -86,6 +88,8 @@ export function buildDataset() {
     projects: getAllProjects(),
     programmes: getAllProgrammes(),
     projectDesignations: getAllProjectDesignations(),
+    // Public signed claims only; never include private M3 adjudications or review queues.
+    projectMilestones: getAllProjectMilestones(),
     capitalIntelligenceSummary: buildCapitalIntelligenceSummary(),
   };
 }
