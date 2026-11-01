@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { ResearchReadingKey } from "@/components/capital/reading-guide";
 import { CapitalExplorer } from "@/components/capital/capital-explorer";
 import { StageMatrix } from "@/components/capital/charts";
 import { CommitmentRow, InlineAmount } from "@/components/capital/rows";
@@ -81,6 +82,8 @@ export default function CapitalPage() {
           </>
         }
       />
+
+      <ResearchReadingKey topic="capital" />
 
       <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
         {[

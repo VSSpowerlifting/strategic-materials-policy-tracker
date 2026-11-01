@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { RecordReadingGuide } from "@/components/capital/reading-guide";
 import {
   AmountDetail,
   CapitalSourceBadge,
@@ -113,6 +114,8 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
         </div>
         <p className="mt-3 font-mono text-xs text-faint">{c.id}</p>
       </header>
+
+      <RecordReadingGuide record={c} />
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="min-w-0 space-y-12">
