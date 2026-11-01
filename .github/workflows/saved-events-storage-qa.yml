@@ -1,0 +1,39 @@
+name: Saved events storage Chromium QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/saved-events-storage-qa.yml"
+      - "lib/watchlist-client.ts"
+      - "components/save-event-button.tsx"
+      - "components/saved-events-explorer.tsx"
+      - "scripts/qa-saved-events-storage-browser.mjs"
+      - "app/saved/**"
+      - "app/events/**"
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saved-events-storage-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  saved-events-storage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: node scripts/qa-saved-events-storage-browser.mjs
+      - run: test -z "$(git status --porcelain)"
