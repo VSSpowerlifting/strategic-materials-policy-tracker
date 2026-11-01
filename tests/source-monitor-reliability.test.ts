@@ -127,9 +127,10 @@ test("Federal Register next-page traversal rejects off-domain, filtered-away and
   assert.equal(scan.report.sources[1].health, "invalid_response"); // Pagination loop fails closed.
 });
 
-test("workflow stays daily, read-only, cache-recoverable and does not publish candidate or seed data", () => {
+test("workflow is manual-only, read-only, cache-recoverable and does not publish candidate or seed data", () => {
   const yml = readFileSync(".github/workflows/source-monitor-pilot.yml", "utf8");
-  assert.match(yml, /cron: "17 13 \* \* \*"/);
+  assert.match(yml, /workflow_dispatch:/);
+  assert.doesNotMatch(yml, /schedule:|cron:/);
   assert.match(yml, /permissions:\s+contents: read\s+actions: read/);
   assert.match(yml, /actions\/download-artifact@v4/);
   assert.match(yml, /smpt-monitor-state-/);

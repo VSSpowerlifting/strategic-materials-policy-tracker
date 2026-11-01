@@ -3,12 +3,8 @@ import assert from "node:assert/strict";
 
 import { addId, parseStoredIds, removeId, toggleId } from "@/lib/watchlist-client";
 
-// These test only the pure list/parse logic. The localStorage- and
-// window-event-touching functions (getSavedEventIds, saveEvent, unsaveEvent,
-// toggleSavedEvent, subscribeSavedEvents) are thin wrappers around this logic
-// plus browser APIs unavailable under node:test; they are exercised by
-// browser testing instead, the same boundary this codebase already draws for
-// clipboard code in components/cite-block.tsx.
+// Pure list/parse cases; browser storage and notifications are covered in
+// saved-events-storage.test.ts and the saved-events Chromium workflow.
 
 test("addId is idempotent and preserves existing order", () => {
   assert.deepEqual(addId([], "a"), ["a"]);

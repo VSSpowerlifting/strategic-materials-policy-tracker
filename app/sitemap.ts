@@ -39,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getAllFinancialCommitments().map((c) => entry(`/capital/${c.id}`, 0.7)),
     ...getAllControlMeasures().map((m) => entry(`/controls/${m.id}`, 0.7)),
     ...getAllOrganizations().map((o) => entry(`/organizations/${o.id}`, 0.6)),
+    entry("/projects/compare", 0.7),
     ...getAllProjects().map((p) => entry(`/projects/${p.id}`, 0.7)),
     ...getAllProgrammes().map((g) => entry(`/programmes/${g.id}`, 0.6)),
     ...getAllSources().map((s) => entry(`/sources/${s.id}`, 0.6)),

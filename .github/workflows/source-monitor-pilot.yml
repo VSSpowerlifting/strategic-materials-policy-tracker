@@ -13,9 +13,6 @@ on:
         type: boolean
         required: false
         default: false
-  schedule:
-    # Daily 13:17 UTC; schedule delivery can be delayed by GitHub.
-    - cron: "17 13 * * *"
 
 permissions:
   contents: read

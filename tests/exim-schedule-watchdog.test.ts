@@ -140,10 +140,10 @@ test("watchdog refuses corrupt provenance, malformed clock, duplicate run, or fu
   /from the future/);
 });
 
-test("independent cron is read-only, separate, and its CLI boots offline", () => {
+test("independent watchdog is manual-only, read-only, separate, and its CLI boots offline", () => {
   const yml = readFileSync(".github/workflows/exim-schedule-watchdog.yml", "utf8");
   const script = readFileSync("scripts/check-exim-schedule.ts", "utf8");
-  assert.match(yml, /cron: "37 22 \* \* \*"/);
+  assert.doesNotMatch(yml, /schedule:|cron:/);
   assert.match(yml, /workflow_dispatch:/);
   assert.match(yml, /actions: read/);
   assert.match(yml, /contents: read/);
