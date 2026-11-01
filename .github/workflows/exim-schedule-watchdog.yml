@@ -4,8 +4,6 @@
 name: SMPT EXIM independent schedule watchdog
 
 on:
-  schedule:
-    - cron: "37 22 * * *"
   workflow_dispatch:
 
 permissions:

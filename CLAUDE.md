@@ -189,8 +189,8 @@ integrity, allowed-value membership, quote anchors and translation provenance.
 ## What still needs building (v1 roadmap)
 
 - v0.6 follow-ups: the EU's second Strategic Project round and any magnet-scrap
-  export instrument; SRF (formerly SIF) project awards; EXIM, DOE and DPA Title
-  III awards; what China does when the October 2025 suspension ends on
+  export instrument; SRF (formerly SIF) project awards; DPA Title III awards;
+  what China does when the October 2025 suspension ends on
   10 November 2026. Earlier items:
 
 - Event records for Australia (Lynas / Iluka), Japan (JOGMEC) and Canada so all six
