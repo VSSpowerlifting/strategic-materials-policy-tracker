@@ -12,6 +12,7 @@ import { jurisdictionLabels, mechanismLabels } from "@/lib/labels";
 import { JURISDICTIONS, MECHANISMS } from "@/lib/types";
 import type { JurisdictionCode, Mechanism } from "@/lib/types";
 import { site } from "@/lib/site";
+import { buildSearchReferences, searchReferencesCsv } from "@/lib/search-references";
 import { selectClass } from "@/components/capital/filter-controls";
 
 const ALL = "all";
@@ -57,6 +58,7 @@ function subscribeDesktop(cb: () => void) {
 
 export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
   const [query, setQuery] = useState("");
+  const [downloadError, setDownloadError] = useState(false);
   const [kind, setKind] = useState<string>(ALL);
   const [actor, setActor] = useState<string>(ALL);
   const [mechanism, setMechanism] = useState<string>(ALL);
@@ -175,6 +177,34 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
       ? { key: "mechanism", kind: "mechanism", label: mechanismLabels[mechanism as Mechanism], clear: () => setMechanism(ALL) }
       : null,
   ].filter((c): c is FilterChip => c !== null);
+
+  function downloadResults(format: "csv" | "json") {
+    setDownloadError(false);
+    let url: string | undefined;
+    let anchor: HTMLAnchorElement | undefined;
+    try {
+      const references = buildSearchReferences(results, {query, kind, actor, mechanism}, {
+        siteUrl: site.url, corpusRevision: site.lastUpdated, scopeStart: site.scopeStart,
+      });
+      const text = format === "csv" ? "\ufeff" + searchReferencesCsv(references) : JSON.stringify(references, null, 2) + "\n";
+      const type = format === "csv" ? "text/csv;charset=utf-8" : "application/json;charset=utf-8";
+      url = URL.createObjectURL(new Blob([text], {type}));
+      anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = `smpt-search-references-${site.lastUpdated}.${format}`;
+      document.body.appendChild(anchor);
+      anchor.click();
+    } catch {
+      setDownloadError(true);
+    } finally {
+      anchor?.remove();
+      // Keep the URL alive long enough for the browser to begin the download.
+      if (url) {
+        const objectUrl = url;
+        window.setTimeout(() => URL.revokeObjectURL(objectUrl), 30000);
+      }
+    }
+  }
 
   function reset() {
     setQuery("");
@@ -343,7 +373,27 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               {results.length} {results.length === 1 ? "matching record" : "matching records"}
               <span className="ml-2 font-normal text-faint">from {docs.length} published index entries</span>
             </p>
-            <ul className="grid gap-2">
+            <div data-testid="search-reference-downloads" className="mb-4 rounded-lg border border-border-strong bg-card p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="font-display text-sm font-semibold">Keep these {results.length} search references</p>
+                <div className="flex flex-wrap gap-2">
+                  {(["csv", "json"] as const).map(format => <button key={format} type="button"
+                    onClick={() => downloadResults(format)}
+                    className="inline-flex min-h-11 items-center rounded-md border border-border-strong px-3 py-2 font-display text-sm text-accent hover:border-accent/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                    Download results {format.toUpperCase()}
+                  </button>)}
+                </div>
+              </div>
+              <p className="mt-2 max-w-4xl text-sm leading-6 text-muted">
+                Downloads contain exactly the results shown, their record links, your query and
+                the corpus revision ({site.lastUpdated}). These are research references; follow
+                each record to its original evidence. For complete data tables, <Link href="/data" className="text-accent underline underline-offset-2">visit Data</Link>.
+              </p>
+              {downloadError ? <p role="alert" className="mt-2 text-sm leading-6 text-muted">
+                The download could not start. Try again in a browser that allows file downloads.
+              </p> : null}
+            </div>
+            <ul data-testid="search-results" className="grid gap-2">
               {results.map((d) => (
                 <li key={`${d.kind}:${d.id}`}>
                   <Link

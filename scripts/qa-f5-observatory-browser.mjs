@@ -164,13 +164,13 @@ async function main(){
         assert(sources.every(s=>s.rel?.split(/\s+/).includes("noopener") &&
           s.rel?.split(/\s+/).includes("noreferrer")));
 
-        // The real seed does NOT have approved physical claims. This is a
-        // typed absence of source-review evidence, never a claim of stalled work.
+        // Wagerup and Narva have separate real issuer-reported reviewed claims;
+        // the remaining two cases have no registered claim. Do not imply stalled work.
         assert.equal(await page.locator("article").filter({
           hasText:"No reviewed occurred physical milestone is registered.",
-        }).count(),4);
-        assert.equal(await page.getByText("No reviewed occurred claim registered").count(),4);
-        assert.equal(await page.getByText(/No source-reviewed occurred physical milestone has entered/).count(),4);
+        }).count(),2);
+        assert.equal(await page.getByText("No reviewed occurred claim registered").count(),2);
+        assert.equal(await page.getByText(/No source-reviewed occurred physical milestone has entered/).count(),2);
 
         process.stdout.write(
           "O3c Chromium "+viewport.width+"x"+viewport.height+

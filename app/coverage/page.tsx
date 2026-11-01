@@ -187,6 +187,28 @@ export default function CoveragePage() {
             </p>
           </Card>
 
+          <Card className="p-5">
+            <h3 className="font-display font-semibold tracking-tight">Direct source citations across the registry</h3>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              {s.citedSources.count} of {s.citedSources.of} registered sources directly support
+              at least one published event, material, project, organization, programme, financing
+              instrument, control clause, designation, framing claim, actor profile or reviewed
+              project milestone.
+            </p>
+            <p className="mt-2 text-xs leading-5 text-faint">
+              {s.citedSources.of - s.citedSources.count} registered
+              {" "}source{s.citedSources.of - s.citedSources.count === 1 ? " has" : "s have"}
+              {" "}no explicit published record citation. This is a cataloguing relationship,
+              not a measure of independent corroboration or research quality.
+            </p>
+            <Link
+              href={s.citedSources.count < s.citedSources.of ? "/sources?citingKind=not_cited" : "/sources"}
+              className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline"
+            >
+              {s.citedSources.count < s.citedSources.of ? "Inspect uncited registered sources" : "Explore source citations"} →
+            </Link>
+          </Card>
+
           <Card className="border-accent/40 p-5">
             <h3 className="font-display font-semibold tracking-tight">No synthetic scores</h3>
             <p className="mt-2 text-sm leading-6 text-muted">

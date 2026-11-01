@@ -1,0 +1,54 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import candidate from "../research/project-execution/release-candidates/narva-commercial-production-2026-10-17.json";
+import queue from "../research/project-execution/m3-2-source-review-queue.json";
+import { getAllProjectMilestones, getProjectMilestonesByProject, getSourceById } from "../lib/data";
+import { validateProjectMilestones } from "../lib/project-milestones";
+import { getAllProjects,getAllSources } from "../lib/data";
+import { site } from "../lib/site";
+
+const narvaId = "mil-ee-neo-narva-commercial-production-reported-2026";
+const wagerupId = "mil-au-alcoa-wagerup-groundbreaking-2026-08-24";
+
+test("Narva public seed matches explicitly authorized reviewed canonical M3 candidate without altering Wagerup", () => {
+  const rows=getAllProjectMilestones();
+  assert.deepEqual(rows.map(x=>x.id),[wagerupId,narvaId]);
+  assert.deepEqual(rows[1],candidate.proposedProjectMilestones[0]);
+  assert.equal(rows[0].kind,"groundbreaking_reported");
+  assert.equal(rows[0].sourceId,"src-alcoa-wagerup-groundbreaking-2026");
+  const q=queue.find(x=>x.id==="review-m3-2-neo-narva-magnets");
+  assert.ok(q);
+  const n=rows[1];
+  assert.equal(n.projectId,q.projectId);
+  assert.equal(n.sourceId,q.sourceId);
+  assert.equal(n.scope,"named_facility");
+  assert.equal(n.scopeAsStated,q.scopeAsStated);
+  assert.equal(n.kind,"production_reported");
+  assert.equal(n.claimMode,"occurred");
+  assert.equal(n.occurredOn,null,"September 14 must NEVER be invented as a production start date");
+  assert.equal(n.targetOn,null);
+  assert.equal(n.statementOriginal,q.statementOriginal);
+  assert.equal(n.statementEn,q.statementEn);
+  assert.equal(n.locator,q.locator);
+  assert.equal(n.note,q.editorialCaution);
+  assert.equal(n.reviewedBy,"Benjamin Yang");
+  assert.equal(n.reviewedAt,"2026-10-17");
+  assert.equal(site.lastUpdated,"2026-10-17");
+  assert.equal(candidate.publicRouteReleaseAuthorized,false);
+  assert.equal(candidate.reviewInputMetadataSha256,"0e8fdca930230527148be4f1da89439f1482b665243b16d747251a47707e6c1b");
+  assert.deepEqual(validateProjectMilestones(rows,{projects:getAllProjects(),sources:getAllSources(),corpusDate:site.lastUpdated}),[]);
+  assert.deepEqual(getProjectMilestonesByProject(q.projectId).map(x=>x.id),[narvaId]);
+});
+test("Narva original issuer and financing boundaries remain distinct from actual production-start clock",()=>{
+  const m=getAllProjectMilestones()[1],src=getSourceById(m.sourceId);
+  assert.ok(src);
+  assert.equal(src.publisher,"Neo Performance Materials");
+  assert.equal(src.datePublished,"2026-09-14");
+  assert.equal(src.dateAccessed,"2026-10-02");
+  assert.match(src.url,/neomaterials\.com/);
+  assert.equal(m.occurredOn,null);
+  assert.ok(m.note?.includes("no observed 2,000-tonne output"));
+  assert.ok(m.note?.includes("JTF-caused production"));
+  assert.ok(!("amount" in m));
+  assert.ok(!JSON.stringify(getAllProjectMilestones()).includes("review-m3-2-"));
+});

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SkipLink } from "@/components/skip-link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { TitlePage } from "@/components/title-page";
 import { site } from "@/lib/site";
 
 // Display / structural / UI labels.
@@ -47,9 +47,9 @@ export default function RootLayout({
       className={`${archivo.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col antialiased">
-        <TitlePage />
+        <SkipLink />
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
         <SiteFooter />
       </body>
     </html>

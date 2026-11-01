@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "f5-milestone-release-candidate-1",
+  "stage": "source_reviewed_milestone_authorized_for_public_seed",
+  "releaseAuthorized": true,
+  "publicSeedModificationAuthorized": true,
+  "publicRouteReleaseAuthorized": false,
+  "proposedCorpusCutoff": "2026-10-17",
+  "publishedCorpusCutoffAtPreparation": "2026-10-09",
+  "sourceReviewId": "review-m3-2-alcoa-wagerup",
+  "reviewInputMetadataSha256": "e14bc4f57124e92af2f0a6dab8718778ed20e44ab1800503d80dabf101df5e26",
+  "reviewReceiptProvenance": "maintainer-reported successful LOCAL gitignored M3 decision and private release rehearsal; NOT an independently accessible source of reviewer authority",
+  "manualReviewRequirements": [
+    "Original issuer Alcoa release read and approved by human reviewer; 5/5 explicit source checks recorded in private local M3 ledger",
+    "Reviewer identity/date disclosure and one Wagerup milestone + Oct 17 curated corpus release separately authorized by maintainer",
+    "Current public seed must contain exactly this single record with all other M3 candidates unsigned",
+    "Current public casefile route remains disabled pending separate review",
+    "Before merge, exact-head typecheck/lint/test/build/data audit/QA must pass and only then production deployment may proceed"
+  ],
+  "proposedProjectMilestones": [
+    {
+      "id": "mil-au-alcoa-wagerup-groundbreaking-2026-08-24",
+      "projectId": "prj-au-alcoa-sojitz-gallium",
+      "kind": "groundbreaking_reported",
+      "claimMode": "occurred",
+      "scope": "named_facility",
+      "scopeAsStated": "gallium production plant co-located at Alcoa’s Wagerup alumina refinery",
+      "occurredOn": "2026-08-24",
+      "targetOn": null,
+      "sourceId": "src-alcoa-wagerup-groundbreaking-2026",
+      "locator": "Opening news paragraph after 08/24/2026 date",
+      "statementOriginal": "The ceremony marked the start of construction of the new facility co-located at Alcoa’s Wagerup alumina refinery in Western Australia.",
+      "statementEn": "The ceremony marked the start of construction of the new facility co-located at Alcoa’s Wagerup alumina refinery in Western Australia.",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-10-17",
+      "note": "Alcoa reports that the August 24, 2026 groundbreaking ceremony marked the start of construction; Australian ministers describe the first sod turned. This candidate records the reported ceremony only, not independently observed sustained works, cash disbursement, commissioning or production."
+    }
+  ],
+  "finalMaintainerAuthorization": {
+    "recordedOn": "2026-10-17",
+    "scope": "one Wagerup groundbreaking_reported milestone, public reviewer name/date and 2026-10-17 curated corpus revision",
+    "separatePublicPathwaysAuthorization": false,
+    "source": "maintainer's explicit release authorization in current conversation; private reviewer ledger remains local"
+  }
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Card } from "@/components/ui/card";
 import { FramingQuote } from "@/components/framing-quote";
 import { SourceCard } from "@/components/source-ref";
@@ -90,12 +91,12 @@ export default async function EventPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(eventJsonLd(event, sources)) }}
       />
-      <Link
-        href="/events"
-        className="font-display text-sm text-muted hover:text-foreground"
-      >
-        ← All events
-      </Link>
+      <Breadcrumbs
+        items={[
+          { href: "/events", label: "Government action" },
+          { label: event.titleEn },
+        ]}
+      />
 
       <header className="mt-6 max-w-3xl">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
@@ -294,19 +295,13 @@ export default async function EventPage({
           </Section>
         </div>
 
-        {/* At a glance */}
+        {/* At a glance: status and mechanism already sit under the title, so they are not repeated here. */}
         <aside className="lg:sticky lg:top-20 lg:self-start">
           <Card className="p-4">
             <h2 className="mb-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted">
               At a glance
             </h2>
             <dl>
-              <MetaRow label="Status">
-                <StatusBadge status={event.policyStatus} />
-              </MetaRow>
-              <MetaRow label="Mechanism">
-                <MechanismBadges mechanisms={event.mechanism} />
-              </MetaRow>
               <MetaRow label="Sectors">
                 {event.affectedSectors.length ? (
                   <SectorBadges sectors={event.affectedSectors} />
