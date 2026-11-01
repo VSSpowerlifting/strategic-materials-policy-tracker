@@ -38,17 +38,14 @@ export default async function SourceDossierPage({
 
   return (
     <Container className="py-12">
-      <Link href="/sources" className="font-display text-sm text-muted hover:text-foreground">
-        ← Source register
-      </Link>
-      <div className="mt-6">
-        <PageHeading
-          index="01"
-          eyebrow="Reverse provenance"
-          title="Source dossier"
-          lead="Follow one registered original document back to the published records that cite it. Each link below is an explicit source reference, not an association inferred from a shared event, company, material or project."
-        />
-      </div>
+      <PageHeading
+        breadcrumbs={[
+          { href: "/sources", label: "Evidence" },
+          { label: source.title },
+        ]}
+        title="Source dossier"
+        lead="Follow one registered original document back to the published records that cite it. Each link below is an explicit source reference, not an association inferred from a shared event, company, material or project."
+      />
 
       <div className="mt-8 max-w-4xl">
         <SourceCard source={source} showDossierLink={false} />

@@ -1,3 +1,15 @@
+## 2026-10-31: frontend journeys and navigation overhaul (draft PR #183)
+
+- Branch `claude/smpt-frontend-overhaul-335dcc` from `66ad5f5`. Frontend only: no `data/seed/*`, taxonomy, classification, status, review, calculation, API, export or validation change.
+- Header reorganized around five research journeys (`journeys` in `lib/site.ts`: Government action, Public capital, Projects, Compare, Evidence), each stating the question it answers. A journey's own views show in a second header row only inside it; the "Research tools" panel is gone. Every URL preserved; `navGroups`/`nav` (footer, sitemap) unchanged.
+- `aria-current` is `"page"` only on an exact match and `"true"` for the containing journey/view. New `Breadcrumbs` on event, actor, source, organization and programme detail pages; capital and project detail pages left alone because of open PRs #162/#166.
+- Homepage reordered: hero and qualified scope/freshness (the same four counts as before, beside their caveat), journeys, worked questions, lattice, material entries, method. Numbered section indices and duplicate event sidebar Status/Mechanism rows removed.
+- `tests/navigation-journeys.test.ts` (7 tests). validate/typecheck/build pass; 1,041 tests pass; lint 0 errors with the nine existing warnings. Production build checked in a browser at 375/768/1024/1280/1440px with no overflow and no console errors. Details, conventions and screenshots: [frontend journeys](docs/frontend/README.md). No merge or deployment.
+- Acceptance QA on `a4043d9`:
+  - axe-core 4.10.2 found no violations on home, event detail, `/compare` and `/projects`.
+  - The violations axe did find are in code this PR does not change: `link-in-text-block` on capital, project and events pages; one `/capital` chart-cell contrast; and the `/events` card h1→h3 skip. They were left for a separate fix.
+  - Keyboard testing found two defects in the new views row: its clipped focus ring and half-hidden focused links. Fixed: the ring is now inset and a focused link scrolls itself into view, with a test.
+
 ## 2026-10-23: integrated research-product revision (draft PR #181)
 
 - Continues `codex/smpt-product-experience-reinvention` from `a2492e8` over original reference `084078f`; no research or publication changes.
