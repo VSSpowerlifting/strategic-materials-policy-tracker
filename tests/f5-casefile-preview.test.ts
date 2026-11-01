@@ -39,7 +39,7 @@ function artificialMilestone(overrides: Partial<ProjectMilestone> = {}): Project
   };
 }
 
-test("F5-3a: actual three pilot drafts are blocked and never serialized as public cases", () => {
+test("F5-3a: Wagerup and Narva reviewed while remaining casefile claims stay private", () => {
   const data = corpus();
   const original = JSON.stringify(data);
   for (const projectId of F5_PILOT_PROJECT_IDS) {
@@ -52,11 +52,26 @@ test("F5-3a: actual three pilot drafts are blocked and never serialized as publi
     assert.equal(draft.autonomouslyApprovedClaims, false);
     assert.equal(draft.policyCausalityAsserted, false);
     assert.equal(draft.historicalMoneyTotalsAuthorized, false);
-    assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa, false);
-    assert.ok(draft.readiness.blockers.some(x => x.includes("project-native")));
-    assert.deepEqual(draft.lanes.physical.occurred, []);
+    if(projectId==="prj-au-alcoa-sojitz-gallium"){
+      assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,true);
+      assert.deepEqual(draft.lanes.physical.occurred.map(x=>x.id),[
+        "mil-au-alcoa-wagerup-groundbreaking-2026-08-24",
+      ]);
+      assert.equal(draft.lanes.physical.occurredEvidence,"registered_reviewed_claims");
+      assert.equal(draft.lanes.physical.occurred[0].kind,"groundbreaking_reported");
+    }else if(projectId==="prj-ee-neo-rare-earth-magnet-project"){
+      assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,true);
+      assert.deepEqual(draft.lanes.physical.occurred.map(x=>x.id),["mil-ee-neo-narva-commercial-production-reported-2026"]);
+      assert.equal(draft.lanes.physical.occurred[0].kind,"production_reported");
+      assert.equal(draft.lanes.physical.occurred[0].occurredOn,null);
+      assert.equal(draft.lanes.physical.occurredEvidence,"registered_reviewed_claims");
+    }else{
+      assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,false);
+      assert.ok(draft.readiness.blockers.some(x=>x.includes("project-native")));
+      assert.deepEqual(draft.lanes.physical.occurred,[]);
+      assert.equal(draft.lanes.physical.occurredEvidence,"no_approved_occurred_claims");
+    }
     assert.deepEqual(draft.lanes.physical.planned, []);
-    assert.equal(draft.lanes.physical.occurredEvidence, "no_approved_occurred_claims");
     assert.equal(draft.lanes.physical.absenceMeansInactivity, false);
     assert.ok(draft.project.evidence.length > 0);
   }

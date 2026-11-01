@@ -7,12 +7,12 @@ export const site = {
   name: "Strategic Materials Policy Tracker",
   shortName: "SMPT",
   tagline:
-    "How the major powers contest rare earths and strategic materials through policy.",
+    "Comparative economic-security research on strategic-material policy and implementation.",
   description:
-    "A source-linked policy and financial-intelligence database tracking how China, the United States, the EU and allied states use export controls, designations, public money, ownership, offtake and stockpiling around rare earths and strategic materials — clause by clause and commitment by commitment, with how each government frames its stance in the original language.",
+    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked records.",
   version: "v0.6-capital-intelligence",
   /** Last curated corpus revision, NOT a claim that every row was rechecked on this date. */
-  lastUpdated: "2026-10-09",
+  lastUpdated: "2026-10-17",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness
@@ -75,23 +75,82 @@ export const navGroups = [
 ] as const;
 
 /**
- * The six inline header links of the Lattice Register design. A presentation layer only: `navGroups` and `nav`
- * stay complete, so the sitemap, the footer and the small-screen menu still reach every page. "Explore" opens
- * the existing event explorer and is marked current across the record-browsing pages; "Jurisdictions" is the
- * `/actors` route under its design label.
+ * The five research journeys, in the order a new reader meets them. Each journey owns a landing route and a set
+ * of supporting views; every page in `nav` except /search (which has its own header control) belongs to exactly
+ * one journey, so exactly one header item is ever marked current. A journey's supporting views appear in a second
+ * header row only while the reader is inside that journey (and under its name in the small-screen menu), so the
+ * header never lists every page at once.
  */
-export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] = [
-  { href: "/", label: "Overview", exact: true },
-  { href: "/compare", label: "Compare" },
+export const journeys = [
   {
     href: "/events",
-    label: "Explore",
-    alsoCurrentFor: ["/capital", "/controls", "/projects", "/organizations", "/programmes", "/sources", "/timeline", "/framing", "/search", "/response"],
+    label: "Government action",
+    question: "What have governments decided, and in what legal form?",
+    views: [
+      { href: "/events", label: "All events" },
+      { href: "/timeline", label: "Timeline" },
+      { href: "/controls", label: "Control clauses" },
+      { href: "/framing", label: "Official framing" },
+      { href: "/actors", label: "Governments" },
+      { href: "/materials", label: "Materials" },
+      { href: "/watchlist", label: "Watchlist" },
+    ],
   },
-  { href: "/materials", label: "Materials" },
-  { href: "/actors", label: "Jurisdictions" },
-  { href: "/methodology", label: "Method" },
-];
+  {
+    href: "/capital",
+    label: "Public capital",
+    question: "Which public money and instruments are committed, and at what status?",
+    views: [
+      { href: "/capital", label: "Financial commitments" },
+      { href: "/programmes", label: "Programmes" },
+      { href: "/organizations", label: "Organizations" },
+    ],
+  },
+  {
+    href: "/projects",
+    label: "Projects",
+    question: "What does the record show for one industrial project?",
+    views: [{ href: "/projects", label: "Project investigations" }],
+  },
+  {
+    href: "/compare",
+    label: "Compare",
+    question: "How do approaches differ across governments and supply-chain stages?",
+    views: [
+      { href: "/compare", label: "Compare governments" },
+      { href: "/portfolios", label: "Portfolios" },
+      { href: "/interplay", label: "Capital and controls together" },
+      { href: "/response", label: "Response by stage" },
+    ],
+  },
+  {
+    href: "/sources",
+    label: "Evidence",
+    question: "Where does each claim come from, and what does the corpus leave out?",
+    views: [
+      { href: "/sources", label: "Sources" },
+      { href: "/methodology", label: "Methodology" },
+      { href: "/coverage", label: "Coverage" },
+      { href: "/data", label: "Data & API" },
+    ],
+  },
+] as const;
+
+/** Header journeys. The wordmark links to the overview, so the overview is not repeated here. */
+export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] =
+  journeys.map(({ href, label, views }) => ({
+    href,
+    label,
+    alsoCurrentFor: views.map((v) => v.href).filter((h) => h !== href),
+  }));
+
+/** `pathname` is `href` or one of its descendants (or exactly `href` when `exact`). */
+export const isActivePath = (pathname: string, href: string, exact = false) =>
+  exact ? pathname === href : pathname === href || pathname.startsWith(href + "/");
+
+/** Whether a header journey is the current one for `pathname`: its landing route or any of its views, with descendants. */
+export const isNavCurrent = (pathname: string, item: (typeof headerNav)[number]) =>
+  isActivePath(pathname, item.href, item.exact) || (item.alsoCurrentFor ?? []).some((h) => isActivePath(pathname, h));
 
 /** Every header destination, flattened (footer, sitemap). */
 export const nav = navGroups.flatMap((g) => g.items.map(({ href, label }) => ({ href, label })));

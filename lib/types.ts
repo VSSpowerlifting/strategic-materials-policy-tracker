@@ -1125,7 +1125,8 @@ export const PROJECT_MILESTONE_KINDS = [
   "funded_activity_completed",
 ] as const;
 export const PROJECT_MILESTONE_MODES = ["occurred", "planned"] as const;
-export const PROJECT_MILESTONE_SCOPES = ["whole_project", "named_facility", "funded_activity"] as const;
+/** Source-bounded physical workstreams do not imply full project construction or operating output. */
+export const PROJECT_MILESTONE_SCOPES = ["whole_project", "named_facility", "funded_activity", "bounded_project_workstream"] as const;
 
 export type ProjectMilestone = {
   id: string;

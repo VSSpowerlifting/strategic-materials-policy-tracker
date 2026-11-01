@@ -1,9 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
 import { getCoverageReport, isPrimaryAnchored } from "@/lib/coverage";
 import { getAllEvents, getAllFramingClaims, getAllSources } from "@/lib/data";
 import { site } from "@/lib/site";
+import { buildSourceUseIndex, publishedSourceRecords, getSourceUses } from "@/lib/source-usage";
+import { buildSourceDirectory, filterSourceDirectory, UNCITED_FILTER } from "@/lib/source-directory";
 import { FRAMING_CATEGORIES, SOURCE_CONFIDENCE } from "@/lib/types";
 
 test("totals match the loaders", () => {
@@ -23,6 +26,7 @@ test("every share has a denominator and a count that cannot exceed it", () => {
     r.evidence.verified,
     r.evidence.monitored,
     r.sources.primary,
+    r.sources.cited,
     r.framing.nonEnglishAnchored,
     r.framing.officialTranslation,
     ...r.actors.map((a) => a.primaryAnchored),
@@ -96,4 +100,63 @@ test("orphaned sources are reported, not hidden", () => {
   const r = getCoverageReport();
   const ids = new Set(getAllSources().map((s) => s.id));
   for (const id of r.sources.orphaned) assert.ok(ids.has(id), `unknown source id ${id}`);
+});
+
+
+test("coverage's full-corpus orphan set exactly matches canonical reverse provenance and the source register", () => {
+  const corpus = publishedSourceRecords();
+  const citations = buildSourceUseIndex(corpus);
+  const report = getCoverageReport();
+  const expected = corpus.sources.filter(s => (citations.get(s.id)?.length ?? 0) === 0)
+    .map(s => s.id);
+  assert.deepEqual(report.sources.orphaned, expected,
+    "unreferenced means no direct citation in ANY published record kind");
+  assert.equal(report.sources.cited.of, corpus.sources.length);
+  assert.equal(report.sources.cited.count + expected.length, corpus.sources.length);
+  const directory = buildSourceDirectory(corpus.sources, citations);
+  const register = filterSourceDirectory(directory, { citingKind: UNCITED_FILTER })
+    .map(row => row.source.id).sort();
+  assert.deepEqual([...expected].sort(), register,
+    "/coverage and /sources?citingKind=not_cited must never contradict each other");
+  for (const source of corpus.sources)
+    assert.deepEqual(getSourceUses(source.id), citations.get(source.id) ?? []);
+});
+
+test("finance-only and project-only citations remain used even absent policy-event and actor references", () => {
+  const live = publishedSourceRecords();
+  const sidFinance = live.sources[0].id, sidProject = live.sources[1].id;
+  const financial = live.finances[0];
+  const project = live.projects[0];
+  const input = {
+    ...live,
+    events:[], framing:[], actors:[], materials:[], controls:[],
+    organizations:[], programmes:[], designations:[], milestones:[],
+    finances:[{
+      ...financial,
+      evidence:[],
+      financialStatusHistory:[{status:"announced" as const,date:null,sourceId:sidFinance,note:null}],
+      implementationStatusHistory:[],terms:[],outcomes:[],relationships:[],
+      financialAmountHistory:undefined,
+    }],
+    projects:[{
+      ...project, evidence:[{
+        sourceId:sidProject,
+        supports:project.evidence[0].supports,
+        evidence:project.evidence[0].evidence,
+      }],
+    }],
+  };
+  const index = buildSourceUseIndex(input);
+  assert.ok(index.get(sidFinance)?.some(u => u.kind === "capital"));
+  assert.ok(index.get(sidProject)?.some(u => u.kind === "project"));
+  assert.ok(!index.get(sidFinance)?.some(u => u.kind === "event"));
+  assert.ok(!index.get(sidProject)?.some(u => u.kind === "event"));
+});
+
+test("coverage page discloses the citation denominator, interpretation and exact uncited filter", async () => {
+  const page = await readFile("app/coverage/page.tsx","utf8");
+  assert.match(page,/s\.citedSources\.count/);
+  assert.match(page,/s\.citedSources\.of/);
+  assert.match(page,/\/sources\?citingKind=not_cited/);
+  assert.match(page,/not a measure of independent corroboration/);
 });

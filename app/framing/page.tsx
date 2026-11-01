@@ -23,7 +23,7 @@ import {
 export const metadata: Metadata = {
   title: "Comparative framing",
   description:
-    "How China, the US and the EU justify their materials policy — grouped by framing category, each label anchored to a quoted passage in the original language.",
+    "Compare how tracked governments explain strategic-material policy measures, with each framing category anchored to a passage in the original source.",
 };
 
 // Stable actor order so a given actor sits in a comparable position across every
@@ -46,7 +46,7 @@ export default function FramingPage() {
         index="—"
         eyebrow="The signature view"
         title="Comparative framing"
-        lead="Every government reaches for the language of security — but they do not mean the same thing. Beijing frames control as national security and non-proliferation; Washington and Brussels frame access as economic security and supply-chain resilience. Each label below is assigned only from a quoted passage, never inferred from context."
+        lead="Compare the stated rationales for strategic-material policy across the jurisdictions in this corpus. Each framing label comes from a quoted passage, not an assumption about intent. Similar language does not establish comparable policy effects."
       />
 
       {/* Category legend — a structured register, not a badge cloud */}

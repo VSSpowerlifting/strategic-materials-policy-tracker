@@ -19,9 +19,9 @@ export default function ActorsPage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Six actors"
+        eyebrow="Jurisdictions"
         title="Actors"
-        lead="The incumbent and the states trying to diversify away from it. Each profile sets out an actor's place in the supply chain, the policy instruments it reaches for, and its framing posture."
+        lead="Compare tracked governments and jurisdictions by their documented supply-chain positions, policy instruments and stated rationales. Coverage differs by actor; a smaller record count does not mean less policy activity."
       />
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {jurisdictions.map((j) => (

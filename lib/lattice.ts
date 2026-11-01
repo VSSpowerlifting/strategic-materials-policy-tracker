@@ -5,6 +5,7 @@
  * kind at a time and never adds one kind to another. Amounts stay in the source's currency and qualifier
  * (`amountAsStated` is carried through), and no cell holds a money total. Deterministic: "as of" is an argument.
  */
+import { cellKey } from "./lattice-view";
 import { commitmentActor, controlIssuer, controlSpans, controlStatusOn, currentFinancialStatus, formatDecimalCompact, isEnded } from "./capital-control";
 import { stageLatticeGaps, stageResponseMap } from "./capital-intelligence";
 import {
@@ -37,7 +38,8 @@ export type LatticeKind = "commitment" | "control" | "designation";
 /** Which of a cell's three capital fields a commitment sits in. */
 export type CapitalField = "capital" | "option" | "ended";
 
-type Common = { id: string; href: string; actor: JurisdictionCode; actorShort: string; title: string };
+export type LatticeProjectLink = { id: string; name: string; href: string; relationship: "direct_finance" | "nonallocative_association" | "designation" };
+type Common = { id: string; href: string; actor: JurisdictionCode; actorShort: string; title: string; projects?: LatticeProjectLink[] };
 
 export type LatticeCommitment = Common & {
   kind: "commitment";
@@ -99,7 +101,7 @@ export type LatticeModel = {
   gaps: ReturnType<typeof stageLatticeGaps>;
 };
 
-export const cellKey = (materialId: string, stage: SupplyChainStage) => `${materialId}|${stage}`;
+export { cellKey } from "./lattice-view";
 
 const QUALIFIER_WORD: Record<string, string | null> = { exact: null, up_to: "up to", approximately: "about", at_least: "at least" };
 
@@ -153,6 +155,10 @@ function commitmentRecord(c: FinancialCommitment, field: CapitalField): LatticeC
     field,
     title: commitmentTitle(c),
     parties: partyNames(c).join(" to "),
+    projects: [...(c.projectId ? [{ id: c.projectId, relationship: "direct_finance" as const }] : []), ...(c.associatedProjectIds ?? []).map(id => ({ id, relationship: "nonallocative_association" as const }))].flatMap(link => {
+      const p = getProjectById(link.id);
+      return p ? [{ ...link, name: p.name, href: `/projects/${p.id}` }] : [];
+    }),
     amount: amountView(c),
     instrument: financialInstrumentLabels[c.instrument],
     status: dated?.date ? `${financialStatusLabels[status]}, ${formatDate(dated.date)}` : financialStatusLabels[status],
@@ -193,6 +199,7 @@ function designationRecord(d: ProjectDesignation, asOf: string): LatticeDesignat
     actor: programme.actor,
     actorShort: jurisdictionShort[programme.actor],
     title: project?.name ?? d.projectNameAsStated,
+    projects: project ? [{ id: project.id, name: project.name, href: `/projects/${project.id}`, relationship: "designation" }] : [],
     programme: programme.name,
     asStated: project && project.name !== d.projectNameAsStated ? d.projectNameAsStated : null,
     status: entry
