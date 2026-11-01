@@ -1,3 +1,12 @@
+## 2026-11-01: PR closeout; monitoring and evidence-pathway work stopped
+
+- Maintainer decision: stop building monitoring and evidence-pathway infrastructure (EXIM/DOE monitoring, F5 Observatory, F4 amount history) and resolve every open PR.
+- Merged after updating each onto current `main` and passing validate, typecheck, lint, tests and build locally at the exact merged head: #167 (CSV formula neutralization), #164 (saved-events storage failure), #162 (financing reading guide), #166 (project comparison).
+- Closed unmerged as a scope decision, not a correctness finding; branches kept: #172, #169, #133, #132, #130 (F5) and #86 (F4 RFC). F5 epic #108 and issues #110, #112, #113 and #114 closed as not planned. #91 (dev-only ESLint advisory) stays open.
+- Removed the `schedule:` triggers from `exim-shadow-monitor`, `exim-schedule-watchdog` and `source-monitor-pilot`; all remain manually dispatchable and their code is kept. The DOE and M2 workflows were already manual-only.
+- The three workflow tests now assert manual-only triggers instead of the old cron strings.
+- Earlier F5 entries below are historical. Their pending actions (pilot reviews, milestone publication, comparator QA) are no longer planned.
+
 ## 2026-10-31: frontend journeys and navigation overhaul (draft PR #183)
 
 - Branch `claude/smpt-frontend-overhaul-335dcc` from `66ad5f5`. Frontend only: no `data/seed/*`, taxonomy, classification, status, review, calculation, API, export or validation change.

@@ -134,7 +134,8 @@ test("recovery remains EXIM-only, source-read-only and does not schedule a new t
  assert.match(js,/run\.event/);
  assert.match(js,/reportName/);
  assert.doesNotMatch(js,/data\/seed|uploadArtifact|writeFile|rebaseline|finance/);
- assert.match(wf,/    - cron: "7 14 \* \* \*"/);
+ assert.match(wf,/workflow_dispatch:/);
+ assert.doesNotMatch(wf,/^  schedule:|cron:/m);
  assert.match(wf,/contents: read/);
  assert.match(wf,/actions: read/);
  assert.doesNotMatch(wf,/contents: write/);
