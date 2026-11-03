@@ -21,39 +21,39 @@ const refs=():GuidedReviewRefs=>({
 });
 const choices=(over:Partial<HumanReviewInput>={}):HumanReviewInput=>({
   verdict:"approved",reviewedBy:"SYNTHETIC REGRESSION TEST (not a real reviewer)",
-  reviewedAt:"2026-10-17",
+  reviewedAt:"2026-11-03",
   rationale:"Synthetic test only: the original issuer reports an initial commercial production phase; actual start day was not independently established.",
   checks:{fullSourceRead:true,quotedPassageMatches:true,scopeIsExplicit:true,eventAndEvidenceDatesSeparated:true,noFinancingOrOperationsInference:true},
   proposedMilestoneId:"mil-ee-neo-narva-initial-commercial-output-reported",
-  manuallyCopiedDigest:prepareGuidedReview(records,refs(),narva,"2026-10-17").worksheet.reviewInputDigestSha256,
+  manuallyCopiedDigest:prepareGuidedReview(records,refs(),narva,"2026-11-03").worksheet.reviewInputDigestSha256,
   ...over,
 });
-const review=(over:Partial<HumanReviewInput>={},t=template as unknown as SourceReviewDecision[],r=refs(),cutoff="2026-10-17",today="2026-10-17")=>
+const review=(over:Partial<HumanReviewInput>={},t=template as unknown as SourceReviewDecision[],r=refs(),cutoff="2026-11-03",today="2026-11-03")=>
   buildGuidedPrivateDecisions(records,t,r,narva,cutoff,today,choices(over));
 
 test("review session always uses one canonical gitignored per-candidate path",()=>{
   assert.equal(privateReviewPathFor(narva),".project-execution-review/review-m3-2-neo-narva-magnets.adjudications.json");
   assert.throws(()=>privateReviewPathFor("../../data/seed/project-milestones.json"),/Invalid canonical review ID/);
   assert.throws(()=>privateReviewPathFor("review-m3-2-nearby/secret"),/Invalid canonical review ID/);
-  assert.deepEqual(parseGuidedReviewArgs(["--id",narva,"--proposed-cutoff","2026-10-17"]),{id:narva,proposedCutoff:"2026-10-17"});
-  assert.deepEqual(parseGuidedReviewArgs(["--proposed-cutoff","2026-10-17","--id",narva]),{id:narva,proposedCutoff:"2026-10-17"});
+  assert.deepEqual(parseGuidedReviewArgs(["--id",narva,"--proposed-cutoff","2026-11-03"]),{id:narva,proposedCutoff:"2026-11-03"});
+  assert.deepEqual(parseGuidedReviewArgs(["--proposed-cutoff","2026-11-03","--id",narva]),{id:narva,proposedCutoff:"2026-11-03"});
   assert.throws(()=>parseGuidedReviewArgs(["--id",narva]),/explicit real proposed cutoff/);
   assert.throws(()=>parseGuidedReviewArgs(["--id",narva,"--proposed-cutoff","2026-02-30"]),/explicit real proposed cutoff/);
-  assert.throws(()=>parseGuidedReviewArgs(["--id",narva,"--id",narva,"--proposed-cutoff","2026-10-17"]),/Usage:/);
+  assert.throws(()=>parseGuidedReviewArgs(["--id",narva,"--id",narva,"--proposed-cutoff","2026-11-03"]),/Usage:/);
 });
 
 test("already published Wagerup and Narva are unavailable for accidental second review",()=>{
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
-  assert.throws(()=>prepareGuidedReview(records,{...refs(),currentPublicMilestones:getAllProjectMilestones()},narva,"2026-10-17"),/Already published/);
-  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-alcoa-wagerup","2026-10-17"),/Already published/);
-  assert.equal(site.lastUpdated,"2026-10-17");
+  assert.throws(()=>prepareGuidedReview(records,{...refs(),currentPublicMilestones:getAllProjectMilestones()},narva,"2026-11-03"),/Already published/);
+  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-alcoa-wagerup","2026-11-03"),/Already published/);
+  assert.equal(site.lastUpdated,"2026-11-03");
 });
 
 test("unresolved taxonomy cannot be approved by a guided checklist",()=>{
-  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-inl-demonstration","2026-10-17"),/TAXONOMY BLOCKED/);
-  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-stibnite-burntlog","2026-10-17"),/TAXONOMY BLOCKED/);
-  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-no-such-case","2026-10-17"),/Unknown source-review ID/);
-  assert.throws(()=>prepareGuidedReview(records,refs(),narva,"2026-10-16"),/CURRENT public corpus revision/);
+  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-inl-demonstration","2026-11-03"),/TAXONOMY BLOCKED/);
+  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-stibnite-burntlog","2026-11-03"),/TAXONOMY BLOCKED/);
+  assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-no-such-case","2026-11-03"),/Unknown source-review ID/);
+  assert.throws(()=>prepareGuidedReview(records,refs(),narva,"2026-11-02"),/CURRENT public corpus revision/);
   assert.throws(()=>prepareGuidedReview(records,refs(),narva,"2026-10-32"),/CURRENT public corpus revision/);
 });
 
@@ -89,21 +89,21 @@ test("no checkbox, reviewer identity, verdict, rationale or attestation can be a
 });
 
 test("never backdate a source review to fit an already published cutoff",()=>{
-  assert.throws(()=>review({reviewedAt:"2026-10-18"}),/future/);
-  assert.throws(()=>review({reviewedAt:"2026-10-18"},template as unknown as SourceReviewDecision[],refs(),"2026-10-18","2026-10-18"),/fingerprint differs/);
-  assert.throws(()=>review({reviewedAt:"2026-10-18"},template as unknown as SourceReviewDecision[],refs(),"2026-10-17","2026-10-18"),/exceeds proposed cutoff/);
+  assert.throws(()=>review({reviewedAt:"2026-11-04"}),/future/);
+  assert.throws(()=>review({reviewedAt:"2026-11-04"},template as unknown as SourceReviewDecision[],refs(),"2026-11-04","2026-11-04"),/fingerprint differs/);
+  assert.throws(()=>review({reviewedAt:"2026-11-04"},template as unknown as SourceReviewDecision[],refs(),"2026-11-03","2026-11-04"),/exceeds proposed cutoff/);
 });
 
 test("public corpus/source/finance or worksheet changes invalidate previously copied metadata fingerprint",()=>{
   const old=choices().manuallyCopiedDigest;
   // The digest deliberately pins cutoff, queue, publisher, project and finance metadata,
   // NOT the independently displayed count of previously published milestones.
-  assert.notEqual(prepareGuidedReview(records,refs(),narva,"2026-10-18").worksheet.reviewInputDigestSha256,old);
-  assert.throws(()=>review({manuallyCopiedDigest:old},template as unknown as SourceReviewDecision[],refs(),"2026-10-18"),/fingerprint differs/);
+  assert.notEqual(prepareGuidedReview(records,refs(),narva,"2026-11-04").worksheet.reviewInputDigestSha256,old);
+  assert.throws(()=>review({manuallyCopiedDigest:old},template as unknown as SourceReviewDecision[],refs(),"2026-11-04"),/fingerprint differs/);
   const modified=structuredClone(records);
   modified.find(x=>x.id===narva)!.statementOriginal="Synthetic altered issuer statement";
   modified.find(x=>x.id===narva)!.statementEn="Synthetic altered issuer statement";
-  assert.notEqual(prepareGuidedReview(modified,refs(),narva,"2026-10-17").worksheet.reviewInputDigestSha256,old);
+  assert.notEqual(prepareGuidedReview(modified,refs(),narva,"2026-11-03").worksheet.reviewInputDigestSha256,old);
 });
 
 test("never overwrite or launder earlier original human decision into another review session",()=>{
@@ -116,8 +116,8 @@ test("never overwrite or launder earlier original human decision into another re
 test("CI and noninteractive pipes cannot create fake source-review decisions",()=>{
   // An unpublished row that is not taxonomy-blocked, so the run reaches the TTY guard.
   const id="review-m3-2-cyclic-extended-operations";
-  const run=spawnSync(process.execPath,["--import","tsx","scripts/run-f5-guided-private-review.ts","--id",id,"--proposed-cutoff","2026-10-17"],{
-    encoding:"utf8",input:"approved\nSYNTHETIC\n2026-10-17\ny\ny\ny\ny\ny\nshortcut\n",
+  const run=spawnSync(process.execPath,["--import","tsx","scripts/run-f5-guided-private-review.ts","--id",id,"--proposed-cutoff","2026-11-03"],{
+    encoding:"utf8",input:"approved\nSYNTHETIC\n2026-11-03\ny\ny\ny\ny\ny\nshortcut\n",
   });
   assert.notEqual(run.status,0);
   assert.match(run.stderr,/interactive human TTY/);

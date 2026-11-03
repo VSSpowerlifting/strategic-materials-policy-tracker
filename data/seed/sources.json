@@ -2194,5 +2194,77 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Directors' report: issuer compliant with closed DOE loan facility, no development decision at June 30, 2026. Note 10: $4.273M unamortized DOE loan establishment fees, amortization starts after first draw; it is not an advance or independent commitment. Filing documents no positive disbursement; an absence of disclosure is not a universal proof none occurred later."
+  },
+  {
+    "id": "src-ec-crma-sp-annex-2026-10",
+    "title": "Annex to Commission Decision C(2026) 8051 final: list of Strategic Projects",
+    "publisher": "European Commission",
+    "url": "https://single-market-economy.ec.europa.eu/document/download/efabd887-9c12-4a3d-910e-8433c0f63a81_en?filename=C_2026_8051_F1_ANNEX_EN_V3_P1_5091583.PDF",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-11-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The list of 46 Strategic Projects in the EU, read in full 2026-11-03 (file sha256 2d927a5fbbb05dddcec4eaf4dae80180a3d9a0d0e901801cc794d04bda140ce3). Each entry gives the project name, type, country, promoter and materials. Only projects naming a tracked material are recorded as designations. The document states it was adopted on 9 October 2026; when this PDF was first posted online is not established, so datePublished is left unknown. The Decision was later published in the Official Journal as Commission Decision (EU) 2026/2349 (OJ L, 22.10.2026); notification and effective dates are not established."
+  },
+  {
+    "id": "src-ec-crma-sp-decision-2026-10",
+    "title": "Commission Decision of 9.10.2026 recognising certain critical raw material projects as Strategic Projects under Regulation (EU) 2024/1252 (C(2026) 8051 final)",
+    "publisher": "European Commission",
+    "url": "https://single-market-economy.ec.europa.eu/document/download/56f5457c-2ed0-4c10-8c76-d66a79cb00b6_en?filename=C_2026_8051_F1_COMMISSION_DECISION_EN_V2_P1_5091203.PDF",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-11-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The decision itself, read in full 2026-11-03 (file sha256 f0768137c98466c0fe53f79c241bf7d97cf7f358a2aeb9b3332bd07ddf677342). Adopted under Article 7(9) of Regulation (EU) 2024/1252. Article 1: \"The projects listed in the Annex are recognised as Strategic Projects.\" Article 2 addresses the decision to each promoter with its address; those addresses are the source for promoters' countries. Recital (4): 101 applications from projects in Member States, 98 complete. Only the English text is authentic. The document states it was adopted on 9 October 2026; when this PDF was first posted online is not established, so datePublished is left unknown. The Decision was later published in the Official Journal as Commission Decision (EU) 2026/2349 (OJ L, 22.10.2026); notification and effective dates are not established."
+  },
+  {
+    "id": "src-ec-rep-lu-2026-10-09",
+    "title": "Commission selects 46 new Strategic Projects to bolster the EU's supply of critical raw materials",
+    "publisher": "European Commission, Representation in Luxembourg",
+    "url": "https://luxembourg.representation.ec.europa.eu/actualites-et-evenements/actualites/commission-selects-46-new-strategic-projects-bolster-eus-supply-critical-raw-materials-2026-10-09_en",
+    "language": "en",
+    "datePublished": "2026-10-09",
+    "dateAccessed": "2026-11-03",
+    "sourceType": "official",
+    "confidence": "secondary",
+    "notes": "Commission news article, read 2026-11-03. States 46 projects in 16 Member States, selected from 102 applications of which 92 were assessed; 8 extraction, 11 processing, 19 recycling and 8 integrated. Its 102 differs from the Decision's recital (4) figure of 101; the Decision is preferred. Its benchmark-coverage and financing statements are Commission claims and are not recorded as capital. IP/26/2113 is the press-corner original and has not been read."
+  },
+  {
+    "id": "src-eurlex-dec-2026-2349",
+    "title": "Commission Decision (EU) 2026/2349 of 9 October 2026 recognising certain critical raw material projects as Strategic Projects under Regulation (EU) 2024/1252 (notified under document C(2026) 8051)",
+    "publisher": "Official Journal of the European Union (EUR-Lex)",
+    "url": "https://eur-lex.europa.eu/eli/dec/2026/2349/oj",
+    "language": "en",
+    "datePublished": "2026-10-22",
+    "dateAccessed": "2026-11-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "The Official Journal publication of the Decision (OJ L, 2026/2349, 22.10.2026; ELI http://data.europa.eu/eli/dec/2026/2349/oj; CELEX 32026D2349), read in full on EUR-Lex 2026-11-03. It states that only the English text is authentic. Adopted 9 October 2026 under Article 7(9) of Regulation (EU) 2024/1252; Article 1 recognises the 46 projects listed in the Annex as Strategic Projects, and Article 2 addresses the Decision to their promoters. Recital (4): 101 applications, 98 complete. datePublished is the Official Journal date. The text does not state when the Decision was notified or took effect; the EUR-Lex catalogue metadata gives 2026-10-22 as the first date of entry into force, which is not a statement of the Decision itself and is not used as the effective date. The Commission's C(2026) 8051 final PDFs are separate source records and keep their own version-specific details."
+  },
+  {
+    "id": "src-borme-c-2025-4584",
+    "title": "BORME-C-2025-4584: ABENOJAR TUNGSTEN, S.L. (transformación de empresas)",
+    "publisher": "Agencia Estatal Boletín Oficial del Estado (Boletín Oficial del Registro Mercantil)",
+    "url": "https://www.boe.es/diario_borme/txt.php?id=BORME-C-2025-4584",
+    "language": "other",
+    "datePublished": "2025-08-01",
+    "dateAccessed": "2026-11-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Spanish. BORME núm. 145 of 1 August 2025, p. 5696, section two, company transformations. Read in full 2026-11-03. Announces the unanimous decision of 30 July 2025 to transform Abenojar Tungsten, S.L. into a sociedad anónima, \"conservando su personalidad jurídica\", under the name \"Abenojar Tungsten, S.A.\". Supports the identity of org-abenojar-tungsten only."
+  },
+  {
+    "id": "src-abr-abn-96621530185",
+    "title": "ABN Lookup: current details for ABN 96 621 530 185 (Pure Battery Technologies Limited)",
+    "publisher": "Australian Business Register (Australian Taxation Office)",
+    "url": "https://abr.business.gov.au/ABN/View?abn=96621530185",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-11-03",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Live register entry, read 2026-11-03 (the page stamps \"Record extracted: 04 Nov 2026\", Australian time; \"ABN last updated: 04 Mar 2025\"). Entity name PURE BATTERY TECHNOLOGIES LIMITED; Australian Public Company; ABN active from 15 Sep 2017; ACN 621 530 185. Supports the name, kind and country of org-pure-battery-technologies only."
   }
 ]

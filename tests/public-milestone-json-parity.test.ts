@@ -34,7 +34,7 @@ test("public register and downloadable JSON expose exactly one genuinely reviewe
   assert.equal(m.targetOn,null);
   assert.equal(m.reviewedBy,"Benjamin Yang");
   assert.equal(m.reviewedAt,"2026-10-17");
-  assert.equal(site.lastUpdated,"2026-10-17");
+  assert.equal(site.lastUpdated,"2026-11-03");
   assert.ok(!JSON.stringify(milestones).includes(".project-execution-review"));
   assert.ok(!JSON.stringify(milestones).includes("review-m3-2"));
 });

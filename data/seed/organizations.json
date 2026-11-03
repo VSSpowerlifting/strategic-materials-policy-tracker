@@ -54,9 +54,10 @@
   },
   {
     "id": "org-abenojar-tungsten",
-    "name": "ABENÓJAR TUNGSTEN S.L.",
+    "name": "ABENÓJAR TUNGSTEN S.A.",
     "nameOriginal": null,
     "aliases": [
+      "ABENÓJAR TUNGSTEN S.L.",
       "Abenojar Tungsten S.L."
     ],
     "kind": "company",
@@ -73,10 +74,30 @@
         ],
         "evidence": "explicit",
         "locator": "Article 2, row 27",
-        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+        "note": "Named as a project promoter to which the decision is addressed, as ABENÓJAR TUNGSTEN S.L.; the country is read from the promoter's address."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 5",
+        "note": "Named as a project promoter to which the decision is addressed, as ABENÓJAR TUNGSTEN S.A.; the country is read from the promoter's address (\"Calle Ayala nº 10, 4º Izquierda, Madris, Spain\" [sic])."
+      },
+      {
+        "sourceId": "src-borme-c-2025-4584",
+        "supports": [
+          "name"
+        ],
+        "evidence": "explicit",
+        "locator": "Sección segunda, Transformación de empresas",
+        "note": "The partners of Abenojar Tungsten, S.L. approved its transformation into a sociedad anónima on 30 July 2025, keeping its legal personality, under the name \"Abenojar Tungsten, S.A.\"."
       }
     ],
-    "notes": null
+    "notes": "One legal person. The shareholders approved its transformation from S.L. into S.A. at a universal meeting on 30 July 2025, keeping its legal personality (BORME-C-2025-4584, published 1 August 2025). The Commission's October 2026 Decision names it as S.A. The date the transformation was registered or took legal effect is not stated in the notice and has not been established."
   },
   {
     "id": "org-alaska-range-resources",
@@ -103,6 +124,30 @@
       }
     ],
     "notes": "Wholly owned U.S. subsidiary of Nova Minerals Limited; the current organization schema does not encode corporate-subsidiary ownership."
+  },
+  {
+    "id": "org-alkeemia",
+    "name": "Alkeemia S.p.A.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "IT",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 4",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Via della Chimica, 5, 30175 Porto Marghera (VE), Italy\")."
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-allied-material",
@@ -135,6 +180,30 @@
       }
     ],
     "notes": "The English name is this project's rendering; the METI and JOGMEC lists give only the Japanese name."
+  },
+  {
+    "id": "org-amg-lithium",
+    "name": "AMG Lithium GmbH",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "DE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 17",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Industriepark Höchst Gebäude B852, 65926 Frankfurt, Germany\")."
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-arafura-rare-earths",
@@ -220,6 +289,30 @@
         "evidence": "explicit",
         "locator": "Title page",
         "note": "The Act is an Act of the Commonwealth of Australia; the tax offset is paid by the Commonwealth."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-back-to-battery",
+    "name": "Back to Battery B.V.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "NL",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 38",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Mezenlaan 75, 2566ZE, Delft, Netherlands\")."
       }
     ],
     "notes": null
@@ -459,6 +552,54 @@
     "notes": null
   },
   {
+    "id": "org-cmk-sro",
+    "name": "CMK s.r.o.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "SK",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 18",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Sandricka 30, 96681 Žarnovica, Slovakia\")."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-critical-circular-industries",
+    "name": "CRITICAL. (owner of Circular Industries)",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "NL",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 43",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Veembroederhof 281, 1019 HD Amsterdam, Netherlands\")."
+      }
+    ],
+    "notes": "Name as stated in the Decision (Article 2, row 43) and the annex: \"CRITICAL. (owner of Circular Industries)\". Neither establishes the corporate identity of Circular Industries or any shareholding in it, so no separate organisation and no parent link are coded."
+  },
+  {
     "id": "org-cyclic-materials",
     "name": "Cyclic Materials Incorporated",
     "nameOriginal": null,
@@ -482,6 +623,30 @@
       }
     ],
     "notes": "The cited sources do not state where the company is incorporated."
+  },
+  {
+    "id": "org-cylib-production-i",
+    "name": "cylib Production I GmbH",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "DE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 16",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Philipsstraße 8, 52068 Aachen, Germany\")."
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-de-government",
@@ -556,6 +721,54 @@
       }
     ],
     "notes": "A multilateral development bank, not a tracked government: its money is public but credited to no actor."
+  },
+  {
+    "id": "org-eco-life-style",
+    "name": "ECO LIFE STYLE S.R.L.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "RO",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 14",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Strada Plevnei no. 42, Dascalu Commune, Ilfov County, Romania\")."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-emme",
+    "name": "ELECTRO MOBILITY MATERIALS EUROPE (EMME)",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 13",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"43 RUE D'ARMAGNAC 33800 BORDEAUX, France\")."
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-eu-commission",
@@ -655,6 +868,30 @@
         "evidence": "explicit",
         "locator": "Article 2, row 7",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-finncobalt",
+    "name": "FinnCobalt Oy",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FI",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 19",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Suutarinkatu 9 83500 Outokumpu, Finland\")."
       }
     ],
     "notes": null
@@ -824,6 +1061,30 @@
         "evidence": "explicit",
         "locator": "Article 2, row 16",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-hypromag-gmbh",
+    "name": "HyProMag GmbH",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "DE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 20",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Unterm Wolfsberg 9/9a, 75177 Pforzheim, Germany\")."
       }
     ],
     "notes": null
@@ -1185,6 +1446,54 @@
     "notes": "Borrower under the executed €150M EIB facility agreement of 20 August 2024 (SEC Exhibit 4.8); separately promoter/holder of the EU CRMA Strategic Project designation. Kept legally distinct from guarantor Keliber Oy."
   },
   {
+    "id": "org-kghm-polska-miedz",
+    "name": "KGHM Polska Miedź S.A.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "PL",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 30",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"ul. Marii Skłodowskiej-Curie 48, 59-300 Lubin, Poland\")."
+      }
+    ],
+    "notes": "Also the promoter of entry (12), the Retków-Grodziszcze copper deposit, which names no tracked material and is not coded."
+  },
+  {
+    "id": "org-lithium-de-france",
+    "name": "Lithium de France",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 21",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"31 Rue de la Redoute, 67500 Haguenau, France\")."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-lithium-nevada-llc",
     "name": "Lithium Nevada LLC",
     "nameOriginal": null,
@@ -1328,6 +1637,30 @@
     "notes": null
   },
   {
+    "id": "org-mineralia",
+    "name": "MINERALIA - Minas, Geotecnia e Construções, Lda.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "PT",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 6",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"R. Padre José G. Eigenmann, n. 90, 4715-199 Braga, Portugal\")."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-mkango-resources",
     "name": "Mkango Resources Ltd.",
     "nameOriginal": null,
@@ -1421,6 +1754,54 @@
         "evidence": "explicit",
         "locator": "Section 2.1",
         "note": "\"Neo Performance's Rare earths magnet project in Estonia\"; the name is recorded as the Communication gives it."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-neomat-pcam",
+    "name": "NEOMAT PCAM",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 24",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"ZAC DES BASSINS 124 RUE DU MAGASIN GENERAL 59140 DUNKERQUE, France\")."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-neptune-energy-innovations",
+    "name": "Neptune Energy Innovations GmbH",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "DE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 3",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Ahrensburger Straße 1, DE-30659 Hannover, Germany\")."
       }
     ],
     "notes": null
@@ -1591,6 +1972,30 @@
     "notes": "Estonian company registration number 16493223. Current beneficiary for project 2021-2027.6.01.22-0002 ('Magnetitehas Narva') in EIS grant register and Ministry project audit. NPM Silmet OÜ was the initial 2022 beneficiary; Ministry audit records reassignment of 95% of grant-supported project activities and budget to NPM Narva OÜ in the 3 November 2023 amendment, with NPM Silmet retained as project partner. Distinct from sponsor/issuer name Neo Performance Materials Inc. No explicit direct parent-company ownership edge is asserted here: audit shows a common corporate group, not a verified direct shareholding chain."
   },
   {
+    "id": "org-npm-silmet-ou",
+    "name": "NPM Silmet OÜ",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "EE",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 35",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Sillamäe linn, Kesk tn 2/1, 40231, Ida-Viru maakond, Estonia\")."
+      }
+    ],
+    "notes": "A different legal entity from NPM Narva OÜ (org-npm-narva-ou). Neo Performance Materials' Annual Information Form of 19 March 2026 lists NPM Silmet OÜ and NPM Narva OÜ as separate Estonian subsidiaries, each 100%. No parent link is recorded: neither the Decision nor the annex states one, and Neo Performance is not yet a registry organisation."
+  },
+  {
     "id": "org-ntwist",
     "name": "NTwist Inc.",
     "nameOriginal": null,
@@ -1612,6 +2017,30 @@
       }
     ],
     "notes": "The NRCan backgrounder identifies NTwist Inc. as the project lead but does not state its jurisdiction of incorporation."
+  },
+  {
+    "id": "org-omcd-tek-hub",
+    "name": "OMCD TEK HUB S.p.A.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "IT",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 33",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"via Megolo, 43 - 28877 Anzola d'Ossola (VB), Italy\")."
+      }
+    ],
+    "notes": null
   },
   {
     "id": "org-orano-batteries",
@@ -1767,6 +2196,42 @@
     "notes": null
   },
   {
+    "id": "org-pure-battery-technologies",
+    "name": "Pure Battery Technologies Limited",
+    "nameOriginal": null,
+    "aliases": [
+      "Pure Batterry Technologies Ltd."
+    ],
+    "kind": "company",
+    "countryCode": "AU",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-abr-abn-96621530185",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Current details: Entity name; Entity type; ASIC registration",
+        "note": "Entity name \"PURE BATTERY TECHNOLOGIES LIMITED\", Australian Public Company, ACN 621 530 185."
+      },
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 29",
+        "note": "Named as a project promoter to which the decision is addressed, spelt \"Pure Batterry Technologies Ltd.\"; the country is read from the promoter's address (\"Level 32, 10 Eagle Street, Brisbane, QLD,4000, Australia\")."
+      }
+    ],
+    "notes": "Both official EU sources spell the promoter \"Pure Batterry Technologies Ltd.\" [sic] (annex entry 29; Decision Article 2, row 29); only the project name in the same row reads \"Pure Battery Technologies pCAM plant Europe\". The name follows the Australian Business Register, and the EU spelling is kept as an alias (maintainer ruling B7, 2026-11-03)."
+  },
+  {
     "id": "org-rain-carbon-canada",
     "name": "Rain Carbon Canada",
     "nameOriginal": null,
@@ -1810,6 +2275,30 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-rhodia-operations",
+    "name": "Rhodia Operations",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 7",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"9 rue des Cuirassiers 69003 Lyon - France\")."
       }
     ],
     "notes": null
@@ -2002,6 +2491,54 @@
     "notes": null
   },
   {
+    "id": "org-sokli-oy",
+    "name": "Sokli Oy",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FI",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 37",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Soklinkairantie 12, 98840, Ruuvaoja, Finland\")."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-suhanko-arctic-platinum",
+    "name": "Suhanko Arctic Platinum Oy",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "FI",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 39",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Ahjotie 7, 96320 Rovaniemi, Finland\")."
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-talga",
     "name": "Talga AB",
     "nameOriginal": null,
@@ -2021,6 +2558,30 @@
         "evidence": "explicit",
         "locator": "Article 2, row 44",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-tdm-electronics",
+    "name": "TDM Electronics Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "PL",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 42",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"Spokojna 1, 05-555, Rembertów, Poland\")."
       }
     ],
     "notes": null
@@ -2712,6 +3273,30 @@
         "evidence": "explicit",
         "locator": "First paragraph",
         "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-zinnwald-lithium-plc",
+    "name": "Zinnwald Lithium Plc",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "GB",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ec-crma-sp-decision-2026-10",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Article 2, row 46",
+        "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address (\"22A St James’s Square, London, SW1Y 4JH, United Kingdom\")."
       }
     ],
     "notes": null

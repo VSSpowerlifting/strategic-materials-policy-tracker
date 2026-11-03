@@ -193,7 +193,7 @@ try {
     assert.equal(download.suggestedFilename(), "smpt-prj-au-alcoa-sojitz-gallium-investigation.json");
     const packet = JSON.parse(await readFile(await download.path(), "utf8"));
     assert.equal(packet.projectionVersion, "smpt-investigation-1");
-    assert.equal(packet.corpus.revision, "2026-10-17");
+    assert.equal(packet.corpus.revision, "2026-11-03");
     assert.equal(packet.projectId, "prj-au-alcoa-sojitz-gallium");
     assert.equal(packet.nativeMilestones[0].id, "mil-au-alcoa-wagerup-groundbreaking-2026-08-24");
     assert.match(packet.nativeMilestones[0].note, /ceremon/);
@@ -236,7 +236,7 @@ try {
     );
     assert.match(
       await page.locator("#events-count").innerText(),
-      /of 65 events/,
+      /of 66 events/,
     );
     await page.locator("#events-government").selectOption("us");
     await page.waitForFunction(
@@ -285,7 +285,7 @@ try {
     await page.waitForFunction(
       () =>
         document.querySelector("#events-count")?.textContent ===
-        "65 of 65 events",
+        "66 of 66 events",
     );
     assert.equal(new URL(page.url()).searchParams.get("context"), "research");
 
