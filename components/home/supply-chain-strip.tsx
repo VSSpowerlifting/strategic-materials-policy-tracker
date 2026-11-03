@@ -25,13 +25,14 @@ const KIND_WORDS = [
 ] as const;
 
 /**
- * The supply chain as a row of stages (a column below `xl`), each with its record counts by kind. The connector
+ * The supply chain as a row of stages, each with its record counts by kind. Below `xl` the row keeps its width and
+ * scrolls sideways inside a focusable region, so it stays one short band instead of a long rail. The connector
  * between two stages carries a slow dash drift and a pulse that passes along the chain stage by stage; both stop
  * under reduced motion. The counts are the content; the motion is decoration and carries no data.
  */
 export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[]; outside: StageCounts[]; asOf: React.ReactNode }) {
   return (
-    <figure aria-labelledby="chain-heading">
+    <figure aria-labelledby="chain-heading" className="m-0">
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
         <h2 id="chain-heading" className="font-display text-base font-semibold">
           Where the records sit along the supply chain
@@ -46,18 +47,25 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
         </ul>
       </div>
 
-      <ol className="mt-8 grid xl:grid-cols-8">
+      <p className="mt-6 font-display text-xs text-muted lg:hidden">Scroll sideways to see every stage.</p>
+      <div
+        tabIndex={0}
+        role="region"
+        aria-label="Supply-chain stages"
+        className="chain-scroll -mx-4 mt-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 xl:mx-0 xl:mt-8 xl:overflow-visible xl:px-0 xl:pb-0"
+      >
+      <ol className="grid min-w-[60rem] grid-cols-8 xl:min-w-0">
         {chain.map((s, i) => {
           const empty = !hasRecords(s);
           return (
-            <li key={s.stage} className="chain-stage relative flex gap-4 pb-6 xl:flex-col xl:items-center xl:gap-3 xl:px-2 xl:pb-0 xl:text-center">
+            <li key={s.stage} className="chain-stage relative flex flex-col items-center gap-3 px-2 text-center">
               {i < chain.length - 1 ? (
                 <span aria-hidden className="chain-link" style={{ "--i": i } as React.CSSProperties} />
               ) : null}
               <span
                 aria-hidden
                 className={
-                  "relative z-10 mt-1 h-3 w-3 shrink-0 rounded-full border-2 bg-background xl:mt-0 " +
+                  "relative z-10 h-3 w-3 shrink-0 rounded-full border-2 bg-background " +
                   (empty ? "border-border-strong" : "border-accent")
                 }
               />
@@ -68,7 +76,7 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
                 {empty ? (
                   <p className="mt-1.5 font-display text-xs text-muted">No records coded</p>
                 ) : (
-                  <ul className="mt-1.5 space-y-1 font-display text-xs leading-4 text-muted xl:inline-block xl:text-left">
+                  <ul className="mt-1.5 inline-block space-y-1 text-left font-display text-xs leading-4 text-muted">
                     {KIND_WORDS.filter(([kind]) => s[kind] > 0).map(([kind, one, many]) => (
                       <li key={kind} className="flex items-center gap-1.5">
                         <KindMark kind={kind} />
@@ -82,6 +90,7 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
           );
         })}
       </ol>
+      </div>
 
       <figcaption className="mt-8 max-w-3xl text-sm leading-6 text-muted">
         Distinct records at each stage across all materials, {asOf}. A record that covers several stages is

@@ -121,7 +121,14 @@ export default function Home() {
             </Link>
           </aside>
         </div>
+        <ElementStrip materials={materials} />
       </Container>
+
+      <section className="border-t border-border">
+        <Container width="wide" className="py-10 sm:py-12">
+          <SupplyChainStrip chain={chain.chain} outside={chain.outside} asOf={asOf} />
+        </Container>
+      </section>
 
       <section id="cases" aria-labelledby="cases-heading" className="scroll-mt-20 border-t border-border-strong">
         <Container width="wide" className="py-10 sm:py-14">
@@ -383,12 +390,6 @@ export default function Home() {
           ) : null}
         </Container>
       </section>
-
-      {/* After the worked cases, not before them: below xl the stage rail is a long vertical list. */}
-      <Container width="wide" className="pt-10 sm:pt-14">
-        <SupplyChainStrip chain={chain.chain} outside={chain.outside} asOf={asOf} />
-        <ElementStrip materials={materials} />
-      </Container>
 
       <section id="browse" aria-label="Browse by material and stage" className="scroll-mt-20">
       <Container width="wide" className="py-10 sm:py-14">

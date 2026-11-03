@@ -119,10 +119,14 @@ test("case statuses are read as of the revision date, so a later entry cannot ap
   assert.equal(designationStatusOn(laterDsg, site.lastUpdated), dsg.statusHistory[0].status);
 });
 
-test("the worked cases come before the supply-chain strip and the material tiles", () => {
+test("the opening runs hero, material tiles, supply-chain strip, then the worked cases", () => {
+  const tiles = view.indexOf('aria-label="Materials in scope"');
+  const strip = view.indexOf('id="chain-heading"');
   const cases = view.indexOf('id="cases"');
-  assert.ok(cases > 0);
-  assert.ok(view.indexOf('id="chain-heading"') > view.indexOf('id="start"'));
-  assert.ok(view.indexOf('aria-label="Materials in scope"') > cases);
-  assert.ok(view.indexOf('id="chain-heading"') < view.indexOf('id="browse"'));
+  assert.ok(view.indexOf('id="scope-heading"') < tiles);
+  assert.ok(tiles < strip);
+  assert.ok(strip < cases);
+  assert.ok(cases < view.indexOf('id="start"'));
+  // One strip only: responsive layout comes from CSS, not a second copy.
+  assert.equal(view.split('id="chain-heading"').length, 2);
 });
