@@ -17,7 +17,8 @@ const minimal=():Record<string,unknown[]>=>Object.fromEntries(F5_SEED_NAMES.map(
 // evidenced only by them. Removing them restores the 17 October row set.
 const EU_CRMA_2026_EVENT="evt-eu-crma-strategic-projects-2026-10";
 const EU_CRMA_2026_SOURCES=new Set(["src-abr-abn-96621530185","src-borme-c-2025-4584",
-  "src-ec-crma-sp-annex-2026-10","src-ec-crma-sp-decision-2026-10","src-ec-rep-lu-2026-10-09"]);
+  "src-ec-crma-sp-annex-2026-10","src-ec-crma-sp-decision-2026-10","src-ec-rep-lu-2026-10-09",
+  "src-eurlex-dec-2026-2349"]);
 type Row={id:string;eventId?:string;evidence?:{sourceId:string}[]};
 const evidencedOnlyByEuCrma2026=(r:Row)=>!!r.evidence?.length&&r.evidence.every(e=>EU_CRMA_2026_SOURCES.has(e.sourceId));
 const withoutEuCrma2026=(s:SeedInput):SeedInput=>({...s,
@@ -72,13 +73,13 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
   const frozen=JSON.stringify(current);
   assert.equal(auditF5CorpusCutoffImpact(withoutEuCrma2026(current),"2026-10-09","2026-10-17").totalPublicSeedRows,700);
   const r=auditF5CorpusCutoffImpact(current,"2026-10-17","2026-11-03");
-  assert.equal(r.totalPublicSeedRows,781);
+  assert.equal(r.totalPublicSeedRows,782);
   assert.equal(r.datasets.find(d=>d.seed==="project-designations")?.rows,59);
-  assert.equal(r.datasets.find(d=>d.seed==="sources")?.rows,188);
+  assert.equal(r.datasets.find(d=>d.seed==="sources")?.rows,189);
   assert.deepEqual([...new Set(r.newlyIncludedDatedFields.map(x=>x.recordId))].sort(),
     [EU_CRMA_2026_EVENT,...EU_CRMA_2026_SOURCES].sort(),
     "no existing record is silently re-dated by the revision");
-  assert.equal(r.countNewlyIncludedDatedFields,7);
+  assert.equal(r.countNewlyIncludedDatedFields,10);
   assert.equal(r.countOtherPostCutoffFields,0);
   assert.equal(r.countFutureIntervalEndFields,21);
   assert.equal(r.publicationAuthorized,false);
@@ -124,7 +125,7 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   const parsed=JSON.parse(output);
   assert.equal(parsed.proposedCutoff,"2026-11-03");
   assert.equal(parsed.currentPublishedCutoff,"2026-11-03");
-  assert.equal(parsed.totalPublicSeedRows,781);
+  assert.equal(parsed.totalPublicSeedRows,782);
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
   assert.equal(parsed.countFutureIntervalEndFields,21);
   assert.equal(parsed.publicationAuthorized,false,
