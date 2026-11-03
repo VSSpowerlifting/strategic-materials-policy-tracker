@@ -63,6 +63,12 @@ The page answers its questions in reading order:
 5. **Start with a material.** Links to `/events?material=…`.
 6. **Records, not articles.** How evidence is layered, with links to the methodology and the data.
 
+**2026-11-03 additions** (`components/home/supply-chain-strip.tsx`):
+
+- **The supply-chain strip.** For each physical stage it shows the distinct commitments, control clauses and designations, taken from `chainStageCounts` in `lib/homepage-chain.ts` over the lattice model. The kinds are never added together. The connector animation carries no data and is static under reduced motion. The strip is a vertical rail below `xl` and a single row at `xl` and above.
+- **The element strip.** Material tiles in the hero, each linking to `/materials/{slug}`.
+- **Tests.** Both are covered by `tests/homepage-chain.test.ts`.
+
 ### Section numbering
 
 `AtlasIndex` and `Section` still accept `index` so existing callers compile, but they no longer draw it.
@@ -89,6 +95,7 @@ These checks ran on a production build (`next build && next start`) in a browser
 | `before-capital-1440.png` | `after-capital-1440.png` |
 | `before-events-1440.png` | `after-events-1440.png` |
 | `before-research-tools-1440.png` | (panel removed; see the second header row in any `after-*` capture) |
+| `before-redesign-home-{320,375,768,1024,1440}.png` | `after-redesign-home-{320,375,768,1024,1440}.png` (2026-11-03 editorial homepage with worked cases; full page) |
 
 ## Overlap with open PRs
 

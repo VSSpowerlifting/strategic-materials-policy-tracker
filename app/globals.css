@@ -263,7 +263,48 @@
   }
 }
 
+/* Homepage supply-chain strip: the connector from one stage to the next. Below xl it runs down the left rail;
+   at xl it runs across to the next column. The dash drift and the travelling pulse are decoration only. */
+.chain-link {
+  position: absolute;
+  top: 1rem; bottom: -0.25rem; left: 0.3125rem; width: 2px;
+  background-image: linear-gradient(to bottom, color-mix(in oklab, var(--accent) 55%, transparent) 50%, transparent 50%);
+  background-size: 2px 8px;
+  animation: chain-drift-y 1.6s linear infinite;
+  overflow: hidden;
+}
+.chain-link::after {
+  content: "";
+  position: absolute; left: -1px; top: 0; width: 4px; height: 14px; border-radius: 2px;
+  background: var(--mark-commitment);
+  box-shadow: 0 0 8px var(--mark-commitment);
+  opacity: 0;
+  animation: chain-pulse-y 5.6s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.7s);
+}
+@media (min-width: 80rem) {
+  .chain-link {
+    top: 0.3125rem; bottom: auto; left: calc(50% + 0.5rem); right: calc(-50% + 0.5rem); width: auto; height: 2px;
+    background-image: linear-gradient(to right, color-mix(in oklab, var(--accent) 55%, transparent) 50%, transparent 50%);
+    background-size: 8px 2px;
+    animation-name: chain-drift-x;
+  }
+  .chain-link::after { top: -1px; left: 0; width: 14px; height: 4px; animation-name: chain-pulse-x; }
+}
+@keyframes chain-drift-y { to { background-position: 0 8px; } }
+@keyframes chain-drift-x { to { background-position: 8px 0; } }
+@keyframes chain-pulse-y {
+  0% { top: 0; opacity: 0; } 2% { opacity: 1; } 11% { opacity: 1; } 12.5% { top: calc(100% - 14px); opacity: 0; } 100% { opacity: 0; }
+}
+@keyframes chain-pulse-x {
+  0% { left: 0; opacity: 0; } 2% { opacity: 1; } 11% { opacity: 1; } 12.5% { left: calc(100% - 14px); opacity: 0; } 100% { opacity: 0; }
+}
+.element-tile { transition: background-color 150ms ease, border-color 150ms ease; }
+.element-tile:hover { background: var(--surface); border-color: currentColor !important; }
+
 @media (prefers-reduced-motion: reduce) {
+  .chain-link,
+  .chain-link::after,
   .flow-line,
   .flow-line--slow,
   .choke-pulse {

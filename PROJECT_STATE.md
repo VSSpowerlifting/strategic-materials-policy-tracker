@@ -1,3 +1,34 @@
+## 2026-11-03: editorial homepage redesign (uncommitted, branch `claude/smpt-homepage-redesign-6cb2dc`)
+
+- Worktree `.claude/worktrees/smpt-homepage-redesign-6cb2dc` from `b4834d7` (= `origin/main`). Frontend only: no `data/seed/*`, taxonomy, classification, status, review, calculation, API, export or validation change, and `site.lastUpdated` stays `2026-10-17`.
+- `app/page.tsx` now runs value → worked cases → start a task → browse by material and stage → evidence standards and limits. Hero CTAs go to `#cases` and `#start`. The four qualified coverage counts and the `/coverage` link are kept in a "Scope and freshness" aside.
+- Three worked cases (`lib/homepage-cases.ts`), each built from record ids through the public loaders and read as of `site.lastUpdated`. A case drops out if a record goes missing.
+  - Export restriction: `china-rare-earth-controls-2025-04` → `ctl-cn-ree-2025-04-export-licensing` (`lang="zh"` scope text) → materials → `src-mofcom-18`. The paused October clause (`ctl-cn-ree-2025-10-foreign-direct-product-licensing`) appears with its derived status and end date, next to `china-rare-earth-suspension-2025-11`.
+  - Financing: `fin-au-alcoa-sojitz-gallium-2025-equity`, `fin-us-exim-perpetua-stibnite-2026` and `fin-us-dod-perpetua-stibnite-dpa`. These sit at three distinct statuses. Each shows its status definition, the payment wording from the shared `explainFinancialRecord`, and the source's `amountAsStated`. Nothing is summed.
+  - Tungsten: `dsg-eu-crma-tungsten-west`, `fin-uk-nwf-2026-tungsten-west-package`, `fin-jp-jogmec-almt-tungsten-grant` and `ctl-cn-tungsten-2025-export-licensing`. They are ordered by supply-chain stage and then date, and the page states that this order is not a ranking or an effectiveness measure.
+- The five journeys and the investigation entries stay under "Start your own question". The lattice is kept unchanged as a secondary section.
+- New `tests/homepage-research-journeys.test.ts` (7 tests) checks that:
+  - the cases are present;
+  - every case record link resolves;
+  - derived statuses and payment wording are shown;
+  - the `lang="zh"` text is marked;
+  - there are no money totals and exactly four `<dd>`;
+  - the heading outline is valid;
+  - in-page anchors have targets.
+- QA (dev server):
+  - axe-core 4.10.2 (wcag2a/2aa/21aa + best-practice): 0 homepage violations.
+  - 80 unique `<main>` links returned 200.
+  - Keyboard: the skip link comes first, focus is visible, and the CTAs move focus to their sections; reduced motion keeps `scroll-behavior: auto`.
+  - No page-level horizontal overflow at 320/375/768/1024. The lattice table scrolls inside its own container at 1024.
+- Gates: validate, typecheck, tests 1075/1075 and build all pass. Lint has 0 errors and 9 warnings, all pre-existing in untouched `scripts/`/`tests/` files.
+- Screenshots: `docs/frontend/screenshots/before-redesign-home-{320,375,768,1024,1440}.png` and `after-redesign-home-{320,375,768,1024,1440}.png` (full page). These were taken before the two strips below were added.
+- Follow-up (same day): two data-grounded graphics in `components/home/supply-chain-strip.tsx`.
+  - Supply-chain strip, after the hero. `lib/homepage-chain.ts` derives each stage's distinct commitments, control clauses and designations from the existing lattice model. The three kinds are counted separately and never added together, and there is no total. Stages outside the physical chain are listed in the caption only when they hold records. The layout is a vertical rail below `xl` (80rem) and an 8-column row at `xl` and above. The animated dash connector and pulse are decoration only and stop under `prefers-reduced-motion`. The section links to the lattice, now `#browse`.
+  - Element strip in the hero: one tile per material linking to `/materials/{slug}`. `lib/materials-meta.ts` gains Li, Co and Ni symbols and hues; these are presentation only.
+  - New `tests/homepage-chain.test.ts` (5 tests) checks that the stage order is correct, that each count equals the distinct lattice-cell union, that no total key exists, that off-chain stages appear only when they hold records, and that the homepage renders the strip and every material link.
+  - Checked in the dev server: no page overflow at 320/375/768/1024/1280/1440; the element row fits on one line at 1440.
+- Not committed, pushed or opened as a PR; awaiting maintainer review.
+
 ## 2026-11-01: PR closeout; monitoring and evidence-pathway work stopped
 
 - Maintainer decision: stop building monitoring and evidence-pathway infrastructure (EXIM/DOE monitoring, F5 Observatory, F4 amount history) and resolve every open PR.
