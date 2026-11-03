@@ -8,6 +8,7 @@ import {
 import { getInvestigationEntries } from "@/lib/research-experience";
 import { LatticeOverview } from "@/components/lattice/lattice";
 import { ElementStrip, SupplyChainStrip } from "@/components/home/supply-chain-strip";
+import { HeroPlate } from "@/components/home/hero-plate";
 import { chainStageCounts } from "@/lib/homepage-chain";
 import { buildLatticeModel } from "@/lib/lattice";
 import { formatDateLong } from "@/lib/format";
@@ -94,7 +95,8 @@ export default function Home() {
               Research by <Link href="/about" className="underline underline-offset-4">Benjamin Yang</Link>.
             </p>
           </div>
-          <aside aria-labelledby="scope-heading" className="self-end border-t border-border-strong pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+          <aside aria-labelledby="scope-heading" className="relative self-end border-t border-border-strong pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <HeroPlate />
             <h2 id="scope-heading" className="font-display text-sm font-semibold">Scope and freshness</h2>
             <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
               Curated revision: <time dateTime={site.lastUpdated}>{revision}</time>. Coverage is selective and
