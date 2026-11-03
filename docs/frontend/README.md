@@ -63,6 +63,14 @@ The page answers its questions in reading order:
 5. **Start with a material.** Links to `/events?material=…`.
 6. **Records, not articles.** How evidence is layered, with links to the methodology and the data.
 
+**2026-11-03 additions** (`components/home/supply-chain-strip.tsx`):
+
+- **The supply-chain strip.** For each physical stage it shows the distinct commitments, control clauses and designations, taken from `chainStageCounts` in `lib/homepage-chain.ts` over the lattice model. The kinds are never added together. The connector animation carries no data and is static under reduced motion. The strip is one horizontal 8-column row at every width. Below `lg` the row sits in a focusable, labelled region (`role="region"`, "Supply-chain stages") that scrolls sideways, with a short "Scroll sideways" hint. From `lg` up the row fits without scrolling. The DOM holds one copy of the strip.
+- **The element strip.** A row of material tiles, each linking to `/materials/{slug}`. The material's hue appears only on the tile border. The symbol uses the foreground colour, because three hued symbols (C, Nd and W) measured below 4.5:1.
+- **Placement (final layout, 2026-11-03).** The order is the hero (with scope/freshness and the drafting mark), then the material tiles inside the hero container, then the supply-chain strip, then the three worked cases, then the tools and browse sections. An earlier QA pass had moved both strips below the cases because the vertical rail below `xl` was about 1,100px tall. The horizontal scrolling row removes that cost: the strip is about 505px tall at 375px and 296px at 1280px and above. The first case now starts at 2,290px at 320px, 2,050px at 375px and 1,399px at 1280/1440px.
+- **Hero drafting mark** (`components/home/hero-plate.tsx`). A static SVG sits in the empty space above "Scope and freshness". It continues the aside's left rule upward with reference ticks, three broken concentric arcs, two gapped connectors, five unlabelled nodes and two registration marks. Strokes are 1px `--border-strong` at reduced opacity; the one gold node is `--brand-gold` at 60% stroke. It has no text, data or implied relationship, and it is not a copy of the stage strip. It is `aria-hidden`, `focusable="false"` and `pointer-events: none`, and has no animation, gradient or grain. It is positioned absolutely (`bottom-full`), so it adds no height and leaves the headline, copy, CTAs and counts where they were. It shows only at `lg` and above; below `lg` the aside stacks under the hero and there is no empty space to fill.
+- **Tests.** `tests/homepage-chain.test.ts` covers both strips. `tests/homepage-research-journeys.test.ts` checks the order (hero, tiles, strip, cases, start) and that the strip renders once.
+
 ### Section numbering
 
 `AtlasIndex` and `Section` still accept `index` so existing callers compile, but they no longer draw it.
@@ -89,6 +97,9 @@ These checks ran on a production build (`next build && next start`) in a browser
 | `before-capital-1440.png` | `after-capital-1440.png` |
 | `before-events-1440.png` | `after-events-1440.png` |
 | `before-research-tools-1440.png` | (panel removed; see the second header row in any `after-*` capture) |
+| `before-redesign-home-{320,375,768,1024,1440}.png` | `after-redesign-home-{320,375,768,1024,1280,1440}.png` (2026-11-03 editorial homepage with worked cases, after the QA pass; full page) |
+| `before-hero-motif-{320,375,768,1024,1280,1440}.png` | `after-hero-motif-{320,375,768,1024,1280,1440}.png` (hero drafting mark; first viewport) |
+| `after-hero-motif-*.png` | `after-final-layout-{320,375,768,1024,1280,1440}.png` (first viewport), `after-final-layout-375-strip-scrolled.png`, `after-final-layout-1440-full.png` (tiles and strip under the hero) |
 
 ## Overlap with open PRs
 
