@@ -4,7 +4,16 @@ import { existsSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import Home from "../app/page";
-import { getFinancingCase, getLegalControlCase, getTungstenCase } from "../lib/homepage-cases";
+import {
+  designationStatusOn,
+  financialReadingOn,
+  getFinancingCase,
+  getLegalControlCase,
+  getTungstenCase,
+} from "../lib/homepage-cases";
+import { financialStatusOn } from "../lib/capital-control";
+import { site } from "../lib/site";
+import { getProjectDesignationById } from "../lib/data";
 import {
   getControlMeasureById,
   getEventById,
@@ -85,4 +94,35 @@ test("headings form one outline: a single h1 and no skipped levels", () => {
 test("in-page calls to action point at sections that exist", () => {
   for (const anchor of [...view.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]))
     assert.ok(view.includes(`id="${anchor}"`), `#${anchor} has no target`);
+});
+
+test("case statuses are read as of the revision date, so a later entry cannot appear under it", () => {
+  const dod = getFinancialCommitmentById("fin-us-dod-perpetua-stibnite-dpa")!;
+  const later = {
+    ...dod,
+    financialStatusHistory: [
+      ...dod.financialStatusHistory,
+      { ...dod.financialStatusHistory.at(-1)!, status: "withdrawn" as const, date: "2099-01-01" },
+    ],
+  };
+  const reading = financialReadingOn(later, site.lastUpdated)!;
+  assert.equal(reading.key, financialStatusOn(dod, site.lastUpdated));
+  assert.notEqual(reading.key, "withdrawn");
+  assert.doesNotMatch(reading.payment, /ended instrument/);
+  assert.equal(financialReadingOn(dod, "2000-01-01"), null);
+
+  for (const row of getFinancingCase())
+    assert.equal(row.status.key, financialStatusOn(row.commitment, site.lastUpdated), row.commitment.id);
+
+  const dsg = getProjectDesignationById("dsg-eu-crma-tungsten-west")!;
+  const laterDsg = { ...dsg, statusHistory: [...dsg.statusHistory, { ...dsg.statusHistory[0], status: "withdrawn" as never, date: "2099-01-01" }] };
+  assert.equal(designationStatusOn(laterDsg, site.lastUpdated), dsg.statusHistory[0].status);
+});
+
+test("the worked cases come before the supply-chain strip and the material tiles", () => {
+  const cases = view.indexOf('id="cases"');
+  assert.ok(cases > 0);
+  assert.ok(view.indexOf('id="chain-heading"') > view.indexOf('id="start"'));
+  assert.ok(view.indexOf('aria-label="Materials in scope"') > cases);
+  assert.ok(view.indexOf('id="chain-heading"') < view.indexOf('id="browse"'));
 });

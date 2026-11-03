@@ -1,4 +1,4 @@
-## 2026-11-03: editorial homepage redesign (uncommitted, branch `claude/smpt-homepage-redesign-6cb2dc`)
+## 2026-11-03: editorial homepage redesign (draft PR #187, branch `claude/smpt-homepage-redesign-6cb2dc`)
 
 - Worktree `.claude/worktrees/smpt-homepage-redesign-6cb2dc` from `b4834d7` (= `origin/main`). Frontend only: no `data/seed/*`, taxonomy, classification, status, review, calculation, API, export or validation change, and `site.lastUpdated` stays `2026-10-17`.
 - `app/page.tsx` now runs value → worked cases → start a task → browse by material and stage → evidence standards and limits. Hero CTAs go to `#cases` and `#start`. The four qualified coverage counts and the `/coverage` link are kept in a "Scope and freshness" aside.
@@ -27,7 +27,15 @@
   - Element strip in the hero: one tile per material linking to `/materials/{slug}`. `lib/materials-meta.ts` gains Li, Co and Ni symbols and hues; these are presentation only.
   - New `tests/homepage-chain.test.ts` (5 tests) checks that the stage order is correct, that each count equals the distinct lattice-cell union, that no total key exists, that off-chain stages appear only when they hold records, and that the homepage renders the strip and every material link.
   - Checked in the dev server: no page overflow at 320/375/768/1024/1280/1440; the element row fits on one line at 1440.
-- Not committed, pushed or opened as a PR; awaiting maintainer review.
+- Committed as `0deed7f` and opened as draft PR #187.
+- Final visual QA pass (same day):
+  - Both strips moved out of the hero to sit after "Start your own question" and before `#browse`. The first worked case now starts at 1,476px instead of 2,891px at 320px, and at 938px instead of 1,411px at 1440px.
+  - Element-tile symbols now use the foreground colour, with the hue on the border only. C, Nd and W had measured 3.39–4.18:1; all tiles now measure 11.43:1.
+  - Case statuses: `financialReadingOn` and `designationStatusOn` in `lib/homepage-cases.ts` read financing and designation statuses as of `site.lastUpdated`, so an entry added later cannot show under the revision date. The statuses displayed were already correct. New tests cover the as-of cut and the section order.
+  - Checked: no overflow at 320/375/768/1024/1280/1440, keyboard order and focus outlines correct, and the chain animations are `none` under reduced motion.
+  - Gates: tests 1082/1082, validate, typecheck and build pass. Lint has 0 errors and 9 pre-existing warnings.
+  - Screenshots refreshed: `after-redesign-home-{320,375,768,1024,1280,1440}.png`.
+  - Not merged or deployed; awaiting maintainer visual approval.
 
 ## 2026-11-01: PR closeout; monitoring and evidence-pathway work stopped
 

@@ -14,7 +14,7 @@ import {
   getProjectDesignationById,
   getSourceById,
 } from "./data";
-import { controlStatusOn, currentFinancialStatus } from "./capital-control";
+import { controlStatusOn, financialStatusEntryOn } from "./capital-control";
 import { CONTROL_STATUS_DEFS, FINANCIAL_STATUS_DEFS } from "./capital-vocabulary";
 import { explainFinancialRecord } from "./financial-reading";
 import { amountView } from "./lattice";
@@ -26,9 +26,31 @@ import {
   supplyChainStageLabels,
 } from "./labels";
 import { site } from "./site";
-import type { ControlMeasure, SupplyChainStage } from "./types";
+import type { ControlMeasure, FinancialCommitment, ProjectDesignation, SupplyChainStage } from "./types";
 
 const stageList = (stages: readonly SupplyChainStage[]) => stages.map((s) => supplyChainStageLabels[s]);
+
+/**
+ * A commitment's status and payment wording as of `asOf`, not its latest entry: the history is cut at the
+ * last entry evidenced by that date, so an entry added after the revision cannot appear under its date.
+ * Null when nothing is evidenced by then.
+ */
+export function financialReadingOn(c: FinancialCommitment, asOf: string) {
+  const entry = financialStatusEntryOn(c, asOf);
+  if (!entry) return null;
+  const history = c.financialStatusHistory.slice(0, c.financialStatusHistory.indexOf(entry) + 1);
+  return {
+    key: entry.status,
+    label: financialStatusLabels[entry.status],
+    definition: FINANCIAL_STATUS_DEFS[entry.status],
+    payment: explainFinancialRecord({ ...c, financialStatusHistory: history }).payment,
+  };
+}
+
+/** A designation's status as of `asOf`: the last dated entry on or before it. */
+export function designationStatusOn(d: ProjectDesignation, asOf: string) {
+  return d.statusHistory.filter((e) => e.date !== null && e.date <= asOf).at(-1)?.status ?? null;
+}
 
 function controlStatus(m: ControlMeasure) {
   const status = controlStatusOn(m, site.lastUpdated);
@@ -72,8 +94,8 @@ export function getFinancingCase() {
     const c = getFinancialCommitmentById(id);
     const project = c?.projectId ? getProjectById(c.projectId) : undefined;
     const event = c ? getEventById(c.eventId) : undefined;
-    if (!c || !project || !event || !c.amount) return [];
-    const status = currentFinancialStatus(c);
+    const reading = c ? financialReadingOn(c, site.lastUpdated) : null;
+    if (!c || !project || !event || !c.amount || !reading) return [];
     return [
       {
         commitment: c,
@@ -81,9 +103,9 @@ export function getFinancingCase() {
         provider: c.provider,
         instrument: financialInstrumentLabels[c.instrument],
         amount: amountView(c)!,
-        status: { key: status, label: financialStatusLabels[status], definition: FINANCIAL_STATUS_DEFS[status] },
+        status: { key: reading.key, label: reading.label, definition: reading.definition },
         /** What the status does and does not establish about payment, from the shared reader interpretation. */
-        payment: explainFinancialRecord(c).payment,
+        payment: reading.payment,
       },
     ];
   });
@@ -112,7 +134,7 @@ export function getTungstenCase(): TungstenEntry[] {
   const designation = getProjectDesignationById("dsg-eu-crma-tungsten-west");
   const dsgEvent = designation ? getEventById(designation.eventId) : undefined;
   const dsgProject = designation ? getProjectById(designation.projectId) : undefined;
-  const dsgStatus = designation?.statusHistory.at(-1)?.status;
+  const dsgStatus = designation ? designationStatusOn(designation, site.lastUpdated) : null;
   if (designation && dsgEvent && dsgProject && dsgStatus && jurisdictionName(dsgEvent.jurisdiction))
     entries.push({
       id: designation.id,
@@ -134,7 +156,8 @@ export function getTungstenCase(): TungstenEntry[] {
     const c = getFinancialCommitmentById(finId);
     const event = c ? getEventById(c.eventId) : undefined;
     const project = c?.projectId ? getProjectById(c.projectId) : undefined;
-    if (!c || !event || !project || !jurisdictionName(event.jurisdiction)) continue;
+    const reading = c ? financialReadingOn(c, site.lastUpdated) : null;
+    if (!c || !event || !project || !reading || !jurisdictionName(event.jurisdiction)) continue;
     entries.push({
       id: c.id,
       lever,
@@ -143,7 +166,7 @@ export function getTungstenCase(): TungstenEntry[] {
       title: event.titleEn,
       href: `/capital/${c.id}`,
       stages: stageList(project.stages),
-      status: financialStatusLabels[currentFinancialStatus(c)],
+      status: reading.label,
       detail: { project: { id: project.id, name: project.name }, amount: amountView(c) },
     });
   }

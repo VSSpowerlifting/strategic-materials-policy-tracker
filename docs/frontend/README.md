@@ -66,8 +66,9 @@ The page answers its questions in reading order:
 **2026-11-03 additions** (`components/home/supply-chain-strip.tsx`):
 
 - **The supply-chain strip.** For each physical stage it shows the distinct commitments, control clauses and designations, taken from `chainStageCounts` in `lib/homepage-chain.ts` over the lattice model. The kinds are never added together. The connector animation carries no data and is static under reduced motion. The strip is a vertical rail below `xl` and a single row at `xl` and above.
-- **The element strip.** Material tiles in the hero, each linking to `/materials/{slug}`.
-- **Tests.** Both are covered by `tests/homepage-chain.test.ts`.
+- **The element strip.** A row of material tiles, each linking to `/materials/{slug}`. The material's hue appears only on the tile border. The symbol uses the foreground colour, because three hued symbols (C, Nd and W) measured below 4.5:1.
+- **Placement (QA pass, 2026-11-03).** Both strips sit after "Start your own question" and before "Browse by material and stage", not in the hero. Below `xl` the stage rail is a long vertical list, about 1,100px tall at 375px. In the hero it pushed the first worked case down to 2,891px at 320px and 1,411px at 1440px. After the move the first case starts at 1,476px and 938px. The tiles also competed with the hero buttons.
+- **Tests.** `tests/homepage-chain.test.ts` covers both strips. `tests/homepage-research-journeys.test.ts` checks that the cases come before both strips.
 
 ### Section numbering
 
@@ -95,7 +96,7 @@ These checks ran on a production build (`next build && next start`) in a browser
 | `before-capital-1440.png` | `after-capital-1440.png` |
 | `before-events-1440.png` | `after-events-1440.png` |
 | `before-research-tools-1440.png` | (panel removed; see the second header row in any `after-*` capture) |
-| `before-redesign-home-{320,375,768,1024,1440}.png` | `after-redesign-home-{320,375,768,1024,1440}.png` (2026-11-03 editorial homepage with worked cases; full page) |
+| `before-redesign-home-{320,375,768,1024,1440}.png` | `after-redesign-home-{320,375,768,1024,1280,1440}.png` (2026-11-03 editorial homepage with worked cases, after the QA pass; full page) |
 
 ## Overlap with open PRs
 

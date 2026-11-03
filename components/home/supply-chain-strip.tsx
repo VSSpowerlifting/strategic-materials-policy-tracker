@@ -31,7 +31,7 @@ const KIND_WORDS = [
  */
 export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[]; outside: StageCounts[]; asOf: React.ReactNode }) {
   return (
-    <figure aria-labelledby="chain-heading" className="mt-12 border-t border-border-strong pt-8">
+    <figure aria-labelledby="chain-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
         <h2 id="chain-heading" className="font-display text-base font-semibold">
           Where the records sit along the supply chain
@@ -117,8 +117,8 @@ export function ElementStrip({ materials }: { materials: Material[] }) {
               <Link
                 href={`/materials/${m.slug}`}
                 title={m.nameEn}
-                className="element-tile relative flex h-10 min-w-10 items-center justify-center rounded border bg-elevated px-1.5 font-mono text-sm font-medium"
-                style={{ borderColor: `${hue}66`, color: hue }}
+                className="element-tile relative flex h-10 min-w-10 items-center justify-center rounded border bg-elevated px-1.5 font-mono text-sm font-medium text-foreground/90"
+                style={{ borderColor: `${hue}80` }}
               >
                 <span className="sr-only">{m.nameEn}</span>
                 <span aria-hidden>{symbol}</span>
