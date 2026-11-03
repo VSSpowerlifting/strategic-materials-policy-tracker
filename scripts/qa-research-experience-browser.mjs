@@ -236,7 +236,7 @@ try {
     );
     assert.match(
       await page.locator("#events-count").innerText(),
-      /of 65 events/,
+      /of 66 events/,
     );
     await page.locator("#events-government").selectOption("us");
     await page.waitForFunction(
@@ -285,7 +285,7 @@ try {
     await page.waitForFunction(
       () =>
         document.querySelector("#events-count")?.textContent ===
-        "65 of 65 events",
+        "66 of 66 events",
     );
     assert.equal(new URL(page.url()).searchParams.get("context"), "research");
 

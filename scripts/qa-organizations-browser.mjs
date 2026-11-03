@@ -30,8 +30,8 @@ try{
   await page.goto(origin+"/organizations",{waitUntil:"networkidle"});
   assert.equal(await page.locator("h1").innerText(),"Organizations");
   const total=await page.getByTestId("organization-record").count();
-  assert.equal(total,99);
-  assert.equal(await page.getByTestId("organization-result-count").innerText(),"99");
+  assert.equal(total,122);
+  assert.equal(await page.getByTestId("organization-result-count").innerText(),"122");
   await page.locator("#organizations-kind").selectOption("joint_vehicle");
   await page.waitForFunction(()=>new URLSearchParams(location.search).get("kind")==="joint_vehicle");
   assert.equal(await page.getByTestId("organization-record").count(),1);
@@ -49,7 +49,7 @@ try{
  await page.goto(origin+"/organizations?role=sponsor",{waitUntil:"networkidle"});
  assert.equal(await page.locator("#organizations-role").inputValue(),"sponsor");
  const results=await page.getByTestId("organization-record").count();
- assert.ok(results>0&&results<99);
+ assert.ok(results>0&&results<122);
  assert.ok((await page.getByTestId("organization-record").allTextContents())
    .every(s=>s.includes("sponsored project")));
  await page.locator("#organizations-query").fill("no-such-company-ever-9911");
@@ -61,6 +61,6 @@ try{
  await page.keyboard.press("Enter");
  await page.waitForURL(/\/organizations\/org-5n-plus$/);
  assert.ok((await page.locator("h1").innerText()).includes("5N Plus"));
- console.log("Organization explorer: 99 prerendered records, source-defined roles, shareable filters, keyboard detail links and mobile/tablet/desktop passed.");
+ console.log("Organization explorer: 122 prerendered records, source-defined roles, shareable filters, keyboard detail links and mobile/tablet/desktop passed.");
  await page.close();
 }finally{if(browser)await browser.close();server.kill("SIGTERM")}
