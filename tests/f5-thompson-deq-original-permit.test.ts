@@ -128,7 +128,7 @@ test("original-source edges cannot turn regulatory authorization into audited ph
   assert.equal(permit.sourceEvidenceEdges[0].doesNotSupport,"all_new_units_commissioned_or_realized_output");
   assert.equal(permit.sourceEvidenceEdges[1].doesNotSupport,"all_nine_operating_together_or_nameplate_tonnage");
   assert.equal(permit.sourceEvidenceEdges[2].doesNotSupport,"exact_commissioning_day_or_full_capacity");
-  assert.equal(site.lastUpdated,"2026-10-17");
+  assert.equal(site.lastUpdated,"2026-11-03");
   assert.equal(getAllProjectMilestones().length,2);
 });
 

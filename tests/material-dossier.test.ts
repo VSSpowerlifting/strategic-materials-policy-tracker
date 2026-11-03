@@ -44,10 +44,11 @@ test("tungsten cells equal the hand-checked table in the specification", () => {
   const p = dossier("tungsten");
   const at = (id: string) => p.stages.find((s) => s.id === id)!.counts;
   assert.deepEqual(at("exploration"), { commitments: 1, controls: 0, designations: 0 });
-  assert.deepEqual(at("mining"), { commitments: 2, controls: 0, designations: 3 });
-  assert.deepEqual(at("processing"), { commitments: 3, controls: 1, designations: 2 });
+  assert.deepEqual(at("mining"), { commitments: 2, controls: 0, designations: 4 });
+  assert.deepEqual(at("processing"), { commitments: 3, controls: 1, designations: 3 });
   assert.deepEqual(at("refining"), { commitments: 2, controls: 1, designations: 1 });
-  for (const s of p.stages) if (!["exploration", "mining", "processing", "refining"].includes(s.id)) assert.deepEqual(s.counts, { commitments: 0, controls: 0, designations: 0 }, s.id);
+  assert.deepEqual(at("recycling"), { commitments: 0, controls: 0, designations: 1 });
+  for (const s of p.stages) if (!["exploration", "mining", "processing", "refining", "recycling"].includes(s.id)) assert.deepEqual(s.counts, { commitments: 0, controls: 0, designations: 0 }, s.id);
   // One clause, the China anti-smuggling campaign, records no stage, by rule.
   assert.equal(p.unstaged.controls.length, 1);
   assert.match(p.unstaged.controls[0].noStageReason ?? "", /^By rule/);
@@ -80,34 +81,34 @@ test("every material and stage: cards, counts and the lattice model agree", () =
 test("tungsten stats", () => {
   const p = dossier("tungsten");
   const v = (k: string) => stat(p, k).value;
-  assert.equal(v("events"), 18);
+  assert.equal(v("events"), 19);
   assert.equal(v("clauses"), 2);
   assert.equal(v("capital"), 8);
   assert.equal(stat(p, "capital").sublabel, "2 of them are parts of a package");
-  assert.equal(v("designations"), 5);
-  assert.equal(v("projects"), 6);
+  assert.equal(v("designations"), 8);
+  assert.equal(v("projects"), 9);
   assert.equal(stat(p, "projects").sublabel, "1 with no designation");
   assert.equal(v("programmes"), 4);
-  assert.equal(v("organizations"), 11);
-  assert.equal(v("sources"), 29);
+  assert.equal(v("organizations"), 13);
+  assert.equal(v("sources"), 32);
 });
 
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
   const expected: Record<string, [number, number, number]> = {
-    tungsten: [5, 6, 1],
-    "rare-earth-elements": [9, 22, 13],
-    graphite: [15, 22, 7],
+    tungsten: [8, 9, 1],
+    "rare-earth-elements": [13, 26, 13],
+    graphite: [19, 26, 7],
     "ndfeb-magnets": [0, 5, 5],
-    gallium: [1, 4, 3],
-    germanium: [2, 5, 3],
+    gallium: [2, 5, 3],
+    germanium: [3, 6, 3],
     dysprosium: [0, 3, 3],
     terbium: [0, 3, 3],
     antimony: [0, 6, 6],
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
-    lithium: [1, 9, 8], // Thacker Pass and Rhyolite Ridge processing are separate non-designated projects
-    cobalt: [4, 5, 1],
-    nickel: [4, 6, 2],
+    lithium: [8, 16, 8], // Thacker Pass and Rhyolite Ridge processing are separate non-designated projects
+    cobalt: [14, 15, 1],
+    nickel: [16, 18, 2],
   };
   for (const slug of slugs) {
     const p = dossier(slug);
@@ -118,14 +119,14 @@ test("designations, projects and projects with no designation, per material; the
 
 // --- AC-3: the sources definition -----------------------------------------------------------------
 
-test("sources: 29 for tungsten, 33 if registry evidence were counted, and an unrelated registry citation is excluded", () => {
+test("sources: 32 for tungsten, 37 if registry evidence were counted, and an unrelated registry citation is excluded", () => {
   const cited = sourcesCitedByMaterial("tungsten");
-  assert.equal(cited.length, 29);
+  assert.equal(cited.length, 32);
   assert.ok(cited.some((c) => c.source.id === "src-iea-critical-minerals"), "the material record's own source");
   assert.deepEqual(cited.find((c) => c.source.id === "src-iea-critical-minerals")!.citedBy.map((c) => c.kind), ["material_record"]);
   for (const c of cited) assert.ok(c.citedBy.length >= 1, c.source.id);
   const wider = sourcesCitedByMaterial("tungsten", undefined, { includeRegistry: true });
-  assert.equal(wider.length, 33);
+  assert.equal(wider.length, 37);
   assert.notEqual(cited.length, wider.length);
 
   // A fixture: a registry organization of the material cites a source no record of the material cites.
@@ -133,7 +134,7 @@ test("sources: 29 for tungsten, 33 if registry evidence were counted, and an unr
   const unrelated = data.sources.find((s) => !cited.some((c) => c.source.id === s.id) && !wider.some((c) => c.source.id === s.id))!;
   const org = data.organizations.find((o) => o.id === "org-jp-jogmec")!;
   const fixture: DossierData = { ...data, organizations: data.organizations.map((o) => (o.id === org.id ? { ...o, evidence: [...o.evidence, { sourceId: unrelated.id, supports: ["name"], evidence: "explicit" as const }] } : o)) };
-  assert.equal(sourcesCitedByMaterial("tungsten", fixture).length, 29);
+  assert.equal(sourcesCitedByMaterial("tungsten", fixture).length, 32);
   assert.ok(sourcesCitedByMaterial("tungsten", fixture, { includeRegistry: true }).some((c) => c.source.id === unrelated.id));
 });
 
@@ -385,7 +386,7 @@ test("edge fixtures: a funding option, a row with no amount, a group material, a
 
 test("every event is plotted at its event date, never its publication date", () => {
   const p = dossier("tungsten");
-  assert.equal(p.timeline.points.length, 18);
+  assert.equal(p.timeline.points.length, 19);
   const differs = seedData().events.filter((e) => e.affectedMaterialIds.includes("tungsten") && e.lifecycle.officialPublicationDate !== e.date);
   assert.ok(differs.length >= 4, "the seed has events whose two dates differ");
   for (const e of differs) assert.equal(p.timeline.points.find((x) => x.id === e.id)!.date, e.date);
@@ -457,8 +458,8 @@ test("fixture: a project with two designations is two cards, one project", () =>
   const second = { ...structuredClone(base), id: "dsg-eu-crma-tungsten-west-second", stages: ["processing" as const] };
   const fixture: DossierData = { ...data, designations: [...data.designations, second].sort((a, b) => (a.id < b.id ? -1 : 1)) };
   const p = dossier("tungsten", fixture);
-  assert.equal(stat(p, "projects").value, 6);
-  assert.equal(stat(p, "designations").value, 6);
+  assert.equal(stat(p, "projects").value, 9);
+  assert.equal(stat(p, "designations").value, 9);
   const cards = p.stages.flatMap((s) => s.designations.map((d) => ({ stage: s.id, id: d.id }))).filter((c) => c.id.startsWith("dsg-eu-crma-tungsten-west"));
   assert.deepEqual(cards.sort((a, b) => (a.id < b.id ? -1 : 1)), [
     { stage: "mining", id: "dsg-eu-crma-tungsten-west" },
@@ -473,17 +474,17 @@ test("fixture: a project whose only designation names other materials is listed 
   const listed = p.registryProjects.find((r) => r.id === "prj-gb-hemerdon")!;
   assert.ok(listed, "Hemerdon is in the registry list");
   assert.equal(listed.designatedElsewhere.length, 1);
-  assert.equal(stat(p, "designations").value, 4);
-  assert.equal(stat(p, "projects").value, 6);
+  assert.equal(stat(p, "designations").value, 7);
+  assert.equal(stat(p, "projects").value, 9);
   assert.equal(stat(p, "projects").sublabel, "2 with no designation");
   assert.ok(!p.stages.some((s) => s.designations.some((d) => d.projectId === "prj-gb-hemerdon")));
 });
 
 // --- Events and related ---------------------------------------------------------------------------
 
-test("tungsten: 18 events, 9 with no child row, and the legal-basis events are separate", () => {
+test("tungsten: 19 events, 9 with no child row, and the legal-basis events are separate", () => {
   const p = dossier("tungsten");
-  assert.equal(p.events.length, 18);
+  assert.equal(p.events.length, 19);
   assert.equal(p.events.filter((e) => e.children.commitments + e.children.controls + e.children.designations === 0).length, 9);
   assert.equal(p.events.filter((e) => e.event.policyStatus === "superseded").length, 3);
   assert.deepEqual(p.related.legalBasis.map((b) => b.id), ["evt-cn-decree-792-2024", "evt-cn-ecl-2020"]);
@@ -494,7 +495,7 @@ test("tungsten: 18 events, 9 with no child row, and the legal-basis events are s
 
 test("the lede names the oldest and latest event and claims coding, not attribution", () => {
   const p = dossier("tungsten");
-  assert.equal(p.lede, "Records coded to Tungsten, from Final List of Critical Minerals 2018 (18 May 2018) to the latest event on 7 Sep 2026. Shared stage codes are not findings.");
+  assert.equal(p.lede, "Records coded to Tungsten, from Final List of Critical Minerals 2018 (18 May 2018) to the latest event on 9 Oct 2026. Shared stage codes are not findings.");
   assert.ok(!p.lede.includes("every record whose source names"));
 });
 

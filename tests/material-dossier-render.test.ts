@@ -135,6 +135,16 @@ test("the future-date note is replaced by the dates when there are some", () => 
 
 /** The `#records` markup, split into one string per stage column (the heading id opens each). */
 const columnsOf = (markup: string) => markup.slice(markup.indexOf('id="records"')).split(/<div class="(?:dossier-stage|min-w-0 rounded-md border border-dashed)/).slice(1);
+/** The markup outside every top-level `<details>`; a folded card may hold its own disclosure, so nesting is tracked. */
+const outsideDetails = (markup: string) => {
+  let depth = 0, last = 0, out = "";
+  for (const m of markup.matchAll(/<details|<\/details>/g)) {
+    if (depth === 0) out += markup.slice(last, m.index);
+    depth += m[0] === "<details" ? 1 : -1;
+    last = m.index! + m[0].length;
+  }
+  return depth === 0 ? out + markup.slice(last) : out;
+};
 
 test("every records column carries the three labelled rows in order, and the columns are subgrid rows on desktop", () => {
   for (const slug of slugs) {
@@ -175,7 +185,7 @@ test("a column with more than six cards shows six and folds the rest behind Show
     const toggles = [...col.matchAll(/<summary[^>]*>Show all (\d+)<\/summary>/g)];
     // Every card of the column is in the markup, and the folded ones sit inside a disclosure.
     assert.ok(cards(col) >= total, `${id}: cards kept`);
-    const open = col.replace(/<details[\s\S]*?<\/details>/g, "");
+    const open = outsideDetails(col);
     if (total > 6) {
       assert.ok(toggles.length > 0, `${id}: folds`);
       assert.ok(cards(open) <= 6 + stage.capital.reduce((n, r) => n + r.parts.length, 0), `${id}: at most six visible`);

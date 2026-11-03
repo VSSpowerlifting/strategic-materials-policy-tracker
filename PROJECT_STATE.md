@@ -1,3 +1,25 @@
+## 2026-11-03: EU CRMA second Strategic Projects round, release candidate (draft PR)
+
+- Branch `claude/smpt-eu-crma-2026-rc-f5628f`, rebased onto `origin/main` at `3192747` (homepage PR #187). The homepage files, tests and docs from #187 are unchanged. PR #185 is out of scope. Commit, push and a draft PR were authorized on 3 Nov 2026; merge and deploy were not.
+- Integrates the reviewed research for Commission Decision C(2026) 8051, adopted 9 Oct 2026 and published in the OJ on 22 Oct 2026 as Decision (EU) 2026/2349. The Commission recognized 46 projects; the tracker codes the 26 that name a tracked material. The 46-versus-26 distinction is stated on the event, in /methodology and in the README.
+- Maintainer approvals from 3 Nov 2026 are applied: F01–F05, F06 and F08. The 26-project selection and rulings B1–B12 are unchanged.
+- Candidate hashes (private files, not committed): the original human-reviewed candidate is sha256 `fe652a7e…15f7`; the post-review candidate is `cc8d6095…083d`.
+- Seed changes against `origin/main`:
+  - 1 event (`evt-eu-crma-strategic-projects-2026-10`) and 5 sources.
+  - 26 designations and 26 projects.
+  - 23 organizations net. `org-abenojar-tungsten` was replaced in place, not duplicated.
+  - Material, jurisdiction and programme notes updated. `site.lastUpdated` is 2026-11-03.
+- ID collisions: every id in the release, nested ids included, was checked across all seed categories at `origin/main`. The only shared id is the intentional `org-abenojar-tungsten`.
+  - Validator gap: `scripts/validate-data.ts` checks a candidate's `candidateId` and `proposedSources[].id` against published ids, but not its proposed event, organization, project or designation ids. The gap is documented and not refactored in this release.
+- Methodology: the limitations bullet claimed every event had a framing anchor. That was false before this release: 12 events had none. The bullet now computes the anchored count. The historical v0.x note in the version history is unchanged.
+- Human review: the maintainer stated in chat on 3 Nov 2026 that he had completed his human review. That statement is the only basis for the recorded verdict, reviewer and `reviewedAt`.
+- Release blockers (merge or deploy is not authorized until these clear):
+  - The per-field worksheet boxes are unticked and no signed attestation exists. None has been invented.
+  - The maintainer has not reviewed the applied correction text, which is the original→post-review diff.
+  - The `site.lastUpdated` = 2026-11-03 revision needs final publication review.
+  - The new event has no framing anchor; validate warns about this. An anchor needs a verified quotation of the Commission's own wording.
+  - `lifecycle.publishedAt` stays null until a deploy.
+
 ## 2026-11-03: editorial homepage redesign (draft PR #187, branch `claude/smpt-homepage-redesign-6cb2dc`)
 
 - Hero texture pass: a static, `aria-hidden` drafting mark (`components/home/hero-plate.tsx`) fills the empty space above "Scope and freshness" at `lg` and above, and is hidden below `lg`. It has no text or data, uses `--border-strong` and `--brand-gold` at low opacity, and has no animation. `app/page.tsx` changes only the import, `relative` on the aside and the element itself. Body height (7439 at 1280/1440) and the hero positions are unchanged, and there is no overflow at 320 to 1440. Gates: tests 1082/1082, validate, typecheck, lint (0 errors) and build all pass. axe reports one best-practice item, `landmark-complementary-is-top-level`, on the lattice's "Selected node" panel (`components/lattice/lattice.tsx`), which this pass does not touch. Screenshots: `docs/frontend/screenshots/{before,after}-hero-motif-*.png`.

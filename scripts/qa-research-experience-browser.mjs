@@ -193,7 +193,7 @@ try {
     assert.equal(download.suggestedFilename(), "smpt-prj-au-alcoa-sojitz-gallium-investigation.json");
     const packet = JSON.parse(await readFile(await download.path(), "utf8"));
     assert.equal(packet.projectionVersion, "smpt-investigation-1");
-    assert.equal(packet.corpus.revision, "2026-10-17");
+    assert.equal(packet.corpus.revision, "2026-11-03");
     assert.equal(packet.projectId, "prj-au-alcoa-sojitz-gallium");
     assert.equal(packet.nativeMilestones[0].id, "mil-au-alcoa-wagerup-groundbreaking-2026-08-24");
     assert.match(packet.nativeMilestones[0].note, /ceremon/);

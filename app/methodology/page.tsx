@@ -21,7 +21,7 @@ import {
 import type { JurisdictionCode } from "@/lib/types";
 import { site } from "@/lib/site";
 import { formatDate } from "@/lib/format";
-import { getAllControlMeasures, getAllEvents, getAllFinancialCommitments, getDatasetSummary } from "@/lib/data";
+import { getAllControlMeasures, getAllEvents, getAllFinancialCommitments, getAllFramingClaims, getDatasetSummary } from "@/lib/data";
 import {
   capitalSourceLabels,
   controlStatusLabels,
@@ -147,7 +147,9 @@ function coverageShape() {
   const ranked = [...byActor.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
   const fewest = ranked[ranked.length - 1][1];
   const thinnest = ranked.filter(([, n]) => n === fewest).map(([j]) => jurisdictionLabels[j]);
-  return { summary, ranked, fewest, thinnest };
+  const anchoredIds = new Set(getAllFramingClaims().map((f) => f.eventId));
+  const anchored = events.filter((e) => anchoredIds.has(e.id)).length;
+  return { summary, ranked, fewest, thinnest, anchored };
 }
 
 /** "A", "A and B", "A, B and C" — so a derived sentence still reads as English. */
@@ -157,7 +159,7 @@ function listSentence(items: string[]): string {
 }
 
 export default function MethodologyPage() {
-  const { summary, ranked, fewest, thinnest } = coverageShape();
+  const { summary, ranked, fewest, thinnest, anchored } = coverageShape();
   return (
     <Container className="py-12">
       <PageHeading
@@ -668,9 +670,13 @@ export default function MethodologyPage() {
             <H2 id="limitations">Limitations &amp; disclaimer</H2>
             <ul className="space-y-2 text-muted">
               <li>
-                · The dataset is a seed. Every tracked actor is event-coded and every
-                coded event carries at least one framing anchor — but coverage is
-                deliberately uneven: {jurisdictionLabels[ranked[0][0]]} accounts for{" "}
+                · The dataset is a seed. Every tracked actor is event-coded, but framing
+                anchors are not universal: {anchored} of the {summary.events}{" "}
+                events carry one. The others, including the October 2026 Strategic
+                Projects Decision,
+                have none yet, because an anchor is added only from a verified quotation
+                of the issuing government&apos;s own wording, never written to fill a gap.
+                Coverage is also deliberately uneven: {jurisdictionLabels[ranked[0][0]]} accounts for{" "}
                 {ranked[0][1]} of the {summary.events} events, while{" "}
                 {listSentence(thinnest)} {thinnest.length === 1 ? "is" : "are"}{" "}
                 represented by{" "}
@@ -687,6 +693,13 @@ export default function MethodologyPage() {
                 · Categorical labels are interpretive judgements anchored to sources,
                 not legal determinations. Status reflects the last-updated date;
                 measures change.
+              </li>
+              <li>
+                · EU Strategic Project rounds are not coded alike in two respects. Four March 2025 designations
+                list battery-grade lithium without coding it as lithium, while the October 2026 list codes it as
+                lithium, so lithium counts across rounds are not like for like. The October 2026 Decision is coded
+                &ldquo;unclear&rdquo; because the sources read do not establish when it was notified to its
+                addressees; the 2025 lists are coded in force. That is a coding difference, not a legal finding.
               </li>
             </ul>
             <p className="rounded-lg border border-amber-400/25 bg-amber-400/[0.06] px-4 py-3 text-amber-100/90">
@@ -709,7 +722,8 @@ export default function MethodologyPage() {
                 material-by-stage response map of capital, designations and control clauses, with item types and
                 supply-chain stages coded on every control clause that defines items. New records from primaries:
                 China&apos;s Announcements Nos. 56, 57, 58 and 62 of 2025; the EU&apos;s Critical Raw Materials Act
-                Strategic Projects (March and June 2025) and RESourceEU; Japan&apos;s certified critical-mineral
+                Strategic Projects (March and June 2025, and the 26 of the 46 projects recognised in October 2026
+                that name a tracked material) and RESourceEU; Japan&apos;s certified critical-mineral
                 supply-assurance plans and JOGMEC grants; Canada&apos;s G7 Production Alliance round and PDAC 2026
                 awards; Commerce&apos;s CHIPS agreements with USA Rare Earth; and what MP Materials&apos; later filings
                 record about the DoD package. Corrections: currency totals are now split by instrument (version

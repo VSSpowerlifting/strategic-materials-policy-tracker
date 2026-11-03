@@ -2689,5 +2689,50 @@
       "verifiedAt": "2026-10-08",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-eu-crma-strategic-projects-2026-10",
+    "date": "2026-10-09",
+    "jurisdiction": "eu",
+    "issuingBody": "European Commission",
+    "titleOriginal": "Commission Decision of 9.10.2026 recognising certain critical raw material projects as Strategic Projects under Regulation (EU) 2024/1252 of the European Parliament and of the Council",
+    "titleOriginalLang": "en",
+    "titleEn": "Commission Decision recognising 46 critical raw material projects in the EU as Strategic Projects under the Critical Raw Materials Act",
+    "titleEnSource": "na",
+    "documentNumber": "C(2026) 8051 final",
+    "policyStatus": "unclear",
+    "mechanism": [
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "gallium",
+      "germanium",
+      "graphite",
+      "lithium",
+      "cobalt",
+      "nickel",
+      "tungsten"
+    ],
+    "affectedSectors": [
+      "battery",
+      "defense"
+    ],
+    "summary": "The Commission's second list of Strategic Projects in the EU under Regulation (EU) 2024/1252, adopted under Article 7(9) after the second call cut-off of 15 January 2026. The Decision records 101 applications from projects in Member States, 98 of them complete, and recognises the 46 projects in its annex. Twenty-six of the 46 name at least one material SMPT tracks and are recorded as designations: four rare-earth projects for magnets (BREES, HyProMag GmbH, Silmet 2.0, Sokli), one gallium project (GaRefine), one germanium project, three naming tungsten, and battery-material projects naming lithium, graphite, cobalt or nickel. The other 20 name only copper, aluminium, magnesium, titanium, silicon or platinum group metals and are not coded. Recognition is not funding; no amount is recorded.",
+    "analyticalSignificance": "The second list of Strategic Projects in the EU; recognition, not money, and any funding that follows is a separate decision. For rare earths it adds an extraction project (Sokli), a processing project in Estonia (Silmet 2.0) and two recycling projects for rare earth elements for magnets (BREES, HyProMag GmbH) to the five rare-earth projects on the first EU list of March 2025. Status is coded unclear: the Decision is addressed to the project promoters (Article 2), and the sources read do not establish when it was notified to them or took effect; the two 2025 lists are coded in force, a coding difference rather than a legal finding. The date recorded is the date of adoption, 9 October 2026, not the later Official Journal publication. Cross-round comparison of lithium is limited: four March 2025 designations list battery-grade lithium without coding it as lithium, while this list codes it as lithium.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ec-crma-sp-decision-2026-10",
+      "src-ec-crma-sp-annex-2026-10",
+      "src-ec-rep-lu-2026-10-09"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-10-09",
+      "discoveredAt": "2026-11-03",
+      "verifiedAt": "2026-11-03",
+      "publishedAt": null
+    }
   }
 ]

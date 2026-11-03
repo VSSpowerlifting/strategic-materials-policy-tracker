@@ -32,7 +32,7 @@ test("read-only public parity checks the entire exported corpus and every actual
   const before=JSON.stringify(e);
   const r=await checkPublicReleaseParity(e,healthyHttp(e));
   assert.equal(r.status,"in_sync");
-  assert.equal(r.expectedCuratedCorpusCutoff,"2026-10-17");
+  assert.equal(r.expectedCuratedCorpusCutoff,"2026-11-03");
   assert.equal(r.expectedPublishedMilestoneCount,2);
   assert.deepEqual(r.issues,[]);
   assert.equal(r.checkedEndpoints.length,4);

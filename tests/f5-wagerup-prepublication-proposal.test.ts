@@ -19,8 +19,8 @@ const sourceId="src-alcoa-wagerup-groundbreaking-2026";
 test("supervised release publishes exactly one source-reviewed Wagerup claim, not unsigned peers",()=>{
   const milestones=getAllProjectMilestones();
   assert.deepEqual(milestones.map(x=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
-  assert.equal(site.lastUpdated,"2026-10-17");
-  assert.equal(candidate.proposedCorpusCutoff,site.lastUpdated);
+  assert.equal(site.lastUpdated,"2026-11-03");
+  assert.equal(candidate.proposedCorpusCutoff,"2026-10-17","the Wagerup candidate was proposed at the 17 October cutoff; later cutoffs do not rewrite it");
   assert.equal(candidate.publishedCorpusCutoffAtPreparation,"2026-10-09");
   assert.equal(candidate.proposedProjectMilestones.length,1);
   assert.deepEqual(milestones[0],candidate.proposedProjectMilestones[0],
