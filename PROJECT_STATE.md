@@ -1,3 +1,21 @@
+## 2026-11-03: DFARS 2027 brief revised after source review
+
+- The [DFARS 2027 brief](docs/analysis/dfars-2027-covered-materials-brief-2026-11-01.md) was rewritten after PR #185 review 5746985796. It now separates five legal layers:
+  - 10 U.S.C. 4872 as amended. Molybdenum is covered from 18 December 2025, the upstream test applies from 1 January 2027, and gallium and germanium are covered from 18 December 2027.
+  - The codified DFARS MAY 2024 clause.
+  - Class deviation 2026-O0041 Rev. 1, with clause 252.225-7961, effective 1 July 2026. Case 2024-D014 is open.
+  - EO 14415. Its §2 waiver limits apply from 1 January 2027. It does not amend or postpone the statutory test.
+  - H.R. 9073. It is referred to committee only; Congress.gov was checked on 2026-11-03.
+- This supersedes the 11-01 entry's description of 252.225-7052 and acquisition.gov as the checked basis; those acquisition.gov URLs now return 404. The candidate corrections are listed in a private package beside a claim ledger (`data/candidates/*.local.md`, git-ignored). The f91ac8 `candidates.json` was not edited, and nothing was reviewed or promoted.
+- validate passes. lint has 0 errors and the nine existing warnings. typecheck and build were not run, because only docs changed. No `data/seed/*`, taxonomy or `site.lastUpdated` change. Committed and pushed to the PR #185 branch with maintainer approval. Not merged or deployed.
+
+## 2026-11-01: DFARS 2027 covered-materials brief and private candidates (brief committed; candidates private)
+
+- Branch `claude/smpt-resume-improvements-f91ac8` from `f3df7c0`. No `data/seed/*`, taxonomy, code, API, export or `site.lastUpdated` change.
+- Two unreviewed drafts were added to the git-ignored `data/candidates/candidates.json`. `cand-us-dfars-sensitive-materials-2027` covers 10 U.S.C. 4872 and DFARS 225.7018 / 252.225-7052; the 1 January 2027 mined/refined/separated stage is checked against govinfo and acquisition.gov. `cand-us-ndaa-fy2026-covered-materials-2025` covers PL 119-60 §§843, 844(a), 844(b) and 848. Its section numbers and text were checked on 2026-11-01 against the enrolled PL 119-60 on govinfo (approved 18 December 2025; 139 Stat. 975–979). H.R. 9073 is noted as pending only. Both need human source review and the promotion step.
+- [DFARS 2027 brief](docs/analysis/dfars-2027-covered-materials-brief-2026-11-01.md): a draft analysis. It sets the rule's two-stage test beside existing seed capital rows for MP Materials, Vulcan/ReElement, USA Rare Earth CHIPS and 5N Plus, by stage, material and legal standing, with no totals and no causal claims. Its row-level facts were checked against seed.
+- validate, typecheck and build pass; lint has 0 errors and the nine existing warnings. The brief and this entry are committed on the branch and opened as a PR; the candidates stay uncommitted. Not merged.
+
 ## 2026-11-01: PR closeout; monitoring and evidence-pathway work stopped
 
 - Maintainer decision: stop building monitoring and evidence-pathway infrastructure (EXIM/DOE monitoring, F5 Observatory, F4 amount history) and resolve every open PR.
