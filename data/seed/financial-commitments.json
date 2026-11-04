@@ -796,6 +796,103 @@
     "notes": "The release does not say which instruments the transactions will use. The facility it is drawn from provides loans and equity support, and the Reserve operates by securing and on-selling rights to minerals."
   },
   {
+    "id": "fin-br-bndes-piaui-niquel-2026",
+    "eventId": "evt-br-bndes-piaui-2026",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000",
+      "currency": "BRL",
+      "qualifier": "exact",
+      "amountAsStated": "R$ 100 milhões",
+      "currencyBasis": "stated"
+    },
+    "provider": "Banco Nacional de Desenvolvimento Econômico e Social (BNDES)",
+    "providerJurisdiction": "brazil",
+    "providerOrgIds": [
+      "org-br-bndes"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-br-bndes-maquinas-servicos",
+    "recipient": "Piauí Níquel Metais S/A",
+    "recipientOrgIds": [
+      "org-br-piaui-niquel-metais"
+    ],
+    "project": "Piauí Níquel nickel and cobalt processing project",
+    "projectId": "prj-br-piaui-niquel",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "BR",
+        "subnational": "Piauí",
+        "asStated": "Capitão Gervásio Oliveira (PI), Brazil"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "nickel",
+      "cobalt"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-07-13",
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "note": "BNDES reports approval of R$100 million of financing; signature, obligation and disbursement are not evidenced."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "not_stated",
+        "date": null,
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "note": "Physical status is described only as a project in development; stated target dates are future projections."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "status",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Title; paragraphs 1–5; project technology and production paragraphs",
+        "note": "BNDES directly states financing approval amount, named product, recipient, project, location and materials."
+      },
+      {
+        "sourceId": "src-br-bndes-machines-services",
+        "supports": [
+          "instrument",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Official BNDES product heading and financing/interest details",
+        "note": "Confirms Máquinas e Serviços as a credit-financing product; no case-specific loan terms inferred."
+      }
+    ],
+    "notes": "One approved public loan under the named BNDES product. Record status decided; no executed contract, drawdown or verified facility completion shown by reviewed source. The recipient was also selected in the 2025 BNDES–Finep call, but R$45.8bn aggregate estimated investment across 56 plans is not additional government financing."
+  },
+  {
     "id": "fin-ca-cgf-cyclic-2026-equity",
     "eventId": "evt-ca-cgf-cyclic-2026",
     "relationships": [],
