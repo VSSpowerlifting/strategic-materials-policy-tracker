@@ -1498,6 +1498,7 @@ test("unsigned selection proposals are separately classified and cannot be upgra
     "incoherent_value@fin-alpha-selection:financialStatusHistory[0].status",
   ]);
   assertErrors(validate([{ ...selected, amount: null }]), [
+    "evidence_for_absent_field@fin-alpha-selection:evidence[0].supports[3]",
     "incoherent_value@fin-alpha-selection:amount",
   ]);
 });
