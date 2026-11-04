@@ -18,6 +18,8 @@ export const VALUE_ROLE_DEFS: Record<(typeof VALUE_ROLES)[number], string> = {
     "A ceiling a party may call on at its own election under an executed agreement. Listed, never summed: an executed option is not committed money. An exercise is recorded as its own commitment drawn from the option, with its own payment status.",
   indication:
     "A non-binding letter of intent or interest that names an amount: possible support, not money committed to anyone. Listed in its own layer, never summed, and never counted as binding, not yet binding, capital, backing or co-investment.",
+  selection_proposal:
+    "An applicant was selected to negotiate a possible award. The proposed federal share is conditional on negotiations; it is not a grant agreement, commitment, obligation or payment. Listed only, never summed or treated as a project backer.",
   expected_co_investment: "Money a government expects others to invest.",
   private_financing: "Commercial capital raised alongside public money.",
   recipient_own_funds: "The recipient's own contribution.",
@@ -34,6 +36,7 @@ export const CAPITAL_SOURCE_DEFS: Record<(typeof CAPITAL_SOURCES)[number], strin
 
 export const FINANCIAL_STATUS_DEFS: Record<(typeof FINANCIAL_STATUSES)[number], string> = {
   announced: "Publicly announced; no decision or agreement is stated.",
+  selected_for_negotiations: "The provider identified an applicant to negotiate an award. Terms remain subject to negotiation and funding has not been committed, contracted or paid.",
   authorized: "Legal or budgetary authority exists, e.g. an enacted statute or cabinet approval.",
   allocated: "Assigned to the purpose, e.g. in a budget.",
   decided: "The provider has decided to invest, lend or award, including a conditional commitment.",
