@@ -41,3 +41,16 @@ This audit is source-level research performed with official primary documents an
 - Vercel refused new preview builds with `build-rate-limit` and an upgrade link on 4 November 2026. Do not assume preview or production deployability.
 - Advancing `site.lastUpdated` from 3 to 4 November triggered 23 failures in guided private M3/F5 review tests because historical prepared review candidates were supplied with a 3 November proposed cutoff. Those tests are protecting historical review workflow semantics, not denying the newly researched DOE/Korean/Brazilian facts. We restored the site cutoff to **3 November** during staging and kept a **separate proposed 4 November cutoff audit** that does not authorize publication. A future, dedicated activation phase must decide how to preserve old review fixtures without rewriting original evidence.
 - No deployment or merge was performed during this review. The code and source corrections remain on the review branch pending resolved deployment capacity, final CI and maintainer approval.
+
+
+## 4 November release activation addendum
+
+The maintainer directed the release workflow to continue despite Vercel's current build-rate quota. This is approval to proceed with verified GitHub changes, **not evidence that production has deployed**.
+
+- The release branch now proposes `site.lastUpdated = 2026-11-04`; the previous `2026-11-03` cutoff remains a fixed historical fixture in M3/F5 retrospective tests.
+- Existing synthetic private reviewer fixtures were explicitly pinned to their original test cutoff. New review sessions continue to require a proposed date on or after the live site cutoff. A regression test rejects attempts to reuse 3 November after the 4 November activation.
+- Separate policy-event and original-source audit shows 71 events, 97 finance rows, 103 projects, 197 sources, 10 jurisdictions, with no federal DOE selected shares treated as commitments.
+- The Vercel `build-rate-limit` status may persist even when GitHub CI passes. A merge alone is **not** a deployment confirmation. Verify exact deployment commit and live export parity independently before announcing a public release as live.
+- All historical signed human reviews, candidate files, source access receipts and project milestones must retain their original dates and contents.
+
+**Activation checklist:** final full CI/Chromium QA green; merge #195, #198, then #200 using exact heads with no intervening unreviewed changes; check main deployment status; distinguish code merged from live publication.
