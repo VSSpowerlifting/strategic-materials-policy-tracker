@@ -344,6 +344,60 @@
     "notes": "Run by the Department of Commerce's CHIPS Program Office. It provides direct funding and loans or loan guarantees, recorded as their own instruments."
   },
   {
+    "id": "prg-us-doe-battery-manufacturing-recycling-round3",
+    "name": "Battery Manufacturing and Recycling Grants",
+    "nameOriginal": null,
+    "actor": "us",
+    "kind": "grant_programme",
+    "administeringOrgIds": [
+      "org-us-doe"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "Infrastructure Investment and Jobs Act, Section 40207(c)",
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "name",
+          "kind",
+          "administrators",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Overview / Funding Type / Funding Source and Round 3 selection listings",
+        "note": "DOE official grants programme page identifies the legal foundation and its programme scope."
+      }
+    ],
+    "notes": "DOE grant programme; five third-round 20 August 2026 selectees have project-level proposed federal shares pending award negotiations."
+  },
+  {
+    "id": "prg-us-doe-battery-processing-round3",
+    "name": "Battery Materials Processing Grants",
+    "nameOriginal": null,
+    "actor": "us",
+    "kind": "grant_programme",
+    "administeringOrgIds": [
+      "org-us-doe"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": "Infrastructure Investment and Jobs Act, Section 40207(b)",
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "supports": [
+          "name",
+          "kind",
+          "administrators",
+          "legal_authority"
+        ],
+        "evidence": "explicit",
+        "locator": "Overview / Funding Type / Funding Source and Round 3 selection listings",
+        "note": "DOE official grants programme page identifies the legal foundation and its programme scope."
+      }
+    ],
+    "notes": "DOE grant programme; 20 August 2026 third-round grant selections are proposed federal shares pending award negotiations."
+  },
+  {
     "id": "prg-us-osc-critical-minerals-lending",
     "name": "Office of Strategic Capital critical-minerals lending (One Big Beautiful Bill Act)",
     "nameOriginal": null,
