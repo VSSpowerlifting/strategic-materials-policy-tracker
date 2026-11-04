@@ -14,7 +14,7 @@ const trace=(id:string)=>buildProgrammeTrail(programmeLedger(id)!,input());
 
 test("all registered schemes have exact ledger row identities, not inferred programme funding",()=>{
  const programmes=getAllProgrammes();
- assert.equal(programmes.length,13);
+ assert.equal(programmes.length,15);
  for(const p of programmes){
   const ledger=programmeLedger(p.id)!,trail=trace(p.id);
   assert.equal(trail.id,p.id);
