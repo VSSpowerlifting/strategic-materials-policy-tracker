@@ -1,0 +1,431 @@
+{
+  "asOf": "2026-11-04",
+  "visibility": "repository_research_only",
+  "reviewStatus": "primary_official_sources_read_selection_only",
+  "publicSeedChanges": false,
+  "sourceRegister": [
+    {
+      "key": "doe500",
+      "url": "https://www.energy.gov/articles/energy-department-announces-500-million-secure-americas-critical-mineral-and-battery"
+    },
+    {
+      "key": "doe500processing",
+      "url": "https://www.energy.gov/cmei/manufacturing/battery-materials-processing-grants"
+    },
+    {
+      "key": "doe500recycling",
+      "url": "https://www.energy.gov/cmei/manufacturing/battery-manufacturing-and-recycling-grants"
+    },
+    {
+      "key": "doe162",
+      "url": "https://www.energy.gov/cmei/articles/does-office-critical-minerals-and-energy-innovation-announces-162-million-accelerate"
+    },
+    {
+      "key": "doe162bulletin",
+      "url": "https://content.govdelivery.com/accounts/USEERE/bulletins/425650a"
+    },
+    {
+      "key": "nthcycle",
+      "url": "https://rss.globenewswire.com/news-release/2026/08/20/3348717/0/en/u-s-department-of-energy-selects-nth-cycle-to-enter-award-negotiations-for-up-to-100-million-to-build-new-critical-mineral-refining-facility.html"
+    }
+  ],
+  "cohorts": [
+    {
+      "cohortId": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "announcedSelectedCount": 7,
+      "announcedTotalSelectedFederalShareUSD": 500000000,
+      "individualAmountStatus": "officially_listed",
+      "countingRule": "Seven federal share proposals total 500m; do not sum a separate aggregate record"
+    },
+    {
+      "cohortId": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "announcedSelectedCount": 9,
+      "announcedTotalSelectedFederalShareUSD": 162000000,
+      "individualAmountStatus": "not_stated",
+      "countingRule": "One aggregate cohort amount, nine selectees with null individual amounts; never split equally"
+    }
+  ],
+  "candidates": [
+    {
+      "candidateId": "doe26-round3-waterleaf",
+      "cohort": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "selecteeAsStated": "Waterleaf P1 HoldCo, LLC",
+      "aliasContext": "Lilac Solutions company",
+      "selectionStatus": "selected_for_award_negotiations",
+      "proposedFederalShareUSD": 100000000,
+      "projectLocationAsStated": "West Promontory, UT",
+      "locationEvidenceType": "site",
+      "trackedMaterialsDirectlyNamed": [
+        "lithium"
+      ],
+      "activityAsStatedSummary": "Commercial lithium extraction and refining facility; battery-grade lithium carbonate",
+      "sourceKeys": [
+        "doe500",
+        "doe500processing"
+      ],
+      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "pendingChecks": [
+        "Check later award or termination disclosure before setting live financial status",
+        "Resolve company and project IDs; distinguish named facility from general company"
+      ]
+    },
+    {
+      "candidateId": "doe26-round3-formation-jervois",
+      "cohort": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "selecteeAsStated": "Formation Holdings US, Inc. (Jervois)",
+      "aliasContext": null,
+      "selectionStatus": "selected_for_award_negotiations",
+      "proposedFederalShareUSD": 100000000,
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "location_undetermined",
+      "trackedMaterialsDirectlyNamed": [
+        "cobalt"
+      ],
+      "activityAsStatedSummary": "Commercial cobalt refinery; battery-grade cobalt sulfate",
+      "sourceKeys": [
+        "doe500",
+        "doe500processing"
+      ],
+      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "pendingChecks": [
+        "Check later award or termination disclosure before setting live financial status",
+        "Resolve company and project IDs; distinguish named facility from general company"
+      ]
+    },
+    {
+      "candidateId": "doe26-round3-nth-cycle",
+      "cohort": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "selecteeAsStated": "Nth Cycle, Inc.",
+      "aliasContext": null,
+      "selectionStatus": "selected_for_award_negotiations",
+      "proposedFederalShareUSD": 100000000,
+      "projectLocationAsStated": "Southeastern United States",
+      "locationEvidenceType": "region",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Black-mass refining to high-purity metals and battery-grade materials; issuer calls it Project SHIELD, with nickel/lithium outputs disclosed separately",
+      "sourceKeys": [
+        "doe500",
+        "doe500recycling"
+      ],
+      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "pendingChecks": [
+        "Check later award or termination disclosure before setting live financial status",
+        "Resolve company and project IDs; distinguish named facility from general company",
+        "Issuer Project SHIELD name and nickel/lithium products require separate issuer citation"
+      ]
+    },
+    {
+      "candidateId": "doe26-round3-princeton-nuenergy",
+      "cohort": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "selecteeAsStated": "Princeton NuEnergy Inc.",
+      "aliasContext": null,
+      "selectionStatus": "selected_for_award_negotiations",
+      "proposedFederalShareUSD": 50000000,
+      "projectLocationAsStated": "Commerce, GA",
+      "locationEvidenceType": "site",
+      "trackedMaterialsDirectlyNamed": [
+        "nickel"
+      ],
+      "activityAsStatedSummary": "Demonstration facility for recovery/rejuvenation of nickel-containing cathode material",
+      "sourceKeys": [
+        "doe500",
+        "doe500recycling"
+      ],
+      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "pendingChecks": [
+        "Check later award or termination disclosure before setting live financial status",
+        "Resolve company and project IDs; distinguish named facility from general company"
+      ]
+    },
+    {
+      "candidateId": "doe26-round3-arcanum",
+      "cohort": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "selecteeAsStated": "Arcanum Ventures, LLC",
+      "aliasContext": null,
+      "selectionStatus": "selected_for_award_negotiations",
+      "proposedFederalShareUSD": 50000000,
+      "projectLocationAsStated": "U.S. Gulf Coast",
+      "locationEvidenceType": "region",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Facility for battery-grade ethylene carbonate (outside tracked mineral taxonomy)",
+      "sourceKeys": [
+        "doe500",
+        "doe500recycling"
+      ],
+      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "pendingChecks": [
+        "Check later award or termination disclosure before setting live financial status",
+        "Resolve company and project IDs; distinguish named facility from general company"
+      ]
+    },
+    {
+      "candidateId": "doe26-round3-elevated-materials",
+      "cohort": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "selecteeAsStated": "Elevated Materials, LLC",
+      "aliasContext": null,
+      "selectionStatus": "selected_for_award_negotiations",
+      "proposedFederalShareUSD": 50000000,
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "location_undetermined",
+      "trackedMaterialsDirectlyNamed": [
+        "lithium"
+      ],
+      "activityAsStatedSummary": "Facility for lithium-metal films and prelithiated materials; GWh scale is proposed capacity, not measured output",
+      "sourceKeys": [
+        "doe500",
+        "doe500recycling"
+      ],
+      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "pendingChecks": [
+        "Check later award or termination disclosure before setting live financial status",
+        "Resolve company and project IDs; distinguish named facility from general company"
+      ]
+    },
+    {
+      "candidateId": "doe26-round3-coreshell",
+      "cohort": "2026-08-20-doe-battery-round3",
+      "announcementDate": "2026-08-20",
+      "selecteeAsStated": "Coreshell Technologies Incorporated",
+      "aliasContext": null,
+      "selectionStatus": "selected_for_award_negotiations",
+      "proposedFederalShareUSD": 50000000,
+      "projectLocationAsStated": "San Leandro, CA",
+      "locationEvidenceType": "site",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Silicon-anode lithium-ion electrodes/cells; silicon feedstock outside current SMPT material taxonomy",
+      "sourceKeys": [
+        "doe500",
+        "doe500recycling"
+      ],
+      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "pendingChecks": [
+        "Check later award or termination disclosure before setting live financial status",
+        "Resolve company and project IDs; distinguish named facility from general company"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-anactisis",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "Anactisis Inc.",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2a",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Pittsburgh, PA",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Bench-to-pilot recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-still-bright",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "Still Bright Inc.",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2a",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Newark, NJ",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Bench-to-pilot recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-nusano",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "Nusano Inc.",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2a",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "West Valley City, UT",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Bench-to-pilot recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-sitration",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "SiTration Inc.",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2a",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Cambridge, MA",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Bench-to-pilot recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-thompson-creek",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "Thompson Creek Metals Company USA",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2b",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Langeloth, PA",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Pilot-to-precommercial recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-felix-gold",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "Felix Gold Alaska Treasure Creek Inc.",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2b",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Fairbanks, AK",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Pilot-to-precommercial recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-disa",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "DISA Technologies Inc.",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2b",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Mills, WY",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Pilot-to-precommercial recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-alcoa",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "Alcoa USA Corp.",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2b",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Pittsburgh, PA",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Pilot-to-precommercial recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    },
+    {
+      "candidateId": "doe26-byproducts-trigg",
+      "cohort": "2026-08-18-doe-byproduct-pilots",
+      "announcementDate": "2026-08-18",
+      "selecteeAsStated": "Trigg Minerals",
+      "selectionStatus": "selected_for_award_negotiations",
+      "topicArea": "2b",
+      "proposedFederalShareUSD": null,
+      "headquartersAsStated": "Jersey City, NJ",
+      "projectLocationAsStated": null,
+      "locationEvidenceType": "not_stated",
+      "trackedMaterialsDirectlyNamed": [],
+      "activityAsStatedSummary": "Pilot-to-precommercial recovery technology; individual material and site not specified",
+      "sourceKeys": [
+        "doe162"
+      ],
+      "reviewDisposition": "cohort_confirmed_project_details_pending",
+      "pendingChecks": [
+        "Obtain a source allocating individual amount, feedstock/materials and facility site",
+        "Do not use headquarters address as facility location",
+        "Check signed award or termination disclosure",
+        "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
+      ]
+    }
+  ]
+}
