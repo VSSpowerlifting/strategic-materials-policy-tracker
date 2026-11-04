@@ -217,6 +217,45 @@
     "notes": "A substitution project: it \"aims to contribute to the substitution of germanium\", so no supply-chain stage is coded."
   },
   {
+    "id": "prj-br-piaui-niquel",
+    "name": "Piauí Níquel nickel and cobalt processing project",
+    "sponsorOrgIds": [
+      "org-br-piaui-niquel-metais"
+    ],
+    "locations": [
+      {
+        "countryCode": "BR",
+        "subnational": "Piauí",
+        "asStated": "Capitão Gervásio Oliveira (PI), Brazil"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "nickel",
+      "cobalt"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraph and technology/production paragraphs",
+        "note": "Issuer describes the physical processing project, financing recipient, location, and nickel/cobalt intermediate products."
+      }
+    ],
+    "notes": "BNDES describes development of high-purity nickel/cobalt mixed hydroxide precipitate production. The stated 2028 production start and 2029 operational phase are targets, not observed milestones."
+  },
+  {
     "id": "prj-ca-cmgd-nb-granitoids",
     "name": "Geochronology and Petrogenesis of Granitoids and Related Critical Mineral Systems in New Brunswick",
     "sponsorOrgIds": [
