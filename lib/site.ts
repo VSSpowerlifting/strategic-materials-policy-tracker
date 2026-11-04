@@ -162,6 +162,7 @@ export const primaryNav = nav.filter((i) =>
 
 /** Pages reachable from the footer and sitemap but kept out of the crowded header. */
 export const secondaryNav = [
+  { href: "/research", label: "Research" },
   { href: "/saved", label: "Saved" },
   { href: "/about", label: "About" },
 ] as const;
