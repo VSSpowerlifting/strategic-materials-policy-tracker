@@ -75,6 +75,32 @@
     "notes": "Export Finance Australia's partnership role is kept in this note; it has no registry record until a cited source states what kind of body it is."
   },
   {
+    "id": "prg-br-bndes-maquinas-servicos",
+    "name": "BNDES Máquinas e Serviços",
+    "nameOriginal": "BNDES Máquinas e Serviços",
+    "actor": "brazil",
+    "kind": "financing_facility",
+    "administeringOrgIds": [
+      "org-br-bndes"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-br-bndes-machines-services",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Product heading, financing eligibility and credit/interest terms",
+        "note": "Named BNDES product is a financing facility for machinery and services."
+      }
+    ],
+    "notes": "BNDES financing product named in the Piauí Níquel approval; programme-level terms are not attributed to the particular loan without agreement evidence."
+  },
+  {
     "id": "prg-ca-cmrdd",
     "name": "Critical Minerals Research, Development and Demonstration (CMRDD) program",
     "nameOriginal": null,
