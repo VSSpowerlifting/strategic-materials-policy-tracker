@@ -83,12 +83,15 @@ export default function Home() {
               project and the original document. Each step keeps its own status, so a pledge is never read as a
               payment and a paused rule is never read as one in force.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="#cases" className="research-button">
-                See three worked cases
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <Link href="/research" className="research-button">
+                Explore published research
               </Link>
               <Link href="#start" className="research-button-secondary">
                 Start your own question
+              </Link>
+              <Link href="#cases" className="px-2 font-display text-sm text-foreground underline underline-offset-4 hover:text-accent">
+                See three worked cases
               </Link>
             </div>
             <p className="mt-4 font-display text-sm text-muted">
