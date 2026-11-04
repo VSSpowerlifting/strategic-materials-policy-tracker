@@ -241,6 +241,7 @@ export function SiteHeader() {
             </ul>
             <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border-strong pt-4 font-display text-sm">
               <Link href="/search" onClick={closeMenu} className="text-muted hover:text-foreground">Search</Link>
+              <Link href="/research" onClick={closeMenu} className="text-muted hover:text-foreground">Research</Link>
               <Link href="/saved" onClick={closeMenu} className="text-muted hover:text-foreground">Saved</Link>
               <Link href="/about" onClick={closeMenu} className="text-muted hover:text-foreground">About Benjamin Yang</Link>
               <RecordAsOf className="w-full" />
