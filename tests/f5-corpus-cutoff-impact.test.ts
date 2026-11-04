@@ -119,6 +119,31 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
   assert.equal(site.lastUpdated,"2026-11-04");
 });
 
+test("4 November revision contains only dated admissions from source-reviewed expansion batches",()=>{
+  const snapshot=seeds();
+  const candidate=auditF5CorpusCutoffImpact(snapshot,"2026-11-03","2026-11-04");
+  assert.equal(candidate.totalPublicSeedRows,802);
+  assert.equal(candidate.countNewlyIncludedDatedFields,11,
+    "eight new source access dates and three reviewed Korean/Brazilian event dates");
+  assert.equal(candidate.countOtherPostCutoffFields,0);
+  assert.deepEqual(candidate.afterProposedCutoffFields,[]);
+  assert.deepEqual([...new Set(candidate.newlyIncludedDatedFields.map(r=>r.recordId))].sort(),[
+    "evt-br-bndes-finep-minerals-2025",
+    "evt-br-bndes-piaui-2026",
+    "evt-kr-motir-rare-earths-2026",
+    "src-br-bndes-finep-select-2025-06",
+    "src-br-bndes-machines-services",
+    "src-br-bndes-piaui-2026-07",
+    "src-kr-motir-rare-earths-2026-02",
+    "src-us-doe-battery-manufacturing-round3",
+    "src-us-doe-battery-processing-round3",
+    "src-us-doe-battery-round3-2026-08",
+    "src-us-doe-industrial-byproducts-2026-08",
+  ].sort());
+  assert.equal(candidate.publicationAuthorized,false,
+    "source metadata audit alone never authorizes publication");
+});
+
 test("cutoff impact sorts in-window source dates separately from future interval end boundaries",()=>{
   const input=minimal();
   input["sources"]=[
