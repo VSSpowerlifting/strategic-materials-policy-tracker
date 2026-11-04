@@ -103,6 +103,13 @@ const sections = [
   },
 ] as const;
 
+const comparison = [
+  { jurisdiction: "China", instrument: "Export licensing", implementation: "Controls on specified tungsten products and technologies introduced in February 2025" },
+  { jurisdiction: "European Union", instrument: "Strategic Project designation", implementation: "El Moto under construction; separately designated APT plant at proposal stage" },
+  { jurisdiction: "United Kingdom", instrument: "Equity and lending", implementation: "£25 million Hemerdon core loan reported fully drawn by 2 September 2026" },
+  { jurisdiction: "Japan", instrument: "Industrial grants", implementation: "Grant decisions for tungsten powder, carbide and recycled-feedstock conversion projects" },
+] as const;
+
 const downloads = [
   { label: "Full research dossier", detail: "26-page PDF", href: "/research/r001/tungsten-supply-security.pdf" },
   { label: "Executive memo", detail: "2-page PDF", href: "/research/r001/tungsten-supply-security-memo.pdf" },
@@ -129,19 +136,44 @@ export default function TungstenResearchDossier() {
       <section className="bg-paper text-paper-foreground">
         <Container width="wide" className="py-12 sm:py-16">
           <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-16">
-            <article className="max-w-3xl min-w-0">
+            <article className="max-w-4xl min-w-0">
               <div className="space-y-5 border-b border-paper-border pb-9">
                 {introduction.map((paragraph) => (
                   <p key={paragraph} className="font-display text-[1.125rem] leading-[1.85] sm:text-[1.2rem]">{paragraph}</p>
                 ))}
               </div>
+              <section aria-labelledby="comparison-heading" className="border-b border-paper-border py-10">
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Comparative findings</p>
+                <h2 id="comparison-heading" className="mt-3 font-display text-xl font-bold tracking-tight sm:text-2xl">Policy instruments and recorded implementation</h2>
+                <div className="mt-5 overflow-x-auto border-y border-paper-border">
+                  <table className="w-full min-w-[560px] border-collapse text-left font-display text-sm leading-6">
+                    <caption className="sr-only">Selected tungsten policy measures in China, the European Union, the United Kingdom and Japan</caption>
+                    <thead className="bg-paper-foreground text-paper">
+                      <tr>
+                        <th scope="col" className="w-[22%] px-3 py-3 font-semibold">Jurisdiction</th>
+                        <th scope="col" className="w-[26%] px-3 py-3 font-semibold">Instrument</th>
+                        <th scope="col" className="px-3 py-3 font-semibold">Documented implementation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {comparison.map((entry, index) => (
+                        <tr key={entry.jurisdiction} className={index % 2 === 0 ? "bg-paper" : "bg-[#ebe8e0]"}>
+                          <th scope="row" className="border-t border-paper-border px-3 py-3 align-top font-semibold">{entry.jurisdiction}</th>
+                          <td className="border-t border-paper-border px-3 py-3 align-top">{entry.instrument}</td>
+                          <td className="border-t border-paper-border px-3 py-3 align-top">{entry.implementation}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
               {sections.map((section, i) => (
                 <section key={section.id} id={section.id} aria-labelledby={`${section.id}-heading`} className="scroll-mt-28 border-b border-paper-border py-10 sm:py-12">
                   <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-paper-accent">Finding {String(i + 1).padStart(2, "0")}</p>
                   <h2 id={`${section.id}-heading`} className="mt-3 font-display text-[1.8rem] font-medium leading-[1.2] tracking-tight sm:text-[2.1rem]">{section.heading}</h2>
-                  <div className="mt-6 space-y-5">
+                  <div className="mt-6 space-y-5 xl:columns-2 xl:gap-9">
                     {section.paragraphs.map((paragraph) => (
-                      <p key={paragraph} className="font-display text-[1.075rem] leading-[1.85]">{paragraph}</p>
+                      <p key={paragraph} className="break-inside-avoid font-display text-[1.025rem] leading-[1.8]">{paragraph}</p>
                     ))}
                   </div>
                   {section.sources.length > 0 && (
@@ -160,7 +192,7 @@ export default function TungstenResearchDossier() {
               ))}
               <section aria-labelledby="research-record-heading" className="pt-10">
                 <h2 id="research-record-heading" className="font-display text-base font-semibold">Research record</h2>
-                <p className="mt-3 font-display text-sm leading-7 text-paper-muted">Research cutoff: 3 November 2026. The comparison uses the SMPT dataset frozen at GitHub commit <a href="https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/commit/4fc59c7ea38ca788eb7537353274a953c90e13eb" target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-2 underline-offset-4">4fc59c7</a>, supplemented by the original sources linked above. Evidence is selective and stage-specific. The complete dossier provides detailed figures, references and methodology.</p>
+                <p className="mt-3 font-display text-sm leading-7 text-paper-muted">Research cutoff: 3 November 2026. The comparison uses the SMPT dataset frozen at GitHub commit <a href="https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/commit/4fc59c7ea38ca788eb7537353274a953c90e13eb" target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-2 underline-offset-4">4fc59c7</a>, supplemented by the original sources linked above. The complete dossier contains the supporting exhibits, original-source register and methodology.</p>
                 <p className="mt-4 font-display text-sm text-paper-muted">Suggested citation: Yang, Benjamin. “Tungsten Supply Security.” Strategic Materials Policy Tracker, Research Dossier 001 (November 2026).</p>
               </section>
             </article>
@@ -181,7 +213,7 @@ export default function TungstenResearchDossier() {
                   ))}
                 </ul>
               </div>
-              <p className="mt-8 font-display text-xs leading-5 text-paper-muted">SMPT is an independent research project. Findings reflect the dated source record; the site&apos;s current corpus revision may differ.</p>
+              <p className="mt-8 font-display text-xs leading-5 text-paper-muted">Research Dossier 001 · Benjamin Yang · 3 November 2026 source cutoff</p>
             </aside>
           </div>
         </Container>
