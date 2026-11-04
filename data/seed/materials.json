@@ -56,7 +56,8 @@
       "evt-ca-g7-cmpa-2026",
       "evt-eu-crma-strategic-projects-2026-10",
       "evt-br-bndes-finep-minerals-2025",
-      "evt-kr-motir-rare-earths-2026"
+      "evt-kr-motir-rare-earths-2026",
+      "evt-us-doe-byproduct-pilots-selections-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -357,7 +358,8 @@
       "evt-us-doe-thacker-pass-loan-2024",
       "evt-us-doe-rhyolite-ridge-2025",
       "evt-eu-crma-strategic-projects-2026-10",
-      "evt-br-bndes-finep-minerals-2025"
+      "evt-br-bndes-finep-minerals-2025",
+      "evt-us-doe-battery-round3-selections-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals-2026",
@@ -419,7 +421,8 @@
       "china-rare-earth-suspension-2025-11",
       "evt-eu-crma-strategic-projects-2025-03",
       "evt-eu-crma-strategic-projects-2026-10",
-      "evt-br-bndes-piaui-2026"
+      "evt-br-bndes-piaui-2026",
+      "evt-us-doe-battery-round3-selections-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals-2026",
@@ -461,7 +464,8 @@
       "evt-ca-g7-cmpa-2025",
       "evt-eu-crma-strategic-projects-2026-10",
       "evt-br-bndes-finep-minerals-2025",
-      "evt-br-bndes-piaui-2026"
+      "evt-br-bndes-piaui-2026",
+      "evt-us-doe-battery-round3-selections-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals-2026",
@@ -508,7 +512,8 @@
       "evt-us-army-perpetua-otia-2023",
       "evt-us-exim-stibnite-2026",
       "evt-us-dow-arr-antimony-2025",
-      "evt-us-dow-usac-antimony-2026"
+      "evt-us-dow-usac-antimony-2026",
+      "evt-us-doe-byproduct-pilots-selections-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
