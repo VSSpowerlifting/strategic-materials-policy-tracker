@@ -10,7 +10,7 @@ test("Research is promoted on the homepage without crowding desktop navigation",
   assert.equal(journeys.length, 5);
   assert.equal(headerNav.length, 5);
   assert.ok(headerNav.every((item) => item.href !== "/research"));
-  assert.ok(journeys.every((item) => item.href !== "/research"));
+  assert.ok(journeys.every((item) => !item.href.startsWith("/research")));
   assert.match(homepage(), /<Link href="\/research" className="research-button">\s*Explore published research/);
   assert.match(homepage(), /<Link href="#start" className="research-button-secondary">/);
   assert.match(homepage(), /<Link href="#cases" className="px-2 font-display text-sm/);
