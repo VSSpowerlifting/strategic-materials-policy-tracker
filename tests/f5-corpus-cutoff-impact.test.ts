@@ -92,8 +92,9 @@ test("Wagerup curated revision changed only the reviewed milestone: historical c
 });
 
 test("3 November revision adds only the October 2026 EU Strategic Projects rows and their review dates",()=>{
-  const current=withoutKoreaBrazilExpansion(seeds());
-  const frozen=JSON.stringify(current);
+  const full=seeds();
+  const current=withoutKoreaBrazilExpansion(full);
+  const frozen=JSON.stringify(full);
   assert.equal(auditF5CorpusCutoffImpact(withoutEuCrma2026(current),"2026-10-09","2026-10-17").totalPublicSeedRows,700);
   const r=auditF5CorpusCutoffImpact(current,"2026-10-17","2026-11-03");
   assert.equal(r.totalPublicSeedRows,782);
