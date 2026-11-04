@@ -30,20 +30,6 @@ const DOE_2026_SELECTION_IDS=new Set([
   "src-us-doe-battery-processing-round3",
   "src-us-doe-battery-manufacturing-round3",
   "src-us-doe-industrial-byproducts-2026-08",
-  "org-us-waterleaf-p1-holdco",
-  "org-us-formation-holdings",
-  "org-us-nth-cycle",
-  "org-us-princeton-nuenergy",
-  "org-us-arcanum-ventures",
-  "org-us-elevated-materials",
-  "org-us-coreshell-technologies",
-  "prj-us-waterleaf-lilac-lithium",
-  "prj-us-formation-jervois-cobalt",
-  "prj-us-nth-cycle-black-mass",
-  "prj-us-princeton-nuenergy-cathode",
-  "prj-us-arcanum-ethylene-carbonate",
-  "prj-us-elevated-lithium-films",
-  "prj-us-coreshell-silicon-anode",
 ]);
 const KOREA_BRAZIL_EXPANSION_IDS=new Set([
   "evt-br-bndes-finep-minerals-2025",
@@ -171,7 +157,7 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   const parsed=JSON.parse(output);
   assert.equal(parsed.proposedCutoff,"2026-11-03");
   assert.equal(parsed.currentPublishedCutoff,"2026-11-03");
-  assert.equal(parsed.totalPublicSeedRows,816);
+  assert.equal(parsed.totalPublicSeedRows,802);
   assert.ok(parsed.afterProposedCutoffFields.some((r:{recordId:string})=>
     KOREA_BRAZIL_EXPANSION_IDS.has(r.recordId)),
     "Unreleased November 4 source-review dates remain visible after the last authorized cutoff");
