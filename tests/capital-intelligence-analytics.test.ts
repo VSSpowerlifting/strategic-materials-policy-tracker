@@ -602,7 +602,7 @@ test("in the corpus, Australia's stockpiling allocation is counted at stockpilin
 
   // Every actor's stage and material counts equal the rule, written out apart from `actorPortfolio`.
   for (const actor of actorsWithCapital(all)) {
-    const mine = all.filter((x) => x.providerJurisdiction === actor && !isEnded(x) && x.valueRole !== "funding_option" && x.valueRole !== "indication");
+    const mine = all.filter((x) => x.providerJurisdiction === actor && !isEnded(x) && x.valueRole !== "funding_option" && x.valueRole !== "indication" && x.valueRole !== "selected_proposal");
     const byId = new Map(mine.map((x) => [x.id, x]));
     const covered = (x: FinancialCommitment, has: (p: FinancialCommitment) => boolean) =>
       x.relationships.some((r) => {
