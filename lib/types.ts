@@ -20,6 +20,8 @@ export const JURISDICTIONS = [
   "canada",
   "uk",
   "india",
+  "brazil",
+  "korea",
   "other",
 ] as const;
 
