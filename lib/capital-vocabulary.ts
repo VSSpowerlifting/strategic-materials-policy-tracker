@@ -11,6 +11,7 @@ import {
 
 export const VALUE_ROLE_DEFS: Record<(typeof VALUE_ROLES)[number], string> = {
   commitment: "Money, or a money-like promise, committed to a named recipient or project. The only role ever summed.",
+  selected_proposal: "The proposed federal share of an applicant selected to negotiate a grant. A selection is not a signed award, an obligation or a payment; it is listed separately and excluded from every committed-capital total.",
   program_envelope: "The ceiling of a programme, fund or facility that awards are drawn from.",
   budget_appropriation: "Money set aside in a budget or allocation.",
   lending_authority: "A ceiling on what a lender may lend or guarantee.",
@@ -33,6 +34,7 @@ export const CAPITAL_SOURCE_DEFS: Record<(typeof CAPITAL_SOURCES)[number], strin
 };
 
 export const FINANCIAL_STATUS_DEFS: Record<(typeof FINANCIAL_STATUSES)[number], string> = {
+  selected_for_negotiations: "The applicant was selected to negotiate an award. Amount, eligibility and terms may change; the agency has not executed a binding grant or paid the proposed share.",
   announced: "Publicly announced; no decision or agreement is stated.",
   authorized: "Legal or budgetary authority exists, e.g. an enacted statute or cabinet approval.",
   allocated: "Assigned to the purpose, e.g. in a budget.",
