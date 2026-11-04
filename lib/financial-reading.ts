@@ -27,7 +27,9 @@ export function explainFinancialRecord(
  if(c.projectId&&shared.length)throw new Error("Cannot label the same finance row as directly allocated and shared");
  if(new Set(shared).size!==shared.length)throw new Error("Duplicate unallocated project association");
 
- const payment=role==="funding_option"
+ const payment=role==="selection_proposal"
+   ? "An applicant was selected to negotiate an award. No signed funding agreement, obligation or disbursement has been established by this selection."
+   : role==="funding_option"
    ? "For an option, this financial status describes the agreement granting the option, not exercise or payment. Check the option ladder and any separate drawn commitment."
    : status==="disbursed"
      ? "The source-linked current status records disbursement. Check the cited history for amount, timing and scope; it does not establish physical construction."
@@ -41,7 +43,9 @@ export function explainFinancialRecord(
    : shared.length
      ? "The record names multiple associated projects, but its financial amount is shared and unallocated. No portion can be assigned to any individual project's capital stack."
      : "No direct registered project association is coded for this row. A project or facility may still be named in source text; absence of a link is not proof of inactivity.";
- const boundary=role==="commitment"
+ const boundary=role==="selection_proposal"
+   ? "This is proposed support at the award-negotiation stage. It is excluded from committed-capital totals, financing backers, co-investment and actual payments."
+   : role==="commitment"
    ? c.capitalSource==="private"||c.capitalSource==="not_stated"
      ? "A commitment record is not automatically a government commitment. The recorded provider and capital source determine attribution."
      : "This is a commitment role, but the financial status still determines legal standing and payment. Funding and verified industrial outcomes remain separate."

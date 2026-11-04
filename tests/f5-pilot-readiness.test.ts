@@ -42,7 +42,7 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
   assert.ok(report.cases.every(x=>!x.publicationEligible && x.releaseBlockers.length>=1));
   assert.ok(report.cases.every(x=>!x.releaseBlockers.includes("curated_corpus_cutoff_requires_separate_approval")),
     "the reviewed corpus cutoff proposal in this PR is 2026-10-09; and it does not authorize other candidate signoffs");
-  assert.equal(site.lastUpdated, "2026-11-03");
+  assert.equal(site.lastUpdated, "2026-11-04");
   assert.equal(getAllProjectMilestones().length, 2);
 });
 

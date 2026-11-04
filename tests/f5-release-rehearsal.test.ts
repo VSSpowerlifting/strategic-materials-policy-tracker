@@ -49,7 +49,7 @@ function syntheticDecision(id:string, cutoff:string=proposed) {
 test("real release now has only Wagerup registered without auto-authorizing the private Observatory",()=>{
   const current=getAllProjectMilestones();
   assert.deepEqual(current.map(m=>m.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
-  assert.equal(site.lastUpdated,"2026-11-03");
+  assert.equal(site.lastUpdated,"2026-11-04");
   const replay=rehearseF5Release(queue,example,{
     ...corpus(),milestones:current,
   },site.lastUpdated,site.lastUpdated);

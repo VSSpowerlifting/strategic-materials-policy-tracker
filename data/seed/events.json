@@ -2832,11 +2832,9 @@
       "funding"
     ],
     "affectedMaterialIds": [
-      "rare-earth-elements",
-      "ndfeb-magnets"
+      "rare-earth-elements"
     ],
     "affectedSectors": [
-      "defense",
       "battery",
       "energy",
       "industrial"
@@ -2865,7 +2863,7 @@
     "titleOriginalLang": "en",
     "titleEn": "DOE selects seven battery and critical-materials processing and manufacturing projects for $500 million in proposed federal support",
     "titleEnSource": "na",
-    "documentNumber": "DE-FOA-0003585",
+    "documentNumber": null,
     "policyStatus": "active",
     "mechanism": [
       "funding",

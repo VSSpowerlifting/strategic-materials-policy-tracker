@@ -1475,3 +1475,30 @@ test("registry ids carry their own prefix and are unique across every collection
     ],
   );
 });
+
+test("unsigned selection proposals are separately classified and cannot be upgraded by status alone", () => {
+  const selected = commitment({
+    id: "fin-alpha-selection",
+    valueRole: "selection_proposal",
+    instrument: "grant",
+    amount: { value: "100000000", currency: "USD", qualifier: "up_to",
+      amountAsStated: "proposed federal share of up to $100 million", currencyBasis: "stated" },
+    financialStatusHistory: [
+      { status: "selected_for_negotiations", date: "2026-08-20", sourceId: "src-one" },
+    ],
+  });
+  assertErrors(validate([selected]), []);
+  assertErrors(validate([{ ...selected, valueRole: "commitment" }]), [
+    "incoherent_value@fin-alpha-selection:financialStatusHistory",
+  ]);
+  assertErrors(validate([{ ...selected, financialStatusHistory: [
+    { status: "contracted", date: "2026-08-20", sourceId: "src-one" },
+  ] }]), [
+    "incoherent_value@fin-alpha-selection:financialStatusHistory",
+    "incoherent_value@fin-alpha-selection:financialStatusHistory[0].status",
+  ]);
+  assertErrors(validate([{ ...selected, amount: null }]), [
+    "evidence_for_absent_field@fin-alpha-selection:evidence[0].supports[3]",
+    "incoherent_value@fin-alpha-selection:amount",
+  ]);
+});

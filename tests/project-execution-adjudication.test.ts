@@ -109,15 +109,16 @@ test("M3 multi-review handoff rejects the same dated facility event reported by 
     "batch review does not modify the existing Wagerup public seed");
 });
 
-test("real post-cutoff human review is blocked instead of quietly backdated", () => {
+test("a historical post-cutoff human review is blocked instead of quietly backdated", () => {
   const d = draft();
-  setApproved(d[1], "2026-11-04");
-  const blocked = audit(d);
+  const previousCorpus = refs();
+  previousCorpus.corpusCutoff = "2026-11-03"; // fixed historical review simulation
+  setApproved(d[1], "2026-11-04", queue, previousCorpus);
+  const blocked = audit(d, previousCorpus);
   assert.deepEqual(blocked.errors, []);
   assert.equal(blocked.proposals.length, 0);
   assert.match(blocked.blocked[0].reason, /requires a separately authorized site.lastUpdated revision/);
-  const newCorpus = refs();
-  newCorpus.corpusCutoff = "2026-11-05"; // hypothetical future authorized corpus cutoff in this fixture only
+  const newCorpus = refs(); // current published cutoff accepts the dated synthetic review
   setApproved(d[1], "2026-11-04", queue, newCorpus);
   const eligible = audit(d, newCorpus);
   assert.deepEqual(eligible.errors, []);
@@ -284,8 +285,10 @@ test("Thompson Falls: taxonomy resolved, but only a synthetic human decision yie
   assert.equal(result.proposals[0].occurredOn, null);
   assert.match(result.proposals[0].note ?? "", /not a completed\/operating project/);
   assert.equal(getAllProjectMilestones().length, 2, "preview is not another publication");
-  setApproved(d, "2026-11-04");
-  const staleCutoff = audit(rows);
+  const historic = refs();
+  historic.corpusCutoff = "2026-11-03";
+  setApproved(d, "2026-11-04", queue, historic);
+  const staleCutoff = audit(rows, historic);
   assert.equal(staleCutoff.proposals.length, 0);
   assert.ok(staleCutoff.blocked.some(b => b.id === d.id && /curated corpus cutoff/.test(b.reason)));
 });

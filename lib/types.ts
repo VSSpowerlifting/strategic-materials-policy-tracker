@@ -364,6 +364,7 @@ export const VALUE_ROLES = [
   "lending_authority", // a ceiling on what a lender may lend or guarantee
   "funding_option", // a ceiling a party may call on at its election under an executed agreement; an exercise is recorded as its own commitment drawn from it
   "indication", // a non-binding letter of intent or interest that names an amount: possible support, never a commitment, capital or backing
+  "selection_proposal", // proposed federal share for an applicant selected to negotiate an award; unsigned, no government commitment or project backing
   "expected_co_investment", // money the government expects others to put in
   "private_financing", // commercial capital raised alongside public money
   "recipient_own_funds", // the recipient's own contribution
@@ -382,6 +383,7 @@ export const CAPITAL_SOURCES = [
 /** The financial lifecycle of a commitment. The stages are distinct, never interchangeable. */
 export const FINANCIAL_STATUSES = [
   "announced",
+  "selected_for_negotiations", // issuer selected an applicant for award talks; no executed agreement or payment
   "authorized", // legal or budgetary authority exists
   "allocated", // money assigned to the purpose, e.g. in a budget
   "decided", // the provider has decided to invest or award

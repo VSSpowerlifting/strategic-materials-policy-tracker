@@ -240,6 +240,7 @@ export const valueRoleLabels: Record<ValueRole, string> = {
   lending_authority: "Lending authority",
   funding_option: "Funding option",
   indication: "Non-binding indication",
+  selection_proposal: "Selected for negotiations",
   expected_co_investment: "Expected co-investment",
   private_financing: "Private financing",
   recipient_own_funds: "Recipient's own funds",
@@ -256,6 +257,7 @@ export const capitalSourceLabels: Record<CapitalSource, string> = {
 
 export const financialStatusLabels: Record<FinancialStatus, string> = {
   announced: "Announced",
+  selected_for_negotiations: "Selected for negotiations",
   authorized: "Authorized",
   allocated: "Allocated",
   decided: "Decided",
@@ -553,6 +555,7 @@ export const layerLabels = {
   other_commitment: "Other commitments",
   funding_option: "Funding options",
   indication: "Non-binding indications",
+  selection_proposal: "Award selections under negotiation",
   envelope: "Envelopes, appropriations and lending authorities",
   private_financing: "Private financing",
   recipient_own_funds: "Recipient's own funds",
@@ -566,6 +569,7 @@ export const layerGlosses = {
   other_commitment: "Committed with private capital, or capital whose source the sources do not state. Listed, never summed with public money.",
   funding_option: "A ceiling a party may call on under an executed agreement. Listed, never summed: an option is not committed money until exercised.",
   indication: "Non-binding letters of intent or interest that name an amount. Listed, never summed: an indication is possible support, not a commitment, capital or a backer.",
+  selection_proposal: "A provider has selected the applicant for award negotiations and stated a proposed funding share. Listed in a separate layer, never summed as capital or treated as a funder, backer, contractual award or payment.",
   envelope: "Ceilings that awards are drawn from. Listed, never summed, and never divided into awards.",
   private_financing: "Commercial capital raised alongside public money. Listed, never public support.",
   recipient_own_funds: "The recipient's own contribution. Listed, never public support.",
