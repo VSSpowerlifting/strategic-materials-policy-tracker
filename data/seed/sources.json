@@ -2184,6 +2184,54 @@
     "notes": "Army article on the 29 July 2026 opening of the Idaho National Laboratory prototype antimony-sulfide processing facility. States that the Army effort began in 2023 at $27.1 million and that the separate DPA project with Perpetua totaled about $59.3 million."
   },
   {
+    "id": "src-us-doe-battery-manufacturing-round3",
+    "title": "Battery Manufacturing and Recycling Grants — Round 3 selected projects",
+    "publisher": "U.S. Department of Energy",
+    "url": "https://www.energy.gov/cmei/manufacturing/battery-manufacturing-and-recycling-grants",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-11-04",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official DOE programme page identifies Nth Cycle, Princeton NuEnergy, Arcanum Ventures, Elevated Materials and Coreshell Technologies, individual proposed federal shares, proposed activities, and location specificity. Live programme webpage; Round 3 selection date is 20 August 2026."
+  },
+  {
+    "id": "src-us-doe-battery-processing-round3",
+    "title": "Battery Materials Processing Grants — Round 3 selected projects",
+    "publisher": "U.S. Department of Energy",
+    "url": "https://www.energy.gov/cmei/manufacturing/battery-materials-processing-grants",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-11-04",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official DOE programme page identifies Waterleaf P1 HoldCo and Formation Holdings US, individual proposed federal shares, descriptions and location specificity. Live programme webpage; Round 3 selection date is 20 August 2026."
+  },
+  {
+    "id": "src-us-doe-battery-round3-2026-08",
+    "title": "Energy Department Announces $500 Million To Secure America's Critical Mineral and Battery Supply Chains",
+    "publisher": "U.S. Department of Energy",
+    "url": "https://www.energy.gov/articles/energy-department-announces-500-million-secure-americas-critical-mineral-and-battery",
+    "language": "en",
+    "datePublished": "2026-08-20",
+    "dateAccessed": "2026-11-04",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Announcement identifies seven selected projects and a proposed $500 million federal-share total. Selection is not a signed grant or cash advance."
+  },
+  {
+    "id": "src-us-doe-industrial-byproducts-2026-08",
+    "title": "DOE’s Office of Critical Minerals and Energy Innovation Announces $162 Million To Accelerate Critical Minerals and Materials Recovery from Industrial Sources",
+    "publisher": "U.S. Department of Energy",
+    "url": "https://www.energy.gov/cmei/articles/does-office-critical-minerals-and-energy-innovation-announces-162-million-accelerate",
+    "language": "en",
+    "datePublished": "2026-08-18",
+    "dateAccessed": "2026-11-04",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official DOE selection announcement gives nine selectee names, headquarters and topic categories, but no individual award share or site; expressly warns selection for negotiations does not commit funding. $162 million is the aggregate selected-project figure."
+  },
+  {
     "id": "src-usac-2026-q1-call-sec-exhibit",
     "title": "United States Antimony Corporation, First Quarter 2026 Earnings Call Transcript (Exhibit 99.1 to Form 8-K)",
     "publisher": "United States Antimony Corporation / U.S. Securities and Exchange Commission (EDGAR)",
