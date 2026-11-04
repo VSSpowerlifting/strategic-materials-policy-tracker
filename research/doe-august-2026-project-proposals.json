@@ -1,8 +1,8 @@
 {
-  "reviewState": "research_only_do_not_promote",
+  "reviewState": "staged_draft_pending_release",
   "asOf": "2026-11-04",
-  "blocker": "The public Project registry requires a linked FinancialCommitment or ProjectDesignation. DOE selections are negotiations-stage and cannot be represented as committed money under the current finance ontology.",
-  "sourcePolicy": "Official DOE selected-project pages; selection amounts remain outside committed-capital summaries",
+  "blocker": "DOE grant selections now have a separate noncommitted selected_proposal financial role on a draft branch. Seven projects are staged for independent source review and maintainer approval; no signed awards or disbursements have been verified.",
+  "sourcePolicy": "Projects, organizations, grant programmes and proposed federal shares are included only in a draft PR. Selection amounts remain outside commitment and project-backing totals.",
   "proposedProjects": [
     {
       "id": "prj-us-arcanum-ethylene-carbonate",
