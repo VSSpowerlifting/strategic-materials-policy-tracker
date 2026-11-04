@@ -23,6 +23,14 @@ type Row={id:string;eventId?:string;evidence?:{sourceId:string}[]};
 // Preserve historical cutoff snapshots when later, separately reviewed corpus
 // expansions add rows. This explicitly enumerated cohort may not retroactively
 // change the 17 October or 3 November 2026 release evidence.
+const DOE_2026_SELECTION_IDS=new Set([
+  "evt-us-doe-battery-round3-selections-2026",
+  "evt-us-doe-byproduct-pilots-selections-2026",
+  "src-us-doe-battery-round3-2026-08",
+  "src-us-doe-battery-processing-round3",
+  "src-us-doe-battery-manufacturing-round3",
+  "src-us-doe-industrial-byproducts-2026-08",
+]);
 const KOREA_BRAZIL_EXPANSION_IDS=new Set([
   "evt-br-bndes-finep-minerals-2025",
   "evt-br-bndes-piaui-2026",
@@ -41,7 +49,7 @@ const KOREA_BRAZIL_EXPANSION_IDS=new Set([
 ]);
 const withoutKoreaBrazilExpansion=(s:SeedInput):SeedInput=>
   Object.fromEntries(Object.entries(s).map(([name,rows])=>[
-    name,(rows as Row[]).filter(r=>!KOREA_BRAZIL_EXPANSION_IDS.has(r.id)),
+    name,(rows as Row[]).filter(r=>!KOREA_BRAZIL_EXPANSION_IDS.has(r.id) && !DOE_2026_SELECTION_IDS.has(r.id)),
   ]));
 const evidencedOnlyByEuCrma2026=(r:Row)=>!!r.evidence?.length&&r.evidence.every(e=>EU_CRMA_2026_SOURCES.has(e.sourceId));
 const withoutEuCrma2026=(s:SeedInput):SeedInput=>({...s,
@@ -149,7 +157,7 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   const parsed=JSON.parse(output);
   assert.equal(parsed.proposedCutoff,"2026-11-03");
   assert.equal(parsed.currentPublishedCutoff,"2026-11-03");
-  assert.equal(parsed.totalPublicSeedRows,796);
+  assert.equal(parsed.totalPublicSeedRows,802);
   assert.ok(parsed.afterProposedCutoffFields.some((r:{recordId:string})=>
     KOREA_BRAZIL_EXPANSION_IDS.has(r.recordId)),
     "Unreleased November 4 source-review dates remain visible after the last authorized cutoff");

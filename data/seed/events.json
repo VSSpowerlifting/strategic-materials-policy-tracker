@@ -2855,5 +2855,86 @@
       "verifiedAt": "2026-11-04",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-us-doe-battery-round3-selections-2026",
+    "date": "2026-08-20",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Energy, Office of Critical Minerals and Energy Innovation",
+    "titleOriginal": "Energy Department Announces $500 Million To Secure America's Critical Mineral and Battery Supply Chains",
+    "titleOriginalLang": "en",
+    "titleEn": "DOE selects seven battery and critical-materials processing and manufacturing projects for $500 million in proposed federal support",
+    "titleEnSource": "na",
+    "documentNumber": "DE-FOA-0003585",
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "lithium",
+      "cobalt",
+      "nickel"
+    ],
+    "affectedSectors": [
+      "battery",
+      "industrial",
+      "energy"
+    ],
+    "summary": "On 20 August 2026, DOE announced seven selected applicants in the third round of its Battery Materials Processing and Battery Manufacturing and Recycling grant programmes. Official project lists show three proposed federal shares of $100 million and four of $50 million, totaling $500 million: Waterleaf P1 HoldCo (Lilac Solutions), Formation Holdings US (Jervois), Nth Cycle, Princeton NuEnergy, Arcanum Ventures, Elevated Materials and Coreshell Technologies. Listed projects concern lithium extraction/refining, cobalt refining, battery black-mass recovery, nickel-bearing cathode recycling, electrolyte chemicals, lithium-metal films and silicon-anode battery manufacturing. Selections do not establish binding award agreements, funds disbursed or completed facility construction.",
+    "analyticalSignificance": "The two DOE project lists provide recipient-level proposed federal shares and industrial activities suitable for subsequent award tracing. The figures represent a selection-stage pipeline, not signed or disbursed federal financing, and must not enter SMPT committed-capital totals until independent agreement evidence supports status promotion.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-us-doe-battery-round3-2026-08",
+      "src-us-doe-battery-processing-round3",
+      "src-us-doe-battery-manufacturing-round3"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-08-20",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-doe-byproduct-pilots-selections-2026",
+    "date": "2026-08-18",
+    "jurisdiction": "us",
+    "issuingBody": "U.S. Department of Energy, Office of Critical Minerals and Energy Innovation",
+    "titleOriginal": "DOE’s Office of Critical Minerals and Energy Innovation Announces $162 Million To Accelerate Critical Minerals and Materials Recovery from Industrial Sources",
+    "titleOriginalLang": "en",
+    "titleEn": "DOE selects nine industrial-feedstock critical-materials pilot proposals totaling $162 million",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "antimony",
+      "rare-earth-elements"
+    ],
+    "affectedSectors": [
+      "industrial",
+      "energy",
+      "defense"
+    ],
+    "summary": "On 18 August 2026, DOE selected nine applicants under Mines & Metals Capacity Expansion Topic Area 2 for industrial-feedstock critical-materials recovery pilots, collectively described as totaling $162 million. Topic 2a selected Anactisis, Still Bright, Nusano and SiTration; Topic 2b selected Thompson Creek Metals Company USA, Felix Gold Alaska Treasure Creek, DISA Technologies, Alcoa USA and Trigg Minerals. DOE names scandium, copper, antimony and rare earths as materials within the cohort. Its announcement supplies headquarters, not site locations, and no per-selectee financing amounts. DOE states that selection for negotiations does not commit an award.",
+    "analyticalSignificance": "The nine-project cohort establishes a bounded U.S. industrial-byproduct pilot research queue with named companies and technology-readiness targets, while company-specific material mappings, physical sites, contractual award values and disbursements require further original-source evidence.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-us-doe-industrial-byproducts-2026-08"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-08-18",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
   }
 ]
