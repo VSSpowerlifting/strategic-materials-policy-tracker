@@ -38,6 +38,7 @@ export function buildCapitalControlSummary() {
       "Amounts are never converted between currencies.",
       "Only rows with valueRole \"commitment\" are summed; envelopes, appropriations and lending authorities are listed, never summed.",
       "Funding options (valueRole \"funding_option\") are listed, never summed: an executed option is not an exercise. An exercise is recorded as its own commitment drawn from the option.",
+      "Selected grant proposals (valueRole \"selected_proposal\") are selected for award negotiations only. Proposed shares are never summed as commitments, counted as backing, or described as obligations or payments.",
       "A row is not added when a row it is part of or drawn from is counted in the same total.",
       "If two counted rows in one currency share a descendant, that currency's total is withheld: status \"withheld\", sums null, and the overlapping rows named.",
       "Private financing, recipient funds, expected co-investment and total project cost are never public support; mixed vehicles are reported apart.",
@@ -61,6 +62,7 @@ export function buildCapitalControlSummary() {
       publicCapitalSources: PUBLIC_CAPITAL_SOURCES,
       envelopesListedNotSummed: listed([...LISTED_NOT_SUMMED_ROLES]),
       indicationsListedNotSummed: listed(["indication"]),
+      selectedProposalsListedNotSummed: listed(["selected_proposal"]),
       fundingOptionsListedNotSummed: all
         .filter((c) => c.valueRole === "funding_option")
         .map((c) => {
