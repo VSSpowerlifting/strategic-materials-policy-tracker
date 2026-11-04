@@ -1475,3 +1475,29 @@ test("registry ids carry their own prefix and are unique across every collection
     ],
   );
 });
+
+
+test("selection-stage grant proposals are distinct from contracted awards and paid commitments", () => {
+  const selected = commitment({
+    valueRole: "selected_proposal",
+    instrument: "grant",
+    financialStatusHistory: [{status: "selected_for_negotiations", date: "2025-06-01", sourceId: "src-one"}],
+  });
+  assertErrors(validate([selected]), []);
+  const badStatus = validate([commitment({
+    valueRole: "selected_proposal",
+    financialStatusHistory: [{status: "contracted", date: "2025-06-01", sourceId: "src-one"}],
+  })]);
+  assert.ok(badStatus.errors.some(e => e.code === "incoherent_value" && e.field === "financialStatusHistory"));
+  const wrongRole = validate([commitment({
+    valueRole: "commitment",
+    financialStatusHistory: [{status: "selected_for_negotiations", date: "2025-06-01", sourceId: "src-one"}],
+  })]);
+  assert.ok(wrongRole.errors.some(e => e.code === "incoherent_value" && e.field === "valueRole"));
+  const wrongInstrument = validate([commitment({
+    valueRole: "selected_proposal",
+    instrument: "loan",
+    financialStatusHistory: [{status: "selected_for_negotiations", date: "2025-06-01", sourceId: "src-one"}],
+  })]);
+  assert.ok(wrongInstrument.errors.some(e => e.code === "incoherent_value" && e.field === "instrument"));
+});
