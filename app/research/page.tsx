@@ -17,6 +17,29 @@ export default function ResearchIndex() {
         <div className="mt-12 border-t border-border-strong">
           <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
             <div className="font-display text-sm leading-6 text-muted">
+              <p className="font-semibold text-accent">Applied Strategy 001</p>
+              <p>4 November 2026</p>
+              <p className="mt-2">Benjamin Yang</p>
+            </div>
+            <div>
+              <h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl">
+                <Link href="/research/antimony-supply-resilience" className="hover:text-accent">
+                  U.S. Antimony Supply Resilience, 2027–2031
+                </Link>
+              </h2>
+              <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">
+                A defense-manufacturing strategy case comparing supplier qualification, sourcing diversification,
+                strategic inventory and conditional domestic offtake. Includes an editable cost-exposure and
+                resilience model with severe-disruption tests.
+              </p>
+              <Link href="/research/antimony-supply-resilience" className="research-text-link">
+                Read the case and open the financial model
+              </Link>
+            </div>
+          </article>
+
+          <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
+            <div className="font-display text-sm leading-6 text-muted">
               <p className="font-semibold text-accent">Research Dossier 001</p>
               <p>3 November 2026</p>
               <p className="mt-2">Benjamin Yang</p>
