@@ -9169,6 +9169,603 @@
     }
   },
   {
+    "id": "fin-us-doe-round3-selected-arcanum",
+    "eventId": "evt-us-doe-battery-round3-selections-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "selected_proposal",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "Federal share: $50 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Energy",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-doe-battery-manufacturing-recycling-round3",
+    "recipient": "Arcanum Ventures, LLC",
+    "recipientOrgIds": [
+      "org-us-arcanum-ventures"
+    ],
+    "project": "Arcanum battery-grade ethylene carbonate facility",
+    "projectId": "prj-us-arcanum-ethylene-carbonate",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": null,
+        "asStated": "United States Gulf Coast"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "battery-grade ethylene carbonate"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "selected_for_negotiations",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE names the applicant as a Round 3 selection with a proposed federal share. Selection for negotiations is neither an executed award nor an obligation or disbursement."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE describes a proposed or intended facility. No evidence here of construction, commissioning or production."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status",
+          "programme",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3: Arcanum Ventures, LLC; federal share and proposed project description",
+        "note": "DOE official project listing identifies a grant-programme selectee and proposed federal share; category records selection separately from any binding award."
+      }
+    ],
+    "notes": "Selected-for-negotiations grant proposal. Proposed federal share; no executed grant agreement, funds obligated or cash disbursed. Excluded from committed-capital totals and project backing; if DOE later signs an award, register separately with agreement evidence."
+  },
+  {
+    "id": "fin-us-doe-round3-selected-coreshell",
+    "eventId": "evt-us-doe-battery-round3-selections-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "selected_proposal",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "Federal share: $50 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Energy",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-doe-battery-manufacturing-recycling-round3",
+    "recipient": "Coreshell Technologies Incorporated",
+    "recipientOrgIds": [
+      "org-us-coreshell-technologies"
+    ],
+    "project": "Coreshell silicon-anode electrode and cell manufacturing project",
+    "projectId": "prj-us-coreshell-silicon-anode",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "California",
+        "asStated": "San Leandro, CA"
+      }
+    ],
+    "stages": [
+      "component_manufacturing",
+      "final_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "metallurgical silicon",
+      "silicon-anode lithium-ion electrodes and cells"
+    ],
+    "financialStatusHistory": [
+      {
+        "status": "selected_for_negotiations",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE names the applicant as a Round 3 selection with a proposed federal share. Selection for negotiations is neither an executed award nor an obligation or disbursement."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE describes a proposed or intended facility. No evidence here of construction, commissioning or production."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status",
+          "programme",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3: Coreshell Technologies Incorporated; federal share and proposed project description",
+        "note": "DOE official project listing identifies a grant-programme selectee and proposed federal share; category records selection separately from any binding award."
+      }
+    ],
+    "notes": "Selected-for-negotiations grant proposal. Proposed federal share; no executed grant agreement, funds obligated or cash disbursed. Excluded from committed-capital totals and project backing; if DOE later signs an award, register separately with agreement evidence."
+  },
+  {
+    "id": "fin-us-doe-round3-selected-elevated-materials",
+    "eventId": "evt-us-doe-battery-round3-selections-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "selected_proposal",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "Federal share: $50 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Energy",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-doe-battery-manufacturing-recycling-round3",
+    "recipient": "Elevated Materials, LLC",
+    "recipientOrgIds": [
+      "org-us-elevated-materials"
+    ],
+    "project": "Elevated Materials lithium-metal-film manufacturing facility",
+    "projectId": "prj-us-elevated-lithium-films",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": null,
+        "asStated": "United States"
+      }
+    ],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "selected_for_negotiations",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE names the applicant as a Round 3 selection with a proposed federal share. Selection for negotiations is neither an executed award nor an obligation or disbursement."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE describes a proposed or intended facility. No evidence here of construction, commissioning or production."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status",
+          "programme",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3: Elevated Materials, LLC; federal share and proposed project description",
+        "note": "DOE official project listing identifies a grant-programme selectee and proposed federal share; category records selection separately from any binding award."
+      }
+    ],
+    "notes": "Selected-for-negotiations grant proposal. Proposed federal share; no executed grant agreement, funds obligated or cash disbursed. Excluded from committed-capital totals and project backing; if DOE later signs an award, register separately with agreement evidence."
+  },
+  {
+    "id": "fin-us-doe-round3-selected-formation-jervois",
+    "eventId": "evt-us-doe-battery-round3-selections-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "selected_proposal",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "Federal share: $100 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Energy",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-doe-battery-processing-round3",
+    "recipient": "Formation Holdings US, Inc. (Jervois)",
+    "recipientOrgIds": [
+      "org-us-formation-holdings"
+    ],
+    "project": "Formation Holdings (Jervois) cobalt sulfate refinery",
+    "projectId": "prj-us-formation-jervois-cobalt",
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "refining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "cobalt"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "selected_for_negotiations",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "note": "DOE names the applicant as a Round 3 selection with a proposed federal share. Selection for negotiations is neither an executed award nor an obligation or disbursement."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "note": "DOE describes a proposed or intended facility. No evidence here of construction, commissioning or production."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status",
+          "programme",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3: Formation Holdings US, Inc. (Jervois); federal share and proposed project description",
+        "note": "DOE official project listing identifies a grant-programme selectee and proposed federal share; category records selection separately from any binding award."
+      }
+    ],
+    "notes": "Selected-for-negotiations grant proposal. Proposed federal share; no executed grant agreement, funds obligated or cash disbursed. Excluded from committed-capital totals and project backing; if DOE later signs an award, register separately with agreement evidence."
+  },
+  {
+    "id": "fin-us-doe-round3-selected-nth-cycle",
+    "eventId": "evt-us-doe-battery-round3-selections-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "selected_proposal",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "Federal share: $100 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Energy",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-doe-battery-manufacturing-recycling-round3",
+    "recipient": "Nth Cycle, Inc.",
+    "recipientOrgIds": [
+      "org-us-nth-cycle"
+    ],
+    "project": "Nth Cycle southeastern U.S. battery black-mass refining facility",
+    "projectId": "prj-us-nth-cycle-black-mass",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": null,
+        "asStated": "Southeastern U.S."
+      }
+    ],
+    "stages": [
+      "recycling",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "selected_for_negotiations",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE names the applicant as a Round 3 selection with a proposed federal share. Selection for negotiations is neither an executed award nor an obligation or disbursement."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE describes a proposed or intended facility. No evidence here of construction, commissioning or production."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status",
+          "programme",
+          "location"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3: Nth Cycle, Inc.; federal share and proposed project description",
+        "note": "DOE official project listing identifies a grant-programme selectee and proposed federal share; category records selection separately from any binding award."
+      }
+    ],
+    "notes": "Selected-for-negotiations grant proposal. Proposed federal share; no executed grant agreement, funds obligated or cash disbursed. Excluded from committed-capital totals and project backing; if DOE later signs an award, register separately with agreement evidence."
+  },
+  {
+    "id": "fin-us-doe-round3-selected-princeton-nuenergy",
+    "eventId": "evt-us-doe-battery-round3-selections-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "selected_proposal",
+    "capitalSource": "public",
+    "amount": {
+      "value": "50000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "Federal share: $50 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Energy",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-doe-battery-manufacturing-recycling-round3",
+    "recipient": "Princeton NuEnergy Inc.",
+    "recipientOrgIds": [
+      "org-us-princeton-nuenergy"
+    ],
+    "project": "Princeton NuEnergy cathode-rejuvenation demonstration facility",
+    "projectId": "prj-us-princeton-nuenergy-cathode",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Georgia",
+        "asStated": "Commerce, GA"
+      }
+    ],
+    "stages": [
+      "recycling",
+      "component_manufacturing"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "nickel"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "selected_for_negotiations",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE names the applicant as a Round 3 selection with a proposed federal share. Selection for negotiations is neither an executed award nor an obligation or disbursement."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "note": "DOE describes a proposed or intended facility. No evidence here of construction, commissioning or production."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status",
+          "programme",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3: Princeton NuEnergy Inc.; federal share and proposed project description",
+        "note": "DOE official project listing identifies a grant-programme selectee and proposed federal share; category records selection separately from any binding award."
+      }
+    ],
+    "notes": "Selected-for-negotiations grant proposal. Proposed federal share; no executed grant agreement, funds obligated or cash disbursed. Excluded from committed-capital totals and project backing; if DOE later signs an award, register separately with agreement evidence."
+  },
+  {
+    "id": "fin-us-doe-round3-selected-waterleaf",
+    "eventId": "evt-us-doe-battery-round3-selections-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "selected_proposal",
+    "capitalSource": "public",
+    "amount": {
+      "value": "100000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "Federal share: $100 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "U.S. Department of Energy",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-doe"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-doe-battery-processing-round3",
+    "recipient": "Waterleaf P1 HoldCo, LLC",
+    "recipientOrgIds": [
+      "org-us-waterleaf-p1-holdco"
+    ],
+    "project": "Waterleaf lithium extraction and refining project at Great Salt Lake",
+    "projectId": "prj-us-waterleaf-lilac-lithium",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Utah",
+        "asStated": "West Promontory, UT"
+      }
+    ],
+    "stages": [
+      "processing",
+      "refining"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [
+      "lithium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "selected_for_negotiations",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "note": "DOE names the applicant as a Round 3 selection with a proposed federal share. Selection for negotiations is neither an executed award nor an obligation or disbursement."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-20",
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "note": "DOE describes a proposed or intended facility. No evidence here of construction, commissioning or production."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "stages",
+          "status",
+          "programme",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3: Waterleaf P1 HoldCo, LLC; federal share and proposed project description",
+        "note": "DOE official project listing identifies a grant-programme selectee and proposed federal share; category records selection separately from any binding award."
+      }
+    ],
+    "notes": "Selected-for-negotiations grant proposal. Proposed federal share; no executed grant agreement, funds obligated or cash disbursed. Excluded from committed-capital totals and project backing; if DOE later signs an award, register separately with agreement evidence."
+  },
+  {
     "id": "fin-us-doe-thacker-pass-atvm-2024",
     "eventId": "evt-us-doe-thacker-pass-loan-2024",
     "relationships": [],
