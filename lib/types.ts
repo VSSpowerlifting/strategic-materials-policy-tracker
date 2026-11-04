@@ -359,6 +359,7 @@ export const FINANCIAL_INSTRUMENTS = [
  */
 export const VALUE_ROLES = [
   "commitment", // committed to a named recipient or project
+  "selected_proposal", // applicant selected for grant negotiation; proposed share, no executed award or commitment
   "program_envelope", // the ceiling of a programme or fund that awards are drawn from
   "budget_appropriation", // money set aside in a budget
   "lending_authority", // a ceiling on what a lender may lend or guarantee
@@ -381,6 +382,7 @@ export const CAPITAL_SOURCES = [
 
 /** The financial lifecycle of a commitment. The stages are distinct, never interchangeable. */
 export const FINANCIAL_STATUSES = [
+  "selected_for_negotiations", // chosen to negotiate a grant; selection is not an award, obligation or payment
   "announced",
   "authorized", // legal or budgetary authority exists
   "allocated", // money assigned to the purpose, e.g. in a budget
