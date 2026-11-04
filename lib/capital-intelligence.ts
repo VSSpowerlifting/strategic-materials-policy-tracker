@@ -74,6 +74,8 @@ export const ACTOR_HOME_COUNTRIES: Readonly<Record<JurisdictionCode, readonly st
   canada: ["CA"],
   uk: ["GB"],
   india: ["IN"],
+  brazil: ["BR"],
+  korea: ["KR"],
   other: [],
 };
 
@@ -207,6 +209,7 @@ export const LAYER_KEYS = [
   "joint_vehicle_commitment", // committed by a joint vehicle whose public share is not stated: summed apart
   "other_commitment", // committed, but private or of unstated source: listed
   "funding_option", // listed, never summed
+  "selected_proposal", // selection for award negotiations; never backing or a government commitment
   "indication", // non-binding letters of intent or interest: listed, never summed, never capital or backing
   "envelope", // envelopes, appropriations and lending authorities: listed, never summed
   "private_financing",
@@ -249,7 +252,7 @@ export function layers(rows: readonly FinancialCommitment[], all: readonly Finan
  * and indication rows stay listed wherever they appear, with their status or role.
  */
 export const isBackingRow = (c: FinancialCommitment): boolean =>
-  !isEnded(c) && c.valueRole !== "funding_option" && c.valueRole !== "indication";
+  !isEnded(c) && c.valueRole !== "funding_option" && c.valueRole !== "indication" && c.valueRole !== "selected_proposal";
 
 export type ProjectStack = {
   project: Project;
@@ -513,7 +516,7 @@ export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialC
   const standing = { binding: 0, not_yet_binding: 0, status_not_stated: 0, ended: 0 };
   for (const c of counted) {
     byLayer[layerOf(c)]++;
-    if (c.valueRole === "funding_option" || c.valueRole === "indication") continue;
+    if (c.valueRole === "funding_option" || c.valueRole === "indication" || c.valueRole === "selected_proposal") continue;
     byInstrument[c.instrument] = (byInstrument[c.instrument] ?? 0) + 1;
     if (c.valueRole === "commitment") {
       standing[legalStanding(c)]++;
@@ -524,7 +527,7 @@ export function actorPortfolio(actor: JurisdictionCode, all: readonly FinancialC
   // (and, being this actor's rows, the same provider) covers that stage or material, so a part that reaches
   // beyond its package is counted at the stage or material the package does not cover, and never twice
   // where both cover it. `rows` above is unchanged. Funding options and indications are left out, as everywhere here.
-  const standingRows = rows.filter((c) => !isEnded(c) && c.valueRole !== "funding_option" && c.valueRole !== "indication");
+  const standingRows = rows.filter((c) => !isEnded(c) && c.valueRole !== "funding_option" && c.valueRole !== "indication" && c.valueRole !== "selected_proposal");
   const standingById = new Map(standingRows.map((c) => [c.id, c]));
   const coveredByPackage = (c: FinancialCommitment, covers: (p: FinancialCommitment) => boolean) =>
     isFoldedPart(c, standingById, (p) => layerOf(p) === layerOf(c) && covers(p));

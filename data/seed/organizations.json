@@ -318,6 +318,59 @@
     "notes": null
   },
   {
+    "id": "org-br-bndes",
+    "name": "Banco Nacional de Desenvolvimento Econômico e Social (BNDES)",
+    "nameOriginal": "Banco Nacional de Desenvolvimento Econômico e Social",
+    "aliases": [
+      "BNDES"
+    ],
+    "kind": "public_financier",
+    "countryCode": "BR",
+    "actor": "brazil",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Title and opening paragraphs",
+        "note": "Brazilian federal development bank providing the named financing decision."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-br-piaui-niquel-metais",
+    "name": "Piauí Níquel Metais S/A",
+    "nameOriginal": "Piauí Níquel Metais S/A",
+    "aliases": [
+      "Piauí Níquel"
+    ],
+    "kind": "company",
+    "countryCode": "BR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraphs 1, 3–5",
+        "note": "BNDES identifies the Brazilian operating company and reports it as a wholly owned subsidiary of Brazilian Nickel Limited; parent registry onboarding remains separate."
+      }
+    ],
+    "notes": "Named BNDES finance recipient, operating company for the Piauí Níquel undertaking. Parent Brazilian Nickel Limited is not yet registered."
+  },
+  {
     "id": "org-ca-canada-growth-fund",
     "name": "Canada Growth Fund",
     "nameOriginal": null,
@@ -2987,6 +3040,29 @@
     "notes": null
   },
   {
+    "id": "org-us-arcanum-ventures",
+    "name": "Arcanum Ventures, LLC",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3 selected projects: Arcanum Ventures",
+        "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+      }
+    ],
+    "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+  },
+  {
     "id": "org-us-commerce",
     "name": "U.S. Department of Commerce",
     "nameOriginal": null,
@@ -3012,6 +3088,29 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "org-us-coreshell-technologies",
+    "name": "Coreshell Technologies Incorporated",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3 selected projects: Coreshell Technologies",
+        "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+      }
+    ],
+    "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
   },
   {
     "id": "org-us-dod",
@@ -3080,6 +3179,29 @@
     "notes": "Federal ATVM/Loan Programs Office financing authority for the Thacker Pass loan. The original borrower agreement identifies DOE as an agreement party and provides for Federal Financing Bank advances under federal loan arrangements."
   },
   {
+    "id": "org-us-elevated-materials",
+    "name": "Elevated Materials, LLC",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3 selected projects: Elevated Materials",
+        "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+      }
+    ],
+    "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+  },
+  {
     "id": "org-us-exim",
     "name": "Export-Import Bank of the United States",
     "nameOriginal": null,
@@ -3120,6 +3242,32 @@
     "notes": "U.S. federal public export-credit lender. The Perpetua Resources Idaho $2.906B project loan was board approved in May 2026, but remained awaiting definitive documentation according to the issuer's 2026 Q2 Form 10-Q; lender identity does not promote a decided loan to contracted/disbursed."
   },
   {
+    "id": "org-us-formation-holdings",
+    "name": "Formation Holdings US, Inc.",
+    "nameOriginal": null,
+    "aliases": [
+      "Formation Holdings US",
+      "Jervois (doing-business-as reference)"
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3 selected projects: Formation Holdings US",
+        "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+      }
+    ],
+    "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+  },
+  {
     "id": "org-us-government",
     "name": "United States Government",
     "nameOriginal": null,
@@ -3143,6 +3291,29 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "org-us-nth-cycle",
+    "name": "Nth Cycle, Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3 selected projects: Nth Cycle",
+        "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+      }
+    ],
+    "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
   },
   {
     "id": "org-us-osc",
@@ -3179,6 +3350,54 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "org-us-princeton-nuenergy",
+    "name": "Princeton NuEnergy Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-manufacturing-round3",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3 selected projects: Princeton NuEnergy",
+        "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+      }
+    ],
+    "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+  },
+  {
+    "id": "org-us-waterleaf-p1-holdco",
+    "name": "Waterleaf P1 HoldCo, LLC",
+    "nameOriginal": null,
+    "aliases": [
+      "Waterleaf P1 HoldCo"
+    ],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-doe-battery-processing-round3",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Round 3 selected projects: Waterleaf P1 HoldCo",
+        "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+      }
+    ],
+    "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
   },
   {
     "id": "org-usa-rare-earth",

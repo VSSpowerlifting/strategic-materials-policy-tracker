@@ -1,0 +1,437 @@
+{
+  "reviewState": "staged_draft_pending_release",
+  "asOf": "2026-11-04",
+  "blocker": "DOE grant selections now have a separate noncommitted selected_proposal financial role on a draft branch. Seven projects are staged for independent source review and maintainer approval; no signed awards or disbursements have been verified.",
+  "sourcePolicy": "Projects, organizations, grant programmes and proposed federal shares are included only in a draft PR. Selection amounts remain outside commitment and project-backing totals.",
+  "proposedProjects": [
+    {
+      "id": "prj-us-arcanum-ethylene-carbonate",
+      "name": "Arcanum battery-grade ethylene carbonate facility",
+      "sponsorOrgIds": [
+        "org-us-arcanum-ventures"
+      ],
+      "locations": [
+        {
+          "countryCode": "US",
+          "subnational": null,
+          "asStated": "United States Gulf Coast"
+        }
+      ],
+      "stages": [
+        "processing"
+      ],
+      "materialIds": [],
+      "materialAttribution": "includes_untracked",
+      "untrackedMaterialsAsStated": [
+        "battery-grade ethylene carbonate"
+      ],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "sponsors",
+            "location",
+            "stages",
+            "materials"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Arcanum Ventures",
+          "note": "Source names selected applicant, intended facility activity, and proposed region or site when stated. Stages are normalized from project activity; no construction or financing milestones inferred."
+        }
+      ],
+      "notes": "DOE lists $50m proposed federal share; top-line location TBD and narrative specifies U.S. Gulf Coast region. Ethylene carbonate is an electrolyte ingredient outside the currently tracked material categories. No lithium processing claim derived from the product's battery application."
+    },
+    {
+      "id": "prj-us-coreshell-silicon-anode",
+      "name": "Coreshell silicon-anode electrode and cell manufacturing project",
+      "sponsorOrgIds": [
+        "org-us-coreshell-technologies"
+      ],
+      "locations": [
+        {
+          "countryCode": "US",
+          "subnational": "California",
+          "asStated": "San Leandro, CA"
+        }
+      ],
+      "stages": [
+        "component_manufacturing",
+        "final_manufacturing"
+      ],
+      "materialIds": [],
+      "materialAttribution": "includes_untracked",
+      "untrackedMaterialsAsStated": [
+        "metallurgical silicon",
+        "silicon-anode lithium-ion electrodes and cells"
+      ],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "sponsors",
+            "location",
+            "stages",
+            "materials"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Coreshell Technologies",
+          "note": "Source names selected applicant, intended facility activity, and proposed region or site when stated. Stages are normalized from project activity; no construction or financing milestones inferred."
+        }
+      ],
+      "notes": "DOE lists $50m proposed federal share and plans for silicon-anode electrode and cell manufacturing. The source says silicon replaces imported graphite; graphite is not an output or input material attributed to this project. Metallurgical silicon is not a tracked SMPT material yet."
+    },
+    {
+      "id": "prj-us-elevated-lithium-films",
+      "name": "Elevated Materials lithium-metal-film manufacturing facility",
+      "sponsorOrgIds": [
+        "org-us-elevated-materials"
+      ],
+      "locations": [
+        {
+          "countryCode": "US",
+          "subnational": null,
+          "asStated": "United States"
+        }
+      ],
+      "stages": [
+        "component_manufacturing"
+      ],
+      "materialIds": [
+        "lithium"
+      ],
+      "materialAttribution": "tracked_only",
+      "untrackedMaterialsAsStated": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "sponsors",
+            "location",
+            "stages",
+            "materials"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Elevated Materials",
+          "note": "Source names selected applicant, intended facility activity, and proposed region or site when stated. Stages are normalized from project activity; no construction or financing milestones inferred."
+        }
+      ],
+      "notes": "DOE lists a proposed $50m federal share and a proposed U.S. manufacturing facility for ultra-thin lithium metal films; site TBD. Proposed gigawatt-hour capacity is a target, not actual output."
+    },
+    {
+      "id": "prj-us-formation-jervois-cobalt",
+      "name": "Formation Holdings (Jervois) cobalt sulfate refinery",
+      "sponsorOrgIds": [
+        "org-us-formation-holdings"
+      ],
+      "locations": [],
+      "stages": [
+        "refining"
+      ],
+      "materialIds": [
+        "cobalt"
+      ],
+      "materialAttribution": "tracked_only",
+      "untrackedMaterialsAsStated": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-processing-round3",
+          "supports": [
+            "name",
+            "sponsors",
+            "stages",
+            "materials"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Formation Holdings US",
+          "note": "Source names selected applicant, intended facility activity, and proposed region or site when stated. Stages are normalized from project activity; no construction or financing milestones inferred."
+        }
+      ],
+      "notes": "DOE lists a proposed $100m federal share, applicant doing business as Jervois and location TBD. No exact facility site inferred. Selected project, not evidence of signed award or operating refinery."
+    },
+    {
+      "id": "prj-us-nth-cycle-black-mass",
+      "name": "Nth Cycle southeastern U.S. battery black-mass refining facility",
+      "sponsorOrgIds": [
+        "org-us-nth-cycle"
+      ],
+      "locations": [
+        {
+          "countryCode": "US",
+          "subnational": null,
+          "asStated": "Southeastern U.S."
+        }
+      ],
+      "stages": [
+        "recycling",
+        "refining"
+      ],
+      "materialIds": [],
+      "materialAttribution": "not_stated",
+      "untrackedMaterialsAsStated": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "sponsors",
+            "location",
+            "stages"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Nth Cycle",
+          "note": "Source names selected applicant, intended facility activity, and proposed region or site when stated. Stages are normalized from project activity; no construction or financing milestones inferred."
+        }
+      ],
+      "notes": "DOE lists a proposed $100m share and a facility to process lithium-ion battery black mass into high-purity metals and battery-grade materials. The DOE description does not identify individual metal outputs, so no tracked material is assigned without a project-specific source. Southeastern U.S. is a region, not an exact site."
+    },
+    {
+      "id": "prj-us-princeton-nuenergy-cathode",
+      "name": "Princeton NuEnergy cathode-rejuvenation demonstration facility",
+      "sponsorOrgIds": [
+        "org-us-princeton-nuenergy"
+      ],
+      "locations": [
+        {
+          "countryCode": "US",
+          "subnational": "Georgia",
+          "asStated": "Commerce, GA"
+        }
+      ],
+      "stages": [
+        "recycling",
+        "component_manufacturing"
+      ],
+      "materialIds": [
+        "nickel"
+      ],
+      "materialAttribution": "tracked_only",
+      "untrackedMaterialsAsStated": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "sponsors",
+            "location",
+            "stages",
+            "materials"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Princeton NuEnergy",
+          "note": "Source names selected applicant, intended facility activity, and proposed region or site when stated. Stages are normalized from project activity; no construction or financing milestones inferred."
+        }
+      ],
+      "notes": "DOE lists a proposed $50m federal share and a Georgia demonstration plant for recovering and rejuvenating nickel-containing cathode material from manufacturing scrap. The description is prospective, not proof of plant operation."
+    },
+    {
+      "id": "prj-us-waterleaf-lilac-lithium",
+      "name": "Waterleaf lithium extraction and refining project at Great Salt Lake",
+      "sponsorOrgIds": [
+        "org-us-waterleaf-p1-holdco"
+      ],
+      "locations": [
+        {
+          "countryCode": "US",
+          "subnational": "Utah",
+          "asStated": "West Promontory, UT"
+        }
+      ],
+      "stages": [
+        "processing",
+        "refining"
+      ],
+      "materialIds": [
+        "lithium"
+      ],
+      "materialAttribution": "tracked_only",
+      "untrackedMaterialsAsStated": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-processing-round3",
+          "supports": [
+            "name",
+            "sponsors",
+            "location",
+            "stages",
+            "materials"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Waterleaf P1 HoldCo",
+          "note": "Source names selected applicant, intended facility activity, and proposed region or site when stated. Stages are normalized from project activity; no construction or financing milestones inferred."
+        }
+      ],
+      "notes": "DOE lists a proposed $100m federal share and a commercial lithium-carbonate project on the northeastern shore of Great Salt Lake. Waterleaf is described as a Lilac Solutions company; corporate-group linkage is left for a separate organizational source. Selected project; no executed DOE grant or verified construction."
+    }
+  ],
+  "proposedOrganizations": [
+    {
+      "id": "org-us-arcanum-ventures",
+      "name": "Arcanum Ventures, LLC",
+      "nameOriginal": null,
+      "aliases": [],
+      "kind": "company",
+      "countryCode": null,
+      "actor": null,
+      "parents": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "kind"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Arcanum Ventures",
+          "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+        }
+      ],
+      "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+    },
+    {
+      "id": "org-us-coreshell-technologies",
+      "name": "Coreshell Technologies Incorporated",
+      "nameOriginal": null,
+      "aliases": [],
+      "kind": "company",
+      "countryCode": null,
+      "actor": null,
+      "parents": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "kind"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Coreshell Technologies",
+          "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+        }
+      ],
+      "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+    },
+    {
+      "id": "org-us-elevated-materials",
+      "name": "Elevated Materials, LLC",
+      "nameOriginal": null,
+      "aliases": [],
+      "kind": "company",
+      "countryCode": null,
+      "actor": null,
+      "parents": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "kind"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Elevated Materials",
+          "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+        }
+      ],
+      "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+    },
+    {
+      "id": "org-us-formation-holdings",
+      "name": "Formation Holdings US, Inc.",
+      "nameOriginal": null,
+      "aliases": [
+        "Formation Holdings US",
+        "Jervois (doing-business-as reference)"
+      ],
+      "kind": "company",
+      "countryCode": null,
+      "actor": null,
+      "parents": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-processing-round3",
+          "supports": [
+            "name",
+            "kind"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Formation Holdings US",
+          "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+        }
+      ],
+      "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+    },
+    {
+      "id": "org-us-nth-cycle",
+      "name": "Nth Cycle, Inc.",
+      "nameOriginal": null,
+      "aliases": [],
+      "kind": "company",
+      "countryCode": null,
+      "actor": null,
+      "parents": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "kind"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Nth Cycle",
+          "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+        }
+      ],
+      "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+    },
+    {
+      "id": "org-us-princeton-nuenergy",
+      "name": "Princeton NuEnergy Inc.",
+      "nameOriginal": null,
+      "aliases": [],
+      "kind": "company",
+      "countryCode": null,
+      "actor": null,
+      "parents": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-manufacturing-round3",
+          "supports": [
+            "name",
+            "kind"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Princeton NuEnergy",
+          "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+        }
+      ],
+      "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+    },
+    {
+      "id": "org-us-waterleaf-p1-holdco",
+      "name": "Waterleaf P1 HoldCo, LLC",
+      "nameOriginal": null,
+      "aliases": [
+        "Waterleaf P1 HoldCo"
+      ],
+      "kind": "company",
+      "countryCode": null,
+      "actor": null,
+      "parents": [],
+      "evidence": [
+        {
+          "sourceId": "src-us-doe-battery-processing-round3",
+          "supports": [
+            "name",
+            "kind"
+          ],
+          "evidence": "explicit",
+          "locator": "Round 3 selected projects: Waterleaf P1 HoldCo",
+          "note": "DOE names the applicant as selected for award negotiations. Corporate nationality and headquarters are not established by this project listing alone."
+        }
+      ],
+      "notes": "Named DOE Round 3 selectee; source is a selection announcement, not an award agreement."
+    }
+  ]
+}

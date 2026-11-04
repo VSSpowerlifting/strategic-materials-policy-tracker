@@ -60,6 +60,8 @@ export const jurisdictionLabels: Record<JurisdictionCode, string> = {
   canada: "Canada",
   uk: "United Kingdom",
   india: "India",
+  brazil: "Brazil",
+  korea: "South Korea",
   other: "Other",
 };
 
@@ -72,6 +74,8 @@ export const jurisdictionShort: Record<JurisdictionCode, string> = {
   canada: "CA",
   uk: "GB",
   india: "IN",
+  brazil: "BR",
+  korea: "KR",
   other: "—",
 };
 
@@ -231,6 +235,7 @@ export const financialInstrumentLabels: Record<FinancialInstrument, string> = {
 
 export const valueRoleLabels: Record<ValueRole, string> = {
   commitment: "Commitment",
+  selected_proposal: "Selected grant proposal",
   program_envelope: "Program envelope",
   budget_appropriation: "Budget appropriation",
   lending_authority: "Lending authority",
@@ -251,6 +256,7 @@ export const capitalSourceLabels: Record<CapitalSource, string> = {
 };
 
 export const financialStatusLabels: Record<FinancialStatus, string> = {
+  selected_for_negotiations: "Selected for negotiations",
   announced: "Announced",
   authorized: "Authorized",
   allocated: "Allocated",
@@ -548,6 +554,7 @@ export const layerLabels = {
   joint_vehicle_commitment: "Joint-vehicle commitments",
   other_commitment: "Other commitments",
   funding_option: "Funding options",
+  selected_proposal: "Selected grant proposals — negotiations pending",
   indication: "Non-binding indications",
   envelope: "Envelopes, appropriations and lending authorities",
   private_financing: "Private financing",
@@ -561,6 +568,7 @@ export const layerGlosses = {
   joint_vehicle_commitment: "Committed by a vehicle that public and private parties set up together. Summed apart from public money, per currency and instrument: the public share is not stated.",
   other_commitment: "Committed with private capital, or capital whose source the sources do not state. Listed, never summed with public money.",
   funding_option: "A ceiling a party may call on under an executed agreement. Listed, never summed: an option is not committed money until exercised.",
+  selected_proposal: "The proposed federal share of a selected grant applicant. Selection is subject to award negotiations, with no executed grant agreement, financial obligation or payment established. Listed separately and never included in capital or project-backing totals.",
   indication: "Non-binding letters of intent or interest that name an amount. Listed, never summed: an indication is possible support, not a commitment, capital or a backer.",
   envelope: "Ceilings that awards are drawn from. Listed, never summed, and never divided into awards.",
   private_financing: "Commercial capital raised alongside public money. Listed, never public support.",

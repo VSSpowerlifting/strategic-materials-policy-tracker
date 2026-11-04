@@ -53,6 +53,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const ended = stack.rows.filter(isEnded);
   const options = stack.rows.filter((c) => !isEnded(c) && c.valueRole === "funding_option");
   const indications = stack.rows.filter((c) => !isEnded(c) && c.valueRole === "indication");
+  const selectedProposals = stack.rows.filter((c) => c.valueRole === "selected_proposal");
   const programmes = [...new Set(stack.rows.flatMap((c) => (c.programmeId ? [c.programmeId] : [])))];
   let n = 0;
   const next = () => String(++n).padStart(2, "0");
@@ -91,7 +92,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             title="Capital stack"
             description="One layer per value role. Only committed public money, and joint-vehicle money apart from it, is summed, per currency; everything else is listed. There is no total across layers."
           >
-            {ended.length || options.length || indications.length ? (
+            {ended.length || options.length || indications.length || selectedProposals.length ? (
               <p className="mb-6 max-w-prose rounded-md border border-dashed px-4 py-3 text-sm leading-6 text-muted">
                 {ended.length
                   ? `${ended.length} row${ended.length === 1 ? " has" : "s have"} ended (withdrawn or lapsed) and no longer back${ended.length === 1 ? "s" : ""} this project; ${ended.length === 1 ? "it stays" : "they stay"} listed with ${ended.length === 1 ? "its" : "their"} status. `
@@ -101,6 +102,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                   : ""}
                 {indications.length
                   ? `${indications.length} non-binding indication${indications.length === 1 ? " is a letter" : "s are letters"} of intent or interest, possible support and not a commitment, and ${indications.length === 1 ? "is" : "are"} not counted as backing; one that became binding would be recorded as a commitment.`
+                  : ""}
+                {selectedProposals.length
+                  ? `${selectedProposals.length} selected grant proposal${selectedProposals.length === 1 ? " is" : "s are"} under negotiation. The proposed federal share is excluded from committed funding and does not make DOE a current project backer.`
                   : ""}
               </p>
             ) : null}
