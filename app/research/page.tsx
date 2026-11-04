@@ -12,8 +12,8 @@ export default function ResearchIndex() {
     <div data-flush-footer>
       <Container width="wide" className="py-12 sm:py-20">
         <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Independent analysis</p>
-        <h1 className="mt-3 font-serif text-5xl font-medium tracking-tight sm:text-6xl">Research</h1>
-        <p className="mt-5 max-w-3xl font-serif text-xl leading-8 text-muted">Evidence-led studies connecting government policy to financing, industrial activity and commercial execution across strategic-material supply chains.</p>
+        <h1 className="mt-3 font-display text-5xl font-medium tracking-tight sm:text-6xl">Research</h1>
+        <p className="mt-5 max-w-3xl font-display text-xl leading-8 text-muted">Evidence-led studies connecting government policy to financing, industrial activity and commercial execution across strategic-material supply chains.</p>
         <div className="mt-12 border-t border-border-strong">
           <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
             <div className="font-display text-sm leading-6 text-muted">
@@ -22,8 +22,8 @@ export default function ResearchIndex() {
               <p className="mt-2">Benjamin Yang</p>
             </div>
             <div>
-              <h2 className="font-serif text-3xl font-medium leading-tight sm:text-4xl"><Link href="/research/tungsten-supply-security" className="hover:text-accent">Tungsten Supply Security</Link></h2>
-              <p className="mt-4 max-w-2xl font-serif text-lg leading-8 text-muted">How policy instruments translate into financing, industrial development and commercial supply. A comparative examination of China, the European Union, the United Kingdom and Japan.</p>
+              <h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl"><Link href="/research/tungsten-supply-security" className="hover:text-accent">Tungsten Supply Security</Link></h2>
+              <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">How policy instruments translate into financing, industrial development and commercial supply. A comparative examination of China, the European Union, the United Kingdom and Japan.</p>
               <Link href="/research/tungsten-supply-security" className="research-text-link">Read the research and download the dossier</Link>
             </div>
           </article>
