@@ -1297,6 +1297,15 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
     (link) => `${link.commitmentId}\u0000${link.relationship}`,
   );
 
+  if (c.valueRole === "selected_proposal") {
+    if (c.instrument !== "grant") r.error("incoherent_value", "instrument", "selected_proposal currently applies only to grant selections");
+    if (!["selected_for_negotiations", "withdrawn", "lapsed"].includes(c.financialStatusHistory.at(-1)?.status ?? ""))
+      r.error("incoherent_value", "financialStatusHistory", "a selected_proposal cannot be assigned decided, contracted or paid status; create a separately evidenced commitment on award");
+    if (!c.financialStatusHistory.some(e => e.status === "selected_for_negotiations"))
+      r.error("incoherent_value", "financialStatusHistory", "selected_proposal requires source-cited selection for negotiations");
+  } else if (c.financialStatusHistory.some(e => e.status === "selected_for_negotiations")) {
+    r.error("incoherent_value", "valueRole", "selected_for_negotiations status requires the distinct selected_proposal value role");
+  }
   checkStatusHistory(c.financialStatusHistory, "financialStatusHistory", true, r, refs);
   checkStatusHistory(c.implementationStatusHistory, "implementationStatusHistory", false, r, refs);
 
