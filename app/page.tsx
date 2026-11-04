@@ -109,7 +109,7 @@ export default function Home() {
             <dl className="mt-4 grid grid-cols-2 gap-x-5 gap-y-1.5 font-display text-sm leading-6">
               {[
                 [counts.events, "policy events"],
-                [counts.financialCommitments, "financial instruments"],
+                [counts.financialCommitments, "financial records"],
                 [counts.projects, "registered projects"],
                 [counts.projectMilestones, "reviewed industrial observations"],
               ].map(([count, label]) => (
