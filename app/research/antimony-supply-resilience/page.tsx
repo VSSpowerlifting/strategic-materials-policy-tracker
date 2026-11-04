@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
 
-const pdf = "https://drive.google.com/file/d/1oNJ_MsH41mM6m-RyMhqTYgjex66-6iBg/view";
-const model = "https://drive.google.com/file/d/13dWl-vF8eZ31aaozHHIMyC8WGRbWS8E2/view";
-const evidence = "https://drive.google.com/file/d/1PfVHgYyS4OwOEKKquM8ATUHOhh2QG51l/view";
+const pdf = "/research/applied-001/antimony-supply-resilience.pdf";
+const model = "/research/applied-001/antimony-supply-resilience-model.xlsx";
+const evidence = "/research/applied-001/antimony-evidence-and-assumptions.md";
 
 export const metadata: Metadata = {
   title: "U.S. Antimony Supply Resilience — Applied Strategy 001",
