@@ -1,64 +1,74 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
-  getAllFinancialCommitments, getAllOrganizations, getAllProjectMilestones,
-  getAllProjects, getAllSources, getEventById, getMaterialBySlug,
+  getAllFinancialCommitments, getAllOrganizations, getAllProjects, getAllSources,
+  getEventById, getMaterialBySlug,
 } from "../lib/data";
 
 const batchId = "evt-us-doe-battery-round3-selections-2026";
 const pilotId = "evt-us-doe-byproduct-pilots-selections-2026";
-const projects = [
-  "prj-us-waterleaf-lilac-lithium",
-  "prj-us-formation-jervois-cobalt",
-  "prj-us-nth-cycle-black-mass",
-  "prj-us-princeton-nuenergy-cathode",
-  "prj-us-arcanum-ethylene-carbonate",
-  "prj-us-elevated-lithium-films",
-  "prj-us-coreshell-silicon-anode",
-] as const;
+const sourceIds = [
+  "src-us-doe-battery-round3-2026-08",
+  "src-us-doe-battery-processing-round3",
+  "src-us-doe-battery-manufacturing-round3",
+  "src-us-doe-industrial-byproducts-2026-08",
+];
 
-test("DOE Round 3 registers seven distinct selected projects with original-source evidence", () => {
-  const all = getAllProjects();
-  const orgs = getAllOrganizations();
-  const sources = getAllSources();
-  const ids = new Set(all.map((p) => p.id));
-  assert.equal(new Set(projects).size, 7);
-  for (const id of projects) {
-    assert.ok(ids.has(id), id);
-    const project = all.find((p) => p.id === id)!;
-    assert.equal(project.sponsorOrgIds.length, 1);
-    assert.ok(orgs.some((o) => o.id === project.sponsorOrgIds[0]));
-    assert.ok(project.evidence.length >= 1);
-    assert.ok(project.evidence.every((e) => sources.some((s) => s.id === e.sourceId && s.sourceType === "official")));
-    assert.ok(project.notes?.includes("DOE") || project.notes?.includes("Selected"), id);
+const manifest = () => JSON.parse(readFileSync("research/doe-august-2026-cohorts.json", "utf8")) as {
+  candidates: { candidateId: string; cohort: string; proposedFederalShareUSD: number | null }[];
+  cohorts: { cohortId: string; announcedSelectedCount: number; announcedTotalSelectedFederalShareUSD: number }[];
+};
+const proposals = () => JSON.parse(readFileSync("research/doe-august-2026-project-proposals.json", "utf8")) as {
+  reviewState: string;
+  proposedProjects: { id: string; sponsorOrgIds: string[] }[];
+  proposedOrganizations: { id: string }[];
+};
+
+test("DOE issuer source entries support two selection-stage policy events", () => {
+  const sourceRegistry = getAllSources();
+  for (const id of sourceIds) {
+    const source = sourceRegistry.find((s) => s.id === id);
+    assert.ok(source, id);
+    assert.equal(source.sourceType, "official");
+    assert.equal(source.confidence, "primary");
   }
-  const event = getEventById(batchId)!;
-  assert.equal(event.date, "2026-08-20");
-  assert.equal(event.sourceIds.length, 3);
-  assert.equal(event.verificationStatus, "verified");
-  assert.equal(event.lifecycle.publishedAt, null);
-  assert.equal(getEventById(pilotId)?.date, "2026-08-18");
+  const round3 = getEventById(batchId)!;
+  assert.equal(round3.date, "2026-08-20");
+  assert.equal(round3.sourceIds.length, 3);
+  assert.equal(round3.lifecycle.publishedAt, null);
+  assert.equal(round3.lifecycle.verifiedAt, null);
+  const pilot = getEventById(pilotId)!;
+  assert.equal(pilot.date, "2026-08-18");
+  assert.equal(pilot.sourceIds.length, 1);
+  assert.deepEqual(pilot.affectedMaterialIds, ["antimony", "rare-earth-elements"]);
+  assert.ok(getMaterialBySlug("lithium")!.eventIds.includes(batchId));
+  assert.ok(!getMaterialBySlug("lithium")!.eventIds.includes(pilotId));
 });
 
-test("selection-stage proposals do not appear as signed financing or physical milestones", () => {
-  const registered = new Set<string>(projects);
-  assert.ok(!getAllFinancialCommitments().some((c) =>
-    c.eventId === batchId || c.eventId === pilotId ||
-    (c.projectId !== null && registered.has(c.projectId))
-  ));
-  assert.ok(!getAllProjectMilestones().some((m) => registered.has(m.projectId)));
+test("all 16 DOE selectees and seven project proposals remain reproducible research records", () => {
+  const ledger = manifest();
+  assert.equal(ledger.candidates.length, 16);
+  assert.equal(new Set(ledger.candidates.map((r) => r.candidateId)).size, 16);
+  assert.deepEqual(ledger.cohorts.map((c) => c.announcedSelectedCount), [7, 9]);
+  assert.deepEqual(ledger.cohorts.map((c) => c.announcedTotalSelectedFederalShareUSD), [500000000, 162000000]);
+  const round3 = ledger.candidates.filter((c) => c.cohort === "2026-08-20-doe-battery-round3");
+  assert.equal(round3.length, 7);
+  assert.equal(round3.reduce((n, c) => n + (c.proposedFederalShareUSD ?? 0), 0), 500000000);
+  assert.ok(ledger.candidates.filter((c) => c.cohort === "2026-08-18-doe-byproduct-pilots").every((c) => c.proposedFederalShareUSD === null));
+  const staged = proposals();
+  assert.equal(staged.reviewState, "research_only_do_not_promote");
+  assert.equal(staged.proposedProjects.length, 7);
+  assert.equal(staged.proposedOrganizations.length, 7);
+  const orgIds = new Set(staged.proposedOrganizations.map((o) => o.id));
+  for (const p of staged.proposedProjects) assert.ok(p.sponsorOrgIds.every((id) => orgIds.has(id)));
 });
 
-test("source boundaries preserve unknown sites and untracked products", () => {
-  const all = getAllProjects();
-  const byId = (id: string) => all.find((p) => p.id === id)!;
-  assert.deepEqual(byId("prj-us-formation-jervois-cobalt").locations, []);
-  assert.equal(byId("prj-us-nth-cycle-black-mass").locations[0].asStated, "Southeastern U.S.");
-  assert.deepEqual(byId("prj-us-nth-cycle-black-mass").materialIds, []);
-  assert.ok(byId("prj-us-coreshell-silicon-anode").untrackedMaterialsAsStated.includes("metallurgical silicon"));
-  assert.ok(!byId("prj-us-coreshell-silicon-anode").materialIds.includes("graphite"));
-  assert.deepEqual(byId("prj-us-arcanum-ethylene-carbonate").materialIds, []);
-  const lithium = getMaterialBySlug("lithium")!;
-  assert.ok(lithium.eventIds.includes(batchId));
-  assert.ok(!lithium.eventIds.includes(pilotId), "cohort does not map lithium to its selectees");
+test("unexecuted DOE selection proposals are excluded from public finance and linked project registries", () => {
+  const staged = proposals();
+  const projectIds = new Set(getAllProjects().map((p) => p.id));
+  const organizationIds = new Set(getAllOrganizations().map((o) => o.id));
+  for (const p of staged.proposedProjects) assert.ok(!projectIds.has(p.id));
+  for (const o of staged.proposedOrganizations) assert.ok(!organizationIds.has(o.id));
+  assert.ok(!getAllFinancialCommitments().some((c) => c.eventId === batchId || c.eventId === pilotId));
 });
