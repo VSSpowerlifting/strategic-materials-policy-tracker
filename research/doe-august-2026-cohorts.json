@@ -1,7 +1,7 @@
 {
   "asOf": "2026-11-04",
   "visibility": "repository_research_only",
-  "reviewStatus": "primary_official_sources_read_selection_only",
+  "reviewStatus": "source_qualified_staged_for_editorial_approval",
   "publicSeedChanges": false,
   "sourceRegister": [
     {
@@ -66,10 +66,10 @@
         "doe500",
         "doe500processing"
       ],
-      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "reviewDisposition": "staged_draft_selected_proposal_no_release",
       "pendingChecks": [
-        "Check later award or termination disclosure before setting live financial status",
-        "Resolve company and project IDs; distinguish named facility from general company"
+        "Independent reviewer to confirm official selected-project listing and individual proposed federal share",
+        "Check award/termination disclosure before any future commitment status promotion"
       ]
     },
     {
@@ -90,10 +90,10 @@
         "doe500",
         "doe500processing"
       ],
-      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "reviewDisposition": "staged_draft_selected_proposal_no_release",
       "pendingChecks": [
-        "Check later award or termination disclosure before setting live financial status",
-        "Resolve company and project IDs; distinguish named facility from general company"
+        "Independent reviewer to confirm official selected-project listing and individual proposed federal share",
+        "Check award/termination disclosure before any future commitment status promotion"
       ]
     },
     {
@@ -112,11 +112,10 @@
         "doe500",
         "doe500recycling"
       ],
-      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "reviewDisposition": "staged_draft_selected_proposal_no_release",
       "pendingChecks": [
-        "Check later award or termination disclosure before setting live financial status",
-        "Resolve company and project IDs; distinguish named facility from general company",
-        "Issuer Project SHIELD name and nickel/lithium products require separate issuer citation"
+        "Independent reviewer to confirm official selected-project listing and individual proposed federal share",
+        "Check award/termination disclosure before any future commitment status promotion"
       ]
     },
     {
@@ -137,10 +136,10 @@
         "doe500",
         "doe500recycling"
       ],
-      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "reviewDisposition": "staged_draft_selected_proposal_no_release",
       "pendingChecks": [
-        "Check later award or termination disclosure before setting live financial status",
-        "Resolve company and project IDs; distinguish named facility from general company"
+        "Independent reviewer to confirm official selected-project listing and individual proposed federal share",
+        "Check award/termination disclosure before any future commitment status promotion"
       ]
     },
     {
@@ -159,10 +158,10 @@
         "doe500",
         "doe500recycling"
       ],
-      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "reviewDisposition": "staged_draft_selected_proposal_no_release",
       "pendingChecks": [
-        "Check later award or termination disclosure before setting live financial status",
-        "Resolve company and project IDs; distinguish named facility from general company"
+        "Independent reviewer to confirm official selected-project listing and individual proposed federal share",
+        "Check award/termination disclosure before any future commitment status promotion"
       ]
     },
     {
@@ -183,10 +182,10 @@
         "doe500",
         "doe500recycling"
       ],
-      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "reviewDisposition": "staged_draft_selected_proposal_no_release",
       "pendingChecks": [
-        "Check later award or termination disclosure before setting live financial status",
-        "Resolve company and project IDs; distinguish named facility from general company"
+        "Independent reviewer to confirm official selected-project listing and individual proposed federal share",
+        "Check award/termination disclosure before any future commitment status promotion"
       ]
     },
     {
@@ -205,10 +204,10 @@
         "doe500",
         "doe500recycling"
       ],
-      "reviewDisposition": "source_qualified_selection_not_promoted",
+      "reviewDisposition": "staged_draft_selected_proposal_no_release",
       "pendingChecks": [
-        "Check later award or termination disclosure before setting live financial status",
-        "Resolve company and project IDs; distinguish named facility from general company"
+        "Independent reviewer to confirm official selected-project listing and individual proposed federal share",
+        "Check award/termination disclosure before any future commitment status promotion"
       ]
     },
     {
@@ -427,5 +426,7 @@
         "Reconcile Alcoa USA Corp. against Alcoa/Sojitz Wagerup as a separate facility unless exact identity supported"
       ]
     }
-  ]
+  ],
+  "draftSeedChanges": true,
+  "draftFinanceRole": "selected_proposal"
 }
