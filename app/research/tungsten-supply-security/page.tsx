@@ -111,7 +111,7 @@ const comparison = [
 ] as const;
 
 const downloads = [
-  { label: "Full research dossier", detail: "26-page PDF", href: "/research/r001/tungsten-supply-security.pdf" },
+  { label: "Full research dossier", detail: "23-page PDF", href: "/research/r001/tungsten-supply-security.pdf" },
   { label: "Executive memo", detail: "2-page PDF", href: "/research/r001/tungsten-supply-security-memo.pdf" },
   { label: "Source-linked evidence workbook", detail: "XLSX", href: "/research/r001/tungsten-supply-security-evidence.xlsx" },
   { label: "LinkedIn presentation", detail: "8-page PDF", href: "/research/r001/tungsten-supply-security-slides.pdf" },
