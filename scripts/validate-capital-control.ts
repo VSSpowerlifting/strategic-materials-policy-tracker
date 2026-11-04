@@ -1297,6 +1297,23 @@ function checkCommitment(c: FinancialCommitment, r: Reporter, refs: Refs): void 
     (link) => `${link.commitmentId}\u0000${link.relationship}`,
   );
 
+  if (c.valueRole === "selection_proposal") {
+    const allowedStatuses = new Set(["selected_for_negotiations", "withdrawn", "lapsed"]);
+    if (c.instrument !== "grant" && c.instrument !== "unspecified")
+      r.error("incoherent_value", "instrument", "selection proposals must describe a potential grant or an unspecified instrument");
+    if (c.amount === null)
+      r.error("incoherent_value", "amount", "selection proposal must state an identifiable proposed applicant share; aggregate unallocated cohorts belong in the research intake");
+    if (!c.financialStatusHistory.some((entry) => entry.status === "selected_for_negotiations"))
+      r.error("incoherent_value", "financialStatusHistory", "selection proposal requires an issuer-documented selected_for_negotiations status");
+    c.financialStatusHistory.forEach((entry, i) => {
+      if (!allowedStatuses.has(entry.status))
+        r.error("incoherent_value", `financialStatusHistory[${i}].status`,
+          "an unsigned selection cannot be treated as an announced commitment, authorized, decided, contracted or disbursed funding; create a separately evidenced commitment record if an award is later executed");
+    });
+  } else if (c.financialStatusHistory.some((entry) => entry.status === "selected_for_negotiations")) {
+    r.error("incoherent_value", "financialStatusHistory", "selected_for_negotiations status requires selection_proposal valueRole");
+  }
+
   checkStatusHistory(c.financialStatusHistory, "financialStatusHistory", true, r, refs);
   checkStatusHistory(c.implementationStatusHistory, "implementationStatusHistory", false, r, refs);
 
