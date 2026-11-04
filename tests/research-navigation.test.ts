@@ -1,21 +1,25 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { headerNav, isNavCurrent, journeys, secondaryNav } from "../lib/site";
 
-test("published Research is a primary navigation destination", () => {
-  const research = headerNav.find((item) => item.href === "/research");
-  assert.ok(research, "Research must appear in the desktop header");
-  assert.equal(research.label, "Research");
-  assert.equal(journeys[0].href, "/research", "Research should lead the navigation journeys");
-  assert.ok(journeys.some((j) => j.href === "/research"), "Research must also appear in the mobile menu");
-  assert.ok(secondaryNav.some((item) => item.href === "/research"), "Keep the research footer link");
+const homepage = () => readFileSync("app/page.tsx", "utf8");
+const header = () => readFileSync("components/site-header.tsx", "utf8");
+
+test("Research is promoted on the homepage without crowding desktop navigation", () => {
+  assert.equal(journeys.length, 5);
+  assert.equal(headerNav.length, 5);
+  assert.ok(headerNav.every((item) => item.href !== "/research"));
+  assert.ok(journeys.every((item) => !item.href.startsWith("/research")));
+  assert.match(homepage(), /<Link href="\/research" className="research-button">\s*Explore published research/);
+  assert.match(homepage(), /<Link href="#start" className="research-button-secondary">/);
+  assert.match(homepage(), /<Link href="#cases" className="px-2 font-display text-sm/);
 });
 
-test("Research is current on the index and research dossiers, not on other journeys", () => {
-  const item = headerNav.find((nav) => nav.href === "/research")!;
-  assert.equal(isNavCurrent("/research", item), true);
-  assert.equal(isNavCurrent("/research/tungsten-supply-security", item), true);
-  assert.equal(isNavCurrent("/research/antimony-supply-resilience", item), true);
-  assert.equal(isNavCurrent("/events", item), false);
-  assert.equal(isNavCurrent("/projects", item), false);
+test("Research remains accessible on mobile and in the footer", () => {
+  assert.match(header(), /<Link href="\/research" onClick=\{closeMenu\}/);
+  assert.ok(secondaryNav.some((item) => item.href === "/research"));
+  assert.ok(headerNav.every((item) => !isNavCurrent("/research", item)));
+  assert.ok(headerNav.every((item) => !isNavCurrent("/research/tungsten-supply-security", item)));
+  assert.ok(isNavCurrent("/events", headerNav.find((item) => item.href === "/events")!));
 });
