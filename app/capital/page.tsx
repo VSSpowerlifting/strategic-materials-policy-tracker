@@ -53,6 +53,7 @@ export default function CapitalPage() {
   const byRole = rowsByValueRole(all);
   const envelopes = LISTED_NOT_SUMMED_ROLES.flatMap((r) => byRole.get(r) ?? []);
   const options = byRole.get("funding_option") ?? [];
+  const selectedProposals = byRole.get("selected_proposal") ?? [];
   const nonPublic = all.filter(
     (c) =>
       ["private_financing", "recipient_own_funds", "expected_co_investment", "total_project_cost", "indication"].includes(c.valueRole) ||
@@ -278,6 +279,19 @@ export default function CapitalPage() {
             </table>
           </div>
         </Section>
+
+        {selectedProposals.length ? (
+          <Section
+            title="Selected grant proposals under negotiation"
+            description="DOE has selected these applicants for grant negotiations. The listed federal shares are proposals; selection establishes no signed award, obligation or payment. These rows are excluded from all committed-capital totals."
+          >
+            <Card className="overflow-hidden">
+              {selectedProposals.map((c) => (
+                <CommitmentRow key={c.id} c={bySummary.get(c.id)!} />
+              ))}
+            </Card>
+          </Section>
+        ) : null}
 
         {options.length ? (
           <Section
