@@ -51,7 +51,7 @@ try{
   await page.locator("#projects-search").fill("token-never-in-corpus-2026");
   assert.equal(await page.getByTestId("project-result-count").innerText(),"0");
   await page.getByRole("button",{name:"Show all projects"}).click();
-  assert.equal(await page.getByTestId("project-record").count(),102);
+  assert.equal(await page.getByTestId("project-record").count(),103);
   await page.locator("#projects-search").fill("Alcoa-Sojitz");
   assert.ok(await page.locator('a[href="/projects/prj-au-alcoa-sojitz-gallium"]').count()>0);
   await page.locator('a[href="/projects/prj-au-alcoa-sojitz-gallium"]').first().focus();
