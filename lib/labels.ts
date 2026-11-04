@@ -235,6 +235,7 @@ export const financialInstrumentLabels: Record<FinancialInstrument, string> = {
 
 export const valueRoleLabels: Record<ValueRole, string> = {
   commitment: "Commitment",
+  selected_proposal: "Selected grant proposal",
   program_envelope: "Program envelope",
   budget_appropriation: "Budget appropriation",
   lending_authority: "Lending authority",
@@ -255,6 +256,7 @@ export const capitalSourceLabels: Record<CapitalSource, string> = {
 };
 
 export const financialStatusLabels: Record<FinancialStatus, string> = {
+  selected_for_negotiations: "Selected for negotiations",
   announced: "Announced",
   authorized: "Authorized",
   allocated: "Allocated",
