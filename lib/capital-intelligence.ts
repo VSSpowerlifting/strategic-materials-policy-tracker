@@ -74,6 +74,8 @@ export const ACTOR_HOME_COUNTRIES: Readonly<Record<JurisdictionCode, readonly st
   canada: ["CA"],
   uk: ["GB"],
   india: ["IN"],
+  brazil: ["BR"],
+  korea: ["KR"],
   other: [],
 };
 
