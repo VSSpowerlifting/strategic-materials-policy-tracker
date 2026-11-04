@@ -116,10 +116,10 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
   assert.equal(r.countFutureIntervalEndFields,21);
   assert.equal(r.publicationAuthorized,false);
   assert.equal(JSON.stringify(seeds()),frozen);
-  assert.equal(site.lastUpdated,"2026-11-04");
+  assert.equal(site.lastUpdated,"2026-11-03");
 });
 
-test("4 November revision contains only dated admissions from source-reviewed expansion batches",()=>{
+test("proposed 4 November revision contains only dated admissions from reviewed expansion batches",()=>{
   const snapshot=seeds();
   const candidate=auditF5CorpusCutoffImpact(snapshot,"2026-11-03","2026-11-04");
   assert.equal(candidate.totalPublicSeedRows,802);
@@ -180,12 +180,12 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
     "--proposed-cutoff",site.lastUpdated,
   ],{encoding:"utf8"});
   const parsed=JSON.parse(output);
-  assert.equal(parsed.proposedCutoff,"2026-11-04");
-  assert.equal(parsed.currentPublishedCutoff,"2026-11-04");
+  assert.equal(parsed.proposedCutoff,"2026-11-03");
+  assert.equal(parsed.currentPublishedCutoff,"2026-11-03");
   assert.equal(parsed.totalPublicSeedRows,802);
-  assert.equal(parsed.countOtherPostCutoffFields,0,
-    "Newly reviewed November 4 record dates must be within the authorized revision cutoff");
-  assert.deepEqual(parsed.afterProposedCutoffFields,[]);
+  assert.ok(parsed.afterProposedCutoffFields.some((r:{recordId:string})=>
+    KOREA_BRAZIL_EXPANSION_IDS.has(r.recordId)),
+    "Unreleased November 4 source-review dates remain visible after the last authorized cutoff");
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
   assert.equal(parsed.countFutureIntervalEndFields,21);
   assert.equal(parsed.publicationAuthorized,false,
