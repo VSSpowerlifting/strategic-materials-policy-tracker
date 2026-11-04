@@ -81,7 +81,9 @@
       "evt-us-dow-arr-antimony-2025",
       "evt-us-dow-usac-antimony-2026",
       "evt-us-doe-thacker-pass-loan-2024",
-      "evt-us-doe-rhyolite-ridge-2025"
+      "evt-us-doe-rhyolite-ridge-2025",
+      "evt-us-doe-battery-round3-selections-2026",
+      "evt-us-doe-byproduct-pilots-selections-2026"
     ],
     "sourceIds": [
       "src-doi-press-2025",
@@ -91,7 +93,11 @@
       "src-fedreg-eo-14272",
       "src-fedreg-cm-list-2018",
       "src-fedreg-eo-13953",
-      "src-fedreg-cm-list-2022"
+      "src-fedreg-cm-list-2022",
+      "src-us-doe-battery-round3-2026-08",
+      "src-us-doe-battery-processing-round3",
+      "src-us-doe-battery-manufacturing-round3",
+      "src-us-doe-industrial-byproducts-2026-08"
     ]
   },
   {
