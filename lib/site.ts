@@ -75,13 +75,19 @@ export const navGroups = [
 ] as const;
 
 /**
- * The five research journeys, in the order a new reader meets them. Each journey owns a landing route and a set
+ * The six top-level journeys, in the order a new reader meets them. Each journey owns a landing route and a set
  * of supporting views; every page in `nav` except /search (which has its own header control) belongs to exactly
  * one journey, so exactly one header item is ever marked current. A journey's supporting views appear in a second
  * header row only while the reader is inside that journey (and under its name in the small-screen menu), so the
  * header never lists every page at once.
  */
 export const journeys = [
+  {
+    href: "/research",
+    label: "Research",
+    question: "Read SMPT's published research dossiers and applied strategy studies.",
+    views: [{ href: "/research", label: "All research" }],
+  },
   {
     href: "/events",
     label: "Government action",
