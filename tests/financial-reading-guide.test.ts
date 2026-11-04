@@ -29,7 +29,7 @@ test("the entire methodology vocabulary has exactly one definition for every off
 
 test("all 97 published finance records receive exact role/status explanations with no semantic reassignment",()=>{
  const rows=corpus();
- assert.equal(rows.length,97);
+ assert.equal(rows.length,104);
  for(const c of rows){
   const before=structuredClone(c),reading=explainFinancialRecord(c);
   const current=c.financialStatusHistory.at(-1)!.status;
