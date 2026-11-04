@@ -1,37 +1,41 @@
-# DOE August 2026 selection-stage corpus admission — author review
+# DOE August 2026 selection intake — author review
 
-**Branch:** `data/2026-11-doe-selected-projects`, stacked on Korea–Brazil PR #195. **Release:** draft; no merge or deployment.
+**State:** draft data PR and review-gated research records, **not published**.
 
-## Qualified seed changes
+## Current qualified additions
 
-- **2 policy events**: DOE's August 18 byproduct-pilot selections ($162 million across nine) and August 20 battery Round 3 selections ($500 million across seven)
-- **4 official DOE sources**: the two dated agency announcements and two live selected-project programme pages
-- **7 individually described physical projects**: Waterleaf/Lilac, Formation/Jervois, Nth Cycle, Princeton NuEnergy, Arcanum Ventures, Elevated Materials and Coreshell Technologies
-- **7 applicant organizations**, registered without invented corporate-incorporation locations
-- **Material event references**: lithium, cobalt, nickel, antimony and rare earth elements where DOE identifies them for individual projects or the aggregate cohort
-- **No new finance, construction, commissioning or production statuses**: DOE describes proposed federal support and selections for negotiation. No signed grant, payment or observed milestone is established by the reviewed pages.
+Two US policy events and four primary DOE sources are staged in public-seed JSON for editorial review:
 
-## Primary sources
+- 18 August 2026: DOE selected nine industrial-byproduct pilot applicants under Topic Area 2, **$162 million in aggregate**. DOE supplies headquarters but no individual award shares, project facilities or selectee-to-material mapping.
+- 20 August 2026: DOE selected seven battery-processing, manufacturing and recycling applicants, **$500 million in proposed federal shares**. The two DOE programme pages provide the seven companies, their project activities, and three $100m plus four $50m proposed shares.
 
-1. [DOE August 20 announcement](https://www.energy.gov/articles/energy-department-announces-500-million-secure-americas-critical-mineral-and-battery)
-2. [DOE Battery Materials Processing Round 3 selected-project list](https://www.energy.gov/cmei/manufacturing/battery-materials-processing-grants) — Waterleaf $100m and Formation/Jervois $100m
-3. [DOE Battery Manufacturing/Recycling Round 3 selected-project list](https://www.energy.gov/cmei/manufacturing/battery-manufacturing-and-recycling-grants) — Nth Cycle $100m, Princeton $50m, Arcanum $50m, Elevated $50m and Coreshell $50m
-4. [DOE August 18 industrial-byproducts announcement](https://www.energy.gov/cmei/articles/does-office-critical-minerals-and-energy-innovation-announces-162-million-accelerate) — nine selectees across two topic areas; aggregate $162m, no individual shares
+The selected applicants are **not contractually funded or operating facilities** on this evidence. No `FinancialCommitment` or `ProjectMilestone` is created.
 
-The [detailed research source register](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/research/2026-11-04-corpus-expansion-audit/research/doe-august-2026-cohorts.json) preserves the seven proposed federal shares, nine other selectees, unknowns and exact issuer links.
+The existing SMPT public `Project` registry requires a link to a financial record or designation. The seven well-described DOE facilities cannot yet be linked because the current finance value-role vocabulary describes committed amounts, programme ceilings or letters of interest, rather than DOE selections for negotiations. CI's registry-integrity test correctly rejected unlinked project records. We preserved the full set of seven proposed project rows and seven applicant organizations as a structured, explicitly **research-only** proposal file.
 
-## Accounting and identity restrictions
+## Reproducible research files
 
-The present `FinancialCommitment.valueRole` categories do not capture selected-for-negotiation grants accurately. These selectee amounts are retained in research intake rather than entered as public commitments, programme envelopes or nonbinding letters of interest. The sum of the seven project shares is $500 million; it must not be stacked with an aggregate programme amount. The separate $162 million announcement does not assign dollars to individual selectees.
+- [16-selectee cohort register](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/data/2026-11-doe-selected-projects/research/doe-august-2026-cohorts.json) — DOE source URLs, candidate IDs, seven individual proposed shares, nine unspecified shares, location specificity and reviewer questions
+- [Seven proposed project and applicant rows](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/data/2026-11-doe-selected-projects/research/doe-august-2026-project-proposals.json) — complete proposed project/org schema, explicit `research_only_do_not_promote` gate
+- [Original full research review](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/research/2026-11-04-corpus-expansion-audit/docs/analysis/doe-august-2026-cohort-source-review.md)
 
-The nine August 18 companies are named with their **headquarters**, not project facilities. DOE does not map scandium/copper/antimony/rare-earth output to particular selectees. Their names and topic areas stay in the research manifest until project identity, location and material scope are verified by original sources.
+## Official sources
 
-The seven August 20 project names are normalized from DOE descriptions of **future/planned** facilities. Broad location labels (Southeastern U.S., Gulf Coast, United States) are preserved as such. Nth Cycle black mass does not establish individual recovered minerals in the DOE text; its `materialIds` remain empty. Coreshell's metallurgical silicon and Arcanum's ethylene carbonate are untracked material terms. Graphite substitution at Coreshell is not graphite-processing evidence.
+1. [DOE, 20 August 2026: $500m selection announcement](https://www.energy.gov/articles/energy-department-announces-500-million-secure-americas-critical-mineral-and-battery)
+2. [DOE Battery Materials Processing Round 3 recipients](https://www.energy.gov/cmei/manufacturing/battery-materials-processing-grants) — Waterleaf $100m and Formation/Jervois $100m
+3. [DOE Battery Manufacturing and Recycling Round 3 recipients](https://www.energy.gov/cmei/manufacturing/battery-manufacturing-and-recycling-grants) — Nth Cycle $100m, Princeton NuEnergy $50m, Arcanum $50m, Elevated Materials $50m and Coreshell $50m
+4. [DOE, 18 August 2026: $162m industrial-byproduct pilot selections](https://www.energy.gov/cmei/articles/does-office-critical-minerals-and-energy-innovation-announces-162-million-accelerate)
 
-`PolicyEvent.policyStatus: active` here represents the announcement action; it must not be interpreted as an executed award. `lifecycle.verifiedAt` and `lifecycle.publishedAt` are null. The site cutoff remains 3 November 2026 until a separate explicit release decision.
+DOE expressly states for the byproduct pilot that selection for award negotiations does not commit it to make an award and that amounts can change. Do not classify announcement-stage federal shares as binding public financing. The $500m cohort figure is the sum of seven individual proposals, and the nine byproduct selections have no issuer-provided dollar apportionments.
 
-## Review and stop condition
+The DOE material references in the **aggregate policy events** are not selectee-specific critical mineral attributions. Coreshell's silicon substitution is not graphite production; Arcanum's ethylene carbonate and Coreshell's metallurgical silicon sit outside the current 14-material taxonomy. Location labels such as Gulf Coast, southeastern U.S. and site TBD are preserved in the research file without invented addresses.
 
-Review each DOE list, selected recipient, site/region, stage, material and event title for issuer fidelity. Run complete validation, test and build gates plus relevant browser checks. Keep historical cutoff snapshot tests unchanged apart from excluding these separately dated rows. Seek independent author approval before promoting the stacked PR or merging. Do not combine with website UI changes or an unreviewed financing ontology extension.
+## Admission and publication gate
 
-**Subsequent phase:** if selected-but-unsigned awards are to appear in the public financial layer, define and test a clearly noncommitted selection value role/status first. After that, source-review any award agreements or cancellations. Track the nine byproduct pilots as research leads until individual descriptions are established.
+- [ ] Source-author review of both events, exact DOE titles, selected applicants, classifications and original URLs
+- [ ] All data validation, typecheck, lint, tests, build, project/browser checks; historical 3 November 2026 cutoff snapshots preserved
+- [ ] Restore this PR's base from `main` (used temporarily to trigger CI) to the Korea–Brazil PR #195 branch after tests
+- [ ] Authorize a new corpus revision date before any public release; maintain `lifecycle.verifiedAt: null` and `publishedAt: null` during draft stage
+- [ ] As a separate engineering phase, introduce a rigorously defined **selected-for-negotiations** financial value role that remains outside public commitments, totals, obligations and disbursements. Only then re-evaluate the seven project/organization proposals for public admission with correct financial linkage
+
+**Stop condition:** reviewed, valid draft PR; no merge or deployment before maintainer approval. 
