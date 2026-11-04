@@ -2735,5 +2735,125 @@
       "verifiedAt": "2026-11-03",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-br-bndes-finep-minerals-2025",
+    "date": "2025-06-12",
+    "jurisdiction": "brazil",
+    "issuingBody": "BNDES / Finep",
+    "titleOriginal": "BNDES e Finep concluem avaliação de propostas de chamada pública de projetos com foco em minerais estratégicos",
+    "titleOriginalLang": "other",
+    "titleEn": "BNDES and Finep select 56 strategic-mineral business plans for joint support planning",
+    "titleEnSource": "self",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "lithium",
+      "graphite",
+      "nickel"
+    ],
+    "affectedSectors": [
+      "battery",
+      "energy",
+      "industrial"
+    ],
+    "summary": "On 12 June 2025, BNDES and Finep announced 56 selected business plans for the next stage of their strategic-minerals call: preparation of individual joint support plans. Their estimated total investment was R$45.8 billion. The eligible projects span rare earths, lithium, graphite, copper, silicon, nickel and other materials. Financial instruments would be identified in the next stage.",
+    "analyticalSignificance": "This selection establishes a public pipeline for Brazilian processing and manufacturing proposals. The R$45.8 billion figure is aggregate estimated business-plan investment; separate public financing decisions require their own evidence and records.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-br-bndes-finep-select-2025-06"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-06-12",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-04",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-br-bndes-piaui-2026",
+    "date": "2026-07-13",
+    "jurisdiction": "brazil",
+    "issuingBody": "Banco Nacional de Desenvolvimento Econômico e Social (BNDES)",
+    "titleOriginal": "BNDES aprova R$ 100 mi para apoiar processamento de níquel no Piauí",
+    "titleOriginalLang": "other",
+    "titleEn": "BNDES approves R$100 million for Piauí nickel and cobalt processing equipment",
+    "titleEnSource": "self",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "nickel",
+      "cobalt"
+    ],
+    "affectedSectors": [
+      "battery",
+      "industrial"
+    ],
+    "summary": "On 13 July 2026, BNDES reported approval of R$100 million in financing under its Máquinas e Serviços product for Piauí Níquel Metais S/A to obtain equipment and industrial services supporting high-purity nickel and cobalt processing in Capitão Gervásio Oliveira, Piauí. BNDES identifies the company's business plan as one selected in the 2025 BNDES–Finep strategic-minerals call.",
+    "analyticalSignificance": "The financing approval connects a selected strategic-minerals business plan to a named public lender, recipient and processing project. The stated 2028 production start and 2029 operational phase are issuer-reported targets; contract execution, cash advances and achieved production require subsequent evidence.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-br-bndes-piaui-2026-07",
+      "src-br-bndes-machines-services"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-07-13",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-04",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-kr-motir-rare-earths-2026",
+    "date": "2026-02-04",
+    "jurisdiction": "korea",
+    "issuingBody": "Ministry of Trade, Industry and Resources (MOTIR)",
+    "titleOriginal": "MOTIR Steps Up Public–Private Cooperation to Stabilize Rare Earth Supply Chains",
+    "titleOriginalLang": "en",
+    "titleEn": "MOTIR Steps Up Public–Private Cooperation to Stabilize Rare Earth Supply Chains",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "supply_chain_security",
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "defense",
+      "battery",
+      "energy",
+      "industrial"
+    ],
+    "summary": "The Republic of Korea's Resource Security Council approved a comprehensive set of rare-earth supply-chain measures on 4 February 2026, announced by MOTIR on 6 February. Measures include designation of all 17 rare earths as critical minerals, more detailed import/export tariff codes, overseas resource-development loan budget growth from KRW 39 billion in 2025 to KRW 67.5 billion in 2026, support for domestic production capacity and recycling, and a planned Rare Earth R&D Fund.",
+    "analyticalSignificance": "The policy combines material designation, supply-chain monitoring, financing capacity and domestic manufacturing support. The budget figure is a programme allocation, pending identification of individual project-level loans or awards.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-kr-motir-rare-earths-2026-02"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-02-06",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-04",
+      "publishedAt": null
+    }
   }
 ]
