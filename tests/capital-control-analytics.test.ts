@@ -687,7 +687,7 @@ test("a status the source does not give is neither binding nor not yet binding, 
   assert.deepEqual([...new Set(standings)].sort(), ["binding", "ended", "not_yet_binding", "status_not_stated"]);
   assert.deepEqual(
     FINANCIAL_STATUSES.filter((s) => legalStanding(fin("x", { financialStatusHistory: history(s) })) === "status_not_stated"),
-    ["not_stated"],
+    ["selected_for_negotiations", "not_stated"],
   );
   // Unknown corpus rows are listed apart; a source-reviewed row can acquire a stated status later.
   const corpus = totalCommitments(publicCommitmentRows(), getAllFinancialCommitments());
