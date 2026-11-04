@@ -318,6 +318,59 @@
     "notes": null
   },
   {
+    "id": "org-br-bndes",
+    "name": "Banco Nacional de Desenvolvimento Econômico e Social (BNDES)",
+    "nameOriginal": "Banco Nacional de Desenvolvimento Econômico e Social",
+    "aliases": [
+      "BNDES"
+    ],
+    "kind": "public_financier",
+    "countryCode": "BR",
+    "actor": "brazil",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Title and opening paragraphs",
+        "note": "Brazilian federal development bank providing the named financing decision."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-br-piaui-niquel-metais",
+    "name": "Piauí Níquel Metais S/A",
+    "nameOriginal": "Piauí Níquel Metais S/A",
+    "aliases": [
+      "Piauí Níquel"
+    ],
+    "kind": "company",
+    "countryCode": "BR",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-br-bndes-piaui-2026-07",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Paragraphs 1, 3–5",
+        "note": "BNDES identifies the Brazilian operating company and reports it as a wholly owned subsidiary of Brazilian Nickel Limited; parent registry onboarding remains separate."
+      }
+    ],
+    "notes": "Named BNDES finance recipient, operating company for the Piauí Níquel undertaking. Parent Brazilian Nickel Limited is not yet registered."
+  },
+  {
     "id": "org-ca-canada-growth-fund",
     "name": "Canada Growth Fund",
     "nameOriginal": null,

@@ -54,7 +54,9 @@
       "evt-ca-cgf-cyclic-2026",
       "evt-ca-feddev-cyclic-2025",
       "evt-ca-g7-cmpa-2026",
-      "evt-eu-crma-strategic-projects-2026-10"
+      "evt-eu-crma-strategic-projects-2026-10",
+      "evt-br-bndes-finep-minerals-2025",
+      "evt-kr-motir-rare-earths-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -306,7 +308,8 @@
       "evt-eu-resourceeu-2025",
       "evt-ca-g7-cmpa-2025",
       "evt-ca-nrcan-pdac-2026",
-      "evt-eu-crma-strategic-projects-2026-10"
+      "evt-eu-crma-strategic-projects-2026-10",
+      "evt-br-bndes-finep-minerals-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -353,7 +356,8 @@
       "evt-eu-crma-strategic-projects-2025-03",
       "evt-us-doe-thacker-pass-loan-2024",
       "evt-us-doe-rhyolite-ridge-2025",
-      "evt-eu-crma-strategic-projects-2026-10"
+      "evt-eu-crma-strategic-projects-2026-10",
+      "evt-br-bndes-finep-minerals-2025"
     ],
     "sourceIds": [
       "src-iea-critical-minerals-2026",
@@ -414,7 +418,8 @@
       "evt-cn-mofcom-58-2025",
       "china-rare-earth-suspension-2025-11",
       "evt-eu-crma-strategic-projects-2025-03",
-      "evt-eu-crma-strategic-projects-2026-10"
+      "evt-eu-crma-strategic-projects-2026-10",
+      "evt-br-bndes-piaui-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals-2026",
@@ -454,7 +459,9 @@
       "china-rare-earth-suspension-2025-11",
       "evt-eu-crma-strategic-projects-2025-03",
       "evt-ca-g7-cmpa-2025",
-      "evt-eu-crma-strategic-projects-2026-10"
+      "evt-eu-crma-strategic-projects-2026-10",
+      "evt-br-bndes-finep-minerals-2025",
+      "evt-br-bndes-piaui-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals-2026",
@@ -577,7 +584,8 @@
       "evt-cn-mofcom-56-2025",
       "evt-cn-mofcom-62-2025",
       "evt-eu-resourceeu-2025",
-      "evt-us-chips-usar-2026"
+      "evt-us-chips-usar-2026",
+      "evt-kr-motir-rare-earths-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

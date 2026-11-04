@@ -60,6 +60,8 @@ export const jurisdictionLabels: Record<JurisdictionCode, string> = {
   canada: "Canada",
   uk: "United Kingdom",
   india: "India",
+  brazil: "Brazil",
+  korea: "South Korea",
   other: "Other",
 };
 
@@ -72,6 +74,8 @@ export const jurisdictionShort: Record<JurisdictionCode, string> = {
   canada: "CA",
   uk: "GB",
   india: "IN",
+  brazil: "BR",
+  korea: "KR",
   other: "—",
 };
 

@@ -107,8 +107,8 @@ test("designations, projects and projects with no designation, per material; the
     neodymium: [0, 0, 0],
     praseodymium: [0, 0, 0],
     lithium: [8, 16, 8], // Thacker Pass and Rhyolite Ridge processing are separate non-designated projects
-    cobalt: [14, 15, 1],
-    nickel: [16, 18, 2],
+    cobalt: [14, 16, 2],
+    nickel: [16, 19, 3],
   };
   for (const slug of slugs) {
     const p = dossier(slug);

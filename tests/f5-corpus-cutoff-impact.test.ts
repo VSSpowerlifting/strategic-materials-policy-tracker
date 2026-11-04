@@ -20,6 +20,29 @@ const EU_CRMA_2026_SOURCES=new Set(["src-abr-abn-96621530185","src-borme-c-2025-
   "src-ec-crma-sp-annex-2026-10","src-ec-crma-sp-decision-2026-10","src-ec-rep-lu-2026-10-09",
   "src-eurlex-dec-2026-2349"]);
 type Row={id:string;eventId?:string;evidence?:{sourceId:string}[]};
+// Preserve historical cutoff snapshots when later, separately reviewed corpus
+// expansions add rows. This explicitly enumerated cohort may not retroactively
+// change the 17 October or 3 November 2026 release evidence.
+const KOREA_BRAZIL_EXPANSION_IDS=new Set([
+  "evt-br-bndes-finep-minerals-2025",
+  "evt-br-bndes-piaui-2026",
+  "evt-kr-motir-rare-earths-2026",
+  "src-br-bndes-finep-select-2025-06",
+  "src-br-bndes-piaui-2026-07",
+  "src-br-bndes-machines-services",
+  "src-kr-motir-rare-earths-2026-02",
+  "org-br-bndes",
+  "org-br-piaui-niquel-metais",
+  "prj-br-piaui-niquel",
+  "prg-br-bndes-maquinas-servicos",
+  "fin-br-bndes-piaui-niquel-2026",
+  "brazil",
+  "korea",
+]);
+const withoutKoreaBrazilExpansion=(s:SeedInput):SeedInput=>
+  Object.fromEntries(Object.entries(s).map(([name,rows])=>[
+    name,(rows as Row[]).filter(r=>!KOREA_BRAZIL_EXPANSION_IDS.has(r.id)),
+  ]));
 const evidencedOnlyByEuCrma2026=(r:Row)=>!!r.evidence?.length&&r.evidence.every(e=>EU_CRMA_2026_SOURCES.has(e.sourceId));
 const withoutEuCrma2026=(s:SeedInput):SeedInput=>({...s,
   events:(s.events as Row[]).filter(r=>r.id!==EU_CRMA_2026_EVENT),
@@ -31,7 +54,7 @@ const withoutEuCrma2026=(s:SeedInput):SeedInput=>({...s,
 
 test("Wagerup curated revision changed only the reviewed milestone: historical corpus dates remain untouched",()=>{
   const frozen=JSON.stringify(seeds());
-  const current=withoutEuCrma2026(seeds());
+  const current=withoutEuCrma2026(withoutKoreaBrazilExpansion(seeds()));
   const previous={...current,"project-milestones":[]};
   const historical=auditF5CorpusCutoffImpact(previous,
     candidate.publishedCorpusCutoffAtPreparation,candidate.proposedCorpusCutoff);
@@ -69,8 +92,9 @@ test("Wagerup curated revision changed only the reviewed milestone: historical c
 });
 
 test("3 November revision adds only the October 2026 EU Strategic Projects rows and their review dates",()=>{
-  const current=seeds();
-  const frozen=JSON.stringify(current);
+  const full=seeds();
+  const current=withoutKoreaBrazilExpansion(full);
+  const frozen=JSON.stringify(full);
   assert.equal(auditF5CorpusCutoffImpact(withoutEuCrma2026(current),"2026-10-09","2026-10-17").totalPublicSeedRows,700);
   const r=auditF5CorpusCutoffImpact(current,"2026-10-17","2026-11-03");
   assert.equal(r.totalPublicSeedRows,782);
@@ -125,7 +149,10 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   const parsed=JSON.parse(output);
   assert.equal(parsed.proposedCutoff,"2026-11-03");
   assert.equal(parsed.currentPublishedCutoff,"2026-11-03");
-  assert.equal(parsed.totalPublicSeedRows,782);
+  assert.equal(parsed.totalPublicSeedRows,796);
+  assert.ok(parsed.afterProposedCutoffFields.some((r:{recordId:string})=>
+    KOREA_BRAZIL_EXPANSION_IDS.has(r.recordId)),
+    "Unreleased November 4 source-review dates remain visible after the last authorized cutoff");
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
   assert.equal(parsed.countFutureIntervalEndFields,21);
   assert.equal(parsed.publicationAuthorized,false,
