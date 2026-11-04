@@ -373,6 +373,8 @@ export function totalCommitments(
   const roles = new Set(rows.map((r) => r.valueRole));
   if (roles.size > 1)
     throw new Error(`totalCommitments: refusing to add unlike value roles (${[...roles].join(", ")})`);
+  if (roles.has("selected_proposal"))
+    throw new Error("totalCommitments: refusing to sum selected grant proposals; no award is committed");
 
   const inScope = new Map(rows.map((r) => [r.id, r]));
   const unquantifiedIds: string[] = [];
@@ -536,7 +538,7 @@ export function commitmentActor(c: FinancialCommitment): JurisdictionCode | null
 export const BINDING_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["contracted", "partially_disbursed", "disbursed"];
 
 /** Financial statuses at which money is promised or decided but no binding agreement exists yet. */
-export const NOT_YET_BINDING_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["announced", "authorized", "allocated", "decided"];
+export const NOT_YET_BINDING_FINANCIAL_STATUSES: readonly FinancialStatus[] = ["announced", "selected_for_negotiations", "authorized", "allocated", "decided"];
 
 export function isBinding(c: FinancialCommitment): boolean {
   return BINDING_FINANCIAL_STATUSES.includes(currentFinancialStatus(c));
