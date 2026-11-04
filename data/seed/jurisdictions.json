@@ -253,5 +253,49 @@
     "sourceIds": [
       "src-pib-ncmm-2025"
     ]
+  },
+  {
+    "id": "brazil",
+    "code": "BR",
+    "name": "Brazil",
+    "roles": [
+      "funder"
+    ],
+    "supplyChainPosition": "BNDES and Finep are pursuing strategic-minerals processing and manufacturing proposals through financing and project-development support. The reviewed BNDES record identifies a nickel/cobalt processing project in Piauí.",
+    "keyBodies": [
+      "BNDES",
+      "Finep"
+    ],
+    "framingPosture": "BNDES presents domestic mineral processing and industrial value addition as contributors to the energy transition and Brazilian technological capability.",
+    "eventIds": [
+      "evt-br-bndes-finep-minerals-2025",
+      "evt-br-bndes-piaui-2026"
+    ],
+    "sourceIds": [
+      "src-br-bndes-finep-select-2025-06",
+      "src-br-bndes-piaui-2026-07"
+    ]
+  },
+  {
+    "id": "korea",
+    "code": "KR",
+    "name": "South Korea",
+    "roles": [
+      "import_dependent",
+      "funder",
+      "regulator"
+    ],
+    "supplyChainPosition": "MOTIR identifies substantial imported-resource dependence and a planned policy response spanning rare-earth supply security, financing, production, recycling and research.",
+    "keyBodies": [
+      "Ministry of Trade, Industry and Resources (MOTIR)",
+      "Resource Security Council"
+    ],
+    "framingPosture": "MOTIR frames measures as industrial and resource security and resilience against external supply disruptions.",
+    "eventIds": [
+      "evt-kr-motir-rare-earths-2026"
+    ],
+    "sourceIds": [
+      "src-kr-motir-rare-earths-2026-02"
+    ]
   }
 ]
