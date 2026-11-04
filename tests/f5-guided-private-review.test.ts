@@ -17,7 +17,8 @@ const refs=():GuidedReviewRefs=>({
   projects:getAllProjects(),sources:getAllSources(),commitments:getAllFinancialCommitments(),
   // Historical pre-Narva public state (Wagerup only, same cutoff) so nonpublishing
   // review-construction tests can still exercise the now-published Narva queue row.
-  currentPublicMilestones:getAllProjectMilestones().filter(m=>m.id!=="mil-ee-neo-narva-commercial-production-reported-2026"),currentPublicCutoff:site.lastUpdated,
+  currentPublicMilestones:getAllProjectMilestones().filter(m=>m.id!=="mil-ee-neo-narva-commercial-production-reported-2026"),
+  currentPublicCutoff:"2026-11-03", // explicit historical fixture, never the live cutoff
 });
 const choices=(over:Partial<HumanReviewInput>={}):HumanReviewInput=>({
   verdict:"approved",reviewedBy:"SYNTHETIC REGRESSION TEST (not a real reviewer)",
@@ -46,7 +47,15 @@ test("already published Wagerup and Narva are unavailable for accidental second 
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
   assert.throws(()=>prepareGuidedReview(records,{...refs(),currentPublicMilestones:getAllProjectMilestones()},narva,"2026-11-03"),/Already published/);
   assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-alcoa-wagerup","2026-11-03"),/Already published/);
-  assert.equal(site.lastUpdated,"2026-11-03");
+  assert.equal(site.lastUpdated,"2026-11-04");
+});
+
+test("new guided-review sessions reject superseded publication cutoffs",()=>{
+  const live={...refs(),currentPublicCutoff:site.lastUpdated};
+  assert.equal(live.currentPublicCutoff,"2026-11-04");
+  assert.throws(()=>prepareGuidedReview(records,live,narva,"2026-11-03"),
+    /CURRENT public corpus revision/);
+  assert.doesNotThrow(()=>prepareGuidedReview(records,live,narva,site.lastUpdated));
 });
 
 test("unresolved taxonomy cannot be approved by a guided checklist",()=>{
@@ -116,7 +125,7 @@ test("never overwrite or launder earlier original human decision into another re
 test("CI and noninteractive pipes cannot create fake source-review decisions",()=>{
   // An unpublished row that is not taxonomy-blocked, so the run reaches the TTY guard.
   const id="review-m3-2-cyclic-extended-operations";
-  const run=spawnSync(process.execPath,["--import","tsx","scripts/run-f5-guided-private-review.ts","--id",id,"--proposed-cutoff","2026-11-03"],{
+  const run=spawnSync(process.execPath,["--import","tsx","scripts/run-f5-guided-private-review.ts","--id",id,"--proposed-cutoff",site.lastUpdated],{
     encoding:"utf8",input:"approved\nSYNTHETIC\n2026-11-03\ny\ny\ny\ny\ny\nshortcut\n",
   });
   assert.notEqual(run.status,0);
