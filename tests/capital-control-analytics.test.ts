@@ -588,6 +588,7 @@ test("every financial row lands in exactly one bucket of the summary", () => {
     ["public commitments", [...t.currencies.flatMap((c) => [...c.countedIds, ...c.nestedIds]), ...t.unquantifiedIds, ...t.statusNotStatedIds, ...t.endedIds]],
     ["envelopes", s.capital.envelopesListedNotSummed.map((r) => r.id)],
     ["indications", s.capital.indicationsListedNotSummed.map((r) => r.id)],
+    ["DOE selections", s.capital.selectedProposalsListedNotSummed.map((r) => r.id)],
     ["options", s.capital.fundingOptionsListedNotSummed.map((r) => r.id)],
     ["kept apart", s.capital.keptApartFromPublicSupport.map((r) => r.id)],
   ];
