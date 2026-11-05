@@ -37,7 +37,14 @@ def validate(data, sources):
     assert len(ids) == len(set(ids)), 'Duplicate source ID'
     by_source = {s['id']: s for s in sources}
     for s in sources:
-        assert date.fromisoformat(s['datePublished']) <= cutoff, 'Post-cutoff source'
+        if s['datePublished'] is None:
+            assert s['documentType'] in {'announcement_index', 'official_filing'}, 'Undated source requires an explicit snapshot/filing type'
+            assert date.fromisoformat(s['dateAccessed']) <= cutoff, 'Post-cutoff snapshot'
+        else:
+            assert date.fromisoformat(s['datePublished']) <= cutoff, 'Post-cutoff source'
+        for field in ['documentDate','dateFiled','certificationDate']:
+            if s.get(field):
+                assert date.fromisoformat(s[field]) <= cutoff, 'Post-cutoff document/filing date'
         assert s['url'].startswith('https://') and s['rights'], 'Missing source access/rights'
     facts = data['facts']
     keys = [f['id'] for f in facts]
@@ -138,11 +145,13 @@ def build(output):
     def ref(short):
         return f"'Evidence'!$E${rows['hfi-'+short]}"
     def link(short):
-        return '=' + ref(short)
+        return f'=IF(ISNUMBER({ref(short)}),{ref(short)},"Unavailable")'
+    def midpoint(low, high):
+        return f'=IF(COUNT({ref(low)},{ref(high)})=2,AVERAGE({ref(low)},{ref(high)}),"Unavailable")'
     title('Sources', 'Source register', 'Original documents remain with publishers. Publication rights require separate review.')
     headers('Sources', 7, ['Source ID', 'Title', 'Issuer', 'Type', 'Published', 'Reporting period', 'Original URL', 'Verification', 'Rights / access', 'SHA-256 of downloaded PDF'])
     for r, s in enumerate(sources, 8):
-        values = [s['id'], s['title'], s['issuer'], s['documentType'], date.fromisoformat(s['datePublished']),
+        values = [s['id'], s['title'], s['issuer'], s['documentType'], date.fromisoformat(s['datePublished']) if s['datePublished'] else None,
                   s['reportingPeriod'], s['url'], s['verificationStatus'], s['rights'], s['sha256']]
         for c, v in enumerate(values, 3):
             wb['Sources'].cell(r, c, v)
@@ -158,8 +167,8 @@ def build(output):
     selector.add('D4')
     headers('Assumptions', 7, ['Driver', 'Active selection', 'Base', 'Upside', 'Downside', 'Unit', 'Classification', 'Input IDs / method'])
     assumptions = [
-        (8, 'Remaining project spend', f'=AVERAGE({ref("remaining-low")},{ref("remaining-high")})', link('remaining-low'), link('remaining-high'), 'GBP', 'Derived / Guidance', 'hfi-remaining-low; hfi-remaining-high'),
-        (9, 'FY2028 cash opex + sustaining capex', f'=AVERAGE({ref("opex-low")},{ref("opex-high")})', link('opex-low'), link('opex-high'), 'GBP', 'Derived / Guidance', 'hfi-opex-low; hfi-opex-high'),
+        (8, 'Remaining project spend', midpoint('remaining-low','remaining-high'), link('remaining-low'), link('remaining-high'), 'GBP', 'Derived / Guidance', 'hfi-remaining-low; hfi-remaining-high'),
+        (9, 'FY2028 cash opex + sustaining capex', midpoint('opex-low','opex-high'), link('opex-low'), link('opex-high'), 'GBP', 'Derived / Guidance', 'hfi-opex-low; hfi-opex-high'),
         (10, 'FY2028 WO3 volume reference', link('wo3-fy28'), link('wo3-fy28'), link('wo3-fy28'), 'tonnes_WO3', 'Assumption from Guidance', 'hfi-wo3-fy28; use 3300 floor of 3300+'),
         (11, 'WO3 payability coefficient', link('payability'), link('payability'), link('payability'), 'fraction', 'Guidance', 'hfi-payability; FS25 coefficient, not Elmet contract'),
         (12, 'Metal royalty / sales cost fraction', link('royalty'), link('royalty'), link('royalty'), 'fraction', 'Assumption from Guidance', 'hfi-royalty; applied to payable receipts'),
@@ -195,21 +204,30 @@ def build(output):
     funding = {
         8: ('NWF equity subscription gross', link('nwf-equity'), 'Equity, not revenue. Part refinanced the previous bridge.'),
         9: ('NWF core loan drawn by approval', link('nwf-loan'), 'Drawn by 2 Sep 2026, no further draw of same core facility assumed.'),
-        10: ('Gross equity plus core loan', '=SUM(D8:D9)', '£61m gross transaction resources; fees and refinancing uses not deducted.'),
+        10: ('Gross equity plus core loan', '=IF(COUNT(D8:D9)=2,SUM(D8:D9),"Unavailable")', '£61m gross transaction resources; fees and refinancing uses not deducted.'),
         11: ('Uncommitted accordion ceiling', link('nwf-accordion'), 'Excluded from core liquidity and incremental coverage unless user overrides availability.'),
-        12: ('Package including uncommitted ceiling', '=D10+D11', 'Reconciles to headline £71m; parent package never added again.'),
+        12: ('Package including uncommitted ceiling', '=IF(COUNT(D10:D11)=2,D10+D11,"Unavailable")', 'Reconciles to headline £71m; parent package never added again.'),
         16: ('Remaining project spend selected', '=IF(AND(ISNUMBER(\'Assumptions\'!D8),\'Assumptions\'!D8>=0),\'Assumptions\'!D8,"Unavailable")', 'October guidance excludes operating costs.'),
-        17: ('Reference midpoint remaining spend', f'=AVERAGE({ref("remaining-low")},{ref("remaining-high")})', 'Fixed disclosed range midpoint, not a financing commitment.'),
-        18: ('Change versus reference midpoint', '=IF(ISNUMBER(D16),D16-D17,"Unavailable")', 'Signed change only; no full sources-and-uses balance implied.'),
+        17: ('Reference midpoint remaining spend', midpoint('remaining-low','remaining-high'), 'Fixed disclosed range midpoint, not a financing commitment.'),
+        18: ('Change versus reference midpoint', '=IF(COUNT(D16:D17)=2,D16-D17,"Unavailable")', 'Signed change only; no full sources-and-uses balance implied.'),
         19: ('Incremental delay cost', '=IF(AND(ISNUMBER(\'Assumptions\'!D13),\'Assumptions\'!D13>=0),\'Assumptions\'!D13,"Unavailable")', 'Three-month fallback processing scenario; not uniform monthly burn.'),
-        20: ('Incremental one-year interest proxy', "=IF(AND(ISNUMBER('Assumptions'!D14),'Assumptions'!D14>=0),D9*'Assumptions'!D14,\"Unavailable\")", 'Constant £25m balance; excludes rate steps/day-count. Incremental proxy only.'),
+        20: ('Incremental one-year interest proxy', "=IF(AND(ISNUMBER(D9),ISNUMBER('Assumptions'!D14),'Assumptions'!D14>=0),D9*'Assumptions'!D14,\"Unavailable\")", 'Constant £25m balance; excludes rate steps/day-count. Incremental proxy only.'),
         21: ('Combined incremental requirement', '=IF(COUNT(D18:D20)=3,SUM(D18:D20),"Unavailable")', 'No forecast collection losses, taxes or general delay burn included.'),
         22: ('Assumed accordion available', "='Assumptions'!D15", 'Default zero; use does not establish commitment or receipt.'),
-        23: ('Uncovered incremental stress', '=IF(AND(COUNT(D21:D22)=2,D22>=0,D22<=D11),MAX(0,D21-D22),"Unavailable")', 'Additional stress above midpoint; NOT the total funding gap.'),
+        23: ('Uncovered incremental stress', '=IF(AND(COUNT(D21:D22)=2,ISNUMBER(D11),D22>=0,D22<=D11),MAX(0,D21-D22),"Unavailable")', 'Additional stress above midpoint; NOT the total funding gap.'),
         25: ('Current net project funding gap', 'Unavailable', 'Cutoff cash and complete remaining sources/uses bridge unavailable.'),
         26: ('Cutoff corporate cash', 'Unavailable', 'Do not add March cash and August funding without intervening cash flows.'),
-        27: ('FY2028 remaining-spend lower bound', f'={ref("remaining-low")}-{ref("fy27-high")}', '£5m extreme bound, not a paired company scenario.'),
-        28: ('FY2028 remaining-spend upper bound', f'={ref("remaining-high")}-{ref("fy27-low")}', '£20m extreme bound; excluded from Operating core requirement.'),
+        27: ('FY2028 remaining-spend lower bound', f'=IF(COUNT({ref("remaining-low")},{ref("fy27-high")})=2,{ref("remaining-low")}-{ref("fy27-high")},"Unavailable")', '£5m extreme bound, not a paired company scenario.'),
+        28: ('FY2028 remaining-spend upper bound', f'=IF(COUNT({ref("remaining-high")},{ref("fy27-low")})=2,{ref("remaining-high")}-{ref("fy27-low")},"Unavailable")', '£20m extreme bound; excluded from Operating core requirement.'),
+        32: ('31 March group cash, opening stock', link('cash-2026'), 'hfi-cash-2026; audited consolidated balance, not project-only.'),
+        33: ('April Hargreaves cash payment', f'=IF(ISNUMBER({ref("harg-paid-apr2026")}),-{ref("harg-paid-apr2026")},"Unavailable")', 'hfi-harg-paid-apr2026; accounts note36 confirms paid, not just planned.'),
+        34: ('August NWF equity subscription gross', '=D8', 'hfi-nwf-equity; net fees and exact bank credit unavailable.'),
+        35: ('NWF draw by 2 September approval', '=D9', 'hfi-nwf-loan; DRL borrower, group scope; no second core draw assumed.'),
+        36: ('May-August bridge receipts / repayment', 'Unavailable', 'USD25m facility limit and full repayment disclosed, exact GBP cash movements unavailable.'),
+        37: ('Other April-cutoff cash movements', 'Unavailable', 'Operating, capital deposits, financing fees, sales collections and equipment cash flows incomplete.'),
+        38: ('4 November closing unrestricted cash', 'Unavailable', 'Bridge cannot close. No partial subtotal is represented as available cash.'),
+        39: ('31 March escrow, excluded from bridge', link('escrow-2026'), 'hfi-escrow-2026; non-current restricted funds, not operating liquidity.'),
+        40: ('October equipment finance snapshot', link('fleet-current'), 'hfi-fleet-current; debt stock, not a cash receipt in this bridge.'),
     }
     for r, (label, value, note) in funding.items():
         for c, v in [('C', label), ('D', value), ('E', note)]:
@@ -233,14 +251,14 @@ def build(output):
         put('August plan',f'D{r}',link(key),MONEY)
         put('August plan',f'E{r}','hfi-'+key)
     aug_calcs = {
-        14:('Plan source components','=SUM(D8:D13)','Stated source total £88m; includes £15m projected receipts.'),
-        27:('Rounded use components','=SUM(D16:D26)','£87m: £1m below issuer stated £88m; rounding note retained.'),
+        14:('Plan source components','=IF(COUNT(D8:D13)=6,SUM(D8:D13),"Unavailable")','Stated source total £88m; includes £15m projected receipts.'),
+        27:('Rounded use components','=IF(COUNT(D16:D26)=11,SUM(D16:D26),"Unavailable")','£87m: £1m below issuer stated £88m; rounding note retained.'),
         28:('Stated total uses',link('aug-total-uses'),'Authoritative issuer total for reserve arithmetic; no undisclosed balancing use invented.'),
-        29:('Stated uses less target reserve','=D28-D26','£75m other uses based on stated total, not sum of rounded components.'),
-        32:('Revenue realized by peak date',"=IF(AND(ISNUMBER('Assumptions'!D16),'Assumptions'!D16>=0,'Assumptions'!D16<=1),D13*'Assumptions'!D16,\"Unavailable\")",'Timing boundary only. Downside assumes entire £15m delayed past peak date.'),
-        33:('Core loan received by peak date',"=IF(AND(ISNUMBER('Assumptions'!D17),'Assumptions'!D17>=0,'Assumptions'!D17<=1),D12*'Assumptions'!D17,\"Unavailable\")",'Timing counterfactual only. Full historical draw was subsequently disclosed.'),
-        34:('Timing-adjusted plan sources','=IF(COUNT(D32:D33)=2,SUM(D8:D11)+SUM(D32:D33),"Unavailable")','No accordion or double-counted parent package.'),
-        35:('Plan cash after non-reserve uses','=IF(ISNUMBER(D34),D34-D29,"Unavailable")','Base £13m. Full revenue delay leaves negative £2m before new funding.'),
+        29:('Stated uses less target reserve','=IF(COUNT(D26,D28)=2,D28-D26,"Unavailable")','£75m other uses based on stated total, not sum of rounded components.'),
+        32:('Revenue realized by peak date',"=IF(AND(ISNUMBER(D13),ISNUMBER('Assumptions'!D16),'Assumptions'!D16>=0,'Assumptions'!D16<=1),D13*'Assumptions'!D16,\"Unavailable\")",'Timing boundary only. Downside assumes entire £15m delayed past peak date.'),
+        33:('Core loan received by peak date',"=IF(AND(ISNUMBER(D12),ISNUMBER('Assumptions'!D17),'Assumptions'!D17>=0,'Assumptions'!D17<=1),D12*'Assumptions'!D17,\"Unavailable\")",'Timing counterfactual only. Full historical draw was subsequently disclosed.'),
+        34:('Timing-adjusted plan sources','=IF(AND(COUNT(D8:D11)=4,COUNT(D32:D33)=2),SUM(D8:D11)+SUM(D32:D33),"Unavailable")','No accordion or double-counted parent package.'),
+        35:('Plan cash after non-reserve uses','=IF(COUNT(D29,D34)=2,D34-D29,"Unavailable")','Base £13m. Full revenue delay gives approximately £2m deficit on stated-total basis; £1m on rounded-detail basis.'),
         36:('Shortfall to target reserve','=IF(ISNUMBER(D35),MAX(0,D26-D35),"Unavailable")','Reserve shortfall is distinct from cash deficit.'),
         37:('Cash deficit before target reserve','=IF(ISNUMBER(D35),MAX(0,-D35),"Unavailable")','Not a current funding gap. Original plan has no dated monthly cash schedule.'),
     }
@@ -328,11 +346,14 @@ def build(output):
         ('October capital forecast components less total', f'={ref("capex-rebuild")}+{ref("capex-mining")}+{ref("capex-property")}+{ref("capex-expansion")}-{ref("capex-total")}', 'GBP'),
         ('Current cash bridge reconciliation', 'Unavailable', 'Missing post-March full cash movements'),
         ('Contractual NWF interest schedule', 'Unavailable', 'Draw date, daily SONIA, fee and compounding terms missing'),
-        ('Funding scenario input validity', '=IF(AND(\'Assumptions\'!D8>=0,\'Assumptions\'!D13>=0,\'Assumptions\'!D14>=0,\'Assumptions\'!D15>=0,\'Assumptions\'!D15<=\'Funding\'!D11),"Valid","Invalid input")', 'Nonnegative costs; assumed accordion cannot exceed ceiling'),
-        ('Operating input validity', '=IF(AND(\'Assumptions\'!D10>0,\'Assumptions\'!D11>0,\'Assumptions\'!D11<=1,\'Assumptions\'!D12>=0,\'Assumptions\'!D12<1),"Valid","Invalid input")', 'Positive volume and payability; royalty below 100%'),
+        ('Funding scenario input validity', '=IF(AND(COUNT(\'Assumptions\'!D8,\'Assumptions\'!D13,\'Assumptions\'!D14,\'Assumptions\'!D15)=4,\'Assumptions\'!D8>=0,\'Assumptions\'!D13>=0,\'Assumptions\'!D14>=0,\'Assumptions\'!D15>=0,\'Assumptions\'!D15<=\'Funding\'!D11),"Valid","Invalid input")', 'Nonnegative numeric costs; assumed accordion cannot exceed ceiling'),
+        ('Operating input validity', '=IF(AND(COUNT(\'Assumptions\'!D10:D12)=3,\'Assumptions\'!D10>0,\'Assumptions\'!D11>0,\'Assumptions\'!D11<=1,\'Assumptions\'!D12>=0,\'Assumptions\'!D12<1),"Valid","Invalid input")', 'Positive numeric volume and payability; royalty below 100%'),
         ('August rounded uses less stated total', "='August plan'!D27-'August plan'!D28", 'GBP; known negative £1m rounding difference, not zero'),
     ]
     for r, (label, formula, unit) in enumerate(checks, 8):
+        if r <= 16 or r == 21:
+            refs = re.findall(r"'[^']+'!\$?[A-Z]+\$?[0-9]+", formula)
+            formula = f'=IF(COUNT({",".join(refs)})={len(refs)},{formula[1:]},"Unavailable")'
         put('Checks', f'C{r}', label)
         put('Checks', f'D{r}', formula, '#,##0.00" ";(#,##0.00)" ";0.00" "')
         put('Checks', f'E{r}', unit)

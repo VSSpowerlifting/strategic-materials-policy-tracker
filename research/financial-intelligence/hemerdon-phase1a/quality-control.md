@@ -2,6 +2,8 @@
 
 Cutoff: **4 November 2026**. Status: internal research draft, publication review pending. No independent human finance sign-off or native Excel execution is claimed.
 
+The sections below record the preserved Phase 1A baseline (`4582fb529c86dffc1a6329218e8081fe16550043`). The Phase 1B acceptance update at the end supersedes its counts and model-validation limits where stated.
+
 ## Evidence sufficiency decision
 
 The available disclosures support historical financial reconciliation, transaction-status analysis, a reconstruction of the original August funding plan, remaining-capital guidance, incremental cost stresses and FY2028 revenue-coverage arithmetic. They do not supply a current unrestricted-cash bridge, an updated dated life-of-mine cash model, complete facility documents or lender CFADS definitions. Independent NPV, IRR, DSCR and a precise current net financing gap are therefore marked Unavailable. A usable partial model passes the assignment's sufficiency gate; a full valuation does not.
@@ -23,7 +25,7 @@ Validation checks source IDs, cutoff, disclosure classifications, null unknowns,
 | Government up-to-£35m lending versus £25m core facility | Reconcile core plus £10m uncommitted accordion. £71m parent never added to its components. |
 | NWF term start | August proposed terms: date of definitive agreement. Accounts: date of drawdown. October slide states366 days without origin. No exact maturity date inferred. |
 | Borrower and guarantors | August proposed terms name DRL borrower and PLC/Services/Aggregates guarantors. Executed documents not obtained; public role disclosure distinguished from definitive legal verification. |
-| August detailed uses sum £87m versus stated £88m | Retain negative£1m reconciliation and issuer rounding note. Use stated total for reserve analysis, with no invented use. It is not reported as a zero-difference check. |
+| August detailed uses sum £87m versus stated £88m | Retain negative £1m reconciliation and issuer rounding note. Use stated total for reserve analysis, with no invented use. It is not reported as a zero-difference check. |
 | August £7m opening cash versus March £25.49m | Different dates and purposes. No complete intervening cash bridge obtained. Neither establishes November cash. |
 | August £18m bridge repayment | Forecast plan use. Later repayment confirmed, but exact cash, FX, fees and accrued interest require transaction evidence. Do not count repaid bridge as current debt. |
 | February approximate£43m versus approximate£44m wording | Circular conditionally raised £43.04m supports rounded£43m language. Use exact £41,029,253 net equity cash in historical reconciliations; do not infer exact fees from rounded gross. |
@@ -68,4 +70,20 @@ These are three review lenses applied by the implementing agent, not three indep
 
 ## Release boundary
 
-The artifacts support review and a carefully sourced memo foundation. They do not support publication-grade conclusions about precise current liquidity, complete break-even, independent value or repayment sufficiency. Obtain a same-date cash/debt snapshot and full cash bridge first, then executed terms and monthly operating/collection evidence. Independent human finance review, native Excel verification, source-rights clearance and public editorial approval remain required next-phase work. No source or reviewer authority has been promoted by this delivery.
+The artifacts support review and a carefully sourced memo foundation. They do not support publication-grade conclusions about precise current liquidity, complete break-even, independent value or repayment sufficiency. Obtain a same-date cash/debt snapshot and full cash bridge first, then executed terms and monthly operating/collection evidence. Independent human finance review, source-rights clearance and public editorial approval remain next-phase work. No source or reviewer authority has been promoted by this delivery.
+
+## Phase 1B acceptance update — outcome B
+
+The register now has **158 inputs/claims across 20 sources**. Newly indexed evidence includes the issuer's live embedded announcement index, April/May financing disclosures, three prospective option-funding notices and the filed group security agreement. The accounts and October presentation were fetched again; their hashes match Phase 1A. Unknown publication dates for the index and filing remain null, with retrieval, instrument, filing and certificate dates separately recorded. No raw original is redistributed.
+
+The baseline's 161 cached formula values agreed with independent LibreOffice recalculation. Thirty independently defined cases then found 12 failed cell expectations when inputs were removed: source links could coerce blanks to zero, AVERAGE/SUM could silently accept incomplete inputs, and the operating check could report Valid for missing volume. These were material edit/refresh defects despite correct intact-input results. `../hemerdon-phase1b/baseline-validation.json` preserves the failures. Numeric-source guards, complete-input prerequisites and check guards repair them.
+
+The corrected workbook has **167 formulas**, preserving the nine-sheet layout while adding dated bridge observations in Funding rows 32:40. Final independent validation passes **32/32 cases**, with **zero differences across 167 cached formula results**. The checks also compare all 158 source-linked workbook values to the claim register and verify formula references, external-link absence and absence of dependency cycles. The nine zero reconciliations and known negative £1m rounding difference remain distinct. The original producer-engine mutation/scan checks pass separately, and affected workbook ranges were rendered and inspected.
+
+Microsoft Excel was not found in `/Applications` or the Spotlight bundle-ID search. The independent engine was `LibreOfficeDev 26.8.0.0.alpha0`, version string retained in `validation-results.json`. It recalculated disposable copies only. This is stronger independent calculation evidence than the prior single-engine check; it is not native Excel or a separate human review. The public Excel workbook should receive a native compatibility check when that environment becomes available.
+
+Focused Python tests now pass **9/9**. The repository suite and data validation were rerun before the preservation commit: **1,083 passed**, validation passed with 17 existing warnings. They cover unchanged production code; no deployment or CI result is inferred. The workbook's generated matrix, cached outputs, controls and source links were inspected after export.
+
+All four principal figures reproduce. The original August shortfall must be described as approximately £2m on the stated-total basis, with approximately £1m using the rounded detail. The £5.75m increment remains an analyst stress, not an observed funding gap. A new confirmed April £3m payment, prospectively stated option funding and registered security do not close the missing November cash bridge. A detailed lease-payment presentation difference of £6,104 is retained in the information checklist rather than forced into a debt-service rollforward.
+
+**Recommendation B:** conditionally accept a financing-structure/government-intervention case and explicitly bounded scenarios. Do not accept current liquidity, complete financing-gap, valuation or repayment-sufficiency conclusions. See the [closure decision](../hemerdon-phase1b/financial-evidence-closure.md), [funding bridge](../hemerdon-phase1b/funding-bridge.json), [independent results](../hemerdon-phase1b/validation-results.json) and [information checklist](../hemerdon-phase1b/information-request-checklist.md). This gate authorizes no publication, PR, outreach or deployment.

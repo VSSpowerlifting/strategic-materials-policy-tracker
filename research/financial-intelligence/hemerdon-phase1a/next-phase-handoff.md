@@ -2,6 +2,8 @@
 
 Cutoff: 4 November 2026. Start with [README.md](README.md), [financial-assessment.md](financial-assessment.md), [quality-control.md](quality-control.md) and the workbook. The source register and claim matrix let the next researcher trace values without reconstructing this conversation.
 
+Phase 1B has now reached **outcome B — Conditionally ready**. The [closure report](../hemerdon-phase1b/financial-evidence-closure.md), [independent validation](../hemerdon-phase1b/validation-results.json) and [precise information checklist](../hemerdon-phase1b/information-request-checklist.md) govern the next session. Public drafting remains a separate authorization; accepted scope covers financing structure and bounded scenarios, excluding present cash, valuation and repayment sufficiency.
+
 ## Ready for drafting, subject to human review
 
 - The legal issuer/project distinction, DRL ownership disclosure and public-corpus ID mapping.
@@ -43,6 +45,6 @@ This is a handoff outline only. The final memo and deck have not been created. D
 
 ## Work state and boundary
 
-Branch: `codex/hemerdon-financial-phase1a`, created from `2286648f3bbb699eee5b6171f334792ffa2d545d`. Artifacts are confined to `research/financial-intelligence/hemerdon-phase1a/`. No production seeds, app code, exports or R001 publication assets were changed. No commit, push, PR, merge or deployment is part of this delivery.
+Branch: `codex/hemerdon-financial-phase1a`, created from `2286648f3bbb699eee5b6171f334792ffa2d545d`. Original Phase 1A is preserved in commit `4582fb529c86dffc1a6329218e8081fe16550043`; Phase 1B extends the two Hemerdon research directories on the same branch. No production seeds, app code, exports or R001 publication assets were changed. No push, PR, merge or deployment is part of this delivery.
 
 The next highest-value action is to obtain the current unrestricted-cash and debt snapshot with the complete cash bridge, then reconcile it to remaining capital and the NWF maturity. Proceed to the public memo and deck only as a separate authorized phase. Production integration, feeds, additional company studies and a final public consulting deck remain deferred.

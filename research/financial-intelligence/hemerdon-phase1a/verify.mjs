@@ -99,10 +99,14 @@ for(let r=8;r<=16;r++) close(get('Checks',`D${r}`),0);
 close(get('Checks','D21'),-1000000);
 const errors=await wb.inspect({kind:'match',searchTerm:'#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!|#NULL!|#SPILL!|#CALC!',options:{useRegex:true,maxResults:300},summary:'Formula error scan'});
 await fs.writeFile(path.join(qaDir,'error-scan.ndjson'),errors.ndjson);
-const ranges={Overview:'C2:F27',Assumptions:'C2:J19',Funding:'C2:E28','August plan':'C2:E37',Operating:'C2:F28',Historical:'C2:H20',Evidence:'C2:M12',Sources:'C2:L11',Checks:'C2:E21'};
+const ranges={Overview:'C2:F27',Assumptions:'C2:J19',Funding:'C2:E40','August plan':'C2:E37',Operating:'C2:F28',Historical:'C2:H20',Evidence:'C2:M12',Sources:'C2:L11',Checks:'C2:E21'};
 for(const [sheetName,range] of Object.entries(ranges)){
   const rendered=await wb.render({sheetName,range,scale:1.3});
   await fs.writeFile(path.join(qaDir,`${sheetName}.png`),new Uint8Array(await rendered.arrayBuffer()));
+}
+for(const [sheetName,range] of [['Sources','C19:L27'],['Evidence','C153:M165']]){
+  const rendered=await wb.render({sheetName,range,scale:1.3});
+  await fs.writeFile(path.join(qaDir,`${sheetName}-closure.png`),new Uint8Array(await rendered.arrayBuffer()));
 }
 await (await SpreadsheetFile.exportXlsx(wb)).save(input);
 await fs.writeFile(path.join(path.dirname(input),'model-results.json'),JSON.stringify({cutoff:'2026-11-04',engine:'@oai/artifact-tool; not native Excel',scenarios:results,formulaReconciliations:9,knownAugustUsesRoundingDifferenceGBP:-1000000,scenarioMutationChecks:['selected cost','missing selected cost','unselected missing price','blank/zero/positive price','missing volume','100% royalty','hypothetical accordion and ceiling','original-plan core-loan timing','original-plan receipt timing','receipt fraction above100%','negative capex'],nativeExcelVerified:false},null,2)+'\n');

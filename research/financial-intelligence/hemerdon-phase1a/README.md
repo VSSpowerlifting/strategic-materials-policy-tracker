@@ -2,7 +2,9 @@
 
 Research cutoff: **4 November 2026**. Research draft for review, outside the website build and publication pipeline. Source corpus base: `2286648f3bbb699eee5b6171f334792ffa2d545d`. Existing dossier R001 has its own 3 November cutoff, which this case does not change.
 
-The defensible output is a partial financial model: historical reconciliation, financing status, original August-plan receipt/timing sensitivities, remaining capital guidance, incremental funding stresses and FY2028 tungsten revenue coverage. Current cash, a complete remaining funding gap, independent NPV/IRR and lender DSCR remain unavailable. The final register contains 147 claims/inputs and 12 sources.
+The defensible output is a partial financial model: historical reconciliation, financing status, original August-plan receipt/timing sensitivities, remaining capital guidance, incremental funding stresses and FY2028 tungsten revenue coverage. Current cash, a complete remaining funding gap, independent NPV/IRR and lender DSCR remain unavailable. Phase 1A's 147-input/12-source baseline is preserved in commit `4582fb529c86dffc1a6329218e8081fe16550043`. Phase 1B expands the register to **158 claims/inputs and 20 sources** and adds numeric-input guards and a dated incomplete cash bridge.
+
+**Phase 1B decision: B — Conditionally ready.** Read the [Financial Evidence Closure Report](../hemerdon-phase1b/financial-evidence-closure.md) and [validation guide](../hemerdon-phase1b/README.md) before drafting or reusing outputs. All 32 independent LibreOffice cases pass; native Excel remains unverified. No public memo, presentation or publication approval is included.
 
 | Deliverable | File |
 |---|---|

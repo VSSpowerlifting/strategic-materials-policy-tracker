@@ -64,6 +64,13 @@ class EvidenceTests(unittest.TestCase):
         self.sources[0]['datePublished'] = '2026-11-05'
         with self.assertRaises(AssertionError): validate(self.data, self.sources)
 
+    def test_undated_discovery_and_filing_dates_are_explicit(self):
+        validate(self.data,self.sources)
+        registry = next(s for s in self.sources if s['id']=='hfs-group-security-2026')
+        self.assertIsNone(registry['datePublished'])
+        registry['dateFiled']='2026-11-05'
+        with self.assertRaises(AssertionError): validate(self.data,self.sources)
+
     def test_formula_references_and_dependency_direction(self):
         with tempfile.TemporaryDirectory() as tmp:
             wb = build(Path(tmp)/'test.xlsx')
