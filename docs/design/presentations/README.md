@@ -11,10 +11,11 @@ SMPT publishes independently authored, source-linked industrial-policy and finan
 
 1. [Presentation Standard v2](SMPT_PRESENTATION_STANDARD_V2.md) — definitive governance, type, palette, slide structures, length budgets, editorial and QA rules.
 2. [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) — chart selection, scales, status encodings, sensitivity reconciliation and source methods.
+4. [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) — mandatory affirmative-writing, graphic-purpose, AI-assisted production, and five-gate review standard.
 3. [Reference Analysis](REFERENCE_ANALYSIS.md) — annotated evaluation of the four supplied McKinsey/BCG decks and additional institutional resources.
-4. [FI001 Redesign Brief](FI001_REDESIGN_BRIEF.md) — suggested **18-slide** versioned redesign, not an authorization to overwrite the published FI001 edition.
-5. [Original slide previews](examples/) — four SMPT-authored vector examples demonstrating the system. These are not copies of consultant slide screenshots.
-6. [Editable PowerPoint master generator](templates/create_master.py) — reproducible eight-layout starter using editable PowerPoint text and shapes.
+5. [FI001 Redesign Brief](FI001_REDESIGN_BRIEF.md) — suggested **18-slide** versioned redesign, not an authorization to overwrite the published FI001 edition.
+6. [Original slide previews](examples/) — four SMPT-authored vector examples demonstrating the system. These are not copies of consultant slide screenshots.
+7. [Editable PowerPoint master generator](templates/create_master.py) — reproducible eight-layout starter using editable PowerPoint text and shapes.
 
 ## Original examples
 
@@ -45,4 +46,4 @@ Included: rules, layouts, chart grammar, editorial standards, original examples,
 
 Not included: McKinsey, BCG, Bain or Strategy& slide screenshots, logos, font binaries, copied template files, or a revised FI001 publication. Several supplied PDFs carry explicit reuse restrictions; link to sources rather than rehosting their content.
 
-**Production note:** Before declaring a new deck publication-ready, its editable PowerPoint and PDF must be rendered and visually inspected, calculations reconciled to the controlling research model, and author/editorial approval recorded. A style guide is not itself publication approval.
+**Production note:** Run the [editorial authenticity and visual integrity gates](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) and record their evidence before declaring a new deck publication-ready. Before declaring a new deck publication-ready, its editable PowerPoint and PDF must be rendered and visually inspected, calculations reconciled to the controlling research model, and author/editorial approval recorded. A style guide is not itself publication approval.
