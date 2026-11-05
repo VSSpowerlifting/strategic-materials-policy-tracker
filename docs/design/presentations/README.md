@@ -11,8 +11,8 @@ SMPT publishes independently authored, source-linked industrial-policy and finan
 
 1. [Presentation Standard v2](SMPT_PRESENTATION_STANDARD_V2.md) — definitive governance, type, palette, slide structures, length budgets, editorial and QA rules.
 2. [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) — chart selection, scales, status encodings, sensitivity reconciliation and source methods.
-4. [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) — mandatory affirmative-writing, graphic-purpose, AI-assisted production, and five-gate review standard.
-3. [Reference Analysis](REFERENCE_ANALYSIS.md) — annotated evaluation of the four supplied McKinsey/BCG decks and additional institutional resources.
+3. [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) — mandatory affirmative-writing, graphic-purpose, AI-assisted production, and five-gate review standard.
+4. [Reference Analysis](REFERENCE_ANALYSIS.md) — annotated evaluation of the four supplied McKinsey/BCG decks and additional institutional resources.
 5. [FI001 Redesign Brief](FI001_REDESIGN_BRIEF.md) — suggested **18-slide** versioned redesign, not an authorization to overwrite the published FI001 edition.
 6. [Original slide previews](examples/) — four SMPT-authored vector examples demonstrating the system. These are not copies of consultant slide screenshots.
 7. [Editable PowerPoint master generator](templates/create_master.py) — reproducible eight-layout starter using editable PowerPoint text and shapes.
