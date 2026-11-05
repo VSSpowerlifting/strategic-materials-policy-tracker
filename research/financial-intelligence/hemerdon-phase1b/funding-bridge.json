@@ -1,0 +1,122 @@
+{
+  "researchCutoff": "2026-11-04",
+  "baselineCommit": "4582fb529c86dffc1a6329218e8081fe16550043",
+  "sourceRegister": "../hemerdon-phase1a/sources.json",
+  "claimRegister": "../hemerdon-phase1a/evidence.json",
+  "historicalPlan": {
+    "published": "2026-08-25",
+    "sourceId": "hfs-nwf-terms",
+    "scope": "group/project original funding plan through unspecified peak funding date",
+    "currency": "GBP",
+    "statedSources": "88000000",
+    "statedUsesIncludingReserve": "88000000",
+    "sumOfRoundedUseLines": "87000000",
+    "plannedCashReserve": "13000000",
+    "anticipatedOperatingReceipts": "15000000",
+    "cashWithAllReceiptsDelayedUsingStatedTotal": "-2000000",
+    "cashWithAllReceiptsDelayedUsingRoundedDetail": "-1000000",
+    "classification": "Guidance with Derived scenario calculations",
+    "notActualCash": true,
+    "note": "Plan is not added to October remaining expenditure or reconstructed as observed November liquidity. Reserve target shortfall differs from cash deficit. Values are rounded, not precision estimates."
+  },
+  "latestSupportablePosition": {
+    "scope": "dated observations; consolidated group except stated project/PLC items",
+    "auditedOpeningCash": {
+      "stockDate": "2026-03-31",
+      "published": "2026-09-03",
+      "amount": "25485511",
+      "currency": "GBP",
+      "inputId": "hfi-cash-2026",
+      "sourceId": "hfs-tw-ar2026",
+      "locator": "Printed p34 financial position and p54 note22"
+    },
+    "restrictedEscrowExcluded": {
+      "stockDate": "2026-03-31",
+      "amount": "14912042",
+      "currency": "GBP",
+      "inputId": "hfi-escrow-2026",
+      "sourceId": "hfs-tw-ar2026",
+      "locator": "Printed p54 note20"
+    },
+    "datedPostMarchItems": [
+      {
+        "date": "2026-04",
+        "kind": "cash_outflow_confirmed_in_accounts",
+        "amount": "3000000",
+        "currency": "GBP",
+        "inputId": "hfi-harg-paid-apr2026",
+        "sourceId": "hfs-tw-ar2026",
+        "locator": "Printed p64 note36",
+        "meaning": "Hargreaves termination payment actually made; other April costs remain unquantified."
+      },
+      {
+        "date": "2026-05-21",
+        "kind": "bridge_facility_limit_not_draw",
+        "amount": "25000000",
+        "currency": "USD",
+        "inputId": "hfi-may-bridge-limit",
+        "sourceId": "hfs-tw-may2026",
+        "meaning": "Not converted to GBP or added as a verified receipt. Exact draw and repayment cash/FX unavailable."
+      },
+      {
+        "date": "2026-08-25",
+        "kind": "reported_equity_subscription_gross",
+        "amount": "36000000",
+        "currency": "GBP",
+        "inputId": "hfi-nwf-equity",
+        "sourceId": "hfs-nwf-terms",
+        "meaning": "PLC equity subscription; completed raise corroborated by later accounts/adviser. Exact net cash credit/fees unavailable."
+      },
+      {
+        "date": "2026-08-28",
+        "kind": "bridge_repaid_status",
+        "amount": null,
+        "currency": null,
+        "inputId": "hfi-bridge-status",
+        "sourceId": "hfs-bridge-repaid",
+        "meaning": "Full repayment reported; do not retain May bridge as outstanding or infer exact GBP cash paid from August plan £18m."
+      },
+      {
+        "noLaterThan": "2026-09-02",
+        "kind": "nwf_core_loan_drawn",
+        "amount": "25000000",
+        "currency": "GBP",
+        "inputId": "hfi-nwf-loan",
+        "sourceId": "hfs-tw-ar2026",
+        "locator": "Printed pp37,65",
+        "meaning": "Full draw disclosed by approval. DRL borrower per proposed terms. Later principal balance and exact transfer date unavailable."
+      },
+      {
+        "dateRange": ["2026-09-16", "2026-10-01"],
+        "kind": "option_funding_prospective",
+        "amount": "83030.76",
+        "currency": "GBP",
+        "inputId": "hfi-options-total",
+        "sourceIds": ["hfs-options-sep16", "hfs-options-sep24", "hfs-options-oct1"],
+        "meaning": "Sum of issuer-stated additional funding to be provided; not verified bank credits."
+      }
+    ],
+    "facilityAndRequirementObservations": [
+      {"inputId": "hfi-nwf-accordion", "amount": "10000000", "currency": "GBP", "meaning": "Uncommitted maximum; zero availability assumed in modeled cases."},
+      {"inputId": "hfi-equipment-apr-facility", "amount": "22300000", "currency": "GBP", "meaning": "April contracted equipment finance. Not a separate additive cash receipt."},
+      {"inputId": "hfi-fleet-current", "amount": "11000000", "currency": "GBP", "meaning": "October management current equipment-finance snapshot, not cash."},
+      {"inputId": "hfi-fleet-ordered", "amount": "22000000", "currency": "GBP", "meaning": "October approximate ordered-machine commitment. Incremental/overlap scope not closed."},
+      {"inputIds": ["hfi-remaining-low", "hfi-remaining-high"], "range": ["40000000", "45000000"], "currency": "GBP", "meaning": "October remaining project-spend guidance, excludes opex."},
+      {"inputId": "hfi-hargreaves", "amount": "7000000", "currency": "GBP", "meaning": "Future Hargreaves payment by15May2027, not the already-paid April £3m."}
+    ],
+    "unquantifiedInterveningMovements": [
+      "Exact net NWF equity cash credit and fees",
+      "May bridge draw/repayment cash, currencies, FX, accrued interest and fees",
+      "Other equity/option credits actually received",
+      "Operating payments and customer cash collections",
+      "Capital deposits, cash invoices, equipment finance and associated cash deposits/payments",
+      "Tax/VAT cash, provision recoveries, restriction transfers and other financing movements"
+    ],
+    "closingCashAtCutoff": null,
+    "aggregateDebtPrincipalAtCutoff": null,
+    "remainingNetProjectFundingGap": null,
+    "closureStatus": "Unavailable: incomplete same-date stock and intervening cash ledger",
+    "cashBridgeEquation": "C_close = C_31Mar + net verified cash receipts - verified cash payments + unresolved net intervening movements. Gross subscriptions and facility limits are not substituted for exact net receipts.",
+    "partialSubtotalPresentedAsLiquidity": false
+  }
+}

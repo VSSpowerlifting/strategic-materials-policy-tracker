@@ -1,0 +1,615 @@
+{
+  "cutoff": "2026-11-04",
+  "productionDate": "2026-11-05",
+  "acceptedCommit": "772f2f4c02631f533a0a893849c9bedb8a6ff8ad",
+  "failureCount": 0,
+  "failures": [],
+  "checks": [
+    {
+      "check": "publication model byte-identical to accepted source",
+      "passed": true
+    },
+    {
+      "check": "preserved independent validation covers unchanged publication model",
+      "passed": true
+    },
+    {
+      "check": "all seven memo exhibit tables match reviewed content",
+      "passed": true
+    },
+    {
+      "check": "preferred memo title and subtitle metadata",
+      "passed": true
+    },
+    {
+      "check": "preferred title appears in memo",
+      "passed": true
+    },
+    {
+      "check": "all authored analytical paragraphs in DOCX",
+      "passed": true
+    },
+    {
+      "check": "ten editable slides",
+      "passed": true
+    },
+    {
+      "check": "preferred PowerPoint title metadata",
+      "passed": true
+    },
+    {
+      "check": "preferred title and subtitle on cover",
+      "passed": true
+    },
+    {
+      "check": "PowerPoint uses SMPT colors and neutral defaults",
+      "passed": true
+    },
+    {
+      "check": "slide 1 graphite background",
+      "passed": true
+    },
+    {
+      "check": "slide 10 graphite background",
+      "passed": true
+    },
+    {
+      "check": "native chart values reconcile to accepted findings",
+      "passed": true
+    },
+    {
+      "check": "core bars solid and accordion separately outlined",
+      "passed": true
+    },
+    {
+      "check": "four chart workbooks embedded",
+      "passed": true
+    },
+    {
+      "check": "all PPTX external citation targets resolve to canonical source URLs",
+      "passed": true
+    },
+    {
+      "check": "finalizer receipt matches delivered PowerPoint",
+      "passed": true
+    },
+    {
+      "check": "PPTX package geometry font and native charts passed",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo preferred title metadata",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo expected page count",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 1 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 1 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 2 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 2 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 3 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 3 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 4 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 4 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 5 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 5",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 5",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 5",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 5 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 6 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 6 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 7 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 7 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 8 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo page 8 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo PDF link targets match canonical sources",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo embeds Arial only",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo PDF colors restricted to SMPT and neutrals",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck preferred title metadata",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck expected page count",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 1 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 1",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 1 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 2 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 2",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 2 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 3 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 3",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 3 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 4 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 4",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 4 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 5 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 5",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 5",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 5",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 5",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 5 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 6 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 6",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 6 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 7 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 7",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 7 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 8 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 8",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 8 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 9 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 9",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 9",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 9",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 9",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 9 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 10 contains cutoff",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 10",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 10",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 10",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck link rectangle within page 10",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck page 10 source links present",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck PDF link targets match canonical sources",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck embeds Arial only",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck PDF colors restricted to SMPT and neutrals",
+      "passed": true
+    },
+    {
+      "check": "four headline values retained in memo PDF",
+      "passed": true
+    }
+  ],
+  "pdfs": [
+    {
+      "file": "SMPT_FI001_Hemerdon_Financial_Memo.pdf",
+      "pages": 8,
+      "hyperlinkAnnotations": 44,
+      "renderedFontFamilies": [
+        "Arial"
+      ]
+    },
+    {
+      "file": "SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
+      "pages": 10,
+      "hyperlinkAnnotations": 33,
+      "renderedFontFamilies": [
+        "Arial"
+      ]
+    }
+  ],
+  "sha256": {
+    "SMPT_FI001_Hemerdon_Financial_Memo.docx": "3a95a23775deb50870ff7f1c39e3ebe671cf711119599475e1c0fbeed25dd038",
+    "SMPT_FI001_Hemerdon_Financial_Memo.pdf": "a90416a2142b364f2d5c51b3aa4bf2cc785bef0b4a7831988b8f104fa94714f8",
+    "SMPT_FI001_Hemerdon_Strategy_Deck.pptx": "96ccfbd7e5b03a8f5677e85c615ebf3ec8257c1e7d8d6f3fdaeb531a2562e909",
+    "SMPT_FI001_Hemerdon_Strategy_Deck.pdf": "fada7757cb56302c2e01aab19d88ef030c2015a55452c64f93a9ecf93a81f16d",
+    "SMPT_FI001_Hemerdon_Financial_Model.xlsx": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7",
+    "SMPT_FI001_Evidence_Appendix.md": "ca8dc61140e31a844d01c39fe382744d641d146612dac093608319111f6900de",
+    "SMPT_FI001_Model_Guide.md": "8b2e87f0cdb2d2e07f2f16bae79b1139f4e2c1ac10a5acca93591ec9409e0241",
+    "SMPT_FI001_Research_Abstract.md": "ff03b95cfe7bd73cdfe617738c3497bd782e2c35dbf52d7d13fa891b2b771451",
+    "publication-content.json": "ee2b4c400fa225debd6f29d9cd4149e0200b5f0cb3bde135370dcc342a707e8c",
+    "publication-exhibits.json": "3bceb18e1091ac48d35519e07eac5f86bc825900ddca585fbc5d24b9039e105d",
+    "model-validation-results.json": "3b94c2f5ed675827cf4695f416236fcf96213ea1565be2a6319ca0e57d9c4e70",
+    "deck-validation-results.json": "5ec269e5b03e84aefda60bb0b573edd8fd5a2711b1f031c1d2e4092df5bcb29f",
+    "SMPT_FI001_Publication_QC.md": "0bbfc4d99e2b5789c60c8873b32355650abba9fb084cf6468d114d4c5f915d2a",
+    "SMPT_FI001_Publication_Handoff.md": "f99730076766242c29ccd27d0273da1c8ae19adc8044c8c1c30586426cd76d9e"
+  },
+  "nativeExcelVerified": false,
+  "nativePowerPointVerified": false,
+  "visualReview": "Recorded separately in Publication QC; programmatic checks do not establish visual quality",
+  "linkCheckBoundary": "Embedded targets and PDF annotations tested against canonical source URLs. Live external host availability not re-audited."
+}

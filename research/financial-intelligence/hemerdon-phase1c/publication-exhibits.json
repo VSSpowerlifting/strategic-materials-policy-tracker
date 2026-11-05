@@ -1,0 +1,37 @@
+{
+  "cutoff": "2026-11-04",
+  "acceptedCommit": "772f2f4c02631f533a0a893849c9bedb8a6ff8ad",
+  "modelSHA256": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7",
+  "findings": {
+    "coreGrossGBP": 61000000,
+    "headlineGBP": 71000000,
+    "remainingMidpointGBP": 42500000,
+    "downsideIncrementGBP": 5750000.0,
+    "augustNoReceiptsStatedGBP": -2000000,
+    "augustNoReceiptsDetailGBP": -1000000,
+    "coreCoverageGBPPerMtu": 438.1492418839239
+  },
+  "sourceAliases": {
+    "S1": "hfs-tw-ar2026",
+    "S2": "hfs-tw-oct2026",
+    "S3": "src-nwf-tungsten-west-2026",
+    "S4": "hfs-nwf-terms",
+    "S5": "hfs-bridge-repaid",
+    "S6": "hfs-processing",
+    "S7": "hfs-elmet-rns",
+    "S8": "hfs-group-security-2026",
+    "S9": "hfs-tw-apr2026",
+    "S10": "hfs-tw-may2026"
+  },
+  "units": "GBP unless explicitly GBP million or GBP per mtu",
+  "interpretation": "Dated transaction structure and bounded scenarios; not a current cash or funding-gap forecast",
+  "workbookCells": {
+    "coreGrossGBP": "Funding!D10",
+    "headlineGBP": "Funding!D12",
+    "remainingMidpointGBP": "Funding!D16",
+    "downsideIncrementGBP": "Funding!D21 (Downside)",
+    "augustNoReceiptsStatedGBP": "August plan!D35 (receipts factor 0)",
+    "augustNoReceiptsDetailGBP": "August plan detailed uses, independently summed",
+    "coreCoverageGBPPerMtu": "Operating!D21 (Base)"
+  }
+}
