@@ -24,6 +24,14 @@ These commitments govern public descriptions of the project; they do not imply e
 
 ---
 
+## Applied Strategy research outputs
+
+SMPT's source-linked tracker is the **evidence infrastructure**, not a forecast engine or an investment-advice service. Its separate **Applied Strategy** research products use that evidence to evaluate corporate and institutional decisions with explicit assumptions, options, financial/operational scenarios and—when appropriate—editable Excel models and decision-ready presentations. Analytical projections and model outputs are never silently promoted into the factual tracker.
+
+The permanent [Four-Layer Analytical Framework & Applied Strategy Standard](docs/research/SMPT_APPLIED_STRATEGY_STANDARD.md) connects **government policy → capital allocation → industrial execution → commercial implications** and defines the evidence, PowerPoint, Excel-model and publication-review expectations. Broader source coverage is useful insofar as it enables better research and better decisions, not as a record-count goal.
+
+---
+
 ## Start here
 
 A short guided tour of the live site:
