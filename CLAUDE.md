@@ -14,6 +14,8 @@ government policy instruments affecting rare earths and adjacent strategic mater
 It is **not** a commodity-price model, an investment-recommendation service, a general
 news aggregator, or a home for unsupported geopolitical speculation.
 
+For **separate Applied Strategy and Financial Intelligence research deliverables** (not tracker seed data), use [the Four-Layer Analytical Framework & Applied Strategy Standard](docs/research/SMPT_APPLIED_STRATEGY_STANDARD.md). It governs research questions, consulting-style decks, spreadsheet modeling and decision recommendations while preserving all tracker data and methodology boundaries stated here.
+
 ## Headroom compression boundary (critical)
 
 Headroom/Ruflo may compress or summarize terminal output, build/lint logs, repetitive

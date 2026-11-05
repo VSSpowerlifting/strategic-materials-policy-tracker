@@ -1,0 +1,326 @@
+{
+  "researchCutoff": "2026-11-04",
+  "inputWorkbook": "/Users/benjaminyang/.codex/worktrees/1bd1/strategic-materials-policy-tracker/research/financial-intelligence/hemerdon-phase1a/hemerdon-financial-model.xlsx",
+  "inputSHA256": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7",
+  "evidenceSHA256": "bdef9d956c8004b4ccda492ada436f1a902d82b5d40cfd5122f23d6615e82d44",
+  "validatorSHA256": "418646446937f8cfb866b6067fd12a7aa4e3b54473ee72c458fa2a0bddf1dbf8",
+  "engine": "LibreOfficeDev 26.8.0.0.alpha0 2c87e51eeaa2b413ff4ae097b2705eea1995d8e5",
+  "nativeExcelVerified": false,
+  "structure": [
+    {
+      "formulaCount": 167,
+      "sourceInputCount": 158,
+      "checksTerminal": true
+    }
+  ],
+  "independentClaims": {
+    "nwfCoreGrossGBP": "61000000",
+    "nwfEnvelopeGBP": "71000000",
+    "remainingSpendGBP": [
+      "40000000",
+      "45000000"
+    ],
+    "downsideIncrementGBP": "5750000.00",
+    "augustCashNoReceiptsStatedTotalGBP": "-2000000",
+    "augustCashNoReceiptsRoundedDetailGBP": "-1000000"
+  },
+  "cachedFormulaDifferences": [],
+  "caseCount": 32,
+  "caseResults": [
+    {
+      "case": "base",
+      "passed": true,
+      "observed": {
+        "Funding!D10": 61000000,
+        "Funding!D16": 42500000,
+        "Funding!D23": 0,
+        "Operating!D20": 111500000,
+        "Operating!D21": 438.149241883924,
+        "August plan!D35": 13000000,
+        "Overview!D17": "Unavailable",
+        "Historical!E11": 25485511,
+        "Checks!D8": 0,
+        "Checks!D9": 0,
+        "Checks!D10": 0,
+        "Checks!D11": 0,
+        "Checks!D12": 0,
+        "Checks!D13": 0,
+        "Checks!D14": 0,
+        "Checks!D15": 0,
+        "Checks!D16": 0,
+        "Checks!D21": -1000000
+      }
+    },
+    {
+      "case": "upside",
+      "passed": true,
+      "observed": {
+        "Funding!D10": 61000000,
+        "Funding!D16": 40000000,
+        "Funding!D23": 0,
+        "Operating!D20": 109000000,
+        "Operating!D21": 428.325267850652,
+        "August plan!D35": 13000000,
+        "Overview!D17": "Unavailable",
+        "Historical!E11": 25485511,
+        "Checks!D8": 0,
+        "Checks!D9": 0,
+        "Checks!D10": 0,
+        "Checks!D11": 0,
+        "Checks!D12": 0,
+        "Checks!D13": 0,
+        "Checks!D14": 0,
+        "Checks!D15": 0,
+        "Checks!D16": 0,
+        "Checks!D21": -1000000
+      }
+    },
+    {
+      "case": "downside",
+      "passed": true,
+      "observed": {
+        "Funding!D10": 61000000,
+        "Funding!D16": 45000000,
+        "Funding!D23": 5750000,
+        "Operating!D20": 114000000,
+        "Operating!D21": 447.973215917196,
+        "August plan!D35": -2000000,
+        "Overview!D17": "Unavailable",
+        "Historical!E11": 25485511,
+        "Checks!D8": 0,
+        "Checks!D9": 0,
+        "Checks!D10": 0,
+        "Checks!D11": 0,
+        "Checks!D12": 0,
+        "Checks!D13": 0,
+        "Checks!D14": 0,
+        "Checks!D15": 0,
+        "Checks!D16": 0,
+        "Checks!D21": -1000000
+      }
+    },
+    {
+      "case": "changed_active_cost",
+      "passed": true,
+      "observed": {
+        "Overview!D13": 115000000
+      }
+    },
+    {
+      "case": "missing_selected_cost",
+      "passed": true,
+      "observed": {
+        "Operating!D20": "Unavailable",
+        "Overview!D14": "Unavailable"
+      }
+    },
+    {
+      "case": "unselected_blank",
+      "passed": true,
+      "observed": {
+        "Operating!D20": 111500000
+      }
+    },
+    {
+      "case": "missing_volume",
+      "passed": true,
+      "observed": {
+        "Operating!D21": "Unavailable",
+        "Checks!D20": "Invalid input"
+      }
+    },
+    {
+      "case": "zero_volume",
+      "passed": true,
+      "observed": {
+        "Operating!D21": "Unavailable",
+        "Checks!D20": "Invalid input"
+      }
+    },
+    {
+      "case": "full_royalty",
+      "passed": true,
+      "observed": {
+        "Operating!D21": "Unavailable"
+      }
+    },
+    {
+      "case": "zero_payability",
+      "passed": true,
+      "observed": {
+        "Operating!D21": "Unavailable"
+      }
+    },
+    {
+      "case": "zero_price",
+      "passed": true,
+      "observed": {
+        "Operating!D25": 0,
+        "Operating!D26": -111500000
+      }
+    },
+    {
+      "case": "positive_price",
+      "passed": true,
+      "observed": {
+        "Operating!D25": 127239750,
+        "Operating!D26": 15739750
+      }
+    },
+    {
+      "case": "negative_price",
+      "passed": true,
+      "observed": {
+        "Operating!D25": "Invalid price",
+        "Operating!D26": "Unavailable"
+      }
+    },
+    {
+      "case": "blank_price",
+      "passed": true,
+      "observed": {
+        "Operating!D25": "Unavailable"
+      }
+    },
+    {
+      "case": "negative_capex",
+      "passed": true,
+      "observed": {
+        "Funding!D23": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_capex",
+      "passed": true,
+      "observed": {
+        "Funding!D23": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_delay",
+      "passed": true,
+      "observed": {
+        "Funding!D23": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_rate",
+      "passed": true,
+      "observed": {
+        "Funding!D23": "Unavailable"
+      }
+    },
+    {
+      "case": "accordion_hypothetical",
+      "passed": true,
+      "observed": {
+        "Funding!D23": 0,
+        "Funding!D10": 61000000
+      }
+    },
+    {
+      "case": "accordion_over_ceiling",
+      "passed": true,
+      "observed": {
+        "Funding!D23": "Unavailable"
+      }
+    },
+    {
+      "case": "original_revenue_delayed",
+      "passed": true,
+      "observed": {
+        "August plan!D35": -2000000,
+        "August plan!D36": 15000000,
+        "August plan!D37": 2000000
+      }
+    },
+    {
+      "case": "original_loan_delayed",
+      "passed": true,
+      "observed": {
+        "August plan!D35": -12000000,
+        "Funding!D9": 25000000
+      }
+    },
+    {
+      "case": "bad_receipt_fraction",
+      "passed": true,
+      "observed": {
+        "August plan!D35": "Unavailable"
+      }
+    },
+    {
+      "case": "invalid_case",
+      "passed": true,
+      "observed": {
+        "Funding!D23": "Unavailable",
+        "Operating!D21": "Unavailable",
+        "Checks!D19": "Invalid input",
+        "Checks!D20": "Invalid input"
+      }
+    },
+    {
+      "case": "missing_source_nwf-equity",
+      "passed": true,
+      "observed": {
+        "Funding!D10": "Unavailable",
+        "Overview!D8": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_source_nwf-loan",
+      "passed": true,
+      "observed": {
+        "Funding!D10": "Unavailable",
+        "Funding!D23": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_source_nwf-accordion",
+      "passed": true,
+      "observed": {
+        "Funding!D12": "Unavailable",
+        "Funding!D23": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_source_remaining-low",
+      "passed": true,
+      "observed": {
+        "Funding!D16": "Unavailable",
+        "Funding!D17": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_source_opex-high",
+      "passed": true,
+      "observed": {
+        "Operating!D20": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_source_aug-cash-open",
+      "passed": true,
+      "observed": {
+        "August plan!D14": "Unavailable",
+        "August plan!D35": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_source_aug-revenue",
+      "passed": true,
+      "observed": {
+        "August plan!D35": "Unavailable"
+      }
+    },
+    {
+      "case": "missing_source_cash-2026",
+      "passed": true,
+      "observed": {
+        "Overview!D16": "Unavailable"
+      }
+    }
+  ],
+  "failureCount": 0,
+  "failures": []
+}

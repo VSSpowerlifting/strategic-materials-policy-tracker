@@ -1,0 +1,7 @@
+# Inside Tungsten West's £71 Million Restart Financing
+
+Government Capital, Project Expenditure and Refinancing Risk at Hemerdon
+
+The National Wealth Fund's investment changes the financing available for Hemerdon's restart through £36 million of equity and a £25 million core loan, with a further £10 million of uncommitted lending capacity accounting for the £71 million headline. Tungsten West reports a fully funded restart pathway and commissioning progress. Equity absorbs residual project risk without scheduled repayment, while the loan's announced 366-day tenor makes the timing of production, customer collections and refinancing consequential. This assessment reconstructs the instruments and reconciles October's £40–45 million remaining-project-spend guidance with two distinct sensitivities: a £5.75 million incremental cost and rate stress, and the deferral of £15 million of expected receipts in the original August plan. The latter produces approximately £2 million negative cash on published aggregate totals, or £1 million using rounded detail. These scenarios identify expenditure and timing exposures within dated disclosures; neither establishes current liquidity or repayment capacity. The next financial assessment depends on a reconciled cash and debt schedule and evidence that commissioning is converting into dependable collections.
+
+Research cutoff: 4 November 2026. Prepared for publication review; release requires separate authorization.

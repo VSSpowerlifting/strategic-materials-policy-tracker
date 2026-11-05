@@ -1,0 +1,78 @@
+{
+  "cutoff": "2026-11-04",
+  "issuerIndexSourceId": "hfs-issuer-rns-index",
+  "indexEntriesReturned": 176,
+  "latestListedAnnouncement": "2026-10-19",
+  "indexResponseSHA256": "d1d69e90e7a139be21ceaeaa4f61ac465248e2cb921589cc4fc6d29421a9e0fa",
+  "selectedFinancialAndCommissioningEntries": [
+    {
+      "date": "13/10/2026",
+      "headline": "Corporate Presentation",
+      "url": "https://cdn.irtools.co.uk/pdf/5a89fa6a-e710-45aa-8ae6-9a693da00af3.pdf"
+    },
+    {
+      "date": "01/10/2026",
+      "headline": "Exercise of Options & TVR",
+      "url": "https://cdn.irtools.co.uk/pdf/f9c0c2dd-c65f-4353-adb4-7444f931422b.pdf"
+    },
+    {
+      "date": "24/09/2026",
+      "headline": "Exercise of Options & TVR",
+      "url": "https://cdn.irtools.co.uk/pdf/8821ae8e-9d27-4632-ac8f-538f2274a1a0.pdf"
+    },
+    {
+      "date": "16/09/2026",
+      "headline": "Exercise of Options & TVR",
+      "url": "https://cdn.irtools.co.uk/pdf/bad3ab88-c3ab-48a0-96c3-04827000d01f.pdf"
+    },
+    {
+      "date": "03/09/2026",
+      "headline": "Financial Results for the Year Ended 31 March 2026",
+      "url": "https://cdn.irtools.co.uk/pdf/6621d13f-621a-4fef-8cf9-d8918ec66471.pdf"
+    },
+    {
+      "date": "28/08/2026",
+      "headline": "Short-Term Loan Repayment",
+      "url": "https://cdn.irtools.co.uk/pdf/70d5ae9c-4f38-4143-85cc-d8f3260d4af1.pdf"
+    },
+    {
+      "date": "25/08/2026",
+      "headline": "Strategic Investment by the UK Government NWF",
+      "url": "https://cdn.irtools.co.uk/pdf/af239483-9793-415d-be4a-59fc0df5ebdc.pdf"
+    },
+    {
+      "date": "08/07/2026",
+      "headline": "Project Commissioning Update",
+      "url": "https://irtools.co.uk/142/story/d0a98f3b-ec7e-4de8-ac4b-4ba7c0ebe6d1"
+    },
+    {
+      "date": "21/05/2026",
+      "headline": "Q1 2026 Project Funding and Debt Update",
+      "url": "https://irtools.co.uk/142/story/d5b40af9-e3e7-4943-8dc2-a521f445fbad"
+    },
+    {
+      "date": "08/04/2026",
+      "headline": "Q1 2026 Project Update",
+      "url": "https://irtools.co.uk/142/story/3207f7ec-faca-4010-9ad2-a18629fccb19"
+    }
+  ],
+  "latestExactAuditedCashStockLocated": "2026-03-31",
+  "newerExactCashStockLocated": false,
+  "limits": [
+    "Bounded review of issuer index, linked accounts/presentation, financing/option/commissioning releases and Companies House security filing; not an exhaustive guarantee of disclosure absence.",
+    "Search service Companies House cache omitted charge0005; fresh direct registry retrieval and original filing superseded the cache.",
+    "Index/filing publication dates unknown; access and document/filing/certificate dates retained separately."
+  ],
+  "documentRechecks": [
+    {
+      "sourceId": "hfs-tw-ar2026",
+      "downloadedSHA256": "e1230b17540f74780862ccea671f6fcac9061e45c2f5d80d80e747a09b10a247",
+      "matchesPhase1A": true
+    },
+    {
+      "sourceId": "hfs-tw-oct2026",
+      "downloadedSHA256": "2e5928a56c87fa296fcc36bb67fc89ba96b6ec9124b7de1fdf910b285720af93",
+      "matchesPhase1A": true
+    }
+  ]
+}
