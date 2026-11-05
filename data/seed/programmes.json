@@ -444,11 +444,12 @@
         "sourceId": "src-us-exim-project-vault-2026",
         "supports": [
           "name",
-          "kind"
+          "kind",
+          "administrators"
         ],
         "evidence": "explicit",
         "locator": "Programme announcement and structure",
-        "note": null
+        "note": "The source locates this reserve initiative in the United States and says it is independently governed. This evidence supports the US actor attribution, but does not identify its legal operating administrator; administeringOrgIds stays empty."
       }
     ],
     "notes": "EXIM is the public lender; the reserve is described as independently governed. Its actual operating administrator is not verified."
