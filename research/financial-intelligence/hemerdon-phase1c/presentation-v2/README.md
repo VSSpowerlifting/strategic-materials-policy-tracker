@@ -1,9 +1,9 @@
-# FI001 presentation v2 — human review candidate
+# FI001 presentation v2 — approved public edition
 
 **Inside Tungsten West's £71 Million Restart Financing**
 *Government Capital, Project Expenditure and Refinancing Risk at Hemerdon*
 
-Versioned successor under SMPT Presentation Standard v2. Research cutoff **4 November 2026**; revision **5 November 2026**. **18 slides: 14 main and four appendix.** This directory does not replace the released edition.
+Versioned successor under SMPT Presentation Standard v2. Research cutoff **4 November 2026**; revision **5 November 2026**. **18 slides: 14 main and four appendix.** **Author-approved for public release on 5 November 2026**; the original ten-slide edition remains separately preserved.
 
 | Review file | Purpose |
 |---|---|
@@ -54,4 +54,4 @@ FONTCONFIG_FILE=/path/to/LibreOffice.app/Contents/Resources/fontconfig/fonts.con
 
 Georgia Bold is used for assertions. Source Sans 3 was unavailable in the installed fonts, so body text uses the v2-approved **Arial fallback**. The final PDF embeds Georgia Bold and Arial regular/bold. No font binaries are included. Native PowerPoint/Excel opening, tagged-PDF accessibility certification, and human editorial approval are not claimed.
 
-**Agent assessment: READY FOR HUMAN PUBLICATION REVIEW.** Any replacement of live downloads needs a separately authorized release change.
+**Publication status:** Author-approved on 5 November 2026 for release under the documented limited-factual-use approach to source materials. Approval covers the exact v2 deck and PDF at production commit `2ac310a2c563c2b45a95cfb1584bb2889968f62e`. The publication QC and handoff retain their historical pre-release findings. The original model and ten-slide deck remain unchanged. Website distribution is tracked in the separate release PR.
