@@ -1,0 +1,86 @@
+{
+  "base": {
+    "range": "'09 Decision Dashboard'!C6:D14",
+    "majorDimension": "ROWS",
+    "values": [
+      [
+        "Required preserved/incremental ktpa",
+        198.7656649061074
+      ],
+      [
+        "Required fraction of facility",
+        0.7950626596244296
+      ],
+      [
+        "Required annual after-tax benefit $m",
+        839.0102235826776
+      ],
+      [
+        "BHP pro rata capital $m",
+        3363.7499999999995
+      ],
+      [
+        "Copper EBITDA shock $m",
+        491.05854142626913
+      ],
+      [
+        "Cash-use residual $m",
+        141.75143721440327
+      ],
+      [
+        "Isolated GS revision cash proxy $m",
+        1478.2949999999998
+      ],
+      [
+        "GS vs latest realised price",
+        -0.003520328388028071
+      ],
+      [
+        "Conditional recommendation",
+        "Stage"
+      ]
+    ]
+  },
+  "combinedStress": {
+    "range": "'09 Decision Dashboard'!C6:D14",
+    "majorDimension": "ROWS",
+    "values": [
+      [
+        "Required preserved/incremental ktpa",
+        416.4932802195037
+      ],
+      [
+        "Required fraction of facility",
+        1.6659731208780146
+      ],
+      [
+        "Required annual after-tax benefit $m",
+        1218.2428446420483
+      ],
+      [
+        "BHP pro rata capital $m",
+        4036.4999999999995
+      ],
+      [
+        "Copper EBITDA shock $m",
+        -3346.822708573731
+      ],
+      [
+        "Cash-use residual $m",
+        -1646.061578410594
+      ],
+      [
+        "Isolated GS revision cash proxy $m",
+        1478.2949999999998
+      ],
+      [
+        "GS vs latest realised price",
+        -0.003520328388028071
+      ],
+      [
+        "Conditional recommendation",
+        "Stage"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="520" height="205" preserveAspectRatio="xMinYMin meet" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="520" height="205"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-205)" style="clip-path: url(#clip)">
+		<g transform="">
+			<g transform="">
+				<g transform="">
+					<g transform="">
+						<path d="M 48,36 L 488,36 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 48,36 L 48,31 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145.777778,36 L 145.777778,31 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 242.968889,36 L 242.968889,31 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 341.333333,36 L 341.333333,31 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 488,36 L 488,31 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,48,31)">
+							<text x="-10.009765625" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">8,500</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,145.777778,31)">
+							<text x="-10.009765625" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">9,500</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,242.968889,31)">
+							<text x="-12.234375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">10,494</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,341.333333,31)">
+							<text x="-12.234375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">11,500</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,488,31)">
+							<text x="-12.234375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">13,000</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 48,36 L 48,176 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 48,36 L 43,36 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 48,67.111111 L 43,67.111111 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 48,98.222222 L 43,98.222222 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 48,129.333333 L 43,129.333333 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 48,160.444444 L 43,160.444444 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,43,36)">
+							<text x="-4.44921875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,43,67.111111)">
+							<text x="-13.34765625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">100</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,43,98.222222)">
+							<text x="-13.34765625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">200</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,43,129.333333)">
+							<text x="-13.34765625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">300</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,43,160.444444)">
+							<text x="-13.34765625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">400</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<polyline points="48 109.0141, 145.7778 97.78116, 242.9692 89.58652, 341.3333 83.24442, 488 76.15775" style="stroke: rgb(50%,49%,45%); stroke-linecap: round; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+					<polyline points="48 125.2395, 145.7778 109.0141, 242.9692 97.83821, 341.3333 89.54367, 488 80.61973" style="stroke: rgb(59%,45%,17%); stroke-linecap: round; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+					<polyline points="48 150.7364, 145.7778 125.2395, 242.9692 109.0938, 341.3333 97.78116, 488 86.19719" style="stroke: rgb(14%,14%,12%); stroke-linecap: round; stroke-width: 2; fill: None; fill-rule: evenodd;"/>
+				</g>
+			</g>
+			<text x="0" y="193" style="font-family: SMPT; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,386) scale(1,-1)">Required equivalent benefit (ktpa) by long-term copper price (US$/t)</text>
+			<text x="38" y="9" style="font-family: SMPT; font-size: 8px;fill: rgb(50%,49%,45%); stroke:none;" transform="translate(0,18) scale(1,-1)">$3,000/t burden</text>
+			<text x="203" y="9" style="font-family: SMPT; font-size: 8px;fill: rgb(59%,45%,17%); stroke:none;" transform="translate(0,18) scale(1,-1)">$4,000/t burden</text>
+			<text x="368" y="9" style="font-family: SMPT; font-size: 8px;fill: rgb(14%,14%,12%); stroke:none;" transform="translate(0,18) scale(1,-1)">$5,000/t burden</text>
+		</g>
+	</g>
+</svg>

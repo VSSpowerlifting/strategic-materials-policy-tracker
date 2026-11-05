@@ -1,0 +1,62 @@
+[
+  {
+    "case": 1,
+    "expected": 198.76566490610745,
+    "actual": 198.7656649061074,
+    "pass": true
+  },
+  {
+    "case": 2,
+    "expected": 143.42055103977398,
+    "actual": 143.42055103977393,
+    "pass": true
+  },
+  {
+    "case": 3,
+    "expected": 286.84110207954797,
+    "actual": 286.84110207954785,
+    "pass": true
+  },
+  {
+    "case": 4,
+    "expected": 218.6422313967182,
+    "actual": 218.64223139671816,
+    "pass": true
+  },
+  {
+    "case": 5,
+    "expected": 238.51879788732893,
+    "actual": 238.51879788732887,
+    "pass": true
+  },
+  {
+    "case": 6,
+    "expected": 416.4932802195037,
+    "actual": 416.4932802195037,
+    "pass": true
+  },
+  {
+    "input": "byproduct EBITDA change",
+    "before": 491.05854142626913,
+    "after": 591.0585414262691,
+    "pass": true
+  },
+  {
+    "input": "D24",
+    "before": 839.0102235826776,
+    "after": 922.9112459409456,
+    "pass": true
+  },
+  {
+    "input": "D23",
+    "before": 839.0102235826776,
+    "after": 922.9112459409455,
+    "pass": true
+  },
+  {
+    "input": "D25",
+    "before": 0.7950626596244296,
+    "after": 0.7227842360222086,
+    "pass": true
+  }
+]

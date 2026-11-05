@@ -29,6 +29,7 @@ const KIND_LABEL: Record<SearchKind, string> = {
   framing: "Framing claims",
   source: "Sources",
   watched: "Watchlist",
+  publication: "Research publications",
 };
 
 // Browse shortcuts expose the six most useful research entry points.

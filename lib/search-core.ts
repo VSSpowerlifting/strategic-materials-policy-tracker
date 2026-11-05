@@ -17,6 +17,7 @@ export const SEARCH_KINDS = [
   "framing",
   "source",
   "watched",
+  "publication",
 ] as const;
 export type SearchKind = (typeof SEARCH_KINDS)[number];
 

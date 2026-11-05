@@ -1,0 +1,406 @@
+{
+  "research_cutoff": "2026-11-05",
+  "baseline_commit": "649d5ab30c765e863bc237efbbff3e26dccc1531",
+  "files": [
+    {
+      "path": "docs/research/fi002-bhp-copper/.gitattributes",
+      "bytes": 312,
+      "sha256": "65a5690c1020618fd38e3ee9737c8213d67b62b1c7783b75f1ffd69ce46a44f1"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/.gitignore",
+      "bytes": 512,
+      "sha256": "c877b559ea5a7afd3e4260fbc49d03043847156695167b9069165fa506f243e8"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/README.md",
+      "bytes": 8189,
+      "sha256": "21d208e20e80cd178aba9833e9410e474c6dc7764b292717b55073fdfe99d097"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/Research_Charter.md",
+      "bytes": 2853,
+      "sha256": "605e82996f6d7c9e9c65ffb31fd6d9e5408dd982d74c8d04d32bebaa7fb5c6f3"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_BHP_Copper_Model.xlsx",
+      "bytes": 58564,
+      "sha256": "41d650cb9f2b2dd458ec60900f55cb2fed3c7bab887ae3ca195ade4aaa3d206e"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_BHP_Copper_Strategy_Deck.pdf",
+      "bytes": 201755,
+      "sha256": "fcd79b2deb38791077de961a6988280b36d9071da1db6980710547f14ef813e0"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_BHP_Copper_Strategy_Deck.pptx",
+      "bytes": 67707,
+      "sha256": "c2d9c1c8eb20ab81719e7cb0a957076fdb799a38043843d6382aeb6906a03725"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_BHP_Copper_Strategy_Memo.md",
+      "bytes": 19691,
+      "sha256": "fba99b1effad8fc04dcdf6583fc6a8493de09fdc472b111b8b7ee86ee3a0f288"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_BHP_Copper_Strategy_Memo.pdf",
+      "bytes": 76786,
+      "sha256": "170e467d4f4bc2d1db1db98c9d2ab568ead255d71acce342c7f1146e0acc6a84"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_Claim_Source_Matrix.csv",
+      "bytes": 1682,
+      "sha256": "7dfd7d9b9a00699f39ba44a17c4764ead230e73671e73359c64581652bd8297c"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_Evidence_Register.csv",
+      "bytes": 6445,
+      "sha256": "935dd83299b8cf6d87c26961429748221528a059cf72d739e8f599d8a391390d"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_Methodology.md",
+      "bytes": 9058,
+      "sha256": "55a6055b689942a86ffa6dd69bb37aa1d11bfc5d04b28875b294975bec99481b"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/SMPT_FI002_Publication_Summary.md",
+      "bytes": 4633,
+      "sha256": "a44bb850a4b283d0530b29766f9a37b840410b0b65a67ab72f704ebf67ec2d17"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/build.mjs",
+      "bytes": 36405,
+      "sha256": "6f480d95a2785eee2da408efe91a8a98c3a62c1adab6ba2ebd9a07511d28de42"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/inputs.json",
+      "bytes": 14862,
+      "sha256": "70458e39ed602a0f5f2f9bca40b3ebb7849eab7cb08052192dfe78512f58676a"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/native-recalculation.json",
+      "bytes": 1736,
+      "sha256": "dc59a4c690e10fbbfd88b93d70584a72aff166720cd98a47b5dd64226ddf0be4"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/prepare.py",
+      "bytes": 29440,
+      "sha256": "b96f50795b5d7f5ff9982b861bb7c8ce3d102830a44b44a759987e8be459c32c"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/presentation-validation.json",
+      "bytes": 6014,
+      "sha256": "f4822124c93a1a2fbbaac067a55489a1a32a9efffce519ba9907584f1e6fb8d2"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/render_documents.py",
+      "bytes": 23108,
+      "sha256": "f43d266e34582fa9846167b0a3113601d139e2e16f6702882f702aaffd7b1a38"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/archive/2026-11-04/slide-content.json",
+      "bytes": 1690,
+      "sha256": "b90a9be2c03b0f5c04080ddf6bd10c3d14520470605cb471c887ee404c642bc9"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/audit/SMPT_FI002_Native_Model_Readback.xlsx",
+      "bytes": 100670,
+      "sha256": "a5d32fc4f1a45016aeb806c263a26e4438a8ffd29a900935ca72927a89afcf6b"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/build.mjs",
+      "bytes": 31503,
+      "sha256": "204c4da301448acc264b1ab6ebfb54f655fc1eabd6ccb0af864e2a3e80ab55fb"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/executive-slide-content.json",
+      "bytes": 15078,
+      "sha256": "2168f994e18e8c55b567914af672028d5ed40c6f82e59de70484d2a9992959b7"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/executive_brief.py",
+      "bytes": 6977,
+      "sha256": "37563c4303ccf4e31629c537868750e7134d531e76bd22b3ce9ea61daf01d833"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/executive_deck.mjs",
+      "bytes": 15945,
+      "sha256": "b1af360a4a539143789f93e5b7f790b50fee89046a3b2f36a33afbf521d34de3"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/export_deck_pdf.py",
+      "bytes": 1400,
+      "sha256": "5f36d99b59c7e97cb8895928f06a06dc0a66985a69c2a8a70a9347db641dbf0e"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/formula-error-scan.json",
+      "bytes": 380,
+      "sha256": "fa14be5dbd7f6e38ac92182053c1b27cb513f3f8e339ffe42f96409f74cdd7ca"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/formula-manifest.json",
+      "bytes": 46548,
+      "sha256": "a93ac744ebfc33dbafc4ee4225c44b68593077cbddd8bdffcde2203f74bc6595"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/inputs.json",
+      "bytes": 24753,
+      "sha256": "5ba92d9722cc4cc49cd74b16a5ef875b050b2218f5c4e9c839de2b78ef27ef88"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/model-tests.json",
+      "bytes": 1131,
+      "sha256": "3732fd5578454ed1cac2b9408f8bc96a43cab2e7dcb34a0bb2d591b06a96ee5a"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/native-render-views.json",
+      "bytes": 759,
+      "sha256": "465a675e7b0a555d2dff37defcdb62062377e425651932b19de655099aee8c6e"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/native-v2-checks.json",
+      "bytes": 2171,
+      "sha256": "d62e0764957377ef8d4965a42a7b67e41c35216606a68941e2da450065f7fef4"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/native_update.py",
+      "bytes": 3426,
+      "sha256": "d08cd8552a2d4236532183fdf45ce99d29c095ae6419e2e274525eeb98510dcf"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/package.py",
+      "bytes": 1271,
+      "sha256": "ee18a35424eb2b02248888f2d375e820130381f149b8ce049684eab2a1de1b9f"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/presentation-v3-validation.json",
+      "bytes": 10433,
+      "sha256": "85bf237f050fed6399252b824c47dd70de086d68e636ff817708e9f9aa4e7706"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/presentation-v5-validation.json",
+      "bytes": 10617,
+      "sha256": "2464d0f438cbcce260118e59745a6df03c545815d449aded28e03e628f4d9ee1"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/publication-data.json",
+      "bytes": 24753,
+      "sha256": "5ba92d9722cc4cc49cd74b16a5ef875b050b2218f5c4e9c839de2b78ef27ef88"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/readback.mjs",
+      "bytes": 1001,
+      "sha256": "5fdcf7710da44041ac7fba0c332cc71f514974c3da6a801960c1046bdc7acbfa"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/report-content.json",
+      "bytes": 29265,
+      "sha256": "3fa1ab6e96661887ca6992863f267ab515b0d37d89bd2deb338a24778e6c1fe4"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/report-narrative.json",
+      "bytes": 29266,
+      "sha256": "bba411ce75da246b5d1b61c66a5f98c112f0c41cf59b711168b86baca33870ff"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/report.py",
+      "bytes": 16907,
+      "sha256": "c5b512e63d1e11f4032a145d68e88c0d0f6063849111507499b29dad80070872"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/research_v2.py",
+      "bytes": 7988,
+      "sha256": "42b13079262a4036bd06774fb193bb9fc56b80c278a104aa157874eb3f1b94b5"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/verification-results.json",
+      "bytes": 10412,
+      "sha256": "a9b53f3e0bc9c7e1e4630425be1241d7cddf776392863882a3740a4fd5f548b1"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/verify.py",
+      "bytes": 13819,
+      "sha256": "4f88ac80e5b364d533a66c8f97c3eb6ffcf9add2aab63cbfdd7db2ce6475d03c"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/build/write_support.py",
+      "bytes": 22864,
+      "sha256": "d92927195259067a12ee6251589d2947725257f39d53317c9f5d9c681c13e43e"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Memo.md",
+      "bytes": 4747,
+      "sha256": "44f92be28b8f96ffeee56e765a3846ca460a16220fd06c362f10d731ed7e51d0"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Memo.pdf",
+      "bytes": 58276,
+      "sha256": "cd692a2a4aafb8bb774ab9b8db9b68f5df025c79b0a782ffeb9317525592922e"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Model.xlsx",
+      "bytes": 61260,
+      "sha256": "84f4348a54d9e79f19dccc14338ebea7277c066a109f3bb248f02891a8e5afa1"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Research_Report.html",
+      "bytes": 87179,
+      "sha256": "930fabc26354c7ed265b332364c3a4f22d1e511208994b342f8a8509d307e59c"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Research_Report.md",
+      "bytes": 39636,
+      "sha256": "5a1b7ab0fff6a198a3f034fe5852980306b95112ae83f2cc03bc02b724fbe506"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Research_Report.pdf",
+      "bytes": 109797,
+      "sha256": "878c2ec38f74480948d59e48ec58106fd756fd8a5d6586e6acb2e4f3491d25f0"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Strategy_Deck.pdf",
+      "bytes": 372757,
+      "sha256": "ebbe3739b4218993a8c1e879f827e430a334b302a271e2b4a2bc4632ab28e28e"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Strategy_Deck.pptx",
+      "bytes": 78466,
+      "sha256": "7fab17ac8e729c9e9b8914f92060d513b2e7275eef95d3feec015e12390b6efb"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Claim_Source_Matrix.csv",
+      "bytes": 1806,
+      "sha256": "61fd8aaeabda7923f6ab25b79e4b46c30fc32e4eae361b3495ccbd0ba1f09808"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Delivery_Index.md",
+      "bytes": 6085,
+      "sha256": "3883f1b8b7e7130a20f8cd8b145c369389a552428e59d424e4695a18d0c8f75f"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Evidence_Register.csv",
+      "bytes": 9325,
+      "sha256": "8c82a947f1258d12cf6f9a2cb12c4feb85c59fd57cd96929ba0e77ffd854498d"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Methodology.md",
+      "bytes": 11682,
+      "sha256": "f5177d98ec0be2eea5f9a0829d1a566ce2fcc26a7a0fcc8b8e1515a08aa88a22"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Price_Cost_Frontier.csv",
+      "bytes": 1334,
+      "sha256": "75d7dfad958998b2cb6821060fba41a948d4478927b4c7ce724001866b333f30"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Price_Sensitivity.csv",
+      "bytes": 277,
+      "sha256": "a69fd7942b8abb24a1e72d9d6686de8cf5ceba4722ac3240e0d1e3f3017a332c"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Publication_Summary.md",
+      "bytes": 4862,
+      "sha256": "ff462bea36075c9bbdf4e70ec3434361f562438108422ba63ec5ad285bfb99a4"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Quality_Review.md",
+      "bytes": 22639,
+      "sha256": "1369ecffe4837ce906852672c0900f7cc69f69cfa8a9b857b393d47f39857405"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Reconciliation.md",
+      "bytes": 3911,
+      "sha256": "8926aba2ac53495ca28d841eb7ae33be58f24aa9f16c69ee6459d672cc370a13"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Replacement_Margin_Frontier.csv",
+      "bytes": 199,
+      "sha256": "67260128039cab839bd528b8eb59a33e73ad832681ace42ef8dd8d177649b72d"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Threshold_Sensitivities.csv",
+      "bytes": 773,
+      "sha256": "f5fcbf8f59eda2478019e5aed86cdf7ca26789f12c9cf9072ce5e6d28f4b8149"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Verification_Results.json",
+      "bytes": 10412,
+      "sha256": "a9b53f3e0bc9c7e1e4630425be1241d7cddf776392863882a3740a4fd5f548b1"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/SMPT_FI002_Website_Handoff.md",
+      "bytes": 1668,
+      "sha256": "f1cbecc4cbbae99ebb35248089ab511676b241faedcaef4e0f8feb723b5b6219"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/figures/exhibit-02.svg",
+      "bytes": 5195,
+      "sha256": "3834f5c5dd26603e809640f3fa9a30d20afd6a51ebad0bb1f5bd84c820662296"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/figures/exhibit-03.svg",
+      "bytes": 5942,
+      "sha256": "605ff951954b7dc7906ea2028411afd79e79bd8c76a4570ec807ccfede4b0ec3"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/figures/exhibit-04.svg",
+      "bytes": 6238,
+      "sha256": "8e4495007a97021965748fd1200f9e80e66e8b7f48d8bcf3a823edf216a24b7d"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/figures/exhibit-05.svg",
+      "bytes": 6653,
+      "sha256": "63145d8cf88374541195b6836a2fe13733f72b9f23fd7936d523f514d177e15b"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/figures/exhibit-09.svg",
+      "bytes": 5933,
+      "sha256": "8db1045d11b590ac1010827a553998cef146439115d966a12914edf0bc8e7313"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/figures/exhibit-10.svg",
+      "bytes": 6744,
+      "sha256": "18482fab0ae380951d8c408ef0e468780a97104639ec37a96bad2f457b708e4b"
+    },
+    {
+      "path": "docs/research/fi002-bhp-copper/output/figures/exhibit-11.svg",
+      "bytes": 7896,
+      "sha256": "695ea64ed361a40f3c2ce7d1f5d70ba193e177b85ee453f6315592cbf52dd54e"
+    },
+    {
+      "path": "research/fi002/README.md",
+      "bytes": 4547,
+      "sha256": "39be89df15c2bd5ccf39394f3c39236eaed9829b7a7683325ca9d741b8f4de14"
+    },
+    {
+      "path": "research/fi002/SMPT_FI002_Evidence_Register_2026-11-05.csv",
+      "bytes": 12913,
+      "sha256": "44011e50e1b1c04c7506c67f8546b292e7174181e05ad135b98842b4a32abd02"
+    },
+    {
+      "path": "research/fi002/SMPT_FI002_Financial_Model_Specification_2026-11-05.md",
+      "bytes": 23029,
+      "sha256": "ec50ad607b91c467d0e973b8e27470100622a9c6dd1baf63d5d3e82b99a0b758"
+    },
+    {
+      "path": "research/fi002/SMPT_FI002_Independent_Quality_Review_2026-11-05.md",
+      "bytes": 17409,
+      "sha256": "be654bd57dedfe9fe9b8365fa22ad356da7b35f4adaeeb6920fbe39ff928fff0"
+    },
+    {
+      "path": "research/fi002/SMPT_FI002_Price_Sensitivity_Illustrations_2026-11-05.csv",
+      "bytes": 815,
+      "sha256": "1399924e6d096e1ba34bcddce3bbf078c7f9237798a69687e80799b066663c5b"
+    },
+    {
+      "path": "research/fi002/SMPT_FI002_Reproducibility_Audit_2026-11-05.py",
+      "bytes": 4780,
+      "sha256": "23704a968a102ce3408aac8e90630402b4d9c10113b8c7e30d754e0e3ad86625"
+    },
+    {
+      "path": "research/fi002/SMPT_FI002_Research_Continuation_2026-11-05.md",
+      "bytes": 24941,
+      "sha256": "880c8015be946fff84cb4cb90c6037669bb548ef1e2091291715d91473801e78"
+    }
+  ]
+}

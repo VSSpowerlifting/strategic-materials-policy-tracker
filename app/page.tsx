@@ -95,7 +95,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="mt-4 font-display text-sm text-muted">
-              New research: <Link href="/research/hemerdon-financing" className="text-foreground underline underline-offset-4 hover:text-accent">Inside Tungsten West&apos;s £71 Million Restart Financing — Financial Intelligence 001</Link>.
+              New research: <Link href="/research/escondida-copper" className="text-foreground underline underline-offset-4 hover:text-accent">Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision — Financial Intelligence 002</Link>.
             </p>
             <p className="mt-6 font-display text-xs text-muted">
               Research by <Link href="/about" className="underline underline-offset-4">Benjamin Yang</Link>.

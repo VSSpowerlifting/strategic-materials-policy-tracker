@@ -1,0 +1,103 @@
+{
+  "edition": "SMPT FI002 public research edition",
+  "researchCutoff": "2026-11-05",
+  "approvedResearchCommit": "1c4288916abe8fa1df9f906c87a4278647e6adcb",
+  "files": {
+    "citation.bib": {
+      "bytes": 392,
+      "sha256": "fe93062b459fcdaadce940b54140c0f1449a31b65327e51355b131b4e3ad7f61"
+    },
+    "claim-source-matrix.csv": {
+      "bytes": 1806,
+      "sha256": "61fd8aaeabda7923f6ab25b79e4b46c30fc32e4eae361b3495ccbd0ba1f09808"
+    },
+    "evidence-register.csv": {
+      "bytes": 9325,
+      "sha256": "8c82a947f1258d12cf6f9a2cb12c4feb85c59fd57cd96929ba0e77ffd854498d"
+    },
+    "executive-brief.pdf": {
+      "bytes": 58276,
+      "sha256": "cd692a2a4aafb8bb774ab9b8db9b68f5df025c79b0a782ffeb9317525592922e"
+    },
+    "executive-slides.pdf": {
+      "bytes": 372757,
+      "sha256": "ebbe3739b4218993a8c1e879f827e430a334b302a271e2b4a2bc4632ab28e28e"
+    },
+    "executive-slides.pptx": {
+      "bytes": 78423,
+      "sha256": "b67e7c0eca736b4b5958615e53609c5de9ed128c8d4de0372cbe9d4b57e143ea"
+    },
+    "figures/exhibit-02.svg": {
+      "bytes": 5195,
+      "sha256": "3834f5c5dd26603e809640f3fa9a30d20afd6a51ebad0bb1f5bd84c820662296"
+    },
+    "figures/exhibit-03.svg": {
+      "bytes": 5942,
+      "sha256": "605ff951954b7dc7906ea2028411afd79e79bd8c76a4570ec807ccfede4b0ec3"
+    },
+    "figures/exhibit-04.svg": {
+      "bytes": 6238,
+      "sha256": "8e4495007a97021965748fd1200f9e80e66e8b7f48d8bcf3a823edf216a24b7d"
+    },
+    "figures/exhibit-05.svg": {
+      "bytes": 6653,
+      "sha256": "63145d8cf88374541195b6836a2fe13733f72b9f23fd7936d523f514d177e15b"
+    },
+    "figures/exhibit-09.svg": {
+      "bytes": 5933,
+      "sha256": "8db1045d11b590ac1010827a553998cef146439115d966a12914edf0bc8e7313"
+    },
+    "figures/exhibit-10.svg": {
+      "bytes": 6744,
+      "sha256": "18482fab0ae380951d8c408ef0e468780a97104639ec37a96bad2f457b708e4b"
+    },
+    "figures/exhibit-11.svg": {
+      "bytes": 7896,
+      "sha256": "695ea64ed361a40f3c2ce7d1f5d70ba193e177b85ee453f6315592cbf52dd54e"
+    },
+    "methodology.md": {
+      "bytes": 11127,
+      "sha256": "f182c2b483a68a5ef2669d7eb9b551f433f34616778d87160fdb22515abad8d6"
+    },
+    "model.xlsx": {
+      "bytes": 61260,
+      "sha256": "84f4348a54d9e79f19dccc14338ebea7277c066a109f3bb248f02891a8e5afa1"
+    },
+    "price-cost-frontier.csv": {
+      "bytes": 1334,
+      "sha256": "75d7dfad958998b2cb6821060fba41a948d4478927b4c7ce724001866b333f30"
+    },
+    "price-sensitivity.csv": {
+      "bytes": 277,
+      "sha256": "a69fd7942b8abb24a1e72d9d6686de8cf5ceba4722ac3240e0d1e3f3017a332c"
+    },
+    "replacement-margin-frontier.csv": {
+      "bytes": 199,
+      "sha256": "67260128039cab839bd528b8eb59a33e73ad832681ace42ef8dd8d177649b72d"
+    },
+    "report-cover.png": {
+      "bytes": 215984,
+      "sha256": "44333b483102e9f1c3c9f8c6b4411f2c630cdb0d05d43ef9165ededfe5d24c7b"
+    },
+    "report.html": {
+      "bytes": 88774,
+      "sha256": "727fdff83e1cc2a425765db4034beb935e9977b7cd3b80f6aed4f3bfe11e515e"
+    },
+    "report.md": {
+      "bytes": 39627,
+      "sha256": "6fe10139f1cc670539b1a262fdb6443499a92309eb763fb6ecfd1f37fa1b135a"
+    },
+    "report.pdf": {
+      "bytes": 109673,
+      "sha256": "06f4fae2aaaa91b3167d6a0f8b2006d00fd3dcb222e8a098386cfc018b689e11"
+    },
+    "social.png": {
+      "bytes": 49200,
+      "sha256": "198fdade7187e953cdfcdc8822733b891738395cff55ed606713b2759bbb0f10"
+    },
+    "threshold-sensitivities.csv": {
+      "bytes": 773,
+      "sha256": "f5fcbf8f59eda2478019e5aed86cdf7ca26789f12c9cf9072ce5e6d28f4b8149"
+    }
+  }
+}

@@ -3,7 +3,9 @@
   "git": {
     "deploymentEnabled": {
       "main": true,
-      "*": false
+      "*": false,
+      "codex/fi002-website-release-candidate": false
     }
-  }
+  },
+  "ignoreCommand": "node scripts/fi002-ignore-preview.mjs"
 }

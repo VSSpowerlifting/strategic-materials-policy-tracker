@@ -1,0 +1,264 @@
+{
+  "approvedResearchCommit": "1c4288916abe8fa1df9f906c87a4278647e6adcb",
+  "checks": [
+    {
+      "check": "SHA256: citation.bib",
+      "passed": true
+    },
+    {
+      "check": "SHA256: claim-source-matrix.csv",
+      "passed": true
+    },
+    {
+      "check": "SHA256: evidence-register.csv",
+      "passed": true
+    },
+    {
+      "check": "SHA256: executive-brief.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256: executive-slides.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256: executive-slides.pptx",
+      "passed": true
+    },
+    {
+      "check": "SHA256: figures/exhibit-02.svg",
+      "passed": true
+    },
+    {
+      "check": "SHA256: figures/exhibit-03.svg",
+      "passed": true
+    },
+    {
+      "check": "SHA256: figures/exhibit-04.svg",
+      "passed": true
+    },
+    {
+      "check": "SHA256: figures/exhibit-05.svg",
+      "passed": true
+    },
+    {
+      "check": "SHA256: figures/exhibit-09.svg",
+      "passed": true
+    },
+    {
+      "check": "SHA256: figures/exhibit-10.svg",
+      "passed": true
+    },
+    {
+      "check": "SHA256: figures/exhibit-11.svg",
+      "passed": true
+    },
+    {
+      "check": "SHA256: methodology.md",
+      "passed": true
+    },
+    {
+      "check": "SHA256: model.xlsx",
+      "passed": true
+    },
+    {
+      "check": "SHA256: price-cost-frontier.csv",
+      "passed": true
+    },
+    {
+      "check": "SHA256: price-sensitivity.csv",
+      "passed": true
+    },
+    {
+      "check": "SHA256: replacement-margin-frontier.csv",
+      "passed": true
+    },
+    {
+      "check": "SHA256: report-cover.png",
+      "passed": true
+    },
+    {
+      "check": "SHA256: report.html",
+      "passed": true
+    },
+    {
+      "check": "SHA256: report.md",
+      "passed": true
+    },
+    {
+      "check": "SHA256: report.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256: social.png",
+      "passed": true
+    },
+    {
+      "check": "SHA256: threshold-sensitivities.csv",
+      "passed": true
+    },
+    {
+      "check": "ZIP allowlist",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: citation.bib",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: claim-source-matrix.csv",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: evidence-register.csv",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: executive-brief.pdf",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: executive-slides.pdf",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: executive-slides.pptx",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: figures/exhibit-02.svg",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: figures/exhibit-03.svg",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: figures/exhibit-04.svg",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: figures/exhibit-05.svg",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: figures/exhibit-09.svg",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: figures/exhibit-10.svg",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: figures/exhibit-11.svg",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: methodology.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: model.xlsx",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: price-cost-frontier.csv",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: price-sensitivity.csv",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: replacement-margin-frontier.csv",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: report-cover.png",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: report.html",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: report.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: report.pdf",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: social.png",
+      "passed": true
+    },
+    {
+      "check": "ZIP hash: threshold-sensitivities.csv",
+      "passed": true
+    },
+    {
+      "check": "report.pdf page count",
+      "passed": true
+    },
+    {
+      "check": "report.pdf link count",
+      "passed": true
+    },
+    {
+      "check": "report.pdf no private link",
+      "passed": true
+    },
+    {
+      "check": "report.pdf metadata",
+      "passed": true
+    },
+    {
+      "check": "executive-slides.pdf page count",
+      "passed": true
+    },
+    {
+      "check": "executive-slides.pdf link count",
+      "passed": true
+    },
+    {
+      "check": "executive-slides.pdf no private link",
+      "passed": true
+    },
+    {
+      "check": "executive-slides.pdf metadata",
+      "passed": true
+    },
+    {
+      "check": "executive-brief.pdf page count",
+      "passed": true
+    },
+    {
+      "check": "executive-brief.pdf link count",
+      "passed": true
+    },
+    {
+      "check": "executive-brief.pdf no private link",
+      "passed": true
+    },
+    {
+      "check": "executive-brief.pdf metadata",
+      "passed": true
+    },
+    {
+      "check": "41 approved narrative paragraphs preserved verbatim",
+      "passed": true
+    },
+    {
+      "check": "7 original vector exhibits preserved",
+      "passed": true
+    },
+    {
+      "check": "PPTX only delivery note changed",
+      "passed": true
+    }
+  ],
+  "passed": 64,
+  "failed": 0,
+  "publicZipSha256": "8f6cedea418c90ab6b1db3c5492caa28acab30be26fe9b99e142aa7642f03717"
+}

@@ -1,0 +1,7 @@
+# Research exports are binary; preserve standard CSV CRLF without false whitespace findings.
+*.pdf binary
+*.pptx binary
+*.xlsx binary
+*.csv -text whitespace=cr-at-eol
+# Keep the original prototype source byte-for-byte, including its existing trailing space.
+archive/2026-11-04/build.mjs whitespace=-blank-at-eol

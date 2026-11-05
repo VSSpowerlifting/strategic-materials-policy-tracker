@@ -1,0 +1,46 @@
+[
+  {
+    "sheet": "00 Model Guide",
+    "range": "C2:J26"
+  },
+  {
+    "sheet": "01 Source Register",
+    "range": "C5:F9"
+  },
+  {
+    "sheet": "02 Historical Financials",
+    "range": "C2:I29"
+  },
+  {
+    "sheet": "03 Market Scenarios",
+    "range": "C2:I29"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "range": "C38:F55"
+  },
+  {
+    "sheet": "05 Capital Expenditure",
+    "range": "C2:I29"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "range": "C2:H21"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "range": "C2:I29"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "range": "C33:K41"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "range": "C2:F20"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "range": "C2:I29"
+  }
+]

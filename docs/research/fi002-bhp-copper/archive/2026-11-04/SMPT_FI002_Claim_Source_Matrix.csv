@@ -1,0 +1,13 @@
+claim_id,claim,source_ids,locator,status
+C01,"2027 $15,400/t is a publicly reported GS forecast, up from $13,800/t",S08; S09,Forecast tables,Secondary corroborated; original unavailable
+C02,"FY26 copper underlying EBITDA $18,187m; group $32,947m",S03,"PDF pp.36,136",Primary verified
+C03,54% contribution excludes Group and unallocated items,S03,PDF p.36 footnote 3,Primary verified; 54.2% recalculated
+C04,"Escondida capex $5.4-6.3bn nominal, output 230-270ktpa facility total",S01,"Slides 28,36,40",Management guidance; incremental benefit undisclosed
+C05,16-18% IRR uses UBS May 2026 long-term $4.76/lb copper,S01,"Slide 36, slide 28 footnote 3",Guidance verified; IRR not replicated
+C06,"$0.8bn gross pre-commitment approved, not full FID",S05; S01,Quarter pp.1-2; presentation slide28,Primary verified; not added to approximate $0.5bn BHP share
+C07,"World Bank 2027 copper forecast $13,000/t",S12,Table1 PDF p.21,Primary forecast verified
+C08,Base required production benefit 198.8ktpa,SMPT assumptions; S01,Model 06 and Methodology,Derived investment screen; not actual project forecast
+C09,GS revision gross annualised sales exposure $2.39bn,S05 volumes plus SMPT 95% sales factor,Model 04,"Derived; mixed calendar/fiscal sensitivity, not forecast"
+C10,Historical FCF = operating plus signed investing CF,S03,PDF p.37,"9767 = 21778 - 12011, capex already included"
+C11,"BHP controls and fully consolidates Escondida, with 42.5% NCI",S03; S06,PDF p.163; asset page,Primary verified; economic pro rata is separate
+C12,"Stage engineering and commitment, preserve replacement readiness",SMPT analysis,Memo pp.5-6; model thresholds,Conditional analyst recommendation

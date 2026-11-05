@@ -72,7 +72,7 @@ test("every result href points at a real route shape", () => {
   for (const d of docs)
     assert.match(
       d.href,
-      /^\/(events|capital|controls|projects|organizations|programmes|materials|actors|sources|watchlist)(\/|#)/,
+      /^\/(events|capital|controls|projects|organizations|programmes|materials|actors|sources|watchlist|research)(\/|#)/,
       `${d.id}: suspicious href ${d.href}`,
     );
 });
