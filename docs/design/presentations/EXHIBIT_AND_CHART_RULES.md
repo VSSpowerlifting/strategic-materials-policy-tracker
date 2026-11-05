@@ -2,6 +2,8 @@
 
 Version 2.0 · 5 November 2026 · [Return to presentation index](README.md)
 
+AI-assisted quantitative charts and graphics must also pass the [Editorial Authenticity & Visual Integrity Standard](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md), particularly the original-data, evidence-status, editable-figure and visual-purpose checks.
+
 ## Chart selection follows the analytical question
 
 | Question | Preferred exhibit | Guardrails |
