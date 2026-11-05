@@ -46,7 +46,7 @@ Base assumptions:
 - Gross nominal capital: $5,850m, midpoint of the $5.4–6.3bn issuer range.
 - Five equal year-end $1,170m draws in 2027–31. This is not a disclosed expenditure profile.
 - Valuation origin: end-2026; discount rate: 10% nominal, an SMPT assumption.
-- Twenty full benefit years at year ends 2032–51, no ramp-up or terminal value.
+- Twenty full benefit years at year ends 2032–51, no ramp-up or terminal value. Copper price, all-in net burden and resulting annual contribution are held flat in nominal dollars. This levelized convention is not a real-price forecast with inflation escalation; a full appraisal would specify nominal or real annual schedules consistently.
 - Long-term copper: $4.76/lb × unit conversion = $10,494.00368/t.
 - Assumed levelized all-in net burden: $4,000/t. This is not reported C1 cost or an engineering estimate.
 - Assumed cash-tax wedge: 35%, not a fiscal model or statutory rate forecast.
@@ -69,7 +69,7 @@ The full capital budget remains in the screen. Readiness approval does not estab
 
 The six selectable scenarios remain Base, Upside, Downside, Delay, Overrun and Combined stress. The near-term price selector is independent from the long-term screen price. They are deterministic tests, not probabilities or forecasts. Thresholds are approximately 199, 143, 287, 219, 239 and 416ktpa respectively. Combined stress uses $8,500/t long-term copper, 20% more capital and two years of benefit deferral with capital timing held fixed.
 
-The additional screen table independently varies rate, duration, first benefit, burden, price and capital. Ten benefit years from 2034 produces 333.232ktpa at otherwise unchanged assumptions. That does not claim a ten-year mine life. BHP's disclosed FY2034–43 averaging window does not validate the base's twenty flat benefit years. The price-cost frontier uses a numeric price axis with actual unequal price intervals.
+The additional screen table independently varies rate, duration, first benefit, burden, price and capital. Ten benefit years from 2032 produces 275.398ktpa; moving those ten years to 2034 produces 333.232ktpa at otherwise unchanged assumptions. The latter comparison combines shorter duration and a later start, rather than isolating duration alone. The fiscal-year facility averaging window is not an exact calendar-year cash-flow schedule. That does not claim a ten-year mine life. BHP's disclosed FY2034–43 averaging window does not validate the base's twenty flat benefit years. The price-cost frontier uses a numeric price axis with actual unequal price intervals.
 
 An option illustration shifts both capital and benefits. With the same shift, the discount factors cancel from the required annual benefit apart from an assumed capital premium. A 10% acceleration premium or 5% staging escalation therefore produces a 10% or 5% increase mechanically. These identities do not rank real alternatives. The illustrative 125ktpa lost-year cash value is approximately $528m at the base assumed margin; it is not an observed Los Colorados decline forecast.
 
@@ -81,6 +81,6 @@ BHP's $12bn FY2027–31 and $24bn FY2032–35 Copper FCF projections are cumulat
 
 ## Reproduction and software
 
-Run `research_v2.py`, then `build.mjs` (artifact-tool workbook authoring), then `report.py`, `executive_brief.py` and `executive_deck.mjs`. Convert the final PPTX to PDF with LibreOffice. `verify.py` independently sums annual cash flows, compares cached formulas in the local and native-exported workbooks and inspects PDF/PPTX structure. `readback.mjs` renders bounded views from an exported native Sheet. The finalized PowerPoint contains native tables and charts with embedded editable data; chart values use six decimal places to preserve Excel portability. The report uses original vector exhibits.
+Run `research_v2.py`, then `build.mjs` (artifact-tool workbook authoring), then `report.py`, `executive_brief.py` and `executive_deck.mjs`. Convert the final PPTX to PDF with LibreOffice. `verify.py` independently sums annual cash flows, compares cached formulas in the local and native-exported workbooks and inspects PDF/PPTX structure. `readback.mjs` renders bounded views from an exported native Sheet. The finalized PowerPoint contains native tables and charts with embedded editable data; chart values use six decimal places to preserve Excel portability. The report uses original vector exhibits. `build/report-narrative.json` is the canonical editorial narrative; `report.py` generates the accepted PDF, Markdown, HTML, captions and exhibits from it. Editorial refinement preserves the model, calculation CSVs and brief without changes. The presentation retains its numbers and gains a bounded format/editorial revision under Presentation Standard v2; `export_deck_pdf.py` supplies system font directories to LibreOffice to avoid silent substitution.
 
 See the repository README for runtime commands and the QC record for exact test results, visual checks and software limits. Legacy prototype builders and conclusions are archived and are not the current regeneration path.

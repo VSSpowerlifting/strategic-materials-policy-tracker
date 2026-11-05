@@ -1,0 +1,285 @@
+{
+  "research_cutoff": "2026-11-05",
+  "stage": "Final editorial edition",
+  "drive_account": "ben.yang@gwmail.gwu.edu",
+  "file_metadata_checks": [
+    {
+      "name": "SMPT_FI002_Methodology.md",
+      "ok": true,
+      "metadata": {
+        "id": "14gLrtD0SnHj7F4xXJyCgXNSGdozzZUSr",
+        "title": "SMPT_FI002_Methodology.md",
+        "mime_type": "text/markdown",
+        "size": "11682",
+        "url": "https://drive.google.com/file/d/14gLrtD0SnHj7F4xXJyCgXNSGdozzZUSr/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/14gLrtD0SnHj7F4xXJyCgXNSGdozzZUSr/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:16.496Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 11682
+    },
+    {
+      "name": "SMPT_FI002_Publication_Summary.md",
+      "ok": true,
+      "metadata": {
+        "id": "1D7UpDiSvjrb6sf3F7nu2cZEG_F81_RxA",
+        "title": "SMPT_FI002_Publication_Summary.md",
+        "mime_type": "text/markdown",
+        "size": "4862",
+        "url": "https://drive.google.com/file/d/1D7UpDiSvjrb6sf3F7nu2cZEG_F81_RxA/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1D7UpDiSvjrb6sf3F7nu2cZEG_F81_RxA/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:18.750Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 4862
+    },
+    {
+      "name": "SMPT_FI002_BHP_Copper_Research_Report.pdf",
+      "ok": true,
+      "metadata": {
+        "id": "1xC9INmnBHGBotNmkPRLG6AoJDSEUR8ll",
+        "title": "SMPT_FI002_BHP_Copper_Research_Report.pdf",
+        "mime_type": "application/pdf",
+        "size": "109797",
+        "url": "https://drive.google.com/file/d/1xC9INmnBHGBotNmkPRLG6AoJDSEUR8ll/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1xC9INmnBHGBotNmkPRLG6AoJDSEUR8ll/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:20.817Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 109797
+    },
+    {
+      "name": "SMPT_FI002_BHP_Copper_Research_Report.html",
+      "ok": true,
+      "metadata": {
+        "id": "1H6eaRPaeNBRHQ4QjXsHHYH2NI53kTVWx",
+        "title": "SMPT_FI002_BHP_Copper_Research_Report.html",
+        "mime_type": "text/html",
+        "size": "87179",
+        "url": "https://drive.google.com/file/d/1H6eaRPaeNBRHQ4QjXsHHYH2NI53kTVWx/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1H6eaRPaeNBRHQ4QjXsHHYH2NI53kTVWx/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:23.354Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 87179
+    },
+    {
+      "name": "SMPT_FI002_BHP_Copper_Research_Report.md",
+      "ok": true,
+      "metadata": {
+        "id": "1l5WVTceecFEqpMsPu7Se0jvydZgxB7y6",
+        "title": "SMPT_FI002_BHP_Copper_Research_Report.md",
+        "mime_type": "text/markdown",
+        "size": "39636",
+        "url": "https://drive.google.com/file/d/1l5WVTceecFEqpMsPu7Se0jvydZgxB7y6/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1l5WVTceecFEqpMsPu7Se0jvydZgxB7y6/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:25.601Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 39636
+    },
+    {
+      "name": "SMPT_FI002_BHP_Copper_Strategy_Deck.pptx",
+      "ok": true,
+      "metadata": {
+        "id": "19gfTUS0-85u20AlOKssuM-R0-1UHWPmh",
+        "title": "SMPT_FI002_BHP_Copper_Strategy_Deck.pptx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "size": "78466",
+        "url": "https://docs.google.com/presentation/d/19gfTUS0-85u20AlOKssuM-R0-1UHWPmh/edit?usp=drivesdk&ouid=102647525259596827582&rtpof=true&sd=true",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:28.606Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 78466
+    },
+    {
+      "name": "SMPT_FI002_BHP_Copper_Strategy_Deck.pdf",
+      "ok": true,
+      "metadata": {
+        "id": "1dSStOSqCXvZio3_C1CLgnurT6eTIXSZP",
+        "title": "SMPT_FI002_BHP_Copper_Strategy_Deck.pdf",
+        "mime_type": "application/pdf",
+        "size": "372757",
+        "url": "https://drive.google.com/file/d/1dSStOSqCXvZio3_C1CLgnurT6eTIXSZP/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1dSStOSqCXvZio3_C1CLgnurT6eTIXSZP/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:31.485Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 372757
+    },
+    {
+      "name": "SMPT_FI002_Quality_Review.md",
+      "ok": true,
+      "metadata": {
+        "id": "1p5nBqylIOapDjdoNoOOU-fBTI9_6ZQz6",
+        "title": "SMPT_FI002_Quality_Review.md",
+        "mime_type": "text/markdown",
+        "size": "22639",
+        "url": "https://drive.google.com/file/d/1p5nBqylIOapDjdoNoOOU-fBTI9_6ZQz6/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1p5nBqylIOapDjdoNoOOU-fBTI9_6ZQz6/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:34.016Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 22639
+    },
+    {
+      "name": "SMPT_FI002_Verification_Results.json",
+      "ok": true,
+      "metadata": {
+        "id": "1xLxmXAQDaeNEAFYn7TAXyx8Gn4FLmEZc",
+        "title": "SMPT_FI002_Verification_Results.json",
+        "mime_type": "application/json",
+        "size": "10412",
+        "url": "https://drive.google.com/file/d/1xLxmXAQDaeNEAFYn7TAXyx8Gn4FLmEZc/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1xLxmXAQDaeNEAFYn7TAXyx8Gn4FLmEZc/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:42.668Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 10412
+    },
+    {
+      "name": "SMPT_FI002_Reproducibility_Package.zip",
+      "ok": true,
+      "metadata": {
+        "id": "1jCNdTnu0RFxbGD57VMmfo82rajSPv2te",
+        "title": "SMPT_FI002_Reproducibility_Package.zip",
+        "mime_type": "application/zip",
+        "size": "1166368",
+        "url": "https://drive.google.com/file/d/1jCNdTnu0RFxbGD57VMmfo82rajSPv2te/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1jCNdTnu0RFxbGD57VMmfo82rajSPv2te/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:45.245Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 1166368
+    },
+    {
+      "name": "SMPT_FI002_Delivery_Index.md",
+      "ok": true,
+      "metadata": {
+        "id": "1DQkfrL8LplzWCqDCLCDPabaGbsMKXGSM",
+        "title": "SMPT_FI002_Delivery_Index.md",
+        "mime_type": "text/markdown",
+        "size": "6085",
+        "url": "https://drive.google.com/file/d/1DQkfrL8LplzWCqDCLCDPabaGbsMKXGSM/view?usp=drivesdk",
+        "display_url": "https://drive.google.com/file/d/1DQkfrL8LplzWCqDCLCDPabaGbsMKXGSM/view?usp=drivesdk",
+        "file_or_folder": "file",
+        "created_time": null,
+        "modified_time": "2026-11-05T21:39:47.855Z",
+        "parent_ids": [
+          "1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf"
+        ],
+        "drive_id": null,
+        "current_user_can_share": null,
+        "has_augmented_permissions": null,
+        "shared": false,
+        "permissions": null,
+        "source_visibility_status": "not_shared"
+      },
+      "local_bytes": 6085
+    }
+  ],
+  "zip_byte_identical": true,
+  "zip_sha256": "777c9fa9cf1ed10a0a73b8435d643a72215adafa14b0c2508d94d4b2332e91da",
+  "zip_bytes": 1166368,
+  "hashed_members_verified": 80
+}

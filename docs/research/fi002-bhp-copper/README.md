@@ -19,7 +19,7 @@ Start with the [14-page flagship PDF](output/SMPT_FI002_BHP_Copper_Research_Repo
 | Evidence | [Source/access register](output/SMPT_FI002_Evidence_Register.csv), [major-claim matrix](output/SMPT_FI002_Claim_Source_Matrix.csv) |
 | Technical methods | [Methodology](output/SMPT_FI002_Methodology.md), four calculation CSVs in `output/` |
 | Research reconciliation | [Material corrections and differences](output/SMPT_FI002_Reconciliation.md) |
-| Editorial gate and QA | [Quality review](output/SMPT_FI002_Quality_Review.md), [70-check result](output/SMPT_FI002_Verification_Results.json) |
+| Editorial gate and QA | [Quality review](output/SMPT_FI002_Quality_Review.md), [80-check result](output/SMPT_FI002_Verification_Results.json) |
 | Eventual website phase | [Approval-pending publication handoff](output/SMPT_FI002_Website_Handoff.md) |
 | Authorized durable delivery | [Existing university Drive folder](https://drive.google.com/drive/folders/1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf), account `ben.yang@gwmail.gwu.edu` |
 
@@ -35,7 +35,7 @@ Only `docs/research/fi002-bhp-copper/` is changed. No public data, website copy,
 
 ## Reproduce
 
-Python calculations and ReportLab generate the report, two-page brief and original vector figures. The bundled `@oai/artifact-tool` authors the workbook and native PowerPoint objects. `openpyxl` is used for read-only verification and extraction of native update requests, not workbook authoring.
+`build/report-narrative.json` is the canonical final editorial narrative; edit it and run `report.py` to regenerate the matching PDF, Markdown and standalone HTML. Python calculations and ReportLab generate the report, two-page brief and original vector figures. The bundled `@oai/artifact-tool` authors the workbook and native PowerPoint objects. `openpyxl` is used for read-only verification and extraction of native update requests, not workbook authoring.
 
 Current build order, from the repository root:
 
@@ -45,7 +45,7 @@ node docs/research/fi002-bhp-copper/build/build.mjs
 python3 docs/research/fi002-bhp-copper/build/report.py
 python3 docs/research/fi002-bhp-copper/build/executive_brief.py
 node docs/research/fi002-bhp-copper/build/executive_deck.mjs
-soffice --headless --convert-to pdf --outdir docs/research/fi002-bhp-copper/output docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Strategy_Deck.pptx
+python3 docs/research/fi002-bhp-copper/build/export_deck_pdf.py
 python3 docs/research/fi002-bhp-copper/build/write_support.py
 python3 docs/research/fi002-bhp-copper/build/verify.py
 ```
@@ -61,3 +61,7 @@ The calculation CSVs and Python arithmetic can be inspected without artifact-too
 ## Delivery and next action
 
 `output/SMPT_FI002_Delivery_Index.md` records verified university Drive links after upload. The final Git commit and draft PR are reported in the completion handoff. Editorial review is the next action. Any public download destination, website edit, sharing-permission change, merge or deployment requires separate authorization.
+
+The final expert/editorial audit is recorded in the [Quality Review](output/SMPT_FI002_Quality_Review.md). It preserves the model and brief and updates the executive deck’s typography, palette and source locators without numerical changes. The completed research commit `f7515ca9968c32f74e7a40e7e4c4f8ee952d5263` remains the accessible pre-editorial baseline on [draft PR #203](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/203).
+
+Deck revision: Presentation Standard v2 and its companion authenticity/exhibit rules were inspected on GitHub `main` at `b688516763447b669b6755d9083726e691753ac7`. The report follows the one-family research house style; the deck uses Georgia/Arial, the permitted installed fallback for Source Sans 3. The v5 finalization receipt validates a private revision under `output/editorial/revision-3/`; after review, its PPTX bytes were copied unchanged to the existing current filename. The PDF was regenerated through `export_deck_pdf.py` with verified Georgia/Arial embedding. For regeneration, use a fresh private revision/receipt path and promote only after QA.

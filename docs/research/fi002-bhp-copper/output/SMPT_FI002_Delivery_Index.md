@@ -34,10 +34,12 @@ All files reside in the [existing university Drive folder](https://drive.google.
 
 The HTML is standalone and editable; Markdown figures and complete source scripts are in the reproducibility ZIP. The ZIP includes current research files, audit snapshot and unchanged PR #202 baseline. Original prototype files are marked by their dated archive path. Its package manifest contains SHA-256 hashes. Volatile remote-storage audit metadata is excluded from the ZIP.
 
-Verification: 70/70 automated checks; 329 formula results agree between local and native exports; report/deck/brief have 14/12/2 pages and live source links. All final report and slide pages and bounded views of all model tabs were visually reviewed. This is internal review, not external professional assurance.
+Verification: 80/80 automated checks; 329 formula results agree between local and native exports; report/deck/brief have 14/12/2 pages and live source links. All final report and slide pages and bounded views of all model tabs were visually reviewed. This is internal review, not external professional assurance.
 
 Limitations: original proprietary Goldman note unavailable; annual average uses attributed public reporting. Complete project/no-build, fiscal and annual cash schedules unavailable; no independent project valuation or reproduced IRR. Current environmental stage is mirror-based and must be refreshed before release. Native Microsoft Office rendering was not verified.
 
 Git branch: `codex/fi002-research-publication`, based on `649d5ab30c765e863bc237efbbff3e26dccc1531`. The draft PR is stacked on [research handoff PR #202](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/202); the completion handoff identifies the resulting commit and PR. No baseline file, public dataset or website file is modified.
 
 Next action: Ben's editorial review, then a separately approved website phase using the linked handoff. No merge, deployment, public sharing change or external distribution has been performed.
+
+Final editorial edition: same 5 November 2026 research cutoff and Drive file identities. The report now develops the earnings-to-funding-to-replacement argument in connected paragraphs; the deck follows the new presentation guidance. The model, evidence, calculation CSVs and brief retain their completed-research bytes. The final audit, before/after examples and five editorial gates are in the Quality Review. Draft PR: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/203. Human publication approval remains pending.

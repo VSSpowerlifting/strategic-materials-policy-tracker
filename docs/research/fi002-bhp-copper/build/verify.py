@@ -78,10 +78,50 @@ chartmins=[]
 for p in charts:
  root=ET.fromstring(z.read(p));chartmins.extend(x.attrib['val']for x in root.findall('.//c:valAx/c:scaling/c:min',ns))
 check('Deck quantitative bar axes start at zero',len(chartmins)==3 and all(float(x)==0 for x in chartmins))
-receipt=json.loads((B/'presentation-v3-validation.json').read_text());check('Presentation structural and geometry checks',receipt['packageIntegrity']['finding_count']==0 and receipt['presentationLayout']['finding_count']==0)
+receipt=json.loads((B/'presentation-v5-validation.json').read_text());check('Presentation structural and geometry checks',receipt['packageIntegrity']['finding_count']==0 and receipt['presentationLayout']['finding_count']==0)
 check('Portable chart data validation',receipt['portableChartData']['portable_chart_validation_passed'] if 'portableChartData'in receipt else '"portable_chart_validation_passed": true'in json.dumps(receipt))
 check('One current memo, dated prototype preserved',not(O/'SMPT_FI002_BHP_Copper_Strategy_Memo.pdf').exists()and(R/'archive/2026-11-04/SMPT_FI002_BHP_Copper_Strategy_Memo.pdf').exists())
 root=subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip();diff=subprocess.check_output(['git','diff','649d5ab30c765e863bc237efbbff3e26dccc1531','--','research/fi002'],text=True);check('PR202 baseline unchanged',not diff)
+# Final editorial acceptance checks. Financial artifacts remain the completed-research baseline.
+from html import unescape
+from html.parser import HTMLParser
+import ast
+class ReadText(HTMLParser):
+ def __init__(self):super().__init__();self.parts=[]
+ def handle_data(self,data):self.parts.append(data)
+ht=(O/'SMPT_FI002_BHP_Copper_Research_Report.html').read_text();parser=ReadText();parser.feed(ht)
+md=(O/'SMPT_FI002_BHP_Copper_Research_Report.md').read_text()
+pdf=PdfReader(O/'SMPT_FI002_BHP_Copper_Research_Report.pdf');pt=' '.join(p.extract_text()for p in pdf.pages)
+def norm(t):return re.sub(r'\s+',' ',unescape(t)).strip()
+versions=[norm(md),norm(' '.join(parser.parts)),norm(pt)]
+narrative=json.loads((B/'report-narrative.json').read_text())
+check('Accepted narrative identical in PDF, Markdown and HTML',all(norm(body)in v for page in narrative for _,body in page[4]for v in versions),f'{sum(len(p[4])for p in narrative)} accepted paragraphs')
+module=ast.parse((B/'report.py').read_text());tables=next(ast.literal_eval(x.value)for x in module.body if isinstance(x,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='TABLES'for t in x.targets))
+check('All exhibit tables preserved across report formats',all(norm(cell)in v for rows in tables.values()for row in rows for cell in row for v in versions))
+captions=re.findall(r'Exhibit \d+\. [^\n]+',md)
+check('Seven accepted captions in PDF and editable HTML',len(captions)==7 and all(norm(c)in versions[1]and norm(c)in versions[2]for c in captions))
+baseline='f7515ca9968c32f74e7a40e7e4c4f8ee952d5263'
+def oldbytes(path):return subprocess.check_output(['git','show',baseline+':'+str(path.relative_to(Path(root)))])
+figs=list((O/'figures').glob('*.svg'))
+check('Seven original vector exhibits unchanged and embedded',len(figs)==7 and all(p.read_bytes()==oldbytes(p.resolve())and p.read_text()in ht for p in figs))
+stable=[O/x for x in ['SMPT_FI002_BHP_Copper_Model.xlsx','SMPT_FI002_BHP_Copper_Memo.pdf','SMPT_FI002_BHP_Copper_Memo.md','SMPT_FI002_Evidence_Register.csv','SMPT_FI002_Claim_Source_Matrix.csv','SMPT_FI002_Price_Sensitivity.csv','SMPT_FI002_Price_Cost_Frontier.csv','SMPT_FI002_Threshold_Sensitivities.csv','SMPT_FI002_Replacement_Margin_Frontier.csv']]
+stable += [R/'audit/SMPT_FI002_Native_Model_Readback.xlsx',B/'publication-data.json',B/'formula-manifest.json']
+check('Model, evidence, calculations and brief byte-identical to completed research',all(p.read_bytes()==oldbytes(p.resolve())for p in stable),f'{len(stable)} files compared to {baseline}')
+check('Reported earnings-scale comparisons round to 9% and 13%',round(gs/32947*100)==9 and round(spread/32947*100)==13,f'{gs/32947*100:.6f}% and {spread/32947*100:.6f}%; scale only')
+check('Duration and later start are explicitly separated',round(screen(life=10))==275 and round(screen(life=10,start=2034))==333 and all(x in versions[0]for x in ['275ktpa','Starting those ten years in 2034','flat in nominal dollars']))
+pdfuris={str(a.get_object().get('/A',{}).get('/URI'))for page in pdf.pages for a in page.get('/Annots',[])if a.get_object().get('/A',{}).get('/URI')}
+htmluris=set(unescape(u)for u in re.findall(r'href="([^"]+)"',ht));mduris=set(re.findall(r'\]\((https://[^)]+)\)',md))
+check('All report source and model link destinations agree across formats',pdfuris==htmluris==mduris,f'{len(pdfuris)} unique destinations; availability limitations in QC')
+olddeck=zipfile.ZipFile(__import__('io').BytesIO(oldbytes((O/'SMPT_FI002_BHP_Copper_Strategy_Deck.pptx').resolve())))
+chartpath=re.compile(r'ppt/(?:slides/)?charts/chart\d+\.xml')
+def chartvalues(book):
+ return [[e.text for e in ET.fromstring(book.read(p)).findall('.//c:numCache/c:pt/c:v',ns)]for p in sorted(book.namelist())if chartpath.fullmatch(p)]
+def tablenumbers(book):
+ return [re.findall(r'[-+]?\d+(?:[.,]\d+)*',' '.join(t.text or ''for t in ET.fromstring(book.read(p)).findall('.//a:tbl//a:t',{'a':'http://schemas.openxmlformats.org/drawingml/2006/main'})))for p in sorted(book.namelist())if re.fullmatch(r'ppt/slides/slide\d+\.xml',p)]
+check('Revised deck preserves every chart value and table numeric token',chartvalues(z)==chartvalues(olddeck)and tablenumbers(z)==tablenumbers(olddeck))
+fonts=set(re.findall(r'typeface="([^"]+)"',''.join(z.read(p).decode()for p in slides)))
+fontnames={str(f.get_object().get('/BaseFont'))for page in PdfReader(O/'SMPT_FI002_BHP_Copper_Strategy_Deck.pdf').pages for f in page.get('/Resources',{}).get('/Font',{}).values()}
+check('Deck typography follows v2 with permitted installed body fallback',fonts=={'Georgia','Arial'} and any('Georgia' in name for name in fontnames)and any('Arial' in name for name in fontnames),str(sorted(fontnames)))
 report=dict(cutoff='2026-11-05',checks=results,passed=sum(x['passed']for x in results),total=len(results),formula_count=len(manifest),pdfs=pdfmeta,scope='Internal automated checks; source and visual assessment in Quality Review')
 (B/'verification-results.json').write_text(json.dumps(report,indent=2));(O/'SMPT_FI002_Verification_Results.json').write_text(json.dumps(report,indent=2))
 print(json.dumps(dict(passed=report['passed'],total=report['total'],formula_count=len(manifest),failures=[x for x in results if not x['passed']]),indent=2))

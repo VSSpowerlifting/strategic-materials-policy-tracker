@@ -244,7 +244,7 @@
     {
       "check": "SMPT_FI002_BHP_Copper_Research_Report live source annotations",
       "passed": true,
-      "detail": "57 hyperlinks"
+      "detail": "59 hyperlinks"
     },
     {
       "check": "SMPT_FI002_BHP_Copper_Research_Report registered link destinations",
@@ -269,7 +269,7 @@
     {
       "check": "SMPT_FI002_BHP_Copper_Strategy_Deck live source annotations",
       "passed": true,
-      "detail": "35 hyperlinks"
+      "detail": "32 hyperlinks"
     },
     {
       "check": "SMPT_FI002_BHP_Copper_Strategy_Deck registered link destinations",
@@ -350,21 +350,71 @@
       "check": "PR202 baseline unchanged",
       "passed": true,
       "detail": ""
+    },
+    {
+      "check": "Accepted narrative identical in PDF, Markdown and HTML",
+      "passed": true,
+      "detail": "41 accepted paragraphs"
+    },
+    {
+      "check": "All exhibit tables preserved across report formats",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Seven accepted captions in PDF and editable HTML",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Seven original vector exhibits unchanged and embedded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Model, evidence, calculations and brief byte-identical to completed research",
+      "passed": true,
+      "detail": "12 files compared to f7515ca9968c32f74e7a40e7e4c4f8ee952d5263"
+    },
+    {
+      "check": "Reported earnings-scale comparisons round to 9% and 13%",
+      "passed": true,
+      "detail": "8.590817% and 12.886225%; scale only"
+    },
+    {
+      "check": "Duration and later start are explicitly separated",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "All report source and model link destinations agree across formats",
+      "passed": true,
+      "detail": "16 unique destinations; availability limitations in QC"
+    },
+    {
+      "check": "Revised deck preserves every chart value and table numeric token",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Deck typography follows v2 with permitted installed body fallback",
+      "passed": true,
+      "detail": "['/BAAAAA+Arial-BoldMT', '/CAAAAA+Georgia-Bold', '/DAAAAA+Arial-BoldMT', '/EAAAAA+ArialMT', '/FAAAAA+ArialMT', '/GAAAAA+Arial-BoldMT', '/HAAAAA+ArialMT', '/IAAAAA+ArialMT', '/JAAAAA+Arial-BoldMT', '/KAAAAA+ArialMT', '/LAAAAA+ArialMT', '/MAAAAA+ArialMT', '/NAAAAA+Arial-BoldMT']"
     }
   ],
-  "passed": 70,
-  "total": 70,
+  "passed": 80,
+  "total": 80,
   "formula_count": 329,
   "pdfs": {
     "SMPT_FI002_BHP_Copper_Research_Report": {
       "pages": 14,
-      "uri_annotations": 57,
-      "words": 4976
+      "uri_annotations": 59,
+      "words": 5003
     },
     "SMPT_FI002_BHP_Copper_Strategy_Deck": {
       "pages": 12,
-      "uri_annotations": 35,
-      "words": 1085
+      "uri_annotations": 32,
+      "words": 1245
     },
     "SMPT_FI002_BHP_Copper_Memo": {
       "pages": 2,

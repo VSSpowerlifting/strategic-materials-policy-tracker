@@ -16,3 +16,9 @@ build/*.inspect.ndjson
 .chart-data*/
 build/presentation-v2-validation.json
 output/*Reproducibility_Package.zip
+
+output/editorial/
+
+build/previews/
+build/presentation-editorial-validation.json
+build/presentation-v4-validation.json
