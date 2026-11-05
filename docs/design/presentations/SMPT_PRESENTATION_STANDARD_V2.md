@@ -1,7 +1,7 @@
 # SMPT Presentation Standard v2.0
 
 Adopted **5 November 2026** · Applies to **new and revised research presentations**  
-Companion standards: [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [Reference Analysis](REFERENCE_ANALYSIS.md)
+Companion standards: [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) · [Reference Analysis](REFERENCE_ANALYSIS.md)
 
 ## Purpose and operating principles
 
@@ -133,6 +133,8 @@ Use [the full exhibit and chart rules](EXHIBIT_AND_CHART_RULES.md). The essentia
 
 ## 7. Editorial voice
 
+The [Editorial Authenticity & Visual Integrity Standard](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) is mandatory for drafting, editing and reviewing AI-assisted presentation prose and graphics. Its affirmative-writing principle prioritizes direct claims and connective financial reasoning; necessary evidentiary negations remain intact.
+
 Presentation language is a compressed version of serious research writing, not a chain of slogans.
 
 - Use natural, varied syntax and explain the **mechanism** linking a financing fact to a strategic consequence.
@@ -164,6 +166,7 @@ Required outputs for a publication release:
 - Numerical QA: reconcile the deck with source register and accepted model. Include source cutoff and version in metadata.
 
 Editorial QA:
+- [ ] Five [authenticity and visual integrity review gates](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) recorded as PASS / REVISE / HOLD with supporting evidence?
 - Headline-only reading coherent?
 - No asserted causality from mere temporal sequence?
 - No uncommitted capacity visualized as cash?
