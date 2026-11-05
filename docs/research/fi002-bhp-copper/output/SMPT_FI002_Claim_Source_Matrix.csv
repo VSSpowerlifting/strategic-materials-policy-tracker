@@ -1,0 +1,15 @@
+claim_id,claim,source_ids,locator,status
+C01,"GS 2027 average $15,400/t; older $13,800",S18; S08; S20,Forecast paragraph,Corroborated public reporting; original unavailable
+C02,"GS end2027 $15,600/t",S16,Copper transcript exchange,Primary public statement; distinct horizon
+C03,BHP FY26 static copper sensitivity $39m per UScent/lb,S01,Slide48 and footnotes,"Verified issuer sensitivity, equity-accounted excluded"
+C04,"GS revision implies $2,830.416m static EBITDA differential",S01; S18,Model04 D45,"Derived, FY26-static only; no FCF inference"
+C05,"GS-WorldBank spread implies $4,245.625m static differential",S01; S12; S18,Model04 D46,"Derived illustration, not forecast"
+C06,"Copper EBITDA 18,187; Group32,947; headline54% excludes G&U",S03,"PDF pp36,136",Verified and denominator reconciled
+C07,"FY26 FCF9,767 = CFO21,778 + CFI(-12,011)",S03,PDF p37,Verified; capex already embedded
+C08,ENC5.4-6.3bn nominal;230-270ktpa facility output,S01,"Slides28,36,40",Guidance; not wholly incremental
+C09,16-18% IRR uses $4.76/lb long term,S01,Slide36 note3 for slide28,Issuer return; not independently reproduced
+C10,Base199ktpa and stress416ktpa remain hypothetical,SMPT assumptions,"Model06,08 and threshold CSV",Algebra verified; no-build benefit unknown
+C11,Only10years from2034 implies333ktpa,SMPT assumptions,Threshold sensitivity CSV,Illustrates horizon dependence; not company mine life
+C12,ICSG global refined2027 surplus368kt,S19,Release p1,Primary PDF inspected; distinct geography from GS
+C13,RCA pending; Nov4 request indexed,S17; S21,Metadata and ICSARA2 block,Mirror-only current stage; substantive order unavailable
+C14,Maintain funded readiness; no numeric strategy ranking,SMPT analysis,Report decision section,"Conditional judgment, revised from prototype staging preference"

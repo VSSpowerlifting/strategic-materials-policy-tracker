@@ -1,0 +1,63 @@
+# SMPT Financial Intelligence 002 — Research publication package
+
+**Goldman Sachs' Copper Outlook and BHP's $6 Billion Escondida Decision**
+Near-term earnings exposure, replacement economics and the case for conditional investment readiness
+
+Research cutoff: **5 November 2026**. **READY FOR EDITORIAL REVIEW.** Independent SMPT research; neither Goldman Sachs nor BHP commissioned, sponsored or endorsed it. Internal publication preparation only. No public release is authorized.
+
+Start with the [14-page flagship PDF](output/SMPT_FI002_BHP_Copper_Research_Report.pdf) or [standalone editable HTML](output/SMPT_FI002_BHP_Copper_Research_Report.html). The [publication summary](output/SMPT_FI002_Publication_Summary.md) contains the abstract, findings and download inventory.
+
+## Reader files
+
+| Purpose | File |
+| --- | --- |
+| Editable report narrative | [Markdown](output/SMPT_FI002_BHP_Copper_Research_Report.md), with original SVG exhibits in `output/figures/` |
+| Live 11-tab financial model | [University Google Sheet](https://docs.google.com/spreadsheets/d/1MysAjBqAQ4-63XPo7YtncDle3q4faZDsBpTaVBWsg1k/edit?usp=drivesdk) |
+| Local editable model | [Excel workbook](output/SMPT_FI002_BHP_Copper_Model.xlsx) |
+| Executive edition | [12-slide PowerPoint](output/SMPT_FI002_BHP_Copper_Strategy_Deck.pptx), [PDF](output/SMPT_FI002_BHP_Copper_Strategy_Deck.pdf) |
+| Decision brief | [Two-page PDF](output/SMPT_FI002_BHP_Copper_Memo.pdf), [editable narrative](output/SMPT_FI002_BHP_Copper_Memo.md) |
+| Evidence | [Source/access register](output/SMPT_FI002_Evidence_Register.csv), [major-claim matrix](output/SMPT_FI002_Claim_Source_Matrix.csv) |
+| Technical methods | [Methodology](output/SMPT_FI002_Methodology.md), four calculation CSVs in `output/` |
+| Research reconciliation | [Material corrections and differences](output/SMPT_FI002_Reconciliation.md) |
+| Editorial gate and QA | [Quality review](output/SMPT_FI002_Quality_Review.md), [70-check result](output/SMPT_FI002_Verification_Results.json) |
+| Eventual website phase | [Approval-pending publication handoff](output/SMPT_FI002_Website_Handoff.md) |
+| Authorized durable delivery | [Existing university Drive folder](https://drive.google.com/drive/folders/1gSNclpsNdzgCbGy3EaQDqsV_NOUrI8Zf), account `ben.yang@gwmail.gwu.edu` |
+
+The model and report are consistent: the main operating result uses BHP's disclosed FY26 sensitivity, not a forward earnings forecast. The 199/333/416ktpa calculations remain hypothetical reverse appraisal. Construction timing cannot be ranked without a with-build/no-build operating plan. The original Goldman annual-average note was not obtained; public reporting is clearly attributed.
+
+## Provenance and branch boundary
+
+This work resumes the local prototype originally created at detached HEAD `2286648f3bbb699eee5b6171f334792ffa2d545d`. Its complete useful outputs and builders are preserved in `archive/2026-11-04/`. The six-page prototype memo is superseded by the flagship report and shorter current brief; archived conclusions are not current publication claims.
+
+The new isolated branch is `codex/fi002-research-publication`, based on `649d5ab30c765e863bc237efbbff3e26dccc1531` from `research/fi002-bhp-copper-handoff-2026-11-05`. [PR #202](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/202) remains the discoverable independent research baseline. Its `research/fi002/` directory is unchanged. The new draft PR is stacked on that branch to keep this package's review diff separate; do not merge either automatically.
+
+Only `docs/research/fi002-bhp-copper/` is changed. No public data, website copy, schema, reviewer gate, CI or deployment file is changed. A private Drive upload is authorized delivery, not public release.
+
+## Reproduce
+
+Python calculations and ReportLab generate the report, two-page brief and original vector figures. The bundled `@oai/artifact-tool` authors the workbook and native PowerPoint objects. `openpyxl` is used for read-only verification and extraction of native update requests, not workbook authoring.
+
+Current build order, from the repository root:
+
+```sh
+python3 docs/research/fi002-bhp-copper/build/research_v2.py
+node docs/research/fi002-bhp-copper/build/build.mjs
+python3 docs/research/fi002-bhp-copper/build/report.py
+python3 docs/research/fi002-bhp-copper/build/executive_brief.py
+node docs/research/fi002-bhp-copper/build/executive_deck.mjs
+soffice --headless --convert-to pdf --outdir docs/research/fi002-bhp-copper/output docs/research/fi002-bhp-copper/output/SMPT_FI002_BHP_Copper_Strategy_Deck.pptx
+python3 docs/research/fi002-bhp-copper/build/write_support.py
+python3 docs/research/fi002-bhp-copper/build/verify.py
+```
+
+Use the installed Codex primary runtime Node/Python binaries in this environment; the source records their font and presentation-validator paths. Python dependencies: ReportLab, pypdf, openpyxl, Pillow; Node: `@oai/artifact-tool`. The Node build directory resolves dependencies through a local ignored symlink to the bundled modules. Equivalent installations must update the runtime/font/validator paths. Node used here: 24.22.1. The original authoring environment's spreadsheet/presentation skills and finalizer are required for identical Office regeneration.
+
+The presentation finalizer intentionally refuses to overwrite an existing final artifact or receipt. To regenerate, preserve the prior file/receipt under a new revision name and point the script to a new receipt path. Do not remove these protections or overwrite the dated prototype. PDF metadata and Office package IDs may vary on regeneration; compare numerical outputs and content, not regenerated binary hashes.
+
+`native_update.py` builds bounded raw Google Sheets requests from the verified local workbook, but does not make network changes. The authenticated university connector applies them to the existing model. `build/native-v2-checks.json` records six actual native recalculations. `audit/SMPT_FI002_Native_Model_Readback.xlsx` is the final exported native snapshot used for the formula-cache comparison; it is an audit artifact, not a second active model. `readback.mjs` renders a new export from `build/native-readback.xlsx` when available. `verify.py` falls back to the durable audit snapshot. Formula manifests, local scenario checks, the presentation validation receipt and final verification results are retained in `build/`.
+
+The calculation CSVs and Python arithmetic can be inspected without artifact-tool. Original primary financial documents remain linked; the package does not redistribute proprietary bank research or issuer-owned presentation exhibits.
+
+## Delivery and next action
+
+`output/SMPT_FI002_Delivery_Index.md` records verified university Drive links after upload. The final Git commit and draft PR are reported in the completion handoff. Editorial review is the next action. Any public download destination, website edit, sharing-permission change, merge or deployment requires separate authorization.

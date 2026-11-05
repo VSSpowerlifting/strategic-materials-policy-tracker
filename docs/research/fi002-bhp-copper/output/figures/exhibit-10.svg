@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="520" height="205" preserveAspectRatio="xMinYMin meet" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="520" height="205"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-205)" style="clip-path: url(#clip)">
+		<g transform="">
+			<g transform="">
+				<g transform="">
+					<rect x="145.0" y="36.833333333333336" width="182.20185949727323" height="19.333333333333336" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="65.83333333333333" width="252.4485637480293" height="19.33333333333333" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="94.83333333333333" width="305.46276213511544" height="19.33333333333333" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="123.83333333333333" width="151.81979986174372" height="19.33333333333333" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="152.83333333333334" width="216.09841459971528" height="19.333333333333343" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,331.201859,46.5)">
+							<text x="-6.673828125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">199</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,401.448564,75.5)">
+							<text x="-6.673828125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">275</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,454.462762,104.5)">
+							<text x="-6.673828125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">333</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,300.8198,133.5)">
+							<text x="-6.673828125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">166</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,365.098415,162.5)">
+							<text x="-6.673828125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">236</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 145,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 140,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,61 L 140,61 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,90 L 140,90 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,119 L 140,119 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,148 L 140,148 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,177 L 140,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,140,46.5)">
+							<text x="-51.140625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">20y from 2032</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,75.5)">
+							<text x="-51.140625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">10y from 2032</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,104.5)">
+							<text x="-51.140625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">10y from 2034</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,133.5)">
+							<text x="-43.58203125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">8% discount</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,162.5)">
+							<text x="-48.03125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">12% discount</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 475,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 145,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 236.666667,32 L 236.666667,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 328.333333,32 L 328.333333,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 420,32 L 420,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,145,27)">
+							<text x="-2.224609375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,236.666667,27)">
+							<text x="-6.673828125" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">100</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,328.333333,27)">
+							<text x="-6.673828125" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">200</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,420,27)">
+							<text x="-6.673828125" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">300</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<text x="0" y="192" style="font-family: SMPT; font-size: 9px;fill: rgb(14%,14%,12%); stroke:none;" transform="translate(0,384) scale(1,-1)">Required equivalent benefit, ktpa; other base assumptions fixed</text>
+		</g>
+	</g>
+</svg>

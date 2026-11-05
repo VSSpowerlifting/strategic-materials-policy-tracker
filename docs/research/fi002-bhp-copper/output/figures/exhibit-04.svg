@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="520" height="205" preserveAspectRatio="xMinYMin meet" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="520" height="205"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-205)" style="clip-path: url(#clip)">
+		<g transform="">
+			<g transform="">
+				<g transform="">
+					<rect x="145.0" y="38.041666666666664" width="203.37900000000002" height="24.166666666666664" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="74.29166666666667" width="300.0855" height="24.16666666666667" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="110.54166666666667" width="237.534" height="24.16666666666667" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="146.79166666666666" width="239.7285" height="24.166666666666657" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,352.379,50.125)">
+							<text x="-7.78515625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">12.3</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,449.0855,86.375)">
+							<text x="-7.78515625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">18.2</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,386.534,122.625)">
+							<text x="-7.78515625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">14.4</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,388.7285,158.875)">
+							<text x="-7.78515625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">14.5</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 145,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 140,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,68.25 L 140,68.25 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,104.5 L 140,104.5 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,140.75 L 140,140.75 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,177 L 140,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,140,50.125)">
+							<text x="-47.58203125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">Copper FY25</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,86.375)">
+							<text x="-47.58203125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">Copper FY26</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,122.625)">
+							<text x="-48.9140625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">Iron ore FY25</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,158.875)">
+							<text x="-48.9140625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">Iron ore FY26</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 475,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 145,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 227.5,32 L 227.5,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 310,32 L 310,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 392.5,32 L 392.5,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 475,32 L 475,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,145,27)">
+							<text x="-2.224609375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,227.5,27)">
+							<text x="-2.224609375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">5</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,310,27)">
+							<text x="-4.44921875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">10</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,392.5,27)">
+							<text x="-4.44921875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">15</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,475,27)">
+							<text x="-4.44921875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">20</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<text x="0" y="192" style="font-family: SMPT; font-size: 9px;fill: rgb(14%,14%,12%); stroke:none;" transform="translate(0,384) scale(1,-1)">Underlying EBITDA, US$bn; statutory segments</text>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,376 @@
+{
+  "cutoff": "2026-11-05",
+  "checks": [
+    {
+      "check": "11-tab native/local identity",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Both selectors restored to base",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Local six-case propagation and four perturbations",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Independent six-case annual DCF: Base",
+      "passed": true,
+      "detail": "198.765664906 ktpa"
+    },
+    {
+      "check": "Native scenario recalculation: Base",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Independent six-case annual DCF: Upside",
+      "passed": true,
+      "detail": "143.420551040 ktpa"
+    },
+    {
+      "check": "Native scenario recalculation: Upside",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Independent six-case annual DCF: Downside",
+      "passed": true,
+      "detail": "286.841102080 ktpa"
+    },
+    {
+      "check": "Native scenario recalculation: Downside",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Independent six-case annual DCF: Delay",
+      "passed": true,
+      "detail": "218.642231397 ktpa"
+    },
+    {
+      "check": "Native scenario recalculation: Delay",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Independent six-case annual DCF: Overrun",
+      "passed": true,
+      "detail": "238.518797887 ktpa"
+    },
+    {
+      "check": "Native scenario recalculation: Overrun",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Independent six-case annual DCF: Combined stress",
+      "passed": true,
+      "detail": "416.493280220 ktpa"
+    },
+    {
+      "check": "Native scenario recalculation: Combined stress",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen 20 years from 2032",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen 10 years from 2032",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen 10 years from 2034",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen 8% discount rate",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen 12% discount rate",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen $3,000/t burden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen $5,000/t burden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Additional screen Combined stress",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Operating calculation D45",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Operating calculation D46",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Operating calculation D27",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Operating calculation D28",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Operating calculation D31",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Funding boundary D8",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Funding boundary D11",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Funding boundary D12",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Funding boundary D19",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Funding boundary D20",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Capital categories reconcile",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Economic ownership capital",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Copper excluding G&U",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Copper divided by group",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Secondary proxy warning in local and native",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No forward funding residual on current dashboard",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "All formula logic preserved in native export",
+      "passed": true,
+      "detail": "329 formulas; two audit constants rounded by Google to 15 significant digits (less than 1e-8); other differences []"
+    },
+    {
+      "check": "All formula caches agree after native recalculation",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "No cached formula errors in either workbook",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "Native rate precision is visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Historical realized price precision",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Live scenario validation retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "21 unique source/access records",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "14 major claims with traceable source IDs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Research_Report page count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Research_Report live source annotations",
+      "passed": true,
+      "detail": "57 hyperlinks"
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Research_Report registered link destinations",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Research_Report substantial pages and no placeholders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Research_Report independence statement",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Strategy_Deck page count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Strategy_Deck live source annotations",
+      "passed": true,
+      "detail": "35 hyperlinks"
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Strategy_Deck registered link destinations",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Strategy_Deck substantial pages and no placeholders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Strategy_Deck independence statement",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Memo page count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Memo live source annotations",
+      "passed": true,
+      "detail": "9 hyperlinks"
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Memo registered link destinations",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Memo substantial pages and no placeholders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SMPT_FI002_BHP_Copper_Memo independence statement",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "12 editable PowerPoint slides",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "8 native analytical tables",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "3 native charts and embedded editable data",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Deck quantitative bar axes start at zero",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Presentation structural and geometry checks",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Portable chart data validation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "One current memo, dated prototype preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "PR202 baseline unchanged",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "passed": 70,
+  "total": 70,
+  "formula_count": 329,
+  "pdfs": {
+    "SMPT_FI002_BHP_Copper_Research_Report": {
+      "pages": 14,
+      "uri_annotations": 57,
+      "words": 4976
+    },
+    "SMPT_FI002_BHP_Copper_Strategy_Deck": {
+      "pages": 12,
+      "uri_annotations": 35,
+      "words": 1085
+    },
+    "SMPT_FI002_BHP_Copper_Memo": {
+      "pages": 2,
+      "uri_annotations": 9,
+      "words": 604
+    }
+  },
+  "scope": "Internal automated checks; source and visual assessment in Quality Review"
+}
