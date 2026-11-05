@@ -35,6 +35,41 @@
     "notes": "The release names the project without saying who develops it, so no sponsor is recorded. It calls it \"a trilateral project with Japan, the United States and Australia\" and says \"Japan has already provided 50 percent of the project costs to date\"; no Japanese amount is stated or recorded."
   },
   {
+    "id": "prj-au-donald-mineral-sands",
+    "name": "Donald Mineral Sands Project",
+    "sponsorOrgIds": [
+      "org-au-astron"
+    ],
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Victoria",
+        "asStated": "regional Victoria"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-donald-gam-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Donald Mineral Sands paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "Projected construction employment is not proof that construction has started."
+  },
+  {
     "id": "prj-au-nolans",
     "name": "Nolans project",
     "sponsorOrgIds": [
@@ -266,6 +301,82 @@
       }
     ],
     "notes": "BNDES describes development of high-purity nickel/cobalt mixed hydroxide precipitate production. The stated 2028 production start and 2029 operational phase are targets, not observed milestones."
+  },
+  {
+    "id": "prj-ca-alma-billet-casting",
+    "name": "Alma smelter billet casting centre",
+    "sponsorOrgIds": [
+      "org-ca-rio-tinto-aluminium"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Quebec",
+        "asStated": "Alma smelter, Saguenay-Lac-Saint-Jean"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "aluminium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First investment paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Rio Tinto's aggregate support covers this and the Grande-Baie project; per-site allocations are not disclosed."
+  },
+  {
+    "id": "prj-ca-alouette-electrolysis",
+    "name": "Aluminerie Alouette electrolysis modernization",
+    "sponsorOrgIds": [
+      "org-ca-aluminerie-alouette"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Quebec",
+        "asStated": "Aluminerie Alouette smelter, Quebec"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "aluminium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Second investment paragraph",
+        "note": null
+      }
+    ],
+    "notes": "C$135m total project cost is distinct from the C$28.5m announced government support."
   },
   {
     "id": "prj-ca-cmgd-nb-granitoids",
@@ -653,6 +764,83 @@
       }
     ],
     "notes": "The current NRCan EIP profile lists the project as Active, with a C$4,750,000 agreement value and C$12,262,850 project total; it gives no payment or construction date. GGT's 11 August 2026 official post says its Mississauga graphite-purification demonstration facility was entering final-stage commissioning. The post does not identify the NRCan award by name, so the linkage is recorded with that limitation; no commercial operation or project completion is inferred. Review on 3 October 2026 found no later project-specific primary disclosure."
+  },
+  {
+    "id": "prj-ca-grande-baie-anode-furnaces",
+    "name": "Grande-Baie smelter anode baking furnace modernization",
+    "sponsorOrgIds": [
+      "org-ca-rio-tinto-aluminium"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Quebec",
+        "asStated": "Grande-Baie smelter, Saguenay-Lac-Saint-Jean"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "aluminium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "First investment paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Per-site split of C$164.8m government support is not disclosed."
+  },
+  {
+    "id": "prj-ca-marathon-copper-palladium",
+    "name": "Marathon copper-palladium project",
+    "sponsorOrgIds": [
+      "org-ca-generation-mining"
+    ],
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Marathon, Northwestern Ontario"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "materialIds": [
+      "copper",
+      "palladium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-cgf-marathon-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and transaction details",
+        "note": null
+      }
+    ],
+    "notes": "Shovel-ready and fully permitted does not mean construction has begun."
   },
   {
     "id": "prj-ca-nmg-matawinie",
@@ -3918,6 +4106,41 @@
     "notes": null
   },
   {
+    "id": "prj-us-5e-boron-americas",
+    "name": "5E Boron Americas project",
+    "sponsorOrgIds": [
+      "org-us-5e-advanced-materials"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "California",
+        "asStated": "California"
+      }
+    ],
+    "stages": [],
+    "materialIds": [
+      "boron"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "5E loan paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Precise facility location and stage are not inferred from the source."
+  },
+  {
     "id": "prj-us-5n-st-george-germanium-refining",
     "name": "St. George germanium recovery and refining expansion",
     "sponsorOrgIds": [
@@ -4149,6 +4372,44 @@
       }
     ],
     "notes": "Prototype processing capability using samples from the Stibnite Gold Project; separate from the mine project itself."
+  },
+  {
+    "id": "prj-us-kellyton-graphite",
+    "name": "Kellyton Graphite Plant",
+    "sponsorOrgIds": [
+      "org-us-westwater"
+    ],
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alabama",
+        "asStated": "Kellyton Graphite Plant, Alabama"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-westwater-sec-exim-2026",
+        "supports": [
+          "name",
+          "sponsors",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Kellyton construction and qualification-line update; EXIM paragraph",
+        "note": null
+      }
+    ],
+    "notes": "Qualification-line output is not evidence of commercial plant operation."
   },
   {
     "id": "prj-us-mountain-pass-samarium",
