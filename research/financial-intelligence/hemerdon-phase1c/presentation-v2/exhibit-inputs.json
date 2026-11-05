@@ -1,0 +1,258 @@
+{
+  "researchCutoff": "2026-11-04",
+  "modelSHA256": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7",
+  "sourceValues": {
+    "hfi-nwf-equity": {
+      "value": "36000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "src-nwf-tungsten-west-2026"
+      ],
+      "locator": "Opening financing paragraphs"
+    },
+    "hfi-nwf-loan": {
+      "value": "25000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-tw-ar2026"
+      ],
+      "locator": "Printed pp.37,65; PDF pp.39,67"
+    },
+    "hfi-nwf-accordion": {
+      "value": "10000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 33"
+    },
+    "hfi-nwf-tenor": {
+      "value": "366",
+      "unit": "days",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 33"
+    },
+    "hfi-nwf-margin": {
+      "value": "0.055",
+      "unit": "fraction",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 33"
+    },
+    "hfi-nwf-step": {
+      "value": "0.01",
+      "unit": "fraction",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 33"
+    },
+    "hfi-remaining-low": {
+      "value": "40000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 20"
+    },
+    "hfi-remaining-high": {
+      "value": "45000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 20"
+    },
+    "hfi-fy27-low": {
+      "value": "25000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 20"
+    },
+    "hfi-fy27-high": {
+      "value": "35000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-tw-oct2026"
+      ],
+      "locator": "Slide 20"
+    },
+    "hfi-delay-cost": {
+      "value": "3000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-tw-ar2026"
+      ],
+      "locator": "Printed p.38, PDF p.40, going concern"
+    },
+    "hfi-delay-months": {
+      "value": "3",
+      "unit": "months",
+      "sourceIds": [
+        "hfs-tw-ar2026"
+      ],
+      "locator": "Printed p.38, PDF p.40"
+    },
+    "hfi-aug-mine-opex": {
+      "value": "3000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-process-opex": {
+      "value": "2000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-other-opex": {
+      "value": "8000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-finance-cost": {
+      "value": "4000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-wc": {
+      "value": "6000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-mining-capital": {
+      "value": "7000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-site-capital": {
+      "value": "16000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-other-capital": {
+      "value": "5000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-bridge-repay": {
+      "value": "18000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-ea-provision": {
+      "value": "5000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-reserve": {
+      "value": "13000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-cash-open": {
+      "value": "7000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-ea-recovery": {
+      "value": "5000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-revenue": {
+      "value": "15000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-equity": {
+      "value": "36000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    },
+    "hfi-aug-loan": {
+      "value": "25000000",
+      "unit": "GBP",
+      "sourceIds": [
+        "hfs-nwf-terms"
+      ],
+      "locator": "Appendix Sources and Uses"
+    }
+  },
+  "analystAssumptions": {
+    "rateIncrement": 0.01,
+    "rateYears": 1,
+    "constantLoanBalanceGBP": 25000000,
+    "accordionAvailabilityGBP": 0,
+    "scenarioProbability": null
+  },
+  "derivedGBPmillion": {
+    "core": 61,
+    "headline": 71,
+    "midpoint": 42.5,
+    "stressComponents": [
+      2.5,
+      3,
+      0.25
+    ],
+    "stressTotal": 5.75,
+    "augustGroupedUses": [
+      23.0,
+      28.0,
+      23.0,
+      13.0
+    ],
+    "augustSources": 88.0,
+    "augustRoundedUses": 87.0,
+    "augustDeferralStated": -2.0,
+    "augustDeferralDetail": -1.0
+  }
+}
