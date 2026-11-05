@@ -47,7 +47,11 @@
         "asStated": "the Northern Territory"
       }
     ],
-    "stages": [],
+    "stages": [
+      "mining",
+      "processing",
+      "separation"
+    ],
     "materialIds": [
       "rare-earth-elements"
     ],
@@ -73,9 +77,18 @@
         "evidence": "explicit",
         "locator": "Overview and Export Finance Australia section, pp. 1–2; Annexure B, use of proceeds",
         "note": "Arafura Rare Earths Limited is the corporate developer raising funds specifically for the Nolans project. This sponsorship link does not assert separate legal ownership of project assets."
+      },
+      {
+        "sourceId": "src-au-nolans-construction-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs; ore-to-oxide facility description",
+        "note": "The release identifies an integrated ore-to-oxide undertaking, supporting mining/processing stages; separation is inferred from ore-to-oxide refining and should be separately verified."
       }
     ],
-    "notes": "The release names the project as \"the Arafura Nolans project\" and states no developer or stage, so neither is recorded. The April 2026 ASX announcement expressly identifies Arafura Rare Earths Limited as the corporate equity issuer financing Nolans development, so it is registered as the project's sponsor/developer; underlying project-asset title remains unasserted."
+    "notes": "The release names the project as \"the Arafura Nolans project\" and states no developer or stage, so neither is recorded. The April 2026 ASX announcement expressly identifies Arafura Rare Earths Limited as the corporate equity issuer financing Nolans development, so it is registered as the project's sponsor/developer; underlying project-asset title remains unasserted. The Australian Government reported that construction had begun by 8 October 2026; its exact start date is not stated."
   },
   {
     "id": "prj-be-gepeto",
