@@ -163,7 +163,7 @@ A valid financial caveat, cautious qualifier or justified visual pattern **never
 
 Copy into the publication's quality-control report; link to exact files, versions and sources.
 
-\`\`\`md
+```md
 ## Editorial authenticity and visual integrity review
 - Publication / version:
 - Commit / deck source / rendered PDF:
@@ -194,7 +194,7 @@ Copy into the publication's quality-control report; link to exact files, version
 - What automated checks **did not** run:
 - Agent assessment: READY FOR HUMAN PUBLICATION REVIEW / HOLD
 - Human editorial approval (name/date/version): PENDING until actually recorded
-\`\`\`
+```
 
 Only mark a gate PASS when its stated evidence was examined. Use REVISE for addressable quality issues; use HOLD for material accuracy, provenance, rights or authorization issues. This document sets an evaluation standard; it does not claim that an independent professional has performed or certified any review.
 
