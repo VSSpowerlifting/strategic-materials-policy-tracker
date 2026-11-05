@@ -5,10 +5,14 @@ import { site } from "@/lib/site";
 
 const assets = {
   memo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
-  deck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
+  deck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/SMPT_FI001_Hemerdon_Presentation_v2.pdf",
+  originalDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
   model: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Model.xlsx",
   editableMemo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.docx",
-  editableDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pptx",
+  editableDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/SMPT_FI001_Hemerdon_Presentation_v2.pptx",
+  originalEditableDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pptx",
+  deckQc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/publication-qc.md",
+  deckSources: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/source-appendix.md",
   appendix: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Evidence_Appendix.md",
   guide: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Model_Guide.md",
   qc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_QC.md",
@@ -44,7 +48,7 @@ const sources = [
 
 const downloads = [
   { title: "Financial research memorandum", type: "8-page PDF", href: assets.memo },
-  { title: "Executive strategy presentation", type: "10-slide PDF", href: assets.deck },
+  { title: "Financial strategy presentation · v2", type: "18-slide PDF · 14 main + 4 appendix", href: assets.deck },
   { title: "Financial model", type: "Editable Excel workbook", href: assets.model },
   { title: "Evidence and methodology", type: "Source-linked research appendix", href: assets.appendix },
   { title: "Model guide", type: "Assumptions and scenario interpretation", href: assets.guide },
@@ -79,7 +83,7 @@ export default function HemerdonFinancing() {
               Read the financial memo (PDF)
             </a>
             <a href={assets.deck} target="_blank" rel="noopener noreferrer" className="research-button-secondary">
-              View the executive presentation
+              View the 18-slide presentation
             </a>
             <a href={assets.model} target="_blank" rel="noopener noreferrer" className="research-button-secondary">
               Open the financial model
@@ -168,9 +172,19 @@ export default function HemerdonFinancing() {
                 <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Editable editions</p>
                 <div className="mt-4 space-y-3 font-display text-sm">
                   <p><a href={assets.editableMemo} className="underline underline-offset-4 hover:text-paper-accent">Word memorandum</a></p>
-                  <p><a href={assets.editableDeck} className="underline underline-offset-4 hover:text-paper-accent">PowerPoint presentation</a></p>
-                  <p><a href={assets.qc} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Publication methodology and QC</a></p>
+                  <p><a href={assets.editableDeck} className="underline underline-offset-4 hover:text-paper-accent">PowerPoint presentation · v2 (18 slides)</a></p>
+                  <p><a href={assets.deckQc} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Presentation v2 validation and QC</a></p>
+                  <p><a href={assets.deckSources} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Presentation v2 source and exhibit notes</a></p>
+                  <p><a href={assets.qc} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Original financial research methodology and QC</a></p>
                 </div>
+              </div>
+              <div className="mt-10 border-t border-paper-border pt-5">
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Previous presentation edition</p>
+                <p className="mt-3 font-display text-sm leading-6 text-paper-muted">
+                  The original ten-slide edition remains available for archival comparison. The financial memo, model and evidence base are unchanged.
+                </p>
+                <p className="mt-4 font-display text-sm"><a href={assets.originalDeck} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Original ten-slide PDF</a></p>
+                <p className="mt-3 font-display text-sm"><a href={assets.originalEditableDeck} className="underline underline-offset-4 hover:text-paper-accent">Original editable PowerPoint</a></p>
               </div>
             </aside>
           </div>
