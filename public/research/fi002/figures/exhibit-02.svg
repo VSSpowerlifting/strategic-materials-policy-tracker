@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="520" height="205" preserveAspectRatio="xMinYMin meet" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="520" height="205"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-205)" style="clip-path: url(#clip)">
+		<g transform="">
+			<g transform="">
+				<g transform="">
+					<rect x="145.0" y="40.05555555555556" width="284.625" height="32.222222222222214" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="88.3888888888889" width="317.625" height="32.222222222222214" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="136.72222222222223" width="268.125" height="32.22222222222223" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,433.625,56.166667)">
+							<text x="-11.123046875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">13800</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,466.625,104.5)">
+							<text x="-11.123046875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">15400</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,417.125,152.833333)">
+							<text x="-11.123046875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">13000</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 145,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 140,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,80.333333 L 140,80.333333 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,128.666667 L 140,128.666667 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,177 L 140,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,140,56.166667)">
+							<text x="-64.92578125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">GS prior 2027 avg</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,104.5)">
+							<text x="-74.7109375" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">GS revised 2027 avg</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,152.833333)">
+							<text x="-76.48828125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">World Bank 2027 avg</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 475,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 145,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 248.125,32 L 248.125,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 351.25,32 L 351.25,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 454.375,32 L 454.375,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,145,27)">
+							<text x="-2.224609375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,248.125,27)">
+							<text x="-8.8984375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">5000</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,351.25,27)">
+							<text x="-11.123046875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">10000</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,454.375,27)">
+							<text x="-11.123046875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">15000</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<text x="0" y="192" style="font-family: SMPT; font-size: 9px;fill: rgb(14%,14%,12%); stroke:none;" transform="translate(0,384) scale(1,-1)">US$/t, calendar 2027 average forecasts</text>
+		</g>
+	</g>
+</svg>

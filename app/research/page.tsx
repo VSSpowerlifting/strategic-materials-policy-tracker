@@ -16,6 +16,13 @@ export default function ResearchIndex() {
         <p className="mt-5 max-w-3xl font-display text-xl leading-8 text-muted">Evidence-led studies connecting government policy to financing, industrial activity and commercial execution across strategic-material supply chains.</p>
         <div className="mt-12 border-t border-border-strong">
           <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
+            <div className="font-display text-sm leading-6 text-muted"><p className="font-semibold text-accent">Financial Intelligence 002</p><p>5 November 2026 cutoff</p><p className="mt-2">Benjamin Yang</p></div>
+            <div><h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl"><Link href="/research/escondida-copper" className="hover:text-accent">Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision</Link></h2>
+            <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">Original financial analysis of copper-price exposure, replacement economics and corporate capital allocation. A 14-page flagship report with an editable model, executive presentation and inspectable evidence.</p>
+            <Link href="/research/escondida-copper" className="research-text-link">Read the report and explore the analysis</Link></div>
+          </article>
+
+          <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
             <div className="font-display text-sm leading-6 text-muted">
               <p className="font-semibold text-accent">Financial Intelligence 001</p>
               <p>5 November 2026</p>

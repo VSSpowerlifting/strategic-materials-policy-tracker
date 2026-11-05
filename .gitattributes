@@ -1,0 +1,8 @@
+# Preserve release-manifest hashes across checkouts, including approved CSV CRLF.
+public/research/fi002/** -text
+public/research/fi002/*.csv whitespace=cr-at-eol
+public/research/fi002/*.pdf binary
+public/research/fi002/*.xlsx binary
+public/research/fi002/*.pptx binary
+public/research/fi002/*.zip binary
+public/research/fi002/*.png binary

@@ -1,0 +1,43 @@
+{
+  "localOnly": true,
+  "checks": [
+    {
+      "viewport": 320,
+      "overflow": false,
+      "radioTests": 5,
+      "axeViolations": 0,
+      "internalLinks": 17,
+      "consoleErrors": []
+    },
+    {
+      "viewport": 390,
+      "overflow": false,
+      "radioTests": 5,
+      "axeViolations": 0,
+      "internalLinks": 17,
+      "consoleErrors": []
+    },
+    {
+      "viewport": 768,
+      "overflow": false,
+      "radioTests": 5,
+      "axeViolations": 0,
+      "internalLinks": 17,
+      "consoleErrors": []
+    },
+    {
+      "viewport": 1440,
+      "overflow": false,
+      "radioTests": 5,
+      "axeViolations": 0,
+      "internalLinks": 17,
+      "consoleErrors": []
+    }
+  ],
+  "catalog": true,
+  "homepage": true,
+  "search": true,
+  "sitemap": true,
+  "fullText": true,
+  "noJavaScriptFallback": true
+}

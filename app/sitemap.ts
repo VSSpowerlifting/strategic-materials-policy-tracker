@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // /coverage), so listing them again here would duplicate sitemap
     // entries — a crawler-facing correctness bug, not a cosmetic one.
     ...[...nav, ...secondaryNav].map((n) => entry(n.href, 0.8)),
+    { url: `${site.url}/research/escondida-copper`, lastModified: new Date("2026-11-05"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${site.url}/research/hemerdon-financing`, lastModified: new Date("2026-11-05"), changeFrequency: "monthly", priority: 0.8 },
     ...getAllEvents().map((e) => entry(`/events/${e.id}`, 0.9)),
     ...getAllMaterials().map((m) => entry(`/materials/${m.slug}`, 0.7)),
