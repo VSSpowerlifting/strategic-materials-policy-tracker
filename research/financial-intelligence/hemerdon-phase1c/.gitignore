@@ -1,0 +1,4 @@
+.build/
+.codex-finalizer/
+__pycache__/
+.chart-data-*/
