@@ -95,7 +95,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="mt-4 font-display text-sm text-muted">
-              New research: <Link href="/research/tungsten-supply-security" className="text-foreground underline underline-offset-4 hover:text-accent">Tungsten Supply Security — Research Dossier 001</Link>.
+              New research: <Link href="/research/hemerdon-financing" className="text-foreground underline underline-offset-4 hover:text-accent">Inside Tungsten West&apos;s £71 Million Restart Financing — Financial Intelligence 001</Link>.
             </p>
             <p className="mt-6 font-display text-xs text-muted">
               Research by <Link href="/about" className="underline underline-offset-4">Benjamin Yang</Link>.

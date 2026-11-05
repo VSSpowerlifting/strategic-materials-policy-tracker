@@ -17,6 +17,29 @@ export default function ResearchIndex() {
         <div className="mt-12 border-t border-border-strong">
           <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
             <div className="font-display text-sm leading-6 text-muted">
+              <p className="font-semibold text-accent">Financial Intelligence 001</p>
+              <p>5 November 2026</p>
+              <p className="mt-2">Benjamin Yang</p>
+            </div>
+            <div>
+              <h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl">
+                <Link href="/research/hemerdon-financing" className="hover:text-accent">
+                  Inside Tungsten West&apos;s £71 Million Restart Financing
+                </Link>
+              </h2>
+              <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">
+                An independent financial assessment of the National Wealth Fund&apos;s Hemerdon investment,
+                remaining project expenditure, and refinancing exposure. Includes an eight-page memo,
+                ten-slide executive presentation, and editable financial model.
+              </p>
+              <Link href="/research/hemerdon-financing" className="research-text-link">
+                Read the financial case and download the model
+              </Link>
+            </div>
+          </article>
+
+          <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
+            <div className="font-display text-sm leading-6 text-muted">
               <p className="font-semibold text-accent">Applied Strategy 001</p>
               <p>4 November 2026</p>
               <p className="mt-2">Benjamin Yang</p>
