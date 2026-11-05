@@ -303,7 +303,7 @@ test("an actor's portfolio counts a package once and sums public and joint-vehic
   assert.equal(uk.counts.rows, 4);
   assert.equal(uk.counts.byLayer.public_commitment, 2);
   assert.equal(uk.counts.byLayer.envelope, 2);
-  assert.ok(uk.rows.some((r) => r.id === "fin-uk-cm-accelerator-envelope-2026"));
+  assert.ok(uk.rowIds.includes("fin-uk-cm-accelerator-envelope-2026"));
   const japan = actorPortfolio("japan");
   assert.equal(japan.jointVehicleTotals.currencies[0]?.currency, "AUD", "JARE's equity is summed apart from public money");
   assert.ok(japan.publicTotals.currencies.every((c) => c.currency !== "AUD"));
