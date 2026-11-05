@@ -298,10 +298,12 @@ test("a row drawn from one programme's facility and part of another's reserve be
 
 test("an actor's portfolio counts a package once and sums public and joint-vehicle money apart", () => {
   const uk = actorPortfolio("uk");
-  // The NWF package with its two parts folded in, the procurement right and the DBT fund.
-  assert.equal(uk.counts.rows, 3);
+  // The earlier NWF package/procurement right and DBT fund retain their roles;
+  // the later UK Accelerator adds one distinct non-committed programme envelope.
+  assert.equal(uk.counts.rows, 4);
   assert.equal(uk.counts.byLayer.public_commitment, 2);
-  assert.equal(uk.counts.byLayer.envelope, 1);
+  assert.equal(uk.counts.byLayer.envelope, 2);
+  assert.ok(uk.rows.some((r) => r.id === "fin-uk-cm-accelerator-envelope-2026"));
   const japan = actorPortfolio("japan");
   assert.equal(japan.jointVehicleTotals.currencies[0]?.currency, "AUD", "JARE's equity is summed apart from public money");
   assert.ok(japan.publicTotals.currencies.every((c) => c.currency !== "AUD"));
