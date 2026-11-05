@@ -248,7 +248,7 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   assert.equal(parsed.totalPublicSeedRows,F5_SEED_NAMES.reduce((n,seed)=>n+seeds()[seed].length,0));
   assert.ok(parsed.countOtherPostCutoffFields>0,
     "unapproved 5 November records must remain visibly beyond the 4 November site cutoff");
-  assert.ok(parsed.afterProposedCutoffFields.some(r=>
+  assert.ok(parsed.afterProposedCutoffFields.some((r:{recordId:string;field:string;date:string})=>
     r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"),
   "new primary-source access dates must be reported as future-to-current-publication");
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
