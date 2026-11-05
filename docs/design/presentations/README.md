@@ -14,6 +14,7 @@ SMPT publishes independently authored, source-linked industrial-policy and finan
 3. [Reference Analysis](REFERENCE_ANALYSIS.md) — annotated evaluation of the four supplied McKinsey/BCG decks and additional institutional resources.
 4. [FI001 Redesign Brief](FI001_REDESIGN_BRIEF.md) — suggested **18-slide** versioned redesign, not an authorization to overwrite the published FI001 edition.
 5. [Original slide previews](examples/) — four SMPT-authored vector examples demonstrating the system. These are not copies of consultant slide screenshots.
+6. [Editable PowerPoint master generator](templates/create_master.py) — reproducible eight-layout starter using editable PowerPoint text and shapes.
 
 ## Original examples
 
@@ -26,6 +27,17 @@ The illustrations below are original SMPT designs using **already disclosed FI00
 ![Milestone-to-cash-conversion evidence](examples/03-cash-conversion.svg)
 
 ![Executive financial thesis](examples/04-executive-findings.svg)
+
+## Generate an editable PowerPoint starter
+
+With Python 3 and [python-pptx](https://python-pptx.readthedocs.io/) installed:
+
+```bash
+python -m pip install python-pptx
+python docs/design/presentations/templates/create_master.py SMPT_Research_Master_v2.pptx
+```
+
+The starter contains eight **illustrative** original layouts and example FI001 figures, **not** an approved republished research edition. Replace examples using the controlling model and evidence register before publication. Convert a finished PPTX to PDF using an available office renderer, inspect every slide, and validate font substitutions and hyperlinks. Source Sans 3 and Georgia are only font *names* in the PPTX; no font files are bundled. When these fonts are unavailable, common renderers may fall back to other serif/sans families.
 
 ## What is included / excluded
 
