@@ -30,7 +30,7 @@ export default function ResearchIndex() {
               <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">
                 An independent financial assessment of the National Wealth Fund&apos;s Hemerdon investment,
                 remaining project expenditure, and refinancing exposure. Includes an eight-page memo,
-                ten-slide executive presentation, and editable financial model.
+                18-slide financial strategy presentation, and editable financial model.
               </p>
               <Link href="/research/hemerdon-financing" className="research-text-link">
                 Read the financial case and download the model
