@@ -1,0 +1,382 @@
+{
+  "title": "Inside Tungsten West's £71 Million Restart Financing",
+  "subtitle": "Government Capital, Project Expenditure and Refinancing Risk at Hemerdon",
+  "cutoff": "2026-11-04",
+  "acceptedCommit": "772f2f4c02631f533a0a893849c9bedb8a6ff8ad",
+  "modelSHA256": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7",
+  "fonts": {
+    "title": "Georgia Bold",
+    "body": "Arial",
+    "fallbackReason": "Source Sans 3 not installed; Arial permitted by SMPT v2"
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "title": "",
+      "scope": "",
+      "kind": "cover",
+      "claimClass": "Research identity",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "sourceLine": "Accepted FI001 research. Revision candidate for human editorial review.",
+      "mechanism": "Instrument-level financing analysis connects capital provision with expenditure, cash conversion and financing obligations.",
+      "caveat": "",
+      "data": []
+    },
+    {
+      "slide": 2,
+      "title": "Government capital strengthens the restart and sets a financing timetable",
+      "scope": "National Wealth Fund (NWF) financing   /   Dated disclosures and independent analysis",
+      "kind": "executive findings",
+      "claimClass": "Analyst inference",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4"
+      ],
+      "sourceLine": "Accounts, approved 2 Sep 2026, pp37–38. October presentation, slides20,33. August terms, 25 Aug.",
+      "mechanism": "Capital access improves restart prospects while short debt tenor makes cash timing and refinancing material.",
+      "caveat": "Current headroom and repayment sufficiency remain unestablished.",
+      "data": [
+        61,
+        40,
+        45,
+        366
+      ]
+    },
+    {
+      "slide": 3,
+      "title": "Financing and operating progress advanced through distinct 2026 milestones",
+      "scope": "Hemerdon, Devon   /   Drakelands Restoration Limited (DRL), wholly owned operating subsidiary",
+      "kind": "dated chronology",
+      "claimClass": "Reported / management guidance",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "sourceLine": "Issuer releases: 25/28 Aug, 15/23 Sep. Accounts: published 3 Sep, approved 2 Sep. October deck: 13 Oct.",
+      "mechanism": "Drawdown strengthens the financing evidence beyond the announcement; operating disclosures establish a separate execution record.",
+      "caveat": "Chronology does not establish causal production impact.",
+      "data": []
+    },
+    {
+      "slide": 4,
+      "title": "The £71m headline contains £61m of gross core financing",
+      "scope": "Instrument amounts   /   GBP million   /   Transaction financing, not current cash",
+      "kind": "proportional instrument bars",
+      "claimClass": "Reported + independent arithmetic",
+      "sourceKeys": [
+        "S1",
+        "S3",
+        "S4"
+      ],
+      "sourceLine": "NWF and issuer releases, 25 Aug. Accounts pp37,65: full core draw by 2 Sep. Model Funding!D8:D12.",
+      "mechanism": "Separate instrument and availability treatments prevent conditional lending capacity being mistaken for cash.",
+      "caveat": "£61m is gross transaction financing; exact net equity proceeds and later uses are unreconciled.",
+      "data": [
+        36,
+        25,
+        10,
+        61,
+        71
+      ]
+    },
+    {
+      "slide": 5,
+      "title": "Equity absorbs residual risk and the loan requires repayment",
+      "scope": "NWF equity in Tungsten West plc   /   Proposed loan borrower: DRL, with group guarantees",
+      "kind": "instrument comparison",
+      "claimClass": "Reported terms / analyst interpretation",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S8"
+      ],
+      "sourceLine": "August terms; accounts pp37–38,65; October slide33; group deed 28 Aug. SONIA: Sterling Overnight Index Average. pp: percentage points.",
+      "mechanism": "Equity and debt allocate project risk differently, while a rising margin increases the cost of a slower ramp.",
+      "caveat": "Do not infer executed loan terms, first-ranking security or exact maturity from the deed.",
+      "data": [
+        36,
+        25,
+        10,
+        5.5,
+        1,
+        366
+      ]
+    },
+    {
+      "slide": 6,
+      "title": "The August plan combined £61m financing with other cash sources",
+      "scope": "Original plan dated 25 August 2026   /   GBP million   /   Unspecified peak funding date",
+      "kind": "sources and uses",
+      "claimClass": "Management plan / independent aggregation",
+      "sourceKeys": [
+        "S4",
+        "S5"
+      ],
+      "sourceLine": "RNS9611R Appendix Sources and Uses. Model August plan. Later repayment reported 28 Aug.",
+      "mechanism": "The plan reserves depend on anticipated collections as well as financing, and uses include replacement of prior bridge debt.",
+      "caveat": "Forecast receipts, recoveries and planned uses are not verified bank flows.",
+      "data": {
+        "sources": [
+          61,
+          7,
+          5,
+          15
+        ],
+        "uses": [
+          23,
+          28,
+          23,
+          13
+        ],
+        "statedTotal": 88,
+        "detailTotal": 87
+      }
+    },
+    {
+      "slide": 7,
+      "title": "October guidance leaves £40–45m of project expenditure",
+      "scope": "Management estimate released 13 October 2026   /   GBP million   /   Operating costs excluded",
+      "kind": "range exhibit",
+      "claimClass": "Management guidance / midpoint convention",
+      "sourceKeys": [
+        "S2"
+      ],
+      "sourceLine": "October presentation slide20. Model Funding!D16:D17,D27:D28. Financial years end 31 March.",
+      "mechanism": "The spending range measures remaining project work. Payment timing and operating flows govern its liquidity effect.",
+      "caveat": "Do not subtract this range from gross financing to manufacture cash.",
+      "data": [
+        40,
+        42.5,
+        45,
+        25,
+        35
+      ]
+    },
+    {
+      "slide": 8,
+      "title": "The illustrative downside adds £5.75m above the spending reference",
+      "scope": "October-based analyst stress   /   GBP million incremental   /   No accordion draw assumed",
+      "kind": "native driver chart",
+      "claimClass": "Analyst scenario using company inputs",
+      "sourceKeys": [
+        "S1",
+        "S2"
+      ],
+      "sourceLine": "Accounts p38: three-month fallback-processing sensitivity. October slide20. Model Funding!D18:D23, Downside.",
+      "mechanism": "Capex range, fallback-processing delay and simple rate exposure describe distinct sources of incremental cash uses.",
+      "caveat": "Illustrative increment, not guidance, current cash requirement or forecast costs.",
+      "data": [
+        2.5,
+        3,
+        0.25,
+        5.75
+      ]
+    },
+    {
+      "slide": 9,
+      "title": "Deferring August receipts removes the plan’s cash reserve",
+      "scope": "Historical August counterfactual   /   GBP million   /   All other original-plan items held fixed",
+      "kind": "native scenario chart",
+      "claimClass": "Historical-plan counterfactual",
+      "sourceKeys": [
+        "S4"
+      ],
+      "sourceLine": "RNS9611R funding appendix, 25 Aug. Model August plan!D35:D37 with receipts factor 0.",
+      "mechanism": "Collections timing supported the planned reserve. Deferral changes historical-plan ending cash without establishing actual non-receipt.",
+      "caveat": "Neither rounding convention is an observed current deficit.",
+      "data": [
+        13,
+        -2,
+        -1,
+        15,
+        88,
+        75,
+        73,
+        74
+      ]
+    },
+    {
+      "slide": 10,
+      "title": "Commissioning must establish repeatable payable output",
+      "scope": "Reported milestones and management guidance   /   No independently verified steady-state performance",
+      "kind": "operating evidence ladder",
+      "claimClass": "Issuer-reported progress / guidance",
+      "sourceKeys": [
+        "S2",
+        "S6"
+      ],
+      "sourceLine": "Processing release, 15 Sep. October presentation, operating milestones and FY2028 guidance.",
+      "mechanism": "Operational performance controls payable volume and cost per unit, so commissioning progress needs a cash-conversion test.",
+      "caveat": "Targets and reported milestones remain distinct from verified sustained production.",
+      "data": [
+        3300,
+        600
+      ]
+    },
+    {
+      "slide": 11,
+      "title": "Elmet provides a contracted outlet with variable-price receipts",
+      "scope": "Agreement announced 23 September 2026   /   1,000t contained WO3 annually for eight years",
+      "kind": "commercial dependency sequence",
+      "claimClass": "Reported contract / analyst mechanism",
+      "sourceKeys": [
+        "S7"
+      ],
+      "sourceLine": "Issuer RNS8695V in FCA NSM, highlights and further information. APT: ammonium paratungstate. Delivery/payment dates unresolved.",
+      "mechanism": "The sequence exposes the contractual and working-capital steps between plant output and cash available to creditors.",
+      "caveat": "The nominal contract value is not guaranteed revenue. The additional 500t provision remains conditional.",
+      "data": [
+        1000,
+        8
+      ]
+    },
+    {
+      "slide": 12,
+      "title": "The short loan horizon makes the cash-conversion timetable material",
+      "scope": "Announced 366-day tenor   /   FY2028 financing-service guidance   /   Exact maturity unresolved",
+      "kind": "financing horizon matrix",
+      "claimClass": "Reported terms / analyst inference",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4",
+        "S8"
+      ],
+      "sourceLine": "August terms: agreement-date origin. Accounts p38: drawdown origin. October slides23,33. Deed 28 Aug.",
+      "mechanism": "A relatively short core loan places repayment or replacement capital close to the ramp, while equipment service extends beyond it.",
+      "caveat": "Tenors and fiscal-year service are separate disclosed measures. Exact core-loan maturity remains unresolved.",
+      "data": [
+        366,
+        26,
+        6,
+        3,
+        5
+      ]
+    },
+    {
+      "slide": 13,
+      "title": "Each capital provider needs a different test of the operating ramp",
+      "scope": "Institutional decision matrix   /   Independent SMPT interpretation",
+      "kind": "stakeholder decision matrix",
+      "claimClass": "Analyst inference",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4",
+        "S7",
+        "S8"
+      ],
+      "sourceLine": "Accepted memo sections3,6,7 and Phase1B information-request checklist. No investment recommendation or lender underwriting.",
+      "mechanism": "The same operating facts inform residual returns, debt recovery and strategic supply through different contractual exposures.",
+      "caveat": "No human professional endorsement is implied.",
+      "data": []
+    },
+    {
+      "slide": 14,
+      "title": "Collections and financing terms will shape the next assessment",
+      "scope": "Financial conclusion   /   Supported restart pathway with specific monitoring priorities",
+      "kind": "closing decision synthesis",
+      "claimClass": "Analyst inference",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4",
+        "S7"
+      ],
+      "sourceLine": "Accepted FI001 memo and Phase1B closure. Review candidate retains the 4 November 2026 research cutoff.",
+      "mechanism": "Financing has strengthened access to capital. Cash conversion and a documented financing calendar determine how confidently that progress can be underwritten.",
+      "caveat": "Current cash, a complete funding gap, valuation and repayment sufficiency remain outside this evidence base.",
+      "data": []
+    },
+    {
+      "slide": 15,
+      "title": "Source dates and financial observation dates serve different purposes",
+      "scope": "Appendix A   /   Primary-source hierarchy and date reconciliation",
+      "kind": "source-date matrix",
+      "claimClass": "Source methodology",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4",
+        "S6",
+        "S7",
+        "S8"
+      ],
+      "sourceLine": "All sources resolve to the accepted Phase1A register. No live evidence refresh. Full locators also in source-appendix.md.",
+      "mechanism": "Preserving observation and publication dates prevents later disclosures from becoming falsely contemporaneous cash balances.",
+      "caveat": "Issuer reports remain attributed and are not independent production verification.",
+      "data": []
+    },
+    {
+      "slide": 16,
+      "title": "Instrument status limits which amounts can be aggregated",
+      "scope": "Appendix B   /   Capital and liability classification register",
+      "kind": "instrument status register",
+      "claimClass": "Reported / guidance",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "S9",
+        "S10"
+      ],
+      "sourceLine": "Accounts and August terms; bridge releases 21 May / 28 Aug; April release 8 Apr; October slide33.",
+      "mechanism": "Financing classification prevents facility limits, conditional capacity, historical stocks and overlapping equipment amounts from becoming a spurious debt or cash total.",
+      "caveat": "Equipment service and principal require instrument-level reconciliation.",
+      "data": []
+    },
+    {
+      "slide": 17,
+      "title": "The four findings reconcile to the accepted financial model",
+      "scope": "Appendix C   /   Model hash and calculation checks   /   GBP million unless stated",
+      "kind": "model reconciliation",
+      "claimClass": "Independent arithmetic / validated model",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4"
+      ],
+      "sourceLine": "Accepted workbook SHA-256 da37ccd1…4562895f7. Full hash and cell provenance in validation-results.json.",
+      "mechanism": "Explicit arithmetic and workbook provenance preserve the financial meanings of all four headline results.",
+      "caveat": "The grouped model selector does not assign joint probability or make the separate scenarios additive.",
+      "data": [
+        61,
+        71,
+        42.5,
+        5.75,
+        -2,
+        -1
+      ]
+    },
+    {
+      "slide": 18,
+      "title": "Liquidity and executed terms are the highest-value next disclosures",
+      "scope": "Appendix D   /   Ranked diligence requests from the accepted Phase1B record",
+      "kind": "ranked diligence",
+      "claimClass": "Analyst recommendation",
+      "sourceKeys": [
+        "S1",
+        "S2",
+        "S4",
+        "S7",
+        "S8"
+      ],
+      "sourceLine": "Phase1B information-request checklist. No outreach undertaken. A new evidence update needs separate authorization.",
+      "mechanism": "The requests progress from closing the cash stock to timing obligations and demonstrating commercial conversion.",
+      "caveat": "Current funding gap, DSCR, valuation and repayment assurance remain unavailable.",
+      "data": []
+    }
+  ]
+}

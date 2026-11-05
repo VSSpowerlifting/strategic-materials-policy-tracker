@@ -1,0 +1,1485 @@
+{
+  "baseline": "b688516763447b669b6755d9083726e691753ac7",
+  "researchCutoff": "2026-11-04",
+  "slideCount": 18,
+  "mainSlides": 14,
+  "appendixSlides": 4,
+  "checkCount": 289,
+  "failureCount": 0,
+  "checks": [
+    {
+      "check": "Accepted model byte identity",
+      "passed": true,
+      "detail": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7"
+    },
+    {
+      "check": "Phase1A model byte identity",
+      "passed": true
+    },
+    {
+      "check": "Preserved independent validation applies to model",
+      "passed": true
+    },
+    {
+      "check": "Core financing independently recomputed",
+      "passed": true
+    },
+    {
+      "check": "Headline including uncommitted reconciles",
+      "passed": true
+    },
+    {
+      "check": "October range and midpoint",
+      "passed": true
+    },
+    {
+      "check": "Independent stress arithmetic",
+      "passed": true
+    },
+    {
+      "check": "Stress matches independent workbook case",
+      "passed": true
+    },
+    {
+      "check": "August grouped sources/uses",
+      "passed": true
+    },
+    {
+      "check": "August stated and detail scenarios",
+      "passed": true
+    },
+    {
+      "check": "Slide4 instrument inputs",
+      "passed": true
+    },
+    {
+      "check": "Slide6 grouped sources/uses",
+      "passed": true
+    },
+    {
+      "check": "Slide7 range",
+      "passed": true
+    },
+    {
+      "check": "Slide8 stress components",
+      "passed": true
+    },
+    {
+      "check": "Slide9 receipt scenario",
+      "passed": true
+    },
+    {
+      "check": "18 slides / hard cap",
+      "passed": true
+    },
+    {
+      "check": "Slide01 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide01 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide01 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide01 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide02 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide02 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide02 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide02 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide03 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide03 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide03 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide03 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide04 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide04 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide04 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide04 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide05 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide05 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide05 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide05 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide06 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide06 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide06 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide06 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide07 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide07 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide07 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide07 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide08 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide08 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide08 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide08 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide09 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide09 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide09 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide09 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide10 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide10 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide10 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide10 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide11 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide11 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide11 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide11 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide12 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide12 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide12 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide12 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide13 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide13 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide13 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide13 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide14 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide14 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide14 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide14 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide15 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide15 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide15 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide15 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide16 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide16 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide16 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide16 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide17 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide17 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide17 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide17 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Slide18 cutoff and number",
+      "passed": true
+    },
+    {
+      "check": "Slide18 source and class specification",
+      "passed": true
+    },
+    {
+      "check": "Slide18 Georgia/Arial only",
+      "passed": true
+    },
+    {
+      "check": "Slide18 native links match register",
+      "passed": true
+    },
+    {
+      "check": "Native table ownership",
+      "passed": true,
+      "detail": [
+        5,
+        13,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "check": "Native chart ownership",
+      "passed": true,
+      "detail": [
+        8,
+        9
+      ]
+    },
+    {
+      "check": "ppt/slides/charts/chart1.xml literal values",
+      "passed": true,
+      "detail": [
+        2.5,
+        3.0,
+        0.25
+      ]
+    },
+    {
+      "check": "ppt/slides/charts/chart2.xml literal values",
+      "passed": true,
+      "detail": [
+        13.0,
+        -2.0,
+        -1.0
+      ]
+    },
+    {
+      "check": "Both chart series exact",
+      "passed": true
+    },
+    {
+      "check": "Two editable chart workbooks",
+      "passed": true
+    },
+    {
+      "check": "ppt/embeddings/chart-data-snapshot-001.xlsx workbook values",
+      "passed": true,
+      "detail": [
+        2.5,
+        3,
+        0.25
+      ]
+    },
+    {
+      "check": "ppt/embeddings/chart-data-snapshot-002.xlsx workbook values",
+      "passed": true,
+      "detail": [
+        13,
+        -2,
+        -1
+      ]
+    },
+    {
+      "check": "Financing instrument bars editable",
+      "passed": true
+    },
+    {
+      "check": "Financing widths proportional",
+      "passed": true,
+      "detail": [
+        4114800,
+        2857500,
+        1143000
+      ]
+    },
+    {
+      "check": "Accordion has dashed outline",
+      "passed": true
+    },
+    {
+      "check": "No flattened slide images",
+      "passed": true
+    },
+    {
+      "check": "No rhetorical contrast patterns",
+      "passed": true
+    },
+    {
+      "check": "Required status caveats visible",
+      "passed": true
+    },
+    {
+      "check": "PDF 18 pages",
+      "passed": true
+    },
+    {
+      "check": "PDF01 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF01 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF01 link1",
+      "passed": true
+    },
+    {
+      "check": "PDF01 link2",
+      "passed": true
+    },
+    {
+      "check": "PDF01 link3",
+      "passed": true
+    },
+    {
+      "check": "PDF01 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF01 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF02 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF02 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF02 link4",
+      "passed": true
+    },
+    {
+      "check": "PDF02 link5",
+      "passed": true
+    },
+    {
+      "check": "PDF02 link6",
+      "passed": true
+    },
+    {
+      "check": "PDF02 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF02 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF03 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF03 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF03 link7",
+      "passed": true
+    },
+    {
+      "check": "PDF03 link8",
+      "passed": true
+    },
+    {
+      "check": "PDF03 link9",
+      "passed": true
+    },
+    {
+      "check": "PDF03 link10",
+      "passed": true
+    },
+    {
+      "check": "PDF03 link11",
+      "passed": true
+    },
+    {
+      "check": "PDF03 link12",
+      "passed": true
+    },
+    {
+      "check": "PDF03 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF03 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF04 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF04 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF04 link13",
+      "passed": true
+    },
+    {
+      "check": "PDF04 link14",
+      "passed": true
+    },
+    {
+      "check": "PDF04 link15",
+      "passed": true
+    },
+    {
+      "check": "PDF04 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF04 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF05 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF05 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF05 link16",
+      "passed": true
+    },
+    {
+      "check": "PDF05 link17",
+      "passed": true
+    },
+    {
+      "check": "PDF05 link18",
+      "passed": true
+    },
+    {
+      "check": "PDF05 link19",
+      "passed": true
+    },
+    {
+      "check": "PDF05 link20",
+      "passed": true
+    },
+    {
+      "check": "PDF05 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF05 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF06 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF06 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF06 link21",
+      "passed": true
+    },
+    {
+      "check": "PDF06 link22",
+      "passed": true
+    },
+    {
+      "check": "PDF06 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF06 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF07 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF07 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF07 link23",
+      "passed": true
+    },
+    {
+      "check": "PDF07 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF07 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF08 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF08 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF08 link24",
+      "passed": true
+    },
+    {
+      "check": "PDF08 link25",
+      "passed": true
+    },
+    {
+      "check": "PDF08 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF08 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF09 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF09 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF09 link26",
+      "passed": true
+    },
+    {
+      "check": "PDF09 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF09 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF10 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF10 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF10 link27",
+      "passed": true
+    },
+    {
+      "check": "PDF10 link28",
+      "passed": true
+    },
+    {
+      "check": "PDF10 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF10 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF11 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF11 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF11 link29",
+      "passed": true
+    },
+    {
+      "check": "PDF11 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF11 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF12 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF12 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF12 link30",
+      "passed": true
+    },
+    {
+      "check": "PDF12 link31",
+      "passed": true
+    },
+    {
+      "check": "PDF12 link32",
+      "passed": true
+    },
+    {
+      "check": "PDF12 link33",
+      "passed": true
+    },
+    {
+      "check": "PDF12 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF12 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF13 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF13 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF13 link34",
+      "passed": true
+    },
+    {
+      "check": "PDF13 link35",
+      "passed": true
+    },
+    {
+      "check": "PDF13 link36",
+      "passed": true
+    },
+    {
+      "check": "PDF13 link37",
+      "passed": true
+    },
+    {
+      "check": "PDF13 link38",
+      "passed": true
+    },
+    {
+      "check": "PDF13 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF13 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF14 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF14 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF14 link39",
+      "passed": true
+    },
+    {
+      "check": "PDF14 link40",
+      "passed": true
+    },
+    {
+      "check": "PDF14 link41",
+      "passed": true
+    },
+    {
+      "check": "PDF14 link42",
+      "passed": true
+    },
+    {
+      "check": "PDF14 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF14 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF15 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF15 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF15 link43",
+      "passed": true
+    },
+    {
+      "check": "PDF15 link44",
+      "passed": true
+    },
+    {
+      "check": "PDF15 link45",
+      "passed": true
+    },
+    {
+      "check": "PDF15 link46",
+      "passed": true
+    },
+    {
+      "check": "PDF15 link47",
+      "passed": true
+    },
+    {
+      "check": "PDF15 link48",
+      "passed": true
+    },
+    {
+      "check": "PDF15 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF15 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF16 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF16 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF16 link49",
+      "passed": true
+    },
+    {
+      "check": "PDF16 link50",
+      "passed": true
+    },
+    {
+      "check": "PDF16 link51",
+      "passed": true
+    },
+    {
+      "check": "PDF16 link52",
+      "passed": true
+    },
+    {
+      "check": "PDF16 link53",
+      "passed": true
+    },
+    {
+      "check": "PDF16 link54",
+      "passed": true
+    },
+    {
+      "check": "PDF16 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF16 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF17 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF17 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF17 link55",
+      "passed": true
+    },
+    {
+      "check": "PDF17 link56",
+      "passed": true
+    },
+    {
+      "check": "PDF17 link57",
+      "passed": true
+    },
+    {
+      "check": "PDF17 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF17 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF18 selectable cutoff/title",
+      "passed": true
+    },
+    {
+      "check": "PDF18 wide aspect",
+      "passed": true
+    },
+    {
+      "check": "PDF18 link58",
+      "passed": true
+    },
+    {
+      "check": "PDF18 link59",
+      "passed": true
+    },
+    {
+      "check": "PDF18 link60",
+      "passed": true
+    },
+    {
+      "check": "PDF18 link61",
+      "passed": true
+    },
+    {
+      "check": "PDF18 link62",
+      "passed": true
+    },
+    {
+      "check": "PDF18 glyphs inside page",
+      "passed": true
+    },
+    {
+      "check": "PDF18 render exists",
+      "passed": true
+    },
+    {
+      "check": "PDF Georgia Bold and Arial embedded text",
+      "passed": true,
+      "detail": [
+        "Arial-BoldMT",
+        "ArialMT",
+        "Georgia-Bold"
+      ]
+    },
+    {
+      "check": "PDF source-link count",
+      "passed": true,
+      "detail": 62
+    },
+    {
+      "check": "Finalizer matches delivered bytes",
+      "passed": true
+    },
+    {
+      "check": "Finalizer native import passed",
+      "passed": true
+    },
+    {
+      "check": "Finalizer geometry no findings",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/.gitignore",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/README.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/architecture-proposal.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/capability-audit.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/claim-source-matrix.csv",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/evidence.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/financial-assessment.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/hemerdon-financial-model.xlsx",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/model-results.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/model.py",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/next-phase-handoff.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/quality-control.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/requirements.txt",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/sources.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/test_model.py",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1a/verify.mjs",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/.gitignore",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/README.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/baseline-validation.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/financial-evidence-closure.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/funding-bridge.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/information-request-checklist.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/source-discovery-log.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/validate_workbook.py",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1b/validation-results.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/.gitignore",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/README.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Evidence_Appendix.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.docx",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Model.xlsx",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pptx",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Model_Guide.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_Handoff.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_QC.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Research_Abstract.md",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/build_deck.mjs",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/build_publication.py",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/deck-validation-results.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/finalize_pdf.py",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/model-validation-results.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/publication-content.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/publication-exhibits.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/publication-validation-results.json",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/style_pptx.py",
+      "passed": true
+    },
+    {
+      "check": "Preserve research/financial-intelligence/hemerdon-phase1c/validate_publication.py",
+      "passed": true
+    }
+  ],
+  "nativePowerPointVerified": false,
+  "nativeExcelVerified": false,
+  "pdfFonts": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "Georgia-Bold"
+  ],
+  "pdfSourceLinkCount": 62,
+  "finalizerWarnings": [
+    {
+      "available_bottom_in": 6.5104,
+      "columns": 3,
+      "declared_bottom_in": 5.5417,
+      "estimated_native_bottom_in": 6.8126,
+      "footer_object_ids": [
+        "6",
+        "7"
+      ],
+      "kind": "native_table_overflow",
+      "overflow_in": 0.3022,
+      "rows": 4,
+      "slide": 5,
+      "table_id": "10"
+    },
+    {
+      "available_bottom_in": 6.5104,
+      "columns": 3,
+      "declared_bottom_in": 5.9688,
+      "estimated_native_bottom_in": 6.5521,
+      "footer_object_ids": [
+        "6"
+      ],
+      "kind": "native_table_overflow",
+      "overflow_in": 0.0417,
+      "rows": 5,
+      "slide": 15,
+      "table_id": "10"
+    },
+    {
+      "available_bottom_in": 6.5104,
+      "columns": 3,
+      "declared_bottom_in": 6.1458,
+      "estimated_native_bottom_in": 6.5295,
+      "footer_object_ids": [
+        "6"
+      ],
+      "kind": "native_table_overflow",
+      "overflow_in": 0.0191,
+      "rows": 6,
+      "slide": 16,
+      "table_id": "10"
+    },
+    {
+      "available_bottom_in": 6.5104,
+      "columns": 3,
+      "declared_bottom_in": 6.1979,
+      "estimated_native_bottom_in": 6.5618,
+      "footer_object_ids": [
+        "6"
+      ],
+      "kind": "native_table_overflow",
+      "overflow_in": 0.0514,
+      "rows": 6,
+      "slide": 18,
+      "table_id": "10"
+    }
+  ],
+  "preservedArtifacts": [
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/.gitignore",
+      "sha256": "f26e256e34675221eae866c9e559713dcfa010c787da183ae9ebeeccc45d7427"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/README.md",
+      "sha256": "615e76071a7c8f6addd1f8ad31d15bcdaaf9cfafe31be98fae217b490b2814c1"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/architecture-proposal.md",
+      "sha256": "1d3813add5b6a35b9644630643890fd46e235539934da273cf47c958bd8ccd15"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/capability-audit.md",
+      "sha256": "e0d6855e9b7a305242e9ac63d7920739390e6d09a7077cb003799bf3e50d4afe"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/claim-source-matrix.csv",
+      "sha256": "e6a7128f4988fb63c2f07cc4dbb8ae45711d4d07ea5b1022cb4bcfb851498392"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/evidence.json",
+      "sha256": "bdef9d956c8004b4ccda492ada436f1a902d82b5d40cfd5122f23d6615e82d44"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/financial-assessment.md",
+      "sha256": "3b018385a516a5457b777acefdd5d8e84693e27070a1bf05b2600964ad4acd88"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/hemerdon-financial-model.xlsx",
+      "sha256": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/model-results.json",
+      "sha256": "f3075c2e5c22268fd6b939dfe54d2ea850f17810537ef8d4a1285a6cacc93c5c"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/model.py",
+      "sha256": "f75693d6206c215cd6fe560c6584542e09d3b9e65d3e722a9cb1cfcb13a80278"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/next-phase-handoff.md",
+      "sha256": "a7a5116adb1e718b4e5e5274d70e67c793b8d881ad4dc5a2ab03e3b59b9a66f2"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/quality-control.md",
+      "sha256": "0e858d0afa15b40f9d05d6dd5a19dabe979311765ad82dcdb6120334bad83064"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/requirements.txt",
+      "sha256": "06d28d69e958deafb09f0a44fcae9b548f15e4debc14ebc39aad5f0934856fbf"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/sources.json",
+      "sha256": "379d959a76b2bcc4cf3bddb9346e19c7fe3280485be99b2d57e02039d0409d9d"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/test_model.py",
+      "sha256": "31ab301ede10c70a67ec7ec6086a62ad7b4c44774a4e14f71d616a39fd699a14"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1a/verify.mjs",
+      "sha256": "bedaba59d1a759f7b00e7099f428ed919c9a1e44ff2dc37154660f0d51ee30f0"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/.gitignore",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/README.md",
+      "sha256": "88977a604787f4d9f778be00f3aa1a02806f10f9bd232906b8de15cf565de47c"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/baseline-validation.json",
+      "sha256": "b77e7a8d7c0829ebe1b6b25d7bb4abb4b93df3da8826a1af11482e479383d3b0"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/financial-evidence-closure.md",
+      "sha256": "a0d54e890a284a921b35e8d9e4dadd0a3627a82e302ca19daa5b556927ded775"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/funding-bridge.json",
+      "sha256": "3ade638b3bc23e7352b6b7f4a662a3074c30445f2a484ca03240a3d488f96b8b"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/information-request-checklist.md",
+      "sha256": "37eecdbb30b129576341b0a8fb6b79bce3be1b34dfd44b3d554fcc3a33c47e34"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/source-discovery-log.json",
+      "sha256": "aa223748985ee99a8699e700254b9eb01ad9fe85d61d1d036e546ba1d21aa55e"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/validate_workbook.py",
+      "sha256": "418646446937f8cfb866b6067fd12a7aa4e3b54473ee72c458fa2a0bddf1dbf8"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1b/validation-results.json",
+      "sha256": "23ffade9a1ce9145386c0e0be9e22cf127052056bbaa0ec9f7ab5d200ea30dfa"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/.gitignore",
+      "sha256": "6b1fbf40b7742fde561100098afb2e0668e83bc5d7a9a5f4e9a327f040ceb82d"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/README.md",
+      "sha256": "30d73693397711fd6a6968c0099cf817ea4563a2338ca533deac2dcf3335ca40"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Evidence_Appendix.md",
+      "sha256": "ca8dc61140e31a844d01c39fe382744d641d146612dac093608319111f6900de"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.docx",
+      "sha256": "3a95a23775deb50870ff7f1c39e3ebe671cf711119599475e1c0fbeed25dd038"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
+      "sha256": "a90416a2142b364f2d5c51b3aa4bf2cc785bef0b4a7831988b8f104fa94714f8"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Model.xlsx",
+      "sha256": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
+      "sha256": "fada7757cb56302c2e01aab19d88ef030c2015a55452c64f93a9ecf93a81f16d"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pptx",
+      "sha256": "96ccfbd7e5b03a8f5677e85c615ebf3ec8257c1e7d8d6f3fdaeb531a2562e909"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Model_Guide.md",
+      "sha256": "8b2e87f0cdb2d2e07f2f16bae79b1139f4e2c1ac10a5acca93591ec9409e0241"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_Handoff.md",
+      "sha256": "f99730076766242c29ccd27d0273da1c8ae19adc8044c8c1c30586426cd76d9e"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_QC.md",
+      "sha256": "0bbfc4d99e2b5789c60c8873b32355650abba9fb084cf6468d114d4c5f915d2a"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Research_Abstract.md",
+      "sha256": "ff03b95cfe7bd73cdfe617738c3497bd782e2c35dbf52d7d13fa891b2b771451"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/build_deck.mjs",
+      "sha256": "ae4362827e223a62cc1a2a7770b5d9a02a7b5ccdc755ecff29377b2dda192292"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/build_publication.py",
+      "sha256": "193836d1477370091fa74e7e4c39224e41a06b55564074b9674be463e5b18c10"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/deck-validation-results.json",
+      "sha256": "5ec269e5b03e84aefda60bb0b573edd8fd5a2711b1f031c1d2e4092df5bcb29f"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/finalize_pdf.py",
+      "sha256": "4f9c2309437ebb291d8a41fb79ff52f40a4f23ab7070fac180df00576e706100"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/model-validation-results.json",
+      "sha256": "3b94c2f5ed675827cf4695f416236fcf96213ea1565be2a6319ca0e57d9c4e70"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/publication-content.json",
+      "sha256": "ee2b4c400fa225debd6f29d9cd4149e0200b5f0cb3bde135370dcc342a707e8c"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/publication-exhibits.json",
+      "sha256": "3bceb18e1091ac48d35519e07eac5f86bc825900ddca585fbc5d24b9039e105d"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/publication-validation-results.json",
+      "sha256": "5474708e438a927dafa7d92b7e7ff67e9a3db49f8cb3e43d94e140c729a6af43"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/style_pptx.py",
+      "sha256": "9441a0cab44f20633d7a6352ad9ac52d035c4adc5f848c1384e0a76ae544558a"
+    },
+    {
+      "path": "research/financial-intelligence/hemerdon-phase1c/validate_publication.py",
+      "sha256": "c21c89c9f44b67df2acc5996c17847af391da811d217fde9a57cfaf16f4def42"
+    }
+  ],
+  "artifactSHA256": {
+    "publication-handoff.md": "7ac67357e201aa9475a0612099050325dd37931bd6cd1800db3a3b9a7cc9dba4",
+    "style_package.py": "60e58264a817b2476f4758d04294b6b432b23a05cb9cb21358b2a8a1dad2a704",
+    "build_deck.mjs": "04a5aa76a897e5d6c5ee0cb5d188ecdfcc5a8eb412f98d082c7acc2194e6a071",
+    "validate_deck.py": "16daa25cb23b202c8af5544517d220773c399f5fabcb48aeadcbdc28fbc9dd49",
+    "SMPT_FI001_Hemerdon_Presentation_v2.pdf": "b72cef3811e011c91f615f0965a2c98f49ad9cb56bb39a23c22a8a868e7f8172",
+    "source-link-checks.json": "1f9deeef3784a23be38508272be52960520e0f642f92c3f55f5365c345d1bc93",
+    "export_pdf.py": "4f83f77730469b077946ed2de77ba54ca99777d975fa5f1de1da5570465678ec",
+    "README.md": "c6e0057c845ffebc603e16900a0524ad105e86e297c010c7903ee44dd3961b5c",
+    "source-appendix.md": "c41799a58116d24410da34b44e603dd8fba322d21d58066b7b96dc1b3e1c27aa",
+    "deck-validation-results.json": "a9dfd1485b354635d7de258928bdc8b20f7f5f657dbe9030442ac4df546d9b20",
+    "exhibit-inputs.json": "1f03eec5a95cbe9bf02b26683d1d110675a9379bf25c6cda8ed3a077ee349406",
+    "contact-sheet.png": "dd2b55244890cdaf8cb9ae5c318f5f3763de26f5d84f2c1f124806141b4cd7ab",
+    "publication-qc.md": "7b9191c9ed61563bb064c347b726b9a431640cd4d19c05833371adcd4b424788",
+    "slide-specs.json": "046f9cf28d8596d644d39df372ba961ecab71f50188b7e879c34bf06281b63d3",
+    "SMPT_FI001_Hemerdon_Presentation_v2.pptx": "0fbf981ec3d2a3ae33fd7467f8684932501fec190bb89476b3b7c0b3be468863"
+  }
+}
