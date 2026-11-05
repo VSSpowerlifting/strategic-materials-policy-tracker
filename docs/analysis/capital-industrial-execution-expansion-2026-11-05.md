@@ -27,7 +27,7 @@ The new entities are:
 - 6 policy events (US EXIM loans, Project Vault, Australian financing, Canada SRF, CGF Marathon, UK accelerator)
 - 12 distinct financing rows (3 + 1 + 3 + 2 + 2 + 1)
 - 7 physical project rows (including distinct Alma and Grande-Baie sites)
-- 10 organizations, 3 programmes, 7 additional sources and 6 additional material types
+- 10 organizations, 3 programmes, 8 additional original sources (including Nolans), 2 source-quoted framing claims and 6 additional material types
 - 1 lifecycle update to existing Nolans financing and project records
 
 ## Dated high-risk control review
@@ -36,10 +36,12 @@ The new entities are:
 
 ## Review and release gate
 
-1. Run `npm run validate`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, and `git diff --check` on the PR head.
+1. Run `npm run validate`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, and `git diff --check` on the PR head. Newly added post-November-4 source-review dates must remain flagged as unreleased by the 2026-11-04 cutoff audit pending publication authorization; older cutoff tests isolate this new batch rather than rewriting past history.
 2. Independently verify the source statements, legal categories and `associatedProjectIds` schema/renderer treatment, especially the two-site Rio entry.
 3. Verify all new project/org/programme foreign keys, material and jurisdiction inverse links, zero orphan projects, and source register resolution.
 4. Inspect /events, /capital, /projects, /programmes, /materials, /portfolios, /coverage and exports at preview.
 5. Resolve any validation/test/build failures **before** approval. Reviewer retains release authority; no automatic merge or deployment.
+
+This branch also adds regression coverage for Nolans construction-versus-payment and updates historical count assertions and responsive Chromium QA to match the source-linked expansion. Browsers must continue to verify actual record cardinality rather than relying on pre-expansion literals.
 
 No calculation of undisclosed private capital, conditional financing drawdown or production capacity is permitted in this tranche.
