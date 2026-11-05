@@ -25,7 +25,7 @@ function rule(s,y,x=60,w=1160){rect(s,x,y,w,1,darks.has(s)?P.brand:P.rule);}
 function base(heading,scope,keys,sourceLine,kind,claimClass='Analyst inference'){
  const n=pres.slides.items.length+1,s=pres.slides.add(),dark=n===1||n===14;if(dark)darks.add(s);s.background.fill=dark?P.dark:P.paper;
  txt(s,'SMPT',60,28,100,28,20,true,dark?P.highlight:P.gold);txt(s,`FINANCIAL INTELLIGENCE 001${n>=15?'   APPENDIX':''}`,175,32,900,25,14,false,dark?P.light:P.muted);rule(s,65);
- if(heading)txt(s,heading,60,91,1160,105,40,true,null,true);
+ if(heading)txt(s,n===11?heading.replace(' establishes','\nestablishes'):heading,60,91,1160,105,40,true,null,true);
  if(scope)txt(s,scope,60,202,1160,33,18,false,dark?P.light:P.muted);
  rule(s,625);let f=txt(s,'',60,636,1160,43,13,false,dark?P.light:P.muted);
  f.text=[{runs:[...keys.flatMap(k=>[{run:k,style:{typeface:'Arial',fontSize:'13px',underline:'sng',bold:true,color:dark?P.highlight:P.gold},link:{uri:refs[k].url,isExternal:true}},{run:'  ',style:{fontSize:'13px'}}]),{run:sourceLine,style:{typeface:'Arial',fontSize:'13px',color:dark?P.light:P.muted}}]}];
@@ -91,7 +91,7 @@ const ops=[['Processing commencement','15 September announcement','Reported acti
 ops.forEach((r,i)=>{let y=260+i*92;txt(s,r[0],60,y,395,66,24,true);txt(s,r[1],480,y,410,59,22);txt(s,r[2],930,y,290,59,21,true,P.gold);txt(s,'Financial test: '+r[3],480,y+48,740,39,21);rule(s,y+85);});
 note(s,'Throughput and recovery determine saleable volume. Poor recoveries or acceptance delays can absorb cash even as physical work advances.',558);
 spec('Operational performance controls payable volume and cost per unit, so commissioning progress needs a cash-conversion test.','Targets and reported milestones remain distinct from verified sustained production.',[3300,600]);
-s=base('Elmet provides a contracted outlet with variable-price receipts','Agreement announced 23 September 2026   /   1,000t contained WO3 annually for eight years',['S7'],'Issuer RNS8695V in FCA NSM, highlights and further information. APT: ammonium paratungstate. Delivery/payment dates unresolved.','commercial dependency sequence','Reported contract / analyst mechanism');
+s=base("Elmet's APT-linked offtake establishes a route to future sales",'Agreement announced 23 September 2026   /   1,000t contained WO3 annually for eight years',['S7'],'Issuer RNS8695V in FCA NSM, highlights and further information. APT: ammonium paratungstate. Delivery/payment dates unresolved.','commercial dependency sequence','Reported contract / analyst mechanism');
 txt(s,'Contracted route',60,254,360,34,25,true,P.gold);txt(s,'APT-linked variable pricing',445,254,775,34,25,true);rule(s,308);
 const stages=[['Payable output','Quantity and specification','Operating evidence needed'],['Delivery / acceptance','Customer accepts product','Shipment evidence needed'],['Invoice','Price and settlement terms','Invoice data needed'],['Collection','Customer payment','Bank receipt evidence needed']];
 stages.forEach((r,i)=>{let x=60+i*292;txt(s,String(i+1).padStart(2,'0'),x,341,245,38,27,true,P.gold);txt(s,r[0],x,391,270,62,26,true);txt(s,r[1],x,466,265,57,22);txt(s,r[2],x,531,265,49,19,false,P.muted);if(i<3)rect(s,x+269,351,18,1,P.rule);});

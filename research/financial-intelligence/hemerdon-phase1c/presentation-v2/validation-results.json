@@ -1466,20 +1466,20 @@
     }
   ],
   "artifactSHA256": {
-    "publication-handoff.md": "7ac67357e201aa9475a0612099050325dd37931bd6cd1800db3a3b9a7cc9dba4",
+    "publication-handoff.md": "2352bc1daa44ec1dd23ea786b07d10bb38979a4eae2531ff9c774e369ef60ffd",
     "style_package.py": "60e58264a817b2476f4758d04294b6b432b23a05cb9cb21358b2a8a1dad2a704",
-    "build_deck.mjs": "04a5aa76a897e5d6c5ee0cb5d188ecdfcc5a8eb412f98d082c7acc2194e6a071",
+    "build_deck.mjs": "762f0b564ed3e8ad92c2408fa904a2a1ebf096bb248dd183fca8f77b749fe936",
     "validate_deck.py": "16daa25cb23b202c8af5544517d220773c399f5fabcb48aeadcbdc28fbc9dd49",
-    "SMPT_FI001_Hemerdon_Presentation_v2.pdf": "b72cef3811e011c91f615f0965a2c98f49ad9cb56bb39a23c22a8a868e7f8172",
+    "SMPT_FI001_Hemerdon_Presentation_v2.pdf": "3a0de36dbee7cac507703c9eef4173cb6a7fa255b4d750ecaea272d47806a716",
     "source-link-checks.json": "1f9deeef3784a23be38508272be52960520e0f642f92c3f55f5365c345d1bc93",
     "export_pdf.py": "4f83f77730469b077946ed2de77ba54ca99777d975fa5f1de1da5570465678ec",
     "README.md": "c6e0057c845ffebc603e16900a0524ad105e86e297c010c7903ee44dd3961b5c",
     "source-appendix.md": "c41799a58116d24410da34b44e603dd8fba322d21d58066b7b96dc1b3e1c27aa",
-    "deck-validation-results.json": "a9dfd1485b354635d7de258928bdc8b20f7f5f657dbe9030442ac4df546d9b20",
+    "deck-validation-results.json": "58e40a71af55b436cf878c128900c8b8e5b72759d5e8e6c0a4d7c62aec9ab366",
     "exhibit-inputs.json": "1f03eec5a95cbe9bf02b26683d1d110675a9379bf25c6cda8ed3a077ee349406",
-    "contact-sheet.png": "dd2b55244890cdaf8cb9ae5c318f5f3763de26f5d84f2c1f124806141b4cd7ab",
-    "publication-qc.md": "7b9191c9ed61563bb064c347b726b9a431640cd4d19c05833371adcd4b424788",
-    "slide-specs.json": "046f9cf28d8596d644d39df372ba961ecab71f50188b7e879c34bf06281b63d3",
-    "SMPT_FI001_Hemerdon_Presentation_v2.pptx": "0fbf981ec3d2a3ae33fd7467f8684932501fec190bb89476b3b7c0b3be468863"
+    "contact-sheet.png": "bc9eee16ef1b899b8350d121fd9d05d20d1587b92a2a62cfddcd3fb361562adc",
+    "publication-qc.md": "b274348f3a33dd79506111bf9adb9ca2ee32278e1632d075b8556df089b34f27",
+    "slide-specs.json": "128cda17859c4d6e15592987d0127c5ccabc20de095322c9d82e200e7f48a14c",
+    "SMPT_FI001_Hemerdon_Presentation_v2.pptx": "f9552284cdffb357ad04b99511f897795e5a246ebcd9ed7339fdc19fca1383a7"
   }
 }

@@ -1,6 +1,6 @@
 # FI001 v2 — editorial and visual quality control
 
-**Agent determination: READY FOR HUMAN PUBLICATION REVIEW.** This is an unreleased candidate, not public-release approval.
+**Agent determination: READY FOR FINAL PUBLICATION APPROVAL.** This is an unreleased candidate, not public-release approval.
 
 Version: 5 November 2026. Research cutoff: **4 November 2026**. Baseline: current main `b688516763447b669b6755d9083726e691753ac7`. Controlling Phase 1B acceptance: `772f2f4c02631f533a0a893849c9bedb8a6ff8ad`.
 
@@ -63,3 +63,13 @@ All 18 individual final slides and the final contact sheet were reviewed for cli
 - No application build/tests, live download replacement, website deployment or release verification was performed. The original released edition remains intact.
 
 **Next action:** human review of this exact PDF/PowerPoint, followed by a separate release decision. No merge, deployment, outreach or live replacement is authorized by this production check.
+
+## Final slide 11 editorial correction — 5 November 2026
+
+At review baseline `95823bb42a67d9d42ca84fda39aed29ad9d7e038`, replaced “Elmet provides a contracted outlet with variable-price receipts” with **“Elmet's APT-linked offtake establishes a route to future sales”** in the canonical generator and generated slide specification. The revised assertion describes the contractual route to future sales without implying realized customer receipts. Delivery/acceptance, invoicing and collection retain their separate evidence requirements, including shipment, invoice and bank receipt evidence. The source, quantities, duration, variable-pricing label and conditional-volume caveat are unchanged.
+
+The editable PowerPoint and matching PDF were regenerated. Slide 11 was inspected at full size (1601 × 900); a deliberate break before “establishes” removes the orphaned final word without changing title wording, font size or exhibit geometry. All 18 slides remain intact. Render comparison against the review baseline confirms slides 1–10 and 12–18 are pixel-identical and slide 11 changes only in its title band. The contact sheet was refreshed.
+
+Correction review: gates A/B/E PASS for the revised assertion and its preserved evidence distinctions; C PASS for the full-size title fit and unchanged-slide comparison; D PASS for the rerun 289 presentation/source/financial/preservation checks and nine original model unit tests. All 47 original Phase 1A–1C artifacts, including the accepted Excel model, remain byte-identical to the original baseline. No new research, financial model change or source-host availability test was undertaken. The four previously documented table warnings and native Office/accessibility limitations remain.
+
+**READY FOR FINAL PUBLICATION APPROVAL.** Human financial/editorial approval and source-specific rights clearance remain pending. PR #210 stays draft; no merge, deployment or publication is authorized by these checks.
