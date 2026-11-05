@@ -49,8 +49,7 @@
     ],
     "stages": [
       "mining",
-      "processing",
-      "separation"
+      "processing"
     ],
     "materialIds": [
       "rare-earth-elements"
@@ -85,7 +84,7 @@
         ],
         "evidence": "explicit",
         "locator": "Opening paragraphs; ore-to-oxide facility description",
-        "note": "The release identifies an integrated ore-to-oxide undertaking, supporting mining/processing stages; separation is inferred from ore-to-oxide refining and should be separately verified."
+        "note": "Government describes ore-to-oxide mine and processing; no distinct separation-stage milestone is established."
       }
     ],
     "notes": "The release names the project as \"the Arafura Nolans project\" and states no developer or stage, so neither is recorded. The April 2026 ASX announcement expressly identifies Arafura Rare Earths Limited as the corporate equity issuer financing Nolans development, so it is registered as the project's sponsor/developer; underlying project-asset title remains unasserted. The Australian Government reported that construction had begun by 8 October 2026; its exact start date is not stated."
