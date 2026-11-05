@@ -1,0 +1,46 @@
+{
+  "cutoff": "2026-11-04",
+  "engine": "@oai/artifact-tool; not native Excel",
+  "scenarios": [
+    {
+      "case": "Base",
+      "remainingSpend": 42500000,
+      "coreCash": 111500000,
+      "incrementalStress": 0,
+      "coverageGBPPerMtu": 438.1492418839239,
+      "augustPlanCashAfterOtherUses": 13000000
+    },
+    {
+      "case": "Upside",
+      "remainingSpend": 40000000,
+      "coreCash": 109000000,
+      "incrementalStress": 0,
+      "coverageGBPPerMtu": 428.32526785065204,
+      "augustPlanCashAfterOtherUses": 13000000
+    },
+    {
+      "case": "Downside",
+      "remainingSpend": 45000000,
+      "coreCash": 114000000,
+      "incrementalStress": 5750000,
+      "coverageGBPPerMtu": 447.97321591719566,
+      "augustPlanCashAfterOtherUses": -2000000
+    }
+  ],
+  "formulaReconciliations": 9,
+  "knownAugustUsesRoundingDifferenceGBP": -1000000,
+  "scenarioMutationChecks": [
+    "selected cost",
+    "missing selected cost",
+    "unselected missing price",
+    "blank/zero/positive price",
+    "missing volume",
+    "100% royalty",
+    "hypothetical accordion and ceiling",
+    "original-plan core-loan timing",
+    "original-plan receipt timing",
+    "receipt fraction above100%",
+    "negative capex"
+  ],
+  "nativeExcelVerified": false
+}
