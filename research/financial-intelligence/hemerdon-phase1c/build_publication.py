@@ -38,38 +38,40 @@ exhibits={'cutoff':'2026-11-04','acceptedCommit':'772f2f4c02631f533a0a893849c9be
 (HERE/'publication-exhibits.json').write_text(json.dumps(exhibits,indent=2)+'\n')
 shutil.copyfile(A/'hemerdon-financial-model.xlsx',HERE/'SMPT_FI001_Hemerdon_Financial_Model.xlsx')
 assert sha(HERE/'SMPT_FI001_Hemerdon_Financial_Model.xlsx')==v['inputSHA256']
-(HERE/'SMPT_FI001_Research_Abstract.md').write_text('# '+content['title']+'\n\n'+content['abstract']+'\n\nResearch cutoff: 4 November 2026. Prepared for publication review; release requires separate authorization.\n')
+(HERE/'SMPT_FI001_Research_Abstract.md').write_text('# '+content['title']+'\n\n'+content['subtitle']+'\n\n'+content['abstract']+'\n\nResearch cutoff: 4 November 2026. Prepared for publication review; release requires separate authorization.\n')
 
-def link(p,label,url):
+def link(p,label,url,size=8):
  h=OxmlElement('w:hyperlink');h.set(qn('r:id'),p.part.relate_to(url,'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',is_external=True))
  r=OxmlElement('w:r');pr=OxmlElement('w:rPr')
- for tag,attrs in [('w:rFonts',{'w:ascii':'Arial','w:hAnsi':'Arial'}),('w:color',{'w:val':'73571F'}),('w:b',{}),('w:u',{'w:val':'single'})]:
+ for tag,attrs in [('w:rFonts',{'w:ascii':'Arial','w:hAnsi':'Arial'}),('w:color',{'w:val':'7A5510'}),('w:b',{}),('w:sz',{'w:val':str(size*2)}),('w:u',{'w:val':'single'})]:
   e=OxmlElement(tag)
   for k,val in attrs.items():e.set(qn(k),val)
   pr.append(e)
  r.append(pr);t=OxmlElement('w:t');t.text=label;r.append(t);h.append(r);p._p.append(h)
 
 doc=Document();sec=doc.sections[0]
+bg=OxmlElement('w:background');bg.set(qn('w:color'),'F5F3EE');doc.element.insert(0,bg)
+display=OxmlElement('w:displayBackgroundShape');doc.settings.element.append(display)
 sec.page_width=Inches(8.5);sec.page_height=Inches(11)
 sec.top_margin=Inches(.64);sec.bottom_margin=Inches(.62);sec.left_margin=sec.right_margin=Inches(.72)
 sec.header_distance=Inches(.27);sec.footer_distance=Inches(.27)
 for name in ['Normal','Title','Heading 1','Heading 2','Caption','Header','Footer']:
- st=doc.styles[name];st.font.name='Arial';st.font.color.rgb=RGBColor.from_string('252421')
+ st=doc.styles[name];st.font.name='Arial';st.font.color.rgb=RGBColor.from_string('1B1915')
 normal=doc.styles['Normal'];normal.font.size=Pt(10);normal.paragraph_format.line_spacing=1.12;normal.paragraph_format.space_after=Pt(7)
-doc.styles['Title'].font.size=Pt(25);doc.styles['Title'].font.bold=True
+doc.styles['Title'].font.size=Pt(24);doc.styles['Title'].font.bold=True
 doc.styles['Heading 1'].font.size=Pt(16);doc.styles['Heading 1'].paragraph_format.space_after=Pt(12)
 doc.styles['Heading 2'].font.size=Pt(11);doc.styles['Heading 2'].font.bold=True
 doc.styles['Caption'].font.size=Pt(9);doc.styles['Caption'].font.bold=True
-doc.core_properties.title=content['title'];doc.core_properties.author='Strategic Materials Policy Tracker';doc.core_properties.subject='Financial Intelligence 001; research cutoff 4 November 2026; review edition'
+doc.core_properties.title=content['title'];doc.core_properties.author='Strategic Materials Policy Tracker';doc.core_properties.subject=content['subtitle']
 h=sec.header.paragraphs[0];h.text='STRATEGIC MATERIALS POLICY TRACKER                                         FINANCIAL INTELLIGENCE 001';h.runs[0].font.size=Pt(8)
-f=sec.footer.paragraphs[0];f.text='Hemerdon   /   Research cutoff 4 November 2026   /   Publication review'
+f=sec.footer.paragraphs[0];f.text='Inside Tungsten West’s Restart Financing   /   4 November 2026   /   Review edition'
 f.runs[0].font.size=Pt(8);f.add_run(' '*5)
 fld=OxmlElement('w:fldSimple');fld.set(qn('w:instr'),'PAGE');f._p.append(fld)
 for i,page in enumerate(content['pages']):
  if i:doc.add_page_break()
  if i==0:
-  p=doc.add_paragraph('FINANCIAL DUE DILIGENCE MEMORANDUM');p.runs[0].font.size=Pt(9);p.runs[0].bold=True;p.runs[0].font.color.rgb=RGBColor.from_string('98752D')
-  doc.add_paragraph(content['title'],'Title')
+  p=doc.add_paragraph('FINANCIAL INTELLIGENCE 001   /   RESEARCH MEMORANDUM');p.runs[0].font.size=Pt(9);p.runs[0].bold=True;p.runs[0].font.color.rgb=RGBColor.from_string('7A5510')
+  doc.add_paragraph(content['title'].replace(' £71','\n£71'),'Title')
   p=doc.add_paragraph(content['subtitle']);p.runs[0].font.size=Pt(11)
   p=doc.add_paragraph('Independent SMPT research   •   Evidence through 4 November 2026');p.runs[0].font.size=Pt(9)
  doc.add_heading(page['heading'],level=1)
@@ -86,21 +88,22 @@ for i,page in enumerate(content['pages']):
   for r,row in enumerate(t.rows):
    trPr=row._tr.get_or_add_trPr();flag=OxmlElement('w:cantSplit');trPr.append(flag)
    for c in row.cells:
-    tcPr=c._tc.get_or_add_tcPr();shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'262523' if r==0 else ('F0EEE8' if r%2 else 'FBFAF7'));tcPr.append(shade)
+    tcPr=c._tc.get_or_add_tcPr();shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'12110F' if r==0 else ('EFECE6' if r%2 else 'F5F3EE'));tcPr.append(shade)
     for p in c.paragraphs:
      p.paragraph_format.space_after=Pt(5);p.paragraph_format.space_before=Pt(5);p.paragraph_format.line_spacing=1.06
-     for run in p.runs:run.font.size=Pt(9);run.font.color.rgb=RGBColor.from_string('FFFFFF' if r==0 else '252421');run.bold=r==0
+     for run in p.runs:run.font.size=Pt(9);run.font.color.rgb=RGBColor.from_string('EFECE6' if r==0 else '1B1915');run.bold=r==0
   doc.add_paragraph().paragraph_format.space_after=Pt(0)
  if page.get('sourceGuide'):
   for k,s in refs.items():
    p=doc.add_paragraph();p.paragraph_format.space_after=Pt(5)
-   link(p,k+'  '+s['title'],s['url']);p.add_run('  ('+(s['datePublished'] or 'Deed dated 28 August; filed 1 September 2026')+')')
-   for run in p.runs:run.font.size=Pt(8)
+   label='DRL group security agreement and charge 118544670005' if k=='S8' else s['title']
+   link(p,k+'  '+label,s['url'],size=9);p.add_run('  ('+(s['datePublished'] or 'Deed dated 28 August; filed 1 September 2026')+')')
+   for run in p.runs:run.font.size=Pt(9)
  for text in page.get('after',[]):doc.add_paragraph(text)
  if not page.get('sourceGuide'):
   p=doc.add_paragraph('Sources: ');p.paragraph_format.space_before=Pt(3)
   for k in page['sources']:link(p,k,refs[k]['url']);p.add_run('  ')
-  p.add_run('Locators and full titles on page 8 and in the evidence appendix.')
+  p.add_run('Full titles on page 8; claim locators in the evidence appendix.')
   for run in p.runs:run.font.size=Pt(8)
 # Remove inherited Word theme borders, including the default blue title rule.
 for st in doc.styles:
@@ -114,7 +117,7 @@ for root in [doc.element,doc.styles.element]:
 doc.save(HERE/'SMPT_FI001_Hemerdon_Financial_Memo.docx')
 # Publication-facing evidence appendix draws traceability directly from canonical records.
 facts=json.loads((A/'evidence.json').read_text())['facts']
-lines=['# FI001 evidence and methodology appendix','', '**Research cutoff: 4 November 2026. Production date: 5 November 2026.** Publication-review edition.','',
+lines=['# '+content['title'],'',content['subtitle'],'','## Evidence and methodology appendix','', '**Research cutoff: 4 November 2026. Production date: 5 November 2026.** Publication-review edition.','',
  '## Evidence hierarchy and scope','',
  'Audited accounts establish dated consolidated balances. Issuer presentations establish management guidance and claimed milestones. Announcements establish the described transaction status at their date. A filed security deed establishes documentary terms, subject to its scope. Analyst arithmetic and scenarios are explicitly identified. Neither disclosure nor source verification independently validates forecast operating outcomes.','',
  '## Financial classifications','',

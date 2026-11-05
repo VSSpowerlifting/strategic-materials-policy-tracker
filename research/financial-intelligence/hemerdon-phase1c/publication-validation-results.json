@@ -10,11 +10,19 @@
       "passed": true
     },
     {
-      "check": "fresh independent validation covers publication model",
+      "check": "preserved independent validation covers unchanged publication model",
       "passed": true
     },
     {
       "check": "all seven memo exhibit tables match reviewed content",
+      "passed": true
+    },
+    {
+      "check": "preferred memo title and subtitle metadata",
+      "passed": true
+    },
+    {
+      "check": "preferred title appears in memo",
       "passed": true
     },
     {
@@ -26,7 +34,31 @@
       "passed": true
     },
     {
+      "check": "preferred PowerPoint title metadata",
+      "passed": true
+    },
+    {
+      "check": "preferred title and subtitle on cover",
+      "passed": true
+    },
+    {
+      "check": "PowerPoint uses SMPT colors and neutral defaults",
+      "passed": true
+    },
+    {
+      "check": "slide 1 graphite background",
+      "passed": true
+    },
+    {
+      "check": "slide 10 graphite background",
+      "passed": true
+    },
+    {
       "check": "native chart values reconcile to accepted findings",
+      "passed": true
+    },
+    {
+      "check": "core bars solid and accordion separately outlined",
       "passed": true
     },
     {
@@ -43,6 +75,10 @@
     },
     {
       "check": "PPTX package geometry font and native charts passed",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo preferred title metadata",
       "passed": true
     },
     {
@@ -294,7 +330,15 @@
       "passed": true
     },
     {
-      "check": "SMPT_FI001_Hemerdon_Financial_Memo one Arial-compatible rendered family",
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo embeds Arial only",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Financial_Memo PDF colors restricted to SMPT and neutrals",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck preferred title metadata",
       "passed": true
     },
     {
@@ -518,7 +562,11 @@
       "passed": true
     },
     {
-      "check": "SMPT_FI001_Hemerdon_Strategy_Deck one Arial-compatible rendered family",
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck embeds Arial only",
+      "passed": true
+    },
+    {
+      "check": "SMPT_FI001_Hemerdon_Strategy_Deck PDF colors restricted to SMPT and neutrals",
       "passed": true
     },
     {
@@ -532,7 +580,7 @@
       "pages": 8,
       "hyperlinkAnnotations": 44,
       "renderedFontFamilies": [
-        "LiberationSans"
+        "Arial"
       ]
     },
     {
@@ -540,23 +588,25 @@
       "pages": 10,
       "hyperlinkAnnotations": 33,
       "renderedFontFamilies": [
-        "LiberationSans"
+        "Arial"
       ]
     }
   ],
   "sha256": {
-    "SMPT_FI001_Hemerdon_Financial_Memo.docx": "3814180800d0745ce69a93bd216b59ae3f225986e345a5fae5bd7aa3a02b7749",
-    "SMPT_FI001_Hemerdon_Financial_Memo.pdf": "c28010297ab284ced7db9d5e2fb7c5828e39ee6d42d45201e47094c71b6a1853",
-    "SMPT_FI001_Hemerdon_Strategy_Deck.pptx": "8badd604765acc286400188ad9a563d6ad024125c0c381dfd87261f81dc25441",
-    "SMPT_FI001_Hemerdon_Strategy_Deck.pdf": "c3437a340fb4c0e794183084713ea39748515726a1e7d462bb16ab7850223f2d",
+    "SMPT_FI001_Hemerdon_Financial_Memo.docx": "3a95a23775deb50870ff7f1c39e3ebe671cf711119599475e1c0fbeed25dd038",
+    "SMPT_FI001_Hemerdon_Financial_Memo.pdf": "a90416a2142b364f2d5c51b3aa4bf2cc785bef0b4a7831988b8f104fa94714f8",
+    "SMPT_FI001_Hemerdon_Strategy_Deck.pptx": "96ccfbd7e5b03a8f5677e85c615ebf3ec8257c1e7d8d6f3fdaeb531a2562e909",
+    "SMPT_FI001_Hemerdon_Strategy_Deck.pdf": "fada7757cb56302c2e01aab19d88ef030c2015a55452c64f93a9ecf93a81f16d",
     "SMPT_FI001_Hemerdon_Financial_Model.xlsx": "da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7",
-    "SMPT_FI001_Evidence_Appendix.md": "130559a65ea77dddf95dec15515638d92235472ffb994c3c02948f295c7d9764",
+    "SMPT_FI001_Evidence_Appendix.md": "ca8dc61140e31a844d01c39fe382744d641d146612dac093608319111f6900de",
     "SMPT_FI001_Model_Guide.md": "8b2e87f0cdb2d2e07f2f16bae79b1139f4e2c1ac10a5acca93591ec9409e0241",
-    "SMPT_FI001_Research_Abstract.md": "0f251c90c3fde94f0876e096921bbf0e5894788e9f5585b41e54a4f142777a93",
-    "publication-content.json": "a934a41bac4dbceb98eab2e096a553b6c2c3352b9ec977ac40fa2f8246248eeb",
+    "SMPT_FI001_Research_Abstract.md": "ff03b95cfe7bd73cdfe617738c3497bd782e2c35dbf52d7d13fa891b2b771451",
+    "publication-content.json": "ee2b4c400fa225debd6f29d9cd4149e0200b5f0cb3bde135370dcc342a707e8c",
     "publication-exhibits.json": "3bceb18e1091ac48d35519e07eac5f86bc825900ddca585fbc5d24b9039e105d",
     "model-validation-results.json": "3b94c2f5ed675827cf4695f416236fcf96213ea1565be2a6319ca0e57d9c4e70",
-    "deck-validation-results.json": "ff6788373511f45b3b87c0c24843068448820bd0b8356df589de60d98b1f8919"
+    "deck-validation-results.json": "5ec269e5b03e84aefda60bb0b573edd8fd5a2711b1f031c1d2e4092df5bcb29f",
+    "SMPT_FI001_Publication_QC.md": "0bbfc4d99e2b5789c60c8873b32355650abba9fb084cf6468d114d4c5f915d2a",
+    "SMPT_FI001_Publication_Handoff.md": "f99730076766242c29ccd27d0273da1c8ae19adc8044c8c1c30586426cd76d9e"
   },
   "nativeExcelVerified": false,
   "nativePowerPointVerified": false,

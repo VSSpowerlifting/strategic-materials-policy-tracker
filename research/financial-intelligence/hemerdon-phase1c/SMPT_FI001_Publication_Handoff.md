@@ -1,10 +1,10 @@
 # FI001 publication handoff
 
-**READY FOR PUBLICATION REVIEW.** The package provides a substantive financing and execution assessment, with conditional research acceptance preserved. It does not authorize publication.
+**READY FOR FINAL PUBLICATION REVIEW.** The revised package combines developed financial analysis with the SMPT graphite, cream and gold design. Conditional research acceptance remains preserved. It does not authorize publication.
 
-Title: **Hemerdon Financing and Restart Risk**
+Title: **Inside Tungsten West's £71 Million Restart Financing**
 
-Subtitle: Capital structure, remaining expenditure and refinancing exposure at Tungsten West
+Subtitle: Government Capital, Project Expenditure and Refinancing Risk at Hemerdon
 
 Research cutoff: **4 November 2026**. Production date: **5 November 2026**.
 
@@ -18,6 +18,12 @@ Research cutoff: **4 November 2026**. Production date: **5 November 2026**.
 - [Evidence and methodology appendix](SMPT_FI001_Evidence_Appendix.md)
 - [Publication QC and skeptical review](SMPT_FI001_Publication_QC.md)
 - [Research abstract](SMPT_FI001_Research_Abstract.md)
+
+## Final revision
+
+The title, metadata and publication-facing descriptions have been updated. Connected paragraphs now explain how capital provision affects the restart and how production, deliveries and collections interact with the loan timetable. The memo retains eight pages, while the ten-slide deck presents the same conclusions through shorter assertions and original financial exhibits. Graphite cover/conclusion slides, cream reading surfaces, restrained gold, consistent Arial and explicit financing-status treatments replace the prior visual styling.
+
+No figures, model inputs, formulas, source claims or financial conclusions changed. Existing filenames remain stable. Human finance/editorial review and rights clearance remain the next release steps.
 
 ## Analytical decision
 
@@ -43,6 +49,6 @@ Phase 1A/1B files are unchanged. The publication workbook is byte-identical to t
 
 ## Verification and next action
 
-The fresh model validation passes all 32 cases with zero cached differences across 167 formulas. Nine model tests and 130 cross-format checks pass. Eight memo pages and ten deck pages were rendered and inspected. Native Excel/PowerPoint execution remains unverified. Full evidence and limitations are recorded in the QC and JSON receipts.
+The preserved independent model validation passes all 32 cases with zero cached differences across 167 formulas. Nine model tests and 142 cross-format checks pass. The PDFs now embed Arial; the £61m core transaction and £10m uncommitted capacity have distinct solid and outlined treatments. Eight memo pages and ten deck pages were rendered and inspected. Native Excel/PowerPoint execution remains unverified. Full evidence and limitations are recorded in the QC and JSON receipts.
 
 The next action is independent human financial/editorial review and source-rights clearance, followed by the user's separate release decision. Do not extend the research cutoff or publish these files automatically.

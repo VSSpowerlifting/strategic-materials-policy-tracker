@@ -1,94 +1,356 @@
 {
-  "title": "Hemerdon Financing and Restart Risk",
-  "subtitle": "Capital structure, remaining expenditure and refinancing exposure at Tungsten West",
+  "title": "Inside Tungsten West's £71 Million Restart Financing",
+  "subtitle": "Government Capital, Project Expenditure and Refinancing Risk at Hemerdon",
   "series": "SMPT Financial Intelligence 001",
   "cutoff": "4 November 2026",
   "productionDate": "5 November 2026",
-  "abstract": "The National Wealth Fund's Hemerdon transaction provides £61 million of gross equity and core-loan financing within a £71 million headline that includes an uncommitted £10 million accordion. Tungsten West reports a fully funded restart pathway and processing progress. The financing replaces earlier short-term debt and supports redevelopment, while its announced 366-day loan tenor leaves commercial execution and refinancing material. This assessment reconciles the instruments, October remaining-spend guidance and two distinct model sensitivities. An illustrative £5.75 million incremental stress measures cost and rate exposure. Deferring £15 million of expected receipts in the original August plan produces approximately £2 million negative cash on the stated-total convention, or approximately £1 million using rounded detail. Neither result establishes a current deficit. The next investment test is the conversion of commissioning and offtake into collected cash before debt repayment, supported by a reconciled liquidity and debt schedule.",
+  "abstract": "The National Wealth Fund's investment changes the financing available for Hemerdon's restart through £36 million of equity and a £25 million core loan, with a further £10 million of uncommitted lending capacity accounting for the £71 million headline. Tungsten West reports a fully funded restart pathway and commissioning progress. Equity absorbs residual project risk without scheduled repayment, while the loan's announced 366-day tenor makes the timing of production, customer collections and refinancing consequential. This assessment reconstructs the instruments and reconciles October's £40–45 million remaining-project-spend guidance with two distinct sensitivities: a £5.75 million incremental cost and rate stress, and the deferral of £15 million of expected receipts in the original August plan. The latter produces approximately £2 million negative cash on published aggregate totals, or £1 million using rounded detail. These scenarios identify expenditure and timing exposures within dated disclosures; neither establishes current liquidity or repayment capacity. The next financial assessment depends on a reconciled cash and debt schedule and evidence that commissioning is converting into dependable collections.",
   "pages": [
     {
-      "heading": "1  Executive financial thesis",
+      "heading": "1  Financing the restart",
       "paragraphs": [
-        "Government capital has materially improved Hemerdon's access to restart finance. The National Wealth Fund (NWF) transaction combines risk-bearing equity with a short core loan and a separate conditional lending option. Tungsten West reports a fully funded restart pathway and commissioning progress. The investment question now concerns how expenditure, operating milestones and customer collections align with the company's financing obligations. [S1, S2, S3]",
-        "The £71 million headline reconciles to £36 million equity, a £25 million core loan and a £10 million uncommitted accordion. The first two instruments provide £61 million of gross transaction financing. The accounts disclose full core-loan drawdown by their approval on 2 September. Equity proceeds and borrowed cash have different economic consequences: equity shares residual risk, while debt requires servicing and repayment. Conditional accordion capacity remains subject to further agreement. [S1, S2, S3]",
-        "October guidance places remaining project expenditure at approximately £40–45 million, excluding operating costs. This estimate cannot be deducted from gross financing to infer liquidity. Earlier bridge repayment, other expenditures, equipment funding and operating receipts affect the cash available at any later date. The research identifies dated observations, rather than manufacturing a closing cash balance. [S2, S4, S5]"
+        "Tungsten West's £71 million financing headline contains £61 million of gross equity and core-loan funding, alongside a £10 million uncommitted accordion. The National Wealth Fund (NWF) transaction therefore brings both capital that the company reports raising or drawing and an option for further borrowing that requires agreement. Full drawdown of the £25 million core loan was disclosed by accounts approval on 2 September, advancing the financing beyond its August announcement. Management describes Hemerdon's restart as fully funded and reports commissioning progress. [S1, S2, S3]",
+        "The composition matters because the £36 million equity contribution absorbs project risk without scheduled repayment, while the core loan places a financing obligation alongside the operating ramp. NWF capital supports redevelopment and the refinancing of earlier short-term debt, but the new loan's announced 366-day tenor gives the company a relatively short period in which to establish dependable cash generation or arrange replacement funding. [S1, S2, S4, S5]",
+        "October's £40–45 million remaining-project-spend estimate provides a useful measure of work still to be financed and executed, although operating costs sit outside its scope. Mapping that estimate to the financing instruments directs attention to how expenditure and collections fall within the financing horizon. [S2]"
       ],
-      "exhibit": {"title":"Exhibit 1  Four findings and their investment meaning", "headers":["Verified result", "Financial interpretation"], "rows":[["£61m gross core financing", "£36m equity plus £25m loan. The £71m maximum includes £10m uncommitted lending."],["£40–45m remaining spend", "October management estimate of project expenditure, excluding operating costs."],["£5.75m incremental stress", "Analyst combination of upper-range capex, delay sensitivity and an annual rate proxy."],["About £2m August-plan deficit", "All £15m forecast receipts deferred. Rounded detailed uses imply about £1m instead."]]},
-      "after": ["The principal conclusion is that financing availability and commercial repayment capacity require separate analysis. NWF intervention supports the restart and refinances prior debt. Its short announced tenor leaves the timing of reliable production, sales collections and any refinancing important to both creditors and shareholders. The model quantifies selected exposures without establishing a present funding shortage or debt-repayment sufficiency."],
-      "sources": ["S1", "S2", "S3", "S4", "S5"]
+      "exhibit": {
+        "title": "Exhibit 1  Reconciled financial findings",
+        "headers": [
+          "Verified result",
+          "Financial interpretation"
+        ],
+        "rows": [
+          [
+            "£61m gross core financing",
+            "£36m equity plus £25m loan. The £71m maximum includes £10m uncommitted lending."
+          ],
+          [
+            "£40–45m remaining spend",
+            "October management estimate of project expenditure, excluding operating costs."
+          ],
+          [
+            "£5.75m incremental stress",
+            "Analyst combination of upper-range capex, delay sensitivity and an annual rate proxy."
+          ],
+          [
+            "August receipts deferred  £2m deficit",
+            "Original-plan counterfactual. Rounded detailed uses imply about £1m instead."
+          ]
+        ]
+      },
+      "after": [
+        "The investment case consequently turns on the quality and timing of execution after funding. Processing progress and a commercial offtake agreement strengthen the route to sales; their financial value will emerge as saleable output becomes collected cash. The accepted model quantifies selected cost and receipt sensitivities so that investors and lenders can examine those dependencies without treating a financing announcement as a cash-flow forecast."
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ]
     },
     {
-      "heading": "2  Restart progress and commercial conversion",
+      "heading": "2  Operating progress and cash conversion",
       "paragraphs": [
-        "Hemerdon is a tungsten and tin redevelopment in Devon held through Drakelands Restoration Limited (DRL), a wholly owned Tungsten West subsidiary. PLC-level financing and group cash are not automatically equivalent to project-level liquidity. Understanding which entity receives funds, owns assets and owes obligations is therefore central to evaluating the restart. The August proposed facility identifies DRL as borrower with group guarantees. [S1, S4]",
-        "The operating record has advanced. The issuer announced processing commencement on 15 September. Its October presentation describes fine-gravity wet commissioning in the third quarter and coarse-gravity wet commissioning in October as achieved milestones. These disclosures support a more developed operating position than a financing announcement alone. They remain issuer reports and do not establish sustained design throughput, recovery, payable output or collected cash. [S2, S6]",
-        "The 23 September Elmet agreement adds a documented route to market. It covers 1,000 tonnes of contained WO3 annually for eight years, with variable APT-linked pricing. The additional 500-tonne processing provision requires further commercial and delivery agreement and reasonable endeavours. It should remain outside firm contracted sales volumes. The reported nominal value above £1.4 billion at prevailing prices and exchange rates does not establish guaranteed future receipts. [S7]"
+        "Hemerdon's tungsten and tin redevelopment in Devon sits within Drakelands Restoration Limited (DRL), a wholly owned Tungsten West subsidiary. The August facility proposal identifies DRL as borrower with group guarantees, linking project execution to obligations across the corporate structure. That distinction matters when assessing liquidity: the location and restrictions of cash determine whether a group balance can meet a particular project's bills. [S1, S4]",
+        "The issuer's September processing announcement and October commissioning update show progress toward generating revenue. Fine-gravity wet commissioning in the third quarter and coarse-gravity wet commissioning in October are reported as achieved milestones. Their significance is the opportunity to demonstrate sustained plant performance, through which ore throughput and recovery translate into payable output. A plant can be commissioning successfully while volumes, unit costs and collection patterns are still developing. [S2, S6]",
+        "The eight-year Elmet agreement announced on 23 September provides a commercial outlet for 1,000 tonnes of contained WO3 annually, with variable pricing linked to ammonium paratungstate (APT). It strengthens market access while leaving receipts dependent on deliveries and the contractual price at settlement. With variable pricing, the issuer's nominal value above £1.4 billion at prevailing prices and exchange rates carries no revenue guarantee. The additional 500-tonne processing provision still requires agreement on commercial and delivery terms and reasonable endeavours. [S7]"
       ],
-      "exhibit": {"title":"Exhibit 2  Evidence required as the restart advances", "headers":["Observed or targeted stage", "Financial test"], "rows":[["Processing and wet commissioning reported", "Sustained hours, throughput, recovery and cost per payable unit."],["Elmet offtake signed", "Product acceptance, delivery schedule, invoice pricing and collection terms."],["FY2028 output guidance", "Production and shipment reconciliation before treating guidance as receipts."],["Loan repayment or refinancing", "Monthly cash minimum, executed maturity and an agreed source of repayment."]]},
-      "after": ["Management's FY2028 outlook exceeds 3,300 tonnes of contained WO3 and 600 tonnes of tin. The model uses 3,300 tonnes solely as a reference volume. A production target becomes a cash source only after recoveries, contractual payability, delivery, acceptance and payment. This sequence explains why an offtake agreement can strengthen commercial prospects while leaving working capital and financing timing material. [S2]", "Public capital providers should monitor these conversion stages alongside strategic supply objectives. The chronology supports a link between capital provision and the restart pathway, but does not isolate incremental output caused by the intervention. Commodity conditions, engineering performance and private commercial arrangements also influence outcomes."],
-      "sources": ["S1", "S2", "S4", "S6", "S7"]
+      "exhibit": {
+        "title": "Exhibit 2  Evidence required as the restart advances",
+        "headers": [
+          "Observed or targeted stage",
+          "Financial test"
+        ],
+        "rows": [
+          [
+            "Processing and wet commissioning reported",
+            "Sustained hours, throughput, recovery and cost per payable unit."
+          ],
+          [
+            "Elmet offtake signed",
+            "Product acceptance, delivery schedule, invoice pricing and collection terms."
+          ],
+          [
+            "FY2028 output guidance",
+            "Production and shipment reconciliation before treating guidance as receipts."
+          ],
+          [
+            "Loan repayment or refinancing",
+            "Monthly cash minimum, executed maturity and an agreed source of repayment."
+          ]
+        ]
+      },
+      "after": [
+        "Management's FY2028 outlook exceeds 3,300 tonnes of contained WO3 and 600 tonnes of tin. As production builds toward that guidance, recovery and product acceptance will influence the payable volume, while invoice and payment terms determine how quickly sales replenish cash used in the restart. Delays can therefore affect liquidity even where the eventual sales opportunity remains intact. [S2]",
+        "For an investor, this makes shipment and collection data the natural successors to commissioning announcements. For a public capital provider, the same observations indicate whether financed capacity is becoming usable supply. The evidence documents this progression without isolating the additional output caused by government intervention."
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S4",
+        "S6",
+        "S7"
+      ]
     },
     {
-      "heading": "3  Financing instruments and creditor obligations",
+      "heading": "3  Capital structure and financing terms",
       "paragraphs": [
-        "The NWF package carries different claims on project economics. The £36 million equity component supplies permanent risk capital at group level and changes ownership participation. It does not create scheduled principal repayment. The £25 million core loan adds a contractual financing obligation. The £10 million accordion is an option for potential further debt, with commitment and conditions still to be established. Treating all three as interchangeable financing conceals both dilution and repayment exposure. [S1, S3, S4]",
-        "The original announced loan tenor is 366 days. October pricing disclosure specifies SONIA plus an initial 5.5 percentage-point margin, increasing by one percentage point each quarter. This structure gives time an economic cost even before considering the opportunity cost of delayed sales. The exact maturity cannot be fixed from the reviewed disclosures: the August announcement measures tenor from definitive agreement, while the accounts refer to drawdown. Neither an inferred signing date nor the security deed resolves that difference. [S1, S2, S4]"
+        "Within the core transaction, equity and debt expose capital providers to different parts of Hemerdon's economics. The £36 million equity contribution participates in residual returns and changes ownership, giving the company capital without a scheduled principal payment. The £25 million loan brings a repayment claim into the restart timetable, while any subsequent use of the £10 million accordion would require commitment and add indebtedness. The announced shareholder arrangements also give NWF specified board nomination or observer, information and veto rights, providing a basis for oversight alongside its financial exposure. [S1, S3, S4]",
+        "The disclosed loan pricing makes time consequential. October terms specify SONIA plus an initial margin of 5.5 percentage points, with a further percentage point each quarter. A slower ramp can thus defer receipts while the margin rises. The repayment calendar nevertheless requires the executed agreement: the original announcement measures the 366-day term from definitive agreement, whereas the accounts refer to drawdown, leaving the precise maturity unresolved. [S1, S2, S4]"
       ],
-      "exhibit": {"title":"Exhibit 3  Instrument economics and documentation", "headers":["Instrument or term", "Supported status and diligence implication"], "rows":[["£36m equity", "Gross raise reported. Exact net cash credit and transaction fees remain unreconciled."],["£25m core loan", "Full draw disclosed by 2 September. Current principal and repayment timetable need confirmation."],["£10m accordion", "Uncommitted. No default availability assumed in the model."],["366 days and quarterly pricing steps", "Announced short tenor. Executed start date, rate conventions and fees remain necessary."],["Group security deed dated 28 August", "Filed fixed/floating security with equipment exclusions. Facility linkage and priority require diligence."]]},
-      "after": ["A filed group security agreement names DRL, Tungsten West, Tungsten West Services and Aggregates West as chargors, and GLAS as security trustee. It documents fixed/floating security and a negative pledge, including defined exclusions for financed equipment. The deed references a loan agreement but does not name its lender or reproduce the full terms. Connecting it specifically to NWF remains an inference from timing and parties. Registration alone establishes neither first priority nor collateral realizable value. [S8]", "Equipment finance creates a further creditor layer. October disclosure identifies £11 million current equipment finance and approximately £22 million for machines ordered, with three-to-five-year terms and indicative pricing around 10%. Their overlap and draw schedule are unresolved. Summing these figures, or adding April's £22.3 million agreement again, would overstate a verified debt stock. [S2, S9]"],
-      "sources": ["S1", "S2", "S3", "S4", "S8", "S9"]
+      "exhibit": {
+        "title": "Exhibit 3  Instrument economics and documentation",
+        "headers": [
+          "Instrument or term",
+          "Supported status and diligence implication"
+        ],
+        "rows": [
+          [
+            "£36m equity",
+            "Gross raise reported. Exact net cash credit and transaction fees remain unreconciled."
+          ],
+          [
+            "£25m core loan",
+            "Full draw disclosed by 2 September. Current principal and repayment timetable need confirmation."
+          ],
+          [
+            "£10m accordion",
+            "Uncommitted. No default availability assumed in the model."
+          ],
+          [
+            "366 days and quarterly pricing steps",
+            "Announced short tenor. Executed start date, rate conventions and fees remain necessary."
+          ],
+          [
+            "Group security deed dated 28 August",
+            "Filed fixed/floating security with equipment exclusions. Facility linkage and priority require diligence."
+          ]
+        ]
+      },
+      "after": [
+        "The filed group security agreement provides documentary evidence of fixed and floating security and a negative pledge, naming DRL, Tungsten West, Tungsten West Services and Aggregates West as chargors and GLAS as trustee. Its financed-equipment exclusions make the relationship with other creditors particularly relevant. The deed references a loan agreement without naming the lender, so attribution to NWF remains an inference from its timing and parties. Registration supplies a diligence starting point; facility linkage, priority and collateral value still require the complete financing documents. [S8]",
+        "Equipment funding adds a longer-dated source of finance and a separate service burden. October disclosure identifies £11 million current equipment finance and approximately £22 million for ordered machines, with three-to-five-year terms and indicative pricing around 10%. Reconciling their overlap and draw schedule with April's £22.3 million agreement is necessary before assessing aggregate debt or future cash service. [S2, S9]"
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S8",
+        "S9"
+      ]
     },
     {
-      "heading": "4  Dated spending and liquidity reconstruction",
+      "heading": "4  Remaining expenditure and the cash bridge",
       "paragraphs": [
-        "October's £40–45 million remaining project expenditure guidance is a management estimate for a defined redevelopment programme. The model uses £42.5 million as a midpoint convention. The company places £25–35 million in FY2027, with the balance in the following financial year. Financial years end on 31 March. Operating costs sit outside this remaining-spend estimate. Its relation to paid deposits, equipment funding and individual scope commitments needs a project ledger. [S2]",
-        "The latest exact audited general-use cash balance located is £25,485,511 at 31 March 2026. The £14,912,042 restoration escrow is separately restricted. The accounts' September publication does not update the balance-sheet date. FY2026 net equity cash of £41,029,253 is already included in the March closing cash stock, as is £5,205,000 of convertible-note cash issuance. Adding these flows again would double-count historical funding. [S1]"
+        "October's £40–45 million remaining-project-spend guidance describes the redevelopment work ahead, with £25–35 million falling in FY2027 and the balance in the following financial year. The model's £42.5 million midpoint is an analyst convention within that range. Because financial years end on 31 March and operating costs are excluded, the guidance needs to be mapped to monthly payments and operating cash flows before it can inform a liquidity forecast. [S2]",
+        "The audited starting point is £25,485,511 of general-use group cash at 31 March 2026, alongside a separately restricted £14,912,042 restoration escrow. The intervening financing changes what the company can fund, but September publication of those accounts leaves their cash observation at March. The FY2026 net equity proceeds of £41,029,253 and convertible-note cash issuance of £5,205,000 already contribute to that opening stock. A post-March reconstruction must begin with the stock and then follow subsequent movements. [S1]"
       ],
-      "exhibit": {"title":"Exhibit 4  A cash bridge with explicitly unresolved movements", "headers":["Dated item", "Status in reconstruction"], "rows":[["31 March general-use cash £25.486m", "Audited group opening stock. Restricted escrow excluded."],["April Hargreaves payment £3m", "Subsequent-event note confirms payment. Further £7m due by 15 May 2027."],["May USD25m bridge", "Binding facility limit. Exact draw and GBP equivalent unavailable."],["28 August bridge repayment", "Issuer reports full repayment. Actual GBP outflow, FX and fees unresolved."],["NWF gross equity £36m and loan £25m", "Raise and full loan draw disclosed. Net equity credit and complete uses still required."],["Closing cash at research cutoff", "Unavailable without full operating, investing and financing cash movements."]]},
-      "after": ["The March £10.642 million deposits balance primarily reflects rebuild purchase orders and is already captured in the financial statements. Construction cash therefore cannot be reconstructed from PPE purchases alone. Similarly, the £197.212 million convertible-note conversion and £167.324 million fair-value remeasurement are non-cash accounting movements. The large reported loss is unsuitable as a proxy for cash consumption. [S1]", "The supported inference is that new financing materially changed capital access after March. A precise current funding gap requires a same-date bank-reconciled cash balance, debt schedule and unpaid capex ledger. The absence of that bridge does not overturn management's fully funded restart statement, and this assessment makes no contrary finding of a current cash shortage."],
-      "sources": ["S1", "S2", "S5", "S9", "S10"]
+      "exhibit": {
+        "title": "Exhibit 4  Dated cash observations and unresolved movements",
+        "headers": [
+          "Dated item",
+          "Status in reconstruction"
+        ],
+        "rows": [
+          [
+            "31 March general-use cash £25.486m",
+            "Audited group opening stock. Restricted escrow excluded."
+          ],
+          [
+            "April Hargreaves payment £3m",
+            "Subsequent-event note confirms payment. Further £7m due by 15 May 2027."
+          ],
+          [
+            "May USD25m bridge",
+            "Binding facility limit. Exact draw and GBP equivalent unavailable."
+          ],
+          [
+            "28 August bridge repayment",
+            "Issuer reports full repayment. Actual GBP outflow, FX and fees unresolved."
+          ],
+          [
+            "NWF gross equity £36m and loan £25m",
+            "Raise and full loan draw disclosed. Net equity credit and complete uses still required."
+          ],
+          [
+            "Closing cash at research cutoff",
+            "Unavailable without full operating, investing and financing cash movements."
+          ]
+        ]
+      },
+      "after": [
+        "The bridge illustrates why gross funding does not measure construction headroom. The May facility, subsequent bridge repayment and NWF receipts sit among operating expenditure, capital payments and other financing movements whose exact dates and amounts are needed to close the cash rollforward. Comparing the £61 million transaction with October remaining spend would omit these uses and the receipts arising during the same period. [S1, S2, S5, S10]",
+        "Accounting presentation introduces a further reconciliation issue. The March £10.642 million deposits balance mainly reflects rebuild purchase orders, so cash committed to redevelopment extends beyond the PPE acquisition line. Meanwhile, the £197.212 million convertible-note conversion and £167.324 million fair-value remeasurement moved no cash. A bank-reconciled ledger and unpaid capex schedule would resolve these distinctions and allow management's fully funded pathway to be examined as dated financial headroom. The available record supports no finding of a current shortage. [S1]"
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S5",
+        "S9",
+        "S10"
+      ]
     },
     {
-      "heading": "5  Scenarios quantify separate financial exposures",
+      "heading": "5  Cost exposure and dependence on receipts",
       "paragraphs": [
-        "The expenditure sensitivity starts from October's £42.5 million midpoint. Moving to the £45 million upper end adds £2.5 million. The accounts describe an approximately £3 million effect from a three-month delay involving fallback processing. The model combines these with a separate analyst assumption: one percentage point on a constant £25 million principal for one year, or £0.25 million. The resulting incremental stress is £5.75 million. [S1, S2]",
-        "The combined amount tests exposure above the reference convention. It is not management's forecast, a complete cash requirement or a contractual interest schedule. The interest proxy does not reconstruct SONIA, quarterly margin steps, day-count conventions or repayment. Delay cost has no assigned fiscal year. The model assumes no accordion draw, preserving the distinction between an uncommitted facility and available liquidity."
+        "The October spending range makes the scale of incremental cost exposure visible. Moving from the £42.5 million midpoint to £45 million adds £2.5 million, to which the model adds the company's approximately £3 million sensitivity for a three-month delay involving fallback processing. A separate analyst rate proxy, one percentage point on a constant £25 million for one year, contributes £0.25 million. Together they produce a £5.75 million increment above the midpoint reference. [S1, S2]",
+        "This combination is useful because execution pressure can affect both expenditure and financing cost. It remains a deliberately bounded stress: the rate proxy isolates exposure without reconstructing SONIA, quarterly margin steps or fees, and the delay cost has no fiscal-year assignment. No accordion draw is assumed. The result therefore measures a selected increase in uses, leaving the amount and timing of any financing response to a fuller cash forecast."
       ],
-      "exhibit": {"title":"Exhibit 5  Reconciliation of the two scenario findings", "headers":["Calculation in GBP millions", "Result and meaning"], "rows":[["(45 − 42.5) + 3 + (1% × 25 × 1 year)", "5.75 incremental cost and rate stress above the midpoint."],["August sources 88 − deferred receipts 15", "73 sources remain under this counterfactual."],["Stated uses 88 − target reserve 13", "75 non-reserve uses on the aggregate-total convention."],["73 − 75", "−2 ending cash. £15m below the original reserve target."],["Detailed rounded uses 87 − reserve 13", "74 non-reserve uses. Alternative ending cash −1."]]},
-      "after": ["The receipt sensitivity addresses a different question. The original August plan combined £61 million equity and core debt with £7 million opening cash, £5 million provision recovery and £15 million anticipated receipts. Published aggregate sources and uses were both £88 million, including a £13 million reserve. Holding other items fixed and deferring all receipts produces approximately £2 million negative cash on stated totals. The separately rounded use lines sum to £87 million and produce approximately £1 million instead. [S4]", "This is a boundary test of the original plan at its unspecified peak funding date. It neither asserts that receipts failed nor measures present liquidity. It also differs from the £15 million shortfall against the planned reserve. October remaining-spend guidance and August uses overlap in scope and date, so adding the £5.75 million stress to the August deficit would create a misleading aggregate funding-gap figure."],
-      "sources": ["S1", "S2", "S4"]
+      "exhibit": {
+        "title": "Exhibit 5  Reconciliation of the two scenario findings",
+        "headers": [
+          "Calculation in GBP millions",
+          "Result and meaning"
+        ],
+        "rows": [
+          [
+            "(45 − 42.5) + 3 + (1% × 25 × 1 year)",
+            "5.75 incremental cost and rate stress above the midpoint."
+          ],
+          [
+            "August sources 88 − deferred receipts 15",
+            "73 sources remain under this counterfactual."
+          ],
+          [
+            "Stated uses 88 − target reserve 13",
+            "75 non-reserve uses on the aggregate-total convention."
+          ],
+          [
+            "73 − 75",
+            "−2 ending cash. £15m below the original reserve target."
+          ],
+          [
+            "Detailed rounded uses 87 − reserve 13",
+            "74 non-reserve uses. Alternative ending cash −1."
+          ]
+        ]
+      },
+      "after": [
+        "The original August funding plan exposes a separate dependence on collections. Its £61 million equity and core loan sat alongside £7 million opening cash, £5 million provision recovery and £15 million anticipated receipts. Published aggregate sources and uses both totalled £88 million, including a £13 million reserve. Deferring the receipts while holding the other plan items fixed leaves approximately £2 million negative cash on those totals, a £15 million shortfall against the reserve target. [S4]",
+        "The separately rounded use lines total £87 million, producing approximately £1 million negative cash under the same counterfactual. Retaining that rounding difference avoids false precision while preserving the economic finding: the original reserve depended materially on the timing of operating receipts. The exercise concerns the August plan at an unspecified peak funding date and makes no claim that the receipts failed to arrive. Its scope overlaps subsequent expenditure guidance, so combining it with the October £5.75 million stress would misstate a current financing requirement."
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S4"
+      ]
     },
     {
-      "heading": "6  Cash generation and refinancing economics",
+      "heading": "6  Cash generation within the loan horizon",
       "paragraphs": [
-        "The financing horizon and the operating ramp need to be evaluated together. A 366-day core loan can require repayment or replacement while a large redevelopment is still establishing reliable production and collections. FY2028 company guidance includes approximately £26 million NWF principal and interest, approximately £6 million equipment service and £7 million Hargreaves payment, alongside £70–75 million cash operating costs and sustaining capex. These fiscal-year estimates provide context, rather than a monthly repayment forecast. [S2]",
-        "The model's core annual cash reference is £109–114 million, with a £111.5 million midpoint. At 3,300 tonnes contained WO3, 100 mtu per tonne, 79.5% payability and a modeled 3% deduction, each £1 per mtu of GBP APT reference produces £254,479.50 of annual tungsten receipt proxy. Dividing the midpoint cash reference by this coefficient gives £438.15 per mtu. The coefficient is an explicit model assumption set, not a reconstruction of Elmet's executed contract. [S2]"
+        "The loan's announced 366-day tenor places repayment or refinancing close to the period in which Hemerdon is establishing its operating cash cycle. October's FY2028 guidance includes approximately £26 million NWF principal and interest and £6 million equipment service, alongside £70–75 million cash operating costs and sustaining capex. The separate £7 million Hargreaves payment takes the model's selected annual cash reference to £109–114 million, with a £111.5 million midpoint. These amounts show why production economics and the financing calendar need to be assessed together. [S2]",
+        "The model relates that selected cash reference to tungsten receipts using 3,300 tonnes of contained WO3, 100 mtu per tonne, 79.5% payability and a modeled 3% deduction. At those coefficients, each £1 per mtu of GBP APT reference generates £254,479.50 in the annual receipt proxy, giving £438.15 per mtu at the midpoint cash requirement. This calculation isolates the sensitivity to price and payable volume without supplying a forward commodity forecast or substituting for Elmet's executed pricing terms. [S2]"
       ],
-      "exhibit": {"title":"Exhibit 6  FY2028 tungsten-only core coverage reference", "headers":["Cost case", "Core cash reference", "GBP APT reference per mtu"], "rows":[["Lower operating-cost case", "£109.0m", "£428.33"],["Midpoint convention", "£111.5m", "£438.15"],["Upper operating-cost case", "£114.0m", "£447.97"]]},
-      "after": ["These coverage references exclude tin and aggregate receipts, remaining restart capex, discretionary growth, cash taxes and working-capital changes. Omitted revenue and costs work in opposite directions. The result cannot serve as full project break-even, a conservative bound, a valuation or lender debt-service coverage. The workbook leaves the forward APT price blank. Any entered price must be an explicit independent GBP assumption, with no silent USD conversion.", "Within fixed coefficients, a £100 per mtu change in reference price changes the annual tungsten receipt proxy by about £25.45 million. Actual cash depends on achieved output and collection. Strong prices can therefore improve financing prospects without proving reliable debt service. Conversely, commissioning delay can combine later receipts, further expenditure and higher financing cost.", "The practical refinancing test is whether dependable operating cash arrives before contractual repayment, or whether replacement capital is agreed in time. The available public record does not establish repayment sufficiency, covenant headroom or default probability. Those assessments require executed terms, monthly cash forecasts and a consolidated equipment-debt schedule."],
-      "sources": ["S1", "S2", "S4", "S7"]
+      "exhibit": {
+        "title": "Exhibit 6  FY2028 tungsten-only core coverage reference",
+        "headers": [
+          "Cost case",
+          "Core cash reference",
+          "GBP APT reference per mtu"
+        ],
+        "rows": [
+          [
+            "Lower operating-cost case",
+            "£109.0m",
+            "£428.33"
+          ],
+          [
+            "Midpoint convention",
+            "£111.5m",
+            "£438.15"
+          ],
+          [
+            "Upper operating-cost case",
+            "£114.0m",
+            "£447.97"
+          ]
+        ]
+      },
+      "after": [
+        "The coverage reference omits tin and aggregate receipts as well as remaining restart capex, growth expenditure, cash taxes and working capital. Because the omitted flows run in both directions, the result supplies neither full project break-even nor a conservative bound. Its value is diagnostic: it shows how a defined set of cash uses compares with a defined tungsten revenue coefficient, while keeping the missing parts of the project cash flow visible.",
+        "At fixed coefficients, a £100 per mtu reference-price change moves the annual tungsten receipt proxy by about £25.45 million. Achieved output and collection timing determine how much of that price exposure becomes cash available for creditors. A strong price can improve refinancing prospects, but a slower ramp may still absorb working capital and defer collections as financing costs rise.",
+        "Refinancing would move the repayment obligation to a later date and on terms still to be agreed. The relevant test is therefore the alignment of dependable collections with contractual payments, together with the availability and economics of replacement capital. A monthly forecast through the executed maturity, supported by the equipment-debt schedule, is necessary to assess repayment capacity and covenant headroom."
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S4",
+        "S7"
+      ]
     },
     {
-      "heading": "7  Institutional implications and monitoring priorities",
+      "heading": "7  Implications for institutional capital",
       "paragraphs": [
-        "For equity investors, the transaction reduces reliance on uncertain access to restart capital, while increasing the importance of future cash generation and the terms of any further financing. Equity support absorbs risk without scheduled repayment, but neither the headline nor a strong commodity market establishes shareholder value. A valuation would require ownership and dilution analysis, a life-of-mine model, taxes, working capital, closure obligations and an explicit discount rate.",
-        "For lenders, the first priority is an executable repayment calendar. The definitive facility should settle the tenor origin, SONIA conventions, quarterly step dates, covenants, cure rights and accordion conditions. Security diligence should establish collateral scope, financed-equipment exclusions, priority and enforceability. The registry filing is useful documentary evidence, but cannot substitute for the complete financing package.",
-        "For public capital providers, implementation monitoring should follow capital deployment into commissioned capacity and then verified supply. Equity exposure, debt recovery and strategic delivery are different objectives. Measuring additional industrial output or a financing-cost subsidy requires a credible counterfactual beyond this record. An offtake negotiation right alone does not establish a government purchase commitment or a price floor. [S3, S4]"
+        "For equity investors, NWF's investment reduces dependence on uncertain access to restart funding and gives the company a stronger basis for pursuing its commissioning programme. The return on that capital will depend on the cash remaining after operating costs, investment and financing obligations. Monitoring payable output and collections therefore provides more information about the developing investment case than the financing headline alone; any further capital raise would also need to be assessed for its ownership and dilution consequences.",
+        "A lender's analysis begins with the same operating evidence but asks when cash becomes available against a specific repayment calendar. The definitive facility must settle the tenor origin, rate conventions and quarterly step dates, as well as covenants, cure rights and accordion conditions. Security diligence must then reconcile the group deed with financed-equipment exclusions and creditor priority. Together, these documents determine how much flexibility exists if the commercial ramp takes longer than expected.",
+        "Public capital providers have an additional implementation test. The equity investment carries residual exposure, the loan requires recovery, and the industrial objective depends on commissioned capacity becoming dependable supply. Monitoring those objectives separately allows strategic progress to be recognized without assuming it proves a financial return. Government procurement remains subject to a subsequent agreement, with no agreed price floor disclosed. [S3, S4]"
       ],
-      "exhibit": {"title":"Exhibit 7  Evidence that would change the financial assessment", "headers":["Indicator", "Improvement or deterioration to assess"], "rows":[["Bank-reconciled liquidity and capex ledger", "Remaining obligations funded with clear headroom, or rising unpaid commitments and restricted cash."],["Throughput, recovery and payable shipments", "Sustained conversion toward guidance, or repeated commissioning and acceptance delays."],["Receivable ageing and collections", "Contracted output converts to cash, or working capital absorbs financing."],["Executed repayment and refinancing terms", "Agreed replacement capital or cash cover, or an unresolved maturity approaching."],["Equipment draw and amortisation schedule", "No double-counted capacity and manageable cash service, or concentrated payment pressure."]]},
-      "after": ["Hemerdon's financing has advanced from a policy announcement to disclosed equity funding and loan drawdown. Processing and commercial progress provide relevant support for management's restart pathway. The most consequential next evidence is the alignment of delivery, collections and refinancing with the short loan horizon. SMPT's financial contribution is an instrument-level reconstruction and transparent scenario analysis. The findings support a substantive financing case while leaving present liquidity and investment valuation open."],
-      "sources": ["S1", "S2", "S3", "S4", "S7", "S8"]
+      "exhibit": {
+        "title": "Exhibit 7  Evidence that would change the financial assessment",
+        "headers": [
+          "Indicator",
+          "Improvement or deterioration to assess"
+        ],
+        "rows": [
+          [
+            "Bank-reconciled liquidity and capex ledger",
+            "Remaining obligations funded with clear headroom, or rising unpaid commitments and restricted cash."
+          ],
+          [
+            "Throughput, recovery and payable shipments",
+            "Sustained conversion toward guidance, or repeated commissioning and acceptance delays."
+          ],
+          [
+            "Receivable ageing and collections",
+            "Contracted output converts to cash, or working capital absorbs financing."
+          ],
+          [
+            "Executed repayment and refinancing terms",
+            "Agreed replacement capital or cash cover, or an unresolved maturity approaching."
+          ],
+          [
+            "Equipment draw and amortisation schedule",
+            "No double-counted capacity and manageable cash service, or concentrated payment pressure."
+          ]
+        ]
+      },
+      "after": [
+        "Hemerdon has progressed to disclosed equity funding and loan drawdown, with processing milestones and a binding commercial agreement supporting management's restart pathway. The next financial judgement will be better informed by how much saleable material is delivered, how promptly customers pay and how the repayment timetable is funded. The instrument reconstruction and scenario results identify where those observations matter most, while a reconciled liquidity and debt schedule remains the prerequisite for underwriting current headroom or investment value."
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S7",
+        "S8"
+      ]
     },
     {
       "heading": "8  Methodology and primary source guide",
       "paragraphs": [
-        "The research cutoff is 4 November 2026. Publication production on 5 November does not extend the evidence horizon. This memorandum uses the Phase 1B accepted evidence register and model at commit 772f2f4c02631f533a0a893849c9bedb8a6ff8ad. GBP amounts, source reporting dates and company/project scope are retained. Financial years end on 31 March. Audited accounts, issuer guidance, filed documents and analyst scenarios have different evidentiary roles.",
-        "All four principal findings reconcile to the accepted workbook and independent calculation record. Phase 1B tested 32 cases in LibreOffice, including missing-input boundaries, with no remaining failures and no differences across 167 cached formula results. It preserved the earlier missing-input failures and their correction trail. Native Microsoft Excel execution remains unverified. The publication workbook is a byte-identical copy with a separate model guide.",
-        "The evidence appendix provides source IDs, claim-level locators, metric definitions and the complete limitations framework. The model is a bounded financing and sensitivity tool. It excludes unsupported current cash, current total debt, full financing gap, NPV/IRR, equity valuation, covenant headroom and repayment conclusions. Selected findings are independently derived from disclosed facts, rather than an audit of company forecasts."
+        "This memorandum uses the evidence register and model accepted in Phase 1B at commit 772f2f4c02631f533a0a893849c9bedb8a6ff8ad, with a research cutoff of 4 November 2026. The editorial revision retains the original amounts, reporting dates and company/project scope. Financial years end on 31 March. Audited balances, issuer guidance, filed terms and analyst scenarios are identified according to their evidentiary role.",
+        "All four principal findings reconcile to the accepted workbook. Independent LibreOffice validation tested 32 cases with zero remaining failures and no differences across 167 cached formulas; the earlier missing-input failures and their corrections remain preserved in the audit trail. The publication workbook is byte-identical to that accepted version. Native Microsoft Excel execution remains unverified.",
+        "The evidence appendix and model guide contain claim-level locators, scenario assumptions and metric definitions. Current cash, aggregate current debt, a complete funding gap, valuation/NPV/IRR, DSCR, covenant headroom, repayment sufficiency and default probability remain outside the supported conclusions. The analysis also makes no causal estimate of additional production attributable to public financing."
       ],
       "sourceGuide": true,
-      "after": ["Distribution status: prepared for publication review. Independent human financial/editorial review and source-specific rights clearance remain release gates. No original AMC tables, source PDFs or proprietary benchmark series are reproduced. This research does not express an investment recommendation."],
-      "sources": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10"]
+      "after": [
+        "Prepared for final publication review. Independent human financial/editorial approval and source-specific rights clearance remain release conditions. No original AMC tables, source PDFs or proprietary benchmark series are reproduced, and the publication expresses no investment recommendation."
+      ],
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10"
+      ]
     }
   ]
 }

@@ -1,4 +1,8 @@
-# FI001 evidence and methodology appendix
+# Inside Tungsten West's £71 Million Restart Financing
+
+Government Capital, Project Expenditure and Refinancing Risk at Hemerdon
+
+## Evidence and methodology appendix
 
 **Research cutoff: 4 November 2026. Production date: 5 November 2026.** Publication-review edition.
 

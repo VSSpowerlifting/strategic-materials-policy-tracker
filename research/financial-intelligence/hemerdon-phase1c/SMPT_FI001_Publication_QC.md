@@ -1,8 +1,37 @@
 # FI001 publication quality control
 
-**Determination: READY FOR PUBLICATION REVIEW.** This is a complete production package for human review. It is not editorial approval or authorization for public release.
+**Determination: READY FOR FINAL PUBLICATION REVIEW.** This is a complete production package for human review. It is not editorial approval or authorization for public release.
 
 Research cutoff: **4 November 2026**. Production: **5 November 2026**. Controlling analytical record: Phase 1B acceptance commit `772f2f4c02631f533a0a893849c9bedb8a6ff8ad`. Phase 1A preservation commit `4582fb529c86dffc1a6329218e8081fe16550043` remains intact.
+
+## Final editorial and design revision
+
+Title: **Inside Tungsten West's £71 Million Restart Financing**
+
+Subtitle: Government Capital, Project Expenditure and Refinancing Risk at Hemerdon
+
+This pass changes prose, presentation and directly necessary production utilities. The eight-page memo was read sequentially and edited paragraph by paragraph in two substantive passes, followed by rendered-page corrections. It develops the economic mechanism after each major disclosure: equity absorbs residual risk, short debt requires repayment during the ramp, operating milestones become cash through payable production and customer collection, and refinancing depends on that timing. Repeated methodological caveats and catalog-like sequences were consolidated without removing the accepted limitations.
+
+The deck has its own concise narrative, with comments attached to exhibits rather than copied memo paragraphs. Graphite cover and conclusion slides frame cream analytical pages. The native financing chart uses solid £36m/£25m core bars and a separate outlined £10m uncommitted bar. The £61m gross core total is prominent beside it. Headline financing, drawdown and current cash retain distinct meanings.
+
+The palette is taken from `app/globals.css` and the final revision brief: graphite `#12110f`, surfaces `#1a1814`/`#232019`, cream `#efece6`, accent/brand gold `#e3b04b`/`#c8993e`, paper `#f5f3ee`, ink `#1b1915`, muted `#5b5548`, border `#d8d3c7` and paper gold `#7a5510`. This explicit revision direction supersedes the older publication palette for these artifacts. No application CSS was modified.
+
+### Problems found and resolved during revision
+
+| Observation | Resolution and evidence |
+|---|---|
+| Prior paragraphs often stopped after reporting a fact | Developed the effects on cash timing, risk allocation and refinancing across memo pp1–7; removed recurring rhetorical contrasts and paragraph-end summaries. |
+| The title and descriptions used the old framing | Preferred title/subtitle now appear in canonical content, Word/PowerPoint/PDF metadata, cover, abstract, README and handoff. Stable filenames retained. |
+| Conditional capacity looked economically similar to core funding | Solid core bars versus an outlined accordion, with clear status and £61m aggregation on slide4. Values remain 36/25/10. |
+| Generic publication colors differed from actual SMPT tokens | Applied the graphite/paper/gold palette to the memo, deck and themes. Added explicit axis colors after validation found a renderer default gray outside the palette. |
+| The PDF exporter substituted Liberation Sans and recolored links blue | Bundled Fontconfig discovery makes Arial available to export. A narrowly scoped PDF finalizer corrects only the renderer's known default link color to dark gold on paper and accent gold on dark slides. All 77 source annotations remain intact. |
+| One authoring preview reported a GPU compilation timeout and omitted solid bars | Native chart data/fills and the actual LibreOffice PDF were checked. The final PDF visibly contains both core bars and the outlined accordion. Final PDF slides supply visual acceptance; native PowerPoint execution is not claimed. |
+| The preferred memo title wrapped with one word on its second line | Set a deliberate break before £71 Million, keeping the full title and metadata unchanged. Source-guide links use readable 9pt type. |
+| The conclusion commentary crowded its source line and table borders inherited heavy defaults | Shortened the conclusion commentary and applied thin native table rules in paper-border or brand gold. Final PDF slides were rechecked after export. |
+
+All eight final memo pages and ten final deck slides were rendered and visually inspected for clipping, overlap, alignment, contrast, units and citations. A second sequential reading checked that the prose supports the financing argument without repeating its limitations. This is AI editorial review and engine verification, not a claim of independent human expert approval.
+
+The accepted workbook remains byte-identical, SHA-256 `da37ccd1efeddec0164d11264ce1618bd72ea4b87e3acff4c9811274552895f7`. Phases 1A/1B and their validation record are untouched. The existing 32-case/167-formula independent results continue to cover that unchanged file; this editorial pass does not claim a new Excel or model-underwriting exercise.
 
 ## Quantitative acceptance
 
@@ -33,7 +62,7 @@ These corrections improve presentation and interpretation. No financial input, f
 
 - Rendered and visually inspected all **8 memo pages** and **10 presentation slides**, including the actual LibreOffice PDF export of the PowerPoint.
 - Re-rendered after corrections. Checked clipping, table wrapping, chart labels, negative signs, GBP/mtu versus GBP million, source footnotes, source-guide links and page/slide markers.
-- Editable DOCX/PPTX use Arial. The PDF engine embeds Liberation Sans, the Arial-compatible family used in SMPT's approved house style. Both PDFs use that one family, in regular and bold weights. The transient Carlito heading substitution was removed.
+- Editable DOCX/PPTX and both final PDFs use Arial in regular and bold weights. The initial production at commit `4a385c1` used a Liberation Sans PDF fallback. Explicit bundled Fontconfig discovery now resolves installed Arial, eliminating that substitution.
 - Memo PDF: **44 source-link annotations**. Deck PDF: **33**. Targets and annotation rectangles are validated against canonical source URLs. Live third-party host availability was not re-audited during production.
 - PowerPoint: **10 slides, 7 native tables, 4 native charts**. Each chart has an embedded workbook containing the displayed source-data snapshot. These are chart-editing data, not substitutes for the accepted financial model or its formula lineage.
 - The source workbook was not restyled or regenerated. Its visible sheets and formula dependencies are unchanged from Phase 1B's inspected version, so repeated rendering of unchanged workbook views was unnecessary. Fresh independent recalculation tested the publication copy.
@@ -46,7 +75,7 @@ These corrections improve presentation and interpretation. No financial input, f
 | `validate_workbook.py --input ...Financial_Model.xlsx --output ...model-validation-results.json --soffice ...` | 32 cases, 0 failures, 167 formulas, 0 cached differences |
 | `python3 -m unittest discover -s research/financial-intelligence/hemerdon-phase1a -p test_model.py` | 9 tests passed |
 | Presentation finalizer | Package integrity, slide size/count, Arial policy, native table/chart ownership and re-import passed; 0 layout findings |
-| `validate_publication.py` | 130 checks, 0 failures; four chart datasets, seven memo tables, PDFs, links and fingerprints reconciled |
+| `validate_publication.py` | 142 checks, 0 failures; four chart datasets, seven memo tables, PDFs, links and fingerprints reconciled |
 | `git diff --check` | Passed before commit |
 
 The final JSON receipts control over this prose if files are regenerated. `publication-validation-results.json` stores delivered-file fingerprints. The complete source/evidence trace remains in the accepted register and generated appendix.

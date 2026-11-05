@@ -15,84 +15,103 @@ const sources=JSON.parse(await fs.readFile(path.join(out,'../hemerdon-phase1a/so
 const ref=Object.fromEntries(Object.entries(data.sourceAliases).map(([k,id])=>[k,sources.find(s=>s.id===id)]));
 const facts=JSON.parse(await fs.readFile(path.join(out,'../hemerdon-phase1a/evidence.json'),'utf8')).facts;
 const value=id=>Number(facts.find(f=>f.id===id).value);
-const P={paper:'#FBFAF7',ink:'#252421',charcoal:'#262523',gold:'#98752D',band:'#F0EEE8',rule:'#D0CCC3',muted:'#605D56'};
+const P={bg:'#12110f',surface:'#1a1814',elevated:'#232019',cream:'#efece6',accent:'#e3b04b',brand:'#c8993e',paper:'#f5f3ee',ink:'#1b1915',muted:'#5b5548',rule:'#d8d3c7',gold:'#7a5510'};
+const content=JSON.parse(await fs.readFile(path.join(out,'publication-content.json'),'utf8'));
 const pres=Presentation.create({slideSize:{width:1280,height:720}});
-function text(s,str,x,y,w,h,size=23,bold=false,color=P.ink){
+const darkSlides=new WeakSet();
+function text(s,str,x,y,w,h,size=23,bold=false,color){
  const sh=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});
- sh.text=str;sh.text.style={typeface:'Arial',fontSize:size,bold,color,verticalAlignment:'top'};return sh;
+ sh.text=str;sh.text.style={typeface:'Arial',fontSize:size,bold,color:color||(darkSlides.has(s)?P.cream:P.ink),verticalAlignment:'top'};return sh;
 }
-function base(title,idx,srcs,note=''){
- const s=pres.slides.add();s.background.fill=P.paper;
- text(s,'SMPT  /  FINANCIAL INTELLIGENCE 001',64,28,900,24,15,true,P.gold);
- text(s,title,64,78,1140,100,36,true);
- text(s,'Research cutoff 4 November 2026   /   Publication review',64,678,1050,22,14,false,P.muted);
- text(s,String(idx).padStart(2,'0'),1170,678,45,22,14,false,P.muted);
- const foot=text(s,'',64,633,1140,34,14,false,P.muted);
- foot.text=[{runs:[{run:'Sources: ',style:{typeface:'Arial',fontSize:'14px',color:P.muted}},...srcs.flatMap(k=>[{run:k,style:{typeface:'Arial',fontSize:'14px',bold:true,underline:'sng',color:'#73571F'},link:{uri:ref[k].url,isExternal:true}},{run:'   ',style:{fontSize:'14px'}}]),{run:note,style:{typeface:'Arial',fontSize:'14px',color:P.muted}}]}];
- s.speakerNotes.text=srcs.map(k=>`${k}: ${ref[k].title}. ${ref[k].url}`).join('\n')+'\n'+note+'\nControlling evidence: Phase 1B acceptance 772f2f4c02631f533a0a893849c9bedb8a6ff8ad. Financial units and dates are stated on slide. Independent analyst interpretation unless attributed.';
+function rule(s,y,x=64,w=1140){
+ s.shapes.add({geometry:'rect',position:{left:x,top:y,width:w,height:1},fill:darkSlides.has(s)?P.brand:P.rule,line:{fill:'none',width:0}});
+}
+function base(title,idx,srcs,note='',section='FINANCING AND EXECUTION'){
+ const s=pres.slides.add();const dark=idx===1||idx===10;if(dark)darkSlides.add(s);
+ s.background.fill=dark?P.bg:P.paper;
+ text(s,'SMPT',64,26,95,30,22,true,dark?P.accent:P.gold);
+ text(s,`FINANCIAL INTELLIGENCE 001   /   ${section}`,175,31,1020,24,14,false,dark?P.cream:P.muted);
+ rule(s,65);
+ if(title)text(s,title,64,91,1130,92,35,true);
+ text(s,'Inside Tungsten West’s Restart Financing   /   Research cutoff 4 November 2026',64,678,1050,22,13,false,dark?P.cream:P.muted);
+ text(s,String(idx).padStart(2,'0'),1170,678,45,22,14,false,dark?P.accent:P.muted);
+ rule(s,662);
+ const linkColor=dark?P.accent:P.gold,muted=dark?P.cream:P.muted;
+ const foot=text(s,'',64,633,1140,27,13,false,muted);
+ foot.text=[{runs:[{run:'Sources: ',style:{typeface:'Arial',fontSize:'13px',color:muted}},...srcs.flatMap(k=>[{run:k,style:{typeface:'Arial',fontSize:'13px',bold:true,underline:'sng',color:linkColor},link:{uri:ref[k].url,isExternal:true}},{run:'   ',style:{fontSize:'13px'}}]),{run:note,style:{typeface:'Arial',fontSize:'13px',color:muted}}]}];
+ s.speakerNotes.text=srcs.map(k=>`${k}: ${ref[k].title}. ${ref[k].url}`).join('\n')+'\n'+note+'\nControlling evidence: Phase 1B acceptance 772f2f4c02631f533a0a893849c9bedb8a6ff8ad. Source dates and locators are retained in the evidence appendix. Independent analyst interpretation unless attributed.';
  return s;
 }
-function table(s,rows,x=64,y=190,w=1140,h=380,widths=null,size=22){
+function table(s,rows,x=64,y=200,w=1140,h=360,widths=null,size=22){
+ const dark=darkSlides.has(s);
  const t=s.tables.add({rows:rows.length,columns:rows[0].length,left:x,top:y,width:w,height:h,values:rows,...(widths?{columnWidths:widths}:{})});
- t.borders.assign({fill:P.rule,width:.6,style:'solid'});
+ t.borders.assign({fill:dark?P.brand:P.rule,width:.5,style:'solid'});
  for(let r=0;r<rows.length;r++)for(let c=0;c<rows[0].length;c++){
-  const cell=t.getCell(r,c);cell.fill=r===0?P.charcoal:(r%2?P.band:P.paper);
-  cell.text.style={typeface:'Arial',fontSize:size,bold:r===0,color:r===0?'#FFFFFF':P.ink};
+  const cell=t.getCell(r,c);cell.fill=r===0?(dark?P.elevated:P.bg):(dark?(r%2?P.surface:P.bg):(r%2?P.cream:P.paper));
+  cell.text.style={typeface:'Arial',fontSize:size,bold:r===0,color:r===0?(dark?P.accent:P.cream):(dark?P.cream:P.ink)};
  }
  return t;
 }
-function chart(s,cats,vals,x,y,w,h,colors=[P.gold],max=null){
+function chart(s,cats,vals,x,y,w,h,outlinedLast=false){
+ const negative=Math.min(...vals)<0;
  const ch=s.charts.add('bar',{position:{left:x,top:y,width:w,height:h},categories:cats,
-  series:[{name:'GBP million',values:vals,fill:colors[0]}],hasLegend:false,
+  series:[{name:'GBP million',values:vals,fill:P.gold,...(outlinedLast?{points:[{idx:0,fill:P.ink},{idx:1,fill:P.ink},{idx:2,fill:P.paper,line:{style:'dashed',fill:P.gold,width:2}}]}:{})}],hasLegend:false,
   barOptions:{direction:'column',grouping:'clustered',gapWidth:90},
-  dataLabels:{showValue:true,position:'outEnd',textStyle:{fontSize:20,fill:P.ink},numberFormatCode:vals.every(Number.isInteger)?'0':(vals.some(n=>n%0.5!==0)?'0.00':'0.0')},
-  yAxis:{min:Math.min(...vals)<0?-5:0,max:max||(Math.min(...vals)<0?20:Math.ceil(Math.max(...vals)*1.22)),majorUnit:Math.max(...vals)<=4?1:(Math.max(...vals)<=15?5:10),numberFormatCode:'0',textStyle:{fontSize:18,fill:P.muted},majorGridlines:{fill:P.rule,width:.5}},
-  xAxis:{tickLabelPosition:'low',textStyle:{fontSize:18,fill:P.ink}},chartFill:P.paper,plotAreaFill:P.paper});
+  dataLabels:{showValue:true,position:'outEnd',textStyle:{fontSize:21,fill:P.ink},numberFormatCode:vals.every(Number.isInteger)?'0':(vals.some(n=>n%0.5!==0)?'0.00':'0.0')},
+  yAxis:{line:{fill:P.rule,width:.5},min:negative?-5:0,max:negative?20:Math.ceil(Math.max(...vals)*1.22),majorUnit:Math.max(...vals)<=4?1:(Math.max(...vals)<=15?5:10),numberFormatCode:'0',textStyle:{fontSize:17,fill:P.muted},majorGridlines:{fill:P.rule,width:.5}},
+  xAxis:{line:{fill:P.rule,width:.5},tickLabelPosition:'low',textStyle:{fontSize:18,fill:P.ink}},chartFill:P.paper,plotAreaFill:P.paper});
  applyPresentationChartFont(ch,{fontFamily:'Arial'});return ch;
 }
-let s=base('Hemerdon financing and restart risk',1,['S1','S2','S3'],'Independent SMPT research');
-text(s,'£71m headline financing package',64,208,1100,60,45,true);
-text(s,'Capital structure, remaining expenditure and refinancing exposure at Tungsten West',64,281,1100,70,28);
-text(s,'How does government-backed financing change the restart pathway, and which dependencies remain material to commercial execution?',64,390,1100,105,31,true);
-text(s,'£61m gross equity and core loan support the restart. The short loan horizon makes production, collections and refinancing central to the financial assessment.',64,520,1110,80,24);
-s=base('Capital access improved while execution governs repayment',2,['S1','S2','S4'],'Values in GBP million unless stated');
-table(s,[['Financial finding','Commercial implication'],['61 gross equity and core debt','Full core draw disclosed by 2 September. Headline 71 includes 10 uncommitted.'],['40–45 remaining project spend','October management estimate excludes operating costs. Midpoint convention 42.5.'],['5.75 incremental analyst stress','Capex, delay and rate exposure. Current cash and a complete funding gap remain unestablished.']],64,190,1140,330,[420,720],23);
-text(s,"Management reports a fully funded restart pathway. The research tests its financing mechanics and selected sensitivities, without finding a current cash shortage.",64,553,1135,64,23);
-s=base('Reported processing progress strengthens the restart pathway',3,['S2','S6','S7'],'Issuer reports and guidance. FY ends 31 March.');
-table(s,[['Date / horizon','Documented development','Financial implication'],['15 September 2026','Processing commencement announced','Operating activity precedes steady-state cash conversion.'],['23 September 2026','Elmet: 1,000t WO3 per year for eight years','Variable APT-linked price. Nominal contract value is not guaranteed receipts.'],['October 2026','Coarse-gravity wet commissioning reported achieved','Sustained throughput, recovery and costs remain the next tests.'],['FY2028 guidance','More than 3,300t WO3 and 600t tin','Targets require delivery, acceptance and collection.']],64,190,1140,405,[230,430,480],21);
-s=base('£61m core financing sits within the £71m headline',4,['S1','S2','S3'],'GBP million. Gross transaction amounts, not remaining cash.');
-chart(s,['Equity','Core loan','Uncommitted\naccordion'],[value('hfi-nwf-equity')/1e6,value('hfi-nwf-loan')/1e6,value('hfi-nwf-accordion')/1e6],64,203,660,350);
-table(s,[['Instrument','Economic claim'],['£36m equity','Residual risk capital and ownership participation.'],['£25m core loan','Repayment obligation. Full draw disclosed.'],['£10m accordion','Additional potential debt requiring commitment.']],760,195,445,360,[155,290],21);
-text(s,'Core gross: £36m + £25m = £61m. Adding the £10m uncommitted accordion reconciles the £71m maximum.',64,570,1135,49,24,true);
-s=base('Short tenor and pricing steps make financing time-sensitive',5,['S1','S2','S4','S8'],'October pricing disclosure. Executed facility terms remain required.');
-table(s,[['Term or document','Disclosure','Lender diligence implication'],['Tenor','366 days','Agreement-date versus drawdown origin unresolved. Exact maturity unavailable.'],['Pricing','SONIA + 5.5pp initially; +1pp each quarter','Confirm step dates, rate conventions, fees and repayment mechanics.'],['Group security deed','Dated 28 August; filed 1 September','Four group chargors, GLAS trustee, equipment exclusions.'],['Facility attribution','Deed references a loan agreement; lender unnamed','NWF linkage is an inference. Registration does not establish priority or recovery value.']],64,190,1140,405,[235,410,495],21);
-s=base('October guidance leaves £40–45m project spending',6,['S1','S2','S5','S10'],'GBP million. Remaining-spend guidance excludes operating costs.');
-chart(s,['Lower end','Midpoint\nconvention','Upper end'],[40,data.findings.remainingMidpointGBP/1e6,45],64,205,660,340);
-text(s,'£25–35m in FY2027',775,206,425,44,28,true);
-text(s,'Company timing guidance places the balance in the following year.',775,262,425,65,23);
-text(s,'Latest exact audited cash',775,352,425,35,25,true);
-text(s,'£25.486m at 31 March 2026. Separate restricted escrow: £14.912m. Neither is a current liquidity snapshot.',775,402,425,105,23);
-text(s,'No current cash bridge can be closed without post-March operating flows, capital payments, financing receipts, bridge repayment and fees.',64,560,1138,65,24);
-s=base('Two sensitivities measure different financing exposures',7,['S1','S2','S4'],'GBP million. Analyst counterfactuals over dated disclosures.');
-text(s,'Increment above £42.5m reference',64,182,550,35,25,true);
-chart(s,['Capex','Delay','Rate'],[2.5,3,.25],64,225,545,260);
-text(s,'£5.75m = £2.5m + £3m + £0.25m',64,500,545,39,25,true);
-text(s,'Rate proxy: 1% × £25m × one year. No accordion draw assumed.',64,550,545,61,21);
-text(s,'Original August plan ending cash',670,182,535,35,25,true);
-chart(s,['Planned\nreserve','No receipts\nstated totals','No receipts\nrounded detail'],[13,data.findings.augustNoReceiptsStatedGBP/1e6,data.findings.augustNoReceiptsDetailGBP/1e6],670,225,535,260);
-text(s,'All £15m expected receipts deferred',670,500,535,39,25,true);
-text(s,'About £2m / £1m deficits depend on rounding convention. Neither is observed cash. Do not add to the £5.75m stress.',670,550,535,70,21);
-s=base('Commissioning must convert into collected cash',8,['S2','S7'],'FY2028 reference. GBP unless stated.');
-table(s,[['Conversion stage','Financial dependence','Evidence to monitor'],['Production and recovery','Payable volume drives receipts','Sustained throughput and contained WO3 shipments.'],['Contract execution','APT-linked price remains variable','Quality acceptance, discounts and payment dates.'],['Cash generation','Working capital affects available cash','Invoices, receivable ageing and bank collections.'],['Debt service','Short loan horizon overlaps the ramp','Monthly forecast and agreed repayment/refinancing.']],64,190,1140,300,[280,395,465],21);
-text(s,'£111.5m midpoint core annual cash reference',64,521,1130,38,27,true);
-text(s,'FY2028 selected uses imply £438.15/mtu tungsten-only coverage at fixed coefficients. Excludes tin/aggregate receipts, restart capex, taxes and working capital. This is not full break-even or DSCR.',64,566,1134,60,21);
-s=base('Each capital provider faces a different diligence priority',9,['S1','S2','S4','S8'],'Independent financial interpretation');
-table(s,[['Stakeholder','Decision exposure','Priority evidence'],['Equity investors','Residual returns, ownership and future dilution','Payable output, cash conversion and further financing terms.'],['Project lenders','Maturity, collateral and repayment source','Executed facility, security priority, monthly cash and fleet-debt schedule.'],['Public capital providers','Capital recovery and strategic delivery','Deployment into commissioned capacity, verified supply and instrument-specific performance.']],64,195,1140,345,[255,420,465],23);
-text(s,'£71m of potential financing does not establish investment value or repayment capacity. Those decisions require dated cash flows and the complete contractual capital structure.',64,565,1135,60,24);
-s=base('The next assessment turns on collections and refinancing',10,['S1','S2','S4','S7'],'Evidence requirements reflect the frozen research cutoff.');
-table(s,[['Indicator','Would strengthen the outlook','Would weaken the outlook'],['Liquidity and capex','Reconciled cash covers dated obligations','Unpaid commitments rise or restrictions absorb cash.'],['Operating conversion','Sustained output and timely collections','Repeated recovery, acceptance or payment delays.'],['Repayment timetable','Cash cover or replacement capital agreed','Material maturity exposure remains unresolved.']],64,190,1140,310,[245,435,460],23);
-text(s,'NWF capital supports a credible restart pathway',64,535,1130,40,30,true);
-text(s,'The financial test is dependable cash generation within the financing horizon. Current liquidity, valuation and repayment sufficiency remain open diligence questions.',64,581,1135,49,23);
+let s=base('',1,['S1','S2','S3'],'Independent research   /   Review edition','HEMERDON');
+text(s,"Inside Tungsten West's\n£71 Million Restart Financing",64,140,1135,145,49,true);
+text(s,content.subtitle,64,315,1110,88,29,false,P.cream);
+text(s,'How does government capital change the restart pathway, and which dependencies shape commercial execution?',64,443,1080,87,28);
+rule(s,551,64,180);
+text(s,'£61m gross core financing',64,578,620,43,29,true,P.accent);
+text(s,'£10m additional lending capacity remains uncommitted',690,583,510,42,21,false,P.cream);
+s=base('NWF capital supports the restart with a short loan horizon',2,['S1','S2','S4'],'Gross financing and October management guidance','EXECUTIVE FINDINGS');
+table(s,[['Financial result','Economic implication'],['£61m gross equity and core debt','Capital supports redevelopment and replaces earlier short-term finance. The loan adds a repayment obligation during the ramp.'],['£40–45m remaining project spend','Execution still draws cash. October guidance excludes operating costs and needs a dated payment schedule.'],['£5.75m incremental analyst stress','Capex, delay and rate exposure test the sensitivity of uses. Funding headroom requires a complete cash bridge.']],64,205,1140,340,[370,770],22);
+text(s,"Management reports a fully funded restart. The next financial test is the conversion of commissioning into dependable customer collections.",64,574,1135,51,23);
+s=base('Commissioning progress creates a route to commercial receipts',3,['S2','S6','S7'],'Issuer reports and guidance. Financial years end 31 March.','OPERATING MILESTONES');
+table(s,[['Date / horizon','Development','Cash conversion still to demonstrate'],['15 September 2026','Processing commencement announced','Sustained throughput and recovery into payable output.'],['23 September 2026','Elmet: 1,000t contained WO3 annually for eight years','Variable APT-linked pricing, delivery and customer payment.'],['October 2026','Coarse-gravity wet commissioning reported achieved','Repeatable performance and operating cost per payable unit.'],['FY2028 guidance','More than 3,300t WO3 and 600t tin','Production and shipments reconciled to invoices and collections.']],64,205,1140,395,[215,440,485],21);
+s=base('The £71m headline combines £61m core and £10m uncommitted',4,['S1','S2','S3'],'GBP million. Gross transaction financing; full core-loan draw disclosed by 2 September.','CAPITAL STRUCTURE');
+chart(s,['Equity','Core loan','Uncommitted\naccordion'],[value('hfi-nwf-equity')/1e6,value('hfi-nwf-loan')/1e6,value('hfi-nwf-accordion')/1e6],64,225,660,330,true);
+table(s,[['Financing status','Interpretation'],['£61m gross core','£36m equity and £25m loan. Equity shares residual risk; the loan requires repayment.'],['£10m uncommitted','Outlined capacity requires agreement and would add debt.']],780,210,425,310,[170,255],22);
+text(s,'£61m',780,546,160,50,38,true);
+text(s,'core gross transaction financing',946,551,260,50,22);
+s=base('Short tenor and margin steps increase the cost of delay',5,['S1','S2','S4','S8'],'Announced terms and October disclosure. Exact executed maturity remains unresolved.','DEBT AND SECURITY');
+table(s,[['Term / document','Supported disclosure','Financial consequence'],['366-day tenor','Agreement-date versus drawdown origin differs','A precise repayment calendar requires the definitive facility.'],['Loan pricing','SONIA + 5.5pp initially; +1pp each quarter','Later collections can coincide with a rising financing margin.'],['Group security deed','Dated 28 August; four group chargors and GLAS trustee','Financed-equipment exclusions make creditor scope and priority material.'],['Facility linkage','Referenced loan agreement leaves lender unnamed','NWF attribution remains an inference. Recovery analysis needs the full documents.']],64,205,1140,395,[220,450,470],21);
+s=base('October spend guidance needs to be mapped to cash payments',6,['S1','S2','S5','S10'],'GBP million. Remaining project expenditure excludes operating costs.','EXPENDITURE AND LIQUIDITY');
+chart(s,['Lower end','Midpoint\nconvention','Upper end'],[40,data.findings.remainingMidpointGBP/1e6,45],64,220,655,325);
+text(s,'£25–35m in FY2027',775,215,425,44,28,true);
+text(s,'Company guidance places the balance in the following year.',775,269,425,61,23);
+rule(s,356,775,425);
+text(s,'31 March audited cash',775,383,425,35,25,true);
+text(s,'£25.486m general-use group cash\n£14.912m separately restricted escrow',775,432,425,88,23);
+text(s,'Net financing receipts, bridge repayment and subsequent operating and capital flows determine later cash headroom.',64,574,1140,50,23);
+s=base('Cost stress and receipt timing test separate exposures',7,['S1','S2','S4'],'GBP million. Separate dated sensitivities, with no combined current-gap inference.','MODEL SENSITIVITIES');
+text(s,'October increment above £42.5m',64,197,545,35,25,true);
+chart(s,['Capex','Delay','Rate'],[2.5,3,.25],64,242,545,250);
+text(s,'£5.75m incremental stress',64,519,545,37,27,true);
+text(s,'Company delay sensitivity £3m. Analyst rate proxy: 1% × £25m × one year. No accordion draw.',64,563,545,61,20);
+text(s,'Original August plan ending cash',670,197,535,35,25,true);
+chart(s,['Planned\nreserve','No receipts\nstated totals','No receipts\nrounded detail'],[13,data.findings.augustNoReceiptsStatedGBP/1e6,data.findings.augustNoReceiptsDetailGBP/1e6],670,242,535,250);
+text(s,'£15m anticipated receipts deferred',670,519,535,37,26,true);
+text(s,'Approximately £2m / £1m negative cash, depending on rounding convention. This tests the original plan.',670,563,535,61,20);
+s=base('Payable production and collections determine cash generation',8,['S2','S7'],'FY2028 selected cash reference and fixed model coefficients','COMMERCIAL CONVERSION');
+table(s,[['Conversion stage','Economic dependence','Evidence to monitor'],['Production and recovery','Payable volume drives receipts','Sustained throughput and contained WO3 shipments.'],['Delivery and acceptance','Contract pricing and settlement determine revenue','Quality, discounts and invoice terms.'],['Customer collections','Working capital affects cash available for debt service','Receivable ageing, payment dates and bank receipts.'],['Repayment or refinancing','Reliable cash must align with contractual payments','Monthly forecast through executed maturity.']],64,205,1140,300,[280,400,460],21);
+text(s,'£111.5m',64,528,500,46,35,true,P.gold);
+text(s,'Selected annual cash reference',64,578,600,28,21);
+text(s,'£438.15/mtu',800,528,390,46,35,true,P.gold);
+text(s,'Tungsten-only coverage reference',800,578,410,28,21);
+text(s,'Excludes tin/aggregate receipts, restart and growth capex, tax and working capital. Full break-even and DSCR remain unestablished.',64,612,1140,19,15);
+s=base('Capital providers need different evidence from the same ramp',9,['S1','S2','S4','S8'],'Independent financial interpretation','INSTITUTIONAL IMPLICATIONS');
+table(s,[['Capital provider','Decision exposure','Diligence priority'],['Equity investors','Residual cash returns and future dilution','Payable output, collections and any further financing terms.'],['Project lenders','Repayment date, collateral and replacement capital','Executed facility, creditor priority, monthly cash and equipment-debt schedule.'],['Public capital providers','Instrument returns and dependable strategic supply','Capital deployment into commissioned capacity, then verified delivery.']],64,205,1140,330,[255,420,465],22);
+text(s,'A reconciled liquidity and debt schedule would allow operating progress to be assessed against financial obligations.',64,574,1135,51,23);
+s=base('Collections and refinancing are the next financing tests',10,['S1','S2','S4','S7'],'Independent assessment   /   Prepared for final publication review','CONCLUSION');
+table(s,[['Indicator','Stronger financial position','Pressure on the timetable'],['Liquidity and expenditure','Cash reconciled to dated obligations','Rising unpaid commitments or restricted cash.'],['Operating conversion','Sustained output and timely collections','Recovery, acceptance or customer-payment delays.'],['Loan repayment','Cash cover or replacement capital agreed','An approaching maturity with financing unresolved.']],64,205,1140,300,[235,435,470],22);
+text(s,'Government capital supports the restart pathway',64,543,1135,40,30,true,P.accent);
+text(s,'Current liquidity, valuation and repayment sufficiency remain open diligence questions.',64,589,1135,30,21);
 await fs.mkdir(build,{recursive:true});
 const candidate=path.join(build,'candidate.pptx');
 await (await PresentationFile.exportPptx(pres)).save(candidate);
