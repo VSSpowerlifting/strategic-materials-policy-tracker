@@ -111,7 +111,7 @@ note(s,'EXIM Stibnite authorization ($2.906bn) and an INL processing pilot docum
 {
 const s=pg(p,4,8,series);head(s,'Four-strategy comparison','Only the balanced strategy meets both modeled 2030 constraints','Severe eight-month disruption; 100 t/year buyer; cash cap $3m; service tolerance ≤5 t unfilled');
 const names=['Domestic-led','Diversification-led','Inventory-led','Balanced / conditional'],unfilled=[22.125,16.65,0,0],cash=[0.919,1.378,4.134,2.296];
-label(s,'Unfilled antimony-equivalent (t)',0.78,2.40,5.7);names.forEach((n,i)=>{const y=2.83+i*0.86;txt(s,n,0.79,y,2.66,0.34,13.4,C.ink,i===3);nativeBar(s,3.55,y,6.35,0.36,unfilled[i],25,i===3?C.gold:C.dark);txt(s,`${unfilled[i].toFixed(i===2||i===3?0:1)} t`,10.26,y,1.05,0.32,15,C.ink,true,{align:'right'});txt(s,`$${cash[i].toFixed(2)}m stock`,11.32,y,1.23,0.34,11.7,C.gray,false,{align:'right'});});
+label(s,'Unfilled antimony-equivalent (t)',0.78,2.40,5.7);names.forEach((n,i)=>{const y=2.83+i*0.86;txt(s,n,0.79,y,2.66,0.34,13.4,C.ink,i===3);nativeBar(s,3.55,y,6.35,0.36,unfilled[i],25,i===3?C.gold:C.dark);txt(s,`${unfilled[i]===0?'0':(Math.round((unfilled[i]+1e-9)*10)/10).toFixed(1)} t`,10.26,y,1.05,0.32,15,C.ink,true,{align:'right'});txt(s,`$${cash[i].toFixed(2)}m stock`,11.32,y,1.23,0.34,11.7,C.gray,false,{align:'right'});});
 line(s,3.55,6.31,9.9,6.31,C.line);txt(s,'Threshold: 5 t',9.78,6.23,2.72,0.2,10,C.gray);note(s,'Inventory-led passes continuity but exceeds the illustrative $3m stock limit; balanced passes both only under specified qualification assumptions.',6.57);linkText(s,'Model register / 2030 comparison',U.evidence,0.61,6.94,6.8,0.13,C.goldInk,8.8);
 }
 {
