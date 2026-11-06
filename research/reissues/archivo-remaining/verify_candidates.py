@@ -38,7 +38,8 @@ REQUIRED_LINKS = {
     ],
     'a001': [
         'pubs.usgs.gov/periodicals/mcs2026/', 'www.exim.gov/solutions/project-and-structured-finance/transactions',
-        'www.sec.gov/Archives/edgar/data/1526243/', 'inl.gov/news-release/',
+        'www.sec.gov/Archives/edgar/data/1526243/', 'www.sec.gov/Archives/edgar/data/101538/',
+        'www.dla.mil/Strategic-Materials/', 'inl.gov/news-release/',
         'www.mofcom.gov.cn/zfxxgk/fdzdgknr/ztfl/dwmygl/',
         'www.mofcom.gov.cn/zfxxgk/gkml/art/2024/', 'www.mofcom.gov.cn/zfxxgk/gkml/art/2025/',
         '/research/applied-001/antimony-evidence-and-assumptions.md',
