@@ -120,9 +120,15 @@ def main():
         if baseline.is_file():
             reference=fitz.open(baseline)
             base_text=' '.join(p.get_text() for p in reference)
+            ref_images=[]
+            for pg in reference:
+                pix=pg.get_pixmap(matrix=fitz.Matrix(0.61,0.61),alpha=False)
+                ref_images.append(Image.frombytes('RGB',(pix.width,pix.height),pix.samples))
+            if len(ref_images)==8:
+                montage(ref_images,out/(stem+'-baseline-contact.jpg'))
             current_text=' '.join(p.get_text() for p in fitz.open(pdf))
             base_nums=tokens(base_text);current_nums=tokens(current_text)
-            reference_report={'pages':reference.page_count,'bytes':baseline.stat().st_size,'sha256':sha(baseline),
+            reference_report={'pages':reference.page_count,'page_size_points':[round(reference[0].rect.width,2),round(reference[0].rect.height,2)],'bytes':baseline.stat().st_size,'sha256':sha(baseline),
                               'source_tokens_not_in_candidate':sorted((base_nums-current_nums).elements())[:100],
                               'candidate_tokens_not_in_source':sorted((current_nums-base_nums).elements())[:100]}
         else:
