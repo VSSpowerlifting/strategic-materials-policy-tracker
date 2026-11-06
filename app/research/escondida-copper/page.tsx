@@ -134,18 +134,17 @@ export default function EscondidaCopper() {
                   investment decision?
                 </h2>
                 <p className="fi-lead">
-                  Goldman Sachs’ copper outlook makes a material difference at
-                  BHP’s earnings scale. Escondida’s investment case turns on a
-                  different question: what production and cash flow would the
-                  mine lose without a new concentrator?
+                  Goldman Sachs’ copper outlook could materially increase BHP’s
+                  earnings. For Escondida, the investment case depends on how
+                  much mine production and cash flow the new concentrator
+                  preserves.
                 </p>
                 <p>
-                  The two decisions run on different clocks. Higher copper
-                  prices in 2027 could expand financial flexibility before a
-                  replacement plant starts producing in 2031–32. SMPT connects
-                  those horizons without treating a near-term forecast as a
-                  long-term project price, or earnings sensitivity as investment
-                  cash.
+                  Goldman’s forecast covers 2027. The replacement concentrator
+                  is expected to begin producing in 2031–32. Higher near-term
+                  prices could give BHP more financial flexibility, while the
+                  construction decision depends on long-term cash flow,
+                  capital costs and operating continuity.
                 </p>
                 <div className="fi-findings">
                   <div>
@@ -160,10 +159,11 @@ export default function EscondidaCopper() {
                   </div>
                   <div>
                     <span className="fi-eyebrow">Investment judgment</span>
-                    <strong>Fund readiness</strong>
+                    <strong>Continue pre-construction work</strong>
                     <p>
-                      Maintain engineering and permitting progress; test major
-                      construction commitments against costed alternatives.
+                      Continue engineering and permitting while using costed
+                      alternatives to decide when to commit construction
+                      capital.
                     </p>
                   </div>
                 </div>
@@ -171,8 +171,8 @@ export default function EscondidaCopper() {
               <section id="exposure" className="fi-section">
                 
                 <h2>
-                  The forecast gap is material. Translating it into financing
-                  requires more evidence.
+                  Goldman’s revised forecast implies a $2.83bn EBITDA
+                  sensitivity.
                 </h2>
                 <p>
                   Public reporting attributes a{" "}
@@ -188,7 +188,7 @@ export default function EscondidaCopper() {
                     <span className="fi-eyebrow">
                       Exhibit 01 / Outside forecasts
                     </span>
-                    <h3>Three price expectations, one calendar year</h3>
+                    <h3>Calendar-2027 copper-price forecasts</h3>
                     <p>US dollars per tonne · calendar-2027 annual average</p>
                   </figcaption>
                   <div
@@ -243,55 +243,54 @@ export default function EscondidaCopper() {
                     <a href={sources.bank}>World Bank, October 2026, Table 1</a>
                     ;{" "}
                     <a href={sources.bhp}>BHP FY2026 presentation, slide 48</a>.
-                    SMPT calculations. The original Goldman note was not
-                    obtained; public reporting provides the annual average.
+                    SMPT calculations. The Goldman annual average comes from public reporting;
+                    the original research note remains unavailable.
                     Goldman’s separate $15,600/t end-2027 view has a different
                     horizon.
                   </p>
                 </figure>
                 <p>
                   These are hypothetical sensitivities holding BHP’s FY2026
-                  exposure static. They exclude a forecast of volume, costs,
-                  taxes and distributions. Escondida is 57.5% economically owned
-                  but fully consolidated; applying a uniform ownership
-                  percentage to reported Group exposure would misstate its
-                  accounting scope. Neither differential represents forward
-                  earnings or cash available for the project.
+                  exposure static. Forecasting earnings and project cash
+                  requires volume, cost, tax and distribution assumptions.
+                  Escondida is 57.5% economically owned but fully consolidated;
+                  reported Group exposure therefore uses a different accounting
+                  basis from a simple ownership allocation. Both figures are
+                  static EBITDA sensitivities, distinct from future earnings
+                  or cash available for construction.
                 </p>
               </section>
               <section id="replacement" className="fi-section">
                 
                 <h2>
-                  Preserved production matters more than the plant’s headline
-                  output.
+                  Escondida’s replacement economics depend on production
+                  preserved.
                 </h2>
                 <p>
                   The New Concentrator replaces Los Colorados. BHP’s $5.4–6.3
                   billion gross capital estimate and 230–270 ktpa
-                  facility-output range describe the planned asset; they do not
-                  establish its incremental benefit to the mine. A
-                  with-build/no-build comparison must include production
-                  preserved, alternative processing, avoided costs and relevant
-                  capital.
+                  facility-output range describe the planned asset.
+                  Incremental value to the mine depends on production
+                  preserved, alternative processing, avoided costs and capital
+                  under with-build and no-build plans.
                 </p>
                 <p>
-                  SMPT reverses the appraisal: given assumed spending and an
-                  assumed margin, what level annual benefit would recover
-                  capital? The result changes substantially with benefit
-                  duration and timing. Comparing the screens below shows why 199
-                  ktpa cannot settle the investment decision.
+                  The model estimates the annual production-equivalent benefit
+                  needed to recover capital under assumed prices, margins,
+                  spending and timing. Across the four tests, that requirement
+                  ranges from 199 to 416 ktpa.
                 </p>
                 <figure className="fi-exhibit">
                   <figcaption>
                     <span className="fi-eyebrow">
-                      Exhibit 02 / Independent assumption tests
+                      Exhibit 02 / Capital-recovery scenarios
                     </span>
                     <h3>
-                      What must the replacement investment preserve or add?
+                      Required annual production-equivalent benefit
                     </h3>
                     <p>
-                      Required production-equivalent benefit, rather than total
-                      facility output
+                      Estimated output preserved or added against a no-build
+                      mine plan
                     </p>
                   </figcaption>
                   <Fi002Screen />
@@ -299,9 +298,11 @@ export default function EscondidaCopper() {
                 <p>
                   BHP’s management-guided 16–18% return uses a long-term copper
                   assumption of approximately $10,494/t, below Goldman’s
-                  near-term forecast. The underlying annual project cash flows
-                  and no-build mine plan are unavailable. SMPT’s screen does not
-                  reproduce that IRR or independently value the project.
+                  near-term forecast. The annual project cash-flow schedule and
+                  costed no-build mine plan remain outside the public
+                  disclosure. This model provides a simplified capital-recovery
+                  sensitivity, distinct from BHP’s IRR calculation and a full
+                  project valuation.
                 </p>
                 <p className="fi-note">
                   Project estimates:{" "}
@@ -316,23 +317,23 @@ export default function EscondidaCopper() {
               <section id="decision" className="fi-section">
                 
                 <h2>
-                  Maintain funded readiness. Make construction timing earn its
-                  place.
+                  Advance engineering and permitting before committing
+                  construction capital.
                 </h2>
                 <p>
                   BHP’s October operating review records{" "}
                   <strong>
                     $0.8 billion of gross pre-commitment funding approved
                   </strong>{" "}
-                  for engineering, permitting and execution readiness. Approval
-                  is distinct from spending already incurred or a final
-                  construction sanction. The research supports maintaining that
-                  preparation and selectively accelerating work that resolves
-                  uncertainty or protects a credible replacement schedule.
+                  for engineering, permitting and execution readiness. The approval covers pre-construction readiness; actual
+                  expenditures and the final construction sanction are
+                  separate decisions. Continue preparation and selectively
+                  accelerate work that resolves uncertainty or protects
+                  the replacement schedule.
                 </p>
                 <div className="fi-decision-list">
                   <div>
-                    <h3>Acceleration requires</h3>
+                    <h3>Case for accelerating construction</h3>
                     <p>
                       Discounted avoided continuity losses that exceed the
                       acceleration premium and execution risk, with permits and
@@ -340,7 +341,7 @@ export default function EscondidaCopper() {
                     </p>
                   </div>
                   <div>
-                    <h3>Staging or deferral requires</h3>
+                    <h3>Case for delaying construction</h3>
                     <p>
                       A credible interim operating plan whose retained
                       flexibility outweighs deterioration, escalation and lost
@@ -348,7 +349,7 @@ export default function EscondidaCopper() {
                     </p>
                   </div>
                   <div>
-                    <h3>The decision changes with</h3>
+                    <h3>Evidence needed before sanction</h3>
                     <p>
                       A costed no-build mine plan, annual production and fiscal
                       schedules, binding execution alternatives and material
@@ -357,12 +358,13 @@ export default function EscondidaCopper() {
                   </div>
                 </div>
                 <p>
-                  Stronger copper prices expand the choices available to
-                  management. They do not rank Escondida against other uses of
-                  capital. Historical cash flow, cumulative management
-                  projections and gross project budgets have different scopes;
-                  subtracting project capital twice or equating EBITDA with
-                  deployable cash would create an artificial funding conclusion.
+                  Higher copper prices could improve BHP’s capacity to fund
+                  construction. Ranking Escondida against competing uses of
+                  capital still requires project-level returns and alternatives.
+                  Historical cash flow, cumulative management projections and
+                  gross project budgets use different scopes. The funding
+                  analysis treats them separately and distinguishes EBITDA
+                  sensitivity from deployable cash.
                 </p>
                 <p className="fi-note">
                   Readiness source:{" "}
@@ -372,9 +374,8 @@ export default function EscondidaCopper() {
                   . The{" "}
                   <a href={sources.permit}>indexed Chilean permitting file</a>{" "}
                   showed evaluation pending at the research cutoff, including a
-                  4 November applicant request. The mirror and document-access
-                  limits do not support a delay probability or approval-date
-                  forecast.
+                  4 November applicant request. Document-access limits leave the approval date and
+                  potential delay probability unresolved.
                 </p>
               </section>
             </article>
@@ -391,7 +392,8 @@ export default function EscondidaCopper() {
               <div className="fi-aside-note">
                 <p className="fi-eyebrow">Research independence</p>
                 <p>
-                  Goldman Sachs and BHP neither commissioned nor endorsed this work.
+                  SMPT produced this research independently of Goldman Sachs
+                  and BHP. All analytical judgments are SMPT’s.
                 </p>
               </div>
             </aside>
@@ -437,12 +439,13 @@ export default function EscondidaCopper() {
               
               <h2>Source basis and citation</h2>
               <p>
-                The analytical edition is frozen at{" "}
-                <time dateTime={fi002.cutoff}>5 November 2026</time>. A focused
-                preparation-date check of Goldman attribution, BHP readiness
-                funding and the permitting index found no material change
-                requiring revision. Primary access to the original Goldman note
-                and substantive October permit-review questions remains limited.
+                Research completed on{" "}
+                <time dateTime={fi002.cutoff}>5 November 2026</time>. Goldman’s
+                forecast attribution, BHP’s readiness funding and the Chilean
+                permitting index were checked again before publication, with
+                findings consistent with this edition. The original Goldman
+                note and substantive October permit-review questions
+                remain inaccessible.
               </p>
               <p>
                 Evidence classifications and access attempts are recorded in the{" "}
@@ -454,8 +457,8 @@ export default function EscondidaCopper() {
                   methodology
                 </a>{" "}
                 distinguishes issuer facts, outside forecasts and independent
-                assumptions. Internal financial and editorial checks are not
-                external professional verification.
+                assumptions. Financial and editorial checking was internal; external
+                professional verification remains outstanding.
               </p>
             </div>
             <div className="fi-citation">
@@ -469,9 +472,9 @@ export default function EscondidaCopper() {
                 Download BibTeX citation ↓
               </a>
               <p className="fi-note">
-                Independent financial and corporate strategy research.
-                Illustrative analysis, not a personalized investment
-                recommendation.
+                Independent financial and corporate strategy research for
+                general information. Investment decisions require individual
+                assessment and appropriate professional advice.
               </p>
             </div>
           </section>
