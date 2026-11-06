@@ -59,13 +59,10 @@ export default function AntimonySupplyResilience() {
             U.S. Antimony Supply Resilience
           </h1>
           <p className="mt-4 font-display text-lg text-muted">Strategic options for a defense manufacturer, 2027–2031</p>
-          <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
-            A procurement decision case testing how qualified international supply, strategic inventory and staged
-            domestic offtake interact when a critical input faces prolonged disruption.
-          </p>
+          
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link>
-            {" · "}4 November 2026{" · "}Applied Strategy 001
+            {" · "}4 November 2026
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a href={pdf} target="_blank" rel="noopener noreferrer" className="research-button">
@@ -83,9 +80,7 @@ export default function AntimonySupplyResilience() {
           <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
             <article className="min-w-0 max-w-4xl">
               <section className="border-b border-paper-border pb-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">
-                  Executive decision
-                </p>
+                
                 <h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight">
                   Qualify the alternative source, then fund five months of buyer-approved stock
                 </h2>
@@ -103,9 +98,7 @@ export default function AntimonySupplyResilience() {
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">
-                  Supply evidence
-                </p>
+                
                 <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
                   Import dependence and material qualification frame the risk
                 </h2>
@@ -124,9 +117,7 @@ export default function AntimonySupplyResilience() {
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">
-                  Strategy comparison
-                </p>
+                
                 <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
                   A balanced policy meets both modeled 2030 constraints
                 </h2>
