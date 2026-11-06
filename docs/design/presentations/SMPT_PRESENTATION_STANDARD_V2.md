@@ -1,4 +1,4 @@
-# SMPT Presentation Standard v2.0
+# SMPT Presentation Standard v2.1
 
 Adopted **5 November 2026** · Applies to **new and revised research presentations**  
 Companion standards: [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) · [Reference Analysis](REFERENCE_ANALYSIS.md)
@@ -80,17 +80,20 @@ Charts may introduce *functional* neutral grays for series differentiation; do n
 
 ### Typography
 
-Use **Georgia Bold** for cover/major assertion titles and **Source Sans 3** for body text, axes, tables, legends, annotations and footnotes. These are an SMPT editorial pairing, **not claims about McKinsey's proprietary brand fonts**.
+**Archivo is the sole primary family for SMPT presentation design.** Use Archivo Regular, Medium and Semibold for the cover, headline, body, figure labels, axes, tables and source notes. This replaces the previous Georgia/Source Sans 3 pairing and aligns future decks with the website.
 
-- Major title: Georgia Bold, **28–34 pt** on analytical pages; 36–46 pt cover depending on line count.
-- Section/exhibit heading: Source Sans 3 Semibold, 18–22 pt.
-- Analytical body: Source Sans 3, **16–20 pt**; rarely below 15 pt.
-- Chart data labels: 12–15 pt; axis labels 11–13 pt when necessary.
-- Footnotes/source line: 9.5–11 pt, never silently omit critical qualifications for legibility.
-- Figures: right-aligned where tabular, units and sign conventions explicit; no fake precision.
-- Fallbacks: Georgia → Cambria; Source Sans 3 → Arial/Helvetica. Verify the *exported PDF* for substitution and reflow. Do not commit or distribute font binaries.
+- Cover title: Archivo Semibold, **36–46 pt**, with measured line breaks.
+- Major assertion title: Archivo Semibold, **28–34 pt** on analytical slides.
+- Section/exhibit heading: Archivo Medium/Semibold, **18–22 pt**.
+- Analytical body: Archivo Regular, **16–20 pt**; rarely below 15 pt.
+- Chart data labels: Archivo Medium, 12–15 pt; axes 11–13 pt when justified.
+- Footnotes/source line: Archivo Regular, 9.5–11 pt; retain material qualifications and links.
+- Financial figures and dates: Archivo with tabular numerals where supported.
+- Dense technical identifiers: fixed-width type is permitted selectively; avoid decorative monospace.
 
-The website currently uses a different display/serif pairing; this presentation pairing is a deliberate **slide-publication** decision, not a replacement for the website design system.
+Always include an editable PowerPoint and matching selectable-text PDF. Archive/embed the true Archivo face where software licenses and export engines permit; install Archivo in rendering environments and verify that the **PDF embeds Archivo** rather than silently substituting another family. For interoperability, Arial may be used only as a clearly documented fallback where the recipient requires a system font; never silently mix Archivo and Arial within the primary deck. Do not commit or distribute standalone font binaries.
+
+The existing 5 November 2026 research decks remain citation-stable until a typography-only replacement has passed source-link, numerical, editable-object, rendered-slide and human publication review. Historical versions remain accessible.
 
 ### Contrast and accessibility
 
@@ -102,7 +105,7 @@ The website currently uses a different display/serif pairing; this presentation 
 
 These are **archetypes**, not eight mandatory slides or a fixed sequence.
 
-**A — Research cover.** Graphite field, concise Georgia title, subdued topic/series rail, subtitle, author, issue date and source cutoff. No consultant-brand mimicry.
+**A — Research cover.** Graphite field, concise Archivo Semibold title, subdued topic/series rail, subtitle, author, issue date and source cutoff. No consultant-brand mimicry.
 
 **B — Executive findings.** One thesis, up to three quantified supporting findings with why they matter, plus a single clearly identified unresolved decision variable.
 
@@ -179,7 +182,7 @@ Editorial QA:
 
 ## 10. Governance and application
 
-- v2 is the default **for future SMPT research decks**.
+- v2.1 with Archivo is the default **for future SMPT research decks**.
 - Existing live FI001 publication remains unchanged until a new independently verified version has completed editorial and release gates.
 - The [FI001 redesign brief](FI001_REDESIGN_BRIEF.md) is the first candidate application, targeting 18 slides including four appendix slides.
 - The Financial Intelligence 002 case can subsequently reuse the same design grammar; do not expand this documentation task into FI002 development.

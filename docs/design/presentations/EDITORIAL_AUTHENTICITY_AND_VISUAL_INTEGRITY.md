@@ -99,7 +99,7 @@ Choose a layout after defining the comparison the reader needs. Test whether eac
 - Preserve editability: native PowerPoint text/shapes/charts where practical; record source input and generator paths for computed figures.
 - Verify complete financial classification. Use different line/outline/status treatment for uncommitted versus committed, management targets versus realized results, and reported versus independently verified activity.
 - A timeline arrow communicates **sequence** unless a documented basis supports causality. Show the uncertainty directly.
-- Original layouts must follow the SMPT graphite/cream/gold palette, Georgia/Source Sans 3 typography, direct labels, readable sourcing and the hard **20-slide total cap**.
+- Original layouts must follow the SMPT graphite/cream/gold palette, Archivo typography, direct labels, readable sourcing and the hard **20-slide total cap**.
 
 ### Accessibility
 
@@ -204,7 +204,7 @@ Only mark a gate PASS when its stated evidence was examined. Use REVISE for addr
 
 ## 8. Adoption and boundaries
 
-Apply to newly authored and revised SMPT research decks, including the **planned FI001 v2 redesign**. The current live FI001 files, original models and approved factual statements remain intact until a separately approved, versioned replacement passes publication review. The existing 20-slide cap, color and typography systems are unchanged.
+Apply to newly authored and revised SMPT research decks, including the **planned FI001 v2 redesign**. The current live FI001 files, original models and approved factual statements remain intact until a separately approved, versioned replacement passes publication review. The existing 20-slide cap and colors remain unchanged; the presentation typography is now Archivo under Presentation Standard v2.1.
 
 **External reference points:** [NIST Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) (risk evaluation and oversight); [Microsoft PowerPoint accessibility guidance](https://support.microsoft.com/en-us/accessibility/powerpoint/make-your-powerpoint-presentations-accessible-to-people-with-disabilities) (contrast, reading order, alt text); [BCG written-case example](https://media-publications.bcg.com/BCG-Written-Case-Example.pdf) (key message titles and quantitative exhibits). These sources inform the workflow; they are not endorsements of SMPT.
 

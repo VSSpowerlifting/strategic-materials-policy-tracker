@@ -5,11 +5,11 @@ import { site } from "@/lib/site";
 
 const assets = {
   memo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
-  deck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/SMPT_FI001_Hemerdon_Presentation_v2.pdf",
+  deck: "/research/fi001/presentation-v2-archivo.pdf",
   originalDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
   model: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Model.xlsx",
   editableMemo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.docx",
-  editableDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/SMPT_FI001_Hemerdon_Presentation_v2.pptx",
+  editableDeck: "/research/fi001/presentation-v2-archivo.pptx",
   originalEditableDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pptx",
   deckQc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/publication-qc.md",
   deckSources: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/source-appendix.md",

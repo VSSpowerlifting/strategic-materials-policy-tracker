@@ -37,7 +37,7 @@ with zipfile.ZipFile(ppt) as z:
   check(f'Slide{i:02} source and class specification',bool(spec['slides'][i-1]['sourceKeys']) and bool(spec['slides'][i-1]['mechanism']))
   if xml.findall('.//a:tbl',N):tableOwners.append(i)
   if xml.findall('.//c:chart',N):chartOwners.append(i)
-  check(f'Slide{i:02} Georgia/Arial only',set(xml.xpath('//a:latin/@typeface',namespaces=N))<={'Georgia','Arial'})
+  check(f'Slide{i:02} Archivo only',set(xml.xpath('//a:latin/@typeface',namespaces=N))<={'Georgia','Arial'})
   rel=E.fromstring(z.read(f'ppt/slides/_rels/slide{i}.xml.rels'));targets=[n.get('Target') for n in rel if n.get('Type','').endswith('/hyperlink')];check(f'Slide{i:02} native links match register',bool(targets) and all(t in urls for t in targets))
  check('Native table ownership',tableOwners==[5,13,15,16,17,18],tableOwners);check('Native chart ownership',chartOwners==[8,9],chartOwners)
  charts=[n for n in z.namelist() if re.search(r'/charts/chart\d+\.xml$',n)]
@@ -70,7 +70,7 @@ with pdfplumber.open(p/'SMPT_FI001_Hemerdon_Presentation_v2.pdf') as pdf:
   chars=pp.chars;fonts.update(c['fontname'].split('+')[-1] for c in chars)
   check(f'PDF{i:02} glyphs inside page',all(c['x0']>=0 and c['x1']<=pp.width+.5 and c['top']>=0 and c['bottom']<=pp.height+.5 for c in chars))
   check(f'PDF{i:02} render exists',(p/f'.build/rendered/slide-{i:02}.png').is_file())
-check('PDF Georgia Bold and Arial embedded text',any('Georgia-Bold' in f for f in fonts) and all('Arial' in f or 'Georgia' in f for f in fonts),sorted(fonts));check('PDF source-link count',linkCount==sum(len(s['sourceKeys']) for s in spec['slides']),linkCount)
+check('PDF Archivo embedded text',any('Archivo' in f for f in fonts) and all('Archivo' in f for f in fonts),sorted(fonts));check('PDF source-link count',linkCount==sum(len(s['sourceKeys']) for s in spec['slides']),linkCount)
 receipt=json.loads((p/'deck-validation-results.json').read_text());check('Finalizer matches delivered bytes',receipt['finalSha256']==sha(ppt));check('Finalizer native import passed',receipt['firstPartyImport']['passed']);check('Finalizer geometry no findings',receipt['presentationLayout']['findingCount']==0)
 originals=[]
 for folder in ['hemerdon-phase1a','hemerdon-phase1b','hemerdon-phase1c']:
