@@ -33,7 +33,7 @@ export function DossierHeader({ payload }: { payload: DossierPayload }) {
       <div className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <h1 className="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{payload.nameEn}</h1>
         {payload.nameZh ? (
-          <span lang="zh" className="font-serif text-2xl text-muted">
+          <span lang="zh" className="font-display text-2xl text-muted">
             {payload.nameZh}
           </span>
         ) : null}
@@ -70,7 +70,7 @@ export function DossierHeader({ payload }: { payload: DossierPayload }) {
       </dl>
 
       <nav aria-label="On this page" className="mt-6">
-        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">On this page</p>
+        <p className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">On this page</p>
         <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-2 font-display text-sm">
           {sections.map((s) => (
             <li key={s.href}>

@@ -60,7 +60,7 @@ export function EventListItem({
               {framingCategories.length > 0 ? (
                 <FramingBadges categories={framingCategories} />
               ) : (
-                <span className="font-mono text-[11px] leading-none text-faint">
+                <span className="font-display text-[11px] leading-none text-faint">
                   Official framing not yet coded
                 </span>
               )}
@@ -79,7 +79,7 @@ export function EventLine({ event }: { event: PolicyEvent }) {
       href={`/events/${event.id}`}
       className="group flex items-baseline gap-3 py-2"
     >
-      <time className="tnum w-24 shrink-0 font-mono text-xs text-faint">
+      <time className="tnum w-24 shrink-0 font-display text-xs text-faint">
         {formatDate(event.date)}
       </time>
       <JurisdictionTag code={event.jurisdiction} />

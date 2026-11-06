@@ -20,7 +20,7 @@ export function SourceCard({
       <p className="mt-2 font-display text-sm text-muted">{source.publisher}</p>
       <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs leading-5 text-muted">
         <Badge>{sourceTypeLabels[source.sourceType]}</Badge>
-        <span className="font-mono uppercase tracking-wide">{source.language}</span>
+        <span className="font-display uppercase tracking-wide">{source.language}</span>
         {source.datePublished ? (
           <span>Published {formatDate(source.datePublished)}</span>
         ) : null}

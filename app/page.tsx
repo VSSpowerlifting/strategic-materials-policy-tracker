@@ -76,10 +76,10 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16">
           <div>
             <p className="font-display text-sm text-muted">Strategic Materials Policy Tracker</p>
-            <h1 className="mt-4 max-w-4xl font-serif text-[2.2rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="mt-4 max-w-4xl font-display text-[2.2rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
               Research on critical minerals policy, financing and industrial development.
             </h1>
-            <p className="mt-6 max-w-2xl font-serif text-lg leading-8 text-muted">
+            <p className="mt-6 max-w-2xl font-display text-lg leading-8 text-muted">
               Follow government measures, capital commitments and industrial projects
               through the original records.
             </p>
@@ -126,7 +126,7 @@ export default function Home() {
       <section id="research" aria-labelledby="research-heading" className="border-t border-border-strong">
         <Container width="wide" className="py-12 sm:py-16">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <h2 id="research-heading" className="font-serif text-3xl font-medium">Published research</h2>
+            <h2 id="research-heading" className="font-display text-3xl font-medium">Published research</h2>
             <Link href="/research" className="font-display text-sm text-accent underline underline-offset-4">
               All research
             </Link>
@@ -135,7 +135,7 @@ export default function Home() {
             {featured.map((item) => (
               <article key={item.href} className="border-t border-border pt-5">
                 <p className="font-display text-sm text-muted">{item.category}</p>
-                <h3 className="mt-2 font-serif text-xl leading-tight sm:text-2xl">
+                <h3 className="mt-2 font-display text-xl leading-tight sm:text-2xl">
                   <Link href={item.href} className="hover:text-accent">{item.title}</Link>
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-muted">{item.description}</p>
@@ -147,14 +147,14 @@ export default function Home() {
 
       <section id="examples" aria-labelledby="examples-heading" className="border-t border-border-strong">
         <Container width="wide" className="py-12 sm:py-14">
-          <h2 id="examples-heading" className="font-serif text-3xl font-medium">
+          <h2 id="examples-heading" className="font-display text-3xl font-medium">
             From the records
           </h2>
           <div className="mt-7 grid gap-7 md:grid-cols-3">
             {legal ? (
               <article className="border-t border-border pt-4">
                 <p className="font-display text-sm text-muted">Legal controls</p>
-                <h3 className="mt-3 font-serif text-lg leading-snug">
+                <h3 className="mt-3 font-display text-lg leading-snug">
                   <Link href={`/events/${legal.event.id}`} className="hover:text-accent">
                     {legal.event.titleEn}
                   </Link>
@@ -170,7 +170,7 @@ export default function Home() {
             {financing.length ? (
               <article className="border-t border-border pt-4">
                 <p className="font-display text-sm text-muted">Public financing</p>
-                <h3 className="mt-3 font-serif text-lg leading-snug">
+                <h3 className="mt-3 font-display text-lg leading-snug">
                   <Link href={`/capital/${financing[0].commitment.id}`} className="hover:text-accent">
                     {financing[0].provider}: {financing[0].instrument.toLowerCase()}
                   </Link>
@@ -183,7 +183,7 @@ export default function Home() {
             {tungsten.length ? (
               <article className="border-t border-border pt-4">
                 <p className="font-display text-sm text-muted">Tungsten comparison</p>
-                <h3 className="mt-3 font-serif text-lg leading-snug">
+                <h3 className="mt-3 font-display text-lg leading-snug">
                   <Link href={tungsten[0].href} className="hover:text-accent">{tungsten[0].title}</Link>
                 </h3>
                 <p className="mt-2 font-display text-sm text-muted">
@@ -205,7 +205,7 @@ export default function Home() {
             preferred={{ slug: "gallium", stage: "processing" }}
             intro={
               <>
-                <h2 className="font-serif text-3xl font-medium">Browse by material and stage</h2>
+                <h2 className="font-display text-3xl font-medium">Browse by material and stage</h2>
                 <p className="mt-3 text-sm leading-6 text-muted">
                   Select a marked cell to open its source-linked records.
                 </p>
@@ -217,7 +217,7 @@ export default function Home() {
 
       <section aria-labelledby="database-heading" className="border-t border-border-strong bg-paper text-paper-foreground">
         <Container width="wide" className="py-12 sm:py-14">
-          <h2 id="database-heading" className="font-serif text-3xl font-medium">Explore the database</h2>
+          <h2 id="database-heading" className="font-display text-3xl font-medium">Explore the database</h2>
           <nav aria-label="Database sections" className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
             {journeys.map((journey) => (
               <Link

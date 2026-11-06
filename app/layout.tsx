@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SkipLink } from "@/components/skip-link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
 
-// Display / structural / UI labels.
+// Shared typography for UI, editorial reading, tables and headings.
 const archivo = Archivo({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -14,16 +14,7 @@ const archivo = Archivo({
   display: "swap",
 });
 
-// All long-form reading text — what makes the data pages read like a publication.
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-
-// Data tokens: document numbers, dates, symbols, source IDs, section index.
+// Fixed-width typography for actual record IDs and technical/code notation.
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -44,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${archivo.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col antialiased">
         <SkipLink />
