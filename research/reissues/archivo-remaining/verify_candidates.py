@@ -25,8 +25,24 @@ REFERENCE = {
     'a001': 'public/research/applied-001/antimony-supply-resilience.pdf',
 }
 REQUIRED = {
-    'r001': ['71m', '36m', '25m', '10m', 'JAPAN', 'El Moto', 'September', 'China', '4 February 2025'],
-    'a001': ['91%', '55%', '45%', '5 months', '30%', '2.296m', '4.134m', '16.50 t', '12.45 t'],
+    'r001': ['71m', '36m', '25m', '10m', 'JAPAN', 'El Moto', 'September', 'China', '4 February 2025', '15.9bn', '8bn', 'BY 2 SEP'],
+    'a001': ['91%', '55%', '45%', '5 months', '30%', '2.296m', '4.134m', '16.50 t', '12.45 t', '16.7 t', '4.91 months', '4.35 t', '5 t service threshold'],
+}
+REQUIRED_LINKS = {
+    'r001': [
+        'www.nationalwealthfund.org.uk/', 'www.lse.co.uk/rns/strategic-investment-by-the-uk-government-',
+        'www.tungstenwest.com/investors', 'www.jogmec.go.jp/activities/metal/critical-grant.html',
+        'www.allied-material.co.jp/dcms_media/other/', 'news.mmc.co.jp/corporate/en/newsroom/',
+        'abtungsten.es/en/2026/09/18/', 'abtungsten.es/en/2026/10/09/',
+        'www.mofcom.gov.cn/zwgk/zcfb/',
+    ],
+    'a001': [
+        'pubs.usgs.gov/periodicals/mcs2026/', 'www.exim.gov/solutions/project-and-structured-finance/transactions',
+        'www.sec.gov/Archives/edgar/data/1526243/', 'inl.gov/news-release/',
+        'www.mofcom.gov.cn/zfxxgk/fdzdgknr/ztfl/dwmygl/',
+        'www.mofcom.gov.cn/zfxxgk/gkml/art/2024/', 'www.mofcom.gov.cn/zfxxgk/gkml/art/2025/',
+        '/research/applied-001/antimony-evidence-and-assumptions.md',
+    ],
 }
 NS = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main',
       'p': 'http://schemas.openxmlformats.org/presentationml/2006/main'}
@@ -37,7 +53,7 @@ def sha(p: Path) -> str:
 def tokens(text: str) -> Counter[str]:
     return Counter(re.findall(r'(?:[$£¥]\s?)?\d+(?:[.,]\d+)?\s?(?:%|m|bn|t|years|months)?', text, re.I))
 
-def pptx_evidence(src: Path) -> dict:
+def pptx_evidence(src: Path, key: str) -> dict:
     with ZipFile(src) as z:
         names = z.namelist()
         slides = sorted((n for n in names if re.fullmatch(r'ppt/slides/slide\d+\.xml', n)), key=lambda s:int(re.search(r'\d+',s).group()))
@@ -62,6 +78,8 @@ def pptx_evidence(src: Path) -> dict:
         assert images == 0, (src.name,'raster image shapes found',images)
         assert font_refs == {'Archivo'}, (src.name,'font references',font_refs)
         assert len(links) >= 4, (src.name,'source hyperlinks',len(links))
+        missing_links=[frag for frag in REQUIRED_LINKS[key] if not any(frag in link for link in links)]
+        assert not missing_links, (src.name, 'required primary source links absent', missing_links)
         return {'slides':len(slides),'editable_text_nodes':text_nodes,'native_shape_nodes':shape_nodes,'raster_picture_shapes':images,
                 'specified_fonts':sorted(font_refs),'hyperlink_count':len(links),'external_hyperlinks':sorted(set(links)),
                 'per_slide_text':[len(t) for t in slide_text]}
@@ -113,7 +131,7 @@ def main():
     for key,stem in NAMES.items():
         ppt=out/(stem+'.pptx');pdf=out/(stem+'.pdf')
         assert ppt.exists() and pdf.exists(),(ppt,pdf)
-        native=pptx_evidence(ppt)
+        native=pptx_evidence(ppt,key)
         scanned,images=pdf_evidence(pdf,REQUIRED[key],require_archivo=not args.allow_font_substitution)
         montage(images,out/(stem+'-contact.jpg'))
         baseline=root/REFERENCE[key]
