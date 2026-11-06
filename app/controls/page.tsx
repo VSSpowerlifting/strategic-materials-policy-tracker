@@ -42,9 +42,8 @@ export default function ControlsPage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Restrictions as policy"
         title="Controls"
-        lead="Export licensing, prohibitions, extraterritorial rules, end-use restrictions, suspensions, investigations, divestiture orders and domestic production controls — one row per operative clause, so a limb that is suspended is never hidden inside a measure that is otherwise in force."
+        lead="Export, import, investment and production restrictions recorded by operative clause and legal status."
       />
 
       <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
