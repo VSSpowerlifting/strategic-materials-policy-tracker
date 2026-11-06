@@ -38,7 +38,7 @@ import type { ValueQualifier } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Capital",
   description:
-    "Source-verified public money in strategic-material supply chains: equity, loans, grants, tax credits, price floors, offtake and stockpile funding, by provider, recipient, stage, material and status — in original currencies, with parent envelopes and child awards never double-counted.",
+    "Source-verified public money in strategic-material supply chains: equity, loans, grants, tax credits, price floors, offtake and stockpile funding, by provider, recipient, stage, material and status — in original currencies, with package-and-award overlap reconciled.",
 };
 
 const QUALIFIER_ORDER: ValueQualifier[] = ["exact", "approximately", "at_least", "up_to"];
@@ -113,7 +113,7 @@ export default function CapitalPage() {
                       <Link href={`/capital/${t.overlap.a}`} className="text-accent hover:text-accent-strong">{t.overlap.a}</Link> and{" "}
                       <Link href={`/capital/${t.overlap.b}`} className="text-accent hover:text-accent-strong">{t.overlap.b}</Link> both
                       contain <Link href={`/capital/${t.overlap.shared}`} className="text-accent hover:text-accent-strong">{t.overlap.shared}</Link>,
-                      so adding them would double-count. The rows are listed below without a sum.
+                      and share a component. The rows appear separately from aggregated totals to prevent double counting.
                     </p>
                   ) : (
                     <div className="mt-2 divide-y divide-border/60">
@@ -122,7 +122,7 @@ export default function CapitalPage() {
                           <p className="font-display text-sm font-semibold">{financialInstrumentLabels[inst.instrument]}</p>
                           {!inst.summed ? (
                             <p className="font-mono text-[11px] leading-5 text-faint">
-                              Listed below, not summed: {inst.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources name no instrument the tracker's vocabulary covers"}.
+                              Listed separately: {inst.reason === "several_instruments" ? "instrument types are bundled without an identified split" : "the source leaves the instrument category unspecified"}.
                             </p>
                           ) : null}
                           {(inst.summed
@@ -190,7 +190,7 @@ export default function CapitalPage() {
                   </ul>
                   {t.nestedIds.length ? (
                     <p className="mt-3 text-xs leading-5 text-faint">
-                      Not added again: {t.nestedIds.length} part{t.nestedIds.length === 1 ? "" : "s"} of a counted package (
+                      Included in the package above: {t.nestedIds.length} part{t.nestedIds.length === 1 ? "" : "s"} of a counted package (
                       {t.nestedIds.map((id, i) => (
                         <span key={id}>
                           {i ? ", " : ""}
@@ -207,8 +207,8 @@ export default function CapitalPage() {
             })}
           </div>
           <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
-            Amounts stated &ldquo;up to&rdquo; are ceilings, not payments. Unquantified commitments, those without a stated status, and ended commitments
-            are listed separately. <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">Counting rules</Link>.
+            Amounts stated &ldquo;up to&rdquo; are ceilings; payments are tracked separately.
+            Commitments with unstated amounts or status, along with ended commitments, appear in separate rows. <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">Counting rules</Link>.
           </p>
           <div className="mt-6 overflow-x-auto rounded-lg border">
             <table className="w-full min-w-[36rem] border-collapse text-sm">
@@ -217,7 +217,7 @@ export default function CapitalPage() {
                 <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
                   <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · “up to”, “about” and “at least” figures in separate buckets</th>
-                  <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum (no amount, no status, or ended)</th>
+                  <th scope="col" className="px-3 py-2 text-right font-normal">Unaggregated rows (amount/status unstated or ended)</th>
                 </tr>
               </thead>
               <tbody>
@@ -242,7 +242,7 @@ export default function CapitalPage() {
                                         ? `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
                                             .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
                                             .join(" and ")}`
-                                        : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed, not summed`,
+                                        : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed separately`,
                                     )
                                     .join("; ")}
                             </span>
@@ -258,7 +258,7 @@ export default function CapitalPage() {
                     </td>
                     <td
                       className="tnum px-3 py-3 text-right font-mono text-xs text-muted"
-                      title={`${t.unquantifiedIds.length} no amount · ${t.statusNotStatedIds.length} no status stated · ${t.endedIds.length} ended`}
+                      title={`${t.unquantifiedIds.length} amount unstated · ${t.statusNotStatedIds.length} status unstated · ${t.endedIds.length} ended`}
                     >
                       {t.unquantifiedIds.length + t.statusNotStatedIds.length + t.endedIds.length || "—"}
                     </td>
@@ -341,7 +341,7 @@ export default function CapitalPage() {
         <Section
           index={options.length ? "05" : "04"}
           title="Other financing"
-          description="Private capital, recipient funds, indications and financing without a stated public share."
+          description="Private capital, recipient funds, indications and financing with an unstated public share."
         >
           <Card className="overflow-hidden">
             {nonPublic.map((c) => (
