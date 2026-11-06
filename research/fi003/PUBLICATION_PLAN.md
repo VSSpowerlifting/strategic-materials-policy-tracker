@@ -1,6 +1,6 @@
 # FI003 — single publication tracker
 
-**Updated November 6, 2026. Target: December 4, 2026, conditional on research and Benjamin’s review.** This file controls owners, status, dependencies, proposed dates and publication gates. Dates below are planning proposals, not commitments by collaborators. Research cutoff remains November 6. Draft PR [#215](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/215) remains the delivery vehicle.
+**Updated November 6, 2026. Internal conservative target: December 4, 2026, conditional on financial, editorial and file-readiness review.** This file controls owners, status, dependencies, proposed dates and publication gates. Dates below are planning proposals, not commitments by collaborators. Research cutoff remains November 6. Draft PR [#215](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/215) remains the delivery vehicle.
 
 Working title: **JPMorgan and MP Materials: Financing Through 10X Construction**.
 
@@ -12,6 +12,12 @@ Decision: explain what a comparable industrial sponsor or lender should learn fr
 
 **Review entry points — model 1.0, November 6:** [native private Google Sheet](https://docs.google.com/spreadsheets/d/1Lrfoe4sNRBc6IBfwyNTwgKINOYWCsHkWZb0EH4wzdYI/edit), [editable recalculated Excel workbook](outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx), [controlling cell/formula specification](outputs/fi003-model-v1/model_spec.json), [technical verification](VERIFICATION.md). Both workbook formats have six tabs and working formulas. Native owner-only access was verified; no sharing was enabled. Subsequent manual edits are independent copies, with no automatic synchronization.
 
+## Independent reviewer handoff — verified 6 November
+
+Benjamin sent the scoped FI003 financial review assignment to Jiho by GW email on **6 November 2026**. The message asked her to evaluate JPMorgan's actual role versus other banks, compare the original undrawn commitment with received equity and conditional credit, challenge the government-support causal inference, and supply at least three documented references, a 1–2-page finding and a retain/narrow/reframe recommendation. The existing fill-in Google Doc and six-tab working Sheet are both shared with the reviewer as an editor; no public or domain-wide access was granted. The template was still awaiting her findings when checked. This is a **requested** independent assessment, not a completed review, acceptance, endorsement, legal signoff or obligation.
+
+Her first-pass target is **Monday–Tuesday, 16–17 November**, expressly flexible because of exams. The email mentions **20 November as a tentative publication aspiration**, whereas this tracker has used **4 December as the conservative internal target**. Neither date is a commitment. Reconcile the actual release date after her feedback, thesis adjudication, native PowerPoint check and PDF accessibility remediation. Do not compress review or publish on 20 November merely to meet the earlier aspiration; record any revised decision before sending new external expectations.
+
 ## Work and decisions
 
 | Item | Owner | Current status | Dependency / concrete review gate | Suggested milestone |
@@ -22,7 +28,7 @@ Decision: explain what a comparable industrial sponsor or lender should learn fr
 | Acceptance audit and presentation draft 0.2 | Codex | Complete: project baseline, full covenant-trigger description, cover-link contrast | All slides rendered/inspected; local limitations and numbers reconcile; no public assets replaced | Nov 6 |
 | Bounded final review and draft 0.3 | Codex | COMPLETE; financial thesis retained; standalone definitions/conditions, immutable links and metadata/evidence descriptions corrected | FINAL_REVIEW and QUALITY_REVIEW_V03; 24 tests, 11 schedules, 388 caches, all 15 pages and extracted candidate package verified. Eight controlling originals freshly retrieved by alternate service; 20 cached original fingerprints matched | Nov 6 |
 | Financial/methodological review | Benjamin | PENDING | Review executive answer, alternatives, credit clauses/timing, ownership denominator and conditional recommendations against exact draft | Suggested Nov 10 |
-| Optional strongest-objection challenge | Jiho, only if invited by Benjamin | Invitation unsent; no assignment or credit inferred | One page testing decision value and bank attribution; not a workbook or legal sign-off | Suggested Nov 16–17, subject to agreement |
+| Independent financial thesis challenge | Jiho, invited by Benjamin via email 6 Nov | **Assignment sent; editor access confirmed; response pending** | 1–2 pages covering bank role, capital trade-offs, government backing, three original-source references and final thesis recommendation; not a model rebuild or legal sign-off | Flexible Nov 16–17; exams take priority |
 | Adjudicate feedback and revise exact draft | Benjamin decides; Codex implements bounded changes | PENDING | Record changes against claims and repeat affected calculations/rendering | Suggested Nov 18–20 |
 | Final financial/source, editorial and accessibility/compatibility review | Benjamin; Codex supplies QA | PENDING; concrete accessibility defects identified | Native PowerPoint absent: open/edit/save/reopen untested. PDF has 30 decorative Figure tags without artifact treatment and generic paragraph headings. Remediate/review reading order and assistive use; exact-file/source-rights approval | Suggested Nov 27–Dec 1 |
 | Evidence-change check and release decision | Benjamin; Codex checks sources if requested | PENDING | Keep cutoff or explicitly authorize new research version; approve exact files and release separately | Dec 2–3 |
@@ -115,7 +121,7 @@ The manuscript labels the August 2027 trigger as illustrative and 2028 commissio
 
 [QUALITY_REVIEW_V03](presentation/QUALITY_REVIEW_V03.md) records actual checks, corrections, exact hashes and practical limits. Draft 0.2 QC and its binary hashes remain preserved. No automated or agent PASS is human approval.
 
-**Next action:** Benjamin reviews exact draft 0.3 and model 1.0, especially slides 2, 4–6, 8–11 and 14–15, with a suggested November 10 milestone. This bounded correction phase is complete. Further changes follow his decisions or a separately authorized release-readiness phase. Accessibility remediation, native PowerPoint testing, exact-file/source-rights approval and separate publication authorization remain blockers. Jiho's challenge is optional and unsent. December 4 remains conditional. No merge, manual deployment, publication, outreach or institutional endorsement has occurred.
+**Next action:** Benjamin reviews exact draft 0.3 and model 1.0, especially slides 2, 4–6, 8–11 and 14–15, with a suggested November 10 milestone. This bounded correction phase is complete. Further changes follow his decisions or a separately authorized release-readiness phase. Accessibility remediation, native PowerPoint testing, exact-file/source-rights approval and separate publication authorization remain blockers. Jiho's review assignment was emailed separately on November 6, with a flexible November 16–17 target. November 20 was described to her as tentative; December 4 remains the conservative internal target subject to a post-review decision. No merge, manual deployment, publication or institutional endorsement has occurred in this Codex research phase.
 
 ## Benjamin’s draft 0.3 decision record
 
@@ -129,7 +135,7 @@ These are financial/editorial review questions, separate from publication author
 | Credit mechanism and timing | 8–9; S09 §1.01, §§4.02, 6.16, 7.11 | Accept clause interpretation and clearly hypothetical date, with actual use/headroom withheld | PENDING |
 | Recommendation and evidence limits | 14–15; C51–C54 | Accept conditional funding/covenant diligence; keep optimality and completion-funding conclusions outside scope | PENDING |
 
-Codex implements only the resulting bounded corrections, preserves model 1.0, and repeats affected checks. Jiho’s optional response can test understanding and bank attribution if Benjamin authorizes an invitation. A technical/legal specialist could add value on the covenant interpretation if available, but no outside review or endorsement is claimed or arranged. Native PowerPoint compatibility and PDF reading-order/assistive-technology review remain open pre-release checks. Financial review does not authorize merge or release. Suggested review milestone remains **November 10**, with **December 4 conditional**.
+Codex implements only the resulting bounded corrections, preserves model 1.0, and repeats affected checks. Jiho's assigned independent assessment is pending; her emailed scope tests decision value and bank attribution, without making her responsible for model rebuilding or source-admission signoff. A technical/legal specialist could add value on the covenant interpretation if available, but no outside review or endorsement is claimed or arranged. Native PowerPoint compatibility and PDF reading-order/assistive-technology review remain open pre-release checks. Financial review does not authorize merge or release. Suggested review milestone remains **November 10**, with **December 4 conditional**.
 
 ## Candidate admission review entry — added scope, November 6
 
