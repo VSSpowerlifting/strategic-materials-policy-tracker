@@ -174,14 +174,13 @@ export default function HemerdonFinancing() {
                   <p><a href={assets.qc} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Original financial research methodology and QC</a></p>
                 </div>
               </div>
-              <div className="mt-10 border-t border-paper-border pt-5">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Previous presentation edition</p>
-                <p className="mt-3 font-display text-sm leading-6 text-paper-muted">
-                  The original ten-slide edition remains available for archival comparison. The financial memo, model and evidence base are unchanged.
-                </p>
-                <p className="mt-4 font-display text-sm"><a href={assets.originalDeck} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Original ten-slide PDF</a></p>
-                <p className="mt-3 font-display text-sm"><a href={assets.originalEditableDeck} className="underline underline-offset-4 hover:text-paper-accent">Original editable PowerPoint</a></p>
-              </div>
+              <details className="mt-10 border-t border-paper-border pt-5 font-display text-sm">
+                  <summary className="cursor-pointer font-semibold">Earlier presentation (10 slides)</summary>
+                  <div className="mt-4 space-y-3 text-paper-muted">
+                    <p><a href={assets.originalDeck} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Original PDF</a></p>
+                    <p><a href={assets.originalEditableDeck} className="underline underline-offset-4 hover:text-paper-accent">Original PowerPoint</a></p>
+                  </div>
+                </details>
             </aside>
           </div>
         </Container>
