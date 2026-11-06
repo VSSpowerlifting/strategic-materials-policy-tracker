@@ -71,8 +71,8 @@ export default function Home() {
             [counts.projects, "Projects"],
           ].map(([value, label]) => (
             <div key={label}>
-              <dd className="tnum text-3xl font-semibold sm:text-4xl">{value}</dd>
-              <dt className="mt-2 text-sm text-muted">{label}</dt>
+              <dt className="text-sm text-muted">{label}</dt>
+              <dd className="tnum mt-2 text-3xl font-semibold sm:text-4xl">{value}</dd>
             </div>
           ))}
         </dl>
@@ -95,7 +95,7 @@ export default function Home() {
                   <Link href={item.href} className="hover:text-accent">{item.title}</Link>
                 </h3>
                 <p className="mt-3 max-w-xl text-base leading-7 text-muted">{item.description}</p>
-                <Link href={item.href} className="research-text-link">Read report</Link>
+                <Link href={item.href} className="research-text-link">View research</Link>
               </article>
             ))}
           </div>
