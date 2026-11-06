@@ -108,7 +108,7 @@ export function ControlsExplorer({
         <FilterSelect id="ctl-target" label="Named target" value={target} onChange={setTarget} options={opts.target} />
         <FilterSelect id="ctl-material" label="Material" value={material} onChange={setMaterial} options={opts.material} />
       </div>
-      <p className="mt-4 font-mono text-xs text-muted" aria-live="polite">
+      <p className="mt-4 font-display text-xs text-muted" aria-live="polite">
         <span className="tnum text-foreground">{filtered.length}</span> of {rows.length} control clauses
         {active ? (
           <button type="button" onClick={reset} className="ml-3 text-accent hover:text-accent-strong">

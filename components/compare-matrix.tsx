@@ -217,7 +217,7 @@ export function CompareMatrix({
                   <h3 className="font-display font-semibold leading-snug tracking-tight text-foreground">
                     {jurisdictionLabels[selected.jurisdiction]} · {selectedRow.material.nameEn}
                   </h3>
-                  <p className="tnum mt-0.5 font-mono text-xs text-faint">
+                  <p className="tnum mt-0.5 font-display text-xs text-faint">
                     {selectedCell.count} coded {selectedCell.count === 1 ? "event" : "events"}
                     {selectedCell.latestDate
                       ? ` · latest ${formatDate(selectedCell.latestDate)}`
@@ -228,7 +228,7 @@ export function CompareMatrix({
               <button
                 type="button"
                 onClick={close}
-                className="rounded font-mono text-xs text-faint transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                className="rounded font-display text-xs text-faint transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 Close
               </button>
@@ -240,7 +240,7 @@ export function CompareMatrix({
                 {selectedCell.mechanisms.map((m) => (
                   <span
                     key={m}
-                    className="inline-flex items-center border-l-2 border-border-strong pl-1.5 font-mono text-[11px] leading-none text-muted"
+                    className="inline-flex items-center border-l-2 border-border-strong pl-1.5 font-display text-[11px] leading-none text-muted"
                   >
                     {mechanismLabels[m]}
                   </span>
@@ -256,7 +256,7 @@ export function CompareMatrix({
             </Link>
           </div>
         ) : (
-          <p className="font-mono text-[11px] leading-relaxed text-faint">
+          <p className="font-display text-[11px] leading-relaxed text-faint">
             Select a cell to see its mechanisms, most recent measure and the events behind the
             count.
           </p>

@@ -47,7 +47,7 @@ export function MaterialSymbol({
         style={{ background: hue }}
       />
       {atomicNumber ? (
-        <span className="absolute right-1 top-0.5 font-mono text-[9px] text-faint">
+        <span className="absolute right-1 top-0.5 font-display text-[9px] text-faint">
           {atomicNumber}
         </span>
       ) : null}
@@ -76,16 +76,16 @@ export function MaterialTile({ material }: { material: Material }) {
           {material.nameEn}
         </h2>
         {material.nameZh ? (
-          <span lang="zh" className="font-mono text-xs text-faint">
+          <span lang="zh" className="font-display text-xs text-faint">
             {material.nameZh}
           </span>
         ) : null}
-        <div className="tnum mt-0.5 font-mono text-[11px] text-faint">
+        <div className="tnum mt-0.5 font-display text-[11px] text-faint">
           {material.eventIds.length} events
         </div>
         {material.grouping ? (
           <div
-            className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.15em]"
+            className="mt-0.5 font-display text-[10px] uppercase tracking-[0.15em]"
             style={{ color: hue }}
           >
             {material.grouping}
@@ -111,13 +111,13 @@ export function MaterialTileHeader({ material }: { material: Material }) {
             {material.nameEn}
           </h1>
           {material.nameZh ? (
-            <span lang="zh" className="font-mono text-lg text-muted">
+            <span lang="zh" className="font-display text-lg text-muted">
               {material.nameZh}
             </span>
           ) : null}
         </div>
         {material.grouping ? (
-          <p className="mt-1 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+          <p className="mt-1 font-display text-xs uppercase tracking-[0.18em] text-faint">
             {material.grouping}
           </p>
         ) : null}

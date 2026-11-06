@@ -1,11 +1,13 @@
-# SMPT research publication house style — v2.0
+# SMPT research publication house style — v2.1
 
-**Adopted by the maintainer on 4 November 2026.** Applies to the social research edition, executive memo, long-form research dossiers, and reader-facing research pages. The site's broader application and dashboard components retain their existing visual system.
+**Adopted on 4 November 2026; typography updated on 6 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized.
 
 ## Publication identity
 
 - Use the SMPT palette: near-black/charcoal (#262523), warm paper (#FBFAF7), body ink (#252421), muted gold (#98752D), warm neutral table bands (#F0EEE8), and fine rules (#D0CCC3). No green.
-- Use **one professional sans-serif font family per publication** for cover, headings, running headers, body, notes, tables, bibliography, and captions, with regular and bold weights. The November 2026 PDF candidates use Liberation Sans, an Arial-compatible family.
+- **Archivo is the SMPT primary typeface** for the website, research pages, data tables, titles, navigation and future publications. Establish hierarchy with size, regular/medium/semibold weights, spacing and rules rather than switching between serif and sans-serif.
+- For new PDFs, embed Archivo when the publishing environment supports it. Arial or Liberation Sans may serve as explicitly documented compatibility fallbacks for editable Word, PowerPoint and Google exports. Use one sans-serif family within each document, including cover, headings, body, notes, tables and captions. Avoid Georgia headings and decorative typeface changes.
+- JetBrains Mono is reserved for actual source identifiers, machine-readable codes, literal URLs and programming notation. Use Archivo with tabular numerals for dates, numerical KPIs, financial tables, navigation labels, and provenance captions.
 - Dense tables and two-column analytical prose are welcome when the information warrants them. Use full-width figures for comparisons requiring greater space. Preserve readable type at page and mobile-view size.
 - Apply restrained running headers, page numbers, section numbering, gold rules, exhibit numbers, and documentary captions. Avoid marketing decks, dramatic isolated fragments, decorative oversized whitespace, and arbitrary visual clutter.
 

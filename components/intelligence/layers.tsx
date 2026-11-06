@@ -15,7 +15,7 @@ export function LayerBlock({ layer }: { layer: Layer }) {
     <div>
       <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <h3 className="font-display font-semibold">{layerLabels[layer.key]}</h3>
-        <span className="font-mono text-[11px] text-faint">
+        <span className="font-display text-[11px] text-faint">
           {layer.rows.length} row{layer.rows.length === 1 ? "" : "s"} · {layer.totals ? "summed per currency" : "listed, not summed"}
         </span>
       </div>

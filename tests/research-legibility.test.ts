@@ -39,7 +39,7 @@ test("fact sheet labels and badges have differentiated readable sizes",async()=>
  const badge=await file("components/ui/badge.tsx");
  assert.match(primitive,/font-display text-xs font-semibold leading-5 text-muted/);
  assert.match(primitive,/text-\[0\.9375rem\] leading-7 \[overflow-wrap:anywhere\]/);
- assert.match(badge,/font-mono text-xs leading-5/);
+ assert.match(badge,/font-display text-xs leading-5/);
 });
 
 test("evidence preserves exact source fields on both responsive layouts",async()=>{

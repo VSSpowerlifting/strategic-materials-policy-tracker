@@ -57,10 +57,11 @@
   --color-mark-control: var(--mark-control);
   --color-mark-designation: var(--mark-designation);
 
-  /* Three families. Inter and IBM Plex Mono are gone. */
+  /* Archivo is the sitewide text family. Keep the serif token as a compatibility alias
+     while older page classes are migrated; JetBrains is reserved for actual codes/IDs. */
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  --font-serif: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", "JetBrains Mono", monospace;
 }
 
@@ -81,9 +82,8 @@
     background-color: var(--bg);
     background-image: none;
     color: var(--fg);
-    /* Reading default is the serif. Structural/UI surfaces opt into Archivo
-       with `font-display`. */
-    font-family: var(--font-newsreader), ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    /* Archivo is the baseline for all site content, including long-form reading. */
+    font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-synthesis-weight: none;
@@ -150,15 +150,15 @@
   }
 
   /*
-   * Classification metadata rail — the mono, uppercase provenance/label strip
+   * Classification metadata rail — uppercase Archivo provenance/label strip
    * on dossiers (FramingQuote footer, event-card header, framing category
    * bands). Quiet, instrument-like; structural, not decorative.
    */
   .rail {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem; /* 11px */
-    line-height: 1;
-    letter-spacing: 0.14em;
+    font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.2;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--faint);
   }
@@ -320,7 +320,7 @@
 @media (min-width: 768px) { .investigation-lanes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 
-/* Interface notes use Archivo; Newsreader remains for editorial headings and reading. */
+/* Interface notes, editorial headings and reading all use Archivo. */
 .investigation-lane p, .research-chronology, .project-evidence { font-family: var(--font-display); }
 html { scroll-padding-top: 7rem; }
 

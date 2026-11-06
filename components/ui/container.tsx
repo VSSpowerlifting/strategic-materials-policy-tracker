@@ -43,7 +43,7 @@ export function AtlasIndex({
   className?: string;
 }) {
   return (
-    <div className={cn("flex items-baseline gap-3 font-mono text-xs", className)}>
+    <div className={cn("flex items-baseline gap-3 font-display text-xs", className)}>
       <span className="text-accent">{label}</span>
       <span aria-hidden className="h-px flex-1 self-center bg-border" />
     </div>
