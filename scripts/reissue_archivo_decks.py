@@ -77,6 +77,7 @@ def rewrite_pptx(pptx: Path) -> dict:
     original = pptx.read_bytes()
     output = io.BytesIO()
     replaced = 0
+    already_archivo = False
     with ZipFile(io.BytesIO(original), "r") as zi, ZipFile(output, "w") as zo:
         names = zi.namelist()
         if len(names) != len(set(names)):
@@ -84,12 +85,13 @@ def rewrite_pptx(pptx: Path) -> dict:
         for info in zi.infolist():
             contents = zi.read(info.filename)
             if info.filename.startswith("ppt/") and info.filename.endswith((".xml", ".rels")):
+                already_archivo |= b'typeface="Archivo"' in contents
                 contents, count = XML_FONT.subn(rb'\1Archivo\3', contents)
                 replaced += count
                 if FORBIDDEN_FONT.search(contents):
                     raise RuntimeError("Legacy typeface remains in " + info.filename)
             zo.writestr(info, contents)
-    if replaced < 1 and b'typeface="Archivo"' not in original:
+    if replaced < 1 and not already_archivo:
         raise RuntimeError("No Archivo face or restylable legacy font references in " + str(pptx))
     restyled = output.getvalue()
     with ZipFile(io.BytesIO(original)) as old, ZipFile(io.BytesIO(restyled)) as new:
