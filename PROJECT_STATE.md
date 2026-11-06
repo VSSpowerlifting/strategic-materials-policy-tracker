@@ -1,5 +1,12 @@
 ## 2026-11-06: FI003 financing argument revised and approved candidate packages admitted (draft PR #215)
 
+## 2026-11-06: FI003 managerial review and 15-slide draft
+
+- Reviewed PR #215 at `146fa50`; core financing-flexibility thesis preserved after independent challenge. [Managerial assessment](research/fi003/MANAGERIAL_REVIEW.md) narrows recommendations to funding availability, uses and covenant conditions through commissioning. C51 text repaired; C53–C54 add qualified performance-covenant and reporting-rights evidence.
+- [Draft PPTX](research/fi003/outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pptx) and matching PDF prepared in Archivo. Fifteen slides rendered/inspected; editable evidence, clickable sources and numerical lineage checked. Model 1.0 and its source hashes preserved. [QC](research/fi003/presentation/QUALITY_REVIEW.md) records gates and limitations.
+- [PUBLICATION_PLAN](research/fi003/PUBLICATION_PLAN.md) remains controlling. Next: Benjamin financial/methodological review, suggested Nov 10. Optional Jiho challenge remains unsent; suggested Nov 16–17 only if invited. Dec 4 conditional publication target. No merge, release, deployment or outreach authorized/performed.
+
+
 - Continues `codex/fi003-jpmorgan-financing-foundation` from reviewed `c1a700a`; [research packet](research/fi003/README.md) remains authoritative. [PUBLICATION_PLAN](research/fi003/PUBLICATION_PLAN.md) is the single tracker for owners, dates, workbook scope and release gates.
 - Strengthens financing-flexibility thesis, ranks alternatives, compares dilution/repayment/conditional availability, refreshes Q3 10-Q, corrects offtake term/definitions/three states, and distinguishes MP’s guarantee to DoD from sovereign repayment cover. Eleven schedules reproduce; Jiho’s unsent assignment is one independent objection.
 - Benjamin explicitly approved all three prepared candidate packages in chat. Admits three finance rows (private equity, corporate RCF, TSIF manufacturing grant), one Texas event, five sources, six organizations and one programme; updates existing MP support evidence and reverse links. Corporate financing is unallocated to projects; TEF corporate operations are not assigned to manufacturing. No schema or taxonomy change. Private promotion records remain ignored; `publishedAt` and monitoring start remain null pending actual release.

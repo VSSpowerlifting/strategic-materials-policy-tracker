@@ -2,7 +2,9 @@
 
 **Updated November 6, 2026. Target: December 4, 2026, conditional on research and Benjamin’s review.** This file controls owners, status, dependencies, proposed dates and publication gates. Dates below are planning proposals, not commitments by collaborators. Research cutoff remains November 6. Draft PR [#215](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/215) remains the delivery vehicle.
 
-Working title: **JPMorgan and MP Materials: Financing Flexibility Before 10X Production**.
+Working title: **JPMorgan and MP Materials: Financing Through 10X Construction**.
+
+**Current phase: independent managerial review and presentation draft completed for human review.** [Managerial judgment](MANAGERIAL_REVIEW.md) preserves the core thesis with focused corrections. [Editable PowerPoint](outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pptx) and [matching PDF](outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pdf) contain 15 total slides. [Exact-file QC](presentation/QUALITY_REVIEW.md), [slide/data manifest](presentation/slide-manifest.json) and [verification](outputs/presentation-draft-v01/verification.json) control this draft. This is preparatory production under the current request, not inferred financial approval. Model 1.0 and prior verification remain intact. C51 text is repaired; C53–C54 add contract/diligence evidence without model changes.
 
 Decision: explain what a comparable industrial sponsor or lender should learn from a replaceable construction commitment, completed equity and continuing corporate credit. **Recommended stance:** JPMorgan supported flexibility across the transition; received equity increased financing certainty in exchange for ownership dilution, while MP’s corporate liquidity and execution exposure remained. An ordinary equity takeout is the strongest explanation. Government support is directly visible in subsequent cash and credit terms; its contribution to July 2025 equity demand is unisolated. [analysis.md](analysis.md) develops the argument and evidence that could change it.
 
@@ -12,20 +14,20 @@ Decision: explain what a comparable industrial sponsor or lender should learn fr
 
 ## Work and decisions
 
-| Item | Owner | Status at this revision | Dependency / concrete review gate | Proposed date |
+| Item | Owner | Current status | Dependency / concrete review gate | Suggested milestone |
 |---|---|---|---|---|
-| Refined thesis, competing explanations, financing economics and retained-risk assessment | Codex | Complete for Benjamin financial/methodological review | Judge the ordinary-equity-takeout objection and causal attribution; no inferred optimality | Nov 6 delivery; proposed review by Nov 10 |
-| Q3 filing refresh, sources, contract corrections and reproducible arithmetic | Codex | Complete for research review; results in VERIFICATION | Maintain Nov 6 cutoff; review material clauses and source reconciliations | Nov 6 |
-| Candidate admission preparation and existing-record duplicate review | Codex | All three packages explicitly approved by Benjamin and admitted to draft branch; see entry below | Established candidate workflow, distinct private/public finance and project uses; no schema expansion | Nov 6 |
-| Strongest-objection challenge | Jiho, if Benjamin invites him | Pending; no finding or approval attributed | One-page response to JIHO_HANDOFF; Codex’s analysis already proceeds independently | Suggested Nov 13 |
-| Send invitation / assign credit and authorship | Benjamin | Unsent message prepared | Benjamin chooses participation and sends; no external communication authorized here | Suggested Nov 9 |
-| Adjudicate thesis, method and objection | Benjamin | Pending | Record disagreements beside affected claim; Jiho response is optional input, not a prerequisite to research progress | Suggested Nov 16 |
-| Editable Excel and native Google Sheets model | Codex | Built and technically verified, version 1.0; Benjamin financial approval pending | 388 formulas reconcile in LibreOffice and native Sheets; 10 scenarios on each artifact-tool/native engine; actual headroom excluded | Nov 6 delivery; proposed review Nov 10–13 |
-| Bounded timing analysis / model specification | Codex | Implemented; explicit delivery-date scenario and commissioning-year bounds | Accept decision usefulness of pre-commissioning covenant interval; no cash runway forecast | Nov 6; review with model |
-| Storyline and production-ready exhibit specification | Codex | Revised below; no slides built | Benjamin resolves thesis/method; model 1.0 controls data; ≤20 total slides, target 12 | Review by Nov 16; deck production proposed Nov 23–25 |
-| Exact-file financial/source and editorial review | Benjamin; Codex supplies QA | Pending | Five gates below; resolve material discrepancies and source rights | Suggested Nov 27–Dec 1 |
-| Evidence-change check and release decision | Benjamin; Codex checks sources if requested | Pending | Report any post-cutoff development separately; preserve cutoff or explicitly authorize new research version; exact files approved | Dec 2–3 |
-| Publication | Benjamin | HOLD pending human authorization | Exact asset approval plus separately authorized release action; deadline may move | Dec 4 conditional |
+| Independent analytical review and bounded revision | Codex, research director | Complete; MANAGERIAL_REVIEW records judgment and alternatives | Core thesis retained; new C53–C54 interpretation and C51 repair reviewable | Nov 6 |
+| Model 1.0 and source traceability | Codex | Preserved; targeted technical checks rerun | 24 Python tests; 11 schedules; specification; 388 delivered-XLSX cached values; saved native baseline/scenarios. No new live Sheets or Microsoft Excel session | Nov 6 |
+| Original-source recheck | Codex | 20 URLs retrieved; 18 non-bank resources match stored fingerprints | Bank page HTML changed; current self-attribution retained, historical register preserved. source-recheck.json records observations | Nov 6 |
+| Presentation draft 0.1 | Codex | 15-slide editable PPTX and matching PDF built | All slides rendered/inspected; local limitations and numbers reconcile; no public assets replaced | Nov 6 |
+| Financial/methodological review | Benjamin | PENDING | Review executive answer, alternatives, credit clauses/timing, ownership denominator and conditional recommendations against exact draft | Suggested Nov 10 |
+| Optional strongest-objection challenge | Jiho, only if invited by Benjamin | Invitation unsent; no assignment or credit inferred | One page testing decision value and bank attribution; not a workbook or legal sign-off | Suggested Nov 16–17, subject to agreement |
+| Adjudicate feedback and revise exact draft | Benjamin decides; Codex implements bounded changes | PENDING | Record changes against claims and repeat affected calculations/rendering | Suggested Nov 18–20 |
+| Final financial/source, editorial and accessibility/compatibility review | Benjamin; Codex supplies QA | PENDING | Five gates below; exact file hashes; source rights; PowerPoint and PDF assistive-technology checks where required | Suggested Nov 27–Dec 1 |
+| Evidence-change check and release decision | Benjamin; Codex checks sources if requested | PENDING | Keep cutoff or explicitly authorize new research version; approve exact files and release separately | Dec 2–3 |
+| Publication | Benjamin | HOLD | Separate merge, publication and release authorization required | Dec 4 conditional |
+
+Prior candidate-admission approval remains scoped to the source records described at the end of this file. No further data admission is part of this review.
 
 Unresolved evidence, ranked by consequence:
 
@@ -74,55 +76,45 @@ No DCF, WACC, project DSCR, bank-profitability estimate, debt-service forecast o
 | revolver_sensitivity | Workbook sensitivity; optional appendix | Marginal borrowing cost, not an original-loan comparison |
 | ppa_sensitivity | Workbook formula check; short risk-map example if useful | Normalized payoff rather than unsupported market forecast |
 
-## Revised 12-slide storyline and production-ready exhibit specification
+## Current 15-slide production manifest
 
-Each title below is a provisional assertion, not finished slide copy. Preserve sources, evidence class, units, cutoff and source/calc links when producing slides. Use original SMPT visuals, direct labels and text/status encodings beyond color. This budget includes cover and methods; all appendices count toward the 20-slide ceiling.
+The previous 12-slide specification remains recoverable at reviewed commit `146fa5084cf0492ce1e7f4ef84757c94879e83de`. It is superseded for this draft. The original model and eleven schedules remain controlling. [prepare.py](presentation/prepare.py) creates the frozen [manuscript/data manifest](presentation/slide-manifest.json); [build.mjs](presentation/build.mjs) creates native editable evidence. Each slide has original-source hyperlinks and full notes. See [production instructions](presentation/README.md).
 
-| # | Assertion and class | Comparison / exhibit; data and sources | Mechanism / material limit |
-|---|---|---|---|
-| 1 | JPMorgan and MP: financing flexibility before production | Scope/decision cover; November 6 cutoff; research authorship/review status | Hypothetical sponsor/lender audience; no affiliation |
-| 2 | Received equity improved financing certainty; dilution and corporate exposure remained — judgment | Three findings plus strongest ordinary-equity-takeout objection; analysis and C37–C50 | Government-to-equity causality stays open; no optimality claim |
-| 3 | JPMorgan participated from joint commitment to continuing credit — documented roles | Entity/role matrix; S01/S07/S09/S15; underwriting.csv | Preserve joint participants and bank self-description |
-| 4 | Replacement rights were built into the original financing route — contract/disclosure | Dated chronology: July 9, Apple July 15, equity July 16, RCF Aug 25, expiry Aug 26; S02/S11/S17 | Sequence, no unsupported causal arrows |
-| 5 | Equity supplied capital without scheduled repayment, with 7.68% ownership dilution — calculation/judgment | Financing matrix + 8.31% share-base growth / 7.68% dilution; Financing!B9:B24 and A27:F33; financing_economics.csv | Original loan never funded; dilution is ownership share, not a dollar valuation; fees cannot rank cost of capital |
-| 6 | L-Cs leave $203m of the $275m revolver available at September — reported/derived | Three dated snapshots; revolver_snapshots.csv; S19 Note 8 | Capacity is conditional, L-C sublimit not extra cash |
-| 7 | Earnings-based tests can precede expected 10X commissioning — contract/scenario | Credit!B40:B47 timing interval, with concise clause-(a)(xiv) addback/reversal inset from B29:B35; S09 §§1.01/6.01(b)/7.11; C50 | Illustrative trigger; commissioning year bounds, not COD; no actual headroom or sole-design attribution |
-| 8 | Public support leaves MP’s additional-capital duty and parent obligations in place — contract/judgment | Risk-allocation matrix; S02 §§6.01/6.04(d)/6.09/6.13; S03/S04/S05/S19 | Conditional preferred fallback and use restrictions distinct from received cash; MP guarantee runs to DoD; timing obligation qualified |
-| 9 | 10X threshold protection changes across three contractual states — contract/calculation | Three-state table; offtake_threshold.csv; S03 §§1.2/2.1/6.2 | Legal term begins signing; full-year illustration excludes true-up/proration |
-| 10 | PPA support produced $110.9m of cash; other balances have different meanings — reported | Cash/receivable/ceiling/noncash table; support_accounting.csv; S19 Notes 9/13/15/21 | No double count with OCF; TSIF differs from HREE receipts |
-| 11 | Expansion consumed $492.4m of company liquid assets during nine months — calculation | True historical bridge; liquid_assets/liquidity_bridge; S19 | Multi-project company resources, no remaining 10X gap or runway |
-| 12 | Replicate financing flexibility, then diligence cash conversion and completion — recommendation | Sponsor/lender/public-financier decisions, decisive gaps and linked sources/methods | Benjamin resolves thesis; exact-file publication gates still required |
-
-### Controlling exhibit instructions
-
-Produce original SMPT visuals from model 1.0 after Benjamin’s review. Capture the exact workbook revision/control values used for every exhibit; a changed Google Sheet is not an automatically updated publication source. Numerical displays round only after calculation. Chart sources remain clickable originals with note/section locators and the November 6 cutoff. The model’s functional green cross-sheet formula convention does not transfer into publication charts; use the presentation/house palette and direct labels. **Future deck typography is Archivo under Presentation Standard v2.1**, refreshed through GitHub at main `bb0934b` (PR #218); this supersedes the earlier Georgia/Source Sans pairing. The workbook uses Arial for spreadsheet interoperability.
-
-| Exhibit / slide | Production form and exact controlling range | Display / evidence rules; decisive limit |
+| Slide | Headline / evidence role | Controlling source or model range |
 |---|---|---|
-| E1 / 3: bank roles | Entity–function matrix; analysis role table, `exhibits/underwriting.csv`, S07 Schedule A and S09 cover/signatures | JPMorgan entities named separately; 4,727,272 / 11,818,181 ≈40% initial underwriting obligation. No final retention, fee share or unique-capability claim |
-| E2 / 4: financing sequence | Horizontal dated timeline; `chronology.csv`, S02 §§2.05–2.07, S11 Note 3, S17 | Signing/commitment → equity pricing/completion → RCF → undrawn expiry; Apple as a separately labeled contemporaneous event. Arrows convey time only |
-| E3 / 5: financing economics | Three-instrument comparison with two denominator bars; Financing!B12:B24, A27:F33; `financing_economics.csv` | $724.2m net received; 8.31% old-base growth, 7.68% post-base dilution, 92.32% retained. Show $22.425m/3% discount and $7.4m/0.74% expense in a separate fee-basis note; no relative capital-cost ranking |
-| E4 / 6: available corporate credit | Three dated stacked capacity bars; Credit!A7:F10; `revolver_snapshots.csv` | $275m facility split into loans (zero), implied L-Cs ($40m/$72m/$72m) and remaining ($235m/$203m/$203m). USD m; L-C sublimit never drawn as another bar. Remaining capacity is conditional |
-| E5 / 7: covenant timing | Timeline plus small clause equation; Credit!B40:B47 and B29:B35; `model.py:first_test_quarter` / `scenario` | Baseline trigger Aug 15, 2027 → Sep 30 first test → shaded 2028 commissioning-year band. Label 93/458 days as bounds; annotate ≥$400m-certificate earlier trigger. Clause inset max(40−20,0)=20, with later duplicate-cash reversal; all hypothetical. No EBITDA/headroom axis |
-| E6 / 8: allocation of obligations | Compact payer → beneficiary → condition → retained exposure matrix; Support!A44:F52 / A54:F56 and analysis risk map | Distinguish price protection, offtake, initial public equity, conditional additional preferred, samarium debt, grants, MP guarantee and corporate RCF. Show S02 §6.13 additional-capital duty and §6.04(d) timing qualification; MP → DoD guarantee direction prominent. No support total |
-| E7 / 9: three offtake states | State table, using Support!B8:B15 and `offtake_threshold.csv`; S03 §§1.2/2.1/6.2 | Fixed CY2029 illustration: pre-COD blank; COD/pre-milestone at 50% = $75.770m; post-milestone = $151.541m. Legal term begins signing. Nominal /4 ≠ actual first payment; describe stub/true-up separately |
-| E8 / 10: support cash conversion | PPA rollforward with separate status rows; Liquidity!B31:B36, Support!B33:B40; `support_accounting.csv` | $51.016m + $67.962m − $8.109m = $110.869m, reconciling to reported $110.9m receipts. State nine months ended Sep 30, 2026. Receivables, ceilings, noncash recognition and HREE cash retain separate labels; no double count in OCF |
-| E9 / 11: historical company liquidity | True waterfall; Liquidity!B16:B26 with dated asset endpoints A8:D10; `liquidity_bridge.csv` / `liquid_assets.csv` | Opening $1,830.286m; seven signed components; closing $1,337.911m; change −$492.375m; zero residual. Preserve smaller accretion/restricted/valuation steps in labels or audit inset. No allocation of all PP&E or remaining assets to 10X |
-| E10 / 12: decisions and evidence | Three stakeholder rows with action, required evidence and change-of-view condition; analysis final paragraphs; Checks evidence flags | Sponsor: cash/uses/completion; lender: certificates and cash conversion; public financier: delivered cash and enforceable obligations. Source/method links included here and on exhibits; no numerical risk score |
+| 1 | JPMorgan and MP Materials | Scope and cited transaction documents |
+| 2 | Equity secured cash while MP retained exposure through commissioning | Financing!B16:B24; Credit!A7:F10 |
+| 3 | Replacement rights connected the closing commitment to later financing | chronology.csv; Financing!B7:B16 |
+| 4 | JPMorgan spans the financing stages alongside substantial partner roles | exhibits/underwriting.csv |
+| 5 | An available equity takeout best explains the observed transition | analysis.md: ranked competing explanations |
+| 6 | Equity supplied $724.2m at 7.68% isolated ownership dilution | Financing!B9:B24; financing_economics.csv |
+| 7 | Letters of credit leave $203m of the $275m revolver available | Credit!A7:F10; revolver_snapshots.csv |
+| 8 | Defense contracts enter both covenant earnings and performance obligations | Credit!B29:B35; covenant_adjustment.csv |
+| 9 | Corporate earnings tests can precede expected 10X commissioning | Credit!B40:B47; model.py:scenario; prototype.py:first_test_quarter |
+| 10 | Government support covers specified exposures while MP retains funding duties | Support!A44:F56; analysis.md risk map |
+| 11 | 10X threshold protection changes with contractual operating status | Support!B8:B15; offtake_threshold.csv |
+| 12 | Price protection delivered $110.9m of cash during nine-month 2026 | Liquidity!B31:B36; Support!B33:B40; support_accounting.csv |
+| 13 | Company liquid assets fell $492.4m as expansion continued | Liquidity!B16:B26; liquidity_bridge.csv; liquid_assets.csv |
+| 14 | A dated funding and covenant schedule is the next decision input | analysis.md: decisions and conditions through commissioning |
+| 15 | Evidence supports the architecture and bounds the financial conclusions | inputs.json; model.py; VERIFICATION.md; PUBLICATION_PLAN.md |
 
-Technical sensitivities and the $0.8m cancellation comparison stay in the workbook. They do not require more slides. If an appendix is added, it counts toward the 20-slide total cap.
+Numerical provenance includes model 1.0 input/specification/workbook hashes and frozen scenario controls. Ownership chart fractions use 12 decimal places for portable literal chart workbooks; full calculation precision remains in model 1.0. Native charts carry literal data snapshots, not links that recalculate when the controlling financial workbook changes. All eleven tables, both native charts and the complete historical waterfall remain editable. The waterfall uses true-scaled native data bars, with each of seven signed movements preserved.
+
+The manuscript labels the August 2027 trigger as illustrative and 2028 commissioning as management expectation. It retains the original-source boundaries, conditional public fallback, restricted uses and ordinary-equity explanation. Covenant mechanics and timing occupy separate slides. All fonts are Archivo, embedded in the PDF. No private native-Sheet link or restricted source file is shared by the deck.
 
 ## Five publication gates
 
-| Gate | Phase status | Evidence now / release requirement |
+| Gate | Agent draft assessment | Remaining human/release condition |
 |---|---|---|
-| A Analytical substance | Refined argument/model prepared; Benjamin review pending | Ranked explanations, financing economics and timing implications delivered; accepted scope does not imply approval of conclusions |
-| B Prose authenticity | Research copy reviewed by Codex; publication copy pending | Direct claims with local limitations; reread full publication copy after production |
-| C Visual integrity | HOLD for publication; no slides exist | Render and inspect every actual slide, links, reading order and contrast |
-| D Quantitative/source fidelity | Workbook 1.0 technical checks complete; human financial and exact-deck review pending | 388 formulas reconcile in LibreOffice/native Sheets; 10 scenarios, invalid-input tests, historical stability, all-tab visual inspection; no native Microsoft Excel test claimed |
-| E Publication coherence | Storyline prepared; Benjamin review pending | Read title sequence and final deck; exact files, rights and human release approval required |
+| A Analytical substance | PASS for the narrower architecture/monitoring case; human review pending | Judge attribution, clause interpretation and decision usefulness; no optimality/headroom/completion-funding claim |
+| B Prose authenticity | PASS after full-copy read | Benjamin's editorial judgment and any final revisions |
+| C Visual integrity | PASS for rendered draft; formal accessibility/PowerPoint compatibility review pending | All 15 inspected; PDF selectable and Archivo embedded; tagged-PDF/assistive-technology and native PowerPoint testing not claimed |
+| D Quantitative/source fidelity | PASS for bounded calculations and exact-draft reconciliation; human financial review pending | 24 tests; 11 schedules; model hashes unchanged; 388 formula cache values; editable charts and all source annotations checked |
+| E Publication coherence | PASS for draft sequence; release HOLD | Exact-file approval, source-rights confirmation and separate merge/publication authorization |
 
-This phase stops at a reviewable financial argument, tested workbooks and exhibit specification. **Next action:** Benjamin reviews the thesis, ordinary-equity-takeout objection, timing method and model 1.0. Once resolved, finished-deck production is the next coherent phase. No merge, deployment, publication, external message or institutional approval is authorized here.
+[QUALITY_REVIEW](presentation/QUALITY_REVIEW.md) records the actual checks, corrected visual defects, exact hashes and practical limits. No automated or agent PASS is human approval.
+
+**Next action:** Benjamin reviews draft 0.1, especially slides 2, 5, 8–9 and 14–15, with a suggested November 10 milestone. Codex owns a bounded revision after decisions. Jiho's challenge is optional and unsent. December 4 remains conditional. No merge, manual deployment, publication, outreach or institutional endorsement has occurred.
 
 ## Candidate admission review entry — added scope, November 6
 
