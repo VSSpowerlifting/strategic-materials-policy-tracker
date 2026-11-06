@@ -66,7 +66,7 @@ note(s,'Headline capacity, equity issuance and loan drawdown represent different
 }
 {
 const s=pg(p,4,8,series);head(s,'Hemerdon operating sequence','Processing activity preceded the August public financing announcement','Public chronology establishes sequencing; transaction-level data is needed to assess additional output');
-const entries=[['JUL 2026','Processing and phased commissioning reported','Company operational disclosure'],['25 AUG','NWF investment announced','Up to £71m, including contingent capacity'],['2 SEP','Core loan reported fully drawn','By accounts-approval date; transfer date unknown'],['SEP 2026','Eight-year offtake announced','Deliveries and product acceptance remain to be tested']];
+const entries=[['JUL 2026','Processing and phased commissioning reported','Company operational disclosure'],['25 AUG','NWF investment announced','Up to £71m, including contingent capacity'],['BY 2 SEP','Core loan reported fully drawn','By accounts-approval date; transfer date unknown'],['SEP 2026','Eight-year offtake announced','Deliveries and product acceptance remain to be tested']];
 const baseX=0.82, gap=0.17, colW=2.78;
 line(s,0.98,2.91,12.13,2.91,C.line,1.4);
 entries.forEach((e,i)=>{const x=baseX+i*(colW+gap);dot(s,x+0.13,2.80,0.20,i===1?C.gold:C.dark);label(s,e[0],x+0.04,3.24,colW-0.12);txt(s,e[1],x+0.04,3.67,colW-0.12,1.03,16,C.ink,true,{valign:'top'});line(s,x+0.04,4.88,x+colW-0.18,4.88,C.line,0.4);txt(s,e[2],x+0.04,5.11,colW-0.14,0.95,12,C.gray,false,{valign:'top'});});
@@ -100,14 +100,14 @@ cover(p,series,'U.S. Antimony\nSupply Resilience','Strategic options for a hypot
 {
 const s=pg(p,2,8,series);head(s,'Decision recommendation','Qualify a second supply lane, then hold five months of stock','Conditional balanced policy for 100 t/year of contained antimony-equivalent demand');
 metric(s,'45%','Target share from an independently qualified alternative international supply lane',0.80,2.77,3.53);metric(s,'5 months','Provisional buyer-qualified reserve: $2.30m at the historical USGS metal proxy',4.86,2.77,3.53);metric(s,'30%','Future domestic offtake target; availability begins only with verified qualified output',8.85,2.77,3.63);
-line(s,0.84,4.55,12.42,4.55,C.line);txt(s,'2030 severe interruption',0.86,4.86,5.4,0.34,17,C.ink,true);txt(s,'0 t unfilled under modeled supplier assumptions',0.86,5.33,10.8,0.53,24,C.goldInk,true);small(s,'The policy reverses if qualification or delivery independence fails. The model is a scenario stress test, not an actual purchase instruction.',0.87,6.04,11.25,12.8);
+line(s,0.84,4.55,12.42,4.55,C.line);txt(s,'2030 severe interruption',0.86,4.86,5.4,0.34,17,C.ink,true);txt(s,'0 t unfilled under modeled supplier assumptions',0.86,5.33,10.8,0.53,24,C.goldInk,true);small(s,'2027–29: the modeled minimum buffer is 4.91 months for ≤5 t unfilled. Five months still leaves 4.35 t unfilled before domestic qualification.',0.87,6.04,11.25,12.8);
 note(s,'USGS historical price proxy; model inputs and assumptions are documented in the public evidence register.',6.63);linkText(s,'Evidence and assumptions',U.evidence,0.61,6.94,4.5,0.13,C.goldInk,8.8);
 }
 {
 const s=pg(p,3,8,series);head(s,'Supply baseline','National import reliance does not establish a buyer’s supplier mix','USGS estimates and historical U.S. antimony import origin, different denominators');
 metric(s,'91%','U.S. net import reliance, 2025 estimate',0.78,2.66,5.0);metric(s,'55%','China share of U.S. metal + oxide import origins, 2021–2024',6.95,2.66,5.35);
 line(s,0.78,4.16,12.5,4.16,C.line);label(s,'Buyer-specific diligence',0.81,4.46,4.1);const q=[['Form + grade','Contained-Sb conversion and specification'],['Traceability','Mine, smelter and refinery location'],['Qualification','Test results, supply independence and acceptance']];q.forEach((v,i)=>{txt(s,v[0],0.83,4.86+i*0.48,3.17,0.29,13,C.ink,true);txt(s,v[1],4.01,4.86+i*0.48,7.91,0.29,13,C.gray)});
-note(s,'EXIM Stibnite authorization ($2.906bn) and an INL processing pilot document industrial development, not buyer-qualified deliveries.');linkText(s,'USGS MCS 2026',U.usgs,0.61,6.94,2.16,0.13,C.goldInk,8.8);linkText(s,'EXIM transaction register',U.exim,2.96,6.94,2.98,0.13,C.goldInk,8.8);linkText(s,'INL pilot',U.inl,6.12,6.94,1.75,0.13,C.goldInk,8.8);
+note(s,'China’s item-specific export licensing is a separate sourcing gate. EXIM’s $2.906bn Stibnite authorization and an INL pilot still require buyer-level qualification evidence.');linkText(s,'USGS MCS 2026',U.usgs,0.61,6.94,2.16,0.13,C.goldInk,8.8);linkText(s,'EXIM transaction register',U.exim,2.96,6.94,2.98,0.13,C.goldInk,8.8);linkText(s,'INL pilot',U.inl,6.12,6.94,1.75,0.13,C.goldInk,8.8);linkText(s,'MOFCOM No. 33',U.mofSb,8.03,6.94,2.45,0.13,C.goldInk,8.8);
 }
 {
 const s=pg(p,4,8,series);head(s,'Four-strategy comparison','Only the balanced strategy meets both modeled 2030 constraints','Severe eight-month disruption; 100 t/year buyer; cash cap $3m; service tolerance ≤5 t unfilled');
