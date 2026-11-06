@@ -1,0 +1,7 @@
+hypothetical_benchmark_usd_kg,milestone_reached,support_usd_kg,payment_to_government_usd_kg,benchmark_plus_net_support_usd_kg,basis,sources
+70,False,40,0,110,"One eligible designated NdPr kg equivalent; not sales revenue, margin or forecast",S04 Sections 2-3
+110,False,0,0,110,"One eligible designated NdPr kg equivalent; not sales revenue, margin or forecast",S04 Sections 2-3
+140,False,0,0,140,"One eligible designated NdPr kg equivalent; not sales revenue, margin or forecast",S04 Sections 2-3
+70,True,40,0.00,110.00,"One eligible designated NdPr kg equivalent; not sales revenue, margin or forecast",S04 Sections 2-3
+110,True,0,0.00,110.00,"One eligible designated NdPr kg equivalent; not sales revenue, margin or forecast",S04 Sections 2-3
+140,True,0,9.00,131.00,"One eligible designated NdPr kg equivalent; not sales revenue, margin or forecast",S04 Sections 2-3

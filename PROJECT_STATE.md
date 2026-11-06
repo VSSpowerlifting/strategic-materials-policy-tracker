@@ -1,3 +1,10 @@
+## 2026-11-06: FI003 JPMorgan / MP Materials research foundation
+
+- Research-only branch `codex/fi003-jpmorgan-financing-foundation` is based on current main `fe1d5b3` (initial investigation used local main `b4834d7`); [FI003 packet](research/fi003/README.md) reconciles the original joint commitment's undrawn expiration, equity underwriting, corporate revolver and government contracts through November 6, 2026.
+- Provisional thesis centers on closing assurance, financing replacement and the credit agreement's explicit Defense-payment EBITDA adjustment. Ten reproducible exploratory schedules preserve cash/capacity/accounting distinctions. Exact commitment-cancellation arithmetic and actual covenant application remain unresolved.
+- [Jiho's independent assignment](research/fi003/JIHO_HANDOFF.md) reserves financing, credit and commercial judgment; no conclusions attributed to him. Benjamin retains thesis integration and publication approval. [Verification record](research/fi003/VERIFICATION.md) and [next-phase plan](research/fi003/PUBLICATION_PLAN.md) govern the handoff.
+- No factual corpus, existing publication, application code or production deployment changed. Requested standards/FI002 architecture were consulted at `fe1d5b3` on the existing FI002 branch because they are absent from starting `main`. Publication and final-model work remain separate phases.
+
 ## 2026-11-03: EU CRMA second Strategic Projects round, release candidate (draft PR)
 
 - Branch `claude/smpt-eu-crma-2026-rc-f5628f`, rebased onto `origin/main` at `3192747` (homepage PR #187). The homepage files, tests and docs from #187 are unchanged. PR #185 is out of scope. Commit, push and a draft PR were authorized on 3 Nov 2026; merge and deploy were not.

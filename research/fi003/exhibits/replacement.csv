@@ -1,0 +1,11 @@
+measure,usd_m,classification,sources
+Original commitment reference minimum,1000,commitment; never funded,S01;S11
+Equity gross calculated from exact shares,747.49994,derived gross proceeds,S07;S11
+Underwriting discount calculated,22.4249982,derived aggregate discount; not bank profit,S07;S11
+Equity after discount before other expenses,725.0749418,derived; not final net cash,S07;S11
+Final net equity proceeds,724.2,reported; rounded,S11
+Implied other expenses / rounding,0.8749418,derived residual; not exact expense disclosure,S07;S11
+Corporate revolver,275,committed capacity; not proceeds,S09
+Final net equity plus capacity minus commitment reference,-0.8,arithmetic comparison only; mixed cash/capacity,S09;S11
+After-discount equity plus capacity minus reference,0.0749418,arithmetic compatibility only; exact contractual reduction unknown,S07;S09;S11
+Aggregate commitment and structuring fee expense,7.4,reported expense; no JPMorgan allocation,S11
