@@ -163,7 +163,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                           : "No stage coded: the covered items are listed in an unread annex or sit outside the tracked materials."}
                       </span>
                       <span className="mt-1 block font-mono text-[11px] text-faint">
-                        Where the items belong, not a claim that the clause restricts that stage.
+                        The supply-chain stage of the covered items; any restriction effect is recorded separately.
                       </span>
                     </>
                   ) : (
@@ -189,7 +189,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
             </Card>
           </Section>
 
-          <Section index={next()} title="Status" description="Oldest first; the last entry is current. A stated end date is shown, never extended by inference.">
+          <Section index={next()} title="Status" description="Listed oldest first, with the latest status current. End dates follow the governing source.">
             <Card className="p-5">
               <ControlStatusTrail entries={m.statusHistory} />
               {statusEntriesRecordedElsewhere(m).map(({ entry, event }) => (
@@ -198,7 +198,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   <Link href={`/events/${event.id}`} className="text-accent hover:text-accent-strong">
                     {event.documentNumber?.split(";")[0] ?? event.titleEn}
                   </Link>{" "}
-                  ({formatDate(event.date)}). That event is not a control measure of its own; see its page for what it does.
+                  ({formatDate(event.date)}). The event page describes the associated policy action.
                 </p>
               ))}
             </Card>
