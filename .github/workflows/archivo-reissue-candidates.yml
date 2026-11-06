@@ -45,6 +45,9 @@ jobs:
       - name: Validate slide source, figures, PDFs, links and Archivo embedding
         run: |
           python research/reissues/archivo-remaining/verify_candidates.py --out-dir candidates --root "$GITHUB_WORKSPACE"
+          mkdir -p candidates/baseline
+          cp public/research/r001/tungsten-supply-security-slides.pdf candidates/baseline/R001_original.pdf
+          cp public/research/applied-001/antimony-supply-resilience.pdf candidates/baseline/A001_original.pdf
           git diff --exit-code
       - name: Preserve review candidates without publication
         if: always()
@@ -56,6 +59,7 @@ jobs:
             candidates/*.pdf
             candidates/*-contact.jpg
             candidates/*-baseline-contact.jpg
+            candidates/baseline/*.pdf
             candidates/archivo-reissue-qa.json
             candidates/ARCHIVO_REISSUE_REVIEW.md
           if-no-files-found: warn
