@@ -1,0 +1,51 @@
+name: Legacy Archivo editable candidate rebuild
+on:
+  push:
+    branches:
+      - design/legacy-archivo-candidates-20261106
+permissions:
+  contents: write
+jobs:
+  reconstruct:
+    if: contains(github.event.head_commit.message, '[legacy-archivo-build]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: \${{ github.ref_name }}
+          persist-credentials: true
+      - name: Install LibreOffice and conversion dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libreoffice-impress poppler-utils fontconfig
+          python -m pip install python-pptx PyMuPDF pillow fonttools
+      - name: Construct editable source-aligned slides and source/target audits
+        run: python scripts/rebuild_legacy_archivo_decks.py
+      - name: Attach candidate review package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-archivo-editable-candidates
+          path: research/legacy-archivo-review-20261106/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Commit editable candidate deck masters and contact sheets to design branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/legacy-archivo-review-20261106/
+          git diff --cached --quiet && exit 1
+          git commit -m "Design: add R001 and Applied 001 editable candidate masters"
+          git push origin HEAD:\${{ github.ref_name }}
+      - name: Enforce audit blockers without publishing
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result=json.loads(Path("research/legacy-archivo-review-20261106/RESULT.json").read_text())
+          errors=result["blocking"]
+          if errors:
+              raise SystemExit("Candidate QA blockers: "+"; ".join(errors))
+          print("Automated checks passed; human visual approval remains required")
+          PY
