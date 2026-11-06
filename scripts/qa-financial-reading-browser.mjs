@@ -50,7 +50,7 @@ try{
   await gloss.locator("summary").focus();
   await page.keyboard.press("Enter");
   assert.ok(await gloss.locator("dd").first().isVisible(),"keyboard glossary disclosure works");
-  assert.ok(await gloss.getByText("Obligation is not an SMPT financial-status label.",{exact:false}).isVisible());
+  assert.ok(await gloss.getByText("Obligation is tracked outside SMPT's financial-status categories.",{exact:false}).isVisible());
   await page.goto(origin+"/projects",{waitUntil:"networkidle"});
   await page.getByTestId("reading-key-projects").locator("summary").click();
   assert.ok(await page.getByText("Shared, unallocated association",{exact:true}).isVisible());
