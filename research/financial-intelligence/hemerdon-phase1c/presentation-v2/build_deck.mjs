@@ -19,7 +19,7 @@ const P={dark:'#12110F',paper:'#F5F3EE',ink:'#1B1915',brand:'#C8993E',gold:'#7A5
 const pres=Presentation.create({slideSize:{width:1280,height:720}});const specs=[];const darks=new WeakSet();
 const title="Inside Tungsten West's £71 Million Restart Financing";
 const subtitle='Government Capital, Project Expenditure and Refinancing Risk at Hemerdon';
-function txt(s,v,x,y,w,h,size=24,bold=false,color=null,serif=false){let q=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});q.text=v;q.text.style={typeface:serif?'Archivo':'Archivo',fontSize:size,bold,color:color||(darks.has(s)?P.light:P.ink),verticalAlignment:'top'};return q;}
+function txt(s,v,x,y,w,h,size=24,bold=false,color=null,serif=false){let q=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});q.text=v;q.text.style={typeface:'Archivo',fontSize:size,bold,color:color||(darks.has(s)?P.light:P.ink),verticalAlignment:'top'};return q;}
 function rect(s,x,y,w,h,fill=P.ink,line=null,dash=false){return s.shapes.add({geometry:'rect',position:{left:x,top:y,width:w,height:h},fill,line:line?{fill:line,width:2,style:dash?'dashed':'solid'}:{fill:'none',width:0}});}
 function rule(s,y,x=60,w=1160){rect(s,x,y,w,1,darks.has(s)?P.brand:P.rule);}
 function base(heading,scope,keys,sourceLine,kind,claimClass='Analyst inference'){
@@ -124,7 +124,7 @@ s=base('Liquidity and executed terms are the highest-value next disclosures','Ap
 table(s,[['Priority','Request','Financial question it resolves'],['1','Same-date cash / debt and cash rollforward','How much unrestricted cash is available\nagainst outstanding commitments?'],['1','Paid / committed / remaining capex ledger','When do October spending estimates\nbecome bank payments?'],['2','Executed loan, amendments and security terms','What are the exact maturity, covenants,\npricing conventions and creditor priority?'],['2','Equipment draw and amortisation schedule','Which disclosures overlap, and when\ndoes equipment service fall due?'],['3','Payable output, invoices and collections','How does operating performance convert\nto cash through the debt horizon?']],[110,520,530],251,344,20);
 spec('The requests progress from closing the cash stock to timing obligations and demonstrating commercial conversion.','Current funding gap, DSCR, valuation and repayment assurance remain unavailable.');
 await fs.mkdir(path.join(out,'.build'),{recursive:true});
-await fs.writeFile(path.join(out,'slide-specs.json'),JSON.stringify({title,subtitle,cutoff:'2026-11-04',acceptedCommit:accepted.acceptedCommit,modelSHA256:accepted.modelSHA256,fonts:{title:'Georgia Bold',body:'Archivo',fallbackReason:'Source Sans 3 not installed; Arial permitted by SMPT v2'},slides:specs},null,2)+'\n');
+await fs.writeFile(path.join(out,'slide-specs.json'),JSON.stringify({title,subtitle,cutoff:'2026-11-04',acceptedCommit:accepted.acceptedCommit,modelSHA256:accepted.modelSHA256,fonts:{title:'Archivo Semibold',body:'Archivo',fallbackReason:'Render with installed Archivo and verify PDF embedding'},slides:specs},null,2)+'\n');
 const candidate=path.join(out,'.build','candidate.pptx');await(await PresentationFile.exportPptx(pres)).save(candidate);
 execFileSync(path.join(runtime,'python/bin/python3'),[path.join(out,'style_package.py'),candidate]);
 await fs.mkdir(path.join(out,'.build','final'),{recursive:true});
