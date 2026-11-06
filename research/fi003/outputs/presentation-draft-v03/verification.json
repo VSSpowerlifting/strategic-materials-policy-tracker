@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "cutoff": "2026-11-06",
+  "model_unchanged": true,
+  "slides": 15,
+  "editable_tables": 11,
+  "editable_native_charts": 2,
+  "embedded_literal_chart_workbooks": 2,
+  "waterfall": "9 editable native bars, including seven signed movements; original values in slide manifest",
+  "chart_snapshot_precision": "Ownership fractions rounded to 12 decimal places for Excel portability; full model precision retained",
+  "pdf_links": 46,
+  "unique_link_targets": 15,
+  "fonts": [
+    "BAAAAA+Archivo-Bold",
+    "CAAAAA+Archivo-Bold",
+    "DAAAAA+Archivo-Bold",
+    "EAAAAA+Archivo-Regular",
+    "FAAAAA+Archivo-Regular",
+    "GAAAAA+Archivo-Regular",
+    "HAAAAA+Archivo-Regular",
+    "IAAAAA+Archivo-Bold",
+    "JAAAAA+Archivo-Bold",
+    "KAAAAA+Archivo-Regular",
+    "LAAAAA+Archivo-Regular",
+    "MAAAAA+Archivo-Bold",
+    "NAAAAA+Archivo-Regular",
+    "OAAAAA+Archivo-Regular",
+    "PAAAAA+Archivo-Bold",
+    "QAAAAA+Archivo-Regular",
+    "RAAAAA+Archivo-Regular",
+    "SAAAAA+Archivo-Regular",
+    "TAAAAA+Archivo-Bold",
+    "UAAAAA+Archivo-Bold",
+    "VAAAAA+Archivo-Regular"
+  ],
+  "claims": 54,
+  "minimum_footer_contrast": 6.042,
+  "files": {
+    "SMPT_FI003_JPMorgan_MP_Draft_v03.pptx": {
+      "bytes": 106668,
+      "sha256": "c70e181551a12df01c91bcae8f5b327725176bcdc5e28d0ea15e3728c86fddfe"
+    },
+    "SMPT_FI003_JPMorgan_MP_Draft_v03.pdf": {
+      "bytes": 298356,
+      "sha256": "f79d0d471ae87b356d4f4ec8b24b83a1e800c2cb986e7cc3c0afb96ce79cae4e"
+    }
+  },
+  "limits": [
+    "No Microsoft PowerPoint application test",
+    "No newly executed live Sheets session",
+    "No legal opinion, actual headroom or completion-funding certification",
+    "Basic PDF tags inspected separately; no PDF/UA or assistive-technology certification"
+  ]
+}

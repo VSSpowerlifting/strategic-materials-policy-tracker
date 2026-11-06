@@ -33,7 +33,7 @@ def build():
     slide('cover', 'JPMorgan and MP Materials', 'Financing Through 10X Construction',
         [('S02','§§2.05, 6.01'),('S09','cover, §1.01'),('S11','Notes 3, 18'),('S19','MD&A: 10X')], ['C01','C05','C11','C27','C28'], '',
         '10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.',
-        author='Benjamin Yang', version='Research draft 0.2 · 6 November 2026')
+        author='Benjamin Yang', version='Research draft 0.3 · 6 November 2026')
     slide('answer', 'Equity secured cash while MP retained exposure through commissioning',
         'Analyst judgment · comparable industrial sponsor and lender perspective',
         [('S02','§§6.01, 6.13'),('S09','§§1.01, 7.11'),('S11','Notes 3, 18'),('S19','Note 8, MD&A')],
@@ -112,10 +112,10 @@ def build():
         'Credit!B40:B47; model.py:scenario; prototype.py:first_test_quarter',
         'Treasury and lenders need a corporate earnings and eligible-liquidity case during construction, before assuming 10X operating receipts contribute.',
         rows=[['Stage','Test or milestone'],['Before the trigger','At least $500m unrestricted contractual cash / Cash Equivalents'],
-              ['Trigger: earlier delivery','A ≥$400m EBITDA compliance certificate or required Q2 2027 financial statements'],
+              ['Trigger: earlier delivery','A certificate showing ≥$400m covenant EBITDA over four quarters, or required Q2 2027 financial statements'],
               ['Illustrative delivery: 15 Aug 2027','First quarter ending after delivery: 30 Sep 2027'],
               ['From the earnings-test stage','Leverage ≤4.00× and cash-interest coverage ≥3.00×, subject to terms'],
-              ['Management expectation: 2028','10X begins commissioning. Commissioning is distinct from contractual COD']],
+              ['Management expectation: 2028','10X begins commissioning, distinct from the commercial operation date (COD)']],
         caveat='The delivery date is assumed, not a legal deadline. The 93–458 days compare year endpoints, not forecast COD dates. Reported Adjusted EBITDA is distinct from covenant EBITDA.')
     slide('support','Government support covers specified exposures while MP retains funding duties',
         'Contract and reported cash distinctions · each instrument assessed separately',
@@ -124,32 +124,32 @@ def build():
         'MP must use reasonable best efforts to raise additional capital if enumerated funding is insufficient. Timing obligations are qualified, and the parent guarantee runs to DoD.',
         rows=[['Instrument','Risk addressed','Exposure or condition retained'],
               ['NdPr price protection','Eligible benchmark shortfall','Designation, quantity, costs and collection timing'],
-              ['10X offtake','Qualifying output / defined support','Construction, specifications and payment mechanics'],
+              ['10X offtake','Qualifying output / defined support','Construction, specifications, future appropriations and payment timing'],
               ['$400m initial preferred','Received public equity capital','7% cumulative preference and potential dilution'],
               ['Additional preferred fallback','Shortfall below $350m incremental net financing','Conditional purchase mechanics. July equity exceeded threshold']],
-        caveat='Specified source/use restrictions constrain flexibility. The separate $150m samarium loan is repayable and serves another project. No extra backstop cash is counted.')
+        caveat='NdPr = neodymium-praseodymium. Specified-use rules constrain flexibility. The separate $150m samarium loan is repayable; no extra backstop cash is counted.')
     threshold = p.capacity_threshold(2029,D('.5'),f['full_ebitda_base'],f['escalation'],True)
     full = p.capacity_threshold(2029,D('.5'),f['full_ebitda_base'],f['escalation'],True,True)
     slide('states','10X threshold protection changes with contractual operating status',
         'Hypothetical full-year CY2029 threshold definition · USD million · 50% capacity illustration',
         [('S03','§§1.2, 2.1, 6.2')],['C20','C21','C22'],'Support!B8:B15; offtake_threshold.csv',
-        'Before the production milestone, capacity scales the threshold. From that milestone, the full escalating definition applies. These states change the entitlement used in a financing assessment.',
+        'COD requires operations capable of any magnet output and notice to DoD. The production milestone is the quarter-end of written notice of annual target-capacity capability.',
         rows=[['Contractual state','Threshold definition','2029 illustration'],['Before commercial operation','Operating threshold withheld','—'],
-              ['COD to production milestone','Full amount × capacity estimate / target',fmt(threshold,3)],
+              ['COD to production milestone','Full amount × annual capacity estimate / target',fmt(threshold,3)],
               ['From production milestone','$140m × 1.02⁴',fmt(full,3)]],
-        caveat='The legal term starts at signing and runs to ten years after COD. Full-year amounts exclude first-payment stub and annual true-up. Threshold EBITDA is distinct from cash available for debt service and corporate covenant EBITDA.')
-    slide('conversion','Price protection delivered $110.9m of cash during nine-month 2026',
+        caveat='The target is ≥10,000 tons block-equivalent, typically ≥7,000 tons finished magnets. Full-year thresholds exclude payment stubs/true-up and are distinct from cash and covenant EBITDA. Legal term: signing to ten years after COD.')
+    slide('conversion','Price protection delivered $110.9m of cash in the first nine months of 2026',
         'Reported receipts and SMPT receivable reconciliation · USD million',
         [('S19','Notes 9, 13, 15, 21; MD&A Cash Flows')],['C41','C42','C43','C44'],
         'Liquidity!B31:B36; Support!B33:B40; support_accounting.csv',
         'Payment evidence matters independently of accounting income, receivables and award ceilings. Reported receipts are already included in operating cash flow.',
         equation=f'{fmt(f["ppa_receivable_open"],3)} + {fmt(f["ppa_income_9m"],3)} − {fmt(f["ppa_receivable_close"],3)} = {fmt(receipt,3)}',
-        equation_labels='Opening PPA receivable + nine-month income − closing receivable = implied receipts',
-        rows=[['Other support evidence at 30 Sep 2026','Amount / status'],['45X credit cash receipts',f'${fmt(f["tax_credit_receipt"],0)}m received during nine months'],
+        equation_labels='Opening price-protection receivable + nine-month income − closing receivable = implied receipts',
+        rows=[['Other support evidence at 30 Sep 2026','Amount / status'],['Section 45X tax-credit cash receipts',f'${fmt(f["tax_credit_receipt"],0)}m received during nine months'],
               ['10X reimbursable-cost receivable',f'${fmt(f["dod_cost_receivable"],3)}m accrued'],
-              ['TSIF reimbursement ceiling',f'Up to ${fmt(f["tsif_grant_limit"])}m'],
-              ['TSIF award receivable recognition',f'${fmt(f["tsif_recognized_non_cash"],3)}m noncash']],
-        caveat='The $110.869m rollforward is consistent with reported rounded receipts of $110.9m. The distinct $6.5m HREE construction-award cash belongs in the company liquidity bridge.')
+              ['Texas manufacturing reimbursement ceiling',f'Up to ${fmt(f["tsif_grant_limit"])}m'],
+              ['Texas manufacturing award receivable',f'${fmt(f["tsif_recognized_non_cash"],3)}m noncash']],
+        caveat='The rollforward matches rounded receipts of $110.9m. The separate $6.5m heavy-rare-earth (HREE) construction-award cash belongs in the company bridge.')
     slide('bridge',f'Company liquid assets fell ${fmt(opening-closing)}m as expansion continued',
         'Historical cash plus short-term investments · USD million · nine months to 30 Sep 2026',
         [('S19','cash flows, balance sheets, Note 4'),('S11','restricted cash')],['C29','C30','C48'],
@@ -180,8 +180,8 @@ def build():
 
     paths = ['inputs.json','sources.json','prototype.py','model.py','outputs/fi003-model-v1/model_spec.json',
         'outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx']
-    return {'version':'FI003 presentation draft 0.2','cutoff':'2026-11-06',
-        'reviewed_head':'2b1c4558de5389214e9fd33830b304bbad499ae2',
+    return {'version':'FI003 presentation draft 0.3','cutoff':'2026-11-06',
+        'reviewed_head':'3975390968968da63059fb0fa4a5c9175de46ec3',
         'model_version':model.VERSION,'source_hashes':{q:hashlib.sha256((ROOT/q).read_bytes()).hexdigest() for q in paths},
         'baseline_controls':data['model_controls'],'sources':sources,'slides':slides}
 

@@ -1,7 +1,7 @@
 {
-  "version": "FI003 presentation draft 0.2",
+  "version": "FI003 presentation draft 0.3",
   "cutoff": "2026-11-06",
-  "reviewed_head": "2b1c4558de5389214e9fd33830b304bbad499ae2",
+  "reviewed_head": "3975390968968da63059fb0fa4a5c9175de46ec3",
   "model_version": "FI003 model 1.0 — 2026-11-06",
   "source_hashes": {
     "inputs.json": "1b3436186f306188926060d27fc39636418405e2078ab9e848aca6ef69851daa",
@@ -395,7 +395,7 @@
       "model_ref": "",
       "note": "10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.",
       "author": "Benjamin Yang",
-      "version": "Research draft 0.2 · 6 November 2026"
+      "version": "Research draft 0.3 · 6 November 2026"
     },
     {
       "number": 2,
@@ -815,7 +815,7 @@
         ],
         [
           "Trigger: earlier delivery",
-          "A ≥$400m EBITDA compliance certificate or required Q2 2027 financial statements"
+          "A certificate showing ≥$400m covenant EBITDA over four quarters, or required Q2 2027 financial statements"
         ],
         [
           "Illustrative delivery: 15 Aug 2027",
@@ -827,7 +827,7 @@
         ],
         [
           "Management expectation: 2028",
-          "10X begins commissioning. Commissioning is distinct from contractual COD"
+          "10X begins commissioning, distinct from the commercial operation date (COD)"
         ]
       ],
       "caveat": "The delivery date is assumed, not a legal deadline. The 93–458 days compare year endpoints, not forecast COD dates. Reported Adjusted EBITDA is distinct from covenant EBITDA."
@@ -880,7 +880,7 @@
         [
           "10X offtake",
           "Qualifying output / defined support",
-          "Construction, specifications and payment mechanics"
+          "Construction, specifications, future appropriations and payment timing"
         ],
         [
           "$400m initial preferred",
@@ -893,7 +893,7 @@
           "Conditional purchase mechanics. July equity exceeded threshold"
         ]
       ],
-      "caveat": "Specified source/use restrictions constrain flexibility. The separate $150m samarium loan is repayable and serves another project. No extra backstop cash is counted."
+      "caveat": "NdPr = neodymium-praseodymium. Specified-use rules constrain flexibility. The separate $150m samarium loan is repayable; no extra backstop cash is counted."
     },
     {
       "number": 11,
@@ -912,7 +912,7 @@
         "C22"
       ],
       "model_ref": "Support!B8:B15; offtake_threshold.csv",
-      "note": "Before the production milestone, capacity scales the threshold. From that milestone, the full escalating definition applies. These states change the entitlement used in a financing assessment.",
+      "note": "COD requires operations capable of any magnet output and notice to DoD. The production milestone is the quarter-end of written notice of annual target-capacity capability.",
       "rows": [
         [
           "Contractual state",
@@ -926,7 +926,7 @@
         ],
         [
           "COD to production milestone",
-          "Full amount × capacity estimate / target",
+          "Full amount × annual capacity estimate / target",
           "75.770"
         ],
         [
@@ -935,12 +935,12 @@
           "151.541"
         ]
       ],
-      "caveat": "The legal term starts at signing and runs to ten years after COD. Full-year amounts exclude first-payment stub and annual true-up. Threshold EBITDA is distinct from cash available for debt service and corporate covenant EBITDA."
+      "caveat": "The target is ≥10,000 tons block-equivalent, typically ≥7,000 tons finished magnets. Full-year thresholds exclude payment stubs/true-up and are distinct from cash and covenant EBITDA. Legal term: signing to ten years after COD."
     },
     {
       "number": 12,
       "kind": "conversion",
-      "title": "Price protection delivered $110.9m of cash during nine-month 2026",
+      "title": "Price protection delivered $110.9m of cash in the first nine months of 2026",
       "scope": "Reported receipts and SMPT receivable reconciliation · USD million",
       "source_refs": [
         [
@@ -957,14 +957,14 @@
       "model_ref": "Liquidity!B31:B36; Support!B33:B40; support_accounting.csv",
       "note": "Payment evidence matters independently of accounting income, receivables and award ceilings. Reported receipts are already included in operating cash flow.",
       "equation": "51.016 + 67.962 − 8.109 = 110.869",
-      "equation_labels": "Opening PPA receivable + nine-month income − closing receivable = implied receipts",
+      "equation_labels": "Opening price-protection receivable + nine-month income − closing receivable = implied receipts",
       "rows": [
         [
           "Other support evidence at 30 Sep 2026",
           "Amount / status"
         ],
         [
-          "45X credit cash receipts",
+          "Section 45X tax-credit cash receipts",
           "$19m received during nine months"
         ],
         [
@@ -972,15 +972,15 @@
           "$2.506m accrued"
         ],
         [
-          "TSIF reimbursement ceiling",
+          "Texas manufacturing reimbursement ceiling",
           "Up to $53.5m"
         ],
         [
-          "TSIF award receivable recognition",
+          "Texas manufacturing award receivable",
           "$10.075m noncash"
         ]
       ],
-      "caveat": "The $110.869m rollforward is consistent with reported rounded receipts of $110.9m. The distinct $6.5m HREE construction-award cash belongs in the company liquidity bridge."
+      "caveat": "The rollforward matches rounded receipts of $110.9m. The separate $6.5m heavy-rare-earth (HREE) construction-award cash belongs in the company bridge."
     },
     {
       "number": 13,

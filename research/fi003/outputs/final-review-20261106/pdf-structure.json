@@ -1,0 +1,366 @@
+{
+  "02": {
+    "tagged": true,
+    "language": "en-US",
+    "tags": {
+      "/Div": 138,
+      "/P": 293,
+      "/Figure": 41,
+      "/Link": 46,
+      "/Table": 11,
+      "/TR": 52,
+      "/TH": 25,
+      "/TD": 93
+    },
+    "figures": [
+      {
+        "page": 1,
+        "alt": ""
+      },
+      {
+        "page": 2,
+        "alt": ""
+      },
+      {
+        "page": 2,
+        "alt": ""
+      },
+      {
+        "page": 2,
+        "alt": ""
+      },
+      {
+        "page": 3,
+        "alt": ""
+      },
+      {
+        "page": 4,
+        "alt": ""
+      },
+      {
+        "page": 5,
+        "alt": ""
+      },
+      {
+        "page": 6,
+        "alt": ""
+      },
+      {
+        "page": 6,
+        "alt": ""
+      },
+      {
+        "page": 7,
+        "alt": ""
+      },
+      {
+        "page": 7,
+        "alt": ""
+      },
+      {
+        "page": 8,
+        "alt": ""
+      },
+      {
+        "page": 9,
+        "alt": ""
+      },
+      {
+        "page": 10,
+        "alt": ""
+      },
+      {
+        "page": 11,
+        "alt": ""
+      },
+      {
+        "page": 12,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 14,
+        "alt": ""
+      },
+      {
+        "page": 15,
+        "alt": ""
+      }
+    ],
+    "figures_without_alt": 41,
+    "pdfua_identifier": false
+  },
+  "03": {
+    "tagged": true,
+    "language": "en-US",
+    "tags": {
+      "/Div": 138,
+      "/P": 293,
+      "/Figure": 41,
+      "/Link": 46,
+      "/Table": 11,
+      "/TR": 52,
+      "/TH": 25,
+      "/TD": 93
+    },
+    "figures": [
+      {
+        "page": 1,
+        "alt": ""
+      },
+      {
+        "page": 2,
+        "alt": ""
+      },
+      {
+        "page": 2,
+        "alt": ""
+      },
+      {
+        "page": 2,
+        "alt": ""
+      },
+      {
+        "page": 3,
+        "alt": ""
+      },
+      {
+        "page": 4,
+        "alt": ""
+      },
+      {
+        "page": 5,
+        "alt": ""
+      },
+      {
+        "page": 6,
+        "alt": ""
+      },
+      {
+        "page": 6,
+        "alt": "Isolated post-offering ownership: existing holders 92.324501%, new offering shares 7.675499%. Starting basic shares 163,477,816 plus 13,590,908 offering shares. Other dilution excluded."
+      },
+      {
+        "page": 7,
+        "alt": ""
+      },
+      {
+        "page": 7,
+        "alt": "USD million. At 31 December 2025: implied letters of credit 40, remaining capacity 235. At 30 June and 30 September 2026: letters of credit 72, remaining capacity 203. All snapshots show zero revolver loans. Total capacity 275; letter-of-credit sublimit is included."
+      },
+      {
+        "page": 8,
+        "alt": ""
+      },
+      {
+        "page": 9,
+        "alt": ""
+      },
+      {
+        "page": 10,
+        "alt": ""
+      },
+      {
+        "page": 11,
+        "alt": ""
+      },
+      {
+        "page": 12,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "Historical company liquid assets, USD million: 31 Dec 2025: +1830.286; Operating: -7.757; Cash PP&E: -420.250; HREE award: +6.500; Financing: -91.145; Accretion: +20.876; Restricted cash: +0.821; Valuation: -1.420; 30 Sep 2026: +1337.911. Opening and closing values are balances; intervening values are signed movements, not a remaining 10X budget."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "Operating: -7.757 USD million."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "Cash PP&E: -420.250 USD million."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "HREE award: +6.500 USD million."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "Financing: -91.145 USD million."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "Accretion: +20.876 USD million."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "Restricted cash: +0.821 USD million."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "Valuation: -1.420 USD million."
+      },
+      {
+        "page": 13,
+        "alt": ""
+      },
+      {
+        "page": 13,
+        "alt": "30 Sep 2026: +1337.911 USD million."
+      },
+      {
+        "page": 14,
+        "alt": ""
+      },
+      {
+        "page": 15,
+        "alt": ""
+      }
+    ],
+    "figures_without_alt": 30,
+    "pdfua_identifier": false
+  }
+}

@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createRequire} from 'node:module';
+import {execFileSync} from 'node:child_process';
 const here=path.dirname(fileURLToPath(import.meta.url));
 const runtime=process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES;
 if(!runtime)throw new Error('CODEX_PRIMARY_RUNTIME_NODE_MODULES must identify the bundled runtime');
@@ -10,7 +11,7 @@ const require=createRequire(path.join(runtime,'fi003.cjs'));
 const {Presentation,PresentationFile}=await import(pathToFileURL(require.resolve('@oai/artifact-tool')).href);
 const d=JSON.parse(await fs.readFile(path.join(here,'slide-manifest.json'),'utf8'));
 const work=path.dirname(here),build=process.env.FI003_DECK_BUILD||path.join(here,'.build');
-const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v02');
+const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v03');
 await fs.mkdir(build,{recursive:true});await fs.mkdir(out,{recursive:true});
 const deck=Presentation.create({slideSize:{width:1280,height:720}});
 const c={paper:'#F5F3EE',ink:'#1B1915',muted:'#5B5548',gold:'#7A5510',char:'#12110F',light:'#EFECE6',rule:'#D8D3C7',band:'#EAE6DC',neutral:'#817B70'};
@@ -136,8 +137,8 @@ for(const m of d.slides){
   note(s,m.note,242+h+14,m.kind==='methods'?42:59);caveat(s,m.caveat,632,31);
   if(m.kind==='methods'){
    const a=box(s,'research-links','',56,609,1168,22,15);
-   const base='https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/codex/fi003-jpmorgan-financing-foundation/research/fi003/';
-   a.text.set([[...[["Working model 1.0 (XLSX)","outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx"],["Evidence and sources","evidence.csv"],["Methods and reproduction","README.md"]].map(([label,url],i)=>({run:(i?'   ·   ':'')+label,style:{typeface:'Archivo',fontSize:'15px',underline:'sng',color:c.gold},link:{uri:base+url,isExternal:true}}))]]);
+   const base=`https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/${d.reviewed_head}/research/fi003/`;
+   a.text.set([[...[["Working model 1.0 (XLSX)","outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx"],["Claim ledger","evidence.csv"],["Original-source register","sources.json"]].map(([label,url],i)=>({run:(i?'   ·   ':'')+label,style:{typeface:'Archivo',fontSize:'15px',underline:'sng',color:c.gold},link:{uri:base+url,isExternal:true}}))]]);
   }
  }
  footer(s,m);
@@ -145,9 +146,10 @@ for(const m of d.slides){
 await fs.writeFile(path.join(build,'shape-manifest.json'),JSON.stringify(shapes,null,2));
 const candidatePath=path.join(build,'candidate.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
+execFileSync(process.env.CODEX_PRIMARY_RUNTIME_PYTHON||'python3',[path.join(here,'finish_package.py'),candidatePath],{stdio:'inherit'});
 const skill=process.env.FI003_PRESENTATION_SKILL||'/root/.codex/skills/builtins/presentations';
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
-const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v02.pptx');
+const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v03.pptx');
 await finalizePresentation({workspaceDir:work,candidatePath,finalPath,
  pythonExecutable:process.env.CODEX_PRIMARY_RUNTIME_PYTHON,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
