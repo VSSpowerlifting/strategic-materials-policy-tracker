@@ -20,7 +20,7 @@ try{
  }
  assert.ok(ready,"Reading guide server not ready: "+logs);
  const html=await (await fetch(origin+"/capital/fin-us-dod-mp-2025-additional-preferred-option")).text();
- assert.ok(html.includes("What the evidence says"),"record explanation must be in server-rendered HTML");
+ assert.ok(html.includes("Evidence and status"),"record explanation must be in server-rendered HTML");
  browser=await chromium.launch({headless:true});
  const cases=[
   {id:"fin-us-dod-mp-2025-additional-preferred-option",needle:"For an option"},
@@ -36,9 +36,10 @@ try{
    assert.ok((await guide.innerText()).includes(c.needle),"expected evidence vocabulary for "+c.id);
    assert.ok((await guide.innerText()).includes("not independently verifies")===false,
     "no doubled-negative text");
-   assert.ok((await guide.innerText()).includes("What has happened legally?"));
-   assert.ok((await guide.innerText()).includes("Has money been paid?"));
-   assert.ok((await guide.innerText()).includes("What does it link to?"));
+   assert.ok((await guide.innerText()).includes("Figure type"));
+   assert.ok((await guide.innerText()).includes("Legal status"));
+   assert.ok((await guide.innerText()).includes("Payment"));
+   assert.ok((await guide.innerText()).includes("Linked projects"));
    assert.ok(await guide.getByRole("link",{name:/counting and evidence rules/i}).count()>0);
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+3);
    assert.equal(overflow,false,"horizontal overflow at "+viewport.width+" in "+c.id);
