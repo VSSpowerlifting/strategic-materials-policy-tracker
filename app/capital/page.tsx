@@ -207,8 +207,8 @@ export default function CapitalPage() {
             })}
           </div>
           <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
-            Amounts stated &ldquo;up to&rdquo; are ceilings, not payments. Unquantified, inactive and unsupported
-            commitments are listed separately. <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">Counting rules</Link>.
+            Amounts stated &ldquo;up to&rdquo; are ceilings, not payments. Unquantified commitments, those without a stated status, and ended commitments
+            are listed separately. <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">Counting rules</Link>.
           </p>
           <div className="mt-6 overflow-x-auto rounded-lg border">
             <table className="w-full min-w-[36rem] border-collapse text-sm">
