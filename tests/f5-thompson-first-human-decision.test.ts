@@ -48,7 +48,7 @@ test("no fake human review, source-body proof, digest, milestone ID or public mi
   assert.equal(getAllProjectMilestones().length,2);
   assert.ok(example.every(x=>x.verdict==="pending" && x.reviewedBy===null &&
     x.reviewedAt===null && x.reviewInputDigestSha256===null));
-  assert.equal(site.lastUpdated,"2026-11-04",
+  assert.equal(site.lastUpdated,"2026-11-06",
     "a future reviewer cannot backdate source inspection to existing curated cutoff");
 });
 

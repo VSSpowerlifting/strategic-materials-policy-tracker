@@ -84,7 +84,7 @@ test("dated occurrence cannot follow source publication or the corpus cutoff", (
   const rows = q();
   rows[0].occurredOn = "2026-08-25";
   assert.match(audit(rows).errors.join(" | "), /occurred date postdates source evidence boundary/);
-  rows[0].occurredOn = "2026-11-05";
+  rows[0].occurredOn = "2026-11-07";
   assert.match(audit(rows).errors.join(" | "), /proposed occurrence postdates curated corpus cutoff/);
   rows[0].occurredOn = "2026-02-30";
   assert.match(audit(rows).errors.join(" | "), /real date or null/);
@@ -237,7 +237,7 @@ test("Stibnite original-source registration uses actual access receipt without b
   assert.equal(source.confidence,"primary");
   assert.equal(source.datePublished,"2025-10-21","event/report date is not the 2026 access receipt");
   assert.equal(source.dateAccessed,"2026-10-09","never backdate original source access");
-  assert.equal(site.lastUpdated, "2026-11-04","source registration retains the dated curated corpus revision");
+  assert.equal(site.lastUpdated, "2026-11-06","source registration retains the dated curated corpus revision");
   assert.ok(source.notes?.includes("nonbinding"),"do not mislabel conditional EXIM financing");
   assert.equal(getAllProjectMilestones().length, 2,"unsigned Stibnite source does not add another public milestone");
 });
