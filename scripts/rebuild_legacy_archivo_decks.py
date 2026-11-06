@@ -55,28 +55,72 @@ def bez(a,b,c,d):
                   (1-t)**3*a.y+3*(1-t)**2*t*b.y+3*(1-t)*t*t*c.y+t**3*d.y))
     return p
 def drawings(slide,page,stats):
+    # PyMuPDF often represents a single filled bar, card or background as
+    # several connected "l" segments. Drawing each as a separate connector
+    # drops the fill entirely. Reassemble contiguous line segments into a
+    # closed native PowerPoint freeform before applying the PDF fill.
+    def near(a,b):
+        return abs(a.x-b.x)<.1 and abs(a.y-b.y)<.1
+
     for draw in page.get_drawings():
         fill,line=draw.get("fill"),draw.get("color")
         width=draw.get("width") or .2
+        chain=[]
+
+        def flush_lines():
+            nonlocal chain
+            if not chain: return
+            pts=[(p.x,p.y) for p in chain]
+            closed=len(pts)>2 and (
+                fill is not None or near(chain[0],chain[-1]) or bool(draw.get("closePath"))
+            )
+            try:
+                if not path(slide,pts,fill if closed else None,line,width,closed):
+                    raise ValueError("invalid line-chain geometry")
+                stats["native_vectors"]+=1
+            except Exception:
+                stats["unhandled_vectors"].append("l")
+            chain=[]
+
         for item in draw.get("items",[]):
             kind=item[0]
+            if kind=="l":
+                a,b=item[1:3]
+                if not chain:
+                    chain=[a,b]
+                elif near(chain[-1],a):
+                    chain.append(b)
+                elif near(chain[-1],b):
+                    chain.append(a)
+                else:
+                    flush_lines()
+                    chain=[a,b]
+                # A new polygon can start after the current path returns
+                # to its origin; otherwise merged fills can bridge regions.
+                if len(chain)>=4 and near(chain[-1],chain[0]):
+                    flush_lines()
+                continue
+
+            flush_lines()
             try:
                 if kind=="re":
                     r=fitz.Rect(item[1])
                     if r.is_empty: continue
                     shp=slide.shapes.add_shape(MSO_SHAPE.RECTANGLE,U(r.x0),U(r.y0),U(r.width),U(r.height))
                     sty(shp,fill,line,width)
-                elif kind=="l":
-                    a,b=item[1:3]
-                    if not path(slide,[(a.x,a.y),(b.x,b.y)],None,line,width): raise ValueError()
                 elif kind=="c":
-                    if not path(slide,bez(*item[1:5]),fill,line,width,fill is not None): raise ValueError()
+                    if not path(slide,bez(*item[1:5]),fill,line,width,fill is not None):
+                        raise ValueError()
                 elif kind=="qu":
                     q=item[1]
-                    if not path(slide,[(q.ul.x,q.ul.y),(q.ur.x,q.ur.y),(q.lr.x,q.lr.y),(q.ll.x,q.ll.y)],fill,line,width,True): raise ValueError()
-                else: raise ValueError()
+                    if not path(slide,[(q.ul.x,q.ul.y),(q.ur.x,q.ur.y),(q.lr.x,q.lr.y),(q.ll.x,q.ll.y)],fill,line,width,True):
+                        raise ValueError()
+                else:
+                    raise ValueError()
                 stats["native_vectors"]+=1
-            except Exception: stats["unhandled_vectors"].append(kind)
+            except Exception:
+                stats["unhandled_vectors"].append(kind)
+        flush_lines()
 def images(slide,page,doc,stats):
     for info in page.get_image_info(xrefs=True):
         r=fitz.Rect(info["bbox"])
