@@ -1,0 +1,124 @@
+{
+  "blocking": [
+    "r001: numeric text changed",
+    "r001: unsupported graphics",
+    "applied001: numeric text changed",
+    "applied001: unsupported graphics"
+  ],
+  "cases": [
+    {
+      "name": "r001",
+      "fonts": [
+        "BAAAAA+Archivo-Bold",
+        "CAAAAA+Archivo-Regular"
+      ],
+      "missing_links": {},
+      "missing_numeric_tokens": {
+        "1": {
+          "2026\n\n\n\n\n\nIN": 1,
+          "2026   ": 1,
+          "001\n\n    Fu": 1,
+          "001                                                                                 ": 1,
+          "1  ": 1
+        },
+        "2": {
+          "2026\n\n\nTu": 1,
+          "001                                                                                                   ": 1,
+          "2  ": 1
+        },
+        "3": {
+          "2026\n\n\nPu": 1,
+          "001                                                                                                   ": 1,
+          "3  ": 1
+        },
+        "4": {
+          "2026\n\n\nHe": 1,
+          "2026     Co": 1,
+          "2026         Tu": 1,
+          "001                                                                                                   ": 1,
+          "4  ": 1
+        },
+        "5": {
+          "2026\n\n\nEU": 1,
+          "001                                                                                                   ": 1,
+          "5  ": 1
+        },
+        "6": {
+          "2026\n\n\nJa": 1,
+          "001                                                                                                   ": 1,
+          "6  ": 1
+        },
+        "7": {
+          "2026\n\n\nCo": 1,
+          "001                                                                                                   ": 1,
+          "7  ": 1
+        },
+        "8": {
+          "2026\n\n\nRe": 1,
+          "2026\n\nAu": 1,
+          "001                                                                                                   ": 1,
+          "8  ": 1
+        }
+      },
+      "minimum_text_retention": 1.0
+    },
+    {
+      "name": "applied001",
+      "fonts": [
+        "BAAAAA+Archivo-Bold",
+        "CAAAAA+Archivo-Regular"
+      ],
+      "missing_links": {},
+      "missing_numeric_tokens": {
+        "1": {
+          "2031\n\nQu": 1
+        },
+        "2": {
+          "08  IN": 1
+        },
+        "3": {
+          "08  LA": 1,
+          "1         fi": 1,
+          "2026                                                      SM": 1
+        },
+        "4": {
+          "08  OP": 1
+        },
+        "5": {
+          "08  QU": 1,
+          "22.1\n\n                                                                                                                             ": 1,
+          "4.13\n\n    Di": 1,
+          "16.7\n                                                                                                                ": 1,
+          "0.0\n\n                                                                                                            ": 1,
+          "1.38\n                                                                                           ": 1,
+          "0.0\n\n\n\n\n                                                                                          Do": 1,
+          "2026                                                                    SM": 1
+        },
+        "6": {
+          "08  DE": 1,
+          "29                                                   ": 1,
+          "2030                                                      ": 1,
+          "2031                                                        ": 1,
+          "2026                                                                         SM": 1
+        },
+        "7": {
+          "08  EX": 1,
+          "2027                  ": 1,
+          "2028                  ": 1,
+          "2029                  ": 1,
+          "2030                  ": 1,
+          "2031\n\n\n\n  PR": 1,
+          "2026                                                             Pe": 1
+        },
+        "8": {
+          "08  SO": 1,
+          "2026  ": 1,
+          "08    Un": 1,
+          "2030\n\n\n                                                                                                                Th": 1,
+          "2026                                                                                                                          ": 1
+        }
+      },
+      "minimum_text_retention": 1.0
+    }
+  ]
+}
