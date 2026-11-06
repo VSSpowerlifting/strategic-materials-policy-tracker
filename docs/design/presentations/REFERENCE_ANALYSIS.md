@@ -2,6 +2,8 @@
 
 5 November 2026 · Companion to [SMPT Presentation Standard v2](SMPT_PRESENTATION_STANDARD_V2.md)
 
+**6 November extension:** [Visual Repertoire & Consulting References](VISUAL_REPERTOIRE_AND_REFERENCES.md) adds verified publisher links and exact page/figure locators, original SMPT examples and a production workflow for varied exhibits. This older comparison remains historical; Archivo under the current presentation standard controls typography.
+
 This is **design research**, not permission to reproduce branded consulting assets. Four PDF examples were supplied for internal study. Original decks are *not* redistributed here; the linked institutional publications and the original SMPT example SVGs provide public reference points.
 
 ## A. Four decks supplied for comparison
@@ -59,7 +61,7 @@ The supplied PDF's embedded typefaces include **Georgia Bold (large headings) an
 ### What these resources do *not* establish
 
 - A universal professional slide count. SMPT's **20-slide ceiling is an owner-imposed editorial constraint**, not a rule stated by McKinsey or BCG.
-- A universally preferred font. The Georgia / Source Sans 3 pairing is **SMPT's own typography choice**.
+- A universally preferred font. Georgia / Source Sans 3 was an earlier **SMPT choice**; the current presentation standard specifies Archivo.
 - That consulting-branded slide screenshots may be redistributed in a public style guide.
 - That a polished graphic substitutes for traceable assumptions or human editorial signoff.
 

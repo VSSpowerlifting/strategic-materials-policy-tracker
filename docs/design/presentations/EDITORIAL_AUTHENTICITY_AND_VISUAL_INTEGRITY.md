@@ -92,6 +92,8 @@ Choose a layout after defining the comparison the reader needs. Test whether eac
 
 **A three-column slide is legitimate when three comparable categories genuinely exist.** Visual symmetry is a design choice, never evidence that the categories are equivalent.
 
+Apply the [visual-repertoire workflow](VISUAL_REPERTOIRE_AND_REFERENCES.md): plan the exhibit family from the relationship, review the contact sheet for repetitive composition, and document any intentional repetition under gates C/E. Variety should improve attention and comprehension while preserving a consistent SMPT identity. Chart-type counts alone cannot pass this review.
+
 ### Graphics and AI generation
 
 - Construct **quantitative charts from verified numeric data**: controlling workbook, source-linked dataset, or reproducible script. Keep edits and labels consistent with source values.
