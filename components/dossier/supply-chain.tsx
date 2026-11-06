@@ -225,8 +225,8 @@ function StageColumn({ stage }: { stage: StageBlock }) {
         {stage.capital.length ? <FoldedList items={stage.capital} limit={capN} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} /> : <Empty>None</Empty>}
         {stage.options.length ? (
           <div className="space-y-2 pt-1">
-            <SubHeading note="listed apart">Funding options, not commitments</SubHeading>
-            <p className="text-xs leading-5 text-faint">A funding option is a right to call on money, not an exercise of it.</p>
+            <SubHeading note="listed separately">Funding options</SubHeading>
+            <p className="text-xs leading-5 text-faint">A funding option permits a request for capital under specified terms. Exercises are recorded as separate commitments.</p>
             <FoldedList items={stage.options} limit={optN} label="Show all" className={list} render={(r) => <CapitalCard key={r.id} row={r} />} />
           </div>
         ) : null}
@@ -331,13 +331,13 @@ export function RecordsByStage({ payload }: { payload: DossierPayload }) {
         </p>
       ) : null}
       <p className="mt-6 max-w-3xl text-sm leading-6 text-muted">
-        A designation is a government&apos;s recognition of a project under a named scheme. It records standing, not money, and covers only the stages and materials the designation names. A project is the registry record of the site or venture. Shared stage codes are not a finding.
+        A designation records government recognition of a project and the materials and stages named in that designation. Financial support is recorded separately. Project registry entries appear below.
       </p>
 
       {payload.registryProjects.length ? (
         <div className="mt-10">
           <h3 className="font-display text-base font-semibold">Registry projects with no designation naming {payload.nameEn}</h3>
-          <p className="mt-1 text-sm leading-6 text-faint">Not placed by stage: a project&apos;s own stage list is not a designation, and the lattice places only designations.</p>
+          <p className="mt-1 text-sm leading-6 text-faint">The lattice places designations at their stated stages. Other registered projects appear here separately.</p>
           <ul className="mt-3 grid gap-3 md:grid-cols-2">
             {payload.registryProjects.map((p) => (
               <li key={p.id} className="rounded-md border border-border bg-card p-3 text-sm">

@@ -424,7 +424,7 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
       </h3>
       {v ? (
         <>
-          <p className="mt-1.5 text-sm leading-5 text-paper-muted">{cellSummary(v.counts) || "No counted records"}. Listed by kind, never added together.</p>
+          <p className="mt-1.5 text-sm leading-5 text-paper-muted">{cellSummary(v.counts) || "No counted records"}. Grouped by record type.</p>
           {v.counts.commitments ? (
             <>
               <PanelHeading kind="commitments" note="in their own currencies">
@@ -435,15 +435,15 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
           ) : null}
           {v.options.length ? (
             <>
-              <PanelHeading kind="commitments" note="listed apart">Funding options, not commitments</PanelHeading>
-              <p className="mb-2 text-xs leading-5 text-paper-muted">A funding option is a right to call on money, not an exercise of it, so it is not counted above.</p>
+              <PanelHeading kind="commitments" note="listed separately">Funding options</PanelHeading>
+              <p className="mb-2 text-xs leading-5 text-paper-muted">Funding options set out a right to request capital under specified terms. Any exercise is recorded separately.</p>
               <ul className="divide-y divide-paper-border">{v.options.map((r) => <CommitmentItem key={r.id} r={r} />)}</ul>
             </>
           ) : null}
           {v.ended.length ? (
             <>
               <PanelHeading kind="commitments" note="listed apart">Withdrawn or lapsed</PanelHeading>
-              <p className="mb-2 text-xs leading-5 text-paper-muted">An ended row is not capital and is not counted above.</p>
+              <p className="mb-2 text-xs leading-5 text-paper-muted">Withdrawn and lapsed instruments are listed separately from current commitments.</p>
               <ul className="divide-y divide-paper-border">{v.ended.map((r) => <CommitmentItem key={r.id} r={r} />)}</ul>
             </>
           ) : null}
@@ -459,12 +459,6 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
               <ul className="divide-y divide-paper-border">{v.designations.map((r) => <DesignationItem key={r.id} r={r} />)}</ul>
             </>
           ) : null}
-          <div className="mt-5 rounded-lg border border-paper-border bg-paper-border/40 p-3.5">
-            <p className="font-display text-sm font-semibold">Shared codes, not a finding</p>
-            <p className="mt-1 text-[13px] leading-5 text-paper-muted">
-              These records share a material and a stage. The record does not say that any clause prompted a commitment or a designation, or the reverse.
-            </p>
-          </div>
         </>
       ) : (
         <p className="mt-3 text-sm leading-6 text-paper-muted">No record of the kinds and government now selected sits at this node. Change the filters above to see the others.</p>
