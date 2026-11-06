@@ -12,7 +12,7 @@ export function HeroPlate() {
       focusable="false"
       viewBox="0 0 400 220"
       preserveAspectRatio="xMinYMax meet"
-      className="pointer-events-none absolute bottom-full left-0 mb-8 hidden h-52 w-full lg:block"
+      className="pointer-events-none absolute bottom-full left-6 mb-2 hidden h-44 w-[88%] lg:block"
     >
       <g stroke="var(--border-strong)" strokeWidth="1">
         {/* The aside's rule, continued upward and broken, with reference ticks. */}
