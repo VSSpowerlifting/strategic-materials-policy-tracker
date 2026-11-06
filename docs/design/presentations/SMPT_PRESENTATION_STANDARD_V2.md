@@ -91,7 +91,7 @@ Charts may introduce *functional* neutral grays for series differentiation; do n
 - Financial figures and dates: Archivo with tabular numerals where supported.
 - Dense technical identifiers: fixed-width type is permitted selectively; avoid decorative monospace.
 
-Always include an editable PowerPoint and matching selectable-text PDF. Archive/embed the true Archivo face where software licenses and export engines permit; install Archivo in rendering environments and verify that the **PDF embeds Archivo** rather than silently substituting another family. For interoperability, Arial may be used only as a clearly documented fallback where the recipient requires a system font; never silently mix Archivo and Arial within the primary deck. Do not commit or distribute standalone font binaries.
+Always include an editable PowerPoint and matching selectable-text PDF. Embed the true Archivo face in PDF exports where software licenses and export engines permit; install Archivo in rendering environments and verify that the **PDF embeds Archivo** rather than silently substituting another family. For interoperability, Arial may be used only as a clearly documented fallback where the recipient requires a system font; never silently mix Archivo and Arial within the primary deck. Do not commit or distribute standalone font binaries.
 
 The existing 5 November 2026 research decks remain citation-stable until a typography-only replacement has passed source-link, numerical, editable-object, rendered-slide and human publication review. Historical versions remain accessible.
 
