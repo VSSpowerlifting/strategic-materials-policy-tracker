@@ -83,26 +83,26 @@ export default function InterplayPage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Money meets restriction"
+        eyebrow="Capital and control"
         title="Capital × Control"
-        lead="Controls and capital are recorded separately because they answer different questions. This page puts them on one clock and one grid, so you can see which governments restrict and which pay, on which materials, and in what order. It shows sequence, never causation: no link between a control and a financing is drawn unless a source states it."
+        lead="Compare the timing of government financing and control measures by jurisdiction, material and supply-chain stage. Each record retains its source and legal status. A causal relationship requires explicit supporting evidence."
       />
       <div className="mt-12 space-y-14">
-        <Section index="01" title="Chronology by actor" description="Every dated status change of a financial row (circle) and a control clause (square). The chart is a picture; the list below it gives every change as text, with a link to each record.">
+        <Section index="01" title="Chronology by actor" description="Every dated status change of a financial row (circle) and a control clause (square). The chart and linked list show each recorded status change.">
           <InterplayChronology asOf={asOf} />
           <div className="mt-8">
             <InterplayChronologyList />
           </div>
         </Section>
 
-        <Section index="02" title="Material by actor" description={`Financial rows provided that have not ended (a package counts once; a withdrawn or lapsed row is left out, and a funding option is a row of its own, not an exercise) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts, never money.`}>
+        <Section index="02" title="Material by actor" description={`Financial rows provided that have not ended (a package counts once; a withdrawn or lapsed row is left out, and a funding option is a row of its own, not an exercise) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts of recorded instruments.`}>
           <MaterialInterplayMatrix asOf={asOf} />
         </Section>
 
         <Section
           index="03"
           title="Material by supply-chain stage"
-          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. A clause's stage is where its items belong (separation technology sits at separation), not a claim that it restricts that stage; clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed. Record counts, never money.`}
+          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. A clause's stage is where its items belong (separation technology sits at separation), not a claim that it restricts that stage; clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed. Record counts of recorded instruments.`}
         >
           <StageResponseMap asOf={asOf} />
         </Section>

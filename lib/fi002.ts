@@ -20,7 +20,7 @@ export const fi002Screens = [
     years: "20 years · 2032–51",
     benefit: "$839m",
     explanation:
-      "Twenty assumed benefit years spread the recovery of capital over a long operating period. The public record does not establish twenty years of flat incremental benefit.",
+      "Twenty years of assumed benefits lower the annual capital-recovery requirement. Flat incremental production across that period is a modeling assumption.",
   },
   {
     name: "Shorter benefits",
@@ -31,7 +31,7 @@ export const fi002Screens = [
     years: "10 years · 2032–41",
     benefit: "$1,162m",
     explanation:
-      "Halving the benefit duration raises the required annual contribution. Capital, margin and the first benefit year remain unchanged from the base screen.",
+      "Halving the benefit period raises the annual requirement. Capital, margin and first production year match the base case.",
   },
   {
     name: "Shorter, later",
