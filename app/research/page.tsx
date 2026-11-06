@@ -17,7 +17,7 @@ export default function ResearchIndex() {
             <div className="font-display text-sm leading-6 text-muted"><p className="font-semibold text-accent">Financial Intelligence 002</p><p>5 November 2026 cutoff</p><p className="mt-2">Benjamin Yang</p></div>
             <div><h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl"><Link href="/research/escondida-copper" className="hover:text-accent">Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision</Link></h2>
             <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">Financial analysis of copper-price exposure, replacement economics and BHP’s capital-allocation decision.</p>
-            <Link href="/research/escondida-copper" className="research-text-link">View research</Link></div>
+            </div>
           </article>
 
           <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
@@ -35,9 +35,7 @@ export default function ResearchIndex() {
               <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">
                 An assessment of Hemerdon’s restart financing, remaining project expenditure and refinancing exposure.
               </p>
-              <Link href="/research/hemerdon-financing" className="research-text-link">
-                View research
-              </Link>
+              
             </div>
           </article>
 
@@ -56,9 +54,7 @@ export default function ResearchIndex() {
               <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">
                 A defense-manufacturing strategy case comparing supplier qualification, inventory and domestic offtake.
               </p>
-              <Link href="/research/antimony-supply-resilience" className="research-text-link">
-                View research
-              </Link>
+              
             </div>
           </article>
 
@@ -71,7 +67,7 @@ export default function ResearchIndex() {
             <div>
               <h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl"><Link href="/research/tungsten-supply-security" className="hover:text-accent">Tungsten Supply Security</Link></h2>
               <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">A comparison of tungsten policy, finance and industrial development in China, the EU, the UK and Japan.</p>
-              <Link href="/research/tungsten-supply-security" className="research-text-link">View research</Link>
+              
             </div>
           </article>
         </div>
