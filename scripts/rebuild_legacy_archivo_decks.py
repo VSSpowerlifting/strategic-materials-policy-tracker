@@ -25,10 +25,13 @@ def C(x):
     if isinstance(x,(tuple,list)): return RGBColor(*(max(0,min(255,round(a*255))) for a in x[:3]))
     return RGBColor((int(x)>>16)&255,(int(x)>>8)&255,int(x)&255)
 def sty(shape,fill=None,line=None,weight=0):
-    if fill is None: shape.fill.background()
-    else:
-        shape.fill.solid()
-        shape.fill.fore_color.rgb=C(fill)
+    # Connectors have a line but no fill; the old fill access discarded
+    # every PDF line segment and concealed it as "unsupported graphics".
+    if hasattr(shape, "fill"):
+        if fill is None: shape.fill.background()
+        else:
+            shape.fill.solid()
+            shape.fill.fore_color.rgb=C(fill)
     if line is None or weight<=0: shape.line.fill.background()
     else:
         shape.line.color.rgb=C(line)
@@ -127,7 +130,12 @@ def links(slide,page,stats):
         sh.click_action.hyperlink.address=url
         stats["hyperlinks"].append(url)
 def text_of(page): return page.get_text(sort=True)
-def nums(t): return re.findall(r"(?<!\w)(?:[$£€]\s*)?\d+(?:[.,]\d+)*(?:\s*%|\s*[A-Za-z]{0,2})?",t)
+def nums(t):
+    # Compare values, currency symbols and percentages, never adjacent
+    # text/line-breaks. E.g. "2031\n\nQu" and "2031" are equal,
+    # while "16.7" vs "17.6" remains a blocking numerical difference.
+    tokens=re.findall(r"(?<!\w)[+\-−]?(?:[$£€]\s*)?\d+(?:[.,]\d+)*(?:\s*%)?",t)
+    return [re.sub(r"\s+","",token) for token in tokens]
 def contact(doc,target):
     ims=[]
     for page in doc:
