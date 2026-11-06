@@ -181,7 +181,7 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
   assert.equal(r.countFutureIntervalEndFields,21);
   assert.equal(r.publicationAuthorized,false);
   assert.equal(JSON.stringify(seeds()),frozen);
-  assert.equal(site.lastUpdated,"2026-11-04");
+  assert.equal(site.lastUpdated,"2026-11-06");
 });
 
 test("proposed 4 November revision contains only dated admissions from reviewed expansion batches",()=>{
@@ -239,20 +239,34 @@ test("cutoff impact rejects missing public seed arrays and invalid/backdated dat
   assert.throws(()=>auditF5CorpusCutoffImpact(all,"2026-10-09","2026-10-17"),/missing public seed array sources/);
 });
 
+test("November 6 admission is a dated cohort separate from historical November 4 snapshot",()=>{
+  const full=seeds();
+  const previous=withoutNovember5Expansion(full);
+  const frozenFour=auditF5CorpusCutoffImpact(previous,"2026-11-03","2026-11-04");
+  assert.equal(frozenFour.totalPublicSeedRows,802);
+  const admitted=auditF5CorpusCutoffImpact(full,"2026-11-04","2026-11-06");
+  assert.ok(admitted.countNewlyIncludedDatedFields>0);
+  assert.ok(admitted.newlyIncludedDatedFields.some(r=>
+    r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"));
+  assert.equal(admitted.publicationAuthorized,false,
+    "date sensitivity is historical evidence, not a substitute for the maintainer release gate");
+  assert.equal(site.lastUpdated,"2026-11-06");
+});
+
 test("live cutoff audit CLI is read-only at the current authorized corpus date",()=>{
   const output=execFileSync(process.execPath,[
     "--import","tsx","scripts/audit-f5-corpus-cutoff-impact.ts",
     "--proposed-cutoff",site.lastUpdated,
   ],{encoding:"utf8"});
   const parsed=JSON.parse(output);
-  assert.equal(parsed.proposedCutoff,"2026-11-04");
-  assert.equal(parsed.currentPublishedCutoff,"2026-11-04");
+  assert.equal(parsed.proposedCutoff,"2026-11-06");
+  assert.equal(parsed.currentPublishedCutoff,"2026-11-06");
   assert.equal(parsed.totalPublicSeedRows,F5_SEED_NAMES.reduce((n,seed)=>n+seeds()[seed].length,0));
-  assert.ok(parsed.countOtherPostCutoffFields>0,
-    "unapproved 5 November records must remain visibly beyond the 4 November site cutoff");
-  assert.ok(parsed.afterProposedCutoffFields.some((r:{recordId:string;field:string;date:string})=>
+  assert.ok(parsed.afterProposedCutoffFields.every((r:{date:string})=>r.date>"2026-11-06"),
+    "future-to-current publication metadata can only postdate the new November 6 cutoff");
+  assert.ok(!parsed.afterProposedCutoffFields.some((r:{recordId:string;field:string;date:string})=>
     r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"),
-  "new primary-source access dates must be reported as future-to-current-publication");
+    "approved November 5 original-source access must be within the November 6 curated cutoff");
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
   assert.equal(parsed.countFutureIntervalEndFields,21);
   assert.equal(parsed.publicationAuthorized,false,
