@@ -1,0 +1,5 @@
+# Reproducible authoring/cache intermediates; the recalculated workbook is delivered.
+*.inspect.ndjson
+/FI003_Working_Model_v1.xlsx
+/native-baseline.json
+/qa/

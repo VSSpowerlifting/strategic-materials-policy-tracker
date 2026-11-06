@@ -1,0 +1,2370 @@
+{
+  "file": "research/fi003/outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx",
+  "sha256": "4db87d45a083548cabfe5de85d8ce3bc6b7c9d69c4176ae75d897ca191ba337e",
+  "engine": "LibreOfficeDev 26.8.0.0.alpha0, Calc OOXML recalculation",
+  "scenario": "baseline",
+  "checks": [
+    {
+      "cell": "Financing!B7",
+      "expected": 1000.0,
+      "actual": 1000.0,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B8",
+      "expected": 7.4,
+      "actual": 7.4,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B9",
+      "expected": 13590908.0,
+      "actual": 13590908.0,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B10",
+      "expected": 55.0,
+      "actual": 55.0,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B11",
+      "expected": 53.35,
+      "actual": 53.35,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B12",
+      "expected": 747.49994,
+      "actual": 747.49994,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B13",
+      "expected": 22.4249982,
+      "actual": 22.4249982,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B14",
+      "expected": 725.0749418,
+      "actual": 725.0749418,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B15",
+      "expected": 724.2,
+      "actual": 724.2,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B16",
+      "expected": 0.8749418,
+      "actual": 0.874941799999988,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B18",
+      "expected": 163477816.0,
+      "actual": 163477816.0,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B19",
+      "expected": 177068724.0,
+      "actual": 177068724.0,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B20",
+      "expected": 0.08313609964057753,
+      "actual": 0.0831360996405775,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B21",
+      "expected": 0.07675498920972627,
+      "actual": 0.0767549892097263,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B22",
+      "expected": 0.9232450107902738,
+      "actual": 0.923245010790274,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B23",
+      "expected": 0.03,
+      "actual": 0.03,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B24",
+      "expected": 0.0074,
+      "actual": 0.0074,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B38",
+      "expected": -0.8,
+      "actual": -0.799999999999955,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B39",
+      "expected": 0.0749418,
+      "actual": 0.0749418000000333,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B8",
+      "expected": 275.0,
+      "actual": 275.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!C8",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!E8",
+      "expected": 235.0,
+      "actual": 235.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!D8",
+      "expected": 40.0,
+      "actual": 40.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B9",
+      "expected": 275.0,
+      "actual": 275.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!C9",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!E9",
+      "expected": 203.0,
+      "actual": 203.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!D9",
+      "expected": 72.0,
+      "actual": 72.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B10",
+      "expected": 275.0,
+      "actual": 275.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!C10",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!E10",
+      "expected": 203.0,
+      "actual": 203.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!D10",
+      "expected": 72.0,
+      "actual": 72.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B20",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Credit!B21",
+      "expected": 53.0,
+      "actual": 53.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B22",
+      "expected": 0.1855,
+      "actual": 0.1855,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B23",
+      "expected": 9.75,
+      "actual": 9.75,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B24",
+      "expected": 9.9355,
+      "actual": 9.9355,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B33",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Credit!B34",
+      "expected": 20.0,
+      "actual": 20.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B35",
+      "expected": 20.0,
+      "actual": 20.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B41",
+      "expected": 2028.0,
+      "actual": 2028.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B42",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Credit!B43",
+      "expected": 46660,
+      "actual": 46660.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B44",
+      "expected": 46753,
+      "actual": 46753.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B45",
+      "expected": 47118,
+      "actual": 47118.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B46",
+      "expected": 93,
+      "actual": 93.0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B47",
+      "expected": 458,
+      "actual": 458.0,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B8",
+      "expected": 1166.011,
+      "actual": 1166.011,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!C8",
+      "expected": 664.275,
+      "actual": 664.275,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!D8",
+      "expected": 1830.286,
+      "actual": 1830.286,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B9",
+      "expected": 429.075,
+      "actual": 429.075,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!C9",
+      "expected": 1023.564,
+      "actual": 1023.564,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!D9",
+      "expected": 1452.639,
+      "actual": 1452.639,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B10",
+      "expected": 260.336,
+      "actual": 260.336,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!C10",
+      "expected": 1077.575,
+      "actual": 1077.575,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!D10",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B12",
+      "expected": -492.375,
+      "actual": -492.375,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B16",
+      "expected": 1830.286,
+      "actual": 1830.286,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B17",
+      "expected": -7.757,
+      "actual": -7.757,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B18",
+      "expected": -420.25,
+      "actual": -420.25,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B19",
+      "expected": 6.5,
+      "actual": 6.5,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B20",
+      "expected": -91.145,
+      "actual": -91.145,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B21",
+      "expected": 20.876,
+      "actual": 20.876,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B22",
+      "expected": 0.821,
+      "actual": 0.821,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B23",
+      "expected": -1.42,
+      "actual": -1.42,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B24",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B25",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B26",
+      "expected": 0.0,
+      "actual": 2.27373675443232e-13,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B31",
+      "expected": 51.016,
+      "actual": 51.016,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B32",
+      "expected": 67.962,
+      "actual": 67.962,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B33",
+      "expected": 8.109,
+      "actual": 8.109,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B34",
+      "expected": 110.869,
+      "actual": 110.869,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B35",
+      "expected": 110.9,
+      "actual": 110.9,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B36",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B41",
+      "expected": 862.793,
+      "actual": 862.793,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B42",
+      "expected": 150.0,
+      "actual": 150.0,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B43",
+      "expected": 30.34,
+      "actual": 30.34,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B44",
+      "expected": 1043.133,
+      "actual": 1043.133,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B45",
+      "expected": 936.253,
+      "actual": 936.253,
+      "pass": true
+    },
+    {
+      "cell": "Support!B13",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Support!B14",
+      "expected": 75.7702512,
+      "actual": 75.7702512,
+      "pass": true
+    },
+    {
+      "cell": "Support!B15",
+      "expected": 18.9425628,
+      "actual": 18.9425628,
+      "pass": true
+    },
+    {
+      "cell": "Support!B19",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Support!B20",
+      "expected": 110.0,
+      "actual": 110.0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B21",
+      "expected": 0.3,
+      "actual": 0.3,
+      "pass": true
+    },
+    {
+      "cell": "Support!B22",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B23",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B24",
+      "expected": 140.0,
+      "actual": 140.0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B31",
+      "expected": 400.0,
+      "actual": 400.0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B32",
+      "expected": 150.0,
+      "actual": 150.0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B33",
+      "expected": 19.0,
+      "actual": 19.0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B34",
+      "expected": 23.457,
+      "actual": 23.457,
+      "pass": true
+    },
+    {
+      "cell": "Support!B35",
+      "expected": 32.6,
+      "actual": 32.6,
+      "pass": true
+    },
+    {
+      "cell": "Support!B36",
+      "expected": 2.506,
+      "actual": 2.506,
+      "pass": true
+    },
+    {
+      "cell": "Support!B37",
+      "expected": 7.9,
+      "actual": 7.9,
+      "pass": true
+    },
+    {
+      "cell": "Support!B38",
+      "expected": 53.5,
+      "actual": 53.5,
+      "pass": true
+    },
+    {
+      "cell": "Support!B39",
+      "expected": 10.075,
+      "actual": 10.075,
+      "pass": true
+    },
+    {
+      "cell": "Support!B40",
+      "expected": 218.6,
+      "actual": 218.6,
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H18",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H19",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H20",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H21",
+      "expected": "S07 original",
+      "actual": "S07 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H22",
+      "expected": "S07 original",
+      "actual": "S07 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H23",
+      "expected": "S07 original",
+      "actual": "S07 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H24",
+      "expected": "S07 original",
+      "actual": "S07 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H25",
+      "expected": "S07 original",
+      "actual": "S07 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H26",
+      "expected": "S07 original",
+      "actual": "S07 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H27",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H28",
+      "expected": "S09 original",
+      "actual": "S09 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H29",
+      "expected": "S08 original",
+      "actual": "S08 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H30",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H31",
+      "expected": "S13 original",
+      "actual": "S13 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H32",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H33",
+      "expected": "S13 original",
+      "actual": "S13 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H34",
+      "expected": "S13 original",
+      "actual": "S13 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H35",
+      "expected": "S09 original",
+      "actual": "S09 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H36",
+      "expected": "S09 original",
+      "actual": "S09 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H37",
+      "expected": "S09 original",
+      "actual": "S09 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H38",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H39",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H40",
+      "expected": "S13 original",
+      "actual": "S13 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H41",
+      "expected": "S13 original",
+      "actual": "S13 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H42",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H43",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H44",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H45",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H46",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H47",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H48",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H49",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H50",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H51",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H52",
+      "expected": "S14 original",
+      "actual": "S14 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H53",
+      "expected": "S04 original",
+      "actual": "S04 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H54",
+      "expected": "S04 original",
+      "actual": "S04 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H55",
+      "expected": "S03 original",
+      "actual": "S03 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H56",
+      "expected": "S03 original",
+      "actual": "S03 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H57",
+      "expected": "S02 original",
+      "actual": "S02 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H58",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H59",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H60",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H61",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H62",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H63",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H64",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H65",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H66",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H67",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H68",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H69",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H70",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H71",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H72",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H73",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H74",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H75",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H76",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H77",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H78",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H79",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H80",
+      "expected": "S06 original",
+      "actual": "S06 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H81",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H82",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H83",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H84",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H85",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H86",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H87",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H93",
+      "expected": "S01 original",
+      "actual": "S01 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H94",
+      "expected": "S02 original",
+      "actual": "S02 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H95",
+      "expected": "S03 original",
+      "actual": "S03 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H96",
+      "expected": "S04 original",
+      "actual": "S04 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H97",
+      "expected": "S05 original",
+      "actual": "S05 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H98",
+      "expected": "S06 original",
+      "actual": "S06 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H99",
+      "expected": "S07 original",
+      "actual": "S07 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H100",
+      "expected": "S08 original",
+      "actual": "S08 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H101",
+      "expected": "S09 original",
+      "actual": "S09 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H102",
+      "expected": "S10 original",
+      "actual": "S10 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H103",
+      "expected": "S11 original",
+      "actual": "S11 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H104",
+      "expected": "S12 original",
+      "actual": "S12 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H105",
+      "expected": "S13 original",
+      "actual": "S13 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H106",
+      "expected": "S14 original",
+      "actual": "S14 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H107",
+      "expected": "S15 original",
+      "actual": "S15 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H108",
+      "expected": "S16 original",
+      "actual": "S16 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H109",
+      "expected": "S17 original",
+      "actual": "S17 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H110",
+      "expected": "S18 original",
+      "actual": "S18 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H111",
+      "expected": "S19 original",
+      "actual": "S19 original",
+      "pass": true
+    },
+    {
+      "cell": "Guide_Sources!H112",
+      "expected": "S20 original",
+      "actual": "S20 original",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B8",
+      "expected": 1000.0,
+      "actual": 1000.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E8",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B9",
+      "expected": 7.4,
+      "actual": 7.4,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E9",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B10",
+      "expected": 13590908.0,
+      "actual": 13590908.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E10",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B11",
+      "expected": 55.0,
+      "actual": 55.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E11",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B12",
+      "expected": 53.35,
+      "actual": 53.35,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E12",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B13",
+      "expected": 747.49994,
+      "actual": 747.49994,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E13",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B14",
+      "expected": 22.4249982,
+      "actual": 22.4249982,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E14",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B15",
+      "expected": 725.0749418,
+      "actual": 725.0749418,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E15",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B16",
+      "expected": 724.2,
+      "actual": 724.2,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E16",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B17",
+      "expected": 0.8749418,
+      "actual": 0.874941799999988,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E17",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B18",
+      "expected": 163477816.0,
+      "actual": 163477816.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E18",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B19",
+      "expected": 177068724.0,
+      "actual": 177068724.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E19",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B20",
+      "expected": 0.08313609964057753,
+      "actual": 0.0831360996405775,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E20",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B21",
+      "expected": 0.07675498920972627,
+      "actual": 0.0767549892097263,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E21",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B22",
+      "expected": 0.9232450107902738,
+      "actual": 0.923245010790274,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E22",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B23",
+      "expected": 0.03,
+      "actual": 0.03,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E23",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B24",
+      "expected": 0.0074,
+      "actual": 0.0074,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E24",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B25",
+      "expected": -0.8,
+      "actual": -0.799999999999955,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E25",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B26",
+      "expected": 0.0749418,
+      "actual": 0.0749418000000333,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E26",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B27",
+      "expected": 275.0,
+      "actual": 275.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E27",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B28",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E28",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B29",
+      "expected": 235.0,
+      "actual": 235.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E29",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B30",
+      "expected": 40.0,
+      "actual": 40.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E30",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B31",
+      "expected": 275.0,
+      "actual": 275.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E31",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B32",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E32",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B33",
+      "expected": 203.0,
+      "actual": 203.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E33",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B34",
+      "expected": 72.0,
+      "actual": 72.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E34",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B35",
+      "expected": 275.0,
+      "actual": 275.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E35",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B36",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E36",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B37",
+      "expected": 203.0,
+      "actual": 203.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E37",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B38",
+      "expected": 72.0,
+      "actual": 72.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E38",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B39",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Checks!E39",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B40",
+      "expected": 53.0,
+      "actual": 53.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E40",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B41",
+      "expected": 0.1855,
+      "actual": 0.1855,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E41",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B42",
+      "expected": 9.75,
+      "actual": 9.75,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E42",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B43",
+      "expected": 9.9355,
+      "actual": 9.9355,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E43",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B44",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Checks!E44",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B45",
+      "expected": 20.0,
+      "actual": 20.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E45",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B46",
+      "expected": 20.0,
+      "actual": 20.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E46",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B47",
+      "expected": 2028.0,
+      "actual": 2028.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E47",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B48",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Checks!E48",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B49",
+      "expected": 46660,
+      "actual": 46660.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E49",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B50",
+      "expected": 46753,
+      "actual": 46753.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E50",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B51",
+      "expected": 47118,
+      "actual": 47118.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E51",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B52",
+      "expected": 93,
+      "actual": 93.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E52",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B53",
+      "expected": 458,
+      "actual": 458.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E53",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B54",
+      "expected": 1166.011,
+      "actual": 1166.011,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E54",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B55",
+      "expected": 664.275,
+      "actual": 664.275,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E55",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B56",
+      "expected": 1830.286,
+      "actual": 1830.286,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E56",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B57",
+      "expected": 429.075,
+      "actual": 429.075,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E57",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B58",
+      "expected": 1023.564,
+      "actual": 1023.564,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E58",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B59",
+      "expected": 1452.639,
+      "actual": 1452.639,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E59",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B60",
+      "expected": 260.336,
+      "actual": 260.336,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E60",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B61",
+      "expected": 1077.575,
+      "actual": 1077.575,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E61",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B62",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E62",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B63",
+      "expected": -492.375,
+      "actual": -492.375,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E63",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B64",
+      "expected": 1830.286,
+      "actual": 1830.286,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E64",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B65",
+      "expected": -7.757,
+      "actual": -7.757,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E65",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B66",
+      "expected": -420.25,
+      "actual": -420.25,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E66",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B67",
+      "expected": 6.5,
+      "actual": 6.5,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E67",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B68",
+      "expected": -91.145,
+      "actual": -91.145,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E68",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B69",
+      "expected": 20.876,
+      "actual": 20.876,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E69",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B70",
+      "expected": 0.821,
+      "actual": 0.821,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E70",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B71",
+      "expected": -1.42,
+      "actual": -1.42,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E71",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B72",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E72",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B73",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E73",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B74",
+      "expected": 0.0,
+      "actual": 2.27373675443232e-13,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E74",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B75",
+      "expected": 51.016,
+      "actual": 51.016,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E75",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B76",
+      "expected": 67.962,
+      "actual": 67.962,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E76",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B77",
+      "expected": 8.109,
+      "actual": 8.109,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E77",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B78",
+      "expected": 110.869,
+      "actual": 110.869,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E78",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B79",
+      "expected": 110.9,
+      "actual": 110.9,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E79",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B80",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E80",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B81",
+      "expected": 862.793,
+      "actual": 862.793,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E81",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B82",
+      "expected": 150.0,
+      "actual": 150.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E82",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B83",
+      "expected": 30.34,
+      "actual": 30.34,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E83",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B84",
+      "expected": 1043.133,
+      "actual": 1043.133,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E84",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B85",
+      "expected": 936.253,
+      "actual": 936.253,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E85",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B86",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Checks!E86",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B87",
+      "expected": 75.7702512,
+      "actual": 75.7702512,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E87",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B88",
+      "expected": 18.9425628,
+      "actual": 18.9425628,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E88",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B89",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Checks!E89",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B90",
+      "expected": 110.0,
+      "actual": 110.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E90",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B91",
+      "expected": 0.3,
+      "actual": 0.3,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E91",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B92",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E92",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B93",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E93",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B94",
+      "expected": 140.0,
+      "actual": 140.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E94",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B95",
+      "expected": 400.0,
+      "actual": 400.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E95",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B96",
+      "expected": 150.0,
+      "actual": 150.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E96",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B97",
+      "expected": 19.0,
+      "actual": 19.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E97",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B98",
+      "expected": 23.457,
+      "actual": 23.457,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E98",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B99",
+      "expected": 32.6,
+      "actual": 32.6,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E99",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B100",
+      "expected": 2.506,
+      "actual": 2.506,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E100",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B101",
+      "expected": 7.9,
+      "actual": 7.9,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E101",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B102",
+      "expected": 53.5,
+      "actual": 53.5,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E102",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B103",
+      "expected": 10.075,
+      "actual": 10.075,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E103",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B104",
+      "expected": 218.6,
+      "actual": 218.6,
+      "pass": true
+    },
+    {
+      "cell": "Checks!E104",
+      "expected": "PASS",
+      "actual": "PASS",
+      "pass": true
+    },
+    {
+      "cell": "Checks!B109",
+      "expected": 0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!B110",
+      "expected": 70,
+      "actual": 70.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!B111",
+      "expected": 0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!B112",
+      "expected": 0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!B113",
+      "expected": 0.0,
+      "actual": 2.27373675443232e-13,
+      "pass": true
+    },
+    {
+      "cell": "Checks!B114",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    },
+    {
+      "cell": "Checks!B115",
+      "expected": 0.0,
+      "actual": 0.0,
+      "pass": true
+    }
+  ],
+  "tabs": {
+    "Financing": {
+      "formula_count": 19,
+      "validation_count": 0,
+      "merge_count": 7
+    },
+    "Credit": {
+      "formula_count": 27,
+      "validation_count": 7,
+      "merge_count": 11
+    },
+    "Liquidity": {
+      "formula_count": 32,
+      "validation_count": 0,
+      "merge_count": 8
+    },
+    "Support": {
+      "formula_count": 19,
+      "validation_count": 4,
+      "merge_count": 9
+    },
+    "Guide_Sources": {
+      "formula_count": 90,
+      "validation_count": 0,
+      "merge_count": 33
+    },
+    "Checks": {
+      "formula_count": 201,
+      "validation_count": 0,
+      "merge_count": 20
+    }
+  },
+  "errors": [],
+  "pass": true
+}

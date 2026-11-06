@@ -553,6 +553,14 @@
       "locator": "Note 4 Short-term investments unrealized losses September 30",
       "as_of": "2026-09-30",
       "evidence_class": "reported"
+    },
+    "commissioning_year": {
+      "value": "2028",
+      "unit": "calendar year; management expectation",
+      "source": "S19",
+      "locator": "MD&A Recent Developments, 10X Facility: expects to begin commissioning in 2028; not COD",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
     }
   },
   "assumptions": {
@@ -643,6 +651,74 @@
       "unit": "USD million per hypothetical Test Period",
       "class": "hypothetical",
       "rationale": "Isolated clause (a)(xiv) arithmetic including later duplicate-payment reversal; actual eligibility and attribution unverified; no compliance result"
+    }
+  },
+  "model_controls": {
+    "draw": {
+      "value": 150,
+      "unit": "USD million",
+      "class": "hypothetical",
+      "rationale": "Static Q3 L-C balance; conditional draw, not forecast"
+    },
+    "sofr": {
+      "value": 0.04,
+      "unit": "fraction/year",
+      "class": "hypothetical",
+      "rationale": "Illustrative SOFR, not observed or forecast"
+    },
+    "days": {
+      "value": 360,
+      "unit": "actual elapsed days / 360",
+      "class": "hypothetical",
+      "rationale": "One 360-day rate-year illustration"
+    },
+    "minimum": {
+      "value": 40,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Eligible contractual minimum assumed solely to isolate clause"
+    },
+    "income": {
+      "value": 20,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Attributable Consolidated Net Income, not Adjusted EBITDA"
+    },
+    "duplicate": {
+      "value": 0,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Later cash duplicating prior addback only"
+    },
+    "trigger": {
+      "value": "2027-08-15",
+      "unit": "date",
+      "class": "hypothetical",
+      "rationale": "Illustrative Q2 statement delivery; not a calculated contractual deadline or forecast"
+    },
+    "state": {
+      "value": "COD / before milestone",
+      "unit": "contractual state",
+      "class": "hypothetical",
+      "rationale": "Three-state illustration, not actual operating status"
+    },
+    "year": {
+      "value": 2029,
+      "unit": "calendar year",
+      "class": "hypothetical",
+      "rationale": "Full-year threshold definition, excludes stub and true-up"
+    },
+    "capacity": {
+      "value": 0.5,
+      "unit": "capacity estimate / target",
+      "class": "hypothetical",
+      "rationale": "Pre-milestone ratio only; no contractual 100% cap inferred"
+    },
+    "benchmark": {
+      "value": 140,
+      "unit": "USD/NdPr kg equivalent",
+      "class": "hypothetical",
+      "rationale": "Normalized eligible designated kg, not sales revenue"
     }
   }
 }

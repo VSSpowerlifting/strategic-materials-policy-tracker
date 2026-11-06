@@ -4,6 +4,7 @@ import argparse
 import csv
 import io
 import json
+from datetime import date, timedelta
 from decimal import Decimal, getcontext
 from pathlib import Path
 
@@ -64,6 +65,19 @@ def rcf_cost(commitment, lc, draw, fee, spread, sofr, days):
     assert min(fee, spread, sofr, days) >= 0
     unused = commitment - lc - draw
     return unused, unused * fee * days / 360, draw * (sofr + spread) * days / 360
+
+
+def first_test_quarter(trigger):
+    """First calendar fiscal quarter END strictly after delivery; S09 7.11(b)/(c)."""
+    assert isinstance(trigger, date)
+    quarter = (trigger.month - 1) // 3 + 1
+    year, month = trigger.year, quarter * 3
+    following = date(year + (month == 12), month % 12 + 1, 1)
+    end = following - timedelta(days=1)
+    if trigger == end:
+        following = date(following.year + (following.month == 10), (following.month + 2) % 12 + 1, 1)
+        end = following - timedelta(days=1)
+    return end
 
 
 def build(data, sources):
