@@ -35,7 +35,7 @@ test("site headings, financial articles and common UI labels use Archivo", () =>
 
 test("fixed-width typography remains for technical identifiers and literal URLs", () => {
   assert.match(read("app/globals.css"), /--font-mono: var\(--font-jetbrains\)/);
-  assert.match(read("components/capital/primitives.tsx"), /font-mono text-xs text-faint"\}\{sourceId\}/);
+  assert.match(read("components/capital/primitives.tsx"), /font-mono text-xs text-faint">\{sourceId\}/);
   assert.match(read("components/source-ref.tsx"), /break-all font-mono text-xs/);
   assert.match(read("components/material-tile.tsx"), /font-mono font-medium leading-none/);
   assert.match(read("app/coverage/page.tsx"), /className="font-mono text-xs text-accent hover:text-accent-strong"/);
