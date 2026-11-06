@@ -191,7 +191,7 @@ export default async function EventPage({
             <Section
               index={nextSectionIndex()}
               title={`Projects recognized (${designations.length})`}
-              description="Project designations this decision makes: standing under a scheme, not money, and never counted as capital."
+              description="Project designations confer standing under a scheme. Any financing appears in separate capital records."
             >
               <Card className="overflow-hidden">
                 {designations.map((d) => (
@@ -220,10 +220,9 @@ export default async function EventPage({
               <Card className="p-5">
                 <p className="text-sm leading-6 text-muted">
                   Framing:{" "}
-                  <span className="font-mono text-faint">Not yet coded.</span> No
-                  framing category is assigned because this record does not yet carry
-                  a verified quoted passage from the primary source. Per the
-                  methodology, a framing label is never inferred from context alone.
+                  <span className="font-mono text-faint">Not yet coded.</span> A
+                  verified quotation from the primary source is still needed
+                  before assigning a framing category.
                 </p>
               </Card>
             )}
@@ -256,10 +255,9 @@ export default async function EventPage({
               // share and sends the reader to the summary for which one it is.
               // Either way no material is inferred onto the record.
               <Card className="px-4 py-3 text-sm leading-6 text-muted">
-                No tracked material is coded for this record — either the instrument
-                names no material of its own, or the minerals it names fall outside
-                this database&apos;s material set. The summary above says which. Nothing
-                is inferred here from the measures issued under it.
+                The material field is empty because the instrument either specifies
+                no materials of its own or names minerals outside this dataset.
+                The summary above identifies the applicable scope.
               </Card>
             )}
           </Section>

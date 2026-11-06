@@ -17,7 +17,7 @@ export function Fi002Screen() {
     <div className="fi-screen">
       <fieldset>
         <legend className="fi-eyebrow">
-          Compare the approved assumption tests
+          Compare capital-recovery scenarios
         </legend>
         <div className="fi-options">
           {fi002Screens.map((s, i) => (
@@ -39,8 +39,8 @@ export function Fi002Screen() {
         </div>
         <noscript>
           <p className="fi-note">
-            JavaScript is off. The base screen is shown; expand the table below
-            to compare all four tests.
+            With JavaScript disabled, the base scenario is displayed. The table
+            below lists all four scenarios.
           </p>
         </noscript>
       </fieldset>
@@ -78,7 +78,7 @@ export function Fi002Screen() {
         </dl>
       </div>
       <details className="fi-details">
-        <summary>All four tests and common assumptions</summary>
+        <summary>All four scenarios and assumptions</summary>
         <div
           className="fi-table-scroll"
           role="region"
@@ -87,12 +87,12 @@ export function Fi002Screen() {
         >
           <table>
             <caption>
-              Approved capital-recovery screens. Required equivalent benefit in
+              Capital-recovery scenarios. Required production-equivalent benefit in
               thousand tonnes per year (ktpa), rounded.
             </caption>
             <thead>
               <tr>
-                <th scope="col">Assumption test</th>
+                <th scope="col">Scenario</th>
                 <th scope="col">Benefit period</th>
                 <th scope="col">Required ktpa</th>
               </tr>
@@ -112,7 +112,7 @@ export function Fi002Screen() {
           End-2026 valuation origin; 10% nominal discount rate; five equal
           year-end capital draws in 2027–31; $4,000/t all-in net burden; 35%
           assumed cash-tax wedge. Price and contribution stay flat in nominal
-          dollars. No ramp-up or terminal value. The workbook includes six
+          dollars. Ramp-up and terminal value are excluded. The workbook includes six
           selectable scenarios and additional sensitivities; these four tests
           explain duration, timing and combined stress.
         </p>
@@ -123,8 +123,9 @@ export function Fi002Screen() {
           published sensitivity calculations (CSV)
         </a>
         . Equivalent benefit includes output preserved or added against no
-        build. These are assumption-dependent capital-recovery screens, not
-        independently established project viability thresholds.
+        build. These scenarios estimate the annual benefit needed for capital
+        recovery under the stated assumptions. A full project viability
+        assessment requires a mine-wide with-build/no-build cash-flow model.
       </p>
     </div>
   );

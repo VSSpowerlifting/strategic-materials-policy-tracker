@@ -4,6 +4,12 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+## Website editorial and interface standard
+
+Use concise, specific, natural editorial copy. A visible sentence must provide a fact, clarify a material distinction, or help the reader navigate. Remove duplicate introductions, ornamental microcopy, question-shaped labels, generic slogans, and repeated platform self-explanations. Prefer publication titles, authors, dates, record fields and source links to promotional prose. Keep navigation labels short and place technical explanations in methodology, contextual disclosures, or accessible detail views.
+
+Do not remove source attribution, legal/financial status distinctions, uncertainty, methodological qualifications or accessibility information to achieve shorter copy. Check the resulting page at mobile and desktop widths; compare before/after reading time, navigation clarity and content availability. This standard applies to all new public pages and future revisions.
+
 ## SMPT editorial positioning
 
 Treat SMPT as a comparative economic-security and industrial-policy research platform, not as a China- or Mandarin-centered project. Apply these principles to all public-facing copy, metadata and project documentation:

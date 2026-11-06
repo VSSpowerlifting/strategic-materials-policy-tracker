@@ -23,21 +23,13 @@ export default function ProjectsPage() {
   );
   const materialNames = Object.fromEntries(getAllMaterials().map(m=>[m.id,m.nameEn]));
   return <Container className="py-12">
-    <PageHeading index="04" eyebrow="Project investigations" title="Projects"
-      lead={<>Explore the physical undertakings named in the policy and financing record.
-        Filter by material, supply-chain stage, country or type of documented relationship.
-        A project record describes the undertaking; associated money and independently
-        verified industrial progress are different questions.</>} />
-    <div className="mt-7 flex flex-wrap gap-3">
-      {projects.filter(p => ["prj-au-alcoa-sojitz-gallium", "prj-us-stibnite"].includes(p.id)).map(p => <Link key={p.id} href={`/projects/${p.id}`} className="research-button-secondary">Investigate {p.name}</Link>)}
-    </div>
+    <PageHeading title="Projects" lead="Industrial projects, searchable by material, country, production stage and financial relationship." />
     <ResearchReadingKey topic="projects" />
-    <Section index="01" className="mt-10" title="Project research directory"
-      description={`${rows.length} distinct registered undertakings, not an exhaustive census of industrial projects.`}>
+    <Section className="mt-10" title="Project directory">
       <ProjectsExplorer rows={rows} materialNames={materialNames}/>
       <p className="mt-6 text-sm text-muted">
-        Compare: <Link href="/projects/compare" className="text-accent hover:text-accent-strong">Two-project evidence comparison</Link>
-        {" · "}Download: <a href="/api/export/projects.csv" className="text-accent hover:text-accent-strong">Project CSV</a>
+        <Link href="/projects/compare" className="text-accent hover:text-accent-strong">Compare projects</Link>
+        {" · "}Downloads: <a href="/api/export/projects.csv" className="text-accent hover:text-accent-strong">Project CSV</a>
         {" · "}<Link href="/api/v1/projects" prefetch={false} className="text-accent hover:text-accent-strong">Project JSON API</Link>
         {" · "}<Link href="/response" className="text-accent hover:text-accent-strong">Government financing and reported physical status</Link>
       </p>

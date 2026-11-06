@@ -13,10 +13,8 @@ export const metadata:Metadata={
 export default function SourcesPage(){
  const rows=buildSourceDirectory(getAllSources(),buildSourceUseIndex(publishedSourceRecords()));
  return <Container className="py-12">
-   <PageHeading index="01" eyebrow="Provenance" title="Source register"
-     lead="Explore the original documents behind SMPT's curated policy, financial and industrial-project records.
-     Search the source register and follow exact cited records to their supporting documents. Registration does
-     not certify independent verification of each substantive claim."/>
+   <PageHeading title="Source register"
+     lead="Original documents cited in SMPT research and database records."/>
    <div className="mt-10"><SourceRegisterExplorer rows={rows}/></div>
    <p className="mt-12 max-w-prose text-sm leading-7 text-muted">
      Learn more about the <Link href="/methodology#sources" className="text-accent hover:underline">
