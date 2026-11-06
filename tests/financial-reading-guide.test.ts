@@ -130,7 +130,9 @@ test("same authoritative definitions power methodology and every relevant public
  assert.ok(!method.includes("const FINANCIAL_STATUS_DEFS:"));
  assert.ok(!method.includes("const VALUE_ROLE_DEFS:"));
  assert.match(page,/<RecordReadingGuide record=\{c\} \/>/);
- assert.match(ui,/What the evidence says — and does not say/);
+ assert.match(ui,/Evidence and status/);
+ assert.ok(ui.includes("{reading.boundary}"));
+ assert.ok(ui.includes("text:reading.payment"));
  assert.match(ui,/heading:reading\.role\.label/); // explanation comes from the same typed record
  assert.match(ui,/FINANCIAL_STATUS_DEFS\.contracted/);
  for(const [path,topic] of [

@@ -123,7 +123,7 @@ test("F1 outputs: the lattice amount view carries basisLabel for this row only",
 test("F1: /capital carries the amount-basis caveat on both aggregate surfaces and uses binding wording that covers partial disbursement", () => {
   const source = readFileSync(resolve(process.cwd(), "app/capital/page.tsx"), "utf8");
   assert.equal((source.match(/<AmountBasisNotes\b/g) ?? []).length, 2);
-  assert.match(source, /contracted, partially disbursed and disbursed rows are binding, while payment is tracked separately/);
+  assert.match(source, /contracted, partially disbursed or disbursed; payment tracked separately/);
   assert.doesNotMatch(source, /Binding means a contract has been executed or money paid/);
 });
 

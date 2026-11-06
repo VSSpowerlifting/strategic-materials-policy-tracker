@@ -127,7 +127,7 @@ export default function CapitalPage() {
                           ) : null}
                           {(inst.summed
                             ? ([
-                                ["Binding", "contracted, partly or fully paid", inst.binding],
+                                ["Binding", "contracted, partially disbursed or disbursed; payment tracked separately", inst.binding],
                                 ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", inst.notYetBinding],
                               ] as const)
                             : []

@@ -144,8 +144,8 @@ test("homepage coverage reconciles to public loaders and the opening leads strai
     counts.projectMilestones,
   ])
     assert.ok(view.includes(`>${count}</dd>`));
-  assert.match(view, /Curated revision/);
-  assert.match(view, /not all government activity/);
+  assert.match(view, /Revised/);
+  assert.ok(view.includes('href="/coverage"'));
   assert.match(view, /href="\/events\?material=gallium"/);
   assert.match(view, /href="\/projects\/prj-au-alcoa-sojitz-gallium"/);
   assert.doesNotMatch(view, /<dialog/);
