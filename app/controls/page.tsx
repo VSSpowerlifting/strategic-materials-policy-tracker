@@ -64,8 +64,8 @@ export default function ControlsPage() {
       <div className="mt-14 space-y-14">
         <Section
           index="01"
-          title="Clocks running"
-          description="Clauses whose current status has a stated end date. Days are counted from the data's as-of date, not from today."
+          title="Controls with stated end dates"
+          description="Clauses whose current status has a stated end date. Remaining days use the corpus revision date as their reference."
         >
           <div className="grid gap-4 md:grid-cols-2">
             {clockGroups.map((group) => {
@@ -96,7 +96,7 @@ export default function ControlsPage() {
                     ))}
                   </ul>
                   <p className="mt-3 text-xs leading-5 text-faint">
-                    What follows the end date is not recorded until an official source states it.
+                    Post-expiry standing remains pending official confirmation.
                   </p>
                 </Card>
               );
