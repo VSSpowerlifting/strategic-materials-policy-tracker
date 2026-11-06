@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { getAllMaterials, getDatasetSummary } from "@/lib/data";
 import { LatticeOverview } from "@/components/lattice/lattice";
@@ -7,6 +8,7 @@ import { ElementStrip, SupplyChainStrip } from "@/components/home/supply-chain-s
 import { chainStageCounts } from "@/lib/homepage-chain";
 import { buildLatticeModel } from "@/lib/lattice";
 import { formatDateLong } from "@/lib/format";
+import { fi002 } from "@/lib/fi002";
 import { getFinancingCase, getLegalControlCase, getTungstenCase } from "@/lib/homepage-cases";
 import { journeys, site } from "@/lib/site";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
@@ -76,7 +78,7 @@ export default function Home() {
       />
 
       <Container width="wide" className="py-10 sm:py-16">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-10 xl:gap-12">
           <div>
             <p className="font-display text-sm text-muted">Strategic Materials Policy Tracker</p>
             <h1 className="mt-4 max-w-4xl font-serif text-[2.2rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
@@ -96,23 +98,42 @@ export default function Home() {
           </div>
           <aside
             aria-labelledby="latest-research-heading"
-            className="self-center border-t border-border-strong pt-7 lg:border-l-2 lg:border-t-0 lg:border-accent/60 lg:py-3 lg:pl-8"
+            className="min-w-0 self-center border-t border-border-strong pt-7 lg:border-l-2 lg:border-t-0 lg:border-accent/60 lg:py-3 lg:pl-6"
           >
-            <p className="font-display text-sm font-semibold text-accent">Latest research</p>
-            <p className="mt-3 font-display text-xs text-muted">
-              {latestResearch.category} · <time dateTime={latestResearch.date}>{latestResearch.dateLabel}</time>
-            </p>
-            <h2 id="latest-research-heading" className="mt-3 max-w-xl font-serif text-[1.7rem] leading-[1.18] tracking-tight sm:text-3xl">
-              <Link href={latestResearch.href} className="hover:text-accent">
-                {latestResearch.title}
+            <div className="grid min-w-0 grid-cols-[5.5rem_minmax(0,1fr)] items-start gap-4 sm:grid-cols-[7rem_minmax(0,1fr)] lg:grid-cols-[5.75rem_minmax(0,1fr)] lg:gap-5 xl:grid-cols-[7rem_minmax(0,1fr)]">
+              <Link
+                href={latestResearch.href}
+                aria-label={`Read ${latestResearch.title}`}
+                className="block min-w-0 overflow-hidden border border-border-strong transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                <Image
+                  src={`${fi002.assets}/report-cover.png`}
+                  alt="Cover of the Escondida financial research report"
+                  width={612}
+                  height={792}
+                  sizes="(min-width: 1280px) 112px, (min-width: 1024px) 92px, (min-width: 640px) 112px, 88px"
+                  className="h-auto w-full"
+                  priority
+                />
               </Link>
-            </h2>
-            <p className="mt-4 max-w-md font-display text-sm leading-6 text-muted">
-              {latestResearch.description}
-            </p>
-            <Link href={latestResearch.href} className="mt-5 inline-block font-display text-sm font-medium text-accent underline underline-offset-4 hover:text-foreground">
-              Read report
-            </Link>
+              <div className="min-w-0">
+                <p className="font-display text-sm font-semibold text-accent">Latest research</p>
+                <p className="mt-2 font-display text-xs leading-5 text-muted">
+                  {latestResearch.category} · <time dateTime={latestResearch.date}>{latestResearch.dateLabel}</time>
+                </p>
+                <h2 id="latest-research-heading" className="mt-3 font-serif text-[1.25rem] leading-[1.2] tracking-tight sm:text-[1.5rem] lg:text-[1.3rem] xl:text-[1.45rem] 2xl:text-[1.65rem]">
+                  <Link href={latestResearch.href} className="hover:text-accent">
+                    {latestResearch.title}
+                  </Link>
+                </h2>
+                <p className="mt-3 font-display text-sm leading-6 text-muted">
+                  {latestResearch.description}
+                </p>
+                <Link href={latestResearch.href} className="mt-4 inline-block font-display text-sm font-medium text-accent underline underline-offset-4 hover:text-foreground">
+                  Read report
+                </Link>
+              </div>
+            </div>
           </aside>
         </div>
 
