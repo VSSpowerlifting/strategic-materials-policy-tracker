@@ -59,9 +59,8 @@ export default function CoveragePage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Evidence & coverage"
-        title="What the dataset can support"
-        lead="This page exposes the coded footprint of the database: how many events are actually anchored to a source and to a framing quote, how the source register breaks down by confidence, and where the research is thin. Every count below describes this coded sample — it is not a claim about how much policy activity any government has actually undertaken."
+        title="Coverage"
+        lead="Corpus size, primary-source coverage and research gaps. Counts describe SMPT’s records, not all government activity."
       />
 
       <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -83,7 +82,7 @@ export default function CoveragePage() {
         className="mt-14"
         index="02"
         title="By actor"
-        description="Events, framing anchors and linked sources coded per actor — a measure of how deeply this project has researched each government, not of how much each government has done."
+        description="Events, framing anchors and sources recorded for each government."
       >
         <div className="overflow-x-auto">
           <table className="w-full min-w-[38rem] text-sm">
