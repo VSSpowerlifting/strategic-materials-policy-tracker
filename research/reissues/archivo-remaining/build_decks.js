@@ -25,6 +25,8 @@ const U={r001:'https://strategic-materials-policy-tracker.vercel.app/research/tu
   usgs:'https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf',
   exim:'https://www.exim.gov/solutions/project-and-structured-finance/transactions',
   sec:'https://www.sec.gov/Archives/edgar/data/1526243/000110465926097134/ppta-20260630x10q.htm',
+  usac:'https://www.sec.gov/Archives/edgar/data/101538/000110465926094035/uamy-20260630x10q.htm',
+  dla:'https://www.dla.mil/Strategic-Materials/',
   inl:'https://inl.gov/news-release/inl-hosts-ribbon-cutting-for-pilot-plant-supporting-domestic-antimony-production/',
   mofSb:'https://www.mofcom.gov.cn/zfxxgk/fdzdgknr/ztfl/dwmygl/art/2024/art_c37e7a6e7438428c951e2b1e488dc47e.html',
   mof46:'https://www.mofcom.gov.cn/zfxxgk/gkml/art/2024/art_99f5d51bbe6a412ca309d5818c4dee52.html',
@@ -137,7 +139,7 @@ note(s,'Each test is a separate modeled shock, not an expected forecast or cumul
 const s=pg(p,8,8,series);head(s,'Execution gates','Procurement, Finance and Legal each control a material assumption','Decision rights before firming purchases, inventory funding or domestic offtake');
 const rows=[['OWNER','VERIFICATION REQUIRED','TRIGGER'],['Procurement + Engineering','Grade, chain of custody, independent refining, delivery tests','Qualify alternative 45% lane'],['Finance','Actual quoted price, carry, storage, working-capital ceiling','Approve five-month reserve'],['Strategy + Legal','Financing close, processing stage, product acceptance, contract remedies','Stage conditional domestic offtake']];table(s,rows,0.75,2.63,11.85,[0.64,0.88,0.88,0.88],[2.65,5.18,4.02],[],13.4);
 linkText(s,'USGS MCS 2026',U.usgs,0.83,6.05,1.98,0.16,C.goldInk,9.2);linkText(s,'EXIM register',U.exim,2.82,6.05,1.64,0.16,C.goldInk,9.2);linkText(s,'Perpetua 10-Q',U.sec,4.48,6.05,1.77,0.16,C.goldInk,9.2);linkText(s,'INL pilot',U.inl,6.40,6.05,1.31,0.16,C.goldInk,9.2);linkText(s,'MOFCOM No. 33',U.mofSb,7.91,6.05,2.05,0.16,C.goldInk,9.2);
-linkText(s,'MOFCOM No. 46',U.mof46,0.83,6.28,2.06,0.16,C.goldInk,9.2);linkText(s,'MOFCOM No. 72',U.mof72,3.01,6.28,2.06,0.16,C.goldInk,9.2);linkText(s,'Model evidence register',U.evidence,5.23,6.28,3.25,0.16,C.goldInk,9.2);
+linkText(s,'MOFCOM No. 46',U.mof46,0.83,6.28,1.92,0.16,C.goldInk,9.2);linkText(s,'MOFCOM No. 72',U.mof72,2.88,6.28,1.92,0.16,C.goldInk,9.2);linkText(s,'Model register',U.evidence,4.95,6.28,1.84,0.16,C.goldInk,9.2);linkText(s,'USAC 10-Q',U.usac,7.02,6.28,1.72,0.16,C.goldInk,9.2);linkText(s,'DLA stockpile',U.dla,8.90,6.28,2.1,0.16,C.goldInk,9.2);
 shape(s,0.80,6.55,11.75,0.40,C.dark);txt(s,'ILLUSTRATIVE BUYER CASE  ·  SOURCE CUTOFF 4 NOV 2026  ·  INDEPENDENT SMPT ANALYSIS',1.0,6.59,11.28,0.29,9.6,C.muted,false);linkText(s,'Read case / model',U.a001,0.64,6.94,3.9,0.13,C.goldInk,8.8);
 }
 await p.writeFile({fileName:path.join(OUT,'SMPT_A001_Antimony_Archivo_Candidate.pptx')});}
