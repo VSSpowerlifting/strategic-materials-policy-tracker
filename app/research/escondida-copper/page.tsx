@@ -63,27 +63,23 @@ export default function EscondidaCopper() {
       <section className="fi-hero">
         <Container width="wide" className="py-10 sm:py-16">
           <Link href="/research" className="fi-back">
-            Research / Financial Intelligence 002
+            ← Research
           </Link>
           <div className="fi-hero-grid">
             <div>
               <p className="fi-eyebrow">
-                SMPT · Independent financial research
+                Financial Intelligence 002
               </p>
               <h1>
                 Goldman Sachs’ Copper Outlook and BHP’s{" "}
                 <span>$6 Billion Escondida Decision</span>
               </h1>
               <p className="fi-deck">
-                Near-term earnings exposure, replacement economics and the case
-                for conditional investment readiness
+                Copper-price exposure, replacement economics and BHP’s capital-allocation decision
               </p>
               <p className="fi-byline">
                 By <Link href="/about">Benjamin Yang</Link>
-                <br />
-                Research cutoff{" "}
-                <time dateTime={fi002.cutoff}>5 November 2026</time> · Financial
-                Intelligence 002
+                {" · "}Research cutoff <time dateTime={fi002.cutoff}>5 November 2026</time>
               </p>
               <div className="fi-actions">
                 <a
@@ -99,9 +95,7 @@ export default function EscondidaCopper() {
                   Read online <span>→</span>
                 </a>
               </div>
-              <p className="fi-hero-note">
-                14-page report · original analysis · editable financial model
-              </p>
+              
             </div>
             <a
               href={`${fi002.assets}/report.pdf`}
@@ -134,7 +128,7 @@ export default function EscondidaCopper() {
           <div className="fi-reading-grid">
             <article>
               <section id="question" className="fi-section">
-                <p className="fi-eyebrow">01 / Research question</p>
+                
                 <h2>
                   How much should a bullish copper forecast change a long-lived
                   investment decision?
@@ -175,7 +169,7 @@ export default function EscondidaCopper() {
                 </div>
               </section>
               <section id="exposure" className="fi-section">
-                <p className="fi-eyebrow">02 / Copper-price exposure</p>
+                
                 <h2>
                   The forecast gap is material. Translating it into financing
                   requires more evidence.
@@ -266,7 +260,7 @@ export default function EscondidaCopper() {
                 </p>
               </section>
               <section id="replacement" className="fi-section">
-                <p className="fi-eyebrow">03 / Replacement economics</p>
+                
                 <h2>
                   Preserved production matters more than the plant’s headline
                   output.
@@ -320,7 +314,7 @@ export default function EscondidaCopper() {
                 </p>
               </section>
               <section id="decision" className="fi-section">
-                <p className="fi-eyebrow">04 / Capital allocation</p>
+                
                 <h2>
                   Maintain funded readiness. Make construction timing earn its
                   place.
@@ -385,12 +379,9 @@ export default function EscondidaCopper() {
               </section>
             </article>
             <aside className="fi-aside">
-              <p className="fi-eyebrow">The complete research</p>
-              <h2>Follow the financial argument.</h2>
-              <p>
-                The flagship report connects market expectations, accounting
-                scope, project economics and corporate capital allocation.
-              </p>
+              
+              <h2>Report and model</h2>
+              
               <a href={`${fi002.assets}/report.pdf`}>
                 Open the 14-page report ↗
               </a>
@@ -398,24 +389,17 @@ export default function EscondidaCopper() {
                 Download the Excel model ↓
               </a>
               <div className="fi-aside-note">
-                <p className="fi-eyebrow">Independent SMPT analysis</p>
+                <p className="fi-eyebrow">Research independence</p>
                 <p>
-                  Goldman Sachs and BHP are research subjects. Neither
-                  commissioned, sponsored, participated in or endorsed this
-                  work.
+                  Goldman Sachs and BHP neither commissioned nor endorsed this work.
                 </p>
               </div>
             </aside>
           </div>
           <section id="downloads" className="fi-section fi-download-section">
-            <p className="fi-eyebrow">05 / Research collection</p>
-            <h2>Read, test and inspect the analysis.</h2>
-            <p>
-              The report is the flagship. Companion materials provide a shorter
-              briefing, an editable model and traceable evidence. Downloads are
-              standalone public copies; the master university workbook is not
-              shared.
-            </p>
+            
+            <h2>Downloads</h2>
+            
             <div className="fi-downloads">
               {fi002Downloads.map((d) => (
                 <a
@@ -445,14 +429,12 @@ export default function EscondidaCopper() {
               <a href={`${fi002.assets}/publication-manifest.json`}>
                 File checksums
               </a>
-              . The ZIP includes the Markdown figure assets and four calculation
-              CSVs. Excel formulas are retained; use a copy for your own
-              assumptions.
+              .
             </p>
           </section>
           <section id="research-record" className="fi-section fi-record">
             <div>
-              <p className="fi-eyebrow">06 / Research record</p>
+              
               <h2>Source basis and citation</h2>
               <p>
                 The analytical edition is frozen at{" "}
@@ -494,7 +476,7 @@ export default function EscondidaCopper() {
             </div>
           </section>
           <nav className="fi-related" aria-label="Related research">
-            <p className="fi-eyebrow">Continue reading</p>
+            
             <Link href="/research/hemerdon-financing">
               Financial Intelligence 001
               <br />
