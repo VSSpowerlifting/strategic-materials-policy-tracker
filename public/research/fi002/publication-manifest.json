@@ -20,12 +20,12 @@
       "sha256": "cd692a2a4aafb8bb774ab9b8db9b68f5df025c79b0a782ffeb9317525592922e"
     },
     "executive-slides.pdf": {
-      "bytes": 372757,
-      "sha256": "ebbe3739b4218993a8c1e879f827e430a334b302a271e2b4a2bc4632ab28e28e"
+      "sha256": "c291ac3e12f320bc2156a549ceeeafa0f80bf376e9db6abb36792b57f75df6b3",
+      "bytes": 118796
     },
     "executive-slides.pptx": {
-      "bytes": 78423,
-      "sha256": "b67e7c0eca736b4b5958615e53609c5de9ed128c8d4de0372cbe9d4b57e143ea"
+      "sha256": "9f4568a81ea57ad04992ef175a5bdbd41200c2cf4fdf7f4da0638b9eb7732ec5",
+      "bytes": 78332
     },
     "figures/exhibit-02.svg": {
       "bytes": 5195,
