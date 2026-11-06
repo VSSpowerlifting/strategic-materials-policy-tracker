@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { getAllMaterials, getDatasetSummary } from "@/lib/data";
 import { LatticeOverview } from "@/components/lattice/lattice";
@@ -8,7 +7,6 @@ import { ElementStrip, SupplyChainStrip } from "@/components/home/supply-chain-s
 import { chainStageCounts } from "@/lib/homepage-chain";
 import { buildLatticeModel } from "@/lib/lattice";
 import { formatDateLong } from "@/lib/format";
-import { fi002 } from "@/lib/fi002";
 import { getFinancingCase, getLegalControlCase, getTungstenCase } from "@/lib/homepage-cases";
 import { journeys, site } from "@/lib/site";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
@@ -27,16 +25,13 @@ export const metadata: Metadata = {
   },
 };
 
-const latestResearch = {
-  category: "Financial Intelligence 002",
-  date: "2026-11-05",
-  dateLabel: "5 November 2026",
-  title: "Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
-  description: "Copper-price exposure, replacement economics and BHP’s capital-allocation decision.",
-  href: "/research/escondida-copper",
-} as const;
-
-const moreResearch = [
+const featured = [
+  {
+    category: "Financial Intelligence 002",
+    title: "Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
+    description: "Copper-price exposure, replacement economics and BHP’s investment decision.",
+    href: "/research/escondida-copper",
+  },
   {
     category: "Financial Intelligence 001",
     title: "Inside Tungsten West’s £71 Million Restart Financing",
@@ -77,18 +72,18 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLdScript(datasetJsonLd()) }}
       />
 
-      <Container width="wide" className="pb-10 pt-10 sm:pb-12 sm:pt-14 lg:pt-16">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 xl:gap-16">
+      <Container width="wide" className="py-10 sm:py-16">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16">
           <div>
             <p className="font-display text-sm text-muted">Strategic Materials Policy Tracker</p>
-            <h1 className="mt-4 max-w-2xl font-serif text-[2.1rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3rem] xl:text-[3.25rem]">
+            <h1 className="mt-4 max-w-4xl font-serif text-[2.2rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
               Research on critical minerals policy, financing and industrial development.
             </h1>
-            <p className="mt-5 max-w-xl font-serif text-lg leading-7 text-muted">
+            <p className="mt-6 max-w-2xl font-serif text-lg leading-8 text-muted">
               Follow government measures, capital commitments and industrial projects
               through the original records.
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link href="/research" className="research-button">Read research</Link>
               <Link href="/events" className="research-button-secondary">Explore records</Link>
             </div>
@@ -96,65 +91,28 @@ export default function Home() {
               Research by <Link href="/about" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">Benjamin Yang</Link>
             </p>
           </div>
-          <aside
-            aria-labelledby="latest-research-heading"
-            className="min-w-0 border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:py-1 lg:pl-8"
-          >
-            <div className="grid min-w-0 grid-cols-[6rem_minmax(0,1fr)] items-start gap-5 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-7 lg:grid-cols-[8rem_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[9rem_minmax(0,1fr)]">
-              <Link
-                href={latestResearch.href}
-                aria-label={`Read ${latestResearch.title}`}
-                className="block min-w-0 overflow-hidden border border-border-strong transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                <Image
-                  src={`${fi002.assets}/report-cover.png`}
-                  alt="Cover of the Escondida financial research report"
-                  width={612}
-                  height={792}
-                  sizes="(min-width: 1280px) 144px, (min-width: 1024px) 128px, (min-width: 640px) 144px, 96px"
-                  className="h-auto w-full"
-                  priority
-                />
-              </Link>
-              <div className="min-w-0">
-                <p className="font-display text-sm font-semibold text-accent">Latest research</p>
-                <p className="mt-2 font-display text-xs leading-5 text-muted">
-                  {latestResearch.category} · <time dateTime={latestResearch.date}>{latestResearch.dateLabel}</time>
-                </p>
-                <h2 id="latest-research-heading" className="mt-3 font-serif text-xl leading-[1.2] tracking-tight sm:text-2xl lg:text-[1.35rem] xl:text-2xl">
-                  <Link href={latestResearch.href} className="hover:text-accent">
-                    {latestResearch.title}
-                  </Link>
-                </h2>
-                <p className="mt-3 font-display text-sm leading-6 text-muted">
-                  {latestResearch.description}
-                </p>
-                <Link href={latestResearch.href} className="mt-4 inline-block font-display text-sm font-medium text-accent underline underline-offset-4 hover:text-foreground">
-                  Read report
-                </Link>
-              </div>
-            </div>
+          <aside aria-labelledby="corpus-heading" className="relative self-center border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <h2 id="corpus-heading" className="font-display text-sm font-semibold">Current corpus</h2>
+            <p className="mt-2 font-display text-sm text-muted">
+              Revised <time dateTime={site.lastUpdated}>{revision}</time>
+            </p>
+            <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-5 font-display">
+              {[
+                [counts.events, "Policy events"],
+                [counts.financialCommitments, "Financial instruments"],
+                [counts.projects, "Projects"],
+                [counts.projectMilestones, "Industrial observations"],
+              ].map(([value, label]) => (
+                <div key={label}>
+                  <dd className="tnum text-2xl font-semibold text-foreground">{value}</dd>
+                  <dt className="mt-1 text-sm text-muted">{label}</dt>
+                </div>
+              ))}
+            </dl>
+            <Link href="/coverage" className="mt-5 inline-block font-display text-sm text-accent underline underline-offset-4">
+              Coverage
+            </Link>
           </aside>
-        </div>
-
-        <div className="mt-10 border-t border-border-strong pt-5 sm:mt-12">
-          <div className="flex flex-wrap items-baseline justify-between gap-3 font-display text-sm">
-            <p className="font-semibold">Current corpus</p>
-            <p className="text-muted">Revised <time dateTime={site.lastUpdated}>{revision}</time> · <Link href="/coverage" className="underline underline-offset-4 hover:text-foreground">Coverage</Link></p>
-          </div>
-          <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 font-display sm:grid-cols-4">
-            {[
-              [counts.events, "Policy events"],
-              [counts.financialCommitments, "Financial instruments"],
-              [counts.projects, "Projects"],
-              [counts.projectMilestones, "Industrial observations"],
-            ].map(([value, label]) => (
-              <div key={label}>
-                <dt className="text-sm text-muted">{label}</dt>
-                <dd className="tnum mt-1 text-xl font-semibold text-foreground">{value}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
         <ElementStrip materials={materials} />
       </Container>
@@ -168,13 +126,13 @@ export default function Home() {
       <section id="research" aria-labelledby="research-heading" className="border-t border-border-strong">
         <Container width="wide" className="py-12 sm:py-16">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <h2 id="research-heading" className="font-serif text-3xl font-medium">More research</h2>
+            <h2 id="research-heading" className="font-serif text-3xl font-medium">Published research</h2>
             <Link href="/research" className="font-display text-sm text-accent underline underline-offset-4">
               All research
             </Link>
           </div>
-          <div className="mt-7 grid gap-x-10 gap-y-8 lg:grid-cols-3">
-            {moreResearch.map((item) => (
+          <div className="mt-7 grid gap-x-12 gap-y-8 md:grid-cols-2">
+            {featured.map((item) => (
               <article key={item.href} className="border-t border-border pt-5">
                 <p className="font-display text-sm text-muted">{item.category}</p>
                 <h3 className="mt-2 font-serif text-xl leading-tight sm:text-2xl">
