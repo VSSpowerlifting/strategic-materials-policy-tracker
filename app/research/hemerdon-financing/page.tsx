@@ -60,19 +60,15 @@ export default function HemerdonFinancing() {
       <section className="border-b border-border-strong">
         <Container width="wide" className="py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
-            Research / Financial Intelligence 001
+            ← Research
           </Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-            Strategic Materials Policy Tracker · Financial Intelligence 001
-          </p>
-          <h1 className="mt-4 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          
+          <h1 className="mt-8 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             Inside Tungsten West&apos;s £71 Million Restart Financing
           </h1>
-          <p className="mt-5 max-w-4xl font-display text-xl leading-8 text-foreground">
-            Government Capital, Project Expenditure and Refinancing Risk at Hemerdon
-          </p>
-          <p className="mt-7 max-w-3xl font-serif text-xl leading-9 text-muted">
-            An independent reconstruction of the National Wealth Fund&apos;s investment, the financial obligations it creates and the remaining steps between mine commissioning and commercial cash generation.
+          <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
+            The National Wealth Fund’s investment, Hemerdon’s remaining expenditure
+            and the refinancing obligations behind the restart.
           </p>
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="underline underline-offset-4 hover:text-accent">Benjamin Yang</Link>
@@ -97,7 +93,7 @@ export default function HemerdonFinancing() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-16">
             <article className="min-w-0 max-w-4xl">
               <section className="border-b border-paper-border pb-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">The central finding</p>
+                
                 <h2 className="mt-3 font-display text-3xl font-semibold leading-tight">
                   The financing strengthens the restart while introducing a near-term repayment timetable
                 </h2>
@@ -156,7 +152,7 @@ export default function HemerdonFinancing() {
 
             <aside className="min-w-0">
               <div className="border-t border-paper-border pt-5">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Publication files</p>
+                <h2 className="font-display text-sm font-semibold">Downloads</h2>
                 <ul className="mt-5 space-y-5">
                   {downloads.map((item) => (
                     <li key={item.title}>
@@ -193,9 +189,9 @@ export default function HemerdonFinancing() {
 
       <section className="border-t border-border-strong">
         <Container width="wide" className="py-12 sm:py-16">
-          <h2 className="font-display text-2xl font-semibold">Primary sources and research context</h2>
+          <h2 className="font-display text-2xl font-semibold">Sources</h2>
           <p className="mt-4 max-w-3xl font-serif text-lg leading-8 text-muted">
-            The study draws on audited accounts, issuer disclosures, the National Wealth Fund announcement, and financing documentation. Its financial sensitivities are independent analyst exercises rather than management forecasts. The source-by-source evidence trail and scenario assumptions are documented with the publication.
+            Financial sensitivities are independent analysis, not company forecasts. Source details and assumptions are included with the memo.
           </p>
           <ul className="mt-6 max-w-3xl space-y-3">
             {sources.map((s) => (
@@ -205,7 +201,7 @@ export default function HemerdonFinancing() {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl font-display text-sm leading-7 text-muted">
-            Independent SMPT research by Benjamin Yang. The financial estimates are limited to the stated evidence cutoff and do not constitute an investment recommendation or a claim of independent third-party financial review. The original financial model, supporting source register and publication QC are available with the paper.
+            Research uses the stated evidence cutoff and has not undergone independent financial review. It is not investment advice.
           </p>
           <Link href="/research/tungsten-supply-security" className="mt-6 inline-block font-display text-sm text-accent underline underline-offset-4 hover:text-foreground">
             Related research: Tungsten Supply Security
