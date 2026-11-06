@@ -92,7 +92,7 @@ export default function Home() {
               Research by <Link href="/about" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">Benjamin Yang</Link>
             </p>
           </div>
-          <aside aria-labelledby="corpus-heading" className="relative self-end border-t border-border-strong pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+          <aside aria-labelledby="corpus-heading" className="relative self-end border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-3">
             <HeroPlate />
             <h2 id="corpus-heading" className="font-display text-sm font-semibold">Current corpus</h2>
             <p className="mt-2 font-display text-sm text-muted">
