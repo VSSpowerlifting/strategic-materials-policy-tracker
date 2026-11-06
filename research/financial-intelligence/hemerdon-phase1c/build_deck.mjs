@@ -21,7 +21,7 @@ const pres=Presentation.create({slideSize:{width:1280,height:720}});
 const darkSlides=new WeakSet();
 function text(s,str,x,y,w,h,size=23,bold=false,color){
  const sh=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});
- sh.text=str;sh.text.style={typeface:'Arial',fontSize:size,bold,color:color||(darkSlides.has(s)?P.cream:P.ink),verticalAlignment:'top'};return sh;
+ sh.text=str;sh.text.style={typeface:'Archivo',fontSize:size,bold,color:color||(darkSlides.has(s)?P.cream:P.ink),verticalAlignment:'top'};return sh;
 }
 function rule(s,y,x=64,w=1140){
  s.shapes.add({geometry:'rect',position:{left:x,top:y,width:w,height:1},fill:darkSlides.has(s)?P.brand:P.rule,line:{fill:'none',width:0}});
@@ -38,7 +38,7 @@ function base(title,idx,srcs,note='',section='FINANCING AND EXECUTION'){
  rule(s,662);
  const linkColor=dark?P.accent:P.gold,muted=dark?P.cream:P.muted;
  const foot=text(s,'',64,633,1140,27,13,false,muted);
- foot.text=[{runs:[{run:'Sources: ',style:{typeface:'Arial',fontSize:'13px',color:muted}},...srcs.flatMap(k=>[{run:k,style:{typeface:'Arial',fontSize:'13px',bold:true,underline:'sng',color:linkColor},link:{uri:ref[k].url,isExternal:true}},{run:'   ',style:{fontSize:'13px'}}]),{run:note,style:{typeface:'Arial',fontSize:'13px',color:muted}}]}];
+ foot.text=[{runs:[{run:'Sources: ',style:{typeface:'Archivo',fontSize:'13px',color:muted}},...srcs.flatMap(k=>[{run:k,style:{typeface:'Archivo',fontSize:'13px',bold:true,underline:'sng',color:linkColor},link:{uri:ref[k].url,isExternal:true}},{run:'   ',style:{fontSize:'13px'}}]),{run:note,style:{typeface:'Archivo',fontSize:'13px',color:muted}}]}];
  s.speakerNotes.text=srcs.map(k=>`${k}: ${ref[k].title}. ${ref[k].url}`).join('\n')+'\n'+note+'\nControlling evidence: Phase 1B acceptance 772f2f4c02631f533a0a893849c9bedb8a6ff8ad. Source dates and locators are retained in the evidence appendix. Independent analyst interpretation unless attributed.';
  return s;
 }
@@ -48,7 +48,7 @@ function table(s,rows,x=64,y=200,w=1140,h=360,widths=null,size=22){
  t.borders.assign({fill:dark?P.brand:P.rule,width:.5,style:'solid'});
  for(let r=0;r<rows.length;r++)for(let c=0;c<rows[0].length;c++){
   const cell=t.getCell(r,c);cell.fill=r===0?(dark?P.elevated:P.bg):(dark?(r%2?P.surface:P.bg):(r%2?P.cream:P.paper));
-  cell.text.style={typeface:'Arial',fontSize:size,bold:r===0,color:r===0?(dark?P.accent:P.cream):(dark?P.cream:P.ink)};
+  cell.text.style={typeface:'Archivo',fontSize:size,bold:r===0,color:r===0?(dark?P.accent:P.cream):(dark?P.cream:P.ink)};
  }
  return t;
 }
@@ -60,7 +60,7 @@ function chart(s,cats,vals,x,y,w,h,outlinedLast=false){
   dataLabels:{showValue:true,position:'outEnd',textStyle:{fontSize:21,fill:P.ink},numberFormatCode:vals.every(Number.isInteger)?'0':(vals.some(n=>n%0.5!==0)?'0.00':'0.0')},
   yAxis:{line:{fill:P.rule,width:.5},min:negative?-5:0,max:negative?20:Math.ceil(Math.max(...vals)*1.22),majorUnit:Math.max(...vals)<=4?1:(Math.max(...vals)<=15?5:10),numberFormatCode:'0',textStyle:{fontSize:17,fill:P.muted},majorGridlines:{fill:P.rule,width:.5}},
   xAxis:{line:{fill:P.rule,width:.5},tickLabelPosition:'low',textStyle:{fontSize:18,fill:P.ink}},chartFill:P.paper,plotAreaFill:P.paper});
- applyPresentationChartFont(ch,{fontFamily:'Arial'});return ch;
+ applyPresentationChartFont(ch,{fontFamily:'Archivo'});return ch;
 }
 let s=base('',1,['S1','S2','S3'],'Independent research   /   Review edition','HEMERDON');
 text(s,"Inside Tungsten West's\n£71 Million Restart Financing",64,140,1135,145,49,true);
@@ -134,7 +134,7 @@ const result=await finalizePresentation({workspaceDir:out,candidatePath:localCan
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...[2,3,4,5,8,9,10].flatMap(n=>['--require-native-table-slide',String(n)])],
  explicitTotalSlideCount:10,requiredNativeTableOwnerSlides:[2,3,4,5,8,9,10],requiredNativeChartOwnerSlides:[4,6,7],
- materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'user_request',families:['Arial']},verifyArtifactToolImport:true,
+ materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'user_request',families:['Archivo']},verifyArtifactToolImport:true,
  receiptPath:path.join(out,'.build',`deck-validation-${Date.now()}.json`)});
 await fs.copyFile(final,delivery);
 await fs.writeFile(path.join(build,'deck-validation.json'),JSON.stringify(result,null,2));

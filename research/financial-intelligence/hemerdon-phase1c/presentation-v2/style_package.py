@@ -13,8 +13,8 @@ with zipfile.ZipFile(p,'w') as z:
     for node in r.findall('.//a:clrScheme/a:'+tag,N):
      for child in list(node):node.remove(child)
      E.SubElement(node,'{'+A+'}srgbClr',val=color)
-   for node in r.findall('.//a:majorFont/a:latin',N):node.set('typeface','Georgia')
-   for node in r.findall('.//a:minorFont/a:latin',N):node.set('typeface','Arial')
+   for node in r.findall('.//a:majorFont/a:latin',N):node.set('typeface','Archivo')
+   for node in r.findall('.//a:minorFont/a:latin',N):node.set('typeface','Archivo')
    data=E.tostring(r,xml_declaration=True,encoding='UTF-8',standalone=True)
   elif info.filename.startswith('ppt/slides/slide') and info.filename.endswith('.xml'):
    r=E.fromstring(data)
