@@ -8118,7 +8118,7 @@
         "note": "Construction of the linked 10X Facility is underway. This does not revive or demonstrate a draw under the expired 2025 bank commitment letter."
       }
     ],
-    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing. Lifecycle review on 3 October 2026: the Q3 2025 filing still supports the letter's undrawn expiry; the Q2 2026 filing and 6 August results report construction at the linked 10X project. The subsequent equity offering and revolving credit facility are separate financing, not disbursements or repayment under this historical commitment.",
+    "notes": "Private capital raised alongside the DoD package. Never part of a public-support figure. The filing says the $1,000,000,000 may be reduced dollar for dollar for certain equity or debt raises and certain unrestricted cash. The letter expired undrawn on 26 August 2025 (Form 10-Q for Q3 2025), after the company's public offering (net proceeds of $724.2 million, per its Form 10-K for 2025) and a revolving credit facility reduced it to nothing. Lifecycle review on 3 October 2026: the Q3 2025 filing still supports the letter's undrawn expiry; the Q2 2026 filing and 6 August results report construction at the linked 10X project. The subsequent equity offering and revolving credit facility are separate financing, not disbursements or repayment under this historical commitment. The equity offering and corporate revolver are separate instruments, not drawdowns or repayment under this expired commitment.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-03",
       "implementationStatusCheckedAt": "2026-10-03"
@@ -8212,6 +8212,94 @@
       }
     ],
     "notes": "The recipient's own contribution, recorded so it is never counted as public support. The Transaction Agreement states that up to $600 million of existing cash supports the 10X Facility, Samarium Project and Facility Improvements, with no allocation among those uses. associatedProjectIds records those non-allocative links; the amount is not attributed to any project stack."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-corporate-revolver",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "private_financing",
+    "capitalSource": "private",
+    "amount": {
+      "value": "275000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$275.0 million revolving credit facility",
+      "currencyBasis": "stated"
+    },
+    "provider": "JPMorgan Chase Bank, N.A.; Goldman Sachs Bank USA; Morgan Stanley Senior Funding, Inc.; Citibank, N.A.; Bank of America, N.A.",
+    "providerJurisdiction": null,
+    "providerOrgIds": [
+      "org-jpmorgan-chase-bank-na",
+      "org-goldman-sachs-bank-usa",
+      "org-morgan-stanley-senior-funding",
+      "org-citibank-na",
+      "org-bank-of-america-na"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "contracted",
+        "date": "2025-08-25",
+        "sourceId": "src-mp-credit-agreement-2025",
+        "note": "Executed corporate credit agreement; not a funded construction loan."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [
+      {
+        "kind": "other",
+        "value": "200000000",
+        "qualifier": "exact",
+        "currency": "USD",
+        "unit": "L-C sublimit inside the revolver",
+        "asStated": "$200.0 million letter of credit facility sublimit",
+        "sourceId": "src-mp-10q-2026-q3",
+        "note": "Not additive to the $275m facility."
+      }
+    ],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-mp-credit-agreement-2025",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Section 1.01 Revolving Credit Commitment; signatures",
+        "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q3",
+        "supports": [
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 8 Revolving Credit Facility",
+        "note": null
+      }
+    ],
+    "notes": "JPMorgan is agent, lender and L-C issuer with other banks; no individual commitment allocation recorded. At September 30, 2026 MP reports no loan borrowings, $203.0m remaining borrowing capacity, $128.0m unused L-C capacity and covenant compliance. These are capacity snapshots, not cash or a 10X project allocation. Nominal August 25, 2030 maturity is subject to the contractual springing clause. The corporate facility is separate from the original construction commitment."
   },
   {
     "id": "fin-us-dod-mp-2025-magnet-offtake",
@@ -8390,9 +8478,27 @@
         "evidence": "explicit",
         "locator": "CEO comments in second-quarter 2026 results",
         "note": "Reports accelerated construction at 10X. This corroborates the project's construction status; it does not date construction commencement or establish a financing draw."
+      },
+      {
+        "sourceId": "src-mp-10x-offtake-agreement-2025",
+        "supports": [
+          "terms"
+        ],
+        "evidence": "explicit",
+        "locator": "Sections 1.2 and 2.1",
+        "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q3",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Notes 9 and 13",
+        "note": "No new disbursement status inferred from liability or receivable balances."
       }
     ],
-    "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations. Lifecycle review on 3 October 2026 retains contracted status and construction with an unknown commencement date. The Q2 2026 filing recognizes pre-production reimbursable costs under the offtake but does not separately quantify cumulative cash paid under it; no disbursement status or total commitment amount is inferred from deferred balances or receivables. Price Protection Agreement receipts, Independence production and Apple prepayments concern separate instruments or facilities. Commissioning in 2028 remains a target.",
+    "notes": "No amount is stated for the offtake itself: DoD buys at the Project Company's production cost and makes facilitation payments. The outcomes are the company's expectations. Lifecycle review on 3 October 2026 retains contracted status and construction with an unknown commencement date. The Q2 2026 filing recognizes pre-production reimbursable costs under the offtake but does not separately quantify cumulative cash paid under it; no disbursement status or total commitment amount is inferred from deferred balances or receivables. Price Protection Agreement receipts, Independence production and Apple prepayments concern separate instruments or facilities. Commissioning in 2028 remains a target. Original contract checked November 6: Section 2.1 makes the legal term effective July 9, 2025 through ten years after commercial operation. Section 1.2 capacity-scales the threshold only between commercial operation and the production milestone; full escalating threshold applies from the milestone. Q3 Notes 9 and 13 report reimbursement accounting and a receivable, not cumulative offtake cash collections.",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-03",
       "implementationStatusCheckedAt": "2026-10-03"
@@ -8562,6 +8668,12 @@
         "date": "2025-07-09",
         "sourceId": "src-dod-mp-transaction-agreement-2025",
         "note": "NdPr price floor protection agreement (PPA) entered into on the Effective Date."
+      },
+      {
+        "status": "partially_disbursed",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q3",
+        "note": "MD&A reports $110.9 million PPA cash received during the nine months ended September 30, 2026. Individual receipt dates are not stated; September 30 is an observation date, not an asserted payment date."
       }
     ],
     "implementationStatusHistory": [],
@@ -8614,9 +8726,89 @@
         "evidence": "explicit",
         "locator": "Item 1.01, Price Protection Agreement",
         "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q3",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "MD&A Cash Flows: Net Cash Used in Operating Activities; Notes 3 and 13",
+        "note": null
       }
     ],
-    "notes": "Applies to all of the Company's products that contain NdPr (concentrate, oxide and metal). No total value is stated: the cost depends on future prices, and none is estimated here. The agreement commenced on 1 October 2025. MP's 10-Q for the quarter to 30 June 2026 reports price protection agreement income of $59.9 million for the first half of 2026 (its right to receive cash from the DoW for the gap between $110 per kilogram of NdPr and the benchmark price) and a PPA income receivable of $17.6 million at 30 June 2026 ($51.0 million at 31 December 2025). It does not state cash received, so no payment status is recorded; these are the company's accounting figures, not a government statement."
+    "notes": "Applies to all of the Company's products that contain NdPr (concentrate, oxide and metal). No total value is stated: the cost depends on future prices, and none is estimated here. The agreement commenced on 1 October 2025. MP's 10-Q for the quarter to 30 June 2026 reports price protection agreement income of $59.9 million for the first half of 2026 (its right to receive cash from the DoW for the gap between $110 per kilogram of NdPr and the benchmark price) and a PPA income receivable of $17.6 million at 30 June 2026 ($51.0 million at 31 December 2025). That Q2 note did not state cash received; the subsequent Q3 disclosure below now supports a payment status. These remain issuer disclosures. Q3 refresh: MP reports $110.9 million PPA cash receipts during the first nine months of 2026 and $8.109 million PPA income receivable at September 30. These are distinct from recognized income and from 10X offtake reimbursements; the total agreement amount remains unstated."
+  },
+  {
+    "id": "fin-us-dod-mp-2025-public-equity",
+    "eventId": "evt-us-dod-mp-2025",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "private_financing",
+    "capitalSource": "private",
+    "amount": {
+      "value": "724200000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$724.2 million net proceeds after underwriting discounts, commissions and other offering expenses",
+      "currencyBasis": "stated"
+    },
+    "provider": "Investors in MP Materials public offering",
+    "providerJurisdiction": null,
+    "providerOrgIds": [],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "disbursed",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q3",
+        "note": "Note 16 reports offering completed in July 2025; exact final settlement date for all shares is not stated here."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-mp-10q-2026-q3",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Note 16 Public Offering of Common Stock",
+        "note": null
+      },
+      {
+        "sourceId": "src-mp-equity-prospectus-2025",
+        "supports": [
+          "recipient"
+        ],
+        "evidence": "explicit",
+        "locator": "Use of Proceeds",
+        "note": "Unallocated company uses; no projectId or associatedProjectIds inferred."
+      }
+    ],
+    "notes": "Completed July 2025 offering of 13,590,908 common shares at $55. Amount is reported net cash proceeds, rounded to $0.1 million, not gross proceeds or current cash. The proceeds are private investor capital. Proceeds support expansion including 10X, strategic growth and general purposes; no project amount is allocated. Separate from the expired bank commitment, not a draw or component of it."
   },
   {
     "id": "fin-us-dod-mp-2025-samarium-loan",
@@ -10541,5 +10733,100 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "fin-us-texas-mp-2026-tsif",
+    "eventId": "evt-us-texas-mp-northlake-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "53457500",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$53,457,500 TSIF grant extended for the manufacturing facility",
+      "currencyBasis": "stated"
+    },
+    "provider": "Office of the Governor of Texas",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-texas-governor"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-texas-semiconductor-innovation-fund",
+    "recipient": "MP Materials Corp.",
+    "recipientOrgIds": [
+      "org-mp-materials"
+    ],
+    "project": "10X Facility manufacturing at Northlake",
+    "projectId": "prj-us-mp-10x-facility",
+    "facility": "10X Facility",
+    "locations": [],
+    "stages": [
+      "component_manufacturing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "ndfeb-magnets"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-02-26",
+        "sourceId": "src-texas-mp-northlake-2026",
+        "note": "Governor announces grant extended; payment not established."
+      },
+      {
+        "status": "contracted",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q3",
+        "note": "Note 15 dates executed TSIF grant agreement to May 2026; exact day not stated."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-mp-10q-2026-q3",
+        "note": "Q3 Note 6 and MD&A report construction underway; exact construction start day is unknown."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-texas-mp-northlake-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "recipient",
+          "project",
+          "facility",
+          "stages",
+          "materials",
+          "status",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening grant paragraphs and 10X/NdFeB description",
+        "note": null
+      },
+      {
+        "sourceId": "src-mp-10q-2026-q3",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Notes 6, 15 and 21; MD&A 10X Facility",
+        "note": null
+      }
+    ],
+    "notes": "Official exact award amount; MP rounds ceiling to $53.5m. May 2026 agreement reimburses eligible construction/equipment costs after reporting and approval requirements. $10.075m noncash award-receivable recognition is not a cash payment. Do not add this award to the approximately $200m aggregate incentive headline without scope reconciliation. The separate TEF corporate-operations grant is excluded from this manufacturing child."
   }
 ]

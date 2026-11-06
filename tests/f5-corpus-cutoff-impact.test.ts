@@ -47,9 +47,14 @@ const KOREA_BRAZIL_EXPANSION_IDS=new Set([
   "brazil",
   "korea",
 ]);
+// FI003 is a separately approved 6 November admission. Exclude its explicit
+// new cohort only when reconstructing the earlier release snapshots below.
+const FI003_IDS=new Set(["evt-us-texas-mp-northlake-2026", "src-mp-10q-2026-q3", "src-mp-credit-agreement-2025", "src-mp-10x-offtake-agreement-2025", "src-texas-mp-northlake-2026", "src-mp-equity-prospectus-2025", "fin-us-dod-mp-2025-public-equity", "fin-us-dod-mp-2025-corporate-revolver", "fin-us-texas-mp-2026-tsif", "org-jpmorgan-chase-bank-na", "org-morgan-stanley-senior-funding", "org-citibank-na", "org-bank-of-america-na", "org-us-texas-governor", "org-us-texas-chips-office", "prg-us-texas-semiconductor-innovation-fund"]);
+const withoutFi003=(s:SeedInput):SeedInput=>Object.fromEntries(
+  Object.entries(s).map(([name,rows])=>[name,(rows as Row[]).filter(r=>!FI003_IDS.has(r.id))]));
 const withoutKoreaBrazilExpansion=(s:SeedInput):SeedInput=>
   Object.fromEntries(Object.entries(s).map(([name,rows])=>[
-    name,(rows as Row[]).filter(r=>!KOREA_BRAZIL_EXPANSION_IDS.has(r.id) && !DOE_2026_SELECTION_IDS.has(r.id)),
+    name,(rows as Row[]).filter(r=>!KOREA_BRAZIL_EXPANSION_IDS.has(r.id) && !DOE_2026_SELECTION_IDS.has(r.id) && !FI003_IDS.has(r.id)),
   ]));
 const evidencedOnlyByEuCrma2026=(r:Row)=>!!r.evidence?.length&&r.evidence.every(e=>EU_CRMA_2026_SOURCES.has(e.sourceId));
 const withoutEuCrma2026=(s:SeedInput):SeedInput=>({...s,
@@ -116,11 +121,11 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
   assert.equal(r.countFutureIntervalEndFields,21);
   assert.equal(r.publicationAuthorized,false);
   assert.equal(JSON.stringify(seeds()),frozen);
-  assert.equal(site.lastUpdated,"2026-11-04");
+  assert.equal(site.lastUpdated,"2026-11-06");
 });
 
 test("proposed 4 November revision contains only dated admissions from reviewed expansion batches",()=>{
-  const snapshot=seeds();
+  const snapshot=withoutFi003(seeds());
   const candidate=auditF5CorpusCutoffImpact(snapshot,"2026-11-03","2026-11-04");
   assert.equal(candidate.totalPublicSeedRows,802);
   assert.equal(candidate.countNewlyIncludedDatedFields,11,
@@ -180,9 +185,9 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
     "--proposed-cutoff",site.lastUpdated,
   ],{encoding:"utf8"});
   const parsed=JSON.parse(output);
-  assert.equal(parsed.proposedCutoff,"2026-11-04");
-  assert.equal(parsed.currentPublishedCutoff,"2026-11-04");
-  assert.equal(parsed.totalPublicSeedRows,802);
+  assert.equal(parsed.proposedCutoff,"2026-11-06");
+  assert.equal(parsed.currentPublishedCutoff,"2026-11-06");
+  assert.equal(parsed.totalPublicSeedRows,818);
   assert.equal(parsed.countOtherPostCutoffFields,0,
     "the newly admitted 4 November source-review dates fall within the current revision");
   assert.deepEqual(parsed.afterProposedCutoffFields,[]);
@@ -191,4 +196,14 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   assert.equal(parsed.publicationAuthorized,false,
     "audit's non-publication flags do not retroactively undo separately authorized source publication");
   assert.equal(parsed.maintainerReviewRequired,true);
+});
+
+
+test("FI003 admission advances only its eight new dated fields and preserves prior milestones",()=>{
+  const r=auditF5CorpusCutoffImpact(seeds(),"2026-11-04","2026-11-06");
+  assert.equal(r.totalPublicSeedRows,818);
+  assert.equal(r.countNewlyIncludedDatedFields,8);
+  assert.ok(r.newlyIncludedDatedFields.every(x=>FI003_IDS.has(x.recordId)));
+  assert.deepEqual(r.afterProposedCutoffFields,[]);
+  assert.equal(r.publicationAuthorized,false);
 });

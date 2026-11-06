@@ -1,21 +1,17 @@
 # FI003 — JPMorgan Chase / MP Materials
 
-**Research foundation and exploratory prototype · cutoff November 6, 2026 · human review pending**
+**Financial research revision · November 6, 2026 cutoff · Benjamin review pending**
 
-Working question: **What did JPMorgan's replaceable construction commitment accomplish, and how did government contracts, equity underwriting and corporate credit change the financing path for MP's 10X expansion?**
+**Recommended thesis:** JPMorgan supported financing flexibility before 10X production through a replaceable joint construction commitment, equity underwriting and continuing corporate credit. Equity supplied cash without scheduled repayment; government support entered both cash flows and the bank contract; MP retained construction, liquidity and operating risks. The evidence establishes a financing outcome, with dilution and conditional credit access, rather than proving the chosen structure optimal.
 
-The strongest provisional thesis is that JPMorgan helped assemble a transaction that could close with contingent construction financing and subsequently move to equity funding and a smaller corporate revolver. The credit agreement explicitly recognizes government-backed minimum payments in its covenant EBITDA definition. Public information supports these contractual mechanisms; it does not establish JPMorgan's internal underwriting conclusions or the project's eventual commercial returns.
+Read [analysis.md](analysis.md) for the argument, ranked competing explanations, financing comparison and retained-risk map. [PUBLICATION_PLAN.md](PUBLICATION_PLAN.md) is the **single tracker** for owners, dependencies, proposed dates, the bounded workbook specification and revised 12-slide storyline. [JIHO_HANDOFF.md](JIHO_HANDOFF.md) asks one strongest-objection question and includes an unsent message. [VERIFICATION.md](VERIFICATION.md) records current checks, corrections and limits, with previous environment results distinguished.
 
-Start with [the research analysis](analysis.md), then [Jiho's independent assignment](JIHO_HANDOFF.md). The [publication plan](PUBLICATION_PLAN.md) identifies the human decisions and next implementation phase. [Verification](VERIFICATION.md) records checks and limits.
-
-| Artifact | Purpose |
+| Evidence / calculation artifact | Purpose |
 |---|---|
-| [Evidence ledger](evidence.csv) | 39 claims with source IDs, exact section locators, status, dates and limitations |
-| [Source register](sources.json) | 18 original-source URLs, issuance/retrieval dates and retrieval fingerprints |
-| [Chronology](chronology.csv) | Reconciles signing, capital raising, expiration and later disclosures |
-| [Inputs](inputs.json) | 43 sourced numeric facts, separately labeled illustrative assumptions |
-| [Prototype](prototype.py) / [tests](test_prototype.py) | Standard-library Python calculations; no external package required |
-| [Exploratory schedules](exhibits/) | Ten generated CSV exhibits; source notes and classifications remain in each table |
+| [evidence.csv](evidence.csv), [sources.json](sources.json), [chronology.csv](chronology.csv) | Claims, original locators, dates, evidence classes and source-retrieval fingerprints; includes the November 6 Q3 10-Q |
+| [inputs.json](inputs.json) | Sourced numeric facts separated from hypothetical assumptions; original USD units retained |
+| [prototype.py](prototype.py), [test_prototype.py](test_prototype.py) | Standard-library Decimal calculations, independent anchors and material failure cases |
+| [exhibits/](exhibits/) | Eleven reproducible schedules; publication plan ranks their usefulness and combines/demotes exploratory tables |
 
 Reproduce from the repository root:
 
@@ -25,20 +21,16 @@ python3 -m unittest discover -s research/fi003 -p 'test_*.py' -v
 python3 research/fi003/prototype.py --check
 ```
 
-Use normal Python execution; `python -O` disables assertion checks. CSV precision is retained for audit; publication displays should round to the disclosure's precision. These schedules are an analytical prototype, not a publication-ready workbook, forecast, valuation or investment recommendation. No source-corpus records, existing publications or site output are changed.
+Use ordinary Python execution; `python -O` disables assertions. Retained CSV precision supports audit; eventual displays must round to source precision. No project valuation, actual covenant headroom or debt-service forecast is produced.
 
-## Standards and prior-work provenance
+## Guidance, scope and provenance
 
-The four requested standards and FI002 research/model specification were absent from starting `main` (`b4834d75068459a0f60006735e9480df782fdaae`). They were read from existing branch `codex/fi002-production-verification` at **`fe1d5b3b2fd9ef99018fe2be6b032466b69c5771`**, without importing that branch:
+On November 6, Codex retrieved through GitHub **AGENTS.md, CLAUDE.md, operating-playbook.md, the Applied Strategy Standard, Presentation Standard v2, Exhibit and Chart Rules, and Editorial Authenticity & Visual Integrity** at live main `fe1d5b3b2fd9ef99018fe2be6b032466b69c5771` and PR head `c1a700a1713e5300ee7506d418fae566e26e822a`. All seven matched exactly. The linked research-publication house style and FI002 financial-model specification were also consulted through GitHub. No separate overriding FI003 modeling guide was found in those references.
 
-- `docs/research/SMPT_APPLIED_STRATEGY_STANDARD.md`
-- `docs/design/presentations/SMPT_PRESENTATION_STANDARD_V2.md`
-- `docs/design/presentations/EXHIBIT_AND_CHART_RULES.md`
-- `docs/design/presentations/EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md`
-- `research/fi002/README.md` and `SMPT_FI002_Financial_Model_Specification_2026-11-05.md`
+The newer presentation rule’s **20-slide total cap**, including appendices, governs over the earlier Applied Strategy wording about a main-deck ceiling. The slide standard’s Georgia/Source Sans 3 pairing governs slides; the house style’s single sans family governs its named written formats. No conflict requires changing source facts. The user explicitly authorizes this branch’s scoped commit/push; CLAUDE’s separate integration-branch rule concerns tooling integration, outside this task. No merge, deployment, public release, external message or human approval is inferred.
 
-The useful FI002 precedent is the separation of source facts, arithmetic, scenarios and human decisions. FI003 instead uses financing reconciliation and contract mechanics; a project DCF would exceed the evidence. The newer presentation standard's 20-slide **total** cap governs the proposed future deck. No slides are produced here. The referenced global `RTK.md` was not found in the checkout or checked parent/Codex locations; no rules were fabricated from it.
+The initial foundation used standards from the FI002 branch because its first checkout predated their arrival on main; they are now verified on main and the PR. The existing foundation branch/worktree remains canonical. The attached older FI003 checkout, unrelated untracked screenshots and other worktrees are preserved. The globally referenced RTK.md remains unavailable at the assigned checkout; no missing instructions were invented.
 
-After fetching current GitHub main, the research-only change was transferred to `codex/fi003-jpmorgan-financing-foundation` in the isolated `fi003-research` worktree, based on that same `fe1d5b3` revision. The original checkout's pre-existing untracked screenshots were preserved. This foundation branch and its draft PR are the canonical review version; see [verification](VERIFICATION.md) for both environments' check results.
+The added candidate task first reviewed existing MP event, source, finance and project records. The current candidate disposition and schema limits are recorded in PUBLICATION_PLAN and VERIFICATION. Private candidate payloads remain in the documented candidate workflow; analytical calculations remain here. Benjamin explicitly approved all three concrete packages; the admitted public seed changes are in this draft PR. Public release remains separately gated.
 
-Benjamin Yang retains direction, integration and publication authority. Jiho is a prospective collaborator; all work reserved for him remains unperformed by him. This packet was produced with Codex assistance and makes no claim of human financial review.
+Benjamin retains major methodological, editorial and publication decisions. Jiho’s prospective independent challenge is pending and does not block research preparation. This packet is Codex-assisted research and makes no claim of Jiho’s findings or approval.

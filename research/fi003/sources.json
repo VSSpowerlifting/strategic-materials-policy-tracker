@@ -244,11 +244,39 @@
     "publication_or_filing_date": "2026-11-06",
     "retrieved_on": "2026-11-06",
     "issuer": "SEC",
-    "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
-    "sha256": "85fad0b537d036feef896701551a64b9b522aeb36df5069a0db4d6b1002a33a7",
-    "bytes": 86627,
+    "retrieval": "HTTP 200; refreshed complete SEC submissions JSON; Q3 accession and filing/acceptance dates checked",
+    "sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+    "bytes": 86789,
     "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
-    "limitations": "Issuer disclosure; no independent verification of physical performance",
-    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    "limitations": "Live index snapshot; includes filings beyond the research scope, which are not admitted as evidence.",
+    "hash_basis": "Raw HTTP response bytes; replaces earlier November 6 retrieval fingerprint."
+  },
+  {
+    "id": "S19",
+    "title": "Q3 2026 Form 10-Q",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+    "publication_or_filing_date": "2026-11-06",
+    "retrieved_on": "2026-11-06",
+    "issuer": "MP Materials",
+    "retrieval": "HTTP 200; complete original HTML retrieved directly; financial statements, notes, MD&A, risks and exhibit list read",
+    "sha256": "dd45624f47b781eb0b84c6c3b8f0dd02900bb2ec7b430e148bb85f24af7eebc2",
+    "bytes": 2144965,
+    "rights": "Original links and paraphrased facts; original filing not redistributed",
+    "limitations": "Filed unaudited interim statements; issuer reports of construction and compliance; no actual compliance certificate. Signed November 5; SEC filing date November 6; acceptance November 5 at 23:13:56 UTC.",
+    "hash_basis": "Raw HTTP response bytes; fingerprint identifies retrieval, not authenticated signatures."
+  },
+  {
+    "id": "S20",
+    "title": "Texas Governor announces MP Northlake manufacturing and corporate-operations grants",
+    "url": "https://gov.texas.gov/news/post/governor-abbott-announces-mp-materials-rare-earth-magnet-manufacturing-expansion-in-northlake",
+    "publication_or_filing_date": "2026-02-26",
+    "retrieved_on": "2026-11-06",
+    "issuer": "Office of the Governor of Texas",
+    "retrieval": "HTTP 200; complete original release retrieved and body read; announcement distinguished from May agreement and noncash recognition",
+    "sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+    "bytes": 96803,
+    "rights": "Links and paraphrased facts only",
+    "limitations": "Announcement does not establish paid funds or supply full executed grant conditions; TSIF manufacturing and TEF corporate uses are separate.",
+    "hash_basis": "Raw HTTP response bytes; retrieval fingerprint, not authenticated original signature."
   }
 ]

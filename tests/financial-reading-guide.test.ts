@@ -27,9 +27,9 @@ test("the entire methodology vocabulary has exactly one definition for every off
  assert.match(VALUE_ROLE_DEFS.funding_option,/never summed/);
 });
 
-test("all 97 published finance records receive exact role/status explanations with no semantic reassignment",()=>{
+test("all 100 published finance records receive exact role/status explanations with no semantic reassignment",()=>{
  const rows=corpus();
- assert.equal(rows.length,97);
+ assert.equal(rows.length,100);
  for(const c of rows){
   const before=structuredClone(c),reading=explainFinancialRecord(c);
   const current=c.financialStatusHistory.at(-1)!.status;

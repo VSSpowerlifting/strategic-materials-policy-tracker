@@ -163,7 +163,7 @@ test("submitted source-test request and draft inspection followup avoid duplicat
  assert.equal(request.recordsObtained,false);
  assert.equal(request.publicMilestoneAuthorized,false);
  assert.equal(request.humanReviewCompleted,false);
- assert.equal(site.lastUpdated,"2026-11-04");
+ assert.equal(site.lastUpdated,"2026-11-06");
  assert.ok(decisions.every(x=>x.verdict==="pending"));
  assert.equal(getAllProjectMilestones().length,2);
 });

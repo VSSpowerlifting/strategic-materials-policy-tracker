@@ -1,67 +1,82 @@
-# FI003 verification and limits
+# FI003 — verification, corrections and delivery limits
 
-**Research cutoff and local verification date: November 6, 2026.** This records a preliminary analytical prototype. No human financial, legal or publication approval has occurred.
+**Research cutoff and verification date: November 6, 2026.** Research conclusions remain ready for Benjamin’s review. Benjamin explicitly approved all three concrete candidate admission packages in chat; that approval covers the admitted source records, not the financial thesis, future workbook, publication files, merge or deployment. No findings or approval are attributed to Jiho.
 
-## Evidence work performed
+## Identity and governing guidance
 
-- Retrieved complete original documents for 18 register entries: July agreements and equity offering, August credit agreement, Q3 2025 10-Q, 2025 10-K, Q1/Q2 2026 10-Qs, November 5 Q3 release, JPMorgan's transaction account, its October 2026 strategy statement, Apple 8-K and SEC submissions metadata. Relevant operative sections and financial tables were read directly, rather than treating search snippets as evidence.
-- The SEC submissions response contained Q2 as its most recent 2026 10-Q and the November 5 earnings 8-K. Q3 financials come from the separately furnished release; **no Q3 2026 10-Q is represented as reviewed**. This is a bounded retrieval finding, not a guarantee that no later filing appeared during November 6.
-- Original documents were retrieved through HTTP into a temporary research cache. Direct retrieval succeeded where some web-reader requests returned 403/internal errors. The issuer's Q3 release page returned 403; its complete SEC-furnished Exhibit 99.1 was read instead. No paywall bypass was used.
-- `sources.json` contains original URLs, issuance/retrieval dates, saved UTF-8 retrieval sizes and SHA-256 fingerprints. These fingerprints identify the retrieval used; they do not authenticate issuer signatures. Full bank articles/transcripts and source screenshots are not redistributed. Temporary originals are not a durable archive; future reviewers must retrieve originals using the register. A source change may require a new fingerprint and review.
-- The 39-row claim ledger preserves reported facts, source claims, calculations, inferences and unresolved interpretations. Its source IDs join the register; numeric inputs separately identify source, locator, unit and as-of date. Omitted/redacted schedules remain a limit.
+- Live draft PR [#215](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/215) was open, unmerged and at reviewed head `c1a700a1713e5300ee7506d418fae566e26e822a`. Base/current main was `fe1d5b3b2fd9ef99018fe2be6b032466b69c5771`; no dependent PR was needed. The continuation uses the existing `codex/fi003-jpmorgan-financing-foundation` branch and `/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/fi003-research` worktree, initially clean, with the expected GitHub origin and shared repository common directory.
+- The attached checkout was on older `codex/fi003-jpmorgan-financing-research` at `a4bbd89` with pre-existing untracked screenshots/private state. It and other worktrees were preserved; no branch switch, reset, clean, guard bypass or overwrite was used there.
+- All seven requested governing documents were retrieved through GitHub on both main and the reviewed PR head; file contents matched exactly. The linked publication house style and FI002 model specification were also read through GitHub. README records the slide-cap and format-specific typography precedence. The user authorized this commit/push; publication authority stays separate.
 
-## Prototype scope and calculation checks
+## Source and interpretation checks
 
-The standard-library Python script produces ten CSV schedules from `inputs.json`. It uses Decimal arithmetic, retains full precision until presentation, and has no network calls or implicit market inputs. Sourced facts are separate from hypothetical prices, SOFR, draws, capacity fractions, calendar years and clause examples. Those examples are not approved underwriting assumptions.
+The packet now has **49 claims, 20 sources and 69 sourced numeric facts**, separate from assumptions. Source IDs resolve from the ledger and inputs. Existing cached originals for material contracts, offering and bank documents match the foundation’s SHA-256 fingerprints and were reread at the relevant operative sections. Complete Q3 2026 HTML, the refreshed SEC index and the Texas official release were retrieved directly by HTTP and fingerprinted. The web reader failed on the Q3 URL; direct retrieval returned HTTP 200. No snippet, compressed legal summary or inaccessible-source assertion replaces the originals.
 
-Fifteen automated tests cover independently calculated offering anchors, initial underwriting allocations, L-C/borrowing reconciliation, interest/fees, overdraw rejection, rate/draw direction, the actual liquid-asset bridge, PPA boundaries and milestone sharing, pre-COD exclusion, capacity scaling, isolated covenant adjustment, accounting/cash separation, provenance/cutoff failures, historical stability under scenario changes, claim-source integrity, CSV roundtrips and generated-output equality. A deterministic `--check` compares all ten committed schedules byte for byte without rewriting them.
+The SEC index records accession `0001801368-26-000057` as a **November 6 filing**, accepted November 5 at **23:13:56 UTC**, signed November 5. This resolves the prior same-day retrieval observation that Q2 was latest. Q3 financial statements, Notes 3/4/6/8/9/13/15/16/21, MD&A, risk disclosures and the exhibit list were checked. September credit capacity, support receivables and cash collection, principal/carrying debt, construction, incentive recognition and subsequent-event references were reconciled. The filing has no separate subsequent-events note or new financing-contract exhibit; that bounded observation is not a claim that no events occurred.
 
-Independent numeric anchors include:
+Material corrections and independent anchors:
 
-| Check | Result |
-|---|---:|
-| Final share count × $55 | $747.499940m |
-| Final share count × $53.35 | $725.0749418m |
-| Final net $724.2m + $275m capacity − $1bn reference | −$0.8m |
-| Before-other-expenses proceeds + capacity − reference | +$0.0749418m |
-| $7.4m expense / $1bn reference | 0.74%; not annualized |
-| June capacity: $275m − $72m L-C exposure | $203m; zero loan draws reported |
-| Illustrative $150m draw at 4% SOFR + 2.5%, 360 days | $9.75m loan interest; $0.1855m unused fee; excludes other fees |
-| September liquid assets less December | −$492.375m |
-| Liquid-asset bridge residual | −$0.599m; not force-allocated |
-| Recognized PPA income, 2025 plus 9m 2026 | $118.978m; not verified receipts |
-| Hypothetical 2029, post-COD 50% capacity threshold | $75.7702512m; not CFADS |
-
-The generated diff was reviewed as data: each table labels instrument status, period, units and source. There is no project DCF, actual covenant headroom, bank profitability, regulatory-capital model or automatic public-data update. The guarantee adjustment is isolated arithmetic; actual applicability and anti-duplication implementation remain with Jiho.
-
-## Repository checks
-
-Canonical delivery worktree: `/Users/benjaminyang/strategic-materials-policy-tracker-worktrees/fi003-research`; branch `codex/fi003-jpmorgan-financing-foundation`, based on `origin/main` at `fe1d5b3b2fd9ef99018fe2be6b032466b69c5771`. The PR/commit metadata supplies the final delivery revision; no self-referential commit hash is embedded here.
-
-| Final-worktree check | Observed result |
+| Item | Original-source check / result |
 |---|---|
-| FI003 unittest discovery | **15 passed**, no failures |
-| `prototype.py --check` | **10 schedules reproduce exactly** |
-| `npm run validate` | Passed; existing source/framing warnings remain |
-| `npm run typecheck` | Passed |
-| `npm run lint` | Passed: **0 errors, 27 warnings** in pre-existing files |
-| `npm test` | **1,097 passed**, 0 failed |
-| `npm run build` | Passed |
-| Complete changed-file list and generated CSV diff | Reviewed; research package plus seven-line project-state addition only |
-| `git diff --check` | Passed after normalizing the new ledger/chronology CSVs to LF |
+| Offtake legal term / locator | S03 preamble and §2.1: effective July 9, 2025 until ten years after COD. Definitions are §1.2 |
+| Three operating states | No pre-COD operating threshold modeled; capacity ratio between COD and milestone; full escalating threshold from milestone. No automatic later reversion to capacity scaling |
+| Illustrative 2029 threshold | $140m × 1.02^4 = $151.5405024m full threshold; 50% pre-milestone = $75.7702512m. Full-year definition only; no actual true-up/first-payment calculation |
+| MP guarantee | S02 §6.09 guarantees specified project-company payments/performance **to DoD** as primary obligor, subject to underlying limits; not sovereign repayment insurance for banks |
+| Credit adjustment | S09 §1.01 EBITDA (a)(xiv): Test-Period amounts against attributable net income, certificate estimate and later duplicate-cash reversal; no actual certificate use established |
+| Q3 revolver | S19 Note 8: zero loans, $203m capacity, $128m unused L-C capacity, reported covenant compliance. $72m implied L-C exposure stays an analytical calculation |
+| Equity arithmetic | 13,590,908 × $55 = $747.499940m gross; × $53.35 = $725.0749418m after discount/before other expenses; discount $22.4249982m / gross = 3% |
+| Dilution | July-9 basic base 163,477,816; isolated post-offering base 177,068,724. Share-base increase 8.313610%; new shares / isolated post-base 7.675499%. Other dilution excluded |
+| Commitment reconciliation | Final reported $724.2m net + $275m capacity − $1bn = −$0.8m; after-discount basis yields +$0.0749418m. Issuer-reported expiration controls status; precise cancellation ledger remains unavailable |
+| PPA receipts | S19 explicitly reports $110.9m cash receipts. Opening receivable $51.016m + income $67.962m − closing $8.109m = $110.869m, consistent with that rounding |
+| Liquid-asset bridge | $1,830.286m opening to $1,337.911m closing: −$492.375m. Old −$0.599m residual resolves to +$0.821m restricted-cash release and −$1.420m investment valuation; residual now zero |
+| Principal vs carrying debt | $862.793m notes + $150m samarium + $30.340m equipment = $1,043.133m principal. $936.253m long-term carrying amount excludes equipment and reflects discounts |
+| Distinct grant uses | S20: $53,457,500 TSIF manufacturing vs $12,880,500 TEF corporate operations. S19 rounds TSIF to $53.5m, reports May agreement and $10.075m noncash receivable recognition. HREE $6.5m construction cash is separate |
 
-Initial-checkout results are preserved rather than replaced by the clean-worktree results. The original checkout was on older local main `b4834d7`. Its full Node run passed 1,067/1,068 tests: `tests/editorial-ledger.test.ts:143` expected an empty import history, while the existing ignored `.monitor-editorial/inbox.json` had five imports and zero items. The unchanged CLI reads that local state. Broad lint there traversed embedded `.claude/worktrees` and reported 4,486 errors/46,858 warnings; limiting lint to tracked project files returned zero errors/nine warnings. Validation, typecheck and build passed there. No private ledger, embedded worktree or unrelated code was changed to clear these failures.
+A separate exact-rational (`fractions.Fraction`) calculation, without importing the prototype, checked offering proceeds, PPA receipt reconciliation, full threshold and the complete liquidity bridge. Deterministic tests additionally cover wrong-state scaling, impossible milestone-before-COD, negative/overdraw cases, later EBITDA reversals, historical stability, source/cutoff failure and output equality. The threshold definition contains no express 100% ratio cap; the function therefore adds no invented cap, while listed scenarios remain 25%–100%.
 
-Fetching current main revealed that the original checkout's untracked screenshots were tracked upstream, so Git refused an in-place rebase. They were left in place. The FI003-only commit was transferred to the new worktree; the project-state conflict was resolved by adding the FI003 entry above the complete upstream state history. No upstream content was dropped. The original local research checkpoint remains at `a4bbd89` on `codex/fi003-jpmorgan-financing-research`; the foundation branch and its PR are the canonical handoff.
+Original-source files and bank transcripts are not redistributed. Retrieval fingerprints identify the bytes or stated decoded basis used; they do not authenticate issuer signatures or establish legal opinions. Rights are respected through links, short terms and paraphrased facts.
 
-The complete suite was then run against the updated base in the isolated worktree, not merely the previously failing test in isolation. Only verification prose changed after those project checks. CI status must be read on the PR; local passes are not represented as CI results. A passing code check cannot establish a financial interpretation or authorize publication.
+## Approved candidate admission and public-output checks
 
-## Material unresolved evidence and human gates
+Existing MP records were reviewed before drafting candidates. The original joint commitment/lapse, public preferred equity, samarium loan, PPA, offtake and unsplit own cash already existed. No duplicate amount was added for those instruments.
 
-1. Complete executed commitment/fee letter and exact cancellation arithmetic; JPMorgan's individual commitment and fee allocation.
-2. Actual covenant certificates, guarantee addback, cash eligibility, netting-cap calculation and a September credit refresh.
-3. Reliable remaining 10X capital-spend profile, incentive cash timing, operating ramp economics and CFADS. The latest reviewed investment expectation is **more than** $1.25bn, not a fixed budget.
-4. Jiho's independent credit/commercial interpretation and accepted scenario assumptions; Benjamin's policy/industrial integration and final thesis choice.
-5. A separately scoped workbook/deck phase, exact-output financial/source/editorial review and explicit human publication authorization.
+Three private candidates were created under the existing `CandidateRecord` workflow, source-verified by Codex, and checked in an isolated native-schema dry run. Benjamin then answered **“Approve all three packages.”** Codex admitted:
 
-No physical site inspection, borrower/bank confirmation, independent legal opinion, native Excel recalculation, finished-slide rendering, production deployment or public-content verification was performed. Those absent activities are not silently marked passed. The case is feasible as bounded financing research; project-return claims remain withheld.
+- P0: Q3 PPA receipts/payment status and offtake evidence on existing records, with unknown actual receipt dates and null total PPA amount preserved.
+- P1: separate private equity and corporate-revolver children under the existing MP event. They carry no full 10X allocation and no false `part_of`/`drawn_from` relationship to the expired commitment.
+- P2: one Texas event and the TSIF manufacturing grant, with necessary source, programme, organization and reverse links. TEF corporate support is not assigned to manufacturing; no TSIF disbursement is inferred from noncash recognition.
+
+Net additions: **one event, three finance rows, five sources, six organizations and one programme**. The current seed has 72 events, 202 sources, 100 finance rows, 130 organizations and 14 programmes. Existing project/milestone records and their original review dates remain intact. The curated revision is November 6; `publishedAt` and monitoring start remain null until actual release. Morgan Stanley Senior Funding Inc. is a company, since its lender signature alone does not establish chartered-bank status. No schema, taxonomy, aggregate calculation or site-layout implementation changed.
+
+`CandidateRecord` lacks fields for typed amendments, financial children and registries. Native proposed payloads therefore lived in a private review bundle rather than invented fields or duplicate events. The admitted rows are now reviewable in the PR. The ignored `data/candidates/fi003.local.json` contains actual approval/promotion bookkeeping and is not committed. No modeled figures enter seed data. The separate private review bundle is `/Users/benjaminyang/.codex/fi003-admission-review/2026-11-06/`.
+
+Initial dry-run checks caught a wrong programme field name, missing reverse event links and an evidence-field claim against an unallocated project; these were corrected and the whole dry run repeated successfully. Real-worktree candidate/data validation then passed. Source review and validation do not themselves grant human publication authority.
+
+## Final local checks on the revised research and admitted corpus
+
+| Check | Observed result |
+|---|---|
+| FI003 Python discovery | **18 passed** |
+| `prototype.py --check` | **11 schedules reproduce exactly** |
+| Independent rational arithmetic | Passed offering, receipt, threshold and liquidity anchors |
+| Candidate payload strict TypeScript / isolated production validator | Passed after corrections |
+| Actual `npm run validate` | Passed; 3 real private candidate/promotion records remain isolated |
+| `npm audit --omit=dev --audit-level=moderate` | **0 vulnerabilities** |
+| Full `npm test` | **1,101 passed, 0 failed** |
+| `npm run lint` | **0 errors, 27 pre-existing warnings** |
+| `npm run build` and subsequent `npm run typecheck` | Passed |
+| Local production browser / output QA | Four affected finance records, Texas event and 10X project at **375px and 1440px**; no horizontal overflow; original source links present; representative TSIF screenshots inspected |
+| Local API/export/sitemap QA | Finance APIs retain roles/statuses/amounts; JSON/CSV include admitted records; sitemap includes Texas event; no FI003 private candidate IDs or reviewer payload leakage |
+| Complete diff / generated-output inspection and `git diff --check` | Completed; no unrelated seed reordering or serialization changes retained |
+
+The first post-admission full Node run failed **22 of 1,100** tests because old current-cutoff/count assertions and the 10X stack expected the earlier corpus. Repairs preserve historical release snapshots by excluding the explicitly enumerated FI003 cohort only for those snapshots. Current tests recognize the separate Texas grant and several-public-bodies result without inventing private project funding. Three admission regressions and one dated-field audit test were added. The complete suite was rerun and passed, rather than accepting isolated successes. No prior human signatures, source dates or milestones were rewritten. A test development attempt also used the wrong aggregate property name; it was corrected to the established `instruments/byQualifier` shape before the full passing run.
+
+One initial Python expected percentage was truncated rather than rounded at six decimals; it was corrected to the independently checked 8.313610% and the complete 18-test suite rerun. The original foundation’s results remain history: 15 Python tests/10 schedules; 1,097 Node tests passing in this worktree. Its older attached checkout had a private-ledger-dependent Node failure and lint traversed embedded worktrees; private state was preserved. Those historical passes are not substituted for this revision’s checks.
+
+CI must be read against the pushed SHA; local passes are not CI results. Browser checks used the local production build, not the live website. Temporary logs/screenshots are under `/tmp/smpt-fi003-phase2/`; no source screenshots or binaries are committed.
+
+## Remaining consequence and next gate
+
+The financing-flexibility and retained-risk conclusions are strengthened; claims of optimality, sole JPMorgan design, demonstrated addback use and unsubsidized 10X viability remain unsupported. Missing original loan terms prevent a price/recourse optimization, while the $0.8m cancellation difference stays a bounded evidence gap. Missing certificates prevent actual covenant headroom. Missing project spend/ramp/collection schedules prevent a project funding forecast or DCF.
+
+Benjamin’s next decision is the thesis, ranked objections and bounded workbook/storyline scope in PUBLICATION_PLAN. Jiho’s one-page challenge remains optional input and unsent. No native Excel recalculation, finished-slide review, physical inspection, borrower/bank confirmation, legal opinion, production deployment or public publication verification is claimed. No merge, release or external message was performed.

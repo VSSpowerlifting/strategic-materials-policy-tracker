@@ -1,9 +1,11 @@
 measure,usd_m,classification,sources
-Opening company liquid assets,1830.286,reported 2025-12-31,S14
-Operating cash flow,-7.757,reported 9m 2026; accretion sign transformed,S14
-"Cash PP&E purchases, all company projects",-420.250,reported 9m 2026; accretion sign transformed,S14
-Government construction-award proceeds,6.500,reported 9m 2026; accretion sign transformed,S14
-Financing cash flows,-91.145,reported 9m 2026; accretion sign transformed,S14
-Accretion on short-term investments,20.876,reported 9m 2026; accretion sign transformed,S14
-"Residual: valuation, restricted-cash movement and other differences",-0.599,derived residual; components not independently allocated,S14
-Closing company liquid assets,1337.911,reported 2026-09-30; not spendable project cash,S14
+Opening company liquid assets,1830.286,reported 2025-12-31,S19
+Operating cash flow,-7.757,reported 9m 2026; sign reversed for investment accretion only,S19 cash flows and Note 4; S11 restricted cash
+"Cash PP&E purchases, all company projects",-420.250,reported 9m 2026; sign reversed for investment accretion only,S19 cash flows and Note 4; S11 restricted cash
+Government construction-award proceeds,6.500,reported 9m 2026; sign reversed for investment accretion only,S19 cash flows and Note 4; S11 restricted cash
+Financing cash flows,-91.145,reported 9m 2026; sign reversed for investment accretion only,S19 cash flows and Note 4; S11 restricted cash
+Accretion on short-term investments,20.876,reported 9m 2026; sign reversed for investment accretion only,S19 cash flows and Note 4; S11 restricted cash
+Release of restricted cash outside liquid-asset measure,0.821,derived from reported balances; see inputs locators,S19 cash flows and Note 4; S11 restricted cash
+Change in short-term investment unrealized valuation,-1.420,derived from reported balances; see inputs locators,S19 cash flows and Note 4; S11 restricted cash
+Unexplained residual,0.000,derived check; must be zero at disclosed precision,S19
+Closing company liquid assets,1337.911,reported 2026-09-30; not spendable project cash,S19

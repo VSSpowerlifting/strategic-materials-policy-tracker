@@ -280,7 +280,11 @@
       "src-fortune-dod-mp",
       "src-mp-10q-2025-q3",
       "src-mp-10k-2025",
-      "src-mp-10q-2026-q2"
+      "src-mp-10q-2026-q2",
+      "src-mp-10q-2026-q3",
+      "src-mp-credit-agreement-2025",
+      "src-mp-10x-offtake-agreement-2025",
+      "src-mp-equity-prospectus-2025"
     ],
     "verificationStatus": "verified",
     "intakeMode": "backfill",
@@ -2932,6 +2936,42 @@
       "officialPublicationDate": "2026-08-18",
       "discoveredAt": null,
       "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-texas-mp-northlake-2026",
+    "date": "2026-02-26",
+    "jurisdiction": "us",
+    "issuingBody": "Office of the Governor of Texas",
+    "titleOriginal": "Governor Abbott Announces MP Materials Rare Earth Magnet Manufacturing Expansion In Northlake",
+    "titleOriginalLang": "en",
+    "titleEn": "Texas announces separate manufacturing and corporate-operations grants for MP Materials Northlake campus",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding"
+    ],
+    "affectedMaterialIds": [
+      "ndfeb-magnets"
+    ],
+    "affectedSectors": [
+      "industrial"
+    ],
+    "summary": "Texas announced a $53,457,500 TSIF grant for MP Materials magnet manufacturing at the Northlake 10X campus and a separate $12,880,500 TEF grant for corporate operations. MP subsequently reported entering the TSIF reimbursement agreement in May 2026, with eligible-cost, reporting and approval conditions. Announcement and agreement do not establish cash disbursement.",
+    "analyticalSignificance": "Separates public manufacturing reimbursement from a corporate-operations incentive and the company-wide financing arrangements. The TSIF award is linked to 10X; the TEF amount is not attributed to magnet construction.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-texas-mp-northlake-2026",
+      "src-mp-10q-2026-q3"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "monitored",
+    "lifecycle": {
+      "officialPublicationDate": "2026-02-26",
+      "discoveredAt": "2026-11-06",
+      "verifiedAt": "2026-11-06",
       "publishedAt": null
     }
   }

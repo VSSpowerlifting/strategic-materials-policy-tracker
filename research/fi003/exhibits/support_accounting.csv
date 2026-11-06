@@ -1,7 +1,17 @@
 measure,usd_m,classification,sources
 2025 PPA income recognized,51.016,reported income; not receipts,S11
-9m 2026 PPA income recognized,67.962,reported income; not receipts,S14
-Cumulative PPA income through September 2026,118.978,derived recognized income; not receipts,S11;S14
+9m 2026 PPA income recognized,67.962,reported income; not receipts,S19
+Cumulative PPA income through September 2026,118.978,derived recognized income; not receipts,S11;S19
+9m 2026 PPA cash receipts reported,110.9,reported cash; rounded; already inside operating cash flow,S19 MD&A Cash Flows
+PPA opening receivable plus income less closing receivable,110.869,derived implied receipts assuming no other movements; reconciles to rounded cash disclosure,S19 Note 13; income statement
+PPA closing receivable,8.109,reported accrued income; not cash,S19 Note 13
+9m 2026 45X cash receipts,19.0,reported cash; already inside operating cash flow,S19 Note 15
+45X current receivable,23.457,reported receivable; not cash,S19 Note 13
+45X non-current receivable,32.6,reported receivable; rounded; not cash,S19 Note 15
+10X reimbursable-cost receivable,2.506,reported receivable; not cash or loan guarantee,S19 Note 13
+10X reimbursement contract liability,7.9,reported accounting liability; not all cash collected; matching capitalized fulfillment costs,S19 Note 9
+TSIF grant ceiling,53.5,conditional reimbursement ceiling; not cash,S19 Note 15
+TSIF award receivable recognized in 9m 2026,10.075,reported noncash recognition; not grant cash receipts,S19 Notes 15;21
 9m 2026 company Adjusted EBITDA,106.241,reported non-GAAP; not covenant EBITDA or cash,S14
 Government preferred cash consideration,400,company cash raised; no full 10X allocation,S11
 Government samarium loan cash consideration,150,repayable debt; different project use,S11

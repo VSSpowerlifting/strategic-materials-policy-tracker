@@ -1500,6 +1500,42 @@
     "notes": "Binding quarterly filing of the recipient, read in a browser on 2026-09-23. Note 12: \"In July 2025, the Company issued 400,000 shares ... to the DoW for cash consideration of $400.0 million.\" Note on debt: the Samarium Project Loan \"bears interest at a fixed rate of 5.38% per annum\". Note 3 and MD&A: the Price Protection Agreement commenced on October 1, 2025; PPA income of $59.9 million for the six months to June 30, 2026 and a PPA income receivable of $17.6 million ($51.0 million at December 31, 2025). The 10X Facility is in Northlake, Texas, on a 120-acre site bought in April 2026, where construction is \"currently underway\". It refers to the Department of Defense as the Department of War. Full original filing reread on 3 October 2026 for the 10X lifecycle review; the reporting date is not treated as a construction commencement date."
   },
   {
+    "id": "src-mp-10q-2026-q3",
+    "title": "MP Materials Corp. Form 10-Q for the quarterly period ended September 30, 2026",
+    "publisher": "MP Materials Corp. / SEC EDGAR",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+    "language": "en",
+    "datePublished": "2026-11-06",
+    "dateAccessed": "2026-11-06",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete original retrieved directly on November 6. Notes 3, 8, 9, 13, 15, 16, 21 and MD&A support issuer-reported financing, receipts and project uses. Signed November 5, SEC filing date November 6. No government rationale inferred from recipient disclosures."
+  },
+  {
+    "id": "src-mp-10x-offtake-agreement-2025",
+    "title": "10X Offtake Agreement effective July 9, 2025",
+    "publisher": "MP Materials Corp. / SEC EDGAR",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex105.htm",
+    "language": "en",
+    "datePublished": "2025-07-10",
+    "dateAccessed": "2026-11-06",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Filed original read; definitions Section 1.2, term Section 2.1 and payment Sections 6.1-6.8. Term begins at effective date and ends ten years after commercial operation; operating threshold conditions differ before and after production milestone."
+  },
+  {
+    "id": "src-mp-credit-agreement-2025",
+    "title": "MP Materials Credit Agreement dated August 25, 2025",
+    "publisher": "MP Materials Corp. / SEC EDGAR",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm",
+    "language": "en",
+    "datePublished": "2025-08-25",
+    "dateAccessed": "2026-11-06",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete filed agreement read, including definitions, credit-extension conditions, financial covenants and signatures. Joint syndicate; no sole-design attribution to JPMorgan."
+  },
+  {
     "id": "src-mp-dod-2025",
     "title": "MP Materials announces transformational public-private partnership with the Department of Defense",
     "publisher": "MP Materials",
@@ -1510,6 +1546,18 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Company press release setting out the DoD–MP Materials deal terms (preferred stock, warrant, loan, NdPr price floor, magnet offtake). Source type recorded as 'other' (company announcement)."
+  },
+  {
+    "id": "src-mp-equity-prospectus-2025",
+    "title": "MP Materials prospectus supplement dated July 16, 2025",
+    "publisher": "MP Materials Corp. / SEC EDGAR",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525160635/d923027d424b5.htm",
+    "language": "en",
+    "datePublished": "2025-07-18",
+    "dateAccessed": "2026-11-06",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete original read. The Offering and Use of Proceeds support company-level equity financing including 10X, strategic growth and general purposes; no full 10X allocation or underwriter retained holdings inferred."
   },
   {
     "id": "src-mp-q2-results-20260806",
@@ -2134,6 +2182,18 @@
     "sourceType": "other",
     "confidence": "primary",
     "notes": "Company release clarifying that the signed Strategic Investment Agreement is a commercial framework and that contemplated arrangements remain subject to definitive documentation and applicable approvals."
+  },
+  {
+    "id": "src-texas-mp-northlake-2026",
+    "title": "Governor Abbott Announces MP Materials Rare Earth Magnet Manufacturing Expansion In Northlake",
+    "publisher": "Office of the Governor of Texas",
+    "url": "https://gov.texas.gov/news/post/governor-abbott-announces-mp-materials-rare-earth-magnet-manufacturing-expansion-in-northlake",
+    "language": "en",
+    "datePublished": "2026-02-26",
+    "dateAccessed": "2026-11-06",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Complete official release read. Separately identifies $53,457,500 TSIF grant for manufacturing and $12,880,500 TEF grant for corporate operations. Announces grants extended; does not establish cash disbursement. Links 10X campus to NdFeB magnets."
   },
   {
     "id": "src-ucore-canada-conditional-20251031",

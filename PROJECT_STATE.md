@@ -1,3 +1,10 @@
+## 2026-11-06: FI003 financing argument revised and approved candidate packages admitted (draft PR #215)
+
+- Continues `codex/fi003-jpmorgan-financing-foundation` from reviewed `c1a700a`; [research packet](research/fi003/README.md) remains authoritative. [PUBLICATION_PLAN](research/fi003/PUBLICATION_PLAN.md) is the single tracker for owners, dates, workbook scope and release gates.
+- Strengthens financing-flexibility thesis, ranks alternatives, compares dilution/repayment/conditional availability, refreshes Q3 10-Q, corrects offtake term/definitions/three states, and distinguishes MP’s guarantee to DoD from sovereign repayment cover. Eleven schedules reproduce; Jiho’s unsent assignment is one independent objection.
+- Benjamin explicitly approved all three prepared candidate packages in chat. Admits three finance rows (private equity, corporate RCF, TSIF manufacturing grant), one Texas event, five sources, six organizations and one programme; updates existing MP support evidence and reverse links. Corporate financing is unallocated to projects; TEF corporate operations are not assigned to manufacturing. No schema or taxonomy change. Private promotion records remain ignored; `publishedAt` and monitoring start remain null pending actual release.
+- Verification, prior failures and exact remaining decisions: [VERIFICATION](research/fi003/VERIFICATION.md). December 4 is conditional on Benjamin’s methodological/editorial and exact-file publication decisions. Commit/push authorized; no merge, deployment or external message authorized.
+
 ## 2026-11-06: FI003 JPMorgan / MP Materials research foundation
 
 - Research-only branch `codex/fi003-jpmorgan-financing-foundation` is based on current main `fe1d5b3` (initial investigation used local main `b4834d7`); [FI003 packet](research/fi003/README.md) reconciles the original joint commitment's undrawn expiration, equity underwriting, corporate revolver and government contracts through November 6, 2026.
