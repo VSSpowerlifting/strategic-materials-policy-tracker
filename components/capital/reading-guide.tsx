@@ -28,8 +28,8 @@ export function RecordReadingGuide({record}:{record:FinancialCommitment}){
     </div>)}
    </dl>
    <p className="mt-4 border-t border-border pt-3 text-sm leading-6 text-muted">
-    {reading.boundary} A financial record alone never independently verifies construction,
-    commissioning or production. <Link href="/methodology#capital-counting"
+    {reading.boundary} Construction, commissioning and production require
+    separate physical-progress evidence. <Link href="/methodology#capital-counting"
       className="font-medium text-accent underline underline-offset-2 hover:text-accent-strong">
       Read SMPT&apos;s counting and evidence rules
     </Link>.
@@ -40,7 +40,7 @@ export function RecordReadingGuide({record}:{record:FinancialCommitment}){
 const keys={
  capital:{
   title:"Financing definitions",
-  intro:"These describe different things: the type of figure and the source-reported stage of the financial relationship. They are not a single timeline or an amount of money spent.",
+  intro:"Value roles classify the figure; financial statuses describe the instrument’s reported stage. Payment evidence is assessed separately.",
   rows:[
    {term:valueRoleLabels.commitment,meaning:VALUE_ROLE_DEFS.commitment},
    {term:valueRoleLabels.program_envelope,meaning:VALUE_ROLE_DEFS.program_envelope},
@@ -51,28 +51,28 @@ const keys={
    {term:financialStatusLabels.contracted,meaning:FINANCIAL_STATUS_DEFS.contracted},
    {term:financialStatusLabels.partially_disbursed,meaning:FINANCIAL_STATUS_DEFS.partially_disbursed},
    {term:financialStatusLabels.disbursed,meaning:FINANCIAL_STATUS_DEFS.disbursed},
-   {term:"Obligated",meaning:"Obligation is not an SMPT financial-status label. In particular, 'contracted' alone does not establish whether funds have been obligated."},
+   {term:"Obligated",meaning:"Obligation is tracked outside SMPT's financial-status categories. A contracted instrument requires separate evidence of any formal obligation."},
   ],
  },
  projects:{
   title:"Project relationships",
-  intro:"These relationships are distinct. Neither a project registration nor a financing reference independently proves that a facility was built.",
+  intro:"Project registrations and financing references establish recorded relationships. Physical completion requires separate milestone evidence.",
   rows:[
    {term:"Direct financing reference",meaning:"A financial instrument has a registered project ID. Its value role and current legal status still determine whether any funding is a public commitment or paid."},
-   {term:"Shared, unallocated association",meaning:"One unsplit financing instrument references multiple projects. Its amount cannot be assigned to any single project."},
-   {term:"Project designation",meaning:"A recorded designation confers recognition or standing. It is not an award or evidence of disbursement."},
+   {term:"Shared, unallocated association",meaning:"One instrument references several projects; its reported amount remains unallocated across them."},
+   {term:"Project designation",meaning:"A designation records official recognition or standing. Awards and disbursements use separate finance records."},
    {term:"Physical progress",meaning:"Company and government reports of construction, commissioning or operation are separate from funding; independently verified project milestones require their own source and editorial review."},
   ],
  },
  programmes:{
   title:"Programme finance",
-  intro:"A government scheme can have an authorized ceiling, individual finance records and designations. Those are not interchangeable or additive.",
+  intro:"A government scheme can have an authorized ceiling, individual finance records and designations. Each has a distinct role and counting basis.",
   rows:[
    {term:valueRoleLabels.program_envelope,meaning:VALUE_ROLE_DEFS.program_envelope},
    {term:valueRoleLabels.lending_authority,meaning:VALUE_ROLE_DEFS.lending_authority},
    {term:valueRoleLabels.commitment,meaning:VALUE_ROLE_DEFS.commitment},
-   {term:"Parent and child schemes",meaning:"A parent programme's record view can include the same financial rows as its child. Do not add both totals together."},
-   {term:"Designation",meaning:"Recognition of a strategic project is not a financial award, disbursement or proof of completed production."},
+   {term:"Parent and child schemes",meaning:"Parent and child programme views may contain the same instruments. Each underlying instrument is counted once."},
+   {term:"Designation",meaning:"Strategic-project recognition records standing. Financial awards, payments and physical milestones require separate evidence."},
   ],
  },
 } as const;
