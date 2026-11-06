@@ -7,16 +7,16 @@ import type {FinancialCommitment} from "@/lib/types";
 export function RecordReadingGuide({record}:{record:FinancialCommitment}){
  const reading=explainFinancialRecord(record);
  const rows=[
-  {label:"What kind of figure?",heading:reading.role.label,text:reading.role.definition},
-  {label:"What has happened legally?",heading:reading.status.label,text:reading.status.definition},
-  {label:"Has money been paid?",heading:"Follow the payment evidence",text:reading.payment},
-  {label:"What does it link to?",heading:"Project attribution",text:reading.linkage},
+  {label:"Figure type",heading:reading.role.label,text:reading.role.definition},
+  {label:"Legal status",heading:reading.status.label,text:reading.status.definition},
+  {label:"Payment",heading:"Payment evidence",text:reading.payment},
+  {label:"Linked projects",heading:"Project attribution",text:reading.linkage},
  ];
  return <section aria-labelledby="record-reading-guide" data-testid="financial-reading-guide"
    className="mt-7 max-w-4xl rounded-lg border border-border-strong bg-card p-5 sm:p-6">
    <p className="font-mono text-xs text-accent">Reading this record</p>
    <h2 id="record-reading-guide" className="mt-2 font-display text-xl font-semibold leading-snug">
-     What the evidence says — and does not say
+     Evidence and status
    </h2>
    <dl className="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
     {rows.map(row=><div key={row.label} className="min-w-0 border-t border-border pt-3">
@@ -39,7 +39,7 @@ export function RecordReadingGuide({record}:{record:FinancialCommitment}){
 
 const keys={
  capital:{
-  title:"Understanding financing terms",
+  title:"Financing definitions",
   intro:"These describe different things: the type of figure and the source-reported stage of the financial relationship. They are not a single timeline or an amount of money spent.",
   rows:[
    {term:valueRoleLabels.commitment,meaning:VALUE_ROLE_DEFS.commitment},
@@ -55,7 +55,7 @@ const keys={
   ],
  },
  projects:{
-  title:"Understanding project relationships",
+  title:"Project relationships",
   intro:"These relationships are distinct. Neither a project registration nor a financing reference independently proves that a facility was built.",
   rows:[
    {term:"Direct financing reference",meaning:"A financial instrument has a registered project ID. Its value role and current legal status still determine whether any funding is a public commitment or paid."},
@@ -65,7 +65,7 @@ const keys={
   ],
  },
  programmes:{
-  title:"Understanding programme finance",
+  title:"Programme finance",
   intro:"A government scheme can have an authorized ceiling, individual finance records and designations. Those are not interchangeable or additive.",
   rows:[
    {term:valueRoleLabels.program_envelope,meaning:VALUE_ROLE_DEFS.program_envelope},
@@ -82,7 +82,7 @@ export function ResearchReadingKey({topic}:{topic:keyof typeof keys}){
  return <details data-testid={"reading-key-"+topic}
   className="mt-8 max-w-5xl rounded-lg border border-border-strong bg-card/50">
   <summary className="flex min-h-12 cursor-pointer list-item items-center px-4 py-3 font-display text-sm font-semibold text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-5">
-   {key.title} — quick definitions
+   {key.title}
   </summary>
   <div className="border-t border-border px-4 pb-5 pt-3 sm:px-5">
    <p className="max-w-3xl text-sm leading-6 text-muted">{key.intro}</p>
