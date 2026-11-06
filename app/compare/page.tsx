@@ -67,7 +67,7 @@ export default function ComparePage() {
                 Gallium: licensing exports and supporting recovery
               </h2>
               <p className="mt-4 text-base leading-7 text-muted">
-                China’s gallium export licensing and Australia’s project support differ in timing, scope and legal status. Comparing them does not establish causation.
+                China’s gallium export licensing and Australia’s project support differ in timing, scope and legal status. Any causal relationship between them would require separate evidence.
               </p>
               <Link
                 href="/events?material=gallium"
@@ -123,9 +123,9 @@ export default function ComparePage() {
                 </p>
                 <p className="mt-3 text-sm leading-6 text-muted">
                   This project-level instrument sits in the US–Australia
-                  framework record. An announced financial state does not
-                  establish execution or payment. Offtake rights and US support
-                  remain separate instruments.
+                  framework record. Its published status is announced; execution
+                  and payment require later evidence. Offtake rights and US
+                  support are recorded separately.
                 </p>
                 <Link
                   href={`/capital/${support.id}`}
@@ -150,7 +150,7 @@ export default function ComparePage() {
           <p className="mt-6 border-t pt-4 text-sm leading-7 text-muted">
             Status basis: corpus revised {formatDate(site.lastUpdated)}. Amounts
             keep their source-stated currencies and qualifiers; these examples
-            are not summed. Official rationale is separately quoted on the{" "}
+            appear separately. Official rationale is quoted on the{" "}
             <Link href="/framing" className="text-accent underline">
               framing comparison
             </Link>
@@ -164,10 +164,10 @@ export default function ComparePage() {
         description="Choose a populated cell to see the mechanisms, latest event and filtered policy records behind it. Compare within a material, then inspect the sources before drawing a substantive conclusion."
       >
         <p className="mb-5 max-w-3xl text-sm leading-7 text-muted">
-          The cells count distinct coded policy events, not financial values,
-          legal strength or industrial outcomes. A multi-material event appears
-          in multiple rows; totals overlap. An empty cell means no coded event,
-          not no real-world activity.
+          The cells count distinct coded policy events. Financial value, legal
+          strength and industrial outcomes require separate evidence. A
+          multi-material event appears in each relevant row, so row totals
+          overlap. An empty cell indicates a gap in this coded corpus.
         </p>
         <CompareMatrix
           jurisdictions={jurisdictions}
