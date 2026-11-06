@@ -34,14 +34,13 @@ export default function ComparePage() {
   return (
     <Container width="wide" className="py-12">
       <PageHeading
-        eyebrow="Compare"
-        title="Different tools. The same material."
-        lead="Compare what governments have documented: the instruments they use, the legal and financial states their sources support, and the rationale they give. Record counts measure this corpus's coverage, not effectiveness."
+        title="Compare"
+        lead="Compare government measures, financing and projects by material and supply-chain stage."
       />
       <Section
         className="mt-14"
         title="Materials by supply-chain stage"
-        description="The lattice retains separate encodings for government commitments, control clauses and designations. Records can occupy multiple stages. This is a structural view, not an impact or capital total."
+        description="Counts for financial commitments, control clauses and project designations, shown separately."
       >
         <LatticeCompare
           model={buildLatticeModel(site.lastUpdated)}
@@ -68,9 +67,7 @@ export default function ComparePage() {
                 Gallium: licensing exports and supporting recovery
               </h2>
               <p className="mt-4 text-base leading-7 text-muted">
-                Two documented approaches to gallium supply chains. These
-                records differ in date, scope and legal character. Their
-                juxtaposition does not establish that one caused the other.
+                China’s gallium export licensing and Australia’s project support differ in timing, scope and legal status. Comparing them does not establish causation.
               </p>
               <Link
                 href="/events?material=gallium"
