@@ -32,7 +32,7 @@ import type { FinancialInstrument } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Portfolios",
   description:
-    "Each government's strategic-material capital side by side: committed public money per currency, binding and not yet binding; what it is spent through, on which stages and materials, at home or abroad; where it flows; and which projects more than one provider backs.",
+    "Government financial instruments compared by currency, legal standing, material, industrial stage, geography and co-financing relationships.",
 };
 
 type Row = { label: string; values: number[]; href?: (i: number) => string };
@@ -284,7 +284,7 @@ export default function PortfoliosPage() {
         <Section
           index="04"
           title="Projects with more than one backer"
-          description="By kind: more than one government's capital, public and private capital, several public bodies, or public capital alongside a designation. Envelopes and total project cost are not capital provided, so they do not count."
+          description="By kind: more than one government's capital, public and private capital, several public bodies, or public capital alongside a designation. Programme ceilings and total project costs appear outside the count of capital provided."
         >
           {co.length ? (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -315,8 +315,8 @@ export default function PortfoliosPage() {
         {designators.length ? (
           <Section
             index="05"
-            title="Recognition without money"
-            description="Projects a government recognizes under a designation scheme. Standing, not capital: never summed, never counted in the tables above. At home or abroad is read from the designated project's stated country against the designating government's home territory."
+            title="Project designations"
+            description="Projects a government recognizes under a designation scheme. Designation standing is tracked separately from financial commitments. At home or abroad is read from the designated project's stated country against the designating government's home territory."
           >
             <div className="space-y-4">
               {designators.map((d) => {
