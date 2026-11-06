@@ -67,6 +67,8 @@ const NOVEMBER_5_EXPANSION_IDS=new Set([
   "src-us-exim-project-vault-2026",
   "src-uk-cm-accelerator-2026",
   "src-au-nolans-construction-2026",
+  "src-ca-genm-cgf-equity-close-2026",
+  "src-ca-genm-marathon-construction-2026",
   "fc-us-exim-project-vault-supply-resilience-2026",
   "fc-uk-cm-accelerator-economic-security-2026",
   "tantalum","niobium","boron","aluminium","copper","palladium",
