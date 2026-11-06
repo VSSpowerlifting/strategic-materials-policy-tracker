@@ -33,7 +33,7 @@ test("Narva public seed matches explicitly authorized reviewed canonical M3 cand
   assert.equal(n.note,q.editorialCaution);
   assert.equal(n.reviewedBy,"Benjamin Yang");
   assert.equal(n.reviewedAt,"2026-10-17");
-  assert.equal(site.lastUpdated,"2026-11-04");
+  assert.equal(site.lastUpdated,"2026-11-06");
   assert.equal(candidate.publicRouteReleaseAuthorized,false);
   assert.equal(candidate.reviewInputMetadataSha256,"0e8fdca930230527148be4f1da89439f1482b665243b16d747251a47707e6c1b");
   assert.deepEqual(validateProjectMilestones(rows,{projects:getAllProjects(),sources:getAllSources(),corpusDate:site.lastUpdated}),[]);

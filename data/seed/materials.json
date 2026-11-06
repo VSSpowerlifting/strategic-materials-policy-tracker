@@ -57,7 +57,8 @@
       "evt-eu-crma-strategic-projects-2026-10",
       "evt-br-bndes-finep-minerals-2025",
       "evt-kr-motir-rare-earths-2026",
-      "evt-us-doe-byproduct-pilots-selections-2026"
+      "evt-us-doe-byproduct-pilots-selections-2026",
+      "evt-au-donald-gam-financing-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -310,7 +311,8 @@
       "evt-ca-g7-cmpa-2025",
       "evt-ca-nrcan-pdac-2026",
       "evt-eu-crma-strategic-projects-2026-10",
-      "evt-br-bndes-finep-minerals-2025"
+      "evt-br-bndes-finep-minerals-2025",
+      "evt-us-exim-critical-minerals-2026-08"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -594,6 +596,133 @@
     "sourceIds": [
       "src-iea-critical-minerals",
       "src-cset-mofcom-61"
+    ]
+  },
+  {
+    "id": "tantalum",
+    "slug": "tantalum",
+    "nameEn": "Tantalum",
+    "nameZh": "钽",
+    "grouping": null,
+    "statusSummary": "EXIM and EFA announced separate loan support linked to tantalum production.",
+    "chinaPositionNote": "This tranche does not establish a China-specific policy or production estimate for this material.",
+    "diversificationNote": "The admitted source establishes an announced financing or project development step, not operating capacity or material delivered.",
+    "downstreamIndustries": [
+      "Electronic capacitors",
+      "Aerospace alloys",
+      "Medical devices"
+    ],
+    "eventIds": [
+      "evt-us-exim-critical-minerals-2026-08",
+      "evt-au-donald-gam-financing-2026"
+    ],
+    "sourceIds": [
+      "src-us-exim-minerals-roundtable-2026",
+      "src-au-donald-gam-2026"
+    ]
+  },
+  {
+    "id": "niobium",
+    "slug": "niobium",
+    "nameEn": "Niobium",
+    "nameZh": "铌",
+    "grouping": null,
+    "statusSummary": "EXIM named niobium alongside tantalum in a financing announcement.",
+    "chinaPositionNote": "This tranche does not establish a China-specific policy or production estimate for this material.",
+    "diversificationNote": "The admitted source establishes an announced financing or project development step, not operating capacity or material delivered.",
+    "downstreamIndustries": [
+      "Steel alloys",
+      "Electronics",
+      "Advanced manufacturing"
+    ],
+    "eventIds": [
+      "evt-us-exim-critical-minerals-2026-08"
+    ],
+    "sourceIds": [
+      "src-us-exim-minerals-roundtable-2026"
+    ]
+  },
+  {
+    "id": "boron",
+    "slug": "boron",
+    "nameEn": "Boron",
+    "nameZh": "硼",
+    "grouping": null,
+    "statusSummary": "EXIM announced funding for 5E Boron Americas; no payment is established.",
+    "chinaPositionNote": "This tranche does not establish a China-specific policy or production estimate for this material.",
+    "diversificationNote": "The admitted source establishes an announced financing or project development step, not operating capacity or material delivered.",
+    "downstreamIndustries": [
+      "Permanent magnets",
+      "Semiconductors",
+      "Specialty glass"
+    ],
+    "eventIds": [
+      "evt-us-exim-critical-minerals-2026-08"
+    ],
+    "sourceIds": [
+      "src-us-exim-minerals-roundtable-2026"
+    ]
+  },
+  {
+    "id": "aluminium",
+    "slug": "aluminium",
+    "nameEn": "Aluminium (aluminum)",
+    "nameZh": "铝",
+    "grouping": null,
+    "statusSummary": "Canada's Strategic Response Fund announced site-modernization support for aluminum production.",
+    "chinaPositionNote": "This tranche does not establish a China-specific policy or production estimate for this material.",
+    "diversificationNote": "The admitted source establishes an announced financing or project development step, not operating capacity or material delivered.",
+    "downstreamIndustries": [
+      "Aerospace",
+      "Defense production",
+      "Automotive components"
+    ],
+    "eventIds": [
+      "evt-ca-srf-aluminium-2026"
+    ],
+    "sourceIds": [
+      "src-ca-srf-aluminium-2026"
+    ]
+  },
+  {
+    "id": "copper",
+    "slug": "copper",
+    "nameEn": "Copper",
+    "nameZh": "铜",
+    "grouping": null,
+    "statusSummary": "Canada Growth Fund announced funding to advance the Marathon copper-palladium undertaking.",
+    "chinaPositionNote": "This tranche does not establish a China-specific policy or production estimate for this material.",
+    "diversificationNote": "The admitted source establishes an announced financing or project development step, not operating capacity or material delivered.",
+    "downstreamIndustries": [
+      "Electrical infrastructure",
+      "Industrial manufacturing",
+      "Transportation"
+    ],
+    "eventIds": [
+      "evt-ca-cgf-marathon-2026"
+    ],
+    "sourceIds": [
+      "src-cgf-marathon-2026"
+    ]
+  },
+  {
+    "id": "palladium",
+    "slug": "palladium",
+    "nameEn": "Palladium",
+    "nameZh": "钯",
+    "grouping": "platinum-group metals",
+    "statusSummary": "Marathon's developer and financier describe palladium as a planned project output, not current production.",
+    "chinaPositionNote": "This tranche does not establish a China-specific policy or production estimate for this material.",
+    "diversificationNote": "The admitted source establishes an announced financing or project development step, not operating capacity or material delivered.",
+    "downstreamIndustries": [
+      "Transportation components",
+      "Industrial catalysts"
+    ],
+    "eventIds": [
+      "evt-ca-cgf-marathon-2026"
+    ],
+    "sourceIds": [
+      "src-cgf-marathon-2026"
     ]
   }
 ]

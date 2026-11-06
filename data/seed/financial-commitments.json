@@ -294,7 +294,14 @@
         "note": "Arafura executed a binding US$100 million subscription agreement with Export Finance Australia; completion remained subject to conditions precedent."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-au-nolans-construction-2026",
+        "note": "The 8 October 2026 government release states construction had commenced by its publication date; the exact start day is not established. This is project progress, not evidence that EFA equity subscription conditions were satisfied or funds were paid."
+      }
+    ],
     "terms": [],
     "outcomes": [
       {
@@ -351,12 +358,21 @@
         "evidence": "explicit",
         "locator": "Overview and Export Finance Australia section (pp. 1–2); Annexure B (p. 6)",
         "note": "Binding US$100M EFA subscription is for fully paid ordinary shares in Arafura Rare Earths Limited, not shares in a legally distinct Nolans project. Amount and status are unchanged; completion subject to conditions precedent."
+      },
+      {
+        "sourceId": "src-au-nolans-construction-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs",
+        "note": "Supports physical construction as of the release, not the equity instrument's financial lifecycle."
       }
     ],
-    "notes": "The US$100 million EFA equity support announced in October 2025 became a binding subscription agreement on 1 April 2026. Completion remained subject to conditions precedent, so no disbursement is inferred. A 2 October 2026 lifecycle review found primary company material still tying full construction commencement to financing/settlement milestones; no later primary source reviewed cleanly confirmed full construction commencement, so no physical construction status is recorded here. The April 2026 ASX disclosure identifies Arafura Rare Earths Limited as the legal share issuer/recipient of EFA's agreed investment; Nolans is the project to which proceeds are intended to be applied, not a share-issuing entity.",
+    "notes": "The US$100 million EFA equity support announced in October 2025 became a binding subscription agreement on 1 April 2026. Completion remained subject to conditions precedent, so no disbursement is inferred. A 2 October 2026 lifecycle review found primary company material still tying full construction commencement to financing/settlement milestones; no later primary source reviewed cleanly confirmed full construction commencement, so no physical construction status is recorded here. The April 2026 ASX disclosure identifies Arafura Rare Earths Limited as the legal share issuer/recipient of EFA's agreed investment; Nolans is the project to which proceeds are intended to be applied, not a share-issuing entity. Update 5 November 2026: Australian Government confirms construction had commenced by 8 October; financing remains at the last independently supported status. ",
     "lifecycleReview": {
       "financialStatusCheckedAt": "2026-10-02",
-      "implementationStatusCheckedAt": "2026-10-02"
+      "implementationStatusCheckedAt": "2026-11-05"
     }
   },
   {
@@ -796,6 +812,223 @@
     "notes": "The release does not say which instruments the transactions will use. The facility it is drawn from provides loans and equity support, and the Reserve operates by securing and on-selling rights to minerals."
   },
   {
+    "id": "fin-au-donald-efa-2026",
+    "eventId": "evt-au-donald-gam-financing-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "70000000",
+      "currency": "AUD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to A$70 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export Finance Australia",
+    "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-efa"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Astron Corporation",
+    "recipientOrgIds": [
+      "org-au-astron"
+    ],
+    "project": "Donald Mineral Sands Project",
+    "projectId": "prj-au-donald-mineral-sands",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Victoria",
+        "asStated": "regional Victoria"
+      }
+    ],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-10-27",
+        "sourceId": "src-au-donald-gam-2026",
+        "note": "Provider decision or conditional approval; neither execution nor disbursement is established."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-donald-gam-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "Conditional approval; the announcement does not specify debt versus equity, definitive documentation, or disbursement."
+  },
+  {
+    "id": "fin-au-donald-nrf-2026",
+    "eventId": "evt-au-donald-gam-financing-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "110000000",
+      "currency": "AUD",
+      "qualifier": "exact",
+      "amountAsStated": "A$110 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "National Reconstruction Fund",
+    "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-nrf"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Astron Corporation",
+    "recipientOrgIds": [
+      "org-au-astron"
+    ],
+    "project": "Donald Mineral Sands Project",
+    "projectId": "prj-au-donald-mineral-sands",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "AU",
+        "subnational": "Victoria",
+        "asStated": "regional Victoria"
+      }
+    ],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "rare-earth-elements"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-10-27",
+        "sourceId": "src-au-donald-gam-2026",
+        "note": "Provider decision or conditional approval; neither execution nor disbursement is established."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-donald-gam-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "Conditional government investment approval; the legal instrument is not specified, so do not assume equity or payment."
+  },
+  {
+    "id": "fin-au-gam-efa-2026",
+    "eventId": "evt-au-donald-gam-financing-2026",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "41400000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "US$41.4 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "Export Finance Australia",
+    "providerJurisdiction": "australia",
+    "providerOrgIds": [
+      "org-au-efa"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Global Advanced Metals",
+    "recipientOrgIds": [
+      "org-global-advanced-metals"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "tantalum"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-10-27",
+        "sourceId": "src-au-donald-gam-2026",
+        "note": "Provider decision or conditional approval; neither execution nor disbursement is established."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-donald-gam-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "Conditional EFA lending for tantalum production; project location not established. Distinct from EXIM's August $25M loan in Pennsylvania."
+  },
+  {
     "id": "fin-br-bndes-piaui-niquel-2026",
     "eventId": "evt-br-bndes-piaui-2026",
     "relationships": [],
@@ -982,6 +1215,198 @@
       }
     ],
     "notes": "CGF says the US$25 million supports expansion of the Kingston Centre of Excellence, Canadian R&D, execution of the first Hub and broader commercialization. The row links the named Kingston project because the source directly supports it, but the amount is not treated as exclusively allocated to construction or any single stage."
+  },
+  {
+    "id": "fin-ca-cgf-marathon-equity-2026",
+    "eventId": "evt-ca-cgf-marathon-2026",
+    "relationships": [],
+    "instrument": "equity",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "90000000",
+      "currency": "CAD",
+      "qualifier": "approximately",
+      "amountAsStated": "~ $90 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Generation Mining Limited",
+    "recipientOrgIds": [
+      "org-ca-generation-mining"
+    ],
+    "project": "Marathon Project",
+    "projectId": "prj-ca-marathon-copper-palladium",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Northwestern Ontario"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "copper",
+      "palladium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-09-14",
+        "sourceId": "src-cgf-marathon-2026",
+        "note": null
+      },
+      {
+        "status": "disbursed",
+        "date": "2026-09-21",
+        "sourceId": "src-ca-genm-cgf-equity-close-2026",
+        "note": "Issuer confirms completed issuance of CGF's C$40m private placement shares and approximately C$49m bought-deal shares. The actual combined value of roughly C$89m reconciles to CGF's earlier approximately C$90m announcement; preserve its original approximate amount."
+      }
+    ],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-ca-genm-marathon-construction-2026",
+        "note": "Issuer confirmed Marathon early-works construction had commenced by 1 October 2026; exact first-work day is unstated. The project milestone is separate from the timing of CGF equity payment and the convertible note."
+      }
+    ],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-cgf-marathon-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-ca-genm-cgf-equity-close-2026",
+        "supports": [
+          "amount",
+          "status",
+          "recipient",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Closing and CGF acquisition paragraphs",
+        "note": "Closing evidence: C$40m private placement plus approximately C$49m bought-deal CGF shares, versus earlier ~C$90m commitment."
+      },
+      {
+        "sourceId": "src-ca-genm-marathon-construction-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and Early Works Program",
+        "note": "Physical construction at Marathon; no inference about note issuance, further drawdowns or commercial production."
+      }
+    ],
+    "notes": "CGF's approximately C$90m announced equity commitment was completed through a C$40m private placement and approximately C$49m acquisition in the bought-deal offering, confirmed on 21 September 2026. The original approximate headline is retained, rather than replacing it with an exact C$90m cash receipt. The issuer subsequently reported early works underway at Marathon by 1 October 2026; the exact first construction day is unstated. This equity closing does not establish issuance of CGF's separately proposed C$50m convertible note."
+  },
+  {
+    "id": "fin-ca-cgf-marathon-note-2026",
+    "eventId": "evt-ca-cgf-marathon-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public_enterprise",
+    "amount": {
+      "value": "50000000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$50 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Canada Growth Fund",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-canada-growth-fund"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Generation Mining Limited",
+    "recipientOrgIds": [
+      "org-ca-generation-mining"
+    ],
+    "project": "Marathon Project",
+    "projectId": "prj-ca-marathon-copper-palladium",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Ontario",
+        "asStated": "Northwestern Ontario"
+      }
+    ],
+    "stages": [
+      "mining"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "copper",
+      "palladium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-09-14",
+        "sourceId": "src-cgf-marathon-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-cgf-marathon-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "The 14 September source describes a C$50m convertible note within a proposed C$100m offering, with shareholder and regulatory closing conditions. The 21 September issuer release confirms CGF common-share purchases, not the convertible note closing. SMPT's instrument taxonomy lacks a convertible-debt subtype; keep the instrument unspecified and financial status announced pending direct evidence of issuance."
   },
   {
     "id": "fin-ca-cmrdd-2024-cyclic-materials",
@@ -3538,6 +3963,168 @@
     }
   },
   {
+    "id": "fin-ca-srf-alouette-2026",
+    "eventId": "evt-ca-srf-aluminium-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "28500000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$28.5 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Government of Canada (Strategic Response Fund)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-ca-srf",
+    "recipient": "Aluminerie Alouette",
+    "recipientOrgIds": [
+      "org-ca-aluminerie-alouette"
+    ],
+    "project": "Aluminerie Alouette electrolysis modernization",
+    "projectId": "prj-ca-alouette-electrolysis",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Quebec",
+        "asStated": "Quebec"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "aluminium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-10-23",
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "C$135M total project cost, separate from C$28.5M public support. Legal financing instrument and payment status unstated."
+  },
+  {
+    "id": "fin-ca-srf-rio-tinto-2026",
+    "eventId": "evt-ca-srf-aluminium-2026",
+    "relationships": [],
+    "instrument": "unspecified",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "164800000",
+      "currency": "CAD",
+      "qualifier": "exact",
+      "amountAsStated": "$164.8 million",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Government of Canada (Strategic Response Fund)",
+    "providerJurisdiction": "canada",
+    "providerOrgIds": [
+      "org-ca-government"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-ca-srf",
+    "recipient": "Rio Tinto Aluminium",
+    "recipientOrgIds": [
+      "org-ca-rio-tinto-aluminium"
+    ],
+    "project": "Rio Tinto Saguenay-Lac-Saint-Jean aluminum projects",
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "CA",
+        "subnational": "Quebec",
+        "asStated": "Saguenay-Lac-Saint-Jean"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "aluminium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-10-23",
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "Public support covers both Alma billet casting and Grande-Baie anode-baking modernization; no per-facility allocation is stated. C$818.5M denotes total project costs, not public funding.",
+    "associatedProjectIds": [
+      "prj-ca-alma-billet-casting",
+      "prj-ca-grande-baie-anode-furnaces"
+    ]
+  },
+  {
     "id": "fin-ca-trail-cgf-2026-indication",
     "eventId": "evt-ca-trail-strategic-metals-2026",
     "relationships": [],
@@ -5400,6 +5987,73 @@
       }
     ],
     "notes": "The amount is approximate as both lists print it (約, \"about\"); the yen figure is 億円 × 100,000,000."
+  },
+  {
+    "id": "fin-uk-cm-accelerator-envelope-2026",
+    "eventId": "evt-uk-cm-accelerator-2026",
+    "relationships": [],
+    "instrument": "grant",
+    "valueRole": "program_envelope",
+    "capitalSource": "public",
+    "amount": {
+      "value": "25000000",
+      "currency": "GBP",
+      "qualifier": "up_to",
+      "amountAsStated": "up to £25 million",
+      "currencyBasis": "stated"
+    },
+    "provider": "UK Department for Business, Innovation, Science and Trade",
+    "providerJurisdiction": "uk",
+    "providerOrgIds": [
+      "org-uk-bist"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-uk-cm-accelerator",
+    "recipient": null,
+    "recipientOrgIds": [],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "research_development",
+      "processing",
+      "recycling"
+    ],
+    "stageAllocation": "multi_stage_unallocated",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-05",
+        "sourceId": "src-uk-cm-accelerator-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-uk-cm-accelerator-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "stages",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "Programme grant envelope, not awarded project financing. Funding decisions forecast for November–December 2026. Future grants must be distinguished from and not added to the programme ceiling."
   },
   {
     "id": "fin-uk-cms-2025-critical-mineral-fund",
@@ -10005,6 +10659,156 @@
     "notes": "The recipient's SEC-furnished earnings-call transcript allocates $20M to Thompson Falls. Its Form 10-Q reports $12.8M of accepted milestones received in April 2026 and recorded against Thompson Falls construction in progress. Neither amount is incremental to the parent $27M award."
   },
   {
+    "id": "fin-us-exim-5e-boron-2026",
+    "eventId": "evt-us-exim-critical-minerals-2026-08",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "8000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$8M",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Export-Import Bank of the United States",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-exim"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "5E Advanced Materials, LLC",
+    "recipientOrgIds": [
+      "org-us-5e-advanced-materials"
+    ],
+    "project": "5E Boron Americas project",
+    "projectId": "prj-us-5e-boron-americas",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "California",
+        "asStated": "California"
+      }
+    ],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "boron"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-07",
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "EXIM announced $8M for the named project; separate SEC descriptions of a differently sized proposed EXIM EMP facility should not be conflated with this announced amount."
+  },
+  {
+    "id": "fin-us-exim-gam-2026",
+    "eventId": "evt-us-exim-critical-minerals-2026-08",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "25000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$25M",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Export-Import Bank of the United States",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-exim"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Global Advanced Metals",
+    "recipientOrgIds": [
+      "org-global-advanced-metals"
+    ],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Pennsylvania",
+        "asStated": "Pennsylvania"
+      }
+    ],
+    "stages": [],
+    "stageAllocation": "not_stated",
+    "materialIds": [
+      "tantalum",
+      "niobium"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-07",
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "location",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "EXIM names the borrower and metals but not a distinct project, signed documents or cash payment."
+  },
+  {
     "id": "fin-us-exim-perpetua-stibnite-2026",
     "eventId": "evt-us-exim-stibnite-2026",
     "relationships": [],
@@ -10141,6 +10945,161 @@
       }
     ],
     "notes": "EXIM's official transaction table uses 'Authorized', but the commitment remains non-binding in SMPT's lifecycle until definitive loan documents are executed. The June 2026 filing states that availability depends on completion of definitive documentation and satisfaction of conditions precedent. EXIM's May 21, 2026 board record names Perpetua Resources Idaho Inc. as prospective borrower/PSOR and the Canadian-incorporated Perpetua Resources Corp. as proposed guarantor; this classification does not imply execution of a loan or guarantee."
+  },
+  {
+    "id": "fin-us-exim-project-vault-2026",
+    "eventId": "evt-us-exim-project-vault-2026",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "10000000000",
+      "currency": "USD",
+      "qualifier": "up_to",
+      "amountAsStated": "up to $10 billion",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Export-Import Bank of the United States",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-exim"
+    ],
+    "legalAuthority": null,
+    "programmeId": "prg-us-project-vault",
+    "recipient": "Project Vault",
+    "recipientOrgIds": [],
+    "project": null,
+    "projectId": null,
+    "facility": null,
+    "locations": [],
+    "stages": [
+      "stockpiling"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [],
+    "materialAttribution": "not_stated",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "decided",
+        "date": "2026-02-02",
+        "sourceId": "src-us-exim-project-vault-2026",
+        "note": "Provider decision or conditional approval; neither execution nor disbursement is established."
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-project-vault-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "stages",
+          "programme"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "Board approval of a loan ceiling, not proof of a signed agreement, disbursement, reserve inventory, or specific mineral procurement. Do not add potential private financing to this public amount."
+  },
+  {
+    "id": "fin-us-exim-westwater-2026",
+    "eventId": "evt-us-exim-critical-minerals-2026-08",
+    "relationships": [],
+    "instrument": "loan",
+    "valueRole": "commitment",
+    "capitalSource": "public",
+    "amount": {
+      "value": "25000000",
+      "currency": "USD",
+      "qualifier": "exact",
+      "amountAsStated": "$25M",
+      "currencyBasis": "issuer_context"
+    },
+    "provider": "Export-Import Bank of the United States",
+    "providerJurisdiction": "us",
+    "providerOrgIds": [
+      "org-us-exim"
+    ],
+    "legalAuthority": null,
+    "programmeId": null,
+    "recipient": "Westwater Resources, Inc.",
+    "recipientOrgIds": [
+      "org-us-westwater"
+    ],
+    "project": "Kellyton Graphite Plant",
+    "projectId": "prj-us-kellyton-graphite",
+    "facility": null,
+    "locations": [
+      {
+        "countryCode": "US",
+        "subnational": "Alabama",
+        "asStated": "Alabama"
+      }
+    ],
+    "stages": [
+      "processing"
+    ],
+    "stageAllocation": "single_stage",
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "financialStatusHistory": [
+      {
+        "status": "announced",
+        "date": "2026-08-07",
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "note": null
+      }
+    ],
+    "implementationStatusHistory": [],
+    "terms": [],
+    "outcomes": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "supports": [
+          "instrument",
+          "value_role",
+          "capital_source",
+          "amount",
+          "provider",
+          "status",
+          "recipient",
+          "project",
+          "location",
+          "stages",
+          "materials"
+        ],
+        "evidence": "explicit",
+        "locator": "Financing paragraphs",
+        "note": null
+      },
+      {
+        "sourceId": "src-us-westwater-sec-exim-2026",
+        "supports": [
+          "project",
+          "stages",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Kellyton Graphite Plant construction update and EXIM paragraph",
+        "note": "The filing describes approval but no closing; exact approval date is not stated."
+      }
+    ],
+    "notes": "Westwater's 2026 Q2 SEC filing confirms an approximately $25M direct-loan approval in August under Make More in America but states that definitive documents and closing conditions remain outstanding; no disbursement confirmed."
   },
   {
     "id": "fin-us-osc-obbba-2025-credit-subsidy",

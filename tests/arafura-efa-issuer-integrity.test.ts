@@ -42,7 +42,12 @@ test("recipient correction never promotes EFA subscription to cash paid or creat
     ["announced", "2025-10-20"],
     ["contracted", "2026-04-01"],
   ]);
-  assert.deepEqual(c.implementationStatusHistory, []);
+  assert.equal(c.implementationStatusHistory.length, 1);
+  assert.deepEqual(c.implementationStatusHistory.map((s) => [s.status, s.date, s.sourceId]), [
+    ["construction", null, "src-au-nolans-construction-2026"],
+  ]);
+  assert.ok(c.evidence.some((e) => e.sourceId === "src-au-nolans-construction-2026" && e.supports.includes("status")));
+  assert.equal(c.financialStatusHistory.at(-1)?.status, "contracted", "physical construction cannot prove cash disbursement");
   assert.equal(getAllFinancialCommitments().filter((r) => r.id === id).length, 1);
   assert.match(c.notes ?? "", /not a share-issuing entity/);
 });

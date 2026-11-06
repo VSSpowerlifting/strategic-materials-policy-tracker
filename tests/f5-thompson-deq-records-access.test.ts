@@ -153,7 +153,7 @@ test("private source intake and no public mutation survive a deterministic offli
   assert.ok(handoff.nextUseOfRecords.whenObtained.includes("gitignored private evidence vault"));
   assert.match(handoff.nextUseOfRecords.reviewer,/existing M3 original-source human adjudication/);
   assert.match(handoff.nextUseOfRecords.publication,/No automatic project-milestone seed/);
-  assert.equal(site.lastUpdated,"2026-11-04");
+  assert.equal(site.lastUpdated,"2026-11-06");
   assert.equal(getAllProjectMilestones().length,2);
   assert.ok(decisions.every(x=>x.verdict==="pending" && x.reviewedBy===null && x.reviewedAt===null));
   const input=current(),before=JSON.stringify(input);

@@ -169,6 +169,32 @@
     "notes": null
   },
   {
+    "id": "prg-ca-srf",
+    "name": "Strategic Response Fund",
+    "nameOriginal": null,
+    "actor": "canada",
+    "kind": "multi_instrument",
+    "administeringOrgIds": [
+      "org-ca-government"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme announcement and structure",
+        "note": null
+      }
+    ],
+    "notes": "The announcement does not establish whether each support instrument is a grant, loan or other investment."
+  },
+  {
     "id": "prg-eu-crma-strategic-projects",
     "name": "Strategic Projects under the Critical Raw Materials Act",
     "nameOriginal": null,
@@ -317,6 +343,32 @@
     "notes": "Grants half the applicant's cost of a certified undertaking. Rare earths, tungsten, gallium, germanium, antimony and graphite are among the minerals it currently supports."
   },
   {
+    "id": "prg-uk-cm-accelerator",
+    "name": "Critical Minerals Accelerator",
+    "nameOriginal": null,
+    "actor": "uk",
+    "kind": "grant_programme",
+    "administeringOrgIds": [
+      "org-uk-bist"
+    ],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-uk-cm-accelerator-2026",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme announcement and structure",
+        "note": null
+      }
+    ],
+    "notes": "The £25m total is a competitive grant scheme ceiling, not funding awarded to named projects."
+  },
+  {
     "id": "prg-us-chips-incentives",
     "name": "CHIPS Incentives Program",
     "nameOriginal": null,
@@ -377,5 +429,29 @@
       }
     ],
     "notes": null
+  },
+  {
+    "id": "prg-us-project-vault",
+    "name": "Project Vault / U.S. Strategic Critical Minerals Reserve",
+    "nameOriginal": null,
+    "actor": "us",
+    "kind": "strategic_reserve",
+    "administeringOrgIds": [],
+    "parentProgrammeId": null,
+    "legalAuthorityAsStated": null,
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-project-vault-2026",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "Programme announcement and structure",
+        "note": "The source locates this reserve initiative in the United States and says it is independently governed. This evidence supports the US actor attribution, but does not identify its legal operating administrator; administeringOrgIds stays empty."
+      }
+    ],
+    "notes": "EXIM is the public lender; the reserve is described as independently governed. Its actual operating administrator is not verified."
   }
 ]
