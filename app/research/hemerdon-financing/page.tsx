@@ -121,21 +121,21 @@ export default function HemerdonFinancing() {
                   <div className="border border-dashed border-paper-border bg-white/30 p-5">
                     <p className="font-display text-3xl font-semibold tabular-nums">£10m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Uncommitted accordion</p>
-                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">Conditional additional borrowing capacity, not available cash.</p>
+                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">Conditional additional borrowing capacity; further borrowing remains subject to agreement.</p>
                   </div>
                 </div>
                 <p className="mt-5 font-display text-sm leading-7 text-paper-muted">
-                  £61 million gross equity and core-loan financing sits within the £71 million maximum. Amounts represent different instruments and cannot be read as current unrestricted cash.
+                  £61 million in gross equity and core-loan financing sits within the £71 million maximum. Current cash availability depends on draws, expenditures and debt obligations.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
                 <h2 className="font-display text-2xl font-semibold">Remaining expenditure and the tested sensitivities</h2>
                 <p className="mt-5 font-serif text-lg leading-9">
-                  Tungsten West&apos;s October guidance placed remaining project expenditure at approximately £40–45 million, excluding operating costs. The research uses £42.5 million as a midpoint reference and tests an illustrative £5.75 million increment combining the upper end of the capital range, a company-described delay sensitivity and a separately labeled one-year interest-rate proxy. It is a scenario for analyzing exposure, not a prediction of additional spending.
+                  Tungsten West&apos;s October guidance placed remaining project expenditure at approximately £40–45 million, excluding operating costs. The research uses £42.5 million as a midpoint reference and tests an illustrative £5.75 million increment combining the upper end of the capital range, a company-described delay sensitivity and a separately labeled one-year interest-rate proxy. This scenario tests exposure under stated assumptions about cost, delay and interest.
                 </p>
                 <p className="mt-5 font-serif text-lg leading-9">
-                  A different model exercise returns to the company&apos;s original August funding plan. Deferring all £15 million of anticipated receipts while holding other items fixed produces approximately £2 million negative cash using published aggregate totals, or £1 million using separately rounded details. These results illuminate the plan&apos;s dependence on receipts at that historical point; they do not establish a cash shortage at the November research cutoff. The October stress and August counterfactual have different bases and are not added together.
+                  A different model exercise returns to the company&apos;s original August funding plan. Deferring all £15 million of anticipated receipts while holding other items fixed produces approximately £2 million negative cash using published aggregate totals, or £1 million using separately rounded details. The August exercise shows the original plan&apos;s dependence on anticipated receipts. Current cash availability requires more recent reconciliation. The October stress and August counterfactual are reported on separate bases.
                 </p>
               </section>
 
@@ -145,7 +145,7 @@ export default function HemerdonFinancing() {
                   The September Elmet offtake agreement gives Hemerdon a documented route to market, while processing and commissioning updates indicate progress toward producing saleable tungsten. Financial performance will ultimately depend on the conversion of those operating milestones into accepted deliveries and collected receipts. For creditors, the decisive information is the executed loan timetable and a reconciled cash and debt schedule; for equity investors, the same operational evidence informs the ability to fund the remaining ramp without unexpected financing costs or dilution.
                 </p>
                 <p className="mt-5 font-serif text-lg leading-9">
-                  The full memo, executive deck and accompanying model examine those relationships in greater depth. The analysis does not estimate current unrestricted cash, a complete funding gap, project valuation, covenant headroom or repayment sufficiency because the public disclosures reviewed do not support those calculations.
+                  The full memo, executive deck and accompanying model examine those relationships in greater depth. The public filings support the presented sensitivities while leaving current unrestricted cash, the full funding gap, valuation, covenant headroom and repayment sufficiency unresolved.
                 </p>
               </section>
             </article>
@@ -190,7 +190,7 @@ export default function HemerdonFinancing() {
         <Container width="wide" className="py-12 sm:py-16">
           <h2 className="font-display text-2xl font-semibold">Sources</h2>
           <p className="mt-4 max-w-3xl font-serif text-lg leading-8 text-muted">
-            Financial sensitivities are independent analysis, not company forecasts. Source details and assumptions are included with the memo.
+            Financial sensitivities are SMPT calculations under stated assumptions, distinct from management guidance. Source details and assumptions are included with the memo.
           </p>
           <ul className="mt-6 max-w-3xl space-y-3">
             {sources.map((s) => (
@@ -200,7 +200,7 @@ export default function HemerdonFinancing() {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl font-display text-sm leading-7 text-muted">
-            Research uses the stated evidence cutoff and has not undergone independent financial review. It is not investment advice.
+            Research reflects the stated evidence cutoff. Financial checking was internal; external review remains outstanding. Investment decisions require independent assessment.
           </p>
           <Link href="/research/tungsten-supply-security" className="mt-6 inline-block font-display text-sm text-accent underline underline-offset-4 hover:text-foreground">
             Related research: Tungsten Supply Security
