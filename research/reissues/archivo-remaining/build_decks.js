@@ -2,6 +2,7 @@
  * Publication is withheld pending source/PDF fidelity and Archivo embed check.
  * Runtime: Node 22, pptxgenjs. All charts, tables, text are native PowerPoint.
  */
+/* eslint-disable @typescript-eslint/no-require-imports -- standalone Node build source uses CommonJS dependencies */
 'use strict';
 const pptxgen = require('pptxgenjs');
 const fs=require('fs'),path=require('path');
@@ -10,7 +11,6 @@ fs.mkdirSync(OUT,{recursive:true});
 const C={dark:'12110F',panel:'1A1814',paper:'F5F3EE',ink:'1B1915',gray:'5B5548',line:'D8D3C7',gold:'C8993E',gold2:'E3B04B',goldInk:'7A5510',muted:'EFECE6',other:'B9B3A6',beige:'E9E3D7',soft:'E4D6BD',white:'FFFFFF'};
 const FONT='Archivo';
 const S={rect:'rect',line:'line',roundRect:'roundRect'};
-const SW=13.333, SH=7.5;
 const U={r001:'https://strategic-materials-policy-tracker.vercel.app/research/tungsten-supply-security',a001:'https://strategic-materials-policy-tracker.vercel.app/research/antimony-supply-resilience',
   uk:'https://www.nationalwealthfund.org.uk/news-and-publications/news/national-wealth-fund-backs-tungsten-west-to-unlock-critical-uk-tungsten-supply/',
   tw:'https://www.tungstenwest.com/investors',
@@ -46,7 +46,6 @@ function small(s,text,x,y,w,fs=13,col=C.gray){txt(s,text,x,y,w,0.54,fs,col,false
 function label(s,text,x,y,w=5){txt(s,text.toUpperCase(),x,y,w,0.25,9.7,C.goldInk,true,{charSpacing:1.1});}
 function metric(s,value,caption,x,y,w,opts={}){txt(s,value,x,y,w,0.64,31,opts.color||C.ink,true);txt(s,caption,x,y+0.66,w,0.58,12.4,C.gray,false,{valign:'top'});}
 function table(s,rows,x,y,width,rowHeights,weights,colAlign=[],fs=14){const total=weights.reduce((a,b)=>a+b,0),w=weights.map(z=>z/total*width);let yp=y;rows.forEach((row,r)=>{const rh=rowHeights[r]||0.65;if(r===0)shape(s,x,yp,width,rh,C.dark);else if(r%2===0)shape(s,x,yp,width,rh,C.beige,C.beige);else shape(s,x,yp,width,rh,C.paper,C.paper);let xp=x;row.forEach((v,c)=>{txt(s,String(v),xp+0.15,yp+0.05,w[c]-0.25,rh-0.1,r===0?11.2:fs,r===0?C.muted:C.ink,r===0||c===0,{align:colAlign[c]||'left',valign:'mid'});xp+=w[c];});if(r>0)line(s,x,yp,x+width,yp,C.line,0.5);yp+=rh;});return yp;}
-function pill(s,labelText,x,y,w,color=C.dark,fg=C.muted){shape(s,x,y,w,0.35,color,color,true);txt(s,labelText,x+0.10,y+0.03,w-0.20,0.28,10.6,fg,true,{align:'center'});}
 function nativeBar(s,x,y,maxW,height,value,max,color=C.gold){shape(s,x,y,maxW,height,C.beige,C.beige);shape(s,x,y,maxW*value/max,height,color,color);}
 function cover(p,series,title,subtitle,date,scope){let s=pg(p,1,8,series,true);shape(s,0.57,0.62,0.085,0.91,C.gold2);txt(s,'SMPT  /  '+series.toUpperCase(),0.83,0.65,10.9,0.32,12,C.gold2,true,{charSpacing:1.1});txt(s,title,0.76,1.58,11.8,2.12,43,C.muted,true,{breakLine:false,valign:'mid'});txt(s,subtitle,0.78,4.11,10.6,0.86,21,C.muted,false,{valign:'top'});line(s,0.79,5.47,12.45,5.47,'504837',0.7);txt(s,'Benjamin Yang',0.79,5.78,4.5,0.34,14,C.muted,true);txt(s,'Research cutoff: '+date,0.79,6.21,7.1,0.25,12,C.other);txt(s,scope,6.65,6.17,5.75,0.28,10.3,C.other,false,{align:'right'});return s;}
 async function tungsten(){const p=pptx('Tungsten Supply Security — Archivo editable edition');const series='RESEARCH DOSSIER 001';
@@ -122,7 +121,7 @@ note(s,'Initial inventory cash is an asset, not an annual incremental expense; a
 }
 {
 const s=pg(p,6,8,series);head(s,'Domestic qualification trajectory','The domestic target becomes available only after qualification','Modeled ramp to 30% target share; all values are illustrative buyer sourcing shares');
-const entries=[['2027','0%'],['2028','0%'],['2029','0%'],['2030','15%'],['2031','30%']];const bx=1.05,barW=10.35;entries.forEach((e,i)=>{const y=2.52+i*0.70;txt(s,e[0],0.84,y,1.0,0.34,14,C.ink,true);nativeBar(s,2.03,y,9.6,0.39,parseInt(e[1]),30,C.gold);txt(s,e[1],11.96,y,0.63,0.35,15,C.ink,true,{align:'right'})});
+const entries=[['2027','0%'],['2028','0%'],['2029','0%'],['2030','15%'],['2031','30%']];entries.forEach((e,i)=>{const y=2.52+i*0.70;txt(s,e[0],0.84,y,1.0,0.34,14,C.ink,true);nativeBar(s,2.03,y,9.6,0.39,parseInt(e[1]),30,C.gold);txt(s,e[1],11.96,y,0.63,0.35,15,C.ink,true,{align:'right'})});
 small(s,'Until qualified domestic deliveries are available, that target volume is assigned to the incumbent sourcing lane in the model.',0.85,6.21,11.7,13);
 note(s,'Actual schedules, plant status, processing specifications and enforceable offtake terms would control a real procurement ramp.',6.64);
 }
