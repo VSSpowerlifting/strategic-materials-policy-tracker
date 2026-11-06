@@ -1267,9 +1267,22 @@
         "date": "2026-09-14",
         "sourceId": "src-cgf-marathon-2026",
         "note": null
+      },
+      {
+        "status": "disbursed",
+        "date": "2026-09-21",
+        "sourceId": "src-ca-genm-cgf-equity-close-2026",
+        "note": "Issuer confirms completed issuance of CGF's C$40m private placement shares and approximately C$49m bought-deal shares. The actual combined value of roughly C$89m reconciles to CGF's earlier approximately C$90m announcement; preserve its original approximate amount."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-ca-genm-marathon-construction-2026",
+        "note": "Issuer confirmed Marathon early-works construction had commenced by 1 October 2026; exact first-work day is unstated. The project milestone is separate from the timing of CGF equity payment and the convertible note."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -1291,9 +1304,30 @@
         "evidence": "explicit",
         "locator": "Financing paragraphs",
         "note": null
+      },
+      {
+        "sourceId": "src-ca-genm-cgf-equity-close-2026",
+        "supports": [
+          "amount",
+          "status",
+          "recipient",
+          "project"
+        ],
+        "evidence": "explicit",
+        "locator": "Closing and CGF acquisition paragraphs",
+        "note": "Closing evidence: C$40m private placement plus approximately C$49m bought-deal CGF shares, versus earlier ~C$90m commitment."
+      },
+      {
+        "sourceId": "src-ca-genm-marathon-construction-2026",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening and Early Works Program",
+        "note": "Physical construction at Marathon; no inference about note issuance, further drawdowns or commercial production."
       }
     ],
-    "notes": "Approximate CGF common share commitment within the wider C$200M equity financing. Standard closing conditions apply; no project construction inferred."
+    "notes": "CGF's approximately C$90m announced equity commitment was completed through a C$40m private placement and approximately C$49m acquisition in the bought-deal offering, confirmed on 21 September 2026. The original approximate headline is retained, rather than replacing it with an exact C$90m cash receipt. The issuer subsequently reported early works underway at Marathon by 1 October 2026; the exact first construction day is unstated. This equity closing does not establish issuance of CGF's separately proposed C$50m convertible note."
   },
   {
     "id": "fin-ca-cgf-marathon-note-2026",
@@ -1372,7 +1406,7 @@
         "note": null
       }
     ],
-    "notes": "Source names a convertible note. SMPT's existing instrument taxonomy has no convertible-debt type, so this is left unspecified rather than misclassified as a conventional loan. Closing conditions remain."
+    "notes": "The 14 September source describes a C$50m convertible note within a proposed C$100m offering, with shareholder and regulatory closing conditions. The 21 September issuer release confirms CGF common-share purchases, not the convertible note closing. SMPT's instrument taxonomy lacks a convertible-debt subtype; keep the instrument unspecified and financial status announced pending direct evidence of issuance."
   },
   {
     "id": "fin-ca-cmrdd-2024-cyclic-materials",
