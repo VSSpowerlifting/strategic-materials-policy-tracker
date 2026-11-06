@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Coverage",
   description:
-    "The coded footprint of the dataset: source composition, framing-anchor coverage, per-actor counts and the research boundaries that limit what these figures can support. Counts, not scores.",
+    "The coded footprint of the dataset: source composition, framing-anchor coverage, per-actor counts and the research boundaries that limit what these figures can support. Source-linked record counts.",
 };
 
 function pct(s: Share): number | null {
@@ -22,7 +22,7 @@ function HeadlineStat({ n, label, sub }: { n: string; label: string; sub: string
   return (
     <div className="rounded-lg border bg-card p-4">
       <div className="tnum font-display text-3xl font-bold leading-none">{n}</div>
-      <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+      <div className="mt-1.5 font-display text-[11px] uppercase tracking-[0.16em] text-faint">
         {label}
       </div>
       <div className="mt-1 text-xs text-muted">{sub}</div>
@@ -39,7 +39,7 @@ function DistributionBar({ label, count, max }: { label: string; count: number; 
       <div className="h-2 min-w-0 overflow-hidden rounded-full bg-elevated" aria-hidden="true">
         <div className="h-full rounded-full bg-accent/60" style={{ width: `${width}%` }} />
       </div>
-      <span className="tnum text-right font-mono text-xs text-faint">{count}</span>
+      <span className="tnum text-right font-display text-xs text-faint">{count}</span>
     </li>
   );
 }
@@ -59,9 +59,8 @@ export default function CoveragePage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Evidence & coverage"
-        title="What the dataset can support"
-        lead="This page exposes the coded footprint of the database: how many events are actually anchored to a source and to a framing quote, how the source register breaks down by confidence, and where the research is thin. Every count below describes this coded sample — it is not a claim about how much policy activity any government has actually undertaken."
+        title="Coverage"
+        lead="Corpus size, primary-source coverage and research gaps. These counts describe the records currently in SMPT."
       />
 
       <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -83,12 +82,12 @@ export default function CoveragePage() {
         className="mt-14"
         index="02"
         title="By actor"
-        description="Events, framing anchors and linked sources coded per actor — a measure of how deeply this project has researched each government, not of how much each government has done."
+        description="Events, framing anchors and sources recorded for each government."
       >
         <div className="overflow-x-auto">
           <table className="w-full min-w-[38rem] text-sm">
             <thead>
-              <tr className="border-b border-border text-left font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+              <tr className="border-b border-border text-left font-display text-[11px] uppercase tracking-[0.16em] text-faint">
                 <th className="py-2 pr-4 font-normal">Actor</th>
                 <th className="py-2 pr-4 text-right font-normal">Events</th>
                 <th className="py-2 pr-4 text-right font-normal">Framing anchored</th>
@@ -104,13 +103,13 @@ export default function CoveragePage() {
                       {jurisdictionLabels[a.jurisdiction]}
                     </Link>
                   </td>
-                  <td className="tnum py-2.5 pr-4 text-right font-mono">{a.events}</td>
-                  <td className="tnum py-2.5 pr-4 text-right font-mono">
+                  <td className="tnum py-2.5 pr-4 text-right font-display">{a.events}</td>
+                  <td className="tnum py-2.5 pr-4 text-right font-display">
                     {a.framingCoverage.count}
                     <span className="text-faint">/{a.framingCoverage.of}</span>
                   </td>
-                  <td className="tnum py-2.5 pr-4 text-right font-mono">{a.linkedSources}</td>
-                  <td className="tnum py-2.5 text-right font-mono">{a.primaryLinkedSources}</td>
+                  <td className="tnum py-2.5 pr-4 text-right font-display">{a.linkedSources}</td>
+                  <td className="tnum py-2.5 text-right font-display">{a.primaryLinkedSources}</td>
                 </tr>
               ))}
             </tbody>
@@ -140,16 +139,16 @@ export default function CoveragePage() {
         </Section>
       </div>
 
-      <Section className="mt-14" index="05" title="Research boundaries" description="What limits these counts, stated plainly rather than smoothed over.">
+      <Section className="mt-14" index="05" title="Research boundaries" description="Coverage, provenance and counting limitations.">
         <div className="grid gap-4 md:grid-cols-2">
           <Card className="p-5">
             <h3 className="font-display font-semibold tracking-tight">Coded date window</h3>
-            <p className="mt-2 tnum font-mono text-sm text-foreground">
+            <p className="mt-2 tnum font-display text-sm text-foreground">
               {formatDate(s.dateWindow.earliest)} – {formatDate(s.dateWindow.latest)}
             </p>
             <p className="mt-2 text-xs leading-5 text-faint">
-              No event outside this window has been coded yet. A gap here is a research boundary, not
-              a claim that nothing happened before or after it.
+              The current dataset covers this date window. Earlier and later activity
+              requires separate research.
             </p>
           </Card>
 
@@ -178,12 +177,11 @@ export default function CoveragePage() {
             <h3 className="font-display font-semibold tracking-tight">Actor-coverage imbalance</h3>
             <p className="mt-2 text-sm leading-6 text-muted">
               {topActor
-                ? `${jurisdictionLabels[topActor.jurisdiction]} accounts for ${topActor.events} of ${s.totals.events} coded events (${topActorPct}%). An actor with few events here is one this project has researched less — not one that has acted less.`
+                ? `${jurisdictionLabels[topActor.jurisdiction]} accounts for ${topActor.events} of ${s.totals.events} coded events (${topActorPct}%). Event counts reflect differences in SMPT’s research coverage across jurisdictions.`
                 : "No events are coded yet."}
             </p>
             <p className="mt-2 text-xs leading-5 text-faint">
-              This imbalance is a property of the research, not the underlying policy record, and it
-              is why the table above is published rather than summarised away.
+              The table shows the distribution of coded research across jurisdictions.
             </p>
           </Card>
 
@@ -198,8 +196,8 @@ export default function CoveragePage() {
             <p className="mt-2 text-xs leading-5 text-faint">
               {s.citedSources.of - s.citedSources.count} registered
               {" "}source{s.citedSources.of - s.citedSources.count === 1 ? " has" : "s have"}
-              {" "}no explicit published record citation. This is a cataloguing relationship,
-              not a measure of independent corroboration or research quality.
+              {" "}yet to be linked directly to a published record. This counts citation
+              links within the registry; it is separate from independent corroboration.
             </p>
             <Link
               href={s.citedSources.count < s.citedSources.of ? "/sources?citingKind=not_cited" : "/sources"}
@@ -210,12 +208,11 @@ export default function CoveragePage() {
           </Card>
 
           <Card className="border-accent/40 p-5">
-            <h3 className="font-display font-semibold tracking-tight">No synthetic scores</h3>
+            <h3 className="font-display font-semibold tracking-tight">Categorical coverage</h3>
             <p className="mt-2 text-sm leading-6 text-muted">
-              Nothing on this page is weighted, normalised or rolled up into a single number. The
-              project&apos;s first rule is that classifications stay categorical and source-grounded
-              — there is no overall &ldquo;coverage score&rdquo; here, because a single number would
-              invite exactly the comparison this coded sample cannot support.
+              This page reports counts of coded records and documented source relationships.
+              Categories retain their source-defined meaning. Comparing the scale of
+              government activity requires a broader, consistently sampled dataset.
             </p>
           </Card>
         </div>

@@ -19,7 +19,7 @@ const downloads = [
     file: "smpt-financial-commitments.csv",
     href: "/api/export/financial-commitments.csv",
     fmt: "CSV",
-    desc: "One row per financial instrument: value role, capital source, amount in the source's currency with its qualifier and wording, provider, recipient, stages, materials, parent links and current status. Never converted or summed.",
+    desc: "One row per financial instrument: value role, capital source, amount in the source's currency with its qualifier and wording, provider, recipient, stages, materials, parent links and current status. Amounts retain their source currency and instrument classification.",
   },
   {
     file: "smpt-control-measures.csv",
@@ -37,7 +37,7 @@ const downloads = [
     file: "smpt-projects.csv",
     href: "/api/export/projects.csv",
     fmt: "CSV",
-    desc: "One row per physical project: sponsors, stated location, stages, materials, and the financial rows and designations that point to it. No money is stored on a project.",
+    desc: "One row per physical project: sponsors, stated location, stages, materials, and the financial rows and designations that point to it. Financial amounts remain in the linked instruments.",
   },
   {
     file: "smpt-programmes.csv",
@@ -49,13 +49,13 @@ const downloads = [
     file: "smpt-project-milestones.json",
     href: "/api/v1/project-milestones",
     fmt: "JSON",
-    desc: "The public human-reviewed industrial milestone register, retaining named-facility scope, original publisher statement, pinpoint, event or target date, and real reviewer attribution. Source review is not proof of facility operation or government disbursement.",
+    desc: "The public human-reviewed industrial milestone register, retaining named-facility scope, original publisher statement, pinpoint, event or target date, and real reviewer attribution. Facility operations and disbursements require their own supporting records.",
   },
   {
     file: "smpt-project-designations.csv",
     href: "/api/export/project-designations.csv",
     fmt: "CSV",
-    desc: "One row per project recognized under a designation scheme, such as an EU strategic project: the scheme, project, holders, location, stages, materials and current status. Standing, not money.",
+    desc: "One row per project recognized under a designation scheme, such as an EU strategic project: the scheme, project, holders, location, stages, materials and current status. Designation status is recorded separately from financing.",
   },
   {
     file: "smpt-financial-status-history.csv",
@@ -108,13 +108,12 @@ export default function DataPage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Take it with you"
         title="Data export"
-        lead="The whole dataset is downloadable, with the same source links and translation provenance you see on the site. CSV files are UTF-8 with a byte-order mark for Excel; text that resembles a spreadsheet formula receives a protective tab prefix. Use JSON for exact original strings."
+        lead="Download the source-linked dataset as JSON or CSV."
       />
 
       <p className="mt-6 font-mono text-sm text-faint">
-        Current snapshot: {s.events} events · {s.framingClaims} framing anchors ·{" "}
+        Corpus: {s.events} events · {s.framingClaims} framing anchors ·{" "}
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
         sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses ·{" "}
         {s.organizations} organizations · {s.projects} projects · {s.programmes} programmes ·{" "}
@@ -146,10 +145,9 @@ export default function DataPage() {
       </div>
 
       <section className="mt-10 max-w-prose rounded border border-border-strong bg-card p-5 font-display text-sm leading-7" aria-labelledby="investigation-downloads">
-        <h2 id="investigation-downloads" className="text-lg font-semibold text-foreground">Project investigation packets</h2>
+        <h2 id="investigation-downloads" className="text-lg font-semibold text-foreground">Project downloads</h2>
         <p className="mt-3 text-muted">Each project investigation offers a structured JSON download at <code className="break-all">/api/v1/projects/[id]/investigation</code>. <a href="/api/v1/projects/prj-au-alcoa-sojitz-gallium/investigation" download className="text-accent underline">Download the Wagerup example</a>.</p>
-        <p className="mt-3 text-muted">Projection <code>smpt-investigation-1</code> includes identity and organization roles, directly attributable instruments, separately labelled nonallocative associations, financial histories and current amount wording, parent policy context, announcement-sibling controls, published native milestones, legacy financial-row observations, source URLs and field locators. Planned claims keep target dates; unknown dates remain null.</p>
-        <p className="mt-3 text-muted">These deterministic build artifacts use the curated corpus revision and legal-status cutoff, with no build timestamp or historical known-as-of claim. No project-wide financial total or causal effect is computed. Existing registry endpoints and dataset exports retain their contracts. Unknown or unpublished project IDs return 404.</p>
+        <p className="mt-3 text-muted">Packets contain project, financing, status and source references. Unallocated amounts remain separate; unknown dates remain null.</p>
       </section>
 
       <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
@@ -157,7 +155,7 @@ export default function DataPage() {
           JSON API
         </h2>
         <p>
-          Read-only, prerendered endpoints under <code className="font-mono text-sm text-foreground">/api/v1</code>:
+          Read-only endpoints under <code className="font-mono text-sm text-foreground">/api/v1</code>:
           {" "}<code className="font-mono text-sm">events</code>, <code className="font-mono text-sm">framing</code>,{" "}
           <code className="font-mono text-sm">materials</code>, <code className="font-mono text-sm">actors</code>,{" "}
           <code className="font-mono text-sm">sources</code>, <code className="font-mono text-sm">financial-commitments</code>,{" "}
@@ -168,7 +166,7 @@ export default function DataPage() {
           double-count-safe totals and status counts behind the Capital and Controls pages, and{" "}
           <code className="font-mono text-sm">capital-intelligence/summary</code>: portfolios, capital stacks, programme
           ledgers, co-investment, flows and the stage response map. Totals are per currency and per value role, with
-          statuses evaluated on the data&apos;s as-of date; no endpoint returns a ratio, share or cross-currency figure.
+          statuses evaluated on the data&apos;s as-of date; API outputs retain separate currencies and value roles.
         </p>
       </div>
 
@@ -178,11 +176,11 @@ export default function DataPage() {
         </h2>
         <p>
           The data is provided as-is for research and journalism. Categorical
-          labels are interpretive judgements anchored to the cited sources, not
-          legal determinations. Quotations are reproduced from the linked
+          labels are research classifications grounded in the cited sources.
+          Formal legal determinations require qualified legal assessment. Quotations are reproduced from the linked
           originals under fair-use for commentary; please cite the original
-          publisher as well as this database. This is not legal or compliance
-          advice.
+          publisher as well as this database. Use the underlying official publications and qualified counsel for legal
+          or compliance decisions.
         </p>
       </div>
     </Container>

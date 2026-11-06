@@ -27,7 +27,7 @@ test("the entire methodology vocabulary has exactly one definition for every off
  assert.match(VALUE_ROLE_DEFS.funding_option,/never summed/);
 });
 
-test("every published finance record receives exact role/status explanations with no semantic reassignment",()=>{
+test("every tracked finance record receives exact role/status explanations with no semantic reassignment",()=>{
  const rows=corpus();
  assert.equal(rows.length,109);
  for(const c of rows){
@@ -130,7 +130,9 @@ test("same authoritative definitions power methodology and every relevant public
  assert.ok(!method.includes("const FINANCIAL_STATUS_DEFS:"));
  assert.ok(!method.includes("const VALUE_ROLE_DEFS:"));
  assert.match(page,/<RecordReadingGuide record=\{c\} \/>/);
- assert.match(ui,/What the evidence says — and does not say/);
+ assert.match(ui,/Evidence and status/);
+ assert.ok(ui.includes("{reading.boundary}"));
+ assert.ok(ui.includes("text:reading.payment"));
  assert.match(ui,/heading:reading\.role\.label/); // explanation comes from the same typed record
  assert.match(ui,/FINANCIAL_STATUS_DEFS\.contracted/);
  for(const [path,topic] of [
@@ -140,6 +142,6 @@ test("same authoritative definitions power methodology and every relevant public
  ]){
   assert.match(await readFile(path,"utf8"),new RegExp('ResearchReadingKey topic="'+topic+'"'));
  }
- assert.match(ui,/Obligation is not an SMPT financial-status label/);
+ assert.match(ui,/Obligation is tracked outside SMPT's financial-status categories/);
  assert.match(ui,/\/methodology#capital-counting/);
 });

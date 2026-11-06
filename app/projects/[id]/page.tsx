@@ -89,7 +89,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <Section
             index={next()}
             title="Capital stack"
-            description="One layer per value role. Only committed public money, and joint-vehicle money apart from it, is summed, per currency; everything else is listed. There is no total across layers."
+            description="One layer per value role. Public commitments and joint-vehicle capital are reported separately by currency. Other categories appear as individual records."
           >
             {ended.length || options.length || indications.length ? (
               <p className="mb-6 max-w-prose rounded-md border border-dashed px-4 py-3 text-sm leading-6 text-muted">
@@ -110,10 +110,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <div id="project-industrial" className="scroll-mt-44">
           {reviewedMilestones.length ? (
             <Section index={next()} title="Source-reviewed industrial observations"
-              description="Original-source claims independently assessed by a human reviewer. Reported events remain separate from financing status and are not evidence that funding caused construction or production.">
+              description="Original-source claims independently assessed by a human reviewer. Reported industrial activity and financial standing have separate evidence trails. Causal attribution requires further support.">
               <ReviewedProjectMilestones milestones={reviewedMilestones} />
             </Section>
-          ) : <Section title="Source-reviewed industrial observations"><p className="max-w-prose text-base leading-7 text-muted">No source-reviewed project milestone is published for this undertaking. Any financing-row activity reports below remain attributed observations, not independently reviewed project milestones. Missing evidence does not establish inactivity.</p></Section>}
+          ) : <Section title="Source-reviewed industrial observations"><p className="max-w-prose text-base leading-7 text-muted">This undertaking currently lacks a published source-reviewed industrial milestone. Any activity described in financing records remains attributed to its publisher. Its operational status requires further source review.</p></Section>}
           </div>
 
           <div id="project-policy" className="scroll-mt-44"><ProjectPolicyContext investigation={investigation} /></div>
@@ -122,7 +122,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             <Section
               index={next()}
               title="Shared / unallocated financing"
-              description="These rows explicitly support this project and at least one other project, but the source does not allocate the stated amount among them. They are shown for provenance and excluded from this project's capital stack, backers and co-investment."
+              description="The source associates these financing rows with several projects while leaving the amount unallocated. They appear for provenance and remain outside individual project stacks and co-investment totals."
             >
               <Card className="overflow-hidden">
                 {stack.associatedRows.map((c) => (
@@ -139,7 +139,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           ) : null}
 
           {stack.designations.length ? (
-            <Section index={next()} title="Designations" description="Recognition under a scheme confers standing, not money, and is never counted as capital.">
+            <Section index={next()} title="Designations" description="Scheme recognition records standing; capital support requires a separate financial instrument.">
               <Card className="overflow-hidden">
                 {stack.designations.map((d) => (
                   <DesignationRow key={d.id} d={d} />
@@ -151,7 +151,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <Section
             index={next()}
             title="Control clauses on the same materials and stages"
-            description={`Clauses whose covered items share a material and a supply-chain stage with this project, with their legal status on ${formatDate(site.lastUpdated)}. An overlap of items, not a finding that the project is affected.`}
+            description={`Clauses whose covered items share a material and a supply-chain stage with this project, with their legal status on ${formatDate(site.lastUpdated)}. The overlap is a shared material and stage; project-level effects require separate evidence.`}
           >
             {controls.length ? (
               <Card className="overflow-hidden">

@@ -40,6 +40,7 @@ No generic "thank you" slide, full-page disclaimer page or three separate empty 
 
 ## Art direction
 
+- Run the [Editorial Authenticity & Visual Integrity Standard](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) on final wording, charts, graphics and full-deck coherence, recording all five gate outcomes in the successor edition QC report.
 - Standard 16:9 wide.
 - Graphite cover/closing, cream analytical pages, gold emphasis.
 - Georgia Bold assertion titles; Source Sans 3 supporting text and figure annotations; document fallbacks and export verification.

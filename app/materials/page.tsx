@@ -18,7 +18,7 @@ export default function MaterialsPage() {
         index="01"
         eyebrow="Bounded set"
         title="Materials"
-        lead="Rare earths, the named elements covered by controls, and adjacent strategic materials — including gallium, germanium, graphite, antimony, tungsten and finished magnets. Explore the recorded policies, financing and industrial evidence attached to each; these are bounded research dossiers, not comprehensive global supply-chain models."
+        lead="Rare earths, the named elements covered by controls, and adjacent strategic materials — including gallium, germanium, graphite, antimony, tungsten and finished magnets. Explore the recorded policies, financing and industrial evidence attached to each; each dossier presents the evidence currently coded for that material."
       />
       <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {materials.map((m) => (

@@ -5,10 +5,14 @@ import { site } from "@/lib/site";
 
 const assets = {
   memo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
-  deck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
+  deck: "/research/fi001/presentation-v2-archivo.pdf",
+  originalDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pdf",
   model: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Model.xlsx",
   editableMemo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.docx",
-  editableDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pptx",
+  editableDeck: "/research/fi001/presentation-v2-archivo.pptx",
+  originalEditableDeck: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Strategy_Deck.pptx",
+  deckQc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/publication-qc.md",
+  deckSources: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/dab99c72ad986b54d2f874bd5bdf4cf6644115f0/research/financial-intelligence/hemerdon-phase1c/presentation-v2/source-appendix.md",
   appendix: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Evidence_Appendix.md",
   guide: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Model_Guide.md",
   qc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_QC.md",
@@ -44,7 +48,7 @@ const sources = [
 
 const downloads = [
   { title: "Financial research memorandum", type: "8-page PDF", href: assets.memo },
-  { title: "Executive strategy presentation", type: "10-slide PDF", href: assets.deck },
+  { title: "Financial strategy presentation · v2", type: "18-slide PDF · 14 main + 4 appendix", href: assets.deck },
   { title: "Financial model", type: "Editable Excel workbook", href: assets.model },
   { title: "Evidence and methodology", type: "Source-linked research appendix", href: assets.appendix },
   { title: "Model guide", type: "Assumptions and scenario interpretation", href: assets.guide },
@@ -56,19 +60,15 @@ export default function HemerdonFinancing() {
       <section className="border-b border-border-strong">
         <Container width="wide" className="py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
-            Research / Financial Intelligence 001
+            ← Research
           </Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-            Strategic Materials Policy Tracker · Financial Intelligence 001
-          </p>
-          <h1 className="mt-4 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          
+          <h1 className="mt-8 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             Inside Tungsten West&apos;s £71 Million Restart Financing
           </h1>
-          <p className="mt-5 max-w-4xl font-display text-xl leading-8 text-foreground">
-            Government Capital, Project Expenditure and Refinancing Risk at Hemerdon
-          </p>
-          <p className="mt-7 max-w-3xl font-serif text-xl leading-9 text-muted">
-            An independent reconstruction of the National Wealth Fund&apos;s investment, the financial obligations it creates and the remaining steps between mine commissioning and commercial cash generation.
+          <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
+            The National Wealth Fund’s investment, Hemerdon’s remaining expenditure
+            and the refinancing obligations behind the restart.
           </p>
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="underline underline-offset-4 hover:text-accent">Benjamin Yang</Link>
@@ -79,7 +79,7 @@ export default function HemerdonFinancing() {
               Read the financial memo (PDF)
             </a>
             <a href={assets.deck} target="_blank" rel="noopener noreferrer" className="research-button-secondary">
-              View the executive presentation
+              View the 18-slide presentation
             </a>
             <a href={assets.model} target="_blank" rel="noopener noreferrer" className="research-button-secondary">
               Open the financial model
@@ -93,14 +93,14 @@ export default function HemerdonFinancing() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-16">
             <article className="min-w-0 max-w-4xl">
               <section className="border-b border-paper-border pb-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">The central finding</p>
+                
                 <h2 className="mt-3 font-display text-3xl font-semibold leading-tight">
                   The financing strengthens the restart while introducing a near-term repayment timetable
                 </h2>
-                <p className="mt-5 font-serif text-lg leading-9">
+                <p className="mt-5 font-display text-lg leading-9">
                   The National Wealth Fund&apos;s August transaction brought together £36 million of equity and a £25 million core loan. A further £10 million accordion accounts for the balance of the £71 million headline, although that capacity remains uncommitted. Tungsten West subsequently disclosed that the £25 million loan had been fully drawn by approval of its annual accounts on 2 September 2026. The distinction matters for the restart: equity provides risk-bearing capital without a scheduled principal payment, whereas the loan places a repayment or refinancing obligation alongside the company&apos;s commissioning programme.
                 </p>
-                <p className="mt-5 font-serif text-lg leading-9">
+                <p className="mt-5 font-display text-lg leading-9">
                   Management reports a fully funded pathway to production and has announced processing progress. Those developments materially improve the position described by the financing announcement, but the short loan tenor makes the timing of payable output, customer collections and replacement funding important to the next stage of commercial execution.
                 </p>
               </section>
@@ -121,38 +121,38 @@ export default function HemerdonFinancing() {
                   <div className="border border-dashed border-paper-border bg-white/30 p-5">
                     <p className="font-display text-3xl font-semibold tabular-nums">£10m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Uncommitted accordion</p>
-                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">Conditional additional borrowing capacity, not available cash.</p>
+                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">Conditional additional borrowing capacity; further borrowing remains subject to agreement.</p>
                   </div>
                 </div>
                 <p className="mt-5 font-display text-sm leading-7 text-paper-muted">
-                  £61 million gross equity and core-loan financing sits within the £71 million maximum. Amounts represent different instruments and cannot be read as current unrestricted cash.
+                  £61 million in gross equity and core-loan financing sits within the £71 million maximum. Current cash availability depends on draws, expenditures and debt obligations.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
                 <h2 className="font-display text-2xl font-semibold">Remaining expenditure and the tested sensitivities</h2>
-                <p className="mt-5 font-serif text-lg leading-9">
-                  Tungsten West&apos;s October guidance placed remaining project expenditure at approximately £40–45 million, excluding operating costs. The research uses £42.5 million as a midpoint reference and tests an illustrative £5.75 million increment combining the upper end of the capital range, a company-described delay sensitivity and a separately labeled one-year interest-rate proxy. It is a scenario for analyzing exposure, not a prediction of additional spending.
+                <p className="mt-5 font-display text-lg leading-9">
+                  Tungsten West&apos;s October guidance placed remaining project expenditure at approximately £40–45 million, excluding operating costs. The research uses £42.5 million as a midpoint reference and tests an illustrative £5.75 million increment combining the upper end of the capital range, a company-described delay sensitivity and a separately labeled one-year interest-rate proxy. This scenario tests exposure under stated assumptions about cost, delay and interest.
                 </p>
-                <p className="mt-5 font-serif text-lg leading-9">
-                  A different model exercise returns to the company&apos;s original August funding plan. Deferring all £15 million of anticipated receipts while holding other items fixed produces approximately £2 million negative cash using published aggregate totals, or £1 million using separately rounded details. These results illuminate the plan&apos;s dependence on receipts at that historical point; they do not establish a cash shortage at the November research cutoff. The October stress and August counterfactual have different bases and are not added together.
+                <p className="mt-5 font-display text-lg leading-9">
+                  A different model exercise returns to the company&apos;s original August funding plan. Deferring all £15 million of anticipated receipts while holding other items fixed produces approximately £2 million negative cash using published aggregate totals, or £1 million using separately rounded details. The August exercise shows the original plan&apos;s dependence on anticipated receipts. Current cash availability requires more recent reconciliation. The October stress and August counterfactual are reported on separate bases.
                 </p>
               </section>
 
               <section className="py-10">
                 <h2 className="font-display text-2xl font-semibold">What matters next</h2>
-                <p className="mt-5 font-serif text-lg leading-9">
+                <p className="mt-5 font-display text-lg leading-9">
                   The September Elmet offtake agreement gives Hemerdon a documented route to market, while processing and commissioning updates indicate progress toward producing saleable tungsten. Financial performance will ultimately depend on the conversion of those operating milestones into accepted deliveries and collected receipts. For creditors, the decisive information is the executed loan timetable and a reconciled cash and debt schedule; for equity investors, the same operational evidence informs the ability to fund the remaining ramp without unexpected financing costs or dilution.
                 </p>
-                <p className="mt-5 font-serif text-lg leading-9">
-                  The full memo, executive deck and accompanying model examine those relationships in greater depth. The analysis does not estimate current unrestricted cash, a complete funding gap, project valuation, covenant headroom or repayment sufficiency because the public disclosures reviewed do not support those calculations.
+                <p className="mt-5 font-display text-lg leading-9">
+                  The full memo, executive deck and accompanying model examine those relationships in greater depth. The public filings support the presented sensitivities while leaving current unrestricted cash, the full funding gap, valuation, covenant headroom and repayment sufficiency unresolved.
                 </p>
               </section>
             </article>
 
             <aside className="min-w-0">
               <div className="border-t border-paper-border pt-5">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Publication files</p>
+                <h2 className="font-display text-sm font-semibold">Downloads</h2>
                 <ul className="mt-5 space-y-5">
                   {downloads.map((item) => (
                     <li key={item.title}>
@@ -168,10 +168,19 @@ export default function HemerdonFinancing() {
                 <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Editable editions</p>
                 <div className="mt-4 space-y-3 font-display text-sm">
                   <p><a href={assets.editableMemo} className="underline underline-offset-4 hover:text-paper-accent">Word memorandum</a></p>
-                  <p><a href={assets.editableDeck} className="underline underline-offset-4 hover:text-paper-accent">PowerPoint presentation</a></p>
-                  <p><a href={assets.qc} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Publication methodology and QC</a></p>
+                  <p><a href={assets.editableDeck} className="underline underline-offset-4 hover:text-paper-accent">PowerPoint presentation · v2 (18 slides)</a></p>
+                  <p><a href={assets.deckQc} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Presentation v2 validation and QC</a></p>
+                  <p><a href={assets.deckSources} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Presentation v2 source and exhibit notes</a></p>
+                  <p><a href={assets.qc} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Original financial research methodology and QC</a></p>
                 </div>
               </div>
+              <details className="mt-10 border-t border-paper-border pt-5 font-display text-sm">
+                  <summary className="cursor-pointer font-semibold">Earlier presentation (10 slides)</summary>
+                  <div className="mt-4 space-y-3 text-paper-muted">
+                    <p><a href={assets.originalDeck} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-paper-accent">Original PDF</a></p>
+                    <p><a href={assets.originalEditableDeck} className="underline underline-offset-4 hover:text-paper-accent">Original PowerPoint</a></p>
+                  </div>
+                </details>
             </aside>
           </div>
         </Container>
@@ -179,9 +188,9 @@ export default function HemerdonFinancing() {
 
       <section className="border-t border-border-strong">
         <Container width="wide" className="py-12 sm:py-16">
-          <h2 className="font-display text-2xl font-semibold">Primary sources and research context</h2>
-          <p className="mt-4 max-w-3xl font-serif text-lg leading-8 text-muted">
-            The study draws on audited accounts, issuer disclosures, the National Wealth Fund announcement, and financing documentation. Its financial sensitivities are independent analyst exercises rather than management forecasts. The source-by-source evidence trail and scenario assumptions are documented with the publication.
+          <h2 className="font-display text-2xl font-semibold">Sources</h2>
+          <p className="mt-4 max-w-3xl font-display text-lg leading-8 text-muted">
+            Financial sensitivities are SMPT calculations under stated assumptions, distinct from management guidance. Source details and assumptions are included with the memo.
           </p>
           <ul className="mt-6 max-w-3xl space-y-3">
             {sources.map((s) => (
@@ -191,7 +200,7 @@ export default function HemerdonFinancing() {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl font-display text-sm leading-7 text-muted">
-            Independent SMPT research by Benjamin Yang. The financial estimates are limited to the stated evidence cutoff and do not constitute an investment recommendation or a claim of independent third-party financial review. The original financial model, supporting source register and publication QC are available with the paper.
+            Research reflects the stated evidence cutoff. Financial checking was internal; external review remains outstanding. Investment decisions require independent assessment.
           </p>
           <Link href="/research/tungsten-supply-security" className="mt-6 inline-block font-display text-sm text-accent underline underline-offset-4 hover:text-foreground">
             Related research: Tungsten Supply Security

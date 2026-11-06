@@ -867,8 +867,8 @@ export function buildMaterialDossier(slug: string, asOf: string, model?: Lattice
   const oldest = [...events].sort((a, b) => byCodePoint(a.date, b.date) || byCodePoint(a.id, b.id))[0];
   const newestEvent = events[0];
   const lede = oldest && newestEvent
-    ? `Records coded to ${material.nameEn}, from ${oldest.titleEn} (${formatDate(oldest.date)}) to the latest event on ${formatDate(newestEvent.date)}. Shared stage codes are not findings.`
-    : `Records coded to ${material.nameEn}. Shared stage codes are not findings.`;
+    ? `Records coded to ${material.nameEn}, from ${oldest.titleEn} (${formatDate(oldest.date)}) to the latest event on ${formatDate(newestEvent.date)}.`
+    : `Records coded to ${material.nameEn}.`;
   const noteFields: { field: NoteField; label: string }[] = [
     { field: "statusSummary", label: "Status summary" },
     { field: "chinaPositionNote", label: "China's position" },

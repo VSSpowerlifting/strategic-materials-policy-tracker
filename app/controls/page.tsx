@@ -42,9 +42,8 @@ export default function ControlsPage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Restrictions as policy"
         title="Controls"
-        lead="Export licensing, prohibitions, extraterritorial rules, end-use restrictions, suspensions, investigations, divestiture orders and domestic production controls — one row per operative clause, so a limb that is suspended is never hidden inside a measure that is otherwise in force."
+        lead="Export, import, investment and production restrictions recorded by operative clause and legal status."
       />
 
       <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
@@ -55,18 +54,18 @@ export default function ControlsPage() {
           ["With a stated end date", clocks.length],
         ].map(([k, v]) => (
           <div key={k} className="bg-card px-4 py-4">
-            <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{k}</dt>
+            <dt className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">{k}</dt>
             <dd className="tnum mt-1 font-display text-3xl font-bold">{v}</dd>
           </div>
         ))}
       </dl>
-      <p className="mt-2 font-mono text-[11px] text-faint">Statuses as of {formatDate(asOf)}, the date the data was last checked.</p>
+      <p className="mt-2 font-display text-[11px] text-faint">Statuses as of {formatDate(asOf)}, the date the data was last checked.</p>
 
       <div className="mt-14 space-y-14">
         <Section
           index="01"
-          title="Clocks running"
-          description="Clauses whose current status has a stated end date. Days are counted from the data's as-of date, not from today."
+          title="Controls with stated end dates"
+          description="Clauses whose current status has a stated end date. Remaining days use the corpus revision date as their reference."
         >
           <div className="grid gap-4 md:grid-cols-2">
             {clockGroups.map((group) => {
@@ -76,11 +75,11 @@ export default function ControlsPage() {
                 <Card key={`${entry.sourceId}|${entry.until}|${entry.status}`} className="p-5">
                   <div className="flex items-baseline justify-between gap-3">
                     <ControlStatusBadge status={entry.status} />
-                    <span className="tnum font-mono text-xs text-muted">until {formatDate(entry.until!)}</span>
+                    <span className="tnum font-display text-xs text-muted">until {formatDate(entry.until!)}</span>
                   </div>
                   <p className="tnum mt-3 font-display text-4xl font-bold">
                     {daysLeft}
-                    <span className="ml-2 font-mono text-sm font-normal text-muted">days {daysLeft >= 0 ? "left" : "past"}</span>
+                    <span className="ml-2 font-display text-sm font-normal text-muted">days {daysLeft >= 0 ? "left" : "past"}</span>
                   </p>
                   <p className="mt-2 text-sm leading-6 text-muted">
                     <JurisdictionTag code={event.jurisdiction} />{" "}
@@ -97,7 +96,7 @@ export default function ControlsPage() {
                     ))}
                   </ul>
                   <p className="mt-3 text-xs leading-5 text-faint">
-                    What follows the end date is not recorded until an official source states it.
+                    Post-expiry standing remains pending official confirmation.
                   </p>
                 </Card>
               );
@@ -118,7 +117,7 @@ export default function ControlsPage() {
             <table className="w-full min-w-[44rem] border-collapse text-sm">
               <caption className="sr-only">Control clauses by issuing actor and measure type</caption>
               <thead>
-                <tr className="border-b bg-card font-mono text-[11px] text-faint">
+                <tr className="border-b bg-card font-display text-[11px] text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal uppercase tracking-[0.12em]">Measure type</th>
                   {issuers.map((j) => (
                     <th key={j} scope="col" className="px-2 py-2 text-center font-normal">{jurisdictionLabels[j]}</th>
@@ -136,13 +135,13 @@ export default function ControlsPage() {
                           {n ? (
                             <Link
                               href={`/controls?issuer=${j}&type=${t}`}
-                              className="tnum flex h-8 items-center justify-center rounded font-mono text-xs hover:ring-1 hover:ring-accent"
+                              className="tnum flex h-8 items-center justify-center rounded font-display text-xs hover:ring-1 hover:ring-accent"
                               style={{ background: `color-mix(in oklab, #C77B7B ${Math.min(60, 14 + n * 8)}%, transparent)` }}
                             >
                               {n}
                             </Link>
                           ) : (
-                            <span className="flex h-8 items-center justify-center font-mono text-xs text-border-strong">·</span>
+                            <span className="flex h-8 items-center justify-center font-display text-xs text-border-strong">·</span>
                           )}
                         </td>
                       );

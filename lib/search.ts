@@ -46,6 +46,7 @@ import { commitmentActor, controlIssuer, currentControlStatus, currentFinancialS
 import { formatMoney } from "./decimal";
 
 import type { JurisdictionCode } from "./types";
+import { fi002 } from "./fi002";
 import { normalize } from "./search-core";
 import type { SearchDoc } from "./search-core";
 export { SEARCH_KINDS, normalize, searchDocs } from "./search-core";
@@ -324,6 +325,12 @@ export function buildSearchIndex(): SearchDoc[] {
     });
   }
 
+  docs.push({
+    id: "smpt-fi002", kind: "publication", title: fi002.title,
+    subtitle: "Financial Intelligence 002 · Independent SMPT analysis · 5 November 2026 cutoff",
+    href: fi002.path, date: fi002.cutoff, jurisdiction: null, mechanisms: null,
+    haystack: join(fi002.title, fi002.description, "FI002 copper Escondida Goldman Sachs BHP Benjamin Yang replacement economics financial model EBITDA"),
+  });
   return docs;
 }
 

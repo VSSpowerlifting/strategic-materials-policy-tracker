@@ -29,6 +29,7 @@ const KIND_LABEL: Record<SearchKind, string> = {
   framing: "Framing claims",
   source: "Sources",
   watched: "Watchlist",
+  publication: "Research publications",
 };
 
 // Browse shortcuts expose the six most useful research entry points.
@@ -340,7 +341,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                   className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 rounded-lg border border-border-strong bg-card px-4 py-4 text-left transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   <span className="font-display text-base font-semibold leading-6">{KIND_LABEL[type]}</span>
-                  <span className="tnum shrink-0 font-mono text-sm text-accent">{allCounts[type]}</span>
+                  <span className="tnum shrink-0 font-display text-sm text-accent">{allCounts[type]}</span>
                 </button>
               ))}
             </div>

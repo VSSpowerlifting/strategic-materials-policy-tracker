@@ -21,11 +21,11 @@ const expectations={
  actor:getAllJurisdictions().length,
  framing:getAllFramingClaims().length,
  source:getAllSources().length,
- watched:getAllWatchedSources().length,
+ watched:getAllWatchedSources().length, publication:1,
 } as const;
 
-test("the existing single search index covers all eleven public record families without duplicates",()=>{
- assert.equal(SEARCH_KINDS.length,11);
+test("the existing single search index covers public record families and research publications without duplicates",()=>{
+ assert.equal(SEARCH_KINDS.length,12);
  let total=0;
  const keys=new Set<string>();
  for(const k of SEARCH_KINDS){

@@ -30,11 +30,11 @@ function readCsv(text: string): string[][] {
   return rows;
 }
 
-test("all eleven public record kinds preserve identities, displayed context and canonical anchors", () => {
+test("all public record and publication kinds preserve identities, displayed context and canonical anchors", () => {
   const examples = SEARCH_KINDS.map(kind => docs.find(d => d.kind === kind)!);
   const before = structuredClone(examples);
   const list = buildSearchReferences(examples, all, context);
-  assert.equal(list.recordCount, 11);
+  assert.equal(list.recordCount, SEARCH_KINDS.length);
   assert.deepEqual(list.records.map(r => r.kind), [...SEARCH_KINDS]);
   for (const [i, row] of list.records.entries()) {
     assert.deepEqual(row, {kind: examples[i].kind, id: examples[i].id,

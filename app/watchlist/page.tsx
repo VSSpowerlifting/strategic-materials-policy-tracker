@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Watchlist",
   description:
-    "The official sources under standing review — what the tracker watches, how often, and for which materials. The input side of the database, published so that coverage can be audited rather than assumed.",
+    "Official publication sources registered for review, with stated cadence and materials coverage.",
 };
 
 export default function WatchlistPage() {
@@ -25,40 +25,37 @@ export default function WatchlistPage() {
         index="01"
         eyebrow="Coverage"
         title="What this tracker watches"
-        lead="The source register shows what has been cited. This page shows what is under review — the official pages and feeds the project has undertaken to check, at a stated interval, for each jurisdiction it publishes events for. Publishing the input side is what makes the absence of a record legible: a gap here is a gap in coverage, not evidence that nothing happened."
+        lead="This register lists the official pages and feeds selected for review, organized by jurisdiction and review cadence. Coverage gaps reflect the sources currently monitored or scheduled for review."
       />
 
       <Card className="mt-8 p-6">
         <h2 className="font-display font-semibold tracking-tight">
-          What this page does and does not claim
+          How to read this watchlist
         </h2>
         <ul className="mt-3 max-w-3xl space-y-2 text-sm leading-6 text-muted">
           <li>
-            Watching a source is a statement about the project&apos;s review routine. It asserts
-            nothing about that source&apos;s contents, and no measure is implied to exist or not
-            exist because a page appears here.
+            An entry identifies an official publication venue selected for review.
+            The policy measures themselves appear in the source-linked event records.
           </li>
           <li>
-            Cadence is the interval the project commits to reviewing at — not an observed
-            publication frequency of the source.
+            Cadence states the project&apos;s planned review interval, separate from
+            how often the publisher releases new material.
           </li>
           <li>
             {site.monitoringStartedAt ? (
               <>Prospective monitoring began {site.monitoringStartedAt}.</>
             ) : (
               <>
-                Prospective monitoring has not started. Every record currently in the database was
-                added retrospectively, so no timeliness or lag statistic is computed anywhere on
-                this site — there is no monitoring start date to compute one against. The review
-                dates below are empty for the same reason, and are left empty rather than
-                backfilled.
+                The current records were collected retrospectively. Prospective
+                monitoring awaits a recorded start date; review dates and
+                publication-lag measures will be available after that start.
               </>
             )}
           </li>
           <li>
             Sources are added here when they are the authoritative publication venue for a
-            jurisdiction&apos;s measures. Reachability is confirmed at the time of addition; that
-            is recorded in each entry&apos;s note, and is not a claim of continued availability.
+            jurisdiction&apos;s measures. Each entry records the source&apos;s accessibility when added;
+            current availability may change.
           </li>
         </ul>
         <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
@@ -72,9 +69,8 @@ export default function WatchlistPage() {
           <h2 className="font-display font-semibold tracking-tight">Coverage gaps</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
             The tracker publishes events for{" "}
-            {gaps.map((g) => jurisdictionLabels[g.jurisdiction]).join(", ")} but has no source under
-            active review there. Records for these jurisdictions are retrospective only, and this
-            site should not be read as monitoring them.
+            {gaps.map((g) => jurisdictionLabels[g.jurisdiction]).join(", ")} and currently lists no active-review source for those jurisdictions.
+            The published records there were researched retrospectively.
           </p>
         </Card>
       ) : null}

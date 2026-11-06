@@ -42,11 +42,11 @@ export function InstrumentsPanel({
       {commitments.length ? (
         <div>
           <div className="mb-2 flex items-baseline justify-between gap-3">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+            <h3 className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">
               Financial instruments ({commitments.length})
             </h3>
             {capitalHref ? (
-              <Link href={capitalHref} className="font-mono text-[11px] text-accent hover:text-accent-strong">
+              <Link href={capitalHref} className="font-display text-[11px] text-accent hover:text-accent-strong">
                 Open in Capital →
               </Link>
             ) : null}
@@ -61,11 +61,11 @@ export function InstrumentsPanel({
       {controls.length ? (
         <div>
           <div className="mb-2 flex items-baseline justify-between gap-3">
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+            <h3 className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">
               Control clauses ({controls.length})
             </h3>
             {controlsHref ? (
-              <Link href={controlsHref} className="font-mono text-[11px] text-accent hover:text-accent-strong">
+              <Link href={controlsHref} className="font-display text-[11px] text-accent hover:text-accent-strong">
                 Open in Controls →
               </Link>
             ) : null}

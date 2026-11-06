@@ -1,0 +1,1647 @@
+[
+  {
+    "sheet": "00 Model Guide",
+    "cell": "D6",
+    "formula": "=CHOOSE(D5,\"Base\",\"Upside\",\"Downside\",\"Delay\",\"Overrun\",\"Combined stress\")"
+  },
+  {
+    "sheet": "01 Source Register",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "02 Historical Financials",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "02 Historical Financials",
+    "cell": "E30",
+    "formula": "=E9/(E9+E22+E23)"
+  },
+  {
+    "sheet": "02 Historical Financials",
+    "cell": "E31",
+    "formula": "=E9/E7"
+  },
+  {
+    "sheet": "03 Market Scenarios",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "03 Market Scenarios",
+    "cell": "D6",
+    "formula": "=CHOOSE('00 Model Guide'!$D$5,E6,F6,G6,H6,I6,J6)"
+  },
+  {
+    "sheet": "03 Market Scenarios",
+    "cell": "D7",
+    "formula": "=CHOOSE('00 Model Guide'!$D$5,E7,F7,G7,H7,I7,J7)"
+  },
+  {
+    "sheet": "03 Market Scenarios",
+    "cell": "D8",
+    "formula": "=CHOOSE('00 Model Guide'!$D$5,E8,F8,G8,H8,I8,J8)"
+  },
+  {
+    "sheet": "03 Market Scenarios",
+    "cell": "D9",
+    "formula": "=CHOOSE('00 Model Guide'!$D$5,E9,F9,G9,H9,I9,J9)"
+  },
+  {
+    "sheet": "03 Market Scenarios",
+    "cell": "D10",
+    "formula": "=CHOOSE('00 Model Guide'!$D$5,E10,F10,G10,H10,I10,J10)"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "G6",
+    "formula": "=D6"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "H6",
+    "formula": "=D6*F6"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "G7",
+    "formula": "=D7"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "H7",
+    "formula": "=D7*F7"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "G8",
+    "formula": "=D8"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "H8",
+    "formula": "=D8*F8"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "G9",
+    "formula": "=0"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "H9",
+    "formula": "=D9*F9"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "G11",
+    "formula": "=SUM(G6:G9)"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "H11",
+    "formula": "=SUM(H6:H9)"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D14",
+    "formula": "='03 Market Scenarios'!D16"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D15",
+    "formula": "=G11*D14"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D16",
+    "formula": "='02 Historical Financials'!E11*'03 Market Scenarios'!D15"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D17",
+    "formula": "='03 Market Scenarios'!D6"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D18",
+    "formula": "='03 Market Scenarios'!D7"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D19",
+    "formula": "=D15*D18*(D17-D16)/1000"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D20",
+    "formula": "=D15*(D18-1)*(D16-'03 Market Scenarios'!D19)/1000"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D21",
+    "formula": "=(D19+D20)*(1-'03 Market Scenarios'!D17)+D25"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D22",
+    "formula": "=D21*(1-'03 Market Scenarios'!D18)"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D23",
+    "formula": "=D22*G6/G11*(1-F6)"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D24",
+    "formula": "=D9*D14*D18*(D17-D16)/1000"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D27",
+    "formula": "=D15*('03 Market Scenarios'!D33-'03 Market Scenarios'!D32)/1000"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D28",
+    "formula": "=D27*(1-'03 Market Scenarios'!D17)"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D29",
+    "formula": "=D28*(1-'03 Market Scenarios'!D18)"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D30",
+    "formula": "='03 Market Scenarios'!D33/'03 Market Scenarios'!D32-1"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D31",
+    "formula": "='03 Market Scenarios'!D34*'03 Market Scenarios'!D15"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D32",
+    "formula": "='03 Market Scenarios'!D33/D31-1"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D34",
+    "formula": "=SUM(D6:D9)-'03 Market Scenarios'!D30"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D40",
+    "formula": "='03 Market Scenarios'!D32"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D41",
+    "formula": "='03 Market Scenarios'!D6"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D42",
+    "formula": "=D41-D40"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D43",
+    "formula": "=D42/'03 Market Scenarios'!D15*100"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D44",
+    "formula": "=D43*D39"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D45",
+    "formula": "=('03 Market Scenarios'!D33-'03 Market Scenarios'!D32)/'03 Market Scenarios'!D15*100*D39"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "D46",
+    "formula": "=('03 Market Scenarios'!D33-'03 Market Scenarios'!D42)/'03 Market Scenarios'!D15*100*D39"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "E50",
+    "formula": "=(D50-$D$40)/'03 Market Scenarios'!$D$15*100"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "F50",
+    "formula": "=E50*$D$39"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "E51",
+    "formula": "=(D51-$D$40)/'03 Market Scenarios'!$D$15*100"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "F51",
+    "formula": "=E51*$D$39"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "E52",
+    "formula": "=(D52-$D$40)/'03 Market Scenarios'!$D$15*100"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "F52",
+    "formula": "=E52*$D$39"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "E53",
+    "formula": "=(D53-$D$40)/'03 Market Scenarios'!$D$15*100"
+  },
+  {
+    "sheet": "04 Operating Sensitivity",
+    "cell": "F53",
+    "formula": "=E53*$D$39"
+  },
+  {
+    "sheet": "05 Capital Expenditure",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "05 Capital Expenditure",
+    "cell": "D11",
+    "formula": "=SUM(D6:D10)"
+  },
+  {
+    "sheet": "05 Capital Expenditure",
+    "cell": "D16",
+    "formula": "=D15*'03 Market Scenarios'!D26"
+  },
+  {
+    "sheet": "05 Capital Expenditure",
+    "cell": "E16",
+    "formula": "=E15*'03 Market Scenarios'!D26"
+  },
+  {
+    "sheet": "05 Capital Expenditure",
+    "cell": "D18",
+    "formula": "=D17*0.5"
+  },
+  {
+    "sheet": "05 Capital Expenditure",
+    "cell": "E18",
+    "formula": "=E17*0.5"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D6",
+    "formula": "='03 Market Scenarios'!D24*'03 Market Scenarios'!D9"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D7",
+    "formula": "=D6*'03 Market Scenarios'!D26"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D8",
+    "formula": "='03 Market Scenarios'!D8"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D9",
+    "formula": "='03 Market Scenarios'!D20"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D10",
+    "formula": "='03 Market Scenarios'!D18"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D11",
+    "formula": "='03 Market Scenarios'!D21"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D12",
+    "formula": "='03 Market Scenarios'!D22"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D13",
+    "formula": "='03 Market Scenarios'!D23+'03 Market Scenarios'!D10"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D14",
+    "formula": "=SUM(G31:G60)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D15",
+    "formula": "=SUM(H31:H60)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D16",
+    "formula": "=D14/D15"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D17",
+    "formula": "=IF(D8>D9,D16*1000/((D8-D9)*(1-D10)),\"n.a.\")"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D18",
+    "formula": "='03 Market Scenarios'!D25"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D19",
+    "formula": "=IF(ISNUMBER(D17),D17/D18,\"n.a.\")"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D31",
+    "formula": "=C31-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E31",
+    "formula": "=IF(AND(C31>='03 Market Scenarios'!$D$27,C31<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F31",
+    "formula": "=1/(1+$D$11)^D31"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G31",
+    "formula": "=E31*F31"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H31",
+    "formula": "=IF(AND(C31>=$D$13,C31<$D$13+$D$12),F31,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D32",
+    "formula": "=C32-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E32",
+    "formula": "=IF(AND(C32>='03 Market Scenarios'!$D$27,C32<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F32",
+    "formula": "=1/(1+$D$11)^D32"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G32",
+    "formula": "=E32*F32"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H32",
+    "formula": "=IF(AND(C32>=$D$13,C32<$D$13+$D$12),F32,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D33",
+    "formula": "=C33-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E33",
+    "formula": "=IF(AND(C33>='03 Market Scenarios'!$D$27,C33<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F33",
+    "formula": "=1/(1+$D$11)^D33"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G33",
+    "formula": "=E33*F33"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H33",
+    "formula": "=IF(AND(C33>=$D$13,C33<$D$13+$D$12),F33,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D34",
+    "formula": "=C34-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E34",
+    "formula": "=IF(AND(C34>='03 Market Scenarios'!$D$27,C34<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F34",
+    "formula": "=1/(1+$D$11)^D34"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G34",
+    "formula": "=E34*F34"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H34",
+    "formula": "=IF(AND(C34>=$D$13,C34<$D$13+$D$12),F34,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D35",
+    "formula": "=C35-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E35",
+    "formula": "=IF(AND(C35>='03 Market Scenarios'!$D$27,C35<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F35",
+    "formula": "=1/(1+$D$11)^D35"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G35",
+    "formula": "=E35*F35"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H35",
+    "formula": "=IF(AND(C35>=$D$13,C35<$D$13+$D$12),F35,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D36",
+    "formula": "=C36-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E36",
+    "formula": "=IF(AND(C36>='03 Market Scenarios'!$D$27,C36<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F36",
+    "formula": "=1/(1+$D$11)^D36"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G36",
+    "formula": "=E36*F36"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H36",
+    "formula": "=IF(AND(C36>=$D$13,C36<$D$13+$D$12),F36,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D37",
+    "formula": "=C37-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E37",
+    "formula": "=IF(AND(C37>='03 Market Scenarios'!$D$27,C37<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F37",
+    "formula": "=1/(1+$D$11)^D37"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G37",
+    "formula": "=E37*F37"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H37",
+    "formula": "=IF(AND(C37>=$D$13,C37<$D$13+$D$12),F37,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D38",
+    "formula": "=C38-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E38",
+    "formula": "=IF(AND(C38>='03 Market Scenarios'!$D$27,C38<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F38",
+    "formula": "=1/(1+$D$11)^D38"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G38",
+    "formula": "=E38*F38"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H38",
+    "formula": "=IF(AND(C38>=$D$13,C38<$D$13+$D$12),F38,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D39",
+    "formula": "=C39-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E39",
+    "formula": "=IF(AND(C39>='03 Market Scenarios'!$D$27,C39<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F39",
+    "formula": "=1/(1+$D$11)^D39"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G39",
+    "formula": "=E39*F39"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H39",
+    "formula": "=IF(AND(C39>=$D$13,C39<$D$13+$D$12),F39,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D40",
+    "formula": "=C40-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E40",
+    "formula": "=IF(AND(C40>='03 Market Scenarios'!$D$27,C40<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F40",
+    "formula": "=1/(1+$D$11)^D40"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G40",
+    "formula": "=E40*F40"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H40",
+    "formula": "=IF(AND(C40>=$D$13,C40<$D$13+$D$12),F40,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D41",
+    "formula": "=C41-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E41",
+    "formula": "=IF(AND(C41>='03 Market Scenarios'!$D$27,C41<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F41",
+    "formula": "=1/(1+$D$11)^D41"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G41",
+    "formula": "=E41*F41"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H41",
+    "formula": "=IF(AND(C41>=$D$13,C41<$D$13+$D$12),F41,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D42",
+    "formula": "=C42-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E42",
+    "formula": "=IF(AND(C42>='03 Market Scenarios'!$D$27,C42<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F42",
+    "formula": "=1/(1+$D$11)^D42"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G42",
+    "formula": "=E42*F42"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H42",
+    "formula": "=IF(AND(C42>=$D$13,C42<$D$13+$D$12),F42,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D43",
+    "formula": "=C43-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E43",
+    "formula": "=IF(AND(C43>='03 Market Scenarios'!$D$27,C43<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F43",
+    "formula": "=1/(1+$D$11)^D43"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G43",
+    "formula": "=E43*F43"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H43",
+    "formula": "=IF(AND(C43>=$D$13,C43<$D$13+$D$12),F43,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D44",
+    "formula": "=C44-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E44",
+    "formula": "=IF(AND(C44>='03 Market Scenarios'!$D$27,C44<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F44",
+    "formula": "=1/(1+$D$11)^D44"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G44",
+    "formula": "=E44*F44"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H44",
+    "formula": "=IF(AND(C44>=$D$13,C44<$D$13+$D$12),F44,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D45",
+    "formula": "=C45-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E45",
+    "formula": "=IF(AND(C45>='03 Market Scenarios'!$D$27,C45<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F45",
+    "formula": "=1/(1+$D$11)^D45"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G45",
+    "formula": "=E45*F45"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H45",
+    "formula": "=IF(AND(C45>=$D$13,C45<$D$13+$D$12),F45,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D46",
+    "formula": "=C46-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E46",
+    "formula": "=IF(AND(C46>='03 Market Scenarios'!$D$27,C46<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F46",
+    "formula": "=1/(1+$D$11)^D46"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G46",
+    "formula": "=E46*F46"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H46",
+    "formula": "=IF(AND(C46>=$D$13,C46<$D$13+$D$12),F46,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D47",
+    "formula": "=C47-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E47",
+    "formula": "=IF(AND(C47>='03 Market Scenarios'!$D$27,C47<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F47",
+    "formula": "=1/(1+$D$11)^D47"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G47",
+    "formula": "=E47*F47"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H47",
+    "formula": "=IF(AND(C47>=$D$13,C47<$D$13+$D$12),F47,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D48",
+    "formula": "=C48-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E48",
+    "formula": "=IF(AND(C48>='03 Market Scenarios'!$D$27,C48<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F48",
+    "formula": "=1/(1+$D$11)^D48"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G48",
+    "formula": "=E48*F48"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H48",
+    "formula": "=IF(AND(C48>=$D$13,C48<$D$13+$D$12),F48,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D49",
+    "formula": "=C49-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E49",
+    "formula": "=IF(AND(C49>='03 Market Scenarios'!$D$27,C49<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F49",
+    "formula": "=1/(1+$D$11)^D49"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G49",
+    "formula": "=E49*F49"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H49",
+    "formula": "=IF(AND(C49>=$D$13,C49<$D$13+$D$12),F49,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D50",
+    "formula": "=C50-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E50",
+    "formula": "=IF(AND(C50>='03 Market Scenarios'!$D$27,C50<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F50",
+    "formula": "=1/(1+$D$11)^D50"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G50",
+    "formula": "=E50*F50"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H50",
+    "formula": "=IF(AND(C50>=$D$13,C50<$D$13+$D$12),F50,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D51",
+    "formula": "=C51-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E51",
+    "formula": "=IF(AND(C51>='03 Market Scenarios'!$D$27,C51<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F51",
+    "formula": "=1/(1+$D$11)^D51"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G51",
+    "formula": "=E51*F51"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H51",
+    "formula": "=IF(AND(C51>=$D$13,C51<$D$13+$D$12),F51,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D52",
+    "formula": "=C52-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E52",
+    "formula": "=IF(AND(C52>='03 Market Scenarios'!$D$27,C52<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F52",
+    "formula": "=1/(1+$D$11)^D52"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G52",
+    "formula": "=E52*F52"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H52",
+    "formula": "=IF(AND(C52>=$D$13,C52<$D$13+$D$12),F52,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D53",
+    "formula": "=C53-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E53",
+    "formula": "=IF(AND(C53>='03 Market Scenarios'!$D$27,C53<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F53",
+    "formula": "=1/(1+$D$11)^D53"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G53",
+    "formula": "=E53*F53"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H53",
+    "formula": "=IF(AND(C53>=$D$13,C53<$D$13+$D$12),F53,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D54",
+    "formula": "=C54-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E54",
+    "formula": "=IF(AND(C54>='03 Market Scenarios'!$D$27,C54<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F54",
+    "formula": "=1/(1+$D$11)^D54"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G54",
+    "formula": "=E54*F54"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H54",
+    "formula": "=IF(AND(C54>=$D$13,C54<$D$13+$D$12),F54,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D55",
+    "formula": "=C55-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E55",
+    "formula": "=IF(AND(C55>='03 Market Scenarios'!$D$27,C55<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F55",
+    "formula": "=1/(1+$D$11)^D55"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G55",
+    "formula": "=E55*F55"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H55",
+    "formula": "=IF(AND(C55>=$D$13,C55<$D$13+$D$12),F55,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D56",
+    "formula": "=C56-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E56",
+    "formula": "=IF(AND(C56>='03 Market Scenarios'!$D$27,C56<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F56",
+    "formula": "=1/(1+$D$11)^D56"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G56",
+    "formula": "=E56*F56"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H56",
+    "formula": "=IF(AND(C56>=$D$13,C56<$D$13+$D$12),F56,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D57",
+    "formula": "=C57-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E57",
+    "formula": "=IF(AND(C57>='03 Market Scenarios'!$D$27,C57<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F57",
+    "formula": "=1/(1+$D$11)^D57"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G57",
+    "formula": "=E57*F57"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H57",
+    "formula": "=IF(AND(C57>=$D$13,C57<$D$13+$D$12),F57,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D58",
+    "formula": "=C58-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E58",
+    "formula": "=IF(AND(C58>='03 Market Scenarios'!$D$27,C58<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F58",
+    "formula": "=1/(1+$D$11)^D58"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G58",
+    "formula": "=E58*F58"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H58",
+    "formula": "=IF(AND(C58>=$D$13,C58<$D$13+$D$12),F58,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D59",
+    "formula": "=C59-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E59",
+    "formula": "=IF(AND(C59>='03 Market Scenarios'!$D$27,C59<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F59",
+    "formula": "=1/(1+$D$11)^D59"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G59",
+    "formula": "=E59*F59"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H59",
+    "formula": "=IF(AND(C59>=$D$13,C59<$D$13+$D$12),F59,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "D60",
+    "formula": "=C60-2026"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "E60",
+    "formula": "=IF(AND(C60>='03 Market Scenarios'!$D$27,C60<'03 Market Scenarios'!$D$27+'03 Market Scenarios'!$D$28),$D$6/'03 Market Scenarios'!$D$28,0)"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "F60",
+    "formula": "=1/(1+$D$11)^D60"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "G60",
+    "formula": "=E60*F60"
+  },
+  {
+    "sheet": "06 Escondida Economics",
+    "cell": "H60",
+    "formula": "=IF(AND(C60>=$D$13,C60<$D$13+$D$12),F60,0)"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D6",
+    "formula": "='02 Historical Financials'!E13"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D7",
+    "formula": "=-'02 Historical Financials'!E14"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D8",
+    "formula": "=D6-D7"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D9",
+    "formula": "='02 Historical Financials'!E17"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D10",
+    "formula": "='02 Historical Financials'!E18"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D11",
+    "formula": "=D8-D9-D10"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D13",
+    "formula": "='02 Historical Financials'!E16"
+  },
+  {
+    "sheet": "07 Funding Capacity",
+    "cell": "D14",
+    "formula": "='02 Historical Financials'!E25"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D6",
+    "formula": "='03 Market Scenarios'!E6"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E6",
+    "formula": "='03 Market Scenarios'!E8"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F6",
+    "formula": "='03 Market Scenarios'!D24*'03 Market Scenarios'!E9"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G6",
+    "formula": "='03 Market Scenarios'!E10"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H6",
+    "formula": "=F6/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^('03 Market Scenarios'!$D$23+G6-2027))/((E6-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I6",
+    "formula": "=H6/'03 Market Scenarios'!$D$25"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D7",
+    "formula": "='03 Market Scenarios'!F6"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E7",
+    "formula": "='03 Market Scenarios'!F8"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F7",
+    "formula": "='03 Market Scenarios'!D24*'03 Market Scenarios'!F9"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G7",
+    "formula": "='03 Market Scenarios'!F10"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H7",
+    "formula": "=F7/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^('03 Market Scenarios'!$D$23+G7-2027))/((E7-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I7",
+    "formula": "=H7/'03 Market Scenarios'!$D$25"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D8",
+    "formula": "='03 Market Scenarios'!G6"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E8",
+    "formula": "='03 Market Scenarios'!G8"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F8",
+    "formula": "='03 Market Scenarios'!D24*'03 Market Scenarios'!G9"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G8",
+    "formula": "='03 Market Scenarios'!G10"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H8",
+    "formula": "=F8/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^('03 Market Scenarios'!$D$23+G8-2027))/((E8-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I8",
+    "formula": "=H8/'03 Market Scenarios'!$D$25"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D9",
+    "formula": "='03 Market Scenarios'!H6"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E9",
+    "formula": "='03 Market Scenarios'!H8"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F9",
+    "formula": "='03 Market Scenarios'!D24*'03 Market Scenarios'!H9"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G9",
+    "formula": "='03 Market Scenarios'!H10"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H9",
+    "formula": "=F9/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^('03 Market Scenarios'!$D$23+G9-2027))/((E9-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I9",
+    "formula": "=H9/'03 Market Scenarios'!$D$25"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D10",
+    "formula": "='03 Market Scenarios'!I6"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E10",
+    "formula": "='03 Market Scenarios'!I8"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F10",
+    "formula": "='03 Market Scenarios'!D24*'03 Market Scenarios'!I9"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G10",
+    "formula": "='03 Market Scenarios'!I10"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H10",
+    "formula": "=F10/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^('03 Market Scenarios'!$D$23+G10-2027))/((E10-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I10",
+    "formula": "=H10/'03 Market Scenarios'!$D$25"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D11",
+    "formula": "='03 Market Scenarios'!J6"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E11",
+    "formula": "='03 Market Scenarios'!J8"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F11",
+    "formula": "='03 Market Scenarios'!D24*'03 Market Scenarios'!J9"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G11",
+    "formula": "='03 Market Scenarios'!J10"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H11",
+    "formula": "=F11/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^('03 Market Scenarios'!$D$23+G11-2027))/((E11-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I11",
+    "formula": "=H11/'03 Market Scenarios'!$D$25"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G16",
+    "formula": "='03 Market Scenarios'!$D$24*D16/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/(1+'03 Market Scenarios'!$D$21)^(E16-2027)"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H16",
+    "formula": "=G16/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^(F16-2027))"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I16",
+    "formula": "=H16/(('03 Market Scenarios'!$D$8-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D17",
+    "formula": "=1+'03 Market Scenarios'!D35"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G17",
+    "formula": "='03 Market Scenarios'!$D$24*D17/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/(1+'03 Market Scenarios'!$D$21)^(E17-2027)"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H17",
+    "formula": "=G17/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^(F17-2027))"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I17",
+    "formula": "=H17/(('03 Market Scenarios'!$D$8-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D18",
+    "formula": "=1+'03 Market Scenarios'!D36"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G18",
+    "formula": "='03 Market Scenarios'!$D$24*D18/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/(1+'03 Market Scenarios'!$D$21)^(E18-2027)"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "H18",
+    "formula": "=G18/((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$22))/'03 Market Scenarios'!$D$21/(1+'03 Market Scenarios'!$D$21)^(F18-2027))"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "I18",
+    "formula": "=H18/(('03 Market Scenarios'!$D$8-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D21",
+    "formula": "='03 Market Scenarios'!D25*'03 Market Scenarios'!D29*('03 Market Scenarios'!D8-'03 Market Scenarios'!D20)*(1-'03 Market Scenarios'!D18)/1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D22",
+    "formula": "='03 Market Scenarios'!D24/'03 Market Scenarios'!D28"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D27",
+    "formula": "=D$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C27-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E27",
+    "formula": "=E$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C27-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F27",
+    "formula": "=F$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C27-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G27",
+    "formula": "=G$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C27-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D28",
+    "formula": "=D$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C28-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E28",
+    "formula": "=E$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C28-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F28",
+    "formula": "=F$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C28-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G28",
+    "formula": "=G$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C28-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D29",
+    "formula": "=D$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C29-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "E29",
+    "formula": "=E$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C29-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "F29",
+    "formula": "=F$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C29-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "G29",
+    "formula": "=G$26/'03 Market Scenarios'!$D$28*((1-(1+'03 Market Scenarios'!$D$21)^(-'03 Market Scenarios'!$D$28))/'03 Market Scenarios'!$D$21)/'06 Escondida Economics'!$D$15/(($C29-'03 Market Scenarios'!$D$20)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D34",
+    "formula": "=K34/5*((1-(1+F34)^(-5))/F34)/((1-(1+F34)^(-G34))/F34/(1+F34)^(H34-2027))/((J34-I34)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D35",
+    "formula": "=K35/5*((1-(1+F35)^(-5))/F35)/((1-(1+F35)^(-G35))/F35/(1+F35)^(H35-2027))/((J35-I35)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D36",
+    "formula": "=K36/5*((1-(1+F36)^(-5))/F36)/((1-(1+F36)^(-G36))/F36/(1+F36)^(H36-2027))/((J36-I36)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D37",
+    "formula": "=K37/5*((1-(1+F37)^(-5))/F37)/((1-(1+F37)^(-G37))/F37/(1+F37)^(H37-2027))/((J37-I37)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D38",
+    "formula": "=K38/5*((1-(1+F38)^(-5))/F38)/((1-(1+F38)^(-G38))/F38/(1+F38)^(H38-2027))/((J38-I38)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D39",
+    "formula": "=K39/5*((1-(1+F39)^(-5))/F39)/((1-(1+F39)^(-G39))/F39/(1+F39)^(H39-2027))/((J39-I39)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D40",
+    "formula": "=K40/5*((1-(1+F40)^(-5))/F40)/((1-(1+F40)^(-G40))/F40/(1+F40)^(H40-2027))/((J40-I40)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "08 Scenarios and Decisions",
+    "cell": "D41",
+    "formula": "=K41/5*((1-(1+F41)^(-5))/F41)/((1-(1+F41)^(-G41))/F41/(1+F41)^(H41-2027))/((J41-I41)*(1-'03 Market Scenarios'!$D$18))*1000"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D6",
+    "formula": "='04 Operating Sensitivity'!D45"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D7",
+    "formula": "='04 Operating Sensitivity'!D46"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D8",
+    "formula": "='04 Operating Sensitivity'!D44"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D9",
+    "formula": "='06 Escondida Economics'!D6"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D10",
+    "formula": "='06 Escondida Economics'!D7"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D11",
+    "formula": "='06 Escondida Economics'!D17"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D12",
+    "formula": "='06 Escondida Economics'!D8"
+  },
+  {
+    "sheet": "09 Decision Dashboard",
+    "cell": "D13",
+    "formula": "='07 Funding Capacity'!D8"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D3",
+    "formula": "='00 Model Guide'!D6"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D6",
+    "formula": "='02 Historical Financials'!E13+'02 Historical Financials'!E14-'02 Historical Financials'!E15"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D7",
+    "formula": "='05 Capital Expenditure'!D11-'03 Market Scenarios'!D31"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D8",
+    "formula": "='08 Scenarios and Decisions'!H6-198.76566490610745"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D9",
+    "formula": "=SUM('06 Escondida Economics'!E31:E60)-'06 Escondida Economics'!D6"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D10",
+    "formula": "='06 Escondida Economics'!D7-'06 Escondida Economics'!D6*'03 Market Scenarios'!D26"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D11",
+    "formula": "='04 Operating Sensitivity'!D34"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D12",
+    "formula": "='04 Operating Sensitivity'!D27-2394"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D13",
+    "formula": "='02 Historical Financials'!E30"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D14",
+    "formula": "='02 Historical Financials'!E31"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D15",
+    "formula": "=IF('06 Escondida Economics'!D8>'06 Escondida Economics'!D9,\"VALID\",\"INVALID\")"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D20",
+    "formula": "=IF('06 Escondida Economics'!D13+'06 Escondida Economics'!D12-1<=2056,\"VALID\",\"EXTEND SCHEDULE\")"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D21",
+    "formula": "=IF('03 Market Scenarios'!D21>0,\"VALID\",\"INVALID\")"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D22",
+    "formula": "='04 Operating Sensitivity'!D45-2830.4163887999694"
+  },
+  {
+    "sheet": "10 Model Validation",
+    "cell": "D23",
+    "formula": "='07 Funding Capacity'!D8-'02 Historical Financials'!E15"
+  }
+]

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="520" height="205" preserveAspectRatio="xMinYMin meet" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="520" height="205"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-205)" style="clip-path: url(#clip)">
+		<g transform="">
+			<g transform="">
+				<g transform="">
+					<rect x="145.0" y="36.02777777777778" width="299.4475" height="16.111111111111107" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="60.19444444444445" width="165.15125" height="16.111111111111107" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="84.36111111111111" width="134.29625" height="16.111111111111114" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="108.52777777777777" width="92.89500000000001" height="16.111111111111114" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="132.69444444444446" width="32.381249999999994" height="16.111111111111114" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<rect x="145.0" y="156.86111111111111" width="9.02000000000001" height="16.111111111111114" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(59%,45%,17%); fill-rule: evenodd;"/>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,448.4475,44.083333)">
+							<text x="-7.78515625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">21.8</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,314.15125,68.25)">
+							<text x="-7.78515625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">12.0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,283.29625,92.416667)">
+							<text x="-5.560546875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">9.8</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,241.895,116.583333)">
+							<text x="-5.560546875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">6.8</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,181.38125,140.75)">
+							<text x="-5.560546875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">2.4</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,158.02,164.916667)">
+							<text x="-5.560546875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">0.7</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 145,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 140,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,56.166667 L 140,56.166667 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,80.333333 L 140,80.333333 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,104.5 L 140,104.5 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,128.666667 L 140,128.666667 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,152.833333 L 140,152.833333 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 145,177 L 140,177 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,140,44.083333)">
+							<text x="-48.01953125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">Operating CF</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,68.25)">
+							<text x="-59.58984375" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">Investing outflow</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,92.416667)">
+							<text x="-50.68359375" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">Reported FCF</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,116.583333)">
+							<text x="-52.47265625" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">BHP dividends</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,140.75)">
+							<text x="-49.80078125" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">NCI dividends</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,140,164.916667)">
+							<text x="-52.91796875" y="-3.2" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-6) scale(1,-1)">After dividends</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 145,32 L 475,32 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 145,32 L 145,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 213.75,32 L 213.75,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 282.5,32 L 282.5,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 351.25,32 L 351.25,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 420,32 L 420,27 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,145,27)">
+							<text x="-2.224609375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,213.75,27)">
+							<text x="-2.224609375" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">5</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,282.5,27)">
+							<text x="-4.44921875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">10</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,351.25,27)">
+							<text x="-4.44921875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">15</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,420,27)">
+							<text x="-4.44921875" y="-8.0" style="font-family: SMPT; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-16) scale(1,-1)">20</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<text x="0" y="192" style="font-family: SMPT; font-size: 9px;fill: rgb(14%,14%,12%); stroke:none;" transform="translate(0,384) scale(1,-1)">FY2026 consolidated cash-use measures, US$bn</text>
+		</g>
+	</g>
+</svg>

@@ -501,7 +501,7 @@ test("tungsten: 19 events, 9 with no child row, and the legal-basis events are s
 
 test("the lede names the oldest and latest event and claims coding, not attribution", () => {
   const p = dossier("tungsten");
-  assert.equal(p.lede, "Records coded to Tungsten, from Final List of Critical Minerals 2018 (18 May 2018) to the latest event on 9 Oct 2026. Shared stage codes are not findings.");
+  assert.equal(p.lede, "Records coded to Tungsten, from Final List of Critical Minerals 2018 (18 May 2018) to the latest event on 9 Oct 2026.");
   assert.ok(!p.lede.includes("every record whose source names"));
 });
 

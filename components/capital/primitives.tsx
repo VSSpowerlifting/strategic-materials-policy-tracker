@@ -45,7 +45,7 @@ export function ImplementationStatusBadge({ status }: { status: ImplementationSt
 /** Control status: a squared hue marker (the chart's legend) plus the label. */
 export function ControlStatusBadge({ status }: { status: ControlStatus }) {
   return (
-    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] leading-none text-muted">
+    <span className="inline-flex items-center gap-1.5 font-display text-[11px] leading-none text-muted">
       <span aria-hidden className="h-3 w-[5px] shrink-0 rounded-[1px]" style={{ background: CONTROL_STATUS_HUES[status] }} />
       <span className={status === "in_force" ? "text-accent" : undefined}>{controlStatusLabels[status]}</span>
     </span>
@@ -83,10 +83,10 @@ export function AmountFigure({
   return (
     <span className="inline-flex flex-wrap items-baseline gap-x-1.5">
       {amount.qualifier !== "exact" ? (
-        <span className="font-mono text-xs text-faint">{QUALIFIER_PREFIX[amount.qualifier].trim()}</span>
+        <span className="font-display text-xs text-faint">{QUALIFIER_PREFIX[amount.qualifier].trim()}</span>
       ) : null}
       <span className={`tnum font-display font-semibold tracking-tight ${sizeClass}`}>
-        <span className="mr-1 font-mono text-[0.7em] font-normal text-muted">{amount.currency}</span>
+        <span className="mr-1 font-display text-[0.7em] font-normal text-muted">{amount.currency}</span>
         {formatDecimalCompact(amount.value)}
       </span>
     </span>
@@ -99,16 +99,16 @@ export function AmountDetail({ amount }: { amount: MonetaryAmount }) {
     <div>
       <AmountFigure amount={amount} size="lg" />
       <p className="mt-2 text-sm leading-6 text-muted">
-        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">As stated </span>
+        <span className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">As stated </span>
         “{amount.amountAsStated}”
       </p>
-      <p className="mt-1 font-mono text-[11px] text-faint">
+      <p className="mt-1 font-display text-[11px] text-faint">
         {amount.currency} {groupDecimal(amount.value)} · {valueQualifierLabels[amount.qualifier]} · Currency{" "}
         {currencyBasisLabels[amount.currencyBasis].toLowerCase()}
       </p>
       {amount.basisNote ? (
         <p className="mt-2 text-sm leading-6 text-muted">
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Amount basis </span>
+          <span className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">Amount basis </span>
           {amount.basisNote}
         </p>
       ) : null}
@@ -150,12 +150,12 @@ export function StatusTrail<S extends string>({
               className={`absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-[2px] border-2 border-background ${current ? "bg-accent" : "bg-border-strong"}`}
             />
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <time className="tnum font-mono text-xs text-faint">{e.date ? formatDate(e.date) : "Date not stated"}</time>
+              <time className="tnum font-display text-xs text-faint">{e.date ? formatDate(e.date) : "Date not stated"}</time>
               {render(e.status)}
               {e.until ? (
-                <span className="font-mono text-[11px] text-muted">until {formatDate(e.until)}</span>
+                <span className="font-display text-[11px] text-muted">until {formatDate(e.until)}</span>
               ) : null}
-              {current ? <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">current</span> : null}
+              {current ? <span className="font-display text-[10px] uppercase tracking-[0.14em] text-accent">current</span> : null}
             </div>
             {e.note ? <p lang={/[\u3400-\u9fff]/.test(e.note) ? "zh" : undefined} className="mt-1 max-w-prose text-sm leading-6 text-muted">{e.note}</p> : null}
             <p className="mt-1">
@@ -295,7 +295,7 @@ export function Fact({ label, children }: { label: string; children: React.React
 }
 
 export function NotStated({ children = "Not stated" }: { children?: React.ReactNode }) {
-  return <span className="font-mono text-xs text-faint">{children}</span>;
+  return <span className="font-display text-xs text-faint">{children}</span>;
 }
 
 /**
@@ -372,7 +372,7 @@ export function OptionLadder({
     <ol className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
       {steps.map((s, i) => (
         <li key={s.label} className="bg-card px-4 py-3">
-          <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em]">
+          <p className="flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.12em]">
             <span
               aria-hidden
               className={`inline-flex h-4 w-4 items-center justify-center rounded-sm border text-[10px] ${s.done ? "border-accent text-accent" : "border-border-strong text-faint"}`}

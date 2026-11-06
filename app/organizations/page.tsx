@@ -17,7 +17,7 @@ export default function OrganizationsPage(){
   <PageHeading index="05" eyebrow="Capital intelligence" title="Organizations"
    lead="Find the bodies named in SMPT's capital and project records. Explore companies, public financiers,
    government offices, programme administrators and designation holders through explicit source-linked relationships.
-   A listing or financier role alone is not evidence that money has moved."/>
+   Financing status and payment evidence appear in the linked financial records."/>
   <div className="mt-10"><OrganizationsExplorer rows={rows}/></div>
   <p className="mt-8 text-sm text-muted">
    Download: <a href="/api/export/organizations.csv" className="text-accent hover:underline">Organization CSV</a>

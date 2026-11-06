@@ -1,0 +1,66 @@
+{
+  "method": "HEAD only; link availability, not evidence refresh",
+  "checkedDate": "2026-11-05",
+  "results": [
+    {
+      "key": "S1",
+      "url": "https://cdn.prod.website-files.com/69d6c3cf43485ab7fac9a296/6a995da54cb744f81ed2b6f3_Tungsten%20West%20Plc%20-%202026%20Audit%20Signed%20Accounts.pdf",
+      "status": 200,
+      "resolvedURL": "https://cdn.prod.website-files.com/69d6c3cf43485ab7fac9a296/6a995da54cb744f81ed2b6f3_Tungsten%20West%20Plc%20-%202026%20Audit%20Signed%20Accounts.pdf"
+    },
+    {
+      "key": "S2",
+      "url": "https://cdn.prod.website-files.com/69d6c3cf43485ab7fac9a296/6acd6cb2e4f003daa6f036a1_TW_Corporate_Presentation_Oct2026_Master.pdf",
+      "status": 200,
+      "resolvedURL": "https://cdn.prod.website-files.com/69d6c3cf43485ab7fac9a296/6acd6cb2e4f003daa6f036a1_TW_Corporate_Presentation_Oct2026_Master.pdf"
+    },
+    {
+      "key": "S3",
+      "url": "https://www.nationalwealthfund.org.uk/news-and-publications/news/national-wealth-fund-backs-tungsten-west-to-unlock-critical-uk-tungsten-supply/",
+      "status": 200,
+      "resolvedURL": "https://www.nationalwealthfund.org.uk/news-and-publications/news/national-wealth-fund-backs-tungsten-west-to-unlock-critical-uk-tungsten-supply/"
+    },
+    {
+      "key": "S4",
+      "url": "https://www.lse.co.uk/rns/strategic-investment-by-the-uk-government-nwf-yqliknoaeuaxugf.html",
+      "status": 403,
+      "note": "HTTP error during HEAD; no new evidence retrieved."
+    },
+    {
+      "key": "S5",
+      "url": "https://www.investegate.co.uk/index.php/announcement/rns/tungsten-west--tun/short-term-loan-repayment/9745287",
+      "status": 200,
+      "resolvedURL": "https://www.investegate.co.uk/index.php/announcement/rns/tungsten-west--tun/short-term-loan-repayment/9745287"
+    },
+    {
+      "key": "S6",
+      "url": "https://www.lse.co.uk/rns/processing-operations-commence-during-visit-by-nwf-tc6mhjidfgjazfe.html?mobile_view=desktop",
+      "status": 403,
+      "note": "HTTP error during HEAD; no new evidence retrieved."
+    },
+    {
+      "key": "S7",
+      "url": "https://data.fca.org.uk/artefacts/NSM/RNS/5863657b-8c2a-4537-999f-c7e5ee92f995.html",
+      "status": 200,
+      "resolvedURL": "https://data.fca.org.uk/artefacts/NSM/RNS/5863657b-8c2a-4537-999f-c7e5ee92f995.html"
+    },
+    {
+      "key": "S8",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/11854467/filing-history/MzU0MTkxODI3NGFkaXF6a2N4/document?format=pdf&download=0",
+      "status": 200,
+      "resolvedURL": "https://s3.eu-west-2.amazonaws.com/document-api-images-live.ch.gov.uk/docs/9CEVcNsGkI-ROyrLu7UZvJCWaGGYW5oFSbLVVFdVxr0/application-pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAWRGBDBV3ABPPBVEL%2F20261105%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261105T214613Z&X-Amz-Expires=60&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAIaCWV1LXdlc3QtMiJIMEYCIQCZsWEa2SpIpqpNKLPf%2Bak6kKfKXZ6y4Emyeh6NECiOuAIhAIpP4jfMf9Ybd74zLlC6Kd5kKwYbc82AEixTiuzjHRyIKooECMr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBRoMNDQ5MjI5MDMyODIyIgxqOgsM%2FwU37s%2FV5k0q3gMxUnvDDQVWpCQZtvaDI8e%2Ff7AEgNBe5iBHuvWdLWgmIXUUWgBFDy3Td2V7p4vcteHioZKdLEHz7WAqiiNKMgGPfYuelZ3oht%2B%2FCb98PCnoRoGfEtwRbvwxnm1ykA%2B2k4pWXfJzWdkwNixqqDk%2Bm1eeyrZT4wdprAk%2BTvagMibBEQeT7p9%2BWbBk68vxGOt1rIfOmBM7oSUCQ5GmTD5KKUH41SJWP1IsDyo7eZ2DB4ILO59sx9kppn9e1NyhG8oPGqq%2FJqK7393mjWElyynYKIy8uiVdGET0fhy0edsTm%2FQfNm3avygzGfOt1vy%2BIb%2B%2FMOaxqfZ7yYKJwpaiAYYdhtVbj3i%2F2518u1Iz2CtX4QX54HAAhHX4YJX3wpPOd9vrzDy0GxvfwTJXF3zXkjt%2Fc6gsmlQBM70DlHDcNor7RpEVWthnvbMCTbnppzXjslHtnC9kk5cftpunE96eO59MklHpk7uBeYqxRhKGL9ADMtILC%2BXczuvl1yqkRyZwW4wYBB26jAPY%2FXOXYwzCYdpw0JPjCCA1hYUQaoP0T%2Fb7AD0O%2BNGyBqabCTYIMXdRj8APn7M1%2FF%2BbEcte8aIa%2B4KTkTss8OpEaJf8iP6cCagtpUr5%2F%2BtlvCOvCt5w6uyNFjz%2FMMGJs9cGOqQBGIHXcJSxKONXyw5kHf0bPXuypB%2FrWQJFs%2BkVNo9c9DM%2FuYU%2FUH4oOUnhB7lsHhH8NIHUbH0%2Baradym4J67A5EHyvAC%2FZcdkpT%2F0XgoEuYkW9%2Bj4SYB%2Fdy7Gsjt%2FrCdt50OqMNOrhDS7BCV8nafwkCyMQKou0Bx5fZexNdpTOVPt78hJRDKO4yPkqgQ6IhBvqtOqnDh9R4tP2%2Bt%2FBsD1G6KK5ues%3D&X-Amz-SignedHeaders=host&response-content-disposition=inline%3Bfilename%3D%2211854467_mr01_2026-09-04.pdf%22&X-Amz-Signature=7a950fec156d51bf2fb0bcddcf0a3c50f9f3e2e5dfbbca38de0d336e4eaae981"
+    },
+    {
+      "key": "S9",
+      "url": "https://data.fca.org.uk/artefacts/NSM/RNS/4f5dac34-61c4-449e-a77a-80de4a3011ad.html",
+      "status": 200,
+      "resolvedURL": "https://data.fca.org.uk/artefacts/NSM/RNS/4f5dac34-61c4-449e-a77a-80de4a3011ad.html"
+    },
+    {
+      "key": "S10",
+      "url": "https://www.investegate.co.uk/index.php/announcement/rns/tungsten-west--tun/q1-2026-project-funding-and-debt-update-/9579011",
+      "status": 200,
+      "resolvedURL": "https://www.investegate.co.uk/index.php/announcement/rns/tungsten-west--tun/q1-2026-project-funding-and-debt-update-/9579011"
+    }
+  ]
+}

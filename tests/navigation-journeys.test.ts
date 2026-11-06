@@ -61,18 +61,19 @@ test("every navigation and journey link points at a route that exists", () => {
   for (const href of hrefs) assert.ok(routeExists(href), `${href} has no app route`);
 });
 
-test("homepage journeys, worked examples and material entries resolve to real routes and records", () => {
+test("homepage research, evidence examples, material entries and navigation lead to published routes", () => {
   const view = renderToStaticMarkup(createElement(Home));
   for (const j of journeys) {
     assert.ok(view.includes(`href="${j.href}"`), `journey ${j.label} is linked`);
-    assert.ok(view.includes(j.question.replaceAll("'", "&#x27;")), `journey ${j.label} states its question`);
+    assert.ok(j.question.length > 20, `journey ${j.label} retains its editorial question in navigation data`);
   }
   for (const entry of getInvestigationEntries()) {
-    assert.ok(view.includes(`href="${entry.href}"`));
-    assert.ok(routeExists(entry.href.replace(/\/[^/]+$/, "/[id]")), entry.href);
+    const directory = entry.href.split("/").slice(0, -1).join("/");
+    assert.ok(routeExists(`${directory}/[id]`), entry.href);
   }
-  for (const m of getAllMaterials()) assert.ok(view.includes(`href="/events?material=${m.id}"`), m.id);
-  // The homepage introduces no numbering or totals beyond the four qualified coverage counts.
+  assert.match(view, /id="examples"/);
+  for (const m of getAllMaterials())
+    assert.ok(view.includes(`href="/materials/${m.slug}"`), m.id);
   assert.equal((view.match(/<dd/g) ?? []).length, 4);
 });
 

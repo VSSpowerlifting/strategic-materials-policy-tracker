@@ -20,7 +20,7 @@ import type { FinancialStatus, ImplementationStatus } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Industrial response — funding and physical evidence",
   description:
-    "Which source-linked strategic-material projects have a binding government instrument, and which record construction or later? Separate financial and physical evidence, without a synthetic score.",
+    "Source-linked government financing and physical progress for strategic-material projects, assessed separately.",
 };
 
 const FINANCE_LABEL: Record<FinanceAxis, string> = {
@@ -89,15 +89,15 @@ export default function IndustrialResponsePage() {
         title="From commitments to construction"
         lead={
           <>
-            A signed financing agreement and a working plant are not the same outcome. This view places financial standing
-            beside documented implementation for each government-backed project, without converting currencies, scoring
-            success or claiming that one policy instrument caused a physical milestone.
+            This view compares the financial standing of government-backed projects with
+            their reported physical progress. Funding, construction and commissioning
+            are recorded as separate stages, with sources linked to each observation.
           </>
         }
       />
       <p className="mt-5 font-mono text-[11px] leading-5 text-faint">
         Corpus revision: {formatDateLong(model.asOf)} · Financial standing evidenced by that date ·
-        Physical status from the current source-linked record (not a historical as-of reconstruction)
+        Physical status from the latest source-linked record
       </p>
 
       <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border lg:grid-cols-4">
@@ -157,22 +157,23 @@ export default function IndustrialResponsePage() {
         </div>
         <div className="mt-5 grid gap-4 text-sm leading-6 text-muted md:grid-cols-2">
           <p>
-            <strong className="font-semibold text-foreground">Recorded is not necessarily built.</strong>{" "}
+            <strong className="font-semibold text-foreground">Reported physical activity</strong>{" "}
             {model.reportedExecutionProjects} projects have an implementation entry at construction or later;
-            {model.strictExecutionProjects} remain under a stricter reading excluding{" "}
-            {model.exceptionalActivityProjects} funded-activity completion that does not independently
-            establish construction of the facility.
+            {model.strictExecutionProjects} meet a stricter construction-evidence standard, excluding{" "}
+            {model.exceptionalActivityProjects} funded-activity completion records that require separate evidence
+            of facility construction.
           </p>
           <p>
-            <strong className="font-semibold text-foreground">Not recorded is not inactive.</strong>{" "}
-            {model.noPhysicalRecordProjects} projects in the government-commitment denominator have no
-            usable physical milestone recorded. This is a documentation gap, not evidence that work has stopped.
+            <strong className="font-semibold text-foreground">Physical evidence gaps</strong>{" "}
+            {model.noPhysicalRecordProjects} projects with recorded government commitments lack a usable
+            physical milestone in the current corpus. Operational standing for
+            those projects remains undetermined.
           </p>
         </div>
       </Section>
 
       <Section index="02" title="Material-level evidence" className="mt-14"
-        description="Distinct project counts within each material, not additive across materials: a project tagged to several materials appears in each row. No money is totalled or converted.">
+        description="Distinct project counts by material. Projects with several material tags appear in multiple rows; the table reports counts rather than financial totals.">
         <div className="overflow-x-auto rounded-lg border">
           <table className="w-full min-w-[35rem] text-sm">
             <thead className="border-b bg-card text-left font-mono text-[11px] uppercase tracking-wide text-faint">
@@ -228,7 +229,7 @@ export default function IndustrialResponsePage() {
                         <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-faint">Physical — recorded status</p>
                         <Evidence entries={p.physicalEvidence} kind="physical" />
                         {p.exceptionalActivityOnly ? (
-                          <p className="mt-2 text-faint">Completion refers to the funded activity, not independent proof that a plant was built.</p>
+                          <p className="mt-2 text-faint">The completed activity is the funded scope; facility construction requires separate evidence.</p>
                         ) : null}
                       </div>
                     </div>
@@ -247,29 +248,30 @@ export default function IndustrialResponsePage() {
             <p className="font-display text-base font-semibold text-foreground">What is counted</p>
             <p className="mt-2">
               One registered project with at least one directly linked, as-of-evidenced, non-ended government commitment.
-              Financing may have no stated amount. A financing package and its child allocations cannot count the same
-              project twice. {model.directLinkedProjects} of {model.registryProjects} projects have some direct financial
+              A commitment can have an unstated amount. Financial packages and child allocations
+              count each qualifying project once. {model.directLinkedProjects} of {model.registryProjects} projects have some direct financial
               linkage; the matrix&apos;s {model.governmentProjects} projects meet its narrower government-commitment test.
             </p>
           </Card>
           <Card className="p-5 text-sm leading-7 text-muted">
-            <p className="font-display text-base font-semibold text-foreground">What is not counted</p>
+            <p className="font-display text-base font-semibold text-foreground">Excluded from the denominator</p>
             <p className="mt-2">
-              Project designations alone, private financing, non-binding indications, programme ceilings,
-              unknown legal recipients, and unsplit money linked through non-allocative shared project
-              associations cannot qualify a project. {model.associatedButNotAllocatedLinks} project associations are
+              The denominator excludes designation-only records, private finance,
+              non-binding indications, programme ceilings, unknown legal recipients,
+              and shared financing associations lacking a project-level allocation. {model.associatedButNotAllocatedLinks} project associations are
               kept outside the direct-financing denominator; {model.projectlessGovernmentRows} government commitment
-              rows lack a singular project link and are not allocated by guesswork.
+              rows lack a direct project allocation.
             </p>
           </Card>
         </div>
         <p className="mt-5 max-w-4xl text-sm leading-7 text-muted">
           The status of a financing agreement and the status of an industrial undertaking are <em>different observations</em>.
           Sources can report construction before a loan is signed, or describe an executed award without a construction
-          update. This view cannot establish which government intervention caused which industrial outcome, nor
-          retrospectively reconstruct the project register as it existed in prior years. For financial status,
-          undated source statements enter the as-of view at their conservative evidence boundary, not at an invented
-          signing date. See the <Link href="/methodology#capital-counting" className="text-accent hover:underline">counting rules</Link> and{" "}
+          update. Attribution of industrial outcomes to specific policies requires separate
+          causal evidence. The project register captures the current dataset revision,
+          while financial standing is evaluated at the recorded as-of date. For financial status,
+          undated source statements enter the as-of view at their conservative
+          evidence boundary. See the <Link href="/methodology#capital-counting" className="text-accent hover:underline">counting rules</Link> and{" "}
           <Link href="/portfolios" className="text-accent hover:underline">government portfolios</Link> for the
           complementary financial analysis.
         </p>

@@ -44,7 +44,7 @@ export default async function SourceDossierPage({
           { label: source.title },
         ]}
         title="Source dossier"
-        lead="Follow one registered original document back to the published records that cite it. Each link below is an explicit source reference, not an association inferred from a shared event, company, material or project."
+        lead="Follow one registered original document back to the published records that cite it. Each link identifies a direct citation in a published record."
       />
 
       <div className="mt-8 max-w-4xl">
@@ -53,7 +53,7 @@ export default async function SourceDossierPage({
 
       <div className="mt-8 max-w-4xl rounded-md border border-dashed border-border px-4 py-3 text-sm leading-6 text-muted">
         <strong className="font-semibold text-foreground">{uses.length} directly citing record{uses.length === 1 ? "" : "s"}.</strong>{" "}
-        This is a snapshot of the curated public corpus, not a live document monitor or proof that every sentence in the linked document supports every aspect of a record. Status and implementation observations are distinct from executed agreements, cash disbursements and verified physical milestones. Private research and pending editor reviews are excluded.
+        This dossier shows direct citations in the current public corpus. Each reference supports the specific fields or observations recorded at its locator. Agreement, payment and physical-progress evidence retain separate classifications. Pending editorial research stays outside the public register.
       </div>
 
       {groups.length ? (
@@ -83,15 +83,15 @@ export default async function SourceDossierPage({
         </div>
       ) : (
         <p className="mt-10 max-w-prose text-sm leading-7 text-muted">
-          No directly citing record is indexed for this source in the current public corpus.
-          Registration is not itself evidence that a separate policy or physical event has been verified.
+          This source is registered but has yet to receive a direct citation from a published record.
+          Related policy or project findings require their own source-backed admission.
         </p>
       )}
 
       <p className="mt-12 max-w-prose text-sm leading-7 text-faint">
         Only direct references in published events, field evidence, source-linked status
         histories, quotations, legal relationships, profiles and reviewed project milestones
-        are shown. These links do not assign causality. See the{" "}
+        are shown. Claims about causality require separate evidence. See the{" "}
         <Link href="/methodology#sources" className="text-accent hover:underline">
           source hierarchy and verification methodology
         </Link>.

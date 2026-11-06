@@ -1,0 +1,878 @@
+{
+  "date": "2026-11-05",
+  "sources": [
+    [
+      "S01",
+      "BHP",
+      "FY2026 results presentation",
+      "2026-08-18",
+      "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "FY2026; FY2027-35 guidance",
+      "Slides 19-22, 28, 35-36, 40, 48, 50",
+      "Capital, project ranges, IRR methodology, cash-flow scope",
+      "Management guidance",
+      "Verified primary",
+      "Forward-looking; UBS assumptions reproduced by BHP, not independently surveyed",
+      "Link and paraphrase; no third-party graphics"
+    ],
+    [
+      "S02",
+      "BHP",
+      "FY2026 results exchange release",
+      "2026-08-18",
+      "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_exchangerelease.pdf",
+      "FY2026; FY2025 comparative",
+      "PDF pp. 4-5, 7, 19, 21-24",
+      "Results, distributions, Jansen, asset metrics",
+      "Reported / management guidance",
+      "Verified primary",
+      "Asset and statutory segment tables have different equity-accounting boundaries",
+      "Link; reproduce selected facts only"
+    ],
+    [
+      "S03",
+      "BHP",
+      "Annual Report 2026",
+      "2026-08-18",
+      "https://www.bhp.com/-/media/documents/investors/annual-reports/2026/260818_bhpannualreport2026.pdf",
+      "Years ended 30 June 2026 / 2025",
+      "PDF pp. 22, 30, 36-37, 132, 136, 153, 163-165",
+      "Historical financials; FCF; liquidity; consolidation; commitments",
+      "Reported financials",
+      "Verified primary, selected sections",
+      "Audited statements govern accounting; EBITDA/FCF are non-IFRS; not a full audit by SMPT",
+      "Link; selected data, no full-report redistribution"
+    ],
+    [
+      "S04",
+      "SEC / BHP",
+      "FY2026 Form 20-F filing index",
+      "2026-08-18",
+      "https://www.sec.gov/Archives/edgar/data/811809/000119312526354647/0001193125-26-354647-index.htm",
+      "FY ended 2026-06-30",
+      "Index filing/period dates; main document bhp-20260630.htm",
+      "Filing identity and date",
+      "Filing metadata",
+      "Index verified; main HTML inaccessible",
+      "Main HTML exceeded retrieval size limit; no claim of full 20-F inspection",
+      "Link only"
+    ],
+    [
+      "S05",
+      "BHP",
+      "September 2026 quarterly operational review",
+      "2026-10-20",
+      "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/261020_bhpoperationalreviewforthequarterended30september2026-pdf.pdf",
+      "Q1 FY2027",
+      "PDF pp. 1-2, 5",
+      "400.7 kt; $7.01/lb; asset guidance; $0.8bn gross pre-commitment",
+      "Reported unaudited / guidance",
+      "Verified primary",
+      "Provisional pricing and finalisation adjustments; guidance is fiscal, GS is calendar",
+      "Selected facts; link to issuer"
+    ],
+    [
+      "S06",
+      "BHP",
+      "Escondida asset page",
+      "Undated; retrieved 2026-11-04",
+      "https://www.bhp.com/what-we-do/global-locations/chile/escondida",
+      "Current asset description",
+      "Escondida at a glance",
+      "BHP 57.5%; Rio Tinto 30%; JECO combined 12.5%",
+      "Issuer description",
+      "Verified primary",
+      "Not a source for parent cash remittance entitlement",
+      "Link and paraphrase"
+    ],
+    [
+      "S07",
+      "BHP",
+      "Environmental permit submission announcement",
+      "2026-03-17",
+      "https://www.bhp.com/news/articles/03/escondida--bhp-submits-environmental-permit-to-build-a-new-concentrator-plant",
+      "March project plan",
+      "Project description",
+      "March $4.4-5.9bn; 220-260ktpa; replacement of Los Colorados",
+      "Management plan",
+      "Verified primary",
+      "Submission is not environmental approval or FID",
+      "Link and paraphrase"
+    ],
+    [
+      "S08",
+      "World Investment Institute",
+      "Copper: Goldman Sachs Raises Price Forecast on US-China Competition",
+      "2026-10-25",
+      "https://wiinstitute.org/copper-goldman-sachs-raises-price-forecast-on-us-china-competition/",
+      "Attributed GS research dated 2026-10-19",
+      "Forecast table; market mechanisms; risks",
+      "2027 $15,400/t vs $13,800/t; end-2026 $14,700/t",
+      "Secondary reporting of bank forecast",
+      "Verified public secondary, original unavailable",
+      "Original GS report not obtained; reported forwards are historical secondary data",
+      "Independent paraphrase; no proprietary charts or full report"
+    ],
+    [
+      "S09",
+      "International Copper Association Australia",
+      "Copper Weekly Brief - 22 October 2026",
+      "2026-10-22",
+      "https://copper.com.au/news/mining/copper-weekly-brief-22-october-2026/",
+      "October 2026 market reporting",
+      "Supply and demand outlook table",
+      "Corroborates GS forecasts; reports global ICSG surplus vs ex-US deficit",
+      "Secondary market commentary",
+      "Verified public secondary",
+      "Possible common source; corroboration does not constitute independent primary GS verification",
+      "Paraphrase selected facts"
+    ],
+    [
+      "S10",
+      "Goldman Sachs",
+      "Public Goldman Sachs Research hub",
+      "Retrieved 2026-11-04",
+      "https://www.goldmansachs.com/insights/goldman-sachs-research",
+      "Public hub",
+      "Research listing / targeted site search",
+      "Attempt to locate authorized original October 19 copper note",
+      "Research access check",
+      "Hub inspected; specific original not located",
+      "Do not characterize the hub as verifying $15,400",
+      "Link only"
+    ],
+    [
+      "S11",
+      "FinancialJuice",
+      "Goldman Sachs: Copper",
+      "Retrieved 2026-11-04",
+      "https://www.financialjuice.com/News/9812752/Goldman-Sachs-Copper.aspx",
+      "Unconfirmed",
+      "Accessible page shell",
+      "Starting lead only",
+      "Access check",
+      "Original URL exposed shell; alternative S18 body verified 5Nov",
+      "Original starting URL remains weak; use S18 for forecast support",
+      "No content redistributed"
+    ],
+    [
+      "S12",
+      "World Bank",
+      "Commodity Markets Outlook, October 2026",
+      "2026-10-27",
+      "https://thedocs.worldbank.org/en/doc/2ac43f46629cf90c2ea5b8929a343593-0050012026/original/CMO-October-2026.pdf",
+      "CY2026-28 forecasts",
+      "Table 1, PDF p.21 (printed p.13)",
+      "Copper 2026 $13,200; 2027 $13,000; 2028 $12,500/t",
+      "Independent institutional forecast",
+      "Verified primary",
+      "Different price definition and forecast assumptions; not market consensus or long-term price",
+      "Attribute World Bank; original SMPT exhibits"
+    ],
+    [
+      "S13",
+      "ICSG",
+      "April 2026 forecast download landing page",
+      "2026-04-23; page updated 2026-10-23",
+      "https://icsg.org/download/2026-04-23-press-release-icsg-copper-market-forecast-2026-2027/",
+      "April publication",
+      "Landing-page dates",
+      "Temporal check on candidate ICSG source",
+      "Source coverage",
+      "Landing page verified, not used as October numerical evidence",
+      "Update timestamp cannot establish October forecast contents",
+      "Link only"
+    ],
+    [
+      "S14",
+      "SEA Chile",
+      "Antofagasta project evaluation article",
+      "Retrieved 2026-11-04",
+      "https://www.sea.gob.cl/noticias/sea-antofagasta-director-regional-destaca-evaluacion-de-proyectos-por-mas-de-us28-mil",
+      "October 2026 lead",
+      "Search result / page returned navigation",
+      "Environmental approval cross-check",
+      "Access check",
+      "Substantive article not retrieved",
+      "No independent permit-status conclusion; use BHP submission/admission wording",
+      "No copied material"
+    ],
+    [
+      "S15",
+      "GBM",
+      "Public copper forecast coverage linked by WII",
+      "Retrieved 2026-11-04",
+      "https://gbm.com/media/noticia/goldman-sachs-revisa-al-alza-su-prevision-sobre-el-precio-del-cobre/",
+      "Unconfirmed",
+      "HTTP 403",
+      "GS verification attempt",
+      "Access check",
+      "Inaccessible",
+      "Excluded from numerical support",
+      "No copied material"
+    ],
+    [
+      "S16",
+      "Goldman Sachs",
+      "Exchanges: Why Oil Prices Are Surging Despite Recovering Supply",
+      "2026-10-23",
+      "https://www.goldmansachs.com/insights/goldman-sachs-exchanges/why-oil-prices-are-surging-despite-recovering-supply",
+      "End CY2027",
+      "Transcript, copper exchange with Daan Struyven",
+      "Public $15,600/t end-2027 view and stockbuilding / scrap mechanisms",
+      "Bank public forecast",
+      "Verified primary transcript",
+      "Point forecast, not verification of $15,400 annual-average original report",
+      "Link and paraphrase; no audio or proprietary research redistributed"
+    ],
+    [
+      "S17",
+      "Ambi / SEA indexed documents",
+      "Escondida SEIA file 2167965265",
+      "Retrieved 2026-11-05",
+      "https://ambihub.cl/seia/proyecto/2167965265",
+      "Review through 4 November 2026",
+      "Project metadata; ICSARA2; extension request",
+      "Pending RCA; 9Oct questions; 14Oct extension; 4Nov applicant request",
+      "Third-party index of official administrative record",
+      "Mirror inspected; underlying October text inaccessible",
+      "Procedural stage only; no quantified delay or severity; Nov4 request is not a granted extension",
+      "Link; independent translation of selected metadata"
+    ],
+    [
+      "S18",
+      "FinancialJuice",
+      "Goldman Sachs: Copper - FJElite",
+      "2026-10-20",
+      "https://www.financialjuice.com/News/9812752/Goldman-Sachs-Copper---FJElite.aspx?xy=rss",
+      "CY2027 average / end2026",
+      "20Oct 08:37 article body",
+      "GS $15,400 average vs $13,800; $14,700 end2026",
+      "Attributed bank forecast",
+      "Substantive public secondary text inspected",
+      "Original bank note not obtained; reporting may share sources",
+      "Paraphrase, no original bank content bundled"
+    ],
+    [
+      "S19",
+      "ICSG",
+      "Copper Market Forecast 2026/2027",
+      "2026-10-14",
+      "https://icsg.org/download/2026-10-14-press-release-icsg-copper-market-forecast-2026-2027/",
+      "2026 and 2027 global refined market",
+      "Linked two-page release, p.1 balance paragraph and methodology",
+      "104kt / 368kt surplus; China apparent-use stock caveat",
+      "Institutional forecast",
+      "Primary PDF body inspected via catalog download",
+      "PDF search metadata incorrectly says 2009; document body dated 14Oct2026; forecasts uncertain",
+      "Link; original SMPT exhibit; selected factual values only"
+    ],
+    [
+      "S20",
+      "Business Recorder / Reuters",
+      "Copper flat as China caution outweighs US stockpiling, Goldman upgrade",
+      "2026-10-20",
+      "https://www.brecorder.com/news/40445090/copper-flat-as-china-caution-outweighs-us-stockpiling-goldman-upgrade",
+      "CY2027 average",
+      "Goldman forecast paragraph",
+      "Additional publicly attributed Goldman forecast coverage",
+      "News reporting",
+      "Public article inspected",
+      "Secondary report, no original bank model",
+      "Link and independent paraphrase"
+    ],
+    [
+      "S21",
+      "SEA Chile",
+      "Second ICSARA underlying document",
+      "2026-10-09",
+      "https://firma.sea.gob.cl/publicaciones/2026/10/09/1791570558_2169809262",
+      "Environmental review",
+      "Official link from S17",
+      "Attempt to inspect substantive environmental questions",
+      "Access record",
+      "Inaccessible",
+      "No inference about material conditions, approval probability or delay duration",
+      "No source text redistributed"
+    ]
+  ],
+  "source_headers": [
+    "source_id",
+    "issuer",
+    "document_title",
+    "document_date",
+    "url",
+    "reporting_period",
+    "locator",
+    "claim_supported",
+    "classification",
+    "verification_status",
+    "uncertainty",
+    "redistribution"
+  ],
+  "historical": [
+    [
+      "Group revenue",
+      51262,
+      58760,
+      "US$m",
+      "S03 PDF p.136"
+    ],
+    [
+      "Group underlying EBITDA",
+      25978,
+      32947,
+      "US$m",
+      "S03 PDF p.136"
+    ],
+    [
+      "Copper statutory segment revenue",
+      22530,
+      29031,
+      "US$m",
+      "S03 PDF p.136"
+    ],
+    [
+      "Copper statutory segment underlying EBITDA",
+      12326,
+      18187,
+      "US$m",
+      "S03 PDF p.136"
+    ],
+    [
+      "Group copper production (mixed reporting basis)",
+      2017,
+      1953,
+      "kt",
+      "S03 PDF p.30"
+    ],
+    [
+      "Realised copper price",
+      4.25,
+      5.74,
+      "US$/lb",
+      "S03 PDF p.30"
+    ],
+    [
+      "Capital and exploration cash expenditure",
+      9794,
+      10257,
+      "US$m",
+      "S03 PDF p.37"
+    ],
+    [
+      "Net operating cash flow",
+      18692,
+      21778,
+      "US$m",
+      "S03 PDF p.37"
+    ],
+    [
+      "Net investing cash flow",
+      -13350,
+      -12011,
+      "US$m",
+      "S03 PDF p.37"
+    ],
+    [
+      "Reported free cash flow",
+      5342,
+      9767,
+      "US$m",
+      "S03 PDF p.37"
+    ],
+    [
+      "Net debt",
+      12924,
+      8694,
+      "US$m",
+      "S03 PDF p.22"
+    ],
+    [
+      "BHP dividends paid (cash-flow statement)",
+      6403,
+      6756,
+      "US$m",
+      "S03 PDF p.132"
+    ],
+    [
+      "NCI dividends paid",
+      1873,
+      2355,
+      "US$m",
+      "S03 PDF p.132"
+    ],
+    [
+      "Escondida revenue (100%, consolidated)",
+      13177,
+      17054,
+      "US$m",
+      "S03 PDF p.163"
+    ],
+    [
+      "Escondida underlying EBITDA (100%)",
+      8593,
+      12440,
+      "US$m",
+      "S02 PDF pp.21-22"
+    ],
+    [
+      "Escondida net operating cash flow (100%)",
+      6263,
+      7551,
+      "US$m",
+      "S03 PDF p.163"
+    ],
+    [
+      "Iron ore underlying EBITDA",
+      14396,
+      14529,
+      "US$m",
+      "S03 PDF p.36"
+    ],
+    [
+      "Coal underlying EBITDA",
+      573,
+      832,
+      "US$m",
+      "S03 PDF p.36"
+    ],
+    [
+      "Group and unallocated EBITDA",
+      -1317,
+      -601,
+      "US$m",
+      "S03 PDF p.36"
+    ],
+    [
+      "Cash and equivalents",
+      11894,
+      18532,
+      "US$m",
+      "S03 PDF pp.164-165"
+    ],
+    [
+      "Contracted capital commitments",
+      4785,
+      4300,
+      "US$m",
+      "S03 PDF p.153"
+    ],
+    [
+      "Undrawn revolving credit facility",
+      5500,
+      5500,
+      "US$m",
+      "S03 PDF p.22"
+    ]
+  ],
+  "scenario_inputs": [
+    [
+      "Base",
+      13000,
+      1,
+      10494.003680000287,
+      1,
+      0
+    ],
+    [
+      "Upside",
+      15400,
+      1.05,
+      13000,
+      1,
+      0
+    ],
+    [
+      "Downside",
+      11000,
+      0.9,
+      8500,
+      1,
+      0
+    ],
+    [
+      "Delay",
+      13000,
+      1,
+      10494.003680000287,
+      1,
+      1
+    ],
+    [
+      "Overrun",
+      13000,
+      1,
+      10494.003680000287,
+      1.2,
+      0
+    ],
+    [
+      "Combined stress",
+      11000,
+      0.9,
+      8500,
+      1.2,
+      2
+    ]
+  ],
+  "key": {
+    "lb": 2204.6226218488,
+    "base": {
+      "pv_capex": 4435.220520207883,
+      "annuity_factor": 5.286253248820904,
+      "required_cf": 839.0102235826778,
+      "required_kt": 198.76566490610745
+    },
+    "scenarios": [
+      {
+        "name": "Base",
+        "price": 13000,
+        "volume": 1,
+        "longprice": 10494.003680000287,
+        "capex": 5850,
+        "delay": 0,
+        "ebitda": 491.05854142626913,
+        "cash": 319.1880519270749,
+        "minority": 90.43661471267123,
+        "funding_residual": 141.75143721440318,
+        "pv_capex": 4435.220520207883,
+        "annuity_factor": 5.286253248820904,
+        "required_cf": 839.0102235826778,
+        "required_kt": 198.76566490610745
+      },
+      {
+        "name": "Upside",
+        "price": 15400,
+        "volume": 1.05,
+        "longprice": 13000,
+        "capex": 5850,
+        "delay": 0,
+        "ebitda": 4712.72791642627,
+        "cash": 3063.2731456770757,
+        "minority": 867.9273912751714,
+        "funding_residual": 2108.345754401903,
+        "pv_capex": 4435.220520207883,
+        "annuity_factor": 5.286253248820904,
+        "required_cf": 839.0102235826778,
+        "required_kt": 143.42055103977398
+      },
+      {
+        "name": "Downside",
+        "price": 11000,
+        "volume": 0.9,
+        "longprice": 8500,
+        "capex": 5850,
+        "delay": 0,
+        "ebitda": -3346.822708573731,
+        "cash": -2175.434760572925,
+        "minority": -616.3731821623287,
+        "funding_residual": -1646.0615784105948,
+        "pv_capex": 4435.220520207883,
+        "annuity_factor": 5.286253248820904,
+        "required_cf": 839.0102235826778,
+        "required_kt": 286.84110207954797
+      },
+      {
+        "name": "Delay",
+        "price": 13000,
+        "volume": 1,
+        "longprice": 10494.003680000287,
+        "capex": 5850,
+        "delay": 1,
+        "ebitda": 491.05854142626913,
+        "cash": 319.1880519270749,
+        "minority": 90.43661471267123,
+        "funding_residual": 141.75143721440318,
+        "pv_capex": 4435.220520207883,
+        "annuity_factor": 4.805684771655367,
+        "required_cf": 922.9112459409456,
+        "required_kt": 218.6422313967182
+      },
+      {
+        "name": "Overrun",
+        "price": 13000,
+        "volume": 1,
+        "longprice": 10494.003680000287,
+        "capex": 7020.0,
+        "delay": 0,
+        "ebitda": 491.05854142626913,
+        "cash": 319.1880519270749,
+        "minority": 90.43661471267123,
+        "funding_residual": 141.75143721440318,
+        "pv_capex": 5322.26462424946,
+        "annuity_factor": 5.286253248820904,
+        "required_cf": 1006.8122682992134,
+        "required_kt": 238.51879788732893
+      },
+      {
+        "name": "Combined stress",
+        "price": 11000,
+        "volume": 0.9,
+        "longprice": 8500,
+        "capex": 7020.0,
+        "delay": 2,
+        "ebitda": -3346.822708573731,
+        "cash": -2175.434760572925,
+        "minority": -616.3731821623287,
+        "funding_residual": -1646.0615784105948,
+        "pv_capex": 5322.26462424946,
+        "annuity_factor": 4.368804337868515,
+        "required_cf": 1218.2428446420483,
+        "required_kt": 416.4932802195037
+      }
+    ],
+    "gs_gross": 2394.0,
+    "gs_ebitda": 2274.2999999999997,
+    "gs_cash": 1478.2949999999998,
+    "gs_revision": 0.11594202898550725,
+    "latest_realised": 15454.404579160087,
+    "gs_vs_latest": -0.003520328388028071,
+    "static_gs_revision": 2830.4163887999694,
+    "static_gs_wb": 4245.624583199954,
+    "legacy_proxy_gap": 0.19647864921943514,
+    "historical_after_dividends": 656
+  },
+  "title": "Goldman Sachs' Copper Outlook and BHP's $6 Billion Escondida Decision",
+  "subtitle": "Near-term earnings exposure, replacement economics and the case for conditional investment readiness",
+  "market_cases": [
+    {
+      "name": "World Bank 2027",
+      "price": 13000,
+      "delta": -800,
+      "cents": -36.28738959999961,
+      "ebitda": -1415.2081943999847
+    },
+    {
+      "name": "Previous GS reported",
+      "price": 13800,
+      "delta": 0,
+      "cents": 0.0,
+      "ebitda": 0.0
+    },
+    {
+      "name": "Dated forward snapshot",
+      "price": 14405,
+      "delta": 605,
+      "cents": 27.442338384999697,
+      "ebitda": 1070.2511970149883
+    },
+    {
+      "name": "Revised GS reported",
+      "price": 15400,
+      "delta": 1600,
+      "cents": 72.57477919999921,
+      "ebitda": 2830.4163887999694
+    }
+  ],
+  "thresholds": [
+    {
+      "name": "20 years from 2032",
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 198.76566490611626
+    },
+    {
+      "name": "10 years from 2032",
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 3.815292736899912,
+      "annual": 1162.48498504775,
+      "kt": 275.3984331796683
+    },
+    {
+      "name": "10 years from 2034",
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 3.153134493305712,
+      "annual": 1406.6068319077776,
+      "kt": 333.2321041473987
+    },
+    {
+      "name": "8% discount rate",
+      "pv_capex": 4671.470743381359,
+      "benefit_factor": 6.6820661515104876,
+      "annual": 699.1057312902191,
+      "kt": 165.62159984917494
+    },
+    {
+      "name": "12% discount rate",
+      "pv_capex": 4217.588156743655,
+      "benefit_factor": 4.238362909719543,
+      "annual": 995.0984015719263,
+      "kt": 235.7437250178712
+    },
+    {
+      "name": "$3,000/t burden",
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 172.24237063064345
+    },
+    {
+      "name": "$5,000/t burden",
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 234.94432012429337
+    },
+    {
+      "name": "Combined stress",
+      "pv_capex": 5322.26462424946,
+      "benefit_factor": 4.368804337868515,
+      "annual": 1218.2428446420483,
+      "kt": 416.4932802195037
+    }
+  ],
+  "frontier": [
+    {
+      "price": 8500,
+      "burden": 3000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 234.68817442872106
+    },
+    {
+      "price": 9500,
+      "burden": 3000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 198.58230143968706
+    },
+    {
+      "price": 10494.00368,
+      "burden": 3000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 172.24237063064345
+    },
+    {
+      "price": 11500,
+      "burden": 3000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 151.85705404211362
+    },
+    {
+      "price": 13000,
+      "burden": 3000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 129.07849593579658
+    },
+    {
+      "price": 8500,
+      "burden": 4000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 286.84110207954797
+    },
+    {
+      "price": 9500,
+      "burden": 4000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 234.68817442872106
+    },
+    {
+      "price": 10494.00368,
+      "burden": 4000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 198.76566490611626
+    },
+    {
+      "price": 11500,
+      "burden": 4000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 172.10466124772879
+    },
+    {
+      "price": 13000,
+      "burden": 4000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 143.42055103977398
+    },
+    {
+      "price": 8500,
+      "burden": 5000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 368.7957026737045
+    },
+    {
+      "price": 9500,
+      "burden": 5000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 286.84110207954797
+    },
+    {
+      "price": 10494.00368,
+      "burden": 5000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 234.94432012429337
+    },
+    {
+      "price": 11500,
+      "burden": 5000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 198.58230143968706
+    },
+    {
+      "price": 13000,
+      "burden": 5000,
+      "pv_capex": 4435.220520207883,
+      "benefit_factor": 5.286253248820904,
+      "annual": 839.0102235826778,
+      "kt": 161.34811991974573
+    }
+  ],
+  "replacement_grid": [
+    {
+      "benefit_kt": 100,
+      "required_aftertax_margin": 8390.102235826778
+    },
+    {
+      "benefit_kt": 125,
+      "required_aftertax_margin": 6712.081788661422
+    },
+    {
+      "benefit_kt": 150,
+      "required_aftertax_margin": 5593.401490551185
+    },
+    {
+      "benefit_kt": 175,
+      "required_aftertax_margin": 4794.344134758158
+    },
+    {
+      "benefit_kt": 200,
+      "required_aftertax_margin": 4195.051117913389
+    },
+    {
+      "benefit_kt": 225,
+      "required_aftertax_margin": 3728.9343270341233
+    },
+    {
+      "benefit_kt": 250,
+      "required_aftertax_margin": 3356.040894330711
+    }
+  ]
+}

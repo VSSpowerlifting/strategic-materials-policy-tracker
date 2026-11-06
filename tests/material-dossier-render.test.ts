@@ -208,7 +208,7 @@ test("Project registry is a labelled block from lg up and a disclosure below it,
 test("the explanatory line sits once, under the grid", () => {
   for (const slug of slugs) {
     const markup = html(payload(slug));
-    const line = "A designation is a government";
+    const line = "A designation records government recognition";
     assert.equal(count(text(markup), line), 1, slug);
     assert.ok(markup.indexOf(line) > markup.lastIndexOf('id="stage-'), `${slug}: after the last stage heading`);
   }

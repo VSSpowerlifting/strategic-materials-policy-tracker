@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 const TOC = [
-  ["scope", "What this tracks — and does not"],
+  ["scope", "Scope and research boundaries"],
   ["sources", "Source hierarchy"],
   ["translation", "Translation policy"],
   ["provenance", "Provenance and coverage"],
@@ -166,15 +166,15 @@ export default function MethodologyPage() {
         index="01"
         eyebrow="How the data is made"
         title="Methodology"
-        lead="The boundaries of this project are its credibility. This page sets out exactly what is and is not tracked, how sources are graded, how translations are handled, what every label means, and how framing is assigned."
+        lead="Definitions for SMPT’s research scope, source hierarchy, translation practices, status classifications, financial counting and evidence limitations."
       />
 
       <section aria-labelledby="reading-evidence" className="mt-8 rounded border border-border-strong bg-card p-5 sm:p-6">
-        <h2 id="reading-evidence" className="font-serif text-2xl">Three questions to ask of every record</h2>
+        <h2 id="reading-evidence" className="font-display text-2xl">Reading the evidence</h2>
         <div className="mt-5 grid gap-6 md:grid-cols-3 text-base leading-7 text-muted">
           <div><h3 className="font-display text-sm font-semibold text-foreground">Who makes the claim?</h3><p className="mt-2">Follow the original document and quoted passage. A government rationale and an issuer&apos;s activity report have different evidentiary roles.</p><a href="#sources" className="research-text-link">Source hierarchy</a></div>
-          <div><h3 className="font-display text-sm font-semibold text-foreground">What state is established?</h3><p className="mt-2">An announcement, binding agreement, payment and industrial observation are separate. A programme ceiling is not an individual award.</p><a href="#capital-counting" className="research-text-link">Financial counting rules</a></div>
-          <div><h3 className="font-display text-sm font-semibold text-foreground">What is missing?</h3><p className="mt-2">Unknown dates stay unknown. Coverage is selective; absent records do not prove inactivity. Shared materials never establish causation.</p><a href="#limitations" className="research-text-link">Limits of the evidence</a></div>
+          <div><h3 className="font-display text-sm font-semibold text-foreground">What state is established?</h3><p className="mt-2">An announcement, binding agreement, payment and industrial observation are separate. Programme ceilings and recipient awards have different financial roles.</p><a href="#capital-counting" className="research-text-link">Financial counting rules</a></div>
+          <div><h3 className="font-display text-sm font-semibold text-foreground">What remains uncertain?</h3><p className="mt-2">Unknown dates remain explicit. Coverage varies by jurisdiction, and causal relationships require evidence beyond shared materials or timing.</p><a href="#limitations" className="research-text-link">Limits of the evidence</a></div>
         </div>
       </section>
 
@@ -195,7 +195,7 @@ export default function MethodologyPage() {
 
         <div className="max-w-3xl space-y-12 leading-7 text-foreground/90">
           <section className="space-y-3">
-            <H2 id="scope">What this tracks — and does not</H2>
+            <H2 id="scope">Scope of the tracker</H2>
             <p>
               This database tracks <strong>policy instruments and official framing</strong>:
               the export controls, licensing regimes, critical-mineral designations,
@@ -205,16 +205,15 @@ export default function MethodologyPage() {
             </p>
             <p>
               The comparative unit is a documented measure, financial instrument
-              or reported industrial observation, not a preferred country. This
-              does not imply equally complete coverage across jurisdictions:
-              absence from the corpus is not evidence of government inaction,
-              and records appearing near one another do not establish causation.
+              or reported industrial observation. Research coverage varies by
+              jurisdiction, while comparisons of policy effects require
+              evidence beyond a shared date or material.
             </p>
             <p>
-              It does <strong>not</strong> model the global minerals market. It does
-              not track or forecast market prices, estimate reserves or tonnages,
-              publish supply-risk numbers or rankings, or make projections its
-              sources do not state. Where market-share figures appear — for
+              The tracker covers policy instruments and reported implementation.
+              Independent market-price forecasts, reserve and tonnage estimates,
+              supply-risk scores and original commodity-market projections fall
+              outside its remit. Where market-share figures appear — for
               example, that China processes roughly 90% of rare earths — they are
               cited context drawn from bodies such as the IEA and USGS, not original
               estimates.
@@ -225,14 +224,12 @@ export default function MethodologyPage() {
               filing sets out, as part of the measure itself — a price floor written
               into an agreement, a tax-offset percentage, a capacity covenant, a
               contract term. Such a term is recorded only when it can be cited
-              precisely. It describes the instrument; it is not an estimate of the
-              market.
+              precisely. These values describe the instrument’s stated terms.
             </p>
             <p>
               Scope is deliberately bounded: {summary.jurisdictions} actors, a
               rare-earth-centred material set, and events from {site.scopeStart}{" "}
-              forward. The boundary is
-              the point — it is what lets every record be sourced. Some records carry
+              forward. The bounded sample supports direct source verification for each record. Some records carry
               no material at all: a framework statute names none of its own, and an
               instrument may name minerals that fall outside this material set. Both
               are recorded as an empty scope and said so on the record, rather than
@@ -256,20 +253,19 @@ export default function MethodologyPage() {
                 program envelope, and a <strong>control measure</strong> (ids
                 beginning <code className="font-mono text-faint">ctl-</code>) records
                 one operative clause of an export, import, investment or domestic
-                control. The tracker remains a policy-intelligence record, not a
-                commodity-price or market-forecasting model.
+                control. Commodity-market forecasts are handled separately from the policy tracker.
               </p>
               <ul className="space-y-2 text-muted">
                 <li>
                   · Original currency is authoritative. An amount is kept as the
                   source states it, with its currency and any qualifier such as
-                  &ldquo;up to&rdquo;. Nothing is converted, adjusted for inflation or
-                  totalled across currencies.
+                  &ldquo;up to&rdquo;. Amounts retain their original currency and qualifiers; published
+                  totals are grouped by currency.
                 </li>
                 <li>
-                  · Unlike instruments are never combined. A loan, an equity stake, a
-                  tax credit and a price floor are different promises and are not
-                  added into one figure.
+                  · Financial instruments retain separate value roles. Loans, equity,
+                  tax credits and price floors are displayed and counted under
+                  their respective instrument categories.
                 </li>
                 <li>
                   · A commitment records how it relates to larger ones: it can be

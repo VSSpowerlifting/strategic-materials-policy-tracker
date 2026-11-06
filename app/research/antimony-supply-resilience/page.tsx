@@ -50,22 +50,19 @@ export default function AntimonySupplyResilience() {
       <section className="border-b border-border-strong">
         <Container width="wide" className="py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
-            Research / Applied Strategy 001
+            ← Research
           </Link>
           <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-            Strategic Materials Policy Tracker · Applied industrial strategy
+            Applied Strategy 001
           </p>
-          <h1 className="mt-4 max-w-5xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          <h1 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             U.S. Antimony Supply Resilience
           </h1>
           <p className="mt-4 font-display text-lg text-muted">Strategic options for a defense manufacturer, 2027–2031</p>
-          <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
-            A procurement decision case testing how qualified international supply, strategic inventory and staged
-            domestic offtake interact when a critical input faces prolonged disruption.
-          </p>
+          
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link>
-            {" · "}4 November 2026{" · "}Applied Strategy 001
+            {" · "}4 November 2026
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a href={pdf} target="_blank" rel="noopener noreferrer" className="research-button">
@@ -83,9 +80,7 @@ export default function AntimonySupplyResilience() {
           <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
             <article className="min-w-0 max-w-4xl">
               <section className="border-b border-paper-border pb-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">
-                  Executive decision
-                </p>
+                
                 <h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight">
                   Qualify the alternative source, then fund five months of buyer-approved stock
                 </h2>
@@ -97,15 +92,13 @@ export default function AntimonySupplyResilience() {
                 </p>
                 <p className="mt-4 font-display text-lg leading-8">
                   The five-month policy depends on qualifying a separate 45% international sourcing lane and testing
-                  the actual grade, refining origin, end-use eligibility and delivery terms. If that channel cannot
-                  qualify, the model shows 16.5 metric tons unfilled in 2027 under the severe interruption.
+                  the actual grade, refining origin, end-use eligibility and delivery terms. Failure to qualify that channel leaves 16.5 metric tons of modeled
+                  demand unfilled in 2027 under the severe interruption.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">
-                  Supply evidence
-                </p>
+                
                 <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
                   Import dependence and material qualification frame the risk
                 </h2>
@@ -119,14 +112,13 @@ export default function AntimonySupplyResilience() {
                   Public financing may support future U.S. supply. EXIM lists $2.906 billion for Stibnite as
                   <strong> authorized</strong>; financing close, processing arrangements, qualified deliveries and
                   actual buyer supply remain separate milestones. Idaho National Laboratory&apos;s 2026 pilot
-                  commissioning demonstrates processing development rather than commercially qualified antimony output.
+                  commissioning demonstrates early processing capability. Commercial qualification
+                  and accepted antimony deliveries remain separate milestones.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">
-                  Strategy comparison
-                </p>
+                
                 <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
                   A balanced policy meets both modeled 2030 constraints
                 </h2>
@@ -196,7 +188,8 @@ export default function AntimonySupplyResilience() {
                 <p className="mt-4 font-display text-base leading-8">
                   The demand, supplier shares, premiums, inventory limits and disruptions are scenario assumptions
                   for a hypothetical manufacturer. The workbook is an episodic cost-exposure and continuity test;
-                  it is not an actual company procurement plan or an expected-value forecast.
+                  it models the cost and continuity consequences of stipulated scenarios
+                  for a hypothetical buyer.
                 </p>
                 <h3 className="mt-8 font-display text-base font-semibold">Selected original sources</h3>
                 <ul className="mt-3 space-y-2 font-display text-sm leading-7">

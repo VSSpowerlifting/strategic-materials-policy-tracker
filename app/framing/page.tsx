@@ -46,7 +46,7 @@ export default function FramingPage() {
         index="—"
         eyebrow="The signature view"
         title="Comparative framing"
-        lead="Compare the stated rationales for strategic-material policy across the jurisdictions in this corpus. Each framing label comes from a quoted passage, not an assumption about intent. Similar language does not establish comparable policy effects."
+        lead="Compare the stated rationales for strategic-material policy across the jurisdictions in this corpus. Each category is supported by a quoted primary-source passage. Policy effects require separate evidence."
       />
 
       {/* Category legend — a structured register, not a badge cloud */}
@@ -139,8 +139,7 @@ export default function FramingPage() {
         <Link href="/methodology#labels" className="font-display text-accent hover:text-accent-strong">
           methodology page
         </Link>
-        . Framing that has not yet been anchored to a verified quote is left
-        uncoded rather than guessed.
+        . A framing category is assigned after its supporting quotation is verified.
       </p>
     </Container>
   );
