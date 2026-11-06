@@ -1,9 +1,9 @@
-# SMPT presentation system — version 2.0
+# SMPT presentation system — version 2.1
 
 **Status:** Adopted editorial design standard for new SMPT decks, 5 November 2026  
 **Owner:** SMPT editorial/research lead  
 **Scope:** Executive briefings, applied-strategy cases, financial-intelligence cases, and visual research dossiers  
-**Hard ceiling:** **20 slides total**, including title, executive summary, conclusion, methods, references, and appendix. No exceptions by renaming a section "backup."
+**Primary typeface:** Archivo Regular/Medium/Semibold for all new or revised decks. Render PDFs with the same embedded family and preserve native editable charts and source hyperlinks.\n\n**Hard ceiling:** **20 slides total**, including title, executive summary, conclusion, methods, references, and appendix. No exceptions by renaming a section "backup."
 
 SMPT publishes independently authored, source-linked industrial-policy and financial research. This system translates the analysis into readable, defensible, editable PowerPoint presentations. It borrows **principles** of disciplined consulting communication, not another firm's branding or proprietary slide designs.
 

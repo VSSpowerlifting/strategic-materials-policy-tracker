@@ -35,7 +35,7 @@ def txt(sl,value,x,y,w,h,pt=18,bold=False,ink=INK,serif=False):
     tf=s.text_frame; tf.clear(); tf.word_wrap=True
     tf.margin_left=Inches(.02); tf.margin_top=Inches(.02)
     p=tf.paragraphs[0]; p.text=value
-    p.font.name="Georgia" if serif else "Source Sans 3"
+    p.font.name="Archivo"
     p.font.size=Pt(pt); p.font.bold=bold; p.font.color.rgb=col(ink)
     return s
 
