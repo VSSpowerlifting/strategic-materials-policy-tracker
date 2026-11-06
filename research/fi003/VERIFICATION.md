@@ -2,6 +2,12 @@
 
 **Research cutoff and verification date: November 6, 2026.** Research conclusions remain ready for Benjamin’s review. Benjamin explicitly approved all three concrete candidate admission packages in chat; that approval covers the admitted source records, not the financial conclusions, model’s financial approval, publication files, merge or deployment. No findings or approval are attributed to Jiho.
 
+## Live-draft acceptance and presentation 0.2 — November 6
+
+The supplied `146fa508` checkpoint had advanced to `2b1c4558de5389214e9fd33830b304bbad499ae2`, which already contained draft 0.1. The [acceptance audit](MANAGERIAL_ACCEPTANCE.md) retains its thesis/model after review and records a bounded successor. [Draft 0.2 QC](presentation/QUALITY_REVIEW_V02.md) controls the new files. Cover context now identifies 10X and its management-reported baseline; slide 9 includes both covenant-trigger routes. Cover hyperlink contrast is repaired through a dedicated master. Only rendered pages 1 and 9 change; the other thirteen are pixel-identical. No financial model, claim/source register, admitted database row or draft 0.1 binary changed.
+
+Repeat checks: 24 Python tests, eleven schedules, specification, saved native scenarios and all 388 delivered-XLSX cached formulas pass. Presentation checks confirm fifteen pages, eleven tables, two native charts/literal workbooks, complete waterfall, 46 links and embedded Archivo; actual footer contrast is at least 6.04:1. All twenty original URLs returned content; eighteen historical fingerprints match and both bank-page HTML differences remain separately logged. Direct-loader data validation, lint (0 errors, 28 inherited warnings), build and typecheck pass. Ordinary validation launcher still encounters runner `tsx` IPC `EPERM`; no unrelated workaround committed. No new live Sheets or Microsoft Office execution, formal accessibility certification or human financial/publication approval is claimed. Draft 0.1 history below remains intact.
+
 ## Managerial review and draft production — November 6
 
 Reviewed starting head `146fa5084cf0492ce1e7f4ef84757c94879e83de` through GitHub and a clean isolated clone of the existing branch. All twelve starting-SHA workflows succeeded. Current main `6adc30893b79b14a13a83349fea1e029b5ba2366` has identical governing instructions/standards. No main integration or unrelated fixes were needed. Model source/input/workbook hashes match delivery.json, and the native Sheet was neither edited nor shared.

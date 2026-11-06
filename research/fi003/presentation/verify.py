@@ -21,9 +21,18 @@ def norm(s):
     return re.sub(r'[^a-z0-9]','',unicodedata.normalize('NFKC',s).lower())
 
 
+def contrast(foreground, background):
+    def luminance(rgb):
+        values=[((rgb >> shift) & 255)/255 for shift in (16,8,0)]
+        linear=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in values]
+        return sum(a*b for a,b in zip(linear,(.2126,.7152,.0722)))
+    a,b=sorted((luminance(foreground),luminance(background)))
+    return (b+.05)/(a+.05)
+
+
 def main():
-    out=ROOT/'outputs'/'presentation-draft-v01'
-    stem='SMPT_FI003_JPMorgan_MP_Draft_v01'
+    out=ROOT/'outputs'/'presentation-draft-v02'
+    stem='SMPT_FI003_JPMorgan_MP_Draft_v02'
     pptx,pdf=out/(stem+'.pptx'),out/(stem+'.pdf')
     manifest=json.loads((HERE/'slide-manifest.json').read_text())
     assert manifest==json.loads(json.dumps(prepare.build())),'Slide snapshot drift'
@@ -57,7 +66,7 @@ def main():
         assert len(embeddings)==2
     doc=fitz.open(pdf)
     assert len(doc)==15
-    all_uris=set(); fonts=set()
+    all_uris=set(); fonts=set(); footer_contrasts=[]
     for m,page in zip(manifest['slides'],doc):
         actual=norm(page.get_text())
         for key in ['title','scope','note','caveat']:
@@ -75,6 +84,11 @@ def main():
                 for span in line['spans']:
                     x0,y0,x1,y1=span['bbox']
                     assert x0>=0 and y0>=0 and x1<=page.rect.width+.1 and y1<=page.rect.height+.1,('Off-page text',m['number'],span['text'])
+                    if y0>=page.rect.height*.92 and span['text'].strip():
+                        ratio=contrast(span['color'],0x12110F if m['number']==1 else 0xF5F3EE)
+                        assert ratio>=4.5,('Unreadable source/footer contrast',m['number'],ratio,span['text'])
+                        footer_contrasts.append(ratio)
+    assert norm('required Q2 2027 financial statements') in norm(doc[8].get_text()),'Missing calendar trigger limb'
     # Independent cash bridge and ownership arithmetic, rather than build output alone.
     assert abs(sum([1830.286,-7.757,-420.250,6.500,-91.145,20.876,.821,-1.420])-1337.911) < 1e-9
     assert round(13590908/(163477816+13590908)*100,6)==7.675499
@@ -84,6 +98,7 @@ def main():
         'chart_snapshot_precision':'Ownership fractions rounded to 12 decimal places for Excel portability; full model precision retained',
         'pdf_links':sum(len(p.get_links()) for p in doc),'unique_link_targets':len(all_uris),'fonts':sorted(fonts),
         'claims':len(list(__import__('csv').DictReader((ROOT/'evidence.csv').open()))),
+        'minimum_footer_contrast':round(min(footer_contrasts),3),
         'files':{f.name:{'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest()} for f in [pptx,pdf]},
         'limits':['No Microsoft PowerPoint application test','No newly executed live Sheets session','No legal opinion, actual headroom or completion-funding certification','PDF tagging and assistive-technology review not claimed']}
     (out/'verification.json').write_text(json.dumps(result,indent=2)+'\n')

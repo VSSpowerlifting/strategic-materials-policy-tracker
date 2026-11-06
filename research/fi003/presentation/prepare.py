@@ -31,9 +31,9 @@ def build():
             source_refs=sources_, claim_ids=claims, model_ref=model_ref, note=note, **kw))
 
     slide('cover', 'JPMorgan and MP Materials', 'Financing Through 10X Construction',
-        [('S02','§§2.05, 6.01'),('S09','cover, §1.01'),('S11','Notes 3, 18')], ['C01','C05','C11'], '',
-        'A replaceable bank commitment, an equity takeout and government-linked corporate credit',
-        author='Benjamin Yang', version='Research draft 0.1 · 6 November 2026')
+        [('S02','§§2.05, 6.01'),('S09','cover, §1.01'),('S11','Notes 3, 18'),('S19','MD&A: 10X')], ['C01','C05','C11','C27','C28'], '',
+        '10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.',
+        author='Benjamin Yang', version='Research draft 0.2 · 6 November 2026')
     slide('answer', 'Equity secured cash while MP retained exposure through commissioning',
         'Analyst judgment · comparable industrial sponsor and lender perspective',
         [('S02','§§6.01, 6.13'),('S09','§§1.01, 7.11'),('S11','Notes 3, 18'),('S19','Note 8, MD&A')],
@@ -112,10 +112,11 @@ def build():
         'Credit!B40:B47; model.py:scenario; prototype.py:first_test_quarter',
         'Treasury and lenders need a corporate earnings and eligible-liquidity case during construction, before assuming 10X operating receipts contribute.',
         rows=[['Stage','Test or milestone'],['Before the trigger','At least $500m unrestricted contractual cash / Cash Equivalents'],
+              ['Trigger: earlier delivery','A ≥$400m EBITDA compliance certificate or required Q2 2027 financial statements'],
               ['Illustrative delivery: 15 Aug 2027','First quarter ending after delivery: 30 Sep 2027'],
               ['From the earnings-test stage','Leverage ≤4.00× and cash-interest coverage ≥3.00×, subject to terms'],
               ['Management expectation: 2028','10X begins commissioning. Commissioning is distinct from contractual COD']],
-        caveat='An earlier ≥$400m EBITDA certificate can trigger the switch. Delivery timing is assumed, not a legal deadline. The 93–458 days compare year endpoints, not forecast COD dates.')
+        caveat='The delivery date is assumed, not a legal deadline. The 93–458 days compare year endpoints, not forecast COD dates. Reported Adjusted EBITDA is distinct from covenant EBITDA.')
     slide('support','Government support covers specified exposures while MP retains funding duties',
         'Contract and reported cash distinctions · each instrument assessed separately',
         [('S02','§§6.01, 6.04(d), 6.09, 6.13'),('S03','§§6.1–6.9'),('S04','§§2–3'),('S11','Note 3')],
@@ -179,8 +180,8 @@ def build():
 
     paths = ['inputs.json','sources.json','prototype.py','model.py','outputs/fi003-model-v1/model_spec.json',
         'outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx']
-    return {'version':'FI003 presentation draft 0.1','cutoff':'2026-11-06',
-        'reviewed_head':'146fa5084cf0492ce1e7f4ef84757c94879e83de',
+    return {'version':'FI003 presentation draft 0.2','cutoff':'2026-11-06',
+        'reviewed_head':'2b1c4558de5389214e9fd33830b304bbad499ae2',
         'model_version':model.VERSION,'source_hashes':{q:hashlib.sha256((ROOT/q).read_bytes()).hexdigest() for q in paths},
         'baseline_controls':data['model_controls'],'sources':sources,'slides':slides}
 

@@ -4,7 +4,7 @@
 
 Working title: **JPMorgan and MP Materials: Financing Through 10X Construction**.
 
-**Current phase: independent managerial review and presentation draft completed for human review.** [Managerial judgment](MANAGERIAL_REVIEW.md) preserves the core thesis with focused corrections. [Editable PowerPoint](outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pptx) and [matching PDF](outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pdf) contain 15 total slides. [Exact-file QC](presentation/QUALITY_REVIEW.md), [slide/data manifest](presentation/slide-manifest.json) and [verification](outputs/presentation-draft-v01/verification.json) control this draft. This is preparatory production under the current request, not inferred financial approval. Model 1.0 and prior verification remain intact. C51 text is repaired; C53–C54 add contract/diligence evidence without model changes.
+**Current phase: independent acceptance audit and presentation draft 0.2 completed for human review.** [Managerial judgment](MANAGERIAL_REVIEW.md) preserves the core thesis with focused corrections. [Editable PowerPoint](outputs/presentation-draft-v02/SMPT_FI003_JPMorgan_MP_Draft_v02.pptx) and [matching PDF](outputs/presentation-draft-v02/SMPT_FI003_JPMorgan_MP_Draft_v02.pdf) contain 15 total slides. Draft 0.1 remains unchanged. [Acceptance audit](MANAGERIAL_ACCEPTANCE.md) records the live-head review and the two revised slides; no model or source fact changed. [Exact-file QC](presentation/QUALITY_REVIEW_V02.md), [slide/data manifest](presentation/slide-manifest.json) and [verification](outputs/presentation-draft-v02/verification.json) control this draft. This is preparatory production under the current request, not inferred financial approval. Model 1.0 and prior verification remain intact. C51 text is repaired; C53–C54 add contract/diligence evidence without model changes.
 
 Decision: explain what a comparable industrial sponsor or lender should learn from a replaceable construction commitment, completed equity and continuing corporate credit. **Recommended stance:** JPMorgan supported flexibility across the transition; received equity increased financing certainty in exchange for ownership dilution, while MP’s corporate liquidity and execution exposure remained. An ordinary equity takeout is the strongest explanation. Government support is directly visible in subsequent cash and credit terms; its contribution to July 2025 equity demand is unisolated. [analysis.md](analysis.md) develops the argument and evidence that could change it.
 
@@ -19,7 +19,7 @@ Decision: explain what a comparable industrial sponsor or lender should learn fr
 | Independent analytical review and bounded revision | Codex, research director | Complete; MANAGERIAL_REVIEW records judgment and alternatives | Core thesis retained; new C53–C54 interpretation and C51 repair reviewable | Nov 6 |
 | Model 1.0 and source traceability | Codex | Preserved; targeted technical checks rerun | 24 Python tests; 11 schedules; specification; 388 delivered-XLSX cached values; saved native baseline/scenarios. No new live Sheets or Microsoft Excel session | Nov 6 |
 | Original-source recheck | Codex | 20 URLs retrieved; 18 non-bank resources match stored fingerprints | Bank page HTML changed; current self-attribution retained, historical register preserved. source-recheck.json records observations | Nov 6 |
-| Presentation draft 0.1 | Codex | 15-slide editable PPTX and matching PDF built | All slides rendered/inspected; local limitations and numbers reconcile; no public assets replaced | Nov 6 |
+| Acceptance audit and presentation draft 0.2 | Codex | Complete: project baseline, full covenant-trigger description, cover-link contrast | All slides rendered/inspected; local limitations and numbers reconcile; no public assets replaced | Nov 6 |
 | Financial/methodological review | Benjamin | PENDING | Review executive answer, alternatives, credit clauses/timing, ownership denominator and conditional recommendations against exact draft | Suggested Nov 10 |
 | Optional strongest-objection challenge | Jiho, only if invited by Benjamin | Invitation unsent; no assignment or credit inferred | One page testing decision value and bank attribution; not a workbook or legal sign-off | Suggested Nov 16–17, subject to agreement |
 | Adjudicate feedback and revise exact draft | Benjamin decides; Codex implements bounded changes | PENDING | Record changes against claims and repeat affected calculations/rendering | Suggested Nov 18–20 |
@@ -82,7 +82,7 @@ The previous 12-slide specification remains recoverable at reviewed commit `146f
 
 | Slide | Headline / evidence role | Controlling source or model range |
 |---|---|---|
-| 1 | JPMorgan and MP Materials | Scope and cited transaction documents |
+| 1 | JPMorgan and MP Materials | Scope, 10X location, management investment/commissioning expectation; C27–C28 / S19 |
 | 2 | Equity secured cash while MP retained exposure through commissioning | Financing!B16:B24; Credit!A7:F10 |
 | 3 | Replacement rights connected the closing commitment to later financing | chronology.csv; Financing!B7:B16 |
 | 4 | JPMorgan spans the financing stages alongside substantial partner roles | exhibits/underwriting.csv |
@@ -90,7 +90,7 @@ The previous 12-slide specification remains recoverable at reviewed commit `146f
 | 6 | Equity supplied $724.2m at 7.68% isolated ownership dilution | Financing!B9:B24; financing_economics.csv |
 | 7 | Letters of credit leave $203m of the $275m revolver available | Credit!A7:F10; revolver_snapshots.csv |
 | 8 | Defense contracts enter both covenant earnings and performance obligations | Credit!B29:B35; covenant_adjustment.csv |
-| 9 | Corporate earnings tests can precede expected 10X commissioning | Credit!B40:B47; model.py:scenario; prototype.py:first_test_quarter |
+| 9 | Corporate earnings tests can precede expected 10X commissioning | Both trigger routes; Credit!B40:B47; model.py:scenario; prototype.py:first_test_quarter |
 | 10 | Government support covers specified exposures while MP retains funding duties | Support!A44:F56; analysis.md risk map |
 | 11 | 10X threshold protection changes with contractual operating status | Support!B8:B15; offtake_threshold.csv |
 | 12 | Price protection delivered $110.9m of cash during nine-month 2026 | Liquidity!B31:B36; Support!B33:B40; support_accounting.csv |
@@ -100,7 +100,7 @@ The previous 12-slide specification remains recoverable at reviewed commit `146f
 
 Numerical provenance includes model 1.0 input/specification/workbook hashes and frozen scenario controls. Ownership chart fractions use 12 decimal places for portable literal chart workbooks; full calculation precision remains in model 1.0. Native charts carry literal data snapshots, not links that recalculate when the controlling financial workbook changes. All eleven tables, both native charts and the complete historical waterfall remain editable. The waterfall uses true-scaled native data bars, with each of seven signed movements preserved.
 
-The manuscript labels the August 2027 trigger as illustrative and 2028 commissioning as management expectation. It retains the original-source boundaries, conditional public fallback, restricted uses and ordinary-equity explanation. Covenant mechanics and timing occupy separate slides. All fonts are Archivo, embedded in the PDF. No private native-Sheet link or restricted source file is shared by the deck.
+The manuscript labels the August 2027 trigger as illustrative and 2028 commissioning as management expectation. It retains the original-source boundaries, conditional public fallback, restricted uses and ordinary-equity explanation. Covenant mechanics and timing occupy separate slides. All fonts are Archivo, embedded in the PDF. Draft 0.2 source/footer contrast is at least 6.04:1 in the actual PDF; only pages 1 and 9 differ visually from draft 0.1. No private native-Sheet link or restricted source file is shared by the deck.
 
 ## Five publication gates
 
@@ -112,9 +112,23 @@ The manuscript labels the August 2027 trigger as illustrative and 2028 commissio
 | D Quantitative/source fidelity | PASS for bounded calculations and exact-draft reconciliation; human financial review pending | 24 tests; 11 schedules; model hashes unchanged; 388 formula cache values; editable charts and all source annotations checked |
 | E Publication coherence | PASS for draft sequence; release HOLD | Exact-file approval, source-rights confirmation and separate merge/publication authorization |
 
-[QUALITY_REVIEW](presentation/QUALITY_REVIEW.md) records the actual checks, corrected visual defects, exact hashes and practical limits. No automated or agent PASS is human approval.
+[QUALITY_REVIEW_V02](presentation/QUALITY_REVIEW_V02.md) records the actual checks, corrected visual defects, exact hashes and practical limits. No automated or agent PASS is human approval.
 
-**Next action:** Benjamin reviews draft 0.1, especially slides 2, 5, 8–9 and 14–15, with a suggested November 10 milestone. Codex owns a bounded revision after decisions. Jiho's challenge is optional and unsent. December 4 remains conditional. No merge, manual deployment, publication, outreach or institutional endorsement has occurred.
+**Next action:** Benjamin reviews draft 0.2, especially slides 2, 4–6, 8–9 and 14–15, with a suggested November 10 milestone. Codex owns a bounded revision after decisions. Jiho's challenge is optional and unsent. December 4 remains conditional. No merge, manual deployment, publication, outreach or institutional endorsement has occurred.
+
+## Benjamin’s draft 0.2 decision record
+
+These are financial/editorial review questions, separate from publication authorization. Record a decision and any required correction against the exact draft. No answer has been inferred.
+
+| Review item | Relevant slides / evidence | Decision to record | Status |
+|---|---|---|---|
+| Central argument | 2, 5, 14; analysis.md | Accept the financing-flexibility / commissioning-monitoring case, or identify a specific unsupported step | PENDING |
+| JPMorgan prominence | 4–5; C02, C08–C12, C33 | Accept the bank lens with Goldman and other roles visible, or request a narrower title | PENDING |
+| Ownership trade-off | 6; Financing!B18:B24 / C46 | Accept 7.68% isolated dilution, distinct from 8.31% share-base growth; both omit other dilution | PENDING |
+| Credit mechanism and timing | 8–9; S09 §1.01, §§4.02, 6.16, 7.11 | Accept clause interpretation and clearly hypothetical date, with actual use/headroom withheld | PENDING |
+| Recommendation and evidence limits | 14–15; C51–C54 | Accept conditional funding/covenant diligence; keep optimality and completion-funding conclusions outside scope | PENDING |
+
+Codex implements only the resulting bounded corrections, preserves model 1.0, and repeats affected checks. Jiho’s optional response can test understanding and bank attribution if Benjamin authorizes an invitation. A technical/legal specialist could add value on the covenant interpretation if available, but no outside review or endorsement is claimed or arranged. Native PowerPoint compatibility and PDF reading-order/assistive-technology review remain open pre-release checks. Financial review does not authorize merge or release. Suggested review milestone remains **November 10**, with **December 4 conditional**.
 
 ## Candidate admission review entry — added scope, November 6
 

@@ -1,13 +1,15 @@
-# FI003 presentation draft 0.1
+# FI003 presentation draft 0.2
 
 Research cutoff: **6 November 2026**. This is a reviewable draft, prepared under the managerial-review request. Financial conclusions and publication remain subject to Benjamin's review. [PUBLICATION_PLAN](../PUBLICATION_PLAN.md) is the only owner/date/gate tracker.
 
-- [Editable PowerPoint](../outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pptx)
-- [Matching selectable-text PDF](../outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pdf)
-- [Quality review and exact-file hashes](QUALITY_REVIEW.md)
-- [Numerical/package verification](../outputs/presentation-draft-v01/verification.json)
+- [Editable PowerPoint](../outputs/presentation-draft-v02/SMPT_FI003_JPMorgan_MP_Draft_v02.pptx)
+- [Matching selectable-text PDF](../outputs/presentation-draft-v02/SMPT_FI003_JPMorgan_MP_Draft_v02.pdf)
+- [Quality review and exact-file hashes](QUALITY_REVIEW_V02.md)
+- [Numerical/package verification](../outputs/presentation-draft-v02/verification.json)
 - [Frozen slide manuscript and provenance](slide-manifest.json)
 - [Independent managerial assessment](../MANAGERIAL_REVIEW.md)
+
+Draft 0.1 remains unchanged in `outputs/presentation-draft-v01/` and is reproducible using commit `2b1c4558de5389214e9fd33830b304bbad499ae2`. Draft 0.2 adds the project baseline on the cover, both covenant-trigger routes on slide 9, and cover hyperlink contrast. No model or numerical exhibit changes.
 
 ## Source and build contract
 
@@ -30,7 +32,7 @@ For a new local render, use fresh absolute `FI003_DECK_BUILD` and `FI003_DECK_OU
 "$CODEX_PRIMARY_RUNTIME_NODE" research/fi003/presentation/build.mjs
 soffice -env:UserInstallation=file:///tmp/fi003-lo-deck \
   --headless --convert-to pdf --outdir "$FI003_DECK_OUTPUT" \
-  "$FI003_DECK_OUTPUT/SMPT_FI003_JPMorgan_MP_Draft_v01.pptx"
+  "$FI003_DECK_OUTPUT/SMPT_FI003_JPMorgan_MP_Draft_v02.pptx"
 ```
 
 `verify.py` verifies the committed draft directory. It checks unchanged model hashes, fresh manuscript reproduction, native chart values and zero-based axes, embedded chart workbooks, native tables, Archivo text, PDF content and source hyperlinks. Run with the bundled Python, which supplies PyMuPDF:

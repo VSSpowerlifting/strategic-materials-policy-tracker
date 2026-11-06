@@ -10,12 +10,18 @@ const require=createRequire(path.join(runtime,'fi003.cjs'));
 const {Presentation,PresentationFile}=await import(pathToFileURL(require.resolve('@oai/artifact-tool')).href);
 const d=JSON.parse(await fs.readFile(path.join(here,'slide-manifest.json'),'utf8'));
 const work=path.dirname(here),build=process.env.FI003_DECK_BUILD||path.join(here,'.build');
-const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v01');
+const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v02');
 await fs.mkdir(build,{recursive:true});await fs.mkdir(out,{recursive:true});
 const deck=Presentation.create({slideSize:{width:1280,height:720}});
 const c={paper:'#F5F3EE',ink:'#1B1915',muted:'#5B5548',gold:'#7A5510',char:'#12110F',light:'#EFECE6',rule:'#D8D3C7',band:'#EAE6DC',neutral:'#817B70'};
 deck.theme.defaultFont='Archivo';
-deck.theme.colorScheme={name:'SMPT Archivo',themeColors:{accent1:c.gold,accent2:c.neutral,accent3:c.muted,accent4:c.char,accent5:'#C8993E',accent6:c.rule,bg1:c.paper,bg2:c.char,tx1:c.ink,tx2:c.light,dk1:c.char,dk2:'#1A1814',lt1:c.paper,lt2:c.light,hlink:c.gold,folHlink:c.gold}};
+deck.theme.colorScheme={name:'SMPT Archivo',themeColors:{accent1:c.gold,accent2:c.neutral,accent3:c.muted,accent4:c.char,accent5:'#E3B04B',accent6:c.rule,bg1:c.paper,bg2:c.char,tx1:c.ink,tx2:c.light,dk1:c.char,dk2:'#1A1814',lt1:c.paper,lt2:c.light,hlink:c.gold,folHlink:c.gold}};
+// LibreOffice applies the inherited hyperlink color even to explicitly colored
+// runs. A cover-only master gives links sufficient contrast on graphite.
+const coverMaster=deck.masters.add('SMPT graphite cover');
+coverMaster.setColorMap({bg1:'lt1',tx1:'dk1',bg2:'lt2',tx2:'dk2',accent1:'accent1',accent2:'accent2',accent3:'accent3',accent4:'accent4',accent5:'accent5',accent6:'accent6',hlink:'accent5',folHlink:'accent5'});
+const coverLayout=deck.layouts.add('SMPT graphite cover');
+coverLayout.setParentLayoutId(coverMaster.id);
 const shapes=[],tableOwners=[],chartOwners=[];
 function box(s,name,t,x,y,w,h,size=24,bold=false,color=c.ink){
  const a=s.shapes.add({name,geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{style:'solid',fill:'none',width:0}});
@@ -73,12 +79,12 @@ for(const m of d.slides){
  console.log('Authoring',m.number,m.kind);
  let s;
  if(m.kind==='cover'){
-  s=deck.slides.add();s.background.fill=c.char;
+  s=deck.slides.add();s.setLayout(coverLayout);s.background.fill=c.char;
   box(s,'series','SMPT   /   FINANCIAL INTELLIGENCE 003',64,42,1140,28,17,true,'#E3B04B');
   box(s,'headline',m.title,64,164,1145,135,59,true,c.light);
   box(s,'subtitle',m.scope,64,317,1140,100,42,true,c.light);
   rect(s,'identity-rule',64,444,100,3,'#E3B04B');
-  box(s,'summary',m.note,64,475,1045,75,26,false,c.light);
+  box(s,'summary',m.note,64,475,1140,85,24,false,c.light);
   box(s,'author',m.author+'\n'+m.version+'\nSource cutoff 6 November 2026',64,575,1050,75,19,false,c.light);
   footer(s,m,true);continue;
  }
@@ -141,7 +147,7 @@ const candidatePath=path.join(build,'candidate.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 const skill=process.env.FI003_PRESENTATION_SKILL||'/root/.codex/skills/builtins/presentations';
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
-const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v01.pptx');
+const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v02.pptx');
 await finalizePresentation({workspaceDir:work,candidatePath,finalPath,
  pythonExecutable:process.env.CODEX_PRIMARY_RUNTIME_PYTHON,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
