@@ -119,9 +119,10 @@ export default function PortfoliosPage() {
         title="Portfolios"
         lead={
           <>
-            Each government&apos;s capital, side by side, from the financial rows it provides. Money is shown only as
-            per-currency totals of committed public money, binding apart from not yet binding; everything else is a count of
-            records. No figure is converted between currencies, and no government is ranked.
+            Compare the public financial instruments attributed to each government.
+            Committed money is grouped by currency and binding status; the remaining
+            measures count records. Comparing financing scale across currencies
+            requires a separate consistent basis.
           </>
         }
       />
