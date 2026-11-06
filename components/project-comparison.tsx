@@ -130,7 +130,7 @@ export function ProjectComparison({rows,materialNames,revision}: Props) {
             Tracked materials: {sharedMaterials.length ? sharedMaterials.map(id => materialNames[id] ?? id).join(", ") : "none listed in both records"}.
             {" "}Stages: {sharedStages.length ? sharedStages.map(id => supplyChainStageLabels[id as SupplyChainStage] ?? id).join(", ") : "none listed in both records"}.
           </p>
-          <p className="mt-2 text-xs leading-5 text-faint">Shared categories do not establish a supply agreement, ownership link or policy effect between the projects.</p>
+          <p className="mt-2 text-xs leading-5 text-faint">Shared categories reflect the recorded materials and stages. Commercial and ownership relationships appear in the individual project records.</p>
         </div>
         <div className="mt-5 grid gap-5 lg:grid-cols-2">
           <ComparisonCard row={a} materialNames={materialNames} revision={revision}/>
