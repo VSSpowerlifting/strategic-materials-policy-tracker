@@ -6,8 +6,8 @@ Issue [#219](https://github.com/VSSpowerlifting/strategic-materials-policy-track
 
 The published eight-page PDF presentations have no authoritatively editable PowerPoint masters in this repository. `build_decks.js` reconstructs both as **native editable PowerPoint elements** (text, bars, comparison tables, timeline points and labels) using the signed-off research, not raster PDF conversion:
 
-- R001: [Tungsten Supply Security](https://strategic-materials-policy-tracker.vercel.app/research/tungsten-supply-security); full original source dossier and [publication receipt](../../../../docs/research/r001-tungsten-publication-2026-11-04.md). Research cutoff: **3 November 2026**.
-- Applied Strategy 001: [U.S. Antimony Supply Resilience](https://strategic-materials-policy-tracker.vercel.app/research/antimony-supply-resilience); [public evidence and assumption register](../../../../public/research/applied-001/antimony-evidence-and-assumptions.md), with model-backed 2030 severe-case results. Research cutoff: **4 November 2026**.
+- R001: [Tungsten Supply Security](https://strategic-materials-policy-tracker.vercel.app/research/tungsten-supply-security); full original source dossier and [publication receipt](../../../docs/research/r001-tungsten-publication-2026-11-04.md). Research cutoff: **3 November 2026**.
+- Applied Strategy 001: [U.S. Antimony Supply Resilience](https://strategic-materials-policy-tracker.vercel.app/research/antimony-supply-resilience); [public evidence and assumption register](../../../public/research/applied-001/antimony-evidence-and-assumptions.md), with model-backed 2030 severe-case results. Research cutoff: **4 November 2026**.
 
 These new presentations retain the decision logic but reorganize editorial sentences and exhibits. They are **not** typography-only binary replacements. Original research dates, underlying model assumptions and live PDFs remain unchanged.
 
