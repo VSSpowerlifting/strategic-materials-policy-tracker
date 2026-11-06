@@ -50,12 +50,12 @@ export default function AntimonySupplyResilience() {
       <section className="border-b border-border-strong">
         <Container width="wide" className="py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
-            Research / Applied Strategy 001
+            ← Research
           </Link>
           <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-            Strategic Materials Policy Tracker · Applied industrial strategy
+            Applied Strategy 001
           </p>
-          <h1 className="mt-4 max-w-5xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          <h1 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             U.S. Antimony Supply Resilience
           </h1>
           <p className="mt-4 font-display text-lg text-muted">Strategic options for a defense manufacturer, 2027–2031</p>
