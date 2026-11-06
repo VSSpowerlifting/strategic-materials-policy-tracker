@@ -142,6 +142,6 @@ test("same authoritative definitions power methodology and every relevant public
  ]){
   assert.match(await readFile(path,"utf8"),new RegExp('ResearchReadingKey topic="'+topic+'"'));
  }
- assert.match(ui,/Obligation is not an SMPT financial-status label/);
+ assert.match(ui,/Obligation is tracked outside SMPT's financial-status categories/);
  assert.match(ui,/\/methodology#capital-counting/);
 });
