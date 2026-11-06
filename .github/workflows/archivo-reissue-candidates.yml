@@ -55,6 +55,7 @@ jobs:
             candidates/*.pptx
             candidates/*.pdf
             candidates/*-contact.jpg
+            candidates/*-baseline-contact.jpg
             candidates/archivo-reissue-qa.json
             candidates/ARCHIVO_REISSUE_REVIEW.md
           if-no-files-found: warn
