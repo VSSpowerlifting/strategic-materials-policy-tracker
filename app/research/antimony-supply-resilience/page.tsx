@@ -92,8 +92,8 @@ export default function AntimonySupplyResilience() {
                 </p>
                 <p className="mt-4 font-display text-lg leading-8">
                   The five-month policy depends on qualifying a separate 45% international sourcing lane and testing
-                  the actual grade, refining origin, end-use eligibility and delivery terms. If that channel cannot
-                  qualify, the model shows 16.5 metric tons unfilled in 2027 under the severe interruption.
+                  the actual grade, refining origin, end-use eligibility and delivery terms. Failure to qualify that channel leaves 16.5 metric tons of modeled
+                  demand unfilled in 2027 under the severe interruption.
                 </p>
               </section>
 
@@ -112,7 +112,8 @@ export default function AntimonySupplyResilience() {
                   Public financing may support future U.S. supply. EXIM lists $2.906 billion for Stibnite as
                   <strong> authorized</strong>; financing close, processing arrangements, qualified deliveries and
                   actual buyer supply remain separate milestones. Idaho National Laboratory&apos;s 2026 pilot
-                  commissioning demonstrates processing development rather than commercially qualified antimony output.
+                  commissioning demonstrates early processing capability. Commercial qualification
+                  and accepted antimony deliveries remain separate milestones.
                 </p>
               </section>
 
@@ -187,7 +188,8 @@ export default function AntimonySupplyResilience() {
                 <p className="mt-4 font-display text-base leading-8">
                   The demand, supplier shares, premiums, inventory limits and disruptions are scenario assumptions
                   for a hypothetical manufacturer. The workbook is an episodic cost-exposure and continuity test;
-                  it is not an actual company procurement plan or an expected-value forecast.
+                  it models the cost and continuity consequences of stipulated scenarios
+                  for a hypothetical buyer.
                 </p>
                 <h3 className="mt-8 font-display text-base font-semibold">Selected original sources</h3>
                 <ul className="mt-3 space-y-2 font-display text-sm leading-7">
