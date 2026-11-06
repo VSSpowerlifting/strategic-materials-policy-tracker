@@ -250,7 +250,7 @@ export function EventsExplorer({
         </details>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 font-mono text-sm text-faint">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 font-display text-sm text-faint">
         <p id="events-count" tabIndex={-1} className="tnum outline-none" aria-live="polite">
           {filtered.length} of {events.length} events
         </p>
@@ -310,7 +310,7 @@ export function EventsExplorer({
         )}
       </Card>
 
-      <p className="mt-3 font-mono text-[11px] leading-relaxed text-faint">
+      <p className="mt-3 font-display text-[11px] leading-relaxed text-faint">
         Framing markers show how the issuing government officially presented a
         measure — quoted, not inferred — and do not restate its legal effect.
         Compare anchors on the{" "}
