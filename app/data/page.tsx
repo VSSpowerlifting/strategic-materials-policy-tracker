@@ -108,13 +108,12 @@ export default function DataPage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Take it with you"
         title="Data export"
-        lead="The whole dataset is downloadable, with the same source links and translation provenance you see on the site. CSV files are UTF-8 with a byte-order mark for Excel; text that resembles a spreadsheet formula receives a protective tab prefix. Use JSON for exact original strings."
+        lead="Download the source-linked dataset as JSON or CSV."
       />
 
       <p className="mt-6 font-mono text-sm text-faint">
-        Current snapshot: {s.events} events · {s.framingClaims} framing anchors ·{" "}
+        Corpus: {s.events} events · {s.framingClaims} framing anchors ·{" "}
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
         sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses ·{" "}
         {s.organizations} organizations · {s.projects} projects · {s.programmes} programmes ·{" "}
@@ -146,10 +145,9 @@ export default function DataPage() {
       </div>
 
       <section className="mt-10 max-w-prose rounded border border-border-strong bg-card p-5 font-display text-sm leading-7" aria-labelledby="investigation-downloads">
-        <h2 id="investigation-downloads" className="text-lg font-semibold text-foreground">Project investigation packets</h2>
+        <h2 id="investigation-downloads" className="text-lg font-semibold text-foreground">Project downloads</h2>
         <p className="mt-3 text-muted">Each project investigation offers a structured JSON download at <code className="break-all">/api/v1/projects/[id]/investigation</code>. <a href="/api/v1/projects/prj-au-alcoa-sojitz-gallium/investigation" download className="text-accent underline">Download the Wagerup example</a>.</p>
-        <p className="mt-3 text-muted">Projection <code>smpt-investigation-1</code> includes identity and organization roles, directly attributable instruments, separately labelled nonallocative associations, financial histories and current amount wording, parent policy context, announcement-sibling controls, published native milestones, legacy financial-row observations, source URLs and field locators. Planned claims keep target dates; unknown dates remain null.</p>
-        <p className="mt-3 text-muted">These deterministic build artifacts use the curated corpus revision and legal-status cutoff, with no build timestamp or historical known-as-of claim. No project-wide financial total or causal effect is computed. Existing registry endpoints and dataset exports retain their contracts. Unknown or unpublished project IDs return 404.</p>
+        <p className="mt-3 text-muted">Packets contain project, financing, status and source references. Unallocated amounts remain separate; unknown dates remain null.</p>
       </section>
 
       <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
@@ -157,7 +155,7 @@ export default function DataPage() {
           JSON API
         </h2>
         <p>
-          Read-only, prerendered endpoints under <code className="font-mono text-sm text-foreground">/api/v1</code>:
+          Read-only endpoints under <code className="font-mono text-sm text-foreground">/api/v1</code>:
           {" "}<code className="font-mono text-sm">events</code>, <code className="font-mono text-sm">framing</code>,{" "}
           <code className="font-mono text-sm">materials</code>, <code className="font-mono text-sm">actors</code>,{" "}
           <code className="font-mono text-sm">sources</code>, <code className="font-mono text-sm">financial-commitments</code>,{" "}
