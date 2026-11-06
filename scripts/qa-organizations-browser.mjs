@@ -4,9 +4,11 @@
  */
 import assert from "node:assert/strict";
 import {spawn} from "node:child_process";
+import {readFileSync} from "node:fs";
 import {setTimeout as delay} from "node:timers/promises";
 import {chromium} from "playwright";
 const port=3487,origin="http://127.0.0.1:"+port;
+const expectedOrganizationCount=JSON.parse(readFileSync(new URL("../data/seed/organizations.json",import.meta.url),"utf8")).length;
 const server=spawn(process.execPath,[
  "node_modules/next/dist/bin/next","start","-p",String(port),"-H","127.0.0.1",
 ],{env:{...process.env,NODE_ENV:"production"},stdio:["ignore","pipe","pipe"]});
@@ -30,8 +32,8 @@ try{
   await page.goto(origin+"/organizations",{waitUntil:"networkidle"});
   assert.equal(await page.locator("h1").innerText(),"Organizations");
   const total=await page.getByTestId("organization-record").count();
-  assert.equal(total,124);
-  assert.equal(await page.getByTestId("organization-result-count").innerText(),"124");
+  assert.equal(total,expectedOrganizationCount);
+  assert.equal(await page.getByTestId("organization-result-count").innerText(),String(expectedOrganizationCount));
   await page.locator("#organizations-kind").selectOption("joint_vehicle");
   await page.waitForFunction(()=>new URLSearchParams(location.search).get("kind")==="joint_vehicle");
   assert.equal(await page.getByTestId("organization-record").count(),1);
@@ -49,7 +51,7 @@ try{
  await page.goto(origin+"/organizations?role=sponsor",{waitUntil:"networkidle"});
  assert.equal(await page.locator("#organizations-role").inputValue(),"sponsor");
  const results=await page.getByTestId("organization-record").count();
- assert.ok(results>0&&results<124);
+ assert.ok(results>0&&results<expectedOrganizationCount);
  assert.ok((await page.getByTestId("organization-record").allTextContents())
    .every(s=>s.includes("sponsored project")));
  await page.locator("#organizations-query").fill("no-such-company-ever-9911");
@@ -61,6 +63,6 @@ try{
  await page.keyboard.press("Enter");
  await page.waitForURL(/\/organizations\/org-5n-plus$/);
  assert.ok((await page.locator("h1").innerText()).includes("5N Plus"));
- console.log("Organization explorer: 124 prerendered records, source-defined roles, shareable filters, keyboard detail links and mobile/tablet/desktop passed.");
+ console.log("Organization explorer: " + expectedOrganizationCount + " prerendered records, source-defined roles, shareable filters, keyboard detail links and mobile/tablet/desktop passed.");
  await page.close();
 }finally{if(browser)await browser.close();server.kill("SIGTERM")}

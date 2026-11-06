@@ -96,8 +96,8 @@ test("tungsten stats", () => {
 test("designations, projects and projects with no designation, per material; the counts are not assumed equal", () => {
   const expected: Record<string, [number, number, number]> = {
     tungsten: [8, 9, 1],
-    "rare-earth-elements": [13, 26, 13],
-    graphite: [19, 26, 7],
+    "rare-earth-elements": [13, 27, 14],
+    graphite: [19, 27, 8],
     "ndfeb-magnets": [0, 5, 5],
     gallium: [2, 5, 3],
     germanium: [3, 6, 3],
@@ -109,6 +109,12 @@ test("designations, projects and projects with no designation, per material; the
     lithium: [8, 16, 8], // Thacker Pass and Rhyolite Ridge processing are separate non-designated projects
     cobalt: [14, 16, 2],
     nickel: [16, 19, 3],
+    aluminium: [0, 3, 3],
+    boron: [0, 1, 1],
+    copper: [0, 1, 1],
+    niobium: [0, 0, 0],
+    palladium: [0, 1, 1],
+    tantalum: [0, 0, 0],
   };
   for (const slug of slugs) {
     const p = dossier(slug);

@@ -233,6 +233,29 @@
     "notes": "ASX-listed corporate issuer of shares under the 1 April 2026 binding Export Finance Australia US$100M subscription. The investment finances Nolans development; share issuance remains subject to closing conditions. Not an assertion of disbursement."
   },
   {
+    "id": "org-au-astron",
+    "name": "Astron Corporation",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-donald-gam-2026",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Donald Mineral Sands conditional financing paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-au-disr",
     "name": "Department of Industry, Science and Resources",
     "nameOriginal": null,
@@ -253,6 +276,31 @@
         "evidence": "explicit",
         "locator": "Masthead; paragraph on future transactions",
         "note": "\"Future transactions under the Reserve will be led out of the Department of Industry, Science and Resources\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-au-efa",
+    "name": "Export Finance Australia",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "public_financier",
+    "countryCode": "AU",
+    "actor": "australia",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-donald-gam-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Australian Government credit agency financing paragraphs",
+        "note": null
       }
     ],
     "notes": null
@@ -289,6 +337,31 @@
         "evidence": "explicit",
         "locator": "Title page",
         "note": "The Act is an Act of the Commonwealth of Australia; the tax offset is paid by the Commonwealth."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-au-nrf",
+    "name": "National Reconstruction Fund",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "public_financier",
+    "countryCode": "AU",
+    "actor": "australia",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-au-donald-gam-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Donald investment paragraph",
+        "note": null
       }
     ],
     "notes": null
@@ -371,6 +444,30 @@
     "notes": "Named BNDES finance recipient, operating company for the Piauí Níquel undertaking. Parent Brazilian Nickel Limited is not yet registered."
   },
   {
+    "id": "org-ca-aluminerie-alouette",
+    "name": "Aluminerie Alouette",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "CA",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Quebec aluminum smelter and electrolysis paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-ca-canada-growth-fund",
     "name": "Canada Growth Fund",
     "nameOriginal": null,
@@ -444,6 +541,30 @@
         ],
         "evidence": "explicit",
         "locator": "Ucore paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-generation-mining",
+    "name": "Generation Mining Limited",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "CA",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-cgf-marathon-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Opening paragraphs and company description",
         "note": null
       }
     ],
@@ -574,6 +695,29 @@
         "evidence": "explicit",
         "locator": "Critical Minerals Geoscience and Data initiative entries",
         "note": "A provincial department: its actor is Canada, the tracked government it sits within."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-ca-rio-tinto-aluminium",
+    "name": "Rio Tinto Aluminium",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-ca-srf-aluminium-2026",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Canadian aluminum operations quick facts and investment paragraph",
+        "note": null
       }
     ],
     "notes": null
@@ -1016,6 +1160,29 @@
         "evidence": "explicit",
         "locator": "Article 2, row 13",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-global-advanced-metals",
+    "name": "Global Advanced Metals",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Global Advanced Metals loan paragraph",
+        "note": null
       }
     ],
     "notes": null
@@ -2883,6 +3050,31 @@
     "notes": null
   },
   {
+    "id": "org-uk-bist",
+    "name": "Department for Business, Innovation, Science and Trade",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "GB",
+    "actor": "uk",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-uk-cm-accelerator-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Issuing department on official GOV.UK scheme",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-uk-dbt",
     "name": "Department for Business and Trade",
     "nameOriginal": null,
@@ -3008,6 +3200,29 @@
         "evidence": "explicit",
         "locator": "Article 2, row 11",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-us-5e-advanced-materials",
+    "name": "5E Advanced Materials, LLC",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-exim-minerals-roundtable-2026",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "5E Boron Americas loan paragraph",
+        "note": null
       }
     ],
     "notes": null
@@ -3229,6 +3444,30 @@
         "evidence": "explicit",
         "locator": "History list: \"Secretary of Defense Establishes Office of Strategic Capital\"",
         "note": "\"SECDEF establishes the Office of Strategic Capital (OSC) as a finance organization within the Department of Defense\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-us-westwater",
+    "name": "Westwater Resources, Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": "US",
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-us-westwater-sec-exim-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country"
+        ],
+        "evidence": "explicit",
+        "locator": "Registrant header; Kellyton plant and financing sections",
+        "note": null
       }
     ],
     "notes": null

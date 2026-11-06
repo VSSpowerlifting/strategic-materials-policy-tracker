@@ -132,6 +132,18 @@
     "notes": "Arafura's ASX announcement states that it executed a binding Subscription Agreement and Investor Rights Deed with Export Finance Australia for US$100 million of equity. Completion remained subject to conditions precedent, including shareholder approval, key debt documentation and construction approvals; the sunset date stated was 1 December 2026."
   },
   {
+    "id": "src-au-donald-gam-2026",
+    "title": "More investment, more jobs for Australia's critical minerals future",
+    "publisher": "Australian Government — Department of Industry, Science and Resources",
+    "url": "https://www.minister.industry.gov.au/t-ayres/media/more-investment-more-jobs-australias-critical-minerals-future",
+    "language": "en",
+    "datePublished": "2026-10-27",
+    "dateAccessed": "2026-11-05",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Conditional EFA and NRF financing for Donald; conditional EFA US$41.4m loan for GAM."
+  },
+  {
     "id": "src-au-industry-cmsr",
     "title": "Delivering Australia's critical minerals supply",
     "publisher": "Department of Industry, Science and Resources (Australia)",
@@ -142,6 +154,18 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Australian government statement on the Critical Minerals Strategic Reserve."
+  },
+  {
+    "id": "src-au-nolans-construction-2026",
+    "title": "Construction starts on Arafura Rare Earths Project",
+    "publisher": "Australian Government — Ministers for the Department of Industry, Science and Resources",
+    "url": "https://www.minister.industry.gov.au/t-ayres/media/construction-starts-arafura-rare-earths-project",
+    "language": "en",
+    "datePublished": "2026-10-08",
+    "dateAccessed": "2026-11-05",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Official Australian Government release dated 8 October 2026 stating that construction at the Nolans project had commenced. It does not specify the precise commencement day or establish disbursement of any specific financing instrument."
   },
   {
     "id": "src-au-pmc-cmsr",
@@ -216,6 +240,30 @@
     "notes": "Official approval of R$100 million BNDES Máquinas e Serviços financing for Piauí Níquel Metais S/A, for processing equipment and services. Financing contract/disbursement and physical production milestones remain unverified."
   },
   {
+    "id": "src-ca-genm-cgf-equity-close-2026",
+    "title": "Generation Mining closes bought-deal offering and concurrent private placement for C$240 million",
+    "publisher": "Generation Mining Limited",
+    "url": "https://genmining.com/news/2026/generation-mining-closes-bought-deal-public-offe-15459/",
+    "language": "en",
+    "datePublished": "2026-09-21",
+    "dateAccessed": "2026-11-06",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Issuer confirms CGF acquired 62.5m shares for C$40m in the closed private placement and 76.45m shares for approximately C$49m in the completed bought-deal offering. The combined C$89m approximates the previously announced ~C$90m CGF equity commitment. Convertible note financing is distinct and not established as closed by this release."
+  },
+  {
+    "id": "src-ca-genm-marathon-construction-2026",
+    "title": "Generation Mining commences construction at Marathon copper-palladium mine",
+    "publisher": "Generation Mining Limited",
+    "url": "https://genmining.com/news/2026/generation-mining-commences-construction-at-marath-15486/",
+    "language": "en",
+    "datePublished": "2026-10-01",
+    "dateAccessed": "2026-11-06",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Issuer states early works construction had commenced, with construction financial assurance posted. Publication date establishes construction by 1 October 2026, not an exact first-work date. Procurement commitments and forward-looking milestones are not treated as realized capital expenditure or production."
+  },
+  {
     "id": "src-ca-ised-divest",
     "title": "Government of Canada orders the divestiture of investments by foreign companies in Canadian critical minerals companies",
     "publisher": "Innovation, Science and Economic Development Canada",
@@ -226,6 +274,18 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "ISED statement ordering the three divestitures under the Investment Canada Act. URL filed under the canada.ca 2022/10 path; the order date is 2 November 2022."
+  },
+  {
+    "id": "src-ca-srf-aluminium-2026",
+    "title": "Government of Canada invests over $190 million to advance Canada's critical minerals sector and strengthen aluminum processing",
+    "publisher": "Innovation, Science and Economic Development Canada",
+    "url": "https://www.canada.ca/en/innovation-science-economic-development/news/2026/10/government-of-canada-invests-over-190-million-to-advance-canadas-critical-minerals-sector-and-strengthen-aluminum-processing.html",
+    "language": "en",
+    "datePublished": "2026-10-23",
+    "dateAccessed": "2026-11-05",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "C$164.8m Rio Tinto support across two sites; C$28.5m Alouette; separate total project costs."
   },
   {
     "id": "src-canada-grant-cyclic-cmrdd-2024",
@@ -286,6 +346,18 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Canada Growth Fund press release. The page is dated 23 January 2026 and carries a Kingston dateline of 20 January 2026. It states that CGF invested US$25 million in Cyclic Materials as part of a US$75 million Series C preferred-equity round, supporting expansion of the Kingston Centre of Excellence, Canadian R&D, the first commercial Hub and broader commercialization. It also states that Cyclic was then constructing its first commercial-scale Hub in Kingston."
+  },
+  {
+    "id": "src-cgf-marathon-2026",
+    "title": "Canada Growth Fund commits to invest approximately $140 million in Generation Mining",
+    "publisher": "Canada Growth Fund Inc.",
+    "url": "https://www.cgf-fcc.ca/en/news/canada-growth-fund-commits-to-invest-140-million-in-generation-mining-to-mobilize-private-capital-for-ontarios-marathon-critical-minerals-project/",
+    "language": "en",
+    "datePublished": "2026-09-15",
+    "dateAccessed": "2026-11-05",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "C$90m approximate common equity and C$50m convertible note, subject to closing conditions."
   },
   {
     "id": "src-cgf-nmg-schedule13d-2024",
@@ -2172,6 +2244,18 @@
     "notes": "Complete issuer release reviewed. Executed modification of a distinct US award supports Kingston process development and Louisiana Enhanced Machine A; not execution of the Canadian conditional package."
   },
   {
+    "id": "src-uk-cm-accelerator-2026",
+    "title": "Critical Minerals Programme: Critical Minerals Accelerator",
+    "publisher": "UK Department for Business, Innovation, Science and Trade",
+    "url": "https://www.gov.uk/government/publications/critical-minerals-programme-critical-minerals-accelerator",
+    "language": "en",
+    "datePublished": "2026-08-05",
+    "dateAccessed": "2026-11-05",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "£25m scheme ceiling; no recipients named; decisions expected November–December 2026."
+  },
+  {
     "id": "src-us-army-antimony-pilot-2026",
     "title": "U.S. Army, Perpetua Resources, and INL launch domestic antimony sulfide processing facility",
     "publisher": "U.S. Army",
@@ -2230,6 +2314,42 @@
     "sourceType": "official",
     "confidence": "primary",
     "notes": "Official DOE selection announcement gives nine selectee names, headquarters and topic categories, but no individual award share or site; expressly warns selection for negotiations does not commit funding. $162 million is the aggregate selected-project figure."
+  },
+  {
+    "id": "src-us-exim-minerals-roundtable-2026",
+    "title": "Trump Administration Announces $58M in Major New Critical Mineral Deals at White House Roundtable",
+    "publisher": "Export-Import Bank of the United States",
+    "url": "https://exim.gov/news/trump-administration-announces-58m-major-new-critical-mineral-deals-white-house-roundtable",
+    "language": "en",
+    "datePublished": "2026-08-07",
+    "dateAccessed": "2026-11-05",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Names distinct loans; not contract or disbursement evidence."
+  },
+  {
+    "id": "src-us-exim-project-vault-2026",
+    "title": "EXIM Approves Project Vault Loan to Launch America's Strategic Critical Minerals Reserve and Support Manufacturing Jobs",
+    "publisher": "Export-Import Bank of the United States",
+    "url": "https://www.exim.gov/news/project-vault",
+    "language": "en",
+    "datePublished": "2026-02-02",
+    "dateAccessed": "2026-11-05",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "EXIM board approves direct loan up to $10bn; not evidence of disbursement or reserve inventory."
+  },
+  {
+    "id": "src-us-westwater-sec-exim-2026",
+    "title": "Westwater Resources quarterly report for quarter ended June 30, 2026",
+    "publisher": "Westwater Resources / U.S. SEC",
+    "url": "https://www.sec.gov/Archives/edgar/data/839470/000110465926092955/wwr-20260630x10q.htm",
+    "language": "en",
+    "datePublished": null,
+    "dateAccessed": "2026-11-05",
+    "sourceType": "other",
+    "confidence": "primary",
+    "notes": "Westwater confirms August EXIM approval for Kellyton but states definitive loan documentation and closing conditions remain outstanding."
   },
   {
     "id": "src-usac-2026-q1-call-sec-exhibit",

@@ -4,9 +4,11 @@
  */
 import assert from "node:assert/strict";
 import {spawn} from "node:child_process";
+import {readFileSync} from "node:fs";
 import {setTimeout as delay} from "node:timers/promises";
 import {chromium} from "playwright";
 const port=3481, base=`http://127.0.0.1:${port}`;
+const expectedProjectCount=JSON.parse(readFileSync(new URL("../data/seed/projects.json",import.meta.url),"utf8")).length;
 const server=spawn(process.execPath,["node_modules/next/dist/bin/next","start","-p",String(port),"-H","127.0.0.1"],{
   env:{...process.env,NODE_ENV:"production"},stdio:["ignore","pipe","pipe"],
 });
@@ -26,12 +28,12 @@ try{
     const page=await browser.newPage({viewport});
     await page.goto(base+"/projects",{waitUntil:"networkidle"});
     assert.equal(await page.locator("h1").innerText(),"Projects");
-    assert.equal(await page.getByTestId("project-record").count(),103);
-    assert.equal(await page.getByTestId("project-result-count").innerText(),"103");
+    assert.equal(await page.getByTestId("project-record").count(),expectedProjectCount);
+    assert.equal(await page.getByTestId("project-result-count").innerText(),String(expectedProjectCount));
     await page.locator("#projects-material").selectOption("gallium");
     await page.waitForFunction(()=>new URLSearchParams(location.search).get("material")==="gallium");
     assert.ok(await page.getByTestId("project-record").count()>0);
-    assert.ok(await page.getByTestId("project-record").count()<103);
+    assert.ok(await page.getByTestId("project-record").count()<expectedProjectCount);
     assert.ok(await page.locator('a[href="/projects/prj-au-alcoa-sojitz-gallium"]').count()>0);
     await page.reload({waitUntil:"networkidle"});
     assert.equal(await page.locator("#projects-material").inputValue(),"gallium");
@@ -39,7 +41,7 @@ try{
     const overflowing=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
     assert.equal(overflowing,false,"horizontal overflow at "+viewport.width);
     await page.getByRole("button",{name:"Clear filters"}).click();
-    assert.equal(await page.getByTestId("project-record").count(),103);
+    assert.equal(await page.getByTestId("project-record").count(),expectedProjectCount);
     await page.close();
   }
   const page=await browser.newPage({viewport:{width:1360,height:900}});
@@ -51,7 +53,7 @@ try{
   await page.locator("#projects-search").fill("token-never-in-corpus-2026");
   assert.equal(await page.getByTestId("project-result-count").innerText(),"0");
   await page.getByRole("button",{name:"Show all projects"}).click();
-  assert.equal(await page.getByTestId("project-record").count(),103);
+  assert.equal(await page.getByTestId("project-record").count(),expectedProjectCount);
   await page.locator("#projects-search").fill("Alcoa-Sojitz");
   assert.ok(await page.locator('a[href="/projects/prj-au-alcoa-sojitz-gallium"]').count()>0);
   await page.locator('a[href="/projects/prj-au-alcoa-sojitz-gallium"]').first().focus();

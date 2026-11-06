@@ -83,7 +83,9 @@
       "evt-us-doe-thacker-pass-loan-2024",
       "evt-us-doe-rhyolite-ridge-2025",
       "evt-us-doe-battery-round3-selections-2026",
-      "evt-us-doe-byproduct-pilots-selections-2026"
+      "evt-us-doe-byproduct-pilots-selections-2026",
+      "evt-us-exim-critical-minerals-2026-08",
+      "evt-us-exim-project-vault-2026"
     ],
     "sourceIds": [
       "src-doi-press-2025",
@@ -143,7 +145,8 @@
     "eventIds": [
       "evt-au-cmsr-2026",
       "evt-au-cmpti-2025",
-      "evt-us-au-framework-2025"
+      "evt-us-au-framework-2025",
+      "evt-au-donald-gam-financing-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -203,7 +206,9 @@
       "evt-ca-nrcan-cmrdd-2024",
       "evt-ca-nrcan-lithium-processing-2024",
       "evt-ca-nrcan-pdac-2026",
-      "evt-ca-trail-strategic-metals-2026"
+      "evt-ca-trail-strategic-metals-2026",
+      "evt-ca-srf-aluminium-2026",
+      "evt-ca-cgf-marathon-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -229,7 +234,8 @@
     "eventIds": [
       "evt-uk-cms-2022",
       "evt-uk-cms-2025",
-      "evt-uk-nwf-tungsten-west-2026"
+      "evt-uk-nwf-tungsten-west-2026",
+      "evt-uk-cm-accelerator-2026"
     ],
     "sourceIds": [
       "src-gov-uk-cms-2022",
