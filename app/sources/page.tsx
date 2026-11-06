@@ -13,7 +13,7 @@ export const metadata:Metadata={
 export default function SourcesPage(){
  const rows=buildSourceDirectory(getAllSources(),buildSourceUseIndex(publishedSourceRecords()));
  return <Container className="py-12">
-   <PageHeading title="Sources"
+   <PageHeading title="Source register"
      lead="Original documents cited in SMPT research and database records."/>
    <div className="mt-10"><SourceRegisterExplorer rows={rows}/></div>
    <p className="mt-12 max-w-prose text-sm leading-7 text-muted">
