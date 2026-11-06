@@ -127,8 +127,8 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
                   <div className="mt-3 border-t pt-3">
                     <p className="mb-3 text-sm leading-6 text-muted">
                       A <strong className="font-semibold text-foreground">funding option</strong>: a ceiling the recipient may call on
-                      under an executed agreement. An executed option is not committed money, so this figure is never added to any
-                      total. An exercise would be recorded as its own commitment drawn from this row, with its own payment status.
+                      under an executed agreement. Its value is displayed separately from committed
+                      funding. Any exercise becomes a distinct commitment with its own payment status.
                     </p>
                     <OptionLadder
                       executed={option.executed ? { date: option.executed.date, sourceId: option.executed.sourceId } : null}
@@ -139,14 +139,14 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
                   </div>
                 ) : c.valueRole !== "commitment" ? (
                   <p className="mt-3 border-t pt-3 text-sm leading-6 text-muted">
-                    This figure is a <strong className="font-semibold text-foreground">{valueRoleLabels[c.valueRole].toLowerCase()}</strong>, not money
-                    committed to a recipient. It is never added to commitments or to other roles.
+                    This figure is a <strong className="font-semibold text-foreground">{valueRoleLabels[c.valueRole].toLowerCase()}</strong>. Its reported value
+                    belongs to a distinct category, separate from recipient commitments.
                   </p>
                 ) : null}
               </Card>
             ) : (
               <Card className="p-5 text-sm leading-6 text-muted">
-                No amount is stated for this instrument. Its terms below are what the source commits to; no value is estimated.
+                The source states this instrument’s terms but leaves the amount unspecified.
               </Card>
             )}
           </Section>
@@ -155,7 +155,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
             <Section
               index={next()}
               title="Place in the money chain"
-              description="A figure is never counted together with a figure it is part of or drawn from."
+              description="Parent packages and drawn amounts are reconciled to count each underlying instrument once."
             >
               <div className="space-y-4">
                 {c.relationships.map((r) => {
@@ -216,7 +216,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
                   {c.projectId ? <span className="mt-1 block"><ProjectLink id={c.projectId} /> <span className="font-mono text-[11px] text-faint">capital stack →</span></span> : null}
                   {c.associatedProjectIds?.length ? (
                     <span className="mt-2 block text-sm text-muted">
-                      Shared / unallocated financing. These project links do not allocate the amount to any individual project or enter its capital stack.
+                      Shared / unallocated financing. The reported amount is associated with several projects and remains outside each individual capital stack.
                       {c.associatedProjectIds.map((id) => (
                         <span key={id} className="mt-1 block"><ProjectLink id={id} /></span>
                       ))}
