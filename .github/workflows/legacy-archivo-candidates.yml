@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: \${{ github.ref_name }}
+          ref: ${{ github.ref_name }}
           persist-credentials: true
       - name: Install LibreOffice and conversion dependencies
         run: |
@@ -37,7 +37,7 @@ jobs:
           git add research/legacy-archivo-review-20261106/
           git diff --cached --quiet && exit 1
           git commit -m "Design: add R001 and Applied 001 editable candidate masters"
-          git push origin HEAD:\${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
       - name: Enforce audit blockers without publishing
         run: |
           python - <<'PY'
