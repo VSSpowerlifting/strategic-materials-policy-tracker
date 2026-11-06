@@ -27,6 +27,8 @@ const U={r001:'https://strategic-materials-policy-tracker.vercel.app/research/tu
   sec:'https://www.sec.gov/Archives/edgar/data/1526243/000110465926097134/ppta-20260630x10q.htm',
   inl:'https://inl.gov/news-release/inl-hosts-ribbon-cutting-for-pilot-plant-supporting-domestic-antimony-production/',
   mofSb:'https://www.mofcom.gov.cn/zfxxgk/fdzdgknr/ztfl/dwmygl/art/2024/art_c37e7a6e7438428c951e2b1e488dc47e.html',
+  mof46:'https://www.mofcom.gov.cn/zfxxgk/gkml/art/2024/art_99f5d51bbe6a412ca309d5818c4dee52.html',
+  mof72:'https://www.mofcom.gov.cn/zfxxgk/gkml/art/2025/art_43489ca6f2094b70954c25249702b4cc.html',
   evidence:'https://strategic-materials-policy-tracker.vercel.app/research/applied-001/antimony-evidence-and-assumptions.md'};
 function pptx(name){let p=new pptxgen();p.layout='LAYOUT_WIDE';p.author='Benjamin Yang / Strategic Materials Policy Tracker';p.subject=name;p.title=name;p.company='Strategic Materials Policy Tracker';p.lang='en-US';p.theme={headFontFace:FONT,bodyFontFace:FONT,lang:'en-US'};return p;}
 function shape(s, x,y,w,h,fill,line=fill,rad=false){s.addShape(rad?S.roundRect:S.rect,{x,y,w,h,rectRadius:0.08,line:{color:line,width:0.4},fill:{color:fill}});}
@@ -60,7 +62,7 @@ note(s,'The comparison tracks legal decisions, financial status and physical imp
 const s=pg(p,3,8,series);head(s,'United Kingdom','The £71m NWF headline includes £10m of contingent lending','Tungsten West / Hemerdon; announced August 2026; source amounts in GBP');
 const bx=0.75,by=2.70,len=11.7;let px=bx;const vals=[36,25,10],colors=[C.dark,C.gold,C.other];const labs=['£36m equity','£25m core loan','£10m conditional accordion'];for(let i=0;i<3;i++){let w=len*vals[i]/71;shape(s,px,by,w,1.02,colors[i],colors[i]);txt(s,labs[i],px+0.08,by+0.24,w-0.16,0.5,i===2?12.3:16, i===1?C.ink:C.white,true,{align:'center'});px+=w}
 metric(s,'£25m','Core loan fully drawn by 2 September 2026, according to FY2026 accounts',0.78,4.16,5.65,{color:C.ink});metric(s,'£10m','Additional accordion remained conditional in the announced package',6.87,4.16,5.4,{color:C.ink});
-note(s,'Headline capacity, equity issuance and loan drawdown represent different financing statuses; the core loan also creates repayment exposure.');linkText(s,'NWF (25 Aug) · Issuer terms · FY2026 accounts',U.uk,0.61,6.91,9.0,0.15,C.goldInk,8.8);
+note(s,'Headline capacity, equity issuance and loan drawdown represent different financing statuses; the core loan also creates repayment exposure.');linkText(s,'NWF announcement',U.uk,0.61,6.91,2.05,0.15,C.goldInk,8.8);linkText(s,'Issuer financing terms',U.twTerm,2.82,6.91,2.38,0.15,C.goldInk,8.8);linkText(s,'Investor accounts',U.tw,5.44,6.91,2.24,0.15,C.goldInk,8.8);
 }
 {
 const s=pg(p,4,8,series);head(s,'Hemerdon operating sequence','Processing activity preceded the August public financing announcement','Public chronology establishes sequencing; transaction-level data is needed to assess additional output');
@@ -80,7 +82,7 @@ note(s,'CRMA permit-processing timelines operate under legal triggers and except
 const s=pg(p,6,8,series);head(s,'Japan','Grant decisions target downstream conversion and recycled feedstock','JOGMEC decisions and recipient capacity targets; announced amounts shown in JPY');
 const vals=[7.5,2], names=['Allied Material','Japan New Metals'], scales=['¥7.5bn grant decision','¥2.0bn grant decision'];vals.forEach((v,i)=>{const y=2.62+i*1.48;txt(s,names[i],0.77,y,3.52,0.35,18,C.ink,true);nativeBar(s,4.30,y,6.0,0.49,v,8,C.gold);txt(s,scales[i],10.53,y,1.96,0.45,14,C.ink,true,{align:'right'});});
 line(s,0.75,5.49,12.50,5.49,C.line);small(s,'ALLIED MATERIAL\nPlanned tungsten powder and carbide equipment; approximately 1.5× existing capacity; H1 FY2028 target.',0.80,5.65,5.6,12.7,C.gray);small(s,'JAPAN NEW METALS\nTarget 2,400 tonnes annual APT capacity (WO₃-equivalent); April 2029 schedule.',6.9,5.65,5.56,12.7,C.gray);
-note(s,'A grant decision establishes an award milestone. Cash disbursement, installed equipment and qualified output require separate evidence.',6.66);linkText(s,'JOGMEC awards / Mitsubishi Materials',U.jogmec,0.61,6.91,6.6,0.15,C.goldInk,8.8);
+txt(s,'Recipient investment: ~¥15.9bn',0.80,6.22,5.6,0.22,11.0,C.gray);txt(s,'Recipient investment: ~¥8bn',6.90,6.22,5.6,0.22,11.0,C.gray);note(s,'Grant decisions establish award milestones; payment and installed capacity require separate evidence.',6.66);linkText(s,'JOGMEC decisions',U.jogmec,0.61,6.91,2.05,0.15,C.goldInk,8.8);linkText(s,'Allied Material',U.allied,2.83,6.91,1.85,0.15,C.goldInk,8.8);linkText(s,'Mitsubishi Materials',U.mits,4.85,6.91,2.6,0.15,C.goldInk,8.8);
 }
 {
 const s=pg(p,7,8,series);head(s,'China','The February 2025 tungsten control operates at item level','MOFCOM/GACC Announcement No. 10 · effective 4 February 2025');
@@ -105,13 +107,13 @@ note(s,'USGS historical price proxy; model inputs and assumptions are documented
 const s=pg(p,3,8,series);head(s,'Supply baseline','National import reliance does not establish a buyer’s supplier mix','USGS estimates and historical U.S. antimony import origin, different denominators');
 metric(s,'91%','U.S. net import reliance, 2025 estimate',0.78,2.66,5.0);metric(s,'55%','China share of U.S. metal + oxide import origins, 2021–2024',6.95,2.66,5.35);
 line(s,0.78,4.16,12.5,4.16,C.line);label(s,'Buyer-specific diligence',0.81,4.46,4.1);const q=[['Form + grade','Contained-Sb conversion and specification'],['Traceability','Mine, smelter and refinery location'],['Qualification','Test results, supply independence and acceptance']];q.forEach((v,i)=>{txt(s,v[0],0.83,4.86+i*0.48,3.17,0.29,13,C.ink,true);txt(s,v[1],4.01,4.86+i*0.48,7.91,0.29,13,C.gray)});
-note(s,'EXIM Stibnite authorization ($2.906bn) and an INL processing pilot document industrial development, not buyer-qualified deliveries.');linkText(s,'USGS 2026 · EXIM project register',U.usgs,0.61,6.94,7.1,0.13,C.goldInk,8.8);
+note(s,'EXIM Stibnite authorization ($2.906bn) and an INL processing pilot document industrial development, not buyer-qualified deliveries.');linkText(s,'USGS MCS 2026',U.usgs,0.61,6.94,2.16,0.13,C.goldInk,8.8);linkText(s,'EXIM transaction register',U.exim,2.96,6.94,2.98,0.13,C.goldInk,8.8);linkText(s,'INL pilot',U.inl,6.12,6.94,1.75,0.13,C.goldInk,8.8);
 }
 {
 const s=pg(p,4,8,series);head(s,'Four-strategy comparison','Only the balanced strategy meets both modeled 2030 constraints','Severe eight-month disruption; 100 t/year buyer; cash cap $3m; service tolerance ≤5 t unfilled');
 const names=['Domestic-led','Diversification-led','Inventory-led','Balanced / conditional'],unfilled=[22.125,16.65,0,0],cash=[0.919,1.378,4.134,2.296];
 label(s,'Unfilled antimony-equivalent (t)',0.78,2.40,5.7);names.forEach((n,i)=>{const y=2.83+i*0.86;txt(s,n,0.79,y,2.66,0.34,13.4,C.ink,i===3);nativeBar(s,3.55,y,6.35,0.36,unfilled[i],25,i===3?C.gold:C.dark);txt(s,`${unfilled[i]===0?'0':(Math.round((unfilled[i]+1e-9)*10)/10).toFixed(1)} t`,10.26,y,1.05,0.32,15,C.ink,true,{align:'right'});txt(s,`$${cash[i].toFixed(2)}m stock`,11.32,y,1.23,0.34,11.7,C.gray,false,{align:'right'});});
-line(s,3.55,6.31,9.9,6.31,C.line);txt(s,'Threshold: 5 t',9.78,6.23,2.72,0.2,10,C.gray);note(s,'Inventory-led passes continuity but exceeds the illustrative $3m stock limit; balanced passes both only under specified qualification assumptions.',6.57);linkText(s,'Model register / 2030 comparison',U.evidence,0.61,6.94,6.8,0.13,C.goldInk,8.8);
+const thresholdX=3.55+6.35*(5/25);line(s,thresholdX,2.78,thresholdX,5.80,C.goldInk,1.2);line(s,3.55,6.02,9.9,6.02,C.line);txt(s,'5 t service threshold',thresholdX+0.10,5.98,2.72,0.24,10.4,C.goldInk,true);note(s,'Inventory-led passes continuity but exceeds the illustrative $3m stock limit; balanced passes both only under specified qualification assumptions.',6.57);linkText(s,'Model register / 2030 comparison',U.evidence,0.61,6.94,6.8,0.13,C.goldInk,8.8);
 }
 {
 const s=pg(p,5,8,series);head(s,'Economic trade-off','Five months frees $1.84m of stock cash versus nine months','2030 severe case; annual incremental expense includes sourcing premiums, carry and spot markup');
@@ -134,7 +136,8 @@ note(s,'Each test is a separate modeled shock, not an expected forecast or cumul
 {
 const s=pg(p,8,8,series);head(s,'Execution gates','Procurement, Finance and Legal each control a material assumption','Decision rights before firming purchases, inventory funding or domestic offtake');
 const rows=[['OWNER','VERIFICATION REQUIRED','TRIGGER'],['Procurement + Engineering','Grade, chain of custody, independent refining, delivery tests','Qualify alternative 45% lane'],['Finance','Actual quoted price, carry, storage, working-capital ceiling','Approve five-month reserve'],['Strategy + Legal','Financing close, processing stage, product acceptance, contract remedies','Stage conditional domestic offtake']];table(s,rows,0.75,2.63,11.85,[0.64,0.88,0.88,0.88],[2.65,5.18,4.02],[],13.4);
-small(s,'Sources: USGS MCS 2026; EXIM transaction register; Perpetua 10-Q; Idaho National Laboratory; MOFCOM/GACC announcements; model evidence register (4 Nov 2026).',0.83,6.05,11.69,10.9);
+linkText(s,'USGS MCS 2026',U.usgs,0.83,6.05,1.98,0.16,C.goldInk,9.2);linkText(s,'EXIM register',U.exim,2.82,6.05,1.64,0.16,C.goldInk,9.2);linkText(s,'Perpetua 10-Q',U.sec,4.48,6.05,1.77,0.16,C.goldInk,9.2);linkText(s,'INL pilot',U.inl,6.40,6.05,1.31,0.16,C.goldInk,9.2);linkText(s,'MOFCOM No. 33',U.mofSb,7.91,6.05,2.05,0.16,C.goldInk,9.2);
+linkText(s,'MOFCOM No. 46',U.mof46,0.83,6.28,2.06,0.16,C.goldInk,9.2);linkText(s,'MOFCOM No. 72',U.mof72,3.01,6.28,2.06,0.16,C.goldInk,9.2);linkText(s,'Model evidence register',U.evidence,5.23,6.28,3.25,0.16,C.goldInk,9.2);
 shape(s,0.80,6.55,11.75,0.40,C.dark);txt(s,'ILLUSTRATIVE BUYER CASE  ·  SOURCE CUTOFF 4 NOV 2026  ·  INDEPENDENT SMPT ANALYSIS',1.0,6.59,11.28,0.29,9.6,C.muted,false);linkText(s,'Read case / model',U.a001,0.64,6.94,3.9,0.13,C.goldInk,8.8);
 }
 await p.writeFile({fileName:path.join(OUT,'SMPT_A001_Antimony_Archivo_Candidate.pptx')});}
