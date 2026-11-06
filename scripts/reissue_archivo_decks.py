@@ -46,6 +46,24 @@ def install_archivo() -> None:
     for weight, style in [(400, "Regular"), (500, "Medium"), (600, "SemiBold"), (700, "Bold")]:
         font = TTFont(raw)
         instantiateVariableFont(font, {"wdth": 100, "wght": weight}, inplace=True)
+        # The upstream variable font ships with a SemiBold naming default.
+        # Give every static instance its correct family/style/weight so LO
+        # renders Archivo Regular as Regular, not as the SemiBold default.
+        font["OS/2"].usWeightClass = weight
+        font["OS/2"].fsSelection &= ~((1 << 5) | (1 << 6))
+        if weight == 400:
+            font["OS/2"].fsSelection |= 1 << 6
+        elif weight >= 700:
+            font["OS/2"].fsSelection |= 1 << 5
+        font["head"].macStyle = 1 if weight >= 700 else 0
+        for record in font["name"].names:
+            name = {
+                1: "Archivo", 2: style, 4: "Archivo " + style,
+                6: "Archivo-" + style, 16: "Archivo", 17: style
+            }.get(record.nameID)
+            if name is None:
+                continue
+            record.string = name.encode("utf-16-be" if record.platformID == 3 else "mac_roman")
         font.save(fontdir / ("Archivo-" + style + ".ttf"))
         font.close()
     raw.unlink()
@@ -71,8 +89,8 @@ def rewrite_pptx(pptx: Path) -> dict:
                 if FORBIDDEN_FONT.search(contents):
                     raise RuntimeError("Legacy typeface remains in " + info.filename)
             zo.writestr(info, contents)
-    if replaced < 1:
-        raise RuntimeError("No replaceable font references in " + str(pptx))
+    if replaced < 1 and b'typeface="Archivo"' not in original:
+        raise RuntimeError("No Archivo face or restylable legacy font references in " + str(pptx))
     restyled = output.getvalue()
     with ZipFile(io.BytesIO(original)) as old, ZipFile(io.BytesIO(restyled)) as new:
         if old.namelist() != new.namelist():
@@ -115,6 +133,8 @@ def audit_pdf(before_pdf: bytes, output: Path, expected_pages: int) -> dict:
     fonts = sorted({f[3] for pg in after for f in pg.get_fonts(full=True)})
     if not any("Archivo" in name for name in fonts):
         raise RuntimeError("Archivo was not embedded in exported PDF: " + repr(fonts))
+    if all("SemiBold" in name for name in fonts):
+        raise RuntimeError("Regular type is incorrectly exported as SemiBold: " + repr(fonts))
     # Exports may vary in whitespace/line breaks but must preserve almost all text.
     old_text = [re.sub(r"\s+", "", pg.get_text()) for pg in before]
     new_text = [re.sub(r"\s+", "", pg.get_text()) for pg in after]
