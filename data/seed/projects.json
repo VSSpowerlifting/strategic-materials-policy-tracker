@@ -838,9 +838,18 @@
         "evidence": "explicit",
         "locator": "Opening paragraphs and transaction details",
         "note": null
+      },
+      {
+        "sourceId": "src-ca-genm-marathon-construction-2026",
+        "supports": [
+          "stages"
+        ],
+        "evidence": "explicit",
+        "locator": "Issuer statement of construction commencement and Early Works Program",
+        "note": "Construction-phase early works were underway by the 1 October 2026 publication date; this does not establish production, commissioning or a specific exact first-work date."
       }
     ],
-    "notes": "Shovel-ready and fully permitted does not mean construction has begun."
+    "notes": "At the initial 14 September 2026 financing announcement Marathon was described as fully permitted and shovel-ready. Generation Mining subsequently reported early construction work had commenced by 1 October 2026, including site access, clearing and water-management preparations. This is a documented construction-phase project milestone, separate from a commercial production date."
   },
   {
     "id": "prj-ca-nmg-matawinie",
