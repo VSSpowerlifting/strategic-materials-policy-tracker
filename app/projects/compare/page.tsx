@@ -14,7 +14,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Compare project evidence",
   description:
-    "Compare two registered strategic-material projects by their stated materials, sponsors, financing relationships, source citations and publicly reviewed milestones—without treating support as output.",
+    "Compare two registered strategic-material projects by their stated materials, sponsors, financing relationships, source citations and publicly reviewed milestones—with finance and physical milestones evaluated separately.",
 };
 
 export default function ProjectComparisonPage() {
@@ -30,12 +30,12 @@ export default function ProjectComparisonPage() {
       ← Project directory
     </Link>
     <PageHeading index="04" eyebrow="Capital intelligence" title="Compare project evidence"
-      lead="Place two registered undertakings side by side. Compare the facts actually recorded—sponsors, materials, locations, financing relationships, project citations and reviewed physical milestones—without mistaking a financial commitment, project association or designation for delivered industrial capacity." />
+      lead="Place two registered undertakings side by side. Compare the facts actually recorded—sponsors, materials, locations, financing relationships, project citations and reviewed physical milestones—with financing and delivered industrial capacity documented through distinct sources." />
     <div className="mt-8">
       <ProjectComparison rows={rows} materialNames={materialNames} revision={site.lastUpdated} />
     </div>
     <p className="mt-8 max-w-prose text-sm leading-7 text-muted">
-      This is a comparison of curated published records, not an exhaustive project census,
+      This comparison draws on the published SMPT project register,
       a causal policy evaluation or a dollar ranking. Open the linked project, financial and
       source records to check what each original publisher establishes.{" "}
       <Link href="/methodology" className="text-accent hover:underline">Read the methodology.</Link>

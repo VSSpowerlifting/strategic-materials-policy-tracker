@@ -20,5 +20,5 @@ test("project API exposes associated financing separately, without changing stac
 test("capital detail links shared projects with explicit unallocated explanation", () => {
   const source = readFileSync(resolve(process.cwd(), "app/capital/[id]/page.tsx"), "utf8");
   assert.match(source, /c\.associatedProjectIds\.map/);
-  assert.match(source, /do not allocate the amount/);
+  assert.match(source, /associated with several projects and remains outside each individual capital stack/);
 });

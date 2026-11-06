@@ -32,14 +32,13 @@ import {
   valueQualifierLabels,
   valueRoleLabels,
 } from "@/lib/labels";
-import { site } from "@/lib/site";
 import { FINANCIAL_STATUSES, JURISDICTIONS } from "@/lib/types";
 import type { ValueQualifier } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Capital",
   description:
-    "Source-verified public money in strategic-material supply chains: equity, loans, grants, tax credits, price floors, offtake and stockpile funding, by provider, recipient, stage, material and status — in original currencies, with parent envelopes and child awards never double-counted.",
+    "Source-verified public money in strategic-material supply chains: equity, loans, grants, tax credits, price floors, offtake and stockpile funding, by provider, recipient, stage, material and status — in original currencies, with package-and-award overlap reconciled.",
 };
 
 const QUALIFIER_ORDER: ValueQualifier[] = ["exact", "approximately", "at_least", "up_to"];
@@ -70,15 +69,11 @@ export default function CapitalPage() {
     <Container className="py-12">
       <PageHeading
         index="01"
-        eyebrow="Money as policy"
         title="Capital"
         lead={
           <>
-            How governments put money, ownership and purchase guarantees behind strategic-material supply chains.
-            Each row is one instrument from an official source or binding filing, in the currency the source uses.
-            Programme envelopes, unexercised funding options and private capital are listed apart from money committed to a
-            recipient, and never summed; a commitment stated &ldquo;up to&rdquo; is added only to others stated the same way.
-            A part is never counted alongside the package it belongs to.
+            Public financing, investment and purchase guarantees for strategic-material supply chains.
+            Amounts and legal status follow the cited records.
           </>
         }
       />
@@ -102,8 +97,8 @@ export default function CapitalPage() {
       <div className="mt-14 space-y-14">
         <Section
           index="01"
-          title="Public commitments to recipients, binding and not yet binding"
-          description="Rows with the value role “commitment” and public or public-enterprise capital. Summed per currency and per instrument, never across either; parts of a counted package are left out; money under a binding agreement is shown apart from money announced, decided or conditionally committed; figures stated “up to”, “about” or “at least” are added only to figures stated the same way, within one currency and instrument, and shown apart from exact figures (an “up to” sum adds stated upper bounds; it is not an amount paid); withdrawn or lapsed commitments are left out."
+          title="Public commitments"
+          description="Grouped by currency, instrument, amount qualifier and legal status. Parent and child amounts are counted once."
         >
           <div className="grid gap-4 lg:grid-cols-3">
             {totals.currencies.map((t) => {
@@ -118,7 +113,7 @@ export default function CapitalPage() {
                       <Link href={`/capital/${t.overlap.a}`} className="text-accent hover:text-accent-strong">{t.overlap.a}</Link> and{" "}
                       <Link href={`/capital/${t.overlap.b}`} className="text-accent hover:text-accent-strong">{t.overlap.b}</Link> both
                       contain <Link href={`/capital/${t.overlap.shared}`} className="text-accent hover:text-accent-strong">{t.overlap.shared}</Link>,
-                      so adding them would double-count. The rows are listed below without a sum.
+                      and share a component. The rows appear separately from aggregated totals to prevent double counting.
                     </p>
                   ) : (
                     <div className="mt-2 divide-y divide-border/60">
@@ -127,12 +122,12 @@ export default function CapitalPage() {
                           <p className="font-display text-sm font-semibold">{financialInstrumentLabels[inst.instrument]}</p>
                           {!inst.summed ? (
                             <p className="font-mono text-[11px] leading-5 text-faint">
-                              Listed below, not summed: {inst.reason === "several_instruments" ? "each row combines instruments without a split" : "the sources name no instrument the tracker's vocabulary covers"}.
+                              Listed separately: {inst.reason === "several_instruments" ? "instrument types are bundled without an identified split" : "the source leaves the instrument category unspecified"}.
                             </p>
                           ) : null}
                           {(inst.summed
                             ? ([
-                                ["Binding", "contracted, partly or fully paid", inst.binding],
+                                ["Binding", "contracted, partially disbursed or disbursed; payment tracked separately", inst.binding],
                                 ["Not yet binding", "announced, authorized, allocated or decided, incl. conditional", inst.notYetBinding],
                               ] as const)
                             : []
@@ -195,7 +190,7 @@ export default function CapitalPage() {
                   </ul>
                   {t.nestedIds.length ? (
                     <p className="mt-3 text-xs leading-5 text-faint">
-                      Not added again: {t.nestedIds.length} part{t.nestedIds.length === 1 ? "" : "s"} of a counted package (
+                      Included in the package above: {t.nestedIds.length} part{t.nestedIds.length === 1 ? "" : "s"} of a counted package (
                       {t.nestedIds.map((id, i) => (
                         <span key={id}>
                           {i ? ", " : ""}
@@ -212,13 +207,8 @@ export default function CapitalPage() {
             })}
           </div>
           <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
-            Totals are never converted between currencies, never added across instruments or value roles. Within one currency and instrument, figures stated &ldquo;up to&rdquo;, &ldquo;about&rdquo; or &ldquo;at least&rdquo; are added only to others stated the same way; an &ldquo;up to&rdquo; figure is a sum of stated upper bounds, not an amount paid. A paler bar marks any such figure.
-            {" "}
-            {totals.unquantifiedIds.length} public commitments state no amount at all — a price floor, an offtake, a tax offset, a procurement right — and are listed below rather than valued.
-            {" "}Binding means an agreement is executed: contracted, partially disbursed and disbursed rows are binding, while payment is tracked separately. A contracted row need not mean funds are obligated or paid, and a partially disbursed row is not fully paid. Every earlier stage the source states, including conditional loan commitments, is shown as not yet binding. A non-binding letter of intent or interest is not a commitment at all: it is an indication, listed below apart from public support and never summed. A commitment whose source states no status is neither: it is listed, not summed
-            {totals.statusNotStatedIds.length ? ` (${totals.statusNotStatedIds.length} now)` : ""}, and a withdrawn or lapsed one is listed as ended
-            {totals.endedIds.length ? ` (${totals.endedIds.length} now)` : ""} and never summed.
-            {" "}See the <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">counting rules</Link>.
+            Amounts stated &ldquo;up to&rdquo; are ceilings; payments are tracked separately.
+            Commitments with unstated amounts or status, along with ended commitments, appear in separate rows. <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">Counting rules</Link>.
           </p>
           <div className="mt-6 overflow-x-auto rounded-lg border">
             <table className="w-full min-w-[36rem] border-collapse text-sm">
@@ -227,7 +217,7 @@ export default function CapitalPage() {
                 <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
                   <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · “up to”, “about” and “at least” figures in separate buckets</th>
-                  <th scope="col" className="px-3 py-2 text-right font-normal">Rows without a sum (no amount, no status, or ended)</th>
+                  <th scope="col" className="px-3 py-2 text-right font-normal">Unaggregated rows (amount/status unstated or ended)</th>
                 </tr>
               </thead>
               <tbody>
@@ -252,7 +242,7 @@ export default function CapitalPage() {
                                         ? `${financialInstrumentLabels[i.instrument].toLowerCase()} ${QUALIFIER_ORDER.filter((q) => i.byQualifier[q])
                                             .map((q) => `${q === "exact" ? "" : `${valueQualifierLabels[q].toLowerCase()} `}${formatDecimalCompact(i.byQualifier[q]!)}`)
                                             .join(" and ")}`
-                                        : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed, not summed`,
+                                        : `${financialInstrumentLabels[i.instrument].toLowerCase()}: ${i.countedIds.length} row${i.countedIds.length === 1 ? "" : "s"} listed separately`,
                                     )
                                     .join("; ")}
                             </span>
@@ -268,7 +258,7 @@ export default function CapitalPage() {
                     </td>
                     <td
                       className="tnum px-3 py-3 text-right font-mono text-xs text-muted"
-                      title={`${t.unquantifiedIds.length} no amount · ${t.statusNotStatedIds.length} no status stated · ${t.endedIds.length} ended`}
+                      title={`${t.unquantifiedIds.length} amount unstated · ${t.statusNotStatedIds.length} status unstated · ${t.endedIds.length} ended`}
                     >
                       {t.unquantifiedIds.length + t.statusNotStatedIds.length + t.endedIds.length || "—"}
                     </td>
@@ -283,7 +273,7 @@ export default function CapitalPage() {
           <Section
             index="02"
             title="Funding options under executed agreements"
-            description="A ceiling a recipient may call on at its own election. The agreement is signed, but an option is not committed money until it is exercised, so it is listed here and never added to the totals above. An exercise would be recorded as its own commitment."
+            description="Optional funding under signed agreements, listed separately from exercised commitments."
           >
             <div className="space-y-4">
               {options.map((c) => {
@@ -314,8 +304,8 @@ export default function CapitalPage() {
 
         <Section
           index={options.length ? "03" : "02"}
-          title="Instruments that carry terms, not a sum"
-          description="Price floors, offtake, tax offsets and procurement rights change incentives without a stated total. Their operative terms are the finding."
+          title="Other financial instruments"
+          description="Price floors, offtake, tax offsets and procurement rights, recorded by their terms."
         >
           <div className="grid gap-4 md:grid-cols-2">
             {unquantified.map((c) => (
@@ -339,7 +329,7 @@ export default function CapitalPage() {
         <Section
           index={options.length ? "04" : "03"}
           title="Envelopes, appropriations and lending authorities"
-          description="Ceilings that awards are drawn from. Listed, never summed: two envelopes can share a drawdown, and an envelope is not money committed to anyone."
+          description="Programme ceilings and appropriations, separate from recipient commitments."
         >
           <Card className="overflow-hidden">
             {envelopes.map((c) => (
@@ -350,8 +340,8 @@ export default function CapitalPage() {
 
         <Section
           index={options.length ? "05" : "04"}
-          title="Kept apart from public support"
-          description="Private financing, a recipient's own funds, money governments expect others to invest, non-binding letters of intent or interest (indications, not commitments), joint vehicles whose public share is not stated, and rows whose capital source the source does not state."
+          title="Other financing"
+          description="Private capital, recipient funds, indications and financing with an unstated public share."
         >
           <Card className="overflow-hidden">
             {nonPublic.map((c) => (
@@ -365,13 +355,13 @@ export default function CapitalPage() {
 
         <Section
           index={options.length ? "06" : "05"}
-          title="Where the money is aimed"
-          description="Financial rows by providing actor and supply-chain stage. Counts of records, not of money."
+          title="Finance by production stage"
+          description="Financial records by government and supply-chain stage."
         >
           <StageMatrix rows={all} />
         </Section>
 
-        <Section index={options.length ? "07" : "06"} title="All financial rows" description={`Every row, filterable. Data as of ${site.lastUpdated}.`}>
+        <Section index={options.length ? "07" : "06"} title="All financial records">
           <CapitalExplorer rows={summaries} materialNames={materialNames} />
           <p className="mt-4 text-sm text-muted">
             Download:{" "}

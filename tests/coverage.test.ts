@@ -158,5 +158,5 @@ test("coverage page discloses the citation denominator, interpretation and exact
   assert.match(page,/s\.citedSources\.count/);
   assert.match(page,/s\.citedSources\.of/);
   assert.match(page,/\/sources\?citingKind=not_cited/);
-  assert.match(page,/not a measure of independent corroboration/);
+  assert.match(page,/separate from independent corroboration/);
 });

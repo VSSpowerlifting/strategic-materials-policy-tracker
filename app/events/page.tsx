@@ -21,9 +21,8 @@ export default function EventsPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        eyebrow="Explore"
-        title="Explore policy evidence"
-        lead="Start with a material or government. Open a measure to distinguish its official rationale, legal standing and source-linked instruments. The list reflects this corpus, not all government activity."
+        title="Policy events"
+        lead="Search government measures by material, jurisdiction, instrument and status."
       />
       <nav aria-label="Explore record types" className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-display text-sm">
         <span aria-current="page" className="font-semibold text-foreground">Policy events</span>

@@ -146,7 +146,7 @@ export function SiteHeader() {
               className="hidden h-9 w-48 items-center gap-2 rounded-md border border-border-strong bg-card/60 px-3 font-display text-sm text-muted transition-colors hover:border-accent/50 hover:text-foreground xl:flex"
             >
               <SearchIcon />
-              <span className="flex-1">Search the record</span>
+              <span className="flex-1">Search</span>
               <kbd className="rounded border border-border-strong px-1.5 font-mono text-[10px] text-faint">/</kbd>
             </Link>
             <Link
@@ -233,8 +233,7 @@ export function SiteHeader() {
                   <li key={j.href}>
                     <Link href={j.href} onClick={closeMenu} aria-current={ariaCurrent(pathname, j.href, current)} className="block py-3">
                       <span className={cn("block font-display text-base text-foreground", current && "font-semibold text-accent")}>{j.label}</span>
-                      <span className="mt-0.5 block text-sm leading-5 text-muted">{j.question}</span>
-                    </Link>
+                                          </Link>
                   </li>
                 );
               })}
@@ -243,7 +242,7 @@ export function SiteHeader() {
               <Link href="/research" onClick={closeMenu} aria-current={isActive(pathname, "/research") ? "page" : undefined} className="font-semibold text-foreground hover:text-accent">Research</Link>
               <Link href="/search" onClick={closeMenu} className="text-muted hover:text-foreground">Search</Link>
               <Link href="/saved" onClick={closeMenu} className="text-muted hover:text-foreground">Saved</Link>
-              <Link href="/about" onClick={closeMenu} className="text-muted hover:text-foreground">About Benjamin Yang</Link>
+              <Link href="/about" onClick={closeMenu} className="text-muted hover:text-foreground">About</Link>
               <RecordAsOf className="w-full" />
             </div>
           </Container>

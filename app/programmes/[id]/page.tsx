@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!g) return { title: "Programme not found" };
   return {
     title: `${g.name} — ${programmeKindLabels[g.kind]}`,
-    description: `The ceilings of ${g.name} and the awards recorded under it, in original currencies, never divided into a utilisation rate.`,
+    description: `The ceilings of ${g.name} and the awards recorded under it, shown separately in their original currencies.`,
   };
 }
 
@@ -70,7 +70,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
         <div className="min-w-0 space-y-12">
           <ProgrammeResearchTrail trail={trail} />
           {l.envelopes.length ? (
-            <Section index={next()} title="Ceilings" description="Envelopes, appropriations and lending authorities. Listed, never summed, and never divided into the awards below.">
+            <Section index={next()} title="Ceilings" description="Envelopes, appropriations and lending authority are listed separately from recipient awards.">
               <Card className="overflow-hidden">
                 {l.envelopes.map((c) => <CommitmentRow key={c.id} c={summarizeCommitment(c)} />)}
               </Card>
@@ -80,7 +80,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
           <Section
             index={next()}
             title="Awards recorded under the programme"
-            description="Committed public money the corpus records under this programme or one beneath it, summed per currency; a part is not added to its package. What the corpus records, not the programme's spend."
+            description="Recorded public commitments under this programme or its children, summed by currency after reconciling package components. Actual programme expenditure requires separate payment evidence."
           >
             {l.recordedAwards ? (
               <>
@@ -101,7 +101,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
           ) : null}
 
           {l.designations.length ? (
-            <Section index={next()} title="Projects recognized" description="Standing, not money; never counted as capital.">
+            <Section index={next()} title="Projects recognized" description="Recognition standing is recorded separately from financial support.">
               <Card className="overflow-hidden">
                 {l.designations.map((d) => <DesignationRow key={d.id} d={d} showProject />)}
               </Card>

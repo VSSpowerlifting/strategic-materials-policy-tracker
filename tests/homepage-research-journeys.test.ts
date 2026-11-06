@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import Home from "../app/page";
@@ -40,41 +40,53 @@ const resolves = (href: string) => {
   return existsSync(`app/${section}/${dir}/page.tsx`) && (section === "materials" || Boolean(lookups[section]?.(id)));
 };
 
-test("all three worked cases are present and complete", () => {
-  assert.ok(getLegalControlCase(), "legal-control case records exist");
-  assert.equal(getFinancingCase().length, 3, "all three financing rows resolve");
-  assert.equal(getTungstenCase().length, 4, "all four tungsten records resolve");
-  for (const id of ["case-legal-heading", "case-finance-heading", "case-tungsten-heading"])
-    assert.ok(view.includes(`id="${id}"`), id);
+test("the three evidence examples use complete source-backed case records", () => {
+  const legal = getLegalControlCase();
+  const financing = getFinancingCase();
+  const tungsten = getTungstenCase();
+  assert.ok(legal, "legal-control case records exist");
+  assert.equal(financing.length, 3, "all three finance statuses remain available in the underlying research case");
+  assert.equal(tungsten.length, 4, "the four cross-jurisdiction tungsten records remain available");
+  assert.match(view, /id="examples"/);
+  for (const title of ["Legal controls", "Public financing", "Tungsten comparison"])
+    assert.ok(view.includes(title), title);
+  assert.ok(view.includes(`href="/controls/${legal.control.id}"`));
+  assert.ok(view.includes(`href="/capital/${financing[0].commitment.id}"`));
+  assert.ok(view.includes(`href="${tungsten[0].href}"`));
 });
 
-test("every record link in the worked cases opens a published record", () => {
-  const cases = view.slice(view.indexOf('id="cases"'), view.indexOf('id="start"'));
-  const hrefs = [...cases.matchAll(/href="(\/(?:events|controls|capital|projects|sources|materials)\/[^"?#]+)"/g)].map((m) => m[1]);
-  assert.ok(hrefs.length >= 15, `found ${hrefs.length} record links`);
+test("every source-linked homepage example opens a published record", () => {
+  const start = view.indexOf('id="examples"');
+  const end = view.indexOf('id="browse"');
+  assert.ok(start !== -1 && end > start, "the examples section precedes the interactive data browser");
+  const examples = view.slice(start, end);
+  const hrefs = [...examples.matchAll(new RegExp('href="(/(?:events|controls|capital|projects|sources|materials)/[^"?#]+)"', "g"))].map((m) => m[1]);
+  assert.ok(hrefs.length >= 5, `found ${hrefs.length} published record links`);
   for (const href of hrefs) assert.ok(resolves(href), `${href} does not resolve`);
 });
 
-test("statuses on the page are the derived labels, read as of the revision", () => {
+test("the compact homepage examples display as-of-revision status and amount labels", () => {
   const legal = getLegalControlCase()!;
+  const financing = getFinancingCase();
+  const tungsten = getTungstenCase();
   assert.ok(view.includes(escape(legal.status.label)));
-  assert.ok(view.includes(escape(legal.later.status.label.toLowerCase())));
-  assert.ok(legal.later.status.until, "the paused clause carries an end date");
-  assert.ok(view.includes(`dateTime="${legal.later.status.until}"`));
-  for (const row of getFinancingCase()) {
-    assert.ok(view.includes(escape(row.status.definition)), row.commitment.id);
-    assert.ok(view.includes(escape(row.payment)), row.commitment.id);
-    assert.ok(view.includes(escape(row.amount.asStated)), row.commitment.id);
-  }
-  // Three different points between announcement and payment, not three of the same.
-  assert.equal(new Set(getFinancingCase().map((r) => r.status.key)).size, 3);
-  for (const entry of getTungstenCase()) assert.ok(view.includes(escape(entry.status)), entry.id);
+  assert.ok(legal.later.status.until, "the paused clause retains its documented expiry");
+  assert.ok(view.includes(escape(financing[0].status.label)));
+  assert.ok(view.includes(escape(financing[0].amount.currency)));
+  assert.ok(view.includes(escape(String(financing[0].amount.value))));
+  assert.ok(view.includes(escape(tungsten[0].status)));
+  assert.equal(new Set(financing.map((r) => r.status.key)).size, 3);
+  for (const row of financing)
+    assert.equal(row.status.key, financialStatusOn(row.commitment, site.lastUpdated), row.commitment.id);
 });
 
-test("original-language text is marked with its language and not translated", () => {
+test("the legal example links to the clause that retains and labels original-language scope", () => {
   const legal = getLegalControlCase()!;
-  assert.ok(view.includes(`lang="zh"`));
-  assert.ok(view.includes(escape(legal.control.productScopeAsStated!)));
+  assert.ok(legal.control.productScopeAsStated, "original legal product scope exists");
+  assert.ok(view.includes(`href="/controls/${legal.control.id}"`));
+  const detail = readFileSync("app/controls/[id]/page.tsx", "utf8");
+  assert.ok(detail.includes('lang={hasCjk(m.productScopeAsStated) ? "zh" : "en"}'));
+  assert.ok(detail.includes("{m.productScopeAsStated}"));
 });
 
 test("the page shows no money totals and keeps the four qualified coverage counts", () => {
@@ -119,14 +131,14 @@ test("case statuses are read as of the revision date, so a later entry cannot ap
   assert.equal(designationStatusOn(laterDsg, site.lastUpdated), dsg.statusHistory[0].status);
 });
 
-test("the opening runs hero, material tiles, supply-chain strip, then the worked cases", () => {
+test("the opening leads from corpus and materials to the supply chain, research, and evidence examples", () => {
+  const corpus = view.indexOf("Current corpus");
   const tiles = view.indexOf('aria-label="Materials in scope"');
   const strip = view.indexOf('id="chain-heading"');
-  const cases = view.indexOf('id="cases"');
-  assert.ok(view.indexOf('id="scope-heading"') < tiles);
-  assert.ok(tiles < strip);
-  assert.ok(strip < cases);
-  assert.ok(cases < view.indexOf('id="start"'));
-  // One strip only: responsive layout comes from CSS, not a second copy.
+  const research = view.indexOf('id="research"');
+  const examples = view.indexOf('id="examples"');
+  const browser = view.indexOf('id="browse"');
+  assert.ok(corpus !== -1 && corpus < tiles);
+  assert.ok(tiles < strip && strip < research && research < examples && examples < browser);
   assert.equal(view.split('id="chain-heading"').length, 2);
 });

@@ -122,11 +122,11 @@ export default function TungstenResearchDossier() {
     <div data-flush-footer>
       <section className="border-b border-border-strong">
         <Container width="wide" className="py-12 sm:py-20">
-          <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">Research / Dossier 001</Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Strategic Materials Policy Tracker · Original research</p>
+          <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">← Research</Link>
+          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Research Dossier 001</p>
           <h1 className="mt-4 max-w-4xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">Tungsten Supply Security</h1>
-          <p className="mt-5 max-w-3xl font-display text-xl leading-8 text-muted sm:text-2xl">How policy instruments translate into financing, industrial development and commercial supply</p>
-          <p className="mt-7 font-display text-sm text-muted">By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link> · Research Dossier 001 · Research cutoff <time dateTime="2026-11-03">3 November 2026</time></p>
+          <p className="mt-5 max-w-3xl font-display text-xl leading-8 text-muted sm:text-2xl">Policy, financing and industrial development across China, the EU, the UK and Japan.</p>
+          <p className="mt-7 font-display text-sm text-muted">By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link> · Research cutoff <time dateTime="2026-11-03">3 November 2026</time></p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={downloads[0].href} className="research-button" download>Download the full dossier (PDF)</a>
             <a href={downloads[1].href} className="research-button-secondary" download>Executive memo (PDF)</a>
@@ -143,7 +143,7 @@ export default function TungstenResearchDossier() {
                 ))}
               </div>
               <section aria-labelledby="comparison-heading" className="border-b border-paper-border py-10">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Comparative findings</p>
+                
                 <h2 id="comparison-heading" className="mt-3 font-display text-xl font-bold tracking-tight sm:text-2xl">Policy instruments and recorded implementation</h2>
                 <div className="mt-5 overflow-x-auto border-y border-paper-border">
                   <table className="w-full min-w-[560px] border-collapse text-left font-display text-sm leading-6">
@@ -167,9 +167,9 @@ export default function TungstenResearchDossier() {
                   </table>
                 </div>
               </section>
-              {sections.map((section, i) => (
+              {sections.map((section) => (
                 <section key={section.id} id={section.id} aria-labelledby={`${section.id}-heading`} className="scroll-mt-28 border-b border-paper-border py-10 sm:py-12">
-                  <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-paper-accent">Finding {String(i + 1).padStart(2, "0")}</p>
+                  
                   <h2 id={`${section.id}-heading`} className="mt-3 font-display text-[1.8rem] font-medium leading-[1.2] tracking-tight sm:text-[2.1rem]">{section.heading}</h2>
                   <div className="mt-6 space-y-5 xl:columns-2 xl:gap-9">
                     {section.paragraphs.map((paragraph) => (
@@ -206,14 +206,14 @@ export default function TungstenResearchDossier() {
                 </ol>
               </nav>
               <div className="mt-10 border-t border-paper-border pt-5">
-                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Download & reuse</h2>
+                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Files</h2>
                 <ul className="mt-3 space-y-3 font-display text-sm">
                   {downloads.map((file) => (
                     <li key={file.href}><a href={file.href} download className="font-semibold text-paper-accent underline decoration-2 underline-offset-4 hover:text-paper-foreground">{file.label}</a><span className="block text-xs text-paper-muted">{file.detail}</span></li>
                   ))}
                 </ul>
               </div>
-              <p className="mt-8 font-display text-xs leading-5 text-paper-muted">Research Dossier 001 · Benjamin Yang · 3 November 2026 source cutoff</p>
+              
             </aside>
           </div>
         </Container>

@@ -21,7 +21,7 @@ export default function ActorsPage() {
         index="01"
         eyebrow="Jurisdictions"
         title="Actors"
-        lead="Compare tracked governments and jurisdictions by their documented supply-chain positions, policy instruments and stated rationales. Coverage differs by actor; a smaller record count does not mean less policy activity."
+        lead="Compare tracked governments and jurisdictions by their documented supply-chain positions, policy instruments and stated rationales. Record counts reflect SMPT’s coverage, which varies by jurisdiction."
       />
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {jurisdictions.map((j) => (
