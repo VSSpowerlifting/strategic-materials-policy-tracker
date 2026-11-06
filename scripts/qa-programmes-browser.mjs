@@ -27,8 +27,8 @@ try{
   await page.goto(origin+"/programmes",{waitUntil:"networkidle"});
   assert.equal(await page.locator("h1").innerText(),"Programmes");
   const total=await page.getByTestId("programme-record").count();
-  assert.equal(total,13);
-  assert.equal(await page.getByTestId("programme-result-count").innerText(),"13");
+  assert.equal(total,14);
+  assert.equal(await page.getByTestId("programme-result-count").innerText(),"14");
   await page.locator("#programmes-kind").selectOption("tax_incentive");
   await page.waitForFunction(()=>new URLSearchParams(location.search).get("kind")==="tax_incentive");
   assert.equal(await page.getByTestId("programme-record").count(),1);
@@ -46,7 +46,7 @@ try{
  await page.goto(origin+"/programmes?evidence=designation",{waitUntil:"networkidle"});
  assert.equal(await page.locator("#programmes-evidence").inputValue(),"designation");
  const count=await page.getByTestId("programme-record").count();
- assert.ok(count>0&&count<13);
+ assert.ok(count>0&&count<14);
  assert.ok((await page.getByTestId("programme-record").allTextContents())
   .every(text=>/\d+ designation/.test(text)));
  await page.locator("#programmes-query").fill("no-such-programme-in-world-1999");
@@ -58,6 +58,6 @@ try{
  await page.keyboard.press("Enter");
  await page.waitForURL(/\/programmes\/prg-ca-cmrdd$/);
  assert.ok((await page.locator("h1").innerText()).includes("Critical Minerals Research"));
- console.log("Programme explorer: 13 static entries, honest scheme roles, shareable filters, keyboard detail navigation, mobile/tablet/desktop succeeded.");
+ console.log("Programme explorer: 14 static entries, honest scheme roles, shareable filters, keyboard detail navigation, mobile/tablet/desktop succeeded.");
  await page.close();
 }finally{if(browser)await browser.close();server.kill("SIGTERM")}

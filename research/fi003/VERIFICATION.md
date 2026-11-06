@@ -66,6 +66,7 @@ Initial dry-run checks caught a wrong programme field name, missing reverse even
 | `npm run lint` | **0 errors, 27 pre-existing warnings** |
 | `npm run build` and subsequent `npm run typecheck` | Passed |
 | Local production browser / output QA | Four affected finance records, Texas event and 10X project at **375px and 1440px**; no horizontal overflow; original source links present; representative TSIF screenshots inspected |
+| Full organization/programme Chromium QA | Passed directory counts, shareable filters, empty states, keyboard detail navigation and mobile/tablet/desktop at 375/768/1440px; secondary navigation at 1360px. Only stale count expectations changed in those two scripts |
 | Local API/export/sitemap QA | Finance APIs retain roles/statuses/amounts; JSON/CSV include admitted records; sitemap includes Texas event; no FI003 private candidate IDs or reviewer payload leakage |
 | Complete diff / generated-output inspection and `git diff --check` | Completed; no unrelated seed reordering or serialization changes retained |
 
