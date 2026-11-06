@@ -139,8 +139,7 @@ export default function FramingPage() {
         <Link href="/methodology#labels" className="font-display text-accent hover:text-accent-strong">
           methodology page
         </Link>
-        . Framing that has not yet been anchored to a verified quote is left
-        uncoded rather than guessed.
+        . A framing category is assigned after its supporting quotation is verified.
       </p>
     </Container>
   );
