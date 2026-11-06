@@ -19,7 +19,7 @@ const downloads = [
     file: "smpt-financial-commitments.csv",
     href: "/api/export/financial-commitments.csv",
     fmt: "CSV",
-    desc: "One row per financial instrument: value role, capital source, amount in the source's currency with its qualifier and wording, provider, recipient, stages, materials, parent links and current status. Never converted or summed.",
+    desc: "One row per financial instrument: value role, capital source, amount in the source's currency with its qualifier and wording, provider, recipient, stages, materials, parent links and current status. Amounts retain their source currency and instrument classification.",
   },
   {
     file: "smpt-control-measures.csv",
@@ -37,7 +37,7 @@ const downloads = [
     file: "smpt-projects.csv",
     href: "/api/export/projects.csv",
     fmt: "CSV",
-    desc: "One row per physical project: sponsors, stated location, stages, materials, and the financial rows and designations that point to it. No money is stored on a project.",
+    desc: "One row per physical project: sponsors, stated location, stages, materials, and the financial rows and designations that point to it. Financial amounts remain in the linked instruments.",
   },
   {
     file: "smpt-programmes.csv",
@@ -49,13 +49,13 @@ const downloads = [
     file: "smpt-project-milestones.json",
     href: "/api/v1/project-milestones",
     fmt: "JSON",
-    desc: "The public human-reviewed industrial milestone register, retaining named-facility scope, original publisher statement, pinpoint, event or target date, and real reviewer attribution. Source review is not proof of facility operation or government disbursement.",
+    desc: "The public human-reviewed industrial milestone register, retaining named-facility scope, original publisher statement, pinpoint, event or target date, and real reviewer attribution. Facility operations and disbursements require their own supporting records.",
   },
   {
     file: "smpt-project-designations.csv",
     href: "/api/export/project-designations.csv",
     fmt: "CSV",
-    desc: "One row per project recognized under a designation scheme, such as an EU strategic project: the scheme, project, holders, location, stages, materials and current status. Standing, not money.",
+    desc: "One row per project recognized under a designation scheme, such as an EU strategic project: the scheme, project, holders, location, stages, materials and current status. Designation status is recorded separately from financing.",
   },
   {
     file: "smpt-financial-status-history.csv",
@@ -166,7 +166,7 @@ export default function DataPage() {
           double-count-safe totals and status counts behind the Capital and Controls pages, and{" "}
           <code className="font-mono text-sm">capital-intelligence/summary</code>: portfolios, capital stacks, programme
           ledgers, co-investment, flows and the stage response map. Totals are per currency and per value role, with
-          statuses evaluated on the data&apos;s as-of date; no endpoint returns a ratio, share or cross-currency figure.
+          statuses evaluated on the data&apos;s as-of date; API outputs retain separate currencies and value roles.
         </p>
       </div>
 
@@ -176,11 +176,11 @@ export default function DataPage() {
         </h2>
         <p>
           The data is provided as-is for research and journalism. Categorical
-          labels are interpretive judgements anchored to the cited sources, not
-          legal determinations. Quotations are reproduced from the linked
+          labels are research classifications grounded in the cited sources.
+          Formal legal determinations require qualified legal assessment. Quotations are reproduced from the linked
           originals under fair-use for commentary; please cite the original
-          publisher as well as this database. This is not legal or compliance
-          advice.
+          publisher as well as this database. Use the underlying official publications and qualified counsel for legal
+          or compliance decisions.
         </p>
       </div>
     </Container>
