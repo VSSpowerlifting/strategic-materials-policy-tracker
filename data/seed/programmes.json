@@ -453,5 +453,31 @@
       }
     ],
     "notes": "EXIM is the public lender; the reserve is described as independently governed. Its actual operating administrator is not verified."
+  },
+  {
+    "id": "prg-us-texas-semiconductor-innovation-fund",
+    "name": "Texas Semiconductor Innovation Fund",
+    "nameOriginal": null,
+    "kind": "grant_programme",
+    "actor": "us",
+    "administeringOrgIds": [
+      "org-us-texas-chips-office"
+    ],
+    "parentProgrammeId": null,
+    "evidence": [
+      {
+        "sourceId": "src-texas-mp-northlake-2026",
+        "supports": [
+          "name",
+          "kind",
+          "administrators"
+        ],
+        "evidence": "explicit",
+        "locator": "First and closing paragraphs",
+        "note": null
+      }
+    ],
+    "notes": "TSIF provides semiconductor-related grants and is the programme behind the Northlake manufacturing award.",
+    "legalAuthorityAsStated": null
   }
 ]

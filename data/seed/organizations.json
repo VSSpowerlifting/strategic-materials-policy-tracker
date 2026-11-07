@@ -391,6 +391,29 @@
     "notes": null
   },
   {
+    "id": "org-bank-of-america-na",
+    "name": "Bank of America, N.A.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "bank",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-mp-credit-agreement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Lender/L-C issuer signature",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-br-bndes",
     "name": "Banco Nacional de Desenvolvimento Econômico e Social (BNDES)",
     "nameOriginal": "Banco Nacional de Desenvolvimento Econômico e Social",
@@ -744,6 +767,29 @@
         "evidence": "explicit",
         "locator": "Article 2, row 7",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-citibank-na",
+    "name": "Citibank, N.A.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "bank",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-mp-credit-agreement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Lender/L-C issuer signature",
+        "note": null
       }
     ],
     "notes": null
@@ -1582,6 +1628,29 @@
     "notes": null
   },
   {
+    "id": "org-jpmorgan-chase-bank-na",
+    "name": "JPMorgan Chase Bank, N.A.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "bank",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-mp-credit-agreement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover and lender/L-C issuer signature",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
     "id": "org-jpmorgan-chase-funding",
     "name": "JPMorgan Chase Funding Inc.",
     "nameOriginal": null,
@@ -1902,6 +1971,29 @@
         "evidence": "explicit",
         "locator": "Article 2, row 36",
         "note": "Named as a project promoter to which the decision is addressed; the country is read from the promoter's address."
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-morgan-stanley-senior-funding",
+    "name": "Morgan Stanley Senior Funding, Inc.",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "company",
+    "countryCode": null,
+    "actor": null,
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-mp-credit-agreement-2025",
+        "supports": [
+          "name",
+          "kind"
+        ],
+        "evidence": "explicit",
+        "locator": "Cover; lender/L-C issuer signature",
+        "note": "The filed agreement identifies this incorporated financing counterparty as a lender/L-C issuer; it does not establish that the entity is a chartered commercial bank. The company label preserves its named legal form."
       }
     ],
     "notes": null
@@ -3444,6 +3536,56 @@
         "evidence": "explicit",
         "locator": "History list: \"Secretary of Defense Establishes Office of Strategic Capital\"",
         "note": "\"SECDEF establishes the Office of Strategic Capital (OSC) as a finance organization within the Department of Defense\""
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-us-texas-chips-office",
+    "name": "Texas CHIPS Office",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-texas-mp-northlake-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Closing program administration paragraph",
+        "note": null
+      }
+    ],
+    "notes": null
+  },
+  {
+    "id": "org-us-texas-governor",
+    "name": "Office of the Governor of Texas",
+    "nameOriginal": null,
+    "aliases": [],
+    "kind": "government",
+    "countryCode": "US",
+    "actor": "us",
+    "parents": [],
+    "evidence": [
+      {
+        "sourceId": "src-texas-mp-northlake-2026",
+        "supports": [
+          "name",
+          "kind",
+          "country",
+          "actor"
+        ],
+        "evidence": "explicit",
+        "locator": "Official release heading and grant announcement",
+        "note": null
       }
     ],
     "notes": null

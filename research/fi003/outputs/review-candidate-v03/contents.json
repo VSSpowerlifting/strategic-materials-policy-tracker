@@ -1,0 +1,130 @@
+{
+  "status": "DRAFT: ready for human financial/editorial review; publication HOLD",
+  "source_cutoff": "2026-11-06",
+  "presentation_version": "0.3",
+  "model_version": "1.0",
+  "baseline_sha": "3975390968968da63059fb0fa4a5c9175de46ec3",
+  "release_gates": [
+    "Human financial/editorial and exact-file/source-rights approval",
+    "Native Microsoft PowerPoint compatibility",
+    "Remaining PDF accessibility remediation and review",
+    "Separate publication authorization"
+  ],
+  "files": {
+    "research/fi003/READER_GUIDE.md": {
+      "bytes": 8084,
+      "sha256": "59d4d04cc6cd433458c1ddde8153ace7ebdd5d4bcbd21e2e8bbd27c8ad1edb95"
+    },
+    "research/fi003/chronology.csv": {
+      "bytes": 2260,
+      "sha256": "42e54a0c7823979f78c8053111bfe6dc25ad9fb7ea4fe805748f7bd88791ab42"
+    },
+    "research/fi003/evidence.csv": {
+      "bytes": 19240,
+      "sha256": "a0f0ae93467ad8f535fc8c180431ae40c71d8155fa004d4c58287d90824ec731"
+    },
+    "research/fi003/exhibits/covenant_adjustment.csv": {
+      "bytes": 1053,
+      "sha256": "cb98112fdbc41f13a97f93a6dce451ec31bb8f6f2be30cf0feb03490a62717e0"
+    },
+    "research/fi003/exhibits/financing_economics.csv": {
+      "bytes": 921,
+      "sha256": "ebe6e1ce2cedd6213b6da1f2db66d14eea710b845e5af41e8025c3408bad52c0"
+    },
+    "research/fi003/exhibits/liquid_assets.csv": {
+      "bytes": 512,
+      "sha256": "11ecc57ec438846302633750c2eb50ea2fd8f11186ecb836ded644d20dbff493"
+    },
+    "research/fi003/exhibits/liquidity_bridge.csv": {
+      "bytes": 1335,
+      "sha256": "a4c4ed7a2db4facb4b97402ac3845b8f3e4eb911d08db492b5b6ade5d4dd1d8a"
+    },
+    "research/fi003/exhibits/offtake_threshold.csv": {
+      "bytes": 5363,
+      "sha256": "88bc413dcc3958c0b58c070b348c6aa1abbb7008b4cac6728b5a8d8155f5c0ec"
+    },
+    "research/fi003/exhibits/ppa_sensitivity.csv": {
+      "bytes": 869,
+      "sha256": "75f793620cd4b0cfcfcaa39b3c855f230bcb6afda9822daf9e7e7717220c411a"
+    },
+    "research/fi003/exhibits/replacement.csv": {
+      "bytes": 955,
+      "sha256": "bdf95f1947e86e0b58132e69b714daf44056cbe61ff3e1ce76d01fdd18cfda53"
+    },
+    "research/fi003/exhibits/revolver_sensitivity.csv": {
+      "bytes": 2481,
+      "sha256": "cb289b42131018e65195139f54d7159dc71ff29627485a6f1f1e54128454a6aa"
+    },
+    "research/fi003/exhibits/revolver_snapshots.csv": {
+      "bytes": 470,
+      "sha256": "ef7042bb6f97dd4a9db61ff49c52f3ef7f216515af1f9abb039c3288ff00efd3"
+    },
+    "research/fi003/exhibits/support_accounting.csv": {
+      "bytes": 1711,
+      "sha256": "9aacfebe6c823e20ebc773893bf3ec9666b24a0955c73f80575cb9e1281e59b6"
+    },
+    "research/fi003/exhibits/underwriting.csv": {
+      "bytes": 522,
+      "sha256": "5b14d7735774f5b4f5418e0555ddfa87db96a468bce9c3491c5d5951ac1611db"
+    },
+    "research/fi003/inputs.json": {
+      "bytes": 21956,
+      "sha256": "1b3436186f306188926060d27fc39636418405e2078ab9e848aca6ef69851daa"
+    },
+    "research/fi003/model.py": {
+      "bytes": 40109,
+      "sha256": "dca50f8cb7d36ad821b51e1c28b500516fb83bd8ad75f853442712b824a5fb3d"
+    },
+    "research/fi003/outputs/fi003-model-v1/model_spec.json": {
+      "bytes": 269741,
+      "sha256": "1bfcffb57de346b44b891f73ea1fff917e113ead806a3830de0dd162a75a0494"
+    },
+    "research/fi003/outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx": {
+      "bytes": 43058,
+      "sha256": "4db87d45a083548cabfe5de85d8ce3bc6b7c9d69c4176ae75d897ca191ba337e"
+    },
+    "research/fi003/outputs/presentation-draft-v03/SMPT_FI003_JPMorgan_MP_Draft_v03.pdf": {
+      "bytes": 298356,
+      "sha256": "f79d0d471ae87b356d4f4ec8b24b83a1e800c2cb986e7cc3c0afb96ce79cae4e"
+    },
+    "research/fi003/outputs/presentation-draft-v03/SMPT_FI003_JPMorgan_MP_Draft_v03.pptx": {
+      "bytes": 106668,
+      "sha256": "c70e181551a12df01c91bcae8f5b327725176bcdc5e28d0ea15e3728c86fddfe"
+    },
+    "research/fi003/presentation/prepare.py": {
+      "bytes": 20263,
+      "sha256": "6f29a81bc91d144562316555bd35fabede16a9ad62428565f65f2afd4158f5bd"
+    },
+    "research/fi003/presentation/slide-manifest.json": {
+      "bytes": 45313,
+      "sha256": "8bdd78504dafc5e3aa2c721b3e3d7c5b7f7c723b2dfdbfb50ade6833c2a66cc1"
+    },
+    "research/fi003/prototype.py": {
+      "bytes": 18148,
+      "sha256": "6a21148001d698533ee82bb3b9d1f472df5334a12dfce04eecdc8ee60598a98a"
+    },
+    "research/fi003/sources.json": {
+      "bytes": 17772,
+      "sha256": "8b296e5492ec06d8262e06997e4f9654ae0e5d67d628abe4fd91176d5233900f"
+    },
+    "research/fi003/test_model.py": {
+      "bytes": 3474,
+      "sha256": "ee1ac0ccfcf3838781d666566c8da08e159e07707c12d60863ba3ca433a34a47"
+    },
+    "research/fi003/test_prototype.py": {
+      "bytes": 9194,
+      "sha256": "9876f88a8b2dd3f86807a2596c5f4b62609922d05523f1416a986be02ef8a3e9"
+    },
+    "research/fi003/verify_workbook.py": {
+      "bytes": 5358,
+      "sha256": "93700a13d9b274d142267f30acb83242448fa651ffd10d1b6325f9079aca6386"
+    }
+  },
+  "exclusions": [
+    "Internal trackers and README",
+    "Native Sheets/access records",
+    "Original filings/bank articles/transcripts/screenshots",
+    "Standalone fonts",
+    "Historical presentation binaries and unrelated repository files"
+  ]
+}

@@ -591,7 +591,8 @@
       "evt-cn-mofcom-56-2025",
       "evt-cn-mofcom-62-2025",
       "evt-eu-resourceeu-2025",
-      "evt-us-chips-usar-2026"
+      "evt-us-chips-usar-2026",
+      "evt-us-texas-mp-northlake-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

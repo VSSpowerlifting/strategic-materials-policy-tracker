@@ -1,0 +1,162 @@
+[
+  {
+    "id": "S01",
+    "bytes": 99371,
+    "sha256": "19328b7d418d0190549f161ac3e137c4397b0cdea8a1c8dd2757372ca75553f0",
+    "historical_sha256": "19328b7d418d0190549f161ac3e137c4397b0cdea8a1c8dd2757372ca75553f0",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S02",
+    "bytes": 259159,
+    "sha256": "80cf4b9198f80d17063466bdfeb60c8672a25a0522dd9149dcc2db0ea18aace3",
+    "historical_sha256": "80cf4b9198f80d17063466bdfeb60c8672a25a0522dd9149dcc2db0ea18aace3",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S03",
+    "bytes": 236236,
+    "sha256": "6670327aa3ed30b79133cca66d1f18a1d36b9bc478cebe066fdfbc8f5d667b8b",
+    "historical_sha256": "6670327aa3ed30b79133cca66d1f18a1d36b9bc478cebe066fdfbc8f5d667b8b",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S04",
+    "bytes": 110172,
+    "sha256": "36b475c9a1f1a491fb991483abb84c4488085d1fe1e82af7b92269ac67c9ce0a",
+    "historical_sha256": "36b475c9a1f1a491fb991483abb84c4488085d1fe1e82af7b92269ac67c9ce0a",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S05",
+    "bytes": 143922,
+    "sha256": "371483e4106fd789186c12cfcb2fcb222f95ab70319dd6bb29a3830abafde65e",
+    "historical_sha256": "371483e4106fd789186c12cfcb2fcb222f95ab70319dd6bb29a3830abafde65e",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S06",
+    "bytes": 388830,
+    "sha256": "1bc8121fbe4a0610b748df50102c4b038988c518c07484610d6ee04e2fc27a93",
+    "historical_sha256": "1bc8121fbe4a0610b748df50102c4b038988c518c07484610d6ee04e2fc27a93",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S07",
+    "bytes": 186573,
+    "sha256": "bbbe99d91eeb7822169af792a94e6520054960653e2256f6478f2471a2221da4",
+    "historical_sha256": "bbbe99d91eeb7822169af792a94e6520054960653e2256f6478f2471a2221da4",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S08",
+    "bytes": 33369,
+    "sha256": "bf464e0978f4d97ee348b8088c130622170f14d5315790387fd3992c15aab8e4",
+    "historical_sha256": "bf464e0978f4d97ee348b8088c130622170f14d5315790387fd3992c15aab8e4",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S09",
+    "bytes": 1091491,
+    "sha256": "7bff14645f3c2f736019bd06ed316a2ba6bd529bdf9aaa11266c210aa5037be8",
+    "historical_sha256": "7bff14645f3c2f736019bd06ed316a2ba6bd529bdf9aaa11266c210aa5037be8",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S10",
+    "bytes": 2243434,
+    "sha256": "f9a9db28f4d3d7b9ba2585d3a01031734b0c98f238fb9ae472b8325e7155a715",
+    "historical_sha256": "f9a9db28f4d3d7b9ba2585d3a01031734b0c98f238fb9ae472b8325e7155a715",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S11",
+    "bytes": 3138687,
+    "sha256": "460a73939f1190fb4c24215b1a29faae7ef66e1aaf5a01e7e40cf5f6fbd09b89",
+    "historical_sha256": "460a73939f1190fb4c24215b1a29faae7ef66e1aaf5a01e7e40cf5f6fbd09b89",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S12",
+    "bytes": 1562521,
+    "sha256": "ffca7c0abb95ef54ddac7341cdca4da68b0da0c0bcbb98f52f7e286aa50ca22d",
+    "historical_sha256": "ffca7c0abb95ef54ddac7341cdca4da68b0da0c0bcbb98f52f7e286aa50ca22d",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S13",
+    "bytes": 2023303,
+    "sha256": "e0f676175c72e195b67626310b17643bc2ad3dc35bd9e46e4eb66ce40b24fe8c",
+    "historical_sha256": "e0f676175c72e195b67626310b17643bc2ad3dc35bd9e46e4eb66ce40b24fe8c",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S14",
+    "bytes": 379977,
+    "sha256": "c803c095365317f59dde264abf54f5aba287219899e0fcce0a295e46729d3aed",
+    "historical_sha256": "c803c095365317f59dde264abf54f5aba287219899e0fcce0a295e46729d3aed",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S15",
+    "bytes": 218099,
+    "sha256": "6a91ad1cfecab0c176432411ca8560405e85b44116267045029da7fc0838a0ce",
+    "historical_sha256": "c578480118a2cbd2f7efc93293b74d2fcce12ff226946353c57c8b44b112266b",
+    "raw_match": false,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S16",
+    "bytes": 109973,
+    "sha256": "fb8bc09070cd57b416b6a10514e796a679fbe3532b961d1c56da65e826d2dc5e",
+    "historical_sha256": "6ebead904f98e8b4bdb13c68cb6c0f90a5401f7f614a907eef88cd3394910977",
+    "raw_match": false,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S17",
+    "bytes": 29282,
+    "sha256": "2809ab8e907685031d6ceede7ca41021870bb4ea226905544be32122e08b7dea",
+    "historical_sha256": "2809ab8e907685031d6ceede7ca41021870bb4ea226905544be32122e08b7dea",
+    "raw_match": true,
+    "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+  },
+  {
+    "id": "S18",
+    "bytes": 86789,
+    "sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+    "historical_sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+    "raw_match": true,
+    "hash_basis": "Raw HTTP response bytes; replaces earlier November 6 retrieval fingerprint."
+  },
+  {
+    "id": "S19",
+    "bytes": 2144965,
+    "sha256": "dd45624f47b781eb0b84c6c3b8f0dd02900bb2ec7b430e148bb85f24af7eebc2",
+    "historical_sha256": "dd45624f47b781eb0b84c6c3b8f0dd02900bb2ec7b430e148bb85f24af7eebc2",
+    "raw_match": true,
+    "hash_basis": "Raw HTTP response bytes; fingerprint identifies retrieval, not authenticated signatures."
+  },
+  {
+    "id": "S20",
+    "bytes": 96803,
+    "sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+    "historical_sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+    "raw_match": true,
+    "hash_basis": "Raw HTTP response bytes; retrieval fingerprint, not authenticated original signature."
+  }
+]

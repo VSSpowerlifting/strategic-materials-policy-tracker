@@ -47,6 +47,11 @@ const KOREA_BRAZIL_EXPANSION_IDS=new Set([
   "brazil",
   "korea",
 ]);
+// FI003 is a separately approved 6 November admission. Exclude its explicit
+// new cohort only when reconstructing the earlier release snapshots below.
+const FI003_IDS=new Set(["evt-us-texas-mp-northlake-2026", "src-mp-10q-2026-q3", "src-mp-credit-agreement-2025", "src-mp-10x-offtake-agreement-2025", "src-texas-mp-northlake-2026", "src-mp-equity-prospectus-2025", "fin-us-dod-mp-2025-public-equity", "fin-us-dod-mp-2025-corporate-revolver", "fin-us-texas-mp-2026-tsif", "org-jpmorgan-chase-bank-na", "org-morgan-stanley-senior-funding", "org-citibank-na", "org-bank-of-america-na", "org-us-texas-governor", "org-us-texas-chips-office", "prg-us-texas-semiconductor-innovation-fund"]);
+const withoutFi003=(s:SeedInput):SeedInput=>Object.fromEntries(
+  Object.entries(s).map(([name,rows])=>[name,(rows as Row[]).filter(r=>!FI003_IDS.has(r.id))]));
 // Independently approved November 5 records are being prepared on a *new* branch.
 // Do not allow their later source access/review dates or new row identities to
 // retroactively change the frozen October 17 / November 3 / November 4 audits.
@@ -114,7 +119,7 @@ const withoutNovember5Expansion=(s:SeedInput):SeedInput=>
 
 const withoutKoreaBrazilExpansion=(s:SeedInput):SeedInput=>
   Object.fromEntries(Object.entries(withoutNovember5Expansion(s)).map(([name,rows])=>[
-    name,(rows as Row[]).filter(r=>!KOREA_BRAZIL_EXPANSION_IDS.has(r.id) && !DOE_2026_SELECTION_IDS.has(r.id)),
+    name,(rows as Row[]).filter(r=>!KOREA_BRAZIL_EXPANSION_IDS.has(r.id) && !DOE_2026_SELECTION_IDS.has(r.id) && !FI003_IDS.has(r.id)),
   ]));
 const evidencedOnlyByEuCrma2026=(r:Row)=>!!r.evidence?.length&&r.evidence.every(e=>EU_CRMA_2026_SOURCES.has(e.sourceId));
 const withoutEuCrma2026=(s:SeedInput):SeedInput=>({...s,
@@ -185,7 +190,7 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
 });
 
 test("proposed 4 November revision contains only dated admissions from reviewed expansion batches",()=>{
-  const snapshot=withoutNovember5Expansion(seeds());
+  const snapshot=withoutFi003(withoutNovember5Expansion(seeds()));
   const candidate=auditF5CorpusCutoffImpact(snapshot,"2026-11-03","2026-11-04");
   assert.equal(candidate.totalPublicSeedRows,802);
   assert.equal(candidate.countNewlyIncludedDatedFields,11,
@@ -241,7 +246,7 @@ test("cutoff impact rejects missing public seed arrays and invalid/backdated dat
 
 test("November 6 admission is a dated cohort separate from historical November 4 snapshot",()=>{
   const full=seeds();
-  const previous=withoutNovember5Expansion(full);
+  const previous=withoutFi003(withoutNovember5Expansion(full));
   const frozenFour=auditF5CorpusCutoffImpact(previous,"2026-11-03","2026-11-04");
   assert.equal(frozenFour.totalPublicSeedRows,802);
   const admitted=auditF5CorpusCutoffImpact(full,"2026-11-04","2026-11-06");
@@ -272,4 +277,41 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
   assert.equal(parsed.publicationAuthorized,false,
     "audit's non-publication flags do not retroactively undo separately authorized source publication");
   assert.equal(parsed.maintainerReviewRequired,true);
+});
+
+
+test("FI003 admission advances only its eight new dated fields and preserves prior milestones",()=>{
+  // Main's separately reviewed November 5 cohort shares the 4–6 November window;
+  // remove it so this check isolates the FI003 admission.
+  const r=auditF5CorpusCutoffImpact(withoutNovember5Expansion(seeds()),"2026-11-04","2026-11-06");
+  assert.equal(r.totalPublicSeedRows,818);
+  assert.equal(r.countNewlyIncludedDatedFields,8);
+  assert.ok(r.newlyIncludedDatedFields.every(x=>FI003_IDS.has(x.recordId)));
+  assert.deepEqual(r.afterProposedCutoffFields,[]);
+  assert.equal(r.publicationAuthorized,false);
+});
+
+test("combined 6 November corpus re-dates no record outside the FI003 and November 5 cohorts",()=>{
+  const r=auditF5CorpusCutoffImpact(seeds(),"2026-11-04","2026-11-06");
+  // Main's November 5 revision rechecked only this existing Nolans equity
+  // instrument's implementation status. Keep this exception field/date-specific.
+  const nolansRecheck={
+    seed:"financial-commitments",
+    recordId:"fin-au-arafura-nolans-2025-equity",
+    field:"lifecycleReview.implementationStatusCheckedAt",
+    date:"2026-11-05",
+  };
+  assert.deepEqual(
+    r.newlyIncludedDatedFields.filter(x=>x.recordId===nolansRecheck.recordId),
+    [nolansRecheck],
+    "only the approved Nolans implementation recheck is newly dated",
+  );
+  assert.ok(r.newlyIncludedDatedFields.every(x=>
+    FI003_IDS.has(x.recordId)||NOVEMBER_5_EXPANSION_IDS.has(x.recordId)||
+    (x.seed===nolansRecheck.seed&&x.recordId===nolansRecheck.recordId&&
+     x.field===nolansRecheck.field&&x.date===nolansRecheck.date)),
+    "every newly dated field belongs to an approved cohort or exact Nolans recheck");
+  assert.equal(r.newlyIncludedDatedFields.filter(x=>FI003_IDS.has(x.recordId)).length,8);
+  assert.equal(r.countNewlyIncludedDatedFields,25);
+  assert.equal(r.publicationAuthorized,false);
 });

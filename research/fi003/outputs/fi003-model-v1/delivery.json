@@ -1,0 +1,68 @@
+{
+  "version": "FI003 model 1.0 \u2014 2026-11-06",
+  "cutoff": "2026-11-06",
+  "reviewed_repository_baseline": "66e42a4b32d65b902dc2eea5f852fc8d944522c2",
+  "integrated_main": "bb0934b87cc257032fe79e92e500ebfe928a2a1e",
+  "integration_commit": "3046189b725b65b6fa0fbe5fdc8c2949724d14c1",
+  "xlsx": "recalculated/FI003_Working_Model_v1.xlsx",
+  "xlsx_sha256": "4db87d45a083548cabfe5de85d8ce3bc6b7c9d69c4176ae75d897ca191ba337e",
+  "native_sheet_url": "https://docs.google.com/spreadsheets/d/1Lrfoe4sNRBc6IBfwyNTwgKINOYWCsHkWZb0EH4wzdYI/edit",
+  "native_mime_type": "application/vnd.google-apps.spreadsheet",
+  "native_parent_folder_id": "1_KNkx96LkRQAT9mEEvCw9GYKuVN9HJ2D",
+  "access_verification": {
+    "drive_metadata_shared": false,
+    "permission_types_roles": [
+      {
+        "type": "user",
+        "role": "owner"
+      }
+    ],
+    "authenticated_ui": "Share. Private to only me.",
+    "sharing_changes": false
+  },
+  "native_conversion": "Drive import_spreadsheet, native_google_sheets, from recalculated XLSX; subsequent matching text/layout refinements; final full readback verified",
+  "automatic_synchronization": false,
+  "engines": [
+    "Python 3 standard-library Decimal and datetime",
+    "Bundled artifact-tool in runtime 26.1030.10813 / Node 24.22.1",
+    "LibreOfficeDev 26.8.0.0.alpha0 Calc",
+    "Google Sheets native evaluation via effectiveValue readback"
+  ],
+  "native_microsoft_excel_application_tested": false,
+  "formula_cells": 388,
+  "analytical_anchors": 97,
+  "fixed_historical_anchors_per_scenario": 76,
+  "source_facts": 70,
+  "source_hyperlinks": 90,
+  "controls": 11,
+  "scenarios": 10,
+  "preview_ranges": 18,
+  "financial_approval": "Pending Benjamin review",
+  "source_code_sha256": {
+    "inputs.json": "1b3436186f306188926060d27fc39636418405e2078ab9e848aca6ef69851daa",
+    "sources.json": "8b296e5492ec06d8262e06997e4f9654ae0e5d67d628abe4fd91176d5233900f",
+    "prototype.py": "6a21148001d698533ee82bb3b9d1f472df5334a12dfce04eecdc8ee60598a98a",
+    "model.py": "dca50f8cb7d36ad821b51e1c28b500516fb83bd8ad75f853442712b824a5fb3d",
+    "build_workbook.mjs": "2735ef005f45364961897702a4c3a71a74069a819ad20de36070b646d4a750ce",
+    "verify_workbook.py": "93700a13d9b274d142267f30acb83242448fa651ffd10d1b6325f9079aca6386",
+    "verify_native.py": "2643b95f2fedbacd22ac98f09f7b5d720e94d714e75994304fd3ad1e1619fbae"
+  },
+  "repository_checks": {
+    "validate": "PASS",
+    "node_tests": {
+      "passed": 1101,
+      "failed": 0
+    },
+    "python_tests": {
+      "passed": 24,
+      "failed": 0
+    },
+    "lint": {
+      "errors": 0,
+      "inherited_warnings": 28,
+      "fi003_warnings": 0
+    },
+    "build": "PASS",
+    "typecheck": "PASS"
+  }
+}

@@ -1,0 +1,5 @@
+case,hypothetical_applicable_test_period_minimum_usd_m,hypothetical_attributable_net_income_usd_m,conditional_addback_usd_m,reversal_of_prior_duplicative_addback_usd_m,net_clause_adjustment_usd_m,basis,sources
+No applicable current-period minimum,0,20,0,0,0,Illustrative clause arithmetic only; no actual covenant EBITDA or future 10X entitlement inferred,S09 Section 1.01 Consolidated EBITDA (a)(xiv); analyst assumptions
+Minimum exceeds attributable income,40,20,20,0,20,Illustrative clause arithmetic only; no actual covenant EBITDA or future 10X entitlement inferred,S09 Section 1.01 Consolidated EBITDA (a)(xiv); analyst assumptions
+Income exceeds minimum,40,60,0,0,0,Illustrative clause arithmetic only; no actual covenant EBITDA or future 10X entitlement inferred,S09 Section 1.01 Consolidated EBITDA (a)(xiv); analyst assumptions
+Later cash duplicates prior addback,0,20,0,20,-20,Illustrative clause arithmetic only; no actual covenant EBITDA or future 10X entitlement inferred,S09 Section 1.01 Consolidated EBITDA (a)(xiv); analyst assumptions

@@ -1,0 +1,8 @@
+measure,value,unit,interpretation,sources
+Basic shares before offering,163477816,shares,July 9 basis; excludes potential shares,S06 S-7
+Basic shares plus final offering only,177068724,shares,Isolated pro forma; not actual later reported shares,S06;S11
+Increase relative to pre-offering basic shares,8.3136099640577532550349216801379,percent,Denominator is July 9 basic shares,S06;S11
+New shares as share of isolated post-offering base,7.6754989209726275544855679877153,percent,Existing holders retain the remainder; excludes other dilution,S06;S11
+Aggregate underwriting discount / gross equity,3.00,percent,Transaction cost; not bank profit or annual cost of equity,S07;S11
+Commitment expense / minimum headline commitment,0.74,percent,Not annualized; no bank-specific allocation,S11
+Debt principal including equipment notes,1043.133,USD million,September company principal; not covenant debt or project debt,S19 Note 8

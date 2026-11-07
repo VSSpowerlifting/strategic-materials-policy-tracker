@@ -195,13 +195,14 @@ test("a capital stack is layers of one value role each, with no grand total", ()
   assert.deepEqual(
     stack.layers.map((l) => [l.key, l.rows.map((r) => r.id)]),
     [
-      ["public_commitment", ["fin-us-dod-mp-2025-magnet-offtake"]],
+      ["public_commitment", ["fin-us-dod-mp-2025-magnet-offtake", "fin-us-texas-mp-2026-tsif"]],
       ["private_financing", ["fin-us-dod-mp-2025-bank-financing"]],
     ],
   );
-  // The offtake states no amount, so the public layer sums nothing and lists it as unquantified.
+  // The offtake stays unquantified; only the separate TSIF grant supplies an amount.
   const pub = stack.layers[0].totals!;
-  assert.deepEqual(pub.currencies, []);
+  assert.deepEqual(pub.currencies.map(c => [c.currency, c.status === "summed" ? c.instruments.map(i => [i.instrument, i.byQualifier]) : []]),
+    [["USD", [["grant", {exact: "53457500"}]]]]);
   assert.deepEqual(pub.unquantifiedIds, ["fin-us-dod-mp-2025-magnet-offtake"]);
   // Private financing is listed, never summed, and never merged with public money.
   assert.equal(stack.layers[1].totals, null);
@@ -225,9 +226,11 @@ test("co-investment is classed by who provides the capital, and counts no envelo
   const byProject = new Map(coInvestments().map((c) => [c.project.id, c]));
   assert.deepEqual(byProject.get("prj-au-alcoa-sojitz-gallium")?.kinds, ["cross_government"]);
   assert.deepEqual(byProject.get("prj-au-alcoa-sojitz-gallium")?.governments, ["australia", "us"]);
-  // The 10X facility carries a US offtake and the banks' commitment letter, which lapsed undrawn on 2025-08-26:
-  // ended money no longer backs the project, so it is not public-and-private co-investment.
-  assert.ok(!byProject.has("prj-us-mp-10x-facility"), "a lapsed private letter beside one public row is not co-investment");
+  // DoD offtake plus the admitted Texas grant involves two public bodies.
+  // The expired letter and unallocated corporate takeout do not add private project backing.
+  assert.deepEqual(byProject.get("prj-us-mp-10x-facility")?.kinds, ["several_public_bodies"]);
+  assert.deepEqual(byProject.get("prj-us-mp-10x-facility")?.rowIds,
+    ["fin-us-dod-mp-2025-magnet-offtake", "fin-us-texas-mp-2026-tsif"]);
   const tenX = projectStack("prj-us-mp-10x-facility")!;
   assert.deepEqual(tenX.governments, ["us"]);
   assert.ok(tenX.rows.some((c) => c.id === "fin-us-dod-mp-2025-bank-financing"), "the lapsed letter stays listed in the stack");

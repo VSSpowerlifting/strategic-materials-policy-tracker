@@ -1,0 +1,651 @@
+{
+  "version": "FI003 model 1.0 — 2026-11-06",
+  "engine": "@oai/artifact-tool (bundled Node runtime)",
+  "baseline": [
+    {
+      "cell": "Financing!B7",
+      "expected": 1000,
+      "actual": 1000,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B8",
+      "expected": 7.4,
+      "actual": 7.4,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B9",
+      "expected": 13590908,
+      "actual": 13590908,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B10",
+      "expected": 55,
+      "actual": 55,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B11",
+      "expected": 53.35,
+      "actual": 53.35,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B12",
+      "expected": 747.49994,
+      "actual": 747.49994,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B13",
+      "expected": 22.4249982,
+      "actual": 22.42499819999998,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B14",
+      "expected": 725.0749418,
+      "actual": 725.0749418,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B15",
+      "expected": 724.2,
+      "actual": 724.2,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B16",
+      "expected": 0.8749418,
+      "actual": 0.8749417999999878,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B18",
+      "expected": 163477816,
+      "actual": 163477816,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B19",
+      "expected": 177068724,
+      "actual": 177068724,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B20",
+      "expected": 0.08313609964057753,
+      "actual": 0.08313609964057753,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B21",
+      "expected": 0.07675498920972627,
+      "actual": 0.07675498920972627,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B22",
+      "expected": 0.9232450107902738,
+      "actual": 0.9232450107902738,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B23",
+      "expected": 0.03,
+      "actual": 0.02999999999999997,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B24",
+      "expected": 0.0074,
+      "actual": 0.0074,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B38",
+      "expected": -0.8,
+      "actual": -0.7999999999999545,
+      "pass": true
+    },
+    {
+      "cell": "Financing!B39",
+      "expected": 0.0749418,
+      "actual": 0.07494180000003325,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B8",
+      "expected": 275,
+      "actual": 275,
+      "pass": true
+    },
+    {
+      "cell": "Credit!C8",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!E8",
+      "expected": 235,
+      "actual": 235,
+      "pass": true
+    },
+    {
+      "cell": "Credit!D8",
+      "expected": 40,
+      "actual": 40,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B9",
+      "expected": 275,
+      "actual": 275,
+      "pass": true
+    },
+    {
+      "cell": "Credit!C9",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!E9",
+      "expected": 203,
+      "actual": 203,
+      "pass": true
+    },
+    {
+      "cell": "Credit!D9",
+      "expected": 72,
+      "actual": 72,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B10",
+      "expected": 275,
+      "actual": 275,
+      "pass": true
+    },
+    {
+      "cell": "Credit!C10",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "cell": "Credit!E10",
+      "expected": 203,
+      "actual": 203,
+      "pass": true
+    },
+    {
+      "cell": "Credit!D10",
+      "expected": 72,
+      "actual": 72,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B20",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Credit!B21",
+      "expected": 53,
+      "actual": 53,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B22",
+      "expected": 0.1855,
+      "actual": 0.1855,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B23",
+      "expected": 9.75,
+      "actual": 9.75,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B24",
+      "expected": 9.9355,
+      "actual": 9.9355,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B33",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Credit!B34",
+      "expected": 20,
+      "actual": 20,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B35",
+      "expected": 20,
+      "actual": 20,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B41",
+      "expected": 2028,
+      "actual": 2028,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B42",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Credit!B43",
+      "expected": 46660,
+      "actual": 46660,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B44",
+      "expected": 46753,
+      "actual": 46753,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B45",
+      "expected": 47118,
+      "actual": 47118,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B46",
+      "expected": 93,
+      "actual": 93,
+      "pass": true
+    },
+    {
+      "cell": "Credit!B47",
+      "expected": 458,
+      "actual": 458,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B8",
+      "expected": 1166.011,
+      "actual": 1166.011,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!C8",
+      "expected": 664.275,
+      "actual": 664.275,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!D8",
+      "expected": 1830.286,
+      "actual": 1830.286,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B9",
+      "expected": 429.075,
+      "actual": 429.075,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!C9",
+      "expected": 1023.564,
+      "actual": 1023.564,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!D9",
+      "expected": 1452.639,
+      "actual": 1452.639,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B10",
+      "expected": 260.336,
+      "actual": 260.336,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!C10",
+      "expected": 1077.575,
+      "actual": 1077.575,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!D10",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B12",
+      "expected": -492.375,
+      "actual": -492.375,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B16",
+      "expected": 1830.286,
+      "actual": 1830.286,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B17",
+      "expected": -7.757,
+      "actual": -7.757,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B18",
+      "expected": -420.25,
+      "actual": -420.25,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B19",
+      "expected": 6.5,
+      "actual": 6.5,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B20",
+      "expected": -91.145,
+      "actual": -91.145,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B21",
+      "expected": 20.876,
+      "actual": 20.876,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B22",
+      "expected": 0.821,
+      "actual": 0.8210000000000001,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B23",
+      "expected": -1.42,
+      "actual": -1.4200000000000002,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B24",
+      "expected": 1337.911,
+      "actual": 1337.9109999999998,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B25",
+      "expected": 1337.911,
+      "actual": 1337.911,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B26",
+      "expected": 0,
+      "actual": 2.2737367544323206e-13,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B31",
+      "expected": 51.016,
+      "actual": 51.016,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B32",
+      "expected": 67.962,
+      "actual": 67.962,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B33",
+      "expected": 8.109,
+      "actual": 8.109,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B34",
+      "expected": 110.869,
+      "actual": 110.86900000000001,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B35",
+      "expected": 110.9,
+      "actual": 110.9,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B36",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B41",
+      "expected": 862.793,
+      "actual": 862.793,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B42",
+      "expected": 150,
+      "actual": 150,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B43",
+      "expected": 30.34,
+      "actual": 30.34,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B44",
+      "expected": 1043.133,
+      "actual": 1043.133,
+      "pass": true
+    },
+    {
+      "cell": "Liquidity!B45",
+      "expected": 936.253,
+      "actual": 936.253,
+      "pass": true
+    },
+    {
+      "cell": "Support!B13",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Support!B14",
+      "expected": 75.7702512,
+      "actual": 75.7702512,
+      "pass": true
+    },
+    {
+      "cell": "Support!B15",
+      "expected": 18.9425628,
+      "actual": 18.9425628,
+      "pass": true
+    },
+    {
+      "cell": "Support!B19",
+      "expected": "VALID",
+      "actual": "VALID",
+      "pass": true
+    },
+    {
+      "cell": "Support!B20",
+      "expected": 110,
+      "actual": 110,
+      "pass": true
+    },
+    {
+      "cell": "Support!B21",
+      "expected": 0.3,
+      "actual": 0.3,
+      "pass": true
+    },
+    {
+      "cell": "Support!B22",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B23",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "cell": "Support!B24",
+      "expected": 140,
+      "actual": 140,
+      "pass": true
+    },
+    {
+      "cell": "Support!B31",
+      "expected": 400,
+      "actual": 400,
+      "pass": true
+    },
+    {
+      "cell": "Support!B32",
+      "expected": 150,
+      "actual": 150,
+      "pass": true
+    },
+    {
+      "cell": "Support!B33",
+      "expected": 19,
+      "actual": 19,
+      "pass": true
+    },
+    {
+      "cell": "Support!B34",
+      "expected": 23.457,
+      "actual": 23.457,
+      "pass": true
+    },
+    {
+      "cell": "Support!B35",
+      "expected": 32.6,
+      "actual": 32.6,
+      "pass": true
+    },
+    {
+      "cell": "Support!B36",
+      "expected": 2.506,
+      "actual": 2.506,
+      "pass": true
+    },
+    {
+      "cell": "Support!B37",
+      "expected": 7.9,
+      "actual": 7.9,
+      "pass": true
+    },
+    {
+      "cell": "Support!B38",
+      "expected": 53.5,
+      "actual": 53.5,
+      "pass": true
+    },
+    {
+      "cell": "Support!B39",
+      "expected": 10.075,
+      "actual": 10.075,
+      "pass": true
+    },
+    {
+      "cell": "Support!B40",
+      "expected": 218.6,
+      "actual": 218.6,
+      "pass": true
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "zero_draw_low_benchmark_pre_cod",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "full_draw_post_milestone",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "negative_income_duplicate_reversal",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "quarter_end_trigger_above_target",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "invalid_draw",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "missing_rate",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "invalid_state",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "invalid_year",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "negative_capacity",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    },
+    {
+      "name": "missing_benchmark",
+      "outputs": 21,
+      "historicalAnchors": 76,
+      "pass": true
+    }
+  ],
+  "formulaCount": 388
+}
