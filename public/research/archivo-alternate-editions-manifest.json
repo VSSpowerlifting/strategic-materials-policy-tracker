@@ -3,14 +3,14 @@
     "a001": {
       "alternate_files": {
         "pdf": {
-          "bytes": 95979,
+          "bytes": 95916,
           "path": "public/research/applied-001/antimony-supply-resilience-archivo-executive.pdf",
-          "sha256": "13bed2d3f690e09908f4b9b6ab060a75c9956cda0b7599d9817031bff0b5ce0b"
+          "sha256": "bc9ee17b09060adb34ac03437654afba9c17f78cf14f065137f548b3090f2a54"
         },
         "pptx": {
-          "bytes": 258196,
+          "bytes": 258246,
           "path": "public/research/applied-001/antimony-supply-resilience-archivo-executive.pptx",
-          "sha256": "37f54cc3d46506dcc6b38f945e8298ccfff1881aaa63bdcec59f5b3cc2fb45d4"
+          "sha256": "8c0ed4af929bd5e913760be5a33aaee9f70f2e221b71b8307d94f4ddaecc1288"
         }
       },
       "editable_pptx": {
@@ -28,14 +28,14 @@
     "r001": {
       "alternate_files": {
         "pdf": {
-          "bytes": 86298,
+          "bytes": 86266,
           "path": "public/research/r001/tungsten-supply-security-archivo-executive.pdf",
-          "sha256": "67989da2c489946dba8a6bd8616bb9d9878488d384b7c9eaeafa9cc24620a33e"
+          "sha256": "b68ebc302486915197b6a6dfd5691d96611f6f05b870de12a190207d0a9d9bc1"
         },
         "pptx": {
-          "bytes": 230592,
+          "bytes": 230640,
           "path": "public/research/r001/tungsten-supply-security-archivo-executive.pptx",
-          "sha256": "5dbb0891efda7d7c2a429a055ef9f23f5241f47a85d8eec4a11e8b72b3123400"
+          "sha256": "8dec6016cbacf3cbdbf653363f0f7abd4855934576cc9fbd4c8fc773a29c63bb"
         }
       },
       "editable_pptx": {
@@ -51,8 +51,8 @@
       "research_cutoff": "2026-11-03"
     }
   },
+  "generator": "research/reissues/archivo-remaining/build_decks.js",
   "publication_status": "draft_pending_human_approval",
   "release_scope": "alternate widescreen executive PDF/PPTX; originals preserved",
-  "review_artifact_run": 42313061887,
   "schema": "smpt-archivo-alternate-editions-1"
 }
