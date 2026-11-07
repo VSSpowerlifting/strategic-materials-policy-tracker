@@ -6,6 +6,7 @@ on:
       - codex/issue-219-archivo-publication
     paths:
       - '.github/workflows/archivo-publication-stage.yml'
+      - 'research/reissues/archivo-remaining/build_decks.js'
   workflow_dispatch:
 
 permissions:

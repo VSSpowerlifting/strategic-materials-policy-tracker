@@ -87,8 +87,15 @@ note(s,'CRMA permit-processing timelines operate under legal triggers and except
 {
 const s=pg(p,6,8,series);head(s,'Japan','Grant decisions target downstream conversion and recycled feedstock','JOGMEC decisions and recipient capacity targets; announced amounts shown in JPY');
 const vals=[7.5,2], names=['Allied Material','Japan New Metals'], scales=['¥7.5bn grant decision','¥2.0bn grant decision'];vals.forEach((v,i)=>{const y=2.62+i*1.48;txt(s,names[i],0.77,y,3.52,0.35,18,C.ink,true);nativeBar(s,4.30,y,6.0,0.49,v,8,C.gold);txt(s,scales[i],10.53,y,1.96,0.45,14,C.ink,true,{align:'right'});});
-line(s,0.75,5.49,12.50,5.49,C.line);small(s,'ALLIED MATERIAL\nPlanned tungsten powder and carbide equipment; approximately 1.5× existing capacity; H1 FY2028 target.',0.80,5.65,5.6,12.7,C.gray);small(s,'JAPAN NEW METALS\nTarget 2,400 tonnes annual APT capacity (WO₃-equivalent); April 2029 schedule.',6.9,5.65,5.56,12.7,C.gray);
-txt(s,'Recipient investment: ~¥15.9bn',0.80,6.09,5.6,0.26,11.7,C.gray);txt(s,'Recipient investment: ~¥8bn',6.90,6.09,5.6,0.26,11.7,C.gray);note(s,'Grant decisions establish award milestones; payment and installed capacity require separate evidence.',6.66);linkText(s,'JOGMEC decisions',U.jogmec,0.61,6.91,2.05,0.15,C.goldInk,8.8);linkText(s,'Allied Material',U.allied,2.83,6.91,1.85,0.15,C.goldInk,8.8);linkText(s,'Mitsubishi Materials',U.mits,4.85,6.91,2.6,0.15,C.goldInk,8.8);
+line(s,0.75,5.24,12.50,5.24,C.line);
+txt(s,'ALLIED MATERIAL',0.80,5.32,5.6,0.22,11.8,C.ink,true);
+txt(s,'JAPAN NEW METALS',6.90,5.32,5.56,0.22,11.8,C.ink,true);
+txt(s,'Planned tungsten powder/carbide equipment; ~1.5× capacity',0.80,5.58,5.6,0.22,12.1,C.gray);
+txt(s,'Operating target: first half of FY2028',0.80,5.83,5.6,0.22,12.1,C.gray);
+txt(s,'APT capacity target: 2,400 t/year (WO₃-equivalent)',6.90,5.58,5.56,0.22,12.1,C.gray);
+txt(s,'Scheduled operation: April 2029',6.90,5.83,5.56,0.22,12.1,C.gray);
+txt(s,'Recipient investment: ~¥15.9bn',0.80,6.09,5.6,0.26,11.7,C.gray);
+txt(s,'Recipient investment: ~¥8bn',6.90,6.09,5.6,0.26,11.7,C.gray);note(s,'Grant decisions establish award milestones; payment and installed capacity require separate evidence.',6.66);linkText(s,'JOGMEC decisions',U.jogmec,0.61,6.91,2.05,0.15,C.goldInk,8.8);linkText(s,'Allied Material',U.allied,2.83,6.91,1.85,0.15,C.goldInk,8.8);linkText(s,'Mitsubishi Materials',U.mits,4.85,6.91,2.6,0.15,C.goldInk,8.8);
 }
 {
 const s=pg(p,7,8,series);head(s,'China','The February 2025 tungsten control operates at item level','MOFCOM/GACC Announcement No. 10 · effective 4 February 2025');
