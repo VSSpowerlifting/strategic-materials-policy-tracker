@@ -59,3 +59,16 @@ jobs:
             git commit -m "Stage legible alternate slide editions and exact-file manifest"
             git push origin "HEAD:refs/heads/codex/issue-219-archivo-publication"
           fi
+      - name: Preserve updated review renders and QA receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue219-legibility-review
+          path: |
+            ${{ runner.temp }}/issue219/*.pdf
+            ${{ runner.temp }}/issue219/*.pptx
+            ${{ runner.temp }}/issue219/*-contact.jpg
+            ${{ runner.temp }}/issue219/archivo-reissue-qa.json
+            ${{ runner.temp }}/issue219/ARCHIVO_REISSUE_REVIEW.md
+          if-no-files-found: warn
+          retention-days: 14

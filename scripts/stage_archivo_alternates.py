@@ -53,7 +53,7 @@ def main():
   for ext in ("pdf","pptx"):
    source=folder/(c["stem"]+"."+ext); assert source.is_file(),source
    # New version is generated from this reviewed branch with source-linked numeric QA. The manifest pins its exact byte hash after generation.
-  assert sha(source)!=c["old_sha"],"Alternate artifact must not equal the original published PDF"
+   assert sha(source)!=c["old_sha"],"Alternate artifact must not equal the original published PDF"
    dest=R/c["dir"]/(c["base"]+"."+ext)
    # This update only writes the clearly named *alternate* download file; original PDF paths are never writable through this path.
    assert dest!=original and dest.name.endswith("-archivo-executive."+ext)
@@ -65,6 +65,17 @@ def main():
   urls=[l.get("uri","") for page in pdf for l in page.get_links()]
   assert any("Archivo" in v for v in fonts) and not any("Noto" in v for v in fonts)
   assert sum(u.startswith("https://") for u in urls)>=c["min_pdf_links"]
+  # Do not permit enlarging source labels in PPTX only and silently shrinking back to tiny type in the PDF export.
+  tiny=[]
+  for page_num,page in enumerate(pdf,1):
+   for block in page.get_text("dict")["blocks"]:
+    if block["type"]!=0: continue
+    for line in block["lines"]:
+     for span in line["spans"]:
+      label=span["text"].strip()
+      if label and span["bbox"][1]<510 and span["size"]<10.05:
+       tiny.append({"page":page_num,"size":round(span["size"],2),"text":label[:72]})
+  assert not tiny, f"{k}: source/explanatory text still too small: {tiny[:14]}"
   edited=pptx_check(folder/(c["stem"]+".pptx"),c["min_pptx_links"])
   manifest["cases"][k]={"research_cutoff":c["cutoff"],"original_pdf":c["old"],"original_sha256":c["old_sha"],"alternate_files":targets,"editable_pptx":edited,"pdf_links":len(urls)}
   assert sha(original)==c["old_sha"],"Original PDF modified"
