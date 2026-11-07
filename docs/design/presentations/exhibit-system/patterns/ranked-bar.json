@@ -1,0 +1,45 @@
+{
+  "id": "ranked-bar",
+  "name": "Ranked horizontal bar",
+  "family_code": "A",
+  "order": 1,
+  "reader_question": "Which entity is largest on one measure, and by how much?",
+  "relationship": "Magnitude ranking of comparable entities on a single measure and status.",
+  "question_types": ["rank"],
+  "requires": ["single-measure"],
+  "incompatible": ["non-comparable-bases", "time-axis"],
+  "capacity": { "min_items": 3, "max_items": 12, "what": "bars" },
+  "use_when": [
+    "Every bar shares one unit, one definition and one status (for example committed, not announced)",
+    "Rank order itself matters to the argument"
+  ],
+  "avoid_when": [
+    "Values mix statuses or bases — use status-separated-capital or parallel-basis-panels",
+    "Fewer than three entities — state the comparison in the title or use a two-value callout"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure, unit and status, shown as the series name" },
+    { "field": "dp", "type": "number?", "notes": "Displayed decimals; defaults to 0" },
+    { "field": "items[].label", "type": "string", "notes": "Unique entity label" },
+    { "field": "items[].value", "type": "number ≥ 0", "notes": "Magnitude on the shared basis" },
+    { "field": "items[].highlight", "type": "boolean?", "notes": "At most one highlighted result" }
+  ],
+  "units": "One unit and status for every bar; zero baseline.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Bar values and labels through Edit Data (embedded workbook)", "Bar colours, gap width, data-label format", "Frame text: title, subtitle, interpretation, source"],
+    "not_data_bound": ["Highlight colour is a per-point fill; re-sorting after a data edit is manual"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/ranked-bar.ts",
+  "fixture": "fixtures/ranked-bar.json",
+  "integrity_rules": ["magnitude-nonnegative", "min-categories", "max-categories", "unique-labels", "single-highlight"],
+  "table_alternative": "A two-column table (entity, value) when exact figures matter more than rank, or when there are more than twelve entities.",
+  "variations": ["Vertical columns for up to six short labels", "Ranked dot plot (ranked-dot) when bars would be visually heavy"],
+  "limitations": ["Does not show uncertainty, status mix or change over time"],
+  "excluded_alternatives": [
+    { "form": "Pie or donut", "reason": "Angles compare magnitudes less accurately than aligned bar lengths and fail beyond a few categories" },
+    { "form": "3D bars", "reason": "Perspective distorts length; prohibited by the exhibit rules" }
+  ],
+  "references": ["bcg-sia-2022-exhibit-6", "smpt-repertoire-2026"]
+}

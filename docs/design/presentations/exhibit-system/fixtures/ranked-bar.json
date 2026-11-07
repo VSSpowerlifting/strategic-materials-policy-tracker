@@ -1,0 +1,22 @@
+{
+  "pattern": "ranked-bar",
+  "classification": "synthetic-demonstration",
+  "title": "Programme Gamma carries the largest committed balance of the seven demonstration programmes",
+  "subtitle": "Committed public support by programme, CU million, demonstration cut-off",
+  "annotation": "Rank on one measure and one status. Committed amounts only; announced and drawn amounts belong on separate exhibits.",
+  "source": "Synthetic fixture ranked-bar.json, constructed for the exhibit gallery",
+  "visual_text": ["Programme Gamma", "Programme Alpha", "INTERPRETATION"],
+  "data": {
+    "unit": "CU million, committed",
+    "dp": 0,
+    "items": [
+      { "label": "Programme Alpha", "value": 410 },
+      { "label": "Programme Beta", "value": 265 },
+      { "label": "Programme Gamma", "value": 640, "highlight": true },
+      { "label": "Programme Delta", "value": 180 },
+      { "label": "Programme Epsilon", "value": 120 },
+      { "label": "Programme Zeta", "value": 95 },
+      { "label": "Programme Eta", "value": 40 }
+    ]
+  }
+}

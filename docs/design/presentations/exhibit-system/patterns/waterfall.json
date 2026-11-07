@@ -1,0 +1,44 @@
+{
+  "id": "waterfall",
+  "name": "Reconciling waterfall bridge",
+  "family_code": "E",
+  "order": 1,
+  "reader_question": "How did an opening balance become the closing balance, and which movements drove it?",
+  "relationship": "Additive reconciliation: opening + Σ movements = closing, on one consistent basis.",
+  "question_types": ["reconcile"],
+  "requires": ["additive-movements", "single-measure"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 2, "max_items": 8, "what": "movements" },
+  "use_when": [
+    "Opening and closing balances share a basis and every movement is stated",
+    "The size and sign of each driver matters"
+  ],
+  "avoid_when": [
+    "Movements do not reconcile or are on different bases — use parallel-basis-panels",
+    "Movements are scenario sensitivities rather than additive changes — use tornado"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "start.label / start.value", "type": "string / number ≥ 0", "notes": "Opening balance" },
+    { "field": "steps[].label / steps[].delta", "type": "string / number", "notes": "Signed movements, in order" },
+    { "field": "end.label / end.value", "type": "string / number ≥ 0", "notes": "Closing balance; must equal start + Σ deltas" }
+  ],
+  "units": "One unit throughout; bars keep true geometry (no inflated small movements).",
+  "editability": {
+    "tier": "native-chart-with-helper-series",
+    "editable": ["Stacked bar chart with embedded workbook (Edit Data)", "Increase, decrease and total colours", "Frame text"],
+    "not_data_bound": ["The unfilled 'helper' series holds each float; editing a movement requires recomputing the helper column", "Connector hairlines between bars are native shapes positioned from the fixture"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/waterfall.ts",
+  "fixture": "fixtures/waterfall.json",
+  "integrity_rules": ["bridge-reconciles", "bridge-levels-nonnegative", "max-categories", "unique-labels"],
+  "table_alternative": "A reconciliation table (line item, movement, running balance) for audit-grade lookup.",
+  "variations": ["Sources-and-uses for financing packages", "Driver bridge with subtotal columns"],
+  "limitations": ["Running balances must stay non-negative for the helper-series geometry", "Movements are read in sequence; the order is a presentation choice, not causation"],
+  "excluded_alternatives": [
+    { "form": "Stacked bar of opening and closing only", "reason": "Hides which movements produced the change" },
+    { "form": "Sankey", "reason": "Implies flow between nodes rather than an additive balance" }
+  ],
+  "references": ["bain-pe-2025-figure-2", "smpt-repertoire-2026"]
+}

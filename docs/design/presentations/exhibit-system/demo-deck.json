@@ -1,0 +1,13 @@
+{
+  "title": "SMPT exhibit system — demonstration deck",
+  "cover_lines": [
+    "A short argument built from registered exhibit patterns",
+    "Every name, number and date is synthetic demonstration data"
+  ],
+  "slides": [
+    { "fixture": "ranked-bar", "label": "DEMONSTRATION · COMPARISON" },
+    { "fixture": "dumbbell", "label": "DEMONSTRATION · CHANGE" },
+    { "fixture": "waterfall", "label": "DEMONSTRATION · RECONCILIATION" },
+    { "fixture": "sources-and-uses", "label": "DEMONSTRATION · FINANCING" }
+  ]
+}

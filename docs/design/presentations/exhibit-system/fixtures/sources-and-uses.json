@@ -1,0 +1,23 @@
+{
+  "pattern": "sources-and-uses",
+  "classification": "synthetic-demonstration",
+  "title": "Debt funds more than half of Project 4, and construction absorbs most of the money",
+  "subtitle": "Financing plan of one demonstration project, CU million",
+  "annotation": "Both columns total 900. Private equity and debt are shown as sources of the project, not as public support.",
+  "source": "Synthetic fixture sources-and-uses.json, constructed for the exhibit gallery",
+  "visual_text": ["Senior debt", "Construction", "Total 900 on each side"],
+  "data": {
+    "unit": "CU million",
+    "dp": 0,
+    "sources": [
+      { "label": "Senior debt", "value": 480 },
+      { "label": "Sponsor equity", "value": 270 },
+      { "label": "Public grant", "value": 150 }
+    ],
+    "uses": [
+      { "label": "Construction", "value": 620 },
+      { "label": "Equipment", "value": 190 },
+      { "label": "Contingency", "value": 90 }
+    ]
+  }
+}
