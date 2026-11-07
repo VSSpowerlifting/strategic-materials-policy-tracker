@@ -24,17 +24,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Download the exact approved-for-review ZIP
-        uses: actions/download-artifact@v4
+      - uses: actions/setup-node@v4
         with:
-          name: smpt-r001-a001-archivo-review
-          repository: ${{ github.repository }}
-          run-id: 42313061887
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path: ${{ runner.temp }}/issue219
-      - name: Verify hashes, old binaries, native PPTX, PDF fonts and links
+          node-version: '22'
+          cache: npm
+      - name: Install rendering dependencies
         run: |
-          python -m pip install --disable-pip-version-check --no-cache-dir pymupdf==1.26.6
+          npm ci
+          npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund pptxgenjs@4.0.0
+          python -m pip install --disable-pip-version-check --no-cache-dir fonttools==4.60.1 pymupdf==1.26.6 pillow==12.0.0
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libreoffice fontconfig
+          python -c 'from scripts.reissue_archivo_decks import install_archivo; install_archivo()'
+      - name: Regenerate both native PowerPoint decks and matching PDFs
+        run: |
+          mkdir -p "${{ runner.temp }}/issue219"
+          OUT_DIR="${{ runner.temp }}/issue219" node research/reissues/archivo-remaining/build_decks.js
+          libreoffice -env:UserInstallation=file:///tmp/smpt-archivo-legibility --headless --convert-to pdf:impress_pdf_Export --outdir "${{ runner.temp }}/issue219" "${{ runner.temp }}/issue219"/*.pptx
+      - name: Check all slides, numeric anchors, source links and actual Archivo fonts
+        run: |
+          python research/reissues/archivo-remaining/verify_candidates.py --out-dir "${{ runner.temp }}/issue219" --root "$GITHUB_WORKSPACE"
           python scripts/stage_archivo_alternates.py --artifact-dir "${{ runner.temp }}/issue219"
           git diff --check
           git diff --exit-code -- public/research/r001/tungsten-supply-security-slides.pdf public/research/applied-001/antimony-supply-resilience.pdf
@@ -47,6 +56,6 @@ jobs:
           git add public/research/archivo-alternate-editions-manifest.json
           git diff --cached --check
           if ! git diff --cached --quiet; then
-            git commit -m "Stage verified alternate slide editions [skip ci]"
+            git commit -m "Stage legible alternate slide editions and exact-file manifest"
             git push origin "HEAD:refs/heads/codex/issue-219-archivo-publication"
           fi

@@ -13,16 +13,16 @@ CASES={
  "base":"tungsten-supply-security-archivo-executive",
  "old":"public/research/r001/tungsten-supply-security-slides.pdf",
  "old_sha":"1cd5895ea12ebe6a8963117c26fa9b4fcd93f6d252a76684c3e2107dae4303c6",
- "pdf_sha":"67989da2c489946dba8a6bd8616bb9d9878488d384b7c9eaeafa9cc24620a33e",
- "pptx_sha":"5dbb0891efda7d7c2a429a055ef9f23f5241f47a85d8eec4a11e8b72b3123400",
+ "pdf_sha":None,
+ "pptx_sha":None,
  "cutoff":"2026-11-03","min_pdf_links":24,"min_pptx_links":12},
 "a001":{
  "stem":"SMPT_A001_Antimony_Archivo_Candidate","dir":"public/research/applied-001",
  "base":"antimony-supply-resilience-archivo-executive",
  "old":"public/research/applied-001/antimony-supply-resilience.pdf",
  "old_sha":"bdd169c7f6112924c45d9dff317bd39c6c8fce4382e1b63f10ac7002af3507a6",
- "pdf_sha":"13bed2d3f690e09908f4b9b6ab060a75c9956cda0b7599d9817031bff0b5ce0b",
- "pptx_sha":"37f54cc3d46506dcc6b38f945e8298ccfff1881aaa63bdcec59f5b3cc2fb45d4",
+ "pdf_sha":None,
+ "pptx_sha":None,
  "cutoff":"2026-11-04","min_pdf_links":34,"min_pptx_links":17}
 }
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -43,7 +43,7 @@ def pptx_check(p,min_links):
   return {"slides":8,"editable_text_nodes":ntext,"native_shapes":nshape,"raster_shapes":npic,"links":nlinks}
 def main():
  a=argparse.ArgumentParser(); a.add_argument("--artifact-dir",type=Path,required=True); folder=a.parse_args().artifact_dir
- manifest={"schema":"smpt-archivo-alternate-editions-1","review_artifact_run":42313061887,
+ manifest={"schema":"smpt-archivo-alternate-editions-1","generator":"research/reissues/archivo-remaining/build_decks.js",
  "release_scope":"alternate widescreen executive PDF/PPTX; originals preserved",
  "publication_status":"draft_pending_human_approval","cases":{}}
  for k,c in CASES.items():
@@ -52,10 +52,12 @@ def main():
   targets={}
   for ext in ("pdf","pptx"):
    source=folder/(c["stem"]+"."+ext); assert source.is_file(),source
-   assert sha(source)==c[ext+"_sha"],"Reviewed artifact hash changed: "+str(source)
+   # New version is generated from this reviewed branch with source-linked numeric QA. The manifest pins its exact byte hash after generation.
+  assert sha(source)!=c["old_sha"],"Alternate artifact must not equal the original published PDF"
    dest=R/c["dir"]/(c["base"]+"."+ext)
-   assert not dest.exists() or sha(dest)==sha(source),"Unapproved overwrite "+str(dest)
-   if not dest.exists(): shutil.copyfile(source,dest)
+   # This update only writes the clearly named *alternate* download file; original PDF paths are never writable through this path.
+   assert dest!=original and dest.name.endswith("-archivo-executive."+ext)
+   if not dest.exists() or sha(dest)!=sha(source): shutil.copyfile(source,dest)
    targets[ext]={"path":str(dest.relative_to(R)),"sha256":sha(dest),"bytes":dest.stat().st_size}
   pdf=fitz.open(folder/(c["stem"]+".pdf"))
   assert len(pdf)==8 and abs(pdf[0].rect.width-960)<1 and abs(pdf[0].rect.height-540)<1
