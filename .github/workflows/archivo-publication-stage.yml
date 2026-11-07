@@ -1,0 +1,75 @@
+name: Stage Archivo alternate deck binaries for Issue 219
+
+on:
+  push:
+    branches:
+      - codex/issue-219-archivo-publication
+    paths:
+      - '.github/workflows/archivo-publication-stage.yml'
+      - 'research/reissues/archivo-remaining/build_decks.js'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  stage-reviewed-binaries:
+    if: github.ref == 'refs/heads/codex/issue-219-archivo-publication'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install rendering dependencies
+        run: |
+          npm ci
+          npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund pptxgenjs@4.0.0
+          python -m pip install --disable-pip-version-check --no-cache-dir fonttools==4.60.1 pymupdf==1.26.6 pillow==12.0.0
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libreoffice fontconfig
+          python -c 'from scripts.reissue_archivo_decks import install_archivo; install_archivo()'
+      - name: Regenerate both native PowerPoint decks and matching PDFs
+        run: |
+          mkdir -p "${{ runner.temp }}/issue219"
+          OUT_DIR="${{ runner.temp }}/issue219" node research/reissues/archivo-remaining/build_decks.js
+          libreoffice -env:UserInstallation=file:///tmp/smpt-archivo-legibility --headless --convert-to pdf:impress_pdf_Export --outdir "${{ runner.temp }}/issue219" "${{ runner.temp }}/issue219"/*.pptx
+      - name: Check all slides, numeric anchors, source links and actual Archivo fonts
+        run: |
+          python research/reissues/archivo-remaining/verify_candidates.py --out-dir "${{ runner.temp }}/issue219" --root "$GITHUB_WORKSPACE"
+          python scripts/stage_archivo_alternates.py --artifact-dir "${{ runner.temp }}/issue219"
+          git diff --check
+          git diff --exit-code -- public/research/r001/tungsten-supply-security-slides.pdf public/research/applied-001/antimony-supply-resilience.pdf
+      - name: Commit only new binaries and a manifest to this draft release branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/research/r001/tungsten-supply-security-archivo-executive.{pdf,pptx}
+          git add public/research/applied-001/antimony-supply-resilience-archivo-executive.{pdf,pptx}
+          git add public/research/archivo-alternate-editions-manifest.json
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m "Stage legible alternate slide editions and exact-file manifest"
+            git push origin "HEAD:refs/heads/codex/issue-219-archivo-publication"
+          fi
+      - name: Preserve updated review renders and QA receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue219-legibility-review
+          path: |
+            ${{ runner.temp }}/issue219/*.pdf
+            ${{ runner.temp }}/issue219/*.pptx
+            ${{ runner.temp }}/issue219/*-contact.jpg
+            ${{ runner.temp }}/issue219/archivo-reissue-qa.json
+            ${{ runner.temp }}/issue219/ARCHIVO_REISSUE_REVIEW.md
+          if-no-files-found: warn
+          retention-days: 14

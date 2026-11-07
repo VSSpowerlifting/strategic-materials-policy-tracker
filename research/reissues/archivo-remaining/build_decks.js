@@ -37,17 +37,21 @@ function shape(s, x,y,w,h,fill,line=fill,rad=false){s.addShape(rad?S.roundRect:S
 function txt(s,t,x,y,w,h,size=18,color=C.ink,bold=false,options={}){s.addText(t,{x,y,w,h,fontFace:FONT,fontSize:size,color,bold,margin:0,breakLine:false,fit:'shrink',valign:'mid',...options});}
 function line(s,x1,y1,x2,y2,color=C.line,width=1){s.addShape(S.line,{x:x1,y:y1,w:x2-x1,h:y2-y1,line:{color,width,beginArrowType:'none',endArrowType:'none'}});}
 function dot(s,x,y,d=0.14,color=C.gold){s.addShape('ellipse',{x,y,w:d,h:d,line:{color},fill:{color}})}
-function linkText(s,label,url,x,y,w=5.5,h=0.2,col=C.gray,size=9.5){txt(s,label,x,y,w,h,size,col,false,{hyperlink:{url},underline:{color:col,style:'sng'}})}
+function linkText(s,label,url,x,y,w=5.5,h=0.2,col=C.gray,size=10.4){
+  const isFooter=y>=6.85;
+  txt(s,label,x,isFooter?6.87:y,w,Math.max(h,0.19),Math.max(size,10.4),col,false,
+      {hyperlink:{url},underline:{color:col,style:'sng'}});
+}
 function pg(p,i,total,series,dark=false){let s=p.addSlide();s.background={color:dark?C.dark:C.paper};const fg=dark?C.muted:C.gray;
   line(s,0.58,7.09,12.76,7.09,dark?'413D35':C.line,0.6);
-  txt(s,'STRATEGIC MATERIALS POLICY TRACKER',0.58,7.14,4.3,0.17,8.2,fg,true,{charSpacing:1.3});
-  txt(s,series,6.5,7.14,3.8,0.17,8.2,fg,false,{align:'right'});
-  txt(s,`${String(i).padStart(2,'0')} / ${String(total).padStart(2,'0')}`,11.45,7.14,1.29,0.17,8.5,fg,true,{align:'right'});
+  txt(s,'STRATEGIC MATERIALS POLICY TRACKER',0.58,7.14,4.6,0.20,9.5,fg,true,{charSpacing:1.0});
+  txt(s,series,6.45,7.14,3.95,0.20,9.5,fg,false,{align:'right'});
+  txt(s,`${String(i).padStart(2,'0')} / ${String(total).padStart(2,'0')}`,11.45,7.14,1.29,0.20,9.5,fg,true,{align:'right'});
   return s;}
-function head(s,kicker,title,scope){txt(s,kicker.toUpperCase(),0.60,0.39,11.8,0.20,10,C.goldInk,true,{charSpacing:1.7});txt(s,title,0.60,0.72,12.05,0.91,29,C.ink,true,{breakLine:false});if(scope)txt(s,scope,0.60,1.66,12.05,0.42,12.8,C.gray,false);line(s,0.59,2.17,12.74,2.17,C.line,0.65);}
-function note(s,text,y=6.55){txt(s,text,0.61,y,12.05,0.37,9.6,C.gray,false,{valign:'top'});}
+function head(s,kicker,title,scope){txt(s,kicker.toUpperCase(),0.60,0.39,11.8,0.25,10.8,C.goldInk,true,{charSpacing:1.4});txt(s,title,0.60,0.72,12.05,0.91,29,C.ink,true,{breakLine:false});if(scope)txt(s,scope,0.60,1.66,12.05,0.42,12.8,C.gray,false);line(s,0.59,2.17,12.74,2.17,C.line,0.65);}
+function note(s,text,y=6.40){txt(s,text,0.61,Math.min(y,6.40),12.05,0.42,11.2,C.ink,false,{valign:'top'});}
 function small(s,text,x,y,w,fs=13,col=C.gray){txt(s,text,x,y,w,0.54,fs,col,false,{valign:'top'})}
-function label(s,text,x,y,w=5){txt(s,text.toUpperCase(),x,y,w,0.25,9.7,C.goldInk,true,{charSpacing:1.1});}
+function label(s,text,x,y,w=5){txt(s,text.toUpperCase(),x,y,w,0.28,10.8,C.goldInk,true,{charSpacing:0.8});}
 function metric(s,value,caption,x,y,w,opts={}){txt(s,value,x,y,w,0.64,31,opts.color||C.ink,true);txt(s,caption,x,y+0.66,w,0.58,12.4,C.gray,false,{valign:'top'});}
 function table(s,rows,x,y,width,rowHeights,weights,colAlign=[],fs=14){const total=weights.reduce((a,b)=>a+b,0),w=weights.map(z=>z/total*width);let yp=y;rows.forEach((row,r)=>{const rh=rowHeights[r]||0.65;if(r===0)shape(s,x,yp,width,rh,C.dark);else if(r%2===0)shape(s,x,yp,width,rh,C.beige,C.beige);else shape(s,x,yp,width,rh,C.paper,C.paper);let xp=x;row.forEach((v,c)=>{txt(s,String(v),xp+0.15,yp+0.05,w[c]-0.25,rh-0.1,r===0?11.2:fs,r===0?C.muted:C.ink,r===0||c===0,{align:colAlign[c]||'left',valign:'mid'});xp+=w[c];});if(r>0)line(s,x,yp,x+width,yp,C.line,0.5);yp+=rh;});return yp;}
 function nativeBar(s,x,y,maxW,height,value,max,color=C.gold){shape(s,x,y,maxW,height,C.beige,C.beige);shape(s,x,y,maxW*value/max,height,color,color);}
@@ -83,8 +87,15 @@ note(s,'CRMA permit-processing timelines operate under legal triggers and except
 {
 const s=pg(p,6,8,series);head(s,'Japan','Grant decisions target downstream conversion and recycled feedstock','JOGMEC decisions and recipient capacity targets; announced amounts shown in JPY');
 const vals=[7.5,2], names=['Allied Material','Japan New Metals'], scales=['¥7.5bn grant decision','¥2.0bn grant decision'];vals.forEach((v,i)=>{const y=2.62+i*1.48;txt(s,names[i],0.77,y,3.52,0.35,18,C.ink,true);nativeBar(s,4.30,y,6.0,0.49,v,8,C.gold);txt(s,scales[i],10.53,y,1.96,0.45,14,C.ink,true,{align:'right'});});
-line(s,0.75,5.49,12.50,5.49,C.line);small(s,'ALLIED MATERIAL\nPlanned tungsten powder and carbide equipment; approximately 1.5× existing capacity; H1 FY2028 target.',0.80,5.65,5.6,12.7,C.gray);small(s,'JAPAN NEW METALS\nTarget 2,400 tonnes annual APT capacity (WO₃-equivalent); April 2029 schedule.',6.9,5.65,5.56,12.7,C.gray);
-txt(s,'Recipient investment: ~¥15.9bn',0.80,6.22,5.6,0.22,11.0,C.gray);txt(s,'Recipient investment: ~¥8bn',6.90,6.22,5.6,0.22,11.0,C.gray);note(s,'Grant decisions establish award milestones; payment and installed capacity require separate evidence.',6.66);linkText(s,'JOGMEC decisions',U.jogmec,0.61,6.91,2.05,0.15,C.goldInk,8.8);linkText(s,'Allied Material',U.allied,2.83,6.91,1.85,0.15,C.goldInk,8.8);linkText(s,'Mitsubishi Materials',U.mits,4.85,6.91,2.6,0.15,C.goldInk,8.8);
+line(s,0.75,5.24,12.50,5.24,C.line);
+txt(s,'ALLIED MATERIAL',0.80,5.32,5.6,0.22,11.8,C.ink,true);
+txt(s,'JAPAN NEW METALS',6.90,5.32,5.56,0.22,11.8,C.ink,true);
+txt(s,'Planned tungsten powder/carbide equipment; ~1.5× capacity',0.80,5.58,5.6,0.22,12.1,C.gray);
+txt(s,'Operating target: first half of FY2028',0.80,5.83,5.6,0.22,12.1,C.gray);
+txt(s,'APT capacity target: 2,400 t/year (WO₃-equivalent)',6.90,5.58,5.56,0.22,12.1,C.gray);
+txt(s,'Scheduled operation: April 2029',6.90,5.83,5.56,0.22,12.1,C.gray);
+txt(s,'Recipient investment: ~¥15.9bn',0.80,6.09,5.6,0.26,11.7,C.gray);
+txt(s,'Recipient investment: ~¥8bn',6.90,6.09,5.6,0.26,11.7,C.gray);note(s,'Grant decisions establish award milestones; payment and installed capacity require separate evidence.',6.66);linkText(s,'JOGMEC decisions',U.jogmec,0.61,6.91,2.05,0.15,C.goldInk,8.8);linkText(s,'Allied Material',U.allied,2.83,6.91,1.85,0.15,C.goldInk,8.8);linkText(s,'Mitsubishi Materials',U.mits,4.85,6.91,2.6,0.15,C.goldInk,8.8);
 }
 {
 const s=pg(p,7,8,series);head(s,'China','The February 2025 tungsten control operates at item level','MOFCOM/GACC Announcement No. 10 · effective 4 February 2025');
@@ -94,7 +105,7 @@ note(s,'The next implementation evidence is transaction-specific: licensing appl
 {
 const s=pg(p,8,8,series);head(s,'Decision synthesis','Evidence quality improves when financial and physical milestones are tracked separately','Selected diligence priorities for lenders, industrial buyers and policymakers');
 table(s,[['MECHANISM','EVIDENCE TO REQUEST','DECISION VARIABLE'],['UK financing','Loan drawdown, maturity terms, expenditure','Liquidity and ramp-up resilience'],['EU designation','Permits, FID, construction schedule','Actual time to productive capacity'],['Japan conversion grants','Payments, installed equipment, saleable output','Available conversion volumes'],['China licensing','Item-specific approvals and shipments','Deliverability and compliance']],0.72,2.61,11.96,[0.63,0.74,0.74,0.74,0.74],[2.25,5.1,4.61],[],13.4);
-shape(s,0.75,6.47,11.92,0.43,C.dark);txt(s,'RESEARCH CUTOFF 3 NOV 2026   ·   SOURCE CORPUS 4fc59c7   ·   SOURCE-LEVEL EVIDENCE IN FULL DOSSIER',0.95,6.53,11.5,0.29,9.5,C.muted,false);linkText(s,'Read full research',U.r001,0.64,6.94,3.5,0.13,C.goldInk,8.8);
+shape(s,0.75,6.35,11.92,0.43,C.dark);txt(s,'RESEARCH CUTOFF 3 NOV 2026   ·   SOURCE CORPUS 4fc59c7   ·   SOURCE-LEVEL EVIDENCE IN FULL DOSSIER',0.95,6.40,11.5,0.30,10.7,C.muted,false);linkText(s,'Read full research',U.r001,0.64,6.94,3.5,0.13,C.goldInk,8.8);
 }
 await p.writeFile({fileName:path.join(OUT,'SMPT_R001_Tungsten_Archivo_Candidate.pptx')});}
 async function antimony(){const p=pptx('U.S. Antimony Supply Resilience — Archivo editable edition');const series='APPLIED STRATEGY 001';
@@ -102,7 +113,7 @@ cover(p,series,'U.S. Antimony\nSupply Resilience','Strategic options for a hypot
 {
 const s=pg(p,2,8,series);head(s,'Decision recommendation','Qualify a second supply lane, then hold five months of stock','Conditional balanced policy for 100 t/year of contained antimony-equivalent demand');
 metric(s,'45%','Target share from an independently qualified alternative international supply lane',0.80,2.77,3.53);metric(s,'5 months','Provisional buyer-qualified reserve: $2.30m at the historical USGS metal proxy',4.86,2.77,3.53);metric(s,'30%','Future domestic offtake target; availability begins only with verified qualified output',8.85,2.77,3.63);
-line(s,0.84,4.55,12.42,4.55,C.line);txt(s,'2030 severe interruption',0.86,4.86,5.4,0.34,17,C.ink,true);txt(s,'0 t unfilled under modeled supplier assumptions',0.86,5.33,10.8,0.53,24,C.goldInk,true);small(s,'2027–29: the modeled minimum buffer is 4.91 months for ≤5 t unfilled. Five months still leaves 4.35 t unfilled before domestic qualification.',0.87,6.04,11.25,12.8);
+line(s,0.84,4.55,12.42,4.55,C.line);txt(s,'2030 severe interruption',0.86,4.86,5.4,0.34,17,C.ink,true);txt(s,'0 t unfilled under modeled supplier assumptions',0.86,5.33,10.8,0.53,24,C.goldInk,true);small(s,'2027–29: the modeled minimum buffer is 4.91 months for ≤5 t unfilled. Five months still leaves 4.35 t unfilled before domestic qualification.',0.87,5.86,11.25,13.3);
 note(s,'USGS historical price proxy; model inputs and assumptions are documented in the public evidence register.',6.63);linkText(s,'Evidence and assumptions',U.evidence,0.61,6.94,4.5,0.13,C.goldInk,8.8);
 }
 {
@@ -120,27 +131,27 @@ const thresholdX=3.55+6.35*(5/25);line(s,thresholdX,2.78,thresholdX,5.80,C.goldI
 {
 const s=pg(p,5,8,series);head(s,'Economic trade-off','Five months frees $1.84m of stock cash versus nine months','2030 severe case; annual incremental expense includes sourcing premiums, carry and spot markup');
 const rows=[['','BALANCED / CONDITIONAL','INVENTORY-LED'],['Stock months','5 months','9 months'],['Inventory capital','$2.296m','$4.134m'],['Modeled annual increment','$813k','$703k'],['2030 residual unfilled','0 t','0 t']];table(s,rows,0.81,2.57,11.77,[0.60,0.64,0.64,0.64,0.64],[4.55,3.65,3.57],[],15);
-shape(s,0.82,6.13,11.69,0.42,C.beige);txt(s,'Trade-off: lower initial working capital at approximately $110k more annual modeled expense',1.0,6.18,11.29,0.3,14,C.ink,true);
+shape(s,0.82,5.96,11.69,0.36,C.beige);txt(s,'Trade-off: lower initial working capital at approximately $110k more annual modeled expense',1.0,5.99,11.29,0.29,14,C.ink,true);
 note(s,'Initial inventory cash is an asset, not an annual incremental expense; all amounts use hypothetical buyer and historical price inputs.',6.65);
 }
 {
 const s=pg(p,6,8,series);head(s,'Domestic qualification trajectory','The domestic target becomes available only after qualification','Modeled ramp to 30% target share; all values are illustrative buyer sourcing shares');
 const entries=[['2027','0%'],['2028','0%'],['2029','0%'],['2030','15%'],['2031','30%']];entries.forEach((e,i)=>{const y=2.52+i*0.70;txt(s,e[0],0.84,y,1.0,0.34,14,C.ink,true);nativeBar(s,2.03,y,9.6,0.39,parseInt(e[1]),30,C.gold);txt(s,e[1],11.96,y,0.63,0.35,15,C.ink,true,{align:'right'})});
-small(s,'Until qualified domestic deliveries are available, that target volume is assigned to the incumbent sourcing lane in the model.',0.85,6.21,11.7,13);
+small(s,'Until qualified domestic deliveries are available, that target volume is assigned to the incumbent sourcing lane in the model.',0.85,5.86,11.7,13.3);
 note(s,'Actual schedules, plant status, processing specifications and enforceable offtake terms would control a real procurement ramp.',6.64);
 }
 {
 const s=pg(p,7,8,series);head(s,'Reversal conditions','The five-month policy is sensitive to supplier independence','Residual unfilled contained-Sb equivalent in each distinct adverse scenario');
-const rows=[['SEVERE TEST','MODELED GAP','OUTCOME AGAINST ≤5 t'],['2027: no qualified alternative','16.50 t','Above tolerance'],['2030: alternative lane 75% curtailed','5.70 t','Above tolerance'],['2030: curtailment + domestic delay','12.45 t','Above tolerance'],['2030: 12-month interruption','15.15 t','Above tolerance']];table(s,rows,0.79,2.55,11.75,[0.64,0.78,0.78,0.78,0.78],[6.25,1.91,3.59],[],14.0);
-shape(s,0.81,6.32,11.68,0.39,C.beige);txt(s,'Action: strengthen alternate refinery qualification and retain a sixth-month procurement option',0.96,6.35,11.23,0.30,12.9,C.ink,true);
+const rows=[['SEVERE TEST','MODELED GAP','OUTCOME AGAINST ≤5 t'],['2027: no qualified alternative','16.50 t','Above tolerance'],['2030: alternative lane 75% curtailed','5.70 t','Above tolerance'],['2030: curtailment + domestic delay','12.45 t','Above tolerance'],['2030: 12-month interruption','15.15 t','Above tolerance']];table(s,rows,0.79,2.55,11.75,[0.64,0.69,0.69,0.69,0.69],[6.25,1.91,3.59],[],14.0);
+shape(s,0.81,6.05,11.68,0.32,C.beige);txt(s,'Action: strengthen alternate refinery qualification and retain a sixth-month procurement option',0.96,6.06,11.23,0.29,13.4,C.ink,true);
 note(s,'Each test is a separate modeled shock, not an expected forecast or cumulative five-year loss.',6.77);
 }
 {
 const s=pg(p,8,8,series);head(s,'Execution gates','Procurement, Finance and Legal each control a material assumption','Decision rights before firming purchases, inventory funding or domestic offtake');
 const rows=[['OWNER','VERIFICATION REQUIRED','TRIGGER'],['Procurement + Engineering','Grade, chain of custody, independent refining, delivery tests','Qualify alternative 45% lane'],['Finance','Actual quoted price, carry, storage, working-capital ceiling','Approve five-month reserve'],['Strategy + Legal','Financing close, processing stage, product acceptance, contract remedies','Stage conditional domestic offtake']];table(s,rows,0.75,2.63,11.85,[0.64,0.88,0.88,0.88],[2.65,5.18,4.02],[],13.4);
-linkText(s,'USGS MCS 2026',U.usgs,0.83,6.05,1.98,0.16,C.goldInk,9.2);linkText(s,'EXIM register',U.exim,2.82,6.05,1.64,0.16,C.goldInk,9.2);linkText(s,'Perpetua 10-Q',U.sec,4.48,6.05,1.77,0.16,C.goldInk,9.2);linkText(s,'INL pilot',U.inl,6.40,6.05,1.31,0.16,C.goldInk,9.2);linkText(s,'MOFCOM No. 33',U.mofSb,7.91,6.05,2.05,0.16,C.goldInk,9.2);
-linkText(s,'MOFCOM No. 46',U.mof46,0.83,6.28,1.92,0.16,C.goldInk,9.2);linkText(s,'MOFCOM No. 72',U.mof72,2.88,6.28,1.92,0.16,C.goldInk,9.2);linkText(s,'Model register',U.evidence,4.95,6.28,1.84,0.16,C.goldInk,9.2);linkText(s,'USAC 10-Q',U.usac,7.02,6.28,1.72,0.16,C.goldInk,9.2);linkText(s,'DLA stockpile',U.dla,8.90,6.28,2.1,0.16,C.goldInk,9.2);
-shape(s,0.80,6.55,11.75,0.40,C.dark);txt(s,'ILLUSTRATIVE BUYER CASE  ·  SOURCE CUTOFF 4 NOV 2026  ·  INDEPENDENT SMPT ANALYSIS',1.0,6.59,11.28,0.29,9.6,C.muted,false);linkText(s,'Read case / model',U.a001,0.64,6.94,3.9,0.13,C.goldInk,8.8);
+linkText(s,'USGS MCS 2026',U.usgs,0.83,6.00,2.16,0.21,C.goldInk,10.6);linkText(s,'EXIM register',U.exim,3.20,6.00,1.80,0.21,C.goldInk,10.6);linkText(s,'Perpetua 10-Q',U.sec,5.30,6.00,1.95,0.21,C.goldInk,10.6);linkText(s,'INL pilot',U.inl,7.54,6.00,1.47,0.21,C.goldInk,10.6);linkText(s,'MOFCOM No. 33',U.mofSb,9.50,6.00,2.45,0.21,C.goldInk,10.6);
+linkText(s,'MOFCOM No. 46',U.mof46,0.83,6.27,2.18,0.21,C.goldInk,10.6);linkText(s,'MOFCOM No. 72',U.mof72,3.20,6.27,2.18,0.21,C.goldInk,10.6);linkText(s,'Model register',U.evidence,5.57,6.27,1.72,0.21,C.goldInk,10.6);linkText(s,'USAC 10-Q',U.usac,7.62,6.27,1.58,0.21,C.goldInk,10.6);linkText(s,'DLA stockpile',U.dla,9.62,6.27,2.05,0.21,C.goldInk,10.6);
+shape(s,0.80,6.55,11.75,0.29,C.dark);txt(s,'ILLUSTRATIVE BUYER CASE  ·  SOURCE CUTOFF 4 NOV 2026  ·  INDEPENDENT SMPT ANALYSIS',1.0,6.56,11.28,0.27,10.7,C.muted,false);linkText(s,'Read case / model',U.a001,0.64,6.94,3.9,0.13,C.goldInk,8.8);
 }
 await p.writeFile({fileName:path.join(OUT,'SMPT_A001_Antimony_Archivo_Candidate.pptx')});}
 Promise.all([tungsten(),antimony()]).catch(e=>{console.error(e);process.exitCode=1});
