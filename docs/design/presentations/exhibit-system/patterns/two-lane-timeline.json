@@ -1,0 +1,47 @@
+{
+  "id": "two-lane-timeline",
+  "name": "Two-lane dated timeline",
+  "family_code": "I",
+  "order": 1,
+  "reader_question": "In what order did two jurisdictions announce, enact and implement their measures?",
+  "relationship": "Dated events from two parallel tracks placed on one date axis; marker style separates announcement, effective and implementation dates.",
+  "question_types": ["sequence"],
+  "requires": ["dated-events", "parallel-tracks", "time-axis"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 4, "max_items": 14, "what": "dated events across both lanes" },
+  "use_when": [
+    "Two jurisdictions' measures need to be read against the same calendar",
+    "The gap between announcement, effective and implementation dates matters"
+  ],
+  "avoid_when": [
+    "More than two tracks must be compared — use swimlane",
+    "Events carry different evidence states rather than date types — use evidence-milestone-strip"
+  ],
+  "data_contract": [
+    { "field": "lanes[].name", "type": "string", "notes": "Exactly two lanes; the first draws above the axis, the second below" },
+    { "field": "lanes[].events[].label", "type": "string ≤ 26 characters", "notes": "Short measure name" },
+    { "field": "lanes[].events[].date", "type": "ISO date", "notes": "Events within a lane in ascending order" },
+    { "field": "lanes[].events[].kind", "type": "announcement | effective | implementation", "notes": "Which date the event records" }
+  ],
+  "units": "Calendar dates on a linear day-count scale spanning whole calendar years.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Markers, stems, axis band and labels as native shapes and text boxes", "Lane and event wording", "Colours and marker styles"],
+    "not_data_bound": ["Dates are positioned from the fixture at build time; moving an event requires dragging its marker, stem and label together", "There is no embedded workbook"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/two-lane-timeline.ts",
+  "fixture": "fixtures/two-lane-timeline.json",
+  "integrity_rules": ["dates-ascending", "unique-labels", "min-categories", "max-categories", "lane-count", "label-length", "label-stagger"],
+  "table_alternative": "A dated event table with lane, measure, date type and date.",
+  "variations": ["Lanes split by instrument instead of jurisdiction", "Shaded interval between announcement and effective date"],
+  "limitations": [
+    "Shared dates do not imply causation or response between lanes",
+    "Label stagger is limited to three levels per lane; dense clusters need the swimlane or a table"
+  ],
+  "excluded_alternatives": [
+    { "form": "Single combined lane", "reason": "Loses which jurisdiction issued each measure" },
+    { "form": "Line chart of cumulative measure counts", "reason": "Counts erase the differences between announcement, effective and implementation dates" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "histogram",
+  "name": "Histogram",
+  "family_code": "H",
+  "order": 3,
+  "reader_question": "How is one measure distributed across many items, and where does a reference value fall in it?",
+  "relationship": "Frequency of one continuous measure in contiguous, equal-width bins.",
+  "question_types": ["distribution"],
+  "requires": ["sample", "single-measure"],
+  "incompatible": ["non-comparable-bases", "time-axis"],
+  "capacity": { "min_items": 5, "max_items": 16, "what": "bins" },
+  "use_when": [
+    "One measure is observed on many items and the overall shape matters",
+    "A reference value is to be located within the distribution"
+  ],
+  "avoid_when": [
+    "Groups are to be compared — use box-interval or strip-plot",
+    "Items must be identified individually — use ranked-dot or ranked-bar",
+    "Fewer than about 30 observations, where bin shape is unstable"
+  ],
+  "data_contract": [
+    { "field": "measure / countLabel", "type": "string", "notes": "What is binned (with unit) and what is counted" },
+    { "field": "bins[]", "type": "{from, to, count}", "notes": "Contiguous, equal-width, strictly increasing bins; counts are whole numbers ≥ 0" },
+    { "field": "reference", "type": "{label, value}?", "notes": "Optional reference value, inside the binned range" }
+  ],
+  "units": "x axis in the measure's unit with one stated bin width; y axis is a count starting at zero.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Native column chart with embedded workbook (Edit Data) for the counts", "Column colour, gap and value labels", "Frame text"],
+    "not_data_bound": ["Bin-edge labels, axis titles and the reference line are positioned from the fixture and do not move if bins are edited", "Category names in the workbook are bin ranges; the visible edge labels are separate text boxes"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/histogram.ts",
+  "fixture": "fixtures/histogram.json",
+  "integrity_rules": ["bins-contiguous", "min-categories", "max-categories", "counts-nonnegative", "counts-whole", "bins-equal-width", "threshold-within-axis"],
+  "table_alternative": "A frequency table of bin ranges and counts.",
+  "variations": ["Without a reference line", "Share-of-items axis when sample sizes differ across panels"],
+  "limitations": ["Bin width and edge convention change the visual shape; both are stated", "Equal-width bins only, so column height equals frequency", "Reference line is positioned and does not follow data edits"],
+  "excluded_alternatives": [
+    { "form": "Kernel density curve", "reason": "A smoothed curve implies values between observations and hides the sample size" },
+    { "form": "Unequal-width bins", "reason": "Column height would no longer equal frequency without density rescaling" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

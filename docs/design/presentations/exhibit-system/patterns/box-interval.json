@@ -1,0 +1,45 @@
+{
+  "id": "box-interval",
+  "name": "Box and interval summary",
+  "family_code": "H",
+  "order": 2,
+  "reader_question": "How do the centre, middle half and full range of a measure compare across groups?",
+  "relationship": "Five-number summary per group on one shared axis: minimum, first quartile, median, third quartile, maximum.",
+  "question_types": ["distribution", "uncertainty"],
+  "requires": ["sample", "intervals", "single-measure"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 2, "max_items": 8, "what": "groups" },
+  "use_when": [
+    "A source reports five-number summaries rather than raw observations",
+    "Groups have enough observations (at least 5) for quartiles to mean something"
+  ],
+  "avoid_when": [
+    "Raw observations are few and available — use strip-plot",
+    "The shape of one distribution matters — use histogram",
+    "The audience is unlikely to read quartiles"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "axis", "type": "{min, max, step}", "notes": "Explicit shared axis containing every summary value" },
+    { "field": "groups[].label / n", "type": "string / integer ≥ 5", "notes": "Unique group name and its observation count, shown on every row" },
+    { "field": "groups[].min, q1, median, q3, max", "type": "number", "notes": "Five stated numbers, ordered min ≤ q1 ≤ median ≤ q3 ≤ max" }
+  ],
+  "units": "One unit and one shared axis across all rows.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Whiskers, boxes, median lines, gridlines and labels are native shapes and text", "Colours and positions"],
+    "not_data_bound": ["All five numbers per group are positioned from the fixture and are not data-bound; there is no embedded workbook, so editing a value means resizing the shapes and relabelling"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/box-interval.ts",
+  "fixture": "fixtures/box-interval.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "axis-explicit", "interval-ordered", "bounded-values", "min-observations"],
+  "table_alternative": "A table of group, n, minimum, Q1, median, Q3 and maximum.",
+  "variations": ["Strip-plot overlay when raw observations exist"],
+  "limitations": ["Quartiles from small n are unstable; n is printed on every row", "Boxes hide multimodality and cannot show individual outliers", "Whiskers here are the stated minimum and maximum, not a statistical fence"],
+  "excluded_alternatives": [
+    { "form": "Mean with error bars", "reason": "Implies a symmetric confidence interval the five-number summary does not provide" },
+    { "form": "Notched box plot", "reason": "Notches imply a significance test; none is supplied" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

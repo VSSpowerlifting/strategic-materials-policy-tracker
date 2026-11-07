@@ -1,0 +1,25 @@
+{
+  "pattern": "histogram",
+  "classification": "synthetic-demonstration",
+  "title": "Synthetic site output peaks at 25 to 30 kt a year; 9 of 60 sites reach the 40 kt reference",
+  "subtitle": "Number of sites by annual output, 60 synthetic sites, 5 kt bins, kilotonnes per year",
+  "annotation": "Bins are contiguous and equal in width, with the lower edge included. The dashed reference sits on the 40 kt bin edge: 9 sites (6 + 3) fall at or above it. The reference value is illustrative.",
+  "source": "Synthetic fixture histogram.json, constructed for the exhibit gallery",
+  "visual_text": ["Reference: 40 kt", "14", "Number of sites", "35"],
+  "data": {
+    "measure": "Annual output per site, kt",
+    "countLabel": "Number of sites",
+    "dp": 0,
+    "bins": [
+      { "from": 10, "to": 15, "count": 2 },
+      { "from": 15, "to": 20, "count": 5 },
+      { "from": 20, "to": 25, "count": 9 },
+      { "from": 25, "to": 30, "count": 14 },
+      { "from": 30, "to": 35, "count": 12 },
+      { "from": 35, "to": 40, "count": 9 },
+      { "from": 40, "to": 45, "count": 6 },
+      { "from": 45, "to": 50, "count": 3 }
+    ],
+    "reference": { "label": "Reference: 40 kt", "value": 40 }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "pattern": "conversion-flow",
+  "classification": "synthetic-demonstration",
+  "title": "Of 1,000 kt of feed, 575 kt reaches alloy; beneficiation is the largest single loss at 180 kt",
+  "subtitle": "Contained Material X carried through four conversion steps, kt; losses as stated per step",
+  "annotation": "Every step reconciles: input equals output plus loss. Percentages use each step's own input.",
+  "source": "Synthetic fixture conversion-flow.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Feed", "1,000", "575", "−180", "Beneficiation"],
+  "data": {
+    "unit": "kt of contained Material X",
+    "dp": 0,
+    "input": { "label": "Feed", "value": 1000 },
+    "steps": [
+      { "process": "Beneficiation", "label": "Concentrate", "out": 820, "loss": 180 },
+      { "process": "Separation", "label": "Oxide", "out": 700, "loss": 120 },
+      { "process": "Reduction", "label": "Metal", "out": 610, "loss": 90 },
+      { "process": "Alloying", "label": "Alloy", "out": 575, "loss": 35 }
+    ]
+  }
+}

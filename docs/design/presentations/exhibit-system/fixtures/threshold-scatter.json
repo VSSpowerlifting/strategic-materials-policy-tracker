@@ -1,0 +1,40 @@
+{
+  "pattern": "threshold-scatter",
+  "classification": "synthetic-demonstration",
+  "title": "Four of 17 synthetic projects combine unit cost above the ceiling with utilisation below the floor",
+  "subtitle": "Unit cost against utilisation, 17 synthetic projects; dashed lines mark a cost ceiling and a utilisation floor",
+  "annotation": "Projects in the lower-right quadrant breach both reference thresholds and are drawn in the accent. The thresholds are illustrative synthetic values, not policy limits.",
+  "source": "Synthetic fixture threshold-scatter.json, constructed for the exhibit gallery",
+  "visual_text": ["Cost ceiling: 60", "Utilisation floor: 50", "Project 4", "Above ceiling, below floor"],
+  "data": {
+    "xAxis": { "label": "Unit cost, CU per unit", "min": 0, "max": 100, "step": 20 },
+    "yAxis": { "label": "Utilisation, % of installed capacity", "min": 0, "max": 100, "step": 20 },
+    "xThreshold": { "label": "Cost ceiling: 60", "value": 60, "breach": "above" },
+    "yThreshold": { "label": "Utilisation floor: 50", "value": 50, "breach": "below" },
+    "quadrants": {
+      "tl": "Within ceiling, above floor",
+      "tr": "Above ceiling, above floor",
+      "bl": "Within ceiling, below floor",
+      "br": "Above ceiling, below floor"
+    },
+    "points": [
+      { "label": "Project 1", "x": 15, "y": 72 },
+      { "label": "Project 2", "x": 22, "y": 65 },
+      { "label": "Project 3", "x": 28, "y": 80, "named": true, "side": "r" },
+      { "label": "Project 4", "x": 88, "y": 20, "named": true, "side": "t" },
+      { "label": "Project 5", "x": 35, "y": 58 },
+      { "label": "Project 6", "x": 42, "y": 70 },
+      { "label": "Project 7", "x": 48, "y": 62 },
+      { "label": "Project 8", "x": 30, "y": 40 },
+      { "label": "Project 9", "x": 20, "y": 30, "named": true, "side": "r" },
+      { "label": "Project 10", "x": 38, "y": 25 },
+      { "label": "Project 11", "x": 52, "y": 45 },
+      { "label": "Project 12", "x": 66, "y": 35 },
+      { "label": "Project 13", "x": 72, "y": 28 },
+      { "label": "Project 14", "x": 80, "y": 42 },
+      { "label": "Project 15", "x": 68, "y": 72 },
+      { "label": "Project 16", "x": 78, "y": 62 },
+      { "label": "Project 17", "x": 85, "y": 82 }
+    ]
+  }
+}

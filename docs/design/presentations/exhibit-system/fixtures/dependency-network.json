@@ -1,0 +1,36 @@
+{
+  "pattern": "dependency-network",
+  "classification": "synthetic-demonstration",
+  "title": "Project 4 depends on two organisations, and Programme P is upstream of one of them through Project 2",
+  "subtitle": "Declared dependencies among nine synthetic entities; each arrow points from the supplier to the dependent",
+  "annotation": "The highlighted path runs from Programme P to Project 4. Organisation M receives from two projects; Organisation N from one.",
+  "source": "Synthetic fixture dependency-network.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Programme P", "Project 4", "Organisation M", "Highlighted path"],
+  "data": {
+    "edgeMeaning": "Arrow: the source supplies or funds the target",
+    "nodes": [
+      { "id": "prg-p", "label": "Programme P", "type": "Programme" },
+      { "id": "org-k", "label": "Organisation K", "type": "Organisation" },
+      { "id": "org-l", "label": "Organisation L", "type": "Organisation" },
+      { "id": "prj-1", "label": "Project 1", "type": "Project" },
+      { "id": "prj-2", "label": "Project 2", "type": "Project" },
+      { "id": "prj-3", "label": "Project 3", "type": "Project" },
+      { "id": "org-m", "label": "Organisation M", "type": "Organisation" },
+      { "id": "org-n", "label": "Organisation N", "type": "Organisation" },
+      { "id": "prj-4", "label": "Project 4", "type": "Project" }
+    ],
+    "edges": [
+      { "from": "prg-p", "to": "prj-1" },
+      { "from": "prg-p", "to": "prj-2" },
+      { "from": "org-k", "to": "prj-1" },
+      { "from": "org-l", "to": "prj-3" },
+      { "from": "prj-1", "to": "org-m" },
+      { "from": "prj-2", "to": "org-m" },
+      { "from": "prj-3", "to": "org-n" },
+      { "from": "org-m", "to": "prj-4" },
+      { "from": "org-n", "to": "prj-4" }
+    ],
+    "highlightPath": ["prg-p", "prj-2", "org-m", "prj-4"]
+  }
+}

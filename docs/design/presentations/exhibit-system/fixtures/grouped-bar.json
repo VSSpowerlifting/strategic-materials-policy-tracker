@@ -1,0 +1,21 @@
+{
+  "pattern": "grouped-bar",
+  "classification": "synthetic-demonstration",
+  "title": "Organisation K's storage capacity exceeds its processing capacity at three of five demonstration sites",
+  "subtitle": "Capacity by site and stage at one cut-off, units per year; zero-based axis",
+  "annotation": "Sites 2 and 4 are the exceptions: processing capacity is the larger bar. The three series use the same unit and cut-off, so adjacent bars compare directly.",
+  "source": "Synthetic fixture grouped-bar.json, constructed for the exhibit gallery",
+  "visual_text": ["Site 1", "Site 5", "Storage", "Processing", "Transport", "120"],
+  "data": {
+    "unit": "Units per year, capacity",
+    "dp": 0,
+    "series": ["Storage", "Processing", "Transport"],
+    "categories": [
+      { "label": "Site 1", "values": [120, 80, 60] },
+      { "label": "Site 2", "values": [70, 95, 50] },
+      { "label": "Site 3", "values": [110, 90, 75] },
+      { "label": "Site 4", "values": [55, 85, 40] },
+      { "label": "Site 5", "values": [100, 65, 45] }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "sensitivity-grid",
+  "name": "Two-way sensitivity grid",
+  "family_code": "F",
+  "order": 2,
+  "reader_question": "How does a model output change when two drivers vary together, and where does it change sign or magnitude?",
+  "relationship": "Two-way sensitivity: one model run per cell of a driver-A by driver-B grid, with the base case marked.",
+  "question_types": ["sensitivity"],
+  "requires": ["model-output", "single-measure", "conditions"],
+  "incompatible": ["sample"],
+  "capacity": { "min_items": 3, "max_items": 7, "what": "values per driver (3 to 7 rows by 3 to 7 columns)" },
+  "use_when": [
+    "Two drivers jointly determine a model output and exact cell values matter",
+    "The base case must remain visible inside the range of alternatives"
+  ],
+  "avoid_when": [
+    "More than two drivers need comparison — use tornado",
+    "Values are observed rather than model output",
+    "A continuous surface is claimed; the grid shows discrete runs only"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Output measure and unit, labelled as model output" },
+    { "field": "rowDriver / colDriver", "type": "{name, values[3..7]}", "notes": "Axis driver and its tested values as display strings" },
+    { "field": "cells[][]", "type": "number[][]", "notes": "Rows × columns of model output; dimensions must match the axes" },
+    { "field": "base", "type": "{row, col}", "notes": "Labels of the base-case row and column; must exist in the grid" }
+  ],
+  "units": "One output unit; shading is a relative ramp over the grid's own minimum and maximum, not an absolute scale.",
+  "editability": {
+    "tier": "table",
+    "editable": ["Native PowerPoint table: values, fills, borders and fonts", "Frame text"],
+    "not_data_bound": ["Cell shading is a static fill computed from the fixture; editing a value does not recolour it", "The sequential key, base-case marker and model-output tag are positioned shapes and text"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/sensitivity-grid.ts",
+  "fixture": "fixtures/sensitivity-grid.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "aligned-series", "base-in-grid"],
+  "table_alternative": "The grid is itself a table; a plain unshaded copy serves screen-reader and export use.",
+  "variations": ["Diverging shade around a threshold where sign matters", "One grid per scenario"],
+  "limitations": ["Shading is relative to the grid's range, so two grids are not comparable by colour", "Shows two drivers only; others are held at base values"],
+  "excluded_alternatives": [
+    { "form": "3D surface chart", "reason": "Perspective distorts values and hides exact cell outputs" },
+    { "form": "Heat-map without values", "reason": "Colour alone cannot carry precise model outputs" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

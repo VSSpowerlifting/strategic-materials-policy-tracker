@@ -1,0 +1,44 @@
+{
+  "id": "threshold-scatter",
+  "name": "Threshold scatter",
+  "family_code": "G",
+  "order": 2,
+  "reader_question": "Which items fall beyond a stated reference value on one or both measures?",
+  "relationship": "Association between two measures read against one or two stated reference thresholds that divide the plane into quadrants.",
+  "question_types": ["relationship", "state"],
+  "requires": ["two-measures", "conditions"],
+  "incompatible": ["non-comparable-bases", "time-axis"],
+  "capacity": { "min_items": 6, "max_items": 30, "what": "points" },
+  "use_when": [
+    "A source or analyst states a threshold on at least one measure and the reader needs to see who is beyond it",
+    "Quadrant membership is the message and exact values are secondary"
+  ],
+  "avoid_when": [
+    "No stated threshold exists; drawing one invents a criterion — use scatter",
+    "A third measure must also be encoded — use bubble"
+  ],
+  "data_contract": [
+    { "field": "xAxis / yAxis", "type": "{label, min, max, step, dp?}", "notes": "Explicit axis range containing every point and every threshold" },
+    { "field": "xThreshold / yThreshold", "type": "{label, value, breach: above|below}", "notes": "One or two reference values; breach states which side counts as beyond" },
+    { "field": "quadrants", "type": "{tl, tr, bl, br}", "notes": "Neutral quadrant captions" },
+    { "field": "points[]", "type": "{label, x, y, named?, side?}", "notes": "Unique items; points beyond every supplied threshold are drawn in the accent" }
+  ],
+  "units": "Each axis states its own unit; thresholds are expressed in the unit of their axis.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Native scatter chart with embedded workbook (Edit Data)", "Marker colours and axis ranges", "Frame text"],
+    "not_data_bound": ["Threshold lines, quadrant captions and point labels are positioned shapes and text computed from the fixture; they do not move if chart data or axis range is edited", "The accent/neutral split is two series computed from the thresholds at build time"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/threshold-scatter.ts",
+  "fixture": "fixtures/threshold-scatter.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "axis-explicit", "bounded-values", "threshold-present", "threshold-within-axis", "labelled-points-limit"],
+  "table_alternative": "A table of items with a flag column stating which thresholds each item breaches.",
+  "variations": ["Single vertical threshold only", "Single horizontal threshold only"],
+  "limitations": ["Thresholds must be stated or sourced; an analyst-chosen cut-off is a presentation choice and is labelled as such", "Items near a threshold look categorically different from items just across it", "Correlation is not causation"],
+  "excluded_alternatives": [
+    { "form": "Four-colour quadrant shading", "reason": "Fills would compete with the single accent and imply four classes of equal standing" },
+    { "form": "Composite score ranking", "reason": "Collapsing two measures into one index would hide the thresholds' separate meaning" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

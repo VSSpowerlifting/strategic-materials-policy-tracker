@@ -1,0 +1,10 @@
+{
+  "classification": "Synthetic layout fixtures only; no company, project, policy or investment findings",
+  "units": "Illustrative units, except the explicitly hypothetical timeline days",
+  "ranked_comparison": {"labels": ["Option A", "Option B", "Option C"], "values": [55, 80, 65]},
+  "paired_observations": {"labels": ["Series A", "Series B", "Series C"], "start": [20, 40, 30], "end": [35, 25, 32]},
+  "bridge": {"labels": ["Opening", "Operating", "Investment", "Receipts", "Closing"], "values": [100, -15, -25, 10, 70]},
+  "small_multiples": {"periods": [1, 2, 3, 4], "series": {"Series A": [20, 40, 55, 70], "Series B": [65, 60, 50, 40]}},
+  "timeline": {"finance": [{"day": 0, "label": "Signed", "status": "completed"}, {"day": 10, "label": "Cash", "status": "completed"}], "industrial": [{"day": 20, "label": "Build", "status": "completed"}, {"day": 40, "label": "Target", "status": "expected"}]},
+  "sensitivity": {"cost": [90, 100, 110], "delay": [0, 2, 4], "output": [[12, 10, 8], [8, 6, 4], [4, 2, 0]]}
+}

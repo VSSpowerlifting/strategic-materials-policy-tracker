@@ -1,0 +1,20 @@
+{
+  "pattern": "role-matrix",
+  "classification": "synthetic-demonstration",
+  "title": "Organisation K holds three roles on the synthetic project; Organisation M holds only one",
+  "subtitle": "Roles recorded per organisation in the demonstration source set; a mark shows a role, not an amount",
+  "annotation": "The matrix shows who plays which role. It says nothing about how much each organisation provides. Only one organisation is recorded as regulator.",
+  "source": "Synthetic fixture role-matrix.json, constructed for the exhibit gallery",
+  "visual_text": ["Organisation K", "Organisation M", "Provider", "Regulator", "Organisations in role"],
+  "data": {
+    "roles": ["Provider", "Recipient", "Co-investor", "Operator", "Regulator"],
+    "orgs": [
+      { "label": "Organisation K", "cells": [{ "qualifier": "senior debt" }, null, { "qualifier": "from 2031" }, { "qualifier": "Project 3" }, null] },
+      { "label": "Organisation L", "cells": [{}, { "qualifier": "Programme P" }, null, null, null] },
+      { "label": "Organisation M", "cells": [null, null, null, null, {}] },
+      { "label": "Organisation N", "cells": [null, { "qualifier": "Project 3" }, { "qualifier": "minority" }, null, null] },
+      { "label": "Organisation P", "cells": [{ "qualifier": "guarantee" }, null, null, { "qualifier": "Site 4" }, null] },
+      { "label": "Organisation Q", "cells": [null, { "qualifier": "Project 5" }, null, null, null] }
+    ]
+  }
+}

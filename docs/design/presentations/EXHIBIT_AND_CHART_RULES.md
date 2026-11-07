@@ -20,6 +20,8 @@ AI-assisted quantitative charts and graphics must also pass the [Editorial Authe
 
 **Never choose a chart because it looks like consulting.** Choose it because it exposes a comparison the decision-maker otherwise cannot see.
 
+Use the [broader visual repertoire and linked examples](VISUAL_REPERTOIRE_AND_REFERENCES.md) when selecting the exhibit. It covers paired observations, small multiples, sensitivity heatmaps, conditional states, networks, option profiles and other forms beyond tables and bars. Test a graphical alternative for timing/change/state evidence before defaulting to a prose-filled table. Keep the same scale/encoding across intentionally comparable exhibits.
+
 ## Transaction and financing taxonomy
 
 SMPT's status vocabulary should persist into presentations:
@@ -76,6 +78,8 @@ Where issuer and analyst values share an exhibit, clearly differentiate their pr
 8. Changes in percentage points are not changes in percent.
 9. A scenario's arithmetic must trace to workbook inputs or an independently rerunnable script.
 10. No slide should imply forecast certainty when assumptions are discretionary.
+
+Displayed precision should serve the decision; keep full precision in the source/model. For example, one decimal may be enough for a USD-million presentation even when the audit schedule uses three. Round each label from its controlling value rather than accumulating rounded movements. If rounded labels fail to reconcile, disclose the actual rounding difference. Small waterfall movements must keep true-scaled geometry; use direct labels or an explicitly separate detail scale instead of inflating bars.
 
 ## Chart grammar and accessibility
 

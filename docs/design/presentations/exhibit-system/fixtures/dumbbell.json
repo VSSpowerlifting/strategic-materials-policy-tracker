@@ -1,0 +1,22 @@
+{
+  "pattern": "dumbbell",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction C added the most licensed capacity between the two demonstration observations",
+  "subtitle": "Licensed processing capacity at two cut-offs, kilotonnes per year",
+  "annotation": "Both dots share one axis that starts at zero. Licensed capacity is a permit term, not operating output.",
+  "source": "Synthetic fixture dumbbell.json, constructed for the exhibit gallery",
+  "visual_text": ["Jurisdiction C", "Cut-off 1", "Cut-off 2"],
+  "data": {
+    "unit": "kt per year, licensed",
+    "dp": 0,
+    "fromLabel": "Cut-off 1",
+    "toLabel": "Cut-off 2",
+    "items": [
+      { "label": "Jurisdiction A", "from": 42, "to": 55 },
+      { "label": "Jurisdiction B", "from": 30, "to": 33 },
+      { "label": "Jurisdiction C", "from": 12, "to": 48 },
+      { "label": "Jurisdiction D", "from": 25, "to": 21 },
+      { "label": "Jurisdiction E", "from": 8, "to": 14 }
+    ]
+  }
+}

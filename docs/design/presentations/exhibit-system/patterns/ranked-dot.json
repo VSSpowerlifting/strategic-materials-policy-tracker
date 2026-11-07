@@ -1,0 +1,44 @@
+{
+  "id": "ranked-dot",
+  "name": "Ranked dot plot",
+  "family_code": "A",
+  "order": 2,
+  "reader_question": "How do items rank on one measure when the differences are small relative to the level?",
+  "relationship": "Ordered comparison of single values on a shared axis that may start above zero; position, not length, carries the value.",
+  "question_types": ["rank"],
+  "requires": ["single-measure"],
+  "incompatible": ["non-comparable-bases", "parts-of-whole"],
+  "capacity": { "min_items": 4, "max_items": 12, "what": "dots" },
+  "use_when": [
+    "Bars would exaggerate small differences because every value sits far from zero",
+    "The reader needs the ordering and approximate gaps, with the axis range stated"
+  ],
+  "avoid_when": [
+    "The measure is an additive quantity whose size relative to zero matters — use ranked-bar",
+    "Items are measured on different bases or in different units"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "axisMin / axisMax / tickStep", "type": "number", "notes": "Stated axis range; every value must fall inside it" },
+    { "field": "items[].label / items[].value", "type": "string / number", "notes": "One dot per item" },
+    { "field": "items[].highlight", "type": "boolean, optional", "notes": "At most one accent dot" }
+  ],
+  "units": "One unit and basis throughout; the non-zero axis range is printed on the slide.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Dots, guide lines, gridlines, tick labels and value labels as native shapes and text", "Accent dot colour", "Frame text"],
+    "not_data_bound": ["Dot positions are drawn on a computed scale; values are not data-bound and there is no embedded workbook", "Editing a value means moving the dot and rewriting its label"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/ranked-dot.ts",
+  "fixture": "fixtures/ranked-dot.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "bounded-values", "axis-range", "single-highlight"],
+  "table_alternative": "A sorted table of item and value, with the measure and basis in the header.",
+  "variations": ["Two-period dots on the same rows (dumbbell)", "Dots with a reference line for a stated threshold"],
+  "limitations": ["The axis does not start at zero, so gaps must not be read as proportions", "Guide lines run from the axis start and are not bars"],
+  "excluded_alternatives": [
+    { "form": "Truncated-axis bar chart", "reason": "Bar length from a non-zero baseline misstates proportions" },
+    { "form": "Lollipop on a zero-based axis", "reason": "Compresses small differences into near-identical stems" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

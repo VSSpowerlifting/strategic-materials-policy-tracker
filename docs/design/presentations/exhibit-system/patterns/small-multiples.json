@@ -1,0 +1,45 @@
+{
+  "id": "small-multiples",
+  "name": "Small multiples on a shared axis",
+  "family_code": "C",
+  "order": 2,
+  "reader_question": "How do several items' paths over time compare when each gets its own panel?",
+  "relationship": "The same measure over the same periods for 4–6 items, one panel each, on an identical value axis so slopes and levels compare directly.",
+  "question_types": ["trend", "rank"],
+  "requires": ["single-measure", "time-axis", "several-series"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 4, "max_items": 6, "what": "panels" },
+  "use_when": [
+    "Overlaid lines would tangle but the reader must still compare shapes and levels",
+    "All panels share one unit, period set and basis"
+  ],
+  "avoid_when": [
+    "Only two or three series exist — use indexed-lines",
+    "Panels differ in unit or basis, which would force different axes"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit shared by every panel" },
+    { "field": "axisMin / axisMax / majorUnit", "type": "number", "notes": "One value axis applied to every panel; all values must fall inside it" },
+    { "field": "periods[]", "type": "string[≥4]", "notes": "Shared period labels" },
+    { "field": "panels[].title / panels[].values[]", "type": "string / number[]", "notes": "One value per period" },
+    { "field": "panels[].highlight", "type": "boolean, optional", "notes": "At most one accent panel" }
+  ],
+  "units": "One unit throughout; identical axis minimum, maximum and tick step in every panel, stated in the subtitle.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["One native line chart per panel, each with an embedded workbook (Edit Data)", "Panel titles and last-value labels as text", "Frame text"],
+    "not_data_bound": ["The shared axis is enforced by the renderer; after editing one panel's axis the others must be matched by hand", "Panel titles and last-value labels are text boxes, not chart elements"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/small-multiples.ts",
+  "fixture": "fixtures/small-multiples.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "bounded-values", "aligned-series", "axis-range", "single-highlight"],
+  "table_alternative": "A matrix of item by period with the unit in the header.",
+  "variations": ["Column panels for discrete counts", "A reference line at a stated threshold in every panel"],
+  "limitations": ["A shared axis can flatten the smallest series", "Six panels is the legible limit at slide size"],
+  "excluded_alternatives": [
+    { "form": "Free-scaled panels", "reason": "Different axes make equal-looking slopes mean different things" },
+    { "form": "Single chart with six overlaid lines", "reason": "Crossing lines hide individual paths" }
+  ],
+  "references": ["mckinsey-2025-small-multiples", "smpt-repertoire-2026"]
+}

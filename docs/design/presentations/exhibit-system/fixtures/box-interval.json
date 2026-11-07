@@ -1,0 +1,21 @@
+{
+  "pattern": "box-interval",
+  "classification": "synthetic-demonstration",
+  "title": "Synthetic delivery times are shortest and tightest at Organisation M and spread furthest at Organisation L",
+  "subtitle": "Months from award to first output; minimum, quartiles, median and maximum per organisation",
+  "annotation": "Whiskers run from minimum to maximum, boxes span the interquartile range and the accent line marks the median. Organisation M has only nine observations, so its quartiles are the least stable.",
+  "source": "Synthetic fixture box-interval.json, constructed for the exhibit gallery",
+  "visual_text": ["Organisation M", "Organisation L", "12 · n = 9", "27 · n = 22"],
+  "data": {
+    "unit": "Months to first output",
+    "dp": 0,
+    "axis": { "min": 0, "max": 60, "step": 10 },
+    "groups": [
+      { "label": "Organisation K", "n": 18, "min": 8, "q1": 14, "median": 19, "q3": 26, "max": 38 },
+      { "label": "Organisation L", "n": 22, "min": 12, "q1": 20, "median": 27, "q3": 36, "max": 55 },
+      { "label": "Organisation M", "n": 9, "min": 6, "q1": 9, "median": 12, "q3": 15, "max": 20 },
+      { "label": "Organisation N", "n": 15, "min": 15, "q1": 24, "median": 30, "q3": 34, "max": 44 },
+      { "label": "Organisation O", "n": 12, "min": 10, "q1": 18, "median": 22, "q3": 31, "max": 48 }
+    ]
+  }
+}

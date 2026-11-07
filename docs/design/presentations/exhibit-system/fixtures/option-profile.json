@@ -1,0 +1,18 @@
+{
+  "pattern": "option-profile",
+  "classification": "synthetic-demonstration",
+  "title": "Option 3 is the only profile still at announcement; Options 1 and 4 are binding",
+  "subtitle": "Instrument, status, timing, conditions and open question per demonstration option; one status vocabulary",
+  "annotation": "Same five facts for every option, so differences are visible without prose. Status follows the transaction taxonomy; an announcement is not a commitment.",
+  "source": "Synthetic fixture option-profile.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Option 3", "Announcement", "Binding", "2031-04-01 to 2033-03-31", "Open question"],
+  "data": {
+    "options": [
+      { "label": "Option 1", "instrument": "Grant to Organisation K", "status": "binding", "start": "2031-01-15", "end": "2032-12-31", "conditions": "Delivery of Site 4 by end of period", "open": "Repayment trigger not stated" },
+      { "label": "Option 2", "instrument": "Loan guarantee, Programme P", "status": "authorization", "start": "2031-06-01", "end": "2033-06-30", "conditions": "Co-investment by a second organisation", "open": "Cap not yet set" },
+      { "label": "Option 3", "instrument": "Price floor for Material X", "status": "announcement", "start": "2031-04-01", "end": "2033-03-31", "conditions": "None stated", "open": "Legal basis and floor level not stated" },
+      { "label": "Option 4", "instrument": "Equity stake in Project 3", "status": "binding", "start": "2030-09-01", "end": "2033-09-01", "conditions": "Board seat; offtake share to Jurisdiction A", "open": "Exit terms not stated" }
+    ]
+  }
+}

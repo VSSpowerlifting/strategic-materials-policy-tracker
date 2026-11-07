@@ -1,0 +1,22 @@
+{
+  "pattern": "stacked-bar",
+  "classification": "synthetic-demonstration",
+  "title": "Class 4 permits supply 35% of Jurisdiction C's licensed capacity, the largest total of the five",
+  "subtitle": "Licensed processing capacity by permit class, kt per year, one cut-off",
+  "annotation": "All four classes are the same measure, so the segments add to each bar-end total. Licensed capacity is a permit term, not operating output.",
+  "source": "Synthetic fixture stacked-bar.json, constructed for the exhibit gallery",
+  "visual_text": ["Jurisdiction C", "Class 4", "142", "96", "kt per year, licensed"],
+  "data": {
+    "unit": "kt per year, licensed",
+    "dp": 0,
+    "components": ["Class 1", "Class 2", "Class 3", "Class 4"],
+    "accent": "Class 4",
+    "rows": [
+      { "label": "Jurisdiction A", "values": [30, 28, 22, 16] },
+      { "label": "Jurisdiction B", "values": [18, 20, 12, 8] },
+      { "label": "Jurisdiction C", "values": [34, 30, 28, 50] },
+      { "label": "Jurisdiction D", "values": [26, 22, 14, 9] },
+      { "label": "Jurisdiction E", "values": [14, 12, 10, 4] }
+    ]
+  }
+}

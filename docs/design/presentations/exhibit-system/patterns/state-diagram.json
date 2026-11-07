@@ -1,0 +1,100 @@
+{
+  "id": "state-diagram",
+  "name": "Instrument state diagram",
+  "family_code": "J",
+  "order": 1,
+  "reader_question": "Which legal or administrative states can this instrument occupy, which one is current, and which transitions are permitted?",
+  "relationship": "Discrete states of one instrument linked by labelled, directed transitions; one state is current.",
+  "question_types": [
+    "state"
+  ],
+  "requires": [
+    "states",
+    "edges"
+  ],
+  "incompatible": [
+    "quantified-flows"
+  ],
+  "capacity": {
+    "min_items": 3,
+    "max_items": 6,
+    "what": "states"
+  },
+  "use_when": [
+    "The reader needs to know what can happen next to an instrument, not when it happened",
+    "Transitions have a named trigger such as a vote, a date or an order"
+  ],
+  "avoid_when": [
+    "The order and dates of events are the point — use a timeline",
+    "Quantities move between the states — use conversion-flow"
+  ],
+  "data_contract": [
+    {
+      "field": "asOf",
+      "type": "ISO date",
+      "notes": "Date at which the current state is read"
+    },
+    {
+      "field": "currentId",
+      "type": "string",
+      "notes": "Must be one of states[].id"
+    },
+    {
+      "field": "states[].id / label / note?",
+      "type": "string",
+      "notes": "3–6 states in layout order; row 2 runs right to left"
+    },
+    {
+      "field": "transitions[].from / to / label",
+      "type": "string",
+      "notes": "Directed, labelled by trigger; endpoints must be declared states; no duplicates"
+    }
+  ],
+  "units": "No quantities; the only date is the as-of date of the current state.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": [
+      "State boxes, arrows and trigger labels as native shapes and text",
+      "Fill and outline of each state",
+      "Frame text"
+    ],
+    "not_data_bound": [
+      "States and transitions are drawn shapes; editing the fixture and re-running the build is the way to change structure",
+      "Arrow geometry is computed and not connected to the boxes as PowerPoint connectors"
+    ],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/state-diagram.ts",
+  "fixture": "fixtures/state-diagram.json",
+  "integrity_rules": [
+    "min-categories",
+    "max-categories",
+    "unique-labels",
+    "edges-resolve",
+    "current-state-resolves",
+    "no-duplicate-edges"
+  ],
+  "table_alternative": "A transition table (from state, to state, trigger).",
+  "variations": [
+    "Single-row chain for linear lifecycles",
+    "Terminal states marked in the note line"
+  ],
+  "limitations": [
+    "Up to six states in two rows; larger lifecycles need a table or a split into two exhibits",
+    "Only transitions between adjacent rows or neighbours are routed; the layout order is chosen by the author",
+    "The diagram shows permitted transitions, not how often or when they occur"
+  ],
+  "excluded_alternatives": [
+    {
+      "form": "Flowchart with decision diamonds",
+      "reason": "Adds branching logic the state record does not contain; use condition-tree for decisions"
+    },
+    {
+      "form": "Timeline of status changes",
+      "reason": "Answers when, not which transitions are possible"
+    }
+  ],
+  "references": [
+    "smpt-repertoire-2026"
+  ]
+}

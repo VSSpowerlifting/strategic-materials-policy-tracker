@@ -1,0 +1,24 @@
+{
+  "pattern": "tornado",
+  "classification": "synthetic-demonstration",
+  "title": "In the illustrative model, offtake price moves the result by 180 CU million, more than any other driver",
+  "subtitle": "Model output: net present value of Project 3, CU million, one driver varied at a time around the base case",
+  "annotation": "Model output, not an observation: drivers move one at a time, so interactions are not shown.",
+  "source": "Synthetic fixture tornado.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["MODEL OUTPUT — illustrative", "Offtake price (±20%)", "Base case: 240", "150", "330"],
+  "data": {
+    "unit": "CU million, model output",
+    "dp": 0,
+    "baseLabel": "Base case",
+    "base": 240,
+    "drivers": [
+      { "label": "Offtake price (±20%)", "low": 150, "high": 330 },
+      { "label": "Discount rate (±2 pts)", "low": 190, "high": 300 },
+      { "label": "Capital cost (±15%)", "low": 205, "high": 275 },
+      { "label": "Ramp-up delay (±6 months)", "low": 205, "high": 262 },
+      { "label": "Recovery rate (±5 pts)", "low": 215, "high": 265 },
+      { "label": "Operating cost (±10%)", "low": 220, "high": 258 }
+    ]
+  }
+}

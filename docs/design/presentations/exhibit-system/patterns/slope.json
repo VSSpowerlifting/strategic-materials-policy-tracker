@@ -1,0 +1,45 @@
+{
+  "id": "slope",
+  "name": "Two-period slope chart",
+  "family_code": "B",
+  "order": 2,
+  "reader_question": "How did each item move between two observations, and did any item change rank?",
+  "relationship": "Per-item change between two observations of one measure; line slope shows direction and relative movement, crossings show rank changes.",
+  "question_types": ["compare-two-observations", "rank"],
+  "requires": ["single-measure", "two-observations"],
+  "incompatible": ["non-comparable-bases", "parts-of-whole"],
+  "capacity": { "min_items": 3, "max_items": 8, "what": "lines" },
+  "use_when": [
+    "Each item has a value at exactly two comparable cut-offs",
+    "Rank changes and direction matter more than exact differences"
+  ],
+  "avoid_when": [
+    "More than two observations exist — use annotated-line or small-multiples",
+    "The reader must compare exact magnitudes or gaps — use dumbbell on a zero-based axis"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "fromLabel / toLabel", "type": "string", "notes": "The two observation labels; must differ" },
+    { "field": "items[].label", "type": "string", "notes": "Item name" },
+    { "field": "items[].from / items[].to", "type": "number", "notes": "Value at each observation" },
+    { "field": "items[].highlight", "type": "boolean, optional", "notes": "At most one accent line" }
+  ],
+  "units": "One unit and basis at both cut-offs; vertical position is linear in value between the lowest and highest value shown, with no zero baseline, and the slide says so.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Lines, end dots and labels as native shapes and text", "Accent line colour and weight", "Frame text"],
+    "not_data_bound": ["Line endpoints are drawn on a computed scale; values are not data-bound and there is no embedded workbook", "End labels are separated vertically by a fixed minimum gap, so a label can sit slightly off its dot", "Editing a value means moving the line end and rewriting its label"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/slope.ts",
+  "fixture": "fixtures/slope.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "single-highlight", "distinct-periods"],
+  "table_alternative": "A table of item, first value, second value and change.",
+  "variations": ["Dumbbell for exact gaps on a zero-based axis", "Slope with a dashed line for items measured on a different basis"],
+  "limitations": ["The vertical scale is not zero-based, so slopes compare direction, not proportional change", "Up to eight lines before end labels crowd"],
+  "excluded_alternatives": [
+    { "form": "Grouped bars for two periods", "reason": "Hides rank crossings and makes direction harder to see across many items" },
+    { "form": "Bump chart", "reason": "Shows rank only and discards the size of the movement" }
+  ],
+  "references": ["mckinsey-2025-two-period-rank", "smpt-repertoire-2026"]
+}
