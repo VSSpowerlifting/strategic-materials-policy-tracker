@@ -3,21 +3,26 @@
 import hashlib
 from io import BytesIO
 import json
+import re
 from pathlib import Path
 import sys
 from zipfile import ZipFile, ZIP_DEFLATED, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT/'outputs/review-candidate-v03'
-ARCHIVE = OUT/'FI003_Review_Candidate_v03.zip'
+OUT = ROOT/'outputs/review-candidate-v04'
+ARCHIVE = OUT/'FI003_Review_Candidate_v04.zip'
 FILES = [
     'READER_GUIDE.md', 'evidence.csv', 'sources.json', 'inputs.json', 'chronology.csv',
     'prototype.py', 'model.py', 'test_prototype.py', 'test_model.py', 'verify_workbook.py',
     'presentation/prepare.py', 'presentation/slide-manifest.json',
+    'presentation/build.mjs', 'presentation/finish_package.py',
+    'presentation/verify.py', 'presentation/remediate_pdf.py',
+    'outputs/presentation-draft-v04/verification.json',
+    'outputs/presentation-draft-v04/accessibility.json',
     'outputs/fi003-model-v1/model_spec.json',
     'outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx',
-    'outputs/presentation-draft-v03/SMPT_FI003_JPMorgan_MP_Draft_v03.pptx',
-    'outputs/presentation-draft-v03/SMPT_FI003_JPMorgan_MP_Draft_v03.pdf',
+    'outputs/presentation-draft-v04/SMPT_FI003_JPMorgan_MP_Draft_v04.pptx',
+    'outputs/presentation-draft-v04/SMPT_FI003_JPMorgan_MP_Draft_v04.pdf',
 ] + [f'exhibits/{name}.csv' for name in (
     'support_accounting', 'underwriting', 'replacement', 'revolver_snapshots',
     'ppa_sensitivity', 'financing_economics', 'offtake_threshold',
@@ -39,7 +44,8 @@ def inspect(data, name):
         # Exact PDF annotations are checked separately by presentation/verify.py.
         assert b'docs.google.com' not in data
     else:
-        assert b'docs.google.com' not in data and b'drive.google.com' not in data, name
+        # Allow the verifier's bare-domain deny-list, but reject actual URLs/paths.
+        assert not re.search(rb'(?:https?://)?(?:docs|drive)\.google\.com/', data), name
         assert b'file://' not in data and b'/Users/benjaminyang' not in data, name
 
 
@@ -48,11 +54,11 @@ def main():
     manifest = {
         'status': 'DRAFT: ready for human financial/editorial review; publication HOLD',
         'source_cutoff': '2026-11-06',
-        'presentation_version': '0.3', 'model_version': '1.0',
-        'baseline_sha': '3975390968968da63059fb0fa4a5c9175de46ec3',
+        'presentation_version': '0.4', 'model_version': '1.0',
+        'baseline_sha': 'a07167f25675957be779af8a56961f10e6face41',
         'release_gates': ['Human financial/editorial and exact-file/source-rights approval',
                           'Native Microsoft PowerPoint compatibility',
-                          'Remaining PDF accessibility remediation and review',
+                          'Manual PDF accessibility and assistive-technology review',
                           'Separate publication authorization'],
         'files': {name: {'bytes': len(data), 'sha256': digest(data)} for name, data in sorted(payload.items())},
         'exclusions': ['Internal trackers and README', 'Native Sheets/access records',

@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "baseline_sha": "a07167f25675957be779af8a56961f10e6face41",
+  "visual_guidance_sha": "b7f4c8c409017cb3f1fa4507eb4e85ea6f7d7a91",
+  "protected_paths": [
+    "analysis.md",
+    "inputs.json",
+    "sources.json",
+    "evidence.csv",
+    "model.py",
+    "prototype.py",
+    "exhibits",
+    "outputs/fi003-model-v1",
+    "outputs/presentation-draft-v03",
+    "outputs/review-candidate-v03"
+  ],
+  "original_chart_series_unchanged": true,
+  "original_full_precision_waterfall_unchanged": true,
+  "original_source_rows_preserved_in_manifest": true,
+  "model_source_hashes_and_controls_identical": true,
+  "visible_revision_slides": [
+    1,
+    3,
+    5,
+    9,
+    11,
+    13,
+    14
+  ],
+  "new_threshold_chart_values": [
+    75.7702512,
+    151.5405024
+  ],
+  "individually_inspected_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "local_checks": {
+    "financial_tests": 24,
+    "schedules": 11,
+    "formula_cache_values": 388,
+    "repo_validation": "PASS (25 inherited warnings)",
+    "lint": "PASS (28 inherited warnings; 0 errors)",
+    "build": "PASS after moving corrupt local Turbopack cache aside; no source changes",
+    "typecheck": "PASS"
+  },
+  "limits": [
+    "No newly executed live source refresh, Sheets, Excel, PowerPoint or assistive-technology session",
+    "No merge-conflict resolution or combined-main CI in this phase"
+  ]
+}

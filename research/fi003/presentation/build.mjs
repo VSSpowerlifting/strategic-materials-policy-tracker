@@ -10,8 +10,8 @@ if(!runtime)throw new Error('CODEX_PRIMARY_RUNTIME_NODE_MODULES must identify th
 const require=createRequire(path.join(runtime,'fi003.cjs'));
 const {Presentation,PresentationFile}=await import(pathToFileURL(require.resolve('@oai/artifact-tool')).href);
 const d=JSON.parse(await fs.readFile(path.join(here,'slide-manifest.json'),'utf8'));
-const work=path.dirname(here),build=process.env.FI003_DECK_BUILD||path.join(here,'.build');
-const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v03');
+const work=path.dirname(here),build=process.env.FI003_DECK_BUILD||path.join(here,'.build-v04');
+const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v04');
 await fs.mkdir(build,{recursive:true});await fs.mkdir(out,{recursive:true});
 const deck=Presentation.create({slideSize:{width:1280,height:720}});
 const c={paper:'#F5F3EE',ink:'#1B1915',muted:'#5B5548',gold:'#7A5510',char:'#12110F',light:'#EFECE6',rule:'#D8D3C7',band:'#EAE6DC',neutral:'#817B70'};
@@ -94,6 +94,59 @@ for(const m of d.slides){
   const ys=[242,348,454];
   m.findings.forEach(([value,t],i)=>{box(s,'finding-value-'+i,value,56,ys[i],275,80,i===2?28:42,true,c.gold);box(s,'finding-copy-'+i,t,352,ys[i],850,82,25);if(i<2)rule(s,ys[i]+91);});
   note(s,m.note,557,55);caveat(s,m.caveat,620,38);
+  }else if(m.kind==='sequence'){
+  // Equal spacing is schematic; statuses remain explicit in the event copy.
+  rule(s,292,56,1168,c.gold);
+  m.events.forEach(([date,label,copy],i)=>{const x=56+i*296;
+   box(s,'date-'+i,date,x,246,272,30,23,true,c.gold);
+   rect(s,'event-marker-'+i,x,286,12,12,c.gold);
+   box(s,'event-'+i,label,x,320,268,60,25,true);
+   box(s,'event-copy-'+i,copy,x,390,268,123,22);
+  });
+  box(s,'spacing','Sequence schematic; spacing does not represent elapsed time',56,529,1168,26,15,false,c.muted);
+  note(s,m.note,568,57);caveat(s,m.caveat,630,33);
+ }else if(m.kind==='alternatives'){
+  m.rows.slice(1).forEach(([label,copy],i)=>{const y=241+i*78;
+   box(s,'rank-'+i,String(i+1).padStart(2,'0'),56,y,55,40,28,true,c.gold);
+   box(s,'explanation-'+i,label.replace(/^\d+\. /,''),132,y,414,65,22,true);
+   box(s,'evidence-'+i,copy,584,y,640,65,21);
+   if(i<3)rule(s,y+68,132,1092);
+  });note(s,m.note,563,55);caveat(s,m.caveat,628,36);
+ }else if(m.kind==='timing'){
+  box(s,'pretrigger','Before the trigger',56,242,465,31,24,true,c.gold);
+  box(s,'liquidity','At least $500m unrestricted contractual cash / Cash Equivalents',56,286,465,71,24);
+  box(s,'trigger','Trigger: earlier delivery of either',592,242,632,31,24,true,c.gold);
+  box(s,'trigger-a','A certificate showing ≥$400m covenant EBITDA over four quarters',592,286,632,57,22);
+  box(s,'trigger-b','Required Q2 2027 financial statements',592,354,632,35,22);
+  rule(s,403);
+  box(s,'assumed-date','Illustrative delivery: 15 Aug 2027',56,422,510,31,22,true);
+  box(s,'first-test','First quarter ending after delivery: 30 Sep 2027',56,463,510,58,22);
+  box(s,'posttrigger','From the earnings-test stage',592,422,632,31,22,true,c.gold);
+  box(s,'earnings-tests','Leverage ≤4.00× and cash-interest coverage ≥3.00×, subject to terms',592,463,632,58,22);
+  box(s,'commission','Management expectation: 2028',56,533,510,28,20,true);
+  box(s,'commission-limit','10X begins commissioning, distinct from the commercial operation date (COD)',592,533,632,43,18);
+  note(s,m.note,585,45);caveat(s,m.caveat,639,26);
+ }else if(m.kind==='states'){
+  box(s,'pre-cod','Before commercial operation',56,243,1168,32,24,true);
+  box(s,'withheld','Operating threshold withheld',56,283,1168,29,22,false,c.muted);
+  rule(s,324);
+  chartOwners.push(m.number);
+  s.charts.add('bar',{position:{left:56,top:343,width:1168,height:169},categories:m.chart.categories,
+   series:m.chart.series.map(a=>({...a,fill:c.gold,valuesFormatCode:'0.0'})),
+   barOptions:{direction:'column',grouping:'clustered',gapWidth:150},hasLegend:false,
+   chartFill:c.paper,plotAreaFill:c.paper,
+   xAxis:{textStyle:{typeface:'Archivo',fontSize:19,fill:c.ink},majorGridlines:null},
+   yAxis:{min:0,max:175,majorUnit:50,numberFormatCode:'0',textStyle:{typeface:'Archivo',fontSize:16,fill:c.muted},majorGridlines:{style:'solid',fill:c.rule,width:.6}},
+   dataLabels:{showValue:true,position:'center',numberFormatCode:'0.0',textStyle:{typeface:'Archivo',fontSize:22,bold:true,fill:'#FFFFFF'}}});
+  box(s,'threshold-basis','50% annual capacity estimate / target    ·    Full amount: $140m × 1.02⁴',56,526,1168,29,19,false,c.muted);
+  note(s,m.note,570,55);caveat(s,m.caveat,631,34);
+ }else if(m.kind==='decisions'){
+  m.rows.slice(1).forEach(([owner,action],i)=>{const y=244+i*101;
+   box(s,'action-number-'+i,String(i+1).padStart(2,'0'),56,y,60,42,31,true,c.gold);
+   box(s,'decision-owner-'+i,owner,142,y,340,82,23,true);
+   box(s,'decision-condition-'+i,action,534,y,690,82,22);
+   if(i<2)rule(s,y+89,142,1082);
+  });note(s,m.note,566,55);caveat(s,m.caveat,631,33);
  }else if(m.kind==='economics'){
   nativeBars(s,m,{y:245,h:135,max:1,percent:true});
   table(s,m.rows.slice(0,3),{y:390,h:135,widths:[555,613],size:20});
@@ -121,14 +174,14 @@ for(const m of d.slides){
   values.forEach((v,i)=>{const total=i===0||i===values.length-1;
    const from=total?0:cumulative,to=total?v:cumulative+v;
    const top=base-Math.max(from,to)*scale,height=Math.abs(to-from)*scale;
-   rect(s,'waterfall-'+i,x0+i*dx,top,bw,height,total?c.gold:c.neutral);
-   const label=total?v:(v>=0?'+':'−')+Math.abs(v).toFixed(3);
-   box(s,'bar-value-'+i,total?v.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3}):label,x0+i*dx-22,top-29,120,25,17,true,c.ink);
-   box(s,'bar-label-'+i,labels[i],x0+i*dx-20,530,116,42,16,false,c.muted);
+   rect(s,'waterfall-'+i,x0+i*dx,top,bw,height,total?c.gold:([2,4].includes(i)?c.ink:c.neutral));
+   const label=total?v:(v>=0?'+':'−')+Math.abs(v).toFixed(1);
+   box(s,'bar-value-'+i,total?v.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}):label,x0+i*dx-22,top-29,120,25,17,true,c.ink);
+   box(s,'bar-label-'+i,labels[i],x0+i*dx-20,530,116,45,15,false,c.muted);
    if(i>0&&!total)cumulative=to;
    if(i<values.length-1)rule(s,base-(total?v:to)*scale,x0+i*dx+bw,dx-bw,c.neutral);
   });
-  note(s,m.note,582,45);caveat(s,m.caveat,631,32);
+  note(s,m.note,584,47);caveat(s,m.caveat,639,26);
  }else{
   const dense=m.kind==='roles'||m.kind==='support';
   const widths=m.kind==='roles'?[205,470,493]:m.kind==='support'?[300,375,493]:m.kind==='states'?[360,553,255]:m.kind==='decisions'?[340,828]:[365,803];
@@ -149,7 +202,7 @@ await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 execFileSync(process.env.CODEX_PRIMARY_RUNTIME_PYTHON||'python3',[path.join(here,'finish_package.py'),candidatePath],{stdio:'inherit'});
 const skill=process.env.FI003_PRESENTATION_SKILL||'/root/.codex/skills/builtins/presentations';
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
-const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v03.pptx');
+const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v04.pptx');
 await finalizePresentation({workspaceDir:work,candidatePath,finalPath,
  pythonExecutable:process.env.CODEX_PRIMARY_RUNTIME_PYTHON,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),

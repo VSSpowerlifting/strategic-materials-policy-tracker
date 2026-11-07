@@ -1,4 +1,4 @@
-# FI003 reader guide — draft 0.3
+# FI003 reader guide — draft 0.4
 
 **JPMorgan and MP Materials: Financing Through 10X Construction**
 
@@ -43,7 +43,7 @@ Original commitment/fee terms, actual certificates and remaining project spend/c
 
 ## Files and reproduction
 
-The candidate package contains the editable draft 0.3 PowerPoint, its matching PDF, unchanged model 1.0 XLSX, claim/source registers, this guide, the full text/data slide manifest, eleven schedules, model inputs/specification and calculation/verification scripts. The manifest supplies selectable text and numeric equivalents for the deck’s evidence, including both charts and the complete waterfall. Chart workbooks inside the PPTX contain literal snapshots; they do not automatically synchronize with model edits.
+The candidate package contains the editable draft 0.4 PowerPoint, its matching PDF, unchanged model 1.0 XLSX, claim/source registers, this guide, the full text/data slide manifest, eleven schedules, model inputs/specification and calculation/verification scripts. The manifest supplies selectable text and numeric equivalents for the deck’s evidence, including all three charts and the complete waterfall. Chart workbooks inside the PPTX contain literal snapshots; they do not automatically synchronize with model edits.
 
 In the package’s `research/fi003/` directory, use Python 3 to run:
 
@@ -58,4 +58,4 @@ The delivered XLSX has six editable tabs and 388 formula cells. Model recalculat
 
 Source URLs link to original documents; originals, bank articles/transcripts and standalone fonts are excluded. Exhibits and prose are original SMPT transformations/paraphrases. Archivo is used under the [SIL Open Font License](https://github.com/Omnibus-Type/Archivo/blob/master/OFL.txt), with font embedding in the PDF only. The package excludes internal trackers, private native-Sheet links and sharing records. It conveys no institutional endorsement or publication permission.
 
-The PDF contains selectable text, language and structure tags. Automated structural/contrast checks and visual inspection do not establish PDF/UA compliance or assistive-technology usability. Native Microsoft PowerPoint compatibility, final accessibility remediation/review and Benjamin’s exact-file approval remain release gates.
+Draft 0.4 replaces five slide tables with a financing timeline, ranked evidence assessment, covenant-trigger exhibit, operating-threshold column chart and owner/action exhibit. The historical liquidity waterfall displays one decimal while retaining full-precision values. The PDF contains selectable text, language and structure tags. Text-free decorative vectors are marked as artifacts; all fifteen slide headlines have H1 tags and selected subheadings have H2 tags. Twelve meaningful evidence descriptions, six table structures and 46 hyperlinks remain. Automated structural/contrast checks and visual inspection do not establish PDF/UA compliance or assistive-technology usability. Native Microsoft PowerPoint compatibility, manual accessibility and assistive-technology review and Benjamin’s exact-file approval remain release gates.

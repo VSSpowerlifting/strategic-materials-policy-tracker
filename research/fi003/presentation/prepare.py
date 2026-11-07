@@ -33,7 +33,7 @@ def build():
     slide('cover', 'JPMorgan and MP Materials', 'Financing Through 10X Construction',
         [('S02','§§2.05, 6.01'),('S09','cover, §1.01'),('S11','Notes 3, 18'),('S19','MD&A: 10X')], ['C01','C05','C11','C27','C28'], '',
         '10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.',
-        author='Benjamin Yang', version='Research draft 0.3 · 6 November 2026')
+        author='Benjamin Yang', version='Research draft 0.4 · 6 November 2026')
     slide('answer', 'Equity secured cash while MP retained exposure through commissioning',
         'Analyst judgment · comparable industrial sponsor and lender perspective',
         [('S02','§§6.01, 6.13'),('S09','§§1.01, 7.11'),('S11','Notes 3, 18'),('S19','Note 8, MD&A')],
@@ -154,8 +154,8 @@ def build():
         'Historical cash plus short-term investments · USD million · nine months to 30 Sep 2026',
         [('S19','cash flows, balance sheets, Note 4'),('S11','restricted cash')],['C29','C30','C48'],
         'Liquidity!B16:B26; liquidity_bridge.csv; liquid_assets.csv',
-        'The bridge demonstrates continued corporate resource use across multiple projects. A remaining 10X funding requirement needs a separate cost-to-complete and collection schedule.',
-        waterfall={'labels':['31 Dec 2025','Operating','Cash PP&E','HREE award','Financing','Accretion','Restricted cash','Valuation','30 Sep 2026'],
+        'Cash capital spending accounted for most of the decline in company liquid assets. Assessing remaining 10X funding requires a project-specific spending and collection schedule.',
+        waterfall={'labels':['31 Dec 2025','Operating','Cash PP&E','HREE award','Financing','Accretion','Restricted-cash release','Valuation','30 Sep 2026'],
             'values':[float(bridge[0]['usd_m'])]+[float(r['usd_m']) for r in bridge[1:-2]]+[float(bridge[-1]['usd_m'])]},
         caveat='All seven components reconcile at unrounded precision. PPA receipts are inside operating cash flow. Company liquid assets are not free 10X cash or certified covenant liquidity.')
     slide('decisions','A dated funding and covenant schedule is the next decision input',
@@ -178,10 +178,45 @@ def build():
               ['Bank individual holds and internal decisions','No bank profitability, sole-design or indispensability claim']],
         caveat='No affiliation or endorsement by JPMorgan, MP Materials or the U.S. government. Research links, calculations and model provenance accompany this draft.')
 
+    # Visual transformations retain the underlying source rows as lineage.
+    transformed = {
+        3: dict(exhibit_family='schematic timeline', reader_question='How did the financing route change?',
+            events=[['9 Jul 2025','Closing commitment','Government agreements and a replaceable joint commitment of at least $1bn'],
+                    ['16 Jul 2025','Equity priced at $55','July completion supplied $724.2m net common-equity proceeds'],
+                    ['25 Aug 2025','Corporate credit','A $275m revolver was executed; borrowing remains conditional'],
+                    ['26 Aug 2025','Undrawn expiration','MP reports the original construction commitment expired undrawn']],
+            visual_text=['9 Jul 2025','Closing commitment','Government agreements and a replaceable joint commitment of at least $1bn',
+                         '16 Jul 2025','Equity priced at $55','July completion supplied $724.2m net common-equity proceeds',
+                         '25 Aug 2025','Corporate credit','A $275m revolver was executed; borrowing remains conditional',
+                         '26 Aug 2025','Undrawn expiration','MP reports the original construction commitment expired undrawn','Sequence schematic; spacing does not represent elapsed time']),
+        5: dict(exhibit_family='ranked evidence assessment', reader_question='Which explanation fits the record best?'),
+        9: dict(exhibit_family='conditional trigger and milestone comparison', reader_question='When do the corporate tests change?',
+            visual_text=['Before the trigger','At least $500m unrestricted contractual cash / Cash Equivalents',
+                         'Trigger: earlier delivery of either','A certificate showing ≥$400m covenant EBITDA over four quarters',
+                         'Required Q2 2027 financial statements','Illustrative delivery: 15 Aug 2027',
+                         'First quarter ending after delivery: 30 Sep 2027','From the earnings-test stage',
+                         'Leverage ≤4.00× and cash-interest coverage ≥3.00×, subject to terms',
+                         'Management expectation: 2028','10X begins commissioning, distinct from the commercial operation date (COD)']),
+        11: dict(exhibit_family='contract-state column comparison', reader_question='How does the threshold change after each operating milestone?',
+             chart={'categories':['COD to production milestone','From production milestone'],
+                    'series':[{'name':'Full-year 2029 threshold illustration','values':[float(threshold),float(full)]}]},
+             visual_text=['Before commercial operation','Operating threshold withheld','50% annual capacity estimate / target',
+                          'Full amount: $140m × 1.02⁴','75.8','151.5']),
+        13: dict(exhibit_family='signed liquidity waterfall', reader_question='What explains the change in company liquid assets?'),
+        14: dict(exhibit_family='owner and decision-condition exhibit', reader_question='What should treasury and credit teams do next?'),
+    }
+    families={1:'cover',2:'three findings',4:'role comparison table',6:'ownership composition and calculation',7:'capacity composition by date',8:'credit provision matrix',10:'support and retained-exposure matrix',12:'receivable equation and support table',15:'evidence-gap table'}
+    for item in slides:
+        item.update(transformed.get(item['number'],dict(exhibit_family=families.get(item['number'],'table'),reader_question=item['title'])))
+        if item['number'] in (5,14):
+            item['visual_text']=[(cell[3:] if item['number']==5 and col==0 else cell) for row in item['rows'][1:] for col,cell in enumerate(row)]
+        item['relationship']='Documented sequence / analyst comparison; see scope, qualifications and model_ref'
+
     paths = ['inputs.json','sources.json','prototype.py','model.py','outputs/fi003-model-v1/model_spec.json',
         'outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx']
-    return {'version':'FI003 presentation draft 0.3','cutoff':'2026-11-06',
-        'reviewed_head':'3975390968968da63059fb0fa4a5c9175de46ec3',
+    return {'version':'FI003 presentation draft 0.4','cutoff':'2026-11-06',
+        'reviewed_head':'a07167f25675957be779af8a56961f10e6face41',
+        'visual_guidance_ref':'b7f4c8c409017cb3f1fa4507eb4e85ea6f7d7a91',
         'model_version':model.VERSION,'source_hashes':{q:hashlib.sha256((ROOT/q).read_bytes()).hexdigest() for q in paths},
         'baseline_controls':data['model_controls'],'sources':sources,'slides':slides}
 

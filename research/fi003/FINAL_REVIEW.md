@@ -1,5 +1,8 @@
 # FI003 bounded final-review phase
 
+**Successor:** this document records the draft 0.3 financial/editorial review. Current presentation-only draft 0.4 and its bounded PDF tagging correction are documented in [QUALITY_REVIEW_V04](presentation/QUALITY_REVIEW_V04.md). The [publication tracker](PUBLICATION_PLAN.md) controls current files and pending decisions. The financial thesis, source facts and model remain unchanged.
+
+
 **November 6, 2026 · READY FOR HUMAN FINANCIAL/EDITORIAL REVIEW · publication HOLD**
 
 Reviewed starting head: `3975390968968da63059fb0fa4a5c9175de46ec3`, open/draft [PR #215](https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/215), branch `codex/fi003-jpmorgan-financing-foundation`, base `main` at `bb0934b87cc257032fe79e92e500ebfe928a2a1e`. All twelve workflow runs succeeded on that exact starting head. The assigned existing worktree was clean and fast-forwarded from `146fa508`; the attached older branch, its untracked screenshots and all other worktrees were preserved. No integration or application/data edit belongs to this phase. RTK.md remains unavailable.

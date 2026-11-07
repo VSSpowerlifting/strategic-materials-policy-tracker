@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "cutoff": "2026-11-06",
+  "model_unchanged": true,
+  "slides": 15,
+  "editable_tables": 6,
+  "editable_native_charts": 3,
+  "embedded_literal_chart_workbooks": 3,
+  "waterfall": "9 editable native bars, including seven signed movements; original values in slide manifest",
+  "chart_snapshot_precision": "Ownership fractions rounded to 12 decimal places for Excel portability; full model precision retained",
+  "pdf_links": 46,
+  "unique_link_targets": 15,
+  "fonts": [
+    "BAAAAA+Archivo-Bold",
+    "CAAAAA+Archivo-Bold",
+    "DAAAAA+Archivo-Bold",
+    "EAAAAA+Archivo-Regular",
+    "FAAAAA+Archivo-Regular",
+    "GAAAAA+Archivo-Regular",
+    "HAAAAA+Archivo-Regular",
+    "IAAAAA+Archivo-Bold",
+    "JAAAAA+Archivo-Bold",
+    "KAAAAA+Archivo-Regular",
+    "LAAAAA+Archivo-Regular",
+    "MAAAAA+Archivo-Bold",
+    "NAAAAA+Archivo-Regular",
+    "OAAAAA+Archivo-Regular",
+    "PAAAAA+Archivo-Bold",
+    "QAAAAA+Archivo-Bold",
+    "RAAAAA+Archivo-Bold",
+    "SAAAAA+Archivo-Regular",
+    "TAAAAA+Archivo-Bold",
+    "UAAAAA+Archivo-Regular",
+    "VAAAAA+Archivo-Regular",
+    "WAAAAA+Archivo-Bold",
+    "XAAAAA+Archivo-Bold",
+    "YAAAAA+Archivo-Regular",
+    "ZAAAAA+Archivo-Bold"
+  ],
+  "claims": 54,
+  "minimum_footer_contrast": 6.042,
+  "files": {
+    "SMPT_FI003_JPMorgan_MP_Draft_v04.pptx": {
+      "bytes": 113205,
+      "sha256": "8b0d26589f18dac89f2c6ff496810af837db4023b4169367f41f1e937f515d3e"
+    },
+    "SMPT_FI003_JPMorgan_MP_Draft_v04.pdf": {
+      "bytes": 451816,
+      "sha256": "02e760946f5a47bd3ac2c6ff4dad76dbc6e7f537e1e52af172fd9538cd46c0b2"
+    }
+  },
+  "limits": [
+    "No Microsoft PowerPoint application test",
+    "No newly executed live Sheets session",
+    "No legal opinion, actual headroom or completion-funding certification",
+    "Basic PDF tags inspected separately; no PDF/UA or assistive-technology certification"
+  ]
+}

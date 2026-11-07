@@ -1,7 +1,8 @@
 {
-  "version": "FI003 presentation draft 0.3",
+  "version": "FI003 presentation draft 0.4",
   "cutoff": "2026-11-06",
-  "reviewed_head": "3975390968968da63059fb0fa4a5c9175de46ec3",
+  "reviewed_head": "a07167f25675957be779af8a56961f10e6face41",
+  "visual_guidance_ref": "b7f4c8c409017cb3f1fa4507eb4e85ea6f7d7a91",
   "model_version": "FI003 model 1.0 — 2026-11-06",
   "source_hashes": {
     "inputs.json": "1b3436186f306188926060d27fc39636418405e2078ab9e848aca6ef69851daa",
@@ -395,7 +396,10 @@
       "model_ref": "",
       "note": "10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.",
       "author": "Benjamin Yang",
-      "version": "Research draft 0.3 · 6 November 2026"
+      "version": "Research draft 0.4 · 6 November 2026",
+      "exhibit_family": "cover",
+      "reader_question": "JPMorgan and MP Materials",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 2,
@@ -443,7 +447,10 @@
           "Defense agreements enter the EBITDA definition and a performance covenant. Actual addback use remains unknown"
         ]
       ],
-      "caveat": "The evidence supports financing flexibility. Original loan terms and a remaining-cost schedule are insufficient to rank the capital mix or certify completion funding."
+      "caveat": "The evidence supports financing flexibility. Original loan terms and a remaining-cost schedule are insufficient to rank the capital mix or certify completion funding.",
+      "exhibit_family": "three findings",
+      "reader_question": "Equity secured cash while MP retained exposure through commissioning",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 3,
@@ -499,7 +506,47 @@
           "Original construction commitment expired undrawn"
         ]
       ],
-      "caveat": "Apple announced a separate agreement on 15 July, before equity pricing. The sequence alone cannot isolate its influence or that of government support."
+      "caveat": "Apple announced a separate agreement on 15 July, before equity pricing. The sequence alone cannot isolate its influence or that of government support.",
+      "exhibit_family": "schematic timeline",
+      "reader_question": "How did the financing route change?",
+      "events": [
+        [
+          "9 Jul 2025",
+          "Closing commitment",
+          "Government agreements and a replaceable joint commitment of at least $1bn"
+        ],
+        [
+          "16 Jul 2025",
+          "Equity priced at $55",
+          "July completion supplied $724.2m net common-equity proceeds"
+        ],
+        [
+          "25 Aug 2025",
+          "Corporate credit",
+          "A $275m revolver was executed; borrowing remains conditional"
+        ],
+        [
+          "26 Aug 2025",
+          "Undrawn expiration",
+          "MP reports the original construction commitment expired undrawn"
+        ]
+      ],
+      "visual_text": [
+        "9 Jul 2025",
+        "Closing commitment",
+        "Government agreements and a replaceable joint commitment of at least $1bn",
+        "16 Jul 2025",
+        "Equity priced at $55",
+        "July completion supplied $724.2m net common-equity proceeds",
+        "25 Aug 2025",
+        "Corporate credit",
+        "A $275m revolver was executed; borrowing remains conditional",
+        "26 Aug 2025",
+        "Undrawn expiration",
+        "MP reports the original construction commitment expired undrawn",
+        "Sequence schematic; spacing does not represent elapsed time"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 4,
@@ -561,7 +608,10 @@
           "Joint arrangers Goldman/Morgan Stanley. Citi/BofA roles"
         ]
       ],
-      "caveat": "Initial underwriting obligations establish participation, not retained investment, fee allocation or unique capability."
+      "caveat": "Initial underwriting obligations establish participation, not retained investment, fee allocation or unique capability.",
+      "exhibit_family": "role comparison table",
+      "reader_question": "JPMorgan spans the financing stages alongside substantial partner roles",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 5,
@@ -617,7 +667,20 @@
           "Weak: completed replacement financing fits the disclosed sequence better"
         ]
       ],
-      "caveat": "Apple’s agreement and the available equity market are credible influences. The record does not establish JPMorgan indispensability or financing optimality."
+      "caveat": "Apple’s agreement and the available equity market are credible influences. The record does not establish JPMorgan indispensability or financing optimality.",
+      "exhibit_family": "ranked evidence assessment",
+      "reader_question": "Which explanation fits the record best?",
+      "visual_text": [
+        "Flexible commitment, then equity",
+        "Strong: express replacement rights, completed proceeds and issuer-reported lapse",
+        "Government support improved financeability",
+        "Direct mechanisms in public capital and credit terms. Equity-demand effect unisolated",
+        "Debt-cost or leverage aversion drove the choice",
+        "Plausible. Missing loan pricing, tenor and management rationale prevent confirmation",
+        "Expiration signaled bank rejection",
+        "Weak: completed replacement financing fits the disclosed sequence better"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 6,
@@ -687,7 +750,10 @@
           "92.32% of isolated post-offering base"
         ]
       ],
-      "caveat": "Excludes preferred conversion, warrants, other issuances, options and convertibles. The 3% underwriting discount is a one-time transaction cost, not the cost of equity."
+      "caveat": "Excludes preferred conversion, warrants, other issuances, options and convertibles. The 3% underwriting discount is a one-time transaction cost, not the cost of equity.",
+      "exhibit_family": "ownership composition and calculation",
+      "reader_question": "Equity supplied $724.2m at 7.68% isolated ownership dilution",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 7,
@@ -739,7 +805,10 @@
           }
         ]
       },
-      "caveat": "The $200m L-C sublimit sits inside the $275m facility. MP reported compliance at 30 September 2026. This is capacity, separate from cash on hand."
+      "caveat": "The $200m L-C sublimit sits inside the $275m facility. MP reported compliance at 30 September 2026. This is capacity, separate from cash on hand.",
+      "exhibit_family": "capacity composition by date",
+      "reader_question": "Letters of credit leave $203m of the $275m revolver available",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 8,
@@ -781,7 +850,10 @@
         ]
       ],
       "example": "Hypothetical clause arithmetic: max($40m applicable amount − $20m attributable income, 0) = $20m addback",
-      "caveat": "Actual adjustment use and headroom are unknown. Future 10X amounts require applicable entitlement. No existing default or automatic loss of availability is inferred."
+      "caveat": "Actual adjustment use and headroom are unknown. Future 10X amounts require applicable entitlement. No existing default or automatic loss of availability is inferred.",
+      "exhibit_family": "credit provision matrix",
+      "reader_question": "Defense contracts enter both covenant earnings and performance obligations",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 9,
@@ -830,7 +902,23 @@
           "10X begins commissioning, distinct from the commercial operation date (COD)"
         ]
       ],
-      "caveat": "The delivery date is assumed, not a legal deadline. The 93–458 days compare year endpoints, not forecast COD dates. Reported Adjusted EBITDA is distinct from covenant EBITDA."
+      "caveat": "The delivery date is assumed, not a legal deadline. The 93–458 days compare year endpoints, not forecast COD dates. Reported Adjusted EBITDA is distinct from covenant EBITDA.",
+      "exhibit_family": "conditional trigger and milestone comparison",
+      "reader_question": "When do the corporate tests change?",
+      "visual_text": [
+        "Before the trigger",
+        "At least $500m unrestricted contractual cash / Cash Equivalents",
+        "Trigger: earlier delivery of either",
+        "A certificate showing ≥$400m covenant EBITDA over four quarters",
+        "Required Q2 2027 financial statements",
+        "Illustrative delivery: 15 Aug 2027",
+        "First quarter ending after delivery: 30 Sep 2027",
+        "From the earnings-test stage",
+        "Leverage ≤4.00× and cash-interest coverage ≥3.00×, subject to terms",
+        "Management expectation: 2028",
+        "10X begins commissioning, distinct from the commercial operation date (COD)"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 10,
@@ -893,7 +981,10 @@
           "Conditional purchase mechanics. July equity exceeded threshold"
         ]
       ],
-      "caveat": "NdPr = neodymium-praseodymium. Specified-use rules constrain flexibility. The separate $150m samarium loan is repayable; no extra backstop cash is counted."
+      "caveat": "NdPr = neodymium-praseodymium. Specified-use rules constrain flexibility. The separate $150m samarium loan is repayable; no extra backstop cash is counted.",
+      "exhibit_family": "support and retained-exposure matrix",
+      "reader_question": "Government support covers specified exposures while MP retains funding duties",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 11,
@@ -935,7 +1026,33 @@
           "151.541"
         ]
       ],
-      "caveat": "The target is ≥10,000 tons block-equivalent, typically ≥7,000 tons finished magnets. Full-year thresholds exclude payment stubs/true-up and are distinct from cash and covenant EBITDA. Legal term: signing to ten years after COD."
+      "caveat": "The target is ≥10,000 tons block-equivalent, typically ≥7,000 tons finished magnets. Full-year thresholds exclude payment stubs/true-up and are distinct from cash and covenant EBITDA. Legal term: signing to ten years after COD.",
+      "exhibit_family": "contract-state column comparison",
+      "reader_question": "How does the threshold change after each operating milestone?",
+      "chart": {
+        "categories": [
+          "COD to production milestone",
+          "From production milestone"
+        ],
+        "series": [
+          {
+            "name": "Full-year 2029 threshold illustration",
+            "values": [
+              75.7702512,
+              151.5405024
+            ]
+          }
+        ]
+      },
+      "visual_text": [
+        "Before commercial operation",
+        "Operating threshold withheld",
+        "50% annual capacity estimate / target",
+        "Full amount: $140m × 1.02⁴",
+        "75.8",
+        "151.5"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 12,
@@ -980,7 +1097,10 @@
           "$10.075m noncash"
         ]
       ],
-      "caveat": "The rollforward matches rounded receipts of $110.9m. The separate $6.5m heavy-rare-earth (HREE) construction-award cash belongs in the company bridge."
+      "caveat": "The rollforward matches rounded receipts of $110.9m. The separate $6.5m heavy-rare-earth (HREE) construction-award cash belongs in the company bridge.",
+      "exhibit_family": "receivable equation and support table",
+      "reader_question": "Price protection delivered $110.9m of cash in the first nine months of 2026",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 13,
@@ -1003,7 +1123,7 @@
         "C48"
       ],
       "model_ref": "Liquidity!B16:B26; liquidity_bridge.csv; liquid_assets.csv",
-      "note": "The bridge demonstrates continued corporate resource use across multiple projects. A remaining 10X funding requirement needs a separate cost-to-complete and collection schedule.",
+      "note": "Cash capital spending accounted for most of the decline in company liquid assets. Assessing remaining 10X funding requires a project-specific spending and collection schedule.",
       "waterfall": {
         "labels": [
           "31 Dec 2025",
@@ -1012,7 +1132,7 @@
           "HREE award",
           "Financing",
           "Accretion",
-          "Restricted cash",
+          "Restricted-cash release",
           "Valuation",
           "30 Sep 2026"
         ],
@@ -1028,7 +1148,10 @@
           1337.911
         ]
       },
-      "caveat": "All seven components reconcile at unrounded precision. PPA receipts are inside operating cash flow. Company liquid assets are not free 10X cash or certified covenant liquidity."
+      "caveat": "All seven components reconcile at unrounded precision. PPA receipts are inside operating cash flow. Company liquid assets are not free 10X cash or certified covenant liquidity.",
+      "exhibit_family": "signed liquidity waterfall",
+      "reader_question": "What explains the change in company liquid assets?",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 14,
@@ -1072,7 +1195,18 @@
           "Test entitlement and performance separately from EBITDA recognition. Delayed collection or a material contract issue requires reassessment"
         ]
       ],
-      "caveat": "DoD has contractual cost-to-complete and funding-information rights. Those reports are absent from the public packet. No actual shortfall or automatic default is asserted."
+      "caveat": "DoD has contractual cost-to-complete and funding-information rights. Those reports are absent from the public packet. No actual shortfall or automatic default is asserted.",
+      "exhibit_family": "owner and decision-condition exhibit",
+      "reader_question": "What should treasury and credit teams do next?",
+      "visual_text": [
+        "Substitute funding / treasury",
+        "Confirm settled proceeds, permitted uses and live credit conditions before cancellation. Unfunded replacement requires another committed route",
+        "Fund through commissioning / CFO and lenders",
+        "Reconcile cash, L-Cs, spend, collections and certificates by date. A projected shortfall calls for earlier financing, revised spend or amendment",
+        "Assess public support / credit team",
+        "Test entitlement and performance separately from EBITDA recognition. Delayed collection or a material contract issue requires reassessment"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     },
     {
       "number": 15,
@@ -1128,7 +1262,10 @@
           "No bank profitability, sole-design or indispensability claim"
         ]
       ],
-      "caveat": "No affiliation or endorsement by JPMorgan, MP Materials or the U.S. government. Research links, calculations and model provenance accompany this draft."
+      "caveat": "No affiliation or endorsement by JPMorgan, MP Materials or the U.S. government. Research links, calculations and model provenance accompany this draft.",
+      "exhibit_family": "evidence-gap table",
+      "reader_question": "Evidence supports the architecture and bounds the financial conclusions",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
     }
   ]
 }
