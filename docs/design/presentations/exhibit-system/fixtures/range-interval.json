@@ -1,0 +1,21 @@
+{
+  "pattern": "range-interval",
+  "classification": "synthetic-demonstration",
+  "title": "Project 4 carries the widest stated range, so its point estimate says least about the outcome",
+  "subtitle": "Stated completion cost range and point estimate per project, CU million; zero-based axis",
+  "annotation": "Each bar spans the low and high figures given in the synthetic source; the diamond is the stated point estimate. Ranges overlap across projects, so the ranking by point estimate is not a firm ordering.",
+  "source": "Synthetic fixture range-interval.json, constructed for the exhibit gallery",
+  "visual_text": ["Project 4", "Stated range", "Point estimate", "90", "210", "150"],
+  "data": {
+    "unit": "CU million, stated cost",
+    "dp": 0,
+    "axisMax": 250,
+    "items": [
+      { "label": "Project 4", "low": 90, "point": 150, "high": 210, "highlight": true },
+      { "label": "Project 1", "low": 120, "point": 140, "high": 165 },
+      { "label": "Project 6", "low": 70, "point": 95, "high": 120 },
+      { "label": "Project 2", "low": 60, "point": 80, "high": 100 },
+      { "label": "Project 5", "low": 30, "point": 45, "high": 70 }
+    ]
+  }
+}

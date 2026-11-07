@@ -1,0 +1,51 @@
+{
+  "pattern": "duration-bars",
+  "classification": "synthetic-demonstration",
+  "title": "Measure 6 took 365 days from announcement to effective date, the longest of the six measures",
+  "subtitle": "Elapsed calendar days from announcement to effective date, per measure, longest first",
+  "annotation": "Elapsed time says nothing about which stage was delayed or why.",
+  "source": "Synthetic fixture duration-bars.json, constructed for the exhibit gallery",
+  "visual_text": [
+    "Measure 6, Jurisdiction C",
+    "365 days",
+    "42 days",
+    "14 Mar 2030 → 1 Sep 2030",
+    "Elapsed days, Announcement to Effective date"
+  ],
+  "data": {
+    "fromLabel": "Announcement",
+    "toLabel": "Effective date",
+    "items": [
+      {
+        "label": "Measure 1, Jurisdiction A",
+        "from": "2030-03-14",
+        "to": "2030-09-01"
+      },
+      {
+        "label": "Measure 2, Jurisdiction B",
+        "from": "2030-05-20",
+        "to": "2030-07-01"
+      },
+      {
+        "label": "Measure 3, Jurisdiction A",
+        "from": "2031-02-12",
+        "to": "2031-10-01"
+      },
+      {
+        "label": "Measure 4, Jurisdiction B",
+        "from": "2031-06-10",
+        "to": "2031-10-01"
+      },
+      {
+        "label": "Measure 5, Jurisdiction C",
+        "from": "2032-01-20",
+        "to": "2032-04-01"
+      },
+      {
+        "label": "Measure 6, Jurisdiction C",
+        "from": "2030-08-01",
+        "to": "2031-08-01"
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "annotated-line",
+  "name": "Annotated time series",
+  "family_code": "C",
+  "order": 1,
+  "reader_question": "How did one measure move over time, and where do dated events fall on that path?",
+  "relationship": "One series over time with 1–3 dated events marked; sequence is shown, causation is not claimed.",
+  "question_types": ["trend", "sequence"],
+  "requires": ["single-measure", "time-axis", "dated-events"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 8, "max_items": 24, "what": "points (1–3 event markers)" },
+  "use_when": [
+    "One measure is observed at regular intervals and a few dated events bear on its reading",
+    "The reader should see timing of events against the level of the series"
+  ],
+  "avoid_when": [
+    "Several series must be compared — use indexed-lines or small-multiples",
+    "More than three events matter — use a timeline or milestone form"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "axisMin / axisMax / majorUnit", "type": "number", "notes": "Explicit value axis; all values must fall inside it" },
+    { "field": "points[].date / points[].value", "type": "ISO date / number", "notes": "Regular observations, ascending and unique" },
+    { "field": "events[].date / events[].label", "type": "ISO date / string", "notes": "1–3 events inside the series span, ascending" },
+    { "field": "events[].highlight", "type": "boolean, optional", "notes": "At most one accent marker" }
+  ],
+  "units": "One unit throughout; the value axis range is explicit and stated in the subtitle when it is not zero-based.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Line chart with embedded workbook (Edit Data)", "Axis range and line colour", "Frame text"],
+    "not_data_bound": ["Event hairlines and labels are native shapes positioned from the plot geometry and the event date, not bound to the chart", "First, last and lowest value labels are positioned text; changing the data requires moving them", "Positions assume the chart's manual plot layout and explicit axis range are kept"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/annotated-line.ts",
+  "fixture": "fixtures/annotated-line.json",
+  "integrity_rules": ["min-categories", "max-categories", "dates-ascending", "unique-labels", "bounded-values", "event-count", "axis-range", "event-in-range", "single-highlight"],
+  "table_alternative": "A dated table of observations beside a dated event list.",
+  "variations": ["Shaded span for a stated period instead of a single date", "Indexed series when the level is not the point"],
+  "limitations": ["Event lines show timing only and do not establish cause", "Event dates between observations are interpolated along the category axis"],
+  "excluded_alternatives": [
+    { "form": "Dual-axis line with an event series", "reason": "Two axes invite false visual correlation" },
+    { "form": "Area chart", "reason": "Fills imply a cumulative total the series does not represent" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

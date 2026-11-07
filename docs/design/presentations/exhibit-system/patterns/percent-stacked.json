@@ -1,0 +1,44 @@
+{
+  "id": "percent-stacked",
+  "name": "100% stacked bar (relative composition)",
+  "family_code": "D",
+  "order": 2,
+  "reader_question": "How does the mix of a measure differ across groups, and how large is each group's base?",
+  "relationship": "Part-to-whole as shares: each row sums to 100% of its own base, shown beside the bar.",
+  "question_types": ["composition"],
+  "requires": ["parts-of-whole", "single-measure"],
+  "incompatible": ["non-comparable-bases", "status-stages"],
+  "capacity": { "min_items": 3, "max_items": 6, "what": "bars (up to 4 components each)" },
+  "use_when": [
+    "The mix matters more than the absolute total",
+    "Row bases differ and the reader needs to see by how much"
+  ],
+  "avoid_when": [
+    "Absolute size is the point — use stacked-bar",
+    "Row shares do not sum to 100 and cannot be derived from counts"
+  ],
+  "data_contract": [
+    { "field": "unit / baseLabel", "type": "string", "notes": "Share unit and what each base n counts" },
+    { "field": "input", "type": "\"shares\" | \"counts\"", "notes": "Shares must sum to 100 per row; counts are converted to shares and the derivation is stated on the slide" },
+    { "field": "components[] / accent", "type": "string[2..4] / string (optional)", "notes": "Stacking order and at most one highlighted component" },
+    { "field": "rows[].label / n / values[]", "type": "string / number > 0 / number[] ≥ 0", "notes": "n is required for shares and derived for counts" }
+  ],
+  "units": "Per cent of each row's own base; the axis is fixed at 0–100% and hidden.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["100% stacked bar chart with embedded workbook (Edit Data)", "Segment colours and number format", "Legend and frame text"],
+    "not_data_bound": ["Row bases (n) and the basis note are positioned text computed from the fixture", "Labels below 7% are hidden by a number-format condition, not deleted"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/percent-stacked.ts",
+  "fixture": "fixtures/percent-stacked.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "aligned-series", "magnitude-nonnegative", "sums-to-total", "base-stated"],
+  "table_alternative": "A table of counts and shares per row with the base in its own column.",
+  "variations": ["Counts input with shares derived on the slide", "Column orientation for time-ordered rows"],
+  "limitations": ["Shares from small bases are volatile; the base is shown but not a confidence interval", "Equal bar lengths can read as equal totals"],
+  "excluded_alternatives": [
+    { "form": "Pie charts per group", "reason": "Many slices and no common baseline make cross-group comparison unreliable" },
+    { "form": "Absolute stacked bar", "reason": "Unequal totals hide the difference in mix; see stacked-bar when size matters" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

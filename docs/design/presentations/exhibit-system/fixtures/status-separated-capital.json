@@ -1,0 +1,21 @@
+{
+  "pattern": "status-separated-capital",
+  "classification": "synthetic-demonstration",
+  "title": "Only Organisations K and L report drawn amounts; M and N have no binding amount stated",
+  "subtitle": "Amounts at each status, CU million, one cut-off; every panel is a separate count",
+  "annotation": "Panels are never summed: an announced amount is not additional to a binding one. A dash means no amount is stated, not zero.",
+  "source": "Synthetic fixture status-separated-capital.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Announcement", "Binding", "Drawdown", "Organisation K", "Not yet binding", "200", "—"],
+  "data": {
+    "unit": "CU million",
+    "dp": 0,
+    "statuses": ["announcement", "authorization", "binding", "drawdown"],
+    "rows": [
+      { "label": "Organisation K", "amounts": [150, 120, 100, 40] },
+      { "label": "Organisation L", "amounts": [90, 90, 70, 70] },
+      { "label": "Organisation M", "amounts": [200, 160, null, null] },
+      { "label": "Organisation N", "amounts": [60, null, null, null] }
+    ]
+  }
+}

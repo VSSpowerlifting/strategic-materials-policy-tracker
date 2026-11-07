@@ -1,0 +1,101 @@
+{
+  "id": "conversion-flow",
+  "name": "Quantified conversion flow",
+  "family_code": "J",
+  "order": 4,
+  "reader_question": "How much of the input quantity survives each conversion step, and where is it lost?",
+  "relationship": "Stepwise conversion on one unit: each step's input equals its output plus its loss; heights are proportional to quantity.",
+  "question_types": [
+    "flow",
+    "reconcile"
+  ],
+  "requires": [
+    "quantified-flows",
+    "additive-movements",
+    "single-measure"
+  ],
+  "incompatible": [
+    "non-comparable-bases"
+  ],
+  "capacity": {
+    "min_items": 2,
+    "max_items": 5,
+    "what": "conversion steps"
+  },
+  "use_when": [
+    "Every step reports both its output and its loss on one unit",
+    "The honest alternative to a Sankey when the flows are actually quantified"
+  ],
+  "avoid_when": [
+    "Losses or outputs are not reported — use value-chain-measured",
+    "Flows branch to several destinations — use a table or sources-and-uses"
+  ],
+  "data_contract": [
+    {
+      "field": "unit / dp",
+      "type": "string / integer",
+      "notes": "One unit throughout"
+    },
+    {
+      "field": "input.label / input.value",
+      "type": "string / number ≥ 0",
+      "notes": "Opening quantity"
+    },
+    {
+      "field": "steps[].process / label",
+      "type": "string",
+      "notes": "Process name (on the connector) and the product it yields (column label)"
+    },
+    {
+      "field": "steps[].out / loss",
+      "type": "number ≥ 0",
+      "notes": "out + loss must equal the previous quantity"
+    }
+  ],
+  "units": "One unit; rectangle height is proportional to quantity from zero. Loss percentages use the step's own input.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": [
+      "Column rectangles, carried bands and loss stubs as native shapes and text",
+      "Accent on the final output",
+      "Frame text"
+    ],
+    "not_data_bound": [
+      "Heights are computed from the fixture and are not data-bound; editing a quantity means resizing the shapes and labels",
+      "No embedded workbook"
+    ],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/conversion-flow.ts",
+  "fixture": "fixtures/conversion-flow.json",
+  "integrity_rules": [
+    "min-categories",
+    "max-categories",
+    "unique-labels",
+    "magnitude-nonnegative",
+    "bridge-reconciles"
+  ],
+  "table_alternative": "A step table with input, output, loss and loss share.",
+  "variations": [
+    "Yield-only variant without loss stubs",
+    "Two parallel conversion routes as stacked panels"
+  ],
+  "limitations": [
+    "Linear chain only; no branching or recycling",
+    "Up to five steps across the slide width",
+    "Small losses draw as thin stubs; the printed value carries the precision"
+  ],
+  "excluded_alternatives": [
+    {
+      "form": "Sankey",
+      "reason": "Unquantified ribbons imply flows and proportions the data may not support; this form keeps one scale and reconciles each step"
+    },
+    {
+      "form": "Funnel with centred bars",
+      "reason": "Centring hides that every column shares a zero baseline"
+    }
+  ],
+  "references": [
+    "smpt-repertoire-2026"
+  ]
+}

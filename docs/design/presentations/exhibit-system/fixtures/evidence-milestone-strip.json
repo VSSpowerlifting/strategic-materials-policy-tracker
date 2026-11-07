@@ -1,0 +1,21 @@
+{
+  "pattern": "evidence-milestone-strip",
+  "classification": "synthetic-demonstration",
+  "title": "Only one of seven Programme P milestones is independently verified",
+  "subtitle": "Milestones in date order, tagged by evidence state, 2030–2032",
+  "annotation": "Announced and targeted dates are intentions; only the filled accent marker has an independent check.",
+  "source": "Synthetic fixture evidence-milestone-strip.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Programme P announced", "ANNOUNCED", "INDEPENDENTLY VERIFIED", "10 Feb 2030", "Site 4 inspected"],
+  "data": {
+    "milestones": [
+      { "label": "Programme P announced", "date": "2030-02-10", "state": "announced" },
+      { "label": "Site 4 works begun", "date": "2030-08-15", "state": "reported" },
+      { "label": "Site 4 inspected", "date": "2031-01-20", "state": "independently-verified" },
+      { "label": "Commissioning target", "date": "2031-06-30", "state": "targeted" },
+      { "label": "First output", "date": "2031-11-12", "state": "reported" },
+      { "label": "Full capacity target", "date": "2032-04-30", "state": "targeted" },
+      { "label": "Expansion announced", "date": "2032-09-01", "state": "announced" }
+    ]
+  }
+}

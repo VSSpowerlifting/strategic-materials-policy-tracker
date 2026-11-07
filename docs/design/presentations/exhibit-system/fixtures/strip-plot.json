@@ -1,0 +1,21 @@
+{
+  "pattern": "strip-plot",
+  "classification": "synthetic-demonstration",
+  "title": "Synthetic permitting times cluster tightly in Jurisdiction D but spread widely in Jurisdiction B",
+  "subtitle": "Days from application to permit, every observation, 49 synthetic permits in 5 jurisdictions",
+  "annotation": "Medians alone would hide the spread: Jurisdiction D runs 50 to 68 days while Jurisdiction B runs 40 to 181. Rows are ordered by median; counts differ, so compare spread cautiously for Jurisdiction E (n = 7).",
+  "source": "Synthetic fixture strip-plot.json, constructed for the exhibit gallery",
+  "visual_text": ["Jurisdiction D", "Jurisdiction B", "60 · n = 11", "118 · n = 10"],
+  "data": {
+    "unit": "Days to permit",
+    "dp": 0,
+    "axis": { "min": 0, "max": 200, "step": 50 },
+    "groups": [
+      { "label": "Jurisdiction A", "values": [38, 45, 52, 55, 60, 64, 70, 73, 81, 95] },
+      { "label": "Jurisdiction B", "values": [40, 62, 75, 98, 110, 126, 142, 155, 168, 181] },
+      { "label": "Jurisdiction C", "values": [55, 60, 66, 70, 72, 78, 85, 90, 102, 115, 130] },
+      { "label": "Jurisdiction D", "values": [50, 54, 56, 58, 59, 60, 61, 62, 63, 65, 68] },
+      { "label": "Jurisdiction E", "values": [70, 82, 90, 104, 118, 124, 139] }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "pattern": "counterparty-map",
+  "classification": "synthetic-demonstration",
+  "title": "Project 4 connects six counterparties with distinct contractual roles",
+  "subtitle": "Declared relationships at one synthetic cut-off; equal spokes show links, with no amount or direction encoded",
+  "annotation": "The focal project is the shared point of exposure. Angular order and distance have no meaning; roles do not establish executed funding or physical delivery.",
+  "source": "Synthetic fixture counterparty-map.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": [
+    "Project 4",
+    "Organisation K",
+    "Equipment supplier",
+    "No quantities or direction"
+  ],
+  "data": {
+    "hub": "Project 4",
+    "relationship": "Declared project roles \u00b7 No quantities or direction",
+    "parties": [
+      {
+        "label": "Organisation K",
+        "role": "Equipment supplier"
+      },
+      {
+        "label": "Organisation L",
+        "role": "Equity sponsor"
+      },
+      {
+        "label": "Organisation M",
+        "role": "Lender"
+      },
+      {
+        "label": "Organisation N",
+        "role": "Offtake counterparty"
+      },
+      {
+        "label": "Organisation P",
+        "role": "Feedstock supplier"
+      },
+      {
+        "label": "Organisation Q",
+        "role": "Engineering contractor"
+      }
+    ]
+  }
+}

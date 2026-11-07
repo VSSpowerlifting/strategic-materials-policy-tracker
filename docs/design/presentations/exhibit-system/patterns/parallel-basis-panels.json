@@ -1,0 +1,43 @@
+{
+  "id": "parallel-basis-panels",
+  "name": "Parallel panels for non-comparable bases",
+  "family_code": "E",
+  "order": 3,
+  "reader_question": "How do the same subjects compare on bases that cannot share an axis or a total?",
+  "relationship": "Side-by-side comparison across independent bases; each panel has its own zero-based axis and unit.",
+  "question_types": ["rank", "compare-two-observations"],
+  "requires": ["non-comparable-bases"],
+  "incompatible": ["additive-movements", "parts-of-whole"],
+  "capacity": { "min_items": 3, "max_items": 6, "what": "bars per panel (2 or 3 panels)" },
+  "use_when": [
+    "Funding, capacity and counts describe the same subjects but cannot be added or indexed together",
+    "The reader should see that rankings differ by basis"
+  ],
+  "avoid_when": [
+    "Two panels carry the same basis — they are one chart",
+    "A combined score or total is wanted; this pattern refuses to imply one"
+  ],
+  "data_contract": [
+    { "field": "panels[].basis / unit", "type": "string", "notes": "Distinct basis name and its unit; identical bases are rejected" },
+    { "field": "panels[].items[]", "type": "{label, value ≥ 0}[3..6]", "notes": "Each panel orders its own bars by value" },
+    { "field": "accent", "type": "string (optional)", "notes": "One subject highlighted consistently across panels" }
+  ],
+  "units": "Each panel has its own unit and zero-based axis; no value is compared across panels.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["One bar chart per panel with embedded workbook (Edit Data)", "Bar colours and number formats", "Panel headings and frame text"],
+    "not_data_bound": ["Panel headings, unit lines and separator rules are text and shapes drawn from the fixture"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/parallel-basis-panels.ts",
+  "fixture": "fixtures/parallel-basis-panels.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "distinct-bases", "magnitude-nonnegative", "single-highlight"],
+  "table_alternative": "A matrix of subjects by basis with the unit in each column heading.",
+  "variations": ["Two panels for a before-and-after basis change", "Dot plots per panel for many subjects"],
+  "limitations": ["Bar lengths are not comparable between panels and a shared bar scale would mislead", "Differing ranks do not explain why the bases differ"],
+  "excluded_alternatives": [
+    { "form": "Dual-axis chart", "reason": "A second axis implies a relationship and invites false crossings" },
+    { "form": "Composite index or radar", "reason": "Weights bases that cannot be added; SMPT has no synthetic scores" }
+  ],
+  "references": ["strategyand-2018-exhibit-6", "smpt-repertoire-2026"]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "scatter",
+  "name": "Scatter plot",
+  "family_code": "G",
+  "order": 1,
+  "reader_question": "Do two continuous measures move together across the items, and which items depart from the pattern?",
+  "relationship": "Association between two continuous measures observed on the same items; no causal direction implied.",
+  "question_types": ["relationship"],
+  "requires": ["two-measures"],
+  "incompatible": ["non-comparable-bases", "time-axis"],
+  "capacity": { "min_items": 6, "max_items": 30, "what": "points" },
+  "use_when": [
+    "Each item has two continuous measures on stated units",
+    "The shape of the cloud and the position of a few named items matter more than exact values"
+  ],
+  "avoid_when": [
+    "A third measure must be shown as size — use bubble",
+    "A decision threshold divides the items into groups — use threshold-scatter",
+    "The x measure is time — use a line chart"
+  ],
+  "data_contract": [
+    { "field": "xAxis / yAxis", "type": "{label, min, max, step, dp?}", "notes": "Explicit axis range; every point must fall inside it" },
+    { "field": "points[].label", "type": "string", "notes": "Unique item name" },
+    { "field": "points[].x / points[].y", "type": "number", "notes": "The two measures" },
+    { "field": "points[].named / side", "type": "boolean / r|l|t|b", "notes": "Optional positioned label (at most 6 labelled points)" },
+    { "field": "points[].highlight", "type": "boolean", "notes": "At most one point drawn in the accent" }
+  ],
+  "units": "Each axis states its own unit; axes are independent and not zero-based by rule, so ranges are declared explicitly.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Native scatter chart with embedded workbook (Edit Data)", "Marker colours and axis ranges", "Frame text"],
+    "not_data_bound": ["Point labels are positioned text boxes computed from the fixture, not bound to the chart; they do not move if data is edited", "Axis titles are text boxes"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/scatter.ts",
+  "fixture": "fixtures/scatter.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "axis-explicit", "bounded-values", "labelled-points-limit", "single-accent"],
+  "table_alternative": "A two-column table (item, x, y) for exact lookup.",
+  "variations": ["Threshold scatter with reference lines", "Bubble chart with a third measure as area"],
+  "limitations": ["Correlation is not causation; the exhibit shows association only", "Labels for named points are positioned, so they need re-placing after a data edit", "Dense overlap beyond about 30 points hides items"],
+  "excluded_alternatives": [
+    { "form": "Connected scatter", "reason": "Implies an ordering or time path the data does not carry" },
+    { "form": "Trend line with fitted equation", "reason": "A fitted line is model output and would overstate a small synthetic sample" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

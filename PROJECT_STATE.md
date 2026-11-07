@@ -1,3 +1,14 @@
+## 2026-11-07: presentation gallery recovery and final engineering pass (PR #224, draft)
+
+- Worktree: `.claude/worktrees/smpt-presentation-gallery-9f36b1`; branch `claude/smpt-presentation-gallery-9f36b1`. Recovered intact local commits `946c6a4`, `3b7d8f2`, `4df38d4`, directly descended from remote `59272fb`. The worktree was clean. A recovery ref and Git bundle preserve the original chain.
+- PR #224 remains stacked on open PR #222, whose branch was merged at `a4640b4`. No merge, deployment or publication is authorized here. FI003, existing reports, seed data and public-site code remain untouched.
+- The development library has 39 patterns in eleven families, a 40-slide gallery PPTX, a 14-slide demo PPTX and 39 LibreOffice previews. New counterparty-map uses equal radial spokes for qualitative roles around one focal project; there is no pattern-count quota.
+- Improved dumbbell scale/markers/value alignment, condition-tree type/space, role-matrix wrapping, annotated reference lines and full-width table/interpretation composition. Frames render above native tables to prevent LibreOffice obscuring footer annotations.
+- Static portfolio adds thumbnails, search, family/tier filtering, large previews, persistent two-pattern comparison and editable PPTX links. It stays in development documentation, with no public route.
+- `pptxgenjs` and `jszip` are exact-pinned devDependencies; npm-only generation needs no private runtime. Python 3, LibreOffice, Poppler and local Archivo are explicit external preview prerequisites. Tool lookup has no private-runtime fallback.
+- Research rendering validates source-reference resolution, renderer data and composition, preserves evidence metadata/hashes, rejects existing output files and public output locations, and always retains draft badges. Technical QC never grants release authority. Gates A–E remain human.
+- Structural OOXML checks and LibreOffice render/re-save pass. Manual Microsoft PowerPoint open / Edit Data / save / reopen remains unperformed. The bubble legend remains approximate and disclosed; positioned shapes are not workbook-bound. See `docs/design/presentations/exhibit-system/FINAL_REVIEW.md` for verification and acceptance details.
+
 ## 2026-11-03: EU CRMA second Strategic Projects round, release candidate (draft PR)
 
 - Branch `claude/smpt-eu-crma-2026-rc-f5628f`, rebased onto `origin/main` at `3192747` (homepage PR #187). The homepage files, tests and docs from #187 are unchanged. PR #185 is out of scope. Commit, push and a draft PR were authorized on 3 Nov 2026; merge and deploy were not.

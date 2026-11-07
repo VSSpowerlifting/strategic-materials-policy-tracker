@@ -1,0 +1,48 @@
+{
+  "id": "swimlane",
+  "name": "Swimlane schedule",
+  "family_code": "I",
+  "order": 2,
+  "reader_question": "When does each actor's or instrument's activity run, and where do periods and point events fall against the calendar?",
+  "relationship": "Dated periods and point events grouped by lane on one quarterly date axis; planned periods are hollow and dashed.",
+  "question_types": ["sequence"],
+  "requires": ["dated-events", "parallel-tracks", "intervals", "time-axis"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 3, "max_items": 6, "what": "lanes" },
+  "use_when": [
+    "Three to six actors or instruments each have periods and point events to place on one calendar",
+    "Overlap between lanes matters more than exact event counts"
+  ],
+  "avoid_when": [
+    "Only two tracks are compared — use two-lane-timeline",
+    "The question is elapsed time between two stages per item — use duration-bars"
+  ],
+  "data_contract": [
+    { "field": "lanes[].name", "type": "string", "notes": "Actor or instrument; unique" },
+    { "field": "lanes[].items[].type", "type": "period | point", "notes": "Bar for a period, diamond for a point event" },
+    { "field": "lanes[].items[].start / end / date", "type": "ISO date", "notes": "Periods carry start ≤ end; point events carry date" },
+    { "field": "lanes[].items[].label", "type": "string ≤ 24 characters", "notes": "Unique across the exhibit" },
+    { "field": "lanes[].items[].planned / highlight", "type": "boolean, optional", "notes": "Planned = hollow dashed; at most one highlighted item overall" }
+  ],
+  "units": "Calendar dates on a linear day-count scale snapped to whole quarters; quarter gridlines.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Bars, diamonds, gridlines, headers and labels as native shapes and text boxes", "Colours, dash styles and wording"],
+    "not_data_bound": ["Dates are positioned from the fixture at build time; resizing a bar does not update any data", "There is no embedded workbook"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/swimlane.ts",
+  "fixture": "fixtures/swimlane.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "single-highlight", "interval-ordered", "label-length", "lane-overlap", "label-overlap"],
+  "table_alternative": "A schedule table (lane, item, type, start, end) for exact dates.",
+  "variations": ["Lanes by instrument rather than actor", "Milestone diamonds only"],
+  "limitations": [
+    "Periods within a lane may not overlap and labels sit below the marks, so dense lanes need splitting",
+    "Overlap in time between lanes does not show interaction or causation"
+  ],
+  "excluded_alternatives": [
+    { "form": "Calendar heat map", "reason": "Hides which period or event belongs to which lane" },
+    { "form": "Stacked area of active measures", "reason": "Adds unlike instruments into one count" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

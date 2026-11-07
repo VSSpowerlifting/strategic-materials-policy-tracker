@@ -1,0 +1,30 @@
+{
+  "pattern": "state-diagram",
+  "classification": "synthetic-demonstration",
+  "title": "Instrument Q has two terminal states, and only a suspension can still be reversed",
+  "subtitle": "Legal states of Instrument Q and permitted transitions; current state as of 2032-06-30",
+  "annotation": "Suspended is the only state with a transition back to an earlier state. Lapsed and Withdrawn have no outgoing transition in this synthetic instrument.",
+  "source": "Synthetic fixture state-diagram.json, constructed for the exhibit gallery",
+  "visual_text": ["Proposed", "In force", "Suspended", "suspension lifted", "Current state, as of 2032-06-30"],
+  "data": {
+    "asOf": "2032-06-30",
+    "currentId": "in-force",
+    "states": [
+      { "id": "proposed", "label": "Proposed", "note": "2030-03-01" },
+      { "id": "adopted", "label": "Adopted", "note": "2030-11-15" },
+      { "id": "in-force", "label": "In force", "note": "from 2031-01-01" },
+      { "id": "lapsed", "label": "Lapsed" },
+      { "id": "suspended", "label": "Suspended" },
+      { "id": "withdrawn", "label": "Withdrawn" }
+    ],
+    "transitions": [
+      { "from": "proposed", "to": "adopted", "label": "vote passed" },
+      { "from": "adopted", "to": "in-force", "label": "commencement date" },
+      { "from": "proposed", "to": "withdrawn", "label": "proposal withdrawn" },
+      { "from": "in-force", "to": "suspended", "label": "suspension order" },
+      { "from": "suspended", "to": "in-force", "label": "suspension lifted" },
+      { "from": "in-force", "to": "lapsed", "label": "sunset date" },
+      { "from": "suspended", "to": "lapsed", "label": "sunset date reached" }
+    ]
+  }
+}

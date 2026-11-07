@@ -1,0 +1,48 @@
+{
+  "pattern": "parallel-basis-panels",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction C ranks first on capacity and measure count but only third on committed funding",
+  "subtitle": "Three bases, each on its own axis: committed funding, licensed capacity and count of measures",
+  "annotation": "The bases are never added or indexed; differing ranks show only that each basis captures something different.",
+  "source": "Synthetic fixture parallel-basis-panels.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Committed funding", "Licensed capacity", "Count of measures", "CU million, nominal", "610", "78"],
+  "data": {
+    "accent": "Jurisdiction C",
+    "panels": [
+      {
+        "basis": "Committed funding",
+        "unit": "CU million, nominal",
+        "dp": 0,
+        "items": [
+          { "label": "Jurisdiction B", "value": 610 },
+          { "label": "Jurisdiction A", "value": 420 },
+          { "label": "Jurisdiction C", "value": 330 },
+          { "label": "Jurisdiction D", "value": 150 }
+        ]
+      },
+      {
+        "basis": "Licensed capacity",
+        "unit": "kt per year",
+        "dp": 0,
+        "items": [
+          { "label": "Jurisdiction C", "value": 78 },
+          { "label": "Jurisdiction A", "value": 55 },
+          { "label": "Jurisdiction B", "value": 33 },
+          { "label": "Jurisdiction D", "value": 21 }
+        ]
+      },
+      {
+        "basis": "Count of measures",
+        "unit": "measures in force",
+        "dp": 0,
+        "items": [
+          { "label": "Jurisdiction C", "value": 17 },
+          { "label": "Jurisdiction A", "value": 14 },
+          { "label": "Jurisdiction B", "value": 9 },
+          { "label": "Jurisdiction D", "value": 6 }
+        ]
+      }
+    ]
+  }
+}

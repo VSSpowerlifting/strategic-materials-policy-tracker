@@ -1,0 +1,26 @@
+{
+  "pattern": "exhibit-with-interpretation",
+  "classification": "synthetic-demonstration",
+  "title": "Authorised amounts exceed drawn amounts in every synthetic programme, by the widest margin in Programme P",
+  "subtitle": "Authorised and drawn amounts per programme at one cut-off, CU million; the columns are separate statuses",
+  "annotation": "Each note cites one table row by number. The two columns are different statuses and are not added together.",
+  "source": "Synthetic fixture exhibit-with-interpretation.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Programme P", "1,250", "Authorised", "Drawn", "READING THE TABLE"],
+  "data": {
+    "unit": "CU million, at 2032-12-31",
+    "dp": 0,
+    "columns": ["Authorised", "Drawn"],
+    "rows": [
+      { "label": "Programme P", "values": [1250, 210] },
+      { "label": "Programme Q", "values": [640, 410] },
+      { "label": "Programme R", "values": [380, 355] },
+      { "label": "Programme S", "values": [150, 0] }
+    ],
+    "notes": [
+      { "ref": 1, "text": "Programme P is the largest authorisation but has drawn about one sixth of it." },
+      { "ref": 3, "text": "Programme R has drawn almost all of its authorisation; little headroom is left." },
+      { "ref": 4, "text": "Programme S has authorised an amount but recorded no drawdown at this cut-off." }
+    ]
+  }
+}

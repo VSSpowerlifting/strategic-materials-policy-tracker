@@ -1,0 +1,46 @@
+{
+  "id": "evidence-milestone-strip",
+  "name": "Evidence-state milestone strip",
+  "family_code": "I",
+  "order": 3,
+  "reader_question": "Which milestones have actually been evidenced, and which remain announced or targeted?",
+  "relationship": "One dated sequence of milestones; marker style encodes each milestone's evidence state (announced, targeted, reported, independently verified).",
+  "question_types": ["sequence", "state"],
+  "requires": ["dated-events", "states", "time-axis"],
+  "incompatible": ["quantified-flows"],
+  "capacity": { "min_items": 4, "max_items": 8, "what": "milestones" },
+  "use_when": [
+    "A single project or programme has milestones whose evidence quality differs",
+    "A reader should not mistake a target or announcement for an observed outcome"
+  ],
+  "avoid_when": [
+    "Stages of a formal process are the point — use stage-ladder",
+    "Several actors have parallel schedules — use swimlane"
+  ],
+  "data_contract": [
+    { "field": "milestones[].label", "type": "string ≤ 28 characters", "notes": "Unique; short milestone name" },
+    { "field": "milestones[].date", "type": "ISO date", "notes": "Ascending order; for targeted milestones the target date" },
+    { "field": "milestones[].state", "type": "announced | targeted | reported | independently-verified", "notes": "Controlled vocabulary (EVIDENCE_STATES)" }
+  ],
+  "units": "Calendar dates on a linear day-count scale spanning whole calendar years.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Markers, stems, spine and labels as native shapes and text boxes", "Milestone wording and state text", "Marker colours and dash styles"],
+    "not_data_bound": ["Dates are positioned from the fixture at build time; changing a state means restyling its marker by hand", "There is no embedded workbook"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/evidence-milestone-strip.ts",
+  "fixture": "fixtures/evidence-milestone-strip.json",
+  "integrity_rules": ["min-categories", "max-categories", "controlled-vocabulary", "dates-ascending", "unique-labels", "label-length", "single-highlight", "label-overlap"],
+  "table_alternative": "A milestone table (date, milestone, evidence state, source) for audit-grade lookup.",
+  "variations": ["Per-milestone source tag under the date", "Vertical strip for narrow layouts"],
+  "limitations": [
+    "The accent marks at most one independently verified milestone; more would break the single-highlight rule",
+    "Evidence state describes the milestone's support, not its importance or whether the target was met"
+  ],
+  "excluded_alternatives": [
+    { "form": "Gantt bars", "reason": "Milestones are points; bars would imply durations that are not stated" },
+    { "form": "Traffic-light status column", "reason": "Colour grading implies a performance judgement rather than the quality of evidence" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

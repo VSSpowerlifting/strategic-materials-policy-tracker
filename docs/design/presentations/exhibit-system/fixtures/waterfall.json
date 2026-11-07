@@ -1,0 +1,22 @@
+{
+  "pattern": "waterfall",
+  "classification": "synthetic-demonstration",
+  "title": "Two new awards outweigh one withdrawal, lifting the demonstration portfolio from 500 to 620",
+  "subtitle": "Committed balance bridge between two cut-offs, CU million",
+  "annotation": "Every movement is a sourced change in status. The bridge reconciles exactly: 500 + 180 + 60 − 90 − 30 = 620.",
+  "source": "Synthetic fixture waterfall.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Opening balance", "Closing balance", "Award, Project 3", "INTERPRETATION"],
+  "data": {
+    "unit": "CU million, committed",
+    "dp": 0,
+    "start": { "label": "Opening balance", "value": 500 },
+    "steps": [
+      { "label": "Award, Project 3", "delta": 180 },
+      { "label": "Award, Project 5", "delta": 60 },
+      { "label": "Withdrawal, Project 1", "delta": -90 },
+      { "label": "Lapse, Project 2", "delta": -30 }
+    ],
+    "end": { "label": "Closing balance", "value": 620 }
+  }
+}
