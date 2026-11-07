@@ -1,7 +1,8 @@
-# SMPT Presentation Standard v2.1
+# SMPT Presentation Standard v2.2
 
 Adopted **5 November 2026** · Applies to **new and revised research presentations**  
-Companion standards: [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) · [Reference Analysis](REFERENCE_ANALYSIS.md)
+Visual repertoire update **6 November 2026**; Archivo/palette and publication gates retained.
+Companion standards: [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) · [Visual Repertoire & Consulting References](VISUAL_REPERTOIRE_AND_REFERENCES.md) · [Reference Analysis](REFERENCE_ANALYSIS.md)
 
 ## Purpose and operating principles
 
@@ -121,6 +122,14 @@ These are **archetypes**, not eight mandatory slides or a fixed sequence.
 
 **H — Decision synthesis.** Investor, lender, company and public-financier implications; ranked diligence requests or monitoring conditions; conclusions must be conditional when public evidence is insufficient.
 
+### Exhibit variety and visual flow
+
+Use the [visual repertoire and original examples](VISUAL_REPERTOIRE_AND_REFERENCES.md) to vary exhibit structure, composition and density across the argument. Maintain one recognizable identity through Archivo, palette, alignment and source treatment. Broader graphic variety is expected where the evidence supports genuinely different relationships.
+
+Include the reader question, analytical relationship, selected exhibit family and controlling data/source in the existing slide manifest before production. Consider timelines for sequence, state diagrams for conditional entitlements, bridges for reconciliations, small multiples for comparable series, and direct comparisons for alternatives. Tables should earn their place against those alternatives; exact role/contract matrices remain valid.
+
+Review the full contact sheet as well as individual slides. Three or more substantially identical compositions in sequence trigger editorial review: retain repetition when it enables comparison, otherwise revise the slide that benefits most from another form. This is a judgment prompt, not a chart quota. New colors or icons alone do not provide analytical variety. Record the result in existing visual-integrity and publication-coherence gates.
+
 ## 6. Exhibit discipline
 
 Use [the full exhibit and chart rules](EXHIBIT_AND_CHART_RULES.md). The essentials:
@@ -170,6 +179,7 @@ Required outputs for a publication release:
 
 Editorial QA:
 - [ ] Five [authenticity and visual integrity review gates](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) recorded as PASS / REVISE / HOLD with supporting evidence?
+- [ ] Exhibit selection and contact-sheet review recorded, with repetitive compositions justified or revised?
 - Headline-only reading coherent?
 - No asserted causality from mere temporal sequence?
 - No uncommitted capacity visualized as cash?
@@ -182,7 +192,7 @@ Editorial QA:
 
 ## 10. Governance and application
 
-- v2.1 with Archivo is the default **for future SMPT research decks**.
+- v2.2 retains Archivo and adds the visual-repertoire workflow **for future and revised SMPT research decks**.
 - Existing live FI001 publication remains unchanged until a new independently verified version has completed editorial and release gates.
 - The [FI001 redesign brief](FI001_REDESIGN_BRIEF.md) is the first candidate application, targeting 18 slides including four appendix slides.
 - The Financial Intelligence 002 case can subsequently reuse the same design grammar; do not expand this documentation task into FI002 development.
