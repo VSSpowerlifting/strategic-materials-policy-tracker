@@ -1,0 +1,52 @@
+name: Stage Archivo alternate deck binaries for Issue 219
+
+on:
+  push:
+    branches:
+      - codex/issue-219-archivo-publication
+    paths:
+      - '.github/workflows/archivo-publication-stage.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  stage-reviewed-binaries:
+    if: github.ref == 'refs/heads/codex/issue-219-archivo-publication'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download the exact approved-for-review ZIP
+        uses: actions/download-artifact@v4
+        with:
+          name: smpt-r001-a001-archivo-review
+          repository: ${{ github.repository }}
+          run-id: 42313061887
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/issue219
+      - name: Verify hashes, old binaries, native PPTX, PDF fonts and links
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir pymupdf==1.26.6
+          python scripts/stage_archivo_alternates.py --artifact-dir "${{ runner.temp }}/issue219"
+          git diff --check
+          git diff --exit-code -- public/research/r001/tungsten-supply-security-slides.pdf public/research/applied-001/antimony-supply-resilience.pdf
+      - name: Commit only new binaries and a manifest to this draft release branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/research/r001/tungsten-supply-security-archivo-executive.{pdf,pptx}
+          git add public/research/applied-001/antimony-supply-resilience-archivo-executive.{pdf,pptx}
+          git add public/research/archivo-alternate-editions-manifest.json
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m "Stage verified alternate slide editions [skip ci]"
+            git push origin "HEAD:refs/heads/codex/issue-219-archivo-publication"
+          fi
