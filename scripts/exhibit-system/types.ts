@@ -14,8 +14,11 @@ export interface TextRun {
 
 export interface ChartSeries {
   name: string;
-  labels: string[];
+  /** Category labels (bar/line/area). Omitted for scatter/bubble, where the first series holds X values. */
+  labels?: string[];
   values: number[];
+  /** Bubble sizes (bubble charts only). */
+  sizes?: number[];
 }
 
 export interface TableCell {
