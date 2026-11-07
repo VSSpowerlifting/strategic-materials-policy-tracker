@@ -47,7 +47,8 @@
     "exhibits:select": "tsx scripts/exhibit-system/select.ts",
     "exhibits:gallery": "tsx scripts/exhibit-system/gallery-index.ts",
     "exhibits:previews": "python3 scripts/exhibit-system/render_previews.py",
-    "exhibits:render": "tsx scripts/exhibit-system/research-deck.ts"
+    "exhibits:render": "tsx scripts/exhibit-system/research-deck.ts",
+    "exhibits:browser": "node scripts/exhibit-system/check-gallery-browser.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

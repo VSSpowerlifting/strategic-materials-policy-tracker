@@ -41,7 +41,7 @@ export interface Finding {
 }
 
 export interface DeckReview {
-  shape: "deck-spec" | "slide-specs" | "slide-content";
+  shape: "deck-spec" | "slide-specs" | "slide-content" | "research-deck";
   slides: ReviewSlide[];
   findings: Finding[];
   familyCounts: Record<string, number>;
@@ -122,6 +122,18 @@ export function normaliseManifest(
 
   const o = (raw ?? {}) as Record<string, unknown>;
   const list = Array.isArray(o.slides) ? (o.slides as unknown[]) : [];
+
+  if (o.classification === "research") {
+    const slides = list.map((s, i): ReviewSlide => {
+      const so = (s ?? {}) as Record<string, unknown>;
+      const ex = (so.exhibit ?? {}) as Record<string, unknown>;
+      const id = asStr(so.pattern) ?? "unspecified";
+      const p = byId.get(id);
+      if (!p) findings.push({ severity: "HOLD", rule: "registered-pattern", slide: i + 2, message: `unknown research pattern ${id}` });
+      return { index: i + 2, title: asStr(ex.title) ?? "", subtitle: asStr(ex.subtitle), annotation: asStr(ex.annotation), source: asStr(ex.source), kind: id, family: p ? `${p.family_code}. ${p.family}` : undefined, tier: p?.editability.tier, tableReason: asStr(so.table_reason), structural: false };
+    });
+    return { shape: "research-deck", slides: [{ index: 1, title: asStr(o.title) ?? "", kind: "cover", structural: true }, ...slides], findings };
+  }
 
   if ("cover_lines" in o) {
     const slides = list.map((s, i): ReviewSlide => {

@@ -5,6 +5,7 @@
   "subtitle": "Authorised and drawn amounts per programme at one cut-off, CU million; the columns are separate statuses",
   "annotation": "Each note cites one table row by number. The two columns are different statuses and are not added together.",
   "source": "Synthetic fixture exhibit-with-interpretation.json, constructed for the exhibit gallery",
+  "layout": "wide",
   "visual_text": ["Programme P", "1,250", "Authorised", "Drawn", "READING THE TABLE"],
   "data": {
     "unit": "CU million, at 2032-12-31",

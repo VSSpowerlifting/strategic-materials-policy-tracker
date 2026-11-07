@@ -64,7 +64,7 @@
     "strategyand-2018-exhibit-6": "Strategy&, Every Molecule (2018), p14, Exhibit 6: option comparisons",
     "smpt-repertoire-2026": "SMPT original repertoire examples (examples/05-visual-repertoire.svg)"
   },
-  "pattern_count": 38,
+  "pattern_count": 39,
   "patterns": [
     {
       "id": "ranked-bar",
@@ -3424,6 +3424,91 @@
         {
           "form": "Sankey",
           "reason": "Implies quantified flow; the edges here are unweighted"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "counterparty-map",
+      "name": "Counterparty map",
+      "family_code": "J",
+      "family": "Structure and flow",
+      "order": 6,
+      "reader_question": "Which counterparties hold distinct roles around one focal project?",
+      "relationship": "An unweighted ego network: equal spokes link named counterparties to a focal entity. Angular order and distance carry no measure.",
+      "question_types": [
+        "relationship"
+      ],
+      "requires": [
+        "edges"
+      ],
+      "incompatible": [
+        "quantified-flows",
+        "time-axis"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 8,
+        "what": "counterparties around one hub"
+      },
+      "use_when": [
+        "A single project is the common point of exposure across several contractual roles",
+        "The question concerns counterparties and roles rather than sequences or quantities"
+      ],
+      "avoid_when": [
+        "Amounts, direction or links among counterparties matter",
+        "Several hubs must be compared — use a role-matrix or edge list"
+      ],
+      "data_contract": [
+        {
+          "field": "hub / relationship",
+          "type": "string",
+          "notes": "Focal entity and the declared meaning of all links"
+        },
+        {
+          "field": "parties[].label / role",
+          "type": "string",
+          "notes": "4–8 unique counterparties; labels at most 28 characters, roles at most 44"
+        }
+      ],
+      "units": "No quantities. Spokes have equal weight. Radius and angle have no analytical meaning.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Hub, unweighted spokes, counterparty names and roles"
+        ],
+        "not_data_bound": [
+          "Positioned shapes and lines; moving a label does not reconnect its spoke"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/counterparty-map.ts",
+      "fixture": "fixtures/counterparty-map.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "label-length"
+      ],
+      "table_alternative": "An entity–role table with one row per counterparty.",
+      "variations": [
+        "Group role types in the source table before laying out the spokes"
+      ],
+      "limitations": [
+        "Relationships are asserted by the input; the diagram does not independently verify them",
+        "No direction, flow, size, influence or hierarchy is encoded",
+        "Radial order is only for layout and is not a ranking"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Radar chart",
+          "reason": "Suggests comparable quantitative scales for qualitative roles"
+        },
+        {
+          "form": "Layered dependency network",
+          "reason": "Implies a direction and chain where only shared counterparties are established"
         }
       ],
       "references": [

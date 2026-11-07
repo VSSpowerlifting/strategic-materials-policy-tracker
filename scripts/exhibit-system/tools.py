@@ -6,9 +6,7 @@ dependencies. Lookup order, first match wins:
 1. an explicit environment variable (SOFFICE, PDFTOPPM)
 2. PATH
 3. standard install locations (LibreOffice.app on macOS, Homebrew, /usr/bin)
-4. a bundled Codex runtime under ~/.cache/codex-runtimes, if one happens to
-   exist. This is a convenience fallback only; nothing requires it, and the
-   scripts print which binary they used so a reviewer can tell.
+No private runtime paths are searched.
 
 Install on macOS:  brew install --cask libreoffice && brew install poppler
 Install on Debian/Ubuntu:  apt-get install libreoffice-impress poppler-utils
@@ -37,9 +35,6 @@ _STANDARD = {
     ],
 }
 
-_RUNTIME_BIN = Path.home() / ".cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override"
-
-
 def find_tool(name: str, *, quiet: bool = False) -> str | None:
     """Return a path to `name`, or None if it is not installed anywhere known."""
     env = os.environ.get(_ENV.get(name, ""), "")
@@ -53,9 +48,4 @@ def find_tool(name: str, *, quiet: bool = False) -> str | None:
     for candidate in _STANDARD.get(name, []):
         if Path(candidate).exists():
             return candidate
-    rt = _RUNTIME_BIN / name
-    if rt.exists():
-        if not quiet:
-            print(f"{name}: not on PATH; using bundled runtime copy at {rt}", file=sys.stderr)
-        return str(rt)
     return None

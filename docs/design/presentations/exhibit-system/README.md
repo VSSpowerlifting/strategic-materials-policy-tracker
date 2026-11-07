@@ -2,7 +2,7 @@
 
 Added 7 November 2026 · Development reference for SMPT research decks. It is not part of the public site, and nothing here is cleared for publication.
 
-The system turns a JSON fixture into a native, editable PowerPoint exhibit. It contains 38 registered patterns in 11 families. Each pattern has a data contract, integrity checks, an editability statement and a documented alternative it was chosen over. Use it with [Presentation Standard v2](../SMPT_PRESENTATION_STANDARD_V2.md), [Exhibit and Chart Rules](../EXHIBIT_AND_CHART_RULES.md), [Visual Integrity](../EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) and the [Visual Repertoire](../VISUAL_REPERTOIRE_AND_REFERENCES.md).
+The system turns a JSON fixture into a native, editable PowerPoint exhibit. It contains 39 registered patterns in 11 families. Each pattern has a data contract, integrity checks, an editability statement and a documented alternative it was chosen over. Use it with [Presentation Standard v2](../SMPT_PRESENTATION_STANDARD_V2.md), [Exhibit and Chart Rules](../EXHIBIT_AND_CHART_RULES.md), [Visual Integrity](../EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) and the [Visual Repertoire](../VISUAL_REPERTOIRE_AND_REFERENCES.md).
 
 > **Synthetic data only.** Every name, figure and date in the fixtures, the gallery deck, the demo deck and the previews was made up for layout. None of it is an SMPT research finding. Fixtures use invented entities (such as "Programme Gamma" or "Facility Alpha"), a notional currency (`CU`) and demonstration cut-off dates. `parseFixture` rejects any fixture whose `classification` is not `synthetic-demonstration`, and every non-cover slide carries the synthetic notice.
 
@@ -35,7 +35,7 @@ Code lives in `scripts/exhibit-system/`, and tests in `tests/exhibit-system.test
 | G | Relationship | scatter, threshold-scatter, bubble |
 | H | Distribution and uncertainty | strip-plot, box-interval, histogram |
 | I | Time and sequence | two-lane-timeline, swimlane, evidence-milestone-strip, stage-ladder, duration-bars |
-| J | Structure and flow | state-diagram, condition-tree, value-chain-measured, conversion-flow, dependency-network |
+| J | Structure and flow | state-diagram, condition-tree, value-chain-measured, conversion-flow, dependency-network, counterparty-map |
 | K | Lookup and decision | criterion-matrix, role-matrix, option-profile, exhibit-with-interpretation, location-table |
 
 ## Commands
@@ -52,7 +52,17 @@ npm run exhibits:review     # deck-composition review of demo-deck.json (or pass
 
 Run them in that order after changing a pattern or fixture. Builds are deterministic: zip timestamps and document dates are fixed, so an unchanged input rebuilds byte for byte.
 
-**Runtime.** `pptxgenjs` and `jszip` are not repository dependencies. `build-gallery.ts` resolves them from the bundled Codex runtime, or from the directory in `CODEX_PRIMARY_RUNTIME_NODE_MODULES`. Verification and previews use `python3`, and the LibreOffice tier uses `soffice`. Without `soffice`, that tier is reported as skipped, not passed.
+**Dependencies.** `pptxgenjs` 4.0.1 and `jszip` 3.10.1 are exact-pinned repository devDependencies. Run `npm ci` with development dependencies enabled. Generation imports these packages normally and needs no Codex runtime or `NODE_PATH`. Verification and previews use Python 3 (standard library), LibreOffice Impress and Poppler. Tool lookup uses `SOFFICE` / `PDFTOPPM`, then `PATH`, then standard installation locations; it never searches a private runtime. A missing LibreOffice tier is reported as skipped, never passed.
+
+```sh
+# macOS
+brew install --cask libreoffice
+brew install poppler
+# Debian / Ubuntu
+sudo apt-get install libreoffice-impress poppler-utils
+```
+
+An environment may provide these executables on `PATH`; this does not change the portable installation requirements.
 
 **Fonts.** Decks name Archivo and embed no font files. Font binaries must not be committed. For faithful previews, point `FONTCONFIG_FILE` at a fontconfig file that includes a local Archivo directory. Without it, `render_previews.py` warns and LibreOffice substitutes another face.
 
@@ -84,7 +94,7 @@ Each object is named `role:name` and recorded in `element-manifest.json` with on
 |---|---|---|
 | `native-chart` | PowerPoint chart with an embedded workbook; values change through Edit Data | 14 |
 | `native-chart-with-helper-series` | Native chart that uses invisible helper series (no fill, labels deleted) for geometry such as floating waterfall bars; edit the visible series, keep helpers consistent | 1 |
-| `native-shapes` | Positioned native shapes and text boxes. Editable as objects, but not data-bound, so a new value means moving shapes by hand | 17 |
+| `native-shapes` | Positioned native shapes and text boxes. Editable as objects, but not data-bound, so a new value means moving shapes by hand | 18 |
 | `table` | Native PowerPoint table | 6 |
 | `text` | Native text boxes (titles, interpretation, source, notices) | all slides |
 | `raster` | Embedded image | none used |
@@ -122,3 +132,40 @@ Each pattern spec states what is editable, what is positioned but not data-bound
 - The gallery is a local development document. Do not link it from, or deploy it with, the research site without separate authorization.
 - Consulting references are linked by URL and page in the registry. No external slide artwork, screenshot, logo or font is reproduced. The patterns are original SMPT compositions.
 - A pattern is a form. Using one in a publication still requires the controlling model, the evidence register and the five review gates.
+
+## Browsing the portfolio
+
+Open [the gallery](gallery/index.html) locally. Search includes names, reader questions, data traits, integrity rules and use/avoid guidance. Family and editability filters combine with search, and the URL preserves them when served over HTTP. Family navigation clears other filters. Select two patterns to reveal a persistent comparison tray; enlarge any thumbnail for the full preview. Escape closes the dialog and returns focus. On narrow screens comparisons stack vertically. The pattern reference and image links remain available without JavaScript.
+
+The editable source link on each pattern names its slide in [the gallery PPTX](exhibit-gallery.pptx). [The demo deck](demo-deck.pptx) shows 13 exhibits in a sequence. These are development documents; no public route or deployment is involved. For local HTTP browsing:
+
+```sh
+python3 -m http.server 8764 --bind 127.0.0.1 --directory docs/design/presentations/exhibit-system
+# Open http://127.0.0.1:8764/gallery/index.html
+```
+
+Optional browser acceptance automation lives in `scripts/exhibit-system/check-gallery-browser.mjs`. It starts its own loopback server and tests search, combined filters, no matches, URL persistence, comparison selection/reset, previews, Escape/focus return, every PNG, PPTX downloads, responsive overflow and no-JavaScript browsing. Run `npm run exhibits:browser` with Playwright and its Chromium installed separately. `EXHIBITS_PLAYWRIGHT_MODULE` may name an absolute module entry file; `EXHIBITS_BROWSER_CHANNEL=chrome` uses an installed Chrome. Neither is needed to generate or browse the gallery.
+
+## Research integration: draft output only
+
+```sh
+npm run exhibits:render -- /path/to/research-spec.json /path/to/private/draft.pptx
+npm run exhibits:review -- /path/to/research-spec.json --strict
+python3 scripts/exhibit-system/verify_editability.py --deck /path/to/private/draft.pptx --manifest /path/to/private/draft.manifest.json
+```
+
+Keep the spec and outputs outside this synthetic exhibit-system directory. Outputs must also be outside `public/` and `app/`. Existing decks and manifests cannot be overwritten. Symlinked directory paths are resolved before checking those boundaries. No controlled research product is migrated by this work.
+
+The input object requires `classification: "research"`, a title, optional `cover_lines`, an `evidence` array and `slides`. Each evidence entry requires a unique `id`, an HTTP(S) `url`, document `title` and source `locator` (page, section, table or model cell). Each slide names a registered `pattern`, a `label`, optional `table_reason` and an `exhibit` containing `title`, `subtitle`, `annotation`, `source`, nonempty `evidence_refs`, renderer `data`, optional `layout` and optional `visual_text`. References must resolve to evidence entries. All renderer parsing and integrity checks run before writing. Composition HOLDs, including the 20-slide research ceiling counting the generated cover, block generation. REVIEW findings are recorded for human adjudication.
+
+Evidence references and full source metadata are retained in the manifest and speaker notes. This checks traceability and data contracts; it does **not** establish source authenticity, legal effect, analytical validity or human approval. The generated manifest records hashes of the input and PPTX, composition findings, `pending-human-review` gates and `not-granted` publication authorization. Research structural verification checks the PPTX hash, evidence-reference presence and draft labels.
+
+`qc_record` in the spec or `--qc-record <file>` attaches technical QC metadata only. A relative spec path resolves beside the spec. Its contents never confer authority: **every research slide and cover retains `DRAFT · REVIEW GATES PENDING`, even if a QC file claims approval**. Publication still requires the controlling evidence/model review and explicit human gates A–E in a separate publication workflow. This tool has no release mode.
+
+## Diversity and scope
+
+The library has no pattern-count quota. Add a pattern only when its analytical relationship earns a distinct encoding. Financing coverage includes reconciliation, sources/uses, status separation and scenario sensitivities; strategy includes criteria, options and condition trees; operations includes durations, milestones, states and quantified conversion; relationships include scatter/bubble, directed dependencies and qualitative counterparty roles.
+
+The original radial **counterparty-map** adds an unweighted ego network around one project. Equal spokes make the shared exposure easy to see without inventing a directional chain. Angle and radius carry no analytical meaning. Use the dependency network for directed chains, the role matrix for several organisations across roles, and a table when amounts or edge-specific evidence must be read precisely. A radar chart would impose artificial common scales on qualitative roles; a donut would suggest parts of a whole. Neither is added for visual novelty.
+
+See [the final engineering review](FINAL_REVIEW.md) for recovery provenance, checks, remaining limits and the manual PowerPoint acceptance procedure.

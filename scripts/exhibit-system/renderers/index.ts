@@ -1,3 +1,4 @@
+import { counterpartyMap } from "./counterparty-map";
 import type { Renderer } from "../types";
 import { dumbbell } from "./dumbbell";
 import { FAMILY_ABC } from "./family-abc";
@@ -11,6 +12,7 @@ import { sourcesAndUses } from "./sources-and-uses";
 import { waterfall } from "./waterfall";
 
 const list: Renderer<never>[] = [
+  counterpartyMap as Renderer<never>,
   rankedBar as Renderer<never>,
   waterfall as Renderer<never>,
   dumbbell as Renderer<never>,

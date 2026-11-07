@@ -31,8 +31,8 @@ const registry = loadRegistry();
 const read = (p: string) => readFileSync(resolve(p), "utf8");
 const json = <T>(p: string) => JSON.parse(read(p)) as T;
 
-test("registry holds 30–40 patterns across all eleven families", () => {
-  assert.ok(registry.length >= 30 && registry.length <= 40, `${registry.length} patterns`);
+test("registry covers all eleven analytical families without a pattern quota", () => {
+  assert.ok(registry.length > 0);
   const families = new Set(registry.map((p) => p.family_code));
   assert.deepEqual([...families].sort(), ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]);
 });

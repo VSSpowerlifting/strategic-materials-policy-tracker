@@ -67,9 +67,9 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
   render(h, d) {
     const { x, y } = h.area;
     const labelW = 2.2;
-    const roleW = Math.min(1.35, (h.area.w - labelW) / d.roles.length);
-    const headH = 0.5;
-    const rowH = 0.42;
+    const roleW = (h.area.w - labelW) / d.roles.length;
+    const headH = 0.58;
+    const rowH = Math.min(0.5, (h.area.h - 1.45) / d.orgs.length);
     const footH = 0.42;
     const rule = { type: "solid", pt: 0.75, color: C.border };
     const none = { type: "none" };
@@ -83,7 +83,7 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
         ...o.cells.map((c): TableCell => ({
           text: c?.qualifier ?? "",
           options: {
-            fontSize: 11, color: C.muted, valign: "middle", align: "left", margin: [0.04, 0.04, 0.04, 0.42],
+            fontSize: 11, color: C.muted, valign: "middle", align: "left", margin: [0.02, 0.02, 0.02, 0.34],
             fill: { color: i % 2 ? C.soft : C.paper }, border: [none, none, rule, none],
           },
         })),
@@ -105,7 +105,7 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
       o.cells.forEach((c, j) => {
         if (!c) return;
         h.shape(`role-mark-${i + 1}-${j + 1}`, "data", h.shapes.ellipse, {
-          x: x + labelW + roleW * j + 0.17, y: y + headH + rowH * i + rowH / 2 - dia / 2, w: dia, h: dia,
+          x: x + labelW + roleW * j + 0.1, y: y + headH + rowH * i + rowH / 2 - dia / 2, w: dia, h: dia,
           fill: { color: C.neutralDark }, line: { color: C.neutralDark, width: 1 },
         });
       });

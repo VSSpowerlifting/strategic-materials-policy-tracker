@@ -65,11 +65,11 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
   render(h, d) {
     const { x, y } = h.area;
     const numW = 0.4;
-    const labW = 1.9;
-    const valW = 1.05;
+    const labW = 2.1;
+    const valW = 1.3;
     const tableW = numW + labW + valW * d.columns.length;
     const headH = 0.5;
-    const rowH = 0.66;
+    const rowH = Math.min(0.66, (h.area.h - 0.9) / d.rows.length);
     const rule = { type: "solid", pt: 0.75, color: C.border };
     const none = { type: "none" };
     const hdr = (text: string, align: "left" | "center" | "right"): TableCell => ({
@@ -98,14 +98,14 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
     const bw = h.area.x + h.area.w - bx;
     h.text("reading-heading", "annot", "READING THE TABLE", { x: bx, y, w: bw, h: 0.3, fontSize: 11, bold: true, color: C.muted, charSpacing: 1, valign: "middle" });
     hairline(h, "reading-rule", "annot", bx, y + 0.34, bw);
-    const noteH = 1.05;
+    const noteH = (h.area.h - 0.5) / d.notes.length;
     d.notes.forEach((n, i) => {
       const ny = y + 0.5 + i * noteH;
       h.text(`note-ref-${i + 1}`, "annot", String(n.ref), {
         x: bx, y: ny + 0.02, w: 0.3, h: 0.3, shape: h.shapes.ellipse, fill: { color: C.neutralDark },
         fontSize: 11, bold: true, color: C.paper, align: "center", valign: "middle",
       });
-      h.text(`note-text-${i + 1}`, "annot", n.text, { x: bx + 0.42, y: ny, w: bw - 0.42, h: noteH - 0.1, fontSize: 13, color: C.ink, valign: "top" });
+      h.text(`note-text-${i + 1}`, "annot", n.text, { x: bx + 0.42, y: ny, w: bw - 0.42, h: noteH - 0.1, fontSize: 14, color: C.ink, valign: "top" });
     });
   },
 };

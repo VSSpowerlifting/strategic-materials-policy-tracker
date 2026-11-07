@@ -32,6 +32,7 @@ Exit code 1 if any structural or LibreOffice check fails.
 """
 from __future__ import annotations
 
+import hashlib
 import argparse
 import io
 import json
@@ -220,6 +221,8 @@ def structural(deck: Path, manifest_slides: list[dict], mode: str = "synthetic")
 
         slide_text = texts(root)
         haystack = slide_text + "\n" + "\n".join(chart_text)
+        if mode == "research" and "DRAFT · REVIEW GATES PENDING" not in slide_text:
+            issues.append("research draft badge absent; technical QC cannot authorize publication")
         pattern = man.get("pattern", "?")
         visual_checked = 0
         if pattern != "cover":
@@ -275,7 +278,7 @@ def pdf_pages(pdf: Path) -> int:
 def libreoffice(deck: Path, slide_count: int, chart_count: int) -> dict:
     soffice = find_soffice()
     if not soffice:
-        return {"status": "skipped", "reason": "soffice not found on PATH or in the bundled runtime"}
+        return {"status": "skipped", "reason": "soffice not found via SOFFICE, PATH or standard install locations"}
     with tempfile.TemporaryDirectory() as tmp:
         t = Path(tmp)
         env = dict(os.environ)
@@ -332,6 +335,10 @@ def main() -> int:
         if man.get("classification") != "research":
             print(f"{args.manifest}: classification is not research", file=sys.stderr)
             return 2
+        actual = hashlib.sha256(args.deck.read_bytes()).hexdigest()
+        if man.get("sha256") != actual:
+            print("research manifest hash does not match deck", file=sys.stderr)
+            return 1
         s = structural(args.deck, man["slides"], mode="research")
         print(f"{args.deck}: structural {s['status']} (research mode; LibreOffice and PowerPoint tiers not run)")
         for sl in s["slides"]:
@@ -347,6 +354,10 @@ def main() -> int:
     for d in manifest["decks"]:
         path = REPO / d["file"]
         s = structural(path, d["slides"])
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if d["sha256"] != actual:
+            s["status"] = "fail"
+            s["issues"].append("manifest hash does not match deck")
         chart_count = sum(len(x["charts"]) for x in s["slides"])
         lo = {"status": "skipped", "reason": "--structural-only"} if args.structural_only else libreoffice(
             path, len(d["slides"]), chart_count
@@ -358,7 +369,7 @@ def main() -> int:
                 tiers[k] = tiers.get(k, 0) + v
         decks.append({
             "file": d["file"],
-            "sha256": d["sha256"],
+            "sha256": actual,
             "slides": len(d["slides"]),
             "element_tiers": dict(sorted(tiers.items())),
             "structural": s,

@@ -4,7 +4,7 @@
 // labels are positioned native shapes, NOT bound to the chart data.
 import { arr, bool, isoDate, num, obj, optNum, str } from "../contract";
 import { datesAscending, maxItems, minItems, uniqueLabels, within } from "../integrity";
-import { C, chartDefaults, fmt, formatCode, scale, vline } from "../primitives";
+import { C, chartDefaults, fmt, formatCode, scale } from "../primitives";
 import type { IntegrityIssue, Renderer } from "../types";
 
 export interface AnnotatedLineData {
@@ -129,7 +129,8 @@ export const annotatedLine: Renderer<AnnotatedLineData> = {
     d.events.forEach((e, i) => {
       const x = xAt(e.date);
       const col = e.highlight ? C.accent : C.neutralDark;
-      vline(h, `event-line-${i}`, "annot", x - 0.006, py - 0.12, ph + 0.12, col);
+      h.line(`event-line-${i}`, "annot", { x, y: py - 0.12, w: 0, h: ph + 0.12,
+        line: { color: col, width: 0.5, dashType: "dash" } });
       const right = x + 0.08 + 2.3 > a.x + a.w;
       h.text(`event-label-${i}`, "annot", [
         { text: `${e.date}\n`, options: { bold: true, fontSize: 11, color: col } },

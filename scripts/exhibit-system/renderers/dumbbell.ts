@@ -3,7 +3,7 @@
 // values are NOT data-bound (no embedded workbook).
 import { arr, num, obj, optNum, str } from "../contract";
 import { maxItems, minItems, nonNegative, uniqueLabels } from "../integrity";
-import { C, fmt, hairline, legendItem, scale, vline, niceMax } from "../primitives";
+import { C, fmt, hairline, scale, vline, niceMax } from "../primitives";
 import type { Renderer } from "../types";
 
 export interface DumbbellData {
@@ -43,7 +43,7 @@ export const dumbbell: Renderer<DumbbellData> = {
       ...maxItems(d.items.length, 10, "rows"),
       ...uniqueLabels(d.items.map((i) => i.label)),
     ];
-    if (d.axisMax !== undefined && Math.max(...all) > d.axisMax) {
+    if (d.axisMax !== undefined && (!(d.axisMax > 0) || Math.max(...all) > d.axisMax)) {
       issues.push({ rule: "bounded-values", message: `axisMax ${d.axisMax} is below the largest value` });
     }
     return issues;
@@ -51,7 +51,7 @@ export const dumbbell: Renderer<DumbbellData> = {
   render(h, d) {
     const items = [...d.items].sort((a, b) => b.to - a.to);
     const labelW = 2.1;
-    const valueGutter = 0.7;
+    const valueGutter = 1.55;
     const top = h.area.y + 0.46;
     const bottom = h.area.y + h.area.h - 0.34;
     const x0 = h.area.x + labelW;
@@ -61,18 +61,24 @@ export const dumbbell: Renderer<DumbbellData> = {
     const rowH = (bottom - top) / items.length;
     const dot = 0.17;
 
-    let lx = h.area.x;
-    lx = legendItem(h, "legend-from", lx, h.area.y, d.fromLabel, { fill: C.neutralLight }, 1.9);
-    legendItem(h, "legend-to", lx, h.area.y, d.toLabel, { fill: C.accent }, 1.9);
+    [d.fromLabel, d.toLabel].forEach((label, i) => {
+      const x = h.area.x + i * 1.9;
+      const color = i ? C.accent : C.neutralLight;
+      h.shape(`legend-dot-${i}`, "legend", h.shapes.ellipse, { x, y: h.area.y + 0.05, w: dot, h: dot, fill: { color }, line: { color: C.neutralDark, width: 0.75 } });
+      h.text(`legend-label-${i}`, "legend", label, { x: x + 0.28, y: h.area.y, w: 1.6, h: 0.26, fontSize: 11 });
+    });
     h.text("unit", "axis", d.unit, {
       x: h.area.x + h.area.w - 3.2, y: h.area.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
-    vline(h, "baseline-zero", "axis", x0, top - 0.06, bottom - top + 0.06, C.border);
-    h.text("axis-zero", "axis", "0", { x: x0 - 0.3, y: bottom + 0.04, w: 0.6, h: 0.24, fontSize: 11, color: C.muted, align: "center" });
-    h.text("axis-max", "axis", fmt(max, d.dp), {
-      x: sx(max) - 0.5, y: bottom + 0.04, w: 1, h: 0.24, fontSize: 11, color: C.muted, align: "center",
-    });
+    for (let i = 0; i <= 4; i++) {
+      const value = max * i / 4;
+      const x = sx(value);
+      vline(h, `grid-${i}`, "axis", x, top - 0.06, bottom - top + 0.06, i === 0 ? C.border : C.soft);
+      h.text(`tick-${i}`, "axis", fmt(value, Math.max(d.dp, Number.isInteger(value) ? 0 : 1)), {
+        x: x - 0.4, y: bottom + 0.04, w: 0.8, h: 0.24, fontSize: 11, color: C.muted, align: "center",
+      });
+    }
 
     items.forEach((it, i) => {
       const cy = top + rowH * (i + 0.5);
@@ -96,7 +102,7 @@ export const dumbbell: Renderer<DumbbellData> = {
       });
       const delta = it.to - it.from;
       h.text(`value-${i}`, "label", `${fmt(it.to, d.dp)} (${fmt(delta, d.dp, { sign: true })})`, {
-        x: sx(Math.max(it.from, it.to)) + 0.14, y: cy - 0.14, w: 1.5, h: 0.28, fontSize: 11, color: C.ink, valign: "middle",
+        x: x1 + 0.16, y: cy - 0.14, w: 1.5, h: 0.28, fontSize: 11, color: C.ink, valign: "middle",
       });
     });
   },

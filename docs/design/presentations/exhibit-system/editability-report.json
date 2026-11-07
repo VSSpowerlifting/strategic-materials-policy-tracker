@@ -8,14 +8,14 @@
   "decks": [
     {
       "file": "docs/design/presentations/exhibit-system/exhibit-gallery.pptx",
-      "sha256": "cbea0d93cc1575ca416a97d3227ab08558d66c0be429ef88c1c6117d65bd8a78",
-      "slides": 39,
+      "sha256": "37006d2cc5f9fe6f0debbf8cb00ec30865b4527147f829c6999d9f48e849eab9",
+      "slides": 40,
       "element_tiers": {
         "native-chart": 21,
         "native-chart-with-helper-series": 1,
-        "native-shapes": 634,
+        "native-shapes": 655,
         "table": 6,
-        "text": 768
+        "text": 785
       },
       "structural": {
         "status": "pass",
@@ -109,10 +109,10 @@
           {
             "slide": 6,
             "pattern": "dumbbell",
-            "elements": 49,
+            "elements": 56,
             "tiers": {
-              "native-shapes": 26,
-              "text": 23
+              "native-shapes": 30,
+              "text": 26
             },
             "charts": [],
             "raster_elements": 0,
@@ -661,6 +661,20 @@
           },
           {
             "slide": 35,
+            "pattern": "counterparty-map",
+            "elements": 32,
+            "tiers": {
+              "native-shapes": 17,
+              "text": 15
+            },
+            "charts": [],
+            "raster_elements": 0,
+            "visual_text_checked": 4,
+            "status": "pass",
+            "issues": []
+          },
+          {
+            "slide": 36,
             "pattern": "criterion-matrix",
             "elements": 48,
             "tiers": {
@@ -675,7 +689,7 @@
             "issues": []
           },
           {
-            "slide": 36,
+            "slide": 37,
             "pattern": "role-matrix",
             "elements": 26,
             "tiers": {
@@ -690,7 +704,7 @@
             "issues": []
           },
           {
-            "slide": 37,
+            "slide": 38,
             "pattern": "option-profile",
             "elements": 12,
             "tiers": {
@@ -705,13 +719,13 @@
             "issues": []
           },
           {
-            "slide": 38,
+            "slide": 39,
             "pattern": "exhibit-with-interpretation",
-            "elements": 22,
+            "elements": 21,
             "tiers": {
               "native-shapes": 5,
               "table": 1,
-              "text": 16
+              "text": 15
             },
             "charts": [],
             "raster_elements": 0,
@@ -720,7 +734,7 @@
             "issues": []
           },
           {
-            "slide": 39,
+            "slide": 40,
             "pattern": "location-table",
             "elements": 13,
             "tiers": {
@@ -738,7 +752,7 @@
       },
       "libreoffice": {
         "status": "pass",
-        "pdf_pages": 39,
+        "pdf_pages": 40,
         "resaved_chart_parts": 22,
         "resaved_raster_elements": 0,
         "issues": []
@@ -750,14 +764,14 @@
     },
     {
       "file": "docs/design/presentations/exhibit-system/demo-deck.pptx",
-      "sha256": "cb9e0d1ea5bd313e8b9fbb91ccf569d74815f0710bfa999b800b661ead2ce15b",
+      "sha256": "8dd3ef735ee133d263ccee1f1171469476469569ece76ed5f9f1628a3bf39804",
       "slides": 14,
       "element_tiers": {
         "native-chart": 4,
         "native-chart-with-helper-series": 1,
-        "native-shapes": 234,
+        "native-shapes": 238,
         "table": 1,
-        "text": 283
+        "text": 286
       },
       "structural": {
         "status": "pass",
@@ -801,10 +815,10 @@
           {
             "slide": 3,
             "pattern": "dumbbell",
-            "elements": 49,
+            "elements": 56,
             "tiers": {
-              "native-shapes": 26,
-              "text": 23
+              "native-shapes": 30,
+              "text": 26
             },
             "charts": [],
             "raster_elements": 0,

@@ -122,7 +122,7 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     const { depth } = walk(d);
     const maxDepth = Math.max(...depth.values());
     const cols = maxDepth + 1;
-    const gap = 0.8;
+    const gap = 0.62;
     const pitch = (A.w + gap) / cols;
     const boxW = pitch - gap;
 
@@ -130,7 +130,7 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     const leafCount = d.nodes.filter((n) => n.branches.length === 0).length;
     const topPad = 0.34;
     const rowH = (A.h - topPad) / leafCount;
-    const boxH = Math.min(0.56, rowH - 0.08);
+
     const cy = new Map<string, number>();
     let leaf = 0;
     const place = (id: string): number => {
@@ -148,6 +148,14 @@ export const conditionTree: Renderer<ConditionTreeData> = {
       return y;
     };
     place(d.nodes[0].id);
+
+    // Use the vertical space available at each depth, rather than forcing every
+    // condition into the smallest terminal box in the whole tree.
+    const heightOf = (id: string): number => {
+      const peers = d.nodes.filter((n) => depth.get(n.id) === depth.get(id)).map((n) => cy.get(n.id)!).sort((a, b) => a - b);
+      const minGap = peers.length > 1 ? Math.min(...peers.slice(1).map((y, i) => y - peers[i])) : 1.1;
+      return Math.min(0.92, minGap - 0.1, 2 * (cy.get(id)! - A.y - topPad), 2 * (A.y + A.h - cy.get(id)!));
+    };
 
     // Highlighted route: root to the chosen outcome.
     const onPath = new Set<string>();
@@ -194,7 +202,7 @@ export const conditionTree: Renderer<ConditionTreeData> = {
         if (y2 === undefined) return;
         const accent = onPath.has(n.id) && onPath.has(b.to);
         h.text(`branch-label-${i}-${j}`, "label", b.label, {
-          x: xOf(b.to) - gap / 2 + 0.02, y: y2 - 0.25, w: gap / 2 - 0.02, h: 0.22,
+          x: xOf(b.to) - gap + 0.02, y: y2 - 0.27, w: gap - 0.04, h: 0.22,
           fontSize: 11, bold: true, color: accent ? C.accent : C.muted, align: "center", valign: "bottom",
         });
       });
@@ -203,6 +211,7 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     d.nodes.forEach((n, i) => {
       const y = cy.get(n.id);
       if (y === undefined) return;
+      const boxH = heightOf(n.id);
       const hot = onPath.has(n.id);
       const outcome = n.kind === "outcome";
       const final = hot && outcome;
@@ -214,7 +223,7 @@ export const conditionTree: Renderer<ConditionTreeData> = {
       });
       h.text(`node-label-${i}`, "label", n.label, {
         x: xOf(n.id) + 0.06, y: y - boxH / 2, w: boxW - 0.12, h: boxH,
-        fontSize: 11, bold: outcome, color: final ? "FFFFFF" : C.ink, align: "center", valign: "middle",
+        fontSize: 12, bold: outcome, color: final ? "FFFFFF" : C.ink, align: "center", valign: "middle",
       });
     });
   },

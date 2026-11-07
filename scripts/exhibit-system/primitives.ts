@@ -2,7 +2,7 @@
 //
 // Geometry follows the accepted Archivo master (create_master.py): 13.333 x 7.5 in,
 // dark top bar, gold-toned section label, 26pt assertion title, 13pt measure
-// subtitle, hairline rules at y = 2.47 and 6.91, 9pt source footer.
+// subtitle, hairline rules at y = 2.47 and 6.91, 10pt source footer.
 // No pptxgenjs import: the slide object is passed in.
 
 import type {
@@ -102,18 +102,13 @@ export function fontSizesOf(kind: "text" | "chart" | "table", options: Opts, con
 
 export const SYNTHETIC_NOTICE = "Synthetic demonstration data — not an SMPT finding";
 
-/** Badge on research slides until a QC record is attached. */
+/** Research output is always draft; technical QC cannot authorize publication. */
 export const DRAFT_BADGE = "DRAFT · REVIEW GATES PENDING";
 
 export interface FrameSpec {
   label: string;
   slideNumber: number;
   fixture: Fixture;
-  /**
-   * Research slides only: true when the deck spec names an existing QC record.
-   * It removes the draft badge; it is not evidence that the gates passed.
-   */
-  qcRecorded?: boolean;
 }
 
 /** Element-recording helper factory. Every object gets a role-prefixed `objectName`. */
@@ -198,7 +193,7 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
     h.text("synthetic-badge", "frame", "SYNTHETIC DEMONSTRATION DATA", {
       x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.muted, align: "right", charSpacing: 1,
     });
-  } else if (!spec.qcRecorded) {
+  } else {
     h.text("draft-badge", "frame", DRAFT_BADGE, {
       x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.accent, align: "right", charSpacing: 1,
     });

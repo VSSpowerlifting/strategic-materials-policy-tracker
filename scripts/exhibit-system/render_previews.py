@@ -18,6 +18,7 @@ fonts are not committed). Without it the script still runs and warns.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import shutil
@@ -42,6 +43,8 @@ def slide_patterns() -> list[tuple[int, str]]:
     deck = next((d for d in manifest["decks"] if d["file"] == rel), None)
     if deck is None:
         sys.exit(f"render_previews: {rel} not in element-manifest.json; run npm run exhibits:build first")
+    if deck.get("sha256") != hashlib.sha256(GALLERY.read_bytes()).hexdigest():
+        sys.exit("render_previews: deck hash differs from manifest; run npm run exhibits:build first")
     return [(s["slide"], s["pattern"]) for s in deck["slides"] if s["pattern"] != "cover"]
 
 

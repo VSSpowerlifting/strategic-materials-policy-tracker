@@ -54,6 +54,7 @@ export interface BuildOptions {
   classification: ExhibitClassification;
   /** Research decks only: repository-relative path of the QC handoff record, if one exists. */
   qcRecord?: string;
+  evidence?: { id: string; title: string; url: string; locator: string }[];
 }
 
 function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
@@ -68,14 +69,14 @@ function coverSlide(pptx: Pptx, title: string, lines: string[], records: Element
   h.text("cover-lines", "frame", lines.map((t, i) => ({ text: t, options: { breakLine: i < lines.length - 1 } })), {
     x: 0.8, y: 3.8, w: 11.0, h: 1.6, fontSize: 14, color: "D8D3C7", valign: "top", paraSpaceAfter: 6,
   });
-  const notice = synthetic ? SYNTHETIC_NOTICE : opts.qcRecord ? `QC record: ${opts.qcRecord}` : DRAFT_BADGE;
+  const notice = synthetic ? SYNTHETIC_NOTICE : DRAFT_BADGE;
   h.text("cover-notice", "frame", notice, {
     x: 0.8, y: 6.6, w: 11.5, h: 0.3, fontSize: 11, bold: true, color: C.gold,
   });
   slide.addNotes(
     synthetic
       ? "Cover. Classification: synthetic-demonstration. Contains no SMPT research finding."
-      : `Cover. Classification: research. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`,
+      : `Cover. Classification: research. DRAFT · REVIEW GATES PENDING. Publication authorization is not granted by this tool. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`,
   );
 }
 
@@ -125,8 +126,9 @@ export async function buildDeck(
     slide.background = { color: C.paper };
     const records: ElementRecord[] = [];
     const h = makeHelpers(slide, contentArea(e.fixture), records, pptx.ShapeType, pptx.ChartType);
-    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, qcRecorded: Boolean(opts.qcRecord) });
     renderer.render(h, data, e.fixture);
+    // Keep the fixed frame above native tables in renderers that reflow them.
+    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture });
     slide.addNotes(
       synthetic
         ? [
@@ -136,8 +138,9 @@ export async function buildDeck(
           ].join(" ")
         : [
             `Pattern: ${e.fixture.pattern}.`,
-            "Classification: research.",
+            "Classification: research. DRAFT · REVIEW GATES PENDING. Publication authorization is not granted by this tool.",
             `Evidence: ${(e.fixture.evidence_refs ?? []).join("; ")}.`,
+            ...(opts.evidence ?? []).filter((ref) => e.fixture.evidence_refs?.includes(ref.id)).map((ref) => `${ref.id}: ${ref.title}. ${ref.url} · ${ref.locator}`),
             opts.qcRecord ? `QC record: ${opts.qcRecord}.` : "Review gates A–E pending.",
           ].join(" "),
     );
