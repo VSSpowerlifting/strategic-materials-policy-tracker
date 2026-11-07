@@ -293,12 +293,24 @@ test("FI003 admission advances only its eight new dated fields and preserves pri
 
 test("combined 6 November corpus re-dates no record outside the FI003 and November 5 cohorts",()=>{
   const r=auditF5CorpusCutoffImpact(seeds(),"2026-11-04","2026-11-06");
-  // Main's November 5 revision also re-dated this existing Nolans equity row
-  // (implementationStatusCheckedAt), reverted by withoutNovember5Expansion.
-  const nolansRevision=new Set(["fin-au-arafura-nolans-2025-equity"]);
+  // Main's November 5 revision rechecked only this existing Nolans equity
+  // instrument's implementation status. Keep this exception field/date-specific.
+  const nolansRecheck={
+    seed:"financial-commitments",
+    recordId:"fin-au-arafura-nolans-2025-equity",
+    field:"lifecycleReview.implementationStatusCheckedAt",
+    date:"2026-11-05",
+  };
+  assert.deepEqual(
+    r.newlyIncludedDatedFields.filter(x=>x.recordId===nolansRecheck.recordId),
+    [nolansRecheck],
+    "only the approved Nolans implementation recheck is newly dated",
+  );
   assert.ok(r.newlyIncludedDatedFields.every(x=>
-    FI003_IDS.has(x.recordId)||NOVEMBER_5_EXPANSION_IDS.has(x.recordId)||nolansRevision.has(x.recordId)),
-    "every newly dated field belongs to one of the two reviewed November cohorts");
+    FI003_IDS.has(x.recordId)||NOVEMBER_5_EXPANSION_IDS.has(x.recordId)||
+    (x.seed===nolansRecheck.seed&&x.recordId===nolansRecheck.recordId&&
+     x.field===nolansRecheck.field&&x.date===nolansRecheck.date)),
+    "every newly dated field belongs to an approved cohort or exact Nolans recheck");
   assert.equal(r.newlyIncludedDatedFields.filter(x=>FI003_IDS.has(x.recordId)).length,8);
   assert.equal(r.countNewlyIncludedDatedFields,25);
   assert.equal(r.publicationAuthorized,false);
