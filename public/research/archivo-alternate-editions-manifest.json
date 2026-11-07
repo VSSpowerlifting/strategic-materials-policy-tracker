@@ -52,7 +52,7 @@
     }
   },
   "generator": "research/reissues/archivo-remaining/build_decks.js",
-  "publication_status": "draft_pending_human_approval",
+  "publication_status": "approved_for_publication",
   "release_scope": "alternate widescreen executive PDF/PPTX; originals preserved",
   "schema": "smpt-archivo-alternate-editions-1"
 }

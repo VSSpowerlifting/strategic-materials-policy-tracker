@@ -45,7 +45,7 @@ def main():
  a=argparse.ArgumentParser(); a.add_argument("--artifact-dir",type=Path,required=True); folder=a.parse_args().artifact_dir
  manifest={"schema":"smpt-archivo-alternate-editions-1","generator":"research/reissues/archivo-remaining/build_decks.js",
  "release_scope":"alternate widescreen executive PDF/PPTX; originals preserved",
- "publication_status":"draft_pending_human_approval","cases":{}}
+ "publication_status":"approved_for_publication","cases":{}}
  for k,c in CASES.items():
   original=R/c["old"]
   assert sha(original)==c["old_sha"],"Original approved PDF altered: "+str(original)

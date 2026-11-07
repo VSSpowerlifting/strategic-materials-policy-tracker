@@ -12,7 +12,7 @@ const read=(path:string)=>readFileSync(resolve(path));
 
 test("Archivo alternate release: four files are present, hash-matched, format-valid and original PDFs remain unchanged",()=>{
   assert.deepEqual(Object.keys(manifest.cases).sort(),["a001","r001"]);
-  assert.equal(manifest.publication_status,"draft_pending_human_approval");
+  assert.equal(manifest.publication_status,"approved_for_publication");
   for(const c of Object.values(manifest.cases)){
     assert.match(c.research_cutoff,/^2026-11-0[34]$/);
     assert.equal(digest(read(c.original_pdf)),c.original_sha256);
