@@ -39,7 +39,9 @@ const sourceLinks = [
 ] as const;
 
 const downloads = [
-  { name: "Executive strategy presentation", detail: "8-slide PDF", url: pdf },
+  { name: "Executive strategy presentation", detail: "Original 8-slide source-rich PDF", url: pdf },
+  { name: "Archivo executive edition (PDF)", detail: "8-slide widescreen alternate", url: "/research/applied-001/antimony-supply-resilience-archivo-executive.pdf" },
+  { name: "Editable Archivo presentation (PowerPoint)", detail: "8 editable widescreen slides", url: "/research/applied-001/antimony-supply-resilience-archivo-executive.pptx" },
   { name: "Supply resilience financial model", detail: "13-sheet Excel workbook", url: model },
   { name: "Evidence and assumptions register", detail: "Source-linked methodology", url: evidence },
 ] as const;
@@ -219,6 +221,9 @@ export default function AntimonySupplyResilience() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-4 font-display text-xs leading-6 text-paper-muted">
+                The Archivo edition condenses the analysis for an executive audience. The original presentation retains its more extensive source links.
+              </p>
               <div className="mt-9 border-t border-paper-border pt-5">
                 <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Case parameters</h2>
                 <dl className="mt-4 space-y-4 font-display text-sm">

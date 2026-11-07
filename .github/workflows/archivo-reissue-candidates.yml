@@ -1,0 +1,66 @@
+name: R001 and Applied 001 Archivo presentation candidates
+
+on:
+  pull_request:
+    paths:
+      - 'research/reissues/archivo-remaining/**'
+      - '.github/workflows/archivo-reissue-candidates.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-review-artifacts:
+    name: Editable PowerPoint + PDF / review-only
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies (no lockfile change)
+        run: |
+          npm ci
+          npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund pptxgenjs@4.0.0
+          python -m pip install --disable-pip-version-check fonttools==4.60.1 pymupdf==1.26.6 pillow==12.0.0
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libreoffice fontconfig
+      - name: Install local Archivo for PDF rendering (not committed)
+        run: |
+          python -c 'from scripts.reissue_archivo_decks import install_archivo; install_archivo()'
+          fc-match Archivo
+      - name: Build two native editable decks
+        run: |
+          mkdir -p candidates
+          OUT_DIR="$GITHUB_WORKSPACE/candidates" node research/reissues/archivo-remaining/build_decks.js
+      - name: Export eight-page selectable-text PDFs
+        run: |
+          libreoffice -env:UserInstallation=file:///tmp/smpt-archivo-reissue-219 --headless --convert-to pdf:impress_pdf_Export --outdir candidates candidates/*.pptx
+      - name: Validate slide source, figures, PDFs, links and Archivo embedding
+        run: |
+          python research/reissues/archivo-remaining/verify_candidates.py --out-dir candidates --root "$GITHUB_WORKSPACE"
+          mkdir -p candidates/baseline
+          cp public/research/r001/tungsten-supply-security-slides.pdf candidates/baseline/R001_original.pdf
+          cp public/research/applied-001/antimony-supply-resilience.pdf candidates/baseline/A001_original.pdf
+          git diff --exit-code
+      - name: Preserve review candidates without publication
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpt-r001-a001-archivo-review
+          path: |
+            candidates/*.pptx
+            candidates/*.pdf
+            candidates/*-contact.jpg
+            candidates/*-baseline-contact.jpg
+            candidates/baseline/*.pdf
+            candidates/archivo-reissue-qa.json
+            candidates/ARCHIVO_REISSUE_REVIEW.md
+          if-no-files-found: warn
+          retention-days: 14

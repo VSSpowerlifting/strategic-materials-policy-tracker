@@ -78,11 +78,11 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
      <FilterSelect id="organizations-role" label="Recorded relationship" value={role} onChange={setRole} options={options.role}/>
    </div>
    <div className="mt-4 flex flex-wrap items-center gap-3">
-     <p className="font-mono text-xs text-muted" role="status" aria-live="polite">
+     <p className="font-display text-xs text-muted" role="status" aria-live="polite">
        <span data-testid="organization-result-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered organizations
      </p>
      {active?<button type="button" onClick={clear}
-       className="font-mono text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+       className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
        Clear filters</button>:null}
    </div>
    <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
@@ -97,9 +97,9 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
        if(!section.length)return null;
        return <section key={category} aria-labelledby={"organization-kind-"+category}>
          <div className="mb-4 flex items-baseline gap-3 border-b border-border pb-3">
-           <span className="font-mono text-xs text-faint">{String(index+1).padStart(2,"0")}</span>
+           <span className="font-display text-xs text-faint">{String(index+1).padStart(2,"0")}</span>
            <h2 id={"organization-kind-"+category} className="font-display text-xl font-semibold">
-             {organizationKindLabels[category]} <span className="font-mono text-xs font-normal text-muted">({section.length})</span>
+             {organizationKindLabels[category]} <span className="font-display text-xs font-normal text-muted">({section.length})</span>
            </h2>
          </div>
          <Card className="overflow-hidden">
@@ -119,7 +119,7 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
                  <span className="font-mono text-xs text-muted">{o.countryCode??"Country —"}</span>
                </span>
              </div>
-             <p className="mt-2 font-mono text-[11px] leading-5 text-faint">
+             <p className="mt-2 font-display text-[11px] leading-5 text-faint">
                {[
                  nonempty(o.providedRows,"provider record"),
                  nonempty(o.receivedRows,"recipient record"),

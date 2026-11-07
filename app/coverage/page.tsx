@@ -22,7 +22,7 @@ function HeadlineStat({ n, label, sub }: { n: string; label: string; sub: string
   return (
     <div className="rounded-lg border bg-card p-4">
       <div className="tnum font-display text-3xl font-bold leading-none">{n}</div>
-      <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+      <div className="mt-1.5 font-display text-[11px] uppercase tracking-[0.16em] text-faint">
         {label}
       </div>
       <div className="mt-1 text-xs text-muted">{sub}</div>
@@ -39,7 +39,7 @@ function DistributionBar({ label, count, max }: { label: string; count: number; 
       <div className="h-2 min-w-0 overflow-hidden rounded-full bg-elevated" aria-hidden="true">
         <div className="h-full rounded-full bg-accent/60" style={{ width: `${width}%` }} />
       </div>
-      <span className="tnum text-right font-mono text-xs text-faint">{count}</span>
+      <span className="tnum text-right font-display text-xs text-faint">{count}</span>
     </li>
   );
 }
@@ -87,7 +87,7 @@ export default function CoveragePage() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[38rem] text-sm">
             <thead>
-              <tr className="border-b border-border text-left font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+              <tr className="border-b border-border text-left font-display text-[11px] uppercase tracking-[0.16em] text-faint">
                 <th className="py-2 pr-4 font-normal">Actor</th>
                 <th className="py-2 pr-4 text-right font-normal">Events</th>
                 <th className="py-2 pr-4 text-right font-normal">Framing anchored</th>
@@ -103,13 +103,13 @@ export default function CoveragePage() {
                       {jurisdictionLabels[a.jurisdiction]}
                     </Link>
                   </td>
-                  <td className="tnum py-2.5 pr-4 text-right font-mono">{a.events}</td>
-                  <td className="tnum py-2.5 pr-4 text-right font-mono">
+                  <td className="tnum py-2.5 pr-4 text-right font-display">{a.events}</td>
+                  <td className="tnum py-2.5 pr-4 text-right font-display">
                     {a.framingCoverage.count}
                     <span className="text-faint">/{a.framingCoverage.of}</span>
                   </td>
-                  <td className="tnum py-2.5 pr-4 text-right font-mono">{a.linkedSources}</td>
-                  <td className="tnum py-2.5 text-right font-mono">{a.primaryLinkedSources}</td>
+                  <td className="tnum py-2.5 pr-4 text-right font-display">{a.linkedSources}</td>
+                  <td className="tnum py-2.5 text-right font-display">{a.primaryLinkedSources}</td>
                 </tr>
               ))}
             </tbody>
@@ -143,7 +143,7 @@ export default function CoveragePage() {
         <div className="grid gap-4 md:grid-cols-2">
           <Card className="p-5">
             <h3 className="font-display font-semibold tracking-tight">Coded date window</h3>
-            <p className="mt-2 tnum font-mono text-sm text-foreground">
+            <p className="mt-2 tnum font-display text-sm text-foreground">
               {formatDate(s.dateWindow.earliest)} – {formatDate(s.dateWindow.latest)}
             </p>
             <p className="mt-2 text-xs leading-5 text-faint">

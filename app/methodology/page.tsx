@@ -170,7 +170,7 @@ export default function MethodologyPage() {
       />
 
       <section aria-labelledby="reading-evidence" className="mt-8 rounded border border-border-strong bg-card p-5 sm:p-6">
-        <h2 id="reading-evidence" className="font-serif text-2xl">Reading the evidence</h2>
+        <h2 id="reading-evidence" className="font-display text-2xl">Reading the evidence</h2>
         <div className="mt-5 grid gap-6 md:grid-cols-3 text-base leading-7 text-muted">
           <div><h3 className="font-display text-sm font-semibold text-foreground">Who makes the claim?</h3><p className="mt-2">Follow the original document and quoted passage. A government rationale and an issuer&apos;s activity report have different evidentiary roles.</p><a href="#sources" className="research-text-link">Source hierarchy</a></div>
           <div><h3 className="font-display text-sm font-semibold text-foreground">What state is established?</h3><p className="mt-2">An announcement, binding agreement, payment and industrial observation are separate. Programme ceilings and recipient awards have different financial roles.</p><a href="#capital-counting" className="research-text-link">Financial counting rules</a></div>

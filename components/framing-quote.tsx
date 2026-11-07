@@ -34,22 +34,22 @@ export function FramingQuote({
       <div className="flex-1 border-l-[5px] border-accent px-5 py-4">
         <blockquote
           lang={lang}
-          className="text-pretty font-serif text-xl leading-relaxed text-foreground"
+          className="text-pretty font-display text-xl leading-relaxed text-foreground"
         >
           {claim.quoteOriginal}
         </blockquote>
         {isTranslated ? (
           <p className="mt-3 leading-7 text-muted">
-            <span className="font-mono text-xs text-accent/70">EN&nbsp;</span>
+            <span className="font-display text-xs text-accent/70">EN&nbsp;</span>
             {claim.quoteEn}
           </p>
         ) : null}
       </div>
       {/* Provenance rail — where the anchor comes from */}
-      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border bg-elevated/40 px-5 py-3 font-mono text-xs text-faint">
+      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border bg-elevated/40 px-5 py-3 font-display text-xs text-faint">
         {source ? (
           <>
-            <ExtLink href={source.url} className="font-mono">
+            <ExtLink href={source.url} className="font-display">
               {source.publisher}
             </ExtLink>
             <ConfidenceBadge confidence={source.confidence} />

@@ -1,3 +1,9 @@
+## 2026-11-07: FI003 technically integrated with current main (draft PR #215)
+
+- Merged `main` `604632b` into `codex/fi003-jpmorgan-financing-foundation` (from `6aa8898`) with no rebase and no force-push. Seeds were reconciled by stable ID: no collisions, deletions or semantic duplicates. The only shared edit, `us.eventIds`, was unioned. The combined corpus is 78 events, 112 commitments, 140 organizations, 110 projects, 17 programmes and 212 sources. In the F5 cutoff tests, the historical snapshots exclude both cohorts, and a new full-corpus guard checks that no other record was re-dated.
+- Validate, typecheck, lint (0 errors), 1,113 Node tests, build and the FI003 Python checks pass. The Python checks ran under 3.13, because 3.12 is not installed here. The FI003 model, outputs and decks are unchanged. Details are in [VERIFICATION](research/fi003/VERIFICATION.md) and the [PUBLICATION_PLAN](research/fi003/PUBLICATION_PLAN.md) integration row.
+- This is a technical reconciliation only. Financial review (Benjamin; Jiho's challenge) is pending, and no merge to main, publication or deployment is authorized. Repeat the integration if FI003 is revised or main advances before release.
+
 ## 2026-11-06: FI003 financing argument revised and approved candidate packages admitted (draft PR #215)
 
 ## 2026-11-06: FI003 managerial review and 15-slide draft

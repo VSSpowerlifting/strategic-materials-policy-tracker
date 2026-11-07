@@ -114,7 +114,9 @@ const downloads = [
   { label: "Full research dossier", detail: "23-page PDF", href: "/research/r001/tungsten-supply-security.pdf" },
   { label: "Executive memo", detail: "2-page PDF", href: "/research/r001/tungsten-supply-security-memo.pdf" },
   { label: "Source-linked evidence workbook", detail: "XLSX", href: "/research/r001/tungsten-supply-security-evidence.xlsx" },
-  { label: "LinkedIn presentation", detail: "8-page PDF", href: "/research/r001/tungsten-supply-security-slides.pdf" },
+  { label: "LinkedIn presentation", detail: "Original 8-page portrait PDF", href: "/research/r001/tungsten-supply-security-slides.pdf" },
+  { label: "Archivo executive edition (PDF)", detail: "8-slide widescreen alternate", href: "/research/r001/tungsten-supply-security-archivo-executive.pdf" },
+  { label: "Editable Archivo presentation (PowerPoint)", detail: "8 editable widescreen slides", href: "/research/r001/tungsten-supply-security-archivo-executive.pptx" },
 ] as const;
 
 export default function TungstenResearchDossier() {
@@ -212,6 +214,9 @@ export default function TungstenResearchDossier() {
                     <li key={file.href}><a href={file.href} download className="font-semibold text-paper-accent underline decoration-2 underline-offset-4 hover:text-paper-foreground">{file.label}</a><span className="block text-xs text-paper-muted">{file.detail}</span></li>
                   ))}
                 </ul>
+                <p className="mt-4 font-display text-xs leading-6 text-paper-muted">
+                  The Archivo edition is a condensed, editable executive presentation. The original portrait PDF and research cutoff remain unchanged.
+                </p>
               </div>
               
             </aside>

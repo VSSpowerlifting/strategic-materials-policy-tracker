@@ -29,7 +29,7 @@ export function ProjectOverview({
   return (
     <div className="mt-8">
       <section aria-labelledby="project-overview">
-        <h2 id="project-overview" className="font-serif text-2xl">
+        <h2 id="project-overview" className="font-display text-2xl">
           What does the record establish?
         </h2>
         <p className="mt-3 max-w-4xl text-base leading-8 text-muted">

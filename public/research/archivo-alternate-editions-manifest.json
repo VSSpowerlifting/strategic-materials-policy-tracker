@@ -1,0 +1,58 @@
+{
+  "cases": {
+    "a001": {
+      "alternate_files": {
+        "pdf": {
+          "bytes": 95916,
+          "path": "public/research/applied-001/antimony-supply-resilience-archivo-executive.pdf",
+          "sha256": "6e040cfb7126e55e57b813a80c002cac1bcb7393e482d2de346f47f0deb3d4b1"
+        },
+        "pptx": {
+          "bytes": 258246,
+          "path": "public/research/applied-001/antimony-supply-resilience-archivo-executive.pptx",
+          "sha256": "5e52e21c154842db5a619b5dbb7753affca421608aa505ab2dbabe1d31bc40c7"
+        }
+      },
+      "editable_pptx": {
+        "editable_text_nodes": 164,
+        "links": 17,
+        "native_shapes": 231,
+        "raster_shapes": 0,
+        "slides": 8
+      },
+      "original_pdf": "public/research/applied-001/antimony-supply-resilience.pdf",
+      "original_sha256": "bdd169c7f6112924c45d9dff317bd39c6c8fce4382e1b63f10ac7002af3507a6",
+      "pdf_links": 34,
+      "research_cutoff": "2026-11-04"
+    },
+    "r001": {
+      "alternate_files": {
+        "pdf": {
+          "bytes": 86867,
+          "path": "public/research/r001/tungsten-supply-security-archivo-executive.pdf",
+          "sha256": "64818234a204a004100c0161cb2b8dadb7364f71142a2adf74cc8ef256fe9812"
+        },
+        "pptx": {
+          "bytes": 233168,
+          "path": "public/research/r001/tungsten-supply-security-archivo-executive.pptx",
+          "sha256": "e5da53a575fc373610c1d309d31980f9a3e92c80ed9e25dbcc1ddd604dc82b70"
+        }
+      },
+      "editable_pptx": {
+        "editable_text_nodes": 145,
+        "links": 12,
+        "native_shapes": 200,
+        "raster_shapes": 0,
+        "slides": 8
+      },
+      "original_pdf": "public/research/r001/tungsten-supply-security-slides.pdf",
+      "original_sha256": "1cd5895ea12ebe6a8963117c26fa9b4fcd93f6d252a76684c3e2107dae4303c6",
+      "pdf_links": 24,
+      "research_cutoff": "2026-11-03"
+    }
+  },
+  "generator": "research/reissues/archivo-remaining/build_decks.js",
+  "publication_status": "approved_for_publication",
+  "release_scope": "alternate widescreen executive PDF/PPTX; originals preserved",
+  "schema": "smpt-archivo-alternate-editions-1"
+}

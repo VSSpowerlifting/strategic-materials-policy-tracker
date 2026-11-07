@@ -2940,6 +2940,234 @@
     }
   },
   {
+    "id": "evt-us-exim-critical-minerals-2026-08",
+    "date": "2026-08-07",
+    "jurisdiction": "us",
+    "issuingBody": "Export-Import Bank of the United States",
+    "titleOriginal": "EXIM announces three critical-mineral loans totaling $58 million",
+    "titleOriginalLang": "en",
+    "titleEn": "EXIM announces three critical-mineral loans totaling $58 million",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "graphite",
+      "tantalum",
+      "niobium",
+      "boron"
+    ],
+    "affectedSectors": [
+      "industrial",
+      "battery",
+      "semiconductor",
+      "defense"
+    ],
+    "summary": "EXIM announced $25m lending to Westwater Resources for graphite, $25m to Global Advanced Metals for tantalum and niobium, and $8m to 5E Advanced Materials for 5E Boron Americas. Loan execution and disbursement are not established.",
+    "analyticalSignificance": "Three separate financings, not one $58m recipient award; Westwater separately reports approval subject to definitive documentation.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-us-exim-minerals-roundtable-2026",
+      "src-us-westwater-sec-exim-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-08-07",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-05",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-us-exim-project-vault-2026",
+    "date": "2026-02-02",
+    "jurisdiction": "us",
+    "issuingBody": "Export-Import Bank of the United States",
+    "titleOriginal": "EXIM approves direct loan up to $10 billion for Project Vault",
+    "titleOriginalLang": "en",
+    "titleEn": "EXIM approves direct loan up to $10 billion for Project Vault",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "stockpiling"
+    ],
+    "affectedMaterialIds": [],
+    "affectedSectors": [
+      "industrial",
+      "defense"
+    ],
+    "summary": "EXIM board approved a direct loan of up to $10bn to support Project Vault, an independently governed public-private strategic critical-minerals reserve. Specific commodities, final loan execution, payments and inventory are not established by the announcement.",
+    "analyticalSignificance": "The loan ceiling is distinct from actual drawn capital and stockpiled quantities.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-us-exim-project-vault-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-02-02",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-05",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-au-donald-gam-financing-2026",
+    "date": "2026-10-27",
+    "jurisdiction": "australia",
+    "issuingBody": "Australian Government / Export Finance Australia / National Reconstruction Fund",
+    "titleOriginal": "Conditional financing for Donald Mineral Sands and Global Advanced Metals",
+    "titleOriginalLang": "en",
+    "titleEn": "Conditional financing for Donald Mineral Sands and Global Advanced Metals",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "rare-earth-elements",
+      "tantalum"
+    ],
+    "affectedSectors": [
+      "industrial",
+      "defense",
+      "semiconductor"
+    ],
+    "summary": "Government announced conditional approval for up to A$70m EFA financing and A$110m NRF investment in Donald Mineral Sands, plus a separate conditional US$41.4m EFA loan to Global Advanced Metals for tantalum production.",
+    "analyticalSignificance": "Conditional public approvals, with no presumption of loan execution or disbursement.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-au-donald-gam-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-10-27",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-05",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-srf-aluminium-2026",
+    "date": "2026-10-23",
+    "jurisdiction": "canada",
+    "issuingBody": "Innovation, Science and Economic Development Canada",
+    "titleOriginal": "Strategic Response Fund support for two aluminium recipients",
+    "titleOriginalLang": "en",
+    "titleEn": "Strategic Response Fund support for two aluminium recipients",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "aluminium"
+    ],
+    "affectedSectors": [
+      "industrial",
+      "defense"
+    ],
+    "summary": "Canada announced C$164.8m support for Rio Tinto's Alma and Grande-Baie modernization projects and C$28.5m for Aluminerie Alouette, under the Strategic Response Fund. Project costs C$818.5m and C$135m respectively are not government support.",
+    "analyticalSignificance": "Preserves project-level cost versus public-funding distinctions and Rio Tinto's two separate site undertakings.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-ca-srf-aluminium-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-10-23",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-05",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-ca-cgf-marathon-2026",
+    "date": "2026-09-14",
+    "jurisdiction": "canada",
+    "issuingBody": "Canada Growth Fund Inc.",
+    "titleOriginal": "Canada Growth Fund commits approximately C$140 million to Generation Mining for Marathon",
+    "titleOriginalLang": "en",
+    "titleEn": "Canada Growth Fund commits approximately C$140 million to Generation Mining for Marathon",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [
+      "copper",
+      "palladium"
+    ],
+    "affectedSectors": [
+      "industrial",
+      "energy"
+    ],
+    "summary": "Canada Growth Fund announced approximately C$90m common-share investment and a C$50m convertible note into Generation Mining to advance Marathon copper-palladium development, conditional on transaction closing.",
+    "analyticalSignificance": "Two public instruments anchor larger private-market financing; announcements do not establish funds paid or construction underway.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-cgf-marathon-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-09-15",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-05",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-uk-cm-accelerator-2026",
+    "date": "2026-08-05",
+    "jurisdiction": "uk",
+    "issuingBody": "UK Department for Business, Innovation, Science and Trade",
+    "titleOriginal": "Critical Minerals Accelerator opens £25 million grant competition",
+    "titleOriginalLang": "en",
+    "titleEn": "Critical Minerals Accelerator opens £25 million grant competition",
+    "titleEnSource": "na",
+    "documentNumber": null,
+    "policyStatus": "active",
+    "mechanism": [
+      "funding",
+      "supply_chain_security"
+    ],
+    "affectedMaterialIds": [],
+    "affectedSectors": [
+      "industrial",
+      "energy",
+      "defense"
+    ],
+    "summary": "The United Kingdom opened a £25m programme for competitive grants to support critical-minerals extraction, processing and recycling. First applications closed September 30 and funding decisions were expected November–December 2026. No recipients are identified in guidance.",
+    "analyticalSignificance": "Programme funding ceiling is not an award or disbursed project money.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-uk-cm-accelerator-2026"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-08-05",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-05",
+      "publishedAt": null
+    }
+  },
+  {
     "id": "evt-us-texas-mp-northlake-2026",
     "date": "2026-02-26",
     "jurisdiction": "us",
