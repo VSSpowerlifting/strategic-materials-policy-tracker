@@ -56,7 +56,7 @@ test("QC attachment cannot remove draft classification or grant release authorit
     }
     const notes = await zip.file("ppt/notesSlides/notesSlide2.xml")!.async("string");
     assert.match(notes, /https:\/\/example.org\/test-only/);
-    const verify = spawnSync("python3", ["scripts/exhibit-system/verify_editability.py", "--deck", out, "--manifest", manifest], { encoding: "utf8" });
+    const verify = spawnSync("python3", ["-B", "scripts/exhibit-system/verify_editability.py", "--deck", out, "--manifest", manifest], { encoding: "utf8" });
     assert.equal(verify.status, 0, verify.stdout + verify.stderr);
     await assert.rejects(renderResearchDeck(input, out), /overwrite/);
     await assert.rejects(renderResearchDeck(input, join(dir, "bad.pdf")), /end in .pptx/);
@@ -65,7 +65,7 @@ test("QC attachment cannot remove draft classification or grant release authorit
     symlinkSync(resolve("docs/design/presentations/exhibit-system"), linked);
     assert.throws(() => assertOutsideSystemDir(join(linked, "escape.pptx"), "output"), /inside/);
     writeFileSync(out, "tampered");
-    const altered = spawnSync("python3", ["scripts/exhibit-system/verify_editability.py", "--deck", out, "--manifest", manifest], { encoding: "utf8" });
+    const altered = spawnSync("python3", ["-B", "scripts/exhibit-system/verify_editability.py", "--deck", out, "--manifest", manifest], { encoding: "utf8" });
     assert.equal(altered.status, 1);
     assert.match(altered.stderr, /hash/);
   } finally { rmSync(dir, { recursive: true, force: true }); }
