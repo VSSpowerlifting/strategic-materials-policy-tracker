@@ -10,8 +10,8 @@ if(!runtime)throw new Error('CODEX_PRIMARY_RUNTIME_NODE_MODULES must identify th
 const require=createRequire(path.join(runtime,'fi003.cjs'));
 const {Presentation,PresentationFile}=await import(pathToFileURL(require.resolve('@oai/artifact-tool')).href);
 const d=JSON.parse(await fs.readFile(path.join(here,'slide-manifest.json'),'utf8'));
-const work=path.dirname(here),build=process.env.FI003_DECK_BUILD||path.join(here,'.build-v04');
-const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v04');
+const work=path.dirname(here),build=process.env.FI003_DECK_BUILD||path.join(here,'.build-v05');
+const out=process.env.FI003_DECK_OUTPUT||path.join(work,'outputs','presentation-draft-v05');
 await fs.mkdir(build,{recursive:true});await fs.mkdir(out,{recursive:true});
 const deck=Presentation.create({slideSize:{width:1280,height:720}});
 const c={paper:'#F5F3EE',ink:'#1B1915',muted:'#5B5548',gold:'#7A5510',char:'#12110F',light:'#EFECE6',rule:'#D8D3C7',band:'#EAE6DC',neutral:'#817B70'};
@@ -148,10 +148,33 @@ for(const m of d.slides){
    if(i<2)rule(s,y+89,142,1082);
   });note(s,m.note,566,55);caveat(s,m.caveat,631,33);
  }else if(m.kind==='economics'){
-  nativeBars(s,m,{y:245,h:135,max:1,percent:true});
-  table(s,m.rows.slice(0,3),{y:390,h:135,widths:[555,613],size:20});
-  box(s,'growth',m.rows[3].join(': '),56,538,1168,29,22,true,c.gold);
+  chartOwners.push(m.number);
+  s.charts.add('doughnut',{position:{left:56,top:242,width:490,height:294},
+   categories:m.render_chart.categories,
+   series:m.render_chart.series.map(a=>({...a,valuesFormatCode:'0.00%',points:[{idx:0,fill:c.neutral},{idx:1,fill:c.gold}]})),
+   doughnutOptions:{holeSize:66,firstSliceAngle:270},hasLegend:false,
+   chartFill:c.paper,plotAreaFill:c.paper,dataLabels:{showValue:false,showPercent:false}});
+  table(s,m.rows.slice(0,3),{x:592,y:242,w:632,h:149,widths:[330,302],size:20});
+  box(s,'existing-ownership',m.chart.series[0].name,592,412,632,33,27,true,c.neutral);
+  box(s,'offering-ownership',m.chart.series[1].name,592,458,632,33,27,true,c.gold);
+  box(s,'growth',m.rows[3].join(': '),592,510,632,30,21,true);
   note(s,m.note,575,50);caveat(s,m.caveat,630,32);
+ }else if(m.kind==='support'){
+  // Four documented relationships, with no implied magnitude or cash flow.
+  const positions=[[56,242],[802,242],[56,405],[802,405]];
+  // Thin neutral connectors sit behind editable source text.
+  rule(s,378,480,25,c.rule);rule(s,378,757,25,c.rule);
+  rect(s,'left-relationship-spine',480,300,1,170,c.rule);
+  rect(s,'right-relationship-spine',782,300,1,170,c.rule);
+  [300,470].forEach(y=>{rule(s,y,460,20,c.rule);rule(s,y,782,20,c.rule);});
+  box(s,'recipient','MP Materials',514,345,256,42,31,true,c.gold);
+  m.rows.slice(1).forEach(([instrument,addressed,retained],i)=>{const [x,y]=positions[i];
+   box(s,'support-instrument-'+i,instrument,x,y,420,34,23,true,c.gold);
+   box(s,'addressed-exposure-'+i,addressed,x,y+41,420,48,20,true);
+   box(s,'retained-exposure-'+i,retained,x,y+96,420,66,19);
+  });
+  box(s,'diagram-key','Contract relationships; connector widths carry no financial magnitude',56,568,1168,21,14,false,c.muted);
+  note(s,m.note,594,48);caveat(s,m.caveat,645,20);
  }else if(m.kind==='capacity'){
   nativeBars(s,m,{y:250,h:296});
   note(s,m.note,564,58);caveat(s,m.caveat,629,32);
@@ -202,7 +225,7 @@ await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 execFileSync(process.env.CODEX_PRIMARY_RUNTIME_PYTHON||'python3',[path.join(here,'finish_package.py'),candidatePath],{stdio:'inherit'});
 const skill=process.env.FI003_PRESENTATION_SKILL||'/root/.codex/skills/builtins/presentations';
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
-const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v04.pptx');
+const finalPath=path.join(out,'SMPT_FI003_JPMorgan_MP_Draft_v05.pptx');
 await finalizePresentation({workspaceDir:work,candidatePath,finalPath,
  pythonExecutable:process.env.CODEX_PRIMARY_RUNTIME_PYTHON,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),

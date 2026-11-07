@@ -35,8 +35,8 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--report',type=Path)
     args=parser.parse_args()
-    out=ROOT/'outputs'/'presentation-draft-v04'
-    stem='SMPT_FI003_JPMorgan_MP_Draft_v04'
+    out=ROOT/'outputs'/'presentation-draft-v05'
+    stem='SMPT_FI003_JPMorgan_MP_Draft_v05'
     pptx,pdf=out/(stem+'.pptx'),out/(stem+'.pdf')
     manifest=json.loads((HERE/'slide-manifest.json').read_text())
     assert manifest==json.loads(json.dumps(prepare.build())),'Slide snapshot drift'
@@ -60,7 +60,7 @@ def main():
             node=ET.fromstring(z.read(f'ppt/slides/slide{n}.xml'))
             tables[n]=len(node.findall('.//a:tbl',ns))
             assert all(x.attrib.get('typeface')=='Archivo' for x in node.findall('.//a:latin',ns))
-        assert sum(tables.values())==6
+        assert sum(tables.values())==5
         charts=sorted(n for n in z.namelist() if re.fullmatch(r'ppt/(?:slides/)?charts/chart\d+\.xml',n))
         assert len(charts)==3
         series=[]
@@ -69,8 +69,11 @@ def main():
             for item in node.findall('.//c:ser',ns):
                 series.append([float(v.text) for v in item.findall('./c:val/c:numRef/c:numCache/c:pt/c:v',ns)])
             value_axis=node.findall('.//c:valAx/c:scaling/c:min',ns)
-            assert value_axis and all(float(x.attrib['val'])==0 for x in value_axis),'Truncated value axis'
-        expected=[a['values'] for s in manifest['slides'] if 'chart' in s for a in s['chart']['series']]
+            if node.find('.//c:doughnutChart',ns) is None:
+                assert value_axis and all(float(x.attrib['val'])==0 for x in value_axis),'Truncated value axis'
+            else:
+                assert node.find('.//c:holeSize',ns).attrib['val']=='66'
+        expected=[a['values'] for s in manifest['slides'] if 'chart' in s for a in s.get('render_chart',s['chart'])['series']]
         assert series==expected,(series,expected)
         embeddings=[n for n in z.namelist() if n.startswith('ppt/embeddings/') and n.endswith('.xlsx')]
         assert len(embeddings)==3
@@ -87,7 +90,7 @@ def main():
         assert 'docs.google.com' not in links and 'file:' not in links
         assert '/blob/codex/' not in links,'Moving-branch research link'
         assert 'sources.json' in links and manifest['reviewed_head'] in links
-        assert 'FI003: JPMorgan and MP Materials, draft 0.4' in z.read('docProps/core.xml').decode()
+        assert 'FI003: JPMorgan and MP Materials, draft 0.5' in z.read('docProps/core.xml').decode()
     doc=fitz.open(pdf)
     assert len(doc)==15
     all_uris=set(); fonts=set(); footer_contrasts=[]
@@ -125,7 +128,7 @@ def main():
     assert abs(sum([1830.286,-7.757,-420.250,6.500,-91.145,20.876,.821,-1.420])-1337.911) < 1e-9
     assert round(13590908/(163477816+13590908)*100,6)==7.675499
     result={'status':'PASS','cutoff':manifest['cutoff'],'model_unchanged':True,'slides':15,
-        'editable_tables':6,'editable_native_charts':3,'embedded_literal_chart_workbooks':3,
+        'editable_tables':5,'editable_native_charts':3,'embedded_literal_chart_workbooks':3,
         'waterfall':'9 editable native bars, including seven signed movements; original values in slide manifest',
         'chart_snapshot_precision':'Ownership fractions rounded to 12 decimal places for Excel portability; full model precision retained',
         'pdf_links':sum(len(p.get_links()) for p in doc),'unique_link_targets':len(all_uris),'fonts':sorted(fonts),

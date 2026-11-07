@@ -9,20 +9,20 @@ import sys
 from zipfile import ZipFile, ZIP_DEFLATED, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT/'outputs/review-candidate-v04'
-ARCHIVE = OUT/'FI003_Review_Candidate_v04.zip'
+OUT = ROOT/'outputs/review-candidate-v05'
+ARCHIVE = OUT/'FI003_Review_Candidate_v05.zip'
 FILES = [
     'READER_GUIDE.md', 'evidence.csv', 'sources.json', 'inputs.json', 'chronology.csv',
     'prototype.py', 'model.py', 'test_prototype.py', 'test_model.py', 'verify_workbook.py',
     'presentation/prepare.py', 'presentation/slide-manifest.json',
     'presentation/build.mjs', 'presentation/finish_package.py',
     'presentation/verify.py', 'presentation/remediate_pdf.py',
-    'outputs/presentation-draft-v04/verification.json',
-    'outputs/presentation-draft-v04/accessibility.json',
+    'outputs/presentation-draft-v05/verification.json',
+    'outputs/presentation-draft-v05/accessibility.json',
     'outputs/fi003-model-v1/model_spec.json',
     'outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx',
-    'outputs/presentation-draft-v04/SMPT_FI003_JPMorgan_MP_Draft_v04.pptx',
-    'outputs/presentation-draft-v04/SMPT_FI003_JPMorgan_MP_Draft_v04.pdf',
+    'outputs/presentation-draft-v05/SMPT_FI003_JPMorgan_MP_Draft_v05.pptx',
+    'outputs/presentation-draft-v05/SMPT_FI003_JPMorgan_MP_Draft_v05.pdf',
 ] + [f'exhibits/{name}.csv' for name in (
     'support_accounting', 'underwriting', 'replacement', 'revolver_snapshots',
     'ppa_sensitivity', 'financing_economics', 'offtake_threshold',
@@ -54,8 +54,8 @@ def main():
     manifest = {
         'status': 'DRAFT: ready for human financial/editorial review; publication HOLD',
         'source_cutoff': '2026-11-06',
-        'presentation_version': '0.4', 'model_version': '1.0',
-        'baseline_sha': 'a07167f25675957be779af8a56961f10e6face41',
+        'presentation_version': '0.5', 'model_version': '1.0',
+        'baseline_sha': '2db1c65d184a2357989fb756741bcdc29b01f78b',
         'release_gates': ['Human financial/editorial and exact-file/source-rights approval',
                           'Native Microsoft PowerPoint compatibility',
                           'Manual PDF accessibility and assistive-technology review',

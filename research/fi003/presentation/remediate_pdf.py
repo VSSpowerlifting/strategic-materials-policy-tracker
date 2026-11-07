@@ -85,6 +85,7 @@ def repair(source, output, report, manifest_path):
         if m['kind']=='sequence':subheads=[v[1] for v in m['events']]
         elif m['kind']=='alternatives':subheads=[row[0][3:] for row in m['rows'][1:]]
         elif m['kind']=='timing':subheads=['Before the trigger','Trigger: earlier delivery of either','From the earnings-test stage','Management expectation: 2028']
+        elif m['kind']=='support':subheads=[row[0] for row in m['rows'][1:]]
         elif m['kind']=='states':subheads=['Before commercial operation']
         elif m['kind']=='decisions':subheads=[row[0] for row in m['rows'][1:]]
         for value in subheads:targets[(i,normalized(value))]='/H2'

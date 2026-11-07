@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "starting_sha": "2db1c65d184a2357989fb756741bcdc29b01f78b",
+  "visible_changes": [
+    1,
+    6,
+    10
+  ],
+  "other_twelve_pages_pixel_identical": true,
+  "all_original_financial_text_rows_series_and_controls_unchanged": true,
+  "ownership_chart_values_reoriented_without_change": true,
+  "model_source_hashes_unchanged": true,
+  "financial_tests": 24,
+  "schedules": 11,
+  "native_tables": 5,
+  "native_charts_and_workbooks": 3,
+  "scope": "Presentation-only revision; no new source refresh or financial restructuring"
+}

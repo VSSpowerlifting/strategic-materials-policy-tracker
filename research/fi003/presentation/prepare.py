@@ -33,7 +33,7 @@ def build():
     slide('cover', 'JPMorgan and MP Materials', 'Financing Through 10X Construction',
         [('S02','§§2.05, 6.01'),('S09','cover, §1.01'),('S11','Notes 3, 18'),('S19','MD&A: 10X')], ['C01','C05','C11','C27','C28'], '',
         '10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.',
-        author='Benjamin Yang', version='Research draft 0.4 · 6 November 2026')
+        author='Benjamin Yang', version='Research draft 0.5 · 6 November 2026')
     slide('answer', 'Equity secured cash while MP retained exposure through commissioning',
         'Analyst judgment · comparable industrial sponsor and lender perspective',
         [('S02','§§6.01, 6.13'),('S09','§§1.01, 7.11'),('S11','Notes 3, 18'),('S19','Note 8, MD&A')],
@@ -212,9 +212,16 @@ def build():
             item['visual_text']=[(cell[3:] if item['number']==5 and col==0 else cell) for row in item['rows'][1:] for col,cell in enumerate(row)]
         item['relationship']='Documented sequence / analyst comparison; see scope, qualifications and model_ref'
 
+    ownership=slides[5]['chart']
+    slides[5]['render_chart']={'categories':['Existing holders','New offering shares'],
+        'series':[{'name':'Isolated post-offering ownership','values':[a['values'][0] for a in ownership['series']]}]}
+    slides[5]['exhibit_family']='ownership doughnut and share calculation'
+    slides[9]['exhibit_family']='support-instrument and retained-exposure relationship diagram'
+    slides[9]['visual_text']=[cell for row in slides[9]['rows'][1:] for cell in row]+['MP Materials','Contract relationships; connector widths carry no financial magnitude']
+
     paths = ['inputs.json','sources.json','prototype.py','model.py','outputs/fi003-model-v1/model_spec.json',
         'outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx']
-    return {'version':'FI003 presentation draft 0.4','cutoff':'2026-11-06',
+    return {'version':'FI003 presentation draft 0.5','cutoff':'2026-11-06',
         'reviewed_head':'a07167f25675957be779af8a56961f10e6face41',
         'visual_guidance_ref':'b7f4c8c409017cb3f1fa4507eb4e85ea6f7d7a91',
         'model_version':model.VERSION,'source_hashes':{q:hashlib.sha256((ROOT/q).read_bytes()).hexdigest() for q in paths},

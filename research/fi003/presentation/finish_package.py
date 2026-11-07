@@ -28,10 +28,10 @@ def finish(path):
     for item, data in members:
         if item.filename == 'docProps/core.xml':
             text = data.decode('utf-8-sig')
-            text = re.sub(r'<dc:title>.*?</dc:title>', '<dc:title>FI003: JPMorgan and MP Materials, draft 0.4</dc:title>', text)
+            text = re.sub(r'<dc:title>.*?</dc:title>', '<dc:title>FI003: JPMorgan and MP Materials, draft 0.5</dc:title>', text)
             text = re.sub(r'<dc:creator>.*?</dc:creator>', '<dc:creator>Benjamin Yang</dc:creator>', text)
             text = re.sub(r'<lastModifiedBy>.*?</lastModifiedBy>', '<lastModifiedBy>SMPT, Codex-assisted draft preparation</lastModifiedBy>', text)
-            text = text.replace('</coreProperties>', '<dc:language>en-US</dc:language><dc:subject>Financing through 10X construction; source cutoff 2026-11-06</dc:subject><dc:description>Research draft 0.4. Financial/editorial review and publication authorization pending. Model 1.0 unchanged.</dc:description></coreProperties>')
+            text = text.replace('</coreProperties>', '<dc:language>en-US</dc:language><dc:subject>Financing through 10X construction; source cutoff 2026-11-06</dc:subject><dc:description>Research draft 0.5. Financial/editorial review and publication authorization pending. Model 1.0 unchanged.</dc:description></coreProperties>')
             data = text.encode()
         # Keep native chart labels on one line in PowerPoint and LibreOffice.
         if re.fullmatch(r'ppt/(?:slides/)?charts/chart\d+\.xml', item.filename):

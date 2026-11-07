@@ -1,5 +1,5 @@
 {
-  "version": "FI003 presentation draft 0.4",
+  "version": "FI003 presentation draft 0.5",
   "cutoff": "2026-11-06",
   "reviewed_head": "a07167f25675957be779af8a56961f10e6face41",
   "visual_guidance_ref": "b7f4c8c409017cb3f1fa4507eb4e85ea6f7d7a91",
@@ -396,7 +396,7 @@
       "model_ref": "",
       "note": "10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.",
       "author": "Benjamin Yang",
-      "version": "Research draft 0.4 · 6 November 2026",
+      "version": "Research draft 0.5 · 6 November 2026",
       "exhibit_family": "cover",
       "reader_question": "JPMorgan and MP Materials",
       "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
@@ -751,9 +751,24 @@
         ]
       ],
       "caveat": "Excludes preferred conversion, warrants, other issuances, options and convertibles. The 3% underwriting discount is a one-time transaction cost, not the cost of equity.",
-      "exhibit_family": "ownership composition and calculation",
+      "exhibit_family": "ownership doughnut and share calculation",
       "reader_question": "Equity supplied $724.2m at 7.68% isolated ownership dilution",
-      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref",
+      "render_chart": {
+        "categories": [
+          "Existing holders",
+          "New offering shares"
+        ],
+        "series": [
+          {
+            "name": "Isolated post-offering ownership",
+            "values": [
+              0.92324501079,
+              0.07675498921
+            ]
+          }
+        ]
+      }
     },
     {
       "number": 7,
@@ -982,9 +997,25 @@
         ]
       ],
       "caveat": "NdPr = neodymium-praseodymium. Specified-use rules constrain flexibility. The separate $150m samarium loan is repayable; no extra backstop cash is counted.",
-      "exhibit_family": "support and retained-exposure matrix",
+      "exhibit_family": "support-instrument and retained-exposure relationship diagram",
       "reader_question": "Government support covers specified exposures while MP retains funding duties",
-      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref",
+      "visual_text": [
+        "NdPr price protection",
+        "Eligible benchmark shortfall",
+        "Designation, quantity, costs and collection timing",
+        "10X offtake",
+        "Qualifying output / defined support",
+        "Construction, specifications, future appropriations and payment timing",
+        "$400m initial preferred",
+        "Received public equity capital",
+        "7% cumulative preference and potential dilution",
+        "Additional preferred fallback",
+        "Shortfall below $350m incremental net financing",
+        "Conditional purchase mechanics. July equity exceeded threshold",
+        "MP Materials",
+        "Contract relationships; connector widths carry no financial magnitude"
+      ]
     },
     {
       "number": 11,

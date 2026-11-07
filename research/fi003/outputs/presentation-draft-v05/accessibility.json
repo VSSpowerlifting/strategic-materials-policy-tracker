@@ -1,0 +1,430 @@
+{
+  "status": "PASS",
+  "source_export_sha256": "2dc4a808012d981a1727c062ed40f10bb9a206b9c7e3c72c7a2920daed5bf660",
+  "final_pdf_sha256": "37cc566d66f40bec85b8ea5cbe53dbe3f2b94bb709e77a86c0b52de41d1f38af",
+  "decorative_vectors_artifacted": 50,
+  "artifacts": [
+    {
+      "page": 1,
+      "mcid": 3
+    },
+    {
+      "page": 2,
+      "mcid": 2
+    },
+    {
+      "page": 2,
+      "mcid": 6
+    },
+    {
+      "page": 2,
+      "mcid": 9
+    },
+    {
+      "page": 3,
+      "mcid": 2
+    },
+    {
+      "page": 3,
+      "mcid": 4
+    },
+    {
+      "page": 3,
+      "mcid": 6
+    },
+    {
+      "page": 3,
+      "mcid": 10
+    },
+    {
+      "page": 3,
+      "mcid": 14
+    },
+    {
+      "page": 3,
+      "mcid": 18
+    },
+    {
+      "page": 4,
+      "mcid": 2
+    },
+    {
+      "page": 5,
+      "mcid": 2
+    },
+    {
+      "page": 5,
+      "mcid": 7
+    },
+    {
+      "page": 5,
+      "mcid": 11
+    },
+    {
+      "page": 5,
+      "mcid": 15
+    },
+    {
+      "page": 6,
+      "mcid": 2
+    },
+    {
+      "page": 7,
+      "mcid": 2
+    },
+    {
+      "page": 8,
+      "mcid": 2
+    },
+    {
+      "page": 9,
+      "mcid": 2
+    },
+    {
+      "page": 9,
+      "mcid": 9
+    },
+    {
+      "page": 10,
+      "mcid": 2
+    },
+    {
+      "page": 10,
+      "mcid": 4
+    },
+    {
+      "page": 10,
+      "mcid": 5
+    },
+    {
+      "page": 10,
+      "mcid": 6
+    },
+    {
+      "page": 10,
+      "mcid": 7
+    },
+    {
+      "page": 10,
+      "mcid": 8
+    },
+    {
+      "page": 10,
+      "mcid": 9
+    },
+    {
+      "page": 10,
+      "mcid": 10
+    },
+    {
+      "page": 10,
+      "mcid": 11
+    },
+    {
+      "page": 11,
+      "mcid": 2
+    },
+    {
+      "page": 11,
+      "mcid": 6
+    },
+    {
+      "page": 12,
+      "mcid": 2
+    },
+    {
+      "page": 13,
+      "mcid": 2
+    },
+    {
+      "page": 13,
+      "mcid": 4
+    },
+    {
+      "page": 13,
+      "mcid": 5
+    },
+    {
+      "page": 13,
+      "mcid": 7
+    },
+    {
+      "page": 13,
+      "mcid": 9
+    },
+    {
+      "page": 13,
+      "mcid": 11
+    },
+    {
+      "page": 13,
+      "mcid": 16
+    },
+    {
+      "page": 13,
+      "mcid": 20
+    },
+    {
+      "page": 13,
+      "mcid": 24
+    },
+    {
+      "page": 13,
+      "mcid": 28
+    },
+    {
+      "page": 13,
+      "mcid": 32
+    },
+    {
+      "page": 13,
+      "mcid": 36
+    },
+    {
+      "page": 13,
+      "mcid": 40
+    },
+    {
+      "page": 13,
+      "mcid": 44
+    },
+    {
+      "page": 14,
+      "mcid": 2
+    },
+    {
+      "page": 14,
+      "mcid": 7
+    },
+    {
+      "page": 14,
+      "mcid": 11
+    },
+    {
+      "page": 15,
+      "mcid": 2
+    }
+  ],
+  "headings": [
+    {
+      "page": 1,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 1,
+      "mcid": 2,
+      "role": "/H2"
+    },
+    {
+      "page": 2,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 3,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 3,
+      "mcid": 7,
+      "role": "/H2"
+    },
+    {
+      "page": 3,
+      "mcid": 11,
+      "role": "/H2"
+    },
+    {
+      "page": 3,
+      "mcid": 15,
+      "role": "/H2"
+    },
+    {
+      "page": 3,
+      "mcid": 19,
+      "role": "/H2"
+    },
+    {
+      "page": 4,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 5,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 5,
+      "mcid": 5,
+      "role": "/H2"
+    },
+    {
+      "page": 5,
+      "mcid": 9,
+      "role": "/H2"
+    },
+    {
+      "page": 5,
+      "mcid": 13,
+      "role": "/H2"
+    },
+    {
+      "page": 5,
+      "mcid": 17,
+      "role": "/H2"
+    },
+    {
+      "page": 6,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 7,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 8,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 9,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 9,
+      "mcid": 4,
+      "role": "/H2"
+    },
+    {
+      "page": 9,
+      "mcid": 6,
+      "role": "/H2"
+    },
+    {
+      "page": 9,
+      "mcid": 12,
+      "role": "/H2"
+    },
+    {
+      "page": 9,
+      "mcid": 14,
+      "role": "/H2"
+    },
+    {
+      "page": 10,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 10,
+      "mcid": 13,
+      "role": "/H2"
+    },
+    {
+      "page": 10,
+      "mcid": 16,
+      "role": "/H2"
+    },
+    {
+      "page": 10,
+      "mcid": 19,
+      "role": "/H2"
+    },
+    {
+      "page": 10,
+      "mcid": 22,
+      "role": "/H2"
+    },
+    {
+      "page": 11,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 11,
+      "mcid": 4,
+      "role": "/H2"
+    },
+    {
+      "page": 12,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 13,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 14,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 14,
+      "mcid": 5,
+      "role": "/H2"
+    },
+    {
+      "page": 14,
+      "mcid": 9,
+      "role": "/H2"
+    },
+    {
+      "page": 14,
+      "mcid": 13,
+      "role": "/H2"
+    },
+    {
+      "page": 15,
+      "mcid": 1,
+      "role": "/H1"
+    }
+  ],
+  "roles_before": {
+    "/Div": 202,
+    "/P": 290,
+    "/Figure": 62,
+    "/Link": 46,
+    "/Table": 5,
+    "/TR": 23,
+    "/TH": 11,
+    "/TD": 40
+  },
+  "roles_after": {
+    "/Div": 202,
+    "/P": 254,
+    "/H1": 15,
+    "/H2": 21,
+    "/Link": 46,
+    "/Table": 5,
+    "/TR": 23,
+    "/TH": 11,
+    "/TD": 40,
+    "/Figure": 12
+  },
+  "preserved_meaningful_evidence_descriptions": 12,
+  "pixel_identical_pages": 15,
+  "text_identical_pages": 15,
+  "preserved_links": 46,
+  "checks": [
+    "Text-free vector classification",
+    "Figure removal and ParentTree slot repair",
+    "All main slide headings H1; selected actual subheadings H2",
+    "Remaining content MCIDs resolve to structure entries",
+    "Table/header/cell and link counts preserved",
+    "All pages pixel and text identical to export",
+    "Annotation destinations and rectangles unchanged"
+  ],
+  "manual_review_required": [
+    "Native Microsoft PowerPoint",
+    "Screen-reader reading order and navigation",
+    "Full accessibility audit / PDF-UA certification; not claimed"
+  ]
+}

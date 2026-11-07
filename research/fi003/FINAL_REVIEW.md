@@ -1,6 +1,6 @@
 # FI003 bounded final-review phase
 
-**Successor:** this document records the draft 0.3 financial/editorial review. Current presentation-only draft 0.4 and its bounded PDF tagging correction are documented in [QUALITY_REVIEW_V04](presentation/QUALITY_REVIEW_V04.md). The [publication tracker](PUBLICATION_PLAN.md) controls current files and pending decisions. The financial thesis, source facts and model remain unchanged.
+**Successor:** this document records the draft 0.3 financial/editorial review. Current presentation-only draft 0.5 and its bounded PDF tagging correction are documented in [QUALITY_REVIEW_V05](presentation/QUALITY_REVIEW_V05.md). The [publication tracker](PUBLICATION_PLAN.md) controls current files and pending decisions. The financial thesis, source facts and model remain unchanged.
 
 
 **November 6, 2026 · READY FOR HUMAN FINANCIAL/EDITORIAL REVIEW · publication HOLD**
