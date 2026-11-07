@@ -26,21 +26,14 @@ import sys
 import tempfile
 from pathlib import Path
 
+from tools import find_tool
+
 REPO = Path(__file__).resolve().parents[2]
 SYSTEM = REPO / "docs" / "design" / "presentations" / "exhibit-system"
 GALLERY = SYSTEM / "exhibit-gallery.pptx"
 MANIFEST = SYSTEM / "element-manifest.json"
 PREVIEWS = SYSTEM / "gallery" / "previews"
-RUNTIME_BIN = Path.home() / ".cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override"
 DPI = "72"
-
-
-def find_tool(name: str) -> str | None:
-    found = shutil.which(name)
-    if found:
-        return found
-    rt = RUNTIME_BIN / name
-    return str(rt) if rt.exists() else None
 
 
 def slide_patterns() -> list[tuple[int, str]]:
@@ -55,7 +48,7 @@ def slide_patterns() -> list[tuple[int, str]]:
 def main() -> int:
     soffice, pdftoppm = find_tool("soffice"), find_tool("pdftoppm")
     if not soffice or not pdftoppm:
-        print("render_previews: soffice and pdftoppm are required; previews not rendered", file=sys.stderr)
+        print("render_previews: soffice and pdftoppm are required (see tools.py for install and SOFFICE/PDFTOPPM overrides); previews not rendered", file=sys.stderr)
         return 1
     if not os.environ.get("FONTCONFIG_FILE"):
         print("render_previews: FONTCONFIG_FILE not set; Archivo may fall back to another face", file=sys.stderr)

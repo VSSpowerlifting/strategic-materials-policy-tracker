@@ -2,15 +2,16 @@
 //
 //   npm run exhibits:build            # gallery + demo deck + element manifest
 //
-// This is the ONLY module that loads pptxgenjs and jszip. Neither is a
-// repository dependency: both are resolved from the bundled Codex runtime
-// (CODEX_PRIMARY_RUNTIME_NODE_MODULES, default below). Output is normalised
-// (fixed zip timestamps and core.xml dates) so a rebuild is byte-identical.
+// This is the ONLY module that loads pptxgenjs and jszip. Both are exact-pinned
+// devDependencies (package.json), so `npm ci && npm run exhibits:build` works on
+// a clean machine. They are dev-only: nothing in the site bundle imports them.
+// Output is normalised (fixed zip timestamps and core.xml dates) so a rebuild
+// is byte-identical.
 
 import { createHash } from "node:crypto";
 import fs from "node:fs";
-import { createRequire } from "node:module";
-import os from "node:os";
+import JSZipModule from "jszip";
+import PptxGenJS from "pptxgenjs";
 import path from "node:path";
 import { loadDeckSpec, loadFixture, loadRegistry } from "./registry";
 import { RENDERERS } from "./renderers";
@@ -18,12 +19,6 @@ import { contentArea, C, drawFrame, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOT
 import { DEMO_DECK_SPEC, DEMO_PPTX, GALLERY_PPTX, MANIFEST_FILE, REPO } from "./paths";
 import type { ElementRecord, Fixture, PptxSlide } from "./types";
 
-const DEFAULT_MODULES = path.join(
-  os.homedir(),
-  ".cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
-);
-const MODULES = process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES || DEFAULT_MODULES;
-const runtimeRequire = createRequire(path.join(MODULES, "noop.js"));
 
 interface Pptx {
   layout: string;
@@ -76,7 +71,7 @@ export async function buildDeck(
   cover: { title: string; lines: string[] },
   outFile: string,
 ): Promise<SlideManifest[]> {
-  const Pptx = runtimeRequire("pptxgenjs") as PptxCtor;
+  const Pptx = PptxGenJS as unknown as PptxCtor;
   const pptx = new Pptx();
   pptx.defineLayout({ name: "SMPT_WIDE", width: SLIDE_W, height: SLIDE_H });
   pptx.layout = "SMPT_WIDE";
@@ -142,7 +137,7 @@ export function suppressHelperLabels(chartXml: string): string {
  * own timestamps, so those are normalised recursively.
  */
 async function normalise(buf: Buffer): Promise<Buffer> {
-  const JSZip = runtimeRequire("jszip") as JSZipCtor;
+  const JSZip = JSZipModule as unknown as JSZipCtor;
   const src = await JSZip.loadAsync(buf);
   const out = new JSZip();
   const names = Object.keys(src.files).sort();

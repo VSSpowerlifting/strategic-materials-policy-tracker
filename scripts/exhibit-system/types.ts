@@ -1,9 +1,9 @@
 // Shared types for the SMPT exhibit system.
 //
-// pptxgenjs is deliberately NOT a repository dependency: it is loaded at build
-// time from the bundled runtime (see build-gallery.ts). Renderers only see the
-// minimal structural interface below, so every pure module (registry,
-// integrity, selection, deck review) type-checks and tests without it.
+// pptxgenjs is a pinned devDependency imported only by build-gallery.ts.
+// Renderers see the minimal structural interface below, so every pure module
+// (registry, integrity, selection, deck review) type-checks and tests without
+// loading it.
 
 export type Opts = Record<string, unknown>;
 

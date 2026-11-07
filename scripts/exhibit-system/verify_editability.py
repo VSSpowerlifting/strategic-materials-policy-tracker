@@ -34,13 +34,14 @@ import io
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 import tempfile
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+from tools import find_tool
 
 REPO = Path(__file__).resolve().parents[2]
 SYSTEM = REPO / "docs" / "design" / "presentations" / "exhibit-system"
@@ -246,11 +247,7 @@ def structural(deck: Path, manifest_slides: list[dict]) -> dict:
 
 
 def find_soffice() -> str | None:
-    found = shutil.which("soffice")
-    if found:
-        return found
-    rt = Path.home() / ".cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override/soffice"
-    return str(rt) if rt.exists() else None
+    return find_tool("soffice")
 
 
 def pdf_pages(pdf: Path) -> int:
