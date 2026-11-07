@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="1008pt" viewBox="0 0 1008 1008" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>Original SMPT exhibit repertoire</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Original SMPT exhibit repertoire</dc:title>
+    <dc:description>Synthetic layout fixtures only; no company, project, policy or investment findings</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1008
+L 1008 1008
+L 1008 0
+L 0 0
+z
+" style="fill: #f5f3ee"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 90.72 357.253953
+L 472.006957 357.253953
+L 472.006957 181.44
+L 90.72 181.44
+z
+" style="fill: #f5f3ee"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 90.72 349.26241
+L 300.427826 349.26241
+L 300.427826 319.375337
+L 90.72 319.375337
+z
+" clip-path="url(#pe883153689)" style="fill: #817b70"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 90.72 284.290513
+L 338.556522 284.290513
+L 338.556522 254.40344
+L 90.72 254.40344
+z
+" clip-path="url(#pe883153689)" style="fill: #817b70"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 90.72 219.318616
+L 395.749565 219.318616
+L 395.749565 189.431543
+L 90.72 189.431543
+z
+" clip-path="url(#pe883153689)" style="fill: #7a5510"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="90.72" y="369.429578" transform="rotate(-0 90.72 369.429578)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="281.363478" y="369.429578" transform="rotate(-0 281.363478 369.429578)">50</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="472.006957" y="369.429578" transform="rotate(-0 472.006957 369.429578)">100</text>
+     </g>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="281.363478" y="384.180828" transform="rotate(-0 281.363478 384.180828)">Illustrative units</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_4"/>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="338.656686" transform="rotate(-0 87.22 338.656686)">Option A</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_5"/>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="273.684789" transform="rotate(-0 87.22 273.684789)">Option C</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_6"/>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="208.712892" transform="rotate(-0 87.22 208.712892)">Option B</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_6">
+    <path d="M 90.72 357.253953
+L 90.72 181.44
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 90.72 357.253953
+L 472.006957 357.253953
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: start; fill: #5b5548" x="90.72" y="170.012093" transform="rotate(-0 90.72 170.012093)">A common baseline makes the ordering visible</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="308.053565" y="338.133874" transform="rotate(-0 308.053565 338.133874)">55</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="346.182261" y="273.161977" transform="rotate(-0 346.182261 273.161977)">65</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="403.375304" y="208.19008" transform="rotate(-0 403.375304 208.19008)">80</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="90.72" y="148.44" transform="rotate(-0 90.72 148.44)">1  Ranked comparison</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_8">
+    <path d="M 586.393043 357.253953
+L 967.68 357.253953
+L 967.68 181.44
+L 586.393043 181.44
+z
+" style="fill: #f5f3ee"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_4">
+     <g id="line2d_7"/>
+     <g id="text_13">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="686.731716" y="369.429578" transform="rotate(-0 686.731716 369.429578)">Period 1</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_8"/>
+     <g id="text_14">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="887.409062" y="369.429578" transform="rotate(-0 887.409062 369.429578)">Period 2</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_4">
+     <g id="line2d_9"/>
+     <g id="text_15">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="361.591766" transform="rotate(-0 582.893043 361.591766)">0</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_10"/>
+     <g id="text_16">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="273.684789" transform="rotate(-0 582.893043 273.684789)">25</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_11"/>
+     <g id="text_17">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="185.777813" transform="rotate(-0 582.893043 185.777813)">50</text>
+     </g>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="563.090543" y="269.346977" transform="rotate(-90 563.090543 269.346977)">Illustrative units</text>
+    </g>
+   </g>
+   <g id="line2d_12">
+    <path d="M 686.731716 286.928372
+L 887.409062 234.184186
+" clip-path="url(#p9f066bc884)" style="fill: none; stroke: #7a5510; stroke-width: 2; stroke-linecap: square"/>
+    <defs>
+     <path id="mc8d46a3d0f" d="M 0 3
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132
+C 2.683901 1.55874 3 0.795609 3 0
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132
+C 1.55874 -2.683901 0.795609 -3 0 -3
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132
+C -2.683901 -1.55874 -3 -0.795609 -3 0
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132
+C -1.55874 2.683901 -0.795609 3 0 3
+z
+" style="stroke: #7a5510"/>
+    </defs>
+    <g clip-path="url(#p9f066bc884)">
+     <use xlink:href="#mc8d46a3d0f" x="686.731716" y="286.928372" style="fill: #7a5510; stroke: #7a5510"/>
+     <use xlink:href="#mc8d46a3d0f" x="887.409062" y="234.184186" style="fill: #7a5510; stroke: #7a5510"/>
+    </g>
+   </g>
+   <g id="line2d_13">
+    <path d="M 686.731716 216.602791
+L 887.409062 269.346977
+" clip-path="url(#p9f066bc884)" style="fill: none; stroke: #817b70; stroke-width: 2; stroke-linecap: square"/>
+    <defs>
+     <path id="md1dcbc72f1" d="M 0 3
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132
+C 2.683901 1.55874 3 0.795609 3 0
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132
+C 1.55874 -2.683901 0.795609 -3 0 -3
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132
+C -2.683901 -1.55874 -3 -0.795609 -3 0
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132
+C -1.55874 2.683901 -0.795609 3 0 3
+z
+" style="stroke: #817b70"/>
+    </defs>
+    <g clip-path="url(#p9f066bc884)">
+     <use xlink:href="#md1dcbc72f1" x="686.731716" y="216.602791" style="fill: #817b70; stroke: #817b70"/>
+     <use xlink:href="#md1dcbc72f1" x="887.409062" y="269.346977" style="fill: #817b70; stroke: #817b70"/>
+    </g>
+   </g>
+   <g id="line2d_14">
+    <path d="M 686.731716 251.765581
+L 887.409062 244.733023
+" clip-path="url(#p9f066bc884)" style="fill: none; stroke: #817b70; stroke-width: 2; stroke-linecap: square"/>
+    <g clip-path="url(#p9f066bc884)">
+     <use xlink:href="#md1dcbc72f1" x="686.731716" y="251.765581" style="fill: #817b70; stroke: #817b70"/>
+     <use xlink:href="#md1dcbc72f1" x="887.409062" y="244.733023" style="fill: #817b70; stroke: #817b70"/>
+    </g>
+   </g>
+   <g id="patch_9">
+    <path d="M 586.393043 357.253953
+L 586.393043 181.44
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 586.393043 357.253953
+L 967.68 357.253953
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: start; fill: #5b5548" x="586.393043" y="170.012093" transform="rotate(-0 586.393043 170.012093)">Direct labels show the direction and magnitude</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="674.691076" y="290.228372" transform="rotate(-0 674.691076 290.228372)">Series A: 20</text>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="899.449703" y="237.726686" transform="rotate(-0 899.449703 237.726686)">35</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="674.691076" y="219.902791" transform="rotate(-0 674.691076 219.902791)">Series B: 40</text>
+   </g>
+   <g id="text_23">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="899.449703" y="272.889477" transform="rotate(-0 899.449703 272.889477)">25</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="674.691076" y="255.065581" transform="rotate(-0 674.691076 255.065581)">Series C: 30</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="899.449703" y="248.275523" transform="rotate(-0 899.449703 248.275523)">32</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="586.393043" y="148.44" transform="rotate(-0 586.393043 148.44)">2  Paired observations</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_11">
+    <path d="M 90.72 647.346977
+L 472.006957 647.346977
+L 472.006957 471.533023
+L 90.72 471.533023
+z
+" style="fill: #f5f3ee"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 108.051225 647.346977
+L 151.946905 647.346977
+L 151.946905 500.835349
+L 108.051225 500.835349
+z
+" clip-path="url(#pe43cf8d385)" style="fill: #7a5510"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 183.733432 522.812093
+L 227.629112 522.812093
+L 227.629112 500.835349
+L 183.733432 500.835349
+z
+" clip-path="url(#pe43cf8d385)" style="fill: #817b70"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 259.415638 559.44
+L 303.311318 559.44
+L 303.311318 522.812093
+L 259.415638 522.812093
+z
+" clip-path="url(#pe43cf8d385)" style="fill: #817b70"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 335.097845 559.44
+L 378.993525 559.44
+L 378.993525 544.788837
+L 335.097845 544.788837
+z
+" clip-path="url(#pe43cf8d385)" style="fill: #817b70"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 410.780051 647.346977
+L 454.675731 647.346977
+L 454.675731 544.788837
+L 410.780051 544.788837
+z
+" clip-path="url(#pe43cf8d385)" style="fill: #7a5510"/>
+   </g>
+   <g id="matplotlib.axis_5">
+    <g id="xtick_6">
+     <g id="line2d_15"/>
+     <g id="text_27">
+      <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="129.999065" y="658.799633" transform="rotate(-0 129.999065 658.799633)">Opening</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_16"/>
+     <g id="text_28">
+      <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="205.681272" y="658.799633" transform="rotate(-0 205.681272 658.799633)">Operating</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_17"/>
+     <g id="text_29">
+      <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="281.363478" y="658.799633" transform="rotate(-0 281.363478 658.799633)">Investment</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_18"/>
+     <g id="text_30">
+      <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="357.045685" y="658.799633" transform="rotate(-0 357.045685 658.799633)">Receipts</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_19"/>
+     <g id="text_31">
+      <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="432.727891" y="658.799633" transform="rotate(-0 432.727891 658.799633)">Closing</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_6">
+    <g id="ytick_7">
+     <g id="line2d_20"/>
+     <g id="text_32">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="651.684789" transform="rotate(-0 87.22 651.684789)">0</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_21"/>
+     <g id="text_33">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="578.428975" transform="rotate(-0 87.22 578.428975)">50</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_22"/>
+     <g id="text_34">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="505.173161" transform="rotate(-0 87.22 505.173161)">100</text>
+     </g>
+    </g>
+    <g id="text_35">
+     <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="61.141875" y="559.44" transform="rotate(-90 61.141875 559.44)">Illustrative units</text>
+    </g>
+   </g>
+   <g id="line2d_23">
+    <path d="M 151.946905 500.835349
+L 183.733432 500.835349
+" clip-path="url(#pe43cf8d385)" style="fill: none; stroke: #817b70; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_24">
+    <path d="M 227.629112 522.812093
+L 259.415638 522.812093
+" clip-path="url(#pe43cf8d385)" style="fill: none; stroke: #817b70; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_25">
+    <path d="M 303.311318 559.44
+L 335.097845 559.44
+" clip-path="url(#pe43cf8d385)" style="fill: none; stroke: #817b70; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_26">
+    <path d="M 378.993525 544.788837
+L 410.780051 544.788837
+" clip-path="url(#pe43cf8d385)" style="fill: none; stroke: #817b70; stroke-linecap: square"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 90.72 647.346977
+L 90.72 471.533023
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 90.72 647.346977
+L 472.006957 647.346977
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: start; fill: #5b5548" x="90.72" y="460.105116" transform="rotate(-0 90.72 460.105116)">Opening + signed changes = closing</text>
+   </g>
+   <g id="text_37">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="129.999065" y="494.974884" transform="rotate(-0 129.999065 494.974884)">100</text>
+   </g>
+   <g id="text_38">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="205.681272" y="494.974884" transform="rotate(-0 205.681272 494.974884)">-15</text>
+   </g>
+   <g id="text_39">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="281.363478" y="516.951628" transform="rotate(-0 281.363478 516.951628)">-25</text>
+   </g>
+   <g id="text_40">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="357.045685" y="538.928372" transform="rotate(-0 357.045685 538.928372)">+10</text>
+   </g>
+   <g id="text_41">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="432.727891" y="538.928372" transform="rotate(-0 432.727891 538.928372)">70</text>
+   </g>
+   <g id="text_42">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="90.72" y="438.533023" transform="rotate(-0 90.72 438.533023)">3  Financial bridge</text>
+   </g>
+  </g>
+  <g id="axes_4">
+   <g id="text_43">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: start; fill: #5b5548" x="586.393043" y="460.105116" transform="rotate(-0 586.393043 460.105116)">Shared axes make separate series comparable</text>
+   </g>
+   <g id="text_44">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="586.393043" y="438.533023" transform="rotate(-0 586.393043 438.533023)">4  Small multiples</text>
+   </g>
+   <g id="axes_5">
+    <g id="patch_19">
+     <path d="M 586.393043 633.28186
+L 754.159304 633.28186
+L 754.159304 478.565581
+L 586.393043 478.565581
+z
+" style="fill: #f5f3ee"/>
+    </g>
+    <g id="matplotlib.axis_7">
+     <g id="xtick_11">
+      <g id="line2d_27"/>
+      <g id="text_45">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="586.393043" y="644.734517" transform="rotate(-0 586.393043 644.734517)">P1</text>
+      </g>
+     </g>
+     <g id="xtick_12">
+      <g id="line2d_28"/>
+      <g id="text_46">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="754.159304" y="644.734517" transform="rotate(-0 754.159304 644.734517)">P4</text>
+      </g>
+     </g>
+    </g>
+    <g id="matplotlib.axis_8">
+     <g id="ytick_10">
+      <g id="line2d_29"/>
+      <g id="text_47">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="637.258189" transform="rotate(-0 582.893043 637.258189)">0</text>
+      </g>
+     </g>
+     <g id="ytick_11">
+      <g id="line2d_30"/>
+      <g id="text_48">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="559.900049" transform="rotate(-0 582.893043 559.900049)">50</text>
+      </g>
+     </g>
+     <g id="ytick_12">
+      <g id="line2d_31"/>
+      <g id="text_49">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="482.54191" transform="rotate(-0 582.893043 482.54191)">100</text>
+      </g>
+     </g>
+    </g>
+    <g id="line2d_32">
+     <path d="M 586.393043 602.338605
+L 642.31513 571.395349
+L 698.237217 548.187907
+L 754.159304 524.980465
+" clip-path="url(#p757514656d)" style="fill: none; stroke: #7a5510; stroke-width: 2; stroke-linecap: square"/>
+     <g clip-path="url(#p757514656d)">
+      <use xlink:href="#mc8d46a3d0f" x="586.393043" y="602.338605" style="fill: #7a5510; stroke: #7a5510"/>
+      <use xlink:href="#mc8d46a3d0f" x="642.31513" y="571.395349" style="fill: #7a5510; stroke: #7a5510"/>
+      <use xlink:href="#mc8d46a3d0f" x="698.237217" y="548.187907" style="fill: #7a5510; stroke: #7a5510"/>
+      <use xlink:href="#mc8d46a3d0f" x="754.159304" y="524.980465" style="fill: #7a5510; stroke: #7a5510"/>
+     </g>
+    </g>
+    <g id="patch_20">
+     <path d="M 586.393043 633.28186
+L 586.393043 478.565581
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+    </g>
+    <g id="patch_21">
+     <path d="M 586.393043 633.28186
+L 754.159304 633.28186
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+    </g>
+    <g id="text_50">
+     <text style="font-weight: 700; font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="754.159304" y="514.150326" transform="rotate(-0 754.159304 514.150326)">70</text>
+    </g>
+    <g id="text_51">
+     <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="586.393043" y="472.565581" transform="rotate(-0 586.393043 472.565581)">Series A</text>
+    </g>
+   </g>
+   <g id="axes_6">
+    <g id="patch_22">
+     <path d="M 796.10087 633.28186
+L 963.86713 633.28186
+L 963.86713 478.565581
+L 796.10087 478.565581
+z
+" style="fill: #f5f3ee"/>
+    </g>
+    <g id="matplotlib.axis_9">
+     <g id="xtick_13">
+      <g id="line2d_33"/>
+      <g id="text_52">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="796.10087" y="644.734517" transform="rotate(-0 796.10087 644.734517)">P1</text>
+      </g>
+     </g>
+     <g id="xtick_14">
+      <g id="line2d_34"/>
+      <g id="text_53">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="963.86713" y="644.734517" transform="rotate(-0 963.86713 644.734517)">P4</text>
+      </g>
+     </g>
+    </g>
+    <g id="matplotlib.axis_10">
+     <g id="ytick_13">
+      <g id="line2d_35"/>
+      <g id="text_54">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="792.60087" y="637.258189" transform="rotate(-0 792.60087 637.258189)">0</text>
+      </g>
+     </g>
+     <g id="ytick_14">
+      <g id="line2d_36"/>
+      <g id="text_55">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="792.60087" y="559.900049" transform="rotate(-0 792.60087 559.900049)">50</text>
+      </g>
+     </g>
+     <g id="ytick_15">
+      <g id="line2d_37"/>
+      <g id="text_56">
+       <text style="font-size: 11px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="792.60087" y="482.54191" transform="rotate(-0 792.60087 482.54191)">100</text>
+      </g>
+     </g>
+    </g>
+    <g id="line2d_38">
+     <path d="M 796.10087 532.716279
+L 852.022957 540.452093
+L 907.945043 555.923721
+L 963.86713 571.395349
+" clip-path="url(#p0a812b7761)" style="fill: none; stroke: #7a5510; stroke-width: 2; stroke-linecap: square"/>
+     <g clip-path="url(#p0a812b7761)">
+      <use xlink:href="#mc8d46a3d0f" x="796.10087" y="532.716279" style="fill: #7a5510; stroke: #7a5510"/>
+      <use xlink:href="#mc8d46a3d0f" x="852.022957" y="540.452093" style="fill: #7a5510; stroke: #7a5510"/>
+      <use xlink:href="#mc8d46a3d0f" x="907.945043" y="555.923721" style="fill: #7a5510; stroke: #7a5510"/>
+      <use xlink:href="#mc8d46a3d0f" x="963.86713" y="571.395349" style="fill: #7a5510; stroke: #7a5510"/>
+     </g>
+    </g>
+    <g id="patch_23">
+     <path d="M 796.10087 633.28186
+L 796.10087 478.565581
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+    </g>
+    <g id="patch_24">
+     <path d="M 796.10087 633.28186
+L 963.86713 633.28186
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+    </g>
+    <g id="text_57">
+     <text style="font-weight: 700; font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="963.86713" y="560.565209" transform="rotate(-0 963.86713 560.565209)">40</text>
+    </g>
+    <g id="text_58">
+     <text style="font-weight: 700; font-size: 13px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="796.10087" y="472.565581" transform="rotate(-0 796.10087 472.565581)">Series B</text>
+    </g>
+   </g>
+  </g>
+  <g id="axes_7">
+   <g id="patch_25">
+    <path d="M 90.72 937.44
+L 472.006957 937.44
+L 472.006957 761.626047
+L 90.72 761.626047
+z
+" style="fill: #f5f3ee"/>
+   </g>
+   <g id="matplotlib.axis_11">
+    <g id="xtick_15">
+     <g id="line2d_39"/>
+     <g id="text_59">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="115.057465" y="949.615625" transform="rotate(-0 115.057465 949.615625)">0</text>
+     </g>
+    </g>
+    <g id="xtick_16">
+     <g id="line2d_40"/>
+     <g id="text_60">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="196.18235" y="949.615625" transform="rotate(-0 196.18235 949.615625)">10</text>
+     </g>
+    </g>
+    <g id="xtick_17">
+     <g id="line2d_41"/>
+     <g id="text_61">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="277.307234" y="949.615625" transform="rotate(-0 277.307234 949.615625)">20</text>
+     </g>
+    </g>
+    <g id="xtick_18">
+     <g id="line2d_42"/>
+     <g id="text_62">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="439.557003" y="949.615625" transform="rotate(-0 439.557003 949.615625)">40</text>
+     </g>
+    </g>
+    <g id="text_63">
+     <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="281.363478" y="964.366875" transform="rotate(-0 281.363478 964.366875)">Hypothetical days; sequence only</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_12">
+    <g id="ytick_16">
+     <g id="line2d_43"/>
+     <g id="text_64">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="901.820096" transform="rotate(-0 87.22 901.820096)">Industrial</text>
+     </g>
+    </g>
+    <g id="ytick_17">
+     <g id="line2d_44"/>
+     <g id="text_65">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="87.22" y="821.904662" transform="rotate(-0 87.22 821.904662)">Finance</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_45">
+    <path d="M 115.057465 817.56685
+L 196.18235 817.56685
+" clip-path="url(#p755b5c9efe)" style="fill: none; stroke: #817b70; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_46">
+    <path d="M 115.057465 817.56685
+" clip-path="url(#p755b5c9efe)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="m31ba22c142" d="M 0 5
+C 1.326016 5 2.597899 4.473168 3.535534 3.535534
+C 4.473168 2.597899 5 1.326016 5 0
+C 5 -1.326016 4.473168 -2.597899 3.535534 -3.535534
+C 2.597899 -4.473168 1.326016 -5 0 -5
+C -1.326016 -5 -2.597899 -4.473168 -3.535534 -3.535534
+C -4.473168 -2.597899 -5 -1.326016 -5 0
+C -5 1.326016 -4.473168 2.597899 -3.535534 3.535534
+C -2.597899 4.473168 -1.326016 5 0 5
+z
+" style="stroke: #7a5510; stroke-width: 2"/>
+    </defs>
+    <g clip-path="url(#p755b5c9efe)">
+     <use xlink:href="#m31ba22c142" x="115.057465" y="817.56685" style="fill: #7a5510; stroke: #7a5510; stroke-width: 2"/>
+    </g>
+   </g>
+   <g id="line2d_47">
+    <path d="M 196.18235 817.56685
+" clip-path="url(#p755b5c9efe)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+    <g clip-path="url(#p755b5c9efe)">
+     <use xlink:href="#m31ba22c142" x="196.18235" y="817.56685" style="fill: #7a5510; stroke: #7a5510; stroke-width: 2"/>
+    </g>
+   </g>
+   <g id="line2d_48">
+    <path d="M 277.307234 897.482283
+L 439.557003 897.482283
+" clip-path="url(#p755b5c9efe)" style="fill: none; stroke-dasharray: 4.81,2.08; stroke-dashoffset: 0; stroke: #817b70; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_49">
+    <path d="M 277.307234 897.482283
+" clip-path="url(#p755b5c9efe)" style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
+    <g clip-path="url(#p755b5c9efe)">
+     <use xlink:href="#m31ba22c142" x="277.307234" y="897.482283" style="fill: #7a5510; stroke: #7a5510; stroke-width: 2"/>
+    </g>
+   </g>
+   <g id="line2d_50">
+    <path d="M 439.557003 897.482283
+" clip-path="url(#p755b5c9efe)" style="fill: none; stroke: #d62728; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="m661735792a" d="M 0 5
+C 1.326016 5 2.597899 4.473168 3.535534 3.535534
+C 4.473168 2.597899 5 1.326016 5 0
+C 5 -1.326016 4.473168 -2.597899 3.535534 -3.535534
+C 2.597899 -4.473168 1.326016 -5 0 -5
+C -1.326016 -5 -2.597899 -4.473168 -3.535534 -3.535534
+C -4.473168 -2.597899 -5 -1.326016 -5 0
+C -5 1.326016 -4.473168 2.597899 -3.535534 3.535534
+C -2.597899 4.473168 -1.326016 5 0 5
+z
+" style="stroke: #7a5510; stroke-width: 2"/>
+    </defs>
+    <g clip-path="url(#p755b5c9efe)">
+     <use xlink:href="#m661735792a" x="439.557003" y="897.482283" style="fill: #f5f3ee; stroke: #7a5510; stroke-width: 2"/>
+    </g>
+   </g>
+   <g id="patch_26">
+    <path d="M 90.72 937.44
+L 90.72 761.626047
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_27">
+    <path d="M 90.72 937.44
+L 472.006957 937.44
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_66">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: start; fill: #5b5548" x="90.72" y="750.19814" transform="rotate(-0 90.72 750.19814)">Hypothetical days; open marker indicates a target</text>
+   </g>
+   <g id="text_67">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="115.057465" y="799.985455" transform="rotate(-0 115.057465 799.985455)">Signed</text>
+   </g>
+   <g id="text_68">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="196.18235" y="799.985455" transform="rotate(-0 196.18235 799.985455)">Cash</text>
+   </g>
+   <g id="text_69">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="277.307234" y="879.900888" transform="rotate(-0 277.307234 879.900888)">Build</text>
+   </g>
+   <g id="text_70">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="439.557003" y="879.900888" transform="rotate(-0 439.557003 879.900888)">Target</text>
+   </g>
+   <g id="text_71">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="90.72" y="728.626047" transform="rotate(-0 90.72 728.626047)">5  Parallel milestones</text>
+   </g>
+  </g>
+  <g id="axes_8">
+   <g id="patch_28">
+    <path d="M 586.393043 937.44
+L 967.68 937.44
+L 967.68 761.626047
+L 586.393043 761.626047
+z
+" style="fill: #f5f3ee"/>
+   </g>
+   <g id="QuadMesh_1">
+    <path d="M 586.393043 761.626047
+L 713.488696 761.626047
+L 713.488696 820.230698
+L 586.393043 820.230698
+L 586.393043 761.626047
+" clip-path="url(#pc7b94b3f7e)" style="fill: #7a5510"/>
+    <path d="M 713.488696 761.626047
+L 840.584348 761.626047
+L 840.584348 820.230698
+L 713.488696 820.230698
+L 713.488696 761.626047
+" clip-path="url(#pc7b94b3f7e)" style="fill: #997b44"/>
+    <path d="M 840.584348 761.626047
+L 967.68 761.626047
+L 967.68 820.230698
+L 840.584348 820.230698
+L 840.584348 761.626047
+" clip-path="url(#pc7b94b3f7e)" style="fill: #b9a279"/>
+    <path d="M 586.393043 820.230698
+L 713.488696 820.230698
+L 713.488696 878.835349
+L 586.393043 878.835349
+L 586.393043 820.230698
+" clip-path="url(#pc7b94b3f7e)" style="fill: #b9a279"/>
+    <path d="M 713.488696 820.230698
+L 840.584348 820.230698
+L 840.584348 878.835349
+L 713.488696 878.835349
+L 713.488696 820.230698
+" clip-path="url(#pc7b94b3f7e)" style="fill: #d8c9ac"/>
+    <path d="M 840.584348 820.230698
+L 967.68 820.230698
+L 967.68 878.835349
+L 840.584348 878.835349
+L 840.584348 820.230698
+" clip-path="url(#pc7b94b3f7e)" style="fill: #e2d7c3"/>
+    <path d="M 586.393043 878.835349
+L 713.488696 878.835349
+L 713.488696 937.44
+L 586.393043 937.44
+L 586.393043 878.835349
+" clip-path="url(#pc7b94b3f7e)" style="fill: #e2d7c3"/>
+    <path d="M 713.488696 878.835349
+L 840.584348 878.835349
+L 840.584348 937.44
+L 713.488696 937.44
+L 713.488696 878.835349
+" clip-path="url(#pc7b94b3f7e)" style="fill: #ebe5d9"/>
+    <path d="M 840.584348 878.835349
+L 967.68 878.835349
+L 967.68 937.44
+L 840.584348 937.44
+L 840.584348 878.835349
+" clip-path="url(#pc7b94b3f7e)" style="fill: #f5f3ee"/>
+   </g>
+   <g id="matplotlib.axis_13">
+    <g id="xtick_19">
+     <g id="line2d_51"/>
+     <g id="text_72">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="649.94087" y="949.615625" transform="rotate(-0 649.94087 949.615625)">90</text>
+     </g>
+    </g>
+    <g id="xtick_20">
+     <g id="line2d_52"/>
+     <g id="text_73">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="777.036522" y="949.615625" transform="rotate(-0 777.036522 949.615625)">100</text>
+     </g>
+    </g>
+    <g id="xtick_21">
+     <g id="line2d_53"/>
+     <g id="text_74">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="904.132174" y="949.615625" transform="rotate(-0 904.132174 949.615625)">110</text>
+     </g>
+    </g>
+    <g id="text_75">
+     <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="777.036522" y="964.366875" transform="rotate(-0 777.036522 964.366875)">Illustrative cost</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_14">
+    <g id="ytick_18">
+     <g id="line2d_54"/>
+     <g id="text_76">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="795.266185" transform="rotate(-0 582.893043 795.266185)">0</text>
+     </g>
+    </g>
+    <g id="ytick_19">
+     <g id="line2d_55"/>
+     <g id="text_77">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="853.870836" transform="rotate(-0 582.893043 853.870836)">2</text>
+     </g>
+    </g>
+    <g id="ytick_20">
+     <g id="line2d_56"/>
+     <g id="text_78">
+      <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: end; fill: #1b1915" x="582.893043" y="912.475487" transform="rotate(-0 582.893043 912.475487)">4</text>
+     </g>
+    </g>
+    <g id="text_79">
+     <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="569.833043" y="849.533023" transform="rotate(-90 569.833043 849.533023)">Illustrative delay</text>
+    </g>
+   </g>
+   <g id="patch_29">
+    <path d="M 586.393043 937.44
+L 586.393043 761.626047
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_30">
+    <path d="M 586.393043 937.44
+L 967.68 937.44
+" style="fill: none; stroke: #d8d3c7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_80">
+    <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: start; fill: #5b5548" x="586.393043" y="750.19814" transform="rotate(-0 586.393043 750.19814)">Each cell is an explicit illustrative output</text>
+   </g>
+   <g id="text_81">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #ffffff" x="649.94087" y="794.743372" transform="rotate(-0 649.94087 794.743372)">12</text>
+   </g>
+   <g id="text_82">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="777.036522" y="794.743372" transform="rotate(-0 777.036522 794.743372)">10</text>
+   </g>
+   <g id="text_83">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="904.132174" y="794.743372" transform="rotate(-0 904.132174 794.743372)">8</text>
+   </g>
+   <g id="text_84">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="649.94087" y="853.348023" transform="rotate(-0 649.94087 853.348023)">8</text>
+   </g>
+   <g id="text_85">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="777.036522" y="853.348023" transform="rotate(-0 777.036522 853.348023)">6</text>
+   </g>
+   <g id="text_86">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="904.132174" y="853.348023" transform="rotate(-0 904.132174 853.348023)">4</text>
+   </g>
+   <g id="text_87">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="649.94087" y="911.952674" transform="rotate(-0 649.94087 911.952674)">4</text>
+   </g>
+   <g id="text_88">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="777.036522" y="911.952674" transform="rotate(-0 777.036522 911.952674)">2</text>
+   </g>
+   <g id="text_89">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Archivo'; text-anchor: middle; fill: #1b1915" x="904.132174" y="911.952674" transform="rotate(-0 904.132174 911.952674)">0</text>
+   </g>
+   <g id="text_90">
+    <text style="font-weight: 700; font-size: 19px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="586.393043" y="728.626047" transform="rotate(-0 586.393043 728.626047)">6  Sensitivity heatmap</text>
+   </g>
+  </g>
+  <g id="text_91">
+   <text style="font-weight: 700; font-size: 17px; font-family: 'Archivo'; text-anchor: start; fill: #7a5510" x="70.56" y="37.296" transform="rotate(-0 70.56 37.296)">SMPT  /  EXHIBIT REPERTOIRE</text>
+  </g>
+  <g id="text_92">
+   <text style="font-weight: 700; font-size: 28px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="70.56" y="75.6" transform="rotate(-0 70.56 75.6)">Different questions, different graphic forms</text>
+  </g>
+  <g id="text_93">
+   <text style="font-size: 15px; font-family: 'Archivo'; text-anchor: start; fill: #1b1915" x="70.56" y="105.84" transform="rotate(-0 70.56 105.84)">Synthetic examples only. No company, project or investment findings.</text>
+  </g>
+  <g id="text_94">
+   <text style="font-size: 12px; font-family: 'Archivo'; text-anchor: start; fill: #5b5548" x="70.56" y="982.8" transform="rotate(-0 70.56 982.8)">Original SMPT designs • Fixture data and generator accompany this gallery • Archivo typography</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe883153689">
+   <rect x="90.72" y="181.44" width="381.286957" height="175.813953"/>
+  </clipPath>
+  <clipPath id="p9f066bc884">
+   <rect x="586.393043" y="181.44" width="381.286957" height="175.813953"/>
+  </clipPath>
+  <clipPath id="pe43cf8d385">
+   <rect x="90.72" y="471.533023" width="381.286957" height="175.813953"/>
+  </clipPath>
+  <clipPath id="p757514656d">
+   <rect x="586.393043" y="478.565581" width="167.766261" height="154.716279"/>
+  </clipPath>
+  <clipPath id="p0a812b7761">
+   <rect x="796.10087" y="478.565581" width="167.766261" height="154.716279"/>
+  </clipPath>
+  <clipPath id="p755b5c9efe">
+   <rect x="90.72" y="761.626047" width="381.286957" height="175.813953"/>
+  </clipPath>
+  <clipPath id="pc7b94b3f7e">
+   <rect x="586.393043" y="761.626047" width="381.286957" height="175.813953"/>
+  </clipPath>
+ </defs>
+</svg>
