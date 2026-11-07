@@ -111,9 +111,9 @@ export function xyAxisOptions(xAxis: AxisSpec, yAxis: AxisSpec, g: PlotGeometry)
     catAxisLineShow: true,
     valAxisLineShow: true,
     valAxisLineColor: C.border,
-    catAxisLabelFontSize: 10,
+    catAxisLabelFontSize: 11,
     catAxisLabelColor: C.muted,
-    valAxisLabelFontSize: 10,
+    valAxisLabelFontSize: 11,
     valAxisLabelFormatCode: yAxis.dp > 0 ? `#,##0.${"0".repeat(yAxis.dp)}` : "#,##0",
     catGridLine: { color: C.soft, size: 0.5, style: "solid" },
     valGridLine: { color: C.soft, size: 0.5, style: "solid" },
@@ -123,10 +123,10 @@ export function xyAxisOptions(xAxis: AxisSpec, yAxis: AxisSpec, g: PlotGeometry)
 
 export function axisTitles(h: RenderHelpers, xAxis: AxisSpec, yAxis: AxisSpec, g: PlotGeometry): void {
   h.text("axis-title-y", "axis", `${yAxis.label} (vertical)`, {
-    x: h.area.x, y: h.area.y, w: h.area.w, h: 0.26, fontSize: 10, color: C.muted,
+    x: h.area.x, y: h.area.y, w: h.area.w, h: 0.26, fontSize: 11, color: C.muted,
   });
   h.text("axis-title-x", "axis", `${xAxis.label} (horizontal)`, {
-    x: g.plot.x, y: h.area.y + h.area.h - 0.27, w: g.plot.w, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+    x: g.plot.x, y: h.area.y + h.area.h - 0.27, w: g.plot.w, h: 0.26, fontSize: 11, color: C.muted, align: "right",
   });
 }
 
@@ -149,7 +149,7 @@ export function placeLabel(
     : side === "t" ? { x: cx - w / 2, y: cy - gap - hh, align: "center" }
     : { x: cx - w / 2, y: cy + gap, align: "center" };
   h.text(name, "label", text, {
-    x: pos.x, y: pos.y, w, h: hh, fontSize: 10, color: opts.color ?? C.ink, bold: opts.bold ?? false, align: pos.align, valign: "middle",
+    x: pos.x, y: pos.y, w, h: hh, fontSize: 11, color: opts.color ?? C.ink, bold: opts.bold ?? false, align: pos.align, valign: "middle",
   });
 }
 

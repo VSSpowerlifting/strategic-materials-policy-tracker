@@ -163,9 +163,9 @@ export const conditionTree: Renderer<ConditionTreeData> = {
 
     // Legend
     h.shape("legend-path-key", "legend", h.shapes.rect, { x: A.x, y: A.y + 0.07, w: 0.3, h: 0.04, fill: { color: C.accent }, line: { color: C.accent, width: 0 } });
-    h.text("legend-path-label", "legend", "Route to the example outcome", { x: A.x + 0.4, y: A.y, w: 2.6, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-path-label", "legend", "Route to the example outcome", { x: A.x + 0.4, y: A.y, w: 2.6, h: 0.26, fontSize: 11, color: C.ink });
     h.text("legend-kind", "legend", "Rounded boxes: conditions · square boxes: outcomes", {
-      x: A.x + A.w - 4.5, y: A.y, w: 4.5, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: A.x + A.w - 4.5, y: A.y, w: 4.5, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     const xOf = (id: string) => A.x + (depth.get(id) ?? 0) * pitch;
@@ -195,7 +195,7 @@ export const conditionTree: Renderer<ConditionTreeData> = {
         const accent = onPath.has(n.id) && onPath.has(b.to);
         h.text(`branch-label-${i}-${j}`, "label", b.label, {
           x: xOf(b.to) - gap / 2 + 0.02, y: y2 - 0.25, w: gap / 2 - 0.02, h: 0.22,
-          fontSize: 10, bold: true, color: accent ? C.accent : C.muted, align: "center", valign: "bottom",
+          fontSize: 11, bold: true, color: accent ? C.accent : C.muted, align: "center", valign: "bottom",
         });
       });
     });
@@ -214,7 +214,7 @@ export const conditionTree: Renderer<ConditionTreeData> = {
       });
       h.text(`node-label-${i}`, "label", n.label, {
         x: xOf(n.id) + 0.06, y: y - boxH / 2, w: boxW - 0.12, h: boxH,
-        fontSize: 10, bold: outcome, color: final ? "FFFFFF" : C.ink, align: "center", valign: "middle",
+        fontSize: 11, bold: outcome, color: final ? "FFFFFF" : C.ink, align: "center", valign: "middle",
       });
     });
   },

@@ -113,7 +113,7 @@ export const thresholdScatter: Renderer<ThresholdScatterData> = {
     axisTitles(h, d.xAxis, d.yAxis, g);
 
     const { plot } = g;
-    const cap = { fontSize: 10, color: C.muted, italic: true, h: 0.26, w: 2.7 };
+    const cap = { fontSize: 11, color: C.muted, italic: true, h: 0.26, w: 2.7 };
     h.text("quadrant-tl", "annot", d.quadrants.tl, { ...cap, x: plot.x + 0.08, y: plot.y + 0.04, align: "left" });
     h.text("quadrant-tr", "annot", d.quadrants.tr, { ...cap, x: plot.x + plot.w - cap.w - 0.08, y: plot.y + 0.04, align: "right" });
     h.text("quadrant-bl", "annot", d.quadrants.bl, { ...cap, x: plot.x + 0.08, y: plot.y + plot.h - 0.3, align: "left" });
@@ -124,14 +124,14 @@ export const thresholdScatter: Renderer<ThresholdScatterData> = {
       const x = g.sx(d.xThreshold.value);
       h.line("threshold-x-line", "annot", { x, y: plot.y, w: 0, h: plot.h, line: dash });
       h.text("threshold-x-label", "annot", d.xThreshold.label, {
-        x: x + 0.06, y: plot.y + 0.34, w: 1.9, h: 0.24, fontSize: 10, bold: true, color: C.neutralDark, align: "left",
+        x: x + 0.06, y: plot.y + 0.34, w: 1.9, h: 0.24, fontSize: 11, bold: true, color: C.neutralDark, align: "left",
       });
     }
     if (d.yThreshold) {
       const y = g.sy(d.yThreshold.value);
       h.line("threshold-y-line", "annot", { x: plot.x, y, w: plot.w, h: 0, line: dash });
       h.text("threshold-y-label", "annot", d.yThreshold.label, {
-        x: plot.x + 0.08, y: y - 0.27, w: 1.9, h: 0.24, fontSize: 10, bold: true, color: C.neutralDark, align: "left",
+        x: plot.x + 0.08, y: y - 0.27, w: 1.9, h: 0.24, fontSize: 11, bold: true, color: C.neutralDark, align: "left",
       });
     }
     flagged.forEach((p, i) => {

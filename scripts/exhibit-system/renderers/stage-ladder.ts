@@ -75,15 +75,15 @@ export const stageLadder: Renderer<StageLadderData> = {
     // Legend and as-of note.
     let lx = a.x;
     h.shape("legend-reached", "legend", h.shapes.rect, { x: lx, y: a.y + 0.06, w: 0.3, h: 0.15, fill: { color: C.neutralLight }, line: { color: C.neutralDark, width: 0.75 } });
-    h.text("legend-reached-label", "legend", "Reached", { x: lx + 0.38, y: a.y, w: 0.9, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-reached-label", "legend", "Reached", { x: lx + 0.38, y: a.y, w: 0.9, h: 0.26, fontSize: 11, color: C.ink });
     lx += 1.35;
     h.shape("legend-current", "legend", h.shapes.rect, { x: lx, y: a.y + 0.06, w: 0.3, h: 0.15, fill: { color: C.accent }, line: { color: C.accent, width: 0.75 } });
-    h.text("legend-current-label", "legend", "Latest stage reached", { x: lx + 0.38, y: a.y, w: 1.7, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-current-label", "legend", "Latest stage reached", { x: lx + 0.38, y: a.y, w: 1.7, h: 0.26, fontSize: 11, color: C.ink });
     lx += 2.2;
     h.shape("legend-pending", "legend", h.shapes.rect, { x: lx, y: a.y + 0.06, w: 0.3, h: 0.15, fill: { color: C.paper }, line: { color: C.neutralDark, width: 1.25, dashType: "dash" } });
-    h.text("legend-pending-label", "legend", "Not yet reached", { x: lx + 0.38, y: a.y, w: 1.4, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-pending-label", "legend", "Not yet reached", { x: lx + 0.38, y: a.y, w: 1.4, h: 0.26, fontSize: 11, color: C.ink });
     h.text("as-of", "axis", `Status as of ${longDate(d.asOf)}`, {
-      x: a.x + a.w - 2.6, y: a.y, w: 2.6, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: a.x + a.w - 2.6, y: a.y, w: 2.6, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     d.stages.forEach((s, i) => {
@@ -98,7 +98,7 @@ export const stageLadder: Renderer<StageLadderData> = {
         ? { x, y, w: colW, h: hh, fill: { color: current ? C.accent : C.neutralLight }, line: { color: current ? C.accent : C.neutralDark, width: 0.75 } }
         : { x, y, w: colW, h: hh, fill: { color: C.paper }, line: { color: C.neutralDark, width: 1.25, dashType: "dash" } });
       h.text(`step-label-${i}`, "label", [
-        { text: `STAGE ${i + 1}`, options: { bold: true, fontSize: 9, color: sub, charSpacing: 1, breakLine: true } },
+        { text: `STAGE ${i + 1}`, options: { bold: true, fontSize: 11, color: sub, charSpacing: 1, breakLine: true } },
         { text: s.label, options: { bold: true, fontSize: 13, color: ink, breakLine: true } },
         { text: s.date !== undefined ? longDate(s.date) : "not yet reached", options: { fontSize: 11, color: sub } },
       ], { x: x + 0.12, y: y + 0.1, w: colW - 0.2, h: 1.0, valign: "top", paraSpaceAfter: 2 });

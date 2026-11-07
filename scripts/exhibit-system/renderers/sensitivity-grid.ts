@@ -78,13 +78,13 @@ export const sensitivityGrid: Renderer<SensitivityGridData> = {
     const br = d.rowDriver.values.indexOf(d.base.row);
     const bc = d.colDriver.values.indexOf(d.base.col);
 
-    h.text("unit", "axis", d.unit, { x: h.area.x, y: h.area.y, w: 4.5, h: 0.26, fontSize: 10, color: C.muted });
+    h.text("unit", "axis", d.unit, { x: h.area.x, y: h.area.y, w: 4.5, h: 0.26, fontSize: 11, color: C.muted });
     h.shape("model-tag-box", "annot", h.shapes.rect, {
       x: h.area.x + h.area.w - 2.75, y: h.area.y - 0.01, w: 2.75, h: 0.28,
       fill: { color: C.paper, transparency: 100 }, line: { color: C.neutralDark, width: 0.75, dashType: "dash" },
     });
     h.text("model-tag", "annot", "MODEL OUTPUT — illustrative", {
-      x: h.area.x + h.area.w - 2.75, y: h.area.y - 0.01, w: 2.75, h: 0.28, fontSize: 10, bold: true, color: C.neutralDark, align: "center", valign: "middle", charSpacing: 1,
+      x: h.area.x + h.area.w - 2.75, y: h.area.y - 0.01, w: 2.75, h: 0.28, fontSize: 11, bold: true, color: C.neutralDark, align: "center", valign: "middle", charSpacing: 1,
     });
 
     const grid = { color: C.paper, pt: 1.5, type: "solid" };
@@ -95,10 +95,10 @@ export const sensitivityGrid: Renderer<SensitivityGridData> = {
     const rows: TableCell[][] = [];
     const first: TableCell[] = [
       { text: "", options: { fill: { color: C.paper }, border: grid } },
-      head(`${d.colDriver.name} →`, { colspan: K, fill: { color: C.paper }, color: C.muted, fontSize: 10 }),
+      head(`${d.colDriver.name} →`, { colspan: K, fill: { color: C.paper }, color: C.muted, fontSize: 11 }),
     ];
     rows.push(first);
-    rows.push([head(`${d.rowDriver.name} ↓`, { align: "left", fontSize: 10 }), ...d.colDriver.values.map((v) => head(v))]);
+    rows.push([head(`${d.rowDriver.name} ↓`, { align: "left", fontSize: 11 }), ...d.colDriver.values.map((v) => head(v))]);
     d.cells.forEach((r, i) => {
       rows.push([
         head(d.rowDriver.values[i], { align: "left", fontSize: 11 }),
@@ -133,18 +133,18 @@ export const sensitivityGrid: Renderer<SensitivityGridData> = {
     const keyY = tableTop + rowHs.reduce((s, v) => s + v, 0) + 0.2;
     const steps = 8;
     const kw = 0.3;
-    h.text("key-low", "legend", fmt(lo, d.dp), { x: h.area.x, y: keyY, w: 0.6, h: 0.24, fontSize: 10, color: C.muted, align: "right", valign: "middle" });
+    h.text("key-low", "legend", fmt(lo, d.dp), { x: h.area.x, y: keyY, w: 0.6, h: 0.24, fontSize: 11, color: C.muted, align: "right", valign: "middle" });
     for (let s = 0; s < steps; s++) {
       h.shape(`key-${s}`, "legend", h.shapes.rect, {
         x: h.area.x + 0.68 + s * kw, y: keyY + 0.04, w: kw, h: 0.16, fill: { color: shade(s / (steps - 1)) }, line: { color: C.paper, width: 0 },
       });
     }
-    h.text("key-high", "legend", fmt(hi, d.dp), { x: h.area.x + 0.76 + steps * kw, y: keyY, w: 0.6, h: 0.24, fontSize: 10, color: C.muted, valign: "middle" });
+    h.text("key-high", "legend", fmt(hi, d.dp), { x: h.area.x + 0.76 + steps * kw, y: keyY, w: 0.6, h: 0.24, fontSize: 11, color: C.muted, valign: "middle" });
     h.shape("key-base-box", "legend", h.shapes.rect, {
       x: h.area.x + 3.9, y: keyY + 0.03, w: 0.3, h: 0.18, fill: { color: C.paper, transparency: 100 }, line: { color: C.accent, width: 2.25 },
     });
     h.text("key-base-label", "legend", `Base case: ${d.base.row}, ${d.base.col}`, {
-      x: h.area.x + 4.3, y: keyY, w: 4.4, h: 0.24, fontSize: 10, color: C.ink, valign: "middle",
+      x: h.area.x + 4.3, y: keyY, w: 4.4, h: 0.24, fontSize: 11, color: C.ink, valign: "middle",
     });
   },
 };

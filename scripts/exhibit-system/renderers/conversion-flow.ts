@@ -82,7 +82,7 @@ export const conversionFlow: Renderer<ConversionFlowData> = {
       const pct = qty[i] > 0 ? (s.loss / qty[i]) * 100 : 0;
       h.text(`loss-label-${i}`, "label", [
         { text: fmt(-s.loss, d.dp), options: { bold: true, fontSize: 12, color: C.ink, breakLine: true } },
-        { text: `${fmt(pct, 1)}% of step input`, options: { fontSize: 10, color: C.muted } },
+        { text: `${fmt(pct, 1)}% of step input`, options: { fontSize: 11, color: C.muted } },
       ], { x: x - 0.1, y: top + inH + 0.05, w: gap + 0.2, h: 0.46, align: "center", valign: "top" });
     });
 
@@ -100,7 +100,7 @@ export const conversionFlow: Renderer<ConversionFlowData> = {
       });
     });
     h.text("unit", "axis", `${d.unit} · height proportional to quantity from zero · each step: in = out + loss`, {
-      x: A.x + 0.0, y: A.y + A.h - 0.26, w: A.w, h: 0.24, fontSize: 10, color: C.muted, align: "right",
+      x: A.x + 0.0, y: A.y + A.h - 0.26, w: A.w, h: 0.24, fontSize: 11, color: C.muted, align: "right",
     });
   },
 };

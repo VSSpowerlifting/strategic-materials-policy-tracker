@@ -110,11 +110,11 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
     ];
     legend.forEach(([key, text, style, w]) => {
       stateMarker(h, `legend-${key}`, "legend", style, lx + 0.12, a.y + 0.13, 0.17);
-      h.text(`legend-${key}-label`, "legend", text, { x: lx + 0.32, y: a.y, w: w - 0.32, h: 0.26, fontSize: 10, color: C.ink });
+      h.text(`legend-${key}-label`, "legend", text, { x: lx + 0.32, y: a.y, w: w - 0.32, h: 0.26, fontSize: 11, color: C.ink });
       lx += w;
     });
     h.text("axis-note", "axis", "Positioned on a day-count scale", {
-      x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     // Year gridlines and the year row at the foot of the strip.
@@ -126,7 +126,7 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
       const xa = g.sx(`${y}-01-01`);
       const xb = g.sx(`${y + 1}-01-01`);
       h.text(`year-label-${y}`, "axis", String(y), {
-        x: xa, y: zoneBottom + 0.06, w: xb - xa, h: yearRowH - 0.06, fontSize: 10, bold: true, color: C.neutralDark, align: "center", valign: "middle",
+        x: xa, y: zoneBottom + 0.06, w: xb - xa, h: yearRowH - 0.06, fontSize: 11, bold: true, color: C.neutralDark, align: "center", valign: "middle",
       });
     }
     h.shape("spine", "axis", h.shapes.rect, { x: g.x0, y: mid - 0.012, w: g.x1 - g.x0, h: 0.024, fill: { color: C.neutral }, line: { color: C.neutral, width: 0 } });
@@ -142,8 +142,8 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
       const boxY = up ? mid - mk / 2 - stem - boxH : mid + mk / 2 + stem;
       h.text(`milestone-label-${i}`, "label", [
         { text: m.label, options: { bold: true, fontSize: 11, color: C.ink, breakLine: true } },
-        { text: stateText(m), options: { bold: true, fontSize: 9, color: verified ? C.accent : C.muted, charSpacing: 0.5, breakLine: true } },
-        { text: longDate(m.date), options: { fontSize: 10, color: C.muted } },
+        { text: stateText(m), options: { bold: true, fontSize: 11, color: verified ? C.accent : C.muted, charSpacing: 0.5, breakLine: true } },
+        { text: longDate(m.date), options: { fontSize: 11, color: C.muted } },
       ], { x: x - w / 2, y: boxY, w, h: boxH, align: "center", valign: up ? "bottom" : "top" });
     });
   },

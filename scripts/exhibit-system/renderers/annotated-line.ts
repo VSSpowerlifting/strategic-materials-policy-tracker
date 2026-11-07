@@ -19,6 +19,9 @@ export interface AnnotatedLineData {
 }
 
 const DAY = 86_400_000;
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** Short category label: the year in January, otherwise the month, so labels fit one line. */
+const monthLabel = (iso: string): string => (iso.slice(5, 7) === "01" ? iso.slice(0, 4) : MONTHS[Number(iso.slice(5, 7)) - 1]);
 const t = (iso: string) => Date.parse(`${iso}T00:00:00Z`);
 
 export const annotatedLine: Renderer<AnnotatedLineData> = {
@@ -93,7 +96,7 @@ export const annotatedLine: Renderer<AnnotatedLineData> = {
     h.chart(
       "series-line",
       h.charts.line,
-      [{ name: d.unit, labels: d.points.map((p) => p.date.slice(0, 7)), values: d.points.map((p) => p.value) }],
+      [{ name: d.unit, labels: d.points.map((p) => monthLabel(p.date)), values: d.points.map((p) => p.value) }],
       chartDefaults(a, {
         layout: { x: fx, y: fy, w: fw, h: fh },
         chartColors: [C.neutralDark],
@@ -105,12 +108,12 @@ export const annotatedLine: Renderer<AnnotatedLineData> = {
         valAxisLabelFormatCode: formatCode(d.dp),
         valGridLine: { color: "E9E5DC", size: 0.5 },
         catAxisLabelFrequency: d.tickEvery,
-        catAxisLabelFontSize: 10,
+        catAxisLabelFontSize: 11,
         altText: `Line chart with dated event markers, ${d.unit}`,
       }),
     );
 
-    h.text("unit", "axis", d.unit, { x: a.x, y: a.y, w: 4, h: 0.24, fontSize: 10, color: C.muted });
+    h.text("unit", "axis", d.unit, { x: a.x, y: a.y, w: 4, h: 0.24, fontSize: 11, color: C.muted });
 
     // Event markers: positioned by date, interpolated between the surrounding observations.
     const times = d.points.map((p) => t(p.date));
@@ -129,7 +132,7 @@ export const annotatedLine: Renderer<AnnotatedLineData> = {
       vline(h, `event-line-${i}`, "annot", x - 0.006, py - 0.12, ph + 0.12, col);
       const right = x + 0.08 + 2.3 > a.x + a.w;
       h.text(`event-label-${i}`, "annot", [
-        { text: `${e.date}\n`, options: { bold: true, fontSize: 10, color: col } },
+        { text: `${e.date}\n`, options: { bold: true, fontSize: 11, color: col } },
         { text: e.label, options: { fontSize: 11, color: C.ink } },
       ], {
         x: right ? x - 2.38 : x + 0.08, y: a.y + 0.02, w: 2.3, h: 0.62,

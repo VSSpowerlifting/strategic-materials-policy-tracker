@@ -112,7 +112,7 @@ export const bubble: Renderer<BubbleData> = {
     // Size legend: two reference circles, right column.
     const lx = h.area.x + h.area.w - LEGEND_W + 0.1;
     h.text("size-legend-title", "legend", `Bubble area: ${d.sizeLabel}`, {
-      x: lx, y: g.plot.y, w: LEGEND_W - 0.1, h: 0.5, fontSize: 10, bold: true, color: C.ink, valign: "top",
+      x: lx, y: g.plot.y, w: LEGEND_W - 0.1, h: 0.5, fontSize: 11, bold: true, color: C.ink, valign: "top",
     });
     const refs = [...d.legendSizes].sort((a, b) => a - b);
     let cy = g.plot.y + 0.7;
@@ -124,12 +124,12 @@ export const bubble: Renderer<BubbleData> = {
         fill: { color: C.neutral, transparency: 70 }, line: { color: C.neutralDark, width: 0.75 },
       });
       h.text(`size-legend-value-${i}`, "legend", `${fmt(s, 0)} ${d.sizeUnit}`, {
-        x: lx + dm + 0.08, y: cy - 0.13, w: LEGEND_W - dm - 0.2, h: 0.26, fontSize: 10, color: C.ink, valign: "middle",
+        x: lx + dm + 0.08, y: cy - 0.13, w: LEGEND_W - dm - 0.2, h: 0.26, fontSize: 11, color: C.ink, valign: "middle",
       });
     });
     const noteY = cy + diam(refs[refs.length - 1]) / 2 + 0.2;
     h.text("size-legend-note", "legend", "Legend circles are drawn shapes, approximate to the chart scale.", {
-      x: lx, y: noteY, w: LEGEND_W - 0.1, h: 0.7, fontSize: 9, color: C.muted, valign: "top",
+      x: lx, y: noteY, w: LEGEND_W - 0.1, h: 0.7, fontSize: 11, color: C.muted, valign: "top",
     });
   },
 };

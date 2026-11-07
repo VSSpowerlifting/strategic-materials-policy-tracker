@@ -78,7 +78,7 @@ export const slope: Renderer<SlopeData> = {
     const gap = 0.3;
     const dot = 0.13;
 
-    h.text("unit", "axis", d.unit, { x: a.x, y: a.y, w: a.w, h: 0.26, fontSize: 10, color: C.muted });
+    h.text("unit", "axis", d.unit, { x: a.x, y: a.y, w: a.w, h: 0.26, fontSize: 11, color: C.muted });
     h.text("col-from", "axis", d.fromLabel, {
       x: leftX - 1.0, y: a.y + 0.3, w: 2.0, h: 0.28, fontSize: 12, bold: true, color: C.ink, align: "center",
     });
@@ -86,7 +86,7 @@ export const slope: Renderer<SlopeData> = {
       x: rightX - 1.0, y: a.y + 0.3, w: 2.0, h: 0.28, fontSize: 12, bold: true, color: C.ink, align: "center",
     });
     h.text("scale-note", "axis", `Vertical positions are linear in value, from ${fmt(lo, d.dp)} (bottom) to ${fmt(hi, d.dp)} (top); no zero baseline`, {
-      x: a.x, y: a.y + a.h - 0.28, w: a.w, h: 0.26, fontSize: 10, italic: true, color: C.muted,
+      x: a.x, y: a.y + a.h - 0.28, w: a.w, h: 0.26, fontSize: 11, italic: true, color: C.muted,
     });
 
     const leftY = spread(d.items.map((i) => sy(i.from)), gap, top, bottom);

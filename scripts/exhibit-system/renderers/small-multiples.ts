@@ -89,10 +89,10 @@ export const smallMultiples: Renderer<SmallMultiplesData> = {
           valAxisMaxVal: d.axisMax,
           valAxisMajorUnit: d.majorUnit,
           valAxisLabelFormatCode: formatCode(d.dp),
-          valAxisLabelFontSize: 9,
+          valAxisLabelFontSize: 11,
           valGridLine: { color: "E9E5DC", size: 0.5 },
           catAxisLabelFrequency: skip,
-          catAxisLabelFontSize: 9,
+          catAxisLabelFontSize: 11,
           altText: `Panel ${p.title}, ${d.unit}, shared axis ${d.axisMin} to ${d.axisMax}`,
         }),
       );

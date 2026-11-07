@@ -66,6 +66,8 @@ export interface ElementRecord {
   role: ElementRole;
   tier: EditabilityTier;
   kind: "chart" | "shape" | "line" | "text" | "table";
+  /** Smallest font size (pt) set on a text, chart or table element; absent for shapes and lines. */
+  minPt?: number;
 }
 
 export interface IntegrityIssue {
@@ -73,9 +75,17 @@ export interface IntegrityIssue {
   message: string;
 }
 
+/**
+ * synthetic-demonstration: gallery and demo fixtures under docs/design/presentations/exhibit-system.
+ * research: a real SMPT exhibit, built only through research-deck.ts from a spec kept OUTSIDE that
+ * directory, with evidence references. The two never share a deck.
+ */
+export const EXHIBIT_CLASSIFICATIONS = ["synthetic-demonstration", "research"] as const;
+export type ExhibitClassification = (typeof EXHIBIT_CLASSIFICATIONS)[number];
+
 export interface Fixture {
   pattern: string;
-  classification: "synthetic-demonstration";
+  classification: ExhibitClassification;
   title: string;
   subtitle: string;
   annotation: string;
@@ -85,6 +95,8 @@ export interface Fixture {
   /** "split" (default): exhibit left, interpretation panel right. "wide": full-width exhibit, interpretation strip below. */
   layout?: "split" | "wide";
   data: unknown;
+  /** Research exhibits only: evidence-register or source ids behind every figure. Empty for synthetic fixtures. */
+  evidence_refs?: string[];
 }
 
 export interface Area {

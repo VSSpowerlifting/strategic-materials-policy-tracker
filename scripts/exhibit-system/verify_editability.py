@@ -3,6 +3,9 @@
 
     npm run exhibits:verify            # structural + LibreOffice tiers
     python3 scripts/exhibit-system/verify_editability.py --structural-only
+    python3 scripts/exhibit-system/verify_editability.py --deck out.pptx --manifest out.manifest.json
+        (research mode: structural tier only, prints results, writes nothing;
+         the synthetic notice must be absent and visual_text comes from the manifest)
 
 Three tiers, reported separately and never merged:
 
@@ -138,7 +141,10 @@ def check_chart(z: zipfile.ZipFile, part: str, issues: list[str]) -> dict:
     return info
 
 
-def structural(deck: Path, manifest_slides: list[dict]) -> dict:
+def structural(deck: Path, manifest_slides: list[dict], mode: str = "synthetic") -> dict:
+    """mode "synthetic": gallery/demo decks; visual_text comes from FIXTURES and the
+    synthetic notice must be present. mode "research": visual_text comes from each
+    manifest slide entry and the synthetic notice must be ABSENT."""
     z = zipfile.ZipFile(deck)
     parts = slide_parts(z)
     deck_issues: list[str] = []
@@ -217,16 +223,27 @@ def structural(deck: Path, manifest_slides: list[dict]) -> dict:
         pattern = man.get("pattern", "?")
         visual_checked = 0
         if pattern != "cover":
-            if SYNTHETIC_NOTICE not in slide_text:
-                issues.append("synthetic-data notice absent")
-            fx = FIXTURES / f"{pattern}.json"
-            if not fx.exists():
-                issues.append(f"fixture {fx.name} not found")
+            wanted: list[str] | None = None
+            if mode == "research":
+                if SYNTHETIC_NOTICE in slide_text:
+                    issues.append("synthetic-data notice present on a research slide")
+                if not man.get("evidence_refs"):
+                    issues.append("research slide has no evidence_refs in its manifest entry")
+                wanted = man.get("visual_text")
+                if wanted is None:
+                    issues.append("research slide has no visual_text in its manifest entry")
             else:
-                for s in json.loads(fx.read_text())["visual_text"]:
-                    visual_checked += 1
-                    if not any(v in haystack for v in fmt_number_variants(s)):
-                        issues.append(f"visual_text not found: {s!r}")
+                if SYNTHETIC_NOTICE not in slide_text:
+                    issues.append("synthetic-data notice absent")
+                fx = FIXTURES / f"{pattern}.json"
+                if not fx.exists():
+                    issues.append(f"fixture {fx.name} not found")
+                else:
+                    wanted = json.loads(fx.read_text())["visual_text"]
+            for s in wanted or []:
+                visual_checked += 1
+                if not any(v in haystack for v in fmt_number_variants(s)):
+                    issues.append(f"visual_text not found: {s!r}")
 
         tiers: dict[str, int] = {}
         for e in man["elements"]:
@@ -303,7 +320,26 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--structural-only", action="store_true")
     ap.add_argument("--check", action="store_true", help="verify only; do not write the report")
+    ap.add_argument("--deck", type=Path, help="research mode: a deck built by research-deck.ts")
+    ap.add_argument("--manifest", type=Path, help="research mode: the deck's <out>.manifest.json")
     args = ap.parse_args()
+
+    if args.deck or args.manifest:
+        if not (args.deck and args.manifest):
+            print("--deck and --manifest must be given together", file=sys.stderr)
+            return 2
+        man = json.loads(args.manifest.read_text())
+        if man.get("classification") != "research":
+            print(f"{args.manifest}: classification is not research", file=sys.stderr)
+            return 2
+        s = structural(args.deck, man["slides"], mode="research")
+        print(f"{args.deck}: structural {s['status']} (research mode; LibreOffice and PowerPoint tiers not run)")
+        for sl in s["slides"]:
+            for i in sl["issues"]:
+                print(f"  slide {sl['slide']} ({sl['pattern']}): {i}")
+        for i in s["issues"]:
+            print(f"  {i}")
+        return 0 if s["status"] == "pass" else 1
 
     manifest = json.loads(MANIFEST.read_text())
     decks = []

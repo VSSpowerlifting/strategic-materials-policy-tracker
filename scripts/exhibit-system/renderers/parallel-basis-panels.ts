@@ -86,7 +86,7 @@ export const parallelBasisPanels: Renderer<ParallelBasisData> = {
         });
       }
       h.text(`panel-basis-${i}`, "label", p.basis, { x, y: h.area.y, w: pw, h: 0.3, fontSize: 12, bold: true, color: C.ink });
-      h.text(`panel-unit-${i}`, "axis", p.unit, { x, y: h.area.y + 0.3, w: pw, h: 0.26, fontSize: 10, color: C.muted });
+      h.text(`panel-unit-${i}`, "axis", p.unit, { x, y: h.area.y + 0.3, w: pw, h: 0.26, fontSize: 11, color: C.muted });
       const max = niceMax(Math.max(...p.items.map((it) => it.value)) * 1.22);
       h.chart(
         `panel-chart-${i}`,
@@ -99,7 +99,7 @@ export const parallelBasisPanels: Renderer<ParallelBasisData> = {
           valAxisMinVal: 0,
           valAxisMaxVal: max,
           barGapWidthPct: 55,
-          catAxisLabelFontSize: 10,
+          catAxisLabelFontSize: 11,
           chartColors: p.items.map((it) => (it.label === d.accent ? C.accent : C.neutral)),
           showValue: true,
           dataLabelPosition: "outEnd",

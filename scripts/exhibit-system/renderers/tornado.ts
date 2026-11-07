@@ -66,7 +66,7 @@ export const tornado: Renderer<TornadoData> = {
       fill: { color: C.paper, transparency: 100 }, line: { color: C.neutralDark, width: 0.75, dashType: "dash" },
     });
     h.text("model-tag", "annot", "MODEL OUTPUT — illustrative", {
-      x: h.area.x + h.area.w - 2.75, y: h.area.y - 0.01, w: 2.75, h: 0.28, fontSize: 10, bold: true, color: C.neutralDark, align: "center", valign: "middle", charSpacing: 1,
+      x: h.area.x + h.area.w - 2.75, y: h.area.y - 0.01, w: 2.75, h: 0.28, fontSize: 11, bold: true, color: C.neutralDark, align: "center", valign: "middle", charSpacing: 1,
     });
 
     const top = 0.78;
@@ -115,10 +115,10 @@ export const tornado: Renderer<TornadoData> = {
       });
     });
     h.text("base-label", "axis", `${d.baseLabel}: ${fmt(d.base, d.dp)}`, {
-      x: at(0) - 1.5, y: box.y - 0.3, w: 3, h: 0.26, fontSize: 10, bold: true, color: C.ink, align: "center",
+      x: at(0) - 1.5, y: box.y - 0.3, w: 3, h: 0.26, fontSize: 11, bold: true, color: C.ink, align: "center",
     });
     h.text("unit", "axis", d.unit, {
-      x: h.area.x, y: h.area.y + 0.3, w: 2.6, h: 0.26, fontSize: 10, color: C.muted,
+      x: h.area.x, y: h.area.y + 0.3, w: 2.6, h: 0.26, fontSize: 11, color: C.muted,
     });
   },
 };

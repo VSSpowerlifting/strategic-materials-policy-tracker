@@ -149,9 +149,9 @@ export const dependencyNetwork: Renderer<DependencyNetworkData> = {
 
     // Legend
     h.shape("legend-path-key", "legend", h.shapes.rect, { x: A.x, y: A.y + 0.07, w: 0.3, h: 0.04, fill: { color: C.accent }, line: { color: C.accent, width: 0 } });
-    h.text("legend-path-label", "legend", "Highlighted path", { x: A.x + 0.4, y: A.y, w: 1.6, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-path-label", "legend", "Highlighted path", { x: A.x + 0.4, y: A.y, w: 1.6, h: 0.26, fontSize: 11, color: C.ink });
     h.text("legend-edge", "legend", d.edgeMeaning, {
-      x: A.x + 2.2, y: A.y, w: A.w - 2.2, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: A.x + 2.2, y: A.y, w: A.w - 2.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     // Port offsets spread each node's edges along its side, ordered by the far end's height.
@@ -197,7 +197,7 @@ export const dependencyNetwork: Renderer<DependencyNetworkData> = {
         fill: { color: "FFFFFF" }, line: { color: hot ? C.accent : C.neutral, width: hot ? 2.25 : 1.25 },
       });
       h.text(`node-label-${i}`, "label", [
-        { text: n.type.toUpperCase(), options: { fontSize: 9, bold: true, color: C.muted, charSpacing: 1, breakLine: true } },
+        { text: n.type.toUpperCase(), options: { fontSize: 11, bold: true, color: C.muted, charSpacing: 1, breakLine: true } },
         { text: n.label, options: { fontSize: 12, bold: true, color: C.ink } },
       ], { x: p.x + (n.type === "Programme" ? 0.2 : 0.08), y: p.cy - nodeH / 2, w: nodeW - (n.type === "Programme" ? 0.4 : 0.16), h: nodeH, align: "center", valign: "middle" });
     });

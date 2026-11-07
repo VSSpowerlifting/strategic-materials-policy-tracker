@@ -64,16 +64,16 @@ export const stripPlot: Renderer<StripData> = {
     const dot = 0.12;
 
     h.text("unit", "axis", `${d.unit} · each dot is one observation; accent tick is the group median`, {
-      x: h.area.x, y: h.area.y, w: h.area.w, h: 0.26, fontSize: 10, color: C.muted,
+      x: h.area.x, y: h.area.y, w: h.area.w, h: 0.26, fontSize: 11, color: C.muted,
     });
     for (let v = d.axis.min, k = 0; v <= d.axis.max + 1e-9; v += d.axis.step, k++) {
       vline(h, `grid-${k}`, "axis", sx(v), top - 0.04, bottom - top + 0.04, C.soft);
       h.text(`axis-tick-${k}`, "axis", fmt(v, d.dp), {
-        x: sx(v) - 0.4, y: bottom + 0.05, w: 0.8, h: 0.24, fontSize: 10, color: C.muted, align: "center",
+        x: sx(v) - 0.4, y: bottom + 0.05, w: 0.8, h: 0.24, fontSize: 11, color: C.muted, align: "center",
       });
     }
     h.text("axis-stat-head", "axis", "Median · n", {
-      x: x1 + 0.2, y: top - 0.3, w: statW - 0.2, h: 0.24, fontSize: 9, bold: true, color: C.muted,
+      x: x1 + 0.2, y: top - 0.3, w: statW - 0.2, h: 0.24, fontSize: 11, bold: true, color: C.muted,
     });
 
     groups.forEach((g, i) => {

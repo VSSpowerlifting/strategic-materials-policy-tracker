@@ -149,11 +149,11 @@ export const twoLaneTimeline: Renderer<TwoLaneTimelineData> = {
     ];
     legend.forEach(([k, text]) => {
       marker(h, `legend-${k}`, "legend", k, lx + 0.09, a.y + 0.13, 0.15, C.neutralDark);
-      h.text(`legend-${k}-label`, "legend", text, { x: lx + 0.24, y: a.y, w: 1.45, h: 0.26, fontSize: 10, color: C.ink });
+      h.text(`legend-${k}-label`, "legend", text, { x: lx + 0.24, y: a.y, w: 1.45, h: 0.26, fontSize: 11, color: C.ink });
       lx += 1.75;
     });
     h.text("axis-note", "axis", "Positioned on a day-count scale", {
-      x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     // Year gridlines (behind lanes) and the axis band.
@@ -168,7 +168,7 @@ export const twoLaneTimeline: Renderer<TwoLaneTimelineData> = {
       const xa = g.sx(`${y}-01-01`);
       const xb = g.sx(`${y + 1}-01-01`);
       h.text(`year-label-${y}`, "axis", String(y), {
-        x: xa, y: bandTop, w: xb - xa, h: bandH, fontSize: 10, bold: true, color: C.neutralDark, align: "center", valign: "middle",
+        x: xa, y: bandTop, w: xb - xa, h: bandH, fontSize: 11, bold: true, color: C.neutralDark, align: "center", valign: "middle",
       });
     }
     vline(h, "axis-start", "axis", g.x0, bandTop, bandH, C.neutral);
@@ -192,8 +192,8 @@ export const twoLaneTimeline: Renderer<TwoLaneTimelineData> = {
         vline(h, `stem-${li}-${i}`, "data", xs[i] - 0.006, stemTop, stemH, color);
         marker(h, `marker-${li}-${i}`, "data", e.kind, xs[i], edgeY, mk, color);
         h.text(`event-label-${li}-${i}`, "label", [
-          { text: e.label, options: { bold: true, fontSize: 10, color: C.ink, breakLine: true } },
-          { text: line2(e), options: { fontSize: 9, color: C.muted } },
+          { text: e.label, options: { bold: true, fontSize: 11, color: C.ink, breakLine: true } },
+          { text: line2(e), options: { fontSize: 11, color: C.muted } },
         ], { x: xs[i] + 0.07, y: boxY, w: ws[i], h: boxH, valign: up ? "bottom" : "top" });
       });
     });

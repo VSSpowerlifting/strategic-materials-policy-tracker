@@ -84,7 +84,7 @@ export const waterfall: Renderer<WaterfallData> = {
         valAxisHidden: true,
         valAxisMinVal: 0,
         chartColors: ["transparent", C.neutralDark, C.neutral, C.neutralLight],
-        catAxisLabelFontSize: 10,
+        catAxisLabelFontSize: 11,
         altText: `Waterfall bridge, ${d.unit}`,
       }),
       true,
@@ -105,7 +105,7 @@ export const waterfall: Renderer<WaterfallData> = {
     x = legendItem(h, "legend-up", x, h.area.y, "Increase", { fill: C.neutral }, 1.4);
     legendItem(h, "legend-down", x, h.area.y, "Decrease", { fill: C.neutralLight }, 1.4);
     h.text("unit", "axis", d.unit, {
-      x: h.area.x + h.area.w - 3, y: h.area.y, w: 3, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: h.area.x + h.area.w - 3, y: h.area.y, w: 3, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
   },
 };

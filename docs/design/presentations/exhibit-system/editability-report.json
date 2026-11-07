@@ -8,7 +8,7 @@
   "decks": [
     {
       "file": "docs/design/presentations/exhibit-system/exhibit-gallery.pptx",
-      "sha256": "815ef89c211225ae42047aab011cbe793b829e722003497c2930b812724f0aff",
+      "sha256": "cbea0d93cc1575ca416a97d3227ab08558d66c0be429ef88c1c6117d65bd8a78",
       "slides": 39,
       "element_tiers": {
         "native-chart": 21,
@@ -750,7 +750,7 @@
     },
     {
       "file": "docs/design/presentations/exhibit-system/demo-deck.pptx",
-      "sha256": "dcec37791fafdcefdfc3c2ec93022ce584a67a7831d1758590110d101e2a54c9",
+      "sha256": "cb9e0d1ea5bd313e8b9fbb91ccf569d74815f0710bfa999b800b661ead2ce15b",
       "slides": 14,
       "element_tiers": {
         "native-chart": 4,

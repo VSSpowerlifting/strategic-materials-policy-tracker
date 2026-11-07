@@ -62,7 +62,7 @@ export const rankedDot: Renderer<RankedDotData> = {
     const dot = 0.19;
 
     h.text("unit", "axis", `${d.unit}`, {
-      x: h.area.x, y: h.area.y, w: h.area.w, h: 0.26, fontSize: 10, color: C.muted,
+      x: h.area.x, y: h.area.y, w: h.area.w, h: 0.26, fontSize: 11, color: C.muted,
     });
 
     // Gridlines and tick labels (axis range stated, not hidden).
@@ -72,11 +72,11 @@ export const rankedDot: Renderer<RankedDotData> = {
     ticks.forEach((v, i) => {
       vline(h, `grid-${i}`, "axis", sx(v), top - 0.04, bottom - top + 0.04, i === 0 ? C.neutralLight : C.soft);
       h.text(`tick-${i}`, "axis", fmt(v, axisDp), {
-        x: sx(v) - 0.4, y: bottom + 0.05, w: 0.8, h: 0.24, fontSize: 10, color: C.muted, align: "center",
+        x: sx(v) - 0.4, y: bottom + 0.05, w: 0.8, h: 0.24, fontSize: 11, color: C.muted, align: "center",
       });
     });
     h.text("axis-note", "axis", `Axis runs from ${fmt(d.axisMin, axisDp)} to ${fmt(d.axisMax, axisDp)}; it does not start at zero`, {
-      x: x0, y: bottom + 0.32, w: x1 - x0, h: 0.24, fontSize: 10, italic: true, color: C.muted, align: "center",
+      x: x0, y: bottom + 0.32, w: x1 - x0, h: 0.24, fontSize: 11, italic: true, color: C.muted, align: "center",
     });
 
     items.forEach((it, i) => {

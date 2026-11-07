@@ -144,20 +144,20 @@ export const swimlane: Renderer<SwimlaneData> = {
     // Legend.
     let lx = a.x;
     h.shape("legend-period", "legend", h.shapes.rect, { x: lx, y: a.y + 0.06, w: 0.3, h: 0.15, fill: { color: C.neutral }, line: { color: C.neutral, width: 0.75 } });
-    h.text("legend-period-label", "legend", "Period in effect", { x: lx + 0.38, y: a.y, w: 1.4, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-period-label", "legend", "Period in effect", { x: lx + 0.38, y: a.y, w: 1.4, h: 0.26, fontSize: 11, color: C.ink });
     lx += 1.85;
     h.shape("legend-planned", "legend", h.shapes.rect, { x: lx, y: a.y + 0.06, w: 0.3, h: 0.15, fill: { color: C.paper }, line: { color: C.neutralDark, width: 1.25, dashType: "dash" } });
-    h.text("legend-planned-label", "legend", "Planned period", { x: lx + 0.38, y: a.y, w: 1.3, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-planned-label", "legend", "Planned period", { x: lx + 0.38, y: a.y, w: 1.3, h: 0.26, fontSize: 11, color: C.ink });
     lx += 1.75;
     h.shape("legend-point", "legend", h.shapes.diamond, { x: lx + 0.07, y: a.y + 0.04, w: 0.19, h: 0.19, fill: { color: C.neutralDark }, line: { color: C.paper, width: 0.75 } });
-    h.text("legend-point-label", "legend", "Point event", { x: lx + 0.38, y: a.y, w: 1.1, h: 0.26, fontSize: 10, color: C.ink });
+    h.text("legend-point-label", "legend", "Point event", { x: lx + 0.38, y: a.y, w: 1.1, h: 0.26, fontSize: 11, color: C.ink });
     lx += 1.5;
     if (hasHighlight) {
       h.shape("legend-highlight", "legend", h.shapes.rect, { x: lx, y: a.y + 0.06, w: 0.3, h: 0.15, fill: { color: C.accent }, line: { color: C.accent, width: 0.75 } });
-      h.text("legend-highlight-label", "legend", "Longest period", { x: lx + 0.38, y: a.y, w: 1.3, h: 0.26, fontSize: 10, color: C.ink });
+      h.text("legend-highlight-label", "legend", "Longest period", { x: lx + 0.38, y: a.y, w: 1.3, h: 0.26, fontSize: 11, color: C.ink });
     }
     h.text("axis-note", "axis", "Positioned on a day-count scale", {
-      x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     // Quarter gridlines and headers (year row, quarter row).
@@ -168,7 +168,7 @@ export const swimlane: Renderer<SwimlaneData> = {
       if (q < g.q1) {
         const xb = g.sx(qIso(Math.floor((q + 1) / 4), (q + 1) % 4));
         h.text(`quarter-label-${q}`, "axis", `Q${(q % 4) + 1}`, {
-          x, y: headTop + 0.25, w: xb - x, h: 0.22, fontSize: 10, color: C.muted, align: "center", valign: "middle",
+          x, y: headTop + 0.25, w: xb - x, h: 0.22, fontSize: 11, color: C.muted, align: "center", valign: "middle",
         });
         if (yearEdge) {
           const xe = g.sx(qIso(Math.floor(q / 4) + 1, 0));
@@ -203,7 +203,7 @@ export const swimlane: Renderer<SwimlaneData> = {
         }
         const [lx0] = labelSpan(g.sx, it);
         h.text(`item-label-${li}-${ii}`, "label", it.label, {
-          x: lx0, y: barY + barH + 0.03, w: labelW(it.label), h: 0.22, fontSize: 10, color: C.ink, valign: "top",
+          x: lx0, y: barY + barH + 0.03, w: labelW(it.label), h: 0.22, fontSize: 11, color: C.ink, valign: "top",
         });
       });
     });

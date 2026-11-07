@@ -102,7 +102,7 @@ export const stateDiagram: Renderer<StateDiagramData> = {
     lx = legendItem(h, "legend-current", lx, A.y, `Current state, as of ${d.asOf}`, { fill: C.accent }, 3.1);
     legendItem(h, "legend-other", lx, A.y, "Other state", { fill: "FFFFFF", line: C.neutral }, 1.5);
     h.text("legend-edge", "legend", "Arrow: transition, labelled by trigger", {
-      x: A.x + A.w - 3.1, y: A.y, w: 3.1, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: A.x + A.w - 3.1, y: A.y, w: 3.1, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     // Nodes
@@ -116,7 +116,7 @@ export const stateDiagram: Renderer<StateDiagramData> = {
         line: { color: cur ? C.accent : C.neutral, width: 1.25 },
       });
       const runs = [{ text: s.label, options: { bold: true, fontSize: 13, color: cur ? "FFFFFF" : C.ink, breakLine: !!s.note } }];
-      if (s.note) runs.push({ text: s.note, options: { bold: false, fontSize: 10, color: cur ? "FFFFFF" : C.muted, breakLine: false } });
+      if (s.note) runs.push({ text: s.note, options: { bold: false, fontSize: 11, color: cur ? "FFFFFF" : C.muted, breakLine: false } });
       h.text(`state-label-${i}`, "label", runs, {
         x: p.x + 0.06, y: p.y, w: nodeW - 0.12, h: nodeH, align: "center", valign: "middle",
       });
@@ -131,7 +131,7 @@ export const stateDiagram: Renderer<StateDiagramData> = {
       const name = `edge-${i}`;
       const pair = has(t.to, t.from);
       const lbl = (id: string, text: string, x: number, y: number, w: number, o: Record<string, unknown>) =>
-        h.text(id, "label", text, { x, y, w, h: 0.4, fontSize: 10, color: C.ink, ...o });
+        h.text(id, "label", text, { x, y, w, h: 0.4, fontSize: 11, color: C.ink, ...o });
 
       if (a.r === b.r && Math.abs(a.c - b.c) === 1) {
         const dir = b.c > a.c ? 1 : -1;

@@ -71,7 +71,7 @@ export const stackedBar: Renderer<StackedBarData> = {
       lx = legendItem(h, `legend-${i}`, lx, h.area.y, c, { fill: colors[i], line: C.neutralDark }, 1.55);
     });
     h.text("unit", "axis", d.unit, {
-      x: h.area.x + h.area.w - 2.4, y: h.area.y, w: 2.4, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: h.area.x + h.area.w - 2.4, y: h.area.y, w: 2.4, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     const box = { x: h.area.x, y: h.area.y + 0.4, w: h.area.w, h: h.area.h - 0.4 - (anyHidden ? 0.34 : 0.05) };
@@ -94,7 +94,7 @@ export const stackedBar: Renderer<StackedBarData> = {
         dataBorder: { pt: 1, color: C.paper },
         showValue: true,
         dataLabelPosition: "ctr",
-        dataLabelFontSize: 10,
+        dataLabelFontSize: 11,
         dataLabelColor: C.ink,
         dataLabelFormatCode: `[<${hideBelow}]"";#,##0${d.dp > 0 ? "." + "0".repeat(d.dp) : ""}`,
         altText: `Stacked bar chart of ${d.components.join(", ")}, ${d.unit}`,
@@ -114,7 +114,7 @@ export const stackedBar: Renderer<StackedBarData> = {
     });
     if (anyHidden) {
       h.text("label-note", "axis", `Segment labels omitted below ${fmt(hideBelow, d.dp)}; bar-end figure is the row total.`, {
-        x: h.area.x, y: h.area.y + h.area.h - 0.28, w: h.area.w, h: 0.26, fontSize: 10, color: C.muted,
+        x: h.area.x, y: h.area.y + h.area.h - 0.28, w: h.area.w, h: 0.26, fontSize: 11, color: C.muted,
       });
     }
   },

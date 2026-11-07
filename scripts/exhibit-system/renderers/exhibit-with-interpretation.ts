@@ -73,7 +73,7 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
     const rule = { type: "solid", pt: 0.75, color: C.border };
     const none = { type: "none" };
     const hdr = (text: string, align: "left" | "center" | "right"): TableCell => ({
-      text, options: { bold: true, fontSize: 10.5, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
+      text, options: { bold: true, fontSize: 11, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
     });
     const rows: TableCell[][] = [
       [hdr("#", "center"), hdr("Item", "left"), ...d.columns.map((c) => hdr(c, "right"))],
@@ -91,12 +91,12 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
     h.table("figures-table", rows, {
       x, y, w: tableW, colW: [numW, labW, ...d.columns.map(() => valW)], rowH: [headH, ...d.rows.map(() => rowH)], fontSize: 11,
     });
-    h.text("table-unit", "label", d.unit, { x, y: y + headH + rowH * d.rows.length + 0.1, w: tableW, h: 0.26, fontSize: 10, color: C.muted });
+    h.text("table-unit", "label", d.unit, { x, y: y + headH + rowH * d.rows.length + 0.1, w: tableW, h: 0.26, fontSize: 11, color: C.muted });
 
     // Interpretation block: each note carries the number of the row it cites.
     const bx = x + tableW + 0.4;
     const bw = h.area.x + h.area.w - bx;
-    h.text("reading-heading", "annot", "READING THE TABLE", { x: bx, y, w: bw, h: 0.3, fontSize: 9, bold: true, color: C.muted, charSpacing: 1, valign: "middle" });
+    h.text("reading-heading", "annot", "READING THE TABLE", { x: bx, y, w: bw, h: 0.3, fontSize: 11, bold: true, color: C.muted, charSpacing: 1, valign: "middle" });
     hairline(h, "reading-rule", "annot", bx, y + 0.34, bw);
     const noteH = 1.05;
     d.notes.forEach((n, i) => {

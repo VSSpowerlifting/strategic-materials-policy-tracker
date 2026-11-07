@@ -83,13 +83,13 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
         ...o.cells.map((c): TableCell => ({
           text: c?.qualifier ?? "",
           options: {
-            fontSize: 10, color: C.muted, valign: "middle", align: "left", margin: [0.04, 0.04, 0.04, 0.42],
+            fontSize: 11, color: C.muted, valign: "middle", align: "left", margin: [0.04, 0.04, 0.04, 0.42],
             fill: { color: i % 2 ? C.soft : C.paper }, border: [none, none, rule, none],
           },
         })),
       ]),
       [
-        { text: "Organisations in role", options: { fontSize: 10, bold: true, color: C.muted, valign: "middle", fill: { color: C.paper }, border: [rule, none, none, none] } },
+        { text: "Organisations in role", options: { fontSize: 11, bold: true, color: C.muted, valign: "middle", fill: { color: C.paper }, border: [rule, none, none, none] } },
         ...d.roles.map((_, j): TableCell => ({
           text: fmt(d.orgs.filter((o) => o.cells[j]).length),
           options: { fontSize: 11, bold: true, color: C.ink, align: "center", valign: "middle", fill: { color: C.paper }, border: [rule, none, none, none] },
@@ -113,7 +113,7 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
     const ky = y + headH + rowH * d.orgs.length + footH + 0.18;
     h.shape("role-key-mark", "legend", h.shapes.ellipse, { x, y: ky + 0.045, w: dia, h: dia, fill: { color: C.neutralDark }, line: { color: C.neutralDark, width: 1 } });
     h.text("role-key-label", "legend", "Holds the role in the source set; text beside the mark qualifies it. No amounts are shown.", {
-      x: x + 0.27, y: ky, w: 7.8, h: 0.26, fontSize: 10, color: C.ink, valign: "middle",
+      x: x + 0.27, y: ky, w: 7.8, h: 0.26, fontSize: 11, color: C.ink, valign: "middle",
     });
   },
 };

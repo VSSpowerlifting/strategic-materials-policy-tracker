@@ -65,13 +65,13 @@ export const dumbbell: Renderer<DumbbellData> = {
     lx = legendItem(h, "legend-from", lx, h.area.y, d.fromLabel, { fill: C.neutralLight }, 1.9);
     legendItem(h, "legend-to", lx, h.area.y, d.toLabel, { fill: C.accent }, 1.9);
     h.text("unit", "axis", d.unit, {
-      x: h.area.x + h.area.w - 3.2, y: h.area.y, w: 3.2, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: h.area.x + h.area.w - 3.2, y: h.area.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     vline(h, "baseline-zero", "axis", x0, top - 0.06, bottom - top + 0.06, C.border);
-    h.text("axis-zero", "axis", "0", { x: x0 - 0.3, y: bottom + 0.04, w: 0.6, h: 0.24, fontSize: 10, color: C.muted, align: "center" });
+    h.text("axis-zero", "axis", "0", { x: x0 - 0.3, y: bottom + 0.04, w: 0.6, h: 0.24, fontSize: 11, color: C.muted, align: "center" });
     h.text("axis-max", "axis", fmt(max, d.dp), {
-      x: sx(max) - 0.5, y: bottom + 0.04, w: 1, h: 0.24, fontSize: 10, color: C.muted, align: "center",
+      x: sx(max) - 0.5, y: bottom + 0.04, w: 1, h: 0.24, fontSize: 11, color: C.muted, align: "center",
     });
 
     items.forEach((it, i) => {
@@ -96,7 +96,7 @@ export const dumbbell: Renderer<DumbbellData> = {
       });
       const delta = it.to - it.from;
       h.text(`value-${i}`, "label", `${fmt(it.to, d.dp)} (${fmt(delta, d.dp, { sign: true })})`, {
-        x: sx(Math.max(it.from, it.to)) + 0.14, y: cy - 0.14, w: 1.5, h: 0.28, fontSize: 10, color: C.ink, valign: "middle",
+        x: sx(Math.max(it.from, it.to)) + 0.14, y: cy - 0.14, w: 1.5, h: 0.28, fontSize: 11, color: C.ink, valign: "middle",
       });
     });
   },

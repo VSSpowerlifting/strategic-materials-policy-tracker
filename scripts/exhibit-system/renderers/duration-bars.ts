@@ -75,9 +75,9 @@ export const durationBars: Renderer<DurationBarsData> = {
 
     // Zero baseline.
     vline(h, "baseline-zero", "axis", x0, top - 0.06, bottom - top + 0.06, C.neutral);
-    h.text("axis-zero", "axis", "0", { x: x0 - 0.3, y: bottom + 0.04, w: 0.6, h: 0.24, fontSize: 10, color: C.muted, align: "center" });
-    h.text("axis-max", "axis", `${fmt(max)} days`, { x: x1 - 0.7, y: bottom + 0.04, w: 1.4, h: 0.24, fontSize: 10, color: C.muted, align: "center" });
-    h.text("axis-note", "axis", "Bars start at zero days", { x: x0 + 0.5, y: bottom + 0.04, w: 2.4, h: 0.24, fontSize: 10, color: C.muted, align: "left" });
+    h.text("axis-zero", "axis", "0", { x: x0 - 0.3, y: bottom + 0.04, w: 0.6, h: 0.24, fontSize: 11, color: C.muted, align: "center" });
+    h.text("axis-max", "axis", `${fmt(max)} days`, { x: x1 - 0.7, y: bottom + 0.04, w: 1.4, h: 0.24, fontSize: 11, color: C.muted, align: "center" });
+    h.text("axis-note", "axis", "Bars start at zero days", { x: x0 + 0.5, y: bottom + 0.04, w: 2.4, h: 0.24, fontSize: 11, color: C.muted, align: "left" });
 
     items.forEach((it, i) => {
       const cy = top + rowH * (i + 0.5);
@@ -85,7 +85,7 @@ export const durationBars: Renderer<DurationBarsData> = {
       if (i > 0) hairline(h, `row-rule-${i}`, "axis", a.x, top + rowH * i, a.w, C.soft);
       h.text(`row-label-${i}`, "label", [
         { text: it.label, options: { fontSize: 11, color: C.ink, breakLine: true } },
-        { text: `${longDate(it.from)} → ${longDate(it.to)}`, options: { fontSize: 9, color: C.muted } },
+        { text: `${longDate(it.from)} → ${longDate(it.to)}`, options: { fontSize: 11, color: C.muted } },
       ], { x: a.x, y: cy - 0.22, w: labelW - 0.15, h: 0.44, valign: "middle" });
       const color = i === 0 ? C.accent : C.neutral;
       h.shape(`bar-${i}`, "data", h.shapes.rect, {
@@ -93,7 +93,7 @@ export const durationBars: Renderer<DurationBarsData> = {
       });
       h.text(`value-${i}`, "label", [
         { text: `${fmt(n)} days`, options: { bold: true, fontSize: 11, color: C.ink } },
-        { text: `  ${fmt(n / 30.4375, 1)} mo`, options: { fontSize: 10, color: C.muted } },
+        { text: `  ${fmt(n / 30.4375, 1)} mo`, options: { fontSize: 11, color: C.muted } },
       ], { x: sx(n) + 0.1, y: cy - 0.14, w: valueW + 0.5, h: 0.28, valign: "middle" });
     });
   },

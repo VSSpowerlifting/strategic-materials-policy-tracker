@@ -98,7 +98,7 @@ export const percentStacked: Renderer<PercentStackedData> = {
       lx = legendItem(h, `legend-${i}`, lx, h.area.y, c, { fill: colors[i], line: C.neutralDark }, 1.55);
     });
     h.text("unit", "axis", d.unit, {
-      x: h.area.x + h.area.w - 1.15 - 2.2, y: h.area.y, w: 2.1, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: h.area.x + h.area.w - 1.15 - 2.2, y: h.area.y, w: 2.1, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     const baseW = 1.15;
@@ -126,7 +126,7 @@ export const percentStacked: Renderer<PercentStackedData> = {
         dataBorder: { pt: 1, color: C.paper },
         showValue: true,
         dataLabelPosition: "ctr",
-        dataLabelFontSize: 10,
+        dataLabelFontSize: 11,
         dataLabelColor: C.ink,
         dataLabelFormatCode: `[<7]"";0"%"`,
         altText: `100% stacked bar chart of ${d.components.join(", ")}`,
@@ -137,7 +137,7 @@ export const percentStacked: Renderer<PercentStackedData> = {
     const py0 = box.y + lay.y * box.h;
     const rowH = (lay.h * box.h) / n;
     h.text("base-heading", "axis", `Base (${d.baseLabel})`, {
-      x: px1 + 0.12, y: h.area.y, w: baseW, h: 0.26, fontSize: 10, bold: true, color: C.muted,
+      x: px1 + 0.12, y: h.area.y, w: baseW, h: 0.26, fontSize: 11, bold: true, color: C.muted,
     });
     rows.forEach((r, i) => {
       h.text(`base-${i}`, "label", `n = ${fmt(r.n, 0)}`, {
@@ -145,7 +145,7 @@ export const percentStacked: Renderer<PercentStackedData> = {
       });
     });
     h.text("basis-note", "axis", `Labels under 7% omitted. ${note}`, {
-      x: h.area.x, y: h.area.y + h.area.h - 0.28, w: h.area.w, h: 0.26, fontSize: 10, color: C.muted,
+      x: h.area.x, y: h.area.y + h.area.h - 0.28, w: h.area.w, h: 0.26, fontSize: 11, color: C.muted,
     });
   },
 };

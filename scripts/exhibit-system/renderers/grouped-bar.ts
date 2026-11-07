@@ -77,7 +77,7 @@ export const groupedBar: Renderer<GroupedBarData> = {
       x = legendItem(h, `legend-${s}`, x, h.area.y, name, { fill: colours[s] }, 1.9);
     });
     h.text("unit", "axis", d.unit, {
-      x: h.area.x + h.area.w - 3.2, y: h.area.y, w: 3.2, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: h.area.x + h.area.w - 3.2, y: h.area.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
   },
 };

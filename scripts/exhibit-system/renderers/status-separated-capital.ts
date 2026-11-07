@@ -97,7 +97,7 @@ export const statusSeparatedCapital: Renderer<StatusCapitalData> = {
     lx = legendItem(h, "legend-binding", lx, h.area.y, "Binding", { fill: C.neutral }, 1.2);
     legendItem(h, "legend-later", lx, h.area.y, "Drawn or spent", { fill: C.neutralDark }, 1.75);
     h.text("unit", "axis", `${d.unit} · one scale for every panel · "—" = no amount stated`, {
-      x: h.area.x + h.area.w - 6.2, y: h.area.y, w: 6.2, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: h.area.x + h.area.w - 6.2, y: h.area.y, w: 6.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
     hairline(h, "header-rule", "axis", h.area.x, top - 0.08, h.area.w, C.border);
@@ -108,7 +108,7 @@ export const statusSeparatedCapital: Renderer<StatusCapitalData> = {
         x: px + inset, y: h.area.y + 0.4, w: panelW - inset, h: 0.26, fontSize: 12, bold: true, color: C.ink,
       });
       h.text(`panel-note-${p}`, "axis", HOLLOW.has(s) ? "not yet binding" : s === "binding" ? "legal commitment" : "money moved", {
-        x: px + inset, y: h.area.y + 0.62, w: panelW - inset, h: 0.2, fontSize: 9, color: C.muted,
+        x: px + inset, y: h.area.y + 0.62, w: panelW - inset, h: 0.2, fontSize: 11, color: C.muted,
       });
     });
 

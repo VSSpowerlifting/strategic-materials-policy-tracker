@@ -78,7 +78,7 @@ export const histogram: Renderer<HistogramData> = {
         valAxisMaxVal: yMax,
         showValue: true,
         dataLabelPosition: "outEnd",
-        dataLabelFontSize: 10,
+        dataLabelFontSize: 11,
         dataLabelFormatCode: "#,##0",
         altText: `Histogram of ${d.measure}, ${d.bins.length} bins of width ${width}`,
       }),
@@ -90,14 +90,14 @@ export const histogram: Renderer<HistogramData> = {
     for (let i = 0; i <= n; i++) {
       const v = i === n ? d.bins[n - 1].to : d.bins[i].from;
       h.text(`edge-label-${i}`, "axis", fmt(v, d.dp), {
-        x: edgeX(i) - 0.35, y: g.plot.y + g.plot.h + 0.05, w: 0.7, h: 0.24, fontSize: 10, color: C.muted, align: "center",
+        x: edgeX(i) - 0.35, y: g.plot.y + g.plot.h + 0.05, w: 0.7, h: 0.24, fontSize: 11, color: C.muted, align: "center",
       });
     }
     if (d.reference) {
       const x = g.sx(d.reference.value);
       h.line("reference-line", "annot", { x, y: g.plot.y, w: 0, h: g.plot.h, line: { color: C.accent, width: 1.5, dashType: "dash" } });
       h.text("reference-label", "annot", d.reference.label, {
-        x: x + 0.08, y: g.plot.y + 0.02, w: 1.9, h: 0.26, fontSize: 10, bold: true, color: C.accent, align: "left",
+        x: x + 0.08, y: g.plot.y + 0.02, w: 1.9, h: 0.26, fontSize: 11, bold: true, color: C.accent, align: "left",
       });
     }
   },

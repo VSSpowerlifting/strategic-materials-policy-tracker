@@ -125,11 +125,11 @@ export const criterionMatrix: Renderer<CriterionMatrixData> = {
     });
     // Key for the four marks, below the table.
     const ky = y + headH + rowH * d.criteria.length + 0.2;
-    h.text("mark-key-title", "legend", "Marks", { x, y: ky, w: 0.6, h: 0.26, fontSize: 10, bold: true, color: C.muted, valign: "middle" });
+    h.text("mark-key-title", "legend", "Marks", { x, y: ky, w: 0.6, h: 0.26, fontSize: 11, bold: true, color: C.muted, valign: "middle" });
     MARKS.forEach((m, k) => {
       const kx = x + 0.7 + k * 1.55;
       markGlyph(h, `key-${k + 1}`, m, kx + GLYPH_D / 2, ky + 0.13);
-      h.text(`key-label-${k + 1}`, "legend", m, { x: kx + 0.27, y: ky, w: 1.2, h: 0.26, fontSize: 10, color: C.ink, valign: "middle" });
+      h.text(`key-label-${k + 1}`, "legend", m, { x: kx + 0.27, y: ky, w: 1.2, h: 0.26, fontSize: 11, color: C.ink, valign: "middle" });
     });
   },
 };

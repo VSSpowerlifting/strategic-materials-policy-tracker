@@ -15,9 +15,9 @@ import PptxGenJS from "pptxgenjs";
 import path from "node:path";
 import { loadDeckSpec, loadFixture, loadRegistry } from "./registry";
 import { RENDERERS } from "./renderers";
-import { contentArea, C, drawFrame, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, FONT } from "./primitives";
+import { contentArea, C, DRAFT_BADGE, drawFrame, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, FONT } from "./primitives";
 import { DEMO_DECK_SPEC, DEMO_PPTX, GALLERY_PPTX, MANIFEST_FILE, REPO } from "./paths";
-import type { ElementRecord, Fixture, PptxSlide } from "./types";
+import type { ElementRecord, ExhibitClassification, Fixture, PptxSlide } from "./types";
 
 
 interface Pptx {
@@ -49,28 +49,52 @@ const FIXED_ISO = "2026-01-01T00:00:00Z";
 export interface DeckEntry { fixture: Fixture; label: string }
 export interface SlideManifest { slide: number; pattern: string; elements: ElementRecord[] }
 
-function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[]): void {
+export interface BuildOptions {
+  /** Every entry must carry this classification; a deck never mixes synthetic and research slides. */
+  classification: ExhibitClassification;
+  /** Research decks only: repository-relative path of the QC handoff record, if one exists. */
+  qcRecord?: string;
+}
+
+function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
+  const synthetic = opts.classification === "synthetic-demonstration";
   const slide = pptx.addSlide();
   slide.background = { color: C.dark };
   const h = makeHelpers(slide, { x: 0, y: 0, w: SLIDE_W, h: SLIDE_H }, records, pptx.ShapeType, pptx.ChartType);
-  h.text("cover-kicker", "frame", "STRATEGIC MATERIALS POLICY TRACKER · EXHIBIT SYSTEM", {
+  h.text("cover-kicker", "frame", synthetic ? "STRATEGIC MATERIALS POLICY TRACKER · EXHIBIT SYSTEM" : "STRATEGIC MATERIALS POLICY TRACKER", {
     x: 0.8, y: 1.6, w: 11.5, h: 0.35, fontSize: 12, bold: true, color: C.gold, charSpacing: 1.5,
   });
   h.text("cover-title", "frame", title, { x: 0.8, y: 2.1, w: 11.5, h: 1.4, fontSize: 36, bold: true, color: C.paper, valign: "top" });
   h.text("cover-lines", "frame", lines.map((t, i) => ({ text: t, options: { breakLine: i < lines.length - 1 } })), {
     x: 0.8, y: 3.8, w: 11.0, h: 1.6, fontSize: 14, color: "D8D3C7", valign: "top", paraSpaceAfter: 6,
   });
-  h.text("cover-notice", "frame", SYNTHETIC_NOTICE, {
+  const notice = synthetic ? SYNTHETIC_NOTICE : opts.qcRecord ? `QC record: ${opts.qcRecord}` : DRAFT_BADGE;
+  h.text("cover-notice", "frame", notice, {
     x: 0.8, y: 6.6, w: 11.5, h: 0.3, fontSize: 11, bold: true, color: C.gold,
   });
-  slide.addNotes("Cover. Classification: synthetic-demonstration. Contains no SMPT research finding.");
+  slide.addNotes(
+    synthetic
+      ? "Cover. Classification: synthetic-demonstration. Contains no SMPT research finding."
+      : `Cover. Classification: research. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`,
+  );
 }
 
 export async function buildDeck(
   entries: DeckEntry[],
   cover: { title: string; lines: string[] },
   outFile: string,
+  opts: BuildOptions = { classification: "synthetic-demonstration" },
 ): Promise<SlideManifest[]> {
+  const mixed = entries.filter((e) => e.fixture.classification !== opts.classification);
+  if (mixed.length) {
+    throw new Error(
+      `exhibit build refused — a ${opts.classification} deck cannot contain ${mixed[0].fixture.classification} slides (${mixed.map((e) => e.fixture.pattern).join(", ")})`,
+    );
+  }
+  if (opts.qcRecord && opts.classification !== "research") {
+    throw new Error("exhibit build refused — a QC record applies only to research decks");
+  }
+  const synthetic = opts.classification === "synthetic-demonstration";
   const Pptx = PptxGenJS as unknown as PptxCtor;
   const pptx = new Pptx();
   pptx.defineLayout({ name: "SMPT_WIDE", width: SLIDE_W, height: SLIDE_H });
@@ -78,12 +102,12 @@ export async function buildDeck(
   pptx.author = "SMPT exhibit system";
   pptx.company = "Strategic Materials Policy Tracker";
   pptx.title = cover.title;
-  pptx.subject = "Synthetic demonstration exhibits — not SMPT findings";
+  pptx.subject = synthetic ? "Synthetic demonstration exhibits — not SMPT findings" : "SMPT research exhibits";
   pptx.theme = { headFontFace: FONT, bodyFontFace: FONT };
 
   const manifest: SlideManifest[] = [];
   const coverRecords: ElementRecord[] = [];
-  coverSlide(pptx, cover.title, cover.lines, coverRecords);
+  coverSlide(pptx, cover.title, cover.lines, coverRecords, opts);
   manifest.push({ slide: 1, pattern: "cover", elements: coverRecords });
 
   const problems: string[] = [];
@@ -101,14 +125,21 @@ export async function buildDeck(
     slide.background = { color: C.paper };
     const records: ElementRecord[] = [];
     const h = makeHelpers(slide, contentArea(e.fixture), records, pptx.ShapeType, pptx.ChartType);
-    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture });
+    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, qcRecorded: Boolean(opts.qcRecord) });
     renderer.render(h, data, e.fixture);
     slide.addNotes(
-      [
-        `Pattern: ${e.fixture.pattern}.`,
-        `Classification: ${e.fixture.classification}. ${SYNTHETIC_NOTICE}.`,
-        "Every name and number on this slide is invented to demonstrate the exhibit pattern.",
-      ].join(" "),
+      synthetic
+        ? [
+            `Pattern: ${e.fixture.pattern}.`,
+            `Classification: ${e.fixture.classification}. ${SYNTHETIC_NOTICE}.`,
+            "Every name and number on this slide is invented to demonstrate the exhibit pattern.",
+          ].join(" ")
+        : [
+            `Pattern: ${e.fixture.pattern}.`,
+            "Classification: research.",
+            `Evidence: ${(e.fixture.evidence_refs ?? []).join("; ")}.`,
+            opts.qcRecord ? `QC record: ${opts.qcRecord}.` : "Review gates A–E pending.",
+          ].join(" "),
     );
     manifest.push({ slide: slideNumber, pattern: e.fixture.pattern, elements: records });
   });

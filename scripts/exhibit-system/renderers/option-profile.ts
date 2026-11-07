@@ -75,7 +75,7 @@ export const optionProfile: Renderer<OptionProfileData> = {
     const rows: TableCell[][] = [
       [hdr("Option"), ...d.options.map((o) => hdr(o.label))],
       ...fields.map(([name, get], i): TableCell[] => [
-        { text: name, options: { fontSize: 10, bold: true, color: C.muted, valign: "middle", fill: { color: C.paper }, border: [none, none, rule, none] } },
+        { text: name, options: { fontSize: 11, bold: true, color: C.muted, valign: "middle", fill: { color: C.paper }, border: [none, none, rule, none] } },
         ...d.options.map((o): TableCell => ({
           text: get(o),
           options: {

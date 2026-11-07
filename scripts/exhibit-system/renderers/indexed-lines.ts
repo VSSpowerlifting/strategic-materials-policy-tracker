@@ -101,7 +101,7 @@ export const indexedLines: Renderer<IndexedLinesData> = {
         valAxisLabelFormatCode: formatCode(0),
         valGridLine: { color: "E9E5DC", size: 0.5 },
         catAxisLabelFrequency: 2,
-        catAxisLabelFontSize: 10,
+        catAxisLabelFontSize: 11,
         altText: `Indexed line chart, base = 100 at ${base}`,
       }),
     );
@@ -110,7 +110,7 @@ export const indexedLines: Renderer<IndexedLinesData> = {
       x: a.x, y: a.y, w: 4.5, h: 0.26, fontSize: 11, bold: true, color: C.ink,
     });
     h.text("raw-caption", "axis", `Computed from raw ${d.rawUnit}`, {
-      x: a.x + a.w - 4, y: a.y, w: 4, h: 0.26, fontSize: 10, color: C.muted, align: "right",
+      x: a.x + a.w - 4, y: a.y, w: 4, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
     // Base-100 reference line, positioned at the index value 100.
     hairline(h, "base-100-line", "annot", px, sy(100) - 0.006, pw, C.neutral);

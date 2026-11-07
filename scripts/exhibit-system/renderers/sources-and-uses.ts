@@ -95,7 +95,7 @@ export const sourcesAndUses: Renderer<SourcesUsesData> = {
     place(d.sources, "left");
     place(d.uses, "right");
     h.text("total", "label", `Total ${fmt(total, d.dp)} on each side · ${d.unit}`, {
-      x: area.x, y: h.area.y + h.area.h - 0.34, w: chartW, h: 0.26, fontSize: 10, color: C.muted, align: "center",
+      x: area.x, y: h.area.y + h.area.h - 0.34, w: chartW, h: 0.26, fontSize: 11, color: C.muted, align: "center",
     });
   },
 };

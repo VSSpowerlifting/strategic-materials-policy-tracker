@@ -70,7 +70,7 @@ export const locationTable: Renderer<LocationTableData> = {
     const rule = { type: "solid", pt: 0.5, color: C.border };
     const none = { type: "none" };
     const hdr = (text: string, align: "left" | "right" = "left"): TableCell => ({
-      text, options: { bold: true, fontSize: 10.5, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
+      text, options: { bold: true, fontSize: 11, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
     });
     const rows: TableCell[][] = [[hdr("Site"), hdr("Region"), hdr("Stage"), hdr("Status"), hdr("Capacity", "right"), hdr("Capacity unit")]];
     const groups = [...new Set(d.sites.map((s) => s.jurisdiction))];
@@ -79,12 +79,12 @@ export const locationTable: Renderer<LocationTableData> = {
       rows.push([
         {
           text: `${g}  ·  ${members.length} ${members.length === 1 ? "site" : "sites"}`,
-          options: { colspan: 6, bold: true, fontSize: 10.5, color: C.ink, fill: { color: C.soft }, valign: "middle", border: [rule, none, rule, none] },
+          options: { colspan: 6, bold: true, fontSize: 11, color: C.ink, fill: { color: C.soft }, valign: "middle", border: [rule, none, rule, none] },
         },
       ]);
       for (const s of members) {
         const cell = (text: string, extra: Record<string, unknown> = {}): TableCell => ({
-          text, options: { fontSize: 10.5, valign: "middle", fill: { color: C.paper }, border: [none, none, rule, none], ...extra },
+          text, options: { fontSize: 11, valign: "middle", fill: { color: C.paper }, border: [none, none, rule, none], ...extra },
         });
         rows.push([
           cell(s.id, { bold: true }),
@@ -96,6 +96,6 @@ export const locationTable: Renderer<LocationTableData> = {
         ]);
       }
     }
-    h.table("location-table", rows, { x, y, w, colW, rowH: Math.min(0.32, h.area.h / rows.length), fontSize: 10.5, margin: [0.03, 0.08, 0.03, 0.08] });
+    h.table("location-table", rows, { x, y, w, colW, rowH: Math.min(0.32, h.area.h / rows.length), fontSize: 11, margin: [0.03, 0.08, 0.03, 0.08] });
   },
 };

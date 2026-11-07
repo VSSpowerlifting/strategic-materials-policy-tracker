@@ -97,7 +97,7 @@ export const valueChainMeasured: Renderer<ValueChainData> = {
     });
     hairline(h, "baseline-zero", "axis", A.x, baseline, A.w, C.neutralDark);
     h.text("unit", "axis", `${d.unit} · bars start at zero · one scale across stages`, {
-      x: A.x, y: baseline + 0.06, w: A.w, h: 0.24, fontSize: 10, color: C.muted, align: "left",
+      x: A.x, y: baseline + 0.06, w: A.w, h: 0.24, fontSize: 11, color: C.muted, align: "left",
     });
   },
 };

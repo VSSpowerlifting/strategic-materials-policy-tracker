@@ -46,12 +46,74 @@ const CONTENT_TOP = 2.62;
 export const SPLIT_AREA: Area = { x: LEFT, y: CONTENT_TOP, w: 8.75, h: 4.15 };
 export const WIDE_AREA: Area = { x: LEFT, y: CONTENT_TOP, w: RIGHT_EDGE - LEFT, h: 3.42 };
 
+/**
+ * Type scale in points, from Presentation Standard v2 (type ranges) and the accepted master.
+ * The assertion title stays at the master's 26 pt; the standard's 28-34 pt range is a known
+ * deviation recorded in the exhibit-system README.
+ */
+export const TYPE = {
+  title: 26,
+  subtitle: 14,
+  body: 16, // interpretation panel (split layout)
+  strip: 15, // interpretation strip (wide layout)
+  label: 12, // preferred data label
+  axis: 11,
+  dense: 11, // smallest exhibit text: axis ticks, legends, dense node labels
+  footnote: 10, // source line, badges, kicker-style headings
+} as const;
+
+/**
+ * Smallest permitted size by element role. makeHelpers refuses anything smaller, so a
+ * renderer (or a research spec) cannot ship type below the standard's floors.
+ */
+export const MIN_PT: Readonly<Record<ElementRole, number>> = {
+  frame: TYPE.footnote,
+  annot: TYPE.footnote,
+  data: TYPE.dense,
+  label: TYPE.dense,
+  axis: TYPE.dense,
+  legend: TYPE.dense,
+};
+
+function num(v: unknown): number | undefined {
+  return typeof v === "number" && Number.isFinite(v) ? v : undefined;
+}
+
+/** Every explicit font size on an element: the base option, per-run or per-cell overrides, chart *FontSize keys. */
+export function fontSizesOf(kind: "text" | "chart" | "table", options: Opts, content?: unknown): number[] {
+  const out: number[] = [];
+  const push = (v: unknown) => {
+    const n = num(v);
+    if (n !== undefined) out.push(n);
+  };
+  if (kind === "chart") {
+    for (const [k, v] of Object.entries(options)) if (k.endsWith("FontSize")) push(v);
+    return out;
+  }
+  push(options.fontSize);
+  if (kind === "text" && Array.isArray(content)) {
+    for (const r of content as TextRun[]) push(r.options?.fontSize);
+  }
+  if (kind === "table" && Array.isArray(content)) {
+    for (const row of content as TableCell[][]) for (const c of row) push(c.options?.fontSize);
+  }
+  return out;
+}
+
 export const SYNTHETIC_NOTICE = "Synthetic demonstration data — not an SMPT finding";
+
+/** Badge on research slides until a QC record is attached. */
+export const DRAFT_BADGE = "DRAFT · REVIEW GATES PENDING";
 
 export interface FrameSpec {
   label: string;
   slideNumber: number;
   fixture: Fixture;
+  /**
+   * Research slides only: true when the deck spec names an existing QC record.
+   * It removes the draft badge; it is not evidence that the gates passed.
+   */
+  qcRecorded?: boolean;
 }
 
 /** Element-recording helper factory. Every object gets a role-prefixed `objectName`. */
@@ -69,18 +131,28 @@ export function makeHelpers(
     used.add(full);
     return full;
   };
+  const sized = (objectName: string, role: ElementRole, sizes: number[]): number | undefined => {
+    if (!sizes.length) return undefined;
+    const min = Math.min(...sizes);
+    if (min < MIN_PT[role]) {
+      throw new Error(`type below the ${MIN_PT[role]} pt floor for role "${role}": ${objectName} uses ${min} pt`);
+    }
+    return min;
+  };
   return {
     area,
     shapes: shapeTypes,
     charts: chartTypes,
     chart(name, type, data: ChartSeries[], options: Opts, helper = false) {
       const objectName = nm("data", name);
+      const minPt = sized(objectName, "data", fontSizesOf("chart", options));
       slide.addChart(type, data, { ...options, objectName, altText: options.altText ?? name });
       records.push({
         name: objectName,
         role: "data",
         tier: helper ? "native-chart-with-helper-series" : "native-chart",
         kind: "chart",
+        ...(minPt === undefined ? {} : { minPt }),
       });
     },
     shape(name, role, shape, options) {
@@ -95,13 +167,15 @@ export function makeHelpers(
     },
     text(name, role, text: string | TextRun[], options) {
       const objectName = nm(role, name);
+      const minPt = sized(objectName, role, fontSizesOf("text", options, text));
       slide.addText(text, { fontFace: FONT, color: C.ink, margin: 0, ...options, objectName });
-      records.push({ name: objectName, role, tier: "text", kind: "text" });
+      records.push({ name: objectName, role, tier: "text", kind: "text", ...(minPt === undefined ? {} : { minPt }) });
     },
     table(name, rows: TableCell[][], options) {
       const objectName = nm("data", name);
+      const minPt = sized(objectName, "data", fontSizesOf("table", options, rows));
       slide.addTable(rows, { fontFace: FONT, color: C.ink, ...options, objectName });
-      records.push({ name: objectName, role: "data", tier: "table", kind: "table" });
+      records.push({ name: objectName, role: "data", tier: "table", kind: "table", ...(minPt === undefined ? {} : { minPt }) });
     },
   };
 }
@@ -119,46 +193,53 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
   h.text("section-label", "frame", spec.label, {
     x: LEFT, y: 0.35, w: 8.6, h: 0.3, fontSize: 11, bold: true, color: C.accent, charSpacing: 1,
   });
-  h.text("synthetic-badge", "frame", "SYNTHETIC DEMONSTRATION DATA", {
-    x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: 9, bold: true, color: C.muted, align: "right", charSpacing: 1,
-  });
+  const synthetic = f.classification === "synthetic-demonstration";
+  if (synthetic) {
+    h.text("synthetic-badge", "frame", "SYNTHETIC DEMONSTRATION DATA", {
+      x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.muted, align: "right", charSpacing: 1,
+    });
+  } else if (!spec.qcRecorded) {
+    h.text("draft-badge", "frame", DRAFT_BADGE, {
+      x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.accent, align: "right", charSpacing: 1,
+    });
+  }
   h.text("slide-number", "frame", String(spec.slideNumber), {
     x: 12.0, y: 0.35, w: 0.67, h: 0.3, fontSize: 11, color: C.muted, align: "right",
   });
   h.text("title", "frame", f.title, {
-    x: LEFT, y: 0.84, w: 12.05, h: 1.14, fontSize: 26, bold: true, color: C.ink, valign: "top", fit: "none",
+    x: LEFT, y: 0.84, w: 12.05, h: 1.14, fontSize: TYPE.title, bold: true, color: C.ink, valign: "top", fit: "none",
   });
   h.text("subtitle", "frame", f.subtitle, {
-    x: LEFT, y: 2.02, w: 12.05, h: 0.38, fontSize: 13, color: C.muted, valign: "top",
+    x: LEFT, y: 2.02, w: 12.05, h: 0.38, fontSize: TYPE.subtitle, color: C.muted, valign: "top",
   });
   for (const [n, y] of [["rule-top", 2.47], ["rule-bottom", 6.91]] as const) {
     h.shape(n, "frame", h.shapes.rect, {
       x: LEFT, y, w: 12.05, h: 0.015, fill: { color: C.border }, line: { color: C.border, width: 0 },
     });
   }
-  h.text("source-footer", "frame", `Source: ${f.source} · ${SYNTHETIC_NOTICE}`, {
-    x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: 9, color: C.muted, valign: "top",
+  h.text("source-footer", "frame", synthetic ? `Source: ${f.source} · ${SYNTHETIC_NOTICE}` : `Source: ${f.source}`, {
+    x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: TYPE.footnote, color: C.muted, valign: "top",
   });
 
   if (wide) {
     const y = WIDE_AREA.y + WIDE_AREA.h + 0.16;
     h.shape("interpretation-bar", "annot", h.shapes.rect, {
-      x: LEFT, y, w: 0.05, h: 0.55, fill: { color: C.accent }, line: { color: C.accent, width: 0 },
+      x: LEFT, y, w: 0.05, h: 0.62, fill: { color: C.accent }, line: { color: C.accent, width: 0 },
     });
     h.text("interpretation", "annot", [
-      { text: "INTERPRETATION  ", options: { bold: true, color: C.accent, fontSize: 9, charSpacing: 1 } },
-      { text: f.annotation, options: { color: C.ink, fontSize: 13 } },
-    ], { x: LEFT + 0.2, y, w: 11.85, h: 0.55, valign: "middle" });
+      { text: "INTERPRETATION  ", options: { bold: true, color: C.accent, fontSize: TYPE.footnote, charSpacing: 1 } },
+      { text: f.annotation, options: { color: C.ink, fontSize: TYPE.strip } },
+    ], { x: LEFT + 0.2, y, w: 11.85, h: 0.62, valign: "middle" });
   } else {
     const x = 9.62;
     h.shape("interpretation-bar", "annot", h.shapes.rect, {
       x, y: CONTENT_TOP, w: 0.05, h: 1.1, fill: { color: C.accent }, line: { color: C.accent, width: 0 },
     });
     h.text("interpretation-heading", "annot", "INTERPRETATION", {
-      x: x + 0.2, y: CONTENT_TOP, w: 2.85, h: 0.26, fontSize: 9, bold: true, color: C.accent, charSpacing: 1,
+      x: x + 0.2, y: CONTENT_TOP, w: 2.85, h: 0.26, fontSize: TYPE.footnote, bold: true, color: C.accent, charSpacing: 1,
     });
     h.text("interpretation", "annot", f.annotation, {
-      x: x + 0.2, y: CONTENT_TOP + 0.34, w: 2.85, h: 3.8, fontSize: 13, color: C.ink, valign: "top",
+      x: x + 0.2, y: CONTENT_TOP + 0.34, w: 2.85, h: 3.8, fontSize: TYPE.body, color: C.ink, valign: "top",
       paraSpaceAfter: 4,
     });
   }
@@ -178,10 +259,10 @@ export function chartDefaults(area: Area, extra: Opts = {}): Opts {
     plotArea: { fill: { color: C.paper } },
     chartArea: { fill: { color: C.paper }, roundedCorners: false },
     catAxisLabelFontFace: FONT,
-    catAxisLabelFontSize: 11,
+    catAxisLabelFontSize: TYPE.axis,
     catAxisLabelColor: C.ink,
     valAxisLabelFontFace: FONT,
-    valAxisLabelFontSize: 10,
+    valAxisLabelFontSize: TYPE.axis,
     valAxisLabelColor: C.muted,
     catAxisLineShow: true,
     catAxisLineColor: C.border,
@@ -190,10 +271,10 @@ export function chartDefaults(area: Area, extra: Opts = {}): Opts {
     catGridLine: { style: "none" },
     showLegend: false,
     legendFontFace: FONT,
-    legendFontSize: 10,
+    legendFontSize: TYPE.dense,
     legendColor: C.ink,
     dataLabelFontFace: FONT,
-    dataLabelFontSize: 11,
+    dataLabelFontSize: TYPE.label,
     dataLabelColor: C.ink,
     titleFontFace: FONT,
     ...extra,
@@ -249,7 +330,7 @@ export function legendItem(
     fill: style.fill ? { color: style.fill } : { color: C.paper, transparency: 100 },
     line: { color: style.line ?? style.fill ?? C.ink, width: 1, dashType: style.dash ?? "solid" },
   });
-  h.text(`${name}-label`, "legend", label, { x: x + 0.3, y, w: width - 0.3, h: 0.26, fontSize: 10, color: C.ink });
+  h.text(`${name}-label`, "legend", label, { x: x + 0.3, y, w: width - 0.3, h: 0.26, fontSize: TYPE.dense, color: C.ink });
   return x + width;
 }
 
