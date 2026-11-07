@@ -1,0 +1,45 @@
+{
+  "id": "status-separated-capital",
+  "name": "Status-separated capital panels",
+  "family_code": "D",
+  "order": 3,
+  "reader_question": "How much money sits at each transaction status, and how much of it has actually become binding or moved?",
+  "relationship": "Amounts split by status in separate panels on one unit; a status is never added to another.",
+  "question_types": ["composition", "state"],
+  "requires": ["status-stages", "single-measure"],
+  "incompatible": ["additive-movements"],
+  "capacity": { "min_items": 2, "max_items": 5, "what": "rows (3 to 5 status panels)" },
+  "use_when": [
+    "Announced, authorized, binding and drawn amounts are all stated and must not be conflated",
+    "The reader needs to see where an amount stops progressing through the status taxonomy"
+  ],
+  "avoid_when": [
+    "Statuses are not in the SMPT taxonomy",
+    "Amounts are in different currencies or on different bases — use parallel-basis-panels",
+    "A single total is requested — this pattern refuses to show one"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "One unit and currency for every panel" },
+    { "field": "statuses[]", "type": "taxonomy string[3..5]", "notes": "Taxonomy words in taxonomy order, one panel each" },
+    { "field": "rows[].label / rows[].amounts[]", "type": "string / (number ≥ 0 | null)[]", "notes": "One amount per status; null means no amount stated, never zero" },
+    { "field": "total / sum (forbidden)", "type": "absent", "notes": "A cross-status total at data or row level fails integrity" }
+  ],
+  "units": "One currency and unit; the scale is shared across panels and starts at zero. Nothing is added across panels.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Bar shapes, labels, dashes and fills", "Panel titles and legend", "Frame text"],
+    "not_data_bound": ["Bar lengths are drawn on a computed scale; values are not data-bound and no workbook is embedded", "Hollow dashed outlines mark statuses before binding"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/status-separated-capital.ts",
+  "fixture": "fixtures/status-separated-capital.json",
+  "integrity_rules": ["controlled-vocabulary", "min-categories", "max-categories", "unique-labels", "aligned-series", "magnitude-nonnegative", "status-order", "no-cross-status-total"],
+  "table_alternative": "A table of rows by status with blank cells for amounts not stated.",
+  "variations": ["Per-programme panels in place of per-organisation rows", "Status history as dated steps"],
+  "limitations": ["A later status is not a subset of an earlier one unless the source says so, so bars are not read as conversion rates", "Only taxonomy statuses are drawn; stages beyond expenditure need a different exhibit"],
+  "excluded_alternatives": [
+    { "form": "Stacked bar of statuses", "reason": "Stacking adds amounts at different statuses into one total, which SMPT rules prohibit" },
+    { "form": "Funnel", "reason": "Implies each status is a subset of the previous one and invites conversion-rate readings" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

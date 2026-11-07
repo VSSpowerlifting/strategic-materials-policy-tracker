@@ -1,0 +1,102 @@
+{
+  "id": "dependency-network",
+  "name": "Dependency network",
+  "family_code": "J",
+  "order": 5,
+  "reader_question": "Which organisations, projects and programmes depend on which, and what is the path between two of them?",
+  "relationship": "Directed acyclic network laid out in computed layers; edges are declared dependencies, one path is highlighted.",
+  "question_types": [
+    "relationship",
+    "flow"
+  ],
+  "requires": [
+    "edges"
+  ],
+  "incompatible": [
+    "quantified-flows"
+  ],
+  "capacity": {
+    "min_items": 4,
+    "max_items": 12,
+    "what": "nodes (at most 20 edges)"
+  },
+  "use_when": [
+    "Declared links between named entities explain an exposure or a chain of supply or funding",
+    "One path carries the message"
+  ],
+  "avoid_when": [
+    "Link sizes matter — use conversion-flow or sources-and-uses",
+    "The graph has cycles or hundreds of nodes — use a table of links"
+  ],
+  "data_contract": [
+    {
+      "field": "edgeMeaning",
+      "type": "string",
+      "notes": "What an arrow means, shown in the legend"
+    },
+    {
+      "field": "nodes[].id / label / type",
+      "type": "string / Organisation | Project | Programme",
+      "notes": "Up to 12 nodes"
+    },
+    {
+      "field": "edges[].from / to",
+      "type": "string",
+      "notes": "Up to 20 directed edges between adjacent computed layers; no duplicates, no cycles"
+    },
+    {
+      "field": "highlightPath",
+      "type": "string[]",
+      "notes": "Node ids; every consecutive pair must be a declared edge"
+    }
+  ],
+  "units": "No quantities; edges carry no weight.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": [
+      "Node boxes, arrows and labels as native shapes and text",
+      "Highlighted path colour",
+      "Frame text"
+    ],
+    "not_data_bound": [
+      "Nodes and edges are drawn shapes at computed positions; arrows are not PowerPoint connectors and do not follow moved boxes"
+    ],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/dependency-network.ts",
+  "fixture": "fixtures/dependency-network.json",
+  "integrity_rules": [
+    "min-categories",
+    "max-categories",
+    "unique-labels",
+    "controlled-vocabulary",
+    "edges-resolve",
+    "no-duplicate-edges",
+    "path-follows-edges",
+    "no-cycles",
+    "edges-adjacent-layers"
+  ],
+  "table_alternative": "An edge list (source, target, relationship).",
+  "variations": [
+    "Columns by entity type instead of computed layer",
+    "Edge labels where a source names each relationship"
+  ],
+  "limitations": [
+    "Edges must join adjacent layers; add the intermediate node otherwise",
+    "Layout is a deterministic heuristic and may not minimise crossings for dense graphs",
+    "A drawn link is a declared dependency, not evidence of its size or importance"
+  ],
+  "excluded_alternatives": [
+    {
+      "form": "Force-directed network",
+      "reason": "Positions carry no meaning and change between builds"
+    },
+    {
+      "form": "Sankey",
+      "reason": "Implies quantified flow; the edges here are unweighted"
+    }
+  ],
+  "references": [
+    "smpt-repertoire-2026"
+  ]
+}

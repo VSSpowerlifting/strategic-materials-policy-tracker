@@ -8,7 +8,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { arr, ContractError, num, obj, oneOf, str, strList } from "./contract";
+import { arr, ContractError, num, obj, oneOf, optStr, str, strList } from "./contract";
 import { DEMO_DECK_SPEC, FIXTURES_DIR, PATTERNS_DIR, REGISTRY_FILE, REPO } from "./paths";
 import { EDITABILITY_TIERS, type EditabilityTier, type Fixture } from "./types";
 
@@ -257,7 +257,8 @@ export function loadFixture(stem: string): Fixture {
 export interface DeckSpec {
   title: string;
   cover_lines: string[];
-  slides: { fixture: string; label: string }[];
+  /** `table_reason` records why a table-tier exhibit is the right choice (deck review asks for it). */
+  slides: { fixture: string; label: string; table_reason?: string }[];
 }
 
 export function loadDeckSpec(file = DEMO_DECK_SPEC): DeckSpec {
@@ -267,7 +268,11 @@ export function loadDeckSpec(file = DEMO_DECK_SPEC): DeckSpec {
     cover_lines: strList(o.cover_lines, "deck.cover_lines"),
     slides: arr(o.slides, "deck.slides").map((s, i) => {
       const so = obj(s, `deck.slides[${i}]`);
-      return { fixture: str(so.fixture, `deck.slides[${i}].fixture`), label: str(so.label, `deck.slides[${i}].label`) };
+      return {
+        fixture: str(so.fixture, `deck.slides[${i}].fixture`),
+        label: str(so.label, `deck.slides[${i}].label`),
+        table_reason: optStr(so.table_reason, `deck.slides[${i}].table_reason`),
+      };
     }),
   };
 }

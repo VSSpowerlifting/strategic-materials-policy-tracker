@@ -1,13 +1,26 @@
 {
   "title": "SMPT exhibit system — demonstration deck",
   "cover_lines": [
-    "A short argument built from registered exhibit patterns",
+    "A short argument built from registered exhibit patterns, one family question per slide",
     "Every name, number and date is synthetic demonstration data"
   ],
   "slides": [
     { "fixture": "ranked-bar", "label": "DEMONSTRATION · COMPARISON" },
     { "fixture": "dumbbell", "label": "DEMONSTRATION · CHANGE" },
+    { "fixture": "two-lane-timeline", "label": "DEMONSTRATION · SEQUENCE" },
+    { "fixture": "stage-ladder", "label": "DEMONSTRATION · STATUS" },
+    { "fixture": "status-separated-capital", "label": "DEMONSTRATION · CAPITAL STATUS" },
     { "fixture": "waterfall", "label": "DEMONSTRATION · RECONCILIATION" },
-    { "fixture": "sources-and-uses", "label": "DEMONSTRATION · FINANCING" }
+    { "fixture": "sources-and-uses", "label": "DEMONSTRATION · FINANCING" },
+    { "fixture": "range-interval", "label": "DEMONSTRATION · UNCERTAINTY" },
+    { "fixture": "threshold-scatter", "label": "DEMONSTRATION · RELATIONSHIP" },
+    { "fixture": "tornado", "label": "DEMONSTRATION · SENSITIVITY" },
+    { "fixture": "evidence-milestone-strip", "label": "DEMONSTRATION · EVIDENCE" },
+    { "fixture": "dependency-network", "label": "DEMONSTRATION · STRUCTURE" },
+    {
+      "fixture": "criterion-matrix",
+      "label": "DEMONSTRATION · DECISION",
+      "table_reason": "The reader must check each option against each criterion; a marked matrix keeps every pass and fail visible where a chart would reduce them to a score."
+    }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "pattern": "stage-ladder",
+  "classification": "synthetic-demonstration",
+  "title": "Measure 1 in Jurisdiction A has reached four of five stages; implementation is not yet reached",
+  "subtitle": "Process stages in order with the date each was reached; dashed = not yet reached",
+  "annotation": "Entry into force is the latest stage reached. Implementation has no date and is not assumed to follow on a schedule.",
+  "source": "Synthetic fixture stage-ladder.json, constructed for the exhibit gallery",
+  "visual_text": ["Consultation", "Entry into force", "5 Mar 2030", "1 Apr 2031", "not yet reached"],
+  "data": {
+    "asOf": "2031-06-30",
+    "stages": [
+      { "label": "Proposal", "date": "2030-03-05" },
+      { "label": "Consultation", "date": "2030-06-12" },
+      { "label": "Adoption", "date": "2030-11-20" },
+      { "label": "Entry into force", "date": "2031-04-01" },
+      { "label": "Implementation", "date": null }
+    ]
+  }
+}

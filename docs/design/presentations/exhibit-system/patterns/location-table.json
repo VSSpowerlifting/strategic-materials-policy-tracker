@@ -1,0 +1,44 @@
+{
+  "id": "location-table",
+  "name": "Location table",
+  "family_code": "K",
+  "order": 5,
+  "reader_question": "Which sites sit in which jurisdiction, at what stage and status, with what stated capacity?",
+  "relationship": "Sites grouped by jurisdiction; stage, status and capacity are attributes, not positions.",
+  "question_types": ["lookup", "state"],
+  "requires": ["locations", "status-stages"],
+  "incompatible": ["quantified-flows"],
+  "capacity": { "min_items": 3, "max_items": 10, "what": "sites (up to 4 jurisdiction groups)" },
+  "use_when": [
+    "The reader needs to find a site and read its status, and no claim depends on geographic distance",
+    "Capacity is stated per site in its own unit"
+  ],
+  "avoid_when": [
+    "The point is spatial clustering or proximity and the source supplies sound coordinates — commission a real map",
+    "Capacity must be summed across units — it cannot be; use a single-unit chart"
+  ],
+  "data_contract": [
+    { "field": "sites[].id", "type": "string", "notes": "Unique site identifier" },
+    { "field": "sites[].jurisdiction / region", "type": "string / string (≤22 chars)", "notes": "Grouping key and region label" },
+    { "field": "sites[].stage / status", "type": "string (≤20 chars) / transaction status", "notes": "Status from the transaction taxonomy" },
+    { "field": "sites[].capacity / unit", "type": "number ≥ 0 or null / string (≤26 chars)", "notes": "Stated capacity in its own unit; null renders as Not stated" }
+  ],
+  "units": "Each row carries its own capacity unit; no total is computed or shown.",
+  "editability": {
+    "tier": "table",
+    "editable": ["Native table: rows, group header rows, status text, fills", "Frame text"],
+    "not_data_bound": [],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/location-table.ts",
+  "fixture": "fixtures/location-table.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "controlled-vocabulary", "sorted-order", "magnitude-nonnegative", "cell-length"],
+  "table_alternative": "The pattern is itself the table.",
+  "variations": ["Add a column for co-located organisations", "Single-jurisdiction site register"],
+  "limitations": ["No coordinates or distances", "Ten sites is the legible limit on one slide"],
+  "excluded_alternatives": [
+    { "form": "Bubble map sized by capacity", "reason": "Decorative when no claim depends on position, and implies a common capacity scale across units" },
+    { "form": "Choropleth by jurisdiction", "reason": "Colours area for a measure the sources state per site" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

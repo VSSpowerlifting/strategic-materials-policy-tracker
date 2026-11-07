@@ -1,0 +1,21 @@
+{
+  "pattern": "location-table",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction B lists four demonstration sites, but only one is operational",
+  "subtitle": "Sites by jurisdiction, stage and status; capacity in each site's own unit, not comparable across rows",
+  "annotation": "A table replaces a map because no claim here depends on distance or position. Capacity units differ between sites and are never added up.",
+  "source": "Synthetic fixture location-table.json, constructed for the exhibit gallery",
+  "visual_text": ["Site 4", "Jurisdiction B", "Operational", "1,200", "Not stated"],
+  "data": {
+    "sites": [
+      { "id": "Site 1", "jurisdiction": "Jurisdiction A", "region": "Region A1", "stage": "Stage 1", "status": "operational", "capacity": 1200, "unit": "units per year" },
+      { "id": "Site 2", "jurisdiction": "Jurisdiction A", "region": "Region A2", "stage": "Stage 2", "status": "drawdown", "capacity": 450, "unit": "units per year" },
+      { "id": "Site 3", "jurisdiction": "Jurisdiction A", "region": "Region A1", "stage": "Stage 3", "status": "binding", "capacity": null, "unit": "units per year" },
+      { "id": "Site 4", "jurisdiction": "Jurisdiction B", "region": "Region B1", "stage": "Stage 1", "status": "operational", "capacity": 800, "unit": "units per year" },
+      { "id": "Site 5", "jurisdiction": "Jurisdiction B", "region": "Region B2", "stage": "Stage 1", "status": "authorization", "capacity": 600, "unit": "units per year" },
+      { "id": "Site 6", "jurisdiction": "Jurisdiction B", "region": "Region B2", "stage": "Stage 2", "status": "announcement", "capacity": 300, "unit": "batches per year" },
+      { "id": "Site 7", "jurisdiction": "Jurisdiction B", "region": "Region B3", "stage": "Stage 3", "status": "authorization", "capacity": 90, "unit": "batches per year" },
+      { "id": "Site 8", "jurisdiction": "Jurisdiction C", "region": "Region C1", "stage": "Stage 2", "status": "expenditure", "capacity": 220, "unit": "units per year" }
+    ]
+  }
+}

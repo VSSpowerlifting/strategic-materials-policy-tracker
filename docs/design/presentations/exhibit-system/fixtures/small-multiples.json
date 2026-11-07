@@ -1,0 +1,101 @@
+{
+  "pattern": "small-multiples",
+  "classification": "synthetic-demonstration",
+  "title": "Five of six jurisdictions ended above their first-half 2030 level; Jurisdiction D fell from 85 to 40",
+  "subtitle": "Half-yearly output by jurisdiction, units; every panel uses the same 0 to 100 axis",
+  "annotation": "Identical axes make slopes comparable across panels; Jurisdiction D is the only declining series.",
+  "source": "Synthetic fixture small-multiples.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": [
+    "Jurisdiction A",
+    "Jurisdiction D",
+    "Jurisdiction F",
+    "85",
+    "40",
+    "80"
+  ],
+  "data": {
+    "unit": "Units per quarter, output",
+    "dp": 0,
+    "axisMin": 0,
+    "axisMax": 100,
+    "majorUnit": 50,
+    "periods": [
+      "2030-H1",
+      "2030-H2",
+      "2031-H1",
+      "2031-H2",
+      "2032-H1",
+      "2032-H2"
+    ],
+    "panels": [
+      {
+        "title": "Jurisdiction A",
+        "values": [
+          30,
+          38,
+          45,
+          55,
+          62,
+          70
+        ]
+      },
+      {
+        "title": "Jurisdiction B",
+        "values": [
+          20,
+          25,
+          30,
+          42,
+          48,
+          55
+        ]
+      },
+      {
+        "title": "Jurisdiction C",
+        "values": [
+          70,
+          72,
+          68,
+          75,
+          78,
+          80
+        ]
+      },
+      {
+        "title": "Jurisdiction D",
+        "values": [
+          85,
+          80,
+          72,
+          62,
+          50,
+          40
+        ],
+        "highlight": true
+      },
+      {
+        "title": "Jurisdiction E",
+        "values": [
+          10,
+          15,
+          22,
+          30,
+          38,
+          45
+        ]
+      },
+      {
+        "title": "Jurisdiction F",
+        "values": [
+          50,
+          55,
+          48,
+          58,
+          52,
+          60
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "criterion-matrix",
+  "name": "Criterion matrix",
+  "family_code": "K",
+  "order": 1,
+  "reader_question": "Which options meet which stated criteria, and where is the evidence silent?",
+  "relationship": "Categorical assessment of each option against each criterion; no aggregation across criteria.",
+  "question_types": ["lookup", "decision"],
+  "requires": ["criteria"],
+  "incompatible": ["two-measures"],
+  "capacity": { "min_items": 2, "max_items": 7, "what": "criteria rows (2 to 4 options)" },
+  "use_when": [
+    "Each cell can be graded Meets, Partly, Does not or Not stated from a cited source",
+    "The reader needs to see evidential gaps next to failures"
+  ],
+  "avoid_when": [
+    "A weighted total or ranking is wanted — the tracker has no synthetic scores; use ranked-bar on a sourced measure",
+    "Criteria are quantities on a shared unit — use a native table or bar chart"
+  ],
+  "data_contract": [
+    { "field": "options[]", "type": "string[] (2-4, ≤20 chars)", "notes": "Column labels" },
+    { "field": "accent", "type": "string (optional)", "notes": "One option to highlight; must be an option label" },
+    { "field": "criteria[].label", "type": "string (≤40 chars)", "notes": "Row label, unique" },
+    { "field": "criteria[].marks[]", "type": "Meets | Partly | Does not | Not stated", "notes": "One mark per option, in option order" }
+  ],
+  "units": "No units: categorical marks only. Weights, scores and totals are rejected.",
+  "editability": {
+    "tier": "table",
+    "editable": ["Native table: labels, marks, fills", "Frame text"],
+    "not_data_bound": ["The circle glyphs (filled, half, hollow, dashed) are native shapes positioned over the mark cells from fixed row heights; changing a mark in the table does not move or redraw its glyph"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/criterion-matrix.ts",
+  "fixture": "fixtures/criterion-matrix.json",
+  "integrity_rules": ["no-numeric-score", "min-categories", "max-categories", "unique-labels", "aligned-series", "cell-length", "accent-resolves"],
+  "table_alternative": "The native table itself, with the glyph column removed and marks as text.",
+  "variations": ["Single-option dossier with evidence column", "Role-matrix when the cells name roles rather than grades"],
+  "limitations": ["Four fixed marks; finer grading would imply a scale the sources do not support", "Marks assert nothing beyond the cited statement; they do not combine into an overall verdict"],
+  "excluded_alternatives": [
+    { "form": "Harvey-ball scorecard with weighted total", "reason": "A total invents a cross-criterion scale and hides evidential gaps" },
+    { "form": "Radar chart of options", "reason": "Requires numeric scores on a common axis" }
+  ],
+  "references": ["strategyand-2018-exhibit-6", "smpt-repertoire-2026"]
+}

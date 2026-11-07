@@ -1,0 +1,43 @@
+{
+  "pattern": "annotated-line",
+  "classification": "synthetic-demonstration",
+  "title": "Output fell to a low of 96 in 2031-01, two months after Measure M took effect, then recovered to 117",
+  "subtitle": "Monthly output, units, 2030-01 to 2031-06; vertical axis 80 to 130 (not zero-based)",
+  "annotation": "Event lines mark dates only; the sequence does not establish that Measure M caused the fall or the recovery.",
+  "source": "Synthetic fixture annotated-line.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Measure M announced", "Measure M in force", "Programme P review", "2030-11-01", "96", "117"],
+  "data": {
+    "unit": "Units per month, output",
+    "dp": 0,
+    "axisMin": 80,
+    "axisMax": 130,
+    "majorUnit": 10,
+    "tickEvery": 3,
+    "points": [
+      { "date": "2030-01-01", "value": 112 },
+      { "date": "2030-02-01", "value": 114 },
+      { "date": "2030-03-01", "value": 115 },
+      { "date": "2030-04-01", "value": 117 },
+      { "date": "2030-05-01", "value": 118 },
+      { "date": "2030-06-01", "value": 116 },
+      { "date": "2030-07-01", "value": 113 },
+      { "date": "2030-08-01", "value": 111 },
+      { "date": "2030-09-01", "value": 108 },
+      { "date": "2030-10-01", "value": 106 },
+      { "date": "2030-11-01", "value": 104 },
+      { "date": "2030-12-01", "value": 99 },
+      { "date": "2031-01-01", "value": 96 },
+      { "date": "2031-02-01", "value": 98 },
+      { "date": "2031-03-01", "value": 103 },
+      { "date": "2031-04-01", "value": 109 },
+      { "date": "2031-05-01", "value": 113 },
+      { "date": "2031-06-01", "value": 117 }
+    ],
+    "events": [
+      { "date": "2030-05-15", "label": "Measure M announced" },
+      { "date": "2030-11-01", "label": "Measure M in force", "highlight": true },
+      { "date": "2031-03-01", "label": "Programme P review" }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "tornado",
+  "name": "Sensitivity tornado",
+  "family_code": "F",
+  "order": 1,
+  "reader_question": "Which input assumptions move a model output most, and by how much either way?",
+  "relationship": "One-at-a-time sensitivity: for each driver, the model's lowest and highest outcome around a base case, sorted by swing.",
+  "question_types": ["sensitivity"],
+  "requires": ["model-output", "single-measure", "intervals"],
+  "incompatible": ["sample"],
+  "capacity": { "min_items": 3, "max_items": 8, "what": "drivers" },
+  "use_when": [
+    "A model output exists with a stated base case and a low and high outcome for each driver",
+    "The reader needs the ranking of drivers by influence, labelled as model output"
+  ],
+  "avoid_when": [
+    "The figures are observed data rather than model output",
+    "Drivers interact strongly — one-at-a-time bars would mislead; show a sensitivity-grid for two drivers",
+    "Nothing in the record states the model's assumptions"
+  ],
+  "data_contract": [
+    { "field": "unit / baseLabel / base", "type": "string / string / number", "notes": "Output measure labelled as model output, and the base-case value" },
+    { "field": "drivers[].label", "type": "string", "notes": "Driver with its tested range, e.g. ±20%" },
+    { "field": "drivers[].low / high", "type": "number", "notes": "Lowest and highest outcome for that driver; low ≤ base ≤ high" }
+  ],
+  "units": "One output unit; bars are deviations from the base case, centred on it, with outcome values at the ends.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Stacked bar chart of deviations from base with embedded workbook (Edit Data)", "Bar colours", "Frame text"],
+    "not_data_bound": ["Chart series hold outcome minus base, not the outcomes themselves", "Outcome values at bar ends, the base-case label and the model-output tag are positioned text and shapes computed from the fixture"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/tornado.ts",
+  "fixture": "fixtures/tornado.json",
+  "integrity_rules": ["interval-ordered", "min-categories", "max-categories", "unique-labels"],
+  "table_alternative": "A table of drivers with tested range, low outcome, high outcome and swing.",
+  "variations": ["Per-scenario base cases in small multiples", "Two-driver view as a sensitivity-grid"],
+  "limitations": ["One-at-a-time variation hides interactions between drivers", "Bar length depends on the tested ranges chosen, which are assumptions"],
+  "excluded_alternatives": [
+    { "form": "Clustered bars of low and high", "reason": "Hides the shared base case and makes swing size hard to read" },
+    { "form": "Spider chart", "reason": "Many overlapping lines on a radial scale obscure the ranking" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

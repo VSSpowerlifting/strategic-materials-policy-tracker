@@ -64,7 +64,7 @@
     "strategyand-2018-exhibit-6": "Strategy&, Every Molecule (2018), p14, Exhibit 6: option comparisons",
     "smpt-repertoire-2026": "SMPT original repertoire examples (examples/05-visual-repertoire.svg)"
   },
-  "pattern_count": 4,
+  "pattern_count": 38,
   "patterns": [
     {
       "id": "ranked-bar",
@@ -170,6 +170,315 @@
       ]
     },
     {
+      "id": "ranked-dot",
+      "name": "Ranked dot plot",
+      "family_code": "A",
+      "family": "Comparison",
+      "order": 2,
+      "reader_question": "How do items rank on one measure when the differences are small relative to the level?",
+      "relationship": "Ordered comparison of single values on a shared axis that may start above zero; position, not length, carries the value.",
+      "question_types": [
+        "rank"
+      ],
+      "requires": [
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "parts-of-whole"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 12,
+        "what": "dots"
+      },
+      "use_when": [
+        "Bars would exaggerate small differences because every value sits far from zero",
+        "The reader needs the ordering and approximate gaps, with the axis range stated"
+      ],
+      "avoid_when": [
+        "The measure is an additive quantity whose size relative to zero matters — use ranked-bar",
+        "Items are measured on different bases or in different units"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit"
+        },
+        {
+          "field": "axisMin / axisMax / tickStep",
+          "type": "number",
+          "notes": "Stated axis range; every value must fall inside it"
+        },
+        {
+          "field": "items[].label / items[].value",
+          "type": "string / number",
+          "notes": "One dot per item"
+        },
+        {
+          "field": "items[].highlight",
+          "type": "boolean, optional",
+          "notes": "At most one accent dot"
+        }
+      ],
+      "units": "One unit and basis throughout; the non-zero axis range is printed on the slide.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Dots, guide lines, gridlines, tick labels and value labels as native shapes and text",
+          "Accent dot colour",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Dot positions are drawn on a computed scale; values are not data-bound and there is no embedded workbook",
+          "Editing a value means moving the dot and rewriting its label"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/ranked-dot.ts",
+      "fixture": "fixtures/ranked-dot.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "bounded-values",
+        "axis-range",
+        "single-highlight"
+      ],
+      "table_alternative": "A sorted table of item and value, with the measure and basis in the header.",
+      "variations": [
+        "Two-period dots on the same rows (dumbbell)",
+        "Dots with a reference line for a stated threshold"
+      ],
+      "limitations": [
+        "The axis does not start at zero, so gaps must not be read as proportions",
+        "Guide lines run from the axis start and are not bars"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Truncated-axis bar chart",
+          "reason": "Bar length from a non-zero baseline misstates proportions"
+        },
+        {
+          "form": "Lollipop on a zero-based axis",
+          "reason": "Compresses small differences into near-identical stems"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "grouped-bar",
+      "name": "Grouped bar",
+      "family_code": "A",
+      "family": "Comparison",
+      "order": 3,
+      "reader_question": "How do two or three comparable measures differ within each category?",
+      "relationship": "Side-by-side magnitudes of 2–3 series within each category on one zero-based axis.",
+      "question_types": [
+        "rank"
+      ],
+      "requires": [
+        "single-measure",
+        "several-series"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "parts-of-whole"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 6,
+        "what": "categories (2 or 3 series)"
+      },
+      "use_when": [
+        "Each category has two or three values in the same unit and at the same cut-off",
+        "Within-category contrast matters more than a total"
+      ],
+      "avoid_when": [
+        "Series are parts of a whole — use a composition form",
+        "There are more than three series or six categories — use a table or small-multiples"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit shared by all series"
+        },
+        {
+          "field": "series[]",
+          "type": "string[2..3]",
+          "notes": "Series names, in legend order"
+        },
+        {
+          "field": "categories[].label",
+          "type": "string",
+          "notes": "Category name"
+        },
+        {
+          "field": "categories[].values[]",
+          "type": "number ≥ 0",
+          "notes": "One value per series, same order as series"
+        }
+      ],
+      "units": "One unit throughout; the value axis starts at zero.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Clustered column chart with embedded workbook (Edit Data)",
+          "Series colours",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Legend chips and the unit caption are native shapes and text, not chart elements"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/grouped-bar.ts",
+      "fixture": "fixtures/grouped-bar.json",
+      "integrity_rules": [
+        "magnitude-nonnegative",
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "series-count",
+        "aligned-series"
+      ],
+      "table_alternative": "A category-by-series table with the unit in the header.",
+      "variations": [
+        "Horizontal grouping for long category names",
+        "Highlighting one series in the accent colour"
+      ],
+      "limitations": [
+        "Three series across six categories is the legible limit",
+        "Series are neutral tones; order in the legend carries identity"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Stacked bar",
+          "reason": "Implies the series sum to a meaningful total"
+        },
+        {
+          "form": "Dual-axis combination",
+          "reason": "Two axes invite false visual correlation"
+        }
+      ],
+      "references": [
+        "bcg-sia-2022-exhibit-6",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "range-interval",
+      "name": "Range interval with point estimate",
+      "family_code": "A",
+      "family": "Comparison",
+      "order": 4,
+      "reader_question": "What range does the source state for each item, and where does its point estimate sit?",
+      "relationship": "Per-item stated low–high range with a point estimate inside it, on one zero-based scale.",
+      "question_types": [
+        "uncertainty",
+        "rank"
+      ],
+      "requires": [
+        "single-measure",
+        "intervals"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "model-output"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 8,
+        "what": "ranges"
+      },
+      "use_when": [
+        "A source states a low, a high and a point value for each item",
+        "The width of the stated range is part of the finding"
+      ],
+      "avoid_when": [
+        "The range is a statistical confidence interval derived from a sample — use a distribution form",
+        "Only point values exist — use ranked-bar"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit"
+        },
+        {
+          "field": "axisMax",
+          "type": "number, optional",
+          "notes": "Upper axis bound; defaults to a rounded value above the largest high"
+        },
+        {
+          "field": "items[].label",
+          "type": "string",
+          "notes": "Item name"
+        },
+        {
+          "field": "items[].low / point / high",
+          "type": "number ≥ 0",
+          "notes": "Stated figures; must satisfy low ≤ point ≤ high"
+        },
+        {
+          "field": "items[].highlight",
+          "type": "boolean, optional",
+          "notes": "At most one accent range"
+        }
+      ],
+      "units": "One unit throughout; the scale starts at zero.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Range bars, point markers and labels as native shapes and text",
+          "Accent colour",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Range and marker geometry is drawn on a computed scale; values are not data-bound and there is no embedded workbook",
+          "Editing a figure means resizing the bar, moving the marker and rewriting its labels"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/range-interval.ts",
+      "fixture": "fixtures/range-interval.json",
+      "integrity_rules": [
+        "magnitude-nonnegative",
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "interval-ordered",
+        "bounded-values",
+        "single-highlight"
+      ],
+      "table_alternative": "A table of item, low, point estimate and high.",
+      "variations": [
+        "Ranges with an overlaid reference line",
+        "Ranges at two cut-offs on separate rows"
+      ],
+      "limitations": [
+        "The range is whatever the source states; it carries no probability",
+        "Overlapping ranges do not establish a ranking"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Error bars on a bar chart",
+          "reason": "Suggest a statistical interval around a measured mean that the source does not provide"
+        },
+        {
+          "form": "Fan chart",
+          "reason": "Implies a forecast distribution over time"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
       "id": "dumbbell",
       "name": "Two-observation dumbbell",
       "family_code": "B",
@@ -257,6 +566,749 @@
       ],
       "references": [
         "mckinsey-2025-two-period-rank",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "slope",
+      "name": "Two-period slope chart",
+      "family_code": "B",
+      "family": "Change between two observations",
+      "order": 2,
+      "reader_question": "How did each item move between two observations, and did any item change rank?",
+      "relationship": "Per-item change between two observations of one measure; line slope shows direction and relative movement, crossings show rank changes.",
+      "question_types": [
+        "compare-two-observations",
+        "rank"
+      ],
+      "requires": [
+        "single-measure",
+        "two-observations"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "parts-of-whole"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 8,
+        "what": "lines"
+      },
+      "use_when": [
+        "Each item has a value at exactly two comparable cut-offs",
+        "Rank changes and direction matter more than exact differences"
+      ],
+      "avoid_when": [
+        "More than two observations exist — use annotated-line or small-multiples",
+        "The reader must compare exact magnitudes or gaps — use dumbbell on a zero-based axis"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit"
+        },
+        {
+          "field": "fromLabel / toLabel",
+          "type": "string",
+          "notes": "The two observation labels; must differ"
+        },
+        {
+          "field": "items[].label",
+          "type": "string",
+          "notes": "Item name"
+        },
+        {
+          "field": "items[].from / items[].to",
+          "type": "number",
+          "notes": "Value at each observation"
+        },
+        {
+          "field": "items[].highlight",
+          "type": "boolean, optional",
+          "notes": "At most one accent line"
+        }
+      ],
+      "units": "One unit and basis at both cut-offs; vertical position is linear in value between the lowest and highest value shown, with no zero baseline, and the slide says so.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Lines, end dots and labels as native shapes and text",
+          "Accent line colour and weight",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Line endpoints are drawn on a computed scale; values are not data-bound and there is no embedded workbook",
+          "End labels are separated vertically by a fixed minimum gap, so a label can sit slightly off its dot",
+          "Editing a value means moving the line end and rewriting its label"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/slope.ts",
+      "fixture": "fixtures/slope.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "single-highlight",
+        "distinct-periods"
+      ],
+      "table_alternative": "A table of item, first value, second value and change.",
+      "variations": [
+        "Dumbbell for exact gaps on a zero-based axis",
+        "Slope with a dashed line for items measured on a different basis"
+      ],
+      "limitations": [
+        "The vertical scale is not zero-based, so slopes compare direction, not proportional change",
+        "Up to eight lines before end labels crowd"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Grouped bars for two periods",
+          "reason": "Hides rank crossings and makes direction harder to see across many items"
+        },
+        {
+          "form": "Bump chart",
+          "reason": "Shows rank only and discards the size of the movement"
+        }
+      ],
+      "references": [
+        "mckinsey-2025-two-period-rank",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "annotated-line",
+      "name": "Annotated time series",
+      "family_code": "C",
+      "family": "Time series",
+      "order": 1,
+      "reader_question": "How did one measure move over time, and where do dated events fall on that path?",
+      "relationship": "One series over time with 1–3 dated events marked; sequence is shown, causation is not claimed.",
+      "question_types": [
+        "trend",
+        "sequence"
+      ],
+      "requires": [
+        "single-measure",
+        "time-axis",
+        "dated-events"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 8,
+        "max_items": 24,
+        "what": "points (1–3 event markers)"
+      },
+      "use_when": [
+        "One measure is observed at regular intervals and a few dated events bear on its reading",
+        "The reader should see timing of events against the level of the series"
+      ],
+      "avoid_when": [
+        "Several series must be compared — use indexed-lines or small-multiples",
+        "More than three events matter — use a timeline or milestone form"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit"
+        },
+        {
+          "field": "axisMin / axisMax / majorUnit",
+          "type": "number",
+          "notes": "Explicit value axis; all values must fall inside it"
+        },
+        {
+          "field": "points[].date / points[].value",
+          "type": "ISO date / number",
+          "notes": "Regular observations, ascending and unique"
+        },
+        {
+          "field": "events[].date / events[].label",
+          "type": "ISO date / string",
+          "notes": "1–3 events inside the series span, ascending"
+        },
+        {
+          "field": "events[].highlight",
+          "type": "boolean, optional",
+          "notes": "At most one accent marker"
+        }
+      ],
+      "units": "One unit throughout; the value axis range is explicit and stated in the subtitle when it is not zero-based.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Line chart with embedded workbook (Edit Data)",
+          "Axis range and line colour",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Event hairlines and labels are native shapes positioned from the plot geometry and the event date, not bound to the chart",
+          "First, last and lowest value labels are positioned text; changing the data requires moving them",
+          "Positions assume the chart's manual plot layout and explicit axis range are kept"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/annotated-line.ts",
+      "fixture": "fixtures/annotated-line.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "dates-ascending",
+        "unique-labels",
+        "bounded-values",
+        "event-count",
+        "axis-range",
+        "event-in-range",
+        "single-highlight"
+      ],
+      "table_alternative": "A dated table of observations beside a dated event list.",
+      "variations": [
+        "Shaded span for a stated period instead of a single date",
+        "Indexed series when the level is not the point"
+      ],
+      "limitations": [
+        "Event lines show timing only and do not establish cause",
+        "Event dates between observations are interpolated along the category axis"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Dual-axis line with an event series",
+          "reason": "Two axes invite false visual correlation"
+        },
+        {
+          "form": "Area chart",
+          "reason": "Fills imply a cumulative total the series does not represent"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "small-multiples",
+      "name": "Small multiples on a shared axis",
+      "family_code": "C",
+      "family": "Time series",
+      "order": 2,
+      "reader_question": "How do several items' paths over time compare when each gets its own panel?",
+      "relationship": "The same measure over the same periods for 4–6 items, one panel each, on an identical value axis so slopes and levels compare directly.",
+      "question_types": [
+        "trend",
+        "rank"
+      ],
+      "requires": [
+        "single-measure",
+        "time-axis",
+        "several-series"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 6,
+        "what": "panels"
+      },
+      "use_when": [
+        "Overlaid lines would tangle but the reader must still compare shapes and levels",
+        "All panels share one unit, period set and basis"
+      ],
+      "avoid_when": [
+        "Only two or three series exist — use indexed-lines",
+        "Panels differ in unit or basis, which would force different axes"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit shared by every panel"
+        },
+        {
+          "field": "axisMin / axisMax / majorUnit",
+          "type": "number",
+          "notes": "One value axis applied to every panel; all values must fall inside it"
+        },
+        {
+          "field": "periods[]",
+          "type": "string[≥4]",
+          "notes": "Shared period labels"
+        },
+        {
+          "field": "panels[].title / panels[].values[]",
+          "type": "string / number[]",
+          "notes": "One value per period"
+        },
+        {
+          "field": "panels[].highlight",
+          "type": "boolean, optional",
+          "notes": "At most one accent panel"
+        }
+      ],
+      "units": "One unit throughout; identical axis minimum, maximum and tick step in every panel, stated in the subtitle.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "One native line chart per panel, each with an embedded workbook (Edit Data)",
+          "Panel titles and last-value labels as text",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "The shared axis is enforced by the renderer; after editing one panel's axis the others must be matched by hand",
+          "Panel titles and last-value labels are text boxes, not chart elements"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/small-multiples.ts",
+      "fixture": "fixtures/small-multiples.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "bounded-values",
+        "aligned-series",
+        "axis-range",
+        "single-highlight"
+      ],
+      "table_alternative": "A matrix of item by period with the unit in the header.",
+      "variations": [
+        "Column panels for discrete counts",
+        "A reference line at a stated threshold in every panel"
+      ],
+      "limitations": [
+        "A shared axis can flatten the smallest series",
+        "Six panels is the legible limit at slide size"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Free-scaled panels",
+          "reason": "Different axes make equal-looking slopes mean different things"
+        },
+        {
+          "form": "Single chart with six overlaid lines",
+          "reason": "Crossing lines hide individual paths"
+        }
+      ],
+      "references": [
+        "mckinsey-2025-small-multiples",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "indexed-lines",
+      "name": "Indexed lines, base = 100",
+      "family_code": "C",
+      "family": "Time series",
+      "order": 3,
+      "reader_question": "How have series of different sizes changed relative to a common starting point?",
+      "relationship": "Each series rebased to 100 at one stated base period, so relative change is comparable and level differences drop out.",
+      "question_types": [
+        "trend",
+        "compare-two-observations"
+      ],
+      "requires": [
+        "time-axis",
+        "several-series"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 4,
+        "what": "series (6–24 periods)"
+      },
+      "use_when": [
+        "Series share a period set but differ greatly in level",
+        "Relative change since a stated base period is the question"
+      ],
+      "avoid_when": [
+        "Absolute levels matter — use small-multiples or annotated-line",
+        "A series is zero or negative at the base period"
+      ],
+      "data_contract": [
+        {
+          "field": "rawUnit",
+          "type": "string",
+          "notes": "Unit of the raw values the index is computed from"
+        },
+        {
+          "field": "periods[]",
+          "type": "string[6..24]",
+          "notes": "Shared period labels"
+        },
+        {
+          "field": "baseIndex",
+          "type": "integer",
+          "notes": "Position of the base period in periods; every series equals 100 there"
+        },
+        {
+          "field": "series[].name / series[].values[]",
+          "type": "string / number[] > 0",
+          "notes": "Raw values, one per period; the renderer computes the index"
+        },
+        {
+          "field": "series[].highlight",
+          "type": "boolean, optional",
+          "notes": "At most one accent line"
+        }
+      ],
+      "units": "Index points, base = 100 at the stated period; the base period and the raw unit are printed on the slide.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Line chart with embedded workbook holding the computed index (Edit Data)",
+          "Series colours",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "The workbook holds index values, not the raw values; changing raw data means recomputing the index",
+          "End labels and the base-100 reference line are positioned shapes and text, not chart elements"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/indexed-lines.ts",
+      "fixture": "fixtures/indexed-lines.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "series-count",
+        "base-period-valid",
+        "base-positive",
+        "aligned-series",
+        "single-highlight"
+      ],
+      "table_alternative": "A table of raw values and index values by period for each series.",
+      "variations": [
+        "Rebasing at a policy date instead of the first period",
+        "Index with the raw end values in a side table"
+      ],
+      "limitations": [
+        "The choice of base period changes every line's shape",
+        "An index conveys relative change only and hides which series is larger"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Dual-axis lines",
+          "reason": "Two axes invite false visual correlation between series of different size"
+        },
+        {
+          "form": "Raw-value lines on one axis",
+          "reason": "Large series flatten small ones and hide relative change"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "stacked-bar",
+      "name": "Stacked bar (absolute composition)",
+      "family_code": "D",
+      "family": "Composition",
+      "order": 1,
+      "reader_question": "How large is each total, and how is it divided among a few components of the same measure?",
+      "relationship": "Part-to-whole in absolute units: components of one additive measure add to a stated total per bar.",
+      "question_types": [
+        "composition"
+      ],
+      "requires": [
+        "parts-of-whole",
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "status-stages"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 6,
+        "what": "bars (up to 4 components each)"
+      },
+      "use_when": [
+        "Components are the same measure and genuinely additive",
+        "The absolute size of each total matters as much as its mix"
+      ],
+      "avoid_when": [
+        "Components are unlike instruments or statuses that must not be added — use status-separated-capital",
+        "Only the mix matters and totals differ widely — use percent-stacked",
+        "More than four components or six bars — use a table or ranked-bar"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit, one for every component"
+        },
+        {
+          "field": "components[]",
+          "type": "string[2..4]",
+          "notes": "Component names in stacking order"
+        },
+        {
+          "field": "accent",
+          "type": "string (optional)",
+          "notes": "At most one highlighted component"
+        },
+        {
+          "field": "rows[].label / rows[].values[]",
+          "type": "string / number[] ≥ 0",
+          "notes": "One value per component; bar totals are derived"
+        }
+      ],
+      "units": "One additive unit; the axis starts at zero and is hidden, with a bar-end total instead.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Stacked bar chart with embedded workbook (Edit Data)",
+          "Segment colours and number format",
+          "Legend and frame text"
+        ],
+        "not_data_bound": [
+          "Bar-end totals and the omitted-label note are positioned text computed from the fixture; editing chart data does not update them",
+          "Segment labels below the threshold are hidden by a number-format condition, not deleted"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/stacked-bar.ts",
+      "fixture": "fixtures/stacked-bar.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "aligned-series",
+        "magnitude-nonnegative"
+      ],
+      "table_alternative": "A table of rows by component with a total column, for exact lookup of every segment.",
+      "variations": [
+        "Column orientation for time-ordered totals",
+        "Percent-stacked when only shares matter"
+      ],
+      "limitations": [
+        "Only the bottom component shares a baseline, so inner segments are hard to compare across bars",
+        "Narrow segments are unlabelled and must be read from the table alternative"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Pie or donut per bar",
+          "reason": "Splits one comparison across several shapes and defeats comparing totals"
+        },
+        {
+          "form": "Stacked bar of statuses",
+          "reason": "Statuses are not additive; status-separated-capital keeps them apart"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "percent-stacked",
+      "name": "100% stacked bar (relative composition)",
+      "family_code": "D",
+      "family": "Composition",
+      "order": 2,
+      "reader_question": "How does the mix of a measure differ across groups, and how large is each group's base?",
+      "relationship": "Part-to-whole as shares: each row sums to 100% of its own base, shown beside the bar.",
+      "question_types": [
+        "composition"
+      ],
+      "requires": [
+        "parts-of-whole",
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "status-stages"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 6,
+        "what": "bars (up to 4 components each)"
+      },
+      "use_when": [
+        "The mix matters more than the absolute total",
+        "Row bases differ and the reader needs to see by how much"
+      ],
+      "avoid_when": [
+        "Absolute size is the point — use stacked-bar",
+        "Row shares do not sum to 100 and cannot be derived from counts"
+      ],
+      "data_contract": [
+        {
+          "field": "unit / baseLabel",
+          "type": "string",
+          "notes": "Share unit and what each base n counts"
+        },
+        {
+          "field": "input",
+          "type": "\"shares\" | \"counts\"",
+          "notes": "Shares must sum to 100 per row; counts are converted to shares and the derivation is stated on the slide"
+        },
+        {
+          "field": "components[] / accent",
+          "type": "string[2..4] / string (optional)",
+          "notes": "Stacking order and at most one highlighted component"
+        },
+        {
+          "field": "rows[].label / n / values[]",
+          "type": "string / number > 0 / number[] ≥ 0",
+          "notes": "n is required for shares and derived for counts"
+        }
+      ],
+      "units": "Per cent of each row's own base; the axis is fixed at 0–100% and hidden.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "100% stacked bar chart with embedded workbook (Edit Data)",
+          "Segment colours and number format",
+          "Legend and frame text"
+        ],
+        "not_data_bound": [
+          "Row bases (n) and the basis note are positioned text computed from the fixture",
+          "Labels below 7% are hidden by a number-format condition, not deleted"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/percent-stacked.ts",
+      "fixture": "fixtures/percent-stacked.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "aligned-series",
+        "magnitude-nonnegative",
+        "sums-to-total",
+        "base-stated"
+      ],
+      "table_alternative": "A table of counts and shares per row with the base in its own column.",
+      "variations": [
+        "Counts input with shares derived on the slide",
+        "Column orientation for time-ordered rows"
+      ],
+      "limitations": [
+        "Shares from small bases are volatile; the base is shown but not a confidence interval",
+        "Equal bar lengths can read as equal totals"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Pie charts per group",
+          "reason": "Many slices and no common baseline make cross-group comparison unreliable"
+        },
+        {
+          "form": "Absolute stacked bar",
+          "reason": "Unequal totals hide the difference in mix; see stacked-bar when size matters"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "status-separated-capital",
+      "name": "Status-separated capital panels",
+      "family_code": "D",
+      "family": "Composition",
+      "order": 3,
+      "reader_question": "How much money sits at each transaction status, and how much of it has actually become binding or moved?",
+      "relationship": "Amounts split by status in separate panels on one unit; a status is never added to another.",
+      "question_types": [
+        "composition",
+        "state"
+      ],
+      "requires": [
+        "status-stages",
+        "single-measure"
+      ],
+      "incompatible": [
+        "additive-movements"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 5,
+        "what": "rows (3 to 5 status panels)"
+      },
+      "use_when": [
+        "Announced, authorized, binding and drawn amounts are all stated and must not be conflated",
+        "The reader needs to see where an amount stops progressing through the status taxonomy"
+      ],
+      "avoid_when": [
+        "Statuses are not in the SMPT taxonomy",
+        "Amounts are in different currencies or on different bases — use parallel-basis-panels",
+        "A single total is requested — this pattern refuses to show one"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "One unit and currency for every panel"
+        },
+        {
+          "field": "statuses[]",
+          "type": "taxonomy string[3..5]",
+          "notes": "Taxonomy words in taxonomy order, one panel each"
+        },
+        {
+          "field": "rows[].label / rows[].amounts[]",
+          "type": "string / (number ≥ 0 | null)[]",
+          "notes": "One amount per status; null means no amount stated, never zero"
+        },
+        {
+          "field": "total / sum (forbidden)",
+          "type": "absent",
+          "notes": "A cross-status total at data or row level fails integrity"
+        }
+      ],
+      "units": "One currency and unit; the scale is shared across panels and starts at zero. Nothing is added across panels.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Bar shapes, labels, dashes and fills",
+          "Panel titles and legend",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Bar lengths are drawn on a computed scale; values are not data-bound and no workbook is embedded",
+          "Hollow dashed outlines mark statuses before binding"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/status-separated-capital.ts",
+      "fixture": "fixtures/status-separated-capital.json",
+      "integrity_rules": [
+        "controlled-vocabulary",
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "aligned-series",
+        "magnitude-nonnegative",
+        "status-order",
+        "no-cross-status-total"
+      ],
+      "table_alternative": "A table of rows by status with blank cells for amounts not stated.",
+      "variations": [
+        "Per-programme panels in place of per-organisation rows",
+        "Status history as dated steps"
+      ],
+      "limitations": [
+        "A later status is not a subset of an earlier one unless the source says so, so bars are not read as conversion rates",
+        "Only taxonomy statuses are drawn; stages beyond expenditure need a different exhibit"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Stacked bar of statuses",
+          "reason": "Stacking adds amounts at different statuses into one total, which SMPT rules prohibit"
+        },
+        {
+          "form": "Funnel",
+          "reason": "Implies each status is a subset of the previous one and invites conversion-rate readings"
+        }
+      ],
+      "references": [
         "smpt-repertoire-2026"
       ]
     },
@@ -448,6 +1500,2428 @@
       ],
       "references": [
         "bain-pe-2025-figure-2",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "parallel-basis-panels",
+      "name": "Parallel panels for non-comparable bases",
+      "family_code": "E",
+      "family": "Reconciliation",
+      "order": 3,
+      "reader_question": "How do the same subjects compare on bases that cannot share an axis or a total?",
+      "relationship": "Side-by-side comparison across independent bases; each panel has its own zero-based axis and unit.",
+      "question_types": [
+        "rank",
+        "compare-two-observations"
+      ],
+      "requires": [
+        "non-comparable-bases"
+      ],
+      "incompatible": [
+        "additive-movements",
+        "parts-of-whole"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 6,
+        "what": "bars per panel (2 or 3 panels)"
+      },
+      "use_when": [
+        "Funding, capacity and counts describe the same subjects but cannot be added or indexed together",
+        "The reader should see that rankings differ by basis"
+      ],
+      "avoid_when": [
+        "Two panels carry the same basis — they are one chart",
+        "A combined score or total is wanted; this pattern refuses to imply one"
+      ],
+      "data_contract": [
+        {
+          "field": "panels[].basis / unit",
+          "type": "string",
+          "notes": "Distinct basis name and its unit; identical bases are rejected"
+        },
+        {
+          "field": "panels[].items[]",
+          "type": "{label, value ≥ 0}[3..6]",
+          "notes": "Each panel orders its own bars by value"
+        },
+        {
+          "field": "accent",
+          "type": "string (optional)",
+          "notes": "One subject highlighted consistently across panels"
+        }
+      ],
+      "units": "Each panel has its own unit and zero-based axis; no value is compared across panels.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "One bar chart per panel with embedded workbook (Edit Data)",
+          "Bar colours and number formats",
+          "Panel headings and frame text"
+        ],
+        "not_data_bound": [
+          "Panel headings, unit lines and separator rules are text and shapes drawn from the fixture"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/parallel-basis-panels.ts",
+      "fixture": "fixtures/parallel-basis-panels.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "distinct-bases",
+        "magnitude-nonnegative",
+        "single-highlight"
+      ],
+      "table_alternative": "A matrix of subjects by basis with the unit in each column heading.",
+      "variations": [
+        "Two panels for a before-and-after basis change",
+        "Dot plots per panel for many subjects"
+      ],
+      "limitations": [
+        "Bar lengths are not comparable between panels and a shared bar scale would mislead",
+        "Differing ranks do not explain why the bases differ"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Dual-axis chart",
+          "reason": "A second axis implies a relationship and invites false crossings"
+        },
+        {
+          "form": "Composite index or radar",
+          "reason": "Weights bases that cannot be added; SMPT has no synthetic scores"
+        }
+      ],
+      "references": [
+        "strategyand-2018-exhibit-6",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "tornado",
+      "name": "Sensitivity tornado",
+      "family_code": "F",
+      "family": "Sensitivity",
+      "order": 1,
+      "reader_question": "Which input assumptions move a model output most, and by how much either way?",
+      "relationship": "One-at-a-time sensitivity: for each driver, the model's lowest and highest outcome around a base case, sorted by swing.",
+      "question_types": [
+        "sensitivity"
+      ],
+      "requires": [
+        "model-output",
+        "single-measure",
+        "intervals"
+      ],
+      "incompatible": [
+        "sample"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 8,
+        "what": "drivers"
+      },
+      "use_when": [
+        "A model output exists with a stated base case and a low and high outcome for each driver",
+        "The reader needs the ranking of drivers by influence, labelled as model output"
+      ],
+      "avoid_when": [
+        "The figures are observed data rather than model output",
+        "Drivers interact strongly — one-at-a-time bars would mislead; show a sensitivity-grid for two drivers",
+        "Nothing in the record states the model's assumptions"
+      ],
+      "data_contract": [
+        {
+          "field": "unit / baseLabel / base",
+          "type": "string / string / number",
+          "notes": "Output measure labelled as model output, and the base-case value"
+        },
+        {
+          "field": "drivers[].label",
+          "type": "string",
+          "notes": "Driver with its tested range, e.g. ±20%"
+        },
+        {
+          "field": "drivers[].low / high",
+          "type": "number",
+          "notes": "Lowest and highest outcome for that driver; low ≤ base ≤ high"
+        }
+      ],
+      "units": "One output unit; bars are deviations from the base case, centred on it, with outcome values at the ends.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Stacked bar chart of deviations from base with embedded workbook (Edit Data)",
+          "Bar colours",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Chart series hold outcome minus base, not the outcomes themselves",
+          "Outcome values at bar ends, the base-case label and the model-output tag are positioned text and shapes computed from the fixture"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/tornado.ts",
+      "fixture": "fixtures/tornado.json",
+      "integrity_rules": [
+        "interval-ordered",
+        "min-categories",
+        "max-categories",
+        "unique-labels"
+      ],
+      "table_alternative": "A table of drivers with tested range, low outcome, high outcome and swing.",
+      "variations": [
+        "Per-scenario base cases in small multiples",
+        "Two-driver view as a sensitivity-grid"
+      ],
+      "limitations": [
+        "One-at-a-time variation hides interactions between drivers",
+        "Bar length depends on the tested ranges chosen, which are assumptions"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Clustered bars of low and high",
+          "reason": "Hides the shared base case and makes swing size hard to read"
+        },
+        {
+          "form": "Spider chart",
+          "reason": "Many overlapping lines on a radial scale obscure the ranking"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "sensitivity-grid",
+      "name": "Two-way sensitivity grid",
+      "family_code": "F",
+      "family": "Sensitivity",
+      "order": 2,
+      "reader_question": "How does a model output change when two drivers vary together, and where does it change sign or magnitude?",
+      "relationship": "Two-way sensitivity: one model run per cell of a driver-A by driver-B grid, with the base case marked.",
+      "question_types": [
+        "sensitivity"
+      ],
+      "requires": [
+        "model-output",
+        "single-measure",
+        "conditions"
+      ],
+      "incompatible": [
+        "sample"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 7,
+        "what": "values per driver (3 to 7 rows by 3 to 7 columns)"
+      },
+      "use_when": [
+        "Two drivers jointly determine a model output and exact cell values matter",
+        "The base case must remain visible inside the range of alternatives"
+      ],
+      "avoid_when": [
+        "More than two drivers need comparison — use tornado",
+        "Values are observed rather than model output",
+        "A continuous surface is claimed; the grid shows discrete runs only"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Output measure and unit, labelled as model output"
+        },
+        {
+          "field": "rowDriver / colDriver",
+          "type": "{name, values[3..7]}",
+          "notes": "Axis driver and its tested values as display strings"
+        },
+        {
+          "field": "cells[][]",
+          "type": "number[][]",
+          "notes": "Rows × columns of model output; dimensions must match the axes"
+        },
+        {
+          "field": "base",
+          "type": "{row, col}",
+          "notes": "Labels of the base-case row and column; must exist in the grid"
+        }
+      ],
+      "units": "One output unit; shading is a relative ramp over the grid's own minimum and maximum, not an absolute scale.",
+      "editability": {
+        "tier": "table",
+        "editable": [
+          "Native PowerPoint table: values, fills, borders and fonts",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Cell shading is a static fill computed from the fixture; editing a value does not recolour it",
+          "The sequential key, base-case marker and model-output tag are positioned shapes and text"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/sensitivity-grid.ts",
+      "fixture": "fixtures/sensitivity-grid.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "aligned-series",
+        "base-in-grid"
+      ],
+      "table_alternative": "The grid is itself a table; a plain unshaded copy serves screen-reader and export use.",
+      "variations": [
+        "Diverging shade around a threshold where sign matters",
+        "One grid per scenario"
+      ],
+      "limitations": [
+        "Shading is relative to the grid's range, so two grids are not comparable by colour",
+        "Shows two drivers only; others are held at base values"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "3D surface chart",
+          "reason": "Perspective distorts values and hides exact cell outputs"
+        },
+        {
+          "form": "Heat-map without values",
+          "reason": "Colour alone cannot carry precise model outputs"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "scatter",
+      "name": "Scatter plot",
+      "family_code": "G",
+      "family": "Relationship",
+      "order": 1,
+      "reader_question": "Do two continuous measures move together across the items, and which items depart from the pattern?",
+      "relationship": "Association between two continuous measures observed on the same items; no causal direction implied.",
+      "question_types": [
+        "relationship"
+      ],
+      "requires": [
+        "two-measures"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "time-axis"
+      ],
+      "capacity": {
+        "min_items": 6,
+        "max_items": 30,
+        "what": "points"
+      },
+      "use_when": [
+        "Each item has two continuous measures on stated units",
+        "The shape of the cloud and the position of a few named items matter more than exact values"
+      ],
+      "avoid_when": [
+        "A third measure must be shown as size — use bubble",
+        "A decision threshold divides the items into groups — use threshold-scatter",
+        "The x measure is time — use a line chart"
+      ],
+      "data_contract": [
+        {
+          "field": "xAxis / yAxis",
+          "type": "{label, min, max, step, dp?}",
+          "notes": "Explicit axis range; every point must fall inside it"
+        },
+        {
+          "field": "points[].label",
+          "type": "string",
+          "notes": "Unique item name"
+        },
+        {
+          "field": "points[].x / points[].y",
+          "type": "number",
+          "notes": "The two measures"
+        },
+        {
+          "field": "points[].named / side",
+          "type": "boolean / r|l|t|b",
+          "notes": "Optional positioned label (at most 6 labelled points)"
+        },
+        {
+          "field": "points[].highlight",
+          "type": "boolean",
+          "notes": "At most one point drawn in the accent"
+        }
+      ],
+      "units": "Each axis states its own unit; axes are independent and not zero-based by rule, so ranges are declared explicitly.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Native scatter chart with embedded workbook (Edit Data)",
+          "Marker colours and axis ranges",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Point labels are positioned text boxes computed from the fixture, not bound to the chart; they do not move if data is edited",
+          "Axis titles are text boxes"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/scatter.ts",
+      "fixture": "fixtures/scatter.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "axis-explicit",
+        "bounded-values",
+        "labelled-points-limit",
+        "single-accent"
+      ],
+      "table_alternative": "A two-column table (item, x, y) for exact lookup.",
+      "variations": [
+        "Threshold scatter with reference lines",
+        "Bubble chart with a third measure as area"
+      ],
+      "limitations": [
+        "Correlation is not causation; the exhibit shows association only",
+        "Labels for named points are positioned, so they need re-placing after a data edit",
+        "Dense overlap beyond about 30 points hides items"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Connected scatter",
+          "reason": "Implies an ordering or time path the data does not carry"
+        },
+        {
+          "form": "Trend line with fitted equation",
+          "reason": "A fitted line is model output and would overstate a small synthetic sample"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "threshold-scatter",
+      "name": "Threshold scatter",
+      "family_code": "G",
+      "family": "Relationship",
+      "order": 2,
+      "reader_question": "Which items fall beyond a stated reference value on one or both measures?",
+      "relationship": "Association between two measures read against one or two stated reference thresholds that divide the plane into quadrants.",
+      "question_types": [
+        "relationship",
+        "state"
+      ],
+      "requires": [
+        "two-measures",
+        "conditions"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "time-axis"
+      ],
+      "capacity": {
+        "min_items": 6,
+        "max_items": 30,
+        "what": "points"
+      },
+      "use_when": [
+        "A source or analyst states a threshold on at least one measure and the reader needs to see who is beyond it",
+        "Quadrant membership is the message and exact values are secondary"
+      ],
+      "avoid_when": [
+        "No stated threshold exists; drawing one invents a criterion — use scatter",
+        "A third measure must also be encoded — use bubble"
+      ],
+      "data_contract": [
+        {
+          "field": "xAxis / yAxis",
+          "type": "{label, min, max, step, dp?}",
+          "notes": "Explicit axis range containing every point and every threshold"
+        },
+        {
+          "field": "xThreshold / yThreshold",
+          "type": "{label, value, breach: above|below}",
+          "notes": "One or two reference values; breach states which side counts as beyond"
+        },
+        {
+          "field": "quadrants",
+          "type": "{tl, tr, bl, br}",
+          "notes": "Neutral quadrant captions"
+        },
+        {
+          "field": "points[]",
+          "type": "{label, x, y, named?, side?}",
+          "notes": "Unique items; points beyond every supplied threshold are drawn in the accent"
+        }
+      ],
+      "units": "Each axis states its own unit; thresholds are expressed in the unit of their axis.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Native scatter chart with embedded workbook (Edit Data)",
+          "Marker colours and axis ranges",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Threshold lines, quadrant captions and point labels are positioned shapes and text computed from the fixture; they do not move if chart data or axis range is edited",
+          "The accent/neutral split is two series computed from the thresholds at build time"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/threshold-scatter.ts",
+      "fixture": "fixtures/threshold-scatter.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "axis-explicit",
+        "bounded-values",
+        "threshold-present",
+        "threshold-within-axis",
+        "labelled-points-limit"
+      ],
+      "table_alternative": "A table of items with a flag column stating which thresholds each item breaches.",
+      "variations": [
+        "Single vertical threshold only",
+        "Single horizontal threshold only"
+      ],
+      "limitations": [
+        "Thresholds must be stated or sourced; an analyst-chosen cut-off is a presentation choice and is labelled as such",
+        "Items near a threshold look categorically different from items just across it",
+        "Correlation is not causation"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Four-colour quadrant shading",
+          "reason": "Fills would compete with the single accent and imply four classes of equal standing"
+        },
+        {
+          "form": "Composite score ranking",
+          "reason": "Collapsing two measures into one index would hide the thresholds' separate meaning"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "bubble",
+      "name": "Bubble chart",
+      "family_code": "G",
+      "family": "Relationship",
+      "order": 3,
+      "reader_question": "How do two measures relate across items, and which items carry the most of a third measure?",
+      "relationship": "Association between two measures with a third, strictly positive magnitude encoded as bubble area.",
+      "question_types": [
+        "relationship",
+        "rank"
+      ],
+      "requires": [
+        "two-measures",
+        "third-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "time-axis"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 12,
+        "what": "bubbles"
+      },
+      "use_when": [
+        "A third positive magnitude adds context to a two-measure relationship",
+        "Few enough items that each bubble can be named"
+      ],
+      "avoid_when": [
+        "The size values must be compared precisely — use a ranked bar or a table",
+        "Only two measures exist — use scatter",
+        "Sizes can be zero or negative"
+      ],
+      "data_contract": [
+        {
+          "field": "xAxis / yAxis",
+          "type": "{label, min, max, step, dp?}",
+          "notes": "Explicit axis range containing every bubble centre"
+        },
+        {
+          "field": "sizeLabel / sizeUnit",
+          "type": "string",
+          "notes": "What the area represents and its unit"
+        },
+        {
+          "field": "legendSizes",
+          "type": "number[2]",
+          "notes": "Two reference sizes for the legend circles, no larger than the largest bubble"
+        },
+        {
+          "field": "bubbles[]",
+          "type": "{label, x, y, size > 0, highlight?}",
+          "notes": "Unique items; at most one in the accent"
+        }
+      ],
+      "units": "Three independent units: x, y and the size measure, each stated on the slide.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Native bubble chart with embedded workbook (Edit Data)",
+          "Bubble colours, transparency and axis ranges",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Bubble labels and axis titles are positioned text computed from the fixture",
+          "Size-legend reference circles are drawn shapes scaled to PowerPoint's default bubble size (largest bubble = 25% of the shorter plot side); the renderer may differ, so they are approximate"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/bubble.ts",
+      "fixture": "fixtures/bubble.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "axis-explicit",
+        "bounded-values",
+        "sizes-positive",
+        "size-legend-two",
+        "single-accent"
+      ],
+      "table_alternative": "A table of items with x, y and size columns for exact comparison.",
+      "variations": [
+        "Scatter with labelled points when no third measure exists"
+      ],
+      "limitations": [
+        "Area perception is weak; readers misjudge ratios between bubbles, so exact sizes belong in a table or legend",
+        "Large bubbles can hide neighbours, which caps the item count",
+        "Correlation is not causation"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "3D bubble",
+          "reason": "Depth distorts area and breaks the no-3D rule"
+        },
+        {
+          "form": "Radius-proportional bubbles",
+          "reason": "Encoding size by radius exaggerates ratios by the square"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "strip-plot",
+      "name": "Strip plot",
+      "family_code": "H",
+      "family": "Distribution and uncertainty",
+      "order": 1,
+      "reader_question": "How are individual observations spread within each group, and where does each group's centre sit?",
+      "relationship": "Distribution of every observation per group on one shared axis, with a group median for orientation.",
+      "question_types": [
+        "distribution",
+        "uncertainty"
+      ],
+      "requires": [
+        "sample",
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 8,
+        "what": "groups"
+      },
+      "use_when": [
+        "Each group has a modest number of observations that can all be shown",
+        "Spread, clusters and outliers matter as much as the centre"
+      ],
+      "avoid_when": [
+        "Groups have hundreds of observations — use histogram or box-interval",
+        "Only a summary range is available — use box-interval or range-interval"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit"
+        },
+        {
+          "field": "axis",
+          "type": "{min, max, step}",
+          "notes": "Explicit shared axis containing every observation"
+        },
+        {
+          "field": "groups[].label",
+          "type": "string",
+          "notes": "Unique group name"
+        },
+        {
+          "field": "groups[].values",
+          "type": "number[] (5–40)",
+          "notes": "Every observation; the median and n are computed from them"
+        }
+      ],
+      "units": "One unit and one shared axis across all rows.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Dots, median ticks, gridlines and labels are native shapes and text",
+          "Colours and positions"
+        ],
+        "not_data_bound": [
+          "Dot positions are computed from the fixture and are not data-bound; there is no embedded workbook, so editing a value means moving its dot and relabelling the median",
+          "Vertical jitter is a deterministic function of rank, not a data value"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/strip-plot.ts",
+      "fixture": "fixtures/strip-plot.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "bounded-values",
+        "axis-explicit",
+        "min-observations",
+        "max-observations"
+      ],
+      "table_alternative": "A table of group, n, median, minimum and maximum, with the raw observations in an appendix.",
+      "variations": [
+        "Box-interval when only five-number summaries exist",
+        "Histogram for one group with many observations"
+      ],
+      "limitations": [
+        "Vertical jitter has no meaning; only horizontal position is data",
+        "Medians from very small n are unstable and n is therefore printed on every row",
+        "Sample composition is not shown; unequal groups need caution"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Random jitter",
+          "reason": "Not reproducible between builds; jitter is a deterministic function of rank"
+        },
+        {
+          "form": "Violin plot",
+          "reason": "A smoothed density implies observations between the points that are not in the data"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "box-interval",
+      "name": "Box and interval summary",
+      "family_code": "H",
+      "family": "Distribution and uncertainty",
+      "order": 2,
+      "reader_question": "How do the centre, middle half and full range of a measure compare across groups?",
+      "relationship": "Five-number summary per group on one shared axis: minimum, first quartile, median, third quartile, maximum.",
+      "question_types": [
+        "distribution",
+        "uncertainty"
+      ],
+      "requires": [
+        "sample",
+        "intervals",
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 8,
+        "what": "groups"
+      },
+      "use_when": [
+        "A source reports five-number summaries rather than raw observations",
+        "Groups have enough observations (at least 5) for quartiles to mean something"
+      ],
+      "avoid_when": [
+        "Raw observations are few and available — use strip-plot",
+        "The shape of one distribution matters — use histogram",
+        "The audience is unlikely to read quartiles"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure and unit"
+        },
+        {
+          "field": "axis",
+          "type": "{min, max, step}",
+          "notes": "Explicit shared axis containing every summary value"
+        },
+        {
+          "field": "groups[].label / n",
+          "type": "string / integer ≥ 5",
+          "notes": "Unique group name and its observation count, shown on every row"
+        },
+        {
+          "field": "groups[].min, q1, median, q3, max",
+          "type": "number",
+          "notes": "Five stated numbers, ordered min ≤ q1 ≤ median ≤ q3 ≤ max"
+        }
+      ],
+      "units": "One unit and one shared axis across all rows.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Whiskers, boxes, median lines, gridlines and labels are native shapes and text",
+          "Colours and positions"
+        ],
+        "not_data_bound": [
+          "All five numbers per group are positioned from the fixture and are not data-bound; there is no embedded workbook, so editing a value means resizing the shapes and relabelling"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/box-interval.ts",
+      "fixture": "fixtures/box-interval.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "axis-explicit",
+        "interval-ordered",
+        "bounded-values",
+        "min-observations"
+      ],
+      "table_alternative": "A table of group, n, minimum, Q1, median, Q3 and maximum.",
+      "variations": [
+        "Strip-plot overlay when raw observations exist"
+      ],
+      "limitations": [
+        "Quartiles from small n are unstable; n is printed on every row",
+        "Boxes hide multimodality and cannot show individual outliers",
+        "Whiskers here are the stated minimum and maximum, not a statistical fence"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Mean with error bars",
+          "reason": "Implies a symmetric confidence interval the five-number summary does not provide"
+        },
+        {
+          "form": "Notched box plot",
+          "reason": "Notches imply a significance test; none is supplied"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "histogram",
+      "name": "Histogram",
+      "family_code": "H",
+      "family": "Distribution and uncertainty",
+      "order": 3,
+      "reader_question": "How is one measure distributed across many items, and where does a reference value fall in it?",
+      "relationship": "Frequency of one continuous measure in contiguous, equal-width bins.",
+      "question_types": [
+        "distribution"
+      ],
+      "requires": [
+        "sample",
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "time-axis"
+      ],
+      "capacity": {
+        "min_items": 5,
+        "max_items": 16,
+        "what": "bins"
+      },
+      "use_when": [
+        "One measure is observed on many items and the overall shape matters",
+        "A reference value is to be located within the distribution"
+      ],
+      "avoid_when": [
+        "Groups are to be compared — use box-interval or strip-plot",
+        "Items must be identified individually — use ranked-dot or ranked-bar",
+        "Fewer than about 30 observations, where bin shape is unstable"
+      ],
+      "data_contract": [
+        {
+          "field": "measure / countLabel",
+          "type": "string",
+          "notes": "What is binned (with unit) and what is counted"
+        },
+        {
+          "field": "bins[]",
+          "type": "{from, to, count}",
+          "notes": "Contiguous, equal-width, strictly increasing bins; counts are whole numbers ≥ 0"
+        },
+        {
+          "field": "reference",
+          "type": "{label, value}?",
+          "notes": "Optional reference value, inside the binned range"
+        }
+      ],
+      "units": "x axis in the measure's unit with one stated bin width; y axis is a count starting at zero.",
+      "editability": {
+        "tier": "native-chart",
+        "editable": [
+          "Native column chart with embedded workbook (Edit Data) for the counts",
+          "Column colour, gap and value labels",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Bin-edge labels, axis titles and the reference line are positioned from the fixture and do not move if bins are edited",
+          "Category names in the workbook are bin ranges; the visible edge labels are separate text boxes"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/histogram.ts",
+      "fixture": "fixtures/histogram.json",
+      "integrity_rules": [
+        "bins-contiguous",
+        "min-categories",
+        "max-categories",
+        "counts-nonnegative",
+        "counts-whole",
+        "bins-equal-width",
+        "threshold-within-axis"
+      ],
+      "table_alternative": "A frequency table of bin ranges and counts.",
+      "variations": [
+        "Without a reference line",
+        "Share-of-items axis when sample sizes differ across panels"
+      ],
+      "limitations": [
+        "Bin width and edge convention change the visual shape; both are stated",
+        "Equal-width bins only, so column height equals frequency",
+        "Reference line is positioned and does not follow data edits"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Kernel density curve",
+          "reason": "A smoothed curve implies values between observations and hides the sample size"
+        },
+        {
+          "form": "Unequal-width bins",
+          "reason": "Column height would no longer equal frequency without density rescaling"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "two-lane-timeline",
+      "name": "Two-lane dated timeline",
+      "family_code": "I",
+      "family": "Time and sequence",
+      "order": 1,
+      "reader_question": "In what order did two jurisdictions announce, enact and implement their measures?",
+      "relationship": "Dated events from two parallel tracks placed on one date axis; marker style separates announcement, effective and implementation dates.",
+      "question_types": [
+        "sequence"
+      ],
+      "requires": [
+        "dated-events",
+        "parallel-tracks",
+        "time-axis"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 14,
+        "what": "dated events across both lanes"
+      },
+      "use_when": [
+        "Two jurisdictions' measures need to be read against the same calendar",
+        "The gap between announcement, effective and implementation dates matters"
+      ],
+      "avoid_when": [
+        "More than two tracks must be compared — use swimlane",
+        "Events carry different evidence states rather than date types — use evidence-milestone-strip"
+      ],
+      "data_contract": [
+        {
+          "field": "lanes[].name",
+          "type": "string",
+          "notes": "Exactly two lanes; the first draws above the axis, the second below"
+        },
+        {
+          "field": "lanes[].events[].label",
+          "type": "string ≤ 26 characters",
+          "notes": "Short measure name"
+        },
+        {
+          "field": "lanes[].events[].date",
+          "type": "ISO date",
+          "notes": "Events within a lane in ascending order"
+        },
+        {
+          "field": "lanes[].events[].kind",
+          "type": "announcement | effective | implementation",
+          "notes": "Which date the event records"
+        }
+      ],
+      "units": "Calendar dates on a linear day-count scale spanning whole calendar years.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Markers, stems, axis band and labels as native shapes and text boxes",
+          "Lane and event wording",
+          "Colours and marker styles"
+        ],
+        "not_data_bound": [
+          "Dates are positioned from the fixture at build time; moving an event requires dragging its marker, stem and label together",
+          "There is no embedded workbook"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/two-lane-timeline.ts",
+      "fixture": "fixtures/two-lane-timeline.json",
+      "integrity_rules": [
+        "dates-ascending",
+        "unique-labels",
+        "min-categories",
+        "max-categories",
+        "lane-count",
+        "label-length",
+        "label-stagger"
+      ],
+      "table_alternative": "A dated event table with lane, measure, date type and date.",
+      "variations": [
+        "Lanes split by instrument instead of jurisdiction",
+        "Shaded interval between announcement and effective date"
+      ],
+      "limitations": [
+        "Shared dates do not imply causation or response between lanes",
+        "Label stagger is limited to three levels per lane; dense clusters need the swimlane or a table"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Single combined lane",
+          "reason": "Loses which jurisdiction issued each measure"
+        },
+        {
+          "form": "Line chart of cumulative measure counts",
+          "reason": "Counts erase the differences between announcement, effective and implementation dates"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "swimlane",
+      "name": "Swimlane schedule",
+      "family_code": "I",
+      "family": "Time and sequence",
+      "order": 2,
+      "reader_question": "When does each actor's or instrument's activity run, and where do periods and point events fall against the calendar?",
+      "relationship": "Dated periods and point events grouped by lane on one quarterly date axis; planned periods are hollow and dashed.",
+      "question_types": [
+        "sequence"
+      ],
+      "requires": [
+        "dated-events",
+        "parallel-tracks",
+        "intervals",
+        "time-axis"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 6,
+        "what": "lanes"
+      },
+      "use_when": [
+        "Three to six actors or instruments each have periods and point events to place on one calendar",
+        "Overlap between lanes matters more than exact event counts"
+      ],
+      "avoid_when": [
+        "Only two tracks are compared — use two-lane-timeline",
+        "The question is elapsed time between two stages per item — use duration-bars"
+      ],
+      "data_contract": [
+        {
+          "field": "lanes[].name",
+          "type": "string",
+          "notes": "Actor or instrument; unique"
+        },
+        {
+          "field": "lanes[].items[].type",
+          "type": "period | point",
+          "notes": "Bar for a period, diamond for a point event"
+        },
+        {
+          "field": "lanes[].items[].start / end / date",
+          "type": "ISO date",
+          "notes": "Periods carry start ≤ end; point events carry date"
+        },
+        {
+          "field": "lanes[].items[].label",
+          "type": "string ≤ 24 characters",
+          "notes": "Unique across the exhibit"
+        },
+        {
+          "field": "lanes[].items[].planned / highlight",
+          "type": "boolean, optional",
+          "notes": "Planned = hollow dashed; at most one highlighted item overall"
+        }
+      ],
+      "units": "Calendar dates on a linear day-count scale snapped to whole quarters; quarter gridlines.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Bars, diamonds, gridlines, headers and labels as native shapes and text boxes",
+          "Colours, dash styles and wording"
+        ],
+        "not_data_bound": [
+          "Dates are positioned from the fixture at build time; resizing a bar does not update any data",
+          "There is no embedded workbook"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/swimlane.ts",
+      "fixture": "fixtures/swimlane.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "single-highlight",
+        "interval-ordered",
+        "label-length",
+        "lane-overlap",
+        "label-overlap"
+      ],
+      "table_alternative": "A schedule table (lane, item, type, start, end) for exact dates.",
+      "variations": [
+        "Lanes by instrument rather than actor",
+        "Milestone diamonds only"
+      ],
+      "limitations": [
+        "Periods within a lane may not overlap and labels sit below the marks, so dense lanes need splitting",
+        "Overlap in time between lanes does not show interaction or causation"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Calendar heat map",
+          "reason": "Hides which period or event belongs to which lane"
+        },
+        {
+          "form": "Stacked area of active measures",
+          "reason": "Adds unlike instruments into one count"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "evidence-milestone-strip",
+      "name": "Evidence-state milestone strip",
+      "family_code": "I",
+      "family": "Time and sequence",
+      "order": 3,
+      "reader_question": "Which milestones have actually been evidenced, and which remain announced or targeted?",
+      "relationship": "One dated sequence of milestones; marker style encodes each milestone's evidence state (announced, targeted, reported, independently verified).",
+      "question_types": [
+        "sequence",
+        "state"
+      ],
+      "requires": [
+        "dated-events",
+        "states",
+        "time-axis"
+      ],
+      "incompatible": [
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 8,
+        "what": "milestones"
+      },
+      "use_when": [
+        "A single project or programme has milestones whose evidence quality differs",
+        "A reader should not mistake a target or announcement for an observed outcome"
+      ],
+      "avoid_when": [
+        "Stages of a formal process are the point — use stage-ladder",
+        "Several actors have parallel schedules — use swimlane"
+      ],
+      "data_contract": [
+        {
+          "field": "milestones[].label",
+          "type": "string ≤ 28 characters",
+          "notes": "Unique; short milestone name"
+        },
+        {
+          "field": "milestones[].date",
+          "type": "ISO date",
+          "notes": "Ascending order; for targeted milestones the target date"
+        },
+        {
+          "field": "milestones[].state",
+          "type": "announced | targeted | reported | independently-verified",
+          "notes": "Controlled vocabulary (EVIDENCE_STATES)"
+        }
+      ],
+      "units": "Calendar dates on a linear day-count scale spanning whole calendar years.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Markers, stems, spine and labels as native shapes and text boxes",
+          "Milestone wording and state text",
+          "Marker colours and dash styles"
+        ],
+        "not_data_bound": [
+          "Dates are positioned from the fixture at build time; changing a state means restyling its marker by hand",
+          "There is no embedded workbook"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/evidence-milestone-strip.ts",
+      "fixture": "fixtures/evidence-milestone-strip.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "controlled-vocabulary",
+        "dates-ascending",
+        "unique-labels",
+        "label-length",
+        "single-highlight",
+        "label-overlap"
+      ],
+      "table_alternative": "A milestone table (date, milestone, evidence state, source) for audit-grade lookup.",
+      "variations": [
+        "Per-milestone source tag under the date",
+        "Vertical strip for narrow layouts"
+      ],
+      "limitations": [
+        "The accent marks at most one independently verified milestone; more would break the single-highlight rule",
+        "Evidence state describes the milestone's support, not its importance or whether the target was met"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Gantt bars",
+          "reason": "Milestones are points; bars would imply durations that are not stated"
+        },
+        {
+          "form": "Traffic-light status column",
+          "reason": "Colour grading implies a performance judgement rather than the quality of evidence"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "stage-ladder",
+      "name": "Process stage ladder",
+      "family_code": "I",
+      "family": "Time and sequence",
+      "order": 4,
+      "reader_question": "How far has a measure progressed through its ordered process, and when was each stage reached?",
+      "relationship": "Ordered stages of one process as rising steps; each shows the date reached or is hollow and dashed when not yet reached.",
+      "question_types": [
+        "sequence",
+        "state"
+      ],
+      "requires": [
+        "status-stages",
+        "dated-events",
+        "states"
+      ],
+      "incompatible": [
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 6,
+        "what": "process stages"
+      },
+      "use_when": [
+        "A single measure moves through a fixed order of stages (proposal, consultation, adoption, entry into force, implementation)",
+        "The reader needs to see which stages have and have not been reached"
+      ],
+      "avoid_when": [
+        "Stages can be reached out of order or skipped — use evidence-milestone-strip or a table",
+        "Several measures are compared — use duration-bars or a status matrix"
+      ],
+      "data_contract": [
+        {
+          "field": "asOf",
+          "type": "ISO date",
+          "notes": "Date at which reached / not-yet-reached is read"
+        },
+        {
+          "field": "stages[].label",
+          "type": "string ≤ 24 characters",
+          "notes": "Unique; stages in process order"
+        },
+        {
+          "field": "stages[].date",
+          "type": "ISO date | null",
+          "notes": "Date reached; null = not yet reached. Reached dates ascend and do not follow asOf"
+        }
+      ],
+      "units": "Ordinal stages; dates are labels, not positions.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Steps and text as native shapes and text boxes",
+          "Stage names, dates and fills"
+        ],
+        "not_data_bound": [
+          "Step heights encode order only, not elapsed time; they are positioned from the fixture at build time and are not data-bound",
+          "There is no embedded workbook"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/stage-ladder.ts",
+      "fixture": "fixtures/stage-ladder.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "dates-ascending",
+        "label-length",
+        "reached-after-as-of",
+        "stage-order"
+      ],
+      "table_alternative": "A stage table (stage, status, date reached) for exact dates and sources.",
+      "variations": [
+        "Ladder with a distinct date for announcement versus effective date inside one stage",
+        "Vertical ladder for long stage names"
+      ],
+      "limitations": [
+        "Equal step widths do not represent elapsed time between stages; use duration-bars for that",
+        "A stage without a date is treated as not reached, never as skipped"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Progress bar or percentage complete",
+          "reason": "Stages are not equal-effort units, so a percentage would be a synthetic score"
+        },
+        {
+          "form": "Funnel",
+          "reason": "Implies attrition of quantities between stages, which a single measure does not have"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "duration-bars",
+      "name": "Elapsed-time duration bars",
+      "family_code": "I",
+      "family": "Time and sequence",
+      "order": 5,
+      "reader_question": "How long did each item take to get from one dated stage to the next?",
+      "relationship": "Elapsed days between the same two dated stages for each item, as zero-based bars sorted by duration.",
+      "question_types": [
+        "sequence",
+        "compare-two-observations"
+      ],
+      "requires": [
+        "durations",
+        "dated-events",
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 10,
+        "what": "items"
+      },
+      "use_when": [
+        "Every item has the same two dated stages, such as announcement and effective date",
+        "The lag between stages matters more than the calendar position"
+      ],
+      "avoid_when": [
+        "Calendar position and overlap matter — use swimlane",
+        "Items have different stage pairs — the bars would not share a basis; use a table"
+      ],
+      "data_contract": [
+        {
+          "field": "fromLabel / toLabel",
+          "type": "string",
+          "notes": "The two stages every item is measured between"
+        },
+        {
+          "field": "items[].label",
+          "type": "string ≤ 28 characters",
+          "notes": "Unique item name"
+        },
+        {
+          "field": "items[].from / items[].to",
+          "type": "ISO date",
+          "notes": "from ≤ to; both dates are printed under the item name"
+        }
+      ],
+      "units": "Calendar days between the two stages; months shown as days ÷ 30.4375 for reading only.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Bars, baseline, gridline and labels as native shapes and text boxes",
+          "Item names, dates and colours"
+        ],
+        "not_data_bound": [
+          "Bar lengths are computed from the fixture at build time; editing a date does not resize its bar",
+          "There is no embedded workbook"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/duration-bars.ts",
+      "fixture": "fixtures/duration-bars.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "interval-ordered",
+        "label-length"
+      ],
+      "table_alternative": "A table of item, from date, to date and elapsed days.",
+      "variations": [
+        "Two stacked segments per bar for three dated stages",
+        "Sorted by calendar order instead of duration"
+      ],
+      "limitations": [
+        "Elapsed time does not show which stage was delayed, or whether a delay was intended",
+        "Bars share one zero-based axis only if every item measures the same pair of stages"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Calendar-positioned Gantt bars",
+          "reason": "Offset starts make lengths harder to compare and add calendar position that the question does not ask for"
+        },
+        {
+          "form": "Average duration only",
+          "reason": "Hides the spread across items"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "state-diagram",
+      "name": "Instrument state diagram",
+      "family_code": "J",
+      "family": "Structure and flow",
+      "order": 1,
+      "reader_question": "Which legal or administrative states can this instrument occupy, which one is current, and which transitions are permitted?",
+      "relationship": "Discrete states of one instrument linked by labelled, directed transitions; one state is current.",
+      "question_types": [
+        "state"
+      ],
+      "requires": [
+        "states",
+        "edges"
+      ],
+      "incompatible": [
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 6,
+        "what": "states"
+      },
+      "use_when": [
+        "The reader needs to know what can happen next to an instrument, not when it happened",
+        "Transitions have a named trigger such as a vote, a date or an order"
+      ],
+      "avoid_when": [
+        "The order and dates of events are the point — use a timeline",
+        "Quantities move between the states — use conversion-flow"
+      ],
+      "data_contract": [
+        {
+          "field": "asOf",
+          "type": "ISO date",
+          "notes": "Date at which the current state is read"
+        },
+        {
+          "field": "currentId",
+          "type": "string",
+          "notes": "Must be one of states[].id"
+        },
+        {
+          "field": "states[].id / label / note?",
+          "type": "string",
+          "notes": "3–6 states in layout order; row 2 runs right to left"
+        },
+        {
+          "field": "transitions[].from / to / label",
+          "type": "string",
+          "notes": "Directed, labelled by trigger; endpoints must be declared states; no duplicates"
+        }
+      ],
+      "units": "No quantities; the only date is the as-of date of the current state.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "State boxes, arrows and trigger labels as native shapes and text",
+          "Fill and outline of each state",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "States and transitions are drawn shapes; editing the fixture and re-running the build is the way to change structure",
+          "Arrow geometry is computed and not connected to the boxes as PowerPoint connectors"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/state-diagram.ts",
+      "fixture": "fixtures/state-diagram.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "edges-resolve",
+        "current-state-resolves",
+        "no-duplicate-edges"
+      ],
+      "table_alternative": "A transition table (from state, to state, trigger).",
+      "variations": [
+        "Single-row chain for linear lifecycles",
+        "Terminal states marked in the note line"
+      ],
+      "limitations": [
+        "Up to six states in two rows; larger lifecycles need a table or a split into two exhibits",
+        "Only transitions between adjacent rows or neighbours are routed; the layout order is chosen by the author",
+        "The diagram shows permitted transitions, not how often or when they occur"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Flowchart with decision diamonds",
+          "reason": "Adds branching logic the state record does not contain; use condition-tree for decisions"
+        },
+        {
+          "form": "Timeline of status changes",
+          "reason": "Answers when, not which transitions are possible"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "condition-tree",
+      "name": "Condition tree",
+      "family_code": "J",
+      "family": "Structure and flow",
+      "order": 2,
+      "reader_question": "Which sequence of conditions leads to each outcome, and where does a given case end up?",
+      "relationship": "Hierarchical decision structure: condition nodes with named branches terminating in outcomes.",
+      "question_types": [
+        "decision"
+      ],
+      "requires": [
+        "conditions",
+        "edges"
+      ],
+      "incompatible": [
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 9,
+        "what": "outcomes (depth at most 4)"
+      },
+      "use_when": [
+        "Eligibility or applicability is decided by successive tests",
+        "Each test has a small set of named answers and every answer ends in an outcome"
+      ],
+      "avoid_when": [
+        "Several criteria are weighed together rather than in sequence — use criterion-matrix",
+        "Conditions can combine in any order — use a table of rules"
+      ],
+      "data_contract": [
+        {
+          "field": "nodes[0]",
+          "type": "node",
+          "notes": "The first node is the root"
+        },
+        {
+          "field": "nodes[].id / label / kind",
+          "type": "string / condition | outcome",
+          "notes": "Outcomes are terminal"
+        },
+        {
+          "field": "nodes[].branches[].label / to",
+          "type": "string",
+          "notes": "Every condition names at least two distinct branches; each target is declared and has one parent"
+        },
+        {
+          "field": "highlightOutcomeId?",
+          "type": "string",
+          "notes": "Outcome whose route from the root is drawn in the accent"
+        }
+      ],
+      "units": "No quantities; branch labels are answers such as Yes and No.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Condition and outcome boxes, elbow lines and branch labels as native shapes and text",
+          "Route highlight colour",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "The tree is drawn shapes with computed positions, not a SmartArt or data-bound object",
+          "Elbow lines are separate segments, not PowerPoint connectors"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/condition-tree.ts",
+      "fixture": "fixtures/condition-tree.json",
+      "integrity_rules": [
+        "unique-labels",
+        "edges-resolve",
+        "tree-structure",
+        "min-categories",
+        "max-categories",
+        "branches-complete",
+        "outcome-terminal",
+        "max-depth",
+        "highlight-resolves"
+      ],
+      "table_alternative": "A rules table (route, conditions met, outcome).",
+      "variations": [
+        "Vertical top-down layout for narrow panels",
+        "Branch frequencies where a source reports them"
+      ],
+      "limitations": [
+        "Depth is capped at four tests and nine outcomes",
+        "Branch labels must be short; long answers belong in the node text",
+        "A node reached by two branches is not a tree and is rejected"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Flowchart with loops",
+          "reason": "A tree has no cycles; loops describe processes, which state-diagram covers"
+        },
+        {
+          "form": "Decision matrix",
+          "reason": "Hides the order in which the tests apply"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "value-chain-measured",
+      "name": "Measured value chain",
+      "family_code": "J",
+      "family": "Structure and flow",
+      "order": 3,
+      "reader_question": "Where along the value chain does a quantity exist in the evidence, and where is it not measured?",
+      "relationship": "Ordered stages, each with at most one measured quantity on a shared zero-based scale and one unit.",
+      "question_types": [
+        "flow",
+        "sequence"
+      ],
+      "requires": [
+        "single-measure",
+        "status-stages"
+      ],
+      "incompatible": [
+        "non-comparable-bases",
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 8,
+        "what": "stages"
+      },
+      "use_when": [
+        "The stage sequence is fixed and one quantity is reported at some stages",
+        "Missing measurements are themselves part of the message"
+      ],
+      "avoid_when": [
+        "Stage quantities must reconcile as in, out and loss — use conversion-flow",
+        "Stages are on different bases or units — use parallel-basis-panels"
+      ],
+      "data_contract": [
+        {
+          "field": "unit / dp",
+          "type": "string / integer",
+          "notes": "One unit for every stage"
+        },
+        {
+          "field": "stages[].id / step / label",
+          "type": "string / integer / string",
+          "notes": "step strictly ascending in chain order"
+        },
+        {
+          "field": "stages[].value",
+          "type": "number ≥ 0 | null",
+          "notes": "null draws not measured; zero is a measured zero only"
+        },
+        {
+          "field": "highlightStageId?",
+          "type": "string",
+          "notes": "A measured stage drawn in the accent"
+        }
+      ],
+      "units": "One unit across stages; bars start at zero on one scale. Differences between stages are not losses unless the source says so.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Chevrons, bars and value labels as native shapes and text",
+          "Bar fill and highlight",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Bar heights are computed from the fixture and are not data-bound; editing a value means resizing the bar and its label",
+          "No embedded workbook"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/value-chain-measured.ts",
+      "fixture": "fixtures/value-chain-measured.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "magnitude-nonnegative",
+        "stages-ordered",
+        "measured-minimum",
+        "highlight-resolves"
+      ],
+      "table_alternative": "A stage table with the quantity, unit and a measured/not measured flag.",
+      "variations": [
+        "Number-only variant without bars",
+        "Two measures per stage as paired panels"
+      ],
+      "limitations": [
+        "One quantity per stage; a second measure needs its own panel",
+        "Adjacent stage values are not a conversion: definitions of the stages may differ",
+        "Up to eight stages across the slide width"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Line across the stages",
+          "reason": "Implies a continuous series and interpolates across unmeasured stages"
+        },
+        {
+          "form": "Zero-height bar for a missing stage",
+          "reason": "A missing measurement is not a measured zero"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "conversion-flow",
+      "name": "Quantified conversion flow",
+      "family_code": "J",
+      "family": "Structure and flow",
+      "order": 4,
+      "reader_question": "How much of the input quantity survives each conversion step, and where is it lost?",
+      "relationship": "Stepwise conversion on one unit: each step's input equals its output plus its loss; heights are proportional to quantity.",
+      "question_types": [
+        "flow",
+        "reconcile"
+      ],
+      "requires": [
+        "quantified-flows",
+        "additive-movements",
+        "single-measure"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 5,
+        "what": "conversion steps"
+      },
+      "use_when": [
+        "Every step reports both its output and its loss on one unit",
+        "The honest alternative to a Sankey when the flows are actually quantified"
+      ],
+      "avoid_when": [
+        "Losses or outputs are not reported — use value-chain-measured",
+        "Flows branch to several destinations — use a table or sources-and-uses"
+      ],
+      "data_contract": [
+        {
+          "field": "unit / dp",
+          "type": "string / integer",
+          "notes": "One unit throughout"
+        },
+        {
+          "field": "input.label / input.value",
+          "type": "string / number ≥ 0",
+          "notes": "Opening quantity"
+        },
+        {
+          "field": "steps[].process / label",
+          "type": "string",
+          "notes": "Process name (on the connector) and the product it yields (column label)"
+        },
+        {
+          "field": "steps[].out / loss",
+          "type": "number ≥ 0",
+          "notes": "out + loss must equal the previous quantity"
+        }
+      ],
+      "units": "One unit; rectangle height is proportional to quantity from zero. Loss percentages use the step's own input.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Column rectangles, carried bands and loss stubs as native shapes and text",
+          "Accent on the final output",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Heights are computed from the fixture and are not data-bound; editing a quantity means resizing the shapes and labels",
+          "No embedded workbook"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/conversion-flow.ts",
+      "fixture": "fixtures/conversion-flow.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "magnitude-nonnegative",
+        "bridge-reconciles"
+      ],
+      "table_alternative": "A step table with input, output, loss and loss share.",
+      "variations": [
+        "Yield-only variant without loss stubs",
+        "Two parallel conversion routes as stacked panels"
+      ],
+      "limitations": [
+        "Linear chain only; no branching or recycling",
+        "Up to five steps across the slide width",
+        "Small losses draw as thin stubs; the printed value carries the precision"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Sankey",
+          "reason": "Unquantified ribbons imply flows and proportions the data may not support; this form keeps one scale and reconciles each step"
+        },
+        {
+          "form": "Funnel with centred bars",
+          "reason": "Centring hides that every column shares a zero baseline"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "dependency-network",
+      "name": "Dependency network",
+      "family_code": "J",
+      "family": "Structure and flow",
+      "order": 5,
+      "reader_question": "Which organisations, projects and programmes depend on which, and what is the path between two of them?",
+      "relationship": "Directed acyclic network laid out in computed layers; edges are declared dependencies, one path is highlighted.",
+      "question_types": [
+        "relationship",
+        "flow"
+      ],
+      "requires": [
+        "edges"
+      ],
+      "incompatible": [
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 4,
+        "max_items": 12,
+        "what": "nodes (at most 20 edges)"
+      },
+      "use_when": [
+        "Declared links between named entities explain an exposure or a chain of supply or funding",
+        "One path carries the message"
+      ],
+      "avoid_when": [
+        "Link sizes matter — use conversion-flow or sources-and-uses",
+        "The graph has cycles or hundreds of nodes — use a table of links"
+      ],
+      "data_contract": [
+        {
+          "field": "edgeMeaning",
+          "type": "string",
+          "notes": "What an arrow means, shown in the legend"
+        },
+        {
+          "field": "nodes[].id / label / type",
+          "type": "string / Organisation | Project | Programme",
+          "notes": "Up to 12 nodes"
+        },
+        {
+          "field": "edges[].from / to",
+          "type": "string",
+          "notes": "Up to 20 directed edges between adjacent computed layers; no duplicates, no cycles"
+        },
+        {
+          "field": "highlightPath",
+          "type": "string[]",
+          "notes": "Node ids; every consecutive pair must be a declared edge"
+        }
+      ],
+      "units": "No quantities; edges carry no weight.",
+      "editability": {
+        "tier": "native-shapes",
+        "editable": [
+          "Node boxes, arrows and labels as native shapes and text",
+          "Highlighted path colour",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Nodes and edges are drawn shapes at computed positions; arrows are not PowerPoint connectors and do not follow moved boxes"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/dependency-network.ts",
+      "fixture": "fixtures/dependency-network.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "controlled-vocabulary",
+        "edges-resolve",
+        "no-duplicate-edges",
+        "path-follows-edges",
+        "no-cycles",
+        "edges-adjacent-layers"
+      ],
+      "table_alternative": "An edge list (source, target, relationship).",
+      "variations": [
+        "Columns by entity type instead of computed layer",
+        "Edge labels where a source names each relationship"
+      ],
+      "limitations": [
+        "Edges must join adjacent layers; add the intermediate node otherwise",
+        "Layout is a deterministic heuristic and may not minimise crossings for dense graphs",
+        "A drawn link is a declared dependency, not evidence of its size or importance"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Force-directed network",
+          "reason": "Positions carry no meaning and change between builds"
+        },
+        {
+          "form": "Sankey",
+          "reason": "Implies quantified flow; the edges here are unweighted"
+        }
+      ],
+      "references": [
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "criterion-matrix",
+      "name": "Criterion matrix",
+      "family_code": "K",
+      "family": "Lookup and decision",
+      "order": 1,
+      "reader_question": "Which options meet which stated criteria, and where is the evidence silent?",
+      "relationship": "Categorical assessment of each option against each criterion; no aggregation across criteria.",
+      "question_types": [
+        "lookup",
+        "decision"
+      ],
+      "requires": [
+        "criteria"
+      ],
+      "incompatible": [
+        "two-measures"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 7,
+        "what": "criteria rows (2 to 4 options)"
+      },
+      "use_when": [
+        "Each cell can be graded Meets, Partly, Does not or Not stated from a cited source",
+        "The reader needs to see evidential gaps next to failures"
+      ],
+      "avoid_when": [
+        "A weighted total or ranking is wanted — the tracker has no synthetic scores; use ranked-bar on a sourced measure",
+        "Criteria are quantities on a shared unit — use a native table or bar chart"
+      ],
+      "data_contract": [
+        {
+          "field": "options[]",
+          "type": "string[] (2-4, ≤20 chars)",
+          "notes": "Column labels"
+        },
+        {
+          "field": "accent",
+          "type": "string (optional)",
+          "notes": "One option to highlight; must be an option label"
+        },
+        {
+          "field": "criteria[].label",
+          "type": "string (≤40 chars)",
+          "notes": "Row label, unique"
+        },
+        {
+          "field": "criteria[].marks[]",
+          "type": "Meets | Partly | Does not | Not stated",
+          "notes": "One mark per option, in option order"
+        }
+      ],
+      "units": "No units: categorical marks only. Weights, scores and totals are rejected.",
+      "editability": {
+        "tier": "table",
+        "editable": [
+          "Native table: labels, marks, fills",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "The circle glyphs (filled, half, hollow, dashed) are native shapes positioned over the mark cells from fixed row heights; changing a mark in the table does not move or redraw its glyph"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/criterion-matrix.ts",
+      "fixture": "fixtures/criterion-matrix.json",
+      "integrity_rules": [
+        "no-numeric-score",
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "aligned-series",
+        "cell-length",
+        "accent-resolves"
+      ],
+      "table_alternative": "The native table itself, with the glyph column removed and marks as text.",
+      "variations": [
+        "Single-option dossier with evidence column",
+        "Role-matrix when the cells name roles rather than grades"
+      ],
+      "limitations": [
+        "Four fixed marks; finer grading would imply a scale the sources do not support",
+        "Marks assert nothing beyond the cited statement; they do not combine into an overall verdict"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Harvey-ball scorecard with weighted total",
+          "reason": "A total invents a cross-criterion scale and hides evidential gaps"
+        },
+        {
+          "form": "Radar chart of options",
+          "reason": "Requires numeric scores on a common axis"
+        }
+      ],
+      "references": [
+        "strategyand-2018-exhibit-6",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "role-matrix",
+      "name": "Role matrix",
+      "family_code": "K",
+      "family": "Lookup and decision",
+      "order": 2,
+      "reader_question": "Which organisation plays which role, without implying how much money each provides?",
+      "relationship": "Membership of organisations in roles; each mark is a recorded role, optionally qualified, never a quantity.",
+      "question_types": [
+        "lookup",
+        "state"
+      ],
+      "requires": [
+        "states"
+      ],
+      "incompatible": [
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 8,
+        "what": "organisation rows (2 to 5 roles)"
+      },
+      "use_when": [
+        "The reader needs to see roles and overlaps across organisations before any amounts",
+        "Roles are sourced facts that can be stated in a few words"
+      ],
+      "avoid_when": [
+        "The question is how much each party provides — use sources-and-uses or a flow pattern on one stated basis",
+        "Parties are linked by edges rather than shared roles — use a network or sankey pattern"
+      ],
+      "data_contract": [
+        {
+          "field": "roles[]",
+          "type": "string[] (2-5, ≤16 chars)",
+          "notes": "Column labels, unique"
+        },
+        {
+          "field": "orgs[].label",
+          "type": "string",
+          "notes": "Organisation, unique"
+        },
+        {
+          "field": "orgs[].cells[]",
+          "type": "null | { qualifier?: string ≤16 chars }",
+          "notes": "One entry per role; null means no recorded role. Qualifiers must not read as amounts"
+        }
+      ],
+      "units": "No units. The count row totals organisations per role, never money.",
+      "editability": {
+        "tier": "table",
+        "editable": [
+          "Native table: labels, qualifiers, count row, fills",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "The role circles are native shapes positioned over the cells from fixed row heights; the count row is typed table text, not a formula"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/role-matrix.ts",
+      "fixture": "fixtures/role-matrix.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "aligned-series",
+        "role-held",
+        "cell-length",
+        "no-amounts-in-roles"
+      ],
+      "table_alternative": "A two-column table of organisation and comma-separated roles.",
+      "variations": [
+        "Criterion-matrix when cells are graded rather than held",
+        "Project-level matrix with one column per project"
+      ],
+      "limitations": [
+        "A mark records a role, not its size or duration",
+        "Eight organisations is the legible limit on one slide"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Bubble matrix sized by amount",
+          "reason": "Implies amounts and mixes unlike instruments in one scale"
+        },
+        {
+          "form": "Network diagram of organisations",
+          "reason": "Implies relationships the role data does not record"
+        }
+      ],
+      "references": [
+        "strategyand-2018-exhibit-5",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "option-profile",
+      "name": "Option profile",
+      "family_code": "K",
+      "family": "Lookup and decision",
+      "order": 3,
+      "reader_question": "How do two to four options differ on the same five facts?",
+      "relationship": "Side-by-side description of options on a fixed set of structured fields; no scoring.",
+      "question_types": [
+        "decision",
+        "lookup"
+      ],
+      "requires": [
+        "conditions"
+      ],
+      "incompatible": [
+        "two-measures"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 4,
+        "what": "option columns"
+      },
+      "use_when": [
+        "A small set of options is compared on instrument, status, timing, conditions and open questions",
+        "Every cell can be stated in under about 60 characters"
+      ],
+      "avoid_when": [
+        "Options need grading against criteria — use criterion-matrix",
+        "Facts are long-form or differ by option — write a source dossier instead"
+      ],
+      "data_contract": [
+        {
+          "field": "options[].label",
+          "type": "string (≤26 chars)",
+          "notes": "Column heading, unique"
+        },
+        {
+          "field": "options[].instrument",
+          "type": "string (≤48 chars)",
+          "notes": "Type of measure"
+        },
+        {
+          "field": "options[].status",
+          "type": "announcement | authorization | binding | drawdown | expenditure | operational",
+          "notes": "Transaction status vocabulary"
+        },
+        {
+          "field": "options[].start / end",
+          "type": "ISO date",
+          "notes": "Timing; start must not follow end"
+        },
+        {
+          "field": "options[].conditions / open",
+          "type": "string (≤64 chars)",
+          "notes": "Conditions attached; open question, or 'None stated'"
+        }
+      ],
+      "units": "No quantities. Dates are ISO and shown verbatim.",
+      "editability": {
+        "tier": "table",
+        "editable": [
+          "Native table: every cell, fills, column widths",
+          "Frame text"
+        ],
+        "not_data_bound": [],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/option-profile.ts",
+      "fixture": "fixtures/option-profile.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "controlled-vocabulary",
+        "interval-ordered",
+        "cell-length"
+      ],
+      "table_alternative": "The pattern is itself the table; for four-plus options use a long-format table with one row per option.",
+      "variations": [
+        "Criterion-matrix for graded comparison",
+        "Two-option before/after profile"
+      ],
+      "limitations": [
+        "Character limits keep every row on a fixed height",
+        "Facts are as stated by the source; the table does not rank options"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Weighted decision matrix",
+          "reason": "Weights and totals are synthetic scores the tracker does not produce"
+        },
+        {
+          "form": "Paragraph cards per option",
+          "reason": "Unaligned prose hides which fields are missing"
+        }
+      ],
+      "references": [
+        "strategyand-2018-exhibit-6",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "exhibit-with-interpretation",
+      "name": "Exhibit with interpretation",
+      "family_code": "K",
+      "family": "Lookup and decision",
+      "order": 4,
+      "reader_question": "What are the key figures, and which row supports each interpretive point?",
+      "relationship": "A compact figures table paired with numbered notes; each note cites a table row.",
+      "question_types": [
+        "lookup",
+        "decision"
+      ],
+      "requires": [
+        "exact-values"
+      ],
+      "incompatible": [
+        "non-comparable-bases"
+      ],
+      "capacity": {
+        "min_items": 2,
+        "max_items": 6,
+        "what": "table rows (1 to 2 value columns, 2 to 4 notes)"
+      },
+      "use_when": [
+        "The reader needs exact figures and a short, evidenced reading of them on one slide",
+        "Each interpretive point can be tied to a single row"
+      ],
+      "avoid_when": [
+        "The shape of the data matters more than exact values — use a chart family pattern",
+        "The interpretation spans many rows or needs argument — use the frame interpretation panel or a separate slide"
+      ],
+      "data_contract": [
+        {
+          "field": "unit",
+          "type": "string",
+          "notes": "Measure, unit and date basis"
+        },
+        {
+          "field": "columns[]",
+          "type": "string[] (1-2)",
+          "notes": "Value column headings; separate statuses, not summed"
+        },
+        {
+          "field": "rows[].label / values[]",
+          "type": "string (≤26 chars) / number[]",
+          "notes": "Numbered 1..n in table order"
+        },
+        {
+          "field": "notes[].ref / text",
+          "type": "integer / string (≤130 chars)",
+          "notes": "ref must resolve to a table row; one note per row"
+        }
+      ],
+      "units": "One unit and one date basis for all rows; numbers right-aligned and formatted with the shared grammar.",
+      "editability": {
+        "tier": "table",
+        "editable": [
+          "Native table: figures, labels, fills",
+          "Interpretation notes as text boxes",
+          "Frame text"
+        ],
+        "not_data_bound": [
+          "Note badges (numbered circles) are text shapes; they do not update if table rows are re-ordered"
+        ],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/exhibit-with-interpretation.ts",
+      "fixture": "fixtures/exhibit-with-interpretation.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "aligned-series",
+        "reference-resolves",
+        "cell-length"
+      ],
+      "table_alternative": "The table alone, with notes moved to the frame interpretation panel.",
+      "variations": [
+        "Table plus a single native chart",
+        "Two-column figures with a delta column"
+      ],
+      "limitations": [
+        "Notes are limited to four and 130 characters each to stay beside the table",
+        "Numbered references are typed, not linked"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Callouts drawn with leader lines onto the table",
+          "reason": "Leader lines drift when rows reflow and add decoration without information"
+        },
+        {
+          "form": "Long narrative beside the table",
+          "reason": "Breaks the claim-to-row traceability the pattern exists to show"
+        }
+      ],
+      "references": [
+        "bcg-sia-2022-exhibit-6",
+        "smpt-repertoire-2026"
+      ]
+    },
+    {
+      "id": "location-table",
+      "name": "Location table",
+      "family_code": "K",
+      "family": "Lookup and decision",
+      "order": 5,
+      "reader_question": "Which sites sit in which jurisdiction, at what stage and status, with what stated capacity?",
+      "relationship": "Sites grouped by jurisdiction; stage, status and capacity are attributes, not positions.",
+      "question_types": [
+        "lookup",
+        "state"
+      ],
+      "requires": [
+        "locations",
+        "status-stages"
+      ],
+      "incompatible": [
+        "quantified-flows"
+      ],
+      "capacity": {
+        "min_items": 3,
+        "max_items": 10,
+        "what": "sites (up to 4 jurisdiction groups)"
+      },
+      "use_when": [
+        "The reader needs to find a site and read its status, and no claim depends on geographic distance",
+        "Capacity is stated per site in its own unit"
+      ],
+      "avoid_when": [
+        "The point is spatial clustering or proximity and the source supplies sound coordinates — commission a real map",
+        "Capacity must be summed across units — it cannot be; use a single-unit chart"
+      ],
+      "data_contract": [
+        {
+          "field": "sites[].id",
+          "type": "string",
+          "notes": "Unique site identifier"
+        },
+        {
+          "field": "sites[].jurisdiction / region",
+          "type": "string / string (≤22 chars)",
+          "notes": "Grouping key and region label"
+        },
+        {
+          "field": "sites[].stage / status",
+          "type": "string (≤20 chars) / transaction status",
+          "notes": "Status from the transaction taxonomy"
+        },
+        {
+          "field": "sites[].capacity / unit",
+          "type": "number ≥ 0 or null / string (≤26 chars)",
+          "notes": "Stated capacity in its own unit; null renders as Not stated"
+        }
+      ],
+      "units": "Each row carries its own capacity unit; no total is computed or shown.",
+      "editability": {
+        "tier": "table",
+        "editable": [
+          "Native table: rows, group header rows, status text, fills",
+          "Frame text"
+        ],
+        "not_data_bound": [],
+        "raster": []
+      },
+      "renderer": "scripts/exhibit-system/renderers/location-table.ts",
+      "fixture": "fixtures/location-table.json",
+      "integrity_rules": [
+        "min-categories",
+        "max-categories",
+        "unique-labels",
+        "controlled-vocabulary",
+        "sorted-order",
+        "magnitude-nonnegative",
+        "cell-length"
+      ],
+      "table_alternative": "The pattern is itself the table.",
+      "variations": [
+        "Add a column for co-located organisations",
+        "Single-jurisdiction site register"
+      ],
+      "limitations": [
+        "No coordinates or distances",
+        "Ten sites is the legible limit on one slide"
+      ],
+      "excluded_alternatives": [
+        {
+          "form": "Bubble map sized by capacity",
+          "reason": "Decorative when no claim depends on position, and implies a common capacity scale across units"
+        },
+        {
+          "form": "Choropleth by jurisdiction",
+          "reason": "Colours area for a measure the sources state per site"
+        }
+      ],
+      "references": [
         "smpt-repertoire-2026"
       ]
     }

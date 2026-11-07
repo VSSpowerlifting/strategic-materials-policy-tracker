@@ -15,6 +15,7 @@ SMPT publishes independently authored, source-linked industrial-policy and finan
 2. [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) — chart selection, scales, status encodings, sensitivity reconciliation and source methods.
 3. [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) — mandatory affirmative-writing, graphic-purpose, AI-assisted production, and five-gate review standard.
 4. [Visual Repertoire & Consulting References](VISUAL_REPERTOIRE_AND_REFERENCES.md) — required exhibit-selection workflow, six original graphic examples and exact public consulting references.
+   - [Exhibit system](exhibit-system/README.md) — development reference: 38 synthetic-data exhibit patterns with native editable PPTX renderers, a selection command, deck-composition review and editability verification (structural and LibreOffice; not yet tested in PowerPoint).
 5. [Reference Analysis](REFERENCE_ANALYSIS.md) — annotated evaluation of the four supplied McKinsey/BCG decks and additional institutional resources.
 6. [FI001 Redesign Brief](FI001_REDESIGN_BRIEF.md) — suggested **18-slide** versioned redesign, not an authorization to overwrite the published FI001 edition.
 7. [Original slide previews](examples/) — historical FI001 examples and six new Archivo exhibit patterns. These are not copies of consultant slide screenshots.
@@ -25,6 +26,8 @@ SMPT publishes independently authored, source-linked industrial-policy and finan
 ![Six original SMPT exhibit patterns with synthetic illustrative data](examples/05-visual-repertoire.svg)
 
 See the [visual repertoire](VISUAL_REPERTOIRE_AND_REFERENCES.md) for data classifications, source examples and selection rules. The new gallery uses synthetic layout fixtures; it is separate from research findings.
+
+For editable deck exhibits, use the [exhibit system](exhibit-system/README.md) and its development gallery (`exhibit-system/gallery/index.html`, not for publication).
 
 ## Historical FI001 examples
 

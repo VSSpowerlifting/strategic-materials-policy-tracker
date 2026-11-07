@@ -1,0 +1,44 @@
+{
+  "id": "exhibit-with-interpretation",
+  "name": "Exhibit with interpretation",
+  "family_code": "K",
+  "order": 4,
+  "reader_question": "What are the key figures, and which row supports each interpretive point?",
+  "relationship": "A compact figures table paired with numbered notes; each note cites a table row.",
+  "question_types": ["lookup", "decision"],
+  "requires": ["exact-values"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 2, "max_items": 6, "what": "table rows (1 to 2 value columns, 2 to 4 notes)" },
+  "use_when": [
+    "The reader needs exact figures and a short, evidenced reading of them on one slide",
+    "Each interpretive point can be tied to a single row"
+  ],
+  "avoid_when": [
+    "The shape of the data matters more than exact values — use a chart family pattern",
+    "The interpretation spans many rows or needs argument — use the frame interpretation panel or a separate slide"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure, unit and date basis" },
+    { "field": "columns[]", "type": "string[] (1-2)", "notes": "Value column headings; separate statuses, not summed" },
+    { "field": "rows[].label / values[]", "type": "string (≤26 chars) / number[]", "notes": "Numbered 1..n in table order" },
+    { "field": "notes[].ref / text", "type": "integer / string (≤130 chars)", "notes": "ref must resolve to a table row; one note per row" }
+  ],
+  "units": "One unit and one date basis for all rows; numbers right-aligned and formatted with the shared grammar.",
+  "editability": {
+    "tier": "table",
+    "editable": ["Native table: figures, labels, fills", "Interpretation notes as text boxes", "Frame text"],
+    "not_data_bound": ["Note badges (numbered circles) are text shapes; they do not update if table rows are re-ordered"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/exhibit-with-interpretation.ts",
+  "fixture": "fixtures/exhibit-with-interpretation.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "aligned-series", "reference-resolves", "cell-length"],
+  "table_alternative": "The table alone, with notes moved to the frame interpretation panel.",
+  "variations": ["Table plus a single native chart", "Two-column figures with a delta column"],
+  "limitations": ["Notes are limited to four and 130 characters each to stay beside the table", "Numbered references are typed, not linked"],
+  "excluded_alternatives": [
+    { "form": "Callouts drawn with leader lines onto the table", "reason": "Leader lines drift when rows reflow and add decoration without information" },
+    { "form": "Long narrative beside the table", "reason": "Breaks the claim-to-row traceability the pattern exists to show" }
+  ],
+  "references": ["bcg-sia-2022-exhibit-6", "smpt-repertoire-2026"]
+}

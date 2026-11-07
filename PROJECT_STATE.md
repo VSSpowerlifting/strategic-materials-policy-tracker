@@ -1,3 +1,21 @@
+## 2026-11-07: consulting presentation gallery and exhibit system (draft PR, branch `claude/smpt-presentation-gallery-9f36b1`)
+
+- Builds on PR #222 (`codex/presentation-visual-repertoire`), merged into this branch at `a4640b4`. It does not touch the site, seed data, FI003 or any existing presentation artifact. Commit, push and a draft PR were authorized; merging into `main` and external publication were not.
+- `docs/design/presentations/exhibit-system/` holds:
+  - 38 original exhibit patterns in families A–K (spec, synthetic fixture and native PPTX renderer for each)
+  - a generated registry
+  - `exhibit-gallery.pptx` (39 slides) and a 13-exhibit `demo-deck.pptx` (14 slides)
+  - an element manifest and an editability report
+  - a development-only static gallery (`gallery/index.html`, noindex, with a "not for publication" banner) and 38 LibreOffice previews
+- Code is in `scripts/exhibit-system/` (registry, contract and integrity helpers, renderers, build, verify, select, deck review, gallery index and previews), and tests are in `tests/exhibit-system.test.ts`. The `exhibits:*` npm scripts are documented in the exhibit-system README.
+- Editability tiers: native-chart 14, native-shapes 17, native-chart-with-helper-series 1 (waterfall), table 6. No raster images. The structural and LibreOffice tiers pass for both decks. Manual PowerPoint open/edit/save testing was **not performed**.
+- All fixture data is synthetic (`classification: synthetic-demonstration`, enforced at parse), and every non-cover slide carries the synthetic notice. Consulting references are cited by URL only; no external artwork, logos or fonts are reproduced.
+- Deck review (`exhibits:review`) reports HOLD, REVIEW or INFO and never grants a pass. Gates A–E stay human. Selection (`exhibits:select`) is advisory.
+- Known limitations:
+  - `pptxgenjs` and `jszip` resolve from the Codex runtime (`CODEX_PRIMARY_RUNTIME_NODE_MODULES`), not from `package.json`.
+  - Archivo previews need a local `FONTCONFIG_FILE`; fonts are not committed.
+  - Cosmetic follow-ups: dumbbell ticks are sparse; duration-bars and stage-ladder leave spare interpretation space; condition-tree text is small; the bubble legend is approximate (disclosed); role-matrix marks are left-aligned; date and arrow helpers are duplicated across renderers.
+
 ## 2026-11-03: EU CRMA second Strategic Projects round, release candidate (draft PR)
 
 - Branch `claude/smpt-eu-crma-2026-rc-f5628f`, rebased onto `origin/main` at `3192747` (homepage PR #187). The homepage files, tests and docs from #187 are unchanged. PR #185 is out of scope. Commit, push and a draft PR were authorized on 3 Nov 2026; merge and deploy were not.

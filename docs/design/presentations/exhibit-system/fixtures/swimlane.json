@@ -1,0 +1,46 @@
+{
+  "pattern": "swimlane",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction D's stockpile build is the longest period shown",
+  "subtitle": "Periods and point events by jurisdiction, quarterly axis, 2030–2031; dashed periods are planned",
+  "annotation": "Periods run between stated dates; planned periods are not yet in effect.",
+  "source": "Synthetic fixture swimlane.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Jurisdiction D", "Stockpile build", "Planned expansion", "Q3", "2031"],
+  "data": {
+    "lanes": [
+      {
+        "name": "Jurisdiction A",
+        "items": [
+          { "type": "period", "label": "Consultation", "start": "2030-02-01", "end": "2030-04-30" },
+          { "type": "point", "label": "Rule adopted", "date": "2030-06-15" },
+          { "type": "period", "label": "Phase-in", "start": "2030-09-01", "end": "2031-06-30" }
+        ]
+      },
+      {
+        "name": "Jurisdiction B",
+        "items": [
+          { "type": "period", "label": "Pilot", "start": "2030-04-01", "end": "2030-09-30" },
+          { "type": "point", "label": "Review", "date": "2030-12-01" },
+          { "type": "period", "label": "Planned expansion", "start": "2031-04-01", "end": "2031-12-31", "planned": true }
+        ]
+      },
+      {
+        "name": "Jurisdiction C",
+        "items": [
+          { "type": "point", "label": "Notice", "date": "2030-03-10" },
+          { "type": "period", "label": "Licensing window", "start": "2030-07-01", "end": "2031-01-31" },
+          { "type": "point", "label": "Audit", "date": "2031-05-15" }
+        ]
+      },
+      {
+        "name": "Jurisdiction D",
+        "items": [
+          { "type": "period", "label": "Stockpile build", "start": "2030-01-15", "end": "2031-03-31", "highlight": true },
+          { "type": "point", "label": "Report", "date": "2031-06-30" },
+          { "type": "period", "label": "Planned wind-down", "start": "2031-09-01", "end": "2031-12-31", "planned": true }
+        ]
+      }
+    ]
+  }
+}
