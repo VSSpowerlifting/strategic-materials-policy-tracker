@@ -1,0 +1,58 @@
+{
+  "cases": {
+    "a001": {
+      "alternate_files": {
+        "pdf": {
+          "bytes": 95979,
+          "path": "public/research/applied-001/antimony-supply-resilience-archivo-executive.pdf",
+          "sha256": "13bed2d3f690e09908f4b9b6ab060a75c9956cda0b7599d9817031bff0b5ce0b"
+        },
+        "pptx": {
+          "bytes": 258196,
+          "path": "public/research/applied-001/antimony-supply-resilience-archivo-executive.pptx",
+          "sha256": "37f54cc3d46506dcc6b38f945e8298ccfff1881aaa63bdcec59f5b3cc2fb45d4"
+        }
+      },
+      "editable_pptx": {
+        "editable_text_nodes": 164,
+        "links": 17,
+        "native_shapes": 231,
+        "raster_shapes": 0,
+        "slides": 8
+      },
+      "original_pdf": "public/research/applied-001/antimony-supply-resilience.pdf",
+      "original_sha256": "bdd169c7f6112924c45d9dff317bd39c6c8fce4382e1b63f10ac7002af3507a6",
+      "pdf_links": 34,
+      "research_cutoff": "2026-11-04"
+    },
+    "r001": {
+      "alternate_files": {
+        "pdf": {
+          "bytes": 86298,
+          "path": "public/research/r001/tungsten-supply-security-archivo-executive.pdf",
+          "sha256": "67989da2c489946dba8a6bd8616bb9d9878488d384b7c9eaeafa9cc24620a33e"
+        },
+        "pptx": {
+          "bytes": 230592,
+          "path": "public/research/r001/tungsten-supply-security-archivo-executive.pptx",
+          "sha256": "5dbb0891efda7d7c2a429a055ef9f23f5241f47a85d8eec4a11e8b72b3123400"
+        }
+      },
+      "editable_pptx": {
+        "editable_text_nodes": 143,
+        "links": 12,
+        "native_shapes": 196,
+        "raster_shapes": 0,
+        "slides": 8
+      },
+      "original_pdf": "public/research/r001/tungsten-supply-security-slides.pdf",
+      "original_sha256": "1cd5895ea12ebe6a8963117c26fa9b4fcd93f6d252a76684c3e2107dae4303c6",
+      "pdf_links": 24,
+      "research_cutoff": "2026-11-03"
+    }
+  },
+  "publication_status": "draft_pending_human_approval",
+  "release_scope": "alternate widescreen executive PDF/PPTX; originals preserved",
+  "review_artifact_run": 42313061887,
+  "schema": "smpt-archivo-alternate-editions-1"
+}
