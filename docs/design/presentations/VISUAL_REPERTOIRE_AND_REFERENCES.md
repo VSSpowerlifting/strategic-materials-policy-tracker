@@ -16,7 +16,7 @@ Attention comes from clear comparisons, revealing annotations and a developing a
 
 These six examples demonstrate form only. **All values, dates and states are synthetic layout fixtures, with no company, project, policy or investment finding.** They are original SMPT graphics, not reconstructions of a firm's exhibits. The [fixture data](examples/visual-repertoire-data.json) and [generator](examples/render_visual_repertoire.py) reproduce the SVG and PNG. Use native editable PowerPoint objects when adapting a pattern into a publication; a gallery screenshot is not an editable slide exhibit.
 
-For deck production, the [exhibit system](exhibit-system/README.md) supersedes these six images. It has 38 registered patterns with native editable PowerPoint renderers, integrity checks and an editability report, also on synthetic data. The six SVG examples are kept as the original illustrations for this document.
+For deck production, the [exhibit system](exhibit-system/README.md) supersedes these six images. It has 39 registered patterns with native editable PowerPoint renderers, integrity checks and an editability report, also on synthetic data. The six SVG examples are kept as the original illustrations for this document.
 
 ## Public reference gallery
 
