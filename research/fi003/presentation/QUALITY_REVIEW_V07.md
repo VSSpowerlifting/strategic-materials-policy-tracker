@@ -111,28 +111,65 @@ The renderer refuses to overwrite its outputs. Delete the existing PPTX, manifes
 
 ## PDF accessibility against the draft 0.5 standard
 
-The draft 0.5 PDF was post-processed by `remediate_pdf.py` (receipt: `outputs/presentation-draft-v05/accessibility.json`). Draft 0.6 was not, and neither is draft 0.7. Measured from the tag tree:
+The draft 0.5 PDF was post-processed by `remediate_pdf.py` (receipt: `outputs/presentation-draft-v05/accessibility.json`). Draft 0.6 was not. The draft 0.7 export, `fi003-jpmorgan-mp-materials-draft-0.7.pdf`, **stays unremediated** and byte-for-byte unchanged (sha256 `6f00cd0c05cdc3aff859e7ab7c6af770015cc15a0c0bdac48a6956d21eb83bc5`). A separate file, `fi003-jpmorgan-mp-materials-draft-0.7-accessible.pdf`, is written from it by `v07/remediate_pdf_v07.py`. Its receipt is `fi003-jpmorgan-mp-materials-draft-0.7-accessible.receipt.json`.
 
-| Check | Draft 0.5 (remediated) | Draft 0.7 |
-|-------|------------------------|-----------|
-| Tagged (`/Marked`), `/Lang` en-US, title shown | Yes | Yes. Title: "FI003 JPMorgan and MP Materials, draft 0.7" |
-| Fonts | Archivo embedded | Archivo Regular and Bold embedded |
-| Slide headings tagged H1 or H2 | 15 H1, 21 H2 | **None (gap)** |
-| Decorative vectors artifacted | 50 | **None. 151 of 155 Figure tags have no Alt text (gap)** |
-| Meaningful figures with descriptions | 12 | 4: both slide 4 charts, the slide 6 stacked bar and the slide 12 waterfall |
-| Tables and links preserved | 5 tables, 46 links | 5 tables (18 TH, 77 TD), 34 links |
+| File | sha256 |
+|------|--------|
+| Accessible PDF | `957aa972b40509632c8e494ffe427203b2dfd8ee2fb283269fa79b960a6d306c` |
+| Receipt | `2a52da0e65cd81f351e81d665f5abe01fbe47015682aa00fa7bddaaa129d0cce` |
 
-These gaps are inherited from the exhibit-system export, which draft 0.6 also used; they are not new in 0.7. `remediate_pdf.py` is tied to the draft 0.5 page and heading set, so it was not re-targeted in this editorial pass. Before any publication, either adapt it to the exhibit-system decks or add heading and artifact tagging to the export. No PDF/UA conformance or screen-reader result is claimed.
+Two runs produced byte-identical PDFs and receipts. Measured from the tag tree:
+
+| Check | Draft 0.5 (remediated) | Draft 0.7 export (unremediated) | Draft 0.7 accessible PDF |
+|-------|------------------------|---------------------------------|--------------------------|
+| Tagged (`/Marked`), `/Lang` en-US, title shown | Yes | Yes. Title: "FI003 JPMorgan and MP Materials, draft 0.7" | Yes, unchanged |
+| Fonts | Archivo embedded | Archivo Regular and Bold embedded | Unchanged |
+| Slide headings tagged H1 or H2 | 15 H1, 21 H2 (15 pages) | None | 13 H1, 4 H2. Every slide opens with one H1 |
+| Decorative vectors artifacted | 50 | None. 151 of 155 Figure tags have no Alt text | 147 artifacted. 8 Figures remain, all with Alt text |
+| Meaningful figures with descriptions | 12 | 4 | 8: three charts (slides 4, 6, 12), the slide 4 doughnut and four diagrams (slides 3, 7, 8, 9) |
+| Tables | 5 | 5 (18 TH, 77 TD, 27 TR) | Unchanged |
+| Links | 46 | 34 | 34, URIs and rectangles unchanged |
+| Page pixels and extracted text | — | — | All 13 pages identical to the export |
+
+Draft 0.7 has 13 slides against draft 0.5's 15, and draft 0.5 tagged several H2 subheadings per slide. The H1 count is one per slide in both. Draft 0.7 has fewer H2s because only four slides carry a real subheading; card labels and table captions were not promoted to headings.
+
+**What the script changes.** It re-marks unnamed, text-free vector Figures as `/Artifact` and removes their structure elements and ParentTree slots. Each diagram keeps one representative vector as a Figure carrying the diagram description. The three chart Alts are replaced with descriptions built from the values drawn on the slide; the script fails if a stated value is not among the drawn labels. Slide titles become H1 and the four subheadings H2. The per-page artifact counts are pinned in the script, and any change fails the run. Content bytes outside the marked-content wrappers are not rewritten.
+
+**What the script checks.** Each MCID in a content stream resolves through the ParentTree to the element that owns it. Each link annotation resolves to a Link element. Every page renders pixel-identical and extracts identical text compared with the export. Language, Marked, DisplayDocTitle, Info, XMP, tab order and file ID are unchanged. `test_presentation_v07_accessibility.py` repeats the structural checks on the committed files with pypdf alone.
+
+### Link audit: why 46 became 34
+
+Draft 0.5 had 46 link annotations over 15 unique URIs: 12 source-register URLs and 3 GitHub package links (the working-model XLSX, `evidence.csv` and `sources.json`). Draft 0.7 has 34 over 14 unique URIs, all source-register URLs (S01–S09, S11, S13, S15, S17 and S19). Every source URL in draft 0.5 is still linked in 0.7, and S05 and S08 are new.
+
+The drop comes from slides that draft 0.7 does not have:
+
+- **Linked cover (4 links).** The draft 0.7 cover carries no citations.
+- **Package/closing slide (7 links).** These included the 3 GitHub package links.
+- **Content slides: 35 → 34.** The remaining content slides each cite their own evidence.
+
+On every draft 0.7 page, the links equal that slide's `evidence_refs` in `v07/spec.json`, in order. Each link's visible text is the evidence ID. All 14 URLs match `research/fi003/sources.json`. Per page the counts are 0, 4, 4, 2, 4, 3, 1, 5, 4, 1, 2, 1 and 3.
+
+No source link was lost. The only URIs no longer present are the three repository package links. They were not added back: that would add content to the slides, and the package links belong to final release packaging.
+
+### Limits and manual review still required
+
+These are bounded static checks. They are not a PDF/UA (ISO 14289) or WCAG audit, and no accessibility certification is claimed. Still open:
+
+- A screen-reader pass (NVDA, JAWS or VoiceOver) of reading order, table navigation and Alt text.
+- **Role-matrix marks on slides 2 and 13** are artifacts. Each marked cell carries its own text, but the key text still refers to marks that assistive technology does not announce.
+- **Slide 7 legend** names a route highlight that is not drawn. That is a content issue for the next publication revision, and it was not edited here.
+- Link annotations have no `/Contents`; the visible evidence ID is the link text.
+- Native Microsoft PowerPoint acceptance of the source deck.
 
 ## Not verified or pending
 
 - **Native Microsoft PowerPoint: pending.** PowerPoint is not installed on this machine, so the open, Edit Data, save and reopen test was not run. The test was LibreOffice rendering plus inspection of the chart XML and the embedded workbooks.
-- **Screen readers.** No screen-reader or reading-order test was run.
+- **Screen readers.** No screen-reader test was run on either PDF. The accessible PDF's reading order and tag tree were checked statically only.
 - **Unused legend item.** The slide 4 waterfall legend still shows a "Decrease" item even though there are no decreases. That is the renderer's standard legend, and it is unchanged from draft 0.6. It is left alone to avoid redesigning the shared waterfall.
 - **Layout drift.** The PDF is exported with LibreOffice, so layout in PowerPoint may differ slightly.
 
 ## Decisions for the maintainer
 
-1. **Accessibility remediation.** Decide whether to extend `remediate_pdf.py`, or the exhibit export, so that later decks get heading tags and artifacting before publication.
+1. **Accessibility remediation.** Draft 0.7 now has a separate accessible PDF from `v07/remediate_pdf_v07.py`. The script is pinned to this deck, so it fails on any re-render. Decide whether later decks should get a re-targeted script or heading and artifact tagging in the exhibit export itself. Also decide which PDF a release would ship; packaging is a separate phase.
 2. **Slide 4 legend.** Decide whether the waterfall should hide legend items for series it does not use. This is a shared-renderer change and would also alter draft 0.6 if re-rendered.
 3. **Already resolved.** Draft 0.6 decisions 1 (the ownership donut), 2 (owner assignments on slide 13) and 4 (evidence limits) are resolved by draft 0.7 decisions A, B and C. Decision 3 still stands: the split between the base and option portions is not stated on any slide.

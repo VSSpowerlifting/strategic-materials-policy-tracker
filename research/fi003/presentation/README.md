@@ -58,4 +58,33 @@ The first export in this revision substituted Noto Sans because Archivo was unav
 
 `remediate_pdf.py` classifies only text-free vector Figure content as decoration, replaces its wrapper with `/Artifact BMC`, removes the corresponding structure children and nulls their ParentTree slots. It tags exact matched main headlines as H1 and selected real subheadings as H2. Raw drawing/color-number bytes stay unchanged, avoiding parser float-rounding effects. It refuses complex/unnamed figures containing text, images or XObjects. It preserves meaningful Alt strings, table/header/cell and Link counts, all annotation rectangles/targets, text and exact page-render pixels. Its receipt records 50 artifacts, 15 H1, 21 H2, 12 meaningful figures, five tables and 46 links. All remaining MCIDs resolve to live ParentTree entries. These are bounded static checks, not PDF/UA or screen-reader certification.
 
+### Draft 0.7 accessible PDF
+
+`v07/remediate_pdf_v07.py` reads the unremediated draft 0.7 export and writes a separate accessible copy beside it with a receipt. It never modifies the export, the PowerPoint file or the model.
+
+```sh
+uv run --no-project --with pymupdf==1.26.4 --with pypdf==6.14.2 \
+  python research/fi003/presentation/v07/remediate_pdf_v07.py
+```
+
+Outputs in `outputs/presentation-draft-v07/`:
+
+- `fi003-jpmorgan-mp-materials-draft-0.7-accessible.pdf`
+- `fi003-jpmorgan-mp-materials-draft-0.7-accessible.receipt.json`
+
+The script uses the same method as `remediate_pdf.py`, re-targeted to the 13 draft 0.7 slides in `v07/spec.json`:
+
+- Slide titles become H1, and the four real subheadings become H2.
+- 147 text-free decorative vectors become artifacts.
+- Each diagram keeps one Figure with a description.
+- Chart Alt text is built from the values drawn on the slide.
+
+Per-page artifact counts are pinned, so any re-render fails the script until a reviewer updates it. The script asserts the following against the export:
+
+- every page is pixel- and text-identical;
+- links, tables and metadata are unchanged;
+- every MCID resolves through the ParentTree.
+
+Reruns are byte-identical. `research/fi003/test_presentation_v07_accessibility.py` rechecks the committed files with pypdf alone, including that every link equals its slide's evidence reference and its `sources.json` URL. See `QUALITY_REVIEW_V07.md` for the 46→34 link audit and the manual review still required. These are bounded static checks, not PDF/UA, WCAG or screen-reader certification.
+
 Rerender modified slides and inspect the full deck. Package validation does not establish financial accuracy, native PowerPoint behavior or human approval. Native open/edit/save/reopen, live screen-reader navigation/reading order, broader accessibility review, exact-file/source-rights approval and separate publication authorization remain open. The PR's known merge conflicts with main require a later separately scoped integration phase. No integration/release work belongs in this visual pass.
