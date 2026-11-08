@@ -54,7 +54,8 @@ export interface BuildOptions {
   classification: ExhibitClassification;
   /** Research decks only: repository-relative path of the QC handoff record, if one exists. */
   qcRecord?: string;
-  evidence?: { id: string; title: string; url: string; locator: string }[];
+  /** Research decks only. `label` is the short citation shown (and linked) in the slide footer. */
+  evidence?: { id: string; title: string; url: string; locator: string; label?: string }[];
 }
 
 function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
@@ -128,7 +129,14 @@ export async function buildDeck(
     const h = makeHelpers(slide, contentArea(e.fixture), records, pptx.ShapeType, pptx.ChartType);
     renderer.render(h, data, e.fixture);
     // Keep the fixed frame above native tables in renderers that reflow them.
-    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture });
+    // Research slides with an evidence register get clickable footer citations, in evidence_refs order.
+    const links = opts.classification === "research" && opts.evidence?.length
+      ? (e.fixture.evidence_refs ?? []).flatMap((id) => {
+          const ref = opts.evidence!.find((r) => r.id === id);
+          return ref?.label ? [{ label: ref.label, url: ref.url }] : [];
+        })
+      : undefined;
+    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, ...(links?.length ? { links } : {}) });
     slide.addNotes(
       synthetic
         ? [

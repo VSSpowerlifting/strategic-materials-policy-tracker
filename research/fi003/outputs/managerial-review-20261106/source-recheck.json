@@ -1,0 +1,182 @@
+[
+  {
+    "id": "S01",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796d8k.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 99371,
+    "sha256": "19328b7d418d0190549f161ac3e137c4397b0cdea8a1c8dd2757372ca75553f0",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S02",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 259159,
+    "sha256": "80cf4b9198f80d17063466bdfeb60c8672a25a0522dd9149dcc2db0ea18aace3",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S03",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex105.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 236236,
+    "sha256": "6670327aa3ed30b79133cca66d1f18a1d36b9bc478cebe066fdfbc8f5d667b8b",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S04",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex106.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 110172,
+    "sha256": "36b475c9a1f1a491fb991483abb84c4488085d1fe1e82af7b92269ac67c9ce0a",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S05",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex31.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 143922,
+    "sha256": "371483e4106fd789186c12cfcb2fcb222f95ab70319dd6bb29a3830abafde65e",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S06",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525160635/d923027d424b5.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 388830,
+    "sha256": "1bc8121fbe4a0610b748df50102c4b038988c518c07484610d6ee04e2fc27a93",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S07",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525161255/d923222dex11.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 186573,
+    "sha256": "bbbe99d91eeb7822169af792a94e6520054960653e2256f6478f2471a2221da4",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S08",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553d8k.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 33369,
+    "sha256": "bf464e0978f4d97ee348b8088c130622170f14d5315790387fd3992c15aab8e4",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S09",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 1091491,
+    "sha256": "7bff14645f3c2f736019bd06ed316a2ba6bd529bdf9aaa11266c210aa5037be8",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S10",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136825000054/mp-20250930.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 2243434,
+    "sha256": "f9a9db28f4d3d7b9ba2585d3a01031734b0c98f238fb9ae472b8325e7155a715",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S11",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 3138687,
+    "sha256": "460a73939f1190fb4c24215b1a29faae7ef66e1aaf5a01e7e40cf5f6fbd09b89",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S12",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000029/mp-20260331.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 1562521,
+    "sha256": "ffca7c0abb95ef54ddac7341cdca4da68b0da0c0bcbb98f52f7e286aa50ca22d",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S13",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000048/mp-20260630.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 2023303,
+    "sha256": "e0f676175c72e195b67626310b17643bc2ad3dc35bd9e46e4eb66ce40b24fe8c",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S14",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000056/mpmcq32026er.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 379977,
+    "sha256": "c803c095365317f59dde264abf54f5aba287219899e0fcce0a295e46729d3aed",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S15",
+    "url": "https://www.jpmorgan.com/insights/banking/investment-banking/mp-materials",
+    "retrieved_on": "2026-11-06",
+    "bytes": 218098,
+    "sha256": "2e83079cd068a9e7ab1d1cbd339cb943938c42e1c5ef3369edb975ae990ea6a6",
+    "matches_existing_fingerprint": false,
+    "use": "Current text checked; historical fingerprint retained"
+  },
+  {
+    "id": "S16",
+    "url": "https://www.jpmorganchase.com/newsroom/press-releases/2026/one-year-security-resiliency-initiative-helping-strengthen-industries",
+    "retrieved_on": "2026-11-06",
+    "bytes": 109973,
+    "sha256": "db0e217b08772922c350b15f2b4ee90ce6c84fd0f153393c7702c8743b1a46d6",
+    "matches_existing_fingerprint": false,
+    "use": "Current text checked; historical fingerprint retained"
+  },
+  {
+    "id": "S17",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525159093/d904727d8k.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 29282,
+    "sha256": "2809ab8e907685031d6ceede7ca41021870bb4ea226905544be32122e08b7dea",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S18",
+    "url": "https://data.sec.gov/submissions/CIK0001801368.json",
+    "retrieved_on": "2026-11-06",
+    "bytes": 86789,
+    "sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S19",
+    "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+    "retrieved_on": "2026-11-06",
+    "bytes": 2144965,
+    "sha256": "dd45624f47b781eb0b84c6c3b8f0dd02900bb2ec7b430e148bb85f24af7eebc2",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  },
+  {
+    "id": "S20",
+    "url": "https://gov.texas.gov/news/post/governor-abbott-announces-mp-materials-rare-earth-magnet-manufacturing-expansion-in-northlake",
+    "retrieved_on": "2026-11-06",
+    "bytes": 96803,
+    "sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+    "matches_existing_fingerprint": true,
+    "use": "Original matches recorded fingerprint"
+  }
+]

@@ -1,0 +1,1302 @@
+{
+  "version": "FI003 presentation draft 0.5",
+  "cutoff": "2026-11-06",
+  "reviewed_head": "a07167f25675957be779af8a56961f10e6face41",
+  "visual_guidance_ref": "b7f4c8c409017cb3f1fa4507eb4e85ea6f7d7a91",
+  "model_version": "FI003 model 1.0 — 2026-11-06",
+  "source_hashes": {
+    "inputs.json": "1b3436186f306188926060d27fc39636418405e2078ab9e848aca6ef69851daa",
+    "sources.json": "8b296e5492ec06d8262e06997e4f9654ae0e5d67d628abe4fd91176d5233900f",
+    "prototype.py": "6a21148001d698533ee82bb3b9d1f472df5334a12dfce04eecdc8ee60598a98a",
+    "model.py": "dca50f8cb7d36ad821b51e1c28b500516fb83bd8ad75f853442712b824a5fb3d",
+    "outputs/fi003-model-v1/model_spec.json": "1bfcffb57de346b44b891f73ea1fff917e113ead806a3830de0dd162a75a0494",
+    "outputs/fi003-model-v1/recalculated/FI003_Working_Model_v1.xlsx": "4db87d45a083548cabfe5de85d8ce3bc6b7c9d69c4176ae75d897ca191ba337e"
+  },
+  "baseline_controls": {
+    "draw": {
+      "value": 150,
+      "unit": "USD million",
+      "class": "hypothetical",
+      "rationale": "Static Q3 L-C balance; conditional draw, not forecast"
+    },
+    "sofr": {
+      "value": 0.04,
+      "unit": "fraction/year",
+      "class": "hypothetical",
+      "rationale": "Illustrative SOFR, not observed or forecast"
+    },
+    "days": {
+      "value": 360,
+      "unit": "actual elapsed days / 360",
+      "class": "hypothetical",
+      "rationale": "One 360-day rate-year illustration"
+    },
+    "minimum": {
+      "value": 40,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Eligible contractual minimum assumed solely to isolate clause"
+    },
+    "income": {
+      "value": 20,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Attributable Consolidated Net Income, not Adjusted EBITDA"
+    },
+    "duplicate": {
+      "value": 0,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Later cash duplicating prior addback only"
+    },
+    "trigger": {
+      "value": "2027-08-15",
+      "unit": "date",
+      "class": "hypothetical",
+      "rationale": "Illustrative Q2 statement delivery; not a calculated contractual deadline or forecast"
+    },
+    "state": {
+      "value": "COD / before milestone",
+      "unit": "contractual state",
+      "class": "hypothetical",
+      "rationale": "Three-state illustration, not actual operating status"
+    },
+    "year": {
+      "value": 2029,
+      "unit": "calendar year",
+      "class": "hypothetical",
+      "rationale": "Full-year threshold definition, excludes stub and true-up"
+    },
+    "capacity": {
+      "value": 0.5,
+      "unit": "capacity estimate / target",
+      "class": "hypothetical",
+      "rationale": "Pre-milestone ratio only; no contractual 100% cap inferred"
+    },
+    "benchmark": {
+      "value": 140,
+      "unit": "USD/NdPr kg equivalent",
+      "class": "hypothetical",
+      "rationale": "Normalized eligible designated kg, not sales revenue"
+    }
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "title": "July 2025 transaction 8-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796d8k.htm",
+      "publication_or_filing_date": "2025-07-10",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "19328b7d418d0190549f161ac3e137c4397b0cdea8a1c8dd2757372ca75553f0",
+      "bytes": 99371,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S02",
+      "title": "Transaction agreement, effective July 9, 2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm",
+      "publication_or_filing_date": "2025-07-10",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "80cf4b9198f80d17063466bdfeb60c8672a25a0522dd9149dcc2db0ea18aace3",
+      "bytes": 259159,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Public filed version; omitted schedules/redactions may limit interpretation",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S03",
+      "title": "10X magnet offtake agreement",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex105.htm",
+      "publication_or_filing_date": "2025-07-10",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "6670327aa3ed30b79133cca66d1f18a1d36b9bc478cebe066fdfbc8f5d667b8b",
+      "bytes": 236236,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Public filed version; omitted schedules/redactions may limit interpretation",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S04",
+      "title": "NdPr price protection agreement",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex106.htm",
+      "publication_or_filing_date": "2025-07-10",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "36b475c9a1f1a491fb991483abb84c4488085d1fe1e82af7b92269ac67c9ce0a",
+      "bytes": 110172,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Public filed version; omitted schedules/redactions may limit interpretation",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S05",
+      "title": "Form of Series A certificate of designations",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex31.htm",
+      "publication_or_filing_date": "2025-07-10",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "371483e4106fd789186c12cfcb2fcb222f95ab70319dd6bb29a3830abafde65e",
+      "bytes": 143922,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S06",
+      "title": "Equity prospectus supplement dated July 16, 2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525160635/d923027d424b5.htm",
+      "publication_or_filing_date": "2025-07-18",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "1bc8121fbe4a0610b748df50102c4b038988c518c07484610d6ee04e2fc27a93",
+      "bytes": 388830,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S07",
+      "title": "July 16 underwriting agreement",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525161255/d923222dex11.htm",
+      "publication_or_filing_date": "2025-07-18",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "bbbe99d91eeb7822169af792a94e6520054960653e2256f6478f2471a2221da4",
+      "bytes": 186573,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S08",
+      "title": "August 25 revolving credit 8-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553d8k.htm",
+      "publication_or_filing_date": "2025-08-25",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "bf464e0978f4d97ee348b8088c130622170f14d5315790387fd3992c15aab8e4",
+      "bytes": 33369,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S09",
+      "title": "August 25 credit agreement",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm",
+      "publication_or_filing_date": "2025-08-25",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "7bff14645f3c2f736019bd06ed316a2ba6bd529bdf9aaa11266c210aa5037be8",
+      "bytes": 1091491,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Public filed version; omitted schedules/redactions may limit interpretation",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S10",
+      "title": "Q3 2025 Form 10-Q",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136825000054/mp-20250930.htm",
+      "publication_or_filing_date": "2025-11-07",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "f9a9db28f4d3d7b9ba2585d3a01031734b0c98f238fb9ae472b8325e7155a715",
+      "bytes": 2243434,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S11",
+      "title": "2025 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm",
+      "publication_or_filing_date": "2026-02-26",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "460a73939f1190fb4c24215b1a29faae7ef66e1aaf5a01e7e40cf5f6fbd09b89",
+      "bytes": 3138687,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S12",
+      "title": "Q1 2026 Form 10-Q",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000029/mp-20260331.htm",
+      "publication_or_filing_date": "2026-05-08",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "ffca7c0abb95ef54ddac7341cdca4da68b0da0c0bcbb98f52f7e286aa50ca22d",
+      "bytes": 1562521,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S13",
+      "title": "Q2 2026 Form 10-Q",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000048/mp-20260630.htm",
+      "publication_or_filing_date": "2026-08-07",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "e0f676175c72e195b67626310b17643bc2ad3dc35bd9e46e4eb66ce40b24fe8c",
+      "bytes": 2023303,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S14",
+      "title": "Q3 2026 earnings release furnished as 8-K Exhibit 99.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000056/mpmcq32026er.htm",
+      "publication_or_filing_date": "2026-11-05",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "c803c095365317f59dde264abf54f5aba287219899e0fcce0a295e46729d3aed",
+      "bytes": 379977,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Furnished unaudited release; not a September 2026 10-Q",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S15",
+      "title": "J.P. Morgan transaction article and embedded podcast transcript",
+      "url": "https://www.jpmorgan.com/insights/banking/investment-banking/mp-materials",
+      "publication_or_filing_date": "2025-10-02",
+      "retrieved_on": "2026-11-06",
+      "issuer": "JPMorganChase",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "c578480118a2cbd2f7efc93293b74d2fcce12ff226946353c57c8b44b112266b",
+      "bytes": 218107,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Corporate self-description; investment banking material, not independent research",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S16",
+      "title": "JPMorganChase SRI first-year announcement",
+      "url": "https://www.jpmorganchase.com/newsroom/press-releases/2026/one-year-security-resiliency-initiative-helping-strengthen-industries",
+      "publication_or_filing_date": "2026-10-19",
+      "retrieved_on": "2026-11-06",
+      "issuer": "JPMorganChase",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "6ebead904f98e8b4bdb13c68cb6c0f90a5401f7f614a907eef88cd3394910977",
+      "bytes": 109981,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S17",
+      "title": "July 15 Apple agreement 8-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525159093/d904727d8k.htm",
+      "publication_or_filing_date": "2025-07-15",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML/JSON retrieved; relevant sections read",
+      "sha256": "2809ab8e907685031d6ceede7ca41021870bb4ea226905544be32122e08b7dea",
+      "bytes": 29282,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Issuer disclosure; no independent verification of physical performance",
+      "hash_basis": "Complete retrieved source decoded to UTF-8 locally; hash identifies saved retrieval, not an authenticated original byte stream. Original source files are temporary and not redistributed."
+    },
+    {
+      "id": "S18",
+      "title": "SEC issuer submissions index",
+      "url": "https://data.sec.gov/submissions/CIK0001801368.json",
+      "publication_or_filing_date": "2026-11-06",
+      "retrieved_on": "2026-11-06",
+      "issuer": "SEC",
+      "retrieval": "HTTP 200; refreshed complete SEC submissions JSON; Q3 accession and filing/acceptance dates checked",
+      "sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+      "bytes": 86789,
+      "rights": "Links and paraphrased facts only; no original bank article or transcript redistributed",
+      "limitations": "Live index snapshot; includes filings beyond the research scope, which are not admitted as evidence.",
+      "hash_basis": "Raw HTTP response bytes; replaces earlier November 6 retrieval fingerprint."
+    },
+    {
+      "id": "S19",
+      "title": "Q3 2026 Form 10-Q",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+      "publication_or_filing_date": "2026-11-06",
+      "retrieved_on": "2026-11-06",
+      "issuer": "MP Materials",
+      "retrieval": "HTTP 200; complete original HTML retrieved directly; financial statements, notes, MD&A, risks and exhibit list read",
+      "sha256": "dd45624f47b781eb0b84c6c3b8f0dd02900bb2ec7b430e148bb85f24af7eebc2",
+      "bytes": 2144965,
+      "rights": "Original links and paraphrased facts; original filing not redistributed",
+      "limitations": "Filed unaudited interim statements; issuer reports of construction and compliance; no actual compliance certificate. Signed November 5; SEC filing date November 6; acceptance November 5 at 23:13:56 UTC.",
+      "hash_basis": "Raw HTTP response bytes; fingerprint identifies retrieval, not authenticated signatures."
+    },
+    {
+      "id": "S20",
+      "title": "Texas Governor announces MP Northlake manufacturing and corporate-operations grants",
+      "url": "https://gov.texas.gov/news/post/governor-abbott-announces-mp-materials-rare-earth-magnet-manufacturing-expansion-in-northlake",
+      "publication_or_filing_date": "2026-02-26",
+      "retrieved_on": "2026-11-06",
+      "issuer": "Office of the Governor of Texas",
+      "retrieval": "HTTP 200; complete original release retrieved and body read; announcement distinguished from May agreement and noncash recognition",
+      "sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+      "bytes": 96803,
+      "rights": "Links and paraphrased facts only",
+      "limitations": "Announcement does not establish paid funds or supply full executed grant conditions; TSIF manufacturing and TEF corporate uses are separate.",
+      "hash_basis": "Raw HTTP response bytes; retrieval fingerprint, not authenticated original signature."
+    }
+  ],
+  "slides": [
+    {
+      "number": 1,
+      "kind": "cover",
+      "title": "JPMorgan and MP Materials",
+      "scope": "Financing Through 10X Construction",
+      "source_refs": [
+        [
+          "S02",
+          "§§2.05, 6.01"
+        ],
+        [
+          "S09",
+          "cover, §1.01"
+        ],
+        [
+          "S11",
+          "Notes 3, 18"
+        ],
+        [
+          "S19",
+          "MD&A: 10X"
+        ]
+      ],
+      "claim_ids": [
+        "C01",
+        "C05",
+        "C11",
+        "C27",
+        "C28"
+      ],
+      "model_ref": "",
+      "note": "10X is MP’s planned rare-earth magnet plant in Northlake, Texas.\nManagement expects investment above $1.25bn and commissioning to begin in 2028.",
+      "author": "Benjamin Yang",
+      "version": "Research draft 0.5 · 6 November 2026",
+      "exhibit_family": "cover",
+      "reader_question": "JPMorgan and MP Materials",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 2,
+      "kind": "answer",
+      "title": "Equity secured cash while MP retained exposure through commissioning",
+      "scope": "Analyst judgment · comparable industrial sponsor and lender perspective",
+      "source_refs": [
+        [
+          "S02",
+          "§§6.01, 6.13"
+        ],
+        [
+          "S09",
+          "§§1.01, 7.11"
+        ],
+        [
+          "S11",
+          "Notes 3, 18"
+        ],
+        [
+          "S19",
+          "Note 8, MD&A"
+        ]
+      ],
+      "claim_ids": [
+        "C07",
+        "C14",
+        "C38",
+        "C46",
+        "C52"
+      ],
+      "model_ref": "Financing!B16:B24; Credit!A7:F10",
+      "note": "Assess funding through commissioning using dated cash availability, permitted uses and corporate covenant tests.",
+      "findings": [
+        [
+          "$724.2m",
+          "Net common-equity proceeds received in July 2025, with 7.68% isolated ownership dilution"
+        ],
+        [
+          "$203m",
+          "Remaining conditional revolver capacity at September 2026, after letters of credit"
+        ],
+        [
+          "Contractual support",
+          "Defense agreements enter the EBITDA definition and a performance covenant. Actual addback use remains unknown"
+        ]
+      ],
+      "caveat": "The evidence supports financing flexibility. Original loan terms and a remaining-cost schedule are insufficient to rank the capital mix or certify completion funding.",
+      "exhibit_family": "three findings",
+      "reader_question": "Equity secured cash while MP retained exposure through commissioning",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 3,
+      "kind": "sequence",
+      "title": "Replacement rights connected the closing commitment to later financing",
+      "scope": "Documented sequence · 2025 · amounts have different financing statuses",
+      "source_refs": [
+        [
+          "S02",
+          "§§2.05–2.07"
+        ],
+        [
+          "S11",
+          "Notes 3, 18"
+        ],
+        [
+          "S17",
+          "Item 8.01"
+        ],
+        [
+          "S09",
+          "cover"
+        ]
+      ],
+      "claim_ids": [
+        "C03",
+        "C04",
+        "C05",
+        "C07",
+        "C35"
+      ],
+      "model_ref": "chronology.csv; Financing!B7:B16",
+      "note": "The commitment served a closing and contingent-funding function. MP reports that replacement financing reduced it until it expired undrawn.",
+      "rows": [
+        [
+          "Date",
+          "Observed financing event"
+        ],
+        [
+          "9 Jul 2025",
+          "Government agreements and replaceable joint commitment of at least $1bn"
+        ],
+        [
+          "16 Jul 2025",
+          "Common-equity pricing at $55. July completion ultimately supplied $724.2m net"
+        ],
+        [
+          "25 Aug 2025",
+          "Corporate revolving credit facility executed for $275m"
+        ],
+        [
+          "26 Aug 2025",
+          "Original construction commitment expired undrawn"
+        ]
+      ],
+      "caveat": "Apple announced a separate agreement on 15 July, before equity pricing. The sequence alone cannot isolate its influence or that of government support.",
+      "exhibit_family": "schematic timeline",
+      "reader_question": "How did the financing route change?",
+      "events": [
+        [
+          "9 Jul 2025",
+          "Closing commitment",
+          "Government agreements and a replaceable joint commitment of at least $1bn"
+        ],
+        [
+          "16 Jul 2025",
+          "Equity priced at $55",
+          "July completion supplied $724.2m net common-equity proceeds"
+        ],
+        [
+          "25 Aug 2025",
+          "Corporate credit",
+          "A $275m revolver was executed; borrowing remains conditional"
+        ],
+        [
+          "26 Aug 2025",
+          "Undrawn expiration",
+          "MP reports the original construction commitment expired undrawn"
+        ]
+      ],
+      "visual_text": [
+        "9 Jul 2025",
+        "Closing commitment",
+        "Government agreements and a replaceable joint commitment of at least $1bn",
+        "16 Jul 2025",
+        "Equity priced at $55",
+        "July completion supplied $724.2m net common-equity proceeds",
+        "25 Aug 2025",
+        "Corporate credit",
+        "A $275m revolver was executed; borrowing remains conditional",
+        "26 Aug 2025",
+        "Undrawn expiration",
+        "MP reports the original construction commitment expired undrawn",
+        "Sequence schematic; spacing does not represent elapsed time"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 4,
+      "kind": "roles",
+      "title": "JPMorgan spans the financing stages alongside substantial partner roles",
+      "scope": "Documented functions · legal entities and initial underwriting obligations",
+      "source_refs": [
+        [
+          "S01",
+          "Item 1.01"
+        ],
+        [
+          "S07",
+          "Schedule A"
+        ],
+        [
+          "S09",
+          "cover, signatures"
+        ],
+        [
+          "S15",
+          "bank account"
+        ]
+      ],
+      "claim_ids": [
+        "C02",
+        "C08",
+        "C09",
+        "C11",
+        "C12",
+        "C33"
+      ],
+      "model_ref": "exhibits/underwriting.csv",
+      "note": "JPMorgan’s continuing agency role connects the financing stages. Goldman shared the original commitment and the same initial equity allocation.",
+      "rows": [
+        [
+          "Function",
+          "JPMorgan entity / role",
+          "Other participants / limit"
+        ],
+        [
+          "Advice",
+          "J.P. Morgan: sole financial adviser, per its own account",
+          "Bank self-description"
+        ],
+        [
+          "Construction route",
+          "JPMorgan Chase Funding Inc.: joint commitment",
+          "Goldman Sachs Bank USA. Individual holds unknown"
+        ],
+        [
+          "Equity underwriting",
+          "J.P. Morgan Securities LLC: ≈40% of initial shares",
+          "Goldman ≈40%, Morgan Stanley ≈20%"
+        ],
+        [
+          "Corporate credit",
+          "JPMorgan Chase Bank N.A.: agent, lender and L-C issuer",
+          "Joint arrangers Goldman/Morgan Stanley. Citi/BofA roles"
+        ]
+      ],
+      "caveat": "Initial underwriting obligations establish participation, not retained investment, fee allocation or unique capability.",
+      "exhibit_family": "role comparison table",
+      "reader_question": "JPMorgan spans the financing stages alongside substantial partner roles",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 5,
+      "kind": "alternatives",
+      "title": "An available equity takeout best explains the observed transition",
+      "scope": "Ranked explanations · overlapping mechanisms, rather than causal percentages",
+      "source_refs": [
+        [
+          "S02",
+          "§2.05"
+        ],
+        [
+          "S11",
+          "Notes 3, 18"
+        ],
+        [
+          "S17",
+          "Item 8.01"
+        ],
+        [
+          "S09",
+          "§1.01"
+        ]
+      ],
+      "claim_ids": [
+        "C04",
+        "C05",
+        "C35",
+        "C37",
+        "C38"
+      ],
+      "model_ref": "analysis.md: ranked competing explanations",
+      "note": "The takeout can be conventional while the combined contractual architecture remains useful to a financing team.",
+      "rows": [
+        [
+          "Explanation",
+          "Evidence and implication"
+        ],
+        [
+          "1. Flexible commitment, then equity",
+          "Strong: express replacement rights, completed proceeds and issuer-reported lapse"
+        ],
+        [
+          "2. Government support improved financeability",
+          "Direct mechanisms in public capital and credit terms. Equity-demand effect unisolated"
+        ],
+        [
+          "3. Debt-cost or leverage aversion drove the choice",
+          "Plausible. Missing loan pricing, tenor and management rationale prevent confirmation"
+        ],
+        [
+          "4. Expiration signaled bank rejection",
+          "Weak: completed replacement financing fits the disclosed sequence better"
+        ]
+      ],
+      "caveat": "Apple’s agreement and the available equity market are credible influences. The record does not establish JPMorgan indispensability or financing optimality.",
+      "exhibit_family": "ranked evidence assessment",
+      "reader_question": "Which explanation fits the record best?",
+      "visual_text": [
+        "Flexible commitment, then equity",
+        "Strong: express replacement rights, completed proceeds and issuer-reported lapse",
+        "Government support improved financeability",
+        "Direct mechanisms in public capital and credit terms. Equity-demand effect unisolated",
+        "Debt-cost or leverage aversion drove the choice",
+        "Plausible. Missing loan pricing, tenor and management rationale prevent confirmation",
+        "Expiration signaled bank rejection",
+        "Weak: completed replacement financing fits the disclosed sequence better"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 6,
+      "kind": "economics",
+      "title": "Equity supplied $724.2m at 7.68% isolated ownership dilution",
+      "scope": "SMPT calculation · July-9 basic share base plus the completed offering only",
+      "source_refs": [
+        [
+          "S06",
+          "The Offering, S-7"
+        ],
+        [
+          "S07",
+          "Schedule A"
+        ],
+        [
+          "S11",
+          "Notes 3, 18"
+        ]
+      ],
+      "claim_ids": [
+        "C06",
+        "C07",
+        "C10",
+        "C46"
+      ],
+      "model_ref": "Financing!B9:B24; financing_economics.csv",
+      "note": "Equity avoids scheduled principal and coupon payments while transferring residual ownership. Unknown original loan terms prevent a lifetime financing-cost ranking.",
+      "chart": {
+        "categories": [
+          "Isolated post-offering base"
+        ],
+        "series": [
+          {
+            "name": "Existing holders: 92.32%",
+            "values": [
+              0.92324501079
+            ]
+          },
+          {
+            "name": "New offering shares: 7.68%",
+            "values": [
+              0.07675498921
+            ]
+          }
+        ]
+      },
+      "rows": [
+        [
+          "Measure",
+          "Controlling calculation / meaning"
+        ],
+        [
+          "Existing basic shares",
+          "163,477,816"
+        ],
+        [
+          "New common shares",
+          "13,590,908"
+        ],
+        [
+          "Increase in old share base",
+          "8.31%"
+        ],
+        [
+          "Existing holders retain",
+          "92.32% of isolated post-offering base"
+        ]
+      ],
+      "caveat": "Excludes preferred conversion, warrants, other issuances, options and convertibles. The 3% underwriting discount is a one-time transaction cost, not the cost of equity.",
+      "exhibit_family": "ownership doughnut and share calculation",
+      "reader_question": "Equity supplied $724.2m at 7.68% isolated ownership dilution",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref",
+      "render_chart": {
+        "categories": [
+          "Existing holders",
+          "New offering shares"
+        ],
+        "series": [
+          {
+            "name": "Isolated post-offering ownership",
+            "values": [
+              0.92324501079,
+              0.07675498921
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "number": 7,
+      "kind": "capacity",
+      "title": "Letters of credit leave $203m of the $275m revolver available",
+      "scope": "Reported snapshots and SMPT decomposition · USD million · zero loan draws",
+      "source_refs": [
+        [
+          "S11",
+          "Note 10"
+        ],
+        [
+          "S13",
+          "Note 8"
+        ],
+        [
+          "S19",
+          "Note 8"
+        ]
+      ],
+      "claim_ids": [
+        "C13",
+        "C14"
+      ],
+      "model_ref": "Credit!A7:F10; revolver_snapshots.csv",
+      "note": "Letters of credit consume facility capacity without supplying construction cash. Future borrowing remains subject to the credit agreement.",
+      "chart": {
+        "categories": [
+          "2025-12-31",
+          "2026-06-30",
+          "2026-09-30"
+        ],
+        "series": [
+          {
+            "name": "Implied L-C exposure",
+            "values": [
+              40.0,
+              72.0,
+              72.0
+            ]
+          },
+          {
+            "name": "Remaining conditional capacity",
+            "values": [
+              235.0,
+              203.0,
+              203.0
+            ]
+          }
+        ]
+      },
+      "caveat": "The $200m L-C sublimit sits inside the $275m facility. MP reported compliance at 30 September 2026. This is capacity, separate from cash on hand.",
+      "exhibit_family": "capacity composition by date",
+      "reader_question": "Letters of credit leave $203m of the $275m revolver available",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 8,
+      "kind": "covenant",
+      "title": "Defense contracts enter both covenant earnings and performance obligations",
+      "scope": "Executed corporate credit agreement · mechanism plus hypothetical USD-million illustration",
+      "source_refs": [
+        [
+          "S09",
+          "§1.01(a)(xiv), §§4.02, 6.16"
+        ]
+      ],
+      "claim_ids": [
+        "C38",
+        "C53"
+      ],
+      "model_ref": "Credit!B29:B35; covenant_adjustment.csv",
+      "note": "Contractual earnings recognition can precede collection. The certificate calculation and the underlying contract performance both deserve diligence.",
+      "rows": [
+        [
+          "Credit provision",
+          "Financial meaning"
+        ],
+        [
+          "EBITDA adjustment",
+          "Applicable Test-Period minimums / guaranteed revenues / fixed-price amounts less attributable net income, floored at zero"
+        ],
+        [
+          "Certificate and later cash",
+          "Borrower supplies the estimate. Later cash duplicating a prior addback is subtracted"
+        ],
+        [
+          "Performance covenant",
+          "MP must perform Defense agreements, subject to a Material Adverse Effect exception"
+        ],
+        [
+          "New extensions",
+          "Specified representations and absence of Default condition new credit extensions"
+        ]
+      ],
+      "example": "Hypothetical clause arithmetic: max($40m applicable amount − $20m attributable income, 0) = $20m addback",
+      "caveat": "Actual adjustment use and headroom are unknown. Future 10X amounts require applicable entitlement. No existing default or automatic loss of availability is inferred.",
+      "exhibit_family": "credit provision matrix",
+      "reader_question": "Defense contracts enter both covenant earnings and performance obligations",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 9,
+      "kind": "timing",
+      "title": "Corporate earnings tests can precede expected 10X commissioning",
+      "scope": "Contractual timing scenario · calendar-year bounds for management’s expectation",
+      "source_refs": [
+        [
+          "S09",
+          "§1.01 trigger, §§6.01(b), 7.11"
+        ],
+        [
+          "S19",
+          "MD&A: 10X"
+        ]
+      ],
+      "claim_ids": [
+        "C15",
+        "C50"
+      ],
+      "model_ref": "Credit!B40:B47; model.py:scenario; prototype.py:first_test_quarter",
+      "note": "Treasury and lenders need a corporate earnings and eligible-liquidity case during construction, before assuming 10X operating receipts contribute.",
+      "rows": [
+        [
+          "Stage",
+          "Test or milestone"
+        ],
+        [
+          "Before the trigger",
+          "At least $500m unrestricted contractual cash / Cash Equivalents"
+        ],
+        [
+          "Trigger: earlier delivery",
+          "A certificate showing ≥$400m covenant EBITDA over four quarters, or required Q2 2027 financial statements"
+        ],
+        [
+          "Illustrative delivery: 15 Aug 2027",
+          "First quarter ending after delivery: 30 Sep 2027"
+        ],
+        [
+          "From the earnings-test stage",
+          "Leverage ≤4.00× and cash-interest coverage ≥3.00×, subject to terms"
+        ],
+        [
+          "Management expectation: 2028",
+          "10X begins commissioning, distinct from the commercial operation date (COD)"
+        ]
+      ],
+      "caveat": "The delivery date is assumed, not a legal deadline. The 93–458 days compare year endpoints, not forecast COD dates. Reported Adjusted EBITDA is distinct from covenant EBITDA.",
+      "exhibit_family": "conditional trigger and milestone comparison",
+      "reader_question": "When do the corporate tests change?",
+      "visual_text": [
+        "Before the trigger",
+        "At least $500m unrestricted contractual cash / Cash Equivalents",
+        "Trigger: earlier delivery of either",
+        "A certificate showing ≥$400m covenant EBITDA over four quarters",
+        "Required Q2 2027 financial statements",
+        "Illustrative delivery: 15 Aug 2027",
+        "First quarter ending after delivery: 30 Sep 2027",
+        "From the earnings-test stage",
+        "Leverage ≤4.00× and cash-interest coverage ≥3.00×, subject to terms",
+        "Management expectation: 2028",
+        "10X begins commissioning, distinct from the commercial operation date (COD)"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 10,
+      "kind": "support",
+      "title": "Government support covers specified exposures while MP retains funding duties",
+      "scope": "Contract and reported cash distinctions · each instrument assessed separately",
+      "source_refs": [
+        [
+          "S02",
+          "§§6.01, 6.04(d), 6.09, 6.13"
+        ],
+        [
+          "S03",
+          "§§6.1–6.9"
+        ],
+        [
+          "S04",
+          "§§2–3"
+        ],
+        [
+          "S11",
+          "Note 3"
+        ]
+      ],
+      "claim_ids": [
+        "C18",
+        "C24",
+        "C25",
+        "C26",
+        "C40",
+        "C51",
+        "C52"
+      ],
+      "model_ref": "Support!A44:F56; analysis.md risk map",
+      "note": "MP must use reasonable best efforts to raise additional capital if enumerated funding is insufficient. Timing obligations are qualified, and the parent guarantee runs to DoD.",
+      "rows": [
+        [
+          "Instrument",
+          "Risk addressed",
+          "Exposure or condition retained"
+        ],
+        [
+          "NdPr price protection",
+          "Eligible benchmark shortfall",
+          "Designation, quantity, costs and collection timing"
+        ],
+        [
+          "10X offtake",
+          "Qualifying output / defined support",
+          "Construction, specifications, future appropriations and payment timing"
+        ],
+        [
+          "$400m initial preferred",
+          "Received public equity capital",
+          "7% cumulative preference and potential dilution"
+        ],
+        [
+          "Additional preferred fallback",
+          "Shortfall below $350m incremental net financing",
+          "Conditional purchase mechanics. July equity exceeded threshold"
+        ]
+      ],
+      "caveat": "NdPr = neodymium-praseodymium. Specified-use rules constrain flexibility. The separate $150m samarium loan is repayable; no extra backstop cash is counted.",
+      "exhibit_family": "support-instrument and retained-exposure relationship diagram",
+      "reader_question": "Government support covers specified exposures while MP retains funding duties",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref",
+      "visual_text": [
+        "NdPr price protection",
+        "Eligible benchmark shortfall",
+        "Designation, quantity, costs and collection timing",
+        "10X offtake",
+        "Qualifying output / defined support",
+        "Construction, specifications, future appropriations and payment timing",
+        "$400m initial preferred",
+        "Received public equity capital",
+        "7% cumulative preference and potential dilution",
+        "Additional preferred fallback",
+        "Shortfall below $350m incremental net financing",
+        "Conditional purchase mechanics. July equity exceeded threshold",
+        "MP Materials",
+        "Contract relationships; connector widths carry no financial magnitude"
+      ]
+    },
+    {
+      "number": 11,
+      "kind": "states",
+      "title": "10X threshold protection changes with contractual operating status",
+      "scope": "Hypothetical full-year CY2029 threshold definition · USD million · 50% capacity illustration",
+      "source_refs": [
+        [
+          "S03",
+          "§§1.2, 2.1, 6.2"
+        ]
+      ],
+      "claim_ids": [
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "model_ref": "Support!B8:B15; offtake_threshold.csv",
+      "note": "COD requires operations capable of any magnet output and notice to DoD. The production milestone is the quarter-end of written notice of annual target-capacity capability.",
+      "rows": [
+        [
+          "Contractual state",
+          "Threshold definition",
+          "2029 illustration"
+        ],
+        [
+          "Before commercial operation",
+          "Operating threshold withheld",
+          "—"
+        ],
+        [
+          "COD to production milestone",
+          "Full amount × annual capacity estimate / target",
+          "75.770"
+        ],
+        [
+          "From production milestone",
+          "$140m × 1.02⁴",
+          "151.541"
+        ]
+      ],
+      "caveat": "The target is ≥10,000 tons block-equivalent, typically ≥7,000 tons finished magnets. Full-year thresholds exclude payment stubs/true-up and are distinct from cash and covenant EBITDA. Legal term: signing to ten years after COD.",
+      "exhibit_family": "contract-state column comparison",
+      "reader_question": "How does the threshold change after each operating milestone?",
+      "chart": {
+        "categories": [
+          "COD to production milestone",
+          "From production milestone"
+        ],
+        "series": [
+          {
+            "name": "Full-year 2029 threshold illustration",
+            "values": [
+              75.7702512,
+              151.5405024
+            ]
+          }
+        ]
+      },
+      "visual_text": [
+        "Before commercial operation",
+        "Operating threshold withheld",
+        "50% annual capacity estimate / target",
+        "Full amount: $140m × 1.02⁴",
+        "75.8",
+        "151.5"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 12,
+      "kind": "conversion",
+      "title": "Price protection delivered $110.9m of cash in the first nine months of 2026",
+      "scope": "Reported receipts and SMPT receivable reconciliation · USD million",
+      "source_refs": [
+        [
+          "S19",
+          "Notes 9, 13, 15, 21; MD&A Cash Flows"
+        ]
+      ],
+      "claim_ids": [
+        "C41",
+        "C42",
+        "C43",
+        "C44"
+      ],
+      "model_ref": "Liquidity!B31:B36; Support!B33:B40; support_accounting.csv",
+      "note": "Payment evidence matters independently of accounting income, receivables and award ceilings. Reported receipts are already included in operating cash flow.",
+      "equation": "51.016 + 67.962 − 8.109 = 110.869",
+      "equation_labels": "Opening price-protection receivable + nine-month income − closing receivable = implied receipts",
+      "rows": [
+        [
+          "Other support evidence at 30 Sep 2026",
+          "Amount / status"
+        ],
+        [
+          "Section 45X tax-credit cash receipts",
+          "$19m received during nine months"
+        ],
+        [
+          "10X reimbursable-cost receivable",
+          "$2.506m accrued"
+        ],
+        [
+          "Texas manufacturing reimbursement ceiling",
+          "Up to $53.5m"
+        ],
+        [
+          "Texas manufacturing award receivable",
+          "$10.075m noncash"
+        ]
+      ],
+      "caveat": "The rollforward matches rounded receipts of $110.9m. The separate $6.5m heavy-rare-earth (HREE) construction-award cash belongs in the company bridge.",
+      "exhibit_family": "receivable equation and support table",
+      "reader_question": "Price protection delivered $110.9m of cash in the first nine months of 2026",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 13,
+      "kind": "bridge",
+      "title": "Company liquid assets fell $492.4m as expansion continued",
+      "scope": "Historical cash plus short-term investments · USD million · nine months to 30 Sep 2026",
+      "source_refs": [
+        [
+          "S19",
+          "cash flows, balance sheets, Note 4"
+        ],
+        [
+          "S11",
+          "restricted cash"
+        ]
+      ],
+      "claim_ids": [
+        "C29",
+        "C30",
+        "C48"
+      ],
+      "model_ref": "Liquidity!B16:B26; liquidity_bridge.csv; liquid_assets.csv",
+      "note": "Cash capital spending accounted for most of the decline in company liquid assets. Assessing remaining 10X funding requires a project-specific spending and collection schedule.",
+      "waterfall": {
+        "labels": [
+          "31 Dec 2025",
+          "Operating",
+          "Cash PP&E",
+          "HREE award",
+          "Financing",
+          "Accretion",
+          "Restricted-cash release",
+          "Valuation",
+          "30 Sep 2026"
+        ],
+        "values": [
+          1830.286,
+          -7.757,
+          -420.25,
+          6.5,
+          -91.145,
+          20.876,
+          0.821,
+          -1.42,
+          1337.911
+        ]
+      },
+      "caveat": "All seven components reconcile at unrounded precision. PPA receipts are inside operating cash flow. Company liquid assets are not free 10X cash or certified covenant liquidity.",
+      "exhibit_family": "signed liquidity waterfall",
+      "reader_question": "What explains the change in company liquid assets?",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 14,
+      "kind": "decisions",
+      "title": "A dated funding and covenant schedule is the next decision input",
+      "scope": "Analyst recommendations · comparable sponsor is primary audience",
+      "source_refs": [
+        [
+          "S02",
+          "§§2.05, 6.04(c), 6.13, 7.01(e)"
+        ],
+        [
+          "S09",
+          "§§4.02, 6.16, 7.11"
+        ]
+      ],
+      "claim_ids": [
+        "C04",
+        "C38",
+        "C52",
+        "C53",
+        "C54"
+      ],
+      "model_ref": "analysis.md: decisions and conditions through commissioning",
+      "note": "The record supports the financing architecture and a diligence sequence. Missing loan terms leave the optimal capital mix open.",
+      "rows": [
+        [
+          "Decision / owner",
+          "Action and change-of-action condition"
+        ],
+        [
+          "Substitute funding / treasury",
+          "Confirm settled proceeds, permitted uses and live credit conditions before cancellation. Unfunded replacement requires another committed route"
+        ],
+        [
+          "Fund through commissioning / CFO and lenders",
+          "Reconcile cash, L-Cs, spend, collections and certificates by date. A projected shortfall calls for earlier financing, revised spend or amendment"
+        ],
+        [
+          "Assess public support / credit team",
+          "Test entitlement and performance separately from EBITDA recognition. Delayed collection or a material contract issue requires reassessment"
+        ]
+      ],
+      "caveat": "DoD has contractual cost-to-complete and funding-information rights. Those reports are absent from the public packet. No actual shortfall or automatic default is asserted.",
+      "exhibit_family": "owner and decision-condition exhibit",
+      "reader_question": "What should treasury and credit teams do next?",
+      "visual_text": [
+        "Substitute funding / treasury",
+        "Confirm settled proceeds, permitted uses and live credit conditions before cancellation. Unfunded replacement requires another committed route",
+        "Fund through commissioning / CFO and lenders",
+        "Reconcile cash, L-Cs, spend, collections and certificates by date. A projected shortfall calls for earlier financing, revised spend or amendment",
+        "Assess public support / credit team",
+        "Test entitlement and performance separately from EBITDA recognition. Delayed collection or a material contract issue requires reassessment"
+      ],
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    },
+    {
+      "number": 15,
+      "kind": "methods",
+      "title": "Evidence supports the architecture and bounds the financial conclusions",
+      "scope": "Research cutoff: 6 November 2026 · model 1.0 · agent-assisted independent SMPT analysis",
+      "source_refs": [
+        [
+          "S02",
+          "transaction agreement"
+        ],
+        [
+          "S09",
+          "credit agreement"
+        ],
+        [
+          "S11",
+          "2025 10-K"
+        ],
+        [
+          "S19",
+          "Q3 2026 10-Q"
+        ]
+      ],
+      "claim_ids": [
+        "C10",
+        "C38",
+        "C46",
+        "C48",
+        "C50"
+      ],
+      "model_ref": "inputs.json; model.py; VERIFICATION.md; PUBLICATION_PLAN.md",
+      "note": "The model separates facts, calculations and scenarios. Human financial and publication review remains pending.",
+      "rows": [
+        [
+          "Evidence gap",
+          "Consequence for this publication"
+        ],
+        [
+          "Original commitment / fee letter",
+          "No debt-versus-equity optimality or exact $0.8m cancellation reconciliation"
+        ],
+        [
+          "Actual compliance certificates",
+          "No demonstrated addback use or actual headroom"
+        ],
+        [
+          "Remaining project spend and collections",
+          "No completion-funding certification, runway or project debt-service forecast"
+        ],
+        [
+          "Bank individual holds and internal decisions",
+          "No bank profitability, sole-design or indispensability claim"
+        ]
+      ],
+      "caveat": "No affiliation or endorsement by JPMorgan, MP Materials or the U.S. government. Research links, calculations and model provenance accompany this draft.",
+      "exhibit_family": "evidence-gap table",
+      "reader_question": "Evidence supports the architecture and bounds the financial conclusions",
+      "relationship": "Documented sequence / analyst comparison; see scope, qualifications and model_ref"
+    }
+  ]
+}

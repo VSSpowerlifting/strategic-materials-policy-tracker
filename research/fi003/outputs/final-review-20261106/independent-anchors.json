@@ -1,0 +1,59 @@
+{
+  "method": "Independent rational arithmetic entered from operative offering terms and Q3 statements/Note 4; no model import",
+  "anchors": {
+    "equity_gross_usd_m": {
+      "exact_fraction": "37374997/50000",
+      "decimal": 747.49994
+    },
+    "equity_after_discount_usd_m": {
+      "exact_fraction": "3625374709/5000000",
+      "decimal": 725.0749418
+    },
+    "underwriting_discount_usd_m": {
+      "exact_fraction": "112124991/5000000",
+      "decimal": 22.4249982
+    },
+    "share_base_growth_pct": {
+      "exact_fraction": "169886350/20434727",
+      "decimal": 8.313609964057754
+    },
+    "isolated_ownership_dilution_pct": {
+      "exact_fraction": "339772700/44267181",
+      "decimal": 7.675498920972627
+    },
+    "final_net_plus_capacity_residual_usd_m": {
+      "exact_fraction": "-4/5",
+      "decimal": -0.8
+    },
+    "ppa_receipts_implied_usd_m": {
+      "exact_fraction": "110869/1000",
+      "decimal": 110.869
+    },
+    "full_2029_threshold_usd_m": {
+      "exact_fraction": "47356407/312500",
+      "decimal": 151.5405024
+    },
+    "half_capacity_2029_threshold_usd_m": {
+      "exact_fraction": "47356407/625000",
+      "decimal": 75.7702512
+    },
+    "liquid_asset_change_usd_m": {
+      "exact_fraction": "-3939/8",
+      "decimal": -492.375
+    },
+    "cash_from_cashflow_usd_m": {
+      "exact_fraction": "32542/125",
+      "decimal": 260.336
+    },
+    "investment_rollforward_usd_m": {
+      "exact_fraction": "43103/40",
+      "decimal": 1077.575
+    }
+  },
+  "sources": {
+    "offering": "S06 S-7; S07 Schedule A; S11 Note 18",
+    "cash": "S19 statements/Notes 4, 13 and MD&A Cash Flows; S11 restricted cash",
+    "threshold": "S03 Section 1.2"
+  },
+  "result": "PASS"
+}

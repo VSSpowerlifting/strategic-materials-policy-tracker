@@ -31,6 +31,33 @@
 - Research rendering validates source-reference resolution, renderer data and composition, preserves evidence metadata/hashes, rejects existing output files and public output locations, and always retains draft badges. Technical QC never grants release authority. Gates A–E remain human.
 - Structural OOXML checks and LibreOffice render/re-save pass. Manual Microsoft PowerPoint open / Edit Data / save / reopen remains unperformed. The bubble legend remains approximate and disclosed; positioned shapes are not workbook-bound. See `docs/design/presentations/exhibit-system/FINAL_REVIEW.md` for verification and acceptance details.
 
+## 2026-11-07: FI003 technically integrated with current main (draft PR #215)
+
+- Merged `main` `604632b` into `codex/fi003-jpmorgan-financing-foundation` (from `6aa8898`) with no rebase and no force-push. Seeds were reconciled by stable ID: no collisions, deletions or semantic duplicates. The only shared edit, `us.eventIds`, was unioned. The combined corpus is 78 events, 112 commitments, 140 organizations, 110 projects, 17 programmes and 212 sources. In the F5 cutoff tests, the historical snapshots exclude both cohorts, and a new full-corpus guard checks that no other record was re-dated.
+- Validate, typecheck, lint (0 errors), 1,113 Node tests, build and the FI003 Python checks pass. The Python checks ran under 3.13, because 3.12 is not installed here. The FI003 model, outputs and decks are unchanged. Details are in [VERIFICATION](research/fi003/VERIFICATION.md) and the [PUBLICATION_PLAN](research/fi003/PUBLICATION_PLAN.md) integration row.
+- This is a technical reconciliation only. Financial review (Benjamin; Jiho's challenge) is pending, and no merge to main, publication or deployment is authorized. Repeat the integration if FI003 is revised or main advances before release.
+
+## 2026-11-06: FI003 financing argument revised and approved candidate packages admitted (draft PR #215)
+
+## 2026-11-06: FI003 managerial review and 15-slide draft
+
+- Reviewed PR #215 at `146fa50`; core financing-flexibility thesis preserved after independent challenge. [Managerial assessment](research/fi003/MANAGERIAL_REVIEW.md) narrows recommendations to funding availability, uses and covenant conditions through commissioning. C51 text repaired; C53–C54 add qualified performance-covenant and reporting-rights evidence.
+- [Draft PPTX](research/fi003/outputs/presentation-draft-v01/SMPT_FI003_JPMorgan_MP_Draft_v01.pptx) and matching PDF prepared in Archivo. Fifteen slides rendered/inspected; editable evidence, clickable sources and numerical lineage checked. Model 1.0 and its source hashes preserved. [QC](research/fi003/presentation/QUALITY_REVIEW.md) records gates and limitations.
+- [PUBLICATION_PLAN](research/fi003/PUBLICATION_PLAN.md) remains controlling. Next: Benjamin financial/methodological review, suggested Nov 10. Optional Jiho challenge remains unsent; suggested Nov 16–17 only if invited. Dec 4 conditional publication target. No merge, release, deployment or outreach authorized/performed.
+
+
+- Continues `codex/fi003-jpmorgan-financing-foundation` from reviewed `c1a700a`; [research packet](research/fi003/README.md) remains authoritative. [PUBLICATION_PLAN](research/fi003/PUBLICATION_PLAN.md) is the single tracker for owners, dates, workbook scope and release gates.
+- Strengthens financing-flexibility thesis, ranks alternatives, compares dilution/repayment/conditional availability, refreshes Q3 10-Q, corrects offtake term/definitions/three states, and distinguishes MP’s guarantee to DoD from sovereign repayment cover. Eleven schedules reproduce; Jiho’s unsent assignment is one independent objection.
+- Benjamin explicitly approved all three prepared candidate packages in chat. Admits three finance rows (private equity, corporate RCF, TSIF manufacturing grant), one Texas event, five sources, six organizations and one programme; updates existing MP support evidence and reverse links. Corporate financing is unallocated to projects; TEF corporate operations are not assigned to manufacturing. No schema or taxonomy change. Private promotion records remain ignored; `publishedAt` and monitoring start remain null pending actual release.
+- Verification, prior failures and exact remaining decisions: [VERIFICATION](research/fi003/VERIFICATION.md). December 4 is conditional on Benjamin’s methodological/editorial and exact-file publication decisions. Commit/push authorized; no merge, deployment or external message authorized.
+
+## 2026-11-06: FI003 JPMorgan / MP Materials research foundation
+
+- Research-only branch `codex/fi003-jpmorgan-financing-foundation` is based on current main `fe1d5b3` (initial investigation used local main `b4834d7`); [FI003 packet](research/fi003/README.md) reconciles the original joint commitment's undrawn expiration, equity underwriting, corporate revolver and government contracts through November 6, 2026.
+- Provisional thesis centers on closing assurance, financing replacement and the credit agreement's explicit Defense-payment EBITDA adjustment. Ten reproducible exploratory schedules preserve cash/capacity/accounting distinctions. Exact commitment-cancellation arithmetic and actual covenant application remain unresolved.
+- [Jiho's independent assignment](research/fi003/JIHO_HANDOFF.md) reserves financing, credit and commercial judgment; no conclusions attributed to him. Benjamin retains thesis integration and publication approval. [Verification record](research/fi003/VERIFICATION.md) and [next-phase plan](research/fi003/PUBLICATION_PLAN.md) govern the handoff.
+- No factual corpus, existing publication, application code or production deployment changed. Requested standards/FI002 architecture were consulted at `fe1d5b3` on the existing FI002 branch because they are absent from starting `main`. Publication and final-model work remain separate phases.
+
 ## 2026-11-03: EU CRMA second Strategic Projects round, release candidate (draft PR)
 
 - Branch `claude/smpt-eu-crma-2026-rc-f5628f`, rebased onto `origin/main` at `3192747` (homepage PR #187). The homepage files, tests and docs from #187 are unchanged. PR #185 is out of scope. Commit, push and a draft PR were authorized on 3 Nov 2026; merge and deploy were not.

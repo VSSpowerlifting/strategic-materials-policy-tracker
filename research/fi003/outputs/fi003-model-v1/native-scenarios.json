@@ -1,0 +1,1405 @@
+{
+  "engine": "Google Sheets native calculation; connector updateCells and effectiveValue readback",
+  "reports": [
+    {
+      "name": "zero_draw_low_benchmark_pre_cod",
+      "overrides": {
+        "draw": 0,
+        "sofr": 0.03,
+        "state": "Pre-COD",
+        "benchmark": 70
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 203,
+          "actual": 203,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0.7105,
+          "actual": 0.7105,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 0.7105,
+          "actual": 0.7105,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": "",
+          "actual": "",
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": "",
+          "actual": "",
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 40,
+          "actual": 40,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 110,
+          "actual": 110,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "full_draw_post_milestone",
+      "overrides": {
+        "draw": 203,
+        "sofr": 0.05,
+        "state": "From milestone",
+        "capacity": 0.25
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 15.225,
+          "actual": 15.225000000000003,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 15.225,
+          "actual": 15.225000000000003,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": 151.5405024,
+          "actual": 151.5405024,
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": 37.8851256,
+          "actual": 37.8851256,
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 9,
+          "actual": 9,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 131,
+          "actual": 131,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "negative_income_duplicate_reversal",
+      "overrides": {
+        "minimum": 40,
+        "income": -10,
+        "duplicate": 20,
+        "trigger": "2027-09-30"
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 53,
+          "actual": 53,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0.1855,
+          "actual": 0.1855,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 9.75,
+          "actual": 9.75,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 9.9355,
+          "actual": 9.9355,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 50,
+          "actual": 50,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 30,
+          "actual": 30,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46752,
+          "actual": 46752,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 366,
+          "actual": 366,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": 75.7702512,
+          "actual": 75.7702512,
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": 18.9425628,
+          "actual": 18.9425628,
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 140,
+          "actual": 140,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "quarter_end_trigger_above_target",
+      "overrides": {
+        "trigger": "2027-06-30",
+        "capacity": 1.1
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 53,
+          "actual": 53,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0.1855,
+          "actual": 0.1855,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 9.75,
+          "actual": 9.75,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 9.9355,
+          "actual": 9.9355,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": 166.69455264,
+          "actual": 166.69455264,
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": 41.67363816,
+          "actual": 41.67363816,
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 140,
+          "actual": 140,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "invalid_draw",
+      "overrides": {
+        "draw": 204
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": 75.7702512,
+          "actual": 75.7702512,
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": 18.9425628,
+          "actual": 18.9425628,
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 140,
+          "actual": 140,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "missing_rate",
+      "overrides": {
+        "sofr": null
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": 75.7702512,
+          "actual": 75.7702512,
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": 18.9425628,
+          "actual": 18.9425628,
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 140,
+          "actual": 140,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "invalid_state",
+      "overrides": {
+        "state": "Unrecognized"
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 53,
+          "actual": 53,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0.1855,
+          "actual": 0.1855,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 9.75,
+          "actual": 9.75,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 9.9355,
+          "actual": 9.9355,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "invalid_year",
+      "overrides": {
+        "year": 2024
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 53,
+          "actual": 53,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0.1855,
+          "actual": 0.1855,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 9.75,
+          "actual": 9.75,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 9.9355,
+          "actual": 9.9355,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 140,
+          "actual": 140,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "negative_capacity",
+      "overrides": {
+        "capacity": -0.1
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 53,
+          "actual": 53,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0.1855,
+          "actual": 0.1855,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 9.75,
+          "actual": 9.75,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 9.9355,
+          "actual": 9.9355,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": 140,
+          "actual": 140,
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    },
+    {
+      "name": "missing_benchmark",
+      "overrides": {
+        "benchmark": null
+      },
+      "checks": [
+        {
+          "cell": "Credit!B20",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B21",
+          "expected": 53,
+          "actual": 53,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B22",
+          "expected": 0.1855,
+          "actual": 0.1855,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B23",
+          "expected": 9.75,
+          "actual": 9.75,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B24",
+          "expected": 9.9355,
+          "actual": 9.9355,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B33",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B34",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B35",
+          "expected": 20,
+          "actual": 20,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B42",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Credit!B43",
+          "expected": 46660,
+          "actual": 46660,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B44",
+          "expected": 46753,
+          "actual": 46753,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B45",
+          "expected": 47118,
+          "actual": 47118,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B46",
+          "expected": 93,
+          "actual": 93,
+          "pass": true
+        },
+        {
+          "cell": "Credit!B47",
+          "expected": 458,
+          "actual": 458,
+          "pass": true
+        },
+        {
+          "cell": "Support!B13",
+          "expected": "VALID",
+          "actual": "VALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B14",
+          "expected": 75.7702512,
+          "actual": 75.7702512,
+          "pass": true
+        },
+        {
+          "cell": "Support!B15",
+          "expected": 18.9425628,
+          "actual": 18.9425628,
+          "pass": true
+        },
+        {
+          "cell": "Support!B19",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B22",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B23",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        },
+        {
+          "cell": "Support!B24",
+          "expected": "INVALID",
+          "actual": "INVALID",
+          "pass": true
+        }
+      ],
+      "historicalAnchors": 76,
+      "unchangedFacts": 70,
+      "errors": [],
+      "failures": [],
+      "pass": true
+    }
+  ]
+}

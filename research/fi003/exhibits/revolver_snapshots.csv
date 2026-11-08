@@ -1,0 +1,4 @@
+as_of,commitment_usd_m,loan_draws_usd_m,lc_exposure_implied_usd_m,remaining_capacity_usd_m,sources,caveat
+2025-12-31,275,0,40,235,S11 Note 10,Dated reported snapshot; L-C sublimit is not additive; no future availability assumed
+2026-06-30,275,0,72,203,S13 Note 8,Dated reported snapshot; L-C sublimit is not additive; no future availability assumed
+2026-09-30,275,0,72,203,S19 Note 8,Dated reported snapshot; L-C sublimit is not additive; no future availability assumed
