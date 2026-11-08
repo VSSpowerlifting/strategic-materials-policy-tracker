@@ -92,7 +92,9 @@ export const criterionMatrix: Renderer<CriterionMatrixData> = {
     const labelW = 2.75;
     const optW = Math.min(1.6, (h.area.w - labelW) / d.options.length);
     const headH = 0.55;
-    const rowH = 0.5;
+    // Rows shrink (never grow) so the table plus the marks key fit the exhibit area at the 7-criterion maximum.
+    const keyH = 0.5;
+    const rowH = Math.min(0.5, (h.area.h - headH - keyH) / d.criteria.length);
     const hdr = (text: string, accent: boolean, align: "left" | "center"): TableCell => ({
       text,
       options: { bold: true, fontSize: 11, color: C.paper, fill: { color: accent ? C.accent : C.dark }, align, valign: "middle" },

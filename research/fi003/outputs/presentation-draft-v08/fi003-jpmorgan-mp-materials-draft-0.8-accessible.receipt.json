@@ -1,0 +1,1613 @@
+{
+  "status": "PASS",
+  "scope": "Bounded structure remediation of the draft 0.8 export; not PDF/UA or WCAG certification",
+  "source_export": "fi003-jpmorgan-mp-materials-draft-0.8.pdf",
+  "source_export_sha256": "b878f752493945bd69d0453531a6f4cc1d221982d7c1e70b64ecd88dcf9a6189",
+  "accessible_pdf": "fi003-jpmorgan-mp-materials-draft-0.8-accessible.pdf",
+  "accessible_pdf_sha256": "12689294e7a34b5e38384e58edc6aee66cffa539fb995859b8d45a406ab9ab73",
+  "spec_sha256": "99bf1a729109f30cbf56d199f4777271ef2163fe1838f1870e728f5693f7467e",
+  "tooling": {
+    "pypdf": "6.14.2",
+    "pymupdf": "1.26.4"
+  },
+  "roles_before": {
+    "/Div": 231,
+    "/Figure": 264,
+    "/Link": 48,
+    "/P": 448,
+    "/TD": 146,
+    "/TH": 27,
+    "/TR": 45,
+    "/Table": 7
+  },
+  "roles_after": {
+    "/Div": 231,
+    "/Figure": 9,
+    "/H1": 16,
+    "/H2": 3,
+    "/Link": 48,
+    "/P": 429,
+    "/TD": 146,
+    "/TH": 27,
+    "/TR": 45,
+    "/Table": 7
+  },
+  "figures_before": {
+    "total": 264,
+    "without_alt": 260
+  },
+  "figures_after": {
+    "total": 9,
+    "without_alt": 0
+  },
+  "headings": [
+    {
+      "page": 1,
+      "mcid": 1,
+      "role": "/H1"
+    },
+    {
+      "page": 2,
+      "mcid": 38,
+      "role": "/H2"
+    },
+    {
+      "page": 2,
+      "mcid": 56,
+      "role": "/H1"
+    },
+    {
+      "page": 3,
+      "mcid": 59,
+      "role": "/H1"
+    },
+    {
+      "page": 4,
+      "mcid": 38,
+      "role": "/H1"
+    },
+    {
+      "page": 5,
+      "mcid": 38,
+      "role": "/H2"
+    },
+    {
+      "page": 5,
+      "mcid": 53,
+      "role": "/H1"
+    },
+    {
+      "page": 6,
+      "mcid": 13,
+      "role": "/H2"
+    },
+    {
+      "page": 6,
+      "mcid": 26,
+      "role": "/H1"
+    },
+    {
+      "page": 7,
+      "mcid": 22,
+      "role": "/H1"
+    },
+    {
+      "page": 8,
+      "mcid": 30,
+      "role": "/H1"
+    },
+    {
+      "page": 9,
+      "mcid": 44,
+      "role": "/H1"
+    },
+    {
+      "page": 10,
+      "mcid": 23,
+      "role": "/H1"
+    },
+    {
+      "page": 11,
+      "mcid": 57,
+      "role": "/H1"
+    },
+    {
+      "page": 12,
+      "mcid": 132,
+      "role": "/H1"
+    },
+    {
+      "page": 13,
+      "mcid": 45,
+      "role": "/H1"
+    },
+    {
+      "page": 14,
+      "mcid": 61,
+      "role": "/H1"
+    },
+    {
+      "page": 15,
+      "mcid": 45,
+      "role": "/H1"
+    },
+    {
+      "page": 16,
+      "mcid": 81,
+      "role": "/H1"
+    }
+  ],
+  "alt_text": [
+    {
+      "page": 4,
+      "mcid": 9,
+      "kind": "diagram",
+      "before": "",
+      "after": "Two-lane timeline on a day-count scale, 9 July 2025 to 26 August 2025, each event marked by its status. Financing lane: Joint commitment, effective, 9 July 2025; Equity priced, implementation, 16 July 2025; Revolver signed, effective, 25 August 2025. Commitment and context lane: Apple agreement, announcement, 15 July 2025; Commitment expired, implementation, 26 August 2025.",
+      "derived_from": "spec.json slides[2].exhibit.data"
+    },
+    {
+      "page": 6,
+      "mcid": 0,
+      "kind": "chart",
+      "before": "Waterfall bridge, Million shares",
+      "after": "Waterfall bridge, Million shares: Before offering 163.478; New shares +13.591; Isolated pro forma 177.069.",
+      "derived_from": "spec.json slides[4].exhibit.data"
+    },
+    {
+      "page": 7,
+      "mcid": 5,
+      "kind": "chart",
+      "before": "Stacked bar chart of Letters of credit, Remaining capacity, USD million",
+      "after": "Stacked bar chart, USD million, Letters of credit and Remaining capacity at 3 reported dates. 31 Dec 2025: Letters of credit 40, Remaining capacity 235 (total 275); 30 Jun 2026: Letters of credit 72, Remaining capacity 203 (total 275); 30 Sep 2026: Letters of credit 72, Remaining capacity 203 (total 275).",
+      "derived_from": "spec.json slides[5].exhibit.data"
+    },
+    {
+      "page": 8,
+      "mcid": 0,
+      "kind": "chart",
+      "before": "Waterfall bridge, USD million",
+      "after": "Waterfall bridge, USD million: 31 Dec 2025 1,830.3; Operating cash flow −7.8; Cash capital spending −420.3; Government award proceeds +6.5; Financing cash flows −91.1; Accretion +20.9; Restricted-cash release +0.8; Valuation change −1.4; 30 Sep 2026 1,337.9.",
+      "derived_from": "spec.json slides[6].exhibit.data"
+    },
+    {
+      "page": 9,
+      "mcid": 14,
+      "kind": "diagram",
+      "before": "",
+      "after": "Milestone timeline on a day-count scale, 2025 to 2027; reported dates come from filings and targeted dates are model assumptions. Equity priced, reported, 16 July 2025; Revolver signed, reported, 25 August 2025; Letters of credit $72m, reported, 30 September 2026; Illustrative delivery, targeted, 15 August 2027; Illustrative first test, targeted, 30 September 2027.",
+      "derived_from": "spec.json slides[7].exhibit.data"
+    },
+    {
+      "page": 10,
+      "mcid": 17,
+      "kind": "diagram",
+      "before": "",
+      "after": "Hub-and-spoke diagram with MP Materials at the centre and 4 spokes of equal length that carry no magnitude. NdPr price protection: Floor-price payments (PPA income); 10X offtake: Purchase commitment; threshold varies; Initial preferred: Government cash consideration, $400m; Additional preferred: Fallback if net financing under $350m.",
+      "derived_from": "spec.json slides[8].exhibit.data"
+    },
+    {
+      "page": 13,
+      "mcid": 27,
+      "kind": "diagram",
+      "before": "",
+      "after": "Decision tree. Illustrative clause arithmetic with hypothetical inputs, not reported MP results. Is a minimum payment applicable? if No, No adjustment; if Yes, (Minimum versus attributable income: if Min. higher, (Does later cash repeat the addback: if No, Addback of 20; if Yes, Net reduction of 20); if Income higher, No addback). Highlighted outcome: Net reduction of 20.",
+      "derived_from": "spec.json slides[11].exhibit.data"
+    },
+    {
+      "page": 15,
+      "mcid": 27,
+      "kind": "diagram",
+      "before": "",
+      "after": "Decision tree. Decision conditions for a hypothetical sponsor; the highlighted outcome is the recommendation. Equity window open on acceptable terms? if No, Committed debt or delay; if Yes, (Cost-to-complete above cash plus undrawn: if Yes, Raise more equity first; if No, (Covenant tests bind before 10X revenue: if No, Equity plus revolver; if Yes, Equity only)). Highlighted outcome: Equity plus revolver.",
+      "derived_from": "spec.json slides[13].exhibit.data"
+    }
+  ],
+  "decorative_vectors_artifacted": 255,
+  "artifacts_per_page": {
+    "2": 5,
+    "3": 12,
+    "4": 20,
+    "5": 5,
+    "6": 9,
+    "7": 6,
+    "8": 7,
+    "9": 21,
+    "10": 12,
+    "11": 16,
+    "12": 46,
+    "13": 29,
+    "14": 15,
+    "15": 29,
+    "16": 23
+  },
+  "artifacts": [
+    {
+      "page": 2,
+      "mcid": 39
+    },
+    {
+      "page": 2,
+      "mcid": 52
+    },
+    {
+      "page": 2,
+      "mcid": 58
+    },
+    {
+      "page": 2,
+      "mcid": 59
+    },
+    {
+      "page": 2,
+      "mcid": 69
+    },
+    {
+      "page": 3,
+      "mcid": 46
+    },
+    {
+      "page": 3,
+      "mcid": 47
+    },
+    {
+      "page": 3,
+      "mcid": 48
+    },
+    {
+      "page": 3,
+      "mcid": 49
+    },
+    {
+      "page": 3,
+      "mcid": 50
+    },
+    {
+      "page": 3,
+      "mcid": 51
+    },
+    {
+      "page": 3,
+      "mcid": 52
+    },
+    {
+      "page": 3,
+      "mcid": 53
+    },
+    {
+      "page": 3,
+      "mcid": 55
+    },
+    {
+      "page": 3,
+      "mcid": 61
+    },
+    {
+      "page": 3,
+      "mcid": 62
+    },
+    {
+      "page": 3,
+      "mcid": 72
+    },
+    {
+      "page": 4,
+      "mcid": 0
+    },
+    {
+      "page": 4,
+      "mcid": 2
+    },
+    {
+      "page": 4,
+      "mcid": 4
+    },
+    {
+      "page": 4,
+      "mcid": 7
+    },
+    {
+      "page": 4,
+      "mcid": 8
+    },
+    {
+      "page": 4,
+      "mcid": 11
+    },
+    {
+      "page": 4,
+      "mcid": 13
+    },
+    {
+      "page": 4,
+      "mcid": 14
+    },
+    {
+      "page": 4,
+      "mcid": 17
+    },
+    {
+      "page": 4,
+      "mcid": 18
+    },
+    {
+      "page": 4,
+      "mcid": 21
+    },
+    {
+      "page": 4,
+      "mcid": 22
+    },
+    {
+      "page": 4,
+      "mcid": 26
+    },
+    {
+      "page": 4,
+      "mcid": 27
+    },
+    {
+      "page": 4,
+      "mcid": 30
+    },
+    {
+      "page": 4,
+      "mcid": 31
+    },
+    {
+      "page": 4,
+      "mcid": 34
+    },
+    {
+      "page": 4,
+      "mcid": 40
+    },
+    {
+      "page": 4,
+      "mcid": 41
+    },
+    {
+      "page": 4,
+      "mcid": 51
+    },
+    {
+      "page": 5,
+      "mcid": 39
+    },
+    {
+      "page": 5,
+      "mcid": 49
+    },
+    {
+      "page": 5,
+      "mcid": 55
+    },
+    {
+      "page": 5,
+      "mcid": 56
+    },
+    {
+      "page": 5,
+      "mcid": 66
+    },
+    {
+      "page": 6,
+      "mcid": 7
+    },
+    {
+      "page": 6,
+      "mcid": 9
+    },
+    {
+      "page": 6,
+      "mcid": 12
+    },
+    {
+      "page": 6,
+      "mcid": 17
+    },
+    {
+      "page": 6,
+      "mcid": 19
+    },
+    {
+      "page": 6,
+      "mcid": 22
+    },
+    {
+      "page": 6,
+      "mcid": 28
+    },
+    {
+      "page": 6,
+      "mcid": 29
+    },
+    {
+      "page": 6,
+      "mcid": 35
+    },
+    {
+      "page": 7,
+      "mcid": 0
+    },
+    {
+      "page": 7,
+      "mcid": 2
+    },
+    {
+      "page": 7,
+      "mcid": 18
+    },
+    {
+      "page": 7,
+      "mcid": 24
+    },
+    {
+      "page": 7,
+      "mcid": 25
+    },
+    {
+      "page": 7,
+      "mcid": 33
+    },
+    {
+      "page": 8,
+      "mcid": 19
+    },
+    {
+      "page": 8,
+      "mcid": 21
+    },
+    {
+      "page": 8,
+      "mcid": 23
+    },
+    {
+      "page": 8,
+      "mcid": 26
+    },
+    {
+      "page": 8,
+      "mcid": 32
+    },
+    {
+      "page": 8,
+      "mcid": 33
+    },
+    {
+      "page": 8,
+      "mcid": 37
+    },
+    {
+      "page": 9,
+      "mcid": 0
+    },
+    {
+      "page": 9,
+      "mcid": 2
+    },
+    {
+      "page": 9,
+      "mcid": 4
+    },
+    {
+      "page": 9,
+      "mcid": 7
+    },
+    {
+      "page": 9,
+      "mcid": 8
+    },
+    {
+      "page": 9,
+      "mcid": 9
+    },
+    {
+      "page": 9,
+      "mcid": 10
+    },
+    {
+      "page": 9,
+      "mcid": 15
+    },
+    {
+      "page": 9,
+      "mcid": 16
+    },
+    {
+      "page": 9,
+      "mcid": 20
+    },
+    {
+      "page": 9,
+      "mcid": 21
+    },
+    {
+      "page": 9,
+      "mcid": 25
+    },
+    {
+      "page": 9,
+      "mcid": 26
+    },
+    {
+      "page": 9,
+      "mcid": 30
+    },
+    {
+      "page": 9,
+      "mcid": 31
+    },
+    {
+      "page": 9,
+      "mcid": 35
+    },
+    {
+      "page": 9,
+      "mcid": 36
+    },
+    {
+      "page": 9,
+      "mcid": 40
+    },
+    {
+      "page": 9,
+      "mcid": 46
+    },
+    {
+      "page": 9,
+      "mcid": 47
+    },
+    {
+      "page": 9,
+      "mcid": 59
+    },
+    {
+      "page": 10,
+      "mcid": 1
+    },
+    {
+      "page": 10,
+      "mcid": 2
+    },
+    {
+      "page": 10,
+      "mcid": 3
+    },
+    {
+      "page": 10,
+      "mcid": 4
+    },
+    {
+      "page": 10,
+      "mcid": 5
+    },
+    {
+      "page": 10,
+      "mcid": 8
+    },
+    {
+      "page": 10,
+      "mcid": 11
+    },
+    {
+      "page": 10,
+      "mcid": 14
+    },
+    {
+      "page": 10,
+      "mcid": 19
+    },
+    {
+      "page": 10,
+      "mcid": 25
+    },
+    {
+      "page": 10,
+      "mcid": 26
+    },
+    {
+      "page": 10,
+      "mcid": 36
+    },
+    {
+      "page": 11,
+      "mcid": 40
+    },
+    {
+      "page": 11,
+      "mcid": 41
+    },
+    {
+      "page": 11,
+      "mcid": 42
+    },
+    {
+      "page": 11,
+      "mcid": 43
+    },
+    {
+      "page": 11,
+      "mcid": 44
+    },
+    {
+      "page": 11,
+      "mcid": 45
+    },
+    {
+      "page": 11,
+      "mcid": 46
+    },
+    {
+      "page": 11,
+      "mcid": 47
+    },
+    {
+      "page": 11,
+      "mcid": 48
+    },
+    {
+      "page": 11,
+      "mcid": 49
+    },
+    {
+      "page": 11,
+      "mcid": 50
+    },
+    {
+      "page": 11,
+      "mcid": 51
+    },
+    {
+      "page": 11,
+      "mcid": 53
+    },
+    {
+      "page": 11,
+      "mcid": 59
+    },
+    {
+      "page": 11,
+      "mcid": 60
+    },
+    {
+      "page": 11,
+      "mcid": 70
+    },
+    {
+      "page": 12,
+      "mcid": 81
+    },
+    {
+      "page": 12,
+      "mcid": 82
+    },
+    {
+      "page": 12,
+      "mcid": 83
+    },
+    {
+      "page": 12,
+      "mcid": 84
+    },
+    {
+      "page": 12,
+      "mcid": 85
+    },
+    {
+      "page": 12,
+      "mcid": 86
+    },
+    {
+      "page": 12,
+      "mcid": 87
+    },
+    {
+      "page": 12,
+      "mcid": 88
+    },
+    {
+      "page": 12,
+      "mcid": 89
+    },
+    {
+      "page": 12,
+      "mcid": 90
+    },
+    {
+      "page": 12,
+      "mcid": 91
+    },
+    {
+      "page": 12,
+      "mcid": 92
+    },
+    {
+      "page": 12,
+      "mcid": 93
+    },
+    {
+      "page": 12,
+      "mcid": 94
+    },
+    {
+      "page": 12,
+      "mcid": 95
+    },
+    {
+      "page": 12,
+      "mcid": 96
+    },
+    {
+      "page": 12,
+      "mcid": 97
+    },
+    {
+      "page": 12,
+      "mcid": 98
+    },
+    {
+      "page": 12,
+      "mcid": 99
+    },
+    {
+      "page": 12,
+      "mcid": 100
+    },
+    {
+      "page": 12,
+      "mcid": 101
+    },
+    {
+      "page": 12,
+      "mcid": 102
+    },
+    {
+      "page": 12,
+      "mcid": 103
+    },
+    {
+      "page": 12,
+      "mcid": 104
+    },
+    {
+      "page": 12,
+      "mcid": 105
+    },
+    {
+      "page": 12,
+      "mcid": 106
+    },
+    {
+      "page": 12,
+      "mcid": 107
+    },
+    {
+      "page": 12,
+      "mcid": 108
+    },
+    {
+      "page": 12,
+      "mcid": 109
+    },
+    {
+      "page": 12,
+      "mcid": 110
+    },
+    {
+      "page": 12,
+      "mcid": 111
+    },
+    {
+      "page": 12,
+      "mcid": 112
+    },
+    {
+      "page": 12,
+      "mcid": 113
+    },
+    {
+      "page": 12,
+      "mcid": 114
+    },
+    {
+      "page": 12,
+      "mcid": 115
+    },
+    {
+      "page": 12,
+      "mcid": 116
+    },
+    {
+      "page": 12,
+      "mcid": 117
+    },
+    {
+      "page": 12,
+      "mcid": 119
+    },
+    {
+      "page": 12,
+      "mcid": 121
+    },
+    {
+      "page": 12,
+      "mcid": 122
+    },
+    {
+      "page": 12,
+      "mcid": 124
+    },
+    {
+      "page": 12,
+      "mcid": 126
+    },
+    {
+      "page": 12,
+      "mcid": 128
+    },
+    {
+      "page": 12,
+      "mcid": 134
+    },
+    {
+      "page": 12,
+      "mcid": 135
+    },
+    {
+      "page": 12,
+      "mcid": 143
+    },
+    {
+      "page": 13,
+      "mcid": 0
+    },
+    {
+      "page": 13,
+      "mcid": 3
+    },
+    {
+      "page": 13,
+      "mcid": 4
+    },
+    {
+      "page": 13,
+      "mcid": 5
+    },
+    {
+      "page": 13,
+      "mcid": 6
+    },
+    {
+      "page": 13,
+      "mcid": 7
+    },
+    {
+      "page": 13,
+      "mcid": 8
+    },
+    {
+      "page": 13,
+      "mcid": 9
+    },
+    {
+      "page": 13,
+      "mcid": 10
+    },
+    {
+      "page": 13,
+      "mcid": 11
+    },
+    {
+      "page": 13,
+      "mcid": 12
+    },
+    {
+      "page": 13,
+      "mcid": 13
+    },
+    {
+      "page": 13,
+      "mcid": 14
+    },
+    {
+      "page": 13,
+      "mcid": 15
+    },
+    {
+      "page": 13,
+      "mcid": 16
+    },
+    {
+      "page": 13,
+      "mcid": 17
+    },
+    {
+      "page": 13,
+      "mcid": 18
+    },
+    {
+      "page": 13,
+      "mcid": 19
+    },
+    {
+      "page": 13,
+      "mcid": 20
+    },
+    {
+      "page": 13,
+      "mcid": 29
+    },
+    {
+      "page": 13,
+      "mcid": 31
+    },
+    {
+      "page": 13,
+      "mcid": 33
+    },
+    {
+      "page": 13,
+      "mcid": 35
+    },
+    {
+      "page": 13,
+      "mcid": 37
+    },
+    {
+      "page": 13,
+      "mcid": 39
+    },
+    {
+      "page": 13,
+      "mcid": 41
+    },
+    {
+      "page": 13,
+      "mcid": 47
+    },
+    {
+      "page": 13,
+      "mcid": 48
+    },
+    {
+      "page": 13,
+      "mcid": 52
+    },
+    {
+      "page": 14,
+      "mcid": 45
+    },
+    {
+      "page": 14,
+      "mcid": 46
+    },
+    {
+      "page": 14,
+      "mcid": 47
+    },
+    {
+      "page": 14,
+      "mcid": 48
+    },
+    {
+      "page": 14,
+      "mcid": 49
+    },
+    {
+      "page": 14,
+      "mcid": 50
+    },
+    {
+      "page": 14,
+      "mcid": 51
+    },
+    {
+      "page": 14,
+      "mcid": 52
+    },
+    {
+      "page": 14,
+      "mcid": 53
+    },
+    {
+      "page": 14,
+      "mcid": 54
+    },
+    {
+      "page": 14,
+      "mcid": 55
+    },
+    {
+      "page": 14,
+      "mcid": 57
+    },
+    {
+      "page": 14,
+      "mcid": 63
+    },
+    {
+      "page": 14,
+      "mcid": 64
+    },
+    {
+      "page": 14,
+      "mcid": 70
+    },
+    {
+      "page": 15,
+      "mcid": 0
+    },
+    {
+      "page": 15,
+      "mcid": 3
+    },
+    {
+      "page": 15,
+      "mcid": 4
+    },
+    {
+      "page": 15,
+      "mcid": 5
+    },
+    {
+      "page": 15,
+      "mcid": 6
+    },
+    {
+      "page": 15,
+      "mcid": 7
+    },
+    {
+      "page": 15,
+      "mcid": 8
+    },
+    {
+      "page": 15,
+      "mcid": 9
+    },
+    {
+      "page": 15,
+      "mcid": 10
+    },
+    {
+      "page": 15,
+      "mcid": 11
+    },
+    {
+      "page": 15,
+      "mcid": 12
+    },
+    {
+      "page": 15,
+      "mcid": 13
+    },
+    {
+      "page": 15,
+      "mcid": 14
+    },
+    {
+      "page": 15,
+      "mcid": 15
+    },
+    {
+      "page": 15,
+      "mcid": 16
+    },
+    {
+      "page": 15,
+      "mcid": 17
+    },
+    {
+      "page": 15,
+      "mcid": 18
+    },
+    {
+      "page": 15,
+      "mcid": 19
+    },
+    {
+      "page": 15,
+      "mcid": 20
+    },
+    {
+      "page": 15,
+      "mcid": 29
+    },
+    {
+      "page": 15,
+      "mcid": 31
+    },
+    {
+      "page": 15,
+      "mcid": 33
+    },
+    {
+      "page": 15,
+      "mcid": 35
+    },
+    {
+      "page": 15,
+      "mcid": 37
+    },
+    {
+      "page": 15,
+      "mcid": 39
+    },
+    {
+      "page": 15,
+      "mcid": 41
+    },
+    {
+      "page": 15,
+      "mcid": 47
+    },
+    {
+      "page": 15,
+      "mcid": 48
+    },
+    {
+      "page": 15,
+      "mcid": 54
+    },
+    {
+      "page": 16,
+      "mcid": 57
+    },
+    {
+      "page": 16,
+      "mcid": 58
+    },
+    {
+      "page": 16,
+      "mcid": 59
+    },
+    {
+      "page": 16,
+      "mcid": 60
+    },
+    {
+      "page": 16,
+      "mcid": 61
+    },
+    {
+      "page": 16,
+      "mcid": 62
+    },
+    {
+      "page": 16,
+      "mcid": 63
+    },
+    {
+      "page": 16,
+      "mcid": 64
+    },
+    {
+      "page": 16,
+      "mcid": 65
+    },
+    {
+      "page": 16,
+      "mcid": 66
+    },
+    {
+      "page": 16,
+      "mcid": 67
+    },
+    {
+      "page": 16,
+      "mcid": 68
+    },
+    {
+      "page": 16,
+      "mcid": 69
+    },
+    {
+      "page": 16,
+      "mcid": 70
+    },
+    {
+      "page": 16,
+      "mcid": 71
+    },
+    {
+      "page": 16,
+      "mcid": 72
+    },
+    {
+      "page": 16,
+      "mcid": 73
+    },
+    {
+      "page": 16,
+      "mcid": 74
+    },
+    {
+      "page": 16,
+      "mcid": 75
+    },
+    {
+      "page": 16,
+      "mcid": 77
+    },
+    {
+      "page": 16,
+      "mcid": 83
+    },
+    {
+      "page": 16,
+      "mcid": 84
+    },
+    {
+      "page": 16,
+      "mcid": 96
+    }
+  ],
+  "reading_order": [
+    {
+      "page": 1,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 2,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Table",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 3,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Table",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 4,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 5,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Table",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 6,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 7,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 8,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 9,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 10,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 11,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Table",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 12,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Table",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 13,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 14,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Table",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 15,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Figure",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    },
+    {
+      "page": 16,
+      "top_level": [
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Table",
+        "/Div",
+        "/Div",
+        "/Div"
+      ]
+    }
+  ],
+  "links": {
+    "count": 48,
+    "per_page": [
+      0,
+      4,
+      4,
+      4,
+      4,
+      2,
+      3,
+      1,
+      5,
+      4,
+      4,
+      3,
+      1,
+      2,
+      2,
+      5
+    ]
+  },
+  "pixel_identical_pages": 16,
+  "text_identical_pages": 16,
+  "checks": [
+    "16 H1 slide titles and 3 H2 subheadings; each slide opens with its H1",
+    "Every remaining Figure has Alt text; tables, rows, header and data cells and links preserved",
+    "Every MCID resolves through the ParentTree to the live element that owns it; every link annotation resolves to its Link element",
+    "All pages pixel- and text-identical to the export; link URIs and rectangles unchanged and equal to the manifest evidence references",
+    "Language, Marked, DisplayDocTitle, Info, XMP, structure tab order and file ID unchanged"
+  ],
+  "manual_review_required": [
+    "Screen-reader pass (NVDA/JAWS/VoiceOver) of reading order, table navigation and Alt text",
+    "Role-matrix marks (pages 3, 11, 14 and 16) are artifacts; each marked cell carries its own text, but the key text still refers to marks that assistive technology does not announce",
+    "Criterion-matrix glyphs (page 12) are artifacts; each cell carries its mark word as text, but the Marks key still pairs words with glyphs that assistive technology does not announce",
+    "Link annotations have no /Contents; the visible evidence ID is the link text",
+    "Native Microsoft PowerPoint acceptance of the source deck",
+    "Full PDF/UA (ISO 14289) or WCAG audit; no certification is claimed"
+  ]
+}

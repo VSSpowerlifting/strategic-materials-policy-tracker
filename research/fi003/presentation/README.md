@@ -87,4 +87,21 @@ Per-page artifact counts are pinned, so any re-render fails the script until a r
 
 Reruns are byte-identical. `research/fi003/test_presentation_v07_accessibility.py` rechecks the committed files with pypdf alone, including that every link equals its slide's evidence reference and its `sources.json` URL. See `QUALITY_REVIEW_V07.md` for the 46→34 link audit and the manual review still required. These are bounded static checks, not PDF/UA, WCAG or screen-reader certification.
 
+### Draft 0.8 decision report (proposed)
+
+Draft 0.8 recasts the deck as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals company. It opens with an executive answer and closes with a recommendation, the strongest alternative, reversal triggers and the six objections. The recommendation is a proposed editorial judgment pending maintainer review. Model 1.0, the source registers, the 6 November research cutoff and the publication HOLD are unchanged. Draft 0.7 remains the independent-review baseline.
+
+Inputs live in `v08/`; outputs in `outputs/presentation-draft-v08/` (PPTX, PDF, accessible PDF and receipt, manifest, contact sheet). See `QUALITY_REVIEW_V08.md` for the argument, the objection handling, output hashes and what is not verified.
+
+```sh
+python3 research/fi003/presentation/v08/build_spec.py
+npm run -s exhibits:review -- research/fi003/presentation/v08/spec.json --strict
+npm run exhibits:render -- research/fi003/presentation/v08/spec.json research/fi003/outputs/presentation-draft-v08/fi003-jpmorgan-mp-materials-draft-0.8.pptx
+bash research/fi003/presentation/v08/export_pdf.sh
+uv run --no-project --with pymupdf==1.26.4 --with pypdf==6.14.2 \
+  python research/fi003/presentation/v08/remediate_pdf_v08.py
+```
+
+The render step refuses to overwrite an existing PPTX. Two shared renderer changes came with this draft (waterfall legend keys only drawn movements; criterion-matrix rows shrink to fit seven criteria) and are covered by `tests/exhibit-system-v08-fit.test.ts`. The committed 0.6 and 0.7 outputs were not regenerated.
+
 Rerender modified slides and inspect the full deck. Package validation does not establish financial accuracy, native PowerPoint behavior or human approval. Native open/edit/save/reopen, live screen-reader navigation/reading order, broader accessibility review, exact-file/source-rights approval and separate publication authorization remain open. The PR's known merge conflicts with main require a later separately scoped integration phase. No integration/release work belongs in this visual pass.

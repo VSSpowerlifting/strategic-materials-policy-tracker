@@ -134,8 +134,9 @@ export const waterfall: Renderer<WaterfallData> = {
     });
     let x = h.area.x;
     x = legendItem(h, "legend-total", x, h.area.y, "Level", { fill: C.neutralDark }, 1.2);
-    x = legendItem(h, "legend-up", x, h.area.y, "Increase", { fill: C.neutral }, 1.4);
-    legendItem(h, "legend-down", x, h.area.y, "Decrease", { fill: C.neutralLight }, 1.4);
+    // Key only the movements the bridge actually draws.
+    if (up.some((v) => v > 0)) x = legendItem(h, "legend-up", x, h.area.y, "Increase", { fill: C.neutral }, 1.4);
+    if (down.some((v) => v > 0)) legendItem(h, "legend-down", x, h.area.y, "Decrease", { fill: C.neutralLight }, 1.4);
     const unitW = d.share ? 1.6 : 3;
     h.text("unit", "axis", d.unit, {
       x: h.area.x + bridgeW - unitW, y: h.area.y, w: unitW, h: 0.26, fontSize: 11, color: C.muted, align: "right",
