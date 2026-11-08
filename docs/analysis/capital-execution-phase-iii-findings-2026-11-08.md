@@ -33,8 +33,43 @@ approval:
   and the Thompson row restored exactly as at `ec3bfde`, the M3.2 audit fails
   with "project-native review cannot omit existing matching finance/source
   observations". Keeping the old fingerprint would therefore mean dropping
-  P3-02. The 2026-11-08 approval of P3-01 predates this worksheet change, so
-  Benjamin Yang still needs to confirm the new Thompson worksheet.
+  P3-02. The 2026-11-08 approval of P3-01 came before this worksheet change.
+
+### Thompson Falls fingerprint history
+
+| Fingerprint (SHA-256) | Queue state | Status |
+| --- | --- | --- |
+| `b75f2aa00db0e085381b1c3750c04eef269c7b24602bfbed765b114aaae255a2` | `ec3bfde`, `5f85fd2`: `relatedFinanceIds` empty; the caution says no same-source financier physical-status observation exists | Superseded on 2026-11-08 |
+| `2c91192902c6f897162f364a332405d93ea81c2461dec8bd37e350f63e6c7998` | `ba3a1bf` onward: links `fin-us-dow-usac-antimony-2026-thompson-falls`; the caution says the finance row cites the same 10-Q, so there is no independent confirmation | Current. Accepted by Benjamin Yang on 2026-11-08 |
+
+- **Why it changed.** The fingerprint changed because the approved P3-02
+  construction observation was added to the financing row. Only two worksheet
+  fields differ: `relatedFinanceIds` and the caution's sentence about
+  same-source observations. The project, source, kind, scope, quote, locator
+  and dates are identical. The other six M3.2 fingerprints are unchanged.
+- **Reconciliation on 2026-11-08.** The revised worksheet was checked against
+  the live 10-Q on EDGAR
+  (`uamy-20260630x10q.htm`) and against the approved P3-01 classification.
+  - The quote "The Thompson Falls facility expansion was substantially
+    completed" appears verbatim in Note 9 and again in Note 16.
+  - The filing gives the timing only as "during the second quarter of 2026",
+    with assets placed in service "late in the quarter". No day is stated, so
+    `occurredOn` stays null.
+  - The worksheet's $4.1M placed in service, approximately $29M of gross costs
+    still in construction in progress and $12.8M of grant funding received
+    match the filing.
+  - The worksheet proposes `construction_progress_reported`, `named_facility`,
+    null date and claim mode `occurred`. That matches P3-01 as approved.
+  - Like the finance-row status, the worksheet rests on
+    `src-usac-2026-q2-10q`.
+
+  This reconciliation was AI-assisted. It does not supply the five per-check
+  attestations.
+- **Review history.** The proposal was drafted on 2026-11-07 and left
+  unreviewed. On 2026-11-08, Benjamin Yang approved P3-01 against the
+  `b75f2aa…` worksheet. Later that day he accepted the change to `2c91192…`
+  and kept his P3-01 approval in effect. The local decision records the
+  current fingerprint.
 - **P3-01 and P3-03 to P3-06, recorded as local decisions.** The gitignored
   files `.project-execution-review/adjudications.json` (P3-01) and
   `m3-3-adjudications.json` (P3-03 to P3-06) record verdict `approved`,

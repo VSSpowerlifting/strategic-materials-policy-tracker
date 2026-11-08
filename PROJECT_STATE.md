@@ -2,7 +2,7 @@
 
 - Branch `claude/smpt-phase-iii-adjudication`. Benjamin Yang approved P3-01 to P3-06 on 2026-11-08 as substantive editorial rulings.
 - **P3-02 is in seed.** The Thompson Falls DPA finance row gains an issuer-attributed `construction` status (date null, `src-usac-2026-q2-10q`). Amount, obligation and disbursement are unchanged. Live counts: execution gaps 14 → 13, funded gaps 4 → 3, ahead-of-binding 2.
-- The M3.2 Thompson packet now links that finance row. This changes **one** M3.2 fingerprint (`2c911929…`); the other six are unchanged and pinned in `tests/project-execution-m3-3-cohort.test.ts`.
+- The M3.2 Thompson packet now links that finance row. This changes **one** M3.2 fingerprint, from `b75f2aa0…55a2` to `2c911929…7998`. Benjamin Yang accepted the new fingerprint on 2026-11-08 and his P3-01 approval stands. The revised worksheet was reconciled against the live 10-Q and the approved classification, and they match; the history is in the Phase III findings doc. The other six fingerprints are unchanged and pinned in `tests/project-execution-m3-3-cohort.test.ts`.
 - P3-01 and P3-03 to P3-06 are recorded as `approved` in gitignored `.project-execution-review/*.json` with the real reviewer and date. The adjudication audits for both cohorts report no structural errors, but every row is blocked:
   - the five per-check attestations were not supplied, so they stay false and are not inferred;
   - `reviewedAt` 2026-11-08 is later than the cutoff of 2026-11-06.
