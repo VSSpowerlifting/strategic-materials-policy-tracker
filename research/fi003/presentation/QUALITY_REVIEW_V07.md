@@ -133,6 +133,17 @@ Two runs produced byte-identical PDFs and receipts. Measured from the tag tree:
 
 Draft 0.7 has 13 slides against draft 0.5's 15, and draft 0.5 tagged several H2 subheadings per slide. The H1 count is one per slide in both. Draft 0.7 has fewer H2s because only four slides carry a real subheading; card labels and table captions were not promoted to headings.
 
+**Against the draft 0.5 standard.** Measured by coverage, the accessible PDF meets the draft 0.5 standard. Its raw counts are lower than draft 0.5's only because the deck has fewer slides and fewer visuals.
+
+- Every slide opens with an H1.
+- No Figure is left without Alt text, the same as draft 0.5.
+- Every meaningful visual has a described Figure: the charts and doughnut on slides 4, 6 and 12, and the diagrams on slides 3, 7, 8 and 9. That is 8 Figures, against 12 in draft 0.5.
+- The remaining slides need no Figure:
+  - the cover (slide 1);
+  - the tables (slides 5, 10 and 11);
+  - the two role matrices (slides 2 and 13), whose marks are artifacts. See the limits below.
+- Every evidence reference is linked.
+
 **What the script changes.** It re-marks unnamed, text-free vector Figures as `/Artifact` and removes their structure elements and ParentTree slots. Each diagram keeps one representative vector as a Figure carrying the diagram description. The three chart Alts are replaced with descriptions built from the values drawn on the slide; the script fails if a stated value is not among the drawn labels. Slide titles become H1 and the four subheadings H2. The per-page artifact counts are pinned in the script, and any change fails the run. Content bytes outside the marked-content wrappers are not rewritten.
 
 **What the script checks.** Each MCID in a content stream resolves through the ParentTree to the element that owns it. Each link annotation resolves to a Link element. Every page renders pixel-identical and extracts identical text compared with the export. Language, Marked, DisplayDocTitle, Info, XMP, tab order and file ID are unchanged. `test_presentation_v07_accessibility.py` repeats the structural checks on the committed files with pypdf alone.
