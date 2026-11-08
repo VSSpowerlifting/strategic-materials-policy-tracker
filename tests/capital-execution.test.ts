@@ -85,7 +85,9 @@ test("live corpus capital-to-execution counts", () => {
   assert.equal(r.rows.length, r.response.governmentProjects);
   assert.equal(r.tierCounts.reviewed_milestone + r.tierCounts.financing_row_status + r.tierCounts.none, r.rows.length);
   assert.equal(r.tierCounts.none, r.response.noPhysicalRecordProjects - r.rows.filter((x) => x.physical === "no_record" && x.tier === "reviewed_milestone").length);
-  assert.equal(r.tierCounts.reviewed_milestone, 2);
+  // Wagerup and Narva, plus Nolans, Marathon, Stibnite, Thompson Falls and
+  // Stillwater from the 8 November 2026 Phase III release.
+  assert.equal(r.tierCounts.reviewed_milestone, 7);
   // P3-02 moved Thompson Falls to construction_or_later.
   assert.equal(r.executionGaps.length, 13);
   assert.equal(r.fundedGaps.length, 3);

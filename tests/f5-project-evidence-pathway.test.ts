@@ -44,9 +44,17 @@ test("F5-2: Stibnite preserves separate financing instruments and zero inferred 
   const ids = r.financing.map(x=>x.id);
   assert.ok(ids.includes("fin-us-dod-perpetua-stibnite-dpa"));
   assert.ok(ids.includes("fin-us-exim-perpetua-stibnite-2026"));
-  assert.equal(r.nativeMilestones.length, 0);
+  // P3-06: two reviewed workstream milestones carry their own source-stated dates.
+  assert.deepEqual(r.nativeMilestones.map(m=>[m.id,m.occurredOn]), [
+    ["mil-us-stibnite-burntlog-construction-started-2026-05-30","2026-05-30"],
+    ["mil-us-stibnite-early-works-construction-started-2025-10-21","2025-10-21"],
+  ]);
+  // The financing rows' construction observations stay undated: those date changes
+  // were deferred, and no date is inferred from the reviewed milestones.
   assert.ok(r.financing.some(f=>f.legacyPhysicalObservations.some(s=>
     s.status==="construction" && s.statusDate===null)));
+  assert.ok(r.financing.every(f=>f.legacyPhysicalObservations.every(s=>
+    s.status!=="construction" || s.statusDate===null)));
   assert.ok(r.typedEdges.every(e=>e.causalEffect==="not_asserted"));
   assert.ok(r.policyContexts.every(c=>c.context==="finance_or_designation_parent"));
   assert.equal(r.reviewGaps.absenceMeansInactivity,false);

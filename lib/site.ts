@@ -12,7 +12,7 @@ export const site = {
     "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked records.",
   version: "v0.6-capital-intelligence",
   /** Last curated corpus revision, NOT a claim that every row was rechecked on this date. */
-  lastUpdated: "2026-11-06",
+  lastUpdated: "2026-11-08",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness

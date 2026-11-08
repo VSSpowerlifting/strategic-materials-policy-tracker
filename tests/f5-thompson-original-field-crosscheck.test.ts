@@ -10,6 +10,7 @@ import {
   auditThompsonSourceTriangulation, type ThompsonSourceReviewContext,
 } from "../scripts/f5-thompson-original-field-crosscheck";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const packet=()=>structuredClone(sourcePacket);
 const context=(): ThompsonSourceReviewContext=>({
@@ -35,7 +36,7 @@ test("Thompson SEC/local-source triage binds one existing M3 and five original d
   assert.equal(sourcePacket.evidence.find(e=>e.role==="original_local_field_report")?.sourceId,null);
   assert.equal(sourcePacket.evidence.find(e=>e.role==="registered_q2_form10q")?.sourceId,
     "src-usac-2026-q2-10q");
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("Thompson still uses original human-only M3 packet, not a new positive operational milestone",()=>{
@@ -105,7 +106,7 @@ test("Thompson private review gate cannot be bypassed by signed metadata, claims
   assert.ok(m);
   (m as {reviewVerdict:string}).reviewVerdict="approved";
   assert.match(messages(packet(),other),/existing M3 unsigned review/);
-  const approval=context();approval.publicMilestoneCount=3;
+  const approval=context();approval.publicMilestoneCount=PUBLIC_MILESTONE_IDS_AT_PHASE_III.length+1;
   assert.match(messages(packet(),approval),/no public project-native milestone/);
 });
 
@@ -138,5 +139,5 @@ test("Thompson rejects altered source registry and supports deterministic offlin
   const a=packet(),copy=JSON.stringify(a);
   assert.deepEqual(audit(a),audit(a));
   assert.equal(JSON.stringify(a),copy);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });

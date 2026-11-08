@@ -8,6 +8,7 @@ import decisions from "../research/project-execution/m3-2-adjudications.example.
 import { getAllProjects,getAllSources,getAllFinancialCommitments,getAllProjectMilestones } from "../lib/data";
 import { site } from "../lib/site";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const m3=()=>buildM3ReviewerPackets(queue,{
  projects:getAllProjects(),sources:getAllSources(),commitments:getAllFinancialCommitments(),
@@ -30,7 +31,7 @@ test("PIR release explicitly remains an unsigned supplement to current real M3 r
  assert.equal(receipt.m3.reviewerName,null);
  assert.equal(receipt.m3.reviewedAt,null);
  assert.equal(receipt.publicationAuthorized,false);
- assert.equal(getAllProjectMilestones().length,2);
+ assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("six actual PDF byte hashes from user-supplied archive are not certified agency source signatures",()=>{
@@ -163,7 +164,7 @@ test("submitted source-test request and draft inspection followup avoid duplicat
  assert.equal(request.recordsObtained,false);
  assert.equal(request.publicMilestoneAuthorized,false);
  assert.equal(request.humanReviewCompleted,false);
- assert.equal(site.lastUpdated,"2026-11-06");
+ assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
  assert.ok(decisions.every(x=>x.verdict==="pending"));
- assert.equal(getAllProjectMilestones().length,2);
+ assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });

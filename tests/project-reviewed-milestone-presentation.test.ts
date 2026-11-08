@@ -9,6 +9,8 @@ import { getSourceUses } from "../lib/source-usage";
 import ProjectPage from "../app/projects/[id]/page";
 import { getPublicProjectInvestigation } from "../lib/research-experience";
 import type { ProjectMilestone } from "../lib/types";
+import { getAllProjects } from "../lib/data";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const wagerupId = "mil-au-alcoa-wagerup-groundbreaking-2026-08-24";
 const projectId = "prj-au-alcoa-sojitz-gallium";
@@ -22,7 +24,11 @@ test("project detail uses the public projection for a conditional physical lane 
   assert.deepEqual(packet.nativeMilestones.map(m=>m.id), [wagerupId]);
   const view = renderToStaticMarkup(await ProjectPage({params:Promise.resolve({id:projectId})}));
   assert.ok(view.includes(packet.nativeMilestones[0].statementOriginal.replaceAll("&", "&amp;")));
-  const missing = renderToStaticMarkup(await ProjectPage({params:Promise.resolve({id:"prj-us-stibnite"})}));
+  // Stibnite gained reviewed workstream milestones on 8 November 2026; use a
+  // project that still has none.
+  const withMilestones=new Set(getAllProjectMilestones().map(m=>m.projectId));
+  const noMilestoneProject=getAllProjects().find(p=>!withMilestones.has(p.id))!.id;
+  const missing = renderToStaticMarkup(await ProjectPage({params:Promise.resolve({id:noMilestoneProject})}));
   assert.match(missing, /No source-reviewed project milestone is published/);
   assert.doesNotMatch(missing, /Groundbreaking \(reported\)/);
   assert.match(source,/reviewedMilestones\.length \? \(/,
@@ -36,8 +42,8 @@ test("project detail uses the public projection for a conditional physical lane 
 
 test("first public Wagerup observation displays exact approved scope, source, reviewer and three distinct clocks",()=>{
   const rows=getAllProjectMilestones();
-  assert.deepEqual(rows.map(x=>x.id),[wagerupId,"mil-ee-neo-narva-commercial-production-reported-2026"],"only genuinely signed Wagerup and Narva are published");
-  const row=rows[0];
+  assert.deepEqual(rows.map(x=>x.id),PUBLIC_MILESTONE_IDS_AT_PHASE_III,"only human-signed milestones are published");
+  const row=rows.find(x=>x.id===wagerupId)!;
   assert.equal(row.projectId,projectId);
   assert.equal(row.kind,"groundbreaking_reported");
   assert.equal(row.sourceId,sourceId);
@@ -73,7 +79,7 @@ test("first public Wagerup observation displays exact approved scope, source, re
 });
 
 test("null event/target day does not borrow original publisher date or reviewer day",()=>{
-  const prior=getAllProjectMilestones()[0];
+  const prior=getAllProjectMilestones().find(x=>x.id===wagerupId)!;
   const synthetic:ProjectMilestone={
     ...prior,id:"mil-synthetic-missing-day-not-published",
     kind:"production_reported",claimMode:"planned",
@@ -87,11 +93,11 @@ test("null event/target day does not borrow original publisher date or reviewer 
   assert.match(view,/Original source published/);
   assert.match(view,/<time dateTime="2026-08-24">24 Aug 2026<\/time>/);
   assert.doesNotMatch(view,/Reported event date/);
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[wagerupId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),PUBLIC_MILESTONE_IDS_AT_PHASE_III);
 });
 
 test("unregistered source rejects rendering instead of fabricating a publisher citation",()=>{
-  const prior=getAllProjectMilestones()[0];
+  const prior=getAllProjectMilestones().find(x=>x.id===wagerupId)!;
   const invalid={...prior,sourceId:"src-not-real"};
   assert.throws(()=>html([invalid]),/unregistered original source/);
 });

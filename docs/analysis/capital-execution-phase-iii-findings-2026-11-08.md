@@ -10,6 +10,56 @@ Corpus revision: `site.lastUpdated` = 2026-11-06 (unchanged). Branch:
 `claude/smpt-phase-iii-expansion-aa0f03`, from `main` at `688b6108`. Research
 date: 2026-11-08. Counts are those pinned in `tests/capital-execution.test.ts`.
 
+## Publication (Phase III release, 2026-11-08)
+
+On 2026-11-08 Benjamin Yang confirmed, for the six approved records, that he
+had read the full original sources, checked the quoted passages, checked that
+classifications and scopes are narrowly limited, distinguished occurrence
+dates from source-publication dates, and checked that no record implies
+unsupported financing, causation or operational outcomes. He also authorized
+moving `site.lastUpdated` to 2026-11-08. That date is a curated revision for
+the newly approved evidence. It does not mean the whole historical corpus was
+reverified.
+
+What the release publishes:
+
+- Six `ProjectMilestone` rows, each reviewed by Benjamin Yang on 2026-11-08:
+  Thompson Falls (`construction_progress_reported`, `named_facility`, date
+  null); Marathon (`construction_started`, `bounded_project_workstream`, date
+  null); Nolans (`construction_started`, `whole_project`, date null);
+  Stillwater Phase 1a (`commissioning_started`, `named_facility`, date null);
+  and two Stibnite workstreams (`construction_started`, dated 2025-10-21 and
+  2026-05-30).
+- The Stillwater source `src-usar-stillwater-phase1a-commissioning-2026`.
+  `m3-3-proposed-sources.json` is now empty.
+- Each public row equals its proposal in
+  `research/project-execution/release-candidates/phase-iii-milestones-2026-11-08.json`.
+  The one difference from the adjudication proposal is workflow-status text
+  ("pending named human source review", for example), removed from the note
+  because it is no longer true. The candidate lists every removal, and
+  `tests/phase-iii-release-candidate.test.ts` checks seed against candidate.
+- Live counts: 8 public milestones (Wagerup and Narva plus these six);
+  reviewed-milestone tier 7 projects; execution gaps 13, funded gaps 3,
+  ahead-of-binding 2. Stillwater stays in the execution gaps, because its
+  milestone covers one facility and the gap covers the CHIPS-backed project.
+
+Still deferred or excluded:
+
+- The Stibnite financing-row implementation dates. The workstream milestones
+  carry their own dates; the finance rows are unchanged.
+- FI003, the presentation work and the China legal-status review.
+
+Fingerprints. The M3.2 worksheet digests bind the corpus cutoff and the public
+milestone set, so all seven changed when this release moved both. The
+Thompson history is now `b75f2aa0…55a2` (superseded) → `2c911929…7998`
+(P3-02, accepted) → `ab54bdb1…8590` (this release). The pre-Phase III digests
+still reproduce exactly from the 2026-11-06 corpus, and both sets are pinned in
+`tests/project-execution-m3-3-cohort.test.ts`.
+
+Once the rows are in seed, `audit:project-execution-adjudications` reports
+"proposed milestone ID already exists" for each approved row. That is the
+audit refusing to propose a record twice; it is expected after publication.
+
 ## Decision record (2026-11-08)
 
 Benjamin Yang approved all six rulings on 2026-11-08 as substantive editorial
@@ -97,7 +147,7 @@ approval:
   both remain taxonomy blocked. The approved M3.3 workstream rows supersede
   them editorially.
 
-## Why this phase ships no seed change
+## Why this phase ships no seed change (superseded by the release above)
 
 Phase III's aim was more verified industrial evidence and better project
 timelines. The research found three new physical milestones and confirmed

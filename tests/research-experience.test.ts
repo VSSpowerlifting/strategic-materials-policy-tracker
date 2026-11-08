@@ -78,7 +78,15 @@ test("public project adapter preserves the authoritative stack and published mil
 });
 
 test("financing remains visible without a published project milestone, with explicit gaps", () => {
-  const investigation = getPublicProjectInvestigation("prj-us-stibnite")!;
+  // Phase III published two Stibnite workstream milestones (P3-06), so the no-milestone case is
+  // exercised on a financed project that still has none; Stibnite's milestone state is pinned below.
+  const stibnite = getPublicProjectInvestigation("prj-us-stibnite")!;
+  assert.equal(stibnite.pathway.nativeMilestones.length, 2);
+  assert.doesNotMatch(
+    renderToStaticMarkup(createElement(ProjectOverview, { investigation: stibnite })),
+    /No source-reviewed project milestone is published/,
+  );
+  const investigation = getPublicProjectInvestigation("prj-ca-nmg-matawinie")!;
   assert.ok(investigation.stack.rows.length > 0);
   assert.equal(investigation.pathway.nativeMilestones.length, 0);
   const overview = renderToStaticMarkup(

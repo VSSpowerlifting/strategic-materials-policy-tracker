@@ -8,6 +8,7 @@ import {
 import { auditCyclicOriginalPublisherCrosscheck, type CyclicSourceCrosscheckContext } from "../scripts/f5-cyclic-original-publisher-crosscheck";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import { site } from "../lib/site";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const ctx = () => ({
   m3Queue: structuredClone(queue),
@@ -38,7 +39,7 @@ test("Cyclic F5-5 original publisher crosscheck: source-registered, unsigned and
     "single_federal_reporting_chain_no_independent_physical_inspection");
   assert.equal(research.reportedCompletionMonth,"2026-03");
   assert.equal(research.occurredOn,null);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("Cyclic F5-5 crosscheck uses existing human M3 authority and one funded-activity boundary", () => {
@@ -104,7 +105,7 @@ test("Cyclic F5-5 crosscheck rejects registry/queue drift and approval-shaped ex
   assert.match(run(input(),c).errors.join(" "),/canonical M3 source\/claim\/gate drifted/);
   const extra={...input(), reviewedBy:"synthetic reviewer"};
   assert.match(run(extra).errors.join(" "),/unexpected or absent top-level fields/);
-  const afterPublication={...ctx(),publicMilestoneCount:3};
+  const afterPublication={...ctx(),publicMilestoneCount:PUBLIC_MILESTONE_IDS_AT_PHASE_III.length+1};
   assert.match(run(input(),afterPublication).errors.join(" "),/public project milestones changed/);
   assert.deepEqual(run(input()),run(input()),"audit is deterministic");
 });

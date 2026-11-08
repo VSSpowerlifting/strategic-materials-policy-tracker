@@ -69,8 +69,11 @@ test("O3b: core local HTML retains native source links and disclosure barriers",
   assert.match(html,/min-w-\[52rem\]/);
   assert.match(html,/lg:grid-cols-2/);
   assert.match(html,/target="_blank" rel="noopener noreferrer"/);
-  assert.match(html,/No reviewed occurred claim registered/);
-  assert.match(html,/No source-reviewed occurred physical milestone has entered the project-native register/);
+  // Phase III: all four cases hold reviewed occurred claims, so no empty-state barrier renders;
+  // the pre-Phase III empty-state barrier is covered in f5-observatory-private-ui.test.ts.
+  assert.equal((html.match(/Registered source claims; requires QA/g)??[]).length,4);
+  assert.ok(!html.includes("No reviewed occurred claim registered"));
+  assert.ok(!html.includes("No source-reviewed occurred physical milestone has entered the project-native register"));
   assert.match(html,/not a policy-effect assessment/);
   assert.match(html,/not evidence of a government-caused physical result/);
   assert.match(html,/Recognition only|Official project designations/);

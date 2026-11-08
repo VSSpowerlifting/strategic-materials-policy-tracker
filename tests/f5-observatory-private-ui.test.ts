@@ -14,6 +14,7 @@ import {
   getAllControlMeasures, getAllEvents, getAllFinancialCommitments,
   getAllProjectDesignations, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "@/lib/data";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III, PRE_PHASE_III_CUTOFF, prePhaseIiiMilestones } from "./phase-iii-release-ids";
 
 const corpus=():PathwayInputs=>structuredClone({
   events:getAllEvents(),finances:getAllFinancialCommitments(),
@@ -39,7 +40,7 @@ test("O3: the private Observatory renders actual project cohort without a public
   assert.ok(!existsSync("app/pathways/page.tsx"));
   assert.ok(!nav.some(x=>/observatory|casefile/i.test(x.href+" "+x.label)));
   assert.ok(!headerNav.some(x=>/observatory|casefile/i.test(x.href+" "+x.label)));
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.equal(count(h,'<article id="f5-case-'),4);
   for(const c of m.cases) {
     assert.ok(h.includes('id="f5-case-'+c.comparison.projectId+'"'),c.comparison.projectId);
@@ -69,17 +70,29 @@ test("O3: accessible semantic table, native links, responsive classes and unique
 });
 
 test("O3: distinguish missing reviewed evidence from no industrial activity or project failure",()=>{
+  // Current corpus (Phase III, 8 Nov 2026): all four cases hold reviewed occurred claims.
   const h=html(),m=model();
-  assert.equal(m.sourceReviewedCasefilesReadyForManualQa,2);
-  assert.equal(count(h,"No reviewed occurred physical milestone is registered."),2);
-  assert.equal(count(h,"No source-reviewed occurred physical milestone has entered the project-native register."),2);
+  assert.equal(m.sourceReviewedCasefilesReadyForManualQa,4);
+  assert.equal(count(h,"No reviewed occurred physical milestone is registered."),0);
+  assert.equal(count(h,"No source-reviewed occurred physical milestone has entered the project-native register."),0);
+  assert.equal(count(h,"No reviewed occurred claim registered"),0);
+  assert.equal(count(h,"Registered source claims; requires QA"),4);
   assert.ok(count(h,"Missing a recorded reference is not proof of real-world inactivity.")>0);
-  assert.match(h,/No reviewed occurred claim registered/);
-  assert.match(h,/no reviewed occurred physical milestone/i);
-  assert.ok(!h.includes("Project stalled"));
-  assert.ok(!h.includes("Production achieved"));
-  assert.ok(!h.includes("policy impact score"));
-  assert.ok(!h.includes("total committed capital"));
+  // The pre-Phase III corpus still renders the empty-state barrier for the two unreviewed cases.
+  const c=corpus();
+  const before=buildF5ObservatoryScaffold({...c,milestones:prePhaseIiiMilestones(c.milestones)},PRE_PHASE_III_CUTOFF);
+  const hb=html(before);
+  assert.equal(before.sourceReviewedCasefilesReadyForManualQa,2);
+  assert.equal(count(hb,"No reviewed occurred physical milestone is registered."),2);
+  assert.equal(count(hb,"No source-reviewed occurred physical milestone has entered the project-native register."),2);
+  assert.equal(count(hb,"No reviewed occurred claim registered"),2);
+  assert.match(hb,/no reviewed occurred physical milestone/i);
+  for(const x of [h,hb]){
+    assert.ok(!x.includes("Project stalled"));
+    assert.ok(!x.includes("Production achieved"));
+    assert.ok(!x.includes("policy impact score"));
+    assert.ok(!x.includes("total committed capital"));
+  }
 });
 
 test("O3: financial and government evidence uses noncausal words, no amounts/sums",()=>{
@@ -124,7 +137,7 @@ test("O3: reviewed occurred test fixture shows issuer evidence with unknown day,
   assert.match(h,/Source pinpoint: TEST synthetic source pinpoint/);
   assert.match(h,/not independent on-site verification/);
   assert.equal(preview.publicReleaseAuthorized,false);
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("O3: private renderer refuses public-ready models or unsafe primary-source URLs",()=>{

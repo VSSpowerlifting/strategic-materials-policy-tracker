@@ -6,6 +6,7 @@ import example from "../research/project-execution/m3-2-adjudications.example.js
 import { getAllSources,getAllProjects,getAllFinancialCommitments,getAllProjectMilestones } from "../lib/data";
 import { site } from "../lib/site";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const m3Id = "review-m3-2-thompson-falls-q2-expansion";
 const m3SourceId = "src-usac-2026-q2-10q";
@@ -45,10 +46,10 @@ test("no fake human review, source-body proof, digest, milestone ID or public mi
   assert.equal(brief.publicationAuthorized,false);
   assert.match(sheet().reviewInputDigestSha256,/^[0-9a-f]{64}$/);
   assert.equal(sheet().digestMeaning,"registry_metadata_fingerprint_not_archived_document_hash");
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.ok(example.every(x=>x.verdict==="pending" && x.reviewedBy===null &&
     x.reviewedAt===null && x.reviewInputDigestSha256===null));
-  assert.equal(site.lastUpdated,"2026-11-06",
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF,
     "a future reviewer cannot backdate source inspection to existing curated cutoff");
 });
 
@@ -156,7 +157,7 @@ test("source-role clock and evidence independence stay distinct from SEC canonic
 
 test("candidate cannot silently become a duplicate public industrial milestone",()=>{
   assert.equal(brief.proposedMilestoneId,null);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.equal(queue.filter(x=>x.projectId===projectId && x.sourceId===m3SourceId).length,1);
   assert.equal(brief.humanReviewer,null);
   const clone=structuredClone(brief);

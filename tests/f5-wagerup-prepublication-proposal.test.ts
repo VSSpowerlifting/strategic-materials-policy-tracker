@@ -10,6 +10,7 @@ import {
   getAllControlMeasures,getAllEvents,getAllFinancialCommitments,
   getAllProjectDesignations,getAllProjectMilestones,getAllProjects,getAllSources,
 } from "../lib/data";
+import { PHASE_III_RELEASE_CUTOFF, PRE_PHASE_III_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III, prePhaseIiiMilestones } from "./phase-iii-release-ids";
 
 const reviewId="review-m3-2-alcoa-wagerup";
 const milestoneId="mil-au-alcoa-wagerup-groundbreaking-2026-08-24";
@@ -18,8 +19,10 @@ const sourceId="src-alcoa-wagerup-groundbreaking-2026";
 
 test("supervised release publishes exactly one source-reviewed Wagerup claim, not unsigned peers",()=>{
   const milestones=getAllProjectMilestones();
-  assert.deepEqual(milestones.map(x=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
-  assert.equal(site.lastUpdated,"2026-11-06");
+  assert.deepEqual(milestones.map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
+  assert.equal(milestones[0].id,milestoneId);
+  assert.equal(milestones.filter(x=>x.projectId===pid).length,1,"Wagerup stays the only gallium-project milestone");
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
   assert.equal(candidate.proposedCorpusCutoff,"2026-10-17","the Wagerup candidate was proposed at the 17 October cutoff; later cutoffs do not rewrite it");
   assert.equal(candidate.publishedCorpusCutoffAtPreparation,"2026-10-09");
   assert.equal(candidate.proposedProjectMilestones.length,1);
@@ -34,7 +37,8 @@ test("supervised release publishes exactly one source-reviewed Wagerup claim, no
   assert.equal(milestones[0].targetOn,null);
   assert.equal(milestones[0].projectId,pid);
   assert.equal(milestones[0].sourceId,sourceId);
-  assert.deepEqual(milestones.filter(x=>x.projectId!=="prj-au-alcoa-sojitz-gallium").map(x=>x.id),["mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(milestones.filter(x=>x.projectId!=="prj-au-alcoa-sojitz-gallium").map(x=>x.id),
+    PUBLIC_MILESTONE_IDS_AT_PHASE_III.filter(x=>x!==milestoneId));
   assert.ok(milestones[0].note?.includes("not independently observed sustained works"));
 });
 
@@ -92,9 +96,15 @@ test("Wagerup enters only MANUAL casefile QA, not automatic public pathway relea
   };
   const frozen=JSON.stringify(corpus);
   const actual=auditF5CasefileReadiness(corpus,site.lastUpdated);
-  assert.deepEqual(actual.pilots.filter(x=>x.eligibleForManualQa).map(x=>x.projectId).sort(),[pid,"prj-ee-neo-rare-earth-magnet-project"].sort());
-  assert.equal(actual.pilots.find(x=>x.projectId===pid)?.registeredOccurredMilestones,1);
-  assert.equal(actual.allPilotsEligibleForManualQa,false);
+  // Phase III: Stibnite's two reviewed P3-06 rows make all three pilots eligible for MANUAL QA only.
+  assert.deepEqual(actual.pilots.map(x=>[x.projectId,x.eligibleForManualQa,x.registeredOccurredMilestones]),[
+    [pid,true,1],["prj-ee-neo-rare-earth-magnet-project",true,1],["prj-us-stibnite",true,2],
+  ]);
+  assert.equal(actual.allPilotsEligibleForManualQa,true);
+  const before=auditF5CasefileReadiness({...structuredClone(corpus),milestones:prePhaseIiiMilestones(corpus.milestones)},PRE_PHASE_III_CUTOFF);
+  assert.deepEqual(before.pilots.filter(x=>x.eligibleForManualQa).map(x=>x.projectId).sort(),[pid,"prj-ee-neo-rare-earth-magnet-project"].sort());
+  assert.equal(before.allPilotsEligibleForManualQa,false);
+  assert.equal(before.publicReleaseAuthorized,false);
   assert.equal(actual.publicReleaseAuthorized,false);
   assert.equal(actual.autonomousMilestoneApprovalAuthorized,false);
   assert.equal(actual.inferredCausalityAuthorized,false);

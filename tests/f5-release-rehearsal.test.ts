@@ -11,6 +11,7 @@ import { site } from "@/lib/site";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import { rehearseF5Release } from "../scripts/f5-release-rehearsal";
 import type { SourceReviewDecision } from "../scripts/adjudicate-project-execution";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const proposed = "2026-10-17";
 const legacyCutoff = "2026-10-09";
@@ -48,8 +49,8 @@ function syntheticDecision(id:string, cutoff:string=proposed) {
 
 test("real release now has only Wagerup registered without auto-authorizing the private Observatory",()=>{
   const current=getAllProjectMilestones();
-  assert.deepEqual(current.map(m=>m.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
-  assert.equal(site.lastUpdated,"2026-11-06");
+  assert.deepEqual(current.map(m=>m.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
   const replay=rehearseF5Release(queue,example,{
     ...corpus(),milestones:current,
   },site.lastUpdated,site.lastUpdated);

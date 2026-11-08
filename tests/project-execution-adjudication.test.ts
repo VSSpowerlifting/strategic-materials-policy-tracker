@@ -9,6 +9,7 @@ import {
 } from "../lib/data";
 import { adjudicateProjectExecutionReview } from "../scripts/adjudicate-project-execution";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const draft = () => structuredClone(template);
 const refs = () => ({
@@ -44,7 +45,7 @@ test("review example is genuinely pending and cannot generate a milestone", () =
   assert.deepEqual(r.blocked, []);
   assert.equal(r.counts.pending, 7);
   assert.deepEqual(r.proposals, []);
-  assert.equal(getAllProjectMilestones().length, 2, "review evaluation never modifies the existing Wagerup public seed");
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III], "review evaluation never modifies the existing Wagerup public seed");
 });
 
 test("approved Alcoa produces only a non-publishing, independently validated preview", () => {
@@ -58,7 +59,7 @@ test("approved Alcoa produces only a non-publishing, independently validated pre
   assert.equal(r.proposals[0].kind, "groundbreaking_reported");
   assert.equal(r.proposals[0].occurredOn, "2026-08-24");
   assert.equal(r.proposals[0].sourceId, "src-alcoa-wagerup-groundbreaking-2026");
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("M3 multi-review handoff rejects the same dated facility event reported by two publishers", () => {
@@ -105,7 +106,7 @@ test("M3 multi-review handoff rejects the same dated facility event reported by 
     distinctRows, freshDecisions, references);
   assert.deepEqual(distinct.errors, []);
   assert.equal(distinct.proposals.length, 2);
-  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"],
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), [...PUBLIC_MILESTONE_IDS_AT_PHASE_III],
     "batch review does not modify the existing Wagerup public seed");
 });
 
@@ -214,7 +215,7 @@ test("M3 review preview accepts a structurally valid whole-project null scope bu
   assert.equal(report.proposals.length, 1);
   assert.equal(report.proposals[0].scope, "whole_project");
   assert.equal(report.proposals[0].scopeAsStated, null);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("M3 cannot preview a purported whole-project milestone with a named component", () => {
@@ -244,7 +245,7 @@ test("Narva human adjudication remains pending; a test-only approval cannot beco
   assert.equal(result.proposals[0].sourceId, "src-neo-commercial-production-2026");
   assert.equal(result.proposals[0].reviewedBy, "Synthetic reviewer in regression test");
   assert.equal(result.status, "human_adjudication_preview_only");
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("Stibnite early works canonical scope remains blocked even with a full synthetic signoff", () => {
@@ -263,7 +264,7 @@ test("Stibnite early works canonical scope remains blocked even with a full synt
   assert.equal(result.blocked.length,1);
   assert.equal(result.blocked[0].id,"review-m3-2-stibnite-early-works");
   assert.match(result.blocked[0].reason,/Unresolved taxonomy/);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("Thompson Falls: taxonomy resolved, but only a synthetic human decision yields a nonpublishing preview", () => {
@@ -284,7 +285,7 @@ test("Thompson Falls: taxonomy resolved, but only a synthetic human decision yie
   assert.equal(result.proposals[0].scope, "named_facility");
   assert.equal(result.proposals[0].occurredOn, null);
   assert.match(result.proposals[0].note ?? "", /not a completed\/operating project/);
-  assert.equal(getAllProjectMilestones().length, 2, "preview is not another publication");
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III], "preview is not another publication");
   const historic = refs();
   historic.corpusCutoff = "2026-11-03";
   setApproved(d, "2026-11-04", queue, historic);
@@ -351,7 +352,7 @@ test("old decision cannot approve a changed quote, source URL, project identity 
   const staleFinance = audit(d, changedFinances);
   assert.deepEqual(staleFinance.proposals, []);
   assert.match(staleFinance.errors.join(" | "), /fingerprint differs/);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("changing the curated cutoff never silently carries over an older signed review", () => {
@@ -367,5 +368,5 @@ test("changing the curated cutoff never silently carries over an older signed re
   const fresh = audit(d, revised);
   assert.deepEqual(fresh.errors, []);
   assert.equal(fresh.proposals.length, 1);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });

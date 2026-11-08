@@ -7,6 +7,7 @@ import triangulation from "../research/f5/thompson-falls-original-and-field-tria
 import { getAllProjects, getAllSources, getAllProjectMilestones, getAllFinancialCommitments } from "../lib/data";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import { site } from "../lib/site";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const original = permit.deqPrimaryOriginal;
 const configs = original.engineeringConfigurations;
@@ -49,7 +50,7 @@ test("exact same Thompson M3 registry original, named facility and unsigned meta
   assert.equal(existingBrief.primaryOriginal.evidenceSourceId,w.originalSource.id);
   assert.equal(triangulation.canonicalReviewId,w.id);
   assert.equal(getAllProjects().filter(x=>x.id===w.project.id).length,1);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("December 2025 DEQ permit #2973-05 is independent but not a newly registered source",()=>{
@@ -128,8 +129,8 @@ test("original-source edges cannot turn regulatory authorization into audited ph
   assert.equal(permit.sourceEvidenceEdges[0].doesNotSupport,"all_new_units_commissioned_or_realized_output");
   assert.equal(permit.sourceEvidenceEdges[1].doesNotSupport,"all_nine_operating_together_or_nameplate_tonnage");
   assert.equal(permit.sourceEvidenceEdges[2].doesNotSupport,"exact_commissioning_day_or_full_capacity");
-  assert.equal(site.lastUpdated,"2026-11-06");
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("genuine regulator followup identified without claiming records obtained or request sent",()=>{

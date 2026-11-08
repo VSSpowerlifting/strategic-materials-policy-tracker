@@ -12,9 +12,10 @@ import {
   getAllControlMeasures, getAllEvents, getAllFinancialCommitments,
   getAllProjectDesignations, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "@/lib/data";
+import { prePhaseIiiMilestones, prePhaseIiiSources } from "./phase-iii-release-ids";
 
 const TODAY = "2026-10-17";
-const corpus = (): PathwayInputs => structuredClone({
+const liveCorpus = (): PathwayInputs => structuredClone({
   events: getAllEvents(),
   finances: getAllFinancialCommitments(),
   controls: getAllControlMeasures(),
@@ -23,6 +24,12 @@ const corpus = (): PathwayInputs => structuredClone({
   milestones: getAllProjectMilestones(),
   sources: getAllSources(),
 });
+// The October 17 snapshot excludes only the records the 8 November Phase III
+// release admitted; everything else is the live corpus.
+const corpus = (): PathwayInputs => {
+  const live = liveCorpus();
+  return {...live, milestones: prePhaseIiiMilestones(live.milestones), sources: prePhaseIiiSources(live.sources)};
+};
 
 function fixture(data: PathwayInputs, overrides: Partial<ProjectMilestone> = {}): ProjectMilestone {
   assert.ok(data.sources.some(s => s.id === "src-neo-commercial-production-2026"));
@@ -146,25 +153,45 @@ test("F5 casefile CLI: JSON and human reports both remain deliberately non-publi
   const human = execFileSync(process.execPath, args, {encoding: "utf8"});
   assert.ok(human.includes("Public release: NOT AUTHORIZED"));
   assert.ok(human.includes("Curated corpus validation cutoff: " + site.lastUpdated));
-  assert.ok(human.includes("Ready for manual QA: NO"));
+  assert.ok(human.includes("Ready for manual QA: candidate only"));
+  assert.ok(!human.includes("Ready for manual QA: NO"));
   const json = execFileSync(process.execPath, [...args, "--json"], {encoding: "utf8"});
   const report = JSON.parse(json);
-  assert.deepEqual(report, auditF5CasefileReadiness(corpus(), site.lastUpdated));
+  assert.deepEqual(report, auditF5CasefileReadiness(liveCorpus(), site.lastUpdated));
   assert.equal(report.publicReleaseAuthorized, false);
-  assert.equal(report.allPilotsEligibleForManualQa, false);
+  // Since the 8 November Phase III release every pilot has a reviewed occurred
+  // milestone, so each is a manual-QA candidate; release still needs signoff.
+  assert.equal(report.allPilotsEligibleForManualQa, true);
 });
 
-test("F5 casefile CLI: explicit strict mode fails closed without suppressing review evidence", () => {
+test("F5 readiness at the 8 November cutoff: Stibnite gains two reviewed workstream milestones, nothing auto-releases", () => {
+  const data = liveCorpus();
+  const report = auditF5CasefileReadiness(data, site.lastUpdated);
+  assert.equal(site.lastUpdated, "2026-11-08");
+  const stibnite = report.pilots.find(p => p.projectId === "prj-us-stibnite")!;
+  assert.equal(stibnite.registeredOccurredMilestones, 2);
+  assert.equal(stibnite.registeredPlannedMilestones, 0);
+  assert.equal(stibnite.eligibleForManualQa, true);
+  assert.deepEqual(report.pilots.filter(p => p.eligibleForManualQa).map(p => p.projectId), [...F5_PILOT_PROJECT_IDS]);
+  assert.equal(report.publicReleaseAuthorized, false);
+  assert.equal(report.autonomousMilestoneApprovalAuthorized, false);
+  assert.equal(report.inferredCausalityAuthorized, false);
+});
+
+test("F5 casefile CLI: explicit strict mode passes current coverage and still never authorizes release", () => {
   const args = ["--import", "tsx", "scripts/audit-f5-casefiles.ts"];
+  // Every pilot now has a reviewed occurred milestone (8 November release), so
+  // strict mode passes on the live corpus; it still never authorizes release.
+  // Fail-closed behaviour on missing evidence is covered by the synthetic
+  // fixture tests above.
   const strict = spawnSync(process.execPath, [...args, "--strict"], {encoding: "utf8"});
-  assert.equal(strict.status, 1, "strict mode must refuse current unreviewed pilot coverage");
+  assert.equal(strict.status, 0);
   assert.ok(strict.stdout.includes("Public release: NOT AUTHORIZED"));
-  assert.ok(strict.stdout.includes("BLOCKED: no registered source-reviewed occurred project-native milestone"));
+  assert.ok(!strict.stdout.includes("BLOCKED: no registered source-reviewed occurred project-native milestone"));
   const jsonStrict = spawnSync(process.execPath, [...args, "--json", "--strict"], {encoding: "utf8"});
-  assert.equal(jsonStrict.status, 1);
+  assert.equal(jsonStrict.status, 0);
   const report = JSON.parse(jsonStrict.stdout);
   assert.equal(report.publicReleaseAuthorized, false);
-  assert.equal(report.nextGate, "milestone_evidence_review");
 });
 
 test("F5 casefile CLI: unknown, duplicate or misleading approval flags are invalid", () => {

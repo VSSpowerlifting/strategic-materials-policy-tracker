@@ -4,6 +4,7 @@ import queue from "../research/project-execution/m3-2-source-review-queue.json";
 import { getAllFinancialCommitments, getAllProjectMilestones, getAllProjects, getAllSources, getFinancialCommitmentById } from "@/lib/data";
 import { site } from "@/lib/site";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const aifId = "src-neo-aif-2026";
 const originalUrl = "https://www.neomaterials.com/wp-content/uploads/2026/03/NPM-AIF-2026.pdf";
@@ -32,7 +33,7 @@ test("Narva 2026 AIF supports finance context, not a newly invented physical mil
   assert.equal(row.amount?.qualifier, "approximately");
   assert.equal(row.financialAmountHistory, undefined, "unreviewed F4 history remains blocked");
   assert.ok(row.financialStatusHistory.some(x => x.status === "partially_disbursed" && x.date === "2025-12-31"));
-  assert.equal(getAllProjectMilestones().length, 2, "AIF source-date correction does not independently create physical activity; Narva public record uses September issuer source");
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III], "AIF source-date correction does not independently create physical activity; Narva public record uses September issuer source");
 });
 
 test("changing only the contextual AIF publication clock does not silently invalidate the canonical Narva M3 review fingerprint", () => {

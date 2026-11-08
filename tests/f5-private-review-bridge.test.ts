@@ -13,6 +13,7 @@ import { site } from "../lib/site";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import { emptyPrivateEditorialLedger } from "../scripts/editorial-ledger";
 import { buildF5PrivateReviewerBridge, renderF5PrivateReviewerBridge } from "../scripts/f5-private-review-bridge";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const source = getAllSources().find(s => s.id === "src-neo-commercial-production-2026")!;
 assert.ok(source);
@@ -56,7 +57,7 @@ test("F5 drift/diff integrates exact M3 candidate identity without any approval 
   assert.equal(r.automatedPromotionAuthorized, false);
   assert.equal(r.publicSeedMutationAuthorized, false);
   assert.match(renderF5PrivateReviewerBridge(r), /Receipt acknowledgment/);
-  assert.deepEqual(getAllProjectMilestones().map(x => x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("stable review identity and bridge context fingerprint under equivalent capture retries", () => {
@@ -166,7 +167,7 @@ test("synthetic end-to-end offline CLI is deterministic and cannot write/publicl
     assert.equal(result.candidateEntityLinks.length, 1);
     assert.equal(readFileSync(paths[2], "utf8"), oldText);
     assert.deepEqual(readdirSync(dir).sort(), ["current.json", "current.txt", "prior.json", "prior.txt"]);
-    assert.deepEqual(getAllProjectMilestones().map(x => x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+    assert.deepEqual(getAllProjectMilestones().map(x => x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
     for (const flag of ["--publish", "--approve"]) {
       const run = spawnSync(process.execPath, [...args, flag], { encoding: "utf8" });
       assert.equal(run.status, 2);

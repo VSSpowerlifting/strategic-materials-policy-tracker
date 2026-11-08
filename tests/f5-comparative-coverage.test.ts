@@ -35,7 +35,10 @@ test("F5-4a registry-wide denominators and /response project parity are explicit
   assert.deepEqual(r.projects.filter(p => p.publicResponseAtCutoff.eligibleGovernmentProject)
     .map(p => p.projectId).sort(), response.rows.map(p => p.id).sort());
   assert.equal(new Set(r.projects.map(p => p.projectId)).size, d.projects.length);
-  assert.equal(r.counts.withoutNativeReviewedMilestone, d.projects.length - 2);
+  // Phase III (2026-11-08): seven distinct projects carry reviewed milestones
+  // (Stibnite holds two workstream milestones), up from two.
+  assert.equal(new Set(d.milestones.map(m => m.projectId)).size, 7);
+  assert.equal(r.counts.withoutNativeReviewedMilestone, d.projects.length - 7);
   assert.ok(r.counts.withNativeOccurredMilestone>=1);
   assert.ok(r.counts.withUnreviewedLegacyPhysicalObservation > 0);
   assert.ok(r.projects.every(p => p.lackOfNativeMilestonesMeansInactivity === false));
@@ -118,7 +121,10 @@ test("F5-4a milestone mode and separate clocks survive synthetic source-reviewed
   assert.deepEqual(row.nativeOccurredMilestoneIds, [...new Set([...d.milestones.filter(m=>m.projectId===p.id&&m.claimMode==="occurred").map(m=>m.id),"mil-fixture-reviewed-occurrence"])].sort());
   assert.deepEqual(row.nativePlannedMilestoneIds, []);
   assert.ok(row.structuralSourceIds.includes(src.id));
-  assert.equal(r.counts.withNativeOccurredMilestone, 2);
+  // The fixture lands on projects[0] (Wagerup's project), so the distinct-project
+  // count stays at the seven Phase III projects with reviewed occurred claims.
+  assert.equal(p.id, "prj-au-alcoa-sojitz-gallium");
+  assert.equal(r.counts.withNativeOccurredMilestone, 7);
   assert.equal(r.historicalPhysicalAsOfAuthorized, false,
     "even an earlier legal query must not backdate a reviewed milestone");
 });

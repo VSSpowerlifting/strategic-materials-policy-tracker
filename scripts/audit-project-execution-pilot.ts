@@ -12,6 +12,7 @@ import { isReviewCohort, loadCohortInputs } from "./project-execution-cohort-inp
 import {
   auditProjectExecutionPilot, formatPilotAudit, type ProjectExecutionReviewCohort,
 } from "./review-project-execution-pilot";
+import { PUBLISHED_REVIEWED_MILESTONE_IDS } from "./published-reviewed-milestones";
 
 const args = process.argv.slice(2);
 let cohort: ProjectExecutionReviewCohort | null = null;
@@ -36,11 +37,13 @@ if (bad) {
     cohort: inputs.cohort,
   });
   // Fail closed: review queue cannot replace or populate the public milestone seed.
+  // The published seed must equal exactly the human-reviewed baseline: Wagerup
+  // and Narva (17 October 2026) plus the six Phase III milestones approved on
+  // 8 November 2026 (P3-01 to P3-06). Any other set fails closed.
   const live=getAllProjectMilestones();
-  if(live.length!==2||live[0]?.id!=="mil-au-alcoa-wagerup-groundbreaking-2026-08-24"||
-     live[1]?.id!=="mil-ee-neo-narva-commercial-production-reported-2026"||
+  if(JSON.stringify(live.map(m=>m.id))!==JSON.stringify(PUBLISHED_REVIEWED_MILESTONE_IDS)||
      live[0]?.kind!=="groundbreaking_reported"){
-    r.errors.push("M3.2 audit requires exactly the human-reviewed Wagerup and Narva milestones; do not promote additional queued peers");
+    r.errors.push("Pilot audit requires exactly the human-reviewed published milestones (Wagerup, Narva and the six approved Phase III records); do not promote additional queued peers");
   }
   process.stdout.write(formatPilotAudit(r));
   if (r.errors.length > 0) process.exitCode = 1;

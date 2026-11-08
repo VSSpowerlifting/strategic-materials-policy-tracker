@@ -6,6 +6,7 @@ import { F5_PILOT_PROJECT_IDS } from "@/lib/f5-casefile-readiness";
 import type { PathwayInputs } from "@/lib/evidence-pathway-contract";
 import type { ProjectMilestone } from "@/lib/types";
 import { site } from "@/lib/site";
+import { PRE_PHASE_III_CUTOFF, prePhaseIiiMilestones } from "./phase-iii-release-ids";
 import {
   getAllControlMeasures, getAllEvents, getAllFinancialCommitments,
   getAllProjectDesignations, getAllProjectMilestones, getAllProjects, getAllSources,
@@ -39,7 +40,7 @@ function artificialMilestone(overrides: Partial<ProjectMilestone> = {}): Project
   };
 }
 
-test("F5-3a: Wagerup and Narva reviewed while remaining casefile claims stay private", () => {
+test("F5-3a: all three pilots carry reviewed occurred claims after Phase III while drafts stay private", () => {
   const data = corpus();
   const original = JSON.stringify(data);
   for (const projectId of F5_PILOT_PROJECT_IDS) {
@@ -66,16 +67,31 @@ test("F5-3a: Wagerup and Narva reviewed while remaining casefile claims stay pri
       assert.equal(draft.lanes.physical.occurred[0].occurredOn,null);
       assert.equal(draft.lanes.physical.occurredEvidence,"registered_reviewed_claims");
     }else{
-      assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,false);
-      assert.ok(draft.readiness.blockers.some(x=>x.includes("project-native")));
-      assert.deepEqual(draft.lanes.physical.occurred,[]);
-      assert.equal(draft.lanes.physical.occurredEvidence,"no_approved_occurred_claims");
+      assert.equal(projectId,"prj-us-stibnite");
+      assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,true);
+      assert.deepEqual(draft.readiness.blockers,[]);
+      assert.deepEqual(draft.lanes.physical.occurred.map(x=>[x.id,x.kind,x.scope,x.occurredOn]),[
+        ["mil-us-stibnite-early-works-construction-started-2025-10-21","construction_started","bounded_project_workstream","2025-10-21"],
+        ["mil-us-stibnite-burntlog-construction-started-2026-05-30","construction_started","bounded_project_workstream","2026-05-30"],
+      ]);
+      assert.equal(draft.lanes.physical.occurredEvidence,"registered_reviewed_claims");
     }
     assert.deepEqual(draft.lanes.physical.planned, []);
     assert.equal(draft.lanes.physical.absenceMeansInactivity, false);
     assert.ok(draft.project.evidence.length > 0);
   }
   assert.equal(JSON.stringify(data), original, "private preview must not mutate corpus");
+});
+
+test("F5-3a historical: before the Phase III release Stibnite stayed blocked with no occurred claims", () => {
+  const data = corpus();
+  data.milestones = prePhaseIiiMilestones(data.milestones);
+  const draft = buildF5EditorialCasefilePreview("prj-us-stibnite", data, PRE_PHASE_III_CUTOFF);
+  assert.equal(draft.publicReleaseAuthorized, false);
+  assert.equal(draft.readiness.eligibleForManualSourceAndBrowserQa,false);
+  assert.ok(draft.readiness.blockers.some(x=>x.includes("project-native")));
+  assert.deepEqual(draft.lanes.physical.occurred,[]);
+  assert.equal(draft.lanes.physical.occurredEvidence,"no_approved_occurred_claims");
 });
 
 test("F5-3a: financial, designation, and parent-policy lanes never invent capital or causality", () => {

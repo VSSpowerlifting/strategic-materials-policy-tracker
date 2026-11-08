@@ -11,16 +11,19 @@ import {
 } from "../lib/data";
 import type { Source } from "../lib/types";
 import { site } from "../lib/site";
+import { PRE_PHASE_III_CUTOFF, prePhaseIiiMilestones } from "./phase-iii-release-ids";
 
-const refsFor = (cohort: "m3-2" | "m3-3") => {
+const refsFor = (cohort: "m3-2" | "m3-3", corpus: "current" | "pre-phase-iii" = "current") => {
   const inputs = loadCohortInputs(cohort);
+  const milestones = corpus === "current" ? getAllProjectMilestones() : prePhaseIiiMilestones(getAllProjectMilestones());
   return {
     inputs,
     refs: {
       projects: getAllProjects(), sources: inputs.sources,
-      commitments: getAllFinancialCommitments(), corpusCutoff: site.lastUpdated as string,
-      publicMilestoneCount: getAllProjectMilestones().length,
-      publicMilestoneIds: getAllProjectMilestones().map((m) => m.id),
+      commitments: getAllFinancialCommitments(),
+      corpusCutoff: corpus === "current" ? site.lastUpdated as string : PRE_PHASE_III_CUTOFF,
+      publicMilestoneCount: milestones.length,
+      publicMilestoneIds: milestones.map((m) => m.id),
       cohort,
     },
   };
@@ -42,15 +45,37 @@ const M3_2_DIGESTS: Record<string, string> = {
   "review-m3-2-thompson-falls-q2-expansion": "2c91192902c6f897162f364a332405d93ea81c2461dec8bd37e350f63e6c7998",
 };
 
+// Phase III release (cutoff 2026-11-08, eight public milestones). Every M3.2 digest binds the
+// corpus cutoff and public milestone set, so publishing P3-01, P3-03..P3-06 moves all seven.
+// The 2026-11-06 values above remain reproducible from the pre-Phase III corpus.
+const M3_2_DIGESTS_AT_PHASE_III: Record<string, string> = {
+  "review-m3-2-alcoa-wagerup": "f8bf736beb84a5808b844f6dd5265f5fdee780c5b292849c1d1e971392e41034",
+  "review-m3-2-cyclic-extended-operations": "2598771ad578f40614e2935ef6ba35eb2d8b71f752f616846b1319b25df8efde",
+  "review-m3-2-inl-demonstration": "230064d95d4aa25cc04c93ecba7d8cabb23a70392d243c82ee1b979c7440c90b",
+  "review-m3-2-neo-narva-magnets": "dc1374def43606ba3dc4aa087c2923406c1dd3b0bc4e13a79827aafd2c8b543b",
+  "review-m3-2-stibnite-burntlog": "c692829df9805822a9d9ade9901e9689e11470ed9bb9a6e8344c3c286919584c",
+  "review-m3-2-stibnite-early-works": "47f39420c0aacb61f01a174084fa0085087ae2ee8fc19ad43d33c3990a1fd87f",
+  "review-m3-2-thompson-falls-q2-expansion": "ab54bdb1ab005059885725380a8fc44acedc2a0a0a5ff53652fdd37f87088590",
+};
+
 test("M3.3 cohort: M3.2 worksheet fingerprints and taxonomy blocks are unchanged", () => {
+  // Historical: the pre-Phase III corpus still reproduces the recorded M3.2 fingerprints.
+  const before = refsFor("m3-2", "pre-phase-iii");
+  const p0 = buildM3ReviewerPackets(before.inputs.queue, before.refs);
+  assert.deepEqual(
+    Object.fromEntries(p0.worksheets.map((w) => [w.id, w.reviewInputDigestSha256])),
+    M3_2_DIGESTS);
+  // Current release corpus.
   const { inputs, refs } = refsFor("m3-2");
   const p = buildM3ReviewerPackets(inputs.queue, refs);
   assert.deepEqual(
     Object.fromEntries(p.worksheets.map((w) => [w.id, w.reviewInputDigestSha256])),
-    M3_2_DIGESTS);
-  assert.equal(p.worksheets.find((w) => w.id === "review-m3-2-stibnite-burntlog")?.status,
-    "taxonomy_blocked");
-  assert.equal(p.blockedOnTaxonomy, 3);
+    M3_2_DIGESTS_AT_PHASE_III);
+  for (const packets of [p0, p]) {
+    assert.equal(packets.worksheets.find((w) => w.id === "review-m3-2-stibnite-burntlog")?.status,
+      "taxonomy_blocked");
+    assert.equal(packets.blockedOnTaxonomy, 3);
+  }
 });
 
 test("M3.3 cohort: five unsigned rows pass the queue audit with no taxonomy block", () => {
@@ -85,12 +110,16 @@ test("M3.3 cohort: namespaces cannot be mixed across cohorts", () => {
 });
 
 test("M3.3 cohort: proposed source is review-only and cannot shadow a seeded record", () => {
-  const proposedId = (m33Proposed as Source[])[0].id;
-  assert.equal(getAllSources().some((s) => s.id === proposedId), false);
-  assert.ok(refsFor("m3-3").inputs.sources.some((s) => s.id === proposedId));
-  assert.equal(refsFor("m3-2").inputs.sources.some((s) => s.id === proposedId), false);
+  // Phase III promoted the one proposed source (Stillwater) into the seed; the proposal file is now empty.
+  assert.deepEqual(m33Proposed as Source[], []);
+  const stillwater = "src-usar-stillwater-phase1a-commissioning-2026";
+  assert.equal(getAllSources().filter((s) => s.id === stillwater).length, 1);
+  assert.equal(refsFor("m3-3").inputs.sources.filter((s) => s.id === stillwater).length, 1);
+  assert.equal(refsFor("m3-3").inputs.sources.length, getAllSources().length);
   const seeded = getAllSources();
   assert.throws(() => mergeProposedSources(seeded, [seeded[0]]), /duplicates a seeded source id/);
+  assert.throws(() => mergeProposedSources(seeded, [seeded.find((s) => s.id === stillwater)!]),
+    /duplicates a seeded source id/);
 });
 
 test("M3.3 cohort: the example file is all-pending and yields no proposal", () => {

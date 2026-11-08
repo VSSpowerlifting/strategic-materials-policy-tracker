@@ -1,4 +1,14 @@
-## 2026-11-08: Phase III adjudication and M3.3 implementation (local, unpushed)
+## 2026-11-08: Phase III release (PR #227)
+
+- Branch `claude/smpt-phase-iii-adjudication`. Docs PR #226 merged first. Benjamin Yang approved P3-01 to P3-06, gave the per-check confirmations for those records, and authorized `site.lastUpdated` 2026-11-08 as a curated revision of the new evidence, not a reverification of the whole corpus.
+- Seed: six `ProjectMilestone` rows reviewed by Benjamin Yang on 2026-11-08 (Thompson Falls, Marathon, Nolans, Stillwater Phase 1a, Stibnite early works 2025-10-21, Stibnite Burntlog 2026-05-30) and the Stillwater source. P3-02's Thompson finance-row status was already in seed. Each row equals the release candidate `research/project-execution/release-candidates/phase-iii-milestones-2026-11-08.json`, minus the listed workflow-status note text.
+- Live counts: 8 public milestones; reviewed-milestone tier 7; execution gaps 13, funded gaps 3, ahead-of-binding 2. Stillwater stays in the gaps by design.
+- Fingerprints: all seven M3.2 digests changed because they bind the cutoff and milestone set. Thompson went `b75f2aa0` → `2c911929` (P3-02) → `ab54bdb1` (release). The pre-release digests reproduce from the 2026-11-06 corpus, and tests pin both.
+- The adjudication audit now reports "already exists" for each published row. That is expected.
+- F5 pins updated to the new cutoff and counts, with historical meaning kept through pre-Phase III variants in the tests.
+- Still deferred: Stibnite financing-row dates. Out of scope: FI003, presentation work, China legal-status review.
+
+## 2026-11-08: Phase III adjudication and M3.3 implementation (superseded by the release entry above)
 
 - Branch `claude/smpt-phase-iii-adjudication`. Benjamin Yang approved P3-01 to P3-06 on 2026-11-08 as substantive editorial rulings.
 - **P3-02 is in seed.** The Thompson Falls DPA finance row gains an issuer-attributed `construction` status (date null, `src-usac-2026-q2-10q`). Amount, obligation and disbursement are unchanged. Live counts: execution gaps 14 → 13, funded gaps 4 → 3, ahead-of-binding 2.

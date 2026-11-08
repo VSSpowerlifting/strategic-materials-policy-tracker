@@ -7,6 +7,7 @@ import queue from "../research/project-execution/m3-2-source-review-queue.json";
 import { getAllSources, getAllProjects, getAllFinancialCommitments, getAllProjectMilestones } from "../lib/data";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
 import { site } from "../lib/site";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const current=()=>structuredClone(handoff);
 const m3=()=>buildM3ReviewerPackets(queue,{
@@ -30,7 +31,7 @@ test("records handoff belongs only to existing unsigned Thompson SEC review",()=
   assert.equal(w.proposedObservation.scope,"named_facility");
   assert.equal(w.proposedObservation.occurredOn,null);
   assert.equal(w.humanAttestationPresent,false);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("official permit #2973-05 keeps source testing conditional on unverified all-nine startup",()=>{
@@ -153,8 +154,8 @@ test("private source intake and no public mutation survive a deterministic offli
   assert.ok(handoff.nextUseOfRecords.whenObtained.includes("gitignored private evidence vault"));
   assert.match(handoff.nextUseOfRecords.reviewer,/existing M3 original-source human adjudication/);
   assert.match(handoff.nextUseOfRecords.publication,/No automatic project-milestone seed/);
-  assert.equal(site.lastUpdated,"2026-11-06");
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.ok(decisions.every(x=>x.verdict==="pending" && x.reviewedBy===null && x.reviewedAt===null));
   const input=current(),before=JSON.stringify(input);
   assert.deepEqual(current(),current());

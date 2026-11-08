@@ -7,9 +7,16 @@ import candidate from "../research/project-execution/release-candidates/wagerup-
 import {site} from "../lib/site";
 import {auditF5CorpusCutoffImpact,F5_SEED_NAMES,type SeedInput}
   from "../scripts/audit-f5-corpus-cutoff-impact";
+import {PHASE_III_IDS,PHASE_III_RELEASE_CUTOFF,PRE_PHASE_III_CUTOFF} from "./phase-iii-release-ids";
 
-const seeds=():SeedInput=>Object.fromEntries(F5_SEED_NAMES.map(seed=>[
+const liveSeeds=():SeedInput=>Object.fromEntries(F5_SEED_NAMES.map(seed=>[
   seed,JSON.parse(readFileSync(join(process.cwd(),"data","seed",seed+".json"),"utf8")),
+]));
+// Historical snapshots (17 October to 6 November 2026) predate the 8 November
+// Phase III release; remove exactly its enumerated rows so those audits keep
+// describing the corpus they froze.
+const seeds=():SeedInput=>Object.fromEntries(Object.entries(liveSeeds()).map(([name,rows])=>[
+  name,(rows as {id:string}[]).filter(r=>!PHASE_III_IDS.has(r.id)),
 ]));
 const minimal=():Record<string,unknown[]>=>Object.fromEntries(F5_SEED_NAMES.map(seed=>[seed,[]]));
 // The 3 November 2026 revision added the October 2026 EU Strategic Projects
@@ -181,7 +188,7 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
   assert.equal(r.countFutureIntervalEndFields,21);
   assert.equal(r.publicationAuthorized,false);
   assert.equal(JSON.stringify(seeds()),frozen);
-  assert.equal(site.lastUpdated,"2026-11-06");
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
 });
 
 test("proposed 4 November revision contains only dated admissions from reviewed expansion batches",()=>{
@@ -250,7 +257,7 @@ test("November 6 admission is a dated cohort separate from historical November 4
     r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"));
   assert.equal(admitted.publicationAuthorized,false,
     "date sensitivity is historical evidence, not a substitute for the maintainer release gate");
-  assert.equal(site.lastUpdated,"2026-11-06");
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
 });
 
 test("live cutoff audit CLI is read-only at the current authorized corpus date",()=>{
@@ -259,17 +266,36 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
     "--proposed-cutoff",site.lastUpdated,
   ],{encoding:"utf8"});
   const parsed=JSON.parse(output);
-  assert.equal(parsed.proposedCutoff,"2026-11-06");
-  assert.equal(parsed.currentPublishedCutoff,"2026-11-06");
-  assert.equal(parsed.totalPublicSeedRows,F5_SEED_NAMES.reduce((n,seed)=>n+seeds()[seed].length,0));
-  assert.ok(parsed.afterProposedCutoffFields.every((r:{date:string})=>r.date>"2026-11-06"),
-    "future-to-current publication metadata can only postdate the new November 6 cutoff");
+  assert.equal(parsed.proposedCutoff,"2026-11-08");
+  assert.equal(parsed.currentPublishedCutoff,"2026-11-08");
+  assert.equal(parsed.totalPublicSeedRows,F5_SEED_NAMES.reduce((n,seed)=>n+liveSeeds()[seed].length,0));
+  assert.ok(parsed.afterProposedCutoffFields.every((r:{date:string})=>r.date>"2026-11-08"),
+    "future-to-current publication metadata can only postdate the November 8 cutoff");
   assert.ok(!parsed.afterProposedCutoffFields.some((r:{recordId:string;field:string;date:string})=>
     r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"),
-    "approved November 5 original-source access must be within the November 6 curated cutoff");
+    "approved November 5 original-source access must be within the curated cutoff");
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
   assert.equal(parsed.countFutureIntervalEndFields,21);
   assert.equal(parsed.publicationAuthorized,false,
     "audit's non-publication flags do not retroactively undo separately authorized source publication");
   assert.equal(parsed.maintainerReviewRequired,true);
+});
+
+test("November 8 Phase III release admits only its enumerated milestones and Stillwater source dates",()=>{
+  const full=liveSeeds();
+  const frozen=JSON.stringify(full);
+  const before=auditF5CorpusCutoffImpact(seeds(),PRE_PHASE_III_CUTOFF,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(before.countNewlyIncludedDatedFields,0,
+    "without the Phase III rows nothing in the 6 November corpus is re-dated by the new cutoff");
+  const r=auditF5CorpusCutoffImpact(full,PRE_PHASE_III_CUTOFF,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(r.totalPublicSeedRows,before.totalPublicSeedRows+PHASE_III_IDS.size);
+  assert.deepEqual([...new Set(r.newlyIncludedDatedFields.map(x=>x.recordId))].sort(),
+    [...PHASE_III_IDS].sort(),"no pre-existing record is silently re-dated by the release");
+  assert.ok(r.newlyIncludedDatedFields.filter(x=>x.seed==="project-milestones")
+    .every(x=>x.field==="reviewedAt"&&x.date===PHASE_III_RELEASE_CUTOFF));
+  assert.equal(r.countOtherPostCutoffFields,0);
+  assert.equal(r.publicationAuthorized,false);
+  assert.equal(r.allExternalSourcesRechecked,false,
+    "the November 8 cutoff is a curated release, not a reverification of the historical corpus");
+  assert.equal(JSON.stringify(liveSeeds()),frozen);
 });
