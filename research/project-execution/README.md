@@ -48,3 +48,21 @@ The four-source review queue now has a strictly isolated, **human-only decision 
 7. Even a clean preview is **not permission to publish**. An editor separately reviews and approves the final factual milestone and authorizes a distinct publication PR that adds `mil-...` seed records, updates the real corpus date, reruns validation, and checks site and financial-response invariants. Do not copy any local adjudication file into GitHub.
 
 **Editorial outcomes as of October 8:** Alcoa Wagerup and Cyclic Extended Operations are proposals eligible for independent human review; INL prototype demonstration and Stibnite's Burntlog access-road construction remain taxonomy blocked. This is **not** a claim that any human has yet approved the candidates.
+
+## M3.3 review cohort (Phase III rulings, published 2026-11-08)
+
+M3.3 is a **separate cohort** for the five Phase III proposed rulings (P3-03 to P3-06): Marathon early works, Nolans construction, the Stillwater Phase 1a commissioning, and the Stibnite early-works and Burntlog access-road workstreams as `bounded_project_workstream` milestones. M3.3 itself does not edit the M3.2 queue. The one M3.2 fingerprint change comes from the approved P3-02 finance-row status, described below. `tests/project-execution-m3-3-cohort.test.ts` pins all seven. The M3.2 Burntlog row remains taxonomy blocked; its M3.3 counterpart is a new row with its own ID and fingerprint.
+
+- Queue: `m3-3-source-review-queue.json` (IDs `review-m3-3-*`; mixing namespaces across cohorts fails the audit).
+- `m3-3-proposed-sources.json` held the Stillwater commissioning release before publication. That source is now seeded and the file is `[]`. Anything added later is merged **only** into review inputs, never into public output, and cannot shadow a seeded ID.
+- Decisions: copy `m3-3-adjudications.example.json` to `.project-execution-review/m3-3-adjudications.json` (gitignored) and follow steps 1, 3, 5, 6 and 7 above.
+
+```bash
+npm run review:m3-packets -- --cohort m3-3
+npm run audit:project-execution-pilot -- --cohort m3-3
+npm run audit:project-execution-adjudications -- --cohort m3-3
+```
+
+The Thompson Falls ruling (P3-01) stays in the M3.2 cohort (`review-m3-2-thompson-falls-q2-expansion`). P3-02 was approved on 2026-11-08 and is implemented in seed. It is an issuer-attributed `construction` status, undated, on `fin-us-dow-usac-antimony-2026-thompson-falls`. The Thompson packet now links that finance row, which changed that one M3.2 fingerprint from `b75f2aa0…55a2` to `2c911929…7998`. Benjamin Yang accepted the change on 2026-11-08, and his P3-01 approval remains in effect. The other six are unchanged. The fingerprint history and the reconciliation against the 10-Q are in `docs/analysis/capital-execution-phase-iii-findings-2026-11-08.md`.
+
+On 2026-11-08 Benjamin Yang approved P3-01 and P3-03 to P3-06, supplied the per-check confirmations for those records, and authorized the 2026-11-08 cutoff. The six milestones and the Stillwater source are now in seed. Each matches `release-candidates/phase-iii-milestones-2026-11-08.json`, minus the listed workflow-status note text. After publication, `audit:project-execution-adjudications` reports "proposed milestone ID already exists" for each approved row. That is expected: the audit will not propose a published record twice. The M3.2 digests bind the cutoff and the public milestone set, so all seven changed at release (Thompson is now `ab54bdb1…8590`); the pre-release digests still reproduce from the 2026-11-06 corpus. The Stibnite financing-row dates remain deferred.

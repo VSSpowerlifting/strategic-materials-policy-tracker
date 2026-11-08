@@ -193,7 +193,7 @@ try {
     assert.equal(download.suggestedFilename(), "smpt-prj-au-alcoa-sojitz-gallium-investigation.json");
     const packet = JSON.parse(await readFile(await download.path(), "utf8"));
     assert.equal(packet.projectionVersion, "smpt-investigation-1");
-    assert.equal(packet.corpus.revision, "2026-11-03");
+    assert.equal(packet.corpus.revision, "2026-11-08");
     assert.equal(packet.projectId, "prj-au-alcoa-sojitz-gallium");
     assert.equal(packet.nativeMilestones[0].id, "mil-au-alcoa-wagerup-groundbreaking-2026-08-24");
     assert.match(packet.nativeMilestones[0].note, /ceremon/);
@@ -292,16 +292,24 @@ try {
     await page.goto(base + "/projects/prj-us-stibnite", {
       waitUntil: "networkidle",
     });
-    assert.match(
-      await page.locator("#project-industrial").innerText(),
-      /No source-reviewed project milestone is published/,
-    );
+    // Phase III (P3-06): two reviewed workstream milestones; financing-row dates stay deferred.
+    const stibniteIndustrial = await page.locator("#project-industrial").innerText();
+    assert.doesNotMatch(stibniteIndustrial, /No source-reviewed project milestone is published/);
+    assert.match(stibniteIndustrial, /Burntlog/i);
     await page.locator("#project-finance summary").last().click();
     assert.match(
       await page.locator("#project-finance").innerText(),
       /conditions precedent/,
     );
     await checkLayout("stibnite");
+
+    await page.goto(base + "/projects/prj-ca-nmg-matawinie", {
+      waitUntil: "networkidle",
+    });
+    assert.match(
+      await page.locator("#project-industrial").innerText(),
+      /No source-reviewed project milestone is published/,
+    );
 
     await page.goto(base + "/compare", { waitUntil: "networkidle" });
     assert.match(
@@ -377,13 +385,10 @@ try {
   const dataset = await (
     await page.request.get(base + "/api/export/dataset.json")
   ).json();
-  assert.equal(dataset.counts.projectMilestones, 2);
+  assert.equal(dataset.counts.projectMilestones, 8);
   assert.deepEqual(
     dataset.projectMilestones.map((m) => m.id),
-    [
-      "mil-au-alcoa-wagerup-groundbreaking-2026-08-24",
-      "mil-ee-neo-narva-commercial-production-reported-2026",
-    ],
+    ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-au-nolans-construction-started","mil-ca-marathon-early-works-construction-started","mil-ee-neo-narva-commercial-production-reported-2026","mil-us-stibnite-burntlog-construction-started-2026-05-30","mil-us-stibnite-early-works-construction-started-2025-10-21","mil-us-usac-thompson-falls-construction-progress-reported-2026","mil-us-usar-stillwater-phase1a-commissioning-started"],
   );
   const milestone = dataset.projectMilestones.find(
     (m) => m.id === "mil-au-alcoa-wagerup-groundbreaking-2026-08-24",

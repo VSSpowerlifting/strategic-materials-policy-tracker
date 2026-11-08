@@ -65,7 +65,7 @@ try{
   const registerResponse=await page.request.get(base+"/api/v1/project-milestones");
   assert.equal(registerResponse.status(),200);
   const register=await registerResponse.json();
-  assert.deepEqual(register.map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(register.map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-au-nolans-construction-started","mil-ca-marathon-early-works-construction-started","mil-ee-neo-narva-commercial-production-reported-2026","mil-us-stibnite-burntlog-construction-started-2026-05-30","mil-us-stibnite-early-works-construction-started-2025-10-21","mil-us-usac-thompson-falls-construction-progress-reported-2026","mil-us-usar-stillwater-phase1a-commissioning-started"]);
   assert.equal(register[0].kind,"groundbreaking_reported");
   assert.equal(register[0].reviewedAt,"2026-10-17");
   const detailResponse=await page.request.get(base+"/api/v1/projects/prj-au-alcoa-sojitz-gallium");
@@ -78,7 +78,7 @@ try{
   const datasetResponse=await page.request.get(base+"/api/export/dataset.json");
   assert.equal(datasetResponse.status(),200);
   const dataset=await datasetResponse.json();
-  assert.equal(dataset.counts.projectMilestones,2);
+  assert.equal(dataset.counts.projectMilestones,8);
   assert.deepEqual(dataset.projectMilestones,register);
   const narvaResponse=await page.request.get(base+"/api/v1/projects/prj-ee-neo-rare-earth-magnet-project");
   assert.equal(narvaResponse.status(),200);

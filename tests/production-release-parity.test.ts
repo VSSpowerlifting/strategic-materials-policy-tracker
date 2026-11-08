@@ -5,6 +5,7 @@ import {
   type ExpectedPublicRelease,type PublicHttpFetcher,
 } from "../lib/production-release-parity";
 import {getAllProjectMilestones} from "../lib/data";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III, PUBLIC_MILESTONE_PROJECT_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const expected=()=>expectedPublicRelease();
 function healthyHttp(e:ExpectedPublicRelease):PublicHttpFetcher {
@@ -26,16 +27,17 @@ function healthyHttp(e:ExpectedPublicRelease):PublicHttpFetcher {
 test("read-only public parity checks the entire exported corpus and every actually released physical project",async()=>{
   const e=expected();
   assert.deepEqual(e.milestones,getAllProjectMilestones());
-  assert.deepEqual(e.milestones.map(m=>m.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
-  assert.equal(e.projects.length,2);
-  assert.equal(e.dataset.counts.projectMilestones,2);
+  assert.deepEqual(e.milestones.map(m=>m.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
+  assert.deepEqual(e.projects.map(x=>x.id).sort(),[...PUBLIC_MILESTONE_PROJECT_IDS_AT_PHASE_III]);
+  assert.equal(e.dataset.counts.projectMilestones,PUBLIC_MILESTONE_IDS_AT_PHASE_III.length);
   const before=JSON.stringify(e);
   const r=await checkPublicReleaseParity(e,healthyHttp(e));
   assert.equal(r.status,"in_sync");
-  assert.equal(r.expectedCuratedCorpusCutoff,"2026-11-06");
-  assert.equal(r.expectedPublishedMilestoneCount,2);
+  assert.equal(r.expectedCuratedCorpusCutoff,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(r.expectedPublishedMilestoneCount,PUBLIC_MILESTONE_IDS_AT_PHASE_III.length);
   assert.deepEqual(r.issues,[]);
-  assert.equal(r.checkedEndpoints.length,4);
+  assert.deepEqual(r.checkedEndpoints,["/api/v1/project-milestones","/api/export/dataset.json",
+    ...PUBLIC_MILESTONE_PROJECT_IDS_AT_PHASE_III.map(id=>"/api/v1/projects/"+encodeURIComponent(id))]);
   assert.equal(r.publicOnly,true);
   assert.equal(r.publicationAuthorized,false);
   assert.equal(r.deploymentShaVerified,false,"public data parity is NOT Vercel exact-commit attestation");

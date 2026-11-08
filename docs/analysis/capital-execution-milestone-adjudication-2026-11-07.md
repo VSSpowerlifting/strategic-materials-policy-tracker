@@ -90,3 +90,12 @@ Thompson Falls milestone is admitted later, the live-corpus test in
 `tests/capital-execution.test.ts` needs `reviewed_milestone` 2 → 3. If the
 financing row also gains a construction-stage status, `executionGaps` falls
 14 → 13 and `fundedGaps` 4 → 3.
+
+## Update, 2026-11-08
+
+Benjamin Yang approved the Thompson Falls milestone (P3-01) and the
+financing-row status (P3-02). P3-02 is now in seed, with `executionGaps` at 13
+and `fundedGaps` at 3. The P3-01 milestone is recorded as a local `approved`
+decision but is not yet in seed. It still needs the five per-check
+attestations and a separately authorized cutoff move. See
+`capital-execution-phase-iii-findings-2026-11-08.md`, "Decision record".

@@ -6,6 +6,7 @@
  * financial aggregation, or private evidence persistence is performed.
  */
 import type { FinancialCommitment, Project, Source } from "../lib/types";
+import { PUBLISHED_REVIEWED_MILESTONE_COUNT } from "./published-reviewed-milestones";
 
 type M3Row = {
   id: string; projectId: string; sourceId: string;
@@ -151,8 +152,12 @@ export function auditThompsonSourceTriangulation(packet: unknown, ctx: ThompsonS
     row[0].scopeProposal==="named_facility" &&
     row[0].occurredOn===null && row[0].targetOn===null &&
     row[0].gate==="human_source_review" && row[0].reviewVerdict==="unreviewed" &&
-    row[0].relatedFinanceIds.length===0,
-    "existing M3 unsigned review or no-duplicate-finance contract drifted");
+    // P3-02 (maintainer-approved 2026-11-08) gave the Montana child row an
+    // issuer-reported construction status from this same 10-Q, so the review
+    // must link exactly that one row and nothing else.
+    row[0].relatedFinanceIds.length===1 &&
+    row[0].relatedFinanceIds[0]==="fin-us-dow-usac-antimony-2026-thompson-falls",
+    "existing M3 unsigned review or same-source finance link contract drifted");
   const project=ctx.projects.filter(p=>p.id==="prj-us-usac-thompson-falls-expansion");
   check(project.length===1,"exactly one registered Thompson Falls project required");
   const source=ctx.sources.filter(s=>s.id==="src-usac-2026-q2-10q");
@@ -170,13 +175,16 @@ export function auditThompsonSourceTriangulation(packet: unknown, ctx: ThompsonS
     "$27M parent / April receipt provenance changed");
   check(montana.length===1 && montana[0].projectId==="prj-us-usac-thompson-falls-expansion" &&
     montana[0].amount?.value==="20000000" &&
-    montana[0].implementationStatusHistory.length===0 &&
+    montana[0].implementationStatusHistory.length===1 &&
+    montana[0].implementationStatusHistory[0].status==="construction" &&
+    montana[0].implementationStatusHistory[0].date===null &&
+    montana[0].implementationStatusHistory[0].sourceId==="src-usac-2026-q2-10q" &&
     !montana[0].financialStatusHistory.some(s=>s.status==="disbursed"),
     "Montana $20M allocation is not a second grant or fully paid facility milestone");
   check(alaska.length===1 && alaska[0].projectId==="prj-us-usac-alaska-antimony-feedstock" &&
     alaska[0].amount?.value==="7000000" && alaska[0].implementationStatusHistory.length===0,
     "Alaska $7M allocation must remain distinct and not imply Montana output");
-  check(ctx.publicMilestoneCount===2,"no public project-native milestone promotion authorized beyond Wagerup and Narva");
+  check(ctx.publicMilestoneCount===PUBLISHED_REVIEWED_MILESTONE_COUNT,"no public project-native milestone promotion authorized beyond the eight human-reviewed published milestones");
   return {
     schemaVersion:"f5-5-thompson-source-audit-1" as const,
     errors,

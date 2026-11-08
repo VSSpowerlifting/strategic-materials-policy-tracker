@@ -12,6 +12,7 @@ import {
   getAllControlMeasures,getAllEvents,getAllFinancialCommitments,
   getAllProjectDesignations,getAllProjectMilestones,getAllProjects,getAllSources,
 } from "@/lib/data";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III, prePhaseIiiMilestones } from "./phase-iii-release-ids";
 
 const corpus=():PathwayInputs=>structuredClone({
   events:getAllEvents(),finances:getAllFinancialCommitments(),controls:getAllControlMeasures(),
@@ -32,9 +33,9 @@ test("F5 Observatory: four exact pilot and comparator projects, internal only an
   assert.deepEqual(r.cases.map(c=>c.comparison.track).filter(x=>x==="extended_comparator"),
     ["extended_comparator"]);
   assert.equal(r.curatedCorpusCutoff,site.lastUpdated);
-  assert.equal(r.nextGate,"source_adjudication");
-  assert.equal(r.sourceReviewedCasefilesReadyForManualQa,2);
-  assert.equal(r.allCasefilesEligibleForManualQa,false);
+  assert.equal(r.nextGate,"manual_source_browser_accessibility_qa");
+  assert.equal(r.sourceReviewedCasefilesReadyForManualQa,4);
+  assert.equal(r.allCasefilesEligibleForManualQa,true);
   assert.equal(r.publicReleaseAuthorized,false);
   assert.equal(r.editorialClaimsAutomaticallyApproved,false);
   assert.equal(r.inferredCausalityAuthorized,false);
@@ -43,14 +44,26 @@ test("F5 Observatory: four exact pilot and comparator projects, internal only an
   assert.equal(r.architecture.publicationRouteEnabled,false);
   assert.deepEqual(r.architecture.casefileLanes,
     ["policy","finance","designations","physical"]);
-  assert.equal(r.cases.filter(c=>c.comparison.registeredReviewedOccurredClaims===1).length,2);
-  assert.equal(r.cases.find(c=>c.comparison.projectId==="prj-au-alcoa-sojitz-gallium")?.comparison.registeredReviewedOccurredClaims,1);
-  assert.ok(r.cases.filter(c=>!["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].includes(c.comparison.projectId)).every(c=>c.comparison.registeredReviewedOccurredClaims===0));
-  assert.ok(r.cases.filter(c=>!["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].includes(c.comparison.projectId)).every(c=>c.comparison.occurredEvidence==="no_approved_occurred_claims"));
+  // Phase III (8 Nov 2026): every cohort case now holds reviewed occurred claims; Stibnite holds two.
+  assert.deepEqual(r.cases.map(c=>[c.comparison.projectId,c.comparison.registeredReviewedOccurredClaims]),[
+    ["prj-au-alcoa-sojitz-gallium",1],["prj-ee-neo-rare-earth-magnet-project",1],
+    ["prj-us-stibnite",2],["prj-us-usac-thompson-falls-expansion",1],
+  ]);
+  assert.ok(r.cases.every(c=>c.comparison.occurredEvidence==="registered_reviewed_claims"));
+  assert.ok(r.cases.every(c=>c.comparison.blockers.length===0));
   assert.ok(r.cases.every(c=>c.comparison.missingEvidenceDoesNotMeanFailure));
-  assert.ok(r.cases.filter(c=>!["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].includes(c.comparison.projectId)).every(c=>c.comparison.blockers.some(x=>x.includes("project-native"))));
+  // The pre-Phase III corpus keeps its original disclosure: only Wagerup and Narva were reviewed.
+  const before=build({...data,milestones:prePhaseIiiMilestones(data.milestones)});
+  assert.equal(before.nextGate,"source_adjudication");
+  assert.equal(before.sourceReviewedCasefilesReadyForManualQa,2);
+  assert.equal(before.allCasefilesEligibleForManualQa,false);
+  const unreviewed=before.cases.filter(c=>!["prj-au-alcoa-sojitz-gallium","prj-ee-neo-rare-earth-magnet-project"].includes(c.comparison.projectId));
+  assert.deepEqual(unreviewed.map(c=>c.comparison.projectId),["prj-us-stibnite","prj-us-usac-thompson-falls-expansion"]);
+  assert.ok(unreviewed.every(c=>c.comparison.registeredReviewedOccurredClaims===0));
+  assert.ok(unreviewed.every(c=>c.comparison.occurredEvidence==="no_approved_occurred_claims"));
+  assert.ok(unreviewed.every(c=>c.comparison.blockers.some(x=>x.includes("project-native"))));
   assert.ok(r.cases.every(c=>c.draft.publicReleaseAuthorized===false));
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.equal(JSON.stringify(data),frozen,"scaffold must not modify public data");
 });
 
@@ -98,7 +111,8 @@ test("F5 Observatory: an artificial reviewed physical row advances only Narva to
     statementEn:"Synthetic only",statementEnSource:"na",
     reviewedBy:"synthetic test reviewer; not an actual person",reviewedAt:"2026-10-07",
   };
-  const r=build({...data,milestones:[...data.milestones.filter(m=>m.projectId!==synthetic.projectId),synthetic]});
+  const base=prePhaseIiiMilestones(data.milestones);
+  const r=build({...data,milestones:[...base.filter(m=>m.projectId!==synthetic.projectId),synthetic]});
   const narva=r.cases.find(x=>x.comparison.projectId===synthetic.projectId)!;
   assert.equal(narva.comparison.registeredReviewedOccurredClaims,1);
   assert.equal(narva.comparison.manualSourceAndBrowserQaCandidate,true);
@@ -109,7 +123,7 @@ test("F5 Observatory: an artificial reviewed physical row advances only Narva to
   assert.equal(r.sourceReviewedCasefilesReadyForManualQa,2);
   assert.equal(r.nextGate,"source_adjudication");
   assert.equal(r.publicReleaseAuthorized,false);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("F5 Observatory: failures and non-observation are not a proxy for success, delay or inactivity",()=>{
@@ -167,7 +181,7 @@ test("F5 Observatory: reject duplicate/unknown project, future claims, invalid c
     reviewedBy:"synthetic",reviewedAt:"2026-10-09",
   };
   assert.throws(()=>build({...c,milestones:[invalid]}),/invalid published milestone contract/);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("F5 Observatory CLI: JSON, readable summary and strict reviewer gate; reject publication flags",()=>{
@@ -185,7 +199,7 @@ test("F5 Observatory CLI: JSON, readable summary and strict reviewer gate; rejec
   assert.equal(parsed.cases[0].comparison.projectId,project);
   assert.equal(parsed.publicReleaseAuthorized,false);
   const strict=spawnSync(process.execPath,[...cli,"--strict","--json"],{encoding:"utf8"});
-  assert.equal(strict.status,1,"strict reviewer gate must be nonzero while four cases unreviewed");
+  assert.equal(strict.status,0,"strict reviewer gate passes once all four cases hold reviewed occurred claims");
   assert.deepEqual(JSON.parse(strict.stdout),build());
   for(const bad of [["--publish"],["--approve"],["--json","--json"],["--project"],["--project","not-an-id"]]){
     const out=spawnSync(process.execPath,[...cli,...bad],{encoding:"utf8"});

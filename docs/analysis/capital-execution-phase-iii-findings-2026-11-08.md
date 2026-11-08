@@ -1,7 +1,8 @@
 # Capital-to-execution comparison: Phase III research findings and adjudication packets
 
-Status: **draft for human review. Nothing in this note is in `data/seed/`,
-`data/candidates/` or the M3.2 review queue.** Every proposal below needs a named
+Status: **decisions recorded 2026-11-08 (see Decision record). P3-02 is in
+`data/seed/`; the five milestone rulings await per-check attestation and a cutoff
+authorization.** The original framing follows: Every proposal below needs a named
 human reviewer. AI research cannot supply `reviewedBy`, `reviewedAt` or
 `approvedBy`, so this note records evidence and asks for decisions.
 
@@ -9,7 +10,144 @@ Corpus revision: `site.lastUpdated` = 2026-11-06 (unchanged). Branch:
 `claude/smpt-phase-iii-expansion-aa0f03`, from `main` at `688b6108`. Research
 date: 2026-11-08. Counts are those pinned in `tests/capital-execution.test.ts`.
 
-## Why this phase ships no seed change
+## Publication (Phase III release, 2026-11-08)
+
+On 2026-11-08 Benjamin Yang confirmed, for the six approved records, that he
+had read the full original sources, checked the quoted passages, checked that
+classifications and scopes are narrowly limited, distinguished occurrence
+dates from source-publication dates, and checked that no record implies
+unsupported financing, causation or operational outcomes. He also authorized
+moving `site.lastUpdated` to 2026-11-08. That date is a curated revision for
+the newly approved evidence. It does not mean the whole historical corpus was
+reverified.
+
+What the release publishes:
+
+- Six `ProjectMilestone` rows, each reviewed by Benjamin Yang on 2026-11-08:
+  Thompson Falls (`construction_progress_reported`, `named_facility`, date
+  null); Marathon (`construction_started`, `bounded_project_workstream`, date
+  null); Nolans (`construction_started`, `whole_project`, date null);
+  Stillwater Phase 1a (`commissioning_started`, `named_facility`, date null);
+  and two Stibnite workstreams (`construction_started`, dated 2025-10-21 and
+  2026-05-30).
+- The Stillwater source `src-usar-stillwater-phase1a-commissioning-2026`.
+  `m3-3-proposed-sources.json` is now empty.
+- Each public row equals its proposal in
+  `research/project-execution/release-candidates/phase-iii-milestones-2026-11-08.json`.
+  The one difference from the adjudication proposal is workflow-status text
+  ("pending named human source review", for example), removed from the note
+  because it is no longer true. The candidate lists every removal, and
+  `tests/phase-iii-release-candidate.test.ts` checks seed against candidate.
+- Live counts: 8 public milestones (Wagerup and Narva plus these six);
+  reviewed-milestone tier 7 projects; execution gaps 13, funded gaps 3,
+  ahead-of-binding 2. Stillwater stays in the execution gaps, because its
+  milestone covers one facility and the gap covers the CHIPS-backed project.
+
+Still deferred or excluded:
+
+- The Stibnite financing-row implementation dates. The workstream milestones
+  carry their own dates; the finance rows are unchanged.
+- FI003, the presentation work and the China legal-status review.
+
+Fingerprints. The M3.2 worksheet digests bind the corpus cutoff and the public
+milestone set, so all seven changed when this release moved both. The
+Thompson history is now `b75f2aa0…55a2` (superseded) → `2c911929…7998`
+(P3-02, accepted) → `ab54bdb1…8590` (this release). The pre-Phase III digests
+still reproduce exactly from the 2026-11-06 corpus, and both sets are pinned in
+`tests/project-execution-m3-3-cohort.test.ts`.
+
+Once the rows are in seed, `audit:project-execution-adjudications` reports
+"proposed milestone ID already exists" for each approved row. That is the
+audit refusing to propose a record twice; it is expected after publication.
+
+## Decision record (2026-11-08)
+
+Benjamin Yang approved all six rulings on 2026-11-08 as substantive editorial
+decisions, after reading the original sources. Before that, an AI-assisted
+cross-check (Claude, not a human reviewer) had found that the cited passages
+support each proposal. What was done with that
+approval:
+
+- **P3-02, implemented in seed.** `fin-us-dow-usac-antimony-2026-thompson-falls`
+  now carries one `implementationStatusHistory` entry: `construction`, `date`
+  null, `sourceId` `src-usac-2026-q2-10q`, with a note naming the issuer as
+  the speaker. The financial status, amount, obligation and disbursement
+  fields are untouched. Nothing implies the full grant was received.
+  Live counts: `executionGaps` 14 → 13, `fundedGaps` 4 → 3, `aheadOfBinding`
+  unchanged at 2.
+- **P3-02's queue side effect.** The M3.2 Thompson Falls packet now links
+  that finance row (`relatedFinanceIds`) and says the status rests on the
+  same 10-Q. As a result, its worksheet fingerprint changed to
+  `2c911929…7998`. The other six M3.2 fingerprints are unchanged and pinned.
+  This change is forced, not incidental. With the P3-02 seed status in place
+  and the Thompson row restored exactly as at `ec3bfde`, the M3.2 audit fails
+  with "project-native review cannot omit existing matching finance/source
+  observations". Keeping the old fingerprint would therefore mean dropping
+  P3-02. The 2026-11-08 approval of P3-01 came before this worksheet change.
+
+### Thompson Falls fingerprint history
+
+| Fingerprint (SHA-256) | Queue state | Status |
+| --- | --- | --- |
+| `b75f2aa00db0e085381b1c3750c04eef269c7b24602bfbed765b114aaae255a2` | `ec3bfde`, `5f85fd2`: `relatedFinanceIds` empty; the caution says no same-source financier physical-status observation exists | Superseded on 2026-11-08 |
+| `2c91192902c6f897162f364a332405d93ea81c2461dec8bd37e350f63e6c7998` | `ba3a1bf` onward: links `fin-us-dow-usac-antimony-2026-thompson-falls`; the caution says the finance row cites the same 10-Q, so there is no independent confirmation | Current. Accepted by Benjamin Yang on 2026-11-08 |
+
+- **Why it changed.** The fingerprint changed because the approved P3-02
+  construction observation was added to the financing row. Only two worksheet
+  fields differ: `relatedFinanceIds` and the caution's sentence about
+  same-source observations. The project, source, kind, scope, quote, locator
+  and dates are identical. The other six M3.2 fingerprints are unchanged.
+- **Reconciliation on 2026-11-08.** The revised worksheet was checked against
+  the live 10-Q on EDGAR
+  (`uamy-20260630x10q.htm`) and against the approved P3-01 classification.
+  - The quote "The Thompson Falls facility expansion was substantially
+    completed" appears verbatim in Note 9 and again in Note 16.
+  - The filing gives the timing only as "during the second quarter of 2026",
+    with assets placed in service "late in the quarter". No day is stated, so
+    `occurredOn` stays null.
+  - The worksheet's $4.1M placed in service, approximately $29M of gross costs
+    still in construction in progress and $12.8M of grant funding received
+    match the filing.
+  - The worksheet proposes `construction_progress_reported`, `named_facility`,
+    null date and claim mode `occurred`. That matches P3-01 as approved.
+  - Like the finance-row status, the worksheet rests on
+    `src-usac-2026-q2-10q`.
+
+  This reconciliation was AI-assisted. It does not supply the five per-check
+  attestations.
+- **Review history.** The proposal was drafted on 2026-11-07 and left
+  unreviewed. On 2026-11-08, Benjamin Yang approved P3-01 against the
+  `b75f2aa…` worksheet. Later that day he accepted the change to `2c91192…`
+  and kept his P3-01 approval in effect. The local decision records the
+  current fingerprint.
+- **P3-01 and P3-03 to P3-06, recorded as local decisions.** The gitignored
+  files `.project-execution-review/adjudications.json` (P3-01) and
+  `m3-3-adjudications.json` (P3-03 to P3-06) record verdict `approved`,
+  `reviewedBy` "Benjamin Yang", `reviewedAt` 2026-11-08, a rationale and the
+  current fingerprint. With the checks left `false`, the adjudicator stops at
+  the checklist gate. Its later checks therefore did not run on the real files.
+  Those checks are the `mil-` ID format, duplicate and live-ID clashes, the
+  cutoff, single-row validation and combined validation. A scratch simulation
+  ran them on 2026-11-08 without writing back to any file. It used in-memory
+  copies with every check set to `true`, a hypothetical 2026-11-08 cutoff and
+  the digests recomputed at that cutoff, because the cutoff is part of the
+  fingerprint. All six proposals passed. A combined
+  `validateProjectMilestones` pass over the two seeded milestones and the six
+  proposals also returned no issues. This is a structural result only. It is
+  not an attestation.
+- **Still blocked from seed.** The five per-check attestations (`fullSourceRead`,
+  `quotedPassageMatches`, `scopeIsExplicit`, `eventAndEvidenceDatesSeparated`,
+  `noFinancingOrOperationsInference`) were not individually supplied, so they
+  stay `false`. The adjudicator therefore blocks every approved row.
+  Separately, `reviewedAt` 2026-11-08 postdates the curated cutoff
+  (2026-11-06), so moving the cutoff needs its own authorization. No
+  `ProjectMilestone` row and no Stillwater source entry has been added.
+- **P3-06 deferral.** Stibnite's financing-row implementation dates are
+  deferred for separate reconciliation. Neither M3.2 Stibnite packet changes;
+  both remain taxonomy blocked. The approved M3.3 workstream rows supersede
+  them editorially.
+
+## Why this phase ships no seed change (superseded by the release above)
 
 Phase III's aim was more verified industrial evidence and better project
 timelines. The research found three new physical milestones and confirmed

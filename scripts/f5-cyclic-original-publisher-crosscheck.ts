@@ -3,6 +3,7 @@
  * No network, source-body authentication, decisions, or writes. Research metadata
  * is NOT an M3 adjudication and never authorizes a public industrial milestone.
  */
+import { PUBLISHED_REVIEWED_MILESTONE_COUNT } from "./published-reviewed-milestones";
 type M3Row = {
   id: string; projectId: string; sourceId: string; kindProposal: string;
   scopeProposal: string; occurredOn: string | null; gate: string; reviewVerdict: string;
@@ -105,7 +106,7 @@ export function auditCyclicOriginalPublisherCrosscheck(input: unknown, ctx: Cycl
     fin[0].implementationStatusHistory.some(s => s.status === "completed" &&
       s.date === null && s.sourceId === input.canonicalSourceId),
     "Cyclic finance/activity boundary changed");
-  check(ctx.publicMilestoneCount === 2, "public project milestones changed");
+  check(ctx.publicMilestoneCount === PUBLISHED_REVIEWED_MILESTONE_COUNT, "public project milestones changed");
 
   const expectedClocks: Record<string, [string | null, string]> = {
     "src-nrcan-cmrdd-programme": [null, "2026-10-07"],

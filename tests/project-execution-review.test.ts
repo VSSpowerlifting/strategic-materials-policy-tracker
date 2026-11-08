@@ -8,6 +8,7 @@ import {
   getAllProjectMilestones, getDatasetSummary,
 } from "../lib/data";
 import { auditProjectExecutionPilot, formatPilotAudit } from "../scripts/review-project-execution-pilot";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 type Draft = (typeof queueJson)[number];
 const q = () => structuredClone(queueJson);
@@ -30,7 +31,7 @@ test("M3.2 seven source-linked candidates are a non-promoting review queue", () 
      "review-m3-2-inl-demonstration", "review-m3-2-neo-narva-magnets",
      "review-m3-2-stibnite-burntlog", "review-m3-2-stibnite-early-works",
      "review-m3-2-thompson-falls-q2-expansion"]);
-  assert.equal(getAllProjectMilestones().length, 2, "no unsigned M3 queue candidate is promoted by the queue itself");
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III], "no unsigned M3 queue candidate is promoted by the queue itself");
   assert.equal(getDatasetSummary().projects, getAllProjects().length);
 });
 
@@ -84,7 +85,7 @@ test("dated occurrence cannot follow source publication or the corpus cutoff", (
   const rows = q();
   rows[0].occurredOn = "2026-08-25";
   assert.match(audit(rows).errors.join(" | "), /occurred date postdates source evidence boundary/);
-  rows[0].occurredOn = "2026-11-07";
+  rows[0].occurredOn = "2026-11-09";
   assert.match(audit(rows).errors.join(" | "), /proposed occurrence postdates curated corpus cutoff/);
   rows[0].occurredOn = "2026-02-30";
   assert.match(audit(rows).errors.join(" | "), /real date or null/);
@@ -137,7 +138,7 @@ test("M3.2 whole_project null scope is structurally valid without inventing a pr
   const result = audit(rows);
   assert.deepEqual(result.errors, [], JSON.stringify(result.errors));
   assert.equal(result.status, "non_publication_editorial_queue");
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("M3.2 incompatible scope/name pairs still fail closed in both directions", () => {
@@ -172,7 +173,7 @@ test("Narva is one unsigned source review, not an operational-start day or a sec
   assert.ok(!("reviewedBy" in narva));
   assert.ok(!("reviewedAt" in narva));
   assert.deepEqual(audit().errors, []);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("Stibnite first early works may be queued without inventing a matching financing observation", () => {
@@ -197,7 +198,7 @@ test("Stibnite first early works may be queued without inventing a matching fina
   assert.deepEqual(report.candidates.find(x=>x.id===first.id)?.sourceBoundary,
     {date:"2025-10-21",basis:"publication"});
   assert.equal(report.candidates.find(x=>x.id===first.id)?.deduplicatedLegacyFinanceObservations,0);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("M3 project-native empty finance references still require registered primary source and valid source date", () => {
@@ -237,9 +238,9 @@ test("Stibnite original-source registration uses actual access receipt without b
   assert.equal(source.confidence,"primary");
   assert.equal(source.datePublished,"2025-10-21","event/report date is not the 2026 access receipt");
   assert.equal(source.dateAccessed,"2026-10-09","never backdate original source access");
-  assert.equal(site.lastUpdated, "2026-11-06","source registration retains the dated curated corpus revision");
+  assert.equal(site.lastUpdated, PHASE_III_RELEASE_CUTOFF,"source registration retains the dated curated corpus revision");
   assert.ok(source.notes?.includes("nonbinding"),"do not mislabel conditional EXIM financing");
-  assert.equal(getAllProjectMilestones().length, 2,"unsigned Stibnite source does not add another public milestone");
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III],"unsigned Stibnite source does not add another public milestone");
 });
 
 test("Project-native empty finance links cannot hide an existing same-source financial implementation observation", () => {
@@ -267,18 +268,21 @@ test("Thompson Falls Q2 progress is human-review gated, unsigned and not a finan
   assert.equal(row.scopeProposal, "named_facility");
   assert.equal(row.occurredOn, null, "quarter-end filing does not prove a construction milestone day");
   assert.equal(row.reviewVerdict, "unreviewed");
-  assert.deepEqual(row.relatedFinanceIds, [], "no synthetic financier physical status");
+  // P3-02 (approved 2026-11-08): the Montana child row now carries a same-source
+  // issuer-reported construction status, so the review must link it.
+  assert.deepEqual(row.relatedFinanceIds, ["fin-us-dow-usac-antimony-2026-thompson-falls"]);
   assert.equal(row.taxonomyQuestion, null);
   assert.match(row.editorialCaution, /not a completed\/operating project/);
-  assert.equal(getAllProjectMilestones().length, 2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   const result = audit();
   assert.deepEqual(result.errors, []);
   const match = result.candidates.find(c => c.id === row.id)!;
   assert.deepEqual(match.sourceBoundary, {date:"2026-08-11",basis:"publication"});
-  assert.equal(match.deduplicatedLegacyFinanceObservations, 0);
+  assert.equal(match.deduplicatedLegacyFinanceObservations, 1);
   const finances = getAllFinancialCommitments();
   const child = finances.find(f => f.id === "fin-us-dow-usac-antimony-2026-thompson-falls")!;
-  assert.deepEqual(child.implementationStatusHistory, []);
+  assert.deepEqual(child.implementationStatusHistory.map(h => [h.status, h.date, h.sourceId]),
+    [["construction", null, "src-usac-2026-q2-10q"]]);
   assert.deepEqual(child.financialStatusHistory.map(f => f.status),
     ["decided","partially_disbursed"]);
 });

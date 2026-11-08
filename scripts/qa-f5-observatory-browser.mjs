@@ -164,13 +164,14 @@ async function main(){
         assert(sources.every(s=>s.rel?.split(/\s+/).includes("noopener") &&
           s.rel?.split(/\s+/).includes("noreferrer")));
 
-        // Wagerup and Narva have separate real issuer-reported reviewed claims;
-        // the remaining two cases have no registered claim. Do not imply stalled work.
+        // Since the Phase III release (8 Nov 2026) all four cases hold real
+        // reviewed occurred claims, so no empty-state barrier renders and each
+        // row still says the registered claims require QA.
         assert.equal(await page.locator("article").filter({
           hasText:"No reviewed occurred physical milestone is registered.",
-        }).count(),2);
-        assert.equal(await page.getByText("No reviewed occurred claim registered").count(),2);
-        assert.equal(await page.getByText(/No source-reviewed occurred physical milestone has entered/).count(),2);
+        }).count(),0);
+        assert.equal(await page.getByText("No reviewed occurred claim registered").count(),0);
+        assert.equal(await page.getByText("Registered source claims; requires QA").count(),4);
 
         process.stdout.write(
           "O3c Chromium "+viewport.width+"x"+viewport.height+

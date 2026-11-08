@@ -9,22 +9,26 @@ import {
   getProjectMilestonesByProject,getSourceById,getDatasetSummary,
 } from "../lib/data";
 import { site } from "../lib/site";
+import { PHASE_III_MILESTONE_IDS, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const wagerup="prj-au-alcoa-sojitz-gallium";
 const milestoneId="mil-au-alcoa-wagerup-groundbreaking-2026-08-24";
 const sourceId="src-alcoa-wagerup-groundbreaking-2026";
+const PUBLIC_IDS=PUBLIC_MILESTONE_IDS_AT_PHASE_III;
 const project=(id:string)=>getProject(new Request("http://localhost/api/v1/projects/"+id),{
   params:Promise.resolve({id}),
 });
 
-test("public register and downloadable JSON expose exactly one genuinely reviewed milestone",async()=>{
+test("public register and downloadable JSON expose exactly the human-reviewed milestones",async()=>{
   const response=getMilestoneRegister();
   assert.equal(response.status,200);
   assert.match(response.headers.get("content-type")??"",/application\/json/);
   const milestones=await response.json();
   assert.deepEqual(milestones,getAllProjectMilestones());
-  assert.deepEqual(milestones.map((x:{id:string})=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
-  const m=milestones[0];
+  assert.deepEqual(milestones.map((x:{id:string})=>x.id),PUBLIC_IDS);
+  assert.deepEqual(PUBLIC_IDS.filter(id=>PHASE_III_MILESTONE_IDS.has(id)).length,6);
+  const m=milestones.find((x:{id:string})=>x.id===milestoneId);
+  assert.ok(m);
   assert.equal(m.projectId,wagerup);
   assert.equal(m.sourceId,sourceId);
   assert.equal(m.kind,"groundbreaking_reported");
@@ -34,21 +38,23 @@ test("public register and downloadable JSON expose exactly one genuinely reviewe
   assert.equal(m.targetOn,null);
   assert.equal(m.reviewedBy,"Benjamin Yang");
   assert.equal(m.reviewedAt,"2026-10-17");
-  assert.equal(site.lastUpdated,"2026-11-06");
+  assert.equal(site.lastUpdated,"2026-11-08");
   assert.ok(!JSON.stringify(milestones).includes(".project-execution-review"));
   assert.ok(!JSON.stringify(milestones).includes("review-m3-2"));
+  assert.ok(!JSON.stringify(milestones).includes("review-m3-3"));
+  assert.ok(!JSON.stringify(milestones).includes("pending named human source review"));
 });
 
 test("full dataset and summary carry only published native project milestones",async()=>{
   const ds=buildDataset();
   assert.deepEqual(ds.projectMilestones,getAllProjectMilestones());
-  assert.equal(ds.counts.projectMilestones,2);
-  assert.equal(getDatasetSummary().projectMilestones,2);
+  assert.equal(ds.counts.projectMilestones,8);
+  assert.equal(getDatasetSummary().projectMilestones,8);
   const response=getDataset();
   assert.equal(response.status,200);
   const body=await response.json();
   assert.deepEqual(body.projectMilestones,ds.projectMilestones);
-  assert.equal(body.counts.projectMilestones,2);
+  assert.equal(body.counts.projectMilestones,8);
   assert.equal(body.generatedAt,site.lastUpdated);
   assert.ok(!("reviewerAdjudications" in body));
   assert.ok(!("privateReviewQueue" in body));
@@ -74,7 +80,8 @@ test("project detail API adds source-pinned human evidence without rewriting fin
 });
 
 test("unsigned industrial projects have empty reviewed arrays, never inferred no-work conclusions",async()=>{
-  const unreviewed=getAllProjects().find(p=>p.id!=="prj-au-alcoa-sojitz-gallium");
+  const withMilestones=new Set(getAllProjectMilestones().map(m=>m.projectId));
+  const unreviewed=getAllProjects().find(p=>!withMilestones.has(p.id));
   assert.ok(unreviewed);
   const res=await project(unreviewed.id);
   assert.equal(res.status,200);
@@ -88,7 +95,7 @@ test("unsigned industrial projects have empty reviewed arrays, never inferred no
 });
 
 test("none of the JSON additions create a public Pathways or extra milestone publication",()=>{
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[milestoneId,"mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),PUBLIC_IDS);
   const ds=buildDataset();
   assert.ok(!JSON.stringify(ds).includes("review-m3-2-alcoa-wagerup"));
   assert.ok(!JSON.stringify(ds).includes("prj-ca-cyclic-kingston-demonstration-plant-milestone"));

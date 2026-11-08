@@ -8,6 +8,7 @@ import { join } from "node:path";
 import { getAllSources, getAllProjectMilestones } from "@/lib/data";
 import { auditF5SourceDrift, type F5SourceCapture } from "@/lib/f5-source-drift";
 import { buildF5PrivateVersionHandoff, formatF5PrivateVersionHandoff } from "@/lib/f5-source-version-diff";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const source = getAllSources().find(s => s.id === "src-neo-commercial-production-2026")!;
 assert.ok(source);
@@ -35,7 +36,7 @@ test("F5-5 private handoff anchors exact bytes, review key and readable context"
   assert.equal(r.publicReleaseAuthorized, false);
   assert.equal(r.automatedPromotionAuthorized, false);
   assert.equal(r.entityLinksAdjudicated, false);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("F5-5 refuses altered body, wrong source, outage and absent review key", () => {
@@ -80,7 +81,7 @@ test("F5-5 local CLI is deterministic and never writes a review or published mil
     assert.equal(a, b);
     assert.equal(JSON.parse(a).reviewVerdict, "unreviewed");
     assert.equal(readFileSync(files[2], "utf8"), oldText);
-    assert.equal(getAllProjectMilestones().length,2);
+    assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
     assert.throws(() => execFileSync(process.execPath, [...args, "--publish"], { stdio: "pipe" }));
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

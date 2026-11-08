@@ -6,12 +6,18 @@ import { getAllProjectMilestones, getProjectMilestonesByProject, getSourceById }
 import { validateProjectMilestones } from "../lib/project-milestones";
 import { getAllProjects,getAllSources } from "../lib/data";
 import { site } from "../lib/site";
+import { PHASE_III_MILESTONE_IDS, prePhaseIiiMilestones } from "./phase-iii-release-ids";
 
 const narvaId = "mil-ee-neo-narva-commercial-production-reported-2026";
 const wagerupId = "mil-au-alcoa-wagerup-groundbreaking-2026-08-24";
 
 test("Narva public seed matches explicitly authorized reviewed canonical M3 candidate without altering Wagerup", () => {
-  const rows=getAllProjectMilestones();
+  // The 8 November Phase III release added six records; before it the public
+  // seed held exactly Wagerup and Narva, and those two stay byte-identical.
+  const all=getAllProjectMilestones();
+  assert.equal(all.length,8);
+  assert.deepEqual(all.filter(x=>!PHASE_III_MILESTONE_IDS.has(x.id)).map(x=>x.id),[wagerupId,narvaId]);
+  const rows=prePhaseIiiMilestones(all);
   assert.deepEqual(rows.map(x=>x.id),[wagerupId,narvaId]);
   assert.deepEqual(rows[1],candidate.proposedProjectMilestones[0]);
   assert.equal(rows[0].kind,"groundbreaking_reported");
@@ -33,14 +39,14 @@ test("Narva public seed matches explicitly authorized reviewed canonical M3 cand
   assert.equal(n.note,q.editorialCaution);
   assert.equal(n.reviewedBy,"Benjamin Yang");
   assert.equal(n.reviewedAt,"2026-10-17");
-  assert.equal(site.lastUpdated,"2026-11-06");
+  assert.equal(site.lastUpdated,"2026-11-08");
   assert.equal(candidate.publicRouteReleaseAuthorized,false);
   assert.equal(candidate.reviewInputMetadataSha256,"0e8fdca930230527148be4f1da89439f1482b665243b16d747251a47707e6c1b");
-  assert.deepEqual(validateProjectMilestones(rows,{projects:getAllProjects(),sources:getAllSources(),corpusDate:site.lastUpdated}),[]);
+  assert.deepEqual(validateProjectMilestones(all,{projects:getAllProjects(),sources:getAllSources(),corpusDate:site.lastUpdated}),[]);
   assert.deepEqual(getProjectMilestonesByProject(q.projectId).map(x=>x.id),[narvaId]);
 });
 test("Narva original issuer and financing boundaries remain distinct from actual production-start clock",()=>{
-  const m=getAllProjectMilestones()[1],src=getSourceById(m.sourceId);
+  const m=getAllProjectMilestones().find(x=>x.id===narvaId)!,src=getSourceById(m.sourceId);
   assert.ok(src);
   assert.equal(src.publisher,"Neo Performance Materials");
   assert.equal(src.datePublished,"2026-09-14");

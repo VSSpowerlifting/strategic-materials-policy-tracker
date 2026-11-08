@@ -9,6 +9,7 @@ import {
   getAllFinancialCommitments, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "../lib/data";
 import { site } from "../lib/site";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const input = () => structuredClone(queue);
 const refs = () => ({
@@ -23,7 +24,7 @@ test("M3 workbench: seven source-linked packets, no reviewer identities, no publ
   assert.equal(p.schemaVersion, "m3-reviewer-packet-1");
   assert.equal(p.publicationAuthorized, false);
   assert.equal(p.automaticSourceApprovalAuthorized, false);
-  assert.equal(p.publicMilestoneCount,2);
+  assert.equal(p.publicMilestoneCount,PUBLIC_MILESTONE_IDS_AT_PHASE_III.length);
   assert.equal(p.totalQueueCandidates, 7);
   assert.equal(p.awaitingSourceReview, 4);
   assert.equal(p.blockedOnTaxonomy, 3);
@@ -34,7 +35,7 @@ test("M3 workbench: seven source-linked packets, no reviewer identities, no publ
   assert.ok(p.worksheets.every(w => w.reviewerChecks.length===5));
   assert.ok(p.worksheets.every(w => /^[a-f0-9]{64}$/.test(w.reviewInputDigestSha256)));
   assert.ok(p.worksheets.every(w => /^https?:\/\//.test(w.originalSource.url)));
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("M3 workbench: Narva retains unknown production date and distinguishes source report", () => {
@@ -81,7 +82,7 @@ test("M3 workbench: Thompson Falls is issuer-reported construction progress only
   assert.equal(w.proposedObservation.kind, "construction_progress_reported");
   assert.equal(w.proposedObservation.occurredOn, null);
   assert.equal(w.status, "unsigned_source_review");
-  assert.deepEqual(w.financingObservationReferences, []);
+  assert.deepEqual(w.financingObservationReferences, ["fin-us-dow-usac-antimony-2026-thompson-falls"]);
   assert.match(w.editorialCaution, /not a completed\/operating project/);
   assert.equal(w.originalSource.publishedOn, "2026-08-11");
   assert.equal(w.originalSource.accessedOn, "2026-10-02");
@@ -121,7 +122,7 @@ test("M3 workbench: fingerprints reflect real changes to reviewed source or quot
     ? {...s,dateAccessed:"2026-10-08"} : s);
   const altered=buildM3ReviewerPackets(input(),newRefs).worksheets[0].reviewInputDigestSha256;
   assert.notEqual(before,altered);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("M3 workbench: invalid reviews, source URL, corpus date and unknown IDs fail closed", () => {

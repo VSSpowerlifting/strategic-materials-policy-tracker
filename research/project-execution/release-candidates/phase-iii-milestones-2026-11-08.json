@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "f5-milestone-release-candidate-1",
+  "stage": "source_reviewed_milestone_authorized_for_public_seed",
+  "releaseAuthorized": true,
+  "publicSeedModificationAuthorized": true,
+  "publicRouteReleaseAuthorized": false,
+  "proposedCorpusCutoff": "2026-11-08",
+  "publishedCorpusCutoffAtPreparation": "2026-11-06",
+  "rulings": {
+    "P3-01": "Thompson Falls: construction_progress_reported, named_facility, occurredOn null",
+    "P3-02": "fin-us-dow-usac-antimony-2026-thompson-falls: issuer-reported construction status on the finance row; no milestone",
+    "P3-03": "Marathon: construction_started, bounded_project_workstream, occurredOn null",
+    "P3-04": "Nolans: construction_started, whole_project, occurredOn null",
+    "P3-05": "Stillwater Phase 1a: commissioning_started, named_facility, occurredOn null; source src-usar-stillwater-phase1a-commissioning-2026 seeded",
+    "P3-06": "Stibnite: two bounded workstream milestones dated 2025-10-21 and 2026-05-30; financing-row implementation dates remain deferred"
+  },
+  "sourceReviews": [
+    {
+      "sourceReviewId": "review-m3-3-nolans-construction",
+      "proposedMilestoneId": "mil-au-nolans-construction-started",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "reviewInputDigestSha256": "031c0048bfeefb734eafb2a860467490ac654c3d9d0c7acbab8656cfca259e97"
+    },
+    {
+      "sourceReviewId": "review-m3-3-marathon-early-works",
+      "proposedMilestoneId": "mil-ca-marathon-early-works-construction-started",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "reviewInputDigestSha256": "2a33d014064a9c33514cf9f06cf2ddfadb7d44ec6b05c7f8806906c43925a282"
+    },
+    {
+      "sourceReviewId": "review-m3-3-stibnite-burntlog-workstream",
+      "proposedMilestoneId": "mil-us-stibnite-burntlog-construction-started-2026-05-30",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "reviewInputDigestSha256": "41d45305b66953f071a07ad7951f9e5dadeed20e79adb8303d75f70874dc655b"
+    },
+    {
+      "sourceReviewId": "review-m3-3-stibnite-early-works-workstream",
+      "proposedMilestoneId": "mil-us-stibnite-early-works-construction-started-2025-10-21",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "reviewInputDigestSha256": "5c1b76599f6e16fa6399fbb822b52ace317adf79fc70df566771734c9b67012a"
+    },
+    {
+      "sourceReviewId": "review-m3-2-thompson-falls-q2-expansion",
+      "proposedMilestoneId": "mil-us-usac-thompson-falls-construction-progress-reported-2026",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "reviewInputDigestSha256": "ab54bdb1ab005059885725380a8fc44acedc2a0a0a5ff53652fdd37f87088590"
+    },
+    {
+      "sourceReviewId": "review-m3-3-stillwater-phase1a-commissioning",
+      "proposedMilestoneId": "mil-us-usar-stillwater-phase1a-commissioning-started",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "reviewInputDigestSha256": "ca8b38488a96cff957bc3e26c1970c9a960740c9f655505bdbc4b3efe4c948b2"
+    }
+  ],
+  "reviewReceiptProvenance": "Maintainer's explicit statement in the current conversation on 2026-11-08 that P3-01 to P3-06 were personally reviewed and approved, with five confirmations for the associated milestone reviews: full original source read; quoted passage checked; classification and scope verified as appropriately limited; occurrence date distinguished from source-publication date; record checked not to imply unsupported financing, causation or operational outcomes. Those confirmations set the five checks in the private gitignored adjudication files; no other attestation is recorded. Digests are the worksheet reviewInputDigestSha256 values at the 2026-11-08 curated cutoff.",
+  "noteStatusTextRemovals": {
+    "rule": "Each public note equals the adjudication proposal note with only the listed workflow-status text removed. That text described the review as pending or the source as unregistered, which is false once the approved record is published. No other character of any proposal changes, and the review queues are left untouched so the review fingerprints stay as approved.",
+    "removals": [
+      {
+        "milestoneId": "mil-au-nolans-construction-started",
+        "removedStatusText": [
+          " Proposed ruling P3-04; pending named human source review."
+        ]
+      },
+      {
+        "milestoneId": "mil-ca-marathon-early-works-construction-started",
+        "removedStatusText": [
+          " Proposed ruling P3-03; pending named human source review."
+        ]
+      },
+      {
+        "milestoneId": "mil-us-stibnite-burntlog-construction-started-2026-05-30",
+        "removedStatusText": [
+          " Proposed ruling P3-06; pending named human source review."
+        ]
+      },
+      {
+        "milestoneId": "mil-us-stibnite-early-works-construction-started-2025-10-21",
+        "removedStatusText": [
+          " Proposed ruling P3-06; pending named human source review."
+        ]
+      },
+      {
+        "milestoneId": "mil-us-usac-thompson-falls-construction-progress-reported-2026",
+        "removedStatusText": [
+          "; human source review remains pending"
+        ]
+      },
+      {
+        "milestoneId": "mil-us-usar-stillwater-phase1a-commissioning-started",
+        "removedStatusText": [
+          " Proposed ruling P3-05; pending named human source review.",
+          " The source is proposed in m3-3-proposed-sources.json and is not yet in the public source registry."
+        ]
+      }
+    ]
+  },
+  "manualReviewRequirements": [
+    "Keep occurredOn null where the source does not state the occurrence day (Thompson Falls, Marathon, Nolans, Stillwater)",
+    "Stibnite workstream dates 2025-10-21 and 2026-05-30 come from the approved P3-06 ruling; the Stibnite financing-row implementation dates stay deferred",
+    "No milestone asserts financing causality, disbursement, sustained output or operation beyond the source",
+    "Preserve Wagerup and Narva public entries byte-for-byte; no /pathways release",
+    "site.lastUpdated advanced to 2026-11-08 for this curated release only; this is not a reverification of the whole historical corpus",
+    "Exact-head validation/CI/browser QA and verified production deployment needed before declaring public release"
+  ],
+  "proposedProjectMilestones": [
+    {
+      "id": "mil-au-nolans-construction-started",
+      "projectId": "prj-au-nolans",
+      "kind": "construction_started",
+      "claimMode": "occurred",
+      "scope": "whole_project",
+      "scopeAsStated": null,
+      "occurredOn": null,
+      "targetOn": null,
+      "sourceId": "src-au-nolans-construction-2026",
+      "locator": "Opening sentence of the 8 October 2026 ministerial media release",
+      "statementOriginal": "Construction of a globally significant rare earths project has now commenced in the heart of the nation.",
+      "statementEn": "Construction of a globally significant rare earths project has now commenced in the heart of the nation.",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "note": "Australian Government ministerial statement published 8 October 2026. The 8 October groundbreaking/release date is kept distinct from the actual first construction day, which the release does not state, so occurredOn stays null. The statement does not establish disbursement of any specific financing instrument; the equity row is cross-referenced, not evidenced."
+    },
+    {
+      "id": "mil-ca-marathon-early-works-construction-started",
+      "projectId": "prj-ca-marathon-copper-palladium",
+      "kind": "construction_started",
+      "claimMode": "occurred",
+      "scope": "bounded_project_workstream",
+      "scopeAsStated": "early works program at the Marathon copper-palladium project",
+      "occurredOn": null,
+      "targetOn": null,
+      "sourceId": "src-ca-genm-marathon-construction-2026",
+      "locator": "Opening paragraphs of the 1 October 2026 Generation Mining release",
+      "statementOriginal": "Early works have commenced following the posting of the construction phase financial assurance under the Project's filed Closure Plan.",
+      "statementEn": "Early works have commenced following the posting of the construction phase financial assurance under the Project's filed Closure Plan.",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "note": "Issuer statement published 1 October 2026; it establishes that early works had begun by that date, not the first day of work, so occurredOn stays null. The scope is the bounded early-works programme, not construction of the full mine. The Canada Growth Fund equity row is cross-referenced only: this milestone does not date, condition or evidence any CGF disbursement, and no financing causality is inferred."
+    },
+    {
+      "id": "mil-us-stibnite-burntlog-construction-started-2026-05-30",
+      "projectId": "prj-us-stibnite",
+      "kind": "construction_started",
+      "claimMode": "occurred",
+      "scope": "bounded_project_workstream",
+      "scopeAsStated": "Burntlog Route access road and associated 2026 critical-path works",
+      "occurredOn": "2026-05-30",
+      "targetOn": null,
+      "sourceId": "src-perpetua-stibnite-construction-2026",
+      "locator": "June 1 announcement, first paragraph following project update introduction",
+      "statementOriginal": "On Saturday, May 30, Perpetua commenced additional critical path construction activities for the 2026 field season",
+      "statementEn": "On Saturday, May 30, Perpetua commenced additional critical path construction activities for the 2026 field season",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "note": "Issuer statement dating the start of the Burntlog/2026 critical-path workstream to 30 May 2026. This row supersedes the taxonomy-blocked M3.2 framing by recording a bounded workstream, separate from the October 2025 early works; it is not the start of whole-mine construction. DPA and EXIM rows are cross-referenced because they cite the same source; dating their implementation histories is deferred until the instrument/project-status relationship is independently reconciled. No financing causality is inferred."
+    },
+    {
+      "id": "mil-us-stibnite-early-works-construction-started-2025-10-21",
+      "projectId": "prj-us-stibnite",
+      "kind": "construction_started",
+      "claimMode": "occurred",
+      "scope": "bounded_project_workstream",
+      "scopeAsStated": "early works construction for the Stibnite Gold Project",
+      "occurredOn": "2025-10-21",
+      "targetOn": null,
+      "sourceId": "src-perpetua-stibnite-early-works-2025",
+      "locator": "October 21, 2025 original issuer release, attributed CEO Jon Cherry quote, paragraph 2",
+      "statementOriginal": "we officially started early works construction today",
+      "statementEn": "we officially started early works construction today",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "note": "Issuer release of 21 October 2025; the attributed CEO quotation dates the start of early-works construction to that day. The scope is the early-works workstream only, separate from the 30 May 2026 Burntlog workstream and from whole-mine construction, commissioning or production. The release says financial assurance was posted from cash on hand and describes the preliminary EXIM letter as nonbinding; no financing causality is inferred."
+    },
+    {
+      "id": "mil-us-usac-thompson-falls-construction-progress-reported-2026",
+      "projectId": "prj-us-usac-thompson-falls-expansion",
+      "kind": "construction_progress_reported",
+      "claimMode": "occurred",
+      "scope": "named_facility",
+      "scopeAsStated": "Thompson Falls, Montana antimony processing and refining facility expansion",
+      "occurredOn": null,
+      "targetOn": null,
+      "sourceId": "src-usac-2026-q2-10q",
+      "locator": "Form 10-Q Note 9, Government Grant, substantial-completion and PP&E paragraph; corroborating Note 16, Thompson Falls, Montana Facility Expansion",
+      "statementOriginal": "The Thompson Falls facility expansion was substantially completed",
+      "statementEn": "The Thompson Falls facility expansion was substantially completed",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "note": "USAC's Q2 2026 Form 10-Q reports the expansion substantially completed, $4.1M in related assets placed in service late Q2, and ~$29M gross project costs still in construction in progress at June 30. The exact progress day, full commissioning, design throughput and closure of every grant-funded workstream remain unknown. April $12.8M cash, the $20M Thompson Falls child allocation, the $27M parent and ~$39M corporate expansion budget have distinct accounting bases. Its finance row cites this same 10-Q for construction status: no independent confirmation. This is a reported construction snapshot, not a completed/operating project or a dated start event."
+    },
+    {
+      "id": "mil-us-usar-stillwater-phase1a-commissioning-started",
+      "projectId": "prj-us-usar-stillwater-magnet",
+      "kind": "commissioning_started",
+      "claimMode": "occurred",
+      "scope": "named_facility",
+      "scopeAsStated": "commercial magnet production line (Phase 1a) at its facility in Stillwater, Oklahoma",
+      "occurredOn": null,
+      "targetOn": null,
+      "sourceId": "src-usar-stillwater-phase1a-commissioning-2026",
+      "locator": "Opening paragraph of the 26 March 2026 GlobeNewswire release",
+      "statementOriginal": "today announced the successful commissioning of its commercial magnet production line (Phase 1a) at its facility in Stillwater, Oklahoma.",
+      "statementEn": "today announced the successful commissioning of its commercial magnet production line (Phase 1a) at its facility in Stillwater, Oklahoma.",
+      "statementEnSource": "na",
+      "reviewedBy": "Benjamin Yang",
+      "reviewedAt": "2026-11-08",
+      "note": "Issuer announcement published 26 March 2026; it reports commissioning of the Phase 1a line, not sustained commercial output, design throughput or customer deliveries, and the commissioning day itself is not stated, so occurredOn stays null. The milestone is not attributed to CHIPS or any other public financing."
+    }
+  ],
+  "finalMaintainerAuthorization": {
+    "recordedOn": "2026-11-08",
+    "scope": "six Phase III public milestones (P3-01, P3-03, P3-04, P3-05, P3-06 x2), the Stillwater source, and site.lastUpdated 2026-11-08, attributed to Benjamin Yang reviewed 2026-11-08",
+    "separatePublicPathwaysAuthorization": false,
+    "excluded": [
+      "Stibnite financing-row date changes",
+      "FI003",
+      "presentation work",
+      "China legal-status review"
+    ],
+    "source": "maintainer's explicit authorization in current conversation; private review ledgers remain local"
+  }
+}

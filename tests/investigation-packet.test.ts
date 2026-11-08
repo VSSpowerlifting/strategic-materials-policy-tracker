@@ -67,7 +67,8 @@ test("financial conditions, exact decimal strings, undated histories and nonallo
     assert.equal(packet.nativeMilestones.length, data.getProjectMilestonesByProject(p.id).length);
   }
   const stibnite = getPublicProjectInvestigation("prj-us-stibnite")!.packet;
-  assert.equal(stibnite.nativeMilestones.length, 0);
+  // Phase III (P3-06): two reviewed workstream milestones; the financing rows' own dates stay deferred (null).
+  assert.deepEqual(stibnite.nativeMilestones.map(m => m.occurredOn).sort(), ["2025-10-21", "2026-05-30"]);
   assert.match(JSON.stringify(stibnite), /conditions precedent/);
   assert.ok(stibnite.financialInstruments.some(f => f.legacyPhysicalObservations.some(s => s.date === null)));
 });

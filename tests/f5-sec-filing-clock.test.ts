@@ -35,7 +35,14 @@ test("F5: verifying a source publication clock cannot promote finance approval o
   assert.ok(dpa);
   assert.equal(dpa.financialStatusHistory.at(-1)?.status, "disbursed",
     "the separate DPA agreement has its own already sourced history");
-  assert.deepEqual(
-    getAllProjectMilestones().filter(m => m.projectId === "prj-us-stibnite"), [],
+  // The 10-Q clock repair approves nothing physical. Stibnite's only milestones are
+  // the two separately human-reviewed P3-06 rows, each from its own source, and the
+  // financing rows' construction dates stay deferred.
+  const stibnite = getAllProjectMilestones().filter(m => m.projectId === "prj-us-stibnite");
+  assert.deepEqual(stibnite.map(m => [m.id, m.sourceId, m.reviewedAt]), [
+    ["mil-us-stibnite-burntlog-construction-started-2026-05-30", "src-perpetua-stibnite-construction-2026", "2026-11-08"],
+    ["mil-us-stibnite-early-works-construction-started-2025-10-21", "src-perpetua-stibnite-early-works-2025", "2026-11-08"],
+  ]);
+  assert.ok(getAllProjectMilestones().every(m => m.sourceId !== "src-perpetua-sec-2026-q2"),
     "factual source-metadata repair does not approve physical assertions");
 });

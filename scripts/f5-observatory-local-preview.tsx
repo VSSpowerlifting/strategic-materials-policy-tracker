@@ -19,6 +19,7 @@ import {
 import { site } from "../lib/site";
 import { buildF5ObservatoryScaffold } from "../lib/f5-observatory-scaffold";
 import { PrivateObservatoryReview } from "../components/observatory/private-observatory-review";
+import { PUBLISHED_REVIEWED_MILESTONE_IDS } from "./published-reviewed-milestones";
 
 export const F5_PREVIEW_DIRECTORY = ".project-execution-review";
 export const F5_PREVIEW_HTML = "observatory-preview.html";
@@ -69,12 +70,13 @@ export async function buildF5LocalBrowserPreview():Promise<{
     milestones:getAllProjectMilestones(),projects:getAllProjects(),
     sources:getAllSources(),
   },site.lastUpdated);
+  // Published reviewed-milestone baseline after the 8 November 2026 Phase III
+  // release (P3-01 to P3-06), in seed order. Any other set fails closed.
+  const published=JSON.stringify(getAllProjectMilestones().map(m=>m.id));
   if(model.publicReleaseAuthorized!==false||model.architecture.publicationRouteEnabled!==false||
-     model.sourceReviewedCasefilesReadyForManualQa!==2||
+     model.sourceReviewedCasefilesReadyForManualQa!==4||
      model.cases.length!==4||
-     getAllProjectMilestones().length!==2||
-     getAllProjectMilestones()[0]?.id!=="mil-au-alcoa-wagerup-groundbreaking-2026-08-24"||
-     getAllProjectMilestones()[1]?.id!=="mil-ee-neo-narva-commercial-production-reported-2026")
+     published!==JSON.stringify(PUBLISHED_REVIEWED_MILESTONE_IDS))
     throw new Error("F5 local browser preview refuses unexpected publication or reviewed-outcome baseline");
   const body=renderToStaticMarkup(createElement(PrivateObservatoryReview,{model}));
   if(!body.includes('data-f5-private-review="true"')||

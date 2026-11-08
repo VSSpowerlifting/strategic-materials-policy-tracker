@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {buildSourceDirectory,filterSourceDirectory,normalizeSourceQuery,UNCITED_FILTER} from "@/lib/source-directory";
 import {buildSourceUseIndex,publishedSourceRecords,SOURCE_USE_KINDS} from "@/lib/source-usage";
-import {getAllSources} from "@/lib/data";
+import {getAllProjectMilestones,getAllSources} from "@/lib/data";
 
 const corpus=()=>publishedSourceRecords();
 const directory=()=>{
@@ -74,7 +74,10 @@ test("filtering never mutates data or publishes private milestone review",()=>{
  const rows=directory(),original=structuredClone(rows);
  filterSourceDirectory(rows,{q:"China",publication:"undated",citingKind:"capital"});
  assert.deepEqual(rows,original);
- assert.equal(filterSourceDirectory(rows,{citingKind:"milestone"}).length,2);
+ // Phase III release: eight public milestones cite eight distinct sources.
+ const milestoneSources=["src-alcoa-wagerup-groundbreaking-2026","src-au-nolans-construction-2026","src-ca-genm-marathon-construction-2026","src-neo-commercial-production-2026","src-perpetua-stibnite-construction-2026","src-perpetua-stibnite-early-works-2025","src-usac-2026-q2-10q","src-usar-stillwater-phase1a-commissioning-2026"];
+ assert.deepEqual([...new Set(getAllProjectMilestones().map(m=>m.sourceId))].sort(),milestoneSources);
+ assert.deepEqual(filterSourceDirectory(rows,{citingKind:"milestone"}).map(r=>r.source.id).sort(),milestoneSources);
 });
 test("source page statically includes full directory with accessible and shareable filters",async()=>{
  const {readFile}=await import("node:fs/promises");

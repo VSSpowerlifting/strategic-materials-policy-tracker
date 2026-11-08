@@ -7,6 +7,7 @@ import {
 } from "@/lib/project-milestones";
 import { auditLegacyProjectExecution, formatLegacyExecutionAudit } from "@/lib/project-execution-audit";
 import type { FinancialCommitment, ProjectMilestone, Source } from "@/lib/types";
+import { PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const source: Pick<Source, "id" | "language" | "confidence" | "datePublished" | "dateAccessed"> = {
   id: "src-fixture-primary", language: "en", confidence: "primary",
@@ -27,7 +28,7 @@ const fixture = (): ProjectMilestone => ({
 });
 
 test("public milestone seed remains empty; no inferred verified project milestones", () => {
-  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), [...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
 test("valid explicitly scoped, human-reviewed primary milestone; event and evidence dates stay separate", () => {
@@ -274,5 +275,5 @@ test("construction progress reporting is an undated status observation, not a da
     const errors = validateProjectMilestones([{...progress,...changes}], refs);
     assert.ok(errors.some(e=>expected.test(e)), label+": "+errors.join("; "));
   }
-  assert.deepEqual(getAllProjectMilestones().map(x => x.id), ["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"], "synthetic validation cannot add another public milestone");
+  assert.deepEqual(getAllProjectMilestones().map(x => x.id), [...PUBLIC_MILESTONE_IDS_AT_PHASE_III], "synthetic validation cannot add another public milestone");
 });

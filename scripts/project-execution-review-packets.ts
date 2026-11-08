@@ -7,7 +7,9 @@
  */
 import { createHash } from "node:crypto";
 import type { FinancialCommitment, Project, Source } from "../lib/types";
-import { auditProjectExecutionPilot } from "./review-project-execution-pilot";
+import {
+  auditProjectExecutionPilot, reviewIdPattern, type ProjectExecutionReviewCohort,
+} from "./review-project-execution-pilot";
 import type { PendingProjectExecutionRow } from "./adjudicate-project-execution";
 
 type Refs = {
@@ -16,6 +18,7 @@ type Refs = {
   commitments: readonly FinancialCommitment[];
   corpusCutoff: string;
   publicMilestoneCount: number;
+  cohort?: ProjectExecutionReviewCohort;
 };
 
 export type ReviewerWorksheet = {
@@ -93,12 +96,13 @@ export function buildM3ReviewerPackets(
   const audited = auditProjectExecutionPilot(queue, {
     projects: refs.projects, sources: refs.sources,
     commitments: refs.commitments, corpusCutoff: refs.corpusCutoff,
+    cohort: refs.cohort,
   });
   if (audited.errors.length)
     throw new Error("M3 review queue invalid: " + audited.errors.join(" | "));
   if (!Number.isSafeInteger(refs.publicMilestoneCount) || refs.publicMilestoneCount < 0)
     throw new Error("Invalid current public milestone count");
-  if (requestedId !== null && !/^review-m3-2-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(requestedId))
+  if (requestedId !== null && !reviewIdPattern(refs.cohort).test(requestedId))
     throw new Error("Invalid review ID");
 
   const sourceMap = new Map(refs.sources.map(s => [s.id, s]));

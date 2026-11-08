@@ -1,0 +1,82 @@
+[
+  {
+    "id": "review-m3-3-marathon-early-works",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
+  },
+  {
+    "id": "review-m3-3-nolans-construction",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
+  },
+  {
+    "id": "review-m3-3-stibnite-burntlog-workstream",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
+  },
+  {
+    "id": "review-m3-3-stibnite-early-works-workstream",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
+  },
+  {
+    "id": "review-m3-3-stillwater-phase1a-commissioning",
+    "verdict": "pending",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "checks": {
+      "fullSourceRead": false,
+      "quotedPassageMatches": false,
+      "scopeIsExplicit": false,
+      "eventAndEvidenceDatesSeparated": false,
+      "noFinancingOrOperationsInference": false
+    },
+    "rationale": null,
+    "proposedMilestoneId": null,
+    "reviewInputDigestSha256": null
+  }
+]

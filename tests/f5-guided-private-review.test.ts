@@ -10,6 +10,7 @@ import {
   type GuidedReviewRefs,type HumanReviewInput,
 } from "../scripts/f5-guided-private-review";
 import type {PendingProjectExecutionRow,SourceReviewDecision} from "../scripts/adjudicate-project-execution";
+import { PHASE_III_RELEASE_CUTOFF, PRE_PHASE_III_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const narva="review-m3-2-neo-narva-magnets";
 const records=queue as PendingProjectExecutionRow[];
@@ -44,17 +45,19 @@ test("review session always uses one canonical gitignored per-candidate path",()
 });
 
 test("already published Wagerup and Narva are unavailable for accidental second review",()=>{
-  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),["mil-au-alcoa-wagerup-groundbreaking-2026-08-24","mil-ee-neo-narva-commercial-production-reported-2026"]);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.throws(()=>prepareGuidedReview(records,{...refs(),currentPublicMilestones:getAllProjectMilestones()},narva,"2026-11-03"),/Already published/);
   assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-alcoa-wagerup","2026-11-03"),/Already published/);
-  assert.equal(site.lastUpdated,"2026-11-06");
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
 });
 
 test("new guided-review sessions reject superseded publication cutoffs",()=>{
   const live={...refs(),currentPublicCutoff:site.lastUpdated};
-  assert.equal(live.currentPublicCutoff,"2026-11-06");
+  assert.equal(live.currentPublicCutoff,PHASE_III_RELEASE_CUTOFF);
   assert.throws(()=>prepareGuidedReview(records,live,narva,"2026-11-03"),
     /CURRENT public corpus revision/);
+  assert.throws(()=>prepareGuidedReview(records,live,narva,PRE_PHASE_III_CUTOFF),
+    /CURRENT public corpus revision/,"the superseded 6 Nov cutoff cannot open a new session");
   assert.doesNotThrow(()=>prepareGuidedReview(records,live,narva,site.lastUpdated));
 });
 

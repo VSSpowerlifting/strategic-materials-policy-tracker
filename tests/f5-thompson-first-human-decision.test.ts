@@ -6,6 +6,7 @@ import example from "../research/project-execution/m3-2-adjudications.example.js
 import { getAllSources,getAllProjects,getAllFinancialCommitments,getAllProjectMilestones } from "../lib/data";
 import { site } from "../lib/site";
 import { buildM3ReviewerPackets } from "../scripts/project-execution-review-packets";
+import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const m3Id = "review-m3-2-thompson-falls-q2-expansion";
 const m3SourceId = "src-usac-2026-q2-10q";
@@ -45,10 +46,10 @@ test("no fake human review, source-body proof, digest, milestone ID or public mi
   assert.equal(brief.publicationAuthorized,false);
   assert.match(sheet().reviewInputDigestSha256,/^[0-9a-f]{64}$/);
   assert.equal(sheet().digestMeaning,"registry_metadata_fingerprint_not_archived_document_hash");
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.ok(example.every(x=>x.verdict==="pending" && x.reviewedBy===null &&
     x.reviewedAt===null && x.reviewInputDigestSha256===null));
-  assert.equal(site.lastUpdated,"2026-11-06",
+  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF,
     "a future reviewer cannot backdate source inspection to existing curated cutoff");
 });
 
@@ -81,7 +82,8 @@ test("Thompson scope is an individual expansion, not an authorized whole-project
   assert.equal(original.scopeProposal,brief.candidateScope);
   assert.equal(original.sourceId,brief.existingSourceId);
   assert.equal(original.reviewVerdict,"unreviewed");
-  assert.equal(original.relatedFinanceIds.length,0);
+  // P3-02 added a same-source finance observation on the Montana child row.
+  assert.deepEqual(original.relatedFinanceIds,["fin-us-dow-usac-antimony-2026-thompson-falls"]);
   assert.equal(original.gate,"human_source_review");
   assert.match(brief.candidateNote,/not a dated completion/);
   assert.match(brief.candidateNote,/not.*full nine-furnace operation/);
@@ -112,7 +114,8 @@ test("six different industrial and financial denominators cannot be merged into 
   assert.equal(parent[0].projectId,null);
   assert.equal(parent[0].financialStatusHistory.at(-1)?.status,"partially_disbursed");
   assert.equal(parent[0].financialStatusHistory.at(-1)?.date,null);
-  assert.equal(montana[0].implementationStatusHistory.length,0);
+  // P3-02: issuer-reported construction only, undated; Alaska untouched.
+  assert.deepEqual(montana[0].implementationStatusHistory.map(h=>[h.status,h.date]),[["construction",null]]);
   assert.equal(alaska[0].implementationStatusHistory.length,0);
   assert.match(brief.candidateNote,/distinct bases/);
 });
@@ -154,7 +157,7 @@ test("source-role clock and evidence independence stay distinct from SEC canonic
 
 test("candidate cannot silently become a duplicate public industrial milestone",()=>{
   assert.equal(brief.proposedMilestoneId,null);
-  assert.equal(getAllProjectMilestones().length,2);
+  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.equal(queue.filter(x=>x.projectId===projectId && x.sourceId===m3SourceId).length,1);
   assert.equal(brief.humanReviewer,null);
   const clone=structuredClone(brief);
