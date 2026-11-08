@@ -214,7 +214,9 @@ No construction-or-later evidence was found for these, so nothing is proposed:
 
 - Ten projects in section 06 still have no construction-or-later record:
   the five USA Rare Earth CHIPS projects, NORAM, Estelle, Telescope Li-PICK,
-  the GGT recycling pilot and Rhyolite Ridge. Not all were researched in
+  the GGT recycling pilot and Rhyolite Ridge. Stillwater Magnet stays
+  on this list even if P3-05 is approved, because a milestone never moves
+  the physical axis and its commissioning predates the CHIPS funding. Not all were researched in
   depth this phase; see the table above for those that were.
 - Conditional-to-binding transitions (Ucore, Hemerdon / NWF, Donald, the EXIM
   letters of interest, Stibnite's EXIM loan): none was dated in a source by

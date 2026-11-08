@@ -4,7 +4,7 @@
 - Docs only. `docs/analysis/capital-execution-phase-iii-findings-2026-11-08.md` collects original-source research on Thompson Falls, Marathon, Nolans, USA Rare Earth Stillwater and Stibnite. It asks for six human decisions (P3-01 to P3-06), each with its candidate statement, source URL, proposed kind, scope and date treatment.
 - No seed, queue, schema or taxonomy changes. The M3.2 source-review queue is a closed, digest-pinned cohort, so it was left alone; the note recommends a new M3.3 cohort once the packets are approved. Live counts are unchanged: 2 reviewed milestones, 14 execution gaps, 4 funded gaps.
 - If every recommendation is approved, reviewed milestones go from 2 to as many as 6. If P3-02 is approved, execution gaps go from 14 to 13 and funded gaps from 4 to 3.
-- Negative findings (nothing proposed): Ucore, MP 10X, the five USA Rare Earth CHIPS projects beyond the Stillwater Phase 1a commissioning, Mountain Pass samarium, Lofdal and 5N St George.
+- Negative findings (nothing proposed): Ucore, MP 10X, the other four USA Rare Earth CHIPS projects (Round Top, Stillwater Metal, Magnet Project 2, Metal Project 2), Mountain Pass samarium, Lofdal and 5N St George.
 - Nothing has been recorded as reviewed or approved. FI003, the presentation system and the 10 November China legal-status review are untouched.
 
 ## 2026-11-07: Capital-to-execution comparison, Phase II
