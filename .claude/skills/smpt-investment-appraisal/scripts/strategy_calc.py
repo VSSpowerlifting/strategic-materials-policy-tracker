@@ -195,12 +195,29 @@ def guarded_totals(items, allow_parent_child=False):
     """Total amounts only within identical (currency, instrument, status) groups.
 
     Never converts currency, never adds an envelope to a drawdown, never adds a
-    loan to equity. Items may carry ``id`` and ``part_of`` / ``drawn_from``;
-    a child is excluded from a group that also holds its parent (the parent
-    already contains it) unless ``allow_parent_child`` is set, and the exclusion
-    is reported. Returns parallel totals plus refusals; there is deliberately no
-    grand total.
+    loan to equity. Items may carry ``id`` and either or both of ``part_of`` /
+    ``drawn_from`` (one parent id each). An item is excluded from a group that
+    also holds any ancestor reached through those links, followed across all
+    items (the ancestor already contains it), unless ``allow_parent_child`` is
+    set; the exclusion is reported. Other links (``replaced_by``,
+    ``refinanced_by``, ``backstopped_by``) are not read: the caller must give a
+    replaced original its ended status or leave it out. Returns parallel totals
+    plus refusals; there is deliberately no grand total.
     """
+    by_id = {i.get("id"): i for i in items if i.get("id")}
+
+    def ancestors(item):
+        seen, todo = set(), [item]
+        while todo:
+            cur = todo.pop()
+            for link in ("part_of", "drawn_from"):
+                pid = cur.get(link)
+                if pid and pid not in seen:
+                    seen.add(pid)
+                    if pid in by_id:
+                        todo.append(by_id[pid])
+        return seen
+
     groups, excluded, missing = {}, [], []
     for item in items:
         absent = [k for k in GROUP_KEYS if not item.get(k)]
@@ -214,9 +231,10 @@ def guarded_totals(items, allow_parent_child=False):
         ids = {m.get("id") for m in members}
         kept = []
         for m in members:
-            parent = m.get("part_of") or m.get("drawn_from")
-            if parent and parent in ids and not allow_parent_child:
-                excluded.append({"id": m.get("id"), "reason": "parent %s in same group" % parent})
+            inside = sorted(a for a in ancestors(m) if a in ids and a != m.get("id"))
+            if inside and not allow_parent_child:
+                excluded.append({"id": m.get("id"),
+                                 "reason": "ancestor %s in same group" % ", ".join(inside)})
                 continue
             kept.append(m)
         out.append({

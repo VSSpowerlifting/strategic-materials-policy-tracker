@@ -11,7 +11,7 @@ Decision: …
 └── 3. …
 ```
 
-Branch tests: mutually exclusive (no evidence answers two branches), collectively exhaustive (union answers the decision), 3–5 branches.
+Branch tests: mutually exclusive (each branch asks a distinct analytical question, so no question sits in two branches), collectively exhaustive (together the branches cover everything the decision depends on), 3–5 branches. MECE governs the questions and their coverage, not the evidence. One source can inform several branches, for example a filing that states both financing terms and capacity. Cite it in each branch it informs.
 
 ## Hypothesis register
 

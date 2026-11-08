@@ -9,7 +9,7 @@ Date: 2026-11-08. Branch `claude/smpt-consulting-skills-c70ab2`, base `d5b59bb`.
 | **Simulated walkthrough** | The evaluator read each `SKILL.md` and applied its method by hand to FI003 and FI002, checking whether the method would surface the right decision, methods, distinctions and challenges | Done (below) |
 | **Deterministic recomputation** | `strategy_calc.py` run on payloads built from the products' exhibits and inputs | Done; every anchor reproduced |
 | **Structural validation** | Frontmatter, naming, body order, referenced files, tests | Done |
-| **Claude Code runtime behavior** | Whether Claude Code discovers the skills, selects them from `description`, and loads `references/` on demand | **Not verified.** See [Runtime status](#runtime-status) |
+| **Claude Code runtime behavior** | Whether Claude Code discovers the skills, selects them from `description`, and loads `references/` on demand | **Observed 2026-11-08** in three fresh sessions. See [Runtime status](#runtime-status) |
 
 The walkthrough is a reasoned reading, not observed model behavior. It shows whether the instructions are sufficient and correctly aimed. It cannot show that a model will follow them.
 
@@ -89,7 +89,7 @@ Commands run: `python3 -B .claude/skills/smpt-investment-appraisal/scripts/strat
 | --- | --- | --- | --- |
 | F1 | `threshold` (via `npv`) raised `ValueError: too many values to unpack` when `capital_flows` was passed as a `{year: amount}` mapping, the form a reviewer naturally writes from a workbook | Defect | Fixed. A `_pairs` helper accepts a mapping or a list of pairs, sorts them by year, and is used by `npv` and `sign_changes`. Regression test `test_flows_accept_mapping_or_pairs` asserts that both forms give PV 4435.220520 |
 | F2 | `--help` claimed to show payload shapes but did not | Usability | Fixed. A `PAYLOADS` epilog lists each command's payload shape |
-| F3 | `totals` guards `part_of` and `drawn_from` double counting but not `replaced_by` | Low | Not a live risk: a replaced original and its replacement differ in instrument or status, so they never share a group. This is documented in financing-structure step 3 so no one relies on the link being guarded |
+| F3 | `totals` drops a child only through `part_of` / `drawn_from`. Acceptance testing found three gaps: an item carrying both links had only `part_of` checked, indirect chains were not followed, and `replaced_by` is not read at all, so an original and its replacement with the same currency, instrument and status were summed (the earlier claim that they never share a group was wrong) | Medium → Low | Fixed: both links and indirect chains are now followed, with regression tests. `replaced_by`, `refinanced_by` and `backstopped_by` remain unread by design; financing-structure step 3 tells the analyst to give a replaced original its ended status or leave it out before totalling, and a test pins that behaviour |
 | F4 | README said every `description` contains "Use when …"; two use "Use after …" and "Use before …" | Documentation | README wording corrected. The descriptions were left as they are, because their triggers are more precise |
 | F5 | FI003's thesis-level challenges (causality, fee bases, liquidity direction, conditional backstop) are each reachable from a named method step | Confirmation | None needed |
 
@@ -119,16 +119,16 @@ for f in .claude/skills/smpt-*/SKILL.md; do d=$(basename "$(dirname "$f")"); n=$
 
 ## Runtime status
 
-**Frontmatter-valid; runtime discovery unverified.** This session did not observe Claude Code listing the `smpt-*` skills, selecting one from its description, or loading a reference file on demand. The skill list available to this session was fixed when it started, before the files existed. Re-reading the definitions did not produce a runtime observation.
+**Observed 2026-11-08, Claude Code 2.1.310.** Three fresh, non-interactive sessions (`claude -p … --output-format stream-json --verbose`) were started from this worktree with `Edit`, `Write`, `Bash` and `NotebookEdit` disallowed, so none could change files. The observations below come from the session event streams, not from re-reading the definitions. The earlier simulated walkthrough (above) remains a reasoned reading and is not replaced by these runs.
 
-To verify in a fresh session from this worktree:
+| Check | Prompt | Observed |
+| --- | --- | --- |
+| 1. Discovery | Any prompt; read the `init` event | All eight skills listed in `skills` and `slash_commands`: `smpt-engagement-framing`, `smpt-evidence-baseline`, `smpt-executive-narrative`, `smpt-financing-structure`, `smpt-investment-appraisal`, `smpt-market-competitive`, `smpt-options-decision`, `smpt-review-gate`. The parent checkout's `.claude/skills/` holds no `smpt-*` directory and `~/.claude/skills/` holds only `ben-smpt-review`, so the listed copies are this worktree's |
+| 2. Explicit load | `/smpt-engagement-framing` with a hypothetical state-agency question on a heavy rare earth separation plant | Skill body loaded. The session read `references/mandate-template.md` and returned a mandate table with a labelled hypothetical decision-maker and the "no organization commissioned or endorsed" statement. It did not open `issue-tree-template.md`, which the prompt's scope did not reach. 2 turns, no error |
+| 3. Selection without naming | A JOGMEC equity-stake deck request that named no skill | The first tool call was `Skill {"skill": "smpt-engagement-framing"}`. The session then read the Applied Strategy Standard, both framing references, `PROJECT_STATE.md` and Japan seed records (read-only), inherited the 2026-11-08 cutoff from `lib/site.ts`, and flagged the 10 November 2026 suspension end. 13 turns, no error |
+| 4. References on demand | Checks 2 and 3 | References were opened with `Read` after the skill loaded, when the method pointed to them; none were preloaded into the skill body |
 
-1. Start Claude Code and confirm that the eight `smpt-*` skills appear in the available-skills list.
-2. Type `/smpt-engagement-framing` and confirm that the skill body loads.
-3. Ask an FI-style question without naming a skill, and record which skill, if any, is selected.
-4. Check that `references/*.md` load only when the method points to them.
-
-Record the outcome here, with the session date, as observed behavior.
+Limits: one run per check, print mode rather than an interactive session, and only the entry-point skill was selected. Selection of the seven downstream skills from their own descriptions was not separately exercised.
 
 ## Assessment
 

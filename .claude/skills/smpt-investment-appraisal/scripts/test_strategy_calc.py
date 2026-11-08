@@ -143,6 +143,50 @@ class GuardedTotals(unittest.TestCase):
         self.assertEqual(r["groups"][0]["total"], Decimal("1000"))
         self.assertEqual(r["excluded_overlaps"][0]["id"], "tr1")
 
+    def test_item_with_both_links_checks_drawn_from(self):
+        items = [
+            {"id": "P", "amount": "100", "currency": "USD", "instrument": "loan", "status": "signed"},
+            {"id": "C", "amount": "40", "currency": "USD", "instrument": "loan", "status": "signed",
+             "part_of": "X", "drawn_from": "P"},
+        ]
+        r = sc.guarded_totals(items)
+        self.assertEqual(r["groups"][0]["total"], Decimal("100"))
+        self.assertEqual(r["excluded_overlaps"][0]["id"], "C")
+
+    def test_grandchild_excluded_when_intermediate_in_other_group(self):
+        items = [
+            {"id": "P", "amount": "100", "currency": "USD", "instrument": "loan", "status": "signed"},
+            {"id": "M", "amount": "60", "currency": "USD", "instrument": "loan", "status": "drawn",
+             "part_of": "P"},
+            {"id": "G", "amount": "20", "currency": "USD", "instrument": "loan", "status": "signed",
+             "part_of": "M"},
+        ]
+        r = sc.guarded_totals(items)
+        totals = {g["status"]: g["total"] for g in r["groups"]}
+        self.assertEqual(totals["signed"], Decimal("100"))
+        self.assertEqual([e["id"] for e in r["excluded_overlaps"]], ["G"])
+
+    def test_replaced_by_is_not_read(self):
+        # Documented limitation: the caller must give a replaced original its
+        # ended status or leave it out; the guard does not read replaced_by.
+        items = [
+            {"id": "O", "amount": "100", "currency": "USD", "instrument": "loan", "status": "signed",
+             "replaced_by": "N"},
+            {"id": "N", "amount": "100", "currency": "USD", "instrument": "loan", "status": "signed"},
+        ]
+        r = sc.guarded_totals(items)
+        self.assertEqual(r["groups"][0]["total"], Decimal("200"))
+
+    def test_link_cycle_terminates(self):
+        items = [
+            {"id": "A", "amount": "1", "currency": "USD", "instrument": "loan", "status": "signed",
+             "part_of": "B"},
+            {"id": "B", "amount": "2", "currency": "USD", "instrument": "loan", "status": "signed",
+             "part_of": "A"},
+        ]
+        r = sc.guarded_totals(items)
+        self.assertEqual(len(r["excluded_overlaps"]), 2)
+
     def test_unclassified_item_not_totalled(self):
         r = sc.guarded_totals([{"id": "x", "amount": "5", "currency": "USD", "instrument": "loan"}])
         self.assertEqual(r["groups"], [])

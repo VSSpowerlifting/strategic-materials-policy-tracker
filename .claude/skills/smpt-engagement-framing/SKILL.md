@@ -22,7 +22,7 @@ Do **not** use for tracker data work (records, candidates, classifications). Tha
 1. **Mandate (the six parts of §2).** Fill `references/mandate-template.md`: decision-maker (real, or an explicitly labelled hypothetical perspective), decision, horizon, alternatives, constraints, evidence cutoff, economic mechanism and the outcome measure. State that no organization commissioned or endorsed the work.
 2. **Decision test.** The question must be answerable "yes / no / which / when / how much", and the answer must change what someone does. Rewrite topic questions until it passes. Record rejected framings and why.
 3. **Cutoff and holds.** Freeze an as-of date. Check `PROJECT_STATE.md` and the product folder for an existing cutoff, publication hold or frozen model, and inherit it; never silently move a frozen cutoff.
-4. **Issue tree.** Decompose the decision into 3–5 branches that are mutually exclusive and collectively exhaustive *for this decision*. Prefer the four-layer chain (policy → capital → execution → commercial) as the first cut when the mechanism runs through government action; otherwise use the decision's own economics (value drivers, options, risks). Each leaf is a question with a named evidence type.
+4. **Issue tree.** Decompose the decision into 3–5 branches whose analytical questions are mutually exclusive and collectively exhaustive *for this decision*. MECE applies to the questions, not the evidence, so one source may inform several branches. Prefer the four-layer chain (policy → capital → execution → commercial) as the first cut when the mechanism runs through government action; otherwise use the decision's own economics (value drivers, options, risks). Each leaf is a question with a named evidence type.
 5. **Hypotheses.** For each branch write a hypothesis that could be wrong, the evidence that would refute it, and the competing explanation. A hypothesis is a test plan, not a conclusion; do not draft headlines from it.
 6. **Analysis plan and routing.** For each leaf assign one owning skill and its deliverable (table below). Mark leaves deliberately left out and why, so the gap shows later as a limitation rather than an omission.
 7. **Scale check.** Choose the lightest product that answers the decision (memo, short deck, deck + workbook). A workbook is justified only when the recommendation depends materially on quantitative economics (§2.4, §4).
@@ -50,7 +50,7 @@ Run `smpt-evidence-baseline` before any skill that calculates.
 ## Verification
 
 - Every leaf maps to the decision; no leaf only "provides context".
-- Branches do not overlap (the same evidence should not answer two branches) and their union answers the decision.
+- No analytical question sits in two branches, and the branches together cover the decision. One source may inform several branches.
 - Each hypothesis names the evidence that would refute it.
 - The cutoff, holds and frozen inputs found in the repo are stated, with file paths.
 
