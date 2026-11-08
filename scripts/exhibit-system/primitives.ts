@@ -105,10 +105,22 @@ export const SYNTHETIC_NOTICE = "Synthetic demonstration data — not an SMPT fi
 /** Research output is always draft; technical QC cannot authorize publication. */
 export const DRAFT_BADGE = "DRAFT · REVIEW GATES PENDING";
 
+/** A clickable source citation in a research slide's footer. */
+export interface SourceLink {
+  label: string;
+  url: string;
+}
+
 export interface FrameSpec {
   label: string;
   slideNumber: number;
   fixture: Fixture;
+  /**
+   * Research slides only. When present, the footer reads
+   * "Source: <linked labels>. <fixture.source>" with each label a hyperlink.
+   * Absent (every synthetic slide), the footer is the plain source string.
+   */
+  links?: SourceLink[];
 }
 
 /** Element-recording helper factory. Every object gets a role-prefixed `objectName`. */
@@ -212,9 +224,21 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
       x: LEFT, y, w: 12.05, h: 0.015, fill: { color: C.border }, line: { color: C.border, width: 0 },
     });
   }
-  h.text("source-footer", "frame", synthetic ? `Source: ${f.source} · ${SYNTHETIC_NOTICE}` : `Source: ${f.source}`, {
-    x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: TYPE.footnote, color: C.muted, valign: "top",
-  });
+  if (!synthetic && spec.links?.length) {
+    const runs: TextRun[] = [{ text: "Source: ", options: { color: C.muted } }];
+    spec.links.forEach((l, i) => {
+      if (i) runs.push({ text: "; ", options: { color: C.muted } });
+      runs.push({ text: l.label, options: { color: C.accent, underline: { style: "sng" }, hyperlink: { url: l.url, tooltip: l.label } } });
+    });
+    if (f.source) runs.push({ text: `. ${f.source}`, options: { color: C.muted } });
+    h.text("source-footer", "frame", runs, {
+      x: LEFT, y: 6.98, w: 12.05, h: 0.44, fontSize: TYPE.footnote, color: C.muted, valign: "top",
+    });
+  } else {
+    h.text("source-footer", "frame", synthetic ? `Source: ${f.source} · ${SYNTHETIC_NOTICE}` : `Source: ${f.source}`, {
+      x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: TYPE.footnote, color: C.muted, valign: "top",
+    });
+  }
 
   if (wide) {
     const y = WIDE_AREA.y + WIDE_AREA.h + 0.16;

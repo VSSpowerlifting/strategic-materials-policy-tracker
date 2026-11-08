@@ -36,7 +36,8 @@ export interface ResearchDeck {
   cover_lines: string[];
   qc_record?: string;
   slides: ResearchSlide[];
-  evidence: { id: string; url: string; title: string; locator: string }[];
+  /** `label` (optional) is the short citation linked in the slide footer. */
+  evidence: { id: string; url: string; title: string; locator: string; label?: string }[];
 }
 
 function inside(dir: string, file: string): boolean {
@@ -73,7 +74,8 @@ export function parseResearchDeck(raw: unknown, file: string, baseDir = REPO): R
       const parsed = new URL(url);
       if (!["https:", "http:"].includes(parsed.protocol) || !parsed.hostname) throw new Error();
     } catch { throw new ContractError(`${ep}.url: expected an http(s) source URL`); }
-    return { id, url, title: str(e.title, `${ep}.title`), locator: str(e.locator, `${ep}.locator`) };
+    const label = optStr(e.label, `${ep}.label`);
+    return { id, url, title: str(e.title, `${ep}.title`), locator: str(e.locator, `${ep}.locator`), ...(label !== undefined ? { label } : {}) };
   });
   if (new Set(evidence.map((e) => e.id)).size !== evidence.length) throw new ContractError(`${file}: duplicate evidence id`);
   const slides = arr(o.slides, `${file}.slides`).map((s, i): ResearchSlide => {
