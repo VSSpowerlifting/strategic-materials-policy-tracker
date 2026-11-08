@@ -174,6 +174,15 @@ export function suppressHelperLabels(chartXml: string): string {
 }
 
 /**
+ * pptxgenjs hard-codes Arial in pie/doughnut series data-label text properties
+ * (no option reaches it). Point every chart typeface at the deck font so the
+ * chart XML matches the rest of the deck. A no-op for charts already in FONT.
+ */
+export function unifyChartTypeface(chartXml: string): string {
+  return chartXml.replace(/(<a:(?:latin|ea|cs) typeface=")Arial(")/g, `$1${FONT}$2`);
+}
+
+/**
  * Re-zips an OOXML package with fixed entry dates and fixed core.xml dates.
  * Native charts embed their data as nested .xlsx packages, which carry their
  * own timestamps, so those are normalised recursively.
@@ -196,7 +205,7 @@ async function normalise(buf: Buffer): Promise<Buffer> {
         .replace(/(<dcterms:modified[^>]*>)[^<]*(<\/dcterms:modified>)/, `$1${FIXED_ISO}$2`);
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else if (/^ppt\/charts\/chart\d+\.xml$/.test(name)) {
-      const xml = suppressHelperLabels((await entry.async("string")) as string);
+      const xml = unifyChartTypeface(suppressHelperLabels((await entry.async("string")) as string));
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else {
       out.file(name, (await entry.async("nodebuffer")) as Buffer, { date: FIXED_DATE, createFolders: false });
