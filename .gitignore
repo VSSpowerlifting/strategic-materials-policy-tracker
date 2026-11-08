@@ -42,7 +42,9 @@ next-env.d.ts
 
 # Local Claude / AI tooling
 .agents/
-.claude/skills/
+# Personal and plugin skills stay untracked; SMPT project skills (smpt-*) are versioned.
+.claude/skills/*
+!.claude/skills/smpt-*/
 skills-lock.json
 
 # Graphify output — regenerable from source via `graphify update .`.

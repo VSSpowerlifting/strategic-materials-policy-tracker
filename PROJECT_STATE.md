@@ -1,3 +1,12 @@
+## 2026-11-08: Strategy consulting skills system (draft PR)
+
+- Branch `claude/smpt-consulting-skills-c70ab2` from `d5b59bb`. Adds eight project skills in `.claude/skills/smpt-*/`: engagement-framing (the router), evidence-baseline, market-competitive, financing-structure, investment-appraisal, options-decision, executive-narrative and review-gate. They serve Applied Strategy and Financial Intelligence products only, not tracker data.
+- `.gitignore` now tracks only `.claude/skills/smpt-*/`. Personal and plugin skills stay ignored. The skills exception is recorded in `docs/operating-playbook.md`.
+- `strategy_calc.py` (npv, annuity, threshold, irr, bridge, totals) uses Decimal arithmetic and the standard library only, and refuses floats. Its 21 tests pass.
+- Docs: `docs/research/strategy-skills/README.md` covers routing, the capability map and how to extend the system. `EVALUATION.md` covers the read-only FI003 evaluation, the FI002 contrast case, the recomputation table and findings F1–F5. F1, F2 and F4 are fixed, F3 is documented, and F5 is a confirmation.
+- Invocation was simulated by following each skill by hand. Claude Code runtime discovery has not been verified. FI003/FI002 outputs, frozen models, seed data and the site are unchanged.
+- Gates: validate, lint, typecheck, test (1143/1143) and build all pass. They needed `npm ci` in the worktree first, because the worktree was resolving modules from the parent checkout.
+
 ## 2026-11-08: Phase III release (PR #227)
 
 - Branch `claude/smpt-phase-iii-adjudication`. Docs PR #226 merged first. Benjamin Yang approved P3-01 to P3-06, gave the per-check confirmations for those records, and authorized `site.lastUpdated` 2026-11-08 as a curated revision of the new evidence, not a reverification of the whole corpus.
