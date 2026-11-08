@@ -1,0 +1,804 @@
+{
+  "classification": "research",
+  "title": "FI003 JPMorgan and MP Materials, draft 0.6",
+  "cover_lines": [
+    "JPMorgan and MP Materials",
+    "Financing through 10X construction",
+    "Benjamin Yang · Research draft 0.6 · 8 November 2026",
+    "Draft for review. Publication hold remains in place."
+  ],
+  "evidence": [
+    {
+      "id": "S01",
+      "label": "S01",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796d8k.htm",
+      "title": "July 2025 transaction 8-K",
+      "locator": "July 2025 transaction 8-K"
+    },
+    {
+      "id": "S02",
+      "label": "S02",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm",
+      "title": "Transaction agreement, effective July 9, 2025",
+      "locator": "Transaction agreement §§2.05–2.07, 6.04, 7.01"
+    },
+    {
+      "id": "S03",
+      "label": "S03",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex105.htm",
+      "title": "10X magnet offtake agreement",
+      "locator": "Offtake agreement §§1.2, 6.2"
+    },
+    {
+      "id": "S04",
+      "label": "S04",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex106.htm",
+      "title": "NdPr price protection agreement",
+      "locator": "Price protection agreement"
+    },
+    {
+      "id": "S05",
+      "label": "S05",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex31.htm",
+      "title": "Form of Series A certificate of designations",
+      "locator": "Series A certificate of designations"
+    },
+    {
+      "id": "S06",
+      "label": "S06",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525160635/d923027d424b5.htm",
+      "title": "Equity prospectus supplement dated July 16, 2025",
+      "locator": "Prospectus supplement, offering and capitalization"
+    },
+    {
+      "id": "S07",
+      "label": "S07",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525161255/d923222dex11.htm",
+      "title": "July 16 underwriting agreement",
+      "locator": "Underwriting agreement, Schedule A"
+    },
+    {
+      "id": "S08",
+      "label": "S08",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553d8k.htm",
+      "title": "August 25 revolving credit 8-K",
+      "locator": "Revolving credit 8-K"
+    },
+    {
+      "id": "S09",
+      "label": "S09",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm",
+      "title": "August 25 credit agreement",
+      "locator": "Credit agreement §1.01 Consolidated EBITDA"
+    },
+    {
+      "id": "S11",
+      "label": "S11",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm",
+      "title": "2025 Form 10-K",
+      "locator": "2025 10-K, Note 10"
+    },
+    {
+      "id": "S13",
+      "label": "S13",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000048/mp-20260630.htm",
+      "title": "Q2 2026 Form 10-Q",
+      "locator": "Q2 2026 10-Q, Note 8"
+    },
+    {
+      "id": "S15",
+      "label": "S15",
+      "url": "https://www.jpmorgan.com/insights/banking/investment-banking/mp-materials",
+      "title": "J.P. Morgan transaction article and embedded podcast transcript",
+      "locator": "J.P. Morgan transaction article (own account)"
+    },
+    {
+      "id": "S17",
+      "label": "S17",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525159093/d904727d8k.htm",
+      "title": "July 15 Apple agreement 8-K",
+      "locator": "July 15 Apple agreement 8-K"
+    },
+    {
+      "id": "S19",
+      "label": "S19",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+      "title": "Q3 2026 Form 10-Q",
+      "locator": "Q3 2026 10-Q, cash flows and Note 8"
+    }
+  ],
+  "slides": [
+    {
+      "pattern": "role-matrix",
+      "label": "JPMorgan roles",
+      "exhibit": {
+        "title": "JPMorgan held different roles in each financing instrument",
+        "subtitle": "Roles named in the reviewed filings and in J.P. Morgan's own account; blank means not named in those sources",
+        "annotation": "The adviser role rests on J.P. Morgan's own account. Underwriting shares are initial obligations only: no fee or retention inference.",
+        "source": "Company filings; J.P. Morgan's own account for the adviser role",
+        "evidence_refs": [
+          "S01",
+          "S07",
+          "S08",
+          "S15"
+        ],
+        "data": {
+          "roles": [
+            "Adviser",
+            "Joint commitment",
+            "Underwriting",
+            "Revolver agent"
+          ],
+          "orgs": [
+            {
+              "label": "JPMorgan",
+              "cells": [
+                {
+                  "qualifier": "Own account"
+                },
+                {
+                  "qualifier": "Joint"
+                },
+                {
+                  "qualifier": "Joint largest"
+                },
+                {
+                  "qualifier": "Agent, lender"
+                }
+              ]
+            },
+            {
+              "label": "Goldman Sachs",
+              "cells": [
+                null,
+                {
+                  "qualifier": "Joint"
+                },
+                {
+                  "qualifier": "Joint largest"
+                },
+                null
+              ]
+            },
+            {
+              "label": "Morgan Stanley",
+              "cells": [
+                null,
+                null,
+                {
+                  "qualifier": "Smaller share"
+                },
+                null
+              ]
+            }
+          ]
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "two-lane-timeline",
+      "label": "Sequence",
+      "exhibit": {
+        "title": "A replaceable commitment was followed within seven weeks by equity and a revolver",
+        "subtitle": "Financing events and the government context around them, July to August 2025",
+        "annotation": "Government agreements (9 July) and Apple's 15 July agreement preceded the 16 July pricing; their isolated effect on equity demand is not established.",
+        "source": "SEC filings, July to August 2025",
+        "evidence_refs": [
+          "S01",
+          "S06",
+          "S08",
+          "S17"
+        ],
+        "data": {
+          "lanes": [
+            {
+              "name": "Financing",
+              "events": [
+                {
+                  "label": "Joint commitment",
+                  "date": "2025-07-09",
+                  "kind": "effective"
+                },
+                {
+                  "label": "Equity priced",
+                  "date": "2025-07-16",
+                  "kind": "implementation"
+                },
+                {
+                  "label": "Revolver signed",
+                  "date": "2025-08-25",
+                  "kind": "effective"
+                }
+              ]
+            },
+            {
+              "name": "Commitment and context",
+              "events": [
+                {
+                  "label": "Apple agreement",
+                  "date": "2025-07-15",
+                  "kind": "announcement"
+                },
+                {
+                  "label": "Commitment expired",
+                  "date": "2025-08-26",
+                  "kind": "implementation"
+                }
+              ]
+            }
+          ]
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "waterfall",
+      "label": "Dilution",
+      "exhibit": {
+        "title": "New shares raised the basic count 8.31%, a 7.68% isolated stake",
+        "subtitle": "Basic shares before the July 2025 offering and the isolated pro forma after it, millions of shares",
+        "annotation": "New shares are 7.68% of the isolated post-offering base; existing holders keep 92.32%. Later issuance and potential shares are excluded.",
+        "source": "Prospectus supplement; 2025 10-K",
+        "evidence_refs": [
+          "S06",
+          "S11"
+        ],
+        "data": {
+          "unit": "Million shares",
+          "dp": 3,
+          "start": {
+            "label": "Before offering",
+            "value": 163.478
+          },
+          "steps": [
+            {
+              "label": "New shares",
+              "delta": 13.591
+            }
+          ],
+          "end": {
+            "label": "Isolated pro forma",
+            "value": 177.069
+          }
+        }
+      }
+    },
+    {
+      "pattern": "exhibit-with-interpretation",
+      "label": "Replacement",
+      "exhibit": {
+        "title": "Net equity of $724.2m replaced a $1bn reference without becoming a like-for-like swap",
+        "subtitle": "USD million; cash proceeds and committed capacity shown together, not summed",
+        "annotation": "The comparison mixes cash and capacity; it is arithmetic only.",
+        "source": "Underwriting agreement; 2025 10-K",
+        "evidence_refs": [
+          "S01",
+          "S07",
+          "S08",
+          "S11"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 1,
+          "columns": [
+            "USD million"
+          ],
+          "rows": [
+            {
+              "label": "Gross equity (calculated)",
+              "values": [
+                747.49994
+              ]
+            },
+            {
+              "label": "Underwriting discount",
+              "values": [
+                22.4249982
+              ]
+            },
+            {
+              "label": "Net equity (reported)",
+              "values": [
+                724.2
+              ]
+            },
+            {
+              "label": "Revolver capacity",
+              "values": [
+                275.0
+              ]
+            },
+            {
+              "label": "Original commitment min.",
+              "values": [
+                1000.0
+              ]
+            }
+          ],
+          "notes": [
+            {
+              "ref": 3,
+              "text": "Reported equity issuance net of costs; no scheduled principal repayment."
+            },
+            {
+              "ref": 4,
+              "text": "Committed capacity, not proceeds; drawn loans are zero in every reported snapshot."
+            },
+            {
+              "ref": 5,
+              "text": "Reference minimum for a commitment that expired undrawn; it was never funded."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pattern": "stacked-bar",
+      "label": "Revolver",
+      "exhibit": {
+        "title": "Letters of credit leave $203m of the $275m revolver available",
+        "subtitle": "USD million at three reported dates; no loan draws in any snapshot",
+        "annotation": "The letter-of-credit sublimit is not additive to loans, and no future availability is assumed.",
+        "source": "2025 10-K; Q2 and Q3 2026 10-Qs",
+        "evidence_refs": [
+          "S11",
+          "S13",
+          "S19"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 0,
+          "components": [
+            "Letters of credit",
+            "Remaining capacity"
+          ],
+          "accent": "Remaining capacity",
+          "rows": [
+            {
+              "label": "31 Dec 2025",
+              "values": [
+                40.0,
+                235.0
+              ]
+            },
+            {
+              "label": "30 Jun 2026",
+              "values": [
+                72.0,
+                203.0
+              ]
+            },
+            {
+              "label": "30 Sep 2026",
+              "values": [
+                72.0,
+                203.0
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pattern": "condition-tree",
+      "label": "Covenant addback",
+      "exhibit": {
+        "title": "A minimum-payment addback in covenant earnings can reverse when cash arrives",
+        "subtitle": "Illustrative clause arithmetic with hypothetical inputs, not reported MP results",
+        "annotation": "Hypothetical figures of 40 and 20 show the direction only. Covenant EBITDA is a different measure from Adjusted EBITDA.",
+        "source": "Credit agreement, definition of Consolidated EBITDA",
+        "evidence_refs": [
+          "S09"
+        ],
+        "data": {
+          "nodes": [
+            {
+              "id": "n1",
+              "label": "Is a minimum payment applicable?",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "No",
+                  "to": "o1"
+                },
+                {
+                  "label": "Yes",
+                  "to": "n2"
+                }
+              ]
+            },
+            {
+              "id": "n2",
+              "label": "Minimum versus attributable income",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "Min. higher",
+                  "to": "n3"
+                },
+                {
+                  "label": "Income higher",
+                  "to": "o2"
+                }
+              ]
+            },
+            {
+              "id": "n3",
+              "label": "Does later cash repeat the addback?",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "No",
+                  "to": "o3"
+                },
+                {
+                  "label": "Yes",
+                  "to": "o4"
+                }
+              ]
+            },
+            {
+              "id": "o1",
+              "label": "No adjustment",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o2",
+              "label": "No addback",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o3",
+              "label": "Addback of 20",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o4",
+              "label": "Net reduction of 20",
+              "kind": "outcome",
+              "branches": []
+            }
+          ]
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "evidence-milestone-strip",
+      "label": "Timing",
+      "exhibit": {
+        "title": "Covenant tests could begin before 10X commissioning is expected in 2028",
+        "subtitle": "Reported events and illustrative test dates; dates marked targeted are model assumptions",
+        "annotation": "Management expects commissioning to begin in 2028 without a stated date, so no marker is drawn.",
+        "source": "Company filings; credit agreement; model timing",
+        "evidence_refs": [
+          "S01",
+          "S06",
+          "S08",
+          "S19",
+          "S09"
+        ],
+        "data": {
+          "milestones": [
+            {
+              "label": "Equity priced",
+              "date": "2025-07-16",
+              "state": "reported"
+            },
+            {
+              "label": "Revolver signed",
+              "date": "2025-08-25",
+              "state": "reported"
+            },
+            {
+              "label": "Letters of credit $72m",
+              "date": "2026-09-30",
+              "state": "reported"
+            },
+            {
+              "label": "Illustrative delivery",
+              "date": "2027-08-15",
+              "state": "targeted"
+            },
+            {
+              "label": "Illustrative first test",
+              "date": "2027-09-30",
+              "state": "targeted"
+            }
+          ]
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "counterparty-map",
+      "label": "Government support",
+      "exhibit": {
+        "title": "Government support covers specified exposures while MP keeps its funding duties",
+        "subtitle": "Government instruments linked to MP Materials; equal spokes carry no magnitude",
+        "annotation": "The fallback preferred applies only if net financing falls short of $350m; the July equity exceeded that threshold.",
+        "source": "Transaction agreement; offtake and price protection agreements",
+        "evidence_refs": [
+          "S02",
+          "S03",
+          "S04",
+          "S05"
+        ],
+        "data": {
+          "hub": "MP Materials",
+          "relationship": "Each spoke is a declared government link to MP; line length and position carry no value.",
+          "parties": [
+            {
+              "label": "NdPr price protection",
+              "role": "Floor-price payments (PPA income)"
+            },
+            {
+              "label": "10X offtake",
+              "role": "Purchase commitment; threshold varies"
+            },
+            {
+              "label": "Initial preferred",
+              "role": "Government cash consideration, $400m"
+            },
+            {
+              "label": "Additional preferred",
+              "role": "Fallback if net financing under $350m"
+            }
+          ]
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "exhibit-with-interpretation",
+      "label": "10X threshold",
+      "exhibit": {
+        "title": "The 10X threshold falls with capacity only until the production milestone",
+        "subtitle": "Hypothetical 2029 full-year threshold, USD million, by assumed capacity fraction",
+        "annotation": "Capacity fractions are analyst assumptions. The threshold is not cash flow available for debt service.",
+        "source": "Offtake agreement; model assumptions",
+        "evidence_refs": [
+          "S03"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 1,
+          "columns": [
+            "Before milestone",
+            "From milestone"
+          ],
+          "rows": [
+            {
+              "label": "25% of capacity",
+              "values": [
+                37.8851256,
+                151.5405024
+              ]
+            },
+            {
+              "label": "50% of capacity",
+              "values": [
+                75.7702512,
+                151.5405024
+              ]
+            },
+            {
+              "label": "100% of capacity",
+              "values": [
+                151.5405024,
+                151.5405024
+              ]
+            }
+          ],
+          "notes": [
+            {
+              "ref": 1,
+              "text": "Before the milestone the threshold scales with assumed capacity."
+            },
+            {
+              "ref": 3,
+              "text": "At full capacity the two states give the same threshold."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pattern": "exhibit-with-interpretation",
+      "label": "Price protection",
+      "exhibit": {
+        "title": "Price protection income and cash received are different measures",
+        "subtitle": "USD million; income recognized and cash received are separate accounting facts",
+        "annotation": "The $110.9m of cash is already inside reported operating cash flow and is not additional liquidity.",
+        "source": "2025 10-K; Q3 2026 10-Q",
+        "evidence_refs": [
+          "S11",
+          "S19"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 1,
+          "columns": [
+            "USD million"
+          ],
+          "rows": [
+            {
+              "label": "2025 income",
+              "values": [
+                51.016
+              ]
+            },
+            {
+              "label": "9m 2026 income",
+              "values": [
+                67.962
+              ]
+            },
+            {
+              "label": "Cumulative income",
+              "values": [
+                118.978
+              ]
+            },
+            {
+              "label": "9m 2026 cash received",
+              "values": [
+                110.9
+              ]
+            },
+            {
+              "label": "Closing receivable",
+              "values": [
+                8.109
+              ]
+            }
+          ],
+          "notes": [
+            {
+              "ref": 3,
+              "text": "Income is recognized when earned, not when paid."
+            },
+            {
+              "ref": 4,
+              "text": "Cash received in nine months can include income earned earlier."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pattern": "waterfall",
+      "label": "Liquidity",
+      "exhibit": {
+        "title": "Company liquid assets fell $492.4m as expansion continued",
+        "subtitle": "USD million, 31 December 2025 to 30 September 2026",
+        "annotation": "Capital spending covers all company projects, not 10X alone. The bridge is reported, not forecast.",
+        "source": "Q3 2026 10-Q",
+        "evidence_refs": [
+          "S19"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 1,
+          "start": {
+            "label": "31 Dec 2025",
+            "value": 1830.286
+          },
+          "steps": [
+            {
+              "label": "Operating cash flow",
+              "delta": -7.757
+            },
+            {
+              "label": "Cash capital spending",
+              "delta": -420.25
+            },
+            {
+              "label": "Government award proceeds",
+              "delta": 6.5
+            },
+            {
+              "label": "Financing cash flows",
+              "delta": -91.145
+            },
+            {
+              "label": "Accretion",
+              "delta": 20.876
+            },
+            {
+              "label": "Restricted-cash release",
+              "delta": 0.821
+            },
+            {
+              "label": "Valuation change",
+              "delta": -1.42
+            }
+          ],
+          "end": {
+            "label": "30 Sep 2026",
+            "value": 1337.911
+          }
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "role-matrix",
+      "label": "Decisions",
+      "exhibit": {
+        "title": "Four funding decisions each have a named owner",
+        "subtitle": "Decisions that follow from the financing record and who is positioned to take them",
+        "annotation": "The next decision input is a dated funding and covenant schedule, which the public record does not supply.",
+        "source": "Model analysis of the reviewed record",
+        "evidence_refs": [
+          "S02",
+          "S09",
+          "S19"
+        ],
+        "data": {
+          "roles": [
+            "Treasury",
+            "CFO and board",
+            "Lenders",
+            "Credit teams"
+          ],
+          "orgs": [
+            {
+              "label": "Replace a committed route",
+              "cells": [
+                {
+                  "qualifier": "Owner"
+                },
+                null,
+                null,
+                null
+              ]
+            },
+            {
+              "label": "Equity or a loan",
+              "cells": [
+                null,
+                {
+                  "qualifier": "Owner"
+                },
+                {
+                  "qualifier": "Input"
+                },
+                null
+              ]
+            },
+            {
+              "label": "Funding to commissioning",
+              "cells": [
+                {
+                  "qualifier": "Owner"
+                },
+                null,
+                {
+                  "qualifier": "Input"
+                },
+                null
+              ]
+            },
+            {
+              "label": "Evaluate public support",
+              "cells": [
+                null,
+                null,
+                null,
+                {
+                  "qualifier": "Owner"
+                }
+              ]
+            }
+          ]
+        },
+        "layout": "wide"
+      }
+    }
+  ]
+}
