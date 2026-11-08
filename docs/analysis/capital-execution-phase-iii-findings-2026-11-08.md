@@ -13,8 +13,9 @@ date: 2026-11-08. Counts are those pinned in `tests/capital-execution.test.ts`.
 ## Decision record (2026-11-08)
 
 Benjamin Yang approved all six rulings on 2026-11-08 as substantive editorial
-decisions, after reading the original sources. An independent cross-check had
-confirmed that the cited passages support each proposal. What was done with that
+decisions, after reading the original sources. Before that, an AI-assisted
+cross-check (Claude, not a human reviewer) had found that the cited passages
+support each proposal. What was done with that
 approval:
 
 - **P3-02, implemented in seed.** `fin-us-dow-usac-antimony-2026-thompson-falls`
@@ -28,11 +29,27 @@ approval:
   that finance row (`relatedFinanceIds`) and says the status rests on the
   same 10-Q. As a result, its worksheet fingerprint changed to
   `2c911929…7998`. The other six M3.2 fingerprints are unchanged and pinned.
+  This change is forced, not incidental. With the P3-02 seed status in place
+  and the Thompson row restored exactly as at `ec3bfde`, the M3.2 audit fails
+  with "project-native review cannot omit existing matching finance/source
+  observations". Keeping the old fingerprint would therefore mean dropping
+  P3-02. The 2026-11-08 approval of P3-01 predates this worksheet change, so
+  Benjamin Yang still needs to confirm the new Thompson worksheet.
 - **P3-01 and P3-03 to P3-06, recorded as local decisions.** The gitignored
   files `.project-execution-review/adjudications.json` (P3-01) and
   `m3-3-adjudications.json` (P3-03 to P3-06) record verdict `approved`,
   `reviewedBy` "Benjamin Yang", `reviewedAt` 2026-11-08, a rationale and the
-  current fingerprint. The audit reports no structural errors.
+  current fingerprint. With the checks left `false`, the adjudicator stops at
+  the checklist gate. Its later checks therefore did not run on the real files.
+  Those checks are the `mil-` ID format, duplicate and live-ID clashes, the
+  cutoff, single-row validation and combined validation. A scratch simulation
+  ran them on 2026-11-08 without writing back to any file. It used in-memory
+  copies with every check set to `true`, a hypothetical 2026-11-08 cutoff and
+  the digests recomputed at that cutoff, because the cutoff is part of the
+  fingerprint. All six proposals passed. A combined
+  `validateProjectMilestones` pass over the two seeded milestones and the six
+  proposals also returned no issues. This is a structural result only. It is
+  not an attestation.
 - **Still blocked from seed.** The five per-check attestations (`fullSourceRead`,
   `quotedPassageMatches`, `scopeIsExplicit`, `eventAndEvidenceDatesSeparated`,
   `noFinancingOrOperationsInference`) were not individually supplied, so they
