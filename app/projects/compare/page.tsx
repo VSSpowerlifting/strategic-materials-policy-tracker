@@ -35,7 +35,7 @@ export default function ProjectComparisonPage() {
       <ProjectComparison rows={rows} materialNames={materialNames} revision={site.lastUpdated} />
     </div>
     <p className="mt-8 max-w-prose text-sm leading-7 text-muted">
-      This comparison draws on the published SMPT project register,
+      This comparison draws on the published SMPT project register. It is not
       a causal policy evaluation or a dollar ranking. Open the linked project, financial and
       source records to check what each original publisher establishes.{" "}
       <Link href="/methodology" className="text-accent hover:underline">Read the methodology.</Link>

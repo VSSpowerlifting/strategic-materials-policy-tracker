@@ -11,7 +11,7 @@ import { getSourceById } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 import type { ProjectMilestone } from "@/lib/types";
 
-const KIND_LABELS: Record<ProjectMilestone["kind"], string> = {
+export const KIND_LABELS: Record<ProjectMilestone["kind"], string> = {
   feasibility_completed: "Feasibility completed (reported)",
   groundbreaking_reported: "Groundbreaking (reported)",
   construction_started: "Construction start (reported)",

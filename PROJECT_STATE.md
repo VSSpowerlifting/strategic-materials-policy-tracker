@@ -1,3 +1,16 @@
+## 2026-11-07: Capital-to-execution comparison, Phase II
+
+- Branch `claude/smpt-phase-ii-expansion-75868a`, from main `ea02a30`. Phase I (PR #208) is live at `ea02a30`, with parity IN_SYNC.
+- New `lib/capital-execution.ts` builds on `buildIndustrialResponse` and sums no money. It does four things:
+  - deduplicates physical observations;
+  - assigns each project an evidence tier: reviewed milestone, financing-row status, or none;
+  - lists non-binding government commitments by recorded financial status, with their package links;
+  - lists execution gaps, and projects that reached construction before binding public finance.
+- `/response` gains sections 04–06; the interpretation section moves to 07. Tests pin the live counts: reviewed 2, gaps 14, funded gaps 4, ahead of binding 2, conditional 35 rows across 27 projects.
+- No seed, schema or taxonomy changes. Findings are in `docs/analysis/capital-execution-phase-ii-findings-2026-11-07.md`.
+- Pending human decision: the USAC Thompson Falls milestone, in `docs/analysis/capital-execution-milestone-adjudication-2026-11-07.md`. The 10-Q Note 9 sentence was checked against the filing on 2026-11-07; the note also records that the issuer applied the $12.8M DPA Title III milestone proceeds against the expansion PP&E. It needs a named reviewer. Nothing has been recorded.
+- FI003 (#215), the presentation work (#222/#224) and the 10 November China legal-status review are untouched.
+
 ## 2026-11-07: presentation gallery recovery and final engineering pass (PR #224, draft)
 
 - Worktree: `.claude/worktrees/smpt-presentation-gallery-9f36b1`; branch `claude/smpt-presentation-gallery-9f36b1`. Recovered intact local commits `946c6a4`, `3b7d8f2`, `4df38d4`, directly descended from remote `59272fb`. The worktree was clean. A recovery ref and Git bundle preserve the original chain.
