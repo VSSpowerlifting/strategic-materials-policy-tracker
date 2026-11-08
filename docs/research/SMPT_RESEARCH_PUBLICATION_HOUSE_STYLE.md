@@ -1,6 +1,6 @@
-# SMPT research publication house style — v2.1
+# SMPT research publication house style — v2.2
 
-**Adopted on 4 November 2026; typography updated on 6 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized.
+**Adopted on 4 November 2026; typography updated on 6 November 2026; sentence-cadence preference clarified on 8 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized.
 
 ## Publication identity
 
@@ -15,6 +15,7 @@
 
 - Write descriptive headings that identify the company, jurisdiction, instrument, financing status, industrial project, or documented activity.
 - Avoid two-sentence punchlines, rhetorical negations, repeated disclaimers, AI-style framing, and standalone asides explaining what the research is supposedly not.
+- **Owner-preferred analytical prose:** Favor occasional **fronted adverbial clauses** that establish time, conditions, or commercial context before the main assertion. For example: “When construction is still underway and shipments may be years away, a long-term purchasing commitment can help financiers assess prospective revenue.” Mix these context-first openings with ordinary subject-first sentences, and let longer compound or complex sentences develop connected economic reasoning when that improves clarity. This is a preferred technique, never a compulsory pattern; retain named actors, precise units, evidenced status distinctions, and necessary qualifications. Prefer affirmative explanation to manufactured rhetorical contrast.
 - Explain substantive uncertainty within the analytical paragraph where it changes interpretation. Keep approved facts and financial/status distinctions: legal action, designation, approval, obligation, drawdown, disbursement, construction, commissioning, achieved output, and shipments are different observations.
 - Preserve units, original amounts, dates, source identifiers, and frozen research cutoff. Editorial and presentation work must never silently become a source/data release or factual revision.
 
