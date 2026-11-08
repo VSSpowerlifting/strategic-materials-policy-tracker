@@ -1,27 +1,39 @@
 /**
  * Print a deterministic review-queue audit; never writes to public seed.
  * npm run audit:project-execution-pilot
+ * npm run audit:project-execution-pilot -- --cohort m3-3 [--json]
  */
-import queueJson from "../research/project-execution/m3-2-source-review-queue.json";
 import { site } from "../lib/site";
 import {
-  getAllFinancialCommitments, getAllProjects, getAllSources,
+  getAllFinancialCommitments, getAllProjects,
   getAllProjectMilestones,
 } from "../lib/data";
+import { isReviewCohort, loadCohortInputs } from "./project-execution-cohort-inputs";
 import {
-  auditProjectExecutionPilot, formatPilotAudit,
+  auditProjectExecutionPilot, formatPilotAudit, type ProjectExecutionReviewCohort,
 } from "./review-project-execution-pilot";
 
 const args = process.argv.slice(2);
-if (args.length > 0 && !(args.length === 1 && args[0] === "--json")) {
-  console.error("Usage: npm run audit:project-execution-pilot [-- --json]");
+let cohort: ProjectExecutionReviewCohort | null = null;
+let bad = false;
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === "--json") continue; // accepted for compatibility; output is the text audit
+  if (args[i] === "--cohort" && cohort === null && args[i + 1] && isReviewCohort(args[i + 1])) {
+    cohort = args[++i] as ProjectExecutionReviewCohort; continue;
+  }
+  bad = true;
+}
+if (bad) {
+  console.error("Usage: npm run audit:project-execution-pilot [-- --cohort m3-2|m3-3] [--json]");
   process.exitCode = 2;
 } else {
-  const r = auditProjectExecutionPilot(queueJson, {
+  const inputs = loadCohortInputs(cohort ?? "m3-2");
+  const r = auditProjectExecutionPilot(inputs.queue, {
     projects: getAllProjects(),
-    sources: getAllSources(),
+    sources: inputs.sources,
     commitments: getAllFinancialCommitments(),
     corpusCutoff: site.lastUpdated,
+    cohort: inputs.cohort,
   });
   // Fail closed: review queue cannot replace or populate the public milestone seed.
   const live=getAllProjectMilestones();

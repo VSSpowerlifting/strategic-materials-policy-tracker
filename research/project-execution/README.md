@@ -48,3 +48,19 @@ The four-source review queue now has a strictly isolated, **human-only decision 
 7. Even a clean preview is **not permission to publish**. An editor separately reviews and approves the final factual milestone and authorizes a distinct publication PR that adds `mil-...` seed records, updates the real corpus date, reruns validation, and checks site and financial-response invariants. Do not copy any local adjudication file into GitHub.
 
 **Editorial outcomes as of October 8:** Alcoa Wagerup and Cyclic Extended Operations are proposals eligible for independent human review; INL prototype demonstration and Stibnite's Burntlog access-road construction remain taxonomy blocked. This is **not** a claim that any human has yet approved the candidates.
+
+## M3.3 review cohort (Phase III proposed rulings, non-publishing)
+
+M3.3 is a **separate cohort** for the five Phase III proposed rulings (P3-03 to P3-06): Marathon early works, Nolans construction, the Stillwater Phase 1a commissioning, and the Stibnite early-works and Burntlog access-road workstreams as `bounded_project_workstream` milestones. It does not edit the M3.2 queue, so every M3.2 worksheet fingerprint a reviewer may already have copied stays valid (`tests/project-execution-m3-3-cohort.test.ts` pins them). The M3.2 Burntlog row remains taxonomy blocked; its M3.3 counterpart is a new row with its own ID and fingerprint.
+
+- Queue: `m3-3-source-review-queue.json` (IDs `review-m3-3-*`; mixing namespaces across cohorts fails the audit).
+- `m3-3-proposed-sources.json` holds the one source not yet in `data/seed/sources.json` (the Stillwater commissioning release). It is merged **only** into review inputs, never into public output, and cannot shadow a seeded ID. Seeding it is part of the later, separately approved publication step.
+- Decisions: copy `m3-3-adjudications.example.json` to `.project-execution-review/m3-3-adjudications.json` (gitignored) and follow steps 1, 3, 5, 6 and 7 above.
+
+```bash
+npm run review:m3-packets -- --cohort m3-3
+npm run audit:project-execution-pilot -- --cohort m3-3
+npm run audit:project-execution-adjudications -- --cohort m3-3
+```
+
+The Thompson Falls ruling (P3-01) stays in the M3.2 cohort (`review-m3-2-thompson-falls-q2-expansion`). P3-02, an issuer-attributed implementation status on `fin-us-dow-usac-antimony-2026-thompson-falls`, is a financing-row change outside this milestone gate and needs separate maintainer approval. Every row here is a **proposed ruling pending named human source review**; nothing in the cohort records or implies approval.

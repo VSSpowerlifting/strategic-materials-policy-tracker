@@ -13,6 +13,20 @@ import { isMilestoneIsoDate, milestoneEvidenceBoundary } from "../lib/project-mi
 
 export const M3_2_REVIEW_GATES = ["human_source_review", "taxonomy_blocked"] as const;
 
+/**
+ * Review cohorts. Each cohort is a separate, append-never queue file with its
+ * own id namespace, so a later cohort can neither rewrite nor re-fingerprint an
+ * earlier one. M3.2 is the default and keeps its original messages.
+ */
+export const PROJECT_EXECUTION_REVIEW_COHORTS = {
+  "m3-2": "review-m3-2-",
+  "m3-3": "review-m3-3-",
+} as const;
+export type ProjectExecutionReviewCohort = keyof typeof PROJECT_EXECUTION_REVIEW_COHORTS;
+export function reviewIdPattern(cohort: ProjectExecutionReviewCohort = "m3-2"): RegExp {
+  return new RegExp("^" + PROJECT_EXECUTION_REVIEW_COHORTS[cohort] + "[a-z0-9]+(?:-[a-z0-9]+)*$");
+}
+
 type PilotRow = {
   id: string; projectId: string; sourceId: string; kindProposal: string;
   scopeProposal: string; scopeAsStated: string | null;
@@ -58,8 +72,10 @@ export function auditProjectExecutionPilot(
     sources: readonly ReferenceSource[];
     commitments: readonly ReferenceCommitment[];
     corpusCutoff: string;
+    cohort?: ProjectExecutionReviewCohort;
   },
 ): PilotAuditResult {
+  const cohort = refs.cohort ?? "m3-2";
   const errors: string[] = [];
   const output: PilotAuditResult = {
     status: "non_publication_editorial_queue",
@@ -73,7 +89,8 @@ export function auditProjectExecutionPilot(
     return output;
   }
   if (!Array.isArray(raw)) {
-    errors.push("M3.2 editorial queue must be a JSON array");
+    errors.push((cohort === "m3-2" ? "M3.2" : cohort.toUpperCase().replace("-", ".")) +
+      " editorial queue must be a JSON array");
     return output;
   }
   const projects = new Set(refs.projects.map((p) => p.id));
@@ -87,8 +104,8 @@ export function auditProjectExecutionPilot(
     const r = record(item) ? item : {};
     const id = textPresent(r.id) ? r.id : "(missing at index " + index + ")";
     const fail = (message: string) => errors.push(id + ": " + message);
-    if (!/^review-m3-2-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))
-      fail("review id must use the review-m3-2- namespace");
+    if (!reviewIdPattern(cohort).test(id))
+      fail("review id must use the " + PROJECT_EXECUTION_REVIEW_COHORTS[cohort] + " namespace");
     if (seen.has(id)) fail("duplicate review id");
     if (prev && prev >= id) fail("review ids must be sorted ascending");
     seen.add(id);

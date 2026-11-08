@@ -12,7 +12,7 @@ import {
   isMilestoneIsoDate, validateProjectMilestones,
 } from "../lib/project-milestones";
 import {
-  auditProjectExecutionPilot,
+  auditProjectExecutionPilot, type ProjectExecutionReviewCohort,
 } from "./review-project-execution-pilot";
 import type { FinancialCommitment } from "../lib/types";
 import { buildM3ReviewerPackets } from "./project-execution-review-packets";
@@ -51,6 +51,7 @@ type MilestoneRefs = {
   commitments: readonly FinancialCommitment[];
   corpusCutoff: string;
   publicMilestoneIds: readonly string[];
+  cohort?: ProjectExecutionReviewCohort;
 };
 
 export type AdjudicationReport = {
@@ -92,6 +93,7 @@ export function adjudicateProjectExecutionReview(
   const base = auditProjectExecutionPilot(rows, {
     projects: refs.projects, sources: refs.sources,
     commitments: refs.commitments, corpusCutoff: refs.corpusCutoff,
+    cohort: refs.cohort,
   });
   for (const error of base.errors) report.errors.push("source queue: " + error);
   if (!Array.isArray(rows) || !Array.isArray(decisions)) {
@@ -108,6 +110,7 @@ export function adjudicateProjectExecutionReview(
       projects: refs.projects, sources: refs.sources,
       commitments: refs.commitments, corpusCutoff: refs.corpusCutoff,
       publicMilestoneCount: refs.publicMilestoneIds.length,
+      cohort: refs.cohort,
     });
     inputDigests = new Map(packetReport.worksheets.map(w => [w.id, w.reviewInputDigestSha256]));
   } catch (error) {
