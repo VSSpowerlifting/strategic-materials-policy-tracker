@@ -1,0 +1,44 @@
+{
+  "id": "grouped-bar",
+  "name": "Grouped bar",
+  "family_code": "A",
+  "order": 3,
+  "reader_question": "How do two or three comparable measures differ within each category?",
+  "relationship": "Side-by-side magnitudes of 2–3 series within each category on one zero-based axis.",
+  "question_types": ["rank"],
+  "requires": ["single-measure", "several-series"],
+  "incompatible": ["non-comparable-bases", "parts-of-whole"],
+  "capacity": { "min_items": 2, "max_items": 6, "what": "categories (2 or 3 series)" },
+  "use_when": [
+    "Each category has two or three values in the same unit and at the same cut-off",
+    "Within-category contrast matters more than a total"
+  ],
+  "avoid_when": [
+    "Series are parts of a whole — use a composition form",
+    "There are more than three series or six categories — use a table or small-multiples"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit shared by all series" },
+    { "field": "series[]", "type": "string[2..3]", "notes": "Series names, in legend order" },
+    { "field": "categories[].label", "type": "string", "notes": "Category name" },
+    { "field": "categories[].values[]", "type": "number ≥ 0", "notes": "One value per series, same order as series" }
+  ],
+  "units": "One unit throughout; the value axis starts at zero.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Clustered column chart with embedded workbook (Edit Data)", "Series colours", "Frame text"],
+    "not_data_bound": ["Legend chips and the unit caption are native shapes and text, not chart elements"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/grouped-bar.ts",
+  "fixture": "fixtures/grouped-bar.json",
+  "integrity_rules": ["magnitude-nonnegative", "min-categories", "max-categories", "unique-labels", "series-count", "aligned-series"],
+  "table_alternative": "A category-by-series table with the unit in the header.",
+  "variations": ["Horizontal grouping for long category names", "Highlighting one series in the accent colour"],
+  "limitations": ["Three series across six categories is the legible limit", "Series are neutral tones; order in the legend carries identity"],
+  "excluded_alternatives": [
+    { "form": "Stacked bar", "reason": "Implies the series sum to a meaningful total" },
+    { "form": "Dual-axis combination", "reason": "Two axes invite false visual correlation" }
+  ],
+  "references": ["bcg-sia-2022-exhibit-6", "smpt-repertoire-2026"]
+}

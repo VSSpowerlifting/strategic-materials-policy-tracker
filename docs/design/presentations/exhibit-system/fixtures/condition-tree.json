@@ -1,0 +1,24 @@
+{
+  "pattern": "condition-tree",
+  "classification": "synthetic-demonstration",
+  "title": "Four sequential tests decide eligibility, and only one route ends in full review",
+  "subtitle": "Synthetic eligibility rules for Programme P; highlighted route is the example application",
+  "annotation": "Each test has exactly two named branches. Four of the five outcomes are reached without full review.",
+  "source": "Synthetic fixture condition-tree.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Registered in Jurisdiction A?", "Full review", "Yes", "No", "Not eligible"],
+  "data": {
+    "highlightOutcomeId": "full",
+    "nodes": [
+      { "id": "c1", "label": "Registered in Jurisdiction A?", "kind": "condition", "branches": [{ "label": "Yes", "to": "c2" }, { "label": "No", "to": "o1" }] },
+      { "id": "o1", "label": "Not eligible", "kind": "outcome" },
+      { "id": "c2", "label": "Feedstock is Material X?", "kind": "condition", "branches": [{ "label": "Yes", "to": "c3" }, { "label": "No", "to": "o2" }] },
+      { "id": "o2", "label": "Refer to Programme R", "kind": "outcome" },
+      { "id": "c3", "label": "Request above 100 CU million?", "kind": "condition", "branches": [{ "label": "Yes", "to": "c4" }, { "label": "No", "to": "o3" }] },
+      { "id": "o3", "label": "Short-form review", "kind": "outcome" },
+      { "id": "c4", "label": "Binding offtake agreement signed?", "kind": "condition", "branches": [{ "label": "Yes", "to": "full" }, { "label": "No", "to": "o4" }] },
+      { "id": "full", "label": "Full review", "kind": "outcome" },
+      { "id": "o4", "label": "Resubmit with offtake", "kind": "outcome" }
+    ]
+  }
+}

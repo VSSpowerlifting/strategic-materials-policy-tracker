@@ -1,0 +1,25 @@
+{
+  "pattern": "ranked-dot",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction E leads the demonstration ranking by 3.4 units over Jurisdiction A",
+  "subtitle": "Processing yield index, units, shared axis from 40 to 60 (not zero-based)",
+  "annotation": "Differences are small relative to the level, so dots on a truncated axis show the ordering without bars that would imply proportional size. Read gaps against the stated 40–60 axis.",
+  "source": "Synthetic fixture ranked-dot.json, constructed for the exhibit gallery",
+  "visual_text": ["Jurisdiction E", "Jurisdiction B", "55.2", "47.8", "40"],
+  "data": {
+    "unit": "Yield index, units",
+    "dp": 1,
+    "axisMin": 40,
+    "axisMax": 60,
+    "tickStep": 5,
+    "items": [
+      { "label": "Jurisdiction E", "value": 55.2, "highlight": true },
+      { "label": "Jurisdiction A", "value": 51.8 },
+      { "label": "Jurisdiction C", "value": 50.6 },
+      { "label": "Jurisdiction F", "value": 49.9 },
+      { "label": "Jurisdiction D", "value": 48.7 },
+      { "label": "Jurisdiction B", "value": 47.8 },
+      { "label": "Jurisdiction G", "value": 46.1 }
+    ]
+  }
+}

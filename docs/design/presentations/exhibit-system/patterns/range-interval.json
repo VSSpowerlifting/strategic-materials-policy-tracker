@@ -1,0 +1,45 @@
+{
+  "id": "range-interval",
+  "name": "Range interval with point estimate",
+  "family_code": "A",
+  "order": 4,
+  "reader_question": "What range does the source state for each item, and where does its point estimate sit?",
+  "relationship": "Per-item stated low–high range with a point estimate inside it, on one zero-based scale.",
+  "question_types": ["uncertainty", "rank"],
+  "requires": ["single-measure", "intervals"],
+  "incompatible": ["non-comparable-bases", "model-output"],
+  "capacity": { "min_items": 3, "max_items": 8, "what": "ranges" },
+  "use_when": [
+    "A source states a low, a high and a point value for each item",
+    "The width of the stated range is part of the finding"
+  ],
+  "avoid_when": [
+    "The range is a statistical confidence interval derived from a sample — use a distribution form",
+    "Only point values exist — use ranked-bar"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "axisMax", "type": "number, optional", "notes": "Upper axis bound; defaults to a rounded value above the largest high" },
+    { "field": "items[].label", "type": "string", "notes": "Item name" },
+    { "field": "items[].low / point / high", "type": "number ≥ 0", "notes": "Stated figures; must satisfy low ≤ point ≤ high" },
+    { "field": "items[].highlight", "type": "boolean, optional", "notes": "At most one accent range" }
+  ],
+  "units": "One unit throughout; the scale starts at zero.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Range bars, point markers and labels as native shapes and text", "Accent colour", "Frame text"],
+    "not_data_bound": ["Range and marker geometry is drawn on a computed scale; values are not data-bound and there is no embedded workbook", "Editing a figure means resizing the bar, moving the marker and rewriting its labels"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/range-interval.ts",
+  "fixture": "fixtures/range-interval.json",
+  "integrity_rules": ["magnitude-nonnegative", "min-categories", "max-categories", "unique-labels", "interval-ordered", "bounded-values", "single-highlight"],
+  "table_alternative": "A table of item, low, point estimate and high.",
+  "variations": ["Ranges with an overlaid reference line", "Ranges at two cut-offs on separate rows"],
+  "limitations": ["The range is whatever the source states; it carries no probability", "Overlapping ranges do not establish a ranking"],
+  "excluded_alternatives": [
+    { "form": "Error bars on a bar chart", "reason": "Suggest a statistical interval around a measured mean that the source does not provide" },
+    { "form": "Fan chart", "reason": "Implies a forecast distribution over time" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

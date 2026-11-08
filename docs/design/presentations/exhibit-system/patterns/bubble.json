@@ -1,0 +1,45 @@
+{
+  "id": "bubble",
+  "name": "Bubble chart",
+  "family_code": "G",
+  "order": 3,
+  "reader_question": "How do two measures relate across items, and which items carry the most of a third measure?",
+  "relationship": "Association between two measures with a third, strictly positive magnitude encoded as bubble area.",
+  "question_types": ["relationship", "rank"],
+  "requires": ["two-measures", "third-measure"],
+  "incompatible": ["non-comparable-bases", "time-axis"],
+  "capacity": { "min_items": 3, "max_items": 12, "what": "bubbles" },
+  "use_when": [
+    "A third positive magnitude adds context to a two-measure relationship",
+    "Few enough items that each bubble can be named"
+  ],
+  "avoid_when": [
+    "The size values must be compared precisely — use a ranked bar or a table",
+    "Only two measures exist — use scatter",
+    "Sizes can be zero or negative"
+  ],
+  "data_contract": [
+    { "field": "xAxis / yAxis", "type": "{label, min, max, step, dp?}", "notes": "Explicit axis range containing every bubble centre" },
+    { "field": "sizeLabel / sizeUnit", "type": "string", "notes": "What the area represents and its unit" },
+    { "field": "legendSizes", "type": "number[2]", "notes": "Two reference sizes for the legend circles, no larger than the largest bubble" },
+    { "field": "bubbles[]", "type": "{label, x, y, size > 0, highlight?}", "notes": "Unique items; at most one in the accent" }
+  ],
+  "units": "Three independent units: x, y and the size measure, each stated on the slide.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Native bubble chart with embedded workbook (Edit Data)", "Bubble colours, transparency and axis ranges", "Frame text"],
+    "not_data_bound": ["Bubble labels and axis titles are positioned text computed from the fixture", "Size-legend reference circles are drawn shapes scaled to PowerPoint's default bubble size (largest bubble = 25% of the shorter plot side); the renderer may differ, so they are approximate"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/bubble.ts",
+  "fixture": "fixtures/bubble.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "axis-explicit", "bounded-values", "sizes-positive", "size-legend-two", "single-accent"],
+  "table_alternative": "A table of items with x, y and size columns for exact comparison.",
+  "variations": ["Scatter with labelled points when no third measure exists"],
+  "limitations": ["Area perception is weak; readers misjudge ratios between bubbles, so exact sizes belong in a table or legend", "Large bubbles can hide neighbours, which caps the item count", "Correlation is not causation"],
+  "excluded_alternatives": [
+    { "form": "3D bubble", "reason": "Depth distorts area and breaks the no-3D rule" },
+    { "form": "Radius-proportional bubbles", "reason": "Encoding size by radius exaggerates ratios by the square" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

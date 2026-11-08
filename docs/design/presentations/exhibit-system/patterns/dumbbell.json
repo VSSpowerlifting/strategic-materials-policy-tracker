@@ -1,0 +1,43 @@
+{
+  "id": "dumbbell",
+  "name": "Two-observation dumbbell",
+  "family_code": "B",
+  "order": 1,
+  "reader_question": "How did each entity change between two comparable observations?",
+  "relationship": "Paired observations per entity on a shared axis; the gap is the change.",
+  "question_types": ["compare-two-observations"],
+  "requires": ["two-observations"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 3, "max_items": 10, "what": "rows" },
+  "use_when": [
+    "Both observations use the same population, definition and unit",
+    "The size of each change matters more than the rank"
+  ],
+  "avoid_when": [
+    "More than two time points — use annotated-line or small-multiples",
+    "The second value is a target or forecast — mark it as such or use evidence-milestone-strip"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "fromLabel / toLabel", "type": "string", "notes": "Names of the two observations (for example period labels)" },
+    { "field": "axisMax", "type": "number?", "notes": "Shared axis maximum; must cover every value" },
+    { "field": "items[].label / from / to", "type": "string / number ≥ 0", "notes": "Entity and its two observations" }
+  ],
+  "units": "One unit and population for both observations; axis starts at zero.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Every dot, connector and label is a native shape or text box (move, recolour, retype)"],
+    "not_data_bound": ["Positions are computed from the fixture; changing a value means moving the shape or re-running the renderer — there is no Edit Data"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/dumbbell.ts",
+  "fixture": "fixtures/dumbbell.json",
+  "integrity_rules": ["magnitude-nonnegative", "min-categories", "max-categories", "unique-labels", "bounded-values"],
+  "table_alternative": "A three-column table (entity, first, second, change) when exact values are needed.",
+  "variations": ["Slope chart (slope) when rank reversal is the point", "Paired bars (grouped-bar) for two series with few entities"],
+  "limitations": ["Endpoints are observations; the connector does not represent the path between them"],
+  "excluded_alternatives": [
+    { "form": "Two separate pie charts", "reason": "Cannot show per-entity change and compares angles across charts" }
+  ],
+  "references": ["mckinsey-2025-two-period-rank", "smpt-repertoire-2026"]
+}

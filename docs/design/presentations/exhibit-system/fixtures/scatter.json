@@ -1,0 +1,35 @@
+{
+  "pattern": "scatter",
+  "classification": "synthetic-demonstration",
+  "title": "Synthetic output tracks installed capacity, but sites above 50 kt diverge widely",
+  "subtitle": "Annual output against installed capacity, 20 synthetic sites, kilotonnes per year",
+  "annotation": "Each dot is one synthetic site. Spread widens at higher capacity, and Site 17 sits furthest below the general pattern. The chart shows association only; it does not show that capacity causes output.",
+  "source": "Synthetic fixture scatter.json, constructed for the exhibit gallery",
+  "visual_text": ["Site 17", "Site 20", "Installed capacity, kt per year", "Annual output, kt"],
+  "data": {
+    "xAxis": { "label": "Installed capacity, kt per year", "min": 0, "max": 80, "step": 20 },
+    "yAxis": { "label": "Annual output, kt", "min": 0, "max": 70, "step": 10 },
+    "points": [
+      { "label": "Site 1", "x": 12, "y": 8 },
+      { "label": "Site 2", "x": 15, "y": 11 },
+      { "label": "Site 3", "x": 18, "y": 9, "named": true, "side": "b" },
+      { "label": "Site 4", "x": 21, "y": 16 },
+      { "label": "Site 5", "x": 24, "y": 14 },
+      { "label": "Site 6", "x": 27, "y": 22 },
+      { "label": "Site 7", "x": 30, "y": 17 },
+      { "label": "Site 8", "x": 33, "y": 25, "named": true, "side": "t" },
+      { "label": "Site 9", "x": 36, "y": 21 },
+      { "label": "Site 10", "x": 39, "y": 31 },
+      { "label": "Site 11", "x": 42, "y": 24 },
+      { "label": "Site 12", "x": 45, "y": 35 },
+      { "label": "Site 13", "x": 48, "y": 29 },
+      { "label": "Site 14", "x": 52, "y": 41 },
+      { "label": "Site 15", "x": 55, "y": 33 },
+      { "label": "Site 16", "x": 58, "y": 46 },
+      { "label": "Site 17", "x": 61, "y": 37, "highlight": true, "side": "r" },
+      { "label": "Site 18", "x": 64, "y": 52 },
+      { "label": "Site 19", "x": 68, "y": 44 },
+      { "label": "Site 20", "x": 72, "y": 58, "named": true, "side": "l" }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "role-matrix",
+  "name": "Role matrix",
+  "family_code": "K",
+  "order": 2,
+  "reader_question": "Which organisation plays which role, without implying how much money each provides?",
+  "relationship": "Membership of organisations in roles; each mark is a recorded role, optionally qualified, never a quantity.",
+  "question_types": ["lookup", "state"],
+  "requires": ["states"],
+  "incompatible": ["quantified-flows"],
+  "capacity": { "min_items": 3, "max_items": 8, "what": "organisation rows (2 to 5 roles)" },
+  "use_when": [
+    "The reader needs to see roles and overlaps across organisations before any amounts",
+    "Roles are sourced facts that can be stated in a few words"
+  ],
+  "avoid_when": [
+    "The question is how much each party provides — use sources-and-uses or a flow pattern on one stated basis",
+    "Parties are linked by edges rather than shared roles — use a network or sankey pattern"
+  ],
+  "data_contract": [
+    { "field": "roles[]", "type": "string[] (2-5, ≤16 chars)", "notes": "Column labels, unique" },
+    { "field": "orgs[].label", "type": "string", "notes": "Organisation, unique" },
+    { "field": "orgs[].cells[]", "type": "null | { qualifier?: string ≤16 chars }", "notes": "One entry per role; null means no recorded role. Qualifiers must not read as amounts" }
+  ],
+  "units": "No units. The count row totals organisations per role, never money.",
+  "editability": {
+    "tier": "table",
+    "editable": ["Native table: labels, qualifiers, count row, fills", "Frame text"],
+    "not_data_bound": ["The role circles are native shapes positioned over the cells from fixed row heights; the count row is typed table text, not a formula"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/role-matrix.ts",
+  "fixture": "fixtures/role-matrix.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "aligned-series", "role-held", "cell-length", "no-amounts-in-roles"],
+  "table_alternative": "A two-column table of organisation and comma-separated roles.",
+  "variations": ["Criterion-matrix when cells are graded rather than held", "Project-level matrix with one column per project"],
+  "limitations": ["A mark records a role, not its size or duration", "Eight organisations is the legible limit on one slide"],
+  "excluded_alternatives": [
+    { "form": "Bubble matrix sized by amount", "reason": "Implies amounts and mixes unlike instruments in one scale" },
+    { "form": "Network diagram of organisations", "reason": "Implies relationships the role data does not record" }
+  ],
+  "references": ["strategyand-2018-exhibit-5", "smpt-repertoire-2026"]
+}

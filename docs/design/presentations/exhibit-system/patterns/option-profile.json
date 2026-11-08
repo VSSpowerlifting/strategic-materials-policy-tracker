@@ -1,0 +1,45 @@
+{
+  "id": "option-profile",
+  "name": "Option profile",
+  "family_code": "K",
+  "order": 3,
+  "reader_question": "How do two to four options differ on the same five facts?",
+  "relationship": "Side-by-side description of options on a fixed set of structured fields; no scoring.",
+  "question_types": ["decision", "lookup"],
+  "requires": ["conditions"],
+  "incompatible": ["two-measures"],
+  "capacity": { "min_items": 2, "max_items": 4, "what": "option columns" },
+  "use_when": [
+    "A small set of options is compared on instrument, status, timing, conditions and open questions",
+    "Every cell can be stated in under about 60 characters"
+  ],
+  "avoid_when": [
+    "Options need grading against criteria — use criterion-matrix",
+    "Facts are long-form or differ by option — write a source dossier instead"
+  ],
+  "data_contract": [
+    { "field": "options[].label", "type": "string (≤26 chars)", "notes": "Column heading, unique" },
+    { "field": "options[].instrument", "type": "string (≤48 chars)", "notes": "Type of measure" },
+    { "field": "options[].status", "type": "announcement | authorization | binding | drawdown | expenditure | operational", "notes": "Transaction status vocabulary" },
+    { "field": "options[].start / end", "type": "ISO date", "notes": "Timing; start must not follow end" },
+    { "field": "options[].conditions / open", "type": "string (≤64 chars)", "notes": "Conditions attached; open question, or 'None stated'" }
+  ],
+  "units": "No quantities. Dates are ISO and shown verbatim.",
+  "editability": {
+    "tier": "table",
+    "editable": ["Native table: every cell, fills, column widths", "Frame text"],
+    "not_data_bound": [],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/option-profile.ts",
+  "fixture": "fixtures/option-profile.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "controlled-vocabulary", "interval-ordered", "cell-length"],
+  "table_alternative": "The pattern is itself the table; for four-plus options use a long-format table with one row per option.",
+  "variations": ["Criterion-matrix for graded comparison", "Two-option before/after profile"],
+  "limitations": ["Character limits keep every row on a fixed height", "Facts are as stated by the source; the table does not rank options"],
+  "excluded_alternatives": [
+    { "form": "Weighted decision matrix", "reason": "Weights and totals are synthetic scores the tracker does not produce" },
+    { "form": "Paragraph cards per option", "reason": "Unaligned prose hides which fields are missing" }
+  ],
+  "references": ["strategyand-2018-exhibit-6", "smpt-repertoire-2026"]
+}

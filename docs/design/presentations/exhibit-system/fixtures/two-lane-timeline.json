@@ -1,0 +1,36 @@
+{
+  "pattern": "two-lane-timeline",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction B's measures bunch into 2031 while Jurisdiction A's run from 2030 to 2032",
+  "subtitle": "Dated measures by jurisdiction, announcement, effective and implementation dates, 2030–2032",
+  "annotation": "Dates share one scale; the order of events across lanes does not show that one measure caused another.",
+  "source": "Synthetic fixture two-lane-timeline.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Jurisdiction A", "Jurisdiction B", "Licence rule", "announced 14 Mar 2030", "implemented 1 Mar 2031"],
+  "data": {
+    "lanes": [
+      {
+        "name": "Jurisdiction A",
+        "events": [
+          { "label": "Licence rule", "date": "2030-03-14", "kind": "announcement" },
+          { "label": "Licence rule", "date": "2030-09-01", "kind": "effective" },
+          { "label": "Licence rule", "date": "2031-03-01", "kind": "implementation" },
+          { "label": "Stockpile scheme", "date": "2031-06-10", "kind": "announcement" },
+          { "label": "Stockpile scheme", "date": "2031-10-01", "kind": "effective" },
+          { "label": "Review clause", "date": "2032-04-15", "kind": "implementation" }
+        ]
+      },
+      {
+        "name": "Jurisdiction B",
+        "events": [
+          { "label": "Tariff measure", "date": "2030-05-20", "kind": "announcement" },
+          { "label": "Tariff measure", "date": "2030-07-01", "kind": "effective" },
+          { "label": "Subsidy round", "date": "2031-02-12", "kind": "announcement" },
+          { "label": "Subsidy round", "date": "2031-08-30", "kind": "implementation" },
+          { "label": "Quota notice", "date": "2032-01-20", "kind": "announcement" },
+          { "label": "Quota notice", "date": "2032-04-01", "kind": "effective" }
+        ]
+      }
+    ]
+  }
+}

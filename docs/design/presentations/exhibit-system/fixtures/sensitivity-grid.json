@@ -1,0 +1,23 @@
+{
+  "pattern": "sensitivity-grid",
+  "classification": "synthetic-demonstration",
+  "title": "The illustrative result is negative at a price of 80 and, at 100, once the discount rate reaches 10%",
+  "subtitle": "Model output: net present value of Project 3, CU million, by offtake price and discount rate",
+  "annotation": "Each cell is one model run with both drivers set as shown. Shading is relative to this grid's range, not an absolute scale.",
+  "source": "Synthetic fixture sensitivity-grid.json, constructed for the exhibit gallery",
+  "visual_text": ["MODEL OUTPUT — illustrative", "Offtake price, CU per unit", "94", "−10", "Base case: 120, 8%"],
+  "data": {
+    "unit": "CU million, model output",
+    "dp": 0,
+    "rowDriver": { "name": "Offtake price, CU per unit", "values": ["80", "100", "120", "140", "160"] },
+    "colDriver": { "name": "Discount rate", "values": ["6%", "8%", "10%", "12%"] },
+    "cells": [
+      [-18, -50, -82, -114],
+      [54, 22, -10, -42],
+      [126, 94, 62, 30],
+      [198, 166, 134, 102],
+      [270, 238, 206, 174]
+    ],
+    "base": { "row": "120", "col": "8%" }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "pattern": "indexed-lines",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction A ended at index 138 and Jurisdiction C at 79, both rebased to 100 at 2030-Q1",
+  "subtitle": "Index, base = 100 at 2030-Q1; computed from raw quarterly output in units",
+  "annotation": "Indexing removes level differences (raw starts are 200, 150 and 80), so only relative change since the base period is compared. It says nothing about absolute size or about which series is larger.",
+  "source": "Synthetic fixture indexed-lines.json, constructed for the exhibit gallery",
+  "visual_text": [
+    "Index, base = 100 at Q1 30",
+    "Jurisdiction A",
+    "138.0",
+    "116.0",
+    "78.8"
+  ],
+  "data": {
+    "rawUnit": "output, units per quarter",
+    "periods": [
+      "Q1 30",
+      "Q2 30",
+      "Q3 30",
+      "Q4 30",
+      "Q1 31",
+      "Q2 31",
+      "Q3 31",
+      "Q4 31",
+      "Q1 32",
+      "Q2 32",
+      "Q3 32",
+      "Q4 32"
+    ],
+    "baseIndex": 0,
+    "series": [
+      {
+        "name": "Jurisdiction A",
+        "values": [
+          200,
+          204,
+          210,
+          216,
+          224,
+          230,
+          238,
+          246,
+          252,
+          260,
+          268,
+          276
+        ],
+        "highlight": true
+      },
+      {
+        "name": "Jurisdiction B",
+        "values": [
+          150,
+          153,
+          155,
+          156,
+          158,
+          160,
+          163,
+          165,
+          168,
+          170,
+          172,
+          174
+        ]
+      },
+      {
+        "name": "Jurisdiction C",
+        "values": [
+          80,
+          78,
+          76,
+          75,
+          73,
+          72,
+          70,
+          69,
+          68,
+          66,
+          65,
+          63
+        ]
+      }
+    ]
+  }
+}

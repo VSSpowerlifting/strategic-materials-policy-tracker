@@ -1,0 +1,45 @@
+{
+  "id": "indexed-lines",
+  "name": "Indexed lines, base = 100",
+  "family_code": "C",
+  "order": 3,
+  "reader_question": "How have series of different sizes changed relative to a common starting point?",
+  "relationship": "Each series rebased to 100 at one stated base period, so relative change is comparable and level differences drop out.",
+  "question_types": ["trend", "compare-two-observations"],
+  "requires": ["time-axis", "several-series"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 2, "max_items": 4, "what": "series (6–24 periods)" },
+  "use_when": [
+    "Series share a period set but differ greatly in level",
+    "Relative change since a stated base period is the question"
+  ],
+  "avoid_when": [
+    "Absolute levels matter — use small-multiples or annotated-line",
+    "A series is zero or negative at the base period"
+  ],
+  "data_contract": [
+    { "field": "rawUnit", "type": "string", "notes": "Unit of the raw values the index is computed from" },
+    { "field": "periods[]", "type": "string[6..24]", "notes": "Shared period labels" },
+    { "field": "baseIndex", "type": "integer", "notes": "Position of the base period in periods; every series equals 100 there" },
+    { "field": "series[].name / series[].values[]", "type": "string / number[] > 0", "notes": "Raw values, one per period; the renderer computes the index" },
+    { "field": "series[].highlight", "type": "boolean, optional", "notes": "At most one accent line" }
+  ],
+  "units": "Index points, base = 100 at the stated period; the base period and the raw unit are printed on the slide.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Line chart with embedded workbook holding the computed index (Edit Data)", "Series colours", "Frame text"],
+    "not_data_bound": ["The workbook holds index values, not the raw values; changing raw data means recomputing the index", "End labels and the base-100 reference line are positioned shapes and text, not chart elements"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/indexed-lines.ts",
+  "fixture": "fixtures/indexed-lines.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "series-count", "base-period-valid", "base-positive", "aligned-series", "single-highlight"],
+  "table_alternative": "A table of raw values and index values by period for each series.",
+  "variations": ["Rebasing at a policy date instead of the first period", "Index with the raw end values in a side table"],
+  "limitations": ["The choice of base period changes every line's shape", "An index conveys relative change only and hides which series is larger"],
+  "excluded_alternatives": [
+    { "form": "Dual-axis lines", "reason": "Two axes invite false visual correlation between series of different size" },
+    { "form": "Raw-value lines on one axis", "reason": "Large series flatten small ones and hide relative change" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

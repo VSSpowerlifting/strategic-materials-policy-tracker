@@ -1,0 +1,27 @@
+{
+  "pattern": "bubble",
+  "classification": "synthetic-demonstration",
+  "title": "Synthetic investment is largest at Project 4, which pairs mid-range capacity with low unit cost",
+  "subtitle": "Unit cost against capacity for 9 synthetic projects; bubble area shows investment, CU million",
+  "annotation": "Position carries capacity and unit cost; area carries investment. Readers compare area less accurately than position, so the legend gives two reference sizes. Project 4 is highlighted.",
+  "source": "Synthetic fixture bubble.json, constructed for the exhibit gallery",
+  "visual_text": ["Project 4", "240 CU million", "60 CU million", "Capacity, kt per year"],
+  "data": {
+    "xAxis": { "label": "Capacity, kt per year", "min": 0, "max": 80, "step": 20 },
+    "yAxis": { "label": "Unit cost, CU per unit", "min": 0, "max": 60, "step": 10 },
+    "sizeLabel": "investment",
+    "sizeUnit": "CU million",
+    "legendSizes": [60, 240],
+    "bubbles": [
+      { "label": "Project 1", "x": 10, "y": 45, "size": 60 },
+      { "label": "Project 2", "x": 22, "y": 30, "size": 120 },
+      { "label": "Project 3", "x": 30, "y": 52, "size": 35 },
+      { "label": "Project 4", "x": 38, "y": 18, "size": 240, "highlight": true },
+      { "label": "Project 5", "x": 48, "y": 40, "size": 90 },
+      { "label": "Project 6", "x": 55, "y": 25, "size": 45 },
+      { "label": "Project 7", "x": 62, "y": 50, "size": 150 },
+      { "label": "Project 8", "x": 70, "y": 15, "size": 70 },
+      { "label": "Project 9", "x": 74, "y": 34, "size": 25 }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "pattern": "slope",
+  "classification": "synthetic-demonstration",
+  "title": "Jurisdiction B rose 13 units between the two cut-offs; four of the other five fell",
+  "subtitle": "Processing capacity at two cut-offs, kt per year; vertical position linear in value, no zero baseline",
+  "annotation": "Only Jurisdiction B crosses above Jurisdiction A. The slope shows direction and relative movement for each item; read exact levels from the end labels, because the vertical scale is not zero-based.",
+  "source": "Synthetic fixture slope.json, constructed for the exhibit gallery",
+  "visual_text": ["Jurisdiction B", "2030-12-31", "2032-12-31", "61", "48"],
+  "data": {
+    "unit": "kt per year, processing capacity",
+    "dp": 0,
+    "fromLabel": "2030-12-31",
+    "toLabel": "2032-12-31",
+    "items": [
+      { "label": "Jurisdiction A", "from": 62, "to": 58 },
+      { "label": "Jurisdiction B", "from": 48, "to": 61, "highlight": true },
+      { "label": "Jurisdiction C", "from": 55, "to": 57 },
+      { "label": "Jurisdiction D", "from": 40, "to": 38 },
+      { "label": "Jurisdiction E", "from": 52, "to": 50 },
+      { "label": "Jurisdiction F", "from": 51, "to": 39 }
+    ]
+  }
+}

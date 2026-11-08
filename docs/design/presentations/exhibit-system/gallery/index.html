@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SMPT exhibit pattern gallery (development reference)</title>
+<style>
+:root { --ink:#1b1915; --muted:#5b5548; --rule:#d8d3c7; --paper:#f5f3ee; --accent:#7a5510; --dark:#12110f; }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; font:15px/1.5 Archivo,"Helvetica Neue",Arial,sans-serif; color:var(--ink); background:var(--paper); }
+a { color:var(--accent); text-underline-offset:3px; }
+a:hover { color:var(--ink); }
+button,input,select { font:inherit; }
+button { cursor:pointer; background:white; border:1px solid var(--muted); padding:8px 14px; color:var(--ink); }
+button:disabled { cursor:default; opacity:.55; }
+:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+main { max-width:1640px; margin:auto; padding:36px clamp(16px,3vw,48px) 80px; }
+.masthead { background:var(--dark); color:var(--paper); padding:14px clamp(16px,3vw,48px); letter-spacing:.12em; font-size:12px; }
+.banner { color:var(--muted); max-width:90ch; margin-top:0; }
+h1 { font-size:clamp(30px,4vw,48px); letter-spacing:-.035em; margin:0 0 16px; line-height:1.1; }
+h2 { font-size:23px; margin:36px 0 18px; padding-bottom:8px; border-bottom:1px solid var(--muted); }
+h3 { font-size:19px; line-height:1.25; margin:6px 0 10px; }
+h4 { margin:12px 0 4px; font-size:13px; }
+p { max-width:90ch; }
+.downloads { display:flex; flex-wrap:wrap; gap:12px 24px; margin:22px 0; }
+.downloads a { font-weight:600; }
+nav { border-block:1px solid var(--rule); padding:14px 0; }
+nav ul { display:flex; flex-wrap:wrap; gap:8px 20px; padding:0; margin:0; list-style:none; font-size:13px; }
+#controls { background:var(--paper); padding:18px 0 12px; border-bottom:1px solid var(--rule); }
+.filters { display:flex; flex-wrap:wrap; gap:12px; align-items:end; }
+.filters label { display:flex; flex-direction:column; font-size:13px; gap:4px; }
+.filters label:first-child { flex:1 1 250px; }
+input[type=search], select { padding:9px 10px; border:1px solid var(--muted); background:white; color:var(--ink); max-width:100%; }
+.compare-bar { display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; margin-top:14px; }
+#result-count { margin-right:auto; color:var(--muted); }
+#selection-status { font-size:13px; color:var(--muted); margin:6px 0 0; min-height:1.5em; }
+.pattern-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr)); gap:32px 24px; }
+.pattern { min-width:0; border-bottom:1px solid var(--rule); padding-bottom:18px; scroll-margin-top:20px; }
+.code { font-size:12px; color:var(--muted); margin:8px 0 0; }
+.question { font-size:14px; margin:0 0 12px; min-height:3em; }
+.preview { display:block; }
+.preview img { display:block; width:100%; height:auto; border:1px solid var(--rule); }
+.actions { display:flex; flex-wrap:wrap; gap:8px 20px; align-items:center; margin:12px 0; font-size:13px; }
+.actions label { display:flex; align-items:center; gap:6px; cursor:pointer; }
+input[type=checkbox] { width:17px; height:17px; accent-color:var(--accent); }
+dl { display:grid; grid-template-columns:100px 1fr; gap:5px 12px; font-size:13px; }
+dt { color:var(--muted); } dd { margin:0; overflow-wrap:anywhere; }
+details { font-size:14px; } summary { cursor:pointer; color:var(--accent); font-weight:600; }
+.cols ul { padding-left:20px; margin:4px 0; }
+.refs,.alt { font-size:13px; }
+code { font-size:12px; overflow-wrap:anywhere; }
+#empty { padding:40px 0; font-size:20px; }
+dialog { width:min(1600px,96vw); max-height:94vh; padding:0; border:1px solid var(--muted); background:var(--paper); color:var(--ink); }
+dialog::backdrop { background:rgb(18 17 15 / .8); }
+.dialog-header { display:flex; justify-content:space-between; align-items:center; padding:12px 24px; background:var(--paper); position:sticky; top:0; border-bottom:1px solid var(--rule); z-index:1; }
+.dialog-header h2 { font-size:16px; border:0; margin:0; padding:0; }
+#preview-contents { padding:24px; }
+#preview-contents img { width:100%; height:auto; display:block; }
+#preview-contents.comparing { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+#preview-contents section { min-width:0; }
+#preview-contents dl { margin-block:20px; }
+@media(max-width:760px) { #preview-contents.comparing { grid-template-columns:1fr; } .dialog-header { padding:10px 16px; } #preview-contents { padding:16px; } .filters label { flex:1 1 100%; } }
+@media print { #controls,dialog,.actions { display:none; } .pattern-grid { grid-template-columns:1fr 1fr; } .pattern { break-inside:avoid; } }
+
+.compare-bar.has-selection { position:fixed; bottom:16px; left:clamp(16px,3vw,48px); right:clamp(16px,3vw,48px); z-index:2; margin:0; padding:12px 16px; border:1px solid var(--muted); background:var(--dark); color:var(--paper); box-shadow:0 4px 20px rgb(0 0 0 / .15); }
+.compare-bar.has-selection #result-count { color:var(--paper); }
+.compare-bar.has-selection button:disabled { opacity:1; background:var(--soft,#e9e5dc); color:var(--muted); }
+@media(max-width:560px) { .compare-bar.has-selection #result-count { flex-basis:100%; } }
+
+</style>
+</head>
+<body>
+<div class="masthead">SMPT / PRESENTATION LIBRARY</div>
+<main>
+<p class="banner"><strong>Development reference — not for publication.</strong> All figures and entities are synthetic demonstration data.</p>
+<h1>Exhibit pattern gallery</h1>
+<p>39 editable patterns across 11 analytical families. Browse by the comparison your reader needs to make.</p>
+<div class="downloads"><a href="../exhibit-gallery.pptx" download>Download editable gallery</a><a href="../demo-deck.pptx" download>Download demonstration deck</a><a href="../exhibit-registry.json">Pattern registry</a><a href="../README.md">Build and review guide</a></div>
+<p class="banner">Previews use LibreOffice. Microsoft PowerPoint open / Edit Data / save / reopen remains unverified. native-chart: 14 · native-shapes: 18 · native-chart-with-helper-series: 1 · table: 6. No raster exhibits.</p>
+<nav aria-label="Families"><ul><li><a data-family-link="A" href="#family-A">A. Comparison</a> (4)</li><li><a data-family-link="B" href="#family-B">B. Change between two observations</a> (2)</li><li><a data-family-link="C" href="#family-C">C. Time series</a> (3)</li><li><a data-family-link="D" href="#family-D">D. Composition</a> (3)</li><li><a data-family-link="E" href="#family-E">E. Reconciliation</a> (3)</li><li><a data-family-link="F" href="#family-F">F. Sensitivity</a> (2)</li><li><a data-family-link="G" href="#family-G">G. Relationship</a> (3)</li><li><a data-family-link="H" href="#family-H">H. Distribution and uncertainty</a> (3)</li><li><a data-family-link="I" href="#family-I">I. Time and sequence</a> (5)</li><li><a data-family-link="J" href="#family-J">J. Structure and flow</a> (6)</li><li><a data-family-link="K" href="#family-K">K. Lookup and decision</a> (5)</li></ul></nav>
+<section id="controls" hidden aria-label="Find and compare patterns">
+<div class="filters"><label>Search patterns<input id="search" type="search" placeholder="Name, question, data or integrity rule"></label>
+<label>Family<select id="family"><option value="">All families</option><option value="A">A. Comparison</option><option value="B">B. Change between two observations</option><option value="C">C. Time series</option><option value="D">D. Composition</option><option value="E">E. Reconciliation</option><option value="F">F. Sensitivity</option><option value="G">G. Relationship</option><option value="H">H. Distribution and uncertainty</option><option value="I">I. Time and sequence</option><option value="J">J. Structure and flow</option><option value="K">K. Lookup and decision</option></select></label>
+<label>Editability<select id="tier"><option value="">All tiers</option><option>native-chart</option><option>native-shapes</option><option>native-chart-with-helper-series</option><option>table</option></select></label><button id="reset" type="button">Reset filters</button></div>
+<div class="compare-bar"><output id="result-count" aria-live="polite"></output><button id="compare" type="button" disabled>Compare (0/2)</button><button id="clear-comparison" type="button">Clear selection</button></div>
+<p id="selection-status" aria-live="polite"></p>
+</section>
+<p id="empty" hidden>No patterns match. Try fewer search terms or reset the filters.</p>
+<section class="family" id="family-A"><h2>A. Comparison</h2><div class="pattern-grid">
+<article class="pattern" id="ranked-bar" data-family="A" data-tier="native-chart">
+  <a class="preview" href="previews/ranked-bar.png" aria-label="Enlarge Ranked horizontal bar"><img src="previews/ranked-bar.png" alt="Ranked horizontal bar with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">A1 · <code>ranked-bar</code> · gallery slide 2</p>
+    <h3>Ranked horizontal bar</h3>
+    <p class="question">Which entity is largest on one measure, and by how much?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="ranked-bar">Compare Ranked horizontal bar</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 2</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Magnitude ranking of comparable entities on a single measure and status.</dd>
+    <dt>Question types</dt><dd>rank</dd>
+    <dt>Requires</dt><dd>single-measure</dd>
+    <dt>Capacity</dt><dd>3–12 bars</dd>
+    <dt>Units</dt><dd>One unit and status for every bar; zero baseline.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Every bar shares one unit, one definition and one status (for example committed, not announced)</li><li>Rank order itself matters to the argument</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Values mix statuses or bases — use status-separated-capital or parallel-basis-panels</li><li>Fewer than three entities — state the comparison in the title or use a two-value callout</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Bar values and labels through Edit Data (embedded workbook)</li><li>Bar colours, gap width, data-label format</li><li>Frame text: title, subtitle, interpretation, source</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Highlight colour is a per-point fill; re-sorting after a data edit is manual</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Does not show uncertainty, status mix or change over time</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A two-column table (entity, value) when exact figures matter more than rank, or when there are more than twelve entities.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>magnitude-nonnegative</code> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>single-highlight</code></p>
+  <p class="refs"><strong>Design references:</strong> BCG and SIA (Nov 2022), PDF p16, Exhibit 6: zero-based labelled bars; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="ranked-dot" data-family="A" data-tier="native-shapes">
+  <a class="preview" href="previews/ranked-dot.png" aria-label="Enlarge Ranked dot plot"><img src="previews/ranked-dot.png" alt="Ranked dot plot with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">A2 · <code>ranked-dot</code> · gallery slide 3</p>
+    <h3>Ranked dot plot</h3>
+    <p class="question">How do items rank on one measure when the differences are small relative to the level?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="ranked-dot">Compare Ranked dot plot</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 3</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Ordered comparison of single values on a shared axis that may start above zero; position, not length, carries the value.</dd>
+    <dt>Question types</dt><dd>rank</dd>
+    <dt>Requires</dt><dd>single-measure</dd>
+    <dt>Capacity</dt><dd>4–12 dots</dd>
+    <dt>Units</dt><dd>One unit and basis throughout; the non-zero axis range is printed on the slide.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Bars would exaggerate small differences because every value sits far from zero</li><li>The reader needs the ordering and approximate gaps, with the axis range stated</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The measure is an additive quantity whose size relative to zero matters — use ranked-bar</li><li>Items are measured on different bases or in different units</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Dots, guide lines, gridlines, tick labels and value labels as native shapes and text</li><li>Accent dot colour</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Dot positions are drawn on a computed scale; values are not data-bound and there is no embedded workbook</li><li>Editing a value means moving the dot and rewriting its label</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>The axis does not start at zero, so gaps must not be read as proportions</li><li>Guide lines run from the axis start and are not bars</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A sorted table of item and value, with the measure and basis in the header.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>bounded-values</code> <code>axis-range</code> <code>single-highlight</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="grouped-bar" data-family="A" data-tier="native-chart">
+  <a class="preview" href="previews/grouped-bar.png" aria-label="Enlarge Grouped bar"><img src="previews/grouped-bar.png" alt="Grouped bar with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">A3 · <code>grouped-bar</code> · gallery slide 4</p>
+    <h3>Grouped bar</h3>
+    <p class="question">How do two or three comparable measures differ within each category?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="grouped-bar">Compare Grouped bar</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 4</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Side-by-side magnitudes of 2–3 series within each category on one zero-based axis.</dd>
+    <dt>Question types</dt><dd>rank</dd>
+    <dt>Requires</dt><dd>single-measure, several-series</dd>
+    <dt>Capacity</dt><dd>2–6 categories (2 or 3 series)</dd>
+    <dt>Units</dt><dd>One unit throughout; the value axis starts at zero.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Each category has two or three values in the same unit and at the same cut-off</li><li>Within-category contrast matters more than a total</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Series are parts of a whole — use a composition form</li><li>There are more than three series or six categories — use a table or small-multiples</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Clustered column chart with embedded workbook (Edit Data)</li><li>Series colours</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Legend chips and the unit caption are native shapes and text, not chart elements</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Three series across six categories is the legible limit</li><li>Series are neutral tones; order in the legend carries identity</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A category-by-series table with the unit in the header.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>magnitude-nonnegative</code> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>series-count</code> <code>aligned-series</code></p>
+  <p class="refs"><strong>Design references:</strong> BCG and SIA (Nov 2022), PDF p16, Exhibit 6: zero-based labelled bars; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="range-interval" data-family="A" data-tier="native-shapes">
+  <a class="preview" href="previews/range-interval.png" aria-label="Enlarge Range interval with point estimate"><img src="previews/range-interval.png" alt="Range interval with point estimate with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">A4 · <code>range-interval</code> · gallery slide 5</p>
+    <h3>Range interval with point estimate</h3>
+    <p class="question">What range does the source state for each item, and where does its point estimate sit?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="range-interval">Compare Range interval with point estimate</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 5</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Per-item stated low–high range with a point estimate inside it, on one zero-based scale.</dd>
+    <dt>Question types</dt><dd>uncertainty, rank</dd>
+    <dt>Requires</dt><dd>single-measure, intervals</dd>
+    <dt>Capacity</dt><dd>3–8 ranges</dd>
+    <dt>Units</dt><dd>One unit throughout; the scale starts at zero.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A source states a low, a high and a point value for each item</li><li>The width of the stated range is part of the finding</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The range is a statistical confidence interval derived from a sample — use a distribution form</li><li>Only point values exist — use ranked-bar</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Range bars, point markers and labels as native shapes and text</li><li>Accent colour</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Range and marker geometry is drawn on a computed scale; values are not data-bound and there is no embedded workbook</li><li>Editing a figure means resizing the bar, moving the marker and rewriting its labels</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>The range is whatever the source states; it carries no probability</li><li>Overlapping ranges do not establish a ranking</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of item, low, point estimate and high.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>magnitude-nonnegative</code> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>interval-ordered</code> <code>bounded-values</code> <code>single-highlight</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-B"><h2>B. Change between two observations</h2><div class="pattern-grid">
+<article class="pattern" id="dumbbell" data-family="B" data-tier="native-shapes">
+  <a class="preview" href="previews/dumbbell.png" aria-label="Enlarge Two-observation dumbbell"><img src="previews/dumbbell.png" alt="Two-observation dumbbell with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">B1 · <code>dumbbell</code> · gallery slide 6</p>
+    <h3>Two-observation dumbbell</h3>
+    <p class="question">How did each entity change between two comparable observations?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="dumbbell">Compare Two-observation dumbbell</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 6</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Paired observations per entity on a shared axis; the gap is the change.</dd>
+    <dt>Question types</dt><dd>compare-two-observations</dd>
+    <dt>Requires</dt><dd>two-observations</dd>
+    <dt>Capacity</dt><dd>3–10 rows</dd>
+    <dt>Units</dt><dd>One unit and population for both observations; axis starts at zero.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Both observations use the same population, definition and unit</li><li>The size of each change matters more than the rank</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>More than two time points — use annotated-line or small-multiples</li><li>The second value is a target or forecast — mark it as such or use evidence-milestone-strip</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Every dot, connector and label is a native shape or text box (move, recolour, retype)</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Positions are computed from the fixture; changing a value means moving the shape or re-running the renderer — there is no Edit Data</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Endpoints are observations; the connector does not represent the path between them</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A three-column table (entity, first, second, change) when exact values are needed.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>magnitude-nonnegative</code> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>bounded-values</code></p>
+  <p class="refs"><strong>Design references:</strong> McKinsey, year in charts (8 Dec 2025): 2019 vs 2024 export ranking; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="slope" data-family="B" data-tier="native-shapes">
+  <a class="preview" href="previews/slope.png" aria-label="Enlarge Two-period slope chart"><img src="previews/slope.png" alt="Two-period slope chart with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">B2 · <code>slope</code> · gallery slide 7</p>
+    <h3>Two-period slope chart</h3>
+    <p class="question">How did each item move between two observations, and did any item change rank?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="slope">Compare Two-period slope chart</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 7</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Per-item change between two observations of one measure; line slope shows direction and relative movement, crossings show rank changes.</dd>
+    <dt>Question types</dt><dd>compare-two-observations, rank</dd>
+    <dt>Requires</dt><dd>single-measure, two-observations</dd>
+    <dt>Capacity</dt><dd>3–8 lines</dd>
+    <dt>Units</dt><dd>One unit and basis at both cut-offs; vertical position is linear in value between the lowest and highest value shown, with no zero baseline, and the slide says so.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Each item has a value at exactly two comparable cut-offs</li><li>Rank changes and direction matter more than exact differences</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>More than two observations exist — use annotated-line or small-multiples</li><li>The reader must compare exact magnitudes or gaps — use dumbbell on a zero-based axis</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Lines, end dots and labels as native shapes and text</li><li>Accent line colour and weight</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Line endpoints are drawn on a computed scale; values are not data-bound and there is no embedded workbook</li><li>End labels are separated vertically by a fixed minimum gap, so a label can sit slightly off its dot</li><li>Editing a value means moving the line end and rewriting its label</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>The vertical scale is not zero-based, so slopes compare direction, not proportional change</li><li>Up to eight lines before end labels crowd</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of item, first value, second value and change.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>single-highlight</code> <code>distinct-periods</code></p>
+  <p class="refs"><strong>Design references:</strong> McKinsey, year in charts (8 Dec 2025): 2019 vs 2024 export ranking; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-C"><h2>C. Time series</h2><div class="pattern-grid">
+<article class="pattern" id="annotated-line" data-family="C" data-tier="native-chart">
+  <a class="preview" href="previews/annotated-line.png" aria-label="Enlarge Annotated time series"><img src="previews/annotated-line.png" alt="Annotated time series with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">C1 · <code>annotated-line</code> · gallery slide 8</p>
+    <h3>Annotated time series</h3>
+    <p class="question">How did one measure move over time, and where do dated events fall on that path?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="annotated-line">Compare Annotated time series</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 8</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>One series over time with 1–3 dated events marked; sequence is shown, causation is not claimed.</dd>
+    <dt>Question types</dt><dd>trend, sequence</dd>
+    <dt>Requires</dt><dd>single-measure, time-axis, dated-events</dd>
+    <dt>Capacity</dt><dd>8–24 points (1–3 event markers)</dd>
+    <dt>Units</dt><dd>One unit throughout; the value axis range is explicit and stated in the subtitle when it is not zero-based.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>One measure is observed at regular intervals and a few dated events bear on its reading</li><li>The reader should see timing of events against the level of the series</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Several series must be compared — use indexed-lines or small-multiples</li><li>More than three events matter — use a timeline or milestone form</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Line chart with embedded workbook (Edit Data)</li><li>Axis range and line colour</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Event hairlines and labels are native shapes positioned from the plot geometry and the event date, not bound to the chart</li><li>First, last and lowest value labels are positioned text; changing the data requires moving them</li><li>Positions assume the chart's manual plot layout and explicit axis range are kept</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Event lines show timing only and do not establish cause</li><li>Event dates between observations are interpolated along the category axis</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A dated table of observations beside a dated event list.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>dates-ascending</code> <code>unique-labels</code> <code>bounded-values</code> <code>event-count</code> <code>axis-range</code> <code>event-in-range</code> <code>single-highlight</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="small-multiples" data-family="C" data-tier="native-chart">
+  <a class="preview" href="previews/small-multiples.png" aria-label="Enlarge Small multiples on a shared axis"><img src="previews/small-multiples.png" alt="Small multiples on a shared axis with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">C2 · <code>small-multiples</code> · gallery slide 9</p>
+    <h3>Small multiples on a shared axis</h3>
+    <p class="question">How do several items' paths over time compare when each gets its own panel?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="small-multiples">Compare Small multiples on a shared axis</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 9</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>The same measure over the same periods for 4–6 items, one panel each, on an identical value axis so slopes and levels compare directly.</dd>
+    <dt>Question types</dt><dd>trend, rank</dd>
+    <dt>Requires</dt><dd>single-measure, time-axis, several-series</dd>
+    <dt>Capacity</dt><dd>4–6 panels</dd>
+    <dt>Units</dt><dd>One unit throughout; identical axis minimum, maximum and tick step in every panel, stated in the subtitle.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Overlaid lines would tangle but the reader must still compare shapes and levels</li><li>All panels share one unit, period set and basis</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Only two or three series exist — use indexed-lines</li><li>Panels differ in unit or basis, which would force different axes</li></ul></section>
+    <section><h4>Editable</h4><ul><li>One native line chart per panel, each with an embedded workbook (Edit Data)</li><li>Panel titles and last-value labels as text</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>The shared axis is enforced by the renderer; after editing one panel's axis the others must be matched by hand</li><li>Panel titles and last-value labels are text boxes, not chart elements</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>A shared axis can flatten the smallest series</li><li>Six panels is the legible limit at slide size</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A matrix of item by period with the unit in the header.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>bounded-values</code> <code>aligned-series</code> <code>axis-range</code> <code>single-highlight</code></p>
+  <p class="refs"><strong>Design references:</strong> McKinsey, year in charts (8 Dec 2025): five aligned line panels; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="indexed-lines" data-family="C" data-tier="native-chart">
+  <a class="preview" href="previews/indexed-lines.png" aria-label="Enlarge Indexed lines, base = 100"><img src="previews/indexed-lines.png" alt="Indexed lines, base = 100 with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">C3 · <code>indexed-lines</code> · gallery slide 10</p>
+    <h3>Indexed lines, base = 100</h3>
+    <p class="question">How have series of different sizes changed relative to a common starting point?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="indexed-lines">Compare Indexed lines, base = 100</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 10</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Each series rebased to 100 at one stated base period, so relative change is comparable and level differences drop out.</dd>
+    <dt>Question types</dt><dd>trend, compare-two-observations</dd>
+    <dt>Requires</dt><dd>time-axis, several-series</dd>
+    <dt>Capacity</dt><dd>2–4 series (6–24 periods)</dd>
+    <dt>Units</dt><dd>Index points, base = 100 at the stated period; the base period and the raw unit are printed on the slide.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Series share a period set but differ greatly in level</li><li>Relative change since a stated base period is the question</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Absolute levels matter — use small-multiples or annotated-line</li><li>A series is zero or negative at the base period</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Line chart with embedded workbook holding the computed index (Edit Data)</li><li>Series colours</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>The workbook holds index values, not the raw values; changing raw data means recomputing the index</li><li>End labels and the base-100 reference line are positioned shapes and text, not chart elements</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>The choice of base period changes every line's shape</li><li>An index conveys relative change only and hides which series is larger</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of raw values and index values by period for each series.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>series-count</code> <code>base-period-valid</code> <code>base-positive</code> <code>aligned-series</code> <code>single-highlight</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-D"><h2>D. Composition</h2><div class="pattern-grid">
+<article class="pattern" id="stacked-bar" data-family="D" data-tier="native-chart">
+  <a class="preview" href="previews/stacked-bar.png" aria-label="Enlarge Stacked bar (absolute composition)"><img src="previews/stacked-bar.png" alt="Stacked bar (absolute composition) with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">D1 · <code>stacked-bar</code> · gallery slide 11</p>
+    <h3>Stacked bar (absolute composition)</h3>
+    <p class="question">How large is each total, and how is it divided among a few components of the same measure?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="stacked-bar">Compare Stacked bar (absolute composition)</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 11</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Part-to-whole in absolute units: components of one additive measure add to a stated total per bar.</dd>
+    <dt>Question types</dt><dd>composition</dd>
+    <dt>Requires</dt><dd>parts-of-whole, single-measure</dd>
+    <dt>Capacity</dt><dd>3–6 bars (up to 4 components each)</dd>
+    <dt>Units</dt><dd>One additive unit; the axis starts at zero and is hidden, with a bar-end total instead.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Components are the same measure and genuinely additive</li><li>The absolute size of each total matters as much as its mix</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Components are unlike instruments or statuses that must not be added — use status-separated-capital</li><li>Only the mix matters and totals differ widely — use percent-stacked</li><li>More than four components or six bars — use a table or ranked-bar</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Stacked bar chart with embedded workbook (Edit Data)</li><li>Segment colours and number format</li><li>Legend and frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Bar-end totals and the omitted-label note are positioned text computed from the fixture; editing chart data does not update them</li><li>Segment labels below the threshold are hidden by a number-format condition, not deleted</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Only the bottom component shares a baseline, so inner segments are hard to compare across bars</li><li>Narrow segments are unlabelled and must be read from the table alternative</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of rows by component with a total column, for exact lookup of every segment.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>aligned-series</code> <code>magnitude-nonnegative</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="percent-stacked" data-family="D" data-tier="native-chart">
+  <a class="preview" href="previews/percent-stacked.png" aria-label="Enlarge 100% stacked bar (relative composition)"><img src="previews/percent-stacked.png" alt="100% stacked bar (relative composition) with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">D2 · <code>percent-stacked</code> · gallery slide 12</p>
+    <h3>100% stacked bar (relative composition)</h3>
+    <p class="question">How does the mix of a measure differ across groups, and how large is each group's base?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="percent-stacked">Compare 100% stacked bar (relative composition)</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 12</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Part-to-whole as shares: each row sums to 100% of its own base, shown beside the bar.</dd>
+    <dt>Question types</dt><dd>composition</dd>
+    <dt>Requires</dt><dd>parts-of-whole, single-measure</dd>
+    <dt>Capacity</dt><dd>3–6 bars (up to 4 components each)</dd>
+    <dt>Units</dt><dd>Per cent of each row's own base; the axis is fixed at 0–100% and hidden.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>The mix matters more than the absolute total</li><li>Row bases differ and the reader needs to see by how much</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Absolute size is the point — use stacked-bar</li><li>Row shares do not sum to 100 and cannot be derived from counts</li></ul></section>
+    <section><h4>Editable</h4><ul><li>100% stacked bar chart with embedded workbook (Edit Data)</li><li>Segment colours and number format</li><li>Legend and frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Row bases (n) and the basis note are positioned text computed from the fixture</li><li>Labels below 7% are hidden by a number-format condition, not deleted</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Shares from small bases are volatile; the base is shown but not a confidence interval</li><li>Equal bar lengths can read as equal totals</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of counts and shares per row with the base in its own column.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>aligned-series</code> <code>magnitude-nonnegative</code> <code>sums-to-total</code> <code>base-stated</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="status-separated-capital" data-family="D" data-tier="native-shapes">
+  <a class="preview" href="previews/status-separated-capital.png" aria-label="Enlarge Status-separated capital panels"><img src="previews/status-separated-capital.png" alt="Status-separated capital panels with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">D3 · <code>status-separated-capital</code> · gallery slide 13</p>
+    <h3>Status-separated capital panels</h3>
+    <p class="question">How much money sits at each transaction status, and how much of it has actually become binding or moved?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="status-separated-capital">Compare Status-separated capital panels</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 13</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Amounts split by status in separate panels on one unit; a status is never added to another.</dd>
+    <dt>Question types</dt><dd>composition, state</dd>
+    <dt>Requires</dt><dd>status-stages, single-measure</dd>
+    <dt>Capacity</dt><dd>2–5 rows (3 to 5 status panels)</dd>
+    <dt>Units</dt><dd>One currency and unit; the scale is shared across panels and starts at zero. Nothing is added across panels.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Announced, authorized, binding and drawn amounts are all stated and must not be conflated</li><li>The reader needs to see where an amount stops progressing through the status taxonomy</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Statuses are not in the SMPT taxonomy</li><li>Amounts are in different currencies or on different bases — use parallel-basis-panels</li><li>A single total is requested — this pattern refuses to show one</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Bar shapes, labels, dashes and fills</li><li>Panel titles and legend</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Bar lengths are drawn on a computed scale; values are not data-bound and no workbook is embedded</li><li>Hollow dashed outlines mark statuses before binding</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>A later status is not a subset of an earlier one unless the source says so, so bars are not read as conversion rates</li><li>Only taxonomy statuses are drawn; stages beyond expenditure need a different exhibit</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of rows by status with blank cells for amounts not stated.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>controlled-vocabulary</code> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>aligned-series</code> <code>magnitude-nonnegative</code> <code>status-order</code> <code>no-cross-status-total</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-E"><h2>E. Reconciliation</h2><div class="pattern-grid">
+<article class="pattern" id="waterfall" data-family="E" data-tier="native-chart-with-helper-series">
+  <a class="preview" href="previews/waterfall.png" aria-label="Enlarge Reconciling waterfall bridge"><img src="previews/waterfall.png" alt="Reconciling waterfall bridge with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">E1 · <code>waterfall</code> · gallery slide 14</p>
+    <h3>Reconciling waterfall bridge</h3>
+    <p class="question">How did an opening balance become the closing balance, and which movements drove it?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="waterfall">Compare Reconciling waterfall bridge</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 14</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Additive reconciliation: opening + Σ movements = closing, on one consistent basis.</dd>
+    <dt>Question types</dt><dd>reconcile</dd>
+    <dt>Requires</dt><dd>additive-movements, single-measure</dd>
+    <dt>Capacity</dt><dd>2–8 movements</dd>
+    <dt>Units</dt><dd>One unit throughout; bars keep true geometry (no inflated small movements).</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart-with-helper-series</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Opening and closing balances share a basis and every movement is stated</li><li>The size and sign of each driver matters</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Movements do not reconcile or are on different bases — use parallel-basis-panels</li><li>Movements are scenario sensitivities rather than additive changes — use tornado</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Stacked bar chart with embedded workbook (Edit Data)</li><li>Increase, decrease and total colours</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>The unfilled 'helper' series holds each float; editing a movement requires recomputing the helper column</li><li>Connector hairlines between bars are native shapes positioned from the fixture</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Running balances must stay non-negative for the helper-series geometry</li><li>Movements are read in sequence; the order is a presentation choice, not causation</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A reconciliation table (line item, movement, running balance) for audit-grade lookup.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>bridge-reconciles</code> <code>bridge-levels-nonnegative</code> <code>max-categories</code> <code>unique-labels</code></p>
+  <p class="refs"><strong>Design references:</strong> Bain, Global Private Equity Report 2025, PDF p44, Figure 2: value-creation bridge; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="sources-and-uses" data-family="E" data-tier="native-chart">
+  <a class="preview" href="previews/sources-and-uses.png" aria-label="Enlarge Sources and uses"><img src="previews/sources-and-uses.png" alt="Sources and uses with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">E2 · <code>sources-and-uses</code> · gallery slide 15</p>
+    <h3>Sources and uses</h3>
+    <p class="question">Where does a financing package come from, and what does it pay for?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="sources-and-uses">Compare Sources and uses</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 15</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Two stacked columns that reconcile: Σ sources = Σ uses.</dd>
+    <dt>Question types</dt><dd>reconcile, composition</dd>
+    <dt>Requires</dt><dd>parts-of-whole</dd>
+    <dt>Capacity</dt><dd>2–8 components (≤4 per side)</dd>
+    <dt>Units</dt><dd>One currency and time basis for both sides.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A single package has stated sources and stated uses that total the same amount</li><li>The split between public, private and debt sources matters</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Sources and uses do not reconcile — show the gap explicitly or use parallel-basis-panels</li><li>Components mix committed and conditional capital — use status-separated-capital</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Stacked column chart with embedded workbook (Edit Data)</li><li>Component labels are native text boxes</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Side labels and totals are text boxes positioned from the fixture; update them if values change</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Does not show timing or conditions of each source</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A two-block table (sources with amounts, uses with amounts, matching totals).</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>magnitude-nonnegative</code> <code>totals-match</code> <code>max-categories</code> <code>unique-labels</code></p>
+  <p class="refs"><strong>Design references:</strong> Bain, Global Private Equity Report 2025, PDF p44, Figure 2: value-creation bridge; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="parallel-basis-panels" data-family="E" data-tier="native-chart">
+  <a class="preview" href="previews/parallel-basis-panels.png" aria-label="Enlarge Parallel panels for non-comparable bases"><img src="previews/parallel-basis-panels.png" alt="Parallel panels for non-comparable bases with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">E3 · <code>parallel-basis-panels</code> · gallery slide 16</p>
+    <h3>Parallel panels for non-comparable bases</h3>
+    <p class="question">How do the same subjects compare on bases that cannot share an axis or a total?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="parallel-basis-panels">Compare Parallel panels for non-comparable bases</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 16</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Side-by-side comparison across independent bases; each panel has its own zero-based axis and unit.</dd>
+    <dt>Question types</dt><dd>rank, compare-two-observations</dd>
+    <dt>Requires</dt><dd>non-comparable-bases</dd>
+    <dt>Capacity</dt><dd>3–6 bars per panel (2 or 3 panels)</dd>
+    <dt>Units</dt><dd>Each panel has its own unit and zero-based axis; no value is compared across panels.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Funding, capacity and counts describe the same subjects but cannot be added or indexed together</li><li>The reader should see that rankings differ by basis</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Two panels carry the same basis — they are one chart</li><li>A combined score or total is wanted; this pattern refuses to imply one</li></ul></section>
+    <section><h4>Editable</h4><ul><li>One bar chart per panel with embedded workbook (Edit Data)</li><li>Bar colours and number formats</li><li>Panel headings and frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Panel headings, unit lines and separator rules are text and shapes drawn from the fixture</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Bar lengths are not comparable between panels and a shared bar scale would mislead</li><li>Differing ranks do not explain why the bases differ</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A matrix of subjects by basis with the unit in each column heading.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>distinct-bases</code> <code>magnitude-nonnegative</code> <code>single-highlight</code></p>
+  <p class="refs"><strong>Design references:</strong> Strategy&amp;, Every Molecule (2018), p14, Exhibit 6: option comparisons; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-F"><h2>F. Sensitivity</h2><div class="pattern-grid">
+<article class="pattern" id="tornado" data-family="F" data-tier="native-chart">
+  <a class="preview" href="previews/tornado.png" aria-label="Enlarge Sensitivity tornado"><img src="previews/tornado.png" alt="Sensitivity tornado with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">F1 · <code>tornado</code> · gallery slide 17</p>
+    <h3>Sensitivity tornado</h3>
+    <p class="question">Which input assumptions move a model output most, and by how much either way?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="tornado">Compare Sensitivity tornado</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 17</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>One-at-a-time sensitivity: for each driver, the model's lowest and highest outcome around a base case, sorted by swing.</dd>
+    <dt>Question types</dt><dd>sensitivity</dd>
+    <dt>Requires</dt><dd>model-output, single-measure, intervals</dd>
+    <dt>Capacity</dt><dd>3–8 drivers</dd>
+    <dt>Units</dt><dd>One output unit; bars are deviations from the base case, centred on it, with outcome values at the ends.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A model output exists with a stated base case and a low and high outcome for each driver</li><li>The reader needs the ranking of drivers by influence, labelled as model output</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The figures are observed data rather than model output</li><li>Drivers interact strongly — one-at-a-time bars would mislead; show a sensitivity-grid for two drivers</li><li>Nothing in the record states the model's assumptions</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Stacked bar chart of deviations from base with embedded workbook (Edit Data)</li><li>Bar colours</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Chart series hold outcome minus base, not the outcomes themselves</li><li>Outcome values at bar ends, the base-case label and the model-output tag are positioned text and shapes computed from the fixture</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>One-at-a-time variation hides interactions between drivers</li><li>Bar length depends on the tested ranges chosen, which are assumptions</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of drivers with tested range, low outcome, high outcome and swing.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>interval-ordered</code> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="sensitivity-grid" data-family="F" data-tier="table">
+  <a class="preview" href="previews/sensitivity-grid.png" aria-label="Enlarge Two-way sensitivity grid"><img src="previews/sensitivity-grid.png" alt="Two-way sensitivity grid with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">F2 · <code>sensitivity-grid</code> · gallery slide 18</p>
+    <h3>Two-way sensitivity grid</h3>
+    <p class="question">How does a model output change when two drivers vary together, and where does it change sign or magnitude?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="sensitivity-grid">Compare Two-way sensitivity grid</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 18</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Two-way sensitivity: one model run per cell of a driver-A by driver-B grid, with the base case marked.</dd>
+    <dt>Question types</dt><dd>sensitivity</dd>
+    <dt>Requires</dt><dd>model-output, single-measure, conditions</dd>
+    <dt>Capacity</dt><dd>3–7 values per driver (3 to 7 rows by 3 to 7 columns)</dd>
+    <dt>Units</dt><dd>One output unit; shading is a relative ramp over the grid's own minimum and maximum, not an absolute scale.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">table</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Two drivers jointly determine a model output and exact cell values matter</li><li>The base case must remain visible inside the range of alternatives</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>More than two drivers need comparison — use tornado</li><li>Values are observed rather than model output</li><li>A continuous surface is claimed; the grid shows discrete runs only</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native PowerPoint table: values, fills, borders and fonts</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Cell shading is a static fill computed from the fixture; editing a value does not recolour it</li><li>The sequential key, base-case marker and model-output tag are positioned shapes and text</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Shading is relative to the grid's range, so two grids are not comparable by colour</li><li>Shows two drivers only; others are held at base values</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> The grid is itself a table; a plain unshaded copy serves screen-reader and export use.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>aligned-series</code> <code>base-in-grid</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-G"><h2>G. Relationship</h2><div class="pattern-grid">
+<article class="pattern" id="scatter" data-family="G" data-tier="native-chart">
+  <a class="preview" href="previews/scatter.png" aria-label="Enlarge Scatter plot"><img src="previews/scatter.png" alt="Scatter plot with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">G1 · <code>scatter</code> · gallery slide 19</p>
+    <h3>Scatter plot</h3>
+    <p class="question">Do two continuous measures move together across the items, and which items depart from the pattern?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="scatter">Compare Scatter plot</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 19</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Association between two continuous measures observed on the same items; no causal direction implied.</dd>
+    <dt>Question types</dt><dd>relationship</dd>
+    <dt>Requires</dt><dd>two-measures</dd>
+    <dt>Capacity</dt><dd>6–30 points</dd>
+    <dt>Units</dt><dd>Each axis states its own unit; axes are independent and not zero-based by rule, so ranges are declared explicitly.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Each item has two continuous measures on stated units</li><li>The shape of the cloud and the position of a few named items matter more than exact values</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>A third measure must be shown as size — use bubble</li><li>A decision threshold divides the items into groups — use threshold-scatter</li><li>The x measure is time — use a line chart</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native scatter chart with embedded workbook (Edit Data)</li><li>Marker colours and axis ranges</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Point labels are positioned text boxes computed from the fixture, not bound to the chart; they do not move if data is edited</li><li>Axis titles are text boxes</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Correlation is not causation; the exhibit shows association only</li><li>Labels for named points are positioned, so they need re-placing after a data edit</li><li>Dense overlap beyond about 30 points hides items</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A two-column table (item, x, y) for exact lookup.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>axis-explicit</code> <code>bounded-values</code> <code>labelled-points-limit</code> <code>single-accent</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="threshold-scatter" data-family="G" data-tier="native-chart">
+  <a class="preview" href="previews/threshold-scatter.png" aria-label="Enlarge Threshold scatter"><img src="previews/threshold-scatter.png" alt="Threshold scatter with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">G2 · <code>threshold-scatter</code> · gallery slide 20</p>
+    <h3>Threshold scatter</h3>
+    <p class="question">Which items fall beyond a stated reference value on one or both measures?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="threshold-scatter">Compare Threshold scatter</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 20</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Association between two measures read against one or two stated reference thresholds that divide the plane into quadrants.</dd>
+    <dt>Question types</dt><dd>relationship, state</dd>
+    <dt>Requires</dt><dd>two-measures, conditions</dd>
+    <dt>Capacity</dt><dd>6–30 points</dd>
+    <dt>Units</dt><dd>Each axis states its own unit; thresholds are expressed in the unit of their axis.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A source or analyst states a threshold on at least one measure and the reader needs to see who is beyond it</li><li>Quadrant membership is the message and exact values are secondary</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>No stated threshold exists; drawing one invents a criterion — use scatter</li><li>A third measure must also be encoded — use bubble</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native scatter chart with embedded workbook (Edit Data)</li><li>Marker colours and axis ranges</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Threshold lines, quadrant captions and point labels are positioned shapes and text computed from the fixture; they do not move if chart data or axis range is edited</li><li>The accent/neutral split is two series computed from the thresholds at build time</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Thresholds must be stated or sourced; an analyst-chosen cut-off is a presentation choice and is labelled as such</li><li>Items near a threshold look categorically different from items just across it</li><li>Correlation is not causation</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of items with a flag column stating which thresholds each item breaches.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>axis-explicit</code> <code>bounded-values</code> <code>threshold-present</code> <code>threshold-within-axis</code> <code>labelled-points-limit</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="bubble" data-family="G" data-tier="native-chart">
+  <a class="preview" href="previews/bubble.png" aria-label="Enlarge Bubble chart"><img src="previews/bubble.png" alt="Bubble chart with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">G3 · <code>bubble</code> · gallery slide 21</p>
+    <h3>Bubble chart</h3>
+    <p class="question">How do two measures relate across items, and which items carry the most of a third measure?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="bubble">Compare Bubble chart</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 21</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Association between two measures with a third, strictly positive magnitude encoded as bubble area.</dd>
+    <dt>Question types</dt><dd>relationship, rank</dd>
+    <dt>Requires</dt><dd>two-measures, third-measure</dd>
+    <dt>Capacity</dt><dd>3–12 bubbles</dd>
+    <dt>Units</dt><dd>Three independent units: x, y and the size measure, each stated on the slide.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A third positive magnitude adds context to a two-measure relationship</li><li>Few enough items that each bubble can be named</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The size values must be compared precisely — use a ranked bar or a table</li><li>Only two measures exist — use scatter</li><li>Sizes can be zero or negative</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native bubble chart with embedded workbook (Edit Data)</li><li>Bubble colours, transparency and axis ranges</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Bubble labels and axis titles are positioned text computed from the fixture</li><li>Size-legend reference circles are drawn shapes scaled to PowerPoint's default bubble size (largest bubble = 25% of the shorter plot side); the renderer may differ, so they are approximate</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Area perception is weak; readers misjudge ratios between bubbles, so exact sizes belong in a table or legend</li><li>Large bubbles can hide neighbours, which caps the item count</li><li>Correlation is not causation</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of items with x, y and size columns for exact comparison.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>axis-explicit</code> <code>bounded-values</code> <code>sizes-positive</code> <code>size-legend-two</code> <code>single-accent</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-H"><h2>H. Distribution and uncertainty</h2><div class="pattern-grid">
+<article class="pattern" id="strip-plot" data-family="H" data-tier="native-shapes">
+  <a class="preview" href="previews/strip-plot.png" aria-label="Enlarge Strip plot"><img src="previews/strip-plot.png" alt="Strip plot with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">H1 · <code>strip-plot</code> · gallery slide 22</p>
+    <h3>Strip plot</h3>
+    <p class="question">How are individual observations spread within each group, and where does each group's centre sit?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="strip-plot">Compare Strip plot</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 22</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Distribution of every observation per group on one shared axis, with a group median for orientation.</dd>
+    <dt>Question types</dt><dd>distribution, uncertainty</dd>
+    <dt>Requires</dt><dd>sample, single-measure</dd>
+    <dt>Capacity</dt><dd>2–8 groups</dd>
+    <dt>Units</dt><dd>One unit and one shared axis across all rows.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Each group has a modest number of observations that can all be shown</li><li>Spread, clusters and outliers matter as much as the centre</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Groups have hundreds of observations — use histogram or box-interval</li><li>Only a summary range is available — use box-interval or range-interval</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Dots, median ticks, gridlines and labels are native shapes and text</li><li>Colours and positions</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Dot positions are computed from the fixture and are not data-bound; there is no embedded workbook, so editing a value means moving its dot and relabelling the median</li><li>Vertical jitter is a deterministic function of rank, not a data value</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Vertical jitter has no meaning; only horizontal position is data</li><li>Medians from very small n are unstable and n is therefore printed on every row</li><li>Sample composition is not shown; unequal groups need caution</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of group, n, median, minimum and maximum, with the raw observations in an appendix.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>bounded-values</code> <code>axis-explicit</code> <code>min-observations</code> <code>max-observations</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="box-interval" data-family="H" data-tier="native-shapes">
+  <a class="preview" href="previews/box-interval.png" aria-label="Enlarge Box and interval summary"><img src="previews/box-interval.png" alt="Box and interval summary with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">H2 · <code>box-interval</code> · gallery slide 23</p>
+    <h3>Box and interval summary</h3>
+    <p class="question">How do the centre, middle half and full range of a measure compare across groups?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="box-interval">Compare Box and interval summary</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 23</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Five-number summary per group on one shared axis: minimum, first quartile, median, third quartile, maximum.</dd>
+    <dt>Question types</dt><dd>distribution, uncertainty</dd>
+    <dt>Requires</dt><dd>sample, intervals, single-measure</dd>
+    <dt>Capacity</dt><dd>2–8 groups</dd>
+    <dt>Units</dt><dd>One unit and one shared axis across all rows.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A source reports five-number summaries rather than raw observations</li><li>Groups have enough observations (at least 5) for quartiles to mean something</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Raw observations are few and available — use strip-plot</li><li>The shape of one distribution matters — use histogram</li><li>The audience is unlikely to read quartiles</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Whiskers, boxes, median lines, gridlines and labels are native shapes and text</li><li>Colours and positions</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>All five numbers per group are positioned from the fixture and are not data-bound; there is no embedded workbook, so editing a value means resizing the shapes and relabelling</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Quartiles from small n are unstable; n is printed on every row</li><li>Boxes hide multimodality and cannot show individual outliers</li><li>Whiskers here are the stated minimum and maximum, not a statistical fence</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of group, n, minimum, Q1, median, Q3 and maximum.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>axis-explicit</code> <code>interval-ordered</code> <code>bounded-values</code> <code>min-observations</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="histogram" data-family="H" data-tier="native-chart">
+  <a class="preview" href="previews/histogram.png" aria-label="Enlarge Histogram"><img src="previews/histogram.png" alt="Histogram with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">H3 · <code>histogram</code> · gallery slide 24</p>
+    <h3>Histogram</h3>
+    <p class="question">How is one measure distributed across many items, and where does a reference value fall in it?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="histogram">Compare Histogram</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 24</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Frequency of one continuous measure in contiguous, equal-width bins.</dd>
+    <dt>Question types</dt><dd>distribution</dd>
+    <dt>Requires</dt><dd>sample, single-measure</dd>
+    <dt>Capacity</dt><dd>5–16 bins</dd>
+    <dt>Units</dt><dd>x axis in the measure's unit with one stated bin width; y axis is a count starting at zero.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-chart</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>One measure is observed on many items and the overall shape matters</li><li>A reference value is to be located within the distribution</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Groups are to be compared — use box-interval or strip-plot</li><li>Items must be identified individually — use ranked-dot or ranked-bar</li><li>Fewer than about 30 observations, where bin shape is unstable</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native column chart with embedded workbook (Edit Data) for the counts</li><li>Column colour, gap and value labels</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Bin-edge labels, axis titles and the reference line are positioned from the fixture and do not move if bins are edited</li><li>Category names in the workbook are bin ranges; the visible edge labels are separate text boxes</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Bin width and edge convention change the visual shape; both are stated</li><li>Equal-width bins only, so column height equals frequency</li><li>Reference line is positioned and does not follow data edits</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A frequency table of bin ranges and counts.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>bins-contiguous</code> <code>min-categories</code> <code>max-categories</code> <code>counts-nonnegative</code> <code>counts-whole</code> <code>bins-equal-width</code> <code>threshold-within-axis</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-I"><h2>I. Time and sequence</h2><div class="pattern-grid">
+<article class="pattern" id="two-lane-timeline" data-family="I" data-tier="native-shapes">
+  <a class="preview" href="previews/two-lane-timeline.png" aria-label="Enlarge Two-lane dated timeline"><img src="previews/two-lane-timeline.png" alt="Two-lane dated timeline with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">I1 · <code>two-lane-timeline</code> · gallery slide 25</p>
+    <h3>Two-lane dated timeline</h3>
+    <p class="question">In what order did two jurisdictions announce, enact and implement their measures?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="two-lane-timeline">Compare Two-lane dated timeline</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 25</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Dated events from two parallel tracks placed on one date axis; marker style separates announcement, effective and implementation dates.</dd>
+    <dt>Question types</dt><dd>sequence</dd>
+    <dt>Requires</dt><dd>dated-events, parallel-tracks, time-axis</dd>
+    <dt>Capacity</dt><dd>4–14 dated events across both lanes</dd>
+    <dt>Units</dt><dd>Calendar dates on a linear day-count scale spanning whole calendar years.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Two jurisdictions' measures need to be read against the same calendar</li><li>The gap between announcement, effective and implementation dates matters</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>More than two tracks must be compared — use swimlane</li><li>Events carry different evidence states rather than date types — use evidence-milestone-strip</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Markers, stems, axis band and labels as native shapes and text boxes</li><li>Lane and event wording</li><li>Colours and marker styles</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Dates are positioned from the fixture at build time; moving an event requires dragging its marker, stem and label together</li><li>There is no embedded workbook</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Shared dates do not imply causation or response between lanes</li><li>Label stagger is limited to three levels per lane; dense clusters need the swimlane or a table</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A dated event table with lane, measure, date type and date.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>dates-ascending</code> <code>unique-labels</code> <code>min-categories</code> <code>max-categories</code> <code>lane-count</code> <code>label-length</code> <code>label-stagger</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="swimlane" data-family="I" data-tier="native-shapes">
+  <a class="preview" href="previews/swimlane.png" aria-label="Enlarge Swimlane schedule"><img src="previews/swimlane.png" alt="Swimlane schedule with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">I2 · <code>swimlane</code> · gallery slide 26</p>
+    <h3>Swimlane schedule</h3>
+    <p class="question">When does each actor's or instrument's activity run, and where do periods and point events fall against the calendar?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="swimlane">Compare Swimlane schedule</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 26</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Dated periods and point events grouped by lane on one quarterly date axis; planned periods are hollow and dashed.</dd>
+    <dt>Question types</dt><dd>sequence</dd>
+    <dt>Requires</dt><dd>dated-events, parallel-tracks, intervals, time-axis</dd>
+    <dt>Capacity</dt><dd>3–6 lanes</dd>
+    <dt>Units</dt><dd>Calendar dates on a linear day-count scale snapped to whole quarters; quarter gridlines.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Three to six actors or instruments each have periods and point events to place on one calendar</li><li>Overlap between lanes matters more than exact event counts</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Only two tracks are compared — use two-lane-timeline</li><li>The question is elapsed time between two stages per item — use duration-bars</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Bars, diamonds, gridlines, headers and labels as native shapes and text boxes</li><li>Colours, dash styles and wording</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Dates are positioned from the fixture at build time; resizing a bar does not update any data</li><li>There is no embedded workbook</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Periods within a lane may not overlap and labels sit below the marks, so dense lanes need splitting</li><li>Overlap in time between lanes does not show interaction or causation</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A schedule table (lane, item, type, start, end) for exact dates.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>single-highlight</code> <code>interval-ordered</code> <code>label-length</code> <code>lane-overlap</code> <code>label-overlap</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="evidence-milestone-strip" data-family="I" data-tier="native-shapes">
+  <a class="preview" href="previews/evidence-milestone-strip.png" aria-label="Enlarge Evidence-state milestone strip"><img src="previews/evidence-milestone-strip.png" alt="Evidence-state milestone strip with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">I3 · <code>evidence-milestone-strip</code> · gallery slide 27</p>
+    <h3>Evidence-state milestone strip</h3>
+    <p class="question">Which milestones have actually been evidenced, and which remain announced or targeted?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="evidence-milestone-strip">Compare Evidence-state milestone strip</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 27</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>One dated sequence of milestones; marker style encodes each milestone's evidence state (announced, targeted, reported, independently verified).</dd>
+    <dt>Question types</dt><dd>sequence, state</dd>
+    <dt>Requires</dt><dd>dated-events, states, time-axis</dd>
+    <dt>Capacity</dt><dd>4–8 milestones</dd>
+    <dt>Units</dt><dd>Calendar dates on a linear day-count scale spanning whole calendar years.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A single project or programme has milestones whose evidence quality differs</li><li>A reader should not mistake a target or announcement for an observed outcome</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Stages of a formal process are the point — use stage-ladder</li><li>Several actors have parallel schedules — use swimlane</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Markers, stems, spine and labels as native shapes and text boxes</li><li>Milestone wording and state text</li><li>Marker colours and dash styles</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Dates are positioned from the fixture at build time; changing a state means restyling its marker by hand</li><li>There is no embedded workbook</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>The accent marks at most one independently verified milestone; more would break the single-highlight rule</li><li>Evidence state describes the milestone's support, not its importance or whether the target was met</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A milestone table (date, milestone, evidence state, source) for audit-grade lookup.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>controlled-vocabulary</code> <code>dates-ascending</code> <code>unique-labels</code> <code>label-length</code> <code>single-highlight</code> <code>label-overlap</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="stage-ladder" data-family="I" data-tier="native-shapes">
+  <a class="preview" href="previews/stage-ladder.png" aria-label="Enlarge Process stage ladder"><img src="previews/stage-ladder.png" alt="Process stage ladder with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">I4 · <code>stage-ladder</code> · gallery slide 28</p>
+    <h3>Process stage ladder</h3>
+    <p class="question">How far has a measure progressed through its ordered process, and when was each stage reached?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="stage-ladder">Compare Process stage ladder</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 28</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Ordered stages of one process as rising steps; each shows the date reached or is hollow and dashed when not yet reached.</dd>
+    <dt>Question types</dt><dd>sequence, state</dd>
+    <dt>Requires</dt><dd>status-stages, dated-events, states</dd>
+    <dt>Capacity</dt><dd>4–6 process stages</dd>
+    <dt>Units</dt><dd>Ordinal stages; dates are labels, not positions.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A single measure moves through a fixed order of stages (proposal, consultation, adoption, entry into force, implementation)</li><li>The reader needs to see which stages have and have not been reached</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Stages can be reached out of order or skipped — use evidence-milestone-strip or a table</li><li>Several measures are compared — use duration-bars or a status matrix</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Steps and text as native shapes and text boxes</li><li>Stage names, dates and fills</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Step heights encode order only, not elapsed time; they are positioned from the fixture at build time and are not data-bound</li><li>There is no embedded workbook</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Equal step widths do not represent elapsed time between stages; use duration-bars for that</li><li>A stage without a date is treated as not reached, never as skipped</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A stage table (stage, status, date reached) for exact dates and sources.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>dates-ascending</code> <code>label-length</code> <code>reached-after-as-of</code> <code>stage-order</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="duration-bars" data-family="I" data-tier="native-shapes">
+  <a class="preview" href="previews/duration-bars.png" aria-label="Enlarge Elapsed-time duration bars"><img src="previews/duration-bars.png" alt="Elapsed-time duration bars with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">I5 · <code>duration-bars</code> · gallery slide 29</p>
+    <h3>Elapsed-time duration bars</h3>
+    <p class="question">How long did each item take to get from one dated stage to the next?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="duration-bars">Compare Elapsed-time duration bars</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 29</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Elapsed days between the same two dated stages for each item, as zero-based bars sorted by duration.</dd>
+    <dt>Question types</dt><dd>sequence, compare-two-observations</dd>
+    <dt>Requires</dt><dd>durations, dated-events, single-measure</dd>
+    <dt>Capacity</dt><dd>3–10 items</dd>
+    <dt>Units</dt><dd>Calendar days between the two stages; months shown as days ÷ 30.4375 for reading only.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Every item has the same two dated stages, such as announcement and effective date</li><li>The lag between stages matters more than the calendar position</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Calendar position and overlap matter — use swimlane</li><li>Items have different stage pairs — the bars would not share a basis; use a table</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Bars, baseline, gridline and labels as native shapes and text boxes</li><li>Item names, dates and colours</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Bar lengths are computed from the fixture at build time; editing a date does not resize its bar</li><li>There is no embedded workbook</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Elapsed time does not show which stage was delayed, or whether a delay was intended</li><li>Bars share one zero-based axis only if every item measures the same pair of stages</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A table of item, from date, to date and elapsed days.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>interval-ordered</code> <code>label-length</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-J"><h2>J. Structure and flow</h2><div class="pattern-grid">
+<article class="pattern" id="state-diagram" data-family="J" data-tier="native-shapes">
+  <a class="preview" href="previews/state-diagram.png" aria-label="Enlarge Instrument state diagram"><img src="previews/state-diagram.png" alt="Instrument state diagram with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">J1 · <code>state-diagram</code> · gallery slide 30</p>
+    <h3>Instrument state diagram</h3>
+    <p class="question">Which legal or administrative states can this instrument occupy, which one is current, and which transitions are permitted?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="state-diagram">Compare Instrument state diagram</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 30</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Discrete states of one instrument linked by labelled, directed transitions; one state is current.</dd>
+    <dt>Question types</dt><dd>state</dd>
+    <dt>Requires</dt><dd>states, edges</dd>
+    <dt>Capacity</dt><dd>3–6 states</dd>
+    <dt>Units</dt><dd>No quantities; the only date is the as-of date of the current state.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>The reader needs to know what can happen next to an instrument, not when it happened</li><li>Transitions have a named trigger such as a vote, a date or an order</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The order and dates of events are the point — use a timeline</li><li>Quantities move between the states — use conversion-flow</li></ul></section>
+    <section><h4>Editable</h4><ul><li>State boxes, arrows and trigger labels as native shapes and text</li><li>Fill and outline of each state</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>States and transitions are drawn shapes; editing the fixture and re-running the build is the way to change structure</li><li>Arrow geometry is computed and not connected to the boxes as PowerPoint connectors</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Up to six states in two rows; larger lifecycles need a table or a split into two exhibits</li><li>Only transitions between adjacent rows or neighbours are routed; the layout order is chosen by the author</li><li>The diagram shows permitted transitions, not how often or when they occur</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A transition table (from state, to state, trigger).</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>edges-resolve</code> <code>current-state-resolves</code> <code>no-duplicate-edges</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="condition-tree" data-family="J" data-tier="native-shapes">
+  <a class="preview" href="previews/condition-tree.png" aria-label="Enlarge Condition tree"><img src="previews/condition-tree.png" alt="Condition tree with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">J2 · <code>condition-tree</code> · gallery slide 31</p>
+    <h3>Condition tree</h3>
+    <p class="question">Which sequence of conditions leads to each outcome, and where does a given case end up?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="condition-tree">Compare Condition tree</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 31</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Hierarchical decision structure: condition nodes with named branches terminating in outcomes.</dd>
+    <dt>Question types</dt><dd>decision</dd>
+    <dt>Requires</dt><dd>conditions, edges</dd>
+    <dt>Capacity</dt><dd>3–9 outcomes (depth at most 4)</dd>
+    <dt>Units</dt><dd>No quantities; branch labels are answers such as Yes and No.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Eligibility or applicability is decided by successive tests</li><li>Each test has a small set of named answers and every answer ends in an outcome</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Several criteria are weighed together rather than in sequence — use criterion-matrix</li><li>Conditions can combine in any order — use a table of rules</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Condition and outcome boxes, elbow lines and branch labels as native shapes and text</li><li>Route highlight colour</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>The tree is drawn shapes with computed positions, not a SmartArt or data-bound object</li><li>Elbow lines are separate segments, not PowerPoint connectors</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Depth is capped at four tests and nine outcomes</li><li>Branch labels must be short; long answers belong in the node text</li><li>A node reached by two branches is not a tree and is rejected</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A rules table (route, conditions met, outcome).</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>unique-labels</code> <code>edges-resolve</code> <code>tree-structure</code> <code>min-categories</code> <code>max-categories</code> <code>branches-complete</code> <code>outcome-terminal</code> <code>max-depth</code> <code>highlight-resolves</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="value-chain-measured" data-family="J" data-tier="native-shapes">
+  <a class="preview" href="previews/value-chain-measured.png" aria-label="Enlarge Measured value chain"><img src="previews/value-chain-measured.png" alt="Measured value chain with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">J3 · <code>value-chain-measured</code> · gallery slide 32</p>
+    <h3>Measured value chain</h3>
+    <p class="question">Where along the value chain does a quantity exist in the evidence, and where is it not measured?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="value-chain-measured">Compare Measured value chain</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 32</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Ordered stages, each with at most one measured quantity on a shared zero-based scale and one unit.</dd>
+    <dt>Question types</dt><dd>flow, sequence</dd>
+    <dt>Requires</dt><dd>single-measure, status-stages</dd>
+    <dt>Capacity</dt><dd>4–8 stages</dd>
+    <dt>Units</dt><dd>One unit across stages; bars start at zero on one scale. Differences between stages are not losses unless the source says so.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>The stage sequence is fixed and one quantity is reported at some stages</li><li>Missing measurements are themselves part of the message</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Stage quantities must reconcile as in, out and loss — use conversion-flow</li><li>Stages are on different bases or units — use parallel-basis-panels</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Chevrons, bars and value labels as native shapes and text</li><li>Bar fill and highlight</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Bar heights are computed from the fixture and are not data-bound; editing a value means resizing the bar and its label</li><li>No embedded workbook</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>One quantity per stage; a second measure needs its own panel</li><li>Adjacent stage values are not a conversion: definitions of the stages may differ</li><li>Up to eight stages across the slide width</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A stage table with the quantity, unit and a measured/not measured flag.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>magnitude-nonnegative</code> <code>stages-ordered</code> <code>measured-minimum</code> <code>highlight-resolves</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="conversion-flow" data-family="J" data-tier="native-shapes">
+  <a class="preview" href="previews/conversion-flow.png" aria-label="Enlarge Quantified conversion flow"><img src="previews/conversion-flow.png" alt="Quantified conversion flow with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">J4 · <code>conversion-flow</code> · gallery slide 33</p>
+    <h3>Quantified conversion flow</h3>
+    <p class="question">How much of the input quantity survives each conversion step, and where is it lost?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="conversion-flow">Compare Quantified conversion flow</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 33</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Stepwise conversion on one unit: each step's input equals its output plus its loss; heights are proportional to quantity.</dd>
+    <dt>Question types</dt><dd>flow, reconcile</dd>
+    <dt>Requires</dt><dd>quantified-flows, additive-movements, single-measure</dd>
+    <dt>Capacity</dt><dd>2–5 conversion steps</dd>
+    <dt>Units</dt><dd>One unit; rectangle height is proportional to quantity from zero. Loss percentages use the step's own input.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Every step reports both its output and its loss on one unit</li><li>The honest alternative to a Sankey when the flows are actually quantified</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Losses or outputs are not reported — use value-chain-measured</li><li>Flows branch to several destinations — use a table or sources-and-uses</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Column rectangles, carried bands and loss stubs as native shapes and text</li><li>Accent on the final output</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Heights are computed from the fixture and are not data-bound; editing a quantity means resizing the shapes and labels</li><li>No embedded workbook</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Linear chain only; no branching or recycling</li><li>Up to five steps across the slide width</li><li>Small losses draw as thin stubs; the printed value carries the precision</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A step table with input, output, loss and loss share.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>magnitude-nonnegative</code> <code>bridge-reconciles</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="dependency-network" data-family="J" data-tier="native-shapes">
+  <a class="preview" href="previews/dependency-network.png" aria-label="Enlarge Dependency network"><img src="previews/dependency-network.png" alt="Dependency network with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">J5 · <code>dependency-network</code> · gallery slide 34</p>
+    <h3>Dependency network</h3>
+    <p class="question">Which organisations, projects and programmes depend on which, and what is the path between two of them?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="dependency-network">Compare Dependency network</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 34</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Directed acyclic network laid out in computed layers; edges are declared dependencies, one path is highlighted.</dd>
+    <dt>Question types</dt><dd>relationship, flow</dd>
+    <dt>Requires</dt><dd>edges</dd>
+    <dt>Capacity</dt><dd>4–12 nodes (at most 20 edges)</dd>
+    <dt>Units</dt><dd>No quantities; edges carry no weight.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Declared links between named entities explain an exposure or a chain of supply or funding</li><li>One path carries the message</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Link sizes matter — use conversion-flow or sources-and-uses</li><li>The graph has cycles or hundreds of nodes — use a table of links</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Node boxes, arrows and labels as native shapes and text</li><li>Highlighted path colour</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Nodes and edges are drawn shapes at computed positions; arrows are not PowerPoint connectors and do not follow moved boxes</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Edges must join adjacent layers; add the intermediate node otherwise</li><li>Layout is a deterministic heuristic and may not minimise crossings for dense graphs</li><li>A drawn link is a declared dependency, not evidence of its size or importance</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> An edge list (source, target, relationship).</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>controlled-vocabulary</code> <code>edges-resolve</code> <code>no-duplicate-edges</code> <code>path-follows-edges</code> <code>no-cycles</code> <code>edges-adjacent-layers</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="counterparty-map" data-family="J" data-tier="native-shapes">
+  <a class="preview" href="previews/counterparty-map.png" aria-label="Enlarge Counterparty map"><img src="previews/counterparty-map.png" alt="Counterparty map with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">J6 · <code>counterparty-map</code> · gallery slide 35</p>
+    <h3>Counterparty map</h3>
+    <p class="question">Which counterparties hold distinct roles around one focal project?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="counterparty-map">Compare Counterparty map</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 35</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>An unweighted ego network: equal spokes link named counterparties to a focal entity. Angular order and distance carry no measure.</dd>
+    <dt>Question types</dt><dd>relationship</dd>
+    <dt>Requires</dt><dd>edges</dd>
+    <dt>Capacity</dt><dd>4–8 counterparties around one hub</dd>
+    <dt>Units</dt><dd>No quantities. Spokes have equal weight. Radius and angle have no analytical meaning.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">native-shapes</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A single project is the common point of exposure across several contractual roles</li><li>The question concerns counterparties and roles rather than sequences or quantities</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Amounts, direction or links among counterparties matter</li><li>Several hubs must be compared — use a role-matrix or edge list</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Hub, unweighted spokes, counterparty names and roles</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Positioned shapes and lines; moving a label does not reconnect its spoke</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Relationships are asserted by the input; the diagram does not independently verify them</li><li>No direction, flow, size, influence or hierarchy is encoded</li><li>Radial order is only for layout and is not a ranking</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> An entity–role table with one row per counterparty.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>label-length</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+<section class="family" id="family-K"><h2>K. Lookup and decision</h2><div class="pattern-grid">
+<article class="pattern" id="criterion-matrix" data-family="K" data-tier="table">
+  <a class="preview" href="previews/criterion-matrix.png" aria-label="Enlarge Criterion matrix"><img src="previews/criterion-matrix.png" alt="Criterion matrix with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">K1 · <code>criterion-matrix</code> · gallery slide 36</p>
+    <h3>Criterion matrix</h3>
+    <p class="question">Which options meet which stated criteria, and where is the evidence silent?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="criterion-matrix">Compare Criterion matrix</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 36</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Categorical assessment of each option against each criterion; no aggregation across criteria.</dd>
+    <dt>Question types</dt><dd>lookup, decision</dd>
+    <dt>Requires</dt><dd>criteria</dd>
+    <dt>Capacity</dt><dd>2–7 criteria rows (2 to 4 options)</dd>
+    <dt>Units</dt><dd>No units: categorical marks only. Weights, scores and totals are rejected.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">table</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>Each cell can be graded Meets, Partly, Does not or Not stated from a cited source</li><li>The reader needs to see evidential gaps next to failures</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>A weighted total or ranking is wanted — the tracker has no synthetic scores; use ranked-bar on a sourced measure</li><li>Criteria are quantities on a shared unit — use a native table or bar chart</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native table: labels, marks, fills</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>The circle glyphs (filled, half, hollow, dashed) are native shapes positioned over the mark cells from fixed row heights; changing a mark in the table does not move or redraw its glyph</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Four fixed marks; finer grading would imply a scale the sources do not support</li><li>Marks assert nothing beyond the cited statement; they do not combine into an overall verdict</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> The native table itself, with the glyph column removed and marks as text.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>no-numeric-score</code> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>aligned-series</code> <code>cell-length</code> <code>accent-resolves</code></p>
+  <p class="refs"><strong>Design references:</strong> Strategy&amp;, Every Molecule (2018), p14, Exhibit 6: option comparisons; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="role-matrix" data-family="K" data-tier="table">
+  <a class="preview" href="previews/role-matrix.png" aria-label="Enlarge Role matrix"><img src="previews/role-matrix.png" alt="Role matrix with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">K2 · <code>role-matrix</code> · gallery slide 37</p>
+    <h3>Role matrix</h3>
+    <p class="question">Which organisation plays which role, without implying how much money each provides?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="role-matrix">Compare Role matrix</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 37</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Membership of organisations in roles; each mark is a recorded role, optionally qualified, never a quantity.</dd>
+    <dt>Question types</dt><dd>lookup, state</dd>
+    <dt>Requires</dt><dd>states</dd>
+    <dt>Capacity</dt><dd>3–8 organisation rows (2 to 5 roles)</dd>
+    <dt>Units</dt><dd>No units. The count row totals organisations per role, never money.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">table</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>The reader needs to see roles and overlaps across organisations before any amounts</li><li>Roles are sourced facts that can be stated in a few words</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The question is how much each party provides — use sources-and-uses or a flow pattern on one stated basis</li><li>Parties are linked by edges rather than shared roles — use a network or sankey pattern</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native table: labels, qualifiers, count row, fills</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>The role circles are native shapes positioned over the cells from fixed row heights; the count row is typed table text, not a formula</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>A mark records a role, not its size or duration</li><li>Eight organisations is the legible limit on one slide</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> A two-column table of organisation and comma-separated roles.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>aligned-series</code> <code>role-held</code> <code>cell-length</code> <code>no-amounts-in-roles</code></p>
+  <p class="refs"><strong>Design references:</strong> Strategy&amp;, Every Molecule (2018), p13, Exhibit 5: value-chain network; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="option-profile" data-family="K" data-tier="table">
+  <a class="preview" href="previews/option-profile.png" aria-label="Enlarge Option profile"><img src="previews/option-profile.png" alt="Option profile with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">K3 · <code>option-profile</code> · gallery slide 38</p>
+    <h3>Option profile</h3>
+    <p class="question">How do two to four options differ on the same five facts?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="option-profile">Compare Option profile</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 38</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Side-by-side description of options on a fixed set of structured fields; no scoring.</dd>
+    <dt>Question types</dt><dd>decision, lookup</dd>
+    <dt>Requires</dt><dd>conditions</dd>
+    <dt>Capacity</dt><dd>2–4 option columns</dd>
+    <dt>Units</dt><dd>No quantities. Dates are ISO and shown verbatim.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">table</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>A small set of options is compared on instrument, status, timing, conditions and open questions</li><li>Every cell can be stated in under about 60 characters</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>Options need grading against criteria — use criterion-matrix</li><li>Facts are long-form or differ by option — write a source dossier instead</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native table: every cell, fills, column widths</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><p class="none">None</p></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Character limits keep every row on a fixed height</li><li>Facts are as stated by the source; the table does not rank options</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> The pattern is itself the table; for four-plus options use a long-format table with one row per option.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>controlled-vocabulary</code> <code>interval-ordered</code> <code>cell-length</code></p>
+  <p class="refs"><strong>Design references:</strong> Strategy&amp;, Every Molecule (2018), p14, Exhibit 6: option comparisons; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="exhibit-with-interpretation" data-family="K" data-tier="table">
+  <a class="preview" href="previews/exhibit-with-interpretation.png" aria-label="Enlarge Exhibit with interpretation"><img src="previews/exhibit-with-interpretation.png" alt="Exhibit with interpretation with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">K4 · <code>exhibit-with-interpretation</code> · gallery slide 39</p>
+    <h3>Exhibit with interpretation</h3>
+    <p class="question">What are the key figures, and which row supports each interpretive point?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="exhibit-with-interpretation">Compare Exhibit with interpretation</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 39</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>A compact figures table paired with numbered notes; each note cites a table row.</dd>
+    <dt>Question types</dt><dd>lookup, decision</dd>
+    <dt>Requires</dt><dd>exact-values</dd>
+    <dt>Capacity</dt><dd>2–6 table rows (1 to 2 value columns, 2 to 4 notes)</dd>
+    <dt>Units</dt><dd>One unit and one date basis for all rows; numbers right-aligned and formatted with the shared grammar.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">table</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>The reader needs exact figures and a short, evidenced reading of them on one slide</li><li>Each interpretive point can be tied to a single row</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The shape of the data matters more than exact values — use a chart family pattern</li><li>The interpretation spans many rows or needs argument — use the frame interpretation panel or a separate slide</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native table: figures, labels, fills</li><li>Interpretation notes as text boxes</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><ul><li>Note badges (numbered circles) are text shapes; they do not update if table rows are re-ordered</li></ul></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>Notes are limited to four and 130 characters each to stay beside the table</li><li>Numbered references are typed, not linked</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> The table alone, with notes moved to the frame interpretation panel.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>aligned-series</code> <code>reference-resolves</code> <code>cell-length</code></p>
+  <p class="refs"><strong>Design references:</strong> BCG and SIA (Nov 2022), PDF p16, Exhibit 6: zero-based labelled bars; SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article>
+<article class="pattern" id="location-table" data-family="K" data-tier="table">
+  <a class="preview" href="previews/location-table.png" aria-label="Enlarge Location table"><img src="previews/location-table.png" alt="Location table with synthetic demonstration data" loading="lazy" width="960" height="540"></a>
+  <header>
+    <p class="code">K5 · <code>location-table</code> · gallery slide 40</p>
+    <h3>Location table</h3>
+    <p class="question">Which sites sit in which jurisdiction, at what stage and status, with what stated capacity?</p>
+  </header>
+  <div class="actions"><label><input type="checkbox" data-compare="location-table">Compare Location table</label><a href="../exhibit-gallery.pptx" download>Editable PPTX · slide 40</a></div>
+  <dl>
+    <dt>Relationship</dt><dd>Sites grouped by jurisdiction; stage, status and capacity are attributes, not positions.</dd>
+    <dt>Question types</dt><dd>lookup, state</dd>
+    <dt>Requires</dt><dd>locations, status-stages</dd>
+    <dt>Capacity</dt><dd>3–10 sites (up to 4 jurisdiction groups)</dd>
+    <dt>Units</dt><dd>Each row carries its own capacity unit; no total is computed or shown.</dd>
+    <dt>Editability tier</dt><dd><span class="tier">table</span></dd>
+  </dl>
+  <details><summary>Use, limits and editability</summary>
+  <div class="cols">
+    <section><h4>Use when</h4><ul><li>The reader needs to find a site and read its status, and no claim depends on geographic distance</li><li>Capacity is stated per site in its own unit</li></ul></section>
+    <section><h4>Avoid when</h4><ul><li>The point is spatial clustering or proximity and the source supplies sound coordinates — commission a real map</li><li>Capacity must be summed across units — it cannot be; use a single-unit chart</li></ul></section>
+    <section><h4>Editable</h4><ul><li>Native table: rows, group header rows, status text, fills</li><li>Frame text</li></ul></section>
+    <section><h4>Positioned, not data-bound</h4><p class="none">None</p></section>
+    <section><h4>Raster elements</h4><p class="none">None</p></section>
+    <section><h4>Limitations</h4><ul><li>No coordinates or distances</li><li>Ten sites is the legible limit on one slide</li></ul></section>
+  </div>
+  <p class="alt"><strong>Table alternative:</strong> The pattern is itself the table.</p>
+  <p class="refs"><strong>Integrity rules:</strong> <code>min-categories</code> <code>max-categories</code> <code>unique-labels</code> <code>controlled-vocabulary</code> <code>sorted-order</code> <code>magnitude-nonnegative</code> <code>cell-length</code></p>
+  <p class="refs"><strong>Design references:</strong> SMPT original repertoire examples (examples/05-visual-repertoire.svg)</p>
+</details>
+</article></div></section>
+</main>
+<dialog id="preview-dialog" aria-labelledby="preview-title"><div class="dialog-header"><h2 id="preview-title">Pattern preview · synthetic demonstration</h2><button id="close-preview" type="button" autofocus>Close preview</button></div><div id="preview-contents"></div></dialog>
+<script>// Progressive enhancement: the full reference and PNG links work without JS.
+(() => {
+  const cards = [...document.querySelectorAll('.pattern')];
+  const search = document.querySelector('#search');
+  const family = document.querySelector('#family');
+  const tier = document.querySelector('#tier');
+  const count = document.querySelector('#result-count');
+  const selection = new Set();
+  const compare = document.querySelector('#compare');
+  const dialog = document.querySelector('#preview-dialog');
+  const contents = document.querySelector('#preview-contents');
+  const params = new URLSearchParams(location.search);
+  for (const input of [search, family, tier]) {
+    const value = params.get(input.id);
+    if (value) input.value = value;
+  }
+  function filter() {
+    const terms = search.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+    let visible = 0;
+    for (const card of cards) {
+      const text = card.textContent.toLocaleLowerCase();
+      card.hidden = !terms.every((t) => text.includes(t)) || (family.value && card.dataset.family !== family.value) || (tier.value && card.dataset.tier !== tier.value);
+      if (!card.hidden) visible++;
+    }
+    document.querySelectorAll('.family').forEach((section) => {
+      section.hidden = ![...section.querySelectorAll('.pattern')].some((card) => !card.hidden);
+    });
+    count.textContent = visible + ' of ' + cards.length + ' patterns';
+    document.querySelector('#empty').hidden = visible !== 0;
+    const query = new URLSearchParams();
+    for (const input of [search, family, tier]) if (input.value) query.set(input.id, input.value);
+    try { history.replaceState(null, '', location.pathname + (query.size ? '?' + query : '') + location.hash); } catch { /* file:// may disallow history updates */ }
+  }
+  for (const input of [search, family, tier]) input.addEventListener('input', filter);
+  document.querySelector('#reset').addEventListener('click', () => { search.value = family.value = tier.value = ''; filter(); search.focus(); });
+  document.querySelectorAll('[data-family-link]').forEach((link) => link.addEventListener('click', () => {
+    family.value = link.dataset.familyLink; search.value = tier.value = ''; filter();
+  }));
+  const boxes = [...document.querySelectorAll('[data-compare]')];
+  function updateSelection() {
+    for (const box of boxes) box.disabled = selection.size === 2 && !box.checked;
+    document.querySelector(".compare-bar").classList.toggle("has-selection", selection.size > 0);
+    compare.disabled = selection.size !== 2;
+    compare.textContent = 'Compare (' + selection.size + '/2)';
+    document.querySelector('#selection-status').textContent = [...selection].map((id) => document.getElementById(id).querySelector('h3').textContent).join(' · ');
+  }
+  for (const box of boxes) box.addEventListener('change', () => { if (box.checked) selection.add(box.dataset.compare); else selection.delete(box.dataset.compare); updateSelection(); });
+  document.querySelector('#clear-comparison').addEventListener('click', () => { selection.clear(); boxes.forEach((b) => { b.checked = false; }); updateSelection(); });
+  function open(ids) {
+    contents.replaceChildren();
+    contents.classList.toggle('comparing', ids.length === 2);
+    for (const id of ids) {
+      const card = document.getElementById(id);
+      const section = document.createElement('section');
+      const heading = document.createElement('h3'); heading.textContent = card.querySelector('h3').textContent;
+      const question = document.createElement('p'); question.textContent = card.querySelector('.question').textContent;
+      const img = card.querySelector('img').cloneNode(); img.loading = 'eager';
+      const meta = card.querySelector('dl').cloneNode(true);
+      const details = card.querySelector('details').cloneNode(true); details.open = true;
+      section.append(heading, question, img, meta, details); contents.append(section);
+    }
+    dialog.showModal();
+  }
+  document.querySelectorAll('.preview').forEach((link) => link.addEventListener('click', (event) => { event.preventDefault(); open([link.closest('.pattern').id]); }));
+  compare.addEventListener('click', () => open([...selection]));
+  document.querySelector('#close-preview').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  document.querySelector('#controls').hidden = false;
+  filter(); updateSelection();
+})();
+</script>
+</body>
+</html>

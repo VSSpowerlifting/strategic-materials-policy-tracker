@@ -1,0 +1,44 @@
+{
+  "id": "strip-plot",
+  "name": "Strip plot",
+  "family_code": "H",
+  "order": 1,
+  "reader_question": "How are individual observations spread within each group, and where does each group's centre sit?",
+  "relationship": "Distribution of every observation per group on one shared axis, with a group median for orientation.",
+  "question_types": ["distribution", "uncertainty"],
+  "requires": ["sample", "single-measure"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 2, "max_items": 8, "what": "groups" },
+  "use_when": [
+    "Each group has a modest number of observations that can all be shown",
+    "Spread, clusters and outliers matter as much as the centre"
+  ],
+  "avoid_when": [
+    "Groups have hundreds of observations — use histogram or box-interval",
+    "Only a summary range is available — use box-interval or range-interval"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit" },
+    { "field": "axis", "type": "{min, max, step}", "notes": "Explicit shared axis containing every observation" },
+    { "field": "groups[].label", "type": "string", "notes": "Unique group name" },
+    { "field": "groups[].values", "type": "number[] (5–40)", "notes": "Every observation; the median and n are computed from them" }
+  ],
+  "units": "One unit and one shared axis across all rows.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Dots, median ticks, gridlines and labels are native shapes and text", "Colours and positions"],
+    "not_data_bound": ["Dot positions are computed from the fixture and are not data-bound; there is no embedded workbook, so editing a value means moving its dot and relabelling the median", "Vertical jitter is a deterministic function of rank, not a data value"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/strip-plot.ts",
+  "fixture": "fixtures/strip-plot.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "bounded-values", "axis-explicit", "min-observations", "max-observations"],
+  "table_alternative": "A table of group, n, median, minimum and maximum, with the raw observations in an appendix.",
+  "variations": ["Box-interval when only five-number summaries exist", "Histogram for one group with many observations"],
+  "limitations": ["Vertical jitter has no meaning; only horizontal position is data", "Medians from very small n are unstable and n is therefore printed on every row", "Sample composition is not shown; unequal groups need caution"],
+  "excluded_alternatives": [
+    { "form": "Random jitter", "reason": "Not reproducible between builds; jitter is a deterministic function of rank" },
+    { "form": "Violin plot", "reason": "A smoothed density implies observations between the points that are not in the data" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "stage-ladder",
+  "name": "Process stage ladder",
+  "family_code": "I",
+  "order": 4,
+  "reader_question": "How far has a measure progressed through its ordered process, and when was each stage reached?",
+  "relationship": "Ordered stages of one process as rising steps; each shows the date reached or is hollow and dashed when not yet reached.",
+  "question_types": ["sequence", "state"],
+  "requires": ["status-stages", "dated-events", "states"],
+  "incompatible": ["quantified-flows"],
+  "capacity": { "min_items": 4, "max_items": 6, "what": "process stages" },
+  "use_when": [
+    "A single measure moves through a fixed order of stages (proposal, consultation, adoption, entry into force, implementation)",
+    "The reader needs to see which stages have and have not been reached"
+  ],
+  "avoid_when": [
+    "Stages can be reached out of order or skipped — use evidence-milestone-strip or a table",
+    "Several measures are compared — use duration-bars or a status matrix"
+  ],
+  "data_contract": [
+    { "field": "asOf", "type": "ISO date", "notes": "Date at which reached / not-yet-reached is read" },
+    { "field": "stages[].label", "type": "string ≤ 24 characters", "notes": "Unique; stages in process order" },
+    { "field": "stages[].date", "type": "ISO date | null", "notes": "Date reached; null = not yet reached. Reached dates ascend and do not follow asOf" }
+  ],
+  "units": "Ordinal stages; dates are labels, not positions.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Steps and text as native shapes and text boxes", "Stage names, dates and fills"],
+    "not_data_bound": ["Step heights encode order only, not elapsed time; they are positioned from the fixture at build time and are not data-bound", "There is no embedded workbook"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/stage-ladder.ts",
+  "fixture": "fixtures/stage-ladder.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "dates-ascending", "label-length", "reached-after-as-of", "stage-order"],
+  "table_alternative": "A stage table (stage, status, date reached) for exact dates and sources.",
+  "variations": ["Ladder with a distinct date for announcement versus effective date inside one stage", "Vertical ladder for long stage names"],
+  "limitations": [
+    "Equal step widths do not represent elapsed time between stages; use duration-bars for that",
+    "A stage without a date is treated as not reached, never as skipped"
+  ],
+  "excluded_alternatives": [
+    { "form": "Progress bar or percentage complete", "reason": "Stages are not equal-effort units, so a percentage would be a synthetic score" },
+    { "form": "Funnel", "reason": "Implies attrition of quantities between stages, which a single measure does not have" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

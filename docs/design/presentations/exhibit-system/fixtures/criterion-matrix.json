@@ -1,0 +1,20 @@
+{
+  "pattern": "criterion-matrix",
+  "classification": "synthetic-demonstration",
+  "title": "Option 2 meets four of five demonstration criteria; no option meets all five",
+  "subtitle": "Categorical marks per criterion as stated in the synthetic source set; no scores or weights",
+  "annotation": "Marks record what each source states. A mark is not a score and the rows are not added up. Option 3 has two criteria with no statement, which is a gap in evidence, not a failure.",
+  "source": "Synthetic fixture criterion-matrix.json, constructed for the exhibit gallery",
+  "visual_text": ["Option 2", "Does not", "Not stated", "Partly", "Meets"],
+  "data": {
+    "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+    "accent": "Option 2",
+    "criteria": [
+      { "label": "Binding commitment stated", "marks": ["Meets", "Meets", "Partly", "Does not"] },
+      { "label": "Funding source identified", "marks": ["Partly", "Meets", "Not stated", "Meets"] },
+      { "label": "Delivery date stated", "marks": ["Meets", "Meets", "Meets", "Partly"] },
+      { "label": "Offtake terms disclosed", "marks": ["Does not", "Partly", "Not stated", "Does not"] },
+      { "label": "Independent verification", "marks": ["Partly", "Meets", "Does not", "Not stated"] }
+    ]
+  }
+}

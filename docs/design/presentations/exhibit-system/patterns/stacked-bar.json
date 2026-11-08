@@ -1,0 +1,45 @@
+{
+  "id": "stacked-bar",
+  "name": "Stacked bar (absolute composition)",
+  "family_code": "D",
+  "order": 1,
+  "reader_question": "How large is each total, and how is it divided among a few components of the same measure?",
+  "relationship": "Part-to-whole in absolute units: components of one additive measure add to a stated total per bar.",
+  "question_types": ["composition"],
+  "requires": ["parts-of-whole", "single-measure"],
+  "incompatible": ["non-comparable-bases", "status-stages"],
+  "capacity": { "min_items": 3, "max_items": 6, "what": "bars (up to 4 components each)" },
+  "use_when": [
+    "Components are the same measure and genuinely additive",
+    "The absolute size of each total matters as much as its mix"
+  ],
+  "avoid_when": [
+    "Components are unlike instruments or statuses that must not be added — use status-separated-capital",
+    "Only the mix matters and totals differ widely — use percent-stacked",
+    "More than four components or six bars — use a table or ranked-bar"
+  ],
+  "data_contract": [
+    { "field": "unit", "type": "string", "notes": "Measure and unit, one for every component" },
+    { "field": "components[]", "type": "string[2..4]", "notes": "Component names in stacking order" },
+    { "field": "accent", "type": "string (optional)", "notes": "At most one highlighted component" },
+    { "field": "rows[].label / rows[].values[]", "type": "string / number[] ≥ 0", "notes": "One value per component; bar totals are derived" }
+  ],
+  "units": "One additive unit; the axis starts at zero and is hidden, with a bar-end total instead.",
+  "editability": {
+    "tier": "native-chart",
+    "editable": ["Stacked bar chart with embedded workbook (Edit Data)", "Segment colours and number format", "Legend and frame text"],
+    "not_data_bound": ["Bar-end totals and the omitted-label note are positioned text computed from the fixture; editing chart data does not update them", "Segment labels below the threshold are hidden by a number-format condition, not deleted"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/stacked-bar.ts",
+  "fixture": "fixtures/stacked-bar.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "aligned-series", "magnitude-nonnegative"],
+  "table_alternative": "A table of rows by component with a total column, for exact lookup of every segment.",
+  "variations": ["Column orientation for time-ordered totals", "Percent-stacked when only shares matter"],
+  "limitations": ["Only the bottom component shares a baseline, so inner segments are hard to compare across bars", "Narrow segments are unlabelled and must be read from the table alternative"],
+  "excluded_alternatives": [
+    { "form": "Pie or donut per bar", "reason": "Splits one comparison across several shapes and defeats comparing totals" },
+    { "form": "Stacked bar of statuses", "reason": "Statuses are not additive; status-separated-capital keeps them apart" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

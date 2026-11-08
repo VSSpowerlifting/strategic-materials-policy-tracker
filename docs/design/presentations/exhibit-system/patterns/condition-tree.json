@@ -1,0 +1,103 @@
+{
+  "id": "condition-tree",
+  "name": "Condition tree",
+  "family_code": "J",
+  "order": 2,
+  "reader_question": "Which sequence of conditions leads to each outcome, and where does a given case end up?",
+  "relationship": "Hierarchical decision structure: condition nodes with named branches terminating in outcomes.",
+  "question_types": [
+    "decision"
+  ],
+  "requires": [
+    "conditions",
+    "edges"
+  ],
+  "incompatible": [
+    "quantified-flows"
+  ],
+  "capacity": {
+    "min_items": 3,
+    "max_items": 9,
+    "what": "outcomes (depth at most 4)"
+  },
+  "use_when": [
+    "Eligibility or applicability is decided by successive tests",
+    "Each test has a small set of named answers and every answer ends in an outcome"
+  ],
+  "avoid_when": [
+    "Several criteria are weighed together rather than in sequence — use criterion-matrix",
+    "Conditions can combine in any order — use a table of rules"
+  ],
+  "data_contract": [
+    {
+      "field": "nodes[0]",
+      "type": "node",
+      "notes": "The first node is the root"
+    },
+    {
+      "field": "nodes[].id / label / kind",
+      "type": "string / condition | outcome",
+      "notes": "Outcomes are terminal"
+    },
+    {
+      "field": "nodes[].branches[].label / to",
+      "type": "string",
+      "notes": "Every condition names at least two distinct branches; each target is declared and has one parent"
+    },
+    {
+      "field": "highlightOutcomeId?",
+      "type": "string",
+      "notes": "Outcome whose route from the root is drawn in the accent"
+    }
+  ],
+  "units": "No quantities; branch labels are answers such as Yes and No.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": [
+      "Condition and outcome boxes, elbow lines and branch labels as native shapes and text",
+      "Route highlight colour",
+      "Frame text"
+    ],
+    "not_data_bound": [
+      "The tree is drawn shapes with computed positions, not a SmartArt or data-bound object",
+      "Elbow lines are separate segments, not PowerPoint connectors"
+    ],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/condition-tree.ts",
+  "fixture": "fixtures/condition-tree.json",
+  "integrity_rules": [
+    "unique-labels",
+    "edges-resolve",
+    "tree-structure",
+    "min-categories",
+    "max-categories",
+    "branches-complete",
+    "outcome-terminal",
+    "max-depth",
+    "highlight-resolves"
+  ],
+  "table_alternative": "A rules table (route, conditions met, outcome).",
+  "variations": [
+    "Vertical top-down layout for narrow panels",
+    "Branch frequencies where a source reports them"
+  ],
+  "limitations": [
+    "Depth is capped at four tests and nine outcomes",
+    "Branch labels must be short; long answers belong in the node text",
+    "A node reached by two branches is not a tree and is rejected"
+  ],
+  "excluded_alternatives": [
+    {
+      "form": "Flowchart with loops",
+      "reason": "A tree has no cycles; loops describe processes, which state-diagram covers"
+    },
+    {
+      "form": "Decision matrix",
+      "reason": "Hides the order in which the tests apply"
+    }
+  ],
+  "references": [
+    "smpt-repertoire-2026"
+  ]
+}

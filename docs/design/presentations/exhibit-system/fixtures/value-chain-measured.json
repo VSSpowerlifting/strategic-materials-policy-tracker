@@ -1,0 +1,23 @@
+{
+  "pattern": "value-chain-measured",
+  "classification": "synthetic-demonstration",
+  "title": "The measured series falls most between separation and alloy, across an unmeasured metal stage",
+  "subtitle": "Contained Material X handled at each stage, kt, calendar 2031; stages without a figure read not measured",
+  "annotation": "The 230 kt gap between separation and alloy cannot be assigned to the metal stage, which has no figure.",
+  "source": "Synthetic fixture value-chain-measured.json, constructed for the exhibit gallery",
+  "layout": "wide",
+  "visual_text": ["Separation", "Magnet", "520", "180", "not measured"],
+  "data": {
+    "unit": "kt of contained Material X, calendar 2031",
+    "dp": 0,
+    "highlightStageId": "alloy",
+    "stages": [
+      { "id": "mining", "step": 1, "label": "Mining", "value": 520 },
+      { "id": "separation", "step": 2, "label": "Separation", "value": 410 },
+      { "id": "metal", "step": 3, "label": "Metal", "value": null },
+      { "id": "alloy", "step": 4, "label": "Alloy", "value": 180 },
+      { "id": "magnet", "step": 5, "label": "Magnet", "value": 150 },
+      { "id": "end-use", "step": 6, "label": "End use", "value": null }
+    ]
+  }
+}

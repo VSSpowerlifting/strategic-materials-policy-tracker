@@ -1,0 +1,46 @@
+{
+  "id": "duration-bars",
+  "name": "Elapsed-time duration bars",
+  "family_code": "I",
+  "order": 5,
+  "reader_question": "How long did each item take to get from one dated stage to the next?",
+  "relationship": "Elapsed days between the same two dated stages for each item, as zero-based bars sorted by duration.",
+  "question_types": ["sequence", "compare-two-observations"],
+  "requires": ["durations", "dated-events", "single-measure"],
+  "incompatible": ["non-comparable-bases"],
+  "capacity": { "min_items": 3, "max_items": 10, "what": "items" },
+  "use_when": [
+    "Every item has the same two dated stages, such as announcement and effective date",
+    "The lag between stages matters more than the calendar position"
+  ],
+  "avoid_when": [
+    "Calendar position and overlap matter — use swimlane",
+    "Items have different stage pairs — the bars would not share a basis; use a table"
+  ],
+  "data_contract": [
+    { "field": "fromLabel / toLabel", "type": "string", "notes": "The two stages every item is measured between" },
+    { "field": "items[].label", "type": "string ≤ 28 characters", "notes": "Unique item name" },
+    { "field": "items[].from / items[].to", "type": "ISO date", "notes": "from ≤ to; both dates are printed under the item name" }
+  ],
+  "units": "Calendar days between the two stages; months shown as days ÷ 30.4375 for reading only.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": ["Bars, baseline, gridline and labels as native shapes and text boxes", "Item names, dates and colours"],
+    "not_data_bound": ["Bar lengths are computed from the fixture at build time; editing a date does not resize its bar", "There is no embedded workbook"],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/duration-bars.ts",
+  "fixture": "fixtures/duration-bars.json",
+  "integrity_rules": ["min-categories", "max-categories", "unique-labels", "interval-ordered", "label-length"],
+  "table_alternative": "A table of item, from date, to date and elapsed days.",
+  "variations": ["Two stacked segments per bar for three dated stages", "Sorted by calendar order instead of duration"],
+  "limitations": [
+    "Elapsed time does not show which stage was delayed, or whether a delay was intended",
+    "Bars share one zero-based axis only if every item measures the same pair of stages"
+  ],
+  "excluded_alternatives": [
+    { "form": "Calendar-positioned Gantt bars", "reason": "Offset starts make lengths harder to compare and add calendar position that the question does not ask for" },
+    { "form": "Average duration only", "reason": "Hides the spread across items" }
+  ],
+  "references": ["smpt-repertoire-2026"]
+}

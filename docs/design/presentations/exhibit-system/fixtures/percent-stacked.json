@@ -1,0 +1,23 @@
+{
+  "pattern": "percent-stacked",
+  "classification": "synthetic-demonstration",
+  "title": "Type 3 recipients hold 52% of awards in Jurisdiction B against 25% in Jurisdiction C",
+  "subtitle": "Share of awards by recipient type, per cent of each jurisdiction's own awards",
+  "annotation": "Each bar is 100% of its own base, and the bases range from 12 to 180 awards. Shares from small bases move with a single award.",
+  "source": "Synthetic fixture percent-stacked.json, constructed for the exhibit gallery",
+  "visual_text": ["Jurisdiction B", "Type 3", "n = 180", "n = 12"],
+  "data": {
+    "unit": "% of awards",
+    "baseLabel": "awards",
+    "input": "shares",
+    "components": ["Type 1", "Type 2", "Type 3"],
+    "accent": "Type 3",
+    "rows": [
+      { "label": "Jurisdiction A", "n": 24, "values": [40, 35, 25] },
+      { "label": "Jurisdiction B", "n": 180, "values": [20, 28, 52] },
+      { "label": "Jurisdiction C", "n": 65, "values": [35, 40, 25] },
+      { "label": "Jurisdiction D", "n": 12, "values": [45, 22, 33] },
+      { "label": "Jurisdiction E", "n": 90, "values": [30, 38, 32] }
+    ]
+  }
+}

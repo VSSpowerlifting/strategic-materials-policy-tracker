@@ -1,0 +1,103 @@
+{
+  "id": "value-chain-measured",
+  "name": "Measured value chain",
+  "family_code": "J",
+  "order": 3,
+  "reader_question": "Where along the value chain does a quantity exist in the evidence, and where is it not measured?",
+  "relationship": "Ordered stages, each with at most one measured quantity on a shared zero-based scale and one unit.",
+  "question_types": [
+    "flow",
+    "sequence"
+  ],
+  "requires": [
+    "single-measure",
+    "status-stages"
+  ],
+  "incompatible": [
+    "non-comparable-bases",
+    "quantified-flows"
+  ],
+  "capacity": {
+    "min_items": 4,
+    "max_items": 8,
+    "what": "stages"
+  },
+  "use_when": [
+    "The stage sequence is fixed and one quantity is reported at some stages",
+    "Missing measurements are themselves part of the message"
+  ],
+  "avoid_when": [
+    "Stage quantities must reconcile as in, out and loss — use conversion-flow",
+    "Stages are on different bases or units — use parallel-basis-panels"
+  ],
+  "data_contract": [
+    {
+      "field": "unit / dp",
+      "type": "string / integer",
+      "notes": "One unit for every stage"
+    },
+    {
+      "field": "stages[].id / step / label",
+      "type": "string / integer / string",
+      "notes": "step strictly ascending in chain order"
+    },
+    {
+      "field": "stages[].value",
+      "type": "number ≥ 0 | null",
+      "notes": "null draws not measured; zero is a measured zero only"
+    },
+    {
+      "field": "highlightStageId?",
+      "type": "string",
+      "notes": "A measured stage drawn in the accent"
+    }
+  ],
+  "units": "One unit across stages; bars start at zero on one scale. Differences between stages are not losses unless the source says so.",
+  "editability": {
+    "tier": "native-shapes",
+    "editable": [
+      "Chevrons, bars and value labels as native shapes and text",
+      "Bar fill and highlight",
+      "Frame text"
+    ],
+    "not_data_bound": [
+      "Bar heights are computed from the fixture and are not data-bound; editing a value means resizing the bar and its label",
+      "No embedded workbook"
+    ],
+    "raster": []
+  },
+  "renderer": "scripts/exhibit-system/renderers/value-chain-measured.ts",
+  "fixture": "fixtures/value-chain-measured.json",
+  "integrity_rules": [
+    "min-categories",
+    "max-categories",
+    "unique-labels",
+    "magnitude-nonnegative",
+    "stages-ordered",
+    "measured-minimum",
+    "highlight-resolves"
+  ],
+  "table_alternative": "A stage table with the quantity, unit and a measured/not measured flag.",
+  "variations": [
+    "Number-only variant without bars",
+    "Two measures per stage as paired panels"
+  ],
+  "limitations": [
+    "One quantity per stage; a second measure needs its own panel",
+    "Adjacent stage values are not a conversion: definitions of the stages may differ",
+    "Up to eight stages across the slide width"
+  ],
+  "excluded_alternatives": [
+    {
+      "form": "Line across the stages",
+      "reason": "Implies a continuous series and interpolates across unmeasured stages"
+    },
+    {
+      "form": "Zero-height bar for a missing stage",
+      "reason": "A missing measurement is not a measured zero"
+    }
+  ],
+  "references": [
+    "smpt-repertoire-2026"
+  ]
+}
