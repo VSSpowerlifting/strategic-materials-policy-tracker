@@ -118,7 +118,10 @@ test("Thompson preserves parent/child DPA amounts, partial-disbursement and no a
   assert.equal(m?.amount?.value,"20000000");
   assert.equal(a?.amount?.value,"7000000");
   assert.equal(p?.financialStatusHistory.at(-1)?.status,"partially_disbursed");
-  assert.equal(m?.implementationStatusHistory.length,0);
+  // P3-02: one undated issuer-reported construction entry from the Q2 10-Q.
+  assert.deepEqual(m?.implementationStatusHistory.map(h=>[h.status,h.date,h.sourceId]),
+    [["construction",null,"src-usac-2026-q2-10q"]]);
+  assert.equal(a?.implementationStatusHistory.length,0);
   const altered=context();
   const item=altered.commitments.find(c=>c.id==="fin-us-dow-usac-antimony-2026-thompson-falls");
   assert.ok(item);

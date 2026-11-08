@@ -81,7 +81,8 @@ test("Thompson scope is an individual expansion, not an authorized whole-project
   assert.equal(original.scopeProposal,brief.candidateScope);
   assert.equal(original.sourceId,brief.existingSourceId);
   assert.equal(original.reviewVerdict,"unreviewed");
-  assert.equal(original.relatedFinanceIds.length,0);
+  // P3-02 added a same-source finance observation on the Montana child row.
+  assert.deepEqual(original.relatedFinanceIds,["fin-us-dow-usac-antimony-2026-thompson-falls"]);
   assert.equal(original.gate,"human_source_review");
   assert.match(brief.candidateNote,/not a dated completion/);
   assert.match(brief.candidateNote,/not.*full nine-furnace operation/);
@@ -112,7 +113,8 @@ test("six different industrial and financial denominators cannot be merged into 
   assert.equal(parent[0].projectId,null);
   assert.equal(parent[0].financialStatusHistory.at(-1)?.status,"partially_disbursed");
   assert.equal(parent[0].financialStatusHistory.at(-1)?.date,null);
-  assert.equal(montana[0].implementationStatusHistory.length,0);
+  // P3-02: issuer-reported construction only, undated; Alaska untouched.
+  assert.deepEqual(montana[0].implementationStatusHistory.map(h=>[h.status,h.date]),[["construction",null]]);
   assert.equal(alaska[0].implementationStatusHistory.length,0);
   assert.match(brief.candidateNote,/distinct bases/);
 });

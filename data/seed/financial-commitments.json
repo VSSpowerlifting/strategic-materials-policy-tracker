@@ -10609,7 +10609,14 @@
         "note": "The filing states $12.8M received in April 2026 for accepted milestones, recognized against Thompson Falls construction in progress; no exact day is given."
       }
     ],
-    "implementationStatusHistory": [],
+    "implementationStatusHistory": [
+      {
+        "status": "construction",
+        "date": null,
+        "sourceId": "src-usac-2026-q2-10q",
+        "note": "Issuer-reported: the recipient's Q2 2026 Form 10-Q states that \"The Thompson Falls facility expansion was substantially completed\" and still carries project costs in construction in progress at June 30, 2026; no progress day is stated. This records physical construction only. It does not change the $20M allocation, assert obligation of that amount, or extend the $12.8M April receipt to the full grant, and it is not full commissioning or operation."
+      }
+    ],
     "terms": [],
     "outcomes": [],
     "evidence": [
@@ -10652,8 +10659,8 @@
           "location"
         ],
         "evidence": "explicit",
-        "locator": "Note 9 — Government Grant and Property, Plant and Equipment",
-        "note": "Confirms payment of $12.8M in April 2026, not the entire Thompson Falls $20M allocation."
+        "locator": "Note 9 — Government Grant and Property, Plant and Equipment; Note 16 — Thompson Falls, Montana Facility Expansion",
+        "note": "Confirms payment of $12.8M in April 2026, not the entire Thompson Falls $20M allocation. Notes 9 and 16 also support the issuer-reported construction status (expansion substantially completed; costs still in construction in progress at June 30, 2026)."
       }
     ],
     "notes": "The recipient's SEC-furnished earnings-call transcript allocates $20M to Thompson Falls. Its Form 10-Q reports $12.8M of accepted milestones received in April 2026 and recorded against Thompson Falls construction in progress. Neither amount is incremental to the parent $27M award."

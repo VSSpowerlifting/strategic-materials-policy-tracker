@@ -1,13 +1,49 @@
 # Capital-to-execution comparison: Phase III research findings and adjudication packets
 
-Status: **draft for human review. Nothing in this note is in `data/seed/`,
-`data/candidates/` or the M3.2 review queue.** Every proposal below needs a named
+Status: **decisions recorded 2026-11-08 (see Decision record). P3-02 is in
+`data/seed/`; the five milestone rulings await per-check attestation and a cutoff
+authorization.** The original framing follows: Every proposal below needs a named
 human reviewer. AI research cannot supply `reviewedBy`, `reviewedAt` or
 `approvedBy`, so this note records evidence and asks for decisions.
 
 Corpus revision: `site.lastUpdated` = 2026-11-06 (unchanged). Branch:
 `claude/smpt-phase-iii-expansion-aa0f03`, from `main` at `688b6108`. Research
 date: 2026-11-08. Counts are those pinned in `tests/capital-execution.test.ts`.
+
+## Decision record (2026-11-08)
+
+Benjamin Yang approved all six rulings on 2026-11-08 as substantive editorial
+decisions, after reading the original sources. An independent cross-check had
+confirmed that the cited passages support each proposal. What was done with that
+approval:
+
+- **P3-02, implemented in seed.** `fin-us-dow-usac-antimony-2026-thompson-falls`
+  now carries one `implementationStatusHistory` entry: `construction`, `date`
+  null, `sourceId` `src-usac-2026-q2-10q`, with a note naming the issuer as
+  the speaker. The financial status, amount, obligation and disbursement
+  fields are untouched. Nothing implies the full grant was received.
+  Live counts: `executionGaps` 14 → 13, `fundedGaps` 4 → 3, `aheadOfBinding`
+  unchanged at 2.
+- **P3-02's queue side effect.** The M3.2 Thompson Falls packet now links
+  that finance row (`relatedFinanceIds`) and says the status rests on the
+  same 10-Q. As a result, its worksheet fingerprint changed to
+  `2c911929…7998`. The other six M3.2 fingerprints are unchanged and pinned.
+- **P3-01 and P3-03 to P3-06, recorded as local decisions.** The gitignored
+  files `.project-execution-review/adjudications.json` (P3-01) and
+  `m3-3-adjudications.json` (P3-03 to P3-06) record verdict `approved`,
+  `reviewedBy` "Benjamin Yang", `reviewedAt` 2026-11-08, a rationale and the
+  current fingerprint. The audit reports no structural errors.
+- **Still blocked from seed.** The five per-check attestations (`fullSourceRead`,
+  `quotedPassageMatches`, `scopeIsExplicit`, `eventAndEvidenceDatesSeparated`,
+  `noFinancingOrOperationsInference`) were not individually supplied, so they
+  stay `false`. The adjudicator therefore blocks every approved row.
+  Separately, `reviewedAt` 2026-11-08 postdates the curated cutoff
+  (2026-11-06), so moving the cutoff needs its own authorization. No
+  `ProjectMilestone` row and no Stillwater source entry has been added.
+- **P3-06 deferral.** Stibnite's financing-row implementation dates are
+  deferred for separate reconciliation. Neither M3.2 Stibnite packet changes;
+  both remain taxonomy blocked. The approved M3.3 workstream rows supersede
+  them editorially.
 
 ## Why this phase ships no seed change
 

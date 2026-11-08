@@ -146,10 +146,12 @@
     "statementEn": "The Thompson Falls facility expansion was substantially completed",
     "statementEnSource": "na",
     "locator": "Form 10-Q Note 9, Government Grant, substantial-completion and PP&E paragraph; corroborating Note 16, Thompson Falls, Montana Facility Expansion",
-    "relatedFinanceIds": [],
+    "relatedFinanceIds": [
+      "fin-us-dow-usac-antimony-2026-thompson-falls"
+    ],
     "gate": "human_source_review",
     "reviewVerdict": "unreviewed",
     "taxonomyQuestion": null,
-    "editorialCaution": "USAC's Q2 2026 Form 10-Q reports the expansion substantially completed, $4.1M in related assets placed in service late Q2, and ~$29M gross project costs still in construction in progress at June 30. The exact progress day, full commissioning, design throughput and closure of every grant-funded workstream remain unknown. April $12.8M cash, the $20M Thompson Falls child allocation, the $27M parent and ~$39M corporate expansion budget have distinct accounting bases. No same-source financier physical-status observation exists. This is a reported construction snapshot, not a completed/operating project or a dated start event; human source review remains pending."
+    "editorialCaution": "USAC's Q2 2026 Form 10-Q reports the expansion substantially completed, $4.1M in related assets placed in service late Q2, and ~$29M gross project costs still in construction in progress at June 30. The exact progress day, full commissioning, design throughput and closure of every grant-funded workstream remain unknown. April $12.8M cash, the $20M Thompson Falls child allocation, the $27M parent and ~$39M corporate expansion budget have distinct accounting bases. Its finance row cites this same 10-Q for construction status: no independent confirmation. This is a reported construction snapshot, not a completed/operating project or a dated start event; human source review remains pending."
   }
 ]

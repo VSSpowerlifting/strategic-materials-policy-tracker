@@ -51,7 +51,7 @@ The four-source review queue now has a strictly isolated, **human-only decision 
 
 ## M3.3 review cohort (Phase III proposed rulings, non-publishing)
 
-M3.3 is a **separate cohort** for the five Phase III proposed rulings (P3-03 to P3-06): Marathon early works, Nolans construction, the Stillwater Phase 1a commissioning, and the Stibnite early-works and Burntlog access-road workstreams as `bounded_project_workstream` milestones. It does not edit the M3.2 queue, so every M3.2 worksheet fingerprint a reviewer may already have copied stays valid (`tests/project-execution-m3-3-cohort.test.ts` pins them). The M3.2 Burntlog row remains taxonomy blocked; its M3.3 counterpart is a new row with its own ID and fingerprint.
+M3.3 is a **separate cohort** for the five Phase III proposed rulings (P3-03 to P3-06): Marathon early works, Nolans construction, the Stillwater Phase 1a commissioning, and the Stibnite early-works and Burntlog access-road workstreams as `bounded_project_workstream` milestones. M3.3 itself does not edit the M3.2 queue. The one M3.2 fingerprint change comes from the approved P3-02 finance-row status, described below. `tests/project-execution-m3-3-cohort.test.ts` pins all seven. The M3.2 Burntlog row remains taxonomy blocked; its M3.3 counterpart is a new row with its own ID and fingerprint.
 
 - Queue: `m3-3-source-review-queue.json` (IDs `review-m3-3-*`; mixing namespaces across cohorts fails the audit).
 - `m3-3-proposed-sources.json` holds the one source not yet in `data/seed/sources.json` (the Stillwater commissioning release). It is merged **only** into review inputs, never into public output, and cannot shadow a seeded ID. Seeding it is part of the later, separately approved publication step.
@@ -63,4 +63,6 @@ npm run audit:project-execution-pilot -- --cohort m3-3
 npm run audit:project-execution-adjudications -- --cohort m3-3
 ```
 
-The Thompson Falls ruling (P3-01) stays in the M3.2 cohort (`review-m3-2-thompson-falls-q2-expansion`). P3-02, an issuer-attributed implementation status on `fin-us-dow-usac-antimony-2026-thompson-falls`, is a financing-row change outside this milestone gate and needs separate maintainer approval. Every row here is a **proposed ruling pending named human source review**; nothing in the cohort records or implies approval.
+The Thompson Falls ruling (P3-01) stays in the M3.2 cohort (`review-m3-2-thompson-falls-q2-expansion`). P3-02 was approved on 2026-11-08 and is implemented in seed. It is an issuer-attributed `construction` status, undated, on `fin-us-dow-usac-antimony-2026-thompson-falls`. The Thompson packet now links that finance row, which changed that one M3.2 fingerprint; the other six are unchanged.
+
+On 2026-11-08 Benjamin Yang approved P3-01 and P3-03 to P3-06 as substantive editorial rulings. They are recorded as `approved` in the local adjudication files. Every one is still **blocked from seed** for two reasons. First, the five per-check attestations were not individually supplied and are not inferred. Second, the review date postdates the curated cutoff, and moving the cutoff needs separate authorization. Nothing in the checked-in queue records approval.

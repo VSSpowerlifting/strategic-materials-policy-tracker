@@ -81,7 +81,7 @@ test("M3 workbench: Thompson Falls is issuer-reported construction progress only
   assert.equal(w.proposedObservation.kind, "construction_progress_reported");
   assert.equal(w.proposedObservation.occurredOn, null);
   assert.equal(w.status, "unsigned_source_review");
-  assert.deepEqual(w.financingObservationReferences, []);
+  assert.deepEqual(w.financingObservationReferences, ["fin-us-dow-usac-antimony-2026-thompson-falls"]);
   assert.match(w.editorialCaution, /not a completed\/operating project/);
   assert.equal(w.originalSource.publishedOn, "2026-08-11");
   assert.equal(w.originalSource.accessedOn, "2026-10-02");

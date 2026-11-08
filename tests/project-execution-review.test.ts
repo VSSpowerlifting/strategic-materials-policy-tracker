@@ -267,7 +267,9 @@ test("Thompson Falls Q2 progress is human-review gated, unsigned and not a finan
   assert.equal(row.scopeProposal, "named_facility");
   assert.equal(row.occurredOn, null, "quarter-end filing does not prove a construction milestone day");
   assert.equal(row.reviewVerdict, "unreviewed");
-  assert.deepEqual(row.relatedFinanceIds, [], "no synthetic financier physical status");
+  // P3-02 (approved 2026-11-08): the Montana child row now carries a same-source
+  // issuer-reported construction status, so the review must link it.
+  assert.deepEqual(row.relatedFinanceIds, ["fin-us-dow-usac-antimony-2026-thompson-falls"]);
   assert.equal(row.taxonomyQuestion, null);
   assert.match(row.editorialCaution, /not a completed\/operating project/);
   assert.equal(getAllProjectMilestones().length, 2);
@@ -275,10 +277,11 @@ test("Thompson Falls Q2 progress is human-review gated, unsigned and not a finan
   assert.deepEqual(result.errors, []);
   const match = result.candidates.find(c => c.id === row.id)!;
   assert.deepEqual(match.sourceBoundary, {date:"2026-08-11",basis:"publication"});
-  assert.equal(match.deduplicatedLegacyFinanceObservations, 0);
+  assert.equal(match.deduplicatedLegacyFinanceObservations, 1);
   const finances = getAllFinancialCommitments();
   const child = finances.find(f => f.id === "fin-us-dow-usac-antimony-2026-thompson-falls")!;
-  assert.deepEqual(child.implementationStatusHistory, []);
+  assert.deepEqual(child.implementationStatusHistory.map(h => [h.status, h.date, h.sourceId]),
+    [["construction", null, "src-usac-2026-q2-10q"]]);
   assert.deepEqual(child.financialStatusHistory.map(f => f.status),
     ["decided","partially_disbursed"]);
 });

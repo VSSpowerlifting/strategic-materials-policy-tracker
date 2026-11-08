@@ -86,8 +86,9 @@ test("live corpus capital-to-execution counts", () => {
   assert.equal(r.tierCounts.reviewed_milestone + r.tierCounts.financing_row_status + r.tierCounts.none, r.rows.length);
   assert.equal(r.tierCounts.none, r.response.noPhysicalRecordProjects - r.rows.filter((x) => x.physical === "no_record" && x.tier === "reviewed_milestone").length);
   assert.equal(r.tierCounts.reviewed_milestone, 2);
-  assert.equal(r.executionGaps.length, 14);
-  assert.equal(r.fundedGaps.length, 4);
+  // P3-02 moved Thompson Falls to construction_or_later.
+  assert.equal(r.executionGaps.length, 13);
+  assert.equal(r.fundedGaps.length, 3);
   assert.equal(r.aheadOfBinding.length, 2);
   assert.equal(r.conditional.length, 35);
   assert.equal(r.conditionalProjects, 27);

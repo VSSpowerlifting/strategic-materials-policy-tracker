@@ -35,7 +35,9 @@ const M3_2_DIGESTS: Record<string, string> = {
   "review-m3-2-neo-narva-magnets": "8fe418cdfdedef8681bb8cba0dbab8e155501a8b9895c562e38f74fd1830a874",
   "review-m3-2-stibnite-burntlog": "7dee8307f3dd8796fef5837b1ef527ddc183469159f5bd9211e0c07b57eb17ff",
   "review-m3-2-stibnite-early-works": "041a26dd9f32e263f6b8317c08743618cd077338c020b38d4f5b3f7806ca0c4e",
-  "review-m3-2-thompson-falls-q2-expansion": "b75f2aa00db0e085381b1c3750c04eef269c7b24602bfbed765b114aaae255a2",
+  // P3-02 linked the Thompson row to its same-source finance status; this is the
+  // one intended M3.2 fingerprint change.
+  "review-m3-2-thompson-falls-q2-expansion": "2c91192902c6f897162f364a332405d93ea81c2461dec8bd37e350f63e6c7998",
 };
 
 test("M3.3 cohort: M3.2 worksheet fingerprints and taxonomy blocks are unchanged", () => {
