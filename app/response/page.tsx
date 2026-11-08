@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { formatDateLong } from "@/lib/format";
 import { getAllMaterials, getSourceById } from "@/lib/data";
 import {
-  buildIndustrialResponse,
   FINANCE_ROWS,
   PHYSICAL_COLUMNS,
   matrixKey,
@@ -13,7 +12,9 @@ import {
   type FinanceAxis,
   type PhysicalAxis,
 } from "@/lib/industrial-response";
-import { financialStatusLabels, implementationStatusLabels } from "@/lib/labels";
+import { buildCapitalExecution, type PhysicalObservation } from "@/lib/capital-execution";
+import { KIND_LABELS } from "@/components/projects/reviewed-project-milestones";
+import { financialInstrumentLabels, financialStatusLabels, implementationStatusLabels } from "@/lib/labels";
 import { site } from "@/lib/site";
 import type { FinancialStatus, ImplementationStatus } from "@/lib/types";
 
@@ -51,7 +52,7 @@ function Evidence({ entries, kind }: { entries: EvidenceLink[]; kind: "financial
             {source ? (
               <>
                 {" · "}
-                <a href={source.url} className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+                <a href={source.url} className="relative text-accent hover:underline" target="_blank" rel="noopener noreferrer">
                   source
                   <span className="sr-only">: {source.title}</span>
                 </a>
@@ -64,8 +65,43 @@ function Evidence({ entries, kind }: { entries: EvidenceLink[]; kind: "financial
   );
 }
 
+function SourceLink({ sourceId }: { sourceId: string }) {
+  const source = getSourceById(sourceId);
+  if (!source) return null;
+  return (
+    <a href={source.url} className="relative text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+      source
+      <span className="sr-only">: {source.title}</span>
+    </a>
+  );
+}
+
+/** One line per distinct (source, status, date) observation, however many financing rows cite it. */
+function Observations({ entries }: { entries: PhysicalObservation[] }) {
+  if (!entries.length) return <span className="text-faint">No supporting status entry recorded.</span>;
+  return (
+    <ul className="space-y-1.5">
+      {entries.map((e) => (
+        <li key={`${e.sourceId}-${e.status}-${e.date ?? "undated"}`} className="leading-5">
+          <Link href={`/capital/${e.financialIds[0]}`} className="font-medium text-foreground hover:text-accent">
+            {implementationStatusLabels[e.status as ImplementationStatus] ?? e.status}
+          </Link>
+          <span className="text-faint"> · {e.date ?? "date not stated"}</span>
+          {getSourceById(e.sourceId) ? <>{" · "}<SourceLink sourceId={e.sourceId} /></> : null}
+          {e.financialIds.length > 1 ? (
+            <span className="text-faint"> · cited on {e.financialIds.length} financing rows</span>
+          ) : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function IndustrialResponsePage() {
-  const model = buildIndustrialResponse(site.lastUpdated);
+  const exec = buildCapitalExecution(site.lastUpdated);
+  const model = exec.response;
+  const execById = new Map(exec.rows.map((r) => [r.id, r]));
+  const conditionalOnBinding = exec.conditional.filter((c) => c.projectHasBindingInstrument).length;
   const names = Object.fromEntries(getAllMaterials().map((m) => [m.id, m.nameEn]));
   const perMaterial = getAllMaterials()
     .map((m) => {
@@ -210,7 +246,9 @@ export default function IndustrialResponsePage() {
                 <span className="ml-2 font-mono text-xs font-normal text-faint">({cell.projects.length})</span>
               </h3>
               <div className="grid gap-3 lg:grid-cols-2">
-                {cell.projects.map((p) => (
+                {cell.projects.map((p) => {
+                  const x = execById.get(p.id)!;
+                  return (
                   <Card key={p.id} className="min-w-0 p-5">
                     <Link href={`/projects/${p.id}`} className="font-display text-base font-semibold leading-snug hover:text-accent">
                       {p.name}
@@ -227,21 +265,161 @@ export default function IndustrialResponsePage() {
                       </div>
                       <div>
                         <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-faint">Physical — recorded status</p>
-                        <Evidence entries={p.physicalEvidence} kind="physical" />
+                        <Observations entries={x.observations} />
                         {p.exceptionalActivityOnly ? (
                           <p className="mt-2 text-faint">The completed activity is the funded scope; facility construction requires separate evidence.</p>
+                        ) : null}
+                        {x.milestones.length ? (
+                          <p className="mt-2 text-faint">
+                            Reviewed milestone:{" "}
+                            <Link href={`/projects/${p.id}`} className="text-accent hover:underline">
+                              {x.milestones.map((m) => KIND_LABELS[m.kind]).join("; ")}
+                            </Link>
+                          </p>
                         ) : null}
                       </div>
                     </div>
                   </Card>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section index="04" title="Interpretation and boundaries" className="mt-14"
+      <Section index="04" title="Physical evidence quality" className="mt-14"
+        description="How each project's physical status is evidenced. A reviewed milestone is a source statement checked by a named reviewer against the full original; a financing-row status is the latest implementation entry recorded on a commitment and has not been separately reviewed as a project milestone.">
+        <dl className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
+          {[
+            ["Reviewed project milestone", exec.tierCounts.reviewed_milestone],
+            ["Status on a financing row only", exec.tierCounts.financing_row_status],
+            ["No usable physical status", exec.tierCounts.none],
+          ].map(([label, value]) => (
+            <div key={String(label)} className="bg-card px-4 py-5">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-faint">{label}</dt>
+              <dd className="tnum mt-2 font-display text-3xl font-bold">{value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="mt-5 grid gap-4 text-sm leading-6 text-muted md:grid-cols-2">
+          <p>
+            <strong className="font-semibold text-foreground">Reviewed milestones</strong>{" "}
+            {exec.rows.filter((r) => r.milestones.length).map((r, i, all) => (
+              <span key={r.id}>
+                <Link href={`/projects/${r.id}`} className="text-accent hover:underline">{r.name}</Link>
+                {" "}({r.milestones.map((m) => KIND_LABELS[m.kind].toLowerCase()).join("; ")})
+                {i < all.length - 1 ? "; " : ". "}
+              </span>
+            ))}
+            Milestones are added only after human review and do not change the matrix counts above.
+          </p>
+          <p>
+            <strong className="font-semibold text-foreground">Construction ahead of binding finance</strong>{" "}
+            {exec.aheadOfBinding.length} projects report construction or later while no binding public
+            instrument is established:{" "}
+            {exec.aheadOfBinding.map((r, i, all) => (
+              <span key={r.id}>
+                <Link href={`/projects/${r.id}`} className="text-accent hover:underline">{r.name}</Link>
+                {i < all.length - 1 ? "; " : "."}
+              </span>
+            ))}{" "}
+            Their physical progress is not attributable to the recorded government commitments.
+          </p>
+        </div>
+      </Section>
+
+      <Section index="05" title="Conditional commitments by financing stage" className="mt-14"
+        description={`Directly linked government commitments that are not binding as of the corpus revision: ${exec.conditional.length} rows across ${exec.conditionalProjects} projects. ${conditionalOnBinding} sit on projects that also hold a binding instrument. Amounts appear as each source states them and are not added together; a component row names the package it belongs to.`}>
+        <div className="overflow-x-auto rounded-lg border">
+          <table className="w-full min-w-[52rem] border-collapse text-sm">
+            <caption className="sr-only">Non-binding government commitments grouped by recorded financing status</caption>
+            <thead className="border-b bg-card text-left font-mono text-[11px] uppercase tracking-wide text-faint">
+              <tr>
+                <th scope="col" className="px-4 py-3 font-normal">Project</th>
+                <th scope="col" className="px-4 py-3 font-normal">Instrument · provider</th>
+                <th scope="col" className="px-4 py-3 font-normal">Amount as stated</th>
+                <th scope="col" className="px-4 py-3 font-normal">Status date</th>
+                <th scope="col" className="w-[30%] px-4 py-3 font-normal">Source note</th>
+              </tr>
+            </thead>
+            {exec.conditionalGroups.map((g) => (
+              <tbody key={g.status} className="border-b last:border-0">
+                <tr className="bg-elevated/40">
+                  <th scope="rowgroup" colSpan={5} className="px-4 py-2 text-left font-display font-semibold">
+                    {financialStatusLabels[g.status]}
+                    <span className="ml-2 font-mono text-xs font-normal text-faint">({g.commitments.length})</span>
+                  </th>
+                </tr>
+                {g.commitments.map((c) => (
+                  <tr key={c.financialId} className="border-t align-top">
+                    <td className="px-4 py-3">
+                      <Link href={`/projects/${c.projectId}`} className="font-medium hover:text-accent">{c.projectName}</Link>
+                      {c.projectHasBindingInstrument ? (
+                        <p className="mt-1 text-xs text-faint">Also holds a binding instrument</p>
+                      ) : null}
+                    </td>
+                    <td className="px-4 py-3 text-muted">
+                      <Link href={`/capital/${c.financialId}`} className="text-foreground hover:text-accent">
+                        {financialInstrumentLabels[c.instrument] ?? c.instrument}
+                      </Link>
+                      {c.provider ? <span className="block text-xs text-faint">{c.provider}</span> : null}
+                    </td>
+                    <td className="px-4 py-3 text-muted">
+                      {c.amountAsStated ?? <span className="text-faint">Not stated</span>}
+                      {c.partOf ? (
+                        <span className="mt-1 block text-xs text-faint">
+                          Part of <Link href={`/capital/${c.partOf}`} className="text-accent hover:underline">{c.partOf}</Link>
+                        </span>
+                      ) : null}
+                    </td>
+                    <td className="tnum whitespace-nowrap px-4 py-3 text-muted">
+                      {c.date ?? <span className="text-faint">Not stated</span>}
+                      {" · "}<SourceLink sourceId={c.sourceId} />
+                    </td>
+                    <td className="px-4 py-3 text-xs leading-5 text-muted">{c.note ?? <span className="text-faint">—</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            ))}
+          </table>
+        </div>
+      </Section>
+
+      <Section index="06" title="Binding finance without a construction record" className="mt-14"
+        description={`${exec.executionGaps.length} projects hold a binding government instrument but no construction-or-later entry; ${exec.fundedGaps.length} of them record partial or full disbursement. A missing entry is a research gap, not evidence that work has stalled.`}>
+        <div className="overflow-x-auto rounded-lg border">
+          <table className="w-full min-w-[40rem] text-sm">
+            <caption className="sr-only">Projects with binding government finance and no construction-or-later record</caption>
+            <thead className="border-b bg-card text-left font-mono text-[11px] uppercase tracking-wide text-faint">
+              <tr>
+                <th scope="col" className="px-4 py-3 font-normal">Project</th>
+                <th scope="col" className="px-4 py-3 font-normal">Financial standing</th>
+                <th scope="col" className="px-4 py-3 font-normal">Latest recorded physical status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {exec.executionGaps.map((r) => (
+                <tr key={r.id} className="border-b align-top last:border-0">
+                  <th scope="row" className="px-4 py-3 text-left font-medium">
+                    <Link href={`/projects/${r.id}`} className="hover:text-accent">{r.name}</Link>
+                  </th>
+                  <td className="px-4 py-3 text-muted">{r.funded ? "Disbursement recorded" : "Contracted"}</td>
+                  <td className="px-4 py-3 text-muted">
+                    {r.physical === "no_record" ? (
+                      <span className="text-faint">No usable status recorded</span>
+                    ) : (
+                      <Observations entries={r.observations} />
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      <Section index="07" title="Interpretation and boundaries" className="mt-14"
         description="A deliberately conservative reading of what the records can demonstrate.">
         <div className="grid gap-4 md:grid-cols-2">
           <Card className="p-5 text-sm leading-7 text-muted">

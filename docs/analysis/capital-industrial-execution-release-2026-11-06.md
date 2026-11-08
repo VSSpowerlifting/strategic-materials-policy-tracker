@@ -1,6 +1,6 @@
 # Capital and industrial execution — November 6, 2026 curated corpus activation
 
-**Status:** staged for exact-head CI and release verification; production confirmation requires a separate deployment/parity check.  
+**Status:** released. As of 2026-11-07, production runs main `ea02a30`, which contains this release, and `audit:production-parity` reports IN_SYNC. The pre-release text below is kept as written.  
 **Source review:** [November 5 admission and November 6 lifecycle/provenance audit](capital-industrial-execution-expansion-2026-11-05.md).  
 **Release scope:** PR #208 only; no FI003 (#215) financing research or presentation changes.
 
