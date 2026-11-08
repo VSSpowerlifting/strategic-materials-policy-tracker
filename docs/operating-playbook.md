@@ -120,9 +120,15 @@ lifecycle rules; use a model for ambiguous interpretation and drafting.
 ## Skills
 
 Personal skills installed under `~/.claude/skills/`. They are **not
-version-controlled here**: `.claude/skills/` is git-ignored, so a fresh clone or
+version-controlled here**: `.claude/skills/*` is git-ignored, so a fresh clone or
 CI runner does not have them. A skill holds method only; project facts live in
 the repo.
+
+**Exception:** the eight `smpt-*` strategy skills in `.claude/skills/smpt-*/`
+are tracked (a `.gitignore` negation). They serve Applied Strategy and Financial
+Intelligence products, not tracker data. Start with `smpt-engagement-framing`;
+routing, the capability map and evaluation are in
+[`docs/research/strategy-skills/`](research/strategy-skills/README.md).
 
 | Skill | Use for | Invocation |
 | --- | --- | --- |
