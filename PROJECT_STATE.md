@@ -8,7 +8,7 @@
   - lists execution gaps, and projects that reached construction before binding public finance.
 - `/response` gains sections 04–06; the interpretation section moves to 07. Tests pin the live counts: reviewed 2, gaps 14, funded gaps 4, ahead of binding 2, conditional 35 rows across 27 projects.
 - No seed, schema or taxonomy changes. Findings are in `docs/analysis/capital-execution-phase-ii-findings-2026-11-07.md`.
-- Pending human decision: the USAC Thompson Falls milestone, in `docs/analysis/capital-execution-milestone-adjudication-2026-11-07.md`. It needs a verbatim 10-Q check and a named reviewer. Nothing has been recorded.
+- Pending human decision: the USAC Thompson Falls milestone, in `docs/analysis/capital-execution-milestone-adjudication-2026-11-07.md`. The 10-Q Note 9 sentence was checked against the filing on 2026-11-07; the note also records that the issuer applied the $12.8M DPA Title III milestone proceeds against the expansion PP&E. It needs a named reviewer. Nothing has been recorded.
 - FI003 (#215), the presentation work (#222/#224) and the 10 November China legal-status review are untouched.
 
 ## 2026-11-07: presentation gallery recovery and final engineering pass (PR #224, draft)
