@@ -44,6 +44,13 @@ What the text does **not** do:
 
 **Related listings:** see Finding 3.
 
+## Recheck, 8 November 2026 (two days before expiry)
+
+- **No instrument yet.** MOFCOM's [policy-release listing](https://www.mofcom.gov.cn/zwgk/zcfb/index.html), regenerated 6 November, adds only two anti-dumping investigations (Nos. 56 and 57 of 2026) and a shipping-insurance guideline. The [export-control catalogue](https://aqygzj.mofcom.gov.cn/qdml/) has not been regenerated since 26 October. Nos. 54 and 55 of 2026 are n-propanol trade-remedy reviews, unrelated.
+- **Official silence.** The full transcript of MOFCOM's [5 November press briefing](https://www.mofcom.gov.cn/xwfbzt/2026/swbzklxxwfbh2026n11y5r/index.html) never mentions rare earths, export controls, No. 70 or the deadline.
+- **Press reports conflict on the new date.** VOA Chinese (6 November) says the truce now ends on 20 January 2027; MOFCOM's own 28 September text says 10 January 2027. Neither date has an implementing announcement behind it yet.
+- **What this means for coding:** if no announcement appears by 10 November, the official record will show No. 70's suspension period ending with no published replacement, alongside an agreed but unimplemented political extension. That state needs an explicit reviewer decision, not an inferred status. The 11 November recheck will record what happened.
+
 ## Finding 3: screening the other 2026 MOFCOM entity listings
 
 Each announcement below was read in full on 31 October 2026. The listing texts give names (and usually addresses) only, so any scope link rests on the listed firm's own description, which is weaker evidence than the instrument itself.
@@ -149,7 +156,7 @@ The working copies live in the git-ignored `data/candidates/candidates.json`. Th
     "status": "draft",
     "createdBy": "policy-researcher",
     "createdAt": "2026-10-31",
-    "updatedAt": "2026-10-31",
+    "updatedAt": "2026-11-08",
     "proposedEvent": {
       "date": "2026-09-28",
       "jurisdiction": "china",
@@ -191,10 +198,22 @@ The working copies live in the git-ignored `data/candidates/candidates.json`. Th
         "url": "https://www.mofcom.gov.cn/zwgk/zcfb/index.html",
         "language": "zh",
         "datePublished": null,
-        "dateAccessed": "2026-10-31",
+        "dateAccessed": "2026-11-08",
         "sourceType": "official",
         "confidence": "primary",
-        "notes": "Page generated 2026-10-30 16:25 (MakeTime). First page lists items dated 2026-09-29 to 2026-10-29, including Nos. 44, 46, 48–53 of 2026; none amends or extends Announcement No. 70 of 2025. Negative evidence only, valid as of the access date."
+        "notes": "First access 2026-10-31: Page generated 2026-10-30 16:25 (MakeTime). First page lists items dated 2026-09-29 to 2026-10-29, including Nos. 44, 46, 48–53 of 2026; none amends or extends Announcement No. 70 of 2025. Negative evidence only, valid as of the access date. Recheck 2026-11-08: Page generated 2026-11-06 17:27 (MakeTime). Items added since the 2026-10-31 check: Nos. 56 and 57 of 2026 (anti-dumping investigations, 6 November) and a seven-agency shipping-insurance guideline (6 November). None amends or extends Announcement No. 70 of 2025. The export-control catalogue page (aqygzj.mofcom.gov.cn/qdml/, generated 2026-10-26) still lists No. 70 as its latest entry on the October 2025 package. Nos. 54 and 55 of 2026, absent from this listing, are n-propanol anti-dumping and countervailing expiry reviews (titles per a news reproduction, not read on MOFCOM). Negative evidence only, valid as of the access date."
+      },
+      {
+        "id": "cand-src-mofcom-press-2026-11-05",
+        "title": "商务部召开例行新闻发布会（2026年11月5日）",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "url": "https://www.mofcom.gov.cn/xwfbzt/2026/swbzklxxwfbh2026n11y5r/index.html",
+        "language": "zh",
+        "datePublished": "2026-11-05",
+        "dateAccessed": "2026-11-08",
+        "sourceType": "official",
+        "confidence": "primary",
+        "notes": "Full transcript read 2026-11-08 (spokesperson 黄玲). No question or answer mentions rare earths, export controls, Announcement No. 70, the 10 November date or the Kuala Lumpur arrangement. The only US question concerned agricultural purchases; the answer ties them to the '300亿对300亿' reciprocal tariff arrangement."
       }
     ],
     "verification": {
@@ -207,7 +226,7 @@ The working copies live in the git-ignored `data/candidates/candidates.json`. Th
         "Does not name the instrument whose end date it would change"
       ]
     },
-    "reviewerNotes": "Recommendation: do NOT promote this as its own event. It is better held as monitoring evidence until MOFCOM/GACC publish (or fail to publish) an implementing announcement before 10 November 2026. If one appears, code that announcement as the event and cite this reading as context. If none appears by 10 November, the No. 70 event and its control-measure status histories need a reviewer decision on what the official record shows.",
+    "reviewerNotes": "Recommendation: do NOT promote this as its own event. It is better held as monitoring evidence until MOFCOM/GACC publish (or fail to publish) an implementing announcement before 10 November 2026. If one appears, code that announcement as the event and cite this reading as context. If none appears by 10 November, the No. 70 event and its control-measure status histories need a reviewer decision on what the official record shows. Recheck 2026-11-08: still no numbered announcement amending No. 70, and MOFCOM's 5 November briefing is silent on it. News coverage (VOA Chinese, 6 November) reports a US–China call urging implementation and states the truce was extended to 20 January 2027, which contradicts MOFCOM's own 10 January 2027; neither is evidence of an instrument.",
     "openQuestions": [
       "Does the extension cover the No. 70 suspension? The text says only 'some tariff and non-tariff measures of each side' (双方各自部分关税和非关税措施).",
       "Recheck MOFCOM policy releases and the export-control catalogue (aqygzj.mofcom.gov.cn/qdml/) daily from 7 to 11 November 2026.",
