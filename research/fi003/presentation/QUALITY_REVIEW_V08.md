@@ -1,6 +1,6 @@
 # FI003 presentation draft 0.8: strategic recommendation and verification report
 
-Status: proposed draft for maintainer review. The publication HOLD stays in place. Draft 0.7 remains the baseline for Jiho's independent assessment (feedback expected about 16–17 November 2026); draft 0.8 does not replace it for that review. A clean build does not authorize publication, and this report records no financial, editorial or human approval.
+Status: proposed draft for maintainer review. The publication HOLD stays in place. Draft 0.7 remains the baseline for Jiho's independent assessment (feedback expected about 16–17 November 2026); draft 0.8 does not replace it for that review. A clean build does not authorize publication, and this report records no financial, editorial or human approval. *Updated 8 November 2026:* Benjamin made draft 0.8 the review baseline for Jiho and Ambrose and provisionally adopted its recommendation as the working thesis. It is not approved for publication, and the HOLD stands.
 
 ## What draft 0.8 is
 
@@ -167,5 +167,6 @@ These are bounded static checks, not a PDF/UA (ISO 14289) or WCAG audit. No acce
 1. **Adopt or reject the recommendation.** It is labelled as a proposed editorial judgment. Decide whether FI003 should carry an explicit recommendation at all, or keep 0.7's considerations framing.
 2. **Criterion marks.** Review the 28 marks on slide 12, especially the "Not stated" marks for committed debt and "Partly" for equity plus revolver on covenants and refinancing.
 3. **Which draft goes to Jiho.** Draft 0.7 stays the independent-review baseline. Decide whether 0.8 is shared after that feedback, or folded into a later draft.
+   *Resolved 8 November 2026 by Benjamin:* draft 0.8 is the baseline for both Jiho and Ambrose. See `../JIHO_HANDOFF.md` and `../AMBROSE_HANDOFF.md`; both messages are unsent pending his approval.
 4. **Shared-renderer legend change.** Confirm the waterfall legend change; it alters draft 0.6 and 0.7 slide 4 if they are ever re-rendered.
 5. **Still open from draft 0.6.** Decision 3 (the base and option split is not stated on any slide) is unchanged.

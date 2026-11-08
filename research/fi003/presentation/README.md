@@ -89,7 +89,7 @@ Reruns are byte-identical. `research/fi003/test_presentation_v07_accessibility.p
 
 ### Draft 0.8 decision report (proposed)
 
-Draft 0.8 recasts the deck as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals company. It opens with an executive answer and closes with a recommendation, the strongest alternative, reversal triggers and the six objections. The recommendation is a proposed editorial judgment pending maintainer review. Model 1.0, the source registers, the 6 November research cutoff and the publication HOLD are unchanged. Draft 0.7 remains the independent-review baseline.
+Draft 0.8 recasts the deck as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals company. It opens with an executive answer and closes with a recommendation, the strongest alternative, reversal triggers and the six objections. The recommendation is a proposed editorial judgment pending maintainer review. Model 1.0, the source registers, the 6 November research cutoff and the publication HOLD are unchanged. As of 8 November 2026, draft 0.8 replaces 0.7 as the baseline for the independent reviews ([Jiho](../JIHO_HANDOFF.md), [Ambrose](../AMBROSE_HANDOFF.md)); 0.7 stays as version history.
 
 Inputs live in `v08/`; outputs in `outputs/presentation-draft-v08/` (PPTX, PDF, accessible PDF and receipt, manifest, contact sheet). See `QUALITY_REVIEW_V08.md` for the argument, the objection handling, output hashes and what is not verified.
 

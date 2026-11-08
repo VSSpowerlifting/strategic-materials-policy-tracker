@@ -1,3 +1,9 @@
+## 2026-11-08: FI003 reviewer baseline moved to draft 0.8 (draft PR #215)
+
+- Benjamin made draft 0.8 the baseline for the next review phase and provisionally adopted its recommendation (equity first, plus an undrawn committed revolver as a backstop) as the working thesis. It is not approved for publication. Draft 0.7 remains as version history.
+- [JIHO_HANDOFF](research/fi003/JIHO_HANDOFF.md) now asks Jiho to review 0.8 and to challenge its financing recommendation. The new [AMBROSE_HANDOFF](research/fi003/AMBROSE_HANDOFF.md) asks Ambrose whether MP's commercial agreements give enough revenue visibility for that structure. Both include a source package and an unsent draft email for Benjamin's approval.
+- No changes to the deck, model 1.0, the 6 November cutoff, sources or calculations. The publication HOLD stands. No emails sent, no sharing changed, no merge.
+
 ## 2026-11-07: presentation gallery recovery and final engineering pass (PR #224, draft)
 
 - Worktree: `.claude/worktrees/smpt-presentation-gallery-9f36b1`; branch `claude/smpt-presentation-gallery-9f36b1`. Recovered intact local commits `946c6a4`, `3b7d8f2`, `4df38d4`, directly descended from remote `59272fb`. The worktree was clean. A recovery ref and Git bundle preserve the original chain.

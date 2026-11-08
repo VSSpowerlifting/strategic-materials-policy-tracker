@@ -1,30 +1,98 @@
-# Jiho — one independent challenge
+# Jiho: independent challenge of draft 0.8
 
-**Prepared November 6, 2026; unsent. Participation and response pending.** Benjamin retains methodological, editorial and publication decisions. No findings or approval are attributed to Jiho.
+**Revised November 8, 2026. Revision message unsent; for Benjamin's approval. Response pending.** Benjamin retains methodological, editorial and publication decisions. No findings or approval are attributed to Jiho.
 
-**Question: What is the strongest objection to our interpretation of MP’s financing transition, and does it change the conclusion?**
+## What changed
 
-Our provisional conclusion is that JPMorgan supported financing flexibility through a replaceable joint construction commitment, equity underwriting and continuing corporate credit. MP obtained equity cash and a smaller credit reserve while retaining construction, liquidity and operating risk. The strongest competing explanation so far is an opportunistic equity raise, with Apple’s contemporaneous agreement another possible influence. We have not established that the chosen structure minimized financing cost or that JPMorgan was indispensable.
+Draft 0.8 is now the review baseline. It supersedes draft 0.7 for this assignment; 0.7 stays in the repository for version history and should not be reviewed further. The November 6 assignment Jiho already received (shared Doc and six-tab Sheet, editor access confirmed) still applies. This revision adds one question: whether 0.8's explicit financing recommendation holds.
 
-Please disagree wherever the evidence warrants it. We are asking for roughly **one page**, with an optional annotated exhibit: state your strongest objection, cite the decisive source/locator, explain whether it changes or narrows the conclusion, and name the single missing fact that would most change your judgment. You need not audit every schedule, build a model or approve the publication. Codex has undertaken the financing comparison, covenant analysis, risk mapping and calculations; your pending response does not block that work.
+Draft 0.8 changes what Jiho is reviewing. Draft 0.7 interpreted a financing transition. Draft 0.8 recasts the same evidence as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals sponsor, and it ends with a recommendation. Model 1.0, the November 6 research cutoff, the source and claim registers and the publication HOLD are unchanged.
 
-## Short source packet
+## The recommendation under challenge
 
-Read originals first where practical. The linked analysis offers our interpretation afterward.
+Draft 0.8 recommends **equity first, plus an undrawn committed revolver as a conditional backstop**. Every slide carries the label "proposed editorial judgment, draft 0.8, 8 November 2026; pending maintainer review." Benjamin has adopted it provisionally as the working thesis. It is not approved for publication.
 
-| Original | Focused reading | What to challenge |
+- **Slide 2:** executive answer.
+- **Slide 11:** four options:
+  - committed debt;
+  - equity only;
+  - equity + revolver;
+  - delay to milestones.
+- **Slide 12:** a seven-criterion matrix with categorical marks (Meets / Partly / Does not / Not stated). It uses no weights or scores.
+- **Slide 13:** clause tree.
+- **Slide 14:** strongest alternative, equity only.
+- **Slide 15:** reversal triggers:
+  - equity window closed → committed debt or delay;
+  - cost-to-complete above cash plus undrawn capacity → more equity first;
+  - covenants binding before 10X revenue → equity only;
+  - otherwise → equity + revolver.
+
+  It also states a transfer limit: a sponsor without an anchor offtake, a price floor or a fallback preferred may not have MP's equity window.
+- **Slide 16:** six objections the deck already concedes:
+  1. Equity is not always cheaper.
+  2. The $1bn commitment expired undrawn.
+  3. JPMorgan acted jointly with Goldman and others.
+  4. Government support does not remove risk.
+  5. A revolver is not cash.
+  6. No plan here is optimal or fully funded.
+
+## Question for Jiho
+
+**Does the evidence support recommending equity plus a backstop revolver over the alternatives? If not, what should the deck conclude instead?**
+
+The core of the November 6 assignment still applies:
+
+- JPMorgan's role relative to the other banks;
+- the commitment against the equity and the conditional credit;
+- whether government support is carrying too much causal weight;
+- a retain / narrow / reframe judgment on the case.
+
+Within that scope, please concentrate on these points:
+
+1. **Recommendation versus alternatives.** Is equity + revolver better supported than equity only (slide 14) or committed debt? Would you change any of the slide 12 marks? Two have the most influence:
+   - "Liquidity to draw later" (equity + revolver: Meets; equity only: Does not);
+   - "No debt service pre-revenue" (equity + revolver: Partly).
+2. **Hindsight and selection.** The revolver has never been drawn, and the $1bn commitment expired undrawn. Does the deck recommend a structure because it happened to work for MP, and not because the evidence shows it was the better choice before the outcome was known?
+3. **Transfer.** Do the slide 15 triggers and the transfer limit stop a reader from applying MP's sequence to a sponsor that lacks MP's government support and market access? If they do not, what should the deck say?
+
+You may reject the recommendation, narrow it, or propose a different conclusion. "Equity only," "no general recommendation," or "the case supports description, not advice" are all acceptable answers if the evidence supports them.
+
+## What to send back
+
+About **one to two pages**, plus an optional annotated slide:
+
+- your strongest objection to the recommendation, citing **at least three references** with the source and locator (pinpoint section, note or page);
+- whether it should be **retained, narrowed or reframed**, with the wording you would use;
+- **the single missing fact** that would most change your judgment.
+
+A workbook audit, a model rebuild and publication sign-off are not part of this assignment. Ambrose is reviewing the same 0.8 deck separately, on a different question: whether MP's commercial agreements give enough revenue visibility for the recommended structure. Your two reviews are independent, so please do not coordinate answers.
+
+## Source package
+
+Read the originals first. The deck and analysis give our interpretation and should come second.
+
+| Original | Focused reading | What to test |
 |---|---|---|
-| [Transaction agreement](https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm) | §2.05; §6.01 additional-preferred fallback/use restrictions; §§6.09/6.13 | Was the commitment meaningful beyond a closing deliverable? Does the public fallback change our interpretation? MP’s guarantee runs to DoD; MP must seek capital if funding is insufficient |
-| [2025 10-K](https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm) | Note 3, Commitment Letter; Note 18, offering | Undrawn expiration, $7.4m fees, equity takeout; missing original loan terms |
-| [Credit agreement](https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm) | §1.01 EBITDA (a)(xiv), Covenant Trigger Event, Net Indebtedness; §§6.01(b), 7.11 | Does explicit recognition of Defense payments support our interpretation without actual certificates? Earnings tests can precede expected commissioning |
-| [Q3 2026 10-Q](https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm) | Note 8; Notes 13/15; MD&A Cash Flows | Zero revolver draws/$203m capacity, $110.9m PPA receipts and continued liquidity use |
+| [Transaction agreement (S02)](https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm) | §2.05; §6.01(g) additional-preferred fallback and use restrictions; §§6.09, 6.13 | Whether the public fallback, more than the bank commitment, made equity first safe. MP must seek capital if funding is insufficient. |
+| [2025 10-K (S11)](https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm) | Note 3, Commitment Letter; Note 18, offering | $1bn commitment expired undrawn on 26 August 2025; $7.4m commitment fees; equity takeout; original loan terms not public |
+| [Credit agreement (S09)](https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm) | §1.01 Consolidated EBITDA (a)(xiv), Covenant Trigger Event, Cash Equivalents; §§6.01(b), 7.11 | Pre-trigger $500m minimum unrestricted cash; later leverage ≤4.0x and cash-interest coverage ≥3.0x. Whether these tests make "a revolver is not cash" decisive against slide 15's "otherwise" branch |
+| [Q3 2026 10-Q (S19)](https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm) | Note 8; Notes 13, 15; MD&A Cash Flows | No revolver draws; $203.0m available after $72m of letters of credit; operating cash flow of −$7.757m in 9m 2026; liquid assets down $492.4m since the raise |
+| [Apple 8-K, 15 July 2025 (S17)](https://www.sec.gov/Archives/edgar/data/1801368/000119312525159093/d904727d8k.htm) | Item 8.01 | Optional. A competing explanation for the equity window, announced the day before pricing |
 
-Optional: [Apple July 15 disclosure](https://www.sec.gov/Archives/edgar/data/1801368/000119312525159093/d904727d8k.htm), to challenge causality around equity pricing. [analysis.md](analysis.md) contains the ranked alternatives and financing comparison; [sources.json](sources.json) supplies dates. The model and links are in [PUBLICATION_PLAN.md](PUBLICATION_PLAN.md); no workbook audit is assigned. An ordinary equity takeout is now our strongest explanation of the sequence. Please challenge whether the resulting case gives a reader enough insight, including whether JPMorgan or government support receives too much explanatory weight.
+Repository files, all at the same commit:
 
-## Draft message Benjamin can send
+- [Draft 0.8 PDF](outputs/presentation-draft-v08/fi003-jpmorgan-mp-materials-draft-0.8.pdf) and [accessible PDF](outputs/presentation-draft-v08/fi003-jpmorgan-mp-materials-draft-0.8-accessible.pdf)
+- [QUALITY_REVIEW_V08](presentation/QUALITY_REVIEW_V08.md): argument, objection handling and unverified items. It refers to "eight criteria," but slide 12 has seven. The slide is correct.
+- [analysis.md](analysis.md): ranked alternative explanations and the financing comparison
+- [exhibits/financing_economics.csv](exhibits/financing_economics.csv), [exhibits/revolver_sensitivity.csv](exhibits/revolver_sensitivity.csv), [exhibits/liquidity_bridge.csv](exhibits/liquidity_bridge.csv): the frozen model 1.0 schedules behind slides 11–15
+- [sources.json](sources.json) for dates and [evidence.csv](evidence.csv) for claim-level locators
 
-Hi Jiho — I’m working on a short SMPT case about JPMorgan and MP Materials’ move from a construction-financing commitment to equity and corporate credit. Could you give the argument one focused challenge: what is the strongest objection to our interpretation, and does it change the conclusion?
+## Draft revision message for Benjamin to send (unsent)
 
-I’ve put four focused source readings and the provisional argument in the packet. A page of your own reasoning would be plenty; an annotated exhibit is optional. Please feel free to disagree with the thesis or say we’re giving JPMorgan or government support too much explanatory weight. Codex has built the comparison and working model; I’d value your strongest objection rather than a workbook audit or publication sign-off. We’re aiming for December 4 if the research and review are ready. I can work around your availability.
-
-— Benjamin
+> Hi Jiho — a quick update before you get far into the FI003 review. I've rebuilt the deck as draft 0.8, and please review that version instead of 0.7. It covers the same evidence and model, but it now ends with an explicit recommendation: equity first, with an undrawn revolver as a backstop. Slides 11–16 lay out the options, the criteria, the triggers that would reverse the recommendation and the objections.
+>
+> Everything from my November 6 note still applies: JPMorgan's role relative to the other banks, the commitment against the equity and credit, whether government support carries too much weight, and your retain / narrow / reframe judgment. I'd now also like you to test the recommendation itself. Is equity plus a revolver better supported than equity only or committed debt? Am I recommending a structure because it happened to work for MP? And would it mislead a sponsor that lacks MP's government support?
+>
+> Please disagree freely. "Equity only" or "this case shouldn't give advice at all" are fair answers if the evidence points that way. One to two pages with at least three cited references is plenty, plus the one missing fact that would most change your view. I've attached the 0.8 PDF and a short source list. Is mid-November still workable? Exams come first, so tell me if you need more time.
+>
+> — Benjamin
