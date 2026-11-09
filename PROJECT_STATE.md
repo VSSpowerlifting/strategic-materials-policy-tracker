@@ -1,3 +1,15 @@
+## 2026-11-09: FI002 deck release candidate 1 (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-1/` holds the RC1 PPTX, PDF, contact sheet, renders, manifest and QC record. The builder is `docs/research/fi002-bhp-copper/release/make_release_candidate.py`.
+- Built from revision 4, which stays archived unchanged. The badge and internal labels are removed. No figures or wording change, and the research cutoff is still 5 Nov 2026.
+- The PDF embeds Archivo only. The LibreOffice editability tier passes. All 6 BHP links load in a real browser.
+- Still open:
+  - the PowerPoint tier (PowerPoint is not installed);
+  - the slide-11 connector-line overlap, inherited from rev4, for the reviewer to judge;
+  - the Drive upload, blocked because the connector is not on `ben.yang@gwmail.gwu.edu`;
+  - human approval.
+- The live deck, downloads and Drive files are unchanged.
+
 ## 2026-11-09: FI002 executive deck revision 4 (draft PR #233, review copy)
 
 - Branch `claude/fi002-presentation-redesign-8ed4f5`, which includes `d13b5bb` (opt-in `plain_frame` for research decks).

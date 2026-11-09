@@ -1,0 +1,270 @@
+#!/usr/bin/env python3
+"""Derive the FI002 public-release candidate (RC1) from the revision-4 review copy.
+
+Revision 4 stays untouched as the review archive. RC1 is a byte-level derivative:
+it removes the draft badge, the cover review notice and the internal editorial
+labels in speaker notes, and maps the master's Arial bullet font to Archivo.
+Every other package part and XML byte must be identical to revision 4; the
+script proves that before it writes anything. It then exports the PDF with
+LibreOffice using the installed Archivo faces, audits it against the revision-4
+PDF, renders each slide and builds the contact sheet.
+
+The renderer is not used: its research contract keeps the draft badge on every
+slide (tests/exhibit-research.test.ts). Removing it is a human-gated release
+step, and this script only prepares the candidate for that review.
+
+Run from the repository root with a Python that has PyMuPDF, Pillow and fontTools:
+    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py
+"""
+from __future__ import annotations
+
+import hashlib
+import io
+import json
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+from zipfile import ZipFile
+
+import fitz
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(ROOT / "scripts"))
+from reissue_archivo_decks import XML_FONT, FORBIDDEN_FONT, contact_sheet  # noqa: E402
+
+REV4 = ROOT / "docs/research/fi002-bhp-copper/output/review/revision-4"
+REV4_PPTX = REV4 / "SMPT_FI002_BHP_Copper_Strategy_Deck_rev4.pptx"
+REV4_PDF = REV4 / "SMPT_FI002_BHP_Copper_Strategy_Deck_rev4.pdf"
+REV4_SHA = "04a2cc279c77d44dc5a8c81b54c721cae7f4c375f1f79438ab6b737d72009939"
+REV4_PDF_SHA = "78343271ebfd548276d5eb54e1460fed705aa8b5a9fadbec9a09e6227b8ac1bd"
+OUT = ROOT / "docs/research/fi002-bhp-copper/output/review/release-candidate-1"
+STEM = "SMPT_FI002_BHP_Copper_Strategy_Deck_RC1"
+SLIDES = 11
+
+DRAFT = "DRAFT · REVIEW GATES PENDING"
+REMOVED_SHAPES = {"frame:draft-badge", "frame:cover-notice"}
+# Internal labels in speaker notes, removed verbatim. Evidence titles, URLs and
+# locators are kept.
+NOTE_LABELS = [
+    re.compile(r"^Pattern: [a-z-]+\. "),
+    re.compile(r"Classification: research\. "),
+    re.compile(re.escape(DRAFT + ". ")),
+    re.compile(re.escape("Publication authorization is not granted by this tool. ")),
+    re.compile(re.escape(" Review gates A–E pending.") + r"$"),
+    re.compile(re.escape(" No QC record attached; review gates A–E are pending.") + r"$"),
+]
+LEFTOVER = re.compile(r"DRAFT|REVIEW GATES|Review gates|Classification:|Pattern:|authorization|QC record")
+SP = re.compile(rb"<p:sp>(?:(?!<p:sp>).)*?</p:sp>", re.S)
+SHAPE_NAME = re.compile(rb'<p:cNvPr id="\d+" name="([^"]*)"')
+
+
+def sha(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def strip_shapes(xml: bytes) -> tuple[bytes, list[str]]:
+    removed: list[str] = []
+
+    def drop(m: re.Match) -> bytes:
+        name = SHAPE_NAME.search(m.group(0))
+        if name and name.group(1).decode() in REMOVED_SHAPES:
+            removed.append(name.group(1).decode())
+            return b""
+        return m.group(0)
+
+    return SP.sub(drop, xml), removed
+
+
+def strip_notes(xml: bytes) -> tuple[bytes, int]:
+    texts = re.findall(rb"<a:t>([^<]*)</a:t>", xml)
+    body = texts[0].decode()
+    cleaned = body
+    hits = 0
+    for label in NOTE_LABELS:
+        cleaned, n = label.subn("", cleaned)
+        hits += n
+    if cleaned.startswith("Cover. "):
+        cleaned = "Cover."
+    if LEFTOVER.search(cleaned):
+        raise RuntimeError("Internal label left in notes: " + cleaned[:200])
+    out = xml.replace(b"<a:t>" + texts[0] + b"</a:t>", b"<a:t>" + cleaned.encode() + b"</a:t>", 1)
+    return out, hits
+
+
+def build_pptx() -> tuple[bytes, dict]:
+    original = REV4_PPTX.read_bytes()
+    if sha(original) != REV4_SHA:
+        raise RuntimeError("Revision-4 PPTX hash changed; refusing to derive RC1")
+    if sha(REV4_PDF.read_bytes()) != REV4_PDF_SHA:
+        raise RuntimeError("Revision-4 PDF hash changed; refusing to derive RC1")
+    output = io.BytesIO()
+    log = {"shapes_removed": {}, "note_labels_removed": 0, "font_replacements": {}}
+    with ZipFile(io.BytesIO(original)) as zi, ZipFile(output, "w") as zo:
+        for info in zi.infolist():
+            data = zi.read(info.filename)
+            name = info.filename
+            if re.fullmatch(r"ppt/slides/slide\d+\.xml", name):
+                data, removed = strip_shapes(data)
+                if len(removed) != 1:
+                    raise RuntimeError(f"{name}: expected one review shape, removed {removed}")
+                log["shapes_removed"][name] = removed[0]
+            elif re.fullmatch(r"ppt/notesSlides/notesSlide\d+\.xml", name):
+                data, hits = strip_notes(data)
+                log["note_labels_removed"] += hits
+            if name.startswith("ppt/") and name.endswith((".xml", ".rels")):
+                data, n = XML_FONT.subn(rb"\1Archivo\3", data)
+                if n:
+                    log["font_replacements"][name] = n
+                if FORBIDDEN_FONT.search(data):
+                    raise RuntimeError("Legacy typeface remains in " + name)
+            zo.writestr(info, data)
+    rc = output.getvalue()
+    verify_diff(original, rc)
+    return rc, log
+
+
+def normalise(name: str, data: bytes) -> bytes:
+    data = re.sub(rb'typeface="[^"]+"', b'typeface="FONT"', data)
+    if re.fullmatch(r"ppt/slides/slide\d+\.xml", name):
+        data, _ = strip_shapes(data)
+    if re.fullmatch(r"ppt/notesSlides/notesSlide\d+\.xml", name):
+        data = re.sub(rb"(<a:t>)[^<]*(</a:t>)", rb"\1TEXT\2", data, count=1)
+    return data
+
+
+def verify_diff(before: bytes, after: bytes) -> None:
+    with ZipFile(io.BytesIO(before)) as old, ZipFile(io.BytesIO(after)) as new:
+        if old.namelist() != new.namelist():
+            raise RuntimeError("Package part list changed")
+        for name in old.namelist():
+            a, b = old.read(name), new.read(name)
+            if a == b:
+                continue
+            if not name.endswith((".xml", ".rels")):
+                raise RuntimeError("Binary part changed: " + name)
+            if normalise(name, a) != normalise(name, b):
+                raise RuntimeError("Unexpected XML change in " + name)
+            if re.fullmatch(r"ppt/notesSlides/notesSlide\d+\.xml", name):
+                ta = re.findall(rb"<a:t>([^<]*)</a:t>", a)[0].decode()
+                tb = re.findall(rb"<a:t>([^<]*)</a:t>", b)[0].decode()
+                for url in re.findall(r"https?://\S+", ta):
+                    if url not in tb:
+                        raise RuntimeError(f"{name}: evidence URL lost: {url}")
+        for name in new.namelist():
+            if name.endswith(".xml") and re.search(rb"DRAFT|REVIEW GATES", new.read(name)):
+                raise RuntimeError("Draft text remains in " + name)
+        if b"RCA pending" not in new.read("ppt/slides/slide7.xml"):
+            raise RuntimeError("Research text 'RCA pending' was lost on slide 7")
+
+
+def soffice() -> str:
+    for c in ("soffice", "libreoffice", "/Applications/LibreOffice.app/Contents/MacOS/soffice"):
+        p = shutil.which(c) or (c if Path(c).is_file() else None)
+        if p:
+            return p
+    raise RuntimeError("LibreOffice not found")
+
+
+ARCHIVO_DIR = Path.home() / "Library/Fonts/smpt-archivo"
+ARCHIVO_FACES = ("Archivo-Regular.ttf", "Archivo-Medium.ttf", "Archivo-SemiBold.ttf", "Archivo-Bold.ttf")
+
+
+def export_pdf(pptx: Path) -> Path:
+    # LibreOffice on macOS resolves fonts through CoreText, which does not see faces in a
+    # subfolder of ~/Library/Fonts. Installing them in the temporary profile's user/fonts
+    # folder makes LibreOffice register them for this export only.
+    with tempfile.TemporaryDirectory(prefix="smpt-lo-") as tmp:
+        t = Path(tmp)
+        fonts = t / "profile/user/fonts"
+        fonts.mkdir(parents=True)
+        for face in ARCHIVO_FACES:
+            if not (ARCHIVO_DIR / face).is_file():
+                raise RuntimeError(f"Archivo face missing: {ARCHIVO_DIR / face}")
+            shutil.copy2(ARCHIVO_DIR / face, fonts / face)
+        subprocess.run([soffice(), "-env:UserInstallation=" + (t / "profile").as_uri(), "--headless",
+                        "--convert-to", 'pdf:impress_pdf_Export:{"UseTaggedPDF":{"type":"boolean","value":"true"}}',
+                        "--outdir", str(t), str(pptx)], check=True, timeout=240, capture_output=True)
+        pdf = t / (pptx.stem + ".pdf")
+        if fitz.open(pdf).page_count != SLIDES:
+            raise RuntimeError("Unexpected PDF page count")
+        target = pptx.with_suffix(".pdf")
+        shutil.copy2(pdf, target)
+    return target
+
+
+def audit_pdf(pdf: Path) -> dict:
+    """Stricter than reissue_archivo_decks.audit_pdf: page text must equal revision 4 exactly,
+    ignoring whitespace, once the removed badge string is taken out."""
+    before, after = fitz.open(REV4_PDF), fitz.open(pdf)
+    if before.page_count != SLIDES or after.page_count != SLIDES:
+        raise RuntimeError("PDF page count mismatch")
+    fonts = sorted({f[3] for pg in after for f in pg.get_fonts(full=True)})
+    if not fonts or not all("Archivo" in f for f in fonts):
+        raise RuntimeError("Non-Archivo font embedded: " + repr(fonts))
+    squash = lambda t: re.sub(r"\s+", "", t)
+    for i, (o, n) in enumerate(zip(before, after), 1):
+        expected = squash(o.get_text()).replace(squash(DRAFT), "", 1)
+        if squash(n.get_text()) != expected:
+            raise RuntimeError(f"Page {i}: text differs from revision 4 beyond the removed badge")
+        if re.search(r"DRAFT|REVIEW GATES", n.get_text()):
+            raise RuntimeError(f"Page {i}: draft text remains")
+    links = lambda d: [sorted({l["uri"] for l in pg.get_links() if l.get("uri")}) for pg in d]
+    if links(before) != links(after):
+        raise RuntimeError("PDF link set differs from revision 4")
+    return {"pages": SLIDES, "embedded_fonts": fonts, "links": sum(map(len, links(after))),
+            "text_check": "each page equals revision 4 minus the badge (whitespace ignored)",
+            "tagged": bool(after.pdf_catalog() and "StructTreeRoot" in after.xref_object(after.pdf_catalog())),
+            "title": after.metadata.get("title"), "pdf_sha256": sha(pdf.read_bytes())}
+
+
+def renders(pdf: Path) -> list[str]:
+    folder = OUT / "renders"
+    folder.mkdir(exist_ok=True)
+    names = []
+    for i, page in enumerate(fitz.open(pdf), 1):
+        pix = page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False)
+        path = folder / f"slide-{i:02d}.png"
+        Image.frombytes("RGB", (pix.width, pix.height), pix.samples).save(path, optimize=True)
+        names.append(path.name)
+    return names
+
+
+def main() -> None:
+    if OUT.exists() and any(OUT.glob("*.pptx")):
+        raise RuntimeError(f"{OUT} already holds a candidate; use a new RC number instead of overwriting")
+    rc, log = build_pptx()
+    OUT.mkdir(parents=True, exist_ok=True)
+    pptx = OUT / (STEM + ".pptx")
+    pptx.write_bytes(rc)
+    pdf = export_pdf(pptx)
+    pdf_audit = audit_pdf(pdf)
+    sheet = OUT / "SMPT_FI002_RC1_contact_sheet.png"
+    contact_sheet(pdf, sheet)
+    manifest = {
+        "deck": pptx.name,
+        "derived_from": {"path": str(REV4_PPTX.relative_to(ROOT)), "sha256": REV4_SHA},
+        "pptx_sha256": sha(rc),
+        "pdf": pdf.name,
+        **{k: v for k, v in pdf_audit.items() if k != "pdf_sha256"},
+        "pdf_sha256": pdf_audit["pdf_sha256"],
+        "contact_sheet": sheet.name,
+        "contact_sheet_sha256": sha(sheet.read_bytes()),
+        "renders": renders(pdf),
+        "changes": log,
+        "unchanged": "all other package parts and XML bytes are identical to revision 4 (verified)",
+        "research_cutoff": "2026-11-05",
+        "review_gates": "agent QC recorded; human approval pending",
+        "publication_authorization": "pending human approval",
+        "tools": {"libreoffice": subprocess.run([soffice(), "--version"], capture_output=True, text=True).stdout.strip(),
+                  "pymupdf": fitz.VersionBind},
+    }
+    (OUT / (STEM + ".manifest.json")).write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+    print(json.dumps(manifest, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
