@@ -27,25 +27,25 @@ export const metadata: Metadata = {
 
 const featured = [
   {
-    category: "Financial Intelligence 002",
+    category: "Strategy & Finance",
     title: "Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
     description: "Copper-price exposure, replacement economics and BHP’s investment decision.",
     href: "/research/escondida-copper",
   },
   {
-    category: "Financial Intelligence 001",
+    category: "Strategy & Finance",
     title: "Inside Tungsten West’s £71 Million Restart Financing",
     description: "Hemerdon’s funding package, project expenditure and refinancing exposure.",
     href: "/research/hemerdon-financing",
   },
   {
-    category: "Applied Strategy 001",
+    category: "Strategy & Finance",
     title: "U.S. Antimony Supply Resilience, 2027–2031",
     description: "A defense-manufacturing procurement case with an editable scenario model.",
     href: "/research/antimony-supply-resilience",
   },
   {
-    category: "Research Dossier 001",
+    category: "Policy Research",
     title: "Tungsten Supply Security",
     description: "Comparative financing and industrial development across four jurisdictions.",
     href: "/research/tungsten-supply-security",
