@@ -56,7 +56,6 @@ test("approved model, brief, evidence and four calculation datasets are byte-ide
   const copies = {
     "model.xlsx": "BHP_Copper_Model.xlsx",
     "executive-brief.pdf": "BHP_Copper_Memo.pdf",
-    "executive-slides.pdf": "BHP_Copper_Strategy_Deck.pdf",
     "evidence-register.csv": "Evidence_Register.csv",
     "claim-source-matrix.csv": "Claim_Source_Matrix.csv",
     "price-sensitivity.csv": "Price_Sensitivity.csv",
@@ -70,6 +69,18 @@ test("approved model, brief, evidence and four calculation datasets are byte-ide
       sha(original + "SMPT_FI002_" + source),
       target,
     );
+});
+
+test("published executive slides are byte-identical to author-approved RC4", () => {
+  const accepted = "docs/research/fi002-bhp-copper/output/review/release-candidate-4/";
+  assert.equal(
+    sha(root + "executive-slides.pdf"),
+    sha(accepted + "SMPT_FI002_BHP_Copper_Strategy_Deck_RC4.pdf"),
+  );
+  assert.equal(
+    sha(root + "executive-slides.pptx"),
+    sha(accepted + "SMPT_FI002_BHP_Copper_Strategy_Deck_RC4.pptx"),
+  );
 });
 
 test("all four interactive screens match the independently reproduced approved CSV", () => {
