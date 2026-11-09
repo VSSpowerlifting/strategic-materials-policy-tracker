@@ -1,3 +1,13 @@
+## 2026-11-09: Policy Analysis 001 on the suspension extension (stacked draft PR)
+
+- Branch `claude/smpt-research-china-suspension-extension`, created from `c7c0d55` (the head of draft PR #231). Draft PR only: not merged, deployed or published. AI-generated analysis: a draft until maintainer approval. The review below is automated and is not human approval.
+- Release blocker: the article links to the #231 records (`china-rare-earth-suspension-extension-2026-11`, `china-rare-earth-suspension-2025-11`, `ctl-cn-ree-2026-11-suspension-continuation`). Those exist only on the #231 branch, so this PR is based on it and cannot merge before #231.
+- Page `/research/china-export-control-suspension-extension` (`app/research/china-export-control-suspension-extension/page.tsx`); entries added to `app/research/page.tsx` and `app/sitemap.ts`. No seed data, `site.lastUpdated`, `legalStatusAsOf` or `revisedOn` changed.
+- Primary sources raw-checked on mofcom.gov.cn: No. 58 of 2026; Nos. 55, 56, 57, 58, 61, 62 and 70 of 2025; No. 72 of 2025; No. 46 of 2024; No. 18 of 2025; the 30 Oct 2025 spokesperson Q&A.
+- Review: one independent round (legal, editorial, commercial), one revision; no Critical findings. Record: `docs/research/china-suspension-extension-review-2026-11-09.md` (H1 to H9, M1 to M11, L1 to L9, data-record notes, open uncertainties).
+- Data notes for the maintainer (not edited here): no `src-mofcom-55` or No. 55 clause rows; seed rows for No. 61 end-use, military and chip-review clauses show `in_force` from 2025-10-09, while the text dates only item 1(3) to publication and items 2 to 7 state no separate date.
+- QA: validate, lint (0 errors, 28 existing test-file warnings), typecheck, test (1160/1160) and build pass. Dev-server check at 375, 768 and 1024 px: no horizontal page overflow, no console errors, headings h1/h2 in order, both tables carry captions and column/row scopes, 12 unique MOFCOM URLs, internal record links return 200.
+
 ## 2026-11-09: China suspension continued to 10 Jan 2027 (local draft, issue #207)
 
 - Branch `claude/china-export-control-suspension-c698f6`. Draft PR only: not merged, deployed or published. AI-generated record: a draft until maintainer review.
