@@ -33,7 +33,7 @@ test("research index and all five article headers use the same two public catego
 });
 
 test("research index uses revised China publication title", () => {
-  const headline = "China Extends Suspension of Six Export-Control Announcements to 10 January 2027";
+  const headline = "China Extends the Suspension of Six Export-Control Announcements Through January 10, 2027";
   assert.ok(index.includes(headline));
   assert.ok(read("app/research/china-export-control-suspension-extension/page.tsx").includes(headline));
 });
