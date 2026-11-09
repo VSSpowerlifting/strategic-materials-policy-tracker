@@ -1,6 +1,6 @@
 # SMPT Editorial Authenticity & Visual Integrity Standard
 
-**Version:** 1.0 · **Adopted:** 5 November 2026  
+**Version:** 1.1 · **Adopted:** 5 November 2026 · **Revised:** 9 November 2026 (§2: manufactured terms and micro-labels)  
 **Applies to:** New and revised SMPT research presentations and their analytical copy, figures, charts, diagrams, editable assets and PDF exports.  
 **Companion documents:** [Presentation Standard v2](SMPT_PRESENTATION_STANDARD_V2.md) · [Exhibit and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [Four-Layer Analytical Framework](../../research/SMPT_APPLIED_STRATEGY_STANDARD.md)
 
@@ -74,6 +74,10 @@ Could the statement appear unchanged in a report on a completely different compa
 **Specific:** "The core loan's short tenor overlaps with Hemerdon's commissioning and ramp-up period, making the timing of saleable output, customer receipts and refinancing arrangements material to creditor exposure."
 
 Make the source of each conclusion explicit: **documented fact**, **management/government claim**, **SMPT calculation**, **assumption**, or **analyst inference**.
+
+### Manufactured terms and micro-labels
+
+Use the vocabulary of the sources and the field: the issuer's project name, the bank's forecast basis, the tracker's status values. Do not coin a branded phrase for the analysis itself, such as "the readiness gap" or "the duration trap", and then repeat it as if it were an established term. Describe the thing plainly each time it appears. Do not add eyebrows, kickers, numbered section tags, "Key takeaway" or "Interpretation" headings, or subtitles that restate the title. A label must name a source, a status, a unit, a scenario, a navigation target or an accessibility role; otherwise remove it. Keep required source lines, status badges, axis and legend labels, draft markings and navigation.
 
 ## 3. Visual reasoning: evidence before ornament
 

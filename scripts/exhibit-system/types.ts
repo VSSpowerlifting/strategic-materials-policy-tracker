@@ -109,6 +109,8 @@ export interface Area {
 export interface RenderHelpers {
   /** Content area (inches) the exhibit must stay inside. */
   readonly area: Area;
+  /** Research decks with plain_frame: renderers drop their own small-caps headings. */
+  plain?: boolean;
   /** Native chart; tier inferred from `helper` flag. */
   chart(
     name: string,

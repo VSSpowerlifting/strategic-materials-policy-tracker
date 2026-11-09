@@ -92,6 +92,18 @@ test("plain_frame is opt-in, research-only and keeps source, draft and annotatio
     assert.match(body, /name="annot:interpretation"/);
     const verify = spawnSync("python3", ["-B", "scripts/exhibit-system/verify_editability.py", "--deck", out, "--manifest", manifest], { encoding: "utf8" });
     assert.equal(verify.status, 0, verify.stdout + verify.stderr);
+    // The table-with-notes pattern drops its "READING THE TABLE" micro-heading only under plain_frame.
+    const ewi = loadFixture("exhibit-with-interpretation");
+    const ewiSlide = { pattern: "exhibit-with-interpretation", table_reason: "Exact terms", exhibit: { title: ewi.title, subtitle: ewi.subtitle, annotation: ewi.annotation, data: ewi.data, source: "Test-only evidence stub, Table A", evidence_refs: ["E1"] } };
+    for (const plain of [true, false]) {
+      const p = join(dir, `ewi-${plain}.json`);
+      writeFileSync(p, JSON.stringify({ ...spec(), plain_frame: plain, slides: [ewiSlide] }));
+      const o = join(dir, `ewi-${plain}.pptx`);
+      await renderResearchDeck(p, o);
+      const xml = await (await JSZip.loadAsync(readFileSync(o))).file("ppt/slides/slide2.xml")!.async("string");
+      if (plain) assert.doesNotMatch(xml, /READING THE TABLE|reading-heading/);
+      else assert.match(xml, /READING THE TABLE/);
+    }
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 test("renderer helpers enforce the exhibit typography floor", () => {

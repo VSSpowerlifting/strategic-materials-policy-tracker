@@ -136,6 +136,7 @@ export async function buildDeck(
     slide.background = { color: C.paper };
     const records: ElementRecord[] = [];
     const h = makeHelpers(slide, contentArea(e.fixture), records, pptx.ShapeType, pptx.ChartType);
+    if (opts.plainFrame) h.plain = true;
     renderer.render(h, data, e.fixture);
     // Keep the fixed frame above native tables in renderers that reflow them.
     drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, annotationHeading: !opts.plainFrame });
