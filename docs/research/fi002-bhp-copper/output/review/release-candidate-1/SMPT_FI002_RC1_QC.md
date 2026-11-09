@@ -19,12 +19,25 @@
 
 The builder works on the rev4 PPTX package, not on the spec, so no exhibit is rebuilt:
 
-- It removes the `frame:draft-badge` shape from all 11 slides.
-- It removes the `frame:cover-notice` shape from the cover.
-- It strips the remaining internal editorial labels: 54 removals in total, including the badges and the notice.
+- It removes one shape per slide, 11 in total. On slides 2–11 this is `frame:draft-badge`. On the cover it is `frame:cover-notice`, which carries the same "DRAFT · REVIEW GATES PENDING" text. The cover has no separate badge.
+- It removes 54 renderer labels from the speaker notes. On slides 2–11 there are five per slide:
+  - `Pattern: <exhibit type>.`
+  - `Classification: research.`
+  - `DRAFT · REVIEW GATES PENDING.`
+  - `Publication authorization is not granted by this tool.`
+  - `Review gates A–E pending.`
+
+  The cover has four: it has no Pattern label, and it reads "No QC record attached; review gates A–E are pending." instead.
 - It maps the font slots in the slide master (×9) and the theme (×5) to Archivo, so no Arial or Calibri fallback is left.
 
-The builder compares the result with rev4 XML: removing those shapes and making those font substitutions is the whole difference. Every slide's text equals the rev4 text minus the badge string, and the evidence and note URL sets equal rev4's.
+Each removed string was listed by a rev4-to-RC1 diff and checked. All are renderer or review-tooling labels. None is a source line, unit, status, scenario or hypothetical marker, or caveat. The evidence titles, URLs and locators in the notes are kept, and so is the slide text "RCA pending" on slide 7.
+
+The builder compares the result with rev4 XML: removing those shapes and labels and making those font substitutions is the whole difference. Each PDF page's text equals the rev4 text minus the badge string (on the cover, the notice, which has the same text). The evidence and note URL sets equal rev4's.
+
+**Other places checked for internal labels:**
+- **PPTX parts:** a case-insensitive search of every part found no internal labels. It covered slides, notes, layouts, masters, `docProps`, alt-text `descr` and the five embedded chart workbooks, and searched for "draft", "review gates", "pending", "QC", "kicker", "Classification:" and "Pattern:". The only hit was the research text "RCA pending".
+- **PPTX core properties:** title as in the PDF, subject "SMPT research exhibits", creator "SMPT exhibit system".
+- **PDF metadata (`pdfinfo -meta`):** the same title, description and author, and no internal labels.
 
 ## Verification
 
@@ -34,7 +47,8 @@ The builder compares the result with rev4 XML: removing those shapes and making 
 | Font embedding (`pdffonts`) | Every font is Archivo: 11 Archivo Regular and Bold subset fonts, all embedded, all subset, each with a Unicode map. No Liberation Sans, Arial or Calibri. This closes the rev4 font item. |
 | PDF properties (`pdfinfo`) | Tagged: yes. 11 pages at 959.98 × 540 pt. Title "Goldman Sachs' Copper Outlook and BHP's $6 Billion Escondida Decision". |
 | Badge and label removal | `pdftotext` finds no "DRAFT" or "REVIEW GATES" text. The PPTX XML has no badge or notice shapes. |
-| Text and link audit (`audit_pdf` in the builder) | PASS. Each page's text equals rev4's minus the badge. The evidence and note URL sets are identical. The source URLs sit in the slide notes and source lines, not in PDF link annotations, as in rev4. |
+| Repository gates | `npm run validate` and `npm run lint` both exited 0. The change touches documentation and review files only. |
+| Text and link audit (`audit_pdf` in the builder) | PASS. Each page's text equals rev4's minus the badge (the notice on the cover). The evidence and note URL sets are identical. The source URLs sit in the slide notes and source lines, not in PDF link annotations, as in rev4. |
 | Visual inspection after export | Done for all 11 slides and the contact sheet. No badge, internal label, overflow, overlap or clipping. All text is set in Archivo, and the figures match rev4. Slide 7 still reads "Permit submitted 17 March 2026; RCA pending; FID CY2027–28; first production CY2031–32". The titles on slides 10 and 11 wrap to two lines, which is acceptable. |
 | `verify_editability.py`, structural tier | Run against the rev4 element manifest. It flags only the intended removals: the 11 `frame:draft-badge` shapes and `frame:cover-notice`, all reported as "research draft badge absent". Nothing else is flagged. The research-mode CLI refuses a deck without the badge by design, so this tier cannot pass a release deck. The check here is that the badges and notice are the only differences. |
 | `verify_editability.py`, LibreOffice tier | PASS: it converted the deck to PDF and re-saved it as PPTX. The PDF has 11 pages; the re-saved PPTX keeps all 5 native chart parts and has 0 raster `p:pic` elements. |
