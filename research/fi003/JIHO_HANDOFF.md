@@ -1,16 +1,16 @@
-# Jiho: independent challenge of draft 0.8
+# Jiho: independent challenge of draft 0.9.1
 
 **Revised November 8, 2026. Revision message unsent; for Benjamin's approval. Response pending.** Benjamin retains methodological, editorial and publication decisions. No findings or approval are attributed to Jiho.
 
 ## What changed
 
-Draft 0.8 is now the review baseline. It supersedes draft 0.7 for this assignment; 0.7 stays in the repository for version history and should not be reviewed further. The November 6 assignment Jiho already received (shared Doc and six-tab Sheet, editor access confirmed) still applies. This revision adds one question: whether 0.8's explicit financing recommendation holds.
+Draft 0.9.1 is now the review baseline (adopted 8 November 2026; [QUALITY_REVIEW_V091](presentation/QUALITY_REVIEW_V091.md)). It supersedes drafts 0.8 and 0.9 for this assignment; 0.7, 0.8 and 0.9 stay in the repository for version history and should not be reviewed further. Draft 0.9.1 has the same argument, figures, model and recommendation as 0.8. It changes the exhibit design and states more precisely what the revolver does: slide 12 separates equity raised up front from conditional later borrowing, and slide 14 separates the $203m of conditional capacity from cash and from the $500m liquidity floor. The November 6 assignment Jiho already received (shared Doc and six-tab Sheet, editor access confirmed) still applies. This revision adds one question: whether the deck's explicit financing recommendation holds.
 
-Draft 0.8 changes what Jiho is reviewing. Draft 0.7 interpreted a financing transition. Draft 0.8 recasts the same evidence as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals sponsor, and it ends with a recommendation. Model 1.0, the November 6 research cutoff, the source and claim registers and the publication HOLD are unchanged.
+Draft 0.8 changed what Jiho is reviewing, and 0.9.1 keeps that change. Draft 0.7 interpreted a financing transition. Draft 0.8 recast the same evidence as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals sponsor, and it ended with a recommendation. Model 1.0, the November 6 research cutoff, the source and claim registers and the publication HOLD are unchanged.
 
 ## The recommendation under challenge
 
-Draft 0.8 recommends **equity first, plus an undrawn committed revolver as a conditional backstop**. Every slide carries the label "proposed editorial judgment, draft 0.8, 8 November 2026; pending maintainer review." Benjamin has adopted it provisionally as the working thesis. It is not approved for publication.
+Draft 0.9.1 recommends **equity first, plus an undrawn committed revolver as a conditional backstop**. The judgment slides carry the label "Editorial judgment, draft 0.9.1 (review baseline), 8 November 2026; pending human review." Benjamin has adopted it provisionally as the working thesis. It is not approved for publication.
 
 - **Slide 2:** executive answer.
 - **Slide 11:** four options:
@@ -18,12 +18,12 @@ Draft 0.8 recommends **equity first, plus an undrawn committed revolver as a con
   - equity only;
   - equity + revolver;
   - delay to milestones.
-- **Slide 12:** a seven-criterion matrix with categorical marks (Meets / Partly / Does not / Not stated). It uses no weights or scores.
+- **Slide 12:** a seven-criterion matrix with categorical marks (Meets / Partly / Does not / Not stated). It uses no weights or scores, and its subtitle states that no option is shown to fully fund 10X.
 - **Slide 13:** clause tree.
-- **Slide 14:** strongest alternative, equity only.
+- **Slide 14:** strongest alternative, equity only. The revolver may be drawn on $203m of remaining capacity only if the draw conditions are met; under equity only, an overrun may call for more funding, spending changes or a delay, and new equity is one possible route.
 - **Slide 15:** reversal triggers:
   - equity window closed → committed debt or delay;
-  - cost-to-complete above cash plus undrawn capacity → more equity first;
+  - cost to finish above cash plus borrowing capacity → raise more equity first;
   - covenants binding before 10X revenue → equity only;
   - otherwise → equity + revolver.
 
@@ -33,7 +33,7 @@ Draft 0.8 recommends **equity first, plus an undrawn committed revolver as a con
   2. The $1bn commitment expired undrawn.
   3. JPMorgan acted jointly with Goldman and others.
   4. Government support does not remove risk.
-  5. A revolver is not cash.
+  5. A revolver is conditional, not cash.
   6. No plan here is optimal or fully funded.
 
 ## Question for Jiho
@@ -50,7 +50,7 @@ The core of the November 6 assignment still applies:
 Within that scope, please concentrate on these points:
 
 1. **Recommendation versus alternatives.** Is equity + revolver better supported than equity only (slide 14) or committed debt? Would you change any of the slide 12 marks? Two have the most influence:
-   - "Liquidity to draw later" (equity + revolver: Meets; equity only: Does not);
+   - "Conditional liquidity for later" (equity + revolver: Meets; equity only: Does not);
    - "No debt service pre-revenue" (equity + revolver: Partly).
 2. **Hindsight and selection.** The revolver has never been drawn, and the $1bn commitment expired undrawn. Does the deck recommend a structure because it happened to work for MP, and not because the evidence shows it was the better choice before the outcome was known?
 3. **Transfer.** Do the slide 15 triggers and the transfer limit stop a reader from applying MP's sequence to a sponsor that lacks MP's government support and market access? If they do not, what should the deck say?
@@ -65,7 +65,7 @@ About **one to two pages**, plus an optional annotated slide:
 - whether it should be **retained, narrowed or reframed**, with the wording you would use;
 - **the single missing fact** that would most change your judgment.
 
-A workbook audit, a model rebuild and publication sign-off are not part of this assignment. Ambrose is reviewing the same 0.8 deck separately, on a different question: whether MP's commercial agreements give enough revenue visibility for the recommended structure. Your two reviews are independent, so please do not coordinate answers.
+A workbook audit, a model rebuild and publication sign-off are not part of this assignment. Ambrose is reviewing the same 0.9.1 deck separately, on a different question: whether MP's commercial agreements give enough revenue visibility for the recommended structure. Your two reviews are independent, so please do not coordinate answers.
 
 ## Source package
 
@@ -81,18 +81,18 @@ Read the originals first. The deck and analysis give our interpretation and shou
 
 Repository files, all at the same commit:
 
-- [Draft 0.8 PDF](outputs/presentation-draft-v08/fi003-jpmorgan-mp-materials-draft-0.8.pdf) and [accessible PDF](outputs/presentation-draft-v08/fi003-jpmorgan-mp-materials-draft-0.8-accessible.pdf)
-- [QUALITY_REVIEW_V08](presentation/QUALITY_REVIEW_V08.md): argument, objection handling and unverified items. It refers to "eight criteria," but slide 12 has seven. The slide is correct.
+- [Draft 0.9.1 editable PowerPoint](outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1.pptx) and [accessible PDF](outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1-accessible.pdf). The PowerPoint is the original; the accessible PDF is a tagged export of the same slides.
+- [QUALITY_REVIEW_V091](presentation/QUALITY_REVIEW_V091.md): what changed from 0.9, the source check of the slide 12 and 14 wording, and unverified items. [QUALITY_REVIEW_V08](presentation/QUALITY_REVIEW_V08.md) still holds the argument and objection handling; it refers to "eight criteria," but slide 12 has seven. The slide is correct.
 - [analysis.md](analysis.md): ranked alternative explanations and the financing comparison
 - [exhibits/financing_economics.csv](exhibits/financing_economics.csv), [exhibits/revolver_sensitivity.csv](exhibits/revolver_sensitivity.csv), [exhibits/liquidity_bridge.csv](exhibits/liquidity_bridge.csv): the frozen model 1.0 schedules behind slides 11–15
 - [sources.json](sources.json) for dates and [evidence.csv](evidence.csv) for claim-level locators
 
 ## Draft revision message for Benjamin to send (unsent)
 
-> Hi Jiho — a quick update before you get far into the FI003 review. I've rebuilt the deck as draft 0.8, and please review that version instead of 0.7. It covers the same evidence and model, but it now ends with an explicit recommendation: equity first, with an undrawn revolver as a backstop. Slides 11–16 lay out the options, the criteria, the triggers that would reverse the recommendation and the objections.
+> Hi Jiho — a quick update before you get far into the FI003 review. I've rebuilt the deck as draft 0.9.1, and please review that version instead of 0.7. It covers the same evidence and model, but it now ends with an explicit recommendation: equity first, with an undrawn revolver as a backstop. Slides 11–16 lay out the options, the criteria, the triggers that would reverse the recommendation and the objections.
 >
 > Everything from my November 6 note still applies: JPMorgan's role relative to the other banks, the commitment against the equity and credit, whether government support carries too much weight, and your retain / narrow / reframe judgment. I'd now also like you to test the recommendation itself. Is equity plus a revolver better supported than equity only or committed debt? Am I recommending a structure because it happened to work for MP? And would it mislead a sponsor that lacks MP's government support?
 >
-> Please disagree freely. "Equity only" or "this case shouldn't give advice at all" are fair answers if the evidence points that way. One to two pages with at least three cited references is plenty, plus the one missing fact that would most change your view. I've attached the 0.8 PDF and a short source list. Is mid-November still workable? Exams come first, so tell me if you need more time.
+> Please disagree freely. "Equity only" or "this case shouldn't give advice at all" are fair answers if the evidence points that way. One to two pages with at least three cited references is plenty, plus the one missing fact that would most change your view. I've attached the 0.9.1 deck (PowerPoint and an accessible PDF) and a short source list. Is mid-November still workable? Exams come first, so tell me if you need more time.
 >
 > — Benjamin

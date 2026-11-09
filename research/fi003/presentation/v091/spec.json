@@ -5,7 +5,7 @@
     "JPMorgan and MP Materials",
     "Financing a build before revenue: a recommendation",
     "Benjamin Yang · Research draft 0.9.1 · 8 November 2026 · Evidence to 6 November 2026",
-    "Proposed decision-clarity revision of 0.9; draft 0.8 remains the review baseline. Publication hold remains in place."
+    "Review baseline for financial and commercial review; drafts 0.8 and 0.9 are historical. Publication hold remains in place."
   ],
   "evidence": [
     {
@@ -114,7 +114,7 @@
       "exhibit": {
         "title": "Raise permanent equity first and hold an undrawn revolver as a conditional backstop",
         "subtitle": "Recommendation for a hypothetical U.S. sponsor building before commissioning revenue; USD million, figures shown side by side",
-        "annotation": "Proposed editorial judgment, draft 0.9.1, 8 November 2026; pending maintainer review. The figures are different measures and are not additive. The record does not rank cost of capital, because loan terms are not public.",
+        "annotation": "Editorial judgment, draft 0.9.1 (review baseline), 8 November 2026; pending human review. The figures are different measures and are not additive. The record does not rank cost of capital, because loan terms are not public.",
         "source": "Underwriting agreement; 2025 10-K; Q3 2026 10-Q; credit agreement",
         "evidence_refs": [
           "S07",
@@ -678,7 +678,7 @@
                   "qualifier": "Raised $724.2m of net proceeds"
                 },
                 {
-                  "qualifier": "A new raise on later terms if costs exceed cash"
+                  "qualifier": "More funding, spending changes or delay if costs exceed cash"
                 }
               ]
             },
@@ -718,9 +718,9 @@
       "pattern": "criterion-matrix",
       "label": "Criteria",
       "exhibit": {
-        "title": "Only equity plus a revolver both funds the build up front and keeps later liquidity",
-        "subtitle": "It gives up some covenant freedom and adds debt service if drawn; categorical marks, unweighted",
-        "annotation": "Proposed editorial judgment, draft 0.9.1, 8 November 2026; pending maintainer review. Marks for committed debt rest on the commitment alone; its loan terms are not public, so cost of capital is left unranked.",
+        "title": "Only equity plus a revolver pairs equity raised up front with conditional later borrowing",
+        "subtitle": "No option is shown to fully fund 10X; this one costs covenant freedom and debt service if drawn; unweighted",
+        "annotation": "Editorial judgment, draft 0.9.1 (review baseline), 8 November 2026; pending human review. Marks for committed debt rest on the commitment alone; its loan terms are not public, so cost of capital is left unranked.",
         "source": "FI003 analysis; credit agreement; prospectus supplement; 2025 10-K",
         "evidence_refs": [
           "S06",
@@ -738,7 +738,7 @@
           "display": "text",
           "criteria": [
             {
-              "label": "Funding certain before build",
+              "label": "Capital raised or committed before build",
               "marks": [
                 "Partly",
                 "Meets",
@@ -774,7 +774,7 @@
               ]
             },
             {
-              "label": "Liquidity to draw later",
+              "label": "Conditional liquidity for later",
               "marks": [
                 "Partly",
                 "Does not",
@@ -901,7 +901,7 @@
       "exhibit": {
         "title": "A revolver buys conditional overrun liquidity at the cost of fees, conditions, covenants and repayment",
         "subtitle": "Both options raise the same $724.2m of equity at the same dilution; they differ in what happens if costs exceed cash",
-        "annotation": "Proposed editorial judgment, draft 0.9.1, 8 November 2026; pending maintainer review. Remaining capacity is conditional borrowing, not cash, and does not guarantee that an overrun is covered. Equity only is better if covenants would bind before revenue.",
+        "annotation": "Editorial judgment, draft 0.9.1 (review baseline), 8 November 2026; pending human review. Remaining capacity is conditional borrowing, not cash, and may not cover an overrun. The $500m floor is a liquidity test, not cash set aside for the build. Equity only is better if covenants would bind before revenue.",
         "source": "FI003 analysis; credit agreement; Q3 2026 10-Q",
         "evidence_refs": [
           "S09",
@@ -928,7 +928,7 @@
                   "qualifier": "May draw on $203m of remaining capacity if conditions are met"
                 },
                 {
-                  "qualifier": "Needs a new raise on later terms; more dilution if it is equity"
+                  "qualifier": "More funding, spending changes or delay; new equity is one route"
                 }
               ]
             },
@@ -939,7 +939,7 @@
                   "qualifier": "About $0.71m a year in commitment fees"
                 },
                 {
-                  "qualifier": "No facility cost"
+                  "qualifier": "No facility cost from this financing option"
                 }
               ]
             },
@@ -947,10 +947,10 @@
               "label": "Before each draw",
               "cells": [
                 {
-                  "qualifier": "Representations must hold and no default may exist"
+                  "qualifier": "Representations must hold and no Default may exist"
                 },
                 {
-                  "qualifier": "No lender conditions"
+                  "qualifier": "No draw conditions from this financing option"
                 }
               ]
             },
@@ -961,7 +961,7 @@
                   "qualifier": "Until trigger, $500m liquidity floor; then leverage and coverage"
                 },
                 {
-                  "qualifier": "No facility covenants"
+                  "qualifier": "No covenants from this financing option"
                 }
               ]
             },
@@ -972,7 +972,7 @@
                   "qualifier": "Any loans due by Aug 2030, or earlier under a springing maturity"
                 },
                 {
-                  "qualifier": "No repayment obligation"
+                  "qualifier": "No repayment from this financing option"
                 }
               ]
             }
@@ -988,7 +988,7 @@
       "exhibit": {
         "title": "Equity plus a revolver holds only while three conditions hold; each failure points elsewhere",
         "subtitle": "Decision conditions for a hypothetical sponsor; the highlighted route ends at the recommendation",
-        "annotation": "Proposed editorial judgment, draft 0.9.1, 8 November 2026; pending maintainer review. A sponsor without an anchor offtake, price floor or fallback preferred may lack the equity window, which strengthens committed debt.",
+        "annotation": "Editorial judgment, draft 0.9.1 (review baseline), 8 November 2026; pending human review. A sponsor without an anchor offtake, price floor or fallback preferred may lack the equity window, which strengthens committed debt.",
         "source": "FI003 analysis; credit agreement; transaction agreement",
         "evidence_refs": [
           "S02",
@@ -1079,7 +1079,7 @@
       "exhibit": {
         "title": "Six objections narrow the recommendation without reversing it",
         "subtitle": "Each objection, what the draft concedes, how it answers and what remains open",
-        "annotation": "Proposed editorial judgment, draft 0.9.1, 8 November 2026; pending maintainer review. No structure is optimal and no plan is shown as fully funded: the record has no cost-to-complete for 10X.",
+        "annotation": "Editorial judgment, draft 0.9.1 (review baseline), 8 November 2026; pending human review. No structure is optimal and no plan is shown as fully funded: the record has no cost-to-complete for 10X.",
         "source": "FI003 analysis of the reviewed record",
         "evidence_refs": [
           "S01",

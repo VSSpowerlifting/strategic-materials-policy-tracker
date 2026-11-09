@@ -1,12 +1,12 @@
-# Ambrose: commercial-strategy and revenue-underwriting review of draft 0.8
+# Ambrose: commercial-strategy and revenue-underwriting review of draft 0.9.1
 
 **Prepared November 8, 2026. Unsent; awaiting Benjamin's approval. Participation and response pending.** Benjamin retains methodological, editorial and publication decisions. No findings or approval are attributed to Ambrose.
 
 ## Baseline
 
-Review **draft 0.8**, the 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals sponsor. Draft 0.7 is kept only as version history. Model 1.0, the November 6 research cutoff, the source and claim registers and the publication HOLD are unchanged.
+Review **draft 0.9.1**, the 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals sponsor, adopted as the review baseline on 8 November 2026 ([QUALITY_REVIEW_V091](presentation/QUALITY_REVIEW_V091.md)). Drafts 0.7, 0.8 and 0.9 are kept only as version history; 0.9.1 has the same argument, figures and recommendation as 0.8, with revised exhibit design and more precise revolver wording on slides 12 and 14. Model 1.0, the November 6 research cutoff, the source and claim registers and the publication HOLD are unchanged.
 
-Draft 0.8 recommends **equity first, plus an undrawn committed revolver as a conditional backstop**. Its strongest alternative is equity only. Benjamin has adopted this provisionally as the working thesis. It is not approved for publication, and you are asked to test it.
+Draft 0.9.1 recommends **equity first, plus an undrawn committed revolver as a conditional backstop**. Its strongest alternative is equity only. Benjamin has adopted this provisionally as the working thesis. It is not approved for publication, and you are asked to test it.
 
 Jiho is reviewing the same deck on a separate question: whether the recommendation is better supported than the alternatives, and whether the case generalizes. Your question concerns the revenue side, so please work independently.
 
@@ -69,8 +69,8 @@ Read the originals first. The deck and the CSVs give our interpretation and shou
 
 Repository files, all at the same commit:
 
-- [Draft 0.8 PDF](outputs/presentation-draft-v08/fi003-jpmorgan-mp-materials-draft-0.8.pdf) and [accessible PDF](outputs/presentation-draft-v08/fi003-jpmorgan-mp-materials-draft-0.8-accessible.pdf). Slides 11–16 carry the recommendation.
-- [QUALITY_REVIEW_V08](presentation/QUALITY_REVIEW_V08.md). It refers to "eight criteria," but slide 12 has seven. The slide is correct.
+- [Draft 0.9.1 editable PowerPoint](outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1.pptx) and [accessible PDF](outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1-accessible.pdf). The PowerPoint is the original; the accessible PDF is a tagged export of the same slides. Slides 11–16 carry the recommendation.
+- [QUALITY_REVIEW_V091](presentation/QUALITY_REVIEW_V091.md) for the 0.9.1 changes and source check, and [QUALITY_REVIEW_V08](presentation/QUALITY_REVIEW_V08.md) for the argument. The latter refers to "eight criteria," but slide 12 has seven. The slide is correct.
 - Frozen model 1.0 schedules:
   - [exhibits/offtake_threshold.csv](exhibits/offtake_threshold.csv): illustrative threshold by year and capacity. For example, 2029 at 50% before the milestone gives $75.770m, and after it $151.541m. These are not CFADS.
   - [exhibits/ppa_sensitivity.csv](exhibits/ppa_sensitivity.csv): price-floor arithmetic per kilogram.
@@ -83,7 +83,7 @@ Repository files, all at the same commit:
 
 > Hi Ambrose — I'm finishing a short SMPT case study on how MP Materials financed its 10X magnet expansion, and I'd value a commercial underwriter's challenge before anything is published.
 >
-> The current draft (0.8, attached) recommends equity first, with an undrawn revolver as a backstop. It's a provisional thesis, not a settled conclusion. The question for you: **do MP's commercial agreements give enough revenue visibility to support that structure?** That means the DoD 10X offtake, the $110/kg NdPr price floor, the Apple agreement and the PPA cash already received. I'm especially interested in whether the credit agreement's earnings covenants could bind before 10X revenue arrives, which would favour equity only.
+> The current draft (0.9.1, attached as PowerPoint and an accessible PDF) recommends equity first, with an undrawn revolver as a backstop. It's a provisional thesis, not a settled conclusion. The question for you: **do MP's commercial agreements give enough revenue visibility to support that structure?** That means the DoD 10X offtake, the $110/kg NdPr price floor, the Apple agreement and the PPA cash already received. I'm especially interested in whether the credit agreement's earnings covenants could bind before 10X revenue arrives, which would favour equity only.
 >
 > Please disagree freely. If the contracts point to a different structure, that's a useful answer. One to two pages with at least three cited references is plenty, plus the one missing fact that would most change your view. I've attached a short source list with section references; no model rebuild or valuation needed. A second reviewer is looking at a different question, so please answer independently. Would late November work for you?
 >

@@ -1,8 +1,8 @@
-# FI003 draft 0.9: visual and editorial refinement (proposed)
+# FI003 draft 0.9: visual and editorial refinement (historical)
 
 ## Status
 
-Proposed visual revision of draft 0.8. **Draft 0.8 remains the review baseline** for Jiho and Ambrose until the maintainer adopts 0.9. The publication HOLD stands. Nothing has been merged, published or deployed.
+**Historical.** Superseded by draft 0.9.1, which the maintainer adopted as the working and reviewer baseline on 8 November 2026 ([QUALITY_REVIEW_V091](QUALITY_REVIEW_V091.md)). This record and the 0.9 outputs are kept unchanged as version history. At the time of writing, 0.9 was a proposed visual revision of draft 0.8. The publication HOLD stands. Nothing has been merged, published or deployed.
 
 ## What the draft is
 
@@ -85,7 +85,7 @@ The render step refuses to overwrite an existing PPTX.
 
 ## Accessible PDF
 
-**Not produced for 0.9.** `v08/remediate_pdf_v08.py` is pinned to the 0.8 source hash, page artifacts and heading counts. Porting it is a separate step once the maintainer decides whether 0.9 replaces 0.8. The 0.8 accessible PDF remains the accessible reference. The 0.9 PDF is LibreOffice-tagged only and has not been remediated or link-audited.
+**Not produced for 0.9.** An accessible PDF was later produced for the adopted draft 0.9.1 (`v091/remediate_pdf_v091.py`). `v08/remediate_pdf_v08.py` is pinned to the 0.8 source hash, page artifacts and heading counts. Porting it is a separate step once the maintainer decides whether 0.9 replaces 0.8. The 0.8 accessible PDF remains the accessible reference. The 0.9 PDF is LibreOffice-tagged only and has not been remediated or link-audited.
 
 ## Not verified or pending
 
@@ -95,6 +95,9 @@ The render step refuses to overwrite an existing PPTX.
 - Source-rights approval, publication authorization and the PR's merge conflicts with main. These are out of scope for this pass.
 
 ## Decisions for the maintainer
+
+Resolved on 8 November 2026: draft 0.9.1, not 0.9, was adopted as the review baseline, and its accessible PDF was produced. The original list is kept below.
+
 
 1. Adopt 0.9 as the review baseline, or keep 0.8 and treat 0.9 as a design proposal.
 2. If adopted, approve the reworded subtitles on slides 12 and 14, and decide whether Jiho and Ambrose should receive 0.9 in place of 0.8.

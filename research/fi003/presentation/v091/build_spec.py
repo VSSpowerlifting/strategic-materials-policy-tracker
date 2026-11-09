@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Build spec.json for FI003 presentation draft 0.9.1.
 
-Draft 0.9.1 is a proposed decision-clarity revision of draft 0.9 (itself a
-visual revision of draft 0.8): same slides, order, figures and conclusions;
-the recommendation slides state consequences in plain sentences. Draft 0.8
-remains the review baseline; model 1.0 inputs are read unchanged.
+Draft 0.9.1 is the adopted FI003 review baseline (8 November 2026). It is a
+decision-clarity revision of draft 0.9 (itself a visual revision of draft 0.8):
+same slides, order, figures and conclusions; the recommendation slides state
+consequences in plain sentences. Drafts 0.8 and 0.9 are kept as historical
+versions; model 1.0 inputs are read unchanged.
 
 Every figure is read from the accepted model exports in research/fi003/exhibits/
 and every URL from research/fi003/sources.json. Nothing is typed in twice.
@@ -87,7 +88,7 @@ def add(pattern, label, title, subtitle, annotation, source, refs, data, layout=
 
 
 
-JUDGMENT = "Proposed editorial judgment, draft 0.9.1, 8 November 2026; pending maintainer review."
+JUDGMENT = "Editorial judgment, draft 0.9.1 (review baseline), 8 November 2026; pending human review."
 start = num(liq["Opening company liquid assets"]["usd_m"])
 end = num(liq["Closing company liquid assets"]["usd_m"])
 net_eq = num(repl["Final net equity proceeds"]["usd_m"])
@@ -259,7 +260,7 @@ add("role-matrix", "Options",
                                                {"qualifier": "Loan pricing, tenor and conditions, which are not public"}]},
          {"label": "Equity only", "cells": [{"qualifier": "New common stock; permanent capital with no repayment"},
                                             {"qualifier": f"Raised ${net_eq:.1f}m of net proceeds"},
-                                            {"qualifier": "A new raise on later terms if costs exceed cash"}]},
+                                            {"qualifier": "More funding, spending changes or delay if costs exceed cash"}]},
          {"label": "Equity + revolver", "cells": [{"qualifier": "The same stock sale plus a revolving credit facility"},
                                                   {"qualifier": "Both executed; no loans drawn at 30 Sep 2026"},
                                                   {"qualifier": "Draw conditions and covenant tests being met"}]},
@@ -271,19 +272,19 @@ add("role-matrix", "Options",
 
 # 11. Criteria
 add("criterion-matrix", "Criteria",
-    "Only equity plus a revolver both funds the build up front and keeps later liquidity",
-    "It gives up some covenant freedom and adds debt service if drawn; categorical marks, unweighted",
+    "Only equity plus a revolver pairs equity raised up front with conditional later borrowing",
+    "No option is shown to fully fund 10X; this one costs covenant freedom and debt service if drawn; unweighted",
     f"{JUDGMENT} Marks for committed debt rest on the commitment alone; its loan terms are not public, so cost of capital is left unranked.",
     "FI003 analysis; credit agreement; prospectus supplement; 2025 10-K",
     ev("S06", "S09", "S11"),
     {"options": ["Committed debt", "Equity only", "Equity + revolver", "Delay to milestones"],
      "accent": "Equity + revolver", "display": "text",
      "criteria": [
-         {"label": "Funding certain before build", "marks": ["Partly", "Meets", "Meets", "Does not"]},
+         {"label": "Capital raised or committed before build", "marks": ["Partly", "Meets", "Meets", "Does not"]},
          {"label": "No dilution of holders", "marks": ["Meets", "Does not", "Does not", "Partly"]},
          {"label": "No debt service pre-revenue", "marks": ["Does not", "Meets", "Partly", "Meets"]},
          {"label": "Few covenants pre-commissioning", "marks": ["Not stated", "Meets", "Partly", "Meets"]},
-         {"label": "Liquidity to draw later", "marks": ["Partly", "Does not", "Meets", "Partly"]},
+         {"label": "Conditional liquidity for later", "marks": ["Partly", "Does not", "Meets", "Partly"]},
          {"label": "Low refinancing exposure", "marks": ["Not stated", "Meets", "Partly", "Meets"]},
          {"label": "Absorbs commissioning delay", "marks": ["Not stated", "Partly", "Partly", "Does not"]}]},
     table_reason="Four options against seven categorical criteria need a matrix; a chart would imply a numeric scale the marks do not have.")
@@ -310,7 +311,7 @@ add("condition-tree", "Covenant addback",
 add("role-matrix", "Strongest alternative",
     "A revolver buys conditional overrun liquidity at the cost of fees, conditions, covenants and repayment",
     f"Both options raise the same ${net_eq:.1f}m of equity at the same dilution; they differ in what happens if costs exceed cash",
-    f"{JUDGMENT} Remaining capacity is conditional borrowing, not cash, and does not guarantee that an overrun is covered. Equity only is better if covenants would bind before revenue.",
+    f"{JUDGMENT} Remaining capacity is conditional borrowing, not cash, and may not cover an overrun. The $500m floor is a liquidity test, not cash set aside for the build. Equity only is better if covenants would bind before revenue.",
     "FI003 analysis; credit agreement; Q3 2026 10-Q",
     ev("S09", "S19"),
     {"roles": ["Equity+revolver", "Equity only"],
@@ -318,15 +319,15 @@ add("role-matrix", "Strongest alternative",
                 "cellText": "sentence", "emphasisColumn": "Equity+revolver"},
      "orgs": [
          {"label": "Costs exceed cash on hand", "cells": [{"qualifier": f"May draw on ${rcf_avail:.0f}m of remaining capacity if conditions are met"},
-                                                          {"qualifier": "Needs a new raise on later terms; more dilution if it is equity"}]},
+                                                          {"qualifier": "More funding, spending changes or delay; new equity is one route"}]},
          {"label": "Cost while unused", "cells": [{"qualifier": f"About ${unused_fee:.2f}m a year in commitment fees"},
-                                                  {"qualifier": "No facility cost"}]},
-         {"label": "Before each draw", "cells": [{"qualifier": "Representations must hold and no default may exist"},
-                                                 {"qualifier": "No lender conditions"}]},
+                                                  {"qualifier": "No facility cost from this financing option"}]},
+         {"label": "Before each draw", "cells": [{"qualifier": "Representations must hold and no Default may exist"},
+                                                 {"qualifier": "No draw conditions from this financing option"}]},
          {"label": "Covenant tests", "cells": [{"qualifier": "Until trigger, $500m liquidity floor; then leverage and coverage"},
-                                               {"qualifier": "No facility covenants"}]},
+                                               {"qualifier": "No covenants from this financing option"}]},
          {"label": "Repayment", "cells": [{"qualifier": "Any loans due by Aug 2030, or earlier under a springing maturity"},
-                                          {"qualifier": "No repayment obligation"}]}]},
+                                          {"qualifier": "No repayment from this financing option"}]}]},
     layout="wide",
     table_reason="Two options compared on five situations in words; a chart would imply a numeric scale.")
 
@@ -385,7 +386,7 @@ spec = {
     "title": "FI003 JPMorgan and MP Materials, draft 0.9.1",
     "cover_lines": ["JPMorgan and MP Materials", "Financing a build before revenue: a recommendation",
                     "Benjamin Yang · Research draft 0.9.1 · 8 November 2026 · Evidence to 6 November 2026",
-                    "Proposed decision-clarity revision of 0.9; draft 0.8 remains the review baseline. Publication hold remains in place."],
+                    "Review baseline for financial and commercial review; drafts 0.8 and 0.9 are historical. Publication hold remains in place."],
     "evidence": [{"id": i, "label": i, "url": src[i]["url"], "title": src[i]["title"], "locator": LOC[i]} for i in sorted(used)],
     "slides": slides,
 }

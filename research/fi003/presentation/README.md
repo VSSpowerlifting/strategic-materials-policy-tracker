@@ -1,5 +1,7 @@
 # FI003 presentation draft 0.5
 
+**Current review baseline: draft 0.9.1**, adopted 8 November 2026. Use the [editable PowerPoint](../outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1.pptx) (original) or its [accessible PDF](../outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1-accessible.pdf) (tagged export of the same slides), and see [QUALITY_REVIEW_V091](QUALITY_REVIEW_V091.md). Every earlier draft, including 0.5 below, is version history.
+
 Research cutoff: **6 November 2026**. This is a reviewable draft, prepared under the managerial-review request. Financial conclusions and publication remain subject to Benjamin's review. [PUBLICATION_PLAN](../PUBLICATION_PLAN.md) is the only owner/date/gate tracker.
 
 - [Editable PowerPoint](../outputs/presentation-draft-v05/SMPT_FI003_JPMorgan_MP_Draft_v05.pptx)
@@ -87,9 +89,9 @@ Per-page artifact counts are pinned, so any re-render fails the script until a r
 
 Reruns are byte-identical. `research/fi003/test_presentation_v07_accessibility.py` rechecks the committed files with pypdf alone, including that every link equals its slide's evidence reference and its `sources.json` URL. See `QUALITY_REVIEW_V07.md` for the 46→34 link audit and the manual review still required. These are bounded static checks, not PDF/UA, WCAG or screen-reader certification.
 
-### Draft 0.8 decision report (proposed)
+### Draft 0.8 decision report (historical)
 
-Draft 0.8 recasts the deck as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals company. It opens with an executive answer and closes with a recommendation, the strongest alternative, reversal triggers and the six objections. The recommendation is a proposed editorial judgment pending maintainer review. Model 1.0, the source registers, the 6 November research cutoff and the publication HOLD are unchanged. As of 8 November 2026, draft 0.8 replaces 0.7 as the baseline for the independent reviews ([Jiho](../JIHO_HANDOFF.md), [Ambrose](../AMBROSE_HANDOFF.md)); 0.7 stays as version history.
+Draft 0.8 recasts the deck as a 16-slide decision report for the CFO and board of a hypothetical U.S. critical-minerals company. It opens with an executive answer and closes with a recommendation, the strongest alternative, reversal triggers and the six objections. The recommendation is a proposed editorial judgment pending maintainer review. Model 1.0, the source registers, the 6 November research cutoff and the publication HOLD are unchanged. On 8 November 2026 draft 0.8 replaced 0.7 as the review baseline, and was itself superseded the same day by draft 0.9.1 (below). Its outputs are kept unchanged as version history.
 
 Inputs live in `v08/`; outputs in `outputs/presentation-draft-v08/` (PPTX, PDF, accessible PDF and receipt, manifest, contact sheet). See `QUALITY_REVIEW_V08.md` for the argument, the objection handling, output hashes and what is not verified.
 
@@ -106,9 +108,9 @@ The render step refuses to overwrite an existing PPTX. Two shared renderer chang
 
 Rerender modified slides and inspect the full deck. Package validation does not establish financial accuracy, native PowerPoint behavior or human approval. Native open/edit/save/reopen, live screen-reader navigation/reading order, broader accessibility review, exact-file/source-rights approval and separate publication authorization remain open. The PR's known merge conflicts with main require a later separately scoped integration phase. No integration/release work belongs in this visual pass.
 
-### Draft 0.9 visual refinement (proposed)
+### Draft 0.9 visual refinement (historical)
 
-Draft 0.9 is a visual and editorial pass over draft 0.8. Same 16 slides, argument, model 1.0, figures, sources and cutoff. The dot matrices on slides 3, 11, 14 and 16 become text ledgers, and the criterion matrix on slide 12 shows text verdicts. The decision slides (12, 14, 16) gain an emphasised column or decision subtitle. Reading-convention notes are removed, and tree branch labels no longer collide with connectors. Draft 0.8 remains the review baseline until the maintainer adopts 0.9. The publication HOLD stands. No accessible PDF was produced for 0.9.
+Draft 0.9 is a visual and editorial pass over draft 0.8. Same 16 slides, argument, model 1.0, figures, sources and cutoff. The dot matrices on slides 3, 11, 14 and 16 become text ledgers, and the criterion matrix on slide 12 shows text verdicts. The decision slides (12, 14, 16) gain an emphasised column or decision subtitle. Reading-convention notes are removed, and tree branch labels no longer collide with connectors. 0.9 was not adopted; draft 0.9.1 superseded it. The publication HOLD stands. No accessible PDF was produced for 0.9, and its outputs are kept unchanged as version history.
 
 Inputs live in `v09/`; outputs in `outputs/presentation-draft-v09/` (PPTX, PDF, manifest, contact sheet). See `QUALITY_REVIEW_V09.md` for per-slide decisions, the slide 7–8 sharpness diagnosis (preview resolution, not the charts), hashes and what is not verified.
 
@@ -121,17 +123,21 @@ bash research/fi003/presentation/v09/export_pdf.sh
 
 The new renderer options are opt-in and covered by `tests/exhibit-system-v09-options.test.ts`. The draft 0.8 PPTX re-renders byte-identical.
 
-### Draft 0.9.1 decision-clarity refinement (proposed)
+### Draft 0.9.1 decision-clarity refinement (adopted review baseline)
 
-Draft 0.9.1 rewords and relays the financing recommendation slides (11, 12, 14, 15, 16) of draft 0.9, so that a reader new to the case sees the alternatives, their cost and the reason for the recommendation. Slide 14 now compares equity plus a revolver with equity only across five situations, answered in plain sentences for both options. It keeps conditional borrowing capacity distinct from cash and does not imply that the facility guarantees overrun coverage. Same argument, model 1.0, figures, sources and cutoff. Draft 0.8 remains the review baseline. The publication HOLD stands. No accessible PDF was produced.
+Draft 0.9.1 rewords and relays the financing recommendation slides (11, 12, 14, 15, 16) of draft 0.9, so that a reader new to the case sees the alternatives, their cost and the reason for the recommendation. Slide 14 now compares equity plus a revolver with equity only across five situations, answered in plain sentences for both options. It keeps conditional borrowing capacity distinct from cash and does not imply that the facility guarantees overrun coverage. Slide 12 separates equity raised up front from conditional later borrowing and does not show any option as fully funding 10X. Slide 14 states the revolver draw conditions and keeps the $203m of conditional capacity apart from cash and from the $500m liquidity covenant; under equity only, an overrun may need more funding, spending changes or a delay. Same argument, model 1.0, figures, sources and cutoff. **Adopted 8 November 2026 as the working and reviewer baseline** for both independent reviews ([Jiho](../JIHO_HANDOFF.md), [Ambrose](../AMBROSE_HANDOFF.md)). The publication HOLD stands.
 
-Inputs live in `v091/`; outputs in `outputs/presentation-draft-v091/`. See `QUALITY_REVIEW_V091.md` for the slide 14 diagnosis, per-slide changes, hashes and what is not verified.
+Inputs live in `v091/`; outputs in `outputs/presentation-draft-v091/` (editable PPTX, PDF, remediated accessible PDF and receipt, manifest, contact sheet). The PPTX is the original; the accessible PDF is a tagged, remediated export of the same slides. See `QUALITY_REVIEW_V091.md` for the per-slide changes, source check, chart-data verification, hashes and what is not verified.
 
 ```sh
 python3 research/fi003/presentation/v091/build_spec.py
 npm run -s exhibits:review -- research/fi003/presentation/v091/spec.json --strict
 npm run exhibits:render -- research/fi003/presentation/v091/spec.json research/fi003/outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1.pptx
 bash research/fi003/presentation/v091/export_pdf.sh
+uv run --no-project --with pymupdf==1.26.4 --with pypdf==6.14.2 \
+  python research/fi003/presentation/v091/remediate_pdf_v091.py
+uv run --no-project --with pypdf==6.14.2 \
+  python -m unittest research/fi003/test_presentation_v091_accessibility.py
 ```
 
 The `role-matrix` option `layout.cellText` is opt-in and covered by `tests/exhibit-system-v091-options.test.ts`. The draft 0.9 PPTX re-renders byte-identical.
