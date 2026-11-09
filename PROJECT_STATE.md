@@ -8,14 +8,17 @@
   - `coverage-gaps.json` v2 gives each tracked material without an open monthly series its status (annual only, joint only, no open series) and the test a monthly series would have to meet.
 - **Explorer:** Monthly and Annual tabs, each with a material-grouped multi-select of up to six series. Colour slots are stable when a series is removed. The chart has indexed and published-value views; published values only appear when unit, currency and frequency all match. Estimates are drawn hollow and dotted, and lines never join across a gap or source change. Coordinated cards, legend focus, heatmap, ranked moves to a common end period, and a data table. URL params: `freq`, `series`, `range`, `view`.
 - **Price types:** exchange benchmark, price assessment and trade unit value. Trade unit values are never labelled as prices; a test enforces this.
-- **Governance (blocking reviewer decision):** unchanged. README and CLAUDE.md say "no market prices", and the maintainer decides whether to accept the exception.
+- **Governance (two blocking reviewer decisions):**
+  1. README and CLAUDE.md say "no market prices". Accepting the exception is the maintainer's decision.
+  2. The earlier entry kept commercial assessments off the page. The page and `/api/export/markets.csv` now show and redistribute figures derived from them: the IMF's monthly averages of an SMM rare-earth carbonate assessment, under IMF terms rather than an open licence, and USGS republications of price-agency assessments, under CC0 as published by the USGS. Whether that is acceptable is the maintainer's call.
 - **QA:**
   - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1188/1188) and build all pass.
-  - Browser QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow, after a fix to the heatmap grid.
+  - Browser QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow, after a fix to the heatmap grid. Screenshots of the new page are in `docs/analysis/markets-monitor/`; the old ones were removed.
+  - The IMF cobalt values for 2026 (flat at about 55,850 from February to August, then 42,213 in September) match PCOBA in the pinned SDMX file exactly.
   - Interaction checks: URL restore (it was broken by a mount-order race; now fixed), keyboard chip toggle, and heatmap roving focus opening on the latest month.
 - Not merged, deployed or published.
 
-## 2026-11-09: Critical Minerals Market Monitor (draft PR)
+## 2026-11-09: Critical Minerals Market Monitor (draft PR) — superseded by the multi-source update above
 
 - Branch `claude/critical-minerals-market-monitor-0dd37c` from `c69e8fc`. New route `/markets`, titled "Critical Minerals Market Monitor". Public navigation is unchanged; the route is listed in the sitemap only, and the PR proposes where it could sit in the navigation.
 - **Data:** three World Bank Pink Sheet monthly benchmark averages, January 2005 to October 2026: aluminium, copper and nickel, in nominal US$ per metric tonne. They are frozen in `data/markets/` (manifest, series, observations, coverage gaps).

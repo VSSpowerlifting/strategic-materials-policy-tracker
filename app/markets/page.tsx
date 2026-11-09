@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/format";
 import { fi002 } from "@/lib/fi002";
 
 const DESCRIPTION =
-  "Compare source-linked historical prices for critical and strategic materials: monthly averages from the World Bank Pink Sheet and IMF Primary Commodity Prices, and annual USGS prices and unit values for rare earths, lithium, gallium, germanium, tungsten and more. Market context, not investment advice or a forecast.";
+  "Source-linked historical prices for critical and strategic materials: World Bank and IMF monthly averages for aluminium, copper, nickel, cobalt, palladium and rare-earth carbonate, and USGS annual prices and import unit values for 2021–2025, including rare-earth oxides, lithium, gallium, germanium and tungsten.";
 
 export const metadata: Metadata = {
   title: "Critical Minerals Market Monitor",
@@ -58,10 +58,10 @@ export default function MarketsPage() {
           title="Critical Minerals Market Monitor"
           lead={
             <>
-              Historical prices for the materials the tracker follows, from three public sources: monthly averages from the
-              World Bank and the IMF, and annual USGS prices and import unit values for rare earths, lithium, gallium,
-              germanium, tungsten and other materials with no open monthly series. Prices sit outside the policy record; a
-              shared date does not show that a measure moved a price.
+              The World Bank and the IMF publish monthly averages for aluminium, copper, nickel, cobalt, palladium and
+              rare-earth carbonate. The USGS adds annual prices and import unit values for 2021–2025, including rare-earth
+              oxides, lithium, gallium, germanium and tungsten, which have no open monthly series. Compare up to six series
+              at a time.
             </>
           }
         />
@@ -76,9 +76,10 @@ export default function MarketsPage() {
         </dl>
 
         <p className="mt-4 max-w-4xl text-sm leading-6 text-muted">
-          Every figure is a period average or unit value in nominal US dollars as the source publishes it, not a live quote.
-          Percentage changes, indexed values and rankings are SMPT calculations; no period is interpolated and no unit is
-          converted. Nothing here is investment advice or a forecast.
+          Figures are period averages or unit values in US dollars, as each source publishes them; the USGS labels its
+          lithium carbonate price “annual average-real” without stating a deflator or base year. Percentage changes,
+          indexed values and rankings are SMPT calculations, with no interpolation or unit conversion. Prices sit outside
+          the policy record, and a shared date does not show that a measure moved a price.
         </p>
       </Container>
 
