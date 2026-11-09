@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { headerNav, isActivePath as isActive, isNavCurrent as isCurrent, journeys, site } from "@/lib/site";
-import { formatDate } from "@/lib/format";
+import { formatDateUS } from "@/lib/format";
 import { Container } from "@/components/ui/container";
 import { Wordmark } from "@/components/ui/brand";
 
@@ -72,7 +72,7 @@ function RecordAsOf({ className }: { className?: string }) {
     <span className={cn("inline-flex items-center gap-2 whitespace-nowrap font-display text-xs text-muted", className)}>
       <CalendarIcon />
       <span>
-        Corpus revised <time dateTime={site.revisedOn} className="tnum font-semibold text-foreground">{formatDate(site.revisedOn)}</time>
+        Corpus revised <time dateTime={site.revisedOn} className="tnum font-semibold text-foreground">{formatDateUS(site.revisedOn)}</time>
       </span>
     </span>
   );
