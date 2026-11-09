@@ -13,7 +13,15 @@ import {
   NotStated,
 } from "@/components/capital/primitives";
 import { ControlRow } from "@/components/capital/rows";
-import { currentControlEntry, statusEntriesRecordedElsewhere, summarizeControl } from "@/lib/capital-control";
+import {
+  controlEndPassed,
+  controlEntryOn,
+  controlStatusOn,
+  scheduledControlEntry,
+  statusEntriesRecordedElsewhere,
+  summarizeControl,
+} from "@/lib/capital-control";
+import { site } from "@/lib/site";
 import {
   getAllControlMeasures,
   getControlMeasureById,
@@ -58,7 +66,11 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
   if (!m) notFound();
   const event = getEventById(m.eventId)!;
   const materials = getMaterialsByIds(m.materialIds);
-  const current = currentControlEntry(m);
+  // The status in effect on the legal-status date, never a later-dated entry: that one is "scheduled".
+  const asOf = site.legalStatusAsOf;
+  const current = controlEntryOn(m, asOf) ?? m.statusHistory[0];
+  const scheduled = scheduledControlEntry(m, asOf);
+  const endPassed = controlEndPassed(m, asOf);
   const all = getAllControlMeasures();
   const modifies = m.modifiesMeasureIds.map((x) => getControlMeasureById(x)!).filter(Boolean);
   const modifiedBy = all.filter((x) => x.modifiesMeasureIds.includes(m.id));
@@ -96,6 +108,16 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
           {current.until ? <span className="font-mono text-[11px] text-muted">until {formatDate(current.until)}</span> : null}
           <Badge>{controlDirectionLabels[m.direction]}</Badge>
         </div>
+        {scheduled ? (
+          <p className="mt-3 max-w-prose text-sm leading-6 text-muted">
+            Status as of {formatDate(asOf)}. Scheduled, not yet in effect: <ControlStatusBadge status={scheduled.status} /> from {formatDate(scheduled.date!)}
+            {scheduled.until ? ` to ${formatDate(scheduled.until)}` : ""}.
+          </p>
+        ) : endPassed ? (
+          <p className="mt-3 max-w-prose text-sm leading-6 text-muted">
+            The stated end date has passed as of {formatDate(asOf)}. Its standing after that date depends on a further instrument; none is recorded, and none is assumed.
+          </p>
+        ) : null}
         <p className="mt-3 font-mono text-xs text-faint">{m.id}</p>
       </header>
 
@@ -189,9 +211,9 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
             </Card>
           </Section>
 
-          <Section index={next()} title="Status" description="Listed oldest first, with the latest status current. End dates follow the governing source.">
+          <Section index={next()} title="Status" description={`Listed oldest first. The entry in effect on ${formatDate(asOf)} is marked current; a later-dated entry is marked scheduled. End dates follow the governing source.`}>
             <Card className="p-5">
-              <ControlStatusTrail entries={m.statusHistory} />
+              <ControlStatusTrail entries={m.statusHistory} asOf={asOf} />
               {statusEntriesRecordedElsewhere(m).map(({ entry, event }) => (
                 <p key={`${entry.status}-${event.id}`} className="mt-4 border-t pt-4 text-sm leading-6 text-muted">
                   The &ldquo;{controlStatusLabels[entry.status].toLowerCase()}&rdquo; entry is recorded in a separate event:{" "}
@@ -210,13 +232,13 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                 {modifies.length ? (
                   <div>
                     <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Acts on</p>
-                    <Card className="overflow-hidden">{modifies.map((x) => <ControlRow key={x.id} m={summarizeControl(x)} />)}</Card>
+                    <Card className="overflow-hidden">{modifies.map((x) => <ControlRow key={x.id} m={summarizeControl(x, asOf)} />)}</Card>
                   </div>
                 ) : null}
                 {modifiedBy.length ? (
                   <div>
                     <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Acted on by</p>
-                    <Card className="overflow-hidden">{modifiedBy.map((x) => <ControlRow key={x.id} m={summarizeControl(x)} />)}</Card>
+                    <Card className="overflow-hidden">{modifiedBy.map((x) => <ControlRow key={x.id} m={summarizeControl(x, asOf)} />)}</Card>
                   </div>
                 ) : null}
               </div>
@@ -260,7 +282,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   <li key={x.id}>
                     <Link href={`/controls/${x.id}`} className="group block text-sm">
                       <span className="group-hover:text-accent">{controlMeasureTypeLabels[x.measureType]}{x.clause ? ` · ${x.clause}` : ""}</span>
-                      <span className="mt-0.5 block"><ControlStatusBadge status={currentControlEntry(x).status} /></span>
+                      <span className="mt-0.5 block"><ControlStatusBadge status={controlStatusOn(x, asOf) ?? x.statusHistory[0].status} /></span>
                     </Link>
                   </li>
                 ))}

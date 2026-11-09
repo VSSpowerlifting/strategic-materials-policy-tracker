@@ -32,6 +32,7 @@ import { eventJsonLd, jsonLdScript } from "@/lib/structured-data";
 import { InstrumentsPanel } from "@/components/capital/instruments-panel";
 import { ControlRow } from "@/components/capital/rows";
 import { controlStatusesRecordedIn, summarizeControl } from "@/lib/capital-control";
+import { site } from "@/lib/site";
 import { getControlMeasuresByEvent, getFinancialCommitmentsByEvent, getProjectDesignationsByEvent } from "@/lib/data";
 import { DesignationRow } from "@/components/intelligence/designation-row";
 
@@ -166,7 +167,7 @@ export default async function EventPage({
               <Card className="overflow-hidden">
                 {recordedStatuses.map(({ measure, entry }) => (
                   <div key={`${measure.id}-${entry.status}`}>
-                    <ControlRow m={summarizeControl(measure)} />
+                    <ControlRow m={summarizeControl(measure, site.legalStatusAsOf)} />
                     <p className="border-b px-4 py-2 font-mono text-[11px] text-faint last:border-b-0">
                       Records: {controlStatusLabels[entry.status].toLowerCase()}
                       {entry.date ? `, ${formatDate(entry.date)}` : ""}

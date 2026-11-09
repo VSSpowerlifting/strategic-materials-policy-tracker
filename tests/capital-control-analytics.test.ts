@@ -321,12 +321,14 @@ test("clocks count days from the as-of date, not the clock on the wall", () => {
   assert.ok(a.every((x, i) => i === 0 || a[i - 1].daysLeft <= x.daysLeft), "clocks are soonest first");
 });
 
-test("the Announcement No. 61 clauses are suspended until 10 November 2026 on the as-of date", () => {
+test("the Announcement No. 61 clauses are suspended on the as-of date and the suspension now runs to 10 January 2027", () => {
   const rows = getAllControlMeasures().filter((m) => m.eventId === "china-rare-earth-expansion-2025-10");
   assert.ok(rows.length >= 3);
   for (const m of rows) {
     assert.equal(controlStatusOn(m, site.lastUpdated), "suspended", m.id);
-    assert.equal(m.statusHistory.at(-1)?.until, "2026-11-10", m.id);
+    // The initial window (Announcement No. 70 of 2025) ends 10 November 2026; Announcement No. 58 of 2026 continues it.
+    assert.equal(m.statusHistory.at(-2)?.until, "2026-11-10", m.id);
+    assert.equal(m.statusHistory.at(-1)?.until, "2027-01-10", m.id);
   }
 });
 
@@ -431,7 +433,7 @@ test("summaries resolve their events and carry only serializable values", () => 
     assert.deepEqual(JSON.parse(JSON.stringify(s)), s);
   }
   for (const m of getAllControlMeasures()) {
-    const s = summarizeControl(m);
+    const s = summarizeControl(m, site.legalStatusAsOf);
     assert.equal(s.issuer, getEventById(m.eventId)!.jurisdiction);
     assert.deepEqual(JSON.parse(JSON.stringify(s)), s);
   }

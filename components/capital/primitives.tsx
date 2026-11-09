@@ -128,26 +128,38 @@ export function SourceMention({ sourceId }: { sourceId: string }) {
 }
 
 /**
- * A status history, oldest first, as a vertical trail. The last entry is the
- * current status and is marked as such. Undated entries say so rather than
- * borrowing a date.
+ * A status history, oldest first, as a vertical trail. Without `asOf` the last entry is marked
+ * current. With `asOf` (an ISO date) the entry in effect on that date is marked current and an entry
+ * dated after it is marked "scheduled", never current. Undated entries say so rather than borrowing
+ * a date, and count as already recorded.
  */
 export function StatusTrail<S extends string>({
   entries,
   render,
+  asOf,
 }: {
   entries: (StatusEntry<S> & { until?: string | null })[];
   render: (status: S) => React.ReactNode;
+  asOf?: string;
 }) {
+  const isScheduled = (e: { date: string | null }) => asOf !== undefined && e.date !== null && e.date > asOf;
+  let currentIndex = entries.length - 1;
+  if (asOf !== undefined) {
+    currentIndex = -1;
+    entries.forEach((e, i) => {
+      if (!isScheduled(e)) currentIndex = i;
+    });
+  }
   return (
     <ol className="space-y-0">
       {entries.map((e, i) => {
-        const current = i === entries.length - 1;
+        const current = i === currentIndex;
+        const scheduled = isScheduled(e);
         return (
           <li key={i} className="relative border-l border-border pb-5 pl-6 last:border-l-transparent last:pb-0">
             <span
               aria-hidden
-              className={`absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-[2px] border-2 border-background ${current ? "bg-accent" : "bg-border-strong"}`}
+              className={`absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-[2px] border-2 border-background ${current ? "bg-accent" : scheduled ? "bg-background border-border-strong" : "bg-border-strong"}`}
             />
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <time className="tnum font-display text-xs text-faint">{e.date ? formatDate(e.date) : "Date not stated"}</time>
@@ -156,6 +168,7 @@ export function StatusTrail<S extends string>({
                 <span className="font-display text-[11px] text-muted">until {formatDate(e.until)}</span>
               ) : null}
               {current ? <span className="font-display text-[10px] uppercase tracking-[0.14em] text-accent">current</span> : null}
+              {scheduled ? <span className="font-display text-[10px] uppercase tracking-[0.14em] text-muted">scheduled, not yet in effect</span> : null}
             </div>
             {e.note ? <p lang={/[\u3400-\u9fff]/.test(e.note) ? "zh" : undefined} className="mt-1 max-w-prose text-sm leading-6 text-muted">{e.note}</p> : null}
             <p className="mt-1">
@@ -176,8 +189,8 @@ export function ImplementationStatusTrail({ entries }: { entries: StatusEntry<Im
   return <StatusTrail entries={entries} render={(s) => <ImplementationStatusBadge status={s} />} />;
 }
 
-export function ControlStatusTrail({ entries }: { entries: ControlStatusEntry[] }) {
-  return <StatusTrail entries={entries} render={(s) => <ControlStatusBadge status={s} />} />;
+export function ControlStatusTrail({ entries, asOf }: { entries: ControlStatusEntry[]; asOf?: string }) {
+  return <StatusTrail entries={entries} render={(s) => <ControlStatusBadge status={s} />} asOf={asOf} />;
 }
 
 /**

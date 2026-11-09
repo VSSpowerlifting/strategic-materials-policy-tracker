@@ -11,8 +11,25 @@ export const site = {
   description:
     "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked records.",
   version: "v0.6-capital-intelligence",
-  /** Last curated corpus revision, NOT a claim that every row was rechecked on this date. */
+  /**
+   * The frozen Phase III / F5 research-snapshot date (the corpus cutoff the pinned milestone, F5 and
+   * money/lattice/response analyses are built against). It is NOT the date legal-status views read
+   * and NOT the displayed revision date: see `legalStatusAsOf` and `revisedOn`. Do not advance it
+   * for a single legal update; doing so re-dates the frozen snapshot.
+   */
   lastUpdated: "2026-11-08",
+  /**
+   * The date through which published legal instruments are incorporated. Control-status views
+   * (the controls overview, clocks, summaries and exports) read statuses on this date, so an entry
+   * dated after it is shown as scheduled, never as already effective. 2026-11-09 is the issue date
+   * of MOFCOM/GACC Announcement No. 58 of 2026; its 11 November effective date stays a later date.
+   */
+  legalStatusAsOf: "2026-11-09",
+  /**
+   * The date shown to readers as the last curated revision: the later of the research snapshot and
+   * the legal-status date. Not a claim that every row was rechecked on this date.
+   */
+  revisedOn: "2026-11-09",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness

@@ -20,7 +20,7 @@ import {
 import { buildCapitalControlSummary } from "./capital-control-summary";
 import { buildCapitalIntelligenceSummary } from "./capital-intelligence-summary";
 import { layerOf, organizationRoles } from "./capital-intelligence";
-import { commitmentActor, controlIssuer, currentControlEntry, currentFinancialStatus, evidenceSourceIds } from "./capital-control";
+import { commitmentActor, controlEntryOn, controlIssuer, currentFinancialStatus, scheduledControlEntry, evidenceSourceIds } from "./capital-control";
 import type { PolicyEvent } from "./types";
 
 const LIST_SEP = "; ";
@@ -382,9 +382,17 @@ export function controlMeasuresCsv(): string {
       // v0.6, appended so existing column positions never move.
       "controlledItemTypes",
       "controlledStages",
+      // Appended so existing column positions never move. currentStatus* is the entry in effect on
+      // statusAsOf; scheduled* is an entry already issued that takes effect later (never current).
+      "statusAsOf",
+      "scheduledStatus",
+      "scheduledStatusFrom",
+      "scheduledStatusUntil",
     ],
     getAllControlMeasures().map((m) => {
-      const cur = currentControlEntry(m);
+      // The entry in effect on the legal-status date; an entry dated later is scheduled, never current.
+      const cur = controlEntryOn(m, site.legalStatusAsOf) ?? m.statusHistory[0];
+      const next = scheduledControlEntry(m, site.legalStatusAsOf);
       return [
         m.id,
         m.eventId,
@@ -413,6 +421,10 @@ export function controlMeasuresCsv(): string {
         m.notes ?? "",
         m.controlledItemTypes.join(LIST_SEP),
         m.controlledStages.join(LIST_SEP),
+        site.legalStatusAsOf,
+        next?.status ?? "",
+        next?.date ?? "",
+        next?.until ?? "",
       ];
     }),
   );

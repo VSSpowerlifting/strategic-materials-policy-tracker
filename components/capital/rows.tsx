@@ -166,6 +166,16 @@ export function ControlRow({ m }: { m: ControlSummary }) {
           <p className="mt-0.5 line-clamp-2 text-sm leading-6 text-muted">
             {m.documentNumber ?? m.eventTitle}
           </p>
+          {m.scheduled ? (
+            <p className="mt-1 font-display text-[11px] text-muted">
+              Scheduled, not yet in effect: {controlStatusLabels[m.scheduled.status].toLowerCase()} from {formatDate(m.scheduled.from)}
+              {m.scheduled.until ? ` to ${formatDate(m.scheduled.until)}` : ""}
+            </p>
+          ) : m.endPassed ? (
+            <p className="mt-1 font-display text-[11px] text-muted">
+              Stated end has passed; standing after it depends on a further instrument, none recorded.
+            </p>
+          ) : null}
           <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1.5">
             <Badge>{controlDirectionLabels[m.direction]}</Badge>
             {m.targetJurisdictions.length ? (
