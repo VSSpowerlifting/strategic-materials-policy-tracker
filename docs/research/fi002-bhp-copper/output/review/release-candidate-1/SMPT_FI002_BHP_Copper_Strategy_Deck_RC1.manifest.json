@@ -1,0 +1,71 @@
+{
+  "deck": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC1.pptx",
+  "derived_from": {
+    "path": "docs/research/fi002-bhp-copper/output/review/revision-4/SMPT_FI002_BHP_Copper_Strategy_Deck_rev4.pptx",
+    "sha256": "04a2cc279c77d44dc5a8c81b54c721cae7f4c375f1f79438ab6b737d72009939"
+  },
+  "pptx_sha256": "c415a567c4dd47c088c08394881ddb7ae8c749bb8019d9b9435e6d3d8500cb11",
+  "pdf": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC1.pdf",
+  "pages": 11,
+  "embedded_fonts": [
+    "BAAAAA+Archivo-Bold",
+    "CAAAAA+Archivo-Regular",
+    "DAAAAA+Archivo-Bold",
+    "EAAAAA+Archivo-Regular",
+    "FAAAAA+Archivo-Bold",
+    "GAAAAA+Archivo-Regular",
+    "HAAAAA+Archivo-Regular",
+    "IAAAAA+Archivo-Regular",
+    "JAAAAA+Archivo-Regular",
+    "KAAAAA+Archivo-Regular",
+    "LAAAAA+Archivo-Bold"
+  ],
+  "links": 0,
+  "text_check": "each page equals revision 4 minus the badge (whitespace ignored)",
+  "tagged": true,
+  "title": "Goldman Sachs' Copper Outlook and BHP's $6 Billion Escondida Decision",
+  "pdf_sha256": "868694774f7bae75745298af0827c18ee129cf6506eb418645b174797cc60486",
+  "contact_sheet": "SMPT_FI002_RC1_contact_sheet.png",
+  "contact_sheet_sha256": "bf304060bf28d08e48dc5e8900336bcb23b8ef8e78c52705e75d6ab800f09c53",
+  "renders": [
+    "slide-01.png",
+    "slide-02.png",
+    "slide-03.png",
+    "slide-04.png",
+    "slide-05.png",
+    "slide-06.png",
+    "slide-07.png",
+    "slide-08.png",
+    "slide-09.png",
+    "slide-10.png",
+    "slide-11.png"
+  ],
+  "changes": {
+    "shapes_removed": {
+      "ppt/slides/slide1.xml": "frame:cover-notice",
+      "ppt/slides/slide10.xml": "frame:draft-badge",
+      "ppt/slides/slide11.xml": "frame:draft-badge",
+      "ppt/slides/slide2.xml": "frame:draft-badge",
+      "ppt/slides/slide3.xml": "frame:draft-badge",
+      "ppt/slides/slide4.xml": "frame:draft-badge",
+      "ppt/slides/slide5.xml": "frame:draft-badge",
+      "ppt/slides/slide6.xml": "frame:draft-badge",
+      "ppt/slides/slide7.xml": "frame:draft-badge",
+      "ppt/slides/slide8.xml": "frame:draft-badge",
+      "ppt/slides/slide9.xml": "frame:draft-badge"
+    },
+    "note_labels_removed": 54,
+    "font_replacements": {
+      "ppt/slideMasters/slideMaster1.xml": 9,
+      "ppt/theme/theme1.xml": 5
+    }
+  },
+  "unchanged": "all other package parts and XML bytes are identical to revision 4 (verified)",
+  "research_cutoff": "2026-11-05",
+  "review_gates": "agent QC recorded; human approval pending",
+  "publication_authorization": "pending human approval",
+  "tools": {
+    "libreoffice": "LibreOffice 26.8.2.2 9dea406ab7695df6325b11b0e19fdca8db4b7276",
+    "pymupdf": "1.26.5"
+  }
+}

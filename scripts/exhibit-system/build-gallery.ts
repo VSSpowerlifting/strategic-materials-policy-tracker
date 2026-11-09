@@ -55,6 +55,11 @@ export interface BuildOptions {
   /** Research decks only: repository-relative path of the QC handoff record, if one exists. */
   qcRecord?: string;
   evidence?: { id: string; title: string; url: string; locator: string }[];
+  /**
+   * Research decks only, opt-in: omit decorative frame kickers (the cover
+   * kicker and the "INTERPRETATION" heading). Source, status and draft labels stay.
+   */
+  plainFrame?: boolean;
 }
 
 function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
@@ -62,9 +67,11 @@ function coverSlide(pptx: Pptx, title: string, lines: string[], records: Element
   const slide = pptx.addSlide();
   slide.background = { color: C.dark };
   const h = makeHelpers(slide, { x: 0, y: 0, w: SLIDE_W, h: SLIDE_H }, records, pptx.ShapeType, pptx.ChartType);
-  h.text("cover-kicker", "frame", synthetic ? "STRATEGIC MATERIALS POLICY TRACKER · EXHIBIT SYSTEM" : "STRATEGIC MATERIALS POLICY TRACKER", {
-    x: 0.8, y: 1.6, w: 11.5, h: 0.35, fontSize: 12, bold: true, color: C.gold, charSpacing: 1.5,
-  });
+  if (!opts.plainFrame) {
+    h.text("cover-kicker", "frame", synthetic ? "STRATEGIC MATERIALS POLICY TRACKER · EXHIBIT SYSTEM" : "STRATEGIC MATERIALS POLICY TRACKER", {
+      x: 0.8, y: 1.6, w: 11.5, h: 0.35, fontSize: 12, bold: true, color: C.gold, charSpacing: 1.5,
+    });
+  }
   h.text("cover-title", "frame", title, { x: 0.8, y: 2.1, w: 11.5, h: 1.4, fontSize: 36, bold: true, color: C.paper, valign: "top" });
   h.text("cover-lines", "frame", lines.map((t, i) => ({ text: t, options: { breakLine: i < lines.length - 1 } })), {
     x: 0.8, y: 3.8, w: 11.0, h: 1.6, fontSize: 14, color: "D8D3C7", valign: "top", paraSpaceAfter: 6,
@@ -91,6 +98,9 @@ export async function buildDeck(
     throw new Error(
       `exhibit build refused — a ${opts.classification} deck cannot contain ${mixed[0].fixture.classification} slides (${mixed.map((e) => e.fixture.pattern).join(", ")})`,
     );
+  }
+  if (opts.plainFrame && opts.classification !== "research") {
+    throw new Error("exhibit build refused — plainFrame applies only to research decks");
   }
   if (opts.qcRecord && opts.classification !== "research") {
     throw new Error("exhibit build refused — a QC record applies only to research decks");
@@ -126,9 +136,10 @@ export async function buildDeck(
     slide.background = { color: C.paper };
     const records: ElementRecord[] = [];
     const h = makeHelpers(slide, contentArea(e.fixture), records, pptx.ShapeType, pptx.ChartType);
+    if (opts.plainFrame) h.plain = true;
     renderer.render(h, data, e.fixture);
     // Keep the fixed frame above native tables in renderers that reflow them.
-    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture });
+    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, annotationHeading: !opts.plainFrame });
     slide.addNotes(
       synthetic
         ? [

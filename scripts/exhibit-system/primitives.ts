@@ -106,9 +106,12 @@ export const SYNTHETIC_NOTICE = "Synthetic demonstration data — not an SMPT fi
 export const DRAFT_BADGE = "DRAFT · REVIEW GATES PENDING";
 
 export interface FrameSpec {
+  /** Section label above the title; an empty string draws none. */
   label: string;
   slideNumber: number;
   fixture: Fixture;
+  /** Draw the "INTERPRETATION" kicker beside the annotation (default true). */
+  annotationHeading?: boolean;
 }
 
 /** Element-recording helper factory. Every object gets a role-prefixed `objectName`. */
@@ -185,9 +188,12 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
   h.shape("top-bar", "frame", h.shapes.rect, {
     x: 0, y: 0, w: SLIDE_W, h: 0.12, fill: { color: C.dark }, line: { color: C.dark, width: 0 },
   });
-  h.text("section-label", "frame", spec.label, {
-    x: LEFT, y: 0.35, w: 8.6, h: 0.3, fontSize: 11, bold: true, color: C.accent, charSpacing: 1,
-  });
+  if (spec.label.trim()) {
+    h.text("section-label", "frame", spec.label, {
+      x: LEFT, y: 0.35, w: 8.6, h: 0.3, fontSize: 11, bold: true, color: C.accent, charSpacing: 1,
+    });
+  }
+  const heading = spec.annotationHeading !== false;
   const synthetic = f.classification === "synthetic-demonstration";
   if (synthetic) {
     h.text("synthetic-badge", "frame", "SYNTHETIC DEMONSTRATION DATA", {
@@ -222,7 +228,7 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
       x: LEFT, y, w: 0.05, h: 0.62, fill: { color: C.accent }, line: { color: C.accent, width: 0 },
     });
     h.text("interpretation", "annot", [
-      { text: "INTERPRETATION  ", options: { bold: true, color: C.accent, fontSize: TYPE.footnote, charSpacing: 1 } },
+      ...(heading ? [{ text: "INTERPRETATION  ", options: { bold: true, color: C.accent, fontSize: TYPE.footnote, charSpacing: 1 } }] : []),
       { text: f.annotation, options: { color: C.ink, fontSize: TYPE.strip } },
     ], { x: LEFT + 0.2, y, w: 11.85, h: 0.62, valign: "middle" });
   } else {
@@ -230,11 +236,13 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
     h.shape("interpretation-bar", "annot", h.shapes.rect, {
       x, y: CONTENT_TOP, w: 0.05, h: 1.1, fill: { color: C.accent }, line: { color: C.accent, width: 0 },
     });
-    h.text("interpretation-heading", "annot", "INTERPRETATION", {
-      x: x + 0.2, y: CONTENT_TOP, w: 2.85, h: 0.26, fontSize: TYPE.footnote, bold: true, color: C.accent, charSpacing: 1,
-    });
+    if (heading) {
+      h.text("interpretation-heading", "annot", "INTERPRETATION", {
+        x: x + 0.2, y: CONTENT_TOP, w: 2.85, h: 0.26, fontSize: TYPE.footnote, bold: true, color: C.accent, charSpacing: 1,
+      });
+    }
     h.text("interpretation", "annot", f.annotation, {
-      x: x + 0.2, y: CONTENT_TOP + 0.34, w: 2.85, h: 3.8, fontSize: TYPE.body, color: C.ink, valign: "top",
+      x: x + 0.2, y: heading ? CONTENT_TOP + 0.34 : CONTENT_TOP, w: 2.85, h: 3.8, fontSize: TYPE.body, color: C.ink, valign: "top",
       paraSpaceAfter: 4,
     });
   }
