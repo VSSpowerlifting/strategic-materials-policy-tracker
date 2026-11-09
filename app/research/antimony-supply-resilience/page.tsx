@@ -8,7 +8,7 @@ const model = "/research/applied-001/antimony-supply-resilience-model.xlsx";
 const evidence = "/research/applied-001/antimony-evidence-and-assumptions.md";
 
 export const metadata: Metadata = {
-  title: "U.S. Antimony Supply Resilience — Applied Strategy 001",
+  title: "U.S. Antimony Supply Resilience — Strategy & Finance",
   description:
     "A defense-manufacturing procurement strategy case comparing qualified supplier diversification, inventory and prospective domestic offtake, with a source-linked scenario model.",
   alternates: { canonical: "/research/antimony-supply-resilience" },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "article",
     url: site.url + "/research/antimony-supply-resilience",
     siteName: site.name,
-    title: "U.S. Antimony Supply Resilience | SMPT Applied Strategy 001",
+    title: "U.S. Antimony Supply Resilience | SMPT",
     description: "Supply continuity, inventory working capital and conditional domestic sourcing under 2027–2031 antimony disruption scenarios.",
   },
 };
@@ -55,7 +55,7 @@ export default function AntimonySupplyResilience() {
             ← Research
           </Link>
           <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-            Applied Strategy 001
+            Strategy &amp; Finance
           </p>
           <h1 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             U.S. Antimony Supply Resilience

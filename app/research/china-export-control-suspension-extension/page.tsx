@@ -10,7 +10,7 @@ const DESCRIPTION =
   "China extends the suspension of six October 2025 export-control announcements through 10 January 2027. The April rare-earth controls and a separate US-directed measure follow different schedules.";
 
 export const metadata: Metadata = {
-  title: `${TITLE} — Policy Analysis 001`,
+  title: `${TITLE} — Policy Research`,
   description: DESCRIPTION,
   alternates: { canonical: `/research/${SLUG}` },
   openGraph: {
@@ -156,7 +156,7 @@ export default function ChinaSuspensionExtensionPage() {
           >
             ← Research
           </Link>
-          <p className="mt-8 font-display text-sm font-semibold text-accent">Policy Analysis 001</p>
+          <p className="mt-8 font-display text-sm font-semibold text-accent">Policy Research</p>
           <h1 className="mt-3 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             {TITLE}
           </h1>

@@ -11,6 +11,17 @@
 - Dense tables and two-column analytical prose are welcome when the information warrants them. Use full-width figures for comparisons requiring greater space. Preserve readable type at page and mobile-view size.
 - Apply restrained running headers, page numbers, section numbering, gold rules, exhibit numbers, and documentary captions. Avoid marketing decks, dramatic isolated fragments, decorative oversized whitespace, and arbitrary visual clutter.
 
+## Public research categories
+
+The public research index and article headers use **two categories only**:
+
+- **Policy Research** — original research dossiers and shorter policy analyses grounded in policy instruments, source records, implementation and industrial effects.
+- **Strategy & Finance** — financial intelligence, capital-allocation studies and applied strategy cases involving explicit assumptions, scenarios and decision models.
+
+Use these reader-facing labels consistently in article headers, the research index and metadata. Titles, bylines and publication dates do the rest of the explanatory work. Avoid promoting internal project numbers (R001, FI001, FI002, Applied Strategy 001, Policy Analysis 001) into public category headings. **Keep existing report and model identifiers in filenames, evidence registers, archival records and suggested citations** so that references to published research remain stable. Descriptions such as *report*, *dossier*, *financial model* and *strategy deck* remain appropriate when they accurately name a downloadable format.
+
+This is an editorial grouping, not a change in method. Legal-status research, forecast-based financial modeling and hypothetical strategy cases retain their separate evidence, scenario and publication standards.
+
 ## Language and evidence
 
 - Write descriptive headings that identify the company, jurisdiction, instrument, financing status, industrial project, or documented activity.

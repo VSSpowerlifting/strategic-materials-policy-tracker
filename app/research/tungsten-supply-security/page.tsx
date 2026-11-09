@@ -4,14 +4,14 @@ import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Tungsten Supply Security — Research Dossier 001",
+  title: "Tungsten Supply Security — Policy Research",
   description: "Original SMPT research comparing how tungsten policy instruments translate into finance, industrial development, export licensing and commercial supply in China, the EU, the UK and Japan.",
   alternates: { canonical: "/research/tungsten-supply-security" },
   openGraph: {
     type: "article",
     url: `${site.url}/research/tungsten-supply-security`,
     siteName: site.name,
-    title: "Tungsten Supply Security | SMPT Research Dossier 001",
+    title: "Tungsten Supply Security | SMPT",
     description: "Financing, mine operations, strategic project recognition and conversion capacity across China, the EU, the UK and Japan.",
   },
 };
@@ -125,7 +125,7 @@ export default function TungstenResearchDossier() {
       <section className="border-b border-border-strong">
         <Container width="wide" className="py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">← Research</Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Research Dossier 001</p>
+          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Policy Research</p>
           <h1 className="mt-4 max-w-4xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">Tungsten Supply Security</h1>
           <p className="mt-5 max-w-3xl font-display text-xl leading-8 text-muted sm:text-2xl">Policy, financing and industrial development across China, the EU, the UK and Japan.</p>
           <p className="mt-7 font-display text-sm text-muted">By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link> · Research cutoff <time dateTime="2026-11-03">3 November 2026</time></p>
