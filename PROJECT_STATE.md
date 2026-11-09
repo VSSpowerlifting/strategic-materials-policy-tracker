@@ -12,7 +12,8 @@
   1. README and CLAUDE.md say "no market prices". Accepting the exception is the maintainer's decision.
   2. The earlier entry kept commercial assessments off the page. The page and `/api/export/markets.csv` now show and redistribute figures derived from them: the IMF's monthly averages of an SMM rare-earth carbonate assessment, under IMF terms rather than an open licence, and USGS republications of price-agency assessments, under CC0 as published by the USGS. Whether that is acceptable is the maintainer's call.
 - **QA:**
-  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1188/1188) and build all pass.
+  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1194/1194) and build all pass after the main merge and review fixes.
+  - Code review of the full diff: seven defects fixed in c3b3016 (heatmap blur and tab stop, indexed start, shared-link colour slots, fractional y-ticks, duplicated CSV escaper, dataset list in one place). The CSV `#` preamble stays by design.
   - Browser QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow, after a fix to the heatmap grid. Screenshots of the new page are in `docs/analysis/markets-monitor/`; the old ones were removed.
   - The IMF cobalt values for 2026 (flat at about 55,850 from February to August, then 42,213 in September) match PCOBA in the pinned SDMX file exactly.
   - Interaction checks: URL restore (it was broken by a mount-order race; now fixed), keyboard chip toggle, and heatmap roving focus opening on the latest month.
