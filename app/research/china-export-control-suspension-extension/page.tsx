@@ -305,24 +305,19 @@ export default function ChinaSuspensionExtensionPage() {
                   Commercial interpretation
                 </h2>
                 <p className={p}>
-                  This section describes which legal provisions are suspended. It does not estimate effects on prices,
-                  supply or any firm.
-                </p>
-                <p className={p}>
                   <strong>Analysis: procurement and planning.</strong> For buyers the change is the planning horizon.
                   A contract that runs past 10 January 2027 sits under a suspension whose end date is stated and whose
                   continuation is not addressed. Had the suspension not applied, the overseas provisions of No. 61 would
                   have required a Chinese licence for foreign exports of items meeting a 0.1%-by-value threshold or made
                   with specified Chinese technologies. Whether a given product meets those tests depends on its
-                  composition and process, which this article does not assess. Buyers of batteries, cathode and anode
+                  composition and process. Buyers of batteries, cathode and anode
                   materials and superhard materials face the same date under Nos. 58 and 55 of 2025. Which date governs
                   a given shipment is set by the underlying announcements’ own provisions, not by No. 58 of 2026.
                 </p>
                 <p className={p}>
                   <strong>Analysis: investment.</strong> If the suspension ended, No. 56 (equipment, ores and reagents)
                   and No. 62 (technology and related support) would apply to exports from China of the listed items.
-                  This article does not compare those items with any project’s equipment or technology. A financing or
-                  offtake timeline that extends beyond 10 January 2027 runs against provisions whose position after that
+                  A financing or offtake timeline that extends beyond 10 January 2027 runs against provisions whose position after that
                   date no published instrument states.
                 </p>
               </section>
@@ -336,12 +331,11 @@ export default function ChinaSuspensionExtensionPage() {
                   about a further extension, a lapse or a replacement, and nothing about how the original effective
                   dates (8 November 2025 for Nos. 55 to 58, 1 December 2025 for No. 61 items 1(1) and 1(2)) would apply
                   if the suspension ended. It states a 61-day period, inclusive of both dates, and nothing about any
-                  later one. The shorter period could reflect many causes, and the text states none.
+                  later one. The text gives no reason for the shorter period.
                 </p>
                 <p className={p}>
                   Two end dates, 27 November 2026 and 10 January 2027, fall about six weeks apart, each governed by its
-                  own announcement. The text of any later instrument is what will establish the position after
-                  10 January 2027.
+                  own announcement.
                 </p>
               </section>
             </article>
