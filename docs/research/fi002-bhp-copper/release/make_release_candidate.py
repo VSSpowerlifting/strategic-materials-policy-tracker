@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Derive an FI002 public-release candidate from a review copy.
 
-RC1 derives from revision 4 and RC2 and RC3 from revision 5 (select with
+RC1 derives from revision 4 and RC2 to RC4 from revision 5 (select with
 --candidate; the default is rc1). The source revision stays untouched as the review
 archive. RC3 builds the same PPTX as RC2 and adds clickable source links to the PDF
-(see SOURCE_LINKS); it changes no text, figure or layout.
+(see SOURCE_LINKS); it changes no text, figure or layout. RC4 writes the same links as
+real hyperlinks into the PPTX source footers, styled with an underline and the dark SMPT
+accent; LibreOffice then carries them into the PDF as tagged Link elements.
 The candidate is a byte-level derivative:
 it removes the draft badge, the cover review notice and the internal editorial
 labels in speaker notes, and maps the master's Arial bullet font to Archivo.
@@ -18,7 +20,7 @@ slide (tests/exhibit-research.test.ts). Removing it is a human-gated release
 step, and this script only prepares the candidate for that review.
 
 Run from the repository root with a Python that has PyMuPDF, Pillow and fontTools:
-    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py [--candidate rc1|rc2|rc3]
+    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py [--candidate rc1|rc2|rc3|rc4]
 """
 from __future__ import annotations
 
@@ -59,7 +61,15 @@ CANDIDATES = {
             "pdf_sha": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109",
             "out": "release-candidate-3", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC3",
             "sheet": "SMPT_FI002_RC3_contact_sheet.png", "links": True},
+    # RC4: RC3's links, now styled (underline plus the SMPT paper accent) and also live in the PPTX.
+    # The links are written into the PPTX source-line runs and LibreOffice carries them into the PDF.
+    "rc4": {"source": "revision-5", "source_stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_rev5",
+            "pptx_sha": "071a67e82a2fcb3b0031ad18ce1c2ec93127d8e8d77496e70cd31e6c3ca483b6",
+            "pdf_sha": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109",
+            "out": "release-candidate-4", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC4",
+            "sheet": "SMPT_FI002_RC4_contact_sheet.png", "links": True, "styled_links": True},
 }
+LINK_COLOUR = "7A5510"  # "Accessible paper accent" in docs/design/presentations/SMPT_PRESENTATION_STANDARD_V2.md
 
 # Source-line phrases that become hyperlinks in the RC3 PDF, per 1-based page. Each phrase is
 # text that already appears in that slide's "Source:" footer; each id is an entry of the
@@ -88,9 +98,10 @@ FOOTER_BAND = (0, 500, 960, 522)  # the source line sits at y 505-516 on every c
 
 
 def select(key: str) -> None:
-    global SRC_PPTX, SRC_PDF, SRC_SHA, SRC_PDF_SHA, OUT, STEM, SHEET, WITH_LINKS
+    global SRC_PPTX, SRC_PDF, SRC_SHA, SRC_PDF_SHA, OUT, STEM, SHEET, WITH_LINKS, STYLED_LINKS
     c = CANDIDATES[key]
     WITH_LINKS = bool(c.get("links"))
+    STYLED_LINKS = bool(c.get("styled_links"))
     src = REVIEW / c["source"]
     SRC_PPTX, SRC_PDF = src / (c["source_stem"] + ".pptx"), src / (c["source_stem"] + ".pdf")
     SRC_SHA, SRC_PDF_SHA = c["pptx_sha"], c["pdf_sha"]
@@ -216,6 +227,151 @@ def verify_diff(before: bytes, after: bytes) -> None:
             raise RuntimeError("Research text 'RCA pending' was lost on slide 7")
 
 
+FOOTER_SP = re.compile(rb'<p:sp><p:nvSpPr><p:cNvPr id="\d+" name="frame:source-footer">.*?</p:sp>', re.S)
+FOOTER_RUN = re.compile(rb"<a:r>(<a:rPr[^>]*)>(.*?)</a:rPr><a:t>([^<]*)</a:t></a:r>", re.S)
+THEME_LINK = (b'<a:hlink><a:srgbClr val="0563C1"/></a:hlink><a:folHlink><a:srgbClr val="954F72"/></a:folHlink>',
+              b'<a:hlink><a:srgbClr val="%s"/></a:hlink><a:folHlink><a:srgbClr val="%s"/></a:folHlink>')
+BODY_INK = b'<a:srgbClr val="5B5548"/>'  # the source line's existing warm-gray text colour
+HLINK_EXT = (b'<a:extLst><a:ext uri="{A12FA001-AC4F-418D-AE19-62706E023703}"><ahyp:hlinkClr '
+             b'xmlns:ahyp="http://schemas.microsoft.com/office/drawing/2018/hyperlinkcolor" val="tx"/></a:ext></a:extLst>')
+REL_HYPERLINK = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
+LINK_REL = re.compile(rb'<Relationship Id="(rId\d+)" Type="' + REL_HYPERLINK.encode() + rb'" Target="([^"]*)" TargetMode="External"/>')
+
+
+def esc(text: str) -> bytes:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;").encode()
+
+
+def link_footer(sp: bytes, items: list[tuple[str, str]], rid_for) -> bytes:
+    """Split the footer's single run so each linked phrase becomes its own run. Plain pieces keep the
+    original run properties byte for byte. Linked pieces add an underline, the SMPT accent colour and a
+    hyperlink that uses the run colour in PowerPoint 2019+ (the theme hyperlink colour matches for older ones)."""
+    runs = FOOTER_RUN.findall(sp)
+    if len(runs) != 1 or sp.count(b"<a:p>") != 1:
+        raise RuntimeError("Source footer is not a single run in a single paragraph")
+    open_tag, inner, raw = runs[0]
+    text = raw.decode()
+    if "&" in text:
+        raise RuntimeError("Footer text contains XML entities; extend link_footer before using it")
+    spans = []
+    for phrase, uri in items:
+        if text.count(phrase) != 1:
+            raise RuntimeError(f"{phrase!r} matches {text.count(phrase)} times in the footer")
+        start = text.index(phrase)
+        spans.append((start, start + len(phrase), uri))
+    spans.sort()
+    if any(a[1] > b[0] for a, b in zip(spans, spans[1:])):
+        raise RuntimeError("Linked phrases overlap")
+
+    def run(piece: str, uri: str | None) -> bytes:
+        if uri is None:
+            return b"<a:r>" + open_tag + b">" + inner + b"</a:rPr><a:t>" + esc(piece) + b"</a:t></a:r>"
+        if inner.count(BODY_INK) != 1:
+            raise RuntimeError("Unexpected footer run colour")
+        styled = inner.replace(BODY_INK, b'<a:srgbClr val="%s"/>' % LINK_COLOUR.encode())
+        link = b'<a:hlinkClick r:id="' + rid_for(uri).encode() + b'">' + HLINK_EXT + b"</a:hlinkClick>"
+        return (b"<a:r>" + open_tag + b' u="sng">' + styled + link + b"</a:rPr><a:t>" + esc(piece) + b"</a:t></a:r>")
+
+    out, pos = [], 0
+    for start, end, uri in spans:
+        if start > pos:
+            out.append(run(text[pos:start], None))
+        out.append(run(text[start:end], uri))
+        pos = end
+    if pos < len(text):
+        out.append(run(text[pos:], None))
+    whole = FOOTER_RUN.search(sp)
+    return sp[:whole.start()] + b"".join(out) + sp[whole.end():]
+
+
+def add_pptx_links(pptx: bytes) -> tuple[bytes, list[dict]]:
+    """Add the 29 source hyperlinks to the PPTX. Touches only each content slide's footer shape, that
+    slide's relationships file (new external hyperlink relationships) and the theme's two hyperlink colours."""
+    plan, log = expected_links(), []
+    changed: dict[str, bytes] = {}
+    with ZipFile(io.BytesIO(pptx)) as zi:
+        for n, items in plan.items():
+            data = zi.read(f"ppt/slides/slide{n}.xml")
+            rels = zi.read(f"ppt/slides/_rels/slide{n}.xml.rels")
+            used = [int(x) for x in re.findall(rb'Id="rId(\d+)"', rels)]
+            new: dict[str, str] = {}
+
+            def rid_for(uri: str) -> str:
+                if uri not in new:
+                    new[uri] = f"rId{max(used + [0]) + 1 + len(new)}"
+                return new[uri]
+
+            sps = FOOTER_SP.findall(data)
+            if len(sps) != 1:
+                raise RuntimeError(f"slide{n}: expected one source footer, found {len(sps)}")
+            changed[f"ppt/slides/slide{n}.xml"] = data.replace(
+                sps[0], link_footer(sps[0], [(t, u) for t, _, u in items], rid_for), 1)
+            add = b"".join(b'<Relationship Id="%s" Type="%s" Target="%s" TargetMode="External"/>'
+                           % (rid.encode(), REL_HYPERLINK.encode(), esc(uri)) for uri, rid in new.items())
+            if b"</Relationships>" not in rels:
+                raise RuntimeError(f"slide{n}: unexpected rels")
+            changed[f"ppt/slides/_rels/slide{n}.xml.rels"] = rels.replace(b"</Relationships>", add + b"</Relationships>", 1)
+            log.append({"slide": n, "links": len(items), "relationships": len(new)})
+        theme = zi.read("ppt/theme/theme1.xml")
+        if theme.count(THEME_LINK[0]) != 1:
+            raise RuntimeError("Theme hyperlink colours not found")
+        colour = LINK_COLOUR.encode()
+        changed["ppt/theme/theme1.xml"] = theme.replace(THEME_LINK[0], THEME_LINK[1] % (colour, colour), 1)
+        output = io.BytesIO()
+        with ZipFile(output, "w") as zo:
+            for info in zi.infolist():
+                zo.writestr(info, changed.get(info.filename, zi.read(info.filename)))
+    linked = output.getvalue()
+    verify_pptx_links(pptx, linked)
+    return linked, log
+
+
+def verify_pptx_links(before: bytes, after: bytes) -> None:
+    """Prove the linked PPTX differs from the unlinked one only by the footer runs, their relationships
+    and the theme's hyperlink colours, and that every link points where the spec says."""
+    plan = expected_links()
+    with ZipFile(io.BytesIO(before)) as old, ZipFile(io.BytesIO(after)) as new:
+        if old.namelist() != new.namelist():
+            raise RuntimeError("Package part list changed")
+        for name in old.namelist():
+            a, b = old.read(name), new.read(name)
+            if a == b:
+                continue
+            m = re.fullmatch(r"ppt/slides/slide(\d+)\.xml", name)
+            r = re.fullmatch(r"ppt/slides/_rels/slide(\d+)\.xml\.rels", name)
+            if m and int(m.group(1)) in plan:
+                n = int(m.group(1))
+                fa, fb = FOOTER_SP.search(a), FOOTER_SP.search(b)
+                if FOOTER_SP.sub(b"", a, 1) != FOOTER_SP.sub(b"", b, 1):
+                    raise RuntimeError(f"slide{n}: XML outside the source footer changed")
+                text = lambda x: "".join(t.decode() for t in re.findall(rb"<a:t>([^<]*)</a:t>", x.group(0)))
+                if text(fa) != text(fb):
+                    raise RuntimeError(f"slide{n}: footer text changed")
+                rels = {rid.decode(): uri.decode() for rid, uri in LINK_REL.findall(new.read(f"ppt/slides/_rels/slide{n}.xml.rels"))}
+                found = []
+                for rm in FOOTER_RUN.finditer(fb.group(0)):
+                    tag, inner, piece = rm.groups()
+                    hl = re.findall(rb'<a:hlinkClick r:id="(rId\d+)"', inner)
+                    if b'u="sng"' in tag:
+                        if len(hl) != 1 or b'<a:srgbClr val="%s"/>' % LINK_COLOUR.encode() not in inner:
+                            raise RuntimeError(f"slide{n}: underlined run without link or accent colour")
+                        found.append((piece.decode(), rels[hl[0].decode()]))
+                    elif hl or LINK_COLOUR.encode() in inner:
+                        raise RuntimeError(f"slide{n}: unexpected styling on a plain footer run")
+                want = sorted((t, u) for t, _, u in plan[n])
+                if sorted(found) != want:
+                    raise RuntimeError(f"slide{n}: hyperlinks differ from the plan: {found}")
+            elif r and int(r.group(1)) in plan:
+                if LINK_REL.sub(b"", b) != a:
+                    raise RuntimeError(f"{name}: relationships changed beyond added hyperlinks")
+            elif name == "ppt/theme/theme1.xml":
+                colour = LINK_COLOUR.encode()
+                if b.replace(THEME_LINK[1] % (colour, colour), THEME_LINK[0], 1) != a:
+                    raise RuntimeError("Theme changed beyond the hyperlink colours")
+            else:
+                raise RuntimeError("Unexpected change in " + name)
+
+
 def soffice() -> str:
     for c in ("soffice", "libreoffice", "/Applications/LibreOffice.app/Contents/MacOS/soffice"):
         p = shutil.which(c) or (c if Path(c).is_file() else None)
@@ -299,6 +455,64 @@ def audit_links(pdf: Path) -> list[dict]:
     return found
 
 
+def describe_links(pdf: Path) -> None:
+    """LibreOffice exports each link as a URI annotation plus a tagged Link structure element, but gives the
+    annotation no /Contents. Add the visible link text as /Contents so assistive technology and PDF/UA
+    checkers have a description. Incremental save: the export's bytes are untouched."""
+    doc = fitz.open(pdf)
+    for page in doc:
+        for link in page.get_links():
+            if link["kind"] == fitz.LINK_URI:
+                text = re.sub(r"\s+", " ", page.get_textbox(link["from"])).strip()
+                doc.xref_set_key(link["xref"], "Contents", fitz.get_pdf_str(text))
+    doc.saveIncr()
+    doc.close()
+
+
+def audit_link_structure(pdf: Path) -> dict:
+    """Do not rely on the document being tagged. Every link annotation must be reachable from a Link
+    structure element through the ParentTree, that element must hold an object reference back to the same
+    annotation plus the link's marked text, and the annotation must carry a description."""
+    import pikepdf
+    doc = pikepdf.open(pdf)
+    if "/StructTreeRoot" not in doc.Root or not doc.Root.get("/MarkInfo", {}).get("/Marked"):
+        raise RuntimeError("PDF is not tagged")
+    nums = doc.Root.StructTreeRoot.ParentTree.Nums
+    parents = {int(nums[i]): nums[i + 1] for i in range(0, len(nums), 2)}
+    annots = [(n, a) for n, pg in enumerate(doc.pages, 1) for a in pg.get("/Annots", []) if a.get("/Subtype") == "/Link"]
+    structs = []
+
+    def walk(node):
+        if isinstance(node, pikepdf.Dictionary):
+            if node.get("/S") == "/Link":
+                structs.append(node)
+            kids = node.get("/K")
+            for kid in (list(kids) if isinstance(kids, pikepdf.Array) else [kids] if kids is not None else []):
+                walk(kid)
+
+    walk(doc.Root.StructTreeRoot)
+    if len(annots) != len(structs):
+        raise RuntimeError(f"{len(annots)} link annotations but {len(structs)} Link structure elements")
+    for page_no, a in annots:
+        sp = a.get("/StructParent")
+        if sp is None or int(sp) not in parents:
+            raise RuntimeError(f"Page {page_no}: link annotation is not in the ParentTree")
+        el = parents[int(sp)]
+        if el.get("/S") != "/Link":
+            raise RuntimeError(f"Page {page_no}: annotation maps to a {el.get('/S')} element, not Link")
+        kids = el.get("/K")
+        kids = list(kids) if isinstance(kids, pikepdf.Array) else [kids]
+        objr = [k for k in kids if isinstance(k, pikepdf.Dictionary) and k.get("/Type") == "/OBJR"]
+        if len(objr) != 1 or objr[0]["/Obj"].objgen != a.objgen:
+            raise RuntimeError(f"Page {page_no}: Link element does not reference its annotation")
+        if not any(isinstance(k, int) or (isinstance(k, pikepdf.Dictionary) and "/MCID" in k) for k in kids):
+            raise RuntimeError(f"Page {page_no}: Link element holds no marked link text")
+        if not str(a.get("/Contents", "")).strip():
+            raise RuntimeError(f"Page {page_no}: link annotation has no /Contents description")
+    return {"link_annotations": len(annots), "link_structure_elements": len(structs),
+            "annotations_in_parent_tree": len(annots), "annotations_with_contents": len(annots)}
+
+
 def audit_pdf(pdf: Path) -> dict:
     """Stricter than reissue_archivo_decks.audit_pdf: page text must equal the source exactly,
     ignoring whitespace, once the removed badge string is taken out."""
@@ -348,12 +562,18 @@ def main() -> None:
     if OUT.exists() and any(OUT.glob("*.pptx")):
         raise RuntimeError(f"{OUT} already holds a candidate; use a new RC number instead of overwriting")
     rc, log = build_pptx()
+    pptx_links = None
+    if STYLED_LINKS:
+        rc, pptx_links = add_pptx_links(rc)  # also proves the diff against the unlinked deck
     OUT.mkdir(parents=True, exist_ok=True)
     pptx = OUT / (STEM + ".pptx")
     pptx.write_bytes(rc)
     pdf = export_pdf(pptx)
-    link_log = add_source_links(pdf) if WITH_LINKS else None
+    link_log = add_source_links(pdf) if WITH_LINKS and not STYLED_LINKS else None
+    if STYLED_LINKS:
+        describe_links(pdf)
     pdf_audit = audit_pdf(pdf)
+    structure = audit_link_structure(pdf) if STYLED_LINKS else None
     sheet = OUT / SHEET
     contact_sheet(pdf, sheet)
     manifest = {
@@ -371,8 +591,18 @@ def main() -> None:
             "source_links_note": "URI annotations over source-line text; no visual change. Annotations are not "
                                  "tagged in the PDF structure tree. The PPTX source lines are not hyperlinked."}
            if link_log is not None else {}),
+        **({"pptx_links": pptx_links,
+            "pdf_link_structure": structure,
+            "source_links_note": f"Hyperlinks written into the slide 2 to 11 source footers of the PPTX (underlined, "
+                                 f"#{LINK_COLOUR}), carried into the PDF by LibreOffice as {structure['link_annotations']} "
+                                 "URI annotations, each tagged as a Link structure element with an object reference, "
+                                 "present in the ParentTree and described by /Contents."}
+           if STYLED_LINKS else {}),
         "changes": log,
-        "unchanged": f"all other package parts and XML bytes are identical to {SRC_PPTX.name} (verified)",
+        "unchanged": (f"all other package parts and XML bytes are identical to {SRC_PPTX.name} (verified), apart from "
+                      "the slide footers, their relationship files and the theme hyperlink colours"
+                      if STYLED_LINKS else
+                      f"all other package parts and XML bytes are identical to {SRC_PPTX.name} (verified)"),
         "research_cutoff": "2026-11-05",
         "review_gates": "agent QC recorded; human approval pending",
         "publication_authorization": "pending human approval",

@@ -1,3 +1,11 @@
+## 2026-11-09: FI002 deck release candidate 4, styled and clickable sources (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-4/` holds the RC4 PPTX, PDF, contact sheet, renders, manifest and QC record (with the release handoff). It is built from the same revision 5 source with `make_release_candidate.py --candidate rc4`.
+- The only change from RC3 is the source-link treatment. The 29 source phrases are underlined in the SMPT accessible accent `#7A5510` and are now real hyperlinks in the PPTX as well as the PDF. The PDF carries 29 URI annotations, 29 tagged `/Link` structure elements and `/Contents` descriptions. Text, figures, charts, workbooks, fonts and layout match RC3; only the footer band differs in the renders.
+- RC4 files: PPTX `54e0d620…32168`, PDF `9e1c9765…ba07` (full hashes in the QC record).
+- All repository gates pass (1164 tests, 28 pre-existing lint warnings). The RC3 and earlier archives are unchanged.
+- Still open: the PowerPoint tier (open, click links, Edit Data, save; PowerPoint is not installed here), the Drive upload (the connector cannot see the folder under the university account), human approval, then the release session (merge #233, replace the public downloads, Drive, post-deploy checks).
+
 ## 2026-11-09: FI002 deck release candidate 3, clickable PDF sources (draft PR #233)
 
 - `docs/research/fi002-bhp-copper/output/review/release-candidate-3/` holds the RC3 PPTX, PDF, contact sheet, renders, manifest and QC record. It is built from the same revision 5 source with `make_release_candidate.py --candidate rc3`.
