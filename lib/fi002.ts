@@ -72,7 +72,7 @@ export const fi002Downloads = [
   {
     file: "executive-slides.pdf",
     title: "Executive presentation",
-    detail: "12-slide PDF · findings and decision framework",
+    detail: "11-slide PDF · findings and decision framework",
   },
   {
     file: "executive-slides.pptx",
