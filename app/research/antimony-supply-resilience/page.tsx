@@ -61,7 +61,7 @@ export default function AntimonySupplyResilience() {
             U.S. Antimony Supply Resilience
           </h1>
           <p className="mt-4 font-display text-lg text-muted">
-                  A hypothetical defense manufacturer's choices for keeping antimony supplies moving through disruptions in 2027–2031.
+                  A hypothetical defense manufacturer&rsquo;s choices for keeping antimony supplies moving through disruptions in 2027–2031.
                 </p>
           
           <p className="mt-6 font-display text-sm text-muted">
@@ -89,7 +89,7 @@ export default function AntimonySupplyResilience() {
                   Qualify another supplier before committing to five months of stock
                 </h2>
                 <p className="mt-5 font-display text-lg leading-8">
-                  In the model's severe 2030 case, an eight-month supply interruption can be covered with five months of inventory and an initial stock purchase of about $2.30 million, provided the alternative supplier qualifies. A nine-month, inventory-led approach also covers the disruption, but would tie up about $4.13 million—above the hypothetical buyer's $3 million cash ceiling.
+                  In the model&rsquo;s severe 2030 case, an eight-month supply interruption can be covered with five months of inventory and an initial stock purchase of about $2.30 million, provided the alternative supplier qualifies. A nine-month, inventory-led approach also covers the disruption, but would tie up about $4.13 million—above the hypothetical buyer&rsquo;s $3 million cash ceiling.
                 </p>
                 <p className="mt-4 font-display text-lg leading-8">
                   That five-month plan assumes the manufacturer can qualify a separate supplier for 45% of its international sourcing, including checks on grade, refining origin, end-use eligibility and delivery terms. Without that channel, the same strategy would leave 16.5 metric tons of modeled demand unfilled during the severe 2027 interruption.
@@ -105,7 +105,7 @@ export default function AntimonySupplyResilience() {
                   The US Geological Survey estimated that the United States relied on net imports for 91% of its antimony in 2025. China accounted for 55% of U.S. antimony metal and oxide imports over 2021–2024. Those national figures help explain the exposure, but a manufacturer still has to confirm whether a proposed supplier can deliver the right grade and form, with verified refining history and products that pass acceptance testing.
                 </p>
                 <p className="mt-4 font-display text-base leading-8">
-                  New domestic supply could eventually reduce that exposure. EXIM lists $2.906 billion for the Stibnite project as <strong>authorized</strong>, while Idaho National Laboratory's 2026 pilot commissioning shows early processing capability. Authorization is not a financing close, and a commissioned pilot is not the same as qualified antimony arriving at a manufacturer's plant. Both projects need further commercial milestones before a buyer can rely on deliveries.
+                  New domestic supply could eventually reduce that exposure. EXIM lists $2.906 billion for the Stibnite project as <strong>authorized</strong>, while Idaho National Laboratory&rsquo;s 2026 pilot commissioning shows early processing capability. Authorization is not a financing close, and a commissioned pilot is not the same as qualified antimony arriving at a manufacturer&rsquo;s plant. Both projects need further commercial milestones before a buyer can rely on deliveries.
                 </p>
               </section>
 
@@ -143,7 +143,7 @@ export default function AntimonySupplyResilience() {
                   </table>
                 </div>
                 <p className="mt-4 font-display text-sm leading-7 text-paper-muted">
-                  Stock purchases remain inventory assets. The annual extra cost includes the model's sourcing premiums, holding costs and emergency purchase markups. Figures are rounded from the linked workbook.
+                  Stock purchases remain inventory assets. The annual extra cost includes the model&rsquo;s sourcing premiums, holding costs and emergency purchase markups. Figures are rounded from the linked workbook.
                 </p>
               </section>
 
@@ -169,10 +169,10 @@ export default function AntimonySupplyResilience() {
                   Sources and assumptions
                 </h2>
                 <p className="mt-4 font-display text-base leading-8">
-                  The case uses SMPT's <Link href="/materials/antimony" className="font-semibold text-paper-accent underline decoration-2 underline-offset-4">antimony records</Link> alongside USGS estimates, government financing and licensing records, laboratory reporting and company filings. It treats announced projects, authorized financing, payments and commercial deliveries as separate events.
+                  The case uses SMPT&rsquo;s <Link href="/materials/antimony" className="font-semibold text-paper-accent underline decoration-2 underline-offset-4">antimony records</Link> alongside USGS estimates, government financing and licensing records, laboratory reporting and company filings. It treats announced projects, authorized financing, payments and commercial deliveries as separate events.
                 </p>
                 <p className="mt-4 font-display text-base leading-8">
-                  The manufacturer, its annual demand, sourcing shares, premiums, inventory ceiling and disruptions are hypothetical. The accompanying workbook tests what these assumptions would mean for costs and unfilled demand; it does not project an actual buyer's future supply.
+                  The manufacturer, its annual demand, sourcing shares, premiums, inventory ceiling and disruptions are hypothetical. The accompanying workbook tests what these assumptions would mean for costs and unfilled demand; it does not project an actual buyer&rsquo;s future supply.
                 </p>
                 <h3 className="mt-8 font-display text-base font-semibold">Selected original sources</h3>
                 <ul className="mt-3 space-y-2 font-display text-sm leading-7">
