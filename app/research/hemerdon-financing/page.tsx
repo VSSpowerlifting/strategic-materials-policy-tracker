@@ -67,7 +67,7 @@ export default function HemerdonFinancing() {
             Inside Tungsten West&apos;s £71 Million Restart Financing
           </h1>
           <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
-                  The £71 million headline includes £10 million in borrowing capacity that has yet to be committed, while a short-term loan adds a repayment deadline to the mine's restart.
+                  The £71 million headline includes £10 million in borrowing capacity that has yet to be committed, while a short-term loan adds a repayment deadline to the mine&rsquo;s restart.
                 </p>
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="underline underline-offset-4 hover:text-accent">Benjamin Yang</Link>
@@ -94,10 +94,10 @@ export default function HemerdonFinancing() {
               <section className="border-b border-paper-border pb-10">
                 
                 <h2 className="mt-3 font-display text-3xl font-semibold leading-tight">
-                  Hemerdon's financing brings new capital and a near-term repayment obligation
+                  Hemerdon&rsquo;s financing brings new capital and a near-term repayment obligation
                 </h2>
                 <p className="mt-5 font-display text-lg leading-9">
-                  In August, the National Wealth Fund provided for £36 million in equity and a £25 million core loan to support Tungsten West's Hemerdon restart. Another £10 million could become available through an accordion facility, but that borrowing remains uncommitted. Tungsten West reported that the £25 million loan had been fully drawn by the time its annual accounts were approved on 2 September 2026. Unlike the equity, the loan carries a repayment or refinancing obligation as the company brings the mine back into production.
+                  In August, the National Wealth Fund provided for £36 million in equity and a £25 million core loan to support Tungsten West&rsquo;s Hemerdon restart. Another £10 million could become available through an accordion facility, but that borrowing remains uncommitted. Tungsten West reported that the £25 million loan had been fully drawn by the time its annual accounts were approved on 2 September 2026. Unlike the equity, the loan carries a repayment or refinancing obligation as the company brings the mine back into production.
                 </p>
                 <p className="mt-5 font-display text-lg leading-9">
                   Tungsten West says it has a fully funded route to production and has reported progress on processing and commissioning. Even with that progress, the short loan maturity makes the timing of saleable output and customer payments important: the company will need cash from operations or replacement financing when the debt comes due.
@@ -139,7 +139,7 @@ export default function HemerdonFinancing() {
                   The restart still needs £40–45 million of project spending
                 </h2>
                 <p className="mt-5 font-display text-lg leading-9">
-                  Tungsten West's October guidance put remaining project expenditure at approximately £40–45 million, before operating costs. The model uses £42.5 million as a midpoint and tests an illustrative £5.75 million increase made up of the top end of that spending range, a delay sensitivity described by the company and a separately identified one-year interest proxy. These are scenario assumptions, rather than an updated company funding forecast.
+                  Tungsten West&rsquo;s October guidance put remaining project expenditure at approximately £40–45 million, before operating costs. The model uses £42.5 million as a midpoint and tests an illustrative £5.75 million increase made up of the top end of that spending range, a delay sensitivity described by the company and a separately identified one-year interest proxy. These are scenario assumptions, rather than an updated company funding forecast.
                 </p>
                 <p className="mt-5 font-display text-lg leading-9">
                   The original August financing plan also depended on £15 million in anticipated receipts. In a separate model exercise, delaying all those receipts while holding the other assumptions fixed leaves approximately £2 million of negative cash using the published aggregate figures, or £1 million using the separately rounded details. That result describes the August plan under a hypothetical delay; it is not a current cash balance or the same test as the October cost scenario.
@@ -151,7 +151,7 @@ export default function HemerdonFinancing() {
                   Accepted shipments and the loan timetable are the next tests
                 </h2>
                 <p className="mt-5 font-display text-lg leading-9">
-                  The September offtake agreement with Elmet gives Hemerdon a contracted buyer, while the company's processing updates show progress toward saleable tungsten. For the restart to generate cash, those steps must lead to accepted deliveries and collected payments. Lenders will be looking at the loan's actual repayment schedule alongside operating receipts; shareholders also have reason to watch the cost of any further financing as production ramps up.
+                  The September offtake agreement with Elmet gives Hemerdon a contracted buyer, while the company&rsquo;s processing updates show progress toward saleable tungsten. For the restart to generate cash, those steps must lead to accepted deliveries and collected payments. Lenders will be looking at the loan&rsquo;s actual repayment schedule alongside operating receipts; shareholders also have reason to watch the cost of any further financing as production ramps up.
                 </p>
                 <p className="mt-5 font-display text-lg leading-9">
                   The accompanying memo and model set out the financing and sensitivity calculations in more detail. Public filings do not yet establish unrestricted cash available today, a fully reconciled funding gap, valuation, covenant headroom or whether future receipts will cover repayment. Those questions require newer financial disclosures.
