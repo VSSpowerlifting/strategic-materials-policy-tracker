@@ -313,7 +313,7 @@ export default function ChinaSuspensionExtensionPage() {
                   <Src href={mofcom.no62of2025}>No. 62</Src>.
                 </p>
                 <p className={p}>
-                  China’s earlier rare-earth export controls from April 2025 are separate.
+                  China’s earlier rare-earth export controls from April 2025 are separate.{" "}
                   <Src href={mofcom.no18of2025}>Announcement No. 18 of 2025</Src> covers samarium,
                   gadolinium, terbium, dysprosium, lutetium, scandium and yttrium. Neither the
                   November 2025 suspension nor the new extension lists this announcement, and the
@@ -338,7 +338,7 @@ export default function ChinaSuspensionExtensionPage() {
                   What the extension means for procurement and new projects
                 </h2>
                 <p className={p}>
-                  Consider a company preparing to build a rare-earth processing plant. Its purchasing
+                  Consider a hypothetical company preparing to build a rare-earth processing plant. Its purchasing
                   plan might include equipment from China, processing chemicals such as extractants,
                   and technical support for installation or production. Announcements Nos. 56 and
                   62 of 2025 cover specified items in those categories. If the company is planning
@@ -349,12 +349,12 @@ export default function ChinaSuspensionExtensionPage() {
                 </p>
                 <p className={p}>
                   The overseas-related provisions of Announcement No. 61 of 2025 introduce a different
-                  kind of complexity. They contemplate Chinese licensing for certain goods exported
+                  kind of complexity. If implemented, they would require Chinese licences for certain goods exported
                   from outside China when specified Chinese-origin rare-earth inputs reach at least
                   0.1% of the goods’ value, or when certain Chinese-origin rare-earth technology
                   was used to make them. The announcement also includes rules concerning Chinese-origin
                   items, end users and end uses, including provisions addressing foreign military
-                  users and specified advanced-chip or military-AI applications.
+                  users and advanced chips or AI applications with potential military use.
                 </p>
                 <p className={p}>
                   For a buyer, those tests turn on the product’s composition, production process,
