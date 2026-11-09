@@ -27,27 +27,27 @@ export const metadata: Metadata = {
 
 const featured = [
   {
-    category: "Financial Intelligence 002",
+    category: "Strategy & Finance",
     title: "Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
-    description: "Copper-price exposure, replacement economics and BHP’s investment decision.",
+    description: "How Goldman’s 2027 copper forecast compares with the long-term economics of BHP’s Escondida concentrator.",
     href: "/research/escondida-copper",
   },
   {
-    category: "Financial Intelligence 001",
+    category: "Strategy & Finance",
     title: "Inside Tungsten West’s £71 Million Restart Financing",
-    description: "Hemerdon’s funding package, project expenditure and refinancing exposure.",
+    description: "What is committed in Hemerdon’s £71 million package and how the loan affects the restart.",
     href: "/research/hemerdon-financing",
   },
   {
-    category: "Applied Strategy 001",
+    category: "Strategy & Finance",
     title: "U.S. Antimony Supply Resilience, 2027–2031",
-    description: "A defense-manufacturing procurement case with an editable scenario model.",
+    description: "A modeled inventory and sourcing plan for a defense manufacturer facing an antimony disruption.",
     href: "/research/antimony-supply-resilience",
   },
   {
-    category: "Research Dossier 001",
+    category: "Policy Research",
     title: "Tungsten Supply Security",
-    description: "Comparative financing and industrial development across four jurisdictions.",
+    description: "Tungsten export controls, financing and processing projects across China, the EU, UK and Japan.",
     href: "/research/tungsten-supply-security",
   },
 ] as const;
@@ -61,6 +61,8 @@ export default function Home() {
   const financing = getFinancingCase();
   const tungsten = getTungstenCase();
   const revision = formatDateLong(site.lastUpdated);
+  // The displayed last-curated-revision date; the data views above stay on the research snapshot.
+  const revisedLabel = formatDateLong(site.revisedOn);
   const asOf = (
     <>as of the <time dateTime={site.lastUpdated}>{revision}</time> revision</>
   );
@@ -94,7 +96,7 @@ export default function Home() {
           <aside aria-labelledby="corpus-heading" className="relative self-center border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
             <h2 id="corpus-heading" className="font-display text-sm font-semibold">Current corpus</h2>
             <p className="mt-2 font-display text-sm text-muted">
-              Revised <time dateTime={site.lastUpdated}>{revision}</time>
+              Revised <time dateTime={site.revisedOn}>{revisedLabel}</time>
             </p>
             <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-5 font-display">
               {[

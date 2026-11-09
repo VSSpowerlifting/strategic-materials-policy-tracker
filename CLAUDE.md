@@ -14,6 +14,8 @@ government policy instruments affecting rare earths and adjacent strategic mater
 It is **not** a commodity-price model, an investment-recommendation service, a general
 news aggregator, or a home for unsupported geopolitical speculation.
 
+For **any public-facing writing or editorial revision**, including ordinary research articles and policy analyses, read [SMPT Research Publication House Style](docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) **before drafting** and apply its final natural-language review checklist. This is the canonical writing guide and is separate from the Applied Strategy, Financial Intelligence and presentation standards. It applies even when the task is framed as a small website copy edit. Do not mistake automated review or a passing build for an editor's approval.
+
 For **separate Applied Strategy and Financial Intelligence research deliverables** (not tracker seed data), use [the Four-Layer Analytical Framework & Applied Strategy Standard](docs/research/SMPT_APPLIED_STRATEGY_STANDARD.md). It governs research questions, consulting-style decks, spreadsheet modeling and decision recommendations while preserving all tracker data and methodology boundaries stated here.
 
 ## Headroom compression boundary (critical)
@@ -192,8 +194,9 @@ integrity, allowed-value membership, quote anchors and translation provenance.
 
 - v0.6 follow-ups: the EU's second Strategic Project round and any magnet-scrap
   export instrument; SRF (formerly SIF) project awards; DPA Title III awards;
-  what China does when the October 2025 suspension ends on
-  10 November 2026. Earlier items:
+  what China does when the continued October 2025 suspension ends on
+  10 January 2027 (Announcement No. 58 of 2026 extended the first period, which
+  ended 10 November 2026). Earlier items:
 
 - Event records for Australia (Lynas / Iluka), Japan (JOGMEC) and Canada so all six
   actors are event-coded, not just profiled.

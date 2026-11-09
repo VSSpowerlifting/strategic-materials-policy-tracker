@@ -4,31 +4,31 @@ import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Tungsten Supply Security — Research Dossier 001",
-  description: "Original SMPT research comparing how tungsten policy instruments translate into finance, industrial development, export licensing and commercial supply in China, the EU, the UK and Japan.",
+  title: "Tungsten Supply Security — Policy Research",
+  description: "A comparison of tungsten export controls, financing and industrial projects across China, the European Union, the United Kingdom and Japan.",
   alternates: { canonical: "/research/tungsten-supply-security" },
   openGraph: {
     type: "article",
     url: `${site.url}/research/tungsten-supply-security`,
     siteName: site.name,
-    title: "Tungsten Supply Security | SMPT Research Dossier 001",
-    description: "Financing, mine operations, strategic project recognition and conversion capacity across China, the EU, the UK and Japan.",
+    title: "Tungsten Supply Security | SMPT",
+    description: "How tungsten policy is taking shape through mines, processing plants, export licensing and public finance in four markets.",
   },
 };
 
 const introduction = [
-  "China accounted for approximately 79% of world mined tungsten content in 2025, according to the US Geological Survey's rounded estimates. The concentration matters because usable tungsten reaches buyers through several stages: extraction, chemical conversion, powder production and fabrication. Each stage imposes different technical, financial and commercial requirements.",
-  "SMPT's first research dossier examines selected tungsten policy measures in China, the European Union, the United Kingdom and Japan. The study connects official legal instruments and programme decisions to financing terms, project disclosures and commercial arrangements. The evidence shows implementation occurring through distinct mechanisms: licensing, project designation, loan drawdown, mine processing and conversion-capacity grants.",
+  "According to the US Geological Survey's rounded estimates, China accounted for about 79% of mined tungsten content worldwide in 2025. For buyers, that concentration extends beyond the mine: tungsten must also move through chemical conversion, powder production and fabrication before it reaches many industrial users. Securing ore alone does not guarantee a usable supply.",
+  "Across China, the European Union, the United Kingdom and Japan, governments are pursuing different ways to secure that supply. Some regulate exports. Others back mines, support processing capacity or designate projects for faster administrative treatment. Looking at the financing and company disclosures alongside the official measures shows how far each effort has moved toward production.",
 ] as const;
 
 const sections = [
   {
-    heading: "The UK's £71 million package contains equity, lending and contingent capacity",
+    heading: "Hemerdon's £71 million package includes a loan that must be repaid",
     id: "section-1",
     paragraphs: [
-      "The National Wealth Fund's August 2026 announcement described an investment of up to £71 million to support Tungsten West's Hemerdon restart. Its components comprise £36 million in equity, a £25 million core loan and a further £10 million lending accordion dependent on subsequent commitment. The full headline measures the potential package; the financial statements identify the core facility's actual drawdown.",
-      "Tungsten West's FY2026 accounts disclose that the £25 million NWF core loan was fully drawn by the date the accounts were approved, 2 September 2026. Because the financial year ended on 31 March, that funding is presented as a subsequent event. The disclosure establishes financial execution by the approval date; the precise transfer date requires transaction-level records.",
-      "The financing also creates obligations. The August terms describe a proposed secured, short-maturity loan carrying escalating interest. The wider £88 million funding plan includes bridge-finance repayment and forecast revenue. Gross public capital therefore encompasses instruments with different risk and repayment characteristics. Its contribution to additional industrial spending depends on the allocation of proceeds and the counterfactual financing path.",
+      "In August 2026, the UK's National Wealth Fund announced up to £71 million for Tungsten West's Hemerdon restart: £36 million in equity, a £25 million core loan and another £10 million of potential lending under an accordion facility. The final £10 million depends on a further commitment, so the headline package is larger than the financing already arranged. The company's accounts provide a separate check on how much of the core loan was drawn.",
+      "Tungsten West reported that the £25 million core loan was fully drawn by 2 September 2026, when its FY2026 accounts were approved. With the financial year having ended on 31 March, the accounts recorded this as a subsequent event. They establish that the financing had been drawn by the approval date, although they do not identify the exact transfer date.",
+      "The mix of equity and borrowing matters as Hemerdon moves toward production. The August terms describe a proposed secured loan with a short maturity and escalating interest, while the wider £88 million funding plan also accounts for bridge-finance repayment and forecast revenue. How much public money adds to actual mine spending depends on where the proceeds go and what financing would otherwise have been available.",
     ],
     sources: [
       { label: "National Wealth Fund announcement", url: "https://www.nationalwealthfund.org.uk/news-and-publications/news/national-wealth-fund-backs-tungsten-west-to-unlock-critical-uk-tungsten-supply/" },
@@ -37,12 +37,12 @@ const sections = [
     ],
   },
   {
-    heading: "Hemerdon's operating chronology complicates attribution to the public loan",
+    heading: "Processing at Hemerdon began before the August funding announcement",
     id: "section-2",
     paragraphs: [
-      "Tungsten West reported ore processing and phased commissioning during its 2026 restart. The company's accounts and August announcement also describe commissioning and initial concentrate activity during July, before the public financing announcement on 25 August. Those dates establish an industrial sequence in which operating preparations preceded the announcement.",
-      "Anticipated financial support could have influenced earlier decisions, and subsequently provided capital could support further ramp-up. Estimating the incremental output attributable to government finance requires an alternative production and financing scenario. The documentary record currently establishes reported processing and full core-loan drawdown; sustained output and deliveries form the next operational tests.",
-      "In September, Tungsten West also announced a binding eight-year commercial tungsten offtake with Elmet, using variable pricing linked to APT benchmarks. Elmet's 22 September release was furnished as Exhibit 99.1 under Item 7.01 of its SEC Form 8-K. The commercial agreement establishes a contractual route to an allied conversion partner. Realized deliveries, revenue and downstream processing performance will reveal its operational contribution.",
+      "Tungsten West's accounts and August announcement describe commissioning and initial concentrate activity in July 2026, ahead of the public financing announcement on 25 August. Ore processing was already under way as the funding package was being announced. That sequence matters when attributing the restart's operational progress to government financing.",
+      "The prospect of public support may have informed decisions made earlier, and drawn funds can help pay for the subsequent ramp-up. The disclosed record establishes processing activity and full core-loan drawdown, but does not show how much extra production the loan itself made possible. Sustained output and customer deliveries are the next useful measures of the restart.",
+      "In September, Tungsten West announced a binding eight-year tungsten offtake agreement with Elmet, with variable pricing linked to APT benchmarks. Elmet furnished its 22 September release as Exhibit 99.1 under Item 7.01 of an SEC Form 8-K. The deal gives the mine a contracted route to an allied conversion partner. Its commercial value will become clearer once concentrate is delivered, processed and paid for.",
     ],
     sources: [
       { label: "Tungsten West processing announcement", url: "https://www.lse.co.uk/rns/processing-operations-commence-during-visit-by-nwf-tc6mhjidfgjazfe.html?mobile_view=desktop" },
@@ -51,13 +51,13 @@ const sections = [
     ],
   },
   {
-    heading: "EU Strategic Project recognition covers sharply different development stages",
+    heading: "EU tungsten projects are at very different stages",
     id: "section-3",
     paragraphs: [
-      "EU Strategic Project designation supports administrative coordination, access to financing channels and the permitting framework established by the Critical Raw Materials Act. The selected tungsten-linked projects include extraction, processing and recycling activities, reflecting distinct industrial functions.",
-      "El Moto, recognized in March 2025, was described by its developer as under construction during 2026, with first production targeted for the first quarter of 2029. The separately designated EU APT Tungsten Plant entered the October 2026 list at a much earlier commercial stage. Its developer described evaluation and potential technical partnerships, with a final investment decision pending.",
-      "Article 11 of the Critical Raw Materials Act sets permitting-process time limits for qualifying EU Strategic Projects, with specified triggers, exclusions and extensions. Those legal clocks are distinct from construction schedules. The October decision was adopted on 9 October and published in the Official Journal on 22 October; its notification date remains an additional verification requirement under EU law.",
-      "The commercially relevant question is how designation changes each project's path to capital, construction and production. Evidence of faster permits or completed investments requires project-level administrative and financial records.",
+      "Under the EU Critical Raw Materials Act, Strategic Project designation can help qualifying projects navigate permitting and financing channels. The selected tungsten projects span extraction, processing and recycling, but receiving the same designation does not mean they are equally close to production.",
+      "El Moto received recognition in March 2025. Its developer described the mine as under construction in 2026 and targeted first production in the first quarter of 2029. The EU APT Tungsten Plant, added to the October 2026 list, was still being evaluated for potential technical partnerships, with a final investment decision pending. These are different starting points for measuring what designation achieves.",
+      "Article 11 of the Critical Raw Materials Act provides permitting time limits for qualifying EU Strategic Projects, subject to specific triggers, exclusions and extensions. Those clocks concern regulatory procedures, not the time needed to build a mine or plant. The October decision was adopted on 9 October and published on 22 October 2026; its notification date still requires verification under EU law.",
+      "For either project, the more useful evidence will be a permitting decision, financing close or construction milestone. Those records can show whether designation helped a project advance beyond its status when it was selected.",
     ],
     sources: [
       { label: "El Moto construction disclosure", url: "https://abtungsten.es/en/2026/09/18/abenojar-tungsten-inaugura-la-mina-de-tungsteno-y-oro-el-moto/" },
@@ -66,12 +66,12 @@ const sections = [
     ],
   },
   {
-    heading: "Japanese grants support powder and recycled-feedstock conversion",
+    heading: "Japan is funding the conversion stages of tungsten supply",
     id: "section-4",
     paragraphs: [
-      "Japan's selected tungsten projects address downstream transformation. Allied Material plans powder and tungsten-carbide equipment and a new plant, targeting roughly 1.5 times its existing capacity and operations in the first half of fiscal year 2028. Japan New Metals plans an Akita expansion that processes scrap into ammonium paratungstate, or APT.",
-      "JOGMEC lists grant decisions of approximately ¥7.5 billion for Allied Material and ¥2 billion for Japan New Metals. The latter advances the evidence beyond the frozen SMPT project's earlier announcement status. A grant decision establishes a programme award milestone; payment, equipment installation and incremental output must be tracked separately.",
-      "Mitsubishi Materials describes approximately ¥8 billion in planned investment for the Japan New Metals programme and a target of 2,400 tonnes of annual APT capacity measured on a WO3-equivalent basis, with operation scheduled for April 2029. The 2,400-tonne figure refers to planned total capacity in the stated chemical equivalent. This distinction matters when comparing capacity targets across products or evaluating import-substitution claims.",
+      "Japan's supported projects focus on turning tungsten inputs into materials manufacturers can use. Allied Material plans new powder and tungsten-carbide equipment and a plant intended to lift capacity to roughly 1.5 times the existing level, with operations targeted for the first half of fiscal 2028. Japan New Metals plans to expand its Akita operation to process scrap into ammonium paratungstate (APT).",
+      "JOGMEC lists grant decisions of approximately ¥7.5 billion for Allied Material and ¥2 billion for Japan New Metals. The latter is a more advanced funding status than the earlier announcement captured in SMPT's frozen project data. Still, an award decision and a paid grant are different events; neither by itself establishes that equipment has been installed or additional tungsten has been produced.",
+      "Mitsubishi Materials reports about ¥8 billion in planned investment for the Japan New Metals programme and a target of 2,400 tonnes of annual APT capacity, expressed as WO3 equivalent, with operations scheduled for April 2029. The figure is planned total capacity in a specified chemical equivalent, which matters when comparing it with production targets for other tungsten products.",
     ],
     sources: [
       { label: "JOGMEC grant decisions", url: "https://www.jogmec.go.jp/activities/metal/critical-grant.html" },
@@ -80,23 +80,23 @@ const sections = [
     ],
   },
   {
-    heading: "China's 2025 measure regulates specified tungsten export transactions",
+    heading: "China's tungsten controls depend on the specific product",
     id: "section-5",
     paragraphs: [
-      "China's 4 February 2025 Announcement No. 10 requires export permission for defined tungsten products and associated production technology. The legal descriptions cover specified APT, oxides, carbides, solid tungsten forms and alloys, including technical thresholds for some items. Those technical descriptions determine the transaction boundary.",
-      "The immediate measure of implementation concerns licences and regulated transactions. Evaluation therefore requires item-aligned data on applications, approval and denial rates, processing times, enforcement and actual shipments. Construction milestones answer a different industrial-policy question.",
+      "China's Announcement No. 10 of 4 February 2025 requires export permission for specified tungsten products and production technologies. Its coverage includes particular forms of APT, oxides, carbides, solid tungsten and alloys, with technical thresholds for some items. Those specifications determine which exports fall under the rule.",
+      "To understand how the controls affect trade, the next evidence needed is item-specific: licence applications, approvals and denials, processing times, enforcement records and shipments. Mine construction figures address a different question.",
     ],
     sources: [
       { label: "MOFCOM/GACC announcement in Chinese", url: "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_e623090907fc4e1092f0a4db72f57b95.html" },
     ],
   },
   {
-    heading: "What financiers and industrial buyers should verify next",
+    heading: "What will show whether the projects deliver",
     id: "section-6",
     paragraphs: [
-      "The selected cases reveal a practical hierarchy of questions. For a mine restart, track stable output, product specifications, shipping records and customer acceptance. For public loans, reconcile drawdown, repayment terms and actual expenditure. For conversion expansions, distinguish awards, disbursement, equipment installation and saleable output. For permitting designations, follow approval milestones and financing decisions. For licensing, examine item-specific transactions.",
-      "This comparison uses the SMPT public dataset frozen at repository commit `4fc59c7ea38ca788eb7537353274a953c90e13eb`, supplemented by cited official and corporate evidence available through 3 November 2026. The selected corpus contains 11 events, eight projects, eight designation records, six financing rows and two control clauses. Those counts represent linked records with overlapping underlying projects and interventions.",
-      "The central conclusion is stage-specific: supply assurance depends on the material delivered, available conversion routes and commercial performance. Documentary implementation provides a more useful starting point than announcement totals. Later operating and transactional records will determine how far these interventions translate into reliable supply.",
+      "For Hemerdon, the test is sustained production and accepted deliveries alongside the loan's repayment schedule. For Japan's conversion plants, grant awards will need to be followed by spending, installation and saleable output. EU designations will matter most when projects obtain permits, finance and construction progress. China's licensing system needs to be assessed through actual transactions.",
+      "This comparison draws on SMPT data frozen at commit `4fc59c7ea38ca788eb7537353274a953c90e13eb` and official and corporate disclosures available through 3 November 2026. The selected records cover 11 events, eight projects, eight designations, six financing rows and two control clauses. Several refer to the same underlying projects or interventions, so the record counts are not counts of independent outcomes.",
+      "Across the four markets, the point at which a policy becomes useful to a buyer varies. A licence decision, a loan drawdown and a plant opening each show a different stage of implementation. Ultimately, reliable supply will depend on whether the relevant material reaches customers in a usable form and on workable commercial terms.",
     ],
     sources: [
     ],
@@ -125,7 +125,7 @@ export default function TungstenResearchDossier() {
       <section className="border-b border-border-strong">
         <Container width="wide" className="py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">← Research</Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Research Dossier 001</p>
+          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Policy Research</p>
           <h1 className="mt-4 max-w-4xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">Tungsten Supply Security</h1>
           <p className="mt-5 max-w-3xl font-display text-xl leading-8 text-muted sm:text-2xl">Policy, financing and industrial development across China, the EU, the UK and Japan.</p>
           <p className="mt-7 font-display text-sm text-muted">By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link> · Research cutoff <time dateTime="2026-11-03">3 November 2026</time></p>

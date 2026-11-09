@@ -17,7 +17,7 @@ const sources = {
   permit: "https://ambihub.cl/seia/proyecto/2167965265",
 };
 export const metadata: Metadata = {
-  title: `${fi002.title} — Financial Intelligence 002`,
+  title: `${fi002.title} — Strategy & Finance`,
   description: fi002.description,
   alternates: { canonical: fi002.path },
   authors: [{ name: "Benjamin Yang", url: `${site.url}/about` }],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         url: `${fi002.assets}/social.png`,
         width: 1200,
         height: 630,
-        alt: "SMPT Financial Intelligence 002 — Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
+        alt: "SMPT research cover: Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
       },
     ],
   },
@@ -44,11 +44,11 @@ export const metadata: Metadata = {
   },
 };
 const sections = [
-  ["question", "The investment question"],
-  ["exposure", "Copper-price exposure"],
-  ["replacement", "Replacement economics"],
-  ["decision", "Capital-allocation judgment"],
-  ["downloads", "Report and resources"],
+  ["question", "Escondida investment"],
+  ["exposure", "Copper forecasts"],
+  ["replacement", "Concentrator economics"],
+  ["decision", "Construction timing"],
+  ["downloads", "Report and model"],
   ["research-record", "Sources and citation"],
 ];
 const prices = [
@@ -68,15 +68,15 @@ export default function EscondidaCopper() {
           <div className="fi-hero-grid">
             <div>
               <p className="fi-eyebrow">
-                Financial Intelligence 002
+                Strategy &amp; Finance
               </p>
               <h1>
                 Goldman Sachs’ Copper Outlook and BHP’s{" "}
                 <span>$6 Billion Escondida Decision</span>
               </h1>
               <p className="fi-deck">
-                Copper-price exposure, replacement economics and BHP’s capital-allocation decision
-              </p>
+                  How copper-price forecasts and the cost of preserving mine output shape BHP&rsquo;s Escondida investment.
+                </p>
               <p className="fi-byline">
                 By <Link href="/about">Benjamin Yang</Link>
                 {" · "}Research cutoff <time dateTime={fi002.cutoff}>5 November 2026</time>
@@ -130,21 +130,13 @@ export default function EscondidaCopper() {
               <section id="question" className="fi-section">
                 
                 <h2>
-                  How much should a bullish copper forecast change a long-lived
-                  investment decision?
+                  Goldman&rsquo;s 2027 price outlook and Escondida&rsquo;s longer timetable
                 </h2>
                 <p className="fi-lead">
-                  Goldman Sachs’ copper outlook could materially increase BHP’s
-                  earnings. For Escondida, the investment case depends on how
-                  much mine production and cash flow the new concentrator
-                  preserves.
+                  Goldman Sachs&rsquo; higher copper-price outlook produces a large earnings sensitivity for BHP. The proposed Escondida concentrator, however, will be judged on how much mine output and cash flow it preserves over a much longer period.
                 </p>
                 <p>
-                  Goldman’s forecast covers 2027. The replacement concentrator
-                  is expected to begin producing in 2031–32. Higher near-term
-                  prices could give BHP more financial flexibility, while the
-                  construction decision depends on long-term cash flow,
-                  capital costs and operating continuity.
+                  Goldman&rsquo;s forecast refers to 2027, while BHP expects the replacement concentrator to begin producing in 2031–32. Stronger prices in the nearer term could leave BHP with more capacity to fund the project, but the construction decision turns on costs, continuity of production and the cash generated over the asset&rsquo;s life.
                 </p>
                 <div className="fi-findings">
                   <div>
@@ -153,35 +145,25 @@ export default function EscondidaCopper() {
                     </span>
                     <strong>$2.83bn</strong>
                     <p>
-                      FY2026-static underlying EBITDA differential from the
-                      reported Goldman forecast revision.
-                    </p>
+                  Illustrative change in underlying EBITDA, holding BHP&rsquo;s FY2026 copper exposure constant and applying the reported Goldman forecast revision.
+                </p>
                   </div>
                   <div>
                     <span className="fi-eyebrow">Investment judgment</span>
                     <strong>Continue pre-construction work</strong>
                     <p>
-                      Continue engineering and permitting while using costed
-                      alternatives to decide when to commit construction
-                      capital.
-                    </p>
+                  Advance engineering and permits while comparing costed options before committing construction capital.
+                </p>
                   </div>
                 </div>
               </section>
               <section id="exposure" className="fi-section">
                 
                 <h2>
-                  Goldman’s revised forecast implies a $2.83bn EBITDA
-                  sensitivity.
+                  A $1,600/t price revision implies $2.83bn of EBITDA sensitivity
                 </h2>
                 <p>
-                  Public reporting attributes a{" "}
-                  <strong>$15,400/t calendar-2027 average</strong> to Goldman
-                  Sachs, raised from $13,800/t. The World Bank’s October outlook
-                  puts the same year’s average at $13,000/t. Applying BHP’s
-                  disclosed $39 million EBITDA sensitivity per US cent/lb gives
-                  $2.83 billion for Goldman’s revision and $4.25 billion for the
-                  Goldman–World Bank gap.
+                  Public reporting puts Goldman&rsquo;s average copper-price forecast for 2027 at <strong>$15,400/t</strong>, up from $13,800/t. The World Bank&rsquo;s October forecast for the same year is $13,000/t. Applied to BHP&rsquo;s disclosed sensitivity of $39 million in underlying EBITDA for each US cent/lb movement in copper prices, the difference between Goldman&rsquo;s old and new forecasts corresponds to $2.83 billion; the difference between Goldman and the World Bank corresponds to $4.25 billion.
                 </p>
                 <figure className="fi-exhibit">
                   <figcaption>
@@ -250,35 +232,19 @@ export default function EscondidaCopper() {
                   </p>
                 </figure>
                 <p>
-                  These are hypothetical sensitivities holding BHP’s FY2026
-                  exposure static. Forecasting earnings and project cash
-                  requires volume, cost, tax and distribution assumptions.
-                  Escondida is 57.5% economically owned but fully consolidated;
-                  reported Group exposure therefore uses a different accounting
-                  basis from a simple ownership allocation. Both figures are
-                  static EBITDA sensitivities, distinct from future earnings
-                  or cash available for construction.
+                  Both figures hold BHP&rsquo;s FY2026 copper exposure constant. They illustrate the scale of the price difference rather than predict earnings or cash available for construction, which would also depend on volumes, costs, taxes and distributions. BHP holds a 57.5% economic interest in Escondida but fully consolidates the operation, so Group EBITDA sensitivity cannot simply be multiplied by the ownership percentage.
                 </p>
               </section>
               <section id="replacement" className="fi-section">
                 
                 <h2>
-                  Escondida’s replacement economics depend on production
-                  preserved.
+                  The concentrator&rsquo;s value depends on the production it preserves
                 </h2>
                 <p>
-                  The New Concentrator replaces Los Colorados. BHP’s $5.4–6.3
-                  billion gross capital estimate and 230–270 ktpa
-                  facility-output range describe the planned asset.
-                  Incremental value to the mine depends on production
-                  preserved, alternative processing, avoided costs and capital
-                  under with-build and no-build plans.
+                  The planned New Concentrator would replace Los Colorados. BHP estimates gross capital spending of $5.4–6.3 billion and a facility output of 230–270 ktpa. That production figure describes the proposed plant; it is not automatically a net increase in Escondida&rsquo;s output. The investment benefit depends on what the mine could produce without the replacement and how the build and no-build plans differ in cost.
                 </p>
                 <p>
-                  The model estimates the annual production-equivalent benefit
-                  needed to recover capital under assumed prices, margins,
-                  spending and timing. Across the four tests, that requirement
-                  ranges from 199 to 416 ktpa.
+                  Using assumed prices, margins, spending and project timing, the model works backward from the capital cost to estimate how much annual production-equivalent benefit would be needed to recover it. Across four cases, the requirement ranges from 199 to 416 ktpa.
                 </p>
                 <figure className="fi-exhibit">
                   <figcaption>
@@ -296,13 +262,7 @@ export default function EscondidaCopper() {
                   <Fi002Screen />
                 </figure>
                 <p>
-                  BHP’s management-guided 16–18% return uses a long-term copper
-                  assumption of approximately $10,494/t, below Goldman’s
-                  near-term forecast. The annual project cash-flow schedule and
-                  costed no-build mine plan remain outside the public
-                  disclosure. This model provides a simplified capital-recovery
-                  sensitivity, distinct from BHP’s IRR calculation and a full
-                  project valuation.
+                  BHP has guided to a 16–18% project return using a long-term copper assumption of approximately $10,494/t, well below the reported Goldman 2027 average. Public disclosures do not provide the full annual cash-flow schedule or a costed plan for operating the mine without the replacement concentrator. The simplified model therefore tests capital recovery under stated assumptions; it is not a reproduction of BHP&rsquo;s internal-rate-of-return calculation.
                 </p>
                 <p className="fi-note">
                   Project estimates:{" "}
@@ -317,54 +277,33 @@ export default function EscondidaCopper() {
               <section id="decision" className="fi-section">
                 
                 <h2>
-                  Advance engineering and permitting before committing
-                  construction capital.
+                  Keep engineering and permitting moving before construction approval
                 </h2>
                 <p>
-                  BHP’s October operating review records{" "}
-                  <strong>
-                    $0.8 billion of gross pre-commitment funding approved
-                  </strong>{" "}
-                  for engineering, permitting and execution readiness. The approval covers pre-construction readiness; actual
-                  expenditures and the final construction sanction are
-                  separate decisions. Continue preparation and selectively
-                  accelerate work that resolves uncertainty or protects
-                  the replacement schedule.
+                  In its October operating review, BHP reported <strong>$0.8 billion in gross pre-commitment funding approved</strong> for engineering, permits and execution readiness. That approval is for preparatory work; it does not establish that the full amount has been spent or that construction has received final sanction. Continuing the work that resolves major uncertainties can protect the replacement schedule while BHP evaluates when to commit the larger investment.
                 </p>
                 <div className="fi-decision-list">
                   <div>
                     <h3>Case for accelerating construction</h3>
                     <p>
-                      Discounted avoided continuity losses that exceed the
-                      acceleration premium and execution risk, with permits and
-                      a feasible schedule.
-                    </p>
+                  Faster construction could make sense if the value of avoided production losses exceeds the extra cost and execution risk, provided permits and a workable schedule are in place.
+                </p>
                   </div>
                   <div>
                     <h3>Case for delaying construction</h3>
                     <p>
-                      A credible interim operating plan whose retained
-                      flexibility outweighs deterioration, escalation and lost
-                      operating benefit.
-                    </p>
+                  A delay could make sense if a workable interim mine plan preserves more value than would be lost through deterioration, cost escalation or missed production.
+                </p>
                   </div>
                   <div>
                     <h3>Evidence needed before sanction</h3>
                     <p>
-                      A costed no-build mine plan, annual production and fiscal
-                      schedules, binding execution alternatives and material
-                      permitting conditions.
-                    </p>
+                  Before sanction, BHP would need a costed mine plan without the replacement, annual production and tax schedules, feasible execution alternatives and the relevant permitting conditions.
+                </p>
                   </div>
                 </div>
                 <p>
-                  Higher copper prices could improve BHP’s capacity to fund
-                  construction. Ranking Escondida against competing uses of
-                  capital still requires project-level returns and alternatives.
-                  Historical cash flow, cumulative management projections and
-                  gross project budgets use different scopes. The funding
-                  analysis treats them separately and distinguishes EBITDA
-                  sensitivity from deployable cash.
+                  Higher copper prices may give BHP more financial room to proceed, but the concentrator still competes with other uses of capital. That comparison needs project-level returns and credible alternatives. Historical cash flow, management projections and gross project budgets each cover different periods and scopes, so an EBITDA sensitivity should not be read as money immediately available to spend.
                 </p>
                 <p className="fi-note">
                   Readiness source:{" "}
@@ -392,8 +331,7 @@ export default function EscondidaCopper() {
               <div className="fi-aside-note">
                 <p className="fi-eyebrow">Research independence</p>
                 <p>
-                  SMPT produced this research independently of Goldman Sachs
-                  and BHP. All analytical judgments are SMPT’s.
+                  This is independent SMPT research. Goldman Sachs and BHP did not commission it or review the analytical judgments.
                 </p>
               </div>
             </aside>
@@ -481,7 +419,7 @@ export default function EscondidaCopper() {
           <nav className="fi-related" aria-label="Related research">
             
             <Link href="/research/hemerdon-financing">
-              Financial Intelligence 001
+              Strategy &amp; Finance
               <br />
               <strong>
                 Inside Tungsten West’s £71 Million Restart Financing →

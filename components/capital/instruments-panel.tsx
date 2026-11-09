@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { CommitmentRow, ControlRow } from "@/components/capital/rows";
 import { summarizeCommitment, summarizeControl } from "@/lib/capital-control";
+import { site } from "@/lib/site";
 import { financialRelationshipTypeLabels } from "@/lib/labels";
 import type { ControlMeasure, FinancialCommitment } from "@/lib/types";
 
@@ -72,7 +73,7 @@ export function InstrumentsPanel({
           </div>
           <Card className="overflow-hidden">
             {controls.map((m) => (
-              <ControlRow key={m.id} m={summarizeControl(m)} />
+              <ControlRow key={m.id} m={summarizeControl(m, site.legalStatusAsOf)} />
             ))}
           </Card>
         </div>
