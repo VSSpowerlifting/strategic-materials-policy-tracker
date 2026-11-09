@@ -1,3 +1,11 @@
+## 2026-11-09: FI002 deck release candidate 3, clickable PDF sources (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-3/` holds the RC3 PPTX, PDF, contact sheet, renders, manifest and QC record. It is built from the same revision 5 source with `make_release_candidate.py --candidate rc3`.
+- The only change from RC2 is 29 link annotations added to the PDF source lines, each pointing at the matching URL in the revision 5 evidence list. The PPTX, renders and contact sheet are byte- or pixel-identical to RC2's, and the PDF text is equal.
+- PR #233's conflict with `main` (only `PROJECT_STATE.md`) is resolved locally in merge commit 2757f42; it is not pushed.
+- All repository gates pass on the merged tree (1164 tests). CI has not run on the merged head.
+- Still open: the PowerPoint tier, the Drive upload (the connector cannot see the folder under the university account), CI on a pushed head and human approval.
+
 ## 2026-11-09: FI002 deck release candidate 2 (draft PR #233)
 
 - `docs/research/fi002-bhp-copper/output/review/release-candidate-2/` holds the RC2 PPTX, PDF, contact sheet, renders, manifest and QC record. RC2 is built from `output/review/revision-5/` with `make_release_candidate.py --candidate rc2`.

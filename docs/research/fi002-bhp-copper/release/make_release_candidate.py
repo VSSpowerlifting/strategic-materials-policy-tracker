@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Derive an FI002 public-release candidate from a review copy.
 
-RC1 derives from revision 4 and RC2 from revision 5 (select with --candidate;
-the default is rc1). The source revision stays untouched as the review archive.
+RC1 derives from revision 4 and RC2 and RC3 from revision 5 (select with
+--candidate; the default is rc1). The source revision stays untouched as the review
+archive. RC3 builds the same PPTX as RC2 and adds clickable source links to the PDF
+(see SOURCE_LINKS); it changes no text, figure or layout.
 The candidate is a byte-level derivative:
 it removes the draft badge, the cover review notice and the internal editorial
 labels in speaker notes, and maps the master's Arial bullet font to Archivo.
@@ -16,7 +18,7 @@ slide (tests/exhibit-research.test.ts). Removing it is a human-gated release
 step, and this script only prepares the candidate for that review.
 
 Run from the repository root with a Python that has PyMuPDF, Pillow and fontTools:
-    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py [--candidate rc1|rc2]
+    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py [--candidate rc1|rc2|rc3]
 """
 from __future__ import annotations
 
@@ -51,12 +53,44 @@ CANDIDATES = {
             "pdf_sha": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109",
             "out": "release-candidate-2", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC2",
             "sheet": "SMPT_FI002_RC2_contact_sheet.png"},
+    # RC3: the RC2 deck plus source hyperlinks in the PDF. The PPTX is byte-identical to RC2.
+    "rc3": {"source": "revision-5", "source_stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_rev5",
+            "pptx_sha": "071a67e82a2fcb3b0031ad18ce1c2ec93127d8e8d77496e70cd31e6c3ca483b6",
+            "pdf_sha": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109",
+            "out": "release-candidate-3", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC3",
+            "sheet": "SMPT_FI002_RC3_contact_sheet.png", "links": True},
 }
+
+# Source-line phrases that become hyperlinks in the RC3 PDF, per 1-based page. Each phrase is
+# text that already appears in that slide's "Source:" footer; each id is an entry of the
+# revision-5 spec's evidence list, whose URL is used. A phrase must match exactly once inside
+# the footer band. Pages and phrases are the only places a link can appear.
+SOURCE_LINKS = {
+    2: [("BHP FY2026 results presentation", "S01"), ("Annual Report 2026", "S03"),
+        ("World Bank CMO October 2026", "S12"), ("Goldman Sachs revision as publicly reported", "S18"),
+        ("SMPT calculations", "SMPT")],
+    3: [("World Bank CMO October 2026, Table 1", "S12"), ("FinancialJuice", "S18"),
+        ("Reuters via Business Recorder", "S20"), ("Goldman Sachs Exchanges, 23 October 2026", "S16")],
+    4: [("BHP FY2026 results presentation", "S01"), ("exchange release", "S02"),
+        ("BHP Annual Report 2026", "S03")],
+    5: [("BHP FY2026 results presentation", "S01"), ("BHP Q1 FY2027 operational review", "S05"),
+        ("SMPT Price_Sensitivity calculations", "SMPT")],
+    6: [("BHP Q1 FY2027 operational review guidance", "S05"), ("SMPT methodology proxy calculation", "SMPT")],
+    7: [("BHP FY2026 results presentation", "S01"), ("BHP Escondida permit submission, March 2026", "S07"),
+        ("SEIA index, retrieved 5 November 2026", "S17")],
+    8: [("BHP FY2026 results presentation", "S01"),
+        ("SMPT methodology and Threshold_Sensitivities calculations", "SMPT")],
+    9: [("SMPT Threshold_Sensitivities calculations", "SMPT"), ("BHP FY2026 results presentation", "S01")],
+    10: [("BHP Annual Report 2026", "S03"), ("BHP FY2026 results presentation", "S01")],
+    11: [("BHP FY2026 results presentation", "S01"), ("Annual Report 2026", "S03"), ("SMPT methodology", "SMPT")],
+}
+FOOTER_BAND = (0, 500, 960, 522)  # the source line sits at y 505-516 on every content page
 
 
 def select(key: str) -> None:
-    global SRC_PPTX, SRC_PDF, SRC_SHA, SRC_PDF_SHA, OUT, STEM, SHEET
+    global SRC_PPTX, SRC_PDF, SRC_SHA, SRC_PDF_SHA, OUT, STEM, SHEET, WITH_LINKS
     c = CANDIDATES[key]
+    WITH_LINKS = bool(c.get("links"))
     src = REVIEW / c["source"]
     SRC_PPTX, SRC_PDF = src / (c["source_stem"] + ".pptx"), src / (c["source_stem"] + ".pdf")
     SRC_SHA, SRC_PDF_SHA = c["pptx_sha"], c["pdf_sha"]
@@ -217,6 +251,54 @@ def export_pdf(pptx: Path) -> Path:
     return target
 
 
+def expected_links() -> dict[int, list[tuple[str, str, str]]]:
+    spec = json.loads((REVIEW / "revision-5/SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.spec.json").read_text())
+    url = {e["id"]: e["url"] for e in spec["evidence"]}
+    return {pg: [(text, ev, url[ev]) for text, ev in items] for pg, items in SOURCE_LINKS.items()}
+
+
+def add_source_links(pdf: Path) -> list[dict]:
+    """Add URI link annotations over source-line phrases. Incremental save: every byte of the
+    LibreOffice export, including the tagged structure, stays; only annotations are appended."""
+    doc = fitz.open(pdf)
+    added = []
+    for pg, items in expected_links().items():
+        page = doc[pg - 1]
+        band = fitz.Rect(*FOOTER_BAND)
+        for text, ev, uri in items:
+            hits = [r for r in page.search_for(text, clip=band)]
+            if len(hits) != 1:
+                raise RuntimeError(f"Page {pg}: {text!r} matched {len(hits)} times in the source line")
+            page.insert_link({"kind": fitz.LINK_URI, "from": hits[0], "uri": uri})
+            added.append({"page": pg, "text": text, "evidence_id": ev, "uri": uri,
+                          "rect": [round(v, 1) for v in hits[0]]})
+    doc.saveIncr()
+    doc.close()
+    return added
+
+
+def audit_links(pdf: Path) -> list[dict]:
+    """Every link annotation must be one we expect, over exactly its phrase, and none may be missing."""
+    doc = fitz.open(pdf)
+    expected = expected_links()
+    found = []
+    for i, page in enumerate(doc, 1):
+        got = [l for l in page.get_links() if l["kind"] == fitz.LINK_URI]
+        want = expected.get(i, [])
+        if len(got) != len(want):
+            raise RuntimeError(f"Page {i}: {len(got)} links, expected {len(want)}")
+        by_text = {t: (ev, u) for t, ev, u in want}
+        for link in got:
+            covered = re.sub(r"\s+", " ", page.get_textbox(link["from"])).strip()
+            match = [t for t in by_text if t == covered or t in covered]
+            if not match:
+                raise RuntimeError(f"Page {i}: link rect covers {covered!r}, not a source phrase")
+            if by_text[max(match, key=len)][1] != link["uri"]:
+                raise RuntimeError(f"Page {i}: {covered!r} links to {link['uri']}")
+            found.append({"page": i, "text": covered, "uri": link["uri"]})
+    return found
+
+
 def audit_pdf(pdf: Path) -> dict:
     """Stricter than reissue_archivo_decks.audit_pdf: page text must equal the source exactly,
     ignoring whitespace, once the removed badge string is taken out."""
@@ -234,9 +316,13 @@ def audit_pdf(pdf: Path) -> dict:
         if re.search(r"DRAFT|REVIEW GATES", n.get_text()):
             raise RuntimeError(f"Page {i}: draft text remains")
     links = lambda d: [sorted({l["uri"] for l in pg.get_links() if l.get("uri")}) for pg in d]
-    if links(before) != links(after):
+    if WITH_LINKS:
+        if sum(map(len, links(before))):
+            raise RuntimeError("Source PDF unexpectedly already has links")
+        audit_links(pdf)
+    elif links(before) != links(after):
         raise RuntimeError("PDF link set differs from the source")
-    return {"pages": SLIDES, "embedded_fonts": fonts, "links": sum(map(len, links(after))),
+    return {"pages": SLIDES, "embedded_fonts": fonts, "links": sum(len(l) for l in links(after)),
             "text_check": f"each page equals {SRC_PDF.name} minus the badge (whitespace ignored)",
             "tagged": bool(after.pdf_catalog() and "StructTreeRoot" in after.xref_object(after.pdf_catalog())),
             "title": after.metadata.get("title"), "pdf_sha256": sha(pdf.read_bytes())}
@@ -266,6 +352,7 @@ def main() -> None:
     pptx = OUT / (STEM + ".pptx")
     pptx.write_bytes(rc)
     pdf = export_pdf(pptx)
+    link_log = add_source_links(pdf) if WITH_LINKS else None
     pdf_audit = audit_pdf(pdf)
     sheet = OUT / SHEET
     contact_sheet(pdf, sheet)
@@ -280,6 +367,10 @@ def main() -> None:
         "contact_sheet": sheet.name,
         "contact_sheet_sha256": sha(sheet.read_bytes()),
         "renders": renders(pdf),
+        **({"source_links": link_log,
+            "source_links_note": "URI annotations over source-line text; no visual change. Annotations are not "
+                                 "tagged in the PDF structure tree. The PPTX source lines are not hyperlinked."}
+           if link_log is not None else {}),
         "changes": log,
         "unchanged": f"all other package parts and XML bytes are identical to {SRC_PPTX.name} (verified)",
         "research_cutoff": "2026-11-05",
