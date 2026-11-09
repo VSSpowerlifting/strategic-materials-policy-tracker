@@ -17,7 +17,7 @@ const sources = {
   permit: "https://ambihub.cl/seia/proyecto/2167965265",
 };
 export const metadata: Metadata = {
-  title: `${fi002.title} — Financial Intelligence 002`,
+  title: `${fi002.title} — Strategy & Finance`,
   description: fi002.description,
   alternates: { canonical: fi002.path },
   authors: [{ name: "Benjamin Yang", url: `${site.url}/about` }],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         url: `${fi002.assets}/social.png`,
         width: 1200,
         height: 630,
-        alt: "SMPT Financial Intelligence 002 — Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
+        alt: "SMPT research cover: Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
       },
     ],
   },
@@ -68,7 +68,7 @@ export default function EscondidaCopper() {
           <div className="fi-hero-grid">
             <div>
               <p className="fi-eyebrow">
-                Financial Intelligence 002
+                Strategy &amp; Finance
               </p>
               <h1>
                 Goldman Sachs’ Copper Outlook and BHP’s{" "}
@@ -481,7 +481,7 @@ export default function EscondidaCopper() {
           <nav className="fi-related" aria-label="Related research">
             
             <Link href="/research/hemerdon-financing">
-              Financial Intelligence 001
+              Strategy &amp; Finance
               <br />
               <strong>
                 Inside Tungsten West’s £71 Million Restart Financing →
