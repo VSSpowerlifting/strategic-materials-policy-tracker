@@ -2,7 +2,7 @@
 
 This guide maps common investment-research questions to patterns that already exist in the registry. It adds no pattern, renderer, data or standard. For a deck, it sits under the [Presentation Standard v2](../SMPT_PRESENTATION_STANDARD_V2.md), the [Exhibit and Chart Rules](../EXHIBIT_AND_CHART_RULES.md) and the [Applied Strategy Standard](../../../research/SMPT_APPLIED_STRATEGY_STANDARD.md). Where this guide and those documents disagree, those documents govern.
 
-Every row below was checked with `exhibits:select` using the question type and traits shown. Selection stays advisory. Before choosing a pattern, read its `use_when`, `avoid_when`, `limitations` and `data_contract` in [`exhibit-registry.json`](exhibit-registry.json).
+Every row below was checked with `exhibits:select` using the question type and traits shown. Selection stays advisory. The cautions below describe the renderers as of commit c69e8fc; re-check the `waterfall` cautions after PR #215 lands, since it extends that renderer. Before choosing a pattern, read its `use_when`, `avoid_when`, `limitations` and `data_contract` in [`exhibit-registry.json`](exhibit-registry.json).
 
 ## Question → pattern
 
@@ -25,15 +25,15 @@ Every row below was checked with `exhibits:select` using the question type and t
 | When did each lifecycle milestone happen, and how well evidenced is it? | `sequence`; `dated-events`, `states`, `time-axis` | `evidence-milestone-strip` | Separate announced or targeted dates from reported or verified ones. |
 | How has a measure moved over time, and around which events? | `trend`; `single-measure`, `time-axis`, `dated-events` | `annotated-line` | Shared dates do not prove causation. |
 | What share does each part hold of a total? | `composition`; `parts-of-whole`, `single-measure` | `stacked-bar`, `percent-stacked` | Parts must be additive on one basis. |
-| How does material move through processing stages? | `flow`; `quantified-flows`, `additive-movements`, `single-measure` | `conversion-flow` | Flows balance within the stated unit. |
+| How does material move through processing stages? | `flow`; `quantified-flows`, `additive-movements`, `single-measure` | `conversion-flow` | Flows should balance within the stated unit; no integrity rule checks this. |
 
 ## Cautions specific to investment exhibits
 
-**Status and evidence vocabulary.** Lifecycle and capital exhibits use `STATUS_TAXONOMY` and `EVIDENCE_STATES` from [`scripts/exhibit-system/integrity.ts`](../../../../scripts/exhibit-system/integrity.ts). Do not introduce a parallel set of stage names on a slide.
+**Status and evidence vocabulary.** `STATUS_TAXONOMY` and `EVIDENCE_STATES` are defined in [`scripts/exhibit-system/integrity.ts`](../../../../scripts/exhibit-system/integrity.ts). The `status-separated-capital`, `evidence-milestone-strip`, `option-profile` and `location-table` renderers check against them. For other lifecycle and capital exhibits, use the same names. Do not introduce a parallel set of stage names on a slide.
 
 **An EBITDA bridge is not a cash bridge.** Earnings, operating cash flow and free cash flow differ by non-cash items, working capital and capital expenditure. Use one `waterfall` per measure. Do not move between measures inside one bridge.
 
-**Bridges cannot pass below zero.** `waterfall` enforces `bridge-levels-nonnegative`: a running level below zero, such as earnings moving through a loss, is rejected. Use the pattern's table alternative or `parallel-basis-panels` instead.
+**Bridges cannot pass below zero.** `waterfall` enforces `bridge-levels-nonnegative`: a running level below zero, such as earnings moving through a loss, is rejected. Use the pattern's table alternative (line item, movement, running balance) instead.
 
 **No subtotal columns.** `waterfall` draws start, signed movements and end only. To show a driver sequence with intermediate totals, use consecutive bridges in which the closing value of one opens the next.
 
@@ -47,4 +47,4 @@ Every row below was checked with `exhibits:select` using the question type and t
 
 ## Not covered by an existing pattern
 
-**Cost curves.** No registered pattern draws variable-width bars of capacity against unit cost. `annotated-line` is not a substitute, because a cost curve is not a time series. Until a pattern exists, use a ranked table (`exhibit-with-interpretation`), or `ranked-bar` on unit cost with capacity stated in the labels, and record a `table_reason` in the slide manifest.
+**Cost curves.** No registered pattern draws variable-width bars of capacity against unit cost. `annotated-line` is not a substitute, because a cost curve is not a time series. Until a pattern exists, use a ranked table (`exhibit-with-interpretation`), or `ranked-bar` on unit cost with capacity stated in the annotation, and record a `table_reason` in the slide manifest.

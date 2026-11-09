@@ -1,6 +1,6 @@
 ## 2026-11-09: Exhibit system review for investment research (draft PR)
 
-- Branch `claude/smpt-exhibit-review-727ec7` from `c69e8fc`. Audit-only finding: the 39 existing patterns already cover driver bridges, financing, capacity change, scenarios, thresholds and lifecycle evidence. The gap was discoverability, not missing functionality. No new pattern, renderer, data or standard.
+- Branch `claude/smpt-exhibit-review-727ec7` from `c69e8fc`. Review finding: the 39 existing patterns already cover driver bridges, financing, capacity change, scenarios, thresholds and lifecycle evidence. The gap was discoverability, not missing functionality. No new pattern, renderer, data or standard.
 - Adds `docs/design/presentations/exhibit-system/INVESTMENT_ANALYSIS_GUIDE.md`, which maps investment questions to existing pattern IDs. Each row was checked with `exhibits:select`. The README links to it.
 - Fixes one integrity defect: `waterfall` advertised a "subtotal columns" variation that the renderer does not support. The registry was regenerated, and only that line changed.
 - Cost curves remain a documented gap (a candidate future renderer). PR #215/FI003, models, seed data, the site and the PPTX binaries are unchanged. PowerPoint is not tested.
