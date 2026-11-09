@@ -75,7 +75,7 @@ export default function EscondidaCopper() {
                 <span>$6 Billion Escondida Decision</span>
               </h1>
               <p className="fi-deck">
-                  How copper-price forecasts and the cost of preserving mine output shape BHP's Escondida investment.
+                  How copper-price forecasts and the cost of preserving mine output shape BHP&rsquo;s Escondida investment.
                 </p>
               <p className="fi-byline">
                 By <Link href="/about">Benjamin Yang</Link>
@@ -130,13 +130,13 @@ export default function EscondidaCopper() {
               <section id="question" className="fi-section">
                 
                 <h2>
-                  Goldman's 2027 price outlook and Escondida's longer timetable
+                  Goldman&rsquo;s 2027 price outlook and Escondida&rsquo;s longer timetable
                 </h2>
                 <p className="fi-lead">
-                  Goldman Sachs' higher copper-price outlook produces a large earnings sensitivity for BHP. The proposed Escondida concentrator, however, will be judged on how much mine output and cash flow it preserves over a much longer period.
+                  Goldman Sachs&rsquo; higher copper-price outlook produces a large earnings sensitivity for BHP. The proposed Escondida concentrator, however, will be judged on how much mine output and cash flow it preserves over a much longer period.
                 </p>
                 <p>
-                  Goldman's forecast refers to 2027, while BHP expects the replacement concentrator to begin producing in 2031–32. Stronger prices in the nearer term could leave BHP with more capacity to fund the project, but the construction decision turns on costs, continuity of production and the cash generated over the asset's life.
+                  Goldman&rsquo;s forecast refers to 2027, while BHP expects the replacement concentrator to begin producing in 2031–32. Stronger prices in the nearer term could leave BHP with more capacity to fund the project, but the construction decision turns on costs, continuity of production and the cash generated over the asset&rsquo;s life.
                 </p>
                 <div className="fi-findings">
                   <div>
@@ -145,7 +145,7 @@ export default function EscondidaCopper() {
                     </span>
                     <strong>$2.83bn</strong>
                     <p>
-                  Illustrative change in underlying EBITDA, holding BHP's FY2026 copper exposure constant and applying the reported Goldman forecast revision.
+                  Illustrative change in underlying EBITDA, holding BHP&rsquo;s FY2026 copper exposure constant and applying the reported Goldman forecast revision.
                 </p>
                   </div>
                   <div>
@@ -163,7 +163,7 @@ export default function EscondidaCopper() {
                   A $1,600/t price revision implies $2.83bn of EBITDA sensitivity
                 </h2>
                 <p>
-                  Public reporting puts Goldman's average copper-price forecast for 2027 at <strong>$15,400/t</strong>, up from $13,800/t. The World Bank's October forecast for the same year is $13,000/t. Applied to BHP's disclosed sensitivity of $39 million in underlying EBITDA for each US cent/lb movement in copper prices, the difference between Goldman's old and new forecasts corresponds to $2.83 billion; the difference between Goldman and the World Bank corresponds to $4.25 billion.
+                  Public reporting puts Goldman&rsquo;s average copper-price forecast for 2027 at <strong>$15,400/t</strong>, up from $13,800/t. The World Bank&rsquo;s October forecast for the same year is $13,000/t. Applied to BHP&rsquo;s disclosed sensitivity of $39 million in underlying EBITDA for each US cent/lb movement in copper prices, the difference between Goldman&rsquo;s old and new forecasts corresponds to $2.83 billion; the difference between Goldman and the World Bank corresponds to $4.25 billion.
                 </p>
                 <figure className="fi-exhibit">
                   <figcaption>
@@ -232,16 +232,16 @@ export default function EscondidaCopper() {
                   </p>
                 </figure>
                 <p>
-                  Both figures hold BHP's FY2026 copper exposure constant. They illustrate the scale of the price difference rather than predict earnings or cash available for construction, which would also depend on volumes, costs, taxes and distributions. BHP holds a 57.5% economic interest in Escondida but fully consolidates the operation, so Group EBITDA sensitivity cannot simply be multiplied by the ownership percentage.
+                  Both figures hold BHP&rsquo;s FY2026 copper exposure constant. They illustrate the scale of the price difference rather than predict earnings or cash available for construction, which would also depend on volumes, costs, taxes and distributions. BHP holds a 57.5% economic interest in Escondida but fully consolidates the operation, so Group EBITDA sensitivity cannot simply be multiplied by the ownership percentage.
                 </p>
               </section>
               <section id="replacement" className="fi-section">
                 
                 <h2>
-                  The concentrator's value depends on the production it preserves
+                  The concentrator&rsquo;s value depends on the production it preserves
                 </h2>
                 <p>
-                  The planned New Concentrator would replace Los Colorados. BHP estimates gross capital spending of $5.4–6.3 billion and a facility output of 230–270 ktpa. That production figure describes the proposed plant; it is not automatically a net increase in Escondida's output. The investment benefit depends on what the mine could produce without the replacement and how the build and no-build plans differ in cost.
+                  The planned New Concentrator would replace Los Colorados. BHP estimates gross capital spending of $5.4–6.3 billion and a facility output of 230–270 ktpa. That production figure describes the proposed plant; it is not automatically a net increase in Escondida&rsquo;s output. The investment benefit depends on what the mine could produce without the replacement and how the build and no-build plans differ in cost.
                 </p>
                 <p>
                   Using assumed prices, margins, spending and project timing, the model works backward from the capital cost to estimate how much annual production-equivalent benefit would be needed to recover it. Across four cases, the requirement ranges from 199 to 416 ktpa.
@@ -262,7 +262,7 @@ export default function EscondidaCopper() {
                   <Fi002Screen />
                 </figure>
                 <p>
-                  BHP has guided to a 16–18% project return using a long-term copper assumption of approximately $10,494/t, well below the reported Goldman 2027 average. Public disclosures do not provide the full annual cash-flow schedule or a costed plan for operating the mine without the replacement concentrator. The simplified model therefore tests capital recovery under stated assumptions; it is not a reproduction of BHP's internal-rate-of-return calculation.
+                  BHP has guided to a 16–18% project return using a long-term copper assumption of approximately $10,494/t, well below the reported Goldman 2027 average. Public disclosures do not provide the full annual cash-flow schedule or a costed plan for operating the mine without the replacement concentrator. The simplified model therefore tests capital recovery under stated assumptions; it is not a reproduction of BHP&rsquo;s internal-rate-of-return calculation.
                 </p>
                 <p className="fi-note">
                   Project estimates:{" "}
