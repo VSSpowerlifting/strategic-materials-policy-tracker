@@ -34,7 +34,7 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="mt-9 flex flex-col justify-between gap-2 border-t border-border pt-5 font-display text-xs text-faint sm:flex-row">
-          <p>Corpus revised <time dateTime={site.lastUpdated}>{formatDateLong(site.lastUpdated)}</time>. Coverage is selective.</p>
+          <p>Corpus revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>. Coverage is selective.</p>
           <p>For research use; consult official sources and qualified advisers for legal decisions.</p>
         </div>
       </Container>

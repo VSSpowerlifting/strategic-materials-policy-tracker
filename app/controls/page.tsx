@@ -13,7 +13,7 @@ import {
   countBy,
   summarizeControl,
 } from "@/lib/capital-control";
-import { getAllControlMeasures, getAllMaterials, getEventById } from "@/lib/data";
+import { getAllControlMeasures, getAllMaterials, getEventById, getSourceById } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 import { controlMeasureTypeLabels, jurisdictionLabels } from "@/lib/labels";
 import { site } from "@/lib/site";
@@ -26,9 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function ControlsPage() {
-  const asOf = site.lastUpdated;
+  // Legal statuses are read on the legal-status date, not the research-snapshot date: an entry dated later is scheduled, never effective.
+  const asOf = site.legalStatusAsOf;
   const all = getAllControlMeasures();
-  const summaries = all.map(summarizeControl);
+  const summaries = all.map((m) => summarizeControl(m, asOf));
   const materialNames = Object.fromEntries(getAllMaterials().map((m) => [m.id, m.nameEn]));
   const statusNow = countBy(all, (m) => controlStatusOn(m, asOf));
   const clocks = controlClocks(asOf);
@@ -59,17 +60,17 @@ export default function ControlsPage() {
           </div>
         ))}
       </dl>
-      <p className="mt-2 font-display text-[11px] text-faint">Statuses as of {formatDate(asOf)}, the date the data was last checked.</p>
+      <p className="mt-2 font-display text-[11px] text-faint">Statuses as of {formatDate(asOf)}, the date through which published legal instruments are incorporated. An entry dated later is shown as scheduled, not as effective.</p>
 
       <div className="mt-14 space-y-14">
         <Section
           index="01"
           title="Controls with stated end dates"
-          description="Clauses whose current status has a stated end date. Remaining days use the corpus revision date as their reference."
+          description={`Clauses whose status in effect on ${formatDate(asOf)} has a stated end date. Days are counted from that date to the stated end, which is the last day covered. A continuation dated later is shown as scheduled; no renewal is assumed after a stated end.`}
         >
           <div className="grid gap-4 md:grid-cols-2">
             {clockGroups.map((group) => {
-              const { entry, daysLeft } = group[0];
+              const { entry, daysLeft, scheduled, endPassed } = group[0];
               const event = getEventById(group[0].measure.eventId)!;
               return (
                 <Card key={`${entry.sourceId}|${entry.until}|${entry.status}`} className="p-5">
@@ -78,8 +79,10 @@ export default function ControlsPage() {
                     <span className="tnum font-display text-xs text-muted">until {formatDate(entry.until!)}</span>
                   </div>
                   <p className="tnum mt-3 font-display text-4xl font-bold">
-                    {daysLeft}
-                    <span className="ml-2 font-display text-sm font-normal text-muted">days {daysLeft >= 0 ? "left" : "past"}</span>
+                    {Math.abs(daysLeft)}
+                    <span className="ml-2 font-display text-sm font-normal text-muted">
+                      {daysLeft < 0 ? `day${Math.abs(daysLeft) === 1 ? "" : "s"} since the stated end` : `day${daysLeft === 1 ? "" : "s"} left`}
+                    </span>
                   </p>
                   <p className="mt-2 text-sm leading-6 text-muted">
                     <JurisdictionTag code={event.jurisdiction} />{" "}
@@ -95,9 +98,24 @@ export default function ControlsPage() {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-3 text-xs leading-5 text-faint">
-                    Post-expiry standing remains pending official confirmation.
-                  </p>
+                  {scheduled ? (
+                    <p className="mt-3 border-t pt-3 text-xs leading-5 text-muted">
+                      <span className="font-display uppercase tracking-[0.12em] text-faint">Scheduled, not yet effective</span>
+                      <br />
+                      <ControlStatusBadge status={scheduled.status} /> from {formatDate(scheduled.date!)}
+                      {scheduled.until ? ` to ${formatDate(scheduled.until)}` : ""}
+                      {getSourceById(scheduled.sourceId) ? <> · <Link href={`/sources/${scheduled.sourceId}`} className="hover:text-accent">{getSourceById(scheduled.sourceId)!.title}</Link></> : null}
+                    </p>
+                  ) : null}
+                  {endPassed ? (
+                    <p className="mt-3 text-xs leading-5 text-faint">
+                      The stated end has passed and no later operative instrument is recorded. The record does not infer renewal, resumption or expiry; the current legal position needs the issuing authority&rsquo;s own source.
+                    </p>
+                  ) : !scheduled ? (
+                    <p className="mt-3 text-xs leading-5 text-faint">
+                      Standing after the stated end depends on a further instrument; none is recorded.
+                    </p>
+                  ) : null}
                 </Card>
               );
             })}

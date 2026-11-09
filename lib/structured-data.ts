@@ -24,7 +24,7 @@ export function datasetJsonLd() {
     description: site.description,
     url: site.url,
     version: site.version,
-    dateModified: site.lastUpdated,
+    dateModified: site.revisedOn,
     license: "https://creativecommons.org/licenses/by/4.0/",
     isAccessibleForFree: true,
     creator: { "@type": "Organization", name: site.name },

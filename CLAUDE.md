@@ -192,8 +192,9 @@ integrity, allowed-value membership, quote anchors and translation provenance.
 
 - v0.6 follow-ups: the EU's second Strategic Project round and any magnet-scrap
   export instrument; SRF (formerly SIF) project awards; DPA Title III awards;
-  what China does when the October 2025 suspension ends on
-  10 November 2026. Earlier items:
+  what China does when the continued October 2025 suspension ends on
+  10 January 2027 (Announcement No. 58 of 2026 extended the first period, which
+  ended 10 November 2026). Earlier items:
 
 - Event records for Australia (Lynas / Iluka), Japan (JOGMEC) and Canada so all six
   actors are event-coded, not just profiled.

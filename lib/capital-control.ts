@@ -4,7 +4,9 @@
  *
  * Every function is pure and deterministic. "Today" is never read from the
  * clock: status-as-of questions take an explicit date, and the site passes
- * `site.lastUpdated`, so a rebuild on another day cannot change a page.
+ * `site.lastUpdated` (money, the research snapshot) or `site.legalStatusAsOf`
+ * (control status), so a rebuild on another day cannot change a page. An entry dated
+ * after the as-of date is scheduled, never effective (see `controlEntryOn`).
  *
  * Aggregation rules (see /methodology#capital-counting):
  *  - Money is never converted. Totals are per currency.
@@ -177,6 +179,11 @@ export function financialStatusOn(c: FinancialCommitment, date: string): Financi
   return financialStatusEntryOn(c, date)?.status ?? null;
 }
 
+/**
+ * The LAST recorded entry, whatever its date. It can be dated after the date a view is reading, so
+ * it must not be used to present a status as currently effective: use `controlEntryOn` with the
+ * view's as-of date. It remains correct for "what is the newest thing the record says".
+ */
 export function currentControlEntry(m: ControlMeasure): ControlStatusEntry {
   return m.statusHistory[m.statusHistory.length - 1];
 }
@@ -186,21 +193,45 @@ export function currentControlStatus(m: ControlMeasure): ControlStatus {
 }
 
 /**
- * The status a control measure had on `date`: the last dated entry on or
- * before it, with an undated entry taking effect only after an earlier dated
- * one. Null when the measure had not yet been announced.
+ * The status entry in effect on `date`: the last dated entry on or before it, with an undated entry
+ * taking effect only after an earlier dated one. Null when the measure had not yet been announced.
+ * An entry dated after `date` is never returned, so a scheduled change is not shown as effective.
  */
-export function controlStatusOn(m: ControlMeasure, date: string): ControlStatus | null {
-  let status: ControlStatus | null = null;
+export function controlEntryOn(m: ControlMeasure, date: string): ControlStatusEntry | null {
+  let entry: ControlStatusEntry | null = null;
   for (const e of m.statusHistory) {
     if (e.date === null) {
-      if (status !== null) status = e.status;
+      if (entry !== null) entry = e;
       continue;
     }
-    if (e.date <= date) status = e.status;
+    if (e.date <= date) entry = e;
     else break;
   }
-  return status;
+  return entry;
+}
+
+/** The status a control measure had on `date` (see `controlEntryOn`). Null before it was announced. */
+export function controlStatusOn(m: ControlMeasure, date: string): ControlStatus | null {
+  return controlEntryOn(m, date)?.status ?? null;
+}
+
+/**
+ * The first recorded entry that takes effect AFTER `date`: a change already issued but not yet
+ * effective (for example a continuation issued on 9 November 2026 that starts on 11 November).
+ */
+export function scheduledControlEntry(m: ControlMeasure, date: string): ControlStatusEntry | null {
+  return m.statusHistory.find((e) => e.date !== null && e.date > date) ?? null;
+}
+
+/**
+ * True when the entry in effect on `date` states an end date that has passed and no later entry is
+ * recorded. This is only a flag that the record has no operative instrument after the stated end: it
+ * does not infer renewal, resumption, expiry or revocation. A stated end date is inclusive, so the
+ * end date itself is not yet passed.
+ */
+export function controlEndPassed(m: ControlMeasure, date: string): boolean {
+  const e = controlEntryOn(m, date);
+  return !!e?.until && e.until < date && scheduledControlEntry(m, date) === null;
 }
 
 /** Whole days from `from` to `to` (ISO dates), UTC. */
@@ -650,12 +681,20 @@ export function controlSpans(m: ControlMeasure): StatusSpan[] {
   }));
 }
 
-/** Measures whose current status carries a stated end date, soonest first. */
+/**
+ * Measures whose status in effect on `asOf` carries a stated end date, soonest first. `daysLeft` is
+ * negative once that end has passed. `scheduled` is the next entry already issued but not yet
+ * effective on `asOf` (a continuation), and `endPassed` flags a stated end with nothing recorded after it.
+ */
 export function controlClocks(asOf: string) {
   return getAllControlMeasures()
-    .map((measure) => ({ measure, entry: currentControlEntry(measure) }))
-    .filter(({ entry }) => Boolean(entry.until))
-    .map(({ measure, entry }) => ({ measure, entry, daysLeft: daysBetween(asOf, entry.until!) }))
+    .flatMap((measure) => {
+      const entry = controlEntryOn(measure, asOf);
+      return entry?.until
+        ? [{ measure, entry, scheduled: scheduledControlEntry(measure, asOf), endPassed: controlEndPassed(measure, asOf) }]
+        : [];
+    })
+    .map((c) => ({ ...c, daysLeft: daysBetween(asOf, c.entry.until!) }))
     .sort((a, b) => a.daysLeft - b.daysLeft || (a.measure.id < b.measure.id ? -1 : 1));
 }
 
@@ -852,17 +891,28 @@ export type ControlSummary = {
   targetEntities: string[];
   materialIds: string[];
   untrackedMaterials: string[];
+  /** The status in effect on the summary's as-of date, never a later-dated entry. */
   status: ControlStatus;
+  /** Date of the latest entry in effect on the as-of date. */
   statusDate: string | null;
   until: string | null;
+  /** The next entry issued but not yet effective on the as-of date (its status, start, stated end and source). */
+  scheduled: { status: ControlStatus; from: string; until: string | null; sourceId: string } | null;
+  /** A stated end has passed and no later entry is recorded: no renewal or resumption is inferred. */
+  endPassed: boolean;
   productCodeCount: number;
   firstDate: string | null;
   hasAmbiguity: boolean;
 };
 
-export function summarizeControl(m: ControlMeasure): ControlSummary {
+/**
+ * One control row for list views. `asOf` is required: the status shown is the entry in effect on
+ * that date. A measure not yet announced on `asOf` falls back to its first entry.
+ */
+export function summarizeControl(m: ControlMeasure, asOf: string): ControlSummary {
   const e = getEventById(m.eventId)!;
-  const cur = currentControlEntry(m);
+  const cur = controlEntryOn(m, asOf) ?? m.statusHistory[0];
+  const next = scheduledControlEntry(m, asOf);
   const dated = m.statusHistory.filter((x) => x.date);
   return {
     id: m.id,
@@ -879,8 +929,10 @@ export function summarizeControl(m: ControlMeasure): ControlSummary {
     materialIds: m.materialIds,
     untrackedMaterials: m.untrackedMaterialsAsStated,
     status: cur.status,
-    statusDate: latestDate(m.statusHistory),
+    statusDate: latestDate(m.statusHistory.filter((x) => x.date === null || x.date <= asOf)),
     until: cur.until ?? null,
+    scheduled: next ? { status: next.status, from: next.date!, until: next.until ?? null, sourceId: next.sourceId } : null,
+    endPassed: controlEndPassed(m, asOf),
     productCodeCount: m.productCodes.length,
     firstDate: dated.length ? dated[0].date : null,
     hasAmbiguity: m.evidence.some((x) => x.evidence === "ambiguous"),
