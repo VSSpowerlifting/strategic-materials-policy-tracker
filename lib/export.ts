@@ -40,7 +40,7 @@ const LIST_SEP = "; ";
 const FORMULA_PREFIX = /^[\s\u0000-\u001f\u007f-\u009f]*[=+\-@＝＋－＠]/u;
 const PLAIN_DECIMAL = /^[+-]?(?:\d+)(?:\.\d+)?$/;
 
-function csvCell(v: unknown): string {
+export function csvCell(v: unknown): string {
   const raw = v === null || v === undefined ? "" : String(v);
   const risk = /^[\t\r\n]/.test(raw) ||
     (FORMULA_PREFIX.test(raw) && !PLAIN_DECIMAL.test(raw));

@@ -550,6 +550,9 @@ export function valueDigits(obs: readonly Observation[]): number {
 }
 
 // ── Validation ──────────────────────────────────────────────────────────────
+/** Every pinned release in data/markets/, in display order. The loader and `npm run validate` both read this list. */
+export const MARKET_DATASET_IDS = ["wb-pink-sheet", "imf-pcps", "usgs-mcs-2026"] as const;
+
 export interface MarketDataInput {
   datasets: MarketDataset[];
   coverage: MarketCoverageFile;

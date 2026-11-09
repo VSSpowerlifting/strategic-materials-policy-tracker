@@ -110,6 +110,11 @@ export function Heatmap({
             setInspected(null);
             onInspect(null, null);
           }}
+          onBlur={(e) => {
+            if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
+            setInspected(null);
+            onInspect(null, null);
+          }}
         >
           <caption className="sr-only">
             {step === "year-on-year" ? "Year-on-year" : "Month-on-month"} change in each selected series, {formatPeriod(periods[0], true)} to{" "}

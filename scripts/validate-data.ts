@@ -47,7 +47,7 @@ import {
 import { site } from "../lib/site";
 import { isExampleCandidateFile } from "./candidate-files";
 import { validateProjectMilestones } from "../lib/project-milestones";
-import { validateMarketData } from "../lib/markets";
+import { MARKET_DATASET_IDS, validateMarketData } from "../lib/markets";
 import type { MarketCoverageFile, MarketDataset, MarketManifest, MarketSeries, ObservationsFile } from "../lib/markets";
 import { formatCapitalControlIssue, parseCapitalControlSeed, validateCapitalControl } from "./validate-capital-control";
 import type { CapitalControlCollection } from "./validate-capital-control";
@@ -558,7 +558,6 @@ for (const issue of validateProjectMilestones(projectMilestones, {
 // USGS annual), kept apart from the source-linked policy seed in
 // data/markets/<dataset>/ (built by the `npm run ingest:markets*` scripts).
 const marketsDir = join(seedDir, "..", "markets");
-const MARKET_DATASET_IDS = ["wb-pink-sheet", "imf-pcps", "usgs-mcs-2026"];
 const readMarket = <T>(name: string): T | null => {
   const file = join(marketsDir, `${name}.json`);
   if (!existsSync(file)) {

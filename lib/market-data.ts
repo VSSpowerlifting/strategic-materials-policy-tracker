@@ -14,6 +14,7 @@ import usgsManifest from "@/data/markets/usgs-mcs-2026/manifest.json";
 import usgsSeries from "@/data/markets/usgs-mcs-2026/series.json";
 import usgsObservations from "@/data/markets/usgs-mcs-2026/observations.json";
 import coverageJson from "@/data/markets/coverage-gaps.json";
+import { MARKET_DATASET_IDS } from "@/lib/markets";
 import type {
   Frequency,
   MarketCoverageFile,
@@ -38,6 +39,9 @@ const datasets: MarketDataset[] = [
   dataset(imfManifest, imfSeries, imfObservations),
   dataset(usgsManifest, usgsSeries, usgsObservations),
 ];
+if (datasets.map((d) => d.manifest.datasetId).join() !== MARKET_DATASET_IDS.join()) {
+  throw new Error(`lib/market-data.ts imports ${datasets.map((d) => d.manifest.datasetId).join(", ")}, but MARKET_DATASET_IDS lists ${MARKET_DATASET_IDS.join(", ")}`);
+}
 const coverage = coverageJson as unknown as MarketCoverageFile;
 const allSeries = datasets.flatMap((d) => d.series);
 const seriesById = new Map(allSeries.map((s) => [s.id, s]));

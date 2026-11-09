@@ -6,20 +6,13 @@
  * and annual rows share the file but are told apart by `frequency`; values are
  * never converted between units or currencies.
  */
+import { csvCell } from "@/lib/export";
 import { getMarketDatasets } from "@/lib/market-data";
 import { PRICE_TYPE_LABELS, type MarketDataset } from "@/lib/markets";
 
-// Same escaping rules as lib/export.ts: quote on delimiters, and defuse cells a
+// Same escaping as the tracker export: quote on delimiters and defuse cells a
 // spreadsheet would read as a formula (plain signed decimals stay numeric).
-const FORMULA_PREFIX = /^[\s\u0000-\u001f\u007f-\u009f]*[=+\-@＝＋－＠]/u;
-const PLAIN_DECIMAL = /^[+-]?(?:\d+)(?:\.\d+)?$/;
-
-export function csvCell(v: string | number | null | undefined): string {
-  const raw = v == null ? "" : String(v);
-  const risk = /^[\t\r\n]/.test(raw) || (FORMULA_PREFIX.test(raw) && !PLAIN_DECIMAL.test(raw));
-  const s = risk ? "\t" + raw : raw;
-  return risk || /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-}
+export { csvCell };
 
 export const MARKET_CSV_HEADERS = [
   "series_id",

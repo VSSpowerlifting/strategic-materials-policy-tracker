@@ -352,3 +352,14 @@ test("explorer renders the real series with the default selection and attributio
     assert.doesNotMatch(s.label, /\bprice\b/i, `${s.id} label`);
   }
 });
+
+test("shared links keep each series in its colour slot", async () => {
+  const { slotsFrom, slotsParam } = await import("@/components/markets/market-monitor");
+  const known = new Set(["a", "b", "c"]);
+  const slots = [null, "b", null, "c", null, null];
+  const param = slotsParam(slots);
+  assert.equal(param, ",b,,c");
+  assert.deepEqual(slotsFrom(param.split(","), known), slots);
+  assert.equal(slotsParam(["a", "b", null, null, null, null]), "a,b");
+  assert.equal(slotsParam(Array(6).fill(null)), "");
+});

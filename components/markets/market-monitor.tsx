@@ -55,15 +55,27 @@ function Swatch({ color, dash }: { color: string; dash: string | undefined }) {
   );
 }
 
-/** Fill colour slots from a list of ids, keeping order and dropping unknown or duplicate ids. */
+/**
+ * Fill colour slots from a list of ids, keeping order and dropping unknown or
+ * duplicate ids. An empty entry ("") holds its slot open, so a shared link
+ * written by `slotsParam` restores every series in the colour it had.
+ */
 export function slotsFrom(ids: readonly string[], known: ReadonlySet<string>): Array<string | null> {
   const out: Array<string | null> = Array(MAX_PLOTTED).fill(null);
   let i = 0;
   for (const id of ids) {
     if (i >= MAX_PLOTTED) break;
-    if (known.has(id) && !out.includes(id)) out[i++] = id;
+    if (id === "") i++;
+    else if (known.has(id) && !out.includes(id)) out[i++] = id;
   }
   return out;
+}
+
+/** URL form of the slots: ids in slot order, "" for a free slot, trailing free slots dropped. */
+export function slotsParam(slots: ReadonlyArray<string | null>): string {
+  const ids = slots.map((x) => x ?? "");
+  while (ids.length && ids[ids.length - 1] === "") ids.pop();
+  return ids.join(",");
 }
 
 /** Add an id to the lowest free slot, or remove it, without moving any other series. */
@@ -145,7 +157,7 @@ export function MarketExplorer({
     /* eslint-disable react-hooks/set-state-in-effect -- one-time sync from the URL after hydration */
     setTab(f);
     if (s !== null) {
-      const ids = s.split(",").filter(Boolean);
+      const ids = s.split(",");
       setSlots((cur) => ({ ...cur, [f]: slotsFrom(ids, idsByFreq[f]) }));
     }
     if (isRangeId(r, f)) setRange(r);
@@ -162,11 +174,10 @@ export function MarketExplorer({
     if (!urlReady) return;
     const q = new URLSearchParams(window.location.search);
     const set = (k: string, v: string | null) => (v ? q.set(k, v) : q.delete(k));
-    const ids = tabSlots.filter((x): x is string => x !== null);
-    const isDefault = ids.join(",") === DEFAULT_SELECTION[tab].join(",");
+    const param = slotsParam(tabSlots);
     set("freq", tab === "monthly" ? null : tab);
-    if (isDefault) q.delete("series");
-    else q.set("series", ids.join(","));
+    if (param === DEFAULT_SELECTION[tab].join(",")) q.delete("series");
+    else q.set("series", param);
     set("range", effectiveRange === DEFAULT_RANGE[tab] ? null : effectiveRange);
     set("view", view === "indexed" ? null : view);
     const qs = q.toString().replace(/%2C/g, ",");
@@ -201,6 +212,13 @@ export function MarketExplorer({
   }, [effectiveView, base, selected, win.start, win.end]);
 
   const emphasis = heatInspect.id ?? hoverId ?? focusId;
+
+  // In the indexed view nothing is drawn before the base period, so the chart starts there.
+  const chartPeriods = useMemo(() => {
+    const b = effectiveView === "indexed" ? base?.basePeriod : null;
+    return b && b > win.start ? periods.filter((p) => p >= b) : periods;
+  }, [effectiveView, base, win.start, periods]);
+  const chartStart = chartPeriods[0] ?? win.start;
 
   // Movers: change over a fixed horizon to the latest period every selected series shares.
   const commonEnd = selectedSeries.map((s) => s.lastPeriod).sort()[0] ?? end;
@@ -257,7 +275,7 @@ export function MarketExplorer({
     ? "Select a series to plot"
     : effectiveView === "indexed"
       ? base?.basePeriod
-        ? `Indexed change, ${formatPeriod(win.start)}–${formatPeriod(win.end)} (${formatPeriod(base.basePeriod)} = 100)`
+        ? `Indexed change, ${formatPeriod(chartStart)}–${formatPeriod(win.end)} (${formatPeriod(base.basePeriod)} = 100)`
         : `Indexed change, ${formatPeriod(win.start)}–${formatPeriod(win.end)}`
       : `${tab === "annual" ? "Annual average" : "Monthly average"}, ${formatPeriod(win.start)}–${formatPeriod(win.end)} (${selectedSeries[0]?.unitShort})`;
 
@@ -492,7 +510,7 @@ export function MarketExplorer({
               {lines.length > 0 ? (
                 <PriceChart
                   lines={lines}
-                  periods={periods}
+                  periods={chartPeriods}
                   mode={effectiveView}
                   basePeriod={effectiveView === "indexed" ? (base?.basePeriod ?? null) : null}
                   cursor={cursor}
@@ -595,6 +613,7 @@ export function MarketExplorer({
           </div>
           <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
             <Heatmap
+              key={`${heatPeriods[0] ?? ""}-${heatPeriods.at(-1) ?? ""}`}
               rows={heatRows}
               periods={heatPeriods}
               frequency={tab}

@@ -246,7 +246,9 @@ export function PriceChart({
     if (handled) e.preventDefault();
   }
 
-  const fmtTick = (v: number) => (mode === "indexed" ? formatNumber(v, Number.isInteger(v) ? 0 : 1) : formatNumber(v, 0));
+  // Enough decimals that no two ticks print alike (a 2.5 or 0.5 step needs them), at most 2.
+  const tickDigits = Math.min(2, Math.max(0, ...geo.ticks.map((t) => String(t).split(".")[1]?.length ?? 0)));
+  const fmtTick = (v: number) => formatNumber(v, tickDigits);
   const colW = periods.length > 1 ? plotW / (periods.length - 1) : plotW;
 
   return (
