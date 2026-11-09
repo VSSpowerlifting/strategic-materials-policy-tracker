@@ -18,7 +18,19 @@ export const metadata: Metadata = {
     url: `${site.url}/research/${SLUG}`,
     siteName: site.name,
     title: TITLE,
-    description: DESCRIPTION,
+    description: "China extends six export-control measures through January 10, 2027. What remains restricted, and why the next deadlines matter.",
+    images: [{
+      url: `/research/${SLUG}/opengraph-image`,
+      width: 1200,
+      height: 630,
+      alt: "China extends its export-control pause — SMPT Policy Research",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: "China extends six export-control measures through January 10, 2027.",
+    images: [`/research/${SLUG}/opengraph-image`],
   },
 };
 
