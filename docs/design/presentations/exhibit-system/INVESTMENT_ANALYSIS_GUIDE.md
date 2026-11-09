@@ -21,15 +21,19 @@ Every row below was checked with `exhibits:select` using the question type and t
 | Which option meets which criterion? | `decision`; `criteria` | `criterion-matrix` | Categorical evidence only. No weighted or synthetic score. |
 | What would have to be true for each option? | `decision`; `conditions` (+ `edges`) | `option-profile`, `condition-tree` | Conditions are stated as conditions, not forecasts. |
 | What are a project's economics, exactly? | `lookup`; `exact-values` | `exhibit-with-interpretation` | Each figure carries its basis, date and source. |
-| Where is a project in its lifecycle? | `sequence`; `status-stages`, `dated-events`, `states` | `stage-ladder` | Stages and evidence states from the system's taxonomies (below). |
+| Where is a project in its lifecycle? | `sequence`; `status-stages`, `dated-events`, `states` | `stage-ladder` | Four to six project milestones in process order, each label at most 24 characters. A stage counts as reached only if every earlier stage was. Labels are free text (see below). |
 | When did each lifecycle milestone happen, and how well evidenced is it? | `sequence`; `dated-events`, `states`, `time-axis` | `evidence-milestone-strip` | Separate announced or targeted dates from reported or verified ones. |
 | How has a measure moved over time, and around which events? | `trend`; `single-measure`, `time-axis`, `dated-events` | `annotated-line` | Shared dates do not prove causation. |
 | What share does each part hold of a total? | `composition`; `parts-of-whole`, `single-measure` | `stacked-bar`, `percent-stacked` | Parts must be additive on one basis. |
-| How does material move through processing stages? | `flow`; `quantified-flows`, `additive-movements`, `single-measure` | `conversion-flow` | Flows should balance within the stated unit; no integrity rule checks this. |
+| How does material move through processing stages? | `flow`; `quantified-flows`, `additive-movements`, `single-measure` | `conversion-flow` | Each step must reconcile: output plus loss equals the step's input, in the stated unit. The renderer checks this with `reconciles()`. |
 
 ## Cautions specific to investment exhibits
 
-**Status and evidence vocabulary.** `STATUS_TAXONOMY` and `EVIDENCE_STATES` are defined in [`scripts/exhibit-system/integrity.ts`](../../../../scripts/exhibit-system/integrity.ts). The `status-separated-capital`, `evidence-milestone-strip`, `option-profile` and `location-table` renderers check against them. For other lifecycle and capital exhibits, use the same names. Do not introduce a parallel set of stage names on a slide.
+**Status and evidence vocabulary.** Keep three things apart, and do not invent a fourth vocabulary:
+
+- *Transaction and financing status* (announcement through operational) is `STATUS_TAXONOMY` in [`scripts/exhibit-system/integrity.ts`](../../../../scripts/exhibit-system/integrity.ts). `status-separated-capital`, `option-profile` and `location-table` check against it.
+- *Evidence state* (announced, targeted, reported, independently verified) is `EVIDENCE_STATES` in the same file. `evidence-milestone-strip` checks against it.
+- *Industrial project milestones* (for example permitting, final investment decision, construction, commissioning) are the free-text labels in `stage-ladder`. The renderer checks their order and dates, not their vocabulary. Take the milestone names from the source, and do not present them as financing status or evidence state.
 
 **An EBITDA bridge is not a cash bridge.** Earnings, operating cash flow and free cash flow differ by non-cash items, working capital and capital expenditure. Use one `waterfall` per measure. Do not move between measures inside one bridge.
 
@@ -48,3 +52,5 @@ Every row below was checked with `exhibits:select` using the question type and t
 ## Not covered by an existing pattern
 
 **Cost curves.** No registered pattern draws variable-width bars of capacity against unit cost. `annotated-line` is not a substitute, because a cost curve is not a time series. Until a pattern exists, use a ranked table (`exhibit-with-interpretation`), or `ranked-bar` on unit cost with capacity stated in the annotation, and record a `table_reason` in the slide manifest.
+
+**Multi-project economics matrix.** No single exhibit standardizes capex, capacity, capital intensity, IRR and approval status across several projects. `exhibit-with-interpretation`, `criterion-matrix` and `parallel-basis-panels` each cover part of this. Until a pattern exists, use a table that states each figure's basis, date and source, and record a `table_reason`. This is a possible future requirement, not a scheduled renderer.
