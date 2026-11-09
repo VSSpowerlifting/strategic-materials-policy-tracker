@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Derive the FI002 public-release candidate (RC1) from the revision-4 review copy.
+"""Derive an FI002 public-release candidate from a review copy.
 
-Revision 4 stays untouched as the review archive. RC1 is a byte-level derivative:
+RC1 derives from revision 4 and RC2 from revision 5 (select with --candidate;
+the default is rc1). The source revision stays untouched as the review archive.
+The candidate is a byte-level derivative:
 it removes the draft badge, the cover review notice and the internal editorial
 labels in speaker notes, and maps the master's Arial bullet font to Archivo.
-Every other package part and XML byte must be identical to revision 4; the
+Every other package part and XML byte must be identical to the source; the
 script proves that before it writes anything. It then exports the PDF with
-LibreOffice using the installed Archivo faces, audits it against the revision-4
+LibreOffice using the installed Archivo faces, audits it against the source
 PDF, renders each slide and builds the contact sheet.
 
 The renderer is not used: its research contract keeps the draft badge on every
@@ -14,7 +16,7 @@ slide (tests/exhibit-research.test.ts). Removing it is a human-gated release
 step, and this script only prepares the candidate for that review.
 
 Run from the repository root with a Python that has PyMuPDF, Pillow and fontTools:
-    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py
+    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py [--candidate rc1|rc2]
 """
 from __future__ import annotations
 
@@ -36,13 +38,32 @@ ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / "scripts"))
 from reissue_archivo_decks import XML_FONT, FORBIDDEN_FONT, contact_sheet  # noqa: E402
 
-REV4 = ROOT / "docs/research/fi002-bhp-copper/output/review/revision-4"
-REV4_PPTX = REV4 / "SMPT_FI002_BHP_Copper_Strategy_Deck_rev4.pptx"
-REV4_PDF = REV4 / "SMPT_FI002_BHP_Copper_Strategy_Deck_rev4.pdf"
-REV4_SHA = "04a2cc279c77d44dc5a8c81b54c721cae7f4c375f1f79438ab6b737d72009939"
-REV4_PDF_SHA = "78343271ebfd548276d5eb54e1460fed705aa8b5a9fadbec9a09e6227b8ac1bd"
-OUT = ROOT / "docs/research/fi002-bhp-copper/output/review/release-candidate-1"
-STEM = "SMPT_FI002_BHP_Copper_Strategy_Deck_RC1"
+REVIEW = ROOT / "docs/research/fi002-bhp-copper/output/review"
+# Each candidate names its source revision and pins both source hashes.
+CANDIDATES = {
+    "rc1": {"source": "revision-4", "source_stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_rev4",
+            "pptx_sha": "04a2cc279c77d44dc5a8c81b54c721cae7f4c375f1f79438ab6b737d72009939",
+            "pdf_sha": "78343271ebfd548276d5eb54e1460fed705aa8b5a9fadbec9a09e6227b8ac1bd",
+            "out": "release-candidate-1", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC1",
+            "sheet": "SMPT_FI002_RC1_contact_sheet.png"},
+    "rc2": {"source": "revision-5", "source_stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_rev5",
+            "pptx_sha": "071a67e82a2fcb3b0031ad18ce1c2ec93127d8e8d77496e70cd31e6c3ca483b6",
+            "pdf_sha": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109",
+            "out": "release-candidate-2", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC2",
+            "sheet": "SMPT_FI002_RC2_contact_sheet.png"},
+}
+
+
+def select(key: str) -> None:
+    global SRC_PPTX, SRC_PDF, SRC_SHA, SRC_PDF_SHA, OUT, STEM, SHEET
+    c = CANDIDATES[key]
+    src = REVIEW / c["source"]
+    SRC_PPTX, SRC_PDF = src / (c["source_stem"] + ".pptx"), src / (c["source_stem"] + ".pdf")
+    SRC_SHA, SRC_PDF_SHA = c["pptx_sha"], c["pdf_sha"]
+    OUT, STEM, SHEET = REVIEW / c["out"], c["stem"], c["sheet"]
+
+
+select("rc1")
 SLIDES = 11
 
 DRAFT = "DRAFT · REVIEW GATES PENDING"
@@ -96,11 +117,11 @@ def strip_notes(xml: bytes) -> tuple[bytes, int]:
 
 
 def build_pptx() -> tuple[bytes, dict]:
-    original = REV4_PPTX.read_bytes()
-    if sha(original) != REV4_SHA:
-        raise RuntimeError("Revision-4 PPTX hash changed; refusing to derive RC1")
-    if sha(REV4_PDF.read_bytes()) != REV4_PDF_SHA:
-        raise RuntimeError("Revision-4 PDF hash changed; refusing to derive RC1")
+    original = SRC_PPTX.read_bytes()
+    if sha(original) != SRC_SHA:
+        raise RuntimeError(f"{SRC_PPTX.name} hash changed; refusing to derive {STEM}")
+    if sha(SRC_PDF.read_bytes()) != SRC_PDF_SHA:
+        raise RuntimeError(f"{SRC_PDF.name} hash changed; refusing to derive {STEM}")
     output = io.BytesIO()
     log = {"shapes_removed": {}, "note_labels_removed": 0, "font_replacements": {}}
     with ZipFile(io.BytesIO(original)) as zi, ZipFile(output, "w") as zo:
@@ -197,9 +218,9 @@ def export_pdf(pptx: Path) -> Path:
 
 
 def audit_pdf(pdf: Path) -> dict:
-    """Stricter than reissue_archivo_decks.audit_pdf: page text must equal revision 4 exactly,
+    """Stricter than reissue_archivo_decks.audit_pdf: page text must equal the source exactly,
     ignoring whitespace, once the removed badge string is taken out."""
-    before, after = fitz.open(REV4_PDF), fitz.open(pdf)
+    before, after = fitz.open(SRC_PDF), fitz.open(pdf)
     if before.page_count != SLIDES or after.page_count != SLIDES:
         raise RuntimeError("PDF page count mismatch")
     fonts = sorted({f[3] for pg in after for f in pg.get_fonts(full=True)})
@@ -209,14 +230,14 @@ def audit_pdf(pdf: Path) -> dict:
     for i, (o, n) in enumerate(zip(before, after), 1):
         expected = squash(o.get_text()).replace(squash(DRAFT), "", 1)
         if squash(n.get_text()) != expected:
-            raise RuntimeError(f"Page {i}: text differs from revision 4 beyond the removed badge")
+            raise RuntimeError(f"Page {i}: text differs from the source beyond the removed badge")
         if re.search(r"DRAFT|REVIEW GATES", n.get_text()):
             raise RuntimeError(f"Page {i}: draft text remains")
     links = lambda d: [sorted({l["uri"] for l in pg.get_links() if l.get("uri")}) for pg in d]
     if links(before) != links(after):
-        raise RuntimeError("PDF link set differs from revision 4")
+        raise RuntimeError("PDF link set differs from the source")
     return {"pages": SLIDES, "embedded_fonts": fonts, "links": sum(map(len, links(after))),
-            "text_check": "each page equals revision 4 minus the badge (whitespace ignored)",
+            "text_check": f"each page equals {SRC_PDF.name} minus the badge (whitespace ignored)",
             "tagged": bool(after.pdf_catalog() and "StructTreeRoot" in after.xref_object(after.pdf_catalog())),
             "title": after.metadata.get("title"), "pdf_sha256": sha(pdf.read_bytes())}
 
@@ -234,6 +255,10 @@ def renders(pdf: Path) -> list[str]:
 
 
 def main() -> None:
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--candidate", choices=sorted(CANDIDATES), default="rc1")
+    select(ap.parse_args().candidate)
     if OUT.exists() and any(OUT.glob("*.pptx")):
         raise RuntimeError(f"{OUT} already holds a candidate; use a new RC number instead of overwriting")
     rc, log = build_pptx()
@@ -242,11 +267,12 @@ def main() -> None:
     pptx.write_bytes(rc)
     pdf = export_pdf(pptx)
     pdf_audit = audit_pdf(pdf)
-    sheet = OUT / "SMPT_FI002_RC1_contact_sheet.png"
+    sheet = OUT / SHEET
     contact_sheet(pdf, sheet)
     manifest = {
         "deck": pptx.name,
-        "derived_from": {"path": str(REV4_PPTX.relative_to(ROOT)), "sha256": REV4_SHA},
+        "derived_from": {"path": str(SRC_PPTX.relative_to(ROOT)), "sha256": SRC_SHA,
+                         "pdf": str(SRC_PDF.relative_to(ROOT)), "pdf_sha256": SRC_PDF_SHA},
         "pptx_sha256": sha(rc),
         "pdf": pdf.name,
         **{k: v for k, v in pdf_audit.items() if k != "pdf_sha256"},
@@ -255,7 +281,7 @@ def main() -> None:
         "contact_sheet_sha256": sha(sheet.read_bytes()),
         "renders": renders(pdf),
         "changes": log,
-        "unchanged": "all other package parts and XML bytes are identical to revision 4 (verified)",
+        "unchanged": f"all other package parts and XML bytes are identical to {SRC_PPTX.name} (verified)",
         "research_cutoff": "2026-11-05",
         "review_gates": "agent QC recorded; human approval pending",
         "publication_authorization": "pending human approval",

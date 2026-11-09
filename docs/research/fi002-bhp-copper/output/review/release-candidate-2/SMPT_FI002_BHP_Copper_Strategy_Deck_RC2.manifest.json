@@ -1,0 +1,73 @@
+{
+  "deck": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC2.pptx",
+  "derived_from": {
+    "path": "docs/research/fi002-bhp-copper/output/review/revision-5/SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pptx",
+    "sha256": "071a67e82a2fcb3b0031ad18ce1c2ec93127d8e8d77496e70cd31e6c3ca483b6",
+    "pdf": "docs/research/fi002-bhp-copper/output/review/revision-5/SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pdf",
+    "pdf_sha256": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109"
+  },
+  "pptx_sha256": "fcadecae7053fe490ec8adf5be796f1c2847d990ef140e0f39807c99fd8cd8f5",
+  "pdf": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC2.pdf",
+  "pages": 11,
+  "embedded_fonts": [
+    "BAAAAA+Archivo-Bold",
+    "CAAAAA+Archivo-Regular",
+    "DAAAAA+Archivo-Bold",
+    "EAAAAA+Archivo-Regular",
+    "FAAAAA+Archivo-Bold",
+    "GAAAAA+Archivo-Regular",
+    "HAAAAA+Archivo-Regular",
+    "IAAAAA+Archivo-Regular",
+    "JAAAAA+Archivo-Regular",
+    "KAAAAA+Archivo-Bold",
+    "LAAAAA+Archivo-Regular"
+  ],
+  "links": 0,
+  "text_check": "each page equals SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pdf minus the badge (whitespace ignored)",
+  "tagged": true,
+  "title": "Goldman Sachs' Copper Outlook and BHP's $6 Billion Escondida Decision",
+  "pdf_sha256": "599e5502ee7af5159a017e83d6103d84ff484ec5e963a3cc221fb613100f1ede",
+  "contact_sheet": "SMPT_FI002_RC2_contact_sheet.png",
+  "contact_sheet_sha256": "750c7343d4d8e09a5e5e5f28fca57418940c11f56f88e8c86e9c34aa0bcacf3e",
+  "renders": [
+    "slide-01.png",
+    "slide-02.png",
+    "slide-03.png",
+    "slide-04.png",
+    "slide-05.png",
+    "slide-06.png",
+    "slide-07.png",
+    "slide-08.png",
+    "slide-09.png",
+    "slide-10.png",
+    "slide-11.png"
+  ],
+  "changes": {
+    "shapes_removed": {
+      "ppt/slides/slide1.xml": "frame:cover-notice",
+      "ppt/slides/slide10.xml": "frame:draft-badge",
+      "ppt/slides/slide11.xml": "frame:draft-badge",
+      "ppt/slides/slide2.xml": "frame:draft-badge",
+      "ppt/slides/slide3.xml": "frame:draft-badge",
+      "ppt/slides/slide4.xml": "frame:draft-badge",
+      "ppt/slides/slide5.xml": "frame:draft-badge",
+      "ppt/slides/slide6.xml": "frame:draft-badge",
+      "ppt/slides/slide7.xml": "frame:draft-badge",
+      "ppt/slides/slide8.xml": "frame:draft-badge",
+      "ppt/slides/slide9.xml": "frame:draft-badge"
+    },
+    "note_labels_removed": 54,
+    "font_replacements": {
+      "ppt/slideMasters/slideMaster1.xml": 9,
+      "ppt/theme/theme1.xml": 5
+    }
+  },
+  "unchanged": "all other package parts and XML bytes are identical to SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pptx (verified)",
+  "research_cutoff": "2026-11-05",
+  "review_gates": "agent QC recorded; human approval pending",
+  "publication_authorization": "pending human approval",
+  "tools": {
+    "libreoffice": "LibreOffice 26.8.2.2 9dea406ab7695df6325b11b0e19fdca8db4b7276",
+    "pymupdf": "1.26.5"
+  }
+}

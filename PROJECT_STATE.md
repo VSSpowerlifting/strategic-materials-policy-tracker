@@ -1,3 +1,14 @@
+## 2026-11-09: FI002 deck release candidate 2 (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-2/` holds the RC2 PPTX, PDF, contact sheet, renders, manifest and QC record. RC2 is built from `output/review/revision-5/` with `make_release_candidate.py --candidate rc2`.
+- Changes from RC1:
+  - the slide 2 and slide 6 titles now state that the $2.83bn and $2.27bn figures are modeled sensitivities;
+  - slide 11's decision tree becomes rows, using the new opt-in `condition-tree` `form: "rows"`, with readiness first;
+  - the RC1 slide-11 overlap item is resolved.
+- No findings, sources or figures change, and the research cutoff is still 5 Nov 2026. Revision 4 and RC1 are unchanged.
+- The PDF embeds Archivo only and the LibreOffice tier passes. All repository gates pass (1145 tests).
+- Still open: the PowerPoint tier, the Drive upload (blocked on the university account) and human approval.
+
 ## 2026-11-09: FI002 deck release candidate 1 (draft PR #233)
 
 - `docs/research/fi002-bhp-copper/output/review/release-candidate-1/` holds the RC1 PPTX, PDF, contact sheet, renders, manifest and QC record. The builder is `docs/research/fi002-bhp-copper/release/make_release_candidate.py`.

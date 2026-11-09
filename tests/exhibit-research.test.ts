@@ -106,6 +106,36 @@ test("plain_frame is opt-in, research-only and keeps source, draft and annotatio
     }
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
+test("condition-tree rows form is opt-in, needs outcome notes and draws no connectors or legend", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "smpt-research-rows-"));
+  try {
+    const ct = loadFixture("condition-tree");
+    const data = ct.data as { form?: string; highlightOutcomeId?: string; nodes: { id: string; kind: string; label: string; note?: string }[] };
+    const slide = (d: unknown) => ({ pattern: "condition-tree", table_reason: "Outcomes and their evidence tests", exhibit: { title: ct.title, subtitle: ct.subtitle, annotation: ct.annotation, data: d, source: "Test-only evidence stub, Table A", evidence_refs: ["E1"] } });
+    const rows = { ...data, form: "rows", nodes: data.nodes.map((n) => (n.kind === "outcome" ? { ...n, note: `Evidence for ${n.label}` } : n)) };
+    assert.throws(() => parseResearchDeck({ ...spec(), slides: [slide({ ...data, form: "list" })] }, "test"), /data.form/);
+    assert.throws(() => parseResearchDeck({ ...spec(), slides: [slide({ ...data, form: "rows" })] }, "test"), /rows-note/);
+    assert.throws(() => parseResearchDeck({ ...spec(), slides: [slide({ ...rows, form: "tree" })] }, "test"), /rows-note/);
+    for (const form of ["rows", "tree"]) {
+      const p = join(dir, `${form}.json`);
+      writeFileSync(p, JSON.stringify({ ...spec(), plain_frame: true, slides: [slide(form === "rows" ? rows : data)] }));
+      const o = join(dir, `${form}.pptx`);
+      await renderResearchDeck(p, o);
+      const xml = await (await JSZip.loadAsync(readFileSync(o))).file("ppt/slides/slide2.xml")!.async("string");
+      if (form === "rows") {
+        assert.doesNotMatch(xml, /legend-|edge-|branch-label|node-box/);
+        assert.match(xml, /<a:tbl>/);
+        const hot = data.nodes.find((n) => n.id === data.highlightOutcomeId) ?? data.nodes.find((n) => n.kind === "outcome")!;
+        const first = data.nodes.filter((n) => n.kind === "outcome").map((n) => xml.indexOf(`Evidence for ${n.label}`));
+        assert.ok(first.every((i) => i >= 0));
+        assert.equal(Math.min(...first), xml.indexOf(`Evidence for ${hot.label}`));
+      } else {
+        assert.match(xml, /legend-path-label/);
+        assert.match(xml, /branch-label-/);
+      }
+    }
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
 test("renderer helpers enforce the exhibit typography floor", () => {
   const slide = { addText() {}, addShape() {}, addChart() {}, addTable() {}, addNotes() {} } as PptxSlide;
   const h = makeHelpers(slide, { x: 0, y: 0, w: 8, h: 4 }, [], {}, {});
