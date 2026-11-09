@@ -3,14 +3,15 @@
  *
  * Reads a local copy of the World Bank "CMO-Historical-Data-Monthly.xlsx"
  * workbook (the Pink Sheet monthly history), verifies it against the pinned
- * SHA-256, and writes the frozen, versioned files in `data/markets/`:
+ * SHA-256, and writes the frozen, versioned files in `data/markets/wb-pink-sheet/`:
  *
  *   manifest.json      release, licence, attribution, cutoff, changes made
  *   series.json        per-series metadata (benchmark, grade, unit, limits)
  *   observations.json  monthly values, one array per series, oldest first
  *
- * `coverage-gaps.json` (materials without a redistributable public series) is
- * hand-maintained and never written here.
+ * The IMF and USGS datasets have their own ingests (`ingest-markets-imf.ts`,
+ * `ingest-markets-usgs.ts`). `data/markets/coverage-gaps.json` (materials
+ * without a redistributable monthly series) is hand-maintained.
  *
  * Usage:
  *   npm run ingest:markets -- /path/to/CMO-Historical-Data-Monthly.xlsx
@@ -27,6 +28,7 @@ import { fileURLToPath } from "node:url";
 import JSZip from "jszip";
 
 // ── Pinned release ──────────────────────────────────────────────────────────
+const DATASET_ID = "wb-pink-sheet";
 const WORKBOOK_URL =
   "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx";
 const WORKBOOK_SHA256 = "3c8d9d8dbb48342fdbf24777c39a8ce8964cc2fd0958f72f6779e6e4ad99cde2";
@@ -61,6 +63,7 @@ interface SeriesSpec {
   /** Leading text of the matching Description-sheet entry. */
   descriptionPrefix: string;
   benchmark: string;
+  priceType: "exchange_benchmark";
   form: string;
   grade: string;
   priceBasis: string;
@@ -82,6 +85,7 @@ const SERIES: SeriesSpec[] = [
     sourceUnit: "($/mt)",
     descriptionPrefix: "Aluminum (LME)",
     benchmark: "LME primary aluminium",
+    priceType: "exchange_benchmark",
     form: "Unalloyed primary ingots",
     grade: "High grade, minimum 99.7% purity",
     priceBasis: "LME settlement price (cash price before 2005)",
@@ -95,6 +99,7 @@ const SERIES: SeriesSpec[] = [
     sourceUnit: "($/mt)",
     descriptionPrefix: "Copper (LME)",
     benchmark: "LME copper, grade A",
+    priceType: "exchange_benchmark",
     form: "Cathodes and wire bar shapes",
     grade: "Grade A, minimum 99.9935% purity",
     priceBasis: "LME settlement price",
@@ -108,6 +113,7 @@ const SERIES: SeriesSpec[] = [
     sourceUnit: "($/mt)",
     descriptionPrefix: "Nickel (LME)",
     benchmark: "LME nickel",
+    priceType: "exchange_benchmark",
     form: "Cathodes",
     grade: "Minimum 99.8% purity",
     priceBasis: "LME settlement price (cash price before 2005)",
@@ -321,25 +327,33 @@ async function main() {
     const obs = observations[spec.id];
     return {
       id: spec.id,
+      datasetId: DATASET_ID,
       materialId: spec.materialId,
+      relatedMaterialIds: [],
       label: spec.label,
       benchmark: spec.benchmark,
+      priceType: spec.priceType,
       sourceSeriesName: spec.header,
       sourceUnit: spec.sourceUnit,
       specification: specification.replace(/^\*\s*/, ""),
-      worldBankForecastFlag: specification.startsWith("*"),
+      forecastFlag: specification.startsWith("*"),
       form: spec.form,
       grade: spec.grade,
       priceBasis: spec.priceBasis,
+      deliveryBasis: null,
       currency: "USD",
       unit: "US$ per metric tonne",
+      unitShort: "US$/t",
       unitNote: "Nominal US dollars, not adjusted for inflation",
       frequency: "monthly",
       aggregation: "monthly average",
       underlyingSources,
+      sourceNotes: null,
+      sourceBreaks: [],
       firstPeriod: obs[0].period,
       lastPeriod: obs[obs.length - 1].period,
       observationCount: obs.length,
+      estimatedCount: 0,
       missingValueHandling:
         "Every month in the stored window has a published value. The ingest fails on a missing or non-numeric cell rather than interpolating; calculations that need an absent month return no value.",
       limitations: spec.limitations,
@@ -347,23 +361,30 @@ async function main() {
   });
 
   const manifest = {
-    schemaVersion: 1,
-    datasetId: "wb-pink-sheet-monthly-2026-11",
+    schemaVersion: 2,
+    datasetId: DATASET_ID,
+    releaseId: "wb-pink-sheet-monthly-2026-11",
     title: "World Bank Commodity Price Data (The Pink Sheet), monthly prices",
+    shortName: "World Bank Pink Sheet",
     publisher: "World Bank",
-    workbook: {
+    frequency: "monthly",
+    sourceFile: {
       url: WORKBOOK_URL,
       fileName: "CMO-Historical-Data-Monthly.xlsx",
       sha256: WORKBOOK_SHA256,
       bytes: WORKBOOK_BYTES,
-      sheet: PRICES_SHEET,
-      sheetSubtitle,
-      updatedText: UPDATED_ROW_TEXT,
+      format: "Excel workbook (xlsx)",
+      details: {
+        sheet: PRICES_SHEET,
+        sheetSubtitle,
+        updatedText: UPDATED_ROW_TEXT,
+        pinkSheetPdfUrl:
+          "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Pink-Sheet-November-2026.pdf",
+      },
     },
     landingPageUrl: "https://www.worldbank.org/en/research/commodity-markets",
     catalogUrl: "https://datacatalog.worldbank.org/search/dataset/0038238/commodity-prices-history-and-projections",
-    pinkSheetPdfUrl:
-      "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Pink-Sheet-November-2026.pdf",
+    doi: null,
     releaseDate: RELEASE_DATE,
     retrievedOn: RETRIEVED_ON,
     windowStart: WINDOW_START,
@@ -384,10 +405,12 @@ async function main() {
         "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Pink-Sheet-November-2026.pdf",
     },
     license: {
+      kind: "cc-by-4.0",
       name: "Creative Commons Attribution 4.0 International (CC BY 4.0)",
       url: "https://creativecommons.org/licenses/by/4.0/",
       statedAt: "https://datacatalog.worldbank.org/search/dataset/0038238/commodity-prices-history-and-projections",
       termsUrl: "https://datacatalog.worldbank.org/public-licenses",
+      statedText: "This dataset is licensed under Creative Commons Attribution 4.0",
     },
     attribution:
       "Source: World Bank, Commodity Price Data (The Pink Sheet), monthly prices, updated November 3, 2026. Licensed under CC BY 4.0.",
@@ -398,14 +421,14 @@ async function main() {
     seriesIds: SERIES.map((s) => s.id),
   };
 
-  const root = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "markets");
+  const root = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "markets", DATASET_ID);
   mkdirSync(root, { recursive: true });
   const write = (name: string, value: unknown) => writeFileSync(join(root, name), JSON.stringify(value, null, 2) + "\n");
   write("manifest.json", manifest);
   write("series.json", series);
   write("observations.json", { seriesIds: SERIES.map((s) => s.id), observations });
   console.log(
-    `✓ ingest-markets: ${SERIES.length} series, ${WINDOW_START}–${OBSERVATION_CUTOFF}, ${observations[SERIES[0].id].length} months each → data/markets/`,
+    `✓ ingest-markets: ${SERIES.length} series, ${WINDOW_START}–${OBSERVATION_CUTOFF}, ${observations[SERIES[0].id].length} months each → data/markets/${DATASET_ID}/`,
   );
 }
 

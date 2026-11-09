@@ -1,454 +1,291 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  addMonths,
+  addPeriods,
   changeBetween,
   changeOver,
   changeSummary,
   chooseIndexBase,
   formatNumber,
-  formatPeriod,
+  formatObservationPeriod,
   formatPct,
+  formatPeriod,
   indexSeries,
   isRangeId,
   isStale,
   isValidPeriod,
-  monthlyChangeGrid,
-  monthsBetween,
+  periodChangeGrid,
   periodRange,
+  periodsBetween,
   rangeWindow,
   rankMovers,
   supportedRanges,
   unitsCompatible,
   validateMarketData,
+  valueAt,
   type MarketDataInput,
   type Observation,
 } from "@/lib/markets";
-import { getMarketCoverage, getMarketManifest, getMarketSeries, getObservations } from "@/lib/market-data";
+import {
+  getMarketCoverage,
+  getMarketDatasets,
+  getMarketSeries,
+  getMarketSeriesById,
+  getMarketSeriesForMaterial,
+  getObservations,
+} from "@/lib/market-data";
 import materials from "@/data/seed/materials.json";
-import { createElement } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { heatScaleMax, type HeatRow } from "@/components/markets/heatmap";
-import { MarketMonitor, type MonitorGap } from "@/components/markets/market-monitor";
-import type { MonitorSeries } from "@/components/markets/types";
-import { buildMarketsCsv, MARKET_CSV_HEADERS } from "@/lib/markets-csv";
+import { buildMarketsCsv, csvCell, MARKET_CSV_HEADERS } from "@/lib/markets-csv";
 
 const materialIds = new Set((materials as Array<{ id: string }>).map((m) => m.id));
 const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v)) as T;
 const real = (): MarketDataInput => ({
-  manifest: clone(getMarketManifest()),
-  series: clone(getMarketSeries()),
-  observations: { seriesIds: [...getMarketManifest().seriesIds], observations: Object.fromEntries(getMarketSeries().map((s) => [s.id, clone(getObservations(s.id))])) },
+  datasets: clone(getMarketDatasets()),
   coverage: clone(getMarketCoverage()),
   materialIds,
 });
-const hasError = (input: MarketDataInput, re: RegExp) => validateMarketData(input).errors.some((e) => re.test(e));
-const obs = (start: string, values: number[]): Observation[] => values.map((value, i) => ({ period: addMonths(start, i), value }));
-const close = (a: number, b: number, eps = 1e-9) => assert.ok(Math.abs(a - b) < eps, `${a} ≉ ${b}`);
+const errorsOf = (input: MarketDataInput) => validateMarketData(input).errors;
+const ds = (input: MarketDataInput, id: string) => input.datasets.find((d) => d.manifest.datasetId === id)!;
+/** Splits one CSV line (RFC 4180 quoting) for assertions. */
+const splitCsv = (line: string): string[] => {
+  const out: string[] = [];
+  let f = "";
+  let q = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (q) {
+      if (c === '"' && line[i + 1] === '"') { f += '"'; i++; } else if (c === '"') q = false; else f += c;
+    } else if (c === '"') q = true;
+    else if (c === ",") { out.push(f); f = ""; } else f += c;
+  }
+  out.push(f);
+  return out;
+};
+const obs = (pairs: Array<[string, number, boolean?]>): Observation[] =>
+  pairs.map(([period, value, e]) => (e ? { period, value, estimated: true } : { period, value }));
 
-// ── The stored data ─────────────────────────────────────────────────────────
-test("stored market data passes validation with no errors or warnings", () => {
+// ── Periods ────────────────────────────────────────────────────────────────
+test("periods: months and years are distinct frequencies", () => {
+  assert.ok(isValidPeriod("2026-09", "monthly"));
+  assert.ok(isValidPeriod("2025", "annual"));
+  assert.ok(!isValidPeriod("2025", "monthly"));
+  assert.ok(!isValidPeriod("2026-13"));
+  assert.equal(addPeriods("2026-01", -1), "2025-12");
+  assert.equal(addPeriods("2025", -4), "2021");
+  assert.equal(periodsBetween("2021", "2025"), 4);
+  assert.deepEqual(periodRange("2023", "2025"), ["2023", "2024", "2025"]);
+  assert.throws(() => periodsBetween("2025", "2025-01"), /Cannot compare/);
+});
+
+// ── Changes ────────────────────────────────────────────────────────────────
+test("changes: exact endpoints, no interpolation, estimate flag carried", () => {
+  const o = obs([["2021", 100], ["2022", 120], ["2024", 90], ["2025", 99, true]]);
+  const c = changeBetween(o, "2024", "2025")!;
+  assert.equal(c.pct.toFixed(6), (10).toFixed(6));
+  assert.equal(c.estimated, true);
+  assert.equal(changeBetween(o, "2022", "2023"), null, "missing year is not filled");
+  assert.equal(changeOver(o, 1, "2023"), null);
+  assert.equal(changeBetween(o, "2021", "2022")!.estimated, false);
+});
+
+test("changes: a stated source break nulls changes across it", () => {
+  const breaks = [{ period: "2022", statedAs: "x" }, { period: "2025", statedAs: "x" }];
+  const o = obs([["2021", 158], ["2022", 196], ["2023", 170], ["2024", 167], ["2025", 180, true]]);
+  assert.equal(changeBetween(o, "2021", "2022", breaks), null);
+  assert.equal(changeBetween(o, "2024", "2025", breaks), null);
+  assert.ok(changeBetween(o, "2022", "2024", breaks));
+  const sum = changeSummary(o, "annual", breaks);
+  assert.equal(sum.changes[0].change, null);
+  assert.match(sum.changes[0].reason!, /underlying price source changes in 2025/);
+  const grid = periodChangeGrid(o, ["2022", "2023", "2024", "2025"], breaks);
+  assert.deepEqual(grid.map((g) => g.change === null), [true, false, false, true]);
+});
+
+test("change summary horizons follow the frequency", () => {
+  assert.deepEqual(changeSummary(obs([["2025", 1]]), "annual").changes.map((c) => c.horizon.id), ["1y", "4y"]);
+  assert.deepEqual(changeSummary(obs([["2026-09", 1]]), "monthly").changes.map((c) => c.horizon.id), ["1m", "3m", "12m"]);
+});
+
+// ── Ranges & indexing ──────────────────────────────────────────────────────
+test("ranges: annual offers only all years; monthly windows end-anchored", () => {
+  assert.ok(isRangeId("max", "annual"));
+  assert.ok(!isRangeId("12m", "annual"));
+  assert.deepEqual(rangeWindow("monthly", "3m", "2026-09", "2005-01"), { start: "2026-06", end: "2026-09", truncated: false });
+  assert.deepEqual(rangeWindow("monthly", "10y", "2026-09", "2020-01"), { start: "2020-01", end: "2026-09", truncated: true });
+  assert.deepEqual(supportedRanges("monthly", "2026-01", "2026-09"), ["3m", "6m", "max"]);
+});
+
+test("indexing: common base, break and missing-base exclusions, estimates kept", () => {
+  const a = obs([["2021", 50], ["2022", 60], ["2025", 75, true]]);
+  const b = obs([["2022", 10], ["2023", 20], ["2025", 30, true]]);
+  const t = obs([["2021", 1], ["2022", 2], ["2023", 3]]);
+  const base = chooseIndexBase(
+    [{ id: "a", obs: a }, { id: "b", obs: b }, { id: "t", obs: t, breaks: [{ period: "2023", statedAs: "x" }] }],
+    "2021",
+    "2025",
+  );
+  assert.equal(base.basePeriod, "2022");
+  assert.deepEqual(base.included, ["a", "b"]);
+  assert.match(base.excluded.find((e) => e.id === "t")!.reason, /changes in 2023/);
+  const ia = indexSeries(a, "2022", "2021", "2025");
+  assert.deepEqual(ia.map((o) => o.period), ["2022", "2025"]);
+  assert.equal(ia[0].value, 100);
+  assert.equal(ia[1].estimated, true);
+});
+
+test("units: absolute axis only for identical unit, currency and frequency", () => {
+  const m = { currency: "USD", unit: "US$ per metric tonne", frequency: "monthly" as const };
+  assert.ok(unitsCompatible([m, { ...m }]));
+  assert.ok(!unitsCompatible([m, { ...m, frequency: "annual" }]));
+  assert.ok(!unitsCompatible([m, { ...m, unit: "US$ per pound" }]));
+  assert.ok(!unitsCompatible([]));
+});
+
+test("movers: same endpoints for all; incomparable series listed apart", () => {
+  const r = rankMovers(
+    [
+      { id: "x", obs: obs([["2024", 100], ["2025", 50]]) },
+      { id: "y", obs: obs([["2024", 100], ["2025", 110]]) },
+      { id: "z", obs: obs([["2025", 1]]) },
+    ],
+    1,
+    "2025",
+  );
+  assert.deepEqual(r.ranked.map((m) => m.id), ["x", "y"]);
+  assert.deepEqual(r.unranked.map((u) => u.id), ["z"]);
+});
+
+test("formatting: rounding only at display; estimate marker", () => {
+  assert.equal(formatPct(4.95), "+5.0%");
+  assert.equal(formatPct(-0.04), "0.0%");
+  assert.equal(formatPct(null), "—");
+  assert.equal(formatPeriod("2026-09"), "Sep 2026");
+  assert.equal(formatPeriod("2025"), "2025");
+  assert.equal(formatObservationPeriod({ period: "2025", estimated: true }), "2025e");
+  assert.equal(formatObservationPeriod({ period: "2025", estimated: true }, true), "2025 (estimated)");
+  assert.equal(formatNumber(1234567.891, 2), "1,234,567.89");
+  assert.ok(isStale("2026-08", "2026-09"));
+});
+
+// ── Stored data ────────────────────────────────────────────────────────────
+test("stored market data passes validation with no warnings", () => {
   const r = validateMarketData(real());
   assert.deepEqual(r.errors, []);
   assert.deepEqual(r.warnings, []);
 });
 
-test("stored series are the three World Bank base metals through the stated cutoff", () => {
-  const m = getMarketManifest();
-  assert.deepEqual(m.seriesIds, ["wb-aluminum", "wb-copper", "wb-nickel"]);
-  assert.equal(m.observationCutoff, "2026-10");
-  for (const s of getMarketSeries()) {
-    assert.equal(s.lastPeriod, m.observationCutoff);
-    assert.equal(getObservations(s.id).length, periodRange(s.firstPeriod, s.lastPeriod).length);
+test("three datasets: World Bank and IMF monthly, USGS annual", () => {
+  const d = getMarketDatasets();
+  assert.deepEqual(d.map((x) => [x.manifest.datasetId, x.manifest.frequency]), [
+    ["wb-pink-sheet", "monthly"],
+    ["imf-pcps", "monthly"],
+    ["usgs-mcs-2026", "annual"],
+  ]);
+  assert.deepEqual(d.map((x) => x.manifest.license.kind), ["cc-by-4.0", "imf-terms", "cc0-1.0"]);
+  assert.equal(getMarketSeries("annual").length, 25);
+  assert.ok(getMarketSeries("monthly").length >= 6);
+});
+
+test("USGS: only 2025 is estimated, values match the release", () => {
+  for (const s of getMarketSeries("annual")) {
+    const o = getObservations(s.id);
+    assert.deepEqual(o.map((x) => x.period), ["2021", "2022", "2023", "2024", "2025"], s.id);
+    assert.deepEqual(o.map((x) => Boolean(x.estimated)), [false, false, false, false, true], s.id);
+  }
+  assert.equal(valueAt(getObservations("usgs-ndpr-oxide"), "2022"), 124);
+  assert.equal(valueAt(getObservations("usgs-lithium-carbonate"), "2022"), 63700);
+  assert.equal(valueAt(getObservations("usgs-germanium-metal"), "2025"), 4100);
+  assert.deepEqual(getMarketSeriesById("usgs-tantalite")!.sourceBreaks.map((b) => b.period), ["2022", "2025"]);
+});
+
+test("cross-source sanity: IMF cobalt and palladium track USGS annual figures", () => {
+  // IMF cobalt is stored in US$/t; USGS reports LME cash in US$/lb. Convert only here, in the test.
+  const LB_PER_T = 2204.62262;
+  const mean = (id: string, y: string) => {
+    const v = getObservations(id).filter((o) => o.period.startsWith(`${y}-`)).map((o) => o.value);
+    assert.equal(v.length, 12, `${id} ${y}`);
+    return v.reduce((a, b) => a + b, 0) / 12;
+  };
+  for (const y of ["2021", "2022", "2023", "2024"]) {
+    const co = mean("imf-cobalt", y) / LB_PER_T;
+    const usgsCo = valueAt(getObservations("usgs-cobalt-lme"), y)!;
+    assert.ok(Math.abs(co / usgsCo - 1) < 0.02, `cobalt ${y}: ${co} vs ${usgsCo}`);
+    const pd = mean("imf-palladium", y);
+    const usgsPd = valueAt(getObservations("usgs-palladium"), y)!;
+    assert.ok(Math.abs(pd / usgsPd - 1) < 0.02, `palladium ${y}: ${pd} vs ${usgsPd}`);
   }
 });
 
-test("known changes match hand-computed values from the Pink Sheet", () => {
-  const cu = getObservations("wb-copper");
-  const ni = getObservations("wb-nickel");
-  const al = getObservations("wb-aluminum");
-  // Copper Oct 2026 14508 vs Sep 14474, Jul 13543, Oct 2025 10740.
-  close(changeOver(cu, 1)!.pct, (14508 / 14474 - 1) * 100);
-  close(changeOver(cu, 3)!.pct, (14508 / 13543 - 1) * 100);
-  close(changeOver(cu, 12)!.pct, (14508 / 10740 - 1) * 100);
-  assert.equal(formatPct(changeOver(cu, 1)!.pct, 2), "+0.23%");
-  assert.equal(formatPct(changeOver(cu, 3)!.pct, 2), "+7.13%");
-  assert.equal(formatPct(changeOver(cu, 12)!.pct, 2), "+35.08%");
-  assert.equal(formatPct(changeOver(ni, 1)!.pct, 2), "−5.44%");
-  assert.equal(formatPct(changeOver(al, 1)!.pct, 2), "−6.76%");
-  const sum = changeSummary(cu);
-  assert.equal(sum.latest?.period, "2026-10");
-  assert.equal(sum.m3?.fromPeriod, "2026-07");
-  assert.equal(sum.y1?.fromPeriod, "2025-10");
+test("coverage: every material has a monthly series or a stated gap", () => {
+  const monthly = new Set(getMarketSeries("monthly").map((s) => s.materialId));
+  const gaps = new Map(getMarketCoverage().gaps.map((g) => [g.materialId, g.status]));
+  for (const m of materialIds) assert.ok(monthly.has(m) !== gaps.has(m), m);
+  assert.equal(gaps.get("praseodymium"), "joint_only");
+  assert.equal(gaps.get("ndfeb-magnets"), "no_open_series_identified");
+  assert.equal(gaps.get("lithium"), "annual_only");
+  assert.ok(getMarketSeriesForMaterial("praseodymium").some((s) => s.id === "usgs-ndpr-oxide"));
 });
 
-test("the 3M indexed view ends at the same figure as the 3M change", () => {
-  const cu = getObservations("wb-copper");
-  const w = rangeWindow("3m", "2026-10", "2005-01");
-  assert.deepEqual(w, { start: "2026-07", end: "2026-10", truncated: false });
-  const idx = indexSeries(cu, w.start, w.start, w.end);
-  assert.equal(idx[0].value, 100);
-  close(idx.at(-1)!.value - 100, changeOver(cu, 3)!.pct);
+test("trade unit values are never labelled as prices", () => {
+  const uv = getMarketSeries().filter((s) => s.priceType === "trade_unit_value");
+  assert.equal(uv.length, 6);
+  for (const s of uv) assert.doesNotMatch(`${s.label} ${s.benchmark}`, /\b(price|benchmark|assessment|spot)\b/i, s.id);
 });
 
-// ── Periods ─────────────────────────────────────────────────────────────────
-test("period helpers reject invalid months and cross year boundaries", () => {
-  for (const bad of ["2026-13", "2026-00", "2026-1", "26-01", "2026/01", "", null, 202601]) assert.equal(isValidPeriod(bad), false);
-  assert.equal(isValidPeriod("2026-01"), true);
-  assert.equal(addMonths("2026-01", -1), "2025-12");
-  assert.equal(addMonths("2025-11", 3), "2026-02");
-  assert.equal(monthsBetween("2025-10", "2026-10"), 12);
-  assert.deepEqual(periodRange("2025-11", "2026-02"), ["2025-11", "2025-12", "2026-01", "2026-02"]);
-});
-
-// ── Changes ─────────────────────────────────────────────────────────────────
-test("a change across a missing month is null, never interpolated", () => {
-  const s = [
-    { period: "2026-01", value: 100 },
-    { period: "2026-03", value: 120 },
+// ── Validation failures ────────────────────────────────────────────────────
+test("validation rejects malformed data", () => {
+  const cases: Array<[string, (i: MarketDataInput) => void, RegExp]> = [
+    ["gap in years", (i) => ds(i, "usgs-mcs-2026").observations.observations["usgs-antimony"].splice(2, 1), /missing period|observationCount/],
+    ["monthly period in annual set", (i) => (ds(i, "usgs-mcs-2026").observations.observations["usgs-antimony"][0].period = "2021-01"), /invalid annual period/],
+    ["firm after estimate", (i) => {
+      const o = ds(i, "usgs-mcs-2026").observations.observations["usgs-antimony"];
+      o[3].estimated = true;
+      delete o[4].estimated;
+    }, /follows an estimate/],
+    ["estimatedCount mismatch", (i) => (ds(i, "usgs-mcs-2026").series[0].estimatedCount = 0), /estimatedCount/],
+    ["unit value called a price", (i) => {
+      const s = ds(i, "usgs-mcs-2026").series.find((x) => x.priceType === "trade_unit_value")!;
+      s.label = "Gallium spot price";
+    }, /labelled as a price/],
+    ["duplicate id across datasets", (i) => (ds(i, "imf-pcps").series[0].id = ds(i, "wb-pink-sheet").series[0].id), /more than one dataset/],
+    ["break outside window", (i) => (ds(i, "usgs-mcs-2026").series.find((s) => s.id === "usgs-tantalite")!.sourceBreaks[0].period = "2021"), /outside the stored window/],
+    ["IMF without changes statement", (i) => (ds(i, "imf-pcps").manifest.changesMade = "None."), /statement of changes/],
+    ["coverage gap for a monthly material", (i) => i.coverage.gaps.push({ ...i.coverage.gaps[0], materialId: "copper" }), /already has a published monthly series/],
+    ["coverage gap holding a number", (i) => ((i.coverage.gaps[0] as unknown as Record<string, unknown>).price = 1), /hold no prices/],
+    ["material with no coverage", (i) => i.coverage.gaps.splice(i.coverage.gaps.findIndex((g) => g.materialId === "boron"), 1), /"boron" has no monthly series/],
+    ["joint_only wrongly used", (i) => (i.coverage.gaps.find((g) => g.materialId === "lithium")!.status = "joint_only"), /joint_only/],
   ];
-  assert.equal(changeOver(s, 1), null); // Feb absent
-  close(changeBetween(s, "2026-01", "2026-03")!.pct, 20);
-  assert.equal(changeOver([], 1), null);
-});
-
-test("a non-positive base yields no change", () => {
-  assert.equal(changeBetween(obs("2026-01", [0, 10]), "2026-01", "2026-02"), null);
-  assert.equal(changeBetween(obs("2026-01", [-5, 10]), "2026-01", "2026-02"), null);
-});
-
-test("percentage direction and magnitude are right", () => {
-  const s = obs("2026-01", [200, 150, 300]);
-  assert.equal(changeBetween(s, "2026-01", "2026-02")!.pct, -25);
-  assert.equal(changeBetween(s, "2026-02", "2026-03")!.pct, 100);
-});
-
-// ── Windows ─────────────────────────────────────────────────────────────────
-test("range windows truncate at the earliest month and say so", () => {
-  assert.deepEqual(rangeWindow("12m", "2026-10", "2026-01"), { start: "2026-01", end: "2026-10", truncated: true });
-  assert.deepEqual(rangeWindow("max", "2026-10", "2005-01"), { start: "2005-01", end: "2026-10", truncated: false });
-  assert.deepEqual(supportedRanges("2026-01", "2026-10"), ["3m", "6m", "max"]);
-  assert.ok(supportedRanges("2005-01", "2026-10").includes("10y"));
-  assert.equal(isRangeId("6m"), true);
-  assert.equal(isRangeId("2y"), false);
-});
-
-// ── Indexing ────────────────────────────────────────────────────────────────
-test("series with different start dates are rebased at the latest common first month", () => {
-  const a = obs("2026-01", [100, 110, 120, 130]);
-  const b = obs("2026-03", [50, 60]);
-  const base = chooseIndexBase([{ id: "a", obs: a }, { id: "b", obs: b }], "2026-01", "2026-04");
-  assert.equal(base.basePeriod, "2026-03");
-  assert.deepEqual(base.included, ["a", "b"]);
-  assert.equal(base.explanation, null);
-  const ia = indexSeries(a, base.basePeriod!, "2026-01", "2026-04");
-  assert.deepEqual(ia.map((o) => o.period), ["2026-03", "2026-04"]);
-  close(ia[1].value, (130 / 120) * 100);
-  assert.deepEqual(indexSeries(b, base.basePeriod!, "2026-01", "2026-04").map((o) => o.value), [100, 120]);
-});
-
-test("a series missing the common base month is excluded with a reason", () => {
-  const a = obs("2026-01", [100, 110, 120, 130]);
-  const c = [
-    { period: "2026-01", value: 10 },
-    { period: "2026-04", value: 12 },
-  ];
-  const b = obs("2026-03", [50, 60]);
-  const base = chooseIndexBase([{ id: "a", obs: a }, { id: "b", obs: b }, { id: "c", obs: c }], "2026-01", "2026-04");
-  assert.equal(base.basePeriod, "2026-03");
-  assert.deepEqual(base.included, ["a", "b"]);
-  assert.equal(base.excluded.length, 1);
-  assert.equal(base.excluded[0].id, "c");
-  assert.match(base.excluded[0].reason, /2026-03/);
-});
-
-test("no common base month produces an explanation, not a chart", () => {
-  const a = [{ period: "2026-01", value: 1 }];
-  const b = [{ period: "2026-02", value: 1 }];
-  const r = chooseIndexBase([{ id: "a", obs: a }, { id: "b", obs: b }], "2026-01", "2026-02");
-  // Base is Feb (latest first); a has no Feb value, b does → b alone is included.
-  assert.deepEqual(r.included, ["b"]);
-  const none = chooseIndexBase([{ id: "a", obs: a }], "2026-05", "2026-06");
-  assert.equal(none.basePeriod, null);
-  assert.ok(none.explanation);
-  const disjoint = chooseIndexBase(
-    [
-      { id: "a", obs: [{ period: "2026-01", value: 1 }, { period: "2026-03", value: 1 }] },
-      { id: "b", obs: [{ period: "2026-02", value: 1 }, { period: "2026-04", value: 1 }] },
-    ],
-    "2026-01",
-    "2026-04",
-  );
-  // Base = Feb; a lacks Feb → only b included. Never a fabricated base.
-  assert.deepEqual(disjoint.included, ["b"]);
-  assert.equal(indexSeries([{ period: "2026-01", value: 1 }], "2026-02", "2026-01", "2026-02").length, 0);
-});
-
-// ── Units ───────────────────────────────────────────────────────────────────
-test("incompatible units or currencies never share an absolute axis", () => {
-  assert.equal(unitsCompatible([{ currency: "USD", unit: "US$ per metric tonne" }, { currency: "USD", unit: "US$ per metric tonne" }]), true);
-  assert.equal(unitsCompatible([{ currency: "USD", unit: "US$ per metric tonne" }, { currency: "USD", unit: "US$ per kg" }]), false);
-  assert.equal(unitsCompatible([{ currency: "USD", unit: "US$ per metric tonne" }, { currency: "CNY", unit: "US$ per metric tonne" }]), false);
-  assert.equal(unitsCompatible([]), false);
-  assert.equal(unitsCompatible(getMarketSeries()), true);
-});
-
-// ── Heatmap and movers ──────────────────────────────────────────────────────
-test("heatmap cells are month-on-month changes with gaps left empty", () => {
-  const s = [
-    { period: "2026-01", value: 100 },
-    { period: "2026-02", value: 110 },
-    { period: "2026-04", value: 99 },
-  ];
-  const grid = monthlyChangeGrid(s, periodRange("2026-01", "2026-04"));
-  assert.equal(grid[0].change, null); // no December
-  close(grid[1].change!.pct, 10);
-  assert.equal(grid[2].change, null); // March absent
-  assert.equal(grid[3].change, null); // March absent as prior
-});
-
-test("movers rank by absolute change, break ties by id, and list missing endpoints apart", () => {
-  const r = rankMovers(
-    [
-      { id: "up", obs: obs("2026-01", [100, 105]) },
-      { id: "down", obs: obs("2026-01", [100, 90]) },
-      { id: "tie", obs: obs("2026-01", [100, 95]) },
-      { id: "also", obs: obs("2026-01", [100, 105]) },
-      { id: "short", obs: obs("2026-02", [10]) },
-    ],
-    1,
-    "2026-02",
-  );
-  assert.deepEqual(r.ranked.map((m) => m.id), ["down", "also", "tie", "up"]);
-  assert.deepEqual(r.unranked.map((u) => u.id), ["short"]);
-  assert.match(r.unranked[0].reason, /2026-01/);
-});
-
-// ── Staleness and formatting ────────────────────────────────────────────────
-test("a series ending before the cutoff is stale", () => {
-  assert.equal(isStale("2026-09", "2026-10"), true);
-  assert.equal(isStale("2026-10", "2026-10"), false);
-});
-
-test("display formatting rounds only at the end and uses a true minus", () => {
-  assert.equal(formatPct(5.4449), "+5.4%");
-  assert.equal(formatPct(-5.444, 2), "−5.44%");
-  assert.equal(formatPct(-0.04), "0.0%");
-  assert.equal(formatPct(null), "—");
-  assert.equal(formatPct(Number.NaN), "—");
-  assert.equal(formatNumber(14508), "14,508");
-  assert.equal(formatNumber(1234567.891, 2), "1,234,567.89");
-  assert.equal(formatNumber(-3061), "−3,061");
-});
-
-// ── Validation failures ─────────────────────────────────────────────────────
-test("validation rejects a duplicate period", () => {
-  const d = real();
-  const cu = d.observations.observations["wb-copper"];
-  cu.splice(5, 0, { ...cu[5] });
-  assert.ok(hasError(d, /duplicate period/));
-});
-
-test("validation rejects an invalid date", () => {
-  const d = real();
-  d.observations.observations["wb-copper"][3].period = "2005-13";
-  assert.ok(hasError(d, /invalid period "2005-13"/));
-  const m = real();
-  m.manifest.releaseDate = "2026-02-30";
-  assert.ok(hasError(m, /releaseDate .* not a real/));
-});
-
-test("validation rejects a missing period", () => {
-  const d = real();
-  d.observations.observations["wb-nickel"].splice(10, 1);
-  assert.ok(hasError(d, /missing period\(s\)/));
-});
-
-test("validation rejects non-positive and non-finite values", () => {
-  for (const v of [0, -1, Number.NaN]) {
-    const d = real();
-    d.observations.observations["wb-aluminum"][7].value = v;
-    assert.ok(hasError(d, /positive finite number/), `value ${v}`);
+  for (const [name, mutate, re] of cases) {
+    const input = real();
+    mutate(input);
+    assert.ok(errorsOf(input).some((e) => re.test(e)), `${name}: ${errorsOf(input).join(" | ")}`);
   }
 });
 
-test("validation rejects an incompatible unit", () => {
-  const d = real();
-  d.series[0].unit = "US$ per kg";
-  assert.ok(hasError(d, /unit basis/));
-  const c = real();
-  c.series[1].currency = "EUR";
-  assert.ok(hasError(c, /unit basis/));
-});
-
-test("validation rejects invalid and unknown ids", () => {
-  const d = real();
-  d.series[0].id = "WB Aluminium";
-  assert.ok(hasError(d, /id must match/));
-  const m = real();
-  m.series[0].materialId = "unobtainium";
-  assert.ok(hasError(m, /materialId "unobtainium"/));
-  const o = real();
-  o.observations.observations["wb-zinc"] = [{ period: "2026-01", value: 1 }];
-  assert.ok(hasError(o, /"wb-zinc" is not a series id/));
-  const dup = real();
-  dup.series[2].id = dup.series[1].id;
-  assert.ok(hasError(dup, /duplicate id/));
-});
-
-test("validation rejects missing metadata", () => {
-  const d = real();
-  d.series[0].benchmark = "";
-  assert.ok(hasError(d, /missing benchmark/));
-  const l = real();
-  l.series[0].limitations = [];
-  assert.ok(hasError(l, /limitations/));
-  const m = real();
-  m.manifest.attribution = " ";
-  assert.ok(hasError(m, /missing attribution/));
-  const lic = real();
-  lic.manifest.license.name = "All rights reserved";
-  assert.ok(hasError(lic, /licence/));
-  const sha = real();
-  sha.manifest.workbook.sha256 = "abc";
-  assert.ok(hasError(sha, /sha256/));
-});
-
-test("validation rejects metadata that disagrees with the observations", () => {
-  const d = real();
-  d.series[1].lastPeriod = "2026-09";
-  assert.ok(hasError(d, /lastPeriod 2026-09 ≠/));
-  const c = real();
-  c.series[1].observationCount = 1;
-  assert.ok(hasError(c, /observationCount/));
-  const o = real();
-  o.manifest.seriesIds = [...o.manifest.seriesIds].reverse();
-  assert.ok(hasError(o, /manifest.seriesIds/));
-});
-
-test("an observation after the cutoff is an error; one ending before it is a stale warning", () => {
-  const late = real();
-  late.manifest.observationCutoff = "2026-09";
-  late.manifest.releaseDate = "2026-10-03";
-  late.manifest.retrievedOn = "2026-10-09";
-  assert.ok(hasError(late, /after the stated cutoff/));
-  const stale = real();
-  const ni = stale.observations.observations["wb-nickel"];
-  ni.pop();
-  stale.series[2].lastPeriod = ni.at(-1)!.period;
-  stale.series[2].observationCount = ni.length;
-  const r = validateMarketData(stale);
-  assert.deepEqual(r.errors, []);
-  assert.ok(r.warnings.some((w) => /labelled stale/.test(w)));
-});
-
-test("a cutoff in or after the release month is rejected", () => {
-  const d = real();
-  d.manifest.observationCutoff = "2026-11";
-  assert.ok(hasError(d, /not before the release month/));
-});
-
-test("coverage-gap entries may hold no figures and no covered material", () => {
-  const n = real();
-  (n.coverage.gaps[0] as unknown as Record<string, unknown>).latestPrice = 123;
-  assert.ok(hasError(n, /holds a number/));
-  assert.ok(hasError(n, /unexpected field/));
-  const c = real();
-  c.coverage.gaps[0].materialId = "copper";
-  assert.ok(hasError(c, /already has a published series/));
-  const dup = real();
-  dup.coverage.gaps.push(clone(dup.coverage.gaps[0]));
-  assert.ok(hasError(dup, /duplicate/));
-});
-
-// ── Formatting, scale, export and render ────────────────────────────────────
-
-test("formatPeriod gives short and long month labels without a day", () => {
-  assert.equal(formatPeriod("2026-10"), "Oct 2026");
-  assert.equal(formatPeriod("2026-10", true), "October 2026");
-  assert.equal(formatPeriod("2025-01"), "Jan 2025");
-});
-
-test("heat scale defaults to 5% with no changes and rounds the 95th percentile up to a step", () => {
-  const row = (pcts: Array<number | null>): HeatRow => ({
-    id: "x",
-    label: "X",
-    color: "red",
-    dash: undefined,
-    unit: "u",
-    cells: pcts.map((pct, i) => ({
-      period: addMonths("2025-01", i),
-      change: pct === null ? null : { pct, fromPeriod: "2024-12", toPeriod: "2025-01", fromValue: 1, toValue: 1 },
-    })) as HeatRow["cells"],
-  });
-  assert.equal(heatScaleMax([]), 5);
-  assert.equal(heatScaleMax([row([null, null])]), 5);
-  assert.equal(heatScaleMax([row([1, -1.5, 0.5])]), 2);
-  assert.equal(heatScaleMax([row([1, -4, 2])]), 5);
-  assert.equal(heatScaleMax([row([12, -60])]), 60);
-});
-
-test("CSV export carries attribution, one row per stored observation and CRLF line ends", () => {
-  const manifest = getMarketManifest();
-  const series = getMarketSeries();
-  const csv = buildMarketsCsv(manifest, series, getObservations);
-  assert.ok(csv.endsWith("\r\n"));
-  const lines = csv.slice(0, -2).split("\r\n");
-  const preamble = lines.filter((l) => l.startsWith("# "));
-  assert.ok(preamble.some((l) => l.includes("CC BY 4.0")));
-  assert.ok(preamble.some((l) => /not investment advice and not a forecast/.test(l)));
-  const header = lines[preamble.length];
-  assert.equal(header, MARKET_CSV_HEADERS.join(","));
-  const rows = lines.slice(preamble.length + 1);
-  const expected = series.reduce((n, s) => n + getObservations(s.id).length, 0);
+// ── CSV ────────────────────────────────────────────────────────────────────
+test("CSV: every source attributed, every row present, estimates and frequency explicit", () => {
+  const datasets = getMarketDatasets();
+  const csv = buildMarketsCsv(datasets);
+  const lines = csv.trimEnd().split("\r\n");
+  for (const d of datasets) assert.ok(lines.some((l) => l.startsWith(`# [${d.manifest.datasetId}] `) && l.includes(d.manifest.attribution)));
+  const headerAt = lines.findIndex((l) => l === MARKET_CSV_HEADERS.join(","));
+  assert.ok(headerAt > 0);
+  const rows = lines.slice(headerAt + 1).map(splitCsv);
+  assert.ok(rows.every((r) => r.length === MARKET_CSV_HEADERS.length));
+  const expected = datasets.reduce((n, d) => n + d.series.reduce((k, s) => k + d.observations.observations[s.id].length, 0), 0);
   assert.equal(rows.length, expected);
-  assert.ok(rows.every((r) => r.endsWith(",CC BY 4.0")));
-  assert.ok(!csv.includes("\n\n"));
+  const col = (name: (typeof MARKET_CSV_HEADERS)[number]) => MARKET_CSV_HEADERS.indexOf(name);
+  const nd = rows.find((r) => r[0] === "usgs-ndpr-oxide" && r[col("period")] === "2025")!;
+  assert.equal(nd[col("estimated")], "true");
+  assert.equal(nd[col("frequency")], "annual");
+  assert.equal(nd[col("related_material_ids")], "praseodymium");
+  assert.equal(nd[col("license")], "CC0 1.0");
+  assert.ok(rows.every((r) => r.every((c) => !c.startsWith("="))));
 });
 
-test("the monitor renders defined terms, the export link and gaps without prices", () => {
-  const series: MonitorSeries[] = getMarketSeries().map((s) => ({
-    id: s.id,
-    materialId: s.materialId,
-    materialName: s.label,
-    materialHref: `/materials/${s.materialId}`,
-    label: s.label,
-    benchmark: s.benchmark,
-    unit: s.unit,
-    currency: s.currency,
-    priceBasis: s.priceBasis,
-    aggregation: s.aggregation,
-    firstPeriod: s.firstPeriod,
-    lastPeriod: s.lastPeriod,
-    obs: getObservations(s.id),
-  }));
-  const gaps: MonitorGap[] = getMarketCoverage().gaps.map((g) => ({
-    materialId: g.materialId,
-    materialName: g.materialId,
-    materialHref: null,
-    worldBankCoverage: g.worldBankCoverage,
-    gradeDistinctions: g.gradeDistinctions,
-    requirementForInclusion: g.requirementForInclusion,
-  }));
-  const html = renderToStaticMarkup(
-    createElement(MarketMonitor, { series, gaps, cutoff: "2026-10", nextReleaseDate: "2026-12-02" }),
-  );
-  assert.ok(html.includes('href="/api/export/markets.csv"'));
-  assert.match(html, /monthly benchmark average/i);
-  assert.match(html, /indexed/i);
-  for (const s of series) assert.ok(html.includes(s.label));
-  const gapBlocks = html.split('border-dashed border-border-strong px-3 py-2.5').slice(1);
-  assert.equal(gapBlocks.length, gaps.length);
-  for (const block of gapBlocks) {
-    const item = block.slice(0, block.indexOf("</li>"));
-    assert.ok(item.includes("No open series identified"));
-    assert.ok(!/US\$|USD|\/mt|per tonne/i.test(item), "a coverage gap must not show a price");
-  }
-});
-
-test("an empty monitor renders an unavailable state rather than a chart", () => {
-  const html = renderToStaticMarkup(
-    createElement(MarketMonitor, { series: [], gaps: [], cutoff: "2026-10", nextReleaseDate: "2026-12-02" }),
-  );
-  assert.ok(!html.includes("<path"));
+test("CSV cells: formula injection defused, decimals kept numeric", () => {
+  assert.equal(csvCell("=HYPERLINK(1)"), '"\t=HYPERLINK(1)"');
+  assert.equal(csvCell("-12.5"), "-12.5");
+  assert.equal(csvCell("a,b"), '"a,b"');
+  assert.equal(csvCell(null), "");
 });

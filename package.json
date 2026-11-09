@@ -12,6 +12,8 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "check:links": "tsx scripts/check-links.ts",
     "ingest:markets": "tsx scripts/ingest-markets.ts",
+    "ingest:markets:imf": "tsx scripts/ingest-markets-imf.ts",
+    "ingest:markets:usgs": "tsx scripts/ingest-markets-usgs.ts",
     "audit:lifecycle": "tsx scripts/audit-lifecycle.ts",
     "monitor:pilot": "tsx scripts/monitor-sources.ts",
     "monitor:probe-m2": "tsx scripts/probe-m2-sources.ts",

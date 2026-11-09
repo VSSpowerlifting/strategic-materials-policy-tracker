@@ -48,7 +48,7 @@ import { site } from "../lib/site";
 import { isExampleCandidateFile } from "./candidate-files";
 import { validateProjectMilestones } from "../lib/project-milestones";
 import { validateMarketData } from "../lib/markets";
-import type { MarketCoverageFile, MarketManifest, MarketSeries, ObservationsFile } from "../lib/markets";
+import type { MarketCoverageFile, MarketDataset, MarketManifest, MarketSeries, ObservationsFile } from "../lib/markets";
 import { formatCapitalControlIssue, parseCapitalControlSeed, validateCapitalControl } from "./validate-capital-control";
 import type { CapitalControlCollection } from "./validate-capital-control";
 
@@ -554,13 +554,15 @@ for (const issue of validateProjectMilestones(projectMilestones, {
   corpusDate: site.lastUpdated,
 })) err(issue);
 
-// Market monitor: World Bank monthly benchmark averages, kept apart from the
-// source-linked policy seed in data/markets/ (built by `npm run ingest:markets`).
+// Market monitor: three pinned source releases (World Bank and IMF monthly,
+// USGS annual), kept apart from the source-linked policy seed in
+// data/markets/<dataset>/ (built by the `npm run ingest:markets*` scripts).
 const marketsDir = join(seedDir, "..", "markets");
+const MARKET_DATASET_IDS = ["wb-pink-sheet", "imf-pcps", "usgs-mcs-2026"];
 const readMarket = <T>(name: string): T | null => {
   const file = join(marketsDir, `${name}.json`);
   if (!existsSync(file)) {
-    err(`data/markets/${name}.json is missing (run \`npm run ingest:markets\`)`);
+    err(`data/markets/${name}.json is missing (run the matching \`npm run ingest:markets*\` script)`);
     return null;
   }
   try {
@@ -570,22 +572,23 @@ const readMarket = <T>(name: string): T | null => {
     return null;
   }
 };
-const marketManifest = readMarket<MarketManifest>("manifest");
-const marketSeries = readMarket<MarketSeries[]>("series");
-const marketObservations = readMarket<ObservationsFile>("observations");
+const marketDatasets: MarketDataset[] = [];
+for (const id of MARKET_DATASET_IDS) {
+  const manifest = readMarket<MarketManifest>(`${id}/manifest`);
+  const series = readMarket<MarketSeries[]>(`${id}/series`);
+  const observations = readMarket<ObservationsFile>(`${id}/observations`);
+  if (manifest && series && observations) {
+    if (manifest.datasetId !== id) err(`data/markets/${id}/manifest.json: datasetId "${manifest.datasetId}" does not match its folder`);
+    marketDatasets.push({ manifest, series, observations });
+  }
+}
 const marketCoverage = readMarket<MarketCoverageFile>("coverage-gaps");
-if (marketManifest && marketSeries && marketObservations && marketCoverage) {
-  const marketCheck = validateMarketData({
-    manifest: marketManifest,
-    series: marketSeries,
-    observations: marketObservations,
-    coverage: marketCoverage,
-    materialIds,
-  });
+if (marketDatasets.length === MARKET_DATASET_IDS.length && marketCoverage) {
+  const marketCheck = validateMarketData({ datasets: marketDatasets, coverage: marketCoverage, materialIds });
   for (const e of marketCheck.errors) err(e);
   for (const w of marketCheck.warnings) warn(w);
 }
-const marketSeriesCount = Array.isArray(marketSeries) ? marketSeries.length : 0;
+const marketSeriesCount = marketDatasets.reduce((n, d) => n + (Array.isArray(d.series) ? d.series.length : 0), 0);
 
 const candidateReferenceIds = candidateFiles.flatMap(({ records }) =>
   records.flatMap((c) => [
