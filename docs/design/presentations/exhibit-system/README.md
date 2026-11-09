@@ -73,6 +73,8 @@ An environment may provide these executables on `PATH`; this does not change the
 3. Read the candidate's `use_when`, `avoid_when`, `limitations` and `table_alternative` against the real evidence. Selection is advisory; it does not check sources.
 4. Record the chosen family in the slide manifest. If a table is chosen for timing, change or state evidence, record a `table_reason`, as the Visual Repertoire requires.
 
+For investment-research questions (driver bridges, project economics, capacity, scenarios, lifecycle evidence), [INVESTMENT_ANALYSIS_GUIDE.md](INVESTMENT_ANALYSIS_GUIDE.md) maps each question to existing patterns and lists the constraints to state on the slide.
+
 ## Deck review
 
 `exhibits:review` reads an exhibit-system deck spec, a presentation-v2 `slide-specs` file or an executive slide-content array. It applies the objective and heuristic rows of the Visual Integrity standard, section 5. It flags:

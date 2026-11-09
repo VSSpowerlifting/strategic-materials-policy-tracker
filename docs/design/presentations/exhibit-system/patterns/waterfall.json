@@ -34,7 +34,7 @@
   "fixture": "fixtures/waterfall.json",
   "integrity_rules": ["bridge-reconciles", "bridge-levels-nonnegative", "max-categories", "unique-labels"],
   "table_alternative": "A reconciliation table (line item, movement, running balance) for audit-grade lookup.",
-  "variations": ["Sources-and-uses for financing packages", "Driver bridge with subtotal columns"],
+  "variations": ["Sources-and-uses for financing packages (use sources-and-uses, E2)", "Driver sequence across consecutive bridges, each closing value opening the next (no subtotal columns)"],
   "limitations": ["Running balances must stay non-negative for the helper-series geometry", "Movements are read in sequence; the order is a presentation choice, not causation"],
   "excluded_alternatives": [
     { "form": "Stacked bar of opening and closing only", "reason": "Hides which movements produced the change" },
