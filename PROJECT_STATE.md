@@ -4,7 +4,7 @@
   - Slide 14 states the trade-off in its title. It compares equity plus a revolver with equity only across five situations (overrun, cost while unused, draw conditions, covenant tests, repayment), with a real answer in every Equity only cell.
   - Remaining capacity is described as conditional borrowing, not cash, with no implied guarantee of overrun coverage.
   - Slides 11, 12, 15 and 16 get decision titles and sentence cells.
-- Every figure and term is from draft 0.9 and its sources. The covenant cell says "liquidity floor", because the contract tests cash plus Cash Equivalents (C15). Model 1.0 and the cutoff are unchanged.
+- Every figure and term is from draft 0.9 and its sources. The covenant cell reads "Until trigger, $500m liquidity floor; then leverage and coverage", following C15's sequence; "liquidity floor" because the contract tests cash plus Cash Equivalents. Model 1.0 and the cutoff are unchanged.
 - New opt-in `role-matrix` option `layout.cellText` (`tests/exhibit-system-v091-options.test.ts`). The 0.9 PPTX re-renders byte-identical. Gap noted: `exhibits:review --strict` misses role-matrix cell-length errors that render catches.
 - Draft 0.8 stays the review baseline. No accessible PDF exists for 0.9.1. The HOLD stands; no merge or publication. See [QUALITY_REVIEW_V091](research/fi003/presentation/QUALITY_REVIEW_V091.md).
 

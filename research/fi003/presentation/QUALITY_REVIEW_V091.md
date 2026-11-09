@@ -33,18 +33,18 @@ Slide 14's situation rows:
 | Costs exceed cash on hand | May draw on $203m of remaining capacity if conditions are met | Needs a new raise on later terms; more dilution if it is equity |
 | Cost while unused | About $0.71m a year in commitment fees | No facility cost |
 | Before each draw | Representations must hold and no default may exist | No lender conditions |
-| Covenant tests | $500m liquidity floor; leverage and coverage tests after trigger | No facility covenants |
+| Covenant tests | Until trigger, $500m liquidity floor; then leverage and coverage | No facility covenants |
 | Repayment | Any loans due by Aug 2030, or earlier under a springing maturity | No repayment obligation |
 
 Every figure and term already appears in draft 0.9 and its sources:
 
 - the $203m remaining capacity (30 Jun and 30 Sep 2026);
-- the $0.7105m expired commitment fees, the same figure as the 0.9 annotation;
+- the about $0.71m a year commitment fee: model 1.0's fee on the $203m remaining capacity at zero draw, at the 0.35% a year pre-trigger rate (S09 §2.09(a)) on an illustrative 360-day rate year. It is the same figure as the 0.9 annotation. It is not the $7.4m aggregate commitment and structuring fee expense;
 - the $500m minimum liquidity covenant;
 - the springing maturity and the August 2030 maturity;
 - the $724.2m net equity.
 
-None is new. The covenant cell says "liquidity floor", not "cash minimum". Before a trigger, the contract tests unrestricted cash plus contractual Cash Equivalents (C15, S09 §7.11). The covenant is also not a cash pledge, since cash, deposit and securities accounts are excluded from the collateral, subject to a proceeds carveback (C17, S09 §1.01). The draw-conditions cell restates S09 §4.02 (C53). The Equity only repayment cell was first drafted with a dilution comparison. That wording was dropped because both options carry the same equity dilution.
+None is new. The covenant cell is sequential, as in C15: the liquidity floor applies until a Covenant Trigger Event, and the leverage and coverage tests apply after it. It says "liquidity floor", not "cash minimum". Before a trigger, the contract tests unrestricted cash plus contractual Cash Equivalents (C15, S09 §7.11). The covenant is also not a cash pledge, since cash, deposit and securities accounts are excluded from the collateral, subject to a proceeds carveback (C17, S09 §1.01). The draw-conditions cell summarises the representation and no-Default conditions (C53, S09 §4.02). The Equity only repayment cell was first drafted with a dilution comparison. That wording was dropped because both options carry the same equity dilution.
 
 ## Shared-code change and its effect on committed drafts
 
@@ -62,11 +62,11 @@ Inputs: `v091/build_spec.py`, `v091/spec.json`, `v091/export_pdf.sh`. Outputs: `
 
 | File | SHA-256 |
 |---|---|
-| `fi003-jpmorgan-mp-materials-draft-0.9.1.pptx` | `58892a8e4a92931027bf35747131e85839dc821f4c65752b52a76f78de805a2b` |
-| `fi003-jpmorgan-mp-materials-draft-0.9.1.manifest.json` | `bdd1fc96735aba7131ba5694c636116b05c76d30f7d985974e0bb72c441bbbbd` |
-| `fi003-jpmorgan-mp-materials-draft-0.9.1.pdf` | `15db06bf5223e6ea3fc69f926baf7bdb96b0f04a078d4e43d56bd5e266e412ca` |
-| `fi003-draft-0.9.1-contact-sheet.png` | `91be42e25f070acf06502cde12f4a42ac6f186d543560548be85f3ae8e4cdfa1` |
-| `v091/spec.json` | `e08bd9e31b9ac4c75849206991d3df0ec207638c8124b43e1263ddf0b07160a7` |
+| `fi003-jpmorgan-mp-materials-draft-0.9.1.pptx` | `cebba41250b9f270d6d9195f603567acc0855f960ff072d77c65b4a9cd655365` |
+| `fi003-jpmorgan-mp-materials-draft-0.9.1.manifest.json` | `fc07c83d513a45f54982d7bc745b6da491fffc18e5632224f6a9909abebc755d` |
+| `fi003-jpmorgan-mp-materials-draft-0.9.1.pdf` | `91a1e026ad27e266c268bea63eed15be462e3190eb9cedd2ec7b4606a1ebbc13` |
+| `fi003-draft-0.9.1-contact-sheet.png` | `3c12452ddcdf54726cf42e6c1fae31f8e127df72f013a51f0191d2890a3e4bfd` |
+| `v091/spec.json` | `49689871548be606e6db14189feaeab853d2f33c40daec5a85259c45ae5b4e6b` |
 
 The spec and PPTX are deterministic. The PDF and contact sheet come from LibreOffice and are not expected to be byte-reproducible across machines.
 
@@ -94,7 +94,7 @@ The render step refuses to overwrite an existing PPTX.
 
 - Opening, editing, saving and reopening in native Microsoft PowerPoint.
 - Screen-reader reading order.
-- **Human financial and editorial review of the new wording on slides 11, 12, 14, 15 and 16.** The slide 14 cells restate facility terms in plain language: the draw conditions, the covenant triggers and the springing maturity. A reviewer should confirm that each simplification holds against the credit agreement.
+- **Human financial and editorial review of the new wording on slides 11, 12, 14, 15 and 16.** The slide 14 cells restate facility terms in plain language: the draw conditions, the covenant triggers and the springing maturity. A reviewer should confirm that each simplification holds against the credit agreement. The draw-conditions cell omits one condition: performance of the Defense agreements, subject to a Material Adverse Effect exception (C53, S09 §6.16).
 - Source-rights approval, publication authorization and the PR's merge conflicts with main. These are out of scope.
 
 ## Decisions for the maintainer

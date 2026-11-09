@@ -958,7 +958,7 @@
               "label": "Covenant tests",
               "cells": [
                 {
-                  "qualifier": "$500m liquidity floor; leverage and coverage tests after trigger"
+                  "qualifier": "Until trigger, $500m liquidity floor; then leverage and coverage"
                 },
                 {
                   "qualifier": "No facility covenants"
