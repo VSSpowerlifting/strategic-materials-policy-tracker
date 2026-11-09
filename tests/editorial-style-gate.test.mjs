@@ -105,3 +105,58 @@ test("review records cover publication pages, but exclude static social assets",
 test("page hash changes when table or metadata source changes even without JSX paragraph edits", () => {
   assert.notEqual(pageHash(source), pageHash(source + '\nconst scope = ["changed"];'));
 });
+
+
+import { execFileSync, spawnSync } from "node:child_process";
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+test("integration: missing signoff and flagged contrast fail, corrected copy passes", () => {
+  const dir = mkdtempSync(join(tmpdir(), "smpt-editorial-ci-"));
+  const article = "app/research/example/page.tsx";
+  const record = "docs/editorial/reviews/example.json";
+  const gate = fileURLToPath(new URL("../scripts/editorial-style-gate.mjs", import.meta.url));
+  const git = (...args) => execFileSync("git", args, { cwd: dir, encoding: "utf8" }).trim();
+  const put = (path, content) => {
+    mkdirSync(dirname(join(dir, path)), { recursive: true });
+    writeFileSync(join(dir, path), content);
+  };
+  const run = (sha) => spawnSync(process.execPath, [gate], {
+    cwd: dir,
+    env: { ...process.env, EDITORIAL_BASE_SHA: sha },
+    encoding: "utf8",
+  });
+  try {
+    git("init", "-q");
+    git("config", "user.name", "Editorial CI Test");
+    git("config", "user.email", "ci@example.invalid");
+    put(article, "<p>Original statement.</p>");
+    git("add", "."); git("commit", "-qm", "Baseline research page");
+    const base = git("rev-parse", "HEAD");
+
+    const flagged = "<p>That preserves the pause; it does not repeal the restrictions.</p>";
+    put(article, flagged);
+    git("add", "."); git("commit", "-qm", "Introduce missed contrast");
+    const missing = run(base);
+    assert.notEqual(missing.status, 0);
+    assert.match(missing.stderr, /without a fresh/);
+
+    put(record, JSON.stringify(review(article, pageHash(flagged))));
+    git("add", "."); git("commit", "-qm", "Add review record");
+    const flaggedResult = run(base);
+    assert.notEqual(flaggedResult.status, 0);
+    assert.match(flaggedResult.stderr, /contrast-after-punctuation/);
+
+    const corrected = "<p>The original regulations remain in place, with implementation suspended.</p>";
+    put(article, corrected);
+    put(record, JSON.stringify(review(article, pageHash(corrected))));
+    git("add", "."); git("commit", "-qm", "Correct prose and update signoff");
+    const approved = run(base);
+    assert.equal(approved.status, 0, approved.stderr);
+    assert.match(approved.stdout, /gate passed/i);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
