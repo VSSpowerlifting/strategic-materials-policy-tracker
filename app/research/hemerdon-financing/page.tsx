@@ -19,14 +19,14 @@ const assets = {
 } as const;
 
 export const metadata: Metadata = {
-  title: "Inside Tungsten West's £71 Million Restart Financing — Financial Intelligence 001",
+  title: "Inside Tungsten West's £71 Million Restart Financing — Strategy & Finance",
   description: "Independent SMPT financial research on the National Wealth Fund's Hemerdon investment, loan terms, remaining restart expenditure and bounded financial sensitivities.",
   alternates: { canonical: "/research/hemerdon-financing" },
   openGraph: {
     type: "article",
     url: site.url + "/research/hemerdon-financing",
     siteName: site.name,
-    title: "Inside Tungsten West's £71 Million Restart Financing | SMPT FI001",
+    title: "Inside Tungsten West's £71 Million Restart Financing | SMPT",
     description: "Government capital, project expenditure and refinancing risk at Hemerdon.",
   },
 };
@@ -62,8 +62,8 @@ export default function HemerdonFinancing() {
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
             ← Research
           </Link>
-          
-          <h1 className="mt-8 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Strategy &amp; Finance</p>
+          <h1 className="mt-4 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             Inside Tungsten West&apos;s £71 Million Restart Financing
           </h1>
           <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
