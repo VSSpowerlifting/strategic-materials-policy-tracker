@@ -113,7 +113,7 @@ Produced by `v091/remediate_pdf_v091.py`, ported from the 0.8 remediation and pi
 - A screen-reader pass of the accessible PDF, and a full PDF/UA or WCAG audit. The link annotations lack `/Contents` descriptions.
 - **Human financial and editorial review** of the wording on slides 11, 12, 14, 15 and 16. This is assigned to Jiho (financial) and Ambrose (commercial).
 - Source-rights approval, publication authorization and the PR's merge conflicts with main. These are out of scope.
-- **Drive upload not done.** This session's Drive connector is signed in to an account that cannot see the private FI003 folder. The PPTX and the accessible PDF are staged with their upload titles and hashes in [DRIVE_UPLOAD.md](../outputs/presentation-draft-v091/DRIVE_UPLOAD.md). No folder was created and no sharing was changed.
+- **Drive upload not done.** This session's Drive connector could not reach the private FI003 folder. A title search found nothing, and the known draft 0.5 Slides and model-sheet IDs returned "not found". The PPTX and the accessible PDF are staged with their upload titles and hashes in [DRIVE_UPLOAD.md](../outputs/presentation-draft-v091/DRIVE_UPLOAD.md). No folder was created and no sharing was changed.
 
 ## Decisions for the maintainer
 

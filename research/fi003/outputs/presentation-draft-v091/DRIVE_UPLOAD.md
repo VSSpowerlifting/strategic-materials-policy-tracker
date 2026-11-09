@@ -11,7 +11,7 @@ Upload each file with conversion to Google formats turned off. A converted Googl
 
 ## Why these are staged and not uploaded
 
-On 8 November 2026 the Drive connector in the Claude session was signed in to a different account. That account cannot see the FI003 folder: a title search finds nothing, and the draft 0.5 Slides file ID returns "not found". Making a new folder would split the record, so nothing was uploaded.
+On 8 November 2026 the Claude session's Drive connector was working: it listed recent files. It could not reach the FI003 folder, though. A title search for "FI003" found nothing, and both known FI003 file IDs, the draft 0.5 Slides deck and the native model sheet, returned "not found". The likely cause is that the connector uses an account without access to the folder, but this was not confirmed. A new folder would split the record, so nothing was uploaded.
 
 ## Not on this list
 

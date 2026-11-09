@@ -9,7 +9,7 @@
     - The $203m is conditional capacity. Drawing it requires true representations, no Default and a credit request (S09 §4.02). It stays distinct from cash and from the $500m liquidity covenant.
 - Deliverables: an editable PPTX (the original) and a remediated accessible PDF (a reading copy), produced by `v091/remediate_pdf_v091.py` and covered by `research/fi003/test_presentation_v091_accessibility.py`. Hashes, chart-XML/xlsx checks, the link audit and limits are in [QUALITY_REVIEW_V091](research/fi003/presentation/QUALITY_REVIEW_V091.md).
 - The Jiho and Ambrose handoffs now point to 0.9.1, with their assignments unchanged. Messages are still unsent and sharing is unchanged. Model 1.0, the 6 November cutoff and the sources are unchanged. The S09 served-byte hash difference is documented, and `sources.json` was not edited.
-- The Drive upload is staged, not done. This session's Drive connector cannot see the FI003 folder. Titles and hashes are in `research/fi003/outputs/presentation-draft-v091/DRIVE_UPLOAD.md`.
+- The Drive upload is staged, not done. This session's Drive connector could not reach the FI003 folder: both known FI003 file IDs returned "not found". Titles and hashes are in `research/fi003/outputs/presentation-draft-v091/DRIVE_UPLOAD.md`.
 - The HOLD stands. No merge, deploy or publication.
 
 ## 2026-11-08: FI003 draft 0.9.1 decision-clarity refinement (draft PR #215)
