@@ -52,3 +52,15 @@ test("homepage featured research cards use the same public categories", () => {
   assert.equal(home.split('category: "Policy Research"').length - 1, 1);
   assert.doesNotMatch(home, /category: "(Financial Intelligence|Applied Strategy|Research Dossier|Policy Analysis)/);
 });
+
+test("China article has a publication-specific LinkedIn/Open Graph image", () => {
+  const article = read("app/research/china-export-control-suspension-extension/page.tsx");
+  const card = read("app/research/china-export-control-suspension-extension/opengraph-image.tsx");
+  assert.match(article, /images: \[\{/);
+  assert.match(article, /twitter: \{/);
+  assert.match(article, /summary_large_image/);
+  assert.match(card, /new ImageResponse\(/);
+  assert.match(card, /width: 1200, height: 630/);
+  assert.match(card, /January 10, 2027/);
+  assert.match(card, /Export-Control Pause/);
+});

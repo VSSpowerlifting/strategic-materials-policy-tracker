@@ -39,6 +39,54 @@
   - Interaction checks: keyboard on the chart and heatmap, URL-param round trip and reduced motion.
 - Not merged, deployed or published.
 
+## 2026-11-09: FI002 deck release candidate 4, styled and clickable sources (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-4/` holds the RC4 PPTX, PDF, contact sheet, renders, manifest and QC record (with the release handoff). It is built from the same revision 5 source with `make_release_candidate.py --candidate rc4`.
+- The only change from RC3 is the source-link treatment. The 29 source phrases are underlined in the SMPT accessible accent `#7A5510` and are now real hyperlinks in the PPTX as well as the PDF. The PDF carries 29 URI annotations, 29 tagged `/Link` structure elements and `/Contents` descriptions. Text, figures, charts, workbooks, fonts and layout match RC3; only the footer band differs in the renders.
+- RC4 files: PPTX `54e0d620…32168`, PDF `9e1c9765…ba07` (full hashes in the QC record).
+- All repository gates pass (1164 tests, 28 pre-existing lint warnings). The RC3 and earlier archives are unchanged.
+- Still open: the PowerPoint tier (open, click links, Edit Data, save; PowerPoint is not installed here), the Drive upload (the connector cannot see the folder under the university account), human approval, then the release session (merge #233, replace the public downloads, Drive, post-deploy checks).
+
+## 2026-11-09: FI002 deck release candidate 3, clickable PDF sources (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-3/` holds the RC3 PPTX, PDF, contact sheet, renders, manifest and QC record. It is built from the same revision 5 source with `make_release_candidate.py --candidate rc3`.
+- The only change from RC2 is 29 link annotations added to the PDF source lines, each pointing at the matching URL in the revision 5 evidence list. The PPTX, renders and contact sheet are byte- or pixel-identical to RC2's, and the PDF text is equal.
+- PR #233's conflict with `main` (only `PROJECT_STATE.md`) is resolved locally in merge commit 2757f42; it is not pushed.
+- All repository gates pass on the merged tree (1164 tests). CI has not run on the merged head.
+- Still open: the PowerPoint tier, the Drive upload (the connector cannot see the folder under the university account), CI on a pushed head and human approval.
+
+## 2026-11-09: FI002 deck release candidate 2 (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-2/` holds the RC2 PPTX, PDF, contact sheet, renders, manifest and QC record. RC2 is built from `output/review/revision-5/` with `make_release_candidate.py --candidate rc2`.
+- Changes from RC1:
+  - the slide 2 and slide 6 titles now state that the $2.83bn and $2.27bn figures are modeled sensitivities;
+  - slide 11's decision tree becomes rows, using the new opt-in `condition-tree` `form: "rows"`, with readiness first;
+  - the RC1 slide-11 overlap item is resolved.
+- No findings, sources or figures change, and the research cutoff is still 5 Nov 2026. Revision 4 and RC1 are unchanged.
+- The PDF embeds Archivo only and the LibreOffice tier passes. All repository gates pass (1145 tests).
+- Still open: the PowerPoint tier, the Drive upload (blocked on the university account) and human approval.
+
+## 2026-11-09: FI002 deck release candidate 1 (draft PR #233)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-1/` holds the RC1 PPTX, PDF, contact sheet, renders, manifest and QC record. The builder is `docs/research/fi002-bhp-copper/release/make_release_candidate.py`.
+- Built from revision 4, which stays archived unchanged. The badge and internal labels are removed. No figures or wording change, and the research cutoff is still 5 Nov 2026.
+- The PDF embeds Archivo only. The LibreOffice editability tier passes. All 6 BHP links load in a real browser.
+- Still open:
+  - the PowerPoint tier (PowerPoint is not installed);
+  - the slide-11 connector-line overlap, inherited from rev4, for the reviewer to judge;
+  - the Drive upload, blocked because the connector is not on `ben.yang@gwmail.gwu.edu`;
+  - human approval.
+- The live deck, downloads and Drive files are unchanged.
+
+## 2026-11-09: FI002 executive deck revision 4 (draft PR #233, review copy)
+
+- Branch `claude/fi002-presentation-redesign-8ed4f5`, which includes `d13b5bb` (opt-in `plain_frame` for research decks).
+- The 11-slide editorial and visual redesign is saved in `docs/research/fi002-bhp-copper/output/review/revision-4/`: PPTX, tagged PDF, renders, contact sheet and gate A–E QC record. It adds no new research and changes no figures.
+- The editorial authenticity standard is now v1.1. A new §2 rule covers manufactured terms and micro-labels.
+- The live 12-slide deck and the download links are unchanged. Human publication approval is pending.
+- Drive review copies are not uploaded yet. The Drive connector cannot see the university folder, so it is probably on another account.
+- Open items: re-export the PDF with Archivo; the PowerPoint/LibreOffice editability tiers; a browser check of the BHP links (they return 403 to automated requests); removing the DRAFT badge for release.
+
 ## 2026-11-09: Policy Analysis 001 on the suspension extension (stacked draft PR)
 
 - Branch `claude/smpt-research-china-suspension-extension`, created from `c7c0d55` (the head of draft PR #231). Draft PR only: not merged, deployed or published. AI-generated analysis: a draft until maintainer approval. The review below is automated and is not human approval.

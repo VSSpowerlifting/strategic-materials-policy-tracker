@@ -54,3 +54,19 @@ export function formatMonthYear(iso: string): string {
 export function isoYear(iso: string): string {
   return iso.slice(0, 4);
 }
+
+/** Site masthead date, e.g. "2026-11-09" → "Nov 9, 2026". */
+export function formatDateUS(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (!m) return iso;
+  const [, y, mm, dd] = m;
+  return `${MONTHS[Number(mm) - 1]} ${Number(dd)}, ${y}`;
+}
+
+/** Site footer date, e.g. "2026-11-09" → "November 9, 2026". */
+export function formatDateLongUS(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (!m) return iso;
+  const [, y, mm, dd] = m;
+  return `${MONTHS_LONG[Number(mm) - 1]} ${Number(dd)}, ${y}`;
+}

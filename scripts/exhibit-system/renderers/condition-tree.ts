@@ -1,22 +1,32 @@
 // J2 condition-tree — a decision or eligibility tree: condition nodes with named
 // branches leading to terminal outcome boxes, laid out left to right by depth.
 // Native shapes; geometry and text are editable, nothing is data-bound.
+// Opt-in `form: "rows"` lists the outcomes instead, as a native table of
+// outcome and the evidence each needs, the highlighted outcome first; it draws
+// no connectors, branch labels, legend or node boxes.
 import { arr, obj, oneOf, optStr, str } from "../contract";
 import { edgesResolve, maxItems, minItems, uniqueLabels } from "../integrity";
 import { C } from "../primitives";
-import type { IntegrityIssue, RenderHelpers, Renderer } from "../types";
+import type { IntegrityIssue, RenderHelpers, Renderer, TableCell } from "../types";
 
 const KINDS = ["condition", "outcome"] as const;
+const FORMS = ["tree", "rows"] as const;
+/** Longest outcome note the rows form sets without crowding its row. */
+export const NOTE_LIMIT = 230;
 
 export interface TreeNode {
   id: string;
   label: string;
   kind: (typeof KINDS)[number];
   branches: { label: string; to: string }[];
+  /** Rows form only: the evidence or condition that leads to this outcome. */
+  note?: string;
 }
 export interface ConditionTreeData {
   /** Outcome whose route from the root is highlighted (the single accent). */
   highlightOutcomeId?: string;
+  /** "tree" (default) draws the tree; "rows" lists outcomes with their notes. */
+  form: (typeof FORMS)[number];
   /** The first node is the root. */
   nodes: TreeNode[];
 }
@@ -69,12 +79,14 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     const o = obj(d, "data");
     return {
       highlightOutcomeId: optStr(o.highlightOutcomeId, "data.highlightOutcomeId"),
+      form: o.form === undefined ? "tree" : oneOf(o.form, FORMS, "data.form"),
       nodes: arr(o.nodes, "data.nodes").map((x, i) => {
         const r = obj(x, `data.nodes[${i}]`);
         return {
           id: str(r.id, `data.nodes[${i}].id`),
           label: str(r.label, `data.nodes[${i}].label`),
           kind: oneOf(r.kind, KINDS, `data.nodes[${i}].kind`),
+          note: optStr(r.note, `data.nodes[${i}].note`),
           branches: arr(r.branches ?? [], `data.nodes[${i}].branches`, 0).map((b, j) => {
             const br = obj(b, `data.nodes[${i}].branches[${j}]`);
             return {
@@ -114,9 +126,19 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     if (d.highlightOutcomeId !== undefined && !d.nodes.some((n) => n.id === d.highlightOutcomeId && n.kind === "outcome")) {
       issues.push({ rule: "highlight-resolves", message: `highlighted outcome ${d.highlightOutcomeId} is not a declared outcome` });
     }
+    for (const n of d.nodes) {
+      if (n.note === undefined) {
+        if (d.form === "rows" && n.kind === "outcome") issues.push({ rule: "rows-note", message: `outcome ${n.id} needs a note in the rows form` });
+        continue;
+      }
+      if (d.form !== "rows") issues.push({ rule: "rows-note", message: `${n.id} has a note, which only the rows form shows` });
+      else if (n.kind !== "outcome") issues.push({ rule: "rows-note", message: `condition ${n.id} has a note; only outcomes carry notes` });
+      if (n.note.length > NOTE_LIMIT) issues.push({ rule: "cell-length", message: `${n.id}.note is ${n.note.length} characters; limit ${NOTE_LIMIT}` });
+    }
     return issues;
   },
   render(h, d) {
+    if (d.form === "rows") return renderRows(h, d);
     const A = h.area;
     const byId = new Map(d.nodes.map((n) => [n.id, n]));
     const { depth } = walk(d);
@@ -228,3 +250,25 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     });
   },
 };
+
+/** Outcomes as rows: the highlighted one first, the rest in tree order. */
+function renderRows(h: RenderHelpers, d: ConditionTreeData): void {
+  const A = h.area;
+  const leaves = d.nodes.filter((n) => n.kind === "outcome");
+  const ordered = [...leaves.filter((n) => n.id === d.highlightOutcomeId), ...leaves.filter((n) => n.id !== d.highlightOutcomeId)];
+  const labelW = 3.3;
+  const none = { type: "none" };
+  const rule = { type: "solid", pt: 0.75, color: C.border };
+  const strong = { type: "solid", pt: 2, color: C.accent };
+  const rows: TableCell[][] = ordered.map((n, i) => {
+    const hot = n.id === d.highlightOutcomeId;
+    const border = [i === 0 ? (hot ? strong : rule) : none, none, hot ? strong : rule, none];
+    const base = { valign: "top", margin: [0.1, 0.14, 0.1, 0], border };
+    return [
+      { text: n.label, options: { ...base, fontSize: 14, bold: true, color: hot ? C.accent : C.ink } },
+      { text: n.note ?? "", options: { ...base, fontSize: 13, color: C.ink } },
+    ];
+  });
+  const rowH = Math.min(1.05, A.h / ordered.length);
+  h.table("outcome-rows", rows, { x: A.x, y: A.y, w: A.w, colW: [labelW, A.w - labelW], rowH: ordered.map(() => rowH), fontSize: 13 });
+}

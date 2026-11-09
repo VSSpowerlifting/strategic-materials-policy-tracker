@@ -96,11 +96,14 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
     // Interpretation block: each note carries the number of the row it cites.
     const bx = x + tableW + 0.4;
     const bw = h.area.x + h.area.w - bx;
-    h.text("reading-heading", "annot", "READING THE TABLE", { x: bx, y, w: bw, h: 0.3, fontSize: 11, bold: true, color: C.muted, charSpacing: 1, valign: "middle" });
-    hairline(h, "reading-rule", "annot", bx, y + 0.34, bw);
-    const noteH = (h.area.h - 0.5) / d.notes.length;
+    const top = h.plain ? 0 : 0.5;
+    if (!h.plain) {
+      h.text("reading-heading", "annot", "READING THE TABLE", { x: bx, y, w: bw, h: 0.3, fontSize: 11, bold: true, color: C.muted, charSpacing: 1, valign: "middle" });
+      hairline(h, "reading-rule", "annot", bx, y + 0.34, bw);
+    }
+    const noteH = (h.area.h - top) / d.notes.length;
     d.notes.forEach((n, i) => {
-      const ny = y + 0.5 + i * noteH;
+      const ny = y + top + i * noteH;
       h.text(`note-ref-${i + 1}`, "annot", String(n.ref), {
         x: bx, y: ny + 0.02, w: 0.3, h: 0.3, shape: h.shapes.ellipse, fill: { color: C.neutralDark },
         fontSize: 11, bold: true, color: C.paper, align: "center", valign: "middle",

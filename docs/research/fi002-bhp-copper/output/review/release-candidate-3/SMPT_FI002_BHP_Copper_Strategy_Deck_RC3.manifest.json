@@ -1,0 +1,424 @@
+{
+  "deck": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC3.pptx",
+  "derived_from": {
+    "path": "docs/research/fi002-bhp-copper/output/review/revision-5/SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pptx",
+    "sha256": "071a67e82a2fcb3b0031ad18ce1c2ec93127d8e8d77496e70cd31e6c3ca483b6",
+    "pdf": "docs/research/fi002-bhp-copper/output/review/revision-5/SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pdf",
+    "pdf_sha256": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109"
+  },
+  "pptx_sha256": "fcadecae7053fe490ec8adf5be796f1c2847d990ef140e0f39807c99fd8cd8f5",
+  "pdf": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC3.pdf",
+  "pages": 11,
+  "embedded_fonts": [
+    "BAAAAA+Archivo-Bold",
+    "CAAAAA+Archivo-Regular",
+    "DAAAAA+Archivo-Bold",
+    "EAAAAA+Archivo-Regular",
+    "FAAAAA+Archivo-Bold",
+    "GAAAAA+Archivo-Regular",
+    "HAAAAA+Archivo-Regular",
+    "IAAAAA+Archivo-Regular",
+    "JAAAAA+Archivo-Regular",
+    "KAAAAA+Archivo-Bold",
+    "LAAAAA+Archivo-Regular"
+  ],
+  "links": 29,
+  "text_check": "each page equals SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pdf minus the badge (whitespace ignored)",
+  "tagged": true,
+  "title": "Goldman Sachs' Copper Outlook and BHP's $6 Billion Escondida Decision",
+  "pdf_sha256": "03b3095834bb9177dd687014f8823b980bce4add61a315ff99415012392d82b6",
+  "contact_sheet": "SMPT_FI002_RC3_contact_sheet.png",
+  "contact_sheet_sha256": "750c7343d4d8e09a5e5e5f28fca57418940c11f56f88e8c86e9c34aa0bcacf3e",
+  "renders": [
+    "slide-01.png",
+    "slide-02.png",
+    "slide-03.png",
+    "slide-04.png",
+    "slide-05.png",
+    "slide-06.png",
+    "slide-07.png",
+    "slide-08.png",
+    "slide-09.png",
+    "slide-10.png",
+    "slide-11.png"
+  ],
+  "source_links": [
+    {
+      "page": 2,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        228.3,
+        516.1
+      ]
+    },
+    {
+      "page": 2,
+      "text": "Annual Report 2026",
+      "evidence_id": "S03",
+      "uri": "https://www.bhp.com/-/media/documents/investors/annual-reports/2026/260818_bhpannualreport2026.pdf",
+      "rect": [
+        249.1,
+        505.2,
+        337.5,
+        516.1
+      ]
+    },
+    {
+      "page": 2,
+      "text": "World Bank CMO October 2026",
+      "evidence_id": "S12",
+      "uri": "https://thedocs.worldbank.org/en/doc/2ac43f46629cf90c2ea5b8929a343593-0050012026/original/CMO-October-2026.pdf",
+      "rect": [
+        342.5,
+        505.2,
+        481.4,
+        516.1
+      ]
+    },
+    {
+      "page": 2,
+      "text": "Goldman Sachs revision as publicly reported",
+      "evidence_id": "S18",
+      "uri": "https://www.financialjuice.com/News/9812752/Goldman-Sachs-Copper---FJElite.aspx?xy=rss",
+      "rect": [
+        486.4,
+        505.2,
+        682.2,
+        516.1
+      ]
+    },
+    {
+      "page": 2,
+      "text": "SMPT calculations",
+      "evidence_id": "SMPT",
+      "uri": "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/main/docs/research/fi002-bhp-copper/output/SMPT_FI002_Methodology.md",
+      "rect": [
+        687.3,
+        505.2,
+        769.8,
+        516.1
+      ]
+    },
+    {
+      "page": 3,
+      "text": "World Bank CMO October 2026, Table 1",
+      "evidence_id": "S12",
+      "uri": "https://thedocs.worldbank.org/en/doc/2ac43f46629cf90c2ea5b8929a343593-0050012026/original/CMO-October-2026.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        256.5,
+        516.1
+      ]
+    },
+    {
+      "page": 3,
+      "text": "FinancialJuice",
+      "evidence_id": "S18",
+      "uri": "https://www.financialjuice.com/News/9812752/Goldman-Sachs-Copper---FJElite.aspx?xy=rss",
+      "rect": [
+        261.5,
+        505.2,
+        325.7,
+        516.1
+      ]
+    },
+    {
+      "page": 3,
+      "text": "Reuters via Business Recorder",
+      "evidence_id": "S20",
+      "uri": "https://www.brecorder.com/news/40445090/copper-flat-as-china-caution-outweighs-us-stockpiling-goldman-upgrade",
+      "rect": [
+        346.5,
+        505.2,
+        482.6,
+        516.1
+      ]
+    },
+    {
+      "page": 3,
+      "text": "Goldman Sachs Exchanges, 23 October 2026",
+      "evidence_id": "S16",
+      "uri": "https://www.goldmansachs.com/insights/goldman-sachs-exchanges/why-oil-prices-are-surging-despite-recovering-supply",
+      "rect": [
+        613.0,
+        505.2,
+        814.9,
+        516.1
+      ]
+    },
+    {
+      "page": 4,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        228.3,
+        516.1
+      ]
+    },
+    {
+      "page": 4,
+      "text": "exchange release",
+      "evidence_id": "S02",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_exchangerelease.pdf",
+      "rect": [
+        249.1,
+        505.2,
+        326.7,
+        516.1
+      ]
+    },
+    {
+      "page": 4,
+      "text": "BHP Annual Report 2026",
+      "evidence_id": "S03",
+      "uri": "https://www.bhp.com/-/media/documents/investors/annual-reports/2026/260818_bhpannualreport2026.pdf",
+      "rect": [
+        331.7,
+        505.2,
+        442.7,
+        516.1
+      ]
+    },
+    {
+      "page": 5,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        228.3,
+        516.1
+      ]
+    },
+    {
+      "page": 5,
+      "text": "BHP Q1 FY2027 operational review",
+      "evidence_id": "S05",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/261020_bhpoperationalreviewforthequarterended30september2026-pdf.pdf",
+      "rect": [
+        233.3,
+        505.2,
+        388.3,
+        516.1
+      ]
+    },
+    {
+      "page": 5,
+      "text": "SMPT Price_Sensitivity calculations",
+      "evidence_id": "SMPT",
+      "uri": "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/main/docs/research/fi002-bhp-copper/output/SMPT_FI002_Methodology.md",
+      "rect": [
+        393.2,
+        505.2,
+        551.0,
+        516.1
+      ]
+    },
+    {
+      "page": 6,
+      "text": "BHP Q1 FY2027 operational review guidance",
+      "evidence_id": "S05",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/261020_bhpoperationalreviewforthequarterended30september2026-pdf.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        279.2,
+        516.1
+      ]
+    },
+    {
+      "page": 6,
+      "text": "SMPT methodology proxy calculation",
+      "evidence_id": "SMPT",
+      "uri": "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/main/docs/research/fi002-bhp-copper/output/SMPT_FI002_Methodology.md",
+      "rect": [
+        284.2,
+        505.2,
+        448.4,
+        516.1
+      ]
+    },
+    {
+      "page": 7,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        228.3,
+        516.1
+      ]
+    },
+    {
+      "page": 7,
+      "text": "BHP Escondida permit submission, March 2026",
+      "evidence_id": "S07",
+      "uri": "https://www.bhp.com/news/articles/03/escondida--bhp-submits-environmental-permit-to-build-a-new-concentrator-plant",
+      "rect": [
+        233.3,
+        505.2,
+        443.8,
+        516.1
+      ]
+    },
+    {
+      "page": 7,
+      "text": "SEIA index, retrieved 5 November 2026",
+      "evidence_id": "S17",
+      "uri": "https://ambihub.cl/seia/proyecto/2167965265",
+      "rect": [
+        448.8,
+        505.2,
+        622.3,
+        516.1
+      ]
+    },
+    {
+      "page": 8,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        228.3,
+        516.1
+      ]
+    },
+    {
+      "page": 8,
+      "text": "SMPT methodology and Threshold_Sensitivities calculations",
+      "evidence_id": "SMPT",
+      "uri": "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/main/docs/research/fi002-bhp-copper/output/SMPT_FI002_Methodology.md",
+      "rect": [
+        233.3,
+        505.2,
+        499.6,
+        516.1
+      ]
+    },
+    {
+      "page": 9,
+      "text": "SMPT Threshold_Sensitivities calculations",
+      "evidence_id": "SMPT",
+      "uri": "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/main/docs/research/fi002-bhp-copper/output/SMPT_FI002_Methodology.md",
+      "rect": [
+        81.5,
+        505.2,
+        268.9,
+        516.1
+      ]
+    },
+    {
+      "page": 9,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        273.9,
+        505.2,
+        420.7,
+        516.1
+      ]
+    },
+    {
+      "page": 10,
+      "text": "BHP Annual Report 2026",
+      "evidence_id": "S03",
+      "uri": "https://www.bhp.com/-/media/documents/investors/annual-reports/2026/260818_bhpannualreport2026.pdf",
+      "rect": [
+        81.5,
+        505.2,
+        192.4,
+        516.1
+      ]
+    },
+    {
+      "page": 10,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        400.8,
+        505.2,
+        547.6,
+        516.1
+      ]
+    },
+    {
+      "page": 11,
+      "text": "BHP FY2026 results presentation",
+      "evidence_id": "S01",
+      "uri": "https://www.bhp.com/-/media/documents/media/reports-and-presentations/2026/260818_bhpresultsfortheyearended30june2026_presentation.pdf",
+      "rect": [
+        160.0,
+        505.2,
+        306.8,
+        516.1
+      ]
+    },
+    {
+      "page": 11,
+      "text": "Annual Report 2026",
+      "evidence_id": "S03",
+      "uri": "https://www.bhp.com/-/media/documents/investors/annual-reports/2026/260818_bhpannualreport2026.pdf",
+      "rect": [
+        327.6,
+        505.2,
+        416.0,
+        516.1
+      ]
+    },
+    {
+      "page": 11,
+      "text": "SMPT methodology",
+      "evidence_id": "SMPT",
+      "uri": "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/main/docs/research/fi002-bhp-copper/output/SMPT_FI002_Methodology.md",
+      "rect": [
+        421.0,
+        505.2,
+        508.8,
+        516.1
+      ]
+    }
+  ],
+  "source_links_note": "URI annotations over source-line text; no visual change. Annotations are not tagged in the PDF structure tree. The PPTX source lines are not hyperlinked.",
+  "changes": {
+    "shapes_removed": {
+      "ppt/slides/slide1.xml": "frame:cover-notice",
+      "ppt/slides/slide10.xml": "frame:draft-badge",
+      "ppt/slides/slide11.xml": "frame:draft-badge",
+      "ppt/slides/slide2.xml": "frame:draft-badge",
+      "ppt/slides/slide3.xml": "frame:draft-badge",
+      "ppt/slides/slide4.xml": "frame:draft-badge",
+      "ppt/slides/slide5.xml": "frame:draft-badge",
+      "ppt/slides/slide6.xml": "frame:draft-badge",
+      "ppt/slides/slide7.xml": "frame:draft-badge",
+      "ppt/slides/slide8.xml": "frame:draft-badge",
+      "ppt/slides/slide9.xml": "frame:draft-badge"
+    },
+    "note_labels_removed": 54,
+    "font_replacements": {
+      "ppt/slideMasters/slideMaster1.xml": 9,
+      "ppt/theme/theme1.xml": 5
+    }
+  },
+  "unchanged": "all other package parts and XML bytes are identical to SMPT_FI002_BHP_Copper_Strategy_Deck_rev5.pptx (verified)",
+  "research_cutoff": "2026-11-05",
+  "review_gates": "agent QC recorded; human approval pending",
+  "publication_authorization": "pending human approval",
+  "tools": {
+    "libreoffice": "LibreOffice 26.8.2.2 9dea406ab7695df6325b11b0e19fdca8db4b7276",
+    "pymupdf": "1.26.5"
+  }
+}
