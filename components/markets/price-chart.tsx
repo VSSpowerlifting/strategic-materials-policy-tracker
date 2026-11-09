@@ -1,21 +1,31 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Observation } from "@/lib/markets";
-import { formatNumber, formatPeriod } from "@/lib/markets";
+import type { Frequency, Observation, SourceBreak } from "@/lib/markets";
+import { formatNumber, formatPeriod, periodFrequency, periodsBetween } from "@/lib/markets";
 
 export interface ChartLine {
   id: string;
   label: string;
   color: string;
   dash: string | undefined;
-  /** Already windowed (and indexed, in the indexed view). Missing months are simply absent. */
+  /** Already windowed (and indexed, in the indexed view). Missing periods are simply absent. */
   points: Observation[];
+  /** Stated changes of underlying source inside the window. The line is not joined across one. */
+  breaks: SourceBreak[];
+  /** Unit shown in the tooltip, e.g. "US$/t" or "index". */
+  unit: string;
+  digits: number;
+}
+
+interface Segment {
+  d: string;
+  estimated: boolean;
 }
 
 interface PriceChartProps {
   lines: ChartLine[];
-  /** Every month in the window, oldest first. The x-axis spans exactly these. */
+  /** Every period in the window, oldest first. The x-axis spans exactly these. */
   periods: string[];
   mode: "indexed" | "absolute";
   /** Base month of the indexed view; draws the 100 reference line. */
@@ -28,12 +38,46 @@ interface PriceChartProps {
   label: string;
 }
 
-const MARGIN = { top: 16, right: 88, bottom: 32, left: 56 };
+const MARGIN = { top: 16, bottom: 32, left: 56 };
 const X_STEPS = [1, 2, 3, 6, 12, 24, 36, 60];
 
-/** Index of a "YYYY-MM" month on a continuous scale. */
+/** Month number on a continuous scale, for calendar-aligned monthly ticks. */
 function monthIndex(p: string): number {
   return Number(p.slice(0, 4)) * 12 + Number(p.slice(5, 7)) - 1;
+}
+
+/**
+ * Split a line into drawable pieces. Consecutive observations are joined;
+ * a missing period or a stated source break ends the piece. A step touching an
+ * estimated value is drawn separately so it can be dotted.
+ */
+export function lineSegments(
+  points: readonly Observation[],
+  periods: readonly string[],
+  breaks: readonly SourceBreak[],
+  x: (p: string) => number,
+  y: (v: number) => number,
+): { segments: Segment[]; singles: Array<{ cx: number; cy: number; estimated: boolean; period: string }> } {
+  const byPeriod = new Map(points.map((o) => [o.period, o]));
+  const breakAt = new Set(breaks.map((b) => b.period));
+  const segments: Segment[] = [];
+  const joined = new Set<string>();
+  for (let i = 1; i < periods.length; i++) {
+    const a = byPeriod.get(periods[i - 1]);
+    const b = byPeriod.get(periods[i]);
+    if (!a || !b || breakAt.has(periods[i])) continue;
+    const estimated = Boolean(a.estimated || b.estimated);
+    const step = `${x(a.period).toFixed(1)},${y(a.value).toFixed(1)}L${x(b.period).toFixed(1)},${y(b.value).toFixed(1)}`;
+    const prev = segments[segments.length - 1];
+    if (prev && prev.estimated === estimated && joined.has(a.period)) prev.d += `L${x(b.period).toFixed(1)},${y(b.value).toFixed(1)}`;
+    else segments.push({ d: `M${step}`, estimated });
+    joined.add(a.period);
+    joined.add(b.period);
+  }
+  const singles = points
+    .filter((o) => !joined.has(o.period))
+    .map((o) => ({ cx: x(o.period), cy: y(o.value), estimated: Boolean(o.estimated), period: o.period }));
+  return { segments, singles };
 }
 
 /** Round, evenly spaced y-ticks covering [min, max]. */
@@ -81,6 +125,8 @@ export function PriceChart({
   onFocus,
   label,
 }: PriceChartProps) {
+  const frequency: Frequency = periodFrequency(periods[0]) ?? "monthly";
+  const unitWord = frequency === "annual" ? "years" : "months";
   const wrapRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(800);
 
@@ -95,14 +141,19 @@ export function PriceChart({
   }, []);
 
   const height = Math.round(Math.min(400, Math.max(260, width * 0.46)));
-  const right = width < 480 ? 76 : MARGIN.right;
+  // Room for the longest direct label (≈6.6px per character at 12px), capped at 30% of the width.
+  const CHAR_W = 6.6;
+  const longest = lines.reduce((n, l) => Math.max(n, l.label.length), 0);
+  const right = Math.min(Math.max(Math.round(longest * CHAR_W) + 20, 56), Math.round(width * 0.3));
+  const maxChars = Math.max(4, Math.floor((right - 18) / CHAR_W));
+  const fit = (label: string) => (label.length > maxChars ? `${label.slice(0, maxChars - 1).trimEnd()}…` : label);
   const plotW = Math.max(40, width - MARGIN.left - right);
   const plotH = height - MARGIN.top - MARGIN.bottom;
 
   const geo = useMemo(() => {
     const first = periods[0];
     const span = Math.max(1, periods.length - 1);
-    const x = (p: string) => MARGIN.left + ((monthIndex(p) - monthIndex(first)) / span) * plotW;
+    const x = (p: string) => MARGIN.left + (periods.length > 1 ? periodsBetween(first, p) / span : 0.5) * plotW;
     const values = lines.flatMap((l) => l.points.map((o) => o.value));
     if (mode === "indexed" && basePeriod) values.push(100);
     const lo = values.length ? Math.min(...values) : 0;
@@ -113,33 +164,28 @@ export function PriceChart({
     const y1 = ticks[ticks.length - 1] ?? hi;
     const y = (v: number) => MARGIN.top + (1 - (v - y0) / (y1 - y0 || 1)) * plotH;
 
-    // x ticks: the smallest calendar-aligned step that keeps labels ~80px apart.
+    // x ticks: every year for annual data; otherwise the smallest calendar-aligned
+    // step that keeps labels ~80px apart.
     const maxLabels = Math.max(2, Math.floor(plotW / 80));
-    const step = X_STEPS.find((s) => periods.length / s <= maxLabels) ?? 60;
-    const xTicks = periods.filter((p) => monthIndex(p) % step === 0);
-    const yearOnly = step >= 12;
+    let xTicks: string[];
+    let yearOnly = true;
+    if (frequency === "annual") {
+      const step = Math.max(1, Math.ceil(periods.length / maxLabels));
+      xTicks = periods.filter((_, i) => i % step === 0);
+    } else {
+      const step = X_STEPS.find((s) => periods.length / s <= maxLabels) ?? 60;
+      xTicks = periods.filter((p) => monthIndex(p) % step === 0);
+      yearOnly = step >= 12;
+    }
 
     // Months where at least one plotted line has no value: drawn as a shaded band.
     const missing = periods.filter((p) => lines.some((l) => !l.points.some((o) => o.period === p)));
 
     const paths = lines.map((l) => {
-      const byPeriod = new Map(l.points.map((o) => [o.period, o.value]));
-      const segments: string[] = [];
-      const singles: Array<{ cx: number; cy: number }> = [];
-      let current: Array<[number, number]> = [];
-      const flush = () => {
-        if (current.length === 1) singles.push({ cx: current[0][0], cy: current[0][1] });
-        else if (current.length > 1) segments.push("M" + current.map(([a, b]) => `${a.toFixed(1)},${b.toFixed(1)}`).join("L"));
-        current = [];
-      };
-      for (const p of periods) {
-        const v = byPeriod.get(p);
-        if (v === undefined) flush();
-        else current.push([x(p), y(v)]);
-      }
-      flush();
+      const byPeriod = new Map(l.points.map((o) => [o.period, o]));
+      const { segments, singles } = lineSegments(l.points, periods, l.breaks, x, y);
       const last = l.points[l.points.length - 1];
-      return { id: l.id, d: segments.join(" "), singles, last, byPeriod };
+      return { id: l.id, segments, singles, last, byPeriod };
     });
 
     const endYs = spreadLabels(
@@ -150,7 +196,7 @@ export function PriceChart({
     );
 
     return { x, y, ticks, xTicks, yearOnly, missing, paths, endYs, span };
-  }, [lines, periods, mode, basePeriod, plotW, plotH]);
+  }, [lines, periods, mode, basePeriod, plotW, plotH, frequency]);
 
   const cursorIndex = cursor ? periods.indexOf(cursor) : -1;
 
@@ -208,7 +254,7 @@ export function PriceChart({
       ref={wrapRef}
       role="group"
       tabIndex={0}
-      aria-label={`${label}. Left and right arrows move between months, up and down change the emphasised series, Escape clears.`}
+      aria-label={`${label}. Left and right arrows move between ${unitWord}, up and down change the emphasised series, Escape clears.`}
       onKeyDown={onKeyDown}
       className="relative w-full rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
     >
@@ -273,34 +319,73 @@ export function PriceChart({
           />
         ) : null}
 
+        {/* Stated changes of underlying source */}
+        {lines.flatMap((l) =>
+          l.breaks
+            .filter((b) => periods.includes(b.period))
+            .map((b) => (
+              <g key={`brk-${l.id}-${b.period}`} pointerEvents="none">
+                <line
+                  x1={geo.x(b.period)}
+                  x2={geo.x(b.period)}
+                  y1={MARGIN.top}
+                  y2={MARGIN.top + plotH}
+                  stroke={l.color}
+                  strokeDasharray="1 4"
+                  strokeWidth={1.5}
+                />
+                <text x={geo.x(b.period) + 4} y={MARGIN.top + 10} fontSize={10} fill="var(--faint)">
+                  source change
+                </text>
+              </g>
+            )),
+        )}
+
         {/* Lines */}
         {lines.map((l, i) => {
           const p = geo.paths[i];
           const dim = focusId !== null && focusId !== l.id;
           const strong = focusId === l.id;
+          const markers = frequency === "annual" || periods.length <= 13;
           return (
             <g key={l.id} opacity={dim ? 0.3 : 1}>
-              <path
-                d={p.d}
-                fill="none"
-                stroke={l.color}
-                strokeWidth={strong ? 2.75 : 2}
-                strokeDasharray={l.dash}
-                strokeLinejoin="round"
-                strokeLinecap="round"
-              />
-              {p.singles.map((s) => (
-                <circle key={`${s.cx}-${s.cy}`} cx={s.cx} cy={s.cy} r={4} fill={l.color} stroke="var(--surface)" strokeWidth={2} />
+              {p.segments.map((seg) => (
+                <path
+                  key={seg.d}
+                  d={seg.d}
+                  fill="none"
+                  stroke={l.color}
+                  strokeWidth={strong ? 2.75 : 2}
+                  strokeDasharray={seg.estimated ? "2 4" : l.dash}
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                />
               ))}
-              {/* Wide invisible hit path so a line can be clicked to emphasise it */}
-              <path
-                d={p.d}
-                fill="none"
-                stroke="transparent"
-                strokeWidth={14}
-                style={{ cursor: "pointer" }}
-                onClick={() => onFocus(focusId === l.id ? null : l.id)}
-              />
+              {(markers ? l.points.map((o) => ({ cx: geo.x(o.period), cy: geo.y(o.value), estimated: Boolean(o.estimated), period: o.period })) : p.singles).map(
+                (s) => (
+                  <circle
+                    key={`pt-${s.period}`}
+                    cx={s.cx}
+                    cy={s.cy}
+                    r={4}
+                    fill={s.estimated ? "var(--surface)" : l.color}
+                    stroke={s.estimated ? l.color : "var(--surface)"}
+                    strokeWidth={2}
+                  />
+                ),
+              )}
+              {/* Wide invisible hit paths so a line can be clicked to emphasise it */}
+              {p.segments.map((seg) => (
+                <path
+                  key={`hit-${seg.d}`}
+                  d={seg.d}
+                  fill="none"
+                  stroke="transparent"
+                  strokeWidth={14}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => onFocus(focusId === l.id ? null : l.id)}
+                />
+              ))}
             </g>
           );
         })}
@@ -324,7 +409,8 @@ export function PriceChart({
                 fontWeight={focusId === l.id ? 700 : 500}
                 fill="var(--fg)"
               >
-                {l.label}
+                {fit(l.label)}
+                {fit(l.label) !== l.label ? <title>{l.label}</title> : null}
               </text>
             </g>
           );
@@ -342,16 +428,17 @@ export function PriceChart({
               strokeWidth={1}
             />
             {lines.map((l, i) => {
-              const v = geo.paths[i].byPeriod.get(cursor);
-              if (v === undefined) return null;
+              const o = geo.paths[i].byPeriod.get(cursor);
+              if (o === undefined) return null;
+              const v = o.value;
               return (
                 <circle
                   key={`dot-${l.id}`}
                   cx={geo.x(cursor)}
                   cy={geo.y(v)}
                   r={4.5}
-                  fill={l.color}
-                  stroke="var(--surface)"
+                  fill={o.estimated ? "var(--surface)" : l.color}
+                  stroke={o.estimated ? l.color : "var(--surface)"}
                   strokeWidth={2}
                   opacity={focusId !== null && focusId !== l.id ? 0.4 : 1}
                 />
@@ -360,6 +447,40 @@ export function PriceChart({
           </g>
         ) : null}
       </svg>
+
+      {cursor && cursorIndex !== -1 ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-2 z-10 w-56 rounded-md border border-border-strong bg-elevated px-3 py-2 text-xs"
+          style={
+            geo.x(cursor) > width / 2
+              ? { right: Math.max(8, width - geo.x(cursor) + 12) }
+              : { left: Math.min(width - 232, geo.x(cursor) + 12) }
+          }
+        >
+          <p className="tnum font-display font-semibold text-foreground">{formatPeriod(cursor, true)}</p>
+          <ul className="mt-1 space-y-1">
+            {lines.map((l, i) => {
+              const o = geo.paths[i].byPeriod.get(cursor);
+              return (
+                <li key={l.id} className="flex items-center gap-2">
+                  <svg width="14" height="8" aria-hidden="true" className="shrink-0">
+                    <line x1="0" x2="14" y1="4" y2="4" stroke={l.color} strokeWidth="2.5" strokeDasharray={l.dash} />
+                  </svg>
+                  <span className="min-w-0 flex-1 truncate text-muted">{l.label}</span>
+                  <span className="tnum text-foreground">
+                    {o ? `${formatNumber(o.value, mode === "indexed" ? 1 : l.digits)}${o.estimated ? "e" : ""}` : "n/a"}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="mt-1.5 text-faint">
+            {mode === "indexed" ? "Index, base period = 100" : lines[0]?.unit}
+            {geo.paths.some((p) => p.byPeriod.get(cursor)?.estimated) ? " · e = estimated" : ""}
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 }

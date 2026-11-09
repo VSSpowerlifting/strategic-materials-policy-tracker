@@ -289,3 +289,66 @@ test("CSV cells: formula injection defused, decimals kept numeric", () => {
   assert.equal(csvCell("a,b"), '"a,b"');
   assert.equal(csvCell(null), "");
 });
+
+// ---- Explorer UI ----------------------------------------------------------
+
+test("colour slots: a series keeps its slot when another is removed", async () => {
+  const { slotsFrom, toggleSlot } = await import("@/components/markets/market-monitor");
+  const known = new Set(["a", "b", "c", "d", "e", "f", "g"]);
+  const slots = slotsFrom(["a", "zz", "b", "a", "c"], known);
+  assert.deepEqual(slots, ["a", "b", "c", null, null, null]);
+  const removed = toggleSlot(slots, "b");
+  assert.deepEqual(removed, ["a", null, "c", null, null, null]);
+  assert.deepEqual(toggleSlot(removed, "d"), ["a", "d", "c", null, null, null]);
+  const full = slotsFrom(["a", "b", "c", "d", "e", "f", "g"], known);
+  assert.equal(full.includes("g"), false);
+  assert.deepEqual(toggleSlot(full, "g"), full, "a seventh series is refused, not assigned a generated hue");
+});
+
+test("chart segments: no join across gaps or source breaks; estimated steps drawn apart", async () => {
+  const { lineSegments } = await import("@/components/markets/price-chart");
+  const periods = ["2021", "2022", "2023", "2024", "2025"];
+  const x = (p: string) => Number(p) - 2021;
+  const y = (v: number) => v;
+  const full = obs([["2021", 1], ["2022", 2], ["2023", 3], ["2024", 4], ["2025", 5, true]]);
+  const r = lineSegments(full, periods, [{ period: "2023", statedAs: "new source" }], x, y);
+  assert.deepEqual(
+    r.segments.map((s) => [s.d, s.estimated]),
+    [["M0.0,1.0L1.0,2.0", false], ["M2.0,3.0L3.0,4.0", false], ["M3.0,4.0L4.0,5.0", true]],
+  );
+  assert.equal(r.singles.length, 0);
+  const gap = lineSegments(obs([["2021", 1], ["2023", 3], ["2024", 4]]), periods, [], x, y);
+  assert.deepEqual(gap.segments.map((s) => s.d), ["M2.0,3.0L3.0,4.0"]);
+  assert.deepEqual(gap.singles.map((s) => s.period), ["2021"]);
+});
+
+test("heat scale: round maximum near the 95th percentile", async () => {
+  const { heatScaleMax } = await import("@/components/markets/heatmap");
+  const row = (pcts: Array<number | null>) => ({
+    id: "r", label: "r", color: "#000", dash: undefined, unit: "u", digits: 0,
+    cells: pcts.map((pct, i) => ({
+      period: String(2000 + i),
+      change: pct === null ? null : { fromPeriod: "", toPeriod: "", fromValue: 1, toValue: 1, pct, estimated: false },
+    })),
+  });
+  assert.equal(heatScaleMax([]), 5);
+  assert.equal(heatScaleMax([row([1, -1.5, null])]), 2);
+  assert.equal(heatScaleMax([row([4, -12, 7])]), 15);
+});
+
+test("explorer renders the real series with the default selection and attribution", async () => {
+  const { createElement } = await import("react");
+  const { renderToStaticMarkup } = await import("react-dom/server");
+  const { MarketExplorer, DEFAULT_SELECTION } = await import("@/components/markets/market-monitor");
+  const { buildMonitorSeries, buildReleaseNotices } = await import("@/components/markets/series");
+  const series = buildMonitorSeries();
+  const ids = new Set(series.map((s) => s.id));
+  for (const id of [...DEFAULT_SELECTION.monthly, ...DEFAULT_SELECTION.annual]) assert.ok(ids.has(id), `default ${id} exists`);
+  assert.equal(series.length, getMarketSeries().length);
+  const html = renderToStaticMarkup(createElement(MarketExplorer, { series, releaseNotices: buildReleaseNotices() }));
+  assert.match(html, /Compare series/);
+  assert.equal((html.match(/aria-pressed="true"/g) ?? []).length >= DEFAULT_SELECTION.monthly.length, true);
+  for (const s of series.filter((s) => s.priceType === "trade_unit_value")) {
+    assert.doesNotMatch(s.label, /\bprice\b/i, `${s.id} label`);
+  }
+});

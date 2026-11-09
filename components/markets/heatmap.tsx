@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { HeatCell } from "@/lib/markets";
 import { formatNumber, formatPct, formatPeriod } from "@/lib/markets";
 
@@ -10,6 +10,7 @@ export interface HeatRow {
   color: string;
   dash: string | undefined;
   unit: string;
+  digits: number;
   cells: HeatCell[];
 }
 
@@ -38,20 +39,31 @@ function cellStyle(pct: number, max: number): { background: string; color: strin
 export function Heatmap({
   rows,
   periods,
+  frequency,
   onInspect,
 }: {
   rows: HeatRow[];
   periods: string[];
+  frequency: "monthly" | "annual";
   /** Called when a cell is hovered or focused, and with nulls when inspection ends. */
   onInspect: (id: string | null, period: string | null) => void;
 }) {
   const [active, setActive] = useState<{ r: number; c: number }>({ r: 0, c: Math.max(0, periods.length - 1) });
   const [inspected, setInspected] = useState<{ r: number; c: number } | null>(null);
   const tableRef = useRef<HTMLTableElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const lastPeriod = periods[periods.length - 1];
+  // Open on the latest periods; older months stay a scroll away.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollLeft = el.scrollWidth;
+  }, [lastPeriod, periods.length]);
   const max = heatScaleMax(rows);
+  const step = frequency === "annual" ? "year-on-year" : "month-on-month";
+  const prevWord = frequency === "annual" ? "year" : "month";
 
   if (rows.length === 0 || periods.length === 0) {
-    return <p className="text-sm text-muted">No month-on-month changes can be calculated for this window.</p>;
+    return <p className="text-sm text-muted">No {step} changes can be calculated for this window.</p>;
   }
 
   const r0 = Math.min(active.r, rows.length - 1);
@@ -88,8 +100,8 @@ export function Heatmap({
   const shownCell = shown ? rows[shown.r]?.cells[shown.c] : null;
 
   return (
-    <div>
-      <div className="overflow-x-auto rounded-md border border-border">
+    <div className="min-w-0">
+      <div ref={scrollRef} className="overflow-x-auto rounded-md border border-border">
         <table
           ref={tableRef}
           className="w-full border-separate border-spacing-0.5 bg-card p-1 text-xs"
@@ -100,7 +112,7 @@ export function Heatmap({
           }}
         >
           <caption className="sr-only">
-            Month-on-month change in each monthly benchmark average, {formatPeriod(periods[0], true)} to{" "}
+            {step === "year-on-year" ? "Year-on-year" : "Month-on-month"} change in each selected series, {formatPeriod(periods[0], true)} to{" "}
             {formatPeriod(periods[periods.length - 1], true)}. Arrow keys move between cells.
           </caption>
           <thead>
@@ -114,7 +126,7 @@ export function Heatmap({
                   scope="col"
                   className="tnum min-w-12 px-1 py-1 text-center font-normal whitespace-nowrap text-faint"
                 >
-                  {p.endsWith("-01") || i === 0 ? formatPeriod(p) : formatPeriod(p).slice(0, 3)}
+                  {frequency === "annual" || p.endsWith("-01") || i === 0 ? formatPeriod(p) : formatPeriod(p).slice(0, 3)}
                 </th>
               ))}
             </tr>
@@ -134,8 +146,8 @@ export function Heatmap({
                   const ch = cell.change;
                   const style = ch ? cellStyle(ch.pct, max) : { background: "transparent", color: "var(--faint)" };
                   const label = ch
-                    ? `${row.label}, ${formatPeriod(cell.period, true)}: ${formatPct(ch.pct)} from ${formatNumber(ch.fromValue)} in ${formatPeriod(ch.fromPeriod, true)} to ${formatNumber(ch.toValue)}, ${row.unit}.`
-                    : `${row.label}, ${formatPeriod(cell.period, true)}: no change can be calculated; an observation is missing.`;
+                    ? `${row.label}, ${formatPeriod(cell.period, true)}: ${formatPct(ch.pct)} from ${formatNumber(ch.fromValue, row.digits)} in ${formatPeriod(ch.fromPeriod, true)} to ${formatNumber(ch.toValue, row.digits)}, ${row.unit}${ch.estimated ? "; uses an estimated value" : ""}.`
+                    : `${row.label}, ${formatPeriod(cell.period, true)}: no change can be calculated; an observation is missing or the source changes.`;
                   const isOn = shown?.r === r && shown?.c === c;
                   return (
                     <td key={cell.period} className="p-0">
@@ -155,7 +167,7 @@ export function Heatmap({
                         } ${ch ? "" : "border border-dashed border-border-strong"}`}
                         style={style}
                       >
-                        {ch ? formatPct(ch.pct) : "n/a"}
+                        {ch ? `${formatPct(ch.pct)}${ch.estimated ? "e" : ""}` : "n/a"}
                       </button>
                     </td>
                   );
@@ -170,7 +182,7 @@ export function Heatmap({
         <p aria-live="polite" className="tnum min-h-5">
           {shown && shownCell
             ? shownCell.change
-              ? `${rows[shown.r].label}, ${formatPeriod(shownCell.period, true)}: ${formatPct(shownCell.change.pct)} (${formatNumber(shownCell.change.fromValue)} → ${formatNumber(shownCell.change.toValue)} ${rows[shown.r].unit})`
+              ? `${rows[shown.r].label}, ${formatPeriod(shownCell.period, true)}: ${formatPct(shownCell.change.pct)} (${formatNumber(shownCell.change.fromValue, rows[shown.r].digits)} → ${formatNumber(shownCell.change.toValue, rows[shown.r].digits)} ${rows[shown.r].unit})${shownCell.change.estimated ? ", using an estimate" : ""}`
               : `${rows[shown.r].label}, ${formatPeriod(shownCell.period, true)}: no change can be calculated.`
             : "Hover or focus a cell to see the values behind it."}
         </p>
@@ -187,8 +199,8 @@ export function Heatmap({
         </div>
       </div>
       <p className="mt-1 text-xs text-faint">
-        Colour saturates at ±{max}%, a round value near the 95th percentile of moves shown. Every cell also prints its signed
-        change.
+        Each cell compares a {prevWord} with the one before. Colour saturates at ±{max}%, a round value near the 95th
+        percentile of moves shown; every cell also prints its signed change{frequency === "annual" ? ", and “e” marks one that uses an estimate" : ""}.
       </p>
     </div>
   );

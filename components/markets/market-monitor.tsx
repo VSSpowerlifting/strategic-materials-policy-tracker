@@ -1,55 +1,51 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
+  HORIZONS,
+  PRICE_TYPE_LABELS,
   RANGES,
-  addMonths,
-  changeOver,
+  changeSummary,
   chooseIndexBase,
   formatNumber,
+  formatObservationPeriod,
   formatPct,
   formatPeriod,
   indexSeries,
   isRangeId,
-  isStale,
-  latestObservation,
-  monthlyChangeGrid,
-  monthsBetween,
+  periodChangeGrid,
   periodRange,
   rangeWindow,
   rankMovers,
   supportedRanges,
   unitsCompatible,
-  valueAt,
   windowObservations,
-  type RangeId,
+  type Frequency,
 } from "@/lib/markets";
 import { PriceChart, type ChartLine } from "./price-chart";
 import { Sparkline } from "./sparkline";
 import { Heatmap, type HeatRow } from "./heatmap";
-import { seriesStyle, type MonitorSeries } from "./types";
-
-export interface MonitorGap {
-  materialId: string;
-  materialName: string;
-  materialHref: string | null;
-  worldBankCoverage: string;
-  gradeDistinctions: string;
-  requirementForInclusion: string;
-}
+import { MAX_PLOTTED, slotStyle, type MonitorSeries } from "./types";
 
 type View = "indexed" | "absolute";
 
-const DEFAULT_RANGE: RangeId = "12m";
-const DEFAULT_VIEW: View = "indexed";
-const HEAT_MONTHS = 24;
+/** Opening selection per tab. Shared links override it. */
+export const DEFAULT_SELECTION: Record<Frequency, readonly string[]> = {
+  monthly: ["wb-copper", "wb-nickel", "imf-cobalt", "imf-reo-carbonate"],
+  annual: ["usgs-ndpr-oxide", "usgs-dysprosium-oxide", "usgs-lithium-carbonate", "usgs-germanium-metal", "usgs-tungsten-concentrate"],
+};
+const DEFAULT_RANGE: Record<Frequency, string> = { monthly: "5y", annual: "max" };
+const HEAT_PERIODS: Record<Frequency, number> = { monthly: 24, annual: 10 };
+const MOVER_LAG: Record<Frequency, number> = { monthly: 12, annual: 1 };
 
 const pill =
   "min-h-11 rounded-md border px-3 font-display text-sm tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-accent motion-safe:transition-colors sm:min-h-9";
 const pillOn = "border-accent bg-elevated text-foreground";
 const pillOff = "border-border-strong bg-card text-muted hover:text-foreground";
+const pillDisabled = "border-border bg-card text-faint cursor-not-allowed";
+const h2 = "font-display text-xl font-semibold tracking-tight text-foreground sm:text-[1.375rem]";
 
 function Swatch({ color, dash }: { color: string; dash: string | undefined }) {
   return (
@@ -59,535 +55,658 @@ function Swatch({ color, dash }: { color: string; dash: string | undefined }) {
   );
 }
 
-export function MarketMonitor({
+/** Fill colour slots from a list of ids, keeping order and dropping unknown or duplicate ids. */
+export function slotsFrom(ids: readonly string[], known: ReadonlySet<string>): Array<string | null> {
+  const out: Array<string | null> = Array(MAX_PLOTTED).fill(null);
+  let i = 0;
+  for (const id of ids) {
+    if (i >= MAX_PLOTTED) break;
+    if (known.has(id) && !out.includes(id)) out[i++] = id;
+  }
+  return out;
+}
+
+/** Add an id to the lowest free slot, or remove it, without moving any other series. */
+export function toggleSlot(slots: ReadonlyArray<string | null>, id: string): Array<string | null> {
+  const at = slots.indexOf(id);
+  const next = [...slots];
+  if (at !== -1) next[at] = null;
+  else {
+    const free = next.indexOf(null);
+    if (free !== -1) next[free] = id;
+  }
+  return next;
+}
+
+export function MarketExplorer({
   series,
-  gaps,
-  cutoff,
-  nextReleaseDate,
+  releaseNotices,
 }: {
   series: MonitorSeries[];
-  gaps: MonitorGap[];
-  /** Last month of the frozen dataset ("YYYY-MM"). */
-  cutoff: string;
-  /** The publisher's stated next release date ("YYYY-MM-DD"). */
-  nextReleaseDate: string;
+  /** Sources that state a next release date, for the "may be superseded" notice. */
+  releaseNotices: Array<{ shortName: string; date: string; cutoff: string }>;
 }) {
-  const [focusId, setFocusId] = useState<string | null>(null);
-  const [hoverId, setHoverId] = useState<string | null>(null);
-  const [range, setRange] = useState<RangeId>(DEFAULT_RANGE);
-  const [view, setView] = useState<View>(DEFAULT_VIEW);
-  const [cursor, setCursor] = useState<string | null>(null);
-  const [releasePassed, setReleasePassed] = useState(false);
-  const urlRead = useRef(false);
-
-  const ids = useMemo(() => new Set(series.map((s) => s.id)), [series]);
   const byId = useMemo(() => new Map(series.map((s) => [s.id, s])), [series]);
-  const earliest = useMemo(() => series.map((s) => s.firstPeriod).sort()[0] ?? cutoff, [series, cutoff]);
-  const ranges = useMemo(() => supportedRanges(earliest, cutoff), [earliest, cutoff]);
-  const absoluteAllowed = unitsCompatible(series);
+  const idsByFreq = useMemo(
+    () => ({
+      monthly: new Set(series.filter((s) => s.frequency === "monthly").map((s) => s.id)),
+      annual: new Set(series.filter((s) => s.frequency === "annual").map((s) => s.id)),
+    }),
+    [series],
+  );
+
+  const [tab, setTab] = useState<Frequency>("monthly");
+  const [slots, setSlots] = useState<Record<Frequency, Array<string | null>>>(() => ({
+    monthly: slotsFrom(DEFAULT_SELECTION.monthly, idsByFreq.monthly),
+    annual: slotsFrom(DEFAULT_SELECTION.annual, idsByFreq.annual),
+  }));
+  const [range, setRange] = useState<string>(DEFAULT_RANGE.monthly);
+  const [view, setView] = useState<View>("indexed");
+  const [focusId, setFocusId] = useState<string | null>(null);
+  const [cursor, setCursor] = useState<string | null>(null);
+  const [hoverId, setHoverId] = useState<string | null>(null);
+  const [heatInspect, setHeatInspect] = useState<{ id: string | null; period: string | null }>({ id: null, period: null });
+  const [passed, setPassed] = useState<Array<{ shortName: string; date: string; cutoff: string }>>([]);
+  // Set after the URL has been read; the URL is written only on later renders, once the restored state is in place.
+  const [urlReady, setUrlReady] = useState(false);
+
+  const tabSeries = useMemo(() => series.filter((s) => s.frequency === tab), [series, tab]);
+  const tabSlots = slots[tab];
+  const selected = useMemo(
+    () => tabSlots.flatMap((id, slot) => (id && byId.has(id) ? [{ s: byId.get(id)!, slot }] : [])),
+    [tabSlots, byId],
+  );
+  const selectedSeries = useMemo(() => selected.map((x) => x.s), [selected]);
+  const slotOf = (id: string) => tabSlots.indexOf(id);
+
+  // Window: from the earliest selected series to the latest selected observation.
+  const end = selectedSeries.map((s) => s.lastPeriod).sort().at(-1) ?? tabSeries.map((s) => s.lastPeriod).sort().at(-1) ?? "";
+  const earliest = selectedSeries.map((s) => s.firstPeriod).sort()[0] ?? end;
+  const ranges = useMemo(() => (end ? supportedRanges(tab, earliest, end) : []), [tab, earliest, end]);
+  const effectiveRange = ranges.includes(range) ? range : (ranges.at(-1) ?? "max");
+  const win = end ? rangeWindow(tab, effectiveRange, end, earliest) : { start: "", end: "", truncated: false };
+  const periods = useMemo(() => (win.start ? periodRange(win.start, win.end) : []), [win.start, win.end]);
+
+  const absoluteAllowed = selectedSeries.length > 0 && unitsCompatible(selectedSeries);
+  const effectiveView: View = view === "absolute" && absoluteAllowed ? "absolute" : "indexed";
+
+  const indexInputs = useMemo(() => selectedSeries.map((s) => ({ id: s.id, obs: s.obs, breaks: s.sourceBreaks })), [selectedSeries]);
+  const base = useMemo(
+    () => (win.start ? chooseIndexBase(indexInputs, win.start, win.end) : null),
+    [indexInputs, win.start, win.end],
+  );
 
   // Read the URL once after mount, so the prerendered HTML is always the default view.
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
+    const f = q.get("freq") === "annual" ? "annual" : "monthly";
     const s = q.get("series");
     const r = q.get("range");
-    const v = q.get("view");
     /* eslint-disable react-hooks/set-state-in-effect -- one-time sync from the URL after hydration */
-    if (s && ids.has(s)) setFocusId(s);
-    if (isRangeId(r) && ranges.includes(r)) setRange(r);
-    if (v === "absolute" && absoluteAllowed) setView("absolute");
-    setReleasePassed(new Date().toISOString().slice(0, 10) > nextReleaseDate);
+    setTab(f);
+    if (s !== null) {
+      const ids = s.split(",").filter(Boolean);
+      setSlots((cur) => ({ ...cur, [f]: slotsFrom(ids, idsByFreq[f]) }));
+    }
+    if (isRangeId(r, f)) setRange(r);
+    else setRange(DEFAULT_RANGE[f]);
+    if (q.get("view") === "absolute") setView("absolute");
+    const today = new Date().toISOString().slice(0, 10);
+    setPassed(releaseNotices.filter((n) => today > n.date));
+    setUrlReady(true);
     /* eslint-enable react-hooks/set-state-in-effect */
-    urlRead.current = true;
-  }, [ids, ranges, absoluteAllowed, nextReleaseDate]);
+  }, [idsByFreq, releaseNotices]);
 
   // Mirror the view into the URL so it can be shared; defaults are left out.
   useEffect(() => {
-    if (!urlRead.current) return;
+    if (!urlReady) return;
     const q = new URLSearchParams(window.location.search);
     const set = (k: string, v: string | null) => (v ? q.set(k, v) : q.delete(k));
-    set("series", focusId);
-    set("range", range === DEFAULT_RANGE ? null : range);
-    set("view", view === DEFAULT_VIEW ? null : view);
-    const qs = q.toString();
+    const ids = tabSlots.filter((x): x is string => x !== null);
+    const isDefault = ids.join(",") === DEFAULT_SELECTION[tab].join(",");
+    set("freq", tab === "monthly" ? null : tab);
+    if (isDefault) q.delete("series");
+    else q.set("series", ids.join(","));
+    set("range", effectiveRange === DEFAULT_RANGE[tab] ? null : effectiveRange);
+    set("view", view === "indexed" ? null : view);
+    const qs = q.toString().replace(/%2C/g, ",");
     const next = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
     if (next !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
       window.history.replaceState(window.history.state, "", next);
     }
-  }, [focusId, range, view]);
-
-  const effectiveView: View = view === "absolute" && absoluteAllowed ? "absolute" : "indexed";
-  const win = rangeWindow(range, cutoff, earliest);
-  const periods = useMemo(() => periodRange(win.start, win.end), [win.start, win.end]);
-  const base = useMemo(() => chooseIndexBase(series, win.start, win.end), [series, win.start, win.end]);
+  }, [urlReady, tab, tabSlots, effectiveRange, view]);
 
   const lines: ChartLine[] = useMemo(() => {
-    const shown = effectiveView === "indexed" ? base.included : series.map((s) => s.id);
-    return shown.map((id) => {
-      const s = byId.get(id)!;
-      const st = seriesStyle(id);
+    if (!win.start) return [];
+    const shown =
+      effectiveView === "indexed" ? selected.filter((x) => base?.included.includes(x.s.id)) : selected;
+    return shown.map(({ s, slot }) => {
+      const st = slotStyle(slot);
       const points =
-        effectiveView === "indexed" && base.basePeriod
+        effectiveView === "indexed" && base?.basePeriod
           ? indexSeries(s.obs, base.basePeriod, win.start, win.end)
           : windowObservations(s.obs, win.start, win.end);
-      return { id, label: s.label, color: st.color, dash: st.dash, points };
+      const breaks = s.sourceBreaks.filter((b) => b.period > win.start && b.period <= win.end);
+      return {
+        id: s.id,
+        label: s.label,
+        color: st.color,
+        dash: st.dash,
+        points,
+        breaks,
+        unit: effectiveView === "indexed" ? "index" : s.unitShort,
+        digits: s.digits,
+      };
     });
-  }, [effectiveView, base, series, byId, win.start, win.end]);
+  }, [effectiveView, base, selected, win.start, win.end]);
 
-  const emphasis = hoverId ?? focusId;
-  const readoutPeriod = cursor && periods.includes(cursor) ? cursor : win.end;
-  const unit = series[0]?.unit ?? "";
-  const rangeLabel = RANGES.find((r) => r.id === range)?.label ?? range;
+  const emphasis = heatInspect.id ?? hoverId ?? focusId;
 
-  const chartTitle =
-    effectiveView === "indexed"
-      ? base.basePeriod
-        ? `Indexed change, ${formatPeriod(win.start)}–${formatPeriod(win.end)} (${formatPeriod(base.basePeriod)} = 100)`
-        : `Indexed change, ${formatPeriod(win.start)}–${formatPeriod(win.end)}`
-      : `Monthly benchmark average, ${formatPeriod(win.start)}–${formatPeriod(win.end)} (${unit})`;
-
-  const moverMonths = monthsBetween(win.start, win.end);
-  const movers = useMemo(() => rankMovers(series, moverMonths, win.end), [series, moverMonths, win.end]);
+  // Movers: change over a fixed horizon to the latest period every selected series shares.
+  const commonEnd = selectedSeries.map((s) => s.lastPeriod).sort()[0] ?? end;
+  const moverLag = MOVER_LAG[tab];
+  const movers = useMemo(() => rankMovers(indexInputs, moverLag, commonEnd), [indexInputs, moverLag, commonEnd]);
   const moverMax = Math.max(1e-9, ...movers.ranked.map((m) => Math.abs(m.change.pct)));
 
-  const heatPeriods = useMemo(() => periods.slice(1).slice(-HEAT_MONTHS), [periods]);
+  const heatPeriods = useMemo(() => periods.slice(1).slice(-HEAT_PERIODS[tab]), [periods, tab]);
   const heatRows: HeatRow[] = useMemo(
     () =>
-      series.map((s) => {
-        const st = seriesStyle(s.id);
-        return { id: s.id, label: s.label, color: st.color, dash: st.dash, unit: s.unit, cells: monthlyChangeGrid(s.obs, heatPeriods) };
+      selected.map(({ s, slot }) => {
+        const st = slotStyle(slot);
+        return {
+          id: s.id,
+          label: s.label,
+          color: st.color,
+          dash: st.dash,
+          unit: s.unitShort,
+          digits: s.digits,
+          cells: periodChangeGrid(s.obs, heatPeriods, s.sourceBreaks),
+        };
       }),
-    [series, heatPeriods],
+    [selected, heatPeriods],
   );
 
   const tablePeriods = useMemo(() => [...periods].reverse(), [periods]);
 
-  function toggleFocus(id: string) {
-    setFocusId((cur) => (cur === id ? null : id));
+  const groups = useMemo(() => {
+    const m = new Map<string, { name: string; href: string | null; items: MonitorSeries[] }>();
+    for (const s of tabSeries) {
+      const g = m.get(s.materialId) ?? { name: s.materialName, href: s.materialHref, items: [] };
+      g.items.push(s);
+      m.set(s.materialId, g);
+    }
+    return [...m.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name));
+  }, [tabSeries]);
+
+  const full = selected.length >= MAX_PLOTTED;
+  const unitWord = tab === "annual" ? "year" : "month";
+
+  function toggle(id: string) {
+    setSlots((cur) => ({ ...cur, [tab]: toggleSlot(cur[tab], id) }));
+    if (focusId === id) setFocusId(null);
+  }
+  function switchTab(f: Frequency) {
+    if (f === tab) return;
+    setTab(f);
+    setRange(DEFAULT_RANGE[f]);
+    setFocusId(null);
+    setCursor(null);
   }
 
-  if (series.length === 0) {
-    return (
-      <div className="rounded-md border border-border bg-card p-6 text-sm text-muted">
-        No verified price series is available. The monitor shows nothing rather than an estimate.
-      </div>
-    );
-  }
+  const chartTitle = !win.start
+    ? "Select a series to plot"
+    : effectiveView === "indexed"
+      ? base?.basePeriod
+        ? `Indexed change, ${formatPeriod(win.start)}–${formatPeriod(win.end)} (${formatPeriod(base.basePeriod)} = 100)`
+        : `Indexed change, ${formatPeriod(win.start)}–${formatPeriod(win.end)}`
+      : `${tab === "annual" ? "Annual average" : "Monthly average"}, ${formatPeriod(win.start)}–${formatPeriod(win.end)} (${selectedSeries[0]?.unitShort})`;
+
+  const rangeLabel = RANGES[tab].find((r) => r.id === effectiveRange)?.label ?? effectiveRange;
+  const excluded = effectiveView === "indexed" ? (base?.excluded ?? []) : [];
 
   return (
     <div className="space-y-14">
-      {releasePassed ? (
+      {passed.length > 0 ? (
         <p role="status" className="rounded-md border border-border-strong bg-elevated px-4 py-3 text-sm text-foreground">
-          The World Bank’s next scheduled release date ({nextReleaseDate}) has passed. A newer release may exist; this page
-          still shows the frozen dataset through {formatPeriod(cutoff, true)}.
+          {passed
+            .map(
+              (n) =>
+                `${n.shortName}’s next scheduled release date (${n.date}) has passed, so a newer release may exist; this page still shows its frozen data through ${formatPeriod(n.cutoff, true)}.`,
+            )
+            .join(" ")}
         </p>
       ) : null}
 
+      {/* ── Frequency and series picker ───────────────────────────────── */}
+      <section aria-labelledby="mm-pick-title" className="scroll-mt-24">
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border-strong pb-3">
+          <h2 id="mm-pick-title" className={h2}>
+            Compare series
+          </h2>
+          <div role="group" aria-label="Frequency" className="flex gap-2">
+            {(["monthly", "annual"] as const).map((f) => (
+              <button
+                key={f}
+                type="button"
+                aria-pressed={tab === f}
+                onClick={() => switchTab(f)}
+                className={cn(pill, tab === f ? pillOn : pillOff)}
+              >
+                {f === "monthly" ? "Monthly" : "Annual"}{" "}
+                <span className="text-faint">{idsByFreq[f].size}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="mt-3 max-w-3xl text-[0.9375rem] leading-7 text-muted">
+          {tab === "monthly"
+            ? "Monthly averages from the World Bank Pink Sheet and the IMF Primary Commodity Price System."
+            : "Annual averages and unit values for 2021–2025 from USGS Mineral Commodity Summaries 2026; 2025 values are USGS estimates."}{" "}
+          Choose up to {MAX_PLOTTED} series. A series keeps its colour while it stays selected.
+        </p>
+
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+          <p aria-live="polite" className="tnum text-muted">
+            {selected.length} of {MAX_PLOTTED} selected{full ? " — remove one to add another" : ""}
+          </p>
+          {selected.length > 0 ? (
+            <button
+              type="button"
+              onClick={() => setSlots((cur) => ({ ...cur, [tab]: Array(MAX_PLOTTED).fill(null) }))}
+              className="font-display text-sm text-accent underline-offset-2 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              Clear selection
+            </button>
+          ) : null}
+          <button
+            type="button"
+            onClick={() => setSlots((cur) => ({ ...cur, [tab]: slotsFrom(DEFAULT_SELECTION[tab], idsByFreq[tab]) }))}
+            className="font-display text-sm text-accent underline-offset-2 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            Reset
+          </button>
+        </div>
+
+        <div className="mt-4 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {groups.map(([materialId, g]) => (
+            <div key={materialId} className="bg-card px-4 py-3">
+              <h3 className="font-display text-xs text-faint">
+                {g.href ? (
+                  <Link href={g.href} className="hover:text-accent">
+                    {g.name}
+                  </Link>
+                ) : (
+                  g.name
+                )}
+              </h3>
+              <ul className="mt-2 flex flex-wrap gap-2">
+                {g.items.map((s) => {
+                  const slot = slotOf(s.id);
+                  const on = slot !== -1;
+                  const st = on ? slotStyle(slot) : null;
+                  const disabled = !on && full;
+                  return (
+                    <li key={s.id}>
+                      <button
+                        type="button"
+                        aria-pressed={on}
+                        aria-disabled={disabled || undefined}
+                        onClick={() => (disabled ? undefined : toggle(s.id))}
+                        title={`${s.benchmark} · ${s.sourceShortName} · ${PRICE_TYPE_LABELS[s.priceType]}`}
+                        className={cn(
+                          "inline-flex min-h-11 items-center gap-2 rounded-md border px-2.5 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-accent motion-safe:transition-colors sm:min-h-9",
+                          on ? pillOn : disabled ? pillDisabled : pillOff,
+                        )}
+                      >
+                        {st ? (
+                          <Swatch color={st.color} dash={st.dash} />
+                        ) : (
+                          <span aria-hidden="true" className="h-2 w-5 shrink-0 rounded-sm border border-dashed border-border-strong" />
+                        )}
+                        <span>
+                          {s.label}
+                          <span className="ml-1.5 text-xs text-faint">{s.unitShort}</span>
+                          {s.priceType === "trade_unit_value" ? (
+                            <span className="ml-1.5 text-xs text-faint">· unit value</span>
+                          ) : null}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── Chart ─────────────────────────────────────────────────────── */}
       <section aria-labelledby="mm-chart-title" className="scroll-mt-24">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border-strong pb-3">
-          <div>
-            <h2 id="mm-chart-title" className="font-display text-xl font-semibold tracking-tight text-foreground sm:text-[1.375rem]">
-              {chartTitle}
-            </h2>
-            <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">
-              {effectiveView === "indexed"
-                ? base.basePeriod
+        <div className="border-b border-border-strong pb-3">
+          <h2 id="mm-chart-title" className={h2}>
+            {chartTitle}
+          </h2>
+          <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">
+            {selected.length === 0
+              ? "Choose one or more series above."
+              : effectiveView === "indexed"
+                ? base?.basePeriod
                   ? `Each series is divided by its own ${formatPeriod(base.basePeriod, true)} value and multiplied by 100, so the lines compare percentage paths, not price levels.`
-                  : base.explanation
-                : "Nominal US dollars per metric tonne on one axis. All three series share the same currency and unit."}
-              {win.truncated ? ` The data begin in ${formatPeriod(earliest, true)}, so this window is shorter than ${rangeLabel}.` : ""}
-            </p>
-            {effectiveView === "indexed" && base.excluded.length ? (
-              <ul className="mt-2 text-sm text-muted">
-                {base.excluded.map((e) => (
+                  : base?.explanation
+                : `Published values on one axis; every selected series is in ${selectedSeries[0]?.unit}.`}
+            {win.truncated ? ` The selected series begin in ${formatPeriod(earliest, true)}, so this window is shorter than ${rangeLabel}.` : ""}
+            {tab === "annual" && selected.length > 0 ? " Hollow points and dotted steps mark USGS estimates." : ""}
+          </p>
+        </div>
+
+        {selected.length > 0 ? (
+          <>
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
+              {tab === "monthly" ? (
+                <div role="group" aria-label="Time range" className="flex flex-wrap gap-2">
+                  {RANGES.monthly
+                    .filter((r) => ranges.includes(r.id))
+                    .map((r) => (
+                      <button
+                        key={r.id}
+                        type="button"
+                        aria-pressed={effectiveRange === r.id}
+                        onClick={() => setRange(r.id)}
+                        className={cn(pill, effectiveRange === r.id ? pillOn : pillOff)}
+                      >
+                        {r.label}
+                      </button>
+                    ))}
+                </div>
+              ) : null}
+              <div role="group" aria-label="Scale" className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  aria-pressed={effectiveView === "indexed"}
+                  onClick={() => setView("indexed")}
+                  className={cn(pill, effectiveView === "indexed" ? pillOn : pillOff)}
+                >
+                  Indexed
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={effectiveView === "absolute"}
+                  aria-disabled={!absoluteAllowed || undefined}
+                  aria-describedby={absoluteAllowed ? undefined : "mm-abs-note"}
+                  onClick={() => (absoluteAllowed ? setView("absolute") : undefined)}
+                  className={cn(pill, effectiveView === "absolute" ? pillOn : absoluteAllowed ? pillOff : pillDisabled)}
+                >
+                  Published values
+                </button>
+              </div>
+              {!absoluteAllowed ? (
+                <p id="mm-abs-note" className="text-xs text-faint">
+                  Published values need one shared unit and currency; the selection mixes units.
+                </p>
+              ) : null}
+            </div>
+
+            <ul aria-label="Legend" className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
+              {selected.map(({ s, slot }) => {
+                const st = slotStyle(slot);
+                const plotted = lines.some((l) => l.id === s.id);
+                return (
+                  <li key={s.id} className="flex items-center">
+                    <button
+                      type="button"
+                      aria-pressed={focusId === s.id}
+                      onClick={() => setFocusId((cur) => (cur === s.id ? null : s.id))}
+                      className={cn(
+                        "inline-flex min-h-11 items-center gap-2 rounded-l-md border px-2.5 py-1 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-accent sm:min-h-9",
+                        focusId === s.id ? pillOn : pillOff,
+                      )}
+                    >
+                      <Swatch color={st.color} dash={st.dash} />
+                      <span className={plotted ? "" : "text-faint line-through"}>{s.label}</span>
+                      <span className="shrink-0 text-xs whitespace-nowrap text-faint">{s.sourceShortName}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => toggle(s.id)}
+                      aria-label={`Remove ${s.label}`}
+                      className="inline-flex min-h-11 items-center rounded-r-md border border-l-0 border-border-strong bg-card px-2.5 text-sm text-muted outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-accent sm:min-h-9"
+                    >
+                      ×
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {excluded.length > 0 ? (
+              <ul className="mt-3 space-y-1 text-sm text-muted">
+                {excluded.map((e) => (
                   <li key={e.id}>
-                    {byId.get(e.id)?.label ?? e.id} not shown: {e.reason}
+                    <span className="text-foreground">{byId.get(e.id)?.label}</span> is not plotted in the indexed view: {e.reason}
                   </li>
                 ))}
               </ul>
             ) : null}
-          </div>
-        </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <div role="group" aria-label="Time range" className="flex flex-wrap gap-1.5">
-            {RANGES.filter((r) => ranges.includes(r.id)).map((r) => (
-              <button
-                key={r.id}
-                type="button"
-                aria-pressed={range === r.id}
-                onClick={() => setRange(r.id)}
-                className={cn(pill, range === r.id ? pillOn : pillOff)}
-              >
-                {r.label}
-              </button>
-            ))}
-          </div>
-          {absoluteAllowed ? (
-            <div role="group" aria-label="Scale" className="flex flex-wrap gap-1.5">
-              {(
-                [
-                  ["indexed", "Indexed"],
-                  ["absolute", "US$/t"],
-                ] as const
-              ).map(([v, l]) => (
-                <button
-                  key={v}
-                  type="button"
-                  aria-pressed={effectiveView === v}
-                  onClick={() => setView(v)}
-                  className={cn(pill, effectiveView === v ? pillOn : pillOff)}
-                >
-                  {l}
-                </button>
-              ))}
+            <div className="mt-4 rounded-lg border border-border bg-card p-2 sm:p-4">
+              {lines.length > 0 ? (
+                <PriceChart
+                  lines={lines}
+                  periods={periods}
+                  mode={effectiveView}
+                  basePeriod={effectiveView === "indexed" ? (base?.basePeriod ?? null) : null}
+                  cursor={cursor}
+                  onCursor={setCursor}
+                  focusId={emphasis}
+                  onFocus={setFocusId}
+                  label={chartTitle}
+                />
+              ) : (
+                <p className="p-6 text-sm text-muted">{base?.explanation ?? "Nothing to plot for this selection."}</p>
+              )}
             </div>
-          ) : null}
-        </div>
-
-        <div role="group" aria-label="Series legend. Select a series to emphasise it." className="mt-4 flex flex-wrap gap-1.5">
-          {series.map((s) => {
-            const st = seriesStyle(s.id);
-            const on = focusId === s.id;
-            const plotted = lines.some((l) => l.id === s.id);
-            return (
-              <button
-                key={s.id}
-                type="button"
-                aria-pressed={on}
-                onClick={() => toggleFocus(s.id)}
-                onMouseEnter={() => setHoverId(s.id)}
-                onMouseLeave={() => setHoverId(null)}
-                className={cn(pill, "inline-flex items-center gap-2", on ? pillOn : pillOff)}
-              >
-                <Swatch color={st.color} dash={st.dash} />
-                {s.label}
-                {plotted ? null : <span className="text-faint">(not plotted)</span>}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-4 rounded-md border border-border bg-card p-2 sm:p-3">
-          {lines.length && (effectiveView === "absolute" || base.basePeriod) ? (
-            <PriceChart
-              lines={lines}
-              periods={periods}
-              mode={effectiveView}
-              basePeriod={effectiveView === "indexed" ? base.basePeriod : null}
-              cursor={cursor}
-              onCursor={setCursor}
-              focusId={emphasis}
-              onFocus={setFocusId}
-              label={chartTitle}
-            />
-          ) : (
-            <p className="p-6 text-sm text-muted">{base.explanation ?? "No observations fall inside this window."}</p>
-          )}
-        </div>
-
-        <div aria-live="polite" className="mt-3 rounded-md border border-border bg-card px-4 py-3">
-          <p className="font-display text-xs text-faint">
-            {cursor && periods.includes(cursor) ? "At cursor" : "Last month in window"} · {formatPeriod(readoutPeriod, true)}
-          </p>
-          <dl className="mt-2 grid gap-x-6 gap-y-1.5 text-sm sm:grid-cols-3">
-            {series.map((s) => {
-              const st = seriesStyle(s.id);
-              const abs = valueAt(s.obs, readoutPeriod);
-              const idx =
-                effectiveView === "indexed" && base.basePeriod && base.included.includes(s.id)
-                  ? (() => {
-                      const b = valueAt(s.obs, base.basePeriod!);
-                      return abs !== null && b ? (abs / b) * 100 : null;
-                    })()
-                  : null;
-              return (
-                <div key={s.id} className="flex items-baseline gap-2">
-                  <dt className="inline-flex items-center gap-2 text-muted">
-                    <Swatch color={st.color} dash={st.dash} />
-                    {s.label}
-                  </dt>
-                  <dd className="tnum text-foreground">
-                    {abs === null ? (
-                      <span className="text-faint">no observation</span>
-                    ) : (
-                      <>
-                        {formatNumber(abs)}
-                        {idx !== null ? <span className="text-muted"> · {idx.toFixed(1)}</span> : null}
-                      </>
-                    )}
-                  </dd>
-                </div>
-              );
-            })}
-          </dl>
-          <p className="mt-2 text-xs text-faint">
-            US$ per metric tonne{effectiveView === "indexed" && base.basePeriod ? `, then index (${formatPeriod(base.basePeriod)} = 100)` : ""}.
-            Hover the chart, or focus it and use the arrow keys.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Benchmark cards ───────────────────────────────────────────── */}
-      <section aria-labelledby="mm-cards-title" className="scroll-mt-24">
-        <div className="mb-5 border-b border-border-strong pb-3">
-          <h2 id="mm-cards-title" className="font-display text-xl font-semibold tracking-tight text-foreground sm:text-[1.375rem]">
-            Benchmarks
-          </h2>
-          <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">
-            Last available observation for each series. Changes compare monthly averages; select a card to emphasise its line.
-          </p>
-        </div>
-        <ul className="grid gap-3 md:grid-cols-3">
-          {series.map((s) => {
-            const st = seriesStyle(s.id);
-            const latest = latestObservation(s.obs);
-            const m1 = changeOver(s.obs, 1);
-            const m3 = changeOver(s.obs, 3);
-            const stale = latest ? isStale(latest.period, cutoff) : true;
-            const sparkPeriods = latest ? periodRange(addMonths(latest.period, -12), latest.period) : [];
-            const sparkPoints = latest ? windowObservations(s.obs, sparkPeriods[0], latest.period) : [];
-            const on = focusId === s.id;
-            return (
-              <li
-                key={s.id}
-                className={cn(
-                  "flex flex-col rounded-md border bg-card motion-safe:transition-colors",
-                  on ? "border-accent" : "border-border",
-                )}
-              >
-                <button
-                  type="button"
-                  aria-pressed={on}
-                  onClick={() => toggleFocus(s.id)}
-                  onMouseEnter={() => setHoverId(s.id)}
-                  onMouseLeave={() => setHoverId(null)}
-                  className="flex flex-1 flex-col gap-3 rounded-t-md p-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                >
-                  <span className="flex items-center justify-between gap-3">
-                    <span className="inline-flex items-center gap-2 font-display text-base font-semibold text-foreground">
-                      <Swatch color={st.color} dash={st.dash} />
-                      {s.materialName}
-                    </span>
-                    <span className="font-display text-xs text-faint">{on ? "Emphasised" : "Emphasise"}</span>
-                  </span>
-                  <span className="text-sm text-muted">{s.benchmark}</span>
-                  {latest ? (
-                    <>
-                      <span className="flex items-end justify-between gap-3">
-                        <span>
-                          <span className="tnum block font-display text-2xl font-semibold text-foreground">
-                            {formatNumber(latest.value)}
-                          </span>
-                          <span className="block text-xs text-muted">{s.unit}</span>
-                        </span>
-                        <Sparkline points={sparkPoints} periods={sparkPeriods} color={st.color} dash={st.dash} unit={s.unit} />
-                      </span>
-                      <span className="grid grid-cols-2 gap-2 text-sm">
-                        <span>
-                          <span className="block font-display text-xs text-faint">1M</span>
-                          <span className="tnum text-foreground">{formatPct(m1?.pct)}</span>
-                        </span>
-                        <span>
-                          <span className="block font-display text-xs text-faint">3M</span>
-                          <span className="tnum text-foreground">{formatPct(m3?.pct)}</span>
-                        </span>
-                      </span>
-                      <span className="text-xs text-muted">
-                        {stale ? "Stale · " : ""}Last available observation: {formatPeriod(latest.period, true)} (monthly
-                        average)
-                      </span>
-                    </>
-                  ) : (
-                    <span className="text-sm text-muted">No observation available.</span>
-                  )}
-                </button>
-                <span className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-4 py-2.5 text-xs text-muted">
-                  <span>World Bank Pink Sheet · {s.priceBasis}</span>
-                  {s.materialHref ? (
-                    <Link href={s.materialHref} className="text-accent underline-offset-4 hover:underline">
-                      {s.materialName} profile
-                    </Link>
-                  ) : null}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-
-        {gaps.length ? (
-          <div className="mt-6">
-            <h3 className="font-display text-base font-semibold text-foreground">Tracked materials without a publishable series</h3>
-            <p className="mt-1 max-w-3xl text-sm leading-6 text-muted">
-              No open series was identified for these materials, so no price is shown. Each would need a named product and grade
-              published under terms that allow redistribution.
+            <p className="mt-2 text-xs text-faint">
+              Hover or tap the chart to read every selected series at one {unitWord}. Shaded columns mark {unitWord}s where at
+              least one plotted series has no value; nothing is interpolated.
             </p>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              {gaps.map((g) => (
-                <li key={g.materialId} className="rounded-md border border-dashed border-border-strong px-3 py-2.5">
-                  <details>
-                    <summary className="cursor-pointer list-none outline-none focus-visible:ring-2 focus-visible:ring-accent">
-                      <span className="block font-display text-sm font-semibold text-foreground">{g.materialName}</span>
-                      <span className="block text-xs text-muted">No open series identified</span>
-                    </summary>
-                    <div className="mt-2 space-y-1.5 text-xs leading-5 text-muted">
-                      <p>{g.worldBankCoverage}</p>
-                      <p>{g.gradeDistinctions}</p>
-                      <p>
-                        <span className="text-faint">Needed: </span>
-                        {g.requirementForInclusion}
-                      </p>
-                      {g.materialHref ? (
-                        <Link href={g.materialHref} className="text-accent underline-offset-4 hover:underline">
-                          {g.materialName} profile
-                        </Link>
-                      ) : null}
-                    </div>
-                  </details>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </>
         ) : null}
       </section>
 
-      {/* ── Lower analytics ───────────────────────────────────────────── */}
-      <div className="grid gap-12 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <section aria-labelledby="mm-heat-title" className="min-w-0 scroll-mt-24">
-          <div className="mb-5 border-b border-border-strong pb-3">
-            <h2 id="mm-heat-title" className="font-display text-xl font-semibold tracking-tight text-foreground sm:text-[1.375rem]">
-              Month-on-month change
+      {/* ── Cards ────────────────────────────────────────────────────── */}
+      {selected.length > 0 ? (
+        <section aria-labelledby="mm-cards-title" className="scroll-mt-24">
+          <div className="border-b border-border-strong pb-3">
+            <h2 id="mm-cards-title" className={h2}>
+              Latest values
             </h2>
-            <p className="mt-1.5 text-[0.9375rem] leading-7 text-muted">
-              {heatPeriods.length
-                ? `${formatPeriod(heatPeriods[0], true)} to ${formatPeriod(heatPeriods[heatPeriods.length - 1], true)}${
-                    periods.length - 1 > HEAT_MONTHS ? `, the last ${HEAT_MONTHS} months of the window` : ""
-                  }. Each cell compares a month’s average with the month before.`
-                : "This window is too short for a month-on-month change."}
-            </p>
           </div>
-          <Heatmap
-            key={`${heatPeriods[0] ?? ""}-${heatPeriods.length}`}
-            rows={heatRows}
-            periods={heatPeriods}
-            onInspect={(id, period) => {
-              setHoverId(id);
-              setCursor(period);
-            }}
-          />
-        </section>
-
-        <section aria-labelledby="mm-movers-title" className="scroll-mt-24">
-          <div className="mb-5 border-b border-border-strong pb-3">
-            <h2 id="mm-movers-title" className="font-display text-xl font-semibold tracking-tight text-foreground sm:text-[1.375rem]">
-              Largest moves
-            </h2>
-            <p className="mt-1.5 text-[0.9375rem] leading-7 text-muted">
-              {formatPeriod(win.start)} to {formatPeriod(win.end)} ({moverMonths} months), ranked by size of change.
-            </p>
-          </div>
-          <ol className="space-y-3">
-            {movers.ranked.map((m, i) => {
-              const s = byId.get(m.id)!;
-              const st = seriesStyle(m.id);
-              const w = (Math.abs(m.change.pct) / moverMax) * 100;
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {selected.map(({ s, slot }) => {
+              const st = slotStyle(slot);
+              const sum = changeSummary(s.obs, tab, s.sourceBreaks);
+              const spark = win.start ? windowObservations(s.obs, win.start, win.end) : [];
               return (
-                <li key={m.id}>
-                  <button
-                    type="button"
-                    aria-pressed={focusId === m.id}
-                    onClick={() => toggleFocus(m.id)}
-                    onMouseEnter={() => setHoverId(m.id)}
-                    onMouseLeave={() => setHoverId(null)}
-                    className="w-full rounded-md p-2 text-left outline-none hover:bg-elevated focus-visible:ring-2 focus-visible:ring-accent"
-                  >
-                    <span className="flex items-baseline justify-between gap-3 text-sm">
-                      <span className="text-foreground">
-                        <span className="tnum text-faint">{i + 1}.</span> {s.label}
-                      </span>
-                      <span className="tnum font-display font-semibold text-foreground">{formatPct(m.change.pct)}</span>
-                    </span>
-                    <span aria-hidden="true" className="mt-1.5 block h-1.5 w-full rounded-sm bg-elevated">
-                      <span className="block h-full rounded-sm" style={{ width: `${w}%`, background: st.color }} />
-                    </span>
-                    <span className="tnum mt-1 block text-xs text-muted">
-                      {formatNumber(m.change.fromValue)} → {formatNumber(m.change.toValue)} {s.unit}
-                    </span>
-                  </button>
+                <li
+                  key={s.id}
+                  className={cn(
+                    "rounded-lg border bg-card p-4 motion-safe:transition-colors",
+                    emphasis === s.id ? "border-accent" : "border-border",
+                  )}
+                  onMouseEnter={() => setHoverId(s.id)}
+                  onMouseLeave={() => setHoverId(null)}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h3 className="flex items-center gap-2 font-display font-semibold text-foreground">
+                        <Swatch color={st.color} dash={st.dash} />
+                        {s.label}
+                      </h3>
+                      <p className="mt-1 text-xs text-faint">
+                        {s.sourceShortName} · {PRICE_TYPE_LABELS[s.priceType]}
+                      </p>
+                    </div>
+                    <Sparkline points={spark} periods={periods} color={st.color} dash={st.dash} unit={s.unit} width={112} height={36} />
+                  </div>
+                  {sum.latest ? (
+                    <p className="mt-3">
+                      <span className="tnum font-display text-2xl font-bold tracking-tight text-foreground">
+                        {formatNumber(sum.latest.value, s.digits)}
+                      </span>{" "}
+                      <span className="text-sm text-muted">{s.unitShort}</span>
+                      <span className="tnum block text-xs text-faint">{formatObservationPeriod(sum.latest, true)}</span>
+                    </p>
+                  ) : null}
+                  <dl className="mt-3 grid grid-cols-3 gap-2 border-t border-border pt-3 text-xs">
+                    {sum.changes.map(({ horizon, change, reason }) => (
+                      <div key={horizon.id}>
+                        <dt className="text-faint">{horizon.label}</dt>
+                        <dd className="tnum mt-0.5 text-sm text-foreground" title={reason ?? undefined}>
+                          {change ? `${formatPct(change.pct)}${change.estimated ? "e" : ""}` : "n/a"}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <p className="mt-3 text-xs leading-5 text-muted">{s.benchmark}</p>
+                  {s.materialHref ? (
+                    <Link href={s.materialHref} className="mt-2 inline-block font-display text-xs text-accent hover:underline">
+                      {s.materialName} policy record →
+                    </Link>
+                  ) : null}
                 </li>
               );
             })}
-          </ol>
-          {movers.unranked.length ? (
-            <ul className="mt-3 text-xs text-muted">
-              {movers.unranked.map((u) => (
-                <li key={u.id}>
-                  {byId.get(u.id)?.label ?? u.id} not ranked: {u.reason}
-                </li>
-              ))}
-            </ul>
-          ) : null}
+          </ul>
+          <p className="mt-3 text-xs text-faint">
+            Changes compare the latest value with the value exactly{" "}
+            {HORIZONS[tab].map((h) => `${h.lag} ${unitWord}${h.lag === 1 ? "" : "s"}`).join(" or ")} earlier. “n/a” means one of
+            the two values is missing or the source changes between them; “e” marks a change that uses an estimate.
+          </p>
         </section>
-      </div>
+      ) : null}
 
-      {/* ── Data table & export ───────────────────────────────────────── */}
-      <section aria-labelledby="mm-table-title" className="scroll-mt-24">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-border-strong pb-3">
-          <h2 id="mm-table-title" className="font-display text-xl font-semibold tracking-tight text-foreground sm:text-[1.375rem]">
-            Data
-          </h2>
-          <a
-            href="/api/export/markets.csv"
-            download
-            className="inline-flex min-h-11 items-center rounded-md border border-border-strong bg-card px-3 font-display text-sm text-foreground hover:border-accent sm:min-h-9"
-          >
-            Download CSV (all months, CC BY 4.0)
-          </a>
-        </div>
-        <details className="rounded-md border border-border bg-card">
-          <summary className="cursor-pointer px-4 py-3 font-display text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-accent">
-            Table of monthly benchmark averages, {formatPeriod(win.start)}–{formatPeriod(win.end)} ({periods.length} months)
-          </summary>
-          <div className="max-h-[28rem] overflow-auto border-t border-border">
-            <table className="w-full text-sm">
-              <caption className="sr-only">
-                Monthly benchmark averages in {unit}, {formatPeriod(win.start, true)} to {formatPeriod(win.end, true)}, newest
-                first. A dash marks a month with no observation.
-              </caption>
-              <thead className="sticky top-0 bg-card">
-                <tr className="border-b border-border">
-                  <th scope="col" className="px-4 py-2 text-left font-display text-xs font-medium text-faint">
-                    Month
-                  </th>
-                  {series.map((s) => (
-                    <th key={s.id} scope="col" className="px-4 py-2 text-right font-display text-xs font-medium text-faint">
-                      {s.label}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {tablePeriods.map((p) => (
-                  <tr key={p} className="border-b border-border last:border-0">
-                    <th scope="row" className="tnum px-4 py-1.5 text-left font-normal text-muted">
-                      {formatPeriod(p)}
-                    </th>
-                    {series.map((s) => {
-                      const v = valueAt(s.obs, p);
-                      return (
-                        <td key={s.id} className="tnum px-4 py-1.5 text-right text-foreground">
-                          {v === null ? <span className="text-faint">—</span> : formatNumber(v, 2)}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      {/* ── Heatmap and movers ───────────────────────────────────────── */}
+      {selected.length > 0 ? (
+        <section aria-labelledby="mm-heat-title" className="scroll-mt-24">
+          <div className="border-b border-border-strong pb-3">
+            <h2 id="mm-heat-title" className={h2}>
+              {tab === "annual" ? "Year-on-year change" : "Month-on-month change"}
+            </h2>
           </div>
-        </details>
-      </section>
+          <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+            <Heatmap
+              rows={heatRows}
+              periods={heatPeriods}
+              frequency={tab}
+              onInspect={(id, period) => {
+                setHeatInspect({ id, period });
+                setCursor(period);
+              }}
+            />
+            <div>
+              <h3 className="font-display text-base font-semibold text-foreground">
+                Largest moves, {moverLag} {unitWord}
+                {moverLag === 1 ? "" : "s"} to {formatPeriod(commonEnd)}
+              </h3>
+              <p className="mt-1 text-xs text-faint">
+                Ranked by size of change to the latest {unitWord} all selected series share.
+              </p>
+              <ol className="mt-3 space-y-2">
+                {movers.ranked.map((m) => {
+                  const s = byId.get(m.id)!;
+                  const st = slotStyle(slotOf(m.id));
+                  const w = (Math.abs(m.change.pct) / moverMax) * 100;
+                  return (
+                    <li key={m.id} className="text-sm">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <span className="flex min-w-0 items-center gap-2 truncate text-foreground">
+                          <Swatch color={st.color} dash={st.dash} />
+                          {s.label}
+                        </span>
+                        <span className="tnum shrink-0 text-foreground">
+                          {formatPct(m.change.pct)}
+                          {m.change.estimated ? "e" : ""}
+                        </span>
+                      </div>
+                      <div className="mt-1 h-1.5 rounded-sm bg-elevated" aria-hidden="true">
+                        <div
+                          className="h-1.5 rounded-sm"
+                          style={{ width: `${w}%`, background: m.change.pct >= 0 ? "var(--accent)" : "var(--muted)" }}
+                        />
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+              {movers.unranked.length > 0 ? (
+                <ul className="mt-3 space-y-1 text-xs text-muted">
+                  {movers.unranked.map((u) => (
+                    <li key={u.id}>
+                      {byId.get(u.id)?.label}: not ranked. {u.reason}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* ── Data table ───────────────────────────────────────────────── */}
+      {selected.length > 0 && periods.length > 0 ? (
+        <section aria-labelledby="mm-table-title" className="scroll-mt-24">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border-strong pb-3">
+            <h2 id="mm-table-title" className={h2}>
+              Data
+            </h2>
+            <a href="/api/export/markets.csv" className="font-display text-sm text-accent hover:underline" download>
+              Download all series (CSV)
+            </a>
+          </div>
+          <details className="mt-4 rounded-lg border border-border bg-card">
+            <summary className="cursor-pointer px-4 py-3 font-display text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-accent">
+              Published values for the selected series, {formatPeriod(win.start)}–{formatPeriod(win.end)}
+            </summary>
+            <div className="max-h-[32rem] overflow-auto border-t border-border">
+              <table className="w-full text-left text-sm">
+                <caption className="sr-only">
+                  Published values for the selected series. “e” marks an estimate; a dash marks a period with no value.
+                </caption>
+                <thead className="sticky top-0 bg-card font-display text-xs text-faint">
+                  <tr>
+                    <th scope="col" className="px-4 py-2 font-medium">
+                      Period
+                    </th>
+                    {selectedSeries.map((s) => (
+                      <th key={s.id} scope="col" className="px-4 py-2 text-right font-medium whitespace-nowrap">
+                        {s.label}
+                        <span className="block font-normal">{s.unitShort}</span>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tablePeriods.map((p) => (
+                    <tr key={p} className="border-t border-border">
+                      <th scope="row" className="tnum px-4 py-1.5 font-normal whitespace-nowrap text-muted">
+                        {formatPeriod(p)}
+                      </th>
+                      {selectedSeries.map((s) => {
+                        const o = s.obs.find((x) => x.period === p);
+                        return (
+                          <td key={s.id} className="tnum px-4 py-1.5 text-right whitespace-nowrap text-foreground">
+                            {o ? `${formatNumber(o.value, s.digits)}${o.estimated ? "e" : ""}` : <span className="text-faint">—</span>}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+      ) : null}
     </div>
   );
 }

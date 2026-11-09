@@ -1,3 +1,20 @@
+## 2026-11-09: Critical Minerals Market Monitor, multi-source explorer (draft PR #232, update)
+
+- Same draft PR, fast-forwarded from `5a97a2e` with the work from worktree branch `claude/critical-minerals-market-monitor-b3ff97`. `/markets` is now a multi-source explorer; public navigation is still unchanged.
+- **Data:** 31 series from three pinned releases in `data/markets/<dataset>/`, each regenerated only by its own ingest script, with its source file's checksum verified:
+  - World Bank Pink Sheet (monthly, CC BY 4.0, through October 2026): aluminium, copper, nickel.
+  - IMF Primary Commodity Prices (monthly, IMF terms, through September 2026): cobalt, palladium, rare-earth carbonate (from June 2012).
+  - USGS Mineral Commodity Summaries 2026 data release (annual 2021–2025, CC0, doi:10.5066/P1WKQ63T): 25 series across 18 materials, including NdPr, Nd, Dy and Tb oxides, lithium carbonate, gallium and boron import unit values, germanium, graphite, antimony, tungsten, niobium and tantalite. Values for 2025 are USGS estimates, flagged per observation. Source-price changes the USGS states (tantalite) are stored as breaks.
+  - `coverage-gaps.json` v2 gives each tracked material without an open monthly series its status (annual only, joint only, no open series) and the test a monthly series would have to meet.
+- **Explorer:** Monthly and Annual tabs, each with a material-grouped multi-select of up to six series. Colour slots are stable when a series is removed. The chart has indexed and published-value views; published values only appear when unit, currency and frequency all match. Estimates are drawn hollow and dotted, and lines never join across a gap or source change. Coordinated cards, legend focus, heatmap, ranked moves to a common end period, and a data table. URL params: `freq`, `series`, `range`, `view`.
+- **Price types:** exchange benchmark, price assessment and trade unit value. Trade unit values are never labelled as prices; a test enforces this.
+- **Governance (blocking reviewer decision):** unchanged. README and CLAUDE.md say "no market prices", and the maintainer decides whether to accept the exception.
+- **QA:**
+  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1188/1188) and build all pass.
+  - Browser QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow, after a fix to the heatmap grid.
+  - Interaction checks: URL restore (it was broken by a mount-order race; now fixed), keyboard chip toggle, and heatmap roving focus opening on the latest month.
+- Not merged, deployed or published.
+
 ## 2026-11-09: Critical Minerals Market Monitor (draft PR)
 
 - Branch `claude/critical-minerals-market-monitor-0dd37c` from `c69e8fc`. New route `/markets`, titled "Critical Minerals Market Monitor". Public navigation is unchanged; the route is listed in the sitemap only, and the PR proposes where it could sit in the navigation.

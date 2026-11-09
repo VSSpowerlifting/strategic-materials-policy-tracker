@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
 import { ExtLink } from "@/components/ui/ext-link";
-import { MarketMonitor, type MonitorGap } from "@/components/markets/market-monitor";
-import type { MonitorSeries } from "@/components/markets/types";
-import { getMaterialBySlug } from "@/lib/data";
-import { getMarketCoverage, getMarketManifest, getMarketSeries, getObservations } from "@/lib/market-data";
-import { formatPeriod } from "@/lib/markets";
+import { MarketExplorer } from "@/components/markets/market-monitor";
+import { buildMonitorSeries, buildReleaseNotices, materialLink } from "@/components/markets/series";
+import { getMarketCoverage, getMarketDatasets } from "@/lib/market-data";
+import { PRICE_TYPE_LABELS, formatPeriod, type CoverageStatus } from "@/lib/markets";
 import { formatDate } from "@/lib/format";
 import { fi002 } from "@/lib/fi002";
 
 const DESCRIPTION =
-  "Monthly benchmark averages for aluminium, copper and nickel from the World Bank Pink Sheet, with indexed change, month-on-month changes and coverage gaps for other tracked materials. Market context, not investment advice or a forecast.";
+  "Compare source-linked historical prices for critical and strategic materials: monthly averages from the World Bank Pink Sheet and IMF Primary Commodity Prices, and annual USGS prices and unit values for rare earths, lithium, gallium, germanium, tungsten and more. Market context, not investment advice or a forecast.";
 
 export const metadata: Metadata = {
   title: "Critical Minerals Market Monitor",
@@ -19,63 +18,36 @@ export const metadata: Metadata = {
   alternates: { canonical: "/markets" },
 };
 
-function materialLink(slug: string): { name: string | null; href: string | null } {
-  const m = getMaterialBySlug(slug);
-  return m ? { name: m.nameEn, href: `/materials/${m.slug}` } : { name: null, href: null };
-}
+const STATUS_LABEL: Record<CoverageStatus, string> = {
+  annual_only: "Annual series only",
+  joint_only: "Priced jointly with another material",
+  no_open_series_identified: "No open series identified",
+};
 
 export default function MarketsPage() {
-  const manifest = getMarketManifest();
+  const datasets = getMarketDatasets();
   const coverage = getMarketCoverage();
-  const raw = getMarketSeries();
 
-  const series: MonitorSeries[] = raw.map((s) => {
-    const mat = materialLink(s.materialId);
-    return {
-      id: s.id,
-      materialId: s.materialId,
-      materialName: mat.name ?? s.label,
-      materialHref: mat.href,
-      label: s.label,
-      benchmark: s.benchmark,
-      unit: s.unit,
-      currency: s.currency,
-      priceBasis: s.priceBasis,
-      aggregation: s.aggregation,
-      firstPeriod: s.firstPeriod,
-      lastPeriod: s.lastPeriod,
-      obs: getObservations(s.id),
-    };
-  });
+  const series = buildMonitorSeries();
 
-  const gaps: MonitorGap[] = coverage.gaps.map((g) => {
-    const mat = materialLink(g.materialId);
-    return {
-      materialId: g.materialId,
-      materialName: mat.name ?? g.materialId,
-      materialHref: mat.href,
-      worldBankCoverage: g.worldBankCoverage,
-      gradeDistinctions: g.gradeDistinctions,
-      requirementForInclusion: g.requirementForInclusion,
-    };
-  });
+  const monthly = series.filter((s) => s.frequency === "monthly");
+  const annual = series.filter((s) => s.frequency === "annual");
+  const materialCount = new Set(series.map((s) => s.materialId)).size;
+  const releaseNotices = buildReleaseNotices();
 
-  const cutoff = manifest.observationCutoff;
   const facts: { term: string; value: React.ReactNode }[] = [
-    { term: "Last available observation", value: formatPeriod(cutoff, true) },
-    { term: "Series published", value: `${series.length} monthly benchmark averages` },
-    {
-      term: "Source",
+    { term: "Series", value: `${monthly.length} monthly · ${annual.length} annual, covering ${materialCount} materials` },
+    ...datasets.map((d) => ({
+      term: d.manifest.shortName,
       value: (
-        <ExtLink href={manifest.landingPageUrl}>World Bank Pink Sheet</ExtLink>
+        <>
+          Through {formatPeriod(d.manifest.observationCutoff, true)} · released {formatDate(d.manifest.releaseDate)}
+          <span className="block text-xs text-faint">
+            {d.series.length} series · {d.manifest.license.name.replace(/ public domain dedication$/, "")}
+          </span>
+        </>
       ),
-    },
-    {
-      term: "Source release",
-      value: `${formatDate(manifest.releaseDate)} · retrieved ${formatDate(manifest.retrievedOn)}`,
-    },
-    { term: "Publisher’s update schedule", value: manifest.updateFrequency.statedAs },
-    { term: "Next scheduled release", value: formatDate(manifest.nextScheduledRelease.date) },
+    })),
   ];
 
   return (
@@ -86,14 +58,15 @@ export default function MarketsPage() {
           title="Critical Minerals Market Monitor"
           lead={
             <>
-              Monthly benchmark averages for {series.map((s) => s.label.toLowerCase()).join(", ").replace(/, ([^,]*)$/, " and $1")},
-              published by the World Bank and frozen at the {formatPeriod(cutoff, true)} observation. Prices sit outside the
-              policy record: they are not linked to events, commitments or controls, and a shared date does not show cause.
+              Historical prices for the materials the tracker follows, from three public sources: monthly averages from the
+              World Bank and the IMF, and annual USGS prices and import unit values for rare earths, lithium, gallium,
+              germanium, tungsten and other materials with no open monthly series. Prices sit outside the policy record; a
+              shared date does not show that a measure moved a price.
             </>
           }
         />
 
-        <dl className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <dl className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {facts.map((f) => (
             <div key={f.term} className="bg-card px-4 py-3">
               <dt className="font-display text-xs text-faint">{f.term}</dt>
@@ -103,163 +76,244 @@ export default function MarketsPage() {
         </dl>
 
         <p className="mt-4 max-w-4xl text-sm leading-6 text-muted">
-          Each figure is a monthly average in nominal US dollars, not a price on any single day and not a live quote. Nothing
-          here is investment advice or a forecast. Percentage changes, indexed values and rankings are SMPT calculations from
-          the published figures; no month is interpolated.
+          Every figure is a period average or unit value in nominal US dollars as the source publishes it, not a live quote.
+          Percentage changes, indexed values and rankings are SMPT calculations; no period is interpolated and no unit is
+          converted. Nothing here is investment advice or a forecast.
         </p>
       </Container>
 
       <Container width="wide" className="mt-12">
-        <MarketMonitor
-          series={series}
-          gaps={gaps}
-          cutoff={cutoff}
-          nextReleaseDate={manifest.nextScheduledRelease.date}
-        />
+        <MarketExplorer series={series} releaseNotices={releaseNotices} />
       </Container>
 
       <Container width="wide" className="mt-16 space-y-14">
-        <Section
-          title="Method and definitions"
-          description="How the figures are read, calculated and limited."
-        >
-          <dl className="grid gap-6 md:grid-cols-3">
+        <Section title="Method and definitions" description="How the figures are read, calculated and limited.">
+          <dl className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Monthly benchmark average</dt>
+              <dt className="font-display text-sm font-semibold text-foreground">Exchange benchmark</dt>
               <dd className="mt-1.5 text-sm leading-6 text-muted">
-                The World Bank’s published average of a named exchange benchmark over a calendar month (the Pink Sheet heads
-                these columns “{manifest.aggregationBasis.statedAs}”). SMPT stores the published figure unchanged.
+                An average of a named exchange price, such as the LME cash settlement or COMEX, as averaged by the World
+                Bank, the IMF or the USGS.
               </dd>
             </div>
             <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Last available observation</dt>
+              <dt className="font-display text-sm font-semibold text-foreground">Price assessment</dt>
               <dd className="mt-1.5 text-sm leading-6 text-muted">
-                The latest month with a published value in the frozen dataset ({formatPeriod(cutoff, true)}). It is the
-                observation period, not the date this site was built. After the publisher’s next scheduled release the page
-                says the figures may be superseded.
+                A price-reporting agency’s or dealer’s assessment for a stated product and grade, republished by the IMF or
+                the USGS with its source named. SMPT has not seen the underlying assessment data.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-display text-sm font-semibold text-foreground">Trade unit value</dt>
+              <dd className="mt-1.5 text-sm leading-6 text-muted">
+                The declared value of U.S. imports divided by their quantity, as calculated by the USGS from Census Bureau
+                trade data. It moves with product mix and origin as well as price, so it is never labelled a price.
               </dd>
             </div>
             <div>
               <dt className="font-display text-sm font-semibold text-foreground">Indexed change</dt>
               <dd className="mt-1.5 text-sm leading-6 text-muted">
-                Each series divided by its own value in a common base month and multiplied by 100. The base is the first month
-                of the selected range in which every shown series has a value; a series without one is left out and named.
-                Change over N months compares a month with the month exactly N earlier; if either is missing, no change is
-                shown.
+                Each series divided by its own value in a common base period and multiplied by 100. The base is the latest
+                first period among the selected series, so every included line starts at 100. A series with no value in
+                that period, or whose source changes after it, is left out and named.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-display text-sm font-semibold text-foreground">Change over a horizon</dt>
+              <dd className="mt-1.5 text-sm leading-6 text-muted">
+                A period compared with the period exactly that many months or years earlier. If either value is missing,
+                or the source states a change of underlying data between them, no change is shown.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-display text-sm font-semibold text-foreground">Estimates and source changes</dt>
+              <dd className="mt-1.5 text-sm leading-6 text-muted">
+                USGS 2025 values are estimates made early in 2026; they are marked “e”, drawn hollow and carried into any
+                change or index that uses them. Where the USGS notes a change of price source within a series, the chart
+                marks it and does not join the line across it.
               </dd>
             </div>
           </dl>
 
-          <div className="mt-8 overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[44rem] text-left text-sm">
-              <caption className="sr-only">Specification of each published series</caption>
-              <thead className="bg-card font-display text-xs text-faint">
-                <tr>
-                  <th scope="col" className="px-4 py-2.5 font-medium">Series</th>
-                  <th scope="col" className="px-4 py-2.5 font-medium">World Bank specification</th>
-                  <th scope="col" className="px-4 py-2.5 font-medium">Price basis</th>
-                  <th scope="col" className="px-4 py-2.5 font-medium">Unit</th>
-                  <th scope="col" className="px-4 py-2.5 font-medium">Window</th>
-                </tr>
-              </thead>
-              <tbody>
-                {raw.map((s) => (
-                  <tr key={s.id} className="border-t border-border align-top">
-                    <th scope="row" className="px-4 py-3 font-medium text-foreground">
-                      {s.benchmark}
-                    </th>
-                    <td className="px-4 py-3 leading-6 text-muted">{s.specification}</td>
-                    <td className="px-4 py-3 leading-6 text-muted">{s.priceBasis}</td>
-                    <td className="px-4 py-3 leading-6 text-muted">
-                      {s.unit}
-                      <span className="block text-xs text-faint">{s.unitNote}</span>
-                    </td>
-                    <td className="tnum px-4 py-3 leading-6 whitespace-nowrap text-muted">
-                      {formatPeriod(s.firstPeriod)} – {formatPeriod(s.lastPeriod)}
-                      <span className="block text-xs text-faint">{s.observationCount} months</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <h3 className="mt-8 font-display text-base font-semibold text-foreground">Limitations</h3>
-          <ul className="mt-2 max-w-4xl list-disc space-y-1.5 pl-5 text-sm leading-6 text-muted">
-            {Array.from(new Set(raw.flatMap((s) => s.limitations))).map((l) => (
-              <li key={l}>{l}</li>
+          <div className="mt-10 space-y-4">
+            {datasets.map((d) => (
+              <details key={d.manifest.datasetId} className="rounded-lg border border-border bg-card">
+                <summary className="cursor-pointer px-4 py-3 font-display text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-accent">
+                  {d.manifest.shortName}: specification of {d.series.length} series
+                </summary>
+                <div className="overflow-x-auto border-t border-border">
+                  <table className="w-full min-w-[56rem] text-left text-sm">
+                    <caption className="sr-only">Specification of each {d.manifest.shortName} series</caption>
+                    <thead className="font-display text-xs text-faint">
+                      <tr>
+                        <th scope="col" className="px-4 py-2.5 font-medium">Series</th>
+                        <th scope="col" className="px-4 py-2.5 font-medium">Source specification</th>
+                        <th scope="col" className="px-4 py-2.5 font-medium">Type and basis</th>
+                        <th scope="col" className="px-4 py-2.5 font-medium">Unit</th>
+                        <th scope="col" className="px-4 py-2.5 font-medium">Window</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {d.series.map((s) => (
+                        <tr key={s.id} className="border-t border-border align-top">
+                          <th scope="row" className="px-4 py-3 font-medium text-foreground">
+                            {s.benchmark}
+                            {s.underlyingSources ? (
+                              <span className="mt-1 block text-xs font-normal text-faint">Source: {s.underlyingSources}</span>
+                            ) : null}
+                          </th>
+                          <td className="px-4 py-3 leading-6 text-muted">
+                            {s.specification}
+                            {s.sourceBreaks.map((b) => (
+                              <span key={b.period} className="mt-1 block text-xs text-faint">
+                                From {formatPeriod(b.period)}: {b.statedAs}
+                              </span>
+                            ))}
+                          </td>
+                          <td className="px-4 py-3 leading-6 text-muted">
+                            {PRICE_TYPE_LABELS[s.priceType]}
+                            <span className="block text-xs text-faint">
+                              {s.priceBasis}
+                              {s.deliveryBasis ? ` · ${s.deliveryBasis}` : ""}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 leading-6 text-muted">
+                            {s.unit}
+                            <span className="block text-xs text-faint">{s.unitNote}</span>
+                          </td>
+                          <td className="tnum px-4 py-3 leading-6 whitespace-nowrap text-muted">
+                            {formatPeriod(s.firstPeriod)} – {formatPeriod(s.lastPeriod)}
+                            <span className="block text-xs text-faint">
+                              {s.observationCount} {s.frequency === "annual" ? "years" : "months"}
+                              {s.estimatedCount ? `, ${s.estimatedCount} estimated` : ""}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="border-t border-border px-4 py-3">
+                  <h3 className="font-display text-xs text-faint">Limitations</h3>
+                  <ul className="mt-2 max-w-4xl list-disc space-y-1.5 pl-5 text-sm leading-6 text-muted">
+                    {Array.from(new Set(d.series.flatMap((s) => s.limitations))).map((l) => (
+                      <li key={l}>{l}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
             ))}
-            <li>{raw[0]?.missingValueHandling}</li>
-          </ul>
-        </Section>
-
-        <Section title="Source, licence and attribution">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-3 text-sm leading-6 text-muted">
-              <p className="text-foreground">{manifest.attribution}</p>
-              <p>
-                Licence: <ExtLink href={manifest.license.url}>{manifest.license.name}</ExtLink>, as stated on the{" "}
-                <ExtLink href={manifest.license.statedAt}>World Bank data catalogue entry</ExtLink>. See also the{" "}
-                <ExtLink href={manifest.license.termsUrl}>World Bank public licence terms</ExtLink>.
-              </p>
-              <p>
-                <span className="text-foreground">Changes made.</span> {manifest.changesMade}
-              </p>
-              <p>{manifest.thirdPartyNote}</p>
-            </div>
-            <div className="space-y-3 text-sm leading-6 text-muted">
-              <ul className="space-y-1.5">
-                <li>
-                  <ExtLink href={manifest.landingPageUrl}>World Bank Commodity Markets</ExtLink>
-                </li>
-                <li>
-                  <ExtLink href={manifest.catalogUrl}>Data catalogue: Commodity Prices — History and Projections</ExtLink>
-                </li>
-                <li>
-                  <ExtLink href={manifest.workbook.url}>{manifest.workbook.fileName}</ExtLink>{" "}
-                  <span className="text-faint">
-                    (sheet “{manifest.workbook.sheet}”, {manifest.workbook.updatedText.toLowerCase()})
-                  </span>
-                </li>
-                <li>
-                  <ExtLink href={manifest.pinkSheetPdfUrl}>Pink Sheet, {formatPeriod(manifest.releaseDate.slice(0, 7), true)} (PDF)</ExtLink>
-                </li>
-              </ul>
-              <p className="break-all font-mono text-xs text-faint">
-                Workbook SHA-256 {manifest.workbook.sha256}
-              </p>
-              <p>
-                Dataset <span className="font-mono text-xs">{manifest.datasetId}</span> is regenerated only by the
-                repository’s ingest script from a pinned workbook; the build never fetches prices.
-              </p>
-            </div>
           </div>
         </Section>
 
-        <Section title="Not yet covered">
-          <p className="max-w-4xl text-sm leading-6 text-muted">
-            The World Bank Monthly Prices sheet carries no lithium, cobalt, graphite, tungsten, antimony or rare-earth
-            series. Commercial price assessments for those products are listed as possible future additions only: SMPT has
-            not reviewed the licence terms of any commercial assessment or exchange data feed, and none is shown or
-            redistributed here. Each material’s card above states what an open series would need to show.
+        <Section title="Sources, licences and attribution">
+          <div className="grid gap-8 lg:grid-cols-3">
+            {datasets.map(({ manifest: m }) => (
+              <div key={m.datasetId} className="space-y-3 text-sm leading-6 text-muted">
+                <h3 className="font-display text-base font-semibold text-foreground">{m.shortName}</h3>
+                <p className="text-foreground">{m.attribution}</p>
+                <p>
+                  Licence:{" "}
+                  {m.license.url ? <ExtLink href={m.license.url}>{m.license.name}</ExtLink> : m.license.name}, as stated at{" "}
+                  <ExtLink href={m.license.statedAt}>the publisher’s data page</ExtLink>
+                  {m.license.termsUrl !== m.license.url ? (
+                    <>
+                      {" "}
+                      (<ExtLink href={m.license.termsUrl}>terms</ExtLink>)
+                    </>
+                  ) : null}
+                  .
+                </p>
+                <p>
+                  <span className="text-foreground">Changes made.</span> {m.changesMade}
+                </p>
+                <p>{m.thirdPartyNote}</p>
+                <ul className="space-y-1">
+                  <li>
+                    <ExtLink href={m.landingPageUrl}>Publisher page</ExtLink>
+                  </li>
+                  <li>
+                    <ExtLink href={m.catalogUrl}>Data catalogue entry</ExtLink>
+                  </li>
+                  {m.doi ? (
+                    <li>
+                      <ExtLink href={`https://doi.org/${m.doi}`}>doi:{m.doi}</ExtLink>
+                    </li>
+                  ) : null}
+                </ul>
+                <p className="text-xs text-faint">
+                  {m.updateFrequency ? `${m.updateFrequency.statedAs} ` : ""}
+                  {m.nextScheduledRelease ? `${m.nextScheduledRelease.statedAs} ` : ""}
+                  Retrieved {formatDate(m.retrievedOn)}.
+                </p>
+                <p className="break-all font-mono text-xs text-faint">
+                  {m.sourceFile.fileName} · SHA-256 {m.sourceFile.sha256}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 max-w-4xl text-sm leading-6 text-muted">
+            Each dataset is regenerated only by its ingest script from a pinned source file whose checksum is verified; the
+            site build never fetches prices.
           </p>
+        </Section>
+
+        <Section
+          title="Coverage gaps"
+          description="Tracked materials without an open monthly series, and what one would need to show."
+        >
+          <p className="max-w-4xl text-sm leading-6 text-muted">{coverage.note}</p>
+          <ul className="mt-6 grid gap-4 md:grid-cols-2">
+            {coverage.gaps.map((g) => {
+              const mat = materialLink(g.materialId);
+              return (
+                <li key={g.materialId} className="rounded-lg border border-border bg-card p-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="font-display font-semibold text-foreground">
+                      {mat.href ? (
+                        <Link href={mat.href} className="hover:text-accent">
+                          {mat.name}
+                        </Link>
+                      ) : (
+                        (mat.name ?? g.materialId)
+                      )}
+                    </h3>
+                    <span className="border-l-2 border-border-strong pl-1.5 font-mono text-[11px] text-muted">
+                      {STATUS_LABEL[g.status]}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-muted">{g.monthlyCoverage}</p>
+                  <details className="mt-2 text-sm leading-6 text-muted">
+                    <summary className="cursor-pointer font-display text-xs text-accent outline-none focus-visible:ring-2 focus-visible:ring-accent">
+                      Grades and inclusion test
+                    </summary>
+                    <p className="mt-2">{g.gradeDistinctions}</p>
+                    <p className="mt-2">
+                      <span className="text-foreground">Needed for a monthly series.</span> {g.requirementForInclusion}
+                    </p>
+                  </details>
+                </li>
+              );
+            })}
+          </ul>
         </Section>
 
         <Section title="Related">
           <ul className="grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
-            {series.map((s) =>
-              s.materialHref ? (
-                <li key={s.id}>
-                  <Link href={s.materialHref} className="text-accent underline-offset-2 hover:underline">
-                    {s.materialName} policy record
-                  </Link>
-                </li>
-              ) : null,
-            )}
+            <li>
+              <Link href="/materials" className="text-accent underline-offset-2 hover:underline">
+                Materials and their policy records
+              </Link>
+            </li>
             <li>
               <Link href={fi002.path} className="text-accent underline-offset-2 hover:underline">
                 {fi002.title}
               </Link>
+            </li>
+            <li>
+              <a href="/api/export/markets.csv" className="text-accent underline-offset-2 hover:underline" download>
+                All market series (CSV)
+              </a>
             </li>
           </ul>
         </Section>

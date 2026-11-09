@@ -2,7 +2,7 @@ import type { Observation } from "@/lib/markets";
 import { formatNumber, formatPeriod } from "@/lib/markets";
 
 /**
- * A small line of real monthly observations. Gaps break the line; nothing is
+ * A small line of real observations. Gaps break the line; nothing is
  * interpolated. Pass the months the line should span so a gap at either end
  * is visible as space rather than silently trimmed.
  */
@@ -55,7 +55,7 @@ export function Sparkline({
       height={height}
       viewBox={`0 0 ${width} ${height}`}
       role="img"
-      aria-label={`Monthly trend from ${formatNumber(first.value)} in ${formatPeriod(first.period)} to ${formatNumber(last.value)} in ${formatPeriod(last.period)}, ${unit}.`}
+      aria-label={`Trend from ${formatNumber(first.value)} in ${formatPeriod(first.period)} to ${formatNumber(last.value)} in ${formatPeriod(last.period)}, ${unit}.`}
       className="block shrink-0"
     >
       <path d={segments.join(" ")} fill="none" stroke={color} strokeWidth={2} strokeDasharray={dash} strokeLinejoin="round" strokeLinecap="round" />
