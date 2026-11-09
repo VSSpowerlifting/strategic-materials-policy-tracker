@@ -1,3 +1,12 @@
+## 2026-11-09: FI002 executive deck revision 4 (draft PR #233, review copy)
+
+- Branch `claude/fi002-presentation-redesign-8ed4f5`, which includes `d13b5bb` (opt-in `plain_frame` for research decks).
+- The 11-slide editorial and visual redesign is saved in `docs/research/fi002-bhp-copper/output/review/revision-4/`: PPTX, tagged PDF, renders, contact sheet and gate A–E QC record. It adds no new research and changes no figures.
+- The editorial authenticity standard is now v1.1. A new §2 rule covers manufactured terms and micro-labels.
+- The live 12-slide deck and the download links are unchanged. Human publication approval is pending.
+- Drive review copies are not uploaded yet. The Drive connector cannot see the university folder, so it is probably on another account.
+- Open items: re-export the PDF with Archivo; the PowerPoint/LibreOffice editability tiers; a browser check of the BHP links (they return 403 to automated requests); removing the DRAFT badge for release.
+
 ## 2026-11-08: Strategy consulting skills system (draft PR)
 
 - Branch `claude/smpt-consulting-skills-c70ab2` from `d5b59bb`. Adds eight project skills in `.claude/skills/smpt-*/`: engagement-framing (the router), evidence-baseline, market-competitive, financing-structure, investment-appraisal, options-decision, executive-narrative and review-gate. They serve Applied Strategy and Financial Intelligence products only, not tracker data.
