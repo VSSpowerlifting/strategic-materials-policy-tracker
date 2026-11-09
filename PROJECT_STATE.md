@@ -1,3 +1,13 @@
+## 2026-11-08: FI003 draft 0.9.1 decision-clarity refinement (draft PR #215)
+
+- Proposed draft 0.9.1 (`research/fi003/outputs/presentation-draft-v091/`) rewrites the financing recommendation slides for a senior reader new to the case:
+  - Slide 14 states the trade-off in its title. It compares equity plus a revolver with equity only across five situations (overrun, cost while unused, draw conditions, covenant tests, repayment), with a real answer in every Equity only cell.
+  - Remaining capacity is described as conditional borrowing, not cash, with no implied guarantee of overrun coverage.
+  - Slides 11, 12, 15 and 16 get decision titles and sentence cells.
+- Every figure and term is from draft 0.9 and its sources. The covenant cell says "liquidity floor", because the contract tests cash plus Cash Equivalents (C15). Model 1.0 and the cutoff are unchanged.
+- New opt-in `role-matrix` option `layout.cellText` (`tests/exhibit-system-v091-options.test.ts`). The 0.9 PPTX re-renders byte-identical. Gap noted: `exhibits:review --strict` misses role-matrix cell-length errors that render catches.
+- Draft 0.8 stays the review baseline. No accessible PDF exists for 0.9.1. The HOLD stands; no merge or publication. See [QUALITY_REVIEW_V091](research/fi003/presentation/QUALITY_REVIEW_V091.md).
+
 ## 2026-11-08: FI003 draft 0.9 visual refinement (draft PR #215)
 
 - Proposed draft 0.9 (`research/fi003/outputs/presentation-draft-v09/`) refines 0.8 for a senior finance reader:

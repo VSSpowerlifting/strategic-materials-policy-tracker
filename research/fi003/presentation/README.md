@@ -120,3 +120,18 @@ bash research/fi003/presentation/v09/export_pdf.sh
 ```
 
 The new renderer options are opt-in and covered by `tests/exhibit-system-v09-options.test.ts`. The draft 0.8 PPTX re-renders byte-identical.
+
+### Draft 0.9.1 decision-clarity refinement (proposed)
+
+Draft 0.9.1 rewords and relays the financing recommendation slides (11, 12, 14, 15, 16) of draft 0.9, so that a reader new to the case sees the alternatives, their cost and the reason for the recommendation. Slide 14 now compares equity plus a revolver with equity only across five situations, answered in plain sentences for both options. It keeps conditional borrowing capacity distinct from cash and does not imply that the facility guarantees overrun coverage. Same argument, model 1.0, figures, sources and cutoff. Draft 0.8 remains the review baseline. The publication HOLD stands. No accessible PDF was produced.
+
+Inputs live in `v091/`; outputs in `outputs/presentation-draft-v091/`. See `QUALITY_REVIEW_V091.md` for the slide 14 diagnosis, per-slide changes, hashes and what is not verified.
+
+```sh
+python3 research/fi003/presentation/v091/build_spec.py
+npm run -s exhibits:review -- research/fi003/presentation/v091/spec.json --strict
+npm run exhibits:render -- research/fi003/presentation/v091/spec.json research/fi003/outputs/presentation-draft-v091/fi003-jpmorgan-mp-materials-draft-0.9.1.pptx
+bash research/fi003/presentation/v091/export_pdf.sh
+```
+
+The `role-matrix` option `layout.cellText` is opt-in and covered by `tests/exhibit-system-v091-options.test.ts`. The draft 0.9 PPTX re-renders byte-identical.

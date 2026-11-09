@@ -20,6 +20,8 @@ export interface RoleMatrixData {
     emptyText?: string;
     /** Ledger only: the role column to emphasise (bold ink, soft band). */
     emphasisColumn?: string;
+    /** Ledger only: "sentence" lets a cell carry a short consequence (up to 64 characters) and wraps rows taller. */
+    cellText?: "short" | "sentence";
   };
 }
 
@@ -51,6 +53,7 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
         const ledger = style === "ledger";
         const emptyText = optStr(l.emptyText, "data.layout.emptyText");
         const emphasisColumn = optStr(l.emphasisColumn, "data.layout.emphasisColumn");
+        const cellText = l.cellText === undefined ? undefined : oneOf(l.cellText, ["short", "sentence"] as const, "data.layout.cellText");
         return {
           rowHeader: str(l.rowHeader, "data.layout.rowHeader"),
           labelWidth: optNum(l.labelWidth, "data.layout.labelWidth") ?? 2.2,
@@ -59,6 +62,7 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
           ...(style ? { style } : {}),
           ...(emptyText !== undefined ? { emptyText } : {}),
           ...(emphasisColumn !== undefined ? { emphasisColumn } : {}),
+          ...(cellText !== undefined ? { cellText } : {}),
         };
       })(),
     };
@@ -74,6 +78,7 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
       ...uniqueLabels(d.roles, "role labels"),
       ...uniqueLabels(d.orgs.map((o) => o.label), "organisation labels"),
     ];
+    const maxCell = d.layout?.cellText === "sentence" ? 64 : 16;
     d.orgs.forEach((o) => {
       if (o.cells.length !== d.roles.length) {
         issues.push({ rule: "aligned-series", message: `${o.label}: ${o.cells.length} cells for ${d.roles.length} roles` });
@@ -84,14 +89,14 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
       o.cells.forEach((c) => {
         const q = c?.qualifier;
         if (q === undefined) return;
-        if (q.length > 16) issues.push({ rule: "cell-length", message: `qualifier over 16 characters: ${q}` });
+        if (q.length > maxCell) issues.push({ rule: "cell-length", message: `qualifier over ${maxCell} characters: ${q}` });
         if (AMOUNT_LIKE.test(q)) issues.push({ rule: "no-amounts-in-roles", message: `qualifier reads as an amount: ${q}` });
       });
     });
     const em = d.layout?.emphasisColumn;
     if (em !== undefined && !d.roles.includes(em)) issues.push({ rule: "accent-resolves", message: `emphasis column "${em}" is not a role` });
-    if (d.layout?.style !== "ledger" && (d.layout?.emptyText !== undefined || em !== undefined)) {
-      issues.push({ rule: "layout-option", message: "emptyText and emphasisColumn apply to the ledger style only" });
+    if (d.layout?.style !== "ledger" && (d.layout?.emptyText !== undefined || em !== undefined || d.layout?.cellText !== undefined)) {
+      issues.push({ rule: "layout-option", message: "emptyText, emphasisColumn and cellText apply to the ledger style only" });
     }
     d.roles.forEach((r, j) => {
       if (d.orgs.every((o) => o.cells[j] === null || o.cells[j] === undefined)) {
@@ -174,7 +179,8 @@ function renderLedger(h: RenderHelpers, d: RoleMatrixData): void {
   const roleW = (h.area.w - labelW) / d.roles.length;
   const headH = 0.5;
   const footH = l.showCounts ? 0.42 : 0;
-  const rowH = Math.min(0.56, (h.area.h - headH - footH - 0.1) / d.orgs.length);
+  // Sentence cells wrap to two lines, so their rows may grow; short cells keep the 0.9 geometry.
+  const rowH = Math.min(l.cellText === "sentence" ? 0.86 : 0.56, (h.area.h - headH - footH - 0.1) / d.orgs.length);
   const rule = { type: "solid", pt: 0.75, color: C.border };
   const headRule = { type: "solid", pt: 1.25, color: C.ink };
   const none = { type: "none" };
