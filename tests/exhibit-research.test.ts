@@ -70,6 +70,30 @@ test("QC attachment cannot remove draft classification or grant release authorit
     assert.match(altered.stderr, /hash/);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
+test("plain_frame is opt-in, research-only and keeps source, draft and annotation text", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "smpt-research-plain-"));
+  try {
+    assert.throws(() => parseResearchDeck({ ...spec(), plain_frame: "yes" }, "test"), /plain_frame/);
+    assert.equal(parseResearchDeck(spec(), "test").plain_frame, false);
+    const s = spec() as ReturnType<typeof spec> & { plain_frame?: boolean };
+    s.plain_frame = true;
+    delete (s.slides[0] as { label?: string }).label;
+    const input = join(dir, "spec.json");
+    writeFileSync(input, JSON.stringify(s));
+    const out = join(dir, "plain.pptx");
+    const manifest = await renderResearchDeck(input, out);
+    const zip = await JSZip.loadAsync(readFileSync(out));
+    const cover = await zip.file("ppt/slides/slide1.xml")!.async("string");
+    const body = await zip.file("ppt/slides/slide2.xml")!.async("string");
+    assert.doesNotMatch(cover, /cover-kicker/);
+    assert.doesNotMatch(body, /section-label|interpretation-heading|INTERPRETATION/);
+    assert.match(body, /DRAFT · REVIEW GATES PENDING/);
+    assert.match(body, /Source: Test-only evidence stub/);
+    assert.match(body, /name="annot:interpretation"/);
+    const verify = spawnSync("python3", ["-B", "scripts/exhibit-system/verify_editability.py", "--deck", out, "--manifest", manifest], { encoding: "utf8" });
+    assert.equal(verify.status, 0, verify.stdout + verify.stderr);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
 test("renderer helpers enforce the exhibit typography floor", () => {
   const slide = { addText() {}, addShape() {}, addChart() {}, addTable() {}, addNotes() {} } as PptxSlide;
   const h = makeHelpers(slide, { x: 0, y: 0, w: 8, h: 4 }, [], {}, {});
