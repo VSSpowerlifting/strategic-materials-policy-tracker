@@ -16,7 +16,7 @@ export default function ResearchIndex() {
           <article className="grid gap-8 border-b border-border py-10 lg:grid-cols-[12rem_minmax(0,1fr)]">
             <div className="font-display text-sm leading-6 text-muted"><p className="font-semibold text-accent">Policy Research</p><p>November 9, 2026</p><p className="mt-2">Benjamin Yang</p></div>
             <div><h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl"><Link href="/research/china-export-control-suspension-extension" className="hover:text-accent">China Extends the Suspension of Six Export-Control Announcements Through January 10, 2027</Link></h2>
-            <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">With the November 10 deadline approaching, Beijing has extended its pause on six October 2025 export-control announcements through January 10, 2027. Earlier rare-earth controls remain on a separate track.</p>
+            <p className="mt-4 max-w-2xl font-display text-lg leading-8 text-muted">On November 9, China continued the suspension of six October 2025 export-control announcements through January 10, 2027. The April rare-earth controls and a separate U.S.-directed measure follow different schedules.</p>
             </div>
           </article>
 
