@@ -72,7 +72,7 @@ function RecordAsOf({ className }: { className?: string }) {
     <span className={cn("inline-flex items-center gap-2 whitespace-nowrap font-display text-xs text-muted", className)}>
       <CalendarIcon />
       <span>
-        Corpus revised <time dateTime={site.lastUpdated} className="tnum font-semibold text-foreground">{formatDate(site.lastUpdated)}</time>
+        Corpus revised <time dateTime={site.revisedOn} className="tnum font-semibold text-foreground">{formatDate(site.revisedOn)}</time>
       </span>
     </span>
   );

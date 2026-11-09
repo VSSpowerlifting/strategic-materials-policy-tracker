@@ -1,7 +1,8 @@
 /**
  * The machine-readable summary behind /api/v1/capital-control/summary and
- * the dataset export. Deterministic: statuses are evaluated on
- * `site.lastUpdated`, never on the build clock.
+ * the dataset export. Deterministic, never on the build clock: capital figures
+ * are read at the research-snapshot date `site.lastUpdated`, control statuses
+ * at the legal-status date `site.legalStatusAsOf`.
  */
 import {
   LISTED_NOT_SUMMED_ROLES,
@@ -24,6 +25,7 @@ const obj = <K extends string>(m: Map<K, number>) =>
 
 export function buildCapitalControlSummary() {
   const asOf = site.lastUpdated;
+  const controlsAsOf = site.legalStatusAsOf;
   const all = getAllFinancialCommitments();
   const controls = getAllControlMeasures();
   const totals = totalCommitments(publicCommitmentRows(all), all);
@@ -90,15 +92,21 @@ export function buildCapitalControlSummary() {
     },
     controls: {
       rows: controls.length,
-      byStatusAsOf: obj(countBy(controls, (m) => controlStatusOn(m, asOf))),
+      /** The date control statuses and clocks below are read on; later-dated entries are `scheduled`, not effective. */
+      statusAsOf: controlsAsOf,
+      byStatusAsOf: obj(countBy(controls, (m) => controlStatusOn(m, controlsAsOf))),
       byIssuer: obj(countBy(controls, (m) => controlIssuer(m))),
       byMeasureType: obj(countBy(controls, (m) => m.measureType)),
       byDirection: obj(countBy(controls, (m) => m.direction)),
-      clocks: controlClocks(asOf).map(({ measure, entry, daysLeft }) => ({
+      clocks: controlClocks(controlsAsOf).map(({ measure, entry, daysLeft, scheduled, endPassed }) => ({
         id: measure.id,
         status: entry.status,
         until: entry.until,
         daysFromAsOf: daysLeft,
+        endPassed,
+        scheduled: scheduled
+          ? { status: scheduled.status, from: scheduled.date, until: scheduled.until ?? null, sourceId: scheduled.sourceId }
+          : null,
       })),
     },
   };

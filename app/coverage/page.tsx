@@ -227,7 +227,7 @@ export default function CoveragePage() {
         <Link href="/data" className="font-display text-accent hover:text-accent-strong">
           /data
         </Link>
-        . Data version {site.version}, last updated {site.lastUpdated}.
+        . Data version {site.version}, last updated {site.revisedOn}.
       </p>
     </Container>
   );

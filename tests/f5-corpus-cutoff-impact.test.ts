@@ -15,9 +15,31 @@ const liveSeeds=():SeedInput=>Object.fromEntries(F5_SEED_NAMES.map(seed=>[
 // Historical snapshots (17 October to 6 November 2026) predate the 8 November
 // Phase III release; remove exactly its enumerated rows so those audits keep
 // describing the corpus they froze.
-const seeds=():SeedInput=>Object.fromEntries(Object.entries(liveSeeds()).map(([name,rows])=>[
+// The 9 November 2026 record of MOFCOM/GACC Announcement No. 58 of 2026 (the
+// continued suspension to 10 January 2027) postdates every frozen snapshot
+// below. Its new rows, and the status entries, evidence and links it added to
+// existing rows, are stripped the same way so those audits keep describing
+// the corpus they froze; current-corpus tests assert the records directly.
+const NOVEMBER_9_EXTENSION_IDS=new Set([
+  "china-rare-earth-suspension-extension-2026-11",
+  "src-mofcom-2026-58",
+  "ctl-cn-ree-2026-11-suspension-continuation",
+]);
+const NOVEMBER_9_EXTENSION_SOURCE="src-mofcom-2026-58";
+type ExtensionRow={id:string;eventIds?:string[];evidence?:{sourceId:string}[];statusHistory?:{sourceId?:string}[]};
+const withoutNovember9Extension=(s:SeedInput):SeedInput=>
+  Object.fromEntries(Object.entries(s).map(([name,rows])=>[
+    name,(rows as ExtensionRow[]).filter(r=>!NOVEMBER_9_EXTENSION_IDS.has(r.id)).map(r=>{
+      const previous=structuredClone(r);
+      if(previous.eventIds)previous.eventIds=previous.eventIds.filter(id=>!NOVEMBER_9_EXTENSION_IDS.has(id));
+      if(previous.evidence)previous.evidence=previous.evidence.filter(e=>e.sourceId!==NOVEMBER_9_EXTENSION_SOURCE);
+      if(previous.statusHistory)previous.statusHistory=previous.statusHistory.filter(e=>e.sourceId!==NOVEMBER_9_EXTENSION_SOURCE);
+      return previous;
+    }),
+  ]));
+const seeds=():SeedInput=>withoutNovember9Extension(Object.fromEntries(Object.entries(liveSeeds()).map(([name,rows])=>[
   name,(rows as {id:string}[]).filter(r=>!PHASE_III_IDS.has(r.id)),
-]));
+])));
 const minimal=():Record<string,unknown[]>=>Object.fromEntries(F5_SEED_NAMES.map(seed=>[seed,[]]));
 // The 3 November 2026 revision added the October 2026 EU Strategic Projects
 // event, its five sources and the projects, designations and organisations
@@ -275,15 +297,35 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
     r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"),
     "approved November 5 original-source access must be within the curated cutoff");
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
-  assert.equal(parsed.countFutureIntervalEndFields,21);
+  // 21 intervals from before the 9 November record, plus the 20 it adds: the continued
+  // suspension of 19 control rows (18 clauses and the umbrella row) and its own
+  // continuation row, each running to 10 January 2027.
+  assert.equal(parsed.countFutureIntervalEndFields,41);
+  assert.deepEqual(
+    Object.fromEntries([...new Set(parsed.futureIntervalEndFields.map((x:{date:string})=>x.date))].sort()
+      .map(date=>[date,parsed.futureIntervalEndFields.filter((x:{date:string})=>x.date===date).length])),
+    {"2026-11-10":19,"2026-11-27":2,"2027-01-10":20},
+  );
+  // The only dated fields after the 8 November corpus revision are the enumerated 9 November
+  // record: its own event and source (dated 9 November, four fields), the continuation row's
+  // 9 November "scheduled" entry (one field), and the 11 November effective date of the continued
+  // suspension on the 19 clause/umbrella rows plus the continuation row (twenty fields).
+  const afterCutoff=parsed.afterProposedCutoffFields as {seed:string;recordId:string;field:string;date:string}[];
+  assert.equal(parsed.countOtherPostCutoffFields,25);
+  assert.equal(afterCutoff.filter(r=>r.date==="2026-11-09").length,5);
+  assert.equal(afterCutoff.filter(r=>r.date==="2026-11-11").length,20);
+  assert.deepEqual([...new Set(afterCutoff.map(r=>r.date))].sort(),["2026-11-09","2026-11-11"]);
+  assert.ok(afterCutoff.filter(r=>r.date==="2026-11-09").every(r=>NOVEMBER_9_EXTENSION_IDS.has(r.recordId)));
+  assert.ok(afterCutoff.filter(r=>r.date==="2026-11-11").every(r=>
+    r.seed==="control-measures"&&/^statusHistory\[\d+\]\.date$/.test(r.field)));
   assert.equal(parsed.publicationAuthorized,false,
     "audit's non-publication flags do not retroactively undo separately authorized source publication");
   assert.equal(parsed.maintainerReviewRequired,true);
 });
 
 test("November 8 Phase III release admits only its enumerated milestones and Stillwater source dates",()=>{
-  const full=liveSeeds();
-  const frozen=JSON.stringify(full);
+  const full=withoutNovember9Extension(liveSeeds());
+  const frozen=JSON.stringify(liveSeeds());
   const before=auditF5CorpusCutoffImpact(seeds(),PRE_PHASE_III_CUTOFF,PHASE_III_RELEASE_CUTOFF);
   assert.equal(before.countNewlyIncludedDatedFields,0,
     "without the Phase III rows nothing in the 6 November corpus is re-dated by the new cutoff");

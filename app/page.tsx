@@ -61,6 +61,8 @@ export default function Home() {
   const financing = getFinancingCase();
   const tungsten = getTungstenCase();
   const revision = formatDateLong(site.lastUpdated);
+  // The displayed last-curated-revision date; the data views above stay on the research snapshot.
+  const revisedLabel = formatDateLong(site.revisedOn);
   const asOf = (
     <>as of the <time dateTime={site.lastUpdated}>{revision}</time> revision</>
   );
@@ -94,7 +96,7 @@ export default function Home() {
           <aside aria-labelledby="corpus-heading" className="relative self-center border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
             <h2 id="corpus-heading" className="font-display text-sm font-semibold">Current corpus</h2>
             <p className="mt-2 font-display text-sm text-muted">
-              Revised <time dateTime={site.lastUpdated}>{revision}</time>
+              Revised <time dateTime={site.revisedOn}>{revisedLabel}</time>
             </p>
             <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-5 font-display">
               {[

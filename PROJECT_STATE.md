@@ -1,3 +1,15 @@
+## 2026-11-09: China suspension continued to 10 Jan 2027 (local draft, issue #207)
+
+- Branch `claude/china-export-control-suspension-c698f6`. Draft PR only: not merged, deployed or published. AI-generated record: a draft until maintainer review.
+- Source: MOFCOM/GACC Joint Announcement No. 58 of 2026 (9 Nov 2026), read in full on the official MOFCOM page (`src-mofcom-2026-58`). One operative sentence continues the suspension of Announcements Nos. 55, 56, 57, 58, 61 and 62 of 2025 from 11 Nov 2026 to 10 Jan 2027. It gives no rationale beyond 经批准 and mentions neither No. 70 nor any later date. No framing claim is coded because none is stated.
+- Seed: new event `china-rare-earth-suspension-extension-2026-11`; 18 clause rows plus the umbrella row `ctl-cn-ree-2025-11-suspension` gain a second `suspended`/`in_force` entry (2026-11-11 to 2027-01-10); new row `ctl-cn-ree-2026-11-suspension-continuation` (a `scheduled` entry dated 2026-11-09, then `in_force` from 2026-11-11 to 2027-01-10); event linked from China and six material pages. No. 70 (`src-mofcom-70`) and its period to 2026-11-10 are unchanged. Windows are contiguous.
+- Date model (new in `lib/site.ts`): `lastUpdated` 2026-11-08 stays the frozen Phase III/F5 research snapshot (money, lattice, response, F5 paths). `legalStatusAsOf` 2026-11-09 is the date legal instruments are incorporated; control-status views read statuses on it, so an entry dated later shows as "scheduled, not yet in effect" and never as effective. `revisedOn` 2026-11-09 is the displayed revision date (header, footer, home, sitemap, structured data, coverage). Issuance (9 Nov) and effect (11 Nov) are separate dates.
+- Logic: `controlEntryOn`, `scheduledControlEntry`, `controlEndPassed`, `controlClocks(asOf)` and `summarizeControl(m, asOf)` in `lib/capital-control.ts`; `currentControlEntry` stays the last recorded entry for the frozen F5 scripts. After a window's `until` passes with no later entry the row is flagged `endPassed` only; renewal or resumption is never inferred without another instrument. Control CSV export gains `statusAsOf`, `scheduledStatus`, `scheduledStatusFrom`, `scheduledStatusUntil`.
+- Not changed: April 2025 controls (No. 18, never suspended); the US-specific Ga/Ge/Sb/graphite suspension (No. 72 of 2025) still ends 2026-11-27. Suspension is not repeal; no extension past 2027-01-10 is assumed.
+- `site.lastUpdated` is still 2026-11-08 (not bumped; many Phase III/F5 pins bind it and `scripts/adjudicate-project-execution.ts` requires a separately authorized revision). Pages as of 8 Nov still show the first window for the clauses; the extension shows as an event and in each status history. Maintainer decision needed.
+- Tests: new `tests/china-suspension-extension-2026-11.test.ts` (9/10/11 Nov and 10/11 Jan boundaries, scheduled-not-effective, no inferred renewal, contiguity, source integrity, untouched April/No. 72). `tests/capital-control-analytics.test.ts` reads statuses on `legalStatusAsOf`; `tests/f5-corpus-cutoff-impact.test.ts` strips the 9 Nov record from frozen snapshots (live CLI: 41 future interval ends, 25 post-cutoff fields). All other Phase III/F5 pins unchanged.
+- Open: No. 55 (superhard materials) is listed by number only; the issue cites a different No. 70 URL than `src-mofcom-70`; intake mode `backfill`; no framing claims on the new event.
+
 ## 2026-11-08: Strategy consulting skills system (draft PR)
 
 - Branch `claude/smpt-consulting-skills-c70ab2` from `d5b59bb`. Adds eight project skills in `.claude/skills/smpt-*/`: engagement-framing (the router), evidence-baseline, market-competitive, financing-structure, investment-appraisal, options-decision, executive-narrative and review-gate. They serve Applied Strategy and Financial Intelligence products only, not tracker data.
@@ -584,7 +596,7 @@
 - Four March 2025 EU CRMA Strategic Projects — Fortum Hydromet, GALLICAM, Orano Hydrometallurgy and NorthCYCLE — now promote battery-grade nickel from their already-source-backed designation/project material lists. No new project or financing record is created.
 - Australia's CMPTI row promotes nickel from the statute's existing material list.
 - The 2025 Canada-led G7 CMPA event now declares nickel because its existing NRCan backgrounder includes C$500,000 through NRC IRAP for NTwist Inc. with Vale Europe Ltd. and Tunley Environmental Ltd. to improve nickel production and efficiency. That project is not separately coded as a financial row in this tranche.
-- China Announcement No. 58 now attributes nickel at `component_manufacturing` through explicitly nickel-bearing ternary cathode precursors. This is not a raw-nickel export restriction; the measure remains suspended before implementation through 2026-11-10.
+- China Announcement No. 58 now attributes nickel at `component_manufacturing` through explicitly nickel-bearing ternary cathode precursors. This is not a raw-nickel export restriction; the measure remains suspended before implementation through 2026-11-10. (Extended to 2027-01-10 by MOFCOM/GACC Announcement No. 58 of 2026; see the 2026-11-09 entry.)
 - Out of scope: coding Indonesian nickel policy as a new event/control, creating the NTwist funding as a new row, new nickel financing/project backfill, promotion of PGMs or other materials, physical-status changes, or schema/vocabulary redesign.
 - Focused regression coverage pins dossier provenance, Canada Kingston promotion, the four EU Strategic Projects/designations, CMPTI, G7 event-level scope, No. 58 semantics and the nickel stage-response cell. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
 
@@ -597,7 +609,7 @@
 - Canada's Kingston Cyclic Materials project, its C$4.893M award and the parent Kingston award package now track cobalt while retaining nickel as untracked. The project remains a recycling-stage record and its existing financial/physical lifecycle is unchanged.
 - Four existing March 2025 EU CRMA Strategic Projects — Fortum Hydromet, GALLICAM, Orano Hydrometallurgy and NorthCYCLE — now promote cobalt from their already-source-backed designation/project material lists. No new project or financing record is created.
 - Australia's CMPTI row promotes cobalt from the statute's existing material list.
-- China Announcement No. 58 now attributes cobalt at `component_manufacturing` through explicitly cobalt-bearing ternary cathode precursors. This is not a raw-cobalt export restriction; the measure remains suspended before implementation through 2026-11-10.
+- China Announcement No. 58 now attributes cobalt at `component_manufacturing` through explicitly cobalt-bearing ternary cathode precursors. This is not a raw-cobalt export restriction; the measure remains suspended before implementation through 2026-11-10. (Extended to 2027-01-10 by MOFCOM/GACC Announcement No. 58 of 2026; see the 2026-11-09 entry.)
 - Out of scope: coding the DRC cobalt ban/quota as a new event/control, nickel promotion, new cobalt financing/project backfill, physical-status changes, or schema/vocabulary redesign.
 - Focused regression coverage pins dossier provenance, Canada Kingston promotion, the four EU Strategic Projects/designations, CMPTI, No. 58 semantics and the cobalt stage-response cell. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
 
@@ -608,7 +620,7 @@
 - Adds lithium as the twelfth tracked material, with a current dossier grounded in IEA 2026, USGS 2026, Australia's September 2026 resources outlook, NRCan midstream-processing support, the UK Vision 2035 strategy and China's Announcement No. 58 primary.
 - Promotes existing lithium scope rather than creating speculative new records: 18 existing events now declare lithium; four existing control rows and three existing financial rows carry tracked lithium attribution. No exact `lithium` remains in an `untrackedMaterialsAsStated` field.
 - Canada's three 2022 ICA divestiture controls are now tracked to lithium. Australia's CMPTI row and two already-coded Canadian geoscience awards promote lithium from their existing untracked lists.
-- China No. 58 is attributed to lithium at `component_manufacturing`, with the source's battery/cathode product forms preserved as stated. This is a lithium-supply-chain control, not a claim that China restricted exports of raw lithium; No. 58 remains suspended before implementation through 2026-11-10.
+- China No. 58 is attributed to lithium at `component_manufacturing`, with the source's battery/cathode product forms preserved as stated. This is a lithium-supply-chain control, not a claim that China restricted exports of raw lithium; No. 58 remains suspended before implementation through 2026-11-10. (Extended to 2027-01-10 by MOFCOM/GACC Announcement No. 58 of 2026; see the 2026-11-09 entry.)
 - The ResourceEU event now declares lithium because its existing Commission source names an EIB loan agreement for Strategic Project Keliber. The Keliber loan remains deliberately unmodeled as a separate financial row in this tranche.
 - Out of scope: new lithium financing/project backfill (including Keliber and lithium items in the G7 CMPA rounds), promotion of cobalt/nickel/PGMs, physical-status changes, or any schema/vocabulary redesign.
 - Focused regression coverage pins dossier provenance, event reverse links, the three ICA controls, the CMPTI/PDAC promotions, No. 58 stage semantics and the lithium stage-response cell. Merge gate: validate, typecheck, lint, tests, build and Vercel must all be green on the final head.
@@ -1783,8 +1795,8 @@ and no disbursement, which is not a finding that none exists.
   the Department delivers a Funding Obligation; no funding obligation or
   disbursement is recorded.
 - The No. 61 Annex 1 (.wps) is still unread; Nos. 56/57/58/62 were suspended
-  before or soon after taking effect; the suspension ends 10 Nov 2026 and the
-  validator will warn after that date.
+  before or soon after taking effect; the suspension ended 10 Nov 2026 and was continued to 10 Jan 2027 by
+  Announcement No. 58 of 2026; the validator will warn after 10 Jan 2027.
 - `/coverage` does not yet report registry or Capital & Control counts.
 - Flows fold a whole part into a package that is a flow, not destination by
   destination, and stay at that documented package level. The USAR CHIPS package
@@ -1810,7 +1822,7 @@ PR: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/pull/6
 `main` at `7ddb62c`). Vercel preview built; not merged, per instruction.
 
 Next action: maintainer review of PR #6; after merge, watch 10 Nov 2026
-(China), the EU second round, SRF awards and USA Rare Earth disbursements.
+(China; continued to 10 Jan 2027 on 9 Nov 2026), the EU second round, SRF awards and USA Rare Earth disbursements.
 
 ## Release reconciliation: v0.5 is on `main`
 
@@ -1958,8 +1970,8 @@ session's write guard only allows edits under its own worktree path).
   clauses say so.
 - Whether MP exercised the $350 million option with DoD or used the bank
   alternative is not recorded; no later primary in the corpus states it.
-- The No. 61 suspension ends 10 Nov 2026 and No. 46's Item 2 suspension
-  27 Nov 2026: the validator will warn after those dates until a source
+- The No. 61 suspension ended 10 Nov 2026 and was continued to 10 Jan 2027 (No. 58 of 2026); No. 46's Item 2 suspension
+  ends 27 Nov 2026: the validator will warn after those dates until a source
   records what followed.
 - `graphify update .` not run.
 

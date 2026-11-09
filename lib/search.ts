@@ -42,7 +42,8 @@ import {
   supplyChainStageLabels,
   valueRoleLabels,
 } from "./labels";
-import { commitmentActor, controlIssuer, currentControlStatus, currentFinancialStatus } from "./capital-control";
+import { commitmentActor, controlEntryOn, controlIssuer, currentFinancialStatus } from "./capital-control";
+import { site } from "./site";
 import { formatMoney } from "./decimal";
 
 import type { JurisdictionCode } from "./types";
@@ -207,7 +208,7 @@ export function buildSearchIndex(): SearchDoc[] {
       id: m.id,
       kind: "control",
       title: `${controlMeasureTypeLabels[m.measureType]}${m.clause ? ` · ${m.clause}` : ""}`,
-      subtitle: `${jurisdictionLabels[issuer]} · ${controlStatusLabels[currentControlStatus(m)]}`,
+      subtitle: `${jurisdictionLabels[issuer]} · ${controlStatusLabels[(controlEntryOn(m, site.legalStatusAsOf) ?? m.statusHistory[0]).status]}`,
       href: `/controls/${m.id}`,
       date: m.statusHistory.find((e) => e.date)?.date ?? null,
       jurisdiction: issuer,
