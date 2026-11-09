@@ -5,7 +5,7 @@ export const fi002 = {
   path: "/research/escondida-copper",
   cutoff: "2026-11-05",
   description:
-    "Independent SMPT research connecting Goldman Sachs’ copper outlook to BHP’s earnings exposure, Escondida replacement economics and capital allocation.",
+    "A look at what Goldman Sachs’ 2027 copper forecast means for BHP’s earnings sensitivity and the proposed Escondida replacement concentrator.",
   assets: "/research/fi002",
 } as const;
 
@@ -20,7 +20,7 @@ export const fi002Screens = [
     years: "20 years · 2032–51",
     benefit: "$839m",
     explanation:
-      "Twenty years of assumed benefits lower the annual capital-recovery requirement. Flat incremental production across that period is a modeling assumption.",
+      "In the base case, the model spreads the benefit over 20 years from 2032. It assumes the same annual amount of production preserved or added throughout that period.",
   },
   {
     name: "Shorter benefits",
@@ -31,7 +31,7 @@ export const fi002Screens = [
     years: "10 years · 2032–41",
     benefit: "$1,162m",
     explanation:
-      "Halving the benefit period raises the annual requirement. Capital, margin and first production year match the base case.",
+      "With only ten years to recover the same capital cost, the required annual benefit rises. Margins and the first production year stay the same as in the base case.",
   },
   {
     name: "Shorter, later",
@@ -42,7 +42,7 @@ export const fi002Screens = [
     years: "10 years · 2034–43",
     benefit: "$1,407m",
     explanation:
-      "Deferring those ten benefit years by two years raises the requirement further. The capital schedule stays fixed; this isolates later benefits after the duration change.",
+      "When those ten benefit years start in 2034 instead of 2032, the required annual benefit rises again. The capital-spending schedule stays the same.",
   },
   {
     name: "Combined stress",
@@ -53,7 +53,7 @@ export const fi002Screens = [
     years: "20 years · 2034–53",
     benefit: "$1,218m",
     explanation:
-      "Lower long-term copper, 20% more capital and two years of deferred benefits combine. The required money benefit is lower than in the shorter case because benefits last longer; the weaker margin requires more equivalent tonnes.",
+      "This case combines lower long-term copper prices, 20% higher capital cost and a two-year delay. Because benefits run for 20 years, the annual cash benefit needed is lower than in the ten-year case. The weaker margin still means more production-equivalent tonnes are required.",
   },
 ] as const;
 

@@ -60,7 +60,9 @@ export default function AntimonySupplyResilience() {
           <h1 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
             U.S. Antimony Supply Resilience
           </h1>
-          <p className="mt-4 font-display text-lg text-muted">Strategic options for a defense manufacturer, 2027–2031</p>
+          <p className="mt-4 font-display text-lg text-muted">
+                  A hypothetical defense manufacturer&rsquo;s choices for keeping antimony supplies moving through disruptions in 2027–2031.
+                </p>
           
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link>
@@ -84,50 +86,36 @@ export default function AntimonySupplyResilience() {
               <section className="border-b border-paper-border pb-10">
                 
                 <h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight">
-                  Qualify the alternative source, then fund five months of buyer-approved stock
+                  Qualify another supplier before committing to five months of stock
                 </h2>
                 <p className="mt-5 font-display text-lg leading-8">
-                  Under the modeled eight-month severe interruption in 2030, the balanced strategy covers the full
-                  disruption with an initial inventory investment of about $2.30 million. A nine-month inventory-led
-                  strategy also covers the scenario but ties up about $4.13 million in stock, above the case&apos;s
-                  illustrative $3 million cash ceiling.
+                  In the model&rsquo;s severe 2030 case, an eight-month supply interruption can be covered with five months of inventory and an initial stock purchase of about $2.30 million, provided the alternative supplier qualifies. A nine-month, inventory-led approach also covers the disruption, but would tie up about $4.13 million—above the hypothetical buyer&rsquo;s $3 million cash ceiling.
                 </p>
                 <p className="mt-4 font-display text-lg leading-8">
-                  The five-month policy depends on qualifying a separate 45% international sourcing lane and testing
-                  the actual grade, refining origin, end-use eligibility and delivery terms. Failure to qualify that channel leaves 16.5 metric tons of modeled
-                  demand unfilled in 2027 under the severe interruption.
+                  That five-month plan assumes the manufacturer can qualify a separate supplier for 45% of its international sourcing, including checks on grade, refining origin, end-use eligibility and delivery terms. Without that channel, the same strategy would leave 16.5 metric tons of modeled demand unfilled during the severe 2027 interruption.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
                 
                 <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
-                  Import dependence and material qualification frame the risk
+                  U.S. import dependence makes supplier qualification important
                 </h2>
                 <p className="mt-5 font-display text-base leading-8">
-                  USGS estimated 91% U.S. net import reliance for antimony in 2025. China supplied 55% of U.S.
-                  antimony metal and oxide imports over 2021–2024, a historical import-origin measure. The
-                  national indicators establish market exposure; a manufacturer must separately verify product form,
-                  upstream refining, traceability, testing and acceptance for its own bill of materials.
+                  The US Geological Survey estimated that the United States relied on net imports for 91% of its antimony in 2025. China accounted for 55% of U.S. antimony metal and oxide imports over 2021–2024. Those national figures help explain the exposure, but a manufacturer still has to confirm whether a proposed supplier can deliver the right grade and form, with verified refining history and products that pass acceptance testing.
                 </p>
                 <p className="mt-4 font-display text-base leading-8">
-                  Public financing may support future U.S. supply. EXIM lists $2.906 billion for Stibnite as
-                  <strong> authorized</strong>; financing close, processing arrangements, qualified deliveries and
-                  actual buyer supply remain separate milestones. Idaho National Laboratory&apos;s 2026 pilot
-                  commissioning demonstrates early processing capability. Commercial qualification
-                  and accepted antimony deliveries remain separate milestones.
+                  New domestic supply could eventually reduce that exposure. EXIM lists $2.906 billion for the Stibnite project as <strong>authorized</strong>, while Idaho National Laboratory&rsquo;s 2026 pilot commissioning shows early processing capability. Authorization is not a financing close, and a commissioned pilot is not the same as qualified antimony arriving at a manufacturer&rsquo;s plant. Both projects need further commercial milestones before a buyer can rely on deliveries.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
                 
                 <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
-                  A balanced policy meets both modeled 2030 constraints
+                  The balanced option stays within the modeled cash and supply limits
                 </h2>
                 <p className="mt-4 font-display text-sm leading-7 text-paper-muted">
-                  All values below are calculated for a hypothetical buyer consuming 100 metric tons of contained
-                  antimony per year. The event is an eight-month severe interruption with the assumed qualified
-                  supplier mix and 2030 domestic availability.
+                  The table assumes a manufacturer using 100 metric tons of contained antimony each year, an eight-month severe interruption in 2030, and the qualified supplier mix and domestic availability specified in the model.
                 </p>
                 <div className="mt-5 overflow-x-auto border-y border-paper-border">
                   <table className="w-full min-w-[650px] border-collapse font-display text-sm">
@@ -155,43 +143,36 @@ export default function AntimonySupplyResilience() {
                   </table>
                 </div>
                 <p className="mt-4 font-display text-sm leading-7 text-paper-muted">
-                  Stock purchase cash is an inventory asset. Annual incremental expense combines illustrative
-                  sourcing premiums, inventory carry and disruption-specific emergency procurement markup.
-                  Figures are rounded from the linked workbook.
+                  Stock purchases remain inventory assets. The annual extra cost includes the model&rsquo;s sourcing premiums, holding costs and emergency purchase markups. Figures are rounded from the linked workbook.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
                 <h2 className="font-display text-2xl font-semibold tracking-tight">
-                  Three conditions govern execution
+                  What a manufacturer would need to confirm
                 </h2>
                 <ol className="mt-5 space-y-5 font-display text-base leading-7">
-                  <li><strong>Supplier qualification.</strong> Procurement and Engineering verify grade, refinery,
-                    shipment origin, licensing, storage suitability and independent delivery capability before
-                    relying on the alternative sourcing target.</li>
-                  <li><strong>Inventory funding.</strong> Finance verifies buyer-specific price, storage,
-                    replenishment and cash ceilings. A sixth-month purchase option provides an escalation route
-                    when the modeled continuity tolerance is insufficient.</li>
-                  <li><strong>Domestic offtake.</strong> Strategy and Legal tie any future domestic share to
-                    documented financing, processing, accepted product and enforceable delivery terms.</li>
+                  <li>
+                  <strong>Supplier qualification.</strong> Procurement and engineering teams would verify the grade, refinery, shipment origin, licensing requirements, storage conditions and delivery capacity before relying on the alternative source.
+                </li>
+                  <li>
+                  <strong>Inventory funding.</strong> Finance would check the actual purchase price, storage and replenishment costs against available cash. The case includes a sixth-month purchase option if five months of stock proves insufficient.
+                </li>
+                  <li>
+                  <strong>Domestic offtake.</strong> Any future U.S. sourcing share would depend on documented financing and processing progress, tested product and enforceable delivery terms.
+                </li>
                 </ol>
               </section>
 
               <section className="py-10" aria-labelledby="method-heading">
                 <h2 id="method-heading" className="font-display text-2xl font-semibold tracking-tight">
-                  Sources and modeling method
+                  Sources and assumptions
                 </h2>
                 <p className="mt-4 font-display text-base leading-8">
-                  The evidence base combines SMPT&apos;s <Link href="/materials/antimony" className="font-semibold text-paper-accent underline decoration-2 underline-offset-4">
-                    antimony records
-                  </Link> with USGS, government financing and licensing material, laboratory reporting and issuer filings.
-                  Source documents distinguish announced, authorized and disbursed financing from commercial production.
+                  The case uses SMPT&rsquo;s <Link href="/materials/antimony" className="font-semibold text-paper-accent underline decoration-2 underline-offset-4">antimony records</Link> alongside USGS estimates, government financing and licensing records, laboratory reporting and company filings. It treats announced projects, authorized financing, payments and commercial deliveries as separate events.
                 </p>
                 <p className="mt-4 font-display text-base leading-8">
-                  The demand, supplier shares, premiums, inventory limits and disruptions are scenario assumptions
-                  for a hypothetical manufacturer. The workbook is an episodic cost-exposure and continuity test;
-                  it models the cost and continuity consequences of stipulated scenarios
-                  for a hypothetical buyer.
+                  The manufacturer, its annual demand, sourcing shares, premiums, inventory ceiling and disruptions are hypothetical. The accompanying workbook tests what these assumptions would mean for costs and unfilled demand; it does not project an actual buyer&rsquo;s future supply.
                 </p>
                 <h3 className="mt-8 font-display text-base font-semibold">Selected original sources</h3>
                 <ul className="mt-3 space-y-2 font-display text-sm leading-7">
@@ -222,8 +203,8 @@ export default function AntimonySupplyResilience() {
                 ))}
               </ul>
               <p className="mt-4 font-display text-xs leading-6 text-paper-muted">
-                The Archivo edition condenses the analysis for an executive audience. The original presentation retains its more extensive source links.
-              </p>
+                  The Archivo deck is a shorter presentation; the original edition contains more source links.
+                </p>
               <div className="mt-9 border-t border-paper-border pt-5">
                 <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Case parameters</h2>
                 <dl className="mt-4 space-y-4 font-display text-sm">

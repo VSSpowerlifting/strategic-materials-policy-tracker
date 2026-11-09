@@ -20,7 +20,7 @@ const assets = {
 
 export const metadata: Metadata = {
   title: "Inside Tungsten West's £71 Million Restart Financing — Strategy & Finance",
-  description: "Independent SMPT financial research on the National Wealth Fund's Hemerdon investment, loan terms, remaining restart expenditure and bounded financial sensitivities.",
+  description: "How the National Wealth Fund's Hemerdon financing is structured, what Tungsten West still needs to spend and when its core loan must be repaid.",
   alternates: { canonical: "/research/hemerdon-financing" },
   openGraph: {
     type: "article",
@@ -67,9 +67,8 @@ export default function HemerdonFinancing() {
             Inside Tungsten West&apos;s £71 Million Restart Financing
           </h1>
           <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
-            The National Wealth Fund’s investment, Hemerdon’s remaining expenditure
-            and the refinancing obligations behind the restart.
-          </p>
+                  The £71 million headline includes £10 million in borrowing capacity that has yet to be committed, while a short-term loan adds a repayment deadline to the mine&rsquo;s restart.
+                </p>
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="underline underline-offset-4 hover:text-accent">Benjamin Yang</Link>
             {" · "}5 November 2026{" · "}Research cutoff: 4 November 2026
@@ -95,13 +94,13 @@ export default function HemerdonFinancing() {
               <section className="border-b border-paper-border pb-10">
                 
                 <h2 className="mt-3 font-display text-3xl font-semibold leading-tight">
-                  The financing strengthens the restart while introducing a near-term repayment timetable
+                  Hemerdon&rsquo;s financing brings new capital and a near-term repayment obligation
                 </h2>
                 <p className="mt-5 font-display text-lg leading-9">
-                  The National Wealth Fund&apos;s August transaction brought together £36 million of equity and a £25 million core loan. A further £10 million accordion accounts for the balance of the £71 million headline, although that capacity remains uncommitted. Tungsten West subsequently disclosed that the £25 million loan had been fully drawn by approval of its annual accounts on 2 September 2026. The distinction matters for the restart: equity provides risk-bearing capital without a scheduled principal payment, whereas the loan places a repayment or refinancing obligation alongside the company&apos;s commissioning programme.
+                  In August, the National Wealth Fund provided for £36 million in equity and a £25 million core loan to support Tungsten West&rsquo;s Hemerdon restart. Another £10 million could become available through an accordion facility, but that borrowing remains uncommitted. Tungsten West reported that the £25 million loan had been fully drawn by the time its annual accounts were approved on 2 September 2026. Unlike the equity, the loan carries a repayment or refinancing obligation as the company brings the mine back into production.
                 </p>
                 <p className="mt-5 font-display text-lg leading-9">
-                  Management reports a fully funded pathway to production and has announced processing progress. Those developments materially improve the position described by the financing announcement, but the short loan tenor makes the timing of payable output, customer collections and replacement funding important to the next stage of commercial execution.
+                  Tungsten West says it has a fully funded route to production and has reported progress on processing and commissioning. Even with that progress, the short loan maturity makes the timing of saleable output and customer payments important: the company will need cash from operations or replacement financing when the debt comes due.
                 </p>
               </section>
 
@@ -111,41 +110,51 @@ export default function HemerdonFinancing() {
                   <div className="border-t-4 border-paper-accent bg-white/50 p-5">
                     <p className="font-display text-3xl font-semibold tabular-nums">£36m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Equity</p>
-                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">Gross risk capital reported raised.</p>
+                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">
+                  Equity capital reported raised.
+                </p>
                   </div>
                   <div className="border-t-4 border-paper-accent bg-white/50 p-5">
                     <p className="font-display text-3xl font-semibold tabular-nums">£25m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Core loan</p>
-                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">Full draw disclosed by 2 September; repayment obligation.</p>
+                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">
+                  Fully drawn by 2 September 2026; repayment required.
+                </p>
                   </div>
                   <div className="border border-dashed border-paper-border bg-white/30 p-5">
                     <p className="font-display text-3xl font-semibold tabular-nums">£10m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Uncommitted accordion</p>
-                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">Conditional additional borrowing capacity; further borrowing remains subject to agreement.</p>
+                    <p className="mt-2 font-display text-sm leading-6 text-paper-muted">
+                  Additional borrowing subject to a further commitment.
+                </p>
                   </div>
                 </div>
                 <p className="mt-5 font-display text-sm leading-7 text-paper-muted">
-                  £61 million in gross equity and core-loan financing sits within the £71 million maximum. Current cash availability depends on draws, expenditures and debt obligations.
+                  The £36 million equity investment and £25 million core loan make up £61 million of the package. The remaining £10 million is a financing option, rather than money already committed. Cash available for the restart also depends on spending and debt payments.
                 </p>
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <h2 className="font-display text-2xl font-semibold">Remaining expenditure and the tested sensitivities</h2>
+                <h2 className="font-display text-2xl font-semibold">
+                  The restart still needs £40–45 million of project spending
+                </h2>
                 <p className="mt-5 font-display text-lg leading-9">
-                  Tungsten West&apos;s October guidance placed remaining project expenditure at approximately £40–45 million, excluding operating costs. The research uses £42.5 million as a midpoint reference and tests an illustrative £5.75 million increment combining the upper end of the capital range, a company-described delay sensitivity and a separately labeled one-year interest-rate proxy. This scenario tests exposure under stated assumptions about cost, delay and interest.
+                  Tungsten West&rsquo;s October guidance put remaining project expenditure at approximately £40–45 million, before operating costs. The model uses £42.5 million as a midpoint and tests an illustrative £5.75 million increase made up of the top end of that spending range, a delay sensitivity described by the company and a separately identified one-year interest proxy. These are scenario assumptions, rather than an updated company funding forecast.
                 </p>
                 <p className="mt-5 font-display text-lg leading-9">
-                  A different model exercise returns to the company&apos;s original August funding plan. Deferring all £15 million of anticipated receipts while holding other items fixed produces approximately £2 million negative cash using published aggregate totals, or £1 million using separately rounded details. The August exercise shows the original plan&apos;s dependence on anticipated receipts. Current cash availability requires more recent reconciliation. The October stress and August counterfactual are reported on separate bases.
+                  The original August financing plan also depended on £15 million in anticipated receipts. In a separate model exercise, delaying all those receipts while holding the other assumptions fixed leaves approximately £2 million of negative cash using the published aggregate figures, or £1 million using the separately rounded details. That result describes the August plan under a hypothetical delay; it is not a current cash balance or the same test as the October cost scenario.
                 </p>
               </section>
 
               <section className="py-10">
-                <h2 className="font-display text-2xl font-semibold">What matters next</h2>
+                <h2 className="font-display text-2xl font-semibold">
+                  Accepted shipments and the loan timetable are the next tests
+                </h2>
                 <p className="mt-5 font-display text-lg leading-9">
-                  The September Elmet offtake agreement gives Hemerdon a documented route to market, while processing and commissioning updates indicate progress toward producing saleable tungsten. Financial performance will ultimately depend on the conversion of those operating milestones into accepted deliveries and collected receipts. For creditors, the decisive information is the executed loan timetable and a reconciled cash and debt schedule; for equity investors, the same operational evidence informs the ability to fund the remaining ramp without unexpected financing costs or dilution.
+                  The September offtake agreement with Elmet gives Hemerdon a contracted buyer, while the company&rsquo;s processing updates show progress toward saleable tungsten. For the restart to generate cash, those steps must lead to accepted deliveries and collected payments. Lenders will be looking at the loan&rsquo;s actual repayment schedule alongside operating receipts; shareholders also have reason to watch the cost of any further financing as production ramps up.
                 </p>
                 <p className="mt-5 font-display text-lg leading-9">
-                  The full memo, executive deck and accompanying model examine those relationships in greater depth. The public filings support the presented sensitivities while leaving current unrestricted cash, the full funding gap, valuation, covenant headroom and repayment sufficiency unresolved.
+                  The accompanying memo and model set out the financing and sensitivity calculations in more detail. Public filings do not yet establish unrestricted cash available today, a fully reconciled funding gap, valuation, covenant headroom or whether future receipts will cover repayment. Those questions require newer financial disclosures.
                 </p>
               </section>
             </article>
@@ -190,8 +199,8 @@ export default function HemerdonFinancing() {
         <Container width="wide" className="py-12 sm:py-16">
           <h2 className="font-display text-2xl font-semibold">Sources</h2>
           <p className="mt-4 max-w-3xl font-display text-lg leading-8 text-muted">
-            Financial sensitivities are SMPT calculations under stated assumptions, distinct from management guidance. Source details and assumptions are included with the memo.
-          </p>
+                  The sensitivity figures are SMPT calculations using the assumptions described in the memo, rather than forecasts issued by Tungsten West.
+                </p>
           <ul className="mt-6 max-w-3xl space-y-3">
             {sources.map((s) => (
               <li key={s.url}>
@@ -200,8 +209,8 @@ export default function HemerdonFinancing() {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl font-display text-sm leading-7 text-muted">
-            Research reflects the stated evidence cutoff. Financial checking was internal; external review remains outstanding. Investment decisions require independent assessment.
-          </p>
+                  This research reflects the stated evidence cutoff. Financial checking was internal, and external review remains outstanding. Investment decisions require an independent assessment.
+                </p>
           <Link href="/research/tungsten-supply-security" className="mt-6 inline-block font-display text-sm text-accent underline underline-offset-4 hover:text-foreground">
             Related research: Tungsten Supply Security
           </Link>

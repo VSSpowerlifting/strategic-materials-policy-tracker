@@ -109,12 +109,12 @@ export function Fi002Screen() {
           </table>
         </div>
         <p>
-          End-2026 valuation origin; 10% nominal discount rate; five equal
-          year-end capital draws in 2027–31; $4,000/t all-in net burden; 35%
-          assumed cash-tax wedge. Price and contribution stay flat in nominal
-          dollars. Ramp-up and terminal value are excluded. The workbook includes six
-          selectable scenarios and additional sensitivities; these four tests
-          explain duration, timing and combined stress.
+          The model starts from an end-2026 valuation date and assumes a 10% nominal
+          discount rate, five equal year-end capital draws in 2027–31, a
+          $4,000/t all-in net burden and a 35% cash-tax wedge. Price and
+          contribution stay flat in nominal dollars, with ramp-up and terminal
+          value excluded. The workbook has six scenarios and further sensitivities;
+          the four shown here test changes in benefit duration, timing and costs.
         </p>
       </details>
       <p className="fi-note">
@@ -122,10 +122,11 @@ export function Fi002Screen() {
         <a href="/research/fi002/threshold-sensitivities.csv" download>
           published sensitivity calculations (CSV)
         </a>
-        . Equivalent benefit includes output preserved or added against no
-        build. These scenarios estimate the annual benefit needed for capital
-        recovery under the stated assumptions. A full project viability
-        assessment requires a mine-wide with-build/no-build cash-flow model.
+        . The required benefit can come from output preserved or added relative to a
+        no-build mine plan. These screens show what the project would need to
+        recover capital under the stated assumptions. A full assessment would
+        also require a mine-wide comparison of cash flows with and without
+        the new concentrator.
       </p>
     </div>
   );
