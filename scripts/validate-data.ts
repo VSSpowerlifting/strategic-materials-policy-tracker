@@ -47,6 +47,8 @@ import {
 import { site } from "../lib/site";
 import { isExampleCandidateFile } from "./candidate-files";
 import { validateProjectMilestones } from "../lib/project-milestones";
+import { validateMarketData } from "../lib/markets";
+import type { MarketCoverageFile, MarketManifest, MarketSeries, ObservationsFile } from "../lib/markets";
 import { formatCapitalControlIssue, parseCapitalControlSeed, validateCapitalControl } from "./validate-capital-control";
 import type { CapitalControlCollection } from "./validate-capital-control";
 
@@ -552,6 +554,39 @@ for (const issue of validateProjectMilestones(projectMilestones, {
   corpusDate: site.lastUpdated,
 })) err(issue);
 
+// Market monitor: World Bank monthly benchmark averages, kept apart from the
+// source-linked policy seed in data/markets/ (built by `npm run ingest:markets`).
+const marketsDir = join(seedDir, "..", "markets");
+const readMarket = <T>(name: string): T | null => {
+  const file = join(marketsDir, `${name}.json`);
+  if (!existsSync(file)) {
+    err(`data/markets/${name}.json is missing (run \`npm run ingest:markets\`)`);
+    return null;
+  }
+  try {
+    return JSON.parse(readFileSync(file, "utf8")) as T;
+  } catch (e) {
+    err(`data/markets/${name}.json is not valid JSON: ${(e as Error).message}`);
+    return null;
+  }
+};
+const marketManifest = readMarket<MarketManifest>("manifest");
+const marketSeries = readMarket<MarketSeries[]>("series");
+const marketObservations = readMarket<ObservationsFile>("observations");
+const marketCoverage = readMarket<MarketCoverageFile>("coverage-gaps");
+if (marketManifest && marketSeries && marketObservations && marketCoverage) {
+  const marketCheck = validateMarketData({
+    manifest: marketManifest,
+    series: marketSeries,
+    observations: marketObservations,
+    coverage: marketCoverage,
+    materialIds,
+  });
+  for (const e of marketCheck.errors) err(e);
+  for (const w of marketCheck.warnings) warn(w);
+}
+const marketSeriesCount = Array.isArray(marketSeries) ? marketSeries.length : 0;
+
 const candidateReferenceIds = candidateFiles.flatMap(({ records }) =>
   records.flatMap((c) => [
     c?.candidateId,
@@ -654,6 +689,7 @@ const counts =
   `${controlCount} control measure${controlCount === 1 ? "" : "s"} · ` +
   `${plural(organizationCount, "organization")} · ${plural(projectCount, "project")} · ` +
   `${plural(programmeCount, "programme")} · ${plural(designationCount, "project designation")} · ` +
+  `${plural(marketSeriesCount, "market series", "market series")} · ` +
   `${activeWatched}/${watchlist.length} watched sources active · ` +
   `${candidateCount} candidate${candidateCount === 1 ? "" : "s"} (private)${exampleNote}`;
 

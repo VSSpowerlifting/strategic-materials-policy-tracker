@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "note": "Materials considered for the market monitor without a series SMPT can publish. This file holds no prices. The World Bank finding refers to the Monthly Prices sheet of the workbook pinned in manifest.json, whose metals and minerals columns are aluminum, iron ore, copper, lead, tin, nickel, zinc, gold, platinum and silver. SMPT has not reviewed the licence terms of any commercial price assessment or exchange data feed; none is redistributed here.",
+  "gaps": [
+    {
+      "materialId": "lithium",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook.",
+      "gradeDistinctions": "Lithium carbonate, lithium hydroxide monohydrate and spodumene concentrate are priced separately, and carbonate and hydroxide are further split by grade (battery or technical). A single 'lithium price' would mix unlike products.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "cobalt",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook.",
+      "gradeDistinctions": "Refined cobalt metal, cobalt hydroxide (often quoted as a payable percentage of the metal price) and cobalt sulphate are distinct products with distinct references.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "graphite",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook.",
+      "gradeDistinctions": "Natural flake graphite is assessed by flake size and carbon content; spherical (battery anode) and synthetic graphite are separate products.",
+      "requirementForInclusion": "A monthly series for one named product and specification, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "tungsten",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook.",
+      "gradeDistinctions": "Ammonium paratungstate (APT) and tungsten concentrate are priced separately, typically per metric tonne unit of WO3 content, on different delivery bases.",
+      "requirementForInclusion": "A monthly series for APT or concentrate, stated separately, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "antimony",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook.",
+      "gradeDistinctions": "Antimony metal (by purity) and antimony trioxide are separate products.",
+      "requirementForInclusion": "A monthly series for one named product and purity, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "neodymium",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook.",
+      "gradeDistinctions": "Rare-earth prices are usually assessed for neodymium-praseodymium (NdPr) oxide or metal, or for the individual oxides, and are published for different delivery bases (for example inside and outside China) that are not interchangeable.",
+      "requirementForInclusion": "A monthly NdPr oxide series with a stated delivery basis, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "praseodymium",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook.",
+      "gradeDistinctions": "See neodymium: praseodymium is usually priced inside the combined NdPr oxide or metal assessment.",
+      "requirementForInclusion": "A monthly NdPr oxide series with a stated delivery basis, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "palladium",
+      "status": "no_open_series_identified",
+      "worldBankCoverage": "Not in the pinned Pink Sheet monthly workbook, which carries platinum but not palladium.",
+      "gradeDistinctions": "Palladium is quoted as refined metal by purity and delivery location.",
+      "requirementForInclusion": "A monthly refined-metal series published under terms that permit redistribution with attribution."
+    }
+  ]
+}

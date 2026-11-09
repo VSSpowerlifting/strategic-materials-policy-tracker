@@ -1,3 +1,24 @@
+## 2026-11-09: Critical Minerals Market Monitor (draft PR)
+
+- Branch `claude/critical-minerals-market-monitor-0dd37c` from `c69e8fc`. New route `/markets`, titled "Critical Minerals Market Monitor". Public navigation is unchanged; the route is listed in the sitemap only, and the PR proposes where it could sit in the navigation.
+- **Data:** three World Bank Pink Sheet monthly benchmark averages, January 2005 to October 2026: aluminium, copper and nickel, in nominal US$ per metric tonne. They are frozen in `data/markets/` (manifest, series, observations, coverage gaps).
+  - Release 2026-11-03, retrieved 2026-11-09; the workbook SHA-256 is pinned in the manifest. The next scheduled release is 2026-12-02, after which the page says the figures may be superseded.
+  - Licence: CC BY 4.0, as stated on the World Bank data catalogue. The attribution and the changes made are recorded.
+  - `scripts/ingest-markets.ts` (`npm run ingest:markets`) is the only way to regenerate the dataset; the build never fetches prices.
+  - Prices are not in `data/seed/` and are not linked to events, commitments, controls, totals or search.
+- **Not shown:** lithium, cobalt, graphite, tungsten, antimony and rare earths appear only as coverage gaps, with what an open series would need to show. No commercial assessment's licence has been reviewed, and none is shown or redistributed.
+- **Code:**
+  - `lib/markets.ts` holds the calculations: windows, indexed change, change over N months, the monthly-change grid and movers. Nothing is interpolated. `lib/markets.ts` also has data validation, which `npm run validate` now calls.
+  - `lib/market-data.ts` loads the data; `lib/markets-csv.ts` builds the CSV for the static `/api/export/markets.csv` export, which carries the CC BY 4.0 attribution.
+  - `components/markets/` holds the native-SVG chart, sparklines, heatmap and monitor shell.
+  - URL params: `range`, `view` and `series`.
+- **Governance (blocking reviewer decision):** README and CLAUDE.md both say "no market prices". The page is labelled "Market context" and kept outside the policy record. Whether that exception is accepted, and how the rule should be reworded, is for the maintainer to decide before merge.
+- **QA:**
+  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1176/1176, 33 new) and build all pass.
+  - Visual QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow. Screenshots are in `docs/analysis/markets-monitor/`.
+  - Interaction checks: keyboard on the chart and heatmap, URL-param round trip and reduced motion.
+- Not merged, deployed or published.
+
 ## 2026-11-08: Strategy consulting skills system (draft PR)
 
 - Branch `claude/smpt-consulting-skills-c70ab2` from `d5b59bb`. Adds eight project skills in `.claude/skills/smpt-*/`: engagement-framing (the router), evidence-baseline, market-competitive, financing-structure, investment-appraisal, options-decision, executive-narrative and review-gate. They serve Applied Strategy and Financial Intelligence products only, not tracker data.
