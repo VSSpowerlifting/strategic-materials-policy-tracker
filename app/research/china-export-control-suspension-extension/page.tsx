@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
 
 const SLUG = "china-export-control-suspension-extension";
-const TITLE = "China Extends Suspension of Six Export-Control Announcements Through January 2027";
+const TITLE = "China Extends Suspension of Six Export-Control Announcements to 10 January 2027";
 const DESCRIPTION =
   "China extends the suspension of six October 2025 export-control announcements through 10 January 2027. The April rare-earth controls and a separate US-directed measure follow different schedules.";
 
