@@ -1,0 +1,1187 @@
+{
+  "classification": "research",
+  "title": "FI003 JPMorgan and MP Materials, draft 0.9",
+  "cover_lines": [
+    "JPMorgan and MP Materials",
+    "Financing a build before revenue: a recommendation",
+    "Benjamin Yang · Research draft 0.9 · 8 November 2026 · Evidence to 6 November 2026",
+    "Proposed visual revision; draft 0.8 remains the review baseline. Publication hold remains in place."
+  ],
+  "evidence": [
+    {
+      "id": "S01",
+      "label": "S01",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796d8k.htm",
+      "title": "July 2025 transaction 8-K",
+      "locator": "July 2025 transaction 8-K"
+    },
+    {
+      "id": "S02",
+      "label": "S02",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm",
+      "title": "Transaction agreement, effective July 9, 2025",
+      "locator": "Transaction agreement §§2.05–2.07, 6.04, 7.01"
+    },
+    {
+      "id": "S03",
+      "label": "S03",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex105.htm",
+      "title": "10X magnet offtake agreement",
+      "locator": "Offtake agreement §§1.2, 6.2"
+    },
+    {
+      "id": "S04",
+      "label": "S04",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex106.htm",
+      "title": "NdPr price protection agreement",
+      "locator": "Price protection agreement"
+    },
+    {
+      "id": "S05",
+      "label": "S05",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex31.htm",
+      "title": "Form of Series A certificate of designations",
+      "locator": "Series A certificate of designations"
+    },
+    {
+      "id": "S06",
+      "label": "S06",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525160635/d923027d424b5.htm",
+      "title": "Equity prospectus supplement dated July 16, 2025",
+      "locator": "Prospectus supplement, offering and capitalization"
+    },
+    {
+      "id": "S07",
+      "label": "S07",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525161255/d923222dex11.htm",
+      "title": "July 16 underwriting agreement",
+      "locator": "Underwriting agreement, Schedule A"
+    },
+    {
+      "id": "S08",
+      "label": "S08",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553d8k.htm",
+      "title": "August 25 revolving credit 8-K",
+      "locator": "Revolving credit 8-K"
+    },
+    {
+      "id": "S09",
+      "label": "S09",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm",
+      "title": "August 25 credit agreement",
+      "locator": "Credit agreement §1.01 Consolidated EBITDA"
+    },
+    {
+      "id": "S11",
+      "label": "S11",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm",
+      "title": "2025 Form 10-K",
+      "locator": "2025 10-K, Note 10"
+    },
+    {
+      "id": "S13",
+      "label": "S13",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000048/mp-20260630.htm",
+      "title": "Q2 2026 Form 10-Q",
+      "locator": "Q2 2026 10-Q, Note 8"
+    },
+    {
+      "id": "S15",
+      "label": "S15",
+      "url": "https://www.jpmorgan.com/insights/banking/investment-banking/mp-materials",
+      "title": "J.P. Morgan transaction article and embedded podcast transcript",
+      "locator": "J.P. Morgan transaction article (own account)"
+    },
+    {
+      "id": "S17",
+      "label": "S17",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525159093/d904727d8k.htm",
+      "title": "July 15 Apple agreement 8-K",
+      "locator": "July 15 Apple agreement 8-K"
+    },
+    {
+      "id": "S19",
+      "label": "S19",
+      "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+      "title": "Q3 2026 Form 10-Q",
+      "locator": "Q3 2026 10-Q, cash flows and Note 8"
+    }
+  ],
+  "slides": [
+    {
+      "pattern": "exhibit-with-interpretation",
+      "label": "Executive answer",
+      "exhibit": {
+        "title": "Raise permanent equity first and hold an undrawn revolver as a conditional backstop",
+        "subtitle": "Recommendation for a hypothetical U.S. sponsor building before commissioning revenue; USD million, figures shown side by side",
+        "annotation": "Proposed editorial judgment, draft 0.9, 8 November 2026; pending maintainer review. The figures are different measures and are not additive. The record does not rank cost of capital, because loan terms are not public.",
+        "source": "Underwriting agreement; 2025 10-K; Q3 2026 10-Q; credit agreement",
+        "evidence_refs": [
+          "S07",
+          "S09",
+          "S11",
+          "S19"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 1,
+          "columns": [
+            "USD million"
+          ],
+          "rows": [
+            {
+              "label": "Net equity (reported)",
+              "values": [
+                724.2
+              ]
+            },
+            {
+              "label": "Revolver available, Sep 26",
+              "values": [
+                203.0
+              ]
+            },
+            {
+              "label": "Liquid-asset fall, 9m 2026",
+              "values": [
+                492.375
+              ]
+            },
+            {
+              "label": "Unused fee a year",
+              "values": [
+                0.7105
+              ]
+            },
+            {
+              "label": "Expired commitment fees",
+              "values": [
+                7.4
+              ]
+            }
+          ],
+          "notes": [
+            {
+              "ref": 1,
+              "text": "Permanent capital with no scheduled principal or interest before commissioning revenue exists."
+            },
+            {
+              "ref": 2,
+              "text": "Conditional capacity after letters of credit, not cash; drawing it brings interest and covenant tests."
+            },
+            {
+              "ref": 4,
+              "text": "Analyst calculation at zero draws and static September letters of credit; excludes other fees."
+            },
+            {
+              "ref": 5,
+              "text": "Paid for a $1bn commitment that expired undrawn on 26 August 2025."
+            }
+          ],
+          "notesHeading": "WHAT EACH FIGURE MEANS"
+        }
+      },
+      "table_reason": "The answer pairs five unlike figures with their meaning; a chart would invite summing measures that are not additive."
+    },
+    {
+      "pattern": "role-matrix",
+      "label": "JPMorgan roles",
+      "exhibit": {
+        "title": "JPMorgan shared each financing role with Goldman Sachs or other banks",
+        "subtitle": "Roles named in the reviewed filings and in J.P. Morgan's own account",
+        "annotation": "The case shows a bank group, not a single lender's decision. The adviser role rests on J.P. Morgan's own account; fees, retention and internal credit decisions are not disclosed.",
+        "source": "Company filings; J.P. Morgan's own account for the adviser role",
+        "evidence_refs": [
+          "S01",
+          "S07",
+          "S08",
+          "S15"
+        ],
+        "data": {
+          "roles": [
+            "Adviser",
+            "Joint commitment",
+            "Underwriting",
+            "Revolver agent"
+          ],
+          "orgs": [
+            {
+              "label": "JPMorgan",
+              "cells": [
+                {
+                  "qualifier": "Own account"
+                },
+                {
+                  "qualifier": "Joint"
+                },
+                {
+                  "qualifier": "Joint largest"
+                },
+                {
+                  "qualifier": "Agent, lender"
+                }
+              ]
+            },
+            {
+              "label": "Goldman Sachs",
+              "cells": [
+                null,
+                {
+                  "qualifier": "Joint"
+                },
+                {
+                  "qualifier": "Joint largest"
+                },
+                null
+              ]
+            },
+            {
+              "label": "Morgan Stanley",
+              "cells": [
+                null,
+                null,
+                {
+                  "qualifier": "Smaller share"
+                },
+                null
+              ]
+            }
+          ],
+          "layout": {
+            "rowHeader": "Bank",
+            "labelWidth": 2.2,
+            "showCounts": false,
+            "style": "ledger",
+            "emptyText": "Not named",
+            "emphasisColumn": "Underwriting"
+          }
+        },
+        "layout": "wide"
+      },
+      "table_reason": "Role-by-bank holdings are categorical; a matrix shows shared roles exactly where a chart would imply magnitudes."
+    },
+    {
+      "pattern": "two-lane-timeline",
+      "label": "Sequence",
+      "exhibit": {
+        "title": "Equity and a revolver replaced the joint commitment within seven weeks",
+        "subtitle": "Financing events and the agreements around them, July to August 2025",
+        "annotation": "Government agreements (9 July) and Apple's 15 July agreement preceded the 16 July pricing. The record does not isolate their effect on equity demand.",
+        "source": "SEC filings, July to August 2025",
+        "evidence_refs": [
+          "S01",
+          "S06",
+          "S08",
+          "S17"
+        ],
+        "data": {
+          "lanes": [
+            {
+              "name": "Financing",
+              "events": [
+                {
+                  "label": "Joint commitment",
+                  "date": "2025-07-09",
+                  "kind": "effective"
+                },
+                {
+                  "label": "Equity priced",
+                  "date": "2025-07-16",
+                  "kind": "implementation"
+                },
+                {
+                  "label": "Revolver signed",
+                  "date": "2025-08-25",
+                  "kind": "effective"
+                }
+              ]
+            },
+            {
+              "name": "Commitment and context",
+              "events": [
+                {
+                  "label": "Apple agreement",
+                  "date": "2025-07-15",
+                  "kind": "announcement"
+                },
+                {
+                  "label": "Commitment expired",
+                  "date": "2025-08-26",
+                  "kind": "implementation"
+                }
+              ]
+            }
+          ],
+          "conventionNote": false
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "exhibit-with-interpretation",
+      "label": "Replacement",
+      "exhibit": {
+        "title": "Net equity of $724.2m replaced a $1bn commitment that was never drawn",
+        "subtitle": "USD million; cash proceeds and committed capacity shown together, not summed",
+        "annotation": "The comparison mixes cash and capacity and is arithmetic only. About $0.9m separates the after-discount equity from reported net proceeds as other expenses and rounding.",
+        "source": "Underwriting agreement; 2025 10-K",
+        "evidence_refs": [
+          "S01",
+          "S07",
+          "S08",
+          "S11"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 1,
+          "columns": [
+            "USD million"
+          ],
+          "rows": [
+            {
+              "label": "Gross equity (calculated)",
+              "values": [
+                747.49994
+              ]
+            },
+            {
+              "label": "Underwriting discount",
+              "values": [
+                22.4249982
+              ]
+            },
+            {
+              "label": "Net equity (reported)",
+              "values": [
+                724.2
+              ]
+            },
+            {
+              "label": "Revolver capacity",
+              "values": [
+                275.0
+              ]
+            },
+            {
+              "label": "Original commitment min.",
+              "values": [
+                1000.0
+              ]
+            }
+          ],
+          "notes": [
+            {
+              "ref": 3,
+              "text": "Reported equity issuance net of costs; no scheduled principal repayment."
+            },
+            {
+              "ref": 4,
+              "text": "Committed capacity, not proceeds; drawn loans are zero in every reported snapshot."
+            },
+            {
+              "ref": 5,
+              "text": "Reference minimum for a commitment that expired undrawn; its fees were still expensed."
+            }
+          ],
+          "notesHeading": "WHAT EACH FIGURE MEANS"
+        }
+      },
+      "table_reason": "Cash proceeds and committed capacity are different measures; side-by-side rows with notes avoid a summed or stacked visual."
+    },
+    {
+      "pattern": "waterfall",
+      "label": "Dilution",
+      "exhibit": {
+        "title": "New shares added 8.31% to the basic count and are 7.68% of the isolated base",
+        "subtitle": "Bridge from basic shares before the July 2025 offering to the isolated pro forma, then the composition of that pro forma",
+        "annotation": "Dilution is the price of avoiding fixed charges, and it is the same whether or not a revolver sits alongside. 8.31% uses the pre-offering basic count; 7.68% the isolated post-offering base. Not fully diluted.",
+        "source": "Prospectus supplement; 2025 10-K",
+        "evidence_refs": [
+          "S06",
+          "S11"
+        ],
+        "data": {
+          "unit": "Million shares",
+          "dp": 3,
+          "start": {
+            "label": "Before offering",
+            "value": 163.478
+          },
+          "steps": [
+            {
+              "label": "New shares",
+              "delta": 13.591
+            }
+          ],
+          "end": {
+            "label": "Isolated pro forma",
+            "value": 177.069
+          },
+          "share": {
+            "title": "Composition of the isolated pro forma",
+            "baseLabel": "Pre-offering basic shares",
+            "addedLabel": "New shares"
+          }
+        }
+      }
+    },
+    {
+      "pattern": "stacked-bar",
+      "label": "Revolver",
+      "exhibit": {
+        "title": "Letters of credit leave $203m of the $275m revolver available to draw",
+        "subtitle": "USD million at three reported dates; no loan draws in any snapshot",
+        "annotation": "Availability is conditional on the credit agreement's terms and is not cash. The letter-of-credit sublimit is not additive to loans, and no future availability is assumed.",
+        "source": "2025 10-K; Q2 and Q3 2026 10-Qs",
+        "evidence_refs": [
+          "S11",
+          "S13",
+          "S19"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 0,
+          "components": [
+            "Letters of credit",
+            "Remaining capacity"
+          ],
+          "accent": "Remaining capacity",
+          "keepOrder": true,
+          "legendWidths": [
+            1.75,
+            2.0
+          ],
+          "rows": [
+            {
+              "label": "31 Dec 2025",
+              "values": [
+                40.0,
+                235.0
+              ]
+            },
+            {
+              "label": "30 Jun 2026",
+              "values": [
+                72.0,
+                203.0
+              ]
+            },
+            {
+              "label": "30 Sep 2026",
+              "values": [
+                72.0,
+                203.0
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pattern": "waterfall",
+      "label": "Liquidity",
+      "exhibit": {
+        "title": "Company liquid assets fell $492.4m in nine months as expansion continued",
+        "subtitle": "USD million, 31 December 2025 to 30 September 2026",
+        "annotation": "Capital spending covers all company projects, not 10X alone. Price protection cash of $110.9m is already inside operating cash flow. The bridge is reported, not forecast.",
+        "source": "Q3 2026 10-Q",
+        "evidence_refs": [
+          "S19"
+        ],
+        "data": {
+          "unit": "USD million",
+          "dp": 1,
+          "start": {
+            "label": "31 Dec 2025",
+            "value": 1830.286
+          },
+          "steps": [
+            {
+              "label": "Operating cash flow",
+              "delta": -7.757
+            },
+            {
+              "label": "Cash capital spending",
+              "delta": -420.25
+            },
+            {
+              "label": "Government award proceeds",
+              "delta": 6.5
+            },
+            {
+              "label": "Financing cash flows",
+              "delta": -91.145
+            },
+            {
+              "label": "Accretion",
+              "delta": 20.876
+            },
+            {
+              "label": "Restricted-cash release",
+              "delta": 0.821
+            },
+            {
+              "label": "Valuation change",
+              "delta": -1.42
+            }
+          ],
+          "end": {
+            "label": "30 Sep 2026",
+            "value": 1337.911
+          },
+          "emphasis": [
+            "Cash capital spending",
+            "Financing cash flows"
+          ]
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "evidence-milestone-strip",
+      "label": "Timing",
+      "exhibit": {
+        "title": "Covenant tests could begin before 10X commissioning is expected in 2028",
+        "subtitle": "Reported events and illustrative test dates; dates marked targeted are model assumptions",
+        "annotation": "The leverage and coverage tests start at a covenant-EBITDA certificate or the Q2 2027 statements. Commissioning has no stated date, so no marker is drawn; headroom is not disclosed.",
+        "source": "Company filings; credit agreement; model timing",
+        "evidence_refs": [
+          "S01",
+          "S06",
+          "S08",
+          "S19",
+          "S09"
+        ],
+        "data": {
+          "milestones": [
+            {
+              "label": "Equity priced",
+              "date": "2025-07-16",
+              "state": "reported"
+            },
+            {
+              "label": "Revolver signed",
+              "date": "2025-08-25",
+              "state": "reported"
+            },
+            {
+              "label": "Letters of credit $72m",
+              "date": "2026-09-30",
+              "state": "reported"
+            },
+            {
+              "label": "Illustrative delivery",
+              "date": "2027-08-15",
+              "state": "targeted"
+            },
+            {
+              "label": "Illustrative first test",
+              "date": "2027-09-30",
+              "state": "targeted"
+            }
+          ],
+          "conventionNote": false
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "counterparty-map",
+      "label": "Government support",
+      "exhibit": {
+        "title": "Government support covers specified exposures while MP keeps its funding duties",
+        "subtitle": "Government instruments linked to MP Materials",
+        "annotation": "Support narrows named price and volume risks; construction cost, timing and financing risk stay with the company. The fallback preferred applies only if net financing falls short of $350m.",
+        "source": "Transaction agreement; offtake and price protection agreements",
+        "evidence_refs": [
+          "S02",
+          "S03",
+          "S04",
+          "S05"
+        ],
+        "data": {
+          "hub": "MP Materials",
+          "relationship": "Declared government links; spokes carry no value.",
+          "showRelationship": false,
+          "parties": [
+            {
+              "label": "NdPr price protection",
+              "role": "Floor-price payments (PPA income)"
+            },
+            {
+              "label": "10X offtake",
+              "role": "Purchase commitment; threshold varies"
+            },
+            {
+              "label": "Initial preferred",
+              "role": "Government cash consideration, $400m"
+            },
+            {
+              "label": "Additional preferred",
+              "role": "Fallback if net financing under $350m"
+            }
+          ]
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "role-matrix",
+      "label": "Options",
+      "exhibit": {
+        "title": "Four financing paths are compared on what the record shows and assumes",
+        "subtitle": "Options for a hypothetical sponsor: instrument, case evidence and main assumption",
+        "annotation": "Delay to milestones was not observed in this case and rests on assumption alone. Committed debt is judged without its loan pricing, tenor, conditions or recourse.",
+        "source": "FI003 analysis of the reviewed record; illustrative",
+        "evidence_refs": [
+          "S01",
+          "S07",
+          "S08",
+          "S11"
+        ],
+        "data": {
+          "roles": [
+            "Instrument",
+            "Case evidence",
+            "Main assumption"
+          ],
+          "layout": {
+            "rowHeader": "Option",
+            "labelWidth": 2.6,
+            "showCounts": false,
+            "style": "ledger",
+            "emptyText": "—"
+          },
+          "orgs": [
+            {
+              "label": "Committed debt",
+              "cells": [
+                {
+                  "qualifier": "Bank commitment"
+                },
+                {
+                  "qualifier": "Fees, expiry"
+                },
+                {
+                  "qualifier": "Loan terms"
+                }
+              ]
+            },
+            {
+              "label": "Equity only",
+              "cells": [
+                {
+                  "qualifier": "Common stock"
+                },
+                {
+                  "qualifier": "Net proceeds"
+                },
+                {
+                  "qualifier": "No backstop"
+                }
+              ]
+            },
+            {
+              "label": "Equity + revolver",
+              "cells": [
+                {
+                  "qualifier": "Stock and RCF"
+                },
+                {
+                  "qualifier": "Both executed"
+                },
+                {
+                  "qualifier": "Draw conditions"
+                }
+              ]
+            },
+            {
+              "label": "Delay to milestones",
+              "cells": [
+                {
+                  "qualifier": "Staged later"
+                },
+                null,
+                {
+                  "qualifier": "Later pricing"
+                }
+              ]
+            }
+          ]
+        },
+        "layout": "wide"
+      },
+      "table_reason": "Each option is described by short text in three fields; no quantity exists to chart."
+    },
+    {
+      "pattern": "criterion-matrix",
+      "label": "Criteria",
+      "exhibit": {
+        "title": "Equity plus a revolver trades some covenant exposure for liquidity",
+        "subtitle": "Only equity plus a revolver meets both funding certainty and later liquidity; categorical, unweighted",
+        "annotation": "Proposed editorial judgment, draft 0.9, 8 November 2026; pending maintainer review. Marks for committed debt rest on the commitment alone; its loan terms are not public, so cost of capital is left unranked.",
+        "source": "FI003 analysis; credit agreement; prospectus supplement; 2025 10-K",
+        "evidence_refs": [
+          "S06",
+          "S09",
+          "S11"
+        ],
+        "data": {
+          "options": [
+            "Committed debt",
+            "Equity only",
+            "Equity + revolver",
+            "Delay to milestones"
+          ],
+          "accent": "Equity + revolver",
+          "display": "text",
+          "criteria": [
+            {
+              "label": "Funding certain before build",
+              "marks": [
+                "Partly",
+                "Meets",
+                "Meets",
+                "Does not"
+              ]
+            },
+            {
+              "label": "No dilution of holders",
+              "marks": [
+                "Meets",
+                "Does not",
+                "Does not",
+                "Partly"
+              ]
+            },
+            {
+              "label": "No debt service pre-revenue",
+              "marks": [
+                "Does not",
+                "Meets",
+                "Partly",
+                "Meets"
+              ]
+            },
+            {
+              "label": "Few covenants pre-commissioning",
+              "marks": [
+                "Not stated",
+                "Meets",
+                "Partly",
+                "Meets"
+              ]
+            },
+            {
+              "label": "Liquidity to draw later",
+              "marks": [
+                "Partly",
+                "Does not",
+                "Meets",
+                "Partly"
+              ]
+            },
+            {
+              "label": "Low refinancing exposure",
+              "marks": [
+                "Not stated",
+                "Meets",
+                "Partly",
+                "Meets"
+              ]
+            },
+            {
+              "label": "Absorbs commissioning delay",
+              "marks": [
+                "Not stated",
+                "Partly",
+                "Partly",
+                "Does not"
+              ]
+            }
+          ]
+        }
+      },
+      "table_reason": "Four options against seven categorical criteria need a matrix; a chart would imply a numeric scale the marks do not have."
+    },
+    {
+      "pattern": "condition-tree",
+      "label": "Covenant addback",
+      "exhibit": {
+        "title": "A minimum-payment addback in covenant earnings can reverse when cash arrives",
+        "subtitle": "Illustrative clause arithmetic with hypothetical inputs, not reported MP results",
+        "annotation": "Hypothetical figures of 40 and 20 show the direction only. A reversal lowers covenant earnings near the first tests; covenant EBITDA is a different measure from Adjusted EBITDA.",
+        "source": "Credit agreement, definition of Consolidated EBITDA",
+        "evidence_refs": [
+          "S09"
+        ],
+        "data": {
+          "nodes": [
+            {
+              "id": "n1",
+              "label": "Is a minimum payment applicable?",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "No",
+                  "to": "o1"
+                },
+                {
+                  "label": "Yes",
+                  "to": "n2"
+                }
+              ]
+            },
+            {
+              "id": "n2",
+              "label": "Minimum versus attributable income",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "Min. higher",
+                  "to": "n3"
+                },
+                {
+                  "label": "Income higher",
+                  "to": "o2"
+                }
+              ]
+            },
+            {
+              "id": "n3",
+              "label": "Does later cash repeat the addback?",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "No",
+                  "to": "o3"
+                },
+                {
+                  "label": "Yes",
+                  "to": "o4"
+                }
+              ]
+            },
+            {
+              "id": "o1",
+              "label": "No adjustment",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o2",
+              "label": "No addback",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o3",
+              "label": "Addback of 20",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o4",
+              "label": "Net reduction of 20",
+              "kind": "outcome",
+              "branches": []
+            }
+          ],
+          "highlightOutcomeId": "o4",
+          "conventionNote": false,
+          "labelClear": true
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "role-matrix",
+      "label": "Strongest alternative",
+      "exhibit": {
+        "title": "The revolver adds an undrawn backstop for a small fee and covenant exposure",
+        "subtitle": "Equity plus a revolver against equity only, the strongest alternative; both raise the same equity at the same dilution",
+        "annotation": "Proposed editorial judgment, draft 0.9, 8 November 2026; pending maintainer review. The backstop costs about $0.71m a year undrawn. Equity only wins if covenants would bind before revenue.",
+        "source": "FI003 analysis; credit agreement; Q3 2026 10-Q",
+        "evidence_refs": [
+          "S09",
+          "S19"
+        ],
+        "data": {
+          "roles": [
+            "Equity+revolver",
+            "Equity only"
+          ],
+          "layout": {
+            "rowHeader": "Dimension",
+            "labelWidth": 3.6,
+            "showCounts": false,
+            "style": "ledger",
+            "emphasisColumn": "Equity+revolver",
+            "emptyText": "—"
+          },
+          "orgs": [
+            {
+              "label": "Backstop for overruns",
+              "cells": [
+                {
+                  "qualifier": "Undrawn capacity"
+                },
+                null
+              ]
+            },
+            {
+              "label": "Carrying cost before draws",
+              "cells": [
+                {
+                  "qualifier": "Unused fee"
+                },
+                null
+              ]
+            },
+            {
+              "label": "Covenant tests",
+              "cells": [
+                {
+                  "qualifier": "From trigger"
+                },
+                null
+              ]
+            },
+            {
+              "label": "Response to an overrun",
+              "cells": [
+                {
+                  "qualifier": "Draw, then raise"
+                },
+                {
+                  "qualifier": "New raise"
+                }
+              ]
+            },
+            {
+              "label": "Maturity to manage",
+              "cells": [
+                {
+                  "qualifier": "2030, springing"
+                },
+                null
+              ]
+            }
+          ]
+        },
+        "layout": "wide"
+      },
+      "table_reason": "Two options compared on categorical dimensions; a chart would imply a numeric scale."
+    },
+    {
+      "pattern": "condition-tree",
+      "label": "Reversal triggers",
+      "exhibit": {
+        "title": "Three observable conditions would move the recommendation to another path",
+        "subtitle": "Decision conditions for a hypothetical sponsor; the highlighted outcome is the recommendation",
+        "annotation": "Proposed editorial judgment, draft 0.9, 8 November 2026; pending maintainer review. A sponsor without an anchor offtake, price floor or fallback preferred may lack the equity window, which strengthens committed debt.",
+        "source": "FI003 analysis; credit agreement; transaction agreement",
+        "evidence_refs": [
+          "S02",
+          "S09"
+        ],
+        "data": {
+          "nodes": [
+            {
+              "id": "n1",
+              "label": "Equity window open on acceptable terms?",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "No",
+                  "to": "o1"
+                },
+                {
+                  "label": "Yes",
+                  "to": "n2"
+                }
+              ]
+            },
+            {
+              "id": "n2",
+              "label": "Cost-to-complete above cash plus undrawn?",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "Yes",
+                  "to": "o2"
+                },
+                {
+                  "label": "No",
+                  "to": "n3"
+                }
+              ]
+            },
+            {
+              "id": "n3",
+              "label": "Covenant tests bind before 10X revenue?",
+              "kind": "condition",
+              "branches": [
+                {
+                  "label": "No",
+                  "to": "o3"
+                },
+                {
+                  "label": "Yes",
+                  "to": "o4"
+                }
+              ]
+            },
+            {
+              "id": "o1",
+              "label": "Committed debt or delay",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o2",
+              "label": "Raise more equity first",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o3",
+              "label": "Equity plus revolver",
+              "kind": "outcome",
+              "branches": []
+            },
+            {
+              "id": "o4",
+              "label": "Equity only",
+              "kind": "outcome",
+              "branches": []
+            }
+          ],
+          "highlightOutcomeId": "o3",
+          "conventionNote": false,
+          "labelClear": true
+        },
+        "layout": "wide"
+      }
+    },
+    {
+      "pattern": "role-matrix",
+      "label": "Objections",
+      "exhibit": {
+        "title": "Six objections narrow the recommendation without reversing it",
+        "subtitle": "Each objection, what the draft concedes, how it answers and the limit it keeps",
+        "annotation": "Proposed editorial judgment, draft 0.9, 8 November 2026; pending maintainer review. No structure is optimal and no plan is shown as fully funded: the record has no cost-to-complete for 10X.",
+        "source": "FI003 analysis of the reviewed record",
+        "evidence_refs": [
+          "S01",
+          "S02",
+          "S07",
+          "S09",
+          "S19"
+        ],
+        "data": {
+          "roles": [
+            "Conceded",
+            "Answer",
+            "Limit kept"
+          ],
+          "layout": {
+            "rowHeader": "Objection",
+            "labelWidth": 4.6,
+            "showCounts": false,
+            "style": "ledger",
+            "emphasisColumn": "Answer"
+          },
+          "orgs": [
+            {
+              "label": "Equity is not always cheaper",
+              "cells": [
+                {
+                  "qualifier": "Cost unranked"
+                },
+                {
+                  "qualifier": "Fixed charges"
+                },
+                {
+                  "qualifier": "No loan terms"
+                }
+              ]
+            },
+            {
+              "label": "The $1bn commitment expired undrawn",
+              "cells": [
+                {
+                  "qualifier": "Never funded"
+                },
+                {
+                  "qualifier": "Bridge, not loan"
+                },
+                {
+                  "qualifier": "Fees still paid"
+                }
+              ]
+            },
+            {
+              "label": "JPMorgan acted with Goldman and others",
+              "cells": [
+                {
+                  "qualifier": "Joint roles"
+                },
+                {
+                  "qualifier": "Roles per filing"
+                },
+                {
+                  "qualifier": "No fee split"
+                }
+              ]
+            },
+            {
+              "label": "Government support leaves risk",
+              "cells": [
+                {
+                  "qualifier": "Risk remains"
+                },
+                {
+                  "qualifier": "Named risks only"
+                },
+                {
+                  "qualifier": "MP funds build"
+                }
+              ]
+            },
+            {
+              "label": "A revolver is conditional, not cash",
+              "cells": [
+                {
+                  "qualifier": "Not cash"
+                },
+                {
+                  "qualifier": "Backstop only"
+                },
+                {
+                  "qualifier": "Covenant tests"
+                }
+              ]
+            },
+            {
+              "label": "No optimal or fully funded plan",
+              "cells": [
+                {
+                  "qualifier": "No optimum"
+                },
+                {
+                  "qualifier": "Set triggers"
+                },
+                {
+                  "qualifier": "No cost estimate"
+                }
+              ]
+            }
+          ]
+        },
+        "layout": "wide"
+      },
+      "table_reason": "Six objections each need a concession, an answer and a limit in words; no quantity exists to chart."
+    }
+  ]
+}

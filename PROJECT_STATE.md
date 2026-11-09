@@ -1,3 +1,16 @@
+## 2026-11-08: FI003 draft 0.9 visual refinement (draft PR #215)
+
+- Proposed draft 0.9 (`research/fi003/outputs/presentation-draft-v09/`) refines 0.8 for a senior finance reader:
+  - Text ledgers replace the dot matrices.
+  - The decision slides 12, 14 and 16 get a stronger emphasis and a decision subtitle.
+  - Reading-aid notes are removed.
+  - Tree labels no longer collide with connectors.
+  - Two identical rows on slide 14 are folded into the subtitle.
+- Model 1.0, all figures, sources, the 6 November cutoff and the proposed recommendation are unchanged.
+- Slides 7 and 8 looked blurred only in the old 80-dpi previews. The PDF is vector with no rasters, and the charts are native with embedded workbooks.
+- Shared renderer options are all opt-in (`tests/exhibit-system-v09-options.test.ts`). The 0.8 PPTX re-renders byte-identical.
+- Draft 0.8 stays the review baseline until Benjamin adopts 0.9. No accessible PDF exists for 0.9. The HOLD stands; no merge or publication. See [QUALITY_REVIEW_V09](research/fi003/presentation/QUALITY_REVIEW_V09.md).
+
 ## 2026-11-08: FI003 reviewer baseline moved to draft 0.8 (draft PR #215)
 
 - Benjamin made draft 0.8 the baseline for the next review phase and provisionally adopted its recommendation (equity first, plus an undrawn committed revolver as a backstop) as the working thesis. It is not approved for publication. Draft 0.7 remains as version history.

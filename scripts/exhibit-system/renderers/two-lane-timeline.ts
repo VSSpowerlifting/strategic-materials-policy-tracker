@@ -2,7 +2,7 @@
 // Native shapes on a computed date scale (day counts via Date.UTC): positions are
 // derived from the fixture at build time, NOT data-bound. Labels are staggered by
 // a deterministic descending staircase so no label crosses another label or stem.
-import { arr, isoDate, obj, oneOf, str } from "../contract";
+import { arr, bool, isoDate, obj, oneOf, str } from "../contract";
 import { datesAscending, maxItems, minItems, uniqueLabels } from "../integrity";
 import { C, vline } from "../primitives";
 import type { RenderHelpers, Renderer } from "../types";
@@ -27,6 +27,8 @@ export interface TimelineLane {
 }
 export interface TwoLaneTimelineData {
   lanes: TimelineLane[];
+  /** false omits the reading-convention note (default true). */
+  conventionNote?: boolean;
 }
 
 const dayNum = (iso: string): number => {
@@ -77,6 +79,7 @@ export const twoLaneTimeline: Renderer<TwoLaneTimelineData> = {
   parse(raw) {
     const o = obj(raw, "data");
     return {
+      ...(o.conventionNote === undefined ? {} : { conventionNote: bool(o.conventionNote, "data.conventionNote") }),
       lanes: arr(o.lanes, "data.lanes", 2).map((l, i) => {
         const lo = obj(l, `data.lanes[${i}]`);
         return {
@@ -152,7 +155,7 @@ export const twoLaneTimeline: Renderer<TwoLaneTimelineData> = {
       h.text(`legend-${k}-label`, "legend", text, { x: lx + 0.24, y: a.y, w: 1.45, h: 0.26, fontSize: 11, color: C.ink });
       lx += 1.75;
     });
-    h.text("axis-note", "axis", "Positioned on a day-count scale", {
+    if (d.conventionNote !== false) h.text("axis-note", "axis", "Positioned on a day-count scale", {
       x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 

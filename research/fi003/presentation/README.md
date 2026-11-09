@@ -105,3 +105,18 @@ uv run --no-project --with pymupdf==1.26.4 --with pypdf==6.14.2 \
 The render step refuses to overwrite an existing PPTX. Two shared renderer changes came with this draft (waterfall legend keys only drawn movements; criterion-matrix rows shrink to fit seven criteria) and are covered by `tests/exhibit-system-v08-fit.test.ts`. The committed 0.6 and 0.7 outputs were not regenerated.
 
 Rerender modified slides and inspect the full deck. Package validation does not establish financial accuracy, native PowerPoint behavior or human approval. Native open/edit/save/reopen, live screen-reader navigation/reading order, broader accessibility review, exact-file/source-rights approval and separate publication authorization remain open. The PR's known merge conflicts with main require a later separately scoped integration phase. No integration/release work belongs in this visual pass.
+
+### Draft 0.9 visual refinement (proposed)
+
+Draft 0.9 is a visual and editorial pass over draft 0.8. Same 16 slides, argument, model 1.0, figures, sources and cutoff. The dot matrices on slides 3, 11, 14 and 16 become text ledgers, and the criterion matrix on slide 12 shows text verdicts. The decision slides (12, 14, 16) gain an emphasised column or decision subtitle. Reading-convention notes are removed, and tree branch labels no longer collide with connectors. Draft 0.8 remains the review baseline until the maintainer adopts 0.9. The publication HOLD stands. No accessible PDF was produced for 0.9.
+
+Inputs live in `v09/`; outputs in `outputs/presentation-draft-v09/` (PPTX, PDF, manifest, contact sheet). See `QUALITY_REVIEW_V09.md` for per-slide decisions, the slide 7–8 sharpness diagnosis (preview resolution, not the charts), hashes and what is not verified.
+
+```sh
+python3 research/fi003/presentation/v09/build_spec.py
+npm run -s exhibits:review -- research/fi003/presentation/v09/spec.json --strict
+npm run exhibits:render -- research/fi003/presentation/v09/spec.json research/fi003/outputs/presentation-draft-v09/fi003-jpmorgan-mp-materials-draft-0.9.pptx
+bash research/fi003/presentation/v09/export_pdf.sh
+```
+
+The new renderer options are opt-in and covered by `tests/exhibit-system-v09-options.test.ts`. The draft 0.8 PPTX re-renders byte-identical.

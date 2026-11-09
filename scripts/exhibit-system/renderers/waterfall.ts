@@ -4,7 +4,7 @@
 // composition (start vs. the added amount), read from the same start/end inputs.
 // Only valid when every movement is an increase, so the slices are the start and
 // the sum of the increases and total exactly 100% of the end level.
-import { arr, num, obj, optNum, str } from "../contract";
+import { arr, num, obj, optNum, str, strList } from "../contract";
 import { maxItems, nonNegative, reconciles, sumsTo, uniqueLabels } from "../integrity";
 import { C, chartDefaults, fmt, legendItem } from "../primitives";
 import type { IntegrityIssue, Renderer } from "../types";
@@ -16,6 +16,8 @@ export interface WaterfallData {
   steps: { label: string; delta: number }[];
   end: { label: string; value: number };
   share?: { title: string; baseLabel: string; addedLabel: string };
+  /** Step labels whose value labels are set bold (the movements the slide argues from). */
+  emphasis?: string[];
 }
 
 /** Slice percentages of the end level: [start share, added share], unrounded. */
@@ -39,6 +41,7 @@ export const waterfall: Renderer<WaterfallData> = {
         return { label: str(r.label, `data.steps[${i}].label`), delta: num(r.delta, `data.steps[${i}].delta`) };
       }),
       end: { label: str(e.label, "data.end.label"), value: num(e.value, "data.end.value") },
+      ...(o.emphasis === undefined ? {} : { emphasis: strList(o.emphasis, "data.emphasis") }),
       share: o.share === undefined ? undefined : (() => {
         const sh = obj(o.share, "data.share");
         return {
@@ -72,6 +75,9 @@ export const waterfall: Renderer<WaterfallData> = {
         // The two printed percentages must also add to 100.00, not only the unrounded slices.
         issues.push(...sumsTo(shareSlices(d).map((p) => Number(p.toFixed(2))), 100, "printed share labels", 1e-9));
       }
+    }
+    for (const em of d.emphasis ?? []) {
+      if (!d.steps.some((s) => s.label === em)) issues.push({ rule: "accent-resolves", message: `emphasis "${em}" is not a step label` });
     }
     return issues;
   },
@@ -129,7 +135,7 @@ export const waterfall: Renderer<WaterfallData> = {
       const signed = i > 0 && i < n - 1;
       h.text(`value-${i}`, "label", fmt(v, d.dp, { sign: signed }), {
         x: area.x + i * colW, y: area.y + area.h + 0.04, w: colW, h: 0.28,
-        fontSize: 11, bold: !signed, align: "center", color: C.ink,
+        fontSize: 11, bold: !signed || (d.emphasis ?? []).includes(labels[i]), align: "center", color: C.ink,
       });
     });
     let x = h.area.x;

@@ -4,15 +4,23 @@
 // Optional `layout` relabels the row header, widens the label column, hides the
 // count footer and replaces the key, for row-by-column frameworks whose rows are
 // not organisations. Without it the output is unchanged.
-import { arr, bool, obj, optNum, optStr, str } from "../contract";
+import { arr, bool, obj, oneOf, optNum, optStr, str } from "../contract";
 import { maxItems, minItems, uniqueLabels } from "../integrity";
 import { C, fmt } from "../primitives";
-import type { IntegrityIssue, Renderer, TableCell } from "../types";
+import type { IntegrityIssue, Renderer, RenderHelpers, TableCell } from "../types";
 
 export interface RoleMatrixData {
   roles: string[];
   orgs: { label: string; cells: ({ qualifier?: string } | null)[] }[];
-  layout?: { rowHeader: string; labelWidth: number; showCounts: boolean; keyText: string };
+  layout?: {
+    rowHeader: string; labelWidth: number; showCounts: boolean; keyText: string;
+    /** "ledger" sets the qualifiers as the content: no marks, no key, a light header rule. */
+    style?: "marks" | "ledger";
+    /** Ledger only: text for a cell with no role (muted). */
+    emptyText?: string;
+    /** Ledger only: the role column to emphasise (bold ink, soft band). */
+    emphasisColumn?: string;
+  };
 }
 
 const DEFAULT_KEY = "Holds the role in the source set; text beside the mark qualifies it. No amounts are shown.";
@@ -39,11 +47,18 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
       }),
       layout: o.layout === undefined ? undefined : (() => {
         const l = obj(o.layout, "data.layout");
+        const style = l.style === undefined ? undefined : oneOf(l.style, ["marks", "ledger"] as const, "data.layout.style");
+        const ledger = style === "ledger";
+        const emptyText = optStr(l.emptyText, "data.layout.emptyText");
+        const emphasisColumn = optStr(l.emphasisColumn, "data.layout.emphasisColumn");
         return {
           rowHeader: str(l.rowHeader, "data.layout.rowHeader"),
           labelWidth: optNum(l.labelWidth, "data.layout.labelWidth") ?? 2.2,
           showCounts: l.showCounts === undefined ? true : bool(l.showCounts, "data.layout.showCounts"),
-          keyText: str(l.keyText, "data.layout.keyText"),
+          keyText: ledger && l.keyText === undefined ? "" : str(l.keyText, "data.layout.keyText"),
+          ...(style ? { style } : {}),
+          ...(emptyText !== undefined ? { emptyText } : {}),
+          ...(emphasisColumn !== undefined ? { emphasisColumn } : {}),
         };
       })(),
     };
@@ -73,6 +88,11 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
         if (AMOUNT_LIKE.test(q)) issues.push({ rule: "no-amounts-in-roles", message: `qualifier reads as an amount: ${q}` });
       });
     });
+    const em = d.layout?.emphasisColumn;
+    if (em !== undefined && !d.roles.includes(em)) issues.push({ rule: "accent-resolves", message: `emphasis column "${em}" is not a role` });
+    if (d.layout?.style !== "ledger" && (d.layout?.emptyText !== undefined || em !== undefined)) {
+      issues.push({ rule: "layout-option", message: "emptyText and emphasisColumn apply to the ledger style only" });
+    }
     d.roles.forEach((r, j) => {
       if (d.orgs.every((o) => o.cells[j] === null || o.cells[j] === undefined)) {
         issues.push({ rule: "role-held", message: `no organisation holds the role "${r}"` });
@@ -82,6 +102,10 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
     return issues;
   },
   render(h, d) {
+    if (d.layout?.style === "ledger") {
+      renderLedger(h, d);
+      return;
+    }
     const { x, y } = h.area;
     const labelW = d.layout?.labelWidth ?? 2.2;
     const showCounts = d.layout?.showCounts ?? true;
@@ -137,3 +161,56 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
     });
   },
 };
+
+/**
+ * Ledger style: the qualifier text is the content. No marks and no key; the header is a
+ * rule rather than a dark band; empty cells say so in muted type; one column may be
+ * emphasised. The count footer still follows layout.showCounts.
+ */
+function renderLedger(h: RenderHelpers, d: RoleMatrixData): void {
+  const l = d.layout!;
+  const { x, y } = h.area;
+  const labelW = l.labelWidth;
+  const roleW = (h.area.w - labelW) / d.roles.length;
+  const headH = 0.5;
+  const footH = l.showCounts ? 0.42 : 0;
+  const rowH = Math.min(0.56, (h.area.h - headH - footH - 0.1) / d.orgs.length);
+  const rule = { type: "solid", pt: 0.75, color: C.border };
+  const headRule = { type: "solid", pt: 1.25, color: C.ink };
+  const none = { type: "none" };
+  const isEm = (j: number) => d.roles[j] === l.emphasisColumn;
+  const hdr = (text: string, em: boolean): TableCell => ({
+    text,
+    options: {
+      bold: true, fontSize: 12, color: em ? C.accent : C.ink, fill: { color: em ? C.soft : C.paper }, align: "left", valign: "bottom",
+      border: [none, none, em ? { type: "solid", pt: 2.5, color: C.accent } : headRule, none],
+    },
+  });
+  const rows: TableCell[][] = [
+    [hdr(l.rowHeader, false), ...d.roles.map((r, j) => hdr(r, isEm(j)))],
+    ...d.orgs.map((o): TableCell[] => [
+      { text: o.label, options: { fontSize: 12, bold: true, color: C.ink, valign: "middle", fill: { color: C.paper }, border: [none, none, rule, none] } },
+      ...o.cells.map((c, j): TableCell => {
+        const empty = !c;
+        return {
+          text: empty ? (l.emptyText ?? "") : (c.qualifier ?? ""),
+          options: {
+            fontSize: 12, bold: !empty && isEm(j), color: empty ? C.muted : C.ink, valign: "middle", align: "left",
+            fill: { color: isEm(j) ? C.soft : C.paper }, border: [none, none, rule, none],
+          },
+        };
+      }),
+    ]),
+  ];
+  if (l.showCounts) rows.push([
+    { text: "Organisations in role", options: { fontSize: 11, bold: true, color: C.muted, valign: "middle", fill: { color: C.paper }, border: [rule, none, none, none] } },
+    ...d.roles.map((_, j): TableCell => ({
+      text: fmt(d.orgs.filter((o) => o.cells[j]).length),
+      options: { fontSize: 11, bold: true, color: C.ink, align: "left", valign: "middle", fill: { color: C.paper }, border: [rule, none, none, none] },
+    })),
+  ]);
+  h.table("role-table", rows, {
+    x, y, w: labelW + roleW * d.roles.length, colW: [labelW, ...d.roles.map(() => roleW)],
+    rowH: [headH, ...d.orgs.map(() => rowH), ...(l.showCounts ? [footH] : [])], fontSize: 12,
+  });
+}

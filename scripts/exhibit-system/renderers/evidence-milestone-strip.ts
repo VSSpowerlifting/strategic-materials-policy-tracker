@@ -3,7 +3,7 @@
 // targeted, filled neutral = reported, filled accent = independently verified).
 // Native shapes on a computed date scale (day counts via Date.UTC): positions are
 // derived at build time, NOT data-bound. Labels alternate above and below the spine.
-import { arr, isoDate, obj, str } from "../contract";
+import { arr, bool, isoDate, obj, str } from "../contract";
 import { datesAscending, EVIDENCE_STATES, inVocabulary, maxItems, minItems, uniqueLabels } from "../integrity";
 import { C, vline } from "../primitives";
 import type { IntegrityIssue, RenderHelpers, Renderer } from "../types";
@@ -18,6 +18,8 @@ export interface Milestone {
 }
 export interface EvidenceStripData {
   milestones: Milestone[];
+  /** false omits the reading-convention note (default true). */
+  conventionNote?: boolean;
 }
 
 const dayNum = (iso: string): number => {
@@ -52,6 +54,7 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
   parse(raw) {
     const o = obj(raw, "data");
     return {
+      ...(o.conventionNote === undefined ? {} : { conventionNote: bool(o.conventionNote, "data.conventionNote") }),
       milestones: arr(o.milestones, "data.milestones").map((m, i) => {
         const p = `data.milestones[${i}]`;
         const mo = obj(m, p);
@@ -113,7 +116,7 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
       h.text(`legend-${key}-label`, "legend", text, { x: lx + 0.32, y: a.y, w: w - 0.32, h: 0.26, fontSize: 11, color: C.ink });
       lx += w;
     });
-    h.text("axis-note", "axis", "Positioned on a day-count scale", {
+    if (d.conventionNote !== false) h.text("axis-note", "axis", "Positioned on a day-count scale", {
       x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
