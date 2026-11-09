@@ -1,6 +1,6 @@
-# SMPT research publication house style — v2.1
+# SMPT research publication house style — v2.2
 
-**Adopted on 4 November 2026; typography updated on 6 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized.
+**Adopted on 4 November 2026; typography updated on 6 November 2026; sentence-cadence preference clarified on 8 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized.
 
 ## Publication identity
 
@@ -26,6 +26,8 @@ This is an editorial grouping, not a change in method. Legal-status research, fo
 
 - Write descriptive headings that identify the company, jurisdiction, instrument, financing status, industrial project, or documented activity.
 - Avoid two-sentence punchlines, rhetorical negations, repeated disclaimers, AI-style framing, and standalone asides explaining what the research is supposedly not.
+- **Owner-preferred analytical cadence:** Favor occasional **fronted adverbial clauses** that establish time, commercial context or conditions before the main claim; grammatical inversion and delayed subjects can also create natural variation. For example: “When construction is still underway and shipments may be years away, a long-term purchasing commitment can help financiers assess prospective revenue.” Use longer compound or complex sentences when the clauses carry a single connected explanation. Integrate material qualifications into the relevant sentence, including through subordinate clauses or em dashes, without burying important conditions.
+- **Owner-preferred narrative movement:** Build explanations cumulatively across sentences, following named companies, transactions and developments before drawing the economic inference. Let chronological markers and occasional conversational transitions orient the reader when they express a real relationship; mix precise financial terminology with ordinary explanatory language. Vary openings and sentence shapes on purpose, including direct subject-first sentences. Avoid manufactured rhetorical contrasts, overcompression and repetitive fact → implication conclusions. These are stylistic options, not mandatory forms, and never supersede evidence, original units, financing/status distinctions or source attribution.
 - Explain substantive uncertainty within the analytical paragraph where it changes interpretation. Keep approved facts and financial/status distinctions: legal action, designation, approval, obligation, drawdown, disbursement, construction, commissioning, achieved output, and shipments are different observations.
 - Preserve units, original amounts, dates, source identifiers, and frozen research cutoff. Editorial and presentation work must never silently become a source/data release or factual revision.
 
