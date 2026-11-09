@@ -222,7 +222,7 @@ export default function MarketsPage() {
                   </span>
                 </li>
                 <li>
-                  <ExtLink href={manifest.pinkSheetPdfUrl}>Pink Sheet, November 2026 (PDF)</ExtLink>
+                  <ExtLink href={manifest.pinkSheetPdfUrl}>Pink Sheet, {formatPeriod(manifest.releaseDate.slice(0, 7), true)} (PDF)</ExtLink>
                 </li>
               </ul>
               <p className="break-all font-mono text-xs text-faint">
