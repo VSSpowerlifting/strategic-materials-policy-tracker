@@ -18,6 +18,30 @@
 - Explain substantive uncertainty within the analytical paragraph where it changes interpretation. Keep approved facts and financial/status distinctions: legal action, designation, approval, obligation, drawdown, disbursement, construction, commissioning, achieved output, and shipments are different observations.
 - Preserve units, original amounts, dates, source identifiers, and frozen research cutoff. Editorial and presentation work must never silently become a source/data release or factual revision.
 
+## Natural-language review — mandatory for reader-facing copy
+
+**Before drafting:** Read this guide directly. Identify the concrete development, the reader's reason to care, and the primary-source facts that support each paragraph. Begin with the action and its consequence; introduce document numbers and methodological qualifications where they clarify the story. Write as a knowledgeable reporter or analyst explaining something to another person, rather than as a validator describing a database row.
+
+**While writing:** Prefer complete paragraphs with specific actors, verbs, dates and cause-and-effect explanations that the evidence supports. Vary sentence rhythm naturally. Make analytical implications tangible: which contract term, regulatory date, financing condition or production constraint changes for the reader? Use tables when detailed comparison helps, but avoid repeating the same deadline or disclaimer in every row. A legal instrument can be described once in full and then referred to clearly by year and number where ambiguity remains.
+
+**Remove on the editorial pass:**
+- Repeated self-references such as “this article examines,” “the analysis does not estimate,” and “our framework shows,” when the paragraph can directly state the finding.
+- Standalone disclaimers, rhetorical negations, manufactured three-part takeaways, generic “important implications” claims, and headings that merely label the writing process (“Commercial interpretation,” “Analysis: procurement”).
+- Sentences that sound authoritative without identifying what the source actually establishes; avoid claiming certainty, causality, material supply effects or negotiation motives from an instrument that states only legal dates.
+- Bloated chronology in prose when a timeline already supplies the dates. Keep the paragraph that explains what makes the dates consequential.
+
+**Preserve:** Material negative facts, unknowns and boundaries when they determine interpretation. “Announcement X does not include the April rules” can be an indispensable legal distinction. The aim is precise, readable prose, never a mechanical ban on particular words. Keep every relevant source link, original-language nuance, quantitative condition, effective date, uncertainty and status distinction. Do not replace uncertainty with confident-sounding guesses.
+
+**Examples of the desired adjustment:**
+
+| Labored drafting | More natural, equally careful |
+| --- | --- |
+| “Commercial interpretation. This section does not estimate effects on prices, supply or individual firms.” | “For buyers planning deliveries into 2027, the stated suspension end date is the relevant deadline.” |
+| “The instrument offers two months of stated certainty, with post-expiry standing undetermined.” | “The suspension runs through 10 January 2027. The announcement gives no date beyond that.” |
+| “This analysis examines the implications of these developments for procurement stakeholders.” | “Manufacturers relying on the affected inputs need to check which provisions govern their orders after the suspension ends.” |
+
+**Before handing off a publication**, perform one focused editorial read of the rendered text, not just the source code. Check: Is the opening worth reading? Does each paragraph contribute a fact or meaningful interpretation? Do readers understand the commercial stakes without being told that they are “significant”? Does the conclusion add a real point rather than repeat the lead? Are any negations legally necessary? Are uncertainty, quotation, dates, instrument scope and links unchanged? Read at mobile and desktop widths. Note unresolved editorial questions in the review handoff; an automated checker cannot certify natural voice.
+
 ## Sources and link treatment
 
 - Primary-source hyperlinks must be **real, visible, underlined links**, using bold and a sufficiently dark accent on cream/paper. Do not rely on color alone.

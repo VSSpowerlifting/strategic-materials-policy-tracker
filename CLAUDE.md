@@ -14,6 +14,8 @@ government policy instruments affecting rare earths and adjacent strategic mater
 It is **not** a commodity-price model, an investment-recommendation service, a general
 news aggregator, or a home for unsupported geopolitical speculation.
 
+For **any public-facing writing or editorial revision**, including ordinary research articles and policy analyses, read [SMPT Research Publication House Style](docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) **before drafting** and apply its final natural-language review checklist. This is the canonical writing guide and is separate from the Applied Strategy, Financial Intelligence and presentation standards. It applies even when the task is framed as a small website copy edit. Do not mistake automated review or a passing build for an editor's approval.
+
 For **separate Applied Strategy and Financial Intelligence research deliverables** (not tracker seed data), use [the Four-Layer Analytical Framework & Applied Strategy Standard](docs/research/SMPT_APPLIED_STRATEGY_STANDARD.md). It governs research questions, consulting-style decks, spreadsheet modeling and decision recommendations while preserving all tracker data and methodology boundaries stated here.
 
 ## Headroom compression boundary (critical)

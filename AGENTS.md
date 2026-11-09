@@ -4,6 +4,10 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+## Mandatory publication writing guide
+
+For every new or substantially revised public-facing research article, policy analysis, report, executive memo, social research edition or publication landing page, **read [SMPT Research Publication House Style](docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) before drafting and revisit its natural-language review checklist before delivery**. This requirement applies to narrative articles and website copy, not just decks. It complements the legal/source and publication gates below; a fluent rewrite must never erase a material qualifier, source or legal-status distinction. Automated adherence checks can verify the guide is routed and files compile, but human editorial judgment is still required to approve the writing.
+
 ## Website editorial and interface standard
 
 Use concise, specific, natural editorial copy. A visible sentence must provide a fact, clarify a material distinction, or help the reader navigate. Remove duplicate introductions, ornamental microcopy, question-shaped labels, generic slogans, and repeated platform self-explanations. Prefer publication titles, authors, dates, record fields and source links to promotional prose. Keep navigation labels short and place technical explanations in methodology, contextual disclosures, or accessible detail views.
