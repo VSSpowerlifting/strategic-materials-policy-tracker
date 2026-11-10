@@ -1,11 +1,11 @@
 import type { MonitorSeries } from "@/components/markets/types";
 import { getMaterialBySlug } from "@/lib/data";
 import { getMarketDatasets, getObservations } from "@/lib/market-data";
-import { valueDigits } from "@/lib/markets";
+import { MARKET_ONLY_MATERIALS, valueDigits } from "@/lib/markets";
 
 export function materialLink(slug: string): { name: string | null; href: string | null } {
   const m = getMaterialBySlug(slug);
-  return m ? { name: m.nameEn, href: `/materials/${m.slug}` } : { name: null, href: null };
+  return m ? { name: m.nameEn, href: `/materials/${m.slug}` } : { name: MARKET_ONLY_MATERIALS[slug]?.name ?? null, href: null };
 }
 
 /** Plain series records for the client explorer, in dataset order (World Bank, IMF, USGS). */

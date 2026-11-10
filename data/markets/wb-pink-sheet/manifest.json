@@ -49,11 +49,15 @@
     "statedText": "This dataset is licensed under Creative Commons Attribution 4.0"
   },
   "attribution": "Source: World Bank, Commodity Price Data (The Pink Sheet), monthly prices, updated November 3, 2026. Licensed under CC BY 4.0.",
-  "changesMade": "SMPT extracted the aluminum, copper and nickel columns of the Monthly Prices sheet for January 2005 to October 2026, converted period labels from YYYYMmm to YYYY-MM and removed binary rounding noise from the stored numbers. Published values are otherwise unchanged. Percentage changes, indexed values and rankings shown with them are SMPT calculations.",
+  "changesMade": "SMPT extracted aluminum, copper, nickel, tin, zinc, lead and platinum from the November 3, 2026 Monthly Prices workbook for January 2005 to October 2026. Periods are normalized from YYYYMmm to YYYY-MM; published values are otherwise preserved. Platinum's June 2025 quotation change is marked explicitly. Percentage changes, indexed values and rankings are SMPT calculations.",
   "thirdPartyNote": "The World Bank lists Bloomberg, Platts Metals Week, Thomson Reuters Datastream and others as sources for these series. SMPT republishes only the World Bank's monthly figures, not the underlying daily exchange or vendor data.",
   "seriesIds": [
     "wb-aluminum",
     "wb-copper",
-    "wb-nickel"
+    "wb-nickel",
+    "wb-tin",
+    "wb-zinc",
+    "wb-lead",
+    "wb-platinum"
   ]
 }

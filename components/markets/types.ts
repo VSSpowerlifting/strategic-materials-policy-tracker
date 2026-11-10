@@ -33,14 +33,10 @@ export interface SeriesStyle {
   dash: string | undefined;
 }
 
-/** Most lines plotted at once. A seventh would need a generated hue, which breaks the palette. */
-export const MAX_PLOTTED = 6;
-
 /**
- * Categorical hues in fixed order, validated against the dark surface (#1a1814)
- * with the dataviz palette script: lightness band, chroma floor, adjacent-pair
- * CVD separation ≥ 8 ΔE and ≥ 3:1 contrast all pass. Slots 4–6 are also dashed,
- * and every line carries a direct label, so identity never rests on hue alone.
+ * Six contrast-tested categorical hues. Initial slots retain their existing
+ * styling, so saved URLs keep the same colors. Further slots reuse those hues
+ * with distinctive dash patterns instead of inventing unreviewed colors.
  */
 const PALETTE: readonly SeriesStyle[] = [
   { color: "#3987e5", dash: undefined },
@@ -51,9 +47,27 @@ const PALETTE: readonly SeriesStyle[] = [
   { color: "#008300", dash: "7 4" },
 ];
 
-/** Style for a colour slot. A slot is kept by a series for as long as it stays selected. */
+/** Extra stroke patterns distinguish the same tested hue used by later slots. */
+const EXTRA_DASHES = ["2 4", "11 3 2 3", "1 5", "13 4 3 4", "4 2 1 2"] as const;
+
+/** An existing series keeps its style as other series are added or removed. */
 export function slotStyle(slot: number): SeriesStyle {
-  return PALETTE[slot] ?? { color: "var(--muted)", dash: "2 3" };
+  if (!Number.isInteger(slot) || slot < 0) return { color: "var(--muted)", dash: "2 3" };
+  const base = PALETTE[slot % PALETTE.length];
+  if (slot < PALETTE.length) return base;
+  return {
+    color: base.color,
+    dash: EXTRA_DASHES[(Math.floor(slot / PALETTE.length) - 1) % EXTRA_DASHES.length],
+  };
 }
 
 export const PALETTE_HEX = PALETTE.map((p) => p.color);
+
+/** Tile shorthand for the market-only element selector, including an REE group and graphite. */
+export const MARKET_SYMBOLS: Record<string, string> = {
+  aluminium: "Al", antimony: "Sb", boron: "B", cobalt: "Co", copper: "Cu",
+  dysprosium: "Dy", gallium: "Ga", germanium: "Ge", graphite: "C", lead: "Pb",
+  lithium: "Li", neodymium: "Nd", nickel: "Ni", niobium: "Nb", palladium: "Pd",
+  platinum: "Pt", "rare-earth-elements": "REE", tantalum: "Ta", terbium: "Tb",
+  tin: "Sn", tungsten: "W", zinc: "Zn",
+};

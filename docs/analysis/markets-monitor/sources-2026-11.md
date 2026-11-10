@@ -12,7 +12,7 @@ ingest scripts re-read the pinned files, so these notes are not the data source.
 - SHA-256 `3c8d9d8dbb48342fdbf24777c39a8ce8964cc2fd0958f72f6779e6e4ad99cde2`, 587,760 bytes;
   re-downloaded 2026-11-09 and the hash still matches.
 - Release 2026-11-03; last observation 2026-10; next release 2026-12-02. CC BY 4.0.
-- Series kept: aluminium, copper, nickel (LME, US$/t). Stored window from 2005-01.
+- Series kept: aluminium, copper, nickel, tin, zinc and lead (LME, US$/t), and platinum (US$/troy oz). The four additions use the same pinned workbook, with 262 monthly observations each from 2005-01 to 2026-10. A full-period cross-check of the source workbook against all three previously stored World Bank series found zero differences. Platinum's stated quotation changed in 2025-06; the series records that break.
 
 ## 2. IMF Primary Commodity Price System (PCPS), monthly
 

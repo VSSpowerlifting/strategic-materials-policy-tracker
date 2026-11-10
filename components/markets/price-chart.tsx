@@ -189,12 +189,14 @@ export function PriceChart({
       return { id: l.id, segments, singles, last, byPeriod };
     });
 
-    const endYs = spreadLabels(
-      paths.map((p) => (p.last ? y(p.last.value) : MARGIN.top)),
-      15,
-      MARGIN.top + 4,
-      MARGIN.top + plotH,
-    );
+    const endYs = lines.length <= 8
+      ? spreadLabels(
+          paths.map((p) => (p.last ? y(p.last.value) : MARGIN.top)),
+          15,
+          MARGIN.top + 4,
+          MARGIN.top + plotH,
+        )
+      : paths.map((p) => (p.last ? y(p.last.value) : MARGIN.top));
 
     return { x, y, ticks, xTicks, yearOnly, missing, paths, endYs, span };
   }, [lines, periods, mode, basePeriod, plotW, plotH, frequency]);
@@ -251,6 +253,12 @@ export function PriceChart({
   const tickDigits = Math.min(2, Math.max(0, ...geo.ticks.map((t) => String(t).split(".")[1]?.length ?? 0)));
   const fmtTick = (v: number) => formatNumber(v, tickDigits);
   const colW = periods.length > 1 ? plotW / (periods.length - 1) : plotW;
+  // In a crowded chart the legend focuses an individual line; the full data
+  // remains accessible in the table. Avoid a hover card taller than the chart.
+  const tooltipItems = lines
+    .map((line, i) => ({ line, i }))
+    .filter(({ line, i }) => lines.length <= 8 || (focusId ? line.id === focusId : i < 8));
+  const tooltipHidden = lines.length - tooltipItems.length;
 
   return (
     <div
@@ -410,10 +418,12 @@ export function PriceChart({
           );
         })}
 
+        {/* At high density show a direct end label only for the highlighted
+            line. The keyboard-accessible legend lists every selected line. */}
         {/* Direct labels at line ends */}
         {lines.map((l, i) => {
           const p = geo.paths[i];
-          if (!p.last) return null;
+          if (!p.last || (lines.length > 8 && focusId !== l.id)) return null;
           const lx = geo.x(p.last.period);
           const ly = geo.y(p.last.value);
           const ty = geo.endYs[i];
@@ -480,7 +490,7 @@ export function PriceChart({
         >
           <p className="tnum font-display font-semibold text-foreground">{formatPeriod(cursor, true)}</p>
           <ul className="mt-1 space-y-1">
-            {lines.map((l, i) => {
+            {tooltipItems.map(({ line: l, i }) => {
               const o = geo.paths[i].byPeriod.get(cursor);
               return (
                 <li key={l.id} className="flex items-center gap-2">
@@ -495,6 +505,11 @@ export function PriceChart({
               );
             })}
           </ul>
+          {tooltipHidden > 0 ? (
+            <p className="mt-1.5 text-faint">
+              {tooltipHidden} more selected · highlight a legend item to inspect it
+            </p>
+          ) : null}
           <p className="mt-1.5 text-faint">
             {mode === "indexed" ? "Index, base period = 100" : lines[0]?.unit}
             {geo.paths.some((p) => p.byPeriod.get(cursor)?.estimated) ? " · e = estimated" : ""}

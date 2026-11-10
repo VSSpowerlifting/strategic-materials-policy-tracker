@@ -39,6 +39,14 @@ export interface Observation {
 export const PRICE_TYPES = ["exchange_benchmark", "price_assessment", "trade_unit_value"] as const;
 export type PriceType = (typeof PRICE_TYPES)[number];
 
+/** Approved commodity benchmarks shown only under /markets, with no fabricated policy dossier. */
+export const MARKET_ONLY_MATERIALS: Record<string, { name: string; symbol: string }> = {
+  tin: { name: "Tin", symbol: "Sn" },
+  zinc: { name: "Zinc", symbol: "Zn" },
+  lead: { name: "Lead", symbol: "Pb" },
+  platinum: { name: "Platinum", symbol: "Pt" },
+};
+
 export const PRICE_TYPE_LABELS: Record<PriceType, string> = {
   exchange_benchmark: "Exchange benchmark",
   price_assessment: "Price assessment",
@@ -684,7 +692,9 @@ function validateDataset(d: MarketDataset, materialIds: ReadonlySet<string>, err
       errors.push(`${where}: a trade unit value is labelled as a price, benchmark or assessment`);
     }
     if (!Array.isArray(s.limitations) || s.limitations.length === 0) errors.push(`${where}: limitations must be a non-empty list`);
-    if (!materialIds.has(s.materialId)) errors.push(`${where}: materialId "${s.materialId}" is not a material in data/seed/materials.json`);
+    if (!materialIds.has(s.materialId) && !Object.hasOwn(MARKET_ONLY_MATERIALS, s.materialId)) {
+      errors.push(`${where}: materialId "${s.materialId}" is neither a curated dossier nor an approved market-only commodity`);
+    }
     if (!Array.isArray(s.relatedMaterialIds)) errors.push(`${where}: relatedMaterialIds must be a list`);
     else for (const m of s.relatedMaterialIds) {
       if (!materialIds.has(m)) errors.push(`${where}: related material "${m}" is not in data/seed/materials.json`);

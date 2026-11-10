@@ -306,17 +306,26 @@ test("CSV cells: formula injection defused, decimals kept numeric", () => {
 
 // ---- Explorer UI ----------------------------------------------------------
 
-test("colour slots: a series keeps its slot when another is removed", async () => {
+test("colour slots support the full data catalogue while keeping assignments stable", async () => {
   const { slotsFrom, toggleSlot } = await import("@/components/markets/market-monitor");
-  const known = new Set(["a", "b", "c", "d", "e", "f", "g"]);
-  const slots = slotsFrom(["a", "zz", "b", "a", "c"], known);
-  assert.deepEqual(slots, ["a", "b", "c", null, null, null]);
-  const removed = toggleSlot(slots, "b");
-  assert.deepEqual(removed, ["a", null, "c", null, null, null]);
-  assert.deepEqual(toggleSlot(removed, "d"), ["a", "d", "c", null, null, null]);
-  const full = slotsFrom(["a", "b", "c", "d", "e", "f", "g"], known);
-  assert.equal(full.includes("g"), false);
-  assert.deepEqual(toggleSlot(full, "g"), full, "a seventh series is refused, not assigned a generated hue");
+  const { slotStyle } = await import("@/components/markets/types");
+  const known = new Set(Array.from({ length: 35 }, (_, i) => `s${i}`));
+  const slots = slotsFrom(["s0", "invalid", "s1", "s0", "s2"], known);
+  assert.deepEqual(slots, ["s0", "s1", "s2"]);
+  const removed = toggleSlot(slots, "s1");
+  assert.deepEqual(removed, ["s0", null, "s2"]);
+  assert.deepEqual(toggleSlot(removed, "s3"), ["s0", "s3", "s2"]);
+  let all: Array<string | null> = [];
+  for (const id of known) all = toggleSlot(all, id);
+  assert.deepEqual(all, [...known]);
+  assert.equal(all.length, 35, "all 35 series can be selected");
+  assert.deepEqual(slotsFrom([...known], known), [...known]);
+  assert.deepEqual(slotsFrom(Array(100).fill(""), known), [], "excess URL slots cannot exceed available series");
+  assert.deepEqual(slotStyle(0), { color: "#3987e5", dash: undefined });
+  assert.deepEqual(slotStyle(5), { color: "#008300", dash: "7 4" });
+  assert.equal(slotStyle(6).color, slotStyle(0).color);
+  assert.notEqual(slotStyle(6).dash, slotStyle(0).dash);
+  assert.notDeepEqual(slotStyle(24), slotStyle(0));
 });
 
 test("chart segments: no join across gaps or source breaks; estimated steps drawn apart", async () => {
@@ -362,6 +371,9 @@ test("explorer renders the real series with the default selection and attributio
   const html = renderToStaticMarkup(createElement(MarketExplorer, { series, releaseNotices: buildReleaseNotices() }));
   assert.match(html, /Price trends/);
   assert.match(html, /Choose benchmarks/);
+  assert.match(html, /Select all/);
+  assert.match(html, /4 of 10 selected/);
+  assert.doesNotMatch(html, /Choose up to 6 series|remove one to add another/);
   assert.ok(
     html.indexOf('id="mm-chart-title"') < html.indexOf('id="mm-pick-title"'),
     "the chart must precede the full benchmark picker",
@@ -373,15 +385,36 @@ test("explorer renders the real series with the default selection and attributio
   }
 });
 
-test("shared links keep each series in its colour slot", async () => {
-  const { slotsFrom, slotsParam } = await import("@/components/markets/market-monitor");
-  const known = new Set(["a", "b", "c"]);
-  const slots = [null, "b", null, "c", null, null];
+test("market-only metals have real World Bank histories without invented policy dossiers", async () => {
+  const { MARKET_ONLY_MATERIALS } = await import("@/lib/markets");
+  const { buildMonitorSeries, materialLink } = await import("@/components/markets/series");
+  const symbols = { tin: "Sn", zinc: "Zn", lead: "Pb", platinum: "Pt" };
+  const wb = buildMonitorSeries().filter((s) => ["wb-tin", "wb-zinc", "wb-lead", "wb-platinum"].includes(s.id));
+  assert.equal(wb.length, 4);
+  for (const s of wb) {
+    assert.equal(s.obs.length, 262);
+    assert.equal(s.lastPeriod, "2026-10");
+    assert.equal(materialLink(s.materialId).href, null);
+    assert.equal(MARKET_ONLY_MATERIALS[s.materialId].symbol, symbols[s.materialId as keyof typeof symbols]);
+  }
+  assert.equal(wb.find((s) => s.id === "wb-platinum")?.unitShort, "US$/troy oz");
+  assert.deepEqual(wb.find((s) => s.id === "wb-platinum")?.sourceBreaks.map((b) => b.period), ["2025-06"]);
+});
+
+test("shared links preserve all selected benchmarks and stable style slots", async () => {
+  const { slotsFrom, slotsParam, toggleSlot } = await import("@/components/markets/market-monitor");
+  const known = new Set(Array.from({ length: 25 }, (_, i) => `s${i}`));
+  const slots = [null, "s1", null, "s3", ...Array.from({ length: 17 }, (_, i) => `s${i + 4}`)];
   const param = slotsParam(slots);
-  assert.equal(param, ",b,,c");
+  assert.ok(param.startsWith(",s1,,s3,"));
   assert.deepEqual(slotsFrom(param.split(","), known), slots);
-  assert.equal(slotsParam(["a", "b", null, null, null, null]), "a,b");
-  assert.equal(slotsParam(Array(6).fill(null)), "");
+  assert.equal(slotsParam(["s0", "s1", null, null]), "s0,s1");
+  assert.equal(slotsParam([]), "");
+  const removed = toggleSlot(slots, "s1");
+  assert.equal(removed[3], "s3");
+  assert.deepEqual(slotsFrom(slotsParam(removed).split(","), known), removed);
+  assert.ok(getMarketSeries("monthly").length > 6);
+  assert.ok(getMarketSeries("annual").length > 6);
 });
 
 test("material pages link each covering series to the explorer at its own frequency", async () => {
@@ -394,5 +427,10 @@ test("material pages link each covering series to the explorer at its own freque
   assert.ok(getMarketSeriesForMaterial("praseodymium").some((s) => s.id === "usgs-ndpr-oxide"));
   const slugs = new Set(getAllMaterials().map((m) => m.slug));
   const ids = new Set(getAllMaterials().map((m) => m.id));
-  for (const d of getMarketDatasets()) for (const s of d.series) assert.ok(ids.has(s.materialId) && slugs.has(s.materialId), s.id);
+  const { MARKET_ONLY_MATERIALS } = await import("@/lib/markets");
+  for (const d of getMarketDatasets()) for (const s of d.series) {
+    // Curated policy materials have dossiers; approved market-only benchmarks do not.
+    if (Object.hasOwn(MARKET_ONLY_MATERIALS, s.materialId)) continue;
+    assert.ok(ids.has(s.materialId) && slugs.has(s.materialId), s.id);
+  }
 });

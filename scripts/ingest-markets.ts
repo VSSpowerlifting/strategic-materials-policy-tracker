@@ -42,7 +42,7 @@ const OBSERVATION_CUTOFF = "2026-10";
  * First stored month. The World Bank describes the aluminum and nickel series
  * as LME settlement prices "beginning 2005; previously cash price". Starting
  * the stored window in January 2005 keeps every stored observation on one
- * stated price basis for all three series.
+ * stated price basis for the stored exchange series.
  */
 const WINDOW_START = "2005-01";
 
@@ -63,11 +63,12 @@ interface SeriesSpec {
   /** Leading text of the matching Description-sheet entry. */
   descriptionPrefix: string;
   benchmark: string;
-  priceType: "exchange_benchmark";
+  priceType: "exchange_benchmark" | "price_assessment";
   form: string;
   grade: string;
   priceBasis: string;
   limitations: string[];
+  sourceBreaks?: Array<{ period: string; statedAs: string }>;
 }
 
 const COMMON_LIMITATIONS = [
@@ -121,6 +122,66 @@ const SERIES: SeriesSpec[] = [
       ...COMMON_LIMITATIONS,
       "A refined-metal benchmark. Nickel intermediates and chemicals used in batteries (for example sulphate or mixed hydroxide precipitate) trade on separate terms.",
     ],
+  },
+  {
+    id: "wb-tin",
+    materialId: "tin",
+    label: "Tin",
+    header: "Tin",
+    sourceUnit: "($/mt)",
+    descriptionPrefix: "Tin (LME)",
+    benchmark: "LME refined tin",
+    priceType: "exchange_benchmark",
+    form: "Refined tin",
+    grade: "99.85% purity",
+    priceBasis: "LME settlement price",
+    
+    limitations: ["Monthly averages smooth intra-month moves; a month's figure is not a price on any single day.","Nominal US dollars, not adjusted for inflation; long-window changes include general price-level change.","An exchange benchmark for one grade and delivery basis. Prices paid in contracts for other grades, forms or locations can differ."],
+  },
+  {
+    id: "wb-zinc",
+    materialId: "zinc",
+    label: "Zinc",
+    header: "Zinc",
+    sourceUnit: "($/mt)",
+    descriptionPrefix: "Zinc (LME)",
+    benchmark: "LME high-grade zinc",
+    priceType: "exchange_benchmark",
+    form: "Refined zinc",
+    grade: "Minimum 99.95% purity",
+    priceBasis: "LME settlement price",
+    
+    limitations: ["Monthly averages smooth intra-month moves; a month's figure is not a price on any single day.","Nominal US dollars, not adjusted for inflation; long-window changes include general price-level change.","An exchange benchmark for one grade and delivery basis. Prices paid in contracts for other grades, forms or locations can differ.","The refined-zinc settlement benchmark is distinct from zinc concentrate and downstream products."],
+  },
+  {
+    id: "wb-lead",
+    materialId: "lead",
+    label: "Lead",
+    header: "Lead",
+    sourceUnit: "($/mt)",
+    descriptionPrefix: "Lead (LME)",
+    benchmark: "LME refined lead",
+    priceType: "exchange_benchmark",
+    form: "Refined lead",
+    grade: "99.97% purity",
+    priceBasis: "LME settlement price",
+    
+    limitations: ["Monthly averages smooth intra-month moves; a month's figure is not a price on any single day.","Nominal US dollars, not adjusted for inflation; long-window changes include general price-level change.","An exchange benchmark for one grade and delivery basis. Prices paid in contracts for other grades, forms or locations can differ."],
+  },
+  {
+    id: "wb-platinum",
+    materialId: "platinum",
+    label: "Platinum",
+    header: "Platinum",
+    sourceUnit: "($/troy oz)",
+    descriptionPrefix: "Platinum,",
+    benchmark: "Platinum spot average",
+    priceType: "price_assessment",
+    form: "Plate or ingot",
+    grade: "Minimum 99.95% purity",
+    priceBasis: "Spot average of daily rates (from June 2025); previously London afternoon fixing",
+    sourceBreaks: [{ period: "2025-06", statedAs: "The World Bank changed platinum from the UK London afternoon fixing to the spot average of daily rates beginning June 2025." }],
+    limitations: ["Monthly averages smooth intra-month moves; a month's figure is not a price on any single day.","Nominal US dollars, not adjusted for inflation; long-window changes include general price-level change.","The stated platinum quotation changes in June 2025; trends and returns do not join across that price-basis break.","Platinum spot and metal contract prices for other specifications or places may differ."],
   },
 ];
 
@@ -342,14 +403,14 @@ async function main() {
       priceBasis: spec.priceBasis,
       deliveryBasis: null,
       currency: "USD",
-      unit: "US$ per metric tonne",
-      unitShort: "US$/t",
+      unit: spec.sourceUnit === "($/troy oz)" ? "US$ per troy ounce" : "US$ per metric tonne",
+      unitShort: spec.sourceUnit === "($/troy oz)" ? "US$/troy oz" : "US$/t",
       unitNote: "Nominal US dollars, not adjusted for inflation",
       frequency: "monthly",
       aggregation: "monthly average",
       underlyingSources,
       sourceNotes: null,
-      sourceBreaks: [],
+      sourceBreaks: spec.sourceBreaks ?? [],
       firstPeriod: obs[0].period,
       lastPeriod: obs[obs.length - 1].period,
       observationCount: obs.length,
@@ -415,7 +476,7 @@ async function main() {
     attribution:
       "Source: World Bank, Commodity Price Data (The Pink Sheet), monthly prices, updated November 3, 2026. Licensed under CC BY 4.0.",
     changesMade:
-      "SMPT extracted the aluminum, copper and nickel columns of the Monthly Prices sheet for January 2005 to October 2026, converted period labels from YYYYMmm to YYYY-MM and removed binary rounding noise from the stored numbers. Published values are otherwise unchanged. Percentage changes, indexed values and rankings shown with them are SMPT calculations.",
+      "SMPT extracted aluminum, copper, nickel, tin, zinc, lead and platinum from the November 3, 2026 Monthly Prices workbook for January 2005 to October 2026. Periods are normalized from YYYYMmm to YYYY-MM; published values are otherwise preserved. Platinum's June 2025 quotation change is marked explicitly. Percentage changes, indexed values and rankings are SMPT calculations.",
     thirdPartyNote:
       "The World Bank lists Bloomberg, Platts Metals Week, Thomson Reuters Datastream and others as sources for these series. SMPT republishes only the World Bank's monthly figures, not the underlying daily exchange or vendor data.",
     seriesIds: SERIES.map((s) => s.id),
