@@ -89,8 +89,11 @@ test("the legal example links to the clause that retains and labels original-lan
   assert.ok(detail.includes("{m.productScopeAsStated}"));
 });
 
-test("the page shows no money totals and keeps the four qualified coverage counts", () => {
-  assert.equal((view.match(/<dd/g) ?? []).length, 4);
+test("the homepage market chart replaces corpus counts without introducing money totals", () => {
+  assert.doesNotMatch(view, /Current corpus/);
+  assert.match(view, /id="home-market-heading"/);
+  assert.match(view, /href="\/markets"/);
+  assert.equal((view.match(/<dd/g) ?? []).length, 0);
   assert.doesNotMatch(view, /\b(total|combined|in all|altogether)\b[^<]{0,40}(USD|GBP|JPY|EUR|\$|£|¥)/i);
   assert.doesNotMatch(view, /unlock insights/i);
 });
@@ -131,14 +134,14 @@ test("case statuses are read as of the revision date, so a later entry cannot ap
   assert.equal(designationStatusOn(laterDsg, site.lastUpdated), dsg.statusHistory[0].status);
 });
 
-test("the opening leads from corpus and materials to the supply chain, research, and evidence examples", () => {
-  const corpus = view.indexOf("Current corpus");
+test("the opening leads from market context and materials to the supply chain, research, and examples", () => {
+  const market = view.indexOf('id="home-market-heading"');
   const tiles = view.indexOf('aria-label="Materials in scope"');
   const strip = view.indexOf('id="chain-heading"');
   const research = view.indexOf('id="research"');
   const examples = view.indexOf('id="examples"');
   const browser = view.indexOf('id="browse"');
-  assert.ok(corpus !== -1 && corpus < tiles);
+  assert.ok(market !== -1 && market < tiles);
   assert.ok(tiles < strip && strip < research && research < examples && examples < browser);
   assert.equal(view.split('id="chain-heading"').length, 2);
 });
