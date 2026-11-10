@@ -1,3 +1,13 @@
+## 2026-11-09: `cover_hero_split` cover pattern and FI002 revision 6 cover candidate (draft PR, not merged)
+
+- RC4 is merged (PR #233) and published (PR #242); the entries below that say "draft PR #233" describe it as it was then.
+- New research cover pattern `cover_hero_split` in the exhibit renderer: text column on the left (title, subtitle, one-sentence thesis, optional key-figure callout, draft notice, footer) and a darkened full-height hero image on the right. A research spec opts in with a `cover` block; `cover_lines` decks render exactly as before (revision 5 and the gallery reproduce their committed bytes). The hero image is the one raster the verifier allows: pinned by SHA-256, declared in the manifest as a frame, with alt text and a visible caption. Documented in `docs/design/presentations/exhibit-system/README.md`; tests in `tests/exhibit-hero-cover.test.ts`.
+- `scripts/exhibit-system/cover_art.py` makes reproducible conceptual artwork (gold contours on graphite) with a provenance file.
+- `docs/research/fi002-bhp-copper/output/review/revision-6/` holds the FI002 deck with the new cover: spec, PPTX `4f57add5…`, PDF `30e20c26…`, manifest, renders, contact sheet, artwork and QC record (gates A–E). Callout $2.83bn traced to model tab 04 D45. Slides 2–11 are byte- and pixel-identical to revision 5.
+- No licensed Escondida photo was downloaded; the best public-domain candidates (NASA ASTER 2000, ISS 2009) are listed in the QC record.
+- All gates pass (1184 tests, 28 pre-existing lint warnings).
+- Still open: human review of the cover, the PowerPoint tier, and, if approved, a separate RC5 release step (no `rc5` entry in `make_release_candidate.py` yet).
+
 ## 2026-11-09: FI002 deck release candidate 4, styled and clickable sources (draft PR #233)
 
 - `docs/research/fi002-bhp-copper/output/review/release-candidate-4/` holds the RC4 PPTX, PDF, contact sheet, renders, manifest and QC record (with the release handoff). It is built from the same revision 5 source with `make_release_candidate.py --candidate rc4`.

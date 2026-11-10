@@ -175,6 +175,13 @@ export function makeHelpers(
       slide.addTable(rows, { fontFace: FONT, color: C.ink, ...options, objectName });
       records.push({ name: objectName, role: "data", tier: "table", kind: "table", ...(minPt === undefined ? {} : { minPt }) });
     },
+    image(name, role, options) {
+      if (role !== "frame") throw new Error(`raster image ${name} must use role "frame"; data elements stay native`);
+      if (typeof options.altText !== "string" || !options.altText.trim()) throw new Error(`raster image ${name} needs alt text`);
+      const objectName = nm(role, name);
+      slide.addImage({ ...options, objectName });
+      records.push({ name: objectName, role, tier: "raster", kind: "image" });
+    },
   };
 }
 

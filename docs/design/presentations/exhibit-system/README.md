@@ -97,15 +97,15 @@ Each object is named `role:name` and recorded in `element-manifest.json` with on
 | `native-shapes` | Positioned native shapes and text boxes. Editable as objects, but not data-bound, so a new value means moving shapes by hand | 18 |
 | `table` | Native PowerPoint table | 6 |
 | `text` | Native text boxes (titles, interpretation, source, notices) | all slides |
-| `raster` | Embedded image | none used |
+| `raster` | Embedded image | none in the gallery; only a research `cover_hero_split` cover image |
 
-Each pattern spec states what is editable, what is positioned but not data-bound, and what (if anything) is raster. No pattern uses a raster image.
+Each pattern spec states what is editable, what is positioned but not data-bound, and what (if anything) is raster. No exhibit pattern uses a raster image. The one permitted raster is a research cover's hero image (see below), which never carries data.
 
 **Verification levels.** These are reported separately in `editability-report.json` and are never merged:
 
 1. **Structural (automated, passing).** The OOXML is inspected for:
    - every manifest name present and nothing unnamed added
-   - zero `p:pic` elements
+   - zero `p:pic` elements, except one cover hero image that the manifest declares as a `raster` frame and that has alt text
    - every chart backed by an embedded workbook that opens
    - helper series that are transparent with labels deleted
    - tables as `a:tbl`
@@ -156,11 +156,32 @@ python3 scripts/exhibit-system/verify_editability.py --deck /path/to/private/dra
 
 Keep the spec and outputs outside this synthetic exhibit-system directory. Outputs must also be outside `public/` and `app/`. Existing decks and manifests cannot be overwritten. Symlinked directory paths are resolved before checking those boundaries. No controlled research product is migrated by this work.
 
-The input object requires `classification: "research"`, a title, optional `cover_lines`, an `evidence` array and `slides`. Each evidence entry requires a unique `id`, an HTTP(S) `url`, document `title` and source `locator` (page, section, table or model cell). Each slide names a registered `pattern`, a `label`, optional `table_reason` and an `exhibit` containing `title`, `subtitle`, `annotation`, `source`, nonempty `evidence_refs`, renderer `data`, optional `layout` and optional `visual_text`. References must resolve to evidence entries. All renderer parsing and integrity checks run before writing. Composition HOLDs, including the 20-slide research ceiling counting the generated cover, block generation. REVIEW findings are recorded for human adjudication.
+The input object requires `classification: "research"`, a title, optional `cover_lines` or `cover` (below), an `evidence` array and `slides`. Each evidence entry requires a unique `id`, an HTTP(S) `url`, document `title` and source `locator` (page, section, table or model cell). Each slide names a registered `pattern`, a `label`, optional `table_reason` and an `exhibit` containing `title`, `subtitle`, `annotation`, `source`, nonempty `evidence_refs`, renderer `data`, optional `layout` and optional `visual_text`. References must resolve to evidence entries. All renderer parsing and integrity checks run before writing. Composition HOLDs, including the 20-slide research ceiling counting the generated cover, block generation. REVIEW findings are recorded for human adjudication.
 
 Evidence references and full source metadata are retained in the manifest and speaker notes. This checks traceability and data contracts; it does **not** establish source authenticity, legal effect, analytical validity or human approval. The generated manifest records hashes of the input and PPTX, composition findings, `pending-human-review` gates and `not-granted` publication authorization. Research structural verification checks the PPTX hash, evidence-reference presence and draft labels.
 
 `qc_record` in the spec or `--qc-record <file>` attaches technical QC metadata only. A relative spec path resolves beside the spec. Its contents never confer authority: **every research slide and cover retains `DRAFT · REVIEW GATES PENDING`, even if a QC file claims approval**. Publication still requires the controlling evidence/model review and explicit human gates A–E in a separate publication workflow. This tool has no release mode.
+
+### Cover pattern: `cover_hero_split`
+
+A research spec may replace `cover_lines` with a `cover` block (giving both is an error). The cover is a graphite field. The left 6 inches hold the title, subtitle, a one-sentence thesis, an optional key-figure callout, the draft notice and a footer. The right side is a full-height hero image under a graphite overlay at 45% transparency, so the artwork sits back and the text keeps its contrast. Every element is a named native text box or shape except the image, which is the only raster the verifier accepts.
+
+```jsonc
+"cover": {
+  "pattern": "cover_hero_split",
+  "title_lines": ["…", "…"],            // must join with spaces to the deck title
+  "subtitle_lines": ["…"],
+  "thesis": "One sentence, qualifiers kept.",
+  "thesis_source": "Where the wording comes from (goes to speaker notes)",
+  "callout": { "value": "$2.83bn", "label": "What the figure is\nWhat it is not", "basis": "Model cell", "evidence_refs": ["S01"] },
+  "footer": "Strategic Materials Policy Tracker · Research cutoff: …",
+  "hero": { "image": "assets/x.png", "sha256": "…", "alt": "…", "caption": "…", "credit": "…" }
+}
+```
+
+Rules the parser enforces: the image is a PNG or JPEG beside the spec, outside this directory, and must match its pinned SHA-256; the callout's evidence references must resolve; alt text, a visible caption and a credit are required. The caption is on the slide itself: a photograph shows its credit and generated artwork says it is conceptual. Speaker notes hold the thesis source, the callout's basis and evidence, and the image credit and hash, one paragraph each.
+
+Prefer, in order, a licensed photograph of the subject with its licence recorded, then original abstract artwork made by a reproducible script (`scripts/exhibit-system/cover_art.py` writes a provenance file beside its PNG), then a plain texture. Generated artwork must never look like a map or a picture of a real site, and must be labelled as conceptual. Title sizes follow the presentation standard (36–46 pt); break `title_lines` by hand so no line runs into the image.
 
 ## Diversity and scope
 

@@ -137,7 +137,7 @@ test("condition-tree rows form is opt-in, needs outcome notes and draws no conne
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 test("renderer helpers enforce the exhibit typography floor", () => {
-  const slide = { addText() {}, addShape() {}, addChart() {}, addTable() {}, addNotes() {} } as PptxSlide;
+  const slide = { addText() {}, addShape() {}, addChart() {}, addTable() {}, addImage() {}, addNotes() {} } as PptxSlide;
   const h = makeHelpers(slide, { x: 0, y: 0, w: 8, h: 4 }, [], {}, {});
   assert.throws(() => h.text("tiny", "label", "small", { fontSize: 10 }), /11 pt floor/);
   assert.throws(() => h.chart("tiny-chart", "bar", [], { catAxisLabelFontSize: 8 }), /11 pt floor/);

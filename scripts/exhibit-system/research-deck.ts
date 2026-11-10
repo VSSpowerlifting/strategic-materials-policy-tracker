@@ -24,6 +24,7 @@ import { SYNTHETIC_NOTICE } from "./primitives";
 import { reviewDeck } from "./deck-review";
 import { RENDERERS } from "./renderers";
 import type { Fixture } from "./types";
+import type { HeroCover } from "./build-gallery";
 
 export interface ResearchSlide {
   label: string;
@@ -37,6 +38,8 @@ export interface ResearchDeck {
   qc_record?: string;
   /** Opt-in: omit the section label kickers, cover kicker and "INTERPRETATION" heading. */
   plain_frame: boolean;
+  /** Opt-in cover_hero_split cover; absent means the standard cover. */
+  cover?: HeroCover;
   slides: ResearchSlide[];
   evidence: { id: string; url: string; title: string; locator: string }[];
 }
@@ -112,13 +115,66 @@ export function parseResearchDeck(raw: unknown, file: string, baseDir = REPO): R
       },
     };
   });
+  const title = str(o.title, `${file}.title`);
+  if (o.cover !== undefined && o.cover_lines !== undefined) {
+    throw new ContractError(`${file}: give either cover_lines (standard cover) or cover (cover_hero_split), not both`);
+  }
   return {
-    title: str(o.title, `${file}.title`),
+    title,
     cover_lines: o.cover_lines === undefined ? [] : strList(o.cover_lines, `${file}.cover_lines`, 0),
+    cover: o.cover === undefined ? undefined : parseHeroCover(o.cover, `${file}.cover`, title, evidence, baseDir),
     qc_record: qc === undefined ? undefined : path.resolve(baseDir, qc),
     plain_frame: plainFrame,
     evidence,
     slides,
+  };
+}
+
+const IMAGE_TYPES: Record<string, string> = { ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg" };
+
+/**
+ * cover_hero_split block. The hero image is a file beside the spec, pinned by
+ * SHA-256 so a swapped or regenerated picture cannot enter a deck unnoticed.
+ * The visible caption is required: a photograph needs its credit and generated
+ * artwork needs its "conceptual, not a map" label on the slide itself.
+ */
+export function parseHeroCover(raw: unknown, p: string, title: string, evidence: { id: string }[], baseDir: string): HeroCover {
+  const c = obj(raw, p);
+  oneOf(c.pattern, ["cover_hero_split"] as const, `${p}.pattern`);
+  const titleLines = c.title_lines === undefined ? [title] : strList(c.title_lines, `${p}.title_lines`);
+  if (titleLines.join(" ") !== title) throw new ContractError(`${p}.title_lines: joined with spaces they must equal the deck title`);
+  const h = obj(c.hero, `${p}.hero`);
+  const image = str(h.image, `${p}.hero.image`);
+  const abs = path.resolve(baseDir, image);
+  const type = IMAGE_TYPES[path.extname(abs).toLowerCase()];
+  if (!type) throw new ContractError(`${p}.hero.image: expected a .png or .jpg file`);
+  if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) throw new ContractError(`${p}.hero.image: ${image} does not exist`);
+  assertOutsideSystemDir(abs, "cover image");
+  const bytes = fs.readFileSync(abs);
+  const sha256 = str(h.sha256, `${p}.hero.sha256`);
+  const actual = createHash("sha256").update(bytes).digest("hex");
+  if (actual !== sha256) throw new ContractError(`${p}.hero.sha256: ${image} hashes to ${actual}, not the pinned value`);
+  let callout: HeroCover["callout"];
+  if (c.callout !== undefined) {
+    const k = obj(c.callout, `${p}.callout`);
+    const refs = strList(k.evidence_refs, `${p}.callout.evidence_refs`);
+    for (const ref of refs) if (!evidence.some((e) => e.id === ref)) throw new ContractError(`${p}.callout: unresolved evidence reference ${ref}`);
+    callout = { value: str(k.value, `${p}.callout.value`), label: str(k.label, `${p}.callout.label`), basis: str(k.basis, `${p}.callout.basis`), evidenceRefs: refs };
+  }
+  return {
+    titleLines,
+    subtitleLines: strList(c.subtitle_lines, `${p}.subtitle_lines`),
+    thesis: str(c.thesis, `${p}.thesis`),
+    thesisSource: str(c.thesis_source, `${p}.thesis_source`),
+    callout,
+    footer: str(c.footer, `${p}.footer`),
+    hero: {
+      data: `${type};base64,${bytes.toString("base64")}`,
+      alt: str(h.alt, `${p}.hero.alt`),
+      caption: str(h.caption, `${p}.hero.caption`),
+      credit: str(h.credit, `${p}.hero.credit`),
+      sha256,
+    },
   };
 }
 
@@ -152,7 +208,7 @@ export async function renderResearchDeck(specFile: string, outFile: string, qcOv
   const { buildDeck } = await import("./build-gallery");
   const slides = await buildDeck(
     deck.slides.map((s) => ({ fixture: s.fixture, label: s.label })),
-    { title: deck.title, lines: deck.cover_lines },
+    { title: deck.title, lines: deck.cover_lines, hero: deck.cover },
     outFile,
     { classification: "research", qcRecord: qc, evidence: deck.evidence, plainFrame: deck.plain_frame },
   );

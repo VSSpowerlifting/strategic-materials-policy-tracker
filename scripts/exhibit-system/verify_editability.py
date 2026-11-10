@@ -179,9 +179,20 @@ def structural(deck: Path, manifest_slides: list[dict], mode: str = "synthetic")
         if extra:
             issues.append(f"slide objects not in manifest: {', '.join(extra)}")
 
-        pics = len(list(root.iter(f"{{{NS['p']}}}pic")))
-        if pics:
-            issues.append(f"{pics} raster p:pic element(s)")
+        # Zero rasters, except a cover hero image the manifest declares as a frame
+        # raster (cover_hero_split). A bitmap never carries data.
+        pics = 0
+        for pic in root.iter(f"{{{NS['p']}}}pic"):
+            pics += 1
+            c = pic.find(".//p:cNvPr", NS)
+            nm = c.get("name", "") if c is not None else ""
+            exp = expected.get(nm)
+            declared = (man.get("pattern") == "cover" and exp is not None
+                        and exp.get("tier") == "raster" and exp.get("role") == "frame" and exp.get("kind") == "image")
+            if not declared:
+                issues.append(f"raster p:pic element {nm or '(unnamed)'} is not a declared cover hero image")
+            elif not (c.get("descr") or "").strip():
+                issues.append(f"{nm}: cover hero image has no alt text")
 
         charts = []
         chart_text: list[str] = []
