@@ -27,7 +27,7 @@ import {
 import { PriceChart, type ChartLine } from "./price-chart";
 import { Sparkline } from "./sparkline";
 import { Heatmap, type HeatRow } from "./heatmap";
-import { MAX_PLOTTED, slotStyle, type MonitorSeries } from "./types";
+import { MARKET_SYMBOLS, MAX_PLOTTED, slotStyle, type MonitorSeries } from "./types";
 
 type View = "indexed" | "absolute";
 
@@ -259,6 +259,19 @@ export function MarketExplorer({
   const full = selected.length >= MAX_PLOTTED;
   const unitWord = tab === "annual" ? "year" : "month";
 
+  function toggleMaterial(items: MonitorSeries[]) {
+    const groupIds = new Set(items.map((item) => item.id));
+    const already = tabSlots.some((id) => id !== null && groupIds.has(id));
+    if (already) {
+      setSlots((cur) => ({
+        ...cur,
+        [tab]: cur[tab].map((id) => id && groupIds.has(id) ? null : id),
+      }));
+    } else if (!full) {
+      toggle(items[0].id);
+    }
+  }
+
   function toggle(id: string) {
     setSlots((cur) => ({ ...cur, [tab]: toggleSlot(cur[tab], id) }));
     if (focusId === id) setFocusId(null);
@@ -487,6 +500,44 @@ export function MarketExplorer({
           </button>
         </div>
 
+        <div className="mt-5">
+          <p className="mb-3 text-xs text-faint">
+            Select a material to plot its first listed benchmark, or remove its selected benchmarks. Use the detailed choices below to compare alternate price specifications.
+          </p>
+          <div role="group" aria-label="Element-style material selector" className="grid grid-cols-3 gap-2 min-[410px]:grid-cols-4 sm:grid-cols-6 lg:grid-cols-9">
+            {groups.map(([materialId, g]) => {
+              const chosen = g.items.filter((item) => slotOf(item.id) !== -1);
+              const active = chosen.length > 0;
+              const unavailable = !active && full;
+              const st = active ? slotStyle(slotOf(chosen[0].id)) : null;
+              return (
+                <button
+                  key={materialId}
+                  type="button"
+                  aria-pressed={active}
+                  aria-disabled={unavailable || undefined}
+                  title={`${g.name}: ${g.items.length} ${tab} benchmark${g.items.length === 1 ? "" : "s"}`}
+                  onClick={() => !unavailable && toggleMaterial(g.items)}
+                  className={cn(
+                    "flex min-h-20 min-w-0 flex-col items-start justify-between gap-1 rounded-md border px-3 py-2 text-left outline-none focus-visible:ring-2 focus-visible:ring-accent motion-safe:transition-colors",
+                    active ? "border-accent bg-elevated text-foreground" : unavailable ? pillDisabled : pillOff,
+                  )}
+                >
+                  <span className="font-display text-xl font-semibold leading-none" style={st ? { color: st.color } : undefined}>
+                    {MARKET_SYMBOLS[materialId] ?? "•"}
+                  </span>
+                  <span className="w-full truncate text-xs" title={g.name}>{g.name}</span>
+                  <span className="text-[10px] text-faint">{active ? `${chosen.length} selected` : `${g.items.length} benchmark${g.items.length === 1 ? "" : "s"}`}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="mt-6 flex items-baseline justify-between gap-3">
+          <h3 className="font-display text-sm font-semibold text-foreground">Benchmark specifications</h3>
+          <span className="text-xs text-faint">Different grades and price bases remain separate</span>
+        </div>
         <div className="mt-4 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {groups.map(([materialId, g]) => (
             <div key={materialId} className="bg-card px-4 py-3">
