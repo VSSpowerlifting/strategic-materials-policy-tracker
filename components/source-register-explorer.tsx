@@ -95,7 +95,7 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
          </div>
          <p className="mb-4 max-w-prose text-sm leading-6 text-muted">{hierarchyNotes[tier]}</p>
          <div className="grid gap-3">
-           {group.map(r=><div key={r.source.id} data-testid="source-record" className="min-w-0">
+           {group.map(r=><div key={r.source.id} data-testid="source-record" data-site-motion="card" className="min-w-0">
              <SourceCard source={r.source}/>
              <p className="mt-1 pl-1 font-mono text-[11px] text-muted">
                {r.directlyCitingRecords} directly citing published record{r.directlyCitingRecords===1?"":"s"}
