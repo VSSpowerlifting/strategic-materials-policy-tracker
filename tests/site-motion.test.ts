@@ -10,10 +10,11 @@ import { buildMonitorSeries, buildReleaseNotices } from "@/components/markets/se
 
 test("scroll reveal keeps server-rendered content visible until JS opts into motion", () => {
   const html = renderToStaticMarkup(
-    createElement(ScrollReveal, {
-      kind: "cards",
-      children: createElement("article", { "data-motion-item": true }, "Evidence first"),
-    }),
+    createElement(
+      ScrollReveal,
+      { kind: "cards" },
+      createElement("article", { "data-motion-item": true }, "Evidence first"),
+    ),
   );
   assert.match(html, /data-motion-kind="cards"/);
   assert.match(html, /Evidence first/);
