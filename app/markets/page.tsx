@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/format";
 import { fi002 } from "@/lib/fi002";
 
 const DESCRIPTION =
-  "Source-linked historical prices for critical and strategic materials: World Bank and IMF monthly averages for aluminium, copper, nickel, cobalt, palladium and rare-earth carbonate, and USGS annual prices and import unit values for 2021–2025, including rare-earth oxides, lithium, gallium, germanium and tungsten.";
+  "Source-linked historical prices for critical and strategic materials: World Bank and IMF monthly averages for aluminium, copper, nickel, tin, zinc, lead, platinum, cobalt, palladium and rare-earth carbonate, and USGS annual prices and import unit values for 2021–2025, including rare-earth oxides, lithium, gallium, germanium and tungsten.";
 
 export const metadata: Metadata = {
   title: "Critical Minerals Market Monitor",
@@ -59,7 +59,7 @@ export default function MarketsPage() {
           lead={
             <>
               Compare critical-mineral price benchmarks from the World Bank, IMF and USGS. Plot up to six series across
-              monthly or annual data.
+              monthly or annual data, with an element-style benchmark selector.
             </>
           }
         />
