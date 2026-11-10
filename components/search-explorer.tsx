@@ -336,7 +336,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                 <button
                   key={type}
                   type="button"
-                  data-testid="search-type-shortcut"
+                  data-testid="search-type-shortcut" data-site-motion="card"
                   onClick={() => setKind(type)}
                   className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 rounded-lg border border-border-strong bg-card px-4 py-4 text-left transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
@@ -396,7 +396,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
             </div>
             <ul data-testid="search-results" className="grid gap-2">
               {results.map((d) => (
-                <li key={`${d.kind}:${d.id}`}>
+                <li key={`${d.kind}:${d.id}`} data-site-motion="card">
                   <Link
                     href={d.href}
                     className="block min-w-0 rounded-lg border border-border-strong bg-card p-4 transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"

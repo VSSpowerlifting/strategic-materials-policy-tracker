@@ -86,6 +86,7 @@ export function CommitmentRow({
   const offRole = !SUPPORT_ROLE.has(c.valueRole);
   return (
     <Link
+      data-site-motion="card"
       href={`/capital/${c.id}`}
       className="group flex border-b transition-colors last:border-b-0 hover:bg-elevated"
     >
@@ -140,6 +141,7 @@ export function CommitmentRow({
 export function ControlRow({ m }: { m: ControlSummary }) {
   return (
     <Link
+      data-site-motion="card"
       href={`/controls/${m.id}`}
       className="group flex border-b transition-colors last:border-b-0 hover:bg-elevated"
     >

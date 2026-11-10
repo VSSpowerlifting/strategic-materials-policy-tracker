@@ -103,7 +103,7 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
            </h2>
          </div>
          <Card className="overflow-hidden">
-           {section.map(o=><div data-testid="organization-record" key={o.id}
+           {section.map(o=><div data-testid="organization-record" data-site-motion="card" key={o.id}
              className="border-b border-border px-4 py-4 last:border-b-0 sm:px-5">
              <div className="flex flex-wrap items-start gap-x-4 gap-y-2">
                <span className="min-w-0 flex-1">

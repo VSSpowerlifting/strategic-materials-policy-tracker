@@ -270,7 +270,8 @@
   top: 0.3125rem; left: calc(50% + 0.5rem); right: calc(-50% + 0.5rem); height: 2px;
   background-image: linear-gradient(to right, color-mix(in oklab, var(--accent) 55%, transparent) 50%, transparent 50%);
   background-size: 8px 2px;
-  animation: chain-drift-x 1.6s linear infinite;
+  opacity: 0.45;
+  transition: opacity 180ms ease, filter 180ms ease;
   overflow: hidden;
 }
 .chain-link::after {
@@ -279,7 +280,7 @@
   background: var(--mark-commitment);
   box-shadow: 0 0 8px var(--mark-commitment);
   opacity: 0;
-  animation: chain-pulse-x 5.6s ease-in-out infinite;
+  animation: none;
   animation-delay: calc(var(--i, 0) * 0.7s);
 }
 .chain-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -288,7 +289,27 @@
   0% { left: 0; opacity: 0; } 2% { opacity: 1; } 11% { opacity: 1; } 12.5% { left: calc(100% - 14px); opacity: 0; } 100% { opacity: 0; }
 }
 .element-tile { transition: background-color 150ms ease, border-color 150ms ease; }
-.element-tile:hover { background: var(--surface); border-color: currentColor !important; }
+.element-tile:hover,
+.element-tile:focus-visible { background: var(--surface); border-color: var(--accent) !important; }
+.element-tile:focus-visible { outline-offset: 3px; }
+
+/* Highlight the selected point of the supply chain and the connections
+   leading into it. Counts and the document order never change. */
+.chain-stage-dot { transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease; }
+.chain-stage:is(:hover, :focus-visible) .chain-stage-dot {
+  transform: scale(1.35);
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 15%, transparent);
+}
+.chain-stage:is(:hover, :focus-visible) .chain-link,
+.chain-stage:has(~ .chain-stage:is(:hover, :focus-visible)) .chain-link {
+  opacity: 1;
+  filter: brightness(1.4);
+}
+.chain-stage:is(:hover, :focus-visible) .chain-link::after {
+  animation: chain-pulse-x 1.4s ease-out 1 both;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   .chain-link,
@@ -334,10 +355,93 @@ html { scroll-padding-top: 7rem; }
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
+/* Thin, unobtrusive progress indicator on long-form research articles. */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 80;
+  pointer-events: none;
+  background: color-mix(in oklab, var(--accent) 15%, transparent);
+}
+.reading-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transition: transform 100ms linear;
+}
+
+@keyframes chain-link-enter {
+  from { opacity: 0.18; background-position: 0 0; }
+  to { opacity: 0.9; background-position: 12px 0; }
+}
+@keyframes chain-stage-enter {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 transparent; }
+  55% { transform: scale(1.32); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 transparent; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .market-line-reveal {
+  /* Only animate lines when their parent chart is actually on screen.
+     Without JS, the underlying published lines remain fully visible. */
+  .scroll-reveal[data-motion-kind="chart"][data-motion-entered="true"] .market-line-reveal {
     transform-box: fill-box;
     transform-origin: left center;
     animation: market-series-reveal 1100ms cubic-bezier(.22, .61, .36, 1) both;
+  }
+
+  .scroll-reveal[data-motion-kind="cards"][data-motion-ready="true"] [data-motion-item] {
+    transition: opacity 340ms ease, transform 340ms cubic-bezier(.22,.61,.36,1);
+    transition-delay: calc(var(--reveal-order, 0) * 85ms);
+  }
+  .scroll-reveal[data-motion-kind="cards"][data-motion-ready="true"]:not([data-motion-entered="true"]) [data-motion-item] {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .scroll-reveal[data-motion-kind="chain"][data-motion-entered="true"] .chain-link {
+    animation: chain-link-enter 490ms ease-out both;
+    animation-delay: calc(var(--i, 0) * 95ms);
+  }
+  .scroll-reveal[data-motion-kind="chain"][data-motion-entered="true"] .chain-stage-dot {
+    animation: chain-stage-enter 480ms ease-out both;
+    animation-delay: calc(var(--i, 0) * 95ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress-fill,
+  .chain-stage-dot,
+  .chain-link,
+  .element-tile {
+    transition: none !important;
+  }
+  .chain-stage-dot { animation: none !important; }
+}
+
+
+/* Shared editorial motion on routes beyond the hand-composed homepage.
+   Nodes only acquire these attributes after client-side observation starts.
+   No JS or reduced motion: every section remains fully visible. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-site-motion-ready="true"] {
+    transition: opacity 320ms ease, transform 320ms cubic-bezier(.22,.61,.36,1);
+    transition-delay: var(--site-motion-delay, 0ms);
+  }
+  [data-site-motion-ready="true"]:not([data-site-motion-entered="true"]) {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media print {
+  [data-site-motion-ready="true"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

@@ -26,7 +26,7 @@ function TimelineNode({
   framingCategories: FramingCategory[];
 }) {
   return (
-    <li className="relative border-l border-border pb-8 pl-7 last:border-l-transparent last:pb-0">
+    <li data-site-motion="card" className="relative border-l border-border pb-8 pl-7 last:border-l-transparent last:pb-0">
       <span
         aria-hidden
         className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-accent"

@@ -88,7 +88,7 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
      </h2>
     </div>
     <div className="grid gap-4 md:grid-cols-2">
-     {group.list.map(p=><div key={p.id} data-testid="programme-record" className="min-w-0">
+     {group.list.map(p=><div key={p.id} data-testid="programme-record" data-site-motion="card" className="min-w-0">
       <Card className="flex h-full min-w-0 flex-col p-5">
        <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
         <Link href={"/programmes/"+p.id} className="min-w-0 flex-1 font-display text-lg font-semibold leading-snug hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">{p.name}</Link>

@@ -136,7 +136,7 @@ export function SavedEventsExplorer() {
 
       <div className="mt-4 grid gap-2">
         {events.map((e) => (
-          <div key={e.id} className="flex items-stretch gap-2">
+          <div key={e.id} data-site-motion="card" className="flex items-stretch gap-2">
             <div className="min-w-0 flex-1">
               <Card className="overflow-hidden p-0">
                 <EventListItem event={e} />

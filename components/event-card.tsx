@@ -30,6 +30,7 @@ export function EventListItem({
 }) {
   return (
     <Link
+      data-site-motion="card"
       href={`/events/${event.id}`}
       className="group flex border-b transition-colors last:border-b-0 hover:bg-elevated"
     >

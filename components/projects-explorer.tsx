@@ -110,7 +110,7 @@ export function ProjectsExplorer({rows, materialNames}:{
       Government commitment means a directly linked, non-ended commitment evidenced as of the corpus date.
     </p>
     <div className="mt-6 grid gap-4 md:grid-cols-2">
-      {visible.map(p=><div key={p.id} data-testid="project-record" className="min-w-0">\n        <Card className="flex h-full min-w-0 flex-col p-5">
+      {visible.map(p=><div key={p.id} data-testid="project-record" data-site-motion="card" className="min-w-0">\n        <Card className="flex h-full min-w-0 flex-col p-5">
         <div className="flex flex-wrap items-center gap-2">
           {p.governmentCommitmentProviders.map(code=><JurisdictionTag key={code} code={code}/>)}
           {p.countryCodes.length?p.countryCodes.map(code=><span key={code} className="font-mono text-[11px] text-muted">{countryNames[code]??code}</span>):
