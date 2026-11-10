@@ -58,7 +58,7 @@ export default function MarketsPage() {
           title="Critical Minerals Market Monitor"
           lead={
             <>
-              Compare critical-mineral price benchmarks from the World Bank, IMF and USGS. Plot up to six series across
+              Compare critical-mineral price benchmarks from the World Bank, IMF and USGS. Compare any available series across
               monthly or annual data, with an element-style benchmark selector.
             </>
           }
