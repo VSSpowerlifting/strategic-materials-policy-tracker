@@ -42,6 +42,10 @@ RC4 baseline (preserved): PPTX `54e0d620bf07a2bcae71227d0b464c0defadc64c9cc2ad10
 | Cover contrast | Every cover text span measures at least 7.26:1 against its rendered background (text sits on the flat graphite panel, not over the photo). |
 | Numbers | PDF text and numeric tokens for pages 2–11 equal RC4's. New page-1 figures ($2.83bn, $1,600/t, 5 November 2026, $6 Billion) match slide 2. |
 | Structural verifier | Passed on the rev6c source deck. The RC5 PPTX is a derivative and, like RC2–RC4, cannot be checked against its source manifest. |
+| PDF figure alt text | Page 1's tagged `/Figure` carries: "Astronaut photograph of the Escondida mine's tailings impoundment in Chile's Atacama Desert, taken from the International Space Station on 9 December 2009 … It shows the operation as it was in 2009, not the open pits and not the proposed New Concentrator." The credit is in the speaker notes and provenance file. |
+| Archives untouched | `git diff --stat origin/main` over RC1–RC4, revision 5 and the revision 6 assets is empty. |
+| Stale RC4 references | A repo-wide search for the RC4 hashes and sizes finds none outside the RC4 archive and this record. |
+| `research-package.zip` | Not changed. It bundles an older deck (118,784 and 78,332 bytes) and its own manifest, as it did under RC4. Known inconsistency: its slides do not match the standalone downloads. |
 | Rights and identity | NASA material, not copyrighted per the Gateway to Astronaut Photography conditions of use (read 2026-11-09). Credit in notes and provenance. No NASA logo, no endorsement. No photo date other than the catalogued 2009-12-09. |
 
 ## Notes and limitations
@@ -54,4 +58,4 @@ RC4 baseline (preserved): PPTX `54e0d620bf07a2bcae71227d0b464c0defadc64c9cc2ad10
 
 ## Repository gates (run on this branch before the PR)
 
-`npm run validate`, `npm run lint` (0 errors, 28 pre-existing warnings), `npm run typecheck`, `npm run build`, `npm test` (1211 pass, 0 fail) and `npm run exhibits:build` (tracked gallery files unchanged) all passed.
+`npm run validate`, `npm run lint` (0 errors, 28 pre-existing warnings), `npm run typecheck`, `npm run build`, `npm test` (1211 pass, 0 fail) and `npm run editorial:check`, `npm run exhibits:build` (tracked gallery files unchanged) all passed.
