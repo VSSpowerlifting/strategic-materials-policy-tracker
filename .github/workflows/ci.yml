@@ -36,10 +36,24 @@ jobs:
       - name: Validate data
         run: npm run validate
 
+      # A pull request is compared with its merge base on the current target
+      # branch, so only the PR's own changes count. github.event.pull_request.base.sha
+      # is not refreshed when the target branch moves, and diffing from it counts
+      # later target-branch commits as PR changes.
       - name: Editorial publication review gate
         env:
-          EDITORIAL_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
-        run: npm run editorial:check
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            EDITORIAL_BASE_SHA="$(git merge-base "origin/$BASE_REF" HEAD)"
+          else
+            EDITORIAL_BASE_SHA="$PUSH_BEFORE"
+          fi
+          export EDITORIAL_BASE_SHA
+          echo "Editorial diff base: $EDITORIAL_BASE_SHA"
+          npm run editorial:check
 
       - name: Type check
         run: npm run typecheck
