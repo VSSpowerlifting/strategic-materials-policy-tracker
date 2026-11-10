@@ -1,3 +1,12 @@
+## 2026-11-09: FI002 cover options A/B for review (draft PR #248, not merged)
+
+- `docs/research/fi002-bhp-copper/output/review/revision-6-cover-options/` holds two decks from the same `cover_hero_split` renderer that differ only in the cover image:
+  - A uses the existing conceptual artwork.
+  - B uses NASA astronaut photograph ISS022-E-8282 of the Escondida tailings impoundment, 9 December 2009. It is NASA material, not copyrighted, credited to the Earth Science and Remote Sensing Unit, NASA Johnson Space Center. Provenance is in the asset's JSON. The caption and notes say it shows 2009 operations, not the proposed New Concentrator.
+- Both covers get the footer "Benjamin Yang · Strategic Materials Policy Tracker · Research cutoff 5 November 2026".
+- Slides 2–11 are pixel-identical to revision 5. The side-by-side comparison and QC record are in the folder.
+- The default is unchanged. The editorial choice is pending.
+
 ## 2026-11-09: `cover_hero_split` cover pattern and FI002 revision 6 cover candidate (draft PR, not merged)
 
 - RC4 is merged (PR #233) and published (PR #242); the entries below that say "draft PR #233" describe it as it was then.
