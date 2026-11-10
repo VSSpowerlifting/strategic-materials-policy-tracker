@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/container";
+import { MaterialBenchmarks } from "@/components/markets/material-benchmarks";
 import type { DossierPayload } from "@/lib/material-dossier";
 import { CapitalControls } from "./capital-controls";
 import { EventsSection, RelatedSection } from "./events";
@@ -18,6 +19,7 @@ export function Dossier({ payload }: { payload: DossierPayload }) {
       <TimelineSection payload={payload} />
       <EventsSection payload={payload} />
       <RelatedSection payload={payload} />
+      <MaterialBenchmarks materialId={payload.id} />
       <NotesSection payload={payload} />
     </Container>
   );

@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/research/china-export-control-suspension-extension`, lastModified: new Date("2026-11-09"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${site.url}/research/escondida-copper`, lastModified: new Date("2026-11-05"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${site.url}/research/hemerdon-financing`, lastModified: new Date("2026-11-05"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${site.url}/markets`, lastModified: new Date("2026-11-03"), changeFrequency: "monthly", priority: 0.8 },
     ...getAllEvents().map((e) => entry(`/events/${e.id}`, 0.9)),
     ...getAllMaterials().map((m) => entry(`/materials/${m.slug}`, 0.7)),
     ...getAllJurisdictions().map((j) => entry(`/actors/${j.code.toLowerCase()}`, 0.7)),

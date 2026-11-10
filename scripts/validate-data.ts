@@ -47,6 +47,8 @@ import {
 import { site } from "../lib/site";
 import { isExampleCandidateFile } from "./candidate-files";
 import { validateProjectMilestones } from "../lib/project-milestones";
+import { MARKET_DATASET_IDS, validateMarketData } from "../lib/markets";
+import type { MarketCoverageFile, MarketDataset, MarketManifest, MarketSeries, ObservationsFile } from "../lib/markets";
 import { formatCapitalControlIssue, parseCapitalControlSeed, validateCapitalControl } from "./validate-capital-control";
 import type { CapitalControlCollection } from "./validate-capital-control";
 
@@ -552,6 +554,41 @@ for (const issue of validateProjectMilestones(projectMilestones, {
   corpusDate: site.lastUpdated,
 })) err(issue);
 
+// Market monitor: three pinned source releases (World Bank and IMF monthly,
+// USGS annual), kept apart from the source-linked policy seed in
+// data/markets/<dataset>/ (built by the `npm run ingest:markets*` scripts).
+const marketsDir = join(seedDir, "..", "markets");
+const readMarket = <T>(name: string): T | null => {
+  const file = join(marketsDir, `${name}.json`);
+  if (!existsSync(file)) {
+    err(`data/markets/${name}.json is missing (run the matching \`npm run ingest:markets*\` script)`);
+    return null;
+  }
+  try {
+    return JSON.parse(readFileSync(file, "utf8")) as T;
+  } catch (e) {
+    err(`data/markets/${name}.json is not valid JSON: ${(e as Error).message}`);
+    return null;
+  }
+};
+const marketDatasets: MarketDataset[] = [];
+for (const id of MARKET_DATASET_IDS) {
+  const manifest = readMarket<MarketManifest>(`${id}/manifest`);
+  const series = readMarket<MarketSeries[]>(`${id}/series`);
+  const observations = readMarket<ObservationsFile>(`${id}/observations`);
+  if (manifest && series && observations) {
+    if (manifest.datasetId !== id) err(`data/markets/${id}/manifest.json: datasetId "${manifest.datasetId}" does not match its folder`);
+    marketDatasets.push({ manifest, series, observations });
+  }
+}
+const marketCoverage = readMarket<MarketCoverageFile>("coverage-gaps");
+if (marketDatasets.length === MARKET_DATASET_IDS.length && marketCoverage) {
+  const marketCheck = validateMarketData({ datasets: marketDatasets, coverage: marketCoverage, materialIds });
+  for (const e of marketCheck.errors) err(e);
+  for (const w of marketCheck.warnings) warn(w);
+}
+const marketSeriesCount = marketDatasets.reduce((n, d) => n + (Array.isArray(d.series) ? d.series.length : 0), 0);
+
 const candidateReferenceIds = candidateFiles.flatMap(({ records }) =>
   records.flatMap((c) => [
     c?.candidateId,
@@ -654,6 +691,7 @@ const counts =
   `${controlCount} control measure${controlCount === 1 ? "" : "s"} · ` +
   `${plural(organizationCount, "organization")} · ${plural(projectCount, "project")} · ` +
   `${plural(programmeCount, "programme")} · ${plural(designationCount, "project designation")} · ` +
+  `${plural(marketSeriesCount, "market series", "market series")} · ` +
   `${activeWatched}/${watchlist.length} watched sources active · ` +
   `${candidateCount} candidate${candidateCount === 1 ? "" : "s"} (private)${exampleNote}`;
 

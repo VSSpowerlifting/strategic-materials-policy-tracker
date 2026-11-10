@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "note": "Materials in data/seed/materials.json without a monthly series SMPT can publish, and why. This file holds no prices. Monthly sources are the World Bank Pink Sheet (aluminum, iron ore, copper, lead, tin, nickel, zinc, gold, platinum and silver among its metals columns) and three IMF Primary Commodity Prices series (cobalt, palladium, rare-earth carbonate). SMPT has not reviewed the licence terms of any commercial price assessment or exchange data feed; none is redistributed here.",
+  "gaps": [
+    {
+      "materialId": "lithium",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet. The IMF publishes a lithium series (PLITH), but its documentation describes it both as battery-grade and as industrial-grade lithium metal and names no underlying source, so SMPT does not use it. The USGS annual battery-grade lithium carbonate series is shown instead.",
+      "gradeDistinctions": "Lithium carbonate, lithium hydroxide monohydrate and spodumene concentrate are priced separately, and carbonate and hydroxide are further split by grade (battery or technical). A single 'lithium price' would mix unlike products.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "graphite",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes annual import unit values for flake, lump and chip, and amorphous natural graphite.",
+      "gradeDistinctions": "Natural flake graphite is assessed by flake size and carbon content; spherical (battery anode) and synthetic graphite are separate products.",
+      "requirementForInclusion": "A monthly series for one named product and specification, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "tungsten",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual tungsten-concentrate price.",
+      "gradeDistinctions": "Ammonium paratungstate (APT) and tungsten concentrate are priced separately, typically per metric tonne unit of WO3 content, on different delivery bases.",
+      "requirementForInclusion": "A monthly series for APT or concentrate, stated separately, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "antimony",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual antimony-metal price.",
+      "gradeDistinctions": "Antimony metal (by purity) and antimony trioxide are separate products.",
+      "requirementForInclusion": "A monthly series for one named product and purity, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "neodymium",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The IMF rare-earth carbonate series is a mixed-oxide intermediate, not a neodymium price. The USGS publishes annual NdPr oxide and neodymium oxide prices.",
+      "gradeDistinctions": "Rare-earth prices are usually assessed for neodymium-praseodymium (NdPr) oxide or metal, or for the individual oxides, and are published for different delivery bases (for example inside and outside China) that are not interchangeable.",
+      "requirementForInclusion": "A monthly NdPr oxide series with a stated delivery basis, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "praseodymium",
+      "status": "joint_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. Praseodymium appears only inside the USGS annual NdPr oxide price; no separate praseodymium series is shown.",
+      "gradeDistinctions": "See neodymium: praseodymium is usually priced inside the combined NdPr oxide or metal assessment.",
+      "requirementForInclusion": "A monthly NdPr oxide series with a stated delivery basis, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "dysprosium",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual dysprosium-oxide price.",
+      "gradeDistinctions": "Dysprosium is assessed as oxide or metal, by purity, with prices inside and outside China that are not interchangeable.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "terbium",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual terbium-oxide price.",
+      "gradeDistinctions": "Terbium is assessed as oxide or metal, by purity, with prices inside and outside China that are not interchangeable.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "gallium",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual average customs unit value of U.S. gallium-metal imports, which is not a market price.",
+      "gradeDistinctions": "Gallium is priced as metal by purity (commonly 99.99%), with prices inside and outside China that can differ widely.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "germanium",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes annual European prices for germanium metal and germanium dioxide.",
+      "gradeDistinctions": "Germanium metal and germanium dioxide are separate products, each priced by purity.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "tantalum",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual tantalite price per kilogram of Ta₂O₅ content, whose underlying source changes in 2022 and 2025.",
+      "gradeDistinctions": "Tantalite concentrate is priced on its tantalum-oxide content; tantalum metal, powder and chemicals are separate products.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "niobium",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual unit value of U.S. ferroniobium trade, which is not a market price.",
+      "gradeDistinctions": "Ferroniobium (the main traded form) is distinct from niobium oxide and niobium metal.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "boron",
+      "status": "annual_only",
+      "monthlyCoverage": "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. The USGS publishes an annual unit value of combined U.S. boron imports, which is not a market price.",
+      "gradeDistinctions": "Boron is traded as borate minerals, boric acid and refined borates with different values; the USGS figure combines them.",
+      "requirementForInclusion": "A monthly series for one named product and grade, published under terms that permit redistribution with attribution."
+    },
+    {
+      "materialId": "ndfeb-magnets",
+      "status": "no_open_series_identified",
+      "monthlyCoverage": "No source SMPT uses publishes an NdFeB magnet price, monthly or annual.",
+      "gradeDistinctions": "Sintered and bonded NdFeB magnets are sold by grade (for example N42, N52 and high-coercivity grades with dysprosium or terbium) under bilateral contracts; there is no single benchmark.",
+      "requirementForInclusion": "A published series for one named magnet grade, under terms that permit redistribution with attribution."
+    }
+  ]
+}

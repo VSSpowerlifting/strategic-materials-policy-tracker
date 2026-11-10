@@ -76,6 +76,13 @@ export function reviewPathForPage(path) {
   return null;
 }
 
+/* Inverse of reviewPathForPage, so a changed record is checked against its page. */
+export function pageForReviewPath(path) {
+  if (path === "docs/editorial/reviews/research-index.json") return "app/research/page.tsx";
+  const record = /^docs\/editorial\/reviews\/([^/]+)\.json$/.exec(path);
+  return record ? "app/research/" + record[1] + "/page.tsx" : null;
+}
+
 export function scanChangedProse(source, ranges) {
   const blocks = extractProseBlocks(source).filter(block =>
     ranges.some(range => block.startLine <= range.end && block.endLine >= range.start));
@@ -141,9 +148,14 @@ function main(args) {
   if (!base || /^0{40}$/.test(base)) throw new Error("EDITORIAL_BASE_SHA must be a valid diff base");
   const changed = git(["diff", "--name-only", "--diff-filter=ACMRT",
     base, "HEAD", "--", "app/research", "docs/editorial/reviews"]).split("\n").filter(Boolean);
-  const pages = changed.filter(file => reviewPathForPage(file));
+  // A record changed on its own is validated too, so a draft record with
+  // unchecked fields cannot pass simply because its page did not change.
+  const pages = [...new Set([
+    ...changed.filter(file => reviewPathForPage(file)),
+    ...changed.map(pageForReviewPath).filter(file => file && existsSync(file)),
+  ])];
   if (!pages.length) {
-    console.log("Editorial gate: no published research page changed.");
+    console.log("Editorial gate: no published research page or review record changed.");
     return;
   }
   let failures = 0;

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "datasetId": "imf-pcps",
+  "releaseId": "imf-pcps-2026-10",
+  "title": "IMF Primary Commodity Price System (PCPS), monthly prices",
+  "shortName": "IMF PCPS",
+  "publisher": "International Monetary Fund",
+  "frequency": "monthly",
+  "sourceFile": {
+    "url": "https://api.imf.org/external/sdmx/2.1/data/IMF.RES,PCPS,latest/G001.PCOBA+PPALLA+PREODOM.USD.M?startPeriod=2005-01&detail=full",
+    "fileName": "raw/pcps-PCOBA-PPALLA-PREODOM-USD-M.xml",
+    "sha256": "3f005120ad83924285cc548a1a1c6503e953ba9477c79d65c3071c11220ee7dd",
+    "bytes": 102066,
+    "format": "SDMX 2.1 structure-specific XML (committed in the repository)",
+    "details": {
+      "structureRef": "IMF.RES_PCPS_9_0_0",
+      "publicationDate": "2026-10-06T17:27:04.304001Z",
+      "updateDate": "2026-10-06T17:27:04.357538500Z",
+      "prepared": "2026-11-09T23:04:21Z",
+      "landingPageEdition": "Excel Database: October 2026",
+      "technicalDocumentation": "https://www.imf.org/-/media/files/research/commodityprices/monthly/pcps-technical-documentation.pdf"
+    }
+  },
+  "landingPageUrl": "https://www.imf.org/en/research/commodity-prices",
+  "catalogUrl": "https://data.imf.org/en/datasets/IMF.RES:PCPS",
+  "doi": null,
+  "releaseDate": "2026-10-06",
+  "retrievedOn": "2026-11-09",
+  "windowStart": "2005-01",
+  "observationCutoff": "2026-09",
+  "nextScheduledRelease": null,
+  "updateFrequency": {
+    "statedAs": "Primary Commodity Prices data are updated monthly based on the IMF’s Primary Commodity Prices System.",
+    "sourceUrl": "https://www.imf.org/en/research/commodity-prices"
+  },
+  "aggregationBasis": {
+    "statedAs": "The benchmark prices are obtained from various sources at high frequency which are then converted to monthly frequency by averaging weekly or daily values.",
+    "note": "PCPS technical documentation, section 4.1.",
+    "sourceUrl": "https://www.imf.org/-/media/files/research/commodityprices/monthly/pcps-technical-documentation.pdf"
+  },
+  "license": {
+    "kind": "imf-terms",
+    "name": "IMF Copyright and Usage terms (Data)",
+    "url": null,
+    "statedAt": "https://data.imf.org/en/datasets/IMF.RES:PCPS",
+    "termsUrl": "https://www.imf.org/en/about/copyright-and-terms",
+    "statedText": "You may download, extract, copy, create derivative works, publish, distribute, and use Data obtained from IMF Sites, subject to the following conditions: … it must appear accurately with attribution to the IMF as the source … If the Data is materially transformed by the User, this must be stated explicitly along with the required source citation."
+  },
+  "attribution": "Source: International Monetary Fund, Primary Commodity Price System (PCPS), https://data.imf.org/en/datasets/IMF.RES:PCPS, published October 6, 2026.",
+  "changesMade": "SMPT stored the IMF's published monthly values for indicators PCOBA, PPALLA and PREODOM unchanged and converted period labels from YYYY-Mmm to YYYY-MM. Percentage changes, indexed values and rankings shown with them are SMPT calculations from the IMF data, not IMF figures.",
+  "thirdPartyNote": "The IMF names the London Metal Exchange (cobalt, palladium) and Shanghai Metal Market (rare-earth carbonate) as its sources. SMPT republishes only the IMF's monthly averages, not the underlying exchange or vendor data.",
+  "seriesIds": [
+    "imf-cobalt",
+    "imf-palladium",
+    "imf-reo-carbonate"
+  ]
+}

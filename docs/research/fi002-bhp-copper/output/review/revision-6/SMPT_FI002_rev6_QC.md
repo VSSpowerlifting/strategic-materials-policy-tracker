@@ -1,7 +1,7 @@
 # FI002 executive deck — revision 6 (cover review candidate) quality-control record
 
 - **What this is:** a review candidate for a new cover on the FI002 executive deck, built with the new `cover_hero_split` pattern. The deck is still a draft: every slide keeps `DRAFT · REVIEW GATES PENDING`. Nothing is live, and no human has approved it.
-- **What changed:** slide 1 only. Slides 2 to 11 are the revision 5 slides, byte for byte. The published deck (RC4, from revision 5) is untouched.
+- **What changed:** slide 1 only. Slides 2 to 11 are the revision 5 slides, byte for byte. Revision 5 is RC4's source: it still has the draft badges and no source links, so this candidate is not a drop-in for the published RC4 deck, which is untouched. A release version would need its own RC5 step.
 - **Spec:** [`SMPT_FI002_BHP_Copper_Strategy_Deck_rev6.spec.json`](SMPT_FI002_BHP_Copper_Strategy_Deck_rev6.spec.json). It is the revision 5 spec with the title's apostrophes made curly and `cover_lines` replaced by a `cover` block. `slides` and `evidence` are identical to revision 5.
 - **Renderer:** `npm run exhibits:render` with the `cover_hero_split` support added in this branch. The PDF was exported by LibreOffice with the installed Archivo faces, the same route as revision 5.
 - **Research cutoff:** 5 November 2026, unchanged.
@@ -50,6 +50,17 @@ The first preference was a licensed Escondida photograph. Wikimedia Commons was 
 
 Downloading needs explicit permission and a decision about how a dated image is captioned, so this candidate uses the artwork. To switch, drop the file beside the spec, update `hero.image`, `sha256`, `alt`, `caption` (with the date and credit) and `credit`, and re-render.
 
+## How to rebuild
+
+From the repository root (the PPTX is byte-reproducible; the renderer refuses to overwrite, so render to a new path and compare hashes):
+
+```bash
+python3 scripts/exhibit-system/cover_art.py --seed 2026 --width-in 6.0 --height-in 7.5 --out /tmp/art/fi002-cover-contours.png   # with numpy, matplotlib, pillow
+npm run exhibits:render -- docs/research/fi002-bhp-copper/output/review/revision-6/SMPT_FI002_BHP_Copper_Strategy_Deck_rev6.spec.json /tmp/rev6/rev6.pptx
+```
+
+The PDF was exported with `export_pdf()` from `release/make_release_candidate.py` (LibreOffice, temporary profile with the installed Archivo faces, tagged PDF). The renders are each PDF page drawn by PyMuPDF at 2× scale, and the contact sheet comes from `contact_sheet()` in `scripts/reissue_archivo_decks.py`. Those two steps were run from a scratch script that is not committed.
+
 ## Verification
 
 | Check | Result |
@@ -61,7 +72,7 @@ Downloading needs explicit permission and a decision about how a dated image is 
 | Callout figure | 2,830.416 in tab 04 D45 and tab 09 D6 rounds to $2.83bn, the figure on slide 2. |
 | Default renderer unchanged | Re-rendering the revision 5 spec reproduces its committed PPTX hash `071a67e8…`. `npm run exhibits:build` leaves the gallery and demo deck byte-identical (no change under `docs/design`). |
 | New tests | `tests/exhibit-hero-cover.test.ts`: hash pinning, title-line join, `cover` and `cover_lines` exclusive, callout references, required caption and image type; the image helper refuses non-frame roles and blank alt text; an end-to-end render passes the verifier, puts each notes line in its own paragraph, and fails the verifier once the manifest stops declaring the image. |
-| Repository gates (9 Nov 2026) | `npm run validate` passed (78 events, 109 financial commitments, 46 control measures). `npm run lint`: 0 errors, 28 pre-existing warnings. `npm run typecheck` passed. `npm test`: 1184 of 1184 pass. `npm run build` passed. `npm run exhibits:build` passed, and `git status` shows no change to the generated gallery files (only the README edit in this branch). All six exited 0. |
+| Repository gates (9 Nov 2026) | `npm run validate` passed (78 events, 109 financial commitments, 46 control measures). `npm run lint`: 0 errors, 28 pre-existing warnings. `npm run typecheck` passed. `npm test`: 1210 of 1210 pass (re-run after merging `main` at `5a16c14`). `npm run build` passed. `npm run exhibits:build` passed, and `git status` shows no change to the generated gallery files (only the README edit in this branch). All six exited 0. |
 | PowerPoint tier | **Not run.** PowerPoint is not installed here. Opening the deck, checking the image sits behind the overlay and that the text boxes edit cleanly is outstanding. |
 
 ## Review gates
@@ -80,7 +91,7 @@ The agent's assessment, for a human reviewer to confirm or overturn. None of the
 
 - **Not released.** Producing a public RC5 (draft badge removed, links added as in RC4) is a separate, human-gated step through `release/make_release_candidate.py`, which has no `rc5` entry yet.
 - **PowerPoint untested,** as above.
-- **CI baseline.** `editorial:check` fails on `main` since PR #244 for a reason unrelated to this change. This branch does not touch `app/research/<slug>/page.tsx`, so it needs no new editorial review file.
+- **Editorial gate.** `npm run editorial:check` against the merge base reports that no published research page or review record changed, and exits 0. This branch does not touch `app/research/<slug>/page.tsx`, so it needs no editorial review file.
 - **Notes split.** Speaker notes containing line breaks are now written one paragraph per line. Revision 5 and every gallery deck have no such notes, so their bytes do not change.
 
 ## Release decision
