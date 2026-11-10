@@ -325,3 +325,19 @@
 html { scroll-padding-top: 7rem; }
 
 @media (min-width: 1024px) { .selected-evidence > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.5rem; } }
+
+/* Markets: reveal each measured series from its first to last observation.
+   Clip the graphics rather than animating stroke dashes, which must retain the
+   published estimate/source-break styling. The chart remains static for users
+   requesting reduced motion. */
+@keyframes market-series-reveal {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .market-line-reveal {
+    transform-box: fill-box;
+    transform-origin: left center;
+    animation: market-series-reveal 1100ms cubic-bezier(.22, .61, .36, 1) both;
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { Frequency, Observation, SourceBreak } from "@/lib/markets";
 import { formatNumber, formatPeriod, periodFrequency, periodsBetween } from "@/lib/markets";
 
@@ -127,6 +127,7 @@ export function PriceChart({
 }: PriceChartProps) {
   const frequency: Frequency = periodFrequency(periods[0]) ?? "monthly";
   const unitWord = frequency === "annual" ? "years" : "months";
+  const revealId = useId().replace(/:/g, "");
   const wrapRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(800);
 
@@ -274,6 +275,23 @@ export function PriceChart({
           if (e.pointerType === "mouse") onCursor(null);
         }}
       >
+        {/* Per-line clipping makes the actual historical path unfold from left to right.
+            CSS animates only the reveal rectangle, preserving gaps, estimates and dashed strokes. */}
+        <defs>
+          {lines.map((l, i) => (
+            <clipPath id={`${revealId}-${l.id}-sweep`} key={l.id} clipPathUnits="userSpaceOnUse">
+              <rect
+                x={0}
+                y={0}
+                width={width}
+                height={height}
+                className="market-line-reveal"
+                style={{ animationDelay: `${Math.min(i * 90, 360)}ms` }}
+              />
+            </clipPath>
+          ))}
+        </defs>
+
         {/* Months with a missing value in at least one series */}
         {geo.missing.map((p) => (
           <rect
@@ -350,7 +368,7 @@ export function PriceChart({
           const strong = focusId === l.id;
           const markers = frequency === "annual" || periods.length <= 13;
           return (
-            <g key={l.id} opacity={dim ? 0.3 : 1}>
+            <g key={l.id} opacity={dim ? 0.3 : 1} clipPath={`url(#${revealId}-${l.id}-sweep)`}>
               {p.segments.map((seg) => (
                 <path
                   key={seg.d}
@@ -401,7 +419,7 @@ export function PriceChart({
           const ty = geo.endYs[i];
           const dim = focusId !== null && focusId !== l.id;
           return (
-            <g key={`lab-${l.id}`} opacity={dim ? 0.45 : 1}>
+            <g key={`lab-${l.id}`} opacity={dim ? 0.45 : 1} clipPath={`url(#${revealId}-${l.id}-sweep)`}>
               <line x1={lx + 3} x2={lx + 10} y1={ly} y2={ty} stroke={l.color} strokeWidth={1} />
               <text
                 x={lx + 13}

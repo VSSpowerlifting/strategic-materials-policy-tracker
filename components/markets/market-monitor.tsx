@@ -295,12 +295,11 @@ export function MarketExplorer({
         </p>
       ) : null}
 
-      {/* ── Frequency and series picker ───────────────────────────────── */}
-      <section aria-labelledby="mm-pick-title" className="scroll-mt-24">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border-strong pb-3">
-          <h2 id="mm-pick-title" className={h2}>
-            Compare series
-          </h2>
+      {/* ── Chart ─────────────────────────────────────────────────────── */}
+      <section aria-labelledby="mm-chart-title" className="scroll-mt-24">
+        <div className="border-b border-border-strong pb-3">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2 id="mm-chart-title" className={h2}>Price trends</h2>
           <div role="group" aria-label="Frequency" className="flex gap-2">
             {(["monthly", "annual"] as const).map((f) => (
               <button
@@ -315,6 +314,149 @@ export function MarketExplorer({
               </button>
             ))}
           </div>
+          </div>
+          <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-foreground">{chartTitle}</p>
+            <a href="#mm-pick-title" className="font-display text-sm text-accent underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-accent">
+              Choose benchmarks
+            </a>
+          </div>
+          <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">
+            {selected.length === 0
+              ? "Choose one or more benchmarks below."
+              : effectiveView === "indexed"
+                ? base?.basePeriod
+                  ? `Each series is divided by its own ${formatPeriod(base.basePeriod, true)} value and multiplied by 100, so the lines compare percentage paths, not price levels.`
+                  : base?.explanation
+                : `Published values on one axis; every selected series is in ${selectedSeries[0]?.unit}.`}
+            {win.truncated ? ` The selected series begin in ${formatPeriod(earliest, true)}, so this window is shorter than ${rangeLabel}.` : ""}
+            {tab === "annual" && selected.length > 0 ? " Hollow points and dotted steps mark USGS estimates." : ""}
+          </p>
+        </div>
+
+        {selected.length > 0 ? (
+          <>
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
+              {tab === "monthly" ? (
+                <div role="group" aria-label="Time range" className="flex flex-wrap gap-2">
+                  {RANGES.monthly
+                    .filter((r) => ranges.includes(r.id))
+                    .map((r) => (
+                      <button
+                        key={r.id}
+                        type="button"
+                        aria-pressed={effectiveRange === r.id}
+                        onClick={() => setRange(r.id)}
+                        className={cn(pill, effectiveRange === r.id ? pillOn : pillOff)}
+                      >
+                        {r.label}
+                      </button>
+                    ))}
+                </div>
+              ) : null}
+              <div role="group" aria-label="Scale" className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  aria-pressed={effectiveView === "indexed"}
+                  onClick={() => setView("indexed")}
+                  className={cn(pill, effectiveView === "indexed" ? pillOn : pillOff)}
+                >
+                  Indexed
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={effectiveView === "absolute"}
+                  aria-disabled={!absoluteAllowed || undefined}
+                  aria-describedby={absoluteAllowed ? undefined : "mm-abs-note"}
+                  onClick={() => (absoluteAllowed ? setView("absolute") : undefined)}
+                  className={cn(pill, effectiveView === "absolute" ? pillOn : absoluteAllowed ? pillOff : pillDisabled)}
+                >
+                  Published values
+                </button>
+              </div>
+              {!absoluteAllowed ? (
+                <p id="mm-abs-note" className="text-xs text-faint">
+                  Published values need one shared unit and currency; the selection mixes units.
+                </p>
+              ) : null}
+            </div>
+
+            <div className="mt-4 rounded-lg border border-border bg-card p-2 sm:p-4">
+              {lines.length > 0 ? (
+                <PriceChart
+                  lines={lines}
+                  periods={chartPeriods}
+                  mode={effectiveView}
+                  basePeriod={effectiveView === "indexed" ? (base?.basePeriod ?? null) : null}
+                  cursor={cursor}
+                  onCursor={setCursor}
+                  focusId={emphasis}
+                  onFocus={setFocusId}
+                  label={chartTitle}
+                />
+              ) : (
+                <p className="p-6 text-sm text-muted">{base?.explanation ?? "Nothing to plot for this selection."}</p>
+              )}
+            </div>
+            <ul aria-label="Legend" className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
+              {selected.map(({ s, slot }) => {
+                const st = slotStyle(slot);
+                const plotted = lines.some((l) => l.id === s.id);
+                return (
+                  <li key={s.id} className="flex items-center">
+                    <button
+                      type="button"
+                      aria-pressed={focusId === s.id}
+                      onClick={() => setFocusId((cur) => (cur === s.id ? null : s.id))}
+                      className={cn(
+                        "inline-flex min-h-11 items-center gap-2 rounded-l-md border px-2.5 py-1 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-accent sm:min-h-9",
+                        focusId === s.id ? pillOn : pillOff,
+                      )}
+                    >
+                      <Swatch color={st.color} dash={st.dash} />
+                      <span className={plotted ? "" : "text-faint line-through"}>{s.label}</span>
+                      <span className="shrink-0 text-xs whitespace-nowrap text-faint">{s.sourceShortName}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => toggle(s.id)}
+                      aria-label={`Remove ${s.label}`}
+                      className="inline-flex min-h-11 items-center rounded-r-md border border-l-0 border-border-strong bg-card px-2.5 text-sm text-muted outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-accent sm:min-h-9"
+                    >
+                      ×
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {excluded.length > 0 ? (
+              <ul className="mt-3 space-y-1 text-sm text-muted">
+                {excluded.map((e) => (
+                  <li key={e.id}>
+                    <span className="text-foreground">{byId.get(e.id)?.label}</span> is not plotted in the indexed view: {e.reason}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
+            <p className="mt-2 text-xs text-faint">
+              Hover or tap the chart to read every selected series at one {unitWord}. Shaded columns mark {unitWord}s where at
+              least one plotted series has no value; nothing is interpolated.
+            </p>
+          </>
+        ) : (
+          <p className="mt-6 rounded-lg border border-border bg-card p-8 text-sm text-muted">Select one or more benchmarks in the picker below to plot their history.</p>
+        )}
+      </section>
+
+      {/* ── Frequency and series picker ───────────────────────────────── */}
+      <section aria-labelledby="mm-pick-title" className="scroll-mt-24">
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border-strong pb-3">
+          <h2 id="mm-pick-title" className={h2}>
+            Choose benchmarks
+          </h2>
+
         </div>
         <p className="mt-3 max-w-3xl text-[0.9375rem] leading-7 text-muted">
           {tab === "monthly"
@@ -396,139 +538,6 @@ export function MarketExplorer({
             </div>
           ))}
         </div>
-      </section>
-
-      {/* ── Chart ─────────────────────────────────────────────────────── */}
-      <section aria-labelledby="mm-chart-title" className="scroll-mt-24">
-        <div className="border-b border-border-strong pb-3">
-          <h2 id="mm-chart-title" className={h2}>
-            {chartTitle}
-          </h2>
-          <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">
-            {selected.length === 0
-              ? "Choose one or more series above."
-              : effectiveView === "indexed"
-                ? base?.basePeriod
-                  ? `Each series is divided by its own ${formatPeriod(base.basePeriod, true)} value and multiplied by 100, so the lines compare percentage paths, not price levels.`
-                  : base?.explanation
-                : `Published values on one axis; every selected series is in ${selectedSeries[0]?.unit}.`}
-            {win.truncated ? ` The selected series begin in ${formatPeriod(earliest, true)}, so this window is shorter than ${rangeLabel}.` : ""}
-            {tab === "annual" && selected.length > 0 ? " Hollow points and dotted steps mark USGS estimates." : ""}
-          </p>
-        </div>
-
-        {selected.length > 0 ? (
-          <>
-            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
-              {tab === "monthly" ? (
-                <div role="group" aria-label="Time range" className="flex flex-wrap gap-2">
-                  {RANGES.monthly
-                    .filter((r) => ranges.includes(r.id))
-                    .map((r) => (
-                      <button
-                        key={r.id}
-                        type="button"
-                        aria-pressed={effectiveRange === r.id}
-                        onClick={() => setRange(r.id)}
-                        className={cn(pill, effectiveRange === r.id ? pillOn : pillOff)}
-                      >
-                        {r.label}
-                      </button>
-                    ))}
-                </div>
-              ) : null}
-              <div role="group" aria-label="Scale" className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  aria-pressed={effectiveView === "indexed"}
-                  onClick={() => setView("indexed")}
-                  className={cn(pill, effectiveView === "indexed" ? pillOn : pillOff)}
-                >
-                  Indexed
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={effectiveView === "absolute"}
-                  aria-disabled={!absoluteAllowed || undefined}
-                  aria-describedby={absoluteAllowed ? undefined : "mm-abs-note"}
-                  onClick={() => (absoluteAllowed ? setView("absolute") : undefined)}
-                  className={cn(pill, effectiveView === "absolute" ? pillOn : absoluteAllowed ? pillOff : pillDisabled)}
-                >
-                  Published values
-                </button>
-              </div>
-              {!absoluteAllowed ? (
-                <p id="mm-abs-note" className="text-xs text-faint">
-                  Published values need one shared unit and currency; the selection mixes units.
-                </p>
-              ) : null}
-            </div>
-
-            <ul aria-label="Legend" className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
-              {selected.map(({ s, slot }) => {
-                const st = slotStyle(slot);
-                const plotted = lines.some((l) => l.id === s.id);
-                return (
-                  <li key={s.id} className="flex items-center">
-                    <button
-                      type="button"
-                      aria-pressed={focusId === s.id}
-                      onClick={() => setFocusId((cur) => (cur === s.id ? null : s.id))}
-                      className={cn(
-                        "inline-flex min-h-11 items-center gap-2 rounded-l-md border px-2.5 py-1 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-accent sm:min-h-9",
-                        focusId === s.id ? pillOn : pillOff,
-                      )}
-                    >
-                      <Swatch color={st.color} dash={st.dash} />
-                      <span className={plotted ? "" : "text-faint line-through"}>{s.label}</span>
-                      <span className="shrink-0 text-xs whitespace-nowrap text-faint">{s.sourceShortName}</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => toggle(s.id)}
-                      aria-label={`Remove ${s.label}`}
-                      className="inline-flex min-h-11 items-center rounded-r-md border border-l-0 border-border-strong bg-card px-2.5 text-sm text-muted outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-accent sm:min-h-9"
-                    >
-                      ×
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {excluded.length > 0 ? (
-              <ul className="mt-3 space-y-1 text-sm text-muted">
-                {excluded.map((e) => (
-                  <li key={e.id}>
-                    <span className="text-foreground">{byId.get(e.id)?.label}</span> is not plotted in the indexed view: {e.reason}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-
-            <div className="mt-4 rounded-lg border border-border bg-card p-2 sm:p-4">
-              {lines.length > 0 ? (
-                <PriceChart
-                  lines={lines}
-                  periods={chartPeriods}
-                  mode={effectiveView}
-                  basePeriod={effectiveView === "indexed" ? (base?.basePeriod ?? null) : null}
-                  cursor={cursor}
-                  onCursor={setCursor}
-                  focusId={emphasis}
-                  onFocus={setFocusId}
-                  label={chartTitle}
-                />
-              ) : (
-                <p className="p-6 text-sm text-muted">{base?.explanation ?? "Nothing to plot for this selection."}</p>
-              )}
-            </div>
-            <p className="mt-2 text-xs text-faint">
-              Hover or tap the chart to read every selected series at one {unitWord}. Shaded columns mark {unitWord}s where at
-              least one plotted series has no value; nothing is interpolated.
-            </p>
-          </>
-        ) : null}
       </section>
 
       {/* ── Cards ────────────────────────────────────────────────────── */}

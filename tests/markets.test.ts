@@ -360,7 +360,13 @@ test("explorer renders the real series with the default selection and attributio
   for (const id of [...DEFAULT_SELECTION.monthly, ...DEFAULT_SELECTION.annual]) assert.ok(ids.has(id), `default ${id} exists`);
   assert.equal(series.length, getMarketSeries().length);
   const html = renderToStaticMarkup(createElement(MarketExplorer, { series, releaseNotices: buildReleaseNotices() }));
-  assert.match(html, /Compare series/);
+  assert.match(html, /Price trends/);
+  assert.match(html, /Choose benchmarks/);
+  assert.ok(
+    html.indexOf('id="mm-chart-title"') < html.indexOf('id="mm-pick-title"'),
+    "the chart must precede the full benchmark picker",
+  );
+  assert.match(html, /class="market-line-reveal"/, "historical paths use the SVG reveal clip");
   assert.equal((html.match(/aria-pressed="true"/g) ?? []).length >= DEFAULT_SELECTION.monthly.length, true);
   for (const s of series.filter((s) => s.priceType === "trade_unit_value")) {
     assert.doesNotMatch(s.label, /\bprice\b/i, `${s.id} label`);
