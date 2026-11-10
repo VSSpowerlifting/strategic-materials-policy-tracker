@@ -57,3 +57,12 @@ export function slotStyle(slot: number): SeriesStyle {
 }
 
 export const PALETTE_HEX = PALETTE.map((p) => p.color);
+
+/** Tile shorthand for the market-only element selector, including an REE group and graphite. */
+export const MARKET_SYMBOLS: Record<string, string> = {
+  aluminium: "Al", antimony: "Sb", boron: "B", cobalt: "Co", copper: "Cu",
+  dysprosium: "Dy", gallium: "Ga", germanium: "Ge", graphite: "C", lead: "Pb",
+  lithium: "Li", neodymium: "Nd", nickel: "Ni", niobium: "Nb", palladium: "Pd",
+  platinum: "Pt", "rare-earth-elements": "REE", tantalum: "Ta", terbium: "Tb",
+  tin: "Sn", tungsten: "W", zinc: "Zn",
+};
