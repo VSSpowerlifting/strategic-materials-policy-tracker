@@ -5,6 +5,7 @@ import { getAllMaterials } from "@/lib/data";
 import { LatticeOverview } from "@/components/lattice/lattice";
 import { ElementStrip, SupplyChainStrip } from "@/components/home/supply-chain-strip";
 import { HomeMarketPreview } from "@/components/home/home-market-preview";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { chainStageCounts } from "@/lib/homepage-chain";
 import { buildLatticeModel } from "@/lib/lattice";
 import { formatDateLong } from "@/lib/format";
@@ -92,7 +93,7 @@ export default function Home() {
             </p>
           </div>
           <aside aria-label="Mineral price trends" className="min-w-0 self-center border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">
-            <HomeMarketPreview />
+            <ScrollReveal kind="chart"><HomeMarketPreview /></ScrollReveal>
           </aside>
         </div>
         <ElementStrip materials={materials} />
@@ -100,7 +101,7 @@ export default function Home() {
 
       <section aria-label="Supply-chain coverage" className="border-t border-border">
         <Container width="wide" className="py-10 sm:py-12">
-          <SupplyChainStrip chain={chain.chain} outside={chain.outside} asOf={asOf} />
+          <ScrollReveal kind="chain"><SupplyChainStrip chain={chain.chain} outside={chain.outside} asOf={asOf} /></ScrollReveal>
         </Container>
       </section>
 
@@ -112,9 +113,14 @@ export default function Home() {
               All research
             </Link>
           </div>
-          <div className="mt-7 grid gap-x-12 gap-y-8 md:grid-cols-2">
-            {featured.map((item) => (
-              <article key={item.href} className="border-t border-border pt-5">
+          <ScrollReveal kind="cards" className="mt-7 grid gap-x-12 gap-y-8 md:grid-cols-2">
+            {featured.map((item, i) => (
+              <article
+                key={item.href}
+                data-motion-item
+                style={{ "--reveal-order": i } as React.CSSProperties}
+                className="border-t border-border pt-5"
+              >
                 <p className="font-display text-sm text-muted">{item.category}</p>
                 <h3 className="mt-2 font-display text-xl leading-tight sm:text-2xl">
                   <Link href={item.href} className="hover:text-accent">{item.title}</Link>
@@ -122,7 +128,7 @@ export default function Home() {
                 <p className="mt-2 text-sm leading-6 text-muted">{item.description}</p>
               </article>
             ))}
-          </div>
+          </ScrollReveal>
         </Container>
       </section>
 
@@ -131,9 +137,9 @@ export default function Home() {
           <h2 id="examples-heading" className="font-display text-3xl font-medium">
             From the records
           </h2>
-          <div className="mt-7 grid gap-7 md:grid-cols-3">
+          <ScrollReveal kind="cards" className="mt-7 grid gap-7 md:grid-cols-3">
             {legal ? (
-              <article className="border-t border-border pt-4">
+              <article data-motion-item style={{ "--reveal-order": 0 } as React.CSSProperties} className="border-t border-border pt-4">
                 <p className="font-display text-sm text-muted">Legal controls</p>
                 <h3 className="mt-3 font-display text-lg leading-snug">
                   <Link href={`/events/${legal.event.id}`} className="hover:text-accent">
@@ -149,7 +155,7 @@ export default function Home() {
               </article>
             ) : null}
             {financing.length ? (
-              <article className="border-t border-border pt-4">
+              <article data-motion-item style={{ "--reveal-order": 1 } as React.CSSProperties} className="border-t border-border pt-4">
                 <p className="font-display text-sm text-muted">Public financing</p>
                 <h3 className="mt-3 font-display text-lg leading-snug">
                   <Link href={`/capital/${financing[0].commitment.id}`} className="hover:text-accent">
@@ -162,7 +168,7 @@ export default function Home() {
               </article>
             ) : null}
             {tungsten.length ? (
-              <article className="border-t border-border pt-4">
+              <article data-motion-item style={{ "--reveal-order": 2 } as React.CSSProperties} className="border-t border-border pt-4">
                 <p className="font-display text-sm text-muted">Tungsten comparison</p>
                 <h3 className="mt-3 font-display text-lg leading-snug">
                   <Link href={tungsten[0].href} className="hover:text-accent">{tungsten[0].title}</Link>
@@ -175,7 +181,7 @@ export default function Home() {
                 </Link>
               </article>
             ) : null}
-          </div>
+          </ScrollReveal>
         </Container>
       </section>
 
