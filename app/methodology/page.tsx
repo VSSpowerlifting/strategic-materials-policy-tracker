@@ -216,7 +216,13 @@ export default function MethodologyPage() {
               outside its remit. Where market-share figures appear — for
               example, that China processes roughly 90% of rare earths — they are
               cited context drawn from bodies such as the IEA and USGS, not original
-              estimates.
+              estimates. Published price series from the World Bank, the IMF and the
+              USGS appear separately on the{" "}
+              <Link href="/markets" className="text-accent hover:text-accent-strong">
+                Markets
+              </Link>{" "}
+              page, as each publisher releases them. They are not part of the record
+              and are not linked to individual measures.
             </p>
             <p>
               The one kind of figure it does record is a term of a policy

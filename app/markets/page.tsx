@@ -5,7 +5,7 @@ import { ExtLink } from "@/components/ui/ext-link";
 import { MarketExplorer } from "@/components/markets/market-monitor";
 import { buildMonitorSeries, buildReleaseNotices, materialLink } from "@/components/markets/series";
 import { getMarketCoverage, getMarketDatasets } from "@/lib/market-data";
-import { PRICE_TYPE_LABELS, formatPeriod, type CoverageStatus } from "@/lib/markets";
+import { MARKET_REUSE_NOTES, PRICE_TYPE_LABELS, formatPeriod, type CoverageStatus } from "@/lib/markets";
 import { formatDate } from "@/lib/format";
 import { fi002 } from "@/lib/fi002";
 
@@ -229,6 +229,10 @@ export default function MarketsPage() {
                   <span className="text-foreground">Changes made.</span> {m.changesMade}
                 </p>
                 <p>{m.thirdPartyNote}</p>
+                <p>
+                  <span className="text-foreground">Reuse.</span>{" "}
+                  {MARKET_REUSE_NOTES[m.datasetId as keyof typeof MARKET_REUSE_NOTES]}
+                </p>
                 <ul className="space-y-1">
                   <li>
                     <ExtLink href={m.landingPageUrl}>Publisher page</ExtLink>

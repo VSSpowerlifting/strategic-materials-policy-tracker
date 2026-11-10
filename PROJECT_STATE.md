@@ -8,12 +8,13 @@
   - `coverage-gaps.json` v2 gives each tracked material without an open monthly series its status (annual only, joint only, no open series) and the test a monthly series would have to meet.
 - **Explorer:** Monthly and Annual tabs, each with a material-grouped multi-select of up to six series. Colour slots are stable when a series is removed. The chart has indexed and published-value views; published values only appear when unit, currency and frequency all match. Estimates are drawn hollow and dotted, and lines never join across a gap or source change. Coordinated cards, legend focus, heatmap, ranked moves to a common end period, and a data table. URL params: `freq`, `series`, `range`, `view`.
 - **Price types:** exchange benchmark, price assessment and trade unit value. Trade unit values are never labelled as prices; a test enforces this.
-- **Governance (two blocking reviewer decisions):**
-  1. README and CLAUDE.md say "no market prices". Accepting the exception is the maintainer's decision.
-  2. The earlier entry kept commercial assessments off the page. The page and `/api/export/markets.csv` now show and redistribute figures derived from them: the IMF's monthly averages of an SMM rare-earth carbonate assessment, under IMF terms rather than an open licence, and USGS republications of price-agency assessments, under CC0 as published by the USGS. Whether that is acceptable is the maintainer's call.
+- **Governance (decided 2026-11-09 by the maintainer):**
+  1. Market prices are a permanent, separately maintained research-data layer. README, CLAUDE.md (hard rule 8) and `/methodology` now say so and keep it apart from the policy, financing and project records.
+  2. The publisher-released datasets are approved under their published terms. Each source's attribution, terms, statement of changes and reuse note (`MARKET_REUSE_NOTES` in `lib/markets.ts`: the IMF's commercial-reuse permission and third-party clause, CC0 scope for USGS, vendor data for the World Bank) shows on `/markets` and in every CSV row. No series-specific restriction was found, so none is isolated.
+  3. Navigation option B: `/markets` in the footer and a "Price benchmarks" block on each material page with a covering series, linking to the explorer at that series' frequency. Primary navigation unchanged.
 - **QA:**
-  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1194/1194) and build all pass after the main merge and review fixes.
-  - Code review of the full diff: seven defects fixed in c3b3016 (heatmap blur and tab stop, indexed start, shared-link colour slots, fractional y-ticks, duplicated CSV escaper, dataset list in one place). The CSV `#` preamble stays by design.
+  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1195/1195) and build all pass after the governance changes.
+  - Code review of the full diff: seven defects fixed in c3b3016 (heatmap blur and tab stop, indexed start, shared-link colour slots, fractional y-ticks, duplicated CSV escaper, dataset list in one place). The CSV `#` preamble was later dropped: the header is now row 1 and attribution travels on every row (24 columns, about 2.2 MB, 26 KB gzipped).
   - Browser QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow, after a fix to the heatmap grid. Screenshots of the new page are in `docs/analysis/markets-monitor/`; the old ones were removed.
   - The IMF cobalt values for 2026 (flat at about 55,850 from February to August, then 42,213 in September) match PCOBA in the pinned SDMX file exactly.
   - Interaction checks: URL restore (it was broken by a mount-order race; now fixed), keyboard chip toggle, and heatmap roving focus opening on the latest month.

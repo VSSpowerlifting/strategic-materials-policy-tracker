@@ -267,10 +267,9 @@ test("CSV: every source attributed, every row present, estimates and frequency e
   const datasets = getMarketDatasets();
   const csv = buildMarketsCsv(datasets);
   const lines = csv.trimEnd().split("\r\n");
-  for (const d of datasets) assert.ok(lines.some((l) => l.startsWith(`# [${d.manifest.datasetId}] `) && l.includes(d.manifest.attribution)));
-  const headerAt = lines.findIndex((l) => l === MARKET_CSV_HEADERS.join(","));
-  assert.ok(headerAt > 0);
-  const rows = lines.slice(headerAt + 1).map(splitCsv);
+  // The header is the first line: no comment rows for a spreadsheet or loader to skip.
+  assert.equal(lines[0], MARKET_CSV_HEADERS.join(","));
+  const rows = lines.slice(1).map(splitCsv);
   assert.ok(rows.every((r) => r.length === MARKET_CSV_HEADERS.length));
   const expected = datasets.reduce((n, d) => n + d.series.reduce((k, s) => k + d.observations.observations[s.id].length, 0), 0);
   assert.equal(rows.length, expected);
@@ -280,6 +279,21 @@ test("CSV: every source attributed, every row present, estimates and frequency e
   assert.equal(nd[col("frequency")], "annual");
   assert.equal(nd[col("related_material_ids")], "praseodymium");
   assert.equal(nd[col("license")], "CC0 1.0");
+  assert.equal(nd[col("underlying_sources")], "Argus Media group, Argus Non-Ferrous Markets");
+  // Every row carries its own source's attribution, terms and statement of changes.
+  for (const d of datasets) {
+    const own = rows.filter((r) => r[col("dataset_id")] === d.manifest.datasetId);
+    assert.ok(own.length > 0);
+    assert.ok(own.every((r) => r[col("attribution")] === d.manifest.attribution));
+    assert.ok(own.every((r) => r[col("terms_url")] === d.manifest.license.termsUrl));
+    assert.ok(own.every((r) => r[col("changes_made")] === d.manifest.changesMade));
+    assert.ok(own.every((r) => r[col("third_party_note")] === d.manifest.thirdPartyNote));
+    assert.ok(own.every((r) => r[col("reuse_note")].length > 0));
+  }
+  const reo = rows.find((r) => r[0] === "imf-reo-carbonate")!;
+  assert.equal(reo[col("underlying_sources")], "Shanghai Metal Market");
+  assert.equal(reo[col("license_url")], "");
+  assert.match(reo[col("reuse_note")], /commercial reuse needs the IMF's permission/);
   assert.ok(rows.every((r) => r.every((c) => !c.startsWith("="))));
 });
 
@@ -362,4 +376,17 @@ test("shared links keep each series in its colour slot", async () => {
   assert.deepEqual(slotsFrom(param.split(","), known), slots);
   assert.equal(slotsParam(["a", "b", null, null, null, null]), "a,b");
   assert.equal(slotsParam(Array(6).fill(null)), "");
+});
+
+test("material pages link each covering series to the explorer at its own frequency", async () => {
+  const { benchmarkHref } = await import("@/components/markets/material-benchmarks");
+  const { getMarketSeriesForMaterial } = await import("@/lib/market-data");
+  const { getAllMaterials } = await import("@/lib/data");
+  assert.equal(benchmarkHref({ id: "usgs-ndpr-oxide", frequency: "annual" }), "/markets?freq=annual&series=usgs-ndpr-oxide");
+  assert.equal(benchmarkHref({ id: "wb-copper", frequency: "monthly" }), "/markets?series=wb-copper");
+  // NdPr oxide is priced jointly, so the praseodymium page lists it too.
+  assert.ok(getMarketSeriesForMaterial("praseodymium").some((s) => s.id === "usgs-ndpr-oxide"));
+  const slugs = new Set(getAllMaterials().map((m) => m.slug));
+  const ids = new Set(getAllMaterials().map((m) => m.id));
+  for (const d of getMarketDatasets()) for (const s of d.series) assert.ok(ids.has(s.materialId) && slugs.has(s.materialId), s.id);
 });

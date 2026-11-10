@@ -553,6 +553,21 @@ export function valueDigits(obs: readonly Observation[]): number {
 /** Every pinned release in data/markets/, in display order. The loader and `npm run validate` both read this list. */
 export const MARKET_DATASET_IDS = ["wb-pink-sheet", "imf-pcps", "usgs-mcs-2026"] as const;
 
+/**
+ * What each publisher's terms allow, and what they do not cover, as SMPT reads
+ * them. Kept beside the dataset list because the generated manifests are never
+ * hand-edited. A series with its own restriction would get its own entry here
+ * and be isolated, rather than holding back the rest of its release.
+ */
+export const MARKET_REUSE_NOTES: Record<(typeof MARKET_DATASET_IDS)[number], string> = {
+  "wb-pink-sheet":
+    "CC BY 4.0 allows reuse with attribution to the World Bank. It covers the World Bank's published figures, not the vendor data behind them.",
+  "imf-pcps":
+    "The IMF's terms allow reuse with attribution and an explicit statement of any material change; commercial reuse needs the IMF's permission (copyright@imf.org). The IMF notes that some statistical products incorporate third-party information under separate terms. SMPT has found no separate terms for the rare-earth carbonate series, which the IMF draws from Shanghai Metal Market, and holds no licence to SMM data.",
+  "usgs-mcs-2026":
+    "The CC0 dedication covers the USGS data release. It grants no rights in the price-reporting agencies' own data.",
+};
+
 export interface MarketDataInput {
   datasets: MarketDataset[];
   coverage: MarketCoverageFile;
