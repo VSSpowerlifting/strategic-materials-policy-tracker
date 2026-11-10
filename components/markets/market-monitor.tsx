@@ -556,7 +556,7 @@ export function MarketExplorer({
                 >
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute bottom-[calc(100%+6px)] left-0 z-20 w-max max-w-52 rounded border border-border-strong bg-elevated px-2.5 py-1.5 text-xs text-foreground opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+                    className="pointer-events-none absolute bottom-[calc(100%+6px)] left-0 z-20 w-max max-w-52 rounded border border-border-strong bg-elevated px-2.5 py-1.5 text-xs text-foreground opacity-0 shadow-sm motion-safe:transition-opacity motion-safe:duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
                   >
                     {g.name} · {availabilityText}
                   </span>
