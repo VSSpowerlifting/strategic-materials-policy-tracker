@@ -10,7 +10,7 @@
 - **Price types:** exchange benchmark, price assessment and trade unit value. Trade unit values are never labelled as prices; a test enforces this.
 - **Governance (decided 2026-11-09 by the maintainer):**
   1. Market prices are a permanent, separately maintained research-data layer. README, CLAUDE.md (hard rule 8) and `/methodology` now say so and keep it apart from the policy, financing and project records.
-  2. The publisher-released datasets are approved under their published terms. Each source's attribution, terms, statement of changes and reuse note (`MARKET_REUSE_NOTES` in `lib/markets.ts`: the IMF's commercial-reuse permission and third-party clause, CC0 scope for USGS, vendor data for the World Bank) shows on `/markets` and in every CSV row. No series-specific restriction was found, so none is isolated.
+  2. The publisher-released datasets are approved under their published terms. Each source's attribution, terms, statement of changes and reuse note (`MARKET_REUSE_NOTES` in `lib/markets.ts`: the IMF's request-permission clause for commercial reuse and its third-party clause, checked against the PCPS dataset metadata, which cites only IMF copyright terms; CC0 scope for USGS, vendor data for the World Bank) shows on `/markets` and in every CSV row. No series-specific restriction was found, so none is isolated.
   3. Navigation option B: `/markets` in the footer and a "Price benchmarks" block on each material page with a covering series, linking to the explorer at that series' frequency. Primary navigation unchanged.
 - **QA:**
   - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1195/1195) and build all pass after the governance changes.
@@ -34,7 +34,7 @@
   - `lib/market-data.ts` loads the data; `lib/markets-csv.ts` builds the CSV for the static `/api/export/markets.csv` export, which carries the CC BY 4.0 attribution.
   - `components/markets/` holds the native-SVG chart, sparklines, heatmap and monitor shell.
   - URL params: `range`, `view` and `series`.
-- **Governance (blocking reviewer decision):** README and CLAUDE.md both say "no market prices". The page is labelled "Market context" and kept outside the policy record. Whether that exception is accepted, and how the rule should be reworded, is for the maintainer to decide before merge.
+- **Governance (blocking reviewer decision; resolved 2026-11-09, see the entry above):** README and CLAUDE.md both said "no market prices". The page is labelled "Market context" and kept outside the policy record. Whether that exception is accepted, and how the rule should be reworded, is for the maintainer to decide before merge.
 - **QA:**
   - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1176/1176, 33 new) and build all pass.
   - Visual QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow. Screenshots are in `docs/analysis/markets-monitor/`.

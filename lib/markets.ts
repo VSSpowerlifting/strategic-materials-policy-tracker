@@ -563,7 +563,7 @@ export const MARKET_REUSE_NOTES: Record<(typeof MARKET_DATASET_IDS)[number], str
   "wb-pink-sheet":
     "CC BY 4.0 allows reuse with attribution to the World Bank. It covers the World Bank's published figures, not the vendor data behind them.",
   "imf-pcps":
-    "The IMF's terms allow reuse with attribution and an explicit statement of any material change; commercial reuse needs the IMF's permission (copyright@imf.org). The IMF notes that some statistical products incorporate third-party information under separate terms. SMPT has found no separate terms for the rare-earth carbonate series, which the IMF draws from Shanghai Metal Market, and holds no licence to SMM data.",
+    "The IMF's terms allow reuse with attribution and an explicit statement of any material change, and ask anyone considering commercial reuse to request permission (copyright@imf.org). They also say some statistical products include third-party information under separate terms. The PCPS dataset metadata cites only the IMF's own copyright terms, including for the rare-earth carbonate series the IMF draws from Shanghai Metal Market; SMPT holds no licence to SMM data.",
   "usgs-mcs-2026":
     "The CC0 dedication covers the USGS data release. It grants no rights in the price-reporting agencies' own data.",
 };

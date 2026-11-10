@@ -293,7 +293,7 @@ test("CSV: every source attributed, every row present, estimates and frequency e
   const reo = rows.find((r) => r[0] === "imf-reo-carbonate")!;
   assert.equal(reo[col("underlying_sources")], "Shanghai Metal Market");
   assert.equal(reo[col("license_url")], "");
-  assert.match(reo[col("reuse_note")], /commercial reuse needs the IMF's permission/);
+  assert.match(reo[col("reuse_note")], /considering commercial reuse to request permission/);
   assert.ok(rows.every((r) => r.every((c) => !c.startsWith("="))));
 });
 

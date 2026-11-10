@@ -21,12 +21,11 @@ export function MaterialBenchmarks({ materialId }: { materialId: string }) {
         Price benchmarks
       </h2>
       <p className="mt-3 max-w-prose text-sm leading-6 text-muted">
-        Published series in SMPT’s separate{" "}
+        Price series that cover this material, as their publishers release them, from SMPT’s separate{" "}
         <Link href="/markets" className="text-accent underline-offset-2 hover:underline">
           market-data layer
         </Link>
-        , shown as each publisher releases them. They are not linked to the records above, and a shared date does
-        not show that a measure moved a price.
+        . They are not linked to the records above, and a shared date does not show that a measure moved a price.
       </p>
       <ul className="mt-5 grid gap-3 md:grid-cols-2">
         {series.map((s) => {
