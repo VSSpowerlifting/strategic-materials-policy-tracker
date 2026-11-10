@@ -32,7 +32,8 @@ test("route policy covers research, materials, detailed evidence and other route
 test("published research and material index cards are annotated in rendered HTML", () => {
   const research = renderToStaticMarkup(createElement(ResearchIndex));
   const materials = renderToStaticMarkup(createElement(MaterialsPage));
-  assert.equal((research.match(/data-site-motion="card"/g) ?? []).length, 5);
+  assert.equal((research.match(/<article class="grid /g) ?? []).length, 5);
+  assert.match(siteMotionSelector(siteMotionScope("/research")), /article/, "research cards are targeted without editing publication markup");
   assert.ok((materials.match(/data-site-motion="card"/g) ?? []).length >= 10);
   assert.match(research, /href="\/research\/escondida-copper"/);
   assert.match(materials, /href="\/materials\/tungsten"/);
