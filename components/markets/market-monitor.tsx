@@ -489,7 +489,7 @@ export function MarketExplorer({
           {selected.length < tabSeries.length ? (
             <button
               type="button"
-              onClick={() => setSlots((cur) => ({ ...cur, [tab]: slotsFrom(tabSeries.map((s) => s.id), idsByFreq[tab]) }))}
+              onClick={() => setSlots((cur) => ({ ...cur, [tab]: tabSeries.reduce((acc, s) => acc.includes(s.id) ? acc : toggleSlot(acc, s.id), cur[tab]) }))}
               className="font-display text-sm text-accent underline-offset-2 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-accent"
             >
               Select all
