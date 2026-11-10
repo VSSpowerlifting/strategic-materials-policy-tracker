@@ -422,3 +422,26 @@ html { scroll-padding-top: 7rem; }
   }
   .chain-stage-dot { animation: none !important; }
 }
+
+
+/* Shared editorial motion on routes beyond the hand-composed homepage.
+   Nodes only acquire these attributes after client-side observation starts.
+   No JS or reduced motion: every section remains fully visible. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-site-motion-ready="true"] {
+    transition: opacity 320ms ease, transform 320ms cubic-bezier(.22,.61,.36,1);
+    transition-delay: var(--site-motion-delay, 0ms);
+  }
+  [data-site-motion-ready="true"]:not([data-site-motion-entered="true"]) {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media print {
+  [data-site-motion-ready="true"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
