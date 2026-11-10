@@ -20,7 +20,7 @@ slide (tests/exhibit-research.test.ts). Removing it is a human-gated release
 step, and this script only prepares the candidate for that review.
 
 Run from the repository root with a Python that has PyMuPDF, Pillow and fontTools:
-    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py [--candidate rc1|rc2|rc3|rc4]
+    python3 docs/research/fi002-bhp-copper/release/make_release_candidate.py [--candidate rc1|rc2|rc3|rc4|rc5]
 """
 from __future__ import annotations
 
@@ -68,6 +68,13 @@ CANDIDATES = {
             "pdf_sha": "2e449d0c86262d7036b4b516846d041cb3674a215d7e5e7cb4441936c6623109",
             "out": "release-candidate-4", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC4",
             "sheet": "SMPT_FI002_RC4_contact_sheet.png", "links": True, "styled_links": True},
+    # RC5: RC4's pipeline applied to revision 6c, whose only change from revision 5 is the cover
+    # (NASA photograph ISS022-E-8282, no visible caption). Slides 2-11 are untouched.
+    "rc5": {"source": "revision-6-cover-options", "source_stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_rev6c",
+            "pptx_sha": "f73b92e694a3dab14a2ed1e767b06a2c9bdfbc29552250439df6d95ca87be71e",
+            "pdf_sha": "a7178e53a89c05112fe4e86c3f41fd5eeea519f9ac672554740c36d6343b4ff0",
+            "out": "release-candidate-5", "stem": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC5",
+            "sheet": "SMPT_FI002_RC5_contact_sheet.png", "links": True, "styled_links": True},
 }
 LINK_COLOUR = "7A5510"  # "Accessible paper accent" in docs/design/presentations/SMPT_PRESENTATION_STANDARD_V2.md
 

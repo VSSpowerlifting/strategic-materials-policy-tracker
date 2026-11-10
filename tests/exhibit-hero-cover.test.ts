@@ -56,7 +56,10 @@ test("cover_hero_split parser pins the image and checks title, callout and exclu
     assert.throws(() => parseResearchDeck(badRef, "test", dir), /unresolved evidence/);
     const noCaption = clone();
     delete noCaption.cover.hero.caption;
-    assert.throws(() => parseResearchDeck(noCaption, "test", dir), /caption/);
+    assert.equal(parseResearchDeck(noCaption, "test", dir).cover?.hero.caption, undefined);
+    const blankCaption = clone();
+    blankCaption.cover.hero.caption = 5;
+    assert.throws(() => parseResearchDeck(blankCaption, "test", dir), /caption/);
     const badType = clone();
     badType.cover.hero.image = "hero.gif";
     assert.throws(() => parseResearchDeck(badType, "test", dir), /png or \.jpg/);
@@ -105,5 +108,23 @@ test("hero cover renders one declared raster, splits notes into paragraphs and p
     const undeclared = run();
     assert.equal(undeclared.status, 1);
     assert.match(undeclared.stdout, /not a declared cover hero image/);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("hero cover without a caption renders no caption shape and still passes the verifier", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "smpt-hero-nocap-"));
+  try {
+    const s = spec(dir);
+    delete (s as { cover: { hero: { caption?: string } } }).cover.hero.caption;
+    const input = join(dir, "spec.json");
+    writeFileSync(input, JSON.stringify(s));
+    const out = join(dir, "hero.pptx");
+    const manifestFile = await renderResearchDeck(input, out);
+    const zip = await JSZip.loadAsync(readFileSync(out));
+    const cover = await zip.file("ppt/slides/slide1.xml")!.async("string");
+    assert.doesNotMatch(cover, /cover-hero-caption/);
+    assert.doesNotMatch(cover, /Conceptual artwork/);
+    const ok = spawnSync("python3", ["-B", "scripts/exhibit-system/verify_editability.py", "--deck", out, "--manifest", manifestFile], { encoding: "utf8" });
+    assert.equal(ok.status, 0, ok.stdout + ok.stderr);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

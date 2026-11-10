@@ -72,7 +72,7 @@ export interface HeroCover {
     data: string;
     alt: string;
     /** Visible label on the image, e.g. that it is conceptual artwork. */
-    caption: string;
+    caption?: string;
     credit: string;
     sha256: string;
   };
@@ -138,9 +138,11 @@ function heroCoverSlide(pptx: Pptx, title: string, cover: HeroCover, records: El
     x: imageX, y: 0, w: imageW, h: SLIDE_H,
     fill: { color: C.dark, transparency: HERO_SPLIT.overlayTransparency }, line: { color: C.dark, width: 0, transparency: 100 },
   });
-  h.text("cover-hero-caption", "frame", cover.hero.caption, {
-    x: imageX + 0.35, y: 6.95, w: imageW - 0.7, h: 0.3, fontSize: TYPE.footnote, color: "B5AE9F", align: "right", valign: "bottom",
-  });
+  if (cover.hero.caption) {
+    h.text("cover-hero-caption", "frame", cover.hero.caption, {
+      x: imageX + 0.35, y: 6.95, w: imageW - 0.7, h: 0.3, fontSize: TYPE.footnote, color: "B5AE9F", align: "right", valign: "bottom",
+    });
+  }
   const breakRuns = (lines: string[]) => lines.map((s, i) => ({ text: s, options: { breakLine: i < lines.length - 1 } }));
   h.text("cover-title", "frame", breakRuns(cover.titleLines), {
     x, y: 0.75, w, h: 2.6, fontSize: 40, bold: true, color: C.paper, valign: "top", lineSpacingMultiple: 0.95,

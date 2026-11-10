@@ -175,13 +175,15 @@ A research spec may replace `cover_lines` with a `cover` block (giving both is a
   "thesis_source": "Where the wording comes from (goes to speaker notes)",
   "callout": { "value": "$2.83bn", "label": "What the figure is\nWhat it is not", "basis": "Model cell", "evidence_refs": ["S01"] },
   "footer": "Strategic Materials Policy Tracker · Research cutoff: …",
-  "hero": { "image": "assets/x.png", "sha256": "…", "alt": "…", "caption": "…", "credit": "…" }
+  "hero": { "image": "assets/x.jpg", "sha256": "…", "alt": "…", "credit": "…", "caption": "…" }   // caption is optional
 }
 ```
 
-Rules the parser enforces: the image is a PNG or JPEG beside the spec, outside this directory, and must match its pinned SHA-256; the callout's evidence references must resolve; alt text, a visible caption and a credit are required. The caption is on the slide itself: a photograph shows its credit and generated artwork says it is conceptual. Speaker notes hold the thesis source, the callout's basis and evidence, and the image credit and hash, one paragraph each.
+Rules the parser enforces: the image is a PNG or JPEG beside the spec, outside this directory, and must match its pinned SHA-256; the callout's evidence references must resolve; alt text and a credit are required. The `caption` is **optional**. When given it is drawn on the slide; when omitted the cover carries no image caption, and the credit, date caveats and subject description live in the alt text, speaker notes, the asset's provenance file and the PDF's accessibility metadata. Speaker notes hold the thesis source, the callout's basis and evidence, and the image credit and hash, one paragraph each.
 
-Prefer, in order, a licensed photograph of the subject with its licence recorded, then original abstract artwork made by a reproducible script (`scripts/exhibit-system/cover_art.py` writes a provenance file beside its PNG), then a plain texture. Generated artwork must never look like a map or a picture of a real site, and must be labelled as conceptual. Title sizes follow the presentation standard (36–46 pt); break `title_lines` by hand so no line runs into the image.
+`cover_hero_split` stays optional. For a flagship deck, prefer a relevant, rights-cleared photograph of the actual subject, with its origin, acquisition date, what it does and does not show, licence and requested credit recorded in a provenance file beside the asset. Do not force a visible caption or disclaimer onto the cover: attribution belongs in the notes, alt text and source documents unless the licence requires it on the slide. Never state a photo date, location or subject the provenance does not support, and never imply that the owner of the subject or the photo's publisher endorses the deck.
+
+If no suitable photograph exists, fall back to original abstract artwork made by a reproducible script (`scripts/exhibit-system/cover_art.py` writes a provenance file beside its PNG), then a plain texture. Generated artwork must never look like a map or a picture of a real site, and must say it is conceptual (use a caption for that). Title sizes follow the presentation standard (36–46 pt); break `title_lines` by hand so no line runs into the image. Check text contrast against the rendered cover, not the source image.
 
 ## Diversity and scope
 

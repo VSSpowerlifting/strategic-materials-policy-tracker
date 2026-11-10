@@ -1,0 +1,134 @@
+{
+  "deck": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC5.pptx",
+  "derived_from": {
+    "path": "docs/research/fi002-bhp-copper/output/review/revision-6-cover-options/SMPT_FI002_BHP_Copper_Strategy_Deck_rev6c.pptx",
+    "sha256": "f73b92e694a3dab14a2ed1e767b06a2c9bdfbc29552250439df6d95ca87be71e",
+    "pdf": "docs/research/fi002-bhp-copper/output/review/revision-6-cover-options/SMPT_FI002_BHP_Copper_Strategy_Deck_rev6c.pdf",
+    "pdf_sha256": "a7178e53a89c05112fe4e86c3f41fd5eeea519f9ac672554740c36d6343b4ff0"
+  },
+  "pptx_sha256": "1432779dd3ba720df452098c5244ef840479f89c87a74ae790cad4c6d418cf83",
+  "pdf": "SMPT_FI002_BHP_Copper_Strategy_Deck_RC5.pdf",
+  "pages": 11,
+  "embedded_fonts": [
+    "BAAAAA+Archivo-Bold",
+    "CAAAAA+Archivo-Regular",
+    "DAAAAA+Archivo-Regular",
+    "EAAAAA+Archivo-Bold",
+    "FAAAAA+Archivo-Regular",
+    "GAAAAA+Archivo-Regular",
+    "HAAAAA+Archivo-Bold",
+    "IAAAAA+Archivo-Bold",
+    "JAAAAA+Archivo-Regular",
+    "KAAAAA+Archivo-Regular",
+    "LAAAAA+Archivo-Regular",
+    "MAAAAA+Archivo-Bold",
+    "NAAAAA+Archivo-Regular"
+  ],
+  "links": 29,
+  "text_check": "each page equals SMPT_FI002_BHP_Copper_Strategy_Deck_rev6c.pdf minus the badge (whitespace ignored)",
+  "tagged": true,
+  "title": "Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
+  "pdf_sha256": "52b8006767536bc98708cd67be1a04dbf44e6a23692efe3af4cef8957db8f218",
+  "contact_sheet": "SMPT_FI002_RC5_contact_sheet.png",
+  "contact_sheet_sha256": "d21c9e626e08a0f162d829a862a2b2b279e39dee354cbce891b26f75275f5a86",
+  "renders": [
+    "slide-01.png",
+    "slide-02.png",
+    "slide-03.png",
+    "slide-04.png",
+    "slide-05.png",
+    "slide-06.png",
+    "slide-07.png",
+    "slide-08.png",
+    "slide-09.png",
+    "slide-10.png",
+    "slide-11.png"
+  ],
+  "pptx_links": [
+    {
+      "slide": 2,
+      "links": 5,
+      "relationships": 5
+    },
+    {
+      "slide": 3,
+      "links": 4,
+      "relationships": 4
+    },
+    {
+      "slide": 4,
+      "links": 3,
+      "relationships": 3
+    },
+    {
+      "slide": 5,
+      "links": 3,
+      "relationships": 3
+    },
+    {
+      "slide": 6,
+      "links": 2,
+      "relationships": 2
+    },
+    {
+      "slide": 7,
+      "links": 3,
+      "relationships": 3
+    },
+    {
+      "slide": 8,
+      "links": 2,
+      "relationships": 2
+    },
+    {
+      "slide": 9,
+      "links": 2,
+      "relationships": 2
+    },
+    {
+      "slide": 10,
+      "links": 2,
+      "relationships": 2
+    },
+    {
+      "slide": 11,
+      "links": 3,
+      "relationships": 3
+    }
+  ],
+  "pdf_link_structure": {
+    "link_annotations": 29,
+    "link_structure_elements": 29,
+    "annotations_in_parent_tree": 29,
+    "annotations_with_contents": 29
+  },
+  "source_links_note": "Hyperlinks written into the slide 2 to 11 source footers of the PPTX (underlined, #7A5510), carried into the PDF by LibreOffice as 29 URI annotations, each tagged as a Link structure element with an object reference, present in the ParentTree and described by /Contents.",
+  "changes": {
+    "shapes_removed": {
+      "ppt/slides/slide1.xml": "frame:cover-notice",
+      "ppt/slides/slide10.xml": "frame:draft-badge",
+      "ppt/slides/slide11.xml": "frame:draft-badge",
+      "ppt/slides/slide2.xml": "frame:draft-badge",
+      "ppt/slides/slide3.xml": "frame:draft-badge",
+      "ppt/slides/slide4.xml": "frame:draft-badge",
+      "ppt/slides/slide5.xml": "frame:draft-badge",
+      "ppt/slides/slide6.xml": "frame:draft-badge",
+      "ppt/slides/slide7.xml": "frame:draft-badge",
+      "ppt/slides/slide8.xml": "frame:draft-badge",
+      "ppt/slides/slide9.xml": "frame:draft-badge"
+    },
+    "note_labels_removed": 53,
+    "font_replacements": {
+      "ppt/slideMasters/slideMaster1.xml": 9,
+      "ppt/theme/theme1.xml": 5
+    }
+  },
+  "unchanged": "all other package parts and XML bytes are identical to SMPT_FI002_BHP_Copper_Strategy_Deck_rev6c.pptx (verified), apart from the slide footers, their relationship files and the theme hyperlink colours",
+  "research_cutoff": "2026-11-05",
+  "review_gates": "agent QC recorded; human approval pending",
+  "publication_authorization": "pending human approval",
+  "tools": {
+    "libreoffice": "LibreOffice 26.8.2.2 9dea406ab7695df6325b11b0e19fdca8db4b7276",
+    "pymupdf": "1.26.5"
+  }
+}

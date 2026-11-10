@@ -7,6 +7,13 @@
 - Slides 2–11 are pixel-identical to revision 5. The side-by-side comparison and QC record are in the folder.
 - The default is unchanged. The editorial choice is pending.
 
+## 2026-11-09: FI002 deck release candidate 5, authentic NASA Escondida cover (Issue #252)
+
+- `docs/research/fi002-bhp-copper/output/review/release-candidate-5/` holds the RC5 PPTX, PDF, contact sheet, renders, manifest and QC record. RC5 is RC4 with a new cover only: the NASA ISS022-E-8282 photograph of the Escondida tailings impoundment (9 Dec 2009), no generated artwork and no cover caption. Slides 2–11 render pixel-identically to RC4; all 29 source links, figures, Archivo fonts and the five native charts are preserved.
+- `cover_hero_split`'s hero `caption` is now optional; README guidance updated (rights-cleared factual photographs preferred for flagship decks; attribution in notes, alt text and provenance).
+- RC5 files: PPTX `1432779d…cf83`, PDF `52b80067…f218`. Published to `public/research/fi002/executive-slides.{pdf,pptx}`; `publication-manifest.json` and `tests/fi002-publication.test.ts` point to RC5. RC4 and earlier archives are unchanged.
+- Limitation: PowerPoint was not available; the PPTX was verified structurally and via LibreOffice only.
+
 ## 2026-11-09: `cover_hero_split` cover pattern and FI002 revision 6 cover candidate (draft PR, not merged)
 
 - RC4 is merged (PR #233) and published (PR #242); the entries below that say "draft PR #233" describe it as it was then.

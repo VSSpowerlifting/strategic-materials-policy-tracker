@@ -71,15 +71,15 @@ test("approved model, brief, evidence and four calculation datasets are byte-ide
     );
 });
 
-test("published executive slides are byte-identical to author-approved RC4", () => {
-  const accepted = "docs/research/fi002-bhp-copper/output/review/release-candidate-4/";
+test("published executive slides are byte-identical to author-approved RC5", () => {
+  const accepted = "docs/research/fi002-bhp-copper/output/review/release-candidate-5/";
   assert.equal(
     sha(root + "executive-slides.pdf"),
-    sha(accepted + "SMPT_FI002_BHP_Copper_Strategy_Deck_RC4.pdf"),
+    sha(accepted + "SMPT_FI002_BHP_Copper_Strategy_Deck_RC5.pdf"),
   );
   assert.equal(
     sha(root + "executive-slides.pptx"),
-    sha(accepted + "SMPT_FI002_BHP_Copper_Strategy_Deck_RC4.pptx"),
+    sha(accepted + "SMPT_FI002_BHP_Copper_Strategy_Deck_RC5.pptx"),
   );
 });
 
