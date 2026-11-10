@@ -11,8 +11,9 @@ notes below still apply in full; this section governs how the AI tooling may be 
 
 The Strategic Materials Policy Tracker is a source-linked English database tracking
 government policy instruments affecting rare earths and adjacent strategic materials.
-It is **not** a commodity-price model, an investment-recommendation service, a general
-news aggregator, or a home for unsupported geopolitical speculation.
+It is **not** a commodity-price model or forecaster, an investment-recommendation service,
+a general news aggregator, or a home for unsupported geopolitical speculation. Published
+price series form a separately maintained research-data layer (`/markets`; hard rule 8).
 
 For **any public-facing writing or editorial revision**, including ordinary research articles and policy analyses, read [SMPT Research Publication House Style](docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) **before drafting** and apply its final natural-language review checklist. This is the canonical writing guide and is separate from the Applied Strategy, Financial Intelligence and presentation standards. It applies even when the task is framed as a small website copy edit. Do not mistake automated review or a passing build for an editor's approval.
 
@@ -65,8 +66,9 @@ classifications, or final analytical claims. For any of those, retrieve and read
 
 A source-linked database of how China, the US, the EU and allied states contest
 rare earths and strategic materials through **policy instruments and official
-framing**. Not a market model — no market prices, reserve or tonnage estimates,
-supply-risk numbers or projections. The one exception is a term of a policy
+framing**. Not a market model — the policy record holds no market prices, reserve or
+tonnage estimates, supply-risk numbers or projections. Published price series live only in
+the separate market-data layer (hard rule 8). The one exception in the record is a term of a policy
 instrument that a government states or a binding filing sets out (a price floor
 in an agreement, a tax-offset rate, a capacity covenant), recorded only when
 precisely sourced. Read `README.md` and `/methodology` for the full framing.
@@ -134,6 +136,27 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
    along `drawn_from` links, project material coverage and designation
    schemes, and warns on registry records nothing links to.
 
+8. **Market-data layer (`/markets`).** An approved, permanent research-data layer,
+   maintained separately from the policy, financing and project records. Series live in
+   `data/markets/<release>/` and never in `data/seed/`. Each release is rebuilt only by its
+   own ingest script (`npm run ingest:markets`, `ingest:markets:imf`, `ingest:markets:usgs`)
+   from a pinned source file with a verified SHA-256, and `npm run validate` checks every
+   file. Store values exactly as published: never convert currencies or units, never
+   combine series, never fill a gap, and keep the source's estimate flags and stated
+   source breaks. Keep exchange benchmarks, price assessments and trade unit values
+   apart, and never call a unit value a price. Never link a series to an event, a
+   commitment, a capital total or search, and never imply that a shared date means a
+   measure moved a price. Each release keeps its publisher's terms in its manifest: World
+   Bank CC BY 4.0 attribution, the IMF's statistical-data conditions (attribution and a
+   statement of changes) and USGS CC0 provenance. Where a series derives from a
+   commercial source (World Bank series built on Bloomberg, Platts or Datastream data,
+   the IMF's SMM rare-earth carbonate series, or USGS prices attributed to
+   price-reporting agencies), carry only the publisher's released figures,
+   name the underlying source in the series record, and never imply SMPT licenses the
+   vendor feed. A new source, or a series with its own restriction, needs a reviewed
+   licence entry (`MARKET_REUSE_NOTES` in `lib/markets.ts`); isolate an affected series
+   rather than blocking unrelated coverage.
+
 ## Architecture
 
 - `lib/types.ts` — entities + the categorical label sets as `as const` arrays.
@@ -160,6 +183,9 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
   A row that ended, or is not itself counted, never hides a part that still
   stands; an option is an option and never backing, and an ended row backs
   nothing.
+- `lib/markets.ts` — market-data types, period arithmetic, changes, indexing and the
+  market validator (`validateMarketData`); `lib/market-data.ts` loads the releases
+  listed in `MARKET_DATASET_IDS`; `lib/markets-csv.ts` builds `/api/export/markets.csv`.
 - `components/` — UI primitives (`ui/`) and domain components. `FramingQuote` is
   the signature element; `EventsExplorer` / `TimelineView` are the client filters;
   `components/capital/` holds the Capital & Control rows, explorers and SVG charts;

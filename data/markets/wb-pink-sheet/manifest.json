@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "datasetId": "wb-pink-sheet",
+  "releaseId": "wb-pink-sheet-monthly-2026-11",
+  "title": "World Bank Commodity Price Data (The Pink Sheet), monthly prices",
+  "shortName": "World Bank Pink Sheet",
+  "publisher": "World Bank",
+  "frequency": "monthly",
+  "sourceFile": {
+    "url": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx",
+    "fileName": "CMO-Historical-Data-Monthly.xlsx",
+    "sha256": "3c8d9d8dbb48342fdbf24777c39a8ce8964cc2fd0958f72f6779e6e4ad99cde2",
+    "bytes": 587760,
+    "format": "Excel workbook (xlsx)",
+    "details": {
+      "sheet": "Monthly Prices",
+      "sheetSubtitle": "monthly prices in nominal US dollars, 1960 to present",
+      "updatedText": "Updated on November 03, 2026",
+      "pinkSheetPdfUrl": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Pink-Sheet-November-2026.pdf"
+    }
+  },
+  "landingPageUrl": "https://www.worldbank.org/en/research/commodity-markets",
+  "catalogUrl": "https://datacatalog.worldbank.org/search/dataset/0038238/commodity-prices-history-and-projections",
+  "doi": null,
+  "releaseDate": "2026-11-03",
+  "retrievedOn": "2026-11-09",
+  "windowStart": "2005-01",
+  "observationCutoff": "2026-10",
+  "nextScheduledRelease": {
+    "date": "2026-12-02",
+    "statedAs": "Next update: December 2, 2026.",
+    "sourceUrl": "https://www.worldbank.org/en/research/commodity-markets"
+  },
+  "updateFrequency": {
+    "statedAs": "Commodity prices are updated in the second business day of the month.",
+    "sourceUrl": "https://datacatalog.worldbank.org/search/dataset/0038238/commodity-prices-history-and-projections"
+  },
+  "aggregationBasis": {
+    "statedAs": "Monthly Averages",
+    "note": "Column heading used for monthly figures in the November 2026 Pink Sheet.",
+    "sourceUrl": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Pink-Sheet-November-2026.pdf"
+  },
+  "license": {
+    "kind": "cc-by-4.0",
+    "name": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "statedAt": "https://datacatalog.worldbank.org/search/dataset/0038238/commodity-prices-history-and-projections",
+    "termsUrl": "https://datacatalog.worldbank.org/public-licenses",
+    "statedText": "This dataset is licensed under Creative Commons Attribution 4.0"
+  },
+  "attribution": "Source: World Bank, Commodity Price Data (The Pink Sheet), monthly prices, updated November 3, 2026. Licensed under CC BY 4.0.",
+  "changesMade": "SMPT extracted the aluminum, copper and nickel columns of the Monthly Prices sheet for January 2005 to October 2026, converted period labels from YYYYMmm to YYYY-MM and removed binary rounding noise from the stored numbers. Published values are otherwise unchanged. Percentage changes, indexed values and rankings shown with them are SMPT calculations.",
+  "thirdPartyNote": "The World Bank lists Bloomberg, Platts Metals Week, Thomson Reuters Datastream and others as sources for these series. SMPT republishes only the World Bank's monthly figures, not the underlying daily exchange or vendor data.",
+  "seriesIds": [
+    "wb-aluminum",
+    "wb-copper",
+    "wb-nickel"
+  ]
+}

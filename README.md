@@ -4,7 +4,7 @@
 
 **Live site → https://strategic-materials-policy-tracker.vercel.app**
 
-This is an economic-security **policy** product, not a commodity-price tracker, a mining-economics model, or a generic dashboard. Every record resolves to at least one source in the register — primary official text wherever it is available, with anything less marked as such; every framing label is anchored to a quoted passage in the original language; nothing is scored on an invented 0–100 scale.
+This is an economic-security **policy** product, not a price forecaster, a mining-economics model, or a generic dashboard. Every record resolves to at least one source in the register — primary official text wherever it is available, with anything less marked as such; every framing label is anchored to a quoted passage in the original language; nothing is scored on an invented 0–100 scale.
 
 <!-- TODO (maintainer): add a /framing page screenshot here once a current, deploy-matching capture is available.
      An existing capture lives under .claude/skills/strategic-materials-live-design/screens/pages/framing.png,
@@ -55,9 +55,29 @@ A short guided tour of the live site:
 
 It tracks **policy instruments, financial commitments, official framing and reported industrial activity**: the export controls, licensing regimes, critical-mineral designations, investment rules, supply-chain-security laws, funding, stockpiling and offtake measures governments use around rare earths and adjacent strategic materials — structured, attributed and citable.
 
-It does **not** model the global minerals market. It does not track or forecast market prices, estimate reserves or tonnages, publish supply-risk numbers, or make projections its sources do not state. Where market-share figures appear (for example, that China processes roughly 90% of rare earths), they are cited context drawn from bodies such as the IEA and USGS — not original estimates. The one kind of figure it does record is a term of a policy instrument that a government states or a binding filing sets out — a price floor in an agreement, a tax-offset rate, a capacity covenant — and only when it is precisely sourced. That boundary is the credibility shield, and it is stated plainly on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology).
+It does **not** model the global minerals market. The policy record holds no market prices, and the project does not forecast prices, estimate reserves or tonnages, publish supply-risk numbers, or make projections its sources do not state. Where market-share figures appear (for example, that China processes roughly 90% of rare earths), they are cited context drawn from bodies such as the IEA and USGS — not original estimates. The one kind of figure it does record is a term of a policy instrument that a government states or a binding filing sets out — a price floor in an agreement, a tax-offset rate, a capacity covenant — and only when it is precisely sourced. That boundary is the credibility shield, and it is stated plainly on the [methodology page](https://strategic-materials-policy-tracker.vercel.app/methodology).
 
 The distinctive capability is connecting government measures and their stated rationales to financial instruments, projects and source-reviewed industrial observations. Announcements, binding commitments, payments and reported physical developments are different kinds of evidence; a shared date, material or project does not establish causation. Coverage is selective and uneven across jurisdictions, not a comprehensive measure of government activity.
+
+## Market data layer
+
+[`/markets`](https://strategic-materials-policy-tracker.vercel.app/markets) is a separately maintained research-data layer. It republishes price series exactly as three public releases state them:
+
+| Release | Coverage | Terms |
+| --- | --- | --- |
+| World Bank Pink Sheet | Monthly averages for aluminium, copper and nickel | CC BY 4.0, with attribution |
+| IMF Primary Commodity Prices | Monthly averages for cobalt, palladium and rare-earth carbonate | IMF copyright and usage terms for statistical data: attribution and a statement of changes |
+| USGS Mineral Commodity Summaries 2026 data release | Annual prices and import unit values, 2021–2025, for rare-earth oxides, lithium, gallium, germanium, tungsten, graphite and others | CC0 1.0, with provenance kept |
+
+Several series are averages or republications of commercial price data: the World Bank lists Bloomberg, Platts Metals Week and Thomson Reuters Datastream among its sources, the IMF's rare-earth carbonate series is based on a Shanghai Metal Market assessment, and the USGS cites price-reporting agencies for many of its annual prices. SMPT carries only the figures these publishers release, under the publishers' terms. It has no licence to the underlying vendor data, and each series records the source its publisher names. The IMF asks anyone considering commercial reuse of its data to request permission, and notes that some of its statistical products carry separate third-party terms; the PCPS dataset metadata cites only the IMF's own copyright terms. The CSV export repeats each source's attribution, terms, statement of changes and reuse note on every row.
+
+The layer stays apart from the policy, financing and project records:
+
+- Its files live in `data/markets/<release>/`, never in `data/seed/`.
+- Each release is rebuilt only by its own ingest script from a pinned source file whose SHA-256 is checked.
+- No series is linked to an event, a financial commitment, a capital total or site search, and a shared date does not show that a measure moved a price.
+- Exchange benchmarks, price assessments and trade unit values are labelled as different kinds of figure, and a unit value is never called a price.
+- Values are stored as published, in their own currency and unit, and are never converted or combined.
 
 ## The comparative framing matrix
 
@@ -146,13 +166,15 @@ lib/                 types, data loaders, labels, formatting, export, site confi
 data/seed/           events / framing / materials / jurisdictions / sources / watchlist JSON
                      financial-commitments / control-measures JSON (v0.5)
                      organizations / projects / programmes / project-designations JSON (v0.6)
+data/markets/        pinned market-data releases (World Bank, IMF, USGS) and coverage gaps, kept apart from data/seed/
 data/candidates/     private, git-ignored candidate-review workspace (see its own README)
-scripts/             validate-data.ts, validate-capital-control.ts, candidate-files.ts
+scripts/             validate-data.ts, validate-capital-control.ts, candidate-files.ts,
+                     ingest-markets*.ts (one deterministic ingest per market release)
 ```
 
 ## Data & validation
 
-All data lives in `data/seed/*.json`. The validator (`npm run validate`) checks that every event resolves to at least one source; that every framing claim carries a non-empty `quoteOriginal`, `quoteEn` and a resolving source; that no material, jurisdiction or superseded-event reference dangles; that identifiers are unique; that every label falls within the allowed sets; and that translation provenance is set on every translated field. It exits non-zero on any error, so it can gate CI.
+Policy, financing and project data live in `data/seed/*.json`; the market-data layer lives in `data/markets/`, and `npm run validate` checks both. The validator (`npm run validate`) checks that every event resolves to at least one source; that every framing claim carries a non-empty `quoteOriginal`, `quoteEn` and a resolving source; that no material, jurisdiction or superseded-event reference dangles; that identifiers are unique; that every label falls within the allowed sets; and that translation provenance is set on every translated field. It exits non-zero on any error, so it can gate CI.
 
 To add a record, edit the relevant seed file and re-run `npm run validate`. Unknown fields should be `null` or `"Not yet coded"`.
 

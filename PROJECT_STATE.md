@@ -1,3 +1,46 @@
+## 2026-11-09: Critical Minerals Market Monitor, multi-source explorer (draft PR #232, update)
+
+- Same draft PR, fast-forwarded from `5a97a2e` with the work from worktree branch `claude/critical-minerals-market-monitor-b3ff97`. `/markets` is now a multi-source explorer; public navigation is still unchanged.
+- **Data:** 31 series from three pinned releases in `data/markets/<dataset>/`, each regenerated only by its own ingest script, with its source file's checksum verified:
+  - World Bank Pink Sheet (monthly, CC BY 4.0, through October 2026): aluminium, copper, nickel.
+  - IMF Primary Commodity Prices (monthly, IMF terms, through September 2026): cobalt, palladium, rare-earth carbonate (from June 2012).
+  - USGS Mineral Commodity Summaries 2026 data release (annual 2021–2025, CC0, doi:10.5066/P1WKQ63T): 25 series across 18 materials, including NdPr, Nd, Dy and Tb oxides, lithium carbonate, gallium and boron import unit values, germanium, graphite, antimony, tungsten, niobium and tantalite. Values for 2025 are USGS estimates, flagged per observation. Source-price changes the USGS states (tantalite) are stored as breaks.
+  - `coverage-gaps.json` v2 gives each tracked material without an open monthly series its status (annual only, joint only, no open series) and the test a monthly series would have to meet.
+- **Explorer:** Monthly and Annual tabs, each with a material-grouped multi-select of up to six series. Colour slots are stable when a series is removed. The chart has indexed and published-value views; published values only appear when unit, currency and frequency all match. Estimates are drawn hollow and dotted, and lines never join across a gap or source change. Coordinated cards, legend focus, heatmap, ranked moves to a common end period, and a data table. URL params: `freq`, `series`, `range`, `view`.
+- **Price types:** exchange benchmark, price assessment and trade unit value. Trade unit values are never labelled as prices; a test enforces this.
+- **Governance (decided 2026-11-09 by the maintainer):**
+  1. Market prices are a permanent, separately maintained research-data layer. README, CLAUDE.md (hard rule 8) and `/methodology` now say so and keep it apart from the policy, financing and project records.
+  2. The publisher-released datasets are approved under their published terms. Each source's attribution, terms, statement of changes and reuse note (`MARKET_REUSE_NOTES` in `lib/markets.ts`: the IMF's request-permission clause for commercial reuse and its third-party clause, checked against the PCPS dataset metadata, which cites only IMF copyright terms; CC0 scope for USGS, vendor data for the World Bank) shows on `/markets` and in every CSV row. No series-specific restriction was found, so none is isolated.
+  3. Navigation option B: `/markets` in the footer and a "Price benchmarks" block on each material page with a covering series, linking to the explorer at that series' frequency. Primary navigation unchanged.
+- **QA:**
+  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1195/1195) and build all pass after the governance changes.
+  - Code review of the full diff: seven defects fixed in c3b3016 (heatmap blur and tab stop, indexed start, shared-link colour slots, fractional y-ticks, duplicated CSV escaper, dataset list in one place). The CSV `#` preamble was later dropped: the header is now row 1 and attribution travels on every row (24 columns, about 2.2 MB, 26 KB gzipped).
+  - Browser QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow, after a fix to the heatmap grid. Screenshots of the new page are in `docs/analysis/markets-monitor/`; the old ones were removed.
+  - The IMF cobalt values for 2026 (flat at about 55,850 from February to August, then 42,213 in September) match PCOBA in the pinned SDMX file exactly.
+  - Interaction checks: URL restore (it was broken by a mount-order race; now fixed), keyboard chip toggle, and heatmap roving focus opening on the latest month.
+- Not merged, deployed or published.
+
+## 2026-11-09: Critical Minerals Market Monitor (draft PR) — superseded by the multi-source update above
+
+- Branch `claude/critical-minerals-market-monitor-0dd37c` from `c69e8fc`. New route `/markets`, titled "Critical Minerals Market Monitor". Public navigation is unchanged; the route is listed in the sitemap only, and the PR proposes where it could sit in the navigation.
+- **Data:** three World Bank Pink Sheet monthly benchmark averages, January 2005 to October 2026: aluminium, copper and nickel, in nominal US$ per metric tonne. They are frozen in `data/markets/` (manifest, series, observations, coverage gaps).
+  - Release 2026-11-03, retrieved 2026-11-09; the workbook SHA-256 is pinned in the manifest. The next scheduled release is 2026-12-02, after which the page says the figures may be superseded.
+  - Licence: CC BY 4.0, as stated on the World Bank data catalogue. The attribution and the changes made are recorded.
+  - `scripts/ingest-markets.ts` (`npm run ingest:markets`) is the only way to regenerate the dataset; the build never fetches prices.
+  - Prices are not in `data/seed/` and are not linked to events, commitments, controls, totals or search.
+- **Not shown:** lithium, cobalt, graphite, tungsten, antimony and rare earths appear only as coverage gaps, with what an open series would need to show. No commercial assessment's licence has been reviewed, and none is shown or redistributed.
+- **Code:**
+  - `lib/markets.ts` holds the calculations: windows, indexed change, change over N months, the monthly-change grid and movers. Nothing is interpolated. `lib/markets.ts` also has data validation, which `npm run validate` now calls.
+  - `lib/market-data.ts` loads the data; `lib/markets-csv.ts` builds the CSV for the static `/api/export/markets.csv` export, which carries the CC BY 4.0 attribution.
+  - `components/markets/` holds the native-SVG chart, sparklines, heatmap and monitor shell.
+  - URL params: `range`, `view` and `series`.
+- **Governance (blocking reviewer decision; resolved 2026-11-09, see the entry above):** README and CLAUDE.md both said "no market prices". The page is labelled "Market context" and kept outside the policy record. Whether that exception is accepted, and how the rule should be reworded, is for the maintainer to decide before merge.
+- **QA:**
+  - Gates: validate, lint (0 errors, 28 existing warnings), typecheck, test (1176/1176, 33 new) and build all pass.
+  - Visual QA at 1440, 1024, 768, 390 and 320 px found no horizontal overflow. Screenshots are in `docs/analysis/markets-monitor/`.
+  - Interaction checks: keyboard on the chart and heatmap, URL-param round trip and reduced motion.
+- Not merged, deployed or published.
+
 ## 2026-11-09: FI002 deck release candidate 4, styled and clickable sources (draft PR #233)
 
 - `docs/research/fi002-bhp-copper/output/review/release-candidate-4/` holds the RC4 PPTX, PDF, contact sheet, renders, manifest and QC record (with the release handoff). It is built from the same revision 5 source with `make_release_candidate.py --candidate rc4`.
