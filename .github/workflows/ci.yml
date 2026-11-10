@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -33,6 +35,11 @@ jobs:
 
       - name: Validate data
         run: npm run validate
+
+      - name: Editorial publication review gate
+        env:
+          EDITORIAL_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: npm run editorial:check
 
       - name: Type check
         run: npm run typecheck
