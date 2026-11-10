@@ -1,0 +1,25 @@
+{
+  "article": "app/research/china-export-control-suspension-extension/page.tsx",
+  "pageSha256": "a2416d6f2c2bfe288af43e1caf0cb1c3ba44338adf52c7346a5087f3fe7ec649",
+  "reviewer": "Benjamin Yang",
+  "reviewDate": "2026-11-09",
+  "checks": {
+    "readAllCopy": {
+      "verified": false,
+      "notes": "Draft. The documented copy pass (docs/research/china-suspension-editorial-pass-2026-11-09.md, committed at b7893a9) covers the page before three later edits: f25a481 (legal precision and inline-source spacing), 8622868 (Open Graph and Twitter metadata) and f72925c (PR #244, eight prose adjustments). No recorded read of the final page, whose hash is above. Set to true only after the reviewer confirms reading the final copy, including metadata and both tables."
+    },
+    "desktopPreview": {
+      "verified": false,
+      "notes": "Not documented. The editorial pass lists preview review as still to do ('Review spacing around inline citations and mobile table overflow in the rendered preview'), and the house style says a Vercel deployment status is not evidence of a visual read. Set to true only after the reviewer records a desktop inspection of the final page."
+    },
+    "mobilePreview": {
+      "verified": false,
+      "notes": "Not documented. Mobile table overflow is named as an outstanding preview check in the editorial pass. Set to true only after the reviewer records a mobile-width inspection of the final page."
+    },
+    "sourceLinksAndFacts": {
+      "verified": false,
+      "notes": "Partial evidence. docs/research/china-suspension-extension-review-2026-11-09.md records a check of every factual claim against the full MOFCOM texts (Nos. 58 of 2026; 55-58, 61, 62, 70, 72 and 18 of 2025; 46 of 2024), but labels itself 'automated review only' and does not stand in for human approval. The editorial pass records that the MOFCOM URLs were kept and a BIS primary source was added. No human check of the final page's links and facts is recorded."
+    }
+  },
+  "exceptions": []
+}
