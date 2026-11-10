@@ -32,7 +32,7 @@ export function SiteMotion() {
           observer.unobserve(element);
         }
       },
-      { threshold: 0.06, rootMargin: "0px 0px -4% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -4% 0px" },
     );
 
     const eligible = (el: HTMLElement) => {
