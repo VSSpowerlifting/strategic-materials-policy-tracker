@@ -16,7 +16,7 @@ export function ScrollReveal({
   className,
 }: {
   kind: MotionKind;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
