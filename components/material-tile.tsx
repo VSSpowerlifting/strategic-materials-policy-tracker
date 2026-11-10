@@ -66,6 +66,7 @@ export function MaterialTile({ material }: { material: Material }) {
   const { hue } = getMaterialMeta(material.id);
   return (
     <Link
+      data-site-motion="card"
       href={`/materials/${material.slug}`}
       style={{ "--oxide": hue, "--tile-hue": hue } as React.CSSProperties}
       className="oxide-rule plate group flex items-center gap-4 rounded-r-lg p-4 ring-1 ring-border/80 transition-all hover:bg-elevated hover:shadow-[0_0_18px_2px_color-mix(in_oklab,var(--tile-hue)_14%,transparent)]"
