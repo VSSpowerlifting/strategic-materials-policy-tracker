@@ -52,21 +52,29 @@ export default function MarketsPage() {
 
   return (
     <div className="pb-24">
-      <Container width="wide" className="pt-12 sm:pt-16">
+      <Container width="wide" className="pt-8 sm:pt-12">
         <PageHeading
           eyebrow="Market context"
           title="Critical Minerals Market Monitor"
           lead={
             <>
-              The World Bank and the IMF publish monthly averages for aluminium, copper, nickel, cobalt, palladium and
-              rare-earth carbonate. The USGS adds annual prices and import unit values for 2021–2025, including rare-earth
-              oxides, lithium, gallium, germanium and tungsten, which have no open monthly series. Compare up to six series
-              at a time.
+              Compare critical-mineral price benchmarks from the World Bank, IMF and USGS. Plot up to six series across
+              monthly or annual data.
             </>
           }
         />
 
-        <dl className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+
+      </Container>
+
+      <Container width="wide" className="mt-6">
+        <MarketExplorer series={series} releaseNotices={releaseNotices} />
+      </Container>
+
+      <Container width="wide" className="mt-12">
+        <section aria-labelledby="mm-source-coverage">
+          <h2 id="mm-source-coverage" className="font-display text-xl font-semibold text-foreground">Data coverage</h2>
+        <dl className="mt-4 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {facts.map((f) => (
             <div key={f.term} className="bg-card px-4 py-3">
               <dt className="font-display text-xs text-faint">{f.term}</dt>
@@ -81,10 +89,7 @@ export default function MarketsPage() {
           indexed values and rankings are SMPT calculations, with no interpolation or unit conversion. Prices sit outside
           the policy record, and a shared date does not show that a measure moved a price.
         </p>
-      </Container>
-
-      <Container width="wide" className="mt-12">
-        <MarketExplorer series={series} releaseNotices={releaseNotices} />
+        </section>
       </Container>
 
       <Container width="wide" className="mt-16 space-y-14">
