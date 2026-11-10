@@ -1,0 +1,25 @@
+{
+  "article": "app/research/REPLACE-WITH-SLUG/page.tsx",
+  "pageSha256": "REPLACE-WITH-OUTPUT-OF-npm-run-editorial:check---hash",
+  "reviewer": "",
+  "reviewDate": "",
+  "checks": {
+    "readAllCopy": {
+      "verified": false,
+      "notes": ""
+    },
+    "desktopPreview": {
+      "verified": false,
+      "notes": ""
+    },
+    "mobilePreview": {
+      "verified": false,
+      "notes": ""
+    },
+    "sourceLinksAndFacts": {
+      "verified": false,
+      "notes": ""
+    }
+  },
+  "exceptions": []
+}
