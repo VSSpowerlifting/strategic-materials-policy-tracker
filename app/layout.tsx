@@ -4,6 +4,7 @@ import "./globals.css";
 import { SkipLink } from "@/components/skip-link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteMotion } from "@/components/ui/site-motion";
 import { site } from "@/lib/site";
 
 // Shared typography for UI, editorial reading, tables and headings.
@@ -40,7 +41,10 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col antialiased">
         <SkipLink />
         <SiteHeader />
-        <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+          <SiteMotion />
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>
