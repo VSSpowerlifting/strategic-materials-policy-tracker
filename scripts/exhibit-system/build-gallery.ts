@@ -15,7 +15,7 @@ import PptxGenJS from "pptxgenjs";
 import path from "node:path";
 import { loadDeckSpec, loadFixture, loadRegistry } from "./registry";
 import { RENDERERS } from "./renderers";
-import { contentArea, C, DRAFT_BADGE, drawFrame, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, FONT } from "./primitives";
+import { contentArea, C, DRAFT_BADGE, drawFrame, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, FONT, TYPE } from "./primitives";
 import { DEMO_DECK_SPEC, DEMO_PPTX, GALLERY_PPTX, MANIFEST_FILE, REPO } from "./paths";
 import type { ElementRecord, ExhibitClassification, Fixture, PptxSlide } from "./types";
 
@@ -47,7 +47,45 @@ const FIXED_DATE = new Date("2026-01-01T00:00:00Z");
 const FIXED_ISO = "2026-01-01T00:00:00Z";
 
 export interface DeckEntry { fixture: Fixture; label: string }
-export interface SlideManifest { slide: number; pattern: string; elements: ElementRecord[] }
+export interface SlideManifest { slide: number; pattern: string; cover_pattern?: string; elements: ElementRecord[] }
+
+/**
+ * cover_hero_split: an opt-in research cover. Title, subtitle and thesis sit in
+ * a left column; a hero image fills the right of the slide under a native,
+ * semi-transparent graphite overlay, so a licensed photograph can later replace
+ * the image (Change Picture) and keep the same darkening. An optional key-number
+ * callout and a one-line footer complete it. Every element is a native,
+ * editable object except the single hero bitmap (role `frame`).
+ */
+export interface HeroCover {
+  /** Measured title lines; joined with spaces they equal the deck title. */
+  titleLines: string[];
+  subtitleLines: string[];
+  thesis: string;
+  /** Where the thesis wording comes from; written to the cover notes. */
+  thesisSource: string;
+  /** `label` may hold one measured line break ("\n"). */
+  callout?: { value: string; label: string; evidenceRefs: string[]; basis: string };
+  footer: string;
+  hero: {
+    /** Image bytes as a data URI (`image/png;base64,...`), already hash-checked. */
+    data: string;
+    alt: string;
+    /** Visible label on the image, e.g. that it is conceptual artwork. */
+    caption: string;
+    credit: string;
+    sha256: string;
+  };
+}
+
+/** Geometry of cover_hero_split on the 13.333 × 7.5 in slide. */
+export const HERO_SPLIT = {
+  textX: 0.8,
+  textW: 6.0,
+  imageX: 7.333,
+  /** Overlay transparency in percent: 0 is opaque graphite, 100 shows the image unchanged. */
+  overlayTransparency: 45,
+} as const;
 
 export interface BuildOptions {
   /** Every entry must carry this classification; a deck never mixes synthetic and research slides. */
@@ -87,9 +125,61 @@ function coverSlide(pptx: Pptx, title: string, lines: string[], records: Element
   );
 }
 
+function heroCoverSlide(pptx: Pptx, title: string, cover: HeroCover, records: ElementRecord[], opts: BuildOptions): void {
+  if (opts.classification !== "research") throw new Error("exhibit build refused — cover_hero_split applies only to research decks");
+  if (cover.titleLines.join(" ") !== title) throw new Error("exhibit build refused — cover title lines do not join to the deck title");
+  const slide = pptx.addSlide();
+  slide.background = { color: C.dark };
+  const h = makeHelpers(slide, { x: 0, y: 0, w: SLIDE_W, h: SLIDE_H }, records, pptx.ShapeType, pptx.ChartType);
+  const { textX: x, textW: w, imageX } = HERO_SPLIT;
+  const imageW = SLIDE_W - imageX;
+  h.image("cover-hero", "frame", { data: cover.hero.data, x: imageX, y: 0, w: imageW, h: SLIDE_H, altText: cover.hero.alt });
+  h.shape("cover-hero-overlay", "frame", pptx.ShapeType.rect, {
+    x: imageX, y: 0, w: imageW, h: SLIDE_H,
+    fill: { color: C.dark, transparency: HERO_SPLIT.overlayTransparency }, line: { color: C.dark, width: 0, transparency: 100 },
+  });
+  h.text("cover-hero-caption", "frame", cover.hero.caption, {
+    x: imageX + 0.35, y: 6.95, w: imageW - 0.7, h: 0.3, fontSize: TYPE.footnote, color: "B5AE9F", align: "right", valign: "bottom",
+  });
+  const breakRuns = (lines: string[]) => lines.map((s, i) => ({ text: s, options: { breakLine: i < lines.length - 1 } }));
+  h.text("cover-title", "frame", breakRuns(cover.titleLines), {
+    x, y: 0.75, w, h: 2.6, fontSize: 40, bold: true, color: C.paper, valign: "top", lineSpacingMultiple: 0.95,
+  });
+  h.text("cover-subtitle", "frame", breakRuns(cover.subtitleLines), {
+    x, y: 3.5, w, h: 0.8, fontSize: 20, color: C.paper, valign: "top",
+  });
+  h.text("cover-thesis", "frame", cover.thesis, {
+    x, y: 4.4, w, h: 1.15, fontSize: 14, color: "D8D3C7", valign: "top", lineSpacingMultiple: 1.1,
+  });
+  if (cover.callout) {
+    h.text("cover-callout-value", "frame", cover.callout.value, {
+      x, y: 5.62, w, h: 0.55, fontSize: 34, bold: true, color: C.gold, valign: "top",
+    });
+    h.text("cover-callout-label", "frame", breakRuns(cover.callout.label.split("\n")), {
+      x, y: 6.2, w, h: 0.45, fontSize: 11, color: "D8D3C7", valign: "top",
+    });
+  }
+  h.text("cover-notice", "frame", DRAFT_BADGE, { x, y: 6.72, w, h: 0.25, fontSize: 11, bold: true, color: C.gold });
+  h.text("cover-footer", "frame", cover.footer, { x, y: 7.0, w, h: 0.25, fontSize: TYPE.footnote, color: "B5AE9F" });
+  const evidence = new Map((opts.evidence ?? []).map((e) => [e.id, e]));
+  const calloutSources = (cover.callout?.evidenceRefs ?? []).map((id) => {
+    const e = evidence.get(id);
+    if (!e) throw new Error(`exhibit build refused — cover callout cites unknown evidence ${id}`);
+    return `${e.title}. ${e.url} · ${e.locator}`;
+  });
+  slide.addNotes(
+    [
+      `Cover. Classification: research. DRAFT · REVIEW GATES PENDING. Publication authorization is not granted by this tool. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`,
+      `Thesis wording: ${cover.thesisSource}`,
+      ...(cover.callout ? [`${cover.callout.value} ${cover.callout.label.replace(/\n/g, ". ")}. Basis: ${cover.callout.basis}`, ...calloutSources] : []),
+      `Cover image: ${cover.hero.credit} SHA-256 ${cover.hero.sha256}.`,
+    ].join("\n"),
+  );
+}
+
 export async function buildDeck(
   entries: DeckEntry[],
-  cover: { title: string; lines: string[] },
+  cover: { title: string; lines: string[]; hero?: HeroCover },
   outFile: string,
   opts: BuildOptions = { classification: "synthetic-demonstration" },
 ): Promise<SlideManifest[]> {
@@ -118,8 +208,13 @@ export async function buildDeck(
 
   const manifest: SlideManifest[] = [];
   const coverRecords: ElementRecord[] = [];
-  coverSlide(pptx, cover.title, cover.lines, coverRecords, opts);
-  manifest.push({ slide: 1, pattern: "cover", elements: coverRecords });
+  if (cover.hero) {
+    heroCoverSlide(pptx, cover.title, cover.hero, coverRecords, opts);
+    manifest.push({ slide: 1, pattern: "cover", cover_pattern: "cover_hero_split", elements: coverRecords });
+  } else {
+    coverSlide(pptx, cover.title, cover.lines, coverRecords, opts);
+    manifest.push({ slide: 1, pattern: "cover", elements: coverRecords });
+  }
 
   const problems: string[] = [];
   entries.forEach((e, i) => {
@@ -177,6 +272,19 @@ export function suppressHelperLabels(chartXml: string): string {
 }
 
 /**
+ * pptxgenjs writes speaker notes as a single run, so a newline in the notes
+ * string stays a raw newline inside one <a:t>. Split such a run into one
+ * paragraph per line. Notes without newlines are returned unchanged.
+ */
+export function splitNoteParagraphs(xml: string): string {
+  return xml.replace(
+    /<a:p><a:r>(<a:rPr[^>]*\/>)<a:t>([^<]*\n[^<]*)<\/a:t><\/a:r>(<a:endParaRPr[^>]*\/>)<\/a:p>/g,
+    (_m, rPr: string, text: string, end: string) =>
+      text.split("\n").map((line, i, all) => `<a:p><a:r>${rPr}<a:t>${line}</a:t></a:r>${i === all.length - 1 ? end : ""}</a:p>`).join(""),
+  );
+}
+
+/**
  * Re-zips an OOXML package with fixed entry dates and fixed core.xml dates.
  * Native charts embed their data as nested .xlsx packages, which carry their
  * own timestamps, so those are normalised recursively.
@@ -197,6 +305,9 @@ async function normalise(buf: Buffer): Promise<Buffer> {
       xml = xml
         .replace(/(<dcterms:created[^>]*>)[^<]*(<\/dcterms:created>)/, `$1${FIXED_ISO}$2`)
         .replace(/(<dcterms:modified[^>]*>)[^<]*(<\/dcterms:modified>)/, `$1${FIXED_ISO}$2`);
+      out.file(name, xml, { date: FIXED_DATE, createFolders: false });
+    } else if (/^ppt\/notesSlides\/notesSlide\d+\.xml$/.test(name)) {
+      const xml = splitNoteParagraphs((await entry.async("string")) as string);
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else if (/^ppt\/charts\/chart\d+\.xml$/.test(name)) {
       const xml = suppressHelperLabels((await entry.async("string")) as string);

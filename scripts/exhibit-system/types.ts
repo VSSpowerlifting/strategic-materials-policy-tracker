@@ -33,6 +33,7 @@ export interface PptxSlide {
   addShape(shape: string, options: Opts): unknown;
   addChart(type: string, data: ChartSeries[], options: Opts): unknown;
   addTable(rows: TableCell[][], options: Opts): unknown;
+  addImage(options: Opts): unknown;
   addNotes(notes: string): unknown;
 }
 
@@ -45,7 +46,8 @@ export interface PptxSlide {
  * - native-shapes: editable geometry and text; values are NOT data-bound.
  * - table: a native PowerPoint table.
  * - text: a native text box.
- * - raster: a bitmap. The system target is zero raster data elements.
+ * - raster: a bitmap. The system target is zero raster data elements; the only
+ *   raster allowed is a cover hero image (role `frame`, see cover_hero_split).
  */
 export const EDITABILITY_TIERS = [
   "native-chart",
@@ -65,7 +67,7 @@ export interface ElementRecord {
   name: string;
   role: ElementRole;
   tier: EditabilityTier;
-  kind: "chart" | "shape" | "line" | "text" | "table";
+  kind: "chart" | "shape" | "line" | "text" | "table" | "image";
   /** Smallest font size (pt) set on a text, chart or table element; absent for shapes and lines. */
   minPt?: number;
 }
@@ -123,6 +125,8 @@ export interface RenderHelpers {
   line(name: string, role: ElementRole, options: Opts): void;
   text(name: string, role: ElementRole, text: string | TextRun[], options: Opts): void;
   table(name: string, rows: TableCell[][], options: Opts): void;
+  /** Bitmap image. Role must be `frame`: rasters never carry data. */
+  image(name: string, role: ElementRole, options: Opts): void;
   /** pptxgenjs shape-type names (`rect`, `ellipse`, `line`, ...). */
   readonly shapes: Readonly<Record<string, string>>;
   /** pptxgenjs chart-type names (`bar`, `line`, `scatter`, ...). */

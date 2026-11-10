@@ -1,0 +1,24 @@
+{
+  "generator": "scripts/exhibit-system/cover_art.py",
+  "seed": 2026,
+  "width_in": 6.0,
+  "height_in": 7.5,
+  "dpi": 300,
+  "pixels": [
+    1800,
+    2250
+  ],
+  "palette": {
+    "field": "#12110F",
+    "fine_contours": "#98752D",
+    "index_contours": "#C8993E"
+  },
+  "libraries": {
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2",
+    "pillow": "13.0.0"
+  },
+  "sha256": "8f743f5fcd35f2dbe133a958db6fc3871f6384c5b820d3c7f106ce0b7a105647",
+  "nature": "Procedurally generated conceptual artwork. Not a map, photograph or depiction of any real site; contains no real elevation or location data.",
+  "rights": "Created for SMPT by this script; no third-party image, map data or model output is used."
+}

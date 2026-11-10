@@ -1,0 +1,46 @@
+{
+  "asset": "fi002-cover-escondida-iss022-e-8282.jpg",
+  "sha256": "a1ea806791fa14fb45a1ea521c196a9a49cbb53d7097276a32464f118cb17a83",
+  "subject": "Tailings impoundment of the Escondida copper mine complex, Atacama Desert, Chile. Per NASA's caption the open pits lie to the north and are not shown. Taken in 2009; it does not depict the proposed New Concentrator.",
+  "photo_id": "ISS022-E-8282",
+  "mission": "ISS Expedition 22",
+  "acquired": "2009-12-09T20:56:50Z",
+  "camera": "Nikon D2Xs, 800 mm lens",
+  "photo_center": "24.4° S, 69.1° W (NASA catalogue)",
+  "catalogue_page": "https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?mission=ISS022&roll=E&frame=8282",
+  "nasa_feature_page": "https://science.nasa.gov/earth/earth-observatory/escondida-copper-mine-atacama-desert-chile-43394/",
+  "source_file": {
+    "url": "https://eol.jsc.nasa.gov/DatabaseImages/ESC/large/ISS022/ISS022-E-8282.JPG",
+    "bytes": 910066,
+    "pixels": "4288x2929 (uncropped frame plus an 81-px catalogue label strip)",
+    "sha256": "cb1e1632498b260f1e7164e1a663e1ece95f3d917ae802d637e8cd0e169c67ee",
+    "downloaded": "2026-11-09"
+  },
+  "rights": "NASA Gateway to Astronaut Photography of Earth, Conditions of use (https://eol.jsc.nasa.gov/FAQ/default.htm, read 2026-11-09): NASA material is not protected by copyright unless noted; it may be reproduced without further permission. Requested credit: 'Image courtesy of the Earth Science and Remote Sensing Unit, NASA Johnson Space Center', with the photo number and eol.jsc.nasa.gov. No NASA logo is used and no endorsement is implied.",
+  "credit": "Image courtesy of the Earth Science and Remote Sensing Unit, NASA Johnson Space Center (ISS022-E-8282, eol.jsc.nasa.gov)",
+  "processing": {
+    "crop_box_px": [
+      1000,
+      0,
+      3276,
+      2845
+    ],
+    "crop_note": "4:5 crop centred on the liquid-tailings pond and the retaining dam; excludes the catalogue label strip",
+    "resize": "1800x2250, Pillow 11.3.0 LANCZOS (0.79x downsample)",
+    "caption_scrim": "sRGB values multiplied by a smoothstep ramp from 1.0 at y=1900 px to 0.62 at y=2080 px, held to the bottom edge (numpy 2.5.4, rounded to nearest). Without it the slide caption measured about 4.0:1 against the composited photo; with it the worst pixel under the caption box measures 5.1:1 against #B5AE9F.",
+    "encode": "JPEG quality 90, 4:4:4, baseline, no metadata",
+    "other_edits": "none"
+  },
+  "considered_and_rejected": [
+    {
+      "id": "PIA11090",
+      "what": "ASTER scene of the Escondida pits, 23 April 2000",
+      "why": "Credited NASA/GSFC/METI/ERSDAC/JAROS; the JPL image-use policy says material owned by parties other than NASA/JPL may carry commercial-use restrictions, so it is not cleanly public domain."
+    },
+    {
+      "id": "NASA SVS 15086",
+      "what": "Landsat time series 1985–2026",
+      "why": "Released only as video with no still frames."
+    }
+  ]
+}
