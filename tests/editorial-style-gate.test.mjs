@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   extractProseBlocks, pageHash, parseChangedLineRanges,
-  scanChangedProse, validateReview, unresolvedFindings, reviewPathForPage,
+  scanChangedProse, validateReview, unresolvedFindings, reviewPathForPage, pageForReviewPath,
 } from "../scripts/editorial-style-gate.mjs";
 
 const source = [
@@ -156,6 +156,52 @@ test("integration: missing signoff and flagged contrast fail, corrected copy pas
     const approved = run(base);
     assert.equal(approved.status, 0, approved.stderr);
     assert.match(approved.stdout, /gate passed/i);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("review records map back to their pages", () => {
+  assert.equal(pageForReviewPath("docs/editorial/reviews/china-export-control-suspension-extension.json"),
+    "app/research/china-export-control-suspension-extension/page.tsx");
+  assert.equal(pageForReviewPath("docs/editorial/reviews/research-index.json"), "app/research/page.tsx");
+  assert.equal(pageForReviewPath("docs/editorial/REVIEW_TEMPLATE.json"), null);
+});
+
+test("integration: a record added on its own is validated against the unchanged page", () => {
+  const dir = mkdtempSync(join(tmpdir(), "smpt-editorial-record-"));
+  const article = "app/research/example/page.tsx";
+  const record = "docs/editorial/reviews/example.json";
+  const gate = fileURLToPath(new URL("../scripts/editorial-style-gate.mjs", import.meta.url));
+  const git = (...args) => execFileSync("git", args, { cwd: dir, encoding: "utf8" }).trim();
+  const put = (path, content) => {
+    mkdirSync(dirname(join(dir, path)), { recursive: true });
+    writeFileSync(join(dir, path), content);
+  };
+  const run = (sha) => spawnSync(process.execPath, [gate], {
+    cwd: dir, env: { ...process.env, EDITORIAL_BASE_SHA: sha }, encoding: "utf8",
+  });
+  try {
+    git("init", "-q");
+    git("config", "user.name", "Editorial CI Test");
+    git("config", "user.email", "ci@example.invalid");
+    const page = "<p>Original statement.</p>";
+    put(article, page);
+    git("add", "."); git("commit", "-qm", "Published page");
+    const base = git("rev-parse", "HEAD");
+
+    const draft = review(article, pageHash(page));
+    draft.checks.desktopPreview = { verified: false, notes: "" };
+    put(record, JSON.stringify(draft));
+    git("add", "."); git("commit", "-qm", "Draft record with an unchecked field");
+    const unchecked = run(base);
+    assert.notEqual(unchecked.status, 0);
+    assert.match(unchecked.stderr, /checks\.desktopPreview requires verified:true/);
+
+    put(record, JSON.stringify(review(article, pageHash(page))));
+    git("add", "."); git("commit", "-qm", "Completed record");
+    const complete = run(base);
+    assert.equal(complete.status, 0, complete.stderr);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
