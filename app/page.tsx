@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { getAllMaterials, getDatasetSummary } from "@/lib/data";
+import { getAllMaterials } from "@/lib/data";
 import { LatticeOverview } from "@/components/lattice/lattice";
 import { ElementStrip, SupplyChainStrip } from "@/components/home/supply-chain-strip";
+import { HomeMarketPreview } from "@/components/home/home-market-preview";
 import { chainStageCounts } from "@/lib/homepage-chain";
 import { buildLatticeModel } from "@/lib/lattice";
 import { formatDateLong } from "@/lib/format";
@@ -53,7 +54,6 @@ const featured = [
 ] as const;
 
 export default function Home() {
-  const counts = getDatasetSummary();
   const materials = getAllMaterials();
   const model = buildLatticeModel(site.lastUpdated);
   const chain = chainStageCounts(model);
@@ -61,8 +61,6 @@ export default function Home() {
   const financing = getFinancingCase();
   const tungsten = getTungstenCase();
   const revision = formatDateLong(site.lastUpdated);
-  // The displayed last-curated-revision date; the data views above stay on the research snapshot.
-  const revisedLabel = formatDateLong(site.revisedOn);
   const asOf = (
     <>as of the <time dateTime={site.lastUpdated}>{revision}</time> revision</>
   );
@@ -75,10 +73,10 @@ export default function Home() {
       />
 
       <Container width="wide" className="py-10 sm:py-16">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10 xl:gap-12">
           <div>
             <p className="font-display text-sm text-muted">Strategic Materials Policy Tracker</p>
-            <h1 className="mt-4 max-w-4xl font-display text-[2.2rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="mt-4 max-w-4xl font-display text-[2.2rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.1rem] xl:text-[3.3rem]">
               Research on critical minerals policy, financing and industrial development.
             </h1>
             <p className="mt-6 max-w-2xl font-display text-lg leading-8 text-muted">
@@ -93,27 +91,8 @@ export default function Home() {
               Research by <Link href="/about" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">Benjamin Yang</Link>
             </p>
           </div>
-          <aside aria-labelledby="corpus-heading" className="relative self-center border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-            <h2 id="corpus-heading" className="font-display text-sm font-semibold">Current corpus</h2>
-            <p className="mt-2 font-display text-sm text-muted">
-              Revised <time dateTime={site.revisedOn}>{revisedLabel}</time>
-            </p>
-            <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-5 font-display">
-              {[
-                [counts.events, "Policy events"],
-                [counts.financialCommitments, "Financial instruments"],
-                [counts.projects, "Projects"],
-                [counts.projectMilestones, "Industrial observations"],
-              ].map(([value, label]) => (
-                <div key={label}>
-                  <dd className="tnum text-2xl font-semibold text-foreground">{value}</dd>
-                  <dt className="mt-1 text-sm text-muted">{label}</dt>
-                </div>
-              ))}
-            </dl>
-            <Link href="/coverage" className="mt-5 inline-block font-display text-sm text-accent underline underline-offset-4">
-              Coverage
-            </Link>
+          <aside aria-label="Mineral price trends" className="min-w-0 self-center border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">
+            <HomeMarketPreview />
           </aside>
         </div>
         <ElementStrip materials={materials} />

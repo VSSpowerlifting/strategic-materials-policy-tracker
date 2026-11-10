@@ -74,7 +74,8 @@ test("homepage research, evidence examples, material entries and navigation lead
   assert.match(view, /id="examples"/);
   for (const m of getAllMaterials())
     assert.ok(view.includes(`href="/materials/${m.slug}"`), m.id);
-  assert.equal((view.match(/<dd/g) ?? []).length, 4);
+  assert.match(view, /id="home-market-heading"/);
+  assert.ok(view.includes('href="/markets"'), "the homepage's market CTA reaches the published route");
 });
 
 test("breadcrumbs mark the current page once and never link it", () => {

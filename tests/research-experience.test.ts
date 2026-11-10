@@ -12,7 +12,6 @@ import {
   getEventById,
   getSourceById,
   getAllProjectMilestones,
-  getDatasetSummary,
 } from "../lib/data";
 import { projectStack } from "../lib/capital-intelligence";
 import {
@@ -142,18 +141,12 @@ test("financial chronology retains amount wording, status dates, qualifications 
   assert.doesNotMatch(missing, /<time /);
 });
 
-test("homepage coverage reconciles to public loaders and the opening leads straight to evidence", () => {
+test("homepage market context leads straight to the source-backed explorer and evidence", () => {
   const view = renderToStaticMarkup(createElement(Home));
-  const counts = getDatasetSummary();
-  for (const count of [
-    counts.events,
-    counts.financialCommitments,
-    counts.projects,
-    counts.projectMilestones,
-  ])
-    assert.ok(view.includes(`>${count}</dd>`));
-  assert.match(view, /Revised/);
-  assert.ok(view.includes('href="/coverage"'));
+  assert.match(view, /Mineral price trends/);
+  assert.match(view, /World Bank Pink Sheet and IMF PCPS/);
+  assert.ok(view.includes('href="/markets"'));
+  assert.doesNotMatch(view, /Current corpus/);
   assert.match(view, /href="\/materials\/gallium"/);
   assert.match(view, /href="\/capital\/fin-au-alcoa-sojitz-gallium-2025-equity"/);
   assert.doesNotMatch(view, /<dialog/);
