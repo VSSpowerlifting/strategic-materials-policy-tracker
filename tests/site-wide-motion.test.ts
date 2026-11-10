@@ -69,6 +69,7 @@ test("global section observer is progressive, route-scoped, keyboard-safe and on
   assert.match(layout, /id="main-content"/);
   assert.match(controller, /usePathname/);
   assert.match(controller, /IntersectionObserver/);
+  assert.match(controller, /threshold: 0, rootMargin:/, "long sections must reveal at any intersection");
   assert.match(controller, /MutationObserver/);
   assert.match(controller, /observer\.unobserve\(element\)/);
   assert.match(controller, /observer\.disconnect\(\)/);
