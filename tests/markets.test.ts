@@ -373,6 +373,22 @@ test("explorer renders the real series with the default selection and attributio
   }
 });
 
+test("market-only metals have real World Bank histories without invented policy dossiers", async () => {
+  const { MARKET_ONLY_MATERIALS } = await import("@/lib/markets");
+  const { buildMonitorSeries, materialLink } = await import("@/components/markets/series");
+  const symbols = { tin: "Sn", zinc: "Zn", lead: "Pb", platinum: "Pt" };
+  const wb = buildMonitorSeries().filter((s) => ["wb-tin", "wb-zinc", "wb-lead", "wb-platinum"].includes(s.id));
+  assert.equal(wb.length, 4);
+  for (const s of wb) {
+    assert.equal(s.obs.length, 262);
+    assert.equal(s.lastPeriod, "2026-10");
+    assert.equal(materialLink(s.materialId).href, null);
+    assert.equal(MARKET_ONLY_MATERIALS[s.materialId].symbol, symbols[s.materialId as keyof typeof symbols]);
+  }
+  assert.equal(wb.find((s) => s.id === "wb-platinum")?.unitShort, "US$/troy oz");
+  assert.deepEqual(wb.find((s) => s.id === "wb-platinum")?.sourceBreaks.map((b) => b.period), ["2025-06"]);
+});
+
 test("shared links keep each series in its colour slot", async () => {
   const { slotsFrom, slotsParam } = await import("@/components/markets/market-monitor");
   const known = new Set(["a", "b", "c"]);
