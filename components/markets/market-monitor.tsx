@@ -27,7 +27,7 @@ import {
 import { PriceChart, type ChartLine } from "./price-chart";
 import { Sparkline } from "./sparkline";
 import { Heatmap, type HeatRow } from "./heatmap";
-import { MARKET_SYMBOLS, MAX_PLOTTED, slotStyle, type MonitorSeries } from "./types";
+import { MARKET_SYMBOLS, slotStyle, type MonitorSeries } from "./types";
 
 type View = "indexed" | "absolute";
 
@@ -61,13 +61,15 @@ function Swatch({ color, dash }: { color: string; dash: string | undefined }) {
  * written by `slotsParam` restores every series in the colour it had.
  */
 export function slotsFrom(ids: readonly string[], known: ReadonlySet<string>): Array<string | null> {
-  const out: Array<string | null> = Array(MAX_PLOTTED).fill(null);
-  let i = 0;
+  const out: Array<string | null> = [];
+  // Every known series is selectable. Bound malformed or enormous URL inputs
+  // by the available source series rather than by an arbitrary visual limit.
   for (const id of ids) {
-    if (i >= MAX_PLOTTED) break;
-    if (id === "") i++;
-    else if (known.has(id) && !out.includes(id)) out[i++] = id;
+    if (out.length >= known.size) break;
+    if (id === "") out.push(null);
+    else if (known.has(id) && !out.includes(id)) out.push(id);
   }
+  while (out.at(-1) === null) out.pop();
   return out;
 }
 
@@ -86,7 +88,10 @@ export function toggleSlot(slots: ReadonlyArray<string | null>, id: string): Arr
   else {
     const free = next.indexOf(null);
     if (free !== -1) next[free] = id;
+    else next.push(id);
   }
+  // Never change surviving series' color slots. Trim only the trailing gaps.
+  while (next.at(-1) === null) next.pop();
   return next;
 }
 
@@ -256,7 +261,6 @@ export function MarketExplorer({
     return [...m.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name));
   }, [tabSeries]);
 
-  const full = selected.length >= MAX_PLOTTED;
   const unitWord = tab === "annual" ? "year" : "month";
 
   function toggleMaterial(items: MonitorSeries[]) {
@@ -267,7 +271,7 @@ export function MarketExplorer({
         ...cur,
         [tab]: cur[tab].map((id) => id && groupIds.has(id) ? null : id),
       }));
-    } else if (!full) {
+    } else {
       toggle(items[0].id);
     }
   }
@@ -475,17 +479,26 @@ export function MarketExplorer({
           {tab === "monthly"
             ? "Monthly averages from the World Bank Pink Sheet and the IMF Primary Commodity Price System."
             : "Annual averages and unit values for 2021–2025 from USGS Mineral Commodity Summaries 2026; 2025 values are USGS estimates."}{" "}
-          Choose up to {MAX_PLOTTED} series. A series keeps its colour while it stays selected.
+          Select any available benchmarks. Each keeps its line style while selected; use the legend to highlight a series when the chart is crowded.
         </p>
 
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <p aria-live="polite" className="tnum text-muted">
-            {selected.length} of {MAX_PLOTTED} selected{full ? " — remove one to add another" : ""}
+            {selected.length} of {tabSeries.length} selected
           </p>
+          {selected.length < tabSeries.length ? (
+            <button
+              type="button"
+              onClick={() => setSlots((cur) => ({ ...cur, [tab]: slotsFrom(tabSeries.map((s) => s.id), idsByFreq[tab]) }))}
+              className="font-display text-sm text-accent underline-offset-2 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              Select all
+            </button>
+          ) : null}
           {selected.length > 0 ? (
             <button
               type="button"
-              onClick={() => setSlots((cur) => ({ ...cur, [tab]: Array(MAX_PLOTTED).fill(null) }))}
+              onClick={() => setSlots((cur) => ({ ...cur, [tab]: [] }))}
               className="font-display text-sm text-accent underline-offset-2 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-accent"
             >
               Clear selection
@@ -508,19 +521,17 @@ export function MarketExplorer({
             {groups.map(([materialId, g]) => {
               const chosen = g.items.filter((item) => slotOf(item.id) !== -1);
               const active = chosen.length > 0;
-              const unavailable = !active && full;
               const st = active ? slotStyle(slotOf(chosen[0].id)) : null;
               return (
                 <button
                   key={materialId}
                   type="button"
                   aria-pressed={active}
-                  aria-disabled={unavailable || undefined}
                   title={`${g.name}: ${g.items.length} ${tab} benchmark${g.items.length === 1 ? "" : "s"}`}
-                  onClick={() => !unavailable && toggleMaterial(g.items)}
+                  onClick={() => toggleMaterial(g.items)}
                   className={cn(
                     "flex min-h-20 min-w-0 flex-col items-start justify-between gap-1 rounded-md border px-3 py-2 text-left outline-none focus-visible:ring-2 focus-visible:ring-accent motion-safe:transition-colors",
-                    active ? "border-accent bg-elevated text-foreground" : unavailable ? pillDisabled : pillOff,
+                    active ? "border-accent bg-elevated text-foreground" : pillOff,
                   )}
                 >
                   <span className="font-display text-xl font-semibold leading-none" style={st ? { color: st.color } : undefined}>
@@ -555,18 +566,16 @@ export function MarketExplorer({
                   const slot = slotOf(s.id);
                   const on = slot !== -1;
                   const st = on ? slotStyle(slot) : null;
-                  const disabled = !on && full;
                   return (
                     <li key={s.id}>
                       <button
                         type="button"
                         aria-pressed={on}
-                        aria-disabled={disabled || undefined}
-                        onClick={() => (disabled ? undefined : toggle(s.id))}
+                        onClick={() => toggle(s.id)}
                         title={`${s.benchmark} · ${s.sourceShortName} · ${PRICE_TYPE_LABELS[s.priceType]}`}
                         className={cn(
                           "inline-flex min-h-11 items-center gap-2 rounded-md border px-2.5 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-accent motion-safe:transition-colors sm:min-h-9",
-                          on ? pillOn : disabled ? pillDisabled : pillOff,
+                          on ? pillOn : pillOff,
                         )}
                       >
                         {st ? (
