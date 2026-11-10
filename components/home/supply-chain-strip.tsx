@@ -28,7 +28,7 @@ const KIND_WORDS = [
  * The supply chain as a row of stages, each with its record counts by kind. Below `xl` the row keeps its width and
  * scrolls sideways inside a focusable region, so it stays one short band instead of a long rail. The connector
  * between two stages carries a slow dash drift and a pulse that passes along the chain stage by stage; both stop
- * under reduced motion. The counts are the content; the motion is decoration and carries no data.
+ * under reduced motion. Stage links and dots also respond to hover and keyboard focus without changing any data.
  */
 export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[]; outside: StageCounts[]; asOf: React.ReactNode }) {
   return (
@@ -58,14 +58,19 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
         {chain.map((s, i) => {
           const empty = !hasRecords(s);
           return (
-            <li key={s.stage} className="chain-stage relative flex flex-col items-center gap-3 px-2 text-center">
+            <li
+              key={s.stage}
+              tabIndex={0}
+              style={{ "--i": i } as React.CSSProperties}
+              className="chain-stage relative flex flex-col items-center gap-3 rounded-md px-2 py-1 text-center outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
               {i < chain.length - 1 ? (
                 <span aria-hidden className="chain-link" style={{ "--i": i } as React.CSSProperties} />
               ) : null}
               <span
                 aria-hidden
                 className={
-                  "relative z-10 h-3 w-3 shrink-0 rounded-full border-2 bg-background " +
+                  "chain-stage-dot relative z-10 h-3 w-3 shrink-0 rounded-full border-2 bg-background " +
                   (empty ? "border-border-strong" : "border-accent")
                 }
               />
@@ -126,10 +131,16 @@ export function ElementStrip({ materials }: { materials: Material[] }) {
               <Link
                 href={`/materials/${m.slug}`}
                 title={m.nameEn}
-                className="element-tile relative flex h-10 min-w-10 items-center justify-center rounded border bg-elevated px-1.5 font-mono text-sm font-medium text-foreground/90"
+                className="element-tile group relative flex h-10 min-w-10 items-center justify-center rounded border bg-elevated px-1.5 font-mono text-sm font-medium text-foreground/90"
                 style={{ borderColor: `${hue}80` }}
               >
                 <span className="sr-only">{m.nameEn}</span>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-[calc(100%+8px)] left-0 z-20 w-max max-w-48 rounded border border-border-strong bg-elevated px-2.5 py-1.5 font-display text-xs font-normal text-foreground opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+                >
+                  {m.nameEn}
+                </span>
                 <span aria-hidden>{symbol}</span>
                 {atomicNumber ? (
                   <span aria-hidden className="absolute right-0.5 top-0 text-[8px] text-faint">
