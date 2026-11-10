@@ -410,5 +410,10 @@ test("material pages link each covering series to the explorer at its own freque
   assert.ok(getMarketSeriesForMaterial("praseodymium").some((s) => s.id === "usgs-ndpr-oxide"));
   const slugs = new Set(getAllMaterials().map((m) => m.slug));
   const ids = new Set(getAllMaterials().map((m) => m.id));
-  for (const d of getMarketDatasets()) for (const s of d.series) assert.ok(ids.has(s.materialId) && slugs.has(s.materialId), s.id);
+  const { MARKET_ONLY_MATERIALS } = await import("@/lib/markets");
+  for (const d of getMarketDatasets()) for (const s of d.series) {
+    // Curated policy materials have dossiers; approved market-only benchmarks do not.
+    if (Object.hasOwn(MARKET_ONLY_MATERIALS, s.materialId)) continue;
+    assert.ok(ids.has(s.materialId) && slugs.has(s.materialId), s.id);
+  }
 });
