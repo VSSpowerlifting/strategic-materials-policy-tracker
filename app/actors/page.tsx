@@ -25,10 +25,10 @@ export default function ActorsPage() {
       />
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {jurisdictions.map((j) => (
+          <div key={j.id} data-site-motion="card" className="min-w-0">
           <LinkCard
-            key={j.id}
             href={`/actors/${j.code.toLowerCase()}`}
-            className="p-5"
+            className="h-full p-5"
           >
             <div className="flex items-center gap-3">
               <ActorMonogram code={j.code} size="md" />
@@ -48,6 +48,7 @@ export default function ActorsPage() {
               {j.eventIds.length} {j.eventIds.length === 1 ? "event" : "events"}
             </div>
           </LinkCard>
+          </div>
         ))}
       </div>
     </Container>
