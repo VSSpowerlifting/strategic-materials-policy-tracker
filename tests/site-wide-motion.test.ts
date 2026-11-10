@@ -19,6 +19,7 @@ test("route policy covers research, materials, detailed evidence and other route
     "/projects", "/projects/sample", "/programmes", "/programmes/sample",
     "/organizations", "/sources", "/markets", "/timeline", "/search",
     "/methodology", "/about", "/coverage", "/compare", "/actors",
+    "/saved", "/watchlist", "/data", "/response", "/portfolios",
   ]) {
     assert.equal(siteMotionScope(path), "standard", path);
     assert.match(siteMotionSelector(siteMotionScope(path)), /section/);
@@ -45,6 +46,11 @@ test("major searchable directories mark result wrappers, rather than tables and 
     "components/programmes-explorer.tsx",
     "components/organizations-explorer.tsx",
     "components/source-register-explorer.tsx",
+    "components/search-explorer.tsx",
+    "components/saved-events-explorer.tsx",
+    "components/timeline-view.tsx",
+    "app/data/page.tsx",
+    "app/actors/page.tsx",
   ];
   for (const file of paths) {
     const source = readFileSync(file, "utf8");
