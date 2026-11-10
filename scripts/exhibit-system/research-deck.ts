@@ -135,8 +135,9 @@ const IMAGE_TYPES: Record<string, string> = { ".png": "image/png", ".jpg": "imag
 /**
  * cover_hero_split block. The hero image is a file beside the spec, pinned by
  * SHA-256 so a swapped or regenerated picture cannot enter a deck unnoticed.
- * The visible caption is required: a photograph needs its credit and generated
- * artwork needs its "conceptual, not a map" label on the slide itself.
+ * The visible caption is optional. A photograph's credit and date can live in
+ * speaker notes, alt text and provenance; generated artwork should still say it
+ * is conceptual if it could be mistaken for a map or a real site.
  */
 export function parseHeroCover(raw: unknown, p: string, title: string, evidence: { id: string }[], baseDir: string): HeroCover {
   const c = obj(raw, p);
@@ -171,7 +172,7 @@ export function parseHeroCover(raw: unknown, p: string, title: string, evidence:
     hero: {
       data: `${type};base64,${bytes.toString("base64")}`,
       alt: str(h.alt, `${p}.hero.alt`),
-      caption: str(h.caption, `${p}.hero.caption`),
+      caption: h.caption === undefined ? undefined : str(h.caption, `${p}.hero.caption`),
       credit: str(h.credit, `${p}.hero.credit`),
       sha256,
     },
