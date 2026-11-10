@@ -25,6 +25,7 @@ import {
   type Frequency,
 } from "@/lib/markets";
 import { PriceChart, type ChartLine } from "./price-chart";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { Sparkline } from "./sparkline";
 import { Heatmap, type HeatRow } from "./heatmap";
 import { MARKET_SYMBOLS, slotStyle, type MonitorSeries } from "./types";
@@ -261,6 +262,18 @@ export function MarketExplorer({
     return [...m.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name));
   }, [tabSeries]);
 
+  // Availability is computed across both frequencies so each element tile
+  // states which type of published history exists, even on the opposite tab.
+  const materialFrequencies = useMemo(() => {
+    const frequencies = new Map<string, Set<Frequency>>();
+    for (const entry of series) {
+      const current = frequencies.get(entry.materialId) ?? new Set<Frequency>();
+      current.add(entry.frequency);
+      frequencies.set(entry.materialId, current);
+    }
+    return frequencies;
+  }, [series]);
+
   const unitWord = tab === "annual" ? "year" : "month";
 
   function toggleMaterial(items: MonitorSeries[]) {
@@ -400,17 +413,19 @@ export function MarketExplorer({
 
             <div className="mt-4 rounded-lg border border-border bg-card p-2 sm:p-4">
               {lines.length > 0 ? (
-                <PriceChart
-                  lines={lines}
-                  periods={chartPeriods}
-                  mode={effectiveView}
-                  basePeriod={effectiveView === "indexed" ? (base?.basePeriod ?? null) : null}
-                  cursor={cursor}
-                  onCursor={setCursor}
-                  focusId={emphasis}
-                  onFocus={setFocusId}
-                  label={chartTitle}
-                />
+                <ScrollReveal kind="chart">
+                  <PriceChart
+                    lines={lines}
+                    periods={chartPeriods}
+                    mode={effectiveView}
+                    basePeriod={effectiveView === "indexed" ? (base?.basePeriod ?? null) : null}
+                    cursor={cursor}
+                    onCursor={setCursor}
+                    focusId={emphasis}
+                    onFocus={setFocusId}
+                    label={chartTitle}
+                  />
+                </ScrollReveal>
               ) : (
                 <p className="p-6 text-sm text-muted">{base?.explanation ?? "Nothing to plot for this selection."}</p>
               )}
@@ -515,30 +530,46 @@ export function MarketExplorer({
 
         <div className="mt-5">
           <p className="mb-3 text-xs text-faint">
-            Select a material to plot its first listed benchmark, or remove its selected benchmarks. Use the detailed choices below to compare alternate price specifications.
+            Select a material to plot its first listed benchmark, or remove its selected benchmarks. M = monthly data; A = annual data. Use the detailed choices below for alternate specifications.
           </p>
           <div role="group" aria-label="Element-style material selector" className="grid grid-cols-3 gap-2 min-[410px]:grid-cols-4 sm:grid-cols-6 lg:grid-cols-9">
             {groups.map(([materialId, g]) => {
               const chosen = g.items.filter((item) => slotOf(item.id) !== -1);
               const active = chosen.length > 0;
               const st = active ? slotStyle(slotOf(chosen[0].id)) : null;
+              const available = materialFrequencies.get(materialId) ?? new Set<Frequency>();
+              const availabilityText = [
+                available.has("monthly") ? "Monthly" : null,
+                available.has("annual") ? "Annual" : null,
+              ].filter(Boolean).join(" · ");
               return (
                 <button
                   key={materialId}
                   type="button"
                   aria-pressed={active}
-                  title={`${g.name}: ${g.items.length} ${tab} benchmark${g.items.length === 1 ? "" : "s"}`}
+                  title={`${g.name} · ${availabilityText} · ${g.items.length} ${tab} benchmark${g.items.length === 1 ? "" : "s"}`}
                   onClick={() => toggleMaterial(g.items)}
                   className={cn(
-                    "flex min-h-20 min-w-0 flex-col items-start justify-between gap-1 rounded-md border px-3 py-2 text-left outline-none focus-visible:ring-2 focus-visible:ring-accent motion-safe:transition-colors",
+                    "group relative flex min-h-20 min-w-0 flex-col items-start justify-between gap-1 rounded-md border px-3 py-2 text-left outline-none focus-visible:ring-2 focus-visible:ring-accent motion-safe:transition-colors motion-safe:hover:-translate-y-0.5",
                     active ? "border-accent bg-elevated text-foreground" : pillOff,
                   )}
                 >
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-[calc(100%+6px)] left-0 z-20 w-max max-w-52 rounded border border-border-strong bg-elevated px-2.5 py-1.5 text-xs text-foreground opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  >
+                    {g.name} · {availabilityText}
+                  </span>
                   <span className="font-display text-xl font-semibold leading-none" style={st ? { color: st.color } : undefined}>
                     {MARKET_SYMBOLS[materialId] ?? "•"}
                   </span>
                   <span className="w-full truncate text-xs" title={g.name}>{g.name}</span>
                   <span className="text-[10px] text-faint">{active ? `${chosen.length} selected` : `${g.items.length} benchmark${g.items.length === 1 ? "" : "s"}`}</span>
+                  <span className="text-[10px] font-medium text-muted" aria-label={availabilityText}>
+                    {available.has("monthly") ? "M" : ""}
+                    {available.has("monthly") && available.has("annual") ? " · " : ""}
+                    {available.has("annual") ? "A" : ""}
+                  </span>
                 </button>
               );
             })}
