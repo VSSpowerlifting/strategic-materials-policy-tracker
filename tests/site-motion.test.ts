@@ -25,16 +25,14 @@ test("scroll reveal keeps server-rendered content visible until JS opts into mot
   assert.match(script, /prefers-reduced-motion: reduce/);
 });
 
-test("homepage cards, market snapshot and supply chain have separate in-view entrances", () => {
+test("homepage chart enters in view without reintroducing the long animated lattice", () => {
   const html = renderToStaticMarkup(createElement(Home));
   assert.equal((html.match(/data-motion-kind="chart"/g) ?? []).length, 1);
-  assert.equal((html.match(/data-motion-kind="cards"/g) ?? []).length, 2);
-  assert.equal((html.match(/data-motion-kind="chain"/g) ?? []).length, 1);
-  assert.equal((html.match(/data-motion-item/g) ?? []).length, 7);
-  assert.equal((html.match(/class="chain-stage /g) ?? []).length, 8);
-  assert.match(html, /class="element-tile group/);
-  assert.match(html, /group-focus-visible:opacity-100/);
-  assert.ok(html.indexOf('id="home-market-heading"') < html.indexOf('id="chain-heading"'));
+  assert.equal((html.match(/data-motion-kind="cards"/g) ?? []).length, 0);
+  assert.equal((html.match(/data-motion-kind="chain"/g) ?? []).length, 0);
+  assert.doesNotMatch(html, /class="chain-stage |class="element-tile group/);
+  assert.ok(html.indexOf('id="home-market-heading"') < html.indexOf('id="research"'));
+  assert.ok(html.indexOf('id="research"') < html.indexOf('id="database-heading"'));
 });
 
 test("market selector reports monthly/annual availability and chart enters once in view", () => {
