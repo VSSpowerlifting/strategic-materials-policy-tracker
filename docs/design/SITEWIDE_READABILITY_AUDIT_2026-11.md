@@ -19,6 +19,9 @@ Make SMPT understandable on first visit and readable throughout. Prioritize publ
 ## Phase 1 — focused reading-order foundation
 
 - [x] Homepage: research-first introduction, compact market preview and focused entry links; move the lattice and supply-chain breakdown to their dedicated tools
+- [x] Homepage refinement: larger policy-and-investment headline; Escondida flagship case with source-grounded scenario bars; editorial research feed; four-layer research framework; market/database tools; small research-inquiry contact section
+- [x] Flagship values: use `fi002Screens` published cases (199/275/333/416 ktpa) and label these as modeled thresholds, not plant output forecasts
+- [ ] Visually review the flagship at desktop/mobile widths, including the relative importance of the bar exhibit vs. the market preview and the appropriateness of the public inquiry email
 - [x] Navigation: direct Research and Markets access and an accessible More disclosure for specialist views
 - [x] Capital: search first; advanced funding summaries, counts, classifications and status definitions remain available on demand
 - [x] Projects: project directory and filters before terminology
