@@ -61,21 +61,23 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLdScript(datasetJsonLd()) }}
       />
 
-      <Container width="wide" className="py-20 sm:py-24 lg:py-28">
-        <div className="max-w-5xl">
+      <Container width="wide" className="pb-12 pt-14 sm:pb-14 sm:pt-16 lg:pb-14 lg:pt-20">
+        <div className="max-w-[82rem]">
           <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-accent">
             Policy &amp; financial intelligence
           </p>
-          <h1 className="mt-6 max-w-5xl font-display text-[2.9rem] font-semibold leading-[1.07] tracking-tight text-balance sm:text-[4.2rem] lg:text-[5.05rem]">
+          <h1 className="mt-5 max-w-[80rem] font-display text-[clamp(3.1rem,7.1vw,6.5rem)] font-semibold leading-[0.99] tracking-[-0.045em] text-balance">
             Critical minerals research for policy and investment decisions.
           </h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-muted sm:text-xl sm:leading-9">
-            Independent analysis of government policy, financing agreements and industrial projects,
-            supported by financial models and primary-source research.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Link href="/research" className="research-button">Read research</Link>
-            <Link href="/events" className="research-button-secondary">Explore the database</Link>
+          <div className="mt-9 flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+            <p className="max-w-2xl text-lg leading-8 text-muted sm:text-xl sm:leading-9">
+              Independent analysis of government policy, financing agreements and industrial projects,
+              supported by financial models and primary-source research.
+            </p>
+            <div className="flex shrink-0 flex-wrap items-center gap-3">
+              <Link href="/research" className="research-button">Read research</Link>
+              <Link href="/events" className="research-button-secondary">Explore the database</Link>
+            </div>
           </div>
         </div>
       </Container>
