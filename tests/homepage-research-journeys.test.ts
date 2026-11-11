@@ -33,7 +33,10 @@ test("the homepage leads with research and keeps the data tools secondary", () =
   const chart = view.indexOf('id="home-market-heading"');
   const research = view.indexOf('id="research"');
   const database = view.indexOf('id="database-heading"');
-  assert.ok(chart !== -1 && chart < research && research < database);
+  const caseStudy = view.indexOf('id="featured-case-title"');
+  assert.ok(caseStudy !== -1 && caseStudy < research, "flagship analysis appears directly below hero");
+  assert.ok(research < database && database < chart, "market chart sits with the intelligence tools");
+  assert.match(view, /Research and strategic analysis/);
   assert.ok(view.includes('aria-label="Database sections"'));
   assert.doesNotMatch(view, /aria-label="Materials in scope"/);
   assert.doesNotMatch(view, /Current corpus|Unlock insights/i);
