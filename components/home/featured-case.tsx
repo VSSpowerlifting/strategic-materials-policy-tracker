@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { fi002, fi002Screens } from "@/lib/fi002";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 /** FI002's published model outputs, not independently generated homepage estimates. */
 const scenarioBars = fi002Screens.map((scenario) => ({
@@ -48,6 +49,7 @@ export function FeaturedCase() {
             </div>
           </div>
 
+          <ScrollReveal kind="chart">
           <figure className="min-w-0 rounded-lg border border-border-strong bg-card px-5 py-6 sm:px-7 sm:py-8">
             <div className="flex flex-wrap items-start justify-between gap-5 border-b border-border pb-5">
               <figcaption className="max-w-md">
@@ -103,6 +105,7 @@ export function FeaturedCase() {
               </Link>
             </p>
           </figure>
+          </ScrollReveal>
         </div>
       </div>
     </section>
