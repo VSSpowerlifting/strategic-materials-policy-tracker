@@ -22,7 +22,7 @@ ACCESSIBLE = OUT / 'fi003-mp-materials-10x-financing-draft-1.0-accessible.pdf'
 RECEIPT = OUT / 'fi003-mp-materials-10x-financing-draft-1.0-accessible.receipt.json'
 MANIFEST = OUT / 'fi003-mp-materials-10x-financing-draft-1.0.manifest.json'
 SPEC = ROOT / 'presentation' / 'v100' / 'spec.json'
-SOURCE_SHA256 = 'cc97153e7d5da5ba5cdc20d0f68ca63e28a53e9750a339ba3efaf2fb720c95ed'
+SOURCE_SHA256 = '24bb1a95cd732b1a4ef615d92d2ea5896dc24f02f7b9f351429566581e94a238'
 PAGES = 18
 
 
@@ -80,7 +80,7 @@ class AccessiblePdfV100Tests(unittest.TestCase):
         self.assertEqual(roles['/Table'], 8)
         self.assertEqual(roles['/TH'], 30)
         self.assertEqual(roles['/TD'], 150)
-        self.assertEqual(roles['/Link'], 59)
+        self.assertEqual(roles['/Link'], 64)
 
     def test_every_figure_has_alt_text(self):
         figures = [n for n in self.nodes if n['/S'] == '/Figure']
@@ -132,8 +132,10 @@ class AccessiblePdfV100Tests(unittest.TestCase):
         evidence = {e['id']: e['url'] for e in self.manifest['evidence']}
         for ref, url in evidence.items():
             self.assertEqual(self.register[ref], url, ref)
-        slides = json.loads(SPEC.read_text())['slides']
-        expected = [[]] + [[evidence[r] for r in s['exhibit']['evidence_refs']] for s in slides]
+        spec = json.loads(SPEC.read_text())
+        slides = spec['slides']
+        # Draft 1.0's cover cites its five sources as live links.
+        expected = [[evidence[r] for r in spec['cover']['evidence_refs']]] + [[evidence[r] for r in s['exhibit']['evidence_refs']] for s in slides]
         parent_tree = self.pdf.trailer['/Root']['/StructTreeRoot']['/ParentTree']['/Nums']
         parents = {int(parent_tree[i]): parent_tree[i + 1].get_object() for i in range(0, len(parent_tree), 2)}
         total = 0
@@ -144,7 +146,7 @@ class AccessiblePdfV100Tests(unittest.TestCase):
             for a in links:
                 self.assertEqual(parents[int(a['/StructParent'])]['/S'], '/Link')
             total += len(links)
-        self.assertEqual(total, 59)
+        self.assertEqual(total, 64)
 
     def test_text_identical_to_export(self):
         original = PdfReader(SOURCE)
@@ -175,11 +177,22 @@ class AccessiblePdfV100Tests(unittest.TestCase):
         state = alts[(9, 5)]
         for label in ('Available', 'Draws blocked', 'Grace extended', 'Event of Default', '$343.75m'):
             self.assertIn(label, state)
-        self.assertIn('no such event is reported', state)
+        self.assertIn('Current state as of 30 September 2026: Available', state)
 
-    def test_milestone_alt_marks_illustrative_dates(self):
+    def test_milestone_alt_distinguishes_date_states(self):
         alts = {(a['page'], a['mcid']): a['after'] for a in self.receipt['alt_text']}
-        self.assertIn('illustrative', alts[(11, 19)])
+        alt = alts[(11, 19)]
+        self.assertNotIn('illustrative', alt)
+        self.assertIn('conditional dates apply only if a stated term is met', alt)
+        for mark in ('Revolver signed, reported', 'Covenant trigger deadline, contractual', 'Springing maturity, conditional'):
+            self.assertIn(mark, alt)
+
+    def test_cover_keeps_publication_fields_as_text(self):
+        # Letter-spaced runs extract with gaps, so compare without whitespace.
+        flat = ''.join(self.pdf.pages[0].extract_text().split())
+        for text in ('FINANCIAL INTELLIGENCE 003', 'Benjamin Yang', 'Research draft 1.0', 'Evidence to 6 November 2026',
+                     'not commissioned or reviewed by JPMorgan or MP Materials', '$724.2m', '$275m', 'expired undrawn'):
+            self.assertIn(''.join(text.split()), flat)
 
 if __name__ == '__main__':
     unittest.main()

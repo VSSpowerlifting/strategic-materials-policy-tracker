@@ -1,11 +1,58 @@
 {
   "classification": "research",
   "title": "MP Materials' 10X Financing: Cash, Covenants, and Construction Risk",
-  "cover_lines": [
-    "How a lapsed JPMorgan and Goldman Sachs commitment gave way to equity and a JPMorgan-agented revolver",
-    "Benjamin Yang · Research draft 1.0 candidate · 11 November 2026 · Evidence to 6 November 2026",
-    "Independent research; not commissioned or reviewed by JPMorgan or MP Materials. Pending human review; publication hold remains in place."
-  ],
+  "cover": {
+    "series": "SMPT  /  FINANCIAL INTELLIGENCE 003",
+    "title": "MP Materials'\n10X Financing",
+    "subtitle": "Cash, Covenants, and Construction Risk",
+    "dek": "How a JPMorgan–Goldman Sachs commitment of at least $1bn gave way to $724.2m of net equity and a $275m JPMorgan-agented revolver, and what that means for funding 10X before it earns revenue.",
+    "context": "10X is MP's planned rare-earth magnet plant in Northlake, Texas. MP expects to invest more than $1.25bn; construction is underway and commissioning is expected in 2028.",
+    "byline": [
+      "Benjamin Yang",
+      "Research draft 1.0 · 11 November 2026",
+      "Evidence to 6 November 2026"
+    ],
+    "attribution": "Independent research; not commissioned or reviewed by JPMorgan or MP Materials. Held from publication pending human review.",
+    "ledger": {
+      "heading": "WHAT REPLACED THE COMMITMENT",
+      "unit": "USD million, one scale; three separate instruments",
+      "key": "Dashed: expired undrawn. Solid: cash received. Outline: committed capacity, shaded where in use.",
+      "rows": [
+        {
+          "label": "Joint secured commitment",
+          "value": 1000.0,
+          "valueText": "≥ $1,000m",
+          "status": "JPMorgan and Goldman Sachs; expired undrawn 26 Aug 2025",
+          "treatment": "lapsed"
+        },
+        {
+          "label": "Common equity, net",
+          "value": 724.2,
+          "valueText": "$724.2m",
+          "status": "Received July 2025; no repayment date",
+          "treatment": "received"
+        },
+        {
+          "label": "Revolving credit facility",
+          "value": 275.0,
+          "valueText": "$275m",
+          "status": "$72m letters of credit and no loans at 30 Sep 2026",
+          "treatment": "committed",
+          "part": {
+            "value": 72.0,
+            "label": "Letters of credit"
+          }
+        }
+      ]
+    },
+    "evidence_refs": [
+      "S01",
+      "S07",
+      "S08",
+      "S11",
+      "S19"
+    ]
+  },
   "evidence": [
     {
       "id": "S01",
@@ -111,9 +158,9 @@
       "pattern": "exhibit-with-interpretation",
       "label": "Executive answer",
       "exhibit": {
-        "title": "Raise equity first and keep the revolver for letters of credit; a suspension of Defense payment obligations would block its draws",
-        "subtitle": "Recommendation for a hypothetical U.S. sponsor building before commissioning revenue; USD million, figures shown side by side",
-        "annotation": "Editorial judgment, draft 1.0 candidate, 11 November 2026; pending human review. The figures are different measures and are not additive. Cost of capital is not ranked because the loan terms of the lapsed commitment are not public.",
+        "title": "Fund 10X with equity first and keep the revolver for letters of credit, because a suspended Defense payment obligation blocks new draws",
+        "subtitle": "Recommendation for a hypothetical U.S. sponsor building before commissioning revenue; USD million",
+        "annotation": "Analyst judgment. Equity is permanent capital: $724.2m with no repayment date. The revolver's $203m can be drawn only while no Default exists, and a suspended Defense payment obligation is a Default. Plan 10X spending against cash and the $500m quarter-end test.",
         "source": "Underwriting agreement; 2025 10-K; Q3 2026 10-Q; credit agreement",
         "evidence_refs": [
           "S07",
@@ -147,7 +194,7 @@
               ]
             },
             {
-              "label": "Minimum cash floor",
+              "label": "Quarter-end liquidity test",
               "values": [
                 500.0
               ]
@@ -156,18 +203,18 @@
           "notes": [
             {
               "ref": 2,
-              "text": "Cash plus short-term investments; spending that leaves under $500m at a quarter-end breaches the floor."
+              "text": "Cash plus short-term investments, as reported at 30 September 2026."
             },
             {
               "ref": 3,
-              "text": "Drawable only while no Default exists; an actual suspension of a Defense payment obligation blocks new loans and LCs."
+              "text": "Drawable only while no Default exists; a suspended Defense payment obligation stops new loans and letters of credit."
             },
             {
               "ref": 4,
-              "text": "Tested at each quarter-end until the covenant trigger, not a locked reserve; a breach is an immediate Event of Default."
+              "text": "Measured at each quarter-end until the covenant trigger; cash below it is an immediate Event of Default."
             }
           ],
-          "notesHeading": "WHAT EACH FIGURE MEANS"
+          "notesHeading": "BASIS OF EACH FIGURE"
         }
       },
       "table_reason": "The answer pairs four unlike figures with their meaning; a chart would invite summing measures that are not additive."
@@ -178,7 +225,7 @@
       "exhibit": {
         "title": "JPMorgan held every financing role; Goldman Sachs shared the commitment and, with Morgan Stanley, the underwriting",
         "subtitle": "Roles named in the reviewed filings and in J.P. Morgan's self-description",
-        "annotation": "The case shows a bank group, not a single lender's decision. Goldman Sachs and Morgan Stanley were also joint lead arrangers of the revolver. The sole-adviser role rests on J.P. Morgan's self-description; fees, retention and internal credit decisions are not disclosed.",
+        "annotation": "Goldman Sachs and Morgan Stanley were also joint lead arrangers of the revolver JPMorgan administers. Fees by bank and retained positions are undisclosed; the sole-adviser role rests on J.P. Morgan's own account.",
         "source": "Company filings; credit agreement; J.P. Morgan's self-description for the adviser role",
         "evidence_refs": [
           "S01",
@@ -256,7 +303,7 @@
       "exhibit": {
         "title": "Equity and a revolver replaced the joint commitment within seven weeks",
         "subtitle": "Financing events and the agreements around them, July to August 2025",
-        "annotation": "Government agreements (9 July) and Apple's 15 July agreement preceded the 16 July pricing. The record does not isolate their effect on equity demand.",
+        "annotation": "The Defense agreements (9 July) and Apple's agreement (15 July) came days before the 16 July pricing. The filings do not show how much they added to investor demand.",
         "source": "SEC filings, July to August 2025; 2025 10-K, Note 3",
         "evidence_refs": [
           "S01",
@@ -312,9 +359,9 @@
       "pattern": "exhibit-with-interpretation",
       "label": "Replacement",
       "exhibit": {
-        "title": "Net equity of $724.2m and a $275m revolver replaced a $1bn commitment that was never drawn",
-        "subtitle": "USD million; cash proceeds and committed capacity shown together, not summed",
-        "annotation": "The comparison mixes cash and capacity and is arithmetic only. About $0.9m separates the after-discount equity from reported net proceeds as other expenses and rounding.",
+        "title": "Net equity of $724.2m and a $275m revolver replaced a commitment of at least $1bn that expired undrawn",
+        "subtitle": "USD million; equity is cash received, the revolver is committed capacity",
+        "annotation": "The commitment shrank dollar for dollar as the equity and the revolver closed, and expired undrawn on 26 August 2025. The $0.9m between the after-discount equity and reported net proceeds is other offering expenses and rounding.",
         "source": "Underwriting agreement; 2025 10-K",
         "evidence_refs": [
           "S01",
@@ -354,7 +401,7 @@
               ]
             },
             {
-              "label": "Original commitment min.",
+              "label": "Commitment, minimum",
               "values": [
                 1000.0
               ]
@@ -363,18 +410,18 @@
           "notes": [
             {
               "ref": 3,
-              "text": "Reported equity issuance net of costs; no scheduled principal repayment."
+              "text": "Reported equity proceeds net of costs; no scheduled repayment."
             },
             {
               "ref": 4,
-              "text": "Committed capacity, not proceeds; drawn loans are zero in every reported snapshot."
+              "text": "Committed capacity; no loans were drawn at any reported date."
             },
             {
               "ref": 5,
-              "text": "Reference minimum for a commitment that expired undrawn; $7.4m of fees were still expensed."
+              "text": "Stated as at least $1bn; it expired undrawn and $7.4m of fees were expensed."
             }
           ],
-          "notesHeading": "WHAT EACH FIGURE MEANS"
+          "notesHeading": "STATUS OF EACH AMOUNT"
         }
       },
       "table_reason": "Cash proceeds and committed capacity are different measures; side-by-side rows with notes avoid a summed or stacked visual."
@@ -385,7 +432,7 @@
       "exhibit": {
         "title": "New shares added 8.31% to the basic count and are 7.68% of the isolated base",
         "subtitle": "Bridge from basic shares before the July 2025 offering to the isolated pro forma, then the composition of that pro forma",
-        "annotation": "The dilution is identical with or without a revolver, so it does not separate the two equity options. 8.31% uses the pre-offering basic count; 7.68% the isolated post-offering base. Not fully diluted.",
+        "annotation": "Dilution separates equity from committed debt; both equity options issue the same shares. 8.31% measures the new shares against the pre-offering basic count, 7.68% against the isolated post-offering count. Both counts are basic shares outstanding, not fully diluted.",
         "source": "Prospectus supplement; 2025 10-K",
         "evidence_refs": [
           "S06",
@@ -421,8 +468,8 @@
       "label": "Revolver",
       "exhibit": {
         "title": "Letters of credit leave $203m of the $275m revolver available to draw",
-        "subtitle": "USD million at three reported dates; no loan draws in any snapshot",
-        "annotation": "The letters of credit are the revolver's one observed use. Availability is conditional on the credit agreement and is not cash; the sublimit is not additive to loans.",
+        "subtitle": "USD million at three reported dates; no loans were drawn at any of them",
+        "annotation": "Letters of credit are the revolver's only reported use. The $203m can be drawn only while the agreement's conditions are met, so it supports liquidity without counting as cash. Letters of credit and loans share the $275m commitment.",
         "source": "Credit agreement; 2025 10-K; Q2 and Q3 2026 10-Qs",
         "evidence_refs": [
           "S09",
@@ -473,9 +520,9 @@
       "pattern": "waterfall",
       "label": "Liquidity",
       "exhibit": {
-        "title": "Company liquid assets fell $492.4m in nine months as expansion continued",
-        "subtitle": "USD million, 31 December 2025 to 30 September 2026",
-        "annotation": "Capital spending covers all company projects, not 10X alone; MP guides to $500m to $600m of 2026 capital costs net of awards. Price protection cash of $110.9m is inside operating cash flow. Reported, not forecast.",
+        "title": "Liquid assets fell $492.4m in nine months, mostly from $420.3m of capital spending and $91.1m of financing outflows",
+        "subtitle": "Reported USD million, 31 December 2025 to 30 September 2026",
+        "annotation": "Capital spending covers every company project, of which 10X is one; MP guides to $500m to $600m of 2026 capital costs net of government awards. The $7.8m operating outflow includes $110.9m of price-protection receipts.",
         "source": "Q3 2026 10-Q",
         "evidence_refs": [
           "S19"
@@ -534,8 +581,8 @@
       "label": "Default path",
       "exhibit": {
         "title": "An actual suspension of a Defense payment obligation blocks revolver draws at once; lenders may act after 60 or 90 days",
-        "subtitle": "Revolver states under credit agreement Section 8.01(m); no such event is reported",
-        "annotation": "Plain reading of the filed agreement, not legal advice. The clock starts when an obligation is actually suspended or released; a mere right to suspend is arguably not a Default. Restoring it in time avoids an Event of Default. A late DoD payment is not clearly a trigger. Remedies need lender action.",
+        "subtitle": "Revolver states under credit agreement Section 8.01(m); the revolver was available at 30 September 2026",
+        "annotation": "Plain reading of the filed credit agreement; not legal advice. The clock starts when an obligation is actually suspended or released; whether a right to suspend already counts is arguable, and a late DoD payment is not clearly covered. Restoring the obligation in time avoids an Event of Default. Remedies need Required Lenders to act.",
         "source": "Credit agreement §§1.01, 4.02, 5.05, 8.01(m), 8.02; transaction agreement §9.02(a)",
         "evidence_refs": [
           "S02",
@@ -600,9 +647,9 @@
       "pattern": "exhibit-with-interpretation",
       "label": "Cash tests",
       "exhibit": {
-        "title": "In a suspension of Defense payments, liquidity rests on cash tests of $500m at each quarter-end and $343.75m on day 60",
+        "title": "If Defense payments are suspended, MP's liquidity depends on two cash tests: $500m at each quarter-end and $343.75m on day 60",
         "subtitle": "USD million at 30 September 2026; contractual thresholds beside reported balances",
-        "annotation": "Different measures, not additive; gaps between them are not headroom. Every draw also repeats a no-material-adverse-effect representation. Plain reading of the filed agreement, not legal advice.",
+        "annotation": "Each threshold applies on its own date. Cash can be spent between quarter-ends, so the projected quarter-end balance sets the spending limit. Every draw also repeats the representation that no material adverse effect has occurred.",
         "source": "Credit agreement §§4.02, 5.05, 7.11, 8.01(b) and (m); Q3 2026 10-Q",
         "evidence_refs": [
           "S09",
@@ -622,13 +669,13 @@
               ]
             },
             {
-              "label": "Minimum cash floor",
+              "label": "Quarter-end liquidity test",
               "values": [
                 500.0
               ]
             },
             {
-              "label": "Grace-extension test",
+              "label": "Day-60 extension test",
               "values": [
                 343.75
               ]
@@ -646,7 +693,7 @@
               ]
             },
             {
-              "label": "Revolver available, Sep 26",
+              "label": "Available, Sep 26",
               "values": [
                 203.0
               ]
@@ -659,7 +706,7 @@
             },
             {
               "ref": 2,
-              "text": "Quarter-end test until the covenant trigger, not held aside; a breach is an immediate Event of Default; no equity cure found."
+              "text": "Measured each quarter-end until the covenant trigger; a shortfall is an immediate Event of Default, with no equity cure found."
             },
             {
               "ref": 3,
@@ -670,7 +717,7 @@
               "text": "Lenders may require cash collateral for these after an Event of Default."
             }
           ],
-          "notesHeading": "WHAT EACH TEST DOES"
+          "notesHeading": "WHAT EACH ROW MEASURES"
         }
       },
       "table_reason": "Reported balances and contractual thresholds are unlike measures; rows with their rules avoid implying a subtraction."
@@ -680,8 +727,8 @@
       "label": "Timing",
       "exhibit": {
         "title": "Leverage tests start by Q3 2027, before expected 2028 10X commissioning, and the 2030 notes can pull maturity into 2029",
-        "subtitle": "Reported dates, contract deadlines and one conditional date; none is an MP plan",
-        "annotation": "Trigger: earlier at $400m of covenant EBITDA, later only on a late filing. On $1,043.1m of debt, 4.00x leverage needs about $232m ($209m with 100% netting); 3.00x coverage, at most $108–109m. If enough 2030 notes remain, maturity springs unless cash plus availability tops $1,078.5m or leverage is 2.00x or less.",
+        "subtitle": "Reported dates, contract deadlines and one conditional date",
+        "annotation": "The trigger comes earlier at $400m of covenant EBITDA, later only on a late filing. On $1,043.1m of debt, 4.00x leverage needs about $232m of covenant EBITDA ($209m with 100% netting); 3.00x coverage, at most $108–109m. With enough 2030 notes left, maturity springs unless cash plus availability tops $1,078.5m or leverage is 2.00x or less.",
         "source": "Credit agreement §§1.01, 6.01(b), 7.11; Q3 2026 10-Q, Note 8 and MD&A",
         "evidence_refs": [
           "S08",
@@ -727,7 +774,7 @@
       "exhibit": {
         "title": "The Defense agreements that support MP are also revolver default triggers",
         "subtitle": "Government instruments linked to MP Materials; the transaction, offtake and price protection agreements are named in the credit agreement",
-        "annotation": "Support narrows named price and volume risks; construction cost, timing and financing stay with MP. DoD may suspend offtake performance only after an uncured MP payment default; the filed price agreement has no suspension right. A material 10X breach left uncured past cure and notice periods lets DoD terminate, a revolver Event of Default.",
+        "annotation": "The price floor and offtake reduce MP's NdPr price and magnet volume risk; MP keeps 10X cost and timing risk. DoD can suspend offtake only after an uncured MP payment default; the price agreement has no suspension right. An uncured 10X breach is likelier: it makes the agreement terminable, an immediate revolver Event of Default.",
         "source": "Transaction agreement §§6.13, 9.02(a); offtake §8.4; price protection §8(p)–(q); credit agreement §8.01(m); 2025 10-K, Note 3",
         "evidence_refs": [
           "S02",
@@ -767,9 +814,9 @@
       "pattern": "role-matrix",
       "label": "Options",
       "exhibit": {
-        "title": "On the same dates, each path leaves a different gap: loan terms, letters of credit or later capital",
+        "title": "Each financing path, judged on the same dates, leaves a different question open: loan terms, letter-of-credit cover or later capital",
         "subtitle": "Financing paths compared from July 2025 to 30 September 2026; what each would have provided and what it leaves open",
-        "annotation": "Committed debt is judged without its loan pricing, tenor, conditions or recourse, which are not public. Equity only would need another source for the $72m of letters of credit; its terms are not determined.",
+        "annotation": "The committed debt's pricing, tenor, conditions and recourse were never disclosed, so cost of capital is left unranked. The terms on which equity only would replace the letters of credit are also undetermined.",
         "source": "FI003 analysis of the reviewed record; credit agreement; Q3 2026 10-Q",
         "evidence_refs": [
           "S01",
@@ -800,10 +847,10 @@
                   "qualifier": "A bank commits to lend; loans are drawn and repaid later"
                 },
                 {
-                  "qualifier": "The $1bn commitment expired undrawn after fees were paid"
+                  "qualifier": "The commitment of at least $1bn expired undrawn; fees were paid"
                 },
                 {
-                  "qualifier": "Loan pricing, tenor and conditions; balance not determined"
+                  "qualifier": "Loan pricing, tenor, conditions and recourse"
                 }
               ]
             },
@@ -814,7 +861,7 @@
                   "qualifier": "New common stock; permanent capital with no repayment"
                 },
                 {
-                  "qualifier": "Same $724.2m of net proceeds, no facility"
+                  "qualifier": "The same $724.2m of net proceeds, with no facility"
                 },
                 {
                   "qualifier": "Cash collateral or another issuer for $72m of letters of credit"
@@ -828,10 +875,10 @@
                   "qualifier": "The same stock sale plus a revolving credit facility"
                 },
                 {
-                  "qualifier": "Both executed; $72m of letters of credit, no loans"
+                  "qualifier": "Both closed; $72m of letters of credit and no loans"
                 },
                 {
-                  "qualifier": "Draws depend on no Default and the Defense agreements"
+                  "qualifier": "Draws stop on any Default, including a Defense-agreement event"
                 }
               ]
             },
@@ -843,7 +890,7 @@
                 },
                 null,
                 {
-                  "qualifier": "Capital being available later on acceptable terms"
+                  "qualifier": "Whether capital is available later on acceptable terms"
                 }
               ]
             }
@@ -858,8 +905,8 @@
       "label": "Criteria",
       "exhibit": {
         "title": "Equity plus a revolver adds later liquidity but exposes MP to lender remedies if Defense payments are suspended",
-        "subtitle": "No option is shown to fully fund 10X; marks are categorical and unweighted",
-        "annotation": "Editorial judgment, draft 1.0 candidate, 11 November 2026; pending human review. Marks for committed debt rest on the commitment alone; its loan terms are not public, so cost of capital is left unranked.",
+        "subtitle": "Four financing paths against seven criteria; marks are categorical and unweighted",
+        "annotation": "Analyst judgment. Equity plus revolver and equity only differ on four criteria: covenants, conditional liquidity, lender remedies and refinancing. Marks for committed debt rest on the commitment alone; \"Not stated\" means its loan terms were never published.",
         "source": "FI003 analysis; credit agreement; prospectus supplement; 2025 10-K",
         "evidence_refs": [
           "S06",
@@ -886,7 +933,7 @@
               ]
             },
             {
-              "label": "No dilution of holders",
+              "label": "Avoids dilution of holders",
               "marks": [
                 "Meets",
                 "Does not",
@@ -895,7 +942,7 @@
               ]
             },
             {
-              "label": "No debt service or covenants pre-revenue",
+              "label": "Avoids pre-revenue debt and covenants",
               "marks": [
                 "Does not",
                 "Meets",
@@ -904,7 +951,7 @@
               ]
             },
             {
-              "label": "Conditional liquidity for later",
+              "label": "Provides conditional liquidity later",
               "marks": [
                 "Partly",
                 "Does not",
@@ -913,7 +960,7 @@
               ]
             },
             {
-              "label": "No lender remedies on a DoD suspension",
+              "label": "Avoids lender remedies if DoD suspends",
               "marks": [
                 "Not stated",
                 "Meets",
@@ -922,7 +969,7 @@
               ]
             },
             {
-              "label": "Low refinancing exposure",
+              "label": "Limits refinancing exposure",
               "marks": [
                 "Not stated",
                 "Meets",
@@ -950,7 +997,7 @@
       "exhibit": {
         "title": "A minimum-payment addback in covenant earnings can reverse when cash arrives",
         "subtitle": "Illustrative clause arithmetic with hypothetical inputs, not reported MP results",
-        "annotation": "Hypothetical figures of 40 and 20 show direction only. The text does not settle whether the addback applies while Defense payment obligations are suspended. Covenant EBITDA differs from Adjusted EBITDA.",
+        "annotation": "Where the minimum payment exceeds attributable income, covenant EBITDA adds back the difference (20 on hypothetical 40 and 20). Cash later received for the same amount reverses it, so it counts once. The text leaves open whether the addback applies during a suspension. Covenant EBITDA differs from Adjusted EBITDA.",
         "source": "Credit agreement, definition of Consolidated EBITDA",
         "evidence_refs": [
           "S09"
@@ -1039,8 +1086,8 @@
       "label": "Strongest alternative",
       "exhibit": {
         "title": "The revolver helps in a fundable overrun; a suspension of Defense payments blocks it",
-        "subtitle": "Both options raise the same $724.2m of equity at the same dilution; they differ in what happens under stress",
-        "annotation": "Editorial judgment, draft 1.0 candidate, 11 November 2026; pending human review. Before the covenant trigger a draw adds cash toward the $500m quarter-end floor; after it, a draw raises leverage. Equity only is better if covenant EBITDA would fall short of about $232m at the first leverage test.",
+        "subtitle": "Equity plus revolver against equity only, each with $724.2m of equity at the same dilution, in five situations",
+        "annotation": "Analyst judgment. Before the covenant trigger, a draw adds cash toward the $500m quarter-end test; after it, a draw raises leverage against the 4.00x limit. Equity only is better if covenant EBITDA would fall short of about $232m at the first leverage test.",
         "source": "FI003 analysis; credit agreement; transaction agreement §9.02(a); 2025 10-K; Q3 2026 10-Q",
         "evidence_refs": [
           "S02",
@@ -1080,7 +1127,7 @@
                   "qualifier": "Draws blocked; after day 60/90, lenders may call LC cash cover"
                 },
                 {
-                  "qualifier": "Cash only, with no lender remedies"
+                  "qualifier": "Funds from cash; no lender remedies apply"
                 }
               ]
             },
@@ -1113,7 +1160,7 @@
                   "qualifier": "Loans due Aug 2030, or 30 Nov 2029 if maturity springs"
                 },
                 {
-                  "qualifier": "No repayment from this financing option"
+                  "qualifier": "Permanent capital; nothing to repay"
                 }
               ]
             }
@@ -1127,9 +1174,9 @@
       "pattern": "condition-tree",
       "label": "Reversal triggers",
       "exhibit": {
-        "title": "Four conditions test whether equity plus a revolver still holds; each failure points to another path",
+        "title": "Equity first needs an open equity window, cash to finish 10X, secure Defense payments and covenant EBITDA near $232m",
         "subtitle": "Decision conditions for a hypothetical sponsor; the highlighted route ends at the recommendation",
-        "annotation": "Editorial judgment, draft 1.0 candidate, 11 November 2026; pending human review. Go and slow decisions on 10X are set on projected quarter-end cash of at least $500m, then covenant EBITDA of at least about $232m ($209m on the 100% reading); revolver capacity is a secondary buffer. A sponsor without an anchor offtake or price floor may lack the equity window.",
+        "annotation": "Analyst judgment. Set go and slow decisions on 10X against projected quarter-end cash of at least $500m, then covenant EBITDA of at least about $232m ($209m on the 100% reading). Revolver capacity is a secondary buffer. A sponsor without an anchor offtake or price floor may find the equity window closed.",
         "source": "FI003 analysis; credit agreement; transaction agreement",
         "evidence_refs": [
           "S02",
@@ -1239,9 +1286,9 @@
       "pattern": "role-matrix",
       "label": "Objections",
       "exhibit": {
-        "title": "Six objections narrow the recommendation and name what would still change it",
+        "title": "Six objections narrow the recommendation; the main open item is the cost to complete 10X",
         "subtitle": "Each objection, what the draft concedes, how it answers and what remains open",
-        "annotation": "Editorial judgment, draft 1.0 candidate, 11 November 2026; pending human review. No structure is optimal and no plan is shown as fully funded: the record has no cost-to-complete for 10X.",
+        "annotation": "Analyst judgment. Two open items matter most: the cost to complete 10X, which no public source gives, and counsel's reading of Section 8.01(m).",
         "source": "FI003 analysis; credit, transaction and offtake agreements; filings",
         "evidence_refs": [
           "S01",
@@ -1312,13 +1359,13 @@
               "label": "Government support leaves risk",
               "cells": [
                 {
-                  "qualifier": "Risk remains with MP"
+                  "qualifier": "10X cost, timing and financing stay with MP"
                 },
                 {
-                  "qualifier": "Only risks the record names are claimed"
+                  "qualifier": "Support is credited only for NdPr price and volume risk"
                 },
                 {
-                  "qualifier": "MP still funds the build"
+                  "qualifier": "Construction is funded from MP's own capital"
                 }
               ]
             },

@@ -13,6 +13,67 @@
   - C01–C55 and C57–C62;
   - the registered source fingerprints in `sources.json`.
 - What changed and why: [DECISION_NOTE_V100.md](DECISION_NOTE_V100.md).
+- A second pass on 11 November revised the wording of every slide and replaced the generic cover. The recommendation, model 1.0 and every figure are unchanged. See [Editorial and cover revision](#editorial-and-cover-revision-11-november-second-pass).
+
+## Editorial and cover revision (11 November, second pass)
+
+### Cover
+
+The generic `coverSlide()` gave 1.0 a title, a byline and a badge. It had lost what the 0.5 cover carried: the series line, the two-tier title, the gold rule, the 10X context, and linked citations. The new cover restores those and adds one visual element. It is an original layout drawn by the exhibit system in Archivo on the graphite SMPT ground. It uses no imagery and no bank or company marks.
+
+- **Left column.** It carries:
+  - the series line "SMPT / FINANCIAL INTELLIGENCE 003";
+  - the title, *MP Materials' 10X Financing*, with the subtitle as one heading;
+  - a gold rule;
+  - the dek, naming the commitment, the equity and the revolver;
+  - one context line on 10X (Northlake, more than $1.25bn, commissioning expected in 2028);
+  - the byline: Benjamin Yang, research draft 1.0 of 11 November 2026, evidence to 6 November 2026.
+- **Right column: an instrument ledger.** It shows the three instruments on one USD scale, as separate rows that are never stacked or summed:
+  - the joint commitment of at least $1bn, with a dashed outline because it expired undrawn on 26 Aug 2025;
+  - net equity of $724.2m, in solid gold because the cash was received;
+  - the $275m revolver, in outline, with its $72m of letters of credit shaded.
+
+  Every amount and status is also given as text, so the bars only support the text.
+- **Attribution line.** It reads: independent research, not commissioned or reviewed by JPMorgan or MP Materials, held from publication pending human review. Five evidence IDs (S01, S07, S08, S11, S19) follow as live links. The DRAFT badge stays at top right.
+- **Code.**
+  - `scripts/exhibit-system/research-cover.ts` adds an optional `cover` object to the research-spec contract. The contract enforces field limits, at most three ledger rows, part bounds, the three treatments and resolved evidence references.
+  - A spec without `cover` renders exactly as before: the 0.9.1 re-render is byte-identical.
+  - `tests/exhibit-system-v100-cover.test.ts` covers the contract (5 tests).
+- **Contrast.** Cover link text (#C8993E on #12110F) measures about 7.2:1 in the raster. The body tints are about 13:1 and 8:1.
+
+### Copy
+
+Every title, subtitle, interpretation, row label, legend, note and cover field was read in context and rewritten where it narrated process, set up a manufactured contrast, used a generic label or repeated a disclaimer. Negations that carry fact or law were kept, among them:
+
+- expired undrawn;
+- no loans drawn;
+- no equity cure found;
+- no suspension right in the price agreement;
+- not legal advice;
+- "Not determined" and "Not stated".
+
+| Slide | Main change |
+|---|---|
+| All | The long per-slide judgment stamp is now "Analyst judgment." The draft status and date sit on the cover and in metadata. The legal stamp is now "Plain reading of the filed credit agreement; not legal advice." |
+| 2 | The title states the reason: "…because a suspended Defense payment obligation blocks new draws". The interpretation says what equity and the revolver each are. The row is "Quarter-end liquidity test"; the notes give each figure's basis |
+| 3 | The annotation names JPMorgan as administrative agent and says that bank-level fees and retained positions are undisclosed |
+| 4 | "The filings do not show how much they added to investor demand" replaces "the record does not isolate their effect" |
+| 5 | The title gives the commitment as "at least $1bn … expired undrawn". The interpretation explains the dollar-for-dollar reduction. The notes become "Status of each amount" |
+| 6 | It states what the dilution figure distinguishes (equity versus committed debt) and the basis of each percentage |
+| 7 | It explains why capacity is not cash (draw conditions) and that loans and LCs share the $275m |
+| 8 | The title names the two drivers: $420.3m of capital spending and $91.1m of financing outflows. The $7.8m operating outflow is shown to include $110.9m of price-protection receipts |
+| 9 | The subtitle gives the current state (available at 30 Sep 2026). The legal caveats are merged into one sentence |
+| 10 | The title is in plain prose. The interpretation explains why the projected quarter-end balance sets the spending limit. "Day-60 extension test" replaces "Grace-extension test" |
+| 11 | "None is an MP plan" is dropped from the subtitle. The threshold sentence names covenant EBITDA |
+| 12 | It names the risks the price floor and offtake reduce (NdPr price, magnet volume) and the risks MP keeps (10X cost, timing). It states why a 10X breach is the likelier path |
+| 13 | Each path "leaves a different question open". Cost of capital is left unranked because the terms were never disclosed |
+| 14 | Criteria are positive ("Avoids…", "Provides…", "Limits…"). The interpretation names the four criteria that separate the two equity paths |
+| 15 | It explains the addback mechanism and its one-time effect before the open question |
+| 16 | The subtitle names the five situations. Qualifiers are in plain prose ("Permanent capital; nothing to repay") |
+| 17 | The title states the four conditions, including covenant EBITDA near $232m |
+| 18 | The title names the main open item (cost to complete 10X). The government-support row names the retained risks |
+
+The figures on slide 8 are now computed with half-up decimal rounding (`m1()` in `build_spec.py`), so the title matches the exhibit labels.
 
 ## What changed in the final pass (10 → 11 November)
 
@@ -34,8 +95,8 @@ The 10 November candidate had a QC record, but the brief set out issues it left 
 
 - **Publication / version:** FI003, *MP Materials' 10X Financing: Cash, Covenants, and Construction Risk*, draft 1.0 candidate.
 - **Deck source / rendered PDF:**
-  - `v100/spec.json` (`49c2fd13…`)
-  - `fi003-mp-materials-10x-financing-draft-1.0.pdf` (`cc97153e…`)
+  - `v100/spec.json` (`51ae21a9…`)
+  - `fi003-mp-materials-10x-financing-draft-1.0.pdf` (`24bb1a95…`)
 - **Research cutoff:** 6 November 2026.
 - **Reviewers:**
   - Claude (lead agent);
@@ -54,9 +115,9 @@ The 10 November candidate had a QC record, but the brief set out issues it left 
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | A. Analytical substance | **PASS (agent)**; human review pending | The recommendation is narrowed, not reversed. Equity comes first. The revolver is kept for LCs and for fundable overruns. Construction spending is judged against quarter-end cash of at least $500m and against covenant EBITDA near $232m. The recommendation names the revolver's failure cases: an actual suspension of a Defense payment obligation, and a 10X breach that makes a Defense agreement terminable. Alternatives are compared on the same dates (S13) and by stress (S16). Slide 17 gives four reversal conditions. Cost to complete, headroom, DSCR, funding gap and WACC each appear as "Not determined". |
-| B. Prose authenticity | **PASS (agent)** | Titles state specific claims. Negations that carry fact are kept: no such event is reported; not legal advice; a right is not an act. The new text was read in full. |
-| C. Visual integrity | **PASS (agent)** | 18 / 18 inspected. The slide 9 and slide 11 annotations were shortened after they overran their source lines; both now fit. The timeline uses the new contractual and conditional markers. Archivo only (PDF font check: Archivo Regular and Bold only). 16:9, no generated imagery, no bank graphics. |
-| D. Quantitative/source fidelity | **PASS (agent)** | See the reconciliation table. All 59 evidence links resolve to `sources.json` URLs (tested). Every slide claim's source is on that slide's source line. |
+| B. Prose authenticity | **PASS (agent)** | Second pass: every slide's copy was reread and revised (see the table above). Titles state specific claims. Process narration, manufactured contrasts, generic labels and repeated status stamps were removed. Negations that carry fact or law were kept: expired undrawn; no equity cure found; no suspension right; not legal advice; "Not determined". |
+| C. Visual integrity | **PASS (agent)** | 18 / 18 inspected at full size after the second-pass render. The new cover was checked for hierarchy, alignment, contrast and the ledger's one shared scale. The three-line interpretations on slides 11, 12 and 15–17 sit close to the source rule at the renderer's standard placement and do not overlap. Archivo only (PDF font check). 16:9, no generated imagery, no bank graphics. |
+| D. Quantitative/source fidelity | **PASS (agent)** | See the reconciliation table. The cover ledger's amounts come from the model exports in `build_spec.py`, which asserts $1,000m, $275m and $72m. All 64 evidence links resolve to `sources.json` URLs (tested). Every slide claim's source is on that slide's source line. |
 | E. Publication coherence | **PASS (agent)**; human review pending | The title, the 11 November candidate date, the 6 November cutoff and the HOLD agree across the cover, PDF metadata, the decision note, this record and the publication plan. The deck has 18 slides (maximum 20) and no duplicate headlines. JPMorgan's roles are described from filings only. |
 
 Every gate above is an agent result. Under the presentation standard, automated review never grants PASS on Benjamin's behalf, so the human gates remain open.
@@ -119,7 +180,7 @@ Clause and figure text read from the live copies matches the claim register. `so
   - 18 H1 and 4 H2 headings;
   - 8 tables (30 TH / 150 TD);
   - 10 figures with alt text;
-  - 59 links;
+  - 64 links (the cover adds five);
   - all 18 pages pixel- and text-identical to the export.
 
   Not run: a screen-reader pass (NVDA, JAWS or VoiceOver), or a PDF/UA (ISO 14289) or WCAG audit. No certification is claimed. Link annotations lack `/Contents`; the visible evidence ID serves as the link text.
@@ -139,7 +200,7 @@ The spec cites sources per slide. This table maps each slide to the `evidence.cs
 
 | Slide | Claims |
 |---|---|
-| 1 Cover | C32 (cutoff) |
+| 1 Cover | C01 C02 C05 C07 C13 C14 C27 C28 C32. The 2028 commissioning expectation rests on S19, as recorded in C50; C50's illustrative trigger date is superseded by C67 |
 | 2 Executive answer | C07 C10 C14 C15 C29 C55 C56 C68 |
 | 3 Roles | C02 C08 C09 C11 C12 C33 |
 | 4 Replacement sequence | C01 C05 C13 C35 C51 |
@@ -168,27 +229,28 @@ The remaining claims are not stated on a 1.0 slide. They support the model, the 
 | `verify_editability.py --deck --manifest` | Structural pass (research mode; LibreOffice and PowerPoint tiers not run) |
 | `model.py --check` | PASS: specification and Python anchors reproduce |
 | `prototype.py --check` | PASS: 11 schedules reproduce exactly |
-| FI003 unittests (`discover -p 'test_*.py'`) | 65 tests OK (link count updated 51 → 59 for the added source references) |
+| FI003 unittests (`discover -p 'test_*.py'`) | 66 tests OK (links 59 → 64 for the cover; new test that the cover keeps its publication fields as text) |
+| Cover contract (`tests/exhibit-system-v100-cover.test.ts`) | 5 / 5 pass |
 | PDF / accessible PDF | 18 / 18 pages; Archivo only; 0 occurrences of "targeted" |
 | `npm run validate` | Pass (50 registry warnings, unchanged; no seed data edited) |
 | `npm run lint` | 0 errors, 28 warnings (unchanged) |
 | `npm run typecheck` | Pass |
-| `npm test` | 1,158 / 1,158 pass |
+| `npm test` | 1,163 / 1,163 pass (includes the 5 cover tests) |
 | `npm run build` | Pass |
 
 ## Outputs
 
-Inputs: `v100/build_spec.py`, `v100/spec.json`, `v100/export_pdf.sh`, `v100/remediate_pdf_v100.py`, `v100/contact_sheet.py`. Outputs are in `outputs/presentation-draft-v100/`. The 10 November hashes are superseded.
+Inputs: `v100/build_spec.py`, `v100/spec.json`, `v100/export_pdf.sh`, `v100/remediate_pdf_v100.py`, `v100/contact_sheet.py`. Outputs are in `outputs/presentation-draft-v100/`. The earlier hashes, including the first 11 November render, are superseded.
 
 | File | Role | SHA-256 |
 |---|---|---|
-| `fi003-mp-materials-10x-financing-draft-1.0.pptx` | Editable PowerPoint (native charts with embedded workbooks) | `b3674d20e5c3fc1ef9e7c18f18d53628d83c13a73b0a9fa848f969794ae03c37` |
-| `fi003-mp-materials-10x-financing-draft-1.0-accessible.pdf` | Remediated accessible PDF (reading copy) | `28a4a2eea9781df34f6f4aa32e647efae53023c2915028da79b1614f51dc00d8` |
-| `fi003-mp-materials-10x-financing-draft-1.0-accessible.receipt.json` | Remediation receipt | `9c5af3d852aa31cb7ea11e1b8d4c4e7381d64c70ae027f435de4e497614db483` |
-| `fi003-mp-materials-10x-financing-draft-1.0.pdf` | LibreOffice export (matching PDF; remediation source) | `cc97153e7d5da5ba5cdc20d0f68ca63e28a53e9750a339ba3efaf2fb720c95ed` |
-| `fi003-mp-materials-10x-financing-draft-1.0.manifest.json` | Render manifest | `06052f2dabbdbe9209999d3cf2c10a8a25cf90c44fa8fade24ae5c8662c2deaf` |
-| `fi003-draft-1.0-contact-sheet.png` | Contact sheet | `7a3691898d2c1802bd50430987ad842cdc458208e35653def3703b5d276cad66` |
-| `v100/spec.json` | Deck spec | `49c2fd1320d1697d99e4d9fb6c64207cde870b611fb7a1a8e52817f3a31d38ef` |
+| `fi003-mp-materials-10x-financing-draft-1.0.pptx` | Editable PowerPoint (native charts with embedded workbooks) | `73bf4518fc29dc8b460781cf6dbf4fd005bbed67d820ee0c9e9163eac92360d8` |
+| `fi003-mp-materials-10x-financing-draft-1.0-accessible.pdf` | Remediated accessible PDF (reading copy) | `cc6d06f902822d0f3ecf294b7c880593cee2c608d84451ce9b8eba4b290fc424` |
+| `fi003-mp-materials-10x-financing-draft-1.0-accessible.receipt.json` | Remediation receipt | `df0339d7c80f323483d403a6e8f034c1dc10fc45953299551a263a85fb5db72f` |
+| `fi003-mp-materials-10x-financing-draft-1.0.pdf` | LibreOffice export (matching PDF; remediation source) | `24bb1a95cd732b1a4ef615d92d2ea5896dc24f02f7b9f351429566581e94a238` |
+| `fi003-mp-materials-10x-financing-draft-1.0.manifest.json` | Render manifest | `a6acc7f2b5b2f7b0549e8aa5da014d91cef14203f6a96e275528fc73e7d45682` |
+| `fi003-draft-1.0-contact-sheet.png` | Contact sheet | `cd0df0b3fc75f13005935b7c0602063af0ce6b968f5f9f14f0454a668bd90a2a` |
+| `v100/spec.json` | Deck spec | `51ae21a9a4443c84bc8e4203018a85f7e76444d293dcd81720929946c9da7524` |
 | `evidence.csv` | Claim register (C01–C68) | `c2df4b70c8ae7b2cf97ac0d8701fed0d76fe905b0680d9c107366b2eed2aad64` |
 
 ```sh
@@ -223,13 +285,13 @@ A read-only agent reviewed the deck from five perspectives against `spec.json`, 
 | Slide 16: "loans can be accelerated", but none are drawn | "Draws blocked; after day 60/90, lenders may call LC cash cover" (C58) |
 | Slide 12: $400m preferred cites S11, missing from the slide | S11 and "2025 10-K, Note 3" added; C25 mapped |
 | Slide 12: "lets DoD terminate" dropped materiality, cure and notice | "A material 10X breach left uncured past cure and notice periods lets DoD terminate"; "the filed price agreement has no suspension right" |
-| Slide 3 / 18: Goldman named as the only co-underwriter; "two of four roles were joint" | Title: "Goldman Sachs shared the commitment and, with Morgan Stanley, the underwriting"; the annotation adds that both were joint lead arrangers of the revolver (C12); slide 18 reads "The commitment and underwriting were shared" |
+| Slide 3 / 18: Goldman named as the only co-underwriter; "two of four roles were joint" | Title: "Goldman Sachs shared the commitment and, with Morgan Stanley, the underwriting"; the annotation adds that both were joint lead arrangers of the revolver (C12), wording since revised in the second pass; slide 18 reads "The commitment and underwriting were shared" |
 | Slide 18: "bridged to equity" goes beyond C37 | "It backed closing until equity and the revolver replaced it" (C37, C05) |
-| Slide 2: title omitted the revolver's retained role | "Raise equity first and keep the revolver for letters of credit; a suspension of Defense payment obligations would block its draws" |
+| Slide 2: title omitted the revolver's retained role | "Raise equity first and keep the revolver for letters of credit; a suspension of Defense payment obligations would block its draws"; revised in the second pass to "Fund 10X with equity first and keep the revolver for letters of credit, because a suspended Defense payment obligation blocks new draws" |
 | Slide 14: lender remedies read as a benefit | "…adds later liquidity but exposes MP to lender remedies if Defense payments are suspended" |
 | Slide 17: the Defense-risk outcome named no path | "Fund on cash; treat revolver as unavailable" |
 | Slide 16 fee ($0.71m) and slide 7 snapshots (Dec 2025, Jun 2026) lack evidence rows | Not changed; documented instead. The figures trace to model 1.0's verified input register (`inputs.json`): `pretrigger_commit_fee` 0.35% (S09 §1.01 Applicable Rate Level 1, §2.09(a), confirmed in the filed text on 11 November); `available_2025` and LCs (S11 Note 10); `available_q2` and `unused_lc_q2` (S13 Note 8). The fee is contract-rate arithmetic on reported unused capacity, not an estimated bank fee. Adding claim rows would require fresh quotes from S11 and S13 |
-| Notes not changed | Slide 14's "Does not" for committed debt under "No debt service" stays: drawn construction debt carries debt service. Slide 15's "can reverse" rests on the addback's anti-duplication clause (C38) as analysed in `analysis.md`; a precise clause quote is a follow-up. Slide 16 keeps "Equity+revolver" because the renderer caps role labels at 16 characters. The slide 4 labels around 9–16 July and the slide 11 trigger and first-test markers sit close but do not overlap text |
+| Notes not changed | Slide 14's "Does not" for committed debt under the debt-and-covenants criterion (now "Avoids pre-revenue debt and covenants") stays: drawn construction debt carries debt service. Slide 15's "can reverse" rests on the addback's anti-duplication clause (C38) as analysed in `analysis.md`; a precise clause quote is a follow-up. Slide 16 keeps "Equity+revolver" because the renderer caps role labels at 16 characters. The slide 4 labels around 9–16 July and the slide 11 trigger and first-test markers sit close but do not overlap text |
 
 After these corrections the lead agent records A–E as **PASS (agent)**. A second adversarial pass was not run on the corrected render.
 

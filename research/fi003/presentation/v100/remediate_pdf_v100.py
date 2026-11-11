@@ -39,7 +39,7 @@ RECEIPT = OUT_DIR / 'fi003-mp-materials-10x-financing-draft-1.0-accessible.recei
 
 PAGES = 18
 # The unremediated LibreOffice export of draft 1.0 (recorded in QUALITY_REVIEW_V100.md).
-SOURCE_SHA256 = 'cc97153e7d5da5ba5cdc20d0f68ca63e28a53e9750a339ba3efaf2fb720c95ed'
+SOURCE_SHA256 = '24bb1a95cd732b1a4ef615d92d2ea5896dc24f02f7b9f351429566581e94a238'
 MINUS = '−'
 # (1-based page, MCID) of the chart Figures whose existing Alt is replaced from the spec.
 CHARTS = {(6, 0), (7, 5), (8, 0)}  # spec slide = page - 2
@@ -50,7 +50,9 @@ REPRESENTATIVE = {(4, 8), (9, 5), (11, 19), (12, 16), (15, 24), (17, 32)}
 # Pinned per-page counts of unnamed text-free vectors re-marked as artifacts.
 # Reviewed per page against the rendered slides (rules, markers, connectors, legend swatches,
 # bar segments of the three charts, diagram shapes and ledger rules; 1.0 ledgers and criterion cells are native text); any change fails the run.
-EXPECTED_ARTIFACTS = {2: 5, 3: 4, 4: 20, 5: 5, 6: 9, 7: 6, 8: 7, 9: 14, 10: 5, 11: 24, 12: 12, 13: 4, 14: 4, 15: 28, 16: 4, 17: 36, 18: 4}
+# Page 1 (cover): gold rule, ledger divider, three ledger bars and the letters-of-credit fill.
+# Every ledger amount and status is also set as text beside its bar, so the bars are decorative.
+EXPECTED_ARTIFACTS = {1: 6, 2: 5, 3: 4, 4: 20, 5: 5, 6: 9, 7: 6, 8: 7, 9: 14, 10: 5, 11: 24, 12: 12, 13: 4, 14: 4, 15: 28, 16: 4, 17: 36, 18: 4}
 
 
 
@@ -192,7 +194,7 @@ def diagram_alt(slide):
         years = sorted({m['date'][:4] for m in data['milestones']})
         marks = '; '.join(f"{m['label']}, {m['state']}, {day(m['date'])}" for m in data['milestones'])
         return (f"Milestone timeline on a day-count scale, {years[0]} to {years[-1]}; reported dates come from filings "
-                f"and targeted dates are illustrative model dates or conditional contractual dates. {marks}.")
+                f"contractual dates from the credit agreement, and conditional dates apply only if a stated term is met. {marks}.")
     if pattern == 'counterparty-map':
         spokes = '; '.join(f"{p['label']}: {p['role']}" for p in data['parties'])
         return (f"Hub-and-spoke diagram with {data['hub']} at the centre and {len(data['parties'])} spokes "
@@ -443,7 +445,7 @@ def repair(source, output, receipt_path, spec_path, manifest_path):
 
     # Links equal the manifest's per-slide evidence references.
     urls = {e['id']: e['url'] for e in manifest['evidence']}
-    expected_links = [[]] + [[urls[r] for r in s['exhibit']['evidence_refs']] for s in slides]
+    expected_links = [[urls[r] for r in spec['cover']['evidence_refs']]] + [[urls[r] for r in s['exhibit']['evidence_refs']] for s in slides]
     original = fitz.open(source)
     final = fitz.open(output)
     assert len(original) == len(final) == PAGES

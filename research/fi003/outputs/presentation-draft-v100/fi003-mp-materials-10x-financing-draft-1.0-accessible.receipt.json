@@ -2,39 +2,39 @@
   "status": "PASS",
   "scope": "Bounded structure remediation of the draft 1.0 export; not PDF/UA or WCAG certification",
   "source_export": "fi003-mp-materials-10x-financing-draft-1.0.pdf",
-  "source_export_sha256": "cc97153e7d5da5ba5cdc20d0f68ca63e28a53e9750a339ba3efaf2fb720c95ed",
+  "source_export_sha256": "24bb1a95cd732b1a4ef615d92d2ea5896dc24f02f7b9f351429566581e94a238",
   "accessible_pdf": "fi003-mp-materials-10x-financing-draft-1.0-accessible.pdf",
-  "accessible_pdf_sha256": "28a4a2eea9781df34f6f4aa32e647efae53023c2915028da79b1614f51dc00d8",
-  "spec_sha256": "49c2fd1320d1697d99e4d9fb6c64207cde870b611fb7a1a8e52817f3a31d38ef",
+  "accessible_pdf_sha256": "cc6d06f902822d0f3ecf294b7c880593cee2c608d84451ce9b8eba4b290fc424",
+  "spec_sha256": "51ae21a9a4443c84bc8e4203018a85f7e76444d293dcd81720929946c9da7524",
   "tooling": {
     "pypdf": "6.14.2",
     "pymupdf": "1.26.4"
   },
   "roles_before": {
-    "/Div": 258,
-    "/Figure": 201,
-    "/Link": 59,
-    "/P": 485,
+    "/Div": 273,
+    "/Figure": 207,
+    "/Link": 64,
+    "/P": 498,
     "/TD": 150,
     "/TH": 30,
     "/TR": 48,
     "/Table": 8
   },
   "roles_after": {
-    "/Div": 258,
+    "/Div": 273,
     "/Figure": 10,
     "/H1": 18,
     "/H2": 4,
-    "/Link": 59,
-    "/P": 463,
+    "/Link": 64,
+    "/P": 476,
     "/TD": 150,
     "/TH": 30,
     "/TR": 48,
     "/Table": 8
   },
   "figures_before": {
-    "total": 201,
-    "without_alt": 197
+    "total": 207,
+    "without_alt": 203
   },
   "figures_after": {
     "total": 10,
@@ -43,7 +43,7 @@
   "headings": [
     {
       "page": 1,
-      "mcid": 1,
+      "mcid": 2,
       "role": "/H1"
     },
     {
@@ -190,7 +190,7 @@
       "mcid": 5,
       "kind": "diagram",
       "before": "",
-      "after": "State diagram. Revolver states under credit agreement Section 8.01(m); no such event is reported. States: Available ($203m drawable); Draws blocked (Default: no new loans or LCs); Grace extended (Cash at least $343.75m); Event of Default (Day 60 without a certificate, or day 90; lenders may act). Current state as of 30 September 2026: Available. Transitions: Available to Draws blocked on Defense payment duty suspended or released; Draws blocked to Available on Obligation restored; Draws blocked to Grace extended on Day 60, cash certificate; Grace extended to Event of Default on Day 90 unresolved; Available to Event of Default on Terminable default, lapse or disaffirmation.",
+      "after": "State diagram. Revolver states under credit agreement Section 8.01(m); the revolver was available at 30 September 2026. States: Available ($203m drawable); Draws blocked (Default: no new loans or LCs); Grace extended (Cash at least $343.75m); Event of Default (Day 60 without a certificate, or day 90; lenders may act). Current state as of 30 September 2026: Available. Transitions: Available to Draws blocked on Defense payment duty suspended or released; Draws blocked to Available on Obligation restored; Draws blocked to Grace extended on Day 60, cash certificate; Grace extended to Event of Default on Day 90 unresolved; Available to Event of Default on Terminable default, lapse or disaffirmation.",
       "derived_from": "spec.json slides[7].exhibit.data"
     },
     {
@@ -198,7 +198,7 @@
       "mcid": 19,
       "kind": "diagram",
       "before": "",
-      "after": "Milestone timeline on a day-count scale, 2025 to 2030; reported dates come from filings and targeted dates are illustrative model dates or conditional contractual dates. Revolver signed, reported, 25 August 2025; Covenant trigger deadline, contractual, 14 August 2027; First leverage test, latest, contractual, 30 September 2027; Springing maturity, conditional, 30 November 2029; 2030 notes mature, reported, 1 March 2030.",
+      "after": "Milestone timeline on a day-count scale, 2025 to 2030; reported dates come from filings contractual dates from the credit agreement, and conditional dates apply only if a stated term is met. Revolver signed, reported, 25 August 2025; Covenant trigger deadline, contractual, 14 August 2027; First leverage test, latest, contractual, 30 September 2027; Springing maturity, conditional, 30 November 2029; 2030 notes mature, reported, 1 March 2030.",
       "derived_from": "spec.json slides[9].exhibit.data"
     },
     {
@@ -226,8 +226,9 @@
       "derived_from": "spec.json slides[15].exhibit.data"
     }
   ],
-  "decorative_vectors_artifacted": 191,
+  "decorative_vectors_artifacted": 197,
   "artifacts_per_page": {
+    "1": 6,
     "2": 5,
     "3": 4,
     "4": 20,
@@ -247,6 +248,30 @@
     "18": 4
   },
   "artifacts": [
+    {
+      "page": 1,
+      "mcid": 3
+    },
+    {
+      "page": 1,
+      "mcid": 17
+    },
+    {
+      "page": 1,
+      "mcid": 22
+    },
+    {
+      "page": 1,
+      "mcid": 26
+    },
+    {
+      "page": 1,
+      "mcid": 30
+    },
+    {
+      "page": 1,
+      "mcid": 31
+    },
     {
       "page": 2,
       "mcid": 33
@@ -1019,6 +1044,21 @@
         "/Div",
         "/Div",
         "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
+        "/Div",
         "/Div"
       ]
     },
@@ -1381,9 +1421,9 @@
     }
   ],
   "links": {
-    "count": 59,
+    "count": 64,
     "per_page": [
-      0,
+      5,
       4,
       5,
       5,

@@ -1,6 +1,6 @@
 # FI003 draft 1.0: decision note
 
-**Status:** draft 1.0 candidate, 11 November 2026. Research cutoff 6 November 2026. Pushed to PR #215 for review.
+**Status:** draft 1.0 candidate, 11 November 2026, including a second-pass editorial revision and a new cover. Research cutoff 6 November 2026. Pushed to PR #215 for review.
 
 - The publication HOLD stands. Nothing is merged, deployed or published.
 - Benjamin, Jiho and Ambrose have not reviewed this version, and no counsel has read the legal mechanics.
@@ -16,7 +16,7 @@ In plain terms, equity is the money that stays. The revolver is useful while eve
 
 ## Why the revolver is a secondary buffer
 
-- **The $500m minimum is a test, not a reserve (§7.11(a), C68).** It is measured at each quarter-end until the covenant trigger. Spending that leaves cash under $500m at a quarter-end is an immediate Event of Default; no equity cure was found (C60). Between quarter-ends the cash can be spent. The test sets the planning floor for each quarter-end.
+- **The $500m minimum is a quarter-end test (§7.11(a), C68).** It is measured at each quarter-end until the covenant trigger. Spending that leaves cash under $500m at a quarter-end is an immediate Event of Default; no equity cure was found (C60). Between quarter-ends the cash can be spent. The test sets the planning floor for each quarter-end.
 - **An actual suspension blocks draws at once (§8.01(m)(i), §4.02, C55–C56).** The clock starts when a Defense payment obligation is actually suspended or released, and a Default exists from that point, so new loans and LCs stop.
   - If the obligation is not restored, an Event of Default follows on day 60, or on day 90 if MP certifies cash of at least $343.75m.
   - The §8.02 remedies need Required Lenders to act. With no loans drawn, the live remedies are ending commitments and demanding cash cover for the $72m of LCs (C58).
@@ -29,7 +29,7 @@ In plain terms, equity is the money that stays. The revolver is useful while eve
   - The covenant trigger falls no later than 14 August 2027, absent a late filing, and earlier if covenant EBITDA reaches $400m. The first leverage test falls no later than 30 September 2027, before expected 2028 commissioning.
   - On $1,043.1m of reported debt, 4.00x leverage needs about $232m of covenant EBITDA under the 50% cash-netting cap, which the agreement applies to Article VII. Under the 100% reading it needs $209m.
   - 3.00x interest coverage needs at most $108–109m, so leverage binds first.
-  - These figures are thresholds, not headroom.
+  - These are the covenant EBITDA levels each test requires. Actual headroom is not public.
 - **Springing maturity (C61).** If enough 2030 notes remain outstanding, the revolver matures on 30 November 2029. That is avoided only if cash plus availability tops $1,078.5m, or if leverage is 2.00x or less.
 
 ## Alternatives on consistent dates
@@ -53,7 +53,7 @@ Public sources give no cost to complete, covenant headroom, DSCR, WACC, funding 
 ## What changed since 0.9.1
 
 - **Default linkage.** The recommendation is narrowed, not reversed. 0.9.1 treated the revolver as general conditional liquidity. 1.0 identifies §8.01(m) and S02 §9.02(a) as the mechanisms that disable it in Defense-agreement stress (slides 2, 9, 12, 16 and 18).
-- **Quarter-end floor.** The $500m minimum is a quarter-end test, not a locked reserve (slides 2, 10, 16 and 17).
+- **Quarter-end test.** The $500m minimum is measured at each quarter-end, and cash can be spent between them (slides 2, 10, 16 and 17).
 - **Quantified covenants.** Covenant thresholds ($232m / $209m / $108–109m) and contract deadlines (14 Aug and 30 Sep 2027) replace illustrative dates (slide 11).
 - **Timeline labels.** The renderer gains `contractual` and `conditional` milestone states. No slide labels a contract deadline "targeted".
 - **Replacement costs and sources.**
@@ -66,6 +66,7 @@ Public sources give no cost to complete, covenant headroom, DSCR, WACC, funding 
   - C56 and C63 were revised in the final pass.
   - C67 supersedes C50's illustrative date.
   - C01–C54 are unchanged apart from C50's supersession note in the QC record.
+- **Editorial pass and cover.** Every slide's copy was reread and revised: titles name their reasons and drivers, process narration and repeated status stamps are gone, and criteria and qualifiers read as plain financial statements. Legal and factual qualifications stay. The generic cover is replaced by an original one with the series line, the two-tier title, 10X context, the byline, five linked citations and a ledger of the three instruments on one scale, never summed. Details in the QC record.
 - **Model.** Model 1.0 is unchanged. New figures are clause arithmetic, computed and asserted in `build_spec.py`.
 
 Gates, hashes, the adversarial reads and open items: [QUALITY_REVIEW_V100.md](QUALITY_REVIEW_V100.md).

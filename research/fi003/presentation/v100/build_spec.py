@@ -13,6 +13,7 @@ and every URL from research/fi003/sources.json. Nothing is typed in twice.
 Run from the repository root:  python3 research/fi003/presentation/v100/build_spec.py
 """
 import csv, json, pathlib
+from decimal import Decimal, ROUND_HALF_UP
 
 ROOT = pathlib.Path("research/fi003")
 OUT = ROOT / "presentation/v100/spec.json"
@@ -25,6 +26,11 @@ def table(name, key):
 
 def num(x):
     return float(x)
+
+
+def m1(x):
+    """One-decimal display with half-up rounding, matching the exhibit labels."""
+    return str(Decimal(repr(round(x, 6))).quantize(Decimal("0.1"), ROUND_HALF_UP))
 
 
 src = {s["id"]: s for s in json.load(open(ROOT / "sources.json"))}
@@ -95,8 +101,8 @@ def fact(key):
     return num(facts[key]["value"])
 
 
-JUDGMENT = "Editorial judgment, draft 1.0 candidate, 11 November 2026; pending human review."
-PLAIN = "Plain reading of the filed agreement, not legal advice."
+JUDGMENT = "Analyst judgment."
+PLAIN = "Plain reading of the filed credit agreement; not legal advice."
 start = num(liq["Opening company liquid assets"]["usd_m"])
 end = num(liq["Closing company liquid assets"]["usd_m"])
 net_eq = num(repl["Final net equity proceeds"]["usd_m"])
@@ -125,9 +131,9 @@ assert round(coupon_lo, 1) == 35.9 and round(coupon_hi, 1) == 36.4 and round(cov
 
 # 1. Executive answer
 add("exhibit-with-interpretation", "Executive answer",
-    "Raise equity first and keep the revolver for letters of credit; a suspension of Defense payment obligations would block its draws",
-    "Recommendation for a hypothetical U.S. sponsor building before commissioning revenue; USD million, figures shown side by side",
-    f"{JUDGMENT} The figures are different measures and are not additive. Cost of capital is not ranked because the loan terms of the lapsed commitment are not public.",
+    "Fund 10X with equity first and keep the revolver for letters of credit, because a suspended Defense payment obligation blocks new draws",
+    "Recommendation for a hypothetical U.S. sponsor building before commissioning revenue; USD million",
+    f"{JUDGMENT} Equity is permanent capital: ${net_eq:.1f}m with no repayment date. The revolver's ${rcf_avail:.0f}m can be drawn only while no Default exists, and a suspended Defense payment obligation is a Default. Plan 10X spending against cash and the $500m quarter-end test.",
     "Underwriting agreement; 2025 10-K; Q3 2026 10-Q; credit agreement",
     ev("S07", "S09", "S11", "S19"),
     {"unit": "USD million", "dp": 1, "columns": ["USD million"],
@@ -135,19 +141,19 @@ add("exhibit-with-interpretation", "Executive answer",
          {"label": "Net equity (reported)", "values": [net_eq]},
          {"label": "Liquid assets, 30 Sep 26", "values": [end]},
          {"label": "Revolver available, Sep 26", "values": [rcf_avail]},
-         {"label": "Minimum cash floor", "values": [floor]}],
+         {"label": "Quarter-end liquidity test", "values": [floor]}],
      "notes": [
-         {"ref": 2, "text": "Cash plus short-term investments; spending that leaves under $500m at a quarter-end breaches the floor."},
-         {"ref": 3, "text": "Drawable only while no Default exists; an actual suspension of a Defense payment obligation blocks new loans and LCs."},
-         {"ref": 4, "text": "Tested at each quarter-end until the covenant trigger, not a locked reserve; a breach is an immediate Event of Default."}],
-     "notesHeading": "WHAT EACH FIGURE MEANS"},
+         {"ref": 2, "text": "Cash plus short-term investments, as reported at 30 September 2026."},
+         {"ref": 3, "text": "Drawable only while no Default exists; a suspended Defense payment obligation stops new loans and letters of credit."},
+         {"ref": 4, "text": "Measured at each quarter-end until the covenant trigger; cash below it is an immediate Event of Default."}],
+     "notesHeading": "BASIS OF EACH FIGURE"},
     table_reason="The answer pairs four unlike figures with their meaning; a chart would invite summing measures that are not additive.")
 
 # 2. JPMorgan roles
 add("role-matrix", "JPMorgan roles",
     "JPMorgan held every financing role; Goldman Sachs shared the commitment and, with Morgan Stanley, the underwriting",
     "Roles named in the reviewed filings and in J.P. Morgan's self-description",
-    "The case shows a bank group, not a single lender's decision. Goldman Sachs and Morgan Stanley were also joint lead arrangers of the revolver. The sole-adviser role rests on J.P. Morgan's self-description; fees, retention and internal credit decisions are not disclosed.",
+    "Goldman Sachs and Morgan Stanley were also joint lead arrangers of the revolver JPMorgan administers. Fees by bank and retained positions are undisclosed; the sole-adviser role rests on J.P. Morgan's own account.",
     "Company filings; credit agreement; J.P. Morgan's self-description for the adviser role",
     ev("S01", "S07", "S08", "S09", "S15"),
     {"roles": ["Adviser", "Joint commitment", "Underwriting", "Revolver agent"],
@@ -164,7 +170,7 @@ add("role-matrix", "JPMorgan roles",
 add("two-lane-timeline", "Sequence",
     "Equity and a revolver replaced the joint commitment within seven weeks",
     "Financing events and the agreements around them, July to August 2025",
-    "Government agreements (9 July) and Apple's 15 July agreement preceded the 16 July pricing. The record does not isolate their effect on equity demand.",
+    "The Defense agreements (9 July) and Apple's agreement (15 July) came days before the 16 July pricing. The filings do not show how much they added to investor demand.",
     "SEC filings, July to August 2025; 2025 10-K, Note 3",
     ev("S01", "S06", "S08", "S11", "S17"),
     {"lanes": [
@@ -180,9 +186,9 @@ add("two-lane-timeline", "Sequence",
 
 # 4. Replacement
 add("exhibit-with-interpretation", "Replacement",
-    "Net equity of $724.2m and a $275m revolver replaced a $1bn commitment that was never drawn",
-    "USD million; cash proceeds and committed capacity shown together, not summed",
-    f"The comparison mixes cash and capacity and is arithmetic only. About ${other_exp:.1f}m separates the after-discount equity from reported net proceeds as other expenses and rounding.",
+    "Net equity of $724.2m and a $275m revolver replaced a commitment of at least $1bn that expired undrawn",
+    "USD million; equity is cash received, the revolver is committed capacity",
+    f"The commitment shrank dollar for dollar as the equity and the revolver closed, and expired undrawn on 26 August 2025. The ${other_exp:.1f}m between the after-discount equity and reported net proceeds is other offering expenses and rounding.",
     "Underwriting agreement; 2025 10-K",
     ev("S01", "S07", "S08", "S11"),
     {"unit": "USD million", "dp": 1, "columns": ["USD million"],
@@ -191,19 +197,19 @@ add("exhibit-with-interpretation", "Replacement",
          {"label": "Underwriting discount", "values": [num(repl["Underwriting discount calculated"]["usd_m"])]},
          {"label": "Net equity (reported)", "values": [net_eq]},
          {"label": "Revolver capacity", "values": [num(repl["Corporate revolver"]["usd_m"])]},
-         {"label": "Original commitment min.", "values": [num(repl["Original commitment reference minimum"]["usd_m"])]}],
+         {"label": "Commitment, minimum", "values": [num(repl["Original commitment reference minimum"]["usd_m"])]}],
      "notes": [
-         {"ref": 3, "text": "Reported equity issuance net of costs; no scheduled principal repayment."},
-         {"ref": 4, "text": "Committed capacity, not proceeds; drawn loans are zero in every reported snapshot."},
-         {"ref": 5, "text": f"Reference minimum for a commitment that expired undrawn; ${commit_fees:.1f}m of fees were still expensed."}],
-     "notesHeading": "WHAT EACH FIGURE MEANS"},
+         {"ref": 3, "text": "Reported equity proceeds net of costs; no scheduled repayment."},
+         {"ref": 4, "text": "Committed capacity; no loans were drawn at any reported date."},
+         {"ref": 5, "text": f"Stated as at least $1bn; it expired undrawn and ${commit_fees:.1f}m of fees were expensed."}],
+     "notesHeading": "STATUS OF EACH AMOUNT"},
     table_reason="Cash proceeds and committed capacity are different measures; side-by-side rows with notes avoid a summed or stacked visual.")
 
 # 5. Dilution
 add("waterfall", "Dilution",
     f"New shares added {dil_pre:.2f}% to the basic count and are {dil_post:.2f}% of the isolated base",
     "Bridge from basic shares before the July 2025 offering to the isolated pro forma, then the composition of that pro forma",
-    f"The dilution is identical with or without a revolver, so it does not separate the two equity options. {dil_pre:.2f}% uses the pre-offering basic count; {dil_post:.2f}% the isolated post-offering base. Not fully diluted.",
+    f"Dilution separates equity from committed debt; both equity options issue the same shares. {dil_pre:.2f}% measures the new shares against the pre-offering basic count, {dil_post:.2f}% against the isolated post-offering count. Both counts are basic shares outstanding, not fully diluted.",
     "Prospectus supplement; 2025 10-K",
     ev("S06", "S11"),
     {"unit": "Million shares", "dp": 3,
@@ -215,8 +221,8 @@ add("waterfall", "Dilution",
 # 6. Revolver
 add("stacked-bar", "Revolver",
     "Letters of credit leave $203m of the $275m revolver available to draw",
-    "USD million at three reported dates; no loan draws in any snapshot",
-    "The letters of credit are the revolver's one observed use. Availability is conditional on the credit agreement and is not cash; the sublimit is not additive to loans.",
+    "USD million at three reported dates; no loans were drawn at any of them",
+    f"Letters of credit are the revolver's only reported use. The ${rcf_avail:.0f}m can be drawn only while the agreement's conditions are met, so it supports liquidity without counting as cash. Letters of credit and loans share the ${rcf_commit:.0f}m commitment.",
     "Credit agreement; 2025 10-K; Q2 and Q3 2026 10-Qs",
     ev("S09", "S11", "S13", "S19"),
     {"unit": "USD million", "dp": 0, "components": ["Letters of credit", "Remaining capacity"], "accent": "Remaining capacity",
@@ -227,9 +233,9 @@ add("stacked-bar", "Revolver",
 
 # 7. Liquidity
 add("waterfall", "Liquidity",
-    "Company liquid assets fell $492.4m in nine months as expansion continued",
-    "USD million, 31 December 2025 to 30 September 2026",
-    "Capital spending covers all company projects, not 10X alone; MP guides to $500m to $600m of 2026 capital costs net of awards. Price protection cash of $110.9m is inside operating cash flow. Reported, not forecast.",
+    f"Liquid assets fell ${m1(start - end)}m in nine months, mostly from ${m1(-liq_steps[1]['delta'])}m of capital spending and ${m1(-liq_steps[3]['delta'])}m of financing outflows",
+    "Reported USD million, 31 December 2025 to 30 September 2026",
+    f"Capital spending covers every company project, of which 10X is one; MP guides to $500m to $600m of 2026 capital costs net of government awards. The ${m1(-liq_steps[0]['delta'])}m operating outflow includes $110.9m of price-protection receipts.",
     "Q3 2026 10-Q",
     ev("S19"),
     {"unit": "USD million", "dp": 1, "start": {"label": "31 Dec 2025", "value": start},
@@ -240,8 +246,8 @@ add("waterfall", "Liquidity",
 # 8. Default path (new in 1.0)
 add("state-diagram", "Default path",
     "An actual suspension of a Defense payment obligation blocks revolver draws at once; lenders may act after 60 or 90 days",
-    "Revolver states under credit agreement Section 8.01(m); no such event is reported",
-    f"{PLAIN} The clock starts when an obligation is actually suspended or released; a mere right to suspend is arguably not a Default. Restoring it in time avoids an Event of Default. A late DoD payment is not clearly a trigger. Remedies need lender action.",
+    "Revolver states under credit agreement Section 8.01(m); the revolver was available at 30 September 2026",
+    f"{PLAIN} The clock starts when an obligation is actually suspended or released; whether a right to suspend already counts is arguable, and a late DoD payment is not clearly covered. Restoring the obligation in time avoids an Event of Default. Remedies need Required Lenders to act.",
     "Credit agreement §§1.01, 4.02, 5.05, 8.01(m), 8.02; transaction agreement §9.02(a)",
     ev("S02", "S09"),
     {"asOf": "2026-09-30", "currentId": "a",
@@ -260,32 +266,32 @@ add("state-diagram", "Default path",
 
 # 9. Cash tests (new in 1.0)
 add("exhibit-with-interpretation", "Cash tests",
-    "In a suspension of Defense payments, liquidity rests on cash tests of $500m at each quarter-end and $343.75m on day 60",
+    "If Defense payments are suspended, MP's liquidity depends on two cash tests: $500m at each quarter-end and $343.75m on day 60",
     "USD million at 30 September 2026; contractual thresholds beside reported balances",
-    f"Different measures, not additive; gaps between them are not headroom. Every draw also repeats a no-material-adverse-effect representation. {PLAIN}",
+    "Each threshold applies on its own date. Cash can be spent between quarter-ends, so the projected quarter-end balance sets the spending limit. Every draw also repeats the representation that no material adverse effect has occurred.",
     "Credit agreement §§4.02, 5.05, 7.11, 8.01(b) and (m); Q3 2026 10-Q",
     ev("S09", "S19"),
     {"unit": "USD million", "dp": 2, "columns": ["USD million"],
      "rows": [
          {"label": "Liquid assets, 30 Sep 26", "values": [end]},
-         {"label": "Minimum cash floor", "values": [floor]},
-         {"label": "Grace-extension test", "values": [ext_test]},
+         {"label": "Quarter-end liquidity test", "values": [floor]},
+         {"label": "Day-60 extension test", "values": [ext_test]},
          {"label": "Revolver commitments", "values": [rcf_commit]},
          {"label": "Letters of credit, Sep 26", "values": [rcf_lc]},
-         {"label": "Revolver available, Sep 26", "values": [rcf_avail]}],
+         {"label": "Available, Sep 26", "values": [rcf_avail]}],
      "notes": [
          {"ref": 1, "text": "Cash plus short-term investments; MP reports that the agreement's Cash Equivalents include these investments."},
-         {"ref": 2, "text": "Quarter-end test until the covenant trigger, not held aside; a breach is an immediate Event of Default; no equity cure found."},
+         {"ref": 2, "text": "Measured each quarter-end until the covenant trigger; a shortfall is an immediate Event of Default, with no equity cure found."},
          {"ref": 3, "text": "125% of the $275m commitments; certified on day 60, it adds 30 days of grace after a suspension or release."},
          {"ref": 5, "text": "Lenders may require cash collateral for these after an Event of Default."}],
-     "notesHeading": "WHAT EACH TEST DOES"},
+     "notesHeading": "WHAT EACH ROW MEASURES"},
     table_reason="Reported balances and contractual thresholds are unlike measures; rows with their rules avoid implying a subtraction.")
 
 # 10. Timing
 add("evidence-milestone-strip", "Timing",
     "Leverage tests start by Q3 2027, before expected 2028 10X commissioning, and the 2030 notes can pull maturity into 2029",
-    "Reported dates, contract deadlines and one conditional date; none is an MP plan",
-    f"Trigger: earlier at $400m of covenant EBITDA, later only on a late filing. On ${debt_principal:,.1f}m of debt, 4.00x leverage needs about ${be_50:.0f}m (${be_100:.0f}m with 100% netting); 3.00x coverage, at most ${cov_lo:.0f}–{cov_hi:.0f}m. If enough 2030 notes remain, maturity springs unless cash plus availability tops ${spring_test:,.1f}m or leverage is 2.00x or less.",
+    "Reported dates, contract deadlines and one conditional date",
+    f"The trigger comes earlier at $400m of covenant EBITDA, later only on a late filing. On ${debt_principal:,.1f}m of debt, 4.00x leverage needs about ${be_50:.0f}m of covenant EBITDA (${be_100:.0f}m with 100% netting); 3.00x coverage, at most ${cov_lo:.0f}–{cov_hi:.0f}m. With enough 2030 notes left, maturity springs unless cash plus availability tops ${spring_test:,.1f}m or leverage is 2.00x or less.",
     "Credit agreement §§1.01, 6.01(b), 7.11; Q3 2026 10-Q, Note 8 and MD&A",
     ev("S08", "S09", "S19"),
     {"milestones": [
@@ -301,7 +307,7 @@ add("evidence-milestone-strip", "Timing",
 add("counterparty-map", "Government support",
     "The Defense agreements that support MP are also revolver default triggers",
     "Government instruments linked to MP Materials; the transaction, offtake and price protection agreements are named in the credit agreement",
-    "Support narrows named price and volume risks; construction cost, timing and financing stay with MP. DoD may suspend offtake performance only after an uncured MP payment default; the filed price agreement has no suspension right. A material 10X breach left uncured past cure and notice periods lets DoD terminate, a revolver Event of Default.",
+    "The price floor and offtake reduce MP's NdPr price and magnet volume risk; MP keeps 10X cost and timing risk. DoD can suspend offtake only after an uncured MP payment default; the price agreement has no suspension right. An uncured 10X breach is likelier: it makes the agreement terminable, an immediate revolver Event of Default.",
     "Transaction agreement §§6.13, 9.02(a); offtake §8.4; price protection §8(p)–(q); credit agreement §8.01(m); 2025 10-K, Note 3",
     ev("S02", "S03", "S04", "S05", "S09", "S11"),
     {"hub": "MP Materials", "relationship": "Declared government links; spokes carry no value.", "showRelationship": False,
@@ -314,9 +320,9 @@ add("counterparty-map", "Government support",
 
 # 12. Options on matched dates
 add("role-matrix", "Options",
-    "On the same dates, each path leaves a different gap: loan terms, letters of credit or later capital",
+    "Each financing path, judged on the same dates, leaves a different question open: loan terms, letter-of-credit cover or later capital",
     "Financing paths compared from July 2025 to 30 September 2026; what each would have provided and what it leaves open",
-    "Committed debt is judged without its loan pricing, tenor, conditions or recourse, which are not public. Equity only would need another source for the $72m of letters of credit; its terms are not determined.",
+    "The committed debt's pricing, tenor, conditions and recourse were never disclosed, so cost of capital is left unranked. The terms on which equity only would replace the letters of credit are also undetermined.",
     "FI003 analysis of the reviewed record; credit agreement; Q3 2026 10-Q",
     ev("S01", "S07", "S08", "S11", "S19"),
     {"roles": ["What it is", "On these dates", "Left open"],
@@ -324,36 +330,36 @@ add("role-matrix", "Options",
                 "cellText": "sentence", "emptyText": "Not observed in this case"},
      "orgs": [
          {"label": "Committed debt", "cells": [{"qualifier": "A bank commits to lend; loans are drawn and repaid later"},
-                                               {"qualifier": "The $1bn commitment expired undrawn after fees were paid"},
-                                               {"qualifier": "Loan pricing, tenor and conditions; balance not determined"}]},
+                                               {"qualifier": "The commitment of at least $1bn expired undrawn; fees were paid"},
+                                               {"qualifier": "Loan pricing, tenor, conditions and recourse"}]},
          {"label": "Equity only", "cells": [{"qualifier": "New common stock; permanent capital with no repayment"},
-                                            {"qualifier": f"Same ${net_eq:.1f}m of net proceeds, no facility"},
+                                            {"qualifier": f"The same ${net_eq:.1f}m of net proceeds, with no facility"},
                                             {"qualifier": "Cash collateral or another issuer for $72m of letters of credit"}]},
          {"label": "Equity + revolver", "cells": [{"qualifier": "The same stock sale plus a revolving credit facility"},
-                                                  {"qualifier": f"Both executed; ${rcf_lc:.0f}m of letters of credit, no loans"},
-                                                  {"qualifier": "Draws depend on no Default and the Defense agreements"}]},
+                                                  {"qualifier": f"Both closed; ${rcf_lc:.0f}m of letters of credit and no loans"},
+                                                  {"qualifier": "Draws stop on any Default, including a Defense-agreement event"}]},
          {"label": "Delay to milestones", "cells": [{"qualifier": "Raise in stages after construction milestones"},
                                                     None,
-                                                    {"qualifier": "Capital being available later on acceptable terms"}]}]},
+                                                    {"qualifier": "Whether capital is available later on acceptable terms"}]}]},
     layout="wide",
     table_reason="Each path is described in three short sentences on the same dates; no comparable quantity exists to chart.")
 
 # 13. Criteria
 add("criterion-matrix", "Criteria",
     "Equity plus a revolver adds later liquidity but exposes MP to lender remedies if Defense payments are suspended",
-    "No option is shown to fully fund 10X; marks are categorical and unweighted",
-    f"{JUDGMENT} Marks for committed debt rest on the commitment alone; its loan terms are not public, so cost of capital is left unranked.",
+    "Four financing paths against seven criteria; marks are categorical and unweighted",
+    f"{JUDGMENT} Equity plus revolver and equity only differ on four criteria: covenants, conditional liquidity, lender remedies and refinancing. Marks for committed debt rest on the commitment alone; \"Not stated\" means its loan terms were never published.",
     "FI003 analysis; credit agreement; prospectus supplement; 2025 10-K",
     ev("S06", "S09", "S11"),
     {"options": ["Committed debt", "Equity only", "Equity + revolver", "Delay to milestones"],
      "accent": "Equity + revolver", "display": "text",
      "criteria": [
          {"label": "Capital raised or committed before build", "marks": ["Partly", "Meets", "Meets", "Does not"]},
-         {"label": "No dilution of holders", "marks": ["Meets", "Does not", "Does not", "Partly"]},
-         {"label": "No debt service or covenants pre-revenue", "marks": ["Does not", "Meets", "Partly", "Meets"]},
-         {"label": "Conditional liquidity for later", "marks": ["Partly", "Does not", "Meets", "Partly"]},
-         {"label": "No lender remedies on a DoD suspension", "marks": ["Not stated", "Meets", "Does not", "Meets"]},
-         {"label": "Low refinancing exposure", "marks": ["Not stated", "Meets", "Partly", "Meets"]},
+         {"label": "Avoids dilution of holders", "marks": ["Meets", "Does not", "Does not", "Partly"]},
+         {"label": "Avoids pre-revenue debt and covenants", "marks": ["Does not", "Meets", "Partly", "Meets"]},
+         {"label": "Provides conditional liquidity later", "marks": ["Partly", "Does not", "Meets", "Partly"]},
+         {"label": "Avoids lender remedies if DoD suspends", "marks": ["Not stated", "Meets", "Does not", "Meets"]},
+         {"label": "Limits refinancing exposure", "marks": ["Not stated", "Meets", "Partly", "Meets"]},
          {"label": "Absorbs commissioning delay", "marks": ["Not stated", "Partly", "Partly", "Does not"]}]},
     table_reason="Four options against seven categorical criteria need a matrix; a chart would imply a numeric scale the marks do not have.")
 
@@ -361,7 +367,7 @@ add("criterion-matrix", "Criteria",
 add("condition-tree", "Covenant addback",
     "A minimum-payment addback in covenant earnings can reverse when cash arrives",
     "Illustrative clause arithmetic with hypothetical inputs, not reported MP results",
-    "Hypothetical figures of 40 and 20 show direction only. The text does not settle whether the addback applies while Defense payment obligations are suspended. Covenant EBITDA differs from Adjusted EBITDA.",
+    "Where the minimum payment exceeds attributable income, covenant EBITDA adds back the difference (20 on hypothetical 40 and 20). Cash later received for the same amount reverses it, so it counts once. The text leaves open whether the addback applies during a suspension. Covenant EBITDA differs from Adjusted EBITDA.",
     "Credit agreement, definition of Consolidated EBITDA",
     ev("S09"),
     {"nodes": [
@@ -378,8 +384,8 @@ add("condition-tree", "Covenant addback",
 # 15. Recommendation versus strongest alternative, by stress
 add("role-matrix", "Strongest alternative",
     "The revolver helps in a fundable overrun; a suspension of Defense payments blocks it",
-    f"Both options raise the same ${net_eq:.1f}m of equity at the same dilution; they differ in what happens under stress",
-    f"{JUDGMENT} Before the covenant trigger a draw adds cash toward the $500m quarter-end floor; after it, a draw raises leverage. Equity only is better if covenant EBITDA would fall short of about ${be_50:.0f}m at the first leverage test.",
+    f"Equity plus revolver against equity only, each with ${net_eq:.1f}m of equity at the same dilution, in five situations",
+    f"{JUDGMENT} Before the covenant trigger, a draw adds cash toward the $500m quarter-end test; after it, a draw raises leverage against the 4.00x limit. Equity only is better if covenant EBITDA would fall short of about ${be_50:.0f}m at the first leverage test.",
     "FI003 analysis; credit agreement; transaction agreement §9.02(a); 2025 10-K; Q3 2026 10-Q",
     ev("S02", "S09", "S11", "S19"),
     {"roles": ["Equity+revolver", "Equity only"],
@@ -389,21 +395,21 @@ add("role-matrix", "Strongest alternative",
          {"label": "Fundable company overrun", "cells": [{"qualifier": f"May draw up to ${rcf_avail:.0f}m if no Default exists"},
                                                          {"qualifier": "More equity, spending changes or delay"}]},
          {"label": "Defense payments suspended", "cells": [{"qualifier": "Draws blocked; after day 60/90, lenders may call LC cash cover"},
-                                                      {"qualifier": "Cash only, with no lender remedies"}]},
+                                                      {"qualifier": "Funds from cash; no lender remedies apply"}]},
          {"label": "Overrun breaches 10X duties", "cells": [{"qualifier": "Can become a Default; once terminable, an Event of Default"},
                                                               {"qualifier": "Cash only; DoD termination risk is the same"}]},
          {"label": "Cost while unused", "cells": [{"qualifier": f"About ${unused_fee:.2f}m a year in commitment fees, plus LC fees"},
                                                   {"qualifier": f"No fee; ${rcf_lc:.0f}m of LCs need cash collateral or a new issuer"}]},
          {"label": "Repayment", "cells": [{"qualifier": "Loans due Aug 2030, or 30 Nov 2029 if maturity springs"},
-                                          {"qualifier": "No repayment from this financing option"}]}]},
+                                          {"qualifier": "Permanent capital; nothing to repay"}]}]},
     layout="wide",
     table_reason="Two options compared on five situations in words; a chart would imply a numeric scale.")
 
 # 16. Reversal triggers
 add("condition-tree", "Reversal triggers",
-    "Four conditions test whether equity plus a revolver still holds; each failure points to another path",
+    f"Equity first needs an open equity window, cash to finish 10X, secure Defense payments and covenant EBITDA near ${be_50:.0f}m",
     "Decision conditions for a hypothetical sponsor; the highlighted route ends at the recommendation",
-    f"{JUDGMENT} Go and slow decisions on 10X are set on projected quarter-end cash of at least $500m, then covenant EBITDA of at least about ${be_50:.0f}m (${be_100:.0f}m on the 100% reading); revolver capacity is a secondary buffer. A sponsor without an anchor offtake or price floor may lack the equity window.",
+    f"{JUDGMENT} Set go and slow decisions on 10X against projected quarter-end cash of at least $500m, then covenant EBITDA of at least about ${be_50:.0f}m (${be_100:.0f}m on the 100% reading). Revolver capacity is a secondary buffer. A sponsor without an anchor offtake or price floor may find the equity window closed.",
     "FI003 analysis; credit agreement; transaction agreement",
     ev("S02", "S09"),
     {"nodes": [
@@ -421,9 +427,9 @@ add("condition-tree", "Reversal triggers",
 
 # 17. Objections
 add("role-matrix", "Objections",
-    "Six objections narrow the recommendation and name what would still change it",
+    "Six objections narrow the recommendation; the main open item is the cost to complete 10X",
     "Each objection, what the draft concedes, how it answers and what remains open",
-    f"{JUDGMENT} No structure is optimal and no plan is shown as fully funded: the record has no cost-to-complete for 10X.",
+    f"{JUDGMENT} Two open items matter most: the cost to complete 10X, which no public source gives, and counsel's reading of Section 8.01(m).",
     "FI003 analysis; credit, transaction and offtake agreements; filings",
     ev("S01", "S02", "S03", "S07", "S09", "S19"),
     {"roles": ["Conceded", "Answer", "What remains"],
@@ -439,9 +445,9 @@ add("role-matrix", "Objections",
          {"label": "JPMorgan acted with Goldman and others", "cells": [{"qualifier": "The commitment and underwriting were shared"},
                                                                        {"qualifier": "Each role is stated as the filing names it"},
                                                                        {"qualifier": "The fee split between banks is not disclosed"}]},
-         {"label": "Government support leaves risk", "cells": [{"qualifier": "Risk remains with MP"},
-                                                               {"qualifier": "Only risks the record names are claimed"},
-                                                               {"qualifier": "MP still funds the build"}]},
+         {"label": "Government support leaves risk", "cells": [{"qualifier": "10X cost, timing and financing stay with MP"},
+                                                               {"qualifier": "Support is credited only for NdPr price and volume risk"},
+                                                               {"qualifier": "Construction is funded from MP's own capital"}]},
          {"label": "Correlated availability is overstated", "cells": [{"qualifier": "DoD suspension rights are narrow"},
                                                                       {"qualifier": "A 10X breach or dispute still reaches the revolver"},
                                                                       {"qualifier": "Counsel review of Section 8.01(m)"}]},
@@ -451,12 +457,40 @@ add("role-matrix", "Objections",
     layout="wide",
     table_reason="Six objections each need a concession, an answer and an open limit in words; no quantity exists to chart.")
 
+# Cover (draft 1.0). Every amount is read from the model exports above; the ledger draws
+# three separate instruments on one scale and never stacks or sums them.
+commit_min = num(repl["Original commitment reference minimum"]["usd_m"])
+assert commit_min == 1000.0 and rcf_commit == 275.0 and rcf_lc == 72.0
+COVER = {
+    "series": "SMPT  /  FINANCIAL INTELLIGENCE 003",
+    "title": "MP Materials'\n10X Financing",
+    "subtitle": "Cash, Covenants, and Construction Risk",
+    "dek": (f"How a JPMorgan–Goldman Sachs commitment of at least $1bn gave way to ${net_eq:.1f}m of net equity "
+            f"and a ${rcf_commit:.0f}m JPMorgan-agented revolver, and what that means for funding 10X before it earns revenue."),
+    "context": ("10X is MP's planned rare-earth magnet plant in Northlake, Texas. MP expects to invest more than "
+                "$1.25bn; construction is underway and commissioning is expected in 2028."),
+    "byline": ["Benjamin Yang", "Research draft 1.0 · 11 November 2026", "Evidence to 6 November 2026"],
+    "attribution": ("Independent research; not commissioned or reviewed by JPMorgan or MP Materials. "
+                    "Held from publication pending human review."),
+    "ledger": {
+        "heading": "WHAT REPLACED THE COMMITMENT",
+        "unit": "USD million, one scale; three separate instruments",
+        "key": "Dashed: expired undrawn. Solid: cash received. Outline: committed capacity, shaded where in use.",
+        "rows": [
+            {"label": "Joint secured commitment", "value": commit_min, "valueText": "≥ $1,000m",
+             "status": "JPMorgan and Goldman Sachs; expired undrawn 26 Aug 2025", "treatment": "lapsed"},
+            {"label": "Common equity, net", "value": net_eq, "valueText": f"${net_eq:.1f}m",
+             "status": "Received July 2025; no repayment date", "treatment": "received"},
+            {"label": "Revolving credit facility", "value": rcf_commit, "valueText": f"${rcf_commit:.0f}m",
+             "status": f"${rcf_lc:.0f}m letters of credit and no loans at 30 Sep 2026", "treatment": "committed",
+             "part": {"value": rcf_lc, "label": "Letters of credit"}}]},
+    "evidence_refs": ev("S01", "S07", "S08", "S11", "S19"),
+}
+
 spec = {
     "classification": "research",
-    "title": "MP Materials' 10X Financing: Cash, Covenants, and Construction Risk",
-    "cover_lines": ["How a lapsed JPMorgan and Goldman Sachs commitment gave way to equity and a JPMorgan-agented revolver",
-                    "Benjamin Yang · Research draft 1.0 candidate · 11 November 2026 · Evidence to 6 November 2026",
-                    "Independent research; not commissioned or reviewed by JPMorgan or MP Materials. Pending human review; publication hold remains in place."],
+    "title": f"{COVER['title'].replace(chr(10), ' ')}: {COVER['subtitle']}",
+    "cover": COVER,
     "evidence": [{"id": i, "label": i, "url": src[i]["url"], "title": src[i]["title"], "locator": LOC[i]} for i in sorted(used)],
     "slides": slides,
 }

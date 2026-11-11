@@ -18,6 +18,7 @@ import { RENDERERS } from "./renderers";
 import { contentArea, C, DRAFT_BADGE, drawFrame, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, FONT } from "./primitives";
 import { DEMO_DECK_SPEC, DEMO_PPTX, GALLERY_PPTX, MANIFEST_FILE, REPO } from "./paths";
 import type { ElementRecord, ExhibitClassification, Fixture, PptxSlide } from "./types";
+import { researchCoverSlide, type ResearchCover } from "./research-cover";
 
 
 interface Pptx {
@@ -56,6 +57,8 @@ export interface BuildOptions {
   qcRecord?: string;
   /** Research decks only. `label` is the short citation shown (and linked) in the slide footer. */
   evidence?: { id: string; title: string; url: string; locator: string; label?: string }[];
+  /** Research decks only: a publication cover (research-cover.ts) in place of the generic one. */
+  cover?: ResearchCover;
 }
 
 function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
@@ -109,7 +112,16 @@ export async function buildDeck(
 
   const manifest: SlideManifest[] = [];
   const coverRecords: ElementRecord[] = [];
-  coverSlide(pptx, cover.title, cover.lines, coverRecords, opts);
+  if (opts.cover && opts.classification === "research") {
+    const links = opts.cover.evidence_refs.flatMap((id) => {
+      const ref = opts.evidence?.find((r) => r.id === id);
+      return ref ? [{ id, label: ref.label ?? id, url: ref.url }] : [];
+    });
+    researchCoverSlide(pptx, opts.cover, coverRecords, links,
+      `Cover. Classification: research. ${DRAFT_BADGE}. Publication authorization is not granted by this tool. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`);
+  } else {
+    coverSlide(pptx, cover.title, cover.lines, coverRecords, opts);
+  }
   manifest.push({ slide: 1, pattern: "cover", elements: coverRecords });
 
   const problems: string[] = [];
