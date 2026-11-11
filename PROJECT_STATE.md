@@ -1,3 +1,12 @@
+## 2026-11-11: Site redesign and editorial overhaul, phase 1 (draft PR #258, not merged)
+
+- Branch `claude/smpt-redesign-editorial-377bee`. The route review, before/after heights and verification report are in `docs/design/SITE_REDESIGN_2026-11.md`, with screenshots in `docs/design/redesign-2026-11/`.
+- Stage A: a new homepage (masthead with latest research, then the FI002 Escondida feature whose four model requirements come from `lib/fi002.ts`, then database entry points, the market preview, examples, and method and inquiry). Also a publication-first header and the shared `.page-title` scale in `PageHeading`. The supply-chain strip and lattice moved to `/materials`, and the hover-only `ElementStrip` was removed.
+- Stage B: progressive disclosure on `/capital`, `/sources`, `/framing` and `/controls` (`Section collapsed`, `PageContents`, `ShowMore`, compact `SourceCard`). Also a fix for the `/markets` tooltip overflow on mobile and denser `/projects` cards. No data, calculation or research file changed.
+- Not a full-site redesign. Research pages are unchanged (editorial hash gate) and other routes inherit only the header and heading changes. Deferred: `/methodology` contents navigation, material dossier disclosure and events incremental rendering (the prerender invariant).
+- Checks: tests 1,224/1,224, and validate, lint, typecheck, build and `editorial:check` all pass. The `scripts/qa-*-browser.mjs` assertions were reproduced manually in the browser; the scripts themselves were not run locally because the `playwright` package is missing.
+- Open: confirm the inquiry contact address shown on the homepage.
+
 ## 2026-11-09: FI002 cover options A/B for review (draft PR #248, not merged)
 
 - `docs/research/fi002-bhp-copper/output/review/revision-6-cover-options/` holds two decks from the same `cover_hero_split` renderer that differ only in the cover image:

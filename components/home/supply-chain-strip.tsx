@@ -2,8 +2,6 @@ import Link from "next/link";
 import type { StageCounts } from "@/lib/homepage-chain";
 import { hasRecords } from "@/lib/homepage-chain";
 import { countWord } from "@/lib/lattice-view";
-import { getMaterialMeta } from "@/lib/materials-meta";
-import type { Material } from "@/lib/types";
 
 /** The lattice's encodings at legend size: gold disc, amber disc, cream diamond. */
 function KindMark({ kind }: { kind: "commitments" | "controls" | "designations" }) {
@@ -115,43 +113,5 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
         </Link>
       </figcaption>
     </figure>
-  );
-}
-
-/** A compact element-tile row: each material in scope, linking to its page. Symbols are presentation only. */
-export function ElementStrip({ materials }: { materials: Material[] }) {
-  return (
-    <nav aria-label="Materials in scope" className="mt-8">
-      <p className="font-display text-xs text-muted">Materials in scope</p>
-      <ul className="mt-2 flex flex-wrap gap-1">
-        {materials.map((m) => {
-          const { symbol, atomicNumber, hue } = getMaterialMeta(m.id);
-          return (
-            <li key={m.id}>
-              <Link
-                href={`/materials/${m.slug}`}
-                title={m.nameEn}
-                className="element-tile group relative flex h-10 min-w-10 items-center justify-center rounded border bg-elevated px-1.5 font-mono text-sm font-medium text-foreground/90"
-                style={{ borderColor: `${hue}80` }}
-              >
-                <span className="sr-only">{m.nameEn}</span>
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute bottom-[calc(100%+8px)] left-0 z-20 w-max max-w-48 rounded border border-border-strong bg-elevated px-2.5 py-1.5 font-display text-xs font-normal text-foreground opacity-0 shadow-sm motion-safe:transition-opacity motion-safe:duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
-                >
-                  {m.nameEn}
-                </span>
-                <span aria-hidden>{symbol}</span>
-                {atomicNumber ? (
-                  <span aria-hidden className="absolute right-0.5 top-0 text-[8px] text-faint">
-                    {atomicNumber}
-                  </span>
-                ) : null}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
   );
 }

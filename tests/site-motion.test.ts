@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import Home from "@/app/page";
+import MaterialsPage from "@/app/materials/page";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { MarketExplorer } from "@/components/markets/market-monitor";
 import { buildMonitorSeries, buildReleaseNotices } from "@/components/markets/series";
@@ -25,16 +26,20 @@ test("scroll reveal keeps server-rendered content visible until JS opts into mot
   assert.match(script, /prefers-reduced-motion: reduce/);
 });
 
-test("homepage cards, market snapshot and supply chain have separate in-view entrances", () => {
+test("homepage cards, featured exhibit and market chart have separate in-view entrances", () => {
   const html = renderToStaticMarkup(createElement(Home));
-  assert.equal((html.match(/data-motion-kind="chart"/g) ?? []).length, 1);
+  assert.equal((html.match(/data-motion-kind="chart"/g) ?? []).length, 2);
   assert.equal((html.match(/data-motion-kind="cards"/g) ?? []).length, 2);
-  assert.equal((html.match(/data-motion-kind="chain"/g) ?? []).length, 1);
+  assert.equal((html.match(/data-motion-kind="chain"/g) ?? []).length, 0);
   assert.equal((html.match(/data-motion-item/g) ?? []).length, 7);
+  assert.equal((html.match(/class="exhibit-bar /g) ?? []).length, 4);
+  assert.ok(html.indexOf('id="featured-analysis"') < html.indexOf('id="home-market-heading"'));
+});
+
+test("the supply-chain strip keeps its in-view entrance on the materials page", () => {
+  const html = renderToStaticMarkup(createElement(MaterialsPage));
+  assert.equal((html.match(/data-motion-kind="chain"/g) ?? []).length, 1);
   assert.equal((html.match(/class="chain-stage /g) ?? []).length, 8);
-  assert.match(html, /class="element-tile group/);
-  assert.match(html, /group-focus-visible:opacity-100/);
-  assert.ok(html.indexOf('id="home-market-heading"') < html.indexOf('id="chain-heading"'));
 });
 
 test("market selector reports monthly/annual availability and chart enters once in view", () => {

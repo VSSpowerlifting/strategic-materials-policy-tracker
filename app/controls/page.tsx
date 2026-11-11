@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Container, PageHeading, Section } from "@/components/ui/container";
+import { Container, PageContents, PageHeading, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { ControlsExplorer } from "@/components/capital/controls-explorer";
 import { ControlStatusChart } from "@/components/capital/charts";
@@ -42,29 +42,31 @@ export default function ControlsPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
         title="Controls"
         lead="Export, import, investment and production restrictions recorded by operative clause and legal status."
       />
 
-      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
-        {[
-          ["Control clauses", all.length],
-          ["In force", statusNow.get("in_force") ?? 0],
-          ["Suspended", statusNow.get("suspended") ?? 0],
-          ["With a stated end date", clocks.length],
-        ].map(([k, v]) => (
-          <div key={k} className="bg-card px-4 py-4">
-            <dt className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">{k}</dt>
-            <dd className="tnum mt-1 font-display text-3xl font-bold">{v}</dd>
-          </div>
-        ))}
-      </dl>
-      <p className="mt-2 font-display text-[11px] text-faint">Statuses as of {formatDate(asOf)}, the date through which published legal instruments are incorporated. An entry dated later is shown as scheduled, not as effective.</p>
+      <p className="tnum mt-6 font-display text-sm text-muted">
+        <span className="font-semibold text-foreground">{all.length}</span> control clauses ·{" "}
+        <span className="font-semibold text-foreground">{statusNow.get("in_force") ?? 0}</span> in force ·{" "}
+        <span className="font-semibold text-foreground">{statusNow.get("suspended") ?? 0}</span> suspended ·{" "}
+        <span className="font-semibold text-foreground">{clocks.length}</span> with a stated end date
+      </p>
+      <p className="mt-1 font-display text-xs text-faint">Statuses as of {formatDate(asOf)}, the date through which published legal instruments are incorporated. An entry dated later is shown as scheduled, not as effective.</p>
 
-      <div className="mt-14 space-y-14">
+      <PageContents
+        className="mt-8"
+        items={[
+          { href: "#end-dates", label: "Stated end dates" },
+          { href: "#clauses", label: "All control clauses" },
+          { href: "#status", label: "Legal status over time" },
+          { href: "#tools", label: "Clauses by issuer and type" },
+        ]}
+      />
+
+      <div className="mt-12 space-y-14">
         <Section
-          index="01"
+          id="end-dates"
           title="Controls with stated end dates"
           description={`Clauses whose status in effect on ${formatDate(asOf)} has a stated end date. Days are counted from that date to the stated end, which is the last day covered. A continuation dated later is shown as scheduled; no renewal is assumed after a stated end.`}
         >
@@ -122,15 +124,27 @@ export default function ControlsPage() {
           </div>
         </Section>
 
+        <Section id="clauses" title="All control clauses" description="Filter by issuer, status, type, direction, targeting or material.">
+          <ControlsExplorer rows={summaries} materialNames={materialNames} />
+          <p className="mt-4 text-sm text-muted">
+            Download:{" "}
+            <a href="/api/export/control-measures.csv" className="text-accent hover:text-accent-strong">CSV</a>
+            {" · "}
+            <a href="/api/export/control-status-history.csv" className="text-accent hover:text-accent-strong">status history CSV</a>
+            {" · "}
+            <Link href="/api/v1/control-measures" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
+          </p>
+        </Section>
+
         <Section
-          index="02"
+          id="status"
           title="Legal status over time"
           description="Each bar is one clause, coloured by status; a dashed tail runs to a stated end date. Select a bar for the clause."
         >
           <ControlStatusChart measures={all} asOf={asOf} />
         </Section>
 
-        <Section index="03" title="Who uses which tool" description="Control clauses by issuer and measure type.">
+        <Section id="tools" title="Clauses by issuer and measure type" description="Each count links to the matching clauses in the list above.">
           <div className="overflow-x-auto rounded-lg border">
             <table className="w-full min-w-[44rem] border-collapse text-sm">
               <caption className="sr-only">Control clauses by issuing actor and measure type</caption>
@@ -171,17 +185,6 @@ export default function ControlsPage() {
           </div>
         </Section>
 
-        <Section index="04" title="All control clauses" description="Filter by issuer, status, type, direction, targeting or material.">
-          <ControlsExplorer rows={summaries} materialNames={materialNames} />
-          <p className="mt-4 text-sm text-muted">
-            Download:{" "}
-            <a href="/api/export/control-measures.csv" className="text-accent hover:text-accent-strong">CSV</a>
-            {" · "}
-            <a href="/api/export/control-status-history.csv" className="text-accent hover:text-accent-strong">status history CSV</a>
-            {" · "}
-            <Link href="/api/v1/control-measures" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
-          </p>
-        </Section>
       </div>
     </Container>
   );

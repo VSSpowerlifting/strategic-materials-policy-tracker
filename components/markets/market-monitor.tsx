@@ -532,7 +532,7 @@ export function MarketExplorer({
           <p className="mb-3 text-xs text-faint">
             Select a material to plot its first listed benchmark, or remove its selected benchmarks. M = monthly data; A = annual data. Use the detailed choices below for alternate specifications.
           </p>
-          <div role="group" aria-label="Element-style material selector" className="grid grid-cols-3 gap-2 min-[410px]:grid-cols-4 sm:grid-cols-6 lg:grid-cols-9">
+          <div role="group" aria-label="Element-style material selector" className="market-tiles grid grid-cols-3 gap-2 min-[410px]:grid-cols-4 sm:grid-cols-6 lg:grid-cols-9">
             {groups.map(([materialId, g]) => {
               const chosen = g.items.filter((item) => slotOf(item.id) !== -1);
               const active = chosen.length > 0;
@@ -556,7 +556,7 @@ export function MarketExplorer({
                 >
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute bottom-[calc(100%+6px)] left-0 z-20 w-max max-w-52 rounded border border-border-strong bg-elevated px-2.5 py-1.5 text-xs text-foreground opacity-0 shadow-sm motion-safe:transition-opacity motion-safe:duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+                    className="market-tile-tip pointer-events-none absolute bottom-[calc(100%+6px)] left-0 z-20 w-max max-w-52 rounded border border-border-strong bg-elevated px-2.5 py-1.5 text-xs text-foreground opacity-0 shadow-sm motion-safe:transition-opacity motion-safe:duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
                   >
                     {g.name} · {availabilityText}
                   </span>

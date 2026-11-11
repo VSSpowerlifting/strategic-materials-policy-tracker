@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Container, PageHeading, Section } from "@/components/ui/container";
+import { Container, PageContents, PageHeading, Section } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { ResearchReadingKey } from "@/components/capital/reading-guide";
 import { CapitalExplorer } from "@/components/capital/capital-explorer";
@@ -80,23 +80,24 @@ export default function CapitalPage() {
 
       <ResearchReadingKey topic="capital" />
 
-      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
-        {[
-          ["Financial rows", all.length],
-          ["Events", events],
-          ["Providing governments", actors],
-          ["Instruments", new Set(all.map((c) => c.instrument)).size],
-        ].map(([k, v]) => (
-          <div key={k} className="bg-card px-4 py-4">
-            <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{k}</dt>
-            <dd className="tnum mt-1 font-display text-3xl font-bold">{v}</dd>
-          </div>
-        ))}
-      </dl>
+      <p className="tnum mt-6 font-display text-sm text-muted">
+        {all.length} financial records · {events} events · {actors} providing governments ·{" "}
+        {new Set(all.map((c) => c.instrument)).size} instrument types
+      </p>
+
+      <PageContents
+        className="mt-8 border-y border-border py-4"
+        items={[
+          { href: "#commitments", label: "Public commitments" },
+          { href: "#records", label: "All financial records" },
+          { href: "#stages", label: "By production stage" },
+          { href: "#separate", label: "Listed separately" },
+        ]}
+      />
 
       <div className="mt-14 space-y-14">
         <Section
-          index="01"
+          id="commitments"
           title="Public commitments"
           description="Grouped by currency, instrument, amount qualifier and legal status. Parent and child amounts are counted once."
         >
@@ -159,7 +160,12 @@ export default function CapitalPage() {
                       .map(([s, n]) => `${financialStatusLabels[s]} ${n}`)
                       .join(" · ")}
                   </p>
-                  <ul className="mt-3 space-y-2 border-t pt-3">
+                  <details className="group mt-3 border-t pt-2">
+                    <summary className="inline-flex min-h-10 cursor-pointer list-none items-center gap-2 font-display text-sm text-accent hover:text-accent-strong">
+                      <span aria-hidden className="inline-block transition-transform group-open:rotate-90 motion-reduce:transition-none">›</span>
+                      {counted.length} counted {counted.length === 1 ? "record" : "records"}
+                    </summary>
+                  <ul className="mt-2 space-y-2">
                     {counted.map((c) => {
                       // Bar length is relative within this currency only. Number() is
                       // used for this display ratio alone; totals are exact decimals.
@@ -188,6 +194,7 @@ export default function CapitalPage() {
                       );
                     })}
                   </ul>
+                  </details>
                   {t.nestedIds.length ? (
                     <p className="mt-3 text-xs leading-5 text-faint">
                       Included in the package above: {t.nestedIds.length} part{t.nestedIds.length === 1 ? "" : "s"} of a counted package (
@@ -269,9 +276,35 @@ export default function CapitalPage() {
           </div>
         </Section>
 
+        <Section id="records" title="All financial records">
+          <CapitalExplorer rows={summaries} materialNames={materialNames} />
+          <p className="mt-4 text-sm text-muted">
+            Download:{" "}
+            <a href="/api/export/financial-commitments.csv" className="text-accent hover:text-accent-strong">CSV</a>
+            {" · "}
+            <Link href="/api/v1/financial-commitments" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
+            {" · "}
+            <Link href="/data" className="text-accent hover:text-accent-strong">all exports</Link>
+          </p>
+        </Section>
+
+        <Section
+          id="stages"
+          title="Finance by production stage"
+          description="Financial records by government and supply-chain stage."
+        >
+          <StageMatrix rows={all} />
+        </Section>
+
+        <div id="separate" className="scroll-mt-24 space-y-10">
+          <p className="max-w-3xl font-display text-sm leading-6 text-muted">
+            Listed apart from the amounts above: optional funding, instruments recorded by their terms rather than an
+            amount, programme ceilings and non-public money. None of these rows adds to those amounts.
+          </p>
         {options.length ? (
           <Section
-            index="02"
+            collapsed
+            count={options.length}
             title="Funding options under executed agreements"
             description="Optional funding under signed agreements, listed separately from exercised commitments."
           >
@@ -303,7 +336,8 @@ export default function CapitalPage() {
         ) : null}
 
         <Section
-          index={options.length ? "03" : "02"}
+          collapsed
+          count={unquantified.length}
           title="Other financial instruments"
           description="Price floors, offtake, tax offsets and procurement rights, recorded by their terms."
         >
@@ -327,7 +361,8 @@ export default function CapitalPage() {
         </Section>
 
         <Section
-          index={options.length ? "04" : "03"}
+          collapsed
+          count={envelopes.length}
           title="Envelopes, appropriations and lending authorities"
           description="Programme ceilings and appropriations, separate from recipient commitments."
         >
@@ -339,7 +374,8 @@ export default function CapitalPage() {
         </Section>
 
         <Section
-          index={options.length ? "05" : "04"}
+          collapsed
+          count={nonPublic.length}
           title="Other financing"
           description="Private capital, recipient funds, indications and financing with an unstated public share."
         >
@@ -353,25 +389,7 @@ export default function CapitalPage() {
           </p>
         </Section>
 
-        <Section
-          index={options.length ? "06" : "05"}
-          title="Finance by production stage"
-          description="Financial records by government and supply-chain stage."
-        >
-          <StageMatrix rows={all} />
-        </Section>
-
-        <Section index={options.length ? "07" : "06"} title="All financial records">
-          <CapitalExplorer rows={summaries} materialNames={materialNames} />
-          <p className="mt-4 text-sm text-muted">
-            Download:{" "}
-            <a href="/api/export/financial-commitments.csv" className="text-accent hover:text-accent-strong">CSV</a>
-            {" · "}
-            <Link href="/api/v1/financial-commitments" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
-            {" · "}
-            <Link href="/data" className="text-accent hover:text-accent-strong">all exports</Link>
-          </p>
-        </Section>
+        </div>
       </div>
     </Container>
   );

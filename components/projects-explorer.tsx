@@ -109,27 +109,27 @@ export function ProjectsExplorer({rows, materialNames}:{
       separate evidence relationships, not additive capital or proof of construction. Missing records do not prove inactivity.
       Government commitment means a directly linked, non-ended commitment evidenced as of the corpus date.
     </p>
-    <div className="mt-6 grid gap-4 md:grid-cols-2">
-      {visible.map(p=><div key={p.id} data-testid="project-record" data-site-motion="card" className="min-w-0">\n        <Card className="flex h-full min-w-0 flex-col p-5">
+    <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+      {visible.map(p=><div key={p.id} data-testid="project-record" data-site-motion="card" className="min-w-0">\n        <Card className="flex h-full min-w-0 flex-col p-4">
         <div className="flex flex-wrap items-center gap-2">
           {p.governmentCommitmentProviders.map(code=><JurisdictionTag key={code} code={code}/>)}
-          {p.countryCodes.length?p.countryCodes.map(code=><span key={code} className="font-mono text-[11px] text-muted">{countryNames[code]??code}</span>):
+          {p.countryCodes.length?p.countryCodes.map(code=><span key={code} className="font-display text-xs text-muted">{countryNames[code]??code}</span>):
             <span className="font-mono text-[11px] text-faint">Country not stated</span>}
         </div>
-        <Link href={`/projects/${p.id}`} className="mt-3 font-display text-lg font-semibold leading-snug hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">{p.name}</Link>
-        <div className="mt-2 text-sm text-muted">
+        <Link href={`/projects/${p.id}`} className="mt-2 font-display text-base font-semibold leading-snug hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">{p.name}</Link>
+        <div className="mt-1 text-sm text-muted">
           {p.sponsors.length?p.sponsors.map((s,i)=><span key={s.id}>
             {i>0?", ":""}<Link href={`/organizations/${s.id}`} className="hover:text-accent">{s.name}</Link>
           </span>):"Sponsor not stated"}
         </div>
-        <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1.5">
+        <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
           {p.stages.length?p.stages.map(s=><Badge key={s}>{supplyChainStageLabels[s]}</Badge>):
             <span className="font-mono text-[11px] text-faint">Stage not stated</span>}
-          {p.materialIds.length?p.materialIds.map(id=><span key={id} className="font-mono text-[11px] text-muted">{materialNames[id]??id}</span>):
+          {p.materialIds.length?p.materialIds.map(id=><span key={id} className="font-display text-xs text-muted">{materialNames[id]??id}</span>):
             <span className="font-mono text-[11px] text-faint">Material not stated</span>}
           {p.untrackedMaterialsAsStated.map((s,i)=><span key={i} className="font-mono text-[11px] text-faint">{s}</span>)}
         </div>
-        <p className="mt-auto pt-4 font-mono text-[11px] leading-5 text-faint">
+        <p className="mt-auto pt-3 font-display text-xs leading-5 text-faint">
           {p.directFinanceIds.length} directly linked financial row{p.directFinanceIds.length===1?"":"s"}
           {p.sharedUnallocatedFinanceIds.length?` · ${p.sharedUnallocatedFinanceIds.length} shared/unallocated`:""}
           {p.designationIds.length?` · ${p.designationIds.length} designation${p.designationIds.length===1?"":"s"}`:""}
