@@ -31,7 +31,8 @@ test("homepage chart enters in view without reintroducing the long animated latt
   assert.equal((html.match(/data-motion-kind="cards"/g) ?? []).length, 0);
   assert.equal((html.match(/data-motion-kind="chain"/g) ?? []).length, 0);
   assert.doesNotMatch(html, /class="chain-stage |class="element-tile group/);
-  assert.ok(html.indexOf('id="home-market-heading"') < html.indexOf('id="research"'));
+  assert.ok(html.indexOf('id="featured-case-title"') < html.indexOf('id="research"'));
+  assert.ok(html.indexOf('id="home-market-heading"') > html.indexOf('id="database-heading"'));
   assert.ok(html.indexOf('id="research"') < html.indexOf('id="database-heading"'));
 });
 
