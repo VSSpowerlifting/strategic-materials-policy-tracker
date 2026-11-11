@@ -6,21 +6,34 @@ import { headerNav, isNavCurrent, journeys, secondaryNav } from "../lib/site";
 const homepage = () => readFileSync("app/page.tsx", "utf8");
 const header = () => readFileSync("components/site-header.tsx", "utf8");
 
-test("Research is promoted on the homepage without crowding desktop navigation", () => {
+test("Research and Markets have direct first-level navigation", () => {
+  const source = header();
+  assert.match(source, /href: "\/research", label: "Research"/);
+  assert.match(source, /href: "\/markets", label: "Markets"/);
+  assert.ok(source.includes('label: "Policy"'));
+  assert.ok(source.includes('label: "Capital"'));
+  assert.ok(source.includes('label: "Projects"'));
+  assert.ok(source.includes('label: "Compare"'));
   assert.equal(journeys.length, 5);
-  assert.equal(headerNav.length, 5);
-  assert.ok(headerNav.every((item) => item.href !== "/research"));
-  assert.ok(journeys.every((item) => !item.href.startsWith("/research")));
-  assert.ok(homepage().includes('<Link href="/research" className="research-button">Read research</Link>'));
-  assert.ok(homepage().includes('<Link href="/events" className="research-button-secondary">Explore records</Link>'));
-  assert.ok(homepage().includes('href="/research" className="font-display text-sm text-accent underline underline-offset-4"'));
-  assert.ok(homepage().includes('href: "/research/escondida-copper"'));
+  assert.equal(headerNav.length, 5, "the data-journey taxonomy remains unchanged");
 });
 
-test("Research remains accessible on mobile and in the footer", () => {
-  assert.match(header(), /<Link href="\/research" onClick=\{closeMenu\}/);
-  assert.ok(secondaryNav.some((item) => item.href === "/research"));
+test("Homepage highlights research and links to the complete database", () => {
+  const source = homepage();
+  assert.ok(source.includes('<Link href="/research" className="research-button">Read research</Link>'));
+  assert.ok(source.includes('<Link href="/events" className="research-button-secondary">Explore the database</Link>'));
+  assert.ok(source.includes('href: "/research/china-export-control-suspension-extension"'));
+  assert.ok(source.includes('href: "/research/escondida-copper"'));
+  assert.ok(source.includes('href: "/research/hemerdon-financing"'));
+  assert.doesNotMatch(source, /<LatticeOverview|<SupplyChainStrip|<ElementStrip/);
+});
+
+test("Less-visible routes are reachable without a second navigation bar", () => {
+  const source = header();
+  assert.match(source, /utilityLinks\.map/);
+  assert.match(source, /journey\.views/);
+  assert.match(source, /<details/);
+  assert.match(source, /aria-controls="smpt-mobile-menu"/);
+  assert.ok(secondaryNav.some((link) => link.href === "/research"));
   assert.ok(headerNav.every((item) => !isNavCurrent("/research", item)));
-  assert.ok(headerNav.every((item) => !isNavCurrent("/research/tungsten-supply-security", item)));
-  assert.ok(isNavCurrent("/events", headerNav.find((item) => item.href === "/events")!));
 });
