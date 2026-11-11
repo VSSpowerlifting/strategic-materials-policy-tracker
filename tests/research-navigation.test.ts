@@ -14,7 +14,8 @@ test("Research is promoted on the homepage without crowding desktop navigation",
   assert.ok(homepage().includes('<Link href="/research" className="research-button">Read research</Link>'));
   assert.ok(homepage().includes('<Link href="/events" className="research-button-secondary">Explore records</Link>'));
   assert.ok(homepage().includes('href="/research" className="font-display text-sm text-accent underline underline-offset-4"'));
-  assert.ok(homepage().includes('href: "/research/escondida-copper"'));
+  assert.ok(homepage().includes("<FeaturedCase />"));
+  assert.ok(readFileSync("lib/fi002.ts", "utf8").includes('"/research/escondida-copper"'));
 });
 
 test("Research remains accessible on mobile and in the footer", () => {

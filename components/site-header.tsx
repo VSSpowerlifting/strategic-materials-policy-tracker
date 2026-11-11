@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { headerNav, isActivePath as isActive, isNavCurrent as isCurrent, journeys, site } from "@/lib/site";
+import { headerNav, isActivePath as isActive, isNavCurrent as isCurrent, journeys, publicationNav, site } from "@/lib/site";
 import { formatDateUS } from "@/lib/format";
 import { Container } from "@/components/ui/container";
 import { Wordmark } from "@/components/ui/brand";
@@ -120,7 +120,26 @@ export function SiteHeader() {
             <Wordmark markClassName="h-9 lg:h-11" textClassName="max-[359px]:tracking-[0.01em]" priority />
           </Link>
 
-          <nav aria-label="Main" className="hidden min-w-0 items-stretch gap-1 self-stretch lg:flex">
+          {/* Desktop: the two publications, then the five record journeys. Seven items need the xl width; below
+              it everything opens from the Menu disclosure. */}
+          <nav aria-label="Main" className="hidden min-w-0 items-stretch self-stretch xl:flex">
+            {publicationNav.map((item) => {
+              const current = isActive(pathname, item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={ariaCurrent(pathname, item.href, current)}
+                  className={cn(
+                    "relative flex items-center whitespace-nowrap px-2.5 font-display text-[0.9375rem] font-medium text-foreground/90 transition-colors hover:text-foreground",
+                    current && "text-foreground after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-accent",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <span aria-hidden className="mx-2.5 my-5 w-px bg-border-strong" />
             {headerNav.map((item) => {
               const current = isCurrent(pathname, item);
               return (
@@ -129,8 +148,8 @@ export function SiteHeader() {
                   href={item.href}
                   aria-current={ariaCurrent(pathname, item.href, current)}
                   className={cn(
-                    "relative flex items-center whitespace-nowrap px-3 font-display text-[0.9375rem] text-muted transition-colors hover:text-foreground",
-                    current && "font-medium text-foreground after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-accent",
+                    "relative flex items-center whitespace-nowrap px-2.5 font-display text-[0.9375rem] text-muted transition-colors hover:text-foreground",
+                    current && "font-medium text-foreground after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-accent",
                   )}
                 >
                   {item.label}
@@ -139,11 +158,11 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="ml-auto flex items-center gap-3 lg:gap-5">
+          <div className="ml-auto flex items-center gap-3">
             <Link
               href="/search"
               aria-current={pathname === "/search" ? "page" : undefined}
-              className="hidden h-9 w-48 items-center gap-2 rounded-md border border-border-strong bg-card/60 px-3 font-display text-sm text-muted transition-colors hover:border-accent/50 hover:text-foreground xl:flex"
+              className="hidden h-9 w-48 items-center gap-2 rounded-md border border-border-strong bg-card/60 px-3 font-display text-sm text-muted transition-colors hover:border-accent/50 hover:text-foreground 2xl:flex"
             >
               <SearchIcon />
               <span className="flex-1">Search</span>
@@ -153,11 +172,10 @@ export function SiteHeader() {
               href="/search"
               aria-label="Search the record"
               aria-current={pathname === "/search" ? "page" : undefined}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:bg-elevated hover:text-foreground xl:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:bg-elevated hover:text-foreground 2xl:hidden"
             >
               <SearchIcon />
             </Link>
-            <RecordAsOf className="hidden 2xl:inline-flex" />
             <button
               ref={menuToggle}
               type="button"
@@ -165,7 +183,7 @@ export function SiteHeader() {
               aria-controls={menuId}
               onClick={() => setMenuOpen((o) => !o)}
               className={cn(
-                "inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border-strong px-3 font-display text-sm text-foreground transition-colors hover:bg-elevated max-[399px]:w-9 max-[399px]:px-0 lg:hidden",
+                "inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border-strong px-3 font-display text-sm text-foreground transition-colors hover:bg-elevated max-[399px]:w-9 max-[399px]:px-0 xl:hidden",
                 menuOpen && "bg-elevated",
               )}
             >
@@ -202,13 +220,13 @@ export function SiteHeader() {
                   );
                 })}
               </nav>
-              <RecordAsOf className="hidden lg:inline-flex 2xl:hidden" />
+              <RecordAsOf className="hidden lg:inline-flex" />
             </Container>
           </div>
         ) : null}
 
-        {/* Small screens: the overview, the five data journeys with the question each answers, then utilities. A
-            journey's own views appear in the row above once it is open. */}
+        {/* Below xl: the overview and the two publications, the five record journeys, then utilities. A journey's
+            own views appear in the row above once it is open. */}
         {/* The menu sits below the sticky bar (4rem) and, inside a journey, the views row (2.25rem), plus their
             borders; its height leaves room for both so its last items can always scroll into view. */}
         <nav
@@ -216,7 +234,7 @@ export function SiteHeader() {
           aria-label="Main"
           hidden={!menuOpen}
           className={cn(
-            "overflow-y-auto border-t border-border lg:hidden",
+            "overflow-y-auto border-t border-border xl:hidden",
             hasViewsRow ? "max-h-[calc(100dvh-6.375rem)]" : "max-h-[calc(100dvh-4.125rem)]",
           )}
         >
@@ -227,19 +245,31 @@ export function SiteHeader() {
                   Overview
                 </Link>
               </li>
+              <li>
+                <Link href="/research" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/research", isActive(pathname, "/research"))} className={cn("block py-3 font-display text-base text-foreground", isActive(pathname, "/research") && "font-semibold text-accent")}>
+                  Research
+                </Link>
+              </li>
+              <li>
+                <Link href="/markets" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/markets", isActive(pathname, "/markets"))} className={cn("block py-3 font-display text-base text-foreground", isActive(pathname, "/markets") && "font-semibold text-accent")}>
+                  Markets
+                </Link>
+              </li>
+            </ul>
+            <p className="mt-5 font-display text-xs font-semibold text-muted">Records</p>
+            <ul className="mt-1 divide-y divide-border">
               {journeys.map((j, i) => {
                 const current = isCurrent(pathname, headerNav[i]);
                 return (
                   <li key={j.href}>
-                    <Link href={j.href} onClick={closeMenu} aria-current={ariaCurrent(pathname, j.href, current)} className="block py-3">
-                      <span className={cn("block font-display text-base text-foreground", current && "font-semibold text-accent")}>{j.label}</span>
-                                          </Link>
+                    <Link href={j.href} onClick={closeMenu} aria-current={ariaCurrent(pathname, j.href, current)} className={cn("block py-3 font-display text-base text-foreground", current && "font-semibold text-accent")}>
+                      {j.label}
+                    </Link>
                   </li>
                 );
               })}
             </ul>
             <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border-strong pt-4 font-display text-sm">
-              <Link href="/research" onClick={closeMenu} aria-current={isActive(pathname, "/research") ? "page" : undefined} className="font-semibold text-foreground hover:text-accent">Research</Link>
               <Link href="/search" onClick={closeMenu} className="text-muted hover:text-foreground">Search</Link>
               <Link href="/saved" onClick={closeMenu} className="text-muted hover:text-foreground">Saved</Link>
               <Link href="/about" onClick={closeMenu} className="text-muted hover:text-foreground">About</Link>

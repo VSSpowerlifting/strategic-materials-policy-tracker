@@ -57,8 +57,8 @@ test("the three evidence examples use complete source-backed case records", () =
 
 test("every source-linked homepage example opens a published record", () => {
   const start = view.indexOf('id="examples"');
-  const end = view.indexOf('id="browse"');
-  assert.ok(start !== -1 && end > start, "the examples section precedes the interactive data browser");
+  const end = view.indexOf('id="method-heading"');
+  assert.ok(start !== -1 && end > start, "the examples section precedes the method band");
   const examples = view.slice(start, end);
   const hrefs = [...examples.matchAll(new RegExp('href="(/(?:events|controls|capital|projects|sources|materials)/[^"?#]+)"', "g"))].map((m) => m[1]);
   assert.ok(hrefs.length >= 5, `found ${hrefs.length} published record links`);
@@ -134,14 +134,16 @@ test("case statuses are read as of the revision date, so a later entry cannot ap
   assert.equal(designationStatusOn(laterDsg, site.lastUpdated), dsg.statusHistory[0].status);
 });
 
-test("the opening leads from market context and materials to the supply chain, research, and examples", () => {
+test("the page leads from research to the featured analysis, the tools, record examples and method", () => {
+  const latest = view.indexOf('id="latest-heading"');
+  const featured = view.indexOf('id="featured-analysis"');
+  const tools = view.indexOf('id="tools"');
+  const materials = view.indexOf('aria-label="Materials in scope"');
   const market = view.indexOf('id="home-market-heading"');
-  const tiles = view.indexOf('aria-label="Materials in scope"');
-  const strip = view.indexOf('id="chain-heading"');
-  const research = view.indexOf('id="research"');
   const examples = view.indexOf('id="examples"');
-  const browser = view.indexOf('id="browse"');
-  assert.ok(market !== -1 && market < tiles);
-  assert.ok(tiles < strip && strip < research && research < examples && examples < browser);
-  assert.equal(view.split('id="chain-heading"').length, 2);
+  const method = view.indexOf('id="method-heading"');
+  assert.ok(view.indexOf("<h1") < latest && latest !== -1);
+  assert.ok(latest < featured && featured < tools);
+  assert.ok(tools < materials && materials < market && market < examples && examples < method);
+  assert.doesNotMatch(view, /id="chain-heading"|id="browse"/, "the supply chain and lattice live on /materials");
 });

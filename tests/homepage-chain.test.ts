@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import Home from "../app/page";
+import MaterialsPage from "../app/materials/page";
 import { getAllMaterials } from "../lib/data";
 import { CHAIN_STAGES, chainStageCounts } from "../lib/homepage-chain";
 import { buildLatticeModel } from "../lib/lattice";
@@ -43,10 +44,16 @@ test("off-chain stages appear only when they hold records", () => {
 });
 
 const view = renderToStaticMarkup(createElement(Home));
+const materialsView = renderToStaticMarkup(createElement(MaterialsPage));
 
-test("the homepage draws the strip from real counts and links each material", () => {
-  assert.match(view, /Where the records sit along the supply chain/);
-  for (const s of chain) assert.ok(view.includes(s.label), s.label);
+test("the materials page draws the strip from real counts above the material-stage browser", () => {
+  assert.match(materialsView, /Where the records sit along the supply chain/);
+  for (const s of chain) assert.ok(materialsView.includes(s.label), s.label);
+  assert.match(materialsView, /id="browse"/);
+  assert.ok(materialsView.indexOf('id="chain-heading"') < materialsView.indexOf('id="browse"'));
+  assert.equal(materialsView.split('id="chain-heading"').length, 2);
+});
+
+test("the homepage links each material", () => {
   for (const m of getAllMaterials()) assert.ok(view.includes(`href="/materials/${m.slug}"`), m.slug);
-  assert.match(view, /id="browse"/);
 });

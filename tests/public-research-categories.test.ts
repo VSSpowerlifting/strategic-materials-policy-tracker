@@ -48,8 +48,9 @@ test("house style keeps public grouping separate from archival research identifi
 
 test("homepage featured research cards use the same public categories", () => {
   const home = read("app/page.tsx");
-  assert.equal(home.split('category: "Strategy & Finance"').length - 1, 3);
-  assert.equal(home.split('category: "Policy Research"').length - 1, 1);
+  assert.equal(home.split('category: "Strategy & Finance"').length - 1, 2);
+  assert.equal(home.split('category: "Policy Research"').length - 1, 2);
+  assert.match(read("components/home/featured-case.tsx"), /Featured analysis · Strategy &amp; Finance/);
   assert.doesNotMatch(home, /category: "(Financial Intelligence|Applied Strategy|Research Dossier|Policy Analysis)/);
 });
 

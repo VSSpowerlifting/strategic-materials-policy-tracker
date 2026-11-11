@@ -51,7 +51,7 @@ export function AtlasIndex({
 }
 
 /**
- * Standard page heading: breadcrumb trail or atlas kicker / Archivo title / serif lead. Detail pages pass
+ * Standard page heading: breadcrumb trail or atlas kicker / Archivo title (the shared `.page-title` scale) / lead. Detail pages pass
  * `breadcrumbs`, which replace the kicker so the page's place in its journey is said once.
  */
 export function PageHeading({
@@ -75,11 +75,11 @@ export function PageHeading({
       ) : eyebrow ? (
         <AtlasIndex label={eyebrow} className="mb-4" />
       ) : null}
-      <h1 className="max-w-4xl font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+      <h1 className="page-title max-w-4xl font-display text-balance font-semibold tracking-tight">
         {title}
       </h1>
       {lead ? (
-        <p className="mt-5 max-w-3xl text-pretty text-lg leading-8 text-muted">{lead}</p>
+        <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-muted sm:text-[1.0625rem] sm:leading-8">{lead}</p>
       ) : null}
     </div>
   );

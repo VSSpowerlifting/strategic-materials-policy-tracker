@@ -34,6 +34,6 @@ test("homepage chart replaces the corpus aside, stays chart-first and honors red
   const css = readFileSync("app/globals.css", "utf8");
   assert.match(page, /<HomeMarketPreview \/>/);
   assert.doesNotMatch(page, /Current corpus|corpus-heading/);
-  assert.ok(page.indexOf("<HomeMarketPreview />") < page.indexOf("<ElementStrip materials={materials} />"));
+  assert.ok(page.indexOf("<HomeMarketPreview />") < page.indexOf('id="examples"'));
   assert.match(css, /@media \(prefers-reduced-motion: no-preference\)[\s\S]*?\.market-line-reveal/);
 });

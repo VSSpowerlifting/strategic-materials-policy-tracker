@@ -153,6 +153,15 @@ export const journeys = [
   },
 ] as const;
 
+/**
+ * Publications that sit beside the record journeys in the header: the research articles and the separately
+ * maintained market-data layer. Neither belongs to a journey, so neither ever marks a journey current.
+ */
+export const publicationNav = [
+  { href: "/research", label: "Research" },
+  { href: "/markets", label: "Markets" },
+] as const;
+
 /** Header journeys. The wordmark links to the overview, so the overview is not repeated here. */
 export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] =
   journeys.map(({ href, label, views }) => ({
