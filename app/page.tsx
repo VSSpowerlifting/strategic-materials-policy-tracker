@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { getAllMaterials } from "@/lib/data";
-import { LatticeOverview } from "@/components/lattice/lattice";
-import { ElementStrip, SupplyChainStrip } from "@/components/home/supply-chain-strip";
 import { HomeMarketPreview } from "@/components/home/home-market-preview";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { chainStageCounts } from "@/lib/homepage-chain";
-import { buildLatticeModel } from "@/lib/lattice";
-import { formatDateLong } from "@/lib/format";
-import { getFinancingCase, getLegalControlCase, getTungstenCase } from "@/lib/homepage-cases";
-import { journeys, site } from "@/lib/site";
+import { site } from "@/lib/site";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -27,45 +20,39 @@ export const metadata: Metadata = {
   },
 };
 
+
 const featured = [
   {
+    category: "Policy Research",
+    date: "November 9, 2026",
+    title: "China Extends Export-Control Suspension Through January 10, 2027",
+    description: "Six October 2025 measures remain suspended. The April rare-earth controls follow a different schedule.",
+    href: "/research/china-export-control-suspension-extension",
+  },
+  {
     category: "Strategy & Finance",
+    date: "November 5, 2026",
     title: "Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
-    description: "How Goldman’s 2027 copper forecast compares with the long-term economics of BHP’s Escondida concentrator.",
+    description: "The investment case for BHP's replacement concentrator under different copper-price assumptions.",
     href: "/research/escondida-copper",
   },
   {
     category: "Strategy & Finance",
+    date: "November 5, 2026",
     title: "Inside Tungsten West’s £71 Million Restart Financing",
-    description: "What is committed in Hemerdon’s £71 million package and how the loan affects the restart.",
+    description: "The terms of Hemerdon's financing package and what remains to fund the restart.",
     href: "/research/hemerdon-financing",
-  },
-  {
-    category: "Strategy & Finance",
-    title: "U.S. Antimony Supply Resilience, 2027–2031",
-    description: "A modeled inventory and sourcing plan for a defense manufacturer facing an antimony disruption.",
-    href: "/research/antimony-supply-resilience",
-  },
-  {
-    category: "Policy Research",
-    title: "Tungsten Supply Security",
-    description: "Tungsten export controls, financing and processing projects across China, the EU, UK and Japan.",
-    href: "/research/tungsten-supply-security",
   },
 ] as const;
 
-export default function Home() {
-  const materials = getAllMaterials();
-  const model = buildLatticeModel(site.lastUpdated);
-  const chain = chainStageCounts(model);
-  const legal = getLegalControlCase();
-  const financing = getFinancingCase();
-  const tungsten = getTungstenCase();
-  const revision = formatDateLong(site.lastUpdated);
-  const asOf = (
-    <>as of the <time dateTime={site.lastUpdated}>{revision}</time> revision</>
-  );
+const databaseLinks = [
+  { href: "/events", label: "Policy", detail: "Government actions and export controls" },
+  { href: "/capital", label: "Capital", detail: "Financing commitments and instruments" },
+  { href: "/projects", label: "Projects", detail: "Mines, processing plants and manufacturing" },
+] as const;
 
+export default function Home() {
+  const [latest, ...more] = featured;
   return (
     <div data-flush-footer>
       <script
@@ -73,149 +60,73 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLdScript(datasetJsonLd()) }}
       />
 
-      <Container width="wide" className="py-10 sm:py-16">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10 xl:gap-12">
+      <Container width="wide" className="py-14 sm:py-20">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-16">
           <div>
-            <p className="font-display text-sm text-muted">Strategic Materials Policy Tracker</p>
-            <h1 className="mt-4 max-w-4xl font-display text-[2.2rem] font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.1rem] xl:text-[3.3rem]">
-              Research on critical minerals policy, financing and industrial development.
+            <p className="font-display text-sm text-muted">Independent research by Benjamin Yang</p>
+            <h1 className="mt-5 max-w-3xl font-display text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-balance sm:text-5xl lg:text-[3.2rem]">
+              Critical minerals policy, financing and industrial development.
             </h1>
-            <p className="mt-6 max-w-2xl font-display text-lg leading-8 text-muted">
-              Follow government measures, capital commitments and industrial projects
-              through the original records.
+            <p className="mt-6 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
+              Research and original records on government policy, public investment and strategic-material projects.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link href="/research" className="research-button">Read research</Link>
-              <Link href="/events" className="research-button-secondary">Explore records</Link>
+              <Link href="/events" className="research-button-secondary">Explore the database</Link>
             </div>
-            <p className="mt-6 font-display text-sm text-muted">
-              Research by <Link href="/about" className="underline decoration-border-strong underline-offset-4 hover:text-foreground">Benjamin Yang</Link>
-            </p>
           </div>
-          <aside aria-label="Mineral price trends" className="min-w-0 self-center border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">
+          <aside aria-label="Market-price preview" className="min-w-0 border-t border-border-strong pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
             <ScrollReveal kind="chart"><HomeMarketPreview /></ScrollReveal>
           </aside>
         </div>
-        <ElementStrip materials={materials} />
       </Container>
 
-      <section aria-label="Supply-chain coverage" className="border-t border-border">
-        <Container width="wide" className="py-10 sm:py-12">
-          <ScrollReveal kind="chain"><SupplyChainStrip chain={chain.chain} outside={chain.outside} asOf={asOf} /></ScrollReveal>
-        </Container>
-      </section>
-
       <section id="research" aria-labelledby="research-heading" className="border-t border-border-strong">
-        <Container width="wide" className="py-12 sm:py-16">
+        <Container width="wide" className="py-14 sm:py-20">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <h2 id="research-heading" className="font-display text-3xl font-medium">Published research</h2>
-            <Link href="/research" className="font-display text-sm text-accent underline underline-offset-4">
-              All research
-            </Link>
+            <h2 id="research-heading" className="font-display text-3xl font-medium">Latest research</h2>
+            <Link href="/research" className="font-display text-sm text-accent underline underline-offset-4">All research</Link>
           </div>
-          <ScrollReveal kind="cards" className="mt-7 grid gap-x-12 gap-y-8 md:grid-cols-2">
-            {featured.map((item, i) => (
-              <article
-                key={item.href}
-                data-motion-item
-                style={{ "--reveal-order": i } as React.CSSProperties}
-                className="border-t border-border pt-5"
-              >
-                <p className="font-display text-sm text-muted">{item.category}</p>
-                <h3 className="mt-2 font-display text-xl leading-tight sm:text-2xl">
+          <article className="mt-9 max-w-4xl">
+            <p className="text-sm text-muted">{latest.category} · {latest.date}</p>
+            <h3 className="mt-3 font-display text-2xl font-medium leading-tight sm:text-4xl">
+              <Link href={latest.href} className="hover:text-accent">{latest.title}</Link>
+            </h3>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-muted">{latest.description}</p>
+          </article>
+          <div className="mt-12 grid gap-8 border-t border-border pt-7 md:grid-cols-2 md:gap-12">
+            {more.map((item) => (
+              <article key={item.href}>
+                <p className="text-sm text-muted">{item.category} · {item.date}</p>
+                <h3 className="mt-2 font-display text-xl font-medium leading-snug sm:text-2xl">
                   <Link href={item.href} className="hover:text-accent">{item.title}</Link>
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{item.description}</p>
+                <p className="mt-3 max-w-prose text-sm leading-6 text-muted">{item.description}</p>
               </article>
             ))}
-          </ScrollReveal>
-        </Container>
-      </section>
-
-      <section id="examples" aria-labelledby="examples-heading" className="border-t border-border-strong">
-        <Container width="wide" className="py-12 sm:py-14">
-          <h2 id="examples-heading" className="font-display text-3xl font-medium">
-            From the records
-          </h2>
-          <ScrollReveal kind="cards" className="mt-7 grid gap-7 md:grid-cols-3">
-            {legal ? (
-              <article data-motion-item style={{ "--reveal-order": 0 } as React.CSSProperties} className="border-t border-border pt-4">
-                <p className="font-display text-sm text-muted">Legal controls</p>
-                <h3 className="mt-3 font-display text-lg leading-snug">
-                  <Link href={`/events/${legal.event.id}`} className="hover:text-accent">
-                    {legal.event.titleEn}
-                  </Link>
-                </h3>
-                <p className="mt-2 font-display text-sm text-muted">
-                  {legal.status.label} · <time dateTime={legal.event.date}>{formatDateLong(legal.event.date)}</time>
-                </p>
-                <Link href={`/controls/${legal.control.id}`} className="mt-3 inline-block font-display text-sm text-accent underline underline-offset-4">
-                  View clause
-                </Link>
-              </article>
-            ) : null}
-            {financing.length ? (
-              <article data-motion-item style={{ "--reveal-order": 1 } as React.CSSProperties} className="border-t border-border pt-4">
-                <p className="font-display text-sm text-muted">Public financing</p>
-                <h3 className="mt-3 font-display text-lg leading-snug">
-                  <Link href={`/capital/${financing[0].commitment.id}`} className="hover:text-accent">
-                    {financing[0].provider}: {financing[0].instrument.toLowerCase()}
-                  </Link>
-                </h3>
-                <p className="mt-2 font-display text-sm text-muted">
-                  {financing[0].status.label} · {financing[0].amount.currency} {financing[0].amount.value}
-                </p>
-              </article>
-            ) : null}
-            {tungsten.length ? (
-              <article data-motion-item style={{ "--reveal-order": 2 } as React.CSSProperties} className="border-t border-border pt-4">
-                <p className="font-display text-sm text-muted">Tungsten comparison</p>
-                <h3 className="mt-3 font-display text-lg leading-snug">
-                  <Link href={tungsten[0].href} className="hover:text-accent">{tungsten[0].title}</Link>
-                </h3>
-                <p className="mt-2 font-display text-sm text-muted">
-                  {tungsten[0].jurisdiction} · {tungsten[0].status}
-                </p>
-                <Link href="/materials/tungsten" className="mt-3 inline-block font-display text-sm text-accent underline underline-offset-4">
-                  Tungsten profile
-                </Link>
-              </article>
-            ) : null}
-          </ScrollReveal>
-        </Container>
-      </section>
-
-      <section id="browse" aria-label="Browse by material and stage" className="border-t border-border-strong">
-        <Container width="wide" className="py-12 sm:py-16">
-          <LatticeOverview
-            model={model}
-            preferred={{ slug: "gallium", stage: "processing" }}
-            intro={
-              <>
-                <h2 className="font-display text-3xl font-medium">Browse by material and stage</h2>
-                <p className="mt-3 text-sm leading-6 text-muted">
-                  Select a marked cell to open its source-linked records.
-                </p>
-              </>
-            }
-          />
+          </div>
         </Container>
       </section>
 
       <section aria-labelledby="database-heading" className="border-t border-border-strong bg-paper text-paper-foreground">
-        <Container width="wide" className="py-12 sm:py-14">
+        <Container width="wide" className="py-14 sm:py-20">
           <h2 id="database-heading" className="font-display text-3xl font-medium">Explore the database</h2>
-          <nav aria-label="Database sections" className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
-            {journeys.map((journey) => (
-              <Link
-                key={journey.href}
-                href={journey.href}
-                className="border-t border-paper-border pt-4 font-display text-base font-semibold text-paper-foreground underline decoration-paper-border underline-offset-4 hover:decoration-current"
-              >
-                {journey.label}
+          <p className="mt-3 max-w-2xl text-base leading-7 text-paper-muted">
+            Search the source records behind government measures, financing and industrial projects.
+          </p>
+          <nav aria-label="Database sections" className="mt-9 grid gap-6 sm:grid-cols-3 sm:gap-8">
+            {databaseLinks.map((item) => (
+              <Link key={item.href} href={item.href} className="group border-t border-paper-border pt-5">
+                <span className="block font-display text-xl font-medium group-hover:underline">{item.label}</span>
+                <span className="mt-2 block text-sm leading-6 text-paper-muted">{item.detail}</span>
               </Link>
             ))}
           </nav>
+          <p className="mt-10 text-sm">
+            <Link href="/compare" className="text-paper-accent underline underline-offset-4 hover:text-paper-foreground">Compare materials and government approaches</Link>
+            <span className="mx-3 text-paper-muted">·</span>
+            <Link href="/materials" className="text-paper-accent underline underline-offset-4 hover:text-paper-foreground">Browse materials</Link>
+          </p>
         </Container>
       </section>
     </div>
