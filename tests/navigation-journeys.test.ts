@@ -61,21 +61,18 @@ test("every navigation and journey link points at a route that exists", () => {
   for (const href of hrefs) assert.ok(routeExists(href), `${href} has no app route`);
 });
 
-test("homepage research, evidence examples, material entries and navigation lead to published routes", () => {
+
+test("homepage links to published research and focused database destinations", () => {
   const view = renderToStaticMarkup(createElement(Home));
-  for (const j of journeys) {
-    assert.ok(view.includes(`href="${j.href}"`), `journey ${j.label} is linked`);
-    assert.ok(j.question.length > 20, `journey ${j.label} retains its editorial question in navigation data`);
-  }
+  for (const href of ["/research", "/markets", "/events", "/capital", "/projects", "/compare", "/materials"])
+    assert.ok(view.includes(`href="${href}"`), href);
   for (const entry of getInvestigationEntries()) {
     const directory = entry.href.split("/").slice(0, -1).join("/");
     assert.ok(routeExists(`${directory}/[id]`), entry.href);
   }
-  assert.match(view, /id="examples"/);
-  for (const m of getAllMaterials())
-    assert.ok(view.includes(`href="/materials/${m.slug}"`), m.id);
-  assert.match(view, /id="home-market-heading"/);
-  assert.ok(view.includes('href="/markets"'), "the homepage's market CTA reaches the published route");
+  assert.match(view, /id="research"/);
+  assert.doesNotMatch(view, /id="browse"|id="examples"/);
+  assert.ok(getAllMaterials().some((m) => m.slug === "tungsten"));
 });
 
 test("breadcrumbs mark the current page once and never link it", () => {
@@ -100,11 +97,14 @@ test("an event detail page leads back to its journey through the breadcrumb", as
   assert.match(trail, /aria-current="page"/);
 });
 
-test("views-row links stay visible to keyboard users inside their scroller", () => {
-  // The row clips its overflow, so an outset focus ring or a half-scrolled link would be hidden. SiteHeader needs
-  // the router to render, so this checks the source of the views-row link.
+
+test("secondary navigation remains available in an accessible disclosure", () => {
   const source = readFileSync("components/site-header.tsx", "utf8");
-  const row = source.slice(source.indexOf("journey.views.map"), source.indexOf("{view.label}"));
-  assert.match(row, /onFocus=\{\(e\) => e\.currentTarget\.scrollIntoView\(\{ block: "nearest", inline: "nearest" \}\)\}/);
-  assert.match(row, /focus-visible:outline-offset-\[-2px\]/);
+  assert.match(source, /<details ref=\{moreRef\}/);
+  assert.match(source, /<summary/);
+  assert.match(source, /journeys\.map/);
+  assert.match(source, /journey\.views/);
+  assert.match(source, /aria-expanded=\{menuOpen\}/);
+  assert.match(source, /focus-visible:ring-2/);
+  assert.match(source, /event\.key !== "Escape"/);
 });
