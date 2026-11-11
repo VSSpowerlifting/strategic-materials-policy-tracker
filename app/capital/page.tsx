@@ -72,13 +72,27 @@ export default function CapitalPage() {
         title="Capital"
         lead={
           <>
-            Public financing, investment and purchase guarantees for strategic-material supply chains.
-            Amounts and legal status follow the cited records.
+            Search public financing, investments and purchase guarantees across strategic-material supply chains.
           </>
         }
       />
 
-      <ResearchReadingKey topic="capital" />
+      <section aria-labelledby="find-capital-heading" className="mt-10">
+        <h2 id="find-capital-heading" className="mb-5 font-display text-xl font-semibold">Find financing</h2>
+        <CapitalExplorer rows={summaries} materialNames={materialNames} />
+        <p className="mt-5 text-sm text-muted">
+          Download: <a href="/api/export/financial-commitments.csv" className="text-accent underline underline-offset-2">CSV</a>
+          {" · "}<Link href="/api/v1/financial-commitments" prefetch={false} className="text-accent underline underline-offset-2">JSON API</Link>
+          {" · "}<Link href="/data" className="text-accent underline underline-offset-2">All exports</Link>
+        </p>
+      </section>
+
+      <details className="mt-12 border-t border-border-strong">
+        <summary className="cursor-pointer py-5 font-display text-lg font-semibold text-foreground hover:text-accent focus-visible:ring-2 focus-visible:ring-accent">
+          Financing totals, breakdowns and definitions
+        </summary>
+        <div>
+          <ResearchReadingKey topic="capital" />
 
       <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
         {[
@@ -361,18 +375,9 @@ export default function CapitalPage() {
           <StageMatrix rows={all} />
         </Section>
 
-        <Section index={options.length ? "07" : "06"} title="All financial records">
-          <CapitalExplorer rows={summaries} materialNames={materialNames} />
-          <p className="mt-4 text-sm text-muted">
-            Download:{" "}
-            <a href="/api/export/financial-commitments.csv" className="text-accent hover:text-accent-strong">CSV</a>
-            {" · "}
-            <Link href="/api/v1/financial-commitments" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
-            {" · "}
-            <Link href="/data" className="text-accent hover:text-accent-strong">all exports</Link>
-          </p>
-        </Section>
       </div>
+        </div>
+      </details>
     </Container>
   );
 }
