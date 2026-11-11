@@ -47,6 +47,8 @@ try{
   await page.goto(origin+"/capital",{waitUntil:"networkidle"});
   const gloss=page.getByTestId("reading-key-capital");
   assert.ok(await gloss.count()>0);
+  assert.equal(await gloss.locator("dd").first().isVisible(),false,"the advanced finance glossary starts collapsed");
+  await page.getByText("Financing totals, breakdowns and definitions",{exact:true}).click();
   await gloss.locator("summary").focus();
   await page.keyboard.press("Enter");
   assert.ok(await gloss.locator("dd").first().isVisible(),"keyboard glossary disclosure works");

@@ -147,8 +147,9 @@ test("homepage market context leads straight to the source-backed explorer and e
   assert.match(view, /World Bank Pink Sheet and IMF PCPS/);
   assert.ok(view.includes('href="/markets"'));
   assert.doesNotMatch(view, /Current corpus/);
-  assert.match(view, /href="\/materials\/gallium"/);
-  assert.match(view, /href="\/capital\/fin-au-alcoa-sojitz-gallium-2025-equity"/);
+  assert.match(view, /href="\/materials"/);
+  assert.match(view, /href="\/capital"/);
+  assert.match(view, /href="\/compare"/);
   assert.doesNotMatch(view, /<dialog/);
   const layout = readFileSync("app/layout.tsx", "utf8");
   assert.doesNotMatch(layout, /TitlePage/);

@@ -40,7 +40,7 @@ export function RecordReadingGuide({record}:{record:FinancialCommitment}){
 const keys={
  capital:{
   title:"Financing definitions",
-  intro:"Value roles classify the figure; financial statuses describe the instrument’s reported stage. Payment evidence is assessed separately.",
+  intro:"Financing amounts, agreement status and payments are recorded separately.",
   rows:[
    {term:valueRoleLabels.commitment,meaning:VALUE_ROLE_DEFS.commitment},
    {term:valueRoleLabels.program_envelope,meaning:VALUE_ROLE_DEFS.program_envelope},
@@ -56,7 +56,7 @@ const keys={
  },
  projects:{
   title:"Project relationships",
-  intro:"Project registrations and financing references establish recorded relationships. Physical completion requires separate milestone evidence.",
+  intro:"Project entries link to financing, designations and reported construction milestones.",
   rows:[
    {term:"Direct financing reference",meaning:"A financial instrument has a registered project ID. Its value role and current legal status still determine whether any funding is a public commitment or paid."},
    {term:"Shared, unallocated association",meaning:"One instrument references several projects; its reported amount remains unallocated across them."},
@@ -66,7 +66,7 @@ const keys={
  },
  programmes:{
   title:"Programme finance",
-  intro:"A government scheme can have an authorized ceiling, individual finance records and designations. Each has a distinct role and counting basis.",
+  intro:"Programme ceilings, individual awards and designations are tracked separately.",
   rows:[
    {term:valueRoleLabels.program_envelope,meaning:VALUE_ROLE_DEFS.program_envelope},
    {term:valueRoleLabels.lending_authority,meaning:VALUE_ROLE_DEFS.lending_authority},
@@ -94,7 +94,7 @@ export function ResearchReadingKey({topic}:{topic:keyof typeof keys}){
    </dl>
    <Link href="/methodology#capital-counting"
     className="mt-4 inline-flex min-h-10 items-center font-display text-sm font-medium text-accent underline underline-offset-2">
-    Full terminology and counting rules →
+    Full definitions and counting rules →
    </Link>
   </div>
  </details>;

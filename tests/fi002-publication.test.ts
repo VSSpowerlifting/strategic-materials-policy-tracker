@@ -103,8 +103,9 @@ test("publication is discoverable without adding hypothetical research to tracke
   );
   const sitemap = readFileSync("app/sitemap.ts", "utf8");
   assert.ok(sitemap.includes(fi002.path));
-  for (const file of ["app/page.tsx", "app/research/page.tsx"])
-    assert.ok(readFileSync(file, "utf8").includes(fi002.path));
+  assert.ok(readFileSync("app/research/page.tsx", "utf8").includes(fi002.path));
+  assert.match(readFileSync("app/page.tsx", "utf8"), /<FeaturedCase \/>/);
+  assert.ok(readFileSync("components/home/featured-case.tsx", "utf8").includes("href={fi002.path}"));
   const deployment = JSON.parse(readFileSync("vercel.json", "utf8"));
   assert.equal(deployment.git.deploymentEnabled["*"], false);
   assert.equal(

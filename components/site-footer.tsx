@@ -6,12 +6,11 @@ import { formatDateLongUS } from "@/lib/format";
 
 const footerLinks = [
   { href: "/research", label: "Research" },
-  { href: "/events", label: "Database" },
+  { href: "/markets", label: "Markets" },
+  { href: "/events", label: "Policy" },
   { href: "/capital", label: "Capital" },
   { href: "/projects", label: "Projects" },
-  { href: "/markets", label: "Markets" },
   { href: "/methodology", label: "Methodology" },
-  { href: "/data", label: "Downloads" },
   { href: "/about", label: "About" },
 ] as const;
 
@@ -35,8 +34,8 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="mt-9 flex flex-col justify-between gap-2 border-t border-border pt-5 font-display text-xs text-faint sm:flex-row">
-          <p>Corpus revised <time dateTime={site.revisedOn}>{formatDateLongUS(site.revisedOn)}</time>. Coverage is selective.</p>
-          <p>For research use; consult official sources and qualified advisers for legal decisions.</p>
+          <p>Records revised <time dateTime={site.revisedOn}>{formatDateLongUS(site.revisedOn)}</time>.</p>
+          <p><Link href="/methodology" className="underline underline-offset-2 hover:text-foreground">Sources and methodology</Link></p>
         </div>
       </Container>
     </footer>
