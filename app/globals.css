@@ -388,6 +388,13 @@ html { scroll-padding-top: 7rem; }
 @media (prefers-reduced-motion: no-preference) {
   /* Only animate lines when their parent chart is actually on screen.
      Without JS, the underlying published lines remain fully visible. */
+  /* Animate actual model scenario bars only once their exhibit enters view.
+     Without JS and under reduced motion, the full data remains visible. */
+  .scroll-reveal[data-motion-kind="chart"][data-motion-entered="true"] .featured-case-bar {
+    transform-origin: left center;
+    animation: market-series-reveal 760ms cubic-bezier(.22, .61, .36, 1) both;
+  }
+
   .scroll-reveal[data-motion-kind="chart"][data-motion-entered="true"] .market-line-reveal {
     transform-box: fill-box;
     transform-origin: left center;
