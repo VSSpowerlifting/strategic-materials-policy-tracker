@@ -75,11 +75,11 @@ export function PageHeading({
       ) : eyebrow ? (
         <AtlasIndex label={eyebrow} className="mb-4" />
       ) : null}
-      <h1 className="max-w-4xl font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+      <h1 className="max-w-4xl font-display text-balance text-3xl font-semibold leading-[1.12] tracking-tight sm:text-4xl">
         {title}
       </h1>
       {lead ? (
-        <p className="mt-5 max-w-3xl text-pretty text-lg leading-8 text-muted">{lead}</p>
+        <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-muted">{lead}</p>
       ) : null}
     </div>
   );
@@ -102,7 +102,7 @@ export function Section({
     <section className={cn("scroll-mt-24", className)}>
       {title ? (
         <div className="mb-5 border-b border-border-strong pb-3">
-          <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-[1.375rem]">
+          <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground">
             {title}
           </h2>
           {description ? (
