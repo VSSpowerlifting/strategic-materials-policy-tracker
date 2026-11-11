@@ -44,6 +44,42 @@ What the text does **not** do:
 
 **Related listings:** see Finding 3.
 
+## Result, 11 November 2026: the suspension was continued to 10 January 2027
+
+**Instrument:** [商务部、海关总署公告2026年第58号](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_91466027f465467985942a639a9485f4.html), dated and posted 9 November 2026 by MOFCOM's 安全与管制局. Read in full on both the main MOFCOM page and the [export-control catalogue copy](https://aqygzj.mofcom.gov.cn/qdml/art/2026/art_5c9199b52ff24171aeef73a10576815b.html); the texts are identical. The whole operative text:
+
+> 经批准，自2026年11月11日起至2027年1月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号继续暂停实施。
+
+Self translation: "As approved, from 11 November 2026 to 10 January 2027, MOFCOM/GACC Announcements Nos. 55, 56, 57 and 58 of 2025 and MOFCOM Announcements Nos. 61 and 62 of 2025 continue to be suspended."
+
+What it settles:
+
+- **All six** October 2025 announcements are covered, named one by one.
+- **No gap:** No. 70's window ended on 10 November; this one starts on 11 November.
+- **End date 10 January 2027**, matching MOFCOM's 28 September reading. The 20 January date in press coverage was wrong.
+- It gives no reason, and does not mention Announcement No. 18 of 2025, which was never suspended.
+
+**Naming hazard:** `src-mofcom-58` already means Announcement No. 58 **of 2025** (batteries and graphite anodes). The new source must be promoted as `src-mofcom-58-2026`.
+
+**Announcement No. 72 of 2025** (suspends Article 2 of No. 46 of 2024 until 27 November 2026): nothing on either MOFCOM list addresses it yet. The same day MOFCOM also issued 商务部令2026年第4号, continuing a suspension of countermeasures against five US subsidiaries of Hanwha Ocean for two months; that is a shipbuilding matter outside SMPT's scope.
+
+### Proposed reviewer decision (not applied; seed unchanged)
+
+`npm run validate` now warns on exactly these 19 control rows: each has a status that ran out on 10 November with no later entry.
+
+| # | Change | Records |
+|---|---|---|
+| 1 | Promote `cand-cn-mofcom-58-2026` as a new event with its own control row, source `src-mofcom-58-2026` | new |
+| 2 | Append `{status: suspended, date: 2026-11-11, until: 2027-01-10, sourceId: src-mofcom-58-2026}` with the verbatim sentence as `note` | 18 control rows under Nos. 56, 57, 58, 61, 62 of 2025 |
+| 3 | Append `{status: expired, date: 2026-11-11, sourceId: src-mofcom-70}`; No. 70's own text set its window to 10 November, so the expiry needs no other source | `ctl-cn-ree-2025-11-suspension` |
+| 4 | Change `policyStatus` from `active`; `superseded` plus `supersededByEventId` is the closest existing label (`ended` requires no replacement). Maintainer call | `china-rare-earth-suspension-2025-11` |
+| 5 | Rewrite the "records nothing yet about what follows 10 November 2026" sentences | 6 event summaries and significance notes |
+| 6 | Approved corpus refresh: the instrument postdates `site.lastUpdated` (2026-10-17) | `lib/site.ts` |
+
+**Date convention to choose (item 2):** the existing `scheduled` entries are dated by publication. Dating the new entry 11 November (effective) avoids overlapping No. 70's window; dating it 9 November (publication) matches the earlier convention but overlaps by two days.
+
+**Recommendation:** reject `cand-cn-kl-arrangement-extension-2026` as an event and cite the 28 September reading only as context.
+
 ## Recheck, 8 November 2026 (two days before expiry)
 
 - **No instrument yet.** MOFCOM's [policy-release listing](https://www.mofcom.gov.cn/zwgk/zcfb/index.html), regenerated 6 November, adds only two anti-dumping investigations (Nos. 56 and 57 of 2026) and a shipping-insurance guideline. The [export-control catalogue](https://aqygzj.mofcom.gov.cn/qdml/) has not been regenerated since 26 October. Nos. 54 and 55 of 2026 are n-propanol trade-remedy reviews, unrelated.
@@ -156,7 +192,7 @@ The working copies live in the git-ignored `data/candidates/candidates.json`. Th
     "status": "draft",
     "createdBy": "policy-researcher",
     "createdAt": "2026-10-31",
-    "updatedAt": "2026-11-08",
+    "updatedAt": "2026-11-11",
     "proposedEvent": {
       "date": "2026-09-28",
       "jurisdiction": "china",
@@ -226,7 +262,7 @@ The working copies live in the git-ignored `data/candidates/candidates.json`. Th
         "Does not name the instrument whose end date it would change"
       ]
     },
-    "reviewerNotes": "Recommendation: do NOT promote this as its own event. It is better held as monitoring evidence until MOFCOM/GACC publish (or fail to publish) an implementing announcement before 10 November 2026. If one appears, code that announcement as the event and cite this reading as context. If none appears by 10 November, the No. 70 event and its control-measure status histories need a reviewer decision on what the official record shows. Recheck 2026-11-08: still no numbered announcement amending No. 70, and MOFCOM's 5 November briefing is silent on it. News coverage (VOA Chinese, 6 November) reports a US–China call urging implementation and states the truce was extended to 20 January 2027, which contradicts MOFCOM's own 10 January 2027; neither is evidence of an instrument.",
+    "reviewerNotes": "Recommendation: do NOT promote this as its own event. It is better held as monitoring evidence until MOFCOM/GACC publish (or fail to publish) an implementing announcement before 10 November 2026. If one appears, code that announcement as the event and cite this reading as context. If none appears by 10 November, the No. 70 event and its control-measure status histories need a reviewer decision on what the official record shows. Recheck 2026-11-08: still no numbered announcement amending No. 70, and MOFCOM's 5 November briefing is silent on it. News coverage (VOA Chinese, 6 November) reports a US–China call urging implementation and states the truce was extended to 20 January 2027, which contradicts MOFCOM's own 10 January 2027; neither is evidence of an instrument. Result 2026-11-11: MOFCOM/GACC published Announcement No. 58 of 2026 on 9 November, continuing the suspension of all six announcements from 11 November 2026 to 10 January 2027. That instrument is drafted as cand-cn-mofcom-58-2026. Recommendation: reject this candidate as its own event and cite the 28 September reading only as context, as planned.",
     "openQuestions": [
       "Does the extension cover the No. 70 suspension? The text says only 'some tariff and non-tariff measures of each side' (双方各自部分关税和非关税措施).",
       "Recheck MOFCOM policy releases and the export-control catalogue (aqygzj.mofcom.gov.cn/qdml/) daily from 7 to 11 November 2026.",
@@ -365,6 +401,83 @@ The working copies live in the git-ignored `data/candidates/candidates.json`. Th
     "openQuestions": [
       "Same methodology question as cand-cn-mofcom-12-2026.",
       "Screen Lafert S.p.A., Garnet S.r.l. and Antraco Chemie-Handelsgesellschaft against their own sources."
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotedEventId": null,
+      "promotedAt": null,
+      "approvedBy": null
+    }
+  },
+  {
+    "candidateId": "cand-cn-mofcom-58-2026",
+    "status": "draft",
+    "createdBy": "policy-researcher",
+    "createdAt": "2026-11-11",
+    "updatedAt": "2026-11-11",
+    "proposedEvent": {
+      "date": "2026-11-09",
+      "jurisdiction": "china",
+      "issuingBody": "MOFCOM / GACC",
+      "titleOriginal": "商务部、海关总署公告2026年第58号 公布继续暂停实施商务部、海关总署公告2025年第55号、56号、57号、58号及商务部公告2025年第61号、62号的决定",
+      "titleOriginalLang": "zh",
+      "titleEn": "MOFCOM & GACC Announcement No. 58 of 2026: decision to continue suspending Announcements Nos. 55, 56, 57, 58, 61 and 62 of 2025 (to 10 January 2027)",
+      "titleEnSource": "self",
+      "documentNumber": "MOFCOM & GACC Announcement [2026] No. 58",
+      "policyStatus": "in_force",
+      "mechanism": [
+        "export_control",
+        "trade_action"
+      ],
+      "affectedMaterialIds": [
+        "rare-earth-elements",
+        "ndfeb-magnets",
+        "graphite",
+        "lithium",
+        "cobalt",
+        "nickel"
+      ],
+      "affectedSectors": [
+        "defense",
+        "semiconductor",
+        "energy",
+        "battery",
+        "industrial"
+      ],
+      "summary": "Continues the suspension of the whole 9 October 2025 control package (Announcements No. 55, 56, 57, 58, 61 and 62 of 2025) from 11 November 2026 to 10 January 2027. The previous suspension under Announcement No. 70 of 2025 ran to 10 November 2026, so the new period begins the following day with no gap. The text is one operative sentence; it gives no reason and does not mention Announcement No. 18 of 2025, which was never suspended.",
+      "analyticalSignificance": "Not yet coded. Draft note for reviewer: the end date matches MOFCOM's 28 September 2026 reading of the eighth round of consultations (Kuala Lumpur arrangement extended to 10 January 2027); a press report giving 20 January 2027 was wrong.",
+      "sourceIds": [
+        "cand-src-mofcom-58-2026"
+      ]
+    },
+    "proposedFraming": [],
+    "proposedSources": [
+      {
+        "id": "cand-src-mofcom-58-2026",
+        "title": "商务部、海关总署公告2026年第58号 公布继续暂停实施商务部、海关总署公告2025年第55号、56号、57号、58号及商务部公告2025年第61号、62号的决定",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_91466027f465467985942a639a9485f4.html",
+        "language": "zh",
+        "datePublished": "2026-11-09",
+        "dateAccessed": "2026-11-11",
+        "sourceType": "official",
+        "confidence": "primary",
+        "notes": "Full text read 2026-11-11. 发布单位 安全与管制局; 发布文号 商务部 海关总署2026年第58号; 发文日期 2026年11月09日; posted 2026-11-09 16:00. Operative text verbatim, in full: 经批准，自2026年11月11日起至2027年1月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号继续暂停实施。 Identical copy on the export-control bureau catalogue page https://aqygzj.mofcom.gov.cn/qdml/art/2026/art_5c9199b52ff24171aeef73a10576815b.html (read 2026-11-11). On promotion use id src-mofcom-58-2026: src-mofcom-58 is already Announcement No. 58 of 2025 (batteries and graphite anodes)."
+      }
+    ],
+    "verification": {
+      "verdict": "pending"
+    },
+    "classification": {
+      "confidence": "medium",
+      "ambiguityFlags": [
+        "policyStatus of the No. 70 event after 10 November 2026 is a reviewer decision (see reviewerNotes)"
+      ]
+    },
+    "reviewerNotes": "Proposed reviewer decision (no seed edited). (1) Promote this as a new event with its own control row, citing src-mofcom-58-2026. (2) Append one statusHistory entry to each of the 18 control rows that now say 'suspended until 2026-11-10' under Announcements 56, 57, 58, 61 and 62 of 2025: {status: suspended, date: 2026-11-11, sourceId: src-mofcom-58-2026, until: 2027-01-10, note: the verbatim operative sentence}. Using the effective date (11 Nov) rather than the publication date (9 Nov) keeps the No. 70 and No. 58 windows from overlapping; the existing 'scheduled' entries use publication dates, so the maintainer should pick one convention. (3) Append {status: expired, date: 2026-11-11, sourceId: src-mofcom-70, until: null} to ctl-cn-ree-2025-11-suspension: No. 70's own text set its window to 10 November 2026 (至2026年11月10日), so the expiry rests on No. 70 itself, and the continuation is recorded on the new event's own control row. npm run validate already warns on all 19 rows (the 18 plus this one). (4) The No. 70 event's policyStatus 'active' is now stale. 'ended' does not fit (defined as no continuing effect and no replacement); 'superseded' with supersededByEventId pointing to the new event is the closest existing label, though No. 58 continues rather than replaces No. 70. Maintainer call; do not create a new label. (5) Update the summaries and analyticalSignificance of china-rare-earth-expansion-2025-10, china-rare-earth-suspension-2025-11 and evt-cn-mofcom-56/57/58/62-2025, which say the corpus records nothing about what follows 10 November 2026. (6) Publication date 2026-11-09 is after site.lastUpdated (2026-10-17), so this needs a separately approved corpus refresh.",
+    "openQuestions": [
+      "Intake mode: this was caught by scheduled monitoring after monitoring began, which fits 'monitored' (discoveredAt 2026-11-11, officialPublicationDate 2026-11-09), but the validator then requires verificationStatus 'verified' and full lifecycle dates. Maintainer to decide.",
+      "Also update lastCheckedAt on watch-cn-mofcom-policy-releases and watch-cn-mofcom-export-control-catalogue (both null) in the same release?"
     ],
     "promotion": {
       "promoted": false,

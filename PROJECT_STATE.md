@@ -1,4 +1,6 @@
-## 2026-10-31: China suspension-expiry source watch (research note, no data change)
+## 2026-10-31 (updated 2026-11-11): China suspension-expiry source watch (research note, no data change)
+
+- **Result:** MOFCOM/GACC Announcement No. 58 of 2026 (9 November) continues the suspension of all six October 2025 announcements from 11 November 2026 to 10 January 2027. Drafted as `cand-cn-mofcom-58-2026` with a proposed 6-step reviewer decision (19 control rows need a new status entry; `npm run validate` already warns on them); seed unchanged. Promote its source as `src-mofcom-58-2026`, since `src-mofcom-58` is the 2025 battery announcement.
 
 - Announcement No. 70 of 2025 still ends on **10 November 2026** in the official record. MOFCOM's 28 September 2026 reading says the Kuala Lumpur arrangement was extended to 10 January 2027 but names neither No. 70 nor rare earths, and no numbered announcement amending No. 70 appears in MOFCOM's policy releases as of 30 October.
 - Found a missing 2026 China measure: MOFCOM Announcement No. 23 of 2026 (22 June) put MP Materials and USA Rare Earth, with eight drone and defence firms, on the export-control control list.
