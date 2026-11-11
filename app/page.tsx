@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { HomeMarketPreview } from "@/components/home/home-market-preview";
 import { FeaturedCase } from "@/components/home/featured-case";
@@ -61,22 +62,50 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLdScript(datasetJsonLd()) }}
       />
 
-      <Container width="wide" className="py-20 sm:py-24 lg:py-28">
-        <div className="max-w-5xl">
-          <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-            Policy &amp; financial intelligence
-          </p>
-          <h1 className="mt-6 max-w-5xl font-display text-[2.9rem] font-semibold leading-[1.07] tracking-tight text-balance sm:text-[4.2rem] lg:text-[5.05rem]">
-            Critical minerals research for policy and investment decisions.
-          </h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-muted sm:text-xl sm:leading-9">
-            Independent analysis of government policy, financing agreements and industrial projects,
-            supported by financial models and primary-source research.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Link href="/research" className="research-button">Read research</Link>
-            <Link href="/events" className="research-button-secondary">Explore the database</Link>
+      <Container width="wide" className="pb-11 pt-12 sm:pb-14 sm:pt-16 lg:pb-14 lg:pt-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-8 xl:gap-12">
+          <div className="relative z-10 min-w-0">
+            <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+              Policy &amp; financial intelligence
+            </p>
+            <h1 className="mt-5 max-w-3xl font-display text-[clamp(3rem,5.5vw,5.5rem)] font-semibold leading-[1.02] tracking-[-0.042em] text-balance">
+              Critical minerals research for policy and investment decisions.
+            </h1>
+            <p className="mt-7 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
+              Independent analysis of government policy, financing agreements and industrial projects,
+              supported by financial models and primary-source research.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href="/research" className="research-button">Read research</Link>
+              <Link href="/events" className="research-button-secondary">Explore the database</Link>
+            </div>
           </div>
+
+          <figure className="relative m-0 h-60 min-w-0 overflow-hidden bg-card sm:h-80 lg:h-[460px]">
+            <Image
+              src="/home/escondida-aerial-nasa.jpg"
+              alt="Astronaut photograph of the Escondida mine complex and surrounding Atacama Desert, Chile, taken in 2009"
+              fill
+              priority
+              sizes="(min-width: 1024px) 42vw, (min-width: 640px) 90vw, 100vw"
+              className="object-cover object-center brightness-[0.77] saturate-[0.65]"
+            />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/55 via-transparent to-transparent lg:from-background/80 lg:via-background/15" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/75 via-transparent to-transparent" />
+            <figcaption className="absolute bottom-4 right-4 left-4 text-right font-display text-[11px] leading-5 text-[#e1d9c9]">
+              Escondida mine complex · Chile · 2009
+              <span className="block">
+                <a
+                  href="https://science.nasa.gov/earth/earth-observatory/escondida-copper-mine-atacama-desert-chile-43394/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-[#bfb4a0] underline-offset-2 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2"
+                >
+                  NASA / Expedition 22 photograph
+                </a>
+              </span>
+            </figcaption>
+          </figure>
         </div>
       </Container>
 
