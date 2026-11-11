@@ -27,7 +27,7 @@ test("scroll reveal keeps server-rendered content visible until JS opts into mot
 
 test("homepage chart enters in view without reintroducing the long animated lattice", () => {
   const html = renderToStaticMarkup(createElement(Home));
-  assert.equal((html.match(/data-motion-kind="chart"/g) ?? []).length, 1);
+  assert.equal((html.match(/data-motion-kind="chart"/g) ?? []).length, 2, "flagship exhibit and market chart have separate reveals");
   assert.equal((html.match(/data-motion-kind="cards"/g) ?? []).length, 0);
   assert.equal((html.match(/data-motion-kind="chain"/g) ?? []).length, 0);
   assert.doesNotMatch(html, /class="chain-stage |class="element-tile group/);
