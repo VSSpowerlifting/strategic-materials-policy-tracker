@@ -85,32 +85,95 @@ export function PageHeading({
   );
 }
 
-/** A labelled section under a hairline rule. `index` is accepted but not drawn (see `AtlasIndex`). */
+/**
+ * A labelled section under a hairline rule. `index` is accepted but not drawn (see `AtlasIndex`).
+ *
+ * `collapsed` turns the section into a native disclosure: the heading, an optional record `count` and the
+ * description stay visible in the summary, and the body opens on demand. Use it for secondary groupings that
+ * a reader does not need on first pass; never to hide a qualifier that changes how a visible figure reads.
+ */
 export function Section({
+  id,
   title,
   description,
+  count,
+  collapsed = false,
   children,
   className,
 }: {
+  id?: string;
   title?: string;
   index?: string;
   description?: React.ReactNode;
+  count?: number;
+  collapsed?: boolean;
   children: React.ReactNode;
   className?: string;
 }) {
+  const heading = title ? (
+    <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-[1.375rem]">
+      {title}
+      {count !== undefined ? (
+        <span className="tnum ml-2 align-baseline font-display text-base font-normal text-faint">{count}</span>
+      ) : null}
+    </h2>
+  ) : null;
+  const desc = description ? (
+    <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p>
+  ) : null;
+
+  if (collapsed && title) {
+    const noun = count === 1 ? "record" : "records";
+    return (
+      <section id={id} className={cn("scroll-mt-24", className)}>
+        <div className="border-b border-border-strong pb-3">
+          {heading}
+          {desc}
+        </div>
+        <details className="section-disclosure group">
+          <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 font-display text-sm font-medium text-accent hover:text-accent-strong">
+            <span aria-hidden className="inline-block transition-transform group-open:rotate-90 motion-reduce:transition-none">
+              ›
+            </span>
+            <span className="group-open:hidden">{count !== undefined ? `Show ${count} ${noun}` : "Show"}</span>
+            <span className="hidden group-open:inline">{count !== undefined ? `Hide ${count} ${noun}` : "Hide"}</span>
+          </summary>
+          <div className="pb-2 pt-3">{children}</div>
+        </details>
+      </section>
+    );
+  }
+
   return (
-    <section className={cn("scroll-mt-24", className)}>
+    <section id={id} className={cn("scroll-mt-24", className)}>
       {title ? (
         <div className="mb-5 border-b border-border-strong pb-3">
-          <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-[1.375rem]">
-            {title}
-          </h2>
-          {description ? (
-            <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p>
-          ) : null}
+          {heading}
+          {desc}
         </div>
       ) : null}
       {children}
     </section>
+  );
+}
+
+/**
+ * In-page contents for long directory pages: one line of jump links, wrapping on small screens. Each `href` must
+ * point at an `id` on the same page.
+ */
+export function PageContents({ items, className }: { items: readonly { href: string; label: string }[]; className?: string }) {
+  return (
+    <nav aria-label="On this page" className={cn("font-display text-sm", className)}>
+      <p className="text-xs text-faint">On this page</p>
+      <ul className="mt-1.5 flex flex-wrap gap-x-5 gap-y-1.5">
+        {items.map((i) => (
+          <li key={i.href}>
+            <a href={i.href} className="text-muted underline decoration-border-strong underline-offset-4 hover:text-accent hover:decoration-accent">
+              {i.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }

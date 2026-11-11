@@ -7,8 +7,45 @@ import { formatDate } from "@/lib/format";
 import type { Source } from "@/lib/types";
 
 export function SourceCard({
-  source, showDossierLink = true,
-}: { source: Source; showDossierLink?: boolean }) {
+  source, showDossierLink = true, compact = false,
+}: { source: Source; showDossierLink?: boolean; compact?: boolean }) {
+  if (compact) {
+    // Register row: identity, provenance and both links on two or three lines. Notes and the raw URL live on the dossier.
+    return (
+      <div id={source.id} className="min-w-0 scroll-mt-24 py-3.5">
+        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
+          <h3 className="min-w-0 flex-1 font-display text-base font-semibold leading-snug [overflow-wrap:anywhere]">
+            <Link
+              href={`/sources/${source.id}`}
+              className="hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              {source.title}
+            </Link>
+          </h3>
+          <ExtLink href={source.url} className="shrink-0 font-display text-sm">
+            Original<span className="sr-only"> document: {source.title}</span>
+          </ExtLink>
+        </div>
+        {/* Inline text, not flex: each item keeps its trailing separator, so a wrapped line never starts with a dot. */}
+        <p className="mt-1 font-display text-xs leading-5 text-muted">
+          {[
+            <span key="p" className="text-foreground/85">{source.publisher}</span>,
+            sourceTypeLabels[source.sourceType],
+            <span key="l" className="uppercase">{source.language}</span>,
+            source.datePublished ? `Published ${formatDate(source.datePublished)}` : "Publication date unknown",
+            `Accessed ${formatDate(source.dateAccessed)}`,
+          ].map((item, i, all) => (
+            <span key={i}>
+              <span className={i === 0 ? undefined : "whitespace-nowrap"}>
+                {item}
+                {i < all.length - 1 ? <span aria-hidden className="text-faint"> ·</span> : null}
+              </span>{" "}
+            </span>
+          ))}
+        </p>
+      </div>
+    );
+  }
   return (
     <div id={source.id} className="min-w-0 scroll-mt-24 rounded-lg border border-border-strong bg-card p-4 sm:p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">

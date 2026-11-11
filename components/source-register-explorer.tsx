@@ -83,21 +83,20 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
      Missing publication dates remain unknown. Source access dates are recorded observations, not event or publication dates.
    </p>
    <div className="mt-10 space-y-12">
-     {SOURCE_CONFIDENCE.map((tier,i)=>{
+     {SOURCE_CONFIDENCE.map((tier)=>{
        const group=visible.filter(r=>r.source.confidence===tier);
        if(!group.length)return null;
        return <section key={tier} aria-labelledby={"source-tier-"+tier}>
-         <div className="mb-5 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-3">
-           <span className="font-mono text-xs text-faint">{String(i+1).padStart(2,"0")}</span>
+         <div className="mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border-strong pb-3">
            <h2 id={"source-tier-"+tier} className="font-display text-xl font-semibold">
              {confidenceLabels[tier]} <span className="font-mono text-xs font-normal text-muted">({group.length})</span>
            </h2>
          </div>
-         <p className="mb-4 max-w-prose text-sm leading-6 text-muted">{hierarchyNotes[tier]}</p>
-         <div className="grid gap-3">
-           {group.map(r=><div key={r.source.id} data-testid="source-record" data-site-motion="card" className="min-w-0">
-             <SourceCard source={r.source}/>
-             <p className="mt-1 pl-1 font-mono text-[11px] text-muted">
+         <p className="mb-2 max-w-prose text-sm leading-6 text-muted">{hierarchyNotes[tier]}</p>
+         <div className="divide-y divide-border">
+           {group.map(r=><div key={r.source.id} data-testid="source-record" data-site-motion="card" className="min-w-0 pb-3.5">
+             <SourceCard source={r.source} compact/>
+             <p className="-mt-2 font-display text-xs text-faint">
                {r.directlyCitingRecords} directly citing published record{r.directlyCitingRecords===1?"":"s"}
                {r.citingKinds.length?" · "+r.citingKinds.map(k=>SOURCE_USE_LABELS[k]).join(" · "):""}
              </p>

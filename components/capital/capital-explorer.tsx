@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ShowMore, useIncremental } from "@/components/ui/show-more";
 import { Card } from "@/components/ui/card";
 import { CommitmentRow } from "@/components/capital/rows";
 import {
@@ -131,6 +132,11 @@ export function CapitalExplorer({
   }, [filtered, families]);
 
   const active = [q, actor, instrument, role, source, status, stage, material].some((v) => v && v !== ALL);
+  const page = useIncremental([q, actor, instrument, role, source, status, stage, material, families].join("|"));
+  // Never cut through a package: extend the visible slice to the end of the family it reaches.
+  let cut = Math.min(page.limit, ordered.length);
+  while (cut < ordered.length && ordered[cut].depth > 0) cut++;
+  const visibleRows = ordered.slice(0, cut);
   const reset = () => {
     setQ("");
     [setActor, setInstrument, setRole, setSource, setStatus, setStage, setMaterial].forEach((f) => f(ALL));
@@ -160,13 +166,16 @@ export function CapitalExplorer({
           ) : null}
         </p>
         <label className="inline-flex cursor-pointer items-center gap-2 font-mono text-xs text-muted">
-          <input type="checkbox" checked={families} onChange={(e) => setFamilies(e.target.checked)} className="accent-[#4fb59e]" />
+          <input type="checkbox" checked={families} onChange={(e) => setFamilies(e.target.checked)} style={{ accentColor: "var(--accent)" }} />
           Nest parts under their packages
         </label>
       </div>
       <Card className="mt-3 overflow-hidden">
         {ordered.length ? (
-          ordered.map(({ c, depth, rel }) => <CommitmentRow key={c.id} c={c} indent={depth} relationLabel={rel} />)
+          <>
+            {visibleRows.map(({ c, depth, rel }) => <CommitmentRow key={c.id} c={c} indent={depth} relationLabel={rel} />)}
+            <ShowMore shown={visibleRows.length} total={ordered.length} noun="financial rows" onMore={page.more} onAll={page.all} />
+          </>
         ) : (
           <p className="px-4 py-8 text-center text-sm text-muted">No financial row matches these filters.</p>
         )}

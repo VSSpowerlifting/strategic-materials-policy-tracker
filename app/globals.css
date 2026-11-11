@@ -464,3 +464,26 @@ html { scroll-padding-top: 7rem; }
 .research-button-paper:hover { background: var(--paper-accent); }
 .research-button-secondary-paper { border-color: var(--paper-border); color: var(--paper-fg); }
 .research-button-secondary-paper:hover { background: color-mix(in oklab, var(--paper) 88%, var(--paper-fg)); }
+
+/* Section disclosures (`<Section collapsed>`): hide the default marker; the summary carries its own Show/Hide cue. */
+.section-disclosure > summary::-webkit-details-marker { display: none; }
+
+/* Market selector hover labels: tiles in the right half of each row anchor their label to the right edge, so the
+   label never extends past the viewport. Column counts mirror the grid (3, 4 from 410px, 6 from sm, 9 from lg). */
+.market-tiles > :nth-child(3n) .market-tile-tip { left: auto; right: 0; }
+@media (max-width: 359.98px) {
+  .market-tiles > :nth-child(3n-1) .market-tile-tip { left: auto; right: 0; }
+  .market-tiles .market-tile-tip { max-width: 11.5rem; }
+}
+@media (min-width: 410px) {
+  .market-tiles > :nth-child(n) .market-tile-tip { left: 0; right: auto; }
+  .market-tiles > :is(:nth-child(4n), :nth-child(4n-1)) .market-tile-tip { left: auto; right: 0; }
+}
+@media (min-width: 40rem) {
+  .market-tiles > :nth-child(n) .market-tile-tip { left: 0; right: auto; }
+  .market-tiles > :is(:nth-child(6n), :nth-child(6n-1), :nth-child(6n-2)) .market-tile-tip { left: auto; right: 0; }
+}
+@media (min-width: 64rem) {
+  .market-tiles > :nth-child(n) .market-tile-tip { left: 0; right: auto; }
+  .market-tiles > :is(:nth-child(9n), :nth-child(9n-1), :nth-child(9n-2), :nth-child(9n-3)) .market-tile-tip { left: auto; right: 0; }
+}
