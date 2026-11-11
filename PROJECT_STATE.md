@@ -1,4 +1,4 @@
-## 2026-11-11: Site redesign and editorial overhaul, phase 1 (draft PR, not merged)
+## 2026-11-11: Site redesign and editorial overhaul, phase 1 (draft PR #258, not merged)
 
 - Branch `claude/smpt-redesign-editorial-377bee`. The route review, before/after heights and verification report are in `docs/design/SITE_REDESIGN_2026-11.md`, with screenshots in `docs/design/redesign-2026-11/`.
 - Stage A: a new homepage (masthead with latest research, then the FI002 Escondida feature whose four model requirements come from `lib/fi002.ts`, then database entry points, the market preview, examples, and method and inquiry). Also a publication-first header and the shared `.page-title` scale in `PageHeading`. The supply-chain strip and lattice moved to `/materials`, and the hover-only `ElementStrip` was removed.
