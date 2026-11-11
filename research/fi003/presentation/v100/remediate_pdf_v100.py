@@ -39,7 +39,7 @@ RECEIPT = OUT_DIR / 'fi003-mp-materials-10x-financing-draft-1.0-accessible.recei
 
 PAGES = 18
 # The unremediated LibreOffice export of draft 1.0 (recorded in QUALITY_REVIEW_V100.md).
-SOURCE_SHA256 = 'c8ed02a36f113f6ada25710ed9f7a044c2bc9ad03eb664a50aa9294f82aa653d'
+SOURCE_SHA256 = 'cc97153e7d5da5ba5cdc20d0f68ca63e28a53e9750a339ba3efaf2fb720c95ed'
 MINUS = '−'
 # (1-based page, MCID) of the chart Figures whose existing Alt is replaced from the spec.
 CHARTS = {(6, 0), (7, 5), (8, 0)}  # spec slide = page - 2

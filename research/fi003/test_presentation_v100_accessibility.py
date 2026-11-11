@@ -22,7 +22,7 @@ ACCESSIBLE = OUT / 'fi003-mp-materials-10x-financing-draft-1.0-accessible.pdf'
 RECEIPT = OUT / 'fi003-mp-materials-10x-financing-draft-1.0-accessible.receipt.json'
 MANIFEST = OUT / 'fi003-mp-materials-10x-financing-draft-1.0.manifest.json'
 SPEC = ROOT / 'presentation' / 'v100' / 'spec.json'
-SOURCE_SHA256 = 'c8ed02a36f113f6ada25710ed9f7a044c2bc9ad03eb664a50aa9294f82aa653d'
+SOURCE_SHA256 = 'cc97153e7d5da5ba5cdc20d0f68ca63e28a53e9750a339ba3efaf2fb720c95ed'
 PAGES = 18
 
 
@@ -80,7 +80,7 @@ class AccessiblePdfV100Tests(unittest.TestCase):
         self.assertEqual(roles['/Table'], 8)
         self.assertEqual(roles['/TH'], 30)
         self.assertEqual(roles['/TD'], 150)
-        self.assertEqual(roles['/Link'], 51)
+        self.assertEqual(roles['/Link'], 59)
 
     def test_every_figure_has_alt_text(self):
         figures = [n for n in self.nodes if n['/S'] == '/Figure']
@@ -144,7 +144,7 @@ class AccessiblePdfV100Tests(unittest.TestCase):
             for a in links:
                 self.assertEqual(parents[int(a['/StructParent'])]['/S'], '/Link')
             total += len(links)
-        self.assertEqual(total, 51)
+        self.assertEqual(total, 59)
 
     def test_text_identical_to_export(self):
         original = PdfReader(SOURCE)
@@ -167,7 +167,7 @@ class AccessiblePdfV100Tests(unittest.TestCase):
         self.assertTrue(alts[(17, 32)].endswith('Highlighted outcome: Equity plus revolver.'))
         # Draft 1.0 adds the government-payment branch before the addback test.
         self.assertIn('Cost to finish above cash on hand', alts[(17, 32)])
-        self.assertIn('Defense payment obligations at risk of suspension', alts[(17, 32)])
+        self.assertIn('Defense payments at risk of suspension or dispute', alts[(17, 32)])
         self.assertIn('Covenant EBITDA below about $232m', alts[(17, 32)])
 
     def test_default_path_alt_names_states_and_threshold(self):

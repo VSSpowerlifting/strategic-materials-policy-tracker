@@ -2,10 +2,10 @@
   "status": "PASS",
   "scope": "Bounded structure remediation of the draft 1.0 export; not PDF/UA or WCAG certification",
   "source_export": "fi003-mp-materials-10x-financing-draft-1.0.pdf",
-  "source_export_sha256": "c8ed02a36f113f6ada25710ed9f7a044c2bc9ad03eb664a50aa9294f82aa653d",
+  "source_export_sha256": "cc97153e7d5da5ba5cdc20d0f68ca63e28a53e9750a339ba3efaf2fb720c95ed",
   "accessible_pdf": "fi003-mp-materials-10x-financing-draft-1.0-accessible.pdf",
-  "accessible_pdf_sha256": "4dae79fa6c8d70c469f83d1518007f96764d1c676e39699c7f92610282e62610",
-  "spec_sha256": "85da349267b8e7cb393138113252241ff341efcc04def87ad159d9779ddd8e04",
+  "accessible_pdf_sha256": "28a4a2eea9781df34f6f4aa32e647efae53023c2915028da79b1614f51dc00d8",
+  "spec_sha256": "49c2fd1320d1697d99e4d9fb6c64207cde870b611fb7a1a8e52817f3a31d38ef",
   "tooling": {
     "pypdf": "6.14.2",
     "pymupdf": "1.26.4"
@@ -13,7 +13,7 @@
   "roles_before": {
     "/Div": 258,
     "/Figure": 201,
-    "/Link": 51,
+    "/Link": 59,
     "/P": 485,
     "/TD": 150,
     "/TH": 30,
@@ -25,7 +25,7 @@
     "/Figure": 10,
     "/H1": 18,
     "/H2": 4,
-    "/Link": 51,
+    "/Link": 59,
     "/P": 463,
     "/TD": 150,
     "/TH": 30,
@@ -190,7 +190,7 @@
       "mcid": 5,
       "kind": "diagram",
       "before": "",
-      "after": "State diagram. Revolver states under credit agreement Section 8.01(m); no such event is reported. States: Available ($203m drawable); Draws blocked (Default: no new loans or LCs); Grace extended (Cash at least $343.75m); Event of Default (Lenders may end, accelerate). Current state as of 30 September 2026: Available. Transitions: Available to Draws blocked on Defense payment duty suspended or released; Draws blocked to Available on Obligation restored; Draws blocked to Grace extended on Day 60, cash certificate; Grace extended to Event of Default on Day 90 unresolved; Available to Event of Default on Termination default, lapse or disaffirmation.",
+      "after": "State diagram. Revolver states under credit agreement Section 8.01(m); no such event is reported. States: Available ($203m drawable); Draws blocked (Default: no new loans or LCs); Grace extended (Cash at least $343.75m); Event of Default (Day 60 without a certificate, or day 90; lenders may act). Current state as of 30 September 2026: Available. Transitions: Available to Draws blocked on Defense payment duty suspended or released; Draws blocked to Available on Obligation restored; Draws blocked to Grace extended on Day 60, cash certificate; Grace extended to Event of Default on Day 90 unresolved; Available to Event of Default on Terminable default, lapse or disaffirmation.",
       "derived_from": "spec.json slides[7].exhibit.data"
     },
     {
@@ -198,7 +198,7 @@
       "mcid": 19,
       "kind": "diagram",
       "before": "",
-      "after": "Milestone timeline on a day-count scale, 2025 to 2030; reported dates come from filings and targeted dates are illustrative model dates or conditional contractual dates. Revolver signed, reported, 25 August 2025; Trigger, illustrative, targeted, 15 August 2027; First test, latest, targeted, 30 September 2027; Springing, conditional, targeted, 30 November 2029; 2030 notes mature, reported, 1 March 2030.",
+      "after": "Milestone timeline on a day-count scale, 2025 to 2030; reported dates come from filings and targeted dates are illustrative model dates or conditional contractual dates. Revolver signed, reported, 25 August 2025; Covenant trigger deadline, contractual, 14 August 2027; First leverage test, latest, contractual, 30 September 2027; Springing maturity, conditional, 30 November 2029; 2030 notes mature, reported, 1 March 2030.",
       "derived_from": "spec.json slides[9].exhibit.data"
     },
     {
@@ -222,7 +222,7 @@
       "mcid": 32,
       "kind": "diagram",
       "before": "",
-      "after": "Decision tree. Decision conditions for a hypothetical sponsor; the highlighted route ends at the recommendation. Equity window open on acceptable terms? if No, Committed debt or delay; if Yes, (Cost to finish above cash on hand: if Yes, Raise more equity first; if No, (Defense payment obligations at risk of suspension: if Yes, Plan on cash above the floor; if No, (Covenant EBITDA below about $232m at first test: if Yes, Equity only, or amend first; if No, Equity plus revolver))). Highlighted outcome: Equity plus revolver.",
+      "after": "Decision tree. Decision conditions for a hypothetical sponsor; the highlighted route ends at the recommendation. Equity window open on acceptable terms? if No, Committed debt or delay; if Yes, (Cost to finish above cash on hand: if Yes, Raise more equity first; if No, (Defense payments at risk of suspension or dispute: if Yes, Fund on cash; treat revolver as unavailable; if No, (Covenant EBITDA below about $232m at first test: if Yes, Equity only, or amend first; if No, Equity plus revolver))). Highlighted outcome: Equity plus revolver.",
       "derived_from": "spec.json slides[15].exhibit.data"
     }
   ],
@@ -281,7 +281,7 @@
     },
     {
       "page": 3,
-      "mcid": 58
+      "mcid": 60
     },
     {
       "page": 4,
@@ -361,7 +361,7 @@
     },
     {
       "page": 4,
-      "mcid": 50
+      "mcid": 52
     },
     {
       "page": 5,
@@ -441,7 +441,7 @@
     },
     {
       "page": 7,
-      "mcid": 33
+      "mcid": 35
     },
     {
       "page": 8,
@@ -525,7 +525,7 @@
     },
     {
       "page": 9,
-      "mcid": 38
+      "mcid": 40
     },
     {
       "page": 10,
@@ -689,7 +689,7 @@
     },
     {
       "page": 12,
-      "mcid": 37
+      "mcid": 39
     },
     {
       "page": 13,
@@ -849,7 +849,7 @@
     },
     {
       "page": 16,
-      "mcid": 50
+      "mcid": 54
     },
     {
       "page": 17,
@@ -1009,7 +1009,7 @@
     },
     {
       "page": 18,
-      "mcid": 76
+      "mcid": 78
     }
   ],
   "reading_order": [
@@ -1381,26 +1381,26 @@
     }
   ],
   "links": {
-    "count": 51,
+    "count": 59,
     "per_page": [
       0,
       4,
-      4,
-      4,
-      4,
-      2,
-      3,
-      1,
-      1,
-      2,
-      3,
       5,
       5,
-      3,
+      4,
+      2,
+      4,
       1,
       2,
       2,
-      5
+      3,
+      6,
+      5,
+      3,
+      1,
+      4,
+      2,
+      6
     ]
   },
   "pixel_identical_pages": 18,

@@ -21,6 +21,10 @@ export const EVIDENCE_STATES = [
   "targeted",
   "reported",
   "independently-verified",
+  // Dates set by a contract term (a deadline) or that occur only if a stated
+  // condition is met; never a company plan or an observed event.
+  "contractual",
+  "conditional",
 ] as const;
 export type EvidenceState = (typeof EVIDENCE_STATES)[number];
 
