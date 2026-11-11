@@ -44,9 +44,11 @@ test("off-chain stages appear only when they hold records", () => {
 
 const view = renderToStaticMarkup(createElement(Home));
 
-test("the homepage draws the strip from real counts and links each material", () => {
-  assert.match(view, /Where the records sit along the supply chain/);
-  for (const s of chain) assert.ok(view.includes(s.label), s.label);
-  for (const m of getAllMaterials()) assert.ok(view.includes(`href="/materials/${m.slug}"`), m.slug);
-  assert.match(view, /id="browse"/);
+test("the homepage links to the full material and comparison tools instead of rendering the entire lattice", () => {
+  assert.doesNotMatch(view, /Where the records sit along the supply chain/);
+  assert.doesNotMatch(view, /id="browse"/);
+  assert.match(view, /href="\/materials"/);
+  assert.match(view, /href="\/compare"/);
+  assert.ok(getAllMaterials().length > 0);
+  assert.ok(chain.length > 0, "the detailed stage data remains available for the dedicated tools");
 });
