@@ -23,7 +23,9 @@ test("Homepage highlights research and links to the complete database", () => {
   assert.ok(source.includes('<Link href="/research" className="research-button">Read research</Link>'));
   assert.ok(source.includes('<Link href="/events" className="research-button-secondary">Explore the database</Link>'));
   assert.ok(source.includes('href: "/research/china-export-control-suspension-extension"'));
-  assert.ok(source.includes('href: "/research/escondida-copper"'));
+  assert.ok(source.includes('<FeaturedCase />'), "flagship case is a separate shared component");
+  const caseSource = readFileSync("components/home/featured-case.tsx", "utf8");
+  assert.ok(caseSource.includes("fi002.path"), "flagship links to the published article");
   assert.ok(source.includes('href: "/research/hemerdon-financing"'));
   assert.doesNotMatch(source, /<LatticeOverview|<SupplyChainStrip|<ElementStrip/);
 });
