@@ -419,7 +419,7 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
   return (
     <aside aria-live="polite" aria-label="Selected node" className={cn("rounded-lg bg-paper p-5 font-display text-paper-foreground", compact && "selected-evidence")}>
       <p className="font-display text-xs text-paper-faint">Selected node</p>
-      <h3 className="mt-1 font-serif text-2xl font-semibold leading-tight">
+      <h3 className="mt-1 font-display text-2xl font-semibold leading-tight">
         {material.nameEn} × {label}
       </h3>
       {v ? (
