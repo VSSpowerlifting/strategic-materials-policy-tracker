@@ -1,0 +1,90 @@
+{
+  "kicker": "Executive memo",
+  "title": "Programme Gamma holds the largest committed balance",
+  "classification": "Draft. Unpublished design validation. Synthetic example data, not research.",
+  "meta": [
+    [
+      "Data",
+      "Synthetic demonstration fixture (currency unit CU, millions)"
+    ],
+    [
+      "Prepared",
+      "11 November 2026"
+    ],
+    [
+      "Status",
+      "Draft, not for publication"
+    ]
+  ],
+  "answer": "Programme Gamma carries 640 of the 1,750 CU million committed across seven synthetic programmes; Programme Alpha, the next largest, carries 410. This is a layout fixture and supports no finding about any real programme.",
+  "sections": [
+    {
+      "heading": "What the exhibit shows",
+      "paragraphs": [
+        "Committed balances are ranked on one measure and one status. Announced and drawn amounts are separate measures and are not combined with them.",
+        "Gamma and Alpha together account for 1,050 of 1,750 CU million, so the ranking is concentrated at the top. The remaining five programmes range from 40 to 265."
+      ],
+      "table": {
+        "caption": "Committed balance by programme, CU million, demonstration cut-off",
+        "head": [
+          "Programme",
+          "Committed",
+          "Share of total"
+        ],
+        "align": [
+          "l",
+          "r",
+          "r"
+        ],
+        "rows": [
+          [
+            "Programme Gamma",
+            "640",
+            "36.6%"
+          ],
+          [
+            "Programme Alpha",
+            "410",
+            "23.4%"
+          ],
+          [
+            "Programme Beta",
+            "265",
+            "15.1%"
+          ],
+          [
+            "Programme Delta",
+            "180",
+            "10.3%"
+          ],
+          [
+            "Other (three programmes)",
+            "255",
+            "14.6%"
+          ],
+          [
+            "<b>Total</b>",
+            "<b>1,750</b>",
+            "<b>100.0%</b>"
+          ]
+        ],
+        "source": "Source: synthetic fixture ranked-bar.json, constructed for the exhibit gallery. Shares are rounded to one decimal place and sum to 100.0%."
+      }
+    },
+    {
+      "heading": "What it does not show",
+      "bullets": [
+        "Disbursement or physical progress: a committed balance is not a drawn balance.",
+        "Any government rationale. Rationale belongs in a separate, quoted record.",
+        "Causation. A shared cut-off date does not show that one measure moved another."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Strategic Materials Policy Tracker, methodology",
+      "url": "https://strategic-materials-policy-tracker.vercel.app/methodology",
+      "note": "Counting rules and status definitions."
+    }
+  ]
+}

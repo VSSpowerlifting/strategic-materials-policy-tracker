@@ -13,16 +13,12 @@ export default function SavedEventsPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
-        eyebrow="Your list"
         title="Saved events"
         lead={
           <>
-            Events you have chosen to keep track of, stored only in this browser. This is a
-            personal browsing, separate from the project&apos;s official-source monitoring — for the sources
-            this project actively monitors, see{" "}
-            <Link href="/watchlist" className="text-accent hover:text-accent-strong">
-              /watchlist
+            Stored only in this browser. The sources this project monitors are on the{" "}
+            <Link href="/watchlist" className="link-quiet">
+              watchlist
             </Link>
             .
           </>

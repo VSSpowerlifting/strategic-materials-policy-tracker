@@ -194,7 +194,7 @@ export const dependencyNetwork: Renderer<DependencyNetworkData> = {
       h.shape(`node-box-${i}`, "data", shapeFor(n.type, h), {
         x: p.x, y: p.cy - nodeH / 2, w: nodeW, h: nodeH,
         ...(n.type === "Project" ? { rectRadius: 0.1 } : {}),
-        fill: { color: "FFFFFF" }, line: { color: hot ? C.accent : C.neutral, width: hot ? 2.25 : 1.25 },
+        fill: { color: C.plate }, line: { color: hot ? C.accent : C.neutral, width: hot ? 2.25 : 1.25 },
       });
       h.text(`node-label-${i}`, "label", [
         { text: n.type.toUpperCase(), options: { fontSize: 11, bold: true, color: C.muted, charSpacing: 1, breakLine: true } },

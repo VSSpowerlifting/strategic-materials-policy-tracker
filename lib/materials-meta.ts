@@ -2,8 +2,9 @@
  * Presentation-only metadata for the material element tiles — NOT dataset
  * content. Maps each material id to a periodic-style symbol, an atomic number
  * where one applies, and an "oxide" accent hue derived from real
- * rare-earth / mineral colours and desaturated for the graphite base. Used for
- * thin accents and glows only; never as a large fill, never for text contrast.
+ * rare-earth / mineral colours, darkened for the plaster sheet (each at least
+ * 3:1 on --bg). Used for thin rules and small marks only; never as a large fill
+ * and never as a text colour.
  */
 export type MaterialMeta = {
   symbol: string;
@@ -13,23 +14,23 @@ export type MaterialMeta = {
 };
 
 const META: Record<string, MaterialMeta> = {
-  "rare-earth-elements": { symbol: "REE", hue: "#4FB59E" },
-  dysprosium: { symbol: "Dy", atomicNumber: 66, hue: "#C9CBD0" },
-  terbium: { symbol: "Tb", atomicNumber: 65, hue: "#BFA94E" },
-  neodymium: { symbol: "Nd", atomicNumber: 60, hue: "#8E74B5" },
-  praseodymium: { symbol: "Pr", atomicNumber: 59, hue: "#79A86A" },
-  gallium: { symbol: "Ga", atomicNumber: 31, hue: "#7FA6C4" },
-  germanium: { symbol: "Ge", atomicNumber: 32, hue: "#9AA0A6" },
-  graphite: { symbol: "C", atomicNumber: 6, hue: "#6E7378" },
-  lithium: { symbol: "Li", atomicNumber: 3, hue: "#B7A6C9" },
-  cobalt: { symbol: "Co", atomicNumber: 27, hue: "#6F8FC2" },
-  nickel: { symbol: "Ni", atomicNumber: 28, hue: "#A3AD8E" },
-  antimony: { symbol: "Sb", atomicNumber: 51, hue: "#8C9196" },
-  tungsten: { symbol: "W", atomicNumber: 74, hue: "#B8702E" },
-  "ndfeb-magnets": { symbol: "NdFeB", hue: "#6FB0A0" },
+  "rare-earth-elements": { symbol: "REE", hue: "#2a7a66" },
+  dysprosium: { symbol: "Dy", atomicNumber: 66, hue: "#7a7f87" },
+  terbium: { symbol: "Tb", atomicNumber: 65, hue: "#877618" },
+  neodymium: { symbol: "Nd", atomicNumber: 60, hue: "#6f4f9e" },
+  praseodymium: { symbol: "Pr", atomicNumber: 59, hue: "#4c7d3c" },
+  gallium: { symbol: "Ga", atomicNumber: 31, hue: "#3b7096" },
+  germanium: { symbol: "Ge", atomicNumber: 32, hue: "#69727a" },
+  graphite: { symbol: "C", atomicNumber: 6, hue: "#44484c" },
+  lithium: { symbol: "Li", atomicNumber: 3, hue: "#8566a8" },
+  cobalt: { symbol: "Co", atomicNumber: 27, hue: "#3a5ca0" },
+  nickel: { symbol: "Ni", atomicNumber: 28, hue: "#6c7850" },
+  antimony: { symbol: "Sb", atomicNumber: 51, hue: "#5c646b" },
+  tungsten: { symbol: "W", atomicNumber: 74, hue: "#a2581a" },
+  "ndfeb-magnets": { symbol: "NdFeB", hue: "#35806f" },
 };
 
-const FALLBACK: MaterialMeta = { symbol: "·", hue: "#4FB59E" };
+const FALLBACK: MaterialMeta = { symbol: "·", hue: "#2a7a66" };
 
 export function getMaterialMeta(id: string): MaterialMeta {
   return META[id] ?? FALLBACK;

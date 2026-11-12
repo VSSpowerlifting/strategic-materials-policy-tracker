@@ -12,7 +12,7 @@ import { useEffect, useRef } from "react";
 export const ALL = "all";
 
 export const selectClass =
-  "min-h-11 w-full rounded-md border border-border-strong bg-card px-3 py-2.5 font-display text-base text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 sm:text-sm";
+  "min-h-11 w-full border border-border-strong bg-plate px-3 py-2.5 font-display text-base text-foreground placeholder:text-faint focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:text-sm";
 
 export function FilterSelect({
   id,

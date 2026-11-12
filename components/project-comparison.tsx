@@ -28,7 +28,7 @@ function ComparisonCard({row,materialNames,revision}:{
     <h2 className="break-words font-display text-xl font-semibold tracking-tight">{row.name}</h2>
     <p className="mt-2 break-all font-mono text-xs text-faint">{row.id}</p>
     <Link href={`/projects/${row.id}`} className="mt-3 inline-flex min-h-11 items-center font-display text-sm text-accent hover:underline">
-      Inspect the full project record and its evidence →
+      View project details and evidence
     </Link>
     <dl className="mt-3 space-y-5 text-sm leading-6">
       <div><dt className="font-display font-semibold text-foreground">Recorded location</dt>
@@ -44,10 +44,10 @@ function ComparisonCard({row,materialNames,revision}:{
       <div><dt className="font-display font-semibold text-foreground">Recorded stages</dt>
         <dd className="mt-1 text-muted">{text(row.stages.map(s => supplyChainStageLabels[s as SupplyChainStage] ?? s))}</dd></div>
       <div className="border-t border-border pt-4"><dt className="font-display font-semibold text-foreground">Directly linked financial instruments</dt>
-        <dd className="mt-1 text-muted">{row.directFinanceIds.length} instrument {row.directFinanceIds.length === 1 ? "record" : "records"}; different value roles and statuses, not an amount or a payment total.</dd>
+        <dd className="mt-1 text-muted">{row.directFinanceIds.length} {row.directFinanceIds.length === 1 ? "instrument" : "instruments"}; different value roles and statuses, not an amount or a payment total.</dd>
         <dd className="mt-2"><EvidenceLinks ids={row.directFinanceIds} kind="capital"/></dd></div>
       <div><dt className="font-display font-semibold text-foreground">Shared or unallocated associations</dt>
-        <dd className="mt-1 text-muted">{row.sharedUnallocatedFinanceIds.length} linked financial {row.sharedUnallocatedFinanceIds.length === 1 ? "record" : "records"}; none allocates a project-specific share.</dd>
+        <dd className="mt-1 text-muted">{row.sharedUnallocatedFinanceIds.length} linked financing {row.sharedUnallocatedFinanceIds.length === 1 ? "instrument" : "instruments"}; none allocates a project-specific share.</dd>
         <dd className="mt-2"><EvidenceLinks ids={row.sharedUnallocatedFinanceIds} kind="capital"/></dd></div>
       <div><dt className="font-display font-semibold text-foreground">Government commitment evidenced by {revision}</dt>
         <dd className="mt-1 text-muted">{row.governmentCommitmentEvidenced
@@ -55,7 +55,7 @@ function ComparisonCard({row,materialNames,revision}:{
           : "No qualifying direct government commitment is recorded in the curated corpus. This does not establish that no support exists."}</dd></div>
       <div><dt className="font-display font-semibold text-foreground">Project designations</dt>
         <dd className="mt-1 text-muted">{row.designationIds.length
-          ? `${row.designationIds.length} source-linked designation ${row.designationIds.length === 1 ? "record" : "records"} — standing or priority, not money.`
+          ? `${row.designationIds.length} source-linked ${row.designationIds.length === 1 ? "designation" : "designations"} — standing or priority, not money.`
           : "No designation in the published registry."}</dd>
         {row.designationIds.length ? <dd className="mt-2 space-y-1 text-xs text-faint">
           {row.designationIds.map(id => <span key={id} className="block break-all font-mono">{id}</span>)}
@@ -66,7 +66,7 @@ function ComparisonCard({row,materialNames,revision}:{
           ? `${row.publishedMilestones.length} reviewed project-native milestone ${row.publishedMilestones.length === 1 ? "entry" : "entries"}. These are reported source claims, not verified policy effects.`
           : "No project-native physical milestone has been published after editorial review. This is not evidence of inactivity."}</dd>
         {row.publishedMilestones.length ? <dd className="mt-2 space-y-2">
-          {row.publishedMilestones.map(m => <div key={m.id} className="rounded border border-border p-3 text-xs text-muted">
+          {row.publishedMilestones.map(m => <div key={m.id} className="border border-border p-3 text-xs text-muted">
             <span className="font-semibold text-foreground">{m.kind.replaceAll("_"," ")}</span>
             <span className="block">Claim mode: {m.claimMode.replaceAll("_"," ")} · Scope: {m.scopeAsStated || m.scope.replaceAll("_"," ")}</span>
             <span className="block">Occurred: {m.occurredOn ?? "date not established"} · Target: {m.targetOn ?? "none stated"}</span>
@@ -74,7 +74,7 @@ function ComparisonCard({row,materialNames,revision}:{
           </div>)}
         </dd> : null}</div>
       <div><dt className="font-display font-semibold text-foreground">Original sources for project registry facts</dt>
-        <dd className="mt-1 text-muted">{row.projectSources.length} distinct registered {row.projectSources.length === 1 ? "source" : "sources"}; a count is not a corroboration score. Finance and designation records have additional citations on their own pages.</dd>
+        <dd className="mt-1 text-muted">{row.projectSources.length} distinct registered {row.projectSources.length === 1 ? "source" : "sources"}; a count is not a corroboration score. Finance and designation entries have additional citations on their own pages.</dd>
         <dd className="mt-2"><ul className="space-y-2">{row.projectSources.map(s =>
           <li key={s.id} className="min-w-0">
             <Link href={`/sources/${s.id}`} className="break-words text-accent hover:underline">{s.publisher} · {s.title}</Link>
@@ -117,18 +117,18 @@ export function ProjectComparison({rows,materialNames,revision}: Props) {
       </div>
       <p className="mt-3 text-xs leading-6 text-muted">
         Selections appear in the page URL so a comparison can be shared. There is no ranking:
-        record counts reflect what SMPT has documented as of {revision}, not investment,
+        counts reflect what SMPT has documented as of {revision}, not investment,
         construction completion, economic impact or causal effectiveness.
       </p>
     </Card>
     {!a || !b ? <p role="status" className="mt-6 text-sm text-muted">Choose two projects to compare their published evidence. No private review findings are shown.</p> :
       a.id === b.id ? <p role="status" className="mt-6 text-sm text-muted">Choose two different projects to make a comparison.</p> :
       <div data-testid="project-comparison-results">
-        <div className="mt-6 rounded-lg border border-border bg-card p-4">
+        <div className="mt-6 border border-border bg-plate p-4">
           <h2 className="font-display text-base font-semibold">Recorded characteristics in common</h2>
           <p className="mt-2 text-sm text-muted">
-            Tracked materials: {sharedMaterials.length ? sharedMaterials.map(id => materialNames[id] ?? id).join(", ") : "none listed in both records"}.
-            {" "}Stages: {sharedStages.length ? sharedStages.map(id => supplyChainStageLabels[id as SupplyChainStage] ?? id).join(", ") : "none listed in both records"}.
+            Tracked materials: {sharedMaterials.length ? sharedMaterials.map(id => materialNames[id] ?? id).join(", ") : "none listed for both projects"}.
+            {" "}Stages: {sharedStages.length ? sharedStages.map(id => supplyChainStageLabels[id as SupplyChainStage] ?? id).join(", ") : "none listed for both projects"}.
           </p>
           <p className="mt-2 text-xs leading-5 text-faint">Shared categories reflect recorded materials and stages. The individual project sources provide context for any commercial or ownership relationships.</p>
         </div>

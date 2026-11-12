@@ -87,7 +87,7 @@ export const rangeInterval: Renderer<RangeIntervalData> = {
       const b = sx(it.high);
       h.shape(`range-${i}`, "data", h.shapes.rect, {
         x: a, y: cy - barH / 2, w: Math.max(b - a, 0.02), h: barH,
-        fill: { color: accent ? C.gold : C.neutralLight, transparency: accent ? 55 : 0 },
+        fill: { color: accent ? C.accent : C.neutralLight, transparency: accent ? 55 : 0 },
         line: { color: accent ? C.accent : C.neutral, width: 0.75 },
       });
       h.shape(`point-${i}`, "data", h.shapes.diamond, {

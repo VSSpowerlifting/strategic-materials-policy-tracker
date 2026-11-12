@@ -21,11 +21,11 @@ export function FramingQuote({
   const lang = hasCJK(claim.quoteOriginal) ? "zh" : undefined;
 
   return (
-    <figure className="plate flex h-full flex-col overflow-hidden rounded-lg border border-border-strong transition-colors hover:border-accent/40">
+    <figure className="flex h-full flex-col border border-border bg-plate">
       {/* Classification rail — how this passage is coded */}
       <div className="flex items-center gap-3 border-b border-border px-5 py-2.5">
-        <span aria-hidden className="h-3 w-[5px] shrink-0 rounded-[1px] bg-accent" />
-        <span className="rail">Framing anchor</span>
+        <span aria-hidden className="h-3 w-[5px] shrink-0 bg-accent" />
+        <span className="font-display text-xs text-faint">Framing anchor</span>
         <span className="ml-auto inline-flex flex-wrap items-center justify-end gap-x-3 gap-y-1.5">
           <FramingBadges categories={claim.category} short />
         </span>
@@ -40,13 +40,13 @@ export function FramingQuote({
         </blockquote>
         {isTranslated ? (
           <p className="mt-3 leading-7 text-muted">
-            <span className="font-display text-xs text-accent/70">EN&nbsp;</span>
+            <span className="font-display text-xs text-accent">EN&nbsp;</span>
             {claim.quoteEn}
           </p>
         ) : null}
       </div>
       {/* Provenance rail — where the anchor comes from */}
-      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border bg-elevated/40 px-5 py-3 font-display text-xs text-faint">
+      <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border bg-elevated px-5 py-3 font-display text-xs text-faint">
         {source ? (
           <>
             <ExtLink href={source.url} className="font-display">

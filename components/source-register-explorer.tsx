@@ -39,7 +39,7 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
      ...SOURCE_USE_KINDS.filter(k=>rows.some(r=>r.citingKinds.includes(k)))
        .map(k=>({value:k,label:SOURCE_USE_LABELS[k],count:count(r=>r.citingKinds.includes(k))})),
      ...(rows.some(r=>r.directlyCitingRecords===0)?[{
-       value:UNCITED_FILTER,label:"No directly citing record",count:count(r=>r.directlyCitingRecords===0)}]:[]),
+       value:UNCITED_FILTER,label:"No direct citation",count:count(r=>r.directlyCitingRecords===0)}]:[]),
    ],
   };
  },[rows]);
@@ -68,20 +68,23 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
      <FilterSelect id="source-kind" label="Document type" value={sourceType} onChange={setSourceType} options={options.sourceType}/>
      <FilterSelect id="source-language" label="Original language" value={language} onChange={setLanguage} options={options.language}/>
      <FilterSelect id="source-publication" label="Publication-date completeness" value={publication} onChange={setPublication} options={options.publication}/>
-     <FilterSelect id="source-cited" label="Directly citing record type" value={citingKind} onChange={setCitingKind} options={options.citingKind}/>
+     <FilterSelect id="source-cited" label="Cited by" value={citingKind} onChange={setCitingKind} options={options.citingKind}/>
    </div>
    <div className="mt-4 flex flex-wrap items-center gap-3">
-     <p className="font-mono text-xs text-muted" role="status" aria-live="polite">
+     <p className="font-display text-xs text-muted" role="status" aria-live="polite">
        <span data-testid="sources-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered sources
      </p>
      {active?<button type="button" onClick={clear}
-       className="font-mono text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+       className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
        Clear filters</button>:null}
    </div>
-   <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
-     Direct citations count distinct published records, not individual assertions, independent corroborations or policy effects.
-     Missing publication dates remain unknown. Source access dates are recorded observations, not event or publication dates.
-   </p>
+   <details className="mt-1 max-w-4xl text-xs leading-5 text-faint">
+     <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden"><span className="link-quiet">How citations and dates are counted</span></summary>
+     <p className="pb-2">
+       Direct citations count distinct published entries, not individual assertions, independent corroborations or policy effects.
+       Missing publication dates remain unknown. Source access dates are recorded observations, not event or publication dates.
+     </p>
+   </details>
    <div className="mt-10 space-y-12">
      {SOURCE_CONFIDENCE.map((tier)=>{
        const group=visible.filter(r=>r.source.confidence===tier);
@@ -89,7 +92,7 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
        return <section key={tier} aria-labelledby={"source-tier-"+tier}>
          <div className="mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border-strong pb-3">
            <h2 id={"source-tier-"+tier} className="font-display text-xl font-semibold">
-             {confidenceLabels[tier]} <span className="font-mono text-xs font-normal text-muted">({group.length})</span>
+             {confidenceLabels[tier]} <span className="font-display text-xs font-normal text-muted">({group.length})</span>
            </h2>
          </div>
          <p className="mb-2 max-w-prose text-sm leading-6 text-muted">{hierarchyNotes[tier]}</p>
@@ -97,7 +100,7 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
            {group.map(r=><div key={r.source.id} data-testid="source-record" data-site-motion="card" className="min-w-0 pb-3.5">
              <SourceCard source={r.source} compact/>
              <p className="-mt-2 font-display text-xs text-faint">
-               {r.directlyCitingRecords} directly citing published record{r.directlyCitingRecords===1?"":"s"}
+               {r.directlyCitingRecords} directly citing published {r.directlyCitingRecords===1?"entry":"entries"}
                {r.citingKinds.length?" · "+r.citingKinds.map(k=>SOURCE_USE_LABELS[k]).join(" · "):""}
              </p>
            </div>)}
@@ -105,9 +108,9 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
        </section>;
      })}
    </div>
-   {!visible.length?<div className="mt-10 rounded-lg border border-dashed p-8 text-center text-sm text-muted">
+   {!visible.length?<div className="mt-10 border-y border-border py-8 text-sm text-muted">
      No registered source matches these filters.
-     <button type="button" onClick={clear} className="ml-2 text-accent hover:underline">Show all sources</button>
+     <button type="button" onClick={clear} className="ml-2 link-quiet">Show all sources</button>
    </div>:null}
  </div>;
 }

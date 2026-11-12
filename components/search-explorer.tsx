@@ -245,7 +245,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
             <div className="mt-2 grid gap-3 sm:mt-0 sm:grid-cols-2 lg:grid-cols-3">
               <div>
                 <label htmlFor="kind" className="mb-1.5 block font-display text-xs font-semibold text-muted">
-                  Record type
+                  Type
                 </label>
                 <select id="kind" value={kind} onChange={(e) => setKind(e.target.value)} className={selectClass}>
                   <option value={ALL}>All types{active ? ` (${total})` : ""}</option>
@@ -298,8 +298,8 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               Matching is exact substring, not fuzzy — <span className="font-mono">No. 61</span> and{" "}
               <span className="font-mono">No. 62</span> are different instruments, so a near-miss is
               worse than no match. Original-language text is indexed in its own script; searching{" "}
-              <span className="font-mono">稀土</span> works. Actor filters only match records
-              assigned a tracked government; source and project records are not assigned an actor.
+              <span className="font-mono">稀土</span> works. Actor filters only match entries
+              assigned a tracked government; sources and projects are not assigned an actor.
               Mechanism filters apply to events and watched sources, not finance or projects.
             </p>
           </details>
@@ -321,14 +321,11 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
           <section aria-labelledby="browse-search-types" data-testid="search-browse" className="space-y-4">
             <div>
               <h2 id="browse-search-types" className="font-display text-xl font-semibold tracking-tight">
-                Browse the published record
+                Browse by type
               </h2>
               <p className="mt-1 max-w-3xl text-sm leading-7 text-muted">
-                {docs.length} indexed entries across {SEARCH_KINDS.length} types, including policy
-                events, financial instruments, controls, projects, organizations, programmes,
-                original sources, and research notes. Choose a type below or search for a
-                company, material, exact document number, or original-language phrase.
-                These are curated entries, not a live index of every government action.
+                {docs.length} curated entries across {SEARCH_KINDS.length} types. Choose a type, or search for a
+                company, material, document number or original-language phrase.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -338,7 +335,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                   type="button"
                   data-testid="search-type-shortcut" data-site-motion="card"
                   onClick={() => setKind(type)}
-                  className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 rounded-lg border border-border-strong bg-card px-4 py-4 text-left transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 border border-border-strong bg-plate px-4 py-4 text-left transition-colors hover:border-accent hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   <span className="font-display text-base font-semibold leading-6">{KIND_LABEL[type]}</span>
                   <span className="tnum shrink-0 font-display text-sm text-accent">{allCounts[type]}</span>
@@ -346,10 +343,9 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               ))}
             </div>
             <p className="text-xs leading-6 text-muted">
-              Other indexed types, including actors, materials, framing and the watchlist,
-              are available under <strong className="font-semibold text-foreground">Record type</strong>.
-              Counts are records, not sums of financing, documents independently corroborating
-              an outcome, or proof that no unlisted activity exists.
+              Actors, materials, framing and the watchlist are under{" "}
+              <strong className="font-semibold text-foreground">Type</strong>. Counts are entries in SMPT, never
+              financing totals or a complete list of government activity.
             </p>
           </section>
         ) : results.length === 0 ? (
@@ -358,9 +354,9 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
             <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
               Nothing in the corpus satisfies every term and filter together. This is a bounded
               database — a fixed set of actors, a rare-earth-centred material set, and instruments
-              from {site.scopeStart} forward — so an absence here means the record has not been
+              from {site.scopeStart} forward — so an absence here means it has not been
               coded, not that no such measure exists. Actor-filtered searches exclude unassigned
-              sources and projects, while the mechanism filter only covers applicable records.
+              sources and projects, while the mechanism filter only covers applicable entries.
             </p>
             <button type="button" onClick={reset}
               className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline">
@@ -371,24 +367,24 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
           <>
             <p role="status" aria-live="polite" data-testid="search-result-count"
               className="mb-3 font-display text-sm font-semibold text-muted">
-              {results.length} {results.length === 1 ? "matching record" : "matching records"}
+              {results.length} {results.length === 1 ? "result" : "results"}
               <span className="ml-2 font-normal text-faint">from {docs.length} published index entries</span>
             </p>
-            <div data-testid="search-reference-downloads" className="mb-4 rounded-lg border border-border-strong bg-card p-4">
+            <div data-testid="search-reference-downloads" className="mb-4 border border-border-strong bg-plate p-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="font-display text-sm font-semibold">Keep these {results.length} search references</p>
                 <div className="flex flex-wrap gap-2">
                   {(["csv", "json"] as const).map(format => <button key={format} type="button"
                     onClick={() => downloadResults(format)}
-                    className="inline-flex min-h-11 items-center rounded-md border border-border-strong px-3 py-2 font-display text-sm text-accent hover:border-accent/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                    className="inline-flex min-h-11 items-center border border-border-strong px-3 py-2 font-display text-sm text-accent hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
                     Download results {format.toUpperCase()}
                   </button>)}
                 </div>
               </div>
               <p className="mt-2 max-w-4xl text-sm leading-6 text-muted">
-                Downloads contain exactly the results shown, their record links, your query and
+                Downloads contain exactly the results shown, their links, your query and
                 the corpus revision ({site.lastUpdated}). These are research references; follow
-                each record to its original evidence. For complete data tables, <Link href="/data" className="text-accent underline underline-offset-2">visit Data</Link>.
+                each result to its original evidence. For complete data tables, <Link href="/data" className="text-accent underline underline-offset-2">visit Data</Link>.
               </p>
               {downloadError ? <p role="alert" className="mt-2 text-sm leading-6 text-muted">
                 The download could not start. Try again in a browser that allows file downloads.
@@ -399,7 +395,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                 <li key={`${d.kind}:${d.id}`} data-site-motion="card">
                   <Link
                     href={d.href}
-                    className="block min-w-0 rounded-lg border border-border-strong bg-card p-4 transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    className="block min-w-0 border border-border-strong bg-plate p-4 transition-colors hover:border-accent hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <span className="min-w-0 font-display text-base font-semibold leading-6 tracking-tight [overflow-wrap:anywhere]">

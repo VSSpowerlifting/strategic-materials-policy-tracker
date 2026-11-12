@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
 import { getEvidenceSummary } from "@/lib/data";
 import type { Share } from "@/lib/coverage";
 import { confidenceLabels, jurisdictionLabels, mechanismLabels } from "@/lib/labels";
@@ -11,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Coverage",
   description:
-    "The coded footprint of the dataset: source composition, framing-anchor coverage, per-actor counts and the research boundaries that limit what these figures can support. Source-linked record counts.",
+    "The coded footprint of the dataset: source composition, framing-anchor coverage, per-actor counts and the research boundaries that limit what these figures can support. Source-linked counts.",
 };
 
 function pct(s: Share): number | null {
@@ -20,12 +19,12 @@ function pct(s: Share): number | null {
 
 function HeadlineStat({ n, label, sub }: { n: string; label: string; sub: string }) {
   return (
-    <div className="rounded-lg border bg-card p-4">
-      <div className="tnum font-display text-3xl font-bold leading-none">{n}</div>
-      <div className="mt-1.5 font-display text-[11px] uppercase tracking-[0.16em] text-faint">
-        {label}
-      </div>
-      <div className="mt-1 text-xs text-muted">{sub}</div>
+    <div className="border-t border-border-strong pt-3">
+      <dt className="font-display text-xs text-faint">{label}</dt>
+      <dd className="mt-1">
+        <span className="tnum block font-editorial text-3xl leading-none">{n}</span>
+        <span className="mt-1.5 block font-display text-xs leading-5 text-muted">{sub}</span>
+      </dd>
     </div>
   );
 }
@@ -36,8 +35,8 @@ function DistributionBar({ label, count, max }: { label: string; count: number; 
   return (
     <li className="grid grid-cols-[6.5rem_1fr_2rem] items-center gap-2 sm:grid-cols-[10rem_1fr_2.5rem] sm:gap-3">
       <span className="truncate text-xs text-muted sm:text-sm">{label}</span>
-      <div className="h-2 min-w-0 overflow-hidden rounded-full bg-elevated" aria-hidden="true">
-        <div className="h-full rounded-full bg-accent/60" style={{ width: `${width}%` }} />
+      <div className="h-2 min-w-0 overflow-hidden bg-elevated" aria-hidden="true">
+        <div className="h-full bg-foreground" style={{ width: `${width}%` }} />
       </div>
       <span className="tnum text-right font-display text-xs text-faint">{count}</span>
     </li>
@@ -58,12 +57,11 @@ export default function CoveragePage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
         title="Coverage"
-        lead="Corpus size, primary-source coverage and research gaps. These counts describe the records currently in SMPT."
+        lead="Corpus size, primary-source coverage and research gaps in the data currently in SMPT."
       />
 
-      <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
         <HeadlineStat n={String(s.totals.events)} label="Coded events" sub="Policy measures in the register" />
         <HeadlineStat n={String(s.totals.sources)} label="Registered sources" sub="Documents the corpus cites" />
         <HeadlineStat
@@ -76,29 +74,27 @@ export default function CoveragePage() {
           label="Framing-anchor coverage"
           sub={`${s.framingCoverage.count} of ${s.framingCoverage.of} events`}
         />
-      </div>
+      </dl>
 
       <Section
         className="mt-14"
-        index="02"
         title="By actor"
-        description="Events, framing anchors and sources recorded for each government."
       >
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto border-y border-border-strong">
           <table className="w-full min-w-[38rem] text-sm">
             <thead>
-              <tr className="border-b border-border text-left font-display text-[11px] uppercase tracking-[0.16em] text-faint">
-                <th className="py-2 pr-4 font-normal">Actor</th>
-                <th className="py-2 pr-4 text-right font-normal">Events</th>
-                <th className="py-2 pr-4 text-right font-normal">Framing anchored</th>
-                <th className="py-2 pr-4 text-right font-normal">Linked sources</th>
-                <th className="py-2 text-right font-normal">Primary sources</th>
+              <tr className="border-b border-border bg-elevated text-left font-display text-xs text-faint">
+                <th scope="col" className="py-2 pl-3 pr-4 font-normal">Actor</th>
+                <th scope="col" className="py-2 pr-4 text-right font-normal">Events</th>
+                <th scope="col" className="py-2 pr-4 text-right font-normal">Framing anchored</th>
+                <th scope="col" className="py-2 pr-4 text-right font-normal">Linked sources</th>
+                <th scope="col" className="py-2 pr-3 text-right font-normal">Primary sources</th>
               </tr>
             </thead>
             <tbody>
               {s.byJurisdiction.map((a) => (
                 <tr key={a.jurisdiction} className="border-b border-border last:border-0">
-                  <td className="py-2.5 pr-4 font-display">
+                  <td className="py-2.5 pl-3 pr-4 font-display">
                     <Link href={`/actors/${a.code}`} className="hover:text-accent">
                       {jurisdictionLabels[a.jurisdiction]}
                     </Link>
@@ -109,7 +105,7 @@ export default function CoveragePage() {
                     <span className="text-faint">/{a.framingCoverage.of}</span>
                   </td>
                   <td className="tnum py-2.5 pr-4 text-right font-display">{a.linkedSources}</td>
-                  <td className="tnum py-2.5 text-right font-display">{a.primaryLinkedSources}</td>
+                  <td className="tnum py-2.5 pr-3 text-right font-display">{a.primaryLinkedSources}</td>
                 </tr>
               ))}
             </tbody>
@@ -117,32 +113,32 @@ export default function CoveragePage() {
         </div>
       </Section>
 
-      <div className="mt-14 grid gap-6 md:grid-cols-2">
-        <Section index="03" title="By mechanism" description="Events carry more than one mechanism, so these sum to more than the event count.">
-          <Card className="p-5">
+      <div className="mt-14 grid gap-x-10 gap-y-14 md:grid-cols-2">
+        <Section title="By mechanism" description="Events carry more than one mechanism, so these sum to more than the event count.">
+          <div>
             <ul className="grid gap-2.5">
               {s.byMechanism.map((m) => (
                 <DistributionBar key={m.mechanism} label={mechanismLabels[m.mechanism]} count={m.count} max={maxMechanism} />
               ))}
             </ul>
-          </Card>
+          </div>
         </Section>
 
-        <Section index="04" title="Source confidence" description="Every source in the register, graded by the four-tier confidence hierarchy.">
-          <Card className="p-5">
+        <Section title="Source confidence" description="Every source in the register, graded by the four-tier confidence hierarchy.">
+          <div>
             <ul className="grid gap-2.5">
               {s.bySourceConfidence.map((c) => (
                 <DistributionBar key={c.confidence} label={confidenceLabels[c.confidence]} count={c.count} max={maxConfidence} />
               ))}
             </ul>
-          </Card>
+          </div>
         </Section>
       </div>
 
-      <Section className="mt-14" index="05" title="Research boundaries" description="Coverage, provenance and counting limitations.">
-        <div className="grid gap-4 md:grid-cols-2">
-          <Card className="p-5">
-            <h3 className="font-display font-semibold tracking-tight">Coded date window</h3>
+      <Section className="mt-14" title="Research boundaries">
+        <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+          <div className="border-t border-border-strong pt-4">
+            <h3 className="font-display font-semibold">Coded date window</h3>
             <p className="mt-2 tnum font-display text-sm text-foreground">
               {formatDate(s.dateWindow.earliest)} – {formatDate(s.dateWindow.latest)}
             </p>
@@ -150,10 +146,10 @@ export default function CoveragePage() {
               The current dataset covers this date window. Earlier and later activity
               requires separate research.
             </p>
-          </Card>
+          </div>
 
-          <Card className="p-5">
-            <h3 className="font-display font-semibold tracking-tight">Unresolved coding fields</h3>
+          <div className="border-t border-border-strong pt-4">
+            <h3 className="font-display font-semibold">Unresolved coding fields</h3>
             {s.notYetCodedTitleEventIds.length === 0 ? (
               <p className="mt-2 text-sm leading-6 text-muted">
                 None — every event&apos;s original-language title has been transcribed against its
@@ -171,22 +167,19 @@ export default function CoveragePage() {
                 ))}
               </ul>
             )}
-          </Card>
+          </div>
 
-          <Card className="p-5">
-            <h3 className="font-display font-semibold tracking-tight">Actor-coverage imbalance</h3>
+          <div className="border-t border-border-strong pt-4">
+            <h3 className="font-display font-semibold">Actor-coverage imbalance</h3>
             <p className="mt-2 text-sm leading-6 text-muted">
               {topActor
                 ? `${jurisdictionLabels[topActor.jurisdiction]} accounts for ${topActor.events} of ${s.totals.events} coded events (${topActorPct}%). Event counts reflect differences in SMPT’s research coverage across jurisdictions.`
                 : "No events are coded yet."}
             </p>
-            <p className="mt-2 text-xs leading-5 text-faint">
-              The table shows the distribution of coded research across jurisdictions.
-            </p>
-          </Card>
+          </div>
 
-          <Card className="p-5">
-            <h3 className="font-display font-semibold tracking-tight">Direct source citations across the registry</h3>
+          <div className="border-t border-border-strong pt-4">
+            <h3 className="font-display font-semibold">Direct source citations across the registry</h3>
             <p className="mt-2 text-sm leading-6 text-muted">
               {s.citedSources.count} of {s.citedSources.of} registered sources directly support
               at least one published event, material, project, organization, programme, financing
@@ -196,35 +189,35 @@ export default function CoveragePage() {
             <p className="mt-2 text-xs leading-5 text-faint">
               {s.citedSources.of - s.citedSources.count} registered
               {" "}source{s.citedSources.of - s.citedSources.count === 1 ? " has" : "s have"}
-              {" "}yet to be linked directly to a published record. This counts citation
+              {" "}yet to be linked directly to a published entry. This counts citation
               links within the registry; it is separate from independent corroboration.
             </p>
             <Link
               href={s.citedSources.count < s.citedSources.of ? "/sources?citingKind=not_cited" : "/sources"}
-              className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline"
+              className="link-quiet mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium"
             >
-              {s.citedSources.count < s.citedSources.of ? "Inspect uncited registered sources" : "Explore source citations"} →
+              {s.citedSources.count < s.citedSources.of ? "Inspect uncited registered sources" : "Explore source citations"}
             </Link>
-          </Card>
+          </div>
 
-          <Card className="border-accent/40 p-5">
-            <h3 className="font-display font-semibold tracking-tight">Categorical coverage</h3>
+          <div className="border-t border-border-strong pt-4">
+            <h3 className="font-display font-semibold">Categorical coverage</h3>
             <p className="mt-2 text-sm leading-6 text-muted">
-              This page reports counts of coded records and documented source relationships.
+              This page reports counts of coded entries and documented source relationships.
               Categories retain their source-defined meaning. Comparing the scale of
               government activity requires a broader, consistently sampled dataset.
             </p>
-          </Card>
+          </div>
         </div>
       </Section>
 
-      <p className="mt-12 max-w-prose leading-7 text-faint">
+      <p className="mt-12 max-w-prose border-t border-border pt-4 text-sm leading-6 text-muted">
         Category and field definitions live on the{" "}
-        <Link href="/methodology" className="font-display text-accent hover:text-accent-strong">
+        <Link href="/methodology" className="link-quiet">
           methodology page
         </Link>
         . The full dataset behind these counts is downloadable from{" "}
-        <Link href="/data" className="font-display text-accent hover:text-accent-strong">
+        <Link href="/data" className="link-quiet">
           /data
         </Link>
         . Data version {site.version}, last updated {site.revisedOn}.

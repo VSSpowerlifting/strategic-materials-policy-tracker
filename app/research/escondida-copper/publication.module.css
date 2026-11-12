@@ -2,10 +2,9 @@
   font-family: var(--font-archivo), Arial, sans-serif;
 }
 .publication :global(.fi-eyebrow) {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   line-height: 1.6;
   color: var(--paper-accent);
 }
@@ -13,38 +12,41 @@
   border-bottom: 1px solid var(--border-strong);
 }
 .publication :global(.fi-back) {
+  display: table;
+  margin-inline: auto;
   font-size: 0.8rem;
   text-decoration: underline;
   text-underline-offset: 4px;
   color: var(--muted);
 }
 .publication :global(.fi-hero-grid) {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 19rem;
-  gap: 5rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   margin-top: 2.5rem;
 }
 .publication :global(.fi-hero .fi-eyebrow) {
   color: var(--accent);
 }
 .publication h1 {
-  font-size: clamp(2.25rem, 4.4vw, 4rem);
-  font-weight: 500;
-  letter-spacing: -0.045em;
-  line-height: 1.08;
-  max-width: 19ch;
-  margin-top: 1rem;
-}
-.publication h1 span {
-  color: var(--accent);
+  font-family: var(--font-editorial);
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  font-weight: 300;
+  letter-spacing: -0.018em;
+  line-height: 1.06;
+  max-width: 23ch;
+  margin: 1rem auto 0;
+  text-wrap: balance;
 }
 .publication :global(.fi-deck) {
-  max-width: 38rem;
-  font-size: 1.15rem;
-  line-height: 1.6;
+  max-width: 36rem;
+  font-family: var(--font-editorial);
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.5;
   color: var(--muted);
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0;
+  text-wrap: pretty;
 }
 .publication :global(.fi-byline) {
   font-size: 0.8rem;
@@ -60,6 +62,7 @@
 .publication :global(.fi-actions) {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
   margin-top: 1.75rem;
 }
@@ -76,27 +79,33 @@
   color: var(--muted);
   margin-top: 1rem;
 }
+/* The report itself, as a small plate under the title block: first page beside its label. */
 .publication :global(.fi-cover) {
-  border: 1px solid var(--border-strong);
-  display: block;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  border: 1px solid var(--border);
   background: var(--paper);
-  transition: transform 0.18s ease;
+  text-align: left;
 }
 .publication :global(.fi-cover:hover) {
-  transform: translateY(-4px);
+  border-color: var(--border-strong);
 }
 .publication :global(.fi-cover img) {
-  width: 100%;
+  width: 3.75rem;
   height: auto;
+  border-right: 1px solid var(--border);
 }
 .publication :global(.fi-cover > span) {
   display: flex;
+  gap: 2rem;
   justify-content: space-between;
-  padding: 1rem;
-  font-size: 0.75rem;
-  background: var(--surface);
+  padding: 0 1.25rem;
+  font-size: 0.8125rem;
   color: var(--fg);
-  border-top: 1px solid var(--border-strong);
+}
+.publication :global(.fi-cover > span > span) {
+  color: var(--muted);
 }
 .publication :global(.fi-paper) {
   background: var(--paper);
@@ -139,10 +148,12 @@
   scroll-margin-top: 9rem;
 }
 .publication h2 {
-  font-size: clamp(1.65rem, 2.7vw, 2.25rem);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+  font-family: var(--font-editorial);
+  font-size: clamp(1.75rem, 2.9vw, 2.375rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
   max-width: 30ch;
   margin-top: 0.75rem;
 }
@@ -171,9 +182,12 @@
 }
 .publication :global(.fi-findings strong) {
   display: block;
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: -0.03em;
+  font-family: var(--font-editorial);
+  font-size: 2.125rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  font-variant-numeric: lining-nums;
   margin-top: 0.75rem;
 }
 .publication :global(.fi-findings p) {
@@ -219,7 +233,7 @@
 }
 .publication :global(.fi-bar) {
   height: 1.5rem;
-  background: #817b70;
+  background: var(--border-strong);
 }
 .publication :global(.fi-bar-gold) {
   background: var(--paper-accent);
@@ -237,17 +251,19 @@
 .publication :global(.fi-exposure-pair) {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: #ebe8e0;
+  background: var(--elevated);
   margin-bottom: 1.25rem;
 }
 .publication :global(.fi-exposure-pair > div) {
   padding: 1.25rem;
 }
 .publication :global(.fi-exposure-pair strong) {
-  font-size: 1.75rem;
+  font-family: var(--font-editorial);
+  font-size: 1.875rem;
   display: block;
-  letter-spacing: -0.03em;
-  font-weight: 500;
+  letter-spacing: -0.012em;
+  font-weight: 400;
+  font-variant-numeric: lining-nums;
 }
 .publication :global(.fi-exposure-pair span) {
   font-size: 0.75rem;
@@ -277,7 +293,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid #a29b8e;
+  border: 1px solid var(--border-strong);
   padding: 0.65rem 0.8rem;
   font-size: 0.75rem;
   cursor: pointer;
@@ -300,10 +316,11 @@
   min-height: 17rem;
 }
 .publication :global(.fi-result) {
+  font-family: var(--font-editorial);
   font-size: 4.5rem;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.2;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
   margin-top: 0.25rem;
   font-variant-numeric: tabular-nums;
 }
@@ -474,10 +491,6 @@
   line-height: 1.8;
 }
 @media (max-width: 1023px) {
-  .publication :global(.fi-hero-grid) {
-    grid-template-columns: minmax(0, 1fr) 15rem;
-    gap: 2rem;
-  }
   .publication :global(.fi-reading-grid) {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
@@ -492,11 +505,7 @@
 }
 @media (max-width: 639px) {
   .publication :global(.fi-hero-grid) {
-    grid-template-columns: minmax(0, 1fr);
     margin-top: 2rem;
-  }
-  .publication :global(.fi-cover) {
-    display: none;
   }
   .publication h1 {
     max-width: none;
@@ -561,10 +570,5 @@
     border-left: 0;
     border-top: 1px solid var(--paper-border);
     padding: 1.5rem 0 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .publication :global(.fi-cover) {
-    transition: none;
   }
 }

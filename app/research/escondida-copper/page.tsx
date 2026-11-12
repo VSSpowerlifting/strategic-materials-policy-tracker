@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
+import { ResearchCover } from "@/components/editorial/research-cover";
 import { Fi002Screen } from "@/components/research/fi002-screen";
 import { fi002, fi002Downloads } from "@/lib/fi002";
 import { site } from "@/lib/site";
@@ -62,9 +63,9 @@ export default function EscondidaCopper() {
     <div data-flush-footer className={styles.publication}>
       <section className="fi-hero">
         <Container width="wide" className="py-10 sm:py-16">
-          <Link href="/research" className="fi-back">
+          <a href="/research" className="fi-back">
             ← Research
-          </Link>
+          </a>
           <div className="fi-hero-grid">
             <div>
               <p className="fi-eyebrow">
@@ -85,12 +86,16 @@ export default function EscondidaCopper() {
                 <a
                   className="research-button"
                   href={`${fi002.assets}/report.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Read the full report <span>PDF ↗</span>
                 </a>
                 <a
                   className="research-button-secondary"
                   href={`${fi002.assets}/report.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Read online <span>→</span>
                 </a>
@@ -99,6 +104,8 @@ export default function EscondidaCopper() {
             </div>
             <a
               href={`${fi002.assets}/report.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="fi-cover"
               aria-label="Open the 14-page flagship report PDF"
             >
@@ -114,6 +121,13 @@ export default function EscondidaCopper() {
               </span>
             </a>
           </div>
+          <ResearchCover
+            data-cover="escondida-copper"
+            data-frame="banner"
+            data-caption="full"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="mt-12 sm:mt-16"
+          />
         </Container>
       </section>
       <div className="fi-paper">

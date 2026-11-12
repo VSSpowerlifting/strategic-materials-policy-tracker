@@ -41,7 +41,7 @@ export const counterpartyMap: Renderer<CounterpartyData> = {
       h.shape(`label-background-${i}`, "label", h.shapes.rect, { x: p.x - 1.3, y: p.y - 0.34, w: 2.6, h: 0.68, fill: { color: C.paper }, line: { color: C.paper, width: 0 } });
       h.text(`party-${i}`, "label", [{ text: d.parties[i].label + "\n", options: { bold: true, fontSize: 13 } }, { text: d.parties[i].role, options: { fontSize: 11, color: C.muted } }], { x: p.x - 1.3, y: p.y - 0.3, w: 2.6, h: 0.64, align: "center", valign: "middle" });
     });
-    h.shape("hub", "data", h.shapes.ellipse, { x: cx - 1.3, y: cy - 0.47, w: 2.6, h: 0.94, fill: { color: C.dark }, line: { color: C.dark, width: 1 } });
-    h.text("hub-label", "label", d.hub, { x: cx - 1.15, y: cy - 0.3, w: 2.3, h: 0.6, fontSize: 16, bold: true, color: C.paper, align: "center", valign: "middle" });
+    h.shape("hub", "data", h.shapes.ellipse, { x: cx - 1.3, y: cy - 0.47, w: 2.6, h: 0.94, fill: { color: C.ink }, line: { color: C.ink, width: 1 } });
+    h.text("hub-label", "label", d.hub, { x: cx - 1.15, y: cy - 0.3, w: 2.3, h: 0.6, fontSize: 16, bold: true, color: C.plate, align: "center", valign: "middle" });
   },
 };

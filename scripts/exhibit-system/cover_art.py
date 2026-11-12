@@ -5,7 +5,7 @@
         --seed 2026 --width-in 5.933 --height-in 7.5 --out <dir>/cover-hero.png
 
 Draws contour lines of a synthetic heightfield: a low-frequency surface with
-one terraced depression, in SMPT gold on graphite. The result suggests benched
+one terraced depression, in the malachite ramp on graphite. The result suggests benched
 open-pit terrain without depicting any real place. It is artwork, not a map:
 no coordinates, scale, north arrow or real elevation data go into it, and every
 deck that uses it must label it as conceptual.
@@ -21,16 +21,21 @@ import hashlib
 import json
 from pathlib import Path
 
+import sys
+
 import matplotlib
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from publication.tokens import hex_, ramp_hex  # noqa: E402
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 from PIL import Image  # noqa: E402
 
-GRAPHITE = "#12110F"   # deck cover field (primitives.ts C.dark)
-GOLD_DIM = "#98752D"   # house-style gold, used for the fine contours
-GOLD = "#C8993E"       # deck gold (C.gold), every fifth contour
+GRAPHITE = "#" + hex_("graphite")   # artwork field (publication-tokens.json)
+GOLD_DIM = "#" + ramp_hex()[3]      # fine contours: malachite ramp step 4
+GOLD = "#" + ramp_hex()[1]          # every sixth contour: malachite ramp step 2
 DPI = 300
 
 

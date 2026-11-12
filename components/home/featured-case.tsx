@@ -1,162 +1,216 @@
 import Link from "next/link";
+import { PhotoPlate } from "@/components/editorial/photo-plate";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { formatDateLong } from "@/lib/format";
 import { fi002, fi002Screens } from "@/lib/fi002";
+import { formatDateLong } from "@/lib/format";
 
-/** Exhibit scale in ktpa. Fixed so the four model requirements share one linear axis that starts at zero. */
+/** Exhibit scale in ktpa. Fixed so the four model requirements share one linear scale that starts at zero. */
 const SCALE_MAX = 450;
 const TICKS = [0, 100, 200, 300, 400] as const;
 
+/** Homepage labels, in `fi002Screens` order. The article keeps its own selector labels. */
+const LABELS = ["Base case", "Shorter benefits", "Shorter and later", "Combined stress"] as const;
+
+const tonnes = (ktpa: number) => (ktpa * 1000).toLocaleString("en-US");
+
 /**
- * The homepage flagship: FI002's investment question, finding and recommendation beside its central exhibit.
- * Every figure comes from the approved publication (`lib/fi002.ts` and the article); the bars are drawn from
- * `fi002Screens` and are modeled requirements, never production forecasts. Sits on the paper surface so the
- * featured analysis reads as a printed exhibit after the dark masthead.
+ * Splits a screen's published strings into the assumptions the exhibit compares against the base case.
+ * `years` is "20 years · 2032–51": the span and the first benefit year.
+ */
+function assumptionsOf(s: (typeof fi002Screens)[number]) {
+  const [span, window] = s.years.split(" · ");
+  return { capital: s.capital, price: s.price, span, first: window.slice(0, 4) };
+}
+
+const base = assumptionsOf(fi002Screens[0]);
+
+/** One assumption, set in ink and medium weight when it differs from the base case. */
+function Assumption({ changed, children }: { changed: boolean; children: React.ReactNode }) {
+  return (
+    <span className={changed ? "font-medium text-foreground" : undefined}>
+      {children}
+      {changed ? <span className="sr-only"> (differs from base case)</span> : null}
+    </span>
+  );
+}
+
+/**
+ * The homepage flagship: FI002 under its opening plate. The exhibit sets the four capital-recovery
+ * scenarios on one zero-based scale, each read against the base case, then states why the requirement
+ * rises and what the analysis recommends. Every figure comes from `fi002Screens` (the approved
+ * publication's precomputed screens); they are modeled requirements, never production forecasts, and the
+ * plant's 230–270 ktpa design output is deliberately not drawn beside them.
  */
 export function FeaturedCase() {
+  const [, shorter, later, stress] = fi002Screens;
+  const [baseScreen] = fi002Screens;
+
   return (
-    <section
-      id="featured-analysis"
-      aria-labelledby="featured-analysis-heading"
-      className="on-paper border-t border-border-strong bg-paper text-paper-foreground"
-    >
-      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-paper-border pb-3">
+    <section id="featured-analysis" aria-labelledby="featured-analysis-heading">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
+        <PhotoPlate
+          photo="escondida-tailings"
+          frame="aspect-[4/3] sm:aspect-[2/1] lg:aspect-[21/9]"
+          sizes="(min-width: 1280px) 1216px, 100vw"
+          priority
+        />
+
+        <div className="title-block mt-12 max-w-3xl sm:mt-16">
           <p className="kicker">Featured analysis · Strategy &amp; Finance</p>
-          <p className="font-display text-sm text-paper-muted">
-            Escondida, Chile · data cutoff <time dateTime={fi002.cutoff}>{formatDateLong(fi002.cutoff)}</time>
+          <h2 id="featured-analysis-heading" className="display-2 mt-4 text-foreground">
+            <Link href={fi002.path} className="hover:text-accent">
+              {fi002.title}
+            </Link>
+          </h2>
+          <p className="standfirst mt-6">
+            BHP puts the cost of a concentrator to replace Los Colorados at Escondida at $5.4–6.3 billion. To
+            recover the $5.85 billion midpoint, the plant would need to add value each year equal to the after-tax
+            profit on {tonnes(baseScreen.ktpa)} tonnes of copper at assumed prices and costs; less favourable
+            assumptions raise that to {tonnes(stress.ktpa)} tonnes. The tonnes measure value, not the copper the
+            plant must produce.
           </p>
         </div>
 
-        <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-16">
-          <div className="min-w-0">
-            <h2
-              id="featured-analysis-heading"
-              className="max-w-xl font-display text-[1.75rem] font-semibold leading-[1.15] tracking-tight text-balance sm:text-[2.125rem]"
-            >
-              <Link href={fi002.path} className="hover:text-paper-accent">
-                {fi002.title}
-              </Link>
-            </h2>
-            <p className="mt-5 max-w-xl text-pretty font-display text-[1.0625rem] leading-8 text-paper-foreground/85">
-              BHP estimates $5.4–6.3 billion of gross capital for a concentrator to replace Los Colorados at
-              Escondida, with first production expected in 2031–32. The financial model tests how much annual
-              copper output, preserved or added against a no-build plan, would justify that spending.
+        <figure className="mx-auto mt-12 max-w-5xl sm:mt-16" aria-labelledby="featured-exhibit-title">
+          <figcaption className="border-t border-border-strong pt-5">
+            <p id="featured-exhibit-title" className="font-display text-base font-semibold text-foreground sm:text-lg">
+              Yearly value needed to recover the capital, counted in tonnes of copper
             </p>
+            <p className="mt-1.5 max-w-2xl font-display text-sm leading-6 text-muted">
+              Each bar turns the yearly gain over running the mine without the new plant into tonnes of copper at
+              an assumed after-tax profit per tonne. Each scenario changes the base case on its own; assumptions
+              that differ from it are set in dark type.
+            </p>
+          </figcaption>
 
-            <div className="mt-8 grid gap-6 border-t border-paper-border pt-6 sm:grid-cols-2 sm:gap-8">
-              <div>
-                <h3 className="kicker">Finding</h3>
-                <p className="mt-2 font-display text-[0.9375rem] leading-7">
-                  At $5.85 billion of base-case capital and a long-term copper price of $10,494/t, the project needs about{" "}
-                  <strong className="font-semibold">199 ktpa</strong> of production-equivalent benefit for 20 years.
-                  Shorter or later benefit periods and a combined stress case raise the requirement to 275–416 ktpa.
-                </p>
-              </div>
-              <div>
-                <h3 className="kicker">Recommendation</h3>
-                <p className="mt-2 font-display text-[0.9375rem] leading-7">
-                  Keep engineering and permitting moving before construction approval. BHP has reported $0.8 billion
-                  of gross pre-commitment funding approved for that preparatory work.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href={fi002.path} className="research-button research-button-paper">
-                Read the analysis
-              </Link>
-              <a href={`${fi002.assets}/model.xlsx`} className="research-button-secondary research-button-secondary-paper" download>
-                Financial model (.xlsx)
-              </a>
-              <a href={`${fi002.assets}/report.pdf`} className="font-display text-sm font-semibold text-paper-accent underline underline-offset-4">
-                Report (PDF)
-              </a>
-            </div>
-          </div>
-
-          <figure className="m-0 min-w-0" aria-labelledby="featured-exhibit-title">
-            <figcaption>
-              <p id="featured-exhibit-title" className="font-display text-base font-semibold">
-                Annual production-equivalent benefit needed to justify the investment
-              </p>
-              <p className="mt-1 font-display text-sm text-paper-muted">
-                Thousand tonnes of copper a year (ktpa), four model scenarios
-              </p>
-            </figcaption>
-
-            <ScrollReveal kind="chart" className="mt-6">
-              <div className="relative">
-                {/* Gridlines share the bar track's coordinates: the track starts after the label column. */}
-                <div aria-hidden className="pointer-events-none absolute inset-0 grid grid-cols-[minmax(0,1fr)_3.25rem] gap-x-3 sm:grid-cols-[11rem_minmax(0,1fr)_3.25rem]">
-                  <span className="hidden sm:block" />
-                  <span className="relative">
-                    {TICKS.map((t) => (
-                      <span
-                        key={t}
-                        className="absolute inset-y-0 border-l border-dashed border-paper-border"
-                        style={{ left: `${(t / SCALE_MAX) * 100}%` }}
-                      />
-                    ))}
-                  </span>
-                </div>
-              <ol className="relative m-0 list-none p-0">
-                {fi002Screens.map((s, i) => (
+          <ScrollReveal kind="chart" className="mt-6">
+            <ol className="m-0 list-none p-0">
+              {fi002Screens.map((s, i) => {
+                const a = assumptionsOf(s);
+                const isBase = i === 0;
+                return (
                   <li
                     key={s.name}
-                    className="relative grid grid-cols-[minmax(0,1fr)_3.25rem] items-center gap-x-3 gap-y-1.5 border-b border-paper-border py-3.5 first:border-t sm:grid-cols-[11rem_minmax(0,1fr)_3.25rem] sm:gap-y-0"
+                    className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-2.5 border-t border-border py-5 [grid-template-areas:'label_value'_'bar_bar'_'meta_meta'] sm:grid-cols-[13rem_minmax(0,1fr)_8.5rem] sm:gap-x-6 sm:[grid-template-areas:'label_bar_value'_'meta_bar_value'] lg:grid-cols-[15rem_minmax(0,1fr)_9.5rem]"
                   >
-                    <div className="col-span-2 min-w-0 sm:col-span-1">
-                      <p className={i === 0 ? "font-display text-sm font-semibold" : "font-display text-sm font-medium"}>
-                        {s.name}
-                      </p>
-                      <p className="font-display text-xs leading-5 text-paper-muted">
-                        <span>{s.capital}</span> · <span>{s.price}</span> · <span>{s.years}</span>
-                      </p>
-                    </div>
-                    <div aria-hidden className="h-3.5">
+                    <p className="font-display text-[0.9375rem] font-semibold leading-6 text-foreground [grid-area:label] sm:self-end">
+                      {LABELS[i]}
+                    </p>
+
+                    <ul className="m-0 flex list-none flex-wrap gap-x-4 gap-y-0.5 p-0 font-display text-[0.8125rem] leading-5 text-faint [grid-area:meta] sm:block sm:space-y-0.5">
+                      <li>
+                        <Assumption changed={!isBase && a.capital !== base.capital}>{a.capital}</Assumption> capital
+                      </li>
+                      <li>
+                        <Assumption changed={!isBase && a.price !== base.price}>{a.price}</Assumption> copper
+                      </li>
+                      <li>
+                        <Assumption changed={!isBase && a.span !== base.span}>{a.span}</Assumption> from{" "}
+                        <Assumption changed={!isBase && a.first !== base.first}>{a.first}</Assumption>
+                      </li>
+                    </ul>
+
+                    <div
+                      aria-hidden
+                      className="featured-track relative h-3 [grid-area:bar] sm:-my-5 sm:h-auto sm:self-stretch"
+                    >
                       <span
-                        className="exhibit-bar block h-full rounded-[1px]"
+                        className="exhibit-bar absolute inset-y-0 left-0 block sm:inset-y-auto sm:top-[calc(50%-0.5rem)] sm:h-4"
                         style={{
                           width: `${(s.exact / SCALE_MAX) * 100}%`,
-                          background: i === 0 ? "var(--paper-accent)" : "color-mix(in oklab, var(--paper-accent) 55%, var(--paper))",
+                          background: isBase ? "var(--accent)" : "var(--fg)",
                           "--bar-order": i,
                         } as React.CSSProperties}
                       />
                     </div>
-                    <p className="tnum text-right font-display text-lg font-semibold leading-none">
-                      {s.ktpa}
-                      <span className="sr-only"> ktpa</span>
+
+                    <p
+                      className={`whitespace-nowrap text-right font-editorial text-[1.625rem] leading-none tnum [grid-area:value] sm:self-center sm:text-[1.875rem] ${
+                        isBase ? "text-accent" : "text-foreground"
+                      }`}
+                    >
+                      {tonnes(s.ktpa)}
+                      <span className="ml-1.5 font-display text-xs text-faint">t a year</span>
                     </p>
                   </li>
-                ))}
-              </ol>
-              </div>
-              <div aria-hidden className="mt-1.5 grid grid-cols-[minmax(0,1fr)_3.25rem] gap-x-3 sm:grid-cols-[11rem_minmax(0,1fr)_3.25rem]">
-                <span className="hidden sm:block" />
-                <span className="relative h-4 font-display text-[0.6875rem] text-paper-muted">
-                  {TICKS.map((t) => (
-                    <span key={t} className="tnum absolute -translate-x-1/2 first:translate-x-0" style={{ left: `${(t / SCALE_MAX) * 100}%` }}>
-                      {t}
-                    </span>
-                  ))}
-                </span>
-              </div>
-            </ScrollReveal>
+                );
+              })}
+            </ol>
 
-            <p className="mt-5 font-display text-xs leading-5 text-paper-muted">
-              Model-derived requirements under stated assumptions, not forecasts of plant output. Base-case capital
-              of $5.85 billion is the midpoint of BHP’s range; the combined stress case adds 20% to capital, lowers
-              the long-term copper price and delays benefits by two years.{" "}
-              <a href={`${fi002.assets}/methodology.md`} className="font-semibold text-paper-accent underline underline-offset-2">
-                Methodology
-              </a>{" "}
-              ·{" "}
-              <a href={`${fi002.assets}/evidence-register.csv`} className="font-semibold text-paper-accent underline underline-offset-2">
-                Evidence register
-              </a>
+            <div
+              aria-hidden
+              className="grid grid-cols-1 border-t border-border-strong pt-2 sm:grid-cols-[13rem_minmax(0,1fr)_8.5rem] sm:gap-x-6 lg:grid-cols-[15rem_minmax(0,1fr)_9.5rem]"
+            >
+              <div className="relative h-5 font-display text-[0.6875rem] text-faint tnum sm:col-start-2">
+                {TICKS.map((t) => (
+                  <span
+                    key={t}
+                    className="absolute top-0"
+                    style={{
+                      left: `${(t / SCALE_MAX) * 100}%`,
+                      transform: t === 0 ? undefined : "translateX(-50%)",
+                    }}
+                  >
+                    {tonnes(t)}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <p className="mt-6 max-w-3xl font-display text-xs leading-5 text-faint">
+            These are capital-recovery thresholds from a simplified model, not forecasts of plant output. All four
+            use a 10% discount rate, an assumed $4,000/t net cost and a 35% tax wedge; the base case takes the
+            midpoint of BHP’s capital range and its long-term copper assumption. Source: SMPT financial model,
+            research cutoff {formatDateLong(fi002.cutoff)}.
+          </p>
+        </figure>
+
+        <div className="mx-auto mt-14 grid max-w-5xl gap-10 border-t border-border-strong pt-8 sm:mt-16 md:grid-cols-2 md:gap-12">
+          <div>
+            <h3 className="label">Why the requirement rises</h3>
+            <p className="mt-3 font-display text-[0.9375rem] leading-7 text-foreground">
+              Recovering the same capital over ten years instead of twenty lifts the requirement from{" "}
+              {tonnes(baseScreen.ktpa)} to {tonnes(shorter.ktpa)} tonnes a year. Starting those ten years in 2034
+              rather than 2032 takes it to {tonnes(later.ktpa)}. The combined stress case keeps the 20-year period
+              but starts it in 2034, adds 20% to capital and lowers long-term copper to {stress.price}. A larger
+              capital bill and a thinner margin on every tonne raise the requirement to {tonnes(stress.ktpa)}.
             </p>
-          </figure>
+          </div>
+          <div>
+            <h3 className="label">Recommendation</h3>
+            <p className="mt-3 font-display text-[0.9375rem] font-semibold leading-7 text-foreground">
+              Keep engineering and permitting moving before committing construction capital.
+            </p>
+            <p className="mt-2 font-display text-[0.9375rem] leading-7 text-foreground">
+              The requirement roughly doubles across the four scenarios, and public disclosures do not include
+              the costed no-build mine plan or annual cash-flow schedule needed to narrow it. Continuing
+              pre-construction work can protect the replacement schedule while BHP resolves those uncertainties.
+              BHP has reported $0.8 billion of gross pre-commitment funding approved for that work.
+            </p>
+          </div>
+        </div>
+
+        <div className="title-block mt-12 max-w-2xl">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href={fi002.path} className="research-button">
+              Read the analysis
+            </Link>
+            <a href={`${fi002.assets}/model.xlsx`} className="research-button-secondary" download>
+              Financial model (.xlsx)
+            </a>
+          </div>
+          <ul className="mt-6 flex list-none flex-wrap justify-center gap-x-6 gap-y-2 p-0 font-display text-sm text-muted">
+            <li>
+              <a href={`${fi002.assets}/report.pdf`} className="link-quiet">Report (PDF)</a>
+            </li>
+            <li>
+              <a href={`${fi002.assets}/methodology.md`} className="link-quiet">Methodology</a>
+            </li>
+            <li>
+              <a href={`${fi002.assets}/evidence-register.csv`} className="link-quiet">Evidence register</a>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

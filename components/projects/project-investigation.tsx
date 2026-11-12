@@ -53,13 +53,13 @@ export function ProjectOverview({
         <section className="investigation-lane">
           <h2>Legal and policy context</h2>
           <p>
-            {pathway.policyContexts.length} parent policy records;{" "}
+            {pathway.policyContexts.length} parent policy actions;{" "}
             {stack.designations.length} project designations. Designation
             confers standing, not finance. Material and stage overlaps with
             controls do not establish a restriction on this project.
           </p>
           <a href="#project-policy" className="research-text-link">
-            Read the policy records
+            Read the policy actions
           </a>
         </section>
         <section className="investigation-lane">
@@ -67,7 +67,7 @@ export function ProjectOverview({
           <p>
             {pathway.nativeMilestones.length
               ? `${pathway.nativeMilestones.length} published source-reviewed observation${pathway.nativeMilestones.length === 1 ? "" : "s"}. The exact scope, date and speaker matter; source review is not on-site verification.`
-              : "No source-reviewed project milestone is published in this corpus. Financing records may still contain attributed activity reports; this gap does not establish inactivity."}
+              : "No source-reviewed project milestone is published in this corpus. Financing entries may still contain attributed activity reports; this gap does not establish inactivity."}
           </p>
           <a href="#project-unknowns" className="research-text-link">
             See evidence gaps
@@ -78,7 +78,7 @@ export function ProjectOverview({
         aria-label="Project evidence sections"
         className="mt-6 flex flex-wrap gap-x-6 gap-y-3 border-b pb-5 font-display text-sm text-accent"
       >
-        <a href="#project-finance">Financial record</a>
+        <a href="#project-finance">Financing</a>
         <a href="#project-industrial">Industrial observations</a>
         <a href="#project-policy">Policy context</a>
         <a href="#project-unknowns">Unknowns</a>
@@ -108,7 +108,7 @@ export function ProjectFinancialRecord({
         {packet.financialInstruments.map((row) => (
           <details
             key={row.id}
-            className="rounded border border-border-strong bg-card p-4 sm:p-5"
+            className="border border-border-strong bg-plate p-4 sm:p-5"
           >
             <summary className="cursor-pointer font-display text-base font-medium leading-7">
               {financialInstrumentLabels[row.instrument]} ·{" "}
@@ -148,7 +148,7 @@ export function ProjectFinancialRecord({
                   </dt>
                   <dd>
                     {row.legalAuthority ??
-                      "Not stated in this financial record"}
+                      "Not stated for this instrument"}
                   </dd>
                 </div>
               </dl>
@@ -218,11 +218,11 @@ export function ProjectPolicyContext({
   return (
     <Section
       title="Policy context"
-      description="These records directly parent the project's finance or designation entries. Their presence does not establish a causal effect on industrial activity."
+      description="These policy actions directly parent the project's finance or designation entries. Their presence does not establish a causal effect on industrial activity."
     >
       <ul className="project-evidence space-y-4">
         {packet.policyContexts.map((context) => (
-          <li key={context.id} className="rounded border bg-card p-4">
+          <li key={context.id} className="border bg-plate p-4">
             <p className="font-display text-xs text-muted">
               {formatDate(context.date)} ·{" "}
               {policyStatusLabels[context.policyStatus as PolicyStatus]}
@@ -246,7 +246,7 @@ export function ProjectPolicyContext({
       </ul>
       {!packet.policyContexts.length ? (
         <p className="text-muted">
-          No parent finance or designation policy record is linked.
+          No parent policy action is linked for finance or designation.
         </p>
       ) : null}
     </Section>
@@ -254,7 +254,7 @@ export function ProjectPolicyContext({
 }
 
 export function ProjectUnknowns({ investigation: { packet } }: { investigation: Investigation }) {
-  return <Section title="What remains unknown" description="Gaps describe the available SMPT record. They do not establish that an activity did not occur.">
+  return <Section title="What remains unknown" description="Gaps describe what SMPT has documented. They do not establish that an activity did not occur.">
     <ul className="list-disc space-y-3 pl-5 font-display text-sm leading-7 text-muted">{packet.unknowns.map(note => <li key={note}>{note}</li>)}</ul>
   </Section>;
 }

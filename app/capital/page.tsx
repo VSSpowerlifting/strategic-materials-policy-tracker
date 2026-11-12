@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageContents, PageHeading, Section } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { ResearchReadingKey } from "@/components/capital/reading-guide";
 import { CapitalExplorer } from "@/components/capital/capital-explorer";
 import { StageMatrix } from "@/components/capital/charts";
@@ -68,12 +68,11 @@ export default function CapitalPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
         title="Capital"
         lead={
           <>
             Public financing, investment and purchase guarantees for strategic-material supply chains.
-            Amounts and legal status follow the cited records.
+            Amounts and legal status follow the cited sources.
           </>
         }
       />
@@ -81,7 +80,7 @@ export default function CapitalPage() {
       <ResearchReadingKey topic="capital" />
 
       <p className="tnum mt-6 font-display text-sm text-muted">
-        {all.length} financial records · {events} events · {actors} providing governments ·{" "}
+        {all.length} financing instruments · {events} events · {actors} providing governments ·{" "}
         {new Set(all.map((c) => c.instrument)).size} instrument types
       </p>
 
@@ -89,7 +88,7 @@ export default function CapitalPage() {
         className="mt-8 border-y border-border py-4"
         items={[
           { href: "#commitments", label: "Public commitments" },
-          { href: "#records", label: "All financial records" },
+          { href: "#records", label: "All financing" },
           { href: "#stages", label: "By production stage" },
           { href: "#separate", label: "Listed separately" },
         ]}
@@ -101,28 +100,28 @@ export default function CapitalPage() {
           title="Public commitments"
           description="Grouped by currency, instrument, amount qualifier and legal status. Parent and child amounts are counted once."
         >
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid gap-x-8 gap-y-10 lg:grid-cols-3">
             {totals.currencies.map((t) => {
               const counted = t.countedIds.map((id) => getFinancialCommitmentById(id)!);
               const max = counted.reduce((m, c) => (compareDecimals(c.amount!.value, m) > 0 ? c.amount!.value : m), "0");
               return (
-                <Card key={t.currency} className="min-w-0 p-5">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{t.currency}</p>
+                <div key={t.currency} className="min-w-0 border-t-2 border-foreground pt-4">
+                  <p className="font-display text-xs text-faint">{t.currency}</p>
                   {t.status === "withheld" ? (
                     <p className="mt-2 text-sm leading-6 text-muted">
                       <strong className="font-semibold text-foreground">Total withheld.</strong>{" "}
-                      <Link href={`/capital/${t.overlap.a}`} className="text-accent hover:text-accent-strong">{t.overlap.a}</Link> and{" "}
-                      <Link href={`/capital/${t.overlap.b}`} className="text-accent hover:text-accent-strong">{t.overlap.b}</Link> both
-                      contain <Link href={`/capital/${t.overlap.shared}`} className="text-accent hover:text-accent-strong">{t.overlap.shared}</Link>,
+                      <Link href={`/capital/${t.overlap.a}`} className="link-quiet">{t.overlap.a}</Link> and{" "}
+                      <Link href={`/capital/${t.overlap.b}`} className="link-quiet">{t.overlap.b}</Link> both
+                      contain <Link href={`/capital/${t.overlap.shared}`} className="link-quiet">{t.overlap.shared}</Link>,
                       and share a component. The rows appear separately from aggregated totals to prevent double counting.
                     </p>
                   ) : (
-                    <div className="mt-2 divide-y divide-border/60">
+                    <div className="mt-2 divide-y divide-border">
                       {t.instruments.map((inst) => (
                         <div key={inst.instrument} className="space-y-2 py-3 first:pt-1">
                           <p className="font-display text-sm font-semibold">{financialInstrumentLabels[inst.instrument]}</p>
                           {!inst.summed ? (
-                            <p className="font-mono text-[11px] leading-5 text-faint">
+                            <p className="font-display text-xs leading-5 text-faint">
                               Listed separately: {inst.reason === "several_instruments" ? "instrument types are bundled without an identified split" : "the source leaves the instrument category unspecified"}.
                             </p>
                           ) : null}
@@ -135,14 +134,14 @@ export default function CapitalPage() {
                           ).map(([label, gloss, sums]) =>
                             QUALIFIER_ORDER.some((q) => sums[q]) ? (
                               <div key={label}>
-                                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted" title={gloss}>
+                                <p className="font-display text-xs text-muted" title={gloss}>
                                   {label}
                                 </p>
                                 <dl className="mt-1 space-y-0.5">
                                   {QUALIFIER_ORDER.filter((q) => sums[q]).map((q) => (
                                     <div key={q} className="flex items-baseline justify-between gap-3">
-                                      <dt className="font-mono text-[11px] text-faint">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
-                                      <dd className="tnum font-display text-xl font-bold">{formatDecimalCompact(sums[q]!)}</dd>
+                                      <dt className="font-display text-xs text-faint">{q === "exact" ? "Stated exactly" : valueQualifierLabels[q]}</dt>
+                                      <dd className="tnum font-display text-xl font-semibold">{formatDecimalCompact(sums[q]!)}</dd>
                                     </div>
                                   ))}
                                 </dl>
@@ -154,16 +153,16 @@ export default function CapitalPage() {
                       ))}
                     </div>
                   )}
-                  <p className="mt-3 font-mono text-[11px] leading-5 text-faint">
+                  <p className="mt-3 font-display text-xs leading-5 text-faint">
                     {FINANCIAL_STATUSES.map((s) => [s, countBy(counted, (c) => currentFinancialStatus(c)).get(s)] as const)
                       .filter(([, n]) => n)
                       .map(([s, n]) => `${financialStatusLabels[s]} ${n}`)
                       .join(" · ")}
                   </p>
                   <details className="group mt-3 border-t pt-2">
-                    <summary className="inline-flex min-h-10 cursor-pointer list-none items-center gap-2 font-display text-sm text-accent hover:text-accent-strong">
+                    <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 font-display text-sm text-accent hover:text-accent-strong">
                       <span aria-hidden className="inline-block transition-transform group-open:rotate-90 motion-reduce:transition-none">›</span>
-                      {counted.length} counted {counted.length === 1 ? "record" : "records"}
+                      {counted.length} counted {counted.length === 1 ? "instrument" : "instruments"}
                     </summary>
                   <ul className="mt-2 space-y-2">
                     {counted.map((c) => {
@@ -177,16 +176,16 @@ export default function CapitalPage() {
                               <span className="min-w-0 truncate font-display group-hover:text-accent">{c.recipient ?? c.provider}</span>
                               <InlineAmount amount={c.amount} />
                             </div>
-                            <div className="mt-1 h-1.5 rounded-sm bg-elevated">
+                            <div className="mt-1 h-1.5 bg-elevated">
                               <div
-                                className="h-1.5 rounded-sm"
+                                className="h-1.5"
                                 style={{
                                   width: `${pct}%`,
-                                  background: c.amount!.qualifier === "exact" ? "#CBA86A" : "color-mix(in oklab, #CBA86A 40%, transparent)",
+                                  background: c.amount!.qualifier === "exact" ? "var(--mark-commitment)" : "color-mix(in oklab, var(--mark-commitment) 40%, transparent)",
                                 }}
                               />
                             </div>
-                            <p className="mt-0.5 font-mono text-[10px] text-faint">
+                            <p className="mt-0.5 font-display text-xs text-faint">
                               {commitmentActor(c) ? jurisdictionLabels[commitmentActor(c)!] : "No tracked government"} · {financialInstrumentLabels[c.instrument]} · {financialStatusLabels[currentFinancialStatus(c)]}
                             </p>
                           </Link>
@@ -209,19 +208,19 @@ export default function CapitalPage() {
                       ).
                     </p>
                   ) : null}
-                </Card>
+                </div>
               );
             })}
           </div>
           <p className="mt-4 max-w-prose text-sm leading-6 text-muted">
             Amounts stated &ldquo;up to&rdquo; are ceilings; payments are tracked separately.
-            Commitments with unstated amounts or status, along with ended commitments, appear in separate rows. <Link href="/methodology#capital-counting" className="text-accent hover:text-accent-strong">Counting rules</Link>.
+            Commitments with unstated amounts or status, along with ended commitments, appear in separate rows. <Link href="/methodology#capital-counting" className="link-quiet">Counting rules</Link>.
           </p>
-          <div className="mt-6 overflow-x-auto rounded-lg border">
+          <div className="mt-8 overflow-x-auto border-y border-border-strong bg-plate">
             <table className="w-full min-w-[36rem] border-collapse text-sm">
               <caption className="sr-only">Public commitments by providing actor, currency and instrument</caption>
               <thead>
-                <tr className="border-b bg-card font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+                <tr className="border-b bg-elevated font-display text-xs text-faint">
                   <th scope="col" className="px-3 py-2 text-left font-normal">Provider</th>
                   <th scope="col" className="px-3 py-2 text-left font-normal">By currency and instrument · “up to”, “about” and “at least” figures in separate buckets</th>
                   <th scope="col" className="px-3 py-2 text-right font-normal">Unaggregated rows (amount/status unstated or ended)</th>
@@ -239,7 +238,7 @@ export default function CapitalPage() {
                       <span className="flex flex-col gap-1">
                         {t.currencies.map((cur) => (
                           <span key={cur.currency} className="space-y-1">
-                            <span className="tnum block font-mono text-xs text-muted">
+                            <span className="tnum block font-display text-xs text-muted">
                               <span className="text-foreground">{cur.currency}</span>{" "}
                               {cur.status === "withheld"
                                 ? "total withheld: counted rows overlap"
@@ -260,11 +259,11 @@ export default function CapitalPage() {
                               : null}
                           </span>
                         ))}
-                        {t.currencies.length === 0 ? <span className="font-mono text-xs text-faint">—</span> : null}
+                        {t.currencies.length === 0 ? <span className="font-display text-xs text-faint">—</span> : null}
                       </span>
                     </td>
                     <td
-                      className="tnum px-3 py-3 text-right font-mono text-xs text-muted"
+                      className="tnum px-3 py-3 text-right font-display text-xs text-muted"
                       title={`${t.unquantifiedIds.length} amount unstated · ${t.statusNotStatedIds.length} status unstated · ${t.endedIds.length} ended`}
                     >
                       {t.unquantifiedIds.length + t.statusNotStatedIds.length + t.endedIds.length || "—"}
@@ -276,22 +275,21 @@ export default function CapitalPage() {
           </div>
         </Section>
 
-        <Section id="records" title="All financial records">
+        <Section id="records" title="All financing">
           <CapitalExplorer rows={summaries} materialNames={materialNames} />
-          <p className="mt-4 text-sm text-muted">
+          <p className="mt-4 font-display text-sm text-muted">
             Download:{" "}
-            <a href="/api/export/financial-commitments.csv" className="text-accent hover:text-accent-strong">CSV</a>
+            <a href="/api/export/financial-commitments.csv" className="link-quiet">CSV</a>
             {" · "}
-            <Link href="/api/v1/financial-commitments" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
+            <Link href="/api/v1/financial-commitments" prefetch={false} className="link-quiet">JSON API</Link>
             {" · "}
-            <Link href="/data" className="text-accent hover:text-accent-strong">all exports</Link>
+            <Link href="/data" className="link-quiet">all exports</Link>
           </p>
         </Section>
 
         <Section
           id="stages"
           title="Finance by production stage"
-          description="Financial records by government and supply-chain stage."
         >
           <StageMatrix rows={all} />
         </Section>
@@ -313,12 +311,12 @@ export default function CapitalPage() {
                 const st = optionState(c, all);
                 const step = (list: typeof st.exercises) => list.map((e) => ({ id: e.id, label: e.amount?.amountAsStated ?? e.id }));
                 return (
-                  <Card key={c.id} className="min-w-0 overflow-hidden">
+                  <RecordList key={c.id} className="min-w-0">
                     <CommitmentRow c={bySummary.get(c.id)!} />
-                    <div className="space-y-3 border-t px-4 py-4">
+                    <div className="space-y-3 px-4 py-4">
                       {c.terms.filter((t) => t.kind === "other").slice(0, 1).map((t, i) => (
                         <p key={i} className="text-sm leading-6 text-muted">
-                          <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-faint">As filed </span>“{t.asStated}”
+                          <span className="font-display text-xs text-faint">As filed </span>“{t.asStated}”
                         </p>
                       ))}
                       <OptionLadder
@@ -328,7 +326,7 @@ export default function CapitalPage() {
                         disbursements={step(st.disbursements)}
                       />
                     </div>
-                  </Card>
+                  </RecordList>
                 );
               })}
             </div>
@@ -341,21 +339,21 @@ export default function CapitalPage() {
           title="Other financial instruments"
           description="Price floors, offtake, tax offsets and procurement rights, recorded by their terms."
         >
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-x-8 gap-y-8 md:grid-cols-2">
             {unquantified.map((c) => (
-              <Card key={c.id} className="p-5">
+              <div key={c.id} className="border-t border-border-strong pt-4">
                 <Link href={`/capital/${c.id}`} className="font-display font-semibold hover:text-accent">
                   {financialInstrumentLabels[c.instrument]} · {c.recipient ?? c.provider}
                 </Link>
                 <ul className="mt-3 space-y-2">
                   {c.terms.slice(0, 3).map((t, i) => (
                     <li key={i} className="text-sm leading-6">
-                      <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-faint">{termKindLabels[t.kind]} </span>
+                      <span className="font-display text-xs text-faint">{termKindLabels[t.kind]} </span>
                       <span className="text-muted">“{t.asStated}”</span>
                     </li>
                   ))}
                 </ul>
-              </Card>
+              </div>
             ))}
           </div>
         </Section>
@@ -366,11 +364,11 @@ export default function CapitalPage() {
           title="Envelopes, appropriations and lending authorities"
           description="Programme ceilings and appropriations, separate from recipient commitments."
         >
-          <Card className="overflow-hidden">
+          <RecordList>
             {envelopes.map((c) => (
               <CommitmentRow key={c.id} c={bySummary.get(c.id)!} />
             ))}
-          </Card>
+          </RecordList>
         </Section>
 
         <Section
@@ -379,11 +377,11 @@ export default function CapitalPage() {
           title="Other financing"
           description="Private capital, recipient funds, indications and financing with an unstated public share."
         >
-          <Card className="overflow-hidden">
+          <RecordList>
             {nonPublic.map((c) => (
               <CommitmentRow key={c.id} c={bySummary.get(c.id)!} />
             ))}
-          </Card>
+          </RecordList>
           <p className="mt-2 text-xs text-faint">
             Value roles here: {[...new Set(nonPublic.map((c) => valueRoleLabels[c.valueRole]))].join(", ")}.
           </p>

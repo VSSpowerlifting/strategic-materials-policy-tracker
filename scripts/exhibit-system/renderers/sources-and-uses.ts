@@ -3,7 +3,7 @@
 // workbook carries every figure. Labels are native text beside the columns.
 import { arr, num, obj, optNum, str } from "../contract";
 import { maxItems, nonNegative, totalsMatch, uniqueLabels } from "../integrity";
-import { C, chartDefaults, fmt } from "../primitives";
+import { C, chartDefaults, fmt, RAMP } from "../primitives";
 import type { Renderer } from "../types";
 
 interface Component { label: string; value: number }
@@ -21,7 +21,7 @@ const components = (x: unknown, path: string): Component[] =>
   });
 
 const SOURCE_TONES = [C.neutralDark, C.neutral, C.neutralLight, C.soft];
-const USE_TONES = [C.accent, C.gold, "D9BD84", "EADCBC"];
+const USE_TONES = [C.accent, RAMP[3], RAMP[2], RAMP[1]];
 
 export const sourcesAndUses: Renderer<SourcesUsesData> = {
   id: "sources-and-uses",

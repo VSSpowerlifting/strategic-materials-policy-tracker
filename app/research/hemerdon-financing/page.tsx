@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
+import { researchCoverPhoto } from "@/lib/photography";
 
 const assets = {
   memo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
@@ -18,16 +20,23 @@ const assets = {
   qc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_QC.md",
 } as const;
 
+const coverPhoto = researchCoverPhoto("hemerdon-financing")!;
+
 export const metadata: Metadata = {
   title: "Inside Tungsten West's £71 Million Restart Financing — Strategy & Finance",
   description: "How the National Wealth Fund's Hemerdon financing is structured, what Tungsten West still needs to spend and when its core loan must be repaid.",
   alternates: { canonical: "/research/hemerdon-financing" },
   openGraph: {
+    images: [{ url: coverPhoto.src, width: coverPhoto.width, height: coverPhoto.height, alt: coverPhoto.alt }],
     type: "article",
     url: site.url + "/research/hemerdon-financing",
     siteName: site.name,
     title: "Inside Tungsten West's £71 Million Restart Financing | SMPT",
     description: "Government capital, project expenditure and refinancing risk at Hemerdon.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [coverPhoto.src],
   },
 };
 
@@ -58,22 +67,22 @@ export default function HemerdonFinancing() {
   return (
     <div data-flush-footer>
       <section className="border-b border-border-strong">
-        <Container width="wide" className="py-12 sm:py-20">
-          <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
+        <Container width="wide" className="article-hero py-12 sm:py-20">
+          <a href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
             ← Research
-          </Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Strategy &amp; Finance</p>
-          <h1 className="mt-4 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          </a>
+          <p className="mt-8 font-display text-[0.8125rem] font-medium text-accent">Strategy &amp; Finance</p>
+          <h1 className="article-title mt-4 text-foreground">
             Inside Tungsten West&apos;s £71 Million Restart Financing
           </h1>
-          <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
+          <p className="standfirst mt-6 max-w-[38rem]">
                   The £71 million headline includes £10 million in borrowing capacity that has yet to be committed, while a short-term loan adds a repayment deadline to the mine&rsquo;s restart.
                 </p>
           <p className="mt-6 font-display text-sm text-muted">
             By <Link href="/about" className="underline underline-offset-4 hover:text-accent">Benjamin Yang</Link>
             {" · "}5 November 2026{" · "}Research cutoff: 4 November 2026
           </p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
             <a href={assets.memo} target="_blank" rel="noopener noreferrer" className="research-button">
               Read the financial memo (PDF)
             </a>
@@ -84,6 +93,13 @@ export default function HemerdonFinancing() {
               Open the financial model
             </a>
           </div>
+          <ResearchCover
+            data-cover="hemerdon-financing"
+            data-frame="banner"
+            data-caption="full"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="mt-12 sm:mt-16"
+          />
         </Container>
       </section>
 
@@ -93,7 +109,7 @@ export default function HemerdonFinancing() {
             <article className="min-w-0 max-w-4xl">
               <section className="border-b border-paper-border pb-10">
                 
-                <h2 className="mt-3 font-display text-3xl font-semibold leading-tight">
+                <h2 className="article-h2 mt-3">
                   Hemerdon&rsquo;s financing brings new capital and a near-term repayment obligation
                 </h2>
                 <p className="mt-5 font-display text-lg leading-9">
@@ -105,24 +121,24 @@ export default function HemerdonFinancing() {
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <h2 className="font-display text-2xl font-semibold">What the £71 million headline contains</h2>
-                <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                  <div className="border-t-4 border-paper-accent bg-white/50 p-5">
-                    <p className="font-display text-3xl font-semibold tabular-nums">£36m</p>
+                <h2 className="article-h2">What the £71 million headline contains</h2>
+                <div className="mt-7 grid gap-8 sm:grid-cols-3">
+                  <div className="border-t-2 border-paper-accent pt-4 pr-5">
+                    <p className="article-figure">£36m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Equity</p>
                     <p className="mt-2 font-display text-sm leading-6 text-paper-muted">
                   Equity capital reported raised.
                 </p>
                   </div>
-                  <div className="border-t-4 border-paper-accent bg-white/50 p-5">
-                    <p className="font-display text-3xl font-semibold tabular-nums">£25m</p>
+                  <div className="border-t-2 border-paper-accent pt-4 pr-5">
+                    <p className="article-figure">£25m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Core loan</p>
                     <p className="mt-2 font-display text-sm leading-6 text-paper-muted">
                   Fully drawn by 2 September 2026; repayment required.
                 </p>
                   </div>
-                  <div className="border border-dashed border-paper-border bg-white/30 p-5">
-                    <p className="font-display text-3xl font-semibold tabular-nums">£10m</p>
+                  <div className="border-t-2 border-dashed border-paper-faint pt-4 pr-5">
+                    <p className="article-figure">£10m</p>
                     <p className="mt-2 font-display text-sm font-semibold">Uncommitted accordion</p>
                     <p className="mt-2 font-display text-sm leading-6 text-paper-muted">
                   Additional borrowing subject to a further commitment.
@@ -135,7 +151,7 @@ export default function HemerdonFinancing() {
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <h2 className="font-display text-2xl font-semibold">
+                <h2 className="article-h2">
                   The restart still needs £40–45 million of project spending
                 </h2>
                 <p className="mt-5 font-display text-lg leading-9">
@@ -147,7 +163,7 @@ export default function HemerdonFinancing() {
               </section>
 
               <section className="py-10">
-                <h2 className="font-display text-2xl font-semibold">
+                <h2 className="article-h2">
                   Accepted shipments and the loan timetable are the next tests
                 </h2>
                 <p className="mt-5 font-display text-lg leading-9">
@@ -174,7 +190,7 @@ export default function HemerdonFinancing() {
                 </ul>
               </div>
               <div className="mt-10 border-t border-paper-border pt-5">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-paper-accent">Editable editions</p>
+                <p className="font-display text-[0.8125rem] font-medium text-paper-accent">Editable editions</p>
                 <div className="mt-4 space-y-3 font-display text-sm">
                   <p><a href={assets.editableMemo} className="underline underline-offset-4 hover:text-paper-accent">Word memorandum</a></p>
                   <p><a href={assets.editableDeck} className="underline underline-offset-4 hover:text-paper-accent">PowerPoint presentation · v2 (18 slides)</a></p>
@@ -197,8 +213,8 @@ export default function HemerdonFinancing() {
 
       <section className="border-t border-border-strong">
         <Container width="wide" className="py-12 sm:py-16">
-          <h2 className="font-display text-2xl font-semibold">Sources</h2>
-          <p className="mt-4 max-w-3xl font-display text-lg leading-8 text-muted">
+          <h2 className="article-h2">Sources</h2>
+          <p className="standfirst mt-6 max-w-[38rem]">
                   The sensitivity figures are SMPT calculations using the assumptions described in the memo, rather than forecasts issued by Tungsten West.
                 </p>
           <ul className="mt-6 max-w-3xl space-y-3">

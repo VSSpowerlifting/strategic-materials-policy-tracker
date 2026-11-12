@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Container, PageHeading } from "@/components/ui/container";
 import { EventsExplorer } from "@/components/events-explorer";
@@ -20,16 +19,7 @@ export default function EventsPage() {
 
   return (
     <Container className="py-12">
-      <PageHeading
-        title="Policy events"
-        lead="Search government measures by material, jurisdiction, instrument and status."
-      />
-      <nav aria-label="Explore record types" className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-display text-sm">
-        <span aria-current="page" className="font-semibold text-foreground">Policy events</span>
-        <Link href="/capital" className="text-accent underline underline-offset-4">Financial instruments</Link>
-        <Link href="/controls" className="text-accent underline underline-offset-4">Legal controls</Link>
-        <Link href="/sources" className="text-accent underline underline-offset-4">Original sources</Link>
-      </nav>
+      <PageHeading title="Policy events" />
       <div className="mt-8">
         {/*
           No Suspense boundary here on purpose. The explorer applies any URL

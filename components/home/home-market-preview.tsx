@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getMarketSeriesById, getObservations } from "@/lib/market-data";
-import { addMonths, chooseIndexBase, formatPeriod, indexSeries, periodsBetween } from "@/lib/markets";
+import { addMonths, chooseIndexBase, formatNumber, formatPeriod, indexSeries, periodRange, valueDigits } from "@/lib/markets";
+import { lineSegments, niceTicks } from "@/components/markets/chart-math";
 import { slotStyle } from "@/components/markets/types";
 
 /**
- * A small, static summary of the published /markets data, not a live quote feed.
- * Runs on the server and reuses the market monitor's exact index calculation.
- * The same CSS-only reveal effect as the full monitor respects reduced motion.
+ * A static summary of the published /markets data, not a live quote feed. It runs on the server and reuses the
+ * Market Monitor's index calculation, line geometry and line styles. The plot stretches to its frame, so the
+ * axis labels are HTML placed by percentage and every stroke keeps its drawn width. The line reveal is the
+ * shared CSS-only effect, which stays off under reduced motion.
  */
 const FEATURED = [
   { id: "wb-copper", name: "Copper", slot: 0 },
@@ -14,39 +16,32 @@ const FEATURED = [
   { id: "imf-cobalt", name: "Cobalt", slot: 2 },
 ] as const;
 
-const CHART = {
-  width: 500,
-  height: 236,
-  left: 37,
-  right: 485,
-  top: 14,
-  bottom: 207,
-} as const;
+/** Plot coordinates. The SVG is stretched to its box, so these are proportions, not pixels. */
+const W = 1000;
+const H = 400;
 
-function axisStep(span: number): number {
-  if (span > 140) return 50;
-  if (span > 65) return 25;
-  return span > 30 ? 10 : 5;
+function Unavailable({ message }: { message: string }) {
+  return (
+    <div>
+      <h2 id="home-market-heading" className="font-display text-base font-semibold text-foreground">
+        Mineral price trends
+      </h2>
+      <p className="mt-2 text-sm text-muted">{message}</p>
+      <Link href="/markets" className="research-button-secondary mt-5">
+        Explore the Market Monitor
+      </Link>
+    </div>
+  );
 }
 
 export function HomeMarketPreview() {
-  const candidates = FEATURED.map((item) => ({
-    ...item,
-    observations: getObservations(item.id),
-    breaks: getMarketSeriesById(item.id)?.sourceBreaks ?? [],
-  }));
+  const candidates = FEATURED.map((item) => {
+    const meta = getMarketSeriesById(item.id);
+    return { ...item, meta, observations: getObservations(item.id), breaks: meta?.sourceBreaks ?? [] };
+  });
   const ends = candidates.map((item) => item.observations.at(-1)?.period).filter((p): p is string => Boolean(p));
   const end = ends.length === candidates.length ? ends.sort()[0] : null;
-
-  if (!end) {
-    return (
-      <div>
-        <h2 className="font-display text-lg font-semibold">Mineral price trends</h2>
-        <p className="mt-2 text-sm text-muted">The market chart is temporarily unavailable.</p>
-        <Link href="/markets" className="research-button-secondary mt-5">Explore the Market Monitor</Link>
-      </div>
-    );
-  }
+  if (!end) return <Unavailable message="The market chart is temporarily unavailable." />;
 
   const start = addMonths(end, -36);
   const comparison = chooseIndexBase(
@@ -64,152 +59,161 @@ export function HomeMarketPreview() {
           values: indexSeries(item.observations, base, start, end),
         }))
     : [];
+  if (!base || !lines.length) return <Unavailable message="A comparable period is unavailable for this selection." />;
 
-  if (!base || !lines.length) {
-    return (
-      <div>
-        <h2 className="font-display text-lg font-semibold">Mineral price trends</h2>
-        <p className="mt-2 text-sm text-muted">A comparable period is unavailable for this selection.</p>
-        <Link href="/markets" className="research-button-secondary mt-5">Explore the Market Monitor</Link>
-      </div>
-    );
-  }
-
+  const periods = periodRange(base, end);
   const values = lines.flatMap((line) => line.values.map((point) => point.value));
-  const rawMin = Math.min(100, ...values);
-  const rawMax = Math.max(100, ...values);
-  const step = axisStep(rawMax - rawMin);
-  const min = Math.floor(rawMin / step) * step;
-  const max = Math.max(min + step, Math.ceil(rawMax / step) * step);
-  const totalMonths = Math.max(1, periodsBetween(base, end));
-  const x = (period: string) =>
-    CHART.left + (periodsBetween(base, period) / totalMonths) * (CHART.right - CHART.left);
-  const y = (v: number) =>
-    CHART.bottom - ((v - min) / (max - min)) * (CHART.bottom - CHART.top);
-  const ticks = Array.from({ length: Math.round((max - min) / step) + 1 }, (_, i) => min + i * step);
-  const middle = addMonths(base, Math.floor(totalMonths / 2));
-  const xLabels = [base, middle, end];
+  const ticks = niceTicks(Math.min(100, ...values), Math.max(100, ...values), 5);
+  const min = ticks[0];
+  const max = ticks[ticks.length - 1];
+  const last = Math.max(1, periods.length - 1);
+  const index = new Map(periods.map((p, i) => [p, i]));
+  const x = (period: string) => ((index.get(period) ?? 0) / last) * W;
+  const y = (v: number) => H - ((v - min) / (max - min)) * H;
+  const pctY = (v: number) => `${(y(v) / H) * 100}%`;
+  const xLabels = [base, periods[Math.floor(last / 2)], end];
 
   return (
-    <figure aria-labelledby="home-market-heading" className="m-0 min-w-0">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 id="home-market-heading" className="font-display text-lg font-semibold text-foreground">
+    <figure
+      aria-labelledby="home-market-heading"
+      className="m-0 grid min-w-0 gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:grid-rows-[auto_1fr]"
+    >
+      <div>
+        <h2 id="home-market-heading" className="font-display text-base font-semibold text-foreground">
           Mineral price trends
         </h2>
-        <span className="font-display text-xs text-faint">36-month view</span>
+        <p className="mt-2 font-display text-sm leading-6 text-muted">
+          Monthly averages, indexed to 100 at {formatPeriod(base, true)}. 36-month view.
+        </p>
       </div>
-      <p className="mt-1 font-display text-xs text-muted">
-        Monthly benchmarks · indexed to 100 at {formatPeriod(base)}
-      </p>
 
-      <div className="mt-4 overflow-hidden rounded-md border border-border bg-card/60 px-2 pt-3 pb-1 sm:px-3">
-        <svg
-          role="img"
-          aria-labelledby="home-market-svg-title home-market-svg-description"
-          viewBox={`0 0 ${CHART.width} ${CHART.height}`}
-          className="block h-auto w-full"
-        >
-          <title id="home-market-svg-title">Copper, nickel and cobalt indexed monthly prices</title>
-          <desc id="home-market-svg-description">
-            World Bank copper and nickel, and IMF cobalt monthly averages, each rebased to 100 at {formatPeriod(base)},
-            through {formatPeriod(end)}. The chart is a historical comparison, not live prices.
-          </desc>
-          <defs>
-            {lines.map((line, index) => (
-              <clipPath key={line.id} id={`home-market-reveal-${line.id}`} clipPathUnits="userSpaceOnUse">
-                <rect
-                  x={0}
-                  y={0}
-                  width={CHART.width}
-                  height={CHART.height}
-                  className="market-line-reveal"
-                  style={{ animationDelay: `${index * 120}ms` }}
-                />
-              </clipPath>
-            ))}
-          </defs>
+      <div className="min-w-0 border border-border-strong bg-plate lg:col-start-2 lg:row-span-2 lg:row-start-1">
+        <div className="relative mt-5 mr-12 ml-3 h-56 sm:h-72 lg:h-[23rem]">
+          <svg
+            role="img"
+            aria-labelledby="home-market-svg-title home-market-svg-description"
+            viewBox={`0 0 ${W} ${H}`}
+            preserveAspectRatio="none"
+            className="absolute inset-0 h-full w-full overflow-visible"
+          >
+            <title id="home-market-svg-title">Copper, nickel and cobalt indexed monthly prices</title>
+            <desc id="home-market-svg-description">
+              World Bank copper and nickel, and IMF cobalt monthly averages, each rebased to 100 at {formatPeriod(base)},
+              through {formatPeriod(end)}. The chart is a historical comparison, not live prices.
+            </desc>
+            <defs>
+              {lines.map((line, i) => (
+                <clipPath key={line.id} id={`home-market-reveal-${line.id}`} clipPathUnits="userSpaceOnUse">
+                  <rect
+                    x={-10}
+                    y={-10}
+                    width={W + 20}
+                    height={H + 20}
+                    className="market-line-reveal"
+                    style={{ animationDelay: `${i * 120}ms` }}
+                  />
+                </clipPath>
+              ))}
+            </defs>
 
-          {ticks.map((tick) => (
-            <g key={tick}>
+            {ticks.map((tick) => (
               <line
-                x1={CHART.left}
-                x2={CHART.right}
+                key={tick}
+                x1={0}
+                x2={W}
                 y1={y(tick)}
                 y2={y(tick)}
-                stroke={tick === 100 ? "var(--border-strong)" : "var(--border)"}
-                strokeWidth={tick === 100 ? 1.2 : 0.8}
-                strokeDasharray={tick === 100 ? "3 4" : undefined}
+                stroke={tick === 100 || tick === min ? "var(--border-strong)" : "var(--border)"}
+                strokeWidth={1}
+                vectorEffect="non-scaling-stroke"
               />
-              <text
-                x={CHART.left - 10}
-                y={y(tick)}
-                textAnchor="end"
-                dominantBaseline="central"
-                fill="var(--faint)"
-                fontSize={11}
-                fontVariant="tabular-nums"
-              >
-                {tick}
-              </text>
-            </g>
-          ))}
+            ))}
 
-          {xLabels.map((period, i) => (
-            <text
-              key={period}
-              x={x(period)}
-              y={CHART.height - 10}
-              textAnchor={i === 0 ? "start" : i === xLabels.length - 1 ? "end" : "middle"}
-              fill="var(--faint)"
-              fontSize={11}
-            >
-              {formatPeriod(period)}
-            </text>
-          ))}
-
-          {lines.map((line) => {
-            const path = line.values
-              .map((p, i) => `${i === 0 ? "M" : "L"}${x(p.period).toFixed(1)},${y(p.value).toFixed(1)}`)
-              .join(" ");
-            const last = line.values.at(-1);
-            return (
+            {lines.map((line) => (
               <g key={line.id} clipPath={`url(#home-market-reveal-${line.id})`}>
-                <path
-                  d={path}
-                  stroke={line.color}
-                  strokeWidth={2.4}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-                {last ? (
-                  <circle cx={x(last.period)} cy={y(last.value)} r={3.2} fill={line.color} stroke="var(--surface)" strokeWidth={1.2} />
-                ) : null}
+                {lineSegments(line.values, periods, line.breaks, x, y).segments.map((segment, n) => (
+                  <path
+                    key={n}
+                    d={segment.d}
+                    stroke={line.color}
+                    strokeWidth={1.5}
+                    strokeLinejoin="miter"
+                    strokeLinecap="butt"
+                    fill="none"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
               </g>
-            );
-          })}
-        </svg>
+            ))}
+          </svg>
+          {ticks.map((tick) => (
+            <span
+              key={tick}
+              aria-hidden="true"
+              className="tnum absolute left-full -translate-y-1/2 pl-2 font-display text-[0.6875rem] leading-none text-faint"
+              style={{ top: pctY(tick) }}
+            >
+              {tick}
+            </span>
+          ))}
+        </div>
+        <div aria-hidden="true" className="tnum mr-12 ml-3 flex justify-between pt-1.5 pb-2.5 font-display text-[0.6875rem] leading-4 text-faint">
+          {xLabels.map((period) => (
+            <span key={period}>{formatPeriod(period)}</span>
+          ))}
+        </div>
       </div>
 
-      <ul aria-label="Plotted metals" className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
-        {lines.map((line) => (
-          <li key={line.id} className="flex items-center gap-2 font-display text-xs text-foreground">
-            <span aria-hidden="true" className="h-0.5 w-4 rounded-full" style={{ backgroundColor: line.color }} />
-            {line.name}
-          </li>
-        ))}
-      </ul>
-      <figcaption className="mt-3 font-display text-xs leading-5 text-muted">
-        World Bank Pink Sheet and IMF PCPS · monthly averages through {formatPeriod(end)}
-      </figcaption>
-
-      <Link
-        href="/markets"
-        className="research-button-secondary mt-5 flex w-full items-center justify-between gap-3 transition-colors"
-      >
-        Explore the Market Monitor
-        <span aria-hidden="true" className="text-accent">↗</span>
-      </Link>
+      <div className="min-w-0 self-end">
+        <table className="w-full border-t border-border-strong text-left font-display text-sm">
+          <caption className="sr-only">
+            Index value and published monthly average of each plotted metal in {formatPeriod(end, true)}
+          </caption>
+          <thead className="text-xs text-faint">
+            <tr className="border-b border-border">
+              <th scope="col" className="py-2 pr-3 font-normal">
+                {formatPeriod(end)}
+              </th>
+              <th scope="col" className="py-2 pr-3 text-right font-normal">
+                Index
+              </th>
+              <th scope="col" className="py-2 text-right font-normal">
+                Published
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {lines.map((line) => {
+              const indexed = line.values.at(-1);
+              const published = line.observations.find((o) => o.period === end);
+              return (
+                <tr key={line.id} className="border-b border-border">
+                  <th scope="row" className="py-2.5 pr-3 font-medium text-foreground">
+                    <span className="flex items-center gap-2">
+                      <svg width="16" height="8" aria-hidden="true" className="shrink-0">
+                        <line x1="0" x2="16" y1="4" y2="4" stroke={line.color} strokeWidth="2" />
+                      </svg>
+                      {line.name}
+                    </span>
+                  </th>
+                  <td className="tnum py-2.5 pr-3 text-right text-foreground">
+                    {indexed && indexed.period === end ? formatNumber(indexed.value, 1) : "n/a"}
+                  </td>
+                  <td className="tnum py-2.5 text-right whitespace-nowrap text-muted">
+                    {published ? `${formatNumber(published.value, valueDigits(line.observations))} ${line.meta?.unitShort ?? ""}` : "n/a"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <figcaption className="mt-3 font-display text-xs leading-5 text-faint">
+          World Bank Pink Sheet and IMF PCPS, monthly averages through {formatPeriod(end, true)}.
+        </figcaption>
+        <Link href="/markets" className="research-button-secondary mt-5">
+          Explore the Market Monitor
+        </Link>
+      </div>
     </figure>
   );
 }

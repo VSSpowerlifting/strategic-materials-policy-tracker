@@ -1,6 +1,6 @@
 # SMPT Exhibit and Chart Rules
 
-Version 2.0 · 5 November 2026 · [Return to presentation index](README.md)
+Version 3.0 · 11 November 2026 (colour grammar aligned with the Architectural Research Studio; analytical rules unchanged from 2.0, 5 November 2026) · [Return to presentation index](README.md)
 
 AI-assisted quantitative charts and graphics must also pass the [Editorial Authenticity & Visual Integrity Standard](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md), particularly the original-data, evidence-status, editable-figure and visual-purpose checks.
 
@@ -83,12 +83,16 @@ Displayed precision should serve the decision; keep full precision in the source
 
 ## Chart grammar and accessibility
 
-- Use cream ground \`#F5F3EE\`, dark ink \`#1B1915\` and gold-toned emphasis \`#7A5510\`; graphite \`#12110F\` on covers/closing slides.
-- Neutral bars are distinguishable without color alone through labeling, placement, outline or pattern.
-- One main result highlighted per chart. Avoid coloring every segment gold.
+- Flat ink on a plaster slide or a plate panel: ground `#F6F5F1` or `#FDFDFB`, text and primary marks graphite `#1B1E21`, the one emphasised mark malachite `#1F5C4D`. Axis labels, captions and source lines are faint `#61666C`, gridlines are border `#DBD8CF`, the base or zero line is border-strong `#B5B1A5`. Lines are 1.25–1.5 pt, straight between observations, with no smoothing, shadows, gradients or area fills unless a filled band is the datum.
+- Functional colours keep one meaning across a deck: hematite `#9A3324` for a decline, control, lapsed or ended status; ochre `#9A6A12` for a designation or caution, as a rule or marker only. Neither is a decorative accent.
+- Multi-series exhibits use the categorical set in `publication-tokens.json` (graphite, malachite, hematite, lapis, ochre, plum, in that order) and a single-hue malachite ramp for ordered magnitude. Choose by purpose: add a colour only when the exhibit has another series to separate. Lapis and series ochre fall below 4.5:1 on plate, so they are for marks, never small text.
+- Series are distinguishable without colour through direct labels, placement, outline or dash pattern. The set's last three colours carry a dash pattern by default; further series use the extra dash patterns in the token file.
+- Missing observations are gaps, not interpolated lines.
+- One main result highlighted per chart. Avoid colouring every segment malachite.
+- Numerals in tables and labels use tabular figures. Chart labels are Archivo; Spectral is never used inside an exhibit.
 - Legends follow visual order, and status labels should be written directly onto line/bar groups when feasible.
 - Column/row labels repeat after page breaks only where needed.
-- Sources are clickable in PDF exports and usable as plain text when printed.
+- Sources are clickable in PDF exports and usable as plain text when printed. Source footers are Archivo, faint, with the link in malachite, medium weight and underlined.
 - Use exactly one numeric grammar: decimal point, currency format, thousands separators, negative signs, standard date format.
 - Long tables belong in the companion workbook or appendix, unless the table itself is the decision exhibit.
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { EventListItem } from "@/components/event-card";
 import { FilterSelect, SearchBox } from "@/components/capital/filter-controls";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import {
   framingCategoryShort,
   jurisdictionLabels,
@@ -229,7 +229,7 @@ export function EventsExplorer({
 
   return (
     <div>
-      <div className="rounded border border-border-strong bg-card/40 p-4 sm:p-5">
+      <div className="border-b border-border-strong pb-5">
         <div className="grid gap-4 md:grid-cols-3">
           <FilterSelect id="events-material" label="Material" value={material} onChange={setMaterial}
             options={[...options.materialIds].sort().map(id => ({value: id, label: materialName(id)}))} />
@@ -282,7 +282,7 @@ export function EventsExplorer({
                   }}
                   aria-label={`Remove ${c.kind} filter: ${c.label}`}
                   className={cn(
-                    "-my-1 -mr-1 rounded px-2 py-1 text-muted transition-colors hover:text-foreground",
+                    "-my-1 -mr-1 px-2 py-1 text-muted transition-colors hover:text-foreground",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   )}
                 >
@@ -294,7 +294,7 @@ export function EventsExplorer({
         </ul>
       ) : null}
 
-      <Card className="mt-3 overflow-hidden">
+      <RecordList className="mt-3">
         {filtered.length > 0 ? (
           filtered.map((e) => (
             <EventListItem
@@ -305,16 +305,16 @@ export function EventsExplorer({
           ))
         ) : (
           <p className="px-4 py-10 text-center text-sm text-muted">
-            No policy events match this combination. Remove an active filter or clear all filters to widen the search.
+            No events match these filters.
           </p>
         )}
-      </Card>
+      </RecordList>
 
-      <p className="mt-3 font-display text-[11px] leading-relaxed text-faint">
+      <p className="mt-4 max-w-2xl font-display text-xs leading-5 text-muted">
         Framing markers show how the issuing government officially presented a
         measure — quoted, not inferred — and do not restate its legal effect.
         Compare anchors on the{" "}
-        <Link href="/framing" className="text-accent hover:text-accent-strong">
+        <Link href="/framing" className="link-quiet">
           framing page
         </Link>
         .

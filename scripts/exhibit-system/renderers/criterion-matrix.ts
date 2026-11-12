@@ -4,7 +4,7 @@
 // Never a numeric score, weight or total.
 import { arr, obj, oneOf, optStr, str } from "../contract";
 import { maxItems, minItems, uniqueLabels } from "../integrity";
-import { C } from "../primitives";
+import { C, HEAD_CELL } from "../primitives";
 import type { IntegrityIssue, Renderer, RenderHelpers, TableCell } from "../types";
 
 export const MARKS = ["Meets", "Partly", "Does not", "Not stated"] as const;
@@ -95,7 +95,7 @@ export const criterionMatrix: Renderer<CriterionMatrixData> = {
     const rowH = 0.5;
     const hdr = (text: string, accent: boolean, align: "left" | "center"): TableCell => ({
       text,
-      options: { bold: true, fontSize: 11, color: C.paper, fill: { color: accent ? C.accent : C.dark }, align, valign: "middle" },
+      options: accent ? { bold: true, fontSize: 11, color: C.plate, fill: { color: C.accent }, align, valign: "middle" } : { ...HEAD_CELL, align },
     });
     const rule = { type: "solid", pt: 0.75, color: C.border };
     const none = { type: "none" };

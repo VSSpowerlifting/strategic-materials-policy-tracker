@@ -240,12 +240,12 @@ export const conditionTree: Renderer<ConditionTreeData> = {
       h.shape(`node-box-${i}`, "data", outcome ? h.shapes.rect : h.shapes.roundRect, {
         x: xOf(n.id), y: y - boxH / 2, w: boxW, h: boxH,
         ...(outcome ? {} : { rectRadius: 0.08 }),
-        fill: { color: final ? C.accent : outcome ? C.soft : "FFFFFF" },
+        fill: { color: final ? C.accent : outcome ? C.soft : C.plate },
         line: { color: final ? C.accent : hot ? C.accent : outcome ? C.neutralDark : C.neutral, width: hot ? 2 : 1.25 },
       });
       h.text(`node-label-${i}`, "label", n.label, {
         x: xOf(n.id) + 0.06, y: y - boxH / 2, w: boxW - 0.12, h: boxH,
-        fontSize: 12, bold: outcome, color: final ? "FFFFFF" : C.ink, align: "center", valign: "middle",
+        fontSize: 12, bold: outcome, color: final ? C.plate : C.ink, align: "center", valign: "middle",
       });
     });
   },

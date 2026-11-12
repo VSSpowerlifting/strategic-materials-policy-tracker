@@ -142,18 +142,19 @@ export const framingCategoryShort: Record<FramingCategory, string> = {
   compliance_modernization: "Compliance modernization",
 };
 
-// The framing-category dimension is the one place colour is kept (see
-// FramingBadge): it genuinely helps compare actors on /framing. Strata-palette
-// hues, rendered as a small squared marker — never as a pale pill fill.
+// The framing-category dimension is the one place categorical colour is kept (see
+// FramingBadge): it helps compare actors on /framing. Mineral inks for the light
+// sheet, each at least 4.3:1 on --bg, rendered as a small squared marker and
+// never as a tinted pill. The first three are the site's own record inks.
 export const FRAMING_HUES: Record<FramingCategory, string> = {
-  national_security: "#C77B7B",
-  economic_security: "#CBA86A",
-  supply_chain_resilience: "#57B0A2",
-  leverage_retaliation: "#CE8A5C",
-  resource_environmental: "#84AE68",
-  anti_smuggling: "#5AA1C2",
-  allied_coordination: "#8E8AC6",
-  compliance_modernization: "#A981B6",
+  national_security: "var(--negative)",
+  economic_security: "var(--ochre)",
+  supply_chain_resilience: "var(--accent)",
+  leverage_retaliation: "#b0531a",
+  resource_environmental: "#55752b",
+  anti_smuggling: "#2c6a8f",
+  allied_coordination: "#4b4a9c",
+  compliance_modernization: "#7b4a8c",
 };
 
 // --- Sources ----------------------------------------------------------------
@@ -523,25 +524,27 @@ export const designationEvidenceFieldLabels: Record<DesignationEvidenceField, st
 
 // --- Capital & Control chart hues ---------------------------------------------
 //
-// Drawn from the Strata palette above, so no new colour enters the system.
-// Status hues encode legal standing on the control-status chart; the two kind
-// hues separate money from restrictions on the capital-and-control chronology.
+// Status hues encode legal standing on the control-status chart: in force takes
+// the accent, a suspension the caution ochre, an ended measure hematite, and the
+// stages before force or outside it the same inks the framing legend uses. The
+// two kind hues are the site's record marks (`--mark-commitment`, `--mark-control`),
+// separating money from restrictions on the capital-and-control chronology.
 
 export const CONTROL_STATUS_HUES: Record<ControlStatus, string> = {
-  announced: "#A981B6",
-  scheduled: "#8E8AC6",
-  in_force: "#4fb59e",
-  suspended: "#CBA86A",
-  expired: "#38414a",
-  revoked: "#38414a",
-  investigation: "#5AA1C2",
-  concluded: "#7b8488",
-  not_stated: "#38414a",
+  announced: "#7b4a8c",
+  scheduled: "#4b4a9c",
+  in_force: "var(--accent)",
+  suspended: "var(--ochre)",
+  expired: "var(--negative)",
+  revoked: "var(--negative)",
+  investigation: "#2c6a8f",
+  concluded: "var(--faint)",
+  not_stated: "#84878a",
 };
 
 export const INSTRUMENT_KIND_HUES = {
-  capital: "#CBA86A",
-  control: "#C77B7B",
+  capital: "var(--mark-commitment)",
+  control: "var(--mark-control)",
 } as const;
 
 // --- Capital intelligence views (v0.6) ------------------------------------------------

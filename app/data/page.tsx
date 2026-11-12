@@ -106,13 +106,9 @@ export default function DataPage() {
 
   return (
     <Container className="py-12">
-      <PageHeading
-        index="01"
-        title="Data export"
-        lead="Download the source-linked dataset as JSON or CSV."
-      />
+      <PageHeading title="Data export" />
 
-      <p className="mt-6 font-mono text-sm text-faint">
+      <p className="tnum mt-6 max-w-4xl font-display text-sm leading-6 text-muted">
         Corpus: {s.events} events · {s.framingClaims} framing anchors ·{" "}
         {s.materials} materials · {s.jurisdictions} jurisdictions · {s.sources}{" "}
         sources · {s.financialCommitments} financial commitments · {s.controlMeasures} control clauses ·{" "}
@@ -120,39 +116,35 @@ export default function DataPage() {
         {s.projectDesignations} project designations · {s.projectMilestones} reviewed industrial milestones.
       </p>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+      <ul className="mt-8 border-y border-border-strong">
         {downloads.map((d) => (
-          <div
+          <li
             key={d.file}
             data-site-motion="card"
-            className="flex flex-col rounded-lg border border-border bg-card p-5"
+            className="grid gap-x-6 gap-y-2 border-b border-border py-4 last:border-b-0 sm:grid-cols-[minmax(0,16rem)_minmax(0,1fr)_auto] sm:items-baseline"
           >
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-mono text-sm text-foreground">{d.file}</h2>
-              <span className="border-l-2 border-border-strong pl-1.5 font-mono text-[11px] text-faint">
-                {d.fmt}
-              </span>
-            </div>
-            <p className="mt-2 flex-1 leading-7 text-muted">{d.desc}</p>
+            <h2 className="break-all font-mono text-sm text-foreground">{d.file}</h2>
+            <p className="text-sm leading-6 text-muted">{d.desc}</p>
             <a
               href={d.href}
               download
-              className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-md border border-border px-3 py-1.5 font-display text-sm font-medium transition-colors hover:border-accent/40 hover:bg-elevated"
+              aria-label={`Download ${d.file}`}
+              className="inline-flex min-h-11 w-fit items-center border border-border-strong bg-plate px-3 font-display text-sm font-medium transition-colors hover:border-foreground hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:justify-self-end"
             >
-              Download ↓
+              Download {d.fmt}
             </a>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <section className="mt-10 max-w-prose rounded border border-border-strong bg-card p-5 font-display text-sm leading-7" aria-labelledby="investigation-downloads">
-        <h2 id="investigation-downloads" className="text-lg font-semibold text-foreground">Project downloads</h2>
-        <p className="mt-3 text-muted">Each project investigation offers a structured JSON download at <code className="break-all">/api/v1/projects/[id]/investigation</code>. <a href="/api/v1/projects/prj-au-alcoa-sojitz-gallium/investigation" download className="text-accent underline">Download the Wagerup example</a>.</p>
+      <section className="mt-12 max-w-prose text-sm leading-7" aria-labelledby="investigation-downloads">
+        <h2 id="investigation-downloads" className="font-display text-base font-semibold text-foreground">Project downloads</h2>
+        <p className="mt-3 text-muted">Each project investigation offers a structured JSON download at <code className="break-all">/api/v1/projects/[id]/investigation</code>. <a href="/api/v1/projects/prj-au-alcoa-sojitz-gallium/investigation" download className="link-quiet">Download the Wagerup example</a>.</p>
         <p className="mt-3 text-muted">Packets contain project, financing, status and source references. Unallocated amounts remain separate; unknown dates remain null.</p>
       </section>
 
-      <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
-        <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-faint">
+      <div className="mt-12 max-w-prose space-y-3 text-sm leading-7 text-muted">
+        <h2 className="font-display text-base font-semibold text-foreground">
           JSON API
         </h2>
         <p>
@@ -171,8 +163,8 @@ export default function DataPage() {
         </p>
       </div>
 
-      <div className="mt-12 max-w-prose space-y-3 leading-7 text-muted">
-        <h2 className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-faint">
+      <div className="mt-12 max-w-prose space-y-3 text-sm leading-7 text-muted">
+        <h2 className="font-display text-base font-semibold text-foreground">
           Terms of use
         </h2>
         <p>

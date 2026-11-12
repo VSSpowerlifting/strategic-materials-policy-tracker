@@ -106,7 +106,7 @@ export const annotatedLine: Renderer<AnnotatedLineData> = {
         valAxisMaxVal: d.axisMax,
         valAxisMajorUnit: d.majorUnit,
         valAxisLabelFormatCode: formatCode(d.dp),
-        valGridLine: { color: "E9E5DC", size: 0.5 },
+        valGridLine: { color: C.border, size: 0.5 },
         catAxisLabelFrequency: d.tickEvery,
         catAxisLabelFontSize: 11,
         altText: `Line chart with dated event markers, ${d.unit}`,

@@ -19,7 +19,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Compare government approaches",
   description:
-    "Compare documented policy approaches by material and government, inspect the records behind each count, and distinguish legal controls from financial support and official rationale.",
+    "Compare documented policy approaches by material and government, inspect the entries behind each count, and distinguish legal controls from financial support and official rationale.",
 };
 
 export default function ComparePage() {
@@ -55,14 +55,14 @@ export default function ComparePage() {
       </Section>
       {control && controlEvent && support && supportEvent ? (
         <section
-          className="mt-9 rounded border border-border-strong bg-card p-5 sm:p-7"
+          className="mt-12 border-y border-border-strong py-7"
           aria-labelledby="guided-comparison"
         >
           <div className="grid gap-6 lg:grid-cols-[1fr_2fr]">
             <div>
               <h2
                 id="guided-comparison"
-                className="font-serif text-3xl leading-tight"
+                className="font-display text-2xl font-semibold leading-tight tracking-tight"
               >
                 Gallium: licensing exports and supporting recovery
               </h2>
@@ -81,7 +81,7 @@ export default function ComparePage() {
                 <h3 className="font-display text-lg font-semibold">
                   China: export licensing
                 </h3>
-                <p className="mt-2 font-display text-sm text-accent">
+                <p className="mt-2 font-display text-sm text-foreground">
                   Clause status:{" "}
                   {legalStatus
                     ? controlStatusLabels[legalStatus]
@@ -96,7 +96,7 @@ export default function ComparePage() {
                 <p className="mt-3 text-sm leading-6 text-muted">
                   A legal clause is distinct from the broader event&apos;s
                   status. Read covered items, exemptions and the status history
-                  in the clause record.
+                  on the clause page.
                 </p>
                 <Link
                   href={`/controls/${control.id}`}
@@ -114,7 +114,7 @@ export default function ComparePage() {
                 <h3 className="font-display text-lg font-semibold">
                   Australia: equity support
                 </h3>
-                <p className="mt-2 font-display text-sm text-accent">
+                <p className="mt-2 font-display text-sm text-foreground">
                   Financial state:{" "}
                   {financialStatusLabels[currentFinancialStatus(support)]}
                 </p>
@@ -123,7 +123,7 @@ export default function ComparePage() {
                 </p>
                 <p className="mt-3 text-sm leading-6 text-muted">
                   This project-level instrument sits in the US–Australia
-                  framework record. Its published status is announced; execution
+                  framework entry. Its published status is announced; execution
                   and payment require later evidence. Offtake rights and US
                   support are recorded separately.
                 </p>
@@ -151,7 +151,7 @@ export default function ComparePage() {
             Status basis: corpus revised {formatDate(site.lastUpdated)}. Amounts
             keep their source-stated currencies and qualifiers; these examples
             appear separately. Official rationale is quoted on the{" "}
-            <Link href="/framing" className="text-accent underline">
+            <Link href="/framing" className="link-quiet">
               framing comparison
             </Link>
             .
@@ -160,8 +160,7 @@ export default function ComparePage() {
       ) : null}
       <Section
         className="mt-12"
-        title="Compare policy coverage by material and government"
-        description="Choose a populated cell to see the mechanisms, latest event and filtered policy records behind it. Compare within a material, then inspect the sources before drawing a substantive conclusion."
+        title="Policy coverage by material and government"
       >
         <p className="mb-5 max-w-3xl text-sm leading-7 text-muted">
           The cells count distinct coded policy events. Financial value, legal
@@ -175,20 +174,19 @@ export default function ComparePage() {
           columnTotals={columnTotals}
         />
         <p className="mt-4 text-sm leading-7 text-muted">
-          For complementary evidence:{" "}
-          <Link href="/framing" className="text-accent underline">
-            compare quoted government rationale
+          Related:{" "}
+          <Link href="/framing" className="link-quiet">
+            quoted government rationale
           </Link>
           {" · "}
-          <Link href="/interplay" className="text-accent underline">
-            align capital and controls
+          <Link href="/interplay" className="link-quiet">
+            capital and controls
           </Link>
           {" · "}
-          <Link href="/portfolios" className="text-accent underline">
-            inspect government portfolios
+          <Link href="/portfolios" className="link-quiet">
+            government portfolios
           </Link>
-          . These views answer different questions and retain their own coverage
-          and counting rules.
+          . Each view keeps its own coverage and counting rules.
         </p>
       </Section>
 

@@ -3,7 +3,7 @@
 // may carry a short qualifier as table text. No amounts, no totals of money.
 import { arr, obj, optStr, str } from "../contract";
 import { maxItems, minItems, uniqueLabels } from "../integrity";
-import { C, fmt } from "../primitives";
+import { C, fmt, HEAD_CELL } from "../primitives";
 import type { IntegrityIssue, Renderer, TableCell } from "../types";
 
 export interface RoleMatrixData {
@@ -74,7 +74,7 @@ export const roleMatrix: Renderer<RoleMatrixData> = {
     const rule = { type: "solid", pt: 0.75, color: C.border };
     const none = { type: "none" };
     const hdr = (text: string, align: "left" | "center"): TableCell => ({
-      text, options: { bold: true, fontSize: 11, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
+      text, options: { ...HEAD_CELL, align },
     });
     const rows: TableCell[][] = [
       [hdr("Organisation", "left"), ...d.roles.map((r) => hdr(r, "center"))],

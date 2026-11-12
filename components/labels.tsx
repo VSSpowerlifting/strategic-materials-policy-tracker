@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
+import { Badge, type BadgeTone } from "@/components/ui/badge";
 import {
   confidenceLabels,
   enSourceLabels,
@@ -22,13 +22,19 @@ import type {
   SourceConfidence,
 } from "@/lib/types";
 
-// Verdigris emphasis is reserved for measures currently in effect.
-const STATUS_EMPHASIS = new Set<PolicyStatus>(["active", "in_force"]);
+/** One tone per policy status: in effect, paused or pending, ended, or unstated. Shared with the event row's edge. */
+export const POLICY_STATUS_TONE: Record<PolicyStatus, BadgeTone> = {
+  active: "accent",
+  in_force: "accent",
+  suspended: "ochre",
+  proposed: "ochre",
+  superseded: "negative",
+  ended: "negative",
+  unclear: "neutral",
+};
 
 export function StatusBadge({ status }: { status: PolicyStatus }) {
-  return (
-    <Badge accent={STATUS_EMPHASIS.has(status)}>{policyStatusLabels[status]}</Badge>
-  );
+  return <Badge tone={POLICY_STATUS_TONE[status]}>{policyStatusLabels[status]}</Badge>;
 }
 
 export function MechanismBadges({ mechanisms }: { mechanisms: Mechanism[] }) {
@@ -52,9 +58,8 @@ export function SectorBadges({ sectors }: { sectors: Sector[] }) {
 }
 
 /**
- * The framing-category dimension — the one place colour is kept, as a small
- * squared marker (Strata palette) beside a quiet mono label. Non-pill, so it
- * reads as a legend, not a CMW-style chip.
+ * The framing-category dimension — the one place categorical colour is kept, as a
+ * small squared marker beside a quiet label. It reads as a legend, not a chip.
  */
 export function FramingBadge({
   category,
@@ -70,14 +75,14 @@ export function FramingBadge({
     <>
       <span
         aria-hidden
-        className="h-3 w-[5px] shrink-0 rounded-[1px]"
+        className="h-3 w-[5px] shrink-0"
         style={{ background: FRAMING_HUES[category] }}
       />
       {short ? framingCategoryShort[category] : framingCategoryLabels[category]}
     </>
   );
   const className =
-    "inline-flex items-center gap-1.5 font-display text-[11px] leading-none text-muted";
+    "inline-flex items-center gap-1.5 font-display text-xs leading-none text-muted";
   if (linked) {
     return (
       <Link
@@ -118,7 +123,7 @@ export function ConfidenceBadge({ confidence }: { confidence: SourceConfidence }
 export function EnSourceTag({ source }: { source: EnSource }) {
   if (source === "na") return null;
   return (
-    <span className="text-[11px] text-faint">
+    <span className="text-xs text-faint">
       Translation: {enSourceLabels[source].toLowerCase()}
     </span>
   );
@@ -134,7 +139,7 @@ export function JurisdictionTag({
 }) {
   return (
     <span className="inline-flex items-center gap-1.5">
-      <span className="inline-flex h-5 min-w-[1.75rem] items-center justify-center rounded border border-accent/50 bg-elevated px-1 font-display text-[11px] font-semibold text-foreground">
+      <span className="inline-flex h-5 min-w-[1.75rem] items-center justify-center border border-border-strong bg-plate px-1 font-display text-xs font-semibold text-foreground">
         {jurisdictionShort[code]}
       </span>
       {withName ? <span className="font-display text-sm">{jurisdictionLabels[code]}</span> : null}

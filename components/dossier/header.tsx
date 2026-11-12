@@ -5,7 +5,7 @@ import type { DossierPayload } from "@/lib/material-dossier";
 export function DossierHeader({ payload }: { payload: DossierPayload }) {
   const sections = [
     { href: "#supply-chain", label: "Supply chain" },
-    { href: "#records", label: "Records by stage" },
+    { href: "#records", label: "Activity by stage" },
     { href: "#capital-controls", label: "Capital and controls" },
     { href: "#timeline", label: "Timeline" },
     { href: "#events", label: "Events" },
@@ -37,13 +37,13 @@ export function DossierHeader({ payload }: { payload: DossierPayload }) {
             {payload.nameZh}
           </span>
         ) : null}
-        <span className="rounded border border-border-strong px-1.5 py-0.5 font-mono text-xs text-faint" title="Symbol, for identification only">
+        <span className="border border-border-strong px-1.5 py-0.5 font-display text-xs text-faint" title="Symbol, for identification only">
           {payload.symbol}
         </span>
       </div>
-      <p className="mt-4 max-w-3xl text-pretty text-lg leading-8 text-foreground/90">{payload.lede}</p>
+      <p className="mt-4 max-w-3xl text-pretty text-lg leading-8 text-foreground">{payload.lede}</p>
       <p className="mt-2 font-display text-xs text-faint">
-        Record as of <time dateTime={payload.asOf}>{formatDate(payload.asOf)}</time>. Counts are records of one kind at a time and are never added together.
+        As of <time dateTime={payload.asOf}>{formatDate(payload.asOf)}</time>. Each count covers one kind and counts are never added together.
       </p>
       {payload.groupNote ? (
         <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
@@ -56,9 +56,9 @@ export function DossierHeader({ payload }: { payload: DossierPayload }) {
         </p>
       ) : null}
 
-      <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-4" aria-label={`${payload.nameEn} record counts`}>
+      <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border sm:grid-cols-3 lg:grid-cols-4" aria-label={`${payload.nameEn} counts`}>
         {payload.stats.map((s) => (
-          <div key={s.key} className="bg-card p-4" data-stat={s.key}>
+          <div key={s.key} className="bg-plate p-4" data-stat={s.key}>
             <dt className="font-display text-xs text-muted">{s.label}</dt>
             <dd className="mt-1">
               <span className="tnum font-display text-3xl font-semibold leading-none text-foreground">{s.value}</span>
@@ -70,7 +70,7 @@ export function DossierHeader({ payload }: { payload: DossierPayload }) {
       </dl>
 
       <nav aria-label="On this page" className="mt-6">
-        <p className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">On this page</p>
+        <p className="font-display text-xs text-faint">On this page</p>
         <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-2 font-display text-sm">
           {sections.map((s) => (
             <li key={s.href}>

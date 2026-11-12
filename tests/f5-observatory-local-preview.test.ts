@@ -20,8 +20,8 @@ test("O3b: produces standalone local HTML with real Lattice Register CSS and fou
   assert.match(html,/default-src &#39;none&#39;/);
   assert.match(html,/script-src &#39;none&#39;/);
   assert.match(html,/name="robots" content="noindex, nofollow, noarchive"/);
-  assert.match(html,/Lattice Register|--accent: #e3b04b/);
-  assert.match(html,/--bg: #12110f/);
+  assert.match(html,/Lattice Register|--accent: #1f5c4d/);
+  assert.match(html,/--bg: #f6f5f1/);
   assert.match(html,/grid-template-columns/);
   assert.ok(stylesheetBytes>10000,"the entire real Tailwind/brand stylesheet should compile");
   assert.equal((html.match(/<article id="f5-case-/g)??[]).length,4);

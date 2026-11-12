@@ -1,15 +1,17 @@
-# SMPT research publication house style — v2.1
+# SMPT research publication house style — v3
 
-**Adopted on 4 November 2026; typography updated on 6 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized.
+**Adopted on 4 November 2026; typography updated on 6 November 2026; aligned with the Architectural Research Studio identity on 11 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized. v3 governs new and re-issued publications only; it does not restyle any frozen binary.
+
+The single token source is `docs/design/publication-tokens.json` (palette, chart series, type policy, geometry); `docs/design/PUBLICATION_DESIGN_SYSTEM.md` explains how decks, memos, covers and exhibits apply it. `tests/publication-tokens.test.ts` fails when the tokens drift from the website.
 
 ## Publication identity
 
-- Use the SMPT palette: near-black/charcoal (#262523), warm paper (#FBFAF7), body ink (#252421), muted gold (#98752D), warm neutral table bands (#F0EEE8), and fine rules (#D0CCC3). No green.
-- **Archivo is the SMPT primary typeface** for the website, research pages, data tables, titles, navigation and future publications. Establish hierarchy with size, regular/medium/semibold weights, spacing and rules rather than switching between serif and sans-serif.
-- For new PDFs, embed Archivo when the publishing environment supports it. Arial or Liberation Sans may serve as explicitly documented compatibility fallbacks for editable Word, PowerPoint and Google exports. Use one sans-serif family within each document, including cover, headings, body, notes, tables and captions. Avoid Georgia headings and decorative typeface changes.
+- Use the Studio palette: plaster (#F6F5F1) as page and slide ground, chalk (#FBFAF7) for quiet panels, graphite (#1B1E21) for text, rules and primary marks, slate (#555B61) and faint (#61666C) for secondary text and captions, hairlines (#DBD8CF, #B5B1A5), and malachite (#1F5C4D) as the single emphasised mark and for links. Hematite (#9A3324) means declines, controls or ended status; ochre (#9A6A12) marks designations and cautions and is never used for small text. Colour carries meaning or nothing: no gradients, tinted cards or drop shadows. Data series may add the accessible categorical set in the token file, with dash patterns distinguishing series.
+- **Spectral is the editorial display face and Archivo is the working face.** Spectral (weights 300, 400, 500) sets publication and presentation covers, section dividers, large editorial statements (one governing sentence) and memo and report titles. Archivo sets analytical slide titles, reading text, tables, chart labels, source footers, labels and dense financial content. Never set paragraphs, tables, chart labels, source footers or analytical slide titles in Spectral.
+- No silent font substitution. A missing Spectral or Archivo fails the build loudly. PowerPoint cannot embed fonts, so the PDF export is the canonical, font-embedded form of every deck; PPTX is the editable companion. Embed both families in every new PDF and verify with `pdffonts`. Arial, Liberation Sans, Georgia and Times are not accepted fallbacks.
 - JetBrains Mono is reserved for actual source identifiers, machine-readable codes, literal URLs and programming notation. Use Archivo with tabular numerals for dates, numerical KPIs, financial tables, navigation labels, and provenance captions.
 - Dense tables and two-column analytical prose are welcome when the information warrants them. Use full-width figures for comparisons requiring greater space. Preserve readable type at page and mobile-view size.
-- Apply restrained running headers, page numbers, section numbering, gold rules, exhibit numbers, and documentary captions. Avoid marketing decks, dramatic isolated fragments, decorative oversized whitespace, and arbitrary visual clutter.
+- Apply restrained running headers, page numbers, section numbering, hairline rules, exhibit numbers, and documentary captions. Labels are sentence case and medium weight, never tracked all-caps. Avoid marketing decks, dramatic isolated fragments, decorative oversized whitespace, and arbitrary visual clutter.
 
 ## Public research categories
 
@@ -55,11 +57,11 @@ This is an editorial grouping, not a change in method. Legal-status research, fo
 
 ## Editorial release gate for public research pages
 
-**Every PR changing `app/research/page.tsx` or `app/research/<slug>/page.tsx` must pass the editorial gate in GitHub CI.** This is a publication review in addition to data validation, typechecking, linting, tests, and build. The check is scoped to public research pages for now; PDF, memo, slide, and other website publication workflows still require an explicit editorial review under this guide.
+**Every PR changing the research content of `app/research/page.tsx` or `app/research/<slug>/page.tsx` must pass the editorial gate in GitHub CI.** This is a publication review in addition to data validation, typechecking, linting, tests, and build. The check is scoped to public research pages for now; PDF, memo, slide, and other website publication workflows still require an explicit editorial review under this guide.
 
 1. **Run the screening:** `npm run editorial:check` in CI (with `EDITORIAL_BASE_SHA` set to the PR's merge base with `main`) checks newly edited JSX paragraphs/headings for rhetorical negations, artificial contrasts, process narration, and empty claims of significance. It specifically catches semicolon-led language such as “; it does not” and contrast-led omissions such as “but offers no explanation.” Warnings are actionable errors until fixed or justified.
 2. **Read the entire candidate as published:** Before signoff, read all article copy including metadata and tables, then inspect the rendered page at both desktop and mobile widths. Check link spacing, captions, table overflow, publication dates, opening, conclusion, source links and factual/legal/financial status boundaries. A passing code build or a Vercel deployment status is not evidence of a visual read.
-3. **Add a fresh review record:** Create or update `docs/editorial/reviews/<slug>.json` (or `research-index.json` for the index) **in the same PR** using `docs/editorial/REVIEW_TEMPLATE.json` as the schema. Generate the full-source hash after the final article edit with `npm run editorial:check -- --hash app/research/<slug>/page.tsx`. The CI check verifies that the record was changed in the PR and matches the exact current article source; even changes to linked source records, tables or metadata invalidate a prior signoff.
+3. **Add a fresh review record:** Create or update `docs/editorial/reviews/<slug>.json` (or `research-index.json` for the index) **in the same PR** using `docs/editorial/REVIEW_TEMPLATE.json` as the schema. Generate the content fingerprint after the final article edit with `npm run editorial:check -- --hash app/research/<slug>/page.tsx` and record it as `contentSha256`. The fingerprint covers the page's research content: visible text, metadata, tables and data arrays, numbers, links, image sources and alt text, and the page's own logic. Any change to those invalidates a prior signoff, and the CI check then requires a record changed in the same PR. Class names, inline styles, element and component names, wrapper elements, layout props and imports used only for markup are outside the fingerprint, so a layout, typography or styling change keeps the existing signoff and needs no new record. Earlier records that carry an exact-source `pageSha256` remain valid while the file is byte-identical.
 4. **Document judgment, not mechanical censorship:** A legally necessary negation or distinction may be retained by specifying the rule ID, a concrete excerpt from that paragraph, and a substantive reason in the record's `exceptions` array. A generic exception, blanket waiver or rewritten phrasing with an obsolete review hash fails.
 5. **Only record completed work:** `reviewer` must identify the actual human reader, `reviewDate` must be real, and each of `readAllCopy`, `desktopPreview`, `mobilePreview` and `sourceLinksAndFacts` must have `verified: true` and specific notes. An assistant/agent may draft the review record or perform a preliminary audit but must leave unchecked fields false and identify outstanding human inspection. Never certify a review on another person's behalf.
 
@@ -67,7 +69,7 @@ This is an editorial grouping, not a change in method. Legal-status research, fo
 
 ## Sources and link treatment
 
-- Primary-source hyperlinks must be **real, visible, underlined links**, using bold and a sufficiently dark accent on cream/paper. Do not rely on color alone.
+- Primary-source hyperlinks must be **real, visible, underlined links**, set in malachite (7.1:1 on plaster) and medium or bold weight. Do not rely on color alone.
 - The dossier should provide source URLs or fully resolved bibliography hyperlinks; figures should retain nearby original-source IDs or concrete source notes.
 - PDFs require tested link annotations. The web research article should use a clearly underlined evidence-links treatment with adequate contrast.
 - The LinkedIn edition should offer a clear route to the full publication and its evidence workbook.
@@ -76,7 +78,7 @@ This is an editorial grouping, not a change in method. Legal-status research, fo
 
 **LinkedIn research edition:** Eight pages, portrait 4:5, with a cover, jurisdictional mechanisms, finance, chronology, project comparison, industrial support, evidence matrix, and research-access page. Favor digestible tables and compact two-column analysis; retain sufficient phone-size legibility.
 
-**Executive memo:** Two letter-size pages, strong central findings, evidence table, and full report link.
+**Executive memo:** Two letter-size pages, strong central findings, evidence table, and full report link. Spectral title, a hairline rule, Archivo body at 0.9 in margins; generated by `scripts/publication/memo.py`.
 
 **Long-form dossier:** Letter-size, two-column research prose, typically 9.5–10.5 pt body with 14–15 pt leading, full-width complex tables/figures, an appendix with source register and methods. Let length be determined by editorial content rather than a target page count.
 

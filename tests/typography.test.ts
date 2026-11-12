@@ -4,10 +4,14 @@ import { readFileSync } from "node:fs";
 
 const read = (path: string) => readFileSync(path, "utf8");
 
-test("Archivo is the default typeface for all site contexts", () => {
+test("Archivo is the default typeface; Spectral is confined to the editorial title scale", () => {
   const layout = read("app/layout.tsx");
   const css = read("app/globals.css");
-  assert.match(layout, /import \{ Archivo, JetBrains_Mono \} from "next\/font\/google"/);
+  assert.match(layout, /import \{ Archivo, JetBrains_Mono, Spectral \} from "next\/font\/google"/);
+  // Spectral is reachable only through the editorial token; the body, sans, display and legacy serif tokens
+  // all stay on Archivo.
+  assert.match(css, /--font-editorial: var\(--font-spectral\)/);
+  assert.equal((css.match(/var\(--font-spectral\)/g) ?? []).length, 1, "only --font-editorial names Spectral");
   assert.doesNotMatch(layout, /Newsreader|newsreader/);
   assert.match(css, /--font-display: var\(--font-archivo\)/);
   assert.match(css, /--font-sans: var\(--font-archivo\)/);
@@ -43,6 +47,6 @@ test("fixed-width typography remains for technical identifiers and literal URLs"
 
 test("new research publication style names Archivo without modifying existing releases", () => {
   const style = read("docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md");
-  assert.match(style, /Archivo is the SMPT primary typeface/);
+  assert.match(style, /Spectral is the editorial display face and Archivo is the working face/);
   assert.match(style, /Existing publication binaries remain frozen/);
 });

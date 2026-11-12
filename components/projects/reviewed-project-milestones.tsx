@@ -52,10 +52,10 @@ export function ReviewedProjectMilestones({
           return (
             <li key={milestone.id} className="min-w-0">
               <article aria-labelledby={"milestone-"+milestone.id}
-                className="rounded-lg border border-border-strong bg-card p-4 sm:p-5">
+                className="border border-border-strong bg-plate p-4 sm:p-5">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                   <Badge>{milestone.claimMode === "occurred" ? "Issuer-reported event" : "Proposed / planned"}</Badge>
-                  <span className="font-mono text-xs text-faint">{SCOPE_LABELS[milestone.scope]}</span>
+                  <span className="font-display text-xs text-faint">{SCOPE_LABELS[milestone.scope]}</span>
                 </div>
                 <h3 id={"milestone-"+milestone.id}
                   className="mt-3 font-display text-lg font-semibold leading-snug tracking-tight">
@@ -68,7 +68,7 @@ export function ReviewedProjectMilestones({
                 ) : null}
                 <dl className="mt-4 grid gap-x-6 gap-y-3 border-y border-border py-4 text-sm sm:grid-cols-2">
                   <div>
-                    <dt className="font-mono text-[11px] uppercase tracking-wide text-faint">
+                    <dt className="font-display text-xs text-faint">
                       {milestone.claimMode === "occurred" ? "Reported event date" : "Source-stated target date"}
                     </dt>
                     <dd className="mt-1 font-display text-foreground">
@@ -80,14 +80,14 @@ export function ReviewedProjectMilestones({
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[11px] uppercase tracking-wide text-faint">Original source published</dt>
+                    <dt className="font-display text-xs text-faint">Original source published</dt>
                     <dd className="mt-1 font-display text-foreground">
                       {source.datePublished ? <time dateTime={source.datePublished}>{formatDate(source.datePublished)}</time> : "Date not stated"}
                     </dd>
                   </div>
                   <div className="sm:col-span-2">
-                    <dt className="font-mono text-[11px] uppercase tracking-wide text-faint">Original publisher statement</dt>
-                    <dd className="mt-2 border-l-2 border-border-strong pl-3 font-display leading-7 text-foreground/90">
+                    <dt className="font-display text-xs text-faint">Original publisher statement</dt>
+                    <dd className="mt-2 border-l-2 border-border-strong pl-3 font-display leading-7 text-foreground">
                       <blockquote>{milestone.statementOriginal}</blockquote>
                       {milestone.statementEnSource !== "na" ? (
                         <p className="mt-2 text-sm text-muted">

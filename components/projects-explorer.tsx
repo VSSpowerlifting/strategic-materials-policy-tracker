@@ -99,22 +99,25 @@ export function ProjectsExplorer({rows, materialNames}:{
       <FilterSelect id="projects-relationship" label="Evidence relationship" value={relationship} onChange={setRelationship} options={options.relationship}/>
     </div>
     <div className="mt-4 flex flex-wrap items-center gap-3">
-      <p className="font-mono text-xs text-muted" role="status" aria-live="polite">
+      <p className="font-display text-xs text-muted" role="status" aria-live="polite">
         <span data-testid="project-result-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered projects
       </p>
-      {active?<button type="button" onClick={reset} className="font-mono text-xs text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
+      {active?<button type="button" onClick={reset} className="font-display text-xs text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
     </div>
-    <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
-      One result is one registered project. Direct financing, shared unallocated associations and designations are
-      separate evidence relationships, not additive capital or proof of construction. Missing records do not prove inactivity.
-      Government commitment means a directly linked, non-ended commitment evidenced as of the corpus date.
-    </p>
+    <details className="mt-1 max-w-4xl text-xs leading-5 text-faint">
+      <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden"><span className="link-quiet">What a result shows</span></summary>
+      <p className="pb-2">
+        One result is one registered project. Direct financing, shared unallocated associations and designations are
+        separate evidence relationships, not additive capital or proof of construction. A project with no entry may
+        still be active. Government commitment means a directly linked, non-ended commitment evidenced as of the corpus date.
+      </p>
+    </details>
     <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
       {visible.map(p=><div key={p.id} data-testid="project-record" data-site-motion="card" className="min-w-0">\n        <Card className="flex h-full min-w-0 flex-col p-4">
         <div className="flex flex-wrap items-center gap-2">
           {p.governmentCommitmentProviders.map(code=><JurisdictionTag key={code} code={code}/>)}
           {p.countryCodes.length?p.countryCodes.map(code=><span key={code} className="font-display text-xs text-muted">{countryNames[code]??code}</span>):
-            <span className="font-mono text-[11px] text-faint">Country not stated</span>}
+            <span className="font-display text-xs text-faint">Country not stated</span>}
         </div>
         <Link href={`/projects/${p.id}`} className="mt-2 font-display text-base font-semibold leading-snug hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">{p.name}</Link>
         <div className="mt-1 text-sm text-muted">
@@ -124,10 +127,10 @@ export function ProjectsExplorer({rows, materialNames}:{
         </div>
         <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
           {p.stages.length?p.stages.map(s=><Badge key={s}>{supplyChainStageLabels[s]}</Badge>):
-            <span className="font-mono text-[11px] text-faint">Stage not stated</span>}
+            <span className="font-display text-xs text-faint">Stage not stated</span>}
           {p.materialIds.length?p.materialIds.map(id=><span key={id} className="font-display text-xs text-muted">{materialNames[id]??id}</span>):
-            <span className="font-mono text-[11px] text-faint">Material not stated</span>}
-          {p.untrackedMaterialsAsStated.map((s,i)=><span key={i} className="font-mono text-[11px] text-faint">{s}</span>)}
+            <span className="font-display text-xs text-faint">Material not stated</span>}
+          {p.untrackedMaterialsAsStated.map((s,i)=><span key={i} className="font-display text-xs text-faint">{s}</span>)}
         </div>
         <p className="mt-auto pt-3 font-display text-xs leading-5 text-faint">
           {p.directFinanceIds.length} directly linked financial row{p.directFinanceIds.length===1?"":"s"}

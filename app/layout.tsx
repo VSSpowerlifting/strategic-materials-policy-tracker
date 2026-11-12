@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono, Spectral } from "next/font/google";
 import "./globals.css";
 import { SkipLink } from "@/components/skip-link";
 import { SiteHeader } from "@/components/site-header";
@@ -12,6 +12,15 @@ const archivo = Archivo({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-archivo",
+  display: "swap",
+});
+
+// Editorial serif for titles, standfirsts and large figures. Archivo stays the reading and interface face.
+const spectral = Spectral({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-spectral",
   display: "swap",
 });
 
@@ -36,7 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${archivo.variable} ${spectral.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col antialiased">
         <SkipLink />

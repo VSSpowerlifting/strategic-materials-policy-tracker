@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { FINANCIAL_STATUS_TONE, IMPLEMENTATION_STATUS_TONE, controlStatusTextClass } from "./status-tone";
 import { ExtLink } from "@/components/ui/ext-link";
 import {
   CONTROL_STATUS_HUES,
@@ -30,24 +31,20 @@ import type {
   ValueRole,
 } from "@/lib/types";
 
-// Verdigris emphasis only where money has legally changed hands or a clause
-// binds today; every other stage is a quiet label.
-const FINANCIAL_EMPHASIS = new Set<FinancialStatus>(["contracted", "partially_disbursed", "disbursed"]);
-
 export function FinancialStatusBadge({ status }: { status: FinancialStatus }) {
-  return <Badge accent={FINANCIAL_EMPHASIS.has(status)}>{financialStatusLabels[status]}</Badge>;
+  return <Badge tone={FINANCIAL_STATUS_TONE[status]}>{financialStatusLabels[status]}</Badge>;
 }
 
 export function ImplementationStatusBadge({ status }: { status: ImplementationStatus }) {
-  return <Badge>{implementationStatusLabels[status]}</Badge>;
+  return <Badge tone={IMPLEMENTATION_STATUS_TONE[status] ?? "neutral"}>{implementationStatusLabels[status]}</Badge>;
 }
 
 /** Control status: a squared hue marker (the chart's legend) plus the label. */
 export function ControlStatusBadge({ status }: { status: ControlStatus }) {
   return (
-    <span className="inline-flex items-center gap-1.5 font-display text-[11px] leading-none text-muted">
-      <span aria-hidden className="h-3 w-[5px] shrink-0 rounded-[1px]" style={{ background: CONTROL_STATUS_HUES[status] }} />
-      <span className={status === "in_force" ? "text-accent" : undefined}>{controlStatusLabels[status]}</span>
+    <span className="inline-flex items-center gap-1.5 font-display text-xs leading-none">
+      <span aria-hidden className="h-3 w-[5px] shrink-0" style={{ background: CONTROL_STATUS_HUES[status] }} />
+      <span className={controlStatusTextClass(status)}>{controlStatusLabels[status]}</span>
     </span>
   );
 }
@@ -99,16 +96,16 @@ export function AmountDetail({ amount }: { amount: MonetaryAmount }) {
     <div>
       <AmountFigure amount={amount} size="lg" />
       <p className="mt-2 text-sm leading-6 text-muted">
-        <span className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">As stated </span>
+        <span className="font-display text-xs text-faint">As stated </span>
         “{amount.amountAsStated}”
       </p>
-      <p className="mt-1 font-display text-[11px] text-faint">
+      <p className="mt-1 font-display text-xs text-faint">
         {amount.currency} {groupDecimal(amount.value)} · {valueQualifierLabels[amount.qualifier]} · Currency{" "}
         {currencyBasisLabels[amount.currencyBasis].toLowerCase()}
       </p>
       {amount.basisNote ? (
         <p className="mt-2 text-sm leading-6 text-muted">
-          <span className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">Amount basis </span>
+          <span className="font-display text-xs text-faint">Amount basis </span>
           {amount.basisNote}
         </p>
       ) : null}
@@ -159,16 +156,16 @@ export function StatusTrail<S extends string>({
           <li key={i} className="relative border-l border-border pb-5 pl-6 last:border-l-transparent last:pb-0">
             <span
               aria-hidden
-              className={`absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-[2px] border-2 border-background ${current ? "bg-accent" : scheduled ? "bg-background border-border-strong" : "bg-border-strong"}`}
+              className={`absolute -left-[5px] top-1 h-2.5 w-2.5 border-2 border-background ${current ? "bg-accent" : scheduled ? "bg-background border-border-strong" : "bg-border-strong"}`}
             />
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <time className="tnum font-display text-xs text-faint">{e.date ? formatDate(e.date) : "Date not stated"}</time>
               {render(e.status)}
               {e.until ? (
-                <span className="font-display text-[11px] text-muted">until {formatDate(e.until)}</span>
+                <span className="font-display text-xs text-muted">until {formatDate(e.until)}</span>
               ) : null}
-              {current ? <span className="font-display text-[10px] uppercase tracking-[0.14em] text-accent">current</span> : null}
-              {scheduled ? <span className="font-display text-[10px] uppercase tracking-[0.14em] text-muted">scheduled, not yet in effect</span> : null}
+              {current ? <span className="font-display text-xs font-medium text-accent">Current</span> : null}
+              {scheduled ? <span className="font-display text-xs text-muted">Scheduled, not yet in effect</span> : null}
             </div>
             {e.note ? <p lang={/[\u3400-\u9fff]/.test(e.note) ? "zh" : undefined} className="mt-1 max-w-prose text-sm leading-6 text-muted">{e.note}</p> : null}
             <p className="mt-1">
@@ -212,7 +209,7 @@ export function EvidenceTable<F extends string>({
           const s = getSourceById(e.sourceId);
           return (
             <li key={i} data-testid="evidence-mobile-card"
-              className="min-w-0 rounded-lg border border-border-strong bg-card p-4">
+              className="min-w-0 border border-border bg-plate p-4">
               <p className="font-display text-base font-semibold leading-6 [overflow-wrap:anywhere]">
                 {s ? <ExtLink href={s.url}>{s.title}</ExtLink> : e.sourceId}
               </p>
@@ -237,18 +234,18 @@ export function EvidenceTable<F extends string>({
               </dl>
               {s ? <Link href={"/sources/"+s.id}
                 className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
-                View source dossier →
+                View source dossier
               </Link> : null}
             </li>
           );
         })}
       </ol>
       {/* Wide view: retain an accessible native table and horizontal scrolling when needed. */}
-      <div className="hidden overflow-x-auto rounded-lg border border-border-strong sm:block">
+      <div className="hidden overflow-x-auto border-y border-border-strong sm:block">
         <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
           <caption className="sr-only">Original sources, the fields each supports, evidence level and precise document location</caption>
           <thead>
-            <tr className="border-b border-border-strong bg-card font-display text-xs font-semibold text-muted">
+            <tr className="border-b border-border-strong bg-elevated font-display text-xs font-medium text-faint">
               <th scope="col" className="px-4 py-3">Source</th>
               <th scope="col" className="px-4 py-3">Fields supported</th>
               <th scope="col" className="px-4 py-3">Evidence level</th>
@@ -382,13 +379,13 @@ export function OptionLadder({
     },
   ];
   return (
-    <ol className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
+    <ol className="grid gap-px overflow-hidden border bg-border sm:grid-cols-3">
       {steps.map((s, i) => (
-        <li key={s.label} className="bg-card px-4 py-3">
-          <p className="flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.12em]">
+        <li key={s.label} className="bg-plate px-4 py-3">
+          <p className="flex items-center gap-2 font-display text-xs">
             <span
               aria-hidden
-              className={`inline-flex h-4 w-4 items-center justify-center rounded-sm border text-[10px] ${s.done ? "border-accent text-accent" : "border-border-strong text-faint"}`}
+              className={`inline-flex h-4 w-4 items-center justify-center border text-xs ${s.done ? "border-accent text-accent" : "border-border-strong text-faint"}`}
             >
               {s.done ? "✓" : i + 1}
             </span>

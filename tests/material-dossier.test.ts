@@ -432,7 +432,7 @@ test("designation cards: one per designation, headed by the project, at the desi
   const hemerdon = cards.filter(({ d }) => d.projectId === "prj-gb-hemerdon");
   assert.deepEqual(hemerdon.map((c) => c.stage), ["mining"], "at mining only, not at processing");
   assert.equal(hemerdon[0].d.heading, "Hemerdon tungsten and tin mine");
-  assert.equal(hemerdon[0].d.registry.stageNote, "Project record codes: mining, processing. Not placed here; this designation names mining only.");
+  assert.equal(hemerdon[0].d.registry.stageNote, "Project entry codes: mining, processing. Not placed here; this designation names mining only.");
   // Tin is on the project record; the designation itself names no untracked material.
   assert.deepEqual(hemerdon[0].d.untracked, []);
   assert.deepEqual(hemerdon[0].d.registry.untracked, ["tin"]);
@@ -501,7 +501,7 @@ test("tungsten: 19 events, 9 with no child row, and the legal-basis events are s
 
 test("the lede names the oldest and latest event and claims coding, not attribution", () => {
   const p = dossier("tungsten");
-  assert.equal(p.lede, "Records coded to Tungsten, from Final List of Critical Minerals 2018 (18 May 2018) to the latest event on 9 Oct 2026.");
+  assert.equal(p.lede, "Policy actions, financing and projects coded to Tungsten, from Final List of Critical Minerals 2018 (18 May 2018) to the latest event on 9 Oct 2026.");
   assert.ok(!p.lede.includes("every record whose source names"));
 });
 

@@ -31,7 +31,7 @@ try{
   await start.click();
   await page.waitForURL(/\/programmes\/prg-ca-cms#research-pathway$/);
   assert.equal(await page.getByTestId("programme-finance-path").count(),7);
-  assert.ok((await page.getByTestId("programme-research-pathway").innerText()).includes("identical record, not additional funding"));
+  assert.ok((await page.getByTestId("programme-research-pathway").innerText()).includes("same instrument, not additional funding"));
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
   assert.equal(overflow,false,"horizontal overflow at "+viewport.width);
   await page.close();

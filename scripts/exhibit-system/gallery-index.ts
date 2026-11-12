@@ -86,7 +86,7 @@ ${fs.readFileSync(path.join(REPO, "scripts/exhibit-system/gallery.css"), "utf8")
 </style>
 </head>
 <body>
-<div class="masthead">SMPT / PRESENTATION LIBRARY</div>
+<div class="masthead">SMPT / Presentation library</div>
 <main>
 <p class="banner"><strong>Development reference — not for publication.</strong> All figures and entities are synthetic demonstration data.</p>
 <h1>Exhibit pattern gallery</h1>

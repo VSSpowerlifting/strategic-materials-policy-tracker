@@ -92,8 +92,8 @@ export const stageLadder: Renderer<StageLadderData> = {
       const y = base - hh;
       const reached = s.date !== undefined;
       const current = reached && i === reachedCount - 1;
-      const ink = current ? C.white : C.ink;
-      const sub = current ? C.white : C.muted;
+      const ink = current ? C.plate : C.ink;
+      const sub = current ? C.plate : C.muted;
       h.shape(`step-${i}`, "data", h.shapes.rect, reached
         ? { x, y, w: colW, h: hh, fill: { color: current ? C.accent : C.neutralLight }, line: { color: current ? C.accent : C.neutralDark, width: 0.75 } }
         : { x, y, w: colW, h: hh, fill: { color: C.paper }, line: { color: C.neutralDark, width: 1.25, dashType: "dash" } });
