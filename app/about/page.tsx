@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const evidence = [
   { href: "/methodology", label: "Methodology", note: "Definitions, counting rules and what each status means." },
   { href: "/sources", label: "Sources", note: "The register of official documents, filings and disclosures." },
-  { href: "/coverage", label: "Coverage", note: "What the record includes, and what it leaves out." },
+  { href: "/coverage", label: "Coverage", note: "What SMPT covers, and what it leaves out." },
   { href: "/data", label: "Data and API", note: "Downloads in JSON and CSV, with the public endpoints." },
 ] as const;
 
@@ -62,7 +62,7 @@ export default function AboutPage() {
           ))}
         </ul>
         <p className="mt-4 font-display text-sm text-faint">
-          Record revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>.
+          Last revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>.
         </p>
       </section>
 

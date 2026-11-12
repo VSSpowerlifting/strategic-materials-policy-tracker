@@ -108,7 +108,7 @@ export default async function EventPage({
       />
 
       <RecordTitleBlock
-        breadcrumbs={[{ href: "/events", label: "Government action" }, { label: event.titleEn }]}
+        breadcrumbs={[{ href: "/events", label: "Policy actions" }, { label: event.titleEn }]}
         title={event.titleEn}
         subtitle={
           showOriginalTitle ? (
@@ -139,7 +139,7 @@ export default async function EventPage({
         <SaveEventButton eventId={event.id} />
       </RecordTitleBlock>
 
-      <RecordFacts label="Record facts" flush>
+      <RecordFacts label="Key facts" flush>
         <RecordFact label="Jurisdiction">
           {jurisdiction ? (
             <Link href={actorHref} className="link-quiet">

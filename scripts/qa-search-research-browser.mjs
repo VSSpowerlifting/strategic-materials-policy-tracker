@@ -21,7 +21,7 @@ try{
  }
  assert.ok(ready,"search QA server never became ready: "+logs);
  const html=await (await fetch(origin+"/search")).text();
- assert.ok(html.includes("Browse the published record"),"Browse cards should be server-rendered");
+ assert.ok(html.includes("Browse by type"),"Browse cards should be server-rendered");
  assert.ok(html.includes("Search the corpus"),"Search route must have a real h1");
  browser=await chromium.launch({headless:true});
  for(const viewport of [{width:320,height:720},{width:375,height:812},

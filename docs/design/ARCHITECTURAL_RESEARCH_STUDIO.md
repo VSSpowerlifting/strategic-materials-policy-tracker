@@ -85,9 +85,18 @@ once. Hover changes colour or underline only. Everything is disabled under `pref
 Follow `AGENTS.md` (website editorial standard) and the research house style. A visible sentence states a
 fact, clarifies a distinction, or helps the reader move. Cut introductions that restate the title, interface
 self-description and repeated method notes; keep every qualifier, status distinction, unit, date and source.
-Buttons say what happens. Navigation: Research, Explore, Markets, About; the record journeys (Government
-action, Public capital, Projects, Compare) sit under Explore and Evidence sits under About, all at their
+Buttons say what happens. Navigation: Research, Explore, Markets, About; the journeys (Policy actions,
+Financing, Industrial projects, Compare) sit under Explore and Evidence sits under About, all at their
 existing URLs.
+
+"Records" is not a user-facing label. Name the thing: policy actions, financing, industrial projects,
+organizations, sources, related activity, view details. Internal names (components, test ids, anchors, schema
+and API fields) keep "record".
+
+Progressive disclosure: show the fact a reader scans for (name, status, date, licence) and put rules, caveats
+and provenance in a native `<details>` directly beneath it. Say a shared rule once above a list instead of in
+every entry. `Section` does this for long descriptions (first sentence, then "Reading notes"). Never drop an
+attribution, licence notice, status distinction or caveat to save space.
 
 ## Status and remaining work (11 November 2026)
 
@@ -117,8 +126,8 @@ Not yet converted, or converted only in colour:
   unit-tested only, because no stored series has an interior gap. On a phone the chart starts just below the
   first screen. A "High" annotation can sit on the base point of a falling indexed series. The latest-values
   table no longer links each row to the policy record; the material link remains under benchmark
-  specifications. The coverage-gaps introduction is read from the market data file and uses file paths; the
-  data file was left untouched and needs the maintainer's edit.
+  specifications. The price-coverage introduction is written on the page; the `note` in
+  `data/markets/coverage-gaps.json` still uses file paths and is no longer displayed.
 - Capital-flow exhibit: three classification and wording calls await the maintainer (the NdPr price floor is
   drawn as contingent, not commercial; an executed option reads "no exercise recorded"; lapsed financing reads
   "Lapsed <date>. Not in force."). Reduced-motion, no-JavaScript and real-touch behaviour were not tested.

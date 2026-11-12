@@ -80,7 +80,7 @@ export default function CapitalPage() {
       <ResearchReadingKey topic="capital" />
 
       <p className="tnum mt-6 font-display text-sm text-muted">
-        {all.length} financial records · {events} events · {actors} providing governments ·{" "}
+        {all.length} financing instruments · {events} events · {actors} providing governments ·{" "}
         {new Set(all.map((c) => c.instrument)).size} instrument types
       </p>
 
@@ -88,7 +88,7 @@ export default function CapitalPage() {
         className="mt-8 border-y border-border py-4"
         items={[
           { href: "#commitments", label: "Public commitments" },
-          { href: "#records", label: "All financial records" },
+          { href: "#records", label: "All financing" },
           { href: "#stages", label: "By production stage" },
           { href: "#separate", label: "Listed separately" },
         ]}
@@ -162,7 +162,7 @@ export default function CapitalPage() {
                   <details className="group mt-3 border-t pt-2">
                     <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 font-display text-sm text-accent hover:text-accent-strong">
                       <span aria-hidden className="inline-block transition-transform group-open:rotate-90 motion-reduce:transition-none">›</span>
-                      {counted.length} counted {counted.length === 1 ? "record" : "records"}
+                      {counted.length} counted {counted.length === 1 ? "instrument" : "instruments"}
                     </summary>
                   <ul className="mt-2 space-y-2">
                     {counted.map((c) => {
@@ -275,7 +275,7 @@ export default function CapitalPage() {
           </div>
         </Section>
 
-        <Section id="records" title="All financial records">
+        <Section id="records" title="All financing">
           <CapitalExplorer rows={summaries} materialNames={materialNames} />
           <p className="mt-4 font-display text-sm text-muted">
             Download:{" "}

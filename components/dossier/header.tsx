@@ -5,7 +5,7 @@ import type { DossierPayload } from "@/lib/material-dossier";
 export function DossierHeader({ payload }: { payload: DossierPayload }) {
   const sections = [
     { href: "#supply-chain", label: "Supply chain" },
-    { href: "#records", label: "Records by stage" },
+    { href: "#records", label: "Activity by stage" },
     { href: "#capital-controls", label: "Capital and controls" },
     { href: "#timeline", label: "Timeline" },
     { href: "#events", label: "Events" },
@@ -43,7 +43,7 @@ export function DossierHeader({ payload }: { payload: DossierPayload }) {
       </div>
       <p className="mt-4 max-w-3xl text-pretty text-lg leading-8 text-foreground">{payload.lede}</p>
       <p className="mt-2 font-display text-xs text-faint">
-        Record as of <time dateTime={payload.asOf}>{formatDate(payload.asOf)}</time>. Counts are records of one kind at a time and are never added together.
+        As of <time dateTime={payload.asOf}>{formatDate(payload.asOf)}</time>. Each count covers one kind and counts are never added together.
       </p>
       {payload.groupNote ? (
         <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">

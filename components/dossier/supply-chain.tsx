@@ -292,7 +292,7 @@ export function RecordsByStage({ payload }: { payload: DossierPayload }) {
   const hasUnstaged = payload.unstaged.capital.length + payload.unstaged.controls.length + payload.unstaged.designations.length > 0;
   return (
     <section id="records" className="scroll-mt-24">
-      <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Records by stage</h2>
+      <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Activity by stage</h2>
       {/* Phones: one column of stages, so a row of jump links; each targets the stage's one id. */}
       <nav aria-label="Jump to a stage" className="mt-4 flex flex-wrap gap-2 lg:hidden">
         {payload.stages.map((st) => (

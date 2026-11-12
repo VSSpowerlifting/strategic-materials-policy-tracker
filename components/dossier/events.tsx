@@ -16,7 +16,7 @@ function childLine(children: EventRow["children"]): string | null {
     children.controls ? countWord(children.controls, "control clause", "control clauses") : null,
     children.designations ? countWord(children.designations, "designation", "designations") : null,
   ].filter(Boolean);
-  return parts.length ? `Records under this event: ${parts.join(", ")}.` : null;
+  return parts.length ? `Under this event: ${parts.join(", ")}.` : null;
 }
 
 export function EventsSection({ payload }: { payload: DossierPayload }) {

@@ -14,7 +14,7 @@ import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Critical minerals policy, financing and industrial development",
   description:
-    "Original research and source-linked records on export controls, public financing and industrial projects in strategic-material supply chains.",
+    "Original research and source-linked data on export controls, public financing and industrial projects in strategic-material supply chains.",
   openGraph: {
     type: "website",
     url: site.url,
@@ -90,19 +90,19 @@ export default function Home() {
             Research on critical-minerals policy, public finance and industrial projects
           </h1>
           <p className="standfirst mt-7 max-w-2xl">
-            Original analysis built on a source-linked record of export controls, government financing and
+            Original analysis built on a source-linked database of export controls, government financing and
             project milestones, from the official document to its current status.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link href="/research" className="research-button">Read research</Link>
-            <Link href="/explore" className="research-button-secondary">Explore records</Link>
+            <Link href="/explore" className="research-button-secondary">Explore the data</Link>
           </div>
           <p className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-1 font-display text-sm text-muted">
             <span>
               By <Link href="/about" className="link-quiet text-foreground">Benjamin Yang</Link>
             </span>
             <span>
-              Record revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>
+              Last revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>
             </span>
           </p>
         </div>
@@ -160,9 +160,9 @@ export default function Home() {
       <section id="tools" aria-labelledby="tools-heading" className="border-t border-border-strong">
         <Container width="wide" className="py-14 sm:py-20">
           <div className="title-block max-w-2xl">
-            <h2 id="tools-heading" className="display-2 text-foreground">Explore the record</h2>
+            <h2 id="tools-heading" className="display-2 text-foreground">Explore</h2>
             <p className="mt-4 font-display text-[0.9375rem] leading-7 text-muted">
-              Every record links to the official document it comes from. Amounts stay in their original currency.
+              Policy actions, financing and industrial projects each link to the official document they come from. Amounts stay in their original currency.
             </p>
           </div>
 
@@ -202,7 +202,7 @@ export default function Home() {
           </div>
 
           <div id="examples" className="mt-14">
-            <h3 className="font-display text-base font-semibold">From the records</h3>
+            <h3 className="font-display text-base font-semibold">Examples</h3>
             <ScrollReveal kind="cards" className="mt-5 grid gap-x-10 gap-y-8 md:grid-cols-3">
               {legal ? (
                 <article

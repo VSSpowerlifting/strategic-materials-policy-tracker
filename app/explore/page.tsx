@@ -11,13 +11,13 @@ import {
 import { exploreJourneys } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Explore the record",
+  title: "Explore",
   description:
     "Browse government measures, public financing, industrial projects, organizations and materials, each linked to its primary source.",
 };
 
 /**
- * Entry to the record. Five collections, each with the number of records it holds, then every other view
+ * Entry to the data. Five collections, each with the number of entries it holds, then every other view
  * grouped by the journey it belongs to. Counts are record counts from the public loaders; nothing here sums
  * or compares money.
  */
@@ -26,21 +26,21 @@ export default function ExplorePage() {
   const collections = [
     {
       href: "/events",
-      label: "Government action",
+      label: "Policy actions",
       count: getAllEvents().length,
-      unit: "events",
+      unit: "actions",
       note: "Export controls, laws, funding decisions and official statements, with legal status by date.",
     },
     {
       href: "/capital",
-      label: "Public capital",
+      label: "Financing",
       count: getAllFinancialCommitments().length,
       unit: "commitments",
       note: "Grants, loans, equity and guarantees, each dated from announcement through contract to disbursement.",
     },
     {
       href: "/projects",
-      label: "Projects",
+      label: "Industrial projects",
       count: getAllProjects().length,
       unit: "projects",
       note: "Mines, refineries and plants, with their financing and reported milestones.",
@@ -50,7 +50,7 @@ export default function ExplorePage() {
       label: "Organizations",
       count: getAllOrganizations().length,
       unit: "organizations",
-      note: "Companies, public financiers and agencies named in the capital and project records.",
+      note: "Companies, public financiers and agencies named in financing and industrial projects.",
     },
     {
       href: "/materials",
@@ -64,12 +64,12 @@ export default function ExplorePage() {
   return (
     <Container width="wide" className="py-12 sm:py-20">
       <PageHeading
-        title="Explore the record"
-        lead="Every record links to the official document it comes from. Amounts stay in their original currency."
+        title="Explore"
+        lead="Policy actions, financing and industrial projects each link to the official document they come from. Amounts stay in their original currency."
       />
 
       <form action="/search" method="get" role="search" className="mx-auto mt-10 flex max-w-2xl gap-3">
-        <label htmlFor="explore-q" className="sr-only">Search the record</label>
+        <label htmlFor="explore-q" className="sr-only">Search SMPT</label>
         <input
           id="explore-q"
           name="q"

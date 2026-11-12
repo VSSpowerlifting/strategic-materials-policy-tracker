@@ -64,7 +64,7 @@ test("source cards keep exact primary document href and dossier href while promo
  assert.match(source,/Open original document/);
  assert.match(source,/source\.url/);
  assert.match(source,/href=\{\`\/sources\/\$\{source\.id\}\`\}/);
- assert.match(source,/View citing records/);
+ assert.match(source,/View citations/);
  assert.match(source,/max-w-prose text-\[0\.9375rem\] leading-7/);
 });
 

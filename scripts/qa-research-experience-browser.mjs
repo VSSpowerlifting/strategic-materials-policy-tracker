@@ -142,12 +142,12 @@ try {
     assert.match(await evidence.innerText(), /6 commitments, 1 control clause, 1 designation/);
     await page.locator(".skip-link").focus(); await page.keyboard.press("Enter");
     assert.ok(page.url().endsWith("#gallium:processing"));
-    await analytical.getByLabel("Records", { exact: true }).selectOption("commitments,controls");
+    await analytical.getByLabel("Show", { exact: true }).selectOption("commitments,controls");
     assert.match(await evidence.innerText(), /6 commitments, 1 control clause/);
     assert.doesNotMatch(await evidence.innerText(), /1 designation/);
     await page.reload({ waitUntil: "networkidle" });
-    assert.equal(await analytical.getByLabel("Records", { exact: true }).inputValue(), "commitments,controls");
-    await analytical.getByLabel("Records", { exact: true }).selectOption("all");
+    assert.equal(await analytical.getByLabel("Show", { exact: true }).inputValue(), "commitments,controls");
+    await analytical.getByLabel("Show", { exact: true }).selectOption("all");
     await analytical.getByLabel("Government", { exact: true }).selectOption("australia");
     assert.match(await evidence.innerText(), /3 commitments/);
     await page.reload({ waitUntil: "networkidle" });
@@ -257,7 +257,7 @@ try {
     await event.click();
     await page.waitForURL("**/events/evt-cn-gage-2023");
     await page
-      .getByRole("heading", { name: "Cite this record", exact: true })
+      .getByRole("heading", { name: "Cite this page", exact: true })
       .waitFor();
     assert.ok(
       await page

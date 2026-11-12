@@ -33,7 +33,7 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
     <figure aria-labelledby="chain-heading" className="m-0">
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
         <h2 id="chain-heading" className="font-display text-base font-semibold">
-          Where the records sit along the supply chain
+          Activity along the supply chain
         </h2>
         <ul className="flex flex-wrap gap-x-5 gap-y-1 font-display text-xs text-muted">
           {KIND_WORDS.map(([kind, , many]) => (
@@ -77,7 +77,7 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
                   {s.label}
                 </p>
                 {empty ? (
-                  <p className="mt-1.5 font-display text-xs text-muted">No records coded</p>
+                  <p className="mt-1.5 font-display text-xs text-muted">None coded</p>
                 ) : (
                   <ul className="mt-1.5 inline-block space-y-1 text-left font-display text-xs leading-4 text-muted">
                     {KIND_WORDS.filter(([kind]) => s[kind] > 0).map(([kind, one, many]) => (
@@ -96,7 +96,7 @@ export function SupplyChainStrip({ chain, outside, asOf }: { chain: StageCounts[
       </div>
 
       <figcaption className="mt-8 max-w-3xl text-sm leading-6 text-muted">
-        Distinct records at each stage across all materials, {asOf}. A record that covers several stages is
+        Distinct commitments, control clauses and designations at each stage across all materials, {asOf}. One that covers several stages is
         counted at each; the three kinds are counted apart and never added. Commitments leave out funding options
         and withdrawn or lapsed rows.
         {outside.length ? (

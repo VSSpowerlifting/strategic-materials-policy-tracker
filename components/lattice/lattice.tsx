@@ -64,8 +64,8 @@ function QueryControls({ model, query, update }: { model: LatticeModel; query: R
         <option value="all">All governments</option>{model.actors.map(a => <option key={a.code} value={a.code}>{a.name}</option>)}
       </select>
     </label>
-    <label htmlFor={id + "kind"} className="flex items-center gap-2 text-muted">Records
-      <select aria-label="Records" id={id + "kind"} value={query.kind} disabled={!!query.issues.length} onChange={e => change("kind", e.target.value)} className="min-h-10 border border-border-strong bg-plate px-2 text-sm text-foreground">
+    <label htmlFor={id + "kind"} className="flex items-center gap-2 text-muted">Show
+      <select aria-label="Show" id={id + "kind"} value={query.kind} disabled={!!query.issues.length} onChange={e => change("kind", e.target.value)} className="min-h-10 border border-border-strong bg-plate px-2 text-sm text-foreground">
         {QUERY_KINDS.map(k => <option key={k} value={k}>{({ all: "All kinds", commitments: "Commitments", controls: "Control clauses", designations: "Designations", "commitments,controls": "Commitments + controls", "commitments,designations": "Commitments + designations", "controls,designations": "Controls + designations", none: "None" })[k]}</option>)}
       </select>
     </label>
@@ -524,7 +524,7 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
       </ul>
     <div className="hidden overflow-x-auto bg-background p-4 sm:p-6 md:block">
       <table className="w-full min-w-[34rem] border-collapse">
-        <caption className="sr-only">Records for this material by government and supply-chain stage, each kind counted on its own</caption>
+        <caption className="sr-only">Commitments, control clauses and designations for this material by government and supply-chain stage, each kind counted on its own</caption>
         <thead>
           <tr>
             <td />

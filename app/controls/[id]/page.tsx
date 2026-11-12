@@ -137,7 +137,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
             </div>
           </Section>
 
-          <Section title="Record">
+          <Section title="Details">
             <div className="border-y border-border-strong">
               <dl>
                 <Fact label="Targeting">
@@ -288,7 +288,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
           ) : null}
           <div className="border-t border-border-strong pt-3 text-sm">
             <h2 className="mb-2 font-display text-xs text-faint">Machine-readable</h2>
-            <a href={`/api/v1/control-measures/${m.id}`} className="link-quiet">JSON record with sources</a>
+            <a href={`/api/v1/control-measures/${m.id}`} className="link-quiet">JSON with sources</a>
           </div>
         </aside>
       </div>

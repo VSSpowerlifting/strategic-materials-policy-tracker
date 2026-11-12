@@ -13,7 +13,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Materials",
   description:
-    "Rare earths and adjacent strategic materials, each with its source-linked policy measures, legal controls, public finance and industrial records.",
+    "Rare earths and adjacent strategic materials, each with its source-linked policy measures, legal controls, public finance and industrial projects.",
 };
 
 export default function MaterialsPage() {
@@ -53,7 +53,7 @@ export default function MaterialsPage() {
               <>
                 <h2 className="font-display text-2xl font-semibold tracking-tight">Browse by material and stage</h2>
                 <p className="mt-3 text-sm leading-6 text-muted">
-                  Select a marked cell to open its source-linked records.
+                  Select a marked cell to open its source-linked activity.
                 </p>
               </>
             }

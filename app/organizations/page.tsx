@@ -15,7 +15,7 @@ export default function OrganizationsPage(){
  const rows=buildOrganizationDirectory(orgs,orgs.map(o=>({id:o.id,roles:organizationRoles(o.id)})));
  return <Container className="py-12">
   <PageHeading title="Organizations"
-   lead="Bodies named in the capital and project records. Financing status and payment evidence sit in the linked financial records."/>
+   lead="Bodies named in financing and industrial projects. Financing status and payment evidence sit with each linked instrument."/>
   <div className="mt-10"><OrganizationsExplorer rows={rows}/></div>
   <p className="mt-8 text-sm text-muted">
    Download: <a href="/api/export/organizations.csv" className="text-accent hover:underline">Organization CSV</a>

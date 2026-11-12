@@ -19,7 +19,7 @@ export default function ActorsPage() {
     <Container className="py-12">
       <PageHeading
         title="Actors"
-        lead="Record counts reflect SMPT’s coverage, which varies by jurisdiction."
+        lead="Counts reflect SMPT’s coverage, which varies by jurisdiction."
       />
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {jurisdictions.map((j) => (

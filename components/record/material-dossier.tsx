@@ -22,7 +22,7 @@ export function MaterialRecord({ payload }: { payload: DossierPayload }) {
   const hasBenchmarks = getMarketSeriesForMaterial(payload.id).length > 0;
   const contents = [
     { href: "#supply-chain", label: "Supply chain" },
-    { href: "#records", label: "Records by stage" },
+    { href: "#records", label: "Activity by stage" },
     { href: "#capital-controls", label: "Capital and controls" },
     { href: "#timeline", label: "Timeline" },
     { href: "#events", label: "Events" },
@@ -52,7 +52,7 @@ export function MaterialRecord({ payload }: { payload: DossierPayload }) {
           </>
         }
         status={
-          <StatusLine label="Record as of">
+          <StatusLine label="As of">
             <time dateTime={payload.asOf} className="tnum text-foreground">
               {formatDate(payload.asOf)}
             </time>
@@ -71,7 +71,7 @@ export function MaterialRecord({ payload }: { payload: DossierPayload }) {
         </Qualifier>
       ) : null}
 
-      <RecordFacts label={`${payload.nameEn} record counts`} flush={!payload.groupNote}>
+      <RecordFacts label={`${payload.nameEn} counts`} flush={!payload.groupNote}>
         {payload.stats.map((s) => (
           <RecordFact key={s.key} label={s.label} data-stat={s.key}>
             <span className="tnum block font-editorial text-[2rem] font-light leading-none text-foreground">{s.value}</span>
@@ -80,7 +80,7 @@ export function MaterialRecord({ payload }: { payload: DossierPayload }) {
           </RecordFact>
         ))}
       </RecordFacts>
-      <Qualifier className="mt-4">Counts are records of one kind at a time and are never added together.</Qualifier>
+      <Qualifier className="mt-4">Each count covers one kind and counts are never added together.</Qualifier>
 
       <PageContents items={contents} className="mt-10" />
 

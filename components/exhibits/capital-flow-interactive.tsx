@@ -266,9 +266,9 @@ function FlowFacts({ flow, asOfLabel }: { flow: CapitalFlow; asOfLabel: string }
           <span className="text-muted">. Not additional money.</span>
         </Fact>
       ))}
-      <Fact label="Record">
+      <Fact label="Financing">
         <Link href={flow.href} className="link-quiet">
-          Commitment record
+          View details
         </Link>
       </Fact>
       <Fact label={flow.sources.length === 1 ? "Source" : "Sources"}>
@@ -382,7 +382,7 @@ function PartyPanel({ party, flows }: { party: CapitalFlowParty; flows: readonly
             <FlowHeadline flow={f} />
             <FlowStatusLine flow={f} />
             <Link href={f.href} className="link-quiet font-display text-xs">
-              Commitment record
+              View details
             </Link>
           </li>
         ))}
@@ -651,7 +651,7 @@ export function CapitalFlowInteractive({
                 </div>
                 <details className="min-w-0">
                   <summary className="cursor-pointer font-display text-sm text-muted underline decoration-border-strong underline-offset-4 hover:text-accent">
-                    Record details
+                    View details
                   </summary>
                   <div className="mt-3">
                     <FlowFacts flow={flow} asOfLabel={model.asOfLabel} />

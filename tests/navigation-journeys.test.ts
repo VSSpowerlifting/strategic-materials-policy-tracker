@@ -31,14 +31,14 @@ test("every header destination except search belongs to exactly one journey", ()
 test("detail routes keep their journey current", () => {
   const event = getAllEvents()[0];
   const cases: [string, string][] = [
-    [`/events/${event.id}`, "Government action"],
-    ["/actors/cn", "Government action"],
-    ["/materials/gallium", "Government action"],
-    ["/capital/fin-anything", "Public capital"],
-    ["/organizations/org-anything", "Public capital"],
-    ["/programmes/prg-anything", "Public capital"],
-    ["/projects/prj-us-stibnite", "Projects"],
-    ["/projects/compare", "Projects"],
+    [`/events/${event.id}`, "Policy actions"],
+    ["/actors/cn", "Policy actions"],
+    ["/materials/gallium", "Policy actions"],
+    ["/capital/fin-anything", "Financing"],
+    ["/organizations/org-anything", "Financing"],
+    ["/programmes/prg-anything", "Financing"],
+    ["/projects/prj-us-stibnite", "Industrial projects"],
+    ["/projects/compare", "Industrial projects"],
     ["/sources/src-anything", "Evidence"],
   ];
   for (const [path, label] of cases)
@@ -81,7 +81,7 @@ test("homepage research, evidence examples, material entries and navigation lead
 test("breadcrumbs mark the current page once and never link it", () => {
   const view = renderToStaticMarkup(
     createElement(Breadcrumbs, {
-      items: [{ href: "/capital", label: "Public capital" }, { href: "/programmes", label: "Programmes" }, { label: "Here" }],
+      items: [{ href: "/capital", label: "Financing" }, { href: "/programmes", label: "Programmes" }, { label: "Here" }],
     }),
   );
   assert.match(view, /<nav aria-label="Breadcrumb"/);
@@ -96,7 +96,7 @@ test("an event detail page leads back to its journey through the breadcrumb", as
   const event = getAllEvents()[0];
   const view = renderToStaticMarkup(await EventPage({ params: Promise.resolve({ id: event.id }) }));
   const trail = /<nav aria-label="Breadcrumb"[\s\S]*?<\/nav>/.exec(view)?.[0] ?? "";
-  assert.match(trail, /href="\/events"[^>]*>Government action</);
+  assert.match(trail, /href="\/events"[^>]*>Policy actions</);
   assert.match(trail, /aria-current="page"/);
 });
 

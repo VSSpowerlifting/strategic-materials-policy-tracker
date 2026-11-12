@@ -112,7 +112,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
   return (
     <Container className="py-12 sm:py-16">
       <RecordTitleBlock
-        breadcrumbs={[{ href: "/capital", label: "Public capital" }, { label: title }]}
+        breadcrumbs={[{ href: "/capital", label: "Financing" }, { label: title }]}
         title={title}
         subtitle={c.project ? <p className="standfirst mt-5 max-w-2xl">{c.project}</p> : null}
         identity={
@@ -142,7 +142,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
         }
       />
 
-      <RecordFacts label="Record facts" flush>
+      <RecordFacts label="Key facts" flush>
         <RecordFact label="Value role">{valueRoleLabels[c.valueRole]}</RecordFact>
         <RecordFact label="Instrument">{financialInstrumentLabels[c.instrument]}</RecordFact>
         <RecordFact label="Capital source">{capitalSourceLabels[c.capitalSource]}</RecordFact>
@@ -241,7 +241,7 @@ export default async function CommitmentPage({ params }: { params: Promise<{ id:
             </RailBlock>
             <RailBlock title="Machine-readable">
               <a href={`/api/v1/financial-commitments/${c.id}`} className="link-quiet text-foreground">
-                JSON record with sources
+                JSON with sources
               </a>
             </RailBlock>
           </>

@@ -245,7 +245,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
             <div className="mt-2 grid gap-3 sm:mt-0 sm:grid-cols-2 lg:grid-cols-3">
               <div>
                 <label htmlFor="kind" className="mb-1.5 block font-display text-xs font-semibold text-muted">
-                  Record type
+                  Type
                 </label>
                 <select id="kind" value={kind} onChange={(e) => setKind(e.target.value)} className={selectClass}>
                   <option value={ALL}>All types{active ? ` (${total})` : ""}</option>
@@ -321,14 +321,11 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
           <section aria-labelledby="browse-search-types" data-testid="search-browse" className="space-y-4">
             <div>
               <h2 id="browse-search-types" className="font-display text-xl font-semibold tracking-tight">
-                Browse the published record
+                Browse by type
               </h2>
               <p className="mt-1 max-w-3xl text-sm leading-7 text-muted">
-                {docs.length} indexed entries across {SEARCH_KINDS.length} types, including policy
-                events, financial instruments, controls, projects, organizations, programmes,
-                original sources, and research notes. Choose a type below or search for a
-                company, material, exact document number, or original-language phrase.
-                These are curated entries, not a live index of every government action.
+                {docs.length} curated entries across {SEARCH_KINDS.length} types. Choose a type, or search for a
+                company, material, document number or original-language phrase.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -346,10 +343,9 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               ))}
             </div>
             <p className="text-xs leading-6 text-muted">
-              Other indexed types, including actors, materials, framing and the watchlist,
-              are available under <strong className="font-semibold text-foreground">Record type</strong>.
-              Counts are records, not sums of financing, documents independently corroborating
-              an outcome, or proof that no unlisted activity exists.
+              Actors, materials, framing and the watchlist are under{" "}
+              <strong className="font-semibold text-foreground">Type</strong>. Counts are entries in SMPT, never
+              financing totals or a complete list of government activity.
             </p>
           </section>
         ) : results.length === 0 ? (
@@ -371,7 +367,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
           <>
             <p role="status" aria-live="polite" data-testid="search-result-count"
               className="mb-3 font-display text-sm font-semibold text-muted">
-              {results.length} {results.length === 1 ? "matching record" : "matching records"}
+              {results.length} {results.length === 1 ? "result" : "results"}
               <span className="ml-2 font-normal text-faint">from {docs.length} published index entries</span>
             </p>
             <div data-testid="search-reference-downloads" className="mb-4 border border-border-strong bg-plate p-4">

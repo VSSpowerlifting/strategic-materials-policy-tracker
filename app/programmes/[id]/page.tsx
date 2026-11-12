@@ -49,7 +49,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
     <Container className="py-12">
       <Breadcrumbs
         items={[
-          { href: "/capital", label: "Public capital" },
+          { href: "/capital", label: "Financing" },
           { href: "/programmes", label: "Programmes" },
           { label: g.name },
         ]}
@@ -105,7 +105,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
             </Section>
           ) : null}
 
-          <Section title="Record">
+          <Section title="Details">
             <div className="border-y border-border-strong">
               <dl>
                 <Fact label="Kind">{programmeKindLabels[g.kind]}</Fact>

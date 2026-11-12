@@ -5,6 +5,7 @@ import { ExtLink } from "@/components/ui/ext-link";
 import { MarketExplorer } from "@/components/markets/market-monitor";
 import { buildMonitorSeries, buildReleaseNotices, materialLink } from "@/components/markets/series";
 import { getMarketCoverage, getMarketDatasets } from "@/lib/market-data";
+import type { MonitorSeries } from "@/components/markets/types";
 import { MARKET_REUSE_NOTES, PRICE_TYPE_LABELS, formatPeriod, type CoverageStatus } from "@/lib/markets";
 import { formatDate } from "@/lib/format";
 import { fi002 } from "@/lib/fi002";
@@ -18,11 +19,31 @@ export const metadata: Metadata = {
   alternates: { canonical: "/markets" },
 };
 
-const STATUS_LABEL: Record<CoverageStatus, string> = {
-  annual_only: "Annual series only",
-  joint_only: "Priced jointly with another material",
-  no_open_series_identified: "No open series identified",
-};
+/** Stated once above the directory, so each entry carries only what is specific to its material. */
+const COMMON_COVERAGE = "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. ";
+const COMMON_TERMS = /,(?: published)? under terms that permit redistribution with attribution\.$/;
+
+function withoutCommonCoverage(text: string): string {
+  return text.startsWith(COMMON_COVERAGE) ? text.slice(COMMON_COVERAGE.length) : text;
+}
+
+function withoutCommonTerms(text: string): string {
+  return text.replace(COMMON_TERMS, ".");
+}
+
+/**
+ * What exists for a material without a monthly series, read from the annual series themselves so that a customs
+ * unit value is never labelled a price.
+ */
+function availability(gap: { materialId: string; status: CoverageStatus }, annual: MonitorSeries[]): string {
+  if (gap.status === "no_open_series_identified") return "No open series";
+  if (gap.status === "joint_only") return "Annual price, joint assessment";
+  const types = new Set(annual.filter((s) => s.materialId === gap.materialId).map((s) => s.priceType));
+  if (types.size === 0) return "Annual series";
+  if (types.size === 1 && types.has("trade_unit_value")) return "Annual trade unit value";
+  if (!types.has("trade_unit_value")) return "Annual price";
+  return "Annual price and trade unit value";
+}
 
 /** Square disclosure on the plate; the summary is a full-width, 44px target. */
 const disclosure = "group border border-border-strong bg-plate";
@@ -34,6 +55,24 @@ function DisclosureSummary({ children }: { children: React.ReactNode }) {
       <span aria-hidden="true" className="ml-auto text-base leading-none text-faint group-open:hidden">+</span>
       <span aria-hidden="true" className="ml-auto hidden text-base leading-none text-faint group-open:inline">−</span>
     </summary>
+  );
+}
+
+function SourceFact({ label, wide, children }: { label: string; wide?: boolean; children: React.ReactNode }) {
+  return (
+    <div className={wide ? "col-span-2 lg:col-span-1" : undefined}>
+      <div className="font-display text-xs leading-[1.125rem] text-faint">{label}</div>
+      <div className="mt-0.5 font-display text-sm leading-6 text-foreground">{children}</div>
+    </div>
+  );
+}
+
+function SourceDetail({ term, children }: { term: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <dt className="font-display text-xs leading-[1.125rem] text-faint">{term}</dt>
+      <dd className="mt-0.5">{children}</dd>
+    </div>
   );
 }
 
@@ -219,108 +258,114 @@ export default function MarketsPage() {
           </div>
         </Section>
 
-        <Section title="Sources, licences and attribution">
-          <div className="grid gap-x-10 gap-y-10 lg:grid-cols-3">
+        <Section title="Sources and licences">
+          <ul className="border-t border-border-strong">
             {datasets.map(({ manifest: m }) => (
-              <div key={m.datasetId} className="space-y-3 border-t border-border pt-4 text-sm leading-6 text-muted">
-                <h3 className="font-display text-base font-semibold text-foreground">{m.shortName}</h3>
-                <p className="text-foreground">{m.attribution}</p>
-                <p>
-                  Licence:{" "}
-                  {m.license.url ? (
-                    <ExtLink href={m.license.url} className="inline">
+              <li key={m.datasetId} className="border-b border-border py-4">
+                <div className="grid grid-cols-2 gap-x-8 gap-y-3 lg:grid-cols-[minmax(0,2.4fr)_minmax(0,0.8fr)_minmax(0,1fr)_minmax(0,1.8fr)]">
+                  <div className="col-span-2 lg:col-span-1">
+                    <h3 className="font-display text-base font-semibold text-foreground">{m.publisher}</h3>
+                    <p className="mt-0.5 text-sm leading-6 text-muted">{m.title}</p>
+                  </div>
+                  <SourceFact label="Frequency">{m.frequency === "annual" ? "Annual" : "Monthly"}</SourceFact>
+                  <SourceFact label="Released">{formatDate(m.releaseDate)}</SourceFact>
+                  <SourceFact label="Licence" wide>
+                    <ExtLink href={m.license.url ?? m.license.termsUrl} className="inline">
                       {m.license.name}
                     </ExtLink>
-                  ) : (
-                    m.license.name
-                  )}
-                  , as stated at{" "}
-                  <ExtLink href={m.license.statedAt} className="inline">
-                    the publisher’s data page
-                  </ExtLink>
-                  {m.license.termsUrl !== m.license.url ? (
-                    <>
-                      {" "}
-                      (<ExtLink href={m.license.termsUrl}>terms</ExtLink>)
-                    </>
-                  ) : null}
-                  .
-                </p>
-                <p>
-                  <span className="text-foreground">Changes made.</span> {m.changesMade}
-                </p>
-                <p>{m.thirdPartyNote}</p>
-                <ul className="space-y-1">
-                  <li>
-                    <ExtLink href={m.landingPageUrl}>Publisher page</ExtLink>
-                  </li>
-                  <li>
-                    <ExtLink href={m.catalogUrl}>Data catalogue entry</ExtLink>
-                  </li>
-                  {m.doi ? (
-                    <li>
-                      <ExtLink href={`https://doi.org/${m.doi}`}>doi:{m.doi}</ExtLink>
-                    </li>
-                  ) : null}
-                </ul>
-                <details className={disclosure}>
-                  <DisclosureSummary>Reuse terms, release schedule and source file</DisclosureSummary>
-                  <div className="space-y-3 border-t border-border px-4 py-3">
-                    <p>
-                      <span className="text-foreground">Reuse.</span>{" "}
-                      {MARKET_REUSE_NOTES[m.datasetId as keyof typeof MARKET_REUSE_NOTES]}
-                    </p>
-                    <p className="text-xs leading-5 text-faint">
+                  </SourceFact>
+                </div>
+                <details className={`${disclosure} mt-3`}>
+                  <DisclosureSummary>
+                    Citation, changes and reuse terms<span className="sr-only">: {m.shortName}</span>
+                  </DisclosureSummary>
+                  <dl className="grid gap-x-10 gap-y-4 border-t border-border px-4 py-4 text-sm leading-6 text-muted md:grid-cols-2">
+                    <SourceDetail term="Citation">{m.attribution}</SourceDetail>
+                    <SourceDetail term="Changes made">{m.changesMade}</SourceDetail>
+                    <SourceDetail term="Reuse terms">
+                      {MARKET_REUSE_NOTES[m.datasetId as keyof typeof MARKET_REUSE_NOTES]}{" "}
+                      <ExtLink href={m.license.statedAt} className="inline">
+                        Licence statement
+                      </ExtLink>
+                      {m.license.termsUrl !== m.license.url ? (
+                        <>
+                          {", "}
+                          <ExtLink href={m.license.termsUrl} className="inline">
+                            publisher’s terms
+                          </ExtLink>
+                        </>
+                      ) : null}
+                      .
+                    </SourceDetail>
+                    <SourceDetail term="Third-party data">{m.thirdPartyNote}</SourceDetail>
+                    <SourceDetail term="Source file">
                       {m.updateFrequency ? `${m.updateFrequency.statedAs} ` : ""}
                       {m.nextScheduledRelease ? `${m.nextScheduledRelease.statedAs} ` : ""}
                       Retrieved {formatDate(m.retrievedOn)}.
-                    </p>
-                    <p className="break-all font-mono text-xs leading-5 text-faint">
-                      {m.sourceFile.fileName}
-                      <span className="block">SHA-256 {m.sourceFile.sha256}</span>
-                    </p>
-                  </div>
+                      <span className="mt-1 block break-all font-mono text-xs leading-5 text-faint">
+                        {m.sourceFile.fileName}
+                        <span className="block">SHA-256 {m.sourceFile.sha256}</span>
+                      </span>
+                    </SourceDetail>
+                    <SourceDetail term="Links">
+                      <ul className="flex flex-wrap gap-x-6 gap-y-1">
+                        <li>
+                          <ExtLink href={m.landingPageUrl}>Publisher page</ExtLink>
+                        </li>
+                        <li>
+                          <ExtLink href={m.catalogUrl}>Data catalogue entry</ExtLink>
+                        </li>
+                        {m.doi ? (
+                          <li>
+                            <ExtLink href={`https://doi.org/${m.doi}`}>doi:{m.doi}</ExtLink>
+                          </li>
+                        ) : null}
+                      </ul>
+                    </SourceDetail>
+                  </dl>
                 </details>
-              </div>
+              </li>
             ))}
-          </div>
-          <p className="mt-8 max-w-4xl text-sm leading-6 text-muted">
-            Each dataset is regenerated only by its ingest script from a pinned source file whose checksum is verified; the
-            site build never fetches prices.
+          </ul>
+          <p className="mt-5 max-w-4xl text-sm leading-6 text-muted">
+            SMPT republishes each publisher’s released figures only, without the exchange or vendor data behind them. Every
+            dataset is rebuilt from a pinned source file with a verified checksum; the site build never fetches prices.
           </p>
         </Section>
 
-        <Section
-          title="Coverage gaps"
-          description="Tracked materials without an open monthly series, and what one would need to show."
-        >
-          <p className="max-w-4xl text-sm leading-6 text-muted">{coverage.note}</p>
-          <ul className="mt-6 grid gap-x-10 border-t border-border md:grid-cols-2">
+        <Section title="Price coverage">
+          <p className="max-w-4xl text-[0.9375rem] leading-7 text-muted">
+            {coverage.gaps.length} tracked materials have no monthly series here. The monthly sources are the World Bank Pink
+            Sheet workbook and three IMF Primary Commodity Prices series (cobalt, palladium and rare-earth carbonate). A
+            monthly series qualifies when it covers one named product and grade and its publisher permits redistribution with
+            attribution. SMPT has not reviewed the licence terms of any commercial price assessment or exchange data feed and
+            redistributes none.
+          </p>
+          <ul className="mt-6 gap-x-8 md:columns-2 xl:columns-3">
             {coverage.gaps.map((g) => {
               const mat = materialLink(g.materialId);
+              const name = mat.name ?? g.materialId;
               return (
-                <li key={g.materialId} className="border-b border-border py-4">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                    <h3 className="font-display font-semibold text-foreground">
-                      {mat.href ? (
-                        <Link href={mat.href} className="link-quiet">
-                          {mat.name}
-                        </Link>
-                      ) : (
-                        (mat.name ?? g.materialId)
-                      )}
-                    </h3>
-                    <span className="font-display text-xs text-faint">{STATUS_LABEL[g.status]}</span>
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-muted">{g.monthlyCoverage}</p>
-                  <details className="mt-1 text-sm leading-6 text-muted">
-                    <summary className="inline-flex min-h-11 cursor-pointer items-center font-display text-sm text-foreground">
-                      <span className="link-quiet">Grades and inclusion test</span>
+                <li key={g.materialId} className="break-inside-avoid border-t border-border">
+                  <details className="group">
+                    <summary className="flex min-h-11 cursor-pointer list-none items-baseline gap-3 py-2.5 font-display hover:bg-elevated [&::-webkit-details-marker]:hidden">
+                      <span className="text-[0.9375rem] font-semibold text-foreground">{name}</span>
+                      <span className="ml-auto text-right text-xs text-faint">{availability(g, annual)}</span>
+                      <span aria-hidden="true" className="w-3 text-center text-base leading-none text-faint group-open:hidden">+</span>
+                      <span aria-hidden="true" className="hidden w-3 text-center text-base leading-none text-faint group-open:inline">−</span>
                     </summary>
-                    <p>{g.gradeDistinctions}</p>
-                    <p className="mt-2">
-                      <span className="text-foreground">Needed for a monthly series.</span> {g.requirementForInclusion}
-                    </p>
+                    <dl className="space-y-3 pb-3 text-sm leading-6 text-muted">
+                      <SourceDetail term={g.status === "no_open_series_identified" ? "Coverage" : "Published instead"}>{withoutCommonCoverage(g.monthlyCoverage)}</SourceDetail>
+                      <SourceDetail term="Products and grades">{g.gradeDistinctions}</SourceDetail>
+                      <SourceDetail term="Monthly series needed">{withoutCommonTerms(g.requirementForInclusion)}</SourceDetail>
+                    </dl>
+                    {mat.href ? (
+                      <p className="pb-4">
+                        <Link href={mat.href} className="link-quiet font-display text-sm text-foreground">
+                          {name} policy and financing
+                        </Link>
+                      </p>
+                    ) : null}
                   </details>
                 </li>
               );
@@ -332,7 +377,7 @@ export default function MarketsPage() {
           <ul className="flex flex-wrap gap-x-8 gap-y-3 font-display text-sm">
             <li>
               <Link href="/materials" className="link-quiet">
-                Materials and their policy records
+                Materials
               </Link>
             </li>
             <li>

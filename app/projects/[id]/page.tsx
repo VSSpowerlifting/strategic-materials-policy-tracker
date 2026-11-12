@@ -127,14 +127,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           Download investigation JSON
         </a>
         <span className="font-display text-sm text-muted">
-          Record revised{" "}
+          Last revised{" "}
           <time dateTime={packet.corpus.revision} className="tnum">
             {formatDate(packet.corpus.revision)}
           </time>
         </span>
       </RecordTitleBlock>
 
-      <RecordFacts label="Record facts" flush>
+      <RecordFacts label="Key facts" flush>
         <RecordFact label="Sponsors">
           <OrgList ids={p.sponsorOrgIds} showKind empty="Not stated" />
         </RecordFact>

@@ -15,9 +15,9 @@ const footerColumns = [
   {
     label: "Explore",
     links: [
-      { href: "/events", label: "Government action" },
-      { href: "/capital", label: "Public capital" },
-      { href: "/projects", label: "Projects" },
+      { href: "/events", label: "Policy actions" },
+      { href: "/capital", label: "Financing" },
+      { href: "/projects", label: "Industrial projects" },
       { href: "/materials", label: "Materials" },
       { href: "/compare", label: "Compare" },
     ],
@@ -71,7 +71,7 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="mt-14 flex flex-col justify-between gap-2 border-t border-border pt-5 font-display text-xs leading-5 text-faint sm:flex-row">
-          <p>Record revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>. Coverage is selective.</p>
+          <p>Last revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>. Coverage is selective.</p>
           <p>For research use; consult official sources and qualified advisers for legal decisions.</p>
         </div>
       </Container>

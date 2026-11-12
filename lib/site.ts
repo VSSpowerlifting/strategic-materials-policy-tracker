@@ -50,7 +50,7 @@ export const site = {
  */
 export const navGroups = [
   {
-    label: "Policy record",
+    label: "Policy actions",
     items: [
       { href: "/events", label: "Events", primary: true },
       { href: "/timeline", label: "Timeline", primary: false },
@@ -101,7 +101,7 @@ export const navGroups = [
 export const journeys = [
   {
     href: "/events",
-    label: "Government action",
+    label: "Policy actions",
     question: "What have governments decided, and in what legal form?",
     views: [
       { href: "/events", label: "All events" },
@@ -115,7 +115,7 @@ export const journeys = [
   },
   {
     href: "/capital",
-    label: "Public capital",
+    label: "Financing",
     question: "Which public money and instruments are committed, and at what status?",
     views: [
       { href: "/capital", label: "Financial commitments" },
@@ -125,8 +125,8 @@ export const journeys = [
   },
   {
     href: "/projects",
-    label: "Projects",
-    question: "What does the record show for one industrial project?",
+    label: "Industrial projects",
+    question: "What is documented for one industrial project?",
     views: [{ href: "/projects", label: "Project investigations" }],
   },
   {

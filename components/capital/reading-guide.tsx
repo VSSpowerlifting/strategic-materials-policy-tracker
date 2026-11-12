@@ -14,7 +14,7 @@ export function RecordReadingGuide({record}:{record:FinancialCommitment}){
  ];
  return <section aria-labelledby="record-reading-guide" data-testid="financial-reading-guide"
    className="mt-7 max-w-4xl border border-border-strong bg-plate p-5 sm:p-6">
-   <p className="font-display text-xs text-accent">Reading this record</p>
+   <p className="font-display text-xs text-accent">How to read this page</p>
    <h2 id="record-reading-guide" className="mt-2 font-display text-xl font-semibold leading-snug">
      Evidence and status
    </h2>

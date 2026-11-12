@@ -94,6 +94,17 @@ export function PageHeading({
  * description stay visible in the summary, and the body opens on demand. Use it for secondary groupings that
  * a reader does not need on first pass; never to hide a qualifier that changes how a visible figure reads.
  */
+/**
+ * A long section description shows its first sentence; the counting rules and caveats that follow stay on the page
+ * in a disclosure beneath it. Short descriptions and non-string nodes are shown whole.
+ */
+function splitDescription(description: React.ReactNode): { lead: React.ReactNode; rest: string | null } {
+  if (typeof description !== "string" || description.length <= 180) return { lead: description, rest: null };
+  const end = /(?<=[a-z0-9)”%])\.\s(?=[A-Z])/.exec(description);
+  if (!end) return { lead: description, rest: null };
+  return { lead: description.slice(0, end.index + 1), rest: description.slice(end.index + 2) };
+}
+
 export function Section({
   id,
   title,
@@ -120,12 +131,23 @@ export function Section({
       ) : null}
     </h2>
   ) : null;
-  const desc = description ? (
-    <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p>
+  const { lead, rest } = splitDescription(description);
+  const desc = lead ? (
+    <>
+      <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{lead}</p>
+      {rest ? (
+        <details className="max-w-3xl">
+          <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden">
+            <span className="link-quiet">Reading notes</span>
+          </summary>
+          <p className="pb-2 text-sm leading-6 text-muted">{rest}</p>
+        </details>
+      ) : null}
+    </>
   ) : null;
 
   if (collapsed && title) {
-    const noun = count === 1 ? "record" : "records";
+    const noun = count === 1 ? "item" : "items";
     return (
       <section id={id} className={cn("scroll-mt-24", className)}>
         <div className="border-b border-border-strong pb-3">

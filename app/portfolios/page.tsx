@@ -40,11 +40,11 @@ function CountTable({ actors, groups }: { actors: readonly string[]; groups: { t
   return (
     <div className="relative overflow-x-auto border">
       <table className="w-full min-w-[40rem] border-collapse text-sm">
-        <caption className="sr-only">Record counts by government</caption>
+        <caption className="sr-only">Counts by government</caption>
         <thead>
           <tr className="border-b bg-elevated">
             <th scope="col" className="sticky left-0 z-10 bg-elevated px-3 py-2 text-left font-display text-xs font-normal text-faint">
-              Records
+              Count
             </th>
             {actors.map((a) => (
               <th key={a} scope="col" className="px-3 py-2 text-right font-display text-xs font-normal text-muted">

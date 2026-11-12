@@ -36,9 +36,9 @@ export function CiteBlock({
 
   return (
     <Card className="p-5">
-      <h2 className="font-display font-semibold tracking-tight">Cite this record</h2>
+      <h2 className="font-display font-semibold tracking-tight">Cite this page</h2>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-        This cites the record — the project&apos;s coding of the instrument. For a claim about what
+        This cites SMPT&apos;s coding of the instrument. For a claim about what
         a government actually did, cite the primary document itself; the sources above carry the
         canonical URLs.
       </p>

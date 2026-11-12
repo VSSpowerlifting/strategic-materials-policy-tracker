@@ -104,11 +104,14 @@ export function ProjectsExplorer({rows, materialNames}:{
       </p>
       {active?<button type="button" onClick={reset} className="font-display text-xs text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
     </div>
-    <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
-      One result is one registered project. Direct financing, shared unallocated associations and designations are
-      separate evidence relationships, not additive capital or proof of construction. Missing records do not prove inactivity.
-      Government commitment means a directly linked, non-ended commitment evidenced as of the corpus date.
-    </p>
+    <details className="mt-1 max-w-4xl text-xs leading-5 text-faint">
+      <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden"><span className="link-quiet">Reading notes</span></summary>
+      <p className="pb-2">
+        One result is one registered project. Direct financing, shared unallocated associations and designations are
+        separate evidence relationships, not additive capital or proof of construction. A project with no entry may
+        still be active. Government commitment means a directly linked, non-ended commitment evidenced as of the corpus date.
+      </p>
+    </details>
     <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
       {visible.map(p=><div key={p.id} data-testid="project-record" data-site-motion="card" className="min-w-0">\n        <Card className="flex h-full min-w-0 flex-col p-4">
         <div className="flex flex-wrap items-center gap-2">

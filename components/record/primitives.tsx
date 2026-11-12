@@ -214,7 +214,7 @@ export function RecordLayout({
         {/* The site header with its section row is taller than the shared sections' scroll margin, so anchors in the body clear it here. */}
         <div className="min-w-0 space-y-14 [&_[id]]:scroll-mt-32">{children}</div>
         <aside
-          aria-label="Contents and related records"
+          aria-label="Contents and related activity"
           className="space-y-8 lg:sticky lg:top-32 lg:max-h-[calc(100vh-9.5rem)] lg:self-start lg:overflow-y-auto"
         >
           {contents?.length ? (

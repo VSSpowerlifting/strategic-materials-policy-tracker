@@ -28,7 +28,7 @@ function ComparisonCard({row,materialNames,revision}:{
     <h2 className="break-words font-display text-xl font-semibold tracking-tight">{row.name}</h2>
     <p className="mt-2 break-all font-mono text-xs text-faint">{row.id}</p>
     <Link href={`/projects/${row.id}`} className="mt-3 inline-flex min-h-11 items-center font-display text-sm text-accent hover:underline">
-      Inspect the full project record and its evidence
+      View project details and evidence
     </Link>
     <dl className="mt-3 space-y-5 text-sm leading-6">
       <div><dt className="font-display font-semibold text-foreground">Recorded location</dt>

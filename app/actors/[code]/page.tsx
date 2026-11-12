@@ -56,7 +56,7 @@ export default async function ActorPage({
     <Container className="py-12">
       <Breadcrumbs
         items={[
-          { href: "/events", label: "Government action" },
+          { href: "/events", label: "Policy actions" },
           { href: "/actors", label: "Governments" },
           { label: jurisdiction.name },
         ]}

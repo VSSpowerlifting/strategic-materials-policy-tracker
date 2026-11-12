@@ -78,10 +78,13 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
        className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
        Clear filters</button>:null}
    </div>
-   <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
-     Direct citations count distinct published records, not individual assertions, independent corroborations or policy effects.
-     Missing publication dates remain unknown. Source access dates are recorded observations, not event or publication dates.
-   </p>
+   <details className="mt-1 max-w-4xl text-xs leading-5 text-faint">
+     <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden"><span className="link-quiet">Reading notes</span></summary>
+     <p className="pb-2">
+       Direct citations count distinct published records, not individual assertions, independent corroborations or policy effects.
+       Missing publication dates remain unknown. Source access dates are recorded observations, not event or publication dates.
+     </p>
+   </details>
    <div className="mt-10 space-y-12">
      {SOURCE_CONFIDENCE.map((tier)=>{
        const group=visible.filter(r=>r.source.confidence===tier);

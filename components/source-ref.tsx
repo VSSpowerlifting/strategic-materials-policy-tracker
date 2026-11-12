@@ -74,7 +74,7 @@ export function SourceCard({
       </div>
       {showDossierLink ? (
         <Link href={`/sources/${source.id}`} className="mt-2 inline-flex min-h-10 items-center font-display text-sm font-medium text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
-          View citing records
+          View citations
         </Link>
       ) : null}
     </div>
