@@ -63,20 +63,23 @@ export function FeaturedCase() {
             </Link>
           </h2>
           <p className="standfirst mt-6">
-            BHP puts the cost of a concentrator to replace Los Colorados at Escondida at $5.4–6.3 billion. Recovering the
-            $5.85 billion midpoint would require the new plant to preserve or add {tonnes(baseScreen.ktpa)}{" "}
-            tonnes of copper a year; less favourable assumptions raise that to as much as {tonnes(stress.ktpa)}.
+            BHP puts the cost of a concentrator to replace Los Colorados at Escondida at $5.4–6.3 billion. To
+            recover the $5.85 billion midpoint, the plant would need to add value each year equal to the after-tax
+            profit on {tonnes(baseScreen.ktpa)} tonnes of copper at assumed prices and costs; less favourable
+            assumptions raise that to {tonnes(stress.ktpa)} tonnes. The tonnes measure value, not the copper the
+            plant must produce.
           </p>
         </div>
 
         <figure className="mx-auto mt-12 max-w-5xl sm:mt-16" aria-labelledby="featured-exhibit-title">
           <figcaption className="border-t border-border-strong pt-5">
             <p id="featured-exhibit-title" className="font-display text-base font-semibold text-foreground sm:text-lg">
-              Copper the concentrator must preserve or add each year to recover its capital
+              Yearly value needed to recover the capital, counted in tonnes of copper
             </p>
             <p className="mt-1.5 max-w-2xl font-display text-sm leading-6 text-muted">
-              Tonnes a year against a no-build mine plan. A longer bar means more demanding economics. Each
-              scenario changes the base case on its own; assumptions that differ from it are set in dark type.
+              Each bar turns the yearly gain over running the mine without the new plant into tonnes of copper at
+              an assumed after-tax profit per tonne. Each scenario changes the base case on its own; assumptions
+              that differ from it are set in dark type.
             </p>
           </figcaption>
 

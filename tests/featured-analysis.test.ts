@@ -32,6 +32,10 @@ test("each scenario marks only the assumptions that differ from the base case", 
 
 test("featured analysis separates modeled thresholds from output and keeps its downloads", () => {
   assert.match(html, /not forecasts of plant output/);
+  // The tonnes are a money benefit translated through an assumed margin, not physical output the plant must reach.
+  assert.match(html, /after-tax\s+profit on 199,000 tonnes of copper at assumed prices and costs/);
+  assert.match(html, /The tonnes measure value, not the copper the\s+plant must produce\./);
+  assert.match(html, /counted in tonnes of copper/);
   assert.match(html, /\$0\.8 billion of gross pre-commitment funding approved/);
   assert.match(html, /research cutoff 5 November 2026/);
   assert.doesNotMatch(html, /230–270/, "the plant's design output is not drawn beside the requirement");
