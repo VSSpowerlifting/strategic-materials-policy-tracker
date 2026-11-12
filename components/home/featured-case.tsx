@@ -9,7 +9,7 @@ const SCALE_MAX = 450;
 const TICKS = [0, 100, 200, 300, 400] as const;
 
 /** Homepage labels, in `fi002Screens` order. The article keeps its own selector labels. */
-const LABELS = ["Base case", "Shorter benefits", "Shorter and later", "Combined stress"] as const;
+const LABELS = ["Base case", "10 years of benefits", "10 years, starting later", "Cost, price and timing setbacks"] as const;
 
 const tonnes = (ktpa: number) => (ktpa * 1000).toLocaleString("en-US");
 
@@ -63,23 +63,23 @@ export function FeaturedCase() {
             </Link>
           </h2>
           <p className="standfirst mt-6">
-            BHP puts the cost of a concentrator to replace Los Colorados at Escondida at $5.4–6.3 billion. To
-            recover the $5.85 billion midpoint, the plant would need to add value each year equal to the after-tax
-            profit on {tonnes(baseScreen.ktpa)} tonnes of copper at assumed prices and costs; less favourable
-            assumptions raise that to {tonnes(stress.ktpa)} tonnes. The tonnes measure value, not the copper the
-            plant must produce.
+            BHP estimates that replacing a copper processing plant at Escondida will cost $5.4–6.3 billion. To
+            justify the $5.85 billion midpoint, the replacement would need to deliver enough additional yearly
+            benefit compared with continuing without it. At assumed prices and costs, our model says that benefit
+            must equal the after-tax profit on {tonnes(baseScreen.ktpa)} tonnes of copper in the base case, rising to
+            {tonnes(stress.ktpa)} tonnes under tougher assumptions. Those tonnes describe financial value, not how
+            much copper the new plant must produce.
           </p>
         </div>
 
         <figure className="mx-auto mt-12 max-w-5xl sm:mt-16" aria-labelledby="featured-exhibit-title">
           <figcaption className="border-t border-border-strong pt-5">
             <p id="featured-exhibit-title" className="font-display text-base font-semibold text-foreground sm:text-lg">
-              Yearly value needed to recover the capital, counted in tonnes of copper
+              How much yearly value would justify BHP’s investment?
             </p>
             <p className="mt-1.5 max-w-2xl font-display text-sm leading-6 text-muted">
-              Each bar turns the yearly gain over running the mine without the new plant into tonnes of copper at
-              an assumed after-tax profit per tonne. Each scenario changes the base case on its own; assumptions
-              that differ from it are set in dark type.
+              Each bar shows the amount of copper whose modeled after-tax profit would equal the extra yearly
+              benefit needed. Dark text marks assumptions that change from the base case.
             </p>
           </figcaption>
 
@@ -99,13 +99,13 @@ export function FeaturedCase() {
 
                     <ul className="m-0 flex list-none flex-wrap gap-x-4 gap-y-0.5 p-0 font-display text-[0.8125rem] leading-5 text-faint [grid-area:meta] sm:block sm:space-y-0.5">
                       <li>
-                        <Assumption changed={!isBase && a.capital !== base.capital}>{a.capital}</Assumption> capital
+                        Investment: <Assumption changed={!isBase && a.capital !== base.capital}>{a.capital}</Assumption>
                       </li>
                       <li>
-                        <Assumption changed={!isBase && a.price !== base.price}>{a.price}</Assumption> copper
+                        Copper price: <Assumption changed={!isBase && a.price !== base.price}>{a.price}</Assumption>
                       </li>
                       <li>
-                        <Assumption changed={!isBase && a.span !== base.span}>{a.span}</Assumption> from{" "}
+                        Benefits: <Assumption changed={!isBase && a.span !== base.span}>{a.span}</Assumption> starting{" "}
                         <Assumption changed={!isBase && a.first !== base.first}>{a.first}</Assumption>
                       </li>
                     </ul>
@@ -159,34 +159,36 @@ export function FeaturedCase() {
           </ScrollReveal>
 
           <p className="mt-6 max-w-3xl font-display text-xs leading-5 text-faint">
-            These are capital-recovery thresholds from a simplified model, not forecasts of plant output. All four
-            use a 10% discount rate, an assumed $4,000/t net cost and a 35% tax wedge; the base case takes the
-            midpoint of BHP’s capital range and its long-term copper assumption. Source: SMPT financial model,
-            research cutoff {formatDateLong(fi002.cutoff)}.
+            These are simplified estimates of the extra value needed to recover the investment, not forecasts of
+            plant output. All four use a 10% discount rate, an assumed $4,000/t net cost and a 35% tax adjustment.
+            The base case uses the midpoint of BHP’s capital range and its long-term copper price assumption.
+            Source: SMPT financial model, research cutoff {formatDateLong(fi002.cutoff)}.
           </p>
         </figure>
 
         <div className="mx-auto mt-14 grid max-w-5xl gap-10 border-t border-border-strong pt-8 sm:mt-16 md:grid-cols-2 md:gap-12">
           <div>
-            <h3 className="label">Why the requirement rises</h3>
+            <h3 className="label">Why the amount goes up</h3>
             <p className="mt-3 font-display text-[0.9375rem] leading-7 text-foreground">
-              Recovering the same capital over ten years instead of twenty lifts the requirement from{" "}
-              {tonnes(baseScreen.ktpa)} to {tonnes(shorter.ktpa)} tonnes a year. Starting those ten years in 2034
-              rather than 2032 takes it to {tonnes(later.ktpa)}. The combined stress case keeps the 20-year period
-              but starts it in 2034, adds 20% to capital and lowers long-term copper to {stress.price}. A larger
-              capital bill and a thinner margin on every tonne raise the requirement to {tonnes(stress.ktpa)}.
+              With only ten years of benefits instead of twenty, the required annual value rises from the profit on{" "}
+              {tonnes(baseScreen.ktpa)} to {tonnes(shorter.ktpa)} tonnes of copper. If those ten years start in
+              2034 instead of 2032, the figure rises to {tonnes(later.ktpa)} tonnes. In the last scenario, the
+              benefit period is twenty years but starts in 2034, construction costs are 20% higher, and the copper
+              price falls to {stress.price}. Together, those setbacks raise the yearly requirement to the profit
+              on {tonnes(stress.ktpa)} tonnes.
             </p>
           </div>
           <div>
             <h3 className="label">Recommendation</h3>
             <p className="mt-3 font-display text-[0.9375rem] font-semibold leading-7 text-foreground">
-              Keep engineering and permitting moving before committing construction capital.
+              Continue engineering and permitting before committing the full construction budget.
             </p>
             <p className="mt-2 font-display text-[0.9375rem] leading-7 text-foreground">
-              The requirement roughly doubles across the four scenarios, and public disclosures do not include
-              the costed no-build mine plan or annual cash-flow schedule needed to narrow it. Continuing
-              pre-construction work can protect the replacement schedule while BHP resolves those uncertainties.
-              BHP has reported $0.8 billion of gross pre-commitment funding approved for that work.
+              The needed annual benefit more than doubles in the toughest scenario. BHP’s public disclosures do
+              not provide a detailed forecast of what the mine would earn without the project or the annual cash
+              flows needed to judge the investment. Continuing preparation could protect the replacement schedule
+              while BHP addresses those uncertainties. BHP has approved $0.8 billion of gross pre-commitment
+              funding for that work.
             </p>
           </div>
         </div>
