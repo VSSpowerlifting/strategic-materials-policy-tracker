@@ -1,3 +1,11 @@
+## 2026-11-12: FI003 Studio v1 presentation design candidate (draft, not merged, publication on HOLD)
+
+- Branch `design/fi003-studio-v3-candidate`, from `main` at 74fdc11. Visual migration of the 18 FI003 draft 1.0 slides to the Architectural Research Studio identity. Draft 1.0 (`outputs/presentation-draft-v100/`, `presentation/v100/`) is byte-identical to `6b93058`. No number, source link, evidence ID, interpretation, qualification, model or cutoff (6 November 2026) changed.
+- New: `research/fi003/outputs/presentation-studio-v1/` (PPTX, PDF with Archivo and Spectral embedded, contact sheet, 18 previews, manifest) and `research/fi003/presentation/studio-v1/` (build inputs and `STUDIO_V1_QA.md`). Shared exhibit-system changes are opt-in; defaults unchanged.
+- Parity with draft 1.0: 18 slides, 64 links, notes, tables and charts identical; text differs only in label case and the slide 1 title and subtitle split.
+- Verified locally: strict deck checker, editability (structural), deck review, 1309 tests, `validate`, `typecheck`, `lint` (0 errors), `build`, FI003 model, prototype and unittests. Not verified: native PowerPoint, manual accessibility testing. Not produced: accessibility-tagged PDF (PyMuPDF unavailable).
+- Review gates unchanged and pending: Jiho, Ambrose and Benjamin. HOLD stays. PR #215 not merged; nothing published or deployed.
+
 ## 2026-11-11: Publication design system migration to the Architectural Research Studio identity (draft PR, not merged)
 
 - Branch `claude/smpt-design-system-migration-75d10d`, from `main` at 74547ea. Presentation only: no finding, calculation, evidence register, model, publication date or source cut-off changed, and no FI001, FI002 or R001 binary or protected generator was touched. FI003 was not regenerated.

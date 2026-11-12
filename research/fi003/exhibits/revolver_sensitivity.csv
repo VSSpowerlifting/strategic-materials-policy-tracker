@@ -1,0 +1,13 @@
+hypothetical_draw_usd_m,hypothetical_sofr,remaining_capacity_usd_m,commitment_fee_usd_m,loan_interest_usd_m,fee_plus_loan_interest_usd_m,basis,sources
+0,0.03,203,0.7105,0.000,0.7105,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+0,0.04,203,0.7105,0.000,0.7105,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+0,0.05,203,0.7105,0.000,0.7105,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+50,0.03,153,0.5355,2.750,3.2855,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+50,0.04,153,0.5355,3.250,3.7855,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+50,0.05,153,0.5355,3.750,4.2855,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+150,0.03,53,0.1855,8.250,8.4355,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+150,0.04,53,0.1855,9.750,9.9355,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+150,0.05,53,0.1855,11.250,11.4355,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+203,0.03,0,0.0000,11.165,11.1650,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+203,0.04,0,0.0000,13.195,13.1950,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"
+203,0.05,0,0.0000,15.225,15.2250,"Static September 30 L-C exposure; Level 1; 360 days; excludes L-C, agent, upfront and other fees","S09 Sections 1.01,2.09,2.10; S19 Note 8; analyst assumptions"

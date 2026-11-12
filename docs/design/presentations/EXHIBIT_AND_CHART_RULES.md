@@ -13,7 +13,7 @@ AI-assisted quantitative charts and graphics must also pass the [Editorial Authe
 | How do alternatives compare? | Aligned horizontal bars, compact comparison table | Include baseline, same timing, unit and decision objective |
 | How sensitive is an outcome? | Driver bridge, tornado, scenario matrix | Identify base case, each changed input, cumulative vs standalone changes |
 | What changed over time? | Time series / dated step chart | Activity date, publication date and observation date may differ |
-| Where does a project stand? | Milestone strip with evidence status | Separate announced/targeted/reported/independently verified events |
+| Where does a project stand? | Milestone strip with evidence status | Separate announced/targeted/reported/independently verified events; mark contract deadlines as contractual and dates that occur only if a stated term is met as conditional, never as targeted |
 | What depends on what? | Explicit dependency or conversion-flow diagram | Arrows must mean a supported dependency, not assumed causality |
 | What is distributed among categories? | Ranked bars or heatmap | Define measures and avoid legends that imply completeness when coverage is selective |
 | How does capital allocation affect outcomes? | Financing table, cash-flow sensitivity or decision matrix | Document shareholding, price basis, cash timing, contingent instruments and financing cost |

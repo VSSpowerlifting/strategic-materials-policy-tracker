@@ -1,0 +1,724 @@
+{
+  "cutoff": "2026-11-06",
+  "status": "research revision; Benjamin review pending; Jiho challenge optional input",
+  "facts": {
+    "commitment_reference": {
+      "value": "1000",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Note 3, Commitment Letter for Facility Construction: at least $1bn",
+      "as_of": "2025-07-09",
+      "evidence_class": "reported"
+    },
+    "commitment_fees": {
+      "value": "7.4",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Note 3, nonrefundable commitment and structuring fees",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "final_shares": {
+      "value": "13590908",
+      "unit": "shares",
+      "source": "S11",
+      "locator": "MD&A Recent Developments, Public Offering of Common Stock",
+      "as_of": "2025-07-31",
+      "evidence_class": "reported"
+    },
+    "initial_shares": {
+      "value": "11818181",
+      "unit": "shares",
+      "source": "S07",
+      "locator": "Schedule A",
+      "as_of": "2025-07-16",
+      "evidence_class": "reported"
+    },
+    "jp_initial_shares": {
+      "value": "4727272",
+      "unit": "shares",
+      "source": "S07",
+      "locator": "Schedule A",
+      "as_of": "2025-07-16",
+      "evidence_class": "reported"
+    },
+    "gs_initial_shares": {
+      "value": "4727272",
+      "unit": "shares",
+      "source": "S07",
+      "locator": "Schedule A",
+      "as_of": "2025-07-16",
+      "evidence_class": "reported"
+    },
+    "ms_initial_shares": {
+      "value": "2363637",
+      "unit": "shares",
+      "source": "S07",
+      "locator": "Schedule A",
+      "as_of": "2025-07-16",
+      "evidence_class": "reported"
+    },
+    "public_price": {
+      "value": "55",
+      "unit": "USD/share",
+      "source": "S07",
+      "locator": "Schedule A",
+      "as_of": "2025-07-16",
+      "evidence_class": "reported"
+    },
+    "underwriter_price": {
+      "value": "53.35",
+      "unit": "USD/share",
+      "source": "S07",
+      "locator": "Schedule A",
+      "as_of": "2025-07-16",
+      "evidence_class": "reported"
+    },
+    "final_net": {
+      "value": "724.2",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "MD&A Recent Developments, Public Offering of Common Stock; rounded",
+      "as_of": "2025-07-31",
+      "evidence_class": "reported"
+    },
+    "revolver": {
+      "value": "275",
+      "unit": "USD million",
+      "source": "S09",
+      "locator": "Section 1.01 Revolving Credit Commitment",
+      "as_of": "2025-08-25",
+      "evidence_class": "reported"
+    },
+    "lc_sublimit": {
+      "value": "200",
+      "unit": "USD million",
+      "source": "S08",
+      "locator": "Item 1.01",
+      "as_of": "2025-08-25",
+      "evidence_class": "reported"
+    },
+    "available_2025": {
+      "value": "235",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Note 10, Revolving Credit Facility",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "available_q2": {
+      "value": "203",
+      "unit": "USD million",
+      "source": "S13",
+      "locator": "Note 8, Revolving Credit Facility",
+      "as_of": "2026-06-30",
+      "evidence_class": "reported"
+    },
+    "drawn_2025": {
+      "value": "0",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Note 10, Revolving Credit Facility",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "drawn_q2": {
+      "value": "0",
+      "unit": "USD million",
+      "source": "S13",
+      "locator": "Note 8, Revolving Credit Facility",
+      "as_of": "2026-06-30",
+      "evidence_class": "reported"
+    },
+    "unused_lc_q2": {
+      "value": "128",
+      "unit": "USD million",
+      "source": "S13",
+      "locator": "Note 8, Revolving Credit Facility",
+      "as_of": "2026-06-30",
+      "evidence_class": "reported"
+    },
+    "liquidity_min": {
+      "value": "500",
+      "unit": "USD million",
+      "source": "S09",
+      "locator": "Section 7.11(a); contractual Cash Equivalents definition applies",
+      "as_of": "2025-08-25",
+      "evidence_class": "reported"
+    },
+    "pretrigger_commit_fee": {
+      "value": "0.0035",
+      "unit": "fraction/year",
+      "source": "S09",
+      "locator": "Section 1.01 Applicable Rate, Level 1; Section 2.09(a)",
+      "as_of": "2025-08-25",
+      "evidence_class": "reported"
+    },
+    "pretrigger_sofr_spread": {
+      "value": "0.025",
+      "unit": "fraction/year",
+      "source": "S09",
+      "locator": "Section 1.01 Applicable Rate, Level 1",
+      "as_of": "2025-08-25",
+      "evidence_class": "reported"
+    },
+    "cash_2025": {
+      "value": "1166.011",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Condensed consolidated balance sheets, comparative December 31 column",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "investments_2025": {
+      "value": "664.275",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Condensed consolidated balance sheets, comparative December 31 column",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "cash_q2": {
+      "value": "429.075",
+      "unit": "USD million",
+      "source": "S13",
+      "locator": "Condensed consolidated balance sheets",
+      "as_of": "2026-06-30",
+      "evidence_class": "reported"
+    },
+    "investments_q2": {
+      "value": "1023.564",
+      "unit": "USD million",
+      "source": "S13",
+      "locator": "Condensed consolidated balance sheets",
+      "as_of": "2026-06-30",
+      "evidence_class": "reported"
+    },
+    "cash_q3": {
+      "value": "260.336",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Condensed consolidated balance sheets",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "investments_q3": {
+      "value": "1077.575",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Condensed consolidated balance sheets",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "ocf_9m": {
+      "value": "-7.757",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Condensed consolidated statements of cash flows, 2026 nine months",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "cash_ppe_9m": {
+      "value": "-420.250",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Cash flows, purchases of property plant and equipment",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "construction_awards_9m": {
+      "value": "6.500",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Cash flows, proceeds from government awards used for construction",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "financing_cf_9m": {
+      "value": "-91.145",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Cash flows, net cash used in financing activities",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "investment_accretion_9m": {
+      "value": "20.876",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Cash flows, accretion adjustment -20.876 reversed for liquid-asset bridge",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "ppa_income_2025": {
+      "value": "51.016",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Consolidated statements of operations",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "ppa_income_9m": {
+      "value": "67.962",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Statements of operations, nine months",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "ppa_income_q3": {
+      "value": "8.109",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Statements of operations, three months",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "adjusted_ebitda_9m": {
+      "value": "106.241",
+      "unit": "USD million",
+      "source": "S14",
+      "locator": "Reconciliation of GAAP net loss to non-GAAP Adjusted EBITDA",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "ppa_floor": {
+      "value": "110",
+      "unit": "USD/NdPr kg equivalent",
+      "source": "S04",
+      "locator": "Sections 1(o), 3(a)",
+      "as_of": "2025-07-09",
+      "evidence_class": "reported"
+    },
+    "ppa_upside_share": {
+      "value": "0.30",
+      "unit": "fraction",
+      "source": "S04",
+      "locator": "Section 3(b), after Production Milestone Date only",
+      "as_of": "2025-07-09",
+      "evidence_class": "reported"
+    },
+    "full_ebitda_base": {
+      "value": "140",
+      "unit": "USD million/year, 2025 basis",
+      "source": "S03",
+      "locator": "Section 1.2 Threshold EBITDA Amount",
+      "as_of": "2025-07-09",
+      "evidence_class": "reported"
+    },
+    "escalation": {
+      "value": "0.02",
+      "unit": "fraction/year",
+      "source": "S03",
+      "locator": "Section 1.2 Threshold EBITDA Amount",
+      "as_of": "2025-07-09",
+      "evidence_class": "reported"
+    },
+    "initial_10x_cost": {
+      "value": "1250",
+      "unit": "USD million",
+      "source": "S02",
+      "locator": "Recitals, development construction commissioning and start up",
+      "as_of": "2025-07-09",
+      "evidence_class": "reported"
+    },
+    "preferred_cash": {
+      "value": "400",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Note 3 Financings; cash consideration, not carrying amount",
+      "as_of": "2025-07-10",
+      "evidence_class": "reported"
+    },
+    "samarium_cash": {
+      "value": "150",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Note 3 Consideration Exchanged and Allocation",
+      "as_of": "2025-08-01",
+      "evidence_class": "reported"
+    },
+    "ppa_non_cash_asset": {
+      "value": "218.6",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Note 3 Consideration Exchanged and Allocation; initial noncash rights valuation",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "available_q3": {
+      "value": "203",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 8 Revolving Credit Facility",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "drawn_q3": {
+      "value": "0",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 8 Revolving Credit Facility",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "unused_lc_q3": {
+      "value": "128",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 8 Revolving Credit Facility",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "ppa_receivable_open": {
+      "value": "51.016",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 13 PPA income receivable December 31, 2025",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "ppa_receivable_close": {
+      "value": "8.109",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 13 PPA income receivable September 30, 2026",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "ppa_receipts_9m_rounded": {
+      "value": "110.9",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "MD&A Cash Flows: Net Cash Used in Operating Activities; rounded cash receipt",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "tax_credit_receipt": {
+      "value": "19.0",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 15 45X credit cash received on 2024 tax return",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "tax_credit_receivable_current": {
+      "value": "23.457",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 13 Government grant receivable; Note 15 identifies as 45X",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "tax_credit_receivable_noncurrent": {
+      "value": "32.6",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 15 non-current 45X receivable; rounded",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "dod_cost_receivable": {
+      "value": "2.506",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 13 DoW reimbursable costs receivable",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "dod_cost_liability": {
+      "value": "7.9",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 9 reimbursable amounts deferred as non-current contract liability; rounded",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "tsif_grant_limit": {
+      "value": "53.5",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 15 TSIF grant agreement eligible cost reimbursement ceiling",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "tsif_recognized_non_cash": {
+      "value": "10.075",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 21 non-cash recognition of government award receivable used for construction; Note 15 rounds TSIF to 10.1",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "debt_notes_principal": {
+      "value": "862.793",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 8 Convertible Notes due 2030 principal",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "samarium_principal": {
+      "value": "150",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 8 Samarium Project Loan principal",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "equipment_principal": {
+      "value": "30.340",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 8 equipment notes current plus non-current",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "debt_carrying": {
+      "value": "936.253",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 8 total long-term debt carrying amount; excludes equipment notes",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "notes_2026_repaid": {
+      "value": "67.499",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Cash flow statement Payments to retire long-term debt; Note 8 April 1 settlement",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "restricted_cash_close": {
+      "value": "0.527",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Cash flow statement reconciliation of cash cash equivalents and restricted cash",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "preoffering_basic_shares": {
+      "value": "163477816",
+      "unit": "shares",
+      "source": "S06",
+      "locator": "The Offering, S-7; as of July 9, 2025; excludes potential conversion/options",
+      "as_of": "2025-07-09",
+      "evidence_class": "reported"
+    },
+    "restricted_cash_open_current": {
+      "value": "0.810",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Balance sheet restricted cash current",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "restricted_cash_open_noncurrent": {
+      "value": "0.538",
+      "unit": "USD million",
+      "source": "S11",
+      "locator": "Balance sheet restricted cash non-current",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "investments_gains_open": {
+      "value": "0.371",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 4 Short-term investments unrealized gains December 31",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "investments_losses_open": {
+      "value": "0",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 4 Short-term investments unrealized losses December 31",
+      "as_of": "2025-12-31",
+      "evidence_class": "reported"
+    },
+    "investments_gains_close": {
+      "value": "0.001",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 4 Short-term investments unrealized gains September 30",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "investments_losses_close": {
+      "value": "1.050",
+      "unit": "USD million",
+      "source": "S19",
+      "locator": "Note 4 Short-term investments unrealized losses September 30",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    },
+    "commissioning_year": {
+      "value": "2028",
+      "unit": "calendar year; management expectation",
+      "source": "S19",
+      "locator": "MD&A Recent Developments, 10X Facility: expects to begin commissioning in 2028; not COD",
+      "as_of": "2026-09-30",
+      "evidence_class": "reported"
+    }
+  },
+  "assumptions": {
+    "benchmark_prices": {
+      "values": [
+        "70",
+        "110",
+        "140"
+      ],
+      "unit": "USD/NdPr kg equivalent",
+      "class": "hypothetical",
+      "rationale": "Expose below-floor, at-floor, above-floor payoffs; no market-price forecast"
+    },
+    "illustrative_sofr": {
+      "values": [
+        "0.03",
+        "0.04",
+        "0.05"
+      ],
+      "unit": "fraction/year",
+      "class": "hypothetical",
+      "rationale": "Rate sensitivity; no claimed observed or forecast SOFR"
+    },
+    "revolver_draws": {
+      "values": [
+        "0",
+        "50",
+        "150",
+        "203"
+      ],
+      "unit": "USD million",
+      "class": "hypothetical",
+      "rationale": "Static draw cases within September 30, 2026 residual capacity; no borrowing forecast"
+    },
+    "support_years": {
+      "values": [
+        "2028",
+        "2029",
+        "2030"
+      ],
+      "unit": "calendar year",
+      "class": "hypothetical",
+      "rationale": "Escalation illustrations; no assumed actual COD or milestone date"
+    },
+    "capacity_fractions": {
+      "values": [
+        "0.25",
+        "0.5",
+        "1"
+      ],
+      "unit": "fraction of contractual target capacity",
+      "class": "hypothetical",
+      "rationale": "Illustrative capacity-estimate/target ratios for pre-milestone regime only; post-milestone threshold uses full amount; pre-COD threshold withheld"
+    },
+    "fee_days": {
+      "value": "360",
+      "unit": "days",
+      "class": "hypothetical",
+      "rationale": "360-day rate-year illustration; actual fees use actual days/360"
+    },
+    "government_addback_cases": {
+      "values": [
+        {
+          "name": "No applicable current-period minimum",
+          "applicable_minimum": "0",
+          "attributable_net_income": "20",
+          "duplicative_later_cash": "0"
+        },
+        {
+          "name": "Minimum exceeds attributable income",
+          "applicable_minimum": "40",
+          "attributable_net_income": "20",
+          "duplicative_later_cash": "0"
+        },
+        {
+          "name": "Income exceeds minimum",
+          "applicable_minimum": "40",
+          "attributable_net_income": "60",
+          "duplicative_later_cash": "0"
+        },
+        {
+          "name": "Later cash duplicates prior addback",
+          "applicable_minimum": "0",
+          "attributable_net_income": "20",
+          "duplicative_later_cash": "20"
+        }
+      ],
+      "unit": "USD million per hypothetical Test Period",
+      "class": "hypothetical",
+      "rationale": "Isolated clause (a)(xiv) arithmetic including later duplicate-payment reversal; actual eligibility and attribution unverified; no compliance result"
+    }
+  },
+  "model_controls": {
+    "draw": {
+      "value": 150,
+      "unit": "USD million",
+      "class": "hypothetical",
+      "rationale": "Static Q3 L-C balance; conditional draw, not forecast"
+    },
+    "sofr": {
+      "value": 0.04,
+      "unit": "fraction/year",
+      "class": "hypothetical",
+      "rationale": "Illustrative SOFR, not observed or forecast"
+    },
+    "days": {
+      "value": 360,
+      "unit": "actual elapsed days / 360",
+      "class": "hypothetical",
+      "rationale": "One 360-day rate-year illustration"
+    },
+    "minimum": {
+      "value": 40,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Eligible contractual minimum assumed solely to isolate clause"
+    },
+    "income": {
+      "value": 20,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Attributable Consolidated Net Income, not Adjusted EBITDA"
+    },
+    "duplicate": {
+      "value": 0,
+      "unit": "USD million/Test Period",
+      "class": "hypothetical",
+      "rationale": "Later cash duplicating prior addback only"
+    },
+    "trigger": {
+      "value": "2027-08-15",
+      "unit": "date",
+      "class": "hypothetical",
+      "rationale": "Illustrative Q2 statement delivery; not a calculated contractual deadline or forecast"
+    },
+    "state": {
+      "value": "COD / before milestone",
+      "unit": "contractual state",
+      "class": "hypothetical",
+      "rationale": "Three-state illustration, not actual operating status"
+    },
+    "year": {
+      "value": 2029,
+      "unit": "calendar year",
+      "class": "hypothetical",
+      "rationale": "Full-year threshold definition, excludes stub and true-up"
+    },
+    "capacity": {
+      "value": 0.5,
+      "unit": "capacity estimate / target",
+      "class": "hypothetical",
+      "rationale": "Pre-milestone ratio only; no contractual 100% cap inferred"
+    },
+    "benchmark": {
+      "value": 140,
+      "unit": "USD/NdPr kg equivalent",
+      "class": "hypothetical",
+      "rationale": "Normalized eligible designated kg, not sales revenue"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 // Equal spokes encode declared links to one focal entity, never flow or value.
-import { arr, obj, str } from "../contract";
+import { arr, bool, obj, str } from "../contract";
 import { maxItems, minItems, uniqueLabels } from "../integrity";
 import { C } from "../primitives";
 import type { Renderer } from "../types";
@@ -7,13 +7,15 @@ import type { Renderer } from "../types";
 interface CounterpartyData {
   hub: string;
   relationship: string;
+  /** false keeps `relationship` in the data and alt text but does not print it above the map. */
+  showRelationship?: boolean;
   parties: { label: string; role: string }[];
 }
 export const counterpartyMap: Renderer<CounterpartyData> = {
   id: "counterparty-map",
   parse(raw) {
     const d = obj(raw, "data");
-    return { hub: str(d.hub, "data.hub"), relationship: str(d.relationship, "data.relationship"), parties: arr(d.parties, "data.parties").map((v, i) => {
+    return { hub: str(d.hub, "data.hub"), relationship: str(d.relationship, "data.relationship"), ...(d.showRelationship === undefined ? {} : { showRelationship: bool(d.showRelationship, "data.showRelationship") }), parties: arr(d.parties, "data.parties").map((v, i) => {
       const p = obj(v, `data.parties[${i}]`);
       return { label: str(p.label, `data.parties[${i}].label`), role: str(p.role, `data.parties[${i}].role`) };
     }) };
@@ -28,7 +30,7 @@ export const counterpartyMap: Renderer<CounterpartyData> = {
     const a = h.area;
     const cx = a.x + a.w / 2, cy = a.y + a.h / 2 + 0.13;
     const rx = a.w / 2 - 1.45, ry = a.h / 2 - 0.57;
-    h.text("link-meaning", "legend", d.relationship, { x: a.x, y: a.y, w: a.w, h: 0.27, fontSize: 11, color: C.muted });
+    if (d.showRelationship !== false) h.text("link-meaning", "legend", d.relationship, { x: a.x, y: a.y, w: a.w, h: 0.27, fontSize: 11, color: C.muted });
     const positions = d.parties.map((_, i) => {
       const angle = -Math.PI / 2 + 2 * Math.PI * i / d.parties.length;
       return { x: cx + rx * Math.cos(angle), y: cy + ry * Math.sin(angle) };

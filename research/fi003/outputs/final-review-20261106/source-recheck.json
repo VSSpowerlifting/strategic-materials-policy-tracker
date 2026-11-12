@@ -1,0 +1,320 @@
+[
+  {
+    "id": "S01",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "19328b7d418d0190549f161ac3e137c4397b0cdea8a1c8dd2757372ca75553f0",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/july8k.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S02",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "80cf4b9198f80d17063466bdfeb60c8672a25a0522dd9149dcc2db0ea18aace3",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/transaction.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "eac0edbd0a349e9723db408861fd2b109cd1db7a843ac8c6a9653c0b9228cc33",
+      "bytes": 140619,
+      "metadata": {
+        "scrapeId": "01a1b2fd-883f-75c6-baeb-7bdec3e6f462",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex101.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S03",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "6670327aa3ed30b79133cca66d1f18a1d36b9bc478cebe066fdfbc8f5d667b8b",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/offtake.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "95a33ffc10adc9f609d46a334c449311f3ed5e38e0dc20bac72000ba20352935",
+      "bytes": 130111,
+      "metadata": {
+        "scrapeId": "01a1b2fd-8893-7645-bd4c-8db6c60dd007",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex105.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex105.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S04",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "36b475c9a1f1a491fb991483abb84c4488085d1fe1e82af7b92269ac67c9ce0a",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/ppa.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "bffcfc72b41f426d46dbbb51abf99bc072e211ad86f19f5c2aca98ad51a377ab",
+      "bytes": 61119,
+      "metadata": {
+        "scrapeId": "01a1b2fd-8852-7598-a512-dc7f17393833",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex106.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525157310/d43796dex106.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S05",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "371483e4106fd789186c12cfcb2fcb222f95ab70319dd6bb29a3830abafde65e",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/preferred.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S06",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "1bc8121fbe4a0610b748df50102c4b038988c518c07484610d6ee04e2fc27a93",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/prospectus.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "805e6bec2f74ff8b6327d00a612fb59ee15f24b4ff214022d240cfe9dae4fc7f",
+      "bytes": 190837,
+      "metadata": {
+        "scrapeId": "01a1b2fd-883c-70cd-99f2-cd9616a667ea",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525160635/d923027d424b5.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525160635/d923027d424b5.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S07",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "bbbe99d91eeb7822169af792a94e6520054960653e2256f6478f2471a2221da4",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/underwriting.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "c8a7bbddc5b3ff195e47bccf7cff0d5e529609d6cf9507cb6e45e42cd1f66306",
+      "bytes": 130654,
+      "metadata": {
+        "scrapeId": "01a1b2fd-898b-719c-9181-5547e5afdf24",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525161255/d923222dex11.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525161255/d923222dex11.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S08",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "bf464e0978f4d97ee348b8088c130622170f14d5315790387fd3992c15aab8e4",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/aug8k.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S09",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "7bff14645f3c2f736019bd06ed316a2ba6bd529bdf9aaa11266c210aa5037be8",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/credit.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "609d9226b107997f63eaf381e5c240060b0e2553d1615fb16b09ddd86b65c1d8",
+      "bytes": 713761,
+      "metadata": {
+        "scrapeId": "01a1b2fd-88b2-765b-a86d-05c3a77487d3",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000119312525187776/d15553dex101.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S10",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "f9a9db28f4d3d7b9ba2585d3a01031734b0c98f238fb9ae472b8325e7155a715",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/2025q3.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S11",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "460a73939f1190fb4c24215b1a29faae7ef66e1aaf5a01e7e40cf5f6fbd09b89",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/2025-10k.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "0252228887208cf58cbb710b2172f258797f54a73c4dcd3733c7478fcb9022bd",
+      "bytes": 702450,
+      "metadata": {
+        "title": "mp-20251231",
+        "scrapeId": "01a1b2fd-88cd-77c5-939c-4218a9dddb88",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000008/mp-20251231.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S12",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "ffca7c0abb95ef54ddac7341cdca4da68b0da0c0bcbb98f52f7e286aa50ca22d",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/2026q1.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S13",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "e0f676175c72e195b67626310b17643bc2ad3dc35bd9e46e4eb66ce40b24fe8c",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/2026q2.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S14",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "c803c095365317f59dde264abf54f5aba287219899e0fcce0a295e46729d3aed",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/q3release.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S15",
+    "url": "https://www.jpmorgan.com/insights/banking/investment-banking/mp-materials",
+    "http_status": 200,
+    "bytes": 218106,
+    "sha256": "1e907b7d5dfd982ece5d5e37976d61a94ded0c24afe798b6b674199981b0316f",
+    "decoded_sha256": "1e907b7d5dfd982ece5d5e37976d61a94ded0c24afe798b6b674199981b0316f",
+    "matches_historical": false,
+    "historical_sha256": "c578480118a2cbd2f7efc93293b74d2fcce12ff226946353c57c8b44b112266b",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/jpm.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S16",
+    "url": "https://www.jpmorganchase.com/newsroom/press-releases/2026/one-year-security-resiliency-initiative-helping-strengthen-industries",
+    "http_status": 200,
+    "bytes": 109981,
+    "sha256": "1444cb4fcd3532f62b7a40eeccbbc3d1a5d772962d08febabeaf96729fde721d",
+    "decoded_sha256": "1444cb4fcd3532f62b7a40eeccbbc3d1a5d772962d08febabeaf96729fde721d",
+    "matches_historical": false,
+    "historical_sha256": "6ebead904f98e8b4bdb13c68cb6c0f90a5401f7f614a907eef88cd3394910977",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/jpm2026.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S17",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "2809ab8e907685031d6ceede7ca41021870bb4ea226905544be32122e08b7dea",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003/apple.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S18",
+    "url": "https://data.sec.gov/submissions/CIK0001801368.json",
+    "http_status": 200,
+    "bytes": 86789,
+    "sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+    "decoded_sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+    "matches_historical": true,
+    "historical_sha256": "17f92cac1c517e51721dd824890750d425382e534eaebe53ab012cc978f9a50b",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/fi003-final-review-20261106/S18.html",
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S19",
+    "error": "HTTP Error 403: Forbidden",
+    "historical_sha256": "dd45624f47b781eb0b84c6c3b8f0dd02900bb2ec7b430e148bb85f24af7eebc2",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/smpt-fi003-phase2/2026q3.html",
+    "alternate_fresh_retrieval": {
+      "via": "Firecrawl full original URL to Markdown; no raw-byte equivalence claim",
+      "status": 200,
+      "derived_markdown_sha256": "ff0766d318c70a96994be1f299beb4de78401a3be7933deb53d8542905d0778f",
+      "bytes": 312290,
+      "metadata": {
+        "title": "mp-20260930",
+        "scrapeId": "01a1b2fd-0df5-70e9-80a0-5cf76b4ebedc",
+        "sourceURL": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1801368/000180136826000057/mp-20260930.htm",
+        "statusCode": 200,
+        "contentType": "text/html",
+        "timezone": "America/New_York",
+        "proxyUsed": "basic",
+        "creditsUsed": 1,
+        "concurrencyLimited": false
+      }
+    },
+    "reviewed_on": "2026-11-06"
+  },
+  {
+    "id": "S20",
+    "url": "https://gov.texas.gov/news/post/governor-abbott-announces-mp-materials-rare-earth-magnet-manufacturing-expansion-in-northlake",
+    "http_status": 200,
+    "bytes": 96803,
+    "sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+    "decoded_sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+    "matches_historical": true,
+    "historical_sha256": "897fa192c18b371827231e5af89b32b38cba758d3fd6d98240a8b112e1432769",
+    "cache_fingerprint_match": true,
+    "matching_cached_file": "/tmp/fi003-final-review-20261106/S20.html",
+    "reviewed_on": "2026-11-06"
+  }
+]

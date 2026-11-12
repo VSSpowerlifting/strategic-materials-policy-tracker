@@ -1,7 +1,7 @@
 // K4 exhibit-with-interpretation — a compact native table of key figures with
 // numbered interpretation notes beside it. Each note cites a table row by its
 // row number; check() enforces that every reference resolves.
-import { arr, num, obj, optNum, str, strList } from "../contract";
+import { arr, num, obj, optNum, optStr, str, strList } from "../contract";
 import { maxItems, minItems, uniqueLabels } from "../integrity";
 import { C, fmt, hairline, HEAD_CELL } from "../primitives";
 import type { IntegrityIssue, Renderer, TableCell } from "../types";
@@ -12,6 +12,8 @@ export interface InterpretationData {
   columns: string[];
   rows: { label: string; values: number[] }[];
   notes: { ref: number; text: string }[];
+  /** Heading over the notes (default "READING THE TABLE"). */
+  notesHeading?: string;
 }
 
 export const exhibitWithInterpretation: Renderer<InterpretationData> = {
@@ -33,6 +35,7 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
         const r = obj(x, `data.notes[${i}]`);
         return { ref: num(r.ref, `data.notes[${i}].ref`), text: str(r.text, `data.notes[${i}].text`) };
       }),
+      ...(o.notesHeading === undefined ? {} : { notesHeading: optStr(o.notesHeading, "data.notesHeading") }),
     };
   },
   check(d) {
@@ -98,7 +101,7 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
     const bw = h.area.x + h.area.w - bx;
     const top = h.plain ? 0 : 0.5;
     if (!h.plain) {
-      h.text("reading-heading", "annot", "READING THE TABLE", { x: bx, y, w: bw, h: 0.3, fontSize: 11, bold: true, color: C.muted, charSpacing: 1, valign: "middle" });
+      h.text("reading-heading", "annot", d.notesHeading ?? "READING THE TABLE", { x: bx, y, w: bw, h: 0.3, fontSize: 11, bold: true, color: C.muted, ...(d.notesHeading ? {} : { charSpacing: 1 }), valign: "middle" });
       hairline(h, "reading-rule", "annot", bx, y + 0.34, bw);
     }
     const noteH = (h.area.h - top) / d.notes.length;

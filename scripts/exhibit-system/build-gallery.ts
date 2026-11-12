@@ -20,6 +20,7 @@ import { brandThemeXml } from "../publication/tokens";
 import { contentArea, C, DRAFT_BADGE, drawFrame, FONT, FONT_SERIF, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, TYPE } from "./primitives";
 import { DEMO_DECK_SPEC, DEMO_PPTX, GALLERY_PPTX, MANIFEST_FILE, REPO } from "./paths";
 import type { ElementRecord, ExhibitClassification, Fixture, PptxSlide } from "./types";
+import { researchCoverSlide, type ResearchCover } from "./research-cover";
 
 
 interface Pptx {
@@ -94,12 +95,15 @@ export interface BuildOptions {
   classification: ExhibitClassification;
   /** Research decks only: repository-relative path of the QC handoff record, if one exists. */
   qcRecord?: string;
-  evidence?: { id: string; title: string; url: string; locator: string }[];
+  /** Research decks only. `label` is the short citation shown (and linked) in the slide footer. */
+  evidence?: { id: string; title: string; url: string; locator: string; label?: string }[];
   /**
    * Research decks only, opt-in: omit decorative frame kickers (the cover
    * kicker and the "INTERPRETATION" heading). Source, status and draft labels stay.
    */
   plainFrame?: boolean;
+  /** Research decks only: a publication cover (research-cover.ts) in place of the generic one. */
+  researchCover?: ResearchCover;
 }
 
 function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
@@ -226,6 +230,14 @@ export async function buildDeck(
   if (cover.hero) {
     heroCoverSlide(pptx, cover.title, cover.hero, coverRecords, opts);
     manifest.push({ slide: 1, pattern: "cover", cover_pattern: "cover_hero_split", elements: coverRecords });
+  } else if (opts.researchCover && opts.classification === "research") {
+    const links = opts.researchCover.evidence_refs.flatMap((id) => {
+      const ref = opts.evidence?.find((r) => r.id === id);
+      return ref ? [{ id, label: ref.label ?? id, url: ref.url }] : [];
+    });
+    researchCoverSlide(pptx, opts.researchCover, coverRecords, links,
+      `Cover. Classification: research. ${DRAFT_BADGE}. Publication authorization is not granted by this tool. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`);
+    manifest.push({ slide: 1, pattern: "cover", elements: coverRecords });
   } else {
     coverSlide(pptx, cover.title, cover.lines, coverRecords, opts);
     manifest.push({ slide: 1, pattern: "cover", elements: coverRecords });
@@ -249,7 +261,17 @@ export async function buildDeck(
     if (opts.plainFrame) h.plain = true;
     renderer.render(h, data, e.fixture);
     // Keep the fixed frame above native tables in renderers that reflow them.
-    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, annotationHeading: !opts.plainFrame });
+    // Research slides with an evidence register get clickable footer citations, in evidence_refs order.
+    const links = opts.classification === "research" && opts.evidence?.length
+      ? (e.fixture.evidence_refs ?? []).flatMap((id) => {
+          const ref = opts.evidence!.find((r) => r.id === id);
+          return ref?.label ? [{ label: ref.label, url: ref.url }] : [];
+        })
+      : undefined;
+    drawFrame(h, {
+      label: e.label, slideNumber, fixture: e.fixture, annotationHeading: !opts.plainFrame,
+      ...(links?.length ? { links } : {}),
+    });
     slide.addNotes(
       synthetic
         ? [
@@ -300,6 +322,15 @@ export function splitNoteParagraphs(xml: string): string {
 }
 
 /**
+ * pptxgenjs hard-codes Arial in pie/doughnut series data-label text properties
+ * (no option reaches it). Point every chart typeface at the deck font so the
+ * chart XML matches the rest of the deck. A no-op for charts already in FONT.
+ */
+export function unifyChartTypeface(chartXml: string): string {
+  return chartXml.replace(/(<a:(?:latin|ea|cs) typeface=")Arial(")/g, `$1${FONT}$2`);
+}
+
+/**
  * Re-zips an OOXML package with fixed entry dates and fixed core.xml dates.
  * Native charts embed their data as nested .xlsx packages, which carry their
  * own timestamps, so those are normalised recursively.
@@ -328,7 +359,7 @@ async function normalise(buf: Buffer): Promise<Buffer> {
       const xml = splitNoteParagraphs((await entry.async("string")) as string);
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else if (/^ppt\/charts\/chart\d+\.xml$/.test(name)) {
-      const xml = suppressHelperLabels((await entry.async("string")) as string);
+      const xml = unifyChartTypeface(suppressHelperLabels((await entry.async("string")) as string));
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else {
       out.file(name, (await entry.async("nodebuffer")) as Buffer, { date: FIXED_DATE, createFolders: false });

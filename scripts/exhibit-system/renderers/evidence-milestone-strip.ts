@@ -1,9 +1,10 @@
 // I3 evidence-milestone strip — one sequence of dated milestones, each tagged with
 // an evidence state. Marker style encodes the state (hollow dashed = announced or
-// targeted, filled neutral = reported, filled accent = independently verified).
+// targeted, filled neutral = reported, filled accent = independently verified;
+// solid hollow = contractual deadline, dotted hollow = conditional or illustrative).
 // Native shapes on a computed date scale (day counts via Date.UTC): positions are
 // derived at build time, NOT data-bound. Labels alternate above and below the spine.
-import { arr, isoDate, obj, str } from "../contract";
+import { arr, bool, isoDate, obj, str } from "../contract";
 import { datesAscending, EVIDENCE_STATES, inVocabulary, maxItems, minItems, uniqueLabels } from "../integrity";
 import { C, vline } from "../primitives";
 import type { IntegrityIssue, RenderHelpers, Renderer } from "../types";
@@ -18,6 +19,8 @@ export interface Milestone {
 }
 export interface EvidenceStripData {
   milestones: Milestone[];
+  /** false omits the reading-convention note (default true). */
+  conventionNote?: boolean;
 }
 
 const dayNum = (iso: string): number => {
@@ -52,6 +55,7 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
   parse(raw) {
     const o = obj(raw, "data");
     return {
+      ...(o.conventionNote === undefined ? {} : { conventionNote: bool(o.conventionNote, "data.conventionNote") }),
       milestones: arr(o.milestones, "data.milestones").map((m, i) => {
         const p = `data.milestones[${i}]`;
         const mo = obj(m, p);
@@ -103,17 +107,27 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
 
     // Legend: marker style encodes the evidence state.
     let lx = a.x;
-    const legend: [string, string, "hollow" | "reported" | "verified", number][] = [
+    const legend: [string, string, MarkerStyle, number][] = [
       ["announced-targeted", "Announced or targeted", "hollow", 2.4],
       ["reported", "Reported", "reported", 1.55],
       ["verified", "Independently verified", "verified", 2.2],
     ];
+    // Contract-term states are additive: when a strip uses them, the legend lists only the
+    // states present, so no entry lacks a marker. Strips without them render as before.
+    const present = new Set(d.milestones.map((m) => markerStyle(m.state)));
+    if (present.has("contractual") || present.has("conditional")) {
+      legend.push(["contractual", "Contractual deadline", "contractual", 2.15]);
+      legend.push(["conditional", "Conditional on a stated term", "conditional", 2.7]);
+      const kept = legend.filter(([, , style]) => present.has(style));
+      legend.length = 0;
+      legend.push(...kept);
+    }
     legend.forEach(([key, text, style, w]) => {
       stateMarker(h, `legend-${key}`, "legend", style, lx + 0.12, a.y + 0.13, 0.17);
       h.text(`legend-${key}-label`, "legend", text, { x: lx + 0.32, y: a.y, w: w - 0.32, h: 0.26, fontSize: 11, color: C.ink });
       lx += w;
     });
-    h.text("axis-note", "axis", "Positioned on a day-count scale", {
+    if (d.conventionNote !== false) h.text("axis-note", "axis", "Positioned on a day-count scale", {
       x: a.x + a.w - 3.2, y: a.y, w: 3.2, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
@@ -138,7 +152,7 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
       const verified = m.state === "independently-verified";
       const stemTop = up ? mid - mk / 2 - stem : mid + mk / 2;
       vline(h, `stem-${i}`, "data", x - 0.006, stemTop, stem, C.neutral);
-      stateMarker(h, `marker-${i}`, "data", verified ? "verified" : m.state === "reported" ? "reported" : "hollow", x, mid, mk);
+      stateMarker(h, `marker-${i}`, "data", markerStyle(m.state), x, mid, mk);
       const boxY = up ? mid - mk / 2 - stem - boxH : mid + mk / 2 + stem;
       h.text(`milestone-label-${i}`, "label", [
         { text: m.label, options: { bold: true, fontSize: 11, color: C.ink, breakLine: true } },
@@ -149,10 +163,23 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
   },
 };
 
-/** Hollow dashed = announced or targeted; filled neutral = reported; filled accent = independently verified. */
-function stateMarker(h: RenderHelpers, name: string, role: "data" | "legend", style: "hollow" | "reported" | "verified", cx: number, cy: number, size: number): void {
+type MarkerStyle = "hollow" | "reported" | "verified" | "contractual" | "conditional";
+const markerStyle = (state: string): MarkerStyle =>
+  state === "independently-verified" ? "verified"
+    : state === "reported" ? "reported"
+    : state === "contractual" ? "contractual"
+    : state === "conditional" ? "conditional"
+    : "hollow";
+
+/** Hollow dashed = announced or targeted; filled neutral = reported; filled accent = independently verified;
+ *  hollow solid = contractual deadline; hollow dotted = conditional or illustrative. */
+function stateMarker(h: RenderHelpers, name: string, role: "data" | "legend", style: MarkerStyle, cx: number, cy: number, size: number): void {
   const box = { x: cx - size / 2, y: cy - size / 2, w: size, h: size };
-  if (style === "hollow") {
+  if (style === "contractual") {
+    h.shape(name, role, h.shapes.ellipse, { ...box, fill: { color: C.paper }, line: { color: C.neutralDark, width: 1.5 } });
+  } else if (style === "conditional") {
+    h.shape(name, role, h.shapes.ellipse, { ...box, fill: { color: C.paper }, line: { color: C.neutralDark, width: 1.5, dashType: "sysDot" } });
+  } else if (style === "hollow") {
     h.shape(name, role, h.shapes.ellipse, { ...box, fill: { color: C.paper }, line: { color: C.neutralDark, width: 1.5, dashType: "dash" } });
   } else if (style === "reported") {
     h.shape(name, role, h.shapes.ellipse, { ...box, fill: { color: C.neutral }, line: { color: C.neutralDark, width: 0.75 } });
