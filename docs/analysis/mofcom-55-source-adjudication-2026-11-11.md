@@ -44,3 +44,41 @@ The original MOFCOM No. 55 text, No. 70 (2025), and No. 58 (2026) were independe
 - The source-linked chronological entries remain scheduled 2025-10-09 (announced start 2025-11-08), suspended from 2025-11-07 through 2026-11-10, then continuously suspended from 2026-11-11 through 2027-01-10. No in-force interval is asserted, and no later resumption is inferred. The U.S.-destination paragraph in No. 46 (2024) and its No. 72 suspension remain separate.
 - New regression coverage: `tests/mofcom-55-data.test.ts` checks original-title provenance, seven-row identity and classification, same-source item-scope evidence, and status selection on the critical dates. This supplements, rather than replaces, the full data validator.
 - **Outstanding before merge:** independent human review of classifications and legal chronology; full CI (`npm run validate`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`), any branch integration regressions, and explicit authorization of the corpus publication revision. No source content, scope or legal status is authorized merely by these machine-side corrections.
+
+
+## 12 November 2026 original-source editorial adjudication — PASS for source classification
+
+**Review scope and authority.** This review was conducted with AI assistance in response to the maintainer's request to review and sign off on the No. 55 records. All five official Chinese texts were opened and inspected directly, rather than relying on summaries. **Decision: PASS for source transcription, clause classification, translation anchor and recorded legal chronology.** This is an editorial source-review finding, not a legal opinion, a claim that an independent human lawyer reviewed the translations, or authorization to alter the published corpus cutoff. The maintainer's release decision remains separate.
+
+**Original government pages read (12 November 2026):**
+- [2025 No. 55 — original announced restrictions](https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_949f47563b834dad95b0010f375a892c.html)
+- [2025 No. 70 — suspension from 7 November 2025 through 10 November 2026](https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_b1ec77dd3f0d4762952904df7cdaadec.html)
+- [2026 No. 58 — continuing suspension 11 November 2026 through 10 January 2027](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_91466027f465467985942a639a9485f4.html)
+- [2024 No. 46 — distinct U.S.-destination restrictions, paragraph 2](https://www.mofcom.gov.cn/zwgk/zcfb/art/2024/art_3d5e990b43424e60828030f58a547b60.html)
+- [2025 No. 72 — suspends only paragraph 2 of No. 46 through 27 November 2026](https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_5c68985a6b1a46778e2e8dbff1bb1601.html)
+
+### Independent cross-check against the primary No. 55 text
+
+| Clause and record | Exact controlling facts | Adjudication |
+| --- | --- | --- |
+| 1 / 2C902.a | Artificial-diamond micropowder with average grain diameter <=50 μm; reference customs heading 71051020 | PASS — goods |
+| 2 / 2C902.b | Artificial-diamond single crystal average diameter >50 and <=500 μm; excludes cultivated diamonds for decoration and jewellery; 71051020 | PASS — goods, express exclusion retained |
+| 3 / 2C902.c | Artificial-diamond wire saw meeting **all**: wire diameter <=45 μm, diamond average grain <=8 μm, break force <=16 N | PASS — goods, conjunctive tests retained |
+| 4 / 2C902.d | Artificial-diamond grinding wheel meeting **all**: diamond-tooth hardness <=30 HRB, diamond grain <=5 μm, maximum operating speed >=40 m/s; reference 68042110 | PASS — goods, conjunctive tests retained |
+| 5 / 2B005.b | DCPCVD apparatus; reference heading 84798999 | PASS — equipment |
+| 6 / 2E902 | DCPCVD process technology | PASS — technology |
+| Customs declaration paragraph | Covered goods require the dual-use declaration/code; close-but-uncontrolled items require a noncoverage declaration with technical parameters; customs may withhold release while questioning a declaration | PASS — distinct customs enforcement row |
+
+The general export-licensing paragraph applies to the **six enumerated item clauses** and adds no separate controlled-item scope. **Seven rows are approved, not eight**; an eighth licensing row would duplicate the existing clause coverage. These requirements are general export-item rules, not limited by the source to U.S. destinations. Customs/HTS reference codes remain reference fields rather than legal control identifiers; the six numbered 2C/2B/2E codes are the controlled-item codes.
+
+**Source fields:** Chinese title and national-security/non-proliferation quotation match No. 55 verbatim. The English quotation is correctly marked a nonofficial translation. For this corpus, no named taxonomy material is assigned: `materialIds: []`, `materialAttribution: includes_untracked` and the original untracked material phrase are appropriate. `controlledStages: []` avoids inventing a production-stage claim. The national-security and compliance/non-proliferation framing matches the existing No. 56–58 quoted classification precedent; this is attribution of the issuer's stated rationale, not an assertion of policy effect.
+
+**Dates/status:** No. 55 was issued 2025-10-09, with commencement announced for 2025-11-08. No. 70 suspended the instrument beginning 2025-11-07 **before commencement**, inclusive through 2026-11-10. No. 58 of 2026 continued suspension 2026-11-11 through 2027-01-10, with no intervening day in force. The scheduled entry therefore must never be treated as proof of effective controls. No. 46 (2024), paragraph 2, and No. 72 (2025) remain a separate U.S.-destination legal sequence. No. 72 leaves paragraph 1 of No. 46 untouched. Neither source supplies a basis to infer what will happen after the currently announced suspension end.
+
+### Release boundary: source review passes; publication admission is separate
+
+- The branch's source access and event verification dates are both **2026-11-11**, later than `site.lastUpdated=2026-11-08` (the last approved, frozen research corpus release). Historical tests deliberately exclude the pending No. 55 records when reconstructing that frozen release. **Those test exclusions are not publication authorization.**
+- The site control-status date is independently `site.legalStatusAsOf=2026-11-09`; the No. 55 No. 58 suspension takes effect **2026-11-11**. A release must decide whether to advance and verify the applicable publication metadata or explicitly disclose this as a subsequent admission, without silently rewriting an earlier corpus snapshot.
+- CI passing confirms schema, tests and build; it does not constitute legal review. Marking the draft pull request ready for review may proceed on this source PASS, but **do not merge or deploy before the maintainer explicitly accepts the dated corpus-admission decision**. An independent qualified legal reviewer may additionally be warranted before presenting the tracker as compliance advice.
+
+**Editorial disposition:** No factual correction to the seven source-backed controls was needed after this primary-text comparison. Approved for PR review, subject to the dated publication-release gate above.
