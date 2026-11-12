@@ -139,15 +139,10 @@ export const photographs = {
 
 export type PhotographId = keyof typeof photographs;
 
-export function researchCoverPhoto(slug: string): Photograph | undefined {
-  const cover = researchCovers[slug];
-  return cover?.kind === "photo" ? photographs[cover.photo] : undefined;
-}
-
 /**
- * Cover for each publication, keyed by its route segment. Registered photographs preserve a direct
- * source/rights record; the historical typographic fallback is retained for other future publications.
- * Externally hosted photos should be migrated to vetted local binaries when a checked-in asset is available.
+ * Explicit overrides only: historically published artwork stays fixed.
+ * New research publications receive a cover from resolveResearchCover without adding an entry here.
+ * Do not add source imagery unless its depiction, licence and attribution are recorded above.
  */
 export type ResearchCover =
   | { kind: "photo"; photo: PhotographId }
@@ -160,3 +155,66 @@ export const researchCovers: Record<string, ResearchCover> = {
   "antimony-supply-resilience": { kind: "photo", photo: "antimony-ingot" },
   "tungsten-supply-security": { kind: "photo", photo: "tungsten-usgs" },
 };
+
+// A small approved pool makes automatic assignment predictable and source-traceable.
+// Geographic imagery is assigned only when a slug identifies the depicted site or country.
+const photoRules = [
+  { matches: /\bescondida\b/, photo: "escondida-tailings" },
+  { matches: /\b(?:hemerdon|drakelands)\b/, photo: "drakelands-aster" },
+  { matches: /\bantimony\b/, photo: "antimony-ingot" },
+  { matches: /\b(?:tungsten|wolfram)\b/, photo: "tungsten-usgs" },
+] as const satisfies ReadonlyArray<{ matches: RegExp; photo: PhotographId }>;
+
+// Generic plates are automatically assigned when the image library has no precise match.
+// Chemical abbreviations are labels, not an assertion about a particular mine or company.
+const materialPlates = [
+  { matches: /\brare earths?\b|\bree\b/, mark: "REE", line: "Rare-earth elements" },
+  { matches: /\bcopper\b/, mark: "Cu", line: "Copper · element 29" },
+  { matches: /\blithium\b/, mark: "Li", line: "Lithium · element 3" },
+  { matches: /\bnickel\b/, mark: "Ni", line: "Nickel · element 28" },
+  { matches: /\bcobalt\b/, mark: "Co", line: "Cobalt · element 27" },
+  { matches: /\bgallium\b/, mark: "Ga", line: "Gallium · element 31" },
+  { matches: /\bgermanium\b/, mark: "Ge", line: "Germanium · element 32" },
+  { matches: /\bgraphite\b/, mark: "C", line: "Graphite · carbon" },
+  { matches: /\bmanganese\b/, mark: "Mn", line: "Manganese · element 25" },
+  { matches: /\buranium\b/, mark: "U", line: "Uranium · element 92" },
+  { matches: /\bplatinum\b/, mark: "Pt", line: "Platinum · element 78" },
+] as const;
+
+/**
+ * Always return a cover for a research publication, including unknown future slugs.
+ * - Existing cover overrides are preserved exactly.
+ * - Named sites and broadly illustrative mineral photographs come from the vetted registry.
+ * - A Chinese rare-earth deposit is never used to imply a mine in a different jurisdiction.
+ * - Everything else receives an original typographic plate; no external image lookup at build time.
+ *
+ * For a newly published article or research-index card, render <ResearchCover data-cover={slug} />.
+ * Adding/changing an automatic cover is presentation work, not research-content approval.
+ */
+export function resolveResearchCover(slug: string): ResearchCover {
+  const key = slug.trim().toLowerCase();
+  const manual = researchCovers[key];
+  if (manual) return manual;
+
+  const terms = key.replace(/[^a-z0-9]+/g, " ").trim();
+
+  // Site-specific assets take precedence over mineral-generic ones.
+  for (const rule of photoRules) {
+    if (rule.matches.test(terms)) return { kind: "photo", photo: rule.photo };
+  }
+  // The existing Chinese rare-earth deposit is country-specific.
+  if (/\bchina\b|\bchinese\b/.test(terms) && /\brare earths?\b|\bree\b/.test(terms)) {
+    return { kind: "photo", photo: "china-rare-earths" };
+  }
+  for (const plate of materialPlates) {
+    if (plate.matches.test(terms)) {
+      return { kind: "mark", mark: plate.mark, line: plate.line };
+    }
+  }
+  return { kind: "mark", mark: "SMPT", line: "Research" };
+}
+
+export function researchCoverPhoto(slug: string): Photograph | undefined {
+  const cover = resolveResearchCover(slug);
+  return cover.kind === "photo" ? photographs[cover.photo] : undefined;
+}

@@ -8,6 +8,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 For every new or substantially revised public-facing research article, policy analysis, report, executive memo, social research edition or publication landing page, **read [SMPT Research Publication House Style](docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) before drafting and revisit its natural-language review checklist before delivery**. This requirement applies to narrative articles and website copy, not just decks. It complements the legal/source and publication gates below; a fluent rewrite must never erase a material qualifier, source or legal-status distinction. Automated adherence checks can verify the guide is routed and files compile, but human editorial judgment is still required to approve the writing.
 
+## Automatic research covers (presentation-only)
+
+Every new `app/research/<slug>/page.tsx` publication must include `<ResearchCover data-cover={slug} />` in its hero, and the research-index card must use the same component. The cover resolver in `lib/photography.ts` automatically chooses a provenance-registered documentary image when the subject is a precise match, and otherwise renders a branded material or general-research plate. A new publication needs no manually selected cover. Do not use image searches, synthetic documentary imagery, or geographically misleading photographs as automatic fallbacks.
+
+Cover assignment, cropping and image-registry updates are **exempt from human editorial approval** when they are purely presentation changes; automated provenance, copyright, accessibility, build and visual checks still apply. Adding or changing research prose, figures, legal classifications, citations, substantive metadata, or a new publication remains under the existing human review and release gates. Do not exempt an entire page or broad metadata fields just to bypass approval. See `docs/research/AUTOMATIC_COVER_POLICY.md`.
+
 ## Website editorial and interface standard
 
 Use concise, specific, natural editorial copy. A visible sentence must provide a fact, clarify a material distinction, or help the reader navigate. Remove duplicate introductions, ornamental microcopy, question-shaped labels, generic slogans, and repeated platform self-explanations. Prefer publication titles, authors, dates, record fields and source links to promotional prose. Keep navigation labels short and place technical explanations in methodology, contextual disclosures, or accessible detail views.

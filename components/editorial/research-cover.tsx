@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { researchCovers } from "@/lib/photography";
+import { resolveResearchCover } from "@/lib/photography";
 import { PhotoPlate } from "./photo-plate";
 
 /* Named frames, so a page picks a proportion without passing class strings through a content attribute. */
@@ -11,8 +11,9 @@ const FRAMES = {
 
 /**
  * Cover for a publication in the research gallery. The publication is named by `data-cover` (its route
- * segment): the cover is presentation keyed off the entry it sits in, and the registry in
- * `lib/photography.ts` decides whether it is a captioned photograph or a typographic plate.
+ * segment): the cover is automatically assigned from a vetted subject photograph or a typographic
+ * plate. Historical overrides remain pinned in `lib/photography.ts`. No per-article asset registration
+ * or image-search step is needed for new research publications.
  */
 export function ResearchCover({
   "data-cover": slug,
@@ -29,9 +30,8 @@ export function ResearchCover({
   priority?: boolean;
   className?: string;
 }) {
-  const cover = researchCovers[slug];
+  const cover = resolveResearchCover(slug);
   const frame = FRAMES[frameName];
-  if (!cover) return null;
   if (cover.kind === "photo") {
     return <PhotoPlate photo={cover.photo} frame={frame} sizes={sizes} priority={priority} caption={caption} className={className} />;
   }
