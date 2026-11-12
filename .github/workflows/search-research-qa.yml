@@ -45,4 +45,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: node scripts/qa-search-research-browser.mjs
-      - run: test -z "$(git status --porcelain)"
+      - name: Diagnose unexpected checkout changes
+        run: |
+          git status --porcelain=v1 --untracked-files=all
+          git diff --stat
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
