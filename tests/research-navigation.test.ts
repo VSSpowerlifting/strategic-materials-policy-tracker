@@ -42,10 +42,10 @@ test("Published research back links use reliable document navigation", () => {
   }
 });
 
-test("Escondida online-reading action stays inside the redesigned article", () => {
+test("Escondida report downloads open separately without changing approved copy", () => {
   const source = readFileSync("app/research/escondida-copper/page.tsx", "utf8");
-  assert.match(source, /className="research-button-secondary"\s+href="#question"/);
-  assert.match(source, /id="question"/);
+  assert.ok(source.includes('href={`${fi002.assets}/report.html`}'));
+  assert.match(source, /Read online <span>→<\/span>/);
   assert.match(source, /Full report in HTML/);
   assert.match(source, /target="_blank"\s+rel="noopener noreferrer"/);
 });
