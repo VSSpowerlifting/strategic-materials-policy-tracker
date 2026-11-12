@@ -4001,6 +4001,716 @@
     "notes": "Art. 25 sets fines for enterprises that fail to record product flows in the traceability system, exporters included."
   },
   {
+    "id": "ctl-cn-superhard-2025-55-2b005-b",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 5",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "超硬材料相关物项 (superhard-materials-related items)"
+    ],
+    "productScopeAsStated": "直流电弧等离子体喷射化学气相沉积（DCPCVD）设备",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "2B005.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "84798999",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "equipment"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-55",
+        "until": "2025-11-08",
+        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-11",
+        "sourceId": "src-mofcom-2026-58",
+        "until": "2027-01-10",
+        "note": "Continued suspension; no inference about status after this end date."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-55",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "item_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 5; export licensing paragraph; final commencement sentence",
+        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative suspension sentence listing Announcement No. 55",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-58",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
+        "note": null
+      }
+    ],
+    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
+  },
+  {
+    "id": "ctl-cn-superhard-2025-55-2c902-a",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 1",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "超硬材料相关物项 (superhard-materials-related items)"
+    ],
+    "productScopeAsStated": "平均粒径小于等于50 μm的人造金刚石微粉",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "2C902.a",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "71051020",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-55",
+        "until": "2025-11-08",
+        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-11",
+        "sourceId": "src-mofcom-2026-58",
+        "until": "2027-01-10",
+        "note": "Continued suspension; no inference about status after this end date."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-55",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "item_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 1; export licensing paragraph; final commencement sentence",
+        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative suspension sentence listing Announcement No. 55",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-58",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
+        "note": null
+      }
+    ],
+    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
+  },
+  {
+    "id": "ctl-cn-superhard-2025-55-2c902-b",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 2",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "超硬材料相关物项 (superhard-materials-related items)"
+    ],
+    "productScopeAsStated": "平均粒径大于50 μm且小于等于500 μm的人造金刚石单晶；不管制用于装饰、首饰的培育钻石",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "2C902.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "71051020",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-55",
+        "until": "2025-11-08",
+        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-11",
+        "sourceId": "src-mofcom-2026-58",
+        "until": "2027-01-10",
+        "note": "Continued suspension; no inference about status after this end date."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-55",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "item_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 2; export licensing paragraph; final commencement sentence",
+        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative suspension sentence listing Announcement No. 55",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-58",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
+        "note": null
+      }
+    ],
+    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
+  },
+  {
+    "id": "ctl-cn-superhard-2025-55-2c902-c",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 3",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "超硬材料相关物项 (superhard-materials-related items)"
+    ],
+    "productScopeAsStated": "具有以下所有特性的人造金刚石线锯：线径小于等于45 μm；所含金刚石平均粒径小于等于8 μm；破断拉力小于等于16 N",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "2C902.c",
+        "role": "legal_scope"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-55",
+        "until": "2025-11-08",
+        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-11",
+        "sourceId": "src-mofcom-2026-58",
+        "until": "2027-01-10",
+        "note": "Continued suspension; no inference about status after this end date."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-55",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "item_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 3; export licensing paragraph; final commencement sentence",
+        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative suspension sentence listing Announcement No. 55",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-58",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
+        "note": null
+      }
+    ],
+    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
+  },
+  {
+    "id": "ctl-cn-superhard-2025-55-2c902-d",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 4",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "超硬材料相关物项 (superhard-materials-related items)"
+    ],
+    "productScopeAsStated": "具有以下所有特性的人造金刚石砂轮：金刚石齿硬度小于等于30 HRB；所含金刚石平均粒径小于等于5 μm；最高工作速度大于等于40 m/s",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "2C902.d",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_customs",
+        "code": "68042110",
+        "role": "reference"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-55",
+        "until": "2025-11-08",
+        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-11",
+        "sourceId": "src-mofcom-2026-58",
+        "until": "2027-01-10",
+        "note": "Continued suspension; no inference about status after this end date."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-55",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "item_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 4; export licensing paragraph; final commencement sentence",
+        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative suspension sentence listing Announcement No. 55",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-58",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
+        "note": null
+      }
+    ],
+    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
+  },
+  {
+    "id": "ctl-cn-superhard-2025-55-2e902",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "Item 6",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "超硬材料相关物项 (superhard-materials-related items)"
+    ],
+    "productScopeAsStated": "直流电弧等离子体喷射化学气相沉积（DCPCVD）工艺技术",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "2E902",
+        "role": "legal_scope"
+      }
+    ],
+    "controlledItemTypes": [
+      "technology"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-55",
+        "until": "2025-11-08",
+        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-11",
+        "sourceId": "src-mofcom-2026-58",
+        "until": "2027-01-10",
+        "note": "Continued suspension; no inference about status after this end date."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-55",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "item_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Item 6; export licensing paragraph; final commencement sentence",
+        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative suspension sentence listing Announcement No. 55",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-58",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
+        "note": null
+      }
+    ],
+    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
+  },
+  {
+    "id": "ctl-cn-superhard-2025-55-customs-declaration",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "measureType": "customs_enforcement",
+    "direction": "export",
+    "clause": "Customs declaration paragraph",
+    "targetScopes": [
+      "domestic_operators"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [],
+    "materialAttribution": "includes_untracked",
+    "untrackedMaterialsAsStated": [
+      "超硬材料相关物项 (superhard-materials-related items)"
+    ],
+    "productScopeAsStated": "出口经营者应当对报关商品的真实性负责，加强出口物项识别；属于管制物项的，报关单备注栏注明“属于两用物项”并列明出口管制编码；不属于管制物项但参数、指标、性能等接近的，注明“不属于管制物项”并填写具体参数、指标；海关依法质疑期间出口货物不予放行。",
+    "productCodes": [],
+    "controlledItemTypes": [],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020",
+      "evt-cn-decree-792-2024"
+    ],
+    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
+    "modifiesMeasureIds": [],
+    "modifiesExternalInstruments": [],
+    "statusHistory": [
+      {
+        "status": "scheduled",
+        "date": "2025-10-09",
+        "sourceId": "src-mofcom-55",
+        "until": "2025-11-08",
+        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+      },
+      {
+        "status": "suspended",
+        "date": "2025-11-07",
+        "sourceId": "src-mofcom-70",
+        "until": "2026-11-10",
+        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-11",
+        "sourceId": "src-mofcom-2026-58",
+        "until": "2027-01-10",
+        "note": "Continued suspension; no inference about status after this end date."
+      }
+    ],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-55",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "legal_basis",
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Customs declaration paragraph; final commencement sentence",
+        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
+      },
+      {
+        "sourceId": "src-mofcom-70",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative suspension sentence listing Announcement No. 55",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-58",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
+        "note": null
+      }
+    ],
+    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
+  },
+  {
     "id": "ctl-cn-tungsten-2025-export-licensing",
     "eventId": "evt-cn-tungsten-2025",
     "measureType": "export_licensing",
@@ -4995,715 +5705,5 @@
       }
     ],
     "notes": "Sec. 2 defines critical minerals by the USGS list plus uranium, and derivative products to include permanent magnets. Only the materials the order names are attributed."
-  },
-  {
-    "id": "ctl-cn-superhard-2025-55-2c902-a",
-    "eventId": "evt-cn-mofcom-55-2025",
-    "measureType": "export_licensing",
-    "direction": "export",
-    "clause": "Item 1",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "超硬材料相关物项 (superhard-materials-related items)"
-    ],
-    "productScopeAsStated": "平均粒径小于等于50 μm的人造金刚石微粉",
-    "productCodes": [
-      {
-        "system": "cn_control_number",
-        "code": "2C902.a",
-        "role": "legal_scope"
-      },
-      {
-        "system": "cn_customs",
-        "code": "71051020",
-        "role": "reference"
-      }
-    ],
-    "controlledItemTypes": [
-      "goods"
-    ],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020",
-      "evt-cn-decree-792-2024"
-    ],
-    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "scheduled",
-        "date": "2025-10-09",
-        "sourceId": "src-mofcom-55",
-        "until": "2025-11-08",
-        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
-      },
-      {
-        "status": "suspended",
-        "date": "2025-11-07",
-        "sourceId": "src-mofcom-70",
-        "until": "2026-11-10",
-        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
-      },
-      {
-        "status": "suspended",
-        "date": "2026-11-11",
-        "sourceId": "src-mofcom-2026-58",
-        "until": "2027-01-10",
-        "note": "Continued suspension; no inference about status after this end date."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-55",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "product_codes",
-          "item_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Item 1; export licensing paragraph; final commencement sentence",
-        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
-      },
-      {
-        "sourceId": "src-mofcom-70",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative suspension sentence listing Announcement No. 55",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2026-58",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
-        "note": null
-      }
-    ],
-    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
-  },
-  {
-    "id": "ctl-cn-superhard-2025-55-2c902-b",
-    "eventId": "evt-cn-mofcom-55-2025",
-    "measureType": "export_licensing",
-    "direction": "export",
-    "clause": "Item 2",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "超硬材料相关物项 (superhard-materials-related items)"
-    ],
-    "productScopeAsStated": "平均粒径大于50 μm且小于等于500 μm的人造金刚石单晶；不管制用于装饰、首饰的培育钻石",
-    "productCodes": [
-      {
-        "system": "cn_control_number",
-        "code": "2C902.b",
-        "role": "legal_scope"
-      },
-      {
-        "system": "cn_customs",
-        "code": "71051020",
-        "role": "reference"
-      }
-    ],
-    "controlledItemTypes": [
-      "goods"
-    ],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020",
-      "evt-cn-decree-792-2024"
-    ],
-    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "scheduled",
-        "date": "2025-10-09",
-        "sourceId": "src-mofcom-55",
-        "until": "2025-11-08",
-        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
-      },
-      {
-        "status": "suspended",
-        "date": "2025-11-07",
-        "sourceId": "src-mofcom-70",
-        "until": "2026-11-10",
-        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
-      },
-      {
-        "status": "suspended",
-        "date": "2026-11-11",
-        "sourceId": "src-mofcom-2026-58",
-        "until": "2027-01-10",
-        "note": "Continued suspension; no inference about status after this end date."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-55",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "product_codes",
-          "item_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Item 2; export licensing paragraph; final commencement sentence",
-        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
-      },
-      {
-        "sourceId": "src-mofcom-70",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative suspension sentence listing Announcement No. 55",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2026-58",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
-        "note": null
-      }
-    ],
-    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
-  },
-  {
-    "id": "ctl-cn-superhard-2025-55-2c902-c",
-    "eventId": "evt-cn-mofcom-55-2025",
-    "measureType": "export_licensing",
-    "direction": "export",
-    "clause": "Item 3",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "超硬材料相关物项 (superhard-materials-related items)"
-    ],
-    "productScopeAsStated": "具有以下所有特性的人造金刚石线锯：线径小于等于45 μm；所含金刚石平均粒径小于等于8 μm；破断拉力小于等于16 N",
-    "productCodes": [
-      {
-        "system": "cn_control_number",
-        "code": "2C902.c",
-        "role": "legal_scope"
-      }
-    ],
-    "controlledItemTypes": [
-      "goods"
-    ],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020",
-      "evt-cn-decree-792-2024"
-    ],
-    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "scheduled",
-        "date": "2025-10-09",
-        "sourceId": "src-mofcom-55",
-        "until": "2025-11-08",
-        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
-      },
-      {
-        "status": "suspended",
-        "date": "2025-11-07",
-        "sourceId": "src-mofcom-70",
-        "until": "2026-11-10",
-        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
-      },
-      {
-        "status": "suspended",
-        "date": "2026-11-11",
-        "sourceId": "src-mofcom-2026-58",
-        "until": "2027-01-10",
-        "note": "Continued suspension; no inference about status after this end date."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-55",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "product_codes",
-          "item_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Item 3; export licensing paragraph; final commencement sentence",
-        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
-      },
-      {
-        "sourceId": "src-mofcom-70",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative suspension sentence listing Announcement No. 55",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2026-58",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
-        "note": null
-      }
-    ],
-    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
-  },
-  {
-    "id": "ctl-cn-superhard-2025-55-2c902-d",
-    "eventId": "evt-cn-mofcom-55-2025",
-    "measureType": "export_licensing",
-    "direction": "export",
-    "clause": "Item 4",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "超硬材料相关物项 (superhard-materials-related items)"
-    ],
-    "productScopeAsStated": "具有以下所有特性的人造金刚石砂轮：金刚石齿硬度小于等于30 HRB；所含金刚石平均粒径小于等于5 μm；最高工作速度大于等于40 m/s",
-    "productCodes": [
-      {
-        "system": "cn_control_number",
-        "code": "2C902.d",
-        "role": "legal_scope"
-      },
-      {
-        "system": "cn_customs",
-        "code": "68042110",
-        "role": "reference"
-      }
-    ],
-    "controlledItemTypes": [
-      "goods"
-    ],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020",
-      "evt-cn-decree-792-2024"
-    ],
-    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "scheduled",
-        "date": "2025-10-09",
-        "sourceId": "src-mofcom-55",
-        "until": "2025-11-08",
-        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
-      },
-      {
-        "status": "suspended",
-        "date": "2025-11-07",
-        "sourceId": "src-mofcom-70",
-        "until": "2026-11-10",
-        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
-      },
-      {
-        "status": "suspended",
-        "date": "2026-11-11",
-        "sourceId": "src-mofcom-2026-58",
-        "until": "2027-01-10",
-        "note": "Continued suspension; no inference about status after this end date."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-55",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "product_codes",
-          "item_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Item 4; export licensing paragraph; final commencement sentence",
-        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
-      },
-      {
-        "sourceId": "src-mofcom-70",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative suspension sentence listing Announcement No. 55",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2026-58",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
-        "note": null
-      }
-    ],
-    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
-  },
-  {
-    "id": "ctl-cn-superhard-2025-55-2b005-b",
-    "eventId": "evt-cn-mofcom-55-2025",
-    "measureType": "export_licensing",
-    "direction": "export",
-    "clause": "Item 5",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "超硬材料相关物项 (superhard-materials-related items)"
-    ],
-    "productScopeAsStated": "直流电弧等离子体喷射化学气相沉积（DCPCVD）设备",
-    "productCodes": [
-      {
-        "system": "cn_control_number",
-        "code": "2B005.b",
-        "role": "legal_scope"
-      },
-      {
-        "system": "cn_customs",
-        "code": "84798999",
-        "role": "reference"
-      }
-    ],
-    "controlledItemTypes": [
-      "equipment"
-    ],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020",
-      "evt-cn-decree-792-2024"
-    ],
-    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "scheduled",
-        "date": "2025-10-09",
-        "sourceId": "src-mofcom-55",
-        "until": "2025-11-08",
-        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
-      },
-      {
-        "status": "suspended",
-        "date": "2025-11-07",
-        "sourceId": "src-mofcom-70",
-        "until": "2026-11-10",
-        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
-      },
-      {
-        "status": "suspended",
-        "date": "2026-11-11",
-        "sourceId": "src-mofcom-2026-58",
-        "until": "2027-01-10",
-        "note": "Continued suspension; no inference about status after this end date."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-55",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "product_codes",
-          "item_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Item 5; export licensing paragraph; final commencement sentence",
-        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
-      },
-      {
-        "sourceId": "src-mofcom-70",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative suspension sentence listing Announcement No. 55",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2026-58",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
-        "note": null
-      }
-    ],
-    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
-  },
-  {
-    "id": "ctl-cn-superhard-2025-55-2e902",
-    "eventId": "evt-cn-mofcom-55-2025",
-    "measureType": "export_licensing",
-    "direction": "export",
-    "clause": "Item 6",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "超硬材料相关物项 (superhard-materials-related items)"
-    ],
-    "productScopeAsStated": "直流电弧等离子体喷射化学气相沉积（DCPCVD）工艺技术",
-    "productCodes": [
-      {
-        "system": "cn_control_number",
-        "code": "2E902",
-        "role": "legal_scope"
-      }
-    ],
-    "controlledItemTypes": [
-      "technology"
-    ],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020",
-      "evt-cn-decree-792-2024"
-    ],
-    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "scheduled",
-        "date": "2025-10-09",
-        "sourceId": "src-mofcom-55",
-        "until": "2025-11-08",
-        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
-      },
-      {
-        "status": "suspended",
-        "date": "2025-11-07",
-        "sourceId": "src-mofcom-70",
-        "until": "2026-11-10",
-        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
-      },
-      {
-        "status": "suspended",
-        "date": "2026-11-11",
-        "sourceId": "src-mofcom-2026-58",
-        "until": "2027-01-10",
-        "note": "Continued suspension; no inference about status after this end date."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-55",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "product_codes",
-          "item_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Item 6; export licensing paragraph; final commencement sentence",
-        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
-      },
-      {
-        "sourceId": "src-mofcom-70",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative suspension sentence listing Announcement No. 55",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2026-58",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
-        "note": null
-      }
-    ],
-    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
-  },
-  {
-    "id": "ctl-cn-superhard-2025-55-customs-declaration",
-    "eventId": "evt-cn-mofcom-55-2025",
-    "measureType": "customs_enforcement",
-    "direction": "export",
-    "clause": "Customs declaration paragraph",
-    "targetScopes": [
-      "domestic_operators"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [],
-    "materialAttribution": "includes_untracked",
-    "untrackedMaterialsAsStated": [
-      "超硬材料相关物项 (superhard-materials-related items)"
-    ],
-    "productScopeAsStated": "出口经营者应当对报关商品的真实性负责，加强出口物项识别；属于管制物项的，报关单备注栏注明“属于两用物项”并列明出口管制编码；不属于管制物项但参数、指标、性能等接近的，注明“不属于管制物项”并填写具体参数、指标；海关依法质疑期间出口货物不予放行。",
-    "productCodes": [],
-    "controlledItemTypes": [],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020",
-      "evt-cn-decree-792-2024"
-    ],
-    "legalBasisAsStated": "《中华人民共和国出口管制法》《中华人民共和国对外贸易法》《中华人民共和国海关法》《中华人民共和国两用物项出口管制条例》",
-    "modifiesMeasureIds": [],
-    "modifiesExternalInstruments": [],
-    "statusHistory": [
-      {
-        "status": "scheduled",
-        "date": "2025-10-09",
-        "sourceId": "src-mofcom-55",
-        "until": "2025-11-08",
-        "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
-      },
-      {
-        "status": "suspended",
-        "date": "2025-11-07",
-        "sourceId": "src-mofcom-70",
-        "until": "2026-11-10",
-        "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
-      },
-      {
-        "status": "suspended",
-        "date": "2026-11-11",
-        "sourceId": "src-mofcom-2026-58",
-        "until": "2027-01-10",
-        "note": "Continued suspension; no inference about status after this end date."
-      }
-    ],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-55",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "legal_basis",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Customs declaration paragraph; final commencement sentence",
-        "note": "Reference tariff codes are not legal control identifiers. No. 55 covers untracked superhard-material items."
-      },
-      {
-        "sourceId": "src-mofcom-70",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative suspension sentence listing Announcement No. 55",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2026-58",
-        "supports": [
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Operative continued-suspension sentence listing Announcement No. 55",
-        "note": null
-      }
-    ],
-    "notes": "Suspended before scheduled commencement. Separate from 2024 Announcement No. 46 paragraph 2 U.S.-destination restriction and 2025 Announcement No. 72 suspension."
   }
 ]
