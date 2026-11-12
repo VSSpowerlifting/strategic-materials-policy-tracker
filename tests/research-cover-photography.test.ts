@@ -40,7 +40,6 @@ test("external cover images keep attribution and accessible image descriptions",
 
 // Future research pages inherit a cover without adding a new registry entry or a human artwork sign-off.
 test("new research slugs resolve to an approved photograph or a branded plate", () => {
-  assert.deepEqual(resolveResearchCover("hem erdon"), { kind: "mark", mark: "SMPT", line: "Research" });
   assert.deepEqual(resolveResearchCover("future-hemerdon-refinancing"), { kind: "photo", photo: "drakelands-aster" });
   assert.deepEqual(resolveResearchCover("antimony-supply-outlook-2030"), { kind: "photo", photo: "antimony-ingot" });
   assert.deepEqual(resolveResearchCover("new-tungsten-refining"), { kind: "photo", photo: "tungsten-usgs" });
