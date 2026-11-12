@@ -9,6 +9,9 @@ import {auditF5CorpusCutoffImpact,F5_SEED_NAMES,type SeedInput}
   from "../scripts/audit-f5-corpus-cutoff-impact";
 import {PHASE_III_IDS,PHASE_III_RELEASE_CUTOFF,PRE_PHASE_III_CUTOFF} from "./phase-iii-release-ids";
 
+const NOVEMBER_12_RELEASE_CUTOFF="2026-11-12";
+const PRE_NOVEMBER_12_CUTOFF=PHASE_III_RELEASE_CUTOFF;
+
 const liveSeeds=():SeedInput=>Object.fromEntries(F5_SEED_NAMES.map(seed=>[
   seed,JSON.parse(readFileSync(join(process.cwd(),"data","seed",seed+".json"),"utf8")),
 ]));
@@ -26,11 +29,11 @@ const NOVEMBER_9_EXTENSION_IDS=new Set([
   "ctl-cn-ree-2026-11-suspension-continuation",
 ]);
 const NOVEMBER_9_EXTENSION_SOURCE="src-mofcom-2026-58";
-// No. 55 is a proposed, still-unreviewed November 11 intake on this branch.
-// The frozen 8 November corpus and every earlier curated snapshot must exclude
-// precisely this cohort, including the inverse China jurisdiction event link.
-// This exclusion is TEST-ONLY: the public seeds and live CLI remain unaltered.
-const PENDING_MOFCOM55_CONTROL_IDS=[
+// No. 55 was source-reviewed on 11 November and admitted in the curated
+// 12 November release. Reconstruct older snapshots by removing precisely its
+// ten new rows and the inverse China jurisdiction event link. The live seed
+// files and read-only audit CLI always retain the admitted records.
+const NOVEMBER_12_MOFCOM55_CONTROL_IDS=[
   "ctl-cn-superhard-2025-55-2b005-b",
   "ctl-cn-superhard-2025-55-2c902-a",
   "ctl-cn-superhard-2025-55-2c902-b",
@@ -39,18 +42,18 @@ const PENDING_MOFCOM55_CONTROL_IDS=[
   "ctl-cn-superhard-2025-55-2e902",
   "ctl-cn-superhard-2025-55-customs-declaration",
 ] as const;
-const PENDING_MOFCOM55_IDS=new Set([
+const NOVEMBER_12_MOFCOM55_IDS=new Set([
   "evt-cn-mofcom-55-2025",
   "src-mofcom-55",
   "fc-cn-55-2025-natsec",
-  ...PENDING_MOFCOM55_CONTROL_IDS,
+  ...NOVEMBER_12_MOFCOM55_CONTROL_IDS,
 ]);
 type HistoricalRow={id:string;eventIds?:string[]};
-const withoutPendingMofcom55=(s:SeedInput):SeedInput=>
+const withoutNovember12Mofcom55=(s:SeedInput):SeedInput=>
   Object.fromEntries(Object.entries(s).map(([name,rows])=>[
-    name,(rows as HistoricalRow[]).filter(r=>!PENDING_MOFCOM55_IDS.has(r.id)).map(r=>{
+    name,(rows as HistoricalRow[]).filter(r=>!NOVEMBER_12_MOFCOM55_IDS.has(r.id)).map(r=>{
       if(name!=="jurisdictions"||r.id!=="china")return r;
-      return {...r,eventIds:(r.eventIds??[]).filter(id=>!PENDING_MOFCOM55_IDS.has(id))};
+      return {...r,eventIds:(r.eventIds??[]).filter(id=>!NOVEMBER_12_MOFCOM55_IDS.has(id))};
     }),
   ]));
 type ExtensionRow={id:string;eventIds?:string[];evidence?:{sourceId:string}[];statusHistory?:{sourceId?:string}[]};
@@ -64,7 +67,7 @@ const withoutNovember9Extension=(s:SeedInput):SeedInput=>
       return previous;
     }),
   ]));
-const seeds=():SeedInput=>withoutPendingMofcom55(withoutNovember9Extension(Object.fromEntries(Object.entries(liveSeeds()).map(([name,rows])=>[
+const seeds=():SeedInput=>withoutNovember12Mofcom55(withoutNovember9Extension(Object.fromEntries(Object.entries(liveSeeds()).map(([name,rows])=>[
   name,(rows as {id:string}[]).filter(r=>!PHASE_III_IDS.has(r.id)),
 ]))));
 const minimal=():Record<string,unknown[]>=>Object.fromEntries(F5_SEED_NAMES.map(seed=>[seed,[]]));
@@ -237,7 +240,8 @@ test("3 November revision adds only the October 2026 EU Strategic Projects rows 
   assert.equal(r.countFutureIntervalEndFields,21);
   assert.equal(r.publicationAuthorized,false);
   assert.equal(JSON.stringify(seeds()),frozen);
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(site.lastUpdated,NOVEMBER_12_RELEASE_CUTOFF);
+  assert.equal(PRE_NOVEMBER_12_CUTOFF,"2026-11-08", "frozen Phase III snapshot is unchanged");
 });
 
 test("proposed 4 November revision contains only dated admissions from reviewed expansion batches",()=>{
@@ -306,82 +310,94 @@ test("November 6 admission is a dated cohort separate from historical November 4
     r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"));
   assert.equal(admitted.publicationAuthorized,false,
     "date sensitivity is historical evidence, not a substitute for the maintainer release gate");
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(site.lastUpdated,NOVEMBER_12_RELEASE_CUTOFF);
+  assert.equal(PRE_NOVEMBER_12_CUTOFF,"2026-11-08", "frozen Phase III snapshot is unchanged");
 });
 
-test("live cutoff audit CLI is read-only at the current authorized corpus date",()=>{
+test("November 12 source-reviewed release admits only the dated No. 55 cohort and legal continuation",()=>{
+  const live=liveSeeds();
+  const frozen=JSON.stringify(live);
+  assert.equal(site.lastUpdated,NOVEMBER_12_RELEASE_CUTOFF);
+  assert.equal(site.legalStatusAsOf,NOVEMBER_12_RELEASE_CUTOFF);
+  assert.equal(site.revisedOn,NOVEMBER_12_RELEASE_CUTOFF);
+  assert.equal(PRE_NOVEMBER_12_CUTOFF,"2026-11-08");
+
+  const prior=withoutNovember12Mofcom55(live);
+  // A reconstructed frozen November 8 view does not contain this new ten-row cohort.
+  for(const seed of F5_SEED_NAMES){
+    const added=(live[seed] as {id:string}[]).filter(row=>NOVEMBER_12_MOFCOM55_IDS.has(row.id));
+    assert.equal((live[seed] as unknown[]).length-(prior[seed] as unknown[]).length,added.length,seed);
+  }
+  assert.equal(F5_SEED_NAMES.reduce((n,seed)=>
+    n+(live[seed].length-prior[seed].length),0),NOVEMBER_12_MOFCOM55_IDS.size);
+  const oldChina=(prior.jurisdictions as {id:string;eventIds:string[]}[]).find(x=>x.id==="china");
+  const newChina=(live.jurisdictions as {id:string;eventIds:string[]}[]).find(x=>x.id==="china");
+  assert.ok(oldChina&&newChina);
+  assert.deepEqual(newChina.eventIds.filter(id=>!oldChina.eventIds.includes(id)),
+    ["evt-cn-mofcom-55-2025"]);
+
+  const impact=auditF5CorpusCutoffImpact(live,PRE_NOVEMBER_12_CUTOFF,site.lastUpdated);
+  const olderImpact=auditF5CorpusCutoffImpact(prior,PRE_NOVEMBER_12_CUTOFF,site.lastUpdated);
+  assert.equal(impact.currentPublishedCutoff,"2026-11-08");
+  assert.equal(impact.proposedCutoff,"2026-11-12");
+  // 25 No. 58 continuation metadata observations, 9 new No. 55 review/status
+  // observations, and 26 former 10 November suspension-end boundaries are now
+  // in-window. A boundary is never proof of renewed or effective controls.
+  assert.equal(impact.countNewlyIncludedDatedFields,60);
+  assert.equal(olderImpact.countNewlyIncludedDatedFields,44);
+  const newObservations=impact.newlyIncludedDatedFields.filter(x=>NOVEMBER_12_MOFCOM55_IDS.has(x.recordId));
+  assert.equal(newObservations.length,16, "seven November 10 until fields, seven November 11 suspension dates, one event and one source review");
+  assert.deepEqual(newObservations.filter(x=>x.field.endsWith(".until")).map(x=>x.recordId).sort(),
+    [...NOVEMBER_12_MOFCOM55_CONTROL_IDS].sort());
+  assert.deepEqual(newObservations.filter(x=>x.field==="statusHistory[2].date").map(x=>x.recordId).sort(),
+    [...NOVEMBER_12_MOFCOM55_CONTROL_IDS].sort());
+  assert.deepEqual(newObservations.filter(x=>x.seed==="events"||x.seed==="sources")
+    .map(x=>[x.recordId,x.field,x.date]),[
+      ["evt-cn-mofcom-55-2025","lifecycle.verifiedAt","2026-11-11"],
+      ["src-mofcom-55","dateAccessed","2026-11-11"],
+    ]);
+  assert.deepEqual(impact.newlyIncludedDatedFields.filter(x=>!NOVEMBER_12_MOFCOM55_IDS.has(x.recordId)),
+    olderImpact.newlyIncludedDatedFields,
+    "the No. 55 admission must not rewrite earlier event/status metadata");
+  assert.equal(impact.countOtherPostCutoffFields,0,
+    "the curated November 12 admission must contain no unexplained post-release observations");
+  assert.equal(impact.countFutureIntervalEndFields,29);
+  assert.deepEqual(
+    Object.fromEntries([...new Set(impact.futureIntervalEndFields.map(x=>x.date))].sort()
+      .map(date=>[date,impact.futureIntervalEndFields.filter(x=>x.date===date).length])),
+    {"2026-11-27":2,"2027-01-10":27},
+  );
+  assert.equal(impact.publicationAuthorized,false,
+    "the date audit itself never grants editorial release authorization");
+  assert.equal(impact.allExternalSourcesRechecked,false);
+  assert.equal(JSON.stringify(liveSeeds()),frozen);
+});
+
+test("live cutoff audit CLI is read-only at the newly approved corpus date",()=>{
   const output=execFileSync(process.execPath,[
     "--import","tsx","scripts/audit-f5-corpus-cutoff-impact.ts",
     "--proposed-cutoff",site.lastUpdated,
   ],{encoding:"utf8"});
   const parsed=JSON.parse(output);
-  assert.equal(parsed.proposedCutoff,"2026-11-08");
-  assert.equal(parsed.currentPublishedCutoff,"2026-11-08");
+  assert.equal(parsed.proposedCutoff,NOVEMBER_12_RELEASE_CUTOFF);
+  assert.equal(parsed.currentPublishedCutoff,NOVEMBER_12_RELEASE_CUTOFF);
   assert.equal(parsed.totalPublicSeedRows,F5_SEED_NAMES.reduce((n,seed)=>n+liveSeeds()[seed].length,0));
-  assert.ok(parsed.afterProposedCutoffFields.every((r:{date:string})=>r.date>"2026-11-08"),
-    "future-to-current publication metadata can only postdate the November 8 cutoff");
-  assert.ok(!parsed.afterProposedCutoffFields.some((r:{recordId:string;field:string;date:string})=>
-    r.recordId==="src-us-exim-minerals-roundtable-2026"&&r.field==="dateAccessed"&&r.date==="2026-11-05"),
-    "approved November 5 original-source access must be within the curated cutoff");
   assert.equal(parsed.countNewlyIncludedDatedFields,0);
-  // The live CLI correctly audits the entire proposed branch, including the
-  // unadmitted No. 55 rows. Compare their date observations against a reconstruction
-  // of the authorized 8 November cohort rather than moving the publication cutoff.
-  const authorized=auditF5CorpusCutoffImpact(
-    withoutPendingMofcom55(liveSeeds()),site.lastUpdated,site.lastUpdated);
-  // 21 intervals from before the 9 November record, plus the 20 it adds: the continued
-  // suspension of 19 control rows (18 clauses and the umbrella row) and its own
-  // continuation row, each running to 10 January 2027.
-  assert.equal(authorized.countFutureIntervalEndFields,41);
+  assert.equal(parsed.countOtherPostCutoffFields,0);
+  assert.deepEqual(parsed.afterProposedCutoffFields,[]);
+  assert.equal(parsed.countFutureIntervalEndFields,29);
   assert.deepEqual(
-    Object.fromEntries([...new Set(authorized.futureIntervalEndFields.map(x=>x.date))].sort()
-      .map(date=>[date,authorized.futureIntervalEndFields.filter(x=>x.date===date).length])),
-    {"2026-11-10":19,"2026-11-27":2,"2027-01-10":20},
+    Object.fromEntries([...new Set(parsed.futureIntervalEndFields.map((x:{date:string})=>x.date))].sort()
+      .map(date=>[date,parsed.futureIntervalEndFields.filter((x:{date:string})=>x.date===date).length])),
+    {"2026-11-27":2,"2027-01-10":27},
   );
-  const pendingIntervals=parsed.futureIntervalEndFields.filter(
-    (x:{recordId:string})=>PENDING_MOFCOM55_IDS.has(x.recordId));
-  assert.equal(pendingIntervals.length,14,"each of seven draft control rows adds two future suspension end dates");
-  assert.deepEqual(
-    Object.fromEntries([...new Set(pendingIntervals.map((x:{date:string})=>x.date))].sort()
-      .map(date=>[date,pendingIntervals.filter((x:{date:string})=>x.date===date).length])),
-    {"2026-11-10":7,"2027-01-10":7},
-  );
-  assert.deepEqual(parsed.futureIntervalEndFields.filter(
-    (x:{recordId:string})=>!PENDING_MOFCOM55_IDS.has(x.recordId)),
-    authorized.futureIntervalEndFields,
-    "the pending No. 55 cohort cannot rewrite approved historical intervals");
-  assert.equal(parsed.countFutureIntervalEndFields,55);
-  // The only dated fields after the 8 November corpus revision are the enumerated 9 November
-  // record: its own event and source (dated 9 November, four fields), the continuation row's
-  // 9 November "scheduled" entry (one field), and the 11 November effective date of the continued
-  // suspension on the 19 clause/umbrella rows plus the continuation row (twenty fields).
-  const afterCutoff=parsed.afterProposedCutoffFields as {seed:string;recordId:string;field:string;date:string}[];
-  const approvedAfter=afterCutoff.filter(r=>!PENDING_MOFCOM55_IDS.has(r.recordId));
-  assert.deepEqual(approvedAfter,authorized.afterProposedCutoffFields,
-    "branch-only No. 55 must not change the already curated November 9 observations");
-  assert.equal(approvedAfter.length,25);
-  assert.equal(approvedAfter.filter(r=>r.date==="2026-11-09").length,5);
-  assert.equal(approvedAfter.filter(r=>r.date==="2026-11-11").length,20);
-  assert.deepEqual([...new Set(approvedAfter.map(r=>r.date))].sort(),["2026-11-09","2026-11-11"]);
-  assert.ok(approvedAfter.filter(r=>r.date==="2026-11-09").every(r=>NOVEMBER_9_EXTENSION_IDS.has(r.recordId)));
-  assert.ok(approvedAfter.filter(r=>r.date==="2026-11-11").every(r=>
-    r.seed==="control-measures"&&/^statusHistory\[\d+\]\.date$/.test(r.field)));
-  const pendingAfter=afterCutoff.filter(r=>PENDING_MOFCOM55_IDS.has(r.recordId));
-  assert.deepEqual(pendingAfter,[
-    ...PENDING_MOFCOM55_CONTROL_IDS.map(recordId=>({
-      seed:"control-measures",recordId,field:"statusHistory[2].date",date:"2026-11-11",
-    })),
-    {seed:"events",recordId:"evt-cn-mofcom-55-2025",field:"lifecycle.verifiedAt",date:"2026-11-11"},
-    {seed:"sources",recordId:"src-mofcom-55",field:"dateAccessed",date:"2026-11-11"},
-  ],"seven future suspension dates and two source-review fields belong exclusively to the draft cohort");
-  assert.equal(parsed.countOtherPostCutoffFields,34);
   assert.equal(parsed.publicationAuthorized,false,
-    "audit's non-publication flags do not retroactively undo separately authorized source publication");
+    "the audit remains read-only even after an independently authorized release");
   assert.equal(parsed.maintainerReviewRequired,true);
 });
 
 test("November 8 Phase III release admits only its enumerated milestones and Stillwater source dates",()=>{
-  const full=withoutPendingMofcom55(withoutNovember9Extension(liveSeeds()));
+  const full=withoutNovember12Mofcom55(withoutNovember9Extension(liveSeeds()));
   const frozen=JSON.stringify(liveSeeds());
   const before=auditF5CorpusCutoffImpact(seeds(),PRE_PHASE_III_CUTOFF,PHASE_III_RELEASE_CUTOFF);
   assert.equal(before.countNewlyIncludedDatedFields,0,
