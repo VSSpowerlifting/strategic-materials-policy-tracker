@@ -497,3 +497,24 @@ test("integration: a redesign passes without a record, a content edit still need
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("automatic cover changes are presentation-only; research changes still require a human review", () => {
+  const base = [
+    'import { ResearchCover } from "@/components/editorial/research-cover";',
+    'export default function Article() {',
+    '  return <main><h1>Antimony strategy</h1><p>Inventory assumptions total 18 tonnes.</p></main>;',
+    '}',
+  ].join("\n");
+  const withCover = base.replace(
+    "</main>",
+    '<ResearchCover data-cover="new-antimony-article" data-frame="banner" data-caption="full" /></main>',
+  );
+  assert.equal(contentFingerprint(withCover), contentFingerprint(base),
+    "a registered auto cover must not change the research-content fingerprint");
+  const withMaterialChange = withCover.replace("18 tonnes", "28 tonnes");
+  assert.notEqual(contentFingerprint(withMaterialChange), contentFingerprint(base),
+    "financial/quantitative claims must remain under the editorial gate");
+  const withChangedCitation = withCover.replace("</main>", '<a href="https://example.org/new-source">Evidence</a></main>');
+  assert.notEqual(contentFingerprint(withChangedCitation), contentFingerprint(base),
+    "new source links must remain under the editorial gate");
+});
