@@ -12,6 +12,7 @@ Visual production only. The Studio v3 publication identity (PR #262, `74fdc11`) 
 | PDF, selectable text, Archivo and Spectral embedded | `…/fi003-mp-materials-10x-financing-studio-v1.pdf` |
 | Contact sheet (all 18 slides) | `…/fi003-studio-v1-contact-sheet.png` |
 | Individual previews, 150 dpi | `…/previews/slide-01.png` to `slide-18.png` |
+| Accessibility-tagged PDF (structure repair of the PDF above) | `…/fi003-mp-materials-10x-financing-studio-v1-accessible.pdf`, with `…-accessible.receipt.json` |
 | Build manifest | `…/fi003-mp-materials-10x-financing-studio-v1.manifest.json` |
 | Build inputs | `research/fi003/presentation/studio-v1/` (`build_spec.py`, `export_pdf.sh`, `contact_sheet.py`, `spec.json`) |
 
@@ -68,6 +69,14 @@ No number, chart value, status, citation, evidence ID, qualification or cutoff c
 | `research/fi003/prototype.py --check` | pass (11 schedules reproduce) |
 | FI003 `unittest` (37 tests, includes the v1.0 accessibility test) | OK |
 
+## Tagged PDF
+
+`presentation/studio-v1/remediate_pdf_studio_v1.py` (adapted from the draft 1.0 script, pinned to the SHA-256 of the exported PDF) writes the `-accessible.pdf` and its receipt without touching the source export. PyMuPDF 1.26.5 and pypdf 6.14.2 ran from a scratch virtual environment outside the repo, with the user's approval.
+
+Receipt status PASS: 18 H1 slide titles (the cover title on slide 1) and 4 H2 subheadings; each slide opens with its H1; 10 Figures, all with Alt text (3 charts and 6 diagrams described from `spec.json`, plus the existing doughnut description); 198 decorative vectors re-marked as artifacts, counts pinned per page; 8 tables, 30 TH, 150 TD and 64 links preserved. All 18 pages are pixel- and text-identical to the export, and link URIs and rectangles are unchanged. Cover note: the seven text-free ledger vectors are decorative because every amount and status is also set as text.
+
+Adaptation notes: the running page number is exported inside the chart range on slides 6 to 8, so the chart-label check now skips it. The per-page artifact counts match draft 1.0 except the cover (7 against 6), which follows the new ledger.
+
 ## Visual inspection
 
 All 18 rendered slides were inspected during the build. After the final rebuild, slides 2 and 11 were viewed again to confirm the heading fix and the sentence-case status tags. Slides 1, 5, 6, 7, 8, 10 and 17 were last viewed before that final rebuild; the rebuild did not change their spec and the text-parity check passed on the rebuilt file, but their pixels were not re-viewed.
@@ -88,7 +97,7 @@ Inherited from draft 1.0, not regressions, and left unchanged to keep the layout
 
 - **Native PowerPoint and Keynote editing and rendering** were not tested. Only structural editability and a LibreOffice render were checked. PPTX cannot embed fonts, so the PDF is the canonical visual; the PPTX needs Archivo and Spectral installed.
 - **Manual accessibility testing** (screen reader, keyboard, reading order) was not done.
-- **Accessibility-tagged PDF variant** (the 1.0 package has one) was not produced: it needs PyMuPDF, which is not installed here, and installing it was not authorized. The PDF here has selectable text and embedded fonts but is not tag-remediated. An adapted remediation script was discarded because it was pinned to an earlier PDF hash; it needs to be recreated and re-pinned to the final PDF if the tagged variant is wanted.
+- **Screen-reader and PDF/UA testing** of the tagged PDF was not done. The tagged variant (below) is a bounded structure repair, not PDF/UA or WCAG certification, and link annotations have no `/Contents`; the visible evidence ID is the link text.
 - **Draft PR against the FI003 foundation branch** was not opened. `git merge-tree` of this branch with `codex/fi003-jpmorgan-financing-foundation` (`6b93058`) reports 12 conflicts: `PROJECT_STATE.md`, `data/seed/materials.json`, `tests/f5-corpus-cutoff-impact.test.ts`, add/add in `scripts/exhibit-system/research-cover.ts` and `tests/exhibit-system-v100-cover.test.ts`, and content conflicts in `scripts/exhibit-system/{build-gallery,primitives,research-deck}.ts` and the `condition-tree`, `exhibit-with-interpretation`, `role-matrix` and `stacked-bar` renderers. The FI003 branch forked from an older `main` (`ea02a30`) and carries its own v1.0 cover and renderer edits. Opening a PR against `main` would land held FI003 material outside PR #215. The branch is pushed for review only; integration needs a decision on how to reconcile the exhibit-system code.
 - The Spectral font file was fetched into a temporary folder outside the repo for rendering only. No font binary is committed.
 
