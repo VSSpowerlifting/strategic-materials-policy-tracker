@@ -136,6 +136,20 @@
     "notes": "Justification clause of Announcement No. 61 (2025), verified verbatim against the MOFCOM primary. Re-anchored 2026-08-11: the claim previously cited a third-party bilingual translation and the wording coded at that time (为了维护国家安全和国家利益) does not appear in the announcement, despite a note asserting it was reproduced from the primary. Unlike Announcement No. 46, this text carries no non-proliferation clause, so only national security is coded. This re-anchoring was lost to an accidental working-tree revert on 2026-08-12 and restored the same day by re-fetching the primary and re-reading the clause."
   },
   {
+    "id": "fc-cn-55-2025-natsec",
+    "eventId": "evt-cn-mofcom-55-2025",
+    "actor": "china",
+    "category": [
+      "national_security",
+      "compliance_modernization"
+    ],
+    "quoteOriginal": "为维护国家安全和利益、履行防扩散等国际义务",
+    "quoteEn": "to safeguard national security and interests and fulfil international obligations such as non-proliferation",
+    "quoteEnSource": "self",
+    "sourceId": "src-mofcom-55",
+    "notes": "Announcement No. 55 (2025), opening justification paragraph before item 1. Original-language text is verbatim; the English translation and category treatment match the existing No. 56–58 controls. This records the issuing authorities' stated national-security and non-proliferation rationale, not retaliation, actual trade impact or operation while suspended."
+  },
+  {
     "id": "fc-cn-56-2025-natsec",
     "eventId": "evt-cn-mofcom-56-2025",
     "actor": "china",
