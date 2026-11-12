@@ -1,5 +1,3 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { photographs } from "@/lib/photography";
 
@@ -8,9 +6,7 @@ export const alt =
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image() {
-  const mark = await readFile(join(process.cwd(), "public/brand/smpt-lattice-mark.png"));
-
+export default function Image() {
   return new ImageResponse(
     <div
       style={{
@@ -133,18 +129,7 @@ export default async function Image() {
       >
         Kevnmh · CC BY-SA 4.0
       </div>
-      <img
-        alt=""
-        src={`data:image/png;base64,${mark.toString("base64")}`}
-        style={{
-          position: "absolute",
-          width: 390,
-          height: 345,
-          top: 158,
-          right: -130,
-          opacity: 0,
-        }}
-      />
+
     </div>,
     size,
   );
