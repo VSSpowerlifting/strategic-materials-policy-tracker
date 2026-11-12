@@ -1,3 +1,12 @@
+## 2026-11-11: Publication design system migration to the Architectural Research Studio identity (draft PR, not merged)
+
+- Branch `claude/smpt-design-system-migration-75d10d`, from `main` at 74547ea. Presentation only: no finding, calculation, evidence register, model, publication date or source cut-off changed, and no FI001, FI002 or R001 binary or protected generator was touched. FI003 was not regenerated.
+- One token source, `docs/design/publication-tokens.json` (v3.0), read by `scripts/publication/tokens.ts` and `tokens.py`; `tests/publication-tokens.test.ts` guards it against `app/globals.css`. Plaster ground, graphite text, malachite accent, hematite and ochre as functional colours, dashed lapis/ochre/plum data series, Spectral for covers, dividers, one governing statement and memo/report titles (28 pt floor), Archivo for everything analytical.
+- Updated: Presentation Standard (content v3.0), Exhibit and Chart Rules, house style, Studio reference, exhibit system and gallery (decks, 39 previews, manifest), `templates/create_master.py` (now importable, brands the theme part), new `scripts/publication/{memo,cover,check_deck}.py`, new `docs/design/PUBLICATION_DESIGN_SYSTEM.md`. `tests/typography.test.ts` now asserts the v3 type sentence instead of "Archivo is the SMPT primary typeface".
+- Validation package (unpublished, synthetic): `docs/design/presentations/validation/` with a 5-slide editable deck, memo page, cover and social image, all checked (0 palette violations, Archivo and Spectral only, links live).
+- Verified locally: 1280 tests, `npm run validate`, `typecheck`, `lint` (0 errors), `editorial:check`, `build`. Not verified: rendering in PowerPoint itself.
+- Open for the maintainer: approve the v3 palette and type positions; stale "Dark-first" line in project CLAUDE.md; legacy generators and frozen v2 illustrations listed in the design-system doc; FI003 application steps are in that doc, to run in a separate phase.
+
 ## 2026-11-11: Frontend redesign, "Architectural Research Studio" (draft PR #260, not merged)
 
 - Branch `claude/smpt-frontend-redesign-119d46`, on top of phase 1 (PR #258). Presentation only: no seed data, market data, calculation, export, API or research text changed. Design system and remaining work: `docs/design/ARCHITECTURAL_RESEARCH_STUDIO.md`. Screenshots: `docs/design/studio-redesign/`.

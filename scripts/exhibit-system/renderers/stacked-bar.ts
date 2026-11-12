@@ -64,7 +64,7 @@ export const stackedBar: Renderer<StackedBarData> = {
 
     // Colours: neutrals in order, gold for the single accent component.
     let ni = 0;
-    const colors = d.components.map((c) => (c === d.accent ? C.gold : NEUTRALS[ni++]));
+    const colors = d.components.map((c) => (c === d.accent ? C.accent : NEUTRALS[ni++]));
 
     let lx = h.area.x;
     d.components.forEach((c, i) => {

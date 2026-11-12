@@ -3,7 +3,7 @@
 // no map graphic, no total across capacity units.
 import { arr, obj, oneOf, optNum, str } from "../contract";
 import { inVocabulary, maxItems, minItems, STATUS_TAXONOMY, uniqueLabels } from "../integrity";
-import { C, fmt } from "../primitives";
+import { C, fmt, HEAD_CELL } from "../primitives";
 import type { IntegrityIssue, Renderer, TableCell } from "../types";
 
 export interface LocationTableData {
@@ -70,7 +70,7 @@ export const locationTable: Renderer<LocationTableData> = {
     const rule = { type: "solid", pt: 0.5, color: C.border };
     const none = { type: "none" };
     const hdr = (text: string, align: "left" | "right" = "left"): TableCell => ({
-      text, options: { bold: true, fontSize: 11, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
+      text, options: { ...HEAD_CELL, align },
     });
     const rows: TableCell[][] = [[hdr("Site"), hdr("Region"), hdr("Stage"), hdr("Status"), hdr("Capacity", "right"), hdr("Capacity unit")]];
     const groups = [...new Set(d.sites.map((s) => s.jurisdiction))];

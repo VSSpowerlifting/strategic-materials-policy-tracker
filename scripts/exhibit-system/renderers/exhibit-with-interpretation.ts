@@ -3,7 +3,7 @@
 // row number; check() enforces that every reference resolves.
 import { arr, num, obj, optNum, str, strList } from "../contract";
 import { maxItems, minItems, uniqueLabels } from "../integrity";
-import { C, fmt, hairline } from "../primitives";
+import { C, fmt, hairline, HEAD_CELL } from "../primitives";
 import type { IntegrityIssue, Renderer, TableCell } from "../types";
 
 export interface InterpretationData {
@@ -73,7 +73,7 @@ export const exhibitWithInterpretation: Renderer<InterpretationData> = {
     const rule = { type: "solid", pt: 0.75, color: C.border };
     const none = { type: "none" };
     const hdr = (text: string, align: "left" | "center" | "right"): TableCell => ({
-      text, options: { bold: true, fontSize: 11, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
+      text, options: { ...HEAD_CELL, align },
     });
     const rows: TableCell[][] = [
       [hdr("#", "center"), hdr("Item", "left"), ...d.columns.map((c) => hdr(c, "right"))],

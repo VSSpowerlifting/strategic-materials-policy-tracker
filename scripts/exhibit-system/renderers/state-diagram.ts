@@ -100,7 +100,7 @@ export const stateDiagram: Renderer<StateDiagramData> = {
     // Legend
     let lx = A.x;
     lx = legendItem(h, "legend-current", lx, A.y, `Current state, as of ${d.asOf}`, { fill: C.accent }, 3.1);
-    legendItem(h, "legend-other", lx, A.y, "Other state", { fill: "FFFFFF", line: C.neutral }, 1.5);
+    legendItem(h, "legend-other", lx, A.y, "Other state", { fill: C.plate, line: C.neutral }, 1.5);
     h.text("legend-edge", "legend", "Arrow: transition, labelled by trigger", {
       x: A.x + A.w - 3.1, y: A.y, w: 3.1, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
@@ -112,11 +112,11 @@ export const stateDiagram: Renderer<StateDiagramData> = {
       const cur = s.id === d.currentId;
       h.shape(`state-box-${i}`, "data", h.shapes.roundRect, {
         x: p.x, y: p.y, w: nodeW, h: nodeH, rectRadius: 0.08,
-        fill: { color: cur ? C.accent : "FFFFFF" },
+        fill: { color: cur ? C.accent : C.plate },
         line: { color: cur ? C.accent : C.neutral, width: 1.25 },
       });
-      const runs = [{ text: s.label, options: { bold: true, fontSize: 13, color: cur ? "FFFFFF" : C.ink, breakLine: !!s.note } }];
-      if (s.note) runs.push({ text: s.note, options: { bold: false, fontSize: 11, color: cur ? "FFFFFF" : C.muted, breakLine: false } });
+      const runs = [{ text: s.label, options: { bold: true, fontSize: 13, color: cur ? C.plate : C.ink, breakLine: !!s.note } }];
+      if (s.note) runs.push({ text: s.note, options: { bold: false, fontSize: 11, color: cur ? C.plate : C.muted, breakLine: false } });
       h.text(`state-label-${i}`, "label", runs, {
         x: p.x + 0.06, y: p.y, w: nodeW - 0.12, h: nodeH, align: "center", valign: "middle",
       });

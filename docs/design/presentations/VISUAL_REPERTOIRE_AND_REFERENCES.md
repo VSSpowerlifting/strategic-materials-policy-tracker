@@ -14,6 +14,8 @@ Attention comes from clear comparisons, revealing annotations and a developing a
 
 ![Six original SMPT exhibit patterns, using synthetic illustrative data](examples/05-visual-repertoire.svg)
 
+*Frozen illustration in the earlier graphite-and-gold palette (v2); it shows form only and is not regenerated. For current styling see the [exhibit-system gallery](exhibit-system/README.md) and the [Publication Design System](../PUBLICATION_DESIGN_SYSTEM.md).*
+
 These six examples demonstrate form only. **All values, dates and states are synthetic layout fixtures, with no company, project, policy or investment finding.** They are original SMPT graphics, not reconstructions of a firm's exhibits. The [fixture data](examples/visual-repertoire-data.json) and [generator](examples/render_visual_repertoire.py) reproduce the SVG and PNG. Use native editable PowerPoint objects when adapting a pattern into a publication; a gallery screenshot is not an editable slide exhibit.
 
 For deck production, the [exhibit system](exhibit-system/README.md) supersedes these six images. It has 39 registered patterns with native editable PowerPoint renderers, integrity checks and an editability report, also on synthetic data. The six SVG examples are kept as the original illustrations for this document.

@@ -1,15 +1,17 @@
-# SMPT research publication house style — v2.1
+# SMPT research publication house style — v3
 
-**Adopted on 4 November 2026; typography updated on 6 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized.
+**Adopted on 4 November 2026; typography updated on 6 November 2026; aligned with the Architectural Research Studio identity on 11 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized. v3 governs new and re-issued publications only; it does not restyle any frozen binary.
+
+The single token source is `docs/design/publication-tokens.json` (palette, chart series, type policy, geometry); `docs/design/PUBLICATION_DESIGN_SYSTEM.md` explains how decks, memos, covers and exhibits apply it. `tests/publication-tokens.test.ts` fails when the tokens drift from the website.
 
 ## Publication identity
 
-- Use the SMPT palette: near-black/charcoal (#262523), warm paper (#FBFAF7), body ink (#252421), muted gold (#98752D), warm neutral table bands (#F0EEE8), and fine rules (#D0CCC3). No green.
-- **Archivo is the SMPT primary typeface** for the website, research pages, data tables, navigation and future publications. On the website, Spectral sets page titles, publication titles, standfirsts and large figures only (see `docs/design/ARCHITECTURAL_RESEARCH_STUDIO.md`); reading text, tables, labels and data stay in Archivo. Decks, memos and other publication files use Archivo throughout.
-- For new PDFs, embed Archivo when the publishing environment supports it. Arial or Liberation Sans may serve as explicitly documented compatibility fallbacks for editable Word, PowerPoint and Google exports. Use one sans-serif family within each document, including cover, headings, body, notes, tables and captions. Avoid Georgia headings and decorative typeface changes.
+- Use the Studio palette: plaster (#F6F5F1) as page and slide ground, chalk (#FBFAF7) for quiet panels, graphite (#1B1E21) for text, rules and primary marks, slate (#555B61) and faint (#61666C) for secondary text and captions, hairlines (#DBD8CF, #B5B1A5), and malachite (#1F5C4D) as the single emphasised mark and for links. Hematite (#9A3324) means declines, controls or ended status; ochre (#9A6A12) marks designations and cautions and is never used for small text. Colour carries meaning or nothing: no gradients, tinted cards or drop shadows. Data series may add the accessible categorical set in the token file, with dash patterns distinguishing series.
+- **Spectral is the editorial display face and Archivo is the working face.** Spectral (weights 300, 400, 500) sets publication and presentation covers, section dividers, large editorial statements (one governing sentence) and memo and report titles. Archivo sets analytical slide titles, reading text, tables, chart labels, source footers, labels and dense financial content. Never set paragraphs, tables, chart labels, source footers or analytical slide titles in Spectral.
+- No silent font substitution. A missing Spectral or Archivo fails the build loudly. PowerPoint cannot embed fonts, so the PDF export is the canonical, font-embedded form of every deck; PPTX is the editable companion. Embed both families in every new PDF and verify with `pdffonts`. Arial, Liberation Sans, Georgia and Times are not accepted fallbacks.
 - JetBrains Mono is reserved for actual source identifiers, machine-readable codes, literal URLs and programming notation. Use Archivo with tabular numerals for dates, numerical KPIs, financial tables, navigation labels, and provenance captions.
 - Dense tables and two-column analytical prose are welcome when the information warrants them. Use full-width figures for comparisons requiring greater space. Preserve readable type at page and mobile-view size.
-- Apply restrained running headers, page numbers, section numbering, gold rules, exhibit numbers, and documentary captions. Avoid marketing decks, dramatic isolated fragments, decorative oversized whitespace, and arbitrary visual clutter.
+- Apply restrained running headers, page numbers, section numbering, hairline rules, exhibit numbers, and documentary captions. Labels are sentence case and medium weight, never tracked all-caps. Avoid marketing decks, dramatic isolated fragments, decorative oversized whitespace, and arbitrary visual clutter.
 
 ## Public research categories
 
@@ -67,7 +69,7 @@ This is an editorial grouping, not a change in method. Legal-status research, fo
 
 ## Sources and link treatment
 
-- Primary-source hyperlinks must be **real, visible, underlined links**, using bold and a sufficiently dark accent on cream/paper. Do not rely on color alone.
+- Primary-source hyperlinks must be **real, visible, underlined links**, set in malachite (7.1:1 on plaster) and medium or bold weight. Do not rely on color alone.
 - The dossier should provide source URLs or fully resolved bibliography hyperlinks; figures should retain nearby original-source IDs or concrete source notes.
 - PDFs require tested link annotations. The web research article should use a clearly underlined evidence-links treatment with adequate contrast.
 - The LinkedIn edition should offer a clear route to the full publication and its evidence workbook.
@@ -76,7 +78,7 @@ This is an editorial grouping, not a change in method. Legal-status research, fo
 
 **LinkedIn research edition:** Eight pages, portrait 4:5, with a cover, jurisdictional mechanisms, finance, chronology, project comparison, industrial support, evidence matrix, and research-access page. Favor digestible tables and compact two-column analysis; retain sufficient phone-size legibility.
 
-**Executive memo:** Two letter-size pages, strong central findings, evidence table, and full report link.
+**Executive memo:** Two letter-size pages, strong central findings, evidence table, and full report link. Spectral title, a hairline rule, Archivo body at 0.9 in margins; generated by `scripts/publication/memo.py`.
 
 **Long-form dossier:** Letter-size, two-column research prose, typically 9.5–10.5 pt body with 14–15 pt leading, full-width complex tables/figures, an appendix with source register and methods. Let length be determined by editorial content rather than a target page count.
 

@@ -2,7 +2,7 @@
 // Native table; every cell has a strict character limit so no row reflows.
 import { arr, isoDate, obj, oneOf, str } from "../contract";
 import { dateOrder, inVocabulary, maxItems, minItems, STATUS_TAXONOMY, uniqueLabels } from "../integrity";
-import { C } from "../primitives";
+import { C, HEAD_CELL } from "../primitives";
 import type { IntegrityIssue, Renderer, TableCell } from "../types";
 
 export interface OptionProfileData {
@@ -63,7 +63,7 @@ export const optionProfile: Renderer<OptionProfileData> = {
     const rule = { type: "solid", pt: 0.75, color: C.border };
     const none = { type: "none" };
     const hdr = (text: string, align: "left" | "center" = "left"): TableCell => ({
-      text, options: { bold: true, fontSize: 11, color: C.paper, fill: { color: C.dark }, align, valign: "middle" },
+      text, options: { ...HEAD_CELL, align },
     });
     const fields: [string, (o: OptionProfileData["options"][number]) => string][] = [
       ["Instrument", (o) => o.instrument],
