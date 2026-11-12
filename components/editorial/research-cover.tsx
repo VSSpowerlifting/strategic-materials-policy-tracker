@@ -4,8 +4,8 @@ import { PhotoPlate } from "./photo-plate";
 
 /* Named frames, so a page picks a proportion without passing class strings through a content attribute. */
 const FRAMES = {
-  card: "aspect-[4/3]",
-  feature: "aspect-[4/3] lg:aspect-[16/10]",
+  card: "aspect-[16/9]",
+  feature: "aspect-[16/9]",
   banner: "aspect-[4/3] sm:aspect-[2/1] lg:aspect-[21/9]",
 } as const;
 

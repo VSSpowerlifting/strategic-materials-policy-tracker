@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
+import { researchCoverPhoto } from "@/lib/photography";
+
+const coverPhoto = researchCoverPhoto("tungsten-supply-security")!;
 
 export const metadata: Metadata = {
   title: "Tungsten Supply Security — Policy Research",
   description: "A comparison of tungsten export controls, financing and industrial projects across China, the European Union, the United Kingdom and Japan.",
   alternates: { canonical: "/research/tungsten-supply-security" },
   openGraph: {
+    images: [{ url: coverPhoto.src, width: coverPhoto.width, height: coverPhoto.height, alt: coverPhoto.alt }],
     type: "article",
     url: `${site.url}/research/tungsten-supply-security`,
     siteName: site.name,
     title: "Tungsten Supply Security | SMPT",
     description: "How tungsten policy is taking shape through mines, processing plants, export licensing and public finance in four markets.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [coverPhoto.src],
   },
 };
 
@@ -133,6 +142,13 @@ export default function TungstenResearchDossier() {
             <a href={downloads[0].href} className="research-button" download>Download the full dossier (PDF)</a>
             <a href={downloads[1].href} className="research-button-secondary" download>Executive memo (PDF)</a>
           </div>
+          <ResearchCover
+            data-cover="tungsten-supply-security"
+            data-frame="banner"
+            data-caption="full"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="mt-12 sm:mt-16"
+          />
         </Container>
       </section>
       <section className="bg-paper text-paper-foreground">

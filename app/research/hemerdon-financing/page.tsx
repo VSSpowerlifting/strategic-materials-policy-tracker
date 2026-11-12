@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
+import { researchCoverPhoto } from "@/lib/photography";
 
 const assets = {
   memo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
@@ -18,16 +20,23 @@ const assets = {
   qc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_QC.md",
 } as const;
 
+const coverPhoto = researchCoverPhoto("hemerdon-financing")!;
+
 export const metadata: Metadata = {
   title: "Inside Tungsten West's £71 Million Restart Financing — Strategy & Finance",
   description: "How the National Wealth Fund's Hemerdon financing is structured, what Tungsten West still needs to spend and when its core loan must be repaid.",
   alternates: { canonical: "/research/hemerdon-financing" },
   openGraph: {
+    images: [{ url: coverPhoto.src, width: coverPhoto.width, height: coverPhoto.height, alt: coverPhoto.alt }],
     type: "article",
     url: site.url + "/research/hemerdon-financing",
     siteName: site.name,
     title: "Inside Tungsten West's £71 Million Restart Financing | SMPT",
     description: "Government capital, project expenditure and refinancing risk at Hemerdon.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [coverPhoto.src],
   },
 };
 
@@ -84,6 +93,13 @@ export default function HemerdonFinancing() {
               Open the financial model
             </a>
           </div>
+          <ResearchCover
+            data-cover="hemerdon-financing"
+            data-frame="banner"
+            data-caption="full"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="mt-12 sm:mt-16"
+          />
         </Container>
       </section>
 

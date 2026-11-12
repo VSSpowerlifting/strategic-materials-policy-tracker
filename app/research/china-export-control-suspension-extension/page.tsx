@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Container } from "@/components/ui/container";
+import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
 
 const SLUG = "china-export-control-suspension-extension";
@@ -186,6 +187,13 @@ export default function ChinaSuspensionExtensionPage() {
             </Link>
             {" · "}November 9, 2026{" · "}Research cutoff: November 9, 2026
           </p>
+          <ResearchCover
+            data-cover="china-export-control-suspension-extension"
+            data-frame="banner"
+            data-caption="full"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="mt-12 sm:mt-16"
+          />
         </Container>
       </section>
 
