@@ -474,6 +474,11 @@ html { scroll-padding-top: 7rem; }
 /* Homepage flagship exhibit: bars grow once when the figure enters view; static without JS or with reduced
    motion (ScrollReveal only sets data-motion-ready when motion is allowed). */
 .exhibit-bar { transform-origin: left center; }
+/* Featured exhibit track: zero line in the structural rule, a hairline every 100 ktpa on the 0–450 scale. */
+.featured-track { border-left: 1px solid var(--border-strong); }
+@media (min-width: 40rem) {
+  .featured-track { background-image: repeating-linear-gradient(to right, transparent 0 calc(100% * 100 / 450 - 1px), var(--border) calc(100% * 100 / 450 - 1px) calc(100% * 100 / 450)); }
+}
 @media (prefers-reduced-motion: no-preference) {
   [data-motion-ready] .exhibit-bar { transform: scaleX(0); transition: transform 900ms cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--bar-order, 0) * 110ms + 120ms); }
   [data-motion-entered] .exhibit-bar { transform: scaleX(1); }
