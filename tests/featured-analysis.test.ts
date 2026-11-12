@@ -16,7 +16,7 @@ test("featured exhibit shows every approved screen in tonnes a year, drawn from 
   // No threshold is typed into the component; all come from the approved screens.
   for (const n of ["199", "275", "333", "416"]) assert.doesNotMatch(source, new RegExp(`\\b${n}\\b`));
   // Four scenarios in model order, so a larger requirement is always a longer bar on one zero-based scale.
-  const order = ["Base case", "Shorter benefits", "Shorter and later", "Combined stress"].map((l) => html.indexOf(l));
+  const order = ["Base case", "10 years of benefits", "10 years, starting later", "Cost, price and timing setbacks"].map((l) => html.indexOf(l));
   assert.ok(order.every((x, i) => x !== -1 && (i === 0 || x > order[i - 1])));
 });
 
@@ -33,10 +33,10 @@ test("each scenario marks only the assumptions that differ from the base case", 
 test("featured analysis separates modeled thresholds from output and keeps its downloads", () => {
   assert.match(html, /not forecasts of plant output/);
   // The tonnes are a money benefit translated through an assumed margin, not physical output the plant must reach.
-  assert.match(html, /after-tax\s+profit on 199,000 tonnes of copper at assumed prices and costs/);
-  assert.match(html, /The tonnes measure value, not the copper the\s+plant must produce\./);
-  assert.match(html, /counted in tonnes of copper/);
-  assert.match(html, /\$0\.8 billion of gross pre-commitment funding approved/);
+  assert.match(html, /after-tax\s+profit on 199,000 tonnes of copper in the base case/);
+  assert.match(html, /Those tonnes describe financial value, not how\s+much copper the new plant must produce\./);
+  assert.match(html, /How much yearly value would justify BHP/);
+  assert.match(html, /approved \$0\.8 billion of gross pre-commitment/);
   assert.match(html, /research cutoff 5 November 2026/);
   assert.doesNotMatch(html, /230–270/, "the plant's design output is not drawn beside the requirement");
   for (const href of ["/research/escondida-copper", "/research/fi002/model.xlsx", "/research/fi002/report.pdf"]) {
