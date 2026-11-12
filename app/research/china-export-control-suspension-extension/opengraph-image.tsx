@@ -1,12 +1,15 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { photographs } from "@/lib/photography";
 
 export const alt =
   "SMPT Policy Research: China extends its export-control pause through January 10, 2027";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+export default async function Image() {
+  const mark = await readFile(join(process.cwd(), "public/brand/smpt-lattice-mark.png"));
+
   return new ImageResponse(
     <div
       style={{
@@ -36,7 +39,7 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          width: 790,
+          width: 900,
           padding: "66px 0 60px 76px",
         }}
       >
@@ -57,7 +60,7 @@ export default function Image() {
             style={{
               display: "flex",
               flexDirection: "column",
-              fontSize: 61,
+              fontSize: 67,
               fontWeight: 700,
               lineHeight: 1.07,
               letterSpacing: -1.8,
@@ -95,7 +98,7 @@ export default function Image() {
           display: "flex",
           position: "absolute",
           top: 90,
-          left: 817,
+          left: 913,
           height: 435,
           width: 1,
           backgroundColor: "#b5b1a5",
@@ -103,33 +106,16 @@ export default function Image() {
       />
       <img
         alt=""
-        src={photographs["china-rare-earths"].src}
+        src={`data:image/png;base64,${mark.toString("base64")}`}
         style={{
           position: "absolute",
-          left: 818,
-          top: 0,
-          width: 382,
-          height: 630,
-          objectFit: "cover",
-          objectPosition: "56% 50%",
+          width: 390,
+          height: 345,
+          top: 158,
+          right: -130,
+          opacity: 0.85,
         }}
       />
-      <div
-        style={{
-          display: "flex",
-          position: "absolute",
-          left: 818,
-          bottom: 0,
-          width: 382,
-          padding: "12px 18px",
-          backgroundColor: "rgba(20, 30, 28, 0.82)",
-          color: "#fff",
-          fontSize: 13,
-        }}
-      >
-        Kevnmh · CC BY-SA 4.0
-      </div>
-
     </div>,
     size,
   );
