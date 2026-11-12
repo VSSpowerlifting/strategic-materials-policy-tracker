@@ -65,7 +65,7 @@ About **one to two pages**, plus an optional annotated slide:
 - whether it should be **retained, narrowed or reframed**, with the wording you would use;
 - **the single missing fact** that would most change your judgment.
 
-A workbook audit, a model rebuild and publication sign-off are not part of this assignment. Ambrose is reviewing the same 0.9.1 deck separately, on a different question: whether MP's commercial agreements give enough revenue visibility for the recommended structure. Your two reviews are independent, so please do not coordinate answers.
+A workbook audit, a model rebuild and publication sign-off are not part of this assignment. The previously proposed external commercial-review assignment was withdrawn on 12 November 2026. Benjamin will assess the revenue and contract-cash-timing issues internally; your independent financial-strategy review remains unchanged and does not require additional work.
 
 ## Source package
 
