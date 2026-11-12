@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# Python import caches generated during tests and publication-tool checks
+__pycache__/
+*.py[cod]
+
 # debug
 npm-debug.log*
 yarn-debug.log*
