@@ -1,6 +1,6 @@
 # FI003 Studio v1 design candidate: visual QA and analytical-parity report
 
-**Status: design candidate. Draft 1.0 is unchanged. Publication stays on HOLD. The Jiho, Ambrose and Benjamin review gates are not completed, and nothing here marks any gate passed.**
+**Status: design candidate. Draft 1.0 research and quantitative content are unchanged. Publication stays on HOLD. Jiho's independent financial review and Benjamin's commercial cash-flow, methodological and editorial reviews are pending; the external commercial assignment was withdrawn on 12 November 2026. No human gate has passed.**
 
 Visual production only. The Studio v3 publication identity (PR #262, `74fdc11`) is applied to the 18 slides of FI003 draft 1.0 (`6b93058`). The research cutoff stays 6 November 2026 and authorship is unchanged.
 
@@ -103,4 +103,4 @@ Inherited from draft 1.0, not regressions, and left unchanged to keep the layout
 
 ## Governance
 
-Jiho review, Ambrose review and Benjamin's financial and methodological review are all pending. Publication remains on HOLD. PR #215 is not merged, and nothing is published, deployed or distributed.
+Jiho's independent financial review and Benjamin's commercial cash-flow, financial and methodological reviews are pending. There is no external commercial reviewer. Publication remains on HOLD. PR #215 is not merged, and nothing is published, deployed or distributed.
