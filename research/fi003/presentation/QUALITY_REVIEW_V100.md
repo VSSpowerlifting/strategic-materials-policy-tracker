@@ -5,7 +5,7 @@
 **Draft 1.0 candidate, 11 November 2026. This is the version 1.0 production package for human review. It is not approved for publication.**
 
 - The publication HOLD stands. Nothing is merged or deployed and nothing is published externally. No reviewer was contacted.
-- The package is pushed to PR #215 as a draft for review. Jiho's and Ambrose's reviews have not taken place, and no finding is attributed to them. No counsel has reviewed the legal reading.
+- The package is pushed to PR #215 as a draft for review. Jiho's financial review remains pending; the proposed external commercial assignment was withdrawn on 12 November 2026 before findings were submitted. Benjamin retains the commercial cash-flow check. No reviewer finding is attributed, and no counsel has reviewed the legal reading.
 - The research cutoff is 6 November 2026. No post-cutoff evidence is used.
 - Unchanged:
   - the 0.7–0.9.1 outputs;
@@ -299,5 +299,5 @@ After these corrections the lead agent records A–E as **PASS (agent)**. A seco
 
 1. Accept the narrowed recommendation, or send it back.
 2. Decide whether to obtain counsel's reading of §8.01(m), §4.02(b), §8.02, the Article VII netting cap and S02 §9.02(a) before release.
-3. Approve sending Jiho and Ambrose the 1.0 baseline. Their handoffs are unsent.
-4. Lift the publication HOLD only after the human gates A–E and the independent reviews are complete.
+3. Obtain Jiho's independent financial-strategy feedback and Benjamin's internal commercial cash-flow assessment of the 1.0 baseline. No external commercial assignment remains active.
+4. Keep the publication HOLD until the required human gates, Jiho's independent review, Benjamin's commercial and editorial checks and any necessary legal reading are complete; separate authorization is required to publish.
