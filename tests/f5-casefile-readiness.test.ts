@@ -12,7 +12,7 @@ import {
   getAllControlMeasures, getAllEvents, getAllFinancialCommitments,
   getAllProjectDesignations, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "@/lib/data";
-import { prePhaseIiiMilestones, prePhaseIiiSources } from "./phase-iii-release-ids";
+import { PHASE_III_RELEASE_CUTOFF, prePhaseIiiMilestones, prePhaseIiiSources } from "./phase-iii-release-ids";
 
 const TODAY = "2026-10-17";
 const liveCorpus = (): PathwayInputs => structuredClone({
@@ -164,10 +164,11 @@ test("F5 casefile CLI: JSON and human reports both remain deliberately non-publi
   assert.equal(report.allPilotsEligibleForManualQa, true);
 });
 
-test("F5 readiness at the 8 November cutoff: Stibnite gains two reviewed workstream milestones, nothing auto-releases", () => {
+test("F5 readiness at the frozen 8 November cutoff: Stibnite gains two reviewed workstream milestones, nothing auto-releases", () => {
   const data = liveCorpus();
-  const report = auditF5CasefileReadiness(data, site.lastUpdated);
-  assert.equal(site.lastUpdated, "2026-11-08");
+  const report = auditF5CasefileReadiness(data, PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF, "2026-11-08");
+  assert.equal(site.lastUpdated, "2026-11-12");
   const stibnite = report.pilots.find(p => p.projectId === "prj-us-stibnite")!;
   assert.equal(stibnite.registeredOccurredMilestones, 2);
   assert.equal(stibnite.registeredPlannedMilestones, 0);

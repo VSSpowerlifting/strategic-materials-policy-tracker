@@ -15,7 +15,7 @@ const items = (prefix: string) => configs.filter(c=>c.equipment.startsWith(prefi
 const units = (prefix:string)=>items(prefix).reduce((sum,c)=>sum+c.units,0);
 const worksheet=()=>buildM3ReviewerPackets(queue,{
   projects:getAllProjects(),sources:getAllSources(),
-  commitments:getAllFinancialCommitments(), corpusCutoff:site.lastUpdated,
+  commitments:getAllFinancialCommitments(), corpusCutoff:PHASE_III_RELEASE_CUTOFF,
   publicMilestoneCount:getAllProjectMilestones().length,
 },"review-m3-2-thompson-falls-q2-expansion").worksheets[0];
 
@@ -129,7 +129,8 @@ test("original-source edges cannot turn regulatory authorization into audited ph
   assert.equal(permit.sourceEvidenceEdges[0].doesNotSupport,"all_new_units_commissioned_or_realized_output");
   assert.equal(permit.sourceEvidenceEdges[1].doesNotSupport,"all_nine_operating_together_or_nameplate_tonnage");
   assert.equal(permit.sourceEvidenceEdges[2].doesNotSupport,"exact_commissioning_day_or_full_capacity");
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+  assert.equal(site.lastUpdated,"2026-11-12");
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 

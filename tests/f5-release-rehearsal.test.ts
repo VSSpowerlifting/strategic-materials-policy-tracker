@@ -50,10 +50,11 @@ function syntheticDecision(id:string, cutoff:string=proposed) {
 test("real release now has only Wagerup registered without auto-authorizing the private Observatory",()=>{
   const current=getAllProjectMilestones();
   assert.deepEqual(current.map(m=>m.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+  assert.equal(site.lastUpdated,"2026-11-12");
   const replay=rehearseF5Release(queue,example,{
     ...corpus(),milestones:current,
-  },site.lastUpdated,site.lastUpdated);
+  },PHASE_III_RELEASE_CUTOFF,PHASE_III_RELEASE_CUTOFF);
   assert.deepEqual(replay.before.publishedMilestoneIds,current.map(x=>x.id));
   assert.deepEqual(replay.proposedMilestoneIds,[]);
   assert.equal(replay.publicationAuthorized,false,
