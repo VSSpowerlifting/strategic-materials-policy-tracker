@@ -51,9 +51,9 @@ export default function AntimonySupplyResilience() {
     <div data-flush-footer>
       <section className="border-b border-border-strong">
         <Container width="wide" className="article-hero py-12 sm:py-20">
-          <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
+          <a href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
             ← Research
-          </Link>
+          </a>
           <p className="mt-8 font-display text-[0.8125rem] font-medium text-accent">
             Strategy &amp; Finance
           </p>
