@@ -127,7 +127,9 @@ test("pilot audit CLI is deterministic, parseable and does not publish", () => {
   const parsed = JSON.parse(first);
   assert.equal(parsed.status, "non_publication_editorial_queue");
   assert.deepEqual(parsed.errors, []);
-  assert.equal(first, formatPilotAudit(audit()));
+  // The CLI uses today's curated cutoff; the older M3 tests use the
+  // immutable Phase III cutoff to reproduce original reviewer decisions.
+  assert.equal(first, formatPilotAudit(audit(q(),{...refs(),corpusCutoff:site.lastUpdated})));
 });
 
 test("M3.2 whole_project null scope is structurally valid without inventing a project component", () => {

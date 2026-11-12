@@ -155,7 +155,9 @@ test("F5-1: all review diagnostics are deterministic and no private drafts enter
   assert.ok(summary.includes("Milestone publication: NOT AUTHORIZED"));
   assert.ok(summary.includes("Existing M3.2 cases (reused, never duplicated): 4"));
   const json=execFileSync(process.execPath,[...argv,"--json"],{encoding:"utf8"});
-  assert.deepEqual(JSON.parse(json),audit());
+  // The CLI audits the current curated corpus, while the other F5-1 cases
+  // deliberately replay their original frozen Phase III inputs.
+  assert.deepEqual(JSON.parse(json),audit(input(),{...refs(),corpusCutoff:site.lastUpdated}));
   const bad=spawnSync(process.execPath,[...argv,"--publish"],{encoding:"utf8"});
   assert.equal(bad.status,2);
   assert.ok(bad.stderr.includes("Usage:"));
