@@ -42,6 +42,8 @@ export interface ResearchDeck {
   qc_record?: string;
   /** Opt-in: omit the section label kickers, cover kicker and "INTERPRETATION" heading. */
   plain_frame: boolean;
+  /** Optional document subject (file properties), e.g. to mark a design candidate. */
+  subject?: string;
   /** Opt-in cover_hero_split cover; absent means the standard cover. */
   cover?: HeroCover;
   slides: ResearchSlide[];
@@ -145,6 +147,7 @@ export function parseResearchDeck(raw: unknown, file: string, baseDir = REPO): R
         }),
     qc_record: qc === undefined ? undefined : path.resolve(baseDir, qc),
     plain_frame: plainFrame,
+    ...(o.subject === undefined ? {} : { subject: str(o.subject, `${file}.subject`) }),
     evidence,
     slides,
   };
@@ -238,6 +241,7 @@ export async function renderResearchDeck(specFile: string, outFile: string, qcOv
     {
       classification: "research", qcRecord: qc, evidence: deck.evidence, plainFrame: deck.plain_frame,
       ...(deck.publication_cover ? { researchCover: deck.publication_cover } : {}),
+      ...(deck.subject ? { subject: deck.subject } : {}),
     },
   );
   const manifest = {

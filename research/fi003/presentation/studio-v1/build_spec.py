@@ -311,7 +311,7 @@ add("evidence-milestone-strip", "Timing",
         {"label": "First leverage test, latest", "date": "2027-09-30", "state": "contractual"},
         {"label": "Springing maturity", "date": "2029-11-30", "state": "conditional"},
         {"label": "2030 notes mature", "date": "2030-03-01", "state": "reported"}],
-     "conventionNote": False},
+     "conventionNote": False, "stateCase": "sentence"},
     layout="wide")
 
 # 11. Government support
@@ -501,6 +501,7 @@ COVER = {
 spec = {
     "classification": "research",
     "title": f"{COVER['title'].replace(chr(10), ' ')}: {COVER['subtitle']}",
+    "subject": "FI003 Studio v1 design candidate of research draft 1.0 (review gates pending; held from publication)",
     "publication_cover": COVER,
     "evidence": [{"id": i, "label": i, "url": src[i]["url"], "title": src[i]["title"], "locator": LOC[i]} for i in sorted(used)],
     "slides": slides,

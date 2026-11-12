@@ -104,6 +104,8 @@ export interface BuildOptions {
   plainFrame?: boolean;
   /** Research decks only: a publication cover (research-cover.ts) in place of the generic one. */
   researchCover?: ResearchCover;
+  /** Research decks only: replaces the default document subject (file properties). */
+  subject?: string;
 }
 
 function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
@@ -222,7 +224,7 @@ export async function buildDeck(
   pptx.author = "SMPT exhibit system";
   pptx.company = "Strategic Materials Policy Tracker";
   pptx.title = cover.title;
-  pptx.subject = synthetic ? "Synthetic demonstration exhibits — not SMPT findings" : "SMPT research exhibits";
+  pptx.subject = synthetic ? "Synthetic demonstration exhibits — not SMPT findings" : (opts.subject ?? "SMPT research exhibits");
   pptx.theme = { headFontFace: FONT, bodyFontFace: FONT };
 
   const manifest: SlideManifest[] = [];

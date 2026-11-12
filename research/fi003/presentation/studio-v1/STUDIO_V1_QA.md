@@ -15,16 +15,19 @@ Visual production only. The Studio v3 publication identity (PR #262, `74fdc11`) 
 | Build manifest | `…/fi003-mp-materials-10x-financing-studio-v1.manifest.json` |
 | Build inputs | `research/fi003/presentation/studio-v1/` (`build_spec.py`, `export_pdf.sh`, `contact_sheet.py`, `spec.json`) |
 
-Draft 1.0 (`outputs/presentation-draft-v100/`, `presentation/v100/`) was not edited. All 11 files were hash-compared with `6b93058` and are identical.
+Draft 1.0 (`outputs/presentation-draft-v100/`, `presentation/v100/`) was not edited. All 11 files were hash-compared with `6b93058` and are identical. PR #215 (`codex/fi003-jpmorgan-financing-foundation`) head was still `6b93058` and open when checked on 12 November 2026.
+
+This branch is cut from `main` (`74fdc11`), which does not contain the FI003 research files. A subset of `research/fi003` was copied verbatim from `6b93058` so the deck can be rebuilt (model outputs, exhibits, the v100 presentation inputs and the review and handoff documents). Earlier-version material in that tree was not imported. The copy is a build baseline for review, not a replacement for PR #215.
 
 ## What changed (presentation only)
 
 - Plaster-white ground, graphite type, malachite emphasis; hematite, ochre and lapis stay functional (financial and contractual distinctions).
 - Archivo for titles, body, tables, labels and figures. Spectral appears only on the cover title (44 pt, the permitted role).
 - Cover: new left text column and right ledger. The ledger keeps the three instruments visibly separate: expired undrawn commitment (dashed outline), cash received (solid), committed capacity (outline, shaded where in use).
-- Labels sentence-cased, with no tracked all-caps except the status badge "DRAFT · REVIEW GATES PENDING".
+- Labels sentence-cased, with no tracked all-caps except the status badge "DRAFT · REVIEW GATES PENDING". On slide 11 the milestone status tags (Reported, Contractual, Conditional) use sentence case through the opt-in `stateCase` option.
+- File properties mark the PPTX as a Studio v1 design candidate with review gates pending, through an opt-in `subject` field on the deck spec.
 - Slide 7 (revolver availability): the "remaining capacity" bar uses a tint so data labels meet contrast.
-- Renderer changes are opt-in only (`conventionNote`, `keepOrder`, `legendWidths`, `accentFill`, `notesHeading` without tracking, `publication_cover`). Default outputs of the shared exhibit system are unchanged and its tests pass.
+- Renderer changes are opt-in only (`conventionNote`, `keepOrder`, `legendWidths`, `accentFill`, `stateCase`, `subject`, `notesHeading` without tracking, `publication_cover`). Default outputs of the shared exhibit system are unchanged and its tests pass.
 
 ## Analytical parity with draft 1.0
 
@@ -33,11 +36,11 @@ Compared with `parity.py` on the PPTX XML (text, hyperlink targets, notes, and t
 | Check | Result |
 |---|---|
 | Slide count | 18 and 18 |
-| Hyperlinks | 64 and 64, identical targets on every slide |
+| Hyperlinks | 64 and 64, identical targets on every slide (targets compared with draft 1.0; liveness was not tested) |
 | Speaker notes | identical on every slide |
 | Tables, charts, pictures per slide | identical |
 | Text, case-insensitive | identical on 17 slides; slide 1 only splits the cover title and subtitle into two paragraphs, same words |
-| Text, case-sensitive | differs only where labels were sentence-cased (for example INTERPRETATION to Interpretation) |
+| Text, case-sensitive | differs only where labels were sentence-cased (for example INTERPRETATION to Interpretation; slide 11 status tags) |
 | `spec.json` against draft 1.0 | identical apart from the `publication_cover` key and those label cases |
 
 No number, chart value, status, citation, evidence ID, qualification or cutoff changed. In particular these distinctions are preserved as in draft 1.0:
@@ -67,7 +70,7 @@ No number, chart value, status, citation, evidence ID, qualification or cutoff c
 
 ## Visual inspection
 
-All 18 rendered slides were inspected. Slides 1, 5, 6, 7, 8, 10, 11 and 17 were re-inspected after the final rebuild.
+All 18 rendered slides were inspected during the build. After the final rebuild, slides 2 and 11 were viewed again to confirm the heading fix and the sentence-case status tags. Slides 1, 5, 6, 7, 8, 10 and 17 were last viewed before that final rebuild; the rebuild did not change their spec and the text-parity check passed on the rebuilt file, but their pixels were not re-viewed.
 
 Inherited from draft 1.0, not regressions, and left unchanged to keep the layout faithful:
 
@@ -85,8 +88,8 @@ Inherited from draft 1.0, not regressions, and left unchanged to keep the layout
 
 - **Native PowerPoint and Keynote editing and rendering** were not tested. Only structural editability and a LibreOffice render were checked. PPTX cannot embed fonts, so the PDF is the canonical visual; the PPTX needs Archivo and Spectral installed.
 - **Manual accessibility testing** (screen reader, keyboard, reading order) was not done.
-- **Accessibility-tagged PDF variant** (the 1.0 package has one) was not produced: it needs PyMuPDF, which is not installed here, and installing it was not authorized. The PDF here has selectable text and embedded fonts but is not tag-remediated.
-- **Draft PR against the FI003 foundation branch**: see the PR description for the integration finding.
+- **Accessibility-tagged PDF variant** (the 1.0 package has one) was not produced: it needs PyMuPDF, which is not installed here, and installing it was not authorized. The PDF here has selectable text and embedded fonts but is not tag-remediated. An adapted remediation script was discarded because it was pinned to an earlier PDF hash; it needs to be recreated and re-pinned to the final PDF if the tagged variant is wanted.
+- **Draft PR against the FI003 foundation branch** was not opened. `git merge-tree` of this branch with `codex/fi003-jpmorgan-financing-foundation` (`6b93058`) reports 12 conflicts: `PROJECT_STATE.md`, `data/seed/materials.json`, `tests/f5-corpus-cutoff-impact.test.ts`, add/add in `scripts/exhibit-system/research-cover.ts` and `tests/exhibit-system-v100-cover.test.ts`, and content conflicts in `scripts/exhibit-system/{build-gallery,primitives,research-deck}.ts` and the `condition-tree`, `exhibit-with-interpretation`, `role-matrix` and `stacked-bar` renderers. The FI003 branch forked from an older `main` (`ea02a30`) and carries its own v1.0 cover and renderer edits. Opening a PR against `main` would land held FI003 material outside PR #215. The branch is pushed for review only; integration needs a decision on how to reconcile the exhibit-system code.
 - The Spectral font file was fetched into a temporary folder outside the repo for rendering only. No font binary is committed.
 
 ## Governance

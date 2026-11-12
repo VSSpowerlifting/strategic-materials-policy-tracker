@@ -1,6 +1,7 @@
 {
   "classification": "research",
   "title": "MP Materials' 10X Financing: Cash, Covenants, and Construction Risk",
+  "subject": "FI003 Studio v1 design candidate of research draft 1.0 (review gates pending; held from publication)",
   "publication_cover": {
     "series": "SMPT  /  Financial Intelligence 003",
     "title": "MP Materials'\n10X Financing",
@@ -764,7 +765,8 @@
               "state": "reported"
             }
           ],
-          "conventionNote": false
+          "conventionNote": false,
+          "stateCase": "sentence"
         },
         "layout": "wide"
       }

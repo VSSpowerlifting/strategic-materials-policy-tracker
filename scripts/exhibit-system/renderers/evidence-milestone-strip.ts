@@ -4,7 +4,7 @@
 // solid hollow = contractual deadline, dotted hollow = conditional or illustrative).
 // Native shapes on a computed date scale (day counts via Date.UTC): positions are
 // derived at build time, NOT data-bound. Labels alternate above and below the spine.
-import { arr, bool, isoDate, obj, str } from "../contract";
+import { arr, bool, isoDate, obj, oneOf, str } from "../contract";
 import { datesAscending, EVIDENCE_STATES, inVocabulary, maxItems, minItems, uniqueLabels } from "../integrity";
 import { C, vline } from "../primitives";
 import type { IntegrityIssue, RenderHelpers, Renderer } from "../types";
@@ -21,6 +21,8 @@ export interface EvidenceStripData {
   milestones: Milestone[];
   /** false omits the reading-convention note (default true). */
   conventionNote?: boolean;
+  /** "sentence" sets the state tag in sentence case without tracking (default: tracked capitals). */
+  stateCase?: "sentence";
 }
 
 const dayNum = (iso: string): number => {
@@ -34,7 +36,10 @@ const longDate = (iso: string): string => {
 
 const LABEL_MAX = 28;
 const GAP = 0.12;
-const stateText = (m: Milestone): string => m.state.replace(/-/g, " ").toUpperCase();
+const stateText = (m: Milestone, sentence = false): string => {
+  const t = m.state.replace(/-/g, " ");
+  return sentence ? t.charAt(0).toUpperCase() + t.slice(1) : t.toUpperCase();
+};
 const boxW = (m: Milestone): number => Math.max(m.label.length * 0.085, stateText(m).length * 0.08, longDate(m.date).length * 0.07) + 0.1;
 const SIDE = 0.95;
 
@@ -56,6 +61,7 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
     const o = obj(raw, "data");
     return {
       ...(o.conventionNote === undefined ? {} : { conventionNote: bool(o.conventionNote, "data.conventionNote") }),
+      ...(o.stateCase === undefined ? {} : { stateCase: oneOf(str(o.stateCase, "data.stateCase"), ["sentence"] as const, "data.stateCase") }),
       milestones: arr(o.milestones, "data.milestones").map((m, i) => {
         const p = `data.milestones[${i}]`;
         const mo = obj(m, p);
@@ -156,7 +162,7 @@ export const evidenceMilestoneStrip: Renderer<EvidenceStripData> = {
       const boxY = up ? mid - mk / 2 - stem - boxH : mid + mk / 2 + stem;
       h.text(`milestone-label-${i}`, "label", [
         { text: m.label, options: { bold: true, fontSize: 11, color: C.ink, breakLine: true } },
-        { text: stateText(m), options: { bold: true, fontSize: 11, color: verified ? C.accent : C.muted, charSpacing: 0.5, breakLine: true } },
+        { text: stateText(m, d.stateCase === "sentence"), options: { bold: true, fontSize: 11, color: verified ? C.accent : C.muted, ...(d.stateCase === "sentence" ? {} : { charSpacing: 0.5 }), breakLine: true } },
         { text: longDate(m.date), options: { fontSize: 11, color: C.muted } },
       ], { x: x - w / 2, y: boxY, w, h: boxH, align: "center", valign: up ? "bottom" : "top" });
     });
