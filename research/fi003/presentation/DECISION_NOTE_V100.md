@@ -3,7 +3,7 @@
 **Status:** draft 1.0 candidate, 11 November 2026, including a second-pass editorial revision and a new cover. Research cutoff 6 November 2026. Pushed to PR #215 for review.
 
 - The publication HOLD stands. Nothing is merged, deployed or published.
-- Benjamin, Jiho and Ambrose have not reviewed this version, and no counsel has read the legal mechanics.
+- Benjamin and Jiho have not completed their reviews of this version, and no counsel has read the legal mechanics. The proposed commercial reviewer withdrew before submitting findings; Benjamin retains the commercial cash-flow review.
 - Unchanged: model 1.0, the 0.7–0.9.1 outputs and the registered source fingerprints.
 
 This is editorial analysis from public filings. It is not legal or investment advice.
@@ -79,5 +79,5 @@ Gates, hashes, the adversarial reads and open items: [QUALITY_REVIEW_V100.md](QU
    - which netting cap governs Article VII;
    - §8.02 remedies;
    - the S02 §9.02(a)(ii) path.
-3. Jiho and Ambrose: independent review. Their handoffs are unsent.
+3. Jiho: independent financial-strategy review pending. Benjamin: internal commercial cash-flow and contract-quality review pending; no external commercial reviewer is assigned.
 4. Publication: the HOLD lifts only on Benjamin's separate authorization.
