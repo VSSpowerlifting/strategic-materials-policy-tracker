@@ -20,10 +20,8 @@ export default function TimelinePage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
-        eyebrow="Chronology"
         title="Timeline"
-        lead="The acute phase runs from April 2025, when Beijing's first heavy-rare-earth controls landed. Standing frameworks that predate the window — such as the EU Critical Raw Materials Act — are shown as foundational context."
+        lead="Events from April 2025; standing frameworks that predate the window are shown as foundational context."
       />
       <div className="mt-10 max-w-3xl">
         <TimelineView

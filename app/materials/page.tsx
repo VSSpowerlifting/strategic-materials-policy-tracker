@@ -13,7 +13,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Materials",
   description:
-    "Rare earths and adjacent strategic materials, each with its source-linked policy measures, legal controls, public finance and industrial records.",
+    "Rare earths and adjacent strategic materials, each with its source-linked policy measures, legal controls, public finance and industrial projects.",
 };
 
 export default function MaterialsPage() {
@@ -28,9 +28,8 @@ export default function MaterialsPage() {
     <>
       <Container width="wide" className="py-12">
         <PageHeading
-          eyebrow="Materials"
           title="Materials"
-          lead="Rare earths, the elements named in export controls, and adjacent materials such as gallium, germanium, graphite, antimony, tungsten and NdFeB magnets. Each profile collects the measures, financing and project records coded for that material."
+          lead="Rare earths, the elements named in export controls, and adjacent materials."
         />
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {materials.map((m) => (
@@ -54,7 +53,7 @@ export default function MaterialsPage() {
               <>
                 <h2 className="font-display text-2xl font-semibold tracking-tight">Browse by material and stage</h2>
                 <p className="mt-3 text-sm leading-6 text-muted">
-                  Select a marked cell to open its source-linked records.
+                  Select a marked cell to open its source-linked activity.
                 </p>
               </>
             }

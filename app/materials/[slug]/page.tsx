@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Dossier } from "@/components/dossier/dossier";
+import { MaterialRecord } from "@/components/record/material-dossier";
 import { getAllMaterials } from "@/lib/data";
 import { buildMaterialDossier } from "@/lib/material-dossier";
 import { site } from "@/lib/site";
@@ -20,5 +20,5 @@ export default async function MaterialPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const payload = buildMaterialDossier(slug, site.lastUpdated);
   if (!payload) notFound();
-  return <Dossier payload={payload} />;
+  return <MaterialRecord payload={payload} />;
 }

@@ -21,8 +21,8 @@ export function ControlGapNotice({ gaps, className, tone = "dark", id = "control
     <aside
       aria-labelledby={id}
       className={cn(
-        "rounded-lg border-l-4 px-4 py-4 sm:px-5",
-        tone === "dark" ? "border-accent bg-card text-foreground" : "border-paper-accent bg-paper-border/40 text-paper-foreground",
+        "border-l-4 px-4 py-4 sm:px-5",
+        tone === "dark" ? "border-ochre bg-plate text-foreground" : "border-ochre bg-plate text-paper-foreground",
         className,
       )}
     >
@@ -79,7 +79,7 @@ export function NotOnLatticeStats({ gaps, className }: { gaps: Gaps; className?:
         ))}
       </dl>
       <p className="mt-4 max-w-3xl text-xs leading-5 text-faint">
-        Each count is for its own kind of record over the whole record, whatever the filters above. They are never added together.
+        Each count is for its own kind of entry across the whole dataset, whatever the filters above. They are never added together.
       </p>
     </div>
   );

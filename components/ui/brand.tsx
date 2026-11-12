@@ -20,9 +20,9 @@ export function LatticeMark({ className, priority = false }: { className?: strin
 }
 
 /**
- * Header and footer lockup: the supplied mark beside the full project name in two tracked capitals lines, set in
- * the supplied logo's gold (`--brand-gold`). The name is live text, so it stays selectable and readable by
- * assistive technology; it is always the full name, so the mark never stands in for it.
+ * Header and footer lockup: the supplied mark beside the full project name, set in the editorial serif in ink.
+ * The name is live text, so it stays selectable and readable by assistive technology; it is always the full
+ * name, so the mark never stands in for it. Below `lg` it breaks into two lines to keep the header to one row.
  */
 export function Wordmark({
   className,
@@ -36,11 +36,10 @@ export function Wordmark({
   priority?: boolean;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-3", className)}>
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LatticeMark className={markClassName} priority={priority} />
-      <span className={cn("font-display text-[0.6875rem] font-medium uppercase leading-[1.25] tracking-[0.12em] text-brand", textClassName)}>
-        Strategic Materials
-        <br />
+      <span className={cn("font-editorial text-[0.9375rem] leading-[1.15] text-brand sm:text-[1.0625rem]", textClassName)}>
+        Strategic Materials <br className="lg:hidden" />
         Policy Tracker
       </span>
     </span>

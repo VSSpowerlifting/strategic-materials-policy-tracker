@@ -1,6 +1,6 @@
 {
   "article": "app/research/REPLACE-WITH-SLUG/page.tsx",
-  "pageSha256": "REPLACE-WITH-OUTPUT-OF-npm-run-editorial:check---hash",
+  "contentSha256": "REPLACE-WITH-OUTPUT-OF-npm-run-editorial:check---hash",
   "reviewer": "",
   "reviewDate": "",
   "checks": {

@@ -2,134 +2,104 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { Frequency, Observation, SourceBreak } from "@/lib/markets";
-import { formatNumber, formatPeriod, periodFrequency, periodsBetween } from "@/lib/markets";
+import { formatNumber, formatPeriod } from "@/lib/markets";
+import {
+  buildYScale,
+  interiorGaps,
+  keepNonOverlapping,
+  lineSegments,
+  niceTicks,
+  pickActive,
+  seriesExtremes,
+  spreadLabels,
+  timeTicks,
+  type ScaleKind,
+} from "./chart-math";
+
+export { lineSegments, niceTicks };
 
 export interface ChartLine {
   id: string;
   label: string;
   color: string;
   dash: string | undefined;
-  /** Already windowed (and indexed, in the indexed view). Missing periods are simply absent. */
+  /** What is drawn: the published values, or their index in the indexed view. Missing periods are absent. */
   points: Observation[];
+  /** The published values over the same window, shown in the readout whatever the view. */
+  published: Observation[];
   /** Stated changes of underlying source inside the window. The line is not joined across one. */
   breaks: SourceBreak[];
-  /** Unit shown in the tooltip, e.g. "US$/t" or "index". */
+  /** Unit of the published values, e.g. "US$/t". */
   unit: string;
+  /** Publisher short name, e.g. "World Bank Pink Sheet". */
+  source: string;
+  /** Exchange benchmark, price assessment or trade unit value. */
+  kind: string;
   digits: number;
-}
-
-interface Segment {
-  d: string;
-  estimated: boolean;
 }
 
 interface PriceChartProps {
   lines: ChartLine[];
-  /** Every period in the window, oldest first. The x-axis spans exactly these. */
+  /** Every period in view, oldest first. The time axis spans exactly these. */
   periods: string[];
+  frequency: Frequency;
   mode: "indexed" | "absolute";
-  /** Base month of the indexed view; draws the 100 reference line. */
+  /** The value axis in use (the caller has already fallen back to linear where log is impossible). */
+  scale: ScaleKind;
+  /** Base period of the indexed view; draws the 100 reference line. */
   basePeriod: string | null;
-  cursor: string | null;
-  onCursor: (period: string | null) => void;
+  /** A period and series pointed at from elsewhere on the page (the heatmap). */
+  inspect: { period: string | null; id: string | null };
   focusId: string | null;
   onFocus: (id: string | null) => void;
   /** Accessible name for the plot. The data itself is in the table view. */
   label: string;
+  onSelectRange: (from: string, to: string) => void;
+  /** Zoom by a factor (below 1 zooms in) around a period, or around the default anchor when null. */
+  onZoom: (factor: number, anchor: string | null) => void;
+  onPan: (steps: number) => void;
+  onReset: () => void;
 }
 
-const MARGIN = { top: 16, bottom: 32, left: 56 };
-const X_STEPS = [1, 2, 3, 6, 12, 24, 36, 60];
+const M = { top: 20, bottom: 30, left: 12 };
+const CHAR_W = 6.5;
+const MAX_ROWS = 8;
 
-/** Month number on a continuous scale, for calendar-aligned monthly ticks. */
-function monthIndex(p: string): number {
-  return Number(p.slice(0, 4)) * 12 + Number(p.slice(5, 7)) - 1;
-}
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-/**
- * Split a line into drawable pieces. Consecutive observations are joined;
- * a missing period or a stated source break ends the piece. A step touching an
- * estimated value is drawn separately so it can be dotted.
- */
-export function lineSegments(
-  points: readonly Observation[],
-  periods: readonly string[],
-  breaks: readonly SourceBreak[],
-  x: (p: string) => number,
-  y: (v: number) => number,
-): { segments: Segment[]; singles: Array<{ cx: number; cy: number; estimated: boolean; period: string }> } {
-  const byPeriod = new Map(points.map((o) => [o.period, o]));
-  const breakAt = new Set(breaks.map((b) => b.period));
-  const segments: Segment[] = [];
-  const joined = new Set<string>();
-  for (let i = 1; i < periods.length; i++) {
-    const a = byPeriod.get(periods[i - 1]);
-    const b = byPeriod.get(periods[i]);
-    if (!a || !b || breakAt.has(periods[i])) continue;
-    const estimated = Boolean(a.estimated || b.estimated);
-    const step = `${x(a.period).toFixed(1)},${y(a.value).toFixed(1)}L${x(b.period).toFixed(1)},${y(b.value).toFixed(1)}`;
-    const prev = segments[segments.length - 1];
-    if (prev && prev.estimated === estimated && joined.has(a.period)) prev.d += `L${x(b.period).toFixed(1)},${y(b.value).toFixed(1)}`;
-    else segments.push({ d: `M${step}`, estimated });
-    joined.add(a.period);
-    joined.add(b.period);
-  }
-  const singles = points
-    .filter((o) => !joined.has(o.period))
-    .map((o) => ({ cx: x(o.period), cy: y(o.value), estimated: Boolean(o.estimated), period: o.period }));
-  return { segments, singles };
-}
-
-/** Round, evenly spaced y-ticks covering [min, max]. */
-export function niceTicks(min: number, max: number, target = 5): number[] {
-  if (!Number.isFinite(min) || !Number.isFinite(max)) return [];
-  if (min === max) {
-    const pad = Math.abs(min) * 0.05 || 1;
-    min -= pad;
-    max += pad;
-  }
-  const raw = (max - min) / Math.max(1, target - 1);
-  const mag = 10 ** Math.floor(Math.log10(raw));
-  const norm = raw / mag;
-  const step = (norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 2.5 ? 2.5 : norm <= 5 ? 5 : 10) * mag;
-  const ticks: number[] = [];
-  for (let v = Math.floor(min / step) * step; v <= max + step * 1e-9; v += step) {
-    ticks.push(Number(v.toFixed(10)));
-  }
-  if (ticks[ticks.length - 1] < max) ticks.push(Number((ticks[ticks.length - 1] + step).toFixed(10)));
-  return ticks;
-}
-
-/** Spread label y-positions so no two are closer than `gap`, keeping order. */
-function spreadLabels(ys: number[], gap: number, lo: number, hi: number): number[] {
-  const order = ys.map((y, i) => ({ y, i })).sort((a, b) => a.y - b.y);
-  for (let k = 1; k < order.length; k++) {
-    if (order[k].y - order[k - 1].y < gap) order[k].y = order[k - 1].y + gap;
-  }
-  const overflow = order.length ? order[order.length - 1].y - hi : 0;
-  if (overflow > 0) for (const o of order) o.y -= overflow;
-  for (const o of order) o.y = Math.max(lo, o.y);
-  const out = new Array<number>(ys.length);
-  for (const o of order) out[o.i] = o.y;
-  return out;
+function Swatch({ color, dash }: { color: string; dash: string | undefined }) {
+  return (
+    <svg width="16" height="8" aria-hidden="true" className="shrink-0 self-center">
+      <line x1="0" x2="16" y1="4" y2="4" stroke={color} strokeWidth="2" strokeDasharray={dash} />
+    </svg>
+  );
 }
 
 export function PriceChart({
   lines,
   periods,
+  frequency,
   mode,
+  scale,
   basePeriod,
-  cursor,
-  onCursor,
+  inspect,
   focusId,
   onFocus,
   label,
+  onSelectRange,
+  onZoom,
+  onPan,
+  onReset,
 }: PriceChartProps) {
-  const frequency: Frequency = periodFrequency(periods[0]) ?? "monthly";
   const unitWord = frequency === "annual" ? "years" : "months";
   const revealId = useId().replace(/:/g, "");
   const wrapRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const [width, setWidth] = useState(800);
+  const [hover, setHover] = useState<{ period: string; py: number | null; keyboard: boolean } | null>(null);
+  const [band, setBand] = useState<{ x0: number; x1: number } | null>(null);
+  const drag = useRef<{ x: number; shift: boolean; moved: boolean; panned: number } | null>(null);
+  const suppressClick = useRef(false);
 
   useEffect(() => {
     const el = wrapRef.current;
@@ -141,93 +111,181 @@ export function PriceChart({
     return () => ro.disconnect();
   }, []);
 
-  const height = Math.round(Math.min(400, Math.max(260, width * 0.46)));
-  // Room for the longest direct label (≈6.6px per character at 12px), capped at 30% of the width.
-  const CHAR_W = 6.6;
-  const longest = lines.reduce((n, l) => Math.max(n, l.label.length), 0);
-  const right = Math.min(Math.max(Math.round(longest * CHAR_W) + 20, 56), Math.round(width * 0.3));
-  const maxChars = Math.max(4, Math.floor((right - 18) / CHAR_W));
-  const fit = (label: string) => (label.length > maxChars ? `${label.slice(0, maxChars - 1).trimEnd()}…` : label);
-  const plotW = Math.max(40, width - MARGIN.left - right);
-  const plotH = height - MARGIN.top - MARGIN.bottom;
+  const compact = width < 560;
+  const height = compact ? clamp(Math.round(width * 0.78), 280, 360) : clamp(Math.round(width * 0.46), 380, 560);
+  const plotH = height - M.top - M.bottom;
 
-  const geo = useMemo(() => {
-    const first = periods[0];
-    const span = Math.max(1, periods.length - 1);
-    const x = (p: string) => MARGIN.left + (periods.length > 1 ? periodsBetween(first, p) / span : 0.5) * plotW;
+  const valueText = (v: number, digits: number) => formatNumber(v, mode === "indexed" ? 1 : digits);
+
+  const ys = useMemo(() => {
     const values = lines.flatMap((l) => l.points.map((o) => o.value));
     if (mode === "indexed" && basePeriod) values.push(100);
-    const lo = values.length ? Math.min(...values) : 0;
-    const hi = values.length ? Math.max(...values) : 1;
-    const pad = (hi - lo) * 0.06 || Math.abs(hi) * 0.05 || 1;
-    const ticks = niceTicks(lo - pad, hi + pad, plotH < 240 ? 4 : 5);
-    const y0 = ticks[0] ?? lo;
-    const y1 = ticks[ticks.length - 1] ?? hi;
-    const y = (v: number) => MARGIN.top + (1 - (v - y0) / (y1 - y0 || 1)) * plotH;
+    return buildYScale(values, scale, plotH < 300 ? 4 : plotH < 420 ? 5 : 6);
+  }, [lines, mode, basePeriod, scale, plotH]);
 
-    // x ticks: every year for annual data; otherwise the smallest calendar-aligned
-    // step that keeps labels ~80px apart.
-    const maxLabels = Math.max(2, Math.floor(plotW / 80));
-    let xTicks: string[];
-    let yearOnly = true;
-    if (frequency === "annual") {
-      const step = Math.max(1, Math.ceil(periods.length / maxLabels));
-      xTicks = periods.filter((_, i) => i % step === 0);
-    } else {
-      const step = X_STEPS.find((s) => periods.length / s <= maxLabels) ?? 60;
-      xTicks = periods.filter((p) => monthIndex(p) % step === 0);
-      yearOnly = step >= 12;
-    }
+  // Enough decimals that no two ticks print alike, at most 3.
+  const tickDigits = Math.min(3, Math.max(0, ...ys.ticks.map((t) => String(t).split(".")[1]?.length ?? 0)));
+  const fmtTick = (v: number) => formatNumber(v, tickDigits);
+  const longestTag = Math.max(
+    3,
+    ...ys.ticks.map((t) => fmtTick(t).length),
+    ...lines.map((l) => {
+      const last = l.points[l.points.length - 1];
+      return last ? valueText(last.value, l.digits).length + (last.estimated ? 1 : 0) : 0;
+    }),
+  );
+  const axisW = Math.ceil(longestTag * CHAR_W) + 18;
+  const plotW = Math.max(60, width - M.left - axisW);
+  const plotRight = M.left + plotW;
+  const plotBottom = M.top + plotH;
 
-    // Months where at least one plotted line has no value: drawn as a shaded band.
-    const missing = periods.filter((p) => lines.some((l) => !l.points.some((o) => o.period === p)));
+  const geo = useMemo(() => {
+    const n = periods.length;
+    const index = new Map(periods.map((p, i) => [p, i]));
+    // Annual points sit half a step in from each edge, so a year reads as a point and not as an edge of the plot.
+    const inset = frequency === "annual" ? Math.min(80, plotW / Math.max(2, n * 2)) : 8;
+    const innerW = Math.max(1, plotW - inset * 2);
+    const stepPx = n > 1 ? innerW / (n - 1) : innerW;
+    const xi = (i: number) => M.left + inset + (n > 1 ? i * stepPx : innerW / 2);
+    const x = (p: string) => xi(index.get(p) ?? 0);
+    const y = (v: number) => M.top + (1 - ys.at(v)) * plotH;
+    const at = (px: number) => clamp(Math.round((px - M.left - inset) / stepPx), 0, Math.max(0, n - 1));
+
+    const { ticks: xTicks, yearOnly } = timeTicks(periods, frequency, Math.floor(plotW / (compact ? 64 : 84)));
 
     const paths = lines.map((l) => {
-      const byPeriod = new Map(l.points.map((o) => [o.period, o]));
       const { segments, singles } = lineSegments(l.points, periods, l.breaks, x, y);
-      const last = l.points[l.points.length - 1];
-      return { id: l.id, segments, singles, last, byPeriod };
+      return {
+        id: l.id,
+        segments,
+        singles,
+        last: l.points[l.points.length - 1],
+        byPeriod: new Map(l.points.map((o) => [o.period, o])),
+        published: new Map(l.published.map((o) => [o.period, o])),
+        breakAt: new Map(l.breaks.map((b) => [b.period, b])),
+      };
     });
 
-    const endYs = lines.length <= 8
-      ? spreadLabels(
-          paths.map((p) => (p.last ? y(p.last.value) : MARGIN.top)),
-          15,
-          MARGIN.top + 4,
-          MARGIN.top + plotH,
-        )
-      : paths.map((p) => (p.last ? y(p.last.value) : MARGIN.top));
+    // A period inside a series' own span with no published value: the line breaks, and the column is shaded.
+    const gaps = [...new Set(lines.flatMap((l) => interiorGaps(l.points, periods)))];
 
-    return { x, y, ticks, xTicks, yearOnly, missing, paths, endYs, span };
-  }, [lines, periods, mode, basePeriod, plotW, plotH, frequency]);
+    return { index, x, y, at, stepPx, xTicks, yearOnly, paths, gaps };
+  }, [lines, periods, frequency, plotW, plotH, ys, compact]);
 
-  const cursorIndex = cursor ? periods.indexOf(cursor) : -1;
+  const cursorPeriod = hover && geo.index.has(hover.period) ? hover.period : inspect.period && geo.index.has(inspect.period) ? inspect.period : null;
+  const pointerY = hover && cursorPeriod === hover.period ? hover.py : null;
+  const cursorIndex = cursorPeriod ? (geo.index.get(cursorPeriod) ?? -1) : -1;
 
-  function periodFromClientX(clientX: number, target: SVGSVGElement): string | null {
-    const rect = target.getBoundingClientRect();
-    const scale = width / rect.width;
-    const px = (clientX - rect.left) * scale - MARGIN.left;
-    if (periods.length === 0) return null;
-    const i = Math.round((px / plotW) * geo.span);
-    return periods[Math.min(periods.length - 1, Math.max(0, i))];
+  // The latest wheel handler inputs, read from a native listener (React's wheel listener is passive).
+  const live = useRef({ periods, at: geo.at, width, onZoom, onPan });
+  useEffect(() => {
+    live.current = { periods, at: geo.at, width, onZoom, onPan };
+  });
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    let zoomAcc = 0;
+    let panAcc = 0;
+    const onWheel = (e: WheelEvent) => {
+      const cur = live.current;
+      if (cur.periods.length === 0) return;
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        zoomAcc += e.deltaY;
+        if (Math.abs(zoomAcc) < 40) return;
+        const rect = svg.getBoundingClientRect();
+        const px = (e.clientX - rect.left) * (cur.width / rect.width);
+        cur.onZoom(zoomAcc > 0 ? 1.25 : 0.8, cur.periods[cur.at(px)] ?? null);
+        zoomAcc = 0;
+      } else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+        panAcc += e.deltaX;
+        if (Math.abs(panAcc) < 30) return;
+        cur.onPan(panAcc > 0 ? 1 : -1);
+        panAcc = 0;
+      }
+    };
+    svg.addEventListener("wheel", onWheel, { passive: false });
+    return () => svg.removeEventListener("wheel", onWheel);
+  }, []);
+
+  function pointerPos(e: React.PointerEvent<SVGSVGElement>): { px: number; py: number } {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const k = width / rect.width;
+    return { px: (e.clientX - rect.left) * k, py: (e.clientY - rect.top) * k };
+  }
+
+  function onPointerDown(e: React.PointerEvent<SVGSVGElement>) {
+    if (periods.length === 0) return;
+    const { px, py } = pointerPos(e);
+    setHover({ period: periods[geo.at(px)], py, keyboard: false });
+    if (e.pointerType === "mouse" && e.button === 0) drag.current = { x: px, shift: e.shiftKey, moved: false, panned: 0 };
+  }
+
+  function onPointerMove(e: React.PointerEvent<SVGSVGElement>) {
+    if (periods.length === 0) return;
+    const { px, py } = pointerPos(e);
+    const d = drag.current;
+    if (d && !d.moved && Math.abs(px - d.x) > 6) {
+      d.moved = true;
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
+    if (d?.moved && d.shift) {
+      // Shift-drag pans: the history follows the pointer, one period per step of width.
+      const target = Math.round((d.x - px) / geo.stepPx);
+      if (target !== d.panned) {
+        onPan(target - d.panned);
+        d.panned = target;
+      }
+      return;
+    }
+    if (d?.moved) setBand({ x0: d.x, x1: clamp(px, M.left, plotRight) });
+    setHover({ period: periods[geo.at(px)], py, keyboard: false });
+  }
+
+  function endDrag(e: React.PointerEvent<SVGSVGElement>, commit: boolean) {
+    const d = drag.current;
+    drag.current = null;
+    setBand(null);
+    if (!d?.moved) return;
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
+    suppressClick.current = true;
+    window.setTimeout(() => (suppressClick.current = false), 0);
+    if (!commit || d.shift) return;
+    const { px } = pointerPos(e);
+    const a = geo.at(Math.min(d.x, px));
+    const b = geo.at(Math.max(d.x, px));
+    if (b > a) onSelectRange(periods[a], periods[b]);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     if (periods.length === 0) return;
-    const at = cursorIndex === -1 ? periods.length - 1 : cursorIndex;
+    const lastIndex = periods.length - 1;
+    const at = cursorIndex === -1 ? lastIndex : cursorIndex;
+    const move = (i: number) => setHover({ period: periods[clamp(i, 0, lastIndex)], py: null, keyboard: true });
     let handled = true;
     switch (e.key) {
       case "ArrowLeft":
-        onCursor(periods[Math.max(0, at - (cursorIndex === -1 ? 0 : 1))]);
+        if (e.shiftKey) onPan(-1);
+        else move(cursorIndex === -1 ? at : at - 1);
         break;
       case "ArrowRight":
-        onCursor(periods[Math.min(periods.length - 1, at + (cursorIndex === -1 ? 0 : 1))]);
+        if (e.shiftKey) onPan(1);
+        else move(cursorIndex === -1 ? at : at + 1);
         break;
       case "Home":
-        onCursor(periods[0]);
+        move(0);
         break;
       case "End":
-        onCursor(periods[periods.length - 1]);
+        move(lastIndex);
+        break;
+      case "+":
+      case "=":
+        onZoom(0.8, cursorPeriod);
+        break;
+      case "-":
+      case "_":
+        onZoom(1.25, cursorPeriod);
         break;
       case "ArrowUp":
       case "ArrowDown": {
@@ -235,12 +293,11 @@ export function PriceChart({
         if (ids.length === 0) break;
         const cur = focusId ? ids.indexOf(focusId) : -1;
         const delta = e.key === "ArrowDown" ? 1 : -1;
-        const next = cur === -1 ? (delta === 1 ? 0 : ids.length - 1) : (cur + delta + ids.length) % ids.length;
-        onFocus(ids[next]);
+        onFocus(ids[cur === -1 ? (delta === 1 ? 0 : ids.length - 1) : (cur + delta + ids.length) % ids.length]);
         break;
       }
       case "Escape":
-        onCursor(null);
+        setHover(null);
         onFocus(null);
         break;
       default:
@@ -249,159 +306,265 @@ export function PriceChart({
     if (handled) e.preventDefault();
   }
 
-  // Enough decimals that no two ticks print alike (a 2.5 or 0.5 step needs them), at most 2.
-  const tickDigits = Math.min(2, Math.max(0, ...geo.ticks.map((t) => String(t).split(".")[1]?.length ?? 0)));
-  const fmtTick = (v: number) => formatNumber(v, tickDigits);
-  const colW = periods.length > 1 ? plotW / (periods.length - 1) : plotW;
-  // In a crowded chart the legend focuses an individual line; the full data
-  // remains accessible in the table. Avoid a hover card taller than the chart.
-  const tooltipItems = lines
-    .map((line, i) => ({ line, i }))
-    .filter(({ line, i }) => lines.length <= 8 || (focusId ? line.id === focusId : i < 8));
-  const tooltipHidden = lines.length - tooltipItems.length;
+  // ── Marks ─────────────────────────────────────────────────────────────────
+  const everyPoint = frequency === "annual" || geo.stepPx >= 9;
+  const markerR = frequency === "annual" ? 3.25 : geo.stepPx >= 16 ? 2 : 1.6;
+
+  // Highs and lows of the emphasised series, or of every series while the plot is not crowded.
+  const annotated = focusId ? lines.filter((l) => l.id === focusId) : lines.length <= (compact ? 2 : 4) ? lines : [];
+  const withDate = !compact && annotated.length <= 2;
+  // Where the "Source change" labels sit, so an annotation is placed clear of them.
+  const breakLabels = lines.flatMap((l) =>
+    l.breaks
+      .filter((brk) => geo.index.has(brk.period))
+      .map((brk) => {
+        const bx = geo.x(brk.period);
+        return { x: bx > plotRight - 90 ? bx - 80 : bx + 2, y: M.top, w: 78, h: 14 };
+      }),
+  );
+  const onBreakLabel = (x: number, y: number, w: number) =>
+    breakLabels.some((k) => x < k.x + k.w && k.x < x + w && y < k.y + k.h && k.y < y + 14);
+  const extremes = annotated.flatMap((l) =>
+    seriesExtremes(l.points).map((ex) => {
+      const cx = geo.x(ex.period);
+      const cy = geo.y(ex.value);
+      const text = `${ex.kind === "high" ? "High" : "Low"} ${valueText(ex.value, l.digits)}${ex.estimated ? "e" : ""}${withDate ? `, ${formatPeriod(ex.period)}` : ""}`;
+      const w = text.length * 6 + 6;
+      let ty = ex.kind === "high" ? cy - 9 : cy + 17;
+      if (ty - 11 < 2) ty = cy + 17;
+      if (ty + 4 > plotBottom) ty = cy - 9;
+      let tx = clamp(cx, M.left + w / 2 + 2, plotRight - w / 2 - 2);
+      if (onBreakLabel(tx - w / 2, ty - 11, w)) {
+        // Step to the side of the marker line that carries no "Source change" label.
+        const left = cx - w / 2 - 8;
+        const right = cx + w / 2 + 8;
+        tx = !onBreakLabel(left - w / 2, ty - 11, w) && left - w / 2 >= M.left ? left : right;
+      }
+      return { key: `${l.id}-${ex.kind}`, lineId: l.id, cx, cy, tx, ty, text, color: l.color, estimated: ex.estimated, box: { x: tx - w / 2, y: ty - 11, w, h: 14 } };
+    }),
+  );
+  const keepExtreme = keepNonOverlapping(extremes.map((m) => m.box), 3);
+
+  // Last value of each series, tagged on the value axis.
+  const tagged = lines.map((l, i) => ({ l, p: geo.paths[i] })).filter(({ l, p }) => p.last && (lines.length <= 8 || l.id === focusId));
+  const tagYs = spreadLabels(
+    tagged.map(({ p }) => geo.y(p.last!.value)),
+    17,
+    M.top + 8,
+    plotBottom - 8,
+  );
+
+  // ── Crosshair and readout ─────────────────────────────────────────────────
+  const candidates = cursorPeriod
+    ? lines.flatMap((l, i) => {
+        const o = geo.paths[i].byPeriod.get(cursorPeriod);
+        return o ? [{ id: l.id, y: geo.y(o.value) }] : [];
+      })
+    : [];
+  const activeId = pickActive(candidates, pointerY, focusId ?? inspect.id);
+  const activeAt = lines.findIndex((l) => l.id === activeId);
+  const activePoint = activeAt !== -1 && cursorPeriod ? geo.paths[activeAt].byPeriod.get(cursorPeriod) : undefined;
+
+  const readPeriod = cursorPeriod ?? (compact ? (periods[periods.length - 1] ?? null) : null);
+  const ordered = lines.length > MAX_ROWS && focusId ? [...lines].sort((a, b) => Number(b.id === focusId) - Number(a.id === focusId)) : lines;
+  const rows = ordered.slice(0, MAX_ROWS);
+  const hiddenRows = lines.length - rows.length;
+  const pathOf = (id: string) => geo.paths[lines.findIndex((l) => l.id === id)];
+
+  const readout = readPeriod ? (
+    <>
+      <p className="tnum flex items-baseline justify-between gap-3 font-display font-medium text-foreground">
+        <span>{formatPeriod(readPeriod, true)}</span>
+        {!cursorPeriod ? <span className="font-normal text-faint">Latest in view</span> : null}
+      </p>
+      <ul className="mt-1 divide-y divide-border">
+        {rows.map((l) => {
+          const p = pathOf(l.id);
+          const pub = p.published.get(readPeriod);
+          const pt = p.byPeriod.get(readPeriod);
+          const brk = p.breakAt.get(readPeriod);
+          return (
+            <li key={l.id} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-2 py-1.5">
+              <span className="pt-1">
+                <Swatch color={l.color} dash={l.dash} />
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-foreground">{l.label}</span>
+                <span className="block text-faint">
+                  {l.source}, {l.kind.toLowerCase()}
+                </span>
+              </span>
+              <span className="tnum text-right">
+                {pub ? (
+                  <span className="block whitespace-nowrap">
+                    <span className="text-foreground">
+                      {formatNumber(pub.value, l.digits)}
+                      {pub.estimated ? "e" : ""}
+                    </span>{" "}
+                    <span className="text-faint">{l.unit}</span>
+                  </span>
+                ) : (
+                  <span className="block text-faint">No value published</span>
+                )}
+                {mode === "indexed" && pt ? <span className="block text-faint">Index {formatNumber(pt.value, 1)}</span> : null}
+                {brk ? <span className="block text-faint">Source change</span> : null}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+      {hiddenRows > 0 ? <p className="mt-1 text-faint">{hiddenRows} more series are in the data table.</p> : null}
+      {rows.some((l) => pathOf(l.id).published.get(readPeriod)?.estimated) ? <p className="mt-1 text-faint">e = estimate stated by the source</p> : null}
+    </>
+  ) : null;
+
+  const spoken =
+    hover?.keyboard && cursorPeriod
+      ? `${formatPeriod(cursorPeriod, true)}. ${lines
+          .map((l) => {
+            const pub = pathOf(l.id).published.get(cursorPeriod);
+            return pub ? `${l.label}: ${formatNumber(pub.value, l.digits)} ${l.unit}${pub.estimated ? ", estimated" : ""}` : `${l.label}: no value published`;
+          })
+          .join("; ")}.`
+      : "";
+
+  const cx = cursorPeriod ? geo.x(cursorPeriod) : 0;
+  const dateTag = cursorPeriod ? formatPeriod(cursorPeriod) : "";
+  const dateTagW = dateTag.length * CHAR_W + 14;
+  const bandPeriods = band ? ([periods[geo.at(Math.min(band.x0, band.x1))], periods[geo.at(Math.max(band.x0, band.x1))]] as const) : null;
 
   return (
     <div
       ref={wrapRef}
       role="group"
       tabIndex={0}
-      aria-label={`${label}. Left and right arrows move between ${unitWord}, up and down change the emphasised series, Escape clears.`}
+      aria-label={`${label}. Left and right arrows move between ${unitWord}; Shift with an arrow pans; plus and minus zoom; up and down change the emphasised series; Escape clears.`}
       onKeyDown={onKeyDown}
-      className="relative w-full rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+      className="relative w-full outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       <svg
+        ref={svgRef}
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
         aria-label={label}
         className="block h-auto max-w-full select-none"
-        style={{ touchAction: "pan-y" }}
-        onPointerMove={(e) => onCursor(periodFromClientX(e.clientX, e.currentTarget))}
-        onPointerDown={(e) => onCursor(periodFromClientX(e.clientX, e.currentTarget))}
+        style={{ touchAction: "pan-y", cursor: "crosshair" }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={(e) => endDrag(e, true)}
+        onPointerCancel={(e) => endDrag(e, false)}
         onPointerLeave={(e) => {
-          if (e.pointerType === "mouse") onCursor(null);
+          if (e.pointerType === "mouse" && !drag.current) setHover(null);
         }}
+        onDoubleClick={onReset}
       >
-        {/* Per-line clipping makes the actual historical path unfold from left to right.
-            CSS animates only the reveal rectangle, preserving gaps, estimates and dashed strokes. */}
+        {/* Per-line clipping makes each published path unfold from left to right. CSS animates only the
+            reveal rectangle, so gaps, estimates and dashes are never redrawn or distorted. */}
         <defs>
           {lines.map((l, i) => (
             <clipPath id={`${revealId}-${l.id}-sweep`} key={l.id} clipPathUnits="userSpaceOnUse">
-              <rect
-                x={0}
-                y={0}
-                width={width}
-                height={height}
-                className="market-line-reveal"
-                style={{ animationDelay: `${Math.min(i * 90, 360)}ms` }}
-              />
+              <rect x={0} y={0} width={width} height={height} className="market-line-reveal" style={{ animationDelay: `${Math.min(i * 90, 360)}ms` }} />
             </clipPath>
           ))}
         </defs>
 
-        {/* Months with a missing value in at least one series */}
-        {geo.missing.map((p) => (
-          <rect
-            key={`gap-${p}`}
-            x={geo.x(p) - colW / 2}
-            y={MARGIN.top}
-            width={colW}
-            height={plotH}
-            fill="var(--elevated)"
-            opacity={0.8}
-          />
+        {/* Periods with no published value inside a series' own span */}
+        {geo.gaps.map((p) => (
+          <rect key={`gap-${p}`} x={geo.x(p) - geo.stepPx / 2} y={M.top} width={geo.stepPx} height={plotH} fill="var(--elevated)" />
         ))}
 
-        {/* Grid and y-axis labels */}
-        {geo.ticks.map((t) => (
+        {/* Value grid and axis labels */}
+        {ys.ticks.map((t) => (
           <g key={`y-${t}`}>
-            <line x1={MARGIN.left} x2={MARGIN.left + plotW} y1={geo.y(t)} y2={geo.y(t)} stroke="var(--border)" strokeWidth={1} />
-            <text x={MARGIN.left - 8} y={geo.y(t)} dy="0.32em" textAnchor="end" className="tnum" fontSize={11} fill="var(--faint)">
-              {fmtTick(t)}
-            </text>
+            <line x1={M.left} x2={plotRight} y1={geo.y(t)} y2={geo.y(t)} stroke="var(--border)" strokeWidth={1} />
+            {/* A tick label gives way to a last-value tag sitting on it; the grid line stays. */}
+            {tagYs.every((ty) => Math.abs(ty - geo.y(t)) > 14) ? (
+              <text x={plotRight + 8} y={geo.y(t)} dy="0.32em" className="tnum" fontSize={11} fill="var(--faint)">
+                {fmtTick(t)}
+              </text>
+            ) : null}
           </g>
         ))}
 
-        {/* x-axis */}
-        <line x1={MARGIN.left} x2={MARGIN.left + plotW} y1={MARGIN.top + plotH} y2={MARGIN.top + plotH} stroke="var(--border-strong)" />
+        {/* Index base */}
+        {mode === "indexed" && basePeriod ? (
+          <g>
+            <line x1={M.left} x2={plotRight} y1={geo.y(100)} y2={geo.y(100)} stroke="var(--border-strong)" strokeWidth={1} />
+            {/* The base is always labelled, unless a round tick already sits on or beside it. */}
+            {ys.ticks.every((t) => Math.abs(geo.y(t) - geo.y(100)) > 14) && tagYs.every((ty) => Math.abs(ty - geo.y(100)) > 14) ? (
+              <text x={plotRight + 8} y={geo.y(100)} dy="0.32em" className="tnum" fontSize={11} fill="var(--faint)">
+                100
+              </text>
+            ) : null}
+          </g>
+        ) : null}
+
+        {/* Time axis */}
+        <line x1={M.left} x2={plotRight} y1={plotBottom} y2={plotBottom} stroke="var(--border-strong)" />
+        <line x1={plotRight} x2={plotRight} y1={M.top} y2={plotBottom} stroke="var(--border)" />
         {geo.xTicks.map((p) => (
           <g key={`x-${p}`}>
-            <line x1={geo.x(p)} x2={geo.x(p)} y1={MARGIN.top + plotH} y2={MARGIN.top + plotH + 4} stroke="var(--border-strong)" />
-            <text x={geo.x(p)} y={MARGIN.top + plotH + 18} textAnchor="middle" className="tnum" fontSize={11} fill="var(--faint)">
+            <line x1={geo.x(p)} x2={geo.x(p)} y1={plotBottom} y2={plotBottom + 4} stroke="var(--border-strong)" />
+            <text x={geo.x(p)} y={plotBottom + 18} textAnchor="middle" className="tnum" fontSize={11} fill="var(--faint)">
               {geo.yearOnly ? p.slice(0, 4) : formatPeriod(p)}
             </text>
           </g>
         ))}
 
-        {/* Index reference */}
-        {mode === "indexed" && basePeriod ? (
-          <line
-            x1={MARGIN.left}
-            x2={MARGIN.left + plotW}
-            y1={geo.y(100)}
-            y2={geo.y(100)}
-            stroke="var(--muted)"
-            strokeDasharray="2 3"
-            strokeWidth={1}
-          />
-        ) : null}
-
         {/* Stated changes of underlying source */}
         {lines.flatMap((l) =>
           l.breaks
-            .filter((b) => periods.includes(b.period))
-            .map((b) => (
-              <g key={`brk-${l.id}-${b.period}`} pointerEvents="none">
-                <line
-                  x1={geo.x(b.period)}
-                  x2={geo.x(b.period)}
-                  y1={MARGIN.top}
-                  y2={MARGIN.top + plotH}
-                  stroke={l.color}
-                  strokeDasharray="1 4"
-                  strokeWidth={1.5}
-                />
-                <text x={geo.x(b.period) + 4} y={MARGIN.top + 10} fontSize={10} fill="var(--faint)">
-                  source change
-                </text>
-              </g>
-            )),
+            .filter((b) => geo.index.has(b.period))
+            .map((b) => {
+              const bx = geo.x(b.period);
+              const flip = bx > plotRight - 90;
+              return (
+                <g key={`brk-${l.id}-${b.period}`} pointerEvents="none">
+                  <line x1={bx} x2={bx} y1={M.top} y2={plotBottom} stroke={l.color} strokeDasharray="1 4" strokeWidth={1.5} />
+                  <text x={bx + (flip ? -5 : 5)} y={M.top + 10} textAnchor={flip ? "end" : "start"} fontSize={10.5} fill="var(--muted)" stroke="var(--plate)" strokeWidth={3} paintOrder="stroke">
+                    Source change
+                  </text>
+                </g>
+              );
+            }),
         )}
 
-        {/* Lines */}
+        {/* Lines: one straight step between consecutive published observations */}
         {lines.map((l, i) => {
           const p = geo.paths[i];
           const dim = focusId !== null && focusId !== l.id;
           const strong = focusId === l.id;
-          const markers = frequency === "annual" || periods.length <= 13;
+          const dots = everyPoint
+            ? l.points.map((o) => ({ cx: geo.x(o.period), cy: geo.y(o.value), estimated: Boolean(o.estimated), period: o.period }))
+            : p.singles;
           return (
-            <g key={l.id} opacity={dim ? 0.3 : 1} clipPath={`url(#${revealId}-${l.id}-sweep)`}>
+            <g key={l.id} opacity={dim ? 0.28 : 1} clipPath={`url(#${revealId}-${l.id}-sweep)`}>
               {p.segments.map((seg) => (
                 <path
                   key={seg.d}
                   d={seg.d}
                   fill="none"
                   stroke={l.color}
-                  strokeWidth={strong ? 2.75 : 2}
-                  strokeDasharray={seg.estimated ? "2 4" : l.dash}
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
+                  strokeWidth={strong ? 2 : 1.5}
+                  strokeDasharray={seg.estimated ? "2 3" : l.dash}
+                  strokeLinejoin="miter"
+                  strokeMiterlimit={2}
+                  strokeLinecap="butt"
                 />
               ))}
-              {(markers ? l.points.map((o) => ({ cx: geo.x(o.period), cy: geo.y(o.value), estimated: Boolean(o.estimated), period: o.period })) : p.singles).map(
-                (s) => (
-                  <circle
-                    key={`pt-${s.period}`}
-                    cx={s.cx}
-                    cy={s.cy}
-                    r={4}
-                    fill={s.estimated ? "var(--surface)" : l.color}
-                    stroke={s.estimated ? l.color : "var(--surface)"}
-                    strokeWidth={2}
-                  />
-                ),
-              )}
+              {dots.map((s) => (
+                <circle
+                  key={`pt-${s.period}`}
+                  cx={s.cx}
+                  cy={s.cy}
+                  r={everyPoint ? markerR : 2.25}
+                  fill={s.estimated ? "var(--plate)" : l.color}
+                  stroke={s.estimated ? l.color : frequency === "annual" ? "var(--plate)" : "none"}
+                  strokeWidth={s.estimated ? 1.25 : 1.5}
+                />
+              ))}
               {/* Wide invisible hit paths so a line can be clicked to emphasise it */}
               {p.segments.map((seg) => (
                 <path
@@ -409,113 +572,114 @@ export function PriceChart({
                   d={seg.d}
                   fill="none"
                   stroke="transparent"
-                  strokeWidth={14}
+                  strokeWidth={12}
                   style={{ cursor: "pointer" }}
-                  onClick={() => onFocus(focusId === l.id ? null : l.id)}
+                  onClick={() => {
+                    if (!suppressClick.current) onFocus(focusId === l.id ? null : l.id);
+                  }}
                 />
               ))}
             </g>
           );
         })}
 
-        {/* At high density show a direct end label only for the highlighted
-            line. The keyboard-accessible legend lists every selected line. */}
-        {/* Direct labels at line ends */}
-        {lines.map((l, i) => {
-          const p = geo.paths[i];
-          if (!p.last || (lines.length > 8 && focusId !== l.id)) return null;
-          const lx = geo.x(p.last.period);
-          const ly = geo.y(p.last.value);
-          const ty = geo.endYs[i];
+        {/* Highest and lowest observation in view */}
+        {extremes.map((m, i) =>
+          keepExtreme[i] ? (
+            <g key={`ext-${m.key}`} pointerEvents="none" clipPath={`url(#${revealId}-${m.lineId}-sweep)`}>
+              <circle cx={m.cx} cy={m.cy} r={3.5} fill={m.estimated ? "var(--plate)" : m.color} stroke={m.estimated ? m.color : "var(--plate)"} strokeWidth={1.5} />
+              <text x={m.tx} y={m.ty} textAnchor="middle" className="tnum" fontSize={11} fill="var(--muted)" stroke="var(--plate)" strokeWidth={3.5} paintOrder="stroke">
+                {m.text}
+              </text>
+            </g>
+          ) : null,
+        )}
+
+        {/* Last value of each series on the value axis */}
+        {tagged.map(({ l, p }, i) => {
           const dim = focusId !== null && focusId !== l.id;
           return (
-            <g key={`lab-${l.id}`} opacity={dim ? 0.45 : 1} clipPath={`url(#${revealId}-${l.id}-sweep)`}>
-              <line x1={lx + 3} x2={lx + 10} y1={ly} y2={ty} stroke={l.color} strokeWidth={1} />
-              <text
-                x={lx + 13}
-                y={ty}
-                dy="0.32em"
-                fontSize={12}
-                fontWeight={focusId === l.id ? 700 : 500}
-                fill="var(--fg)"
-              >
-                {fit(l.label)}
-                {fit(l.label) !== l.label ? <title>{l.label}</title> : null}
+            <g key={`tag-${l.id}`} opacity={dim ? 0.45 : 1} pointerEvents="none" clipPath={`url(#${revealId}-${l.id}-sweep)`}>
+              <rect x={plotRight + 1.5} y={tagYs[i] - 8} width={axisW - 3} height={16} fill="var(--plate)" stroke={l.color} strokeWidth={1.25} strokeDasharray={l.dash ? "4 2" : undefined} />
+              <text x={plotRight + 8} y={tagYs[i]} dy="0.32em" className="tnum" fontSize={11} fontWeight={focusId === l.id ? 600 : 500} fill="var(--fg)">
+                {valueText(p.last!.value, l.digits)}
+                {p.last!.estimated ? "e" : ""}
               </text>
             </g>
           );
         })}
 
-        {/* Crosshair */}
-        {cursor && cursorIndex !== -1 ? (
+        {/* Range being selected */}
+        {band && bandPeriods ? (
           <g pointerEvents="none">
-            <line
-              x1={geo.x(cursor)}
-              x2={geo.x(cursor)}
-              y1={MARGIN.top}
-              y2={MARGIN.top + plotH}
-              stroke="var(--border-strong)"
-              strokeWidth={1}
-            />
+            <rect x={Math.min(band.x0, band.x1)} y={M.top} width={Math.abs(band.x1 - band.x0)} height={plotH} fill="var(--accent)" opacity={0.1} />
+            <line x1={band.x0} x2={band.x0} y1={M.top} y2={plotBottom} stroke="var(--accent)" />
+            <line x1={band.x1} x2={band.x1} y1={M.top} y2={plotBottom} stroke="var(--accent)" />
+            <text x={clamp((band.x0 + band.x1) / 2, M.left + 70, plotRight - 70)} y={M.top - 6} textAnchor="middle" className="tnum" fontSize={11} fill="var(--fg)">
+              {formatPeriod(bandPeriods[0])} to {formatPeriod(bandPeriods[1])}
+            </text>
+          </g>
+        ) : null}
+
+        {/* Crosshair, snapped to a published observation, with its date and value on the axes */}
+        {cursorPeriod && !band ? (
+          <g pointerEvents="none">
+            <line x1={cx} x2={cx} y1={M.top} y2={plotBottom} stroke="var(--muted)" strokeWidth={1} strokeDasharray="3 3" />
+            {activePoint ? (
+              <line x1={M.left} x2={plotRight} y1={geo.y(activePoint.value)} y2={geo.y(activePoint.value)} stroke="var(--muted)" strokeWidth={1} strokeDasharray="3 3" />
+            ) : null}
             {lines.map((l, i) => {
-              const o = geo.paths[i].byPeriod.get(cursor);
-              if (o === undefined) return null;
-              const v = o.value;
+              const o = geo.paths[i].byPeriod.get(cursorPeriod);
+              if (!o) return null;
               return (
                 <circle
                   key={`dot-${l.id}`}
-                  cx={geo.x(cursor)}
-                  cy={geo.y(v)}
-                  r={4.5}
-                  fill={o.estimated ? "var(--surface)" : l.color}
-                  stroke={o.estimated ? l.color : "var(--surface)"}
-                  strokeWidth={2}
+                  cx={cx}
+                  cy={geo.y(o.value)}
+                  r={l.id === activeId ? 4 : 3.25}
+                  fill={o.estimated ? "var(--plate)" : l.color}
+                  stroke={o.estimated ? l.color : "var(--plate)"}
+                  strokeWidth={1.5}
                   opacity={focusId !== null && focusId !== l.id ? 0.4 : 1}
                 />
               );
             })}
+            <g transform={`translate(${clamp(cx - dateTagW / 2, M.left, plotRight - dateTagW)},${plotBottom + 5})`}>
+              <rect width={dateTagW} height={18} fill="var(--fg)" />
+              <text x={dateTagW / 2} y={9} dy="0.34em" textAnchor="middle" className="tnum" fontSize={11} fill="var(--plate)">
+                {dateTag}
+              </text>
+            </g>
+            {activePoint && activeAt !== -1 ? (
+              <g transform={`translate(${plotRight + 1},${clamp(geo.y(activePoint.value) - 9, M.top - 9, plotBottom - 9)})`}>
+                <rect width={axisW - 2} height={18} fill="var(--fg)" />
+                <text x={7} y={9} dy="0.34em" className="tnum" fontSize={11} fill="var(--plate)">
+                  {valueText(activePoint.value, lines[activeAt].digits)}
+                  {activePoint.estimated ? "e" : ""}
+                </text>
+              </g>
+            ) : null}
           </g>
         ) : null}
       </svg>
 
-      {cursor && cursorIndex !== -1 ? (
+      {/* Readout: floats beside the crosshair on a wide chart, sits under the plot on a narrow one. */}
+      {compact ? (
+        <div aria-hidden="true" className="border-t border-border px-3 py-2 text-xs leading-5">
+          {readout}
+        </div>
+      ) : cursorPeriod && !band ? (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute top-2 z-10 w-56 rounded-md border border-border-strong bg-elevated px-3 py-2 text-xs"
-          style={
-            geo.x(cursor) > width / 2
-              ? { right: Math.max(8, width - geo.x(cursor) + 12) }
-              : { left: Math.min(width - 232, geo.x(cursor) + 12) }
-          }
+          className="pointer-events-none absolute top-2 z-10 w-80 border border-border-strong bg-plate px-3 py-2 text-xs leading-5"
+          style={cx > M.left + plotW / 2 ? { right: width - cx + 14 } : { left: cx + 14 }}
         >
-          <p className="tnum font-display font-semibold text-foreground">{formatPeriod(cursor, true)}</p>
-          <ul className="mt-1 space-y-1">
-            {tooltipItems.map(({ line: l, i }) => {
-              const o = geo.paths[i].byPeriod.get(cursor);
-              return (
-                <li key={l.id} className="flex items-center gap-2">
-                  <svg width="14" height="8" aria-hidden="true" className="shrink-0">
-                    <line x1="0" x2="14" y1="4" y2="4" stroke={l.color} strokeWidth="2.5" strokeDasharray={l.dash} />
-                  </svg>
-                  <span className="min-w-0 flex-1 truncate text-muted">{l.label}</span>
-                  <span className="tnum text-foreground">
-                    {o ? `${formatNumber(o.value, mode === "indexed" ? 1 : l.digits)}${o.estimated ? "e" : ""}` : "n/a"}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-          {tooltipHidden > 0 ? (
-            <p className="mt-1.5 text-faint">
-              {tooltipHidden} more selected · highlight a legend item to inspect it
-            </p>
-          ) : null}
-          <p className="mt-1.5 text-faint">
-            {mode === "indexed" ? "Index, base period = 100" : lines[0]?.unit}
-            {geo.paths.some((p) => p.byPeriod.get(cursor)?.estimated) ? " · e = estimated" : ""}
-          </p>
+          {readout}
         </div>
       ) : null}
+      <p className="sr-only" aria-live="polite">
+        {spoken}
+      </p>
     </div>
   );
 }

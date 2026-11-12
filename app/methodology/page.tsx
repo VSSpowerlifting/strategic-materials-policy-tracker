@@ -112,11 +112,11 @@ const DEFS: Record<string, Record<string, string>> = {
 
 function DefList({ items }: { items: [string, string][] }) {
   return (
-    <dl className="mt-3 space-y-px overflow-hidden rounded-lg border border-border">
+    <dl className="mt-3 divide-y divide-border border-y border-border-strong">
       {items.map(([term, def]) => (
         <div
           key={term}
-          className="grid gap-1 bg-card px-4 py-2.5 sm:grid-cols-[14rem_minmax(0,1fr)] sm:gap-4"
+          className="grid gap-1 py-2.5 sm:grid-cols-[14rem_minmax(0,1fr)] sm:gap-4"
         >
           <dt className="font-display text-sm font-semibold">{term}</dt>
           <dd className="leading-7 text-muted">{def}</dd>
@@ -126,9 +126,22 @@ function DefList({ items }: { items: [string, string][] }) {
   );
 }
 
+/** Long reference material stays in the page (and in its text) but opens on request. */
+function Disclosure({ label, open, children }: { label: string; open?: boolean; children: React.ReactNode }) {
+  return (
+    <details className="section-disclosure group border-y border-border" open={open}>
+      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 font-display text-sm font-medium text-foreground hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+        <span aria-hidden className="inline-block text-faint transition-transform group-open:rotate-90 motion-reduce:transition-none">›</span>
+        {label}
+      </summary>
+      <div className="space-y-3 pb-4 pt-1">{children}</div>
+    </details>
+  );
+}
+
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h2 id={id} className="scroll-mt-20 font-display text-xl font-bold tracking-tight">
+    <h2 id={id} className="scroll-mt-24 border-t border-border-strong pt-4 font-display text-xl font-semibold leading-snug tracking-tight sm:text-[1.375rem]">
       {children}
     </h2>
   );
@@ -163,29 +176,27 @@ export default function MethodologyPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
-        eyebrow="How the data is made"
         title="Methodology"
-        lead="Definitions for SMPT’s research scope, source hierarchy, translation practices, status classifications, financial counting and evidence limitations."
+        lead="How entries are sourced, translated, classified and counted, and what the evidence does not establish."
       />
 
-      <section aria-labelledby="reading-evidence" className="mt-8 rounded border border-border-strong bg-card p-5 sm:p-6">
-        <h2 id="reading-evidence" className="font-display text-2xl">Reading the evidence</h2>
-        <div className="mt-5 grid gap-6 md:grid-cols-3 text-base leading-7 text-muted">
-          <div><h3 className="font-display text-sm font-semibold text-foreground">Who makes the claim?</h3><p className="mt-2">Follow the original document and quoted passage. A government rationale and an issuer&apos;s activity report have different evidentiary roles.</p><a href="#sources" className="research-text-link">Source hierarchy</a></div>
-          <div><h3 className="font-display text-sm font-semibold text-foreground">What state is established?</h3><p className="mt-2">An announcement, binding agreement, payment and industrial observation are separate. Programme ceilings and recipient awards have different financial roles.</p><a href="#capital-counting" className="research-text-link">Financial counting rules</a></div>
-          <div><h3 className="font-display text-sm font-semibold text-foreground">What remains uncertain?</h3><p className="mt-2">Unknown dates remain explicit. Coverage varies by jurisdiction, and causal relationships require evidence beyond shared materials or timing.</p><a href="#limitations" className="research-text-link">Limits of the evidence</a></div>
+      <section aria-labelledby="reading-evidence" className="mt-8 border-b border-border-strong pb-6">
+        <h2 id="reading-evidence" className="font-display text-xl font-semibold tracking-tight">Reading the evidence</h2>
+        <div className="mt-5 grid gap-x-8 gap-y-6 text-[0.9375rem] leading-7 text-muted md:grid-cols-3">
+          <div><h3 className="font-display text-sm font-semibold text-foreground">Attribution</h3><p className="mt-2">Follow the original document and quoted passage. A government rationale and an issuer&apos;s activity report have different evidentiary roles.</p><a href="#sources" className="research-text-link">Source hierarchy</a></div>
+          <div><h3 className="font-display text-sm font-semibold text-foreground">Status</h3><p className="mt-2">An announcement, binding agreement, payment and industrial observation are separate. Programme ceilings and recipient awards have different financial roles.</p><a href="#capital-counting" className="research-text-link">Financial counting rules</a></div>
+          <div><h3 className="font-display text-sm font-semibold text-foreground">Uncertainty</h3><p className="mt-2">Unknown dates remain explicit. Coverage varies by jurisdiction, and causal relationships require evidence beyond shared materials or timing.</p><a href="#limitations" className="research-text-link">Limits of the evidence</a></div>
         </div>
       </section>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">
         <aside className="lg:sticky lg:top-44 lg:self-start">
-          <nav className="space-y-1 font-display text-sm">
+          <nav aria-label="Methodology sections" className="border-l border-border font-display text-sm">
             {TOC.map(([id, label]) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className="block rounded px-2 py-1 text-muted transition-colors hover:bg-elevated hover:text-foreground"
+                className="-ml-px flex min-h-9 items-center border-l border-transparent px-3 py-1 text-muted transition-colors hover:border-foreground hover:text-foreground"
               >
                 {label}
               </a>
@@ -193,7 +204,7 @@ export default function MethodologyPage() {
           </nav>
         </aside>
 
-        <div className="max-w-3xl space-y-12 leading-7 text-foreground/90">
+        <div className="max-w-3xl space-y-12 leading-7 text-foreground">
           <section className="space-y-3">
             <H2 id="scope">Scope of the tracker</H2>
             <p>
@@ -218,10 +229,10 @@ export default function MethodologyPage() {
               cited context drawn from bodies such as the IEA and USGS, not original
               estimates. Published price series from the World Bank, the IMF and the
               USGS appear separately on the{" "}
-              <Link href="/markets" className="text-accent hover:text-accent-strong">
+              <Link href="/markets" className="link-quiet">
                 Markets
               </Link>{" "}
-              page, as each publisher releases them. They are not part of the record
+              page, as each publisher releases them. They are not part of the policy data
               and are not linked to individual measures.
             </p>
             <p>
@@ -235,17 +246,17 @@ export default function MethodologyPage() {
             <p>
               Scope is deliberately bounded: {summary.jurisdictions} actors, a
               rare-earth-centred material set, and events from {site.scopeStart}{" "}
-              forward. The bounded sample supports direct source verification for each record. Some records carry
+              forward. The bounded sample supports direct source verification for each entry. Some entries carry
               no material at all: a framework statute names none of its own, and an
               instrument may name minerals that fall outside this material set. Both
-              are recorded as an empty scope and said so on the record, rather than
+              are recorded as an empty scope and said so on the entry, rather than
               being filled in from the measures issued under them.
             </p>
 
             <div className="space-y-3 pt-2">
               <h3
                 id="capital-control"
-                className="scroll-mt-20 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted"
+                className="scroll-mt-20 font-display text-sm font-semibold text-muted"
               >
                 Capital &amp; Control
               </h3>
@@ -261,6 +272,7 @@ export default function MethodologyPage() {
                 one operative clause of an export, import, investment or domestic
                 control. Commodity-market forecasts are handled separately from the policy tracker.
               </p>
+              <Disclosure label="Data model and field rules">
               <ul className="space-y-2 text-muted">
                 <li>
                   · Original currency is authoritative. An amount is kept as the
@@ -308,7 +320,7 @@ export default function MethodologyPage() {
                 <li>
                   · A control clause whose status differs from the rest of its
                   instrument — one limb in force, another suspended — is recorded on
-                  its own, so one record never hides a conflict.
+                  its own, so one entry never hides a conflict.
                 </li>
                 <li>
                   · There is no synthetic economic-security score, index or ranking,
@@ -320,18 +332,19 @@ export default function MethodologyPage() {
                 commitments and {summary.controlMeasures} control clauses, across{" "}
                 {new Set([...getAllFinancialCommitments(), ...getAllControlMeasures()].map((r) => r.eventId)).size}{" "}
                 events, each verified field by field against its sources. They are
-                browsable on <Link href="/capital" className="text-accent hover:text-accent-strong">Capital</Link>,{" "}
-                <Link href="/controls" className="text-accent hover:text-accent-strong">Controls</Link> and{" "}
-                <Link href="/interplay" className="text-accent hover:text-accent-strong">Capital × Control</Link>; how
+                browsable on <Link href="/capital" className="link-quiet">Capital</Link>,{" "}
+                <Link href="/controls" className="link-quiet">Controls</Link> and{" "}
+                <Link href="/interplay" className="link-quiet">Capital × Control</Link>; how
                 figures are added up is set out under{" "}
-                <a href="#capital-counting" className="text-accent hover:text-accent-strong">counting rules</a>.
+                <a href="#capital-counting" className="link-quiet">counting rules</a>.
               </p>
+              </Disclosure>
             </div>
 
             <div className="space-y-3 pt-2">
               <h3
                 id="capital-intelligence"
-                className="scroll-mt-20 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted"
+                className="scroll-mt-20 font-display text-sm font-semibold text-muted"
               >
                 Capital intelligence: who, what and under which scheme
               </h3>
@@ -349,14 +362,15 @@ export default function MethodologyPage() {
                 records a project recognized under a designation scheme, such as an EU
                 strategic project under the Critical Raw Materials Act.
               </p>
+              <Disclosure label="Registry and derivation rules">
               <ul className="space-y-2 text-muted">
                 <li>
-                  · Registry records are factual claims like any other. An
+                  · Registry entries are factual claims like any other. An
                   organization&apos;s name, kind, country, government and parent bodies
                   each name the source that states them.
                 </li>
                 <li>
-                  · A renamed body keeps one record and lists its other names, so its
+                  · A renamed body keeps one entry and lists its other names, so its
                   portfolio does not split in two.
                 </li>
                 <li>
@@ -366,7 +380,7 @@ export default function MethodologyPage() {
                   public share of it is not stated.
                 </li>
                 <li>
-                  · A registry record holds no money. Capital stacks, portfolios,
+                  · A registry entry holds no money. Capital stacks, portfolios,
                   co-investment and flows are derived from the financial rows under the
                   same counting rules, one value role at a time and one currency at a
                   time. There is no grand stack total, no public-share percentage, no
@@ -393,14 +407,15 @@ export default function MethodologyPage() {
                   as location not stated, never guessed.
                 </li>
               </ul>
+              </Disclosure>
             </div>
           </section>
 
           <section className="space-y-3">
             <H2 id="sources">Source hierarchy</H2>
             <p>
-              Records are graded by a four-tier confidence hierarchy, shown as a badge
-              on every source. Higher tiers are preferred; where a record currently
+              Entries are graded by a four-tier confidence hierarchy, shown as a badge
+              on every source. Higher tiers are preferred; where an entry currently
               rests on a lower tier, that is visible in the badge, and upgrading it is
               tracked work.
             </p>
@@ -434,7 +449,7 @@ export default function MethodologyPage() {
               Sources are cited in their original language, with an English
               translation where the issuing body does not publish its own. Every
               source is labelled with its provenance and a confidence level — the
-              four tiers set out above — so the basis for each record is visible.
+              four tiers set out above — so the basis for each entry is visible.
             </p>
             <p>
               Coverage is multi-actor by design: it follows the whole contest across
@@ -450,8 +465,9 @@ export default function MethodologyPage() {
               There are no numeric scores anywhere in the model. Every classification
               is one of the categorical labels below.
             </p>
+            <Disclosure label="Policy status, mechanism, sector and source labels">
             <div>
-              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+              <h3 className="font-display text-sm font-semibold text-muted">
                 Policy status
               </h3>
               <DefList
@@ -462,7 +478,7 @@ export default function MethodologyPage() {
               />
             </div>
             <div>
-              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+              <h3 className="font-display text-sm font-semibold text-muted">
                 Mechanism
               </h3>
               <DefList
@@ -470,7 +486,7 @@ export default function MethodologyPage() {
               />
             </div>
             <div>
-              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+              <h3 className="font-display text-sm font-semibold text-muted">
                 Material sensitivity (sectors)
               </h3>
               <DefList
@@ -478,7 +494,7 @@ export default function MethodologyPage() {
               />
             </div>
             <div>
-              <h3 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+              <h3 className="font-display text-sm font-semibold text-muted">
                 Framing category
               </h3>
               <DefList
@@ -488,6 +504,7 @@ export default function MethodologyPage() {
                 ])}
               />
             </div>
+            </Disclosure>
           </section>
 
           <section className="space-y-3">
@@ -530,6 +547,7 @@ export default function MethodologyPage() {
               industrial policy is adding up numbers that are not the same kind of
               thing.
             </p>
+            <Disclosure label="The counting rules" open>
             <ul className="space-y-2 text-muted">
               <li>
                 · <strong className="text-foreground">Per currency, never converted.</strong> Totals are
@@ -588,7 +606,7 @@ export default function MethodologyPage() {
                 allocated child rows can be recorded as parts of the package instead.
               </li>
               <li>
-                · <strong className="text-foreground">Record counts fold a part only where its package covers it.</strong>{" "}
+                · <strong className="text-foreground">Counts fold a part only where its package covers it.</strong>{" "}
                 A part is counted inside its package, so one deal counts once, but only in a count where the
                 package is counted too. Stage and material counts in a portfolio, and the stage response
                 map and the material matrix, work cell by cell: a part is counted at a stage or material its
@@ -656,16 +674,19 @@ export default function MethodologyPage() {
                 floating point.
               </li>
             </ul>
-            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Value roles</h3>
+            </Disclosure>
+            <Disclosure label="Value roles, capital sources and status definitions">
+            <h3 className="pt-2 font-display text-sm font-semibold text-muted">Value roles</h3>
             <DefList
               items={VALUE_ROLES.map((r) => [valueRoleLabels[r], VALUE_ROLE_DEFS[r]])}
             />
-            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Capital sources</h3>
+            <h3 className="pt-2 font-display text-sm font-semibold text-muted">Capital sources</h3>
             <DefList items={CAPITAL_SOURCES.map((c) => [capitalSourceLabels[c], CAPITAL_SOURCE_DEFS[c]])} />
-            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Financial statuses</h3>
+            <h3 className="pt-2 font-display text-sm font-semibold text-muted">Financial statuses</h3>
             <DefList items={FINANCIAL_STATUSES.map((s) => [financialStatusLabels[s], FINANCIAL_STATUS_DEFS[s]])} />
-            <h3 className="pt-2 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">Control statuses</h3>
+            <h3 className="pt-2 font-display text-sm font-semibold text-muted">Control statuses</h3>
             <DefList items={CONTROL_STATUSES.map((s) => [controlStatusLabels[s], CONTROL_STATUS_DEFS[s]])} />
+            </Disclosure>
           </section>
 
           <section className="space-y-3">
@@ -704,7 +725,7 @@ export default function MethodologyPage() {
                 addressees; the 2025 lists are coded in force. That is a coding difference, not a legal finding.
               </li>
             </ul>
-            <p className="rounded-lg border border-amber-400/25 bg-amber-400/[0.06] px-4 py-3 text-amber-100/90">
+            <p className="border-l-2 border-ochre bg-plate px-4 py-3 text-foreground">
               This is not legal or compliance advice. Do not rely on it for
               export-control classification or licensing decisions; consult the primary
               instruments and qualified counsel.
@@ -713,6 +734,7 @@ export default function MethodologyPage() {
 
           <section className="space-y-3">
             <H2 id="versions">Version history</H2>
+            <Disclosure label="All versions">
             <ul className="space-y-2 text-muted">
               <li>
                 <span className="font-mono text-foreground">{site.version}</span> —{" "}
@@ -761,7 +783,7 @@ export default function MethodologyPage() {
                 event, not a control measure: it directs negotiations and imposes no restriction.
               </li>
               <li>
-                <span className="font-mono text-foreground">Earlier releases</span> — Expanded multi-actor seed: nine events
+                <span className="font-display text-foreground">Earlier releases</span> — Expanded multi-actor seed: nine events
                 added since v0.1.0 so all six actors are event-coded — the US DoD–MP
                 Materials partnership, Australia&apos;s Critical Minerals Strategic
                 Reserve, Japan&apos;s JOGMEC/JARE investment in Lynas, Canada&apos;s
@@ -781,11 +803,12 @@ export default function MethodologyPage() {
                 Critical Raw Materials Act — with framing anchors across three actors.
               </li>
             </ul>
+            </Disclosure>
           </section>
 
-          <p className="border-t border-border pt-6 leading-7 text-faint">
-            Questions about a classification? Each rests on the linked source — start
-            there, then see the <Link href="/sources" className="font-display text-accent hover:text-accent-strong">source register</Link>.
+          <p className="border-t border-border pt-6 text-sm leading-6 text-muted">
+            Each classification rests on its linked source. All registered documents are in the{" "}
+            <Link href="/sources" className="link-quiet">source register</Link>.
           </p>
         </div>
       </div>

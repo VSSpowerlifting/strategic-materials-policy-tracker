@@ -47,7 +47,7 @@ const view = renderToStaticMarkup(createElement(Home));
 const materialsView = renderToStaticMarkup(createElement(MaterialsPage));
 
 test("the materials page draws the strip from real counts above the material-stage browser", () => {
-  assert.match(materialsView, /Where the records sit along the supply chain/);
+  assert.match(materialsView, /Activity along the supply chain/);
   for (const s of chain) assert.ok(materialsView.includes(s.label), s.label);
   assert.match(materialsView, /id="browse"/);
   assert.ok(materialsView.indexOf('id="chain-heading"') < materialsView.indexOf('id="browse"'));

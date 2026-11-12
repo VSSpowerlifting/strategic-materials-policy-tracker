@@ -46,15 +46,14 @@ export default function FramingPage() {
   return (
     <Container width="wide" className="py-12">
       <PageHeading
-        eyebrow="Evidence"
         title="Comparative framing"
-        lead="How each government explains its strategic-material measures, grouped by stated rationale. Every category rests on a quoted passage from the original source. A stated rationale is not evidence of a measure’s effect."
+        lead="Stated rationales, each anchored in a quoted passage from the original source. A stated rationale is not evidence of a measure’s effect."
       />
 
       {/* Category legend doubles as the page's contents: each coded category jumps to its block. */}
-      <nav aria-label="Framing categories" className="mt-8 overflow-hidden rounded-lg border border-border-strong plate">
+      <nav aria-label="Framing categories" className="mt-8 border-y border-border-strong">
         <div className="border-b border-b-border px-4 py-2.5">
-          <span className="rail">Categories · coded quotations</span>
+          <span className="font-display text-xs text-faint">Categories · coded quotations</span>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
           {FRAMING_CATEGORIES.map((c) => {
@@ -66,12 +65,12 @@ export default function FramingPage() {
             return n === 0 ? (
               <div key={c} className={cell} title="Not yet observed in a coded quote">
                 <FramingBadge category={c} short />
-                <span className="tnum rail text-faint">0</span>
+                <span className="tnum font-display text-xs text-faint">0</span>
               </div>
             ) : (
-              <a key={c} href={`#${c}`} className={cn(cell, "hover:bg-card focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent")}>
+              <a key={c} href={`#${c}`} className={cn(cell, "hover:bg-elevated focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent")}>
                 <FramingBadge category={c} short />
-                <span className="tnum rail text-faint">{n}</span>
+                <span className="tnum font-display text-xs text-faint">{n}</span>
               </a>
             );
           })}
@@ -98,10 +97,10 @@ export default function FramingPage() {
                   {ev ? (
                     <Link
                       href={`/events/${ev.id}`}
-                      className="max-w-[8rem] truncate font-mono text-[11px] text-faint hover:text-accent"
+                      className="max-w-[8rem] truncate font-display text-xs text-faint hover:text-accent"
                       title={ev.titleEn}
                     >
-                      {ev.titleEn} →
+                      {ev.titleEn}
                     </Link>
                   ) : null}
                 </div>
@@ -120,7 +119,7 @@ export default function FramingPage() {
                   <h2 className="font-display text-xl font-semibold tracking-tight">
                     {framingCategoryLabels[category]}
                   </h2>
-                  <span className="rail tnum ml-auto text-faint">
+                  <span className="tnum ml-auto font-display text-xs text-faint">
                     {claims.length} {claims.length === 1 ? "quotation" : "quotations"}
                   </span>
                 </div>
@@ -148,10 +147,10 @@ export default function FramingPage() {
         })}
       </div>
 
-      <p className="mt-16 max-w-prose leading-7 text-faint">
+      <p className="mt-16 max-w-prose border-t border-border pt-4 text-sm leading-6 text-muted">
         Categories are multi-select: a single passage can carry more than one label
         when the text supports it. Definitions for every category are on the{" "}
-        <Link href="/methodology#labels" className="font-display text-accent hover:text-accent-strong">
+        <Link href="/methodology#labels" className="link-quiet">
           methodology page
         </Link>
         . A framing category is assigned after its supporting quotation is verified.

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ShowMore, useIncremental } from "@/components/ui/show-more";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { CommitmentRow } from "@/components/capital/rows";
 import {
   ALL,
@@ -157,7 +157,7 @@ export function CapitalExplorer({
         <FilterSelect id="cap-material" label="Material" value={material} onChange={setMaterial} options={opts.material} />
       </div>
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="font-mono text-xs text-muted" aria-live="polite">
+        <p className="font-display text-sm text-muted" aria-live="polite">
           <span className="tnum text-foreground">{filtered.length}</span> of {rows.length} financial rows
           {active ? (
             <button type="button" onClick={reset} className="ml-3 text-accent hover:text-accent-strong">
@@ -165,12 +165,12 @@ export function CapitalExplorer({
             </button>
           ) : null}
         </p>
-        <label className="inline-flex cursor-pointer items-center gap-2 font-mono text-xs text-muted">
+        <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 font-display text-sm text-muted">
           <input type="checkbox" checked={families} onChange={(e) => setFamilies(e.target.checked)} style={{ accentColor: "var(--accent)" }} />
           Nest parts under their packages
         </label>
       </div>
-      <Card className="mt-3 overflow-hidden">
+      <RecordList className="mt-3">
         {ordered.length ? (
           <>
             {visibleRows.map(({ c, depth, rel }) => <CommitmentRow key={c.id} c={c} indent={depth} relationLabel={rel} />)}
@@ -179,7 +179,7 @@ export function CapitalExplorer({
         ) : (
           <p className="px-4 py-8 text-center text-sm text-muted">No financial row matches these filters.</p>
         )}
-      </Card>
+      </RecordList>
     </div>
   );
 }

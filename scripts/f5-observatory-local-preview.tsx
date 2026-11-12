@@ -90,14 +90,14 @@ export async function buildF5LocalBrowserPreview():Promise<{
   const raw=await readFile(stylesheetPath,"utf8");
   const processed=await postcss([tailwindcss()]).process(raw,{from:stylesheetPath});
   const css=processed.css;
-  if(!css.includes("--bg: #12110f")||
-     !css.includes("--accent: #e3b04b")||
+  if(!css.includes("--bg: #f6f5f1")||
+     !css.includes("--accent: #1f5c4d")||
      !css.includes("overflow-x: auto")||
      !css.includes("grid-template-columns"))
     throw new Error("F5 preview styling not compiled from current Lattice Register Tailwind source");
   // Locally generated page uses system serif/sans/mono fallbacks in place of
   // Next.js self-hosted font assets. No external fonts or network required.
-  const fontFallbacks=`:root { --font-archivo: Arial, Helvetica, sans-serif; --font-newsreader: Georgia, "Times New Roman", serif; --font-jetbrains: "Courier New", monospace; }`;
+  const fontFallbacks=`:root { --font-archivo: Arial, Helvetica, sans-serif; --font-newsreader: Georgia, "Times New Roman", serif; --font-spectral: Georgia, "Times New Roman", serif; --font-jetbrains: "Courier New", monospace; }`;
   const head=[
     "<!doctype html>",
     '<html lang="en">',

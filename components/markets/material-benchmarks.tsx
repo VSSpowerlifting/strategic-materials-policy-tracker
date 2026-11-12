@@ -17,28 +17,36 @@ export function MaterialBenchmarks({ materialId }: { materialId: string }) {
   if (series.length === 0) return null;
   return (
     <section id="price-benchmarks" aria-labelledby="price-benchmarks-heading" className="scroll-mt-24">
-      <h2 id="price-benchmarks-heading" className="border-b border-border pb-2 font-display text-xl font-semibold">
+      <h2 id="price-benchmarks-heading" className="border-b border-border-strong pb-3 font-display text-xl font-semibold">
         Price benchmarks
       </h2>
       <p className="mt-3 max-w-prose text-sm leading-6 text-muted">
         Price series that cover this material, as their publishers release them, from SMPT’s separate{" "}
-        <Link href="/markets" className="text-accent underline-offset-2 hover:underline">
+        <Link href="/markets" className="link-quiet text-foreground">
           market-data layer
         </Link>
-        . They are not linked to the records above, and a shared date does not show that a measure moved a price.
+        . They are not linked to the policy actions and financing above, and a shared date does not show that a measure moved a price.
       </p>
-      <ul className="mt-5 grid gap-3 md:grid-cols-2">
+      <ul className="mt-5 border-t border-border">
         {series.map((s) => {
           const publisher = getMarketDataset(s.datasetId)?.manifest.shortName ?? s.datasetId;
           return (
-            <li key={s.id} className="rounded-lg border border-border bg-card p-4">
-              <Link href={benchmarkHref(s)} className="font-display font-semibold text-foreground hover:text-accent">
+            <li key={s.id} className="grid gap-x-6 gap-y-1 border-b border-border py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
+              <Link href={benchmarkHref(s)} className="font-display font-medium text-foreground hover:text-accent">
                 {s.label}
               </Link>
-              <p className="mt-1 text-sm leading-6 text-muted">
-                {PRICE_TYPE_LABELS[s.priceType]} · {s.frequency === "annual" ? "Annual" : "Monthly"},{" "}
-                {formatPeriod(s.firstPeriod)}–{formatPeriod(s.lastPeriod)} · {s.unitShort} · {publisher}
-              </p>
+              <dl className="tnum grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 font-display text-sm leading-6 text-muted">
+                <dt className="text-faint">Type</dt>
+                <dd>{PRICE_TYPE_LABELS[s.priceType]}</dd>
+                <dt className="text-faint">Coverage</dt>
+                <dd>
+                  {s.frequency === "annual" ? "Annual" : "Monthly"}, {formatPeriod(s.firstPeriod)} to {formatPeriod(s.lastPeriod)}
+                </dd>
+                <dt className="text-faint">Unit</dt>
+                <dd>{s.unitShort}</dd>
+                <dt className="text-faint">Publisher</dt>
+                <dd>{publisher}</dd>
+              </dl>
             </li>
           );
         })}

@@ -26,14 +26,20 @@ export function heatScaleMax(rows: readonly HeatRow[]): number {
   return steps.find((s) => s >= p95) ?? Math.ceil(p95 / 10) * 10;
 }
 
-/** Diverging fill: gold for rises, warm grey for falls, the plate colour at zero. */
-function cellStyle(pct: number, max: number): { background: string; color: string } {
-  const t = Math.round(Math.min(1, Math.abs(pct) / max) * 85);
-  const pole = pct >= 0 ? "var(--accent)" : "var(--muted)";
-  return {
-    background: `color-mix(in oklab, ${pole} ${t}%, var(--elevated))`,
-    color: t > 55 ? "var(--bg)" : "var(--fg)",
-  };
+/** Tint steps on each side of zero. Four keeps graphite text above 6.5:1 on the strongest tint. */
+const HEAT_STEPS = 4;
+const STEP_PCT = 12;
+
+/** Which tint step a change falls in: 0 for no change, up to ±HEAT_STEPS at or beyond the scale maximum. */
+export function heatLevel(pct: number, max: number): number {
+  if (pct === 0 || !Number.isFinite(pct)) return 0;
+  return Math.sign(pct) * Math.min(HEAT_STEPS, Math.max(1, Math.ceil((Math.abs(pct) / max) * HEAT_STEPS)));
+}
+
+/** Diverging fill in flat steps: malachite for rises, hematite for falls, the plate at zero. */
+function levelFill(level: number): string {
+  if (level === 0) return "var(--plate)";
+  return `color-mix(in oklab, ${level > 0 ? "var(--accent)" : "var(--negative)"} ${Math.abs(level) * STEP_PCT}%, var(--plate))`;
 }
 
 export function Heatmap({
@@ -101,10 +107,10 @@ export function Heatmap({
 
   return (
     <div className="min-w-0">
-      <div ref={scrollRef} className="overflow-x-auto rounded-md border border-border">
+      <div ref={scrollRef} className="overflow-x-auto border border-border-strong bg-plate">
         <table
           ref={tableRef}
-          className="w-full border-separate border-spacing-0.5 bg-card p-1 text-xs"
+          className="w-full border-separate border-spacing-px text-xs"
           onKeyDown={onKeyDown}
           onMouseLeave={() => {
             setInspected(null);
@@ -122,7 +128,7 @@ export function Heatmap({
           </caption>
           <thead>
             <tr>
-              <th scope="col" className="sticky left-0 z-10 bg-card px-2 py-1 text-left font-medium text-faint">
+              <th scope="col" className="sticky left-0 z-10 bg-plate px-3 py-1.5 text-left font-medium text-faint">
                 Series
               </th>
               {periods.map((p, i) => (
@@ -139,7 +145,7 @@ export function Heatmap({
           <tbody>
             {rows.map((row, r) => (
               <tr key={row.id}>
-                <th scope="row" className="sticky left-0 z-10 bg-card px-2 py-1 text-left font-medium whitespace-nowrap text-foreground">
+                <th scope="row" className="sticky left-0 z-10 bg-plate px-3 py-1 text-left font-medium whitespace-nowrap text-foreground">
                   <span className="inline-flex items-center gap-2">
                     <svg width="16" height="8" aria-hidden="true">
                       <line x1="0" x2="16" y1="4" y2="4" stroke={row.color} strokeWidth="2" strokeDasharray={row.dash} />
@@ -149,7 +155,7 @@ export function Heatmap({
                 </th>
                 {row.cells.map((cell, c) => {
                   const ch = cell.change;
-                  const style = ch ? cellStyle(ch.pct, max) : { background: "transparent", color: "var(--faint)" };
+                  const style = ch ? { background: levelFill(heatLevel(ch.pct, max)), color: "var(--fg)" } : { background: "transparent", color: "var(--faint)" };
                   const label = ch
                     ? `${row.label}, ${formatPeriod(cell.period, true)}: ${formatPct(ch.pct)} from ${formatNumber(ch.fromValue, row.digits)} in ${formatPeriod(ch.fromPeriod, true)} to ${formatNumber(ch.toValue, row.digits)}, ${row.unit}${ch.estimated ? "; uses an estimated value" : ""}.`
                     : `${row.label}, ${formatPeriod(cell.period, true)}: no change can be calculated; an observation is missing or the source changes.`;
@@ -167,8 +173,8 @@ export function Heatmap({
                           inspect(r, c);
                         }}
                         onClick={() => inspect(r, c)}
-                        className={`tnum block h-9 w-full min-w-12 rounded-sm px-1 text-center outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                          isOn ? "ring-1 ring-foreground" : ""
+                        className={`tnum block h-9 w-full min-w-12 px-1 text-center focus-visible:outline-offset-[-2px] ${
+                          isOn ? "ring-1 ring-inset ring-foreground" : ""
                         } ${ch ? "" : "border border-dashed border-border-strong"}`}
                         style={style}
                       >
@@ -193,19 +199,17 @@ export function Heatmap({
         </p>
         <div className="flex items-center gap-2" aria-hidden="true">
           <span className="tnum">−{max}%</span>
-          <span
-            className="h-2.5 w-28 rounded-sm"
-            style={{
-              background:
-                "linear-gradient(to right, color-mix(in oklab, var(--muted) 85%, var(--elevated)), var(--elevated), color-mix(in oklab, var(--accent) 85%, var(--elevated)))",
-            }}
-          />
+          <span className="flex border border-border-strong">
+            {Array.from({ length: HEAT_STEPS * 2 + 1 }, (_, i) => i - HEAT_STEPS).map((level) => (
+              <span key={level} className="block h-3 w-4" style={{ background: levelFill(level) }} />
+            ))}
+          </span>
           <span className="tnum">+{max}%</span>
         </div>
       </div>
       <p className="mt-1 text-xs text-faint">
-        Each cell compares a {prevWord} with the one before. Colour saturates at ±{max}%, a round value near the 95th
-        percentile of moves shown; every cell also prints its signed change{frequency === "annual" ? ", and “e” marks one that uses an estimate" : ""}.
+        Each cell compares a {prevWord} with the one before and prints the signed change. Tint runs in four steps to ±{max}%, a round
+        value near the 95th percentile of the moves shown{frequency === "annual" ? "; “e” marks a change that uses an estimate" : ""}.
       </p>
     </div>
   );

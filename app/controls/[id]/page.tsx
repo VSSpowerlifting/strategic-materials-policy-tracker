@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { RecordList } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
 import {
@@ -80,14 +81,10 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
     (acc[k] ??= []).push(c);
     return acc;
   }, {});
-  let n = 0;
-  const next = () => String(++n).padStart(2, "0");
 
   return (
     <Container className="py-12">
-      <Link href="/controls" className="font-display text-sm text-muted hover:text-foreground">
-        ← Controls
-      </Link>
+      <Breadcrumbs items={[{ href: "/controls", label: "Controls" }, { label: controlMeasureTypeLabels[m.measureType] }]} />
 
       <header className="mt-6 max-w-4xl">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
@@ -95,8 +92,8 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
           <span aria-hidden className="text-faint">·</span>
           <span className="text-muted">{event.issuingBody}</span>
         </div>
-        {event.documentNumber ? <p className="mt-3 font-mono text-xs text-faint">{event.documentNumber}</p> : null}
-        <h1 className="mt-3 text-balance font-display text-3xl font-bold tracking-tight">
+        {event.documentNumber ? <p className="mt-3 font-display text-xs text-faint">{event.documentNumber}</p> : null}
+        <h1 className="mt-3 page-title">
           {controlMeasureTypeLabels[m.measureType]}
           {m.clause ? <span className="text-muted"> · {m.clause}</span> : null}
         </h1>
@@ -105,7 +102,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           <ControlStatusBadge status={current.status} />
-          {current.until ? <span className="font-mono text-[11px] text-muted">until {formatDate(current.until)}</span> : null}
+          {current.until ? <span className="font-display text-xs text-muted">until {formatDate(current.until)}</span> : null}
           <Badge>{controlDirectionLabels[m.direction]}</Badge>
         </div>
         {scheduled ? (
@@ -123,8 +120,8 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="min-w-0 space-y-12">
-          <Section index={next()} title="What it covers" description="In the instrument's own words.">
-            <Card className="p-5">
+          <Section title="What it covers" description="In the instrument's own words.">
+            <div className="border-y border-border-strong py-4">
               {m.productScopeAsStated ? (
                 <p lang={hasCjk(m.productScopeAsStated) ? "zh" : "en"} className="text-pretty text-lg leading-relaxed">
                   {m.productScopeAsStated}
@@ -137,11 +134,11 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   Original-language wording, kept untranslated because it defines legal scope; the notes and the event summary give the English sense.
                 </p>
               ) : null}
-            </Card>
+            </div>
           </Section>
 
-          <Section index={next()} title="Record">
-            <Card className="px-5 py-1">
+          <Section title="Details">
+            <div className="border-y border-border-strong">
               <dl>
                 <Fact label="Targeting">
                   {m.targetScopes.length ? m.targetScopes.map((s) => targetScopeLabels[s]).join(", ") : <NotStated>The source does not define its targets</NotStated>}
@@ -166,12 +163,12 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   {materials.length ? (
                     <span className="flex flex-wrap gap-x-3 gap-y-1">
                       {materials.map((x) => (
-                        <Link key={x.id} href={`/materials/${x.slug}`} className="text-accent hover:text-accent-strong">{x.nameEn}</Link>
+                        <Link key={x.id} href={`/materials/${x.slug}`} className="link-quiet">{x.nameEn}</Link>
                       ))}
                     </span>
                   ) : null}
                   {m.untrackedMaterialsAsStated.length ? <span className="mt-1 block text-muted">Also names: {m.untrackedMaterialsAsStated.join("; ")}</span> : null}
-                  <span className="mt-1 block font-mono text-[11px] text-faint">{materialAttributionLabels[m.materialAttribution]}</span>
+                  <span className="mt-1 block font-display text-xs text-faint">{materialAttributionLabels[m.materialAttribution]}</span>
                 </Fact>
                 <Fact label="Items and stages">
                   {m.controlledItemTypes.length ? (
@@ -184,7 +181,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                           ? `Covered items belong to: ${m.controlledStages.map((s) => supplyChainStageLabels[s].toLowerCase()).join(", ")}`
                           : "No stage coded: the covered items are listed in an unread annex or sit outside the tracked materials."}
                       </span>
-                      <span className="mt-1 block font-mono text-[11px] text-faint">
+                      <span className="mt-1 block font-display text-xs text-faint">
                         The supply-chain stage of the covered items; any restriction effect is recorded separately.
                       </span>
                     </>
@@ -197,7 +194,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   {m.legalBasisEventIds.length ? (
                     <span className="mt-1 flex flex-wrap gap-x-3">
                       {m.legalBasisEventIds.map((id) => (
-                        <Link key={id} href={`/events/${id}`} className="text-accent hover:text-accent-strong">{getEventById(id)?.titleEn ?? id}</Link>
+                        <Link key={id} href={`/events/${id}`} className="link-quiet">{getEventById(id)?.titleEn ?? id}</Link>
                       ))}
                     </span>
                   ) : null}
@@ -208,37 +205,37 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   </Fact>
                 ) : null}
               </dl>
-            </Card>
+            </div>
           </Section>
 
-          <Section index={next()} title="Status" description={`Listed oldest first. The entry in effect on ${formatDate(asOf)} is marked current; a later-dated entry is marked scheduled. End dates follow the governing source.`}>
-            <Card className="p-5">
+          <Section title="Status" description={`Listed oldest first. The entry in effect on ${formatDate(asOf)} is marked current; a later-dated entry is marked scheduled. End dates follow the governing source.`}>
+            <div className="border-y border-border-strong py-4">
               <ControlStatusTrail entries={m.statusHistory} asOf={asOf} />
               {statusEntriesRecordedElsewhere(m).map(({ entry, event }) => (
                 <p key={`${entry.status}-${event.id}`} className="mt-4 border-t pt-4 text-sm leading-6 text-muted">
                   The &ldquo;{controlStatusLabels[entry.status].toLowerCase()}&rdquo; entry is recorded in a separate event:{" "}
-                  <Link href={`/events/${event.id}`} className="text-accent hover:text-accent-strong">
+                  <Link href={`/events/${event.id}`} className="link-quiet">
                     {event.documentNumber?.split(";")[0] ?? event.titleEn}
                   </Link>{" "}
                   ({formatDate(event.date)}). The event page describes the associated policy action.
                 </p>
               ))}
-            </Card>
+            </div>
           </Section>
 
           {modifies.length || modifiedBy.length ? (
-            <Section index={next()} title="Linked clauses" description="Clauses this one suspends or modifies, and clauses that act on it.">
+            <Section title="Linked clauses" description="Clauses this one suspends or modifies, and clauses that act on it.">
               <div className="space-y-4">
                 {modifies.length ? (
                   <div>
-                    <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Acts on</p>
-                    <Card className="overflow-hidden">{modifies.map((x) => <ControlRow key={x.id} m={summarizeControl(x, asOf)} />)}</Card>
+                    <p className="mb-1 font-display text-xs text-faint">Acts on</p>
+                    <RecordList>{modifies.map((x) => <ControlRow key={x.id} m={summarizeControl(x, asOf)} />)}</RecordList>
                   </div>
                 ) : null}
                 {modifiedBy.length ? (
                   <div>
-                    <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Acted on by</p>
-                    <Card className="overflow-hidden">{modifiedBy.map((x) => <ControlRow key={x.id} m={summarizeControl(x, asOf)} />)}</Card>
+                    <p className="mb-1 font-display text-xs text-faint">Acted on by</p>
+                    <RecordList>{modifiedBy.map((x) => <ControlRow key={x.id} m={summarizeControl(x, asOf)} />)}</RecordList>
                   </div>
                 ) : null}
               </div>
@@ -246,37 +243,37 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
           ) : null}
 
           {m.productCodes.length ? (
-            <Section index={next()} title={`Product codes (${m.productCodes.length})`} description="As printed. A reference code is for convenience; the item description governs.">
+            <Section title={`Product codes (${m.productCodes.length})`} description="As printed. A reference code is for convenience; the item description governs.">
               <div className="space-y-4">
                 {Object.entries(codeGroups).map(([k, codes]) => (
-                  <Card key={k} className="p-4">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+                  <div key={k} className="border-t border-border-strong pt-3">
+                    <p className="font-display text-xs text-faint">
                       {productCodeSystemLabels[codes[0].system]} · {productCodeRoleLabels[codes[0].role]}
                     </p>
-                    <p className="tnum mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-muted">
+                    <p className="tnum mt-2 flex flex-wrap gap-x-3 gap-y-1 font-display text-xs text-muted">
                       {codes.map((c) => <span key={c.code}>{c.code}</span>)}
                     </p>
-                  </Card>
+                  </div>
                 ))}
               </div>
             </Section>
           ) : null}
 
           {m.notes ? (
-            <Section index={next()} title="Notes">
-              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">{m.notes}</p>
+            <Section title="Notes">
+              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground">{m.notes}</p>
             </Section>
           ) : null}
 
-          <Section index={next()} title="Evidence" description="Which source supports which field, how directly, and where.">
+          <Section title="Evidence" description="Which source supports which field, how directly, and where.">
             <EvidenceTable evidence={m.evidence} fieldLabels={controlEvidenceFieldLabels} />
           </Section>
         </div>
 
         <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
           {siblings.length ? (
-            <Card className="p-4">
-              <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Other clauses in this event</h2>
+            <div className="border-t border-border-strong pt-3">
+              <h2 className="mb-2 font-display text-xs text-faint">Other clauses in this event</h2>
               <ul className="space-y-2">
                 {siblings.map((x) => (
                   <li key={x.id}>
@@ -287,12 +284,12 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
                   </li>
                 ))}
               </ul>
-            </Card>
+            </div>
           ) : null}
-          <Card className="p-4 text-sm">
-            <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Machine-readable</h2>
-            <a href={`/api/v1/control-measures/${m.id}`} className="text-accent hover:text-accent-strong">JSON record with sources</a>
-          </Card>
+          <div className="border-t border-border-strong pt-3 text-sm">
+            <h2 className="mb-2 font-display text-xs text-faint">Machine-readable</h2>
+            <a href={`/api/v1/control-measures/${m.id}`} className="link-quiet">JSON with sources</a>
+          </div>
         </aside>
       </div>
     </Container>

@@ -134,7 +134,7 @@ test("case statuses are read as of the revision date, so a later entry cannot ap
   assert.equal(designationStatusOn(laterDsg, site.lastUpdated), dsg.statusHistory[0].status);
 });
 
-test("the page leads from research to the featured analysis, the tools, record examples and method", () => {
+test("the page leads from the featured analysis to other research, the exhibits, the record and method", () => {
   const latest = view.indexOf('id="latest-heading"');
   const featured = view.indexOf('id="featured-analysis"');
   const tools = view.indexOf('id="tools"');
@@ -142,8 +142,10 @@ test("the page leads from research to the featured analysis, the tools, record e
   const market = view.indexOf('id="home-market-heading"');
   const examples = view.indexOf('id="examples"');
   const method = view.indexOf('id="method-heading"');
-  assert.ok(view.indexOf("<h1") < latest && latest !== -1);
-  assert.ok(latest < featured && featured < tools);
-  assert.ok(tools < materials && materials < market && market < examples && examples < method);
+  const exhibit = view.indexOf('aria-label="Capital-flow exhibit"');
+  // The flagship opens the page, then the other publications, the two exhibits, and only then the record.
+  assert.ok(view.indexOf("<h1") < featured && featured !== -1);
+  assert.ok(featured < latest && latest < exhibit && exhibit < market);
+  assert.ok(market < tools && tools < materials && materials < examples && examples < method);
   assert.doesNotMatch(view, /id="chain-heading"|id="browse"/, "the supply chain and lattice live on /materials");
 });

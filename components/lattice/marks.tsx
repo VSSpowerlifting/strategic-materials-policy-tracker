@@ -95,7 +95,7 @@ export function AreaKey({ samples = [1, 3, 6, 9] }: { samples?: number[] }) {
             <svg width={r * 2 + 2} height={r * 2 + 2} aria-hidden>
               <circle cx={r + 1} cy={r + 1} r={r} fill="none" stroke="var(--muted)" strokeWidth="1" />
             </svg>
-            <span className="tnum font-mono text-[10px] text-faint">{n}</span>
+            <span className="tnum font-display text-xs text-faint">{n}</span>
           </span>
         );
       })}

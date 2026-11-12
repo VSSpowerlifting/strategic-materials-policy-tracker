@@ -15,7 +15,7 @@ export function WatchedSourceCard({ source }: { source: WatchedSource }) {
   const materials = getMaterialsByIds(source.materialIds);
 
   return (
-    <div id={source.id} className="scroll-mt-24 rounded-lg border bg-card p-4">
+    <div id={source.id} className="scroll-mt-24 border bg-plate p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <h3 className="font-display font-semibold leading-snug tracking-tight">
           {source.title}
@@ -34,7 +34,7 @@ export function WatchedSourceCard({ source }: { source: WatchedSource }) {
 
       <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-faint">
         <Badge>Checked {cadenceLabels[source.cadence].toLowerCase()}</Badge>
-        <span className="font-mono uppercase tracking-wide">{source.language}</span>
+        <span className="font-display uppercase">{source.language}</span>
         {/* Freshness is stated only when the project can evidence it. A null
             date is reported as an absence of a published review cycle, never
             softened into "recently" or dressed up as up-to-date. */}

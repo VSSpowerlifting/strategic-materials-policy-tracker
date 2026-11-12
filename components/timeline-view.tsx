@@ -16,7 +16,7 @@ const ALL = "all";
 const WINDOW_START = "2025-04-01";
 
 const selectClass =
-  "rounded-md border border-border bg-card px-2.5 py-2 font-display text-sm text-foreground focus:border-accent/50 focus:outline-none";
+  "min-h-11 border border-border-strong bg-plate px-3 py-2 font-display text-sm text-foreground focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 function TimelineNode({
   event,
@@ -29,9 +29,9 @@ function TimelineNode({
     <li data-site-motion="card" className="relative border-l border-border pb-8 pl-7 last:border-l-transparent last:pb-0">
       <span
         aria-hidden
-        className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-accent"
+        className="absolute -left-[4px] top-2 h-[7px] w-[7px] rounded-full bg-foreground"
       />
-      <time className="tnum font-mono text-xs text-faint">
+      <time dateTime={event.date} className="tnum font-display text-xs text-faint">
         {formatDate(event.date)}
       </time>
       <div className="mt-1.5 flex flex-wrap items-center gap-2">
@@ -122,7 +122,7 @@ export function TimelineView({
             </option>
           ))}
         </select>
-        <span className="tnum self-center font-mono text-sm text-faint">
+        <span className="tnum self-center font-display text-sm text-faint" aria-live="polite">
           {filtered.length} of {events.length}
         </span>
       </div>
@@ -130,8 +130,8 @@ export function TimelineView({
       <div className="mt-10">
         {foundational.length > 0 ? (
           <div className="mb-2">
-            <p className="mb-4 font-mono text-xs text-faint">
-              Foundational context · before April 2025
+            <p className="mb-4 font-display text-xs text-faint">
+              Foundational context, before April 2025
             </p>
             <ol>
               {foundational.map((e) => (
@@ -146,10 +146,7 @@ export function TimelineView({
         ) : null}
 
         <div className="relative mb-6 flex items-center gap-3">
-          <span className="h-px flex-1 bg-border-strong" />
-          <span className="font-mono text-xs text-accent">
-            April 2025 · acute phase
-          </span>
+          <span className="font-display text-xs text-foreground">From April 2025</span>
           <span className="h-px flex-1 bg-border-strong" />
         </div>
 
@@ -168,12 +165,12 @@ export function TimelineView({
         )}
       </div>
 
-      <p className="mt-10 font-mono text-[11px] leading-relaxed text-faint">
+      <p className="mt-10 font-display text-xs leading-5 text-muted">
         Framing markers show how the issuing government officially presented a
         measure — quoted, not inferred — and do not restate its legal effect.
         Events without markers have framing that is not yet coded, not framing
         that does not exist. Compare anchors on the{" "}
-        <Link href="/framing" className="text-accent hover:text-accent-strong">
+        <Link href="/framing" className="link-quiet">
           framing page
         </Link>
         .

@@ -321,8 +321,8 @@ test("colour slots support the full data catalogue while keeping assignments sta
   assert.equal(all.length, 35, "all 35 series can be selected");
   assert.deepEqual(slotsFrom([...known], known), [...known]);
   assert.deepEqual(slotsFrom(Array(100).fill(""), known), [], "excess URL slots cannot exceed available series");
-  assert.deepEqual(slotStyle(0), { color: "#3987e5", dash: undefined });
-  assert.deepEqual(slotStyle(5), { color: "#008300", dash: "7 4" });
+  assert.deepEqual(slotStyle(0), { color: "#1b1e21", dash: undefined });
+  assert.deepEqual(slotStyle(5), { color: "#8b4491", dash: "7 4" });
   assert.equal(slotStyle(6).color, slotStyle(0).color);
   assert.notEqual(slotStyle(6).dash, slotStyle(0).dash);
   assert.notDeepEqual(slotStyle(24), slotStyle(0));

@@ -9,7 +9,7 @@ export const site = {
   tagline:
     "Comparative economic-security research on strategic-material policy and implementation.",
   description:
-    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked records.",
+    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked evidence.",
   version: "v0.6-capital-intelligence",
   /**
    * The frozen Phase III / F5 research-snapshot date (the corpus cutoff the pinned milestone, F5 and
@@ -50,7 +50,7 @@ export const site = {
  */
 export const navGroups = [
   {
-    label: "Policy record",
+    label: "Policy actions",
     items: [
       { href: "/events", label: "Events", primary: true },
       { href: "/timeline", label: "Timeline", primary: false },
@@ -101,7 +101,7 @@ export const navGroups = [
 export const journeys = [
   {
     href: "/events",
-    label: "Government action",
+    label: "Policy actions",
     question: "What have governments decided, and in what legal form?",
     views: [
       { href: "/events", label: "All events" },
@@ -115,7 +115,7 @@ export const journeys = [
   },
   {
     href: "/capital",
-    label: "Public capital",
+    label: "Financing",
     question: "Which public money and instruments are committed, and at what status?",
     views: [
       { href: "/capital", label: "Financial commitments" },
@@ -125,8 +125,8 @@ export const journeys = [
   },
   {
     href: "/projects",
-    label: "Projects",
-    question: "What does the record show for one industrial project?",
+    label: "Industrial projects",
+    question: "What is documented for one industrial project?",
     views: [{ href: "/projects", label: "Project investigations" }],
   },
   {
@@ -162,6 +162,21 @@ export const publicationNav = [
   { href: "/markets", label: "Markets" },
 ] as const;
 
+/**
+ * The four destinations in the header. Research and Markets are publications; Explore gathers the record
+ * journeys behind one entry (`/explore`); About carries the people, the method and the evidence pages.
+ * The journeys keep their own landing routes and URLs: this is a grouping, not a move.
+ */
+export const sections = [
+  { href: "/research", label: "Research" },
+  { href: "/explore", label: "Explore" },
+  { href: "/markets", label: "Markets" },
+  { href: "/about", label: "About" },
+] as const;
+
+/** The journey that explains where claims come from. It sits under About; the other four sit under Explore. */
+export const EVIDENCE_JOURNEY_HREF = "/sources";
+
 /** Header journeys. The wordmark links to the overview, so the overview is not repeated here. */
 export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] =
   journeys.map(({ href, label, views }) => ({
@@ -192,3 +207,23 @@ export const secondaryNav = [
   { href: "/saved", label: "Saved" },
   { href: "/about", label: "About" },
 ] as const;
+
+/** The journey that owns `pathname`, if any. */
+export const journeyFor = (pathname: string) => {
+  const i = headerNav.findIndex((item) => isNavCurrent(pathname, item));
+  return i === -1 ? undefined : journeys[i];
+};
+
+/** Journeys reached through Explore: every journey except Evidence. */
+export const exploreJourneys = journeys.filter((j) => j.href !== EVIDENCE_JOURNEY_HREF);
+
+/** Which of the four header sections `pathname` belongs to, or undefined on the overview. */
+export const sectionFor = (pathname: string): (typeof sections)[number]["href"] | undefined => {
+  if (isActivePath(pathname, "/research")) return "/research";
+  if (isActivePath(pathname, "/markets")) return "/markets";
+  if (isActivePath(pathname, "/about")) return "/about";
+  const journey = journeyFor(pathname);
+  if (journey) return journey.href === EVIDENCE_JOURNEY_HREF ? "/about" : "/explore";
+  if (["/explore", "/search", "/saved"].some((h) => isActivePath(pathname, h))) return "/explore";
+  return undefined;
+};

@@ -155,7 +155,7 @@ function Src({ href, children, agency = "MOFCOM" }: { href: string; children: Re
   );
 }
 
-const h2 = "font-display text-2xl font-semibold";
+const h2 = "article-h2";
 const p = "mt-5 font-display text-lg leading-9";
 const sectionClass = "scroll-mt-28 border-b border-paper-border py-10";
 
@@ -163,18 +163,18 @@ export default function ChinaSuspensionExtensionPage() {
   return (
     <div data-flush-footer>
       <section className="border-b border-border-strong">
-        <Container width="wide" className="py-12 sm:py-20">
+        <Container width="wide" className="article-hero py-12 sm:py-20">
           <Link
             href="/research"
             className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent"
           >
             ← Research
           </Link>
-          <p className="mt-8 font-display text-sm font-semibold text-accent">Policy Research</p>
-          <h1 className="mt-3 max-w-5xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          <p className="mt-8 font-display text-[0.8125rem] font-medium text-accent">Policy Research</p>
+          <h1 className="article-title mt-4 text-foreground">
             {TITLE}
           </h1>
-          <p className="mt-6 max-w-3xl font-display text-xl leading-8 text-muted">
+          <p className="standfirst mt-6 max-w-[38rem]">
             On November 9, one day before a year-long suspension was set to end, China extended the pause
             on six export-control announcements through January 10, 2027. The decision covers rules on
             rare-earth equipment and technology, battery materials and industrial diamonds, while other
@@ -249,7 +249,7 @@ export default function ChinaSuspensionExtensionPage() {
                 <div className="mt-6 overflow-x-auto border-y border-paper-border">
                   <table className="w-full min-w-[480px] border-collapse text-left font-display text-sm leading-6">
                     <caption className="sr-only">Dates in the 2025 and 2026 suspensions</caption>
-                    <thead className="bg-paper-foreground text-paper">
+                    <thead className="bg-elevated text-paper-foreground">
                       <tr>
                         <th scope="col" className="w-[30%] px-3 py-3 font-semibold">Date</th>
                         <th scope="col" className="px-3 py-3 font-semibold">Event</th>
@@ -257,7 +257,7 @@ export default function ChinaSuspensionExtensionPage() {
                     </thead>
                     <tbody>
                       {timeline.map((row, index) => (
-                        <tr key={row.date} className={index % 2 === 0 ? "bg-paper" : "bg-[#ebe8e0]"}>
+                        <tr key={row.date} className={index % 2 === 0 ? "bg-paper" : "bg-card"}>
                           <th scope="row" className="border-t border-paper-border px-3 py-3 align-top font-semibold">
                             {row.date}
                           </th>
@@ -293,7 +293,7 @@ export default function ChinaSuspensionExtensionPage() {
                     <caption className="sr-only">
                       The six suspended October 2025 announcements: subject, original effective date and position
                     </caption>
-                    <thead className="bg-paper-foreground text-paper">
+                    <thead className="bg-elevated text-paper-foreground">
                       <tr>
                         <th scope="col" className="w-[17%] px-3 py-3 font-semibold">Announcement</th>
                         <th scope="col" className="w-[38%] px-3 py-3 font-semibold">Subject</th>
@@ -303,7 +303,7 @@ export default function ChinaSuspensionExtensionPage() {
                     </thead>
                     <tbody>
                       {scope.map((row, index) => (
-                        <tr key={row.announcement} className={index % 2 === 0 ? "bg-paper" : "bg-[#ebe8e0]"}>
+                        <tr key={row.announcement} className={index % 2 === 0 ? "bg-paper" : "bg-card"}>
                           <th scope="row" className="border-t border-paper-border px-3 py-3 align-top font-semibold">
                             {row.announcement}
                           </th>
@@ -420,7 +420,7 @@ export default function ChinaSuspensionExtensionPage() {
 
       <section className="border-t border-border-strong">
         <Container width="wide" className="py-12 sm:py-16">
-          <h2 className="font-display text-2xl font-semibold">Sources</h2>
+          <h2 className="article-h2">Sources</h2>
           <ul className="mt-6 max-w-3xl space-y-3">
             {sources.map((source) => (
               <li key={source.url}>

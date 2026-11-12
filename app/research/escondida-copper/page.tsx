@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
+import { ResearchCover } from "@/components/editorial/research-cover";
 import { Fi002Screen } from "@/components/research/fi002-screen";
 import { fi002, fi002Downloads } from "@/lib/fi002";
 import { site } from "@/lib/site";
@@ -114,6 +115,13 @@ export default function EscondidaCopper() {
               </span>
             </a>
           </div>
+          <ResearchCover
+            data-cover="escondida-copper"
+            data-frame="banner"
+            data-caption="full"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="mt-12 sm:mt-16"
+          />
         </Container>
       </section>
       <div className="fi-paper">

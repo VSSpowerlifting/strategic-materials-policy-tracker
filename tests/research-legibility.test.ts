@@ -47,7 +47,7 @@ test("evidence preserves exact source fields on both responsive layouts",async()
  const evidence=primitive.slice(primitive.indexOf("export function EvidenceTable"),primitive.indexOf("/** A labelled fact row"));
  assert.match(evidence,/aria-label="Evidence references"/);
  assert.match(evidence,/sm:hidden/);
- assert.match(evidence,/hidden overflow-x-auto rounded-lg border border-border-strong sm:block/);
+ assert.match(evidence,/hidden overflow-x-auto border-y border-border-strong sm:block/);
  assert.match(evidence,/<caption className="sr-only">/);
  assert.match(evidence,/View source dossier/);
  assert.match(evidence,/Source dossier/);
@@ -64,7 +64,7 @@ test("source cards keep exact primary document href and dossier href while promo
  assert.match(source,/Open original document/);
  assert.match(source,/source\.url/);
  assert.match(source,/href=\{\`\/sources\/\$\{source\.id\}\`\}/);
- assert.match(source,/View citing records/);
+ assert.match(source,/View citations/);
  assert.match(source,/max-w-prose text-\[0\.9375rem\] leading-7/);
 });
 
@@ -78,11 +78,11 @@ test("search and categorical filters are touch friendly and don't trigger iOS te
  assert.match(filter,/useUrlFilters/);
 });
 
-test("global keyboard focus preserves dark-and-gold palette, reduced motion, and text wrapping",async()=>{
+test("global keyboard focus keeps the accent outline, reduced motion, and text wrapping",async()=>{
  const css=await file("app/globals.css");
  assert.match(css,/:where\(a, button, input, select, textarea, summary\):focus-visible/);
  assert.match(css,/outline: 2px solid var\(--accent\)/);
  assert.match(css,/h1, h2, h3, p, dd/);
  assert.match(css,/@media \(prefers-reduced-motion: reduce\)/);
- assert.match(css,/--accent: #e3b04b/);
+ assert.match(css,/--accent: #1f5c4d/);
 });

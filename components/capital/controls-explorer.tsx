@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { ControlRow } from "@/components/capital/rows";
 import {
   ALL,
@@ -108,7 +108,7 @@ export function ControlsExplorer({
         <FilterSelect id="ctl-target" label="Named target" value={target} onChange={setTarget} options={opts.target} />
         <FilterSelect id="ctl-material" label="Material" value={material} onChange={setMaterial} options={opts.material} />
       </div>
-      <p className="mt-4 font-display text-xs text-muted" aria-live="polite">
+      <p className="mt-4 font-display text-sm text-muted" aria-live="polite">
         <span className="tnum text-foreground">{filtered.length}</span> of {rows.length} control clauses
         {active ? (
           <button type="button" onClick={reset} className="ml-3 text-accent hover:text-accent-strong">
@@ -116,13 +116,13 @@ export function ControlsExplorer({
           </button>
         ) : null}
       </p>
-      <Card className="mt-3 overflow-hidden">
+      <RecordList className="mt-3">
         {filtered.length ? (
           filtered.map((m) => <ControlRow key={m.id} m={m} />)
         ) : (
           <p className="px-4 py-8 text-center text-sm text-muted">No control clause matches these filters.</p>
         )}
-      </Card>
+      </RecordList>
     </div>
   );
 }

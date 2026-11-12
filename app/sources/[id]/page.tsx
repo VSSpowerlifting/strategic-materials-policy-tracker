@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!source) return { title: "Source not found" };
   return {
     title: source.title + " — source dossier",
-    description: "Original publisher citation and directly source-linked policy, financial, control and project records in the curated SMPT corpus.",
+    description: "Original publisher citation and directly source-linked policy, financial, control and project entries in the curated SMPT corpus.",
   };
 }
 
@@ -44,34 +44,32 @@ export default async function SourceDossierPage({
           { label: source.title },
         ]}
         title="Source dossier"
-        lead="Follow one registered original document back to the published records that cite it. Each link identifies a direct citation in a published record."
       />
 
       <div className="mt-8 max-w-4xl">
         <SourceCard source={source} showDossierLink={false} />
       </div>
 
-      <div className="mt-8 max-w-4xl rounded-md border border-dashed border-border px-4 py-3 text-sm leading-6 text-muted">
-        <strong className="font-semibold text-foreground">{uses.length} directly citing record{uses.length === 1 ? "" : "s"}.</strong>{" "}
-        This dossier shows direct citations in the current public corpus. Each reference supports the specific fields or observations recorded at its locator. Agreement, payment and physical-progress evidence retain separate classifications. Pending editorial research stays outside the public register.
+      <div className="mt-8 max-w-4xl border-l-2 border-border-strong pl-4 text-sm leading-6 text-muted">
+        <strong className="font-semibold text-foreground">{uses.length} directly citing {uses.length === 1 ? "entry" : "entries"}.</strong>{" "}
+        Each reference supports the specific fields or observations recorded at its locator. Agreement, payment and physical-progress evidence retain separate classifications. Pending editorial research stays outside the public register.
       </div>
 
       {groups.length ? (
         <div className="mt-12 space-y-12">
-          {groups.map((group, i) => (
+          {groups.map((group) => (
             <Section
               key={group.kind}
-              index={String(i + 2).padStart(2, "0")}
               title={SOURCE_USE_LABELS[group.kind]}
-              description={group.uses.length + " distinct published record" + (group.uses.length === 1 ? "" : "s") + " with an explicit reference to this source."}
+              description={group.uses.length + " distinct published " + (group.uses.length === 1 ? "entry" : "entries") + " with an explicit reference to this source."}
             >
-              <ol className="divide-y divide-border rounded-lg border border-border bg-card">
+              <ol className="divide-y divide-border border-y border-border-strong">
                 {group.uses.map(use => (
-                  <li key={use.kind + ":" + use.id} className="px-5 py-4">
+                  <li key={use.kind + ":" + use.id} className="py-4">
                     <Link href={use.href} className="font-display font-semibold leading-6 hover:text-accent">
                       {use.title}
                     </Link>
-                    <p className="mt-1 break-all font-mono text-[11px] text-faint">{use.id}</p>
+                    <p className="mt-1 break-all font-mono text-xs text-faint">{use.id}</p>
                     <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs leading-5 text-muted">
                       {use.roles.map(role => <li key={role}>{role}</li>)}
                     </ul>
@@ -83,16 +81,16 @@ export default async function SourceDossierPage({
         </div>
       ) : (
         <p className="mt-10 max-w-prose text-sm leading-7 text-muted">
-          This source is registered but has yet to receive a direct citation from a published record.
+          This source is registered but has yet to receive a direct citation from a published entry.
           Related policy or project findings require their own source-backed admission.
         </p>
       )}
 
-      <p className="mt-12 max-w-prose text-sm leading-7 text-faint">
+      <p className="mt-12 max-w-prose border-t border-border pt-4 text-sm leading-6 text-muted">
         Only direct references in published events, field evidence, source-linked status
         histories, quotations, legal relationships, profiles and reviewed project milestones
         are shown. Claims about causality require separate evidence. See the{" "}
-        <Link href="/methodology#sources" className="text-accent hover:underline">
+        <Link href="/methodology#sources" className="link-quiet">
           source hierarchy and verification methodology
         </Link>.
       </p>

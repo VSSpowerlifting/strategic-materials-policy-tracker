@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { CommitmentRow, ControlRow } from "@/components/capital/rows";
 import { summarizeCommitment, summarizeControl } from "@/lib/capital-control";
 import { site } from "@/lib/site";
@@ -43,39 +43,39 @@ export function InstrumentsPanel({
       {commitments.length ? (
         <div>
           <div className="mb-2 flex items-baseline justify-between gap-3">
-            <h3 className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">
+            <h3 className="font-display text-xs text-faint">
               Financial instruments ({commitments.length})
             </h3>
             {capitalHref ? (
-              <Link href={capitalHref} className="font-display text-[11px] text-accent hover:text-accent-strong">
-                Open in Capital →
+              <Link href={capitalHref} className="font-display text-xs text-accent hover:text-accent-strong">
+                Open in Capital
               </Link>
             ) : null}
           </div>
-          <Card className="overflow-hidden">
+          <RecordList>
             {ordered.map(({ c, depth, rel }) => (
               <CommitmentRow key={c.id} c={summarizeCommitment(c)} indent={depth} relationLabel={rel} />
             ))}
-          </Card>
+          </RecordList>
         </div>
       ) : null}
       {controls.length ? (
         <div>
           <div className="mb-2 flex items-baseline justify-between gap-3">
-            <h3 className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">
+            <h3 className="font-display text-xs text-faint">
               Control clauses ({controls.length})
             </h3>
             {controlsHref ? (
-              <Link href={controlsHref} className="font-display text-[11px] text-accent hover:text-accent-strong">
-                Open in Controls →
+              <Link href={controlsHref} className="font-display text-xs text-accent hover:text-accent-strong">
+                Open in Controls
               </Link>
             ) : null}
           </div>
-          <Card className="overflow-hidden">
+          <RecordList>
             {controls.map((m) => (
               <ControlRow key={m.id} m={summarizeControl(m, site.legalStatusAsOf)} />
             ))}
-          </Card>
+          </RecordList>
         </div>
       ) : null}
     </div>

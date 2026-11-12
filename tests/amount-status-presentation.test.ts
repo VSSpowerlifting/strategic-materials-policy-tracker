@@ -45,7 +45,7 @@ test("F1: compact rows and the material page carry a local 'announced' qualifier
   assert.doesNotMatch(inline(other), /announced/i);
   const p = buildMaterialDossier("germanium", site.lastUpdated)!;
   const out = text(renderToStaticMarkup(createElement(Dossier, { payload: p })));
-  assert.match(out, /Amount basis: announced; see the record page/);
+  assert.match(out, /Amount basis: announced; see the financing page/);
   assert.equal(out.split("Amount basis:").length - 1, 1);
 });
 

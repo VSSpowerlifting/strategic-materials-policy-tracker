@@ -5,14 +5,17 @@ import {
   MechanismBadges,
   StatusBadge,
 } from "@/components/labels";
+import { POLICY_STATUS_TONE } from "@/components/labels";
+import type { BadgeTone } from "@/components/ui/badge";
 import { formatDate } from "@/lib/format";
-import type { FramingCategory, PolicyEvent, PolicyStatus } from "@/lib/types";
+import type { FramingCategory, PolicyEvent } from "@/lib/types";
 
-function statusStripClass(status: PolicyStatus): string {
-  if (status === "active" || status === "in_force") return "bg-accent";
-  if (status === "proposed") return "bg-border-strong";
-  return "bg-faint/30";
-}
+const STRIP: Record<BadgeTone, string> = {
+  accent: "bg-accent",
+  ochre: "bg-ochre",
+  negative: "bg-negative",
+  neutral: "bg-border-strong",
+};
 
 /**
  * Dense, full-width row used in the events index and on profile pages.
@@ -34,15 +37,15 @@ export function EventListItem({
       href={`/events/${event.id}`}
       className="group flex border-b transition-colors last:border-b-0 hover:bg-elevated"
     >
-      {/* Status strip — 4px left edge encodes current enforcement */}
+      {/* Status edge: the same tone as the status label on the right. */}
       <span
         aria-hidden
-        className={`w-1 shrink-0 self-stretch rounded-l-sm ${statusStripClass(event.policyStatus)}`}
+        className={`w-[3px] shrink-0 self-stretch ${STRIP[POLICY_STATUS_TONE[event.policyStatus]]}`}
       />
       <div className="flex flex-1 flex-col gap-2 px-4 py-4 sm:flex-row sm:items-stretch sm:gap-0">
         {/* Metadata gutter — fixed dossier register: when & who */}
         <div className="flex items-center gap-2 sm:w-40 sm:shrink-0 sm:flex-col sm:items-start sm:gap-1.5 sm:border-r sm:border-border sm:pr-4">
-          <time className="tnum rail text-faint">{formatDate(event.date)}</time>
+          <time className="tnum font-display text-xs text-faint">{formatDate(event.date)}</time>
           <JurisdictionTag code={event.jurisdiction} />
         </div>
         {/* Record body — what & current standing */}
@@ -61,7 +64,7 @@ export function EventListItem({
               {framingCategories.length > 0 ? (
                 <FramingBadges categories={framingCategories} />
               ) : (
-                <span className="font-display text-[11px] leading-none text-faint">
+                <span className="font-display text-xs leading-none text-faint">
                   Official framing not yet coded
                 </span>
               )}

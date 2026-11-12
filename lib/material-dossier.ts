@@ -509,7 +509,7 @@ function designationView(d: ProjectDesignation, ctx: Ctx, noStage: boolean): Des
       sponsors: (project?.sponsorOrgIds ?? []).map(ctx.orgName),
       untracked: project?.untrackedMaterialsAsStated ?? [],
       stageNote: differs
-        ? `Project record codes: ${pStages.map((s) => supplyChainStageLabels[s].toLowerCase()).join(", ")}. Not placed here; this designation ${named}.`
+        ? `Project entry codes: ${pStages.map((s) => supplyChainStageLabels[s].toLowerCase()).join(", ")}. Not placed here; this designation ${named}.`
         : null,
     },
     noStageReason: noStage ? "Records no stage." : null,
@@ -848,7 +848,7 @@ export function buildMaterialDossier(slug: string, asOf: string, model?: Lattice
       key: "projects",
       label: "Projects",
       value: rows.projects.length,
-      basis: "registry records",
+      basis: "registry entries",
       sublabel: `${registryProjects.length} with no designation`,
     },
   ];
@@ -860,15 +860,15 @@ export function buildMaterialDossier(slug: string, asOf: string, model?: Lattice
   stats.push(
     { key: "programmes", label: "Programmes", value: programmesList.length, basis: "named by these rows" },
     { key: "organizations", label: "Organizations", value: organizationsList.length, basis: "named by these rows" },
-    { key: "sources", label: "Sources", value: sources.length, basis: "cited by these records" },
+    { key: "sources", label: "Sources", value: sources.length, basis: "cited on this page" },
   );
 
   // --- Header, notes, group note ---
   const oldest = [...events].sort((a, b) => byCodePoint(a.date, b.date) || byCodePoint(a.id, b.id))[0];
   const newestEvent = events[0];
   const lede = oldest && newestEvent
-    ? `Records coded to ${material.nameEn}, from ${oldest.titleEn} (${formatDate(oldest.date)}) to the latest event on ${formatDate(newestEvent.date)}.`
-    : `Records coded to ${material.nameEn}.`;
+    ? `Policy actions, financing and projects coded to ${material.nameEn}, from ${oldest.titleEn} (${formatDate(oldest.date)}) to the latest event on ${formatDate(newestEvent.date)}.`
+    : `Policy actions, financing and projects coded to ${material.nameEn}.`;
   const noteFields: { field: NoteField; label: string }[] = [
     { field: "statusSummary", label: "Status summary" },
     { field: "chinaPositionNote", label: "China's position" },
@@ -882,7 +882,7 @@ export function buildMaterialDossier(slug: string, asOf: string, model?: Lattice
     material.grouping === "rare earth elements"
       ? material.slug === "rare-earth-elements"
         ? { text: "This dossier lists the rows that name the rare-earth group as a whole. A row that names only one element is on that element's dossier, and a row can name both.", href: null, linkText: null }
-        : { text: `Some records name the rare-earth group as a whole rather than ${material.nameEn}. They are on the rare-earth dossier and are not repeated here.`, href: "/materials/rare-earth-elements", linkText: "Open the rare earth elements dossier" }
+        : { text: `Some entries name the rare-earth group as a whole rather than ${material.nameEn}. They are on the rare-earth dossier and are not repeated here.`, href: "/materials/rare-earth-elements", linkText: "Open the rare earth elements dossier" }
       : null;
 
   return {

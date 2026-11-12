@@ -51,14 +51,17 @@ export function AtlasIndex({
 }
 
 /**
- * Standard page heading: breadcrumb trail or atlas kicker / Archivo title (the shared `.page-title` scale) / lead. Detail pages pass
- * `breadcrumbs`, which replace the kicker so the page's place in its journey is said once.
+ * Standard page heading, drawn as a centred title block: breadcrumb trail, serif title (the shared
+ * `.page-title` scale), lead, then a sheet rule with a centre tick that the page body hangs from. Detail pages
+ * pass `breadcrumbs` so the page's place in its journey is said once. `eyebrow` is accepted for existing callers
+ * but no longer drawn: the header already names the section, and a label above every title said it twice.
+ * `align="start"` keeps the block on the left edge for pages whose heading shares a row with controls.
  */
 export function PageHeading({
-  eyebrow,
   title,
   lead,
   breadcrumbs,
+  align = "centre",
   className,
 }: {
   eyebrow?: string;
@@ -66,22 +69,21 @@ export function PageHeading({
   title: string;
   lead?: React.ReactNode;
   breadcrumbs?: readonly Crumb[];
+  align?: "centre" | "start";
   className?: string;
 }) {
+  const centred = align === "centre";
   return (
-    <div className={cn(className)}>
+    <header className={cn(centred && "title-block", className)}>
       {breadcrumbs?.length ? (
-        <Breadcrumbs items={breadcrumbs} className="mb-5" />
-      ) : eyebrow ? (
-        <AtlasIndex label={eyebrow} className="mb-4" />
+        <Breadcrumbs items={breadcrumbs} className={cn("mb-6", centred && "[&_ol]:justify-center")} />
       ) : null}
-      <h1 className="page-title max-w-4xl font-display text-balance font-semibold tracking-tight">
-        {title}
-      </h1>
+      <h1 className="page-title max-w-4xl text-foreground">{title}</h1>
       {lead ? (
-        <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-muted sm:text-[1.0625rem] sm:leading-8">{lead}</p>
+        <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted sm:text-[1.0625rem] sm:leading-8">{lead}</p>
       ) : null}
-    </div>
+      <hr className="sheet-rule mt-10 w-full" data-centre={centred ? "" : undefined} />
+    </header>
   );
 }
 
@@ -92,10 +94,18 @@ export function PageHeading({
  * description stay visible in the summary, and the body opens on demand. Use it for secondary groupings that
  * a reader does not need on first pass; never to hide a qualifier that changes how a visible figure reads.
  */
+/**
+ * `description` is always shown whole: it carries the qualifiers a reader needs to interpret the section. `note`
+ * is an optional, page-authored disclosure for supplementary explanation, with a label that says what it holds
+ * ("Counting rules", "How days are counted"). Nothing is split automatically.
+ */
+export type SectionNote = { label: string; body: React.ReactNode };
+
 export function Section({
   id,
   title,
   description,
+  note,
   count,
   collapsed = false,
   children,
@@ -105,6 +115,7 @@ export function Section({
   title?: string;
   index?: string;
   description?: React.ReactNode;
+  note?: SectionNote;
   count?: number;
   collapsed?: boolean;
   children: React.ReactNode;
@@ -118,12 +129,22 @@ export function Section({
       ) : null}
     </h2>
   ) : null;
-  const desc = description ? (
-    <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p>
+  const desc = description || note ? (
+    <>
+      {description ? <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p> : null}
+      {note ? (
+        <details className="max-w-3xl">
+          <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden">
+            <span className="link-quiet">{note.label}</span>
+          </summary>
+          <p className="pb-2 text-sm leading-6 text-muted">{note.body}</p>
+        </details>
+      ) : null}
+    </>
   ) : null;
 
   if (collapsed && title) {
-    const noun = count === 1 ? "record" : "records";
+    const noun = count === 1 ? "item" : "items";
     return (
       <section id={id} className={cn("scroll-mt-24", className)}>
         <div className="border-b border-border-strong pb-3">

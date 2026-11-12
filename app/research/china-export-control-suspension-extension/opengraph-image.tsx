@@ -17,8 +17,8 @@ export default async function Image() {
         position: "relative",
         width: "100%",
         height: "100%",
-        backgroundColor: "#262523",
-        color: "#FBFAF7",
+        backgroundColor: "#f6f5f1",
+        color: "#1b1e21",
         fontFamily: "Arial, sans-serif",
         overflow: "hidden",
       }}
@@ -31,7 +31,7 @@ export default async function Image() {
           top: 0,
           width: "100%",
           height: 10,
-          backgroundColor: "#98752D",
+          backgroundColor: "#1f5c4d",
         }}
       />
       <div
@@ -47,7 +47,7 @@ export default async function Image() {
           style={{
             display: "flex",
             alignItems: "center",
-            color: "#C8A95E",
+            color: "#1f5c4d",
             fontSize: 21,
             fontWeight: 700,
             letterSpacing: 2.2,
@@ -75,7 +75,7 @@ export default async function Image() {
               maxWidth: 730,
               fontSize: 30,
               lineHeight: 1.25,
-              color: "#DDD5C4",
+              color: "#555b61",
             }}
           >
             Six October 2025 measures remain suspended through January 10, 2027
@@ -87,7 +87,7 @@ export default async function Image() {
             fontSize: 18,
             fontWeight: 600,
             letterSpacing: 0.6,
-            color: "#C8A95E",
+            color: "#555b61",
           }}
         >
           NOVEMBER 9, 2026   ·   STRATEGIC MATERIALS POLICY TRACKER
@@ -101,7 +101,7 @@ export default async function Image() {
           left: 913,
           height: 435,
           width: 1,
-          backgroundColor: "#655A47",
+          backgroundColor: "#b5b1a5",
         }}
       />
       <img

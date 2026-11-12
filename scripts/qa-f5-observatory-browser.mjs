@@ -114,7 +114,7 @@ async function main(){
         }
 
         const report=await page.evaluate(()=>{
-          const matches=["h1","header p.text-muted","article .rail","article h2",
+          const matches=["h1","header p.text-muted","article p.text-faint","article h2",
             "article section h3","a.text-accent"];
           const asRgb=value=>{
             const found=value.match(/^rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/i);
