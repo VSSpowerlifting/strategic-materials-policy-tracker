@@ -1,4 +1,4 @@
-## 2026-11-11: Frontend redesign, "Architectural Research Studio" (draft PR, not merged)
+## 2026-11-11: Frontend redesign, "Architectural Research Studio" (draft PR #260, not merged)
 
 - Branch `claude/smpt-frontend-redesign-119d46`, on top of phase 1 (PR #258). Presentation only: no seed data, market data, calculation, export, API or research text changed. Design system and remaining work: `docs/design/ARCHITECTURAL_RESEARCH_STUDIO.md`. Screenshots: `docs/design/studio-redesign/`.
 - Visual system: warm off-white ground, graphite ink, malachite accent, hairline rules, square corners, centred title blocks. Spectral for titles, standfirsts and large figures; Archivo for reading text, interface and data; JetBrains Mono for identifiers only. The site is now light; the dark theme is gone.
