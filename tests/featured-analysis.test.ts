@@ -27,7 +27,7 @@ test("each scenario marks only the assumptions that differ from the base case", 
   assert.match(html, /\$7\.02bn<span class="sr-only"> \(differs from base case\)/);
   assert.match(html, /\$8,500\/t<span class="sr-only"> \(differs from base case\)/);
   // The combined stress case returns to a 20-year horizon, so its span is not marked.
-  assert.match(html, /20 years<\/span> from <span class="font-medium text-foreground">2034/);
+  assert.match(html, /20 years<\/span> starting <span class="font-medium text-foreground">2034/);
 });
 
 test("featured analysis separates modeled thresholds from output and keeps its downloads", () => {
