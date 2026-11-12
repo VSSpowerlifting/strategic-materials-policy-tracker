@@ -368,10 +368,13 @@ test("live cutoff audit CLI is read-only at the current authorized corpus date",
     r.seed==="control-measures"&&/^statusHistory\[\d+\]\.date$/.test(r.field)));
   const pendingAfter=afterCutoff.filter(r=>PENDING_MOFCOM55_IDS.has(r.recordId));
   assert.deepEqual(pendingAfter,[
+    ...PENDING_MOFCOM55_CONTROL_IDS.map(recordId=>({
+      seed:"control-measures",recordId,field:"statusHistory[2].date",date:"2026-11-11",
+    })),
     {seed:"events",recordId:"evt-cn-mofcom-55-2025",field:"lifecycle.verifiedAt",date:"2026-11-11"},
     {seed:"sources",recordId:"src-mofcom-55",field:"dateAccessed",date:"2026-11-11"},
-  ],"only the two actual post-cutoff source-review metadata cells may enter through the draft cohort");
-  assert.equal(parsed.countOtherPostCutoffFields,27);
+  ],"seven future suspension dates and two source-review fields belong exclusively to the draft cohort");
+  assert.equal(parsed.countOtherPostCutoffFields,34);
   assert.equal(parsed.publicationAuthorized,false,
     "audit's non-publication flags do not retroactively undo separately authorized source publication");
   assert.equal(parsed.maintainerReviewRequired,true);
