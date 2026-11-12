@@ -1,3 +1,10 @@
+## 2026-11-12: Homepage featured analysis (FI002) redesign (PR #266, not merged)
+
+- Branch `claude/featured-analysis-redesign-3945be`, from `main` at ddadcdc. Only `components/home/featured-case.tsx`, a `.featured-track` rule in `app/globals.css`, a new `tests/featured-analysis.test.ts` and screenshots in `docs/design/reviews/featured-analysis/`. `lib/fi002.ts`, the article, the model, the CSV and every download are unchanged.
+- The four big numerals became one zero-based horizontal bar exhibit (0–450,000 t a year): Base case 199,000, Shorter benefits 275,000, Shorter and later 333,000, Combined stress 416,000. Each row lists capital, copper price and benefit period; assumptions that differ from the base case are set in dark type (with screen-reader text). Values come from `fi002Screens`; verified against `threshold-sensitivities.csv`, `model.xlsx` and the methodology formula.
+- Wording: the standfirst and chart heading present the figures as yearly value counted in tonnes of copper (the after-tax profit on that many tonnes at assumed prices and costs), not copper the plant must produce; "copper-equivalent" avoided (a by-product conversion term the model does not use). The 230–270 ktpa design output is deliberately not drawn beside the thresholds (methodology: it cannot be equated to the requirement). Added "Why the requirement rises", the recommendation, and a source/cut-off line.
+- Verified locally: `validate`, `lint` (0 errors), `typecheck`, 1285 tests, `build`; browser check at 1440 and 375 px, no horizontal overflow. House-style checklist applied to the new copy (standfirst now states the result directly and names Los Colorados); no human editorial sign-off yet.
+
 ## 2026-11-11: Publication design system migration to the Architectural Research Studio identity (draft PR, not merged)
 
 - Branch `claude/smpt-design-system-migration-75d10d`, from `main` at 74547ea. Presentation only: no finding, calculation, evidence register, model, publication date or source cut-off changed, and no FI001, FI002 or R001 binary or protected generator was touched. FI003 was not regenerated.
