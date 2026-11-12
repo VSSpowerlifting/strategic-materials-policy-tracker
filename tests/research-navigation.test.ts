@@ -25,3 +25,36 @@ test("Research remains accessible on mobile and in the footer", () => {
   assert.ok(headerNav.every((item) => !isNavCurrent("/research/tungsten-supply-security", item)));
   assert.ok(isNavCurrent("/events", headerNav.find((item) => item.href === "/events")!));
 });
+
+
+test("Published research back links use reliable document navigation", () => {
+  const articles = [
+    "escondida-copper",
+    "hemerdon-financing",
+    "antimony-supply-resilience",
+    "tungsten-supply-security",
+    "china-export-control-suspension-extension",
+  ];
+  for (const slug of articles) {
+    const source = readFileSync(`app/research/${slug}/page.tsx`, "utf8");
+    assert.match(source, /<a\s+href="\/research"/, `${slug}: native return link`);
+    assert.doesNotMatch(source, /<Link\s+href="\/research"[^>]*>\s*← Research/, `${slug}: no intercepted return link`);
+  }
+});
+
+test("Escondida online-reading action stays inside the redesigned article", () => {
+  const source = readFileSync("app/research/escondida-copper/page.tsx", "utf8");
+  assert.match(source, /className="research-button-secondary"\s+href="#question"/);
+  assert.match(source, /id="question"/);
+  assert.match(source, /Full report in HTML/);
+  assert.match(source, /target="_blank"\s+rel="noopener noreferrer"/);
+});
+
+test("Social preview is code-rendered in the architectural studio style", () => {
+  const source = readFileSync("app/opengraph-image.tsx", "utf8");
+  assert.match(source, /new ImageResponse\(/);
+  assert.match(source, /width: 1200, height: 630/);
+  assert.match(source, /const PLASTER = "#f6f5f1"/);
+  assert.match(source, /const MALACHITE = "#1f5c4d"/);
+  assert.match(source, /function landscapeSvg\(\)/);
+});
