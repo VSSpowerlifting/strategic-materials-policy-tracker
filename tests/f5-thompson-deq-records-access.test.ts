@@ -12,7 +12,7 @@ import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./p
 const current=()=>structuredClone(handoff);
 const m3=()=>buildM3ReviewerPackets(queue,{
   projects:getAllProjects(),sources:getAllSources(),
-  commitments:getAllFinancialCommitments(),corpusCutoff:site.lastUpdated,
+  commitments:getAllFinancialCommitments(),corpusCutoff:PHASE_III_RELEASE_CUTOFF,
   publicMilestoneCount:getAllProjectMilestones().length,
 },"review-m3-2-thompson-falls-q2-expansion").worksheets[0];
 
@@ -154,7 +154,8 @@ test("private source intake and no public mutation survive a deterministic offli
   assert.ok(handoff.nextUseOfRecords.whenObtained.includes("gitignored private evidence vault"));
   assert.match(handoff.nextUseOfRecords.reviewer,/existing M3 original-source human adjudication/);
   assert.match(handoff.nextUseOfRecords.publication,/No automatic project-milestone seed/);
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+  assert.equal(site.lastUpdated,"2026-11-12");
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.ok(decisions.every(x=>x.verdict==="pending" && x.reviewedBy===null && x.reviewedAt===null));
   const input=current(),before=JSON.stringify(input);

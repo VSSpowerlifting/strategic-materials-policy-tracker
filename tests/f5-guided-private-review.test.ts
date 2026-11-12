@@ -48,12 +48,14 @@ test("already published Wagerup and Narva are unavailable for accidental second 
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.throws(()=>prepareGuidedReview(records,{...refs(),currentPublicMilestones:getAllProjectMilestones()},narva,"2026-11-03"),/Already published/);
   assert.throws(()=>prepareGuidedReview(records,refs(),"review-m3-2-alcoa-wagerup","2026-11-03"),/Already published/);
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+  assert.equal(site.lastUpdated,"2026-11-12");
 });
 
 test("new guided-review sessions reject superseded publication cutoffs",()=>{
   const live={...refs(),currentPublicCutoff:site.lastUpdated};
-  assert.equal(live.currentPublicCutoff,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(live.currentPublicCutoff,"2026-11-12");
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
   assert.throws(()=>prepareGuidedReview(records,live,narva,"2026-11-03"),
     /CURRENT public corpus revision/);
   assert.throws(()=>prepareGuidedReview(records,live,narva,PRE_PHASE_III_CUTOFF),

@@ -14,7 +14,7 @@ const projectId = "prj-us-usac-thompson-falls-expansion";
 const sheet = () => buildM3ReviewerPackets(queue,{
   projects:getAllProjects(), sources:getAllSources(),
   commitments:getAllFinancialCommitments(),
-  corpusCutoff:site.lastUpdated,publicMilestoneCount:getAllProjectMilestones().length,
+  corpusCutoff:PHASE_III_RELEASE_CUTOFF,publicMilestoneCount:getAllProjectMilestones().length,
 },m3Id).worksheets[0];
 
 test("first Thompson milestone brief remains one canonical, unsigned M3 construction-progress proposal",()=>{
@@ -49,8 +49,9 @@ test("no fake human review, source-body proof, digest, milestone ID or public mi
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.ok(example.every(x=>x.verdict==="pending" && x.reviewedBy===null &&
     x.reviewedAt===null && x.reviewInputDigestSha256===null));
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF,
-    "a future reviewer cannot backdate source inspection to existing curated cutoff");
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08",
+    "the original adjudication date remains frozen across later releases");
+  assert.equal(site.lastUpdated,"2026-11-12");
 });
 
 test("original SEC Note 9/16 anchors have correct period, filing and registry clocks",()=>{

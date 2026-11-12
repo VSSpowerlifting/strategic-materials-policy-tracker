@@ -3208,5 +3208,39 @@
       "verifiedAt": "2026-11-05",
       "publishedAt": null
     }
+  },
+  {
+    "id": "evt-cn-mofcom-55-2025",
+    "date": "2025-10-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM / GACC",
+    "titleOriginal": "商务部 海关总署公告2025年第55号 公布对超硬材料相关物项实施出口管制的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM & GACC Announcement No. 55 of 2025: export controls on certain superhard-material items",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM & GACC Announcement [2025] No. 55",
+    "policyStatus": "suspended",
+    "mechanism": [
+      "export_control",
+      "dual_use_license"
+    ],
+    "affectedMaterialIds": [],
+    "affectedSectors": [],
+    "summary": "Announces export licensing for six superhard-material items under 2C902.a–d, 2B005.b and 2E902, including synthetic-diamond powders and single crystals, wire saws, grinding wheels, DCPCVD equipment and process technology, plus customs-declaration requirements. Announced implementation on 8 November 2025; Announcement No. 70 suspended implementation from 7 November 2025 through 10 November 2026, and Announcement No. 58 of 2026 continues suspension from 11 November 2026 through 10 January 2027. No interval actually in force is established by these instruments.",
+    "analyticalSignificance": "Extends the announced Chinese dual-use export-control framework to specified synthetic-diamond inputs, tools and DCPCVD equipment and technology. Its pre-commencement suspension must be distinguished from the separate U.S.-destination restriction on superhard materials under Announcement No. 46 of 2024, paragraph 2, which has a different suspension window under No. 72 of 2025.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-55",
+      "src-mofcom-70",
+      "src-mofcom-2026-58"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-10-09",
+      "discoveredAt": null,
+      "verifiedAt": "2026-11-11",
+      "publishedAt": null
+    }
   }
 ]

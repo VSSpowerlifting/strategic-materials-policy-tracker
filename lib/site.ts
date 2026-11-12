@@ -12,24 +12,26 @@ export const site = {
     "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked evidence.",
   version: "v0.6-capital-intelligence",
   /**
-   * The frozen Phase III / F5 research-snapshot date (the corpus cutoff the pinned milestone, F5 and
-   * money/lattice/response analyses are built against). It is NOT the date legal-status views read
-   * and NOT the displayed revision date: see `legalStatusAsOf` and `revisedOn`. Do not advance it
-   * for a single legal update; doing so re-dates the frozen snapshot.
+   * Date of the latest source-reviewed, curated research-corpus release. An
+   * incremental release advances this date without claiming every historical
+   * record was rechecked. Earlier analyses and Phase III milestones retain
+   * their own pinned 2026-11-08 snapshot in versioned release/test records.
+   * Legal status is separately dated by `legalStatusAsOf` below.
    */
-  lastUpdated: "2026-11-08",
+  lastUpdated: "2026-11-12",
   /**
-   * The date through which published legal instruments are incorporated. Control-status views
-   * (the controls overview, clocks, summaries and exports) read statuses on this date, so an entry
-   * dated after it is shown as scheduled, never as already effective. 2026-11-09 is the issue date
-   * of MOFCOM/GACC Announcement No. 58 of 2026; its 11 November effective date stays a later date.
+   * Date through which incorporated primary-source legal-status observations
+   * are represented in controls views and exports. No. 58 of 2026 was issued
+   * 2026-11-09 and continued the suspension of No. 55 (2025) beginning
+   * 2026-11-11; the November 12 curated release admits that effective status.
+   * This date is not a claim that every legal instrument was freshly rechecked.
    */
-  legalStatusAsOf: "2026-11-09",
+  legalStatusAsOf: "2026-11-12",
   /**
-   * The date shown to readers as the last curated revision: the later of the research snapshot and
-   * the legal-status date. Not a claim that every row was rechecked on this date.
+   * Date of the last curated site research/legal revision, distinct from source
+   * access dates and individual record-review timestamps.
    */
-  revisedOn: "2026-11-09",
+  revisedOn: "2026-11-12",
   /**
    * ISO date prospective monitoring began — set only when a monitoring-capable
    * release is actually deployed. Null until then, deliberately: no timeliness

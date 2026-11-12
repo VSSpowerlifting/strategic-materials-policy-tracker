@@ -1428,6 +1428,18 @@
     "notes": "Chinese primary for Announcement No. 46 (2024). Read 2026-08-12. Justification clause verbatim: 为维护国家安全和利益、履行防扩散等国际义务 — this text does carry the non-proliferation limb, which Announcement No. 61 (2025) does not. Names 镓 (gallium), 锗 (germanium), 锑 (antimony) and 超硬材料 (superhard materials) for the US export ban, with 石墨 (graphite) subject to stricter end-use review. Rebuilt 2026-08-12 after the record was lost to an accidental working-tree revert; re-verified against the primary rather than restored from a copy."
   },
   {
+    "id": "src-mofcom-55",
+    "title": "商务部 海关总署公告2025年第55号 公布对超硬材料相关物项实施出口管制的决定",
+    "publisher": "中华人民共和国商务部、海关总署 (Ministry of Commerce and General Administration of Customs, PRC)",
+    "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_949f47563b834dad95b0010f375a892c.html",
+    "language": "zh",
+    "datePublished": "2025-10-09",
+    "dateAccessed": "2026-11-11",
+    "sourceType": "official",
+    "confidence": "primary",
+    "notes": "Chinese primary text for Announcement No. 55 (2025), adjudicated in docs/analysis/mofcom-55-source-adjudication-2026-11-11.md. Lists six superhard-material, equipment and technology control items (2C902.a–d, 2B005.b, 2E902), a licensing paragraph, a customs declaration paragraph, and an announced implementation date of 2025-11-08. No. 70 of 2025 suspended implementation from 2025-11-07 through 2026-11-10; No. 58 of 2026 continues suspension from 2026-11-11 through 2027-01-10. The announced date does not establish an interval actually in force. Separate U.S.-destination No. 46 (2024) paragraph 2 restrictions and No. 72 (2025) suspension must not be conflated."
+  },
+  {
     "id": "src-mofcom-56",
     "title": "商务部 海关总署公告2025年第56号 公布对部分稀土设备和原辅料相关物项实施出口管制的决定",
     "publisher": "中华人民共和国商务部、海关总署 (Ministry of Commerce and General Administration of Customs, PRC)",

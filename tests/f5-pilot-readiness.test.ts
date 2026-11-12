@@ -20,7 +20,8 @@ const refs = () => ({
   finances: getAllFinancialCommitments(),
   existingM3Queue: m3Queue as unknown as PendingProjectExecutionRow[],
   publicMilestoneIds: getAllProjectMilestones().map(x => x.id),
-  corpusCutoff: site.lastUpdated as string,
+  // Reproduce the approved Phase III pilot review, independent of later corpus releases.
+  corpusCutoff: PHASE_III_RELEASE_CUTOFF,
 });
 const audit = (pkt = input(), external = refs()) => auditF5PilotReadiness(pkt, external);
 
@@ -43,7 +44,8 @@ test("F5-1: original M3 adjudication remains canonical; four F5 pilots are all u
   assert.ok(report.cases.every(x=>!x.publicationEligible && x.releaseBlockers.length>=1));
   assert.ok(report.cases.every(x=>!x.releaseBlockers.includes("curated_corpus_cutoff_requires_separate_approval")),
     "the reviewed corpus cutoff proposal in this PR is 2026-10-09; and it does not authorize other candidate signoffs");
-  assert.equal(site.lastUpdated, PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+  assert.equal(site.lastUpdated,"2026-11-12");
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });
 
@@ -153,7 +155,9 @@ test("F5-1: all review diagnostics are deterministic and no private drafts enter
   assert.ok(summary.includes("Milestone publication: NOT AUTHORIZED"));
   assert.ok(summary.includes("Existing M3.2 cases (reused, never duplicated): 4"));
   const json=execFileSync(process.execPath,[...argv,"--json"],{encoding:"utf8"});
-  assert.deepEqual(JSON.parse(json),audit());
+  // The CLI audits the current curated corpus, while the other F5-1 cases
+  // deliberately replay their original frozen Phase III inputs.
+  assert.deepEqual(JSON.parse(json),audit(input(),{...refs(),corpusCutoff:site.lastUpdated}));
   const bad=spawnSync(process.execPath,[...argv,"--publish"],{encoding:"utf8"});
   assert.equal(bad.status,2);
   assert.ok(bad.stderr.includes("Usage:"));

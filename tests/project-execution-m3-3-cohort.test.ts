@@ -10,8 +10,7 @@ import {
   getAllFinancialCommitments, getAllProjectMilestones, getAllProjects, getAllSources,
 } from "../lib/data";
 import type { Source } from "../lib/types";
-import { site } from "../lib/site";
-import { PRE_PHASE_III_CUTOFF, prePhaseIiiMilestones } from "./phase-iii-release-ids";
+import { PHASE_III_RELEASE_CUTOFF, PRE_PHASE_III_CUTOFF, prePhaseIiiMilestones } from "./phase-iii-release-ids";
 
 const refsFor = (cohort: "m3-2" | "m3-3", corpus: "current" | "pre-phase-iii" = "current") => {
   const inputs = loadCohortInputs(cohort);
@@ -21,7 +20,9 @@ const refsFor = (cohort: "m3-2" | "m3-3", corpus: "current" | "pre-phase-iii" = 
     refs: {
       projects: getAllProjects(), sources: inputs.sources,
       commitments: getAllFinancialCommitments(),
-      corpusCutoff: corpus === "current" ? site.lastUpdated as string : PRE_PHASE_III_CUTOFF,
+      // These fingerprints are for the 8 Nov M3.2/3.3 cohort, not the
+      // subsequently curated 12 Nov legal-control release.
+      corpusCutoff: corpus === "current" ? PHASE_III_RELEASE_CUTOFF : PRE_PHASE_III_CUTOFF,
       publicMilestoneCount: milestones.length,
       publicMilestoneIds: milestones.map((m) => m.id),
       cohort,

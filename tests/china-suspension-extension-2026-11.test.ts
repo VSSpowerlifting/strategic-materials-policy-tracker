@@ -11,6 +11,7 @@ import {
   summarizeControl,
 } from "@/lib/capital-control";
 import { site } from "@/lib/site";
+import { PHASE_III_RELEASE_CUTOFF } from "./phase-iii-release-ids";
 import {
   getAllControlMeasures,
   getEventById,
@@ -212,9 +213,12 @@ test("the US-specific gallium, germanium and antimony suspension keeps its own s
   }
 });
 
-test("the 9 November record is the only content dated after the 8 November corpus revision", () => {
-  const afterCutoff = measures().flatMap((m) =>
-    m.statusHistory.filter((h) => h.date !== null && h.date > "2026-11-08").map((h) => ({ id: m.id, h })),
+test("the 9 November legal continuation is the only post-Phase III status change in its original cohort", () => {
+  // No. 55 was separately admitted on 12 November, and is checked in its own
+  // clause-level regression test. It must not rewrite the 9 November cohort.
+  const afterCutoff = measures().filter((m) => m.eventId !== "evt-cn-mofcom-55-2025").flatMap((m) =>
+    m.statusHistory.filter((h) => h.date !== null && h.date > PHASE_III_RELEASE_CUTOFF)
+      .map((h) => ({ id: m.id, h })),
   );
   assert.ok(afterCutoff.length > 0);
   for (const { id, h } of afterCutoff) {
@@ -229,13 +233,13 @@ test("the 9 November record is the only content dated after the 8 November corpu
 const clockFor = (asOf: string, id: string) => controlClocks(asOf).find((c) => c.measure.id === id);
 const CLAUSE = "ctl-cn-56-2025-customs-declaration";
 
-test("date model: the research snapshot stays at 8 Nov, legal status reads 9 Nov, and the revision date is not earlier than either", () => {
-  assert.equal(site.lastUpdated, "2026-11-08");
-  assert.equal(site.legalStatusAsOf, ISSUED);
-  assert.ok(site.revisedOn >= site.legalStatusAsOf);
-  assert.ok(site.revisedOn >= site.lastUpdated);
-  // The displayed revision date is not the 8 November snapshot, which predates the 9 November instrument.
-  assert.notEqual(site.revisedOn, site.lastUpdated);
+test("date model: Phase III remains frozen at 8 Nov while the curated corpus and legal as-of advance to 12 Nov", () => {
+  assert.equal(PHASE_III_RELEASE_CUTOFF, "2026-11-08");
+  assert.equal(site.lastUpdated, "2026-11-12");
+  assert.equal(site.legalStatusAsOf, "2026-11-12");
+  assert.equal(site.revisedOn, "2026-11-12");
+  assert.ok(site.legalStatusAsOf >= EXTENSION_START,
+    "as-of date includes the Nov 11 effective continuation");
 });
 
 test("9 November: the No. 70 window is effective and the No. 58 window is scheduled, never effective", () => {

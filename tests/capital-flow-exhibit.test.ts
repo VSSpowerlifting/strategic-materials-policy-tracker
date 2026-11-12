@@ -282,7 +282,7 @@ test("the MP exhibit keeps status distinctions exact and follows the page's mark
   assert.match(markup, /<h2 id="capflow-title-evt-us-dod-mp-2025"/);
   assert.match(renderToStaticMarkup(createElement(CapitalFlowExhibit, { eventId: MP, headingLevel: 3 })), /<h3 id="capflow-title-/);
   assert.ok(text.includes("10 July 2025"));
-  assert.ok(text.includes(`Status of each line as of 8 November 2026`));
+  assert.ok(text.includes(`Status of each line as of 12 November 2026`));
 
   assert.ok(text.includes("Lapsed 26 Aug 2025. Not in force."));
   assert.ok(text.includes("no exercise recorded"));

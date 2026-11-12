@@ -5,6 +5,7 @@ import {
   type ExpectedPublicRelease,type PublicHttpFetcher,
 } from "../lib/production-release-parity";
 import {getAllProjectMilestones} from "../lib/data";
+import { site } from "../lib/site";
 import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III, PUBLIC_MILESTONE_PROJECT_IDS_AT_PHASE_III } from "./phase-iii-release-ids";
 
 const expected=()=>expectedPublicRelease();
@@ -33,7 +34,8 @@ test("read-only public parity checks the entire exported corpus and every actual
   const before=JSON.stringify(e);
   const r=await checkPublicReleaseParity(e,healthyHttp(e));
   assert.equal(r.status,"in_sync");
-  assert.equal(r.expectedCuratedCorpusCutoff,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(r.expectedCuratedCorpusCutoff,site.lastUpdated);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
   assert.equal(r.expectedPublishedMilestoneCount,PUBLIC_MILESTONE_IDS_AT_PHASE_III.length);
   assert.deepEqual(r.issues,[]);
   assert.deepEqual(r.checkedEndpoints,["/api/v1/project-milestones","/api/export/dataset.json",

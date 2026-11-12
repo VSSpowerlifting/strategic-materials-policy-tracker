@@ -18,9 +18,10 @@ test("each Phase III seed milestone equals its release-candidate proposal exactl
   }
 });
 
-test("the release candidate cutoff is the published cutoff and the deferrals stand", () => {
+test("the Phase III release candidate preserves its cutoff and deferrals after subsequent corpus releases", () => {
   assert.equal(candidate.proposedCorpusCutoff, PHASE_III_RELEASE_CUTOFF);
-  assert.equal(site.lastUpdated, PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+  assert.equal(site.lastUpdated,"2026-11-12");
   assert.equal(candidate.publishedCorpusCutoffAtPreparation, "2026-11-06");
   assert.ok(candidate.finalMaintainerAuthorization.excluded.includes("Stibnite financing-row date changes"));
   for (const r of candidate.sourceReviews) {
