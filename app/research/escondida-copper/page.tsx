@@ -93,9 +93,11 @@ export default function EscondidaCopper() {
                 </a>
                 <a
                   className="research-button-secondary"
-                  href="#question"
+                  href={`${fi002.assets}/report.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Read analysis <span>↓</span>
+                  Read online <span>→</span>
                 </a>
               </div>
               
