@@ -164,12 +164,11 @@ export default function ChinaSuspensionExtensionPage() {
     <div data-flush-footer>
       <section className="border-b border-border-strong">
         <Container width="wide" className="article-hero py-12 sm:py-20">
-          <Link
+          <a
             href="/research"
-            className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent"
-          >
+            className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
             ← Research
-          </Link>
+          </a>
           <p className="mt-8 font-display text-[0.8125rem] font-medium text-accent">Policy Research</p>
           <h1 className="article-title mt-4 text-foreground">
             {TITLE}
