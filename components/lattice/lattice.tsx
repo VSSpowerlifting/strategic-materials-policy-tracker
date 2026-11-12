@@ -74,7 +74,7 @@ function QueryControls({ model, query, update }: { model: LatticeModel; query: R
 }
 
 function QueryIssues({ query }: { query: ResearchQuery }) {
-  return query.issues.length ? <p role="status" className="my-4 border border-accent p-4 font-display text-sm">{query.issues.join(" ")} No records selected. <a href={typeof window === "undefined" ? "/" : window.location.pathname} className="underline">Reset analytical selection</a>.</p> : null;
+  return query.issues.length ? <p role="status" className="my-4 border border-accent p-4 font-display text-sm">{query.issues.join(" ")} Nothing selected. <a href={typeof window === "undefined" ? "/" : window.location.pathname} className="underline">Reset analytical selection</a>.</p> : null;
 }
 
 // --- Small shared pieces -------------------------------------------------------------------------
@@ -130,7 +130,7 @@ function LatticeTable({
       <table className="w-full border-collapse">
         <caption className="sr-only">
           Materials by supply-chain stage. Each marked cell counts the government commitments, control clauses and designations recorded at that material and stage,
-          each kind on its own. Select a marked cell to read its records.
+          each kind on its own. Select a marked cell to read its entries.
         </caption>
         <thead>
           <tr>
@@ -246,7 +246,7 @@ export function LatticeLegend({ model, className }: { model: LatticeModel; class
             <KindSwatch kind="commitments" />
             <KindSwatch kind="controls" />
           </span>
-          <span>Both at one stage. They sit side by side; the record does not link a clause to a financing.</span>
+          <span>Both at one stage. They sit side by side; SMPT does not link a clause to a financing.</span>
         </li>
         <li className="flex gap-3">
           <KindSwatch kind="designations" className="mt-1" />
@@ -255,7 +255,7 @@ export function LatticeLegend({ model, className }: { model: LatticeModel; class
       </ul>
       <div className="mt-4 flex items-center gap-4 text-[13px] text-muted">
         <AreaKey />
-        <span className="leading-5">Dot area is the number of records, never money or effectiveness.</span>
+        <span className="leading-5">Dot area is the number of entries, never money or effectiveness.</span>
       </div>
     </div>
   );
@@ -271,7 +271,7 @@ function SelectionPreview({ model, query }: { model: LatticeModel; query: Resear
   const project = first?.projects?.[0];
   return <div aria-live="polite" className="mt-5 border-t border-border-strong pt-4 font-display text-sm leading-6">
     <h3 className="font-semibold">{material.nameEn} × {stageLabel(model, query.selection.stage)}</h3>
-    <p className="mt-1 text-muted">{view ? cellSummary(view.counts) || "No counted records" : "No record at this cell under these filters"}.</p>
+    <p className="mt-1 text-muted">{view ? cellSummary(view.counts) || "Nothing counted" : "Nothing at this cell under these filters"}.</p>
     {first ? <Link href={first.href} className="mt-2 block text-accent underline underline-offset-4">Read a {first.kind === "control" ? "control clause" : first.kind === "designation" ? "designation" : "financial instrument"}</Link> : null}
     {project ? <Link href={project.href} className="mt-2 block text-accent underline underline-offset-4">Investigate {project.name}</Link> : null}
     <Link href={researchQueryHref(model, query, "/compare")} className="mt-2 block text-muted underline underline-offset-4">Compare this selection</Link>
@@ -287,7 +287,7 @@ export function LatticeOverview({ model, preferred, intro }: { model: LatticeMod
       <section className="min-w-0" aria-label="Materials by supply-chain stage">
         <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
           <h2 className="font-display text-base font-semibold">Materials by supply-chain stage</h2>
-          <span className="font-display text-xs text-muted">Select a marked cell to inspect its records</span>
+          <span className="font-display text-xs text-muted">Select a marked cell to inspect its entries</span>
         </div>
         <QueryControls model={model} query={query} update={update} />
         <QueryIssues query={query} />
@@ -295,7 +295,7 @@ export function LatticeOverview({ model, preferred, intro }: { model: LatticeMod
         <div className="lg:hidden"><LatticeKey model={model} /></div>
       </section>
     </div>
-    <p className="mt-5 max-w-4xl font-display text-xs leading-5 text-muted">A record can occupy several stages; rows and columns are never totalled. Empty cells describe the coded corpus, not an absence of government activity. <NotPlacedSentence gaps={model.gaps} /></p>
+    <p className="mt-5 max-w-4xl font-display text-xs leading-5 text-muted">An entry can occupy several stages; rows and columns are never totalled. Empty cells describe the coded corpus, not an absence of government activity. <NotPlacedSentence gaps={model.gaps} /></p>
     <div className="mt-7" id="selected-evidence"><RecordsPanel model={model} filter={query.filter} selection={query.selection} query={query} compact /></div>
   </>;
 }
@@ -318,7 +318,7 @@ function LatticeLegendCompact() {
       <li className="flex gap-2"><KindSwatch kind="commitments" className="mt-0.5" /> Government commitments not ended, a package once</li>
       <li className="flex gap-2"><KindSwatch kind="controls" className="mt-0.5" /> Control clauses, any status</li>
       <li className="flex gap-2"><KindSwatch kind="designations" className="mt-0.5" /> Designations: standing, not money</li>
-      <li className="flex items-start gap-2"><span aria-hidden className="mt-0.5 font-display text-xs text-faint">○ ◯</span> Area: number of records, never money</li>
+      <li className="flex items-start gap-2"><span aria-hidden className="mt-0.5 font-display text-xs text-faint">○ ◯</span> Area: number of entries, never money</li>
     </ul>
   );
 }
@@ -424,7 +424,7 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
       </h3>
       {v ? (
         <>
-          <p className="mt-1.5 text-sm leading-5 text-paper-muted">{cellSummary(v.counts) || "No counted records"}. Grouped by record type.</p>
+          <p className="mt-1.5 text-sm leading-5 text-paper-muted">{cellSummary(v.counts) || "Nothing counted"}. Grouped by type.</p>
           {v.counts.commitments ? (
             <>
               <PanelHeading kind="commitments" note="in their own currencies">
@@ -461,11 +461,11 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
           ) : null}
         </>
       ) : (
-        <p className="mt-3 text-sm leading-6 text-paper-muted">No record of the kinds and government now selected sits at this node. Change the filters above to see the others.</p>
+        <p className="mt-3 text-sm leading-6 text-paper-muted">Nothing of the kinds and government now selected sits at this node. Change the filters above to see the others.</p>
       )}
       {unVisible.length ? (
         <div className="mt-5 border-t border-paper-border pt-4">
-          <p className="font-display text-sm font-semibold">{material.nameEn}: records with no stage</p>
+          <p className="font-display text-sm font-semibold">{material.nameEn}: entries with no stage</p>
           <p className="mt-1 text-[13px] leading-5 text-paper-muted">These name this material but record no stage, so they are not on the lattice.</p>
           <ul className="mt-2 space-y-1.5 text-sm">
             {unVisible.map((r) => (
@@ -496,7 +496,7 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
   const rows = governmentRows(model, materialId, filter);
   const stages = model.stages.filter((s) => rows.some((r) => r.cells[s.id]));
   if (!rows.length)
-    return <p className="bg-background p-6 text-sm text-muted">No record of the kinds and government now selected is coded to this material at a stage.</p>;
+    return <p className="bg-background p-6 text-sm text-muted">Nothing of the kinds and government now selected is coded to this material at a stage.</p>;
   return (
     <>
       <ul className="divide-y divide-border bg-background px-4 py-1 md:hidden">
@@ -585,7 +585,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
           <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_22rem] xl:grid-cols-[1fr_24rem]">
             <div className="min-w-0">
               {nothingShown ? (
-                <p className="border border-border bg-plate p-6 text-sm text-muted">Every kind is turned off. Choose at least one above to see records placed on the lattice.</p>
+                <p className="border border-border bg-plate p-6 text-sm text-muted">Every kind is turned off. Choose at least one above to see entries placed on the lattice.</p>
               ) : (
                 <>
                   <LatticeTable model={model} filter={filter} selection={selection} onSelect={select} showCounts />
@@ -596,7 +596,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
                 <span className="inline-flex items-center gap-2"><KindSwatch kind="commitments" /> Government commitments not ended, a package once</span>
                 <span className="inline-flex items-center gap-2"><KindSwatch kind="controls" /> Clauses of any status, where covered items belong</span>
                 <span className="inline-flex items-center gap-2"><KindSwatch kind="designations" /> Designations: standing, not money</span>
-                <span className="text-faint">Numbers are record counts. A record at several stages appears at each; no row or column is totalled.</span>
+                <span className="text-faint">Numbers are counts of entries. An entry at several stages appears at each; no row or column is totalled.</span>
               </div>
             </div>
             <div className="hidden lg:block">
@@ -622,7 +622,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
             <div className="border-t border-paper-foreground/70 pt-8">
               <h2 className="font-display text-3xl font-semibold leading-tight">{material.nameEn} by government and stage</h2>
               <p className="mt-3 max-w-xl text-[15px] leading-7 text-paper-muted">
-                The same counts for one material, split by the government each record names: the providing government of a commitment, the issuer of a clause, the designating government of a
+                The same counts for one material, split by the government each entry names: the providing government of a commitment, the issuer of a clause, the designating government of a
                 designation.
               </p>
             </div>
@@ -632,7 +632,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
                 <div>
                   <h3 className="font-display text-sm font-semibold">Reading this view</h3>
                   <p className="mt-1 text-paper-muted">
-                    A government appears in the role its records give it, and can hold more than one. Counts are records, not money, and not a measure of how much a government has done.
+                    A government appears in the role its entries give it, and can hold more than one. Counts are entries, not money, and not a measure of how much a government has done.
                   </p>
                 </div>
                 <div>

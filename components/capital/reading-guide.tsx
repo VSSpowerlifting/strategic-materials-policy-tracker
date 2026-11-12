@@ -60,13 +60,13 @@ const keys={
   rows:[
    {term:"Direct financing reference",meaning:"A financial instrument has a registered project ID. Its value role and current legal status still determine whether any funding is a public commitment or paid."},
    {term:"Shared, unallocated association",meaning:"One instrument references several projects; its reported amount remains unallocated across them."},
-   {term:"Project designation",meaning:"A designation records official recognition or standing. Awards and disbursements use separate finance records."},
+   {term:"Project designation",meaning:"A designation records official recognition or standing. Awards and disbursements use separate financing entries."},
    {term:"Physical progress",meaning:"Company and government reports of construction, commissioning or operation are separate from funding; independently verified project milestones require their own source and editorial review."},
   ],
  },
  programmes:{
   title:"Programme finance",
-  intro:"A government scheme can have an authorized ceiling, individual finance records and designations. Each has a distinct role and counting basis.",
+  intro:"A government scheme can have an authorized ceiling, individual financing instruments and designations. Each has a distinct role and counting basis.",
   rows:[
    {term:valueRoleLabels.program_envelope,meaning:VALUE_ROLE_DEFS.program_envelope},
    {term:valueRoleLabels.lending_authority,meaning:VALUE_ROLE_DEFS.lending_authority},

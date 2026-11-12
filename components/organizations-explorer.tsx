@@ -121,13 +121,13 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
              </div>
              <p className="mt-2 font-display text-xs leading-5 text-faint">
                {[
-                 nonempty(o.providedRows,"provider record"),
-                 nonempty(o.receivedRows,"recipient record"),
+                 nonempty(o.providedRows,"financing instrument provided"),
+                 nonempty(o.receivedRows,"financing instrument received"),
                  nonempty(o.sponsoredProjects,"sponsored project"),
                  nonempty(o.administeredProgrammes,"administered programme"),
                  nonempty(o.heldDesignations,"designation held"),
                ].filter(Boolean).join(" · ") || "No finance/project/programme/designation role recorded"}
-               {o.endedRows?" · "+o.endedRows+" ended financial record"+(o.endedRows===1?"":"s"):""}
+               {o.endedRows?" · "+o.endedRows+" ended financing instrument"+(o.endedRows===1?"":"s"):""}
                {o.rolledUpOfficeIds.length?" · provider rows include "+o.rolledUpOfficeIds.length+" part-of office"+(o.rolledUpOfficeIds.length===1?"":"s"):""}
              </p>
            </div>)}

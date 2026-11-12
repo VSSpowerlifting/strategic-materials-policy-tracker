@@ -65,7 +65,7 @@ export function SupplyChainBand({ payload }: { payload: DossierPayload }) {
     <section id="supply-chain" className="scroll-mt-24">
       <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Supply chain, stage by stage</h2>
       <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
-        {payload.nameEn}&apos;s row of the lattice: what the record places at each stage. Counts are records per stage, never money; a record coded to several stages is counted at each, so the stages have no total. The last column holds records that name {payload.nameEn} and record no stage, so the lattice cannot place them.
+        {payload.nameEn}&apos;s row of the lattice: what is coded at each stage. Counts are entries per stage, never money; an entry coded to several stages is counted at each, so the stages have no total. The last column holds entries that name {payload.nameEn} and record no stage, so the lattice cannot place them.
       </p>
       <ul
         className="mt-4 grid gap-1 border border-border bg-plate p-2 lg:[grid-template-columns:repeat(var(--stages),minmax(0,1fr))]"
@@ -181,7 +181,7 @@ export function DesignationCard({ d }: { d: DesignationView }) {
       <p className="mt-1 text-xs leading-5 text-muted">Names: {d.materials.join(", ")}</p>
       {d.untracked.length ? <p className="mt-1 text-xs leading-5 text-muted">Also names: {d.untracked.join(", ")}, not a tracked material</p> : null}
       {d.registry.stageNote ? <p className="mt-1.5 text-xs leading-5 text-faint">{d.registry.stageNote}</p> : null}
-      {d.registry.untracked.length ? <p className="mt-1 text-xs leading-5 text-faint">Project record also names: {d.registry.untracked.join(", ")}, not a tracked material</p> : null}
+      {d.registry.untracked.length ? <p className="mt-1 text-xs leading-5 text-faint">The project entry also names: {d.registry.untracked.join(", ")}, not a tracked material</p> : null}
       {d.noStageReason ? <p className="mt-1 text-xs leading-5 text-faint">{d.noStageReason}</p> : null}
       {d.registry.locations.length || d.registry.sponsors.length ? <RegistryBlock registry={d.registry} /> : null}
     </li>
@@ -346,7 +346,7 @@ export function RecordsByStage({ payload }: { payload: DossierPayload }) {
                 </Link>
                 {p.locations.length ? <p className="mt-1 text-xs leading-5 text-muted">Locations: {p.locations.join("; ")}</p> : null}
                 {p.sponsors.length ? <p className="mt-1 text-xs leading-5 text-muted">Sponsors: {p.sponsors.join(", ")}</p> : null}
-                {p.stages.length ? <p className="mt-1 text-xs leading-5 text-faint">Project record codes: {p.stages.join(", ").toLowerCase()}. Registry stages, not placed on the supply-chain lattice.</p> : null}
+                {p.stages.length ? <p className="mt-1 text-xs leading-5 text-faint">Project entry codes: {p.stages.join(", ").toLowerCase()}. Registry stages, not placed on the supply-chain lattice.</p> : null}
                 {p.designatedElsewhere.length ? <p className="mt-1 text-xs leading-5 text-faint">Designated under {p.designatedElsewhere.join(", ")} for other materials.</p> : null}
                 {p.capitalRows.length ? (
                   <p className="mt-1 text-xs leading-5 text-muted">

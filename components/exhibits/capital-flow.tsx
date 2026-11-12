@@ -85,7 +85,7 @@ export function CapitalFlowExhibit({
                   {row.recipientText ? ` to ${row.recipientText}` : ""}. {row.status.text}. {row.reason}{" "}
                 </span>
                 <Link href={row.href} className="link-quiet">
-                  Commitment record
+                  Commitment details
                 </Link>
                 {row.sources.length ? (
                   <span className="text-muted">

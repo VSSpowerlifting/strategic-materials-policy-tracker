@@ -105,7 +105,7 @@ export function ProjectsExplorer({rows, materialNames}:{
       {active?<button type="button" onClick={reset} className="font-display text-xs text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
     </div>
     <details className="mt-1 max-w-4xl text-xs leading-5 text-faint">
-      <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden"><span className="link-quiet">Reading notes</span></summary>
+      <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden"><span className="link-quiet">What a result shows</span></summary>
       <p className="pb-2">
         One result is one registered project. Direct financing, shared unallocated associations and designations are
         separate evidence relationships, not additive capital or proof of construction. A project with no entry may

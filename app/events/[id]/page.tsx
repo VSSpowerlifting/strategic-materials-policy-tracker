@@ -271,7 +271,7 @@ export default async function EventPage({
               {recordedStatuses.map(({ measure, entry }) => (
                 <ControlLine key={`${measure.id}-${entry.status}`} m={summarizeControl(measure, site.legalStatusAsOf)}>
                   <FactNote>
-                    Records: {controlStatusLabels[entry.status].toLowerCase()}
+                    Status stated: {controlStatusLabels[entry.status].toLowerCase()}
                     {entry.date ? `, ${formatDate(entry.date)}` : ""}
                   </FactNote>
                 </ControlLine>
@@ -285,7 +285,7 @@ export default async function EventPage({
             id="designations"
             title="Projects recognized"
             count={designations.length}
-            description="Project designations confer standing under a scheme. Any financing appears in separate capital records."
+            description="Project designations confer standing under a scheme. Any financing appears separately under financing."
           >
             <RecordList>
               {designations.map((d) => (

@@ -6,7 +6,7 @@ import { buildSearchIndex } from "@/lib/search";
 export const metadata: Metadata = {
   title: "Search",
   description:
-    "Search strategic-material policy, finance, controls, projects, organizations, programmes and original sources by name, precise record ID and original-language text.",
+    "Search strategic-material policy, finance, controls, projects, organizations, programmes and original sources by name, precise ID and original-language text.",
 };
 
 export default function SearchPage() {

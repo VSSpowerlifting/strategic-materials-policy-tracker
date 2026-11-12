@@ -45,7 +45,7 @@ function CapitalRow({ row, materialName }: { row: CapitalRowView; materialName: 
       ) : null}
       <p className="mt-1.5">{row.amount ? <Money amount={row.amount} /> : <em className="text-faint">No amount stated</em>}</p>
       {row.asStated ? <AsStated text={row.asStated} /> : null}
-      {row.amountBasis ? <p className="text-xs leading-5 text-faint">Amount basis: {row.amountBasis.toLowerCase()}; see the record page for how it relates to reported figures.</p> : null}
+      {row.amountBasis ? <p className="text-xs leading-5 text-faint">Amount basis: {row.amountBasis.toLowerCase()}; see the financing page for how it relates to reported figures.</p> : null}
       <p className="mt-1 text-xs leading-5 text-muted">
         {row.instrument}. {row.status.text}.
       </p>
@@ -155,7 +155,7 @@ export function CapitalControls({ payload }: { payload: DossierPayload }) {
     <section id="capital-controls" className="scroll-mt-24">
       <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Capital and controls</h2>
       <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
-        Each capital row is shown at its own amount, in its own currency, exactly as the record states it. Nothing here adds up, splits or converts an amount, so a row that names several materials shows its whole amount and a part sits inside its package without being added again.
+        Each capital row is shown at its own amount, in its own currency, exactly as its source states it. Nothing here adds up, splits or converts an amount, so a row that names several materials shows its whole amount and a part sits inside its package without being added again.
       </p>
       <div className="mt-6 grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <div className="min-w-0 space-y-8" data-block="capital">

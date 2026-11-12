@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Coverage",
   description:
-    "The coded footprint of the dataset: source composition, framing-anchor coverage, per-actor counts and the research boundaries that limit what these figures can support. Source-linked record counts.",
+    "The coded footprint of the dataset: source composition, framing-anchor coverage, per-actor counts and the research boundaries that limit what these figures can support. Source-linked counts.",
 };
 
 function pct(s: Share): number | null {
@@ -58,7 +58,7 @@ export default function CoveragePage() {
     <Container className="py-12">
       <PageHeading
         title="Coverage"
-        lead="Corpus size, primary-source coverage and research gaps in the records currently in SMPT."
+        lead="Corpus size, primary-source coverage and research gaps in the data currently in SMPT."
       />
 
       <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
@@ -189,7 +189,7 @@ export default function CoveragePage() {
             <p className="mt-2 text-xs leading-5 text-faint">
               {s.citedSources.of - s.citedSources.count} registered
               {" "}source{s.citedSources.of - s.citedSources.count === 1 ? " has" : "s have"}
-              {" "}yet to be linked directly to a published record. This counts citation
+              {" "}yet to be linked directly to a published entry. This counts citation
               links within the registry; it is separate from independent corroboration.
             </p>
             <Link
@@ -203,7 +203,7 @@ export default function CoveragePage() {
           <div className="border-t border-border-strong pt-4">
             <h3 className="font-display font-semibold">Categorical coverage</h3>
             <p className="mt-2 text-sm leading-6 text-muted">
-              This page reports counts of coded records and documented source relationships.
+              This page reports counts of coded entries and documented source relationships.
               Categories retain their source-defined meaning. Comparing the scale of
               government activity requires a broader, consistently sampled dataset.
             </p>

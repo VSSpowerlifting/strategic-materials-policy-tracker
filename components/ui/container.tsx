@@ -95,20 +95,17 @@ export function PageHeading({
  * a reader does not need on first pass; never to hide a qualifier that changes how a visible figure reads.
  */
 /**
- * A long section description shows its first sentence; the counting rules and caveats that follow stay on the page
- * in a disclosure beneath it. Short descriptions and non-string nodes are shown whole.
+ * `description` is always shown whole: it carries the qualifiers a reader needs to interpret the section. `note`
+ * is an optional, page-authored disclosure for supplementary explanation, with a label that says what it holds
+ * ("Counting rules", "How days are counted"). Nothing is split automatically.
  */
-function splitDescription(description: React.ReactNode): { lead: React.ReactNode; rest: string | null } {
-  if (typeof description !== "string" || description.length <= 180) return { lead: description, rest: null };
-  const end = /(?<=[a-z0-9)”%])\.\s(?=[A-Z])/.exec(description);
-  if (!end) return { lead: description, rest: null };
-  return { lead: description.slice(0, end.index + 1), rest: description.slice(end.index + 2) };
-}
+export type SectionNote = { label: string; body: React.ReactNode };
 
 export function Section({
   id,
   title,
   description,
+  note,
   count,
   collapsed = false,
   children,
@@ -118,6 +115,7 @@ export function Section({
   title?: string;
   index?: string;
   description?: React.ReactNode;
+  note?: SectionNote;
   count?: number;
   collapsed?: boolean;
   children: React.ReactNode;
@@ -131,16 +129,15 @@ export function Section({
       ) : null}
     </h2>
   ) : null;
-  const { lead, rest } = splitDescription(description);
-  const desc = lead ? (
+  const desc = description || note ? (
     <>
-      <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{lead}</p>
-      {rest ? (
+      {description ? <p className="mt-1.5 max-w-3xl text-[0.9375rem] leading-7 text-muted">{description}</p> : null}
+      {note ? (
         <details className="max-w-3xl">
           <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden">
-            <span className="link-quiet">Reading notes</span>
+            <span className="link-quiet">{note.label}</span>
           </summary>
-          <p className="pb-2 text-sm leading-6 text-muted">{rest}</p>
+          <p className="pb-2 text-sm leading-6 text-muted">{note.body}</p>
         </details>
       ) : null}
     </>

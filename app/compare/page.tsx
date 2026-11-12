@@ -19,7 +19,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Compare government approaches",
   description:
-    "Compare documented policy approaches by material and government, inspect the records behind each count, and distinguish legal controls from financial support and official rationale.",
+    "Compare documented policy approaches by material and government, inspect the entries behind each count, and distinguish legal controls from financial support and official rationale.",
 };
 
 export default function ComparePage() {
@@ -96,7 +96,7 @@ export default function ComparePage() {
                 <p className="mt-3 text-sm leading-6 text-muted">
                   A legal clause is distinct from the broader event&apos;s
                   status. Read covered items, exemptions and the status history
-                  in the clause record.
+                  on the clause page.
                 </p>
                 <Link
                   href={`/controls/${control.id}`}
@@ -123,7 +123,7 @@ export default function ComparePage() {
                 </p>
                 <p className="mt-3 text-sm leading-6 text-muted">
                   This project-level instrument sits in the US–Australia
-                  framework record. Its published status is announced; execution
+                  framework entry. Its published status is announced; execution
                   and payment require later evidence. Offtake rights and US
                   support are recorded separately.
                 </p>

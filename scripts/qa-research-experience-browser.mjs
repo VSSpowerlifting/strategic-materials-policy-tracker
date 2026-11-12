@@ -343,10 +343,10 @@ try {
       await checkLayout(route);
     }
     await page.goto(base + "/?material=missing&stage=processing", { waitUntil: "networkidle" });
-    await page.getByRole("status").filter({ hasText: "No records selected" }).waitFor();
+    await page.getByRole("status").filter({ hasText: "Nothing selected" }).waitFor();
     assert.equal(await page.getByRole("complementary", { name: "Selected node" }).count(), 0);
     await page.goto(base + "/#gallium:exploration", { waitUntil: "networkidle" });
-    assert.match(await page.getByRole("complementary", { name: "Selected node" }).innerText(), /No record/);
+    assert.match(await page.getByRole("complementary", { name: "Selected node" }).innerText(), /Nothing (counted|of the kinds|at this cell)/);
     await page.goto(base + "/search?q=Wagerup+groundbreaking", { waitUntil: "networkidle" });
     const discovered = page.locator('[data-testid="search-results"] a[href="/projects/prj-au-alcoa-sojitz-gallium#project-industrial"]');
     await discovered.click();

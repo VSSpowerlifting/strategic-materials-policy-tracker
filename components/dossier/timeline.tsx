@@ -51,7 +51,7 @@ export function TimelineSection({ payload }: { payload: DossierPayload }) {
       </div>
       <p className="mt-3 text-sm leading-6 text-muted" data-future-note>
         {t.futureDates.length === 0
-          ? `No ${payload.nameEn.toLowerCase()} record states a date after the as-of.`
+          ? `No ${payload.nameEn.toLowerCase()} entry states a date after the as-of.`
           : `Dates stated after the as-of: ${t.futureDates.map((f) => `${formatDate(f.date)} (${f.source})`).join("; ")}.`}
       </p>
       <h3 className="mt-6 font-display text-xs text-faint">Newest events</h3>

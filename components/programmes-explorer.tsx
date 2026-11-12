@@ -12,7 +12,7 @@ const evidenceLabels={
  ceiling:"Stated ceiling/envelope",
  public_commitment:"Public-commitment row recorded",
  designation:"Project designation recorded",
- other:"Other financing record",
+ other:"Other financing",
  none:"No financing or designation recorded",
 };
 const lex=(a:string,b:string)=>a<b?-1:a>b?1:0;
@@ -107,7 +107,7 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
          {" · "}{p.designationCount} designation{p.designationCount===1?"":"s"}
         </p>
         {p.includesDescendants?<p>Counts include registered child-programme rows</p>:null}
-        <p className="pt-2"><Link href={"/programmes/"+p.id+"#research-pathway"} className="text-accent hover:underline">Trace records, organizations, projects & sources</Link></p>
+        <p className="pt-2"><Link href={"/programmes/"+p.id+"#research-pathway"} className="text-accent hover:underline">Trace financing, organizations, projects & sources</Link></p>
        </div>
       </Card>
      </div>)}

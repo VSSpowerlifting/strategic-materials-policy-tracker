@@ -162,8 +162,8 @@ export default function MarketsPage() {
           <p className="mt-5 max-w-4xl text-[0.9375rem] leading-7 text-muted">
             Figures are period averages or unit values in US dollars, as each source publishes them; the USGS labels its
             lithium carbonate price “annual average-real” without stating a deflator or base year. Percentage changes,
-            indexed values and rankings are SMPT calculations, with no interpolation or unit conversion. Prices sit outside
-            the policy record, and a shared date does not show that a measure moved a price.
+            indexed values and rankings are SMPT calculations, with no interpolation or unit conversion. Prices are not linked to
+            policy actions or financing, and a shared date does not show that a measure moved a price.
           </p>
         </Section>
 

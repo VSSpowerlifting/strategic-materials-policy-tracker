@@ -72,7 +72,7 @@ export default function CapitalPage() {
         lead={
           <>
             Public financing, investment and purchase guarantees for strategic-material supply chains.
-            Amounts and legal status follow the cited records.
+            Amounts and legal status follow the cited sources.
           </>
         }
       />

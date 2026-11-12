@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!source) return { title: "Source not found" };
   return {
     title: source.title + " — source dossier",
-    description: "Original publisher citation and directly source-linked policy, financial, control and project records in the curated SMPT corpus.",
+    description: "Original publisher citation and directly source-linked policy, financial, control and project entries in the curated SMPT corpus.",
   };
 }
 
@@ -51,7 +51,7 @@ export default async function SourceDossierPage({
       </div>
 
       <div className="mt-8 max-w-4xl border-l-2 border-border-strong pl-4 text-sm leading-6 text-muted">
-        <strong className="font-semibold text-foreground">{uses.length} directly citing record{uses.length === 1 ? "" : "s"}.</strong>{" "}
+        <strong className="font-semibold text-foreground">{uses.length} directly citing {uses.length === 1 ? "entry" : "entries"}.</strong>{" "}
         Each reference supports the specific fields or observations recorded at its locator. Agreement, payment and physical-progress evidence retain separate classifications. Pending editorial research stays outside the public register.
       </div>
 
@@ -61,7 +61,7 @@ export default async function SourceDossierPage({
             <Section
               key={group.kind}
               title={SOURCE_USE_LABELS[group.kind]}
-              description={group.uses.length + " distinct published record" + (group.uses.length === 1 ? "" : "s") + " with an explicit reference to this source."}
+              description={group.uses.length + " distinct published " + (group.uses.length === 1 ? "entry" : "entries") + " with an explicit reference to this source."}
             >
               <ol className="divide-y divide-border border-y border-border-strong">
                 {group.uses.map(use => (
@@ -81,7 +81,7 @@ export default async function SourceDossierPage({
         </div>
       ) : (
         <p className="mt-10 max-w-prose text-sm leading-7 text-muted">
-          This source is registered but has yet to receive a direct citation from a published record.
+          This source is registered but has yet to receive a direct citation from a published entry.
           Related policy or project findings require their own source-backed admission.
         </p>
       )}

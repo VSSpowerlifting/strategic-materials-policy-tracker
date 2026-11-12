@@ -9,7 +9,7 @@ export const site = {
   tagline:
     "Comparative economic-security research on strategic-material policy and implementation.",
   description:
-    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked records.",
+    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked evidence.",
   version: "v0.6-capital-intelligence",
   /**
    * The frozen Phase III / F5 research-snapshot date (the corpus cutoff the pinned milestone, F5 and

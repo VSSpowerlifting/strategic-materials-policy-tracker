@@ -96,7 +96,7 @@ export function ControlStatusChart({
         >
           <title id="ctl-chart-title">Legal status of each control clause over time</title>
           <desc id="ctl-chart-desc">
-            {`${rows.length} clauses from ${formatDate(from)} to ${formatDate(to)}. Each bar is coloured by status; dashed tails run to a stated end date. As of ${formatDate(asOf)}. Each row links to its clause; the filterable list below gives the same records as text.`}
+            {`${rows.length} clauses from ${formatDate(from)} to ${formatDate(to)}. Each bar is coloured by status; dashed tails run to a stated end date. As of ${formatDate(asOf)}. Each row links to its clause; the filterable list below gives the same clauses as text.`}
           </desc>
           {years(from, to).map((y) => (
             <g key={y}>

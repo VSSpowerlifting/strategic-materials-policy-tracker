@@ -113,7 +113,7 @@ export function StageResponseMap({ asOf }: { asOf: string }) {
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full border border-dashed border-faint" /> withdrawn or lapsed rows: not capital</span>
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rotate-45 border border-mark-designation" /> project designations (standing, not money)</span>
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 bg-mark-control" /> control clauses whose covered items sit here</span>
-        <span>Letters: the governments providing or issuing. Hover or focus a count for record ids and statuses.</span>
+        <span>Letters: the governments providing or issuing. Hover or focus a count for ids and statuses.</span>
       </p>
     </div>
   );

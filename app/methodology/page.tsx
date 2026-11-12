@@ -177,7 +177,7 @@ export default function MethodologyPage() {
     <Container className="py-12">
       <PageHeading
         title="Methodology"
-        lead="How records are sourced, translated, classified and counted, and what the evidence does not establish."
+        lead="How entries are sourced, translated, classified and counted, and what the evidence does not establish."
       />
 
       <section aria-labelledby="reading-evidence" className="mt-8 border-b border-border-strong pb-6">
@@ -232,7 +232,7 @@ export default function MethodologyPage() {
               <Link href="/markets" className="link-quiet">
                 Markets
               </Link>{" "}
-              page, as each publisher releases them. They are not part of the record
+              page, as each publisher releases them. They are not part of the policy data
               and are not linked to individual measures.
             </p>
             <p>
@@ -246,10 +246,10 @@ export default function MethodologyPage() {
             <p>
               Scope is deliberately bounded: {summary.jurisdictions} actors, a
               rare-earth-centred material set, and events from {site.scopeStart}{" "}
-              forward. The bounded sample supports direct source verification for each record. Some records carry
+              forward. The bounded sample supports direct source verification for each entry. Some entries carry
               no material at all: a framework statute names none of its own, and an
               instrument may name minerals that fall outside this material set. Both
-              are recorded as an empty scope and said so on the record, rather than
+              are recorded as an empty scope and said so on the entry, rather than
               being filled in from the measures issued under them.
             </p>
 
@@ -272,7 +272,7 @@ export default function MethodologyPage() {
                 one operative clause of an export, import, investment or domestic
                 control. Commodity-market forecasts are handled separately from the policy tracker.
               </p>
-              <Disclosure label="Record model and field rules">
+              <Disclosure label="Data model and field rules">
               <ul className="space-y-2 text-muted">
                 <li>
                   · Original currency is authoritative. An amount is kept as the
@@ -320,7 +320,7 @@ export default function MethodologyPage() {
                 <li>
                   · A control clause whose status differs from the rest of its
                   instrument — one limb in force, another suspended — is recorded on
-                  its own, so one record never hides a conflict.
+                  its own, so one entry never hides a conflict.
                 </li>
                 <li>
                   · There is no synthetic economic-security score, index or ranking,
@@ -365,12 +365,12 @@ export default function MethodologyPage() {
               <Disclosure label="Registry and derivation rules">
               <ul className="space-y-2 text-muted">
                 <li>
-                  · Registry records are factual claims like any other. An
+                  · Registry entries are factual claims like any other. An
                   organization&apos;s name, kind, country, government and parent bodies
                   each name the source that states them.
                 </li>
                 <li>
-                  · A renamed body keeps one record and lists its other names, so its
+                  · A renamed body keeps one entry and lists its other names, so its
                   portfolio does not split in two.
                 </li>
                 <li>
@@ -380,7 +380,7 @@ export default function MethodologyPage() {
                   public share of it is not stated.
                 </li>
                 <li>
-                  · A registry record holds no money. Capital stacks, portfolios,
+                  · A registry entry holds no money. Capital stacks, portfolios,
                   co-investment and flows are derived from the financial rows under the
                   same counting rules, one value role at a time and one currency at a
                   time. There is no grand stack total, no public-share percentage, no
@@ -414,8 +414,8 @@ export default function MethodologyPage() {
           <section className="space-y-3">
             <H2 id="sources">Source hierarchy</H2>
             <p>
-              Records are graded by a four-tier confidence hierarchy, shown as a badge
-              on every source. Higher tiers are preferred; where a record currently
+              Entries are graded by a four-tier confidence hierarchy, shown as a badge
+              on every source. Higher tiers are preferred; where an entry currently
               rests on a lower tier, that is visible in the badge, and upgrading it is
               tracked work.
             </p>
@@ -449,7 +449,7 @@ export default function MethodologyPage() {
               Sources are cited in their original language, with an English
               translation where the issuing body does not publish its own. Every
               source is labelled with its provenance and a confidence level — the
-              four tiers set out above — so the basis for each record is visible.
+              four tiers set out above — so the basis for each entry is visible.
             </p>
             <p>
               Coverage is multi-actor by design: it follows the whole contest across
@@ -606,7 +606,7 @@ export default function MethodologyPage() {
                 allocated child rows can be recorded as parts of the package instead.
               </li>
               <li>
-                · <strong className="text-foreground">Record counts fold a part only where its package covers it.</strong>{" "}
+                · <strong className="text-foreground">Counts fold a part only where its package covers it.</strong>{" "}
                 A part is counted inside its package, so one deal counts once, but only in a count where the
                 package is counted too. Stage and material counts in a portfolio, and the stage response
                 map and the material matrix, work cell by cell: a part is counted at a stage or material its

@@ -201,7 +201,7 @@ function FlowFacts({ flow, asOfLabel }: { flow: CapitalFlow; asOfLabel: string }
       <Fact label="Kind">
         {flow.classLabel}
         {flow.equityInterest ? ", with an equity interest" : ""}.{" "}
-        {flow.flowClass === "ended" ? "Shown for the record only." : flow.remark}
+        {flow.flowClass === "ended" ? "Shown for completeness." : flow.remark}
       </Fact>
       <Fact label="Instrument">
         {flow.instrumentLabel}. Recorded as: {flow.valueRoleLabel.toLowerCase()}. Capital source: {flow.capitalSourceLabel.toLowerCase()}.
@@ -388,7 +388,7 @@ function PartyPanel({ party, flows }: { party: CapitalFlowParty; flows: readonly
         ))}
         <li className="py-2">
           <Link href={party.href} className="link-quiet font-display text-sm">
-            Organization record
+            Organization details
           </Link>
         </li>
       </ul>
@@ -462,7 +462,7 @@ export function CapitalFlowInteractive({
           </p>
           {hasUses ? (
             <p className="label hidden border-b border-border-strong pb-2 @5xl:block" style={{ gridColumn: 4, gridRow: 1 }}>
-              Project named in the record
+              Project named in the source
             </p>
           ) : null}
 
@@ -585,7 +585,7 @@ export function CapitalFlowInteractive({
 
         <div className="mt-6 min-h-40 border-t border-border-strong pt-4">
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <Sub className="label">Selected record</Sub>
+            <Sub className="label">Selected</Sub>
             {pinned ? (
               <button
                 type="button"
@@ -614,8 +614,8 @@ export function CapitalFlowInteractive({
             </div>
           ) : (
             <p className="mt-2 max-w-2xl font-display text-sm leading-6 text-muted">
-              Select a line or an organization to read its record here.
-              {density === "full" ? " Every record is also listed under All flows." : null}
+              Select a line or an organization to read its details here.
+              {density === "full" ? " Every flow is also listed under All flows." : null}
             </p>
           )}
         </div>

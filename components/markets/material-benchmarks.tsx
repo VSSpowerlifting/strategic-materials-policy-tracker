@@ -25,7 +25,7 @@ export function MaterialBenchmarks({ materialId }: { materialId: string }) {
         <Link href="/markets" className="link-quiet text-foreground">
           market-data layer
         </Link>
-        . They are not linked to the records above, and a shared date does not show that a measure moved a price.
+        . They are not linked to the policy actions and financing above, and a shared date does not show that a measure moved a price.
       </p>
       <ul className="mt-5 border-t border-border">
         {series.map((s) => {

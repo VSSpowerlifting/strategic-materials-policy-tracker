@@ -175,7 +175,7 @@ export const FLOW_CLASS_DESCRIPTIONS: Record<FlowClass, string> = {
   contingent: "No money is committed unless an option is exercised, a trigger is met or a binding agreement follows.",
   commercial: "A purchase, offtake or supply term. No capital is provided.",
   not_public: "Private financing or the recipient's own money. Not public support.",
-  ended: "Lapsed or withdrawn. Shown for the record only.",
+  ended: "Lapsed or withdrawn. Shown for completeness.",
   status_not_stated: "The record gives no status, so the row is not read as live.",
   reference: "Listed apart. Not a payment to a recipient.",
 };

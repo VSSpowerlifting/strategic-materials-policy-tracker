@@ -83,8 +83,8 @@ const KIND_LABELS: Record<CitedKind, string> = {
   designation: "designation",
   project: "project",
   framing_claim: "framing claim on an event",
-  material_record: "material record",
-  registry_record: "registry record",
+  material_record: "material entry",
+  registry_record: "registry entry",
 };
 
 function CitedBy({ citedBy }: { citedBy: SourceCitation["citedBy"] }) {
@@ -140,7 +140,7 @@ export function RelatedSection({ payload }: { payload: DossierPayload }) {
   const r = payload.related;
   return (
     <section id="related" className="scroll-mt-24">
-      <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Cited by these records</h2>
+      <h2 className="border-b border-border pb-2 font-display text-xl font-semibold">Cited by</h2>
       <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">Programmes, organizations and sources named by the events and rows above. Lists show the first five; the rest are behind the disclosure.</p>
       <div className="mt-5 grid gap-8 md:grid-cols-2">
         <div>
@@ -159,7 +159,7 @@ export function RelatedSection({ payload }: { payload: DossierPayload }) {
       <div className="mt-8">
         <h3 className="font-display text-base font-semibold">Sources ({r.sources.length})</h3>
         <p className="mt-1 text-xs leading-5 text-faint">
-          Sources cited by the events, by every capital row, control clause, designation and project naming {payload.nameEn}, by framing claims on those events, and by the material record. Registry evidence for organizations and programmes is not counted.
+          Sources cited by the events, by every capital row, control clause, designation and project naming {payload.nameEn}, by framing claims on those events, and by the material entry. Registry evidence for organizations and programmes is not counted.
         </p>
         <div className="mt-3">
           <FoldedList

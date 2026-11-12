@@ -34,8 +34,8 @@ export default function ProjectComparisonPage() {
     </div>
     <p className="mt-8 max-w-prose text-sm leading-7 text-muted">
       This comparison draws on the published SMPT project register. It is not
-      a causal policy evaluation or a dollar ranking. Open the linked project, financial and
-      source records to check what each original publisher establishes.{" "}
+      a causal policy evaluation or a dollar ranking. Open the linked project, financing and
+      source pages to check what each original publisher establishes.{" "}
       <Link href="/methodology" className="link-quiet">Methodology</Link>.
     </p>
   </Container>;

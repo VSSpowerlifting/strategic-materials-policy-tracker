@@ -129,7 +129,7 @@ export default function IndustrialResponsePage() {
       />
       <p className="mt-5 font-display text-xs leading-5 text-faint">
         Corpus revision: {formatDateLong(model.asOf)} · Financial standing evidenced by that date ·
-        Physical status from the latest source-linked record
+        Physical status from the latest source-linked entry
       </p>
 
       <dl className="fact-grid mt-10">
@@ -192,7 +192,7 @@ export default function IndustrialResponsePage() {
             <strong className="font-semibold text-foreground">Reported physical activity</strong>{" "}
             {model.reportedExecutionProjects} projects have an implementation entry at construction or later;
             {model.strictExecutionProjects} meet a stricter construction-evidence standard, excluding{" "}
-            {model.exceptionalActivityProjects} funded-activity completion records that require separate evidence
+            {model.exceptionalActivityProjects} funded-activity completion entries that require separate evidence
             of facility construction.
           </p>
           <p>
@@ -233,7 +233,7 @@ export default function IndustrialResponsePage() {
       </Section>
 
       <Section title="Project evidence register" className="mt-14"
-        description="Each project and status links to its supporting records. Financial entries are evaluated as of the corpus revision; physical entries are the latest recorded in this dataset revision.">
+        description="Each project and status links to its supporting evidence. Financial entries are evaluated as of the corpus revision; physical entries are the latest recorded in this dataset revision.">
         <div className="space-y-9">
           {model.matrix.filter((cell) => cell.projects.length).map((cell) => (
             <div key={cell.key} id={`cell-${cell.key.replace("|", "-")}`} className="scroll-mt-24">
@@ -382,11 +382,11 @@ export default function IndustrialResponsePage() {
         </div>
       </Section>
 
-      <Section title="Binding finance without a construction record" className="mt-14"
+      <Section title="Binding finance without recorded construction" className="mt-14"
         description={`${exec.executionGaps.length} projects hold a binding government instrument but no construction-or-later entry; ${exec.fundedGaps.length} of them record partial or full disbursement. A missing entry is a research gap, not evidence that work has stalled.`}>
         <div className="overflow-x-auto border-y border-border-strong bg-plate">
           <table className="w-full min-w-[40rem] text-sm">
-            <caption className="sr-only">Projects with binding government finance and no construction-or-later record</caption>
+            <caption className="sr-only">Projects with binding government finance and no construction-or-later entry</caption>
             <thead className="border-b bg-elevated text-left font-display text-xs text-faint">
               <tr>
                 <th scope="col" className="px-4 py-3 font-normal">Project</th>
@@ -429,7 +429,7 @@ export default function IndustrialResponsePage() {
           <div className="border-t border-border-strong pt-4 text-sm leading-7 text-muted">
             <p className="font-display text-base font-semibold text-foreground">Excluded from the denominator</p>
             <p className="mt-2">
-              The denominator excludes designation-only records, private finance,
+              The denominator excludes designation-only entries, private finance,
               non-binding indications, programme ceilings, unknown legal recipients,
               and shared financing associations lacking a project-level allocation. {model.associatedButNotAllocatedLinks} project associations are
               kept outside the direct-financing denominator; {model.projectlessGovernmentRows} government commitment

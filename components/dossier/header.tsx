@@ -56,7 +56,7 @@ export function DossierHeader({ payload }: { payload: DossierPayload }) {
         </p>
       ) : null}
 
-      <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border sm:grid-cols-3 lg:grid-cols-4" aria-label={`${payload.nameEn} record counts`}>
+      <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border sm:grid-cols-3 lg:grid-cols-4" aria-label={`${payload.nameEn} counts`}>
         {payload.stats.map((s) => (
           <div key={s.key} className="bg-plate p-4" data-stat={s.key}>
             <dt className="font-display text-xs text-muted">{s.label}</dt>

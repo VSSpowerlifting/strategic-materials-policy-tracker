@@ -35,7 +35,7 @@ export function InterplayChronologyList({ from = CHRONOLOGY_FROM, to = CHRONOLOG
               <summary className="scroll-mt-10 cursor-pointer py-1">
                 <h3 className="inline font-display text-lg font-semibold">{jurisdictionLabels[j]}</h3>
                 <span className="ml-3 font-display text-xs text-muted">
-                  {records} {records === 1 ? "record" : "records"}, {changes} status {changes === 1 ? "change" : "changes"}
+                  {records} {records === 1 ? "entry" : "entries"}, {changes} status {changes === 1 ? "change" : "changes"}
                 </span>
               </summary>
               <div className="mt-3 grid gap-x-8 gap-y-5 lg:grid-cols-2">

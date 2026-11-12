@@ -115,10 +115,10 @@ test("tungsten renders its stage focus target in the records, with the hemerdon 
   const body = text(markup);
   assert.ok(markup.includes('id="stage-processing"'));
   assert.ok(body.includes("Decided, date not stated"));
-  assert.ok(body.includes("Project record codes: mining, processing. Not placed here; this designation names mining only."));
+  assert.ok(body.includes("Project entry codes: mining, processing. Not placed here; this designation names mining only."));
   assert.ok(body.includes("Part: Equity, GBP 36 million; not added again"));
   assert.ok(body.includes("names 13 materials; the amount is not divided"));
-  assert.ok(body.includes("No tungsten record states a date after the as-of."));
+  assert.ok(body.includes("No tungsten entry states a date after the as-of."));
   assert.ok(body.includes("None recorded at: Separation, Component manufacturing"));
   assert.ok(!body.includes("every record whose source names"));
 });
@@ -127,7 +127,7 @@ test("the future-date note is replaced by the dates when there are some", () => 
   const data = seedData();
   const fixture: DossierData = { ...data, commitments: data.commitments.map((c) => (c.id === "fin-jp-jogmec-almt-tungsten-grant" ? { ...structuredClone(c), financialStatusHistory: [...c.financialStatusHistory, { status: "contracted" as const, date: "2027-02-01", sourceId: c.financialStatusHistory[0].sourceId }] } : c)) };
   const body = text(html(payload("tungsten", fixture)));
-  assert.ok(!body.includes("No tungsten record states a date after the as-of."));
+  assert.ok(!body.includes("No tungsten entry states a date after the as-of."));
   assert.ok(body.includes("Dates stated after the as-of: 1 Feb 2027"));
 });
 

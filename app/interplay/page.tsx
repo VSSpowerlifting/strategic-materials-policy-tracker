@@ -98,12 +98,14 @@ export default function InterplayPage() {
 
         <Section
           title="Material by supply-chain stage"
-          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. A clause's stage is where its items belong (separation technology sits at separation), not a claim that it restricts that stage; clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed. Counts are of recorded instruments.`}
+          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. Counts are of recorded instruments. A clause's stage is where its items belong, not a claim that it restricts that stage.`}
+          note={{ label: "Clauses not placed", body: "Separation technology sits at separation. Clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed." }}
         >
           <StageResponseMap asOf={asOf} />
         </Section>
 
-        <Section title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. A part is folded into its package only when that package is listed here in the same state; a row that withdrew or lapsed is marked ended and never hides a part that still stands.">
+        <Section title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. A row that withdrew or lapsed is marked ended."
+          note={{ label: "How packages are folded", body: "A part is folded into its package only when that package is listed here in the same state. An ended row never hides a part that still stands." }}>
           <div className="grid gap-x-8 gap-y-10 lg:grid-cols-2">
             {materials.map((m) => (
               <div key={m.id} className="border-t border-border-strong pt-4">

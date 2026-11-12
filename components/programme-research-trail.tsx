@@ -43,7 +43,7 @@ export function ProgrammeResearchTrail({trail}:{trail:ProgrammeTrail}){
     Follow this scheme to each independently recorded financial or designation row, named bodies,
     project references, and the documents cited by that exact row. Connections are navigational
     registry references, not a claim that capital was disbursed, a company obtained funding,
-    or physical work occurred. Records under a child scheme appear in parent views as the
+    or physical work occurred. Entries under a child scheme appear in parent views as the
     same underlying IDs, never as additional commitments.
    </p>
   </div>
@@ -61,14 +61,14 @@ export function ProgrammeResearchTrail({trail}:{trail:ProgrammeTrail}){
   <Card className="p-4">
    <p className="font-display text-xs font-semibold text-muted">Programme identity</p>
    <p className="mt-2 text-sm text-muted">
-    Source-named administrator: <LinkedEntities items={trail.administrators} empty="Not named in registered source records"/>
+    Source-named administrator: <LinkedEntities items={trail.administrators} empty="Not named in registered sources"/>
    </p>
    <div className="mt-2"><SourceLinks sources={trail.programmeSources}/></div>
   </Card>
   <div>
-   <h3 className="font-display text-xl font-semibold">Financial record pathways</h3>
+   <h3 className="font-display text-xl font-semibold">Financing pathways</h3>
    <p className="mt-1 text-xs leading-5 text-muted">
-    All value roles are included, including ceilings, prospective commitments, options, and ended records.
+    All value roles are included, including ceilings, prospective commitments, options, and ended instruments.
     No numbers are added here; legal standing belongs to each underlying instrument.
    </p>
    {trail.finance.length?<ol className="mt-3 space-y-3">
@@ -86,7 +86,7 @@ export function ProgrammeResearchTrail({trail}:{trail:ProgrammeTrail}){
       <p className="mt-1 text-sm text-foreground">{row.amountAsStated??"Amount not stated"}</p>
       {row.inheritedFromChild?<p className="mt-2 text-xs text-muted">
        Recorded under child programme: <Link href={row.programme.href} className="text-accent hover:underline">{row.programme.name}</Link>
-       {" "}· identical record, not additional funding
+       {" "}· same instrument, not additional funding
       </p>:null}
       <dl className="mt-3 grid gap-x-4 gap-y-2 text-xs leading-5 sm:grid-cols-2">
        <div>
@@ -140,7 +140,7 @@ export function ProgrammeResearchTrail({trail}:{trail:ProgrammeTrail}){
   <p className="text-xs leading-5 text-faint">
    Source links identify explicit citations to the displayed programme, financial row or designation,
    not proof that a source independently validates every claim about its project or recipients.
-   For financial allocations, see each instrument&apos;s record and the existing capital-stack counting rules.
+   For financial allocations, see each instrument&apos;s page and the existing capital-stack counting rules.
   </p>
  </div>;
 }

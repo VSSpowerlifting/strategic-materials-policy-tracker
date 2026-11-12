@@ -95,7 +95,9 @@ and API fields) keep "record".
 
 Progressive disclosure: show the fact a reader scans for (name, status, date, licence) and put rules, caveats
 and provenance in a native `<details>` directly beneath it. Say a shared rule once above a list instead of in
-every entry. `Section` does this for long descriptions (first sentence, then "Reading notes"). Never drop an
+every entry. Nothing is split automatically: a `Section` description is shown whole and carries the qualifiers
+that change how a figure, status, period or calculation reads; supplementary explanation goes in its `note`
+prop under a label that says what it holds ("Counting rules", "How days are counted"). Never drop an
 attribution, licence notice, status distinction or caveat to save space.
 
 ## Status and remaining work (11 November 2026)

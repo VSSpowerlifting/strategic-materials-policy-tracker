@@ -37,7 +37,7 @@ export default function WatchlistPage() {
         <ul className="mt-3 space-y-2 text-sm leading-6 text-muted">
           <li>
             An entry identifies an official publication venue selected for review.
-            The policy measures themselves appear in the source-linked event records.
+            The policy measures themselves appear in the source-linked policy actions.
           </li>
           <li>
             Cadence states the project&apos;s planned review interval, separate from
@@ -48,7 +48,7 @@ export default function WatchlistPage() {
               <>Prospective monitoring began {site.monitoringStartedAt}.</>
             ) : (
               <>
-                The current records were collected retrospectively. Prospective
+                The current entries were collected retrospectively. Prospective
                 monitoring awaits a recorded start date; review dates and
                 publication-lag measures will be available after that start.
               </>
@@ -68,7 +68,7 @@ export default function WatchlistPage() {
           <p className="mt-2 text-sm leading-6 text-muted">
             The tracker publishes events for{" "}
             {gaps.map((g) => jurisdictionLabels[g.jurisdiction]).join(", ")} and currently lists no active-review source for those jurisdictions.
-            The published records there were researched retrospectively.
+            The published entries there were researched retrospectively.
           </p>
         </div>
       ) : null}
@@ -92,11 +92,11 @@ export default function WatchlistPage() {
       </div>
 
       <p className="mt-12 max-w-prose text-sm leading-6 text-muted">
-        Documents actually cited by a published record live in the{" "}
+        Documents actually cited by a published entry live in the{" "}
         <Link href="/sources" className="link-quiet">
           source register
         </Link>
-        . How records move from a watched source to a published event is set out on the{" "}
+        . How entries move from a watched source to a published event is set out on the{" "}
         <Link href="/methodology" className="link-quiet">
           methodology page
         </Link>

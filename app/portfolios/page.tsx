@@ -117,7 +117,7 @@ export default function PortfoliosPage() {
         lead={
           <>
             Committed money is grouped by currency and binding status; the remaining
-            measures count records. Comparing financing scale across currencies
+            measures count instruments. Comparing financing scale across currencies
             requires a separate consistent basis.
           </>
         }
@@ -136,7 +136,7 @@ export default function PortfoliosPage() {
                     <JurisdictionTag code={p.actor} withName />
                   </Link>
                   <span className="font-display text-xs text-faint">
-                    {p.counts.rows} records{p.counts.ended ? ` · ${p.counts.ended} ended` : ""}
+                    {p.counts.rows} instruments{p.counts.ended ? ` · ${p.counts.ended} ended` : ""}
                   </span>
                 </div>
                 <CurrencyTotals totals={p.publicTotals} compact />
@@ -158,7 +158,8 @@ export default function PortfoliosPage() {
 
         <Section
           title="What each portfolio is made of"
-          description={`Counts of records, never money. Rows, value role, instrument, legal standing and geography count a package with its parts once; stage and material count per cell, so a part is counted at a stage or material its package does not list and never again where the package lists it. Instrument, stage and material hold every value role except funding options and non-binding indications (commitments, envelopes, appropriations, private financing and the rest); legal standing and geography hold committed rows only. A row that withdrew or lapsed is not capital and is counted only as ended; a funding option is counted in its own value role and nowhere else, since it is a right to call on money and not an exercise, and so is a non-binding indication, which is possible support and not a commitment. At home or abroad is read from each committed row's stated location or its project's, against the provider's home territory (the member states for the EU). Data as of ${site.lastUpdated}.`}
+          description={`Counts of instruments, never money. Withdrawn or lapsed rows are counted only as ended; funding options and non-binding indications are counted only in their own value role. Data as of ${site.lastUpdated}.`}
+          note={{ label: "Counting rules", body: "Rows, value role, instrument, legal standing and geography count a package with its parts once; stage and material count per cell, so a part is counted at a stage or material its package does not list and never again where the package lists it. Instrument, stage and material hold every value role except funding options and non-binding indications (commitments, envelopes, appropriations, private financing and the rest); legal standing and geography hold committed rows only. A row that withdrew or lapsed is not capital and is counted only as ended; a funding option is counted in its own value role and nowhere else, since it is a right to call on money and not an exercise, and so is a non-binding indication, which is possible support and not a commitment. At home or abroad is read from each committed row's stated location or its project's, against the provider's home territory (the member states for the EU)." }}
         >
           <CountTable
             actors={actors}
@@ -308,7 +309,8 @@ export default function PortfoliosPage() {
         {designators.length ? (
           <Section
             title="Project designations"
-            description="Projects a government recognizes under a designation scheme. Designation standing is tracked separately from financial commitments. At home or abroad is read from the designated project's stated country against the designating government's home territory."
+            description="Projects a government recognizes under a designation scheme. Designation standing is tracked separately from financial commitments."
+            note={{ label: "How home and abroad are read", body: "At home or abroad is read from the designated project's stated country against the designating government's home territory." }}
           >
             <div className="space-y-4">
               {designators.map((d) => {

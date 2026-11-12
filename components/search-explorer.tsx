@@ -298,8 +298,8 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               Matching is exact substring, not fuzzy — <span className="font-mono">No. 61</span> and{" "}
               <span className="font-mono">No. 62</span> are different instruments, so a near-miss is
               worse than no match. Original-language text is indexed in its own script; searching{" "}
-              <span className="font-mono">稀土</span> works. Actor filters only match records
-              assigned a tracked government; source and project records are not assigned an actor.
+              <span className="font-mono">稀土</span> works. Actor filters only match entries
+              assigned a tracked government; sources and projects are not assigned an actor.
               Mechanism filters apply to events and watched sources, not finance or projects.
             </p>
           </details>
@@ -354,9 +354,9 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
             <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
               Nothing in the corpus satisfies every term and filter together. This is a bounded
               database — a fixed set of actors, a rare-earth-centred material set, and instruments
-              from {site.scopeStart} forward — so an absence here means the record has not been
+              from {site.scopeStart} forward — so an absence here means it has not been
               coded, not that no such measure exists. Actor-filtered searches exclude unassigned
-              sources and projects, while the mechanism filter only covers applicable records.
+              sources and projects, while the mechanism filter only covers applicable entries.
             </p>
             <button type="button" onClick={reset}
               className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline">
@@ -382,9 +382,9 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                 </div>
               </div>
               <p className="mt-2 max-w-4xl text-sm leading-6 text-muted">
-                Downloads contain exactly the results shown, their record links, your query and
+                Downloads contain exactly the results shown, their links, your query and
                 the corpus revision ({site.lastUpdated}). These are research references; follow
-                each record to its original evidence. For complete data tables, <Link href="/data" className="text-accent underline underline-offset-2">visit Data</Link>.
+                each result to its original evidence. For complete data tables, <Link href="/data" className="text-accent underline underline-offset-2">visit Data</Link>.
               </p>
               {downloadError ? <p role="alert" className="mt-2 text-sm leading-6 text-muted">
                 The download could not start. Try again in a browser that allows file downloads.

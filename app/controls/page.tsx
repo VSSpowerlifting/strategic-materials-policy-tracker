@@ -68,7 +68,8 @@ export default function ControlsPage() {
         <Section
           id="end-dates"
           title="Controls with stated end dates"
-          description={`Clauses whose status in effect on ${formatDate(asOf)} has a stated end date. Days are counted from that date to the stated end, which is the last day covered. A continuation dated later is shown as scheduled; no renewal is assumed after a stated end.`}
+          description={`Clauses whose status in effect on ${formatDate(asOf)} has a stated end date. No renewal is assumed after a stated end.`}
+          note={{ label: "How days are counted", body: "Days are counted from that date to the stated end, which is the last day covered. A continuation dated later is shown as scheduled." }}
         >
           <div className="grid gap-4 md:grid-cols-2">
             {clockGroups.map((group) => {
@@ -111,7 +112,7 @@ export default function ControlsPage() {
                   ) : null}
                   {endPassed ? (
                     <p className="mt-3 text-xs leading-5 text-faint">
-                      The stated end has passed and no later operative instrument is recorded. The record does not infer renewal, resumption or expiry; the current legal position needs the issuing authority&rsquo;s own source.
+                      The stated end has passed and no later operative instrument is recorded. SMPT does not infer renewal, resumption or expiry; the current legal position needs the issuing authority&rsquo;s own source.
                     </p>
                   ) : !scheduled ? (
                     <p className="mt-3 text-xs leading-5 text-faint">

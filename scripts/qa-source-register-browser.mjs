@@ -73,7 +73,7 @@ try{
  if(orphanIds.length){
    assert.equal(await page.locator("#source-cited").inputValue(),"not_cited");
    assert.ok((await page.getByTestId("source-record").allTextContents())
-     .every(t=>t.includes("0 directly citing published records")));
+     .every(t=>t.includes("0 directly citing published entries")));
  }
  console.log("Source register: static HTML, citations, URL, keyboard and mobile/tablet/desktop passed.");
  await page.close();

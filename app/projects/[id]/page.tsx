@@ -209,7 +209,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <Section
           id="capital-stack"
           title="Capital stack"
-          description="One layer per value role. Public commitments and joint-vehicle capital are reported separately by currency. Other categories appear as individual records."
+          description="One layer per value role. Public commitments and joint-vehicle capital are reported separately by currency. Other categories appear individually."
         >
           {ended.length || options.length || indications.length ? (
             <Qualifier className="mb-8 border-l border-border-strong pl-4">
@@ -243,7 +243,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             <Section title="Source-reviewed industrial observations">
               <Qualifier>
                 This undertaking currently lacks a published source-reviewed industrial milestone. Any activity described in
-                financing records remains attributed to its publisher. Its operational status requires further source review.
+                financing entries remains attributed to its publisher. Its operational status requires further source review.
               </Qualifier>
             </Section>
           )}
@@ -342,7 +342,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             <Qualifier className="mt-6">
               For citations, open a parent{" "}
               <a href="#project-policy" className="link-quiet">
-                policy record
+                policy action
               </a>{" "}
               for BibTeX, RIS and CSL formats. Cite original documents for claims about government action.
             </Qualifier>

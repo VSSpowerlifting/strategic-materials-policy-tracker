@@ -79,7 +79,7 @@ export function NotOnLatticeStats({ gaps, className }: { gaps: Gaps; className?:
         ))}
       </dl>
       <p className="mt-4 max-w-3xl text-xs leading-5 text-faint">
-        Each count is for its own kind of record over the whole record, whatever the filters above. They are never added together.
+        Each count is for its own kind of entry across the whole dataset, whatever the filters above. They are never added together.
       </p>
     </div>
   );
