@@ -63,9 +63,9 @@ export function FeaturedCase() {
             </Link>
           </h2>
           <p className="standfirst mt-6">
-            BHP puts the cost of a replacement concentrator at Escondida at $5.4–6.3 billion. Working back from
-            the $5.85 billion midpoint, the financial model asks how much copper the new plant would have to
-            preserve or add each year to recover that capital.
+            BHP puts the cost of a concentrator to replace Los Colorados at Escondida at $5.4–6.3 billion. Recovering the
+            $5.85 billion midpoint would require the new plant to preserve or add {tonnes(baseScreen.ktpa)}{" "}
+            tonnes of copper a year; less favourable assumptions raise that to as much as {tonnes(stress.ktpa)}.
           </p>
         </div>
 
