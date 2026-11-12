@@ -6,9 +6,9 @@ import type { Material } from "@/lib/types";
 type SymbolSize = "sm" | "md" | "lg";
 
 const SYMBOL_SIZE: Record<SymbolSize, string> = {
-  sm: "h-12 w-12 rounded",
-  md: "h-16 w-16 rounded-md",
-  lg: "h-24 w-24 rounded-lg",
+  sm: "h-12 w-12",
+  md: "h-16 w-16",
+  lg: "h-24 w-24",
 };
 
 const SYMBOL_TEXT: Record<SymbolSize, string> = {
@@ -18,9 +18,9 @@ const SYMBOL_TEXT: Record<SymbolSize, string> = {
 };
 
 /**
- * Periodic-style element tile: large mono symbol, small atomic number, the
- * material's oxide hue as a thin frame + a faint matching corner glow. Sober,
- * not gamified — the hue is an accent only.
+ * Periodic-style element tile: the symbol in ink on the plate surface, a small
+ * atomic number, and the material's hue as one flat rule along the foot. The
+ * hue identifies; it never carries text.
  */
 export function MaterialSymbol({
   id,
@@ -34,26 +34,20 @@ export function MaterialSymbol({
   const { symbol, atomicNumber, hue } = getMaterialMeta(id);
   return (
     <div
-      style={{ borderColor: `${hue}a6` }}
       className={cn(
-        "relative flex shrink-0 items-center justify-center overflow-hidden border bg-elevated",
+        "relative flex shrink-0 items-center justify-center border border-border-strong bg-plate",
         SYMBOL_SIZE[size],
         className,
       )}
     >
-      <span
-        aria-hidden
-        className="absolute -right-3 -top-3 h-10 w-10 rounded-full opacity-60 blur-xl"
-        style={{ background: hue }}
-      />
+      <span aria-hidden className="absolute inset-x-0 bottom-0 h-[3px]" style={{ background: hue }} />
       {atomicNumber ? (
         <span className="absolute right-1 top-0.5 font-display text-[9px] text-faint">
           {atomicNumber}
         </span>
       ) : null}
       <span
-        className={cn("font-mono font-medium leading-none", SYMBOL_TEXT[size])}
-        style={{ color: hue }}
+        className={cn("font-mono font-medium leading-none text-foreground", SYMBOL_TEXT[size])}
       >
         {symbol}
       </span>
@@ -63,13 +57,11 @@ export function MaterialSymbol({
 
 /** Clickable grid tile used on the materials index and the homepage preview. */
 export function MaterialTile({ material }: { material: Material }) {
-  const { hue } = getMaterialMeta(material.id);
   return (
     <Link
       data-site-motion="card"
       href={`/materials/${material.slug}`}
-      style={{ "--oxide": hue, "--tile-hue": hue } as React.CSSProperties}
-      className="oxide-rule plate group flex items-center gap-4 rounded-r-lg p-4 ring-1 ring-border/80 transition-all hover:bg-elevated hover:shadow-[0_0_18px_2px_color-mix(in_oklab,var(--tile-hue)_14%,transparent)]"
+      className="group flex items-center gap-4 border border-border bg-plate p-4 transition-colors hover:border-border-strong hover:bg-elevated"
     >
       <MaterialSymbol id={material.id} size="md" />
       <div className="min-w-0">
@@ -81,16 +73,11 @@ export function MaterialTile({ material }: { material: Material }) {
             {material.nameZh}
           </span>
         ) : null}
-        <div className="tnum mt-0.5 font-display text-[11px] text-faint">
+        <div className="tnum mt-0.5 font-display text-xs text-faint">
           {material.eventIds.length} events
         </div>
         {material.grouping ? (
-          <div
-            className="mt-0.5 font-display text-[10px] uppercase tracking-[0.15em]"
-            style={{ color: hue }}
-          >
-            {material.grouping}
-          </div>
+          <div className="mt-0.5 font-display text-xs text-muted">{material.grouping}</div>
         ) : null}
       </div>
     </Link>
@@ -118,7 +105,7 @@ export function MaterialTileHeader({ material }: { material: Material }) {
           ) : null}
         </div>
         {material.grouping ? (
-          <p className="mt-1 font-display text-xs uppercase tracking-[0.18em] text-faint">
+          <p className="mt-1 font-display text-xs text-faint">
             {material.grouping}
           </p>
         ) : null}

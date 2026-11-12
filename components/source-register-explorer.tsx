@@ -71,11 +71,11 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
      <FilterSelect id="source-cited" label="Directly citing record type" value={citingKind} onChange={setCitingKind} options={options.citingKind}/>
    </div>
    <div className="mt-4 flex flex-wrap items-center gap-3">
-     <p className="font-mono text-xs text-muted" role="status" aria-live="polite">
+     <p className="font-display text-xs text-muted" role="status" aria-live="polite">
        <span data-testid="sources-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered sources
      </p>
      {active?<button type="button" onClick={clear}
-       className="font-mono text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+       className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
        Clear filters</button>:null}
    </div>
    <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
@@ -89,7 +89,7 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
        return <section key={tier} aria-labelledby={"source-tier-"+tier}>
          <div className="mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border-strong pb-3">
            <h2 id={"source-tier-"+tier} className="font-display text-xl font-semibold">
-             {confidenceLabels[tier]} <span className="font-mono text-xs font-normal text-muted">({group.length})</span>
+             {confidenceLabels[tier]} <span className="font-display text-xs font-normal text-muted">({group.length})</span>
            </h2>
          </div>
          <p className="mb-2 max-w-prose text-sm leading-6 text-muted">{hierarchyNotes[tier]}</p>
@@ -105,9 +105,9 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
        </section>;
      })}
    </div>
-   {!visible.length?<div className="mt-10 rounded-lg border border-dashed p-8 text-center text-sm text-muted">
+   {!visible.length?<div className="mt-10 border-y border-border py-8 text-sm text-muted">
      No registered source matches these filters.
-     <button type="button" onClick={clear} className="ml-2 text-accent hover:underline">Show all sources</button>
+     <button type="button" onClick={clear} className="ml-2 link-quiet">Show all sources</button>
    </div>:null}
  </div>;
 }

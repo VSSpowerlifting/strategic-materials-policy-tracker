@@ -18,10 +18,8 @@ export default function ActorsPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
-        eyebrow="Jurisdictions"
         title="Actors"
-        lead="Compare tracked governments and jurisdictions by their documented supply-chain positions, policy instruments and stated rationales. Record counts reflect SMPT’s coverage, which varies by jurisdiction."
+        lead="Record counts reflect SMPT’s coverage, which varies by jurisdiction."
       />
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {jurisdictions.map((j) => (
@@ -44,7 +42,7 @@ export default function ActorsPage() {
             <p className="mt-3 line-clamp-3 leading-7 text-muted">
               {j.supplyChainPosition}
             </p>
-            <div className="tnum mt-3 font-mono text-xs text-faint">
+            <div className="tnum mt-3 font-display text-xs text-faint">
               {j.eventIds.length} {j.eventIds.length === 1 ? "event" : "events"}
             </div>
           </LinkCard>

@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { InstrumentsPanel } from "@/components/capital/instruments-panel";
 import { commitmentActor, controlIssuer } from "@/lib/capital-control";
 import { getAllControlMeasures, getAllFinancialCommitments } from "@/lib/data";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EventListItem } from "@/components/event-card";
 import { FramingQuote } from "@/components/framing-quote";
@@ -66,11 +66,11 @@ export default async function ActorPage({
         <div className="flex items-center gap-4">
           <ActorMonogram code={jurisdiction.code} size="lg" />
           <div>
-            <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="page-title">
               {jurisdiction.name}
             </h1>
-            <p className="mt-1 font-mono text-xs uppercase tracking-[0.18em] text-faint">
-              {jurisdiction.code} · actor dossier
+            <p className="mt-1 font-display text-xs text-faint">
+              {jurisdiction.code}
             </p>
           </div>
         </div>
@@ -83,15 +83,15 @@ export default async function ActorPage({
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="min-w-0 space-y-10">
-          <Section index="01" title="Supply-chain position">
-            <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
+          <Section title="Supply-chain position">
+            <p className="max-w-prose text-pretty text-lg leading-8 text-foreground">
               {jurisdiction.supplyChainPosition}
             </p>
           </Section>
 
           {jurisdiction.framingPosture ? (
-            <Section index="02" title="Framing posture">
-              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
+            <Section title="Framing posture">
+              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground">
                 {jurisdiction.framingPosture}
               </p>
             </Section>
@@ -99,9 +99,7 @@ export default async function ActorPage({
 
           {framing.length > 0 ? (
             <Section
-              index="03"
               title={`Framing anchors (${framing.length})`}
-              description="How this actor justifies its policy, in its own words."
             >
               <div className="grid gap-4">
                 {framing.map((f) => {
@@ -111,9 +109,9 @@ export default async function ActorPage({
                       {ev ? (
                         <Link
                           href={`/events/${ev.id}`}
-                          className="mb-1.5 inline-block font-mono text-xs text-faint hover:text-accent"
+                          className="mb-1.5 inline-block font-display text-xs text-faint hover:text-accent"
                         >
-                          On: {ev.titleEn} →
+                          On: {ev.titleEn}
                         </Link>
                       ) : null}
                       <FramingQuote claim={f} source={getSourceById(f.sourceId)} />
@@ -124,18 +122,18 @@ export default async function ActorPage({
             </Section>
           ) : null}
 
-          <Section index="04" title={`Events (${events.length})`}>
+          <Section title={`Events (${events.length})`}>
             {events.length > 0 ? (
-              <Card className="overflow-hidden">
+              <RecordList>
                 {events.map((e) => (
                   <EventListItem key={e.id} event={e} />
                 ))}
-              </Card>
+              </RecordList>
             ) : (
               <p className="leading-7 text-muted">
                 No events coded yet. This actor&apos;s diversification, funding and
                 stockpiling measures are part of the planned v1 coverage — see the{" "}
-                <Link href="/methodology" className="font-display text-accent hover:text-accent-strong">
+                <Link href="/methodology" className="link-quiet">
                   methodology
                 </Link>{" "}
                 for what remains to be coded.
@@ -145,7 +143,6 @@ export default async function ActorPage({
 
           {commitments.length || controls.length ? (
             <Section
-              index="05"
               title="Capital and control"
               description="Financial instruments this actor provides and control clauses it issues."
             >
@@ -160,21 +157,21 @@ export default async function ActorPage({
         </div>
 
         <aside className="lg:sticky lg:top-20 lg:self-start">
-          <Card className="p-4">
-            <h2 className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+          <div className="border-t border-border-strong pt-3">
+            <h2 className="mb-3 font-display text-xs font-semibold text-muted">
               Key bodies
             </h2>
-            <ul className="space-y-1.5 leading-6 text-foreground/90">
+            <ul className="space-y-1.5 leading-6 text-foreground">
               {jurisdiction.keyBodies.map((b) => (
                 <li key={b} className="flex gap-2">
-                  <span aria-hidden className="text-accent">
+                  <span aria-hidden className="text-faint">
                     ·
                   </span>
                   {b}
                 </li>
               ))}
             </ul>
-          </Card>
+          </div>
         </aside>
       </div>
     </Container>

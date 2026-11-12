@@ -68,10 +68,10 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
    <FilterSelect id="programmes-administrator" label="Administration evidence" value={administrator} onChange={setAdministrator} options={options.administrator}/>
   </div>
   <div className="mt-4 flex flex-wrap items-center gap-3">
-   <p role="status" aria-live="polite" className="font-mono text-xs text-muted">
+   <p role="status" aria-live="polite" className="font-display text-xs text-muted">
     <span data-testid="programme-result-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered programmes
    </p>
-   {active?<button type="button" onClick={clear} className="font-mono text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
+   {active?<button type="button" onClick={clear} className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
   </div>
   <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
    One result is one registered scheme, not one award or a complete government budget.
@@ -82,9 +82,9 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
   <div className="mt-9 space-y-10">
    {grouped.map((group,i)=><section key={group.actor} aria-labelledby={"programme-actor-"+group.actor}>
     <div className="mb-4 flex items-baseline gap-3 border-b border-border pb-3">
-     <span className="font-mono text-xs text-faint">{String(i+1).padStart(2,"0")}</span>
+     <span className="font-display text-xs text-faint">{String(i+1).padStart(2,"0")}</span>
      <h2 id={"programme-actor-"+group.actor} className="font-display text-xl font-semibold">
-      {jurisdictionLabels[group.actor]} <span className="font-mono text-xs font-normal text-muted">({group.list.length})</span>
+      {jurisdictionLabels[group.actor]} <span className="font-display text-xs font-normal text-muted">({group.list.length})</span>
      </h2>
     </div>
     <div className="grid gap-4 md:grid-cols-2">
@@ -99,7 +99,7 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
        <p className="mt-2 text-xs leading-5 text-muted">
         {p.administers.length?"Administered by "+p.administers.join(", "):"Administrator not named in registered sources"}
        </p>
-       <div className="mt-3 space-y-1 font-mono text-[11px] leading-5 text-faint">
+       <div className="mt-3 space-y-1 font-display text-xs leading-5 text-faint">
         {p.envelopeLabels.length?<p>Stated ceilings: {p.envelopeLabels.join(" · ")}</p>:<p>No ceiling row recorded</p>}
         <p>
          {p.publicCommitmentCount} public-commitment row{p.publicCommitmentCount===1?"":"s"}
@@ -107,7 +107,7 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
          {" · "}{p.designationCount} designation{p.designationCount===1?"":"s"}
         </p>
         {p.includesDescendants?<p>Counts include registered child-programme rows</p>:null}
-        <p className="pt-2"><Link href={"/programmes/"+p.id+"#research-pathway"} className="text-accent hover:underline">Trace records, organizations, projects & sources →</Link></p>
+        <p className="pt-2"><Link href={"/programmes/"+p.id+"#research-pathway"} className="text-accent hover:underline">Trace records, organizations, projects & sources</Link></p>
        </div>
       </Card>
      </div>)}

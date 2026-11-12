@@ -13,8 +13,8 @@ export function RecordReadingGuide({record}:{record:FinancialCommitment}){
   {label:"Linked projects",heading:"Project attribution",text:reading.linkage},
  ];
  return <section aria-labelledby="record-reading-guide" data-testid="financial-reading-guide"
-   className="mt-7 max-w-4xl rounded-lg border border-border-strong bg-card p-5 sm:p-6">
-   <p className="font-mono text-xs text-accent">Reading this record</p>
+   className="mt-7 max-w-4xl border border-border-strong bg-plate p-5 sm:p-6">
+   <p className="font-display text-xs text-accent">Reading this record</p>
    <h2 id="record-reading-guide" className="mt-2 font-display text-xl font-semibold leading-snug">
      Evidence and status
    </h2>
@@ -80,7 +80,7 @@ const keys={
 export function ResearchReadingKey({topic}:{topic:keyof typeof keys}){
  const key=keys[topic];
  return <details data-testid={"reading-key-"+topic}
-  className="mt-8 max-w-5xl rounded-lg border border-border-strong bg-card/50">
+  className="mt-8 max-w-5xl border border-border-strong bg-plate">
   <summary className="flex min-h-12 cursor-pointer list-item items-center px-4 py-3 font-display text-sm font-semibold text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-5">
    {key.title}
   </summary>
@@ -94,7 +94,7 @@ export function ResearchReadingKey({topic}:{topic:keyof typeof keys}){
    </dl>
    <Link href="/methodology#capital-counting"
     className="mt-4 inline-flex min-h-10 items-center font-display text-sm font-medium text-accent underline underline-offset-2">
-    Full terminology and counting rules →
+    Full terminology and counting rules
    </Link>
   </div>
  </details>;

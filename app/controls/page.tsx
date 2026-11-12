@@ -52,7 +52,7 @@ export default function ControlsPage() {
         <span className="font-semibold text-foreground">{statusNow.get("suspended") ?? 0}</span> suspended ·{" "}
         <span className="font-semibold text-foreground">{clocks.length}</span> with a stated end date
       </p>
-      <p className="mt-1 font-display text-xs text-faint">Statuses as of {formatDate(asOf)}, the date through which published legal instruments are incorporated. An entry dated later is shown as scheduled, not as effective.</p>
+      <p className="mt-1 max-w-3xl font-display text-xs leading-5 text-faint">Statuses as of {formatDate(asOf)}, the date through which published legal instruments are incorporated. An entry dated later is shown as scheduled, not as effective.</p>
 
       <PageContents
         className="mt-8"
@@ -80,7 +80,7 @@ export default function ControlsPage() {
                     <ControlStatusBadge status={entry.status} />
                     <span className="tnum font-display text-xs text-muted">until {formatDate(entry.until!)}</span>
                   </div>
-                  <p className="tnum mt-3 font-display text-4xl font-bold">
+                  <p className="tnum mt-3 font-editorial text-4xl">
                     {Math.abs(daysLeft)}
                     <span className="ml-2 font-display text-sm font-normal text-muted">
                       {daysLeft < 0 ? `day${Math.abs(daysLeft) === 1 ? "" : "s"} since the stated end` : `day${daysLeft === 1 ? "" : "s"} left`}
@@ -102,7 +102,7 @@ export default function ControlsPage() {
                   </ul>
                   {scheduled ? (
                     <p className="mt-3 border-t pt-3 text-xs leading-5 text-muted">
-                      <span className="font-display uppercase tracking-[0.12em] text-faint">Scheduled, not yet effective</span>
+                      <span className="font-display text-faint">Scheduled, not yet effective</span>
                       <br />
                       <ControlStatusBadge status={scheduled.status} /> from {formatDate(scheduled.date!)}
                       {scheduled.until ? ` to ${formatDate(scheduled.until)}` : ""}
@@ -124,33 +124,33 @@ export default function ControlsPage() {
           </div>
         </Section>
 
-        <Section id="clauses" title="All control clauses" description="Filter by issuer, status, type, direction, targeting or material.">
+        <Section id="clauses" title="All control clauses">
           <ControlsExplorer rows={summaries} materialNames={materialNames} />
-          <p className="mt-4 text-sm text-muted">
+          <p className="mt-4 font-display text-sm text-muted">
             Download:{" "}
-            <a href="/api/export/control-measures.csv" className="text-accent hover:text-accent-strong">CSV</a>
+            <a href="/api/export/control-measures.csv" className="link-quiet">CSV</a>
             {" · "}
-            <a href="/api/export/control-status-history.csv" className="text-accent hover:text-accent-strong">status history CSV</a>
+            <a href="/api/export/control-status-history.csv" className="link-quiet">status history CSV</a>
             {" · "}
-            <Link href="/api/v1/control-measures" prefetch={false} className="text-accent hover:text-accent-strong">JSON API</Link>
+            <Link href="/api/v1/control-measures" prefetch={false} className="link-quiet">JSON API</Link>
           </p>
         </Section>
 
         <Section
           id="status"
           title="Legal status over time"
-          description="Each bar is one clause, coloured by status; a dashed tail runs to a stated end date. Select a bar for the clause."
+          description="One bar per clause, coloured by status; a dashed tail runs to a stated end date."
         >
           <ControlStatusChart measures={all} asOf={asOf} />
         </Section>
 
-        <Section id="tools" title="Clauses by issuer and measure type" description="Each count links to the matching clauses in the list above.">
-          <div className="overflow-x-auto rounded-lg border">
+        <Section id="tools" title="Clauses by issuer and measure type">
+          <div className="overflow-x-auto border-y border-border-strong bg-plate">
             <table className="w-full min-w-[44rem] border-collapse text-sm">
               <caption className="sr-only">Control clauses by issuing actor and measure type</caption>
               <thead>
-                <tr className="border-b bg-card font-display text-[11px] text-faint">
-                  <th scope="col" className="px-3 py-2 text-left font-normal uppercase tracking-[0.12em]">Measure type</th>
+                <tr className="border-b bg-elevated font-display text-xs text-faint">
+                  <th scope="col" className="px-3 py-2 text-left font-normal">Measure type</th>
                   {issuers.map((j) => (
                     <th key={j} scope="col" className="px-2 py-2 text-center font-normal">{jurisdictionLabels[j]}</th>
                   ))}
@@ -167,8 +167,8 @@ export default function ControlsPage() {
                           {n ? (
                             <Link
                               href={`/controls?issuer=${j}&type=${t}`}
-                              className="tnum flex h-8 items-center justify-center rounded font-display text-xs hover:ring-1 hover:ring-accent"
-                              style={{ background: `color-mix(in oklab, #C77B7B ${Math.min(60, 14 + n * 8)}%, transparent)` }}
+                              className="tnum flex h-8 items-center justify-center font-display text-xs text-foreground hover:outline hover:outline-1 hover:outline-accent"
+                              style={{ background: `color-mix(in oklab, var(--mark-control) ${Math.min(44, 10 + n * 6)}%, transparent)` }}
                             >
                               {n}
                             </Link>

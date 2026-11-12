@@ -15,16 +15,16 @@ export function NotesSection({ payload }: { payload: DossierPayload }) {
       <div className="mt-5 space-y-5">
         {fields.map((f) => (
           <div key={f.field}>
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">{f.label}</h3>
-            <p data-note-field={f.field} className="mt-1 max-w-prose text-pretty text-base leading-7 text-foreground/90">
+            <h3 className="font-display text-xs text-faint">{f.label}</h3>
+            <p data-note-field={f.field} className="mt-1 max-w-prose text-pretty text-base leading-7 text-foreground">
               {f.text}
             </p>
           </div>
         ))}
         {downstream.length ? (
           <div>
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Typical downstream uses</h3>
-            <ul data-note-field="downstreamIndustries" className="mt-1 space-y-1 leading-6 text-foreground/90">
+            <h3 className="font-display text-xs text-faint">Typical downstream uses</h3>
+            <ul data-note-field="downstreamIndustries" className="mt-1 space-y-1 leading-6 text-foreground">
               {downstream.map((d) => (
                 <li key={d} className="flex gap-2">
                   <span aria-hidden className="text-accent">

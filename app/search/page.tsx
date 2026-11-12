@@ -15,10 +15,8 @@ export default function SearchPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
-        eyebrow="Find"
         title="Search the corpus"
-        lead="Find policy events, financing instruments, export-control clauses, projects and their source documents in one curated public index. Search exact document numbers, organization names or original-language text, or browse by record type."
+        lead="Exact document numbers, organization names or original-language text."
       />
       <div className="mt-10">
         <SearchExplorer docs={docs} />

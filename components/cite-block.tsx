@@ -43,7 +43,7 @@ export function CiteBlock({
         canonical URLs.
       </p>
 
-      <p className="mt-3 select-all rounded-md border border-border bg-elevated p-3 font-mono text-xs leading-5 text-muted">
+      <p className="mt-3 select-all border border-border bg-elevated p-3 font-mono text-xs leading-5 text-muted">
         {plain}
       </p>
 
@@ -51,7 +51,7 @@ export function CiteBlock({
         <button
           type="button"
           onClick={() => copy(plain, "plain")}
-          className="rounded-md border border-border px-3 py-1.5 font-display text-xs text-foreground transition-colors hover:border-accent/50 hover:text-accent"
+          className="border border-border px-3 py-1.5 font-display text-xs text-foreground transition-colors hover:border-accent hover:text-accent"
         >
           {copied === "plain" ? "Copied" : "Copy citation"}
         </button>
@@ -59,12 +59,12 @@ export function CiteBlock({
           <button
             type="button"
             onClick={() => copy(primaryUrls.join("\n"), "urls")}
-            className="rounded-md border border-border px-3 py-1.5 font-display text-xs text-foreground transition-colors hover:border-accent/50 hover:text-accent"
+            className="border border-border px-3 py-1.5 font-display text-xs text-foreground transition-colors hover:border-accent hover:text-accent"
           >
             {copied === "urls" ? "Copied" : `Copy ${primaryUrls.length} source URL${primaryUrls.length === 1 ? "" : "s"}`}
           </button>
         ) : null}
-        <span className="ml-1 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+        <span className="ml-1 font-display text-xs text-faint">
           Whole corpus:
         </span>
         {[

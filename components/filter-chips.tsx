@@ -28,7 +28,7 @@ export function FilterChips({ chips, fallbackId }: { chips: FilterChip[]; fallba
               }}
               aria-label={`Remove ${c.kind} filter: ${c.label}`}
               className={cn(
-                "-my-1 -mr-1 rounded px-2 py-1 text-muted transition-colors hover:text-foreground",
+                "-my-1 -mr-1 px-2 py-1 text-muted transition-colors hover:text-foreground",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               )}
             >

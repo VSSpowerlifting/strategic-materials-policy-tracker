@@ -123,13 +123,13 @@ export default function TungstenResearchDossier() {
   return (
     <div data-flush-footer>
       <section className="border-b border-border-strong">
-        <Container width="wide" className="py-12 sm:py-20">
+        <Container width="wide" className="article-hero py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">← Research</Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">Policy Research</p>
-          <h1 className="mt-4 max-w-4xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">Tungsten Supply Security</h1>
-          <p className="mt-5 max-w-3xl font-display text-xl leading-8 text-muted sm:text-2xl">Policy, financing and industrial development across China, the EU, the UK and Japan.</p>
+          <p className="mt-8 font-display text-[0.8125rem] font-medium text-accent">Policy Research</p>
+          <h1 className="article-title mt-4 text-foreground">Tungsten Supply Security</h1>
+          <p className="standfirst mt-6 max-w-[38rem]">Policy, financing and industrial development across China, the EU, the UK and Japan.</p>
           <p className="mt-7 font-display text-sm text-muted">By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link> · Research cutoff <time dateTime="2026-11-03">3 November 2026</time></p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
             <a href={downloads[0].href} className="research-button" download>Download the full dossier (PDF)</a>
             <a href={downloads[1].href} className="research-button-secondary" download>Executive memo (PDF)</a>
           </div>
@@ -146,11 +146,11 @@ export default function TungstenResearchDossier() {
               </div>
               <section aria-labelledby="comparison-heading" className="border-b border-paper-border py-10">
                 
-                <h2 id="comparison-heading" className="mt-3 font-display text-xl font-bold tracking-tight sm:text-2xl">Policy instruments and recorded implementation</h2>
+                <h2 id="comparison-heading" className="article-h2 mt-3">Policy instruments and recorded implementation</h2>
                 <div className="mt-5 overflow-x-auto border-y border-paper-border">
                   <table className="w-full min-w-[560px] border-collapse text-left font-display text-sm leading-6">
                     <caption className="sr-only">Selected tungsten policy measures in China, the European Union, the United Kingdom and Japan</caption>
-                    <thead className="bg-paper-foreground text-paper">
+                    <thead className="bg-elevated text-paper-foreground">
                       <tr>
                         <th scope="col" className="w-[22%] px-3 py-3 font-semibold">Jurisdiction</th>
                         <th scope="col" className="w-[26%] px-3 py-3 font-semibold">Instrument</th>
@@ -159,7 +159,7 @@ export default function TungstenResearchDossier() {
                     </thead>
                     <tbody>
                       {comparison.map((entry, index) => (
-                        <tr key={entry.jurisdiction} className={index % 2 === 0 ? "bg-paper" : "bg-[#ebe8e0]"}>
+                        <tr key={entry.jurisdiction} className={index % 2 === 0 ? "bg-paper" : "bg-card"}>
                           <th scope="row" className="border-t border-paper-border px-3 py-3 align-top font-semibold">{entry.jurisdiction}</th>
                           <td className="border-t border-paper-border px-3 py-3 align-top">{entry.instrument}</td>
                           <td className="border-t border-paper-border px-3 py-3 align-top">{entry.implementation}</td>
@@ -172,7 +172,7 @@ export default function TungstenResearchDossier() {
               {sections.map((section) => (
                 <section key={section.id} id={section.id} aria-labelledby={`${section.id}-heading`} className="scroll-mt-28 border-b border-paper-border py-10 sm:py-12">
                   
-                  <h2 id={`${section.id}-heading`} className="mt-3 font-display text-[1.8rem] font-medium leading-[1.2] tracking-tight sm:text-[2.1rem]">{section.heading}</h2>
+                  <h2 id={`${section.id}-heading`} className="article-h2 mt-3">{section.heading}</h2>
                   <div className="mt-6 space-y-5 xl:columns-2 xl:gap-9">
                     {section.paragraphs.map((paragraph) => (
                       <p key={paragraph} className="break-inside-avoid font-display text-[1.025rem] leading-[1.8]">{paragraph}</p>
@@ -180,7 +180,7 @@ export default function TungstenResearchDossier() {
                   </div>
                   {section.sources.length > 0 && (
                     <div className="mt-6 border-l-2 border-paper-accent pl-4">
-                      <h3 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Underlying sources</h3>
+                      <h3 className="font-display text-[0.8125rem] font-medium text-paper-muted">Underlying sources</h3>
                       <ul className="mt-2 space-y-2 font-display text-sm leading-6">
                         {section.sources.map((source) => (
                           <li key={source.url}>
@@ -199,7 +199,7 @@ export default function TungstenResearchDossier() {
               </section>
             </article>
             <aside className="lg:sticky lg:top-32">
-              <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">In this report</h2>
+              <h2 className="font-display text-[0.8125rem] font-medium text-paper-muted">In this report</h2>
               <nav aria-label="Report sections" className="mt-4">
                 <ol className="space-y-3 border-l border-paper-border pl-4 font-display text-sm leading-5">
                   {sections.map((section) => (
@@ -208,7 +208,7 @@ export default function TungstenResearchDossier() {
                 </ol>
               </nav>
               <div className="mt-10 border-t border-paper-border pt-5">
-                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Files</h2>
+                <h2 className="font-display text-[0.8125rem] font-medium text-paper-muted">Files</h2>
                 <ul className="mt-3 space-y-3 font-display text-sm">
                   {downloads.map((file) => (
                     <li key={file.href}><a href={file.href} download className="font-semibold text-paper-accent underline decoration-2 underline-offset-4 hover:text-paper-foreground">{file.label}</a><span className="block text-xs text-paper-muted">{file.detail}</span></li>

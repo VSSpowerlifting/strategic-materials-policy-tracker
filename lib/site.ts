@@ -162,6 +162,21 @@ export const publicationNav = [
   { href: "/markets", label: "Markets" },
 ] as const;
 
+/**
+ * The four destinations in the header. Research and Markets are publications; Explore gathers the record
+ * journeys behind one entry (`/explore`); About carries the people, the method and the evidence pages.
+ * The journeys keep their own landing routes and URLs: this is a grouping, not a move.
+ */
+export const sections = [
+  { href: "/research", label: "Research" },
+  { href: "/explore", label: "Explore" },
+  { href: "/markets", label: "Markets" },
+  { href: "/about", label: "About" },
+] as const;
+
+/** The journey that explains where claims come from. It sits under About; the other four sit under Explore. */
+export const EVIDENCE_JOURNEY_HREF = "/sources";
+
 /** Header journeys. The wordmark links to the overview, so the overview is not repeated here. */
 export const headerNav: readonly { href: string; label: string; exact?: boolean; alsoCurrentFor?: readonly string[] }[] =
   journeys.map(({ href, label, views }) => ({
@@ -192,3 +207,23 @@ export const secondaryNav = [
   { href: "/saved", label: "Saved" },
   { href: "/about", label: "About" },
 ] as const;
+
+/** The journey that owns `pathname`, if any. */
+export const journeyFor = (pathname: string) => {
+  const i = headerNav.findIndex((item) => isNavCurrent(pathname, item));
+  return i === -1 ? undefined : journeys[i];
+};
+
+/** Journeys reached through Explore: every journey except Evidence. */
+export const exploreJourneys = journeys.filter((j) => j.href !== EVIDENCE_JOURNEY_HREF);
+
+/** Which of the four header sections `pathname` belongs to, or undefined on the overview. */
+export const sectionFor = (pathname: string): (typeof sections)[number]["href"] | undefined => {
+  if (isActivePath(pathname, "/research")) return "/research";
+  if (isActivePath(pathname, "/markets")) return "/markets";
+  if (isActivePath(pathname, "/about")) return "/about";
+  const journey = journeyFor(pathname);
+  if (journey) return journey.href === EVIDENCE_JOURNEY_HREF ? "/about" : "/explore";
+  if (["/explore", "/search", "/saved"].some((h) => isActivePath(pathname, h))) return "/explore";
+  return undefined;
+};

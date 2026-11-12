@@ -15,7 +15,7 @@ export function TimelineSection({ payload }: { payload: DossierPayload }) {
       <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
         One dot for each event, placed at its event date as coded. Capital-row and clause status dates are not plotted: a status with no date has no honest position, and an event date is never used in its place.
       </p>
-      <div className="mt-5 rounded-lg border border-border bg-card/50 px-4 pb-3 pt-5">
+      <div className="mt-5 border border-border bg-plate px-4 pb-3 pt-5">
         <div className="relative mx-[6px]" style={{ height }} role="group" aria-label={`${payload.nameEn} events by event date`}>
           {t.points.map((p) => (
             <Link
@@ -34,7 +34,7 @@ export function TimelineSection({ payload }: { payload: DossierPayload }) {
           {t.ticks.map((k) => (
             <span
               key={k.year}
-              className={`absolute top-1 -translate-x-1/2 font-mono text-[10px] text-faint ${k.phone ? "" : "max-sm:hidden"}`}
+              className={`absolute top-1 -translate-x-1/2 font-display text-xs text-faint ${k.phone ? "" : "max-sm:hidden"}`}
               style={{ left: `${k.pct}%` }}
             >
               {k.year}
@@ -54,14 +54,14 @@ export function TimelineSection({ payload }: { payload: DossierPayload }) {
           ? `No ${payload.nameEn.toLowerCase()} record states a date after the as-of.`
           : `Dates stated after the as-of: ${t.futureDates.map((f) => `${formatDate(f.date)} (${f.source})`).join("; ")}.`}
       </p>
-      <h3 className="mt-6 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Newest events</h3>
+      <h3 className="mt-6 font-display text-xs text-faint">Newest events</h3>
       <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {t.newest.map((e) => (
           <li key={e.id}>
-            <Link href={e.href} className="flex min-h-[44px] flex-col justify-center rounded-md border border-border bg-card px-3 py-2 hover:border-accent/40 hover:bg-elevated">
+            <Link href={e.href} className="flex min-h-[44px] flex-col justify-center border border-border bg-plate px-3 py-2 hover:border-accent hover:bg-elevated">
               <span className="flex items-center gap-2">
                 <Chip>{e.actorShort}</Chip>
-                <time dateTime={e.date} className="tnum font-mono text-[11px] text-faint">
+                <time dateTime={e.date} className="tnum font-display text-xs text-faint">
                   {formatDate(e.date)}
                 </time>
               </span>

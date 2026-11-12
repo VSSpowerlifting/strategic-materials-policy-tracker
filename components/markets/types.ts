@@ -34,17 +34,21 @@ export interface SeriesStyle {
 }
 
 /**
- * Six contrast-tested categorical hues. Initial slots retain their existing
- * styling, so saved URLs keep the same colors. Further slots reuse those hues
- * with distinctive dash patterns instead of inventing unreviewed colors.
+ * Six categorical inks for the light plate: graphite, malachite, hematite, lapis, ochre and plum. Each is at
+ * least 3.6:1 against the plate (#fdfdfb) and the page (#f6f5f1), and every pair stays apart under protan,
+ * deutan and tritan simulation (worst pair ΔE 8.6, OKLab ×100) and in normal vision (worst pair ΔE 15.0),
+ * checked with the dataviz palette validator over all pairs. Graphite and malachite are the design system's
+ * own inks, so they sit below the validator's chroma band on purpose. Slots 3–5 are dashed, so the six are
+ * told apart by stroke as well as hue. A series keeps its slot, so a saved URL keeps its line styles; further
+ * slots reuse the same inks with other dash patterns instead of inventing unreviewed colours.
  */
 const PALETTE: readonly SeriesStyle[] = [
-  { color: "#3987e5", dash: undefined },
-  { color: "#d95926", dash: undefined },
-  { color: "#199e70", dash: undefined },
-  { color: "#c98500", dash: "7 4" },
-  { color: "#d55181", dash: "7 4" },
-  { color: "#008300", dash: "7 4" },
+  { color: "#1b1e21", dash: undefined },
+  { color: "#1e6353", dash: undefined },
+  { color: "#9a3324", dash: undefined },
+  { color: "#4a7fd0", dash: "7 4" },
+  { color: "#a27017", dash: "7 4" },
+  { color: "#8b4491", dash: "7 4" },
 ];
 
 /** Extra stroke patterns distinguish the same tested hue used by later slots. */

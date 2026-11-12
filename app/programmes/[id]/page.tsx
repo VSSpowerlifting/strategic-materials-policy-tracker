@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
 import { EvidenceTable, Fact, NotStated } from "@/components/capital/primitives";
@@ -44,8 +44,6 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
     programmes: getAllProgrammes(),
     sourceEntries: getAllSources().map(source => ({source, uses: getSourceUses(source.id)})),
   });
-  let n = 0;
-  const next = () => String(++n).padStart(2, "0");
 
   return (
     <Container className="py-12">
@@ -61,7 +59,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
           <JurisdictionTag code={g.actor} withName />
           <Badge>{programmeKindLabels[g.kind]}</Badge>
         </div>
-        <h1 className="mt-3 text-balance font-display text-3xl font-bold tracking-tight">{g.name}</h1>
+        <h1 className="mt-3 page-title">{g.name}</h1>
         {g.nameOriginal ? <p lang="und" className="mt-1 text-lg text-muted">{g.nameOriginal}</p> : null}
         <p className="mt-3 font-mono text-xs text-faint">{g.id}</p>
       </header>
@@ -70,24 +68,23 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
         <div className="min-w-0 space-y-12">
           <ProgrammeResearchTrail trail={trail} />
           {l.envelopes.length ? (
-            <Section index={next()} title="Ceilings" description="Envelopes, appropriations and lending authority are listed separately from recipient awards.">
-              <Card className="overflow-hidden">
+            <Section title="Ceilings" description="Envelopes, appropriations and lending authority are listed separately from recipient awards.">
+              <RecordList>
                 {l.envelopes.map((c) => <CommitmentRow key={c.id} c={summarizeCommitment(c)} />)}
-              </Card>
+              </RecordList>
             </Section>
           ) : null}
 
           <Section
-            index={next()}
             title="Awards recorded under the programme"
             description="Recorded public commitments under this programme or its children, summed by currency after reconciling package components. Actual programme expenditure requires separate payment evidence."
           >
             {l.recordedAwards ? (
               <>
                 <div className="mb-4"><CurrencyTotals totals={l.recordedAwards.totals!} /></div>
-                <Card className="overflow-hidden">
+                <RecordList>
                   {l.recordedAwards.rows.map((c) => <CommitmentRow key={c.id} c={summarizeCommitment(c)} />)}
-                </Card>
+                </RecordList>
               </>
             ) : (
               <p className="text-sm text-muted">No award to a recipient is recorded under this programme in the corpus.</p>
@@ -95,51 +92,51 @@ export default async function ProgrammePage({ params }: { params: Promise<{ id: 
           </Section>
 
           {l.otherLayers.length ? (
-            <Section index={next()} title="Other rows under the programme" description="Kept apart from committed public money.">
+            <Section title="Other rows under the programme" description="Kept apart from committed public money.">
               <LayerStack layers={l.otherLayers} />
             </Section>
           ) : null}
 
           {l.designations.length ? (
-            <Section index={next()} title="Projects recognized" description="Recognition standing is recorded separately from financial support.">
-              <Card className="overflow-hidden">
+            <Section title="Projects recognized" description="Recognition standing is recorded separately from financial support.">
+              <RecordList>
                 {l.designations.map((d) => <DesignationRow key={d.id} d={d} showProject />)}
-              </Card>
+              </RecordList>
             </Section>
           ) : null}
 
-          <Section index={next()} title="Record">
-            <Card className="px-5 py-1">
+          <Section title="Record">
+            <div className="border-y border-border-strong">
               <dl>
                 <Fact label="Kind">{programmeKindLabels[g.kind]}</Fact>
                 <Fact label="Administered by"><OrgList ids={g.administeringOrgIds} showKind empty="Not stated in the cited sources" /></Fact>
-                <Fact label="Part of">{l.parent ? <Link href={`/programmes/${l.parent.id}`} className="text-accent hover:text-accent-strong">{l.parent.name}</Link> : <NotStated>None</NotStated>}</Fact>
+                <Fact label="Part of">{l.parent ? <Link href={`/programmes/${l.parent.id}`} className="link-quiet">{l.parent.name}</Link> : <NotStated>None</NotStated>}</Fact>
                 {l.children.length ? (
                   <Fact label="Includes">
-                    {l.children.map((c) => <Link key={c.id} href={`/programmes/${c.id}`} className="block text-accent hover:text-accent-strong">{c.name}</Link>)}
+                    {l.children.map((c) => <Link key={c.id} href={`/programmes/${c.id}`} className="block link-quiet">{c.name}</Link>)}
                   </Fact>
                 ) : null}
                 <Fact label="Legal authority">{g.legalAuthorityAsStated ?? <NotStated />}</Fact>
               </dl>
-            </Card>
+            </div>
           </Section>
 
           {g.notes ? (
-            <Section index={next()} title="Notes">
-              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">{g.notes}</p>
+            <Section title="Notes">
+              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground">{g.notes}</p>
             </Section>
           ) : null}
 
-          <Section index={next()} title="Evidence">
+          <Section title="Evidence">
             <EvidenceTable evidence={g.evidence} fieldLabels={programmeEvidenceFieldLabels} />
           </Section>
         </div>
 
         <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
-          <Card className="p-4 text-sm">
-            <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Machine-readable</h2>
-            <a href={`/api/v1/programmes/${g.id}`} className="text-accent hover:text-accent-strong">JSON ledger with sources</a>
-          </Card>
+          <div className="border-t border-border-strong pt-3 text-sm">
+            <h2 className="mb-2 font-display text-xs text-faint">Machine-readable</h2>
+            <a href={`/api/v1/programmes/${g.id}`} className="link-quiet">JSON ledger with sources</a>
+          </div>
         </aside>
       </div>
     </Container>

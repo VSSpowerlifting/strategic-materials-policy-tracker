@@ -28,7 +28,7 @@ function ComparisonCard({row,materialNames,revision}:{
     <h2 className="break-words font-display text-xl font-semibold tracking-tight">{row.name}</h2>
     <p className="mt-2 break-all font-mono text-xs text-faint">{row.id}</p>
     <Link href={`/projects/${row.id}`} className="mt-3 inline-flex min-h-11 items-center font-display text-sm text-accent hover:underline">
-      Inspect the full project record and its evidence →
+      Inspect the full project record and its evidence
     </Link>
     <dl className="mt-3 space-y-5 text-sm leading-6">
       <div><dt className="font-display font-semibold text-foreground">Recorded location</dt>
@@ -66,7 +66,7 @@ function ComparisonCard({row,materialNames,revision}:{
           ? `${row.publishedMilestones.length} reviewed project-native milestone ${row.publishedMilestones.length === 1 ? "entry" : "entries"}. These are reported source claims, not verified policy effects.`
           : "No project-native physical milestone has been published after editorial review. This is not evidence of inactivity."}</dd>
         {row.publishedMilestones.length ? <dd className="mt-2 space-y-2">
-          {row.publishedMilestones.map(m => <div key={m.id} className="rounded border border-border p-3 text-xs text-muted">
+          {row.publishedMilestones.map(m => <div key={m.id} className="border border-border p-3 text-xs text-muted">
             <span className="font-semibold text-foreground">{m.kind.replaceAll("_"," ")}</span>
             <span className="block">Claim mode: {m.claimMode.replaceAll("_"," ")} · Scope: {m.scopeAsStated || m.scope.replaceAll("_"," ")}</span>
             <span className="block">Occurred: {m.occurredOn ?? "date not established"} · Target: {m.targetOn ?? "none stated"}</span>
@@ -124,7 +124,7 @@ export function ProjectComparison({rows,materialNames,revision}: Props) {
     {!a || !b ? <p role="status" className="mt-6 text-sm text-muted">Choose two projects to compare their published evidence. No private review findings are shown.</p> :
       a.id === b.id ? <p role="status" className="mt-6 text-sm text-muted">Choose two different projects to make a comparison.</p> :
       <div data-testid="project-comparison-results">
-        <div className="mt-6 rounded-lg border border-border bg-card p-4">
+        <div className="mt-6 border border-border bg-plate p-4">
           <h2 className="font-display text-base font-semibold">Recorded characteristics in common</h2>
           <p className="mt-2 text-sm text-muted">
             Tracked materials: {sharedMaterials.length ? sharedMaterials.map(id => materialNames[id] ?? id).join(", ") : "none listed in both records"}.

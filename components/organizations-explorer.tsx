@@ -2,7 +2,7 @@
 
 import {useMemo,useState} from "react";
 import Link from "next/link";
-import {Card} from "@/components/ui/card";
+import { Card, RecordList } from "@/components/ui/card";
 import {JurisdictionTag} from "@/components/labels";
 import {ALL,FilterSelect,SearchBox,useUrlFilters} from "@/components/capital/filter-controls";
 import {ORGANIZATION_ROLES,NO_GOVERNMENT,UNSTATED_COUNTRY,filterOrganizationDirectory,
@@ -102,7 +102,7 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
              {organizationKindLabels[category]} <span className="font-display text-xs font-normal text-muted">({section.length})</span>
            </h2>
          </div>
-         <Card className="overflow-hidden">
+         <RecordList>
            {section.map(o=><div data-testid="organization-record" data-site-motion="card" key={o.id}
              className="border-b border-border px-4 py-4 last:border-b-0 sm:px-5">
              <div className="flex flex-wrap items-start gap-x-4 gap-y-2">
@@ -116,10 +116,10 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
                </span>
                <span className="flex shrink-0 items-center gap-2">
                  {o.actor?<JurisdictionTag code={o.actor}/>:null}
-                 <span className="font-mono text-xs text-muted">{o.countryCode??"Country —"}</span>
+                 <span className="font-display text-xs text-muted">{o.countryCode??"Country —"}</span>
                </span>
              </div>
-             <p className="mt-2 font-display text-[11px] leading-5 text-faint">
+             <p className="mt-2 font-display text-xs leading-5 text-faint">
                {[
                  nonempty(o.providedRows,"provider record"),
                  nonempty(o.receivedRows,"recipient record"),
@@ -131,7 +131,7 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
                {o.rolledUpOfficeIds.length?" · provider rows include "+o.rolledUpOfficeIds.length+" part-of office"+(o.rolledUpOfficeIds.length===1?"":"s"):""}
              </p>
            </div>)}
-         </Card>
+         </RecordList>
        </section>;
      })}
    </div>

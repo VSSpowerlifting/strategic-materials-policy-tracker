@@ -15,7 +15,7 @@ type BandActors = { commitments: string[]; controls: string[]; designations: str
 function BandCell({ label, short, counts, actors, marks, attr }: { label: string; short: string; counts: BandCounts; actors: BandActors; marks: boolean; attr: Record<string, string> }) {
   const marked = counts.commitments + counts.controls + counts.designations > 0;
   return (
-    <li {...attr} className="flex items-center gap-4 rounded-md px-2 py-2.5 lg:flex-col lg:items-center lg:gap-1 lg:px-1 lg:py-3 lg:text-center">
+    <li {...attr} className="flex items-center gap-4 px-2 py-2.5 lg:flex-col lg:items-center lg:gap-1 lg:px-1 lg:py-3 lg:text-center">
       <span className="w-28 shrink-0 font-display text-sm font-semibold text-foreground lg:w-auto lg:text-xs">
         <span className="lg:hidden">{label}</span>
         <span className="hidden lg:inline">{short}</span>
@@ -38,7 +38,7 @@ function BandCell({ label, short, counts, actors, marks, attr }: { label: string
                     <KindSwatch kind={k.kind} />
                   </span>
                   <span className="whitespace-nowrap text-foreground">{countWord(k.n, k.one, k.many)}</span>
-                  <span className="whitespace-nowrap font-mono text-[10px] text-faint">{k.who.join(" ")}</span>
+                  <span className="whitespace-nowrap font-display text-xs text-faint">{k.who.join(" ")}</span>
                 </span>
               ))}
           </span>
@@ -68,7 +68,7 @@ export function SupplyChainBand({ payload }: { payload: DossierPayload }) {
         {payload.nameEn}&apos;s row of the lattice: what the record places at each stage. Counts are records per stage, never money; a record coded to several stages is counted at each, so the stages have no total. The last column holds records that name {payload.nameEn} and record no stage, so the lattice cannot place them.
       </p>
       <ul
-        className="mt-4 grid gap-1 rounded-lg border border-border bg-card/50 p-2 lg:[grid-template-columns:repeat(var(--stages),minmax(0,1fr))]"
+        className="mt-4 grid gap-1 border border-border bg-plate p-2 lg:[grid-template-columns:repeat(var(--stages),minmax(0,1fr))]"
         style={{ "--stages": n } as React.CSSProperties}
         aria-label={`${payload.nameEn} by supply-chain stage`}
       >
@@ -96,7 +96,7 @@ function PartLine({ part }: { part: CapitalRowView }) {
 
 export function CapitalCard({ row }: { row: CapitalRowView }) {
   return (
-    <li className="rounded-md border border-border bg-card p-3 text-sm">
+    <li className="border border-border bg-plate p-3 text-sm">
       <div className="flex items-start gap-2">
         {row.actorShort ? <Chip>{row.actorShort}</Chip> : null}
         <Link href={row.href} className="min-w-0 font-display text-sm font-semibold leading-snug [overflow-wrap:anywhere] hover:text-accent">
@@ -117,14 +117,14 @@ export function CapitalCard({ row }: { row: CapitalRowView }) {
 
 export function ControlCard({ control }: { control: ControlView }) {
   return (
-    <li className="rounded-md border border-border bg-card p-3 text-sm">
+    <li className="border border-border bg-plate p-3 text-sm">
       <div className="flex items-start gap-2">
         <Chip>{control.issuerShort}</Chip>
         <Link href={control.href} className="min-w-0 font-display text-sm font-semibold leading-snug [overflow-wrap:anywhere] hover:text-accent">
           {control.title}
         </Link>
       </div>
-      {control.documentNumber ? <p className="mt-1 font-mono text-[11px] text-faint">{control.documentNumber}</p> : null}
+      {control.documentNumber ? <p className="mt-1 font-display text-xs text-faint">{control.documentNumber}</p> : null}
       <p className="mt-1.5 text-xs leading-5 text-muted">
         {control.asOfState}
         {control.entry ? <span className="block text-faint">{control.entry}</span> : null}
@@ -146,7 +146,7 @@ function RegistryBlock({ registry }: { registry: DesignationView["registry"] }) 
       {registry.sponsors.length ? <p>Sponsors: {registry.sponsors.join(", ")}</p> : null}
     </div>
   );
-  const label = "font-mono text-[11px] uppercase tracking-[0.1em] text-faint";
+  const label = "font-display text-xs text-faint";
   return (
     <>
       <details className="mt-2 lg:hidden">
@@ -163,7 +163,7 @@ function RegistryBlock({ registry }: { registry: DesignationView["registry"] }) 
 
 export function DesignationCard({ d }: { d: DesignationView }) {
   return (
-    <li className="rounded-md border border-border bg-card p-3 text-sm">
+    <li className="border border-border bg-plate p-3 text-sm">
       <div className="flex items-start gap-2">
         <span aria-hidden className="mt-1.5">
           <KindSwatch kind="designations" />
@@ -216,7 +216,7 @@ function StageColumn({ stage }: { stage: StageBlock }) {
   const list = "space-y-2";
   const [capN, optN, endN, ctlN, desN] = shownPerRow([stage.capital.length, stage.options.length, stage.ended.length, stage.controls.length, stage.designations.length]);
   return (
-    <div className={`dossier-stage min-w-0 rounded-md p-1 ${columnRows}`}>
+    <div className={`dossier-stage min-w-0 p-1 ${columnRows}`}>
       <h3 id={`stage-${stage.id}`} className="scroll-mt-24 font-display text-base font-semibold">
         {stage.label}
       </h3>
@@ -253,7 +253,7 @@ function NoStageColumn({ payload }: { payload: DossierPayload }) {
   const { capital, controls, designations } = payload.unstaged;
   const [capN, ctlN, desN] = shownPerRow([capital.length, controls.length, designations.length]);
   return (
-    <div className={`min-w-0 rounded-md border border-dashed border-border-strong p-3 ${columnRows}`}>
+    <div className={`min-w-0 border border-dashed border-border-strong p-3 ${columnRows}`}>
       <h3 id="no-stage" className="scroll-mt-24 font-display text-base font-semibold">
         No stage recorded
       </h3>
@@ -299,13 +299,13 @@ export function RecordsByStage({ payload }: { payload: DossierPayload }) {
           <a
             key={st.id}
             href={`#stage-${st.id}`}
-            className={`inline-flex min-h-11 items-center rounded-full border px-3.5 text-sm hover:text-foreground ${st.empty ? "border-border text-faint" : "border-border-strong text-muted"}`}
+            className={`inline-flex min-h-11 items-center border px-3.5 text-sm hover:text-foreground ${st.empty ? "border-border text-faint" : "border-border-strong text-muted"}`}
           >
             {stageShortLabels[st.id]}
           </a>
         ))}
         {hasUnstaged ? (
-          <a href="#no-stage" className="inline-flex min-h-11 items-center rounded-full border border-dashed border-border-strong px-3.5 text-sm text-muted hover:text-foreground">
+          <a href="#no-stage" className="inline-flex min-h-11 items-center border border-dashed border-border-strong px-3.5 text-sm text-muted hover:text-foreground">
             No stage recorded
           </a>
         ) : null}
@@ -340,7 +340,7 @@ export function RecordsByStage({ payload }: { payload: DossierPayload }) {
           <p className="mt-1 text-sm leading-6 text-faint">The lattice places designations at their stated stages. Other registered projects appear here separately.</p>
           <ul className="mt-3 grid gap-3 md:grid-cols-2">
             {payload.registryProjects.map((p) => (
-              <li key={p.id} className="rounded-md border border-border bg-card p-3 text-sm">
+              <li key={p.id} className="border border-border bg-plate p-3 text-sm">
                 <Link href={p.href} className="font-display font-semibold leading-snug hover:text-accent">
                   {p.name}
                 </Link>

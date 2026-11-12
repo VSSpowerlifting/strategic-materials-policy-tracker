@@ -51,14 +51,17 @@ export function AtlasIndex({
 }
 
 /**
- * Standard page heading: breadcrumb trail or atlas kicker / Archivo title (the shared `.page-title` scale) / lead. Detail pages pass
- * `breadcrumbs`, which replace the kicker so the page's place in its journey is said once.
+ * Standard page heading, drawn as a centred title block: breadcrumb trail, serif title (the shared
+ * `.page-title` scale), lead, then a sheet rule with a centre tick that the page body hangs from. Detail pages
+ * pass `breadcrumbs` so the page's place in its journey is said once. `eyebrow` is accepted for existing callers
+ * but no longer drawn: the header already names the section, and a label above every title said it twice.
+ * `align="start"` keeps the block on the left edge for pages whose heading shares a row with controls.
  */
 export function PageHeading({
-  eyebrow,
   title,
   lead,
   breadcrumbs,
+  align = "centre",
   className,
 }: {
   eyebrow?: string;
@@ -66,22 +69,21 @@ export function PageHeading({
   title: string;
   lead?: React.ReactNode;
   breadcrumbs?: readonly Crumb[];
+  align?: "centre" | "start";
   className?: string;
 }) {
+  const centred = align === "centre";
   return (
-    <div className={cn(className)}>
+    <header className={cn(centred && "title-block", className)}>
       {breadcrumbs?.length ? (
-        <Breadcrumbs items={breadcrumbs} className="mb-5" />
-      ) : eyebrow ? (
-        <AtlasIndex label={eyebrow} className="mb-4" />
+        <Breadcrumbs items={breadcrumbs} className={cn("mb-6", centred && "[&_ol]:justify-center")} />
       ) : null}
-      <h1 className="page-title max-w-4xl font-display text-balance font-semibold tracking-tight">
-        {title}
-      </h1>
+      <h1 className="page-title max-w-4xl text-foreground">{title}</h1>
       {lead ? (
-        <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-muted sm:text-[1.0625rem] sm:leading-8">{lead}</p>
+        <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted sm:text-[1.0625rem] sm:leading-8">{lead}</p>
       ) : null}
-    </div>
+      <hr className="sheet-rule mt-10 w-full" data-centre={centred ? "" : undefined} />
+    </header>
   );
 }
 

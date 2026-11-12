@@ -1,40 +1,55 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Container, Section } from "@/components/ui/container";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Card } from "@/components/ui/card";
+import { CiteBlock } from "@/components/cite-block";
+import { CapitalFlowExhibit } from "@/components/exhibits/capital-flow";
 import { FramingQuote } from "@/components/framing-quote";
-import { SourceCard } from "@/components/source-ref";
-import { EventLine } from "@/components/event-card";
+import { JurisdictionTag, POLICY_STATUS_TONE } from "@/components/labels";
 import {
-  JurisdictionTag,
-  MechanismBadges,
-  SectorBadges,
-  StatusBadge,
-} from "@/components/labels";
-import { controlStatusLabels, enSourceLabels, jurisdictionShort } from "@/lib/labels";
+  FactNote,
+  IdentityItem,
+  Prose,
+  Qualifier,
+  RailBlock,
+  RecordFact,
+  RecordFacts,
+  RecordId,
+  RecordLayout,
+  RecordList,
+  RecordTitleBlock,
+  StatusLine,
+  Unknown,
+} from "@/components/record/primitives";
+import { ControlLine, DesignationLine, InstrumentLines } from "@/components/record/rows";
+import { SaveEventButton } from "@/components/save-event-button";
+import { SourceCard } from "@/components/source-ref";
+import { Container, Section } from "@/components/ui/container";
+import { controlStatusesRecordedIn, summarizeControl } from "@/lib/capital-control";
+import { plainCitation } from "@/lib/citation";
 import {
   getAllEvents,
+  getControlMeasuresByEvent,
   getEventById,
+  getFinancialCommitmentsByEvent,
   getFramingByEvent,
   getJurisdictionById,
   getMaterialsByIds,
+  getProjectDesignationsByEvent,
   getRelatedEvents,
   getSourceById,
   getSourcesByIds,
 } from "@/lib/data";
 import { formatDate } from "@/lib/format";
-import { CiteBlock } from "@/components/cite-block";
-import { SaveEventButton } from "@/components/save-event-button";
-import { plainCitation } from "@/lib/citation";
-import { eventJsonLd, jsonLdScript } from "@/lib/structured-data";
-import { InstrumentsPanel } from "@/components/capital/instruments-panel";
-import { ControlRow } from "@/components/capital/rows";
-import { controlStatusesRecordedIn, summarizeControl } from "@/lib/capital-control";
+import {
+  controlStatusLabels,
+  enSourceLabels,
+  jurisdictionShort,
+  mechanismLabels,
+  policyStatusLabels,
+  sectorLabels,
+} from "@/lib/labels";
 import { site } from "@/lib/site";
-import { getControlMeasuresByEvent, getFinancialCommitmentsByEvent, getProjectDesignationsByEvent } from "@/lib/data";
-import { DesignationRow } from "@/components/intelligence/designation-row";
+import { eventJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return getAllEvents().map((e) => ({ id: e.id }));
@@ -49,17 +64,6 @@ export async function generateMetadata({
   const event = getEventById(id);
   if (!event) return { title: "Event not found" };
   return { title: event.titleEn, description: event.summary };
-}
-
-function MetaRow({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="grid grid-cols-[7rem_minmax(0,1fr)] gap-3 border-b border-border py-2.5 last:border-b-0">
-      <dt className="font-display text-xs uppercase tracking-[0.12em] text-faint">
-        {label}
-      </dt>
-      <dd className="text-sm">{children}</dd>
-    </div>
-  );
 }
 
 export default async function EventPage({
@@ -81,263 +85,228 @@ export default async function EventPage({
   const designations = getProjectDesignationsByEvent(event.id);
   const recordedStatuses = controlStatusesRecordedIn(event.id);
   const actorHref = `/actors/${jurisdictionShort[event.jurisdiction].toLowerCase()}`;
-  let sectionNo = 0;
-  const nextSectionIndex = () => String(++sectionNo).padStart(2, "0");
-  const showOriginalTitle =
-    event.titleOriginalLang !== "en" && event.titleOriginal !== "Not yet coded";
+  const titleCoded = event.titleOriginal !== "Not yet coded";
+  const showOriginalTitle = event.titleOriginalLang !== "en" && titleCoded;
+  const hasInstruments = commitments.length > 0 || controls.length > 0;
+
+  const contents = [
+    { href: "#summary", label: "Summary" },
+    { href: "#significance", label: "Analytical significance" },
+    { href: "#framing", label: "Framing anchors" },
+    ...(hasInstruments ? [{ href: "#instruments", label: "Instruments" }] : []),
+    ...(recordedStatuses.length ? [{ href: "#recorded-status", label: "Control status recorded" }] : []),
+    ...(designations.length ? [{ href: "#designations", label: "Projects recognized" }] : []),
+    { href: "#sources", label: "Sources" },
+    { href: "#cite", label: "Citation" },
+  ];
 
   return (
-    <Container className="py-12">
+    <Container className="py-12 sm:py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(eventJsonLd(event, sources)) }}
       />
-      <Breadcrumbs
-        items={[
-          { href: "/events", label: "Government action" },
-          { label: event.titleEn },
-        ]}
-      />
 
-      <header className="mt-6 max-w-3xl">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-          <time className="tnum font-mono text-faint">{formatDate(event.date)}</time>
-          <Link href={actorHref} className="hover:opacity-80">
-            <JurisdictionTag code={event.jurisdiction} withName />
-          </Link>
-          <span aria-hidden className="text-faint">
-            ·
-          </span>
-          <span className="text-muted">{event.issuingBody}</span>
-        </div>
-        {event.documentNumber ? (
-          <p className="mt-3 font-mono text-xs text-faint">{event.documentNumber}</p>
-        ) : null}
-        <h1 className="mt-3 text-balance font-display text-3xl font-bold tracking-tight">
-          {event.titleEn}
-        </h1>
-        {showOriginalTitle ? (
-          <p lang="zh" className="mt-2 text-lg leading-relaxed text-muted">
-            {event.titleOriginal}
-          </p>
+      <RecordTitleBlock
+        breadcrumbs={[{ href: "/events", label: "Government action" }, { label: event.titleEn }]}
+        title={event.titleEn}
+        subtitle={
+          showOriginalTitle ? (
+            <p lang="zh" className="mt-4 max-w-3xl font-display text-lg leading-relaxed text-muted">
+              {event.titleOriginal}
+            </p>
+          ) : null
+        }
+        identity={
+          <>
+            <IdentityItem>
+              <time dateTime={event.date} className="tnum">
+                {formatDate(event.date)}
+              </time>
+            </IdentityItem>
+            <IdentityItem>
+              <Link href={actorHref} className="hover:text-accent">
+                <JurisdictionTag code={event.jurisdiction} withName />
+              </Link>
+            </IdentityItem>
+            <IdentityItem>
+              <RecordId id={event.id} />
+            </IdentityItem>
+          </>
+        }
+        status={<StatusLine prefix="Policy status" label={policyStatusLabels[event.policyStatus]} tone={POLICY_STATUS_TONE[event.policyStatus]} />}
+      >
+        <SaveEventButton eventId={event.id} />
+      </RecordTitleBlock>
+
+      <RecordFacts label="Record facts" flush>
+        <RecordFact label="Jurisdiction">
+          {jurisdiction ? (
+            <Link href={actorHref} className="link-quiet">
+              {jurisdiction.name}
+            </Link>
+          ) : (
+            jurisdictionShort[event.jurisdiction]
+          )}
+        </RecordFact>
+        <RecordFact label="Issuing authority">{event.issuingBody}</RecordFact>
+        <RecordFact label="Document number">{event.documentNumber ? event.documentNumber : <Unknown>Not yet coded</Unknown>}</RecordFact>
+        <RecordFact label="Mechanism" wide>
+          {event.mechanism.map((m) => mechanismLabels[m]).join(", ")}
+        </RecordFact>
+        <RecordFact label="Sectors" wide>
+          {event.affectedSectors.length ? event.affectedSectors.map((s) => sectorLabels[s]).join(", ") : <Unknown>—</Unknown>}
+        </RecordFact>
+        <RecordFact label="Affected materials" wide>
+          {materials.length > 0 ? (
+            <ul className="flex flex-wrap gap-x-5 gap-y-1">
+              {materials.map((m) => (
+                <li key={m.id}>
+                  <Link href={`/materials/${m.slug}`} className="link-quiet">
+                    {m.nameEn}
+                  </Link>
+                  {m.nameZh ? (
+                    <span lang="zh" className="ml-1.5 text-[0.8125rem] text-faint">
+                      {m.nameZh}
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            // The empty scope is itself the finding, and two different findings produce it: an instrument that
+            // names no material, and one whose materials fall outside the tracked set. The line states what both
+            // share and sends the reader to the summary; no material is inferred onto the record.
+            <span className="text-muted">
+              The material field is empty because the instrument either specifies no materials of its own or names
+              minerals outside this dataset. The summary identifies the applicable scope.
+            </span>
+          )}
+        </RecordFact>
+        {event.titleOriginalLang !== "en" && !titleCoded ? (
+          <RecordFact label="Original-language title">
+            <Unknown>Not yet coded</Unknown>
+          </RecordFact>
         ) : null}
         {event.titleEnSource !== "na" ? (
-          <p className="mt-2 text-xs text-faint">
-            English title: {enSourceLabels[event.titleEnSource].toLowerCase()}
-          </p>
+          <RecordFact label="English title">{enSourceLabels[event.titleEnSource]}</RecordFact>
         ) : null}
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <StatusBadge status={event.policyStatus} />
-          <MechanismBadges mechanisms={event.mechanism} />
-        </div>
-        <div className="mt-4">
-          <SaveEventButton eventId={event.id} />
-        </div>
-      </header>
+        <RecordFact label="Sources">
+          <a href="#sources" className="link-quiet tnum">
+            {sources.length}
+          </a>
+        </RecordFact>
+        {hasInstruments ? (
+          <RecordFact label="Instruments">
+            <a href="#instruments" className="link-quiet tnum">
+              {commitments.length} financial, {controls.length} control
+            </a>
+          </RecordFact>
+        ) : null}
+      </RecordFacts>
 
-      {/*
-        Section numbers are assigned in render order rather than hard-coded.
-        "Related events" is conditional, so a record with none used to display
-        04 then 06 — a gap that reads like a missing section. That is now
-        routine rather than rare: an instrument naming no material has no
-        related events either, since relatedness is derived from shared
-        materials. JSX evaluates siblings in source order, so the counter
-        below is deterministic for this server-rendered page.
-      */}
-      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <div className="min-w-0 space-y-10">
-          <Section index={nextSectionIndex()} title="Summary">
-            <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
-              {event.summary}
-            </p>
-          </Section>
-
-          <Section index={nextSectionIndex()} title="Analytical significance">
-            <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">
-              {event.analyticalSignificance}
-            </p>
-          </Section>
-
-          {recordedStatuses.length ? (
-            <Section
-              index={nextSectionIndex()}
-              title="Control status this event records"
-              description="This event's source records a status of a control measure coded under another event."
-            >
-              <Card className="overflow-hidden">
-                {recordedStatuses.map(({ measure, entry }) => (
-                  <div key={`${measure.id}-${entry.status}`}>
-                    <ControlRow m={summarizeControl(measure, site.legalStatusAsOf)} />
-                    <p className="border-b px-4 py-2 font-mono text-[11px] text-faint last:border-b-0">
-                      Records: {controlStatusLabels[entry.status].toLowerCase()}
-                      {entry.date ? `, ${formatDate(entry.date)}` : ""}
-                    </p>
-                  </div>
-                ))}
-              </Card>
-            </Section>
-          ) : null}
-
-          {commitments.length || controls.length ? (
-            <Section
-              index={nextSectionIndex()}
-              title="Instruments in this event"
-              description="The separate financial commitments and control clauses this announcement contains, each with its own status history and evidence."
-            >
-              <InstrumentsPanel commitments={commitments} controls={controls} />
-            </Section>
-          ) : null}
-
-          {designations.length ? (
-            <Section
-              index={nextSectionIndex()}
-              title={`Projects recognized (${designations.length})`}
-              description="Project designations confer standing under a scheme. Any financing appears in separate capital records."
-            >
-              <Card className="overflow-hidden">
-                {designations.map((d) => (
-                  <DesignationRow key={d.id} d={d} showProject />
-                ))}
-              </Card>
-            </Section>
-          ) : null}
-
-          <Section
-            index={nextSectionIndex()}
-            title="Framing anchors"
-            description="Official framing, classified only from quoted passages."
-          >
-            {framing.length > 0 ? (
-              <div className="grid gap-4">
-                {framing.map((f) => (
-                  <FramingQuote
-                    key={f.id}
-                    claim={f}
-                    source={getSourceById(f.sourceId)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <Card className="p-5">
-                <p className="text-sm leading-6 text-muted">
-                  Framing:{" "}
-                  <span className="font-mono text-faint">Not yet coded.</span> A
-                  verified quotation from the primary source is still needed
-                  before assigning a framing category.
-                </p>
-              </Card>
-            )}
-          </Section>
-
-          <Section index={nextSectionIndex()} title="Affected materials">
-            {materials.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {materials.map((m) => (
-                  <Link
-                    key={m.id}
-                    href={`/materials/${m.slug}`}
-                    className="group inline-flex items-center gap-2 rounded-md border bg-card px-3 py-1.5 text-sm transition-colors hover:border-border-strong hover:bg-elevated"
-                  >
-                    <span className="group-hover:text-accent">{m.nameEn}</span>
-                    {m.nameZh ? (
-                      <span lang="zh" className="font-mono text-xs text-faint">
-                        {m.nameZh}
-                      </span>
-                    ) : null}
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              // Saying this out loud matters. An empty section would read as
-              // "not coded yet", when in fact the empty scope is the finding.
-              // Two different findings produce it — a framework instrument that
-              // names no material, and an instrument whose materials fall
-              // outside the tracked set — so the copy states the fact both
-              // share and sends the reader to the summary for which one it is.
-              // Either way no material is inferred onto the record.
-              <Card className="px-4 py-3 text-sm leading-6 text-muted">
-                The material field is empty because the instrument either specifies
-                no materials of its own or names minerals outside this dataset.
-                The summary above identifies the applicable scope.
-              </Card>
-            )}
-          </Section>
-
-          {related.length > 0 ? (
-            <Section
-              index={nextSectionIndex()}
-              title="Related events"
-              description="Events touching the same materials."
-            >
-              <Card className="px-4 py-1">
+      <RecordLayout
+        contents={contents}
+        rail={
+          related.length > 0 ? (
+            <RailBlock title="Events on the same materials">
+              <ul className="space-y-3">
                 {related.map((e) => (
-                  <EventLine key={e.id} event={e} />
+                  <li key={e.id}>
+                    <p className="flex flex-wrap items-baseline gap-x-2 text-[0.8125rem] leading-5 text-faint">
+                      <time dateTime={e.date} className="tnum">
+                        {formatDate(e.date)}
+                      </time>
+                      <JurisdictionTag code={e.jurisdiction} />
+                    </p>
+                    <Link href={`/events/${e.id}`} className="link-quiet text-pretty text-foreground">
+                      {e.titleEn}
+                    </Link>
+                  </li>
                 ))}
-              </Card>
-            </Section>
-          ) : null}
+              </ul>
+            </RailBlock>
+          ) : null
+        }
+      >
+        <Section id="summary" title="Summary">
+          <Prose>{event.summary}</Prose>
+        </Section>
 
-          <Section index={nextSectionIndex()} title={`Sources (${sources.length})`}>
-            <div className="grid gap-3">
-              {sources.map((s) => (
-                <SourceCard key={s.id} source={s} />
+        <Section id="significance" title="Analytical significance">
+          <Prose>{event.analyticalSignificance}</Prose>
+        </Section>
+
+        <Section id="framing" title="Framing anchors">
+          {framing.length > 0 ? (
+            <div className="grid gap-6">
+              {framing.map((f) => (
+                <FramingQuote key={f.id} claim={f} source={getSourceById(f.sourceId)} />
               ))}
             </div>
-          </Section>
+          ) : (
+            <Qualifier>
+              Framing: <span className="text-faint">Not yet coded.</span> A verified quotation from the primary source is
+              still needed before assigning a framing category.
+            </Qualifier>
+          )}
+        </Section>
 
-          <Section index={nextSectionIndex()} title="Citation">
-            <CiteBlock
-              plain={plainCitation(event)}
-              eventId={event.id}
-              primaryUrls={sources.map((s) => s.url)}
-            />
-          </Section>
-        </div>
+        {/* Drawn only where the event holds commitment rows with identified parties; otherwise it renders nothing. */}
+        <CapitalFlowExhibit eventId={event.id} density="summary" />
 
-        {/* At a glance: status and mechanism already sit under the title, so they are not repeated here. */}
-        <aside className="lg:sticky lg:top-20 lg:self-start">
-          <Card className="p-4">
-            <h2 className="mb-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-              At a glance
-            </h2>
-            <dl>
-              <MetaRow label="Sectors">
-                {event.affectedSectors.length ? (
-                  <SectorBadges sectors={event.affectedSectors} />
-                ) : (
-                  <span className="text-faint">—</span>
-                )}
-              </MetaRow>
-              <MetaRow label="Issuer">
-                {jurisdiction ? (
-                  <Link href={actorHref} className="text-accent hover:underline">
-                    {jurisdiction.name}
-                  </Link>
-                ) : (
-                  event.issuingBody
-                )}
-              </MetaRow>
-              <MetaRow label="Doc no.">
-                {event.documentNumber ? (
-                  <span className="font-mono text-xs">{event.documentNumber}</span>
-                ) : (
-                  <span className="font-mono text-xs text-faint">Not yet coded</span>
-                )}
-              </MetaRow>
-              <MetaRow label="Sources">
-                <span className="tnum">{sources.length}</span>
-              </MetaRow>
-              {commitments.length || controls.length ? (
-                <MetaRow label="Instruments">
-                  <span className="tnum">
-                    {commitments.length} financial · {controls.length} control
-                  </span>
-                </MetaRow>
-              ) : null}
-            </dl>
-          </Card>
-        </aside>
-      </div>
+        {hasInstruments ? (
+          <Section id="instruments" title="Instruments in this event">
+            <InstrumentLines commitments={commitments} controls={controls} />
+          </Section>
+        ) : null}
+
+        {recordedStatuses.length ? (
+          <Section
+            id="recorded-status"
+            title="Control status this event records"
+            description="This event's source records a status of a control measure coded under another event."
+          >
+            <RecordList>
+              {recordedStatuses.map(({ measure, entry }) => (
+                <ControlLine key={`${measure.id}-${entry.status}`} m={summarizeControl(measure, site.legalStatusAsOf)}>
+                  <FactNote>
+                    Records: {controlStatusLabels[entry.status].toLowerCase()}
+                    {entry.date ? `, ${formatDate(entry.date)}` : ""}
+                  </FactNote>
+                </ControlLine>
+              ))}
+            </RecordList>
+          </Section>
+        ) : null}
+
+        {designations.length ? (
+          <Section
+            id="designations"
+            title="Projects recognized"
+            count={designations.length}
+            description="Project designations confer standing under a scheme. Any financing appears in separate capital records."
+          >
+            <RecordList>
+              {designations.map((d) => (
+                <DesignationLine key={d.id} d={d} showProject />
+              ))}
+            </RecordList>
+          </Section>
+        ) : null}
+
+        <Section id="sources" title="Sources" count={sources.length}>
+          <div className="grid gap-4">
+            {sources.map((s) => (
+              <SourceCard key={s.id} source={s} />
+            ))}
+          </div>
+        </Section>
+
+        <section id="cite" className="scroll-mt-24">
+          <CiteBlock plain={plainCitation(event)} eventId={event.id} primaryUrls={sources.map((s) => s.url)} />
+        </section>
+      </RecordLayout>
     </Container>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Card } from "@/components/ui/card";
+import { Card, RecordList } from "@/components/ui/card";
 import { EventListItem } from "@/components/event-card";
 import { getAllEvents } from "@/lib/data";
 import { buildBibtexForEvent, plainCitation } from "@/lib/citation";
@@ -17,7 +17,7 @@ import type { SavedEventsResult } from "@/lib/watchlist-client";
 import type { PolicyEvent } from "@/lib/types";
 
 const buttonClass =
-  "min-h-11 rounded-md border border-border px-3 py-2 font-display text-sm text-foreground transition-colors hover:border-accent/50 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground";
+  "min-h-11 border border-border px-3 py-2 font-display text-sm text-foreground transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground";
 
 export function SavedEventsExplorer() {
   const [ids, setIds] = useState<string[]>([]);
@@ -78,7 +78,7 @@ export function SavedEventsExplorer() {
           another device or survive clearing site data.
         </p>
         <Link href="/events" className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong">
-          Browse events →
+          Browse events
         </Link>
       </Card>
     );
@@ -88,7 +88,7 @@ export function SavedEventsExplorer() {
     <div>
       <Card className="p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+          <p className="font-display text-xs text-faint">
             {events.length} saved {events.length === 1 ? "event" : "events"}
           </p>
           <div className="flex flex-wrap items-center gap-2">
@@ -138,15 +138,15 @@ export function SavedEventsExplorer() {
         {events.map((e) => (
           <div key={e.id} data-site-motion="card" className="flex items-stretch gap-2">
             <div className="min-w-0 flex-1">
-              <Card className="overflow-hidden p-0">
+              <RecordList className="p-0">
                 <EventListItem event={e} />
-              </Card>
+              </RecordList>
             </div>
             <button
               type="button"
               onClick={() => applyResult(unsaveEvent(e.id))}
               aria-label={`Remove "${e.titleEn}" from my saved events`}
-              className="min-h-11 shrink-0 self-center rounded-md border border-border px-3 py-2 font-display text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
+              className="min-h-11 shrink-0 self-center border border-border px-3 py-2 font-display text-sm text-muted transition-colors hover:border-accent hover:text-accent"
             >
               Remove
             </button>

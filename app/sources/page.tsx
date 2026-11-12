@@ -16,10 +16,9 @@ export default function SourcesPage(){
    <PageHeading title="Source register"
      lead="Original documents cited in SMPT research and database records."/>
    <div className="mt-10"><SourceRegisterExplorer rows={rows}/></div>
-   <p className="mt-12 max-w-prose text-sm leading-7 text-muted">
-     Learn more about the <Link href="/methodology#sources" className="text-accent hover:underline">
-     source hierarchy and verification standards</Link>. Individual source dossiers list directly
-     citing published records with their own evidence limitations.
+   <p className="mt-12 max-w-prose border-t border-border pt-4 text-sm leading-6 text-muted">
+     <Link href="/methodology#sources" className="link-quiet">Source hierarchy and verification standards</Link>.
+     Each source dossier lists the published records that cite it directly, with their own evidence limitations.
    </p>
  </Container>;
 }

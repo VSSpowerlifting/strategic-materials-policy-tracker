@@ -108,7 +108,7 @@ export function ProjectFinancialRecord({
         {packet.financialInstruments.map((row) => (
           <details
             key={row.id}
-            className="rounded border border-border-strong bg-card p-4 sm:p-5"
+            className="border border-border-strong bg-plate p-4 sm:p-5"
           >
             <summary className="cursor-pointer font-display text-base font-medium leading-7">
               {financialInstrumentLabels[row.instrument]} ·{" "}
@@ -222,7 +222,7 @@ export function ProjectPolicyContext({
     >
       <ul className="project-evidence space-y-4">
         {packet.policyContexts.map((context) => (
-          <li key={context.id} className="rounded border bg-card p-4">
+          <li key={context.id} className="border bg-plate p-4">
             <p className="font-display text-xs text-muted">
               {formatDate(context.date)} ·{" "}
               {policyStatusLabels[context.policyStatus as PolicyStatus]}

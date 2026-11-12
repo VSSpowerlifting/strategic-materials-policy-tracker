@@ -28,7 +28,7 @@ function Notes({ row, materialName }: { row: CapitalRowView; materialName: strin
 
 function CapitalRow({ row, materialName }: { row: CapitalRowView; materialName: string }) {
   return (
-    <li className="rounded-md border border-border bg-card p-3 text-sm" data-capital-row={row.id}>
+    <li className="border border-border bg-plate p-3 text-sm" data-capital-row={row.id}>
       {row.partLabel ? <p className="mb-1.5 font-display text-xs font-semibold text-muted">{row.partLabel}</p> : null}
       <div className="flex items-start gap-2">
         {row.actorShort ? <Chip>{row.actorShort}</Chip> : null}
@@ -107,14 +107,14 @@ function Layer({ layer, materialName }: { layer: LayerBlock; materialName: strin
 
 function ControlRow({ control }: { control: ControlView }) {
   return (
-    <li className="rounded-md border border-border bg-card p-3 text-sm" data-control-clause={control.id}>
+    <li className="border border-border bg-plate p-3 text-sm" data-control-clause={control.id}>
       <div className="flex items-start gap-2">
         <Chip>{control.issuerShort}</Chip>
         <Link href={control.href} className="min-w-0 font-display text-sm font-semibold leading-snug [overflow-wrap:anywhere] hover:text-accent">
           {control.title}
         </Link>
       </div>
-      {control.documentNumber ? <p className="mt-1 font-mono text-[11px] text-faint">{control.documentNumber}</p> : null}
+      {control.documentNumber ? <p className="mt-1 font-display text-xs text-faint">{control.documentNumber}</p> : null}
       <p className="mt-1.5 text-sm text-foreground">{control.asOfState}</p>
       {control.entry ? <p className="text-xs leading-5 text-muted">{control.entry}</p> : null}
       {control.history.length ? (

@@ -86,7 +86,7 @@ export function ControlStatusChart({
 
   return (
     <figure>
-      <div className="overflow-x-auto rounded-lg border bg-card">
+      <div className="overflow-x-auto border bg-plate">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="block h-auto min-w-[760px] w-full"
@@ -101,13 +101,13 @@ export function ControlStatusChart({
           {years(from, to).map((y) => (
             <g key={y}>
               <line x1={x(y)} x2={x(y)} y1={TOP - 8} y2={H - 8} stroke="var(--border)" />
-              <text x={x(y) + 4} y={16} className="fill-[var(--faint)] font-mono" fontSize={11}>
+              <text x={x(y) + 4} y={16} className="fill-[var(--faint)] font-display" fontSize={11}>
                 {y.slice(0, 4)}
               </text>
             </g>
           ))}
           <line x1={x(asOf)} x2={x(asOf)} y1={TOP - 12} y2={H - 4} stroke="var(--accent)" strokeDasharray="2 3" />
-          <text x={x(asOf) - 4} y={TOP - 14} textAnchor="end" className="fill-[var(--accent)] font-mono" fontSize={10}>
+          <text x={x(asOf) - 4} y={TOP - 14} textAnchor="end" className="fill-[var(--accent)] font-display" fontSize={10}>
             as of {formatDate(asOf)}
           </text>
           {rows.map(({ m, spans, issuer, event }, i) => {
@@ -117,7 +117,7 @@ export function ControlStatusChart({
               <Link key={m.id} href={`/controls/${m.id}`}>
                 <g className="group">
                   <rect x={0} y={y} width={W} height={ROW} fill="transparent" className="group-hover:fill-[var(--elevated)]" />
-                  <text x={8} y={y + 15} fontSize={11.5} className="fill-[var(--muted)] font-mono group-hover:fill-[var(--fg)]">
+                  <text x={8} y={y + 15} fontSize={11.5} className="fill-[var(--muted)] font-display group-hover:fill-[var(--fg)]">
                     {label.length > 44 ? `${label.slice(0, 43)}…` : label}
                     <title>{`${controlMeasureTypeLabels[m.measureType]} — ${event.titleEn}`}</title>
                   </text>
@@ -127,7 +127,7 @@ export function ControlStatusChart({
                     const end = x(clamp(endIso < s.from ? s.from : endIso));
                     return (
                       <g key={k}>
-                        <rect x={start} y={y + 6} width={Math.max(2, end - start)} height={ROW - 12} rx={1.5} fill={CONTROL_STATUS_HUES[s.status]} opacity={s.status === "concluded" ? 0.6 : 0.9}>
+                        <rect x={start} y={y + 6} width={Math.max(2, end - start)} height={ROW - 12} fill={CONTROL_STATUS_HUES[s.status]} opacity={s.status === "concluded" ? 0.6 : 0.9}>
                           <title>{`${event.documentNumber ?? event.titleEn} — ${controlStatusLabels[s.status]} from ${formatDate(s.from)}${s.to ? ` to ${formatDate(s.to)}` : ""}${s.until ? ` (stated end ${formatDate(s.until)})` : ""}`}</title>
                         </rect>
                         {s.until && !s.to && s.until > asOf ? (
@@ -153,10 +153,10 @@ export function ControlStatusChart({
           })}
         </svg>
       </div>
-      <figcaption className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] text-muted">
+      <figcaption className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-display text-xs text-muted">
         {CONTROL_STATUSES.filter((s) => used.has(s)).map((s) => (
           <span key={s} className="inline-flex items-center gap-1.5">
-            <span aria-hidden className="h-2.5 w-4 rounded-[1px]" style={{ background: CONTROL_STATUS_HUES[s] }} />
+            <span aria-hidden className="h-2.5 w-4" style={{ background: CONTROL_STATUS_HUES[s] }} />
             {controlStatusLabels[s]}
           </span>
         ))}
@@ -218,7 +218,7 @@ export function InterplayChronology({
   return (
     <figure>
       <div
-        className="overflow-x-auto rounded-lg border bg-card"
+        className="overflow-x-auto border bg-plate"
         role="region"
         aria-label="Chronology chart, scrolls horizontally"
         tabIndex={0}
@@ -231,7 +231,7 @@ export function InterplayChronology({
           {years(from, to).map((y) => (
             <g key={y}>
               <line x1={x(y)} x2={x(y)} y1={TOP - 10} y2={H - 6} stroke="var(--border)" />
-              <text x={x(y) + 4} y={16} fontSize={11} className="fill-[var(--faint)] font-mono">{y.slice(0, 4)}</text>
+              <text x={x(y) + 4} y={16} fontSize={11} className="fill-[var(--faint)] font-display">{y.slice(0, 4)}</text>
             </g>
           ))}
           <line x1={x(asOf)} x2={x(asOf)} y1={TOP - 14} y2={H - 4} stroke="var(--accent)" strokeDasharray="2 3" />
@@ -240,7 +240,7 @@ export function InterplayChronology({
             return (
               <g key={j}>
                 <line x1={LABEL} x2={W - 8} y1={g.split} y2={g.split} stroke="var(--border)" />
-                <text x={8} y={g.top + g.height / 2 + 4} fontSize={12} className="fill-[var(--muted)] font-mono">
+                <text x={8} y={g.top + g.height / 2 + 4} fontSize={12} className="fill-[var(--muted)] font-display">
                   {jurisdictionLabels[j]}
                 </text>
               </g>
@@ -256,20 +256,20 @@ export function InterplayChronology({
                 <title>{tip}</title>
               </circle>
             ) : (
-              <rect key={`${m.id}-${m.date}-${m.status}`} x={cx - 4.5} y={cy - 4.5} width={9} height={9} rx={1} fill={INSTRUMENT_KIND_HUES.control} fillOpacity={0.85} stroke="var(--bg)" strokeWidth={1}>
+              <rect key={`${m.id}-${m.date}-${m.status}`} x={cx - 4.5} y={cy - 4.5} width={9} height={9} fill={INSTRUMENT_KIND_HUES.control} fillOpacity={0.85} stroke="var(--bg)" strokeWidth={1}>
                 <title>{tip}</title>
               </rect>
             );
           })}
         </svg>
       </div>
-      <figcaption className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] text-muted">
+      <figcaption className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-display text-xs text-muted">
         <span className="inline-flex items-center gap-1.5">
           <svg aria-hidden width="12" height="12"><circle cx="6" cy="6" r="5" fill={INSTRUMENT_KIND_HUES.capital} /></svg>
           financial status change (upper row of each lane)
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <svg aria-hidden width="12" height="12"><rect x="1.5" y="1.5" width="9" height="9" rx="1" fill={INSTRUMENT_KIND_HUES.control} /></svg>
+          <svg aria-hidden width="12" height="12"><rect x="1.5" y="1.5" width="9" height="9" fill={INSTRUMENT_KIND_HUES.control} /></svg>
           control status change (lower row)
         </span>
         <span>Undated status entries are omitted, never placed at a guessed date.</span>
@@ -293,12 +293,12 @@ export function StageMatrix({ rows }: { rows: FinancialCommitment[] }) {
   const nonGov = rows.filter((r) => r.stages.length > 0 && !commitmentActor(r)).length;
   return (
     <div>
-      <div className="overflow-x-auto rounded-lg border">
+      <div className="overflow-x-auto border-y border-border-strong bg-plate">
         <table className="w-full min-w-[40rem] border-collapse text-sm">
           <caption className="sr-only">Number of financial rows by actor and supply-chain stage</caption>
           <thead>
-            <tr className="border-b bg-card font-mono text-[11px] text-faint">
-              <th scope="col" className="px-3 py-2 text-left font-normal uppercase tracking-[0.12em]">Actor</th>
+            <tr className="border-b bg-elevated font-display text-xs text-faint">
+              <th scope="col" className="px-3 py-2 text-left font-normal">Actor</th>
               {stages.map((s) => (
                 <th key={s} scope="col" className="px-2 py-2 text-center font-normal">
                   {supplyChainStageLabels[s]}
@@ -317,14 +317,14 @@ export function StageMatrix({ rows }: { rows: FinancialCommitment[] }) {
                       {n ? (
                         <Link
                           href={`/capital?actor=${j}&stage=${s}`}
-                          className="tnum flex h-9 items-center justify-center rounded font-mono text-xs text-foreground hover:ring-1 hover:ring-accent"
+                          className="tnum flex h-9 items-center justify-center font-display text-xs text-foreground hover:outline hover:outline-1 hover:outline-accent"
                           style={{ background: `color-mix(in oklab, var(--accent) ${Math.round(12 + (n / max) * 48)}%, transparent)` }}
                           aria-label={`${n} ${jurisdictionLabels[j]} rows at the ${supplyChainStageLabels[s]} stage`}
                         >
                           {n}
                         </Link>
                       ) : (
-                        <span className="flex h-9 items-center justify-center font-mono text-xs text-border-strong">·</span>
+                        <span className="flex h-9 items-center justify-center font-display text-xs text-border-strong">·</span>
                       )}
                     </td>
                   );
@@ -356,14 +356,14 @@ export function MaterialInterplayMatrix({ asOf }: { asOf: string }) {
   const materials = getAllMaterials().filter((m) => grid.has(m.id));
   const actors = JURISDICTIONS.filter((j) => materials.some((m) => grid.get(m.id)?.has(j)));
   return (
-    <div className="overflow-x-auto rounded-lg border">
+    <div className="overflow-x-auto border-y border-border-strong bg-plate">
       <table className="w-full min-w-[44rem] border-collapse text-sm">
         <caption className="sr-only">
           Financial rows and control clauses by material and actor, as of {formatDate(asOf)}
         </caption>
         <thead>
-          <tr className="border-b bg-card font-mono text-[11px] text-faint">
-            <th scope="col" className="px-3 py-2 text-left font-normal uppercase tracking-[0.12em]">Material</th>
+          <tr className="border-b bg-elevated font-display text-xs text-faint">
+            <th scope="col" className="px-3 py-2 text-left font-normal">Material</th>
             {actors.map((j) => (
               <th key={j} scope="col" className="px-2 py-2 text-center font-normal">
                 {jurisdictionLabels[j]}
@@ -379,10 +379,10 @@ export function MaterialInterplayMatrix({ asOf }: { asOf: string }) {
               </th>
               {actors.map((j) => {
                 const c = grid.get(m.id)?.get(j);
-                if (!c) return <td key={j} className="px-2 py-2 text-center font-mono text-xs text-border-strong">·</td>;
+                if (!c) return <td key={j} className="px-2 py-2 text-center font-display text-xs text-border-strong">·</td>;
                 return (
                   <td key={j} className="px-2 py-2 text-center">
-                    <span className="inline-flex flex-col items-center gap-1 font-mono text-[11px]">
+                    <span className="inline-flex flex-col items-center gap-1 font-display text-xs">
                       {c.capitalIds.length ? (
                         <Link href={`/capital?actor=${j}&material=${m.id}`} className="inline-flex items-center gap-1 text-muted hover:text-foreground" aria-label={`${c.capitalIds.length} financial rows`}>
                           <svg aria-hidden width="8" height="8"><circle cx="4" cy="4" r="4" fill={INSTRUMENT_KIND_HUES.capital} /></svg>
@@ -391,7 +391,7 @@ export function MaterialInterplayMatrix({ asOf }: { asOf: string }) {
                       ) : null}
                       {c.controlIds.length ? (
                         <Link href={`/controls?issuer=${j}&material=${m.id}`} className="inline-flex items-center gap-1 text-muted hover:text-foreground" aria-label={`${c.controlIds.length} control clauses, ${c.controlsInForce} in force`}>
-                          <svg aria-hidden width="8" height="8"><rect width="8" height="8" rx="1" fill={INSTRUMENT_KIND_HUES.control} /></svg>
+                          <svg aria-hidden width="8" height="8"><rect width="8" height="8" fill={INSTRUMENT_KIND_HUES.control} /></svg>
                           <span className="tnum">
                             {c.controlIds.length}
                             <span className="text-faint"> ({c.controlsInForce} in force)</span>

@@ -24,7 +24,7 @@ export function AsStated({ text }: { text: string }) {
 
 export function Chip({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <span className={cn("inline-flex h-5 shrink-0 items-center rounded border border-border-strong px-1 font-display text-[10px] text-faint", className)}>
+    <span className={cn("inline-flex h-5 shrink-0 items-center border border-border-strong px-1 font-display text-xs text-faint", className)}>
       {children}
     </span>
   );
@@ -32,9 +32,9 @@ export function Chip({ children, className }: { children: ReactNode; className?:
 
 export function SubHeading({ children, note }: { children: ReactNode; note?: string }) {
   return (
-    <h4 className="font-display text-[11px] uppercase tracking-[0.12em] text-faint">
+    <h4 className="font-display text-xs text-faint">
       {children}
-      {note ? <span className="ml-2 normal-case tracking-normal text-faint/80">{note}</span> : null}
+      {note ? <span className="ml-2 normal-case tracking-normal text-faint">{note}</span> : null}
     </h4>
   );
 }

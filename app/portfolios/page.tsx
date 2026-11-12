@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
 import { JurisdictionTag } from "@/components/labels";
 import { CurrencyTotals } from "@/components/intelligence/totals";
 import { ProjectLink } from "@/components/intelligence/org-link";
@@ -39,16 +38,16 @@ type Row = { label: string; values: number[]; href?: (i: number) => string };
 
 function CountTable({ actors, groups }: { actors: readonly string[]; groups: { title: string; rows: Row[] }[] }) {
   return (
-    <div className="relative overflow-x-auto rounded-lg border">
+    <div className="relative overflow-x-auto border">
       <table className="w-full min-w-[40rem] border-collapse text-sm">
         <caption className="sr-only">Record counts by government</caption>
         <thead>
-          <tr className="border-b bg-card">
-            <th scope="col" className="sticky left-0 z-10 bg-card px-3 py-2 text-left font-mono text-[11px] font-normal uppercase tracking-[0.12em] text-faint">
+          <tr className="border-b bg-elevated">
+            <th scope="col" className="sticky left-0 z-10 bg-elevated px-3 py-2 text-left font-display text-xs font-normal text-faint">
               Records
             </th>
             {actors.map((a) => (
-              <th key={a} scope="col" className="px-3 py-2 text-right font-mono text-[11px] font-normal text-muted">
+              <th key={a} scope="col" className="px-3 py-2 text-right font-display text-xs font-normal text-muted">
                 {jurisdictionShort[a as keyof typeof jurisdictionShort]}
               </th>
             ))}
@@ -56,8 +55,8 @@ function CountTable({ actors, groups }: { actors: readonly string[]; groups: { t
         </thead>
         {groups.map((g) => (
           <tbody key={g.title}>
-            <tr className="border-b bg-elevated/40">
-              <th scope="colgroup" colSpan={actors.length + 1} className="sticky left-0 px-3 py-1.5 text-left font-mono text-[10px] font-normal uppercase tracking-[0.14em] text-faint">
+            <tr className="border-b bg-elevated">
+              <th scope="colgroup" colSpan={actors.length + 1} className="sticky left-0 px-3 py-1.5 text-left font-display text-xs font-normal text-faint">
                 {g.title}
               </th>
             </tr>
@@ -69,8 +68,8 @@ function CountTable({ actors, groups }: { actors: readonly string[]; groups: { t
                   {r.values.map((v, i) => (
                     <td key={i} className="tnum px-3 py-2 text-right">
                       <span className="inline-flex items-center justify-end gap-2">
-                        <span aria-hidden className="hidden h-1.5 rounded-sm bg-[#CBA86A]/60 sm:block" style={{ width: `${v ? Math.max(3, Math.round((v / max) * 40)) : 0}px` }} />
-                        <span className={v ? "font-mono text-xs text-foreground" : "font-mono text-xs text-faint"}>{v || "·"}</span>
+                        <span aria-hidden className="hidden h-1.5 bg-mark-commitment sm:block" style={{ width: `${v ? Math.max(3, Math.round((v / max) * 40)) : 0}px` }} />
+                        <span className={v ? "font-display text-xs text-foreground" : "font-display text-xs text-faint"}>{v || "·"}</span>
                       </span>
                     </td>
                   ))}
@@ -114,12 +113,9 @@ export default function PortfoliosPage() {
   return (
     <Container className="py-12" width="wide">
       <PageHeading
-        index="03"
-        eyebrow="Capital intelligence"
         title="Portfolios"
         lead={
           <>
-            Compare the public financial instruments attributed to each government.
             Committed money is grouped by currency and binding status; the remaining
             measures count records. Comparing financing scale across currencies
             requires a separate consistent basis.
@@ -129,40 +125,38 @@ export default function PortfoliosPage() {
 
       <div className="mt-12 space-y-16">
         <Section
-          index="01"
           title="Committed public money, per currency"
           description="Summed under the counting rules: a part is never added to its package, envelopes and unexercised options are listed and left out, figures stated “up to” are added only to each other (a sum of stated upper bounds, not an amount paid), and joint vehicles are kept apart from public money."
         >
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {portfolios.map((p) => (
-              <Card key={p.actor} className="min-w-0 p-4">
+              <div key={p.actor} className="border-t border-border-strong pt-4 min-w-0">
                 <div className="mb-3 flex items-center justify-between gap-2">
                   <Link href={`/actors/${getJurisdictionById(p.actor)?.code.toLowerCase() ?? p.actor}`} className="hover:opacity-80">
                     <JurisdictionTag code={p.actor} withName />
                   </Link>
-                  <span className="font-mono text-[11px] text-faint">
+                  <span className="font-display text-xs text-faint">
                     {p.counts.rows} records{p.counts.ended ? ` · ${p.counts.ended} ended` : ""}
                   </span>
                 </div>
                 <CurrencyTotals totals={p.publicTotals} compact />
-                <p className="mt-2 font-mono text-[11px] text-faint">
-                  <Link href={`/capital?actor=${p.actor}&role=commitment`} className="text-accent hover:text-accent-strong">
-                    Every row, with its own figure →
+                <p className="mt-2 font-display text-xs text-faint">
+                  <Link href={`/capital?actor=${p.actor}&role=commitment`} className="link-quiet">
+                    Every row, with its own figure
                   </Link>
                 </p>
                 {p.jointVehicleTotals.currencies.length ? (
                   <div className="mt-3 border-t pt-3">
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Joint vehicles, kept apart</p>
+                    <p className="mb-2 font-display text-xs text-faint">Joint vehicles, kept apart</p>
                     <CurrencyTotals totals={p.jointVehicleTotals} compact />
                   </div>
                 ) : null}
-              </Card>
+              </div>
             ))}
           </div>
         </Section>
 
         <Section
-          index="02"
           title="What each portfolio is made of"
           description={`Counts of records, never money. Rows, value role, instrument, legal standing and geography count a package with its parts once; stage and material count per cell, so a part is counted at a stage or material its package does not list and never again where the package lists it. Instrument, stage and material hold every value role except funding options and non-binding indications (commitments, envelopes, appropriations, private financing and the rest); legal standing and geography hold committed rows only. A row that withdrew or lapsed is not capital and is counted only as ended; a funding option is counted in its own value role and nowhere else, since it is a right to call on money and not an exercise, and so is a non-binding indication, which is possible support and not a commitment. At home or abroad is read from each committed row's stated location or its project's, against the provider's home territory (the member states for the EU). Data as of ${site.lastUpdated}.`}
         >
@@ -218,16 +212,15 @@ export default function PortfoliosPage() {
         </Section>
 
         <Section
-          index="03"
           title="Where the money is aimed"
           description="Committed rows from each government to each country the row or its project names. A row aimed at two countries counts under both; a package counts once, with its parts folded into it."
         >
-          <div className="relative overflow-x-auto rounded-lg border">
+          <div className="relative overflow-x-auto border">
             <table className="w-full min-w-[32rem] border-collapse text-sm">
               <caption className="sr-only">Committed rows by providing government and destination country</caption>
               <thead>
-                <tr className="border-b bg-card font-mono text-[11px] text-muted">
-                  <th scope="col" className="sticky left-0 z-10 bg-card px-3 py-2 text-left font-normal uppercase tracking-[0.12em] text-faint">From \ to</th>
+                <tr className="border-b bg-elevated font-display text-xs text-muted">
+                  <th scope="col" className="sticky left-0 z-10 bg-elevated px-3 py-2 text-left font-normal text-faint">From \ to</th>
                   {destinations.map((d) => (
                     <th key={d} scope="col" className="px-3 py-2 text-right font-normal">{d === "not_stated" ? "not stated" : d}</th>
                   ))}
@@ -242,7 +235,7 @@ export default function PortfoliosPage() {
                     {destinations.map((d) => {
                       const cell = flows.find((f) => f.actor === a && f.destination === d);
                       return (
-                        <td key={d} className="tnum px-3 py-2 text-right font-mono text-xs">
+                        <td key={d} className="tnum px-3 py-2 text-right font-display text-xs">
                           {cell ? (
                             <span title={cell.rowIds.join(", ")} className={d === "not_stated" ? "text-muted" : "text-foreground"}>
                               {cell.rowIds.length}
@@ -259,7 +252,7 @@ export default function PortfoliosPage() {
             </table>
           </div>
           {notStatedWithLocatedParts.length ? (
-            <div className="mt-4 rounded-lg border bg-card p-4 text-sm">
+            <div className="mt-4 border-l-2 border-ochre bg-plate px-4 py-3 text-sm">
               <p className="text-muted">
                 &ldquo;Not stated&rdquo; for a package can sit beside known locations on its parts. A package is aimed at no country
                 when not every part states one; the parts that do are folded into it and are not counted again at their own country
@@ -272,7 +265,7 @@ export default function PortfoliosPage() {
                     <Link href={`/capital/${x.row.id}`} className="min-w-0 text-accent hover:text-accent-strong">
                       {financialInstrumentLabels[x.row.instrument]} · {x.row.recipient ?? x.row.provider ?? x.row.id}
                     </Link>
-                    <span className="font-mono text-[11px] text-faint">
+                    <span className="font-display text-xs text-faint">
                       {x.located} of {x.parts} parts state a country ({x.countries.join(", ")})
                     </span>
                   </li>
@@ -283,29 +276,28 @@ export default function PortfoliosPage() {
         </Section>
 
         <Section
-          index="04"
           title="Projects with more than one backer"
           description="By kind: more than one government's capital, public and private capital, several public bodies, or public capital alongside a designation. Programme ceilings and total project costs appear outside the count of capital provided."
         >
           {co.length ? (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-x-8 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
               {co.map((c) => (
-                <Card key={c.project.id} className="p-4">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">{c.kinds.map((k) => coInvestmentKindLabels[k]).join(" · ")}</p>
+                <div key={c.project.id} className="border-t border-border-strong pt-4">
+                  <p className="font-display text-xs text-muted">{c.kinds.map((k) => coInvestmentKindLabels[k]).join(" · ")}</p>
                   <p className="mt-2 font-display font-semibold leading-snug"><ProjectLink id={c.project.id} /></p>
                   <div className="mt-2 flex flex-wrap items-center gap-2">
                     {c.governments.map((g) => <JurisdictionTag key={g} code={g} />)}
                     {c.designatingGovernments.length ? (
-                      <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-muted">
-                        <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" /> designated by {c.designatingGovernments.map((g) => jurisdictionShort[g]).join(", ")}
+                      <span className="inline-flex items-center gap-1.5 font-display text-xs text-muted">
+                        <span aria-hidden className="h-2 w-2 rotate-45 border border-mark-designation" /> designated by {c.designatingGovernments.map((g) => jurisdictionShort[g]).join(", ")}
                       </span>
                     ) : null}
                   </div>
-                  <p className="mt-2 font-mono text-[11px] text-faint">
+                  <p className="mt-2 font-display text-xs text-faint">
                     {c.rowIds.length} row{c.rowIds.length === 1 ? "" : "s"} · {c.providerOrgIds.length} providing organization{c.providerOrgIds.length === 1 ? "" : "s"}
                     {c.designationIds.length ? ` · ${c.designationIds.length} designation${c.designationIds.length === 1 ? "" : "s"}` : ""}
                   </p>
-                </Card>
+                </div>
               ))}
             </div>
           ) : (
@@ -315,7 +307,6 @@ export default function PortfoliosPage() {
 
         {designators.length ? (
           <Section
-            index="05"
             title="Project designations"
             description="Projects a government recognizes under a designation scheme. Designation standing is tracked separately from financial commitments. At home or abroad is read from the designated project's stated country against the designating government's home territory."
           >
@@ -325,23 +316,23 @@ export default function PortfoliosPage() {
                 const mats = materials.filter((m) => d.counts.byMaterial[m.id]);
                 const st = SUPPLY_CHAIN_STAGES.filter((s) => d.counts.byStage[s]);
                 return (
-                  <Card key={d.actor} className="p-5">
+                  <div key={d.actor} className="border-t border-border-strong pt-4">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <JurisdictionTag code={d.actor} withName />
-                      <span className="font-mono text-[11px] text-faint">{d.counts.designations} designations · {d.counts.holders} holders</span>
+                      <span className="font-display text-xs text-faint">{d.counts.designations} designations · {d.counts.holders} holders</span>
                     </div>
                     <div className="mt-4 grid gap-5 md:grid-cols-3">
                       <div>
-                        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Where</p>
+                        <p className="mb-2 font-display text-xs text-faint">Where</p>
                         <dl className="space-y-1 text-sm">
                           {(["domestic", "abroad", "domestic_and_abroad", "not_stated"] as const).filter((g) => d.counts.byGeography[g]).map((g) => (
-                            <div key={g} className="flex justify-between gap-3"><dt className="text-muted">{geographyLabels[g]}</dt><dd className="tnum font-mono">{d.counts.byGeography[g]}</dd></div>
+                            <div key={g} className="flex justify-between gap-3"><dt className="text-muted">{geographyLabels[g]}</dt><dd className="tnum font-display">{d.counts.byGeography[g]}</dd></div>
                           ))}
                         </dl>
-                        <p className="mt-2 font-mono text-[11px] leading-5 text-faint">{countries.map(([cc, n]) => `${cc} ${n}`).join(" · ")}</p>
+                        <p className="mt-2 font-display text-xs leading-5 text-faint">{countries.map(([cc, n]) => `${cc} ${n}`).join(" · ")}</p>
                       </div>
                       <div>
-                        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Materials</p>
+                        <p className="mb-2 font-display text-xs text-faint">Materials</p>
                         <dl className="space-y-1 text-sm">
                           {mats.map((m) => (
                             <div key={m.id} className="flex justify-between gap-3"><dt className="text-muted">{m.nameEn}</dt><dd className="tnum font-mono">{d.counts.byMaterial[m.id]}</dd></div>
@@ -349,13 +340,13 @@ export default function PortfoliosPage() {
                         </dl>
                       </div>
                       <div>
-                        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-faint">Stages</p>
+                        <p className="mb-2 font-display text-xs text-faint">Stages</p>
                         <dl className="space-y-1 text-sm">
                           {st.map((s) => (
-                            <div key={s} className="flex justify-between gap-3"><dt className="text-muted">{supplyChainStageLabels[s]}</dt><dd className="tnum font-mono">{d.counts.byStage[s]}</dd></div>
+                            <div key={s} className="flex justify-between gap-3"><dt className="text-muted">{supplyChainStageLabels[s]}</dt><dd className="tnum font-display">{d.counts.byStage[s]}</dd></div>
                           ))}
                           {d.counts.noStage ? (
-                            <div className="flex justify-between gap-3"><dt className="text-faint">Substitution, no stage</dt><dd className="tnum font-mono">{d.counts.noStage}</dd></div>
+                            <div className="flex justify-between gap-3"><dt className="text-faint">Substitution, no stage</dt><dd className="tnum font-display">{d.counts.noStage}</dd></div>
                           ) : null}
                         </dl>
                       </div>
@@ -365,39 +356,39 @@ export default function PortfoliosPage() {
                         ? `${d.counts.projectsWithCapital} designated project${d.counts.projectsWithCapital === 1 ? " also carries" : "s also carry"} a financial row in the corpus. `
                         : "No designated project carries a financial row in the corpus yet. "}
                       {programmes.filter((g) => g.actor === d.actor && g.kind === "designation_scheme").map((g) => (
-                        <Link key={g.id} href={`/programmes/${g.id}`} className="text-accent hover:text-accent-strong">{g.name} →</Link>
+                        <Link key={g.id} href={`/programmes/${g.id}`} className="link-quiet">{g.name}</Link>
                       ))}
                     </p>
-                  </Card>
+                  </div>
                 );
               })}
             </div>
           </Section>
         ) : null}
 
-        <Section index={designators.length ? "06" : "05"} title="Programmes" description="The named schemes each government runs.">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Section title="Programmes">
+          <div className="grid gap-x-8 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
             {actors.map((a) => {
               const list = programmes.filter((g) => g.actor === a);
               return (
-                <Card key={a} className="p-4">
+                <div key={a} className="border-t border-border-strong pt-4">
                   <JurisdictionTag code={a} withName />
                   <ul className="mt-3 space-y-1 text-sm">
                     {list.length ? list.map((g) => (
-                      <li key={g.id}><Link href={`/programmes/${g.id}`} className="text-accent hover:text-accent-strong">{g.name}</Link></li>
+                      <li key={g.id}><Link href={`/programmes/${g.id}`} className="link-quiet">{g.name}</Link></li>
                     )) : <li className="text-muted">None recorded.</li>}
                   </ul>
-                </Card>
+                </div>
               );
             })}
           </div>
         </Section>
 
-        <p className="text-sm text-muted">
+        <p className="border-t border-border pt-4 font-display text-sm text-muted">
           Machine-readable:{" "}
-          <Link href="/api/v1/capital-intelligence/summary" prefetch={false} className="text-accent hover:text-accent-strong">capital-intelligence summary (JSON)</Link>
+          <Link href="/api/v1/capital-intelligence/summary" prefetch={false} className="link-quiet">capital-intelligence summary (JSON)</Link>
           {" · "}
-          <Link href="/methodology#capital-intelligence" className="text-accent hover:text-accent-strong">how these views are derived</Link>
+          <Link href="/methodology#capital-intelligence" className="link-quiet">how these views are derived</Link>
         </p>
       </div>
     </Container>

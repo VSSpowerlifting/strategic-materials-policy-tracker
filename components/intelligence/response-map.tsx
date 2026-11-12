@@ -22,28 +22,28 @@ function statusLine(cell: ResponseCell): string {
 }
 
 function Cell({ cell }: { cell: ResponseCell | undefined }) {
-  if (!cell) return <span className="font-mono text-xs text-faint">·</span>;
+  if (!cell) return <span className="font-display text-xs text-faint">·</span>;
   const issuers = Object.keys(cell.controlsByIssuer) as JurisdictionCode[];
   return (
     <span className="flex flex-col items-start gap-1">
       {cell.capitalIds.length ? (
-        <span className="inline-flex items-center gap-1.5 font-mono text-[11px]" title={cell.capitalIds.join(", ")}>
-          <span aria-hidden className="h-2 w-2 rounded-full bg-[#CBA86A]" />
+        <span className="inline-flex items-center gap-1.5 font-display text-xs" title={cell.capitalIds.join(", ")}>
+          <span aria-hidden className="h-2 w-2 rounded-full bg-mark-commitment" />
           <span className="text-foreground">{cell.capitalIds.length}</span>
           <span className="text-faint">{cell.capitalActors.map((a) => jurisdictionShort[a]).join(" ")}</span>
           <span className="sr-only">capital rows</span>
         </span>
       ) : null}
       {cell.optionIds.length ? (
-        <span className="inline-flex items-center gap-1.5 font-mono text-[11px]" title={`${cell.optionIds.join(", ")} (funding options, not exercised commitments)`}>
-          <span aria-hidden className="h-2 w-2 rounded-full border border-[#CBA86A]" />
+        <span className="inline-flex items-center gap-1.5 font-display text-xs" title={`${cell.optionIds.join(", ")} (funding options, not exercised commitments)`}>
+          <span aria-hidden className="h-2 w-2 rounded-full border border-mark-commitment" />
           <span className="text-foreground">{cell.optionIds.length}</span>
           <span className="text-faint">{cell.optionActors.map((a) => jurisdictionShort[a]).join(" ")}</span>
           <span className="sr-only">funding options, not commitments</span>
         </span>
       ) : null}
       {cell.endedIds.length ? (
-        <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-faint" title={`${cell.endedIds.join(", ")} (withdrawn or lapsed)`}>
+        <span className="inline-flex items-center gap-1.5 font-display text-xs text-faint" title={`${cell.endedIds.join(", ")} (withdrawn or lapsed)`}>
           <span aria-hidden className="h-2 w-2 rounded-full border border-dashed border-faint" />
           <span>{cell.endedIds.length}</span>
           <span>ended</span>
@@ -51,16 +51,16 @@ function Cell({ cell }: { cell: ResponseCell | undefined }) {
         </span>
       ) : null}
       {cell.designationIds.length ? (
-        <span className="inline-flex items-center gap-1.5 font-mono text-[11px]" title={cell.designationIds.join(", ")}>
-          <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" />
+        <span className="inline-flex items-center gap-1.5 font-display text-xs" title={cell.designationIds.join(", ")}>
+          <span aria-hidden className="h-2 w-2 rotate-45 border border-mark-designation" />
           <span className="text-foreground">{cell.designationIds.length}</span>
           <span className="text-faint">{cell.designationActors.map((a) => jurisdictionShort[a]).join(" ")}</span>
           <span className="sr-only">project designations</span>
         </span>
       ) : null}
       {cell.controlIds.length ? (
-        <span className="inline-flex items-center gap-1.5 font-mono text-[11px]" title={`${cell.controlIds.join(", ")} (${statusLine(cell)})`}>
-          <span aria-hidden className="h-2 w-2 rounded-[1px] bg-[#C77B7B]" />
+        <span className="inline-flex items-center gap-1.5 font-display text-xs" title={`${cell.controlIds.join(", ")} (${statusLine(cell)})`}>
+          <span aria-hidden className="h-2 w-2 bg-mark-control" />
           <span className="text-foreground">{cell.controlIds.length}</span>
           <span className="text-faint">{issuers.map((a) => jurisdictionShort[a]).join(" ")}</span>
           <span className="sr-only">control clauses: {statusLine(cell)}</span>
@@ -76,16 +76,16 @@ export function StageResponseMap({ asOf }: { asOf: string }) {
   const stages = SUPPLY_CHAIN_STAGES.filter((s) => [...map.values()].some((row) => row.has(s)));
   return (
     <div>
-      <div className="relative overflow-x-auto rounded-lg border">
+      <div className="relative overflow-x-auto border">
         <table className="w-full min-w-[44rem] border-collapse text-sm">
           <caption className="sr-only">Capital commitments, funding options, ended rows, designations and control clauses by material and supply-chain stage</caption>
           <thead>
-            <tr className="border-b bg-card">
-              <th scope="col" className="sticky left-0 z-10 bg-card px-3 py-2 text-left font-mono text-[11px] font-normal uppercase tracking-[0.12em] text-faint">
+            <tr className="border-b bg-elevated">
+              <th scope="col" className="sticky left-0 z-10 bg-elevated px-3 py-2 text-left font-display text-xs font-normal text-faint">
                 Material
               </th>
               {stages.map((s) => (
-                <th key={s} scope="col" className="px-3 py-2 text-left font-mono text-[11px] font-normal text-muted">
+                <th key={s} scope="col" className="px-3 py-2 text-left font-display text-xs font-normal text-muted">
                   {supplyChainStageLabels[s]}
                 </th>
               ))}
@@ -107,12 +107,12 @@ export function StageResponseMap({ asOf }: { asOf: string }) {
           </tbody>
         </table>
       </div>
-      <p className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] text-faint">
-        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full bg-[#CBA86A]" /> government commitments that have not ended, a package once</span>
-        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full border border-[#CBA86A]" /> funding options: a right to call on money, not an exercise</span>
+      <p className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-display text-xs text-faint">
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full bg-mark-commitment" /> government commitments that have not ended, a package once</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full border border-mark-commitment" /> funding options: a right to call on money, not an exercise</span>
         <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-full border border-dashed border-faint" /> withdrawn or lapsed rows: not capital</span>
-        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" /> project designations (standing, not money)</span>
-        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rounded-[1px] bg-[#C77B7B]" /> control clauses whose covered items sit here</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 rotate-45 border border-mark-designation" /> project designations (standing, not money)</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-2 w-2 bg-mark-control" /> control clauses whose covered items sit here</span>
         <span>Letters: the governments providing or issuing. Hover or focus a count for record ids and statuses.</span>
       </p>
     </div>
@@ -125,7 +125,7 @@ export function MaterialStageResponse({ materialId, asOf }: { materialId: string
   if (!row) return <p className="text-sm text-muted">No capital row, designation or control clause is coded to a stage for this material.</p>;
   const stages = SUPPLY_CHAIN_STAGES.filter((s) => row.has(s));
   return (
-    <ul className="divide-y rounded-lg border">
+    <ul className="divide-y border">
       {stages.map((s) => {
         const cell = row.get(s)!;
         return (
@@ -134,7 +134,7 @@ export function MaterialStageResponse({ materialId, asOf }: { materialId: string
             <span className="flex min-w-0 flex-1 flex-col gap-1.5 text-sm">
               {cell.capitalIds.length ? (
                 <span className="flex flex-wrap items-center gap-2">
-                  <span aria-hidden className="h-2 w-2 rounded-full bg-[#CBA86A]" />
+                  <span aria-hidden className="h-2 w-2 rounded-full bg-mark-commitment" />
                   <span className="text-muted">{cell.capitalIds.length} capital row{cell.capitalIds.length === 1 ? "" : "s"} from</span>
                   {cell.capitalActors.map((a) => <JurisdictionTag key={a} code={a} />)}
                 </span>
@@ -143,7 +143,7 @@ export function MaterialStageResponse({ materialId, asOf }: { materialId: string
               )}
               {cell.optionIds.length ? (
                 <span className="flex flex-wrap items-center gap-2">
-                  <span aria-hidden className="h-2 w-2 rounded-full border border-[#CBA86A]" />
+                  <span aria-hidden className="h-2 w-2 rounded-full border border-mark-commitment" />
                   <span className="text-muted">{cell.optionIds.length} funding option{cell.optionIds.length === 1 ? "" : "s"}, not exercised commitments, from</span>
                   {cell.optionActors.map((a) => <JurisdictionTag key={a} code={a} />)}
                 </span>
@@ -156,14 +156,14 @@ export function MaterialStageResponse({ materialId, asOf }: { materialId: string
               ) : null}
               {cell.designationIds.length ? (
                 <span className="flex flex-wrap items-center gap-2">
-                  <span aria-hidden className="h-2 w-2 rotate-45 border border-[#4fb59e]" />
+                  <span aria-hidden className="h-2 w-2 rotate-45 border border-mark-designation" />
                   <span className="text-muted">{cell.designationIds.length} project designation{cell.designationIds.length === 1 ? "" : "s"} from</span>
                   {cell.designationActors.map((a) => <JurisdictionTag key={a} code={a} />)}
                 </span>
               ) : null}
               {cell.controlIds.length ? (
                 <span className="flex flex-wrap items-center gap-2">
-                  <span aria-hidden className="h-2 w-2 rounded-[1px] bg-[#C77B7B]" />
+                  <span aria-hidden className="h-2 w-2 bg-mark-control" />
                   <span className="text-muted">
                     {cell.controlIds.length} control clause{cell.controlIds.length === 1 ? "" : "s"} ({statusLine(cell)}) from
                   </span>

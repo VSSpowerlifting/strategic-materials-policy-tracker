@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading, Section } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
 import { InterplayChronology, MaterialInterplayMatrix } from "@/components/capital/charts";
 import { InterplayChronologyList } from "@/components/capital/chronology-list";
 import { JurisdictionTag } from "@/components/labels";
@@ -45,10 +44,10 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
       {items.map((it) =>
         it.kind === "control" ? (
           <li key={it.m.id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
-            <time className="tnum w-24 shrink-0 font-mono text-xs text-faint">{it.date ? formatDate(it.date) : "—"}</time>
+            <time className="tnum w-24 shrink-0 font-display text-xs text-faint">{it.date ? formatDate(it.date) : "—"}</time>
             <JurisdictionTag code={controlIssuer(it.m)} />
             <Link href={`/controls/${it.m.id}`} className="min-w-0 flex-1 basis-48 md:basis-0 hover:text-accent">
-              <span aria-hidden className="mr-1.5 inline-block h-2 w-2 rounded-[1px] bg-[#C77B7B]" />
+              <span aria-hidden className="mr-1.5 inline-block h-2 w-2 bg-mark-control" />
               {controlMeasureTypeLabels[it.m.measureType]}
               {it.m.clause ? <span className="text-muted"> · {it.m.clause}</span> : null}
             </Link>
@@ -56,10 +55,10 @@ function MaterialLedger({ materialId, asOf }: { materialId: string; asOf: string
           </li>
         ) : (
           <li key={it.c.id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
-            <time className="tnum w-24 shrink-0 font-mono text-xs text-faint">{it.date ? formatDate(it.date) : "—"}</time>
+            <time className="tnum w-24 shrink-0 font-display text-xs text-faint">{it.date ? formatDate(it.date) : "—"}</time>
             <ProviderTag code={commitmentActor(it.c)} />
             <Link href={`/capital/${it.c.id}`} className="min-w-0 flex-1 basis-48 md:basis-0 hover:text-accent">
-              <span aria-hidden className="mr-1.5 inline-block h-2 w-2 rounded-full bg-[#CBA86A]" />
+              <span aria-hidden className="mr-1.5 inline-block h-2 w-2 rounded-full bg-mark-commitment" />
               {financialInstrumentLabels[it.c.instrument]}
               {it.c.valueRole !== "commitment" ? (
                 <span className="text-faint"> · {valueRoleLabels[it.c.valueRole].toLowerCase()}</span>
@@ -82,40 +81,37 @@ export default function InterplayPage() {
   return (
     <Container className="py-12">
       <PageHeading
-        index="01"
-        eyebrow="Capital and control"
         title="Capital × Control"
-        lead="Compare the timing of government financing and control measures by jurisdiction, material and supply-chain stage. Each record retains its source and legal status. A causal relationship requires explicit supporting evidence."
+        lead="Government financing and control measures by date, material and supply-chain stage. A causal relationship requires explicit supporting evidence."
       />
       <div className="mt-12 space-y-14">
-        <Section index="01" title="Chronology by actor" description="Every dated status change of a financial row (circle) and a control clause (square). The chart and linked list show each recorded status change.">
+        <Section title="Chronology by actor" description="Every dated status change of a financial row (circle) and a control clause (square).">
           <InterplayChronology asOf={asOf} />
           <div className="mt-8">
             <InterplayChronologyList />
           </div>
         </Section>
 
-        <Section index="02" title="Material by actor" description={`Financial rows provided that have not ended (a package counts once; a withdrawn or lapsed row is left out, and a funding option is a row of its own, not an exercise) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Record counts of recorded instruments.`}>
+        <Section title="Material by actor" description={`Financial rows provided that have not ended (a package counts once; a withdrawn or lapsed row is left out, and a funding option is a row of its own, not an exercise) and control clauses issued, per material, with clauses in force on ${formatDate(asOf)}. Counts are of recorded instruments.`}>
           <MaterialInterplayMatrix asOf={asOf} />
         </Section>
 
         <Section
-          index="03"
           title="Material by supply-chain stage"
-          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. A clause's stage is where its items belong (separation technology sits at separation), not a claim that it restricts that stage; clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed. Record counts of recorded instruments.`}
+          description={`Where government capital is aimed and where control clauses' covered items sit, stage by stage, with statuses on ${formatDate(asOf)}. A clause's stage is where its items belong (separation technology sits at separation), not a claim that it restricts that stage; clauses that define no items of their own (end-use, customs, divestiture, suspension) are not placed. Counts are of recorded instruments.`}
         >
           <StageResponseMap asOf={asOf} />
         </Section>
 
-        <Section index="04" title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. A part is folded into its package only when that package is listed here in the same state; a row that withdrew or lapsed is marked ended and never hides a part that still stands.">
-          <div className="grid gap-4 lg:grid-cols-2">
+        <Section title="Material ledgers" description="For each material, its controls and its top-level financial rows in date order. A part is folded into its package only when that package is listed here in the same state; a row that withdrew or lapsed is marked ended and never hides a part that still stands.">
+          <div className="grid gap-x-8 gap-y-10 lg:grid-cols-2">
             {materials.map((m) => (
-              <Card key={m.id} className="p-5">
+              <div key={m.id} className="border-t border-border-strong pt-4">
                 <h3 className="mb-3 font-display text-lg font-semibold">
                   <Link href={`/materials/${m.slug}`} className="hover:text-accent">{m.nameEn}</Link>
                 </h3>
                 <MaterialLedger materialId={m.id} asOf={asOf} />
-              </Card>
+              </div>
             ))}
           </div>
         </Section>

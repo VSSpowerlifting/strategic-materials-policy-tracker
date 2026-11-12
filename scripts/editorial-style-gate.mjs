@@ -2,14 +2,24 @@
 /**
  * Diff-aware editorial gate for published SMPT research pages.
  * CI cannot judge natural voice or verify a human actually inspected a preview.
- * It requires a fresh, page-hash-bound editorial attestation and scans edited
- * JSX paragraphs/headings for high-risk writing patterns.
+ * It requires a fresh editorial attestation bound to a page's research content
+ * and scans edited JSX paragraphs/headings for high-risk writing patterns.
+ *
+ * The attestation binds to a content fingerprint, not to the raw file. The
+ * fingerprint covers everything a reader or a citation depends on: visible
+ * text, metadata, data arrays and tables, numbers, links, image sources, alt
+ * text and the page's own logic. It leaves out presentation: class names,
+ * inline styles, element and component names, wrapper elements, layout props,
+ * anchors and imports used only for markup. A layout or styling change
+ * therefore keeps an attestation valid, and any change to the research
+ * content, a figure, a citation or source evidence still requires a new one.
  */
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import ts from "typescript";
 
 const RULES = [
   ["rhetorical-negation", /\bnot\s+(?:just|only|merely)\b.{0,120}?\bbut\b/gi,
@@ -53,9 +63,168 @@ export function extractProseBlocks(source) {
   return blocks;
 }
 
-/* Bind attestation to ALL page source, including metadata and data-driven tables. */
+/* Exact-source hash. Records made before the content fingerprint carry it as pageSha256. */
 export function pageHash(source) {
   return createHash("sha256").update(source).digest("hex");
+}
+
+/*
+ * Presentation attributes: their values never reach the fingerprint. Keep this
+ * list to attributes that cannot carry research content. Anything absent from
+ * it counts as content, so an unknown attribute fails safe.
+ */
+const PRESENTATION_ATTRIBUTES = new Set([
+  "className", "class", "style", "id", "key", "ref", "role", "tabIndex",
+  "width", "height", "sizes", "priority", "loading", "decoding", "fetchPriority",
+  "colSpan", "rowSpan", "scope", "target", "rel", "open",
+  "variant", "size", "tone", "align", "layout", "as",
+]);
+/* aria-* that name or describe something are reader-facing text and stay in the fingerprint. */
+const TEXTUAL_ARIA = new Set([
+  "aria-label", "aria-description", "aria-roledescription", "aria-valuetext", "aria-placeholder",
+]);
+/* Attributes whose name is kept beside the value, so swapping two of them is a content change. */
+const NAMED_ATTRIBUTES = new Set([
+  "href", "src", "srcSet", "poster", "alt", "title", "cite", "dateTime", "lang",
+  "download", "content", "name", "value", ...TEXTUAL_ARIA,
+]);
+
+export function isPresentationAttribute(name) {
+  if (PRESENTATION_ATTRIBUTES.has(name)) return true;
+  if (name.startsWith("data-")) return true;
+  if (name.startsWith("aria-")) return !TEXTUAL_ARIA.has(name);
+  return false;
+}
+
+const FINGERPRINT_VERSION = "smpt-editorial-content-v1";
+
+function isJsxNode(node) {
+  return ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node) || ts.isJsxFragment(node);
+}
+
+/* A constant that can only hold class names: a string, or an object/array of strings. */
+function isClassValue(node) {
+  if (!node) return false;
+  if (ts.isAsExpression(node) || ts.isParenthesizedExpression(node) || ts.isSatisfiesExpression?.(node)) {
+    return isClassValue(node.expression);
+  }
+  if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) return true;
+  if (ts.isArrayLiteralExpression(node)) return node.elements.every(isClassValue);
+  if (ts.isObjectLiteralExpression(node)) {
+    return node.properties.every(p => ts.isPropertyAssignment(p) && isClassValue(p.initializer));
+  }
+  return false;
+}
+
+/* Names referenced anywhere other than a JSX tag position or a presentation attribute. */
+function contentReferences(sf) {
+  const names = new Set();
+  const visit = (node, presentation) => {
+    if (ts.isImportDeclaration(node) || ts.isJsxClosingElement(node)) return;
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      for (const attribute of node.attributes.properties) visit(attribute, presentation);
+      return;
+    }
+    if (ts.isJsxAttribute(node)) {
+      if (node.initializer) {
+        visit(node.initializer, presentation || isPresentationAttribute(node.name.getText(sf)));
+      }
+      return;
+    }
+    if (ts.isIdentifier(node)) {
+      const declares = ts.isVariableDeclaration(node.parent) && node.parent.name === node;
+      if (!presentation && !declares) names.add(node.text);
+      return;
+    }
+    ts.forEachChild(node, child => visit(child, presentation));
+  };
+  visit(sf, false);
+  return names;
+}
+
+function importBindings(node) {
+  const clause = node.importClause;
+  if (!clause) return [];
+  const names = [];
+  if (clause.name) names.push(clause.name.text);
+  const bindings = clause.namedBindings;
+  if (bindings && ts.isNamespaceImport(bindings)) names.push(bindings.name.text);
+  if (bindings && ts.isNamedImports(bindings)) for (const el of bindings.elements) names.push(el.name.text);
+  return names;
+}
+
+/*
+ * The ordered research content of a page, as tokens. Text split by markup stays
+ * split, so adding or removing a link or emphasis around a phrase is a content
+ * change; the element used to carry the text is not.
+ */
+export function contentTokens(source) {
+  const sf = ts.createSourceFile("page.tsx", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const referenced = contentReferences(sf);
+  const tokens = [];
+
+  const emitAttributes = (attributes) => {
+    for (const attribute of attributes.properties) {
+      if (ts.isJsxSpreadAttribute(attribute)) { emit(attribute.expression); continue; }
+      const name = attribute.name.getText(sf);
+      if (isPresentationAttribute(name) || !attribute.initializer) continue;
+      if (NAMED_ATTRIBUTES.has(name)) tokens.push("@" + name);
+      emit(attribute.initializer);
+    }
+  };
+
+  const emit = (node) => {
+    if (node.kind >= ts.SyntaxKind.FirstJSDocNode && node.kind <= ts.SyntaxKind.LastJSDocNode) return;
+    if (ts.isImportDeclaration(node) && !importBindings(node).some(name => referenced.has(name))) return;
+    if (ts.isVariableStatement(node) && node.parent === sf &&
+        !node.modifiers?.some(m => m.kind === ts.SyntaxKind.ExportKeyword) &&
+        node.declarationList.declarations.every(d =>
+          ts.isIdentifier(d.name) && !referenced.has(d.name.text) && isClassValue(d.initializer))) return;
+    if (ts.isJsxElement(node)) {
+      emitAttributes(node.openingElement.attributes);
+      node.children.forEach(emit);
+      return;
+    }
+    if (ts.isJsxSelfClosingElement(node)) { emitAttributes(node.attributes); return; }
+    if (ts.isJsxFragment(node)) { node.children.forEach(emit); return; }
+    if (ts.isJsxText(node)) {
+      const text = node.text.replace(/\s+/g, " ").trim();
+      if (text) tokens.push("T:" + text);
+      return;
+    }
+    if (ts.isJsxExpression(node)) {
+      const inner = node.expression;
+      if (!inner) return;
+      /* {" "} is JSX spacing, which a formatter adds and removes freely. */
+      if ((ts.isStringLiteral(inner) || ts.isNoSubstitutionTemplateLiteral(inner)) && !inner.text.trim()) return;
+      emit(inner);
+      return;
+    }
+    if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
+      tokens.push("S:" + node.text);
+      return;
+    }
+    if (ts.isParenthesizedExpression(node) && isJsxNode(node.expression)) { emit(node.expression); return; }
+    const children = node.getChildren(sf);
+    if (!children.length) {
+      const kind = node.kind;
+      if (kind === ts.SyntaxKind.CommaToken || kind === ts.SyntaxKind.SemicolonToken ||
+          kind === ts.SyntaxKind.EndOfFileToken) return;
+      tokens.push(node.getText(sf));
+      return;
+    }
+    children.forEach(emit);
+  };
+
+  emit(sf);
+  return tokens;
+}
+
+/* What an attestation binds to: every content token, in order. */
+export function contentFingerprint(source) {
+  return createHash("sha256")
+    .update(FINGERPRINT_VERSION + "\n" + JSON.stringify(contentTokens(source)))
+    .digest("hex");
 }
 
 export function parseChangedLineRanges(diff) {
@@ -83,8 +252,12 @@ export function pageForReviewPath(path) {
   return record ? "app/research/" + record[1] + "/page.tsx" : null;
 }
 
-export function scanChangedProse(source, ranges) {
+export function scanChangedProse(source, ranges, baseSource) {
+  /* A paragraph whose words already stood at the base was restyled, not rewritten. */
+  const standing = new Set(typeof baseSource === "string"
+    ? extractProseBlocks(baseSource).map(block => block.text) : []);
   const blocks = extractProseBlocks(source).filter(block =>
+    !standing.has(block.text) &&
     ranges.some(range => block.startLine <= range.end && block.endLine >= range.start));
   const findings = [];
   for (const block of blocks) {
@@ -101,7 +274,16 @@ export function scanChangedProse(source, ranges) {
 export function validateReview(review, file, hash) {
   const errors = [];
   if (review?.article !== file) errors.push("article must equal " + file);
-  if (review?.pageSha256 !== hash) errors.push("pageSha256 is stale; repeat review after page changes");
+  /* hash: { content, page }. A bare string is the exact-source hash, as older callers pass it. */
+  const expected = typeof hash === "string" ? { page: hash } : (hash ?? {});
+  const boundToContent = typeof review?.contentSha256 === "string" &&
+    expected.content !== undefined && review.contentSha256 === expected.content;
+  const boundToSource = typeof review?.pageSha256 === "string" &&
+    expected.page !== undefined && review.pageSha256 === expected.page;
+  if (!boundToContent && !boundToSource) {
+    errors.push((review?.contentSha256 !== undefined ? "contentSha256" : "pageSha256") +
+      " is stale; repeat review after research content changes");
+  }
   if (typeof review?.reviewer !== "string" ||
       review.reviewer.trim().length < 3 ||
       /^(ai|chatgpt|codex|claude|bot)$/i.test(review.reviewer.trim())) {
@@ -136,11 +318,18 @@ function git(args) {
   return execFileSync("git", args, { encoding: "utf8", maxBuffer: 8 * 1024 * 1024 }).trimEnd();
 }
 
+function gitShow(revision, file) {
+  try {
+    return execFileSync("git", ["show", revision + ":" + file],
+      { encoding: "utf8", maxBuffer: 16 * 1024 * 1024, stdio: ["ignore", "pipe", "ignore"] });
+  } catch { return null; }
+}
+
 function main(args) {
   if (args[0] === "--hash") {
     const file = args[1];
     if (!file || !existsSync(file)) throw new Error("Usage: npm run editorial:check -- --hash <article-file>");
-    console.log(pageHash(readFileSync(file, "utf8")));
+    console.log(contentFingerprint(readFileSync(file, "utf8")));
     return;
   }
 
@@ -161,15 +350,24 @@ function main(args) {
   let failures = 0;
   for (const file of pages) {
     const source = readFileSync(file, "utf8");
-    const diff = git(["diff", "--unified=0", base, "HEAD", "--", file]);
-    const { blocks, findings, hash } = scanChangedProse(source, parseChangedLineRanges(diff));
+    const baseSource = gitShow(base, file);
+    const hashes = { content: contentFingerprint(source), page: pageHash(source) };
     const reviewFile = reviewPathForPage(file);
     if (!changed.includes(reviewFile)) {
-      console.error("::error file=" + file + "::Publication page changed without a fresh " + reviewFile);
-      console.error("Expected pageSha256: " + hash);
+      // The page changed and its record did not. That is allowed only when the
+      // research content is identical to the base: a presentation-only change.
+      if (baseSource !== null && contentFingerprint(baseSource) === hashes.content) {
+        console.log("Editorial gate " + file + ": presentation-only change; research content matches the base (" +
+          hashes.content.slice(0, 12) + "), so no new review record is required.");
+        continue;
+      }
+      console.error("::error file=" + file + "::Publication content changed without a fresh " + reviewFile);
+      console.error("Expected contentSha256: " + hashes.content);
       failures++;
       continue;
     }
+    const diff = git(["diff", "--unified=0", base, "HEAD", "--", file]);
+    const { blocks, findings } = scanChangedProse(source, parseChangedLineRanges(diff), baseSource);
     let review;
     try { review = JSON.parse(readFileSync(reviewFile, "utf8")); }
     catch (e) {
@@ -177,7 +375,7 @@ function main(args) {
       failures++;
       continue;
     }
-    for (const message of validateReview(review, file, hash)) {
+    for (const message of validateReview(review, file, hashes)) {
       console.error("::error file=" + reviewFile + "::" + message);
       failures++;
     }

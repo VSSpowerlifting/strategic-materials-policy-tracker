@@ -60,12 +60,12 @@ function QueryControls({ model, query, update }: { model: LatticeModel; query: R
   };
   return <div className="flex flex-wrap items-center gap-3 font-display text-xs">
     <label htmlFor={id + "government"} className="flex items-center gap-2 text-muted">Government
-      <select aria-label="Government" id={id + "government"} value={query.filter.actor} disabled={!!query.issues.length} onChange={e => change("government", e.target.value)} className="min-h-10 rounded border border-border-strong bg-card px-2 text-sm text-foreground">
+      <select aria-label="Government" id={id + "government"} value={query.filter.actor} disabled={!!query.issues.length} onChange={e => change("government", e.target.value)} className="min-h-10 border border-border-strong bg-plate px-2 text-sm text-foreground">
         <option value="all">All governments</option>{model.actors.map(a => <option key={a.code} value={a.code}>{a.name}</option>)}
       </select>
     </label>
     <label htmlFor={id + "kind"} className="flex items-center gap-2 text-muted">Records
-      <select aria-label="Records" id={id + "kind"} value={query.kind} disabled={!!query.issues.length} onChange={e => change("kind", e.target.value)} className="min-h-10 rounded border border-border-strong bg-card px-2 text-sm text-foreground">
+      <select aria-label="Records" id={id + "kind"} value={query.kind} disabled={!!query.issues.length} onChange={e => change("kind", e.target.value)} className="min-h-10 border border-border-strong bg-plate px-2 text-sm text-foreground">
         {QUERY_KINDS.map(k => <option key={k} value={k}>{({ all: "All kinds", commitments: "Commitments", controls: "Control clauses", designations: "Designations", "commitments,controls": "Commitments + controls", "commitments,designations": "Commitments + designations", "controls,designations": "Controls + designations", none: "None" })[k]}</option>)}
       </select>
     </label>
@@ -74,7 +74,7 @@ function QueryControls({ model, query, update }: { model: LatticeModel; query: R
 }
 
 function QueryIssues({ query }: { query: ResearchQuery }) {
-  return query.issues.length ? <p role="status" className="my-4 rounded border border-accent p-4 font-display text-sm">{query.issues.join(" ")} No records selected. <a href={typeof window === "undefined" ? "/" : window.location.pathname} className="underline">Reset analytical selection</a>.</p> : null;
+  return query.issues.length ? <p role="status" className="my-4 border border-accent p-4 font-display text-sm">{query.issues.join(" ")} No records selected. <a href={typeof window === "undefined" ? "/" : window.location.pathname} className="underline">Reset analytical selection</a>.</p> : null;
 }
 
 // --- Small shared pieces -------------------------------------------------------------------------
@@ -97,7 +97,7 @@ function CountLine({ counts, inline = false }: { counts: CellView["counts"]; inl
     { kind: "designations", n: counts.designations },
   ];
   return (
-    <span aria-hidden className={cn("flex items-center gap-2 font-mono text-[11px] text-muted", inline ? "justify-start" : "mt-0.5 justify-center")}>
+    <span aria-hidden className={cn("flex items-center gap-2 font-display text-xs text-muted", inline ? "justify-start" : "mt-0.5 justify-center")}>
       {items
         .filter((i) => i.n > 0)
         .map((i) => (
@@ -153,13 +153,13 @@ function LatticeTable({
           {model.materials.map((m) => {
             const rowSelected = selection?.materialId === m.id;
             return (
-              <tr key={m.id} className={cn(rowSelected && "bg-foreground/[0.05]")}>
+              <tr key={m.id} className={cn(rowSelected && "bg-elevated")}>
                 <th scope="row" className="py-1 pl-2 pr-4 text-right font-normal">
                   <Link href={`/materials/${m.slug}`} className={cn("block font-display text-sm hover:underline", rowSelected ? "font-semibold text-accent" : "text-foreground")}>
                     {m.nameEn}
                   </Link>
                   {m.nameZh ? (
-                    <span lang="zh" className="block font-serif text-[11px] leading-none text-faint">
+                    <span lang="zh" className="block font-display text-xs leading-none text-faint">
                       {m.nameZh}
                     </span>
                   ) : null}
@@ -169,7 +169,7 @@ function LatticeTable({
                   const columnSelected = selection?.stage === s.id;
                   const picked = rowSelected && columnSelected;
                   return (
-                    <td key={s.id} className={cn("p-0.5 text-center", columnSelected && !rowSelected && "bg-foreground/[0.05]")}>
+                    <td key={s.id} className={cn("p-0.5 text-center", columnSelected && !rowSelected && "bg-elevated")}>
                       {v && isMarked(v) ? (
                         <button
                           type="button"
@@ -177,15 +177,15 @@ function LatticeTable({
                           aria-label={`${m.nameEn}, ${s.label}: ${cellSummary(v.counts)}`}
                           onClick={() => onSelect({ materialId: m.id, stage: s.id })}
                           className={cn(
-                            "block w-full rounded-md px-0.5 py-1 outline-offset-1 transition-colors hover:bg-foreground/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent",
-                            picked && "bg-foreground/10 ring-1 ring-foreground/70",
+                            "block w-full px-0.5 py-1 outline-offset-1 transition-colors hover:bg-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent",
+                            picked && "bg-elevated outline outline-1 outline-foreground",
                           )}
                         >
                           <CellMarks counts={v.counts} />
                           {showCounts ? <CountLine counts={v.counts} /> : null}
                         </button>
                       ) : (
-                        <span aria-hidden className={cn("block text-center font-mono text-xs text-faint/50", showCounts ? "py-5" : "py-3.5")}>
+                        <span aria-hidden className={cn("block text-center font-display text-xs text-faint", showCounts ? "py-5" : "py-3.5")}>
                           ·
                         </span>
                       )}
@@ -206,14 +206,14 @@ function MobileLattice({ model, filter, selection, onSelect }: { model: LatticeM
   const id = useId();
   return <div className="md:hidden">
     <label htmlFor={id} className="font-display text-sm text-muted">Material</label>
-    <select id={id} value={selection?.materialId ?? ""} onChange={e => onSelect({ materialId: e.target.value, stage: selection?.stage ?? model.stages[0].id })} className="mt-2 min-h-11 w-full rounded border border-border-strong bg-card px-3 font-display text-base">
+    <select id={id} value={selection?.materialId ?? ""} onChange={e => onSelect({ materialId: e.target.value, stage: selection?.stage ?? model.stages[0].id })} className="mt-2 min-h-11 w-full border border-border-strong bg-plate px-3 font-display text-base">
       <option value="" disabled>Select a material</option>{model.materials.map(m => <option key={m.id} value={m.id}>{m.nameEn}</option>)}
     </select>
     <p className="mt-4 font-display text-sm text-muted">Supply-chain stage · select to inspect</p>
     <div className="mt-2 grid grid-cols-2 gap-2">
       {model.stages.map(stage => {
         const view = selection ? cellView(model, selection.materialId, stage.id, filter) : null;
-        return <button key={stage.id} type="button" disabled={!selection} aria-pressed={selection?.stage === stage.id} onClick={() => selection && onSelect({ ...selection, stage: stage.id })} className={cn("min-h-14 rounded border border-border-strong px-3 py-2 text-left font-display text-sm", selection?.stage === stage.id && "border-accent ring-1 ring-accent")}>
+        return <button key={stage.id} type="button" disabled={!selection} aria-pressed={selection?.stage === stage.id} onClick={() => selection && onSelect({ ...selection, stage: stage.id })} className={cn("min-h-14 border border-border-strong px-3 py-2 text-left font-display text-sm", selection?.stage === stage.id && "border-accent ring-1 ring-accent")}>
           <span className="block">{stage.label}{selection?.stage === stage.id ? <span aria-hidden className="ml-2">✓</span> : null}</span><span className="mt-1 block text-xs text-muted">{view ? cellSummary(view.counts) || "No counted records" : "No counted records"}</span>
         </button>;
       })}
@@ -318,7 +318,7 @@ function LatticeLegendCompact() {
       <li className="flex gap-2"><KindSwatch kind="commitments" className="mt-0.5" /> Government commitments not ended, a package once</li>
       <li className="flex gap-2"><KindSwatch kind="controls" className="mt-0.5" /> Control clauses, any status</li>
       <li className="flex gap-2"><KindSwatch kind="designations" className="mt-0.5" /> Designations: standing, not money</li>
-      <li className="flex items-start gap-2"><span aria-hidden className="mt-0.5 font-mono text-[10px] text-faint">○ ◯</span> Area: number of records, never money</li>
+      <li className="flex items-start gap-2"><span aria-hidden className="mt-0.5 font-display text-xs text-faint">○ ◯</span> Area: number of records, never money</li>
     </ul>
   );
 }
@@ -333,7 +333,7 @@ export function CommitmentItem({ r }: { r: LatticeCommitment }) {
   return (
     <li className="py-3 first:pt-0">
       <div className="flex gap-3">
-        <span className="mt-0.5 inline-flex h-5 shrink-0 items-center rounded border border-paper-border px-1 font-mono text-[10px] text-paper-faint">{r.actorShort}</span>
+        <span className="mt-0.5 inline-flex h-5 shrink-0 items-center border border-paper-border px-1 font-display text-xs text-paper-faint">{r.actorShort}</span>
         <div className="min-w-0 flex-1">
           <Link href={r.href} className="font-display text-sm font-semibold leading-snug text-paper-foreground hover:underline">
             {r.title}
@@ -364,12 +364,12 @@ function ControlItem({ r, stage, asOf }: { r: LatticeControl; stage: string; asO
   return (
     <li className="py-3 first:pt-0">
       <div className="flex gap-3">
-        <span className="mt-0.5 inline-flex h-5 shrink-0 items-center rounded border border-paper-border px-1 font-mono text-[10px] text-paper-faint">{r.actorShort}</span>
+        <span className="mt-0.5 inline-flex h-5 shrink-0 items-center border border-paper-border px-1 font-display text-xs text-paper-faint">{r.actorShort}</span>
         <div className="min-w-0 flex-1">
           <Link href={r.href} className="font-display text-sm font-semibold leading-snug text-paper-foreground hover:underline">
             {r.title}
           </Link>
-          {r.documentNumber ? <p className="mt-0.5 font-mono text-[11px] text-paper-faint">{r.documentNumber}</p> : null}
+          {r.documentNumber ? <p className="mt-0.5 font-display text-xs text-paper-faint">{r.documentNumber}</p> : null}
           <p className="mt-1 text-xs leading-5 text-paper-muted">
             Status on {formatDate(asOf)}: {r.status}.{r.items ? ` Covered items (${r.items}) belong at ${stage.toLowerCase()}.` : ""}
           </p>
@@ -383,7 +383,7 @@ function DesignationItem({ r }: { r: LatticeDesignation }) {
   return (
     <li className="py-3 first:pt-0">
       <div className="flex gap-3">
-        <span className="mt-0.5 inline-flex h-5 shrink-0 items-center rounded border border-paper-border px-1 font-mono text-[10px] text-paper-faint">{r.actorShort}</span>
+        <span className="mt-0.5 inline-flex h-5 shrink-0 items-center border border-paper-border px-1 font-display text-xs text-paper-faint">{r.actorShort}</span>
         <div className="min-w-0 flex-1">
           <Link href={r.href} className="font-display text-sm font-semibold leading-snug text-paper-foreground hover:underline">
             {r.title}
@@ -417,9 +417,9 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
   const un = model.unstaged[material.id];
   const unVisible = un ? unstagedRecords(model, un, filter) : [];
   return (
-    <aside aria-live="polite" aria-label="Selected node" className={cn("rounded-lg bg-paper p-5 font-display text-paper-foreground", compact && "selected-evidence")}>
+    <aside aria-live="polite" aria-label="Selected node" className={cn("bg-paper p-5 font-display text-paper-foreground", compact && "selected-evidence")}>
       <p className="font-display text-xs text-paper-faint">Selected node</p>
-      <h3 className="mt-1 font-serif text-2xl font-semibold leading-tight">
+      <h3 className="mt-1 font-display text-2xl font-semibold leading-tight">
         {material.nameEn} × {label}
       </h3>
       {v ? (
@@ -470,7 +470,7 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
           <ul className="mt-2 space-y-1.5 text-sm">
             {unVisible.map((r) => (
               <li key={r.id} className="flex gap-2">
-                <span className="mt-0.5 inline-flex h-5 shrink-0 items-center rounded border border-paper-border px-1 font-mono text-[10px] text-paper-faint">{r.actorShort}</span>
+                <span className="mt-0.5 inline-flex h-5 shrink-0 items-center border border-paper-border px-1 font-display text-xs text-paper-faint">{r.actorShort}</span>
                 <Link href={r.href} className="leading-snug hover:underline">
                   {r.title}
                   <span className="text-paper-faint"> · {r.kind === "control" ? "control clause" : r.kind === "designation" ? "designation" : "commitment"}</span>
@@ -481,10 +481,10 @@ function RecordsPanel({ model, filter, selection, query, compact = false }: { mo
         </div>
       ) : null}
       <div className="mt-5 grid gap-2">
-        <Link href={researchQueryHref(model, query, "/compare")} className="flex items-center justify-center rounded-md bg-paper-foreground px-4 py-2.5 font-display text-sm font-semibold text-paper hover:bg-paper-foreground/90">
+        <Link href={researchQueryHref(model, query, "/compare")} className="flex items-center justify-center bg-paper-foreground px-4 py-2.5 font-display text-sm font-semibold text-paper hover:bg-paper-foreground/90">
           Compare this selection
         </Link>
-        <Link href={`/materials/${material.slug}#stage-${selection.stage}`} className="flex items-center justify-center rounded-md border border-paper-border px-4 py-2.5 font-display text-sm font-semibold hover:bg-paper-border/40">
+        <Link href={`/materials/${material.slug}#stage-${selection.stage}`} className="flex items-center justify-center border border-paper-border px-4 py-2.5 font-display text-sm font-semibold hover:bg-paper-border/40">
           Open the {material.nameEn.toLowerCase()} dossier
         </Link>
       </div>
@@ -496,10 +496,10 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
   const rows = governmentRows(model, materialId, filter);
   const stages = model.stages.filter((s) => rows.some((r) => r.cells[s.id]));
   if (!rows.length)
-    return <p className="rounded-xl bg-background p-6 text-sm text-muted">No record of the kinds and government now selected is coded to this material at a stage.</p>;
+    return <p className="bg-background p-6 text-sm text-muted">No record of the kinds and government now selected is coded to this material at a stage.</p>;
   return (
     <>
-      <ul className="divide-y divide-border/70 rounded-xl bg-background px-4 py-1 md:hidden">
+      <ul className="divide-y divide-border bg-background px-4 py-1 md:hidden">
         {rows.map((r) => (
           <li key={r.actor} className="py-4">
             <p className="font-display text-sm font-semibold text-foreground">{r.name}</p>
@@ -511,7 +511,7 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
                 return (
                   <li key={s.id} className="flex items-baseline gap-3 text-sm">
                     <span className="w-28 shrink-0 font-display text-muted">{s.label}</span>
-                    <span className="flex flex-wrap items-center gap-x-3 font-mono text-xs text-foreground">
+                    <span className="flex flex-wrap items-center gap-x-3 font-display text-xs text-foreground">
                       <span className="sr-only">{cellSummary(c)}</span>
                       <CountLine counts={c} inline />
                     </span>
@@ -522,7 +522,7 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
           </li>
         ))}
       </ul>
-    <div className="hidden overflow-x-auto rounded-xl bg-background p-4 sm:p-6 md:block">
+    <div className="hidden overflow-x-auto bg-background p-4 sm:p-6 md:block">
       <table className="w-full min-w-[34rem] border-collapse">
         <caption className="sr-only">Records for this material by government and supply-chain stage, each kind counted on its own</caption>
         <thead>
@@ -540,7 +540,7 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
             <tr key={r.actor}>
               <th scope="row" className="py-1 pr-4 text-right font-normal">
                 <span className="block font-display text-sm text-foreground">{r.name}</span>
-                <span className="block font-display text-[11px] leading-tight text-faint">{r.roles.join(", ")}</span>
+                <span className="block font-display text-xs leading-tight text-faint">{r.roles.join(", ")}</span>
               </th>
               {stages.map((s) => {
                 const c = r.cells[s.id];
@@ -552,7 +552,7 @@ function GovernmentSplit({ model, filter, materialId }: { model: LatticeModel; f
                         <CountLine counts={c} />
                       </span>
                     ) : (
-                      <span aria-hidden className="block py-5 font-mono text-xs text-faint/50">·</span>
+                      <span aria-hidden className="block py-5 font-display text-xs text-faint">·</span>
                     )}
                   </td>
                 );
@@ -585,7 +585,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
           <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_22rem] xl:grid-cols-[1fr_24rem]">
             <div className="min-w-0">
               {nothingShown ? (
-                <p className="rounded-lg border border-border bg-card p-6 text-sm text-muted">Every kind is turned off. Choose at least one above to see records placed on the lattice.</p>
+                <p className="border border-border bg-plate p-6 text-sm text-muted">Every kind is turned off. Choose at least one above to see records placed on the lattice.</p>
               ) : (
                 <>
                   <LatticeTable model={model} filter={filter} selection={selection} onSelect={select} showCounts />
@@ -620,7 +620,7 @@ export function LatticeCompare({ model, preferred }: { model: LatticeModel; pref
         <section className="bg-paper text-paper-foreground">
           <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
             <div className="border-t border-paper-foreground/70 pt-8">
-              <h2 className="font-serif text-3xl font-semibold leading-tight">{material.nameEn} by government and stage</h2>
+              <h2 className="font-display text-3xl font-semibold leading-tight">{material.nameEn} by government and stage</h2>
               <p className="mt-3 max-w-xl text-[15px] leading-7 text-paper-muted">
                 The same counts for one material, split by the government each record names: the providing government of a commitment, the issuer of a clause, the designating government of a
                 designation.

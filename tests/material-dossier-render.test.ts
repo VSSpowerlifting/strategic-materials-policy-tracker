@@ -6,7 +6,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { CapitalControls } from "@/components/dossier/capital-controls";
-import { Dossier } from "@/components/dossier/dossier";
+import { MaterialRecord } from "@/components/record/material-dossier";
 import { getAllFramingClaims, getAllMaterials } from "@/lib/data";
 import { framingCategoryLabels } from "@/lib/labels";
 import { buildMaterialDossier, seedData } from "@/lib/material-dossier";
@@ -23,13 +23,13 @@ const ASOF = site.lastUpdated;
 const materials = getAllMaterials();
 const slugs = materials.map((m) => m.slug);
 const payload = (slug: string, data?: DossierData, ledger?: Ledger): DossierPayload => buildMaterialDossier(slug, ASOF, undefined, data, ledger)!;
-const html = (p: DossierPayload) => renderToStaticMarkup(createElement(Dossier, { payload: p }));
+const html = (p: DossierPayload) => renderToStaticMarkup(createElement(MaterialRecord, { payload: p }));
 const text = (markup: string) => markup.replace(/<[^>]*>/g, " ").replace(/&amp;/g, "&").replace(/&#x27;/g, "'").replace(/\s+/g, " ").replace(/\s+([,.;:])/g, "$1");
 const count = (haystack: string, needle: string) => haystack.split(needle).length - 1;
 const moneyAttributes = (markup: string) => [...markup.matchAll(/data-money="([^"]*)"/g)].map((m) => m[1]);
 
 const sourceOf = (file: string) => readFileSync(join(ROOT, file), "utf8");
-const dossierFiles = ["lib/material-dossier.ts", "lib/material-notes-review.ts", ...readdirSync(join(ROOT, "components/dossier")).map((f) => `components/dossier/${f}`)];
+const dossierFiles = ["lib/material-dossier.ts", "lib/material-notes-review.ts", "components/record/material-dossier.tsx", ...readdirSync(join(ROOT, "components/dossier")).map((f) => `components/dossier/${f}`)];
 
 // --- AC-5: the money block ------------------------------------------------------------------------
 
@@ -134,7 +134,7 @@ test("the future-date note is replaced by the dates when there are some", () => 
 // --- §5.3, §7: the records grid, the phone chips and the fold rule --------------------------------
 
 /** The `#records` markup, split into one string per stage column (the heading id opens each). */
-const columnsOf = (markup: string) => markup.slice(markup.indexOf('id="records"')).split(/<div class="(?:dossier-stage|min-w-0 rounded-md border border-dashed)/).slice(1);
+const columnsOf = (markup: string) => markup.slice(markup.indexOf('id="records"')).split(/<div class="(?:dossier-stage|min-w-0 (?:rounded-md )?border border-dashed)/).slice(1);
 /** The markup outside every top-level `<details>`; a folded card may hold its own disclosure, so nesting is tracked. */
 const outsideDetails = (markup: string) => {
   let depth = 0, last = 0, out = "";
@@ -177,7 +177,7 @@ test("phones get a stage-jump chip per stage that links, and never carries, the 
 test("a column with more than six cards shows six and folds the rest behind Show all N, without losing a card", () => {
   const p = payload("rare-earth-elements");
   const markup = html(p);
-  const cards = (col: string) => count(col, "<li class=\"rounded-md border border-border bg-card p-3 text-sm\">");
+  const cards = (col: string) => count(col, "<li class=\"border border-border bg-plate p-3 text-sm\">");
   for (const col of columnsOf(markup).filter((c) => c.includes("<h3") && !c.includes('id="no-stage"'))) {
     const id = /id="stage-([a-z_]+)"/.exec(col)?.[1];
     const stage = p.stages.find((s) => s.id === id)!;

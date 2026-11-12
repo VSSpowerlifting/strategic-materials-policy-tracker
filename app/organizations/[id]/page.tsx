@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/container";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
 import { EvidenceTable, Fact, NotStated } from "@/components/capital/primitives";
@@ -61,8 +61,6 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
   ].sort();
   const funders = [...new Set(roles.received.filter(isBackingRow).flatMap((c) => c.providerOrgIds))].sort();
   const endedRows = [...roles.provided, ...roles.received].filter(isEnded);
-  let n = 0;
-  const next = () => String(++n).padStart(2, "0");
 
   return (
     <Container className="py-12">
@@ -77,11 +75,11 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {o.actor ? <JurisdictionTag code={o.actor} withName /> : null}
           <Badge>{organizationKindLabels[o.kind]}</Badge>
-          {o.countryCode ? <span className="font-mono text-xs text-muted">{o.countryCode}</span> : null}
+          {o.countryCode ? <span className="font-display text-xs text-muted">{o.countryCode}</span> : null}
         </div>
-        <h1 className="mt-3 text-balance font-display text-3xl font-bold tracking-tight">{o.name}</h1>
+        <h1 className="mt-3 page-title">{o.name}</h1>
         {o.nameOriginal ? <p lang="und" className="mt-1 text-lg text-muted">{o.nameOriginal}</p> : null}
-        {o.aliases.length ? <p className="mt-2 font-mono text-xs text-faint">Also named: {o.aliases.join(" · ")}</p> : null}
+        {o.aliases.length ? <p className="mt-2 font-display text-xs text-faint">Also named: {o.aliases.join(" · ")}</p> : null}
         <p className="mt-3 font-mono text-xs text-faint">{o.id}</p>
       </header>
 
@@ -89,7 +87,6 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
         <div className="min-w-0 space-y-12">
           {roles.provided.length ? (
             <Section
-              index={next()}
               title="Capital provided"
               description={
                 rolledUp.length
@@ -112,42 +109,42 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
           ) : null}
 
           {roles.received.length ? (
-            <Section index={next()} title="Capital received" description="Every row naming this organization as its recipient, by value role.">
+            <Section title="Capital received" description="Every row naming this organization as its recipient, by value role.">
               <LayerStack layers={layers(roles.received, all)} />
             </Section>
           ) : null}
 
           {roles.sponsoredProjects.length || roles.administeredProgrammes.length || roles.heldDesignations.length ? (
-            <Section index={next()} title="Projects, programmes and designations">
+            <Section title="Projects, programmes and designations">
               <div className="space-y-4">
                 {roles.sponsoredProjects.length ? (
-                  <Card className="p-4">
-                    <h3 className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Sponsors</h3>
+                  <div className="border-t border-border-strong pt-3">
+                    <h3 className="mb-2 font-display text-xs text-faint">Sponsors</h3>
                     {roles.sponsoredProjects.map((p) => <span key={p.id} className="block"><ProjectLink id={p.id} /></span>)}
-                  </Card>
+                  </div>
                 ) : null}
                 {roles.administeredProgrammes.length ? (
-                  <Card className="p-4">
-                    <h3 className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-faint">Administers</h3>
+                  <div className="border-t border-border-strong pt-3">
+                    <h3 className="mb-2 font-display text-xs text-faint">Administers</h3>
                     {roles.administeredProgrammes.map((g) => (
                       <span key={g.id} className="block">
-                        <Link href={`/programmes/${g.id}`} className="text-accent hover:text-accent-strong">{g.name}</Link>
-                        <span className="ml-2 font-mono text-[11px] text-faint">{programmeKindLabels[g.kind]}</span>
+                        <Link href={`/programmes/${g.id}`} className="link-quiet">{g.name}</Link>
+                        <span className="ml-2 font-display text-xs text-faint">{programmeKindLabels[g.kind]}</span>
                       </span>
                     ))}
-                  </Card>
+                  </div>
                 ) : null}
                 {roles.heldDesignations.length ? (
-                  <Card className="overflow-hidden">
+                  <RecordList>
                     {roles.heldDesignations.map((d) => <DesignationRow key={d.id} d={d} showProject />)}
-                  </Card>
+                  </RecordList>
                 ) : null}
               </div>
             </Section>
           ) : null}
 
-          <Section index={next()} title="Record">
-            <Card className="px-5 py-1">
+          <Section title="Record">
+            <div className="border-y border-border-strong">
               <dl>
                 <Fact label="Kind">{organizationKindLabels[o.kind]}</Fact>
                 <Fact label="Country">{o.countryCode ?? <NotStated>Not stated in the cited sources</NotStated>}</Fact>
@@ -156,7 +153,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
                   {parents.length
                     ? parents.map((p) => (
                         <span key={p.organization.id} className="block">
-                          <span className="font-mono text-[11px] text-faint">{organizationLinkTypeLabels[p.relationship]} </span>
+                          <span className="font-display text-xs text-faint">{organizationLinkTypeLabels[p.relationship]} </span>
                           <OrgLink id={p.organization.id} />
                         </span>
                       ))
@@ -167,43 +164,43 @@ export default async function OrganizationPage({ params }: { params: Promise<{ i
                     {children.map((c) => (
                       <span key={c.organization.id} className="block">
                         <OrgLink id={c.organization.id} />
-                        <span className="ml-2 font-mono text-[11px] text-faint">{organizationLinkTypeLabels[c.relationship].toLowerCase()} this body</span>
+                        <span className="ml-2 font-display text-xs text-faint">{organizationLinkTypeLabels[c.relationship].toLowerCase()} this body</span>
                       </span>
                     ))}
                   </Fact>
                 ) : null}
               </dl>
-            </Card>
+            </div>
           </Section>
 
           {o.notes ? (
-            <Section index={next()} title="Notes">
-              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground/90">{o.notes}</p>
+            <Section title="Notes">
+              <p className="max-w-prose text-pretty text-lg leading-8 text-foreground">{o.notes}</p>
             </Section>
           ) : null}
 
-          <Section index={next()} title="Evidence" description="Name, kind, country, government and parent links each name their source.">
+          <Section title="Evidence" description="Name, kind, country, government and parent links each name their source.">
             <EvidenceTable evidence={o.evidence} fieldLabels={organizationEvidenceFieldLabels} />
           </Section>
         </div>
 
         <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
           {roles.provided.length ? (
-            <Card className="p-4 text-sm">
-              <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Other providers on the same projects or recipients</h2>
+            <div className="border-t border-border-strong pt-3 text-sm">
+              <h2 className="mb-2 font-display text-xs text-faint">Other providers on the same projects or recipients</h2>
               {coProviders.length ? coProviders.map((p) => <span key={p} className="block"><OrgLink id={p} /></span>) : <p className="text-muted">None recorded.</p>}
-            </Card>
+            </div>
           ) : null}
           {roles.received.length ? (
-            <Card className="p-4 text-sm">
-              <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Funded by</h2>
+            <div className="border-t border-border-strong pt-3 text-sm">
+              <h2 className="mb-2 font-display text-xs text-faint">Funded by</h2>
               {funders.length ? funders.map((p) => <span key={p} className="block"><OrgLink id={p} /></span>) : <p className="text-muted">No provider of committed capital is named.</p>}
-            </Card>
+            </div>
           ) : null}
-          <Card className="p-4 text-sm">
-            <h2 className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">Machine-readable</h2>
-            <a href={`/api/v1/organizations/${o.id}`} className="text-accent hover:text-accent-strong">JSON record with sources</a>
-          </Card>
+          <div className="border-t border-border-strong pt-3 text-sm">
+            <h2 className="mb-2 font-display text-xs text-faint">Machine-readable</h2>
+            <a href={`/api/v1/organizations/${o.id}`} className="link-quiet">JSON record with sources</a>
+          </div>
         </aside>
       </div>
     </Container>

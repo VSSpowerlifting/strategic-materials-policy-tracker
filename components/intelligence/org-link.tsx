@@ -14,13 +14,13 @@ export function OrgLink({ id, showKind = false }: { id: string; showKind?: boole
       <Link href={`/organizations/${o.id}`} className="text-accent hover:text-accent-strong">
         {o.name}
       </Link>
-      {showKind ? <span className="font-mono text-[11px] text-faint">{organizationKindLabels[o.kind]}</span> : null}
+      {showKind ? <span className="font-display text-xs text-faint">{organizationKindLabels[o.kind]}</span> : null}
     </span>
   );
 }
 
 export function OrgList({ ids, showKind = false, empty = "None named" }: { ids: readonly string[]; showKind?: boolean; empty?: string }) {
-  if (!ids.length) return <span className="font-mono text-xs text-faint">{empty}</span>;
+  if (!ids.length) return <span className="font-display text-xs text-faint">{empty}</span>;
   return (
     <span className="flex flex-col gap-1">
       {ids.map((id) => (

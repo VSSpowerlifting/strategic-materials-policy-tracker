@@ -28,9 +28,8 @@ export default function MaterialsPage() {
     <>
       <Container width="wide" className="py-12">
         <PageHeading
-          eyebrow="Materials"
           title="Materials"
-          lead="Rare earths, the elements named in export controls, and adjacent materials such as gallium, germanium, graphite, antimony, tungsten and NdFeB magnets. Each profile collects the measures, financing and project records coded for that material."
+          lead="Rare earths, the elements named in export controls, and adjacent materials."
         />
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {materials.map((m) => (

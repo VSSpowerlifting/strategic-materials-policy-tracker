@@ -24,6 +24,53 @@ const STATUS_LABEL: Record<CoverageStatus, string> = {
   no_open_series_identified: "No open series identified",
 };
 
+/** Square disclosure on the plate; the summary is a full-width, 44px target. */
+const disclosure = "group border border-border-strong bg-plate";
+
+function DisclosureSummary({ children }: { children: React.ReactNode }) {
+  return (
+    <summary className="flex min-h-11 cursor-pointer list-none items-center gap-4 px-4 py-2 font-display text-sm text-foreground hover:bg-elevated [&::-webkit-details-marker]:hidden">
+      <span>{children}</span>
+      <span aria-hidden="true" className="ml-auto text-base leading-none text-faint group-open:hidden">+</span>
+      <span aria-hidden="true" className="ml-auto hidden text-base leading-none text-faint group-open:inline">−</span>
+    </summary>
+  );
+}
+
+const DEFINITIONS: { term: string; text: string }[] = [
+  {
+    term: "Exchange benchmark",
+    text: "An average of a named exchange price, such as the LME cash settlement or COMEX, as averaged by the World Bank, the IMF or the USGS.",
+  },
+  {
+    term: "Price assessment",
+    text: "A price-reporting agency’s or dealer’s assessment for a stated product and grade, republished by the IMF or the USGS with its source named. SMPT has not seen the underlying assessment data.",
+  },
+  {
+    term: "Trade unit value",
+    text: "The declared value of U.S. imports divided by their quantity, as calculated by the USGS from Census Bureau trade data. It moves with product mix and origin as well as price, so it is never labelled a price.",
+  },
+];
+
+const CALCULATIONS: { term: string; text: string }[] = [
+  {
+    term: "Indexed change",
+    text: "Each series divided by its own value in a common base period and multiplied by 100. The base is the latest first period among the selected series, so every included line starts at 100. A series with no value in that period, or whose source changes after it, is left out and named.",
+  },
+  {
+    term: "Change over a horizon",
+    text: "A period compared with the period exactly that many months or years earlier. If either value is missing, or the source states a change of underlying data between them, no change is shown.",
+  },
+  {
+    term: "Estimates and source changes",
+    text: "USGS 2025 values are estimates made early in 2026; they are marked “e”, drawn hollow and carried into any change or index that uses them. Where the USGS notes a change of price source within a series, the chart marks it and does not join the line across it.",
+  },
+  {
+    term: "Logarithmic axis",
+    text: "The same published or indexed values on an axis where equal distances are equal percentage changes. It is offered only when every plotted value is positive.",
+  },
+];
+
 export default function MarketsPage() {
   const datasets = getMarketDatasets();
   const coverage = getMarketCoverage();
@@ -35,122 +82,84 @@ export default function MarketsPage() {
   const materialCount = new Set(series.map((s) => s.materialId)).size;
   const releaseNotices = buildReleaseNotices();
 
-  const facts: { term: string; value: React.ReactNode }[] = [
-    { term: "Series", value: `${monthly.length} monthly · ${annual.length} annual, covering ${materialCount} materials` },
-    ...datasets.map((d) => ({
-      term: d.manifest.shortName,
-      value: (
-        <>
-          Through {formatPeriod(d.manifest.observationCutoff, true)} · released {formatDate(d.manifest.releaseDate)}
-          <span className="block text-xs text-faint">
-            {d.series.length} series · {d.manifest.license.name.replace(/ public domain dedication$/, "")}
-          </span>
-        </>
-      ),
-    })),
-  ];
-
   return (
     <div className="pb-24">
-      <Container width="wide" className="pt-8 sm:pt-12">
+      <Container width="wide" className="pt-12">
         <PageHeading
-          eyebrow="Market context"
           title="Critical Minerals Market Monitor"
-          lead={
-            <>
-              Compare critical-mineral price benchmarks from the World Bank, IMF and USGS. Compare any available series across
-              monthly or annual data, with an element-style benchmark selector.
-            </>
-          }
+          lead="Published price benchmarks for critical and strategic materials from the World Bank, the IMF and the USGS, as monthly averages and annual values."
         />
-
-
       </Container>
 
-      <Container width="wide" className="mt-6">
+      <Container width="wide" className="mt-10">
         <MarketExplorer series={series} releaseNotices={releaseNotices} />
       </Container>
 
-      <Container width="wide" className="mt-12">
-        <section aria-labelledby="mm-source-coverage">
-          <h2 id="mm-source-coverage" className="font-display text-xl font-semibold text-foreground">Data coverage</h2>
-        <dl className="mt-4 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {facts.map((f) => (
-            <div key={f.term} className="bg-card px-4 py-3">
-              <dt className="font-display text-xs text-faint">{f.term}</dt>
-              <dd className="tnum mt-1 text-sm leading-6 text-foreground">{f.value}</dd>
+      <Container width="wide" className="mt-16 space-y-16">
+        <Section id="mm-source-coverage" title="Data coverage">
+          <dl className="fact-grid">
+            <div>
+              <dt>Series</dt>
+              <dd className="tnum">
+                {monthly.length} monthly and {annual.length} annual
+                <span className="block text-xs leading-5 text-faint">{materialCount} materials</span>
+              </dd>
             </div>
-          ))}
-        </dl>
+            {datasets.map((d) => (
+              <div key={d.manifest.datasetId}>
+                <dt>{d.manifest.shortName}</dt>
+                <dd className="tnum">
+                  Through {formatPeriod(d.manifest.observationCutoff, true)}
+                  <span className="block text-xs leading-5 text-faint">
+                    Released {formatDate(d.manifest.releaseDate)}
+                  </span>
+                  <span className="block text-xs leading-5 text-faint">
+                    {d.series.length} series, {d.manifest.license.name.replace(/ public domain dedication$/, "")}
+                  </span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-5 max-w-4xl text-[0.9375rem] leading-7 text-muted">
+            Figures are period averages or unit values in US dollars, as each source publishes them; the USGS labels its
+            lithium carbonate price “annual average-real” without stating a deflator or base year. Percentage changes,
+            indexed values and rankings are SMPT calculations, with no interpolation or unit conversion. Prices sit outside
+            the policy record, and a shared date does not show that a measure moved a price.
+          </p>
+        </Section>
 
-        <p className="mt-4 max-w-4xl text-sm leading-6 text-muted">
-          Figures are period averages or unit values in US dollars, as each source publishes them; the USGS labels its
-          lithium carbonate price “annual average-real” without stating a deflator or base year. Percentage changes,
-          indexed values and rankings are SMPT calculations, with no interpolation or unit conversion. Prices sit outside
-          the policy record, and a shared date does not show that a measure moved a price.
-        </p>
-        </section>
-      </Container>
-
-      <Container width="wide" className="mt-16 space-y-14">
-        <Section title="Method and definitions" description="How the figures are read, calculated and limited.">
-          <dl className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Exchange benchmark</dt>
-              <dd className="mt-1.5 text-sm leading-6 text-muted">
-                An average of a named exchange price, such as the LME cash settlement or COMEX, as averaged by the World
-                Bank, the IMF or the USGS.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Price assessment</dt>
-              <dd className="mt-1.5 text-sm leading-6 text-muted">
-                A price-reporting agency’s or dealer’s assessment for a stated product and grade, republished by the IMF or
-                the USGS with its source named. SMPT has not seen the underlying assessment data.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Trade unit value</dt>
-              <dd className="mt-1.5 text-sm leading-6 text-muted">
-                The declared value of U.S. imports divided by their quantity, as calculated by the USGS from Census Bureau
-                trade data. It moves with product mix and origin as well as price, so it is never labelled a price.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Indexed change</dt>
-              <dd className="mt-1.5 text-sm leading-6 text-muted">
-                Each series divided by its own value in a common base period and multiplied by 100. The base is the latest
-                first period among the selected series, so every included line starts at 100. A series with no value in
-                that period, or whose source changes after it, is left out and named.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Change over a horizon</dt>
-              <dd className="mt-1.5 text-sm leading-6 text-muted">
-                A period compared with the period exactly that many months or years earlier. If either value is missing,
-                or the source states a change of underlying data between them, no change is shown.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-display text-sm font-semibold text-foreground">Estimates and source changes</dt>
-              <dd className="mt-1.5 text-sm leading-6 text-muted">
-                USGS 2025 values are estimates made early in 2026; they are marked “e”, drawn hollow and carried into any
-                change or index that uses them. Where the USGS notes a change of price source within a series, the chart
-                marks it and does not join the line across it.
-              </dd>
-            </div>
+        <Section title="Method and definitions">
+          <dl className="grid gap-x-10 gap-y-6 md:grid-cols-3">
+            {DEFINITIONS.map((d) => (
+              <div key={d.term} className="border-t border-border pt-3">
+                <dt className="font-display text-sm font-semibold text-foreground">{d.term}</dt>
+                <dd className="mt-1.5 text-sm leading-6 text-muted">{d.text}</dd>
+              </div>
+            ))}
           </dl>
 
-          <div className="mt-10 space-y-4">
+          <div className="mt-8 space-y-3">
+            <details className={disclosure}>
+              <DisclosureSummary>Calculations: index, changes, estimates and the logarithmic axis</DisclosureSummary>
+              <dl className="grid gap-x-10 gap-y-5 border-t border-border px-4 py-4 md:grid-cols-2">
+                {CALCULATIONS.map((d) => (
+                  <div key={d.term}>
+                    <dt className="font-display text-sm font-semibold text-foreground">{d.term}</dt>
+                    <dd className="mt-1.5 text-sm leading-6 text-muted">{d.text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </details>
+
             {datasets.map((d) => (
-              <details key={d.manifest.datasetId} className="rounded-lg border border-border bg-card">
-                <summary className="cursor-pointer px-4 py-3 font-display text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-accent">
+              <details key={d.manifest.datasetId} className={disclosure}>
+                <DisclosureSummary>
                   {d.manifest.shortName}: specification of {d.series.length} series
-                </summary>
+                </DisclosureSummary>
                 <div className="overflow-x-auto border-t border-border">
                   <table className="w-full min-w-[56rem] text-left text-sm">
                     <caption className="sr-only">Specification of each {d.manifest.shortName} series</caption>
-                    <thead className="font-display text-xs text-faint">
+                    <thead className="bg-elevated font-display text-xs text-faint">
                       <tr>
                         <th scope="col" className="px-4 py-2.5 font-medium">Series</th>
                         <th scope="col" className="px-4 py-2.5 font-medium">Source specification</th>
@@ -178,10 +187,8 @@ export default function MarketsPage() {
                           </td>
                           <td className="px-4 py-3 leading-6 text-muted">
                             {PRICE_TYPE_LABELS[s.priceType]}
-                            <span className="block text-xs text-faint">
-                              {s.priceBasis}
-                              {s.deliveryBasis ? ` · ${s.deliveryBasis}` : ""}
-                            </span>
+                            <span className="block text-xs text-faint">{s.priceBasis}</span>
+                            {s.deliveryBasis ? <span className="block text-xs text-faint">{s.deliveryBasis}</span> : null}
                           </td>
                           <td className="px-4 py-3 leading-6 text-muted">
                             {s.unit}
@@ -213,15 +220,24 @@ export default function MarketsPage() {
         </Section>
 
         <Section title="Sources, licences and attribution">
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-x-10 gap-y-10 lg:grid-cols-3">
             {datasets.map(({ manifest: m }) => (
-              <div key={m.datasetId} className="space-y-3 text-sm leading-6 text-muted">
+              <div key={m.datasetId} className="space-y-3 border-t border-border pt-4 text-sm leading-6 text-muted">
                 <h3 className="font-display text-base font-semibold text-foreground">{m.shortName}</h3>
                 <p className="text-foreground">{m.attribution}</p>
                 <p>
                   Licence:{" "}
-                  {m.license.url ? <ExtLink href={m.license.url}>{m.license.name}</ExtLink> : m.license.name}, as stated at{" "}
-                  <ExtLink href={m.license.statedAt}>the publisher’s data page</ExtLink>
+                  {m.license.url ? (
+                    <ExtLink href={m.license.url} className="inline">
+                      {m.license.name}
+                    </ExtLink>
+                  ) : (
+                    m.license.name
+                  )}
+                  , as stated at{" "}
+                  <ExtLink href={m.license.statedAt} className="inline">
+                    the publisher’s data page
+                  </ExtLink>
                   {m.license.termsUrl !== m.license.url ? (
                     <>
                       {" "}
@@ -234,10 +250,6 @@ export default function MarketsPage() {
                   <span className="text-foreground">Changes made.</span> {m.changesMade}
                 </p>
                 <p>{m.thirdPartyNote}</p>
-                <p>
-                  <span className="text-foreground">Reuse.</span>{" "}
-                  {MARKET_REUSE_NOTES[m.datasetId as keyof typeof MARKET_REUSE_NOTES]}
-                </p>
                 <ul className="space-y-1">
                   <li>
                     <ExtLink href={m.landingPageUrl}>Publisher page</ExtLink>
@@ -251,14 +263,24 @@ export default function MarketsPage() {
                     </li>
                   ) : null}
                 </ul>
-                <p className="text-xs text-faint">
-                  {m.updateFrequency ? `${m.updateFrequency.statedAs} ` : ""}
-                  {m.nextScheduledRelease ? `${m.nextScheduledRelease.statedAs} ` : ""}
-                  Retrieved {formatDate(m.retrievedOn)}.
-                </p>
-                <p className="break-all font-mono text-xs text-faint">
-                  {m.sourceFile.fileName} · SHA-256 {m.sourceFile.sha256}
-                </p>
+                <details className={disclosure}>
+                  <DisclosureSummary>Reuse terms, release schedule and source file</DisclosureSummary>
+                  <div className="space-y-3 border-t border-border px-4 py-3">
+                    <p>
+                      <span className="text-foreground">Reuse.</span>{" "}
+                      {MARKET_REUSE_NOTES[m.datasetId as keyof typeof MARKET_REUSE_NOTES]}
+                    </p>
+                    <p className="text-xs leading-5 text-faint">
+                      {m.updateFrequency ? `${m.updateFrequency.statedAs} ` : ""}
+                      {m.nextScheduledRelease ? `${m.nextScheduledRelease.statedAs} ` : ""}
+                      Retrieved {formatDate(m.retrievedOn)}.
+                    </p>
+                    <p className="break-all font-mono text-xs leading-5 text-faint">
+                      {m.sourceFile.fileName}
+                      <span className="block">SHA-256 {m.sourceFile.sha256}</span>
+                    </p>
+                  </div>
+                </details>
               </div>
             ))}
           </div>
@@ -273,31 +295,29 @@ export default function MarketsPage() {
           description="Tracked materials without an open monthly series, and what one would need to show."
         >
           <p className="max-w-4xl text-sm leading-6 text-muted">{coverage.note}</p>
-          <ul className="mt-6 grid gap-4 md:grid-cols-2">
+          <ul className="mt-6 grid gap-x-10 border-t border-border md:grid-cols-2">
             {coverage.gaps.map((g) => {
               const mat = materialLink(g.materialId);
               return (
-                <li key={g.materialId} className="rounded-lg border border-border bg-card p-4">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <li key={g.materialId} className="border-b border-border py-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <h3 className="font-display font-semibold text-foreground">
                       {mat.href ? (
-                        <Link href={mat.href} className="hover:text-accent">
+                        <Link href={mat.href} className="link-quiet">
                           {mat.name}
                         </Link>
                       ) : (
                         (mat.name ?? g.materialId)
                       )}
                     </h3>
-                    <span className="border-l-2 border-border-strong pl-1.5 font-mono text-[11px] text-muted">
-                      {STATUS_LABEL[g.status]}
-                    </span>
+                    <span className="font-display text-xs text-faint">{STATUS_LABEL[g.status]}</span>
                   </div>
                   <p className="mt-2 text-sm leading-6 text-muted">{g.monthlyCoverage}</p>
-                  <details className="mt-2 text-sm leading-6 text-muted">
-                    <summary className="cursor-pointer font-display text-xs text-accent outline-none focus-visible:ring-2 focus-visible:ring-accent">
-                      Grades and inclusion test
+                  <details className="mt-1 text-sm leading-6 text-muted">
+                    <summary className="inline-flex min-h-11 cursor-pointer items-center font-display text-sm text-foreground">
+                      <span className="link-quiet">Grades and inclusion test</span>
                     </summary>
-                    <p className="mt-2">{g.gradeDistinctions}</p>
+                    <p>{g.gradeDistinctions}</p>
                     <p className="mt-2">
                       <span className="text-foreground">Needed for a monthly series.</span> {g.requirementForInclusion}
                     </p>
@@ -309,19 +329,19 @@ export default function MarketsPage() {
         </Section>
 
         <Section title="Related">
-          <ul className="grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="flex flex-wrap gap-x-8 gap-y-3 font-display text-sm">
             <li>
-              <Link href="/materials" className="text-accent underline-offset-2 hover:underline">
+              <Link href="/materials" className="link-quiet">
                 Materials and their policy records
               </Link>
             </li>
             <li>
-              <Link href={fi002.path} className="text-accent underline-offset-2 hover:underline">
+              <Link href={fi002.path} className="link-quiet">
                 {fi002.title}
               </Link>
             </li>
             <li>
-              <a href="/api/export/markets.csv" className="text-accent underline-offset-2 hover:underline" download>
+              <a href="/api/export/markets.csv" className="link-quiet" download>
                 All market series (CSV)
               </a>
             </li>

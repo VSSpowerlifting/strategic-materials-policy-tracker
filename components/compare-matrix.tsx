@@ -89,7 +89,7 @@ export function CompareMatrix({
         }
       }}
     >
-      <div className="relative overflow-x-auto rounded-lg border border-border-strong plate">
+      <div className="relative overflow-x-auto border-y border-border-strong bg-plate">
         <table className="w-full border-collapse text-sm">
           <caption className="sr-only">
             Tracked materials (rows) by jurisdiction (columns). Each cell is the number of coded
@@ -99,13 +99,13 @@ export function CompareMatrix({
           <thead>
             <tr className="border-b border-border">
               <th scope="col" className="sticky left-0 z-10 bg-plate px-4 py-3 text-left align-bottom">
-                <span className="rail">Material</span>
+                <span className="font-display text-xs text-faint">Material</span>
               </th>
               {jurisdictions.map((j) => (
                 <th key={j} scope="col" className="px-3 py-3 text-center align-bottom">
                   <Link
                     href={`/actors/${jurisdictionShort[j].toLowerCase()}`}
-                    className="inline-flex flex-col items-center gap-1.5 rounded hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-plate"
+                    className="inline-flex flex-col items-center gap-1.5 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-plate"
                     aria-label={jurisdictionLabels[j]}
                   >
                     <ActorMonogram code={jurisdictionShort[j]} size="sm" />
@@ -113,13 +113,13 @@ export function CompareMatrix({
                 </th>
               ))}
               <th scope="col" className="px-4 py-3 text-right align-bottom">
-                <span className="rail">Total</span>
+                <span className="font-display text-xs text-faint">Total</span>
               </th>
             </tr>
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.material.id} className="border-b border-border/60 last:border-b-0">
+              <tr key={r.material.id} className="border-b border-border last:border-b-0">
                 <th scope="row" className="sticky left-0 z-10 bg-plate px-4 py-2.5 text-left font-normal">
                   <Link
                     href={`/materials/${r.material.slug}`}
@@ -161,11 +161,11 @@ export function CompareMatrix({
                           cell.count === 1 ? "event" : "events"
                         }. Show details.`}
                         className={cn(
-                          "tnum inline-flex h-7 min-w-7 cursor-pointer items-center justify-center rounded border px-1.5 font-display text-sm font-semibold text-foreground transition-colors",
+                          "tnum inline-flex h-7 min-w-7 cursor-pointer items-center justify-center border px-1.5 font-display text-sm font-semibold text-foreground transition-colors",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-plate",
                           isOpen
-                            ? "border-accent bg-accent/25"
-                            : "border-accent/30 bg-accent/10 hover:border-accent hover:bg-accent/20",
+                            ? "border-foreground bg-foreground text-background"
+                            : "border-border-strong bg-plate hover:border-foreground hover:bg-elevated",
                         )}
                       >
                         {cell.count}
@@ -182,7 +182,7 @@ export function CompareMatrix({
           <tfoot>
             <tr className="border-t border-border-strong">
               <th scope="row" className="sticky left-0 z-10 bg-plate px-4 py-3 text-left">
-                <span className="rail">Events per actor</span>
+                <span className="font-display text-xs text-faint">Events per actor</span>
               </th>
               {jurisdictions.map((j) => (
                 <td key={j} className="px-3 py-3 text-center">
@@ -209,7 +209,7 @@ export function CompareMatrix({
         className="mt-3 scroll-mt-24"
       >
         {selectedRow && selectedCell && selected ? (
-          <div className="rounded-lg border border-accent/40 bg-card p-4">
+          <div className="border-t-2 border-foreground bg-plate p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="flex items-center gap-3">
                 <ActorMonogram code={jurisdictionShort[selected.jurisdiction]} size="sm" />
@@ -228,19 +228,19 @@ export function CompareMatrix({
               <button
                 type="button"
                 onClick={close}
-                className="rounded font-display text-xs text-faint transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                className="font-display text-xs text-faint transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 Close
               </button>
             </div>
 
             <div className="mt-3">
-              <span className="rail">Mechanisms</span>
+              <span className="font-display text-xs text-faint">Mechanisms</span>
               <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
                 {selectedCell.mechanisms.map((m) => (
                   <span
                     key={m}
-                    className="inline-flex items-center border-l-2 border-border-strong pl-1.5 font-display text-[11px] leading-none text-muted"
+                    className="inline-flex items-center border-l-2 border-border-strong pl-1.5 font-display text-xs leading-none text-muted"
                   >
                     {mechanismLabels[m]}
                   </span>
@@ -252,11 +252,11 @@ export function CompareMatrix({
               href={`/events?actor=${selected.jurisdiction}&material=${selectedRow.material.id}`}
               className="mt-4 inline-block font-display text-sm text-accent hover:text-accent-strong"
             >
-              View matching {selectedCell.count === 1 ? "event" : "events"} →
+              View matching {selectedCell.count === 1 ? "event" : "events"}
             </Link>
           </div>
         ) : (
-          <p className="font-display text-[11px] leading-relaxed text-faint">
+          <p className="font-display text-xs leading-relaxed text-faint">
             Select a cell to see its mechanisms, most recent measure and the events behind the
             count.
           </p>

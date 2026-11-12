@@ -30,11 +30,11 @@ const NECK = 70; // flows converge / re-emerge this far from the core
 
 export function HeroMotif({ materials }: { materials?: number }) {
   return (
-    <div className="plate relative overflow-hidden rounded-xl border border-border-strong">
+    <div className="relative overflow-hidden border border-border bg-plate">
       {/* Instrument rail — frames the schematic; the count is a real dataset value */}
       <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-2.5">
-        <span className="rail">Material-flow chokepoint</span>
-        {materials ? <span className="rail tnum">{materials} materials tracked</span> : null}
+        <span className="font-display text-xs text-faint">Material-flow chokepoint</span>
+        {materials ? <span className="font-display text-xs text-faint tnum">{materials} materials tracked</span> : null}
       </div>
       <div className="relative">
         <FlowTexture />
@@ -50,7 +50,7 @@ export function HeroMotif({ materials }: { materials?: number }) {
             <path
               key={s.code}
               d={`M${s.x} ${s.y} Q ${(s.x + CX) / 2 - 40} ${(s.y + CY) / 2} ${CX - NECK} ${CY}`}
-              className={i % 2 === 0 ? "stroke-border-strong" : "stroke-muted/50"}
+              className={i % 2 === 0 ? "stroke-border-strong" : "stroke-muted"}
               strokeWidth="1.25"
             />
           ))}
@@ -67,7 +67,7 @@ export function HeroMotif({ materials }: { materials?: number }) {
             <path
               key={o.label}
               d={`M${CX + NECK} ${CY} Q ${(CX + o.x) / 2 + 30} ${(CY + o.y) / 2} ${o.x} ${o.y}`}
-              className="flow-line stroke-accent/70"
+              className="flow-line stroke-accent"
               strokeWidth="1.25"
             />
           ))}
@@ -76,7 +76,7 @@ export function HeroMotif({ materials }: { materials?: number }) {
           {SOURCES.map((s) => (
             <g key={s.code}>
               <circle cx={s.x} cy={s.y} r="16" className="fill-elevated stroke-border-strong" strokeWidth="1" />
-              <text x={s.x} y={s.y + 4} textAnchor="middle" className="fill-muted font-mono text-[12px]">
+              <text x={s.x} y={s.y + 4} textAnchor="middle" className="fill-muted font-display text-[12px]">
                 {s.code}
               </text>
             </g>
@@ -98,16 +98,16 @@ export function HeroMotif({ materials }: { materials?: number }) {
           ))}
 
           {/* the chokepoint: incumbent processor, with a breathing halo */}
-          <circle cx={CX} cy={CY} r="46" className="choke-pulse fill-none stroke-accent/35" strokeWidth="1" />
-          <circle cx={CX} cy={CY} r="34" className="fill-card stroke-accent/30" strokeWidth="1" />
-          <circle cx={CX} cy={CY} r="23" className="fill-accent/10 stroke-accent" strokeWidth="1.5" />
+          <circle cx={CX} cy={CY} r="46" className="choke-pulse fill-none stroke-accent" strokeWidth="1" />
+          <circle cx={CX} cy={CY} r="34" className="fill-card stroke-accent" strokeWidth="1" />
+          <circle cx={CX} cy={CY} r="23" className="fill-plate stroke-accent" strokeWidth="1.5" />
           <text x={CX} y={CY - 1} textAnchor="middle" className="fill-foreground font-display text-[16px] font-semibold">
             CN
           </text>
-          <text x={CX} y={CY + 13} textAnchor="middle" className="fill-accent font-mono text-[9px]">
+          <text x={CX} y={CY + 13} textAnchor="middle" className="fill-accent font-display text-[9px]">
             ~90%
           </text>
-          <text x={CX} y={CY + 70} textAnchor="middle" className="fill-faint font-mono text-[11px] uppercase tracking-[0.2em]">
+          <text x={CX} y={CY + 70} textAnchor="middle" className="fill-faint font-display text-xs">
             chokepoint
           </text>
         </svg>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ActorMonogram } from "@/components/actor-monogram";
 import { EventListItem } from "@/components/event-card";
 import { StatusBadge } from "@/components/labels";
-import { Card } from "@/components/ui/card";
+import { RecordList } from "@/components/ui/card";
 import { ExtLink } from "@/components/ui/ext-link";
 import { formatDate } from "@/lib/format";
 import { jurisdictionLabels, jurisdictionShort } from "@/lib/labels";
@@ -27,9 +27,9 @@ export function EventsSection({ payload }: { payload: DossierPayload }) {
         <div className="mt-4">
           <h3 className="font-display text-base font-semibold">Policy status across actors</h3>
           <p className="mt-1 text-sm leading-6 text-faint">Where each actor&apos;s coded measures on this material currently stand.</p>
-          <Card className="mt-3 divide-y divide-border overflow-hidden">
+          <RecordList className="mt-3">
             {payload.actorStatuses.map(({ actor, statuses }) => (
-              <div key={actor} className="flex items-center justify-between gap-4 px-4 py-3">
+              <div key={actor} className="flex items-center justify-between gap-4 border-b px-4 py-3 last:border-b-0">
                 <span className="flex items-center gap-3">
                   <ActorMonogram code={jurisdictionShort[actor]} size="sm" />
                   <span className="font-display text-sm font-medium">{jurisdictionLabels[actor]}</span>
@@ -41,11 +41,11 @@ export function EventsSection({ payload }: { payload: DossierPayload }) {
                 </span>
               </div>
             ))}
-          </Card>
+          </RecordList>
         </div>
       ) : null}
       {payload.events.length ? (
-        <Card className="mt-6 overflow-hidden">
+        <RecordList className="mt-6">
           {payload.events.map((row) => {
             const line = childLine(row.children);
             return (
@@ -68,7 +68,7 @@ export function EventsSection({ payload }: { payload: DossierPayload }) {
               </div>
             );
           })}
-        </Card>
+        </RecordList>
       ) : (
         <p className="mt-4 leading-7 text-muted">No events coded yet.</p>
       )}
@@ -168,7 +168,7 @@ export function RelatedSection({ payload }: { payload: DossierPayload }) {
             label="Show all"
             className="space-y-3"
             render={(s) => (
-              <li key={s.source.id} className="rounded-md border border-border bg-card p-3 text-sm">
+              <li key={s.source.id} className="border border-border bg-plate p-3 text-sm">
                 <p className="font-display font-semibold leading-snug">{s.source.title}</p>
                 <p className="mt-0.5 text-xs leading-5 text-muted">
                   {s.source.publisher}

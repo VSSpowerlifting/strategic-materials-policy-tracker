@@ -50,17 +50,17 @@ export default function AntimonySupplyResilience() {
   return (
     <div data-flush-footer>
       <section className="border-b border-border-strong">
-        <Container width="wide" className="py-12 sm:py-20">
+        <Container width="wide" className="article-hero py-12 sm:py-20">
           <Link href="/research" className="font-display text-sm text-muted underline underline-offset-4 hover:text-accent">
             ← Research
           </Link>
-          <p className="mt-8 font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
+          <p className="mt-8 font-display text-[0.8125rem] font-medium text-accent">
             Strategy &amp; Finance
           </p>
-          <h1 className="mt-6 max-w-5xl font-display text-5xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
+          <h1 className="article-title mt-4 text-foreground">
             U.S. Antimony Supply Resilience
           </h1>
-          <p className="mt-4 font-display text-lg text-muted">
+          <p className="standfirst mt-6 max-w-[38rem]">
                   A hypothetical defense manufacturer&rsquo;s choices for keeping antimony supplies moving through disruptions in 2027–2031.
                 </p>
           
@@ -68,7 +68,7 @@ export default function AntimonySupplyResilience() {
             By <Link href="/about" className="text-foreground underline underline-offset-4">Benjamin Yang</Link>
             {" · "}4 November 2026
           </p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
             <a href={pdf} target="_blank" rel="noopener noreferrer" className="research-button">
               View the strategy deck (PDF)
             </a>
@@ -85,7 +85,7 @@ export default function AntimonySupplyResilience() {
             <article className="min-w-0 max-w-4xl">
               <section className="border-b border-paper-border pb-10">
                 
-                <h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight">
+                <h2 className="article-h2 mt-3">
                   Qualify another supplier before committing to five months of stock
                 </h2>
                 <p className="mt-5 font-display text-lg leading-8">
@@ -98,7 +98,7 @@ export default function AntimonySupplyResilience() {
 
               <section className="border-b border-paper-border py-10">
                 
-                <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
+                <h2 className="article-h2 mt-3">
                   U.S. import dependence makes supplier qualification important
                 </h2>
                 <p className="mt-5 font-display text-base leading-8">
@@ -111,7 +111,7 @@ export default function AntimonySupplyResilience() {
 
               <section className="border-b border-paper-border py-10">
                 
-                <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">
+                <h2 className="article-h2 mt-3">
                   The balanced option stays within the modeled cash and supply limits
                 </h2>
                 <p className="mt-4 font-display text-sm leading-7 text-paper-muted">
@@ -120,7 +120,7 @@ export default function AntimonySupplyResilience() {
                 <div className="mt-5 overflow-x-auto border-y border-paper-border">
                   <table className="w-full min-w-[650px] border-collapse font-display text-sm">
                     <caption className="sr-only">2030 modeled severe-disruption comparison across four sourcing strategies</caption>
-                    <thead className="bg-paper-foreground text-paper">
+                    <thead className="bg-elevated text-paper-foreground">
                       <tr>
                         <th scope="col" className="p-3 text-left font-semibold">Strategy</th>
                         <th scope="col" className="p-3 text-right font-semibold">Stock buffer</th>
@@ -131,7 +131,7 @@ export default function AntimonySupplyResilience() {
                     </thead>
                     <tbody>
                       {comparisons.map((row, index) => (
-                        <tr key={row.policy} className={row.policy.startsWith("Balanced") ? "bg-[#f1e4c5]" : index % 2 === 0 ? "bg-paper" : "bg-[#ebe8e0]"}>
+                        <tr key={row.policy} className={row.policy.startsWith("Balanced") ? "bg-elevated" : index % 2 === 0 ? "bg-paper" : "bg-card"}>
                           <th scope="row" className="border-t border-paper-border p-3 text-left font-semibold">{row.policy}</th>
                           <td className="border-t border-paper-border p-3 text-right">{row.months} mo</td>
                           <td className="border-t border-paper-border p-3 text-right">{row.uncovered}</td>
@@ -148,7 +148,7 @@ export default function AntimonySupplyResilience() {
               </section>
 
               <section className="border-b border-paper-border py-10">
-                <h2 className="font-display text-2xl font-semibold tracking-tight">
+                <h2 className="article-h2">
                   What a manufacturer would need to confirm
                 </h2>
                 <ol className="mt-5 space-y-5 font-display text-base leading-7">
@@ -165,7 +165,7 @@ export default function AntimonySupplyResilience() {
               </section>
 
               <section className="py-10" aria-labelledby="method-heading">
-                <h2 id="method-heading" className="font-display text-2xl font-semibold tracking-tight">
+                <h2 id="method-heading" className="article-h2">
                   Sources and assumptions
                 </h2>
                 <p className="mt-4 font-display text-base leading-8">
@@ -193,7 +193,7 @@ export default function AntimonySupplyResilience() {
             </article>
 
             <aside className="lg:sticky lg:top-32">
-              <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Downloads</h2>
+              <h2 className="font-display text-[0.8125rem] font-medium text-paper-muted">Downloads</h2>
               <ul className="mt-4 space-y-5 border-l border-paper-border pl-4 font-display">
                 {downloads.map((file) => (
                   <li key={file.url}>
@@ -206,7 +206,7 @@ export default function AntimonySupplyResilience() {
                   The Archivo deck is a shorter presentation; the original edition contains more source links.
                 </p>
               <div className="mt-9 border-t border-paper-border pt-5">
-                <h2 className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-paper-muted">Case parameters</h2>
+                <h2 className="font-display text-[0.8125rem] font-medium text-paper-muted">Case parameters</h2>
                 <dl className="mt-4 space-y-4 font-display text-sm">
                   <div><dt className="text-paper-muted">Buyer demand</dt><dd className="font-semibold">100 t contained Sb/year</dd></div>
                   <div><dt className="text-paper-muted">Severe interruption</dt><dd className="font-semibold">8 months</dd></div>

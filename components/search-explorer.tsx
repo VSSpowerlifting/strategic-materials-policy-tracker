@@ -338,7 +338,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                   type="button"
                   data-testid="search-type-shortcut" data-site-motion="card"
                   onClick={() => setKind(type)}
-                  className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 rounded-lg border border-border-strong bg-card px-4 py-4 text-left transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 border border-border-strong bg-plate px-4 py-4 text-left transition-colors hover:border-accent hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   <span className="font-display text-base font-semibold leading-6">{KIND_LABEL[type]}</span>
                   <span className="tnum shrink-0 font-display text-sm text-accent">{allCounts[type]}</span>
@@ -374,13 +374,13 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               {results.length} {results.length === 1 ? "matching record" : "matching records"}
               <span className="ml-2 font-normal text-faint">from {docs.length} published index entries</span>
             </p>
-            <div data-testid="search-reference-downloads" className="mb-4 rounded-lg border border-border-strong bg-card p-4">
+            <div data-testid="search-reference-downloads" className="mb-4 border border-border-strong bg-plate p-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="font-display text-sm font-semibold">Keep these {results.length} search references</p>
                 <div className="flex flex-wrap gap-2">
                   {(["csv", "json"] as const).map(format => <button key={format} type="button"
                     onClick={() => downloadResults(format)}
-                    className="inline-flex min-h-11 items-center rounded-md border border-border-strong px-3 py-2 font-display text-sm text-accent hover:border-accent/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                    className="inline-flex min-h-11 items-center border border-border-strong px-3 py-2 font-display text-sm text-accent hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
                     Download results {format.toUpperCase()}
                   </button>)}
                 </div>
@@ -399,7 +399,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                 <li key={`${d.kind}:${d.id}`} data-site-motion="card">
                   <Link
                     href={d.href}
-                    className="block min-w-0 rounded-lg border border-border-strong bg-card p-4 transition-colors hover:border-accent/50 hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    className="block min-w-0 border border-border-strong bg-plate p-4 transition-colors hover:border-accent hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <span className="min-w-0 font-display text-base font-semibold leading-6 tracking-tight [overflow-wrap:anywhere]">

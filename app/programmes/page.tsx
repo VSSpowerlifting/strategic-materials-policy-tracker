@@ -19,8 +19,8 @@ export default function ProgrammesPage(){
   new Map(getAllOrganizations().map(o=>[o.id,o.name])),
  );
  return <Container className="py-12">
-  <PageHeading index="06" eyebrow="Capital intelligence" title="Programmes"
-   lead="Explore the government schemes through which financing, incentives and project designations are recorded. Programme ceilings and lending authority are recorded separately from recipient funding. The published financial rows reflect SMPT’s selected research coverage."/>
+  <PageHeading title="Programmes"
+   lead="Programme ceilings and lending authority are recorded separately from recipient funding. Published rows reflect SMPT’s selected research coverage."/>
   <ResearchReadingKey topic="programmes" />
   <div className="mt-10"><ProgrammesExplorer rows={rows}/></div>
   <p className="mt-8 text-sm text-muted">

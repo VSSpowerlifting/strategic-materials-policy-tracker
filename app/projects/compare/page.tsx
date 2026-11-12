@@ -26,11 +26,9 @@ export default function ProjectComparisonPage() {
   const rows = buildProjectComparison(directory, projects, getAllSources(), getAllProjectMilestones());
   const materialNames = Object.fromEntries(getAllMaterials().map(m => [m.id, m.nameEn]));
   return <Container className="py-12">
-    <Link href="/projects" className="font-display text-sm text-muted hover:text-foreground">
-      ← Project directory
-    </Link>
-    <PageHeading index="04" eyebrow="Capital intelligence" title="Compare project evidence"
-      lead="Place two registered undertakings side by side. Compare the facts actually recorded—sponsors, materials, locations, financing relationships, project citations and reviewed physical milestones—with financing and delivered industrial capacity documented through distinct sources." />
+    <PageHeading title="Compare project evidence"
+      breadcrumbs={[{ href: "/projects", label: "Projects" }, { label: "Compare" }]}
+      lead="Two registered projects side by side. Financing and delivered industrial capacity are documented through distinct sources." />
     <div className="mt-8">
       <ProjectComparison rows={rows} materialNames={materialNames} revision={site.lastUpdated} />
     </div>
@@ -38,7 +36,7 @@ export default function ProjectComparisonPage() {
       This comparison draws on the published SMPT project register. It is not
       a causal policy evaluation or a dollar ranking. Open the linked project, financial and
       source records to check what each original publisher establishes.{" "}
-      <Link href="/methodology" className="text-accent hover:underline">Read the methodology.</Link>
+      <Link href="/methodology" className="link-quiet">Methodology</Link>.
     </p>
   </Container>;
 }

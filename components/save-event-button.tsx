@@ -37,10 +37,10 @@ export function SaveEventButton({ eventId }: { eventId: string }) {
           setStorageError(!result.ok);
         }}
         aria-pressed={saved}
-        className={`inline-flex min-h-11 items-center gap-1.5 rounded-md border px-3 py-1.5 font-display text-sm transition-colors ${
+        className={`inline-flex min-h-11 items-center gap-1.5 border px-3 py-1.5 font-display text-sm transition-colors ${
           saved
-            ? "border-accent/50 text-accent hover:border-accent hover:text-accent-strong"
-            : "border-border text-foreground hover:border-accent/50 hover:text-accent"
+            ? "border-accent bg-plate text-accent hover:text-accent-strong"
+            : "border-border-strong bg-plate text-foreground hover:border-foreground"
         }`}
       >
         <span aria-hidden="true">{saved ? "★" : "☆"}</span>
