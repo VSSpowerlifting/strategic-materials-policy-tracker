@@ -15,7 +15,9 @@ import PptxGenJS from "pptxgenjs";
 import path from "node:path";
 import { loadDeckSpec, loadFixture, loadRegistry } from "./registry";
 import { RENDERERS } from "./renderers";
-import { contentArea, C, DRAFT_BADGE, drawFrame, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, FONT, TYPE } from "./primitives";
+import { assertFonts } from "../publication/fonts";
+import { brandThemeXml } from "../publication/tokens";
+import { contentArea, C, DRAFT_BADGE, drawFrame, FONT, FONT_SERIF, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, TYPE } from "./primitives";
 import { DEMO_DECK_SPEC, DEMO_PPTX, GALLERY_PPTX, MANIFEST_FILE, REPO } from "./paths";
 import type { ElementRecord, ExhibitClassification, Fixture, PptxSlide } from "./types";
 
@@ -103,20 +105,31 @@ export interface BuildOptions {
 function coverSlide(pptx: Pptx, title: string, lines: string[], records: ElementRecord[], opts: BuildOptions): void {
   const synthetic = opts.classification === "synthetic-demonstration";
   const slide = pptx.addSlide();
-  slide.background = { color: C.dark };
+  slide.background = { color: C.paper };
   const h = makeHelpers(slide, { x: 0, y: 0, w: SLIDE_W, h: SLIDE_H }, records, pptx.ShapeType, pptx.ChartType);
+  // Centred title block, as on the site: kicker, Spectral title, hairline rule with a registration tick, then the lines.
+  const x = 0.8;
+  const w = SLIDE_W - 2 * x;
   if (!opts.plainFrame) {
-    h.text("cover-kicker", "frame", synthetic ? "STRATEGIC MATERIALS POLICY TRACKER · EXHIBIT SYSTEM" : "STRATEGIC MATERIALS POLICY TRACKER", {
-      x: 0.8, y: 1.6, w: 11.5, h: 0.35, fontSize: 12, bold: true, color: C.gold, charSpacing: 1.5,
+    h.text("cover-kicker", "frame", synthetic ? "Strategic Materials Policy Tracker · Exhibit system" : "Strategic Materials Policy Tracker", {
+      x, y: 1.35, w, h: 0.35, fontSize: 13, bold: true, color: C.accent, align: "center",
     });
   }
-  h.text("cover-title", "frame", title, { x: 0.8, y: 2.1, w: 11.5, h: 1.4, fontSize: 36, bold: true, color: C.paper, valign: "top" });
+  h.text("cover-title", "frame", title, {
+    x, y: 1.85, w, h: 1.5, fontSize: 44, fontFace: FONT_SERIF, color: C.ink, align: "center", valign: "middle",
+  });
+  h.shape("cover-rule", "frame", h.shapes.rect, {
+    x, y: 3.62, w, h: 0.015, fill: { color: C.border }, line: { color: C.border, width: 0 },
+  });
+  h.shape("cover-rule-tick", "frame", h.shapes.rect, {
+    x: x + w / 2 - 0.006, y: 3.62 - 0.05, w: 0.012, h: 0.115, fill: { color: C.borderStrong }, line: { color: C.borderStrong, width: 0 },
+  });
   h.text("cover-lines", "frame", lines.map((t, i) => ({ text: t, options: { breakLine: i < lines.length - 1 } })), {
-    x: 0.8, y: 3.8, w: 11.0, h: 1.6, fontSize: 14, color: "D8D3C7", valign: "top", paraSpaceAfter: 6,
+    x: 1.6, y: 3.95, w: SLIDE_W - 3.2, h: 1.6, fontSize: 16, color: C.muted, align: "center", valign: "top", paraSpaceAfter: 6,
   });
   const notice = synthetic ? SYNTHETIC_NOTICE : DRAFT_BADGE;
   h.text("cover-notice", "frame", notice, {
-    x: 0.8, y: 6.6, w: 11.5, h: 0.3, fontSize: 11, bold: true, color: C.gold,
+    x, y: 6.6, w, h: 0.3, fontSize: 11, bold: true, color: C.muted, align: "center",
   });
   slide.addNotes(
     synthetic
@@ -129,40 +142,40 @@ function heroCoverSlide(pptx: Pptx, title: string, cover: HeroCover, records: El
   if (opts.classification !== "research") throw new Error("exhibit build refused — cover_hero_split applies only to research decks");
   if (cover.titleLines.join(" ") !== title) throw new Error("exhibit build refused — cover title lines do not join to the deck title");
   const slide = pptx.addSlide();
-  slide.background = { color: C.dark };
+  slide.background = { color: C.paper };
   const h = makeHelpers(slide, { x: 0, y: 0, w: SLIDE_W, h: SLIDE_H }, records, pptx.ShapeType, pptx.ChartType);
   const { textX: x, textW: w, imageX } = HERO_SPLIT;
   const imageW = SLIDE_W - imageX;
   h.image("cover-hero", "frame", { data: cover.hero.data, x: imageX, y: 0, w: imageW, h: SLIDE_H, altText: cover.hero.alt });
   h.shape("cover-hero-overlay", "frame", pptx.ShapeType.rect, {
     x: imageX, y: 0, w: imageW, h: SLIDE_H,
-    fill: { color: C.dark, transparency: HERO_SPLIT.overlayTransparency }, line: { color: C.dark, width: 0, transparency: 100 },
+    fill: { color: C.ink, transparency: HERO_SPLIT.overlayTransparency }, line: { color: C.ink, width: 0, transparency: 100 },
   });
   if (cover.hero.caption) {
     h.text("cover-hero-caption", "frame", cover.hero.caption, {
-      x: imageX + 0.35, y: 6.95, w: imageW - 0.7, h: 0.3, fontSize: TYPE.footnote, color: "B5AE9F", align: "right", valign: "bottom",
+      x: imageX + 0.35, y: 6.95, w: imageW - 0.7, h: 0.3, fontSize: TYPE.footnote, color: C.plate, align: "right", valign: "bottom",
     });
   }
   const breakRuns = (lines: string[]) => lines.map((s, i) => ({ text: s, options: { breakLine: i < lines.length - 1 } }));
   h.text("cover-title", "frame", breakRuns(cover.titleLines), {
-    x, y: 0.75, w, h: 2.6, fontSize: 40, bold: true, color: C.paper, valign: "top", lineSpacingMultiple: 0.95,
+    x, y: 0.75, w, h: 2.6, fontSize: 40, fontFace: FONT_SERIF, color: C.ink, valign: "top", lineSpacingMultiple: 0.95,
   });
   h.text("cover-subtitle", "frame", breakRuns(cover.subtitleLines), {
-    x, y: 3.5, w, h: 0.8, fontSize: 20, color: C.paper, valign: "top",
+    x, y: 3.5, w, h: 0.8, fontSize: 20, color: C.muted, valign: "top",
   });
   h.text("cover-thesis", "frame", cover.thesis, {
-    x, y: 4.4, w, h: 1.15, fontSize: 14, color: "D8D3C7", valign: "top", lineSpacingMultiple: 1.1,
+    x, y: 4.4, w, h: 1.15, fontSize: 14, color: C.ink, valign: "top", lineSpacingMultiple: 1.1,
   });
   if (cover.callout) {
     h.text("cover-callout-value", "frame", cover.callout.value, {
-      x, y: 5.62, w, h: 0.55, fontSize: 34, bold: true, color: C.gold, valign: "top",
+      x, y: 5.62, w, h: 0.55, fontSize: 34, bold: true, color: C.accent, valign: "top",
     });
     h.text("cover-callout-label", "frame", breakRuns(cover.callout.label.split("\n")), {
-      x, y: 6.2, w, h: 0.45, fontSize: 11, color: "D8D3C7", valign: "top",
+      x, y: 6.2, w, h: 0.45, fontSize: 11, color: C.muted, valign: "top",
     });
   }
-  h.text("cover-notice", "frame", DRAFT_BADGE, { x, y: 6.72, w, h: 0.25, fontSize: 11, bold: true, color: C.gold });
-  h.text("cover-footer", "frame", cover.footer, { x, y: 7.0, w, h: 0.25, fontSize: TYPE.footnote, color: "B5AE9F" });
+  h.text("cover-notice", "frame", DRAFT_BADGE, { x, y: 6.72, w, h: 0.25, fontSize: 11, bold: true, color: C.muted });
+  h.text("cover-footer", "frame", cover.footer, { x, y: 7.0, w, h: 0.25, fontSize: TYPE.footnote, color: C.faint });
   const evidence = new Map((opts.evidence ?? []).map((e) => [e.id, e]));
   const calloutSources = (cover.callout?.evidenceRefs ?? []).map((id) => {
     const e = evidence.get(id);
@@ -308,6 +321,9 @@ async function normalise(buf: Buffer): Promise<Buffer> {
         .replace(/(<dcterms:created[^>]*>)[^<]*(<\/dcterms:created>)/, `$1${FIXED_ISO}$2`)
         .replace(/(<dcterms:modified[^>]*>)[^<]*(<\/dcterms:modified>)/, `$1${FIXED_ISO}$2`);
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
+    } else if (/^ppt\/theme\/theme\d+\.xml$/.test(name)) {
+      const xml = brandThemeXml((await entry.async("string")) as string);
+      out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else if (/^ppt\/notesSlides\/notesSlide\d+\.xml$/.test(name)) {
       const xml = splitNoteParagraphs((await entry.async("string")) as string);
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
@@ -326,10 +342,11 @@ function sha256(file: string): string {
 }
 
 async function main(): Promise<void> {
+  assertFonts(); // covers set Spectral; a deliverable never builds against a substitute face
   const registry = loadRegistry();
   const galleryEntries: DeckEntry[] = registry.map((p) => ({
     fixture: loadFixture(p.id),
-    label: `${p.family_code}. ${p.family.toUpperCase()} · ${p.name.toUpperCase()}`,
+    label: `${p.family_code}. ${p.family} · ${p.name}`,
   }));
   const galleryManifest = await buildDeck(
     galleryEntries,

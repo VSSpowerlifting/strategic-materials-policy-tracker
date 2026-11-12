@@ -1,9 +1,9 @@
-# SMPT presentation system — version 2.2
+# SMPT presentation system — version 3.0
 
-**Status:** Adopted editorial design standard for new SMPT decks, 5 November 2026; visual repertoire extended 6 November 2026
+**Status:** Adopted editorial design standard for new SMPT decks, 5 November 2026; visual repertoire extended 6 November 2026; identity aligned with the Architectural Research Studio 11 November 2026 (proposed v3, pending maintainer approval)
 **Owner:** SMPT editorial/research lead  
 **Scope:** Executive briefings, applied-strategy cases, financial-intelligence cases, and visual research dossiers  
-**Primary typeface:** Archivo Regular/Medium/Semibold for all new or revised decks. Render PDFs with the same embedded family and preserve native editable charts and source hyperlinks.
+**Typefaces:** Spectral for covers, section dividers and large editorial statements; Archivo for analytical titles, text, tables, chart labels and source footers. Colours and faces come from [`../publication-tokens.json`](../publication-tokens.json). PowerPoint cannot embed fonts, so the font-embedded PDF is the canonical form; preserve native editable charts and source hyperlinks in the `.pptx`.
 
 **Hard ceiling:** **20 slides total**, including title, executive summary, conclusion, methods, references, and appendix. No exceptions by renaming a section "backup."
 
@@ -11,7 +11,8 @@ SMPT publishes independently authored, source-linked industrial-policy and finan
 
 ## Read in this order
 
-1. [Presentation Standard v2](SMPT_PRESENTATION_STANDARD_V2.md) — definitive governance, type, palette, slide structures, length budgets, editorial and QA rules.
+0. [Publication Design System](../PUBLICATION_DESIGN_SYSTEM.md) — how the shared tokens apply to decks, memos, covers, social images and exhibits, and which generators are migrated.
+1. [Presentation Standard v3](SMPT_PRESENTATION_STANDARD_V2.md) — definitive governance, type, palette, slide structures, length budgets, editorial and QA rules (file name kept for link stability).
 2. [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) — chart selection, scales, status encodings, sensitivity reconciliation and source methods.
 3. [Editorial Authenticity & Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) — mandatory affirmative-writing, graphic-purpose, AI-assisted production, and five-gate review standard.
 4. [Visual Repertoire & Consulting References](VISUAL_REPERTOIRE_AND_REFERENCES.md) — required exhibit-selection workflow, six original graphic examples and exact public consulting references.
@@ -19,11 +20,14 @@ SMPT publishes independently authored, source-linked industrial-policy and finan
 5. [Reference Analysis](REFERENCE_ANALYSIS.md) — annotated evaluation of the four supplied McKinsey/BCG decks and additional institutional resources.
 6. [FI001 Redesign Brief](FI001_REDESIGN_BRIEF.md) — suggested **18-slide** versioned redesign, not an authorization to overwrite the published FI001 edition.
 7. [Original slide previews](examples/) — historical FI001 examples and six new Archivo exhibit patterns. These are not copies of consultant slide screenshots.
-8. [Legacy PowerPoint master generator](templates/create_master.py) — eight-layout reference using editable text and shapes; requires migration to Archivo before production use.
+8. [PowerPoint master generator](templates/create_master.py) — eight-layout starter in the v3 identity using editable text and shapes.
+9. [Design-validation package](validation/README.md) — unpublished sample cover, executive-answer slide, two exhibit slides, methodology slide, memo page and publication cover generated from the updated templates, using neutral example data.
 
 ## Varied exhibit forms
 
 ![Six original SMPT exhibit patterns with synthetic illustrative data](examples/05-visual-repertoire.svg)
+
+*Frozen illustration in the earlier graphite-and-gold palette (v2). It shows form only and has not been regenerated; the exhibit-system gallery is the current v3 reference. `examples/render_visual_repertoire.py` is a legacy generator.*
 
 See the [visual repertoire](VISUAL_REPERTOIRE_AND_REFERENCES.md) for data classifications, source examples and selection rules. The new gallery uses synthetic layout fixtures; it is separate from research findings.
 
@@ -31,7 +35,7 @@ For editable deck exhibits, use the [exhibit system](exhibit-system/README.md) a
 
 ## Historical FI001 examples
 
-These historical previews retain their earlier typography. Use the new Archivo gallery and current standard when designing a new or revised deck.
+These historical previews retain their earlier graphite-and-gold, Archivo-only styling and are not restyled. Use the current standard when designing a new or revised deck; the exhibit-system gallery now renders in the v3 identity.
 
 The illustrations below are original SMPT designs using **already disclosed FI001 research data**. Values are illustrative *exhibits from that research*, not new models or refreshed figures.
 
@@ -49,12 +53,12 @@ With Python 3 and [python-pptx](https://python-pptx.readthedocs.io/) installed:
 
 ```bash
 python -m pip install python-pptx
-python docs/design/presentations/templates/create_master.py SMPT_Research_Master_v2.pptx
+python docs/design/presentations/templates/create_master.py SMPT_Research_Master_v3.pptx
 ```
 
-The legacy starter has not been migrated to the current Archivo typography. Use it as a layout reference; a production adaptation must replace its Georgia/Source Sans 3 styling with Archivo and pass current gates. This documentation update does not modify the generator.
+The starter now follows the v3 identity: plaster ground, graphite text, malachite emphasis, Spectral on the cover and the closing statement, Archivo everywhere else, and no tracked all-caps. It loads `publication-tokens.json` and stops if Spectral or Archivo is not installed (set `SMPT_ALLOW_MISSING_FONTS=1` only for a layout-only dry run whose output must not be rendered or distributed).
 
-The starter contains eight **illustrative** original layouts and example FI001 figures, **not** an approved republished research edition. Replace examples using the controlling model and evidence register before publication. Convert a finished PPTX to PDF using an available office renderer, inspect every slide, and validate font substitutions and hyperlinks. Source Sans 3 and Georgia are only font *names* in the PPTX; no font files are bundled. When these fonts are unavailable, common renderers may fall back to other serif/sans families.
+The starter contains eight **illustrative** original layouts and example FI001 figures, **not** an approved republished research edition. Replace examples using the controlling model and evidence register before publication. Convert a finished PPTX to PDF using an available office renderer, inspect every slide, and validate font substitutions and hyperlinks. Spectral and Archivo are only font *names* in the PPTX; no font files are bundled or committed. A recipient without them sees a substitute, which is why the PDF export is canonical. Check the PDF with `pdffonts`.
 
 ## What is included / excluded
 

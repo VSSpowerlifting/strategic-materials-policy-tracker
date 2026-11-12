@@ -1,10 +1,15 @@
 // Shared slide frame, design tokens and the recording helper factory.
 //
-// Geometry follows the accepted Archivo master (create_master.py): 13.333 x 7.5 in,
-// dark top bar, gold-toned section label, 26pt assertion title, 13pt measure
-// subtitle, hairline rules at y = 2.47 and 6.91, 10pt source footer.
+// Geometry follows the accepted master (create_master.py): 13.333 x 7.5 in on a
+// plaster ground, sentence-case section label, 26pt Archivo assertion title, 14pt
+// measure subtitle, hairline rules at y = 2.47 (with a registration tick) and 6.91,
+// 10pt source footer. Colours and type families come from the single publication
+// token file (docs/design/publication-tokens.json), the Architectural Research
+// Studio identity shared with the website. Spectral appears only on covers and
+// dividers (never inside an exhibit) and never below 28 pt.
 // No pptxgenjs import: the slide object is passed in.
 
+import { FONT_EDITORIAL, FONT_TEXT, hex, neutralHex, rampHex } from "../publication/tokens";
 import type {
   Area,
   ChartSeries,
@@ -18,23 +23,39 @@ import type {
   TextRun,
 } from "./types";
 
-export const FONT = "Archivo";
+export const FONT = FONT_TEXT;
+/** Editorial display face: covers, section dividers and one-sentence statements only. */
+export const FONT_SERIF = FONT_EDITORIAL;
+/** Spectral is never set below this size (Presentation Standard v3, section 4). */
+export const SERIF_MIN_PT = 28;
 
-/** Colour tokens (hex without '#'), matching EXHIBIT_AND_CHART_RULES v2.0 and the master. */
+/**
+ * Colour tokens (hex without '#'), read from docs/design/publication-tokens.json.
+ * Key names are kept from the earlier palette so renderers keep their meaning:
+ * `paper` is the plaster slide ground, `ink` graphite, `accent` the single
+ * emphasised mark (malachite), `neutral*` the graphite-tinted functional greys.
+ * Light text (`plate`) sits only on graphite or malachite fills.
+ */
 export const C = {
-  dark: "12110F",
-  paper: "F5F3EE",
-  ink: "1B1915",
-  accent: "7A5510", // single highlighted result
-  muted: "5B5548",
-  border: "D8D3C7",
-  soft: "E9E5DC",
-  neutral: "8A8375", // default data mark
-  neutralLight: "C9C3B5", // secondary / comparison mark
-  neutralDark: "4A453B",
-  gold: "C8993E",
-  white: "FFFFFF",
+  paper: hex("plaster"),
+  chalk: hex("chalk"),
+  plate: hex("plate"),
+  soft: hex("elevated"), // table heads, selected rows, soft bands
+  ink: hex("graphite"),
+  muted: hex("slate"),
+  faint: hex("faint"),
+  border: hex("border"),
+  borderStrong: hex("borderStrong"),
+  accent: hex("malachite"), // single highlighted result
+  negative: hex("hematite"), // decline, control, ended or lapsed
+  ochre: hex("ochre"), // designation or caution: rules and markers only
+  neutral: neutralHex("mid"), // default data mark
+  neutralLight: neutralHex("light"), // secondary / comparison mark
+  neutralDark: neutralHex("dark"),
 } as const;
+
+/** Single-hue malachite ramp for ordered magnitude, light to dark (step 5 is the series malachite). */
+export const RAMP: readonly string[] = rampHex();
 
 export const SLIDE_W = 13.333;
 export const SLIDE_H = 7.5;
@@ -110,7 +131,7 @@ export interface FrameSpec {
   label: string;
   slideNumber: number;
   fixture: Fixture;
-  /** Draw the "INTERPRETATION" kicker beside the annotation (default true). */
+  /** Draw the "Interpretation" heading beside the annotation (default true). */
   annotationHeading?: boolean;
 }
 
@@ -165,7 +186,15 @@ export function makeHelpers(
     },
     text(name, role, text: string | TextRun[], options) {
       const objectName = nm(role, name);
-      const minPt = sized(objectName, role, fontSizesOf("text", options, text));
+      const sizes = fontSizesOf("text", options, text);
+      const minPt = sized(objectName, role, sizes);
+      const faces = [options.fontFace, ...(Array.isArray(text) ? (text as TextRun[]).map((r) => r.options?.fontFace) : [])];
+      if (faces.includes(FONT_SERIF)) {
+        if (role !== "frame") throw new Error(`${FONT_SERIF} is for covers and dividers only: ${objectName} has role "${role}"`);
+        if (!sizes.length || Math.min(...sizes) < SERIF_MIN_PT) {
+          throw new Error(`${FONT_SERIF} must be set at ${SERIF_MIN_PT} pt or larger: ${objectName}`);
+        }
+      }
       slide.addText(text, { fontFace: FONT, color: C.ink, margin: 0, ...options, objectName });
       records.push({ name: objectName, role, tier: "text", kind: "text", ...(minPt === undefined ? {} : { minPt }) });
     },
@@ -192,23 +221,21 @@ export function makeHelpers(
 export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
   const f = spec.fixture;
   const wide = f.layout === "wide";
-  h.shape("top-bar", "frame", h.shapes.rect, {
-    x: 0, y: 0, w: SLIDE_W, h: 0.12, fill: { color: C.dark }, line: { color: C.dark, width: 0 },
-  });
   if (spec.label.trim()) {
     h.text("section-label", "frame", spec.label, {
-      x: LEFT, y: 0.35, w: 8.6, h: 0.3, fontSize: 11, bold: true, color: C.accent, charSpacing: 1,
+      x: LEFT, y: 0.35, w: 8.6, h: 0.3, fontSize: 11, bold: true, color: C.accent,
     });
   }
   const heading = spec.annotationHeading !== false;
   const synthetic = f.classification === "synthetic-demonstration";
+  // Status stamps stay all-caps because tests and review checks pin the exact strings; no tracking.
   if (synthetic) {
     h.text("synthetic-badge", "frame", "SYNTHETIC DEMONSTRATION DATA", {
-      x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.muted, align: "right", charSpacing: 1,
+      x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.muted, align: "right",
     });
   } else {
     h.text("draft-badge", "frame", DRAFT_BADGE, {
-      x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.accent, align: "right", charSpacing: 1,
+      x: 8.9, y: 0.35, w: 2.9, h: 0.3, fontSize: TYPE.footnote, bold: true, color: C.accent, align: "right",
     });
   }
   h.text("slide-number", "frame", String(spec.slideNumber), {
@@ -225,8 +252,13 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
       x: LEFT, y, w: 12.05, h: 0.015, fill: { color: C.border }, line: { color: C.border, width: 0 },
     });
   }
+  // Registration tick: the site's sheet rule carries one at its centre.
+  h.shape("rule-tick", "frame", h.shapes.rect, {
+    x: LEFT + 12.05 / 2 - 0.006, y: 2.47 - 0.05, w: 0.012, h: 0.115,
+    fill: { color: C.borderStrong }, line: { color: C.borderStrong, width: 0 },
+  });
   h.text("source-footer", "frame", synthetic ? `Source: ${f.source} · ${SYNTHETIC_NOTICE}` : `Source: ${f.source}`, {
-    x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: TYPE.footnote, color: C.muted, valign: "top",
+    x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: TYPE.footnote, color: C.faint, valign: "top",
   });
 
   if (wide) {
@@ -235,7 +267,7 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
       x: LEFT, y, w: 0.05, h: 0.62, fill: { color: C.accent }, line: { color: C.accent, width: 0 },
     });
     h.text("interpretation", "annot", [
-      ...(heading ? [{ text: "INTERPRETATION  ", options: { bold: true, color: C.accent, fontSize: TYPE.footnote, charSpacing: 1 } }] : []),
+      ...(heading ? [{ text: "Interpretation  ", options: { bold: true, color: C.accent, fontSize: TYPE.strip } }] : []),
       { text: f.annotation, options: { color: C.ink, fontSize: TYPE.strip } },
     ], { x: LEFT + 0.2, y, w: 11.85, h: 0.62, valign: "middle" });
   } else {
@@ -244,8 +276,8 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
       x, y: CONTENT_TOP, w: 0.05, h: 1.1, fill: { color: C.accent }, line: { color: C.accent, width: 0 },
     });
     if (heading) {
-      h.text("interpretation-heading", "annot", "INTERPRETATION", {
-        x: x + 0.2, y: CONTENT_TOP, w: 2.85, h: 0.26, fontSize: TYPE.footnote, bold: true, color: C.accent, charSpacing: 1,
+      h.text("interpretation-heading", "annot", "Interpretation", {
+        x: x + 0.2, y: CONTENT_TOP, w: 2.85, h: 0.26, fontSize: 12, bold: true, color: C.accent,
       });
     }
     h.text("interpretation", "annot", f.annotation, {
@@ -273,9 +305,9 @@ export function chartDefaults(area: Area, extra: Opts = {}): Opts {
     catAxisLabelColor: C.ink,
     valAxisLabelFontFace: FONT,
     valAxisLabelFontSize: TYPE.axis,
-    valAxisLabelColor: C.muted,
+    valAxisLabelColor: C.faint,
     catAxisLineShow: true,
-    catAxisLineColor: C.border,
+    catAxisLineColor: C.borderStrong,
     valAxisLineShow: false,
     valGridLine: { style: "none" },
     catGridLine: { style: "none" },
@@ -290,6 +322,16 @@ export function chartDefaults(area: Area, extra: Opts = {}): Opts {
     ...extra,
   };
 }
+
+/** Table-head cell options: elevated fill, graphite text, a strong rule beneath. Plate text only on graphite or malachite fills. */
+export const HEAD_CELL = {
+  bold: true,
+  fontSize: 11,
+  color: C.ink,
+  fill: { color: C.soft },
+  valign: "middle",
+  border: [{ type: "none" }, { type: "none" }, { type: "solid", pt: 1, color: C.borderStrong }, { type: "none" }],
+} as const;
 
 /** Horizontal hairline across a span (a zero-height rect renders more reliably than a connector). */
 export function hairline(h: RenderHelpers, name: string, role: ElementRole, x: number, y: number, w: number, color: string = C.border): void {

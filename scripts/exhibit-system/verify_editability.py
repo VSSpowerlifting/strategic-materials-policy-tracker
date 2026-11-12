@@ -18,7 +18,7 @@ Three tiers, reported separately and never merged:
                   a:noFill with deleted labels; every table element is an a:tbl;
                   every fixture `visual_text` string appears verbatim in a:t or
                   c:v text; every non-cover slide carries the synthetic notice;
-                  every explicit latin typeface is Archivo.
+                  every explicit latin typeface is Archivo, except Spectral on cover, divider and statement shapes at 28 pt or larger.
 2. libreoffice  - headless soffice converts each deck to PDF (page count must
                   equal slide count) and re-saves it as PPTX; the re-saved file
                   must still contain the same number of chart parts and no
@@ -63,6 +63,10 @@ NS = {
 R_ID = f"{{{NS['r']}}}id"
 SYNTHETIC_NOTICE = "Synthetic demonstration data"
 FONT = "Archivo"
+FONT_EDITORIAL = "Spectral"
+# Spectral is for covers, dividers and one governing statement; never inside an exhibit.
+SERIF_SHAPES = ("cover-title", "divider-title", "statement")
+SERIF_MIN_SZ = 2800  # hundredths of a point
 CHART_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart"
 PACKAGE_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/package"
 
@@ -225,10 +229,22 @@ def structural(deck: Path, manifest_slides: list[dict], mode: str = "synthetic")
             else:
                 issues.append(f"{nm}: unexpected graphicFrame {uri}")
 
-        for lat in root.iter(f"{{{NS['a']}}}latin"):
-            tf = lat.get("typeface", "")
-            if tf and tf != FONT and not tf.startswith("+"):
-                issues.append(f"typeface {tf}")
+        for sp in root.iter(f"{{{NS['p']}}}sp"):
+            nv = sp.find("p:nvSpPr/p:cNvPr", NS)
+            sname = (nv.get("name", "") if nv is not None else "").split(":", 1)[-1]
+            for lat in sp.iter(f"{{{NS['a']}}}latin"):
+                tf = lat.get("typeface", "")
+                if not tf or tf.startswith("+") or tf == FONT:
+                    continue
+                if tf == FONT_EDITORIAL:
+                    if not sname.startswith(SERIF_SHAPES):
+                        issues.append(f"{sname}: {FONT_EDITORIAL} used outside a cover, divider or statement")
+                    for rpr in sp.iter(f"{{{NS['a']}}}rPr"):
+                        sz = rpr.get("sz")
+                        if sz and int(sz) < SERIF_MIN_SZ:
+                            issues.append(f"{sname}: {FONT_EDITORIAL} below {SERIF_MIN_SZ // 100} pt")
+                else:
+                    issues.append(f"typeface {tf}")
 
         slide_text = texts(root)
         haystack = slide_text + "\n" + "\n".join(chart_text)

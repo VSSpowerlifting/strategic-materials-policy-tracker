@@ -1,0 +1,84 @@
+{
+  "$comment": "Single token source for SMPT publications (decks, memos, report covers, social covers, exhibits). Values mirror the Architectural Research Studio site tokens in app/globals.css and the chart series set in components/markets/types.ts; tests/publication-tokens.test.ts fails when they drift. Hex values are written without '#' by the TS and Python loaders when a library needs it.",
+  "version": "3.0",
+  "palette": {
+    "plaster": { "hex": "#f6f5f1", "site": "--bg", "role": "Page and slide ground" },
+    "chalk": { "hex": "#fbfaf7", "site": "--surface", "role": "Quiet panels" },
+    "elevated": { "hex": "#eeece5", "site": "--elevated", "role": "Table heads, selected rows, soft bands" },
+    "plate": { "hex": "#fdfdfb", "site": "--plate", "role": "Exhibit and chart ground; text on graphite or malachite fills" },
+    "graphite": { "hex": "#1b1e21", "site": "--fg", "role": "Text, primary rules, primary marks, table-head fill" },
+    "slate": { "hex": "#555b61", "site": "--muted", "role": "Secondary text" },
+    "faint": { "hex": "#61666c", "site": "--faint", "role": "Captions, axis labels, source lines" },
+    "border": { "hex": "#dbd8cf", "site": "--border", "role": "Hairlines, gridlines" },
+    "borderStrong": { "hex": "#b5b1a5", "site": "--border-strong", "role": "Base lines, structural rules" },
+    "malachite": { "hex": "#1f5c4d", "site": "--accent", "role": "The single emphasised mark; links" },
+    "hematite": { "hex": "#9a3324", "site": "--negative", "role": "Declines, controls, ended or lapsed status" },
+    "ochre": { "hex": "#9a6a12", "site": "--ochre", "role": "Designations and cautions; rules and markers only, never small text" }
+  },
+  "seriesOrder": ["graphite", "malachite", "hematite", "lapis", "ochre", "plum"],
+  "series": {
+    "graphite": { "hex": "#1b1e21", "dash": null },
+    "malachite": { "hex": "#1e6353", "dash": null },
+    "hematite": { "hex": "#9a3324", "dash": null },
+    "lapis": { "hex": "#4a7fd0", "dash": "7 4" },
+    "ochre": { "hex": "#a27017", "dash": "7 4" },
+    "plum": { "hex": "#8b4491", "dash": "7 4" }
+  },
+  "seriesExtraDashes": ["2 4", "11 3 2 3", "1 5", "13 4 3 4", "4 2 1 2"],
+  "neutrals": {
+    "$comment": "Graphite-tinted functional greys for non-focus series and comparison marks. Marks and fills only, never text: mid is at least 3:1 on plaster and plate. They are not brand colours.",
+    "dark": "#3d4247",
+    "mid": "#83888d",
+    "light": "#c8cbcc"
+  },
+  "sequentialRamp": {
+    "$comment": "Single-hue malachite ramp for ordered magnitude (heat grids, intensity). Light to dark; step 1 is nearly ground, step 5 equals the series malachite.",
+    "name": "malachite",
+    "steps": ["#e6ede9", "#c4d7cf", "#8fb3a6", "#4f8272", "#1e6353"]
+  },
+  "contrast": {
+    "$comment": "WCAG 2.x contrast ratios, computed from the hex values above. Ground = plate / plaster.",
+    "vsPlate": {
+      "graphite": 16.44, "slate": 6.75, "faint": 5.69, "malachite": 7.65, "hematite": 7.18, "ochre": 4.64,
+      "seriesMalachite": 6.95, "seriesLapis": 3.94, "seriesOchre": 4.24, "seriesPlum": 6.19,
+      "border": 1.4, "borderStrong": 2.1
+    },
+    "vsPlaster": {
+      "graphite": 15.35, "slate": 6.3, "faint": 5.31, "malachite": 7.14, "hematite": 6.7, "ochre": 4.33,
+      "seriesMalachite": 6.49, "seriesLapis": 3.68, "seriesOchre": 3.96, "seriesPlum": 5.77,
+      "border": 1.31, "borderStrong": 1.96
+    },
+    "rules": [
+      "Text uses graphite, slate or faint on plaster, plate, chalk or elevated (all at least 5.3:1 on plaster).",
+      "Light text (plate) sits only on graphite (16.4:1) or malachite (7.65:1) fills.",
+      "Ochre, lapis and series ochre are marks and rules, never small text; the dash pattern, not hue alone, identifies a series.",
+      "Hairlines are not text and carry no contrast requirement."
+    ]
+  },
+  "type": {
+    "editorial": {
+      "family": "Spectral",
+      "weights": [300, 400, 500],
+      "use": ["publication and presentation covers", "section dividers", "large editorial statements (one governing sentence)", "memo and report titles"],
+      "never": ["analytical slide titles", "paragraphs", "tables", "chart labels", "source footers", "dense financial content"]
+    },
+    "text": {
+      "family": "Archivo",
+      "weights": [400, 500, 600, 700],
+      "use": ["analytical slide titles", "reading text", "tables", "chart labels", "source footers", "dense financial content", "labels"]
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "use": ["record identifiers only"]
+    },
+    "labels": "Sentence case, medium weight, no tracked all-caps.",
+    "fallbackPolicy": "No silent substitution. A missing Spectral or Archivo fails the build loudly; PowerPoint cannot embed fonts, so the PDF export is the canonical, font-embedded form."
+  },
+  "geometry": {
+    "slide": { "widthIn": 13.333, "heightIn": 7.5 },
+    "memo": { "page": "letter", "marginIn": 0.9 },
+    "social": { "widthPx": 1200, "heightPx": 630 },
+    "corners": "square",
+    "rules": "hairline; 0.75 pt on slides"
+  }
+}

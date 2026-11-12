@@ -6,7 +6,7 @@
   "annotation": "Every movement is a sourced change in status. The bridge reconciles exactly: 500 + 180 + 60 − 90 − 30 = 620.",
   "source": "Synthetic fixture waterfall.json, constructed for the exhibit gallery",
   "layout": "wide",
-  "visual_text": ["Opening balance", "Closing balance", "Award, Project 3", "INTERPRETATION"],
+  "visual_text": ["Opening balance", "Closing balance", "Award, Project 3", "Interpretation"],
   "data": {
     "unit": "CU million, committed",
     "dp": 0,

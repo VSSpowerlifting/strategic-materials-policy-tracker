@@ -92,7 +92,7 @@ export const percentStacked: Renderer<PercentStackedData> = {
     const n = rows.length;
 
     let ni = 0;
-    const colors = d.components.map((c) => (c === d.accent ? C.gold : NEUTRALS[ni++]));
+    const colors = d.components.map((c) => (c === d.accent ? C.accent : NEUTRALS[ni++]));
     let lx = h.area.x;
     d.components.forEach((c, i) => {
       lx = legendItem(h, `legend-${i}`, lx, h.area.y, c, { fill: colors[i], line: C.neutralDark }, 1.55);

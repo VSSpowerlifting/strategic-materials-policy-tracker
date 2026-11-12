@@ -47,6 +47,6 @@ test("fixed-width typography remains for technical identifiers and literal URLs"
 
 test("new research publication style names Archivo without modifying existing releases", () => {
   const style = read("docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md");
-  assert.match(style, /Archivo is the SMPT primary typeface/);
+  assert.match(style, /Spectral is the editorial display face and Archivo is the working face/);
   assert.match(style, /Existing publication binaries remain frozen/);
 });

@@ -99,7 +99,7 @@ export const indexedLines: Renderer<IndexedLinesData> = {
         valAxisMaxVal: axisMax,
         valAxisMajorUnit: major,
         valAxisLabelFormatCode: formatCode(0),
-        valGridLine: { color: "E9E5DC", size: 0.5 },
+        valGridLine: { color: C.border, size: 0.5 },
         catAxisLabelFrequency: 2,
         catAxisLabelFontSize: 11,
         altText: `Indexed line chart, base = 100 at ${base}`,

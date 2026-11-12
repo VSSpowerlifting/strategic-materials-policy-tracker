@@ -3,7 +3,8 @@
 // shaded on one restrained sequential ramp; the base case is outlined.
 import { arr, num, obj, optNum, str, strList } from "../contract";
 import { maxItems, minItems, sameLength, uniqueLabels } from "../integrity";
-import { C, fmt } from "../primitives";
+import { contrastRatio } from "../../publication/tokens";
+import { C, fmt, RAMP } from "../primitives";
 import type { IntegrityIssue, Renderer, TableCell } from "../types";
 
 export interface SensitivityGridData {
@@ -17,8 +18,8 @@ export interface SensitivityGridData {
   base: { row: string; col: string };
 }
 
-/** Pale to gold tints; the lowest stop stays visibly darker than the paper. Ink text stays legible at every stop. */
-const RAMP = ["ECE6D9", "E4D3AE", "D9BD84", C.gold];
+/** Cells shade along the single-hue malachite ramp; each cell takes graphite or plate text, whichever contrasts more. */
+const textOn = (fill: string): string => (contrastRatio(C.ink, fill) >= contrastRatio(C.plate, fill) ? C.ink : C.plate);
 
 function hex(c: string): [number, number, number] {
   return [parseInt(c.slice(0, 2), 16), parseInt(c.slice(2, 4), 16), parseInt(c.slice(4, 6), 16)];
@@ -104,15 +105,16 @@ export const sensitivityGrid: Renderer<SensitivityGridData> = {
         head(d.rowDriver.values[i], { align: "left", fontSize: 11 }),
         ...r.map((v, j): TableCell => {
           const isBase = i === br && j === bc;
+          const fill = shade(hi === lo ? 0 : (v - lo) / (hi - lo));
           return {
             text: fmt(v, d.dp),
             options: {
               fontSize: 12,
               bold: isBase,
-              color: C.ink,
+              color: textOn(fill),
               align: "center",
               valign: "middle",
-              fill: { color: shade(hi === lo ? 0 : (v - lo) / (hi - lo)) },
+              fill: { color: fill },
               border: isBase ? { color: C.accent, pt: 3, type: "solid" } : grid,
             },
           };

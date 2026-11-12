@@ -75,7 +75,7 @@ export const valueChainMeasured: Renderer<ValueChainData> = {
       });
       h.text(`stage-label-${i}`, "label", s.label, {
         x: x + (i === 0 ? 0.12 : 0.3), y: A.y, w: pitch - (i === 0 ? 0.5 : 0.62), h: chevH,
-        fontSize: 12, bold: true, color: "FFFFFF", align: "center", valign: "middle",
+        fontSize: 12, bold: true, color: C.plate, align: "center", valign: "middle",
       });
       if (s.value === null) {
         h.text(`value-${i}`, "label", "not measured", {

@@ -1,8 +1,11 @@
 # Architectural Research Studio — SMPT design system
 
 Status: current site design system (November 2026 redesign). Tokens and shared classes live in
-`app/globals.css`; this file says how to use them. It replaces the dark "atlas" look. Presentation decks keep
-their own standard (`docs/design/presentations/`).
+`app/globals.css`; this file says how to use them. It replaces the dark "atlas" look. Publications (decks,
+executive memos, research PDFs, covers, social images and financial exhibits) share these tokens through
+`docs/design/publication-tokens.json` and follow `docs/design/PUBLICATION_DESIGN_SYSTEM.md`; the deck rules are in
+`docs/design/presentations/`. Change a colour or face in `app/globals.css` first, then mirror it in the token file
+(`tests/publication-tokens.test.ts` fails until you do).
 
 ## Idea
 
@@ -33,7 +36,8 @@ is the status line and the evidence; on Markets it is the chart.
 Colour carries meaning or nothing. No gradients, no tinted cards, no drop shadows except the menu shadow. Never
 hard-code a hex in a component: use the token utilities (`text-foreground`, `text-muted`, `text-faint`,
 `text-accent`, `bg-card`, `bg-elevated`, `bg-plate`, `border-border`, `border-border-strong`) or `var(--…)`.
-Chart series use the categorical set in `components/markets/types.ts`.
+Chart series use the categorical set in `components/markets/types.ts`; the publication token file carries the same
+set, a dash pattern for each, and a single-hue malachite ramp for ordered magnitude.
 
 ## Type
 

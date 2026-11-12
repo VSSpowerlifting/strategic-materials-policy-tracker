@@ -8,12 +8,12 @@
   "decks": [
     {
       "file": "docs/design/presentations/exhibit-system/exhibit-gallery.pptx",
-      "sha256": "37006d2cc5f9fe6f0debbf8cb00ec30865b4527147f829c6999d9f48e849eab9",
+      "sha256": "a5a029d0db30eb5e040d9b78ce65e9ea061f308e5d286d2f74e771f0394ddc7b",
       "slides": 40,
       "element_tiers": {
         "native-chart": 21,
         "native-chart-with-helper-series": 1,
-        "native-shapes": 655,
+        "native-shapes": 657,
         "table": 6,
         "text": 785
       },
@@ -24,8 +24,9 @@
           {
             "slide": 1,
             "pattern": "cover",
-            "elements": 4,
+            "elements": 6,
             "tiers": {
+              "native-shapes": 2,
               "text": 4
             },
             "charts": [],
@@ -764,12 +765,12 @@
     },
     {
       "file": "docs/design/presentations/exhibit-system/demo-deck.pptx",
-      "sha256": "8dd3ef735ee133d263ccee1f1171469476469569ece76ed5f9f1628a3bf39804",
+      "sha256": "c8e890c6bc3abb627cf637de5e6e85f91dcf9927e0a2f3ed9c894e4a00ba0539",
       "slides": 14,
       "element_tiers": {
         "native-chart": 4,
         "native-chart-with-helper-series": 1,
-        "native-shapes": 238,
+        "native-shapes": 240,
         "table": 1,
         "text": 286
       },
@@ -780,8 +781,9 @@
           {
             "slide": 1,
             "pattern": "cover",
-            "elements": 4,
+            "elements": 6,
             "tiers": {
+              "native-shapes": 2,
               "text": 4
             },
             "charts": [],

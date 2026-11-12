@@ -18,6 +18,7 @@
 import fs from "node:fs";
 import { createHash } from "node:crypto";
 import path from "node:path";
+import { assertFonts } from "../publication/fonts";
 import { arr, ContractError, obj, oneOf, optStr, str, strList } from "./contract";
 import { REPO, SYSTEM_DIR } from "./paths";
 import { SYNTHETIC_NOTICE } from "./primitives";
@@ -243,6 +244,7 @@ if (require.main === module) {
     console.error("usage: npm run exhibits:render -- <spec.json> <out.pptx> [--qc-record <path>]");
     process.exit(2);
   }
+  assertFonts();
   renderResearchDeck(spec, out, qc)
     .then((m) => {
       console.log(`research deck → ${out}`);

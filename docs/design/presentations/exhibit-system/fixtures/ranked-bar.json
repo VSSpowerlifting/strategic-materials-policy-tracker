@@ -5,7 +5,7 @@
   "subtitle": "Committed public support by programme, CU million, demonstration cut-off",
   "annotation": "Rank on one measure and one status. Committed amounts only; announced and drawn amounts belong on separate exhibits.",
   "source": "Synthetic fixture ranked-bar.json, constructed for the exhibit gallery",
-  "visual_text": ["Programme Gamma", "Programme Alpha", "INTERPRETATION"],
+  "visual_text": ["Programme Gamma", "Programme Alpha", "Interpretation"],
   "data": {
     "unit": "CU million, committed",
     "dp": 0,
