@@ -34,16 +34,18 @@ export function PhotoPlate({
           fill
           sizes={sizes}
           priority={priority}
+          unoptimized={p.src.startsWith("https://")}
           style={{ objectFit: "cover", objectPosition: p.focus }}
         />
       </div>
       <figcaption className="plate-caption">
         <span>
-          {p.shows}, {p.place}, <time dateTime={p.acquired}>{formatDateLong(p.acquired)}</time>.
+          {p.shows}, {p.place}, <time dateTime={p.acquired}>{p.dateLabel ?? formatDateLong(p.acquired)}</time>.
           {caption === "full" && p.limits ? ` ${p.limits}` : null}
         </span>
         <span>
-          <a href={p.sourceUrl} className="link-quiet">{p.photoId}</a>. {p.credit}.
+          <a href={p.sourceUrl} className="link-quiet">{p.photoId}</a>. {p.credit}.{" "}
+          <a href={p.rights.url} className="link-quiet" rel="license">Rights</a>.
         </span>
       </figcaption>
     </figure>

@@ -8,7 +8,7 @@
  * `public/photography/` only together with its entry here.
  */
 export interface Photograph {
-  /** Path under `public/`. */
+  /** Local path under `public/`, or an HTTPS URL at the verified publishing source. */
   src: string;
   width: number;
   height: number;
@@ -24,6 +24,8 @@ export interface Photograph {
   limits?: string;
   /** ISO date the image was acquired. */
   acquired: string;
+  /** Human-readable date where only a year/month is verified. */
+  dateLabel?: string;
   /** Publisher's catalogue identifier. */
   photoId: string;
   credit: string;
@@ -55,13 +57,97 @@ export const photographs = {
     },
     focus: "50% 38%",
   },
+  "china-rare-earths": {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/REE_deposits.jpg/1280px-REE_deposits.jpg",
+    width: 1280,
+    height: 960,
+    alt: "An excavated rare-earth deposit with bare pale slopes and a lined water basin, surrounded by wooded hills.",
+    site: "Rare-earth element deposit",
+    place: "China",
+    shows: "Rare-earth deposit photographed in China",
+    limits: "Photographed in 2016; the image illustrates extraction, not the 2026 export-control announcement or the six regulated product categories.",
+    acquired: "2016-05-22",
+    photoId: "REE_deposits.jpg",
+    credit: "Kevnmh, via Wikimedia Commons; cropped for display",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:REE_deposits.jpg",
+    rights: {
+      statement: "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+      url: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
+    focus: "50% 54%",
+  },
+  "drakelands-aster": {
+    src: "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia19/pia19757/PIA19757.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1134&w=1260",
+    width: 1260,
+    height: 1134,
+    alt: "Satellite view of the Drakelands tungsten-tin mine in the upper right of a wide patchwork of fields and the Plymouth coastline.",
+    site: "Drakelands (Hemerdon) tungsten-tin mine",
+    place: "Devon, England, United Kingdom",
+    shows: "Drakelands mine and its surrounding landscape, imaged from NASA's Terra spacecraft",
+    limits: "ASTER image acquired in 2013; it does not depict 2026 restart work or the financing's current execution.",
+    acquired: "2013-06-05",
+    photoId: "PIA19757",
+    credit: "NASA/GSFC/METI/ERSDAC/JAROS and U.S./Japan ASTER Science Team",
+    sourceUrl: "https://science.nasa.gov/photojournal/drakelands-mine-england/",
+    rights: {
+      statement: "NASA Photojournal imagery, distributed for informational and educational reuse with source credit",
+      url: "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    },
+    focus: "79% 26%",
+  },
+  "antimony-ingot": {
+    src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Antimon_Barren%2C_Deutsches_Museum.JPG/1280px-Antimon_Barren%2C_Deutsches_Museum.JPG",
+    width: 1280,
+    height: 1131,
+    alt: "A flat silver-gray antimony ingot with prominent interlocking crystalline patterns.",
+    site: "Deutsches Museum antimony ingot",
+    place: "Munich, Germany",
+    shows: "A museum specimen of metallic antimony",
+    limits: "Museum specimen photographed in 2010; it is not inventory belonging to the hypothetical defense manufacturer in the strategy case.",
+    acquired: "2010",
+    dateLabel: "2010",
+    photoId: "Antimon_Barren, Deutsches_Museum.JPG",
+    credit: "High Contrast, via Wikimedia Commons; cropped for display",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Antimon_Barren,_Deutsches_Museum.JPG",
+    rights: {
+      statement: "Creative Commons Attribution 3.0 Germany (CC BY 3.0 DE)",
+      url: "https://creativecommons.org/licenses/by/3.0/de/deed.en",
+    },
+    focus: "50% 47%",
+  },
+  "tungsten-usgs": {
+    src: "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/thumbnails/image/hm1-mar2020_0.JPG",
+    width: 1000,
+    height: 749,
+    alt: "A lustrous dark tungsten-bearing mineral crystal with fine parallel ridges against a black background.",
+    site: "USGS tungsten mineral photograph",
+    place: "United States Geological Survey collection",
+    shows: "A tungsten-bearing mineral specimen photographed for the USGS",
+    limits: "This mineral specimen is illustrative and does not document output from any of the four jurisdictions' projects.",
+    acquired: "2020-03",
+    dateLabel: "March 2020 (approx.)",
+    photoId: "USGS tungsten photo-contest image",
+    credit: "Carlin Green, U.S. Geological Survey",
+    sourceUrl: "https://www.usgs.gov/media/images/tungsten",
+    rights: {
+      statement: "Public domain, as stated by the U.S. Geological Survey",
+      url: "https://www.usgs.gov/media/images/tungsten",
+    },
+    focus: "50% 46%",
+  },
 } as const satisfies Record<string, Photograph>;
 
 export type PhotographId = keyof typeof photographs;
 
+export function researchCoverPhoto(slug: string): Photograph | undefined {
+  const cover = researchCovers[slug];
+  return cover?.kind === "photo" ? photographs[cover.photo] : undefined;
+}
+
 /**
- * Cover for each publication, keyed by its route segment. A cover is either a registered photograph or a
- * typographic plate: a large mark with one line under it, both taken from the publication's own subject.
+ * Cover for each publication, keyed by its route segment. Registered photographs preserve a direct
+ * source/rights record; the historical typographic fallback is retained for other future publications.
+ * Externally hosted photos should be migrated to vetted local binaries when a checked-in asset is available.
  */
 export type ResearchCover =
   | { kind: "photo"; photo: PhotographId }
@@ -69,8 +155,8 @@ export type ResearchCover =
 
 export const researchCovers: Record<string, ResearchCover> = {
   "escondida-copper": { kind: "photo", photo: "escondida-tailings" },
-  "china-export-control-suspension-extension": { kind: "mark", mark: "10 Jan 2027", line: "Suspension continued through" },
-  "hemerdon-financing": { kind: "mark", mark: "W", line: "Tungsten, element 74" },
-  "antimony-supply-resilience": { kind: "mark", mark: "Sb", line: "Antimony, element 51" },
-  "tungsten-supply-security": { kind: "mark", mark: "74", line: "Tungsten, atomic number" },
+  "china-export-control-suspension-extension": { kind: "photo", photo: "china-rare-earths" },
+  "hemerdon-financing": { kind: "photo", photo: "drakelands-aster" },
+  "antimony-supply-resilience": { kind: "photo", photo: "antimony-ingot" },
+  "tungsten-supply-security": { kind: "photo", photo: "tungsten-usgs" },
 };

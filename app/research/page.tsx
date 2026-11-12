@@ -26,8 +26,8 @@ export default function ResearchIndex() {
         </header>
         <div className="mt-12 sm:mt-16">
           <article className="grid gap-8 border-b border-border pb-14 lg:grid-cols-12 lg:items-center lg:gap-14 sm:pb-16">
-            <ResearchCover data-cover="china-export-control-suspension-extension" data-frame="feature" priority className="lg:col-span-7" />
-            <div className="lg:col-span-5">
+            <ResearchCover data-cover="china-export-control-suspension-extension" data-frame="feature" priority className="lg:order-2 lg:col-span-7" />
+            <div className="lg:order-1 lg:col-span-5">
               <div className={meta}><p className={category}>Policy Research</p><p>November 9, 2026</p><p>Benjamin Yang</p></div>
               <h2 className="display-2 mt-4 text-foreground"><Link href="/research/china-export-control-suspension-extension" className={titleLink}>China Extends the Suspension of Six Export-Control Announcements Through January 10, 2027</Link></h2>
               <p className="mt-5 text-pretty text-base leading-7 text-muted sm:text-[1.0625rem] sm:leading-8">On November 9, China continued the suspension of six October 2025 export-control announcements through January 10, 2027. The April rare-earth controls and a separate U.S.-directed measure follow different schedules.</p>

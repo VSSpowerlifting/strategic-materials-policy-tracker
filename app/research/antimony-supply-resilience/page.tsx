@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
+import { researchCoverPhoto } from "@/lib/photography";
 
 const pdf = "/research/applied-001/antimony-supply-resilience.pdf";
 const model = "/research/applied-001/antimony-supply-resilience-model.xlsx";
 const evidence = "/research/applied-001/antimony-evidence-and-assumptions.md";
+
+const coverPhoto = researchCoverPhoto("antimony-supply-resilience")!;
 
 export const metadata: Metadata = {
   title: "U.S. Antimony Supply Resilience — Strategy & Finance",
@@ -13,11 +17,16 @@ export const metadata: Metadata = {
     "A defense-manufacturing procurement strategy case comparing qualified supplier diversification, inventory and prospective domestic offtake, with a source-linked scenario model.",
   alternates: { canonical: "/research/antimony-supply-resilience" },
   openGraph: {
+    images: [{ url: coverPhoto.src, width: coverPhoto.width, height: coverPhoto.height, alt: coverPhoto.alt }],
     type: "article",
     url: site.url + "/research/antimony-supply-resilience",
     siteName: site.name,
     title: "U.S. Antimony Supply Resilience | SMPT",
     description: "Supply continuity, inventory working capital and conditional domestic sourcing under 2027–2031 antimony disruption scenarios.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [coverPhoto.src],
   },
 };
 
@@ -76,6 +85,13 @@ export default function AntimonySupplyResilience() {
               Open the Excel model
             </a>
           </div>
+          <ResearchCover
+            data-cover="antimony-supply-resilience"
+            data-frame="banner"
+            data-caption="full"
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="mt-12 sm:mt-16"
+          />
         </Container>
       </section>
 

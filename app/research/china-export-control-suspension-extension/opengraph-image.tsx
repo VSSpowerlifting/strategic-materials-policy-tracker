@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { photographs } from "@/lib/photography";
 
 export const alt =
   "SMPT Policy Research: China extends its export-control pause through January 10, 2027";
@@ -39,7 +40,7 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          width: 900,
+          width: 790,
           padding: "66px 0 60px 76px",
         }}
       >
@@ -60,7 +61,7 @@ export default async function Image() {
             style={{
               display: "flex",
               flexDirection: "column",
-              fontSize: 67,
+              fontSize: 61,
               fontWeight: 700,
               lineHeight: 1.07,
               letterSpacing: -1.8,
@@ -98,12 +99,40 @@ export default async function Image() {
           display: "flex",
           position: "absolute",
           top: 90,
-          left: 913,
+          left: 817,
           height: 435,
           width: 1,
           backgroundColor: "#b5b1a5",
         }}
       />
+      <img
+        alt=""
+        src={photographs["china-rare-earths"].src}
+        style={{
+          position: "absolute",
+          left: 818,
+          top: 0,
+          width: 382,
+          height: 630,
+          objectFit: "cover",
+          objectPosition: "56% 50%",
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          position: "absolute",
+          left: 818,
+          bottom: 0,
+          width: 382,
+          padding: "12px 18px",
+          backgroundColor: "rgba(20, 30, 28, 0.82)",
+          color: "#fff",
+          fontSize: 13,
+        }}
+      >
+        Kevnmh · CC BY-SA 4.0
+      </div>
       <img
         alt=""
         src={`data:image/png;base64,${mark.toString("base64")}`}
@@ -113,7 +142,7 @@ export default async function Image() {
           height: 345,
           top: 158,
           right: -130,
-          opacity: 0.85,
+          opacity: 0,
         }}
       />
     </div>,
