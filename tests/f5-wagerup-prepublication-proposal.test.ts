@@ -22,7 +22,8 @@ test("supervised release publishes exactly one source-reviewed Wagerup claim, no
   assert.deepEqual(milestones.map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
   assert.equal(milestones[0].id,milestoneId);
   assert.equal(milestones.filter(x=>x.projectId===pid).length,1,"Wagerup stays the only gallium-project milestone");
-  assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+  assert.equal(site.lastUpdated,"2026-11-12");
   assert.equal(candidate.proposedCorpusCutoff,"2026-10-17","the Wagerup candidate was proposed at the 17 October cutoff; later cutoffs do not rewrite it");
   assert.equal(candidate.publishedCorpusCutoffAtPreparation,"2026-10-09");
   assert.equal(candidate.proposedProjectMilestones.length,1);

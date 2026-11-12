@@ -12,7 +12,7 @@ import { PHASE_III_RELEASE_CUTOFF, PUBLIC_MILESTONE_IDS_AT_PHASE_III } from "./p
 
 const m3=()=>buildM3ReviewerPackets(queue,{
  projects:getAllProjects(),sources:getAllSources(),commitments:getAllFinancialCommitments(),
- corpusCutoff:site.lastUpdated,publicMilestoneCount:getAllProjectMilestones().length,
+ corpusCutoff:PHASE_III_RELEASE_CUTOFF,publicMilestoneCount:getAllProjectMilestones().length,
 },"review-m3-2-thompson-falls-q2-expansion").worksheets[0];
 
 test("PIR release explicitly remains an unsigned supplement to current real M3 reviewer authority",()=>{
@@ -164,7 +164,8 @@ test("submitted source-test request and draft inspection followup avoid duplicat
  assert.equal(request.recordsObtained,false);
  assert.equal(request.publicMilestoneAuthorized,false);
  assert.equal(request.humanReviewCompleted,false);
- assert.equal(site.lastUpdated,PHASE_III_RELEASE_CUTOFF);
+ assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08");
+ assert.equal(site.lastUpdated,"2026-11-12");
  assert.ok(decisions.every(x=>x.verdict==="pending"));
  assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III]);
 });

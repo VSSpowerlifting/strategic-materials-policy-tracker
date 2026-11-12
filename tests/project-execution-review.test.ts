@@ -16,7 +16,8 @@ const refs = () => ({
   projects: getAllProjects(),
   sources: getAllSources(),
   commitments: getAllFinancialCommitments(),
-  corpusCutoff: site.lastUpdated,
+  // Recreate the historical M3/Phase III review, not today's site cutoff.
+  corpusCutoff: PHASE_III_RELEASE_CUTOFF,
 });
 const audit = (draft: unknown = q(), r = refs()) => auditProjectExecutionPilot(draft, r);
 
@@ -238,7 +239,8 @@ test("Stibnite original-source registration uses actual access receipt without b
   assert.equal(source.confidence,"primary");
   assert.equal(source.datePublished,"2025-10-21","event/report date is not the 2026 access receipt");
   assert.equal(source.dateAccessed,"2026-10-09","never backdate original source access");
-  assert.equal(site.lastUpdated, PHASE_III_RELEASE_CUTOFF,"source registration retains the dated curated corpus revision");
+  assert.equal(PHASE_III_RELEASE_CUTOFF,"2026-11-08","the original adjudication date remains unchanged");
+  assert.equal(site.lastUpdated,"2026-11-12");
   assert.ok(source.notes?.includes("nonbinding"),"do not mislabel conditional EXIM financing");
   assert.deepEqual(getAllProjectMilestones().map(x=>x.id),[...PUBLIC_MILESTONE_IDS_AT_PHASE_III],"unsigned Stibnite source does not add another public milestone");
 });
