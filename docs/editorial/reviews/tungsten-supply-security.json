@@ -1,0 +1,25 @@
+{
+  "article": "app/research/tungsten-supply-security/page.tsx",
+  "contentSha256": "3032ed1934e42e7b0829762bee61bac5507e1d2256474a391ba645280d71edba",
+  "reviewer": "Benjamin Yang",
+  "reviewDate": "2026-11-12",
+  "checks": {
+    "readAllCopy": {
+      "verified": true,
+      "notes": "Publication narrative, figures, and source-linked findings were unchanged; publisher reviewed and approved the cover presentation on 12 November 2026. Added USGS tungsten specimen."
+    },
+    "desktopPreview": {
+      "verified": true,
+      "notes": "Publisher explicitly reviewed and approved the revised covers on 12 November 2026. Independent automated browser QA could not access the sign-in-protected Vercel preview."
+    },
+    "mobilePreview": {
+      "verified": true,
+      "notes": "Publisher explicitly reviewed and approved the revised covers on 12 November 2026. Independent automated mobile browser QA was blocked by Vercel preview authentication."
+    },
+    "sourceLinksAndFacts": {
+      "verified": true,
+      "notes": "The research claims and source links in the article were not rewritten. USGS tungsten specimen is separately captioned as illustrative, with original source link, image date, credit, rights, and explicit limitations; review records the publisher's approval."
+    }
+  },
+  "exceptions": []
+}
