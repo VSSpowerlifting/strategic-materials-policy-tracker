@@ -5072,6 +5072,7 @@
           "materials",
           "product_scope",
           "product_codes",
+          "item_scope",
           "legal_basis",
           "status"
         ],
@@ -5176,6 +5177,7 @@
           "materials",
           "product_scope",
           "product_codes",
+          "item_scope",
           "legal_basis",
           "status"
         ],
@@ -5275,6 +5277,7 @@
           "materials",
           "product_scope",
           "product_codes",
+          "item_scope",
           "legal_basis",
           "status"
         ],
@@ -5379,6 +5382,7 @@
           "materials",
           "product_scope",
           "product_codes",
+          "item_scope",
           "legal_basis",
           "status"
         ],
@@ -5483,6 +5487,7 @@
           "materials",
           "product_scope",
           "product_codes",
+          "item_scope",
           "legal_basis",
           "status"
         ],
@@ -5582,6 +5587,7 @@
           "materials",
           "product_scope",
           "product_codes",
+          "item_scope",
           "legal_basis",
           "status"
         ],
