@@ -61,9 +61,9 @@ function landscapeSvg(): string {
   </svg>`;
 }
 
-// Satori renders the SVG image as an ordinary data URI; no remote asset or
+// Satori renders the illustrated SVG from base64 data; no remote asset or
 // runtime network request is required.
-const landscape = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(landscapeSvg())}`;
+const landscape = `data:image/svg+xml;base64,${btoa(landscapeSvg())}`;
 
 export default function Image() {
   return new ImageResponse(
