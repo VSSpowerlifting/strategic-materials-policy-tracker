@@ -34,6 +34,8 @@ test("featured analysis separates modeled thresholds from output and keeps its d
   assert.match(html, /not forecasts of plant output/);
   // The tonnes are a money benefit translated through an assumed margin, not physical output the plant must reach.
   assert.match(html, /after-tax\s+profit on 199,000 tonnes of copper in the base case/);
+  // A JSX line break once swallowed the space before the figure ("rising to416,000").
+  assert.match(html, /rising to 416,000 tonnes under tougher assumptions/);
   assert.match(html, /Those tonnes describe financial value, not how\s+much copper the new plant must produce\./);
   assert.match(html, /How much yearly value would justify BHP/);
   assert.match(html, /approved \$0\.8 billion of gross pre-commitment/);
