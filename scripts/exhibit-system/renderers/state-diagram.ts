@@ -7,6 +7,13 @@ import { edgesResolve, maxItems, minItems, uniqueLabels } from "../integrity";
 import { C, legendItem } from "../primitives";
 import type { IntegrityIssue, RenderHelpers, Renderer } from "../types";
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** The as-of date in the deck's date style ("30 Sep 2026"), as stage-ladder and the timeline print dates. */
+const longDate = (iso: string): string => {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
+};
+
 export interface StateDiagramData {
   asOf: string;
   currentId: string;
@@ -99,7 +106,7 @@ export const stateDiagram: Renderer<StateDiagramData> = {
 
     // Legend
     let lx = A.x;
-    lx = legendItem(h, "legend-current", lx, A.y, `Current state, as of ${d.asOf}`, { fill: C.accent }, 3.1);
+    lx = legendItem(h, "legend-current", lx, A.y, `Current state, as of ${longDate(d.asOf)}`, { fill: C.accent }, 3.1);
     legendItem(h, "legend-other", lx, A.y, "Other state", { fill: C.plate, line: C.neutral }, 1.5);
     h.text("legend-edge", "legend", "Arrow: transition, labelled by trigger", {
       x: A.x + A.w - 3.1, y: A.y, w: 3.1, h: 0.26, fontSize: 11, color: C.muted, align: "right",

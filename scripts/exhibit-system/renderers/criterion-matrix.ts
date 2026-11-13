@@ -14,6 +14,8 @@ export interface CriterionMatrixData {
   options: string[];
   accent?: string;
   criteria: { label: string; marks: Mark[] }[];
+  /** "marks" (default) draws glyphs and a key; "text" sets the mark words alone, weighted by type. */
+  display?: "marks" | "text";
   /** Any weight/score/total-style keys found in the fixture (rejected by check). */
   forbiddenKeys: string[];
 }
@@ -59,7 +61,8 @@ export const criterionMatrix: Renderer<CriterionMatrixData> = {
         marks: arr(r.marks, `data.criteria[${i}].marks`).map((m, j) => oneOf(m, MARKS, `data.criteria[${i}].marks[${j}]`)),
       };
     });
-    return { options, accent: optStr(o.accent, "data.accent"), criteria, forbiddenKeys };
+    const display = o.display === undefined ? undefined : oneOf(o.display, ["marks", "text"] as const, "data.display");
+    return { options, accent: optStr(o.accent, "data.accent"), criteria, ...(display ? { display } : {}), forbiddenKeys };
   },
   check(d) {
     const issues: IntegrityIssue[] = [
@@ -88,6 +91,10 @@ export const criterionMatrix: Renderer<CriterionMatrixData> = {
     return issues;
   },
   render(h, d) {
+    if (d.display === "text") {
+      renderText(h, d);
+      return;
+    }
     const { x, y } = h.area;
     const labelW = 2.75;
     const optW = Math.min(1.6, (h.area.w - labelW) / d.options.length);
@@ -133,3 +140,56 @@ export const criterionMatrix: Renderer<CriterionMatrixData> = {
     });
   },
 };
+
+/**
+ * Type weight carries the mark in text display: strengths bold, partial marks regular, gaps
+ * and unknowns muted. The words themselves separate "Does not" from "Not stated"; no italic,
+ * because the token family ships no italic face and a synthesized slant reads as an error.
+ */
+const TEXT_STYLE: Record<Mark, { bold: boolean; color: string }> = {
+  Meets: { bold: true, color: C.ink },
+  Partly: { bold: false, color: C.ink },
+  "Does not": { bold: false, color: C.muted },
+  "Not stated": { bold: false, color: C.muted },
+};
+
+/**
+ * Text display: no glyphs and no key. A graphite header rule replaces the filled band, the
+ * accent option is carried by its header colour, a malachite rule and a soft column band, and
+ * each mark word is weighted so strengths and gaps read without a legend.
+ */
+function renderText(h: RenderHelpers, d: CriterionMatrixData): void {
+  const { x, y } = h.area;
+  const labelW = 2.95;
+  const optW = Math.min(1.5, (h.area.w - labelW) / d.options.length);
+  const headH = 0.6;
+  const rowH = Math.min(0.48, (h.area.h - headH - 0.1) / d.criteria.length);
+  const rule = { type: "solid", pt: 0.75, color: C.border };
+  const headRule = { type: "solid", pt: 1.25, color: C.ink };
+  const accentRule = { type: "solid", pt: 2.5, color: C.accent };
+  const none = { type: "none" };
+  const hdr = (text: string, accent: boolean, align: "left" | "center"): TableCell => ({
+    text,
+    options: {
+      bold: true, fontSize: 12, color: accent ? C.accent : C.ink, fill: { color: accent ? C.soft : C.paper },
+      align, valign: "bottom", border: [none, none, accent ? accentRule : headRule, none],
+    },
+  });
+  const rows: TableCell[][] = [
+    [hdr("Criterion", false, "left"), ...d.options.map((o) => hdr(o, o === d.accent, "center"))],
+    ...d.criteria.map((c): TableCell[] => [
+      { text: c.label, options: { fontSize: 12, bold: false, color: C.ink, valign: "middle", fill: { color: C.paper }, border: [none, none, rule, none] } },
+      ...c.marks.map((m, j): TableCell => ({
+        text: m,
+        options: {
+          fontSize: 12, ...TEXT_STYLE[m], valign: "middle", align: "center",
+          fill: { color: d.options[j] === d.accent ? C.soft : C.paper }, border: [none, none, rule, none],
+        },
+      })),
+    ]),
+  ];
+  h.table("criterion-table", rows, {
+    x, y, w: labelW + optW * d.options.length, colW: [labelW, ...d.options.map(() => optW)],
+    rowH: [headH, ...d.criteria.map(() => rowH)], fontSize: 12,
+  });
+}

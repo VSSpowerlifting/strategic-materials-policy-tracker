@@ -1,3 +1,20 @@
+## 2026-11-13: FI003 draft 1.1 deck review candidate (draft PR, not merged)
+
+- Branch `claude/mp-materials-fi003-deck-734b31`, from `main` at 9d08bca. This is a presentation revision of draft 1.0 (PR #215 at `bfd276c7`; that branch is untouched). The recommendation, every figure, model 1.0, source links, qualifications and the 6 November 2026 cutoff are unchanged. Only `exhibits/*.csv`, `inputs.json` and `sources.json` were ported, byte-identical.
+- The new cover is an opt-in `ledger_cover` (`scripts/exhibit-system/ledger-cover.ts`) on the plaster ground, with a Spectral title and a three-instrument USD ledger on one scale (expired, received, committed) and no photo. The analysis is in Archivo. Shared renderer changes are limited to what FI003 uses; their effects on other decks are listed in the QC record. The waterfall's fixed plot layout and drawn-only key are opt-in data options (`alignValues`, `drawnKeysOnly`) set only in FI003's spec, so main's default waterfall is unchanged: all six committed FI002 specs render byte-identically on main `9d08bca` and on this branch. The committed gallery was not regenerated.
+- Outputs are in `research/fi003/outputs/presentation-draft-v110/`: an editable PPTX and manifest, the LibreOffice PDF export, a tagged accessible PDF with its receipt, and the contact sheet. Build files are in `research/fi003/presentation/v110/`, documented in its README. No font binaries are committed; Spectral and Archivo provenance hashes are recorded.
+- Verified locally:
+  - `check_deck.py --strict` (0 violations);
+  - editability, structural and LibreOffice round trip;
+  - `validate`;
+  - `lint` (0 errors);
+  - `typecheck`;
+  - `build`;
+  - 1,300 tests, including 5 new in `tests/exhibit-ledger-cover.test.ts` and 3 in `tests/exhibit-waterfall-options.test.ts`;
+  - tagged-PDF content order on pages 2, 6 and 11;
+  - FI002 rev4–rev6c renders, main vs branch: 6 / 6 byte-identical.
+- QC record: `research/fi003/presentation/QUALITY_REVIEW_V110.md`. Gates A–E are PASS (agent); the human gates are open and the publication HOLD stands. Not run: native PowerPoint, PDF/UA validation (veraPDF/PAC), a screen-reader pass, and `model.py`/`prototype.py`.
+
 ## 2026-11-12: Homepage featured analysis (FI002) redesign (PR #266, not merged)
 
 - Branch `claude/featured-analysis-redesign-3945be`, from `main` at ddadcdc. Only `components/home/featured-case.tsx`, a `.featured-track` rule in `app/globals.css`, a new `tests/featured-analysis.test.ts` and screenshots in `docs/design/reviews/featured-analysis/`. `lib/fi002.ts`, the article, the model, the CSV and every download are unchanged.

@@ -2,7 +2,7 @@
 // Native horizontal stacked bar chart (data-bound segments). Segment labels are
 // native and hidden by a number-format condition where a segment is narrow;
 // the total at each bar end is positioned text (not data-bound).
-import { arr, num, obj, oneOf, optNum, optStr, str } from "../contract";
+import { arr, bool, num, obj, oneOf, optNum, optStr, str } from "../contract";
 import { maxItems, minItems, nonNegative, sameLength, uniqueLabels } from "../integrity";
 import { C, chartDefaults, fmt, legendItem } from "../primitives";
 import type { Renderer } from "../types";
@@ -14,6 +14,10 @@ export interface StackedBarData {
   /** Name of the single highlighted component (optional). */
   accent?: string;
   rows: { label: string; values: number[] }[];
+  /** true keeps the rows in source order (e.g. chronological); default sorts by total, descending. */
+  keepOrder?: boolean;
+  /** Per-component legend item widths in inches (default 1.55 each). */
+  legendWidths?: number[];
 }
 
 /** Light-to-mid neutrals keep ink segment labels legible; the accent component uses gold. */
@@ -31,6 +35,8 @@ export const stackedBar: Renderer<StackedBarData> = {
       dp: optNum(o.dp, "data.dp") ?? 0,
       components,
       accent,
+      ...(o.keepOrder === undefined ? {} : { keepOrder: bool(o.keepOrder, "data.keepOrder") }),
+      ...(o.legendWidths === undefined ? {} : { legendWidths: arr(o.legendWidths, "data.legendWidths").map((v, i) => num(v, `data.legendWidths[${i}]`)) }),
       rows: arr(o.rows, "data.rows").map((x, i) => {
         const r = obj(x, `data.rows[${i}]`);
         return {
@@ -50,12 +56,12 @@ export const stackedBar: Renderer<StackedBarData> = {
       ...uniqueLabels(d.components, "components"),
       ...d.rows.flatMap((r) => sameLength(r.values, d.components, `row "${r.label}" values vs components`)),
       ...nonNegative(d.rows.flatMap((r) => r.values)),
+      ...(d.legendWidths ? sameLength(d.legendWidths, d.components, "legend widths vs components") : []),
     ];
   },
   render(h, d) {
-    const rows = d.rows
-      .map((r) => ({ ...r, total: r.values.reduce((s, v) => s + v, 0) }))
-      .sort((a, b) => b.total - a.total);
+    const totalled = d.rows.map((r) => ({ ...r, total: r.values.reduce((s, v) => s + v, 0) }));
+    const rows = d.keepOrder ? totalled : totalled.sort((a, b) => b.total - a.total);
     const n = rows.length;
     const maxTotal = Math.max(...rows.map((r) => r.total));
     const axisMax = maxTotal * 1.14;
@@ -68,7 +74,7 @@ export const stackedBar: Renderer<StackedBarData> = {
 
     let lx = h.area.x;
     d.components.forEach((c, i) => {
-      lx = legendItem(h, `legend-${i}`, lx, h.area.y, c, { fill: colors[i], line: C.neutralDark }, 1.55);
+      lx = legendItem(h, `legend-${i}`, lx, h.area.y, c, { fill: colors[i], line: C.neutralDark }, d.legendWidths?.[i] ?? 1.55);
     });
     h.text("unit", "axis", d.unit, {
       x: h.area.x + h.area.w - 2.4, y: h.area.y, w: 2.4, h: 0.26, fontSize: 11, color: C.muted, align: "right",

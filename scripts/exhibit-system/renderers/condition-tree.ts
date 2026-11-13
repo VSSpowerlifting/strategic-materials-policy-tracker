@@ -4,7 +4,7 @@
 // Opt-in `form: "rows"` lists the outcomes instead, as a native table of
 // outcome and the evidence each needs, the highlighted outcome first; it draws
 // no connectors, branch labels, legend or node boxes.
-import { arr, obj, oneOf, optStr, str } from "../contract";
+import { arr, bool, obj, oneOf, optStr, str } from "../contract";
 import { edgesResolve, maxItems, minItems, uniqueLabels } from "../integrity";
 import { C } from "../primitives";
 import type { IntegrityIssue, RenderHelpers, Renderer, TableCell } from "../types";
@@ -29,6 +29,10 @@ export interface ConditionTreeData {
   form: (typeof FORMS)[number];
   /** The first node is the root. */
   nodes: TreeNode[];
+  /** false omits the reading-convention note (default true). */
+  conventionNote?: boolean;
+  /** true sets each branch label on the side of its line the connector does not reach (default false: above). */
+  labelClear?: boolean;
 }
 
 const MAX_DEPTH = 4;
@@ -80,6 +84,8 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     return {
       highlightOutcomeId: optStr(o.highlightOutcomeId, "data.highlightOutcomeId"),
       form: o.form === undefined ? "tree" : oneOf(o.form, FORMS, "data.form"),
+      ...(o.conventionNote === undefined ? {} : { conventionNote: bool(o.conventionNote, "data.conventionNote") }),
+      ...(o.labelClear === undefined ? {} : { labelClear: bool(o.labelClear, "data.labelClear") }),
       nodes: arr(o.nodes, "data.nodes").map((x, i) => {
         const r = obj(x, `data.nodes[${i}]`);
         return {
@@ -192,9 +198,12 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     }
 
     // Legend
-    h.shape("legend-path-key", "legend", h.shapes.rect, { x: A.x, y: A.y + 0.07, w: 0.3, h: 0.04, fill: { color: C.accent }, line: { color: C.accent, width: 0 } });
-    h.text("legend-path-label", "legend", "Route to the example outcome", { x: A.x + 0.4, y: A.y, w: 2.6, h: 0.26, fontSize: 11, color: C.ink });
-    h.text("legend-kind", "legend", "Rounded boxes: conditions · square boxes: outcomes", {
+    // conventionNote: false drops both reading aids; the accent route and highlighted outcome then carry the example alone.
+    if (d.conventionNote !== false) {
+      h.shape("legend-path-key", "legend", h.shapes.rect, { x: A.x, y: A.y + 0.07, w: 0.3, h: 0.04, fill: { color: C.accent }, line: { color: C.accent, width: 0 } });
+      h.text("legend-path-label", "legend", "Route to the example outcome", { x: A.x + 0.4, y: A.y, w: 2.6, h: 0.26, fontSize: 11, color: C.ink });
+    }
+    if (d.conventionNote !== false) h.text("legend-kind", "legend", "Rounded boxes: conditions · square boxes: outcomes", {
       x: A.x + A.w - 4.5, y: A.y, w: 4.5, h: 0.26, fontSize: 11, color: C.muted, align: "right",
     });
 
@@ -220,12 +229,16 @@ export const conditionTree: Renderer<ConditionTreeData> = {
     }
     d.nodes.forEach((n, i) => {
       n.branches.forEach((b, j) => {
+        const y1 = cy.get(n.id);
         const y2 = cy.get(b.to);
-        if (y2 === undefined) return;
+        if (y1 === undefined || y2 === undefined) return;
         const accent = onPath.has(n.id) && onPath.has(b.to);
+        // labelClear: a falling branch's connector arrives from above, so its label sits below the line (and vice versa).
+        const below = d.labelClear === true && y2 > y1 + 0.001;
+        const lh = d.labelClear === true ? 0.42 : 0.22;
         h.text(`branch-label-${i}-${j}`, "label", b.label, {
-          x: xOf(b.to) - gap + 0.02, y: y2 - 0.27, w: gap - 0.04, h: 0.22,
-          fontSize: 11, bold: true, color: accent ? C.accent : C.muted, align: "center", valign: "bottom",
+          x: xOf(b.to) - gap + 0.02, y: below ? y2 + 0.05 : y2 - 0.05 - lh, w: gap - 0.04, h: lh,
+          fontSize: 11, bold: true, color: accent ? C.accent : C.muted, align: "center", valign: below ? "top" : "bottom",
         });
       });
     });
