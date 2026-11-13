@@ -656,7 +656,7 @@ html { scroll-padding-top: 7rem; }
 /* ---------------------------------------------------------------------------------------------------------
    Where the reader is (components/ui/section-spy.tsx). The link to the section being read is set in ink, and a
    malachite marker runs along the list's own rule to it: the left rule of a vertical list, or the bottom rule of a
-   single-row bar. Without JavaScript the lists are plain links; under reduced motion the marker moves at once.
+   single-row bar. Without JavaScript the lists are plain links. Under reduced motion the marker moves at once.
    --------------------------------------------------------------------------------------------------------- */
 nav[data-spy-ready] a[aria-current="location"] { color: var(--fg); }
 [data-spy-track] { position: relative; }
