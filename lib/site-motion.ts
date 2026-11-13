@@ -1,7 +1,10 @@
 /**
- * Site-wide visual motion is a progressive enhancement. The home page has its
- * own deliberately composed reveals; other routes use these content targets.
- * Route classification never changes what is rendered or which records exist.
+ * Site-wide visual motion is a progressive enhancement, and it is limited to result cards: each card in a
+ * directory, the research index and the materials index enters once as it scrolls into view, and a card that a
+ * filter adds enters the same way, so a changed result list reads as changed. Headings, sections, figures and
+ * reading text never wait on motion; title blocks have their own settle and exhibits their own draw (see
+ * docs/design/MOTION_AND_INTERACTION.md). Route classification never changes what is rendered or which records
+ * exist.
  */
 export type SiteMotionScope = "home" | "research-index" | "research-article" | "materials-index" | "dossier" | "standard";
 
@@ -15,13 +18,11 @@ export function siteMotionScope(pathname: string): SiteMotionScope {
   return "standard";
 }
 
-/** Named result-card markers are explicit; filter controls and table rows are excluded. */
+/** Named result-card markers are explicit; headings, sections, figures, filter controls and table rows are excluded. */
 export function siteMotionSelector(scope: SiteMotionScope): string {
   if (scope === "home") return "";
-  const common = 'h1, section, [data-site-motion="card"]';
-  if (scope === "research-index") return `${common}, article`;
-  if (scope === "materials-index") return `${common}, a.oxide-rule`;
-  if (scope === "dossier") return `${common}, .dossier > :not(:first-child)`;
-  if (scope === "research-article") return `${common}, figure`;
-  return common;
+  const cards = '[data-site-motion="card"]';
+  if (scope === "research-index") return `${cards}, article`;
+  if (scope === "materials-index") return `${cards}, a.oxide-rule`;
+  return cards;
 }
