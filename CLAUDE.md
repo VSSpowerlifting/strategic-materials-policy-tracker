@@ -198,8 +198,13 @@ precisely sourced. Read `README.md` and `/methodology` for the full framing.
   Read the bundled guides in `node_modules/next/dist/docs/` before using an
   unfamiliar API (see `AGENTS.md`).
 - Tailwind **v4**: theme tokens live in `app/globals.css` (`@theme inline` +
-  `:root`). Dark-first, no toggle. Use `bg-card`, `text-muted`, `border-border`,
-  `text-accent`, etc.
+  `:root`). The site uses plaster backgrounds, graphite text, fine rules and
+  malachite emphasis. Use `bg-card`, `text-muted`, `border-border`, and
+  `text-accent` for those roles.
+- For new decks, reports and PDFs, follow the
+  [Publication Design System](docs/design/PUBLICATION_DESIGN_SYSTEM.md) for the
+  site's type roles, cover imagery and export checks. Start with the shared
+  generators and tokens.
 - Dynamic routes need `generateStaticParams`. Actor URLs use the lowercase 2-letter
   `code` (`/actors/cn`); events use `id`; materials use `slug`.
 - Dates: use `formatDate` from `lib/format.ts` (deterministic, no locale drift).
