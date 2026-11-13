@@ -117,7 +117,7 @@ The existing 5 November 2026 research decks remain citation-stable until a repla
 
 These are **archetypes**, not eight mandatory slides or a fixed sequence.
 
-**A — Research cover.** Plaster ground and the website's centred title block: a Spectral title, a hairline rule with a registration tick, an Archivo subtitle, then author, issue date and source cutoff as a short definition list. No consultant-brand mimicry, no photograph unless it is registered evidence with a caption.
+**A — Research cover.** Use a plaster ground, a Spectral title, an Archivo standfirst when useful, and a compact byline, issue date and research cutoff. Pair the title block with a cleared documentary photograph when it helps identify the subject. Use the shared typographic cover or a sourced exhibit when it fits the case. Follow the [Publication Design System cover rules](../PUBLICATION_DESIGN_SYSTEM.md#covers-and-imagery) for selection, captions and attribution.
 
 **A2 — Section divider.** Plaster ground, a large number or short Spectral title, one governing sentence at most, and a hairline rule. Dividers count toward the 20-slide ceiling; omit them in decks under 12 slides.
 
