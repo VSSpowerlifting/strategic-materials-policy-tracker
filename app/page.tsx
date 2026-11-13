@@ -143,7 +143,7 @@ export default function Home() {
       </section>
 
       {/* Signature exhibit: one event's financing, drawn by what has been paid, promised or made conditional. */}
-      <section aria-label="Capital-flow exhibit" className="border-t border-border-strong bg-card">
+      <section aria-label="Capital-flow exhibit" className="border-t border-border-strong bg-card [--capflow-surface:var(--surface)]">
         <Container width="wide" className="py-14 sm:py-20">
           <CapitalFlowExhibit eventId="evt-us-dod-mp-2025" density="summary" />
         </Container>

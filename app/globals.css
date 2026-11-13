@@ -573,3 +573,83 @@ html { scroll-padding-top: 7rem; }
 @media print {
   .settle > *, .rule-draw { animation: none !important; }
 }
+
+/* ---------------------------------------------------------------------------------------------------------
+   Capital-flow exhibit. Lines draw once, provider to recipient, when the diagram comes into view; the end mark
+   arrives after its line. In the status replay a line whose status changed at the date shown is redrawn once;
+   nothing is tweened from one class to another. Static without JavaScript and under reduced motion.
+   --------------------------------------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes capflow-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes capflow-arrive { from { opacity: 0; } to { opacity: 1; } }
+  .capflow-diagram[data-motion-ready]:not([data-motion-entered]) .capflow-line { clip-path: inset(0 100% 0 0); }
+  .capflow-diagram[data-motion-ready]:not([data-motion-entered]) .capflow-end { opacity: 0; }
+  .capflow-diagram[data-motion-entered] .capflow-line {
+    animation: capflow-draw 700ms cubic-bezier(.2,.7,.2,1) both;
+    animation-delay: calc(var(--lane, 0) * 70ms + 80ms);
+  }
+  .capflow-diagram[data-motion-entered] .capflow-end {
+    animation: capflow-arrive 220ms ease-out both;
+    animation-delay: calc(var(--lane, 0) * 70ms + 680ms);
+  }
+  /* More specific than the entrance, so a redraw starts at once with no lane delay. */
+  .capflow-diagram[data-motion-entered] .capflow-mark[data-changed] .capflow-line,
+  .capflow-mark[data-changed] .capflow-line { animation: capflow-draw 560ms cubic-bezier(.2,.7,.2,1) both; animation-delay: 0ms; }
+  .capflow-diagram[data-motion-entered] .capflow-mark[data-changed] .capflow-end,
+  .capflow-mark[data-changed] .capflow-end { animation: capflow-arrive 200ms ease-out both; animation-delay: 480ms; }
+}
+
+/* Status replay: one dot per dated step on a hairline; the malachite segment runs from the first date to the one
+   shown. Dots are status marks, so they stay round. */
+.capflow-steps::before,
+.capflow-steps::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: calc(100% / (2 * var(--steps, 2)));
+  right: calc(100% / (2 * var(--steps, 2)));
+  height: 1px;
+  background: var(--border-strong);
+}
+.capflow-steps::after {
+  background: var(--accent);
+  height: 2px;
+  top: 3.5px;
+  transform-origin: left center;
+  transform: scaleX(var(--progress, 1));
+}
+.capflow-steps > li { position: relative; z-index: 1; }
+/* On a figure wide enough to draw the lines, the date bar stays below the site header while the lines scroll. */
+@container (min-width: 48rem) {
+  .capflow-replay {
+    position: sticky;
+    top: var(--site-header-h, 6.5rem);
+    z-index: 10;
+    background: var(--capflow-surface, var(--bg));
+    border-bottom: 1px solid var(--border);
+  }
+}
+.capflow-step-dot {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--border-strong);
+  background: var(--bg);
+}
+.capflow-step-dot[data-state="past"] { border-color: var(--accent); background: var(--accent); }
+.capflow-step-dot[data-state="current"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+.capflow-steps button:hover .capflow-step-dot[data-state="future"] { border-color: var(--fg); }
+@media (prefers-reduced-motion: no-preference) {
+  .capflow-steps::after { transition: transform 420ms cubic-bezier(.2,.7,.2,1); }
+  .capflow-step-dot { transition: background-color 200ms ease, border-color 200ms ease; }
+}
+@media print {
+  .capflow-line, .capflow-end { animation: none !important; clip-path: none !important; opacity: 1 !important; }
+}
+
