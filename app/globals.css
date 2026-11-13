@@ -653,3 +653,35 @@ html { scroll-padding-top: 7rem; }
   .capflow-line, .capflow-end { animation: none !important; clip-path: none !important; opacity: 1 !important; }
 }
 
+/* ---------------------------------------------------------------------------------------------------------
+   Where the reader is (components/ui/section-spy.tsx). The link to the section being read is set in ink, and a
+   malachite marker runs along the list's own rule to it: the left rule of a vertical list, or the bottom rule of a
+   single-row bar. Without JavaScript the lists are plain links; under reduced motion the marker moves at once.
+   --------------------------------------------------------------------------------------------------------- */
+nav[data-spy-ready] a[aria-current="location"] { color: var(--fg); }
+[data-spy-track] { position: relative; }
+[data-spy-track]::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: var(--accent);
+  opacity: var(--spy-on, 0);
+}
+[data-spy-track="y"]::before {
+  left: -1px;
+  top: 0;
+  width: 2px;
+  height: var(--spy-h, 0px);
+  transform: translateY(var(--spy-y, 0px));
+}
+[data-spy-track="x"]::before {
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: var(--spy-w, 0px);
+  transform: translateX(var(--spy-x, 0px));
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-spy-track]::before { transition: transform 280ms cubic-bezier(.2,.7,.2,1), width 280ms cubic-bezier(.2,.7,.2,1), height 280ms cubic-bezier(.2,.7,.2,1), opacity 200ms ease; }
+  nav[data-spy-ready] a { transition: color 160ms ease; }
+}

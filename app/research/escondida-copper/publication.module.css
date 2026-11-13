@@ -134,6 +134,20 @@
   border-bottom: 1px solid var(--paper-border);
   font-size: 0.75rem;
 }
+/* On a wide screen the section bar stays under the site header while the report scrolls, and marks the section
+   being read (components/ui/section-spy.tsx). */
+@media (min-width: 1024px) {
+  .publication :global(.fi-section-nav) {
+    position: sticky;
+    top: var(--site-header-h, 4rem);
+    z-index: 20;
+    padding: 1rem 0;
+    background: var(--paper);
+  }
+  .publication :global(.fi-section) {
+    scroll-margin-top: 10rem;
+  }
+}
 .publication :global(.fi-reading-grid) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 14rem;

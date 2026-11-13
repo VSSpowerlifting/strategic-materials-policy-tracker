@@ -4,6 +4,7 @@ import "./globals.css";
 import { SkipLink } from "@/components/skip-link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SectionSpy } from "@/components/ui/section-spy";
 import { SiteMotion } from "@/components/ui/site-motion";
 import { site } from "@/lib/site";
 
@@ -52,6 +53,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
           <SiteMotion />
+          <SectionSpy />
           {children}
         </main>
         <SiteFooter />
