@@ -6,7 +6,7 @@ Draft 1.1 is a review candidate under the publication HOLD. Its quality-control 
 
 - `research/fi003/exhibits/*.csv`, `research/fi003/inputs.json` and `research/fi003/sources.json`: byte-identical copies of draft 1.0's model exports and source register (PR #215 at `bfd276c7`). The model scripts live on that branch.
 - `build_spec.py`: builds `spec.json` from those files, asserting the clause arithmetic and the cover amounts.
-- The exhibit system in `scripts/exhibit-system/`, including the opt-in `ledger_cover` (`ledger-cover.ts`).
+- The exhibit system in `scripts/exhibit-system/`, including the opt-in `ledger_cover` (`ledger-cover.ts`) and the waterfall's opt-in `alignValues` and `drawnKeysOnly` data options, which `build_spec.py` sets on slides 6 and 8.
 
 ## Fonts
 

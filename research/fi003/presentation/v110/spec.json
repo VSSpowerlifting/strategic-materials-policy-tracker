@@ -476,7 +476,9 @@
           "emphasis": [
             "New shares"
           ],
-          "emphasisLabel": "New shares"
+          "emphasisLabel": "New shares",
+          "alignValues": true,
+          "drawnKeysOnly": true
         }
       }
     },
@@ -589,7 +591,9 @@
             "Cash capital spending",
             "Financing cash flows"
           ],
-          "emphasisLabel": "Largest decreases"
+          "emphasisLabel": "Largest decreases",
+          "alignValues": true,
+          "drawnKeysOnly": true
         },
         "layout": "wide"
       }

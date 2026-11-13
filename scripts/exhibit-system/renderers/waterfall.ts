@@ -4,7 +4,7 @@
 // composition (start vs. the added amount), read from the same start/end inputs.
 // Only valid when every movement is an increase, so the slices are the start and
 // the sum of the increases and total exactly 100% of the end level.
-import { arr, num, obj, optNum, optStr, str, strList } from "../contract";
+import { arr, bool, num, obj, optNum, optStr, str, strList } from "../contract";
 import { maxItems, nonNegative, reconciles, sumsTo, uniqueLabels } from "../integrity";
 import { C, chartDefaults, fmt, legendItem } from "../primitives";
 import type { IntegrityIssue, Renderer } from "../types";
@@ -25,6 +25,13 @@ export interface WaterfallData {
    * all emphasised steps must then move the same way. Absent, emphasis stays bold-only.
    */
   emphasisLabel?: string;
+  /**
+   * Opt-in: fix the plot area above a category band so each value label centres on its column.
+   * Off by default, which keeps the automatic plot area and evenly divided label boxes.
+   */
+  alignValues?: boolean;
+  /** Opt-in: key only the movements the bridge draws. Off by default, which always keys both. */
+  drawnKeysOnly?: boolean;
 }
 
 /** Slice percentages of the end level: [start share, added share], unrounded. */
@@ -51,6 +58,8 @@ export const waterfall: Renderer<WaterfallData> = {
       ...(o.emphasis === undefined ? {} : { emphasis: strList(o.emphasis, "data.emphasis") }),
       ...(o.emphasisLabel === undefined ? {} : { emphasisLabel: str(o.emphasisLabel, "data.emphasisLabel") }),
       ...(o.share === undefined ? {} : { share: parseShare(o.share) }),
+      ...(o.alignValues === undefined ? {} : { alignValues: bool(o.alignValues, "data.alignValues") }),
+      ...(o.drawnKeysOnly === undefined ? {} : { drawnKeysOnly: bool(o.drawnKeysOnly, "data.drawnKeysOnly") }),
     };
   },
   check(d) {
@@ -119,10 +128,11 @@ export const waterfall: Renderer<WaterfallData> = {
     // With a share doughnut the bridge keeps the left 58% (arithmetic), the doughnut the right (composition).
     const bridgeW = d.share ? h.area.w * 0.58 : h.area.w;
     const area = { ...h.area, w: bridgeW, y: h.area.y + legendH, h: h.area.h - legendH - 0.36 };
-    // Explicit plot layout (category labels get a fixed band below it) so the value row can be
-    // centred on each column; an automatic plot area drifts from evenly divided label boxes.
+    // Opt-in (alignValues): an explicit plot layout with a fixed category band below it, so the
+    // value row can be centred on each column; an automatic plot area drifts from evenly divided
+    // label boxes. Off by default so existing decks render unchanged.
     const catBand = 0.5;
-    const lay = { x: 0.005, y: 0.02, w: 0.99, h: Math.max(0.5, 0.98 - catBand / area.h) };
+    const lay = d.alignValues ? { x: 0.005, y: 0.02, w: 0.99, h: Math.max(0.5, 0.98 - catBand / area.h) } : undefined;
     h.chart(
       "bridge",
       h.charts.bar,
@@ -142,15 +152,15 @@ export const waterfall: Renderer<WaterfallData> = {
         valAxisMinVal: 0,
         chartColors: ["transparent", C.neutralDark, C.neutral, C.neutralLight, ...(keyed ? [emColor] : [])],
         catAxisLabelFontSize: 11,
-        layout: lay,
+        ...(lay ? { layout: lay } : {}),
         altText: `Waterfall bridge, ${d.unit}`,
       }),
       true,
     );
     // Value labels as native text under each column: avoids stacked-label clutter and keeps one numeric grammar.
     const n = labels.length;
-    const px0 = area.x + lay.x * area.w;
-    const colW = (lay.w * area.w) / n;
+    const px0 = lay ? area.x + lay.x * area.w : area.x;
+    const colW = lay ? (lay.w * area.w) / n : area.w / n;
     const values = [d.start.value, ...d.steps.map((s) => s.delta), d.end.value];
     values.forEach((v, i) => {
       const signed = i > 0 && i < n - 1;
@@ -161,9 +171,9 @@ export const waterfall: Renderer<WaterfallData> = {
     });
     let x = h.area.x;
     x = legendItem(h, "legend-total", x, h.area.y, "Level", { fill: C.neutralDark }, 1.2);
-    // Key only the movements the bridge actually draws.
-    if (up.some((v) => v > 0)) x = legendItem(h, "legend-up", x, h.area.y, "Increase", { fill: C.neutral }, 1.4);
-    if (down.some((v) => v > 0)) x = legendItem(h, "legend-down", x, h.area.y, "Decrease", { fill: C.neutralLight }, 1.4);
+    // Opt-in (drawnKeysOnly): key only the movements the bridge actually draws.
+    if (!d.drawnKeysOnly || up.some((v) => v > 0)) x = legendItem(h, "legend-up", x, h.area.y, "Increase", { fill: C.neutral }, 1.4);
+    if (!d.drawnKeysOnly || down.some((v) => v > 0)) x = legendItem(h, "legend-down", x, h.area.y, "Decrease", { fill: C.neutralLight }, 1.4);
     if (keyed) legendItem(h, "legend-emphasis", x, h.area.y, d.emphasisLabel as string, { fill: emColor }, 2.2);
     const unitW = d.share ? 1.6 : 3;
     h.text("unit", "axis", d.unit, {

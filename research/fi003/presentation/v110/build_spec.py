@@ -221,7 +221,10 @@ add("waterfall", "Dilution",
                # beside the chart already says both counts are basic, not fully diluted.
                "centreLabel": "new shares", "baseNote": f"Base: {post / 1e6:.3f}m shares, isolated pro forma"},
      # Keyed in malachite so the bridge's new shares match the doughnut's new-shares slice.
-     "emphasis": ["New shares"], "emphasisLabel": "New shares"})
+     "emphasis": ["New shares"], "emphasisLabel": "New shares",
+     # Opt-in renderer options: value labels centred on columns; no Increase or Decrease key,
+     # because the bridge's only movement is drawn and keyed as New shares.
+     "alignValues": True, "drawnKeysOnly": True})
 
 # 6. Revolver
 add("stacked-bar", "Revolver",
@@ -245,7 +248,9 @@ add("waterfall", "Liquidity",
     ev("S19"),
     {"unit": "USD million", "dp": 1, "start": {"label": "31 Dec 2025", "value": start},
      "steps": liq_steps, "end": {"label": "30 Sep 2026", "value": end},
-     "emphasis": ["Cash capital spending", "Financing cash flows"], "emphasisLabel": "Largest decreases"},
+     "emphasis": ["Cash capital spending", "Financing cash flows"], "emphasisLabel": "Largest decreases",
+     # Opt-in renderer options: value labels centred on columns; key only the movements drawn.
+     "alignValues": True, "drawnKeysOnly": True},
     layout="wide")
 
 # 8. Default path (new in 1.0)

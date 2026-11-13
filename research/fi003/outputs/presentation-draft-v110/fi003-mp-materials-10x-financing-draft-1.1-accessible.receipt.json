@@ -5,7 +5,7 @@
   "source_export_sha256": "cce6c33e09816a139eb15cd381bb0c1b1e74ed30bb3e609d6308c15f20b1e76f",
   "accessible_pdf": "fi003-mp-materials-10x-financing-draft-1.1-accessible.pdf",
   "accessible_pdf_sha256": "c1835704a1793fe42716124e1ef5013cca84537567a3b19ad0d6a973c8514aa7",
-  "spec_sha256": "c01d5f7c78c1eeaf6d5072e3fa52ff3ec7c701c4563f850ec5cccb3ff38afd29",
+  "spec_sha256": "14b6289781cf4327fe091866e5b5f6522a841d96ccf3bf4a147cb99db4f8351d",
   "tooling": {
     "pypdf": "6.14.2",
     "poppler": "pdftoppm version 26.11.0"
