@@ -126,6 +126,41 @@ export const SYNTHETIC_NOTICE = "Synthetic demonstration data — not an SMPT fi
 /** Research output is always draft; technical QC cannot authorize publication. */
 export const DRAFT_BADGE = "DRAFT · REVIEW GATES PENDING";
 
+/** A clickable source citation in a research slide's footer. */
+export interface SourceLink {
+  /** The document name as the slide's source line writes it (matched without regard to case). */
+  label: string;
+  url: string;
+}
+
+/**
+ * Locates each link's label in the source line: the first case-insensitive occurrence that
+ * does not overlap an earlier match. Returns the matches in reading order and any label the
+ * line does not name.
+ */
+export function locateSourceLinks(
+  source: string,
+  links: readonly SourceLink[],
+): { matches: { start: number; end: number; link: SourceLink }[]; missing: string[] } {
+  const lower = source.toLowerCase();
+  const matches: { start: number; end: number; link: SourceLink }[] = [];
+  const missing: string[] = [];
+  for (const link of links) {
+    const needle = link.label.toLowerCase();
+    let from = 0;
+    let found = -1;
+    while (needle && (found = lower.indexOf(needle, from)) !== -1) {
+      const end = found + needle.length;
+      if (!matches.some((m) => found < m.end && end > m.start)) break;
+      from = found + 1;
+    }
+    if (found === -1 || !needle) missing.push(link.label);
+    else matches.push({ start: found, end: found + needle.length, link });
+  }
+  matches.sort((a, b) => a.start - b.start);
+  return { matches, missing };
+}
+
 export interface FrameSpec {
   /** Section label above the title; an empty string draws none. */
   label: string;
@@ -133,6 +168,13 @@ export interface FrameSpec {
   fixture: Fixture;
   /** Draw the "Interpretation" heading beside the annotation (default true). */
   annotationHeading?: boolean;
+  /**
+   * Research slides only, opt-in. When present, the footer is the slide's own source
+   * line with each cited document's name made a hyperlink in place; every label must
+   * occur in that line. Absent (every synthetic slide and any research spec without
+   * evidence labels), the footer is the plain source string.
+   */
+  links?: SourceLink[];
 }
 
 /** Element-recording helper factory. Every object gets a role-prefixed `objectName`. */
@@ -257,9 +299,31 @@ export function drawFrame(h: RenderHelpers, spec: FrameSpec): void {
     x: LEFT + 12.05 / 2 - 0.006, y: 2.47 - 0.05, w: 0.012, h: 0.115,
     fill: { color: C.borderStrong }, line: { color: C.borderStrong, width: 0 },
   });
-  h.text("source-footer", "frame", synthetic ? `Source: ${f.source} · ${SYNTHETIC_NOTICE}` : `Source: ${f.source}`, {
-    x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: TYPE.footnote, color: C.faint, valign: "top",
-  });
+  if (!synthetic && spec.links?.length) {
+    // Links are malachite and underlined (Presentation Standard v3). Archivo Medium is not
+    // reachable through the token family name, so the link runs stay Archivo Regular.
+    const { matches, missing } = locateSourceLinks(f.source, spec.links);
+    if (missing.length) throw new Error(`source line does not name cited evidence: ${missing.join("; ")}`);
+    const plain = (text: string): TextRun => ({ text, options: { color: C.faint } });
+    const runs: TextRun[] = [plain("Source: ")];
+    let at = 0;
+    for (const m of matches) {
+      if (m.start > at) runs.push(plain(f.source.slice(at, m.start)));
+      runs.push({
+        text: f.source.slice(m.start, m.end),
+        options: { color: C.accent, underline: { style: "sng" }, hyperlink: { url: m.link.url, tooltip: m.link.label } },
+      });
+      at = m.end;
+    }
+    if (at < f.source.length) runs.push(plain(f.source.slice(at)));
+    h.text("source-footer", "frame", runs, {
+      x: LEFT, y: 6.98, w: 12.05, h: 0.44, fontSize: TYPE.footnote, color: C.faint, valign: "top",
+    });
+  } else {
+    h.text("source-footer", "frame", synthetic ? `Source: ${f.source} · ${SYNTHETIC_NOTICE}` : `Source: ${f.source}`, {
+      x: LEFT, y: 7.0, w: 12.05, h: 0.32, fontSize: TYPE.footnote, color: C.faint, valign: "top",
+    });
+  }
 
   if (wide) {
     const y = WIDE_AREA.y + WIDE_AREA.h + 0.16;

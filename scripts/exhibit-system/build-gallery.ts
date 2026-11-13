@@ -17,8 +17,9 @@ import { loadDeckSpec, loadFixture, loadRegistry } from "./registry";
 import { RENDERERS } from "./renderers";
 import { assertFonts } from "../publication/fonts";
 import { brandThemeXml } from "../publication/tokens";
-import { contentArea, C, DRAFT_BADGE, drawFrame, FONT, FONT_SERIF, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, TYPE } from "./primitives";
+import { contentArea, C, DRAFT_BADGE, drawFrame, FONT, FONT_SERIF, locateSourceLinks, makeHelpers, SLIDE_H, SLIDE_W, SYNTHETIC_NOTICE, TYPE } from "./primitives";
 import { DEMO_DECK_SPEC, DEMO_PPTX, GALLERY_PPTX, MANIFEST_FILE, REPO } from "./paths";
+import { ledgerCoverSlide, ledgerDeckTitle, ledgerScale, type LedgerCover } from "./ledger-cover";
 import type { ElementRecord, ExhibitClassification, Fixture, PptxSlide } from "./types";
 
 
@@ -94,7 +95,11 @@ export interface BuildOptions {
   classification: ExhibitClassification;
   /** Research decks only: repository-relative path of the QC handoff record, if one exists. */
   qcRecord?: string;
-  evidence?: { id: string; title: string; url: string; locator: string }[];
+  /**
+   * `label` (optional) is the short document name used for a clickable footer
+   * citation. Slides whose evidence has no labels keep the plain source footer.
+   */
+  evidence?: { id: string; title: string; url: string; locator: string; label?: string }[];
   /**
    * Research decks only, opt-in: omit decorative frame kickers (the cover
    * kicker and the "INTERPRETATION" heading). Source, status and draft labels stay.
@@ -194,7 +199,7 @@ function heroCoverSlide(pptx: Pptx, title: string, cover: HeroCover, records: El
 
 export async function buildDeck(
   entries: DeckEntry[],
-  cover: { title: string; lines: string[]; hero?: HeroCover },
+  cover: { title: string; lines: string[]; hero?: HeroCover; ledger?: LedgerCover },
   outFile: string,
   opts: BuildOptions = { classification: "synthetic-demonstration" },
 ): Promise<SlideManifest[]> {
@@ -223,9 +228,30 @@ export async function buildDeck(
 
   const manifest: SlideManifest[] = [];
   const coverRecords: ElementRecord[] = [];
+  const evidenceById = new Map((opts.evidence ?? []).map((e) => [e.id, e]));
+  if (cover.hero && cover.ledger) throw new Error("exhibit build refused — a deck has one cover");
   if (cover.hero) {
     heroCoverSlide(pptx, cover.title, cover.hero, coverRecords, opts);
     manifest.push({ slide: 1, pattern: "cover", cover_pattern: "cover_hero_split", elements: coverRecords });
+  } else if (cover.ledger) {
+    if (opts.classification !== "research") throw new Error("exhibit build refused — cover_ledger applies only to research decks");
+    if (ledgerDeckTitle(cover.ledger) !== cover.title) throw new Error("exhibit build refused — cover_ledger title differs from the deck title");
+    const refs = cover.ledger.evidence_refs.map((id) => {
+      const e = evidenceById.get(id);
+      if (!e) throw new Error(`exhibit build refused — cover cites unknown evidence ${id}`);
+      return e;
+    });
+    const links = refs.map((e) => ({ label: e.label ?? e.id, url: e.url }));
+    const { perUnit } = ledgerScale(cover.ledger.ledger.rows);
+    const notes = [
+      `Cover. Classification: research. DRAFT · REVIEW GATES PENDING. Publication authorization is not granted by this tool. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`,
+      `Ledger: ${cover.ledger.ledger.heading}. ${cover.ledger.ledger.unit}. One scale, ${perUnit.toFixed(6)} in per unit; rows are separate instruments and are not added together.`,
+      ...cover.ledger.ledger.rows.map((r) => `${r.label}: ${r.valueText} (${r.value}). ${r.status}.${r.part ? ` Shaded part: ${r.part.label}, ${r.part.value}.` : ""}`),
+      `Evidence: ${cover.ledger.evidence_refs.join("; ")}.`,
+      ...refs.map((e) => `${e.id}: ${e.title}. ${e.url} · ${e.locator}`),
+    ].join("\n");
+    ledgerCoverSlide(pptx, cover.ledger, coverRecords, links, notes);
+    manifest.push({ slide: 1, pattern: "cover", cover_pattern: "cover_ledger", elements: coverRecords });
   } else {
     coverSlide(pptx, cover.title, cover.lines, coverRecords, opts);
     manifest.push({ slide: 1, pattern: "cover", elements: coverRecords });
@@ -249,7 +275,19 @@ export async function buildDeck(
     if (opts.plainFrame) h.plain = true;
     renderer.render(h, data, e.fixture);
     // Keep the fixed frame above native tables in renderers that reflow them.
-    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, annotationHeading: !opts.plainFrame });
+    const links = synthetic
+      ? []
+      : (e.fixture.evidence_refs ?? []).flatMap((id) => {
+          const ref = evidenceById.get(id);
+          return ref?.label ? [{ label: ref.label, url: ref.url }] : [];
+        });
+    if (links.length) {
+      const { missing } = locateSourceLinks(e.fixture.source, links);
+      if (missing.length) {
+        throw new Error(`exhibit build refused — slide ${slideNumber} source line does not name cited evidence: ${missing.join("; ")}`);
+      }
+    }
+    drawFrame(h, { label: e.label, slideNumber, fixture: e.fixture, annotationHeading: !opts.plainFrame, ...(links.length ? { links } : {}) });
     slide.addNotes(
       synthetic
         ? [
@@ -283,6 +321,37 @@ export function suppressHelperLabels(chartXml: string): string {
     const name = /<c:tx>[\s\S]*?<c:v>([^<]*)<\/c:v>/.exec(ser)?.[1] ?? "";
     if (!name.startsWith("helper")) return ser;
     return ser.replace(/<c:dLbls>[\s\S]*?<\/c:dLbls>/, "<c:dLbls><c:delete val=\"1\"/></c:dLbls>");
+  });
+}
+
+/**
+ * pptxgenjs writes some chart text runs (doughnut and title defaults) with an
+ * explicit Arial typeface. Every chart typeface is the token sans; a chart that
+ * carries no Arial run is returned unchanged.
+ */
+export function unifyChartTypeface(chartXml: string): string {
+  return chartXml.replace(/(<a:(?:latin|ea|cs) typeface=")Arial(")/g, `$1${FONT}$2`);
+}
+
+/**
+ * pptxgenjs sets one data-label colour per chart. Graphite labels fail contrast on the
+ * malachite accent fill, so a series filled with the accent carries its labels in plate,
+ * but only where the labels are shown and drawn inside the fill (centre, inside end or
+ * inside base). Labels outside the bar or beside a line sit on paper and keep the chart's
+ * colour; every other series, and any chart without such a series, is returned unchanged.
+ */
+export function lightLabelsOnAccent(chartXml: string): string {
+  const accentFill = `<a:solidFill><a:srgbClr val="${C.accent}"/>`;
+  return chartXml.replace(/<c:ser>[\s\S]*?<\/c:ser>/g, (ser) => {
+    const spPr = /<c:spPr>\s*([\s\S]*?)<\/c:spPr>/.exec(ser)?.[1] ?? "";
+    if (!spPr.startsWith(accentFill)) return ser;
+    const dLbls = /<c:dLbls>[\s\S]*?<\/c:dLbls>/.exec(ser)?.[0] ?? "";
+    const inside = /<c:dLblPos val="(?:ctr|inEnd|inBase)"\/>/.test(dLbls);
+    if (!inside || !dLbls.includes('<c:showVal val="1"/>')) return ser;
+    return ser.replace(
+      /(<c:dLbls>(?:(?!<\/c:dLbls>)[\s\S])*?<c:txPr>(?:(?!<\/c:txPr>)[\s\S])*?<a:solidFill>)<a:srgbClr val="[0-9A-Fa-f]{6}"\/>/,
+      `$1<a:srgbClr val="${C.plate}"/>`,
+    );
   });
 }
 
@@ -328,7 +397,7 @@ async function normalise(buf: Buffer): Promise<Buffer> {
       const xml = splitNoteParagraphs((await entry.async("string")) as string);
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else if (/^ppt\/charts\/chart\d+\.xml$/.test(name)) {
-      const xml = suppressHelperLabels((await entry.async("string")) as string);
+      const xml = lightLabelsOnAccent(unifyChartTypeface(suppressHelperLabels((await entry.async("string")) as string)));
       out.file(name, xml, { date: FIXED_DATE, createFolders: false });
     } else {
       out.file(name, (await entry.async("nodebuffer")) as Buffer, { date: FIXED_DATE, createFolders: false });

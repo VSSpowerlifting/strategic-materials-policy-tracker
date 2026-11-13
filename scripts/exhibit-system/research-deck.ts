@@ -26,6 +26,7 @@ import { reviewDeck } from "./deck-review";
 import { RENDERERS } from "./renderers";
 import type { Fixture } from "./types";
 import type { HeroCover } from "./build-gallery";
+import { parseLedgerCover, type LedgerCover } from "./ledger-cover";
 
 export interface ResearchSlide {
   label: string;
@@ -41,8 +42,11 @@ export interface ResearchDeck {
   plain_frame: boolean;
   /** Opt-in cover_hero_split cover; absent means the standard cover. */
   cover?: HeroCover;
+  /** Opt-in cover_ledger cover (`ledger_cover` in the spec). */
+  ledger_cover?: LedgerCover;
   slides: ResearchSlide[];
-  evidence: { id: string; url: string; title: string; locator: string }[];
+  /** `label` (optional): short document name for clickable footer citations. */
+  evidence: { id: string; url: string; title: string; locator: string; label?: string }[];
 }
 
 function inside(dir: string, file: string): boolean {
@@ -81,7 +85,9 @@ export function parseResearchDeck(raw: unknown, file: string, baseDir = REPO): R
       const parsed = new URL(url);
       if (!["https:", "http:"].includes(parsed.protocol) || !parsed.hostname) throw new Error();
     } catch { throw new ContractError(`${ep}.url: expected an http(s) source URL`); }
-    return { id, url, title: str(e.title, `${ep}.title`), locator: str(e.locator, `${ep}.locator`) };
+    const label = optStr(e.label, `${ep}.label`);
+    if (label !== undefined && label.length > 48) throw new ContractError(`${ep}.label: keep citation labels to 48 characters`);
+    return { id, url, title: str(e.title, `${ep}.title`), locator: str(e.locator, `${ep}.locator`), ...(label === undefined ? {} : { label }) };
   });
   if (new Set(evidence.map((e) => e.id)).size !== evidence.length) throw new ContractError(`${file}: duplicate evidence id`);
   const slides = arr(o.slides, `${file}.slides`).map((s, i): ResearchSlide => {
@@ -120,10 +126,14 @@ export function parseResearchDeck(raw: unknown, file: string, baseDir = REPO): R
   if (o.cover !== undefined && o.cover_lines !== undefined) {
     throw new ContractError(`${file}: give either cover_lines (standard cover) or cover (cover_hero_split), not both`);
   }
+  if (o.ledger_cover !== undefined && (o.cover !== undefined || o.cover_lines !== undefined)) {
+    throw new ContractError(`${file}: ledger_cover replaces cover_lines and cover; give only one cover`);
+  }
   return {
     title,
     cover_lines: o.cover_lines === undefined ? [] : strList(o.cover_lines, `${file}.cover_lines`, 0),
     cover: o.cover === undefined ? undefined : parseHeroCover(o.cover, `${file}.cover`, title, evidence, baseDir),
+    ...(o.ledger_cover === undefined ? {} : { ledger_cover: parseLedgerCover(o.ledger_cover, `${file}.ledger_cover`, title, evidence.map((e) => e.id)) }),
     qc_record: qc === undefined ? undefined : path.resolve(baseDir, qc),
     plain_frame: plainFrame,
     evidence,
@@ -210,7 +220,7 @@ export async function renderResearchDeck(specFile: string, outFile: string, qcOv
   const { buildDeck } = await import("./build-gallery");
   const slides = await buildDeck(
     deck.slides.map((s) => ({ fixture: s.fixture, label: s.label })),
-    { title: deck.title, lines: deck.cover_lines, hero: deck.cover },
+    { title: deck.title, lines: deck.cover_lines, hero: deck.cover, ledger: deck.ledger_cover },
     outFile,
     { classification: "research", qcRecord: qc, evidence: deck.evidence, plainFrame: deck.plain_frame },
   );
