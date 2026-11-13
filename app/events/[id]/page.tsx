@@ -24,6 +24,7 @@ import { ControlLine, DesignationLine, InstrumentLines } from "@/components/reco
 import { SaveEventButton } from "@/components/save-event-button";
 import { SourceCard } from "@/components/source-ref";
 import { Container, Section } from "@/components/ui/container";
+import { buildCapitalFlowModel } from "@/lib/capital-flow";
 import { controlStatusesRecordedIn, summarizeControl } from "@/lib/capital-control";
 import { plainCitation } from "@/lib/citation";
 import {
@@ -88,11 +89,14 @@ export default async function EventPage({
   const titleCoded = event.titleOriginal !== "Not yet coded";
   const showOriginalTitle = event.titleOriginalLang !== "en" && titleCoded;
   const hasInstruments = commitments.length > 0 || controls.length > 0;
+  // The exhibit draws only where commitment rows name both parties; the rail lists it only then.
+  const hasFlowExhibit = Boolean(buildCapitalFlowModel(event.id)?.hasIdentifiedParties);
 
   const contents = [
     { href: "#summary", label: "Summary" },
     { href: "#significance", label: "Analytical significance" },
     { href: "#framing", label: "Framing anchors" },
+    ...(hasFlowExhibit ? [{ href: "#financing-status", label: "Financing status" }] : []),
     ...(hasInstruments ? [{ href: "#instruments", label: "Instruments" }] : []),
     ...(recordedStatuses.length ? [{ href: "#recorded-status", label: "Control status recorded" }] : []),
     ...(designations.length ? [{ href: "#designations", label: "Projects recognized" }] : []),
@@ -253,7 +257,7 @@ export default async function EventPage({
         </Section>
 
         {/* Drawn only where the event holds commitment rows with identified parties; otherwise it renders nothing. */}
-        <CapitalFlowExhibit eventId={event.id} density="summary" />
+        <CapitalFlowExhibit eventId={event.id} density="summary" id="financing-status" />
 
         {hasInstruments ? (
           <Section id="instruments" title="Instruments in this event">

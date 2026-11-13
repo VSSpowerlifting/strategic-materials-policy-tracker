@@ -17,12 +17,15 @@ export function CapitalFlowExhibit({
   headingLevel = 2,
   density = "full",
   className,
+  id,
 }: {
   eventId: string;
   headingLevel?: 2 | 3;
   /** "summary" is for pages where the exhibit is a preview: the diagram stands without the list of rows under it. */
   density?: "full" | "summary";
   className?: string;
+  /** Anchor for the page's contents list. */
+  id?: string;
 }) {
   const model = buildCapitalFlowModel(eventId);
   if (!model || !model.hasIdentifiedParties) return null;
@@ -36,7 +39,7 @@ export function CapitalFlowExhibit({
 
   return (
     // `data-motion-kind` keeps the site-wide entrance off the exhibit: its lines have their own draw.
-    <figure className={cn("@container", className)} aria-labelledby={titleId} data-motion-kind="flow">
+    <figure id={id} className={cn("@container", className)} aria-labelledby={titleId} data-motion-kind="flow">
       <CapitalFlowReplay timeline={timeline} headlines={headlines}>
         <figcaption className="title-block">
           <Heading id={titleId} className="display-3 text-foreground">

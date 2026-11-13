@@ -197,3 +197,19 @@ test("motion is limited to drawing and redrawing lines, and is off under reduced
   assert.match(replay, /REPLAY_STEP_MS/);
   assert.match(replay, /if \(next >= last\) setPlaying\(false\)/, "a replay stops at the latest reading");
 });
+
+test("an event page lists the exhibit in its contents, anchored, only where the exhibit is drawn", async () => {
+  const { default: EventPage } = await import("@/app/events/[id]/page");
+  const html = renderToStaticMarkup(await EventPage({ params: Promise.resolve({ id: MP }) }));
+  assert.match(html, /href="#financing-status"[^>]*>Financing status<\/a>/);
+  assert.match(html, /<figure id="financing-status"/);
+  // The rail follows document order: framing, then the exhibit, then the instruments.
+  const rail = html.slice(html.lastIndexOf('aria-label="On this page"'));
+  assert.ok(rail.indexOf("#framing") < rail.indexOf("#financing-status"));
+  assert.ok(rail.indexOf("#financing-status") < rail.indexOf("#instruments"));
+
+  const without = getAllEvents().find((e) => !buildCapitalFlowModel(e.id)?.hasIdentifiedParties);
+  assert.ok(without);
+  const plain = renderToStaticMarkup(await EventPage({ params: Promise.resolve({ id: without.id }) }));
+  assert.doesNotMatch(plain, /financing-status/);
+});
