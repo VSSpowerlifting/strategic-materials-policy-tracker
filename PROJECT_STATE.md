@@ -1,3 +1,10 @@
+## 2026-11-14: Usability pass: filter result counts, phone date bar (draft PR, not merged)
+
+- Branch `claude/smpt-usability-pass-43bc1b`, from `main` at ebc5a10 (#272 merged). Presentation and interaction only: no seed data, status, calculation, export or research text changed. Notes: `docs/design/MOTION_AND_INTERACTION.md`, "Usability pass".
+- Filter result counts: nine explorers announce their count through one hidden polite region (`components/ui/result-announcer.tsx`), 600 ms after the reader's own change settles, never on load, and once per change ("No results", "1 event", "12 events", "All 79 events"). Visible counts are no longer live regions. Clear and "Show all" controls hand focus to the first filter.
+- Phone date bar: below 28rem, dates show day and month on one line, a line under the rail gives the selected date in full with its kind and position, and every date and Replay are 44px tall. Desktop unchanged. Screenshots in `docs/design/reviews/usability-pass/`.
+- Still in the backlog: legend highlighting, the Escondida base-case marker, project milestone progressions, research cover transitions, keeping the reader's place when a filter removes cards above them, and the sticky-bar heading check.
+
 ## 2026-11-13: Financing replay names source and check dates (draft PR, not merged)
 
 - Branch `claude/smpt-replay-reported-on`, from `main` at 045f118 (#271 merged). Presentation only: no seed data, status, step date or calculation changed.

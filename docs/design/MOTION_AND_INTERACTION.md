@@ -199,6 +199,17 @@ longer live regions.
   A type shortcut on `/search` hands focus to the Type select, or to the search box where the select is folded
   away on phones.
 
+### Date bar on phones
+
+At 320 and 375px each date stacked day and month, year, a "Reported" tag and "Latest" in a 58–69px column, and
+Replay was 36px tall. On a figure narrower than 28rem (`@max-md`), each date now shows day and month on one line.
+The year and tags leave the rail but stay in the button's accessible name, and a line under the dates writes the
+selected date out in full with its kind and position ("10 Aug 2025 Reported", then "2 of 5"). Every date and Replay
+are at least 44px tall. Tapping, arrow keys, Home and End, the announcement and reduced motion are unchanged, and
+wider figures are untouched. This keeps the whole sequence visible and reachable without scrolling the rail or
+adding controls. The longest replays now have five dates; one-line labels fit at 320px up to about six.
+Screenshots: `docs/design/reviews/usability-pass/`.
+
 ## Phase 2 backlog
 
 1. Research cover view transitions from the index to the article, once React 19.3 is available.
@@ -207,5 +218,5 @@ longer live regions.
 4. Project milestone progression on `/projects/[id]`, once enough reviewed milestones exist.
 5. Explorer filters: keep the reader's place when a filter removes cards above them. (Result counts are now
    announced; see the usability pass. Cards a filter adds already enter through `SiteMotion`.)
-6. Sticky date bar refinements: a compact single-line form on narrow figures, and a check that it never covers
-   an anchored heading.
+6. Sticky date bar: check that it never covers an anchored heading. (The phone form is done; see the usability
+   pass. Rails longer than about six dates would need a scrolling or windowed rail at 320px.)
