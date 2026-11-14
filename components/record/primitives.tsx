@@ -220,7 +220,7 @@ export function RecordLayout({
           {contents?.length ? (
             <nav aria-label="On this page" className="hidden font-display text-sm lg:block">
               <p className="label border-b border-border pb-2">On this page</p>
-              <ul className="mt-3 space-y-1.5">
+              <ul className="mt-3 space-y-1.5 border-l border-border pl-3">
                 {contents.map((i) => (
                   <li key={i.href}>
                     <a href={i.href} className="text-muted hover:text-accent">

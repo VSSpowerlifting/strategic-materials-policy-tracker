@@ -66,7 +66,7 @@ export function FeaturedCase() {
             BHP estimates that replacing a copper processing plant at Escondida will cost $5.4–6.3 billion. To
             justify the $5.85 billion midpoint, the replacement would need to deliver enough additional yearly
             benefit compared with continuing without it. At assumed prices and costs, our model says that benefit
-            must equal the after-tax profit on {tonnes(baseScreen.ktpa)} tonnes of copper in the base case, rising to
+            must equal the after-tax profit on {tonnes(baseScreen.ktpa)} tonnes of copper in the base case, rising to{" "}
             {tonnes(stress.ktpa)} tonnes under tougher assumptions. Those tonnes describe financial value, not how
             much copper the new plant must produce.
           </p>

@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { siteMotionScope, siteMotionSelector } from "@/lib/site-motion";
 
 /**
- * Observes editorial sections and explicitly marked directory cards across
- * routes. Works with server-rendered pages and subsequently filtered results.
+ * Observes result cards across routes (see lib/site-motion for the policy).
+ * Works with server-rendered pages and subsequently filtered results.
  * Never alters scroll position, focus, sizing, source data, or the DOM order.
  *
  * Without JS, IntersectionObserver or permission for motion, all text,

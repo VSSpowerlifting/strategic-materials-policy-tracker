@@ -81,8 +81,12 @@ say exactly what is in frame. No generated imagery.
 
 ## Motion
 
-One page-load settle (`.settle`, staggered, 400ms) on centred title blocks; chart lines draw left to right
-once. Hover changes colour or underline only. Everything is disabled under `prefers-reduced-motion`.
+One page-load settle (`.settle`, staggered) on centred title blocks; exhibits draw once, when they come into
+view; result cards enter as they scroll in. Headings, sections and reading text never wait on motion. The
+capital-flow exhibit can be stepped through the dates its status evidence changed, and record rails mark the
+section being read. Nothing interpolates between data states, nothing scrolls the page, and every movement is off
+under `prefers-reduced-motion`. Hover changes colour or underline only. Rules, inventory and backlog:
+`MOTION_AND_INTERACTION.md`.
 
 ## Copy
 
@@ -136,4 +140,5 @@ Not yet converted, or converted only in colour:
   `data/markets/coverage-gaps.json` still uses file paths and is no longer displayed.
 - Capital-flow exhibit: three classification and wording calls await the maintainer (the NdPr price floor is
   drawn as contingent, not commercial; an executed option reads "no exercise recorded"; lapsed financing reads
-  "Lapsed <date>. Not in force."). Reduced-motion, no-JavaScript and real-touch behaviour were not tested.
+  "Lapsed <date>. Not in force."). Reduced-motion behaviour was checked in the motion phase (13 November 2026);
+  real-touch behaviour and screen readers were not tested.

@@ -7,8 +7,9 @@
  * the list, which carries everything the panel shows.
  */
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useCapitalFlowStep } from "./capital-flow-replay-state";
 import type {
   CapitalFlow,
   CapitalFlowLegendEntry,
@@ -18,6 +19,9 @@ import type {
   CapitalFlowSource,
   DrawnFlowClass,
 } from "@/lib/capital-flow";
+
+/** A row as shown at the selected date. `notYetRecorded` is set only while the reader steps back in time. */
+type ShownFlow = CapitalFlow & { notYetRecorded?: boolean };
 
 // --- Marks ----------------------------------------------------------------------------------
 
@@ -97,13 +101,29 @@ export function FlowMark({
   equity = false,
   className,
   lane,
+  pending = false,
+  changed = false,
 }: {
   flowClass: DrawnFlowClass;
   equity?: boolean;
   className?: string;
   /** Lane index, used only to stagger the one-time draw. */
   lane?: number;
+  /** No status recorded yet at the date shown: an empty lane, with no class mark. */
+  pending?: boolean;
+  /** The line's status changed at the date shown; it is redrawn once. */
+  changed?: boolean;
 }) {
+  const style = lane === undefined ? undefined : ({ "--lane": lane } as React.CSSProperties);
+  if (pending) {
+    return (
+      <span className={cn("capflow-mark flex items-center text-border-strong", className)} data-pending="" aria-hidden="true">
+        <svg height="14" className="capflow-line h-3.5 min-w-0 flex-1" style={style} aria-hidden="true" focusable="false">
+          <line x1="0" y1="7" x2="100%" y2="7" stroke="currentColor" strokeWidth={1} />
+        </svg>
+      </span>
+    );
+  }
   const line = LINE[flowClass];
   const common = {
     stroke: "currentColor",
@@ -112,15 +132,13 @@ export function FlowMark({
     strokeLinecap: line.cap,
   } as const;
   return (
-    <span className={cn("flex items-center", MARK_TONE[flowClass], className)} aria-hidden="true">
+    <span
+      className={cn("capflow-mark flex items-center", MARK_TONE[flowClass], className)}
+      data-changed={changed ? "" : undefined}
+      aria-hidden="true"
+    >
       <StartMark flowClass={flowClass} equity={equity} />
-      <svg
-        height="14"
-        className="capflow-line h-3.5 min-w-0 flex-1"
-        style={lane === undefined ? undefined : ({ "--lane": lane } as React.CSSProperties)}
-        aria-hidden="true"
-        focusable="false"
-      >
+      <svg height="14" className="capflow-line h-3.5 min-w-0 flex-1" style={style} aria-hidden="true" focusable="false">
         {flowClass === "commercial" ? (
           <>
             <line x1="0" y1="4.5" x2="100%" y2="4.5" {...common} />
@@ -130,7 +148,9 @@ export function FlowMark({
           <line x1="0" y1="7" x2="100%" y2="7" {...common} />
         )}
       </svg>
-      <EndMark flowClass={flowClass} />
+      <span className="capflow-end flex" style={style}>
+        <EndMark flowClass={flowClass} />
+      </span>
     </span>
   );
 }
@@ -193,7 +213,7 @@ function PartyLinks({ flow, side }: { flow: CapitalFlow; side: "providers" | "re
 }
 
 /** Everything the record says about one row, as a list. Used by the panel and by the list of all rows. */
-function FlowFacts({ flow, asOfLabel }: { flow: CapitalFlow; asOfLabel: string }) {
+function FlowFacts({ flow, statusLabel }: { flow: ShownFlow; statusLabel: string }) {
   const allocated = flow.uses.filter((u) => u.allocated);
   const associated = flow.uses.filter((u) => !u.allocated);
   return (
@@ -201,7 +221,7 @@ function FlowFacts({ flow, asOfLabel }: { flow: CapitalFlow; asOfLabel: string }
       <Fact label="Kind">
         {flow.classLabel}
         {flow.equityInterest ? ", with an equity interest" : ""}.{" "}
-        {flow.flowClass === "ended" ? "Shown for completeness." : flow.remark}
+        {flow.flowClass === "ended" && !flow.notYetRecorded ? "Shown for completeness." : flow.remark}
       </Fact>
       <Fact label="Instrument">
         {flow.instrumentLabel}. Recorded as: {flow.valueRoleLabel.toLowerCase()}. Capital source: {flow.capitalSourceLabel.toLowerCase()}.
@@ -220,7 +240,7 @@ function FlowFacts({ flow, asOfLabel }: { flow: CapitalFlow; asOfLabel: string }
           </>
         )}
       </Fact>
-      <Fact label={`Status on ${asOfLabel}`}>
+      <Fact label={statusLabel}>
         <span className={flow.flowClass === "ended" ? "text-negative" : undefined}>{flow.status.text}</span>
         {flow.status.evidencedBy ? <span className="text-muted">; recorded by {flow.status.evidencedBy}</span> : null}
         {flow.status.note ? <span className="mt-1 block text-muted">{flow.status.note}</span> : null}
@@ -283,12 +303,13 @@ function FlowFacts({ flow, asOfLabel }: { flow: CapitalFlow; asOfLabel: string }
   );
 }
 
-function FlowHeadline({ flow, className }: { flow: CapitalFlow; className?: string }) {
+function FlowHeadline({ flow, className }: { flow: ShownFlow; className?: string }) {
   return (
     <span
       className={cn(
         "tnum font-display text-sm font-semibold leading-5 text-foreground",
-        flow.flowClass === "ended" && "font-medium text-muted line-through decoration-negative",
+        flow.flowClass === "ended" && !flow.notYetRecorded && "font-medium text-muted line-through decoration-negative",
+        flow.notYetRecorded && "font-medium text-faint",
         className,
       )}
     >
@@ -297,7 +318,10 @@ function FlowHeadline({ flow, className }: { flow: CapitalFlow; className?: stri
   );
 }
 
-function FlowStatusLine({ flow, className }: { flow: CapitalFlow; className?: string }) {
+function FlowStatusLine({ flow, className }: { flow: ShownFlow; className?: string }) {
+  if (flow.notYetRecorded) {
+    return <span className={cn("font-display text-xs leading-5 text-faint", className)}>{flow.status.text}.</span>;
+  }
   return (
     <span className={cn("font-display text-xs leading-5", flow.flowClass === "ended" ? "text-negative" : "text-muted", className)}>
       {flow.status.text}. {flow.remark}
@@ -368,7 +392,7 @@ function PartyBox({
   );
 }
 
-function PartyPanel({ party, flows }: { party: CapitalFlowParty; flows: readonly CapitalFlow[] }) {
+function PartyPanel({ party, flows }: { party: CapitalFlowParty; flows: readonly ShownFlow[] }) {
   return (
     <div>
       <p className="font-display text-base font-semibold leading-6 text-foreground">{party.name}</p>
@@ -407,13 +431,23 @@ export function CapitalFlowInteractive({
   density?: "full" | "summary";
 }) {
   const uid = useId();
+  const diagram = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState<Selection | null>(null);
   const [pinned, setPinned] = useState<Selection | null>(null);
   const selection = hover ?? pinned;
   const Sub = headingLevel === 2 ? "h3" : "h4";
 
+  // The date the reader has stepped to, if any. Layout stays the latest model's; only class and status change.
+  const replay = useCapitalFlowStep();
+  const flows: ShownFlow[] = replay ? model.flows.map((f) => ({ ...f, ...replay.step.flows[f.id] })) : model.flows;
+  const changed = (id: string) => Boolean(replay?.markChanges && replay.step.changedFlowIds.includes(id));
+  /** A key that changes when a line should be redrawn, so its one-time draw runs again. */
+  const drawKey = (id: string) => (changed(id) ? `changed-${replay?.index}` : "steady");
+  const statusLabel =
+    replay && !replay.step.latest ? `Status recorded by ${replay.step.asOfLabel}` : `Status on ${model.asOfLabel}`;
+
   const parties = new Map(model.parties.map((p) => [p.id, p]));
-  const flowsById = new Map(model.flows.map((f) => [f.id, f]));
+  const flowsById = new Map(flows.map((f) => [f.id, f]));
   const rowId = (flowId: string) => `${uid}-${flowId}`;
 
   // What the current selection touches: its flows, and the parties at either end of them.
@@ -433,6 +467,25 @@ export function CapitalFlowInteractive({
   const partyDimmed = (id: string) => selection !== null && !litParties.has(id);
   const togglePin = (s: Selection) => setPinned((current) => (current && current.type === s.type && current.id === s.id ? null : s));
 
+  // The lines draw once, provider to recipient, when the diagram itself comes into view. Without JavaScript,
+  // IntersectionObserver or permission for motion they are simply drawn.
+  useEffect(() => {
+    const el = diagram.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        el.dataset.motionEntered = "true";
+        observer.disconnect();
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+    );
+    el.dataset.motionReady = "true";
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const hasUses = model.flows.some((f) => f.uses.length > 0);
   // The project column needs a wide figure; below that the projects sit under their lane.
   const columns = hasUses
@@ -446,6 +499,7 @@ export function CapitalFlowInteractive({
     <>
       <div className="hidden @3xl:block">
         <div
+          ref={diagram}
           role="group"
           aria-label="Diagram: one line per recorded row, from provider to recipient"
           className={cn("capflow-diagram grid gap-x-4", columns)}
@@ -466,7 +520,7 @@ export function CapitalFlowInteractive({
             </p>
           ) : null}
 
-          {model.flows.map((flow, i) => {
+          {flows.map((flow, i) => {
             const providerRun = model.providerRuns.find((r) => r.start === i);
             const recipientRun = model.recipientRuns.find((r) => r.start === i);
             const isPinned = pinned?.type === "flow" && pinned.id === flow.id;
@@ -522,11 +576,20 @@ export function CapitalFlowInteractive({
                   <span className="flex flex-wrap items-baseline justify-between gap-x-3">
                     <FlowHeadline flow={flow} className={isLit || isPinned ? "underline decoration-accent underline-offset-4" : undefined} />
                     <span className="font-display text-xs leading-5 text-faint">
+                      {changed(flow.id) ? <span className="mr-2 font-medium text-accent">Changed</span> : null}
                       {flow.classLabel}
                       {flow.equityInterest ? ", equity interest" : ""}
                     </span>
                   </span>
-                  <FlowMark flowClass={flow.flowClass} equity={flow.equityInterest} lane={i} className="my-1" />
+                  <FlowMark
+                    key={drawKey(flow.id)}
+                    flowClass={flow.flowClass}
+                    equity={flow.equityInterest}
+                    lane={i}
+                    pending={flow.notYetRecorded}
+                    changed={changed(flow.id)}
+                    className="my-1"
+                  />
                   <span className="sr-only">. </span>
                   <FlowStatusLine flow={flow} className="block" />
                 </a>
@@ -602,15 +665,20 @@ export function CapitalFlowInteractive({
                 <p className="font-display text-base font-semibold leading-6 text-foreground">
                   {shownFlow.ownFunds ? "The recipient's own funds" : shownFlow.providerText} to {shownFlow.recipientText}
                 </p>
-                <FlowMark flowClass={shownFlow.flowClass} equity={shownFlow.equityInterest} className="my-2 max-w-48" />
+                <FlowMark
+                  flowClass={shownFlow.flowClass}
+                  equity={shownFlow.equityInterest}
+                  pending={shownFlow.notYetRecorded}
+                  className="my-2 max-w-48"
+                />
                 <FlowHeadline flow={shownFlow} className="block" />
                 <FlowStatusLine flow={shownFlow} className="block" />
               </div>
-              <FlowFacts flow={shownFlow} asOfLabel={model.asOfLabel} />
+              <FlowFacts flow={shownFlow} statusLabel={statusLabel} />
             </div>
           ) : shownParty ? (
             <div className="mt-2">
-              <PartyPanel party={shownParty} flows={model.flows.filter((f) => shownParty.flowIds.includes(f.id))} />
+              <PartyPanel party={shownParty} flows={flows.filter((f) => shownParty.flowIds.includes(f.id))} />
             </div>
           ) : (
             <p className="mt-2 max-w-2xl font-display text-sm leading-6 text-muted">
@@ -626,7 +694,7 @@ export function CapitalFlowInteractive({
           All flows
         </Sub>
         <ol>
-          {model.flows.map((flow) => {
+          {flows.map((flow) => {
             const isPinned = pinned?.type === "flow" && pinned.id === flow.id;
             return (
               <li
@@ -639,10 +707,18 @@ export function CapitalFlowInteractive({
               >
                 <div className="mb-3 @4xl:mb-0">
                   <p className="font-display text-xs leading-5 text-faint">
+                    {changed(flow.id) ? <span className="mr-2 font-medium text-accent">Changed</span> : null}
                     {flow.classLabel}
                     {flow.equityInterest ? ", equity interest" : ""}
                   </p>
-                  <FlowMark flowClass={flow.flowClass} equity={flow.equityInterest} className="my-1.5 max-w-40" />
+                  <FlowMark
+                    key={drawKey(flow.id)}
+                    flowClass={flow.flowClass}
+                    equity={flow.equityInterest}
+                    pending={flow.notYetRecorded}
+                    changed={changed(flow.id)}
+                    className="my-1.5 max-w-40"
+                  />
                   <p className="font-display text-base font-semibold leading-6 text-foreground">
                     {flow.ownFunds ? "The recipient's own funds" : flow.providerText} to {flow.recipientText}
                   </p>
@@ -654,7 +730,7 @@ export function CapitalFlowInteractive({
                     View details
                   </summary>
                   <div className="mt-3">
-                    <FlowFacts flow={flow} asOfLabel={model.asOfLabel} />
+                    <FlowFacts flow={flow} statusLabel={statusLabel} />
                   </div>
                 </details>
               </li>

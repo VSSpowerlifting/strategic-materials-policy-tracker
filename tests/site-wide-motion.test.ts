@@ -7,7 +7,7 @@ import ResearchIndex from "@/app/research/page";
 import MaterialsPage from "@/app/materials/page";
 import { siteMotionScope, siteMotionSelector } from "@/lib/site-motion";
 
-test("route policy covers research, materials, detailed evidence and other routes", () => {
+test("route policy: only result cards enter on scroll; headings, sections and figures never wait on motion", () => {
   assert.equal(siteMotionScope("/"), "home");
   assert.equal(siteMotionSelector(siteMotionScope("/")), "", "homepage keeps its own composed motion");
   assert.equal(siteMotionScope("/research"), "research-index");
@@ -22,10 +22,13 @@ test("route policy covers research, materials, detailed evidence and other route
     "/saved", "/watchlist", "/data", "/response", "/portfolios",
   ]) {
     assert.equal(siteMotionScope(path), "standard", path);
-    assert.match(siteMotionSelector(siteMotionScope(path)), /section/);
+    assert.equal(siteMotionSelector(siteMotionScope(path)), '[data-site-motion="card"]', path);
   }
-  assert.match(siteMotionSelector(siteMotionScope("/research/hemerdon-financing")), /figure/);
-  assert.match(siteMotionSelector(siteMotionScope("/materials/tungsten")), /\.dossier/);
+  // Title blocks settle on their own and exhibits draw on their own; reading content is never held back.
+  for (const path of ["/events/sample", "/research", "/research/hemerdon-financing", "/materials", "/materials/tungsten"]) {
+    assert.doesNotMatch(siteMotionSelector(siteMotionScope(path)), /\bsection\b|\bh1\b|\bfigure\b|\.dossier/, path);
+  }
+  assert.match(siteMotionSelector(siteMotionScope("/research")), /\barticle\b/);
   assert.match(siteMotionSelector(siteMotionScope("/materials")), /a\.oxide-rule/);
 });
 
