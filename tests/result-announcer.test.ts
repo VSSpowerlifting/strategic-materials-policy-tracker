@@ -6,6 +6,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import {
   RESULT_ANNOUNCE_DELAY_MS,
+  RESULT_CLEAR_GAP_MS,
   ResultLiveRegion,
   createResultAnnouncer,
   resultCountMessage,
@@ -94,6 +95,27 @@ test("the same wording after a different filter is announced again; returning to
   advance(200);
   gate.update('["b"]', "12 events");
   advance(1000);
+  assert.deepEqual(said(), ["12 events"]);
+});
+
+test("a state is announced only once its count is written: a change in the clear-to-write gap does not swallow it", () => {
+  const { gate, advance, emitted, said } = harness();
+  gate.update('["A"]', "All 79 events");
+  gate.arm();
+  // Select B and let it settle: the region is cleared, and B's count is due one gap later.
+  gate.update('["B"]', "12 events");
+  advance(RESULT_ANNOUNCE_DELAY_MS);
+  assert.deepEqual(emitted, [""], "cleared, count not yet written");
+  // Switch to C inside the gap, which cancels B's write, then settle back on B.
+  advance(RESULT_CLEAR_GAP_MS / 2);
+  gate.update('["C"]', "3 events");
+  advance(RESULT_CLEAR_GAP_MS / 4);
+  gate.update('["B"]', "12 events");
+  assert.deepEqual(said(), [], "nothing written while the reader is still changing filters");
+  advance(RESULT_ANNOUNCE_DELAY_MS + RESULT_CLEAR_GAP_MS);
+  // B was never written before, so it is announced now, once; C was never settled on.
+  assert.deepEqual(said(), ["12 events"]);
+  advance(5000);
   assert.deepEqual(said(), ["12 events"]);
 });
 

@@ -6,7 +6,8 @@
  * - Nothing is announced on load: the gate opens only on the reader's own input inside the explorer (a change,
  *   input or click), so filters applied from the URL after hydration stay silent.
  * - Rapid changes (typing, stepping through a select with the arrow keys) produce one announcement, for the state
- *   the reader settles on. A state that returns to the one last announced says nothing.
+ *   the reader settles on. A state that returns to the one last announced says nothing. A state counts as
+ *   announced only once its count is written to the region, never when the region is cleared for it.
  * - The region is cleared before each message, so the same wording ("12 events" after a different filter) is
  *   announced again.
  * - Focus is never moved here. `focusFirstFilter` is for a Clear control that unmounts when it is used.
@@ -16,7 +17,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 /** How long the filter state must hold before its count is announced. */
 export const RESULT_ANNOUNCE_DELAY_MS = 600;
 /** Gap between clearing the region and writing the message, so screen readers register a change. */
-const CLEAR_GAP_MS = 60;
+export const RESULT_CLEAR_GAP_MS = 60;
 
 /** "No results", "1 event", "12 events" or, when every row is shown, "All 79 events". */
 export function resultCountMessage(count: number, total: number, noun: { one: string; other: string }): string {
@@ -54,13 +55,14 @@ export function createResultAnnouncer(emit: (text: string) => void, schedule: Sc
       pending = schedule(() => {
         pending = null;
         if (!current || current.key === announced) return;
-        announced = current.key;
-        const text = current.message;
+        const { key, message } = current;
         emit("");
         pending = schedule(() => {
           pending = null;
-          emit(text);
-        }, CLEAR_GAP_MS);
+          // Marked only once written: a change during the gap cancels this write, so the state stays unannounced.
+          announced = key;
+          emit(message);
+        }, RESULT_CLEAR_GAP_MS);
       }, delay);
     },
     dispose() {
