@@ -210,6 +210,59 @@ wider figures are untouched. This keeps the whole sequence visible and reachable
 adding controls. The longest replays now have five dates; one-line labels fit at 320px up to about six.
 Screenshots: `docs/design/reviews/usability-pass/`.
 
+## Scenario change marks on the Escondida exhibit (14 November 2026)
+
+Branch `claude/smpt-motion-interaction-c147b0`. Presentation and interaction only: the four screens in
+`lib/fi002.ts`, the article text in `app/research/escondida-copper/page.tsx` and the review record are unchanged.
+
+### Audit
+
+Homepage, research library, the Escondida article and the Market Monitor, at 1440 and 375px.
+
+- **Escondida Exhibit 02 ("Compare capital-recovery scenarios").** Choosing a scenario replaced the required
+  benefit, the explanation and four figures at once, with no sign of which figures had moved. Base to Shorter
+  benefits changes two of the four; Shorter, later to Combined stress changes all four, and the annual after-tax
+  benefit falls while the required tonnage rises. Readers had to compare four cells from memory.
+- **Capital-flow "Selected" panel (homepage MP exhibit, event pages, 48rem and wider).** The panel sits under the
+  whole drawing, up to about 900px below the line or organization a reader picks, so the details often appear out
+  of view. Motion cannot reach it without scrolling the page, which rule 6 forbids; the fix is a layout change
+  (an adjacent or sticky panel).
+- **Market Monitor benchmark picker.** The tiles sit below the chart (about 600px below at 1440, about 1,100px at
+  375), so adding or removing a benchmark changes a chart the reader cannot see. Again the cause is placement, and
+  the Market Monitor's coordinated interaction was deliberately left alone in phase 1.
+- **Research library.** Five cards, no controls; cards already enter once. Nothing to add.
+
+### What was built
+
+After the reader picks a scenario, each figure whose value differs from the scenario shown just before gets a
+malachite rule along its own bottom border, and its label turns malachite. The rule draws left to right (420ms) and
+the new value settles in (240ms, opacity and a 4px rise). The required benefit settles the same way; it is replaced,
+never counted from one value to the next.
+
+- **The mark is state.** It holds until the next choice. Under reduced motion it appears at once, fully drawn, and
+  nothing moves. Nothing is marked on load or on hydration; only the reader's own choice sets the comparison.
+- **The comparison is with the screen shown before**, not with Base, because the question a reader has after a
+  click is what that click changed. The marked cells include the annual after-tax benefit, which is a model
+  output, so no copy calls them assumptions.
+- **No layout shift.** The rule is an absolutely positioned `::after` on the existing border (a changed group is re-keyed so it redraws) and only `transform` and
+  `opacity` animate. Measured with a `layout-shift` observer: none at 1440. At 375 the Combined stress
+  explanation is two lines longer and pushes the figures down, which predates this change.
+- **Screen readers** hear the change in the existing polite, atomic result region, which now begins with a visually
+  hidden note: "Changed from Base: benefit period and annual after-tax benefit." The region itself is not
+  re-keyed, so it keeps announcing.
+- Keyboard: arrow keys move through the radios as before; focus never moves.
+
+Files: `components/research/fi002-screen.tsx`, `lib/fi002.ts` (`fi002ScreenFields`, `changedScreenFields`,
+`screenChangeNote`), `app/research/escondida-copper/publication.module.css`, `tests/fi002-screen-change.test.ts`.
+Recordings and screenshots: `docs/design/reviews/scenario-change-marks/`.
+
+### Open for the maintainer
+
+- The screen-reader copy "Changed from {scenario}: {figures}." (figure names are the existing labels in lower
+  case) was approved by the maintainer on 14 November 2026.
+- Consider a fixed minimum height for the result block on phones, so the longer Combined stress explanation does
+  not push the figures down.
+
 ## Phase 2 backlog
 
 1. Research cover view transitions from the index to the article, once React 19.3 is available.
@@ -218,5 +271,9 @@ Screenshots: `docs/design/reviews/usability-pass/`.
 4. Project milestone progression on `/projects/[id]`, once enough reviewed milestones exist.
 5. Explorer filters: keep the reader's place when a filter removes cards above them. (Result counts are now
    announced; see the usability pass. Cards a filter adds already enter through `SiteMotion`.)
-6. Sticky date bar: check that it never covers an anchored heading. (The phone form is done; see the usability
+6. Capital-flow "Selected" panel: place it beside or stick it to the drawing on wide figures, so a selection's
+   details appear in view (found in the scenario-marks audit; a layout change, not motion).
+7. Market Monitor: show a benchmark change near the picker, or move the picker next to the chart, so adding a
+   series is visible where it is made.
+8. Sticky date bar: check that it never covers an anchored heading. (The phone form is done; see the usability
    pass. Rails longer than about six dates would need a scrolling or windowed rail at 320px.)
