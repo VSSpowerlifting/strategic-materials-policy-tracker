@@ -198,6 +198,18 @@ test("motion is limited to drawing and redrawing lines, and is off under reduced
   assert.match(replay, /if \(next >= last\) setPlaying\(false\)/, "a replay stops at the latest reading");
 });
 
+test("a control in the drawing that takes focus scrolls clear of the stuck date bar", () => {
+  const css = readFileSync("app/globals.css", "utf8");
+  const sticky = css.slice(css.indexOf("@container (min-width: 48rem)"), css.indexOf(".capflow-step-dot {"));
+  assert.match(sticky, /position: sticky;/);
+  // The bar and the scroll margin share one container query: where the bar is not sticky, nothing is offset.
+  assert.match(sticky, /\.capflow-diagram :is\(a\[href\], button, \[tabindex\]:not\(\[tabindex="-1"\]\)\) \{\s*scroll-margin-top: calc\(var\(--capflow-bar-h, 0px\) \+ 0\.5rem\);/);
+  const controls = readFileSync("components/exhibits/capital-flow-replay.tsx", "utf8");
+  assert.match(controls, /ResizeObserver/);
+  assert.match(controls, /setProperty\("--capflow-bar-h"/);
+  assert.match(controls, /<section ref=\{bar\}/);
+});
+
 test("an event page lists the exhibit in its contents, anchored, only where the exhibit is drawn", async () => {
   const { default: EventPage } = await import("@/app/events/[id]/page");
   const html = renderToStaticMarkup(await EventPage({ params: Promise.resolve({ id: MP }) }));

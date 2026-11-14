@@ -17,9 +17,10 @@ branch `claude/smpt-motion-design-1ea91e`). It complements the Motion section of
    and never again on scroll. A title block has a single page-load settle. Nothing else animates unprompted.
 5. **The reader controls time.** Auto-play runs only after a button press. It advances one step at a time, stops
    at the latest reading, and stops as soon as the reader picks a date.
-6. **No scroll-jacking and no layout shift.** Motion uses `transform`, `opacity` and `clip-path` only. It never
-   scrolls the page, moves focus or changes an element's size. A sticky bar is part of the layout from the first
-   paint.
+6. **No scroll-jacking and no layout shift.** Motion never scrolls the page, moves focus or resizes anything in
+   the flow of the page. Lines and cards animate `transform`, `opacity` and `clip-path`; the section marker is an
+   absolutely positioned pseudo-element whose length follows the current link. A sticky bar is part of the layout
+   from the first paint, and focusable controls beneath it carry a scroll margin so focus never lands under it.
 7. **Reduced motion means no movement.** Every animation and transition sits inside
    `@media (prefers-reduced-motion: no-preference)`, and the client enhancers return early under `reduce`. The
    state still changes (the selected date, the current section); only the movement goes. Print resets every
@@ -85,7 +86,11 @@ and are labelled "Changed". "Replay changes" steps through every date and stops 
   under "Also drawn at earlier dates".
 - **An exhibit with one reading has no controls.** 17 of the 35 exhibits get a replay, with up to five steps.
 - On a figure wider than 48rem the date bar is sticky under the site header (its height is published as
-  `--site-header-h`), so the dates stay in view while the lanes scroll.
+  `--site-header-h`), so the dates stay in view while the lanes scroll. The bar publishes its own height as
+  `--capflow-bar-h`, and every focusable control in the drawing takes that as `scroll-margin-top`, so a reader
+  tabbing back up through the lines never lands under the bar.
+- Without JavaScript the bar still lists the dates on which the status changed, but its buttons do nothing; the
+  drawing shows the latest reading.
 - Keyboard: Left/Right and Up/Down move one date, Home and End jump to the first and latest. Each change is
   announced once ("Status as recorded by 26 August 2025. Changed: …"). Nothing is announced before the reader
   interacts.
@@ -142,20 +147,24 @@ earlier classes listed apart, the section marker on rails, and the change of the
 - Tests: `tests/capital-flow-replay.test.ts` (step dates and changed rows for MP, evidence boundaries for undated
   entries, lapse handling, last step equals the latest model across the corpus, ordering invariants, "Not yet
   recorded" rows on the G7 exhibit, key extras, default render with no change marks, single-reading exhibits with
-  no controls, CSS guards, event rail entry); `tests/section-spy.test.ts`; updated `tests/site-wide-motion.test.ts`
-  and `tests/featured-analysis.test.ts`.
-- Gates: `validate`, `typecheck`, `lint` (0 errors), `build`, `editorial:check` and the full test suite.
-- Browser: 16 routes at 1440 and 375px returned 200 with one `h1`, no horizontal overflow and no console errors.
-  Replay keyboard stepping, auto-play stop, sticky date bar, reduced-motion emulation (no animation or transition
-  runs; lines fully drawn) and the section marker on event, Escondida and Tungsten pages were checked.
-  Screenshots: `docs/design/reviews/motion-phase-1/`.
-- Not tested: a real screen reader, touch devices, Safari and Firefox.
+  no controls, CSS guards, the focus scroll margin, event rail entry); `tests/section-spy.test.ts`; updated
+  `tests/site-wide-motion.test.ts` and `tests/featured-analysis.test.ts`.
+- Gates: `validate`, `typecheck`, `lint` (0 errors, 29 warnings that predate this branch), `build`,
+  `editorial:check` (with `EDITORIAL_BASE_SHA` set to the merge base, as in CI) and the full test suite.
+- Browser (Chromium): 16 routes at 1440 and 375px returned 200 with one `h1`, no horizontal overflow and no
+  console errors. Checked: replay keyboard stepping, auto-play stopping at the latest reading, the sticky date bar,
+  focus moving up through the drawing while the bar is stuck (no control hidden on the homepage, MP and G7
+  exhibits), reduced-motion emulation (no animation or transition runs; lines fully drawn) and the section marker
+  on event, Escondida and Tungsten pages. Screenshots: `docs/design/reviews/motion-phase-1/`.
+- Not tested: a real screen reader, touch devices, Safari, Firefox, and a browser with JavaScript turned off (the
+  server markup is covered by the render tests).
 
 ## Open for the maintainer
 
 - Approve the partial reversal of #254 (headings, sections and figures no longer fade in).
-- Approve the new interface copy: "Status by date", "Replay changes", "Changed", "Not yet recorded", "Also drawn
-  at earlier dates", "Financing status". No editorial sign-off has been given.
+- Approve the new interface copy: "Status by date", "Replay changes", "Changed", "Not yet recorded" ("No status is
+  recorded for this line by the date shown."), "Also drawn at earlier dates", "Financing status". The strings were
+  read against the house style's natural-language review; no editorial sign-off has been given.
 - Confirm that an undated status entry may start a replay step at its source's publication date. The status text
   still says the date is not stated.
 

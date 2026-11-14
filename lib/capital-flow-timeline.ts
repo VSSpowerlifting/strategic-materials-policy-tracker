@@ -75,7 +75,7 @@ export type CapitalFlowTimeline = {
 };
 
 export const NOT_YET_RECORDED_LABEL = "Not yet recorded";
-export const NOT_YET_RECORDED_DESCRIPTION = "The record holds no status for the row by the date shown.";
+export const NOT_YET_RECORDED_DESCRIPTION = "No status is recorded for this line by the date shown.";
 
 /** Identity of a state for change detection. A missing status compares by its absence, not by its dated wording. */
 function signature(s: { status: CapitalFlowStatus; notYetRecorded: boolean; flowClass?: string }): string {

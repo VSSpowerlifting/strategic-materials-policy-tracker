@@ -628,6 +628,10 @@ html { scroll-padding-top: 7rem; }
     background: var(--capflow-surface, var(--bg));
     border-bottom: 1px solid var(--border);
   }
+  /* A control in the drawing that takes focus scrolls clear of the stuck bar, not under it. */
+  .capflow-diagram :is(a[href], button, [tabindex]:not([tabindex="-1"])) {
+    scroll-margin-top: calc(var(--capflow-bar-h, 0px) + 0.5rem);
+  }
 }
 .capflow-step-dot {
   display: block;

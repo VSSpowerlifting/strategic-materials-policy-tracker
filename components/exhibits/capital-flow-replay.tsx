@@ -6,7 +6,7 @@
  * `capital-flow-replay-state`. Stepping is discrete: a line that changes is redrawn, nothing is tweened between
  * classes, and the change is written out in the model's own wording.
  */
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import type { CapitalFlowLegendEntry } from "@/lib/capital-flow";
 import {
@@ -109,6 +109,21 @@ export function ReplayControls({
 }) {
   const ctx = useReplay();
   const buttons = useRef<Array<HTMLButtonElement | null>>([]);
+  const bar = useRef<HTMLElement>(null);
+
+  // Publishes the bar's height to the block it sticks within, so a control in the drawing that takes keyboard
+  // focus scrolls clear of the bar while it is stuck (the scroll margin itself is set in globals.css).
+  useEffect(() => {
+    const el = bar.current;
+    const host = el?.parentElement;
+    if (!el || !host || !("ResizeObserver" in window)) return;
+    const publish = () => host.style.setProperty("--capflow-bar-h", `${Math.ceil(el.getBoundingClientRect().height)}px`);
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   if (!ctx || ctx.steps.length < 2) return null;
   const earlier = ctx.timeline.legend.filter((e) => !latestLegend.some((l) => l.key === e.key));
   const now = drawnAt(ctx.steps[ctx.index]);
@@ -136,7 +151,7 @@ export function ReplayControls({
   return (
     <>
       {/* The bar holds the dates; on a wide figure it stays in view while the reader scrolls through the lines. */}
-      <section aria-labelledby={labelId} className="capflow-replay mt-8 border-t border-border pt-4 pb-3">
+      <section ref={bar} aria-labelledby={labelId} className="capflow-replay mt-8 border-t border-border pt-4 pb-3">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
           <Heading id={labelId} className="label">
             Status by date

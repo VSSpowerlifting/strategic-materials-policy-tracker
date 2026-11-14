@@ -6,8 +6,8 @@
 - `SectionSpy` (`components/ui/section-spy.tsx`, `lib/section-spy.ts`) marks the section being read on record rails and the research "Publication sections" and "Report sections" lists (`aria-current="location"` plus a marker on the list's rule), and publishes `--site-header-h`. The Escondida section bar is sticky at 1024px and wider.
 - `SiteMotion` now enters result cards only. Headings, sections, figures and dossier blocks no longer fade in. This partly reverses #254 and needs the maintainer's approval.
 - Fixed "rising to416,000" in the homepage standfirst.
-- Checks: listed in the PR. Not tested: real screen readers, touch devices, Safari and Firefox.
-- Open: approve the #254 narrowing; approve the new interface copy ("Status by date", "Replay changes", "Changed", "Not yet recorded", "Also drawn at earlier dates", "Financing status"); confirm the source-date boundary for undated status entries.
+- Checks (13 November 2026, final tree): tests 1,310/1,310; `validate`, `typecheck` and `build` pass; `lint` 0 errors (29 warnings that predate the branch); `editorial:check` with the merge base: "no published research page or review record changed". Chromium at 1440 and 375 px: 16 routes, no overflow or console errors; keyboard stepping, auto-play stop, reduced motion and focus clearance under the sticky date bar checked. Not tested: real screen readers, touch devices, Safari, Firefox, JavaScript turned off.
+- Open: approve the #254 narrowing; approve the new interface copy ("Status by date", "Replay changes", "Changed", "Not yet recorded" and its description, "Also drawn at earlier dates", "Financing status"); confirm the source-date boundary for undated status entries.
 
 ## 2026-11-12: Homepage featured analysis (FI002) redesign (PR #266, not merged)
 
