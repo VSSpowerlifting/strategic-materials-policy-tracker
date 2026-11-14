@@ -12,7 +12,8 @@ import {
   statusBoundaries,
   type CapitalFlowTimeline,
 } from "@/lib/capital-flow-timeline";
-import { financialStatusEvidenceBoundary } from "@/lib/capital-control";
+import { financialStatusEntryOn, financialStatusEvidence, financialStatusEvidenceBoundary } from "@/lib/capital-control";
+import { changeNotes, stepAnnouncement, stepReading } from "@/components/exhibits/capital-flow-replay";
 import { getAllEvents, getFinancialCommitmentById, getSourceById } from "@/lib/data";
 import { site } from "@/lib/site";
 
@@ -64,6 +65,64 @@ test("an undated status starts its step at the source that evidences it, and kee
   for (const s of timeline.steps.slice(0, -1)) {
     assert.equal(s.flows[EQUITY].flowClass, "committed", `${s.date}: no disbursement recorded yet`);
   }
+});
+
+// --- What kind of date each step is ---------------------------------------------------------------
+
+test("MP: a source's publication date reads 'Reported on', never as the date the status took effect", () => {
+  const { timeline } = timelineOf(MP);
+  // 9 Jul 2025 and 26 Aug 2025 are the statuses' own dates; the other three are the publication dates of the
+  // sources that report the Samarium contract, the Samarium disbursement and the equity disbursement undated.
+  assert.deepEqual(
+    timeline.steps.map((s) => s.dateBasis),
+    ["recorded", "reported", "recorded", "reported", "reported"],
+  );
+  for (const s of timeline.steps) {
+    for (const id of s.changedFlowIds) {
+      const c = getFinancialCommitmentById(id)!;
+      const entry = financialStatusEntryOn(c, s.date)!;
+      assert.equal(s.changeBasis[id], entry.date === null ? "reported" : "recorded", `${s.date} ${id}`);
+      if (entry.date === null) assert.equal(getSourceById(entry.sourceId)?.datePublished, s.date);
+    }
+  }
+  assert.deepEqual(timeline.taggedBases, ["reported"]);
+});
+
+test("every tagged step rests on no stated date, and SMPT check dates read 'Checked by'", () => {
+  const seen = new Set<string>();
+  for (const model of exhibits) {
+    const { steps } = buildCapitalFlowTimeline(model);
+    if (steps.length < 2) continue;
+    for (const s of steps) {
+      seen.add(s.dateBasis);
+      for (const [id, basis] of Object.entries(s.changeBasis)) {
+        const c = getFinancialCommitmentById(id)!;
+        const entry = financialStatusEntryOn(c, s.date);
+        const evidence = entry ? financialStatusEvidence(c, entry) : null;
+        if (!evidence || evidence.date !== s.date) {
+          assert.equal(basis, "recorded", `${model.eventId} ${s.date} ${id}`);
+          continue;
+        }
+        const expected = { stated: "recorded", source_published: "reported", review_checked: "checked", source_accessed: "checked" };
+        assert.equal(basis, expected[evidence.basis], `${model.eventId} ${s.date} ${id}`);
+      }
+      // A step is tagged only when no change at that date has its own date.
+      if (s.dateBasis !== "recorded") {
+        assert.ok(
+          s.changedFlowIds.every((id) => s.changeBasis[id] !== "recorded") || s.changedFlowIds.length === 0,
+          `${model.eventId} ${s.date}`,
+        );
+      }
+    }
+  }
+  assert.deepEqual([...seen].sort(), ["checked", "recorded", "reported"]);
+  // G7, 31 Oct 2025: stated decisions and an undated, reported status change together; the stated date wins.
+  const g7 = timelineOf(G7).timeline.steps.find((s) => s.date === "2025-10-31")!;
+  assert.equal(g7.dateBasis, "recorded");
+  assert.ok(Object.values(g7.changeBasis).includes("reported"));
+  // Santoku: the second step rests on the date SMPT accessed a source that gives no status date.
+  const santoku = timelineOf("evt-jp-espa-santoku-rare-earth-2026").timeline.steps;
+  assert.deepEqual(santoku.map((s) => s.dateBasis), ["recorded", "checked"]);
 });
 
 test("the bank financing is private financing until it lapses, and ended from 26 Aug 2025", () => {
@@ -171,6 +230,41 @@ test("the exhibit renders the latest reading with dated steps, the latest presse
   assert.ok(markup.indexOf("Status by date") < markup.indexOf("capflow-diagram"));
   // The site-wide entrance stays off the exhibit; its lines have their own draw.
   assert.match(markup, /^<figure[^>]*data-motion-kind="flow"/);
+});
+
+test("the date bar tags reported dates and explains the tag; notes and the spoken reading name the date's kind", () => {
+  const markup = render(MP);
+  const text = textOf(markup);
+  const steps = markup.slice(markup.indexOf('class="capflow-steps'), markup.indexOf("</ol>", markup.indexOf('class="capflow-steps')));
+  const buttons = steps.split("<button").slice(1).map(textOf);
+  assert.deepEqual(
+    buttons.map((b) => /\bReported\b/.test(b)),
+    [false, true, false, true, true],
+  );
+  assert.match(buttons[1], /Status reported on/);
+  assert.match(buttons[0], /Status recorded by/);
+  assert.match(buttons[4], /Latest status, reported on/);
+  assert.ok(text.includes("Reported: the publication date of a source that reports a status without giving its date."));
+  assert.doesNotMatch(text, /Checked: the date/);
+
+  const { timeline } = timelineOf(MP);
+  const samarium = timeline.steps[1];
+  assert.equal(stepReading(samarium), "Status as recorded by 10 August 2025, the publication date of the source reporting the change.");
+  assert.equal(stepReading(timeline.steps[2]), "Status as recorded by 26 August 2025.");
+  assert.deepEqual(
+    changeNotes(samarium, { [SAMARIUM]: "Samarium loan" }).map((n) => [n.basis, n.text]),
+    [["reported", "Samarium loan: Contracted, date not stated"]],
+  );
+  // At the latest step the reading gives the as-of date, so a reported change carries its own date.
+  const last = timeline.steps.at(-1)!;
+  assert.equal(
+    stepAnnouncement(last, timeline.steps.length - 1, changeNotes(last, { [EQUITY]: "Equity" })),
+    "Status as of 12 November 2026. Changed: Equity: Disbursed, date not stated (reported on 7 Aug 2026).",
+  );
+  assert.equal(
+    stepAnnouncement(samarium, 1, changeNotes(samarium, { [SAMARIUM]: "Samarium loan" })),
+    "Status as recorded by 10 August 2025, the publication date of the source reporting the change. Changed: Samarium loan: Contracted, date not stated.",
+  );
 });
 
 test("an exhibit whose record shows no change has no replay controls", () => {

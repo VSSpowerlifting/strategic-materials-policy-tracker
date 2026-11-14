@@ -77,6 +77,12 @@ and are labelled "Changed". "Replay changes" steps through every date and stops 
   (`financialStatusEvidenceBoundary`): its own date, or for an undated entry the publication date of the source
   that evidences it. An undated status keeps its wording, for example "Disbursed, date not stated". Only drawn
   rows start steps; listed ceilings and budget lines follow the selected date but never add one.
+- **A step says what kind of date it is.** A status's own date reads "Recorded by". The publication date of a
+  source that reports an undated status reads "Reported on", and the date is tagged "Reported" in the bar. Where
+  the source gives no publication date, SMPT's review or access date reads "Checked by", tagged "Checked". A note
+  under the dates explains each tag in use. Where changes of both kinds fall on one date, the status's own date
+  names the step, and each change below the dates and in the announcement carries its own kind of date. The
+  basis comes from `financialStatusEvidence` in `lib/capital-control.ts`, the same fallback that sets the step date.
 - **The layout is fixed.** Lanes keep the latest model's order at every step; only class and status change, so
   nothing jumps.
 - **A row with no status yet reads "Not yet recorded".** It is drawn as a faint hairline with no marks. It is
@@ -166,7 +172,11 @@ earlier classes listed apart, the section marker on rails, and the change of the
   recorded for this line by the date shown."), "Also drawn at earlier dates", "Financing status". The strings were
   read against the house style's natural-language review; no editorial sign-off has been given.
 - Confirm that an undated status entry may start a replay step at its source's publication date. The status text
-  still says the date is not stated.
+  still says the date is not stated, and the step now reads "Reported on" (or "Checked by" for an SMPT review or
+  access date) rather than "Recorded by".
+- Approve the date-kind copy: "Reported on", "Checked by", the "Reported" and "Checked" tags, and the notes
+  "Reported: the publication date of a source that reports a status without giving its date." and "Checked: the
+  date SMPT reviewed the status or accessed its source, where neither the status nor the source is dated."
 
 ## Phase 2 backlog
 

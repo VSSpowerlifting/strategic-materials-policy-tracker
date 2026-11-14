@@ -7,6 +7,9 @@
  * - A step begins at an evidence boundary (`financialStatusEvidenceBoundary`) of a drawn row: a status entry's
  *   own date, or, for an undated entry, the date by which the corpus evidences it. A step's date is therefore
  *   "recorded by", never "happened on".
+ * - Each step says what kind of date it is (`StepDateBasis`). A status's own date reads "Recorded by"; the
+ *   publication date of a source reporting an undated status reads "Reported on"; an SMPT review or access date
+ *   reads "Checked by". A source or check date is never presented as the date the status took effect.
  * - Between boundaries nothing changes. A step holds its state until the next one; nothing is interpolated.
  * - The lane layout is the latest model's. Each step only overlays class and status per row, so lanes never
  *   reorder while the reader steps through dates.
@@ -15,7 +18,12 @@
  * - The last step is the latest model itself, read at its as-of date (`site.lastUpdated` by default).
  * - If any drawn row would leave the drawing at an earlier date, the exhibit gets no replay.
  */
-import { financialStatusEvidenceBoundary } from "@/lib/capital-control";
+import {
+  financialStatusEntryOn,
+  financialStatusEvidence,
+  financialStatusEvidenceBoundary,
+  type FinancialStatusEvidenceBasis,
+} from "@/lib/capital-control";
 import {
   DRAWN_FLOW_CLASSES,
   buildCapitalFlowModel,
@@ -44,9 +52,52 @@ export type ListedStepState = {
   notYetRecorded: boolean;
 };
 
+/**
+ * What kind of date a step's date is, for the rows that change there: `recorded`, a status's own date; `reported`,
+ * the publication date of a source that reports a status without giving its date; `checked`, the date SMPT
+ * reviewed or accessed a source that gives no date for the status.
+ */
+export type StepDateBasis = "recorded" | "reported" | "checked";
+
+export const STEP_DATE_PREFIX: Record<StepDateBasis, string> = {
+  recorded: "Recorded by",
+  reported: "Reported on",
+  checked: "Checked by",
+};
+
+/** Short tag under a step's date in the date bar. A status's own date carries none. */
+export const STEP_DATE_TAG: Record<StepDateBasis, string | null> = {
+  recorded: null,
+  reported: "Reported",
+  checked: "Checked",
+};
+
+/** Explains a tagged step date, shown under the dates when the replay has one. */
+export const STEP_DATE_NOTE: Record<Exclude<StepDateBasis, "recorded">, string> = {
+  reported: "Reported: the publication date of a source that reports a status without giving its date.",
+  checked: "Checked: the date SMPT reviewed the status or accessed its source, where neither the status nor the source is dated.",
+};
+
+const BASIS_OF: Record<FinancialStatusEvidenceBasis, StepDateBasis> = {
+  stated: "recorded",
+  source_published: "reported",
+  review_checked: "checked",
+  source_accessed: "checked",
+};
+
+/** A status's own date wins, then a source's publication date, then a check date. */
+const BASIS_RANK: StepDateBasis[] = ["recorded", "reported", "checked"];
+
 export type CapitalFlowStep = {
   /** The evidence boundary at which this state begins. */
   date: string;
+  /**
+   * What kind of date `date` is. Where rows changing at one date differ, a status's own date wins, so a step
+   * is tagged "Reported" or "Checked" only when no change there has its own date.
+   */
+  dateBasis: StepDateBasis;
+  /** For each changed row (drawn or listed), what kind of date its change rests on. */
+  changeBasis: Record<string, StepDateBasis>;
   /** "9 Jul 2025". */
   dateLabel: string;
   /** The reading date of the state: the step's own date, or the exhibit's as-of date for the last step. */
@@ -72,6 +123,8 @@ export type CapitalFlowTimeline = {
   legend: CapitalFlowLegendEntry[];
   /** True when some step has a row that is not yet recorded. */
   hasNotYetRecorded: boolean;
+  /** Kinds of tagged date the replay uses, for the note under the dates. */
+  taggedBases: Array<Exclude<StepDateBasis, "recorded">>;
 };
 
 export const NOT_YET_RECORDED_LABEL = "Not yet recorded";
@@ -100,6 +153,18 @@ export function statusBoundaries(model: CapitalFlowModel): string[] {
   return [...dates].sort();
 }
 
+/**
+ * What kind of date `date` is for one row: the basis of the status entry in effect on that date, when that
+ * entry's evidence boundary is the date itself. Null when nothing about the row is evidenced on that date.
+ */
+function basisOn(id: string, date: string): StepDateBasis | null {
+  const c = getFinancialCommitmentById(id);
+  if (!c) return null;
+  const entry = financialStatusEntryOn(c, date);
+  const evidence = entry ? financialStatusEvidence(c, entry) : null;
+  return evidence && evidence.date === date ? BASIS_OF[evidence.basis] : null;
+}
+
 function stateOf(model: CapitalFlowModel): Pick<CapitalFlowStep, "flows" | "listed"> {
   const flows: Record<string, FlowStepState> = {};
   for (const f of model.flows) {
@@ -125,6 +190,8 @@ export function buildCapitalFlowTimeline(latest: CapitalFlowModel): CapitalFlowT
     steps: [
       {
         date: latest.asOf,
+        dateBasis: "recorded",
+        changeBasis: {},
         dateLabel: formatDate(latest.asOf),
         asOf: latest.asOf,
         asOfLabel: latest.asOfLabel,
@@ -136,12 +203,15 @@ export function buildCapitalFlowTimeline(latest: CapitalFlowModel): CapitalFlowT
     ],
     legend: latest.legend,
     hasNotYetRecorded: false,
+    taggedBases: [],
   };
 
   const latestState = stateOf(latest);
   const recordedAtLatest = (status: CapitalFlowStatus) => status.status !== null;
 
-  type Draft = Omit<CapitalFlowStep, "changedFlowIds" | "changedListedIds" | "latest"> & { signature: string };
+  type Draft = Omit<CapitalFlowStep, "changedFlowIds" | "changedListedIds" | "latest" | "dateBasis" | "changeBasis"> & {
+    signature: string;
+  };
   const drafts: Draft[] = [];
   const legendByKey = new Map<string, CapitalFlowLegendEntry>();
 
@@ -222,8 +292,19 @@ export function buildCapitalFlowTimeline(latest: CapitalFlowModel): CapitalFlowT
     const changedListedIds = prev
       ? latest.listed.map((r) => r.id).filter((id) => signature(prev.listed[id]) !== signature(d.listed[id]))
       : [];
+    // The first step changes nothing; its date is described by the drawn rows evidenced on it.
+    const evidencedHere = i === 0 ? latest.flows.map((f) => f.id).filter((id) => basisOn(id, d.date) !== null) : [];
+    const changeBasis: Record<string, StepDateBasis> = {};
+    for (const id of [...changedFlowIds, ...changedListedIds]) changeBasis[id] = basisOn(id, d.date) ?? "recorded";
+    const bases = new Set<StepDateBasis>(
+      i === 0
+        ? evidencedHere.map((id) => basisOn(id, d.date)!)
+        : changedFlowIds.map((id) => changeBasis[id]),
+    );
     return {
       date: d.date,
+      dateBasis: BASIS_RANK.find((b) => bases.has(b)) ?? "recorded",
+      changeBasis,
       dateLabel: d.dateLabel,
       asOf: d.asOf,
       asOfLabel: d.asOfLabel,
@@ -242,9 +323,11 @@ export function buildCapitalFlowTimeline(latest: CapitalFlowModel): CapitalFlowT
   );
   for (const k of extra) legend.push(legendByKey.get(k)!);
 
+  const used = new Set(steps.flatMap((s) => [s.dateBasis, ...Object.values(s.changeBasis)]));
   return {
     steps,
     legend,
     hasNotYetRecorded: steps.some((s) => Object.values(s.flows).some((f) => f.notYetRecorded)),
+    taggedBases: (["reported", "checked"] as const).filter((b) => used.has(b)),
   };
 }
