@@ -178,13 +178,45 @@ earlier classes listed apart, the section marker on rails, and the change of the
   "Reported: the publication date of a source that reports a status without giving its date." and "Checked: the
   date SMPT reviewed the status or accessed its source, where neither the status nor the source is dated."
 
+## Usability pass (14 November 2026)
+
+### Filter result counts
+
+Nine explorers filter a visible list in place: `/events`, `/timeline`, `/search`, `/capital`, `/controls`,
+`/organizations`, `/programmes`, `/projects` and `/sources`. Each now announces its count through one visually
+hidden polite region (`components/ui/result-announcer.tsx`); the visible counts keep their wording and are no
+longer live regions.
+
+- **Only the reader's own change is announced.** The region opens on a change, input or click inside the
+  explorer, so filters read from the URL after hydration stay silent.
+- **Once per settled change.** The count is written 600 ms after the last change: typing a search term gives one
+  announcement, not one per key. A state that returns to the one last announced says nothing. The region is
+  cleared before each message, so the same wording after a different filter is read again.
+- **Wording:** "No results", "1 event", "12 events", and "All 79 events" when every row is shown, including after
+  clearing. `/search` announces "All 812 entries" when cleared, because it returns to browsing by type.
+- **Focus stays with the reader.** Changing a filter never moves focus. A Clear control, an empty-state "Show
+  all" button, or the last removed chip on `/events` unmounts once used, so it hands focus to the first filter.
+  A type shortcut on `/search` hands focus to the Type select, or to the search box where the select is folded
+  away on phones.
+
+### Date bar on phones
+
+At 320 and 375px each date stacked day and month, year, a "Reported" tag and "Latest" in a 58–69px column, and
+Replay was 36px tall. On a figure narrower than 28rem (`@max-md`), each date now shows day and month on one line.
+The year and tags leave the rail but stay in the button's accessible name, and a line under the dates writes the
+selected date out in full with its kind and position ("10 Aug 2025 Reported", then "2 of 5"). Every date and Replay
+are at least 44px tall. Tapping, arrow keys, Home and End, the announcement and reduced motion are unchanged, and
+wider figures are untouched. This keeps the whole sequence visible and reachable without scrolling the rail or
+adding controls. The longest replays now have five dates; one-line labels fit at 320px up to about six.
+Screenshots: `docs/design/reviews/usability-pass/`.
+
 ## Phase 2 backlog
 
 1. Research cover view transitions from the index to the article, once React 19.3 is available.
 2. Legend as filter: choosing a key entry emphasises those lines and dims the others, without hiding any.
 3. FI002 featured exhibit: a base-case reference line that the stressed bars are read against.
 4. Project milestone progression on `/projects/[id]`, once enough reviewed milestones exist.
-5. Compare and explorer filters: announce the changed result count, and keep the reader's place when a filter
-   removes cards above them. (Cards a filter adds already enter through `SiteMotion`.)
-6. Sticky date bar refinements: a compact single-line form on narrow figures, and a check that it never covers
-   an anchored heading.
+5. Explorer filters: keep the reader's place when a filter removes cards above them. (Result counts are now
+   announced; see the usability pass. Cards a filter adds already enter through `SiteMotion`.)
+6. Sticky date bar: check that it never covers an anchored heading. (The phone form is done; see the usability
+   pass. Rails longer than about six dates would need a scrolling or windowed rail at 320px.)

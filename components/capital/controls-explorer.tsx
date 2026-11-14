@@ -11,6 +11,7 @@ import {
   normalize,
   useUrlFilters,
 } from "@/components/capital/filter-controls";
+import { ResultLiveRegion, resultCountMessage, useResultAnnouncer } from "@/components/ui/result-announcer";
 import {
   controlDirectionLabels,
   controlMeasureTypeLabels,
@@ -93,9 +94,14 @@ export function ControlsExplorer({
     setQ("");
     [setIssuer, setType, setDirection, setStatus, setScope, setTarget, setMaterial].forEach((f) => f(ALL));
   };
+  const { announcement, rootProps, focusFirstFilter } = useResultAnnouncer(
+    JSON.stringify([q.trim(), issuer, type, direction, status, scope, target, material]),
+    resultCountMessage(filtered.length, rows.length, { one: "control clause", other: "control clauses" }),
+  );
 
   return (
-    <div>
+    <div {...rootProps}>
+      <ResultLiveRegion text={announcement} />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
           <SearchBox id="ctl-q" value={q} onChange={setQ} placeholder="Document, clause, entity…" />
@@ -108,10 +114,17 @@ export function ControlsExplorer({
         <FilterSelect id="ctl-target" label="Named target" value={target} onChange={setTarget} options={opts.target} />
         <FilterSelect id="ctl-material" label="Material" value={material} onChange={setMaterial} options={opts.material} />
       </div>
-      <p className="mt-4 font-display text-sm text-muted" aria-live="polite">
+      <p className="mt-4 font-display text-sm text-muted">
         <span className="tnum text-foreground">{filtered.length}</span> of {rows.length} control clauses
         {active ? (
-          <button type="button" onClick={reset} className="ml-3 text-accent hover:text-accent-strong">
+          <button
+            type="button"
+            onClick={() => {
+              focusFirstFilter();
+              reset();
+            }}
+            className="ml-3 text-accent hover:text-accent-strong"
+          >
             Clear filters
           </button>
         ) : null}

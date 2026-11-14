@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JurisdictionTag } from "@/components/labels";
 import { ALL, FilterSelect, SearchBox, useUrlFilters } from "@/components/capital/filter-controls";
+import {ResultLiveRegion,resultCountMessage,useResultAnnouncer} from "@/components/ui/result-announcer";
 import { filterProjectDirectory, PROJECT_RELATIONSHIP_FILTERS, UNSTATED,
   type ProjectDirectoryRow } from "@/lib/project-directory";
 import { supplyChainStageLabels } from "@/lib/labels";
@@ -87,7 +88,14 @@ export function ProjectsExplorer({rows, materialNames}:{
     setQ("");setMaterial(ALL);setStage(ALL);setCountry(ALL);
     setGovernment(ALL);setRelationship(ALL);
   };
-  return <div>
+  const {announcement,rootProps,focusFirstFilter}=useResultAnnouncer(
+    JSON.stringify([q.trim(),material,stage,country,government,relationship]),
+    resultCountMessage(visible.length,rows.length,{one:"project",other:"projects"}),
+  );
+  // Clear controls unmount once used; keep the reader in the filters.
+  const resetAndFocus=()=>{focusFirstFilter();reset();};
+  return <div {...rootProps}>
+    <ResultLiveRegion text={announcement}/>
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       <div className="sm:col-span-2 lg:col-span-2">
         <SearchBox id="projects-search" value={q} onChange={setQ} placeholder="Project, sponsor, material or location…" />
@@ -99,10 +107,10 @@ export function ProjectsExplorer({rows, materialNames}:{
       <FilterSelect id="projects-relationship" label="Evidence relationship" value={relationship} onChange={setRelationship} options={options.relationship}/>
     </div>
     <div className="mt-4 flex flex-wrap items-center gap-3">
-      <p className="font-display text-xs text-muted" role="status" aria-live="polite">
+      <p className="font-display text-xs text-muted">
         <span data-testid="project-result-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered projects
       </p>
-      {active?<button type="button" onClick={reset} className="font-display text-xs text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
+      {active?<button type="button" onClick={resetAndFocus} className="font-display text-xs text-accent hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
     </div>
     <details className="mt-1 max-w-4xl text-xs leading-5 text-faint">
       <summary className="inline-flex min-h-11 cursor-pointer list-none items-center font-display text-sm text-foreground [&::-webkit-details-marker]:hidden"><span className="link-quiet">What a result shows</span></summary>
@@ -141,7 +149,7 @@ export function ProjectsExplorer({rows, materialNames}:{
     </div>
     {!visible.length?<Card className="mt-5 p-8 text-center text-sm text-muted">
       No registered project matches these filters. Try another material, country or evidence relationship.
-      <button type="button" onClick={reset} className="ml-2 text-accent hover:underline">Show all projects</button>
+      <button type="button" onClick={resetAndFocus} className="ml-2 text-accent hover:underline">Show all projects</button>
     </Card>:null}
   </div>;
 }

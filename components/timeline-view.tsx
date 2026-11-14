@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FramingBadges, JurisdictionTag, StatusBadge } from "@/components/labels";
 import { jurisdictionLabels } from "@/lib/labels";
 import { formatDate } from "@/lib/format";
+import { ResultLiveRegion, resultCountMessage, useResultAnnouncer } from "@/components/ui/result-announcer";
 import type {
   FramingCategory,
   JurisdictionCode,
@@ -92,9 +93,14 @@ export function TimelineView({
 
   const foundational = filtered.filter((e) => e.date < WINDOW_START);
   const inWindow = filtered.filter((e) => e.date >= WINDOW_START);
+  const { announcement, rootProps } = useResultAnnouncer(
+    JSON.stringify([actor, material]),
+    resultCountMessage(filtered.length, events.length, { one: "event", other: "events" }),
+  );
 
   return (
-    <div>
+    <div {...rootProps}>
+      <ResultLiveRegion text={announcement} />
       <div className="flex flex-wrap gap-3">
         <select
           aria-label="Filter by actor"
@@ -122,7 +128,7 @@ export function TimelineView({
             </option>
           ))}
         </select>
-        <span className="tnum self-center font-display text-sm text-faint" aria-live="polite">
+        <span className="tnum self-center font-display text-sm text-faint">
           {filtered.length} of {events.length}
         </span>
       </div>

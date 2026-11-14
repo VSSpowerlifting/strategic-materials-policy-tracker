@@ -75,14 +75,43 @@ export function ReplayLegend({ latest }: { latest: readonly CapitalFlowLegendEnt
   );
 }
 
-/** "9 Jul 2025" set on two lines: day and month, then year. */
+/**
+ * Classes for what a narrow figure (a phone) leaves out of each date in the bar: the year and the tags. They stay in
+ * the accessible name, and the selected date is written out in full under the dates (`SelectedDateLine`).
+ */
+const NARROW_ONLY_SR = "@max-md:sr-only";
+
+/** "9 Jul 2025" set on two lines: day and month, then year. On a narrow figure only the day and month show. */
 function DateLines({ label }: { label: string }) {
   const cut = label.lastIndexOf(" ");
   return (
     <>
       <span className="block whitespace-nowrap">{cut > 0 ? label.slice(0, cut) : label}</span>
-      {cut > 0 ? <span className="block"> {label.slice(cut + 1)}</span> : null}
+      {cut > 0 ? <span className={cn("block", NARROW_ONLY_SR)}> {label.slice(cut + 1)}</span> : null}
     </>
+  );
+}
+
+/**
+ * On a narrow figure, the date shown, in full and with its kind, and where it falls in the sequence. Hidden from
+ * assistive technology, which reads the same from the pressed date button.
+ */
+function SelectedDateLine({ step, index, count }: { step: CapitalFlowStep; index: number; count: number }) {
+  const tag = STEP_DATE_TAG[step.dateBasis];
+  return (
+    <p
+      aria-hidden="true"
+      className="mt-2 hidden items-baseline justify-between gap-3 font-display text-xs leading-5 @max-md:flex"
+    >
+      <span className="flex min-w-0 flex-wrap gap-x-2">
+        <span className="tnum font-medium text-foreground">{step.dateLabel}</span>
+        {tag ? <span className="text-faint">{tag}</span> : null}
+        {step.latest ? <span className="text-faint">Latest</span> : null}
+      </span>
+      <span className="tnum shrink-0 text-faint">
+        {index + 1} of {count}
+      </span>
+    </p>
   );
 }
 
@@ -193,7 +222,7 @@ export function ReplayControls({
           <button
             type="button"
             onClick={togglePlay}
-            className="inline-flex min-h-9 cursor-pointer items-center gap-2 border border-border-strong bg-plate px-3 font-display text-[0.8125rem] text-foreground hover:border-foreground motion-safe:transition-colors"
+            className="inline-flex min-h-9 cursor-pointer items-center gap-2 @max-md:min-h-11 border border-border-strong bg-plate px-3 font-display text-[0.8125rem] text-foreground hover:border-foreground motion-safe:transition-colors"
           >
             <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false" className="shrink-0">
               {playing ? <path d="M2 1.5 h2 v7 h-2 Z M6 1.5 h2 v7 h-2 Z" fill="currentColor" /> : <path d="M2 1 L9 5 L2 9 Z" fill="currentColor" />}
@@ -235,7 +264,7 @@ export function ReplayControls({
                     move(keys[e.key]);
                   }
                 }}
-                className="group flex w-full cursor-pointer flex-col items-center gap-2 px-1 pb-1 text-center"
+                className="group flex w-full cursor-pointer flex-col items-center gap-2 px-1 pb-1 text-center @max-md:min-h-11"
               >
                 <span className="capflow-step-dot" data-state={i < index ? "past" : i === index ? "current" : "future"} aria-hidden="true" />
                 <span
@@ -250,12 +279,12 @@ export function ReplayControls({
                   </span>
                   <DateLines label={s.dateLabel} />
                   {STEP_DATE_TAG[s.dateBasis] ? (
-                    <span className="block text-faint" aria-hidden="true">
+                    <span className={cn("block text-faint", NARROW_ONLY_SR)} aria-hidden="true">
                       {STEP_DATE_TAG[s.dateBasis]}
                     </span>
                   ) : null}
                   {s.latest ? (
-                    <span className="block text-faint" aria-hidden="true">
+                    <span className={cn("block text-faint", NARROW_ONLY_SR)} aria-hidden="true">
                       Latest
                     </span>
                   ) : null}
@@ -264,6 +293,7 @@ export function ReplayControls({
             </li>
           ))}
         </ol>
+        <SelectedDateLine step={step} index={index} count={steps.length} />
         {ctx.timeline.taggedBases.length ? (
           <p className="mt-2 font-display text-xs leading-5 text-faint">
             {ctx.timeline.taggedBases.map((b) => STEP_DATE_NOTE[b]).join(" ")}

@@ -116,7 +116,7 @@ test("product page remains prerendered, navigable, and filter controls have acce
   const explorer=await fs.readFile("components/projects-explorer.tsx","utf8");
   assert.match(page,/ProjectsExplorer/);
   assert.ok(!page.includes("useSearchParams"));
-  assert.match(explorer,/aria-live="polite"/);
+  assert.match(explorer,/<ResultLiveRegion text=\{announcement\}\/>/);
   assert.match(explorer,/Clear filters/);
   assert.match(explorer,/href=\{\`\/projects\/\$\{p\.id\}\`\}/);
   assert.match(explorer,/governmentCommitmentProviders/);

@@ -2,6 +2,7 @@
 import {useMemo,useState} from "react";
 import {SourceCard} from "@/components/source-ref";
 import {ALL,FilterSelect,SearchBox,useUrlFilters} from "@/components/capital/filter-controls";
+import {ResultLiveRegion,resultCountMessage,useResultAnnouncer} from "@/components/ui/result-announcer";
 import {SOURCE_CONFIDENCE,SOURCE_LANGS,SOURCE_TYPES} from "@/lib/types";
 import {SOURCE_USE_KINDS,SOURCE_USE_LABELS} from "@/lib/source-use-taxonomy";
 import {confidenceLabels,sourceTypeLabels} from "@/lib/labels";
@@ -59,7 +60,14 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
  const active=!!q.trim()||[confidence,sourceType,language,publication,citingKind].some(v=>v!==ALL);
  const clear=()=>{setQ("");setConfidence(ALL);setSourceType(ALL);setLanguage(ALL);
    setPublication(ALL);setCitingKind(ALL)};
- return <div>
+ const {announcement,rootProps,focusFirstFilter}=useResultAnnouncer(
+   JSON.stringify([q.trim(),confidence,sourceType,language,publication,citingKind]),
+   resultCountMessage(visible.length,rows.length,{one:"source",other:"sources"}),
+ );
+ // Clear controls unmount once used; keep the reader in the filters.
+ const clearAndFocus=()=>{focusFirstFilter();clear();};
+ return <div {...rootProps}>
+   <ResultLiveRegion text={announcement}/>
    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
      <div className="sm:col-span-2 lg:col-span-2">
        <SearchBox id="source-query" value={q} onChange={setQ} placeholder="Publisher, title, source ID, language or text…"/>
@@ -71,10 +79,10 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
      <FilterSelect id="source-cited" label="Cited by" value={citingKind} onChange={setCitingKind} options={options.citingKind}/>
    </div>
    <div className="mt-4 flex flex-wrap items-center gap-3">
-     <p className="font-display text-xs text-muted" role="status" aria-live="polite">
+     <p className="font-display text-xs text-muted">
        <span data-testid="sources-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered sources
      </p>
-     {active?<button type="button" onClick={clear}
+     {active?<button type="button" onClick={clearAndFocus}
        className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
        Clear filters</button>:null}
    </div>
@@ -110,7 +118,7 @@ export function SourceRegisterExplorer({rows}:{rows:SourceDirectoryRow[]}){
    </div>
    {!visible.length?<div className="mt-10 border-y border-border py-8 text-sm text-muted">
      No registered source matches these filters.
-     <button type="button" onClick={clear} className="ml-2 link-quiet">Show all sources</button>
+     <button type="button" onClick={clearAndFocus} className="ml-2 link-quiet">Show all sources</button>
    </div>:null}
  </div>;
 }

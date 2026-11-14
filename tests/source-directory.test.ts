@@ -85,7 +85,7 @@ test("source page statically includes full directory with accessible and shareab
  const explorer=await readFile("components/source-register-explorer.tsx","utf8");
  assert.match(page,/SourceRegisterExplorer/);
  assert.ok(!page.includes("useSearchParams"));
- assert.match(explorer,/aria-live="polite"/);
+ assert.match(explorer,/<ResultLiveRegion text=\{announcement\}\/>/);
  assert.match(explorer,/Clear filters/);
  assert.match(explorer,/SourceCard source=\{r.source\}/);
  assert.match(explorer,/directlyCitingRecords/);

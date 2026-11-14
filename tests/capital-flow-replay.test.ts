@@ -267,6 +267,24 @@ test("the date bar tags reported dates and explains the tag; notes and the spoke
   );
 });
 
+test("on a narrow figure the bar keeps every date on one line and writes the selected one out in full", () => {
+  const markup = render(MP);
+  const steps = markup.slice(markup.indexOf('class="capflow-steps'), markup.indexOf("</ol>", markup.indexOf('class="capflow-steps')));
+  // Years and tags leave the rail on a phone but stay in each button's accessible name.
+  assert.equal((steps.match(/@max-md:sr-only/g) ?? []).length, 5 + 3 + 1, "five years, three Reported tags, one Latest");
+  assert.doesNotMatch(steps, /@max-md:hidden/);
+  // Every date and the Replay control are at least 44px tall on a phone.
+  assert.equal((steps.match(/<button[^>]*@max-md:min-h-11/g) ?? []).length, 5);
+  assert.match(markup, /<button[^>]*@max-md:min-h-11[^>]*>[\s\S]*?Replay changes/);
+  // The full-date line: shown only on a narrow figure, hidden from assistive technology, latest date by default.
+  const line = markup.match(/<p aria-hidden="true" class="[^"]*hidden[^"]*@max-md:flex[^"]*">([\s\S]*?)<\/p>/);
+  assert.ok(line, "the selected-date line");
+  // Words, not a middot-joined string (the exhibit's copy rule).
+  assert.equal(textOf(line[1]).trim(), "7 Aug 2026 Reported Latest 5 of 5");
+  // Desktop keeps its layout: no container rule applies above 28rem.
+  assert.match(steps, /class="block whitespace-nowrap">9 Jul<\/span>/);
+});
+
 test("an exhibit whose record shows no change has no replay controls", () => {
   const single = exhibits.find((m) => buildCapitalFlowTimeline(m).steps.length === 1);
   assert.ok(single, "the corpus has an exhibit with a single reading");

@@ -12,6 +12,7 @@ import {
   normalize,
   useUrlFilters,
 } from "@/components/capital/filter-controls";
+import { ResultLiveRegion, resultCountMessage, useResultAnnouncer } from "@/components/ui/result-announcer";
 import {
   capitalSourceLabels,
   financialInstrumentLabels,
@@ -141,9 +142,14 @@ export function CapitalExplorer({
     setQ("");
     [setActor, setInstrument, setRole, setSource, setStatus, setStage, setMaterial].forEach((f) => f(ALL));
   };
+  const { announcement, rootProps, focusFirstFilter } = useResultAnnouncer(
+    JSON.stringify([q.trim(), actor, instrument, role, source, status, stage, material]),
+    resultCountMessage(filtered.length, rows.length, { one: "financial row", other: "financial rows" }),
+  );
 
   return (
-    <div>
+    <div {...rootProps}>
+      <ResultLiveRegion text={announcement} />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
           <SearchBox id="cap-q" value={q} onChange={setQ} placeholder="Recipient, provider, project…" />
@@ -157,10 +163,17 @@ export function CapitalExplorer({
         <FilterSelect id="cap-material" label="Material" value={material} onChange={setMaterial} options={opts.material} />
       </div>
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="font-display text-sm text-muted" aria-live="polite">
+        <p className="font-display text-sm text-muted">
           <span className="tnum text-foreground">{filtered.length}</span> of {rows.length} financial rows
           {active ? (
-            <button type="button" onClick={reset} className="ml-3 text-accent hover:text-accent-strong">
+            <button
+              type="button"
+              onClick={() => {
+                focusFirstFilter();
+                reset();
+              }}
+              className="ml-3 text-accent hover:text-accent-strong"
+            >
               Clear filters
             </button>
           ) : null}
