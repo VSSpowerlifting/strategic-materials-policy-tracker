@@ -1,3 +1,10 @@
+## 2026-11-13: Financing replay names source and check dates (draft PR, not merged)
+
+- Branch `claude/smpt-replay-reported-on`, from `main` at 045f118 (#271 merged). Presentation only: no seed data, status, step date or calculation changed.
+- Every replay step date used to read "Recorded by", including steps set by an undated status entry (23 such entries in the seed), which fall on a source's publication date or an SMPT check date. `financialStatusEvidence` (`lib/capital-control.ts`) now returns the boundary with its kind; `buildCapitalFlowTimeline` gives each step a `dateBasis` and each change a `changeBasis`. The bar tags "Reported" or "Checked" under the date, a note explains the tag, change notes read "Reported on" / "Checked by", and the polite announcement names the kind of date. A status's own date wins when kinds share a date (G7, 31 Oct 2025).
+- Homepage MP exhibit: 9 Jul 2025 and 26 Aug 2025 recorded; 10 Aug 2025, 26 Feb 2026 and 7 Aug 2026 reported. "Checked" appears on four Japanese and US exhibits (for example Santoku, 3 Oct 2026).
+- Open: approve the new copy (listed in `docs/design/MOTION_AND_INTERACTION.md`). The usability pass (filter result announcements, compact mobile date bar) follows on top of this branch.
+
 ## 2026-11-13: Motion design and interaction, phase 1 (draft PR #271, not merged)
 
 - Branch `claude/smpt-motion-design-1ea91e`, from `main` at 9d08bca. Presentation and interaction only: no seed data, market data, calculation, export, API or research text changed. Rules, audit, decisions and backlog: `docs/design/MOTION_AND_INTERACTION.md`. Screenshots: `docs/design/reviews/motion-phase-1/`.

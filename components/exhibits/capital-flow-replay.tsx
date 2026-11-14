@@ -12,7 +12,11 @@ import type { CapitalFlowLegendEntry } from "@/lib/capital-flow";
 import {
   NOT_YET_RECORDED_DESCRIPTION,
   NOT_YET_RECORDED_LABEL,
+  STEP_DATE_NOTE,
+  STEP_DATE_PREFIX,
+  STEP_DATE_TAG,
   type CapitalFlowStep,
+  type StepDateBasis,
 } from "@/lib/capital-flow-timeline";
 import { FlowMark, LegendMark } from "./capital-flow-interactive";
 import { useReplay } from "./capital-flow-replay-state";
@@ -85,12 +89,44 @@ function DateLines({ label }: { label: string }) {
 /** Changes written out under the dates; the rest are marked on the drawing. */
 const MAX_NOTES = 4;
 
-/** What changed at a step, row by row, in the model's own wording. */
-export function changeNotes(step: CapitalFlowStep, headlines: Readonly<Record<string, string>>): string[] {
+/** What changed at a step, row by row, in the model's own wording, with the kind of date each change rests on. */
+export function changeNotes(
+  step: CapitalFlowStep,
+  headlines: Readonly<Record<string, string>>,
+): Array<{ id: string; basis: StepDateBasis; text: string }> {
+  const basis = (id: string) => step.changeBasis[id] ?? "recorded";
   return [
-    ...step.changedFlowIds.map((id) => `${headlines[id] ?? id}: ${step.flows[id].status.text}`),
-    ...step.changedListedIds.map((id) => `${headlines[id] ?? id} (listed, not drawn): ${step.listed[id].status.text}`),
+    ...step.changedFlowIds.map((id) => ({ id, basis: basis(id), text: `${headlines[id] ?? id}: ${step.flows[id].status.text}` })),
+    ...step.changedListedIds.map((id) => ({
+      id,
+      basis: basis(id),
+      text: `${headlines[id] ?? id} (listed, not drawn): ${step.listed[id].status.text}`,
+    })),
   ];
+}
+
+/** The spoken reading of a step. A source or check date is named for what it is. */
+export function stepReading(step: CapitalFlowStep): string {
+  if (step.latest) return `Status as of ${step.asOfLabel}.`;
+  const what =
+    step.dateBasis === "reported"
+      ? ", the publication date of the source reporting the change"
+      : step.dateBasis === "checked"
+        ? ", the date the source was checked"
+        : "";
+  return `Status as recorded by ${step.asOfLabel}${what}.`;
+}
+
+/** The polite announcement for a step: the reading, then what changed, each change dated by its own kind of date. */
+export function stepAnnouncement(step: CapitalFlowStep, index: number, notes: ReturnType<typeof changeNotes>): string {
+  // A change whose date is of another kind than the reading names says so: a reported change among stated ones,
+  // or any reported or checked change at the latest step, whose reading gives the as-of date instead.
+  const named = step.latest ? "recorded" : step.dateBasis;
+  const spoken = notes.map((n) =>
+    n.basis === named ? n.text : `${n.text} (${STEP_DATE_PREFIX[n.basis].toLowerCase()} ${step.dateLabel})`,
+  );
+  const detail = index === 0 ? "The earliest date with a recorded status." : spoken.length ? `Changed: ${spoken.join("; ")}.` : "";
+  return `${stepReading(step)} ${detail}`;
 }
 
 /**
@@ -134,9 +170,7 @@ export function ReplayControls({
   const notes = changeNotes(step, headlines);
   const labelId = `${titleId}-replay`;
 
-  const reading = step.latest ? `Status as of ${step.asOfLabel}.` : `Status as recorded by ${step.asOfLabel}.`;
-  const detail = index === 0 ? "The earliest date with a recorded status." : notes.length ? `Changed: ${notes.join("; ")}.` : "";
-  const announcement = interacted ? `${reading} ${detail}` : "";
+  const announcement = interacted ? stepAnnouncement(step, index, notes) : "";
 
   const move = (to: number) => {
     const target = Math.max(0, Math.min(last, to));
@@ -210,8 +244,16 @@ export function ReplayControls({
                     i === index ? "font-medium text-foreground" : "text-muted group-hover:text-foreground",
                   )}
                 >
-                  <span className="sr-only">{s.latest ? "Latest status, recorded by " : "Status recorded by "}</span>
+                  <span className="sr-only">
+                    {s.latest ? "Latest status, " : "Status "}
+                    {STEP_DATE_PREFIX[s.dateBasis].toLowerCase()}{" "}
+                  </span>
                   <DateLines label={s.dateLabel} />
+                  {STEP_DATE_TAG[s.dateBasis] ? (
+                    <span className="block text-faint" aria-hidden="true">
+                      {STEP_DATE_TAG[s.dateBasis]}
+                    </span>
+                  ) : null}
                   {s.latest ? (
                     <span className="block text-faint" aria-hidden="true">
                       Latest
@@ -222,6 +264,11 @@ export function ReplayControls({
             </li>
           ))}
         </ol>
+        {ctx.timeline.taggedBases.length ? (
+          <p className="mt-2 font-display text-xs leading-5 text-faint">
+            {ctx.timeline.taggedBases.map((b) => STEP_DATE_NOTE[b]).join(" ")}
+          </p>
+        ) : null}
         <p className="sr-only" aria-live="polite">
           {announcement}
         </p>
@@ -235,9 +282,11 @@ export function ReplayControls({
             ) : (
               <ul className="m-0 list-none p-0">
                 {shown.map((n) => (
-                  <li key={n} className="text-foreground">
-                    <span className="text-faint">Recorded by {step.dateLabel}: </span>
-                    {n}
+                  <li key={n.id} className="text-foreground">
+                    <span className="text-faint">
+                      {STEP_DATE_PREFIX[n.basis]} {step.dateLabel}:{" "}
+                    </span>
+                    {n.text}
                   </li>
                 ))}
                 {more > 0 ? (

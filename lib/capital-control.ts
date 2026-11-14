@@ -150,11 +150,29 @@ export function financialStatusEvidenceBoundary(
   c: FinancialCommitment,
   e: FinancialStatusEntry,
 ): string | null {
-  if (e.date !== null) return e.date;
+  return financialStatusEvidence(c, e)?.date ?? null;
+}
+
+/**
+ * What an evidence boundary is: the status's own date (`stated`), the
+ * publication date of the source reporting an undated status
+ * (`source_published`), or an observation date of SMPT's: the financial-review
+ * date (`review_checked`) or the source access date (`source_accessed`).
+ */
+export type FinancialStatusEvidenceBasis = "stated" | "source_published" | "review_checked" | "source_accessed";
+
+/** The boundary of `financialStatusEvidenceBoundary` together with the kind of date it is. */
+export function financialStatusEvidence(
+  c: FinancialCommitment,
+  e: FinancialStatusEntry,
+): { date: string; basis: FinancialStatusEvidenceBasis } | null {
+  if (e.date !== null) return { date: e.date, basis: "stated" };
   const source = getSourceById(e.sourceId);
-  if (source?.datePublished) return source.datePublished;
-  if (c.lifecycleReview?.financialStatusCheckedAt) return c.lifecycleReview.financialStatusCheckedAt;
-  return source?.dateAccessed ?? null;
+  if (source?.datePublished) return { date: source.datePublished, basis: "source_published" };
+  if (c.lifecycleReview?.financialStatusCheckedAt) {
+    return { date: c.lifecycleReview.financialStatusCheckedAt, basis: "review_checked" };
+  }
+  return source?.dateAccessed ? { date: source.dateAccessed, basis: "source_accessed" } : null;
 }
 
 /**
