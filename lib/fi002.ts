@@ -57,6 +57,36 @@ export const fi002Screens = [
   },
 ] as const;
 
+/** The four figures shown beside the required benefit, in display order. Labels only; values stay in the screens. */
+export const fi002ScreenFields = [
+  { key: "capital", label: "Gross capital" },
+  { key: "price", label: "Long-term copper" },
+  { key: "years", label: "Benefit period" },
+  { key: "benefit", label: "Annual after-tax benefit" },
+] as const;
+
+export type Fi002ScreenField = (typeof fi002ScreenFields)[number]["key"];
+
+/** The fields whose shown value differs between two screens, in display order. Compares the published strings. */
+export function changedScreenFields(from: number, to: number): Fi002ScreenField[] {
+  const a = fi002Screens[from];
+  const b = fi002Screens[to];
+  if (!a || !b || from === to) return [];
+  return fi002ScreenFields.filter((f) => a[f.key] !== b[f.key]).map((f) => f.key);
+}
+
+/** The screen-reader note for a switch, e.g. "Changed from Base: benefit period and annual after-tax benefit." */
+export function screenChangeNote(from: number, to: number): string {
+  const changed = changedScreenFields(from, to);
+  const previous = fi002Screens[from];
+  if (!changed.length || !previous) return "";
+  const names = fi002ScreenFields
+    .filter((f) => changed.includes(f.key))
+    .map((f) => f.label.charAt(0).toLowerCase() + f.label.slice(1));
+  const list = names.length === 1 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`;
+  return `Changed from ${previous.name}: ${list}.`;
+}
+
 export const fi002Downloads = [
   {
     file: "report.pdf",

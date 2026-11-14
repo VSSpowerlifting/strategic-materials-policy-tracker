@@ -348,8 +348,56 @@
   margin-top: 0.75rem;
 }
 .publication :global(.fi-assumptions > div) {
+  position: relative;
   padding: 0.6rem 0;
   border-bottom: 1px solid var(--paper-border);
+}
+/*
+ * Exhibit 02: after the reader picks a scenario, each figure whose value differs from the scenario shown
+ * before is marked on its own bottom rule and its label turns malachite. The mark is state, not decoration:
+ * it holds until the next choice and appears without movement under reduced motion. Nothing is marked on
+ * load, and the required benefit is replaced, never counted from one value to the next.
+ */
+.publication :global(.fi-assumptions > [data-changed])::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--paper-accent);
+  transform-origin: left center;
+  pointer-events: none;
+}
+.publication :global(.fi-assumptions > [data-changed] dt) {
+  color: var(--paper-accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fi-rule-draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes fi-value-settle {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+  .publication :global(.fi-assumptions > [data-changed])::after {
+    animation: fi-rule-draw 420ms cubic-bezier(.2, .7, .2, 1) both;
+  }
+  .publication :global(.fi-assumptions > [data-changed] dd),
+  .publication :global(.fi-result[data-settle]) {
+    animation: fi-value-settle 240ms cubic-bezier(.2, .7, .2, 1) both;
+  }
+  .publication :global(.fi-assumptions dt) {
+    transition: color 180ms ease;
+  }
+}
+@media print {
+  .publication :global(.fi-assumptions > [data-changed])::after,
+  .publication :global(.fi-assumptions > [data-changed] dd),
+  .publication :global(.fi-result[data-settle]) {
+    animation: none;
+  }
 }
 .publication dt {
   font-size: 0.7rem;

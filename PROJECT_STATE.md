@@ -1,3 +1,10 @@
+## 2026-11-14: Scenario change marks on the Escondida exhibit (draft PR, not merged)
+
+- Branch `claude/smpt-motion-interaction-c147b0`, from `main` at 1073d69. Presentation and interaction only: no seed data, research text, scenario value or review record changed. Notes: `docs/design/MOTION_AND_INTERACTION.md`, "Scenario change marks".
+- Exhibit 02 on `/research/escondida-copper`: after the reader picks a scenario, each figure that differs from the scenario shown before is marked on its own rule (420ms draw) and its label turns malachite; new values settle in (240ms). Marks hold until the next choice, appear without movement under reduced motion, and never show on load. The result region announces "Changed from {scenario}: {figures}.".
+- Checks (14 November 2026): tests 1,329/1,329 (5 new in `tests/fi002-screen-change.test.ts`); `validate`, `typecheck`, `build` pass; `lint` 0 errors (29 warnings that predate the branch); `editorial:check`: "no published research page or review record changed". Chromium at 1440 and 375: mouse, keyboard arrows, reduced-motion emulation, no layout shift from the marks, no overflow. Recordings in `docs/design/reviews/scenario-change-marks/`. Not tested: real screen readers, real touch devices, Safari, Firefox.
+- Open: approve the screen-reader copy. Audit also logged two layout fixes (capital-flow "Selected" panel placement; Market Monitor picker below the chart) in the backlog.
+
 ## 2026-11-14: Usability pass: filter result counts, phone date bar (draft PR, not merged)
 
 - Branch `claude/smpt-usability-pass-43bc1b`, from `main` at ebc5a10 (#272 merged). Presentation and interaction only: no seed data, status, calculation, export or research text changed. Notes: `docs/design/MOTION_AND_INTERACTION.md`, "Usability pass".
