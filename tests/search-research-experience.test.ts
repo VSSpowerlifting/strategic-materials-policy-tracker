@@ -89,7 +89,7 @@ test("search interface exposes accessible browse shortcuts, full-record counts, 
  assert.match(ui,/data-testid="search-type-shortcut"/);
  assert.match(ui,/allCounts\[type\]/);
  assert.match(ui,/data-testid="search-result-count"/);
- assert.match(ui,/aria-live="polite"/);
+ assert.match(ui,/<ResultLiveRegion text=\{announcement\} \/>/);
  assert.match(ui,/min-h-11/);
  assert.match(ui,/selectClass/);
  assert.match(ui,/Clear all filters/);

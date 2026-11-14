@@ -102,7 +102,7 @@ test("programme page remains server-rendered and exports and accessible filters 
  const explorer=await readFile("components/programmes-explorer.tsx","utf8");
  assert.match(page,/ProgrammesExplorer/);
  assert.ok(!page.includes("useSearchParams"));
- assert.match(explorer,/aria-live="polite"/);
+ assert.match(explorer,/<ResultLiveRegion text=\{announcement\}\/>/);
  assert.match(explorer,/data-testid="programme-record"/);
  assert.match(explorer,/Clear filters/);
  assert.match(page,/\/api\/export\/programmes.csv/);

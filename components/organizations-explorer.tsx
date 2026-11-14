@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Card, RecordList } from "@/components/ui/card";
 import {JurisdictionTag} from "@/components/labels";
 import {ALL,FilterSelect,SearchBox,useUrlFilters} from "@/components/capital/filter-controls";
+import {ResultLiveRegion,resultCountMessage,useResultAnnouncer} from "@/components/ui/result-announcer";
 import {ORGANIZATION_ROLES,NO_GOVERNMENT,UNSTATED_COUNTRY,filterOrganizationDirectory,
  type OrganizationDirectoryRow} from "@/lib/organization-directory";
 import {organizationKindLabels,jurisdictionLabels} from "@/lib/labels";
@@ -66,7 +67,14 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
    [rows,q,kind,country,actor,role]);
  const active=!!q.trim()||[kind,country,actor,role].some(x=>x!==ALL);
  const clear=()=>{setQ("");setKind(ALL);setCountry(ALL);setActor(ALL);setRole(ALL)};
- return <div>
+ const {announcement,rootProps,focusFirstFilter}=useResultAnnouncer(
+   JSON.stringify([q.trim(),kind,country,actor,role]),
+   resultCountMessage(visible.length,rows.length,{one:"organization",other:"organizations"}),
+ );
+ // Clear controls unmount once used; keep the reader in the filters.
+ const clearAndFocus=()=>{focusFirstFilter();clear();};
+ return <div {...rootProps}>
+   <ResultLiveRegion text={announcement}/>
    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
      <div className="sm:col-span-2 lg:col-span-2">
        <SearchBox id="organizations-query" value={q} onChange={setQ}
@@ -78,10 +86,10 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
      <FilterSelect id="organizations-role" label="Recorded relationship" value={role} onChange={setRole} options={options.role}/>
    </div>
    <div className="mt-4 flex flex-wrap items-center gap-3">
-     <p className="font-display text-xs text-muted" role="status" aria-live="polite">
+     <p className="font-display text-xs text-muted">
        <span data-testid="organization-result-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered organizations
      </p>
-     {active?<button type="button" onClick={clear}
+     {active?<button type="button" onClick={clearAndFocus}
        className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
        Clear filters</button>:null}
    </div>
@@ -137,7 +145,7 @@ export function OrganizationsExplorer({rows}:{rows:OrganizationDirectoryRow[]}){
    </div>
    {!visible.length?<Card className="mt-9 p-8 text-center text-sm text-muted">
      No registered organization matches these filters.
-     <button type="button" onClick={clear} className="ml-2 text-accent hover:underline">Show all organizations</button>
+     <button type="button" onClick={clearAndFocus} className="ml-2 text-accent hover:underline">Show all organizations</button>
    </Card>:null}
  </div>;
 }

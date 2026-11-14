@@ -6,6 +6,7 @@ import { EventListItem } from "@/components/event-card";
 import { FilterSelect, SearchBox } from "@/components/capital/filter-controls";
 import { Badge } from "@/components/ui/badge";
 import { RecordList } from "@/components/ui/card";
+import { ResultLiveRegion, resultCountMessage, useResultAnnouncer } from "@/components/ui/result-announcer";
 import {
   framingCategoryShort,
   jurisdictionLabels,
@@ -218,6 +219,11 @@ export function EventsExplorer({
     else window.history.replaceState(window.history.state, "", next);
   }, [query, actor, mechanism, status, material, framing, urlRead]);
 
+  const { announcement, rootProps, focusFirstFilter } = useResultAnnouncer(
+    JSON.stringify([query.trim(), actor, mechanism, status, material, framing]),
+    resultCountMessage(filtered.length, events.length, { one: "event", other: "events" }),
+  );
+
   function reset() {
     setQuery("");
     setActor(ALL);
@@ -228,7 +234,8 @@ export function EventsExplorer({
   }
 
   return (
-    <div>
+    <div {...rootProps}>
+      <ResultLiveRegion text={announcement} />
       <div className="border-b border-border-strong pb-5">
         <div className="grid gap-4 md:grid-cols-3">
           <FilterSelect id="events-material" label="Material" value={material} onChange={setMaterial}
@@ -251,13 +258,17 @@ export function EventsExplorer({
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 font-display text-sm text-faint">
-        <p id="events-count" tabIndex={-1} className="tnum outline-none" aria-live="polite">
+        <p id="events-count" className="tnum">
           {filtered.length} of {events.length} events
         </p>
         {isFiltered ? (
           <button
             type="button"
-            onClick={reset}
+            onClick={() => {
+              // The button unmounts once nothing is filtered; keep the reader in the filters.
+              focusFirstFilter();
+              reset();
+            }}
             className="text-accent hover:text-accent-strong"
           >
             Clear filters
@@ -274,10 +285,11 @@ export function EventsExplorer({
                 <button
                   type="button"
                   onClick={(e) => {
-                    // The removed chip unmounts; hand focus to a neighbour (or the count) so keyboard users keep their place.
+                    // The removed chip unmounts; hand focus to a neighbour (or the first filter) so keyboard users keep their place.
                     const li = e.currentTarget.closest("li");
                     const next = (li?.nextElementSibling ?? li?.previousElementSibling)?.querySelector("button");
-                    (next ?? document.getElementById("events-count"))?.focus();
+                    if (next) next.focus();
+                    else focusFirstFilter();
                     c.clear();
                   }}
                   aria-label={`Remove ${c.kind} filter: ${c.label}`}

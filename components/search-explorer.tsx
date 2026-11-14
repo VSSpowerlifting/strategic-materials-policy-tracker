@@ -14,6 +14,7 @@ import type { JurisdictionCode, Mechanism } from "@/lib/types";
 import { site } from "@/lib/site";
 import { buildSearchReferences, searchReferencesCsv } from "@/lib/search-references";
 import { selectClass } from "@/components/capital/filter-controls";
+import { ResultLiveRegion, resultCountMessage, useResultAnnouncer } from "@/components/ui/result-announcer";
 
 const ALL = "all";
 
@@ -214,8 +215,20 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
     setMechanism(ALL);
   }
 
+  // Without a query or filter the page browses by type, so a cleared search announces the whole index.
+  const { announcement, rootProps } = useResultAnnouncer(
+    JSON.stringify([query.trim(), kind, actor, mechanism]),
+    active ? resultCountMessage(results.length, -1, { one: "result", other: "results" }) : `All ${docs.length} entries`,
+  );
+
+  // The clear controls and the type shortcuts unmount once used; keep the reader in the filters.
+  function focusQuery() {
+    document.getElementById("q")?.focus();
+  }
+
   return (
-    <div>
+    <div {...rootProps}>
+      <ResultLiveRegion text={announcement} />
       <Card className="p-4">
         <div className="grid gap-3 lg:grid-cols-4">
           <div>
@@ -306,7 +319,10 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
           {active ? (
             <button
               type="button"
-              onClick={reset}
+              onClick={() => {
+                focusQuery();
+                reset();
+              }}
               className="inline-flex min-h-11 shrink-0 items-center font-display text-sm font-medium text-accent hover:text-accent-strong"
             >
               Clear
@@ -334,7 +350,12 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
                   key={type}
                   type="button"
                   data-testid="search-type-shortcut" data-site-motion="card"
-                  onClick={() => setKind(type)}
+                  onClick={() => {
+                    // The Type select may sit in a closed "More filters" panel on phones; the search box is always shown.
+                    const select = document.getElementById("kind");
+                    (select && select.offsetParent !== null ? select : document.getElementById("q"))?.focus();
+                    setKind(type);
+                  }}
                   className="flex min-h-[5.5rem] min-w-0 items-start justify-between gap-3 border border-border-strong bg-plate px-4 py-4 text-left transition-colors hover:border-accent hover:bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   <span className="font-display text-base font-semibold leading-6">{KIND_LABEL[type]}</span>
@@ -358,14 +379,14 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
               coded, not that no such measure exists. Actor-filtered searches exclude unassigned
               sources and projects, while the mechanism filter only covers applicable entries.
             </p>
-            <button type="button" onClick={reset}
+            <button type="button" onClick={() => { focusQuery(); reset(); }}
               className="mt-3 inline-flex min-h-11 items-center font-display text-sm font-medium text-accent hover:underline">
               Clear all filters
             </button>
           </Card>
         ) : (
           <>
-            <p role="status" aria-live="polite" data-testid="search-result-count"
+            <p data-testid="search-result-count"
               className="mb-3 font-display text-sm font-semibold text-muted">
               {results.length} {results.length === 1 ? "result" : "results"}
               <span className="ml-2 font-normal text-faint">from {docs.length} published index entries</span>

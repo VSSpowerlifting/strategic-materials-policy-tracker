@@ -4,6 +4,7 @@ import Link from "next/link";
 import {Badge} from "@/components/ui/badge";
 import {Card} from "@/components/ui/card";
 import {ALL,FilterSelect,SearchBox,useUrlFilters} from "@/components/capital/filter-controls";
+import {ResultLiveRegion,resultCountMessage,useResultAnnouncer} from "@/components/ui/result-announcer";
 import {filterProgrammeDirectory,PROGRAMME_EVIDENCE_FILTERS,type ProgrammeDirectoryRow} from "@/lib/programme-directory";
 import {jurisdictionLabels,programmeKindLabels} from "@/lib/labels";
 import {JURISDICTIONS,PROGRAMME_KINDS} from "@/lib/types";
@@ -57,7 +58,14 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
   const list=visible.filter(p=>p.actor===a).sort((x,y)=>lex(x.name,y.name));
   return list.length?[{actor:a,list}]:[];
  }),[visible]);
- return <div>
+ const {announcement,rootProps,focusFirstFilter}=useResultAnnouncer(
+   JSON.stringify([q.trim(),actor,kind,evidence,administrator]),
+   resultCountMessage(visible.length,rows.length,{one:"programme",other:"programmes"}),
+ );
+ // Clear controls unmount once used; keep the reader in the filters.
+ const clearAndFocus=()=>{focusFirstFilter();clear();};
+ return <div {...rootProps}>
+   <ResultLiveRegion text={announcement}/>
   <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
    <div className="sm:col-span-2 lg:col-span-2">
     <SearchBox id="programmes-query" value={q} onChange={setQ} placeholder="Programme, legal authority, administrator or identifier…"/>
@@ -68,10 +76,10 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
    <FilterSelect id="programmes-administrator" label="Administration evidence" value={administrator} onChange={setAdministrator} options={options.administrator}/>
   </div>
   <div className="mt-4 flex flex-wrap items-center gap-3">
-   <p role="status" aria-live="polite" className="font-display text-xs text-muted">
+   <p className="font-display text-xs text-muted">
     <span data-testid="programme-result-count" className="tnum text-foreground">{visible.length}</span> of {rows.length} registered programmes
    </p>
-   {active?<button type="button" onClick={clear} className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
+   {active?<button type="button" onClick={clearAndFocus} className="font-display text-xs text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Clear filters</button>:null}
   </div>
   <p className="mt-2 max-w-4xl text-xs leading-5 text-faint">
    One result is one registered scheme, not one award or a complete government budget.
@@ -116,7 +124,7 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
   </div>
   {!visible.length?<Card className="mt-8 p-8 text-center text-sm text-muted">
    No registered programme matches these filters.
-   <button type="button" onClick={clear} className="ml-2 text-accent hover:underline">Show all programmes</button>
+   <button type="button" onClick={clearAndFocus} className="ml-2 text-accent hover:underline">Show all programmes</button>
   </Card>:null}
  </div>;
 }

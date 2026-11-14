@@ -110,7 +110,7 @@ test("directory page retains export links, static HTML, keyboard links and acces
  const explorer=await readFile("components/organizations-explorer.tsx","utf8");
  assert.match(page,/OrganizationsExplorer/);
  assert.ok(!page.includes("useSearchParams"));
- assert.ok(explorer.includes("aria-live=\"polite\""));
+ assert.match(explorer,/<ResultLiveRegion text=\{announcement\}\/>/);
  assert.match(explorer,/Clear filters/);
  assert.match(explorer,/data-testid="organization-record"/);
  assert.match(page,/\/api\/export\/organizations.csv/);
