@@ -258,8 +258,8 @@ Recordings and screenshots: `docs/design/reviews/scenario-change-marks/`.
 
 ### Open for the maintainer
 
-- Approve the screen-reader copy "Changed from {scenario}: {figures}." (figure names are the existing labels in
-  lower case). No editorial sign-off has been given; the editorial gate passes because `page.tsx` is unchanged.
+- The screen-reader copy "Changed from {scenario}: {figures}." (figure names are the existing labels in lower
+  case) was approved by the maintainer on 14 November 2026.
 - Consider a fixed minimum height for the result block on phones, so the longer Combined stress explanation does
   not push the figures down.
 
