@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: `${site.url}/research/${SLUG}`,
     siteName: site.name,
     title: TITLE,
-    description: "China extends six export-control measures through January 10, 2027. What remains restricted, and why the next deadlines matter.",
+    description: "China continues the suspension of six October 2025 export-control announcements through January 10, 2027, while other licensing rules remain in effect.",
     images: [{
       url: `/research/${SLUG}/opengraph-image`,
       width: 1200,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: TITLE,
-    description: "China extends six export-control measures through January 10, 2027.",
+    description: "China continues the suspension of six export-control announcements through January 10, 2027.",
     images: [`/research/${SLUG}/opengraph-image`],
   },
 };
@@ -175,10 +175,10 @@ export default function ChinaSuspensionExtensionPage() {
             {TITLE}
           </h1>
           <p className="standfirst mt-6 max-w-[38rem]">
-            On November 9, one day before a year-long suspension was set to end, China extended the pause
-            on six export-control announcements through January 10, 2027. The decision covers rules on
-            rare-earth equipment and technology, battery materials and industrial diamonds, while other
-            export restrictions remain on separate schedules.
+            On November 9, 2026, China extended the suspension of six October 2025 export-control
+            announcements through January 10, 2027. The affected measures cover rare-earth equipment
+            and technology, battery materials and industrial diamonds. Earlier rare-earth licensing
+            rules and a separate U.S.-directed restriction remain subject to their own provisions.
           </p>
           <p className="mt-6 font-display text-sm text-muted">
             By{" "}
@@ -203,55 +203,53 @@ export default function ChinaSuspensionExtensionPage() {
             <article className="min-w-0 max-w-4xl">
               <section aria-labelledby="operative-text" className={sectionClass}>
                 <h2 id="operative-text" className={h2}>
-                  China extends the pause before the November 10 deadline
+                  China continues the six-announcement suspension through January 10
                 </h2>
                 <p className={p}>
-                  China was approaching a deadline that mattered to businesses buying critical minerals
-                  and the equipment used to process them. A suspension covering six export-control
-                  announcements was set to end on November 10, 2026. On November 9, Beijing extended
-                  it for another 61 days.
+                  With the previous suspension due to expire on November 10, 2026, China&apos;s Ministry of
+                  Commerce and General Administration of Customs extended the pause on six export-control
+                  announcements for a further 61 days. The decision, issued on November 9, keeps the
+                  specified measures suspended through January 10, 2027.
                 </p>
                 <p className={p}>
-                  The Ministry of Commerce (MOFCOM) and General Administration of Customs published{" "}
-                  <Src href={mofcom.no58of2026}>Announcement No. 58 of 2026</Src>, keeping four joint
-                  announcements (Nos. 55–58 of 2025) and two MOFCOM announcements (Nos. 61–62 of 2025)
-                  suspended from November 11, 2026, through January 10, 2027. Their earlier suspension,
-                  under <Src href={mofcom.no70of2025}>Announcement No. 70 of 2025</Src>, lasts through
-                  November 10. The two periods are consecutive, with no gap.
+                  Issued jointly by the two agencies,{" "}
+                  <Src href={mofcom.no58of2026}>Announcement No. 58 of 2026</Src> covers four joint
+                  announcements (Nos. 55–58 of 2025) and two Ministry of Commerce (MOFCOM)
+                  announcements (Nos. 61 and 62 of 2025). The preceding suspension, established by{" "}
+                  <Src href={mofcom.no70of2025}>Announcement No. 70 of 2025</Src>, runs through
+                  November 10, 2026. The new period begins November 11, leaving no interruption
+                  between the two.
                 </p>
                 <p className={p}>
-                  The single-sentence announcement uses the phrase{" "}
-                  <span lang="zh-Hans">继续暂停实施</span>, meaning the measures will “continue to be
-                  suspended from implementation.” The six regulations remain on the books, with
-                  their implementation suspended through January 10, 2027. The notice records the
-                  approved extension and specifies its end date.
+                  In a single operative sentence, the notice uses the phrase{" "}
+                  <span lang="zh-Hans">继续暂停实施</span> to continue the suspension of implementation.
+                  The underlying announcements remain intact, with January 10, 2027 specified
+                  as the final day of the extended period.
                 </p>
               </section>
 
               <section aria-labelledby="connection" className={sectionClass}>
                 <h2 id="connection" className={h2}>
-                  Why November 10 had become the deadline
+                  The October 2025 measures and the first suspension
                 </h2>
                 <p className={p}>
-                  The six announcements were originally issued on October 9, 2025, during a period
-                  of tightening trade restrictions between Washington and Beijing. After subsequent
-                  U.S.–China talks,{" "}
-                  <Src href={mofcom.qa30Oct2025}>MOFCOM described an arrangement on October 30</Src>:
-                  the United States would suspend its “50% rule” for one year, while China would
-                  suspend the October 9 export-control measures for the same period and work out
-                  further details. The U.S. rule had extended certain export restrictions to
-                  companies owned at least 50% by listed entities, as the{" "}
-                  <Src agency="U.S. BIS" href={mofcom.bisAffiliates2025}>U.S. Commerce Department explained</Src>.
-                  The spokesperson’s statement describes the 2025 arrangement. The U.S. rule’s
-                  current status depends on subsequent U.S. measures.
+                  Published amid an exchange of trade restrictions in October 2025, the six announcements
+                  became part of an arrangement reached after subsequent U.S.–China consultations.
+                  In an <Src href={mofcom.qa30Oct2025}>October 30 statement</Src>, MOFCOM said that China
+                  would suspend the October measures for one year while the United States would
+                  suspend its “50% rule” for the same period. As the{" "}
+                  <Src agency="U.S. BIS" href={mofcom.bisAffiliates2025}>U.S. Commerce Department explained</Src>,
+                  that rule extended certain export restrictions to companies owned at least 50%
+                  by listed entities. MOFCOM&apos;s statement describes the 2025 arrangement; the
+                  U.S. rule&apos;s subsequent legal position depends on later U.S. measures.
                 </p>
                 <p className={p}>
-                  China gave its part of the arrangement legal effect on November 7, 2025, when{" "}
-                  <Src href={mofcom.no70of2025}>Announcement No. 70</Src> suspended the six measures
-                  through November 10, 2026. The November 9, 2026 notice extends that period
-                  through January 10, 2027. The October 2025 remarks provide the published
-                  background for the first suspension; the new instrument establishes the
-                  extension’s dates.
+                  On November 7, 2025, China implemented its side of the arrangement through{" "}
+                  <Src href={mofcom.no70of2025}>Announcement No. 70</Src>, setting November 10, 2026
+                  as the last day of the original suspension. The November 9, 2026 notice continues
+                  that suspension through January 10, 2027. Although the October consultations
+                  provide the background to the initial pause, the new notice gives no explanation
+                  for the additional period.
                 </p>
                 <div className="mt-6 overflow-x-auto border-y border-paper-border">
                   <table className="w-full min-w-[480px] border-collapse text-left font-display text-sm leading-6">
@@ -278,22 +276,22 @@ export default function ChinaSuspensionExtensionPage() {
 
               <section aria-labelledby="scope" className={sectionClass}>
                 <h2 id="scope" className={h2}>
-                  Which measures are on hold, and which still apply?
+                  The provisions covered by the extension
                 </h2>
                 <p className={p}>
-                  The six announcements touch several different supply chains. One covers specified
-                  rare-earth production equipment and processing materials, including ores, flotation
-                  reagents and extractants. Another concerns rare-earth technologies and technical
-                  support. Others address particular medium and heavy rare-earth elements, high-energy-density
-                  lithium-ion batteries, artificial-graphite anodes and “superhard materials,”
-                  including industrial synthetic diamonds and equipment used to manufacture or work
-                  with them.
+                  The six announcements cover specified rare-earth separation and processing equipment,
+                  ores and chemicals used in mineral processing, five medium and heavy rare-earth
+                  elements, and transfers of rare-earth technology and technical assistance.
+                  They also address high-energy-density lithium-ion batteries, artificial-graphite
+                  anodes and superhard materials, including synthetic-diamond micropowder, wire
+                  saws and grinding wheels.
                 </p>
                 <p className={p}>
-                  Their legal histories differ. Announcements Nos. 55–58 of 2025 were scheduled to
-                  begin on November 8, 2025, but were suspended the day before. Parts of Nos. 61 and
-                  62 had already become operative on October 9. The original dates matter when
-                  assessing what a later change to the suspension would mean for a particular rule.
+                  Their original commencement dates vary. Announcements Nos. 55–58 of 2025 were
+                  scheduled to take effect on November 8, 2025, but were suspended the day before.
+                  Portions of Nos. 61 and 62 had already taken effect on October 9, while other
+                  parts of No. 61 were scheduled to begin later. Those differences remain relevant
+                  to assessing the position of each provision after the suspension expires.
                 </p>
                 <div className="mt-6 overflow-x-auto border-y border-paper-border">
                   <table className="w-full min-w-[720px] border-collapse text-left font-display text-sm leading-6">
@@ -332,74 +330,81 @@ export default function ChinaSuspensionExtensionPage() {
                   <Src href={mofcom.no62of2025}>No. 62</Src>.
                 </p>
                 <p className={p}>
-                  China’s earlier rare-earth export controls from April 2025 are separate.{" "}
-                  <Src href={mofcom.no18of2025}>Announcement No. 18 of 2025</Src> covers samarium,
-                  gadolinium, terbium, dysprosium, lutetium, scandium and yttrium. The suspension
-                  notices name the six October measures, while the April licensing requirements
-                  remain separately operative as of the November 9 research cutoff. Buyers of
-                  those seven elements still need to assess the April requirements.
+                  Separate from the October package,{" "}
+                  <Src href={mofcom.no18of2025}>Announcement No. 18 of 2025</Src> imposed export
+                  licensing requirements on samarium, gadolinium, terbium, dysprosium, lutetium,
+                  scandium and yttrium. The two suspension notices cover the six October
+                  announcements, leaving the April licensing regime operative as of the
+                  November 9 research cutoff. Buyers of those seven elements must therefore
+                  continue to assess their orders under the April rules.
                 </p>
                 <p className={p}>
-                  A further suspension has its own clock. Under{" "}
-                  <Src href={mofcom.no72of2025}>Announcement No. 72 of 2025</Src>, paragraph 2 of{" "}
-                  <Src href={mofcom.no46of2024}>Announcement No. 46 of 2024</Src> is suspended
-                  through November 27, 2026. That paragraph says licences are, in principle, not
-                  granted for specified U.S.-bound dual-use exports of gallium, germanium, antimony
-                  and superhard materials, and calls for stricter end-user and end-use reviews for
-                  graphite. Superhard materials appear under both the U.S.-directed provision and
-                  the separate 2025 controls, even though the suspension deadlines differ.
+                  China&apos;s separate restrictions on certain exports to the United States have
+                  an earlier suspension deadline.{" "}
+                  <Src href={mofcom.no72of2025}>Announcement No. 72 of 2025</Src> suspends
+                  paragraph 2 of <Src href={mofcom.no46of2024}>Announcement No. 46 of 2024</Src>
+                  through November 27, 2026. That provision says licences are, in principle,
+                  not granted for specified U.S.-bound dual-use exports of gallium, germanium,
+                  antimony and superhard materials, and calls for stricter end-user and end-use
+                  reviews for graphite. Because superhard materials are also addressed by the
+                  October 2025 package, the applicable provision and destination matter
+                  when assessing an export.
                 </p>
               </section>
 
               <section aria-labelledby="commercial" className={sectionClass}>
                 <h2 id="commercial" className={h2}>
-                  What the extension means for procurement and new projects
+                  Procurement and project contracts extending into 2027
                 </h2>
                 <p className={p}>
-                  Consider a hypothetical company preparing to build a rare-earth processing plant. Its purchasing
-                  plan might include equipment from China, processing chemicals such as extractants,
-                  and technical support for installation or production. Announcements Nos. 56 and
-                  62 of 2025 cover specified items in those categories. If the company is planning
-                  orders or contracts extending beyond January 10, 2027, it has to consider whether
-                  the relevant export would fall under a licensing requirement after the suspension
-                  period. The requirements turn on the specific equipment, materials or services
-                  involved and the provisions covering them.
+                  Consider a hypothetical company preparing to build a rare-earth processing plant.
+                  It might order separation equipment and chemical extractants from China while
+                  negotiating technical assistance for installation and commissioning.
+                  Announcements Nos. 56 and 62 of 2025 cover specified products and services in
+                  those categories. For contracts extending beyond January 10, 2027, the company
+                  would need to identify the items and services involved, determine whether
+                  a licensing provision covers them, and account for the possibility that
+                  the suspension will have ended before delivery or technical work begins.
                 </p>
                 <p className={p}>
-                  The overseas-related provisions of Announcement No. 61 of 2025 introduce a different
-                  kind of complexity. If implemented, they would require Chinese licences for certain goods exported
-                  from outside China when specified Chinese-origin rare-earth inputs reach at least
-                  0.1% of the goods’ value, or when certain Chinese-origin rare-earth technology
-                  was used to make them. The announcement also includes rules concerning Chinese-origin
-                  items, end users and end uses, including provisions addressing foreign military
-                  users and advanced chips or AI applications with potential military use.
+                  Announcement No. 61 of 2025 extends the potential compliance questions to some
+                  transactions outside China. If implemented, its provisions would require
+                  Chinese licences for certain goods exported from other countries when specified
+                  Chinese-origin rare-earth inputs account for at least 0.1% of the goods&apos;
+                  value, or when certain Chinese-origin rare-earth technology was used to make
+                  them. The announcement also addresses Chinese-origin items, foreign military
+                  end users, and advanced chips or AI applications with potential military uses.
                 </p>
                 <p className={p}>
-                  For a buyer, those tests turn on the product’s composition, production process,
-                  relevant annexes and intended use. The extension gives firms more time under the
-                  existing suspension. For an individual shipment or contract, those facts remain
-                  necessary to establish which provisions would apply after the pause ends.
+                  For manufacturers purchasing from suppliers in several countries, the relevant
+                  information may include an item&apos;s composition, its Chinese-origin content,
+                  the technology used in production, the recipient and the intended use.
+                  Establishing the licensing position of any particular shipment after
+                  January 10 would require those facts, the relevant annexes and whatever
+                  legal instruments are then in effect.
                 </p>
               </section>
 
               <section aria-labelledby="uncertainty" className="py-10">
                 <h2 id="uncertainty" className={h2}>
-                  The regulatory deadlines after November 9
+                  The November 27 and January 10 deadlines
                 </h2>
                 <p className={p}>
-                  November 27, 2026, marks the scheduled end of the separate suspension affecting
-                  the U.S.-directed 2024 provision. January 10, 2027, is the final day of the
-                  continued suspension of the six October 2025 announcements. The April 2025
-                  rare-earth controls continue on their own regulatory track.
+                  Under Announcement No. 72 of 2025, the suspension of the specified
+                  U.S.-directed restrictions ends on November 27, 2026. The six October 2025
+                  announcements remain suspended through January 10, 2027, while the April
+                  2025 rare-earth licensing requirements continue to operate. A shipment
+                  involving superhard materials, for example, may require consideration of
+                  more than one provision, depending on the item and destination.
                 </p>
                 <p className={p}>
-                  As of the November 9 research cutoff, China had published no instrument extending
-                  the six-measure suspension beyond January 10. The underlying announcements have
-                  different commencement provisions, including the November 8, 2025 start originally
-                  scheduled for Nos. 55–58, the December 1, 2025 start for No. 61 items 1(1) and
-                  1(2), and the October 9, 2025 effective date of No. 62. Future decisions will
-                  need to be read against those original terms. The January 10 deadline applies
-                  specifically to the six named October 2025 announcements.
+                  At the November 9, 2026 research cutoff, the Chinese authorities had published
+                  no further extension beyond January 10, 2027. Some of the six announcements
+                  were suspended before their scheduled commencement, whereas other provisions
+                  had already operated in October 2025. For procurement agreements extending
+                  into 2027, the original conditions of the relevant announcement and any
+                  subsequent notice will determine which requirements apply when the
+                  transaction takes place.
                 </p>
               </section>
             </article>
