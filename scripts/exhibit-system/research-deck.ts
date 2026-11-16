@@ -23,6 +23,7 @@ import { arr, ContractError, obj, oneOf, optStr, str, strList } from "./contract
 import { REPO, SYSTEM_DIR } from "./paths";
 import { SYNTHETIC_NOTICE } from "./primitives";
 import { reviewDeck } from "./deck-review";
+import { parseDeckLineage, type DeckLineage } from "./lineage";
 import { RENDERERS } from "./renderers";
 import type { Fixture } from "./types";
 import type { HeroCover } from "./build-gallery";
@@ -43,6 +44,8 @@ export interface ResearchDeck {
   cover?: HeroCover;
   slides: ResearchSlide[];
   evidence: { id: string; url: string; title: string; locator: string }[];
+  /** Opt-in versioned claim/model/figure provenance; legacy specs remain valid. */
+  lineage?: DeckLineage;
 }
 
 function inside(dir: string, file: string): boolean {
@@ -128,6 +131,13 @@ export function parseResearchDeck(raw: unknown, file: string, baseDir = REPO): R
     plain_frame: plainFrame,
     evidence,
     slides,
+    ...(o.lineage === undefined ? {} : {
+      lineage: parseDeckLineage(o.lineage, {
+        baseDir,
+        evidence,
+        slides: slides.map((slide) => ({ evidence_refs: slide.fixture.evidence_refs })),
+      }),
+    }),
   };
 }
 
@@ -226,6 +236,7 @@ export async function renderResearchDeck(specFile: string, outFile: string, qcOv
     publication_authorization: "not-granted",
     composition_findings: review.findings,
     evidence: deck.evidence,
+    ...(deck.lineage ? { lineage: deck.lineage } : {}),
     slides: slides.map((s) => {
       const src = deck.slides[s.slide - 2];
       return src ? { ...s, visual_text: src.fixture.visual_text, evidence_refs: src.fixture.evidence_refs } : s;
