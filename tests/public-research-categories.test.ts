@@ -65,6 +65,9 @@ test("China article has a publication-specific LinkedIn/Open Graph image", () =>
   assert.match(card, /January 10, 2027/);
   assert.match(card, /Suspension of Six/);
   assert.match(card, /Export-Control/);
+  // The publication keeps its own headline while inheriting the main site's visual system.
   assert.match(card, /landscapeSvg/);
+  assert.match(card, /PLASTER/);
   assert.match(card, /MALACHITE/);
+  assert.match(card, /POLICY \/ CAPITAL \/ INDUSTRY/);
 });
