@@ -8,7 +8,27 @@ import { parseDeckLineage, type LineageContext } from "../scripts/exhibit-system
 import { parseResearchDeck, renderResearchDeck } from "../scripts/exhibit-system/research-deck";
 import { loadFixture } from "../scripts/exhibit-system/registry";
 
-type Document = Record<string, any>;
+type Document = {
+  version: number;
+  research_cutoff: string;
+  sources: Array<{ id: string; published_at: string; as_of?: string }>;
+  models: Array<{
+    id: string; file: string; sha256: string; as_of: string;
+    outputs: Array<{ id: string; locator: string; value: string; unit: string; basis: string; status: string; as_of: string }>;
+  }>;
+  claims: Array<{
+    id: string; text: string; evidence_class: string; evidence_refs: string[];
+    model_output_refs: string[]; [extra: string]: unknown;
+  }>;
+  slides: Array<{
+    slide: number; claim_ids: string[];
+    figures: Array<{
+      id: string; value: string; unit: string; basis: string; status: string;
+      as_of: string; data_pointer: string; evidence_refs: string[]; model_output_ref?: string;
+    }>;
+    relations: Array<{ kind: string; figure_ids: string[]; total_id?: string }>;
+  }>;
+};
 const copy = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 function sample() {
   const dir = mkdtempSync(join(tmpdir(), "smpt-lineage-test-"));
