@@ -204,8 +204,8 @@ test("research parser integrates opt-in lineage and manifests preserve draft-onl
   const s = sample();
   try {
     const fixture = loadFixture("dumbbell");
-    const data = copy(fixture.data) as { items: { from: number }[] };
-    (data as { unit?: string }).unit = "USD million";
+    const data = copy(fixture.data) as { unit: string; items: { from: number }[] };
+    data.unit = "USD million";
     data.items[0].from = 12.5;
     data.items[1].from = 10;
     data.items[2].from = 2.5;
