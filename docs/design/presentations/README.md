@@ -9,6 +9,10 @@
 
 SMPT publishes independently authored, source-linked industrial-policy and financial research. This system translates the analysis into readable, defensible, editable PowerPoint presentations. It borrows **principles** of disciplined consulting communication, not another firm's branding or proprietary slide designs.
 
+## Deck-production orchestration
+
+The repo-local **SMPT Deck Architect** skill coordinates engagement framing, evidence, financial analysis, the editable exhibit engine and slide-level production QA. Claude Code uses [the canonical skill](../../../.claude/skills/smpt-deck-architect/SKILL.md); Codex uses [its repository entry point](../../../.agents/skills/smpt-deck-architect/SKILL.md), which loads that same workflow. For the next engineering steps, see the [deck engine upgrade roadmap](DECK_ENGINE_UPGRADE_ROADMAP.md). This documentation/skill addition does not upgrade renderers or authorize publication.
+
 ## Read in this order
 
 0. [Publication Design System](../PUBLICATION_DESIGN_SYSTEM.md) — how the shared tokens apply to decks, memos, covers, social images and exhibits, and which generators are migrated.
