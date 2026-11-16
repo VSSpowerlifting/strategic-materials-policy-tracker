@@ -135,7 +135,7 @@ export function parseResearchDeck(raw: unknown, file: string, baseDir = REPO): R
       lineage: parseDeckLineage(o.lineage, {
         baseDir,
         evidence,
-        slides: slides.map((slide) => ({ evidence_refs: slide.fixture.evidence_refs })),
+        slides: slides.map((slide) => ({ evidence_refs: slide.fixture.evidence_refs, data: slide.fixture.data })),
       }),
     }),
   };
