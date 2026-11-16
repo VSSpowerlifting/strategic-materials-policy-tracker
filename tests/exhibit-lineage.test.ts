@@ -18,7 +18,7 @@ function sample() {
   const context: LineageContext = {
     baseDir: dir,
     evidence: [{ id: "E1" }, { id: "E2" }],
-    slides: [{ evidence_refs: ["E1", "E2"] }],
+    slides: [{ evidence_refs: ["E1", "E2"], data: { f1: 10, f2: 2.5, f3: 12.5 } }],
   };
   const details = { unit: "USD million", basis: "drawn-debt", status: "drawn", as_of: "2026-11-09" };
   const document: Document = {
@@ -32,9 +32,9 @@ function sample() {
     slides: [{
       slide: 2, claim_ids: ["C1"],
       figures: [
-        { id: "F1", value: "10.0", ...details, evidence_refs: ["E1"] },
-        { id: "F2", value: "2.50", ...details, evidence_refs: ["E1"] },
-        { id: "F3", value: "12.5", ...details, evidence_refs: ["E1", "E2"], model_output_ref: "M1/O1" },
+        { id: "F1", value: "10.0", ...details, data_pointer: "/f1", evidence_refs: ["E1"] },
+        { id: "F2", value: "2.50", ...details, data_pointer: "/f2", evidence_refs: ["E1"] },
+        { id: "F3", value: "12.5", ...details, data_pointer: "/f3", evidence_refs: ["E1", "E2"], model_output_ref: "M1/O1" },
       ],
       relations: [{ kind: "sum", figure_ids: ["F1", "F2"], total_id: "F3" }],
     }],
@@ -122,7 +122,7 @@ test("pinned model file existence, path confinement and hash are enforced", () =
 });
 
 test("model output lineage must match displayed numerical value, status, currency basis and date", () => {
-  rejectsChange((d) => { d.slides[0].figures[2].value = "12.6"; }, /disagrees with pinned model output/);
+  rejectsChange((d) => { d.models[0].outputs[0].value = "12.6"; }, /disagrees with pinned model output/);
   rejectsChange((d) => { d.slides[0].figures[2].status = "committed"; }, /disagrees with pinned model output/);
   rejectsChange((d) => { d.slides[0].figures[2].unit = "EUR million"; }, /disagrees with pinned model output/);
   rejectsChange((d) => { d.slides[0].figures[2].as_of = "2026-11-08"; }, /disagrees with pinned model output/);
@@ -134,8 +134,25 @@ test("additive totals reject mixed units, financing stages, measurement bases, d
   rejectsChange((d) => { d.slides[0].figures[0].status = "committed"; }, /incompatible status/);
   rejectsChange((d) => { d.slides[0].figures[0].basis = "gross-capacity"; }, /incompatible basis/);
   rejectsChange((d) => { d.slides[0].figures[0].as_of = "2026-11-08"; }, /incompatible as_of/);
-  rejectsChange((d) => { d.slides[0].figures[0].value = "10.01"; }, /does not reconcile/);
+  rejectsChange((d) => { d.slides[0].figures[0].value = "10.01"; }, /disagrees with renderer data/);
+  useSample((s) => {
+    const d = copy(s.document);
+    d.slides[0].figures[0].value = "10.01";
+    const ctx = { ...s.context, slides: [{ evidence_refs: ["E1", "E2"], data: { f1: 10.01, f2: 2.5, f3: 12.5 } }] };
+    assert.throws(() => parseDeckLineage(d, ctx), /does not reconcile/);
+  });
   rejectsChange((d) => { d.slides[0].relations[0].figure_ids.push("F1"); }, /duplicate identifier/);
+});
+
+test("lineage figures must point to matching numeric data in the actual renderer input", () => {
+  rejectsChange((d) => { d.slides[0].figures[0].data_pointer = "/missing"; }, /absent renderer data field/);
+  rejectsChange((d) => { d.slides[0].figures[0].data_pointer = "/f2"; }, /disagrees with renderer data/);
+  rejectsChange((d) => { d.slides[0].figures[0].data_pointer = "/f1/~2"; }, /valid non-root JSON Pointer/);
+  useSample((s) => {
+    const d = copy(s.document);
+    const ctx = { ...s.context, slides: [{ evidence_refs: ["E1", "E2"], data: { f1: "10.00", f2: "2.50", f3: "12.500" } }] };
+    assert.equal(parseDeckLineage(d, ctx).slides.length, 1, "numeric strings are acceptable when exact");
+  });
 });
 
 test("ordinary comparisons require a common unit/basis; parallel panels disclose non-comparable bases", () => {
@@ -159,6 +176,14 @@ test("research parser integrates opt-in lineage and manifests preserve draft-onl
   const s = sample();
   try {
     const fixture = loadFixture("dumbbell");
+    const data = copy(fixture.data) as { items: { from: number }[] };
+    data.items[0].from = 12.5;
+    data.items[1].from = 10;
+    data.items[2].from = 2.5;
+    const lineage = copy(s.document);
+    lineage.slides[0].figures[0].data_pointer = "/items/1/from";
+    lineage.slides[0].figures[1].data_pointer = "/items/2/from";
+    lineage.slides[0].figures[2].data_pointer = "/items/0/from";
     const doc = {
       classification: "research",
       title: "Opt-in lineage integration contract",
@@ -168,9 +193,9 @@ test("research parser integrates opt-in lineage and manifests preserve draft-onl
       ],
       slides: [{ pattern: "dumbbell", label: "A", exhibit: {
         title: fixture.title, subtitle: fixture.subtitle, annotation: fixture.annotation,
-        source: "Test-only evidence, Table 1", evidence_refs: ["E1", "E2"], data: fixture.data,
+        source: "Test-only evidence, Table 1", evidence_refs: ["E1", "E2"], data,
       } }],
-      lineage: s.document,
+      lineage,
     };
     const parsed = parseResearchDeck(doc, "lineage-test", s.dir);
     assert.equal(parsed.lineage?.slides[0].claim_ids[0], "C1");
@@ -181,7 +206,7 @@ test("research parser integrates opt-in lineage and manifests preserve draft-onl
     const record = JSON.parse(readFileSync(manifest, "utf8"));
     assert.equal(record.review_gates, "pending-human-review");
     assert.equal(record.publication_authorization, "not-granted");
-    assert.equal(record.lineage.models[0].sha256, s.document.models[0].sha256);
+    assert.equal(record.lineage.models[0].sha256, lineage.models[0].sha256);
     assert.equal(record.lineage.slides[0].figures[2].value, "12.5");
   } finally {
     rmSync(s.dir, { recursive: true, force: true });
