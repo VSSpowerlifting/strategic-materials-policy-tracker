@@ -48,6 +48,8 @@ export interface LineageClaim {
 }
 export interface LineageFigure extends LineageMeasure {
   id: string;
+  /** JSON Pointer into the actual exhibit.data passed to the renderer. */
+  data_pointer: string;
   evidence_refs: string[];
   model_output_ref?: string;
 }
@@ -73,7 +75,7 @@ export interface DeckLineage {
 export interface LineageContext {
   baseDir: string;
   evidence: readonly { id: string }[];
-  slides: readonly { evidence_refs?: string[] }[];
+  slides: readonly { evidence_refs?: string[]; data: unknown }[];
 }
 
 const ID = /^[A-Za-z][A-Za-z0-9_-]*$/;
@@ -159,6 +161,34 @@ function sumEquals(values: readonly string[], total: string): boolean {
   const places = Math.max(...parsed.map(([, p]) => p));
   const scaled = parsed.map(([n, p]) => n * power(places - p));
   return scaled.slice(0, -1).reduce((a, b) => a + b, BigInt(0)) === scaled[scaled.length - 1];
+}
+
+// Resolve only own data properties; all figure values must bind to the actual exhibit input.
+function resolveDataPointer(data: unknown, pointer: string, location: string): unknown {
+  if (!pointer.startsWith("/") || pointer === "/" || /~(?![01])/.test(pointer)) {
+    throw new LineageError(location + ": expected a valid non-root JSON Pointer");
+  }
+  let current: unknown = data;
+  for (const part of pointer.slice(1).split("/")) {
+    const key = part.replace(/~1/g, "/").replace(/~0/g, "~");
+    if (Array.isArray(current)) {
+      if (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= current.length) {
+        throw new LineageError(location + ": missing array element " + key);
+      }
+      current = current[Number(key)];
+    } else if (current && typeof current === "object" && Object.prototype.hasOwnProperty.call(current, key)) {
+      current = (current as Record<string, unknown>)[key];
+    } else {
+      throw new LineageError(location + ": absent renderer data field " + key);
+    }
+  }
+  return current;
+}
+function rendererValue(raw: unknown, location: string): string {
+  if (typeof raw === "number" && Number.isFinite(raw)) {
+    return decimal(String(raw), location);
+  }
+  return decimal(raw, location);
 }
 
 export function parseDeckLineage(raw: unknown, ctx: LineageContext): DeckLineage {
@@ -256,11 +286,16 @@ export function parseDeckLineage(raw: unknown, ctx: LineageContext): DeckLineage
     }
     const figures = array(r.figures ?? [], p + ".figures").map((v, j): LineageFigure => {
       const q = p + ".figures[" + j + "]";
-      const f = object(v, q, ["id", "value", "unit", "basis", "status", "as_of", "evidence_refs", "model_output_ref"]);
+      const f = object(v, q, ["id", "value", "unit", "basis", "status", "as_of", "data_pointer", "evidence_refs", "model_output_ref"]);
       const evidence_refs = ids(f.evidence_refs, q + ".evidence_refs");
       requireRefs(evidence_refs, permitted, q + ".evidence_refs");
+      const data_pointer = string(f.data_pointer, q + ".data_pointer");
+      const valueInRenderer = rendererValue(resolveDataPointer(ctx.slides[i].data, data_pointer, q + ".data_pointer"), q + ".data_pointer");
+      if (!sumEquals([decimal(f.value, q + ".value")], valueInRenderer)) {
+        throw new LineageError(q + ": declared figure value disagrees with renderer data at " + data_pointer);
+      }
       const outputRef = f.model_output_ref === undefined ? undefined : string(f.model_output_ref, q + ".model_output_ref");
-      const result = { id: id(f.id, q + ".id"), ...measure(f, q, cutoff), evidence_refs, ...(outputRef ? { model_output_ref: outputRef } : {}) };
+      const result = { id: id(f.id, q + ".id"), ...measure(f, q, cutoff), data_pointer, evidence_refs, ...(outputRef ? { model_output_ref: outputRef } : {}) };
       if (outputRef) {
         const output = outputs.get(outputRef);
         if (!output) throw new LineageError(q + ".model_output_ref: unresolved reference " + outputRef);
@@ -309,6 +344,10 @@ export function parseDeckLineage(raw: unknown, ctx: LineageContext): DeckLineage
     return { slide: slide as number, claim_ids, figures, relations };
   });
   if (slides.length !== ctx.slides.length) throw new LineageError("lineage.slides: one lineage record is required per analytical slide");
+  const usedClaims = new Set(slides.flatMap((slide) => slide.claim_ids));
+  for (const claim of claims) {
+    if (!usedClaims.has(claim.id)) throw new LineageError("lineage.claims: unused claim " + claim.id);
+  }
   return { version: 1, research_cutoff: cutoff, sources, models, claims, slides };
 }
 function idsForOutputs(x: unknown, p: string): string[] {
