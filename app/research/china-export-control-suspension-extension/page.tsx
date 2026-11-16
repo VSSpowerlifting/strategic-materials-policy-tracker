@@ -7,8 +7,10 @@ import { site } from "@/lib/site";
 
 const SLUG = "china-export-control-suspension-extension";
 const TITLE = "China Extends the Suspension of Six Export-Control Announcements Through January 10, 2027";
+const SHARE_TITLE = "China Extends the Suspension of Six Export-Control Announcements";
+const SHARE_IMAGE = `/research/${SLUG}/opengraph-image?v=2`;
 const DESCRIPTION =
-  "On November 9, 2026, China extended the suspension of six October 2025 export-control announcements through January 10, 2027. The measures cover rare-earth equipment and technology, battery materials and industrial diamonds; other Chinese controls have separate deadlines.";
+  "On November 9, 2026, China extended the suspension of six October 2025 export-control announcements through January 10, 2027. The measures cover rare-earth equipment and technology, battery materials, and industrial diamonds; other Chinese controls have separate deadlines.";
 
 export const metadata: Metadata = {
   title: `${TITLE} — Policy Research`,
@@ -18,10 +20,10 @@ export const metadata: Metadata = {
     type: "article",
     url: `${site.url}/research/${SLUG}`,
     siteName: site.name,
-    title: TITLE,
-    description: "China continues the suspension of six October 2025 export-control announcements through January 10, 2027, while other licensing rules remain in effect.",
+    title: SHARE_TITLE,
+    description: "Six October 2025 announcements remain suspended through January 10, 2027; other Chinese controls have separate deadlines.",
     images: [{
-      url: `/research/${SLUG}/opengraph-image`,
+      url: SHARE_IMAGE,
       width: 1200,
       height: 630,
       alt: "China extends its export-control pause — SMPT Policy Research",
@@ -29,9 +31,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
-    description: "China continues the suspension of six export-control announcements through January 10, 2027.",
-    images: [`/research/${SLUG}/opengraph-image`],
+    title: SHARE_TITLE,
+    description: "Six export-control announcements remain suspended through January 10, 2027.",
+    images: [SHARE_IMAGE],
   },
 };
 
