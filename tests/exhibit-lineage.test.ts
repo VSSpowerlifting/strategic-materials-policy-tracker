@@ -127,6 +127,7 @@ test("model output lineage must match displayed numerical value, status, currenc
   rejectsChange((d) => { d.slides[0].figures[2].unit = "EUR million"; }, /disagrees with pinned model output/);
   rejectsChange((d) => { d.slides[0].figures[2].as_of = "2026-11-08"; }, /disagrees with pinned model output/);
   rejectsChange((d) => { d.slides[0].figures[2].model_output_ref = "M1/MISSING"; }, /unresolved reference M1\/MISSING/);
+  rejectsChange((d) => { d.claims[0].model_output_refs = []; d.claims[0].evidence_class = "judgment"; }, /not linked to any claim/);
 });
 
 test("additive totals reject mixed units, financing stages, measurement bases, dates and arithmetic", () => {
@@ -166,6 +167,13 @@ test("ordinary comparisons require a common unit/basis; parallel panels disclose
   });
 });
 
+test("figure units must match the renderer's declared global unit when one exists", () => {
+  useSample((s) => {
+    const ctx = { ...s.context, slides: [{ evidence_refs: ["E1", "E2"], data: { unit: "kt per year", f1: 10, f2: 2.5, f3: 12.5 } }] };
+    assert.throws(() => parseDeckLineage(s.document, ctx), /disagrees with renderer data unit/);
+  });
+});
+
 test("all published/model observation dates must remain inside the fixed research cutoff", () => {
   rejectsChange((d) => { d.sources[0].published_at = "2026-11-11"; }, /source date later/);
   rejectsChange((d) => { d.models[0].as_of = "2026-11-11"; }, /later than research cutoff/);
@@ -177,6 +185,7 @@ test("research parser integrates opt-in lineage and manifests preserve draft-onl
   try {
     const fixture = loadFixture("dumbbell");
     const data = copy(fixture.data) as { items: { from: number }[] };
+    (data as { unit?: string }).unit = "USD million";
     data.items[0].from = 12.5;
     data.items[1].from = 10;
     data.items[2].from = 2.5;
