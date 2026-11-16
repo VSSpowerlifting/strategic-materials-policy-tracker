@@ -296,6 +296,15 @@ export function parseDeckLineage(raw: unknown, ctx: LineageContext): DeckLineage
       }
       const outputRef = f.model_output_ref === undefined ? undefined : string(f.model_output_ref, q + ".model_output_ref");
       const result = { id: id(f.id, q + ".id"), ...measure(f, q, cutoff), data_pointer, evidence_refs, ...(outputRef ? { model_output_ref: outputRef } : {}) };
+      const exhibit = ctx.slides[i].data;
+      if (exhibit && typeof exhibit === "object" && !Array.isArray(exhibit) &&
+          typeof (exhibit as Record<string, unknown>).unit === "string" &&
+          result.unit !== (exhibit as Record<string, unknown>).unit) {
+        throw new LineageError(q + ".unit: disagrees with renderer data unit");
+      }
+      if (outputRef && !claim_ids.some((claimId) => byClaim.get(claimId)!.model_output_refs.includes(outputRef))) {
+        throw new LineageError(q + ".model_output_ref: output is not linked to any claim on this slide");
+      }
       if (outputRef) {
         const output = outputs.get(outputRef);
         if (!output) throw new LineageError(q + ".model_output_ref: unresolved reference " + outputRef);
