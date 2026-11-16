@@ -61,12 +61,12 @@ function sample() {
   };
   return { dir, context, document };
 }
-function useSample(fn: (s: ReturnType<typeof sample>) => void): void {
+function withSample(fn: (s: ReturnType<typeof sample>) => void): void {
   const s = sample();
   try { fn(s); } finally { rmSync(s.dir, { recursive: true, force: true }); }
 }
 function rejectsChange(change: (d: Document) => void, matcher: RegExp): void {
-  useSample((s) => {
+  withSample((s) => {
     const input = copy(s.document);
     change(input);
     assert.throws(() => parseDeckLineage(input, s.context), matcher);
@@ -74,7 +74,7 @@ function rejectsChange(change: (d: Document) => void, matcher: RegExp): void {
 }
 
 test("v1 lineage accepts pinned model outputs, exact-decimal totals and traceable slide evidence", () => {
-  useSample((s) => {
+  withSample((s) => {
     const result = parseDeckLineage(s.document, s.context);
     assert.equal(result.version, 1);
     assert.equal(result.slides[0].relations[0].total_id, "F3");
@@ -112,7 +112,7 @@ test("source IDs, slide-local citations, and claim IDs must resolve", () => {
   rejectsChange((d) => { d.claims[0].evidence_refs = ["UNKNOWN"]; }, /unresolved reference UNKNOWN/);
   rejectsChange((d) => { d.slides[0].claim_ids = ["UNKNOWN"]; }, /unresolved reference UNKNOWN/);
   rejectsChange((d) => { d.slides[0].figures[0].evidence_refs = ["UNKNOWN"]; }, /unresolved reference UNKNOWN/);
-  useSample((s) => {
+  withSample((s) => {
     const local: LineageContext = { ...s.context, slides: [{ evidence_refs: ["E2"], data: s.context.slides[0].data }] };
     assert.throws(() => parseDeckLineage(s.document, local), /unresolved reference E1/);
   });
@@ -121,7 +121,7 @@ test("source IDs, slide-local citations, and claim IDs must resolve", () => {
 test("lineage requires exactly one ordered entry for every analytical slide", () => {
   rejectsChange((d) => { d.slides[0].slide = 3; }, /expected analytical slide 2/);
   rejectsChange((d) => { d.slides = []; }, /expected array with at least 1/);
-  useSample((s) => {
+  withSample((s) => {
     const ctx = { ...s.context, slides: [...s.context.slides, s.context.slides[0]] };
     assert.throws(() => parseDeckLineage(s.document, ctx), /one lineage record is required/);
   });
@@ -156,7 +156,7 @@ test("additive totals reject mixed units, financing stages, measurement bases, d
   rejectsChange((d) => { d.slides[0].figures[0].basis = "gross-capacity"; }, /incompatible basis/);
   rejectsChange((d) => { d.slides[0].figures[0].as_of = "2026-11-08"; }, /incompatible as_of/);
   rejectsChange((d) => { d.slides[0].figures[0].value = "10.01"; }, /disagrees with renderer data/);
-  useSample((s) => {
+  withSample((s) => {
     const d = copy(s.document);
     d.slides[0].figures[0].value = "10.01";
     const ctx = { ...s.context, slides: [{ evidence_refs: ["E1", "E2"], data: { f1: 10.01, f2: 2.5, f3: 12.5 } }] };
@@ -169,7 +169,7 @@ test("lineage figures must point to matching numeric data in the actual renderer
   rejectsChange((d) => { d.slides[0].figures[0].data_pointer = "/missing"; }, /absent renderer data field/);
   rejectsChange((d) => { d.slides[0].figures[0].data_pointer = "/f2"; }, /disagrees with renderer data/);
   rejectsChange((d) => { d.slides[0].figures[0].data_pointer = "/f1/~2"; }, /valid non-root JSON Pointer/);
-  useSample((s) => {
+  withSample((s) => {
     const d = copy(s.document);
     const ctx = { ...s.context, slides: [{ evidence_refs: ["E1", "E2"], data: { f1: "10.00", f2: "2.50", f3: "12.500" } }] };
     assert.equal(parseDeckLineage(d, ctx).slides.length, 1, "numeric strings are acceptable when exact");
@@ -177,7 +177,7 @@ test("lineage figures must point to matching numeric data in the actual renderer
 });
 
 test("ordinary comparisons require a common unit/basis; parallel panels disclose non-comparable bases", () => {
-  useSample((s) => {
+  withSample((s) => {
     const d = copy(s.document);
     d.slides[0].figures[0].unit = "EUR million";
     d.slides[0].relations = [{ kind: "compare", figure_ids: ["F1", "F2"] }];
@@ -188,7 +188,7 @@ test("ordinary comparisons require a common unit/basis; parallel panels disclose
 });
 
 test("figure units must match the renderer's declared global unit when one exists", () => {
-  useSample((s) => {
+  withSample((s) => {
     const ctx = { ...s.context, slides: [{ evidence_refs: ["E1", "E2"], data: { unit: "kt per year", f1: 10, f2: 2.5, f3: 12.5 } }] };
     assert.throws(() => parseDeckLineage(s.document, ctx), /disagrees with renderer data unit/);
   });
