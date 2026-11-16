@@ -146,6 +146,10 @@ python3 -m http.server 8764 --bind 127.0.0.1 --directory docs/design/presentatio
 
 Optional browser acceptance automation lives in `scripts/exhibit-system/check-gallery-browser.mjs`. It starts its own loopback server and tests search, combined filters, no matches, URL persistence, comparison selection/reset, previews, Escape/focus return, every PNG, PPTX downloads, responsive overflow and no-JavaScript browsing. Run `npm run exhibits:browser` with Playwright and its Chromium installed separately. `EXHIBITS_PLAYWRIGHT_MODULE` may name an absolute module entry file; `EXHIBITS_BROWSER_CHANNEL=chrome` uses an installed Chrome. Neither is needed to generate or browse the gallery.
 
+## Optional model-to-slide lineage
+
+For stronger provenance checks on new research decks, see [Research deck lineage contract v1](LINEAGE_V1.md). The opt-in lineage block maps claims and numeric figures to source IDs, hash-pinned local model outputs, and exact fields of exhibit renderer input; it validates compatible financial bases and exact-decimal totals. Preflight with `npm run exhibits:lineage:check -- <research-spec.json>`. Existing research specs without lineage remain compatible. These are metadata and renderer-input checks, not independent model recalculation or human publication approval.
+
 ## Research integration: draft output only
 
 ```sh
