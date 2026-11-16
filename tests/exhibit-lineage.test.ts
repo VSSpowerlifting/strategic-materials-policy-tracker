@@ -113,7 +113,7 @@ test("source IDs, slide-local citations, and claim IDs must resolve", () => {
   rejectsChange((d) => { d.slides[0].claim_ids = ["UNKNOWN"]; }, /unresolved reference UNKNOWN/);
   rejectsChange((d) => { d.slides[0].figures[0].evidence_refs = ["UNKNOWN"]; }, /unresolved reference UNKNOWN/);
   useSample((s) => {
-    const local: LineageContext = { ...s.context, slides: [{ evidence_refs: ["E2"] }] };
+    const local: LineageContext = { ...s.context, slides: [{ evidence_refs: ["E2"], data: s.context.slides[0].data }] };
     assert.throws(() => parseDeckLineage(s.document, local), /unresolved reference E1/);
   });
 });
