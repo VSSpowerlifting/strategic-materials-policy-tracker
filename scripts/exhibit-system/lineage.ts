@@ -147,7 +147,7 @@ function requireRefs(refs: readonly string[], available: ReadonlySet<string>, lo
     if (!available.has(ref)) throw new LineageError(location + ": unresolved reference " + ref);
   }
 }
-function power(n: number): bigint { return 10n ** BigInt(n); }
+function power(n: number): bigint { return BigInt(10) ** BigInt(n); }
 function fixedDecimal(s: string): [bigint, number] {
   const neg = s.startsWith("-");
   const [whole, fraction = ""] = (neg ? s.slice(1) : s).split(".");
@@ -158,7 +158,7 @@ function sumEquals(values: readonly string[], total: string): boolean {
   const parsed = [...values, total].map(fixedDecimal);
   const places = Math.max(...parsed.map(([, p]) => p));
   const scaled = parsed.map(([n, p]) => n * power(places - p));
-  return scaled.slice(0, -1).reduce((a, b) => a + b, 0n) === scaled[scaled.length - 1];
+  return scaled.slice(0, -1).reduce((a, b) => a + b, BigInt(0)) === scaled[scaled.length - 1];
 }
 
 export function parseDeckLineage(raw: unknown, ctx: LineageContext): DeckLineage {
