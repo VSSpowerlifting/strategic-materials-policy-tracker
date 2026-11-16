@@ -63,5 +63,8 @@ test("China article has a publication-specific LinkedIn/Open Graph image", () =>
   assert.match(card, /new ImageResponse\(/);
   assert.match(card, /width: 1200, height: 630/);
   assert.match(card, /January 10, 2027/);
-  assert.match(card, /Export-Control Pause/);
+  assert.match(card, /Suspension of Six/);
+  assert.match(card, /Export-Control/);
+  assert.match(card, /landscapeSvg/);
+  assert.match(card, /MALACHITE/);
 });
