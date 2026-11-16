@@ -302,12 +302,12 @@ export function parseDeckLineage(raw: unknown, ctx: LineageContext): DeckLineage
           result.unit !== (exhibit as Record<string, unknown>).unit) {
         throw new LineageError(q + ".unit: disagrees with renderer data unit");
       }
-      if (outputRef && !claim_ids.some((claimId) => byClaim.get(claimId)!.model_output_refs.includes(outputRef))) {
-        throw new LineageError(q + ".model_output_ref: output is not linked to any claim on this slide");
-      }
       if (outputRef) {
         const output = outputs.get(outputRef);
         if (!output) throw new LineageError(q + ".model_output_ref: unresolved reference " + outputRef);
+        if (!claim_ids.some((claimId) => byClaim.get(claimId)!.model_output_refs.includes(outputRef))) {
+          throw new LineageError(q + ".model_output_ref: output is not linked to any claim on this slide");
+        }
         for (const key of ["value", "unit", "basis", "status", "as_of"] as const) {
           if (key === "value" ? !sumEquals([result.value], output.value) : result[key] !== output[key]) {
             throw new LineageError(q + "." + key + ": disagrees with pinned model output " + outputRef);
