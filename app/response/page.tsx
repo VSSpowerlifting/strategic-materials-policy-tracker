@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { IndustrialExecutionMonitor } from "@/components/intelligence/industrial-execution-monitor";
 import { Container, PageHeading, Section } from "@/components/ui/container";
 import { formatDateLong } from "@/lib/format";
 import { getAllMaterials, getSourceById } from "@/lib/data";
@@ -145,6 +146,8 @@ export default function IndustrialResponsePage() {
           </div>
         ))}
       </dl>
+
+      <IndustrialExecutionMonitor />
 
       <Section title="Two independent forms of evidence" className="mt-12"
         description="Each project appears in exactly one cell. Binding means at least one recorded government commitment is contracted, partly disbursed or disbursed. Construction and later refer to implementation entries, regardless of who provided the funding.">

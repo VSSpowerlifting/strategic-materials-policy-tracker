@@ -1,3 +1,10 @@
+## 2026-11-18 — Industrial Execution Monitor pilot (draft)
+
+- The pilot on `/response` compares MP Materials 10X, Neo Narva and USA Rare Earth Stillwater Magnet through 18 November 2026. It follows commissioning, commercial production and first revenue on their respective schedules and links each plant to its project record.
+- Stillwater reported its first block magnet sales in September, with first revenue in Q3 after its initial H1 window. Narva reported shipments after automotive qualification for its first program. MP reported a spring construction start at 10X and targets commissioning in late 2028.
+- Evidence reconciliation and pending human editorial review are recorded in [the pilot claim ledger](docs/analysis/industrial-execution-monitor-2026-11-18.md). The pilot uses a separate research cutoff from the financing and project evidence corpus.
+- The local build and CI production audit required the Next.js 16.4.5 patch for the two advisories affecting the 16.4.3 pin on main.
+
 ## 2026-11-14: Scenario change marks on the Escondida exhibit (PR #274, merged and deployed)
 
 - Branch `claude/smpt-motion-interaction-c147b0`, from `main` at 1073d69. Presentation and interaction only: no seed data, research text, scenario value or review record changed. Notes: `docs/design/MOTION_AND_INTERACTION.md`, "Scenario change marks".
