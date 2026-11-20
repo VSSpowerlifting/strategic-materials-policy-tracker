@@ -1,6 +1,6 @@
 # MP Materials’ 10X Financing: Cash, Covenants, and Construction Risk
 
-**SMPT Financial Intelligence 003 · Manuscript for Benjamin and Jiho**
+**SMPT Strategy & Finance 003 · Manuscript for Benjamin and Jiho**
 
 **Evidence through 6 November 2026 · Publication HOLD**
 
@@ -67,7 +67,7 @@ A defensible completion-funding estimate requires a dated 10X cost-to-complete s
 
 Take the equity while the price is acceptable and preserve committed credit for uses it can actually fund. Before releasing a construction commitment, test settled cash and permitted uses through the delayed start-up case. If the plan needs the revolver in a period when a draw condition could fail, secure cash or a facility with different conditions before that period. If construction debt can preserve ownership while financing that same downside through the first reliable collections, it deserves priority over further dilution. The evidence supports MP’s equity-first choice as defensible. A fully funded plan or a least-cost capital structure remains unproven.
 
-**Question for Jiho.** In a downside case that moves the first 10X operating receipts into a later quarter, would the cost-to-complete and collection schedule leave MP with enough permitted cash to reach those receipts and satisfy the intervening covenant tests if new revolver draws were unavailable? That answer would determine whether the revolver provides useful secondary capacity or whether the financing plan depends on arranging independent funds before commissioning.
+**Question for Jiho.** Based on what MP knew in July 2025, was the dilution from selling shares a defensible price for securing cash before 10X began operating? What was the strongest case for keeping the construction loan commitment, and which missing loan term or project cash-flow assumption would be most likely to change your recommendation?
 
 ---
 
