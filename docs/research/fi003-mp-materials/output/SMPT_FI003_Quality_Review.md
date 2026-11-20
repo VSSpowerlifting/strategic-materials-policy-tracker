@@ -35,7 +35,7 @@ Source IDs and claim numbers refer to the pinned [source register][sources] and 
 
 - Model 1.0 detached export. `prototype.py --check` reproduced 11 schedules. `model.py --check` reproduced the cell specification and independent anchors. All 24 model and prototype tests passed. A read-only check of the delivered workbook verified 388 cached formula results across six tabs.
 - Independently recalculated offering economics, share percentages, liquid-asset movement, letters of credit, and both leverage sensitivities. Checked the dated exhibit against the pinned inputs and corresponding filing sections. Cross-checked §8.3.1 and §8.4.1(a) together to avoid mistaking the 45-day notice period for the threshold at which an offtake payment default first exists.
-- Read the complete rendered Markdown. Checked the source links and locators against the in-scope originals and repository links against their pinned revisions. Confirmed that the report opens with the decision, uses a single liquidity table, and ends with the downside funding question for Jiho.
+- Read the complete rendered Markdown. Checked the source links and locators against the in-scope originals and repository links against their pinned revisions. Confirmed that the report opens with the decision, uses a single liquidity table, and ends with Jiho’s question about the July 2025 financing decision and the assumptions that could change it.
 
 [prose]: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/bfd276c7e64e9c1fa91b00b08457018136201a0d/research/fi003/analysis.md
 [convention]: https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/ce989bd9837f16805385102e69661f273fb70284/docs/research/fi002-bhp-copper/README.md
