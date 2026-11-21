@@ -1,3 +1,11 @@
+## 2026-11-21: FI003 designed review report (draft PR #281, not merged)
+
+- Branch `codex/fi003-written-report` at ef8fa53 (from 70fce38). Presentation of the FI003 manuscript only: no seed data, model, deck, site page or evidence cut-off changed. Source: `docs/research/fi003-mp-materials/source/` (`build_report.py`, `report.css`, README listing every addition beyond the manuscript text).
+- PDF: `docs/research/fi003-mp-materials/output/SMPT_FI003_MP_Materials_Research_Report.pdf`, 16 Letter pages, SHA-256 `c3b89b9f1b683d0980aea63fe1b389e19a75b402ffb01a93120b137cfaa575b4`, also uploaded to the FI003 Drive folder. The existing Google Doc "FI003 — MP Materials' 10X Financing — Research Report (Review Draft)" was formatted in place (text and tables; the designed exhibits are PDF-only).
+- Manuscript change: the liquidity table now has separate columns for cash received or held, borrowing capacity and conditional amounts (figures, sources and wording unchanged; the price-protection row moved into the cash group).
+- Checks (21 November 2026): all 202 manuscript sentences present in the report HTML; every manuscript figure in the PDF text; 19/19 manuscript links present as https annotations; fonts embedded; `npm run validate` passes. CI `validate` fails on `npm audit` (Next 16.0–16.4.4 advisories), as it did on 70fce38 and 639dc83; not addressed here.
+- Open: Benjamin's and Jiho's review; publication hold stays in place.
+
 ## 2026-11-14: Scenario change marks on the Escondida exhibit (PR #274, merged and deployed)
 
 - Branch `claude/smpt-motion-interaction-c147b0`, from `main` at 1073d69. Presentation and interaction only: no seed data, research text, scenario value or review record changed. Notes: `docs/design/MOTION_AND_INTERACTION.md`, "Scenario change marks".
