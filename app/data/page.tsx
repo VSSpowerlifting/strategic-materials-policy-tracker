@@ -19,7 +19,7 @@ const downloads = [
     file: "smpt-financial-commitments.csv",
     href: "/api/export/financial-commitments.csv",
     fmt: "CSV",
-    desc: "One row per financial instrument: value role, capital source, amount in the source's currency with its qualifier and wording, provider, recipient, stages, materials, parent links and current status. Amounts retain their source currency and instrument classification.",
+    desc: "Financial commitments, packages, programme envelopes and their components, with source-currency amounts, qualifiers, parties, parent links and status. Rows are not additive: use partOf, drawnFrom and valueRole to avoid double counting.",
   },
   {
     file: "smpt-control-measures.csv",
