@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Container, PageHeading } from "@/components/ui/container";
+import Link from "next/link";
 import { getDatasetSummary } from "@/lib/data";
+import { INTEGRATION_GUIDE_PATH, MANIFEST_PATH } from "@/lib/dataset-manifest";
 
 export const metadata: Metadata = {
   title: "Data export",
@@ -116,6 +118,17 @@ export default function DataPage() {
         {s.projectDesignations} project designations · {s.projectMilestones} reviewed industrial milestones.
       </p>
 
+      <section className="mt-8 max-w-prose text-sm leading-7" aria-labelledby="manifest-and-guide">
+        <h2 id="manifest-and-guide" className="font-display text-base font-semibold text-foreground">Manifest and integration guide</h2>
+        <p className="mt-3 text-muted">
+          The <a href={MANIFEST_PATH} className="link-quiet">dataset manifest</a> (<code className="font-mono text-sm">{MANIFEST_PATH}</code>) lists
+          the release and legal-status dates, record counts, every download and endpoint, and the fields that join one
+          collection to another. The <Link href={INTEGRATION_GUIDE_PATH} className="link-quiet">integration guide</Link> walks
+          from an event to a control clause, its status and its source, explains each date field, and shows how to total
+          financing without double counting.
+        </p>
+      </section>
+
       <ul className="mt-8 border-y border-border-strong">
         {downloads.map((d) => (
           <li
@@ -153,10 +166,17 @@ export default function DataPage() {
           <code className="font-mono text-sm">materials</code>, <code className="font-mono text-sm">actors</code>,{" "}
           <code className="font-mono text-sm">sources</code>, <code className="font-mono text-sm">financial-commitments</code>,{" "}
           <code className="font-mono text-sm">control-measures</code>, <code className="font-mono text-sm">organizations</code>,{" "}
-          <code className="font-mono text-sm">projects</code>, <code className="font-mono text-sm">programmes</code> and{" "}
-          <code className="font-mono text-sm">project-designations</code> (each with a <code className="font-mono text-sm">/[id]</code>{" "}
-          record that bundles its sources), plus <code className="font-mono text-sm">capital-control/summary</code>, the
-          double-count-safe totals and status counts behind the Capital and Controls pages, and{" "}
+          <code className="font-mono text-sm">projects</code>, <code className="font-mono text-sm">programmes</code>,{" "}
+          <code className="font-mono text-sm">project-designations</code> and{" "}
+          <code className="font-mono text-sm">project-milestones</code>. Events, financial commitments, control measures,
+          organizations, projects, programmes and project designations also have a{" "}
+          <code className="font-mono text-sm">/[id]</code> record that bundles its sources.
+        </p>
+        <p>
+          Four further endpoints describe the corpus as a whole: <code className="font-mono text-sm">dataset-manifest</code>;{" "}
+          <code className="font-mono text-sm">coverage</code>, the evidence and coverage report;{" "}
+          <code className="font-mono text-sm">capital-control/summary</code>, the double-count-safe totals and status
+          counts behind the Capital and Controls pages; and{" "}
           <code className="font-mono text-sm">capital-intelligence/summary</code>: portfolios, capital stacks, programme
           ledgers, co-investment, flows and the stage response map. Totals are per currency and per value role, with
           statuses evaluated on the data&apos;s as-of date; API outputs retain separate currencies and value roles.

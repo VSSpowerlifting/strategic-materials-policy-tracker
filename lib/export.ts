@@ -3,6 +3,7 @@
  * so the route handlers can be prerendered with `dynamic = "force-static"`.
  */
 import { site } from "./site";
+import { datasetCounts, datasetIdentity } from "./dataset-metadata";
 import {
   getAllControlMeasures,
   getAllEvents,
@@ -21,7 +22,7 @@ import { buildCapitalControlSummary } from "./capital-control-summary";
 import { buildCapitalIntelligenceSummary } from "./capital-intelligence-summary";
 import { layerOf, organizationRoles } from "./capital-intelligence";
 import { commitmentActor, controlEntryOn, controlIssuer, currentFinancialStatus, scheduledControlEntry, evidenceSourceIds } from "./capital-control";
-import type { PolicyEvent } from "./types";
+import type { ControlMeasure, PolicyEvent } from "./types";
 
 const LIST_SEP = "; ";
 
@@ -56,26 +57,8 @@ function toCsv(headers: string[], rows: unknown[][]): string {
 
 export function buildDataset() {
   return {
-    name: site.name,
-    version: site.version,
-    generatedAt: site.lastUpdated,
-    scopeFrom: site.scopeStart,
-    notice:
-      "Categorical, source-grounded labels only — no synthetic risk scores. Framing claims are anchored to quoted passages. Not legal or compliance advice.",
-    counts: {
-      events: getAllEvents().length,
-      framing: getAllFramingClaims().length,
-      materials: getAllMaterials().length,
-      jurisdictions: getAllJurisdictions().length,
-      sources: getAllSources().length,
-      financialCommitments: getAllFinancialCommitments().length,
-      controlMeasures: getAllControlMeasures().length,
-      organizations: getAllOrganizations().length,
-      projects: getAllProjects().length,
-      programmes: getAllProgrammes().length,
-      projectDesignations: getAllProjectDesignations().length,
-      projectMilestones: getAllProjectMilestones().length,
-    },
+    ...datasetIdentity(),
+    counts: datasetCounts(),
     events: getAllEvents(),
     framing: getAllFramingClaims(),
     materials: getAllMaterials(),
@@ -351,7 +334,8 @@ export function financialCommitmentsCsv(): string {
   );
 }
 
-export function controlMeasuresCsv(): string {
+/** One row per control clause. `measures` defaults to the whole corpus; a fixture reuses the same columns and status rules. */
+export function controlMeasuresCsv(measures: readonly ControlMeasure[] = getAllControlMeasures()): string {
   return toCsv(
     [
       "id",
@@ -389,7 +373,7 @@ export function controlMeasuresCsv(): string {
       "scheduledStatusFrom",
       "scheduledStatusUntil",
     ],
-    getAllControlMeasures().map((m) => {
+    measures.map((m) => {
       // The entry in effect on the legal-status date; an entry dated later is scheduled, never current.
       const cur = controlEntryOn(m, site.legalStatusAsOf) ?? m.statusHistory[0];
       const next = scheduledControlEntry(m, site.legalStatusAsOf);
@@ -444,10 +428,13 @@ export function financialStatusHistoryCsv(): string {
   return toCsv(["commitmentId", "history", "sequence", "status", "date", "sourceId", "isCurrent", "note"], rows);
 }
 
-/** One row per control status entry, in history order. */
-export function controlStatusHistoryCsv(): string {
+/**
+ * One row per control status entry, in history order. `isCurrent` marks the last recorded entry,
+ * not the entry in effect on a date. `measures` defaults to the whole corpus.
+ */
+export function controlStatusHistoryCsv(measures: readonly ControlMeasure[] = getAllControlMeasures()): string {
   const rows: unknown[][] = [];
-  for (const m of getAllControlMeasures())
+  for (const m of measures)
     m.statusHistory.forEach((e, i) =>
       rows.push([m.id, i, e.status, e.date ?? "", e.until ?? "", e.sourceId, i === m.statusHistory.length - 1, e.note ?? ""]),
     );
