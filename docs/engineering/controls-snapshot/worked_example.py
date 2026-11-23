@@ -192,17 +192,33 @@ def verify_boundaries(snapshot):
     assert status(newer, "2026-11-10")[0] == "scheduled"
     assert status(newer, "2026-11-11") == ("in_force", "src-mofcom-2026-58")
     assert snapshot.first_effect(older) is None
-    continued = {clause_id for clause_id in snapshot.clauses
-                 if status(clause_id, "2026-11-11") == ("suspended", "src-mofcom-2026-58")}
     umbrella = "ctl-cn-ree-2025-11-suspension"
-    linked = set(snapshot.clauses[newer]["modifiesMeasureIds"]) - {umbrella}
-    assert linked <= continued
-    # No. 55 rows are source-linked. Main still names the instrument as external
-    # on the suspension records, so test the exception without inventing edges.
-    assert all(snapshot.clauses[id_]["eventId"] == "evt-cn-mofcom-55-2025"
-               for id_ in continued - linked)
-    print(f"2026 No. 58 continued {len(continued)} clause suspensions; "
-          f"{len(continued - linked)} have no modifiesMeasureIds edge.")
+    no_55 = {clause_id for clause_id, clause in snapshot.clauses.items()
+             if clause["eventId"] == "evt-cn-mofcom-55-2025"}
+    assert len(no_55) == 7
+    for suspension, day, source in (
+        (umbrella, "2025-11-07", "src-mofcom-70"),
+        (newer, "2026-11-11", "src-mofcom-2026-58"),
+    ):
+        suspended = {clause_id for clause_id in snapshot.clauses
+                     if status(clause_id, day) == ("suspended", source)}
+        linked = set(snapshot.clauses[suspension]["modifiesMeasureIds"]) - {umbrella}
+        assert no_55 <= linked
+        assert linked == suspended
+        print(f"{source} suspended {len(suspended)} linked clauses, including all seven under No. 55.")
+
+    for clause_id in (
+        "ctl-cn-ree-2025-10-advanced-chip-ai-review",
+        "ctl-cn-ree-2025-10-military-listed-end-users",
+        "ctl-cn-ree-2025-10-prohibited-end-uses",
+    ):
+        start, *suspensions = snapshot.history[clause_id]
+        assert (start["date"], start["status"], start["sourceId"]) == (None, "not_stated", "src-mofcom-61")
+        assert snapshot.first_effect(clause_id) is None
+        assert [(row["date"], row["status"], row["sourceId"]) for row in suspensions] == [
+            ("2025-11-07", "suspended", "src-mofcom-70"),
+            ("2026-11-11", "suspended", "src-mofcom-2026-58"),
+        ]
 
     partial = {
         "ctl-cn-us-2024-gallium-germanium-antimony-denial",

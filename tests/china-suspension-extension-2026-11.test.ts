@@ -11,6 +11,9 @@ import {
   summarizeControl,
 } from "@/lib/capital-control";
 import { site } from "@/lib/site";
+import { GET as getControlCsv } from "@/app/api/export/control-measures.csv/route";
+import { GET as getDatasetJson } from "@/app/api/export/dataset.json/route";
+import type { ControlMeasure } from "@/lib/types";
 import { PHASE_III_RELEASE_CUTOFF } from "./phase-iii-release-ids";
 import {
   getAllControlMeasures,
@@ -42,15 +45,59 @@ const byId = (id: string) => {
   assert.ok(m, `missing control measure ${id}`);
   return m;
 };
-/** The 18 clause rows plus the umbrella row that Announcement No. 70 put on hold. */
+/** The 25 clause rows plus the No. 70 umbrella row whose window is continued. */
 const suspendedRowIds = () => byId(ROW_ID).modifiesMeasureIds;
 
-test("the continuation row covers the 18 clause rows and the No. 70 umbrella row, with no duplicates", () => {
-  const ids = suspendedRowIds();
-  assert.equal(ids.length, 19);
-  assert.equal(new Set(ids).size, ids.length);
-  assert.ok(ids.includes(UMBRELLA_ID));
-  for (const id of ids) byId(id);
+test("both public exports link the 25 affected clauses to No. 70 and the continuation", async () => {
+  const dataset: { controlMeasures: ControlMeasure[] } = await getDatasetJson().json();
+  const csv = (await getControlCsv().text()).split("\r\n");
+  const no55 = measures().filter((m) => m.eventId === "evt-cn-mofcom-55-2025");
+  assert.equal(no55.length, 7);
+  for (const id of [UMBRELLA_ID, ROW_ID]) {
+    const action = dataset.controlMeasures.find((m) => m.id === id);
+    assert.ok(action, id);
+    const sourceId = id === UMBRELLA_ID ? "src-mofcom-70" : SOURCE_ID;
+    const affected = measures().filter((m) =>
+      m.statusHistory.some((h) => h.status === "suspended" && h.sourceId === sourceId));
+    assert.equal(affected.length, 25);
+    const expected = affected.map((m) => m.id);
+    if (id === ROW_ID) expected.push(UMBRELLA_ID);
+    assert.deepEqual([...action.modifiesMeasureIds].sort(), expected.sort());
+    assert.deepEqual(action.modifiesExternalInstruments, []);
+    assert.ok(csv.find((line) => line.startsWith(id + ","))?.includes(expected.join("; ")), id);
+    assert.ok(action.evidence.some((ref) => ref.sourceId === sourceId &&
+      ref.supports.includes("modified_measures") && ref.evidence === "explicit" &&
+      ref.locator === "Operative sentence"), id);
+  }
+  for (const clause of no55) {
+    assert.equal(controlStatusOn(clause, "2025-11-06"), "scheduled", clause.id);
+    assert.equal(controlStatusOn(clause, "2025-11-07"), "suspended", clause.id);
+    assert.equal(controlStatusOn(clause, "2025-11-08"), "suspended", clause.id);
+    assert.ok(clause.statusHistory.every((h) => h.status !== "in_force"), clause.id);
+  }
+});
+
+test("No. 61 Items 2–4 export unknown effective dates and their dated suspensions", async () => {
+  const dataset: { controlMeasures: ControlMeasure[] } = await getDatasetJson().json();
+  const items = [
+    ["military-listed-end-users", 2],
+    ["prohibited-end-uses", 3],
+    ["advanced-chip-ai-review", 4],
+  ] as const;
+  for (const [suffix, item] of items) {
+    const id = `ctl-cn-ree-2025-10-${suffix}`;
+    const row = dataset.controlMeasures.find((m) => m.id === id);
+    assert.ok(row, id);
+    assert.equal(row.statusHistory[0].status, "not_stated", id);
+    assert.equal(row.statusHistory[0].date, null, id);
+    assert.ok(row.evidence.some((ref) => ref.sourceId === "src-mofcom-61" &&
+      ref.supports.includes("status") && ref.evidence === "ambiguous" &&
+      ref.locator === `Items ${item} and 8`), id);
+    assert.equal(controlStatusOn(row, "2025-10-09"), null, id);
+    assert.equal(controlStatusOn(row, "2025-11-06"), null, id);
+    assert.equal(controlStatusOn(row, "2025-11-07"), "suspended", id);
+  }
+  assert.equal(controlStatusOn(byId("ctl-cn-ree-2025-10-origin-reexport-licensing"), "2025-10-09"), "in_force");
 });
 
 test("every suspended row is suspended on both sides of the 10/11 November 2026 boundary", () => {

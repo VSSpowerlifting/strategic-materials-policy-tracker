@@ -54,11 +54,11 @@
     "exhibits:lineage:check": "tsx scripts/exhibit-system/check-lineage.ts",
     "exhibits:browser": "node scripts/exhibit-system/check-gallery-browser.mjs",
     "editorial:check": "node scripts/editorial-style-gate.mjs",
-    "snapshot:controls": "tsx scripts/build-controls-snapshot.ts"
+    "snapshot:controls": "node --import tsx scripts/build-controls-snapshot.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "next": "16.4.3",
+    "next": "16.4.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "tailwind-merge": "^3.6.0"
@@ -69,7 +69,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.4.3",
+    "eslint-config-next": "16.4.6",
     "jszip": "3.10.1",
     "postcss": "^8.5.23",
     "pptxgenjs": "4.0.1",

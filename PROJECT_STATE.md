@@ -1,8 +1,12 @@
-## 2026-11-22 — Controls snapshot for review
+## 2026-11-23 — Controls snapshot for review (PR #286)
 
 - The opt-in `snapshot:controls` build packages 53 clauses, 24 related events, 119 status entries and 49 sources from the public export corpus. The [dictionary and independent import](docs/engineering/controls-snapshot/README.md) cover joins, dated queries and evidence limits at the 2026-11-12 cutoff.
-- The worked import finds 11 clauses first recorded in force from 2025-01-01 through the cutoff, including eight with explicit official primary status evidence. The graphite-to-US example finds one coded in-force clause at the cutoff. No. 72 is present in clause-level evidence on main, and its standalone event remains under separate review in #283.
-- Next data review should reconcile the seven No. 55 clause links on the suspension records and the three ambiguous No. 61 effective dates. The snapshot retains both limitations for analysts.
+- The worked import finds eight clauses under four instruments first recorded in force from 2025-01-01 through the cutoff, all with explicit official primary status evidence. It checks all seven No. 55 links on each suspension record and preserves the three undated No. 61 starts. The graphite-to-US example finds one coded in-force clause at the cutoff. No. 72 is cited in the clause histories, and its standalone event remains under separate review in #283.
+
+## 2026-11-23 — No. 55 suspension links and No. 61 date review (PR #287, merged)
+
+- No. 70 of 2025 and No. 58 of 2026 each name No. 55 of 2025 in their operative sentence. Both suspension rows now link its six numbered provisions and customs-declaration provision. Each related No. 61 clause already had both links. [No. 55 of 2025, Items 1–6 and closing paragraphs](https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_949f47563b834dad95b0010f375a892c.html), [No. 70 of 2025](https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_b1ec77dd3f0d4762952904df7cdaadec.html), [No. 58 of 2026](https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_91466027f465467985942a639a9485f4.html)
+- No. 61 Items 2–4 now have an undated `not_stated` entry with ambiguous status evidence. Item 8 specifies dates for Item 1 only. The dated suspensions are retained. Under #286's counting definition, first recorded in-force export/re-export restrictions from 2025-01-01 to 2026-11-12 fall from 11 to 8 clauses across the same four instruments. [No. 61 of 2025, Items 2–4 and 8](https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_7fc9bff0fb4546ecb02f66ee77d0e5f6.html), [MOFCOM implementation summary, section V](https://www.mofcom.gov.cn/cms_files/filemanager/policySummary/viewcore_b2ad258652cf4c31858550c3a597b04f.html)
 
 ## 2026-11-14: Scenario change marks on the Escondida exhibit (PR #274, merged and deployed)
 
