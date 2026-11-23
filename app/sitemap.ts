@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // entries — a crawler-facing correctness bug, not a cosmetic one.
     ...[...nav, ...secondaryNav].map((n) => entry(n.href, 0.8)),
     entry("/explore", 0.8),
+    entry("/data/guide", 0.6),
     { url: `${site.url}/research/china-export-control-suspension-extension`, lastModified: new Date("2026-11-09"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${site.url}/research/escondida-copper`, lastModified: new Date("2026-11-05"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${site.url}/research/hemerdon-financing`, lastModified: new Date("2026-11-05"), changeFrequency: "monthly", priority: 0.8 },
