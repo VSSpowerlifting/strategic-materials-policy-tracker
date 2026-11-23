@@ -1,3 +1,9 @@
+## 2026-11-22 — Controls snapshot for review
+
+- The opt-in `snapshot:controls` build packages 53 clauses, 24 related events, 119 status entries and 49 sources from the public export corpus. The [dictionary and independent import](docs/engineering/controls-snapshot/README.md) cover joins, dated queries and evidence limits at the 2026-11-12 cutoff.
+- The worked import finds 11 clauses first recorded in force from 2025-01-01 through the cutoff, including eight with explicit official primary status evidence. The graphite-to-US example finds one coded in-force clause at the cutoff. No. 72 is present in clause-level evidence on main, and its standalone event remains under separate review in #283.
+- Next data review should reconcile the seven No. 55 clause links on the suspension records and the three ambiguous No. 61 effective dates. The snapshot retains both limitations for analysts.
+
 ## 2026-11-14: Scenario change marks on the Escondida exhibit (PR #274, merged and deployed)
 
 - Branch `claude/smpt-motion-interaction-c147b0`, from `main` at 1073d69. Presentation and interaction only: no seed data, research text, scenario value or review record changed. Notes: `docs/design/MOTION_AND_INTERACTION.md`, "Scenario change marks".
