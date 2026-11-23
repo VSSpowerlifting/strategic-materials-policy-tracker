@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Container, PageHeading } from "@/components/ui/container";
 import { getDatasetSummary } from "@/lib/data";
+import { formatDate } from "@/lib/format";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Data export",
@@ -115,6 +117,26 @@ export default function DataPage() {
         {s.organizations} organizations · {s.projects} projects · {s.programmes} programmes ·{" "}
         {s.projectDesignations} project designations · {s.projectMilestones} reviewed industrial milestones.
       </p>
+
+      <section id="controls-snapshot" aria-labelledby="controls-snapshot-heading" className="mt-8 grid gap-4 border border-border-strong bg-plate p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+        <div>
+          <h2 id="controls-snapshot-heading" className="font-display text-base font-semibold text-foreground">Export controls snapshot</h2>
+          <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
+            Download {s.controlMeasures} export-control clauses with linked policy events, dated status histories, and sources.
+            The ZIP includes a versioned manifest with checksums, a data dictionary, and a worked import example.
+          </p>
+          <p className="mt-2 text-sm text-muted">
+            Status as of <time dateTime={site.legalStatusAsOf}>{formatDate(site.legalStatusAsOf)}</time> · Selective coverage
+          </p>
+        </div>
+        <a
+          href="/api/export/controls-snapshot.zip"
+          download
+          className="inline-flex min-h-11 w-fit items-center border border-border-strong bg-elevated px-3 font-display text-sm font-medium transition-colors hover:border-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          Download snapshot (ZIP)
+        </a>
+      </section>
 
       <ul className="mt-8 border-y border-border-strong">
         {downloads.map((d) => (
