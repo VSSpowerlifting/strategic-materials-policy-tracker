@@ -55,9 +55,8 @@
       const heading = document.createElement('h3'); heading.textContent = card.querySelector('h3').textContent;
       const question = document.createElement('p'); question.textContent = card.querySelector('.question').textContent;
       const img = card.querySelector('img').cloneNode(); img.loading = 'eager';
-      const meta = card.querySelector('dl').cloneNode(true);
       const details = card.querySelector('details').cloneNode(true); details.open = true;
-      section.append(heading, question, img, meta, details); contents.append(section);
+      section.append(heading, question, img, details); contents.append(section);
     }
     dialog.showModal();
   }
