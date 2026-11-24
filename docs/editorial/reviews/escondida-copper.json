@@ -1,0 +1,25 @@
+{
+  "article": "app/research/escondida-copper/page.tsx",
+  "contentSha256": "f42ef2e6f941156cf2e1470de6e5bc79adabbf714ceb841c7fb8b340acc3eaf2",
+  "reviewer": "Benjamin Yang",
+  "reviewDate": "2026-11-23",
+  "checks": {
+    "readAllCopy": {
+      "verified": true,
+      "notes": "The publisher approved the new William Pereira research contributor credit. The existing article copy was compared with the base and is identical apart from the credit."
+    },
+    "desktopPreview": {
+      "verified": true,
+      "notes": "The publisher confirmed checking the FI002 credit on the desktop Vercel preview."
+    },
+    "mobilePreview": {
+      "verified": true,
+      "notes": "The publisher confirmed checking the FI002 credit on the mobile Vercel preview."
+    },
+    "sourceLinksAndFacts": {
+      "verified": true,
+      "notes": "The publisher supplied and approved the contributor attribution. A comparison with the base and public page verified that Benjamin Yang’s author credit, citation, research cutoff, and the article’s source links and claims were preserved."
+    }
+  },
+  "exceptions": []
+}

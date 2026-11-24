@@ -4,6 +4,7 @@ export const fi002 = {
     "Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
   path: "/research/escondida-copper",
   cutoff: "2026-11-05",
+  contributors: ["William Pereira"],
   description:
     "A look at what Goldman Sachs’ 2027 copper forecast means for BHP’s earnings sensitivity and the proposed Escondida replacement concentrator.",
   assets: "/research/fi002",
