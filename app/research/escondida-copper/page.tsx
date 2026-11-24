@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     siteName: site.name,
     images: [
       {
-        url: `${fi002.assets}/social.png`,
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "SMPT research cover: Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",
+        alt: "Strategic Materials Policy Tracker — Policy. Capital. Industry. Architectural research studio with a topographic illustration.",
       },
     ],
   },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: fi002.title,
     description: fi002.description,
-    images: [`${fi002.assets}/social.png`],
+    images: ["/opengraph-image"],
   },
 };
 const sections = [

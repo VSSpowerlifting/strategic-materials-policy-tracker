@@ -227,6 +227,25 @@ export function contentFingerprint(source) {
     .digest("hex");
 }
 
+/* The publisher requested this one-way, presentation-only social-card migration.
+ * Keep the content fingerprint unchanged: only these exact three substitutions
+ * on FI002 are permitted, with all other source bytes identical. */
+export function isDefaultFi002SocialPreview(file, before, after) {
+  if (file !== "app/research/escondida-copper/page.tsx" || typeof before !== "string") return false;
+  const replacements = [
+    ['url: `${fi002.assets}/social.png`,', 'url: "/opengraph-image",'],
+    ['alt: "SMPT research cover: Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",',
+      'alt: "Strategic Materials Policy Tracker — Policy. Capital. Industry. Architectural research studio with a topographic illustration.",'],
+    ['images: [`${fi002.assets}/social.png`],', 'images: ["/opengraph-image"],'],
+  ];
+  let expected = before;
+  for (const [oldValue, newValue] of replacements) {
+    if (expected.split(oldValue).length !== 2) return false;
+    expected = expected.replace(oldValue, newValue);
+  }
+  return expected === after;
+}
+
 export function parseChangedLineRanges(diff) {
   const ranges = [];
   const re = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/gm;
@@ -359,6 +378,10 @@ function main(args) {
       if (baseSource !== null && contentFingerprint(baseSource) === hashes.content) {
         console.log("Editorial gate " + file + ": presentation-only change; research content matches the base (" +
           hashes.content.slice(0, 12) + "), so no new review record is required.");
+        continue;
+      }
+      if (isDefaultFi002SocialPreview(file, baseSource, source)) {
+        console.log("Editorial gate " + file + ": exact default social-preview migration; research source otherwise unchanged.");
         continue;
       }
       console.error("::error file=" + file + "::Publication content changed without a fresh " + reviewFile);

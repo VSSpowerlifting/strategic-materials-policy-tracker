@@ -3,6 +3,7 @@ import { test } from "node:test";
 import {
   extractProseBlocks, pageHash, parseChangedLineRanges,
   scanChangedProse, validateReview, unresolvedFindings, reviewPathForPage, pageForReviewPath,
+  isDefaultFi002SocialPreview,
 } from "../scripts/editorial-style-gate.mjs";
 
 const source = [
@@ -517,4 +518,36 @@ test("automatic cover changes are presentation-only; research changes still requ
   const withChangedCitation = withCover.replace("</main>", '<a href="https://example.org/new-source">Evidence</a></main>');
   assert.notEqual(contentFingerprint(withChangedCitation), contentFingerprint(base),
     "new source links must remain under the editorial gate");
+});
+
+test("FI002 default social preview permits only the exact artwork migration", () => {
+  const file = "app/research/escondida-copper/page.tsx";
+  const before = [
+    'export const metadata = { title: "Copper decision", openGraph: { images: [{',
+    '  url: `${fi002.assets}/social.png`,',
+    '  width: 1200, height: 630,',
+    '  alt: "SMPT research cover: Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",',
+    '}] }, twitter: {',
+    '  images: [`${fi002.assets}/social.png`],',
+    '} };',
+    '<p>Capital cost: $6 billion. <a href="/source">Evidence</a></p>',
+  ].join("\n");
+  const after = before
+    .replace('url: `${fi002.assets}/social.png`,', 'url: "/opengraph-image",')
+    .replace('alt: "SMPT research cover: Goldman Sachs’ Copper Outlook and BHP’s $6 Billion Escondida Decision",',
+      'alt: "Strategic Materials Policy Tracker — Policy. Capital. Industry. Architectural research studio with a topographic illustration.",')
+    .replace('images: [`${fi002.assets}/social.png`],', 'images: ["/opengraph-image"],');
+  assert.equal(isDefaultFi002SocialPreview(file, before, after), true);
+  assert.notEqual(contentFingerprint(before), contentFingerprint(after));
+  assert.equal(isDefaultFi002SocialPreview("app/research/other/page.tsx", before, after), false);
+  assert.equal(isDefaultFi002SocialPreview(file, after, before), false);
+  assert.equal(isDefaultFi002SocialPreview(file, null, after), false);
+  for (const edited of [
+    after.replace("$6 billion", "$7 billion"),
+    after.replace("Copper decision", "Changed title"),
+    after.replace('href="/source"', 'href="/other-source"'),
+    after.replace('url: "/opengraph-image"', 'url: "https://example.com/image.png"'),
+    after.replace("Architectural research studio", "Different caption"),
+    before.replace('url: `${fi002.assets}/social.png`,', 'url: "/opengraph-image",'),
+  ]) assert.equal(isDefaultFi002SocialPreview(file, before, edited), false);
 });
