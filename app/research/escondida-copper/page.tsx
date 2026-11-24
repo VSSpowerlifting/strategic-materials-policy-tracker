@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   description: fi002.description,
   alternates: { canonical: fi002.path },
   authors: [{ name: "Benjamin Yang", url: `${site.url}/about` }],
+  other: { "DC.contributor": [...fi002.contributors] },
   openGraph: {
     type: "article",
     title: fi002.title,
@@ -81,6 +82,8 @@ export default function EscondidaCopper() {
               <p className="fi-byline">
                 By <Link href="/about">Benjamin Yang</Link>
                 {" · "}Research cutoff <time dateTime={fi002.cutoff}>5 November 2026</time>
+                <br />
+                Research contribution by {fi002.contributors.join(", ")}
               </p>
               <div className="fi-actions">
                 <a
