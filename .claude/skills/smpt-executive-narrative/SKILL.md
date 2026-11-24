@@ -47,5 +47,5 @@ Complete when a reader of the titles alone gets the answer and its basis, and ev
 ## Boundaries
 
 - Does not render decks, design visuals or alter research conclusions, frozen models or published products; format-only revisions keep the research cutoff unchanged.
-- Does not imitate any consulting firm's proprietary templates or branding; SMPT identity and Archivo typography only.
+- For the rendering handoff, link the [Publication Design System](../../../docs/design/PUBLICATION_DESIGN_SYSTEM.md) for current type roles, cover imagery and export checks.
 - Ends at handoff to `smpt-review-gate`; it never declares publication readiness.

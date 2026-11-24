@@ -27,6 +27,14 @@ Text on a plate fill (`#FDFDFB`) is allowed only on graphite or malachite. Pure 
 - **JetBrains Mono**: record identifiers only.
 - A missing Spectral or Archivo stops every build. PowerPoint cannot embed fonts, so the **PDF export is the canonical form**; the PPTX is the editable source and needs both faces installed. Font binaries are never committed.
 
+## Covers and imagery
+
+Use the live [Research index](https://strategic-materials-policy-tracker.vercel.app/research) and the corresponding article as the visual references for a deck, report or social cover. Start with a clear Spectral title, a short Archivo standfirst if it adds context, and a compact byline and date. Use the plaster ground, fine rules and consistent alignment to frame the page. Interior slides and report pages use the same type roles and put the evidence first.
+
+When the website cover has a documentary photograph that fits the publication and its license permits reuse in the export, use that asset from the site’s registry (`lib/photography.ts`). Keep the caption with the subject, location, date, credit and source link. Keep any qualification needed to understand what the image depicts. Use a crop that keeps the identified subject visible, and carry its alt text into the deck or tagged PDF when the format supports it. A site image can be cleared for one use and need a separate rights check for another.
+
+When there is no suitable cleared photograph, use the shared typographic cover. A case can also open on a sourced exhibit when it explains the finding directly. Use the documentary image as a cover element or as evidence where it helps the reader. Follow the [automatic cover policy](../research/AUTOMATIC_COVER_POLICY.md) for image selection and provenance.
+
 ## Applying the system by medium
 
 | Medium | Layout | Tool | Check |
@@ -77,7 +85,6 @@ These were not changed. Each either writes protected historical artifacts or has
 | `docs/design/presentations/examples/render_visual_repertoire.py` and its SVG/PNG | Needs matplotlib and uses the v2 gold palette. The images are labelled as frozen v2 illustrations. |
 | `docs/design/presentations/SMPT_PRESENTATION_STANDARD_V2.md` file name | Content is v3.0; renaming would break inbound links. |
 | Root Open Graph image | Rendered by the site in the built-in sans, not Spectral or Archivo. |
-| Project `CLAUDE.md` text "Dark-first" | Stale against the plaster-ground site; a maintainer edit. |
 | PPTX font embedding | Not possible in PowerPoint; the PDF export is canonical. |
 | Tabular numerals (memo, cover and decks) | The house style asks for tabular figures in financial tables. No generator can enable the OpenType `tnum` feature (reportlab, python-pptx and pptxgenjs expose no font-feature control), so numerals are right-aligned instead and alignment depends on Archivo's default figures. |
 
