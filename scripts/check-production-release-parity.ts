@@ -2,14 +2,14 @@
  * Manual, read-only HTTP check of the published deterministic corpus.
  * This is NOT Vercel deployment-SHA attestation and NEVER triggers a deploy.
  *
- * npm run audit:production-parity -- --origin https://strategic-materials-policy-tracker.vercel.app
+ * npm run audit:production-parity -- --origin https://stratellar.com
  * npm run audit:production-parity -- --json
  */
 import {
   checkPublicReleaseParity,expectedPublicRelease,publicHttpsFetcher,
 } from "../lib/production-release-parity";
 
-const defaultOrigin="https://strategic-materials-policy-tracker.vercel.app";
+const defaultOrigin="https://stratellar.com";
 const help="Usage: npm run audit:production-parity -- [--origin https://your-production-domain] [--json]";
 async function main(){
   const args=process.argv.slice(2);

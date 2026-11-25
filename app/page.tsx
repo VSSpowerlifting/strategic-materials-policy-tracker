@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: { absolute: `${site.name}: ${site.descriptor}` },
   description:
     "Original research and source-linked data on export controls, public financing and industrial projects in strategic-material supply chains.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: site.url,

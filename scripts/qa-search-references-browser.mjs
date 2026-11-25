@@ -5,7 +5,7 @@ import {setTimeout as delay} from "node:timers/promises";
 import {chromium} from "playwright";
 
 const port = 3500, origin = `http://127.0.0.1:${port}`;
-const canonical = "https://strategic-materials-policy-tracker.vercel.app";
+const canonical = "https://stratellar.com";
 const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-p", String(port), "-H", "127.0.0.1"], {
   env: {...process.env, NODE_ENV: "production"}, stdio: ["ignore", "pipe", "pipe"],
 });

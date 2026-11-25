@@ -50,14 +50,10 @@ export const site = {
    */
   monitoringStartedAt: null as string | null,
   scopeStart: "2018",
-  /**
-   * The origin every canonical URL, sitemap entry, citation and structured-data
-   * record is built from. It stays on the current deployment until
-   * stratellar.com is registered, pointed at the project and serving this
-   * build; switching it earlier would publish canonicals that do not resolve.
-   * The switch is one line here. See docs/brand/STRATELLAR_CUTOVER.md.
-   */
-  url: "https://strategic-materials-policy-tracker.vercel.app",
+  /** Canonical origin for metadata, citations, and the sitemap. */
+  url: "https://stratellar.com",
+  /** Original origin for released links and browser-local saved events. */
+  legacyUrl: "https://strategic-materials-policy-tracker.vercel.app",
   /** Source repository. Renamed at cutover; GitHub redirects the old path. */
   repository: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker",
 } as const;

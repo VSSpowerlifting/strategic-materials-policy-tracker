@@ -64,7 +64,13 @@ export async function generateMetadata({
   const { id } = await params;
   const event = getEventById(id);
   if (!event) return { title: "Event not found" };
-  return { title: event.titleEn, description: event.summary };
+  const canonical = `/events/${event.id}`;
+  return {
+    title: event.titleEn,
+    description: event.summary,
+    alternates: { canonical },
+    openGraph: { title: event.titleEn, description: event.summary, url: canonical, siteName: site.name },
+  };
 }
 
 export default async function EventPage({
