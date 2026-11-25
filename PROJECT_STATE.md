@@ -1,9 +1,8 @@
-## 2026-11-24 — Stratellar release candidate
+## 2026-11-24 — Stratellar production launch
 
-- Stratellar uses the Marker Bed mark, the descriptor “Strategic Materials Intelligence”, and the tagline “Materials. Policy. Capital.” See the [brand system](docs/brand/STRATELLAR_BRAND_SYSTEM.md).
-- The China suspension analysis, Hemerdon, Antimony, and Tungsten serve study-specific social cards. Escondida (FI002) uses the default preview. Existing research files and citations retain their original imprint. The versioned Controls ZIP retains its published bytes and historical attribution.
-- Benjamin Yang approved the research index and five research articles on 24 November 2026. The six editorial records preserve the approved content fingerprints.
-- The domain is registered. The site keeps its existing address, and domain configuration and production release require separate approval. See the [cutover checklist](docs/brand/STRATELLAR_CUTOVER.md).
+- [Stratellar](https://stratellar.com) is live with the Marker Bed mark, the descriptor “Strategic Materials Intelligence”, and the tagline “Materials. Policy. Capital.” [Release PR #292](https://github.com/VSSpowerlifting/stratellar/pull/292) and the [cutover record](docs/brand/STRATELLAR_CUTOVER.md) document the release.
+- The original host still serves historical downloads, APIs and browser-local saved lists. The original Controls ZIP and issued research files retain their published bytes. Escondida (FI002) uses the default preview. All six editorial approvals remain bound to their original content fingerprints.
+- The repository is now `VSSpowerlifting/stratellar`. The [portfolio](https://benyang.dev) links to the canonical platform and renamed repository, with its existing project route intact.
 
 ## 2026-11-23 — Controls snapshot for review (PR #286)
 

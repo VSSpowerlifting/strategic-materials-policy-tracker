@@ -10,7 +10,7 @@ import {
   type EximActionRun,
 } from "../lib/exim-reliability";
 
-const REPO = "VSSpowerlifting/strategic-materials-policy-tracker";
+const REPO = "VSSpowerlifting/stratellar";
 const WORKFLOW = "exim-shadow-monitor.yml";
 const OUT_DIR = join(process.cwd(), ".monitor-exim-reliability");
 const LIMIT_PAGES = 10;

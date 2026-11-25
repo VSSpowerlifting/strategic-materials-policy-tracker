@@ -7,7 +7,7 @@ import { join } from "node:path";
 import { EXIM_FIRST_BASELINE_RUN_ID, type EximActionRun } from "../lib/exim-reliability";
 import { checkEximSchedule, eximScheduleMarkdown } from "../lib/exim-schedule-watchdog";
 
-const REPO = "VSSpowerlifting/strategic-materials-policy-tracker";
+const REPO = "VSSpowerlifting/stratellar";
 const WORKFLOW = "exim-shadow-monitor.yml";
 const OUT = join(process.cwd(), ".monitor-exim-watchdog");
 const MAX_PAGES = 10;

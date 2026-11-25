@@ -1,13 +1,13 @@
 # Stratellar brand system
 
-Version 1.0 · 24 November 2026 · Prepared for founder review. Nothing here is published until the launch steps in [the cutover checklist](STRATELLAR_CUTOVER.md) are approved.
+Version 1.0 · 24 November 2026 · See the [production cutover record](STRATELLAR_CUTOVER.md).
 
 | | |
 | --- | --- |
 | Name | **Stratellar** |
 | Descriptor | **Strategic Materials Intelligence** |
 | Tagline | **Materials. Policy. Capital.** |
-| Intended domain | `stratellar.com` (registered, pending connection) |
+| Production domain | `stratellar.com` |
 | Source of truth in code | `lib/site.ts` (name, descriptor, tagline), `lib/brand-mark.ts` (mark), `app/globals.css` (colour), `docs/design/publication-tokens.json` (off-site colour) |
 | Asset build | `npm run brand:build` regenerates the brand artwork and the copies the site serves |
 

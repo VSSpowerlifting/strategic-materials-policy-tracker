@@ -11,7 +11,7 @@ import { EXIM_FIRST_BASELINE_RUN_ID } from "../lib/exim-reliability";
 import { validateAndAdaptEximEditorial } from "./exim-editorial-adapter";
 import { importReviewQueue, type PrivateEditorialLedger } from "./editorial-ledger";
 
-const REPO = "VSSpowerlifting/strategic-materials-policy-tracker";
+const REPO = "VSSpowerlifting/stratellar";
 const WORKFLOW = "exim-shadow-monitor.yml";
 const MAX_PAGES = 15;
 
