@@ -37,7 +37,7 @@
   "limitations": ["Bar lengths are not comparable between panels and a shared bar scale would mislead", "Differing ranks do not explain why the bases differ"],
   "excluded_alternatives": [
     { "form": "Dual-axis chart", "reason": "A second axis implies a relationship and invites false crossings" },
-    { "form": "Composite index or radar", "reason": "Weights bases that cannot be added; SMPT has no synthetic scores" }
+    { "form": "Composite index or radar", "reason": "Weights bases that cannot be added; Stratellar has no synthetic scores" }
   ],
   "references": ["strategyand-2018-exhibit-6", "smpt-repertoire-2026"]
 }

@@ -20,7 +20,8 @@ export function datasetJsonLd() {
     "@context": "https://schema.org",
     "@type": "Dataset",
     name: site.name,
-    alternateName: site.shortName,
+    // The earlier publishing name, so citations and indexes made under it still resolve to this dataset.
+    alternateName: site.formerName,
     description: site.description,
     url: site.url,
     version: site.version,

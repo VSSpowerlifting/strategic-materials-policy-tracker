@@ -1,5 +1,5 @@
 {
-  "$comment": "Single token source for SMPT publications (decks, memos, report covers, social covers, exhibits). Values mirror the Architectural Research Studio site tokens in app/globals.css and the chart series set in components/markets/types.ts; tests/publication-tokens.test.ts fails when they drift. Hex values are written without '#' by the TS and Python loaders when a library needs it.",
+  "$comment": "Single token source for Stratellar publications (decks, memos, report covers, social covers, exhibits). Values mirror the Architectural Research Studio site tokens in app/globals.css and the chart series set in components/markets/types.ts; tests/publication-tokens.test.ts fails when they drift. Hex values are written without '#' by the TS and Python loaders when a library needs it.",
   "version": "3.0",
   "palette": {
     "plaster": { "hex": "#f6f5f1", "site": "--bg", "role": "Page and slide ground" },
@@ -14,6 +14,16 @@
     "malachite": { "hex": "#1f5c4d", "site": "--accent", "role": "The single emphasised mark; links" },
     "hematite": { "hex": "#9a3324", "site": "--negative", "role": "Declines, controls, ended or lapsed status" },
     "ochre": { "hex": "#9a6a12", "site": "--ochre", "role": "Designations and cautions; rules and markers only, never small text" }
+  },
+  "brand": {
+    "$comment": "Stratellar brand grounds. Seam is the dark ground for covers, social cards and reversed lockups; the malachite ramp carries the mark and rules on it. Values mirror app/globals.css and scripts/brand/build-brand-assets.mjs; tests/brand-system.test.ts fails when they drift. See docs/brand/STRATELLAR_BRAND_SYSTEM.md.",
+    "seam": { "hex": "#0d211d", "site": "--seam", "role": "Cover and social-card ground; reversed lockups" },
+    "seamBed": { "hex": "#143029", "site": "--seam-bed", "role": "Beds and rules drawn on the seam" },
+    "malachiteDeep": { "hex": "#143f35", "site": "--accent-strong", "role": "Hover and emphasis; deep fills" },
+    "malachiteLight": { "hex": "#7fb8a5", "site": "--malachite-light", "role": "The marker bed and accents on the seam" },
+    "onMalachite": { "hex": "#a3cfc0", "site": "--on-malachite", "role": "Secondary text on the seam" },
+    "mist": { "hex": "#c4d7cf", "site": "--malachite-mist", "role": "Rules and quiet fills on light grounds" },
+    "tint": { "hex": "#e6ede9", "site": "--malachite-tint", "role": "The lightest brand wash" }
   },
   "seriesOrder": ["graphite", "malachite", "hematite", "lapis", "ochre", "plum"],
   "series": {

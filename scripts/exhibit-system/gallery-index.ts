@@ -80,13 +80,13 @@ export function renderGalleryHtml(registry: readonly PatternSpec[]): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>SMPT exhibit pattern gallery (development reference)</title>
+<title>Stratellar exhibit pattern gallery (development reference)</title>
 <style>
 ${fs.readFileSync(path.join(REPO, "scripts/exhibit-system/gallery.css"), "utf8")}
 </style>
 </head>
 <body>
-<div class="masthead">SMPT / Presentation library</div>
+<div class="masthead">Stratellar / Presentation library</div>
 <main>
 <p class="banner"><strong>Development reference — not for publication.</strong> All figures and entities are synthetic demonstration data.</p>
 <h1>Exhibit pattern gallery</h1>

@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + financialStatusHistoryCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-financial-status-history.csv"',
+      "content-disposition": 'attachment; filename="stratellar-financial-status-history.csv"',
     },
   });
 }

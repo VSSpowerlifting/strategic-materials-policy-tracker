@@ -1,7 +1,7 @@
 /**
  * F5-0: evidence pathway *contract*, not an impact or causal-inference graph.
  *
- * All links below are structural references already present in reviewed SMPT
+ * All links below are structural references already present in reviewed Stratellar
  * records. In particular: project associations are nonallocative, recognition
  * is not finance, and a shared material/date/jurisdiction NEVER creates an edge.
  * The public investigation adapter uses this audit over published loader inputs.

@@ -56,7 +56,7 @@ def theme_colour_scheme() -> str:
     def c(tag: str, value: str) -> str:
         return f'<a:{tag}><a:srgbClr val="{value}"/></a:{tag}>'
     return (
-        '<a:clrScheme name="SMPT Studio">'
+        '<a:clrScheme name="Stratellar Studio">'
         + c("dk1", hex_("graphite")) + c("lt1", hex_("plate")) + c("dk2", hex_("slate")) + c("lt2", hex_("plaster"))
         + c("accent1", hex_("malachite")) + c("accent2", hex_("hematite")) + c("accent3", hex_("ochre"))
         + c("accent4", series_hex("lapis")) + c("accent5", series_hex("plum")) + c("accent6", neutral_hex("mid"))

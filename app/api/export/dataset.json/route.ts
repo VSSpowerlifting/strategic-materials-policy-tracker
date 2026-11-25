@@ -6,7 +6,7 @@ export function GET() {
   return new Response(JSON.stringify(buildDataset(), null, 2), {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-dataset.json"',
+      "content-disposition": 'attachment; filename="stratellar-dataset.json"',
     },
   });
 }

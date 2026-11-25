@@ -121,7 +121,7 @@ export function fontSizesOf(kind: "text" | "chart" | "table", options: Opts, con
   return out;
 }
 
-export const SYNTHETIC_NOTICE = "Synthetic demonstration data — not an SMPT finding";
+export const SYNTHETIC_NOTICE = "Synthetic demonstration data — not a Stratellar finding";
 
 /** Research output is always draft; technical QC cannot authorize publication. */
 export const DRAFT_BADGE = "DRAFT · REVIEW GATES PENDING";

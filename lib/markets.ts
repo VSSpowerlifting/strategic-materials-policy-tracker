@@ -562,7 +562,7 @@ export function valueDigits(obs: readonly Observation[]): number {
 export const MARKET_DATASET_IDS = ["wb-pink-sheet", "imf-pcps", "usgs-mcs-2026"] as const;
 
 /**
- * What each publisher's terms allow, and what they do not cover, as SMPT reads
+ * What each publisher's terms allow, and what they do not cover, as Stratellar reads
  * them. Kept beside the dataset list because the generated manifests are never
  * hand-edited. A series with its own restriction would get its own entry here
  * and be isolated, rather than holding back the rest of its release.
@@ -571,7 +571,7 @@ export const MARKET_REUSE_NOTES: Record<(typeof MARKET_DATASET_IDS)[number], str
   "wb-pink-sheet":
     "CC BY 4.0 allows reuse with attribution to the World Bank. It covers the World Bank's published figures, not the vendor data behind them.",
   "imf-pcps":
-    "The IMF's terms allow reuse with attribution and an explicit statement of any material change, and ask anyone considering commercial reuse to request permission (copyright@imf.org). They also say some statistical products include third-party information under separate terms. The PCPS dataset metadata cites only the IMF's own copyright terms, including for the rare-earth carbonate series the IMF draws from Shanghai Metal Market; SMPT holds no licence to SMM data.",
+    "The IMF's terms allow reuse with attribution and an explicit statement of any material change, and ask anyone considering commercial reuse to request permission (copyright@imf.org). They also say some statistical products include third-party information under separate terms. The PCPS dataset metadata cites only the IMF's own copyright terms, including for the rare-earth carbonate series the IMF draws from Shanghai Metal Market; Stratellar holds no licence to SMM data.",
   "usgs-mcs-2026":
     "The CC0 dedication covers the USGS data release. It grants no rights in the price-reporting agencies' own data.",
 };

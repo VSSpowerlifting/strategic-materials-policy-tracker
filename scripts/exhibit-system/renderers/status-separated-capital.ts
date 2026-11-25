@@ -1,4 +1,4 @@
-// D3 status-separated-capital — the SMPT signature. Amounts at each transaction
+// D3 status-separated-capital — the Stratellar signature. Amounts at each transaction
 // status sit in separate panels that are never summed. Statuses short of a
 // binding commitment are drawn hollow and dashed. Native shapes on a scale
 // shared by every panel (one unit): geometry and labels are editable, values
@@ -68,7 +68,7 @@ export const statusSeparatedCapital: Renderer<StatusCapitalData> = {
     ];
     const order = d.statuses.map((s) => (STATUS_TAXONOMY as readonly string[]).indexOf(s));
     if (order.some((v, i) => i > 0 && v <= order[i - 1])) {
-      issues.push({ rule: "status-order", message: "statuses must follow the SMPT status taxonomy order" });
+      issues.push({ rule: "status-order", message: "statuses must follow the Stratellar status taxonomy order" });
     }
     if (d.forbiddenKeys.length) {
       issues.push({

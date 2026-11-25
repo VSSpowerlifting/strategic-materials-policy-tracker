@@ -1,0 +1,25 @@
+{
+  "article": "app/research/page.tsx",
+  "contentSha256": "3d082cbafe9cbb95958eaec927a44171b8e3ed6352a9e712605c1078f4729640",
+  "reviewer": "Benjamin Yang",
+  "reviewDate": "2026-11-24",
+  "checks": {
+    "readAllCopy": {
+      "verified": true,
+      "notes": "The approved metadata description names Stratellar. The packet diff shows one metadata line changed and the visible card copy stayed the same."
+    },
+    "desktopPreview": {
+      "verified": true,
+      "notes": "The packet’s 1440 px research-index capture shows the rendered index and cards. The served metadata evidence documents the revised description separately."
+    },
+    "mobilePreview": {
+      "verified": true,
+      "notes": "The packet’s 390 px research-index capture shows the rendered index and card layout at phone width."
+    },
+    "sourceLinksAndFacts": {
+      "verified": true,
+      "notes": "The one-line diff preserves the card links, categories, titles, dates, bylines and summaries. The packet records the site’s default preview at /opengraph-image."
+    }
+  },
+  "exceptions": []
+}

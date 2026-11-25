@@ -85,7 +85,7 @@ export function ProgrammesExplorer({rows}:{rows:ProgrammeDirectoryRow[]}){
    One result is one registered scheme, not one award or a complete government budget.
    Parent programmes include recorded rows from their child schemes; those inherited rows must not be added again across results.
    Ceilings are stated authorities, not paid capital, and are never divided into recorded public-commitment rows.
-   Designations confer recognition, not money. Empty counts mean no row registered here, not no activity outside SMPT.
+   Designations confer recognition, not money. Empty counts mean no row registered here, not no activity outside Stratellar.
   </p>
   <div className="mt-9 space-y-10">
    {grouped.map((group,i)=><section key={group.actor} aria-labelledby={"programme-actor-"+group.actor}>

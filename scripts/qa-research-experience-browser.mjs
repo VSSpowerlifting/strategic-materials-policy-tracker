@@ -190,7 +190,7 @@ try {
     const downloadPromise = page.waitForEvent("download");
     await packetLink.click();
     const download = await downloadPromise;
-    assert.equal(download.suggestedFilename(), "smpt-prj-au-alcoa-sojitz-gallium-investigation.json");
+    assert.equal(download.suggestedFilename(), "stratellar-prj-au-alcoa-sojitz-gallium-investigation.json");
     const packet = JSON.parse(await readFile(await download.path(), "utf8"));
     assert.equal(packet.projectionVersion, "smpt-investigation-1");
     assert.equal(packet.corpus.revision, "2026-11-08");

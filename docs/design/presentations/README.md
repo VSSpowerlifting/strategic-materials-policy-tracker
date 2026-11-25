@@ -1,17 +1,17 @@
-# SMPT presentation system — version 3.0
+# Stratellar presentation system — version 3.0
 
-**Status:** Adopted editorial design standard for new SMPT decks, 5 November 2026; visual repertoire extended 6 November 2026; identity aligned with the Architectural Research Studio 11 November 2026 (proposed v3, pending maintainer approval)
-**Owner:** SMPT editorial/research lead  
+**Status:** Adopted editorial design standard for new Stratellar decks, 5 November 2026; visual repertoire extended 6 November 2026; identity aligned with the Architectural Research Studio 11 November 2026 (proposed v3, pending maintainer approval)
+**Owner:** Stratellar editorial/research lead\
 **Scope:** Executive briefings, applied-strategy cases, financial-intelligence cases, and visual research dossiers  
 **Typefaces:** Spectral for covers, section dividers and large editorial statements; Archivo for analytical titles, text, tables, chart labels and source footers. Colours and faces come from [`../publication-tokens.json`](../publication-tokens.json). PowerPoint cannot embed fonts, so the font-embedded PDF is the canonical form; preserve native editable charts and source hyperlinks in the `.pptx`.
 
 **Hard ceiling:** **20 slides total**, including title, executive summary, conclusion, methods, references, and appendix. No exceptions by renaming a section "backup."
 
-SMPT publishes independently authored, source-linked industrial-policy and financial research. This system translates the analysis into readable, defensible, editable PowerPoint presentations. It borrows **principles** of disciplined consulting communication, not another firm's branding or proprietary slide designs.
+Stratellar publishes independently authored, source-linked industrial-policy and financial research. This system translates the analysis into readable, defensible, editable PowerPoint presentations. It borrows **principles** of disciplined consulting communication, not another firm's branding or proprietary slide designs.
 
 ## Deck-production orchestration
 
-The repo-local **SMPT Deck Architect** skill coordinates engagement framing, evidence, financial analysis, the editable exhibit engine and slide-level production QA. Claude Code uses [the canonical skill](../../../.claude/skills/smpt-deck-architect/SKILL.md); Codex uses [its repository entry point](../../../.agents/skills/smpt-deck-architect/SKILL.md), which loads that same workflow. For the next engineering steps, see the [deck engine upgrade roadmap](DECK_ENGINE_UPGRADE_ROADMAP.md). This documentation/skill addition does not upgrade renderers or authorize publication.
+The repo-local **Stratellar Deck Architect** skill coordinates engagement framing, evidence, financial analysis, the editable exhibit engine and slide-level production QA. Claude Code uses [the canonical skill](../../../.claude/skills/smpt-deck-architect/SKILL.md); Codex uses [its repository entry point](../../../.agents/skills/smpt-deck-architect/SKILL.md), which loads that same workflow. For the next engineering steps, see the [deck engine upgrade roadmap](DECK_ENGINE_UPGRADE_ROADMAP.md). This documentation/skill addition does not upgrade renderers or authorize publication.
 
 ## Read in this order
 
@@ -29,7 +29,7 @@ The repo-local **SMPT Deck Architect** skill coordinates engagement framing, evi
 
 ## Varied exhibit forms
 
-![Six original SMPT exhibit patterns with synthetic illustrative data](examples/05-visual-repertoire.svg)
+![Six original Stratellar exhibit patterns with synthetic illustrative data](examples/05-visual-repertoire.svg)
 
 *Frozen illustration in the earlier graphite-and-gold palette (v2). It shows form only and has not been regenerated; the exhibit-system gallery is the current v3 reference. `examples/render_visual_repertoire.py` is a legacy generator.*
 
@@ -41,7 +41,7 @@ For editable deck exhibits, use the [exhibit system](exhibit-system/README.md) a
 
 These historical previews retain their earlier graphite-and-gold, Archivo-only styling and are not restyled. Use the current standard when designing a new or revised deck; the exhibit-system gallery now renders in the v3 identity.
 
-The illustrations below are original SMPT designs using **already disclosed FI001 research data**. Values are illustrative *exhibits from that research*, not new models or refreshed figures.
+The illustrations below are original Stratellar designs using **already disclosed FI001 research data**. Values are illustrative *exhibits from that research*, not new models or refreshed figures.
 
 ![Core versus uncommitted financial instruments](examples/01-financing-structure.svg)
 
@@ -57,7 +57,7 @@ With Python 3 and [python-pptx](https://python-pptx.readthedocs.io/) installed:
 
 ```bash
 python -m pip install python-pptx
-python docs/design/presentations/templates/create_master.py SMPT_Research_Master_v3.pptx
+python docs/design/presentations/templates/create_master.py Stratellar_Research_Master_v3.pptx
 ```
 
 The starter now follows the v3 identity: plaster ground, graphite text, malachite emphasis, Spectral on the cover and the closing statement, Archivo everywhere else, and no tracked all-caps. It loads `publication-tokens.json` and stops if Spectral or Archivo is not installed (set `SMPT_ALLOW_MISSING_FONTS=1` only for a layout-only dry run whose output must not be rendered or distributed).

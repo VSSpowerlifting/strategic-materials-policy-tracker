@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Original editable SMPT slide-template generator (publication system v3).
+"""Original editable Stratellar slide-template generator (publication system v3).
 
 Builds a reusable eight-layout starter in the Architectural Research Studio
 identity: plaster ground, graphite text and marks, one malachite emphasis,
@@ -121,11 +121,11 @@ def txt(sl, value, x, y, w, h, pt=18, bold=False, ink=INK, serif=False, align=PP
     return s
 
 
-def page(title: str, number: int, subtitle: str = "", footer: str = "Original SMPT template. Replace all example inputs before publication."):
+def page(title: str, number: int, subtitle: str = "", footer: str = "Original Stratellar template. Replace all example inputs before publication."):
     s = prs.slides.add_slide(blank)
     s.background.fill.solid()
     s.background.fill.fore_color.rgb = col(PLASTER)
-    txt(s, "Strategic Materials Policy Tracker", 0.62, 0.35, 8, 0.33, 12, True, ACCENT, name="running-head")
+    txt(s, "Stratellar", 0.62, 0.35, 8, 0.33, 12, True, ACCENT, name="running-head")
     txt(s, str(number).zfill(2), 12.0, 0.35, 0.7, 0.33, 12, False, FAINT, align=PP_ALIGN.RIGHT, name="page-number")
     txt(s, title, 0.62, 0.84, 12.05, 0.8, 26, True, INK, name="title")
     if subtitle:
@@ -142,7 +142,7 @@ def build_master_slides() -> None:
     s = prs.slides.add_slide(blank)
     s.background.fill.solid()
     s.background.fill.fore_color.rgb = col(PLASTER)
-    txt(s, "Strategic Materials Policy Tracker", 0.8, 1.85, 11.73, 0.35, 13, True, ACCENT, align=PP_ALIGN.CENTER, name="cover-kicker")
+    txt(s, "Stratellar", 0.8, 1.85, 11.73, 0.35, 13, True, ACCENT, align=PP_ALIGN.CENTER, name="cover-kicker")
     txt(s, "Industrial capital and commercial execution", 0.8, 2.35, 11.73, 1.5, 44, serif=True, align=PP_ALIGN.CENTER,
         anchor=MSO_ANCHOR.MIDDLE, name="cover-title")
     rule(s, 0.8, 4.12, 11.73, BORDER, "cover-rule")
@@ -233,11 +233,11 @@ def build_master_slides() -> None:
 
 
 def brand_theme(presentation) -> None:
-    """Point the Office theme at the SMPT faces and palette.
+    """Point the Office theme at the Stratellar faces and palette.
 
     python-pptx ships the Office theme (Calibri, blue and orange accents). Anything a person adds in
     PowerPoint without an explicit font or colour would inherit it, so the theme itself is rewritten:
-    Spectral as the major (heading) face, Archivo as the minor (body) face, SMPT tokens as colours.
+    Spectral as the major (heading) face, Archivo as the minor (body) face, Stratellar tokens as colours.
     """
     from pptx.opc.constants import RELATIONSHIP_TYPE as RT
     import re
@@ -246,7 +246,7 @@ def brand_theme(presentation) -> None:
         xml = part.blob.decode("utf-8")
         xml = re.sub(r'(<a:majorFont><a:latin typeface=")[^"]*"', rf'\g<1>{FONT_EDITORIAL}"', xml, count=1)
         xml = re.sub(r'(<a:minorFont><a:latin typeface=")[^"]*"', rf'\g<1>{FONT_TEXT}"', xml, count=1)
-        xml = re.sub(r'<a:fontScheme name="[^"]*"', '<a:fontScheme name="SMPT Studio"', xml, count=1)
+        xml = re.sub(r'<a:fontScheme name="[^"]*"', '<a:fontScheme name="Stratellar Studio"', xml, count=1)
         part._blob = brand_theme_xml(xml).encode("utf-8")
 
 
@@ -254,7 +254,7 @@ if __name__ == "__main__":
     check_fonts()
     build_master_slides()
     brand_theme(prs)
-    dest = Path(sys.argv[1] if len(sys.argv) > 1 else "SMPT_Research_Master_v3.pptx")
+    dest = Path(sys.argv[1] if len(sys.argv) > 1 else "Stratellar_Research_Master_v3.pptx")
     dest.parent.mkdir(parents=True, exist_ok=True)
     prs.save(dest)
     print(f"Created {dest} ({len(prs.slides)} editable slides)")

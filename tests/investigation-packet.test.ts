@@ -14,7 +14,7 @@ test("page projection and emitted packet bytes agree, remain deterministic and s
   const response = await GET(new Request("https://example.test/"), { params: Promise.resolve({ id: wagerup }) });
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type")!, /application\/json/);
-  assert.equal(response.headers.get("content-disposition"), `attachment; filename="smpt-${wagerup}-investigation.json"`);
+  assert.equal(response.headers.get("content-disposition"), `attachment; filename="stratellar-${wagerup}-investigation.json"`);
   const bytes = await response.text();
   assert.deepEqual(JSON.parse(bytes), page.packet);
   assert.equal(bytes, JSON.stringify(getPublicProjectInvestigation(wagerup)!.packet, null, 2) + "\n");

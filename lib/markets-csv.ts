@@ -2,7 +2,7 @@
  * CSV export for the market monitor. Deterministic (no wall-clock reads), so
  * the route handler can be force-static. The header is the first line, so Excel,
  * pandas, R and database loaders read the file without skipping rows. Each row
- * carries its source's attribution, licence, terms link, SMPT's statement of
+ * carries its source's attribution, licence, terms link, Stratellar's statement of
  * changes, the note on underlying commercial data and its reuse terms, so a filtered or split
  * extract keeps the attribution its publisher requires. One row per series per
  * period exactly as stored; monthly and annual rows are told apart by

@@ -4,9 +4,15 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+## Name
+
+The public name is **Stratellar**, with the descriptor **Strategic Materials Intelligence**. Use it in all new public copy, metadata, documents and templates; `lib/site.ts` is the source for the name, descriptor and tagline, and `docs/brand/STRATELLAR_BRAND_SYSTEM.md` documents the identity. Stratellar is a publishing name. Do not describe it as an incorporated company, a firm with clients or a licensed adviser.
+
+The project published as Strategic Materials Policy Tracker (SMPT) until the Stratellar launch. That name stays wherever changing it would break a reference or misstate a record: file and skill names (`SMPT_*`, `smpt-*`), environment variables, citation keys, dataset versions, schema identifiers, workflow names, the repository and deployment addresses, dated review records, and the files of research released under the earlier imprint (`public/research/**`). Name the earlier imprint only where provenance or compatibility needs it; do not add "formerly" lines elsewhere. `docs/brand/STRATELLAR_CUTOVER.md` lists what changes at the domain and repository move.
+
 ## Mandatory publication writing guide
 
-For every new or substantially revised public-facing research article, policy analysis, report, executive memo, social research edition or publication landing page, **read [SMPT Research Publication House Style](docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) before drafting and revisit its natural-language review checklist before delivery**. This requirement applies to narrative articles and website copy, not just decks. It complements the legal/source and publication gates below; a fluent rewrite must never erase a material qualifier, source or legal-status distinction. Automated adherence checks can verify the guide is routed and files compile, but human editorial judgment is still required to approve the writing.
+For every new or substantially revised public-facing research article, policy analysis, report, executive memo, social research edition or publication landing page, **read [Stratellar Research Publication House Style](docs/research/SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) before drafting and revisit its natural-language review checklist before delivery**. This requirement applies to narrative articles and website copy, not just decks. It complements the legal/source and publication gates below; a fluent rewrite must never erase a material qualifier, source or legal-status distinction. Automated adherence checks can verify the guide is routed and files compile, but human editorial judgment is still required to approve the writing.
 
 ## Automatic research covers (presentation-only)
 
@@ -20,9 +26,9 @@ Use concise, specific, natural editorial copy. A visible sentence must provide a
 
 Do not remove source attribution, legal/financial status distinctions, uncertainty, methodological qualifications or accessibility information to achieve shorter copy. Check the resulting page at mobile and desktop widths; compare before/after reading time, navigation clarity and content availability. This standard applies to all new public pages and future revisions.
 
-## SMPT editorial positioning
+## Stratellar editorial positioning
 
-Treat SMPT as a comparative economic-security and industrial-policy research platform, not as a China- or Mandarin-centered project. Apply these principles to all public-facing copy, metadata and project documentation:
+Treat Stratellar as a comparative economic-security and industrial-policy research platform, not as a China- or Mandarin-centered project. Apply these principles to all public-facing copy, metadata and project documentation:
 
 - **Geographically neutral:** Organize comparisons by policy instrument, material, jurisdiction and evidence. Do not cast China as the default subject and other jurisdictions as reactions; retain country-specific facts where supported. Coverage is selective and uneven, not equivalent across countries.
 - **Economically substantive:** Explain trade and legal controls, industrial policy, public financing, investment, stockpiling and implementation with precise status distinctions. Do not confuse announcements, commitments, disbursements and physical operations.
@@ -30,8 +36,8 @@ Treat SMPT as a comparative economic-security and industrial-policy research pla
 
 For **Applied Strategy** and **Financial Intelligence** research products, read [the permanent Four-Layer Analytical Framework & Applied Strategy Standard](docs/research/SMPT_APPLIED_STRATEGY_STANDARD.md) before drafting a deck, model or recommendation. Treat these as separate analytical products: test policy → capital allocation → execution → commercial implications; label evidence versus assumptions and scenarios; preserve original-source traceability and keep projections out of the source-linked tracker.
 
-For every new or revised SMPT research deck, also read [Presentation Standard v2](docs/design/presentations/SMPT_PRESENTATION_STANDARD_V2.md), [Exhibit and Chart Rules](docs/design/presentations/EXHIBIT_AND_CHART_RULES.md), and the mandatory [Editorial Authenticity & Visual Integrity Standard](docs/design/presentations/EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md). Record the five review gates in the publication QC handoff. Prefer affirmative, specific analytical prose; preserve material factual negations and evidence distinctions. Do not infer human approval from automated review.
+For every new or revised Stratellar research deck, also read [Presentation Standard v2](docs/design/presentations/SMPT_PRESENTATION_STANDARD_V2.md), [Exhibit and Chart Rules](docs/design/presentations/EXHIBIT_AND_CHART_RULES.md), and the mandatory [Editorial Authenticity & Visual Integrity Standard](docs/design/presentations/EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md). Record the five review gates in the publication QC handoff. Prefer affirmative, specific analytical prose; preserve material factual negations and evidence distinctions. Do not infer human approval from automated review.
 
-Also apply the [Visual Repertoire & Consulting References](docs/design/presentations/VISUAL_REPERTOIRE_AND_REFERENCES.md): plan exhibit families in the existing slide manifest, actively consider graphics for timing/change/state questions, and review the contact sheet for purposeful visual variety. Keep Archivo and SMPT's visual identity consistent; retain tables where precise comparison warrants them. External examples are linked and discussed, while SMPT graphics remain original and editable.
+Also apply the [Visual Repertoire & Consulting References](docs/design/presentations/VISUAL_REPERTOIRE_AND_REFERENCES.md): plan exhibit families in the existing slide manifest, actively consider graphics for timing/change/state questions, and review the contact sheet for purposeful visual variety. Keep Archivo and Stratellar's visual identity consistent; retain tables where precise comparison warrants them. External examples are linked and discussed, while Stratellar graphics remain original and editable.
 
 Preserve the existing schema, source rights, reviewer authority and publication gates when changing language. Do not rewrite historically or country-specific sourced records merely to make aggregate messaging geographically neutral.

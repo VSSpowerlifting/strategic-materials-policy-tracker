@@ -1,24 +1,24 @@
 {
   "article": "app/research/antimony-supply-resilience/page.tsx",
-  "contentSha256": "cbbda6e283bd75d05656990951f2e29b03a259a0b3cdef4de6924868f4458028",
+  "contentSha256": "ac715ff1d27f6f2bb119965bd2b4bbd0dc244bf74a8d3f040d5866612c241aab",
   "reviewer": "Benjamin Yang",
-  "reviewDate": "2026-11-12",
+  "reviewDate": "2026-11-24",
   "checks": {
     "readAllCopy": {
       "verified": true,
-      "notes": "Publication narrative, figures, and source-linked findings were unchanged; publisher reviewed and approved the cover presentation on 12 November 2026. Added Antimony ingot."
+      "notes": "Approved the Stratellar name for the live antimony records and the Open Graph title, along with the study-specific social card. The suggested citation retains the historical SMPT imprint."
     },
     "desktopPreview": {
       "verified": true,
-      "notes": "Publisher explicitly reviewed and approved the revised covers on 12 November 2026. Independent automated browser QA could not access the sign-in-protected Vercel preview."
+      "notes": "The packet’s 1440 px captures show the live records sentence and the suggested citation."
     },
     "mobilePreview": {
       "verified": true,
-      "notes": "Publisher explicitly reviewed and approved the revised covers on 12 November 2026. Independent automated mobile browser QA was blocked by Vercel preview authentication."
+      "notes": "The packet’s 390 px captures show the live records sentence and the suggested citation at phone width."
     },
     "sourceLinksAndFacts": {
       "verified": true,
-      "notes": "The research claims and source links in the article were not rewritten. Antimony ingot is separately captioned as illustrative, with original source link, image date, credit, rights, and explicit limitations; review records the publisher's approval."
+      "notes": "The packet confirms that /materials/antimony remains the live records link and that the historical Applied Strategy 001 citation is preserved. The Strategy & Finance card identifies U.S. Antimony Supply Resilience, 2027–2031, Benjamin Yang and 4 November 2026."
     }
   },
   "exceptions": []

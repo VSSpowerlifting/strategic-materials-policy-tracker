@@ -9,6 +9,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Explore policy evidence",
+  alternates: { canonical: "/events" },
   description:
     "Searchable, filterable database of policy events — export controls, designations, funding and stockpiling — across China, the US, the EU and allied states.",
 };

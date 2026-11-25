@@ -1,10 +1,10 @@
-# SMPT exhibit system
+# Stratellar exhibit system
 
-Added 7 November 2026 · Development reference for SMPT research decks. It is not part of the public site, and nothing here is cleared for publication.
+Added 7 November 2026 · Development reference for Stratellar research decks. It is not part of the public site, and nothing here is cleared for publication.
 
 The system turns a JSON fixture into a native, editable PowerPoint exhibit. It contains 39 registered patterns in 11 families. Each pattern has a data contract, integrity checks, an editability statement and a documented alternative it was chosen over. Use it with [Presentation Standard v2](../SMPT_PRESENTATION_STANDARD_V2.md), [Exhibit and Chart Rules](../EXHIBIT_AND_CHART_RULES.md), [Visual Integrity](../EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md) and the [Visual Repertoire](../VISUAL_REPERTOIRE_AND_REFERENCES.md).
 
-> **Synthetic data only.** Every name, figure and date in the fixtures, the gallery deck, the demo deck and the previews was made up for layout. None of it is an SMPT research finding. Fixtures use invented entities (such as "Programme Gamma" or "Facility Alpha"), a notional currency (`CU`) and demonstration cut-off dates. `parseFixture` rejects any fixture whose `classification` is not `synthetic-demonstration`, and every non-cover slide carries the synthetic notice.
+> **Synthetic data only.** Every name, figure and date in the fixtures, the gallery deck, the demo deck and the previews was made up for layout. None of it is a Stratellar research finding. Fixtures use invented entities (such as "Programme Gamma" or "Facility Alpha"), a notional currency (`CU`) and demonstration cut-off dates. `parseFixture` rejects any fixture whose `classification` is not `synthetic-demonstration`, and every non-cover slide carries the synthetic notice.
 
 ## What is here
 
@@ -130,7 +130,7 @@ Each pattern spec states what is editable, what is positioned but not data-bound
 ## Boundaries
 
 - The gallery is a local development document. Do not link it from, or deploy it with, the research site without separate authorization.
-- Consulting references are linked by URL and page in the registry. No external slide artwork, screenshot, logo or font is reproduced. The patterns are original SMPT compositions.
+- Consulting references are linked by URL and page in the registry. No external slide artwork, screenshot, logo or font is reproduced. The patterns are original Stratellar compositions.
 - A pattern is a form. Using one in a publication still requires the controlling model, the evidence register and the five review gates.
 
 ## Browsing the portfolio
@@ -178,7 +178,7 @@ A research spec may replace `cover_lines` with a `cover` block (giving both is a
   "thesis": "One sentence, qualifiers kept.",
   "thesis_source": "Where the wording comes from (goes to speaker notes)",
   "callout": { "value": "$2.83bn", "label": "What the figure is\nWhat it is not", "basis": "Model cell", "evidence_refs": ["S01"] },
-  "footer": "Strategic Materials Policy Tracker · Research cutoff: …",
+  "footer": "Stratellar · Research cutoff: …",
   "hero": { "image": "assets/x.jpg", "sha256": "…", "alt": "…", "credit": "…", "caption": "…" }   // caption is optional
 }
 ```

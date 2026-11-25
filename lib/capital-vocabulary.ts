@@ -1,5 +1,5 @@
 /**
- * The canonical reader definitions for SMPT's financial and control terminology.
+ * The canonical reader definitions for Stratellar's financial and control terminology.
  * Previously local to /methodology. Imported by both the methodology and
  * read-only explanatory UI, so meaning never drifts with a glossary copy.
  * These labels are source-independent category definitions, not an adjudication

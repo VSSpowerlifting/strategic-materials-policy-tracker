@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, JetBrains_Mono, Spectral } from "next/font/google";
 import "./globals.css";
 import { SkipLink } from "@/components/skip-link";
@@ -34,11 +34,15 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: { default: site.name, template: `%s · ${site.shortName}` },
+  title: { default: `${site.name}: ${site.descriptor}`, template: `%s · ${site.name}` },
   description: site.description,
   metadataBase: new URL(site.url),
   applicationName: site.name,
+  openGraph: { type: "website", siteName: site.name, locale: "en_US" },
+  twitter: { card: "summary_large_image" },
 };
+
+export const viewport: Viewport = { themeColor: "#f6f5f1" };
 
 export default function RootLayout({
   children,

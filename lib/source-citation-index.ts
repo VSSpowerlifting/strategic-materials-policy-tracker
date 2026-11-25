@@ -1,5 +1,5 @@
 /**
- * Pure canonical reverse-citation index over explicit links in published SMPT
+ * Pure canonical reverse-citation index over explicit links in published Stratellar
  * records. No data loaders: safe to use from both the source directory and
  * the coverage report without introducing a circular data/coverage import.
  */

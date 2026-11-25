@@ -49,7 +49,7 @@ export function explainFinancialRecord(
    ? c.capitalSource==="private"||c.capitalSource==="not_stated"
      ? "A commitment record is not automatically a government commitment. The recorded provider and capital source determine attribution."
      : "This is a commitment role, but the financial status still determines legal standing and payment. Funding and verified industrial outcomes remain separate."
-   : "This value role is not included in SMPT's public-recipient commitment totals. A ceiling, indication, private contribution or project cost is not an additional government award.";
+   : "This value role is not included in Stratellar's public-recipient commitment totals. A ceiling, indication, private contribution or project cost is not an additional government award.";
  return {
   role:{label:valueRoleLabels[role],definition:VALUE_ROLE_DEFS[role]},
   status:{label:financialStatusLabels[status],definition:FINANCIAL_STATUS_DEFS[status]},

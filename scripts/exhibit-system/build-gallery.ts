@@ -111,7 +111,7 @@ function coverSlide(pptx: Pptx, title: string, lines: string[], records: Element
   const x = 0.8;
   const w = SLIDE_W - 2 * x;
   if (!opts.plainFrame) {
-    h.text("cover-kicker", "frame", synthetic ? "Strategic Materials Policy Tracker · Exhibit system" : "Strategic Materials Policy Tracker", {
+    h.text("cover-kicker", "frame", synthetic ? "Stratellar · Exhibit system" : "Stratellar", {
       x, y: 1.35, w, h: 0.35, fontSize: 13, bold: true, color: C.accent, align: "center",
     });
   }
@@ -133,7 +133,7 @@ function coverSlide(pptx: Pptx, title: string, lines: string[], records: Element
   });
   slide.addNotes(
     synthetic
-      ? "Cover. Classification: synthetic-demonstration. Contains no SMPT research finding."
+      ? "Cover. Classification: synthetic-demonstration. Contains no Stratellar research finding."
       : `Cover. Classification: research. DRAFT · REVIEW GATES PENDING. Publication authorization is not granted by this tool. ${opts.qcRecord ? `QC record named: ${opts.qcRecord} (its contents are not verified by the exhibit tools).` : "No QC record attached; review gates A–E are pending."}`,
   );
 }
@@ -213,12 +213,12 @@ export async function buildDeck(
   const synthetic = opts.classification === "synthetic-demonstration";
   const Pptx = PptxGenJS as unknown as PptxCtor;
   const pptx = new Pptx();
-  pptx.defineLayout({ name: "SMPT_WIDE", width: SLIDE_W, height: SLIDE_H });
-  pptx.layout = "SMPT_WIDE";
-  pptx.author = "SMPT exhibit system";
-  pptx.company = "Strategic Materials Policy Tracker";
+  pptx.defineLayout({ name: "STRATELLAR_WIDE", width: SLIDE_W, height: SLIDE_H });
+  pptx.layout = "STRATELLAR_WIDE";
+  pptx.author = "Stratellar exhibit system";
+  pptx.company = "Stratellar";
   pptx.title = cover.title;
-  pptx.subject = synthetic ? "Synthetic demonstration exhibits — not SMPT findings" : "SMPT research exhibits";
+  pptx.subject = synthetic ? "Synthetic demonstration exhibits — not Stratellar findings" : "Stratellar research exhibits";
   pptx.theme = { headFontFace: FONT, bodyFontFace: FONT };
 
   const manifest: SlideManifest[] = [];

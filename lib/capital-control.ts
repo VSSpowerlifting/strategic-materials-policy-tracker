@@ -156,7 +156,7 @@ export function financialStatusEvidenceBoundary(
 /**
  * What an evidence boundary is: the status's own date (`stated`), the
  * publication date of the source reporting an undated status
- * (`source_published`), or an observation date of SMPT's: the financial-review
+ * (`source_published`), or an observation date of Stratellar's: the financial-review
  * date (`review_checked`) or the source access date (`source_accessed`).
  */
 export type FinancialStatusEvidenceBasis = "stated" | "source_published" | "review_checked" | "source_accessed";

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SMPT executive memo and report-page generator (Architectural Research Studio, v3).
+"""Stratellar executive memo and report-page generator (Architectural Research Studio, v3).
 
 Builds a font-embedded, selectable-text PDF from a small JSON spec. Colours, faces and
 page geometry come from docs/design/publication-tokens.json through scripts/publication/tokens.py;
@@ -190,7 +190,7 @@ def build_memo(spec: dict, out: Path, fonts: dict[str, str] | None = None) -> No
         canvas.line(MARGIN, PAGE_H - MARGIN + 14, PAGE_W - MARGIN, PAGE_H - MARGIN + 14)
         canvas.setFillColor(_c("graphite"))
         canvas.setFont(f["text-medium"], 8.5)
-        canvas.drawString(MARGIN, PAGE_H - MARGIN + 21, "Strategic Materials Policy Tracker")
+        canvas.drawString(MARGIN, PAGE_H - MARGIN + 21, "Stratellar")
         canvas.setFillColor(_c("slate"))
         canvas.setFont(f["text"], 8.5)
         canvas.drawRightString(PAGE_W - MARGIN, PAGE_H - MARGIN + 21, spec.get("kicker", "Executive memo"))
@@ -206,8 +206,8 @@ def build_memo(spec: dict, out: Path, fonts: dict[str, str] | None = None) -> No
 
     doc = BaseDocTemplate(
         str(out), pagesize=letter, leftMargin=MARGIN, rightMargin=MARGIN, topMargin=MARGIN, bottomMargin=MARGIN,
-        title=spec["title"], author="Strategic Materials Policy Tracker", subject=spec.get("kicker", "Executive memo"),
-        creator="SMPT publication system v3", initialFontName=f["text"],
+        title=spec["title"], author="Stratellar", subject=spec.get("kicker", "Executive memo"),
+        creator="Stratellar publication system v3", initialFontName=f["text"],
     )
     doc.addPageTemplates([PageTemplate(id="memo", frames=[Frame(MARGIN, MARGIN, CONTENT_W, PAGE_H - 2 * MARGIN, 0, 0, 0, 0)], onPage=page)])
 

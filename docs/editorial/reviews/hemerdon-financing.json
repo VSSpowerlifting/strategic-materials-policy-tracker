@@ -1,24 +1,24 @@
 {
   "article": "app/research/hemerdon-financing/page.tsx",
-  "contentSha256": "b2d162a1a22203cc43a6d4e1f15d51687645d761f398ac64afd2f5cf37a3361e",
+  "contentSha256": "698dab97c5557d8bfbf32378d927305d8597f475dc41f2cebfb4d638a5a52943",
   "reviewer": "Benjamin Yang",
-  "reviewDate": "2026-11-12",
+  "reviewDate": "2026-11-24",
   "checks": {
     "readAllCopy": {
       "verified": true,
-      "notes": "Publication narrative, figures, and source-linked findings were unchanged; publisher reviewed and approved the cover presentation on 12 November 2026. Added Drakelands/Hemerdon satellite image."
+      "notes": "Approved the committed Sources standfirst, which attributes the sensitivity calculations to Stratellar and says Tungsten West issued no such forecasts. The packet also shows the updated title suffix and study card."
     },
     "desktopPreview": {
       "verified": true,
-      "notes": "Publisher explicitly reviewed and approved the revised covers on 12 November 2026. Independent automated browser QA could not access the sign-in-protected Vercel preview."
+      "notes": "The packet’s 1440 px captures show the approved Sources standfirst and the closing note."
     },
     "mobilePreview": {
       "verified": true,
-      "notes": "Publisher explicitly reviewed and approved the revised covers on 12 November 2026. Independent automated mobile browser QA was blocked by Vercel preview authentication."
+      "notes": "The packet’s 390 px captures show the approved Sources standfirst and the closing note at phone width."
     },
     "sourceLinksAndFacts": {
       "verified": true,
-      "notes": "The research claims and source links in the article were not rewritten. Drakelands/Hemerdon satellite image is separately captioned as illustrative, with original source link, image date, credit, rights, and explicit limitations; review records the publisher's approval."
+      "notes": "The packet cites the memo and model guide for the analyst-combined sensitivity and the evidence appendix for the approximately £3 million company-reported delay input. The SHA-pinned downloads and SMPT_FI001 file names are preserved. The Strategy & Finance card identifies the study, Benjamin Yang and 5 November 2026."
     }
   },
   "exceptions": []

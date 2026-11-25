@@ -12,14 +12,16 @@ import { journeys, site } from "@/lib/site";
 import { datasetJsonLd, jsonLdScript } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Critical minerals policy, financing and industrial development",
+  // `absolute`: the root layout's title template does not reach the page of its own segment.
+  title: { absolute: `${site.name}: ${site.descriptor}` },
   description:
     "Original research and source-linked data on export controls, public financing and industrial projects in strategic-material supply chains.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: site.name,
+    title: `${site.name}: ${site.descriptor}`,
     description:
       "Research on strategic-materials policy, financing and industrial development.",
   },
@@ -305,7 +307,7 @@ export default function Home() {
               </p>
               <p className="mt-5">
                 <a
-                  href="mailto:ben.yang@gwmail.gwu.edu?subject=SMPT%20research%20inquiry"
+                  href="mailto:ben.yang@gwmail.gwu.edu?subject=Stratellar%20research%20inquiry"
                   className="research-button-secondary"
                 >
                   ben.yang@gwmail.gwu.edu

@@ -1,4 +1,4 @@
-# SMPT research publication house style — v3
+# Stratellar research publication house style — v3
 
 **Adopted on 4 November 2026; typography updated on 6 November 2026; aligned with the Architectural Research Studio identity on 11 November 2026.** Applies to the website, social research editions, executive memos, long-form research dossiers, and reader-facing research pages. Existing publication binaries remain frozen until a separately reviewed and verified replacement is authorized. v3 governs new and re-issued publications only; it does not restyle any frozen binary.
 

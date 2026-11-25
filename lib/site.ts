@@ -1,15 +1,26 @@
 /**
  * Single source of truth for site identity, navigation, and the footer
- * disclaimers. The name was chosen to fit the multi-actor, policy-instrument
- * scope (not "control", since the project also tracks funding and stockpiling).
+ * disclaimers.
+ *
+ * Stratellar is the publishing name. It is a brand, not a statement about a
+ * legal entity: nothing here or in the site copy should describe Stratellar as
+ * incorporated, as a firm with clients, or as a licensed adviser.
  */
 export const site = {
-  name: "Strategic Materials Policy Tracker",
-  shortName: "SMPT",
-  tagline:
-    "Comparative economic-security research on strategic-material policy and implementation.",
+  name: "Stratellar",
+  shortName: "Stratellar",
+  /** Sits under or beside the name wherever the name appears without context (lockups, cards, titles). */
+  descriptor: "Strategic Materials Intelligence",
+  tagline: "Materials. Policy. Capital.",
   description:
-    "Comparative economic-security research on industrial policy, trade and legal controls, investment, public financing and reported industrial activity across strategic-material supply chains, grounded in source-linked evidence.",
+    "Research and source-linked data on the policy, financing and industrial projects that shape strategic-material supply chains.",
+  /**
+   * The name the project published under until the Stratellar launch. Kept for
+   * provenance only: releases issued before the change carry this imprint in
+   * their files, and their citations name it. Do not use it as an alternative
+   * name for the site.
+   */
+  formerName: "Strategic Materials Policy Tracker",
   version: "v0.6-capital-intelligence",
   /**
    * Date of the latest source-reviewed, curated research-corpus release. An
@@ -39,8 +50,12 @@ export const site = {
    */
   monitoringStartedAt: null as string | null,
   scopeStart: "2018",
-  // Placeholder until a domain is registered / deployed.
-  url: "https://strategic-materials-policy-tracker.vercel.app",
+  /** Canonical origin for metadata, citations, and the sitemap. */
+  url: "https://stratellar.com",
+  /** Original origin for released links and browser-local saved events. */
+  legacyUrl: "https://strategic-materials-policy-tracker.vercel.app",
+  /** Source repository. Renamed at cutover; GitHub redirects the old path. */
+  repository: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker",
 } as const;
 
 /**

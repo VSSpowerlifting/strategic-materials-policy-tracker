@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 /** Stated once above the directory, so each entry carries only what is specific to its material. */
-const COMMON_COVERAGE = "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series SMPT uses. ";
+const COMMON_COVERAGE = "Not in the World Bank Pink Sheet monthly workbook or the IMF Primary Commodity Prices series Stratellar uses. ";
 const COMMON_TERMS = /,(?: published)? under terms that permit redistribution with attribution\.$/;
 
 function withoutCommonCoverage(text: string): string {
@@ -83,7 +83,7 @@ const DEFINITIONS: { term: string; text: string }[] = [
   },
   {
     term: "Price assessment",
-    text: "A price-reporting agency’s or dealer’s assessment for a stated product and grade, republished by the IMF or the USGS with its source named. SMPT has not seen the underlying assessment data.",
+    text: "A price-reporting agency’s or dealer’s assessment for a stated product and grade, republished by the IMF or the USGS with its source named. Stratellar has not seen the underlying assessment data.",
   },
   {
     term: "Trade unit value",
@@ -162,7 +162,7 @@ export default function MarketsPage() {
           <p className="mt-5 max-w-4xl text-[0.9375rem] leading-7 text-muted">
             Figures are period averages or unit values in US dollars, as each source publishes them; the USGS labels its
             lithium carbonate price “annual average-real” without stating a deflator or base year. Percentage changes,
-            indexed values and rankings are SMPT calculations, with no interpolation or unit conversion. Prices are not linked to
+            indexed values and rankings are Stratellar calculations, with no interpolation or unit conversion. Prices are not linked to
             policy actions or financing, and a shared date does not show that a measure moved a price.
           </p>
         </Section>
@@ -328,7 +328,7 @@ export default function MarketsPage() {
             ))}
           </ul>
           <p className="mt-5 max-w-4xl text-sm leading-6 text-muted">
-            SMPT republishes each publisher’s released figures only, without the exchange or vendor data behind them. Every
+            Stratellar republishes each publisher’s released figures only, without the exchange or vendor data behind them. Every
             dataset is rebuilt from a pinned source file with a verified checksum; the site build never fetches prices.
           </p>
         </Section>
@@ -338,7 +338,7 @@ export default function MarketsPage() {
             {coverage.gaps.length} tracked materials have no monthly series here. The monthly sources are the World Bank Pink
             Sheet workbook and three IMF Primary Commodity Prices series (cobalt, palladium and rare-earth carbonate). A
             monthly series qualifies when it covers one named product and grade and its publisher permits redistribution with
-            attribution. SMPT has not reviewed the licence terms of any commercial price assessment or exchange data feed and
+            attribution. Stratellar has not reviewed the licence terms of any commercial price assessment or exchange data feed and
             redistributes none.
           </p>
           <ul className="mt-6 gap-x-8 md:columns-2 xl:columns-3">

@@ -8,7 +8,7 @@
  *   own date, or, for an undated entry, the date by which the corpus evidences it. A step's date is therefore
  *   "recorded by", never "happened on".
  * - Each step says what kind of date it is (`StepDateBasis`). A status's own date reads "Recorded by"; the
- *   publication date of a source reporting an undated status reads "Reported on"; an SMPT review or access date
+ *   publication date of a source reporting an undated status reads "Reported on"; an Stratellar review or access date
  *   reads "Checked by". A source or check date is never presented as the date the status took effect.
  * - Between boundaries nothing changes. A step holds its state until the next one; nothing is interpolated.
  * - The lane layout is the latest model's. Each step only overlays class and status per row, so lanes never
@@ -54,7 +54,7 @@ export type ListedStepState = {
 
 /**
  * What kind of date a step's date is, for the rows that change there: `recorded`, a status's own date; `reported`,
- * the publication date of a source that reports a status without giving its date; `checked`, the date SMPT
+ * the publication date of a source that reports a status without giving its date; `checked`, the date Stratellar
  * reviewed or accessed a source that gives no date for the status.
  */
 export type StepDateBasis = "recorded" | "reported" | "checked";
@@ -75,7 +75,7 @@ export const STEP_DATE_TAG: Record<StepDateBasis, string | null> = {
 /** Explains a tagged step date, shown under the dates when the replay has one. */
 export const STEP_DATE_NOTE: Record<Exclude<StepDateBasis, "recorded">, string> = {
   reported: "Reported: the publication date of a source that reports a status without giving its date.",
-  checked: "Checked: the date SMPT reviewed the status or accessed its source, where neither the status nor the source is dated.",
+  checked: "Checked: the date Stratellar reviewed the status or accessed its source, where neither the status nor the source is dated.",
 };
 
 const BASIS_OF: Record<FinancialStatusEvidenceBasis, StepDateBasis> = {

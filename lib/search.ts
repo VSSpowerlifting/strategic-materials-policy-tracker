@@ -328,7 +328,7 @@ export function buildSearchIndex(): SearchDoc[] {
 
   docs.push({
     id: "smpt-fi002", kind: "publication", title: fi002.title,
-    subtitle: "Financial Intelligence 002 · Independent SMPT analysis · 5 November 2026 cutoff",
+    subtitle: "Financial Intelligence 002 · Independent Stratellar analysis · 5 November 2026 cutoff",
     href: fi002.path, date: fi002.cutoff, jurisdiction: null, mechanisms: null,
     haystack: join(fi002.title, fi002.description, "FI002 copper Escondida Goldman Sachs BHP Benjamin Yang replacement economics financial model EBITDA"),
   });

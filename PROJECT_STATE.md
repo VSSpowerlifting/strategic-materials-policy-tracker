@@ -1,3 +1,10 @@
+## 2026-11-24 — Stratellar release candidate
+
+- Stratellar uses the Marker Bed mark, the descriptor “Strategic Materials Intelligence”, and the tagline “Materials. Policy. Capital.” See the [brand system](docs/brand/STRATELLAR_BRAND_SYSTEM.md).
+- The China suspension analysis, Hemerdon, Antimony, and Tungsten serve study-specific social cards. Escondida (FI002) uses the default preview. Existing research files and citations retain their original imprint. The versioned Controls ZIP retains its published bytes and historical attribution.
+- Benjamin Yang approved the research index and five research articles on 24 November 2026. The six editorial records preserve the approved content fingerprints.
+- The domain is registered. The site keeps its existing address, and domain configuration and production release require separate approval. See the [cutover checklist](docs/brand/STRATELLAR_CUTOVER.md).
+
 ## 2026-11-23 — Controls snapshot for review (PR #286)
 
 - The opt-in `snapshot:controls` build packages 53 clauses, 24 related events, 119 status entries and 49 sources from the public export corpus. The [dictionary and independent import](docs/engineering/controls-snapshot/README.md) cover joins, dated queries and evidence limits at the 2026-11-12 cutoff.

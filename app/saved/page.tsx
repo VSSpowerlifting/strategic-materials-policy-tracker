@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading } from "@/components/ui/container";
 import { SavedEventsExplorer } from "@/components/saved-events-explorer";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Saved events",
+  alternates: { canonical: "/saved" },
   description:
-    "A personal event list stored locally in this browser. Separate from SMPT’s official-source watchlist.",
+    "A personal event list stored locally in this browser. Separate from Stratellar’s official-source watchlist.",
 };
 
 export default function SavedEventsPage() {
@@ -24,6 +26,10 @@ export default function SavedEventsPage() {
           </>
         }
       />
+      <p className="mt-4 text-sm text-muted">
+        Events saved before the move remain in your{" "}
+        <a href={`${site.legacyUrl}/saved`} className="link-quiet">original saved list</a>.
+      </p>
       <div className="mt-10">
         <SavedEventsExplorer />
       </div>

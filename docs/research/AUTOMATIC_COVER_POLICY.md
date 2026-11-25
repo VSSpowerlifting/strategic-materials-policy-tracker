@@ -1,4 +1,4 @@
-# Automatic cover assignment for SMPT research
+# Automatic cover assignment for Stratellar research
 
 ## Scope
 
@@ -23,7 +23,7 @@ The publication slug automatically determines the cover. The renderer returns a 
 1. Preserve pinned covers for already published articles via `researchCovers` in `lib/photography.ts`.
 2. Apply a previously registered photograph only for an identifiable depicted mine, or a genuinely generic material specimen. The China rare-earth photograph is restricted to China-specific rare-earth slugs.
 3. For other supported materials, use the existing typographic plate with verified element labels.
-4. For subjects without a safe specific image, use the branded SMPT research plate instead of a random photograph, a speculative mine photo, or a blank block.
+4. For subjects without a safe specific image, use the branded Stratellar research plate instead of a random photograph, a speculative mine photo, or a blank block.
 
 Use the shared `ResearchCover` component for both index and article. Photos always show a caption with their date, place, subject, source and credit. Historical photographs never imply current operations. Additional documentary images can be enrolled only with a named subject, acquisition date, source URL, usage rights, accurate alternative text and clear limitations. Never fetch arbitrary third-party imagery at build time.
 

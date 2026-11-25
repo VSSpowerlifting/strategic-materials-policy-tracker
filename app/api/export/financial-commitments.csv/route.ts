@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + financialCommitmentsCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-financial-commitments.csv"',
+      "content-disposition": 'attachment; filename="stratellar-financial-commitments.csv"',
     },
   });
 }

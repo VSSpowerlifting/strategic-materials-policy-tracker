@@ -58,7 +58,7 @@ export default function CoveragePage() {
     <Container className="py-12">
       <PageHeading
         title="Coverage"
-        lead="Corpus size, primary-source coverage and research gaps in the data currently in SMPT."
+        lead="Corpus size, primary-source coverage and research gaps in the data currently in Stratellar."
       />
 
       <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
@@ -173,7 +173,7 @@ export default function CoveragePage() {
             <h3 className="font-display font-semibold">Actor-coverage imbalance</h3>
             <p className="mt-2 text-sm leading-6 text-muted">
               {topActor
-                ? `${jurisdictionLabels[topActor.jurisdiction]} accounts for ${topActor.events} of ${s.totals.events} coded events (${topActorPct}%). Event counts reflect differences in SMPT’s research coverage across jurisdictions.`
+                ? `${jurisdictionLabels[topActor.jurisdiction]} accounts for ${topActor.events} of ${s.totals.events} coded events (${topActorPct}%). Event counts reflect differences in Stratellar’s research coverage across jurisdictions.`
                 : "No events are coded yet."}
             </p>
           </div>

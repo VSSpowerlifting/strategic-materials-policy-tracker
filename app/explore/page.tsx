@@ -69,7 +69,7 @@ export default function ExplorePage() {
       />
 
       <form action="/search" method="get" role="search" className="mx-auto mt-10 flex max-w-2xl gap-3">
-        <label htmlFor="explore-q" className="sr-only">Search SMPT</label>
+        <label htmlFor="explore-q" className="sr-only">Search Stratellar</label>
         <input
           id="explore-q"
           name="q"

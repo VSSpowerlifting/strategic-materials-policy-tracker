@@ -1,4 +1,4 @@
-# SMPT Exhibit and Chart Rules
+# Stratellar Exhibit and Chart Rules
 
 Version 3.0 · 11 November 2026 (colour grammar aligned with the Architectural Research Studio; analytical rules unchanged from 2.0, 5 November 2026) · [Return to presentation index](README.md)
 
@@ -24,7 +24,7 @@ Use the [broader visual repertoire and linked examples](VISUAL_REPERTOIRE_AND_RE
 
 ## Transaction and financing taxonomy
 
-SMPT's status vocabulary should persist into presentations:
+Stratellar's status vocabulary should persist into presentations:
 
 1. Announcement or **selection for negotiation**.
 2. Authorization or conditional offer.

@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 import { resolveResearchCover } from "@/lib/photography";
+import { site } from "@/lib/site";
+import { Mark } from "@/components/ui/brand";
 import { PhotoPlate } from "./photo-plate";
 
 /* Named frames, so a page picks a proportion without passing class strings through a content attribute. */
@@ -36,11 +38,14 @@ export function ResearchCover({
     return <PhotoPlate photo={cover.photo} frame={frame} sizes={sizes} priority={priority} caption={caption} className={className} />;
   }
   const long = cover.mark.length > 3;
+  // The general plate (no subject photograph, no material plate) carries the mark above the name.
+  const general = cover.mark === site.name;
   return (
     <div
       aria-hidden
       className={cn("flex flex-col items-center justify-center border border-border bg-elevated text-center", frame, className)}
     >
+      {general ? <Mark className="mb-5 h-10 sm:h-12" /> : null}
       <span className="font-display text-xs text-faint">{cover.line}</span>
       <span className={cn("mt-2 font-editorial font-light leading-none text-foreground", long ? "text-[clamp(2rem,5vw,3.5rem)]" : "text-[clamp(4.5rem,11vw,8rem)]")}>
         {cover.mark}

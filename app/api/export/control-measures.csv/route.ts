@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + controlMeasuresCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-control-measures.csv"',
+      "content-disposition": 'attachment; filename="stratellar-control-measures.csv"',
     },
   });
 }

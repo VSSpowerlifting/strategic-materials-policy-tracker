@@ -68,20 +68,20 @@ export function contrastRatio(a: string, b: string): number {
 
 /**
  * Office theme colour scheme (`<a:clrScheme>`) built from the tokens, so a shape, chart or hyperlink
- * a person adds in PowerPoint starts from the SMPT palette, not Office blue and orange.
+ * a person adds in PowerPoint starts from the Stratellar palette, not Office blue and orange.
  * dk1/lt1 are the default text and light-text colours; accents follow the chart series order.
  */
 export function themeColourScheme(): string {
   const c = (tag: string, value: string) => `<a:${tag}><a:srgbClr val="${value}"/></a:${tag}>`;
   return (
-    `<a:clrScheme name="SMPT Studio">${c("dk1", hex("graphite"))}${c("lt1", hex("plate"))}${c("dk2", hex("slate"))}${c("lt2", hex("plaster"))}` +
+    `<a:clrScheme name="Stratellar Studio">${c("dk1", hex("graphite"))}${c("lt1", hex("plate"))}${c("dk2", hex("slate"))}${c("lt2", hex("plaster"))}` +
     `${c("accent1", hex("malachite"))}${c("accent2", hex("hematite"))}${c("accent3", hex("ochre"))}` +
     `${c("accent4", seriesHex("lapis"))}${c("accent5", seriesHex("plum"))}${c("accent6", neutralHex("mid"))}` +
     `${c("hlink", hex("malachite"))}${c("folHlink", hex("slate"))}</a:clrScheme>`
   );
 }
 
-/** Replace a theme part's colour scheme with the SMPT one; other theme content is untouched. */
+/** Replace a theme part's colour scheme with the Stratellar one; other theme content is untouched. */
 export function brandThemeXml(xml: string): string {
   return xml.replace(/<a:clrScheme[\s\S]*?<\/a:clrScheme>/, themeColourScheme());
 }

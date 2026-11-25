@@ -31,7 +31,7 @@ export function RecordReadingGuide({record}:{record:FinancialCommitment}){
     {reading.boundary} Construction, commissioning and production require
     separate physical-progress evidence. <Link href="/methodology#capital-counting"
       className="font-medium text-accent underline underline-offset-2 hover:text-accent-strong">
-      Read SMPT&apos;s counting and evidence rules
+      Read Stratellar&apos;s counting and evidence rules
     </Link>.
    </p>
   </section>;
@@ -51,7 +51,7 @@ const keys={
    {term:financialStatusLabels.contracted,meaning:FINANCIAL_STATUS_DEFS.contracted},
    {term:financialStatusLabels.partially_disbursed,meaning:FINANCIAL_STATUS_DEFS.partially_disbursed},
    {term:financialStatusLabels.disbursed,meaning:FINANCIAL_STATUS_DEFS.disbursed},
-   {term:"Obligated",meaning:"Obligation is tracked outside SMPT's financial-status categories. A contracted instrument requires separate evidence of any formal obligation."},
+   {term:"Obligated",meaning:"Obligation is tracked outside Stratellar's financial-status categories. A contracted instrument requires separate evidence of any formal obligation."},
   ],
  },
  projects:{

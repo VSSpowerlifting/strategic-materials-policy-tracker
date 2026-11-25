@@ -1,4 +1,4 @@
-// Shared types for the SMPT exhibit system.
+// Shared types for the Stratellar exhibit system.
 //
 // pptxgenjs is a pinned devDependency imported only by build-gallery.ts.
 // Renderers see the minimal structural interface below, so every pure module
@@ -79,7 +79,7 @@ export interface IntegrityIssue {
 
 /**
  * synthetic-demonstration: gallery and demo fixtures under docs/design/presentations/exhibit-system.
- * research: a real SMPT exhibit, built only through research-deck.ts from a spec kept OUTSIDE that
+ * research: a real Stratellar exhibit, built only through research-deck.ts from a spec kept OUTSIDE that
  * directory, with evidence references. The two never share a deck.
  */
 export const EXHIBIT_CLASSIFICATIONS = ["synthetic-demonstration", "research"] as const;

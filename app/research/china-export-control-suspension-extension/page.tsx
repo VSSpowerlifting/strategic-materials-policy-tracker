@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       url: `/research/${SLUG}/opengraph-image`,
       width: 1200,
       height: 630,
-      alt: "China extends its export-control pause — SMPT Policy Research",
+      alt: "Stratellar Policy Research: China Extends the Suspension of Six Export-Control Announcements Through January 10, 2027",
     }],
   },
   twitter: {
@@ -409,9 +409,9 @@ export default function ChinaSuspensionExtensionPage() {
               </section>
             </article>
 
-            <aside aria-label="SMPT records" className="lg:pt-10">
+            <aside aria-label="Stratellar records" className="lg:pt-10">
               <div className="border-t border-paper-border pt-5">
-                <h2 className="font-display text-sm font-semibold">SMPT records</h2>
+                <h2 className="font-display text-sm font-semibold">Stratellar records</h2>
                 <ul className="mt-4 space-y-3">
                   {records.map((record) => (
                     <li key={record.href}>

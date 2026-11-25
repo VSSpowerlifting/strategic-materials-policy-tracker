@@ -14,7 +14,7 @@ export default function SourcesPage(){
  const rows=buildSourceDirectory(getAllSources(),buildSourceUseIndex(publishedSourceRecords()));
  return <Container className="py-12">
    <PageHeading title="Source register"
-     lead="Original documents cited in SMPT research and data."/>
+     lead="Original documents cited in Stratellar research and data."/>
    <div className="mt-10"><SourceRegisterExplorer rows={rows}/></div>
    <p className="mt-12 max-w-prose border-t border-border pt-4 text-sm leading-6 text-muted">
      <Link href="/methodology#sources" className="link-quiet">Source hierarchy and verification standards</Link>.

@@ -7,7 +7,7 @@ on:
         description: "Canonical production HTTPS origin (no path or secrets)"
         required: true
         type: string
-        default: "https://strategic-materials-policy-tracker.vercel.app/"
+        default: "https://stratellar.com/"
 
 permissions:
   contents: read

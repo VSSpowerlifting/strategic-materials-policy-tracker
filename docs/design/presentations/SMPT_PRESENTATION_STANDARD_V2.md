@@ -1,4 +1,4 @@
-# SMPT Presentation Standard v3.0
+# Stratellar Presentation Standard v3.0
 
 Adopted **5 November 2026** · Applies to **new and revised research presentations**  
 Visual repertoire update **6 November 2026**. Identity update (v3.0) **11 November 2026**: decks adopt the Architectural Research Studio palette and type pairing; length budgets, narrative architecture, exhibit discipline and publication gates are unchanged. The file keeps its `_V2` name so existing links hold.
@@ -6,13 +6,13 @@ Companion standards: [Exhibits and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [
 
 ## Purpose and operating principles
 
-An SMPT research deck answers a real economic, financing or strategy question. It should be persuasive **because the evidence is traceable and the analysis is coherent**, not because the slides resemble a consulting firm's marketing material.
+A Stratellar research deck answers a real economic, financing or strategy question. It should be persuasive **because the evidence is traceable and the analysis is coherent**, not because the slides resemble a consulting firm's marketing material.
 
 A successful deck enables a professional reader to:
 - Understand the governing question, answer, and confidence level quickly.
 - Verify that the exhibits substantiate each principal claim.
 - Distinguish announcements, authorized commitments, executed financing, disbursement, operational production and commercial cash receipts.
-- See what analytical work SMPT performed rather than simply reading corporate or government claims.
+- See what analytical work Stratellar performed rather than simply reading corporate or government claims.
 - Locate sources, model inputs, dates and limitations without searching the entire publication.
 
 The five governing tests are **argument**, **evidence**, **economic mechanism**, **decision relevance**, and **visual legibility**. Failing any one requires revision.
@@ -167,8 +167,8 @@ Presentation language is a compressed version of serious research writing, not a
 - Avoid formulaic "not X, but Y", unsupported superlatives, "at the intersection", "landscape", "unprecedented", repeated rule-of-three lists, excessive em dashes and decorative quotation marks.
 - Do not insert unnecessary "this slide shows" or "it is important to note" sentences.
 - Preserve enough interpretation for a reader to understand the exhibit **without a live presenter**.
-- Distinguish what management/government *says*, what records *establish* and what SMPT's model *calculates*.
-- For publicly presented research, use "Independent SMPT analysis" as attribution only where justified; never imply external investment-bank review.
+- Distinguish what management/government *says*, what records *establish* and what Stratellar's model *calculates*.
+- For publicly presented research, use "Independent Stratellar analysis" as attribution only where justified; never imply external investment-bank review.
 
 ## 8. Evidence, intellectual property and rights
 
@@ -178,7 +178,7 @@ For every major quantitative exhibit, the footnote/caption must identify:
 - Calculation source / workbook version and illustrative status as needed.
 - Definitions, currency, real vs nominal and ownership share where relevant.
 
-Reference source materials may have restricted redistribution permissions. **Do not embed screenshots of McKinsey/BCG/Bain/Strategy& reference decks in this public repository.** Attribute design inspiration through links and written critique only. All SMPT visuals, chart structures and editable templates must be original. Do not bundle proprietary fonts or imply affiliation.
+Reference source materials may have restricted redistribution permissions. **Do not embed screenshots of McKinsey/BCG/Bain/Strategy& reference decks in this public repository.** Attribute design inspiration through links and written critique only. All Stratellar visuals, chart structures and editable templates must be original. Do not bundle proprietary fonts or imply affiliation.
 
 ## 9. Production, file format and QA gates
 
@@ -206,7 +206,7 @@ Editorial QA:
 
 ## 10. Governance and application
 
-- v3.0 adopts the Architectural Research Studio identity for **future and revised SMPT research decks** and keeps the v2.2 visual-repertoire workflow. It does not restyle any published deck. The graphite-and-gold, Archivo-only identity of v2.0–v2.2 survives only in frozen historical binaries (FI001, FI002) and in generators that have not been migrated; the migration status is recorded in [PUBLICATION_DESIGN_SYSTEM.md](../PUBLICATION_DESIGN_SYSTEM.md).
+- v3.0 adopts the Architectural Research Studio identity for **future and revised Stratellar research decks** and keeps the v2.2 visual-repertoire workflow. It does not restyle any published deck. The graphite-and-gold, Archivo-only identity of v2.0–v2.2 survives only in frozen historical binaries (FI001, FI002) and in generators that have not been migrated; the migration status is recorded in [PUBLICATION_DESIGN_SYSTEM.md](../PUBLICATION_DESIGN_SYSTEM.md).
 - The type pairing and palette in section 4 await maintainer approval as the house position; until then treat them as the proposed v3 identity that the validation package demonstrates.
 - Existing live FI001 publication remains unchanged until a new independently verified version has completed editorial and release gates.
 - The [FI001 redesign brief](FI001_REDESIGN_BRIEF.md) is the first candidate application, targeting 18 slides including four appendix slides.

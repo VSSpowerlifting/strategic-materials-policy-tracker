@@ -10,7 +10,7 @@ export function GET() {
   return new Response(buildBibtexAll(), {
     headers: {
       "content-type": "application/x-bibtex; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt.bib"',
+      "content-disposition": 'attachment; filename="stratellar.bib"',
     },
   });
 }

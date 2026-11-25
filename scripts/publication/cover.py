@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SMPT publication cover and social-image generator (Architectural Research Studio, v3).
+"""Stratellar publication cover and social-image generator (Architectural Research Studio, v3).
 
 Two outputs from one spec, both typographic (no stock imagery, no gradients, no shadows):
   * report cover: US Letter PDF, vector text with Spectral and Archivo embedded, selectable;
@@ -61,7 +61,7 @@ def report_cover(spec: dict, out: Path) -> None:
     f = register_fonts()
     c = rl_canvas.Canvas(str(out), pagesize=letter)
     c.setTitle(spec["title"])
-    c.setAuthor("Strategic Materials Policy Tracker")
+    c.setAuthor("Stratellar")
     c.setSubject(spec.get("kicker", "Research publication"))
     c.setFillColor(_c("plaster"))
     c.rect(0, 0, W, H, stroke=0, fill=1)
@@ -69,7 +69,7 @@ def report_cover(spec: dict, out: Path) -> None:
     # masthead
     c.setFillColor(_c("graphite"))
     c.setFont(f["text-medium"], 9.5)
-    c.drawString(MARGIN, H - MARGIN, "Strategic Materials Policy Tracker")
+    c.drawString(MARGIN, H - MARGIN, "Stratellar")
     c.setStrokeColor(_c("borderStrong"))
     c.setLineWidth(0.75)
     c.line(MARGIN, H - MARGIN - 9, W - MARGIN, H - MARGIN - 9)
@@ -161,7 +161,7 @@ def social_image(spec: dict, out: Path) -> None:
     d.rectangle([40, 40, w - 41, h - 41], outline=border, width=1)
 
     mast = _pil_font(FONT_TEXT, "Medium", 22)
-    d.text((72, 66), "Strategic Materials Policy Tracker", font=mast, fill=ink)
+    d.text((72, 66), "Stratellar", font=mast, fill=ink)
     d.line([(72, 104), (w - 72, 104)], fill=strong, width=1)
 
     kicker = _pil_font(FONT_TEXT, "Medium", 24)

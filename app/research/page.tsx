@@ -5,7 +5,7 @@ import { ResearchCover } from "@/components/editorial/research-cover";
 
 export const metadata: Metadata = {
   title: "Research",
-  description: "Source-linked original research from the Strategic Materials Policy Tracker.",
+  description: "Source-linked original research from Stratellar.",
 };
 
 /* Shared presentation for the gallery entries: the newest publication leads, the rest hang in two columns. */

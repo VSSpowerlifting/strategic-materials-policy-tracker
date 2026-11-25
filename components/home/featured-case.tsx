@@ -162,7 +162,7 @@ export function FeaturedCase() {
             These are simplified estimates of the extra value needed to recover the investment, not forecasts of
             plant output. All four use a 10% discount rate, an assumed $4,000/t net cost and a 35% tax adjustment.
             The base case uses the midpoint of BHP’s capital range and its long-term copper price assumption.
-            Source: SMPT financial model, research cutoff {formatDateLong(fi002.cutoff)}.
+            Source: Stratellar financial model, research cutoff {formatDateLong(fi002.cutoff)}.
           </p>
         </figure>
 

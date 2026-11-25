@@ -45,7 +45,7 @@ try {
     assert.equal(await page.locator("h1").count(), 1);
     assert.equal(
       await page.locator('link[rel="canonical"]').getAttribute("href"),
-      "https://strategic-materials-policy-tracker.vercel.app" + path,
+      "https://stratellar.com" + path,
     );
     assert.match(
       await page.locator('meta[property="og:image"]').getAttribute("content"),

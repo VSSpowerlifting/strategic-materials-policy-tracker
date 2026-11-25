@@ -211,7 +211,7 @@ export function resolveResearchCover(slug: string): ResearchCover {
       return { kind: "mark", mark: plate.mark, line: plate.line };
     }
   }
-  return { kind: "mark", mark: "SMPT", line: "Research" };
+  return { kind: "mark", mark: "Stratellar", line: "Research" };
 }
 
 export function researchCoverPhoto(slug: string): Photograph | undefined {
