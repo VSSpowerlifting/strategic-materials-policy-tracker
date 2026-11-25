@@ -246,7 +246,7 @@ export function LatticeLegend({ model, className }: { model: LatticeModel; class
             <KindSwatch kind="commitments" />
             <KindSwatch kind="controls" />
           </span>
-          <span>Both at one stage. They sit side by side; SMPT does not link a clause to a financing.</span>
+          <span>Both at one stage. They sit side by side; Stratellar does not link a clause to a financing.</span>
         </li>
         <li className="flex gap-3">
           <KindSwatch kind="designations" className="mt-1" />

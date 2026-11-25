@@ -21,7 +21,7 @@ export function MaterialBenchmarks({ materialId }: { materialId: string }) {
         Price benchmarks
       </h2>
       <p className="mt-3 max-w-prose text-sm leading-6 text-muted">
-        Price series that cover this material, as their publishers release them, from SMPT’s separate{" "}
+        Price series that cover this material, as their publishers release them, from Stratellar’s separate{" "}
         <Link href="/markets" className="link-quiet text-foreground">
           market-data layer
         </Link>

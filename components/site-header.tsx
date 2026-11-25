@@ -108,7 +108,7 @@ export function SiteHeader() {
         {/* One row, three columns: the name, the four destinations on the centre line, search and menu. */}
         <Container width="wide" className="grid h-16 grid-cols-[1fr_auto] items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
           <Link href="/" aria-label={`${site.name}, overview`} aria-current={pathname === "/" ? "page" : undefined} className="min-w-0 justify-self-start">
-            <Wordmark markClassName="h-7 sm:h-8" priority />
+            <Wordmark markClassName="h-7 sm:h-8" />
           </Link>
 
           <nav aria-label="Main" className="hidden items-stretch self-stretch md:flex">
@@ -133,7 +133,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-1 justify-self-end">
             <Link
               href="/search"
-              aria-label="Search SMPT"
+              aria-label={`Search ${site.name}`}
               aria-current={pathname === "/search" ? "page" : undefined}
               className="inline-flex h-10 items-center gap-2 px-2.5 font-display text-sm text-muted transition-colors hover:text-foreground"
             >

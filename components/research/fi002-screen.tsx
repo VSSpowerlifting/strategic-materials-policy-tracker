@@ -130,7 +130,7 @@ export function Fi002Screen() {
         </p>
       </details>
       <p className="fi-note">
-        Source: SMPT reverse appraisal,{" "}
+        Source: Stratellar reverse appraisal,{" "}
         <a href="/research/fi002/threshold-sensitivities.csv" download>
           published sensitivity calculations (CSV)
         </a>

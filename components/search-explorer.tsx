@@ -193,7 +193,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
       url = URL.createObjectURL(new Blob([text], {type}));
       anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = `smpt-search-references-${site.lastUpdated}.${format}`;
+      anchor.download = `stratellar-search-references-${site.lastUpdated}.${format}`;
       document.body.appendChild(anchor);
       anchor.click();
     } catch {
@@ -365,7 +365,7 @@ export function SearchExplorer({ docs }: { docs: SearchDoc[] }) {
             </div>
             <p className="text-xs leading-6 text-muted">
               Actors, materials, framing and the watchlist are under{" "}
-              <strong className="font-semibold text-foreground">Type</strong>. Counts are entries in SMPT, never
+              <strong className="font-semibold text-foreground">Type</strong>. Counts are entries in Stratellar, never
               financing totals or a complete list of government activity.
             </p>
           </section>

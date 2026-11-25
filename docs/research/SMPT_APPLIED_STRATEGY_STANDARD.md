@@ -1,10 +1,10 @@
-# SMPT — Four-Layer Analytical Framework & Applied Strategy Standard
+# Stratellar — Four-Layer Analytical Framework & Applied Strategy Standard
 
 **Status:** Standing research and publication standard  
 **Adopted:** 5 November 2026  
-**Applies to:** New SMPT Applied Strategy products and financial/industrial-strategy analyses, including presentation decks and accompanying spreadsheets. Existing published work is not retroactively changed by this document.
+**Applies to:** New Stratellar Applied Strategy products and financial/industrial-strategy analyses, including presentation decks and accompanying spreadsheets. Existing published work is not retroactively changed by this document.
 
-This document defines how SMPT turns its research corpus into **decision-oriented corporate analysis**. The tracker remains a source-linked comparative record of policy, capital and reported activity. Applied Strategy products are **separate, attributed analytical outputs**: they may use explicit assumptions, scenarios, sensitivities and recommendations, but must not insert inferred prices, forecasts, valuations or model outputs into the factual tracker as though they were source records.
+This document defines how Stratellar turns its research corpus into **decision-oriented corporate analysis**. The tracker remains a source-linked comparative record of policy, capital and reported activity. Applied Strategy products are **separate, attributed analytical outputs**: they may use explicit assumptions, scenarios, sensitivities and recommendations, but must not insert inferred prices, forecasts, valuations or model outputs into the factual tracker as though they were source records.
 
 **Operating thesis:** Industrial intelligence is the foundation; corporate strategy is the application; evidence-backed decisions are the product. Corpus expansion is valuable when it improves source coverage, comparability, traceability or analytical usefulness—not as a record-count target.
 
@@ -55,7 +55,7 @@ The flagship format is a **consulting-style presentation with a reproducible Exc
 - Each analytical slide should lead with a **specific, supportable conclusion**, not a generic topic heading; the exhibit must substantiate that claim.
 - Use charts only when they reveal relationships; label units, periods, denominators, currencies, assumptions, as-of dates and relevant sources. Keep unlike measures visibly separate.
 - Favor charts, decision matrices, waterfall/bridge exhibits, project chronologies, sensitivities and concise explanatory prose over decorative graphics or dense bullet walls.
-- Use a restrained, consistent professional sans-serif, readable sizes, whitespace, grid alignment and a consistent visual hierarchy. Follow SMPT's established publication identity where appropriate; avoid imitation of another firm's proprietary branding.
+- Use a restrained, consistent professional sans-serif, readable sizes, whitespace, grid alignment and a consistent visual hierarchy. Follow Stratellar's established publication identity where appropriate; avoid imitation of another firm's proprietary branding.
 - Preserve analytical connective tissue: explain **why** a result changes the choice, not merely what a chart shows. Avoid exaggerated certainty, promotional tone and formulaic AI-sounding assertions.
 - Source notes must be resolvable, preferably to originals. Clearly distinguish sourced values from modeled numbers and hypothetical illustrations.
 - The PDF/slide export must be visually inspected slide by slide. Editable source files should remain available when practicable.
@@ -82,7 +82,7 @@ A typical workbook separates:
 
 - Match model complexity to the question: procurement total-cost comparisons, margin/EBITDA sensitivity, capex and funding-gap analysis, project returns, cash-flow timing or decision trees as justified. Valuation or risk-adjusted NPV is conditional, not mandatory.
 - Clearly label **reported**, **derived**, and **modeled** quantities. A sensitivity based on a disclosed company coefficient is not a forecast of future earnings; hypothetical capital-recovery thresholds are not predicted production.
-- Preserve underlying tracker amounts in original currencies and existing value roles. Never contaminate SMPT's published aggregation with conversion, speculative modeled amounts or overlapping programme and child commitments. If a standalone case needs a currency-normalized illustration, state the sourced FX rate/date and show the original figures separately; the result is analysis, not a tracker total.
+- Preserve underlying tracker amounts in original currencies and existing value roles. Never contaminate Stratellar's published aggregation with conversion, speculative modeled amounts or overlapping programme and child commitments. If a standalone case needs a currency-normalized illustration, state the sourced FX rate/date and show the original figures separately; the result is analysis, not a tracker total.
 - State and verify whether inputs describe an envelope, signed financing, a drawdown, an actual cash payment, announced capacity, operational output or another distinct status.
 - Show uncertainties that matter to the conclusion (e.g. volume, realization timing, unit economics, commodity prices, conversion yields, discount rates, financing conditions, qualification delays). Do not present a convenient assumption as a sourced fact.
 - Use actual spreadsheet formulas for calculated values. Check formulas/references, units, sign conventions, scenario switches, and ties between executive slides and workbook. Log any intentional simplifications.
@@ -110,4 +110,4 @@ A missing gate is recorded as a **hold, limitation or open diligence item**, not
 - Maintain method flexibility. The four-layer approach is the durable analytical lens; slide structures and model techniques must be adapted to the real decision.
 - External feedback and actual research use are preferred indicators of usefulness; record count, slide count and production volume are not success metrics.
 
-**Related rules:** [SMPT research publication house style](SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) · [Operating playbook](../operating-playbook.md) · [Repository agent instructions](../../AGENTS.md) · [Project and source rules](../../CLAUDE.md).
+**Related rules:** [Stratellar research publication house style](SMPT_RESEARCH_PUBLICATION_HOUSE_STYLE.md) · [Operating playbook](../operating-playbook.md) · [Repository agent instructions](../../AGENTS.md) · [Project and source rules](../../CLAUDE.md).

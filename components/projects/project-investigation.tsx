@@ -254,7 +254,7 @@ export function ProjectPolicyContext({
 }
 
 export function ProjectUnknowns({ investigation: { packet } }: { investigation: Investigation }) {
-  return <Section title="What remains unknown" description="Gaps describe what SMPT has documented. They do not establish that an activity did not occur.">
+  return <Section title="What remains unknown" description="Gaps describe what Stratellar has documented. They do not establish that an activity did not occur.">
     <ul className="list-disc space-y-3 pl-5 font-display text-sm leading-7 text-muted">{packet.unknowns.map(note => <li key={note}>{note}</li>)}</ul>
   </Section>;
 }

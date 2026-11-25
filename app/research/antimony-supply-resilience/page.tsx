@@ -3,13 +3,10 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
-import { researchCoverPhoto } from "@/lib/photography";
 
 const pdf = "/research/applied-001/antimony-supply-resilience.pdf";
 const model = "/research/applied-001/antimony-supply-resilience-model.xlsx";
 const evidence = "/research/applied-001/antimony-evidence-and-assumptions.md";
-
-const coverPhoto = researchCoverPhoto("antimony-supply-resilience")!;
 
 export const metadata: Metadata = {
   title: "U.S. Antimony Supply Resilience — Strategy & Finance",
@@ -17,16 +14,16 @@ export const metadata: Metadata = {
     "A defense-manufacturing procurement strategy case comparing qualified supplier diversification, inventory and prospective domestic offtake, with a source-linked scenario model.",
   alternates: { canonical: "/research/antimony-supply-resilience" },
   openGraph: {
-    images: [{ url: coverPhoto.src, width: coverPhoto.width, height: coverPhoto.height, alt: coverPhoto.alt }],
+    images: [{ url: "/research/antimony-supply-resilience/opengraph-image", width: 1200, height: 630, alt: "Stratellar Strategy & Finance: U.S. Antimony Supply Resilience, 2027–2031" }],
     type: "article",
     url: site.url + "/research/antimony-supply-resilience",
     siteName: site.name,
-    title: "U.S. Antimony Supply Resilience | SMPT",
+    title: "U.S. Antimony Supply Resilience | Stratellar",
     description: "Supply continuity, inventory working capital and conditional domestic sourcing under 2027–2031 antimony disruption scenarios.",
   },
   twitter: {
     card: "summary_large_image",
-    images: [coverPhoto.src],
+    images: ["/research/antimony-supply-resilience/opengraph-image"],
   },
 };
 
@@ -185,7 +182,7 @@ export default function AntimonySupplyResilience() {
                   Sources and assumptions
                 </h2>
                 <p className="mt-4 font-display text-base leading-8">
-                  The case uses SMPT&rsquo;s <Link href="/materials/antimony" className="font-semibold text-paper-accent underline decoration-2 underline-offset-4">antimony records</Link> alongside USGS estimates, government financing and licensing records, laboratory reporting and company filings. It treats announced projects, authorized financing, payments and commercial deliveries as separate events.
+                  The case uses Stratellar&rsquo;s <Link href="/materials/antimony" className="font-semibold text-paper-accent underline decoration-2 underline-offset-4">antimony records</Link> alongside USGS estimates, government financing and licensing records, laboratory reporting and company filings. It treats announced projects, authorized financing, payments and commercial deliveries as separate events.
                 </p>
                 <p className="mt-4 font-display text-base leading-8">
                   The manufacturer, its annual demand, sourcing shares, premiums, inventory ceiling and disruptions are hypothetical. The accompanying workbook tests what these assumptions would mean for costs and unfilled demand; it does not project an actual buyer&rsquo;s future supply.

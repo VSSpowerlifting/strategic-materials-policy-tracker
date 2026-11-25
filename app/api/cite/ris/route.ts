@@ -10,7 +10,7 @@ export function GET() {
   return new Response(buildRisAll(), {
     headers: {
       "content-type": "application/x-research-info-systems; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt.ris"',
+      "content-disposition": 'attachment; filename="stratellar.ris"',
     },
   });
 }

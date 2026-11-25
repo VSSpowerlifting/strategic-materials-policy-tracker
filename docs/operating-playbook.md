@@ -1,4 +1,4 @@
-# SMPT operating playbook
+# Stratellar operating playbook
 
 Load this on demand for task workflow, review, and skill routing. It is **not** an
 `@` import in `CLAUDE.md`; read it when starting substantial work or a review.
@@ -137,8 +137,8 @@ routing, the capability map and evaluation are in
 | `ben-checkpoint` | Source-verified handoff at a phase boundary or block | Manual |
 | `ben-review-change` | Independent review of a diff, branch, PR or slice, findings ranked P0-P3 | Model or manual |
 | `ben-source-verify` | Claim ledger against primary sources (citations, translations, facts) | Model or manual |
-| `ben-smpt-review` | Audit or repair SMPT records, accounting, controls, APIs, exports, UI | Model or manual |
-| `ben-ipr-brief` | Indo-Pacific Record briefs. **IPR repository only; not used for SMPT work.** | Model or manual |
+| `ben-smpt-review` | Audit or repair Stratellar records, accounting, controls, APIs, exports, UI | Model or manual |
+| `ben-ipr-brief` | Indo-Pacific Record briefs. **IPR repository only; not used for Stratellar work.** | Model or manual |
 
 Overlap with `.claude/agents/`: `ben-source-verify` and `ben-smpt-review` are
 procedures run in the main session; the `source-verifier`, `methodology-auditor`

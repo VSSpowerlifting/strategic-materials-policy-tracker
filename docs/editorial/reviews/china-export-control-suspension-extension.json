@@ -1,24 +1,24 @@
 {
   "article": "app/research/china-export-control-suspension-extension/page.tsx",
-  "contentSha256": "f51d09cc059858f87c4a884e5559712ae99bfac9b72aaffb2ec48d4b1837d5de",
+  "contentSha256": "73559687dfe0ad2b96033194472396e831bacd20f742be4c0d6373aa844a3369",
   "reviewer": "Benjamin Yang",
-  "reviewDate": "2026-11-14",
+  "reviewDate": "2026-11-24",
   "checks": {
     "readAllCopy": {
       "verified": true,
-      "notes": "Publisher confirmed approval of the complete China suspension article language revision in chat on November 14, 2026 ET, including revised introduction, five section headings, narrative and metadata; original chronology and scope tables were preserved."
+      "notes": "Approved the Stratellar records heading and matching accessible label, plus the revised social card alt text. The packet diff preserves the article prose and legal-status wording."
     },
     "desktopPreview": {
       "verified": true,
-      "notes": "Publisher expressly confirmed review of the desktop preview and approval of the revised article in chat on November 14, 2026 ET."
+      "notes": "The packet’s 1440 px records capture shows the renamed Stratellar records section."
     },
     "mobilePreview": {
       "verified": true,
-      "notes": "Publisher expressly confirmed review of the mobile preview and approval of the revised article in chat on November 14, 2026 ET."
+      "notes": "The packet’s 390 px records capture shows the renamed Stratellar records section at phone width."
     },
     "sourceLinksAndFacts": {
       "verified": true,
-      "notes": "Publisher expressly confirmed review of source links and factual accuracy on November 14, 2026 ET. The editorial change preserves MOFCOM and BIS citations, underlying announcement scope and original effective dates, November 9 research cutoff, and the separate November 27 / January 10 deadlines."
+      "notes": "The packet diff preserves article sources, dates and legal-status statements. The served 1200 by 630 card identifies Policy Research, the six-announcement suspension through January 10, 2027, Benjamin Yang and November 9, 2026."
     }
   },
   "exceptions": []

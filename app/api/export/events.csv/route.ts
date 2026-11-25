@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + eventsCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-events.csv"',
+      "content-disposition": 'attachment; filename="stratellar-events.csv"',
     },
   });
 }

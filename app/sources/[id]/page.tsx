@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!source) return { title: "Source not found" };
   return {
     title: source.title + " — source dossier",
-    description: "Original publisher citation and directly source-linked policy, financial, control and project entries in the curated SMPT corpus.",
+    description: "Original publisher citation and directly source-linked policy, financial, control and project entries in the curated Stratellar corpus.",
   };
 }
 

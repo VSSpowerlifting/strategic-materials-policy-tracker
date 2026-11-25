@@ -98,7 +98,7 @@ def render(seed: int, width_in: float, height_in: float, out: Path) -> dict:
         "libraries": {"numpy": np.__version__, "matplotlib": matplotlib.__version__, "pillow": Image.__version__},
         "sha256": digest,
         "nature": "Procedurally generated conceptual artwork. Not a map, photograph or depiction of any real site; contains no real elevation or location data.",
-        "rights": "Created for SMPT by this script; no third-party image, map data or model output is used.",
+        "rights": "Created for Stratellar by this script; no third-party image, map data or model output is used.",
     }
 
 

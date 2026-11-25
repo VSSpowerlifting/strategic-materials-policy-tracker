@@ -128,7 +128,7 @@ export function publicHttpsFetcher(
   return async path=>{
     const url=new URL(path,base);
     if(url.origin!==base || !path.startsWith("/api/"))
-      throw new Error("Only same-origin, public SMPT API paths may be checked");
+      throw new Error("Only same-origin, public Stratellar API paths may be checked");
     const response=await networkFetch(url,{method:"GET",redirect:"error",cache:"no-store",signal:AbortSignal.timeout(12000)});
     if(response.status!==200) return {status:response.status,body:null};
     let body:unknown;

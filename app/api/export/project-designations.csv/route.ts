@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + projectDesignationsCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-project-designations.csv"',
+      "content-disposition": 'attachment; filename="stratellar-project-designations.csv"',
     },
   });
 }

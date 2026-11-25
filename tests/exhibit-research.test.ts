@@ -35,7 +35,7 @@ test("research rejects synthetic fixture references and notice text", () => {
   const s = spec();
   assert.throws(() => parseResearchDeck({ ...s, classification: "synthetic-demonstration" }, "test"), /classification/);
   assert.throws(() => parseResearchDeck({ ...s, slides: [{ fixture: "dumbbell" }] }, "test"), /synthetic fixture/);
-  assert.throws(() => parseResearchDeck({ ...s, title: "Synthetic demonstration data — not an SMPT finding" }, "test"), /notice/);
+  assert.throws(() => parseResearchDeck({ ...s, title: "Synthetic demonstration data — not a Stratellar finding" }, "test"), /notice/);
 });
 test("QC attachment cannot remove draft classification or grant release authority", async () => {
   const dir = mkdtempSync(join(tmpdir(), "smpt-research-contract-"));

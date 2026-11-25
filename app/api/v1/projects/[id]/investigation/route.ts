@@ -12,7 +12,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   return new Response(JSON.stringify(packet, null, 2) + "\n", {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "content-disposition": `attachment; filename="smpt-${packet.projectId}-investigation.json"`,
+      "content-disposition": `attachment; filename="stratellar-${packet.projectId}-investigation.json"`,
       "cache-control": "public, max-age=3600",
     },
   });

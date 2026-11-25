@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Editability verification for the SMPT exhibit-system decks.
+"""Editability verification for the Stratellar exhibit-system decks.
 
     npm run exhibits:verify            # structural + LibreOffice tiers
     python3 scripts/exhibit-system/verify_editability.py --structural-only

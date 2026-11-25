@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Strategic Materials Policy Tracker — Policy. Capital. Industry. Architectural research studio with a topographic illustration.",
+        alt: "Stratellar: Strategic Materials Intelligence. Materials. Policy. Capital.",
       },
     ],
   },
@@ -242,7 +242,7 @@ export default function EscondidaCopper() {
                     <a href={sources.bank}>World Bank, October 2026, Table 1</a>
                     ;{" "}
                     <a href={sources.bhp}>BHP FY2026 presentation, slide 48</a>.
-                    SMPT calculations. The Goldman annual average comes from public reporting;
+                    Stratellar calculations. The Goldman annual average comes from public reporting;
                     the original research note remains unavailable.
                     Goldman’s separate $15,600/t end-2027 view has a different
                     horizon.
@@ -348,7 +348,7 @@ export default function EscondidaCopper() {
               <div className="fi-aside-note">
                 <p className="fi-eyebrow">Research independence</p>
                 <p>
-                  This is independent SMPT research. Goldman Sachs and BHP did not commission it or review the analytical judgments.
+                  This is independent Stratellar research. Goldman Sachs and BHP did not commission it or review the analytical judgments.
                 </p>
               </div>
             </aside>
@@ -442,7 +442,7 @@ export default function EscondidaCopper() {
                 Inside Tungsten West’s £71 Million Restart Financing →
               </strong>
             </Link>
-            <Link href="/research">Explore all SMPT research →</Link>
+            <Link href="/research">Explore all Stratellar research →</Link>
           </nav>
         </Container>
       </div>

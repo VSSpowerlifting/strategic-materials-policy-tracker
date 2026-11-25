@@ -3,25 +3,22 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
-import { researchCoverPhoto } from "@/lib/photography";
-
-const coverPhoto = researchCoverPhoto("tungsten-supply-security")!;
 
 export const metadata: Metadata = {
   title: "Tungsten Supply Security — Policy Research",
   description: "A comparison of tungsten export controls, financing and industrial projects across China, the European Union, the United Kingdom and Japan.",
   alternates: { canonical: "/research/tungsten-supply-security" },
   openGraph: {
-    images: [{ url: coverPhoto.src, width: coverPhoto.width, height: coverPhoto.height, alt: coverPhoto.alt }],
+    images: [{ url: "/research/tungsten-supply-security/opengraph-image", width: 1200, height: 630, alt: "Stratellar Policy Research: Tungsten Supply Security" }],
     type: "article",
     url: `${site.url}/research/tungsten-supply-security`,
     siteName: site.name,
-    title: "Tungsten Supply Security | SMPT",
+    title: "Tungsten Supply Security | Stratellar",
     description: "How tungsten policy is taking shape through mines, processing plants, export licensing and public finance in four markets.",
   },
   twitter: {
     card: "summary_large_image",
-    images: [coverPhoto.src],
+    images: ["/research/tungsten-supply-security/opengraph-image"],
   },
 };
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Palette and type check for SMPT decks (`.pptx`), against docs/design/publication-tokens.json.
+"""Palette and type check for Stratellar decks (`.pptx`), against docs/design/publication-tokens.json.
 
 Read-only; standard library only. For each file it inspects every slide, layout and master and reports:
   * colour: any literal sRGB colour that is not a palette token, a chart-series colour, a functional

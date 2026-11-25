@@ -4,7 +4,7 @@
 
 import type { IntegrityIssue } from "./types";
 
-/** SMPT transaction/financing status taxonomy, in order. */
+/** Stratellar transaction/financing status taxonomy, in order. */
 export const STATUS_TAXONOMY = [
   "announcement",
   "authorization",

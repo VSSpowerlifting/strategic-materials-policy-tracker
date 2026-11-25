@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + framingCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-framing.csv"',
+      "content-disposition": 'attachment; filename="stratellar-framing.csv"',
     },
   });
 }

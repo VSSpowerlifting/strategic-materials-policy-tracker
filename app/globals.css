@@ -19,7 +19,16 @@
   --accent: #1f5c4d; /* malachite — links, focus, the one emphasis colour */
   --accent-strong: #143f35; /* hover / emphasis */
   --accent-fg: #f6f5f1; /* text on accent */
-  --brand-gold: #1b1e21; /* wordmark now sets in ink; the lattice mark keeps its gold */
+  --brand-gold: #1b1e21; /* the name and the mark's beds set in ink; the token keeps its old name so utilities resolve */
+
+  /* Stratellar brand grounds, mirrored by scripts/brand/build-brand-assets.mjs (tests/brand-system.test.ts).
+     Seam is the dark ground for covers and social cards; the site itself stays a light sheet. */
+  --seam: #0d211d; /* cover ground */
+  --seam-bed: #143029; /* beds and rules drawn on the seam */
+  --malachite-light: #7fb8a5; /* the marker bed on the seam */
+  --on-malachite: #a3cfc0; /* secondary text on the seam */
+  --malachite-mist: #c4d7cf; /* rules and quiet fills on light grounds */
+  --malachite-tint: #e6ede9; /* the lightest brand wash */
 
   /* "Paper" sections are now the same family as the page: a slightly brighter sheet. */
   --paper: #fdfdfb;
@@ -43,7 +52,7 @@
 
 @theme inline {
   /* Color tokens keep their established names so existing utilities still
-     resolve; only the underlying values move to the Lattice Register palette. */
+     resolve; only the underlying values moved with the Drawing Sheet palette. */
   --color-background: var(--bg);
   --color-card: var(--surface);
   --color-elevated: var(--elevated);
@@ -57,6 +66,12 @@
   --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-fg);
   --color-brand: var(--brand-gold);
+  --color-seam: var(--seam);
+  --color-seam-bed: var(--seam-bed);
+  --color-malachite-light: var(--malachite-light);
+  --color-on-malachite: var(--on-malachite);
+  --color-malachite-mist: var(--malachite-mist);
+  --color-malachite-tint: var(--malachite-tint);
   --color-paper: var(--paper);
   --color-paper-foreground: var(--paper-fg);
   --color-paper-muted: var(--paper-muted);

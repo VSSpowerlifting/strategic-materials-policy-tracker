@@ -1,7 +1,7 @@
-# SMPT Editorial Authenticity & Visual Integrity Standard
+# Stratellar Editorial Authenticity & Visual Integrity Standard
 
 **Version:** 1.1 · **Adopted:** 5 November 2026 · **Revised:** 9 November 2026 (§2: manufactured terms and micro-labels)  
-**Applies to:** New and revised SMPT research presentations and their analytical copy, figures, charts, diagrams, editable assets and PDF exports.  
+**Applies to:** New and revised Stratellar research presentations and their analytical copy, figures, charts, diagrams, editable assets and PDF exports.\
 **Companion documents:** [Presentation Standard v2](SMPT_PRESENTATION_STANDARD_V2.md) · [Exhibit and Chart Rules](EXHIBIT_AND_CHART_RULES.md) · [Four-Layer Analytical Framework](../../research/SMPT_APPLIED_STRATEGY_STANDARD.md)
 
 ## Mandate
@@ -73,7 +73,7 @@ Could the statement appear unchanged in a report on a completely different compa
 
 **Specific:** "The core loan's short tenor overlaps with Hemerdon's commissioning and ramp-up period, making the timing of saleable output, customer receipts and refinancing arrangements material to creditor exposure."
 
-Make the source of each conclusion explicit: **documented fact**, **management/government claim**, **SMPT calculation**, **assumption**, or **analyst inference**.
+Make the source of each conclusion explicit: **documented fact**, **management/government claim**, **Stratellar calculation**, **assumption**, or **analyst inference**.
 
 ### Manufactured terms and micro-labels
 
@@ -96,7 +96,7 @@ Choose a layout after defining the comparison the reader needs. Test whether eac
 
 **A three-column slide is legitimate when three comparable categories genuinely exist.** Visual symmetry is a design choice, never evidence that the categories are equivalent.
 
-Apply the [visual-repertoire workflow](VISUAL_REPERTOIRE_AND_REFERENCES.md): plan the exhibit family from the relationship, review the contact sheet for repetitive composition, and document any intentional repetition under gates C/E. Variety should improve attention and comprehension while preserving a consistent SMPT identity. Chart-type counts alone cannot pass this review.
+Apply the [visual-repertoire workflow](VISUAL_REPERTOIRE_AND_REFERENCES.md): plan the exhibit family from the relationship, review the contact sheet for repetitive composition, and document any intentional repetition under gates C/E. Variety should improve attention and comprehension while preserving a consistent Stratellar identity. Chart-type counts alone cannot pass this review.
 
 ### Graphics and AI generation
 
@@ -105,7 +105,7 @@ Apply the [visual-repertoire workflow](VISUAL_REPERTOIRE_AND_REFERENCES.md): pla
 - Preserve editability: native PowerPoint text/shapes/charts where practical; record source input and generator paths for computed figures.
 - Verify complete financial classification. Use different line/outline/status treatment for uncommitted versus committed, management targets versus realized results, and reported versus independently verified activity.
 - A timeline arrow communicates **sequence** unless a documented basis supports causality. Show the uncertainty directly.
-- Original layouts must follow the SMPT graphite/cream/gold palette, Archivo typography, direct labels, readable sourcing and the hard **20-slide total cap**.
+- Original layouts must follow the Stratellar graphite/cream/gold palette, Archivo typography, direct labels, readable sourcing and the hard **20-slide total cap**.
 
 ### Accessibility
 
@@ -206,12 +206,12 @@ Only mark a gate PASS when its stated evidence was examined. Use REVISE for addr
 
 ## 7. Mandatory handoff for AI-assisted deck creation
 
-> Read the accepted research record, SMPT Presentation Standard v2, the Exhibit and Chart Rules and this authenticity standard. Draft a claim-by-claim storyline before rendering slides. Prefer direct, affirmative explanations; review "not merely X but Y" and similar contrasts and preserve necessary factual negations. Develop connective financial reasoning. Construct editable quantitative exhibits from the controlling data; choose graphic forms for analytical utility and visibly distinguish evidence statuses. Inspect every rendered slide, reconcile its figures and citations, and record the five gate outcomes in the QC report. Stop at READY FOR HUMAN PUBLICATION REVIEW, with no merge, deployment, or automatic republication.
+> Read the accepted research record, Stratellar Presentation Standard v2, the Exhibit and Chart Rules and this authenticity standard. Draft a claim-by-claim storyline before rendering slides. Prefer direct, affirmative explanations; review "not merely X but Y" and similar contrasts and preserve necessary factual negations. Develop connective financial reasoning. Construct editable quantitative exhibits from the controlling data; choose graphic forms for analytical utility and visibly distinguish evidence statuses. Inspect every rendered slide, reconcile its figures and citations, and record the five gate outcomes in the QC report. Stop at READY FOR HUMAN PUBLICATION REVIEW, with no merge, deployment, or automatic republication.
 
 ## 8. Adoption and boundaries
 
-Apply to newly authored and revised SMPT research decks, including the **planned FI001 v2 redesign**. The current live FI001 files, original models and approved factual statements remain intact until a separately approved, versioned replacement passes publication review. The existing 20-slide cap and colors remain unchanged; the presentation typography is now Archivo under Presentation Standard v2.1.
+Apply to newly authored and revised Stratellar research decks, including the **planned FI001 v2 redesign**. The current live FI001 files, original models and approved factual statements remain intact until a separately approved, versioned replacement passes publication review. The existing 20-slide cap and colors remain unchanged; the presentation typography is now Archivo under Presentation Standard v2.1.
 
-**External reference points:** [NIST Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) (risk evaluation and oversight); [Microsoft PowerPoint accessibility guidance](https://support.microsoft.com/en-us/accessibility/powerpoint/make-your-powerpoint-presentations-accessible-to-people-with-disabilities) (contrast, reading order, alt text); [BCG written-case example](https://media-publications.bcg.com/BCG-Written-Case-Example.pdf) (key message titles and quantitative exhibits). These sources inform the workflow; they are not endorsements of SMPT.
+**External reference points:** [NIST Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) (risk evaluation and oversight); [Microsoft PowerPoint accessibility guidance](https://support.microsoft.com/en-us/accessibility/powerpoint/make-your-powerpoint-presentations-accessible-to-people-with-disabilities) (contrast, reading order, alt text); [BCG written-case example](https://media-publications.bcg.com/BCG-Written-Case-Example.pdf) (key message titles and quantitative exhibits). These sources inform the workflow; they are not endorsements of Stratellar.
 
 **Final rule:** Every slide earns its place through defensible evidence, analysis, and communication. Authorship claims must be accurate; editing decisions must improve the work itself.

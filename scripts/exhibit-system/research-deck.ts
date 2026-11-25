@@ -1,4 +1,4 @@
-// Research-deck entry point: renders real SMPT exhibits with the registered
+// Research-deck entry point: renders real Stratellar exhibits with the registered
 // patterns, kept apart from the synthetic gallery.
 //
 //   npm run exhibits:render -- <spec.json> <out.pptx> [--qc-record <path>]

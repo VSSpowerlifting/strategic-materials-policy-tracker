@@ -60,8 +60,11 @@ test("China article has a publication-specific LinkedIn/Open Graph image", () =>
   assert.match(article, /images: \[\{/);
   assert.match(article, /twitter: \{/);
   assert.match(article, /summary_large_image/);
-  assert.match(card, /new ImageResponse\(/);
+  // The route serves the card drawn by `npm run brand:build`; its wording lives in the generator.
+  assert.match(card, /socialCard\("research\/china-export-control-suspension-extension\.png"\)/);
   assert.match(card, /width: 1200, height: 630/);
   assert.match(card, /January 10, 2027/);
-  assert.match(card, /Export-Control Pause/);
+  const generator = read("scripts/brand/build-brand-assets.mjs");
+  assert.match(generator, /slug: "china-export-control-suspension-extension"/);
+  assert.match(generator, /Export-Control Announcements Through January 10, 2027/);
 });

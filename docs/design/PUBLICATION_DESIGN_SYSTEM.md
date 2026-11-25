@@ -1,8 +1,8 @@
-# SMPT Publication Design System
+# Stratellar Publication Design System
 
 Status: v3.0, **draft awaiting maintainer approval** of the palette and type positions below. Nothing here changes a published binary, a finding or a data record.
 
-This document is the map between the website identity in [Architectural Research Studio](ARCHITECTURAL_RESEARCH_STUDIO.md) and the things SMPT produces off the website: decks, executive memos, report covers, social images and financial exhibits. The rules for each product stay in their own standards; this file says where the shared values live, how each medium applies them, and which tools enforce them.
+This document is the map between the website identity in [Architectural Research Studio](ARCHITECTURAL_RESEARCH_STUDIO.md), the name and mark in [the brand system](../brand/STRATELLAR_BRAND_SYSTEM.md), and the things Stratellar produces off the website: decks, executive memos, report covers, social images and financial exhibits. The rules for each product stay in their own standards; this file says where the shared values live, how each medium applies them, and which tools enforce them.
 
 ## One source of values
 
@@ -37,7 +37,7 @@ Text on a plate fill (`#FDFDFB`) is allowed only on graphite or malachite. Pure 
 | Social image | 1200 x 630 PNG, same title block; flattened, so the page that uses it supplies the alt text | `scripts/publication/cover.py` | Visual review |
 | Financial exhibits | Native shapes, true to scale from zero, labelled units and status, one idea per exhibit | `scripts/exhibit-system/` renderers; rules in [Exhibit and Chart Rules](presentations/EXHIBIT_AND_CHART_RULES.md) | `exhibits:verify` (editable objects and geometry) |
 
-Both generators also brand the PPTX theme part (colour scheme "SMPT Studio", Archivo/Spectral theme faces), so a shape a user adds in PowerPoint starts from SMPT colours and fonts rather than the Office defaults.
+Both generators also brand the PPTX theme part (colour scheme "Stratellar Studio", Archivo/Spectral theme faces), so a shape a user adds in PowerPoint starts from Stratellar colours and fonts rather than the Office defaults.
 
 Shared conventions: conclusion-led titles, one source line per slide, the status distinction (announced, committed, drawn, operating) kept visible, outlined rather than filled shapes for anything uncommitted or unverified, and no gradients, shadows or tinted cards. Do not force one layout on every product; the memo, the deck and the cover share values, not a template.
 

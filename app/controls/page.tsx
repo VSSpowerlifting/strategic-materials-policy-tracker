@@ -112,7 +112,7 @@ export default function ControlsPage() {
                   ) : null}
                   {endPassed ? (
                     <p className="mt-3 text-xs leading-5 text-faint">
-                      The stated end has passed and no later operative instrument is recorded. SMPT does not infer renewal, resumption or expiry; the current legal position needs the issuing authority&rsquo;s own source.
+                      The stated end has passed and no later operative instrument is recorded. Stratellar does not infer renewal, resumption or expiry; the current legal position needs the issuing authority&rsquo;s own source.
                     </p>
                   ) : !scheduled ? (
                     <p className="mt-3 text-xs leading-5 text-faint">

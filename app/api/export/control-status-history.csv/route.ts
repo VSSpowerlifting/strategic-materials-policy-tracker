@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + controlStatusHistoryCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-control-status-history.csv"',
+      "content-disposition": 'attachment; filename="stratellar-control-status-history.csv"',
     },
   });
 }

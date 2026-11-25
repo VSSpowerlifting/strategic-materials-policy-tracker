@@ -1,8 +1,10 @@
-# Strategic Materials Policy Tracker
+# Stratellar
 
-**A source-linked comparative research platform for economic security and strategic materials** — examining how governments use industrial policy, trade and legal controls, investment, public finance and industrial intervention, and what the available evidence establishes about implementation. Measures, financial instruments and reported physical activity remain distinct, with field-level references back to original sources.
+**Strategic Materials Intelligence.** Research and source-linked data on the policy, financing and industrial projects that shape strategic-material supply chains. Stratellar examines how governments use industrial policy, trade and legal controls, investment, public finance and industrial intervention, and what the available evidence establishes about implementation. Measures, financial instruments and reported physical activity remain distinct, with field-level references back to original sources.
 
 **Live site → https://strategic-materials-policy-tracker.vercel.app**
+
+Stratellar is the publishing name of the project. The repository, the package and the current deployment address keep their earlier names until the planned move to `stratellar` and `stratellar.com`; see the [cutover checklist](docs/brand/STRATELLAR_CUTOVER.md). Research released before the change keeps its original imprint in its downloadable files. The identity is documented in the [brand system](docs/brand/STRATELLAR_BRAND_SYSTEM.md).
 
 This is an economic-security **policy** product, not a price forecaster, a mining-economics model, or a generic dashboard. Every record resolves to at least one source in the register — primary official text wherever it is available, with anything less marked as such; every framing label is anchored to a quoted passage in the original language; nothing is scored on an invented 0–100 scale.
 
@@ -26,7 +28,7 @@ These commitments govern public descriptions of the project; they do not imply e
 
 ## Applied Strategy research outputs
 
-SMPT's source-linked tracker is the **evidence infrastructure**, not a forecast engine or an investment-advice service. Its separate **Applied Strategy** research products use that evidence to evaluate corporate and institutional decisions with explicit assumptions, options, financial/operational scenarios and—when appropriate—editable Excel models and decision-ready presentations. Analytical projections and model outputs are never silently promoted into the factual tracker.
+Stratellar's source-linked tracker is the **evidence infrastructure**, not a forecast engine or an investment-advice service. Its separate **Applied Strategy** research products use that evidence to evaluate corporate and institutional decisions with explicit assumptions, options, financial/operational scenarios and—when appropriate—editable Excel models and decision-ready presentations. Analytical projections and model outputs are never silently promoted into the factual tracker.
 
 The permanent [Four-Layer Analytical Framework & Applied Strategy Standard](docs/research/SMPT_APPLIED_STRATEGY_STANDARD.md) connects **government policy → capital allocation → industrial execution → commercial implications** and defines the evidence, PowerPoint, Excel-model and publication-review expectations. Broader source coverage is useful insofar as it enables better research and better decisions, not as a record-count goal.
 
@@ -69,7 +71,7 @@ The distinctive capability is connecting government measures and their stated ra
 | IMF Primary Commodity Prices | Monthly averages for cobalt, palladium and rare-earth carbonate | IMF copyright and usage terms for statistical data: attribution and a statement of changes |
 | USGS Mineral Commodity Summaries 2026 data release | Annual prices and import unit values, 2021–2025, for rare-earth oxides, lithium, gallium, germanium, tungsten, graphite and others | CC0 1.0, with provenance kept |
 
-Several series are averages or republications of commercial price data: the World Bank lists Bloomberg, Platts Metals Week and Thomson Reuters Datastream among its sources, the IMF's rare-earth carbonate series is based on a Shanghai Metal Market assessment, and the USGS cites price-reporting agencies for many of its annual prices. SMPT carries only the figures these publishers release, under the publishers' terms. It has no licence to the underlying vendor data, and each series records the source its publisher names. The IMF asks anyone considering commercial reuse of its data to request permission, and notes that some of its statistical products carry separate third-party terms; the PCPS dataset metadata cites only the IMF's own copyright terms. The CSV export repeats each source's attribution, terms, statement of changes and reuse note on every row.
+Several series are averages or republications of commercial price data: the World Bank lists Bloomberg, Platts Metals Week and Thomson Reuters Datastream among its sources, the IMF's rare-earth carbonate series is based on a Shanghai Metal Market assessment, and the USGS cites price-reporting agencies for many of its annual prices. Stratellar carries only the figures these publishers release, under the publishers' terms. It has no licence to the underlying vendor data, and each series records the source its publisher names. The IMF asks anyone considering commercial reuse of its data to request permission, and notes that some of its statistical products carry separate third-party terms; the PCPS dataset metadata cites only the IMF's own copyright terms. The CSV export repeats each source's attribution, terms, statement of changes and reuse note on every row.
 
 The layer stays apart from the policy, financing and project records:
 
@@ -210,10 +212,12 @@ Live counts are on the [coverage dashboard](https://strategic-materials-policy-t
 
 The data is provided as-is for research and journalism. Categorical labels are interpretive judgements anchored to the cited sources, not legal determinations. Quotations are reproduced from the linked originals under fair use for commentary — please cite the original publisher as well as this database.
 
+Cite the database and new research as Stratellar. The site's record pages and the BibTeX, RIS and CSL-JSON endpoints generate citations in that form. A study released before the name change is cited with the imprint printed in its files, Strategic Materials Policy Tracker; its research page prints that citation. Record identifiers, citation keys, API paths and dataset versions are unchanged, so references made under the earlier name still resolve.
+
 ## Disclaimer
 
 Not legal or compliance advice. Categorical labels are interpretive judgements anchored to the cited sources, not legal determinations. Do not rely on this for export-control classification or licensing decisions; consult the primary instruments and qualified counsel.
 
 ## Author / maintainer
 
-Built and maintained by Benjamin Yang, SMPT combines international affairs research, economic-security analysis and close examination of primary-source evidence. Its approach is comparative rather than country-centered. For questions about a classification, start from the source linked on each record, then see the [source register](https://strategic-materials-policy-tracker.vercel.app/sources).
+Built and maintained by Benjamin Yang, Stratellar combines international affairs research, economic-security analysis and close examination of primary-source evidence. Its approach is comparative rather than country-centered. For questions about a classification, start from the source linked on each record, then see the [source register](https://strategic-materials-policy-tracker.vercel.app/sources).

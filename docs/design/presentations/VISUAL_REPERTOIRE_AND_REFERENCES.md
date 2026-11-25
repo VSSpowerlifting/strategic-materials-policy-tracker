@@ -1,22 +1,22 @@
-# SMPT visual repertoire and consulting references
+# Stratellar visual repertoire and consulting references
 
-Added 6 November 2026 · Applies to new and revised SMPT research decks. Read with [Presentation Standard](SMPT_PRESENTATION_STANDARD_V2.md), [Exhibit Rules](EXHIBIT_AND_CHART_RULES.md) and [Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md).
+Added 6 November 2026 · Applies to new and revised Stratellar research decks. Read with [Presentation Standard](SMPT_PRESENTATION_STANDARD_V2.md), [Exhibit Rules](EXHIBIT_AND_CHART_RULES.md) and [Visual Integrity](EDITORIAL_AUTHENTICITY_AND_VISUAL_INTEGRITY.md).
 
 ## Direction
 
-Use a broad repertoire of original graphics to sustain attention and make the argument easier to understand. Vary the exhibit structure, composition and density according to the reader's task. Keep Archivo, SMPT colors, source treatment and status vocabulary consistent across the deck.
+Use a broad repertoire of original graphics to sustain attention and make the argument easier to understand. Vary the exhibit structure, composition and density according to the reader's task. Keep Archivo, Stratellar colors, source treatment and status vocabulary consistent across the deck.
 
 Tables serve exact lookups and multidimensional comparison. They should earn their place against a visual alternative whenever the underlying question concerns timing, change, ranking, sensitivity, operating state or a physical/contractual relationship. A succession of prose-filled tables usually needs a composition review. A coherent series of comparable charts may intentionally repeat a form.
 
-Attention comes from clear comparisons, revealing annotations and a developing argument. More colors, shapes, icons or chart types alone do not establish quality. Public consulting reports illustrate possibilities; they do not establish a universal client-deck formula or a quota for SMPT.
+Attention comes from clear comparisons, revealing annotations and a developing argument. More colors, shapes, icons or chart types alone do not establish quality. Public consulting reports illustrate possibilities; they do not establish a universal client-deck formula or a quota for Stratellar.
 
-## Original SMPT examples
+## Original Stratellar examples
 
-![Six original SMPT exhibit patterns, using synthetic illustrative data](examples/05-visual-repertoire.svg)
+![Six original Stratellar exhibit patterns, using synthetic illustrative data](examples/05-visual-repertoire.svg)
 
 *Frozen illustration in the earlier graphite-and-gold palette (v2); it shows form only and is not regenerated. For current styling see the [exhibit-system gallery](exhibit-system/README.md) and the [Publication Design System](../PUBLICATION_DESIGN_SYSTEM.md).*
 
-These six examples demonstrate form only. **All values, dates and states are synthetic layout fixtures, with no company, project, policy or investment finding.** They are original SMPT graphics, not reconstructions of a firm's exhibits. The [fixture data](examples/visual-repertoire-data.json) and [generator](examples/render_visual_repertoire.py) reproduce the SVG and PNG. Use native editable PowerPoint objects when adapting a pattern into a publication; a gallery screenshot is not an editable slide exhibit.
+These six examples demonstrate form only. **All values, dates and states are synthetic layout fixtures, with no company, project, policy or investment finding.** They are original Stratellar graphics, not reconstructions of a firm's exhibits. The [fixture data](examples/visual-repertoire-data.json) and [generator](examples/render_visual_repertoire.py) reproduce the SVG and PNG. Use native editable PowerPoint objects when adapting a pattern into a publication; a gallery screenshot is not an editable slide exhibit.
 
 For deck production, the [exhibit system](exhibit-system/README.md) supersedes these six images. It has 39 registered patterns with native editable PowerPoint renderers, integrity checks and an editability report, also on synthetic data. The six SVG examples are kept as the original illustrations for this document.
 
@@ -24,7 +24,7 @@ For deck production, the [exhibit system](exhibit-system/README.md) supersedes t
 
 The links below point to publisher-hosted originals, retrieved and visually examined on 6 November 2026. PDF page numbers count the cover as page 1; printed page numbers are also supplied. No external PDF, screenshot, figure asset, logo or font binary is included in this repository. Page anchors apply to the exact linked edition, not to different supplied/abridged copies.
 
-| Reference | Exact example | What to learn | SMPT application / boundary |
+| Reference | Exact example | What to learn | Stratellar application / boundary |
 |---|---|---|---|
 | [McKinsey, year in charts, 8 December 2025](https://www.mckinsey.com/featured-insights/year-in-review/year-in-charts) | AI use across business functions: five aligned line-chart panels | Small multiples expose differences using repeated scales and direct labels | Compare several genuine, comparable series. Keep shared axes; do not invent additional observations to populate panels |
 | [Same McKinsey collection](https://www.mckinsey.com/featured-insights/year-in-review/year-in-charts) | Passenger-car export rankings, 2019 versus 2024 | A two-period rank/value comparison makes changing positions visible | Use a slope/rank comparison when endpoints and populations are comparable; the connecting line does not establish a cause |
@@ -33,7 +33,7 @@ The links below point to publisher-hosted originals, retrieved and visually exam
 | [Strategy&, Maximizing the Value of Every Molecule, 2018](https://www.strategyand.pwc.com/m1/en/reports/maximizing-the-value-of-every-molecule.pdf#page=13) | PDF/printed p13, Exhibit 5: value-chain network and model structure | Connections and modules explain relationships that a prose table would obscure | Map documented material flows or contractual dependencies. Label arrow meaning; keep magnitude unencoded unless evidenced |
 | [Same Strategy& report](https://www.strategyand.pwc.com/m1/en/reports/maximizing-the-value-of-every-molecule.pdf#page=14) | PDF/printed p14, Exhibit 6: option comparisons | Small comparable bar exhibits sit beside explicit capital and implementation criteria | Combine modeled economics with separately labeled qualitative criteria. Avoid invented NPV or subjective numerical scores |
 
-These are public research/report examples, including portrait pages. SMPT adapts their analytical principles to its own 16:9 presentations. Dense report text, animated web graphics and another firm's branding are not automatic slide requirements. Keep the [older reference analysis](REFERENCE_ANALYSIS.md) as historical design research; the current Archivo standard controls typography.
+These are public research/report examples, including portrait pages. Stratellar adapts their analytical principles to its own 16:9 presentations. Dense report text, animated web graphics and another firm's branding are not automatic slide requirements. Keep the [older reference analysis](REFERENCE_ANALYSIS.md) as historical design research; the current Archivo standard controls typography.
 
 ## Working repertoire
 
@@ -74,4 +74,4 @@ Useful candidates are a financing-sequence timeline (slide 3), a conditional cov
 
 All quantitative exhibits must trace to the accepted model or sources. Preserve source facts, uncertainty, legal/financial status and original units when changing visual form. Keep data charts and explanatory diagrams editable in PowerPoint; include meaningful descriptions and sensible reading order, and tag decorative rules/connectors as artifacts in the PDF workflow. Verify native chart workbooks and exported links as applicable.
 
-Link external examples with page/figure locators and explain the principle in original words. Create SMPT's own compositions. Public availability does not itself grant redistribution permission; reference images and complete originals stay outside the public repository. This guide authorizes no research finding, historical restyling, merge, deployment or public product release.
+Link external examples with page/figure locators and explain the principle in original words. Create Stratellar's own compositions. Public availability does not itself grant redistribution permission; reference images and complete originals stay outside the public repository. This guide authorizes no research finding, historical restyling, merge, deployment or public product release.

@@ -288,7 +288,7 @@ export function buildProjectEvidencePathway(
       "Direct project attribution and nonallocative association are different. No individual monetary allocation, financial sum or payment conclusion is authorized.",
       "Financing statuses describe the current corpus revision. Legacy implementation observations require scoped review and are not project-native milestones.",
       "A milestone's event/target date, publication/access horizon and reviewer date are separate. A planned target is not automatically occurred.",
-      "An absent reviewed milestone means no approved entry in SMPT, not that the facility is inactive or failed.",
+      "An absent reviewed milestone means no approved entry in Stratellar, not that the facility is inactive or failed.",
     ],
   };
 }

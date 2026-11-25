@@ -34,7 +34,7 @@ const footerColumns = [
   {
     label: "About",
     links: [
-      { href: "/about", label: "About SMPT" },
+      { href: "/about", label: "About" },
       { href: "/search", label: "Search" },
       { href: "/saved", label: "Saved" },
     ],
@@ -47,8 +47,9 @@ export function SiteFooter() {
       <Container width="wide" className="pb-10 pt-14">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div>
-            <Wordmark markClassName="h-8" />
-            <p className="mt-4 max-w-xs font-display text-sm leading-6 text-muted">
+            <Wordmark markClassName="h-9" descriptor />
+            <p className="mt-5 max-w-xs font-editorial text-lg leading-7 text-foreground">{site.tagline}</p>
+            <p className="mt-3 max-w-xs font-display text-sm leading-6 text-muted">
               Research by{" "}
               <Link href="/about" className="link-quiet text-foreground">Benjamin Yang</Link>
             </p>

@@ -10,7 +10,7 @@ export function GET() {
   return new Response(JSON.stringify(buildCslAll(), null, 2), {
     headers: {
       "content-type": "application/vnd.citationstyles.csl+json; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-csl.json"',
+      "content-disposition": 'attachment; filename="stratellar-csl.json"',
     },
   });
 }

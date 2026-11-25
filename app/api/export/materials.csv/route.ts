@@ -6,7 +6,7 @@ export function GET() {
   return new Response("﻿" + materialsCsv(), {
     headers: {
       "content-type": "text/csv; charset=utf-8",
-      "content-disposition": 'attachment; filename="smpt-materials.csv"',
+      "content-disposition": 'attachment; filename="stratellar-materials.csv"',
     },
   });
 }

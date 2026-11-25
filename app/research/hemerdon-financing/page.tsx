@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ResearchCover } from "@/components/editorial/research-cover";
 import { site } from "@/lib/site";
-import { researchCoverPhoto } from "@/lib/photography";
 
 const assets = {
   memo: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/raw/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Hemerdon_Financial_Memo.pdf",
@@ -20,23 +19,21 @@ const assets = {
   qc: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker/blob/e932a9bf30b9f8667daaa307e0f0b35e04d52990/research/financial-intelligence/hemerdon-phase1c/SMPT_FI001_Publication_QC.md",
 } as const;
 
-const coverPhoto = researchCoverPhoto("hemerdon-financing")!;
-
 export const metadata: Metadata = {
   title: "Inside Tungsten West's £71 Million Restart Financing — Strategy & Finance",
   description: "How the National Wealth Fund's Hemerdon financing is structured, what Tungsten West still needs to spend and when its core loan must be repaid.",
   alternates: { canonical: "/research/hemerdon-financing" },
   openGraph: {
-    images: [{ url: coverPhoto.src, width: coverPhoto.width, height: coverPhoto.height, alt: coverPhoto.alt }],
+    images: [{ url: "/research/hemerdon-financing/opengraph-image", width: 1200, height: 630, alt: "Stratellar Strategy & Finance: Inside Tungsten West’s £71 Million Restart Financing" }],
     type: "article",
     url: site.url + "/research/hemerdon-financing",
     siteName: site.name,
-    title: "Inside Tungsten West's £71 Million Restart Financing | SMPT",
+    title: "Inside Tungsten West's £71 Million Restart Financing | Stratellar",
     description: "Government capital, project expenditure and refinancing risk at Hemerdon.",
   },
   twitter: {
     card: "summary_large_image",
-    images: [coverPhoto.src],
+    images: ["/research/hemerdon-financing/opengraph-image"],
   },
 };
 
@@ -215,7 +212,7 @@ export default function HemerdonFinancing() {
         <Container width="wide" className="py-12 sm:py-16">
           <h2 className="article-h2">Sources</h2>
           <p className="standfirst mt-6 max-w-[38rem]">
-                  The sensitivity figures are SMPT calculations using the assumptions described in the memo, rather than forecasts issued by Tungsten West.
+                  The sensitivity figures are Stratellar calculations using the assumptions described in the memo. They are not forecasts issued by Tungsten West.
                 </p>
           <ul className="mt-6 max-w-3xl space-y-3">
             {sources.map((s) => (

@@ -18,7 +18,7 @@ async function download(page, format, keyboard = false) {
   else await button.click();
   const item = await pending;
   assert.equal(await item.failure(), null);
-  assert.match(item.suggestedFilename(), new RegExp(`^smpt-search-references-\\d{4}-\\d{2}-\\d{2}\\.${format}$`));
+  assert.match(item.suggestedFilename(), new RegExp(`^stratellar-search-references-\\d{4}-\\d{2}-\\d{2}\\.${format}$`));
   const stream = await item.createReadStream(), chunks = [];
   for await (const chunk of stream) chunks.push(chunk);
   return Buffer.concat(chunks).toString("utf8");

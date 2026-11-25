@@ -117,7 +117,7 @@ export function ProjectComparison({rows,materialNames,revision}: Props) {
       </div>
       <p className="mt-3 text-xs leading-6 text-muted">
         Selections appear in the page URL so a comparison can be shared. There is no ranking:
-        counts reflect what SMPT has documented as of {revision}, not investment,
+        counts reflect what Stratellar has documented as of {revision}, not investment,
         construction completion, economic impact or causal effectiveness.
       </p>
     </Card>

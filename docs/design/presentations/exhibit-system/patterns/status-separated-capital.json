@@ -14,7 +14,7 @@
     "The reader needs to see where an amount stops progressing through the status taxonomy"
   ],
   "avoid_when": [
-    "Statuses are not in the SMPT taxonomy",
+    "Statuses are not in the Stratellar taxonomy",
     "Amounts are in different currencies or on different bases — use parallel-basis-panels",
     "A single total is requested — this pattern refuses to show one"
   ],
@@ -38,7 +38,7 @@
   "variations": ["Per-programme panels in place of per-organisation rows", "Status history as dated steps"],
   "limitations": ["A later status is not a subset of an earlier one unless the source says so, so bars are not read as conversion rates", "Only taxonomy statuses are drawn; stages beyond expenditure need a different exhibit"],
   "excluded_alternatives": [
-    { "form": "Stacked bar of statuses", "reason": "Stacking adds amounts at different statuses into one total, which SMPT rules prohibit" },
+    { "form": "Stacked bar of statuses", "reason": "Stacking adds amounts at different statuses into one total, which Stratellar rules prohibit" },
     { "form": "Funnel", "reason": "Implies each status is a subset of the previous one and invites conversion-rate readings" }
   ],
   "references": ["smpt-repertoire-2026"]

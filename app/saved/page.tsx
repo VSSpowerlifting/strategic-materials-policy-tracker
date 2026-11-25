@@ -6,7 +6,7 @@ import { SavedEventsExplorer } from "@/components/saved-events-explorer";
 export const metadata: Metadata = {
   title: "Saved events",
   description:
-    "A personal event list stored locally in this browser. Separate from SMPT’s official-source watchlist.",
+    "A personal event list stored locally in this browser. Separate from Stratellar’s official-source watchlist.",
 };
 
 export default function SavedEventsPage() {

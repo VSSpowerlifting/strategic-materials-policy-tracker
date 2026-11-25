@@ -1,5 +1,5 @@
 /**
- * Strategic Materials Policy Tracker — domain types.
+ * Stratellar: domain types.
  *
  * The categorical label sets below are the single source of truth: the union
  * types are derived from them, and the validation script imports the same
