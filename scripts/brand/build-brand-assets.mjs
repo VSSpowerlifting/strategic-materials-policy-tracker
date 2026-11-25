@@ -350,7 +350,7 @@ function announcement({ label, category, title, author }) {
 }
 
 function linkedinCompanyBanner() {
-  /* LinkedIn company cover: 1128 × 191, drawn at 2x. The page logo covers the lower left, so that corner stays empty. */
+  /* LinkedIn overlays the company logo on the lower-left corner. Keep that corner clear at every export size. */
   const W = 2256, H = 382;
   let body = strataEdge({ x: 1840, y: -210, height: 800, bed: COLOR.seamBed, marker: COLOR.malachite });
   body += text("spectral-400", BRAND.tagline, 92, { x: 560, y: 196, fill: COLOR.paper });
@@ -623,6 +623,7 @@ async function main() {
   write("brand/social/linkedin-company-banner.svg", linkedinCompanyBanner());
   await png(linkedinCompanyBanner(), "brand/social/linkedin-company-banner-2256x382.png");
   await png(linkedinCompanyBanner(), "brand/social/linkedin-company-banner-1128x191.png", { width: 1128 });
+  await png(linkedinCompanyBanner(), "brand/social/linkedin-company-banner-1512x256.png", { width: 1512 });
   write("brand/social/linkedin-personal-banner.svg", linkedinPersonalBanner());
   await png(linkedinPersonalBanner(), "brand/social/linkedin-personal-banner-1584x396.png");
 

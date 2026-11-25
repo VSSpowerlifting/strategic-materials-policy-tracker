@@ -173,7 +173,7 @@ The [research publication house style](../research/SMPT_RESEARCH_PUBLICATION_HOU
 | Homepage card | `brand/social/og-home.png` | 1200 × 630 |
 | Research cards | `brand/social/research/<slug>.png`; template `brand/templates/research-card-1200x630.*` | 1200 × 630 |
 | LinkedIn profile image | `brand/social/linkedin-profile-800.png`, `-400.png` | 800 × 800, 400 × 400 |
-| LinkedIn company banner | `brand/social/linkedin-company-banner-2256x382.png`, `-1128x191.png` | 2256 × 382 (2×), 1128 × 191 |
+| LinkedIn company banner | `brand/social/linkedin-company-banner-1512x256.png`, `-2256x382.png`, `-1128x191.png` | 1512 × 256 (current upload), 2256 × 382, 1128 × 191 |
 | LinkedIn personal banner | `brand/social/linkedin-personal-banner-1584x396.png` | 1584 × 396 |
 | Research announcement | `brand/templates/research-announcement-1200x1200.*` | 1200 × 1200 |
 | Publication cover | `brand/templates/publication-cover-letter.*` | US Letter |

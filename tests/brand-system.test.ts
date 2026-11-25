@@ -130,6 +130,7 @@ test("social and document masters exist at their platform sizes", () => {
     "brand/social/linkedin-profile-400.png": [400, 400],
     "brand/social/linkedin-company-banner-2256x382.png": [2256, 382],
     "brand/social/linkedin-company-banner-1128x191.png": [1128, 191],
+    "brand/social/linkedin-company-banner-1512x256.png": [1512, 256],
     "brand/social/linkedin-personal-banner-1584x396.png": [1584, 396],
     "brand/templates/research-announcement-1200x1200.png": [1200, 1200],
     "brand/templates/research-card-1200x630.png": [1200, 630],
