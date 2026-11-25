@@ -12,7 +12,7 @@ import {
   importReviewQueue, type PrivateEditorialLedger,
 } from "./editorial-ledger";
 
-const REPOSITORY = "VSSpowerlifting/strategic-materials-policy-tracker";
+const REPOSITORY = "VSSpowerlifting/stratellar";
 const WORKFLOW = "source-monitor-pilot.yml";
 /** #71's first live run with an M1.1 editorial queue; earlier runs had no queue. */
 export const FIRST_EDITORIAL_RUN_ID = 37722920588;

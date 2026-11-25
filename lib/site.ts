@@ -54,8 +54,8 @@ export const site = {
   url: "https://stratellar.com",
   /** Original origin for released links and browser-local saved events. */
   legacyUrl: "https://strategic-materials-policy-tracker.vercel.app",
-  /** Source repository. Renamed at cutover; GitHub redirects the old path. */
-  repository: "https://github.com/VSSpowerlifting/strategic-materials-policy-tracker",
+  /** Source repository. Historical GitHub references keep their original URLs. */
+  repository: "https://github.com/VSSpowerlifting/stratellar",
 } as const;
 
 /**

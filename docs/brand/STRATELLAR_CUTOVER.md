@@ -1,127 +1,31 @@
-# Stratellar production cutover checklist
+# Stratellar production cutover
 
-Prepared 24 November 2026. The rebrand is ready for local release review and the domain registration is complete. Public GitHub changes, DNS and Vercel configuration, and production deployment require explicit authorization.
+24 November 2026
 
-The design goal for the move is that no existing address stops working: record pages, research pages, downloads, API and export endpoints, citations already in circulation and links pinned to commit SHAs all keep resolving.
+- [Stratellar](https://stratellar.com) is the canonical platform. [www.stratellar.com](https://www.stratellar.com) redirects to the apex over HTTPS.
+- [Release PR #292](https://github.com/VSSpowerlifting/stratellar/pull/292) launched the rebrand and canonical host at `818b623c53f33350f43176587f1e276d46909e7e` in Vercel deployment `dpl_D5s4qBobXPDXjpxzACKeT8Bazbee`. Benjamin Yang approved the visual identity for release. Six editorial approvals dated 24 November 2026 cover the research index and five studies.
+- The [GitHub repository](https://github.com/VSSpowerlifting/stratellar) was renamed in place. The Vercel project and original deployment hostname retain their existing names. Existing GitHub links depend on the old repository name remaining unused.
+- The [portfolio](https://benyang.dev) followed in [PR #15](https://github.com/VSSpowerlifting/benjamin-yang-portfolio/pull/15) at `a3003388be3fefb0a019adfbe1c3befa044d0f31` in Vercel deployment `dpl_CywkjvPEzFURpDZdo8JWcvu9V4Gh`. Its project route and historical download links are preserved.
 
-## 0. Launch dependencies (founder decisions, before anything else)
+Stratellar is a publishing name. Preliminary checks included the USPTO wordmark search and public uses of similar names. Formal trademark clearance is a separate matter.
 
-| # | Dependency | State | Blocks |
-| --- | --- | --- | --- |
-| 0.1 | Trademark clearance for "Stratellar" in the relevant classes and jurisdictions | Not done. No search was run as part of this work. | Any public use of the name |
-| 0.2 | Registration of `stratellar.com` | Confirmed by the maintainer. Project connection and DNS are separate steps. | None for registration |
-| 0.3 | Legal status. Stratellar is a publishing name, not an incorporated entity. Copy describes it that way. If an entity is formed, the footer, About page, licence notices and any commercial terms need a deliberate edit. | Open | Commercial documents, invoices, terms |
-| 0.4 | Tagline. "Materials. Policy. Capital." was chosen by the founder on 24 November 2026 and replaces the provisional line. It is set in `lib/site.ts` and `BRAND` in `scripts/brand/build-brand-assets.mjs`; `npm run brand:build` redraws the artwork. | Decided | Nothing |
-| 0.5 | Editorial sign-off on the research pages | Benjamin Yang approved all six records in `docs/editorial/reviews/` on 24 November 2026. | None |
+## Historical links and browser storage
 
-## 1. Phase 1 — Review and merge the rebrand (no address changes)
+The [original host](https://strategic-materials-policy-tracker.vercel.app) remains assigned to the platform. Next.js redirects an explicit list of public page paths to the apex with 308 responses and retains query strings. API, citation and export endpoints, downloadable research files and metadata assets continue serving directly on both hosts.
 
-The site can ship under the new name at the current address before the domain is connected. `site.url` still points at `https://strategic-materials-policy-tracker.vercel.app`, so canonicals, the sitemap and citation URLs do not move in this phase.
+Browser-local events saved before cutover remain available at the [original saved list](https://strategic-materials-policy-tracker.vercel.app/saved). Both `/events` and `/events/<id>` also remain available on the original host, preserving the ability to open, save and remove records on that origin. The new site's saved page links to the original list. Each origin keeps its own browser storage.
 
-1. Review the proposed release branch, the brand system and the production-build captures.
-2. Verify the six editorial records against the proposed release and run the editorial gate.
-3. Approve a push and a pull request against `main`. Required checks: `npm run validate`, `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`, `npm run editorial:check`, and the browser QA workflows.
-4. Merge. Vercel deploys `main` (`vercel.json` enables deployment for `main` only).
-5. Verify on the live site: header and footer lockups, `/opengraph-image`, `/manifest.webmanifest`, `/icon.png`, `/apple-icon.png`, `/favicon.ico`, one record page, one research page, `/api/export/dataset.json`, `/api/cite/bibtex`.
-6. Re-scrape link previews: LinkedIn Post Inspector for the home page and each research page, so cached cards refresh.
+The canonical URL in `lib/site.ts` drives metadata, structured data, sitemap and newly generated citation URLs. Existing research files, suggested historical citations and SHA-pinned source links preserve their original attribution. Escondida (FI002) uses the default Stratellar preview. The four other research studies with dedicated preview routes serve their own cards.
 
-Download file names change in this phase from `smpt-*` to `stratellar-*` (for example `stratellar-events.csv`). The request paths are unchanged, and the Controls snapshot keeps `smpt-controls-<date>.zip` because the name is part of a versioned release. A consumer that saves by the server-suggested name will see the new file name; nothing else about the response changes.
+The original Controls snapshot ZIP is served byte for byte under `smpt-controls-2026-11-12.zip`. Its SHA-256 is `40e142cc257d04ade1f2b36aa573872d3322bd5b7b1b15bc6dd666a20d403b55`; all four member hashes and row counts match its embedded manifest.
 
-## 2. Phase 2 — Rename the GitHub repository (optional, independent of the domain)
+## Verify or roll back
 
-GitHub redirects the web, git and API addresses of a renamed repository, including links pinned to a commit. The redirect breaks permanently if a new repository is ever created under the old name, so **never recreate `VSSpowerlifting/strategic-materials-policy-tracker`**.
+Use the Vercel production aliases to confirm the deployed Git SHAs. From a clean client, check the apex, www redirect and old-host page redirects, then verify the sitemap, canonicals, Open Graph images, the legacy saved list and historical downloads. Run `npm run audit:production-parity -- --origin https://stratellar.com` and compare the Controls ZIP SHA-256 from both hosts. Check one SHA-pinned GitHub commit, one blob and one raw download from the original repository name.
 
-1. Founder: Settings → General → Repository name → `stratellar`.
-2. Confirm the Vercel Git connection followed the rename (Project → Settings → Git). Reconnect if it did not.
-3. In one pull request, update the hard-coded references:
+If rollback is needed, use the Vercel deployment recorded immediately before the affected release. The pre-launch deployment IDs were `dpl_2L1t4iWMYGzQF2v8BgZ79HfFoTdF` for the platform and `dpl_DWVcjgSXmYm8j1aJtLpUgFENqfXj` for the portfolio. Restore the corresponding code in GitHub and verify the actual alias destination. Leave the original host assigned and keep released files and APIs available on both origins. Browsers may have cached 308 responses, so the apex should continue to serve those paths during recovery. Restore automatic production assignment once a corrected deployment is approved.
 
-   | File | Reference |
-   | --- | --- |
-   | `lib/site.ts` | `repository` |
-   | `scripts/audit-exim-reliability.ts`, `scripts/check-exim-schedule.ts`, `scripts/editorial-exim-sync.ts`, `scripts/editorial-sync.ts` | `const REPO = "VSSpowerlifting/strategic-materials-policy-tracker"` |
-   | `tests/exim-state-recovery-admission.test.ts` | `repo: "strategic-materials-policy-tracker"` fixtures and assertion |
-   | `README.md` | The paragraph that says the repository keeps its earlier name |
-   | `package.json` | `name` (private package; optional, cosmetic) |
-   | Local clones | `git remote set-url origin …/stratellar.git` |
-
-4. Leave unchanged: the SHA-pinned links in `app/research/hemerdon-financing/page.tsx` and `app/research/tungsten-supply-security/page.tsx`, and the pinned raw-file links in the portfolio. They resolve through the redirect and their text is part of each study's provenance. After the rename, open one of each to confirm.
-5. Leave unchanged: workflow names, concurrency groups and artifact names (`SMPT EXIM shadow monitoring`, `smpt-exim-*`). Tests assert them and stored state is keyed on them.
-6. Do not rename the Vercel project unless there is a reason to. If it is renamed, confirm that `strategic-materials-policy-tracker.vercel.app` is still listed under the project's domains before and after; every published citation depends on it.
-
-## 3. Phase 3 — Connect `stratellar.com`
-
-1. Founder: add `stratellar.com` and `www.stratellar.com` to the Vercel project (Project → Settings → Domains) and create the DNS records Vercel shows. Wait for the certificate.
-2. Choose the canonical host. Recommended: apex `stratellar.com`, with `www` redirecting to it.
-3. Keep `strategic-materials-policy-tracker.vercel.app` assigned to the project and serving. Do not set a domain-level redirect on it yet (see Phase 4).
-4. Check that both hosts serve the same deployment and that `https://stratellar.com/api/export/dataset.json` returns the same bytes as the old host.
-
-## 4. Phase 4 — Switch the canonical address
-
-One constant drives the canonical host: `url` in `lib/site.ts`. It feeds `metadataBase`, every Open Graph URL, `app/sitemap.ts`, `app/robots.ts`, the structured data in `lib/structured-data.ts`, the record URLs written into BibTeX, RIS and CSL-JSON by `lib/citation.ts`, and the search-reference export.
-
-1. In one pull request:
-
-   | File | Change |
-   | --- | --- |
-   | `lib/site.ts` | `url: "https://stratellar.com"` |
-   | `scripts/check-production-release-parity.ts` | `defaultOrigin` |
-   | `.github/workflows/public-release-parity.yml` | default `origin` input |
-   | `scripts/qa-fi002-browser.mjs`, `scripts/qa-search-references-browser.mjs` | canonical origin constants |
-   | `README.md` | live-site links and the naming paragraph |
-   | `AGENTS.md` | the sentence about repository and deployment addresses |
-
-2. Add host-scoped redirects from the old host to the new one **for pages only**. A sketch for `next.config`, to be checked against the bundled Next.js guide (`node_modules/next/dist/docs/`) before it is applied:
-
-   ```ts
-   async redirects() {
-     return [
-       {
-         // Pages move. API routes and released research files keep answering on the old host.
-         source: "/:path((?!api/|research/.+\\.[a-z0-9]+$|_next/|brand/).*)",
-         has: [{ type: "host", value: "strategic-materials-policy-tracker.vercel.app" }],
-         destination: "https://stratellar.com/:path",
-         permanent: true,
-       },
-     ];
-   }
-   ```
-
-   Why pages only: `/api/v1/**`, `/api/export/**` and `/api/cite/**` have script consumers, and not every HTTP client follows a redirect (plain `curl`, some R and Python defaults on POST, spreadsheet importers). Serving them on both hosts costs nothing and breaks no one. Files under `/research/**` are linked from distributed PDFs and from `citation.bib`; keeping them direct avoids a redirect hop in a citation manager.
-
-3. Canonical tags do the consolidation for the paths that stay on both hosts: every page and the sitemap name `stratellar.com` once `site.url` changes.
-4. Record URLs inside newly generated citations change host. Citations generated earlier keep the old host and resolve through the page redirect. Citation keys (`smpt:<event id>`, `smpt-src:<source id>`) do not change.
-5. Files that carry the old host and are **not** edited: `public/research/fi002/citation.bib`, `report.html`, `report.md`, `public/research/applied-001/antimony-evidence-and-assumptions.md`, `public/research/r001/tungsten-supply-security.pdf`. They are released documents. They stay correct for as long as the old host stays assigned to the project, which is why it is never removed.
-6. After deployment, verify from a clean client:
-   - `curl -sI https://strategic-materials-policy-tracker.vercel.app/events/<id>` → `308` to `https://stratellar.com/events/<id>`
-   - `curl -s https://strategic-materials-policy-tracker.vercel.app/api/export/events.csv | shasum -a 256` equals the same request on the new host
-   - `https://stratellar.com/sitemap.xml` and `/robots.txt` name the new host
-   - a record page's `<link rel="canonical">`, `og:url` and JSON-LD `url` name the new host
-   - `npm run audit:production-parity -- --origin https://stratellar.com` passes
-   - each research page, each download on it, and each SHA-pinned GitHub link opens
-7. Founder: Google Search Console — add the `stratellar.com` property, submit the sitemap, and use Change of Address from the old property. Bing Webmaster Tools likewise.
-8. Remove the "keeps its earlier names until" paragraphs from `README.md` and `AGENTS.md`, and update this file to a dated record of what was done.
-
-## 5. Phase 5 — External surfaces (founder only)
-
-Nothing here was touched. Prepared files are in `brand/social/`.
-
-| Surface | Action | Asset |
-| --- | --- | --- |
-| LinkedIn company page | Create or rename, upload logo and banner, set tagline and URL | `linkedin-profile-800.png`, `linkedin-company-banner-2256x382.png` |
-| LinkedIn personal profile | Optional banner; update the project entry | `linkedin-personal-banner-1584x396.png` |
-| Launch post | Use the announcement template for an approved publication | `brand/templates/research-announcement-1200x1200.*` |
-| Portfolio | Verify and release the portfolio through its separate approval process. Update its platform link after the canonical host is verified. | Separate portfolio release |
-| GitHub | Repository description, social preview image, topics | `brand/social/og-default.png` |
-| Email, letterhead, commercial documents | Use the templates | `brand/templates/` |
-| ORCID, Zenodo, Google Scholar, any index that lists the dataset | Update the publisher name; keep the earlier name as an alternate | — |
-
-## 6. Rollback
-
-- Phase 1: revert the merge commit. No address or identifier changed, so nothing external needs repair.
-- Phase 2: rename the repository back; GitHub redirects in both directions as long as neither name is reused.
-- Phase 4: revert the `site.url` pull request. Remove the Search Console change of address. The old host never stopped serving, so citations and API consumers are unaffected either way.
-
-## 7. Register of preserved identifiers
+## Preserved identifiers of preserved identifiers
 
 These keep the earlier name on purpose. Changing any of them would break a consumer, a stored record or a test that guards one. `AGENTS.md` carries the rule.
 
