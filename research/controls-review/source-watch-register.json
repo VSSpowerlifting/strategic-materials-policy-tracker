@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "kind": "controls_source_watch_register",
+  "listings": [
+    {
+      "id": "trade-administration",
+      "url": "https://www.mofcom.gov.cn/zcfb/dwmygl/index.html",
+      "label": "Trade administration",
+      "expectedIntervalDays": 1,
+      "note": "Check older pages manually after a gap."
+    },
+    {
+      "id": "announcements-2026",
+      "url": "https://www.mofcom.gov.cn/zcfb/blgg/gg/2026/index.html",
+      "label": "2026 announcements",
+      "expectedIntervalDays": 1,
+      "note": "Add the next annual listing at rollover."
+    }
+  ],
+  "knownNotices": [
+    {
+      "noticeId": "mofcom-2023-39",
+      "documentNumber": "2023年第39号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2023/art_2b2f5a88d0354d6ea761a1de0fa427de.html",
+      "sourceId": "src-mofcom-39",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2024-46",
+      "documentNumber": "2024年第46号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2024/art_3d5e990b43424e60828030f58a547b60.html",
+      "sourceId": "src-mofcom-46",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2024-51",
+      "documentNumber": "2024年第51号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2024/art_a429e4686e0c4df39588431afbff4b83.html",
+      "sourceId": "src-mofcom-2024-51",
+      "recordState": "review_overlay",
+      "overlayId": "rc-cn-mofcom-59-2026",
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-55",
+      "documentNumber": "2025年第55号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_949f47563b834dad95b0010f375a892c.html",
+      "sourceId": "src-mofcom-55",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-56",
+      "documentNumber": "2025年第56号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_1315078cebe04210bc35c72a4e7f7967.html",
+      "sourceId": "src-mofcom-56",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-57",
+      "documentNumber": "2025年第57号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_59ec4f6bec0b459aa4a30c4bbd0a41c1.html",
+      "sourceId": "src-mofcom-57",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-58",
+      "documentNumber": "2025年第58号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_79646f0161564975a938fe00fee158d5.html",
+      "sourceId": "src-mofcom-58",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-61",
+      "documentNumber": "2025年第61号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_7fc9bff0fb4546ecb02f66ee77d0e5f6.html",
+      "sourceId": "src-mofcom-61",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-62",
+      "documentNumber": "2025年第62号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_6cb42957741440c6984de696b70df9ae.html",
+      "sourceId": "src-mofcom-62",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-70",
+      "documentNumber": "2025年第70号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_b1ec77dd3f0d4762952904df7cdaadec.html",
+      "sourceId": "src-mofcom-70",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2025-72",
+      "documentNumber": "2025年第72号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_5c68985a6b1a46778e2e8dbff1bb1601.html",
+      "sourceId": "src-mofcom-72",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2026-58",
+      "documentNumber": "2026年第58号",
+      "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_91466027f465467985942a639a9485f4.html",
+      "sourceId": "src-mofcom-2026-58",
+      "recordState": "published_record",
+      "overlayId": null,
+      "fingerprint": null
+    },
+    {
+      "noticeId": "mofcom-2026-59",
+      "documentNumber": "2026年第59号",
+      "url": "https://www.mofcom.gov.cn/zcfb/dwmygl/art/2026/art_1bb17d2be5de433283d33f213f0824ef.html",
+      "sourceId": "src-mofcom-2026-59",
+      "recordState": "review_overlay",
+      "overlayId": "rc-cn-mofcom-59-2026",
+      "fingerprint": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "paragraph-two",
+      "priority": "direct",
+      "anyOf": [
+        "2024年第46号",
+        "2025年第72号",
+        "2026年第59号"
+      ]
+    },
+    {
+      "id": "october-package",
+      "priority": "direct",
+      "anyOf": [
+        "2025年第55号",
+        "2025年第56号",
+        "2025年第57号",
+        "2025年第58号",
+        "2025年第61号",
+        "2025年第62号",
+        "2025年第70号",
+        "2026年第58号"
+      ]
+    },
+    {
+      "id": "graphite-notice",
+      "priority": "direct",
+      "anyOf": [
+        "2023年第39号",
+        "石墨",
+        "2024年第51号"
+      ]
+    },
+    {
+      "id": "other-controls",
+      "priority": "adjacent",
+      "anyOf": [
+        "两用物项",
+        "出口管制",
+        "暂停实施"
+      ]
+    }
+  ]
+}

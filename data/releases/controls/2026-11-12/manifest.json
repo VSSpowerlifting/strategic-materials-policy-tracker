@@ -1,0 +1,24 @@
+{
+  "datasetVersion": "smpt-controls-v1-2026-11-12-be5b774228b6206368a6873fee5ab3945b116e346be85ef54e3aa4ab4a6b8ecb",
+  "schemaVersion": 1,
+  "asOf": "2026-11-12",
+  "sourceDatasetVersion": "v0.6-capital-intelligence",
+  "datasets": {
+    "control-clauses.json": {
+      "rows": 53,
+      "sha256": "634fdea3933225882a13ae153f305a783fbfdf9899e0399676258a443a0796ff"
+    },
+    "policy-events.json": {
+      "rows": 24,
+      "sha256": "51af46314c2e91ad7609d978403557064a2407c6ad0050a1b2d556c9e7bc41cc"
+    },
+    "control-status-history.json": {
+      "rows": 119,
+      "sha256": "c788717db64ddd9fe18d4e7bdd97fadb2b900b26e02650b77ccc348bb296bee5"
+    },
+    "sources.json": {
+      "rows": 49,
+      "sha256": "cd99dbf413807baa62cf22a5c0588179c3063d0391d37169d774d7c7919b68d3"
+    }
+  }
+}

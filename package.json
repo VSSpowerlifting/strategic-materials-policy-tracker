@@ -55,7 +55,10 @@
     "exhibits:lineage:check": "tsx scripts/exhibit-system/check-lineage.ts",
     "exhibits:browser": "node scripts/exhibit-system/check-gallery-browser.mjs",
     "editorial:check": "node scripts/editorial-style-gate.mjs",
-    "snapshot:controls": "node --import tsx scripts/build-controls-snapshot.ts"
+    "snapshot:controls": "node --import tsx scripts/build-controls-snapshot.ts",
+    "feed:controls": "node --import tsx scripts/controls-feed.ts",
+    "feed:controls:verify-baseline": "node --import tsx scripts/recover-controls-baseline.ts",
+    "watch:controls": "node --import tsx scripts/controls-source-watch.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
