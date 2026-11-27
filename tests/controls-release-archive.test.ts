@@ -25,6 +25,7 @@ import {
   type ControlsSnapshotManifest,
 } from "../lib/controls-release-archive";
 import { buildControlsSnapshotBundle } from "../lib/controls-snapshot";
+import { buildPublishedControlsSnapshotBundle } from "../lib/published-controls-download";
 import { GET as controlsZipRoute } from "../app/api/export/controls-snapshot.zip/route";
 
 const AS_OF = "2026-11-12";
@@ -161,17 +162,26 @@ test("README.md and worked_example.py in the bundle are the files on disk and eq
   if (!commitPresent) t.diagnostic(`commit ${SOURCE_COMMIT} is not in this clone; README.md and worked_example.py were not compared with it`);
 });
 
-test("the Controls snapshot ZIP route builds the same bytes twice, and while the live cutoff is 2026-11-12 its sha256 is the pinned zipSha256", async (t) => {
+test("the published download is independent of the live cutoff and preserves the original ZIP bytes", async () => {
   const body = async () => Buffer.from(await (await controlsZipRoute()).arrayBuffer());
   const first = await body();
   const second = await body();
-  assert.equal(sha256Hex(first), sha256Hex(second));
-  if (!liveAtArchivedCutoff) {
-    t.diagnostic(`live cutoff is ${live.manifest.asOf}; the ZIP of the 2026-11-12 release can no longer be rebuilt from the live record`);
-    assert.notEqual(sha256Hex(first), ZIP_SHA256);
-    return;
-  }
   assert.equal(sha256Hex(first), ZIP_SHA256);
+  assert.equal(sha256Hex(second), ZIP_SHA256);
+});
+
+test("the published bundle uses the pinned archive and exact companion files", () => {
+  const bundle = buildPublishedControlsSnapshotBundle();
+  assert.equal(bundle.manifest.datasetVersion, DATASET_VERSION);
+  assert.equal(bundle.zipSha256, ZIP_SHA256);
+  for (const name of ARCHIVE_FILES) {
+    assert.equal(bundle.files.find((file) => file.name === name)?.content,
+      readFileSync(join(archiveDir, name), "utf8"));
+  }
+  for (const name of ["README.md", "worked_example.py"]) {
+    assert.equal(bundle.files.find((file) => file.name === name)?.content,
+      readFileSync(join(process.cwd(), COMPANION_DIR, name), "utf8"));
+  }
 });
 
 test("a copy of the archive with one byte changed in a dataset is refused with a message naming the file", async (t) => {
